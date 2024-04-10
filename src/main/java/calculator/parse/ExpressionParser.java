@@ -1,16 +1,14 @@
 package calculator.parse;
 
-import calculator.calc.Calculator;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class ExpressionParser {
 
-    private String a;
-    private String b;
-    private String op;
+    private String firstOperand;
+    private String secondOperand;
+    private String operator;
     private Queue<String> queue = new LinkedList<>();
 
     public String[] parse(String expression){
@@ -23,8 +21,8 @@ public class ExpressionParser {
         return expressionElements;
     }
 
-    public void setA(int a){
-        this.a = Integer.toString(a);
+    public void setFirstOperand(int firstOperand){
+        this.firstOperand = Integer.toString(firstOperand);
     }
 
     public boolean isEmpty(){
@@ -36,23 +34,23 @@ public class ExpressionParser {
             return null;
         }
 
-        if(this.a == null){
-            this.a = this.queue.poll();
+        if(this.firstOperand == null){
+            this.firstOperand = this.queue.poll();
         }
 
-        if(this.op == null){
-            this.op = this.queue.poll();
+        if(this.operator == null){
+            this.operator = this.queue.poll();
         }
 
-        if(this.b == null){
-            this.b = this.queue.poll();
+        if(this.secondOperand == null){
+            this.secondOperand = this.queue.poll();
         }
 
-        String[] exp = new String[]{this.a, this.op, this.b};
+        String[] exp = new String[]{this.firstOperand, this.operator, this.secondOperand};
 
-        this.a = null;
-        this.op = null;
-        this.b = null;
+        this.firstOperand = null;
+        this.operator = null;
+        this.secondOperand = null;
 
         return exp;
     }

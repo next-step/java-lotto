@@ -19,7 +19,7 @@ public class StringCalculator {
         do {
             int tempResult = this.calculator.calculate(exp);
             result = tempResult;
-            this.parser.setA(result);
+            this.parser.setFirstOperand(result);
             exp = this.parser.next();
         } while(exp != null);
 
