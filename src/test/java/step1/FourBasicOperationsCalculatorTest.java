@@ -51,6 +51,14 @@ public class FourBasicOperationsCalculatorTest {
     }
 
     @ParameterizedTest
+    @CsvSource(value = {"2 + 3 * 4 / 2:10"}, delimiter = ':')
+    @DisplayName("혼합")
+    void mixed(String question, int result) {
+        calculator.calculate(question);
+        assertThat(calculator.result()).isEqualTo(result);
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"1 ! 2", "2 @ 3", "4 # 5"})
     @DisplayName("사칙연산 기호 아님")
     void notFourBasicOperations(String question) {
