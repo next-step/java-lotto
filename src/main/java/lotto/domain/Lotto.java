@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -39,15 +39,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
-    }
-
-    public Rank getRank(Lotto lotto) {
-        return Rank.findRank(winningCount(lotto));
-    }
-
-    public int getReward(Lotto lotto) {
-        return Rank.findReward(winningCount(lotto));
     }
 }
