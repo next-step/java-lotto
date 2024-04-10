@@ -25,20 +25,21 @@ public class LottoMatch {
         results.put(LottoMatchNumber.MATCH6, 0);
 
         for (LottoTicket myNumber : myNumbers) {
-            inputMatchResult(myNumber, results);
+            int matchCount = myNumber.checkMatch(targetNumbers);
+            inputMatchResult(matchCount, results);
         }
 
         return results;
     }
 
-    private void inputMatchResult(LottoTicket myNumber, HashMap<LottoMatchNumber, Integer> results) {
+    private void inputMatchResult(int matchCount, HashMap<LottoMatchNumber, Integer> results) {
         for (LottoMatchNumber lottoMatchNumber : LottoMatchNumber.values()) {
-            inputMatchCount(myNumber, results, lottoMatchNumber);
+            inputMatchCount(matchCount, results, lottoMatchNumber);
         }
     }
 
-    private void inputMatchCount(LottoTicket myNumber, HashMap<LottoMatchNumber, Integer> results, LottoMatchNumber lottoMatchNumber) {
-        if (lottoMatchNumber.getMatchNumber() == myNumber.checkMatch(targetNumbers)) {
+    private void inputMatchCount(int matchCount, HashMap<LottoMatchNumber, Integer> results, LottoMatchNumber lottoMatchNumber) {
+        if (lottoMatchNumber.getMatchNumber() == matchCount) {
             results.put(lottoMatchNumber, results.get(lottoMatchNumber) + 1);
         }
     }
