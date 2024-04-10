@@ -24,11 +24,11 @@ public class Lotto {
 		}
 	}
 
-	public static Lotto of(List<Integer> numbers) {
+	public static Lotto createFromNumbers(List<Integer> numbers) {
 		return of(numbers.toArray(new Integer[0]));
 	}
 
-	public static Lotto of(String value) {
+	public static Lotto createFromString(String value) {
 		String[] numbers = value.split(SEPARATOR);
 		Integer[] lottoNumbers = Arrays.stream(numbers)
 			.map(String::trim)
@@ -46,8 +46,8 @@ public class Lotto {
 		return new Lotto(lotto);
 	}
 
-	public int matchCount(Lotto winningLotto){
-		return (int) lotto.stream()
+	public int matchCount(Lotto winningLotto) {
+		return (int)lotto.stream()
 			.filter(winningLotto::isContains)
 			.count();
 	}

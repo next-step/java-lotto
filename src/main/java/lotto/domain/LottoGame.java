@@ -1,31 +1,30 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-	private List<Lotto> userLottos;
-	private Money money;
+	private Lottos userLottos;
+	private Money amount;
 
 	public LottoGame(int money) {
-		this.userLottos = new ArrayList<>();
-		this.money = Money.from(money);
+		this.userLottos = new Lottos();
+		this.amount = Money.from(money);
 	}
 
 	public List<Lotto> createLotto(NumberStrategy numberStrategy) {
-		for (int i = 0; i < money.countOfBuyLotto(); i++) {
-			userLottos.add(Lotto.of(numberStrategy.generateNumber()));
-		}
-		return userLottos;
+		return this.userLottos.createLottos(countOfLotto(), numberStrategy);
+	}
+
+	public int countOfLotto() {
+		return this.amount.countOfBuyLotto();
+	}
+
+	public List<Lotto> getLottos() {
+		return this.userLottos.getLottos();
 	}
 
 	public List<Rank> match(String winningNumbers) {
-		List<Rank> ranks = new ArrayList<>();
-		Lotto winningLotto = Lotto.of(winningNumbers);
-		for (Lotto lotto : this.userLottos) {
-			ranks.add(Rank.from(lotto.matchCount(winningLotto)));
-		}
-		return ranks;
+		return this.userLottos.match(winningNumbers);
 	}
 
 	public double calculateProfit(List<Rank> lottoRanks) {
@@ -33,10 +32,6 @@ public class LottoGame {
 		for (Rank rank : lottoRanks) {
 			totalPrize = totalPrize.plus(rank.getPrize());
 		}
-		return this.money.calculateProfitRatio(totalPrize);
-	}
-
-	public int countOfLotto() {
-		return money.countOfBuyLotto();
+		return this.amount.calculateProfitRatio(totalPrize);
 	}
 }

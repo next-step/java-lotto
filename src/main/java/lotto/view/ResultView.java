@@ -9,13 +9,13 @@ public class ResultView {
 	public static final String WiNNING_RESULT_MESSAGE = "당첨 통계";
 	public static final String SEPARATE_BAR = "---------";
 	public static final String RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
-	public static final String TOTAL_PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
+	public static final String TOTAL_PROFIT_MESSAGE = "총 수익률은 %.2f입니다.(본전일 경우 - 1)";
 
 	public void printOfBuyLotto(LottoGame lottoGame, NumberStrategy numberStrategy) {
 		System.out.println(lottoGame.countOfLotto() + BUY_LOTTO_MESSAGE);
 		List<Lotto> lottos = lottoGame.createLotto(numberStrategy);
-		for (int i = 0; i < lottos.size(); i++) {
-			System.out.println(lottos.get(i));
+		for (Lotto lotto : lottos) {
+			System.out.println(lotto);
 		}
 	}
 
