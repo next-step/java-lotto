@@ -28,4 +28,8 @@ public class LottoGame {
         return this.lottoMatch.matchResult(lottoTickets);
     }
 
+    public void inputTargetNumbers(String input) {
+        lottoMatch = new LottoMatch(input);
+    }
+
 }
