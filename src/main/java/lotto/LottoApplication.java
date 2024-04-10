@@ -1,5 +1,11 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
+import lotto.domain.WinningLotto;
+import lotto.view.InputView;
+import lotto.view.ResultView;
+
 import java.util.List;
 
 public class LottoApplication {
@@ -14,7 +20,10 @@ public class LottoApplication {
         resultView.printLottoCount(lottos);
         resultView.printLottos(lottos);
 
-        Lotto winningLotto = lottoFactory.createLotto(new InputView().getWinningLottoInput());
+        List<Integer> numbers = new InputView().getWinningLottoInput();
+        int bonusNumber = new InputView().getBonusNumber();
+        WinningLotto winningLotto = LottoFactory.createWinningLotto(numbers, bonusNumber);
+
         resultView.printWinningResult(lottoFactory.getRankResults(winningLotto, lottos));
         resultView.printRateOfReturn(lottoFactory.calculateRateOfReturn(winningLotto, lottos));
     }
