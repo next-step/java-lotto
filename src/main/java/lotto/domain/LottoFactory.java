@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +24,10 @@ public class LottoFactory {
         return new Lotto(numbers);
     }
 
+    public static WinningLotto createWinningLotto(List<Integer> numbers, int bonusNumber) {
+        return new WinningLotto(numbers, bonusNumber);
+    }
+
     private static Lotto createRandomLotto() {
         Collections.shuffle(numbers);
         return createLotto(numbers
@@ -32,7 +36,7 @@ public class LottoFactory {
                 .collect(Collectors.toUnmodifiableList()));
     }
 
-    public List<Rank> getRankResults(Lotto winningLotto, List<Lotto> lottos) {
+    public List<Rank> getRankResults(WinningLotto winningLotto, List<Lotto> lottos) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
             ranks.add(winningLotto.getRank(lotto));
@@ -40,7 +44,7 @@ public class LottoFactory {
         return ranks;
     }
 
-    public double calculateRateOfReturn(Lotto winningLotto, List<Lotto> lottos) {
+    public double calculateRateOfReturn(WinningLotto winningLotto, List<Lotto> lottos) {
         double money = lottoPrice * lottos.size();
         double sumOfReward = 0;
         for (Lotto lotto : lottos) {
