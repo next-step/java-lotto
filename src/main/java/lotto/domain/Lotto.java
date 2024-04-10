@@ -46,6 +46,16 @@ public class Lotto {
 		return new Lotto(lotto);
 	}
 
+	public int matchCount(Lotto winningLotto){
+		return (int) lotto.stream()
+			.filter(winningLotto::isContains)
+			.count();
+	}
+
+	private boolean isContains(LottoNumber number) {
+		return this.lotto.contains(number);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
