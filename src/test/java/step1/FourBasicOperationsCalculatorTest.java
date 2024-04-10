@@ -9,13 +9,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class CalculatorTest {
+public class FourBasicOperationsCalculatorTest {
 
-    Calculator calculator;
+    FourBasicOperationsCalculator calculator;
 
     @BeforeEach
     void setUp() {
-        Calculator calculator = new Calculator();
+        calculator = new FourBasicOperationsCalculator();
     }
 
     @ParameterizedTest
