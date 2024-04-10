@@ -9,7 +9,7 @@ public class LottoGame {
 
 	public LottoGame(int money) {
 		this.userLottos = new ArrayList<>();
-		this.money = new Money(money);
+		this.money = Money.from(money);
 	}
 
 	public List<Lotto> createLotto(NumberStrategy numberStrategy) {
@@ -28,7 +28,15 @@ public class LottoGame {
 		return ranks;
 	}
 
-	public int countOfLottos() {
+	public double calculateProfit(List<Rank> lottoRanks) {
+		Money totalPrize = Money.from(0);
+		for (Rank rank : lottoRanks) {
+			totalPrize = totalPrize.plus(rank.getPrize());
+		}
+		return this.money.calculateProfitRatio(totalPrize);
+	}
+
+	public int countOfLotto() {
 		return money.countOfBuyLotto();
 	}
 }

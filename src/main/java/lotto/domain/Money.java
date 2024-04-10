@@ -19,4 +19,16 @@ public class Money {
 	public int countOfBuyLotto() {
 		return money / LOTTO_PRICE;
 	}
+	public static Money from(int money) {
+		return new Money(money);
+	}
+
+	public Money plus(int otherMoney) {
+		return from(this.money + otherMoney);
+	}
+
+	public double calculateProfitRatio(Money totalPrize) {
+		return (double) totalPrize.money / this.money;
+	}
+
 }
