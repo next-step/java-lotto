@@ -32,7 +32,7 @@ public class LottoTicket {
 
 
     public int checkMatch(List<Integer> targetNumbers) {
-        Collections.sort(targetNumbers);
+        // Collections.sort(targetNumbers);
 
         if (targetNumbers.size() != this.lottoNumbers.size()) {
             throw new IllegalArgumentException("당첨 번호 개수가 일치 하지 않습니다.");
@@ -40,14 +40,22 @@ public class LottoTicket {
 
         int count = 0;
         for (int i = 0; i < this.lottoNumbers.size(); i++) {
-            count = compareNumbers(targetNumbers, i, count);
+            // count = compareNumbers(targetNumbers, i, count);
+            count = compareTargetnumbers(targetNumbers, i, count);
         }
 
         return count;
     }
 
-    private int compareNumbers(List<Integer> targetNumbers, int i, int count) {
-        if (this.lottoNumbers.get(i) == targetNumbers.get(i)) {
+    private int compareTargetnumbers(List<Integer> targetNumbers, int i, int count) {
+        for (int j = 0; j < targetNumbers.size(); j++) {
+            count = compareNumbers(targetNumbers, i, count, j);
+        }
+        return count;
+    }
+
+    private int compareNumbers(List<Integer> targetNumbers, int i, int count, int j) {
+        if (this.lottoNumbers.get(i) == targetNumbers.get(j)) {
             count++;
         }
         return count;

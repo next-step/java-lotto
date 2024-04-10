@@ -19,12 +19,12 @@ class LottoTicketTest {
     @Test
     void 당첨번호_비교(){
         List<Integer> ticketNumbers = new ArrayList<>();
-        ticketNumbers.add(1);
-        ticketNumbers.add(2);
-        ticketNumbers.add(3);
         ticketNumbers.add(4);
         ticketNumbers.add(5);
         ticketNumbers.add(6);
+        ticketNumbers.add(7);
+        ticketNumbers.add(8);
+        ticketNumbers.add(9);
         LottoTicket lottoTicket = new LottoTicket(ticketNumbers);
 
         List<Integer> targetNumbers = new ArrayList<>();
@@ -33,9 +33,9 @@ class LottoTicketTest {
         targetNumbers.add(3);
         targetNumbers.add(4);
         targetNumbers.add(5);
-        targetNumbers.add(7);
+        targetNumbers.add(6);
 
-        assertThat(lottoTicket.checkMatch(targetNumbers)).isEqualTo(5);
+        assertThat(lottoTicket.checkMatch(targetNumbers)).isEqualTo(3);
     }
 
 
