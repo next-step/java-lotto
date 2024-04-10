@@ -32,4 +32,18 @@ public class LottoGame {
         lottoMatch = new LottoMatch(input);
     }
 
+
+    public double checkIncome(HashMap<LottoMatchNumber, Integer> results, int money){
+        double income = 0;
+
+        int totalIncome = 0;
+        for (LottoMatchNumber lottoMatchNumber : LottoMatchNumber.values()) {
+            totalIncome += lottoMatchNumber.totalPrizeMoney(results.get(lottoMatchNumber));
+        }
+
+        income = (double) totalIncome/money;
+
+        return income;
+    }
+
 }
