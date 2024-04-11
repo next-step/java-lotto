@@ -28,10 +28,13 @@ public class InputView {
         return winningNumber;
     }
 
-    public static LottoBall lottoBall() {
+    public static LottoBall bonusBall(Set<LottoBall> winningNumber) {
         System.out.println("보너스 볼을 입력해주세요.");
-        LottoBall lottoBall = new LottoBall(SCANNER.nextInt());
-        return lottoBall;
+        LottoBall bonusBall = new LottoBall(SCANNER.nextInt());
+        if (winningNumber.contains(bonusBall)) {
+            throw new IllegalArgumentException("지난 주 당첨 번호 중 하나와 보너스 번호가 같습니다.");
+        }
+        return bonusBall;
     }
 
     public static void winningNumberStringArrayToWinningNumber(String[] winningNumberStringArray, Set<LottoBall> winningNumber) {

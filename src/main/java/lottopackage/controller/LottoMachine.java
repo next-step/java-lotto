@@ -18,7 +18,9 @@ public class LottoMachine {
         LottoGroup lottoGroup = new LottoGroup(numOfLotto);
         OutputView.printLottoGroup(lottoGroup.getLottoGroup());
 
-        List<Prize> lottoResult = lottoGroup.isWinning(InputView.winningNumber());
+        Set<LottoBall> winningNumber = InputView.winningNumber();
+        LottoBall bonusBall = InputView.bonusBall(winningNumber);
+        List<Prize> lottoResult = lottoGroup.isWinning(winningNumber, bonusBall);
         OutputView.printLottoResult(lottoResult, lottoGroup.getLottoGroup().size());
     }
 

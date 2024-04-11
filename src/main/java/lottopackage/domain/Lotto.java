@@ -40,9 +40,9 @@ public class Lotto {
         }
     }
 
-    public Prize isPrize(Set<LottoBall> winningNumber) {
+    public Prize isPrize(Set<LottoBall> winningNumber, LottoBall bonusBall) {
         isLottoValid(winningNumber);
-        return Prize.isPrize(lotto, winningNumber);
+        return Prize.isPrize(lotto, winningNumber, bonusBall);
     }
 
     @Override
