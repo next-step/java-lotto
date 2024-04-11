@@ -12,7 +12,7 @@ public class StringCalculator {
         this.parser.parse(originExpression);
     }
 
-    public int calc(){
+    public int calculate(){
 
         int result = 0;
         String[] exp = this.parser.next();

@@ -1,6 +1,7 @@
 package calculator.calculate;
 
 import calculator.calc.Calculator;
+import calculator.calc.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +12,7 @@ public class DivideTest {
     @Test
     @DisplayName("계산식을 입력하면 나눗셈을 반환한다.")
     public void divideTest(){
-        Calculator calculator = new Calculator();
-        int result = calculator.divide(4,2);
+        int result = Operator.DIVISION.apply(4,2);
 
         assertThat(result).isEqualTo(2);
     }
@@ -20,8 +20,7 @@ public class DivideTest {
     @Test
     @DisplayName("계산식을 입력하면 나눗셈을 정수 내림하여 반환한다. ")
     public void divideFloorTest(){
-        Calculator calculator = new Calculator();
-        int result = calculator.divide(2, 3);
+        int result = Operator.DIVISION.apply(2, 3);
 
         assertThat(result).isEqualTo(0);
     }

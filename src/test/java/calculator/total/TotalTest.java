@@ -1,8 +1,6 @@
 package calculator.total;
 
 import calculator.StringCalculator;
-import calculator.calc.Calculator;
-import calculator.parse.ExpressionParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +13,7 @@ public class TotalTest {
     @DisplayName("식을 입력하고 덧셈 결과를 반환한다.")
     public void addTest(){
         StringCalculator stringCalculator = new StringCalculator("1 + 2");
-        int result = stringCalculator.calc();
+        int result = stringCalculator.calculate();
 
         assertThat(result).isEqualTo(3);
     }
@@ -24,7 +22,7 @@ public class TotalTest {
     @DisplayName("식을 입력하고 덧셈, 곱셈 결과를 반환한다.")
     public void addAndMulTest(){
         StringCalculator stringCalculator = new StringCalculator("1 + 2 * 3");
-        int result = stringCalculator.calc();
+        int result = stringCalculator.calculate();
 
         assertThat(result).isEqualTo(9);
     }
@@ -32,7 +30,7 @@ public class TotalTest {
     @DisplayName("식을 입력하고 덧셈, 곱셈, 뺄셈 결과를 반환한다.")
     public void addAndMulAndMinTest(){
         StringCalculator stringCalculator = new StringCalculator("1 + 2 * 3 - 3");
-        int result = stringCalculator.calc();
+        int result = stringCalculator.calculate();
 
         assertThat(result).isEqualTo(6);
     }
@@ -40,7 +38,7 @@ public class TotalTest {
     @DisplayName("식을 입력하고 덧셈, 곱셈, 나눗셈 결과를 반환한다.")
     public void addAndMulAndDivTest(){
         StringCalculator stringCalculator = new StringCalculator("1 + 2 * 3 / 3");
-        int result = stringCalculator.calc();
+        int result = stringCalculator.calculate();
 
         assertThat(result).isEqualTo(3);
     }
@@ -50,7 +48,7 @@ public class TotalTest {
     public void illegalOperatorTest(){
         assertThatIllegalArgumentException().isThrownBy(() -> {
             StringCalculator stringCalculator = new StringCalculator("1 + 2 * 3 & 3");
-            int result = stringCalculator.calc();
+            int result = stringCalculator.calculate();
         });
     }
 
@@ -59,7 +57,7 @@ public class TotalTest {
     public void nullExpresstionTest(){
         assertThatIllegalArgumentException().isThrownBy(() -> {
             StringCalculator stringCalculator = new StringCalculator(null);
-            int result = stringCalculator.calc();
+            int result = stringCalculator.calculate();
         });
     }
     @Test
@@ -67,7 +65,7 @@ public class TotalTest {
     public void emptyStringTest(){
         assertThatIllegalArgumentException().isThrownBy(() -> {
             StringCalculator stringCalculator = new StringCalculator("");
-            int result = stringCalculator.calc();
+            int result = stringCalculator.calculate();
         });
     }
 }
