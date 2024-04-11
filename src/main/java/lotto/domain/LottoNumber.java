@@ -24,6 +24,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
+    public int toInt() {
+        return this.value;
+    }
+
+
     public static LottoNumber of(int value) {
         LottoNumber lottoNumber = lottoNumbers.get(value);
         if (lottoNumber == null) {

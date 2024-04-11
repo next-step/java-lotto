@@ -12,8 +12,7 @@ public class OutputView {
         System.out.println(lottos.size() + "개를 구매했습니다.");
 
         for (Lotto lotto : lottos) {
-            Collections.sort(lotto.getNumbers());
-            System.out.println(lotto);
+            System.out.println(lotto.sortNumbers());
         }
     }
 

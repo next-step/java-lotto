@@ -1,23 +1,32 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_LENGTH = 6;
-    private List<LottoNumber> numbers;
+    private Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
         validateLottoNumbers(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    public List<LottoNumber> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 
+    public String sortNumbers() {
+        List<Integer> sortedNumbers = numbers.stream()
+                .map(LottoNumber::toInt)
+                .sorted()
+                .collect(Collectors.toList());
+        return sortedNumbers.toString();
+    }
     public long countHits(Lotto others) {
         return others.getNumbers().stream()
                 .filter(other -> numbers.contains(other))
@@ -31,10 +40,6 @@ public class Lotto {
     private static void validateLottoNumbers(List<Integer> numbers) {
         if (numbers.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException("6자리가 아닌 로또번호가 입력되었습니다.");
-        }
-        if (numbers.stream().distinct().count() < numbers.size()
-        ) {
-            throw new IllegalArgumentException("중복되는 로또 번호가 입력되었습니다.");
         }
     }
 
