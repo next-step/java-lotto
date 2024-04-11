@@ -30,4 +30,18 @@ public class Lotto {
 
         return numbers.subList(0, LOTTO_COUNT);
     }
+
+    public static int matchCount(List<Integer> winningNumbers, List<Integer> generateNumbers) {
+        int result = 0;
+        if (winningNumbers.size() != generateNumbers.size()) {
+            return 0;
+        }
+
+        for (int winningNumber : winningNumbers) {
+            if (generateNumbers.contains(winningNumber)) {
+                result++;
+            }
+        }
+        return result;
+    }
 }

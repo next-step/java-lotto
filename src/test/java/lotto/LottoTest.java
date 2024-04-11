@@ -15,13 +15,23 @@ class LottoTest {
     }
 
     @Test
-    void makeLottoNumber() {
+    void generate() {
         List<Integer> result = Lotto.generate();
 
         assertThat(result).hasSize(6);
         assertThat(result.stream().distinct().count()).isEqualTo(6);
+
         for (int number : result) {
             assertThat(number).isBetween(1, 45);
         }
+    }
+
+    @Test
+    void matchCount() {
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> generateNumbers = List.of(1, 2, 3, 4, 5, 7);
+
+        int result = Lotto.matchCount(winningNumbers, generateNumbers);
+        assertThat(result).isEqualTo(5);
     }
 }
