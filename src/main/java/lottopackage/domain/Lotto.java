@@ -65,7 +65,7 @@ public class Lotto {
         Iterator<LottoBall> iteratorLotto = this.lotto.iterator();
         for (int i = 0; i < LOTTO_SIZE; i++) {
             String delimiter = (i == (LOTTO_SIZE - 1)) ? "" : ", ";
-           lotto += (iteratorLotto.next() + delimiter);
+            lotto += (iteratorLotto.next() + delimiter);
         }
 
         lotto += "]";

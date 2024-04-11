@@ -39,7 +39,7 @@ public class InputView {
 
     public static void winningNumberStringArrayToWinningNumber(String[] winningNumberStringArray, Set<LottoBall> winningNumber) {
         for (String number : winningNumberStringArray) {
-            winningNumber.add( new LottoBall(Integer.parseInt(number)));
+            winningNumber.add(new LottoBall(Integer.parseInt(number)));
         }
     }
 }

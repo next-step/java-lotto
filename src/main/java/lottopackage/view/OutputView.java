@@ -27,7 +27,7 @@ public class OutputView {
 
         for (int i = 0; i < prizeGroup.size(); i++) {
             Prize prize = prizeGroup.get(i);
-            String second = (prize == Prize.SECOND)? "보너스 볼 일치 - " : "";
+            String second = (prize == Prize.SECOND) ? "보너스 볼 일치 - " : "";
             System.out.println(prize.getBall() + "개 일치 ("
                     + prize.getWinningAmount() + "원)- " + second
                     + Collections.frequency(lottoResult, prize) + "개");
