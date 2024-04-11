@@ -10,7 +10,7 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validateLottoNumbers(numbers);
         this.numbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
