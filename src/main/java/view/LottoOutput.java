@@ -34,24 +34,19 @@ public class LottoOutput {
         int cnt = 0;
         System.out.println("당첨 통계");
         System.out.println("--------");
+
         for (int i = 0; i < REWARD_SIZE; i++) {
             int lottoMatch = resultWinStatus.get(i);
             cnt += lottoMatch;
-
-            if (REWARD_SIZE == i + 2) {
-                rankReward = RankReward.valueOf(BONUS_BALL_INDEX - 1, true);
+            if (i == 3) {
+                rankReward = RankReward.valueOf(i, true);
                 System.out.println(rankReward.getCorrectCount() + "개 일치, 보너스 볼 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
-                continue;
             }
-            if (REWARD_SIZE == i + 1) {
-                rankReward = RankReward.valueOf(BASIC_WIN_NUMBER_COUNT, false);
+            else {
+                rankReward = RankReward.valueOf(i, false);
                 System.out.println(rankReward.getCorrectCount() + "개 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
-                continue;
             }
-            rankReward = RankReward.valueOf(i + 3, false);
-            System.out.println(rankReward.getCorrectCount() + "개 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
         }
-        // 코드가 너무 더러움
         return cnt;
     }
 
