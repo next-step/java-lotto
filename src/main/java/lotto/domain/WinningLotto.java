@@ -6,7 +6,7 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winner, int bonusNumber) {
         LottoNumber bonus = LottoNumber.of(bonusNumber);
-        if(winner.matchBonus(bonus)){
+        if (winner.matchBonus(bonus)) {
             throw new IllegalArgumentException("로또 당첨번호와 2등 보너스 번호는 중복될 수 없습니다.");
         }
         this.winner = winner;

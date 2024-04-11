@@ -15,17 +15,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     // 45자리의 로또를 사전에 생성한다.
     static {
-        for(int i = LOTTO_NUMBER_MIN ; i <= LOTTO_NUMBER_MAX ; i++){
+        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
             lottoNumbers.put(i, new LottoNumber(i));
         }
     }
+
     private LottoNumber(int value) {
         this.value = value;
     }
 
-    public static LottoNumber of(int value){
+    public static LottoNumber of(int value) {
         LottoNumber lottoNumber = lottoNumbers.get(value);
-        if(lottoNumber == null){
+        if (lottoNumber == null) {
             throw new IllegalArgumentException("1-45 범위를 벗어나는 로또 숫자가 입력되었습니다.");
         }
         return new LottoNumber(value);
@@ -58,6 +59,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public String toString() {
         return "" + value;
     }
+
     @Override
     public int compareTo(LottoNumber other) {
         return Integer.compare(this.value, other.value);
