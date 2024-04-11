@@ -28,6 +28,12 @@ public class InputView {
         return winningNumber;
     }
 
+    public static LottoBall lottoBall() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        LottoBall lottoBall = new LottoBall(SCANNER.nextInt());
+        return lottoBall;
+    }
+
     public static void winningNumberStringArrayToWinningNumber(String[] winningNumberStringArray, Set<LottoBall> winningNumber) {
         for (String number : winningNumberStringArray) {
             winningNumber.add( new LottoBall(Integer.parseInt(number)));
