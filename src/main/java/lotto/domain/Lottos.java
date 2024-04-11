@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -12,7 +13,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
     public int getCount() {
