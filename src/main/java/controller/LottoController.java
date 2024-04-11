@@ -10,6 +10,8 @@ public class LottoController {
     private MyLotto myLotto = new MyLotto();
     private WinStatus winStatus = new WinStatus();
     private final int BASIC_LOTTO_BALL_COUNT = 6;
+    private final int WIN_CHANCE = 6;
+    private final int WIN = 7;
 
     public MyLotto totalLotto(TotalTry totalTry) {
         for (int i = 0; i < totalTry.getTotalTry(); i++) {
@@ -22,7 +24,7 @@ public class LottoController {
     public WinStatus resultReturn(Lotto winLotto) {
         for (Lotto currentLotto  : myLotto.getLotto()) {
             int price = currentLotto.parseNumber(winLotto);
-            if (price == 6)
+            if (price == WIN_CHANCE)
                 price = isBonusMatch(currentLotto, winLotto);
             winStatus.correct(price);
         }
@@ -32,8 +34,8 @@ public class LottoController {
     private int isBonusMatch(Lotto currentLotto, Lotto winLotto) {
         for (LottoBall ball : currentLotto.getBalls()) {
             if (winLotto.getBalls().contains(ball))
-                return 6;
+                return WIN_CHANCE;
         }
-        return 7;
+        return WIN;
     }
 }
