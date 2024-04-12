@@ -7,7 +7,7 @@ class LottoNumberTest {
     @Test
     void instanceCaching() {
         LottoNumber lottoNumber = LottoNumber.of(1);
-        Assertions.assertThat(LottoNumber.of(1)).isEqualTo(lottoNumber);
+        Assertions.assertThat(LottoNumber.of(1)).isSameAs(lottoNumber);
         Assertions.assertThat(LottoNumber.of(1).equals(lottoNumber)).isTrue();
     }
 }

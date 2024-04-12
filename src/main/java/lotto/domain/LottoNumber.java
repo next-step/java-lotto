@@ -34,7 +34,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (lottoNumber == null) {
             throw new IllegalArgumentException("1-45 범위를 벗어나는 로또 숫자가 입력되었습니다.");
         }
-        return new LottoNumber(value);
+        return lottoNumber;
     }
 
     public int getValue() {
