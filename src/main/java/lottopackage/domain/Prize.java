@@ -37,13 +37,20 @@ public enum Prize {
         if (lottoForPrizeCheck.size() == 1) {
             return checkBonusBall(lottoForPrizeCheck, bonusBall);
         }
-        return Arrays.stream(Prize.values()).filter((prize) -> prize.ball == (6 - lottoForPrizeCheck.size())).findFirst().orElse(Prize.SIXTH);
+        return Arrays.stream(Prize.values())
+                .filter((prize) -> prize.ball == (6 - lottoForPrizeCheck.size()))
+                .findFirst()
+                .orElse(Prize.SIXTH);
     }
 
     private static Prize checkBonusBall(Set<LottoBall> lottoForPrizeCheck, LottoBall bonusBall) {
         Set<LottoBall> lottoForPrizeCheck2nd = new HashSet<>(lottoForPrizeCheck);
         lottoForPrizeCheck2nd.remove(bonusBall);
         boolean isBonusBallMatched = lottoForPrizeCheck2nd.isEmpty();
-        return Arrays.stream(Prize.values()).filter((prize) -> prize.bonusBall == isBonusBallMatched).filter((prize) -> prize.ball == (6 - lottoForPrizeCheck.size())).findFirst().orElse(Prize.THIRD);
+        return Arrays.stream(Prize.values())
+                .filter((prize) -> prize.bonusBall == isBonusBallMatched)
+                .filter((prize) -> prize.ball == (6 - lottoForPrizeCheck.size()))
+                .findFirst()
+                .orElse(Prize.THIRD);
     }
 }
