@@ -13,20 +13,13 @@ public class Lotto {
         validateLottoNumbers(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    public String sortNumbers() {
-        List<Integer> sortedNumbers = numbers.stream()
-                .map(LottoNumber::toInt)
-                .sorted()
-                .collect(Collectors.toList());
-        return sortedNumbers.toString();
-    }
     public long countHits(Lotto others) {
         return others.getNumbers().stream()
                 .filter(other -> numbers.contains(other))
