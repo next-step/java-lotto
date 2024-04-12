@@ -7,6 +7,8 @@ public enum ErrorMessage {
     PURCHASE_SINGULAR_PRICE_ERROR("구매 금액 단위가 잘못되었습니다."),
     NEGATIVE_PURCHASE_PRICE_ERROR("구매 금액은 음수가 될 수 없습니다."),
     NOT_FOUND_PRODUCT("찾을 수 없는 상품명입니다."),
+    NEGATIVE_MANUAL_PURCHASE_COUNT("수동 구매 로또 수는 음수가 될 수 없습니다."),
+    OVER_WHOLE_PURCHASE_COUNT("수동 구매 로또 수가 전체 구매 수를 초과할 수 없습니다."),
     CANNOT_BE_INSTANTIATED("인스턴스를 만들 수 없는 클래스 입니다.");
 
     private final String message;

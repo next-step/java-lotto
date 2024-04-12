@@ -9,10 +9,18 @@ import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-    public static void showPurchasedLotto(List<Lotto> lottoSession) {
-        System.out.println(lottoSession.size() + "개를 구매했습니다.");
-
+    public static void showPurchasedLotto(List<Lotto> lottoSession, int manualCount) {
         StringBuilder stringBuilder = new StringBuilder();
+
+        if (manualCount > 0) {
+            stringBuilder.append("수동으로 ").append(manualCount).append("장 ");
+        }
+
+        if (lottoSession.size() - manualCount > 0) {
+            stringBuilder.append("자동으로 ").append(lottoSession.size() - manualCount).append("장");
+        }
+
+        stringBuilder.append("을 구매했습니다.\n");
 
         for (Lotto lotto : lottoSession) {
             stringBuilder.append(Arrays.toString(lotto.getLottoNumbers().toArray())).append("\n");

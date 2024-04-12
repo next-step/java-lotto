@@ -4,15 +4,11 @@ import lotto.constant.ErrorMessage;
 
 public class Purchase {
     private final Product product;
-    private final int purchasePrice;
+    private final int purchaseCount;
 
     public Purchase(Product product, int purchasePrice) {
-        if (purchasePrice < 0) {
-            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR.getMessage());
-        }
-
         this.product = product;
-        this.purchasePrice = purchasePrice;
+        this.purchaseCount = getPurchaseCount(product, purchasePrice);
     }
 
     public Purchase(String productName, int purchasePrice) {
@@ -23,11 +19,23 @@ public class Purchase {
         return this.product;
     }
 
-    public int getPurchaseAmount() {
+    private int getPurchaseCount(Product product, int purchasePrice) {
+        if (purchasePrice < 0) {
+            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR.getMessage());
+        }
+
         if (purchasePrice % product.getPrice() != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR.getMessage());
         }
 
-        return this.purchasePrice / product.getPrice();
+        return purchasePrice / product.getPrice();
+    }
+
+    public int getPurchaseAmount() {
+        return this.purchaseCount;
+    }
+
+    public boolean isOverPurchaseAmount(int amount) {
+        return amount > this.getPurchaseAmount();
     }
 }

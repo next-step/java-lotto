@@ -1,13 +1,11 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoRank;
+import lotto.domain.*;
 import lotto.service.Shop;
-import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,10 +14,20 @@ public class Main {
         InputView input = new InputView();
 
         int purchasedAmount = input.inputPurchaseAmount();
+        Purchase lottoPurchase = Shop.createLottoPurchase(purchasedAmount);
 
-        List<Lotto> purchasedLotto = Shop.purchaseLotto(purchasedAmount);
+        int manualPurchaseCount = input.inputManualPurchaseCount();
 
-        OutputView.showPurchasedLotto(purchasedLotto);
+        Shop.validateManualPurchaseCount(lottoPurchase, manualPurchaseCount);
+
+        List<String> manualInputLottoNumbers = new ArrayList<>();
+        if (manualPurchaseCount > 0) {
+            manualInputLottoNumbers.addAll(input.inputManualLottoNumber(manualPurchaseCount));
+        }
+
+        List<Lotto> purchasedLotto = Shop.purchaseLotto(lottoPurchase, manualInputLottoNumbers);
+
+        OutputView.showPurchasedLotto(purchasedLotto, manualPurchaseCount);
 
         WinningLotto winningLotto = new WinningLotto(
                 WinningLotto.getWinningNumbers(input.inputWinningNumbers()),
