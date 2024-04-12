@@ -6,11 +6,11 @@ public class Lotto {
 
     private final static int PRICE = 1000;
     private final static int LOTTO_SIZE = 6;
-    private static Set<LottoBall> lotto = new HashSet<>();
+    private final Set<LottoBall> LOTTO = new HashSet<>();
 
     public Lotto() {
-        while (lotto.size() != LOTTO_SIZE) {
-            this.lotto.add(new LottoBall());
+        while (LOTTO.size() != LOTTO_SIZE) {
+            this.LOTTO.add(new LottoBall());
         }
     }
 
@@ -18,7 +18,7 @@ public class Lotto {
         isLottoValid(lotto);
         Iterator<Integer> iteratorLotto = lotto.iterator();
         while (iteratorLotto.hasNext()) {
-            this.lotto.add(new LottoBall(iteratorLotto.next()));
+            this.LOTTO.add(new LottoBall(iteratorLotto.next()));
         }
     }
 
@@ -44,7 +44,7 @@ public class Lotto {
     */
 
     public Set<LottoBall> getLotto() {
-        return lotto;
+        return LOTTO;
     }
 
     public static int getLottoSize() {
@@ -65,7 +65,7 @@ public class Lotto {
     }
 
     public Prize checkPrize(WinningNumber winningNumber) {
-        return Prize.checkPrize(lotto, winningNumber);
+        return Prize.checkPrize(LOTTO, winningNumber);
     }
 
     @Override
@@ -73,19 +73,19 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto that = (Lotto) o;
-        return Objects.equals(lotto, that.lotto);
+        return Objects.equals(LOTTO, that.LOTTO);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto);
+        return Objects.hash(LOTTO);
     }
 
     @Override
     public String toString() {
         String lotto = "[";
 
-        Iterator<LottoBall> iteratorLotto = this.lotto.iterator();
+        Iterator<LottoBall> iteratorLotto = this.LOTTO.iterator();
         for (int i = 0; i < LOTTO_SIZE; i++) {
             String delimiter = (i == (LOTTO_SIZE - 1)) ? "" : ", ";
             lotto += (iteratorLotto.next() + delimiter);

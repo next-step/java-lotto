@@ -1,8 +1,8 @@
 /*
-* 클래스 이름:
-* 버전 정보:
-* 날짜:
-* 작성자: SunheeJo
+ * 클래스 이름:
+ * 버전 정보:
+ * 날짜:
+ * 작성자: SunheeJo
  */
 
 package lottopackage;
@@ -25,7 +25,7 @@ public class LottoTest {
     public void lotto() {
         // given
         Lotto lotto = new Lotto();
-        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger( lotto.getLotto() );
+        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger(lotto.getLotto());
         Set<Integer> lotteryBalls = new HashSet<>(
                 Arrays.stream(IntStream.rangeClosed(1, 45).toArray())
                         .boxed()
@@ -34,14 +34,14 @@ public class LottoTest {
         // when, then
         int lottoLength = lottoNumber.size();
         Assertions.assertThat(lottoLength).isEqualTo(6);
-        Assertions.assertThat(lotteryBalls.containsAll ( lottoNumber )).isEqualTo(true);
+        Assertions.assertThat(lotteryBalls.containsAll(lottoNumber)).isEqualTo(true);
     }
 
     @Test
     @DisplayName("lotto.isPrize() - 당첨 등수 확인")
     public void isPrize() {
         // given
-        Set<LottoBall> winningNumber = new Lotto( new HashSet<>( Arrays.asList(1, 2, 3, 4, 5, 6))).getLotto();
+        Set<LottoBall> winningNumber = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))).getLotto();
         LottoBall bonusBall = new LottoBall(45);
         Prize[] prize = Prize.values();
 
@@ -52,7 +52,7 @@ public class LottoTest {
         Lotto winningNumber4th = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 7, 8)));
         Lotto winningNumber5th = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
         Lotto noWinningNumber = new Lotto(new HashSet<>(Arrays.asList(11, 12, 13, 14, 15, 16)));
-        List<Lotto> lottoGroup = new ArrayList<>(Arrays.asList(winningNumber1st, winningNumber2nd, winningNumber3rd, winningNumber4th, winningNumber5th, noWinningNumber) );
+        List<Lotto> lottoGroup = new ArrayList<>(Arrays.asList(winningNumber1st, winningNumber2nd, winningNumber3rd, winningNumber4th, winningNumber5th, noWinningNumber));
 
         // then
         for (int i = 0; i < prize.length; i++) {
