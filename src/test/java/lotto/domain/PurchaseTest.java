@@ -27,9 +27,7 @@ public class PurchaseTest {
     @Test
     @DisplayName("구매 금액 단위 오류 테스트")
     public void purchaseSingularPriceError() {
-        Purchase lottoPurchase = new Purchase("Lotto", 15400);
-
-        assertThatThrownBy(lottoPurchase::getPurchaseAmount)
+        assertThatThrownBy(() -> new Purchase("Lotto", 15400))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR.getMessage());
     }
