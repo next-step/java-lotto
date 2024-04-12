@@ -1,7 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -12,9 +12,17 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Map<WinningType, Long> winningCount(WinningLotto winner) {
-        return this.lottos.stream()
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
+    }
+
+    public int getCount() {
+        return lottos.size();
+    }
+
+    public LottoResult winningResult(WinningLotto winner) {
+        return new LottoResult(this.lottos.stream()
                 .map(winner::findWinningType)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
     }
 }

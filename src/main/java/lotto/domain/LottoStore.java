@@ -7,18 +7,28 @@ import java.util.List;
 
 public class LottoStore {
 
-    public List<Lotto> buyLottos(int price) {
+    public List<Lotto> buyLottos(int price, Lottos manualLottos) {
 
-        int quantity = calculateQuantity(price);
+        int autoLottoCount = calculateCount(price, manualLottos.getCount());
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(LottoFactory.issueLotto());
-        }
+        buyManualLottos(manualLottos, lottos);
+        butAutoLottos(autoLottoCount, lottos);
+
         return lottos;
     }
 
-    private static int calculateQuantity(int price) {
-        return price / 1000;
+    private static void butAutoLottos(int autoLottoCount, List<Lotto> lottos) {
+        for (int i = 0; i < autoLottoCount; i++) {
+            lottos.add(LottoFactory.issueLotto());
+        }
+    }
+
+    private static void buyManualLottos(Lottos manualLottos, List<Lotto> lottos) {
+        lottos.addAll(manualLottos.getLottos());
+    }
+
+    private static int calculateCount(int price, int manualLottoCount) {
+        return price / 1000 - manualLottoCount;
     }
 }

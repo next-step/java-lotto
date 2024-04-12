@@ -1,5 +1,9 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -14,6 +18,25 @@ public class InputView {
         scanner.nextLine();
         return amount;
     }
+
+    public static int scanManualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int count = scanner.nextInt();
+        scanner.nextLine();
+        return count;
+    }
+
+    public static Lottos scanManualNumbers(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            String text = scanner.nextLine();
+            List<Integer> numbers = convertStringToIntList(text);
+            lottos.add(new Lotto(numbers));
+        }
+        return new Lottos(lottos);
+    }
+
 
     public static List<Integer> scanWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");

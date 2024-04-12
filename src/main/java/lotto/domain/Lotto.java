@@ -1,30 +1,22 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
-    public static final int LIMIT_LOTTO_LENGTH = 7;
-    private List<Integer> numbers;
+    public static final int LOTTO_LENGTH = 6;
+    private Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        if (numbers.size() >= LIMIT_LOTTO_LENGTH) {
-            throw new IllegalArgumentException("6자리 초과의 로또 번호가 입력되었습니다.");
-        }
-        if (!lottoRange().containsAll(numbers)) {
-            throw new IllegalArgumentException("1-45 범위를 벗어나는 로또 숫자가 입력되었습니다.");
-        }
-        if (numbers.stream().distinct().count() < numbers.size()
-        ) {
-            throw new IllegalArgumentException("중복되는 로또 번호가 입력되었습니다.");
-        }
-        Collections.sort(numbers);
-        this.numbers = numbers;
+        validateLottoNumbers(numbers);
+        this.numbers = numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    public List<Integer> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 
@@ -34,20 +26,20 @@ public class Lotto {
                 .count();
     }
 
-    public boolean matchBonus(int bonusNumber) {
+    public boolean matchBonus(LottoNumber bonusNumber) {
         return this.numbers.contains(bonusNumber);
     }
 
-    private static List<Integer> lottoRange() {
-        return IntStream.rangeClosed(1, 45)
-                .boxed()
-                .collect(Collectors.toList());
+    private static void validateLottoNumbers(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_LENGTH) {
+            throw new IllegalArgumentException("6자리가 아닌 로또번호가 입력되었습니다.");
+        }
     }
+
 
     @Override
     public String toString() {
-        Collections.sort(numbers);
-        return numbers + "";
+        return "" + numbers;
     }
 
 }
