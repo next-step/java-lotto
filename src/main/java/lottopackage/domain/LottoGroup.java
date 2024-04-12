@@ -2,7 +2,6 @@ package lottopackage.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class LottoGroup {
     private List<Lotto> lottoGroup = new ArrayList<>();
@@ -21,7 +20,7 @@ public class LottoGroup {
         return lottoGroup;
     }
 
-    public List<Prize> checkWinning(WinningNumber winningNumber) {
+    public List<Prize> checkPrize(WinningNumber winningNumber) {
         List<Prize> lottoResult = new ArrayList<>();
         for (int i = 0; i < lottoGroup.size(); i++) {
             Lotto lotto = lottoGroup.get(i);

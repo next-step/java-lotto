@@ -5,8 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoBall {
+    static final int MIN_VALUE = 1;
+    static final int MAX_VALUE = 45;
+
     private final static Set<Integer> lotteryBalls = new HashSet<>(
-            Arrays.stream(IntStream.rangeClosed(1, 45).toArray())
+            Arrays.stream(IntStream.rangeClosed(MIN_VALUE, MAX_VALUE).toArray())
                     .boxed()
                     .collect(Collectors.toSet()));
     private final int lottoBall;

@@ -23,6 +23,7 @@ public enum Prize {
     public int getBall() {
         return ball;
     }
+
     public boolean getBonusBall() {
         return bonusBall;
     }

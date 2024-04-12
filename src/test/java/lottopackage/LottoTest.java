@@ -15,6 +15,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTest {
 
@@ -23,13 +25,16 @@ public class LottoTest {
     public void lotto() {
         // given
         Lotto lotto = new Lotto();
-        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger( lotto.getLotto());
-        Set<Integer> totalLottoNumber = LottoBall.getLotteryBalls();
+        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger( lotto.getLotto() );
+        Set<Integer> lotteryBalls = new HashSet<>(
+                Arrays.stream(IntStream.rangeClosed(1, 45).toArray())
+                        .boxed()
+                        .collect(Collectors.toSet()));
 
         // when, then
         int lottoLength = lottoNumber.size();
         Assertions.assertThat(lottoLength).isEqualTo(6);
-        Assertions.assertThat(totalLottoNumber.containsAll ( lottoNumber )).isEqualTo(true);
+        Assertions.assertThat(lotteryBalls.containsAll ( lottoNumber )).isEqualTo(true);
     }
 
     @Test

@@ -6,8 +6,7 @@ public class Lotto {
 
     private final static int PRICE = 1000;
     private final static int LOTTO_SIZE = 6;
-
-    private final Set<LottoBall> lotto = new HashSet<>();
+    private static Set<LottoBall> lotto = new HashSet<>();
 
     public Lotto() {
         while (lotto.size() != LOTTO_SIZE) {
@@ -22,6 +21,27 @@ public class Lotto {
             this.lotto.add(new LottoBall(iteratorLotto.next()));
         }
     }
+
+    /* 강의에서의 주생성자, 부생성자 내용
+    public Lotto() {
+        while (lotto.size() != LOTTO_SIZE) {
+            this.lotto.add(new LottoBall());
+        }
+    }
+
+    public Lotto(LottoBall... balls) {
+        this(Arrays.asList(balls));
+    }
+
+    public Lotto(List<LottoBall> balls) {
+        this(new HashSet<>(balls));
+    }
+
+    public Lotto(Set<LottoBall> balls) {
+        isLottoValid(balls);
+        this.lotto = balls;
+    }
+    */
 
     public Set<LottoBall> getLotto() {
         return lotto;
