@@ -27,6 +27,10 @@ public class Lotto {
         return lotto;
     }
 
+    public static int getLottoSize() {
+        return LOTTO_SIZE;
+    }
+
     public static int purchaseLotto(int purchaseAmount) {
         if (purchaseAmount < PRICE) {
             throw new IllegalArgumentException("최소 주문 금액(=로또 한 장 금액)은 " + PRICE + "원 입니다.");
@@ -40,9 +44,8 @@ public class Lotto {
         }
     }
 
-    public Prize checkPrize(Set<LottoBall> winningNumber, LottoBall bonusBall) {
-        isLottoValid(winningNumber);
-        return Prize.checkPrize(lotto, winningNumber, bonusBall);
+    public Prize checkPrize(WinningNumber winningNumber) {
+        return Prize.checkPrize(lotto, winningNumber);
     }
 
     @Override

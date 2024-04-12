@@ -34,6 +34,6 @@ public class OutputView {
             totalWinningAmount += (prize.getWinningAmount()) * (Collections.frequency(lottoResult, prize));
         }
 
-        System.out.println("총 수익률은" + (float) totalWinningAmount / (totalLottoGroupSize * 1000) + "입니다.");
+        System.out.println("총 수익률은 " + (float) totalWinningAmount / (totalLottoGroupSize * 1000) + " 입니다.");
     }
 }

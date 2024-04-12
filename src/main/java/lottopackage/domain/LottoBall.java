@@ -6,7 +6,9 @@ import java.util.stream.IntStream;
 
 public class LottoBall {
     private final static Set<Integer> lotteryBalls = new HashSet<>(
-            Arrays.stream(IntStream.rangeClosed(1, 45).toArray()).boxed().collect(Collectors.toSet()));
+            Arrays.stream(IntStream.rangeClosed(1, 45).toArray())
+                    .boxed()
+                    .collect(Collectors.toSet()));
     private final int lottoBall;
 
     public LottoBall() {

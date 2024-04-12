@@ -10,6 +10,7 @@ package lottopackage;
 import lottopackage.domain.Lotto;
 import lottopackage.domain.LottoBall;
 import lottopackage.domain.Prize;
+import lottopackage.domain.WinningNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
@@ -51,7 +52,7 @@ public class LottoTest {
         // then
         for (int i = 0; i < prize.length; i++) {
             Lotto lotto = lottoGroup.get(i);
-            Assertions.assertThat(lotto.checkPrize(winningNumber, bonusBall)).isEqualTo(prize[i]);
+            Assertions.assertThat(lotto.checkPrize(new WinningNumber(winningNumber, bonusBall))).isEqualTo(prize[i]);
         }
     }
 }

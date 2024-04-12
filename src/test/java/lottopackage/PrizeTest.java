@@ -3,6 +3,7 @@ package lottopackage;
 import lottopackage.domain.Lotto;
 import lottopackage.domain.LottoBall;
 import lottopackage.domain.Prize;
+import lottopackage.domain.WinningNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class PrizeTest {
         // then
         for (int i = 0; i < prize.length; i++) {
             Set<LottoBall> lotto = lottoGroup.get(i);
-            Assertions.assertThat(Prize.checkPrize(lotto, winningNumber, bonusBall)).isEqualTo(prize[i]);
+            Assertions.assertThat(Prize.checkPrize(lotto, new WinningNumber(winningNumber, bonusBall))).isEqualTo(prize[i]);
         }
     }
 }

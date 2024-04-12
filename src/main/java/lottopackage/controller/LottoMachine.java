@@ -1,9 +1,6 @@
 package lottopackage.controller;
 
-import lottopackage.domain.Lotto;
-import lottopackage.domain.LottoBall;
-import lottopackage.domain.LottoGroup;
-import lottopackage.domain.Prize;
+import lottopackage.domain.*;
 import lottopackage.view.InputView;
 import lottopackage.view.OutputView;
 
@@ -18,7 +15,7 @@ public class LottoMachine {
 
         Set<LottoBall> winningNumber = InputView.winningNumber();
         LottoBall bonusBall = InputView.bonusBall(winningNumber);
-        List<Prize> lottoResult = lottoGroup.checkWinning(winningNumber, bonusBall);
+        List<Prize> lottoResult = lottoGroup.checkWinning(new WinningNumber(winningNumber, bonusBall));
         OutputView.printLottoResult(lottoResult, lottoGroup.getLottoGroup().size());
     }
 
