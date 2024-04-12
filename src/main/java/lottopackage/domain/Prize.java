@@ -30,7 +30,7 @@ public enum Prize {
         return winningAmount;
     }
 
-    public static Prize isPrize(Set<LottoBall> lotto, Set<LottoBall> winningNumber, LottoBall bonusBall) {
+    public static Prize checkPrize(Set<LottoBall> lotto, Set<LottoBall> winningNumber, LottoBall bonusBall) {
         Set<LottoBall> lottoForPrizeCheck = new HashSet<>(lotto);
 
         lottoForPrizeCheck.removeAll(winningNumber);

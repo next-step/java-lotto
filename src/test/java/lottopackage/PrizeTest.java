@@ -31,7 +31,7 @@ public class PrizeTest {
         // then
         for (int i = 0; i < prize.length; i++) {
             Set<LottoBall> lotto = lottoGroup.get(i);
-            Assertions.assertThat(Prize.isPrize(lotto, winningNumber, bonusBall)).isEqualTo(prize[i]);
+            Assertions.assertThat(Prize.checkPrize(lotto, winningNumber, bonusBall)).isEqualTo(prize[i]);
         }
     }
 }

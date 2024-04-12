@@ -21,11 +21,11 @@ public class LottoGroup {
         return lottoGroup;
     }
 
-    public List<Prize> isWinning(Set<LottoBall> winningNumber, LottoBall bonusBall) {
+    public List<Prize> checkWinning(Set<LottoBall> winningNumber, LottoBall bonusBall) {
         List<Prize> lottoResult = new ArrayList<>();
         for (int i = 0; i < lottoGroup.size(); i++) {
             Lotto lotto = lottoGroup.get(i);
-            lottoResult.add(lotto.isPrize(winningNumber, bonusBall));
+            lottoResult.add(lotto.checkPrize(winningNumber, bonusBall));
         }
         return lottoResult;
     }

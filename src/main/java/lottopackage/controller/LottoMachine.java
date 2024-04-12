@@ -7,8 +7,6 @@ import lottopackage.domain.Prize;
 import lottopackage.view.InputView;
 import lottopackage.view.OutputView;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +18,7 @@ public class LottoMachine {
 
         Set<LottoBall> winningNumber = InputView.winningNumber();
         LottoBall bonusBall = InputView.bonusBall(winningNumber);
-        List<Prize> lottoResult = lottoGroup.isWinning(winningNumber, bonusBall);
+        List<Prize> lottoResult = lottoGroup.checkWinning(winningNumber, bonusBall);
         OutputView.printLottoResult(lottoResult, lottoGroup.getLottoGroup().size());
     }
 

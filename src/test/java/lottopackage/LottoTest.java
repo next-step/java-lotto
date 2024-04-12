@@ -51,7 +51,7 @@ public class LottoTest {
         // then
         for (int i = 0; i < prize.length; i++) {
             Lotto lotto = lottoGroup.get(i);
-            Assertions.assertThat(lotto.isPrize(winningNumber, bonusBall)).isEqualTo(prize[i]);
+            Assertions.assertThat(lotto.checkPrize(winningNumber, bonusBall)).isEqualTo(prize[i]);
         }
     }
 }
