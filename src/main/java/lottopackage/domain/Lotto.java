@@ -6,20 +6,35 @@ public class Lotto {
 
     private final static int PRICE = 1000;
     private final static int LOTTO_SIZE = 6;
-    private final Set<LottoBall> lotto = new HashSet<>();
+    private Set<LottoBall> lotto;
 
     public Lotto() {
+        Set<LottoBall> lotto = new HashSet<>();
         while (lotto.size() != LOTTO_SIZE) {
-            this.lotto.add(new LottoBall());
+            lotto.add(new LottoBall());
         }
+        this.lotto = lotto;
     }
 
-    public Lotto(Set<Integer> lotto) {
-        isLottoValid(lotto);
-        Iterator<Integer> iteratorLotto = lotto.iterator();
-        while (iteratorLotto.hasNext()) {
-            this.lotto.add(new LottoBall(iteratorLotto.next()));
+    public Lotto(Integer... numbers) {
+        this(toLotto(numbers));
+    }
+
+    private static Set<LottoBall> toLotto(Integer... lottoBalls) {
+        Set<LottoBall> lotto = new HashSet<>();
+        for (Integer ball : lottoBalls) {
+            lotto.add(new LottoBall(ball));
         }
+        return lotto;
+    }
+
+    public Lotto(LottoBall... lottoBall) {
+        this( new HashSet<>(Arrays.asList(lottoBall)) );
+    }
+
+    public Lotto(Set<LottoBall> lotto) {
+        isLottoValid(lotto);
+        this.lotto = lotto;
     }
 
     public Set<LottoBall> getLotto() {
