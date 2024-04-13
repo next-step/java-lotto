@@ -28,7 +28,11 @@ public class Lotto {
     }
 
     public Lotto(Set<LottoBall> lottoBalls) {
-        this.lotto = new LottoBalls(lottoBalls);
+        this(new LottoBalls(lottoBalls));
+    }
+
+    public Lotto(LottoBalls lottoBalls) {
+        this.lotto = lottoBalls;
     }
 
     public LottoBalls getLotto() {

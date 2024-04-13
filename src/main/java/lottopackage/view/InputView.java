@@ -1,6 +1,8 @@
 package lottopackage.view;
 
+import lottopackage.domain.Lotto;
 import lottopackage.domain.LottoBall;
+import lottopackage.domain.LottoBalls;
 import lottopackage.domain.WinningNumberAndBonusBall;
 
 import java.util.*;
@@ -13,47 +15,49 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static int numOfManualLotto() {
+    public static List<Lotto> manualLottos() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return SCANNER.nextInt();
-    }
+        int numOfManualLotto = SCANNER.nextInt();
 
-    public static Set<LottoBall> inputManualLotto() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요. (ex) 3, 41, 29, 38, 11, 6");
-        return lotto();
+        List<Lotto> manualLottos = new ArrayList<>();
+
+        for (int i = 0; i < numOfManualLotto; i++) {
+            manualLottos.add(new Lotto(lottoBalls()));
+        }
+
+        return manualLottos;
     }
 
     public static WinningNumberAndBonusBall winningNumberAndBonusBall() {
-        Set<LottoBall> winningNumber = winningNumber();
-        WinningNumberAndBonusBall winningNumberAndBonusBall = new WinningNumberAndBonusBall(winningNumber, bonusBall(winningNumber));
+        WinningNumberAndBonusBall winningNumberAndBonusBall = new WinningNumberAndBonusBall(winningNumber(), bonusBall());
         return winningNumberAndBonusBall;
     }
 
-    private static Set<LottoBall> winningNumber() {
+    private static LottoBalls winningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 11, 6");
-        return lotto();
+        return lottoBalls();
     }
 
-    private static Set<LottoBall> lotto() {
+    private static LottoBall bonusBall() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        LottoBall bonusBall = new LottoBall(SCANNER.nextInt());
+        return bonusBall;
+    }
+
+    private static LottoBalls lottoBalls() {
         String lottoString = SCANNER.next();
         String[] lottoStringArray = lottoString.replaceAll(" ", "").split(",");
 
-        Set<LottoBall> lotto = new HashSet<>();
+        Set<LottoBall> lottoBallSet = new HashSet<>();
         try {
-            lottoStringArrayToLotto(lottoStringArray, lotto);
+            lottoStringArrayToLotto(lottoStringArray, lottoBallSet);
         } catch (Exception exception) {
             throw new IllegalArgumentException("번호를 잘못 입력했습니다.");
         }
-        return lotto;
-    }
 
-    private static LottoBall bonusBall(Set<LottoBall> winningNumber) {
-        System.out.println("보너스 볼을 입력해주세요.");
-        LottoBall bonusBall = new LottoBall(SCANNER.nextInt());
-        if (winningNumber.contains(bonusBall)) {
-            throw new IllegalArgumentException("지난 주 당첨 번호 중 하나와 보너스 번호가 같습니다.");
-        }
-        return bonusBall;
+        LottoBalls lottoBalls = new LottoBalls(lottoBallSet);
+        return lottoBalls;
     }
 
     public static void lottoStringArrayToLotto(String[] winningNumberStringArray, Set<LottoBall> winningNumber) {
