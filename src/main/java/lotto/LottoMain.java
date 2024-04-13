@@ -1,7 +1,10 @@
 package lotto;
 
+import java.util.List;
+
 import lotto.domain.LottoGame;
 import lotto.domain.RandomNumberStrategy;
+import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,7 +15,9 @@ public class LottoMain {
 		RandomNumberStrategy randomNumberStrategy = new RandomNumberStrategy();
 		LottoGame lottoGame = new LottoGame(inputView.inputMoney());
 		resultView.printOfBuyLotto(lottoGame, randomNumberStrategy);
-		resultView.printWinningResult(lottoGame, inputView.inputWinningNumber(), inputView.inputBonusNumber());
+		List<Rank> userLottoRanks = lottoGame.match(inputView.inputWinningNumber(), inputView.inputBonusNumber());
+		resultView.printWinningResult(userLottoRanks);
+		resultView.printProfit(lottoGame.calculateProfit(userLottoRanks));
 	}
 
 }

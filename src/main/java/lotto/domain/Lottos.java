@@ -25,8 +25,4 @@ public class Lottos {private List<Lotto> lottos;
 		}
 		return ranks;
 	}
-
-	public List<Lotto> getLottos() {
-		return lottos;
-	}
 }

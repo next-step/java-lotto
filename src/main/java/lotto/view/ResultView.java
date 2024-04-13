@@ -19,21 +19,16 @@ public class ResultView {
 		}
 	}
 
-	public void printWinningResult(LottoGame lottoGame, String winningNumbers, int bonusNumber) {
-		List<Rank> lottoRanks = lottoGame.match(winningNumbers, bonusNumber);
+	public void printWinningResult(List<Rank> userLottoRank) {
 		System.out.println(WiNNING_RESULT_MESSAGE);
 		System.out.println(SEPARATE_BAR);
-		for (int i = Rank.values().length - 1; i >= 0; i--) {
-			Rank rank = Rank.values()[i];
-			if (isNotSameRank(rank)) {
-				int count = rank.countSameMatch(lottoRanks);
-				System.out.printf(RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize(), count);
-			}
+		for (LottoResult result : LottoResult.matchResult(userLottoRank)) {
+			System.out.printf(RESULT_MESSAGE, result.getMatchCount(), result.getPrize(), result.countWinningLotto());
 		}
-		System.out.printf(TOTAL_PROFIT_MESSAGE, lottoGame.calculateProfit(lottoRanks));
 	}
 
-	private static boolean isNotSameRank(Rank rank) {
-		return rank != Rank.INVALID;
+	public void printProfit(double winningProfit){
+		System.out.printf(TOTAL_PROFIT_MESSAGE, winningProfit);
 	}
+
 }

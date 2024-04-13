@@ -11,7 +11,7 @@ public enum Rank {
 	THIRD(5, 1_500_000),
 	FOURTH(4, 50_000),
 	FIFTH(3, 5_000),
-	INVALID(0, 0);
+	MISS(0, 0);
 	private int matchCount;
 	private int prize;
 
@@ -25,11 +25,11 @@ public enum Rank {
 			.filter(rank -> rank.isSameMatchCount(matchCount))
 			.filter(rank -> checkBonus(matchCount, isBonus, rank))
 			.findFirst()
-			.orElse(INVALID);
+			.orElse(MISS);
 	}
 
 	private static boolean checkBonus(int matchCount, boolean isBonus, Rank rank) {
-		return (matchCount == 5 && isBonus) || rank != SECOND;
+		return isBonus || rank != SECOND;
 	}
 
 	private boolean isSameMatchCount(int matchCount) {
@@ -40,6 +40,14 @@ public enum Rank {
 		return (int)ranks.stream()
 			.filter(rank -> rank == this)
 			.count();
+	}
+
+	public static List<Rank> availableRanks() {
+		List<Rank> ranks = Arrays.stream(Rank.values())
+			.filter(rank -> rank != MISS)
+			.collect(Collectors.toList());
+		Collections.reverse(ranks);
+		return ranks;
 	}
 
 	public int getMatchCount() {
