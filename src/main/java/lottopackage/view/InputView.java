@@ -17,12 +17,12 @@ public class InputView {
 
     public static List<Lotto> manualLottos() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int numOfManualLotto = SCANNER.nextInt();
+        int numberOfManualLotto = SCANNER.nextInt();
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요. (ex) 3, 41, 29, 38, 11, 6");
         List<Lotto> manualLottos = new ArrayList<>();
 
-        for (int i = 0; i < numOfManualLotto; i++) {
+        for (int i = 0; i < numberOfManualLotto; i++) {
             manualLottos.add(new Lotto(lottoBalls()));
         }
 
