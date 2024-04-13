@@ -20,7 +20,7 @@ public class LottoProgram {
         printPurchaseLottoByEachType(amount);
         printLottosCount(lottos);
 
-        WinningLotto winningLotto = new WinningLotto(inputWinningNumbers(), inputBonusNumber());
+        WinningLotto winningLotto = WinningLotto.of(inputWinningNumbers(), inputBonusNumber());
 
         LottoResult lottoResult = winningLotto.getWinningResult(lottos);
         printWinningResult(lottoResult);
