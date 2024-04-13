@@ -5,25 +5,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class WinningNumberAndBonusBall {
-    Set<LottoBall> winningNumber;
+    Lotto winningNumber;
     LottoBall bonusBall;
 
     public WinningNumberAndBonusBall(Set<LottoBall> winningNumber, LottoBall bonusBall) {
-        isValidWinningNumber(winningNumber);
-        this.winningNumber = winningNumber;
-        this.bonusBall = bonusBall;
+        this(new Lotto(winningNumber), bonusBall);
     }
 
-    private static void isValidWinningNumber(Set<LottoBall> winningNumber) {
-        if (winningNumber.size() != Lotto.getLottoSize()) {
-            throw new IllegalArgumentException("당첨번호는 6자리 숫자여야 합니다.");
-        }
+    public WinningNumberAndBonusBall(Lotto winningNumber, LottoBall bonusBall) {
+        this.winningNumber = winningNumber;
+        this.bonusBall = bonusBall;
     }
 
     public static Prize checkPrize(Set<LottoBall> lotto, WinningNumberAndBonusBall winningNumberAndBonusBall) {
         Set<LottoBall> lottoForPrizeCheck = new HashSet<>(lotto);
 
-        lottoForPrizeCheck.removeAll(winningNumberAndBonusBall.winningNumber);
+        lottoForPrizeCheck.removeAll(winningNumberAndBonusBall.winningNumber.getLotto());
         if (lottoForPrizeCheck.size() == 1) {
             return checkBonusBall(lottoForPrizeCheck, winningNumberAndBonusBall.bonusBall);
         }
