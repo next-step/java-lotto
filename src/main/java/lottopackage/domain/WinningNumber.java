@@ -16,8 +16,6 @@ public class WinningNumber {
 
     private static void isValidWinningNumber(Set<LottoBall> winningNumber) {
         if (winningNumber.size() != Lotto.getLottoSize()) {
-            System.out.println(winningNumber.size());
-            System.out.println(Lotto.getLottoSize());
             throw new IllegalArgumentException("당첨번호는 6자리 숫자여야 합니다.");
         }
     }

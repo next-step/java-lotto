@@ -29,10 +29,6 @@ public class LottoBall {
         return lottoBall;
     }
 
-    public static Set<Integer> getLotteryBalls() {
-        return lotteryBalls;
-    }
-
     public static Set<Integer> setLottoBallToSetInteger(Set<LottoBall> setLottoBall) {
         Set<Integer> setInteger = new HashSet<>();
         Iterator<LottoBall> iteratorSetLottoBall = setLottoBall.iterator();
