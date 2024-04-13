@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTest {
@@ -64,5 +66,36 @@ class LottoTest {
 
         int result = Lotto.matchCount(winningNumbers, generateNumbers);
         assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    void returnRate() {
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        List<List<Integer>> purchasedTickets = Arrays.asList(            List.of(8, 21, 23, 41, 42, 43),
+                List.of(3, 5, 11, 16, 32, 38),
+                List.of(7, 11, 16, 35, 36, 44),
+                List.of(1, 8, 11, 31, 41, 42),
+                List.of(13, 14, 16, 38, 42, 45),
+                List.of(7, 11, 30, 40, 42, 43),
+                List.of(2, 13, 22, 32, 38, 45),
+                List.of(23, 25, 33, 36, 39, 41),
+                List.of(1, 3, 5, 14, 22, 45),
+                List.of(5, 9, 38, 41, 43, 44),
+                List.of(2, 8, 9, 18, 19, 21),
+                List.of(13, 14, 18, 21, 23, 35),
+                List.of(17, 21, 29, 37, 42, 45),
+                List.of(3, 8, 27, 30, 35, 44)
+        );
+
+
+        int ticketPrice = 1000;
+        int totalWinnings = purchasedTickets.stream()
+                .mapToInt(ticket -> Lotto.calculateWinnings(Lotto.matchCount(winningNumbers, ticket)))
+                .sum();
+        int totalInvestment = purchasedTickets.size() * ticketPrice;
+
+        double calculatedReturnRate = (double) totalWinnings / totalInvestment;
+
+        assertEquals(0.35, calculatedReturnRate, 0.01);
     }
 }
