@@ -15,11 +15,11 @@ public class Lottos {
         return new Lottos(List.of(lottos));
     }
 
-    public static Lottos of(List<Lotto> lottos){
+    public static Lottos of(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
-    public static Lottos of(){
+    public static Lottos of() {
         return new Lottos(new ArrayList<>());
     }
 
@@ -31,8 +31,12 @@ public class Lottos {
         return lottos;
     }
 
-    public void add(Lottos lottos){
+    public void add(Lottos lottos) {
         this.lottos.addAll(lottos.getLottos());
+    }
+
+    public int size(){
+        return this.lottos.size();
     }
 
     public LottoResult getWinningResult(Lotto winingLotto, LottoNumber bonus) {

@@ -10,27 +10,29 @@ import static lotto.view.ResultView.printPurchaseLottoByEachType;
 import static lotto.view.ResultView.printReturnRate;
 import static lotto.view.ResultView.printWinningResult;
 
+import lotto.view.Customer;
+
 public class LottoProgram {
 
     public void run() {
         Money money = new Money(inputPurchaseAmount());
         PurchaseAmount amount = PurchaseAmount.of(money.purchase(), inputManualLottoCount());
 
-        Lottos lottos = buyLotto(amount);
+        Customer customer = buyLotto(amount);
         printPurchaseLottoByEachType(amount);
-        printLottosCount(lottos);
+        printLottosCount(customer.getLottos());
 
         WinningLotto winningLotto = WinningLotto.of(inputWinningNumbers(), inputBonusNumber());
 
-        LottoResult lottoResult = winningLotto.getWinningResult(lottos);
+        LottoResult lottoResult = winningLotto.getWinningResult(customer.getLottos());
         printWinningResult(lottoResult);
         printReturnRate(lottoResult.calculateReturnRate(amount.getTotal()));
     }
 
-    private Lottos buyLotto(PurchaseAmount amount) {
-        Lottos lottos = Lottos.of();
-        lottos.add(inputManualLottoNumbers(amount.getManual()));
-        lottos.add(NumberGenerator.generateAutoNumbers(amount.getAuto()));
-        return lottos;
+    private static Customer buyLotto(PurchaseAmount amount) {
+        Customer customer = Customer.of(amount);
+        customer.buyManualLotto(inputManualLottoNumbers(amount.getManual()));
+        customer.buyAutoLotto();
+        return customer;
     }
 }

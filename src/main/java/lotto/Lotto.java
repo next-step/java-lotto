@@ -23,21 +23,22 @@ public class Lotto {
         this.type = type;
         this.numbers = numbers;
     }
-    public static Lotto of(List<LottoNumber> numbers){
+
+    public static Lotto of(List<LottoNumber> numbers) {
         return new Lotto(AUTO, numbers);
     }
 
-    public static Lotto of(LottoType type, List<LottoNumber> numbers){
+    public static Lotto of(LottoType type, List<LottoNumber> numbers) {
         return new Lotto(type, numbers);
     }
 
-    public static Lotto of(LottoType type, String ... numbers){
+    public static Lotto of(LottoType type, String... numbers) {
         return new Lotto(type, Arrays.stream(numbers)
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
     }
 
-    public static Lotto of(String ... numbers){
+    public static Lotto of(String... numbers) {
         return new Lotto(AUTO, Arrays.stream(numbers)
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
@@ -49,11 +50,15 @@ public class Lotto {
             .count();
     }
 
-    public boolean matchBonus(LottoNumber bonus){
+    public LottoType getType() {
+        return this.type;
+    }
+
+    public boolean matchBonus(LottoNumber bonus) {
         return numbers.contains(bonus);
     }
 
-    public boolean contains(LottoNumber number){
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 
