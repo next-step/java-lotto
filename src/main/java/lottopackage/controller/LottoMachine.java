@@ -9,7 +9,8 @@ import java.util.List;
 public class LottoMachine {
     public static void lottoMachine() {
         int numOfLotto = numOfLotto();
-        LottoGroup lottoGroup = new LottoGroup(numOfLotto);
+        List<Lotto> manualLotto = InputView.manualLottos();
+        LottoGroup lottoGroup = new LottoGroup(numOfLotto, manualLotto);
         OutputView.printLottoGroup(lottoGroup.getLottoGroup());
 
         List<Prize> lottoResult = lottoGroup.checkPrize(InputView.winningNumberAndBonusBall());

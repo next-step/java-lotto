@@ -12,6 +12,7 @@ public class OutputView {
     }
 
     public static void printLottoGroup(List<Lotto> lottoGroup) {
+        System.out.println("--- 소지하신 로또들 ---");
         for (int i = 0; i < lottoGroup.size(); i++) {
             System.out.println(lottoGroup.get(i));
         }
