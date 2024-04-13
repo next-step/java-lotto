@@ -26,7 +26,7 @@ public class LottoGroupTest {
         Lotto noWinningNumber = new Lotto(11, 12, 13, 14, 15, 16);
         LottoGroup lottoGroup = new LottoGroup(new ArrayList<>(Arrays.asList(winningNumber1st, winningNumber2nd, winningNumber3rd, winningNumber4th, winningNumber5th, noWinningNumber)));
 
-        List<Prize> prizes = lottoGroup.checkPrize(new WinningNumber(winningNumber, bonusBall));
+        List<Prize> prizes = lottoGroup.checkPrize(new WinningNumberAndBonusBall(winningNumber, bonusBall));
 
         // then
         for (int i = 0; i < prizes.size(); i++) {

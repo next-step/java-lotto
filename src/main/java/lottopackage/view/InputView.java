@@ -1,6 +1,7 @@
 package lottopackage.view;
 
 import lottopackage.domain.LottoBall;
+import lottopackage.domain.WinningNumberAndBonusBall;
 
 import java.util.*;
 
@@ -12,23 +13,41 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static Set<LottoBall> winningNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 11, 6");
-
-        String winningNumberString = SCANNER.next();
-        String[] winningNumberStringArray = winningNumberString.replaceAll(" ", "").split(",");
-
-        Set<LottoBall> winningNumber = new HashSet<>();
-        try {
-            winningNumberStringArrayToWinningNumber(winningNumberStringArray, winningNumber);
-        } catch (Exception exception) {
-            throw new IllegalArgumentException("당첨 번호를 잘못 입력했습니다.");
-        }
-
-        return winningNumber;
+    public static int numOfManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return SCANNER.nextInt();
     }
 
-    public static LottoBall bonusBall(Set<LottoBall> winningNumber) {
+    public static Set<LottoBall> inputManualLotto() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요. (ex) 3, 41, 29, 38, 11, 6");
+        return lotto();
+    }
+
+    public static WinningNumberAndBonusBall winningNumberAndBonusBall() {
+        Set<LottoBall> winningNumber = winningNumber();
+        WinningNumberAndBonusBall winningNumberAndBonusBall = new WinningNumberAndBonusBall(winningNumber, bonusBall(winningNumber));
+        return winningNumberAndBonusBall;
+    }
+
+    private static Set<LottoBall> winningNumber() {
+        System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 11, 6");
+        return lotto();
+    }
+
+    private static Set<LottoBall> lotto() {
+        String lottoString = SCANNER.next();
+        String[] lottoStringArray = lottoString.replaceAll(" ", "").split(",");
+
+        Set<LottoBall> lotto = new HashSet<>();
+        try {
+            lottoStringArrayToLotto(lottoStringArray, lotto);
+        } catch (Exception exception) {
+            throw new IllegalArgumentException("번호를 잘못 입력했습니다.");
+        }
+        return lotto;
+    }
+
+    private static LottoBall bonusBall(Set<LottoBall> winningNumber) {
         System.out.println("보너스 볼을 입력해주세요.");
         LottoBall bonusBall = new LottoBall(SCANNER.nextInt());
         if (winningNumber.contains(bonusBall)) {
@@ -37,7 +56,7 @@ public class InputView {
         return bonusBall;
     }
 
-    public static void winningNumberStringArrayToWinningNumber(String[] winningNumberStringArray, Set<LottoBall> winningNumber) {
+    public static void lottoStringArrayToLotto(String[] winningNumberStringArray, Set<LottoBall> winningNumber) {
         for (String number : winningNumberStringArray) {
             winningNumber.add(new LottoBall(Integer.parseInt(number)));
         }

@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WinningNumber {
+public class WinningNumberAndBonusBall {
     Set<LottoBall> winningNumber;
     LottoBall bonusBall;
 
-    public WinningNumber(Set<LottoBall> winningNumber, LottoBall bonusBall) {
+    public WinningNumberAndBonusBall(Set<LottoBall> winningNumber, LottoBall bonusBall) {
         isValidWinningNumber(winningNumber);
         this.winningNumber = winningNumber;
         this.bonusBall = bonusBall;
@@ -20,12 +20,12 @@ public class WinningNumber {
         }
     }
 
-    public static Prize checkPrize(Set<LottoBall> lotto, WinningNumber winningNumber) {
+    public static Prize checkPrize(Set<LottoBall> lotto, WinningNumberAndBonusBall winningNumberAndBonusBall) {
         Set<LottoBall> lottoForPrizeCheck = new HashSet<>(lotto);
 
-        lottoForPrizeCheck.removeAll(winningNumber.winningNumber);
+        lottoForPrizeCheck.removeAll(winningNumberAndBonusBall.winningNumber);
         if (lottoForPrizeCheck.size() == 1) {
-            return checkBonusBall(lottoForPrizeCheck, winningNumber.bonusBall);
+            return checkBonusBall(lottoForPrizeCheck, winningNumberAndBonusBall.bonusBall);
         }
         return Arrays.stream(Prize.values())
                 .filter((prize) -> prize.getBall() == (6 - lottoForPrizeCheck.size()))

@@ -20,11 +20,11 @@ public class LottoGroup {
         return lottoGroup;
     }
 
-    public List<Prize> checkPrize(WinningNumber winningNumber) {
+    public List<Prize> checkPrize(WinningNumberAndBonusBall winningNumberAndBonusBall) {
         List<Prize> lottoResult = new ArrayList<>();
         for (int i = 0; i < lottoGroup.size(); i++) {
             Lotto lotto = lottoGroup.get(i);
-            lottoResult.add(lotto.checkPrize(winningNumber));
+            lottoResult.add(lotto.checkPrize(winningNumberAndBonusBall));
         }
         return lottoResult;
     }

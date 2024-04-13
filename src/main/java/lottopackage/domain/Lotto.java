@@ -58,8 +58,8 @@ public class Lotto {
         }
     }
 
-    public Prize checkPrize(WinningNumber winningNumber) {
-        return Prize.checkPrize(lotto, winningNumber);
+    public Prize checkPrize(WinningNumberAndBonusBall winningNumberAndBonusBall) {
+        return Prize.checkPrize(lotto, winningNumberAndBonusBall);
     }
 
     @Override
