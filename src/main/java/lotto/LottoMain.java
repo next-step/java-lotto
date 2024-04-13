@@ -12,7 +12,7 @@ public class LottoMain {
 		RandomNumberStrategy randomNumberStrategy = new RandomNumberStrategy();
 		LottoGame lottoGame = new LottoGame(inputView.inputMoney());
 		resultView.printOfBuyLotto(lottoGame, randomNumberStrategy);
-		resultView.printWinningResult(lottoGame, inputView.inputWinningNumber());
+		resultView.printWinningResult(lottoGame, inputView.inputWinningNumber(), inputView.inputBonusNumber());
 	}
 
 }

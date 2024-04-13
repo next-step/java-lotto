@@ -19,8 +19,8 @@ public class ResultView {
 		}
 	}
 
-	public void printWinningResult(LottoGame lottoGame, String winningNumbers) {
-		List<Rank> lottoRanks = lottoGame.match(winningNumbers);
+	public void printWinningResult(LottoGame lottoGame, String winningNumbers, int bonusNumber) {
+		List<Rank> lottoRanks = lottoGame.match(winningNumbers, bonusNumber);
 		System.out.println(WiNNING_RESULT_MESSAGE);
 		System.out.println(SEPARATE_BAR);
 		for (int i = Rank.values().length - 1; i >= 0; i--) {

@@ -23,8 +23,8 @@ public class LottoGame {
 		return this.userLottos.getLottos();
 	}
 
-	public List<Rank> match(String winningNumbers) {
-		return this.userLottos.match(winningNumbers);
+	public List<Rank> match(String winningNumbers, int bonusNumber) {
+		return this.userLottos.match(winningNumbers, bonusNumber);
 	}
 
 	public double calculateProfit(List<Rank> lottoRanks) {
