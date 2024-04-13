@@ -13,6 +13,8 @@ import lottopackage.domain.Prize;
 import lottopackage.domain.WinningNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,20 +23,63 @@ import java.util.stream.IntStream;
 public class LottoTest {
 
     @Test
-    @DisplayName("로또 생성자 - (1) 6가지 숫자가 맞는지? (2) 1~45 안에 들어가는 값들인지?")
-    public void lotto() {
+    @DisplayName("로또 생성자(자동) - (1) 6가지 숫자가 맞는지? (2) 1~45 안에 들어가는 값들인지?")
+    public void autoLotto() {
         // given
+        Set<Integer> lotteryBalls = new HashSet<>(
+                Arrays.stream(IntStream.rangeClosed(1, 45).toArray())
+                        .boxed()
+                        .collect(Collectors.toSet()));
+
+        // when
         Lotto lotto = new Lotto();
         Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger(lotto.getLotto());
+        int lottoLength = lottoNumber.size();
+
+        // then
+        Assertions.assertThat(lottoLength).isEqualTo(6);
+        Assertions.assertThat(lotteryBalls.containsAll(lottoNumber)).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("로또 생성자(수동) (정상적인 값 입력) - (1) 6가지 숫자가 맞는지? (2) 1~45 안에 들어가는 값들인지?")
+    public void manualLotto() {
+        // given
+        Set<Integer> lotteryBalls = new HashSet<>(
+                Arrays.stream(IntStream.rangeClosed(1, 45).toArray())
+                        .boxed()
+                        .collect(Collectors.toSet()));
+
+        // when
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger(lotto.getLotto());
+        int lottoLength = lottoNumber.size();
+
+        // then
+        Assertions.assertThat(lottoLength).isEqualTo(6);
+        Assertions.assertThat(lotteryBalls.containsAll(lottoNumber)).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("로또 생성자(수동) (잘못된 값 입력) - (1) 로또 숫자가 6개가 아님 (2) 중복 입력 (3) 1~45를 벗어나는 값 입력")
+    public void wrongManualLotto() {
+        // given
         Set<Integer> lotteryBalls = new HashSet<>(
                 Arrays.stream(IntStream.rangeClosed(1, 45).toArray())
                         .boxed()
                         .collect(Collectors.toSet()));
 
         // when, then
-        int lottoLength = lottoNumber.size();
-        Assertions.assertThat(lottoLength).isEqualTo(6);
-        Assertions.assertThat(lotteryBalls.containsAll(lottoNumber)).isEqualTo(true);
+        Assertions.assertThatThrownBy(() -> {
+            new Lotto(1, 2, 3, 4, 5, 6, 7);
+        }).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> {
+            new Lotto(1, 1, 1, 1, 1, 1);
+        }).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> {
+            new Lotto(46, 47, 48, 49, 50, 51);
+        }).isInstanceOf(IllegalArgumentException.class);
+
     }
 
     @Test
