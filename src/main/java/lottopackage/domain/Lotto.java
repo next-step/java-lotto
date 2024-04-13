@@ -5,22 +5,17 @@ import java.util.*;
 public class Lotto {
 
     private final static int PRICE = 1000;
-    private final static int LOTTO_SIZE = 6;
-    private Set<LottoBall> lotto;
+    private LottoBalls lotto;
 
     public Lotto() {
-        Set<LottoBall> lotto = new HashSet<>();
-        while (lotto.size() != LOTTO_SIZE) {
-            lotto.add(new LottoBall());
-        }
-        this.lotto = lotto;
+        this.lotto = new LottoBalls();
     }
 
     public Lotto(Integer... numbers) {
-        this(toLotto(numbers));
+        this(toLottoBalls(numbers));
     }
 
-    private static Set<LottoBall> toLotto(Integer... lottoBalls) {
+    private static Set<LottoBall> toLottoBalls(Integer... lottoBalls) {
         Set<LottoBall> lotto = new HashSet<>();
         for (Integer ball : lottoBalls) {
             lotto.add(new LottoBall(ball));
@@ -32,17 +27,12 @@ public class Lotto {
         this( new HashSet<>(Arrays.asList(lottoBall)) );
     }
 
-    public Lotto(Set<LottoBall> lotto) {
-        isLottoValid(lotto);
-        this.lotto = lotto;
+    public Lotto(Set<LottoBall> lottoBalls) {
+        this.lotto = new LottoBalls(lottoBalls);
     }
 
-    public Set<LottoBall> getLotto() {
+    public LottoBalls getLotto() {
         return lotto;
-    }
-
-    public static int getLottoSize() {
-        return LOTTO_SIZE;
     }
 
     public static int purchaseLotto(int purchaseAmount) {
@@ -50,12 +40,6 @@ public class Lotto {
             throw new IllegalArgumentException("최소 주문 금액(=로또 한 장 금액)은 " + PRICE + "원 입니다.");
         }
         return (int) purchaseAmount / PRICE;
-    }
-
-    public static void isLottoValid(Set<?> lotto) {
-        if (lotto.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
-        }
     }
 
     public Prize checkPrize(WinningNumberAndBonusBall winningNumberAndBonusBall) {
@@ -77,17 +61,7 @@ public class Lotto {
 
     @Override
     public String toString() {
-        String lotto = "[";
-
-        Iterator<LottoBall> iteratorLotto = this.lotto.iterator();
-        for (int i = 0; i < LOTTO_SIZE; i++) {
-            String delimiter = (i == (LOTTO_SIZE - 1)) ? "" : ", ";
-            lotto += (iteratorLotto.next() + delimiter);
-        }
-
-        lotto += "]";
-
-        return lotto;
+        return lotto.toString();
     }
 }
 

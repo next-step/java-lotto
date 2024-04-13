@@ -7,10 +7,7 @@
 
 package lottopackage;
 
-import lottopackage.domain.Lotto;
-import lottopackage.domain.LottoBall;
-import lottopackage.domain.Prize;
-import lottopackage.domain.WinningNumberAndBonusBall;
+import lottopackage.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
@@ -31,7 +28,7 @@ public class LottoTest {
 
         // when
         Lotto lotto = new Lotto();
-        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger(lotto.getLotto());
+        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger(lotto.getLotto().getLottoBalls());
         int lottoLength = lottoNumber.size();
 
         // then
@@ -50,7 +47,7 @@ public class LottoTest {
 
         // when
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger(lotto.getLotto());
+        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger(lotto.getLotto().getLottoBalls());
         int lottoLength = lottoNumber.size();
 
         // then
@@ -84,8 +81,7 @@ public class LottoTest {
     @DisplayName("lotto.isPrize() - 당첨 등수 확인")
     public void isPrize() {
         // given
-        Set<LottoBall> winningNumber = new Lotto(1, 2, 3, 4, 5, 6).getLotto();
-        LottoBall bonusBall = new LottoBall(45);
+        WinningNumberAndBonusBall winningNumberAndBonusBall = new WinningNumberAndBonusBall(new LottoBalls(1, 2, 3, 4, 5, 6), new LottoBall(45));
         Prize[] prize = Prize.values();
 
         // when
@@ -100,7 +96,7 @@ public class LottoTest {
         // then
         for (int i = 0; i < prize.length; i++) {
             Lotto lotto = lottoGroup.get(i);
-            Assertions.assertThat(lotto.checkPrize(new WinningNumberAndBonusBall(winningNumber, bonusBall))).isEqualTo(prize[i]);
+            Assertions.assertThat(lotto.checkPrize(winningNumberAndBonusBall)).isEqualTo(prize[i]);
         }
     }
 }

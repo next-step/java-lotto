@@ -5,22 +5,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class WinningNumberAndBonusBall {
-    Lotto winningNumber;
+    LottoBalls winningNumber;
     LottoBall bonusBall;
 
     public WinningNumberAndBonusBall(Set<LottoBall> winningNumber, LottoBall bonusBall) {
-        this(new Lotto(winningNumber), bonusBall);
+        this(new LottoBalls(winningNumber), bonusBall);
     }
 
-    public WinningNumberAndBonusBall(Lotto winningNumber, LottoBall bonusBall) {
+    public WinningNumberAndBonusBall(LottoBalls winningNumber, LottoBall bonusBall) {
         this.winningNumber = winningNumber;
         this.bonusBall = bonusBall;
     }
 
-    public static Prize checkPrize(Set<LottoBall> lotto, WinningNumberAndBonusBall winningNumberAndBonusBall) {
-        Set<LottoBall> lottoForPrizeCheck = new HashSet<>(lotto);
+    public static Prize checkPrize(LottoBalls lottoBalls, WinningNumberAndBonusBall winningNumberAndBonusBall) {
+        Set<LottoBall> lottoForPrizeCheck = new HashSet<>(lottoBalls.getLottoBalls());
 
-        lottoForPrizeCheck.removeAll(winningNumberAndBonusBall.winningNumber.getLotto());
+        lottoForPrizeCheck.removeAll(winningNumberAndBonusBall.winningNumber.getLottoBalls());
         if (lottoForPrizeCheck.size() == 1) {
             return checkBonusBall(lottoForPrizeCheck, winningNumberAndBonusBall.bonusBall);
         }

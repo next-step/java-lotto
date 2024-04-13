@@ -13,7 +13,7 @@ public class LottoGroupTest {
     @DisplayName("LottoGroup 내 모든 Lotto의 당첨 등수 확인")
     public void isPrize() {
         // given
-        Set<LottoBall> winningNumber = new Lotto(1, 2, 3, 4, 5, 6).getLotto();
+        Set<LottoBall> winningNumber = new Lotto(1, 2, 3, 4, 5, 6).getLotto().getLottoBalls();
         LottoBall bonusBall = new LottoBall(45);
         Prize[] prizeGroup = Prize.values();
 

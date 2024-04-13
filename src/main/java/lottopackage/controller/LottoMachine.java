@@ -5,7 +5,6 @@ import lottopackage.view.InputView;
 import lottopackage.view.OutputView;
 
 import java.util.List;
-import java.util.Set;
 
 public class LottoMachine {
     public static void lottoMachine() {

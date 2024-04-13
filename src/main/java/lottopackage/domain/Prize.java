@@ -32,7 +32,7 @@ public enum Prize {
         return winningAmount;
     }
 
-    public static Prize checkPrize(Set<LottoBall> lotto, WinningNumberAndBonusBall winningNumberAndBonusBall) {
+    public static Prize checkPrize(LottoBalls lotto, WinningNumberAndBonusBall winningNumberAndBonusBall) {
         return WinningNumberAndBonusBall.checkPrize(lotto, winningNumberAndBonusBall);
     }
 }

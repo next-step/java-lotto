@@ -1,7 +1,6 @@
 package lottopackage.view;
 
 import lottopackage.domain.Lotto;
-import lottopackage.domain.LottoBall;
 import lottopackage.domain.Prize;
 
 import java.util.*;
