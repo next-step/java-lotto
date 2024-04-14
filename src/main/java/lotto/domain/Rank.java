@@ -23,10 +23,9 @@ public enum Rank {
 
     public static List<Rank> getRanks() {
         return Stream.of(values())
-                .filter(rank -> rank != NONE)
+                .filter(match(0).negate())
                 .collect(Collectors.toList());
     }
-
 
     public static Rank findRank(int countOfMatch, boolean bonusNumber) {
         if (countOfMatch == 5 & bonusNumber) {
@@ -59,5 +58,9 @@ public enum Rank {
 
     public int getCountOfMatch() {
         return countOfMatch;
+    }
+
+    public boolean isSecond() {
+        return this == SECOND;
     }
 }
