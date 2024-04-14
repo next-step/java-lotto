@@ -14,8 +14,6 @@ public class LottoResult {
 
     public LottoResult() {
         this(new HashMap<>());
-        Arrays.stream(LottoRank.values())
-            .forEach(this::putRank);
     }
 
     public LottoResult(Map<LottoRank, Integer> result) {
