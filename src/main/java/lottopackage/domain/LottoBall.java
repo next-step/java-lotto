@@ -15,13 +15,23 @@ public class LottoBall {
     private final int lottoBall;
 
     public LottoBall() {
+        this(autoLottoBall());
+    }
+
+    private static int autoLottoBall() {
         List<Integer> lotteryBallsForShuffle = new ArrayList<>(lotteryBalls);
         Collections.shuffle(lotteryBallsForShuffle);
-        lottoBall = lotteryBallsForShuffle.get(0);
+        return lotteryBallsForShuffle.get(0);
+    }
+
+    public LottoBall(String string) {
+        this(Integer.parseInt(string));
     }
 
     public LottoBall(int lottoBall) {
-        isLottoBallValid(lottoBall);
+        if (!lotteryBalls.contains(lottoBall)) {
+            throw new IllegalArgumentException("로또 숫자는 1~45 안에 있어야 합니다.");
+        }
         this.lottoBall = lottoBall;
     }
 
@@ -36,12 +46,6 @@ public class LottoBall {
             setInteger.add(iteratorSetLottoBall.next().getLottoBall());
         }
         return setInteger;
-    }
-
-    public static void isLottoBallValid(int lottoBall) {
-        if (!lotteryBalls.contains(lottoBall)) {
-            throw new IllegalArgumentException("로또 숫자는 1~45 안에 있어야 합니다.");
-        }
     }
 
     @Override

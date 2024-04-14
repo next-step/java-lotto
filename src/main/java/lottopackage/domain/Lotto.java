@@ -11,6 +11,8 @@ public class Lotto {
         this.lotto = new LottoBalls();
     }
 
+
+
     public Lotto(Integer... numbers) {
         this(toLottoBalls(numbers));
     }
