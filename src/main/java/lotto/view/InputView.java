@@ -28,12 +28,12 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
-	public int inputManualLottoNumberCount() {
+	public int inputManualLottoCount() {
 		System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
-		return scanner.nextInt();
+		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public List<String> inputManualLottoNumber(int count) {
+	public List<String> inputManualLotto(int count) {
 		System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
 		return IntStream.range(0, count)
 			.mapToObj(lotto -> scanner.nextLine())
