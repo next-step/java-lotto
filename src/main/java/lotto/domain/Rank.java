@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public enum Rank {
 	FIRST(6, 2_000_000_000),
-	SECOND(5, 30_000_000),
+	SECOND_BONUS(5, 30_000_000),
 	THIRD(5, 1_500_000),
 	FOURTH(4, 50_000),
 	FIFTH(3, 5_000),
@@ -23,13 +23,13 @@ public enum Rank {
 	public static Rank from(int matchCount, boolean isBonus) {
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.isSameMatchCount(matchCount))
-			.filter(rank -> checkBonus(matchCount, isBonus, rank))
+			.filter(rank -> checkBonus(isBonus, rank))
 			.findFirst()
 			.orElse(MISS);
 	}
 
-	private static boolean checkBonus(int matchCount, boolean isBonus, Rank rank) {
-		return isBonus || rank != SECOND;
+	private static boolean checkBonus(boolean isBonus, Rank rank) {
+		return isBonus || rank != SECOND_BONUS;
 	}
 
 	private boolean isSameMatchCount(int matchCount) {
