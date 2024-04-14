@@ -15,13 +15,14 @@ public class LottoFactory {
             .boxed()
             .collect(Collectors.toList());
 
-    public static Lottos createLottos(int buyingAmount) {
-        if (buyingAmount < LOTTO_COST) {
+    public static Lottos createLottos(int buyingAmount, int manualLottoCount, Lottos manualLottos) {
+        if (buyingAmount < LOTTO_COST || buyingAmount / LOTTO_COST < manualLottoCount) {
             throw new IllegalArgumentException("구매 금액이 부족합니다.");
         }
 
-        int lottoAmount = buyingAmount / LOTTO_COST;
-        return new Lottos(lottoAmount);
+        int autoLottoCount = buyingAmount / LOTTO_COST - manualLottoCount;
+
+        return new Lottos(autoLottoCount, manualLottos);
     }
 
 }

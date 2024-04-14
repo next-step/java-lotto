@@ -9,7 +9,9 @@ import static lotto.domain.Rank.SECOND;
 
 public class ResultView {
 
-    public void printLottos(Lottos lottos) {
+    public void printLottos(Lottos lottos, int manualLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualLottoCount, lottos.size() - manualLottoCount);
+
         for (Lotto lotto : lottos.of()) {
 
             System.out.println(lotto.getLotto()
