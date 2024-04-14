@@ -47,7 +47,7 @@ public class InputView {
     }
 
     public WinningLotto bonusNumber(String input, Lotto winningLotto) {
-        Bonus bonus = new Bonus(validateInt(input), winningLotto);
+        Bonus bonus = new Bonus(validateInt(input));
         return new WinningLotto(winningLotto, bonus.getBonusNumber());
     }
 

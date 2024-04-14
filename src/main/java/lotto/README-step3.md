@@ -87,3 +87,6 @@ public enum Rank {
 - [x] Results에서 enum클래스 values 메소드 사용하여 Map 생성부 수정 
 - [x] WinningLotto 6개의 숫자와 보너스볼을 상태로 가지는 객체를 도출하도록
 - [x] RankTest DisplayName을 도메인 용어로 수정
+
+### 3차 TODO LIST
+- [x] WinningLotto 생성자에서 6개의 숫자와 보너스 볼의 중복 여부 검증
