@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
-import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +14,7 @@ public class LottoFactoryTest {
     @DisplayName("티켓 구매 가능 개수 확인")
     void test01() {
         int money = 14000;
-        List<Lotto> lottos = new LottoFactory().issueTicketsByMoney(money);
+        List<Lotto> lottos = new LottoGame().createLotto(money);
         assertThat(lottos.size()).isEqualTo(14);
     }
 
@@ -43,7 +40,7 @@ public class LottoFactoryTest {
         );
         double rateOfReturn = 0.35;
 
-        assertThat(new LottoFactory().calculateRateOfReturn(winningLotto, lottos)).isEqualTo(rateOfReturn);
+        assertThat(new LottoGame().calculateRateOfReturn(winningLotto, lottos)).isEqualTo(rateOfReturn);
     }
 
     @Test
@@ -56,7 +53,7 @@ public class LottoFactoryTest {
                 new Lotto(List.of(1, 2, 4, 7, 8, 9)),
                 new Lotto(List.of(1, 2, 7, 8, 9, 10)));
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-        List<Rank> ranks = new LottoFactory().getRankResults(winningLotto, lottos);
+        List<Rank> ranks = new LottoGame().getRankResults(winningLotto, lottos);
         assertThat(ranks).contains(Rank.FIRST, Rank.SECOND, Rank.SECOND, Rank.FOURTH, Rank.NONE);
     }
 }
