@@ -19,12 +19,8 @@ public class LottoGame {
 		return this.amount.countOfBuyLotto();
 	}
 
-	public List<Lotto> getLottos() {
-		return this.userLottos.getLottos();
-	}
-
-	public List<Rank> match(String winningNumbers) {
-		return this.userLottos.match(winningNumbers);
+	public List<Rank> match(WinningLotto winningLotto) {
+		return this.userLottos.match(winningLotto);
 	}
 
 	public double calculateProfit(List<Rank> lottoRanks) {
