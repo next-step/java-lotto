@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class WinningNumberAndBonusBall {
-    LottoBalls winningNumber;
-    LottoBall bonusBall;
+    private final LottoBalls winningNumber;
+    private final LottoBall bonusBall;
 
     public WinningNumberAndBonusBall(Set<LottoBall> winningNumber, LottoBall bonusBall) {
         this(new LottoBalls(winningNumber), bonusBall);
