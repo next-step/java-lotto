@@ -15,7 +15,7 @@ public class LottoMain {
 		ResultView resultView = new ResultView();
 		RandomNumberStrategy randomNumberStrategy = new RandomNumberStrategy();
 		LottoGame lottoGame = new LottoGame(inputView.inputMoney());
-		int inputManualLottoCount = inputView.inputManualLottoCount();
+		final int inputManualLottoCount = inputView.inputManualLottoCount();
 		lottoGame.createManualLotto(inputView.inputManualLotto(inputManualLottoCount));
 		lottoGame.createAutoLotto(inputManualLottoCount, randomNumberStrategy);
 

@@ -31,6 +31,7 @@ public class LottoGameTest {
 		assertThat(lottos.size()).isEqualTo(manualLottos.size());
 	}
 
+
 	@ParameterizedTest(name = "구매 가격 : {0} 예외")
 	@CsvSource(value = {"2500", "1234"})
 	@DisplayName("단위에 맞지 않은 구입 예외 테스트")
