@@ -26,4 +26,12 @@ class InputViewTest {
         assertThrows(IllegalArgumentException.class , () -> inputView.validateInt(input));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {" ", ""})
+    @DisplayName("빈칸이나 입력값이 없는 상태로 입력하면 에러가 난다")
+    void validate_input_with_blank(String input) {
+        InputView inputView = new InputView();
+        assertThrows(IllegalArgumentException.class , () -> inputView.checkBlank(input));
+    }
+
 }

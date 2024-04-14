@@ -5,10 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -77,8 +74,8 @@ public class InputView {
     }
 
     public void checkBlank(String input){
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("값이 없습니다.");
-        }
+        Optional.ofNullable(input)
+                .filter(s -> !s.isBlank())
+                .orElseThrow(() -> new IllegalArgumentException("값이 없습니다."));
     }
 }
