@@ -5,7 +5,6 @@ import lottopackage.controller.LottoMachine;
 public class LottoMain {
 
     public static void main(String[] args) {
-        //LottoMachine.lottoMachine();
-        LottoBall lottoBall = new LottoBall("a");
+        LottoMachine.lottoMachine();
     }
 }

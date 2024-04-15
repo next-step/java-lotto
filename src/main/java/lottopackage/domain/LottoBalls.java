@@ -1,5 +1,7 @@
 package lottopackage.domain;
 
+import lottopackage.vo.LottoBall;
+
 import java.util.*;
 
 public class LottoBalls {

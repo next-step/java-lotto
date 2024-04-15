@@ -1,5 +1,7 @@
 package lottopackage.domain;
 
+import lottopackage.vo.LottoBall;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

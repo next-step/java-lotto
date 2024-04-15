@@ -1,9 +1,8 @@
 package lottopackage.view;
 
-import lottopackage.domain.Lotto;
-import lottopackage.domain.LottoBall;
-import lottopackage.domain.LottoBalls;
-import lottopackage.domain.WinningNumberAndBonusBall;
+import lottopackage.domain.*;
+import lottopackage.vo.Lotto;
+import lottopackage.vo.LottoBall;
 
 import java.util.*;
 
@@ -18,13 +17,13 @@ public class InputView {
     /* (inputView에서 수동으로 구매한 로또를 생성하고 List<Lotto>로 전달함) */
     public static List<Lotto> manualLottos() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int numberOfManualLotto = SCANNER.nextInt();
+        NumberOfManualLotto numberOfManualLotto = new NumberOfManualLotto(SCANNER.nextInt());
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요. (ex) 3, 41, 29, 38, 11, 6");
         List<Lotto> manualLottos = new ArrayList<>();
 
-        for (int i = 0; i < numberOfManualLotto; i++) {
-            manualLottos.add(new Lotto(lottoBalls()));
+        for (int i = 0; i < numberOfManualLotto.getNumberOfManualLotto(); i++) {
+            manualLottos.add(new Lotto(inputLottoBalls()));
         }
 
         return manualLottos;
@@ -37,7 +36,7 @@ public class InputView {
 
     private static LottoBalls winningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 11, 6");
-        return lottoBalls();
+        return inputLottoBalls();
     }
 
     private static LottoBall bonusBall() {
@@ -46,7 +45,7 @@ public class InputView {
         return bonusBall;
     }
 
-    private static LottoBalls lottoBalls() {
+    private static LottoBalls inputLottoBalls() {
         String lottoString = SCANNER.next();
         String[] lottoStringArray = lottoString.replaceAll(" ", "").split(",");
 
