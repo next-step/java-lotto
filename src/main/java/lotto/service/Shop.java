@@ -19,7 +19,7 @@ public class Shop {
         return new Purchase(LOTTO_PRODUCT_NAME, purchaseAmount);
     }
 
-    public static List<Lotto> purchaseLotto(Purchase purchase, List<String> manualInputLottoNumbers) {
+    public static List<Lotto> getLottoList(Purchase purchase, List<String> manualInputLottoNumbers) {
         List<Lotto> lottoList = new ArrayList<>();
 
         if (!manualInputLottoNumbers.isEmpty()) lottoList.addAll(Shop.getManualInputLotto(manualInputLottoNumbers));

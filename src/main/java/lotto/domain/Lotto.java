@@ -51,4 +51,8 @@ public class Lotto {
     public Boolean containNumber(Integer number) {
         return this.lottoNumbers.contains(number);
     }
+
+    public Boolean equals(Lotto lotto) {
+        return this.lottoNumbers.equals(lotto.lottoNumbers);
+    }
 }

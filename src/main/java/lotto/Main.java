@@ -25,7 +25,7 @@ public class Main {
             manualInputLottoNumbers.addAll(input.inputManualLottoNumber(manualPurchaseCount));
         }
 
-        List<Lotto> purchasedLotto = Shop.purchaseLotto(lottoPurchase, manualInputLottoNumbers);
+        List<Lotto> purchasedLotto = Shop.getLottoList(lottoPurchase, manualInputLottoNumbers);
 
         OutputView.showPurchasedLotto(purchasedLotto, manualPurchaseCount);
 
