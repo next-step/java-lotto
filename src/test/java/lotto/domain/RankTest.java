@@ -28,7 +28,7 @@ public class RankTest {
 		Lotto userLotto = Lotto.createFromString(userNumbers);
 		boolean matchBonus = userNumbers.contains(String.valueOf(bonusNumber));
 		Rank rank = Rank.from(userLotto.matchCount(winningLotto), matchBonus);
-		assertThat(rank).isEqualTo(Rank.SECOND_BONUS);
+		assertThat(rank).isEqualTo(Rank.SECOND);
 
 	}
 

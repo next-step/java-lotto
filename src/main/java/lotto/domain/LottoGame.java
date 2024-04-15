@@ -11,12 +11,8 @@ public class LottoGame {
 		this.amount = Money.from(money);
 	}
 
-	public List<Lotto> createLotto(NumberStrategy numberStrategy) {
-		return this.userLottos.createLottos(countOfLotto(), numberStrategy);
-	}
-
-	public int countOfLotto() {
-		return this.amount.countOfBuyLotto();
+	public int countOfAutoLotto(int countOfmManualLotto) {
+		return this.amount.countOfBuyLotto() - countOfmManualLotto;
 	}
 
 	public List<Rank> match(WinningLotto winningLotto) {
@@ -29,5 +25,18 @@ public class LottoGame {
 			totalPrize = totalPrize.plus(rank.getPrize());
 		}
 		return this.amount.calculateProfitRatio(totalPrize);
+	}
+
+	public List<Lotto> createAutoLotto(int CountOfManualLottos, NumberStrategy numberStrategy) {
+		return this.userLottos.createLottos(countOfAutoLotto(CountOfManualLottos), numberStrategy);
+	}
+
+	public List<Lotto> createManualLotto(List<String> manualLottos) {
+		return this.userLottos.createManualLotto(manualLottos);
+	}
+
+
+	public List<Lotto> getLottos() {
+		return this.userLottos.getLottos();
 	}
 }

@@ -16,11 +16,22 @@ public class Lottos {private List<Lotto> lottos;
 		return this.lottos;
 	}
 
+	public List<Lotto> createManualLotto(List<String> manualLottos) {
+		for (String lotto : manualLottos) {
+			this.lottos.add(Lotto.createFromString(lotto));
+		}
+		return this.lottos;
+	}
+
 	public List<Rank> match(WinningLotto winningLotto) {
 		List<Rank> ranks = new ArrayList<>();
 		for (Lotto lotto : lottos) {
 			ranks.add(winningLotto.match(lotto));
 		}
 		return ranks;
+	}
+
+	public List<Lotto> getLottos() {
+		return lottos;
 	}
 }

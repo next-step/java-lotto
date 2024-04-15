@@ -6,18 +6,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Rank {
-	FIRST(6, 2_000_000_000),
-	SECOND_BONUS(5, 30_000_000),
-	THIRD(5, 1_500_000),
-	FOURTH(4, 50_000),
-	FIFTH(3, 5_000),
-	MISS(0, 0);
+	FIRST(6, 2_000_000_000, false),
+	SECOND(5, 30_000_000, true),
+	THIRD(5, 1_500_000, false),
+	FOURTH(4, 50_000, false),
+	FIFTH(3, 5_000, false),
+	MISS(0, 0, false);
+
 	private int matchCount;
 	private int prize;
+	private boolean isSecondBonus;
 
-	Rank(int matchCount, int prize) {
+	Rank(int matchCount, int prize, boolean isSecondBonus) {
 		this.matchCount = matchCount;
 		this.prize = prize;
+		this.isSecondBonus = isSecondBonus;
 	}
 
 	public static Rank from(int matchCount, boolean isBonus) {
@@ -29,7 +32,7 @@ public enum Rank {
 	}
 
 	private static boolean checkBonus(boolean isBonus, Rank rank) {
-		return isBonus || rank != SECOND_BONUS;
+		return isBonus || rank != SECOND;
 	}
 
 	private boolean isSameMatchCount(int matchCount) {
@@ -56,5 +59,9 @@ public enum Rank {
 
 	public int getPrize() {
 		return prize;
+	}
+
+	public boolean isSecondBonus() {
+		return isSecondBonus;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 	private final static int LOTTO_SIZE = 6;
@@ -74,5 +75,13 @@ public class Lotto {
 	@Override
 	public String toString() {
 		return String.valueOf(lotto);
+	}
+
+	public String sortNumbers() {
+		List<Integer> sortedNumbers = lotto.stream()
+										.map(LottoNumber::toInt)
+										.sorted()
+										.collect(Collectors.toList());
+		return sortedNumbers.toString();
 	}
 }
