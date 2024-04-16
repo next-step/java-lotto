@@ -2,16 +2,16 @@ package lotto.domain;
 
 import lotto.constant.ErrorMessage;
 
-public class Purchase {
+public class SingleOrder {
     private final Product product;
     private final int purchaseCount;
 
-    public Purchase(Product product, int purchasePrice) {
+    public SingleOrder(Product product, int purchasePrice) {
         this.product = product;
         this.purchaseCount = getPurchaseCount(product, purchasePrice);
     }
 
-    public Purchase(String productName, int purchasePrice) {
+    public SingleOrder(String productName, int purchasePrice) {
         this(Product.getProduct(productName), purchasePrice);
     }
 

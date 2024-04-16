@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PurchaseTest {
+public class SingleOrderTest {
     @Test
     @DisplayName("구매 생성 테스트")
     public void purchaseInitializationTest() {
-        Purchase lottoPurchase = new Purchase("Lotto", 15000);
+        SingleOrder lottoPurchase = new SingleOrder("Lotto", 15000);
 
         assertThat(lottoPurchase.getProduct()).isEqualTo(Product.LOTTO);
     }
@@ -19,7 +19,7 @@ public class PurchaseTest {
     @Test
     @DisplayName("구매 금액 음수 오류 테스트")
     public void purchasePriceNegativeError() {
-        assertThatThrownBy(() -> new Purchase("Lotto", -1000))
+        assertThatThrownBy(() -> new SingleOrder("Lotto", -1000))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR.getMessage());
     }
@@ -27,15 +27,15 @@ public class PurchaseTest {
     @Test
     @DisplayName("구매 금액 단위 오류 테스트")
     public void purchaseSingularPriceError() {
-        assertThatThrownBy(() -> new Purchase("Lotto", 15400))
+        assertThatThrownBy(() -> new SingleOrder("Lotto", 15400))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR.getMessage());
 
-        assertThatThrownBy(() -> new Purchase("Lotto", 1001))
+        assertThatThrownBy(() -> new SingleOrder("Lotto", 1001))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR.getMessage());
 
-        assertThatThrownBy(() -> new Purchase("Lotto", 0))
+        assertThatThrownBy(() -> new SingleOrder("Lotto", 0))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.ZERO_PURCHASE_PRICE_ERROR.getMessage());
     }

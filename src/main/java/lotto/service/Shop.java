@@ -2,7 +2,7 @@ package lotto.service;
 
 import lotto.constant.ErrorMessage;
 import lotto.domain.Lotto;
-import lotto.domain.Purchase;
+import lotto.domain.SingleOrder;
 import lotto.parser.LottoNumberParser;
 
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ public class Shop {
         throw new IllegalStateException(ErrorMessage.CANNOT_BE_INSTANTIATED.getMessage());
     }
 
-    public static Purchase createLottoPurchase(int purchaseAmount) {
-        return new Purchase(LOTTO_PRODUCT_NAME, purchaseAmount);
+    public static SingleOrder createLottoPurchase(int purchaseAmount) {
+        return new SingleOrder(LOTTO_PRODUCT_NAME, purchaseAmount);
     }
 
-    public static List<Lotto> getLottoList(Purchase purchase, List<String> manualInputLottoNumbers) {
+    public static List<Lotto> getLottoList(SingleOrder purchase, List<String> manualInputLottoNumbers) {
         List<Lotto> lottoList = new ArrayList<>();
 
         if (!manualInputLottoNumbers.isEmpty()) {
@@ -32,7 +32,7 @@ public class Shop {
         return lottoList;
     }
 
-    public static void validateManualPurchaseCount(Purchase purchase, int manualPurchaseCount) {
+    public static void validateManualPurchaseCount(SingleOrder purchase, int manualPurchaseCount) {
         if (manualPurchaseCount < 0) {
             throw new IllegalArgumentException(ErrorMessage.NEGATIVE_MANUAL_PURCHASE_COUNT.getMessage());
         }

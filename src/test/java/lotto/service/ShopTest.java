@@ -2,7 +2,7 @@ package lotto.service;
 
 import lotto.constant.ErrorMessage;
 import lotto.domain.Lotto;
-import lotto.domain.Purchase;
+import lotto.domain.SingleOrder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ public class ShopTest {
     @Test
     @DisplayName("로또 구매 테스트")
     public void purchaseLottoTest() {
-        Purchase purchase = Shop.createLottoPurchase(3000);
+        SingleOrder purchase = Shop.createLottoPurchase(3000);
         List<String> manualInputLottoNumbers = new ArrayList<>();
 
         assertThat(Shop.getLottoList(purchase, manualInputLottoNumbers).size()).isEqualTo(3);
@@ -26,7 +26,7 @@ public class ShopTest {
     @Test
     @DisplayName("수동 입력 구매 로또가 구매 리스트에 들어가는지 테스트")
     public void purchaseManualLootTest() {
-        Purchase purchase = Shop.createLottoPurchase(3000);
+        SingleOrder purchase = Shop.createLottoPurchase(3000);
         List<String> manualInputLottoNumbers = new ArrayList<>();
         manualInputLottoNumbers.add("3, 4, 5, 6, 7, 8");
         manualInputLottoNumbers.add("23, 39, 1, 10, 42, 7");
@@ -57,7 +57,7 @@ public class ShopTest {
     @Test
     @DisplayName("수동 구매 숫자 검증 테스트 - 음수 입력")
     public void purchaseManualLottoNegativeError() {
-        Purchase purchase = Shop.createLottoPurchase(3000);
+        SingleOrder purchase = Shop.createLottoPurchase(3000);
 
         assertThatThrownBy(() -> Shop.validateManualPurchaseCount(purchase, -1))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -67,7 +67,7 @@ public class ShopTest {
     @Test
     @DisplayName("수동 구매 숫자 검증 테스트 - 구매 금액 단위보다 큰 숫자를 입력")
     public void purchaseManualLottoOverError() {
-        Purchase purchase = Shop.createLottoPurchase(3000);
+        SingleOrder purchase = Shop.createLottoPurchase(3000);
 
         assertThatThrownBy(() -> Shop.validateManualPurchaseCount(purchase, 5))
                 .isInstanceOf(IllegalArgumentException.class)

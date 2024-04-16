@@ -13,7 +13,7 @@ public class Main {
         InputView input = new InputView();
 
         int purchasedAmount = input.inputPurchaseAmount();
-        Purchase lottoPurchase = Shop.createLottoPurchase(purchasedAmount);
+        SingleOrder lottoPurchase = Shop.createLottoPurchase(purchasedAmount);
 
         int manualPurchaseCount = input.inputManualPurchaseCount();
         Shop.validateManualPurchaseCount(lottoPurchase, manualPurchaseCount);
