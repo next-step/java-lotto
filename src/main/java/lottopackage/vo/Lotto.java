@@ -1,6 +1,5 @@
 package lottopackage.vo;
 
-import lottopackage.domain.LottoBalls;
 import lottopackage.domain.Prize;
 import lottopackage.domain.WinningNumberAndBonusBall;
 
@@ -9,7 +8,7 @@ import java.util.*;
 public class Lotto {
 
     private final static int PRICE = 1000;
-    private LottoBalls lotto;
+    private final LottoBalls lotto;
 
     public Lotto() {
         this.lotto = new LottoBalls();

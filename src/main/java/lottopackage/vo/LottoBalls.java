@@ -1,13 +1,11 @@
-package lottopackage.domain;
-
-import lottopackage.vo.LottoBall;
+package lottopackage.vo;
 
 import java.util.*;
 
 public class LottoBalls {
 
     private static final int LOTTO_SIZE = 6;
-    private Set<LottoBall> lottoBalls;
+    private final Set<LottoBall> lottoBalls;
 
     public LottoBalls() {
         Set<LottoBall> lottoBalls = new HashSet<>();

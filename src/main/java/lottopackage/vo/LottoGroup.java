@@ -1,12 +1,14 @@
-package lottopackage.domain;
+package lottopackage.vo;
 
+import lottopackage.domain.Prize;
+import lottopackage.domain.WinningNumberAndBonusBall;
 import lottopackage.vo.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGroup {
-    private List<Lotto> lottoGroup;
+    private final List<Lotto> lottoGroup;
 
     public LottoGroup(int numberOfAutoLotto) {
         this(autoLotto(numberOfAutoLotto));

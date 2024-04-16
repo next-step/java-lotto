@@ -4,6 +4,7 @@ import lottopackage.domain.*;
 import lottopackage.view.InputView;
 import lottopackage.view.OutputView;
 import lottopackage.vo.Lotto;
+import lottopackage.vo.LottoGroup;
 
 import java.util.List;
 

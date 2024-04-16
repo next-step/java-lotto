@@ -1,6 +1,6 @@
 package lottopackage.domain;
 
-import java.util.*;
+import lottopackage.vo.LottoBalls;
 
 public enum Prize {
     FIRST(6, false, 2_000_000_000),

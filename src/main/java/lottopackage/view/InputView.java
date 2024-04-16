@@ -3,6 +3,8 @@ package lottopackage.view;
 import lottopackage.domain.*;
 import lottopackage.vo.Lotto;
 import lottopackage.vo.LottoBall;
+import lottopackage.vo.LottoBalls;
+import lottopackage.vo.NumberOfManualLotto;
 
 import java.util.*;
 

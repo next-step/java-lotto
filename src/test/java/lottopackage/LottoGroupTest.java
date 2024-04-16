@@ -3,6 +3,7 @@ package lottopackage;
 import lottopackage.domain.*;
 import lottopackage.vo.Lotto;
 import lottopackage.vo.LottoBall;
+import lottopackage.vo.LottoGroup;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
