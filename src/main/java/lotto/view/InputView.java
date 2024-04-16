@@ -69,8 +69,8 @@ public class InputView {
     }
 
     public void checkBlank(String input){
-        Optional.ofNullable(input)
-                .filter(s -> !s.isBlank())
-                .orElseThrow(() -> new IllegalArgumentException("값이 없습니다."));
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException("값이 없습니다.");
+        }
     }
 }
