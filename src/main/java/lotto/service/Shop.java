@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.constant.ErrorMessage;
 import lotto.domain.Lotto;
 import lotto.domain.Purchase;
+import lotto.parser.LottoNumberParser;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +45,7 @@ public class Shop {
     private static List<Lotto> getManualInputLotto(List<String> manualInputLottoNumbers) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        manualInputLottoNumbers.forEach(lottoNumber -> lottoList.add(new Lotto(Lotto.parseLottoNumbers(lottoNumber))));
+        manualInputLottoNumbers.forEach(lottoNumber -> lottoList.add(new Lotto(LottoNumberParser.parse(lottoNumber))));
 
         return lottoList;
     }

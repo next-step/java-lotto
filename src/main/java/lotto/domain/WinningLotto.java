@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessage;
+import lotto.parser.LottoNumberParser;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class WinningLotto {
     }
 
     private static List<Integer> parseWinningNumbers(String winningNumbers) {
-        return Lotto.parseLottoNumbers(winningNumbers);
+        return LottoNumberParser.parse(winningNumbers);
     }
 
     public Integer compareLotto(Lotto comparedLotto) {

@@ -1,7 +1,8 @@
-package lotto.domain;
+package lotto.service;
 
 import lotto.constant.ErrorMessage;
-import lotto.service.Shop;
+import lotto.domain.Lotto;
+import lotto.domain.Purchase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

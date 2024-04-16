@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.constant.ErrorMessage;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOWER_BOUND = 1;
@@ -19,16 +18,6 @@ public class Lotto {
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    public static List<Integer> parseLottoNumbers(String lottoNumber) {
-        try {
-            return Arrays.stream(
-                    lottoNumber.replaceAll("\\s", "").split(",")
-            ).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR.getMessage());
-        }
     }
 
     public static void validateNumbersLength(List<Integer> numbers) {
