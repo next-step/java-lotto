@@ -42,8 +42,13 @@ public class InputView {
     }
 
     public List<String> inputManualLottoNumber(int manualPurchaseCount) {
-        System.out.println("수동으로 구매할 번호를 입력해주세요.");
         List<String> lottoNumbers = new ArrayList<>();
+
+        if (manualPurchaseCount <= 0) {
+            return lottoNumbers;
+        }
+
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
 
         for (int i = 0; i < manualPurchaseCount; i++) {
             lottoNumbers.add(scanner.nextLine());

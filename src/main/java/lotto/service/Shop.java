@@ -22,7 +22,10 @@ public class Shop {
     public static List<Lotto> getLottoList(Purchase purchase, List<String> manualInputLottoNumbers) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        if (!manualInputLottoNumbers.isEmpty()) lottoList.addAll(Shop.getManualInputLotto(manualInputLottoNumbers));
+        if (!manualInputLottoNumbers.isEmpty()) {
+            lottoList.addAll(Shop.getManualInputLotto(manualInputLottoNumbers));
+        }
+
         lottoList.addAll(Shop.getAutomaticLotto(purchase.getPurchaseAmount() - manualInputLottoNumbers.size()));
 
         return lottoList;
