@@ -23,7 +23,7 @@ public class OutputView {
         stringBuilder.append("을 구매했습니다.\n");
 
         for (Lotto lotto : lottoSession) {
-            stringBuilder.append(Arrays.toString(lotto.getLottoNumbers().toArray())).append("\n");
+            stringBuilder.append(lotto.getLottoNumbers()).append("\n");
         }
         System.out.println(stringBuilder);
     }

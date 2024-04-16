@@ -16,8 +16,8 @@ public class Lotto {
         this.lottoNumbers = numbers;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public String getLottoNumbers() {
+        return Arrays.toString(lottoNumbers.toArray());
     }
 
     public static void validateNumbersLength(List<Integer> numbers) {
