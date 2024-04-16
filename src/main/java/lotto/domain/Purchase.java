@@ -20,6 +20,10 @@ public class Purchase {
     }
 
     private int getPurchaseCount(Product product, int purchasePrice) {
+        if (purchasePrice == 0) {
+            throw new IllegalArgumentException(ErrorMessage.ZERO_PURCHASE_PRICE_ERROR.getMessage());
+        }
+
         if (purchasePrice < 0) {
             throw new IllegalArgumentException(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR.getMessage());
         }

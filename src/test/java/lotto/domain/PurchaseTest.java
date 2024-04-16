@@ -30,5 +30,13 @@ public class PurchaseTest {
         assertThatThrownBy(() -> new Purchase("Lotto", 15400))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR.getMessage());
+
+        assertThatThrownBy(() -> new Purchase("Lotto", 1001))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR.getMessage());
+
+        assertThatThrownBy(() -> new Purchase("Lotto", 0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.ZERO_PURCHASE_PRICE_ERROR.getMessage());
     }
 }
