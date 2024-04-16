@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Bonus;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -55,9 +52,7 @@ public class InputView {
 
     public WinningLotto bonusNumber(Lotto winningLotto) {
         System.out.println("보너스 볼을 입력해 주세요.");
-
-        Bonus bonus = new Bonus(validateInt(scanner.nextLine()));
-        return new WinningLotto(winningLotto, bonus.getBonusNumber());
+        return new WinningLotto(winningLotto, new LottoNumber(validateInt(scanner.nextLine())));
     }
 
     public int validateInt(String input) {
