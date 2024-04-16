@@ -69,3 +69,8 @@
 - InputView
   - [x] 수동 입력 받기
 - [x] 수동로또 + 자동로또 합쳐서 출력 및 하나의 Lottos로 반환
+
+### 2차 TODO LIST
+- [ ] Bonus 객체 삭제
+- [x] LottoFactory 메소드 분리
+- [x] LottoFactory 생성자에서 필요한 인자만 전달하도록 하여 자동구매와 수동 구매를 분리

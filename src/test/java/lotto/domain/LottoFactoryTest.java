@@ -15,7 +15,7 @@ class LottoFactoryTest {
         int expected = 1;
 
         // when
-        Lottos lottos = LottoFactory.createLottos(money, 0, new Lottos(0));
+        Lottos lottos = LottoFactory.createLottos(money);
 
         // then
         assertEquals(expected, lottos.of().size());
@@ -57,7 +57,7 @@ class LottoFactoryTest {
         int money = 999;
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> LottoFactory.createLottos(money, 0, new Lottos(0)));
+        assertThrows(IllegalArgumentException.class, () -> LottoFactory.createLottos(money));
     }
 
     @Test
