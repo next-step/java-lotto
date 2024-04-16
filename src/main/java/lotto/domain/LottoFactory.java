@@ -20,8 +20,19 @@ public class LottoFactory {
             throw new IllegalArgumentException("구매 금액이 부족합니다.");
         }
 
-        int lottoAmount = buyingAmount / LOTTO_COST;
-        return new Lottos(lottoAmount);
+        int autoLottoCount = buyingAmount / LOTTO_COST;
+
+        return new Lottos(autoLottoCount);
+    }
+
+    public static Lottos createLottos(int buyingAmount, int manualLottoCount, Lottos manualLottos) {
+        if (buyingAmount / LOTTO_COST < manualLottoCount) {
+            throw new IllegalArgumentException("구매 금액이 부족합니다.");
+        }
+
+        int autoLottoCount = buyingAmount / LOTTO_COST - manualLottoCount;
+
+        return new Lottos(autoLottoCount, manualLottos);
     }
 
 }

@@ -5,21 +5,32 @@ import java.util.List;
 
 public class Lottos {
 
-    private final List<Lotto> autoLottos;
+    private final List<Lotto> lottos;
 
-    public Lottos(int size) {
-        autoLottos = new ArrayList<>();
+    public Lottos(int autoLottosSize) {
+        this(autoLottosSize, new Lottos(new ArrayList<>()));
+    }
+
+    public Lottos(int size, Lottos manualLottos) {
+        lottos = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-            autoLottos.add(new Lotto(new NumbersGenerator()));
+            lottos.add(new Lotto(new NumbersGenerator()));
         }
+
+        lottos.addAll(manualLottos.of());
     }
 
     public Lottos(List<Lotto> lottosList) {
-        autoLottos = lottosList;
+        lottos = lottosList;
     }
 
     public List<Lotto> of() {
-        return autoLottos;
+        return lottos;
     }
+
+    public int size() {
+        return lottos.size();
+    }
+
 }

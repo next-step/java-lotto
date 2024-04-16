@@ -15,7 +15,7 @@ class InputViewTest {
     @DisplayName("숫자를 입력하면 에러가 나지 않는다")
     void validate_money(String input, int expected) {
         InputView inputView = new InputView();
-        assertThat(inputView.buyingAmount(input)).isEqualTo(expected);
+        assertThat(inputView.validateInt(input)).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -23,7 +23,15 @@ class InputViewTest {
     @DisplayName("숫자가 아닌 값을 입력하면 에러가 난다")
     void validate_money_with_not_number(String input) {
         InputView inputView = new InputView();
-        assertThrows(IllegalArgumentException.class , () -> inputView.buyingAmount(input));
+        assertThrows(IllegalArgumentException.class , () -> inputView.validateInt(input));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {" ", ""})
+    @DisplayName("빈칸이나 입력값이 없는 상태로 입력하면 에러가 난다")
+    void validate_input_with_blank(String input) {
+        InputView inputView = new InputView();
+        assertThrows(IllegalArgumentException.class , () -> inputView.checkBlank(input));
     }
 
 }

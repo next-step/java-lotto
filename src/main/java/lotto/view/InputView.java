@@ -1,11 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Bonus;
-import lotto.domain.Lotto;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -18,13 +15,25 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public String getBuyingAmountInput() {
+    public int buyingAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextLine();
+        return validateInt(scanner.nextLine());
     }
 
-    public int buyingAmount(String input) {
-        return validateInt(input);
+    public int manualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return validateInt(scanner.nextLine());
+    }
+
+    public Lottos getManualLottoInput(int manualLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> lottoList = new ArrayList<>(manualLottoCount);
+
+        for (int i = 0; i < manualLottoCount; i++) {
+            Lotto manualLotto = stringToLotto(scanner.nextLine());
+            lottoList.add(manualLotto);
+        }
+        return new Lottos(lottoList);
     }
 
     public String getWinningNoInput() {
@@ -32,7 +41,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public Lotto winningNo(String input) {
+    public Lotto stringToLotto(String input) {
         String[] winningNoStrArr = split(input);
 
         return new Lotto(Arrays.stream(winningNoStrArr)
@@ -41,17 +50,12 @@ public class InputView {
                 .collect(Collectors.toSet()));
     }
 
-    public String getBonusNumberInput() {
+    public WinningLotto bonusNumber(Lotto winningLotto) {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextLine();
+        return new WinningLotto(winningLotto, new LottoNumber(validateInt(scanner.nextLine())));
     }
 
-    public WinningLotto bonusNumber(String input, Lotto winningLotto) {
-        Bonus bonus = new Bonus(validateInt(input), winningLotto);
-        return new WinningLotto(winningLotto, bonus.getBonusNumber());
-    }
-
-    private int validateInt(String input) {
+    public int validateInt(String input) {
         checkBlank(input);
         if(!Pattern.matches(regex, input)){
             throw new IllegalArgumentException("숫자만 입력해주세요.");
@@ -64,7 +68,7 @@ public class InputView {
         return input.split(", ");
     }
 
-    private void checkBlank(String input){
+    public void checkBlank(String input){
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("값이 없습니다.");
         }
