@@ -1,10 +1,9 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessage;
+import lotto.parser.LottoNumberParser;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final List<Integer> winningLotto;
@@ -45,13 +44,7 @@ public class WinningLotto {
     }
 
     private static List<Integer> parseWinningNumbers(String winningNumbers) {
-        try {
-            return Arrays.stream(
-                    winningNumbers.replaceAll("\\s", "").split(",")
-            ).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR.getMessage());
-        }
+        return LottoNumberParser.parse(winningNumbers);
     }
 
     public Integer compareLotto(Lotto comparedLotto) {

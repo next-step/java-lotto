@@ -16,7 +16,7 @@ class LottoTest {
     public void lottoInitializationTest() {
         Lotto lotto = new Lotto(Arrays.asList(2, 4, 5, 8, 10, 42));
 
-        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers()).isEqualTo("[2, 4, 5, 8, 10, 42]");
     }
 
     @Test
@@ -24,7 +24,7 @@ class LottoTest {
     public void containNumberTest() {
         Lotto lotto = new Lotto(Arrays.asList(2, 4, 5, 8, 10, 42));
 
-        assertThat(lotto.getLottoNumbers().contains(2)).isTrue();
+        assertThat(lotto.containNumber(2)).isTrue();
     }
 
     @Test

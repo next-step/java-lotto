@@ -16,8 +16,8 @@ public class Lotto {
         this.lottoNumbers = numbers;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public String getLottoNumbers() {
+        return Arrays.toString(lottoNumbers.toArray());
     }
 
     public static void validateNumbersLength(List<Integer> numbers) {
@@ -39,5 +39,9 @@ public class Lotto {
 
     public Boolean containNumber(Integer number) {
         return this.lottoNumbers.contains(number);
+    }
+
+    public Boolean equals(Lotto lotto) {
+        return this.lottoNumbers.equals(lotto.lottoNumbers);
     }
 }
