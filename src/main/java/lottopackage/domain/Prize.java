@@ -1,6 +1,6 @@
 package lottopackage.domain;
 
-import java.util.*;
+import lottopackage.vo.LottoBalls;
 
 public enum Prize {
     FIRST(6, false, 2_000_000_000),
@@ -32,7 +32,7 @@ public enum Prize {
         return winningAmount;
     }
 
-    public static Prize checkPrize(Set<LottoBall> lotto, WinningNumber winningNumber) {
-        return WinningNumber.checkPrize(lotto, winningNumber);
+    public static Prize checkPrize(LottoBalls lotto, WinningNumberAndBonusBall winningNumberAndBonusBall) {
+        return WinningNumberAndBonusBall.checkPrize(lotto, winningNumberAndBonusBall);
     }
 }

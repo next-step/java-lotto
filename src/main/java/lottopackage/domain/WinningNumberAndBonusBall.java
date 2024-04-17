@@ -1,33 +1,31 @@
 package lottopackage.domain;
 
+import lottopackage.vo.LottoBall;
+import lottopackage.vo.LottoBalls;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WinningNumber {
-    Set<LottoBall> winningNumber;
-    LottoBall bonusBall;
+public class WinningNumberAndBonusBall {
+    private final LottoBalls winningNumber;
+    private final LottoBall bonusBall;
 
-    public WinningNumber(Set<LottoBall> winningNumber, LottoBall bonusBall) {
-        isValidWinningNumber(winningNumber);
+    public WinningNumberAndBonusBall(Set<LottoBall> winningNumber, LottoBall bonusBall) {
+        this(new LottoBalls(winningNumber), bonusBall);
+    }
+
+    public WinningNumberAndBonusBall(LottoBalls winningNumber, LottoBall bonusBall) {
         this.winningNumber = winningNumber;
         this.bonusBall = bonusBall;
     }
 
-    private static void isValidWinningNumber(Set<LottoBall> winningNumber) {
-        if (winningNumber.size() != Lotto.getLottoSize()) {
-            System.out.println(winningNumber.size());
-            System.out.println(Lotto.getLottoSize());
-            throw new IllegalArgumentException("당첨번호는 6자리 숫자여야 합니다.");
-        }
-    }
+    public static Prize checkPrize(LottoBalls lottoBalls, WinningNumberAndBonusBall winningNumberAndBonusBall) {
+        Set<LottoBall> lottoForPrizeCheck = new HashSet<>(lottoBalls.getLottoBalls());
 
-    public static Prize checkPrize(Set<LottoBall> lotto, WinningNumber winningNumber) {
-        Set<LottoBall> lottoForPrizeCheck = new HashSet<>(lotto);
-
-        lottoForPrizeCheck.removeAll(winningNumber.winningNumber);
+        lottoForPrizeCheck.removeAll(winningNumberAndBonusBall.winningNumber.getLottoBalls());
         if (lottoForPrizeCheck.size() == 1) {
-            return checkBonusBall(lottoForPrizeCheck, winningNumber.bonusBall);
+            return checkBonusBall(lottoForPrizeCheck, winningNumberAndBonusBall.bonusBall);
         }
         return Arrays.stream(Prize.values())
                 .filter((prize) -> prize.getBall() == (6 - lottoForPrizeCheck.size()))

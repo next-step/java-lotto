@@ -1,7 +1,6 @@
 package lottopackage.view;
 
-import lottopackage.domain.Lotto;
-import lottopackage.domain.LottoBall;
+import lottopackage.vo.Lotto;
 import lottopackage.domain.Prize;
 
 import java.util.*;
@@ -13,6 +12,7 @@ public class OutputView {
     }
 
     public static void printLottoGroup(List<Lotto> lottoGroup) {
+        System.out.println("--- 소지하신 로또들 ---");
         for (int i = 0; i < lottoGroup.size(); i++) {
             System.out.println(lottoGroup.get(i));
         }
