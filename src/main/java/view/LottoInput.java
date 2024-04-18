@@ -30,21 +30,18 @@ public class LottoInput {
             List<LottoBall> balls = new ArrayList<>();
 
             String[] numbers = input.nextLine().split(", ");
-            validateNumber(numbers);
-            for (String number : numbers) {
-                balls.add(LottoBall.ball(Integer.parseInt(number)));
-            }
+
+            validateNumber(balls, numbers);
             Collections.sort(balls, Comparator.comparingInt(LottoBall::getNumber));
             MyLotto.add(balls);
         }
         System.out.println();
     }
 
-    private void validateNumber(String[] numbers) {
-        Set<Integer> balls = new HashSet<>();
+    private void validateNumber(List<LottoBall> balls, String[] numbers) {
         for (String number : numbers) {
-            int ball = parseInt(number);
-            balls.add(ball);
+            int num = parseInt(number);
+            balls.add(LottoBall.ball(num));
         }
     }
 
