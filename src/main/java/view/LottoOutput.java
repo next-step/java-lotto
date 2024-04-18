@@ -5,18 +5,11 @@ import domain.*;
 import java.util.List;
 
 public class LottoOutput {
-    private final int BONUS_PRICE_INDEX = 3;
-    private final int BASIC_WIN_NUMBER_COUNT = 5;
+    private final int BASIC_WIN_NUMBER_COUNT = 6;
     private final int BONUS_BALL_INDEX = 6;
-    LottoResultOutput[] lottoResultOutput;
-    private void wordSetting() {
-        lottoResultOutput = new LottoResultOutput[5];
-        lottoResultOutput[0] = LottoResultOutput.RIGHT_3;
-        lottoResultOutput[1] = LottoResultOutput.RIGHT_4;
-        lottoResultOutput[2] = LottoResultOutput.RIGHT_5;
-        lottoResultOutput[3] = LottoResultOutput.BONUS_5;
-        lottoResultOutput[4] = LottoResultOutput.RIGHT_6;
-    }
+    private final int REWARD_SIZE = 5;
+
+    private RankReward rankReward;
 
     public void winNumber(Lotto lotto) {
         System.out.println();
@@ -39,16 +32,20 @@ public class LottoOutput {
     public int totalPrize(WinStatus winStatus) {
         List<Integer> resultWinStatus = winStatus.getWincount();
         int cnt = 0;
-        wordSetting();
         System.out.println("당첨 통계");
         System.out.println("--------");
-        for (int i = 0; i < BASIC_WIN_NUMBER_COUNT; i++) {
-            cnt += resultWinStatus.get(i);
-            if (BONUS_PRICE_INDEX == i) {
-                System.out.println(lottoResultOutput[i].getCorrectCount() + "개 일치, 보너스 볼 일치 (" + lottoResultOutput[i].getPrice() + "원) - " + resultWinStatus.get(i) + "개");
-                continue;
+
+        for (int i = 0; i < REWARD_SIZE; i++) {
+            int lottoMatch = resultWinStatus.get(i);
+            cnt += lottoMatch;
+            if (i == 3) {
+                rankReward = RankReward.valueOf(i, true);
+                System.out.println(rankReward.getCorrectCount() + "개 일치, 보너스 볼 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
             }
-            System.out.println(lottoResultOutput[i].getCorrectCount() + "개 일치 (" + lottoResultOutput[i].getPrice() + "원) - " + resultWinStatus.get(i) + "개");
+            else {
+                rankReward = RankReward.valueOf(i, false);
+                System.out.println(rankReward.getCorrectCount() + "개 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
+            }
         }
         return cnt;
     }
@@ -57,12 +54,16 @@ public class LottoOutput {
         System.out.printf("총 수익률은 %.2f 입니다.", correct / total);
     }
 
-    public void haveLotto(MyLotto myLotto) {
+    public void haveLotto(MyLotto myLotto, TotalTry totalTry) {
+        System.out.println(userBuyLotto(totalTry));
         for (Lotto lotto : myLotto.getLotto()) {
             LottoBallPrint(lotto);
         }
     }
 
+    private String userBuyLotto(TotalTry totalTry) {
+        return String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", totalTry.getManualTry(), totalTry.getTotalTry());
+    }
     private void LottoBallPrint(Lotto lotto) {
         for (LottoBall ball : lotto.getBalls()) {
             System.out.print(ball.getNumber() + " ");

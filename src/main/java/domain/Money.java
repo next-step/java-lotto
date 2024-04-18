@@ -16,6 +16,5 @@ public class Money {
     private void correctMoney(int money) {
         if (money < 0 || money % LOTTO_PRICE != 0)
             throw new IllegalArgumentException("잘못된 구입금액 입니다");
-        System.out.println(money / LOTTO_PRICE + "개를 구매했습니다.");
     }
 }
