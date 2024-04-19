@@ -1,15 +1,17 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoPrize;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
     @Test
@@ -54,9 +56,7 @@ class LottoTest {
     })
     void invalidInput(String input) {
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            Lotto.parse(input);
-        });
+        assertThrows(IllegalArgumentException.class, () -> Lotto.parse(input));
     }
 
     @Test
@@ -66,6 +66,22 @@ class LottoTest {
 
         int result = Lotto.matchCount(winningNumbers, generateNumbers);
         assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    void calculatePrizeCounts() {
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        List<List<Integer>> tickets = Arrays.asList(
+                List.of(1, 2, 3, 4, 5, 6),   // 6 matches
+                List.of(1, 2, 3, 7, 8, 9),   // 3 matches
+                List.of(10, 11, 12, 13, 14, 15) // 0 matches
+        );
+
+        Map<Integer, Integer> prizeCounts = Lotto.calculatePrizeCounts(winningNumbers, tickets);
+
+        assertEquals(1, prizeCounts.getOrDefault(6, 0));
+        assertEquals(1, prizeCounts.getOrDefault(3, 0));
+        assertFalse(prizeCounts.containsKey(0));
     }
 
     @Test
@@ -90,7 +106,7 @@ class LottoTest {
 
         int ticketPrice = 1000;
         int totalWinnings = purchasedTickets.stream()
-                .mapToInt(ticket -> Lotto.calculateWinnings(Lotto.matchCount(winningNumbers, ticket)))
+                .mapToInt(ticket -> LottoPrize.calculatePrize(Lotto.matchCount(winningNumbers, ticket)))
                 .sum();
         int totalInvestment = purchasedTickets.size() * ticketPrice;
 

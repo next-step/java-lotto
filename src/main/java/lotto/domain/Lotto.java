@@ -1,8 +1,6 @@
-package lotto;
+package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
 
@@ -65,19 +63,14 @@ public class Lotto {
         }
     }
 
-    public static int calculateWinnings(int matchCount) {
-        if (matchCount == 6) {
-            return 2000000000;
+    public static Map<Integer, Integer> calculatePrizeCounts(List<Integer> winningNumbers, List<List<Integer>> tickets) {
+        Map<Integer, Integer> prizeCounts = new HashMap<>();
+        for (List<Integer> ticket : tickets) {
+            int matchCount = matchCount(winningNumbers, ticket);
+            if (matchCount >= 3) {
+                prizeCounts.put(matchCount, prizeCounts.getOrDefault(matchCount, 0) + 1);
+            }
         }
-        if (matchCount == 5) {
-            return 1500000;
-        }
-        if (matchCount == 4) {
-            return 50000;
-        }
-        if (matchCount == 3) {
-            return 5000;
-        }
-        return 0;
+        return prizeCounts;
     }
 }
