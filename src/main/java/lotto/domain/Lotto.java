@@ -4,11 +4,11 @@ import java.util.*;
 
 public class Lotto {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_COUNT = 6;
     private static final int LOTTO_MAX = 45;
 
-    public static int purchase(String number) {
+    public static int calculateTicketCount(String number) {
         if (number == null || number.isEmpty()) {
             return 0;
         }
@@ -19,14 +19,24 @@ public class Lotto {
     public static List<Integer> generate() {
         List<Integer> numbers = new ArrayList<>();
 
-        for (int i = 1; i < LOTTO_MAX; i++) {
+        for (int i = 1; i <= LOTTO_MAX; i++) {
             numbers.add(i);
         }
 
         Collections.shuffle(numbers);
+        numbers = numbers.subList(0,  LOTTO_COUNT);
         Collections.sort(numbers);
 
-        return numbers.subList(0, LOTTO_COUNT);
+        return numbers;
+    }
+
+    public static List<List<Integer>> generateTickets(int count) {
+        List<List<Integer>> tickets = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            tickets.add(generate());
+        }
+        return tickets;
     }
 
     public static int matchCount(List<Integer> winningNumbers, List<Integer> generateNumbers) {
@@ -61,16 +71,5 @@ public class Lotto {
         if (parsedInt < 1 || parsedInt > LOTTO_MAX) {
             throw new IllegalArgumentException("Invalid number: " + parsedInt);
         }
-    }
-
-    public static Map<Integer, Integer> calculatePrizeCounts(List<Integer> winningNumbers, List<List<Integer>> tickets) {
-        Map<Integer, Integer> prizeCounts = new HashMap<>();
-        for (List<Integer> ticket : tickets) {
-            int matchCount = matchCount(winningNumbers, ticket);
-            if (matchCount >= 3) {
-                prizeCounts.put(matchCount, prizeCounts.getOrDefault(matchCount, 0) + 1);
-            }
-        }
-        return prizeCounts;
     }
 }

@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
     @Test
-    void purchase() {
-        int result = Lotto.purchase("14000");
+    void calculateTicketCount() {
+        int result = Lotto.calculateTicketCount("14000");
 
         assertThat(result).isEqualTo(14);
     }
@@ -77,7 +77,7 @@ class LottoTest {
                 List.of(10, 11, 12, 13, 14, 15) // 0 matches
         );
 
-        Map<Integer, Integer> prizeCounts = Lotto.calculatePrizeCounts(winningNumbers, tickets);
+        Map<Integer, Integer> prizeCounts = LottoPrize.calculatePrizeCounts(winningNumbers, tickets);
 
         assertEquals(1, prizeCounts.getOrDefault(6, 0));
         assertEquals(1, prizeCounts.getOrDefault(3, 0));
@@ -87,7 +87,8 @@ class LottoTest {
     @Test
     void returnRate() {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-        List<List<Integer>> purchasedTickets = Arrays.asList(            List.of(8, 21, 23, 41, 42, 43),
+        List<List<Integer>> purchasedTickets = Arrays.asList(
+                List.of(8, 21, 23, 41, 42, 43),
                 List.of(3, 5, 11, 16, 32, 38),
                 List.of(7, 11, 16, 35, 36, 44),
                 List.of(1, 8, 11, 31, 41, 42),
@@ -103,14 +104,7 @@ class LottoTest {
                 List.of(3, 8, 27, 30, 35, 44)
         );
 
-
-        int ticketPrice = 1000;
-        int totalWinnings = purchasedTickets.stream()
-                .mapToInt(ticket -> LottoPrize.calculatePrize(Lotto.matchCount(winningNumbers, ticket)))
-                .sum();
-        int totalInvestment = purchasedTickets.size() * ticketPrice;
-
-        double calculatedReturnRate = (double) totalWinnings / totalInvestment;
+        double calculatedReturnRate = LottoPrize.calculateReturnRate(winningNumbers, purchasedTickets);
 
         assertEquals(0.35, calculatedReturnRate, 0.01);
     }

@@ -1,6 +1,13 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static lotto.domain.Lotto.LOTTO_PRICE;
+import static lotto.domain.Lotto.matchCount;
 
 public enum LottoPrize {
     MATCH_3(3, 5000),
@@ -30,6 +37,22 @@ public enum LottoPrize {
                 .findFirst()
                 .map(LottoPrize::getPrizeAmount)
                 .orElse(0);
+    }
+
+    public static Map<Integer, Integer> calculatePrizeCounts(List<Integer> winningNumbers, List<List<Integer>> purchasedTickets) {
+        return purchasedTickets.stream()
+                .map(ticket -> matchCount(winningNumbers, ticket))
+                .filter(matchCount -> matchCount >= 3)
+                .collect(Collectors.toMap(Function.identity(), count -> 1, Integer::sum));
+    }
+
+    public static double calculateReturnRate(List<Integer> winningNumbers, List<List<Integer>> purchasedTickets) {
+        int totalWinnings = purchasedTickets.stream()
+                .mapToInt(ticket -> calculatePrize(matchCount(winningNumbers, ticket)))
+                .sum();
+        int totalInvestment = purchasedTickets.size() * LOTTO_PRICE;
+
+        return (double) totalWinnings / totalInvestment;
     }
 }
 
