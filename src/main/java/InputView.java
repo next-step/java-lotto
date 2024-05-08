@@ -26,7 +26,7 @@ public class InputView {
     public static List<Integer> inputWinningNumbers() {
         List<Integer> winningNumbers = IntStream.range(0, 6)
                 .mapToObj(i -> scanner.nextInt())
-                .toList();
+                .collect(Collectors.toList());
 
         String inputs = winningNumbers.stream()
                 .map(String::valueOf)
