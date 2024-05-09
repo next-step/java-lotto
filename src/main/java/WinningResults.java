@@ -1,4 +1,6 @@
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningResults {
     private static final int PRICE = 5000;
@@ -22,6 +24,12 @@ public class WinningResults {
                 .orElse(0L);
 
         return (double) winningMoney / (winningResults.size() * PRICE);
+    }
+
+    public List<Rank> winningRanks() {
+        return Arrays.stream(Rank.values())
+                .filter(i -> i.getCountOfMatch() >= Rank.FIFTH.getCountOfMatch())
+                .collect(Collectors.toList());
     }
 
     public List<WinningResult> get() {

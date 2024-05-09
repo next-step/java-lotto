@@ -1,6 +1,4 @@
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,17 +11,7 @@ public class Lotto {
     private final LottoNumbers value;
 
     public Lotto() {
-        this.value = LottoNumbers.of(lottoNumbers);
-    }
-
-    public Lotto(LottoNumber... lottoNumbers) {
-        this(LottoNumbers.of(Arrays.asList(lottoNumbers)));
-    }
-
-    public Lotto(Integer... numbers) {
-        this(LottoNumbers.of(Arrays.stream(numbers)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList())));
+        this.value = LottoNumbers.fromLottoNumberList(lottoNumbers);
     }
 
     public Lotto(LottoNumbers value) {
@@ -36,9 +24,5 @@ public class Lotto {
 
     public LottoNumbers numbers() {
         return this.value;
-    }
-
-    public int size() {
-        return this.value.get().size();
     }
 }

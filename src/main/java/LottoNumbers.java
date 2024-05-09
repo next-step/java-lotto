@@ -4,25 +4,25 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    public static LottoNumbers of(List<LottoNumber> value) {
+    public static LottoNumbers fromLottoNumberList(List<LottoNumber> value) {
         Collections.shuffle(value);
         value = value.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(value.subList(0, LOTTO_NUMBER_COUNT), Comparator.comparingInt(LottoNumber::get));
 
-        return of(new HashSet<>(value));
+        return fromLottoNumberSet(new HashSet<>(value));
     }
 
-    public static LottoNumbers of(Integer... value) {
-        return of(Arrays.stream(value)
+    public static LottoNumbers fromIntegerList(List<Integer> value) {
+        return fromLottoNumberSet(value.stream().map(LottoNumber::of).collect(Collectors.toSet()));
+    }
+
+    public static LottoNumbers fromIntegers(Integer... value) {
+        return fromLottoNumberSet(Arrays.stream(value)
                 .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 
-    public static LottoNumbers of(LottoNumber... value) {
-        return of(Arrays.stream(value).collect(Collectors.toSet()));
-    }
-
-    public static LottoNumbers of(Set<LottoNumber> value) {
+    public static LottoNumbers fromLottoNumberSet(Set<LottoNumber> value) {
         return new LottoNumbers(value);
     }
 
