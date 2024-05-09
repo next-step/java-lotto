@@ -1,7 +1,22 @@
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class LottoNumber {
+    private static final Map<Integer, LottoNumber> lottoNumbersByNumber = IntStream.rangeClosed(1, 45)
+            .boxed()
+            .collect(Collectors.toUnmodifiableMap(
+                    i -> i,
+                    LottoNumber::new
+            ));
+
     private final int value;
 
-    public LottoNumber(int value) {
+    public static LottoNumber of(int value) {
+        return lottoNumbersByNumber.get(value);
+    }
+
+    private LottoNumber(int value) {
         validate(value);
         this.value = value;
     }

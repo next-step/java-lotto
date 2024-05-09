@@ -1,7 +1,13 @@
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private List<Lotto> value;
+
+    public Lottos(Lotto... value) {
+        this(Arrays.stream(value).collect(Collectors.toList()));
+    }
 
     public Lottos(List<Lotto> value) {
         this.value = value;
