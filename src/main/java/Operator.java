@@ -1,33 +1,28 @@
-import java.util.Map;
+import java.util.Arrays;
 import java.util.function.BiFunction;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class Operator {
-    private static final Map<String, BiFunction<Integer, Integer, Integer>> operations = Map.of(
-            "+", (x, y) -> x + y,
-            "-", (x, y) -> x - y,
-            "*", (x, y) -> x * y,
-            "/", (x, y) -> x / y
-    );
+public enum Operator {
+    PLUS("+", (x, y) -> x + y),
+    MINUS("-", (x, y) -> x - y),
+    MULTIPLY("*", (x, y) -> x * y),
+    DIVIDE("/", (x, y) -> x / y);
 
+    private final String symbol;
     private final BiFunction<Integer, Integer, Integer> operation;
 
-    public Operator(String value) {
-        validate(value);
-        operation = operations.get(value);
+    Operator(String symbol, BiFunction<Integer, Integer, Integer> operation) {
+        this.symbol = symbol;
+        this.operation = operation;
     }
 
     public int operate(int x, int y) {
         return operation.apply(x, y);
     }
 
-    private void validate(String value) {
-        Pattern pattern = Pattern.compile("[^\\+\\-\\*/]");
-        Matcher matcher = pattern.matcher(value);
-
-        if (matcher.matches()) {
-            throw new IllegalArgumentException("사칙연산 기호가 아닙니다 : " + value);
-        }
+    public static Operator fromString(String symbol) {
+        return Arrays.stream(Operator.values())
+                .filter(i -> i.symbol.equals(symbol))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다 : " + symbol));
     }
 }

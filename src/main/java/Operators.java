@@ -8,7 +8,7 @@ public class Operators {
         Stack<Operator> operators = new Stack<>();
 
         for (int i = parameters.length() - 2; i >= 0; i-=2) {
-            operators.push(new Operator(parameters.indexOf(i)));
+            operators.push(Operator.fromString(parameters.indexOf(i)));
         }
 
         return new Operators(operators);
