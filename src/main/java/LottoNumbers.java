@@ -46,4 +46,8 @@ public class LottoNumbers {
             throw new IllegalArgumentException("로또번호 개수는 6개만 허용합니다 : " + value.size());
         }
     }
+
+    public boolean isWinningBonus(LottoNumber bonusNumber) {
+        return this.value.contains(bonusNumber);
+    }
 }

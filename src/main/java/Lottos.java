@@ -25,11 +25,11 @@ public class Lottos {
         return this.value;
     }
 
-    public WinningResults draw(Lottos lottos, LottoNumbers winningNumbers) {
+    public WinningResults draw(Lottos lottos, LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         List<WinningResult> winningResultList = lottos.get().stream()
-                .map(i -> new WinningResult(i, winningNumbers))
+                .map(i -> new WinningResult(i, winningNumbers, bonusNumber))
                 .collect(Collectors.toList());
 
-        return new WinningResults(winningResultList);
+        return new WinningResults(winningResultList, bonusNumber);
     }
 }

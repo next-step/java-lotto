@@ -7,8 +7,9 @@ public class LottoApplication {
 
         InputView.printBuyList(lottos);
         LottoNumbers winningNumbers = new LottoNumbers(InputView.inputWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
 
-        WinningResults winningResults = lottos.draw(lottos, winningNumbers);
+        WinningResults winningResults = lottos.draw(lottos, winningNumbers, bonusNumber);
 
         WinningResultsView.printWinningResults(winningResults);
     }

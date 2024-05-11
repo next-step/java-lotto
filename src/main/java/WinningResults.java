@@ -6,9 +6,16 @@ public class WinningResults {
     private static final int PRICE = 5000;
 
     private final List<WinningResult> winningResults;
+    private final LottoNumber bonusNumber;
 
     public WinningResults(List<WinningResult> winningResultList) {
         this.winningResults = winningResultList;
+        this.bonusNumber = null;
+    }
+
+    public WinningResults(List<WinningResult> winningResultList, LottoNumber bonusNumber) {
+        this.winningResults = winningResultList;
+        this.bonusNumber = bonusNumber;
     }
 
     public int countByRank(Rank rank) {

@@ -29,4 +29,8 @@ public class Lotto {
     public LottoNumbers numbers() {
         return this.value;
     }
+
+    public boolean isWinningBonus(LottoNumber bonusNumber) {
+        return this.value.isWinningBonus(bonusNumber);
+    }
 }

@@ -16,10 +16,6 @@ public class LottoGame {
         return new Lottos(lottoList);
     }
 
-    public WinningResults draw(Lottos lottos, LottoNumbers winningNumbers) {
-        return lottos.draw(lottos, winningNumbers);
-    }
-
     private int countBuyLotto(int budget) {
         return budget / PRICE;
     }
