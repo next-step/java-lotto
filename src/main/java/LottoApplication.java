@@ -6,6 +6,7 @@ public class LottoApplication {
         Lottos lottos = lottoGame.buy(budget);
 
         InputView.printBuyList(lottos);
+
         LottoNumbers winningNumbers = new LottoNumbers(InputView.inputWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
 
