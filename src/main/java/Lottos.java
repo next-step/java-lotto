@@ -24,4 +24,12 @@ public class Lottos {
     public List<Lotto> get() {
         return this.value;
     }
+
+    public WinningResults draw(Lottos lottos, LottoNumbers winningNumbers) {
+        List<WinningResult> winningResultList = lottos.get().stream()
+                .map(i -> new WinningResult(i, winningNumbers))
+                .collect(Collectors.toList());
+
+        return new WinningResults(winningResultList);
+    }
 }

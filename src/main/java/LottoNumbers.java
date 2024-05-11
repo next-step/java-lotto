@@ -9,26 +9,24 @@ public class LottoNumbers {
         value = value.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(value.subList(0, LOTTO_NUMBER_COUNT), Comparator.comparingInt(LottoNumber::get));
 
-        return fromLottoNumberSet(new HashSet<>(value));
+        return new LottoNumbers(new HashSet<>(value));
     }
 
-    public static LottoNumbers fromIntegerList(List<Integer> value) {
-        return fromLottoNumberSet(value.stream().map(LottoNumber::of).collect(Collectors.toSet()));
-    }
-
-    public static LottoNumbers fromIntegers(Integer... value) {
-        return fromLottoNumberSet(Arrays.stream(value)
+    public LottoNumbers(List<Integer> value) {
+        this(value.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
     }
 
-    public static LottoNumbers fromLottoNumberSet(Set<LottoNumber> value) {
-        return new LottoNumbers(value);
+    public LottoNumbers(Integer... value) {
+        this(Arrays.stream(value)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet()));
     }
 
     private final Set<LottoNumber> value;
 
-    private LottoNumbers(Set<LottoNumber> value) {
+    public LottoNumbers(Set<LottoNumber> value) {
         validate(value);
         this.value = value;
     }

@@ -11,7 +11,11 @@ public class Lotto {
     private final LottoNumbers value;
 
     public Lotto() {
-        this.value = LottoNumbers.fromLottoNumberList(lottoNumbers);
+        this(LottoNumbers.fromLottoNumberList(lottoNumbers));
+    }
+
+    public Lotto(List<Integer> value) {
+        this(new LottoNumbers(value));
     }
 
     public Lotto(LottoNumbers value) {

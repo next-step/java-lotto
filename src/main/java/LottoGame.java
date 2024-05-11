@@ -17,7 +17,7 @@ public class LottoGame {
     }
 
     public WinningResults draw(Lottos lottos, LottoNumbers winningNumbers) {
-        return LottoDraw.draw(lottos, winningNumbers);
+        return lottos.draw(lottos, winningNumbers);
     }
 
     private int countBuyLotto(int budget) {

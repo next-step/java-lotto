@@ -6,9 +6,9 @@ public class LottoApplication {
         Lottos lottos = lottoGame.buy(budget);
 
         InputView.printBuyList(lottos);
-        LottoNumbers winningNumbers = LottoNumbers.fromIntegerList(InputView.inputWinningNumbers());
+        LottoNumbers winningNumbers = new LottoNumbers(InputView.inputWinningNumbers());
 
-        WinningResults winningResults = LottoDraw.draw(lottos, winningNumbers);
+        WinningResults winningResults = lottos.draw(lottos, winningNumbers);
 
         WinningResultsView.printWinningResults(winningResults);
     }
