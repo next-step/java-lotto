@@ -1,9 +1,14 @@
 package lotto;
 
-import lotto.domain.LottoStore;
 import lotto.domain.Lotto;
+import lotto.domain.LottoStore;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMain {
 
@@ -15,7 +20,13 @@ public class LottoMain {
 
         ResultView.printBuyLotto(lotto);
 
-        String[] lastWinningLotto = InputView.inputWinningLotto().split(",");
+        List<Integer> lastWinningNumbers = Arrays.stream(InputView.inputWinningLotto().split(","))
+                                                    .map(Integer::parseInt)
+                                                    .collect(Collectors.toList());
+
+        WinningLotto winningLotto = new WinningLotto(lotto, lastWinningNumbers);
+
+        ResultView.printWinningResult(winningLotto.winningResult());
 
     }
 }

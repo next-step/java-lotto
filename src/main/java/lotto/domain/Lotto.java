@@ -16,6 +16,10 @@ public class Lotto {
         this.lotto = lotto;
     }
 
+    public Lotto(List<LottoNumbers> lotto){
+        this.lotto = lotto;
+    }
+
     public List<LottoNumbers> lotto() { return lotto; }
 
 }
