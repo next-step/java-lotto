@@ -41,7 +41,6 @@ public class WinningLotto {
 
             winningCounts.merge((int) duplicateNumberCount, 1, Integer::sum);
         }
-
     }
 
     private void calculateRateOfReturn() {
@@ -51,6 +50,6 @@ public class WinningLotto {
         if (winningCounts.containsKey(5)) totalPrize += winningCounts.get(5) * FIVE_MATCHES;
         if (winningCounts.containsKey(6)) totalPrize += winningCounts.get(6) * SIX_MATCHES;
 
-        rateOfReturn = totalPrize / winningCounts.size();
+        rateOfReturn = totalPrize / lotto.lotto().size();
     }
 }
