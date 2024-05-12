@@ -1,7 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 
 public class ResultView {
 
@@ -10,6 +11,16 @@ public class ResultView {
         for(LottoNumbers lottoNumbers : lotto.lotto()){
             System.out.println(lottoNumbers.lottoNumbers());
         }
+    }
+
+    public static void printWinningResult(Map<String, Object> winningResult){
+        System.out.println("  당첨 통계 ");
+        System.out.println("------------");
+
+
+
+
+
     }
 
 }
