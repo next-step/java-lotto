@@ -29,6 +29,12 @@ public class WinningLotto {
         Map<String, Object> winningResult = new HashMap<>();
         winningResult.put("winningCounts", winningCounts);
         winningResult.put("rateOfReturn", rateOfReturn);
+        winningResult.put("prizeMoney", Map.of(
+                3, THREE_MATCHES,
+                4, FOUR_MATCHES,
+                5, FIVE_MATCHES,
+                6, SIX_MATCHES
+        ));
 
         return winningResult;
     }
