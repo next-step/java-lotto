@@ -30,14 +30,10 @@ public class Lotto {
         Map<Integer, Integer> winningCounts = new HashMap<>();
 
         for(LottoNumbers lottoNumbers : lotto){
-            long duplicateNumberCount = lastWinningNumbers.stream()
-                .filter(lottoNumbers.lottoNumbers()::contains)
-                .count();
-            winningCounts.merge((int) duplicateNumberCount, 1, Integer::sum);
-
+            int matchCount = lottoNumbers.matchCount(lastWinningNumbers);
+            winningCounts.merge(matchCount, 1, Integer::sum);
         }
 
         return winningCounts;
     }
-
 }

@@ -18,4 +18,9 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    public int matchCount(List<Integer> lastWinningNumbers){
+        return (int) lastWinningNumbers.stream()
+            .filter(lottoNumbers::contains)
+            .count();
+    }
 }
