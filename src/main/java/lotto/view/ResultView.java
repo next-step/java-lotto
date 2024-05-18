@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
+import lotto.enums.PrizeMoney;
 
 import java.util.Map;
 
@@ -19,13 +20,11 @@ public class ResultView {
         System.out.println("------------");
 
         Map<Integer, Integer> winningCounts = (Map<Integer, Integer>) winningResult.get("winningCounts");
-        Map<String, Object> prizeMoney = (Map<String, Object>) winningResult.get("prizeMoney");
         double rateOfReturn = (double) winningResult.get("rateOfReturn");
 
         for (int i = 3; i <= 6; i++) {
             int count = winningCounts.getOrDefault(i, 0);
-            int prize = (int) prizeMoney.getOrDefault(i, 0);
-            System.out.println(i + "개 일치 (" + prize + "원) - " + count + "개");
+            System.out.println(i + "개 일치 (" + PrizeMoney.valueOf(i).prizeMoney() + "원) - " + count + "개");
         }
 
         System.out.println("총 수익률은 " + rateOfReturn + "입니다.");

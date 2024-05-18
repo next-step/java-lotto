@@ -49,6 +49,6 @@ class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(lotto, lastWinningNumbers);
         double rateOfReturn = (double) winningLotto.winningResult().get("rateOfReturn");
 
-        assertThat(rateOfReturn).isEqualTo(6250);
+        assertThat(rateOfReturn).isEqualTo(6.25);
     }
 }

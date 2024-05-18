@@ -4,16 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WinningLotto {
+import static lotto.enums.PrizeMoney.*;
 
+public class WinningLotto {
     private final Lotto lotto;
     private final List<Integer> lastWinningNumbers;
     private final Map<Integer, Integer> winningCounts;
     private double rateOfReturn;
-    private static final int THREE_MATCHES = 5000;
-    private static final int FOUR_MATCHES = 50000;
-    private static final int FIVE_MATCHES = 1500000;
-    private static final int SIX_MATCHES = 2000000000;
 
     public WinningLotto(Lotto lotto, List<Integer> lastWinningNumbers){
         this.lotto = lotto;
@@ -29,12 +26,6 @@ public class WinningLotto {
         Map<String, Object> winningResult = new HashMap<>();
         winningResult.put("winningCounts", winningCounts);
         winningResult.put("rateOfReturn", rateOfReturn);
-        winningResult.put("prizeMoney", Map.of(
-                3, THREE_MATCHES,
-                4, FOUR_MATCHES,
-                5, FIVE_MATCHES,
-                6, SIX_MATCHES
-        ));
 
         return winningResult;
     }
@@ -51,11 +42,11 @@ public class WinningLotto {
 
     private void calculateRateOfReturn() {
         double totalPrize = 0;
-        if (winningCounts.containsKey(3)) totalPrize += winningCounts.get(3) * THREE_MATCHES;
-        if (winningCounts.containsKey(4)) totalPrize += winningCounts.get(4) * FOUR_MATCHES;
-        if (winningCounts.containsKey(5)) totalPrize += winningCounts.get(5) * FIVE_MATCHES;
-        if (winningCounts.containsKey(6)) totalPrize += winningCounts.get(6) * SIX_MATCHES;
+        if (winningCounts.containsKey(3)) totalPrize += winningCounts.get(3) * THREE_MATCHES.prizeMoney();
+        if (winningCounts.containsKey(4)) totalPrize += winningCounts.get(4) * FOUR_MATCHES.prizeMoney();
+        if (winningCounts.containsKey(5)) totalPrize += winningCounts.get(5) * FIVE_MATCHES.prizeMoney();
+        if (winningCounts.containsKey(6)) totalPrize += winningCounts.get(6) * SIX_MATCHES.prizeMoney();
 
-        rateOfReturn = totalPrize / lotto.lotto().size();
+        rateOfReturn = totalPrize / (lotto.lotto().size() * 1_000);
     }
 }
