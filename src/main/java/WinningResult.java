@@ -1,8 +1,8 @@
 public class WinningResult {
     private final Rank rank;
 
-    public WinningResult(Lotto lotto, LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
-        this.rank = Rank.valueOf((int) lotto.countCommonLottoNumbers(winningLottoNumbers), lotto.isWinningBonus(bonusNumber));
+    public WinningResult(Lotto lotto, Lotto winningLotto, LottoNumber bonusNumber) {
+        this.rank = Rank.valueOf((int) lotto.countCommonLottoNumbers(winningLotto), lotto.isWinningBonus(bonusNumber));
     }
 
     public Rank rank() {

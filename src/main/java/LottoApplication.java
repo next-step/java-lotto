@@ -7,10 +7,10 @@ public class LottoApplication {
 
         InputView.printBuyList(lottos);
 
-        LottoNumbers winningNumbers = new LottoNumbers(InputView.inputWinningNumbers());
+        Lotto winningLotto = new Lotto(InputView.inputWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
 
-        WinningResults winningResults = lottos.draw(lottos, winningNumbers, bonusNumber);
+        WinningResults winningResults = lottos.draw(winningLotto, bonusNumber);
 
         WinningResultsView.printWinningResults(winningResults);
     }

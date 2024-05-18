@@ -40,7 +40,7 @@ public class InputView {
     }
 
     private static String formatLotto(Lotto lotto) {
-        return lotto.numbers().get().stream()
+        return lotto.get().stream()
                 .map(LottoNumber::get)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));

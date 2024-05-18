@@ -25,8 +25,8 @@ public class Lottos {
         return this.value;
     }
 
-    public WinningResults draw(Lottos lottos, LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        List<WinningResult> winningResultList = lottos.get().stream()
+    public WinningResults draw(Lotto winningNumbers, LottoNumber bonusNumber) {
+        List<WinningResult> winningResultList = this.value.stream()
                 .map(i -> new WinningResult(i, winningNumbers, bonusNumber))
                 .collect(Collectors.toList());
 
