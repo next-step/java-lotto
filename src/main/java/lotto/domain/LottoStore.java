@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class LottoStore {
 
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
 
     public Lotto buyAutoLotto(int amount){
         int count = calculateLottoCount(amount);
