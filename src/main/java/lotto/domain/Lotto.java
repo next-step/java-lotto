@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lotto {
     private final List<LottoNumbers> lotto;
@@ -21,5 +23,21 @@ public class Lotto {
     }
 
     public List<LottoNumbers> lotto() { return lotto; }
+
+    public int count() { return lotto.size(); }
+
+    public Map<Integer, Integer> match(List<Integer> lastWinningNumbers){
+        Map<Integer, Integer> winningCounts = new HashMap<>();
+
+        for(LottoNumbers lottoNumbers : lotto){
+            long duplicateNumberCount = lastWinningNumbers.stream()
+                .filter(lottoNumbers.lottoNumbers()::contains)
+                .count();
+            winningCounts.merge((int) duplicateNumberCount, 1, Integer::sum);
+
+        }
+
+        return winningCounts;
+    }
 
 }

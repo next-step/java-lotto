@@ -9,7 +9,7 @@ import static lotto.enums.PrizeMoney.*;
 public class WinningLotto {
     private final Lotto lotto;
     private final List<Integer> lastWinningNumbers;
-    private final Map<Integer, Integer> winningCounts;
+    private Map<Integer, Integer> winningCounts;
     private double rateOfReturn;
 
     public WinningLotto(Lotto lotto, List<Integer> lastWinningNumbers){
@@ -31,13 +31,8 @@ public class WinningLotto {
     }
 
     private void matchingWinningNumberCount(){
-        for(LottoNumbers lottoNumbers : lotto.lotto()){
-            long duplicateNumberCount = lastWinningNumbers.stream()
-                                                          .filter(lottoNumbers.lottoNumbers()::contains)
-                                                          .count();
 
-            winningCounts.merge((int) duplicateNumberCount, 1, Integer::sum);
-        }
+        winningCounts =  lotto.match(lastWinningNumbers);
     }
 
     private void calculateRateOfReturn() {
@@ -47,6 +42,6 @@ public class WinningLotto {
         if (winningCounts.containsKey(5)) totalPrize += winningCounts.get(5) * FIVE_MATCHES.prizeMoney();
         if (winningCounts.containsKey(6)) totalPrize += winningCounts.get(6) * SIX_MATCHES.prizeMoney();
 
-        rateOfReturn = totalPrize / (lotto.lotto().size() * 1_000);
+        rateOfReturn = totalPrize / (lotto.count() * 1_000);
     }
 }

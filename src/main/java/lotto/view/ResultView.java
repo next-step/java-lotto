@@ -9,7 +9,7 @@ import java.util.Map;
 public class ResultView {
 
     public static void printBuyLotto(Lotto lotto){
-        System.out.println(lotto.lotto().size() + "개를 구매했습니다.");
+        System.out.println(lotto.count() + "개를 구매했습니다.");
         for(LottoNumbers lottoNumbers : lotto.lotto()){
             System.out.println(lottoNumbers.lottoNumbers());
         }

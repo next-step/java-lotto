@@ -15,8 +15,8 @@ class LottoStoreTest {
         Lotto lotto2 = lottoStore.buyAutoLotto(1500);
         Lotto lotto3 = lottoStore.buyAutoLotto(5000);
 
-        assertThat(lotto1.lotto().size()).isEqualTo(0);
-        assertThat(lotto2.lotto().size()).isEqualTo(1);
-        assertThat(lotto3.lotto().size()).isEqualTo(5);
+        assertThat(lotto1.count()).isEqualTo(0);
+        assertThat(lotto2.count()).isEqualTo(1);
+        assertThat(lotto3.count()).isEqualTo(5);
     }
 }
