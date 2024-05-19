@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoStore;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -24,9 +25,11 @@ public class LottoMain {
                                                     .map(Integer::parseInt)
                                                     .collect(Collectors.toList());
 
-        WinningLotto winningLotto = new WinningLotto(lotto, lastWinningNumbers);
+        WinningLotto winningLotto = new WinningLotto(lastWinningNumbers);
+        
+        LottoResult lottoResult = new LottoResult(lotto, winningLotto);
 
-        ResultView.printWinningResult(winningLotto.winningResult());
+        ResultView.printWinningResult(lottoResult);
 
     }
 }

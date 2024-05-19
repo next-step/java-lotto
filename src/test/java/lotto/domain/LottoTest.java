@@ -9,9 +9,10 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinningLottoTest {
+class LottoTest {
+
     private Lotto lotto;
-    private List<Integer> lastWinningNumbers;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
@@ -26,15 +27,16 @@ class WinningLottoTest {
                 new LottoNumbers(19, 23, 28, 31, 40, 44)  // 0개 일치
         ));
 
-        lastWinningNumbers = List.of(1, 2, 3, 4, 5, 7);
+        winningLotto = new WinningLotto(1, 2, 3, 4, 5, 7);
     }
 
     @Test
     @DisplayName("당첨번호 일치하는 번호 갯수 계산")
     void matchingWinningNumberCount(){
 
-        WinningLotto winningLotto = new WinningLotto(lotto, lastWinningNumbers);
-        Map<Integer, Integer> winningCounts = (Map<Integer, Integer>) winningLotto.winningResult().get("winningCounts");
+        lotto.match(winningLotto.lastWinningNumbers());
+
+        Map<Integer, Integer> winningCounts = lotto.match(winningLotto.lastWinningNumbers());
 
         assertThat(winningCounts.get(0)).isEqualTo(3);
         assertThat(winningCounts.get(1)).isEqualTo(2);
@@ -42,13 +44,4 @@ class WinningLottoTest {
         assertThat(winningCounts.get(4)).isEqualTo(1);
     }
 
-    @Test
-    @DisplayName("수익률 계산")
-    void calculateRateOfReturn(){
-
-        WinningLotto winningLotto = new WinningLotto(lotto, lastWinningNumbers);
-        double rateOfReturn = (double) winningLotto.winningResult().get("rateOfReturn");
-
-        assertThat(rateOfReturn).isEqualTo(6.25);
-    }
 }

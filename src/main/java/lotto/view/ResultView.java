@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoResult;
 import lotto.enums.PrizeMoney;
 
 import java.util.Map;
@@ -15,12 +16,12 @@ public class ResultView {
         }
     }
 
-    public static void printWinningResult(Map<String, Object> winningResult){
+    public static void printWinningResult(LottoResult lottoResult){
         System.out.println("  당첨 통계 ");
-        System.out.println("------------");
+        System.out.println("-------------");
 
-        Map<Integer, Integer> winningCounts = (Map<Integer, Integer>) winningResult.get("winningCounts");
-        double rateOfReturn = (double) winningResult.get("rateOfReturn");
+        Map<Integer, Integer> winningCounts = lottoResult.matchWinningNumberCount();
+        double rateOfReturn = lottoResult.rateOfReturn();
 
         for (int i = 3; i <= 6; i++) {
             int count = winningCounts.getOrDefault(i, 0);
@@ -29,5 +30,4 @@ public class ResultView {
 
         System.out.println("총 수익률은 " + rateOfReturn + "입니다.");
     }
-
 }
