@@ -2,18 +2,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoNumbersTest {
+public class LottoTest {
     @Test
     public void 로또번호는_6개다() {
-        LottoNumbers lottoNumbers = new Lotto().numbers();
-        assertThat(lottoNumbers.get().size()).isEqualTo(6);
+        Lotto lotto = new Lotto();
+        assertThat(lotto.size()).isEqualTo(6);
     }
 
     @Test
     public void 로또번호는_1부터_45이내다() {
-        LottoNumbers lottoNumbers = new Lotto().numbers();
+        Lotto lotto = new Lotto();
 
-        long inRangeCount = lottoNumbers.get().stream()
+        long inRangeCount = lotto.get().stream()
                 .map(LottoNumber::get)
                 .filter(i -> i >= 1 && i <= 45)
                 .count();
@@ -23,9 +23,9 @@ public class LottoNumbersTest {
 
     @Test
     public void 로또번호는_중복이_없다() {
-        LottoNumbers lottoNumbers = new Lotto().numbers();
+        Lotto lotto = new Lotto();
 
-        long uniqueCount = lottoNumbers.get().stream()
+        long uniqueCount = lotto.get().stream()
                 .distinct()
                 .count();
 

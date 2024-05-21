@@ -40,9 +40,15 @@ public class InputView {
     }
 
     private static String formatLotto(Lotto lotto) {
-        return lotto.numbers().get().stream()
+        return lotto.get().stream()
                 .map(LottoNumber::get)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        return scanner.nextInt();
     }
 }
