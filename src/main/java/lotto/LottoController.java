@@ -23,24 +23,18 @@ public class LottoController {
     }
 
     private List<Lotto> makeLottos(int money) {
-        List<Integer> numbers = makeLottoRandomNumbers();
-        int count = money / Lotto.PRICE;
-
-        return IntStream.range(0, count)
-                .mapToObj(value -> new Lotto(new HashSet<>(numbers.subList(0, 6))))
-                .collect(Collectors.toList());
-    }
-
-    private List<Integer> makeLottoRandomNumbers() {
         List<Integer> numbers = IntStream.range(1, 46)
                 .boxed()
                 .collect(Collectors.toList());
+        int count = money / Lotto.PRICE;
 
-        Collections.shuffle(numbers);
-
-        return numbers;
+        return IntStream.range(0, count)
+                .mapToObj(value -> {
+                    Collections.shuffle(numbers);
+                    return new Lotto(new HashSet<>(numbers.subList(0, 6)));
+                })
+                .collect(Collectors.toList());
     }
-
 
     public List<Lotto> getLottos() {
         return lottos;
