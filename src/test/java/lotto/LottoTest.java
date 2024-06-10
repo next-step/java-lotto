@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoTest {
+    
     @DisplayName("로또는 구입 금액이 있다")
     @Test
     void lottoPrice() {
