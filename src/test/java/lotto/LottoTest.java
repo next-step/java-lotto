@@ -32,6 +32,14 @@ class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(numbers));
     }
 
+    @DisplayName("당첨 로또와 2개 숫자 이하는 꽝")
+    @Test
+    void underTwoMatched(){
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(Set.of(1, 2, 9, 10, 11, 12), 13);
+        assertThat(lotto.match(winningLotto)).isEqualTo(LottoRank.NONE);
+    }
+
     @DisplayName("당첨 로또와 3개 숫자가 일치")
     @Test
     void threeMatched(){
@@ -46,5 +54,29 @@ class LottoTest {
         Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(Set.of(1, 2, 3, 4, 11, 12), 13);
         assertThat(lotto.match(winningLotto)).isEqualTo(LottoRank.FOURTH);
+    }
+
+    @DisplayName("당첨 로또와 5개 숫자가 일치")
+    @Test
+    void fiveMatched(){
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(Set.of(1, 2, 3, 4, 5, 12), 13);
+        assertThat(lotto.match(winningLotto)).isEqualTo(LottoRank.THIRD);
+    }
+
+    @DisplayName("당첨 로또와 5개 숫자와 1개 보너스 숫자가 일치")
+    @Test
+    void fiveAndBonusMatched(){
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(Set.of(1, 2, 3, 4, 5, 12), 6);
+        assertThat(lotto.match(winningLotto)).isEqualTo(LottoRank.SECOND);
+    }
+
+    @DisplayName("당첨 로또와 6개 숫자가 일치")
+    @Test
+    void sixMatched(){
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(Set.of(1, 2, 3, 4, 5, 6), 13);
+        assertThat(lotto.match(winningLotto)).isEqualTo(LottoRank.FIRST);
     }
 }

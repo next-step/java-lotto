@@ -27,13 +27,25 @@ public class Lotto {
     }
 
     public LottoRank match(WinningLotto winningLotto) {
+        int unionCnt = getUnionCnt(winningLotto);
+
+        if (unionCnt == 3) return LottoRank.FIFTH;
+        if (unionCnt == 4) return LottoRank.FOURTH;
+        if (unionCnt == 5) return matchFiveNumbers(winningLotto);
+        if (unionCnt == 6) return LottoRank.FIRST;
+
+        return LottoRank.NONE;
+    }
+
+    private int getUnionCnt(WinningLotto winningLotto) {
         Set<Integer> temp = new HashSet<>(numbers);
+
         temp.retainAll(winningLotto.getNumbers());
 
-        int unionCnt = temp.size();
-        if (unionCnt == 3) return LottoRank.FIFTH;
-        else if (unionCnt == 4) return LottoRank.FOURTH;
-        return LottoRank.NONE;
+        return temp.size();
+    }
 
+    private LottoRank matchFiveNumbers(WinningLotto winningLotto) {
+        return numbers.contains(winningLotto.getBonus()) ? LottoRank.SECOND : LottoRank.THIRD;
     }
 }
