@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoTest {
-    
+
     @DisplayName("로또는 구입 금액이 있다")
     @Test
     void lottoPrice() {
@@ -32,4 +32,19 @@ class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(numbers));
     }
 
+    @DisplayName("당첨 로또와 3개 숫자가 일치")
+    @Test
+    void threeMatched(){
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(Set.of(1, 2, 3, 10, 11, 12), 13);
+        assertThat(lotto.match(winningLotto)).isEqualTo(LottoRank.FIFTH);
+    }
+
+    @DisplayName("당첨 로또와 4개 숫자가 일치")
+    @Test
+    void fourMatched(){
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(Set.of(1, 2, 3, 4, 11, 12), 13);
+        assertThat(lotto.match(winningLotto)).isEqualTo(LottoRank.FOURTH);
+    }
 }
