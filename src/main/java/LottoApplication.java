@@ -3,6 +3,7 @@ import lotto.LottoController;
 import lotto.OutputView;
 
 import java.io.IOException;
+import java.util.Set;
 
 public class LottoApplication {
     public static void main(String[] args) throws IOException {
@@ -11,7 +12,13 @@ public class LottoApplication {
 
         while (true) {
             int money = InputView.requestUserPrice();
+
             outputView.showLottos(money);
+
+            Set<Integer> winningNumbers = InputView.requestWinningNumbers();
+            int bonus = InputView.requestBonus();
+
+            outputView.showResult(winningNumbers, bonus);
         }
     }
 }
