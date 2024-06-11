@@ -13,24 +13,18 @@ public class LottoController {
     }
 
     public void run() throws IOException {
-
         while (true) {
-            int money = InputView.requestUserPrice();
-            buy(money);
-            OutputView.showLottos(this.lottos);
-
-            Set<Integer> winningNumbers = InputView.requestWinningNumbers();
-            int bonus = InputView.requestBonus();
-
-            OutputView.showResult(play(winningNumbers, bonus));
+            buy();
+            play();
         }
     }
 
-    private void buy(int money) {
+    private void buy() throws IOException {
+        int money = InputView.requestUserPrice();
         List<Lotto> newLottos = makeLottos(money);
-
         lottos.clear();
         lottos.addAll(newLottos);
+        OutputView.showLottos(this.lottos);
     }
 
     private List<Lotto> makeLottos(int money) {
@@ -48,16 +42,15 @@ public class LottoController {
                 .collect(Collectors.toList());
     }
 
-    private LottoGameResult play(Set<Integer> winningNumbers, int bonus) {
-        Set<LottoNumber> winningLottoNumbers = winningNumbers.stream()
+    private void play() throws IOException {
+        Set<LottoNumber> winningNumbers = InputView.requestWinningNumbers().stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
-        LottoNumber bonusLottoNumber = LottoNumber.of(bonus);
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusLottoNumber);
+        LottoNumber bonus = LottoNumber.of(InputView.requestBonus());
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
         Map<LottoRank, Long> lottoRanks = getLottoRanks(winningLotto);
         double profitRatio = getProfitRatio(lottoRanks);
-
-        return new LottoGameResult(
+        LottoGameResult result = new LottoGameResult(
                 lottoRanks.getOrDefault(LottoRank.FIRST, 0L),
                 lottoRanks.getOrDefault(LottoRank.SECOND, 0L),
                 lottoRanks.getOrDefault(LottoRank.THIRD, 0L),
@@ -65,6 +58,7 @@ public class LottoController {
                 lottoRanks.getOrDefault(LottoRank.FIFTH, 0L),
                 profitRatio
         );
+        OutputView.showResult(result);
     }
 
     private double getProfitRatio(Map<LottoRank, Long> lottoRanks) {
