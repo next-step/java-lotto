@@ -3,6 +3,7 @@ import lotto.LottoController;
 import lotto.OutputView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class LottoApplication {
