@@ -1,7 +1,7 @@
 package lotto;
 
-import common.StringToLottoNumberConverter;
-import common.StringToLottoNumberSetConverter;
+import common.converter.StringToLottoNumberConverter;
+import common.converter.StringToLottoNumberSetConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

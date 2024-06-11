@@ -1,4 +1,4 @@
-package common;
+package common.converter;
 
 import lotto.LottoNumber;
 import org.junit.jupiter.params.converter.SimpleArgumentConverter;
