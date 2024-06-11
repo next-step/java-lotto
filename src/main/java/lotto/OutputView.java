@@ -1,29 +1,24 @@
 package lotto;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OutputView {
-    private final LottoController lottoController;
 
-    public OutputView(LottoController lottoController) {
-        this.lottoController = lottoController;
-    }
+    public static void showLottos(List<Lotto> lottos){
 
-    public void showLottos(int money) {
-        int count = money / Lotto.PRICE;
+        System.out.println(lottos.size() + "개를 구매했습니다.");
 
-        lottoController.buy(money);
-
-        System.out.println(count + "개를 구매했습니다.");
-
-        for (Lotto lotto : lottoController.getLottos()) {
-            System.out.println(lotto.getNumbers());
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.getNumbers()
+                    .stream()
+                    .map(LottoNumber::getNum)
+                    .collect(Collectors.toList()));
         }
     }
 
-    public void showResult(Set<Integer> winningNumbers, int bonus) {
-        LottoGameResult lottoGameResult = lottoController.play(winningNumbers, bonus);
-
+    public static void showResult(LottoGameResult lottoGameResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원)- " + lottoGameResult.getFifth() + "개");

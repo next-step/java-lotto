@@ -1,5 +1,6 @@
 package lotto;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,11 +12,21 @@ public class LottoController {
         this.lottos = new ArrayList<>();
     }
 
-    public LottoController(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public void run() throws IOException {
+
+        while (true) {
+            int money = InputView.requestUserPrice();
+            buy(money);
+            OutputView.showLottos(this.lottos);
+
+            Set<Integer> winningNumbers = InputView.requestWinningNumbers();
+            int bonus = InputView.requestBonus();
+
+            OutputView.showResult(play(winningNumbers, bonus));
+        }
     }
 
-    public void buy(int money) {
+    private void buy(int money) {
         List<Lotto> newLottos = makeLottos(money);
 
         lottos.clear();
@@ -37,11 +48,7 @@ public class LottoController {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
-    public LottoGameResult play(Set<Integer> winningNumbers, int bonus) {
+    private LottoGameResult play(Set<Integer> winningNumbers, int bonus) {
         Set<LottoNumber> winningLottoNumbers = winningNumbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
