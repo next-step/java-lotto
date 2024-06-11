@@ -23,8 +23,9 @@ public class LottoController {
     }
 
     private List<Lotto> makeLottos(int money) {
-        List<Integer> numbers = IntStream.range(1, 46)
+        List<LottoNumber> numbers = IntStream.range(1, 46)
                 .boxed()
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         int count = money / Lotto.PRICE;
 
@@ -41,7 +42,11 @@ public class LottoController {
     }
 
     public LottoGameResult play(Set<Integer> winningNumbers, int bonus) {
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
+        Set<LottoNumber> winningLottoNumbers = winningNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+        LottoNumber bonusLottoNumber = LottoNumber.of(bonus);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusLottoNumber);
         Map<LottoRank, Long> lottoRanks = getLottoRanks(winningLotto);
         double profitRatio = getProfitRatio(lottoRanks);
 

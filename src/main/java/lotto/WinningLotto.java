@@ -5,20 +5,20 @@ import java.util.Set;
 
 public class WinningLotto {
 
-    private final Set<Integer> numbers;
-    private final int bonus;
+    private final Set<LottoNumber> numbers;
+    private final LottoNumber bonus;
 
-    public WinningLotto(Set<Integer> numbers, int bonus) {
+    public WinningLotto(Set<LottoNumber> numbers, LottoNumber bonus) {
         validation(numbers, bonus);
         this.numbers = numbers;
         this.bonus = bonus;
     }
 
-    private void validation(Set<Integer> numbers, int bonus) {
+    private void validation(Set<LottoNumber> numbers, LottoNumber bonus) {
         if(numbers == null){
             throw new IllegalArgumentException("numbers cannot be null");
         }
-        Set<Integer> validSet = new HashSet<>(numbers);
+        Set<LottoNumber> validSet = new HashSet<>(numbers);
         validSet.add(bonus);
         if (validSet.size() == numbers.size()){
             throw new IllegalArgumentException("보너스 숫자와 당첨 숫자는 중복되면 안됩니다");
@@ -26,11 +26,11 @@ public class WinningLotto {
 
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    public int getBonus() {
+    public LottoNumber getBonus() {
         return bonus;
     }
 }

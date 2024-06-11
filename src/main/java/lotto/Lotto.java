@@ -9,20 +9,20 @@ public class Lotto {
     public static final int PRICE = 1000;
     public static final int NUMBERS_LENGTH = 6;
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public Lotto(Set<Integer> numbers) {
+    public Lotto(Set<LottoNumber> numbers) {
         validation(numbers);
         this.numbers = numbers;
     }
 
-    private void validation(Set<Integer> numbers) {
+    private void validation(Set<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != NUMBERS_LENGTH) {
             throw new IllegalArgumentException();
         }
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 
@@ -38,7 +38,7 @@ public class Lotto {
     }
 
     private int getUnionCnt(WinningLotto winningLotto) {
-        Set<Integer> temp = new HashSet<>(numbers);
+        Set<LottoNumber> temp = new HashSet<>(numbers);
 
         temp.retainAll(winningLotto.getNumbers());
 

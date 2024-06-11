@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
-
     private final int num;
     private static HashMap<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
@@ -42,5 +41,12 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hashCode(num);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "num=" + num +
+                '}';
     }
 }
