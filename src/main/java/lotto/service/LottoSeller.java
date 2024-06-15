@@ -1,4 +1,6 @@
-package lotto.entity;
+package lotto.service;
+
+import lotto.entity.Lotto;
 
 import java.util.Collections;
 import java.util.HashSet;

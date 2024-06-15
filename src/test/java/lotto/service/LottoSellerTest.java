@@ -1,10 +1,11 @@
-package lotto.entity;
+package lotto.service;
 
+import lotto.entity.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static lotto.entity.Lotto.*;
-import static lotto.entity.LottoSeller.LOTTO_PRICE_1000;
+import static lotto.service.LottoSeller.LOTTO_PRICE_1000;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

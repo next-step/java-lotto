@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.entity.Lotto;
+import lotto.entity.WinningLotto;
 import lotto.enums.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,8 +22,8 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(6, 5, 4, 3, 2, 1)),
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                8);
+                new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6)), 8)
+        );
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.FIRST, 1);
     }
@@ -35,8 +36,8 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(7, 5, 4, 3, 2, 1)),
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                7);
+                new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6)), 7)
+        );
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.SECOND, 1);
     }
@@ -49,8 +50,7 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(7, 5, 4, 3, 2, 1)),
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 8)),
-                6);
+                new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 8)), 6));
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.THIRD, 1);
     }
@@ -63,8 +63,7 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(9, 8, 4, 3, 2, 1)),
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
-                6);
+                new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 7)), 6));
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.FOURTH, 1);
     }
@@ -77,8 +76,7 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(12, 11, 10, 3, 2, 1)),
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
-                6);
+                new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 7)), 6));
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.FIFTH, 1);
     }
@@ -91,8 +89,7 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(6, 5, 4, 3, 2, 1)),
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(Set.of(19, 20, 21, 22, 23, 24)),
-                6);
+                new WinningLotto(new Lotto(Set.of(19, 20, 21, 22, 23, 24)), 6));
         assertThat(result.getCountByLottoRank())
                 .doesNotContainKeys(
                         LottoRank.FIRST, LottoRank.SECOND,
