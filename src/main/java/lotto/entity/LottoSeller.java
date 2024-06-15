@@ -1,7 +1,9 @@
 package lotto.entity;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,8 +24,8 @@ public class LottoSeller {
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> randomNumbers() {
-        return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+    private Set<Integer> randomNumbers() {
+        return new HashSet<>(IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.collectingAndThen(
                         Collectors.toList(),
@@ -31,6 +33,6 @@ public class LottoSeller {
                             Collections.shuffle(list);
                             return list.subList(0, LOTTO_NUMBER_COUNT);
                         }
-                ));
+                )));
     }
 }

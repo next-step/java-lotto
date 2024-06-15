@@ -1,6 +1,6 @@
 package lotto.entity;
 
-import java.util.List;
+import java.util.Set;
 
 public class Lotto {
     public static final int MIN_LOTTO_NUMBER = 1;
@@ -10,14 +10,14 @@ public class Lotto {
     public static final String LOTTO_NUMBERS_ARE_6_NUMBER = "로또번호는 6개입니다.";
     public static final String LOTTO_NUMBERS_ARE_NUMBERS_1_TO_45 = "로또번호는 1~45의 숫자입니다.";
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    private static void validate(List<Integer> numbers) {
+    private static void validate(Set<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_ARE_6_NUMBER);
         }
@@ -29,7 +29,7 @@ public class Lotto {
         });
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return numbers;
     }
 

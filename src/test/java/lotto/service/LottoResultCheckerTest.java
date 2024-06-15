@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,10 +18,10 @@ class LottoResultCheckerTest {
     void check1() {
         var result = resultChecker.checkResult(
                 List.of(
-                        new Lotto(List.of(6, 5, 4, 3, 2, 1)),
-                        new Lotto(List.of(7, 8, 9, 10, 11, 12)),
-                        new Lotto(List.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                        new Lotto(Set.of(6, 5, 4, 3, 2, 1)),
+                        new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
+                        new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
+                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
                 8);
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.FIRST, 1);
@@ -31,10 +32,10 @@ class LottoResultCheckerTest {
     void check2() {
         var result = resultChecker.checkResult(
                 List.of(
-                        new Lotto(List.of(7, 5, 4, 3, 2, 1)),
-                        new Lotto(List.of(7, 8, 9, 10, 11, 12)),
-                        new Lotto(List.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                        new Lotto(Set.of(7, 5, 4, 3, 2, 1)),
+                        new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
+                        new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
+                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
                 7);
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.SECOND, 1);
@@ -45,10 +46,10 @@ class LottoResultCheckerTest {
     void check3() {
         var result = resultChecker.checkResult(
                 List.of(
-                        new Lotto(List.of(7, 5, 4, 3, 2, 1)),
-                        new Lotto(List.of(7, 8, 9, 10, 11, 12)),
-                        new Lotto(List.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(List.of(1, 2, 3, 4, 5, 8)),
+                        new Lotto(Set.of(7, 5, 4, 3, 2, 1)),
+                        new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
+                        new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
+                new Lotto(Set.of(1, 2, 3, 4, 5, 8)),
                 6);
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.THIRD, 1);
@@ -59,10 +60,10 @@ class LottoResultCheckerTest {
     void check4() {
         var result = resultChecker.checkResult(
                 List.of(
-                        new Lotto(List.of(9, 8, 4, 3, 2, 1)),
-                        new Lotto(List.of(7, 8, 9, 10, 11, 12)),
-                        new Lotto(List.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(List.of(1, 2, 3, 4, 5, 7)),
+                        new Lotto(Set.of(9, 8, 4, 3, 2, 1)),
+                        new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
+                        new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
+                new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
                 6);
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.FOURTH, 1);
@@ -73,10 +74,10 @@ class LottoResultCheckerTest {
     void check5() {
         var result = resultChecker.checkResult(
                 List.of(
-                        new Lotto(List.of(12, 11, 10, 3, 2, 1)),
-                        new Lotto(List.of(7, 8, 9, 10, 11, 12)),
-                        new Lotto(List.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(List.of(1, 2, 3, 4, 5, 7)),
+                        new Lotto(Set.of(12, 11, 10, 3, 2, 1)),
+                        new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
+                        new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
+                new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
                 6);
         assertThat(result.getCountByLottoRank())
                 .containsEntry(LottoRank.FIFTH, 1);
@@ -87,10 +88,10 @@ class LottoResultCheckerTest {
     void check6() {
         var result = resultChecker.checkResult(
                 List.of(
-                        new Lotto(List.of(6, 5, 4, 3, 2, 1)),
-                        new Lotto(List.of(7, 8, 9, 10, 11, 12)),
-                        new Lotto(List.of(13, 14, 15, 16, 17, 18))),
-                new Lotto(List.of(19, 20, 21, 22, 23, 24)),
+                        new Lotto(Set.of(6, 5, 4, 3, 2, 1)),
+                        new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
+                        new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
+                new Lotto(Set.of(19, 20, 21, 22, 23, 24)),
                 6);
         assertThat(result.getCountByLottoRank())
                 .doesNotContainKeys(
