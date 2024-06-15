@@ -8,13 +8,8 @@ import java.util.Scanner;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class LottoInputProcessor {
+public class LottoInputView {
     private final Scanner scan = new Scanner(System.in);
-    private final LottoViewer viewer;
-
-    public LottoInputProcessor(LottoViewer viewer) {
-        this.viewer = viewer;
-    }
 
     private Object inputProcess(Supplier<?> supplier) {
         while (true) {
@@ -25,10 +20,10 @@ public class LottoInputProcessor {
             }
         }
     }
-    
+
     public int inputMoney() {
         return (int) inputProcess(() -> {
-            viewer.printInputMoney();
+            System.out.println("구입금액을 입력해 주세요.");
             return Integer.parseInt(scan.nextLine());
         });
     }
@@ -42,7 +37,7 @@ public class LottoInputProcessor {
     }
 
     private Lotto inputWinningLotto0() {
-        viewer.inputWinningNumber();
+        System.out.println("지난 주 당첨번호를 입력해 주세요.");
         var winningNumbers = Arrays.stream(scan.nextLine().split(","))
                 .map(s -> {
                     var result = s.trim();
@@ -54,7 +49,7 @@ public class LottoInputProcessor {
     }
 
     private int inputBonusNumber() {
-        viewer.inputBonusNumber();
+        System.out.println("보너스 볼을 입력해 주세요.");
         return Integer.parseInt(scan.nextLine());
     }
 }

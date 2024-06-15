@@ -1,24 +1,24 @@
 package lotto.service;
 
-import lotto.view.LottoInputProcessor;
-import lotto.view.LottoViewer;
+import lotto.view.LottoInputView;
+import lotto.view.LottoResultView;
 
 public class RottoRunner {
     private final LottoSeller seller = new LottoSeller();
     private final LottoResultChecker resultChecker = new LottoResultChecker();
 
-    private final LottoViewer viewer = new LottoViewer();
-    private final LottoInputProcessor inputProcessor = new LottoInputProcessor(viewer);
+    private final LottoInputView inputView = new LottoInputView();
+    private final LottoResultView resultView = new LottoResultView();
 
     public void run() {
-        var money = inputProcessor.inputMoney();
+        var money = inputView.inputMoney();
         var lottos = seller.buyLotto(money);
-        viewer.printLottos(lottos);
+        resultView.printLottos(lottos);
 
-        var winningLotto = inputProcessor.inputWinningLotto();
+        var winningLotto = inputView.inputWinningLotto();
 
         var result = resultChecker.checkResult(lottos, winningLotto);
         var rateOfReturn = (double) result.getAllReward() / money;
-        viewer.printResult(result, rateOfReturn);
+        resultView.printResult(result, rateOfReturn);
     }
 }

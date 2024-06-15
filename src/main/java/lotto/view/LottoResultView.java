@@ -8,22 +8,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class LottoViewer {
-
-    public void printInputMoney() {
-        System.out.println("구입금액을 입력해 주세요.");
-    }
-
+public class LottoResultView {
     public void printLottos(List<Lotto> lottos) {
         lottos.forEach(System.out::println);
-    }
-
-    public void inputWinningNumber() {
-        System.out.println("지난 주 당첨번호를 입력해 주세요.");
-    }
-
-    public void inputBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
     }
 
     public void printResult(LottoResult result, double rateOfReturn) {
