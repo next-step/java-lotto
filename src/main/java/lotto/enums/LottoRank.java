@@ -6,7 +6,7 @@ public enum LottoRank {
     THIRD(5, 1500000),
     FOURTH(4, 50000),
     FIFTH(3, 5000),
-    NO_RANK(-1, -1);
+    NO_RANK(0, 0);
 
     private final int matchCount;
     private final int reward;
@@ -36,5 +36,17 @@ public enum LottoRank {
         }
 
         return THIRD;
+    }
+
+    public String getDescription() {
+        if (SECOND == this) {
+            return String.format("%s개 일치, 보너스 볼 일치 (%s원)", matchCount, reward);
+        }
+
+        return String.format("%s개 일치 (%s원)", matchCount, reward);
+    }
+
+    public int getReward() {
+        return reward;
     }
 }

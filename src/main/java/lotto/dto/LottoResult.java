@@ -2,7 +2,6 @@ package lotto.dto;
 
 import lotto.enums.LottoRank;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
@@ -12,7 +11,14 @@ public class LottoResult {
         this.countByLottoRank = countByLottoRank;
     }
 
-    public Map<LottoRank, Integer> getCountByLottoRank() {
-        return new HashMap<>(countByLottoRank);
+    public int getCountByRank(LottoRank rank) {
+        return countByLottoRank.getOrDefault(rank, 0);
+    }
+
+    public int getAllReward() {
+        return countByLottoRank.entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().getReward() * entry.getValue())
+                .sum();
     }
 }

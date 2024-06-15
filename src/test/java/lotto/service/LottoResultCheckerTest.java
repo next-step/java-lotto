@@ -2,13 +2,13 @@ package lotto.service;
 
 import lotto.entity.Lotto;
 import lotto.entity.WinningLotto;
-import lotto.enums.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Set;
 
+import static lotto.enums.LottoRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultCheckerTest {
@@ -24,8 +24,10 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
                 new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6)), 8)
         );
-        assertThat(result.getCountByLottoRank())
-                .containsEntry(LottoRank.FIRST, 1);
+        assertThat(result.getCountByRank(FIRST))
+                .isEqualTo(1);
+        assertThat(result.getAllReward())
+                .isEqualTo(FIRST.getReward());
     }
 
     @Test
@@ -38,8 +40,10 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
                 new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6)), 7)
         );
-        assertThat(result.getCountByLottoRank())
-                .containsEntry(LottoRank.SECOND, 1);
+        assertThat(result.getCountByRank(SECOND))
+                .isEqualTo(1);
+        assertThat(result.getAllReward())
+                .isEqualTo(SECOND.getReward());
     }
 
     @Test
@@ -51,8 +55,10 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
                 new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 8)), 6));
-        assertThat(result.getCountByLottoRank())
-                .containsEntry(LottoRank.THIRD, 1);
+        assertThat(result.getCountByRank(THIRD))
+                .isEqualTo(1);
+        assertThat(result.getAllReward())
+                .isEqualTo(THIRD.getReward());
     }
 
     @Test
@@ -64,8 +70,10 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
                 new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 7)), 6));
-        assertThat(result.getCountByLottoRank())
-                .containsEntry(LottoRank.FOURTH, 1);
+        assertThat(result.getCountByRank(FOURTH))
+                .isEqualTo(1);
+        assertThat(result.getAllReward())
+                .isEqualTo(FOURTH.getReward());
     }
 
     @Test
@@ -77,8 +85,10 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
                 new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 7)), 6));
-        assertThat(result.getCountByLottoRank())
-                .containsEntry(LottoRank.FIFTH, 1);
+        assertThat(result.getCountByRank(FIFTH))
+                .isEqualTo(1);
+        assertThat(result.getAllReward())
+                .isEqualTo(FIFTH.getReward());
     }
 
     @Test
@@ -90,11 +100,18 @@ class LottoResultCheckerTest {
                         new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
                         new Lotto(Set.of(13, 14, 15, 16, 17, 18))),
                 new WinningLotto(new Lotto(Set.of(19, 20, 21, 22, 23, 24)), 6));
-        assertThat(result.getCountByLottoRank())
-                .doesNotContainKeys(
-                        LottoRank.FIRST, LottoRank.SECOND,
-                        LottoRank.THIRD, LottoRank.FOURTH,
-                        LottoRank.FIFTH
-                );
+        assertThat(result.getCountByRank(FIRST))
+                .isEqualTo(0);
+        assertThat(result.getCountByRank(SECOND))
+                .isEqualTo(0);
+        assertThat(result.getCountByRank(THIRD))
+                .isEqualTo(0);
+        assertThat(result.getCountByRank(FOURTH))
+                .isEqualTo(0);
+        assertThat(result.getCountByRank(FIFTH))
+                .isEqualTo(0);
+        assertThat(result.getAllReward())
+                .isEqualTo(0);
+
     }
 }
