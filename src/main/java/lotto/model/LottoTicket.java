@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
+    public static final int LOTTO_TICKET_PRICE = 1000;
     public static final int LOTTO_NUBERS_SIZE = 6;
     private final Set<LottoNumber> lottoNumbers;
 

@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicketMaker {
-    public static List<LottoTicket> purchase(int ticketCount) {
+    public static List<LottoTicket> purchase(int payAmount) {
+        int ticketCount = payAmount / LottoTicket.LOTTO_TICKET_PRICE;
         return IntStream.range(0, ticketCount)
                 .mapToObj(i -> new LottoTicket(generateRandomNumbers()))
                 .collect(Collectors.toList());
@@ -24,4 +25,6 @@ public class LottoTicketMaker {
                             return list.stream().limit(LottoTicket.LOTTO_NUBERS_SIZE).collect(Collectors.toList());
                         }));
     }
+
+
 }
