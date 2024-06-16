@@ -1,18 +1,25 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoTicketMaker {
-    public static List<LottoTicket> purchase(int payAmount) {
+public class LottoTicketBundle {
+    private final List<LottoTicket> lottoTickets;
+
+    public LottoTicketBundle(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
+
+    public static LottoTicketBundle create(int payAmount) {
         int ticketCount = payAmount / LottoTicket.LOTTO_TICKET_PRICE;
-        return IntStream.range(0, ticketCount)
+        return new LottoTicketBundle(
+                IntStream.range(0, ticketCount)
                 .mapToObj(i -> new LottoTicket(generateRandomNumbers()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+        );
     }
 
     private static List<Integer> generateRandomNumbers() {
@@ -26,5 +33,7 @@ public class LottoTicketMaker {
                         }));
     }
 
-
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
 }
