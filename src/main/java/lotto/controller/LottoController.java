@@ -18,11 +18,7 @@ public class LottoController {
         int manualLottoTicketCount = inputView.inputManualLottoTicketCount();
 
         inputView.printManualLottoNumbers();
-        LottoTicketBundle manualLottoTickets = new LottoTicketBundle(
-                IntStream.range(0, manualLottoTicketCount)
-                .mapToObj(i -> new LottoTicket(inputView.inputManualLottoNumbers()))
-                .collect(Collectors.toList())
-        );
+        LottoTicketBundle manualLottoTickets = inputView.inputManualLottoNumbers(manualLottoTicketCount);
 
         int autoLottoTicketCount = (payAmount-(1000*manualLottoTickets.getLottoTickets().size()))/1000;
         LottoTicketBundle autoLottoTickets = LottoTicketBundle.create(autoLottoTicketCount*1000);
