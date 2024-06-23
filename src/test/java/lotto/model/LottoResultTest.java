@@ -18,14 +18,25 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("총 수익률을 반환한다.")
+    @DisplayName("당첨 통계에 낙점된 경우를 추가한다.")
     public void test2() {
         var lottoResult = new LottoResult();
-        var totalTicketCost = 14000; // 티켓 14개 구입
 
+        lottoResult.addRank(LottoRank.BAD);
+        assertThat(lottoResult.getCount(LottoRank.BAD))
+                .isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("총 수익률을 반환한다.")
+    public void test3() {
+        var lottoResult = new LottoResult();
+
+        // 티켓 2개 구입
         lottoResult.addRank(LottoRank.THREE);
+        lottoResult.addRank(LottoRank.BAD);
 
-        assertThat(lottoResult.getProfitRate(totalTicketCost))
-                .isEqualTo(0.35);
+        assertThat(lottoResult.getProfitRate())
+                .isEqualTo(2.50);
     }
 }

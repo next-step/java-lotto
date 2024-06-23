@@ -1,10 +1,11 @@
 package lotto.model;
 
 public enum LottoRank {
+    BAD(0, 0),
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
-    FIVE_BONUS(6, 30000000),
+    FIVE_BONUS(5, 30000000),
     SIX(6, 2000000000);
 
     private final int matchCount;
@@ -24,7 +25,7 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int matchCount, boolean hasBonus) {
-        if (matchCount == 6 && hasBonus) {
+        if (matchCount == 5 && hasBonus) {
             return FIVE_BONUS;
         }
         for (LottoRank rank : values()) {
@@ -32,6 +33,6 @@ public enum LottoRank {
                 return rank;
             }
         }
-        throw new IllegalArgumentException("일치하는 등수가 없습니다.");
+        return BAD;
     }
 }

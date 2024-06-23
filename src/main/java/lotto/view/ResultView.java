@@ -20,8 +20,18 @@ public class ResultView {
     public void printLottoResult(LottoResult lottoResult, int payAmount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Arrays.stream(LottoRank.values())
-                .forEach(rank -> System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount(), rank.getWinningPrize(), lottoResult.getCount(rank)));
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n", lottoResult.getProfitRate(payAmount));
+
+        Arrays.stream(LottoRank.values()).forEach(rank -> {
+            String message = buildRankMessage(rank, lottoResult.getCount(rank));
+            System.out.println(message);
+        });
+
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n", lottoResult.getProfitRate());
+    }
+
+    private String buildRankMessage(LottoRank rank, int count) {
+        String messageFormat = "%d개 일치%s (%d원)- %d개";
+        String bonusPart = rank == LottoRank.FIVE_BONUS ? ", 보너스 볼 일치" : "";
+        return String.format(messageFormat, rank.getMatchCount(), bonusPart, rank.getWinningPrize(), count);
     }
 }

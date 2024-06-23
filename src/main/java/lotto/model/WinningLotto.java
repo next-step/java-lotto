@@ -10,11 +10,11 @@ public class WinningLotto {
     }
 
     public int match(LottoTicket target) {
-        int matchCount = winningLotto.countMatchingNumbers(winningLotto);
+        int matchCount = winningLotto.countMatchingNumbers(target);
         boolean hasBonus = target.getLottoNumbers().contains(bonusNumber);
 
         if (matchCount == 5 && hasBonus) {
-            return 6;
+            return 5;
         }
 
         return matchCount;
