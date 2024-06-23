@@ -26,13 +26,14 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public int match(LottoTicket otherNumbers) {
-        int matchCount = 0;
-        for (LottoNumber number : lottoNumbers) {
-            if (otherNumbers.getLottoNumbers().contains(number)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
+    public int countMatchingNumbers(LottoTicket otherNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(otherNumbers::contains)
+                .count();
     }
+
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
 }

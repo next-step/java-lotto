@@ -4,7 +4,7 @@ public enum LottoRank {
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
-    FIVE_BONUS(5, 30000000),
+    FIVE_BONUS(6, 30000000),
     SIX(6, 2000000000);
 
     private final int matchCount;
@@ -23,7 +23,10 @@ public enum LottoRank {
         return winningPrize;
     }
 
-    public static LottoRank valueOf(int matchCount) {
+    public static LottoRank valueOf(int matchCount, boolean hasBonus) {
+        if (matchCount == 6 && hasBonus) {
+            return FIVE_BONUS;
+        }
         for (LottoRank rank : values()) {
             if (rank.matchCount == matchCount) {
                 return rank;

@@ -16,6 +16,7 @@ class LottoResultTest {
         assertThat(lottoResult.getCount(LottoRank.THREE))
                 .isEqualTo(1);
     }
+
     @Test
     @DisplayName("총 수익률을 반환한다.")
     public void test2() {
@@ -27,5 +28,4 @@ class LottoResultTest {
         assertThat(lottoResult.getProfitRate(totalTicketCost))
                 .isEqualTo(0.35);
     }
-
 }

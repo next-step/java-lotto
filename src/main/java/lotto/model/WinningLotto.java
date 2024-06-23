@@ -10,10 +10,17 @@ public class WinningLotto {
     }
 
     public int match(LottoTicket target) {
-        int matchCount = winningLotto.match(winningLotto);
-        if (winningLotto.getLottoNumbers().contains(bonusNumber)) {
-            matchCount++;
+        int matchCount = winningLotto.countMatchingNumbers(winningLotto);
+        boolean hasBonus = target.getLottoNumbers().contains(bonusNumber);
+
+        if (matchCount == 5 && hasBonus) {
+            return 6;
         }
+
         return matchCount;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }
