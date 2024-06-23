@@ -5,12 +5,18 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoTicketBundle {
     private final List<LottoTicket> lottoTickets;
 
     public LottoTicketBundle(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public LottoTicketBundle(LottoTicketBundle manualLottoTickets, LottoTicketBundle autoLottoTickets) {
+        this(Stream.concat(manualLottoTickets.getLottoTickets().stream(), autoLottoTickets.getLottoTickets().stream())
+                .collect(Collectors.toList()));
     }
 
     public static LottoTicketBundle create(int payAmount) {

@@ -1,17 +1,17 @@
 package lotto.controller;
 
-import lotto.model.LottoGame;
-import lotto.model.LottoTicket;
-import lotto.model.LottoTicketBundle;
+import lotto.model.*;
+import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoManager {
+public class LottoController {
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
+    private final LottoService lottoService = new LottoService();
 
     public void run() {
         int payAmount = inputView.inputPayAmount();
@@ -25,12 +25,12 @@ public class LottoManager {
         );
 
         int autoLottoTicketCount = (payAmount-(1000*manualLottoTickets.getLottoTickets().size()))/1000;
+        LottoTicketBundle autoLottoTickets = LottoTicketBundle.create(autoLottoTicketCount*1000);
 
-        LottoGame lottoGame = new LottoGame(manualLottoTickets, LottoTicketBundle.create(autoLottoTicketCount*1000));
-
+        LottoTicketBundle userLottoTickets = new LottoTicketBundle(manualLottoTickets, autoLottoTickets);
         resultView.printLottoTicketCounts(manualLottoTicketCount, autoLottoTicketCount);
-        resultView.printUserLottoTickets(lottoGame);
-        inputView.inputWinningNumbers();
-        inputView.inputBonusNumber();
+        resultView.printUserLottoTickets(userLottoTickets);
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(inputView.inputWinningNumbers()), new LottoNumber(inputView.inputBonusNumber()));
+        resultView.printLottoResult(lottoService.calculateResult(userLottoTickets, winningLotto), payAmount);
     }
 }
