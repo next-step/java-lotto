@@ -21,10 +21,12 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Arrays.stream(LottoRank.values()).forEach(rank -> {
-            String message = buildRankMessage(rank, lottoResult.getCount(rank));
-            System.out.println(message);
-        });
+        Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LottoRank.BAD)
+                .forEach(rank -> {
+                    String message = buildRankMessage(rank, lottoResult.getCount(rank));
+                    System.out.println(message);
+                });
 
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n", lottoResult.getProfitRate());
     }
