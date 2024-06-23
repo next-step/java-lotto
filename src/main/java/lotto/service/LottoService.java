@@ -11,4 +11,10 @@ public class LottoService {
         }
         return lottoResult;
     }
+
+    public LottoTicketBundle createAutoLottoTickets(int payAmount, int manualLottoTicketCount) {
+        int autoLottoTicketCount
+                = (payAmount - (LottoTicket.LOTTO_TICKET_PRICE * manualLottoTicketCount)) / LottoTicket.LOTTO_TICKET_PRICE;
+        return LottoTicketBundle.create(autoLottoTicketCount * LottoTicket.LOTTO_TICKET_PRICE);
+    }
 }
