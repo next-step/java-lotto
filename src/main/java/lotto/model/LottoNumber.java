@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Objects;
+
 public class LottoNumber {
     public static final int LOTTO_NUBER_MIN = 1;
     public static final int LOTTO_NUBER_MAX = 45;
@@ -14,6 +16,19 @@ public class LottoNumber {
 
     public static LottoNumber of(int number) {
         return new LottoNumber(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(number);
     }
 
     @Override
