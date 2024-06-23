@@ -30,5 +30,7 @@ public class LottoManager {
 
         resultView.printLottoTicketCounts(manualLottoTicketCount, autoLottoTicketCount);
         resultView.printUserLottoTickets(lottoGame);
+        inputView.inputWinningNumbers();
+        inputView.inputBonusNumber();
     }
 }

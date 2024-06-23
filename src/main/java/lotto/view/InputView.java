@@ -29,4 +29,17 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public List<Integer> inputWinningNumbers() {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        return Arrays.stream(scanner.nextLine().split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
 }
