@@ -15,7 +15,7 @@ public class LottoTicket {
                 .collect(Collectors.toSet()));
     }
 
-    public LottoTicket(Set<LottoNumber> lottoNumbers) {
+    protected LottoTicket(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUBERS_SIZE) {
             throw new IllegalArgumentException("로또 티켓의 로또 숫자는 6개이어야 합니다.");
         }
@@ -24,5 +24,15 @@ public class LottoTicket {
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int match(LottoTicket otherNumbers) {
+        int matchCount = 0;
+        for (LottoNumber number : lottoNumbers) {
+            if (otherNumbers.getLottoNumbers().contains(number)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
     }
 }
