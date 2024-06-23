@@ -20,4 +20,11 @@ public class LottoResult {
     public int getCount(LottoRank rank) {
         return resultMap.get(rank);
     }
+
+    public double getProfitRate(int totalTicketCost) {
+        int totalWinningPrize = resultMap.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getWinningPrize() * entry.getValue())
+                .sum();
+        return Math.floor((double) totalWinningPrize / totalTicketCost * 100) / 100;
+    }
 }
