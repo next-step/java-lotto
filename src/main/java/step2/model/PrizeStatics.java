@@ -1,5 +1,8 @@
 package step2.model;
 
+import step2.enums.ExceptionMessage;
+import step2.enums.LottoPrize;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,5 +22,22 @@ public class PrizeStatics {
 
     public Map<Integer, Integer> getPrizes() {
         return prizes;
+    }
+
+    //현재 총 당첨금액 가져오기
+    public int prizeMoney() {
+        checkPrize();
+        int prizeMoney = 0;
+        for (Map.Entry<Integer, Integer> entry : prizes.entrySet()) {
+            prizeMoney += LottoPrize.calculateTotalPrize(entry.getKey(), entry.getValue());
+        }
+        return prizeMoney;
+    }
+
+    //로또 당첨번호를 맞춰봤는지 체크한다.
+    private void checkPrize() {
+        if (prizes.isEmpty()) {
+            throw new IllegalArgumentException(ExceptionMessage.NOT_MATCH_PRIZE.message());
+        }
     }
 }

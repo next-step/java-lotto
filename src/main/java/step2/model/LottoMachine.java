@@ -14,8 +14,7 @@ public class LottoMachine {
 
     //로또 구매
     public Lotto buyLotto(int money) {
-        int num = receiveMoney(money);
-        return getLotto(num);
+        return getLotto(receiveMoney(money), money);
     }
 
     //로또 장수 가져오기
@@ -25,9 +24,9 @@ public class LottoMachine {
     }
 
     //로또 가져오기
-    public Lotto getLotto(int num) {
+    public Lotto getLotto(int num, int money) {
         checkMinus(num);
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(money);
         for (int i = 0; i < num; i++) {
             lotto.addLotto(outputLotto());
         }

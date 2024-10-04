@@ -23,5 +23,6 @@ public class LottoMain {
         lotto.checkPrizeNum(prizeNum); //번호 맞춰보기
 
         resultView.lottoPrizeView(lotto);
+        resultView.lottoRateReturn(lotto);
     }
 }

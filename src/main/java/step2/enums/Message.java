@@ -9,7 +9,8 @@ public enum Message {
     RESULT_THREE_CORRECT("3개 일치 (5000원)- {count}개"),
     RESULT_FOUR_CORRECT("4개 일치 (50000원)- {count}개"),
     RESULT_FIVE_CORRECT("5개 일치 (1500000원)- {count}개"),
-    RESULT_SIX_CORRECT("6개 일치 (2000000000원)- {count}개");
+    RESULT_SIX_CORRECT("6개 일치 (2000000000원)- {count}개"),
+    RESULT_RATE_RETURN("총 수익률은 {rate}입니다.");
 
     Message(String message) {
         this.message = message;
