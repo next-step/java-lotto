@@ -1,7 +1,5 @@
 package step2.enums;
 
-import step2.enums.ExceptionMessage;
-
 import java.util.Arrays;
 
 public enum PrizeMessage {
