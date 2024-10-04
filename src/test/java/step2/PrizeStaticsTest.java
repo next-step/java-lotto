@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 - 일치하는 Prize가 없을 시 새로 생성한다.
 - 일치하는 Prize가 있을 시 카운트를 올린다.
 - matchCount가 일치한 로또 개수를 가져온다.
+- 수익률을 가져온다.
 */
 public class PrizeStaticsTest {
 
