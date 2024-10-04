@@ -1,8 +1,7 @@
-package step2;
+package step2.util;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.util.DoubleUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

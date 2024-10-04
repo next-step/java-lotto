@@ -1,10 +1,8 @@
-package step2;
+package step2.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.enums.ExceptionMessage;
-import step2.model.Lotto;
-import step2.model.LottoMachine;
 
 import java.util.List;
 
