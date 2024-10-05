@@ -3,9 +3,8 @@ package stringcalculator.domain.operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringcalculator.exception.StringCalculatorIllegalArgumentException;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 class OperatorFactoryTest {
@@ -31,7 +30,6 @@ class OperatorFactoryTest {
     @ParameterizedTest
     @ValueSource(strings = {"^", "&", "(", ")"})
     void operationNotFound(String input) {
-        assertThatThrownBy(() -> OperatorFactory.getOperation(input))
-                .isInstanceOf(StringCalculatorIllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> OperatorFactory.getOperation(input));
     }
 }

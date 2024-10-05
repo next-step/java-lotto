@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import stringcalculator.domain.operator.Division;
-import stringcalculator.exception.StringCalculatorIllegalArgumentException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class DivisionTest {
     private Division division;
@@ -30,14 +29,12 @@ class DivisionTest {
     @DisplayName("두 수를 나눌 때 정수로 나누어 떨어지지 않으면 예외가 발생한다.")
     @Test
     void calculateThrowException() {
-        assertThatThrownBy(() -> division.calculate(4, 3))
-                .isInstanceOf(StringCalculatorIllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> division.calculate(4, 3));
     }
     @DisplayName("0으로 나누려 하면 예외가 발생한다.")
     @Test
     void calculateThrowExceptionWithDivideZero() {
-        assertThatThrownBy(() -> division.calculate(4, 0))
-                .isInstanceOf(StringCalculatorIllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> division.calculate(4, 0));
 
     }
 

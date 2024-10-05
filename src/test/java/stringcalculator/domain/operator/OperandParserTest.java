@@ -5,10 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringcalculator.exception.StringCalculatorIllegalArgumentException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class OperandParserTest {
 
@@ -26,15 +25,13 @@ class OperandParserTest {
     @ParameterizedTest
     @NullAndEmptySource
     void parseWithEmptyString(String input) {
-        assertThatThrownBy(() -> OperandParser.parse(input))
-                .isInstanceOf(StringCalculatorIllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> OperandParser.parse(input));
     }
 
     @DisplayName("숫자가 아닌 문자열 변환 시 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"a", "b", "*"})
     void parseWithNoNumericString(String input) {
-        assertThatThrownBy(() -> OperandParser.parse(input))
-                .isInstanceOf(StringCalculatorIllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> OperandParser.parse(input));
     }
 }
