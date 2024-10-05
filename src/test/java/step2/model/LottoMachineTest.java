@@ -2,7 +2,6 @@ package step2.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.enums.ExceptionMessage;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class LottoMachineTest {
 
         assertThatThrownBy(() -> lottoMachine.receiveMoney(money))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ExceptionMessage.MINIMUM_LOTTO_PRICE.message());
+                .hasMessage("로또의 가격은 1000원입니다.");
     }
 
     @DisplayName("로또 변호 6자리를 랜덤으로 출력한다.")
@@ -54,7 +53,7 @@ public class LottoMachineTest {
     @Test
     void getLottoTest() {
         LottoMachine lottoMachine = new LottoMachine();
-        Lotto lotto = lottoMachine.getLotto(3, 3000);
+        Lotto lotto = lottoMachine.getLotto(3);
 
         assertThat(lotto.getLottos().size()).isEqualTo(3);
     }
@@ -64,9 +63,9 @@ public class LottoMachineTest {
     void getLottoThrowExceptionTest() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        assertThatThrownBy(() -> lottoMachine.getLotto(-1, 1000))
+        assertThatThrownBy(() -> lottoMachine.getLotto(-1))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ExceptionMessage.MINIMUM_LOTTO_NUM.message());
+                .hasMessage("로또는 최소 1장이상부터 생성이 가능합니다.");
     }
 
 }
