@@ -56,8 +56,15 @@ class StringCalculatorTest {
     }
 
     @Test
-    void 숫자_0으로_나눌때_예외처리(){
+    void 숫자_0으로_나눌때_예외처리() {
         String value = "4 / 0";
+        assertThatThrownBy(() -> StringCalculator.run(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 사칙연산자_검증_테스트() {
+        String value = "4 & 0";
         assertThatThrownBy(() -> StringCalculator.run(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }

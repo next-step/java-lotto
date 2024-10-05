@@ -5,9 +5,9 @@ public class StringCalculator {
     private final static String MINUS = "-";
     private final static String MULTIPLE = "*";
     private final static String DIVISION = "/";
-
     private static final String INCORRECT_VALUE_ERROR_MESSAGE = "입력값이 비었거나 null 입니다.";
     private static final String INCORRECT_DIVISION_ERROR_MESSAGE = "0으로 나눌수 없습니다.";
+    private static final String INCORRECT_OPERATOR_ERROR_MESSAGE = "올바른 사칙연산자가 아닙니다.";
 
     public StringCalculator() {
     }
@@ -26,6 +26,7 @@ public class StringCalculator {
     }
 
     private static int calculate(final String operator, int number, int number2) {
+        validateOperator(operator);
         if (operator.equals(PLUS)) {
             return sum(number, number2);
         }
@@ -35,10 +36,7 @@ public class StringCalculator {
         if (operator.equals(MULTIPLE)) {
             return multiple(number, number2);
         }
-        if (operator.equals(DIVISION)) {
-            return divide(number, number2);
-        }
-        return 0;
+        return divide(number, number2);
     }
 
     private static int sum(final int num1, final int num2) {
@@ -63,6 +61,12 @@ public class StringCalculator {
     private static void validateIsBlank(final String value) {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException(INCORRECT_VALUE_ERROR_MESSAGE);
+        }
+    }
+
+    private static void validateOperator(final String value) {
+        if (!value.equals(PLUS) && !value.equals(MINUS) && !value.equals(MULTIPLE) && !value.equals(DIVISION)) {
+            throw new IllegalArgumentException(INCORRECT_OPERATOR_ERROR_MESSAGE);
         }
     }
 }
