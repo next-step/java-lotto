@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -53,7 +54,7 @@ public class LottoConfirmationTest {
     @Test
     void checkLottoNumTest() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
 
         LottoConfirmation lottoConfirmation = new LottoConfirmation();
 
@@ -77,7 +78,7 @@ public class LottoConfirmationTest {
     @Test
     void rateOfReturnTest() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
 
         LottoConfirmation lottoConfirmation = new LottoConfirmation();
 
@@ -90,7 +91,7 @@ public class LottoConfirmationTest {
     @Test
     void rateOfReturnThrowExceptionTest() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
 
         LottoConfirmation lottoConfirmation = new LottoConfirmation();
 

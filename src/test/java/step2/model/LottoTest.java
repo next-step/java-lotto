@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,13 +18,13 @@ public class LottoTest {
     @Test
     void addLottoNumTest() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lotto.addLotto(Arrays.asList(7, 8, 9, 10, 11, 12));
+        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(List.of(7, 8, 9, 10, 11, 12));
 
         assertThat(lotto.getLottos())
                 .containsExactly(
-                        Arrays.asList(1, 2, 3, 4, 5, 6),
-                        Arrays.asList(7, 8, 9, 10, 11, 12)
+                        List.of(1, 2, 3, 4, 5, 6),
+                        List.of(7, 8, 9, 10, 11, 12)
                 );
     }
 
