@@ -54,4 +54,11 @@ class StringCalculatorTest {
         int result = StringCalculator.run(value);
         assertThat(result).isEqualTo(10);
     }
+
+    @Test
+    void 숫자_0으로_나눌때_예외처리(){
+        String value = "4 / 0";
+        assertThatThrownBy(() -> StringCalculator.run(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
