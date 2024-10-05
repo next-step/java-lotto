@@ -1,6 +1,7 @@
 package step2;
 
 import step2.model.Lotto;
+import step2.model.LottoConfirmation;
 import step2.model.LottoMachine;
 import step2.uiView.InputView;
 import step2.uiView.ResultView;
@@ -20,9 +21,10 @@ public class LottoMain {
 
         String prizeNum = inputView.inputPrizeNum(); //당첨번호 입력
 
-        lotto.checkPrizeNum(prizeNum); //번호 맞춰보기
+        LottoConfirmation lottoConfirmation = new LottoConfirmation();
+        lottoConfirmation.checkPrizeNum(lotto, prizeNum); //번호 맞춰보기
 
-        resultView.lottoPrizeView(lotto);
-        resultView.lottoRateReturn(lotto);
+        resultView.lottoPrizeView(lottoConfirmation);
+        resultView.lottoRateReturn(lottoConfirmation);
     }
 }

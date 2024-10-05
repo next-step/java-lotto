@@ -14,6 +14,7 @@ public enum PrizeMessage {
         this.message = message;
     }
 
+    private final static String NOT_MATCH_COUNT = "일치하는 당첨개수가 없습니다.";
     private final static String LOTTO_COUNT = "{count}";
     private final int matchCount;
     private final String message;
@@ -32,6 +33,6 @@ public enum PrizeMessage {
                 .filter(prize -> prize.getMatchCount() == matchCount)
                 .map(prize -> prize.message.replace(LOTTO_COUNT, String.valueOf(count)))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.NOT_MATCH_COUNT.message()));
+                .orElseThrow(() -> new IllegalArgumentException(NOT_MATCH_COUNT));
     }
 }

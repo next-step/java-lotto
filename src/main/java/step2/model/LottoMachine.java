@@ -1,20 +1,20 @@
 package step2.model;
 
-import step2.enums.ExceptionMessage;
 import step2.util.RandomUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoMachine {
+
+    private final static String MINIMUM_LOTTO_NUM = "로또는 최소 1장이상부터 생성이 가능합니다.";
+    private final static String MINIMUM_LOTTO_PRICE = "로또의 가격은 1000원입니다.";
 
     private static final int LOTTO_PRICE = 1000; //로또 가격
     private static final int LOTTO_NUMBER = 6; //로또 번호 수
 
     //로또 구매
     public Lotto buyLotto(int money) {
-        return getLotto(receiveMoney(money), money);
+        return getLotto(receiveMoney(money));
     }
 
     //로또 장수 가져오기
@@ -24,9 +24,9 @@ public class LottoMachine {
     }
 
     //로또 가져오기
-    public Lotto getLotto(int num, int money) {
+    public Lotto getLotto(int num) {
         checkMinus(num);
-        Lotto lotto = new Lotto(money);
+        Lotto lotto = new Lotto();
         for (int i = 0; i < num; i++) {
             lotto.addLotto(outputLotto());
         }
@@ -35,34 +35,32 @@ public class LottoMachine {
 
     //로또 1장 가져오기
     public List<Integer> outputLotto() {
-        List<Integer> lotto = new ArrayList<>();
-        for (int i = 0; i < LOTTO_NUMBER; i++) {
-            lotto.add(getLottoNum(lotto));
+        Set<Integer> lotto = new HashSet<>();
+        while (lotto.size() < LOTTO_NUMBER) {
+            lotto.add(getLottoNum());  // 중복된 값은 자동으로 제외
         }
-        Collections.sort(lotto);
-        return lotto;
+        List<Integer> sortedLotto = new ArrayList<>(lotto);
+        Collections.sort(sortedLotto);
+        return sortedLotto;
     }
 
     //로또 랜덤 번호 가져오기
-    private int getLottoNum(List<Integer> lotto) {
-        int randomNum;
-        do {
-            randomNum = RandomUtil.randomNum();
-        } while (lotto.contains(randomNum));
-        return randomNum;
+    private int getLottoNum() {
+        return RandomUtil.randomNum();
     }
 
     //1이하 번호가 있을 시 예외발생
     private void checkMinus(int num) {
         if (num < 1) {
-            throw new IllegalArgumentException(ExceptionMessage.MINIMUM_LOTTO_NUM.message());
+            throw new IllegalArgumentException(MINIMUM_LOTTO_NUM);
         }
     }
 
     //돈이 1000원 미만이면 로또구매 X 예외발생
     private void checkMoney(int money) {
         if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(ExceptionMessage.MINIMUM_LOTTO_PRICE.message());
+            throw new IllegalArgumentException(MINIMUM_LOTTO_PRICE);
         }
     }
+
 }
