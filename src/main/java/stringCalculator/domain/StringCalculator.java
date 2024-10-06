@@ -2,20 +2,27 @@ package stringCalculator.domain;
 
 public class StringCalculator {
 
+    private Number firstNumber;
+    private Number secondNumber;
 
-    public int plus(String a, String b) {
-        return Integer.parseInt(a) + Integer.parseInt(b);
+    public StringCalculator(String firstNumber, String secondNumber) {
+        this.firstNumber = new Number(firstNumber);
+        this.secondNumber = new Number(secondNumber);
     }
 
-    public int minus(String a, String b) {
-        return Integer.parseInt(a) - Integer.parseInt(b);
+    public int plus() {
+        return firstNumber.getNumber() + secondNumber.getNumber();
     }
 
-    public int multiply(String a, String b) {
-        return Integer.parseInt(a) * Integer.parseInt(b);
+    public int minus() {
+        return firstNumber.getNumber() - secondNumber.getNumber();
     }
 
-    public int divide(String a, String b) {
-        return Integer.parseInt(a) / Integer.parseInt(b);
+    public int multiply() {
+        return firstNumber.getNumber() * secondNumber.getNumber();
+    }
+
+    public int divide() {
+        return firstNumber.getNumber() / secondNumber.getNumber();
     }
 }
