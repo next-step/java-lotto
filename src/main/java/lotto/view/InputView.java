@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoBill;
+import lotto.domain.number.Lotto;
+import lotto.domain.sales.LottoBill;
 
 import java.util.Scanner;
 
@@ -14,12 +14,20 @@ public class InputView {
         int money = SCANNER.nextInt();
         LottoBill bill = new LottoBill(money);
         System.out.println(bill.quantity() + "개를 구매했습니다.");
+        clear();
         return bill;
     }
 
     public Lotto lastWinningLotto() {
+        System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String lastWinning = SCANNER.nextLine();
         return Lotto.of(lastWinning);
+    }
+
+    private void clear() {
+        if (SCANNER.hasNextLine()) {
+            SCANNER.nextLine();
+        }
     }
 }
