@@ -19,7 +19,7 @@ public class StringCalculator {
         int result = Integer.parseInt(arr[0]);
 
         for (int i = 1; i < arr.length; i += 2) {
-            result = calculate(arr[i], result, Integer.parseInt(arr[i+1]));
+            result = calculate(arr[i], result, Integer.parseInt(arr[i + 1]));
         }
 
         return result;
@@ -52,10 +52,10 @@ public class StringCalculator {
     }
 
     private static int divide(final int num1, final int num2) {
-       if (num2 == 0) {
-           throw new IllegalArgumentException(INCORRECT_DIVISION_ERROR_MESSAGE);
-       }
-       return num1 / num2;
+        if (num2 == 0) {
+            throw new IllegalArgumentException(INCORRECT_DIVISION_ERROR_MESSAGE);
+        }
+        return num1 / num2;
     }
 
     private static void validateIsBlank(final String value) {
