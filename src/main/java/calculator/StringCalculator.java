@@ -29,7 +29,7 @@ public class StringCalculator {
         return calculatedValue;
     }
 
-    private static int getResult(int calculatedValue, String operator, int value) {
+    private static int getResult(final int calculatedValue, String operator,final int value) {
         switch (operator) {
             case "+": return calculatedValue + value;
             case "-": return calculatedValue - value;
@@ -39,20 +39,20 @@ public class StringCalculator {
         }
     }
 
-    public static boolean containsOperators(String input) {
+    private static boolean containsOperators(final String input) {
         return OPERATOR_PATTERN.matcher(input).matches();
     }
 
-    public static boolean containsNumbers(String input) {
+    private static boolean containsNumbers(final String input) {
         return NUMBER_PATTERN.matcher(input).matches();
     }
 
 
-    private static String[] getElements(String input) {
+    private static String[] getElements(final String input) {
         return input.split(" ");
     }
 
-    private static List<Integer> getNumberElements(String input) {
+    private static List<Integer> getNumberElements(final String input) {
         return Arrays.stream(getElements(input))
                 .filter(StringCalculator::containsNumbers)
                 .mapToInt(Integer::parseInt)
@@ -60,7 +60,7 @@ public class StringCalculator {
                 .collect(Collectors.toList());
     }
 
-    private static List<String> getOperatorElements(String input) {
+    private static List<String> getOperatorElements(final String input) {
         return Arrays.stream(getElements(input))
                 .filter(StringCalculator::containsOperators)
                 .collect(Collectors.toList());
