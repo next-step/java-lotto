@@ -83,4 +83,21 @@ public class CalculatorTest {
 
         assertThat(Calculator.calculate(userInput)).isEqualTo(40);
     }
+
+    @Test
+    @DisplayName("8 / 4 는 2 를 반환한다.")
+    void test12() {
+        final String userInput = "8 / 4";
+
+        assertThat(Calculator.calculate(userInput)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("8 / 5 는 1.6 으로써, 정수로 떨어지지 않으므로 IllegalArgumentException 예외가 발생한다.")
+    void test13() {
+        final String userInput = "8 / 5";
+
+        assertThatThrownBy(() -> Calculator.calculate(userInput))
+            .isExactlyInstanceOf(IllegalArgumentException.class);
+    }
 }

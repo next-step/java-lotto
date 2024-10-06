@@ -50,6 +50,8 @@ public class Calculator {
                 result = minus(result, Integer.parseInt(split[i + 1]));
             } else if (split[i].equals("*")) {
                 result = multiply(result, Integer.parseInt(split[i + 1]));
+            } else if (split[i].equals("/")) {
+                result = divide(result, Integer.parseInt(split[i + 1]));
             }
         }
 
@@ -66,5 +68,19 @@ public class Calculator {
 
     private static int multiply(final int a, final int b) {
         return a * b;
+    }
+
+    private static int divide(final int a, final int b) {
+        final double result = (double) a / b;
+
+        if (!isInteger(result)) {
+            throw new IllegalArgumentException("결과 값이 정수로 떨어지지 않습니다.");
+        }
+
+        return (int) result;
+    }
+
+    private static boolean isInteger(final double value) {
+        return value == (int) value;
     }
 }
