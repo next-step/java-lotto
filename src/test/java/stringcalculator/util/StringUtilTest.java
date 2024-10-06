@@ -1,12 +1,9 @@
-package util;
+package stringcalculator.util;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringcalculator.util.StringUtil;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,15 +23,4 @@ class StringUtilTest {
         assertThat(StringUtil.isBlank(input)).isFalse();
     }
 
-//    @DisplayName("사용자의 입력을 공백으로 나눌 수 있다.")
-//    @ParameterizedTest
-//    @ValueSource(strings = {"1 + 2", "3 * 4 "})
-//    void splitWithSpace(String input) {
-//
-//        List<String> result = StringUtil.splitBySpace(input);
-//
-//        assertThat(result).hasSize(3)
-//                .element(1)
-//                .isIn(List.of("+", "*", "-", "%"));
-//    }
 }

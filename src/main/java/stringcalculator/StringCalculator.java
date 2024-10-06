@@ -19,8 +19,8 @@ public class StringCalculator {
 
     public void run() {
         List<String> inputs = inputView.getInputsFromUser();
-        int calculate = calculate(inputs);
-        System.out.println("calculate = " + calculate);
+        int result = calculate(inputs);
+        resultView.showResult(result);
     }
 
     public int calculate(List<String> inputs) {

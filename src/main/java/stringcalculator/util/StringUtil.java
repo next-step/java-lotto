@@ -9,5 +9,4 @@ public class StringUtil {
         return str == null || str.isBlank();
     }
 
-
 }

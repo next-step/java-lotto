@@ -26,11 +26,13 @@ class DivisionTest {
 
         assertThat(result).isEqualTo(2);
     }
+
     @DisplayName("두 수를 나눌 때 정수로 나누어 떨어지지 않으면 예외가 발생한다.")
     @Test
     void calculateThrowException() {
         assertThatIllegalArgumentException().isThrownBy(() -> division.calculate(4, 3));
     }
+
     @DisplayName("0으로 나누려 하면 예외가 발생한다.")
     @Test
     void calculateThrowExceptionWithDivideZero() {
@@ -38,13 +40,13 @@ class DivisionTest {
 
     }
 
-    @DisplayName("연산자가 /이면 true를 반환한다.")
+    @DisplayName("연산자가 '/'이면 true를 반환한다.")
     @Test
     void supports() {
         assertThat(division.supports("/")).isTrue();
     }
 
-    @DisplayName("연산자가 /가 아니면 false를 반환한다.")
+    @DisplayName("연산자가 '/'가 아니면 false를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {"+", "-", "*"})
     void supportsReturnFalse(String operator) {

@@ -26,13 +26,13 @@ class MultiplicationTest {
         assertThat(result).isEqualTo(6);
     }
 
-    @DisplayName("연산자가 *이면 true를 반환한다.")
+    @DisplayName("연산자가 '*'이면 true를 반환한다.")
     @Test
     void supports() {
         assertThat(multiplication.supports("*")).isTrue();
     }
 
-    @DisplayName("연산자가 *가 아니면 false를 반환한다.")
+    @DisplayName("연산자가 '*'가 아니면 false를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {"+", "-", "/"})
     void supportsReturnFalse(String operator) {
