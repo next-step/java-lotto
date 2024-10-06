@@ -31,18 +31,4 @@ public class OperatorTest {
         int expected = 1;
         Assertions.assertThat(actual).isEqualTo(expected);
     }
-    /*
-        controller
-        StringCalculatorController
-
-        view
-        InputView
-        OutputView
-
-        model
-        Operand.enum.class
-        Operator.class
-        Processes.class
-
-    * */
 }
