@@ -32,4 +32,14 @@ class InputValidatorTest {
                 List.of("1", "2", "+")
         );
     }
+
+    @Test
+    void 숫자_사칙연산자_공백문자_이외의_문자_포함되어있으면_예외_발생() {
+        // given
+        String input = "1 + 2 ! 3";
+
+        // when, then
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validate(input))
+                .withMessage("숫자, 사칙연산자(+, -, *, /), 공백 이외의 문자는 허용되지 않습니다");
+    }
 }
