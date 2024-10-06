@@ -42,6 +42,17 @@ public class Calculator {
             }
         }
 
-        return Integer.parseInt(userInput);
+        int result = Integer.parseInt(split[0]);
+        for (int i = 0; i < split.length; i++) {
+            if (split[i].equals("+")) {
+                result = plus(result, Integer.parseInt(split[i + 1]));
+            }
+        }
+
+        return result;
+    }
+
+    private static int plus(final int a, final int b) {
+        return a + b;
     }
 }

@@ -59,4 +59,20 @@ public class CalculatorTest {
         assertThatThrownBy(() -> Calculator.calculate(userInput))
             .isExactlyInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("8 + 5 는 13 을 반환한다.")
+    void test07() {
+        final String userInput = "8 + 5";
+
+        assertThat(Calculator.calculate(userInput)).isEqualTo(13);
+    }
+
+    @Test
+    @DisplayName("8 + 5 + 7 는 20 을 반환한다.")
+    void test08() {
+        final String userInput = "8 + 5 + 7";
+
+        assertThat(Calculator.calculate(userInput)).isEqualTo(20);
+    }
 }
