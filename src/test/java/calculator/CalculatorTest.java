@@ -100,4 +100,12 @@ public class CalculatorTest {
         assertThatThrownBy(() -> Calculator.calculate(userInput))
             .isExactlyInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("2 + 3 * 4 / 2 는 10을 반환한다.")
+    void test14() {
+        final String userInput = "2 + 3 * 4 / 2";
+
+        assertThat(Calculator.calculate(userInput)).isEqualTo(10);
+    }
 }
