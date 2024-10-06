@@ -2,7 +2,10 @@ package calculator;
 
 import calculator.util.StringUtils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringCalculator {
 
@@ -15,22 +18,20 @@ public class StringCalculator {
 
     public static int calculate(final String input) {
         validateInput(input);
-        String[] elements = getElements(input);
-        int calculatedValue = Integer.parseInt(elements[0]);
-        String operator = null;
-        for (int i = 1; i < elements.length; i++) {
-            if (containsOperators(elements[i])) {
-                operator = elements[i];
-                continue;
-            }
-            calculatedValue = getResult(calculatedValue, operator, Integer.parseInt(elements[i]));
+        List<Integer> numbers = getNumberElements(input);
+        List<String> operators = getOperatorElements(input);
+        int calculatedValue = numbers.get(0);
+        for (int i=1; i<numbers.size(); i++) {
+            int value= numbers.get(i);
+            String operator = operators.get(i-1);
+            calculatedValue = getResult(calculatedValue, operator, value);
         }
         return calculatedValue;
     }
 
-    private static int getResult(int calculatedValue, String operator, int number) {
+    private static int getResult(int calculatedValue, String operator, int value) {
         if ("+".equals(operator)) {
-            calculatedValue = calculatedValue + number;
+            calculatedValue = calculatedValue + value;
         }
         return calculatedValue;
     }
@@ -42,6 +43,20 @@ public class StringCalculator {
 
     private static String[] getElements(String input) {
         return input.split(" ");
+    }
+
+    private static List<Integer> getNumberElements(String input) {
+        return Arrays.stream(getElements(input))
+                .filter(element -> !containsOperators(element))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    private static List<String> getOperatorElements(String input) {
+        return Arrays.stream(getElements(input))
+                .filter(StringCalculator::containsOperators)
+                .collect(Collectors.toList());
     }
 
     private static void validateInput(final String input) {

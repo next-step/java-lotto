@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,12 +20,11 @@ class StringCalculatorTest {
                 .hasMessage("입력값에 null 또는 공백만 존재하여 계산을 할 수 없습니다.");
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"1 + 2:3", "1 + 2 + 3:6", "1 + 2 + 3 + 4:10"}, delimiter = ':')
     @DisplayName("입력값이 덧셈 연산으로만 이루어졌을 때 calculate 메서드가 덧셈을 수행한다.")
-    void sumTest() {
-        String input = "100 + 200 + 300";
-        int expectValue = 600;
+    void sumTest(String input, int expected) {
         assertThat(StringCalculator.calculate(input))
-                .isEqualTo(expectValue);
+                .isEqualTo(expected);
     }
 }
