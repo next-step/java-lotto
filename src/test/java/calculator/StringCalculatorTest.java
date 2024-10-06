@@ -43,4 +43,12 @@ class StringCalculatorTest {
         assertThat(StringCalculator.calculate(input))
                 .isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"4 / 2:2", "6 / 3 / 2: 1", "100 / 5 / 5 / 4:1"}, delimiter = ':')
+    @DisplayName("입력값이 나눗셈 연산으로만 이루어졌을 때 calculate 메서드가 나눗셈을 수행한다.")
+    void divisionTest(String input, int expected) {
+        assertThat(StringCalculator.calculate(input))
+                .isEqualTo(expected);
+    }
 }

@@ -34,6 +34,7 @@ public class StringCalculator {
             case "+": return calculatedValue + value;
             case "-": return calculatedValue - value;
             case "*": return calculatedValue * value;
+            case "/": return calculatedValue / value;
             default : return calculatedValue;
         }
     }
