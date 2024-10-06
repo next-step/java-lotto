@@ -23,8 +23,9 @@
 - 입력값이 비어있는 경우 IllegalArgumentException 예외가 발생한다.
 - 입력값이 숫자 하나일 경우 해당 숫자를 그대로 반환한다.
 - "숫자, 공백, 부호(+, -, *, /)" 외 문자가 들어온 경우 IllegalArgumentException 예외가 발생한다. 
-- 사칙연산기호가 먼저 들어올 경우에는 IllegalArgumentException 예외가 발생한다.
-- 사칙연산 뒤에 숫자가 존재하지 않는 경우 IllegalArgumentException 예외가 발생한다. 
+- 공백으로 배열을 나눈 뒤, 짝수번째 배열에 사칙연산 부호가 없는 경우 IllegalArgumentException 예외가 발생한다.
+- 공백으로 배열을 나눈 뒤, 홀수번째 배열에 숫자가 존재하지 않는 경우 IllegalArgumentException 예외가 발생한다.
+- 공백으로 배열을 나눈 뒤, 배열의 크기는 홀수이다.
 - 8 + 5 은 13 을 반환한다.
 - 8 - 5 은 3 을 반환한다.
 - 8 * 5 는 40 을 반환한다.
