@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,6 @@ public class LottoBundle {
         for (int i = 0; i < quantity; i++) {
             lottos.add(Lotto.create());
         }
-
         return new LottoBundle(lottos);
     }
 
