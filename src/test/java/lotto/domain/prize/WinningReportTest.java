@@ -24,12 +24,16 @@ public class WinningReportTest {
                 Lotto.of("21,22,23,24,25,26")));
 
         WinningReport report = WinningReport.of(lottoBundle.count() * 1000, lottoBundle, winningLotto);
-        report.analyze();
 
         assertThat(report.first()).isEqualTo(1);
         assertThat(report.second()).isEqualTo(1);
         assertThat(report.third()).isEqualTo(1);
         assertThat(report.fourth()).isEqualTo(1);
+
+        assertThat(report.winAmount(Prize.FOURTH)).isEqualTo(1);
+        assertThat(report.winAmount(Prize.THIRD)).isEqualTo(1);
+        assertThat(report.winAmount(Prize.SECOND)).isEqualTo(1);
+        assertThat(report.winAmount(Prize.FIRST)).isEqualTo(1);
     }
 
     @Test
@@ -44,7 +48,6 @@ public class WinningReportTest {
 
         int salesAmount = lottoBundle.count() * 1000;
         WinningReport report = WinningReport.of(salesAmount, lottoBundle, winningLotto);
-        report.analyze();
 
         assertThat(report.winningRate())
                 .isEqualTo((double)(Prize.THIRD.getPrize() + Prize.FOURTH.getPrize())/ salesAmount);

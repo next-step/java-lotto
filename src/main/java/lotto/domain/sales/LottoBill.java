@@ -22,4 +22,8 @@ public class LottoBill {
     public int quantity() {
         return salesAmount / LOTTO_UNIT_PRICE;
     }
+
+    public int salesAmount() {
+        return salesAmount;
+    }
 }
