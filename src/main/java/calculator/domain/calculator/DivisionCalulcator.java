@@ -1,8 +1,8 @@
-package calculator.domain.cal;
+package calculator.domain.calculator;
 
 import calculator.domain.Calculable;
 
-public class DivisionCal implements Calculable {
+public class DivisionCalulcator implements Calculable {
 
     @Override
     public int calculate(int preResult, int operand) {

@@ -1,4 +1,4 @@
-package calculator.domain.cal;
+package calculator.domain.calculator;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +15,11 @@ public class CalculableTypeTest {
         String division = "/";
         String init = "";
 
-        assertThat(CalculableType.getCalculable(sum).getClass()).isSameAs(SumCal.class);
-        assertThat(CalculableType.getCalculable(sub).getClass()).isSameAs(SubtractionCal.class);
-        assertThat(CalculableType.getCalculable(multi).getClass()).isSameAs(MultiplicationCal.class);
-        assertThat(CalculableType.getCalculable(division).getClass()).isSameAs(DivisionCal.class);
-        assertThat(CalculableType.getCalculable(init).getClass()).isSameAs(InitOperatorCal.class);
+        assertThat(CalculableType.getCalculable(sum).getClass()).isSameAs(SumCalculator.class);
+        assertThat(CalculableType.getCalculable(sub).getClass()).isSameAs(SubtractionCalculator.class);
+        assertThat(CalculableType.getCalculable(multi).getClass()).isSameAs(MultiplicationCalculator.class);
+        assertThat(CalculableType.getCalculable(division).getClass()).isSameAs(DivisionCalulcator.class);
+        assertThat(CalculableType.getCalculable(init).getClass()).isSameAs(InitOperatorCalculator.class);
     }
 
     @Test
