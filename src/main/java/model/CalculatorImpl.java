@@ -1,28 +1,26 @@
 package model;
 
 public class CalculatorImpl implements Calculator {
-    private Operator operator;
-
-    public CalculatorImpl(Operator operator) {
-        this.operator = operator;
-    }
-
 
     @Override
-    public int calculate(int num1, int num2, String operator) {
+    public Integer calculate(Integer num1, Integer num2, String operator) {
+        if (num1 == null || num2 == null) {
+            return null;
+        }
+
         int res;
-        switch(operator){
-            case "+" :
-                res = this.operator.add(num1, num2);
+        switch (operator) {
+            case "+":
+                res = Operator.add(num1, num2);
                 break;
-            case "-" :
-                res = this.operator.minus(num1 ,num2);
+            case "-":
+                res = Operator.minus(num1, num2);
                 break;
             case "*":
-                res = this.operator.multiply(num1, num2);
+                res = Operator.multiply(num1, num2);
                 break;
             case "/":
-                res = this.operator.divide(num1, num2);
+                res = Operator.divide(num1, num2);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid operator: " + operator);
