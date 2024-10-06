@@ -10,7 +10,27 @@ public class Calculator {
     public static final String DEFAULT_DELIMITER = " ";
 
     public static int calculate(final String userInput) {
-        if (userInput == null || userInput.isEmpty()) {
+        isValidUserInput(userInput);
+        final Tokens tokens = new Tokens(userInput.split(DEFAULT_DELIMITER));
+
+        int result = Integer.parseInt(tokens.tokenAt(0));
+        for (int i = 0; i < tokens.size(); i++) {
+            if (tokens.tokenAt(i).equals("+")) {
+                result = plus(result, Integer.parseInt(tokens.tokenAt(i + 1)));
+            } else if (tokens.tokenAt(i).equals("-")) {
+                result = minus(result, Integer.parseInt(tokens.tokenAt(i + 1)));
+            } else if (tokens.tokenAt(i).equals("*")) {
+                result = multiply(result, Integer.parseInt(tokens.tokenAt(i + 1)));
+            } else if (tokens.tokenAt(i).equals("/")) {
+                result = divide(result, Integer.parseInt(tokens.tokenAt(i + 1)));
+            }
+        }
+
+        return result;
+    }
+
+    private static void isValidUserInput(final String userInput) {
+        if (isEmpty(userInput)) {
             throw new IllegalArgumentException("계산할 정보가 없습니다.");
         }
 
@@ -18,44 +38,10 @@ public class Calculator {
         if (!matcher.find()) {
             throw new IllegalArgumentException("허용되지 않는 문자가 입력되었습니다.");
         }
+    }
 
-        final String[] split = userInput.split(DEFAULT_DELIMITER);
-        if (split.length % 2 == 0) {
-            throw new IllegalArgumentException("수식에 오류가 있습니다.");
-        }
-
-        for (int i = 0; i < split.length; i++) {
-            // 짝수는 숫자여야 함.
-            if (i % 2 == 0) {
-                final Matcher numberMatcher = NUMBER_REGEX.matcher(split[i]);
-                if (!numberMatcher.find()) {
-                    throw new IllegalArgumentException("수식에 오류가 있습니다.");
-                }
-            }
-
-            // 홀수는 기호여야 함.
-            if (i % 2 == 1) {
-                final Matcher signMatcher = SIGN_REGEX.matcher(split[i]);
-                if (!signMatcher.find()) {
-                    throw new IllegalArgumentException("수식에 오류가 있습니다.");
-                }
-            }
-        }
-
-        int result = Integer.parseInt(split[0]);
-        for (int i = 0; i < split.length; i++) {
-            if (split[i].equals("+")) {
-                result = plus(result, Integer.parseInt(split[i + 1]));
-            } else if (split[i].equals("-")) {
-                result = minus(result, Integer.parseInt(split[i + 1]));
-            } else if (split[i].equals("*")) {
-                result = multiply(result, Integer.parseInt(split[i + 1]));
-            } else if (split[i].equals("/")) {
-                result = divide(result, Integer.parseInt(split[i + 1]));
-            }
-        }
-
-        return result;
+    private static boolean isEmpty(final String userInput) {
+        return userInput == null || userInput.isEmpty();
     }
 
     private static int plus(final int a, final int b) {
