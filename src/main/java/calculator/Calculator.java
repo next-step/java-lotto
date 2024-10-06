@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,17 +14,13 @@ public class Calculator {
         isValidUserInput(userInput);
         final Tokens tokens = new Tokens(userInput.split(DEFAULT_DELIMITER));
 
-        int result = Integer.parseInt(tokens.tokenAt(0));
-        for (int i = 0; i < tokens.size(); i++) {
-            if (tokens.tokenAt(i).equals("+")) {
-                result = plus(result, Integer.parseInt(tokens.tokenAt(i + 1)));
-            } else if (tokens.tokenAt(i).equals("-")) {
-                result = minus(result, Integer.parseInt(tokens.tokenAt(i + 1)));
-            } else if (tokens.tokenAt(i).equals("*")) {
-                result = multiply(result, Integer.parseInt(tokens.tokenAt(i + 1)));
-            } else if (tokens.tokenAt(i).equals("/")) {
-                result = divide(result, Integer.parseInt(tokens.tokenAt(i + 1)));
-            }
+        final Iterator<Token> tokenIterator = tokens.iterator();
+        int result = tokenIterator.next().parseNumber();
+        while (tokenIterator.hasNext()) {
+            final Token signToken = tokenIterator.next();
+            final Sign sign = signToken.sign();
+            final Token operand = tokenIterator.next();
+            result = sign.apply(result, operand.parseNumber());
         }
 
         return result;
@@ -42,31 +39,5 @@ public class Calculator {
 
     private static boolean isEmpty(final String userInput) {
         return userInput == null || userInput.isEmpty();
-    }
-
-    private static int plus(final int a, final int b) {
-        return a + b;
-    }
-
-    private static int minus(final int a, final int b) {
-        return a - b;
-    }
-
-    private static int multiply(final int a, final int b) {
-        return a * b;
-    }
-
-    private static int divide(final int a, final int b) {
-        final double result = (double) a / b;
-
-        if (!isInteger(result)) {
-            throw new IllegalArgumentException("결과 값이 정수로 떨어지지 않습니다.");
-        }
-
-        return (int) result;
-    }
-
-    private static boolean isInteger(final double value) {
-        return value == (int) value;
     }
 }

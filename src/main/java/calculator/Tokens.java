@@ -1,18 +1,22 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 import static calculator.Calculator.NUMBER_REGEX;
 import static calculator.Calculator.SIGN_REGEX;
 
-public class Tokens {
-    private final List<String> tokens;
+public class Tokens implements Iterable<Token> {
+    private final List<Token> tokens;
 
     public Tokens(final String[] tokens) {
         validateExpression(tokens);
-        this.tokens = Arrays.asList(tokens);
+        this.tokens = Arrays.stream(tokens)
+            .map(Token::new)
+            .collect(Collectors.toUnmodifiableList());
     }
 
     private static void validateExpression(final String[] tokens) {
@@ -64,7 +68,8 @@ public class Tokens {
         return tokens.size();
     }
 
-    public String tokenAt(final int index) {
-        return tokens.get(index);
+    @Override
+    public Iterator<Token> iterator() {
+        return tokens.iterator();
     }
 }
