@@ -75,4 +75,20 @@ public class CalculatorTest {
 
         assertThat(Calculator.calculate(userInput)).isEqualTo(20);
     }
+
+    @Test
+    @DisplayName("8 - 5 는 3 을 반환한다.")
+    void test09() {
+        final String userInput = "8 - 5";
+
+        assertThat(Calculator.calculate(userInput)).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("8 - 5 + 4 는 7 을 반환한다.")
+    void test10() {
+        final String userInput = "8 - 5 + 4";
+
+        assertThat(Calculator.calculate(userInput)).isEqualTo(7);
+    }
 }

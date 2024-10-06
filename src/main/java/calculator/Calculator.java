@@ -46,6 +46,8 @@ public class Calculator {
         for (int i = 0; i < split.length; i++) {
             if (split[i].equals("+")) {
                 result = plus(result, Integer.parseInt(split[i + 1]));
+            } else if (split[i].equals("-")) {
+                result = minus(result, Integer.parseInt(split[i + 1]));
             }
         }
 
@@ -54,5 +56,9 @@ public class Calculator {
 
     private static int plus(final int a, final int b) {
         return a + b;
+    }
+
+    private static int minus(final int a, final int b) {
+        return a - b;
     }
 }
