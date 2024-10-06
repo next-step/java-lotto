@@ -23,4 +23,12 @@ public class CalculatorTest {
         assertThatThrownBy(() -> Calculator.calculate(userInput))
             .isExactlyInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("값이 비어있는 경우 IllegalArgumentException 예외가 발생한다.")
+    void test03() {
+        final String userInput = null;
+        assertThatThrownBy(() -> Calculator.calculate(userInput))
+            .isExactlyInstanceOf(IllegalArgumentException.class);
+    }
 }
