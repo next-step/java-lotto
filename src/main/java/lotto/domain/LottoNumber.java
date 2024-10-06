@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -16,7 +18,7 @@ public class LottoNumber {
 
     private void validateNumber(int number) {
         if (number < MIN_BOUND || number > MAX_BOUND) {
-            throw new IllegalArgumentException("로또 번호는 1에서 45 사이 숫자여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
         }
     }
 

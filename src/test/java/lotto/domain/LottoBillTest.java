@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +22,14 @@ public class LottoBillTest {
     @Test
     void 로또_판매_금액_0원() {
         assertThatThrownBy(() -> new LottoBill(0))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.INVALID_LOTTO_PRICE.getMessage());
     }
 
     @Test
     void 로또_판매_금액_1000원단위_아님() {
         assertThatThrownBy(() -> new LottoBill(1222))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.INVALID_LOTTO_PRICE.getMessage());
     }
 }

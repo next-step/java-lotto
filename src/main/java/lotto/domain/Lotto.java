@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -33,11 +35,11 @@ public class Lotto {
     private static void validateNumbers(String[] numbers) {
         if (Stream.of(numbers).map(String::trim).anyMatch(String::isBlank)
                 || numbers.length != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("6개 숫자를 입력하셔야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.NEED_SIX_NUMBERS.getMessage());
         }
 
         if (Stream.of(numbers).map(String::trim).distinct().count() != numbers.length) {
-            throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER.getMessage());
         }
     }
 

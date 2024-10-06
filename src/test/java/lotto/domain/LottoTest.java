@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -39,28 +40,35 @@ public class LottoTest {
     @Test
     void 로또_생성_중복숫자() {
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.of("1, 1, 3, 4, 5, 6"));
+                .isThrownBy(() -> Lotto.of("1, 1, 3, 4, 5, 6"))
+                .withMessage(ErrorMessage.DUPLICATE_NUMBER.getMessage());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 47", "0, 1, 2, 3, 4, 5", "1, 3, 2, -3, 4, 5"})
     void 로또_생성_문자열_1_45_아님(String text) {
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(text));
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(text))
+                .withMessage(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
     }
 
     @Test
     void 로또_생성_문자열_null() {
-        Assertions.assertThatNullPointerException().isThrownBy(() -> Lotto.of(null));
+        Assertions.assertThatNullPointerException()
+                .isThrownBy(() -> Lotto.of(null));
     }
 
     @Test
     void 로또_생성_문자열_빈문자() {
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(""));
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> Lotto.of(""))
+                .withMessage(ErrorMessage.NEED_SIX_NUMBERS.getMessage());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
     void 로또_생성_문자열_6개_아님(String text) {
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(text));
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> Lotto.of(text))
+                .withMessage(ErrorMessage.NEED_SIX_NUMBERS.getMessage());
     }
 }
