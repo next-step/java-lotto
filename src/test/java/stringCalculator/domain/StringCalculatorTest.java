@@ -8,36 +8,36 @@ public class StringCalculatorTest {
 
     @Test
     void plus() {
-        StringCalculator stringCalculator = new StringCalculator("1", "2");
+        StringCalculator stringCalculator = new StringCalculator("1", "2", "+");
 
-        int actual = stringCalculator.plus();
+        int actual = stringCalculator.calculate();
 
         assertThat(actual).isEqualTo(3);
     }
 
     @Test
     void minus() {
-        StringCalculator stringCalculator = new StringCalculator("2", "1");
+        StringCalculator stringCalculator = new StringCalculator("2", "1", "-");
 
-        int actual = stringCalculator.minus();
+        int actual = stringCalculator.calculate();
 
         assertThat(actual).isEqualTo(1);
     }
 
     @Test
     void multiply() {
-        StringCalculator stringCalculator = new StringCalculator("1", "2");
+        StringCalculator stringCalculator = new StringCalculator("1", "2", "*");
 
-        int actual = stringCalculator.multiply();
+        int actual = stringCalculator.calculate();
 
         assertThat(actual).isEqualTo(2);
     }
 
     @Test
     void divide() {
-        StringCalculator stringCalculator = new StringCalculator("2", "1");
+        StringCalculator stringCalculator = new StringCalculator("2", "1", "/");
 
-        int actual = stringCalculator.divide();
+        int actual = stringCalculator.calculate();
 
         assertThat(actual).isEqualTo(2);
     }
