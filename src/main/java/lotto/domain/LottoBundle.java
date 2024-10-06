@@ -8,7 +8,7 @@ public class LottoBundle {
 
     private final List<Lotto> lottos;
 
-    public LottoBundle(List<Lotto> lottos) {
+    private LottoBundle(List<Lotto> lottos) {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
@@ -17,6 +17,10 @@ public class LottoBundle {
         for (int i = 0; i < quantity; i++) {
             lottos.add(Lotto.create());
         }
+        return new LottoBundle(lottos);
+    }
+
+    public static LottoBundle of(List<Lotto> lottos) {
         return new LottoBundle(lottos);
     }
 
