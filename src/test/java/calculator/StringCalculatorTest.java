@@ -27,4 +27,12 @@ class StringCalculatorTest {
         assertThat(StringCalculator.calculate(input))
                 .isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1 - 2:-1", "100 - 100 - 100:-100", "-1 - -2 - -3 - -4:8"}, delimiter = ':')
+    @DisplayName("입력값이 뺄셈 연산으로만 이루어졌을 때 calculate 메서드가 뺄셈을 수행한다.")
+    void subtractionTest(String input, int expected) {
+        assertThat(StringCalculator.calculate(input))
+                .isEqualTo(expected);
+    }
 }

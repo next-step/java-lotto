@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
 
-    private static final String REGEX = "[+\\-*/]";
-    private static final Pattern COMPILE = Pattern.compile(REGEX);
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+");
+    private static final Pattern OPERATOR_PATTERN = Pattern.compile("[+\\-*/]");
 
     private StringCalculator() {
         throw new UnsupportedOperationException("유틸 클래스는 생성할 수 없습니다.");
@@ -30,14 +30,19 @@ public class StringCalculator {
     }
 
     private static int getResult(int calculatedValue, String operator, int value) {
-        if ("+".equals(operator)) {
-            calculatedValue = calculatedValue + value;
+        switch (operator) {
+            case "+": return calculatedValue + value;
+            case "-": return calculatedValue - value;
+            default : return calculatedValue;
         }
-        return calculatedValue;
     }
 
     public static boolean containsOperators(String input) {
-        return COMPILE.matcher(input).find();
+        return OPERATOR_PATTERN.matcher(input).matches();
+    }
+
+    public static boolean containsNumbers(String input) {
+        return NUMBER_PATTERN.matcher(input).matches();
     }
 
 
@@ -47,7 +52,7 @@ public class StringCalculator {
 
     private static List<Integer> getNumberElements(String input) {
         return Arrays.stream(getElements(input))
-                .filter(element -> !containsOperators(element))
+                .filter(StringCalculator::containsNumbers)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
