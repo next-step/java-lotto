@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 public class Calculator {
     public static final Pattern PERMIT_INPUT_REGEX = Pattern.compile("^[0-9+\\-*/ ]+$");
+    public static final Pattern NUMBER_REGEX = Pattern.compile("^[0-9]+$");
+    public static final Pattern SIGN_REGEX = Pattern.compile("^[+\\-*/]$");
+    public static final String DEFAULT_DELIMITER = " ";
 
     public static int calculate(final String userInput) {
         if (userInput == null || userInput.isEmpty()) {
@@ -14,6 +17,29 @@ public class Calculator {
         final Matcher matcher = PERMIT_INPUT_REGEX.matcher(userInput);
         if (!matcher.find()) {
             throw new IllegalArgumentException("허용되지 않는 문자가 입력되었습니다.");
+        }
+
+        final String[] split = userInput.split(DEFAULT_DELIMITER);
+        if (split.length % 2 == 0) {
+            throw new IllegalArgumentException("수식에 오류가 있습니다.");
+        }
+
+        for (int i = 0; i < split.length; i++) {
+            // 짝수는 숫자여야 함.
+            if (i % 2 == 0) {
+                final Matcher numberMatcher = NUMBER_REGEX.matcher(split[i]);
+                if (!numberMatcher.find()) {
+                    throw new IllegalArgumentException("수식에 오류가 있습니다.");
+                }
+            }
+
+            // 홀수는 기호여야 함.
+            if (i % 2 == 1) {
+                final Matcher signMatcher = SIGN_REGEX.matcher(split[i]);
+                if (!signMatcher.find()) {
+                    throw new IllegalArgumentException("수식에 오류가 있습니다.");
+                }
+            }
         }
 
         return Integer.parseInt(userInput);
