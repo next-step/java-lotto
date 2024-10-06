@@ -4,6 +4,7 @@ import lotto.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -70,5 +71,21 @@ public class LottoTest {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.of(text))
                 .withMessage(ErrorMessage.NEED_SIX_NUMBERS.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1,2,3,4,5,6:6",
+            "1,2,3,4,6,7:5",
+            "1,2,3,4,7,8:4",
+            "2,5,1,22,10,20:3",
+            "10,2,12,4,16,21:2",
+            "6,11,45,40,20,30:1",
+            "21,22,23,24,25,26:0"
+    }, delimiter = ':')
+    void 로또_일치_여부(String lotto, int expected) {
+        Lotto winningLotto = Lotto.of("1,2,3,4,5,6");
+
+        assertThat(winningLotto.match(Lotto.of(lotto))).isEqualTo(expected);
     }
 }

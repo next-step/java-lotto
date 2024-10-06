@@ -47,6 +47,18 @@ public class Lotto {
         return lotto.stream();
     }
 
+    public int match(Lotto compared) {
+        int match = 0;
+        for (LottoNumber number : compared.lotto) {
+            match += compare(number);
+        }
+        return match;
+    }
+
+    private int compare(LottoNumber compared) {
+        return lotto.contains(compared) ? 1 : 0;
+    }
+
     @Override
     public String toString() {
         return lotto.toString();
