@@ -25,7 +25,7 @@
 - "숫자, 공백, 부호(+, -, *, /)" 외 문자가 들어온 경우 IllegalArgumentException 예외가 발생한다. 
 - 홀수번째 배열에 사칙연산 부호가 없는 경우 IllegalArgumentException 예외가 발생한다.
 - 짝수번째 배열에 숫자가 존재하지 않는 경우 IllegalArgumentException 예외가 발생한다.
-- 배열의 크기는 홀수이다.
+- 배열의 크기가 짝수라면 IllegalArgumentException 예외가 발생한다.
 - 8 + 5 은 13 을 반환한다.
 - 8 - 5 은 3 을 반환한다.
 - 8 * 5 는 40 을 반환한다.
