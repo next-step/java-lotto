@@ -31,4 +31,8 @@ public enum Operator {
     private final String symbol;
 
     abstract int apply(int x, int y);
+
+    public boolean isSameSymbol(String operatorSymbol) {
+        return this.symbol.equals(operatorSymbol);
+    }
 }
