@@ -48,6 +48,8 @@ public class Calculator {
                 result = plus(result, Integer.parseInt(split[i + 1]));
             } else if (split[i].equals("-")) {
                 result = minus(result, Integer.parseInt(split[i + 1]));
+            } else if (split[i].equals("*")) {
+                result = multiply(result, Integer.parseInt(split[i + 1]));
             }
         }
 
@@ -60,5 +62,9 @@ public class Calculator {
 
     private static int minus(final int a, final int b) {
         return a - b;
+    }
+
+    private static int multiply(final int a, final int b) {
+        return a * b;
     }
 }

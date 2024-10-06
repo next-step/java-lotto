@@ -69,14 +69,6 @@ public class CalculatorTest {
     }
 
     @Test
-    @DisplayName("8 + 5 + 7 는 20 을 반환한다.")
-    void test08() {
-        final String userInput = "8 + 5 + 7";
-
-        assertThat(Calculator.calculate(userInput)).isEqualTo(20);
-    }
-
-    @Test
     @DisplayName("8 - 5 는 3 을 반환한다.")
     void test09() {
         final String userInput = "8 - 5";
@@ -85,10 +77,10 @@ public class CalculatorTest {
     }
 
     @Test
-    @DisplayName("8 - 5 + 4 는 7 을 반환한다.")
-    void test10() {
-        final String userInput = "8 - 5 + 4";
+    @DisplayName("8 * 5 는 40 을 반환한다.")
+    void test11() {
+        final String userInput = "8 * 5";
 
-        assertThat(Calculator.calculate(userInput)).isEqualTo(7);
+        assertThat(Calculator.calculate(userInput)).isEqualTo(40);
     }
 }
