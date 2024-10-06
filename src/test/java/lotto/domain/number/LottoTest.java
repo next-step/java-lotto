@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.number;
 
 import lotto.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
