@@ -21,21 +21,26 @@ public class StringCalculator {
         List<Integer> numbers = getNumberElements(input);
         List<String> operators = getOperatorElements(input);
         int calculatedValue = numbers.get(0);
-        for (int i=1; i<numbers.size(); i++) {
-            int value= numbers.get(i);
-            String operator = operators.get(i-1);
+        for (int i = 1; i < numbers.size(); i++) {
+            int value = numbers.get(i);
+            String operator = operators.get(i - 1);
             calculatedValue = getResult(calculatedValue, operator, value);
         }
         return calculatedValue;
     }
 
-    private static int getResult(final int calculatedValue, String operator,final int value) {
+    private static int getResult(final int calculatedValue, String operator, final int value) {
         switch (operator) {
-            case "+": return calculatedValue + value;
-            case "-": return calculatedValue - value;
-            case "*": return calculatedValue * value;
-            case "/": return calculatedValue / value;
-            default : return calculatedValue;
+            case "+":
+                return calculatedValue + value;
+            case "-":
+                return calculatedValue - value;
+            case "*":
+                return calculatedValue * value;
+            case "/":
+                return calculatedValue / value;
+            default:
+                return calculatedValue;
         }
     }
 

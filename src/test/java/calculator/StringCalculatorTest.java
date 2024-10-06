@@ -51,6 +51,7 @@ class StringCalculatorTest {
         assertThat(StringCalculator.calculate(input))
                 .isEqualTo(expected);
     }
+
     @ParameterizedTest
     @CsvSource(value = {"2 + 4 / 2:3", "2 + 3 * 4 / 2:10"}, delimiter = ':')
     @DisplayName("calculate 메서드가 사칙연산의 계산 우선순위가 아닌 입력 값에 따라 계산을 수행한다.")
