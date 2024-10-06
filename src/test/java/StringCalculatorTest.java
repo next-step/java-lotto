@@ -1,8 +1,12 @@
+import model.Calculator;
+import model.CalculatorImpl;
+import model.Operator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import view.InputView;
 
 public class StringCalculatorTest {
     @Test
@@ -11,9 +15,10 @@ public class StringCalculatorTest {
         //given
         final int num1 = 1;
         final int num2 = 2;
+        Operator op = new Operator();
 
         //when
-        int result = StringCalculator.add(num1, num2);
+        int result = op.add(num1, num2);
 
         //then
         Assertions.assertThat(result).isEqualTo(3);
@@ -25,9 +30,10 @@ public class StringCalculatorTest {
         //given
         final int num1 = 1;
         final int num2 = 2;
+        Operator op = new Operator();
 
         //when
-        int result = StringCalculator.minus(num1, num2);
+        int result = op.minus(num1, num2);
 
         //then
         Assertions.assertThat(result).isEqualTo(-1);
@@ -39,9 +45,10 @@ public class StringCalculatorTest {
         //given
         final int num1 = 2;
         final int num2 = 2;
+        Operator op = new Operator();
 
         //when
-        int result = StringCalculator.multiply(num1, num2);
+        int result = op.multiply(num1, num2);
 
         //then
         Assertions.assertThat(result).isEqualTo(4);
@@ -53,9 +60,10 @@ public class StringCalculatorTest {
         //given
         final int num1 = 2;
         final int num2 = 2;
+        Operator op = new Operator();
 
         //when
-        int result = StringCalculator.divide(num1, num2);
+        int result = op.divide(num1, num2);
 
         //then
         Assertions.assertThat(result).isEqualTo(1);
@@ -69,8 +77,11 @@ public class StringCalculatorTest {
         final int num2 = 2;
         final String operator = "+";
 
+        Operator op = new Operator();
+        Calculator cal = new CalculatorImpl(op);
+
         //when
-        int result = StringCalculator.calculate(num1, num2, operator);
+        int result = cal.calculate(num1, num2, operator);
 
         //then
         Assertions.assertThat(result).isEqualTo(4);
@@ -83,8 +94,12 @@ public class StringCalculatorTest {
         //given
         String[] split = InputView.splitByEmptyString(input);
 
+        Operator op = new Operator();
+        Calculator cal = new CalculatorImpl(op);
+        StringCalculator stringCalculator = new StringCalculator(cal);
+
         //when
-        int result = StringCalculator.calculateWithSplit(split);
+        int result = stringCalculator.run(split);
 
         //then
         Assertions.assertThat(result).isEqualTo(expected);
