@@ -33,6 +33,7 @@ public class StringCalculator {
         switch (operator) {
             case "+": return calculatedValue + value;
             case "-": return calculatedValue - value;
+            case "*": return calculatedValue * value;
             default : return calculatedValue;
         }
     }

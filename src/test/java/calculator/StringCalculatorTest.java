@@ -35,4 +35,12 @@ class StringCalculatorTest {
         assertThat(StringCalculator.calculate(input))
                 .isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1 * 2:2", "2 * 2 * 3: 12", "-1 * -2 * -3:-6"}, delimiter = ':')
+    @DisplayName("입력값이 곱셈 연산으로만 이루어졌을 때 calculate 메서드가 곱셈을 수행한다.")
+    void multiplicationTest(String input, int expected) {
+        assertThat(StringCalculator.calculate(input))
+                .isEqualTo(expected);
+    }
 }
