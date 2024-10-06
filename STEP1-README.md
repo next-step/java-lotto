@@ -20,6 +20,7 @@
 
 * * *
 ## 테스트 내용 정리
+- 입력값이 비어있는 경우 IllegalArgumentException 예외가 발생한다.
 - 입력값이 숫자 하나일 경우 해당 숫자를 그대로 반환한다.
 - "숫자, 공백, 부호(+, -, *, /)" 외 문자가 들어온 경우 IllegalArgumentException 예외가 발생한다. 
 - 사칙연산기호가 먼저 들어올 경우에는 IllegalArgumentException 예외가 발생한다.
