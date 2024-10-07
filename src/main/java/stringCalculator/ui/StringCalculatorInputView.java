@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class StringCalculatorInputView {
+public final class StringCalculatorInputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public List<String> getExpression() {
+    private StringCalculatorInputView() {}
+
+    public static List<String> getExpression() {
         System.out.println("수식을 입력하세요 (예: 2 + 3 * 4 / 2):");
         String input = SCANNER.nextLine();
 

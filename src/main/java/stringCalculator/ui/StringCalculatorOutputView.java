@@ -1,8 +1,10 @@
 package stringCalculator.ui;
 
-public class StringCalculatorOutputView {
+public final class StringCalculatorOutputView {
 
-    public void resultPrint(int result) {
+    private StringCalculatorOutputView() {}
+
+    public static void resultPrint(int result) {
         System.out.println(result);
     }
 }
