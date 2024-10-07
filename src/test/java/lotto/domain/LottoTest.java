@@ -14,12 +14,9 @@ class LottoTest {
     void shouldContainExactlySixNumbers() {
         final Lotto lotto = new Lotto(
             List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(3), new LottoNumber(4),
+                new LottoNumber(5), new LottoNumber(6)
             )
         );
 
@@ -29,6 +26,19 @@ class LottoTest {
             .isThrownBy(() -> new Lotto(
                 List.of(
                     new LottoNumber(1)
+                )
+            ));
+    }
+
+    @Test
+    @DisplayName("로또는 중복된 로또번호를 가질 수 없다.")
+    void shouldNotHaveDuplicateNumbers() {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> new Lotto(
+                List.of(
+                    new LottoNumber(1), new LottoNumber(1),
+                    new LottoNumber(1), new LottoNumber(1),
+                    new LottoNumber(2), new LottoNumber(3)
                 )
             ));
     }
