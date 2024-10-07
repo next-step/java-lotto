@@ -6,11 +6,11 @@ import java.util.List;
 
 public class LottoRankCalculator {
     private final List<Lotto> lottos;
-    private final List<Integer> winningNumbers;
+    private final WinningNumbers winningNumbers;
 
     private EnumMap<LottoRank, Integer> rankInfo;
 
-    public LottoRankCalculator(final List<Lotto> lottos, final List<Integer> winningNumbers) {
+    public LottoRankCalculator(final List<Lotto> lottos, final WinningNumbers winningNumbers) {
         this.lottos = lottos;
         this.winningNumbers = winningNumbers;
         initialize();
@@ -21,14 +21,12 @@ public class LottoRankCalculator {
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> rankInfo.put(rank, 0));
 
-        calculateLottoRank(winningNumbers);
+        calculateLottoRank();
     }
 
-    private void calculateLottoRank(List<Integer> winningNumbers) {
-        LottoChecker checker = new LottoChecker(winningNumbers);
-
+    private void calculateLottoRank() {
         for (Lotto lotto : lottos) {
-            int matched = checker.matchWinningNumber(lotto);
+            int matched = winningNumbers.matchWinningNumber(lotto);
             LottoRank rank = LottoRank.from(matched);
             rankInfo.put(rank, getRankCount(rank));
         }

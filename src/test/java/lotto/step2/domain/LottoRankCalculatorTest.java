@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoRankCalculatorTest {
     
     private List<Lotto> lottos;
-    private List<Integer> winningNumbers;
+    private WinningNumbers winningNumbers;
     
     @BeforeEach
     void setUp() {
@@ -21,7 +21,7 @@ public class LottoRankCalculatorTest {
                 , new Lotto(List.of(1, 2, 3, 4, 13, 14))
         );
 
-        winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("내가 구매한 로또들이 몇 등의 몇 번 당첨됐는지 확인이 가능하다")
