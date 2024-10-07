@@ -6,7 +6,7 @@ public class Result {
     public static final String ONLY_ALLOWED_NUMBER = "결과에 숫자 이외에 다른 문자가 올 수 없습니다.";
     private final int value;
 
-    public Result(String number) {
+    public Result(final String number) {
         this.value = parseInt(number);
     }
 

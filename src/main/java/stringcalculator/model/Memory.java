@@ -6,7 +6,7 @@ public class Memory {
     private final Operator operator;
     private final Operand operand;
 
-    public Memory(Operator operator, Operand operand) {
+    public Memory(final Operator operator, final Operand operand) {
         this.operator = operator;
         this.operand = operand;
     }
