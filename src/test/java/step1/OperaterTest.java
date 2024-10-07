@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class OperaterTest {
+class OperaterTest {
     @ParameterizedTest
     @ValueSource(strings = {"2+5"})
     @DisplayName("덧셈 테스트")

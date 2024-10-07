@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
-public class StringCalculatorTest {
+class StringCalculatorTest {
 
     @ParameterizedTest
     @CsvSource(value = {"2 + 3 * 4 / 2:2+3*4/2"}, delimiter = ':')
