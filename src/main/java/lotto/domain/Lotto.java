@@ -34,11 +34,11 @@ public class Lotto {
         return ticket;
     }
 
-    private static void ticketsSort(List<Integer> ticket) {
+    private static void ticketsSort(final List<Integer> ticket) {
         Collections.sort(ticket);
     }
 
-    private static int generateUniqueLottoNumber(List<Integer> ticket) {
+    private static int generateUniqueLottoNumber(final List<Integer> ticket) {
         int lottoNumber = generateLottoNumber();
         while (ticket.contains(lottoNumber)) {
             lottoNumber = generateLottoNumber();

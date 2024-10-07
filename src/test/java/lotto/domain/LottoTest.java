@@ -65,8 +65,6 @@ class LottoTest {
         List<List<Integer>> lottoResults = Lotto.issueTickets(2000);
         assertThat(lottoResults)
                 .isNotEmpty()
-                .allSatisfy(lottoResult -> {
-                    assertThat(lottoResult).isSorted();
-                });
+                .allSatisfy(lottoResult -> assertThat(lottoResult).isSorted());
     }
 }
