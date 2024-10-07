@@ -3,7 +3,7 @@ package step3.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,13 +16,13 @@ public class LottoTest {
     @Test
     void addLottoNumTest() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
-        lotto.addLotto(List.of(7, 8, 9, 10, 11, 12));
+        lotto.addLotto(Set.of(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(Set.of(7, 8, 9, 10, 11, 12));
 
         assertThat(lotto.getLottos())
                 .containsExactly(
-                        List.of(1, 2, 3, 4, 5, 6),
-                        List.of(7, 8, 9, 10, 11, 12)
+                        Set.of(1, 2, 3, 4, 5, 6),
+                        Set.of(7, 8, 9, 10, 11, 12)
                 );
     }
 

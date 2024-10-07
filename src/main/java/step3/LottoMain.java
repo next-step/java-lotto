@@ -1,8 +1,8 @@
 package step3;
 
-import step3.model.LottoMachine;
 import step3.model.Lotto;
 import step3.model.LottoConfirmation;
+import step3.model.LottoMachine;
 import step3.uiView.InputView;
 import step3.uiView.ResultView;
 

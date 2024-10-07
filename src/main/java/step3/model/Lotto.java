@@ -2,17 +2,18 @@ package step3.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
-    private final List<List<Integer>> lottos = new ArrayList<>();
+    private final List<Set<Integer>> lottos = new ArrayList<>();
 
     //로또 추가
-    public void addLotto(List<Integer> lotto) {
+    public void addLotto(Set<Integer> lotto) {
         this.lottos.add(lotto);
     }
 
-    public List<List<Integer>> getLottos() {
+    public List<Set<Integer>> getLottos() {
         return lottos;
     }
 

@@ -2,7 +2,10 @@ package step3.model;
 
 import step3.util.RandomUtil;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
 
@@ -34,14 +37,16 @@ public class LottoMachine {
     }
 
     //로또 1장 가져오기
-    public List<Integer> outputLotto() {
+    public Set<Integer> outputLotto() {
         Set<Integer> lotto = new HashSet<>();
+
         while (lotto.size() < LOTTO_NUMBER) {
             lotto.add(getLottoNum());  // 중복된 값은 자동으로 제외
         }
-        List<Integer> sortedLotto = new ArrayList<>(lotto);
-        Collections.sort(sortedLotto);
-        return sortedLotto;
+
+        return lotto.stream()
+                .sorted()
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     //로또 랜덤 번호 가져오기

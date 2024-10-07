@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.enums.LottoPrize;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -56,7 +56,7 @@ public class LottoConfirmationTest {
     @Test
     void checkLottoNumTest() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(Set.of(1, 2, 3, 4, 5, 6));
 
         LottoConfirmation lottoConfirmation = new LottoConfirmation();
 
@@ -80,7 +80,7 @@ public class LottoConfirmationTest {
     @Test
     void rateOfReturnTest() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(Set.of(1, 2, 3, 4, 5, 6));
 
         LottoConfirmation lottoConfirmation = new LottoConfirmation();
 
@@ -93,7 +93,7 @@ public class LottoConfirmationTest {
     @Test
     void rateOfReturnThrowExceptionTest() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(Set.of(1, 2, 3, 4, 5, 6));
 
         LottoConfirmation lottoConfirmation = new LottoConfirmation();
 
@@ -106,7 +106,7 @@ public class LottoConfirmationTest {
     @Test
     void bonusNumMatch_FIVE_BONUS_MATCH() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(Set.of(1, 2, 3, 4, 5, 6));
 
         LottoConfirmation lottoConfirmation = new LottoConfirmation();
         lottoConfirmation.checkPrizeNum(lotto, "1,2,3,4,5,7", 6);
@@ -118,7 +118,7 @@ public class LottoConfirmationTest {
     @Test
     void bonusNumAlreadyContainsThrowExceptionTest() {
         Lotto lotto = new Lotto();
-        lotto.addLotto(List.of(1, 2, 3, 4, 5, 6));
+        lotto.addLotto(Set.of(1, 2, 3, 4, 5, 6));
 
         LottoConfirmation lottoConfirmation = new LottoConfirmation();
 

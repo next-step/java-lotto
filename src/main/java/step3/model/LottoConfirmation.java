@@ -6,8 +6,8 @@ import step3.util.StringUtil;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LottoConfirmation {
 
@@ -32,7 +32,7 @@ public class LottoConfirmation {
         this.lotto = lotto;
         resetPrize();
         checkPrizeNum(prizeLotto);
-        for (List<Integer> lottoNum : lotto.getLottos()) {
+        for (Set<Integer> lottoNum : lotto.getLottos()) {
             int matchCount = checkLottoNum(lottoNum, prizeLotto);
             prize(matchCount, checkBonus(matchCount, lottoNum, bonusNum));
         }
@@ -40,8 +40,8 @@ public class LottoConfirmation {
 
     //로또당첨
     public void prize(int matchCount, boolean bonusMatch) {
-        if(matchCount >= MATCH_COUNT_WON) {
-            LottoPrize lottoPrize = LottoPrize.valueOf(matchCount,bonusMatch);
+        if (matchCount >= MATCH_COUNT_WON) {
+            LottoPrize lottoPrize = LottoPrize.valueOf(matchCount, bonusMatch);
             prizes.put(lottoPrize, prizes.getOrDefault(lottoPrize, 0) + 1);
         }
     }
@@ -62,9 +62,9 @@ public class LottoConfirmation {
     }
 
     //보너스번호 일치 여부를 체크한다.
-    private boolean checkBonus(int matchCount, List<Integer> lotto, int bonusNum) {
+    private boolean checkBonus(int matchCount, Set<Integer> lotto, int bonusNum) {
         boolean bonusMatch = false;
-        if(matchCount == BONUS_MATCH_COUNT) {
+        if (matchCount == BONUS_MATCH_COUNT) {
             bonusMatch = lotto.contains(bonusNum);
         }
         return bonusMatch;
@@ -87,7 +87,7 @@ public class LottoConfirmation {
     }
 
     //로또의 동일 숫자 확인
-    private int checkLottoNum(List<Integer> lotto, String[] prizeLotto) {
+    private int checkLottoNum(Set<Integer> lotto, String[] prizeLotto) {
         int matchCount = 0;
         for (String s : prizeLotto) {
             matchCount += lotto.contains(Integer.parseInt(s)) ? 1 : 0;
