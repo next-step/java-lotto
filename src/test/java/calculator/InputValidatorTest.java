@@ -3,6 +3,7 @@ package calculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -61,5 +62,13 @@ class InputValidatorTest {
         // when, then
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validate(inputItems))
                 .withMessage("숫자, 사칙연산자(+, -, *, /) 사이에는 공백이 있어야 합니다");
+    }
+
+    @ParameterizedTest
+    @MethodSource("makeSequentialItem")
+    void 숫자나_사칙연산자가_연속되면_예외_발생(List<String> inputItems) {
+        // when, then
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validate(inputItems))
+                .withMessage("숫자나 사칙연산자(+, -, *, /)는 연속되어 입력될 수 없습니다");
     }
 }
