@@ -29,11 +29,11 @@ public class LottoMachine {
     //로또 가져오기
     public BoughtLotto getLotto(int num) {
         checkMinus(num);
-        BoughtLotto lotto = new BoughtLotto();
+        BoughtLotto boughtLotto = new BoughtLotto();
         for (int i = 0; i < num; i++) {
-            lotto.addLotto(outputLotto());
+            boughtLotto.addLotto(outputLotto());
         }
-        return lotto;
+        return boughtLotto;
     }
 
     //로또 1장 가져오기
