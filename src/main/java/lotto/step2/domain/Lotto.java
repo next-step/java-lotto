@@ -1,5 +1,7 @@
 package lotto.step2.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -12,6 +14,20 @@ public class Lotto {
     public Lotto(final List<Integer> numbers){
         this.numbers = numbers;
         validateNumbers();
+    }
+
+    public static Lotto create(){
+        List<Integer> numbers = createRandomNumbers();
+        return new Lotto(numbers);
+    }
+
+    private static List<Integer> createRandomNumbers() {
+        List<Integer> numbers = new ArrayList<Integer>();
+        for (int i = 0; i < LIMIT_LOTTO_NUMBER; i++){
+            numbers.add(i);
+        }
+        Collections.shuffle(numbers);
+        return numbers.subList(0, LIMIT_LOTTO_COUNT);
     }
 
     private void validateNumbers() {
