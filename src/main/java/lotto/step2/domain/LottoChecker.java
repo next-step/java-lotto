@@ -2,11 +2,11 @@ package lotto.step2.domain;
 
 import java.util.List;
 
-public class LottoWinningCalculator {
+public class LottoChecker {
 
     private final List<Integer> winningNumbers;
 
-    public LottoWinningCalculator(final List<Integer> winningNumbers) {
+    public LottoChecker(final List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
