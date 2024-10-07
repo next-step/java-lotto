@@ -17,6 +17,12 @@ public class StringCalculatorTest {
     }
 
     @Test
+    @DisplayName("곱셈 구현")
+    void 곱셈() {
+        assertThat(StringCalculator.getInstance().calculate(3,5,"*")).isEqualTo(15);
+    }
+
+    @Test
     @DisplayName("뺄셈 구현")
     void 뺄셈() {
         assertThat(StringCalculator.getInstance().calculate(3,5,"-")).isEqualTo(-2);
