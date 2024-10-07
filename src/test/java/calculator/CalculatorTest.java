@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 class CalculatorTest {
 
@@ -40,6 +41,14 @@ class CalculatorTest {
     @Test
     void calculateTestWithNoneArithmeticOperator() {
         assertThatThrownBy(() -> Calculator.calculate("5 @ 2"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("입력 값이 null이거나 빈 공백 문자인 경우 IllegalArgumentException 예외가 잘 반환되는지")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void calculateTestWithNullAndEmptySource(String formula) {
+        assertThatThrownBy(() -> Calculator.calculate(formula))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
