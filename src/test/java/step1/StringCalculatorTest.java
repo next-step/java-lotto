@@ -18,4 +18,13 @@ public class StringCalculatorTest {
         Assertions.assertThat(cal.getString()).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"2+  5"})
+    @DisplayName("덧셈 테스트")
+    void 덧셈(String input) {
+        Calculator cal = new Calculator(input);
+        cal.deleteSpace();
+        Assertions.assertThat(cal.calculateExpression()).isEqualTo(7);
+    }
+
 }
