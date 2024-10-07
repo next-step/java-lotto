@@ -15,7 +15,7 @@ class CalculatorTest {
     @DisplayName("사칙 연산이 잘 수행되는지")
     @ParameterizedTest
     @MethodSource("formulaAndResult")
-    void additionTest(String formula, int result) {
+    void arithmeticOperationTest(String formula, int result) {
         assertThat(Calculator.calculate(formula)).isEqualTo(result);
     }
 

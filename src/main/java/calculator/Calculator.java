@@ -2,7 +2,6 @@ package calculator;
 
 public class Calculator {
 
-
     public static int calculate(String formula) {
         String[] formulaElements = formula.split(" ");
         int interimResult = getFirstElement(formulaElements);
