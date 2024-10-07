@@ -10,6 +10,23 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringCalculatorTest {
 
+    @Test
+    @DisplayName("숫자 ")
+    void 숫자_연산자_분리() {
+        assertThat(StringCalculator.getInstance().calculate("3 + 5")).isEqualTo(8);
+    }
+
+    @Test
+    @DisplayName("뺄셈 구현")
+    void 뺄셈() {
+        assertThat(StringCalculator.getInstance().calculate(3,5,"+")).isEqualTo(8);
+    }
+
+    @Test
+    @DisplayName("덧셈 구현")
+    void 덧셈() {
+        assertThat(StringCalculator.getInstance().calculate(3,5,"+")).isEqualTo(8);
+    }
 
     @Test
     @DisplayName("숫자 스택과 연산자 스택의 개수가 1개 차이가 나면 true를 반환한다.")

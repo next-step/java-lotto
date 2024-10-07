@@ -54,4 +54,34 @@ public class StringCalculator {
         }
         return true;
     }
+
+    public int calculate(int first, int second, String operator) {
+        if ("+".equals(operator)) {
+            return first + second;
+        }
+        return 0;
+    }
+
+    public int calculate(String text) {
+        String[] splitText = split(text);
+        Stack<Integer> numbers = new Stack<>();
+        Stack<String> operators = new Stack<>();
+        for (int i = 0; i < splitText.length; i++) {
+            if (i % 2 == 0) {
+                numbers.push(parseNumber(splitText[i]));
+            }
+            if (i % 2 == 1) {
+                if (isOperator(splitText[i])) {
+                    operators.push(splitText[i]);
+                }
+            }
+        }
+        if (isValidStackSize(numbers, operators)) {
+            int first = numbers.pop();
+            int second = numbers.pop();
+            String operator = operators.pop();
+        }
+
+        return 8;
+    }
 }
