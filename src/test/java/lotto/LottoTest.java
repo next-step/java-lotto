@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -55,6 +56,17 @@ class LottoTest {
                 .allSatisfy(lottoResult -> {
                     Set<Integer> uniqueNumbers = new HashSet<>(lottoResult);
                     assertThat(uniqueNumbers).hasSize(lottoResult.size());
+                });
+    }
+
+    @Test
+    @DisplayName("발급된 로또 번호가 정렬되어 반환된다.")
+    void sortTest() {
+        List<List<Integer>> lottoResults = Lotto.issueTickets(2000);
+        assertThat(lottoResults)
+                .isNotEmpty()
+                .allSatisfy(lottoResult -> {
+                    assertThat(lottoResult).isSorted();
                 });
     }
 }

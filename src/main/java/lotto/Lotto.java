@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +30,12 @@ public class Lotto {
         for (int j = 0; j < LOTTO_NUMBER_COUNT; j++) {
             ticket.add(generateUniqueLottoNumber(ticket));
         }
+        ticketsSort(ticket);
         return ticket;
+    }
+
+    private static void ticketsSort(List<Integer> ticket) {
+        Collections.sort(ticket);
     }
 
     private static int generateUniqueLottoNumber(List<Integer> ticket) {
