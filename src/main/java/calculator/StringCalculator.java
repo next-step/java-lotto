@@ -14,9 +14,13 @@ public class StringCalculator {
     }
 
     public String[] split(String text) {
-        if(text == null || text.isBlank()){
+        if(isBlank(text)){
             throw new IllegalStateException("문자열이 비어있습니다.");
         }
         return text.split(" ");
+    }
+
+    private static boolean isBlank(String text) {
+        return text == null || text.isBlank();
     }
 }
