@@ -5,7 +5,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -43,4 +45,16 @@ class LottoTest {
                 );
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {100000, 20000, 30000})
+    @DisplayName("랜덤으로 발급된 로또 넘버가 중복을 허용하지 않는다.")
+    void lottoNumberDuplicateTest(int totalPurchasePrice) {
+        List<List<Integer>> lottoResults = Lotto.issueTickets(totalPurchasePrice);
+        assertThat(lottoResults)
+                .isNotEmpty()
+                .allSatisfy(lottoResult -> {
+                    Set<Integer> uniqueNumbers = new HashSet<>(lottoResult);
+                    assertThat(uniqueNumbers).hasSize(lottoResult.size());
+                });
+    }
 }

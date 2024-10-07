@@ -27,10 +27,21 @@ public class Lotto {
     private static List<Integer> issueTicket() {
         List<Integer> ticket = new ArrayList<>(LOTTO_NUMBER_COUNT);
         for (int j = 0; j < LOTTO_NUMBER_COUNT; j++) {
-            int lottoNumber = random.nextInt(LOTTO_BOUND) + 1;
-            ticket.add(lottoNumber);
+            ticket.add(generateUniqueLottoNumber(ticket));
         }
         return ticket;
+    }
+
+    private static int generateUniqueLottoNumber(List<Integer> ticket) {
+        int lottoNumber = generateLottoNumber();
+        while (ticket.contains(lottoNumber)) {
+            lottoNumber = generateLottoNumber();
+        }
+        return lottoNumber;
+    }
+
+    private static int generateLottoNumber() {
+        return random.nextInt(LOTTO_BOUND) + 1;
     }
 
     private static int getTotalTicketCount(final int totalPurchasePrice) {
