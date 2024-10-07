@@ -59,6 +59,9 @@ public class StringCalculator {
         if ("+".equals(operator)) {
             return first + second;
         }
+        if ("-".equals(operator)) {
+            return first - second;
+        }
         return 0;
     }
 
