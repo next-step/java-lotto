@@ -3,87 +3,56 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Stack;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringCalculatorTest {
 
     @Test
-    @DisplayName("숫자 ")
-    void 숫자_연산자_분리() {
-        assertThat(StringCalculator.getInstance().calculate("3 + 5")).isEqualTo(8);
+    @DisplayName("입력받은 문자열이 비정상일 떄, exception을 발생시킨다.")
+    void 문자열_계산_연산식_exception() {
+        assertThatThrownBy(() -> StringCalculator.getInstance().calculate("2 + 3 * 4 /"))
+                .isInstanceOf(IllegalStateException.class);
     }
 
     @Test
-    @DisplayName("곱셈 구현")
+    @DisplayName("입력받은 문자열이 정상일 떄, 연산한 값을 출력한다.")
+    void 문자열_계산() {
+        assertThat(StringCalculator.getInstance().calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("연산자가 아닌 문자는 exception 발생")
+    void 연산자가_아닌_문자() {
+        assertThatThrownBy(() -> StringCalculator.getInstance().calculate(10, 5, "_"))
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    @DisplayName("나눗셈을 연산한다.")
+    void 나눗셈() {
+        assertThat(StringCalculator.getInstance().calculate(10, 5, "/")).isEqualTo(2);
+    }
+
+
+    @Test
+    @DisplayName("곱셈을 연산한다.")
     void 곱셈() {
-        assertThat(StringCalculator.getInstance().calculate(3,5,"*")).isEqualTo(15);
+        assertThat(StringCalculator.getInstance().calculate(3, 5, "*")).isEqualTo(15);
     }
 
     @Test
-    @DisplayName("뺄셈 구현")
+    @DisplayName("뺄셈을 연산한다.")
     void 뺄셈() {
-        assertThat(StringCalculator.getInstance().calculate(3,5,"-")).isEqualTo(-2);
+        assertThat(StringCalculator.getInstance().calculate(3, 5, "-")).isEqualTo(-2);
     }
 
     @Test
-    @DisplayName("덧셈 구현")
+    @DisplayName("덧셈을 연산한다.")
     void 덧셈() {
-        assertThat(StringCalculator.getInstance().calculate(3,5,"+")).isEqualTo(8);
+        assertThat(StringCalculator.getInstance().calculate(3, 5, "+")).isEqualTo(8);
     }
 
-    @Test
-    @DisplayName("숫자 스택과 연산자 스택의 개수가 1개 차이가 나면 true를 반환한다.")
-    void 스택_개수_비교() {
-        Stack<Integer> numbers = new Stack<>();
-        numbers.push(1);
-        numbers.push(2);
-        Stack<String> operators = new Stack<>();
-        operators.push("*");
-        assertThat(StringCalculator.getInstance().isValidStackSize(numbers, operators)).isTrue();
-    }
-
-    @Test
-    @DisplayName("숫자 스택과 연산자 스택의 개수가 1개 차이가 나지 않으면 exception을 발생한다.")
-    void 스택_개수_비교_exception() {
-        Stack<Integer> numbers = new Stack<>();
-        numbers.push(1);
-        Stack<String> operators = new Stack<>();
-        operators.push("*");
-        assertThatThrownBy(() -> StringCalculator.getInstance().isValidStackSize(numbers, operators))
-                .isInstanceOf(IllegalStateException.class);
-    }
-
-    @Test
-    @DisplayName("숫자인 경우 숫자를 반환한다.")
-    void 숫자인_경우() {
-        assertThat(StringCalculator.getInstance().parseNumber("1")).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("숫자가 아닌 경우 exception을 발생한다.")
-    void 숫자_아닌경우() {
-        assertThatThrownBy(() -> StringCalculator.getInstance().parseNumber("a"))
-                .isInstanceOf(IllegalStateException.class);
-    }
-
-    @Test
-    @DisplayName("연산자인 경우 true를 반환한다.")
-    void 연산자인_경우() {
-        assertThat(StringCalculator.getInstance().isOperator("+")).isTrue();
-        assertThat(StringCalculator.getInstance().isOperator("*")).isTrue();
-        assertThat(StringCalculator.getInstance().isOperator("/")).isTrue();
-        assertThat(StringCalculator.getInstance().isOperator("-")).isTrue();
-    }
-
-    @Test
-    @DisplayName("연산자가 아닌 경우 exception을 발생한다.")
-    void 연산자_아닌경우() {
-        assertThatThrownBy(() -> StringCalculator.getInstance().isOperator("_"))
-                .isInstanceOf(IllegalStateException.class);
-    }
 
     @Test
     @DisplayName("문자열이 비어있는 경우 exception을 발생한다.")
