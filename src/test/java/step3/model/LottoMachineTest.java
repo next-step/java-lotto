@@ -53,9 +53,9 @@ public class LottoMachineTest {
     @Test
     void getLottoTest() {
         LottoMachine lottoMachine = new LottoMachine();
-        Lotto lotto = lottoMachine.getLotto(3);
+        BoughtLotto boughtLotto = lottoMachine.getLotto(3);
 
-        assertThat(lotto.getLottos().size()).isEqualTo(3);
+        assertThat(boughtLotto.getBoughtLotto().size()).isEqualTo(3);
     }
 
     @DisplayName("입력받은 숫자가 음수이면 예외를 발생시킨다.")
