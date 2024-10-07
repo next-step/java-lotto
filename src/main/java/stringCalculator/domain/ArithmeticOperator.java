@@ -12,15 +12,15 @@ public enum ArithmeticOperator {
     DIVIDE("/", (firstNumber, secondNumber) -> firstNumber / secondNumber);
 
     private final String operator;
-    private final IntBinaryOperator experssion;
+    private final IntBinaryOperator expression;
 
     ArithmeticOperator(String operator, IntBinaryOperator expression) {
         this.operator = operator;
-        this.experssion = expression;
+        this.expression = expression;
     }
 
     public int calculate(int firstNumber, int secondNumber) {
-        return experssion.applyAsInt(firstNumber, secondNumber);
+        return expression.applyAsInt(firstNumber, secondNumber);
     }
 
     public static ArithmeticOperator from(String operator) {
