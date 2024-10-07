@@ -1,25 +1,32 @@
 package step1;
 
+import step1.operater.Operater;
+
 public class Calculator {
 
-    private String calculate;
+    private String calculation;
     private int result;
 
     public Calculator(String input) {
-        calculate = input;
+        calculation = input;
+        deleteSpace();
     }
 
     public void deleteSpace() {
-        this.calculate = calculate.replace(" ", "");
+        this.calculation = calculation.replace(" ", "");
     }
 
     public String getString() {
-        return this.calculate;
+        return this.calculation;
     }
 
     public int calculateExpression() {
-        String[] splited = calculate.split("\\+");
-        result = Integer.parseInt(splited[0]) + Integer.parseInt(splited[1]);
+        result = Integer.parseInt(calculation.charAt(0) + "");
+        for (int i = 1; i < calculation.length() - 1; i += 2) {
+            int operand = Integer.parseInt(calculation.charAt(i + 1) + "");
+            Operater operater = OperatorSelection.selection(calculation.charAt(i) + "");
+            result = operater.calculate(result, operand);
+        }
         return result;
     }
 }
