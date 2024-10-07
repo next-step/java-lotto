@@ -4,6 +4,7 @@ import stringCalculator.StringCalculatorService;
 import stringCalculator.ui.StringCalculatorInputView;
 import stringCalculator.ui.StringCalculatorOutputView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class StringCalculatorController {
@@ -15,7 +16,8 @@ public class StringCalculatorController {
     }
 
     public void run() {
-        List<String> expressions = StringCalculatorInputView.getExpression();
+        String expression = StringCalculatorInputView.getExpression();
+        List<String> expressions = Arrays.asList(expression.split(" "));
         int result = stringCalculatorService.calculateExpressions(expressions);
         StringCalculatorOutputView.resultPrint(result);
     }
