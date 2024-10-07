@@ -13,6 +13,7 @@ public class InputValidator {
     }
 
     public static void validate(List<String> inputItems) {
+        validateFirstItemIsNumber(inputItems);
         for (String item : inputItems) {
             validateSpaceBetweenItems(item);
         }
@@ -21,6 +22,12 @@ public class InputValidator {
     private static void validateSpaceBetweenItems(String item) {
         if (isNotOperatorOrNumber(item)) {
             throw new IllegalArgumentException("숫자, 사칙연산자(+, -, *, /) 사이에는 공백이 있어야 합니다");
+        }
+    }
+
+    private static void validateFirstItemIsNumber(List<String> items) {
+        if (!items.isEmpty() && !isNumber(items.get(0))) {
+            throw new IllegalArgumentException("가장 첫 항목은 숫자이어야 합니다");
         }
     }
 
