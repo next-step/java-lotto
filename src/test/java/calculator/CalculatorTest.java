@@ -13,4 +13,9 @@ class CalculatorTest {
         assertThat(Calculator.calculate("1 + 2")).isEqualTo(3);
     }
 
+    @DisplayName("뺄셈 연산이 잘 수행되는지")
+    @Test
+    void subtractionTest() {
+        assertThat(Calculator.calculate("2 - 1")).isEqualTo(1);
+    }
 }
