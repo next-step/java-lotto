@@ -1,4 +1,4 @@
-package textcalculator;
+package textcalculator.domain;
 
 public enum Operator {
     PLUS("+") {

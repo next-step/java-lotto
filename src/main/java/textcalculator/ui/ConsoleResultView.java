@@ -1,4 +1,4 @@
-package textcalculator;
+package textcalculator.ui;
 
 public class ConsoleResultView implements ResultView {
 

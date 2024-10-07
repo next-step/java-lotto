@@ -1,4 +1,4 @@
-package textcalculator;
+package textcalculator.domain;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;

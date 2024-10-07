@@ -1,4 +1,4 @@
-package textcalculator;
+package textcalculator.ui;
 
 import java.util.Scanner;
 
