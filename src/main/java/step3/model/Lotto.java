@@ -1,20 +1,33 @@
 package step3.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
+    private final Set<Integer> lotto;
 
-    private final List<Set<Integer>> lottos = new ArrayList<>();
-
-    //로또 추가
-    public void addLotto(Set<Integer> lotto) {
-        this.lottos.add(lotto);
+    public Lotto(Set<Integer> lotto) {
+        this.lotto = lotto;
     }
 
-    public List<Set<Integer>> getLottos() {
-        return lottos;
+    public boolean checkNum(int num) {
+        return this.lotto.contains(num);
     }
 
+    public Set<Integer> getLotto() {
+        return lotto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(this.lotto, lotto.getLotto());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.lotto);
+    }
 }

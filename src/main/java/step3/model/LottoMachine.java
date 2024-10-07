@@ -16,7 +16,7 @@ public class LottoMachine {
     private static final int LOTTO_NUMBER = 6; //로또 번호 수
 
     //로또 구매
-    public Lotto buyLotto(int money) {
+    public BoughtLotto buyLotto(int money) {
         return getLotto(receiveMoney(money));
     }
 
@@ -27,9 +27,9 @@ public class LottoMachine {
     }
 
     //로또 가져오기
-    public Lotto getLotto(int num) {
+    public BoughtLotto getLotto(int num) {
         checkMinus(num);
-        Lotto lotto = new Lotto();
+        BoughtLotto lotto = new BoughtLotto();
         for (int i = 0; i < num; i++) {
             lotto.addLotto(outputLotto());
         }
@@ -37,16 +37,18 @@ public class LottoMachine {
     }
 
     //로또 1장 가져오기
-    public Set<Integer> outputLotto() {
+    public Lotto outputLotto() {
         Set<Integer> lotto = new HashSet<>();
 
         while (lotto.size() < LOTTO_NUMBER) {
             lotto.add(getLottoNum());  // 중복된 값은 자동으로 제외
         }
 
-        return lotto.stream()
+        lotto = lotto.stream()
                 .sorted()
                 .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        return new Lotto(lotto);
     }
 
     //로또 랜덤 번호 가져오기

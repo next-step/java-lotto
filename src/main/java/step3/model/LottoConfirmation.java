@@ -23,16 +23,16 @@ public class LottoConfirmation {
     private final static int LOTTO_PRICE = 1000;
 
     private Map<LottoPrize, Integer> prizes = new HashMap<>();
-    private Lotto lotto;
+    private BoughtLotto boughtLotto;
 
     //당첨번호를 받아 로또 당첨 개수를 확인
-    public void checkPrizeNum(Lotto lotto, String prizeNum, int bonusNum) {
+    public void checkPrizeNum(BoughtLotto boughtLotto, String prizeNum, int bonusNum) {
         String[] prizeLotto = StringUtil.divideNum(prizeNum);
         checkBonusNum(prizeLotto, bonusNum);
-        this.lotto = lotto;
+        this.boughtLotto = boughtLotto;
         resetPrize();
         checkPrizeNum(prizeLotto);
-        for (Set<Integer> lottoNum : lotto.getLottos()) {
+        for (Lotto lottoNum : boughtLotto.getBoughtLotto()) {
             int matchCount = checkLottoNum(lottoNum, prizeLotto);
             prize(matchCount, checkBonus(matchCount, lottoNum, bonusNum));
         }
@@ -62,10 +62,10 @@ public class LottoConfirmation {
     }
 
     //보너스번호 일치 여부를 체크한다.
-    private boolean checkBonus(int matchCount, Set<Integer> lotto, int bonusNum) {
+    private boolean checkBonus(int matchCount, Lotto lotto, int bonusNum) {
         boolean bonusMatch = false;
         if (matchCount == BONUS_MATCH_COUNT) {
-            bonusMatch = lotto.contains(bonusNum);
+            bonusMatch = lotto.checkNum(bonusNum);
         }
         return bonusMatch;
     }
@@ -83,14 +83,14 @@ public class LottoConfirmation {
     }
 
     private int lottoPrice() {
-        return this.lotto.getLottos().size() * LOTTO_PRICE;
+        return this.boughtLotto.getBoughtLotto().size() * LOTTO_PRICE;
     }
 
     //로또의 동일 숫자 확인
-    private int checkLottoNum(Set<Integer> lotto, String[] prizeLotto) {
+    private int checkLottoNum(Lotto lotto, String[] prizeLotto) {
         int matchCount = 0;
         for (String s : prizeLotto) {
-            matchCount += lotto.contains(Integer.parseInt(s)) ? 1 : 0;
+            matchCount += lotto.checkNum(Integer.parseInt(s)) ? 1 : 0;
         }
         return matchCount;
     }
