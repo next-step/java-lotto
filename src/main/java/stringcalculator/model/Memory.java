@@ -6,9 +6,9 @@ public class Memory {
     private final Operator operator;
     private final Operand operand;
 
-    public Memory(String operator, String operand) {
-        this.operator = Operator.convertStringToOperator(operator);
-        this.operand = new Operand(operand);
+    public Memory(Operator operator, Operand operand) {
+        this.operator = operator;
+        this.operand = operand;
     }
 
     @Override
