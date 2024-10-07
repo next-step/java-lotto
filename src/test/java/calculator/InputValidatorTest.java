@@ -42,4 +42,14 @@ class InputValidatorTest {
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validate(input))
                 .withMessage("숫자, 사칙연산자(+, -, *, /), 공백 이외의 문자는 허용되지 않습니다");
     }
+
+    @Test
+    void 숫자_사칙연산자_사이_공백문자_없으면_예외_발생() {
+        // given
+        List<String> inputItems = List.of("10+", "1");
+
+        // when, then
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validate(inputItems))
+                .withMessage("숫자, 사칙연산자(+, -, *, /) 사이에는 공백이 있어야 합니다");
+    }
 }
