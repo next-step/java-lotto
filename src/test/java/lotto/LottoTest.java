@@ -28,4 +28,19 @@ class LottoTest {
         List<List<Integer>> lottoResults = Lotto.issueTickets(totalPurchasePrice);
         assertThat(lottoResults).hasSize(count);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {100000, 20000, 30000})
+    @DisplayName("랜덤으로 발급된 로또 넘버가 1이상 46이하의 수를 보장한다.")
+    void lottoBoundTest(int totalPurchasePrice) {
+        List<List<Integer>> lottoResults = Lotto.issueTickets(totalPurchasePrice);
+        assertThat(lottoResults)
+                .isNotEmpty()
+                .allSatisfy(lottoResult ->
+                        assertThat(lottoResult)
+                                .isNotEmpty()
+                                .allMatch(number -> number > 0 && number < 46 )
+                );
+    }
+
 }

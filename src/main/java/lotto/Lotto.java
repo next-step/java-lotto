@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Lotto {
     private static final int LOTTO_TICKET_PRICE = 1000;
-    private static final int LOTTO_BOUND = 46;
+    private static final int LOTTO_BOUND = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static Random random = new Random();
 
@@ -27,7 +27,7 @@ public class Lotto {
     private static List<Integer> issueTicket() {
         List<Integer> ticket = new ArrayList<>(LOTTO_NUMBER_COUNT);
         for (int j = 0; j < LOTTO_NUMBER_COUNT; j++) {
-            int lottoNumber = random.nextInt(LOTTO_BOUND);
+            int lottoNumber = random.nextInt(LOTTO_BOUND) + 1;
             ticket.add(lottoNumber);
         }
         return ticket;
