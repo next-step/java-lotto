@@ -52,4 +52,8 @@ public class Lotto {
 
         return numberSize != LIMIT_LOTTO_COUNT;
     }
+
+    public boolean hasNumber(Integer winningNumber) {
+        return this.numbers.contains(winningNumber);
+    }
 }
