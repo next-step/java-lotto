@@ -17,17 +17,7 @@ public class Calculator {
     }
 
     private static int calculate(int operand1, String operator, int operand2) {
-        switch(operator) {
-            case "+" :
-                return operand1 + operand2;
-            case "-" :
-                return operand1 - operand2;
-            case "*" :
-                return operand1 * operand2;
-            case "/" :
-                return operand1 / operand2;
-        }
-        return 0;
+        return ArithmeticOperator.calculate(operand1, operator, operand2);
     }
 
     private static String getOperator(int index, String[] formulaElements) {
