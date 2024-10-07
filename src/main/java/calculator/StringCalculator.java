@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.Map;
+import java.util.function.IntBinaryOperator;
+
 public class StringCalculator {
     private static final String PLUS = "+";
     private static final String MINUS = "-";
@@ -25,48 +28,27 @@ public class StringCalculator {
         return result;
     }
 
-    private static int calculate(final String operator, int number, int number2) {
-        validateOperator(operator);
-        if (operator.equals(PLUS)) {
-            return sum(number, number2);
-        }
-        if (operator.equals(MINUS)) {
-            return minus(number, number2);
-        }
-        if (operator.equals(MULTIPLE)) {
-            return multiple(number, number2);
-        }
-        return divide(number, number2);
+    private static int calculate(final String operator, final int num1, final int num2) {
+        return OPERATIONS.getOrDefault(operator, (a, b) -> {
+            throw new IllegalArgumentException(INCORRECT_OPERATOR_ERROR_MESSAGE);
+        }).applyAsInt(num1, num2);
     }
 
-    private static int sum(final int num1, final int num2) {
-        return num1 + num2;
-    }
-
-    private static int minus(final int num1, final int num2) {
-        return num1 - num2;
-    }
-
-    private static int multiple(final int num1, final int num2) {
-        return num1 * num2;
-    }
-
-    private static int divide(final int num1, final int num2) {
-        if (num2 == 0) {
-            throw new IllegalArgumentException(INCORRECT_DIVISION_ERROR_MESSAGE);
-        }
-        return num1 / num2;
-    }
+    private static final Map<String, IntBinaryOperator> OPERATIONS = Map.of(
+            PLUS, (a, b) -> a + b,
+            MINUS, (a, b) -> a - b,
+            MULTIPLE, (a, b) -> a * b,
+            DIVISION, (a, b) -> {
+                if (b == 0) {
+                    throw new IllegalArgumentException(INCORRECT_DIVISION_ERROR_MESSAGE);
+                }
+                return a / b;
+            }
+    );
 
     private static void validateIsBlank(final String value) {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException(INCORRECT_VALUE_ERROR_MESSAGE);
-        }
-    }
-
-    private static void validateOperator(final String value) {
-        if (!value.equals(PLUS) && !value.equals(MINUS) && !value.equals(MULTIPLE) && !value.equals(DIVISION)) {
-            throw new IllegalArgumentException(INCORRECT_OPERATOR_ERROR_MESSAGE);
         }
     }
 }
