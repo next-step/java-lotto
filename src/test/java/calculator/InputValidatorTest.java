@@ -44,9 +44,19 @@ class InputValidatorTest {
     }
 
     @Test
+    void 가장_처음_문자가_숫자가_아니면_예외_발생() {
+        // given
+        List<String> inputItems = List.of("*", "10");
+
+        // when, then
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validate(inputItems))
+                .withMessage("가장 첫 항목은 숫자이어야 합니다");
+    }
+
+    @Test
     void 숫자_사칙연산자_사이_공백문자_없으면_예외_발생() {
         // given
-        List<String> inputItems = List.of("10+", "1");
+        List<String> inputItems = List.of("10", "+1");
 
         // when, then
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validate(inputItems))
