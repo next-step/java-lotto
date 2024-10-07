@@ -46,17 +46,21 @@ public class LottoRankCalculator {
         return this.rankInfo.get(rank) + 1;
     }
 
-    public int calculateToTalAmount(){
+    public int calculateWinningAmount(){
         int totalAmount = 0;
 
         for (LottoRank rank : rankInfo.keySet()) {
-            int rankCount = rankInfo.get(rank);
-            int prizeByRank = rank.prize();
-
-            int amountByRank = prizeByRank * rankCount;
+            int amountByRank = amountByRank(rank);
             totalAmount += amountByRank;
         }
 
         return totalAmount;
+    }
+
+    private int amountByRank(LottoRank rank) {
+        int rankCount = rankInfo.get(rank);
+        int prizeByRank = rank.prize();
+
+        return prizeByRank * rankCount;
     }
 }
