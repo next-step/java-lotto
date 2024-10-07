@@ -2,12 +2,13 @@ package step1;
 
 import step1.operater.Operater;
 
-public class Calculator {
+public class StringCalculator {
 
     private String calculation;
     private int result;
 
-    public Calculator(String input) {
+    public StringCalculator(String input) {
+        validInput(input);
         calculation = input;
         deleteSpace();
     }
@@ -20,11 +21,17 @@ public class Calculator {
         return this.calculation;
     }
 
+    private static void validInput(String input) {
+        if(input == null || input.isEmpty()){
+            throw new IllegalArgumentException("올바르지 않은 계산 식 (null 혹은 빈문자열)");
+        }
+    }
+
     public int calculateExpression() {
         result = Integer.parseInt(calculation.charAt(0) + "");
         for (int i = 1; i < calculation.length() - 1; i += 2) {
             int operand = Integer.parseInt(calculation.charAt(i + 1) + "");
-            Operater operater = OperatorSelection.selection(calculation.charAt(i) + "");
+            Operater operater = OperaterSelection.selection(calculation.charAt(i) + "");
             result = operater.calculate(result, operand);
         }
         return result;

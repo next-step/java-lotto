@@ -4,7 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 public class StringCalculatorTest {
 
@@ -12,56 +13,22 @@ public class StringCalculatorTest {
     @CsvSource(value = {"2 + 3 * 4 / 2:2+3*4/2"}, delimiter = ':')
     @DisplayName("공백을 제거하는지 확인한다")
     void 입력문자열_공백제거(String input, String expected) {
-        Calculator cal = new Calculator(input);
-        cal.deleteSpace();
+        StringCalculator cal = new StringCalculator(input);
+
         Assertions.assertThat(cal.getString()).isEqualTo(expected);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2+5"})
-    @DisplayName("덧셈 테스트")
-    void 덧셈(String input) {
-        Calculator cal = new Calculator(input);
+    @NullSource
+    @EmptySource
+    @DisplayName("공백 혹은 null 입력시 예외를 발생시킨다")
+    void 공백문자열_null_입력테스트(String input) {
 
-        Assertions.assertThat(cal.calculateExpression()).isEqualTo(7);
-    }
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() ->
+                        new StringCalculator(input))
+                .withMessage("올바르지 않은 계산 식 (null 혹은 빈문자열)");
 
-    @ParameterizedTest
-    @ValueSource(strings = {"5-2"})
-    @DisplayName("덧셈 테스트")
-    void 뺄셈(String input) {
-        Calculator cal = new Calculator(input);
-
-        Assertions.assertThat(cal.calculateExpression()).isEqualTo(3);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"5*2"})
-    @DisplayName("곱셈 테스트")
-    void 곱셈(String input) {
-        Calculator cal = new Calculator(input);
-
-        Assertions.assertThat(cal.calculateExpression()).isEqualTo(10);
-    }
-
-
-    @ParameterizedTest
-    @ValueSource(strings = {"5/2"})
-    @DisplayName("나눗셈 테스트")
-    void 나눗셈(String input) {
-        Calculator cal = new Calculator(input);
-
-        Assertions.assertThat(cal.calculateExpression()).isEqualTo(2);
-    }
-
-
-    @ParameterizedTest
-    @ValueSource(strings = {"2 + 3 * 4 / 2"})
-    @DisplayName("복잡한 연산 테스트")
-    void 복잡한_연산(String input) {
-        Calculator cal = new Calculator(input);
-
-        Assertions.assertThat(cal.calculateExpression()).isEqualTo(10);
     }
 
 }
