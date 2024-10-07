@@ -3,7 +3,7 @@ package textcalculator.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class OperatorTest {
 
@@ -37,6 +37,14 @@ public class OperatorTest {
         int result = Operator.DIVIDE.apply(1, 2);
 
         assertThat(result).isEqualTo(0);
+    }
+    
+    @DisplayName("0으로는 나눗셈을 할 수 없다")
+    @Test
+    void divideByZero(){
+        assertThatThrownBy(() -> Operator.DIVIDE.apply(10, 0))
+            .isInstanceOf(ArithmeticException.class)
+            .hasMessage("0으로 나눌 수 없습니다");
     }
 
 
