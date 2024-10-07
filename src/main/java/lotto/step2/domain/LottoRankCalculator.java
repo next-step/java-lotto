@@ -6,11 +6,13 @@ import java.util.List;
 
 public class LottoRankCalculator {
     private final List<Lotto> lottos;
+    private final List<Integer> winningNumbers;
 
     private EnumMap<LottoRank, Integer> rankInfo;
 
-    public LottoRankCalculator(final List<Lotto> lottos) {
+    public LottoRankCalculator(final List<Lotto> lottos, final List<Integer> winningNumbers) {
         this.lottos = lottos;
+        this.winningNumbers = winningNumbers;
         initialize();
     }
 
@@ -18,9 +20,11 @@ public class LottoRankCalculator {
         this.rankInfo = new EnumMap<>(LottoRank.class);
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> rankInfo.put(rank, 0));
+
+        calculateLottoRank(winningNumbers);
     }
 
-    public EnumMap<LottoRank, Integer> calculateLottoRank(List<Integer> winningNumbers) {
+    private void calculateLottoRank(List<Integer> winningNumbers) {
         LottoChecker checker = new LottoChecker(winningNumbers);
 
         for (Lotto lotto : lottos) {
@@ -28,7 +32,11 @@ public class LottoRankCalculator {
             LottoRank rank = LottoRank.from(matched);
             rankInfo.put(rank, getRankCount(rank));
         }
-        return rankInfo;
+    }
+
+    public int findMatchCount(int match) {
+        LottoRank rank = LottoRank.from(match);
+        return rankInfo.get(rank);
     }
 
     private Integer getRankCount(LottoRank rank) {
@@ -38,4 +46,17 @@ public class LottoRankCalculator {
         return this.rankInfo.get(rank) + 1;
     }
 
+    public int calculateToTalAmount(){
+        int totalAmount = 0;
+
+        for (LottoRank rank : rankInfo.keySet()) {
+            int rankCount = rankInfo.get(rank);
+            int prizeByRank = rank.prize();
+
+            int amountByRank = prizeByRank * rankCount;
+            totalAmount += amountByRank;
+        }
+
+        return totalAmount;
+    }
 }
