@@ -35,4 +35,11 @@ class CalculatorTest {
         assertThatThrownBy(() -> Calculator.calculate("5 / 0"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("사칙 연산자가 아닌 문자열이 주어진 경우 IllegalArgumentException 예외가 잘 반환되는지")
+    @Test
+    void calculateTestWithNoneArithmeticOperator() {
+        assertThatThrownBy(() -> Calculator.calculate("5 @ 2"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
