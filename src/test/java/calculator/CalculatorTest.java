@@ -1,10 +1,12 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -25,5 +27,12 @@ class CalculatorTest {
                 arguments("6 * 4", 24),
                 arguments("8 / 2", 4)
         );
+    }
+
+    @DisplayName("0으로 나누었을 때 IllegalArgumentException 예외가 잘 반환되는지")
+    @Test
+    void divisionWithZeroTest() {
+        assertThatThrownBy(() -> Calculator.calculate("5 / 0"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
