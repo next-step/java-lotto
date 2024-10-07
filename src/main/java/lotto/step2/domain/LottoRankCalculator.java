@@ -44,6 +44,10 @@ public class LottoRankCalculator {
         return this.rankInfo.get(rank) + 1;
     }
 
+    public double calculateProfitRate(double purchaseAmount) {
+        double winningAmount = calculateWinningAmount();
+        return winningAmount / purchaseAmount;
+    }
 
     private double calculateWinningAmount(){
         double totalAmount = 0;

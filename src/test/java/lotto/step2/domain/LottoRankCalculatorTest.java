@@ -33,5 +33,19 @@ public class LottoRankCalculatorTest {
         assertThat(calculator.findMatchCount(4)).isEqualTo(2);
     }
 
+    @DisplayName("로또 수익률을 소수부로 계산 가능하다")
+    @Test
+    void calculateProfitRate(){
+        double purchaseAmount = 20000;
 
+        LottoRankCalculator calculator = new LottoRankCalculator(lottos, winningNumbers);
+        double profitRate = calculator.calculateProfitRate(purchaseAmount);
+
+        double winningAmount = 0;
+        winningAmount += calculator.findMatchCount(3) * LottoRank.FOURTH.prize();
+        winningAmount += calculator.findMatchCount(4) * LottoRank.THIRD.prize();
+        winningAmount += calculator.findMatchCount(5) * LottoRank.SECOND.prize();
+        winningAmount += calculator.findMatchCount(6) * LottoRank.FIRST.prize();
+        assertThat(profitRate).isEqualTo(winningAmount / purchaseAmount);
+    }
 }
