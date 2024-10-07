@@ -17,6 +17,7 @@ public class InputValidator {
         for (String item : inputItems) {
             validateSpaceBetweenItems(item);
         }
+        validateSequentialItem(inputItems);
     }
 
     private static void validateSpaceBetweenItems(String item) {
@@ -28,6 +29,31 @@ public class InputValidator {
     private static void validateFirstItemIsNumber(List<String> items) {
         if (!items.isEmpty() && !isNumber(items.get(0))) {
             throw new IllegalArgumentException("가장 첫 항목은 숫자이어야 합니다");
+        }
+    }
+
+    private static void validateSequentialItem(List<String> items) {
+        boolean isPrevNumber = false;
+        boolean isPrevOperator = false;
+
+        for (String item : items) {
+            if (isNumber(item)) {
+                isPrevNumber = true;
+                isPrevOperator = false;
+            }
+
+            if (OPERATORS.contains(item)) {
+                isPrevOperator = true;
+                isPrevNumber = false;
+            }
+
+            if (isPrevNumber && isNumber(item)) {
+                throw new IllegalArgumentException("숫자나 사칙연산자(+, -, *, /)는 연속되어 입력될 수 없습니다");
+            }
+
+            if (isPrevOperator && OPERATORS.contains(item)) {
+                throw new IllegalArgumentException("숫자나 사칙연산자(+, -, *, /)는 연속되어 입력될 수 없습니다");
+            }
         }
     }
 
