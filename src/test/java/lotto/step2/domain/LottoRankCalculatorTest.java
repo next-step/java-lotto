@@ -33,18 +33,5 @@ public class LottoRankCalculatorTest {
         assertThat(calculator.findMatchCount(4)).isEqualTo(2);
     }
 
-    @DisplayName("로또 당첨 금액을 구할 수 있다")
-    @Test
-    void lottoTotalAmount(){
-        LottoRankCalculator calculator = new LottoRankCalculator(lottos, winningNumbers);
-
-        int amount = calculator.calculateWinningAmount();
-
-        /*
-        3개 1번 5000 * 1
-        4개 2번 50000 * 2
-        */
-        assertThat(amount).isEqualTo(105000);
-    }
 
 }

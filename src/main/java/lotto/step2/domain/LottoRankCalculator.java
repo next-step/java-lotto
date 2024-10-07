@@ -44,8 +44,9 @@ public class LottoRankCalculator {
         return this.rankInfo.get(rank) + 1;
     }
 
-    public int calculateWinningAmount(){
-        int totalAmount = 0;
+
+    private double calculateWinningAmount(){
+        double totalAmount = 0;
 
         for (LottoRank rank : rankInfo.keySet()) {
             int amountByRank = amountByRank(rank);
