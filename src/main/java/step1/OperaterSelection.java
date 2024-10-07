@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperaterSelection {
-    private static Map<String, Operater> operaterMap = new HashMap<>();
+    private static final Map<String, Operater> operaterMap = new HashMap<>();
 
     public static Operater selection(String s) {
         initMapInit();
-        if(!operaterMap.containsKey(s)) {
+        if (!operaterMap.containsKey(s)) {
             throw new IllegalArgumentException("잘못된 기호");
         }
         return operaterMap.get(s);
