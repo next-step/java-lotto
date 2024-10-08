@@ -25,8 +25,15 @@ public class InputString {
         String[] splitStrings = value.split(DELIMITER);
 
         for (String element : splitStrings) {
+            checkInvalidOperator(element);
             checkNumber(element);
             checkOperator(element);
+        }
+    }
+
+    private void checkInvalidOperator(String value) {
+        if (!OPERATOR_PATTERN.matcher(value).matches() && !NUMBER_PATTERN.matcher(value).matches()) {
+            throw new IllegalArgumentException();
         }
     }
 
