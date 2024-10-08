@@ -2,9 +2,10 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class LottoBundle {
+public class LottoBundle implements Iterable<Lotto> {
     private final List<Lotto> lottoBundle;
 
     private LottoBundle(final List<Lotto> lottoBundle) {
@@ -22,5 +23,10 @@ public class LottoBundle {
 
     public int size() {
         return lottoBundle.size();
+    }
+
+    @Override
+    public Iterator<Lotto> iterator() {
+        return lottoBundle.iterator();
     }
 }

@@ -16,4 +16,9 @@ public class Lotto {
     public int size() {
         return lottoNumbers.size();
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
