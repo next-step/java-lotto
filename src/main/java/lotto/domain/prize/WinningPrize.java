@@ -1,26 +1,33 @@
 package lotto.domain.prize;
 
-import lotto.constant.Prize;
+import lotto.constant.LottoPrize;
 
-import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class WinningPrize {
 
-    private final Map<Prize, Integer> winnings = new EnumMap<>(Prize.class);
+    private final Map<Integer, Prize> winnings = new LinkedHashMap<>();
+    private final Prize nothing = new Prize(0, 0);
 
-    public void add(Prize prize) {
-        Integer before = winnings.getOrDefault(prize, 0);
-        winnings.put(prize, ++before);
+    public WinningPrize() {
+        for (LottoPrize lottoPrize : LottoPrize.values()) {
+            winnings.put(lottoPrize.getMatch(), new Prize(lottoPrize.getMatch(), lottoPrize.getPrize()));
+        }
     }
 
-    public int winAmount(Prize prize) {
-        return winnings.getOrDefault(prize, 0);
+    public void record(int match) {
+        Optional.ofNullable(winnings.get(match)).orElse(nothing).add();
+    }
+
+    public int winAmount(int match) {
+        return winnings.getOrDefault(match, nothing).quantity();
     }
 
     public int totalPrize() {
-        return winnings.keySet().stream()
-                .mapToInt(prize -> prize.getPrize() * winnings.get(prize))
+        return winnings.values().stream()
+                .mapToInt(Prize::compute)
                 .sum();
     }
 }

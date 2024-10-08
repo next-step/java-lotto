@@ -1,6 +1,6 @@
 package lotto.domain.prize;
 
-import lotto.constant.Prize;
+import lotto.constant.LottoPrize;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,16 +11,16 @@ public class WinningPrizeTest {
     void 당첨금() {
         WinningPrize prize = new WinningPrize();
 
-        prize.add(Prize.FIRST);
-        prize.add(Prize.SECOND);
-        prize.add(Prize.THIRD);
-        prize.add(Prize.THIRD);
-        prize.add(Prize.FOURTH);
-        prize.add(Prize.FOURTH);
+        prize.record(LottoPrize.FIRST.getMatch());
+        prize.record(LottoPrize.SECOND.getMatch());
+        prize.record(LottoPrize.THIRD.getMatch());
+        prize.record(LottoPrize.THIRD.getMatch());
+        prize.record(LottoPrize.FOURTH.getMatch());
+        prize.record(LottoPrize.FOURTH.getMatch());
 
-        assertThat(prize.winAmount(Prize.FIRST)).isEqualTo(1);
-        assertThat(prize.winAmount(Prize.SECOND)).isEqualTo(1);
-        assertThat(prize.winAmount(Prize.THIRD)).isEqualTo(2);
-        assertThat(prize.winAmount(Prize.FOURTH)).isEqualTo(2);
+        assertThat(prize.winAmount(LottoPrize.FIRST.getMatch())).isEqualTo(1);
+        assertThat(prize.winAmount(LottoPrize.SECOND.getMatch())).isEqualTo(1);
+        assertThat(prize.winAmount(LottoPrize.THIRD.getMatch())).isEqualTo(2);
+        assertThat(prize.winAmount(LottoPrize.FOURTH.getMatch())).isEqualTo(2);
     }
 }
