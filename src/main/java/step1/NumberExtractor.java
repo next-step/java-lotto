@@ -17,7 +17,7 @@ public class NumberExtractor {
         return instance;
     }
 
-    public static Queue<Integer> extract(String[] values) {
+    public Queue<Integer> extract(String[] values) {
         return IntStream.range(0, values.length)
                 .filter(i -> i % 2 == 0)
                 .mapToObj(i -> values[i])

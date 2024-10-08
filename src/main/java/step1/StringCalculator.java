@@ -39,8 +39,8 @@ public class StringCalculator {
     }
 
     private static int calculate(String[] splitValues) {
-        Queue<Integer> numbers = NumberExtractor.extract(splitValues);
-        Queue<String> operators = OperatorExtractor.extract(splitValues);
+        Queue<Integer> numbers = NumberExtractor.getInstance().extract(splitValues);
+        Queue<String> operators = OperatorExtractor.getInstance().extract(splitValues);
 
         int result = numbers.poll();
         while (!operators.isEmpty()) {
