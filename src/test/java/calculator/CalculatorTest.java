@@ -73,5 +73,14 @@ class CalculatorTest {
         assertThat(multiplyNumbers(num1, num2)).isEqualTo(15);
     }
 
+    @DisplayName("숫자 2개 나누기")
+    @Test
+    void 나눗셈() {
+        int num1 = 5;
+        int num2 = 3;
+        assertThat(divideNumbers(num1, num2)).isEqualTo(1);
+    }
+
+
 
 }
