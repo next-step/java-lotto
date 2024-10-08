@@ -9,8 +9,8 @@ public class LottoStatistics {
     }
 
     public static LottoWinningResults winningStatistics(
-            List<List<Integer>> lottoResults,
-            List<Integer> lastWeekWinningNumbers
+            final List<List<Integer>> lottoResults,
+            final List<Integer> lastWeekWinningNumbers
     ) {
         LottoWinningResults lottoWinningResults = new LottoWinningResults();
         lottoResults.stream().forEach(lottoResult -> {
