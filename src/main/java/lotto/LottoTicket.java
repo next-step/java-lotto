@@ -25,4 +25,11 @@ public class LottoTicket {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber == targetNumber);
     }
+
+    @Override
+    public String toString() {
+        return "LottoTicket{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
+    }
 }

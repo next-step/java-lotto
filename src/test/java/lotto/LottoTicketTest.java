@@ -33,6 +33,7 @@ class LottoTicketTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void match(int number) {
         LottoTicket lotto = LottoTicket.from(List.of(1, 2, 3, 4, 5, 6));
+
         assertThat(lotto.match(number)).isTrue();
     }
 

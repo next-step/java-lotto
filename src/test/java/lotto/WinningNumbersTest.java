@@ -31,6 +31,7 @@ class WinningNumbersTest {
         LottoTicket.from(List.of(1, 2, 3, 4, 5, 7));
 
         int count = winningNumber.match(LottoTicket.from(List.of(1, 2, 3, 4, 5, 7)));
+
         assertThat(count).isEqualTo(5);
 
     }
