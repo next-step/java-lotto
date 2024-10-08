@@ -2,20 +2,18 @@ package lotto.domain.number;
 
 import lotto.constant.ErrorMessage;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
 
+    public static final String EMPTY_STR = "";
     private static final String DELIMITER = ",";
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<LottoNumber> lotto;
 
-    private Lotto(List<LottoNumber> lotto) {
+    public Lotto(List<LottoNumber> lotto) {
         this.lotto = Collections.unmodifiableList(lotto);
     }
 
@@ -24,27 +22,21 @@ public class Lotto {
     }
 
     public static Lotto of(String lottoNumberString) {
-        String[] numbers = Objects.requireNonNull(lottoNumberString).split(DELIMITER);
+        List<String> numbers = Arrays.stream(Objects.requireNonNull(lottoNumberString).split(DELIMITER))
+                .map(String::trim)
+                .collect(Collectors.toList());
         validateNumbers(numbers);
 
-        return new Lotto(Stream.of(numbers)
-                .map(str -> LottoNumber.of(Integer.parseInt(str.trim())))
+        return new Lotto(numbers.stream()
+                .map(str -> LottoNumber.of(Integer.parseInt(str)))
                 .collect(Collectors.toList()));
     }
 
-    private static void validateNumbers(String[] numbers) {
-        if (Stream.of(numbers).map(String::trim).anyMatch(String::isBlank)
-                || numbers.length != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ErrorMessage.NEED_SIX_NUMBERS.getMessage());
+    private static void validateNumbers(List<String> numbers) {
+        Set<String> numberSet = new HashSet<>(numbers);
+        if (numberSet.contains(EMPTY_STR) || numberSet.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
         }
-
-        if (Stream.of(numbers).map(String::trim).distinct().count() != numbers.length) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER.getMessage());
-        }
-    }
-
-    public Stream<LottoNumber> stream() {
-        return lotto.stream();
     }
 
     public int match(Lotto compared) {

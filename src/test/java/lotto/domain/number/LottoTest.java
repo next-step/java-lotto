@@ -2,46 +2,52 @@ package lotto.domain.number;
 
 import lotto.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
     @Test
-    void 로또_생성_무작위() {
-        Lotto lotto = Lotto.create();
-        LottoNumber[] sequence = IntStream.range(1, 7)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList())
-                .toArray(new LottoNumber[] {});
+    void 문자열_변환_로또_생성() {
+        Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
+        Lotto compared = new Lotto(List.of(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)));
 
-        assertThat(lotto.stream().allMatch(number -> number.number() > 0 && number.number() < 46))
-                .isTrue();
-        assertThat(lotto.stream().map(LottoNumber::number).collect(Collectors.toList()))
-                .isSorted();
-        assertThat(lotto.stream().collect(Collectors.toList())).doesNotContainSequence(sequence);
+        assertThat(lotto.match(compared)).isEqualTo(6);
     }
 
     @Test
-    void 로또_생성_문자열() {
-        Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
+    @DisplayName("무작위 번호로 로또 번호 6개가 정상적으로 생성되었는지 확인한다. 무작위가 아니면 1,2,3,4,5,6로 생성됨")
+    void 무작위_번호_로또_생성() {
+        Lotto lotto = Lotto.create();
+        Lotto compared = new Lotto(List.of(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)));
 
-        assertThat(lotto.stream().allMatch(number -> number.number() > 0 && number.number() < 46))
-                .isTrue();
+        assertThat(lotto.match(compared)).isNotEqualTo(6);
     }
 
     @Test
     void 로또_생성_중복숫자() {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.of("1, 1, 3, 4, 5, 6"))
-                .withMessage(ErrorMessage.DUPLICATE_NUMBER.getMessage());
+                .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
     }
 
     @ParameterizedTest
@@ -61,7 +67,7 @@ public class LottoTest {
     void 로또_생성_문자열_빈문자() {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.of(""))
-                .withMessage(ErrorMessage.NEED_SIX_NUMBERS.getMessage());
+                .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
     }
 
     @ParameterizedTest
@@ -69,7 +75,7 @@ public class LottoTest {
     void 로또_생성_문자열_6개_아님(String text) {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.of(text))
-                .withMessage(ErrorMessage.NEED_SIX_NUMBERS.getMessage());
+                .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
     }
 
     @ParameterizedTest

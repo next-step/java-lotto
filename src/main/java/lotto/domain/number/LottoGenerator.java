@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-abstract class LottoGenerator {
+class LottoGenerator {
+
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(1, 45)
+            .boxed().collect(Collectors.toList());
+
+    private LottoGenerator() {
+    }
 
     static List<LottoNumber> generate() {
-        List<Integer> lottoNumbers = IntStream.rangeClosed(1, 45)
-                .boxed().collect(Collectors.toList());
-        Collections.shuffle(lottoNumbers);
+        Collections.shuffle(LOTTO_NUMBERS);
 
-        return lottoNumbers.subList(0, 6).stream()
+        return LOTTO_NUMBERS.subList(0, 6).stream()
                 .sorted()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());

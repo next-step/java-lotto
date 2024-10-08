@@ -1,6 +1,7 @@
 package lotto.domain.sales;
 
 import lotto.domain.number.Lotto;
+import lotto.domain.prize.WinningPrize;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,6 +33,14 @@ public class LottoBundle {
 
     public int count() {
         return lottos.size();
+    }
+
+    public WinningPrize winPrize(Lotto winningLotto) {
+        WinningPrize winningPrize = new WinningPrize();
+        for (Lotto lotto : lottos) {
+            winningPrize.record(winningLotto.match(lotto));
+        }
+        return winningPrize;
     }
 
     @Override
