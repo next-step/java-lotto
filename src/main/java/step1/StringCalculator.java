@@ -1,19 +1,10 @@
 package step1;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    private static final Map<String, Operator> operatorMap = Map.of(
-            "+", Operator.PLUS,
-            "-", Operator.MINUS,
-            "*", Operator.MULTIPLY,
-            "/", Operator.DIVIDE
-    );
     private static final String DELIMITER = " ";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
 
@@ -62,7 +53,7 @@ public class StringCalculator {
     }
 
     private static int operate(int x, int y, String operator) {
-        return operatorMap.get(operator).calculate(x, y);
+        return Operator.calculate(operator, x, y);
     }
 
 }
