@@ -1,7 +1,6 @@
-package calculator;
+package calculator.entity;
 
-public class StringCalculator {
-
+public class Calculator {
 
     public static int add(int result, int number) {
         return result + number;
