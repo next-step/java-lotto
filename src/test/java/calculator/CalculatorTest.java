@@ -44,5 +44,4 @@ class CalculatorTest {
         assertThat(queue.poll()).isEqualTo(calculateArray[2]);
     }
 
-
 }
