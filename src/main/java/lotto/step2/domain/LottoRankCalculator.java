@@ -5,12 +5,12 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class LottoRankCalculator {
-    private final List<Lotto> lottos;
+    private final Lottos lottos;
     private final WinningNumbers winningNumbers;
 
     private EnumMap<LottoRank, Integer> rankInfo;
 
-    public LottoRankCalculator(final List<Lotto> lottos, final WinningNumbers winningNumbers) {
+    public LottoRankCalculator(final Lottos lottos, final WinningNumbers winningNumbers) {
         this.lottos = lottos;
         this.winningNumbers = winningNumbers;
         initialize();
@@ -25,8 +25,8 @@ public class LottoRankCalculator {
     }
 
     private void calculateLottoRank() {
-        for (Lotto lotto : lottos) {
-            int matched = winningNumbers.matchWinningNumber(lotto);
+        List<Integer> matchCounts = lottos.countMatchingNumbers(winningNumbers);
+        for (int matched : matchCounts) {
             LottoRank rank = LottoRank.from(matched);
             rankInfo.put(rank, getRankCount(rank));
         }

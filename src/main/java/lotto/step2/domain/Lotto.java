@@ -58,7 +58,7 @@ public class Lotto {
     }
 
     private boolean isNotValidNumber(int number) {
-        return number > LIMIT_LOTTO_NUMBER || number <= 0;
+        return number > LIMIT_LOTTO_NUMBER && number <= 0;
     }
 
     private boolean duplicateNumber() {
@@ -71,5 +71,10 @@ public class Lotto {
 
     public boolean hasNumber(Integer winningNumber) {
         return this.numbers.contains(winningNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(numbers);
     }
 }
