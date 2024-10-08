@@ -1,6 +1,9 @@
 package view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static Scanner SC = new Scanner(System.in);
@@ -13,6 +16,14 @@ public class InputView {
     public static Integer getPaidMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         return Integer.parseInt(SC.nextLine());
+    }
+
+    public static List<Integer> getWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String line = SC.nextLine();
+        return Arrays.stream(line.split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public static String[] splitByEmptyString(String input) {
