@@ -19,7 +19,7 @@ public class Lotto {
         return prize;
     }
 
-    public Lotto getMatched(List<Integer> winningNumbers) {
+    public void calPrize(List<Integer> winningNumbers) {
         int cnt = 0;
         for (Integer elem : winningNumbers) {
             if (this.numbers.contains(elem)) {
@@ -28,6 +28,5 @@ public class Lotto {
         }
 
         this.prize = Prize.getPrize(cnt);
-        return this;
     }
 }
