@@ -7,6 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -47,5 +48,15 @@ class CalculatorTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INPUT_IS_NOT_OPERATOR_SYMBOL);
     }
+
+    @DisplayName("숫자 2개 더하기")
+    @Test
+    void 더하기() {
+        int num1=5;
+        int num2=3;
+        assertThat(addNumbers(num1,num2)).isEqualTo(8);
+    }
+
+
 
 }

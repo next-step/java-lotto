@@ -30,4 +30,8 @@ public class Calculator {
             throw new IllegalArgumentException(INPUT_IS_NOT_OPERATOR_SYMBOL);
         }
     }
+
+    public static int addNumbers(int num1, int num2) {
+        return num1+num2;
+    }
 }
