@@ -36,6 +36,6 @@ public class InputTest {
                 new Memory(Operator.convertToOperator("/"), new Operand("2"))
         );
 
-        Assertions.assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(expected);
     }
 }
