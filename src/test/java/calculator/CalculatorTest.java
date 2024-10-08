@@ -5,6 +5,7 @@ import static calculator.Calculator.validateString;
 import static calculator.ErrorMessage.BLINK_INPUT_ERROR;
 import static calculator.ErrorMessage.INPUT_IS_NOT_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.platform.commons.util.StringUtils.isBlank;
 
@@ -24,13 +25,20 @@ class CalculatorTest {
                 .hasMessageContaining(BLINK_INPUT_ERROR);
     }
 
-    @DisplayName("입력받은 문자가 숫자일 경우 에러를 발생한다.")
+    @DisplayName("입력받은 문자가 숫자가 아닌 경우 에러를 발생한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"a"})
+    @ValueSource(strings = {"a", "hi"})
     void 숫자가_아닌경우_에러(String input) {
         assertThatThrownBy(() -> {
             convertStringToInt(input);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INPUT_IS_NOT_NUMBER);
+    }
+
+    @DisplayName("입력받은 문자가 숫자일 경우 숫자로 변환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "3", "-1", "0"})
+    void 문자를_숫자로_변환(String input) {
+        assertThat(convertStringToInt(input)).isEqualTo(Integer.parseInt(input));
     }
 }
