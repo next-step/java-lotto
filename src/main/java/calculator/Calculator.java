@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
 import static calculator.ErrorMessage.*;
@@ -21,6 +23,14 @@ public class Calculator {
 
     private static boolean isBlank(String input) {
         return (input == null || input.trim().isEmpty());
+    }
+
+    public static Queue<String> addArrToQueue(String[] calculateArray) {
+        Queue<String> queue = new LinkedList<>();
+        for (String str : calculateArray) {
+            queue.add(str);
+        }
+        return queue;
     }
 
     public static int convertStringToInt(String input) {
