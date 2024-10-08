@@ -11,24 +11,23 @@ public class FormularValidator {
 
     public static void validate(String[] formularTokens) {
 
-        for(int j=0; j < formularTokens.length ; j=j+2  ){
-            checkOperand(formularTokens[j]);
+        for(int j=0; j < formularTokens.length ; j = j+2  ){
+            validateOperand(formularTokens[j]);
         }
-        checkOperand(formularTokens[formularTokens.length-1]);
+        validateOperand(formularTokens[formularTokens.length-1]);
 
         for(int i=1; i < formularTokens.length ; i=i+2) {
-                checkOperator(formularTokens[i]);
+                validateOperator(formularTokens[i]);
         }
-
     }
-    private static void checkOperand(String formularToken) {
+    private static void validateOperand(String formularToken) {
         if(Pattern.matches(REGEXP_PATTERN_NUMBER, formularToken)){
             return ;
         }
         throw new IllegalArgumentException("입력 산식 피연산자 오류");
     }
 
-    private static void checkOperator(String formularToken) {
+    private static void validateOperator(String formularToken) {
         if (OPERATORS.contains(formularToken)) {
             return ;
         }
