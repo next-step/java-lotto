@@ -92,6 +92,16 @@ class CalculatorTest {
                 .hasMessageContaining(DIVDE_ZERO_ERROR);
     }
 
+    @DisplayName("공백으로 문자열에서 숫자와 사칙연산 분리")
+    @Test
+    void 문자열_분리(){
+        String input = "4 + 6";
+        String calculateArray[] = splitInput(input);
+        assertThat(calculateArray[0]).isEqualTo("4");
+        assertThat(calculateArray[1]).isEqualTo("+");
+        assertThat(calculateArray[2]).isEqualTo("6");
+    }
+
 
 
 }

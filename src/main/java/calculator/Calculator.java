@@ -5,7 +5,8 @@ import java.util.Set;
 import static calculator.ErrorMessage.*;
 
 public class Calculator {
-    private static final Set<String> operationSet = Set.of("+", "-", "*", "/");
+    private static final Set<String> OPERATION_SET = Set.of("+", "-", "*", "/");
+    private static final String DELIMETER = " ";
 
     public static void validateString(String input) {
         if (isBlank(input)) {
@@ -26,7 +27,7 @@ public class Calculator {
     }
 
     public static void validateOperationSymbol(String input) {
-        if (!operationSet.contains(input)) {
+        if (!OPERATION_SET.contains(input)) {
             throw new IllegalArgumentException(INPUT_IS_NOT_OPERATOR_SYMBOL);
         }
     }
@@ -44,9 +45,13 @@ public class Calculator {
     }
 
     public static int divideNumbers(int num1, int num2) {
-        if(num2==0){
+        if (num2 == 0) {
             throw new IllegalArgumentException(DIVDE_ZERO_ERROR);
         }
         return num1 / num2;
+    }
+
+    public static String[] splitInput(String input) {
+        return input.split(DELIMETER);
     }
 }
