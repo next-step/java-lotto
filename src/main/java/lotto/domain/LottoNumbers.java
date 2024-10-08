@@ -22,6 +22,16 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
+    public boolean contains(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public long matchCount(final LottoNumbers other) {
+        return lottoNumbers.stream()
+            .filter(other::contains)
+            .count();
+    }
+
     public LottoNumbers shuffleAndPickLottoNumbers() {
         final List<LottoNumber> pickedNumbers = pickLottoNumbers(shuffle());
         Collections.sort(pickedNumbers);
