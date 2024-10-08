@@ -5,12 +5,23 @@ import java.util.Collections;
 import java.util.List;
 
 public interface LottoNumberStrategy {
-    default List<Integer> create() {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            list.add(i);
+    default List<List<Integer>> create(int cnt) {
+        List<List<Integer>> numberSet = new ArrayList<>();
+
+        for (int i = 0; i < cnt; i++) {
+            List<Integer> shuffledNumbers = getShuffledNumbers();
+            numberSet.add(shuffledNumbers);
         }
-        Collections.shuffle(list);
-        return list.subList(0, 6);
+
+        return numberSet;
+    }
+
+    private static List<Integer> getShuffledNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+        for (int j = 1; j <= 45; j++) {
+            numbers.add(j);
+        }
+        Collections.shuffle(numbers);
+        return numbers.subList(0, 6);
     }
 }

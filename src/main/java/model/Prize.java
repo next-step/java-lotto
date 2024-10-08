@@ -28,6 +28,6 @@ public enum Prize {
         return Arrays.stream(Prize.values())
                 .filter(it -> it.matched == matched)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("illegal matched"));
+                .orElse(null);
     }
 }

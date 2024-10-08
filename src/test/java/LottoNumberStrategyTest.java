@@ -1,12 +1,12 @@
 import model.LottoNumberStrategy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 public class LottoNumberStrategyTest {
-    @RepeatedTest(10)
+    @Test
     @DisplayName("로또 넘버 생성")
     void createLottoNumbersTest() {
         //given
@@ -14,18 +14,12 @@ public class LottoNumberStrategyTest {
         };
 
         //when
-        List<Integer> numbers = lottoNumberStrategy.create();
+        List<List<Integer>> numbers = lottoNumberStrategy.create(6);
 
 
         //then
         System.out.println(numbers);
         Assertions.assertThat(numbers).hasSize(6);
-        int cnt = 0;
-        for (Integer number : numbers) {
-            if (number >= 1 && number <= 45) {
-                cnt++;
-            }
-        }
-        Assertions.assertThat(cnt).isEqualTo(6);
+        numbers.stream().flatMap(List::stream).forEach(it -> Assertions.assertThat(it).isBetween(1, 45));
     }
 }
