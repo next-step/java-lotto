@@ -8,7 +8,12 @@ public class Calculator {
     private static final Set<String> OPERATION_SET = Set.of("+", "-", "*", "/");
     private static final String DELIMETER = " ";
 
-    public static void validateString(String input) {
+    public static String[] splitInput(String input) {
+        validateString(input);
+        return input.split(DELIMETER);
+    }
+
+    private static void validateString(String input) {
         if (isBlank(input)) {
             throw new IllegalArgumentException(BLINK_INPUT_ERROR);
         }
@@ -51,7 +56,5 @@ public class Calculator {
         return num1 / num2;
     }
 
-    public static String[] splitInput(String input) {
-        return input.split(DELIMETER);
-    }
+
 }
