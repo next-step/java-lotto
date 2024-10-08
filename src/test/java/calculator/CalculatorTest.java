@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Queue;
 
 class CalculatorTest {
     @DisplayName("공백으로 문자열에서 숫자와 사칙연산 분리")
@@ -32,16 +31,6 @@ class CalculatorTest {
             splitInput(input);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(BLINK_INPUT_ERROR);
-    }
-
-    @DisplayName("분리한 문자를 Queue에 넣는다.")
-    @Test
-    void 문자_Queue에_넣기() {
-        String[] calculateArray = {"4", "+", "6"};
-        Queue<String> queue = addArrToQueue(calculateArray);
-        assertThat(queue.poll()).isEqualTo(calculateArray[0]);
-        assertThat(queue.poll()).isEqualTo(calculateArray[1]);
-        assertThat(queue.poll()).isEqualTo(calculateArray[2]);
     }
 
 }

@@ -2,12 +2,18 @@ package calculator;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 import static calculator.ErrorMessage.*;
+import static calculator.InputView.inputStr;
 
 public class Calculator {
-
     private static final String DELIMETER = " ";
+    public static void StartCalculate(){
+        String[] inputArrays= splitInput(inputStr());
+        OperationHandler operationHandler = new OperationHandler(inputArrays);
+        operationHandler.calculate();
+    }
 
     public static String[] splitInput(String input) {
         validateString(input);
@@ -23,14 +29,5 @@ public class Calculator {
     private static boolean isBlank(String input) {
         return (input == null || input.trim().isEmpty());
     }
-
-    public static Queue<String> addArrToQueue(String[] calculateArray) {
-        Queue<String> queue = new LinkedList<>();
-        for (String str : calculateArray) {
-            queue.add(str);
-        }
-        return queue;
-    }
-
 
 }
