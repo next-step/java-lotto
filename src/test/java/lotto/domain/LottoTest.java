@@ -13,7 +13,7 @@ class LottoTest {
     @Test
     void 옳바른_로또_생성() {
         List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::generateByValue)
                 .collect(Collectors.toList());
 
         Lotto lotto = new Lotto(lottoNumbers);
@@ -23,7 +23,7 @@ class LottoTest {
     @Test
     void 로또_생성시_6개_검증() {
         List<LottoNumber> lottoNumbers = Stream.of(1, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::generateByValue)
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
@@ -33,7 +33,7 @@ class LottoTest {
     @Test
     void 로또_생성시_중복검증() {
         List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 3, 3, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::generateByValue)
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
