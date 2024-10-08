@@ -44,6 +44,9 @@ public class Calculator {
     }
 
     public static int divideNumbers(int num1, int num2) {
+        if(num2==0){
+            throw new IllegalArgumentException(DIVDE_ZERO_ERROR);
+        }
         return num1 / num2;
     }
 }

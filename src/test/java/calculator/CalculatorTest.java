@@ -81,6 +81,17 @@ class CalculatorTest {
         assertThat(divideNumbers(num1, num2)).isEqualTo(1);
     }
 
+    @DisplayName("0으로 나눌 때 에러발생")
+    @Test
+    void 나눗셈_에러() {
+        int num1 = 5;
+        int num2 = 0;
+        assertThatThrownBy(() -> {
+            divideNumbers(num1, num2);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(DIVDE_ZERO_ERROR);
+    }
+
 
 
 }
