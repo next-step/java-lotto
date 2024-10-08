@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.number.Lotto;
-import lotto.domain.prize.WinningReport;
+import lotto.domain.prize.WinningPrize;
 import lotto.domain.sales.LottoBill;
 import lotto.domain.sales.LottoBundle;
 import lotto.view.InputView;
@@ -18,8 +18,7 @@ public class ConsoleLottoSalesStore {
         resultView.show(lottoBundle);
 
         Lotto lastWinningLotto = inputView.lastWinningLotto();
-        WinningReport winningReport = WinningReport.of(bill.salesAmount(), lottoBundle, lastWinningLotto);
-
-        resultView.report(winningReport);
+        WinningPrize winningPrize = lottoBundle.winPrize(lastWinningLotto);
+        resultView.report(winningPrize, bill);
     }
 }

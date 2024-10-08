@@ -1,7 +1,8 @@
 package lotto.view;
 
 import lotto.constant.LottoPrize;
-import lotto.domain.prize.WinningReport;
+import lotto.domain.prize.WinningPrize;
+import lotto.domain.sales.LottoBill;
 import lotto.domain.sales.LottoBundle;
 
 public class ResultView {
@@ -15,19 +16,19 @@ public class ResultView {
         }
     }
 
-    public void report(WinningReport winningReport) {
+    public void report(WinningPrize winningPrize, LottoBill bill) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("-------------------");
-        printPrizes(winningReport);
-        printProfit(winningReport.winningRate());
+        printPrizes(winningPrize);
+        printProfit((double) winningPrize.totalPrize() / bill.salesAmount());
     }
 
-    private void printPrizes(WinningReport winningReport) {
+    private void printPrizes(WinningPrize winningPrize) {
         for (LottoPrize lottoPrize : LottoPrize.values()) {
             System.out.println(lottoPrize.getMatch()
                     + "개 일치 (" + lottoPrize.getPrize() + "원)- "
-                    + winningReport.winAmount(lottoPrize.getMatch()) + "개");
+                    + winningPrize.winAmount(lottoPrize.getMatch()) + "개");
         }
     }
 
