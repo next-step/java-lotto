@@ -1,13 +1,9 @@
 package calculator;
 
-import static calculator.Calculator.convertStringToInt;
-import static calculator.Calculator.validateString;
-import static calculator.ErrorMessage.BLINK_INPUT_ERROR;
-import static calculator.ErrorMessage.INPUT_IS_NOT_NUMBER;
+import static calculator.Calculator.*;
+import static calculator.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.platform.commons.util.StringUtils.isBlank;
 
 
 import org.junit.jupiter.api.DisplayName;
@@ -41,4 +37,15 @@ class CalculatorTest {
     void 문자를_숫자로_변환(String input) {
         assertThat(convertStringToInt(input)).isEqualTo(Integer.parseInt(input));
     }
+
+    @DisplayName("입력받은 문자가 사칙연산 기호가 아닌 경우 에러를 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "h"})
+    void 사칙연산_기호가_아닌경우_에러(String input) {
+        assertThatThrownBy(() -> {
+            validateOperationSymbol(input);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INPUT_IS_NOT_OPERATOR_SYMBOL);
+    }
+
 }

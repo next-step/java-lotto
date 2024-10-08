@@ -1,9 +1,12 @@
 package calculator;
 
-import static calculator.ErrorMessage.BLINK_INPUT_ERROR;
-import static calculator.ErrorMessage.INPUT_IS_NOT_NUMBER;
+import java.util.Set;
+
+import static calculator.ErrorMessage.*;
 
 public class Calculator {
+    private static final Set<String> operationSet = Set.of("+", "-", "*", "/");
+
     public static void validateString(String input) {
         if (isBlank(input)) {
             throw new IllegalArgumentException(BLINK_INPUT_ERROR);
@@ -22,4 +25,9 @@ public class Calculator {
         }
     }
 
+    public static void validateOperationSymbol(String input) {
+        if (!operationSet.contains(input)) {
+            throw new IllegalArgumentException(INPUT_IS_NOT_OPERATOR_SYMBOL);
+        }
+    }
 }
