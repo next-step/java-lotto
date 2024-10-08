@@ -1,18 +1,18 @@
-package calculator;
+package calculator.domain;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import calculator.view.ResultView;
 
-import static calculator.ErrorMessage.*;
-import static calculator.InputView.inputStr;
+import static calculator.domain.ErrorMessage.*;
+import static calculator.view.InputView.inputStr;
+import static calculator.view.ResultView.printResult;
 
 public class Calculator {
     private static final String DELIMETER = " ";
-    public static void StartCalculate(){
-        String[] inputArrays= splitInput(inputStr());
+
+    public static void StartCalculate() {
+        String[] inputArrays = splitInput(inputStr(ResultView::printInputMessage));
         OperationHandler operationHandler = new OperationHandler(inputArrays);
-        operationHandler.calculate();
+        printResult(operationHandler.calculate());
     }
 
     public static String[] splitInput(String input) {

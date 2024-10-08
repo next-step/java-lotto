@@ -1,24 +1,26 @@
-package calculator;
+package calculator.domain;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
-import static calculator.ErrorMessage.*;
+import static calculator.domain.ErrorMessage.*;
 
 public class OperationHandler {
     private static final Set<String> OPERATION_SET = Set.of("+", "-", "*", "/");
     private Queue<String> operations;
-    public OperationHandler(String[] operationArrays){
-        this.operations=new LinkedList<>();
+
+
+    public OperationHandler(String[] operationArrays) {
+        this.operations = new LinkedList<>();
         for (String operation : operationArrays) {
             operations.add(operation);
         }
     }
 
-    public int calculate(){
-        int calc= convertStringToInt(operations.poll());
-        while (!operations.isEmpty()){
+    public int calculate() {
+        int calc = convertStringToInt(operations.poll());
+        while (!operations.isEmpty()) {
             validateCalcSize(operations);
             Operation operation = new Operation(calc, validateOperationSymbol(operations.poll()), convertStringToInt(operations.poll()));
             calc = operation.execute();
@@ -26,8 +28,8 @@ public class OperationHandler {
         return calc;
     }
 
-    private void validateCalcSize(Queue<String> queue){
-        if(queue.size()<2){
+    private void validateCalcSize(Queue<String> queue) {
+        if (queue.size() < 2) {
             throw new IllegalArgumentException(NOTHING_TO_CACULATE);
         }
     }

@@ -1,22 +1,30 @@
 package calculator;
 
-import org.junit.jupiter.api.BeforeEach;
+import calculator.domain.OperationHandler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static calculator.ErrorMessage.INPUT_IS_NOT_NUMBER;
-import static calculator.ErrorMessage.INPUT_IS_NOT_OPERATOR_SYMBOL;
+import static calculator.domain.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class OperationHandlerTest {
 
     @DisplayName("입력받은 큐들을 계산할 수 있다.")
     @Test
     void 총_계산() {
-        OperationHandler operationHandler =  new OperationHandler(new String[]{"1", "+", "1","*","4"});
-        assertThat(operationHandler.calculate()).isEqualTo(8);
+        OperationHandler operationHandler = new OperationHandler(new String[]{"1", "+", "3", "*", "4"});
+        assertThat(operationHandler.calculate()).isEqualTo(16);
+    }
+
+    @DisplayName("계산 에러 ex. 1 + 1 + 1")
+    @Test
+    void 계산_에러() {
+        OperationHandler operationHandler = new OperationHandler(new String[]{"1", "+", "1", "+"});
+        assertThatThrownBy(() -> {
+            operationHandler.calculate();
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(NOTHING_TO_CACULATE);
     }
 
     @DisplayName("입력받은 문자가 숫자가 아닌 경우 에러를 발생한다.")

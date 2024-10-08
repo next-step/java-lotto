@@ -1,8 +1,6 @@
-package calculator;
+package calculator.domain;
 
-import java.util.Set;
-
-import static calculator.ErrorMessage.*;
+import static calculator.domain.ErrorMessage.*;
 
 public class Operation {
     private static final String ADD_SYMBOL = "+";

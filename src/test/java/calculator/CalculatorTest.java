@@ -1,7 +1,7 @@
 package calculator;
 
-import static calculator.Calculator.*;
-import static calculator.ErrorMessage.*;
+import static calculator.domain.Calculator.*;
+import static calculator.domain.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
