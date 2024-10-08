@@ -51,12 +51,19 @@ class CalculatorTest {
 
     @DisplayName("숫자 2개 더하기")
     @Test
-    void 더하기() {
-        int num1=5;
-        int num2=3;
-        assertThat(addNumbers(num1,num2)).isEqualTo(8);
+    void 덧셈() {
+        int num1 = 5;
+        int num2 = 3;
+        assertThat(addNumbers(num1, num2)).isEqualTo(8);
     }
 
+    @DisplayName("숫자 2개 빼기")
+    @Test
+    void 뺄셈() {
+        int num1 = 5;
+        int num2 = 3;
+        assertThat(subtractNumbers(num1, num2)).isEqualTo(2);
+    }
 
 
 }
