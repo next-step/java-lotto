@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.*;
-import static stringcalculator.model.Operator.convertStringToOperator;
+import static org.assertj.core.api.Assertions.assertThat;
+import static stringcalculator.model.Operator.convertToOperator;
 
 public class MemoryTest {
     @Test
     void 연산자와_피연산자를_저장한다() {
-        Memory actual = new Memory(convertStringToOperator("+"), new Operand("3"));
-        Memory expected = new Memory(convertStringToOperator("+"), new Operand("3"));
-        Memory falseExpected1 = new Memory(convertStringToOperator("/"), new Operand("3"));
-        Memory falseExpected2 = new Memory(convertStringToOperator("+"), new Operand("4"));
-        Memory falseExpected3 = new Memory(convertStringToOperator("/"), new Operand("4"));
+        Memory actual = new Memory(convertToOperator("+"), new Operand("3"));
+        Memory expected = new Memory(convertToOperator("+"), new Operand("3"));
+        Memory falseExpected1 = new Memory(convertToOperator("/"), new Operand("3"));
+        Memory falseExpected2 = new Memory(convertToOperator("+"), new Operand("4"));
+        Memory falseExpected3 = new Memory(convertToOperator("/"), new Operand("4"));
 
         assertThat(actual).isEqualTo(expected);
         assertThat(actual).isNotEqualTo(falseExpected1);
@@ -31,7 +31,7 @@ public class MemoryTest {
     })
     void 메모리에서_사칙연산을_계산한다(String operand1, String operator, String operand2, String operandResult) {
         Operand firstOperand = new Operand(operand1);
-        Memory memory = new Memory(convertStringToOperator(operator), new Operand(operand2));
+        Memory memory = new Memory(convertToOperator(operator), new Operand(operand2));
 
         Operand actual = memory.calculate(firstOperand);
         Operand expected = new Operand(operandResult);

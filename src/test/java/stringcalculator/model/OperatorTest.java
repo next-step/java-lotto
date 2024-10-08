@@ -36,10 +36,10 @@ public class OperatorTest {
 
     @Test
     void 특수문자_4개를_연산자타입으로_바꿔준다() {
-        Operator actualSum = convertStringToOperator("+");
-        Operator actualSubtract = convertStringToOperator("-");
-        Operator actualMultiply = convertStringToOperator("*");
-        Operator actualDivide = convertStringToOperator("/");
+        Operator actualSum = convertToOperator("+");
+        Operator actualSubtract = convertToOperator("-");
+        Operator actualMultiply = convertToOperator("*");
+        Operator actualDivide = convertToOperator("/");
 
         Assertions.assertThat(actualSum).isEqualTo(SUM);
         Assertions.assertThat(actualSubtract).isEqualTo(SUBTRACT);
@@ -50,7 +50,7 @@ public class OperatorTest {
     @Test
     void 특수문자_4개_이외에_다른_값이_입력되면_오류() {
         Assertions.assertThatThrownBy(() -> {
-                    convertStringToOperator("f");
+                    convertToOperator("f");
                 }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(NOT_ALLOWED_OPERATOR_ANOTHER_STRINGS);
     }

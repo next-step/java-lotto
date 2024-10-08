@@ -9,6 +9,10 @@ public class Result {
         this.value = number;
     }
 
+    public int value() {
+        return this.value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

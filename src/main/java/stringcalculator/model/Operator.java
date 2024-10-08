@@ -17,7 +17,7 @@ public enum Operator {
         this.calculate = calculate;
     }
 
-    public static Operator convertStringToOperator(String label) {
+    public static Operator convertToOperator(String label) {
         if (SUM.label.equals(label)) {
             return SUM;
         }

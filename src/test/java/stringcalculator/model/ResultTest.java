@@ -14,4 +14,13 @@ public class ResultTest {
         assertThat(actual).isEqualTo(trueExpected);
         assertThat(actual).isNotEqualTo(falseExpected);
     }
+
+    @Test
+    void 결과를_출력한다() {
+        Result result = new Result(2);
+        int actual = result.value();
+        int expected = 2;
+
+        assertThat(actual).isEqualTo(expected);
+    }
 }
