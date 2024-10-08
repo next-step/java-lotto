@@ -1,6 +1,6 @@
 package lotto.domain.prize;
 
-import lotto.constant.Prize;
+import lotto.constant.LottoPrize;
 import lotto.domain.sales.LottoBundle;
 import lotto.domain.number.Lotto;
 import org.junit.jupiter.api.Test;
@@ -25,15 +25,10 @@ public class WinningReportTest {
 
         WinningReport report = WinningReport.of(lottoBundle.count() * 1000, lottoBundle, winningLotto);
 
-        assertThat(report.first()).isEqualTo(1);
-        assertThat(report.second()).isEqualTo(1);
-        assertThat(report.third()).isEqualTo(1);
-        assertThat(report.fourth()).isEqualTo(1);
-
-        assertThat(report.winAmount(Prize.FOURTH)).isEqualTo(1);
-        assertThat(report.winAmount(Prize.THIRD)).isEqualTo(1);
-        assertThat(report.winAmount(Prize.SECOND)).isEqualTo(1);
-        assertThat(report.winAmount(Prize.FIRST)).isEqualTo(1);
+        assertThat(report.winAmount(LottoPrize.FOURTH.getMatch())).isEqualTo(1);
+        assertThat(report.winAmount(LottoPrize.THIRD.getMatch())).isEqualTo(1);
+        assertThat(report.winAmount(LottoPrize.SECOND.getMatch())).isEqualTo(1);
+        assertThat(report.winAmount(LottoPrize.FIRST.getMatch())).isEqualTo(1);
     }
 
     @Test
@@ -50,6 +45,6 @@ public class WinningReportTest {
         WinningReport report = WinningReport.of(salesAmount, lottoBundle, winningLotto);
 
         assertThat(report.winningRate())
-                .isEqualTo((double)(Prize.THIRD.getPrize() + Prize.FOURTH.getPrize())/ salesAmount);
+                .isEqualTo((double)(LottoPrize.THIRD.getPrize() + LottoPrize.FOURTH.getPrize())/ salesAmount);
     }
 }
