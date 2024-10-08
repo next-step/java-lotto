@@ -14,10 +14,10 @@ class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("로또 번호 목록의 shuffle 은 랜덤한 6개의 로또 번호를 반환한다.")
+    @DisplayName("로또 번호 목록의 shuffleAndPickLottoNumbers 은 랜덤한 6개의 로또 번호를 반환한다.")
     void shouldReturnSixRandomLottoNumbers() {
         final LottoNumbers lottoNumbers = new LottoNumbers();
-        final LottoNumbers shuffleNumbers = lottoNumbers.shuffle();
+        final LottoNumbers shuffleNumbers = lottoNumbers.shuffleAndPickLottoNumbers();
         assertThat(shuffleNumbers.size()).isEqualTo(6);
     }
 }

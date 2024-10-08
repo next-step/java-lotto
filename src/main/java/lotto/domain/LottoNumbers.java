@@ -22,7 +22,7 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
-    public LottoNumbers shuffle() {
+    public LottoNumbers shuffleAndPickLottoNumbers() {
         final List<LottoNumber> shuffledLottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.shuffle(shuffledLottoNumbers);
         return new LottoNumbers(shuffledLottoNumbers.subList(0, LOTTO_PICK_COUNT));
