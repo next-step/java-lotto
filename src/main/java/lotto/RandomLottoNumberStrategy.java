@@ -12,19 +12,14 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
-    private RandomLottoNumberStrategy() {
-    }
-
-    public static RandomLottoNumberStrategy create() {
-        return new RandomLottoNumberStrategy();
-    }
 
     @Override
     public List<Integer> generate() {
         List<Integer> lottoNumbers = initLottoNumbers();
         Collections.shuffle(lottoNumbers);
-        Collections.sort(extractLottoNumbers(lottoNumbers));
-        return lottoNumbers;
+        List<Integer> winningLottoNumbers = extractLottoNumbers(lottoNumbers);
+        Collections.sort( winningLottoNumbers);
+        return winningLottoNumbers;
     }
 
     private List<Integer> extractLottoNumbers(List<Integer> numbers) {

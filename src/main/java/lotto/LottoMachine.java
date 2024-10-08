@@ -16,9 +16,10 @@ public class LottoMachine {
     }
 
     public List<LottoTicket> generateTickets(int amount) {
+        int numberOfTickets = amount / LOTTO_PRICE;
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        int numberOfTickets = amount / LOTTO_PRICE;
+
         for (int i = 0; i < numberOfTickets; i++) {
             lottoTickets.add(LottoTicket.from(lottoNumberStrategy.generate()));
         }

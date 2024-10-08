@@ -22,8 +22,7 @@ public class LottoTicket {
     }
 
     public boolean match(int targetNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber == targetNumber);
+        return lottoNumbers.contains(targetNumber);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class WinningNumber {
     public static final int WINNING_NUMBERS_COUNT = 6;
+
     private final List<Integer> winningNumbers;
 
     private WinningNumber(List<Integer> winningNumbers) {
@@ -20,9 +21,10 @@ public class WinningNumber {
         return new WinningNumber(winningNumbers);
     }
 
-    public int match(LottoTicket lottoTicket) {
+    public int matchLottoNumbers(LottoTicket lottoTicket) {
         return (int) winningNumbers.stream()
                 .filter(lottoTicket::match)
                 .count();
     }
+
 }

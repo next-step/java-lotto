@@ -14,7 +14,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @CsvSource({"1000,1", "2000,2", "3000,3"})
     void generateTicketsLottoTicket(int pay, int count) {
-        LottoMachine lottoMachine = LottoMachine.of(FixedLottoNumberStrategy.from(List.of(1,2,3,4,5,6)));
+        LottoMachine lottoMachine = LottoMachine.of(FixedLottoNumberStrategy.from(List.of(1, 2, 3, 4, 5, 6)));
 
         List<LottoTicket> lottoTickets = lottoMachine.generateTickets(pay);
 

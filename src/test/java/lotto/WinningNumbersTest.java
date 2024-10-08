@@ -24,16 +24,16 @@ class WinningNumbersTest {
                 WinningNumber.from(List.of(1, 1, 2, 3, 4, 5))
         );
     }
+
     @DisplayName("로또 티켓에 몇 개의 당점번호가 있는지 조회할 수 있다.")
     @Test
-    void match() {
+    void matchLottoNumbers() {
         WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6));
         LottoTicket.from(List.of(1, 2, 3, 4, 5, 7));
 
-        int count = winningNumber.match(LottoTicket.from(List.of(1, 2, 3, 4, 5, 7)));
+        int count = winningNumber.matchLottoNumbers(LottoTicket.from(List.of(1, 2, 3, 4, 5, 7)));
 
         assertThat(count).isEqualTo(5);
-
     }
 
 }
