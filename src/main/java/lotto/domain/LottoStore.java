@@ -5,21 +5,21 @@ import java.util.List;
 public class LottoStore {
     public static final int LOTTO_PURCHASE_AMOUNT = 1000;
 
-    private int money;
+    private final Money money;
 
-    public LottoStore(final int money) {
-        if (LOTTO_PURCHASE_AMOUNT > money) {
+    public LottoStore(final Money money) {
+        if (LOTTO_PURCHASE_AMOUNT > money.getMoney()) {
             throw new IllegalArgumentException(LOTTO_PURCHASE_AMOUNT + "이상의 금액이 필요합니다.");
         }
 
-        if (money % LOTTO_PURCHASE_AMOUNT > 0) {
+        if (money.getMoney() % LOTTO_PURCHASE_AMOUNT > 0) {
             throw new IllegalArgumentException("거스름돈이 없습니다. 구매가 불가능합니다.");
         }
 
         this.money = money;
     }
 
-    public LottoBundle purchase() {
+    public LottoBundle issue() {
         return new LottoBundle(
             List.of(
                 new Lotto(
