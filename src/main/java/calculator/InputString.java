@@ -50,6 +50,14 @@ public class InputString {
         return operators.size();
     }
 
+    public String getOperator() {
+        return operators.remove();
+    }
+
+    public int getOneNumber() {
+        return numbers.remove();
+    }
+
     private boolean isNull(String input) {
         return input == null;
     }
