@@ -23,9 +23,19 @@ public class LottoNumbers {
     }
 
     public LottoNumbers shuffleAndPickLottoNumbers() {
+        final List<LottoNumber> pickedNumbers = pickLottoNumbers(shuffle());
+        Collections.sort(pickedNumbers);
+        return new LottoNumbers(pickedNumbers);
+    }
+
+    private static List<LottoNumber> pickLottoNumbers(final List<LottoNumber> shuffledLottoNumbers) {
+        return shuffledLottoNumbers.subList(0, LOTTO_PICK_COUNT);
+    }
+
+    private List<LottoNumber> shuffle() {
         final List<LottoNumber> shuffledLottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.shuffle(shuffledLottoNumbers);
-        return new LottoNumbers(shuffledLottoNumbers.subList(0, LOTTO_PICK_COUNT));
+        return shuffledLottoNumbers;
     }
 
     private List<LottoNumber> initLottoNumbers() {
@@ -35,5 +45,10 @@ public class LottoNumbers {
         }
 
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }
