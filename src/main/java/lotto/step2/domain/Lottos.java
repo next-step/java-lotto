@@ -1,9 +1,7 @@
 package lotto.step2.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
     private final List<Lotto> lottos;
