@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinningPrizeTest {
 
     @Test
-    void 당첨금() {
+    void 입력받은_로또_당첨_번호를_소유한_로또와_비교하여_일치_개수_정상_기록() {
         WinningPrize prize = new WinningPrize();
 
         prize.record(LottoPrize.FIRST.getMatch());

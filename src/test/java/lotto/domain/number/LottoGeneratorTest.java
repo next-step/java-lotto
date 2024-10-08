@@ -12,7 +12,7 @@ public class LottoGeneratorTest {
 
     @Test
     @DisplayName("반환된 LottoNumber 배열에는 정렬된 무작위 수가 존재한다. 리스트 요소가 (1,2,3,4,5,6)이면 안됨")
-    void 무작위_번호_6개_생성() {
+    void 무작위_번호_6개_정상_생성() {
         List<Integer> integers = LottoGenerator.generate()
                 .stream()
                 .map(LottoNumber::number)

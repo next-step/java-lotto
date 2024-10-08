@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTest {
 
     @Test
-    void 문자열_변환_로또_생성() {
+    void 숫자_1_45_사이_6개의_숫자_문자열_입력시_로또_정상_생성() {
         Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
         Lotto compared = new Lotto(List.of(
                 LottoNumber.of(1),
@@ -30,7 +30,7 @@ public class LottoTest {
 
     @Test
     @DisplayName("무작위 번호로 로또 번호 6개가 정상적으로 생성되었는지 확인한다. 무작위가 아니면 1,2,3,4,5,6로 생성됨")
-    void 무작위_번호_로또_생성() {
+    void 무작위_번호_발생_로직을_사용한_자동번호_로또_정상_생성() {
         Lotto lotto = Lotto.create();
         Lotto compared = new Lotto(List.of(
                 LottoNumber.of(1),
@@ -44,27 +44,28 @@ public class LottoTest {
     }
 
     @Test
-    void 로또_생성_중복숫자() {
+    void 중복숫자_입력가_있는_문자열로_로또_생성시_예외발생() {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.of("1, 1, 3, 4, 5, 6"))
                 .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
     }
 
+    @DisplayName("1이상 45이하가 아닌 숫자가 입력된 문자열은 로또 생성 시 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 47", "0, 1, 2, 3, 4, 5", "1, 3, 2, -3, 4, 5"})
-    void 로또_생성_문자열_1_45_아님(String text) {
+    void 문자열내_1_45_사이_아닌_숫자_포함시_인스턴스_생성_예외발생(String text) {
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(text))
                 .withMessage(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
     }
 
     @Test
-    void 로또_생성_문자열_null() {
+    void null_문자열로_로또_생성시_예외발생() {
         Assertions.assertThatNullPointerException()
                 .isThrownBy(() -> Lotto.of(null));
     }
 
     @Test
-    void 로또_생성_문자열_빈문자() {
+    void 빈문자열로_로또_생성시_예외발생() {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.of(""))
                 .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
@@ -72,7 +73,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
-    void 로또_생성_문자열_6개_아님(String text) {
+    void 문자열_내_숫자가_6개_아닐때_로또_생성시_예외발생(String text) {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.of(text))
                 .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
@@ -88,7 +89,7 @@ public class LottoTest {
             "6,11,45,40,20,30:1",
             "21,22,23,24,25,26:0"
     }, delimiter = ':')
-    void 로또_일치_여부(String lotto, int expected) {
+    void 로또끼리_비교하여_일치하는_숫자_개수_정상_반환(String lotto, int expected) {
         Lotto winningLotto = Lotto.of("1,2,3,4,5,6");
 
         assertThat(winningLotto.match(Lotto.of(lotto))).isEqualTo(expected);

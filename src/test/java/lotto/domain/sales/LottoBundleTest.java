@@ -18,14 +18,14 @@ public class LottoBundleTest {
             .mapToObj(LottoNumber::of).collect(Collectors.toList()));
 
     @Test
-    void 개수만큼_로또_생성() {
+    void 입력받은_개수만큼_로또_생성() {
         LottoBundle lottoBundle = LottoBundle.of(5);
 
         assertThat(lottoBundle.count()).isEqualTo(5);
     }
 
     @Test
-    void 당첨_상금_조회() {
+    void 입력받은_당첨번호와_소유한_로또_비교하여_당첨내역_담긴_인스턴스_반환() {
         LottoBundle lottoBundle = LottoBundle.of(List.of(
                 Lotto.of("1,2,3,4,5,6"),
                 Lotto.of("1,2,3,4,5,7"),
