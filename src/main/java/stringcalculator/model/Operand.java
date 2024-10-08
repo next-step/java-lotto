@@ -10,12 +10,20 @@ public class Operand {
         this.number = parseInt(number);
     }
 
+    public Operand(final Integer number) {
+        this.number = number;
+    }
+
     private int parseInt(String number) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ONLY_ALLOWED_NUMBER);
         }
+    }
+
+    public int value() {
+        return this.number;
     }
 
     @Override

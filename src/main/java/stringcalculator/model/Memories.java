@@ -29,4 +29,12 @@ public class Memories {
     public int hashCode() {
         return Objects.hash(memories);
     }
+
+    public Result allCalculate(Operand initOperand) {
+        Operand operand = initOperand;
+        for (Memory memory : memories) {
+            operand = memory.calculate(operand);
+        }
+        return new Result(operand.value());
+    }
 }

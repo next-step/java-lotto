@@ -11,6 +11,10 @@ public class Memory {
         this.operand = operand;
     }
 
+    public Operand calculate(Operand prevOperand) {
+        return operator.calculate(prevOperand, operand);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

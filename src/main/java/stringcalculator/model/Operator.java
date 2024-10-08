@@ -28,13 +28,12 @@ public enum Operator {
             return MULTIPLY;
         }
         if (DIVIDE.label.equals(label)) {
-
             return DIVIDE;
         }
         throw new IllegalArgumentException(NOT_ALLOWED_OPERATOR_ANOTHER_STRINGS);
     }
 
-    public int calculate(int left, int right) {
-        return calculate.apply(left, right);
+    public Operand calculate(Operand left, Operand right) {
+        return new Operand(calculate.apply(left.value(), right.value()));
     }
 }

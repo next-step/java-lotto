@@ -8,29 +8,29 @@ import static stringcalculator.model.Operator.*;
 public class OperatorTest {
     @Test
     void 한개의_사칙연산을_성공한다_덧셈() {
-        int actual = SUM.calculate(2, 3);
-        int expected = 5;
+        Operand actual = SUM.calculate(new Operand("2"), new Operand("3"));
+        Operand expected = new Operand("5");
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void 한개의_사칙연산을_성공한다_뺄셈() {
-        int actual = SUBTRACT.calculate(3, 2);
-        int expected = 1;
+        Operand actual = SUBTRACT.calculate(new Operand("3"), new Operand("2"));
+        Operand expected = new Operand("1");
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void 한개의_사칙연산을_성공한다_곱셈() {
-        int actual = MULTIPLY.calculate(3, 2);
-        int expected = 6;
+        Operand actual = MULTIPLY.calculate(new Operand("3"), new Operand("2"));
+        Operand expected = new Operand("6");
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void 한개의_사칙연산을_성공한다_나눗셈() {
-        int actual = DIVIDE.calculate(3, 2);
-        int expected = 1;
+        Operand actual = DIVIDE.calculate(new Operand("3"), new Operand("2"));
+        Operand expected = new Operand("1");
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
