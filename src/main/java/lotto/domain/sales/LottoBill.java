@@ -5,6 +5,7 @@ import lotto.constant.ErrorMessage;
 public class LottoBill {
 
     private static final int LOTTO_UNIT_PRICE = 1000;
+    private static final int NO_MONEY = 0;
 
     private final int salesAmount;
 
@@ -14,7 +15,7 @@ public class LottoBill {
     }
 
     private static void validateSalesAmount(int salesAmount) {
-        if (salesAmount == 0 || salesAmount % 1000 != 0) {
+        if (salesAmount == NO_MONEY || salesAmount % LOTTO_UNIT_PRICE != NO_MONEY) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_PRICE.getMessage());
         }
     }

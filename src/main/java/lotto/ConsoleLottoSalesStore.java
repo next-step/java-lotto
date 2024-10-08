@@ -11,7 +11,7 @@ public class ConsoleLottoSalesStore {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        LottoBill bill = inputView.sell();
+        LottoBill bill = inputView.lottoBill();
         LottoBundle lottoBundle = LottoBundle.of(bill.quantity());
 
         ResultView resultView = new ResultView();

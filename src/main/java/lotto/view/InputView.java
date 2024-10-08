@@ -9,7 +9,7 @@ public class InputView {
 
     private final static Scanner SCANNER = new Scanner(System.in);
 
-    public LottoBill sell() {
+    public LottoBill lottoBill() {
         System.out.println("구입 금액을 입력해주세요.");
         int money = SCANNER.nextInt();
         LottoBill bill = new LottoBill(money);
