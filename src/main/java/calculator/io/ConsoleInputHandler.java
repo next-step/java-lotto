@@ -1,5 +1,7 @@
 package calculator.io;
 
+import calculator.validator.UserInputValidator;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -11,6 +13,7 @@ public class ConsoleInputHandler implements InputHandler {
     @Override
     public String[] getArithmeticExpressionFromUser() {
         String userInput = SCANNER.nextLine();
+        UserInputValidator.checkIfInputIsEmptyOrBlank(userInput);
         return toStringArray(userInput);
     }
 

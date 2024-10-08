@@ -6,4 +6,6 @@ public interface OutputHandler {
 
     void showSimpleMessage(String message);
 
+    void showExceptionMessage(Exception e);
+
 }

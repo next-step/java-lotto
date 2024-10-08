@@ -12,4 +12,9 @@ public class ConsoleOutputHandler implements OutputHandler {
     public void showSimpleMessage(String message) {
         System.out.println(message);
     }
+
+    @Override
+    public void showExceptionMessage(Exception e) {
+        System.out.println(e.getMessage());
+    }
 }

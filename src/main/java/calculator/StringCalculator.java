@@ -27,7 +27,7 @@ public class StringCalculator {
 
             process(operandsAndOperators);
         } catch (ApplicationException e) {
-            throw new ApplicationException(e.getMessage());
+            outputHandler.showExceptionMessage(e);
         } catch (Exception e) {
             outputHandler.showSimpleMessage("계산기에 문제가 생겼습니다.");
         }
