@@ -65,5 +65,13 @@ class CalculatorTest {
         assertThat(subtractNumbers(num1, num2)).isEqualTo(2);
     }
 
+    @DisplayName("숫자 2개 곱하기")
+    @Test
+    void 곱셈() {
+        int num1 = 5;
+        int num2 = 3;
+        assertThat(multiplyNumbers(num1, num2)).isEqualTo(15);
+    }
+
 
 }
