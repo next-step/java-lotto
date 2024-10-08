@@ -33,4 +33,13 @@ class CalculatorTest {
 
         assertThat(number).isEqualTo(1);
     }
+
+    @Test
+    void run() {
+        InputString inputString = new InputString("2 + 3 * 4 / 2");
+
+        int result = Calculator.run(inputString);
+
+        assertThat(result).isEqualTo(10);
+    }
 }
