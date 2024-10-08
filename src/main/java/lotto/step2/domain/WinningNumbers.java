@@ -9,12 +9,13 @@ public class WinningNumbers {
 
     private final List<Integer> winningNumbers;
 
-    public WinningNumbers WinningNumbers(final String numbers){
+    public static WinningNumbers create(final String numbers){
         LottoValidator.validate(numbers);
         return new WinningNumbers(createNumbers(numbers));
     }
 
     public WinningNumbers(final List<Integer> winningNumbers) {
+        LottoValidator.validate(winningNumbers);
         this.winningNumbers = winningNumbers;
     }
 

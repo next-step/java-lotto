@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 
-public class LottoRankCalculator {
+public class LottoResult {
     private final Lottos lottos;
     private final WinningNumbers winningNumbers;
 
     private EnumMap<LottoRank, Integer> rankInfo;
 
-    public LottoRankCalculator(final Lottos lottos, final WinningNumbers winningNumbers) {
+    public LottoResult(final Lottos lottos, final WinningNumbers winningNumbers) {
         this.lottos = lottos;
         this.winningNumbers = winningNumbers;
         initialize();
@@ -62,7 +62,7 @@ public class LottoRankCalculator {
 
     private int amountByRank(LottoRank rank) {
         int rankCount = rankInfo.get(rank);
-        int prizeByRank = rank.prize();
+        int prizeByRank = rank.getPrize();
 
         return prizeByRank * rankCount;
     }

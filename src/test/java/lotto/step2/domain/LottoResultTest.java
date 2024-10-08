@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoRankCalculatorTest {
+public class LottoResultTest {
     
     private Lottos lottos;
     private WinningNumbers winningNumbers;
@@ -28,7 +28,7 @@ public class LottoRankCalculatorTest {
     @DisplayName("내가 구매한 로또들이 몇 등의 몇 번 당첨됐는지 확인이 가능하다")
     @Test
     void calculateLottoRank(){
-        LottoRankCalculator calculator = new LottoRankCalculator(lottos, winningNumbers);
+        LottoResult calculator = new LottoResult(lottos, winningNumbers);
 
         assertThat(calculator.findMatchCount(3)).isEqualTo(1);
         assertThat(calculator.findMatchCount(4)).isEqualTo(2);
@@ -39,14 +39,14 @@ public class LottoRankCalculatorTest {
     void calculateProfitRate(){
         double purchaseAmount = 20000;
 
-        LottoRankCalculator calculator = new LottoRankCalculator(lottos, winningNumbers);
+        LottoResult calculator = new LottoResult(lottos, winningNumbers);
         double profitRate = calculator.calculateProfitRate(purchaseAmount);
 
         double winningAmount = 0;
-        winningAmount += calculator.findMatchCount(3) * LottoRank.FOURTH.prize();
-        winningAmount += calculator.findMatchCount(4) * LottoRank.THIRD.prize();
-        winningAmount += calculator.findMatchCount(5) * LottoRank.SECOND.prize();
-        winningAmount += calculator.findMatchCount(6) * LottoRank.FIRST.prize();
+        winningAmount += calculator.findMatchCount(3) * LottoRank.FOURTH.getPrize();
+        winningAmount += calculator.findMatchCount(4) * LottoRank.THIRD.getPrize();
+        winningAmount += calculator.findMatchCount(5) * LottoRank.SECOND.getPrize();
+        winningAmount += calculator.findMatchCount(6) * LottoRank.FIRST.getPrize();
         assertThat(profitRate).isEqualTo(winningAmount / purchaseAmount);
     }
 }

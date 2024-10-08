@@ -24,11 +24,15 @@ public enum LottoRank {
                 .orElse(NONE);
     }
 
-    public int prize(){
-        return prize;
-    }
-
     public boolean isNoneRank() {
         return this == NONE;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getPrize(){
+        return prize;
     }
 }
