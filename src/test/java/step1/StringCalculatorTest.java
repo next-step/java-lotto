@@ -2,20 +2,20 @@ package step1;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
 class StringCalculatorTest {
 
-    @ParameterizedTest
-    @CsvSource(value = {"2 + 3 * 4 / 2:2+3*4/2"}, delimiter = ':')
+    @Test
     @DisplayName("공백을 제거하는지 확인한다")
-    void 입력문자열_공백제거(String input, String expected) {
-        StringCalculator cal = new StringCalculator(input);
+    void 입력문자열_공백제거() {
+        StringCalculator cal = new StringCalculator("2 + 3 * 4 / 2");
 
-        Assertions.assertThat(cal.getString()).isEqualTo(expected);
+        Assertions.assertThat(cal.getString()).isEqualTo("2+3*4/2");
+
     }
 
     @ParameterizedTest
