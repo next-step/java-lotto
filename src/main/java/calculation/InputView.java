@@ -37,7 +37,7 @@ public class InputView {
     }
 
     private static boolean isNumberic(String str) {
-        return str.matches("\\d*");
+        return str.matches("[+-]?\\d+");
     }
 
     public static boolean isNullOrBlank(String text) {
