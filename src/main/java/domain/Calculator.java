@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.Arrays;
-
 public class Calculator {
     private int result = 0;
     private boolean isFirst = true;
@@ -10,23 +8,34 @@ public class Calculator {
     public int calculate(String input) {
         String[] tokens = input.split(" ");
 
-        for (String token : tokens) {
-            if (token.equals("+") || token.equals("-") || token.equals("*")) {
-                this.lastOperator = token;
-                continue;
-            }
-
-            try {
+        try {
+            for (String token : tokens) {
                 if (this.isFirst) {
                     handleFirstInteger(Integer.parseInt(token));
                     continue;
                 }
+
+                if (validateOperator(token)) {
+                    continue;
+                }
                 this.result = calculateByOperator(Integer.parseInt(token));
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("유효하지 않은 입력입니다. : " + e.getMessage());
             }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("유효하지 않은 입력입니다. : " + e.getMessage());
         }
         return this.result;
+    }
+
+    private boolean validateOperator(String token) {
+        if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
+            changeOperator(token);
+            return true;
+        }
+        return false;
+    }
+
+    private void changeOperator(String token) {
+        this.lastOperator = token;
     }
 
     private int calculateByOperator(int number) {
@@ -43,7 +52,18 @@ public class Calculator {
             return multiplyTwoNumber(this.result, number);
         }
 
+        if (this.lastOperator.equals("/")) {
+            return divideTwoNumber(this.result, number);
+        }
+
         throw new IllegalArgumentException("유효한 사칙연산 기호가 아닙니다.");
+    }
+
+    private int divideTwoNumber(int result, int number) {
+        if (number == 0) {
+            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        }
+        return result / number;
     }
 
     private void handleFirstInteger(int number) {
