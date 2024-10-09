@@ -5,42 +5,42 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Lotto {
+public class LottoTicket {
     private static final int LOTTO_TICKET_PRICE = 1000;
     private static final int LOTTO_BOUND = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static Random random = new Random();
 
-    private Lotto() {
+    private LottoTicket() {
         throw new UnsupportedOperationException("해당 클래스는 인스턴스를 생성할 수 없습니다.");
     }
 
-    public static List<List<Integer>> issueTickets(final int totalPurchasePrice) {
+    public static List<List<Integer>> issue(final int totalPurchasePrice) {
         validatePurchasePrice(totalPurchasePrice);
-        int totalTicketCount = getTotalTicketCount(totalPurchasePrice);
-        List<List<Integer>> tickets = new ArrayList<>(totalTicketCount);
-        for (int i = 0; i < totalTicketCount; i++) {
-            tickets.add(issueTicket());
+        int totalLottoCount = getTotalLottoCount(totalPurchasePrice);
+        List<List<Integer>> ticket = new ArrayList<>(totalLottoCount);
+        for (int i = 0; i < totalLottoCount; i++) {
+            ticket.add(issueLotto());
         }
-        return tickets;
-    }
-
-    private static List<Integer> issueTicket() {
-        List<Integer> ticket = new ArrayList<>(LOTTO_NUMBER_COUNT);
-        for (int j = 0; j < LOTTO_NUMBER_COUNT; j++) {
-            ticket.add(generateUniqueLottoNumber(ticket));
-        }
-        ticketsSort(ticket);
         return ticket;
     }
 
-    private static void ticketsSort(final List<Integer> ticket) {
-        Collections.sort(ticket);
+    private static List<Integer> issueLotto() {
+        List<Integer> lotto = new ArrayList<>(LOTTO_NUMBER_COUNT);
+        for (int j = 0; j < LOTTO_NUMBER_COUNT; j++) {
+            lotto.add(generateUniqueLottoNumber(lotto));
+        }
+        lottoSort(lotto);
+        return lotto;
     }
 
-    private static int generateUniqueLottoNumber(final List<Integer> ticket) {
+    private static void lottoSort(final List<Integer> lotto) {
+        Collections.sort(lotto);
+    }
+
+    private static int generateUniqueLottoNumber(final List<Integer> lotto) {
         int lottoNumber = generateLottoNumber();
-        while (ticket.contains(lottoNumber)) {
+        while (lotto.contains(lottoNumber)) {
             lottoNumber = generateLottoNumber();
         }
         return lottoNumber;
@@ -50,7 +50,7 @@ public class Lotto {
         return random.nextInt(LOTTO_BOUND) + 1;
     }
 
-    private static int getTotalTicketCount(final int totalPurchasePrice) {
+    private static int getTotalLottoCount(final int totalPurchasePrice) {
         return totalPurchasePrice / LOTTO_TICKET_PRICE;
     }
 

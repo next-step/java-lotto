@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoWinningResults;
 import lotto.ui.InputView;
@@ -12,11 +12,11 @@ public class LottoRunner {
     public static void main(String[] args) {
         int totalPurchasePrice = InputView.readTotalPurchasePrice();
 
-        List<List<Integer>> lottoResults = Lotto.issueTickets(totalPurchasePrice);
-        ResultView.printLottoDetail(lottoResults);
+        List<List<Integer>> ticket = LottoTicket.issue(totalPurchasePrice);
+        ResultView.printLottoDetail(ticket);
 
         List<Integer> lastWeekWinningNumbers = InputView.readLastWeekWinningNumbers();
-        LottoWinningResults lottoWinningResults = LottoStatistics.winningStatistics(lottoResults, lastWeekWinningNumbers);
+        LottoWinningResults lottoWinningResults = LottoStatistics.winningStatistics(ticket, lastWeekWinningNumbers);
 
         ResultView.printWinningStatistics(lottoWinningResults);
         ResultView.printProfitRate(totalPurchasePrice, lottoWinningResults);
