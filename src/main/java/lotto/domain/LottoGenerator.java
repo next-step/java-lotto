@@ -17,4 +17,8 @@ public class LottoGenerator {
             throw new IllegalArgumentException(INCORRECT_UNIT_ERROR_MESSAGE);
         }
     }
+
+    public Lottos getLottos() {
+        return lottos;
+    }
 }

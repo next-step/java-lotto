@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -31,4 +32,7 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
 }
