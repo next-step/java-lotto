@@ -26,6 +26,20 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("중복 숫자를 포함한 숫자 리스트로 로또를 만들려고 하면 IllegalArgumentException을 띄웁니다")
+    void duplicatedNumberTest() {
+        List<Integer> numbers = List.of(1, 2, 2, 3, 4, 5);
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.valueOf(numbers));
+    }
+
+    @Test
+    @DisplayName("로또 최대 숫자보다 큰 숫자 리스트로 로또를 만들려고 하면 IllegalArgumentException을 띄웁니다")
+    void numberIsOutOfRangeTest() {
+        List<Integer> numbers = List.of(1, 2, 2, 3, 4, 500);
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.valueOf(numbers));
+    }
+
+    @Test
     @DisplayName("같은 숫자들로 만들어진 로또는 equals true입니다.")
     void equalsTest() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
