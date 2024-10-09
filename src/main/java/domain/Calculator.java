@@ -11,28 +11,28 @@ public class Calculator {
     public int calculate() {
         List<Token> tokenList = tokens.getTokens();
 
-        int result = parseOperand(tokenList.get(0));
+        int result = extractOperand(tokenList.get(0));
         int lastOperatorIndex = tokenList.size() - 2;
 
         for (int operatorIndex = 1; operatorIndex <= lastOperatorIndex; operatorIndex += 2) {
-            result = executeOperation(result, tokenList, operatorIndex);
+            result = applyOperation(result, tokenList, operatorIndex);
         }
 
         return result;
     }
 
-    private int parseOperand(Token token) {
+    private int extractOperand(Token token) {
         return Integer.parseInt(token.getToken());
     }
 
-    private int executeOperation(int currentResult, List<Token> tokenList, int operatorIndex) {
+    private int applyOperation(int currentResult, List<Token> tokenList, int operatorIndex) {
         String operator = tokenList.get(operatorIndex).getToken();
         int operandIndex = operatorIndex + 1;
-        int operand = parseOperand(tokenList.get(operandIndex));
-        return executeArithmetic(currentResult, operand, operator);
+        int operand = extractOperand(tokenList.get(operandIndex));
+        return performArithmetic(currentResult, operand, operator);
     }
 
-    private int executeArithmetic(int result, int operand, String operator) {
+    private int performArithmetic(int result, int operand, String operator) {
         switch (operator) {
             case "+":
                 return result + operand;
