@@ -1,12 +1,13 @@
 package calculator.domain;
 
-import java.util.Arrays;
+import calculator.enums.Operator;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class CalculateParameter {
-    public static final List<String> OPERATORS = Arrays.asList("+", "-", "*", "/");
+    public static final List<String> OPERATORS = Operator.getOperators();
     Queue<Integer> numbers = new LinkedList<>();
     Queue<String> operators = new LinkedList<>();
 

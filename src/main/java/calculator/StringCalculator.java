@@ -2,12 +2,9 @@ package calculator;
 
 import calculator.domain.CalculateParameter;
 
-public class StringCalculator {
+import static calculator.enums.Operator.*;
 
-    public static final String PLUS = "+";
-    public static final String MINUS = "-";
-    public static final String MULTIPLY = "*";
-    public static final String DIVIDE = "/";
+public class StringCalculator {
     public static final String SPACE = " ";
     private static StringCalculator INSTANCE = null;
 
@@ -37,16 +34,16 @@ public class StringCalculator {
         if (first == null || second == null || operator == null) {
             throw new IllegalStateException("null을 허용하지 않습니다.");
         }
-        if (PLUS.equals(operator)) {
+        if (PLUS.getOperator().equals(operator)) {
             return first + second;
         }
-        if (MINUS.equals(operator)) {
+        if (MINUS.getOperator().equals(operator)) {
             return first - second;
         }
-        if (MULTIPLY.equals(operator)) {
+        if (MULTIPLY.getOperator().equals(operator)) {
             return first * second;
         }
-        if (DIVIDE.equals(operator)) {
+        if (DIVIDE.getOperator().equals(operator)) {
             return first / second;
         }
         throw new IllegalStateException("연산자가 아닌 문자는 허용하지 않습니다.");
