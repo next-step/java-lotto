@@ -6,6 +6,7 @@ public class StringCalculatorMain {
         String input = InputView.getInput();
         StringCalculator calculator = new StringCalculator();
         int result = calculator.calculator(input);
-        System.out.println(result);
+        OutputView.printResult(result);
+
     }
 }
