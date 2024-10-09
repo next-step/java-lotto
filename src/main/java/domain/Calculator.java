@@ -2,61 +2,81 @@ package domain;
 
 public class Calculator {
     private int result = 0;
-    private boolean isFirst = true;
+    private int tokenCount = 0;
     private String lastOperator = "";
 
     public int calculate(String input) {
+        validateInput(input);
         String[] tokens = input.split(" ");
 
-        try {
-            for (String token : tokens) {
-                if (this.isFirst) {
-                    handleFirstInteger(Integer.parseInt(token));
-                    continue;
-                }
+        for (String token : tokens) {
+            tokenCount += 1;
 
-                if (validateOperator(token)) {
-                    continue;
-                }
-                this.result = calculateByOperator(Integer.parseInt(token));
+            if (isFirstOrder()) {
+                this.result = handleFirstInteger(token);
+                continue;
             }
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("유효하지 않은 입력입니다. : " + e.getMessage());
+
+            if (isOrderOperator()) {
+                handleOperator(token);
+                continue;
+            }
+
+            this.result = calculateByOperator(token);
         }
         return this.result;
     }
 
-    private boolean validateOperator(String token) {
+    private boolean isOrderOperator() {
+        return tokenCount % 2 == 0;
+    }
+
+    private boolean isFirstOrder() {
+        return this.tokenCount == 1;
+    }
+
+    private void validateInput(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException("null 또는 빈 공백은 입력할 수 없습니다.");
+        }
+    }
+
+    private void handleOperator(String token) {
         if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
             changeOperator(token);
-            return true;
+            return;
         }
-        return false;
+        throw new IllegalArgumentException("유효하지 않은 사칙연산 기호입니다. 다시 입력 해 주세요.");
     }
 
     private void changeOperator(String token) {
         this.lastOperator = token;
     }
 
-    private int calculateByOperator(int number) {
-        if (this.lastOperator.equals("+")) {
-            return plus_two_number(this.result, number);
+    private int calculateByOperator(String token) {
+        try {
+            int number = Integer.parseInt(token);
+
+            if (this.lastOperator.equals("+")) {
+                return plus_two_number(this.result, number);
+            }
+
+            if (this.lastOperator.equals("-")) {
+                return minusTwoNumber(this.result, number);
+
+            }
+
+            if (this.lastOperator.equals("*")) {
+                return multiplyTwoNumber(this.result, number);
+            }
+
+            if (this.lastOperator.equals("/")) {
+                return divideTwoNumber(this.result, number);
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("유효한 숫자가 아닙니다. " + e.getMessage());
         }
-
-        if (this.lastOperator.equals("-")) {
-            return minusTwoNumber(this.result, number);
-
-        }
-
-        if (this.lastOperator.equals("*")) {
-            return multiplyTwoNumber(this.result, number);
-        }
-
-        if (this.lastOperator.equals("/")) {
-            return divideTwoNumber(this.result, number);
-        }
-
-        throw new IllegalArgumentException("유효한 사칙연산 기호가 아닙니다.");
+        return 0;
     }
 
     private int divideTwoNumber(int result, int number) {
@@ -66,9 +86,12 @@ public class Calculator {
         return result / number;
     }
 
-    private void handleFirstInteger(int number) {
-        this.result = number;
-        this.isFirst = false;
+    private int handleFirstInteger(String token) {
+        try {
+            return Integer.parseInt(token);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("유효하지 않은 첫 번째 정수: " + token);
+        }
     }
 
     private static int multiplyTwoNumber(int currentNumber, int number) {
