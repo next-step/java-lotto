@@ -1,24 +1,19 @@
 package step1;
 
-import step1.operater.Operater;
+import java.util.function.IntBinaryOperator;
 
 public class StringCalculator {
 
-    private String calculation;
-    private int result;
+    public StringCalculator() {
+    }
 
-    public StringCalculator(String input) {
+    public int calculate(String input){
         validInput(input);
-        calculation = input;
-        deleteSpace();
+        return calculateExpression(splitString(input));
     }
 
-    public void deleteSpace() {
-        this.calculation = calculation.replace(" ", "");
-    }
-
-    public String getString() {
-        return this.calculation;
+    public String[] splitString(String input) {
+        return  input.split(" ");
     }
 
     private static void validInput(String input) {
@@ -27,13 +22,15 @@ public class StringCalculator {
         }
     }
 
-    public int calculateExpression() {
-        result = Integer.parseInt(calculation.charAt(0) + "");
-        for (int i = 1; i < calculation.length() - 1; i += 2) {
-            int operand = Integer.parseInt(calculation.charAt(i + 1) + "");
-            Operater operater = OperaterSelection.selection(calculation.charAt(i) + "");
-            result = operater.calculate(result, operand);
+    public int calculateExpression(String[] expression) {
+        int result = Integer.parseInt(expression[0]);
+        
+        for (int i = 1; i < expression.length - 1; i += 2) {
+            int operand = Integer.parseInt(expression[i+1]);
+            IntBinaryOperator operator = OperaterSelection.selection(expression[i]);
+            result = operator.applyAsInt(result,operand);
         }
         return result;
     }
+
 }
