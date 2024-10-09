@@ -17,7 +17,7 @@ class LottoInputViewTest {
     @Test
     @DisplayName("구입 금액을 입력하면 지정된 수량만큼의 로또번들 객체가 반환된다.")
     void shouldReturnLottoBundleBasedOnPurchaseAmount() {
-        final String money = "3000";
+        final String money = "3000\n";
         final LottoInputView lottoInputView = new LottoInputView(
             new ConsoleMessageReader(new ByteArrayInputStream(money.getBytes())),
             new ConsoleMessageWriter()
@@ -37,7 +37,7 @@ class LottoInputViewTest {
         );
 
         assertThatIllegalArgumentException()
-            .isThrownBy(lottoInputView::inputLottoNumbers);
+            .isThrownBy(lottoInputView::inputLastWeekWinningLotto);
     }
 
     @Test
@@ -50,7 +50,7 @@ class LottoInputViewTest {
         );
 
         assertThatIllegalArgumentException()
-            .isThrownBy(lottoInputView::inputLottoNumbers);
+            .isThrownBy(lottoInputView::inputLastWeekWinningLotto);
     }
 
     @ParameterizedTest
@@ -63,11 +63,11 @@ class LottoInputViewTest {
         );
 
         assertThatIllegalArgumentException()
-            .isThrownBy(lottoInputView::inputLottoNumbers);
+            .isThrownBy(lottoInputView::inputLastWeekWinningLotto);
     }
 
     @Test
-    @DisplayName("지난 주 당첨 번호를 입력한 대로 LottoNumbers 객체가 만들어진다.")
+    @DisplayName("지난 주 당첨번호에 대한 Lotto 객체가 만들어진다.")
     void shouldCreateLottoNumbersFromWinningNumbersInput() {
         final String lottoNumbers = "1, 2, 3, 4, 5, 6";
         final LottoInputView lottoInputView = new LottoInputView(
@@ -75,6 +75,6 @@ class LottoInputViewTest {
             new ConsoleMessageWriter()
         );
 
-        assertThat(lottoInputView.inputLottoNumbers().toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(lottoInputView.inputLastWeekWinningLotto().toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }

@@ -27,11 +27,10 @@ public class LottoInputView {
         for (final Lotto lotto : lottoBundle) {
             writer.write(lotto.toString());
         }
-
         return lottoBundle;
     }
 
-    public LottoNumbers inputLottoNumbers() {
+    public Lotto inputLastWeekWinningLotto() {
         writer.write("지난 주 당첨 번호를 입력해 주세요.");
         final String lottoNumbersInput = reader.readString();
         if (lottoNumbersInput.isEmpty()) {
@@ -47,12 +46,14 @@ public class LottoInputView {
             throw new IllegalArgumentException("지난 주 당첨 번호를 정확히 입력 해 주세요.");
         }
 
-        return new LottoNumbers(
+        final LottoNumbers winningLottoNumbers = new LottoNumbers(
             Arrays.stream(lottoNumbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableList())
         );
+
+        return new Lotto(winningLottoNumbers);
     }
 }
