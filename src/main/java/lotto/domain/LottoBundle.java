@@ -1,15 +1,18 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 public class LottoBundle implements Iterable<Lotto> {
     private final List<Lotto> lottoBundle;
 
-    private LottoBundle(final List<Lotto> lottoBundle) {
-        this.lottoBundle = Collections.unmodifiableList(lottoBundle);
+    public LottoBundle() {
+        this.lottoBundle = new ArrayList<>();
+    }
+
+    public LottoBundle(final List<Lotto> lottoBundle) {
+        this.lottoBundle = new ArrayList<>(lottoBundle);
     }
 
     public static LottoBundle issues(final int lottoBundleCount) {
@@ -23,6 +26,10 @@ public class LottoBundle implements Iterable<Lotto> {
 
     public int size() {
         return lottoBundle.size();
+    }
+
+    public void add(final Lotto lotto) {
+        lottoBundle.add(lotto);
     }
 
     @Override

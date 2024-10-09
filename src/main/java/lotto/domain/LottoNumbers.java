@@ -26,9 +26,13 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public long matchCount(final LottoNumbers other) {
+    public boolean isMatch(final LottoNumbers numbers) {
+        return lottoNumbers.stream().allMatch(numbers::contains);
+    }
+
+    public long matchCount(final LottoNumbers numbers) {
         return lottoNumbers.stream()
-            .filter(other::contains)
+            .filter(numbers::contains)
             .count();
     }
 
