@@ -22,10 +22,7 @@ public class LottoMachine {
     }
 
     public Lotto generateLotto() {
-        if (Objects.equals(lotto, new Lotto())) {
-            lotto = new Lotto(pickLottoNumber());
-            return lotto;
-        }
+        lotto = new Lotto(pickLottoNumber());
         return lotto;
     }
 
