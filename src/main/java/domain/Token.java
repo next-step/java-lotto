@@ -5,10 +5,10 @@ public class Token {
     private static final String OPERATOR_ERROR_MESSAGE = "올바른 연산자가 아닙니다.";
     private static final String OPERAND_PATTERN = "[0-9]+";
     private static final String OPERATOR_PATTERN = "[+\\-*/]";
-    private final String Token;
+    private final String token;
 
     public Token(String token) {
-        this.Token = token;
+        this.token = token;
     }
 
     public void validateOperand() {
@@ -24,14 +24,14 @@ public class Token {
     }
 
     private boolean isOperand() {
-        return Token.matches(OPERAND_PATTERN);
+        return token.matches(OPERAND_PATTERN);
     }
 
     private boolean isOperator() {
-        return Token.matches(OPERATOR_PATTERN);
+        return token.matches(OPERATOR_PATTERN);
     }
 
     public String getToken() {
-        return Token;
+        return token;
     }
 }
