@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoWinningResults {
@@ -13,7 +14,7 @@ public class LottoWinningResults {
     }
 
     public List<LottoWinningResult> getWinningResults() {
-        return winningResults;
+        return Collections.unmodifiableList(winningResults);
     }
 
     public long getTotalWinningAmount() {
