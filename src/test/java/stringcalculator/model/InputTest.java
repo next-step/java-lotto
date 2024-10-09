@@ -29,8 +29,8 @@ public class InputTest {
     void 입력문자열을_메모리목록으로_치환한다() {
         String inputString = "2 + 3 * 4 / 2";
         Input input = new Input(inputString);
-        Memories actual = input.convertToMemories();
-        Memories expected = new Memories(new Operand("2"),
+        Calculator actual = input.convertToCalculator();
+        Calculator expected = new Calculator(new Operand("2"),
                 new Memory(Operator.convertToOperator("+"), new Operand("3")),
                 new Memory(Operator.convertToOperator("*"), new Operand("4")),
                 new Memory(Operator.convertToOperator("/"), new Operand("2"))

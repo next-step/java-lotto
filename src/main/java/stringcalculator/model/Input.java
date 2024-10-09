@@ -41,10 +41,7 @@ public class Input {
                 size % EVEN_CHECK_NUMBER == ZERO;
     }
 
-    /*NOTE: memories 객체에서 input 객체를 받아 처리하는 메소드를 설계했었지만,
-            memories 가 input 에 의존성이 생기므로 이 방법으로 수정하였습니다.
-            memories 에서 처리가 더 나은지 고민이 됩니다.*/
-    public Memories convertToMemories() {
+    public Calculator convertToCalculator() {
         String firstOperand = inputs.get(FIRST_OPERAND_INDEX);
 
         List<Memory> memories = new ArrayList<>();
@@ -56,7 +53,7 @@ public class Input {
             memories.add(new Memory(Operator.convertToOperator(operator), new Operand(operand)));
         }
 
-        return new Memories(new Operand(firstOperand), memories.toArray(Memory[]::new));
+        return new Calculator(new Operand(firstOperand), memories.toArray(Memory[]::new));
     }
 
     @Override

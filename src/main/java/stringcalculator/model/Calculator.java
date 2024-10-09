@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Memories {
+public class Calculator {
     private final Operand firstOperand;
     private final List<Memory> memories;
 
-    public Memories(Operand firstOperand, final Memory... memories) {
+    public Calculator(Operand firstOperand, final Memory... memories) {
         this.firstOperand = firstOperand;
         this.memories = convertMemories(memories);
     }
@@ -19,7 +19,7 @@ public class Memories {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Result allCalculate() {
+    public Result calculate() {
         Operand operand = this.firstOperand;
         for (Memory memory : memories) {
             operand = memory.calculate(operand);
@@ -31,8 +31,8 @@ public class Memories {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Memories memories1 = (Memories) o;
-        return Objects.equals(firstOperand, memories1.firstOperand) && Objects.equals(memories, memories1.memories);
+        Calculator calculator1 = (Calculator) o;
+        return Objects.equals(firstOperand, calculator1.firstOperand) && Objects.equals(memories, calculator1.memories);
     }
 
     @Override

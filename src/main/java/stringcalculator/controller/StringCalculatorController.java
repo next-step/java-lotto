@@ -9,8 +9,8 @@ public class StringCalculatorController {
     public static void run() {
         Input input = new Input(InputView.input());
 
-        Result result = input.convertToMemories()
-                .allCalculate();
+        Result result = input.convertToCalculator()
+                .calculate();
 
         ResultView.print(result);
     }
