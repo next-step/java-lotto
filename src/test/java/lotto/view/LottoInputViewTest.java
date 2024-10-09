@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoBundle;
 import lotto.domain.LottoPurchaseResult;
 import lotto.io.ConsoleMessageReader;
 import lotto.io.ConsoleMessageWriter;
