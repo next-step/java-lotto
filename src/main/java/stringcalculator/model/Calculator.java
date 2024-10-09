@@ -7,6 +7,7 @@ public class Calculator {
     public static final int OPERATOR_LOOP_START_INDEX = 1;
     public static final int OPERAND_LOOP_START_INDEX = 0;
     public static final int LOOP_INCREASE = 2;
+    public static final int GET_OPERAND_OFFSET = 1;
     private final List<Operand> operands;
     private final List<Operator> operators;
 
@@ -43,7 +44,7 @@ public class Calculator {
     public Result calculate() {
         Operand calculatedOperand = this.operands.get(FIRST_INDEX);
         for (int index = 0; index < operators.size(); index++) {
-            Operand operand = operands.get(index + 1);
+            Operand operand = operands.get(index + GET_OPERAND_OFFSET);
             calculatedOperand = operators.get(index).calculate(calculatedOperand, operand);
         }
         return new Result(calculatedOperand.value());

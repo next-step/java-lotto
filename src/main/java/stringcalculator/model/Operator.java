@@ -1,6 +1,8 @@
 package stringcalculator.model;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
+import java.util.stream.Stream;
 
 public enum Operator {
     SUM("+", (left, right) -> left + right),
@@ -18,19 +20,10 @@ public enum Operator {
     }
 
     public static Operator convertToOperator(String label) {
-        if (SUM.label.equals(label)) {
-            return SUM;
-        }
-        if (SUBTRACT.label.equals(label)) {
-            return SUBTRACT;
-        }
-        if (MULTIPLY.label.equals(label)) {
-            return MULTIPLY;
-        }
-        if (DIVIDE.label.equals(label)) {
-            return DIVIDE;
-        }
-        throw new IllegalArgumentException(NOT_ALLOWED_OPERATOR_ANOTHER_STRINGS);
+        return Arrays.stream(Operator.values())
+                .filter(operator -> operator.label.equals(label))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(NOT_ALLOWED_OPERATOR_ANOTHER_STRINGS));
     }
 
     public Operand calculate(Operand left, Operand right) {
