@@ -38,7 +38,8 @@ public class LottoGame {
     public List<Lotto> getLottos(int lottoCount) {
         List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            result.add(AutoLotto.getInstance().getLotto(lottoNumbers, LOTTO_NUMBER_COUNT));
+            result.add(AutoLotto.getInstance()
+                    .getLotto(lottoNumbers, LOTTO_NUMBER_COUNT));
         }
         return Collections.unmodifiableList(result);
     }
