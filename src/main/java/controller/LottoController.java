@@ -1,7 +1,11 @@
 package controller;
 
+import lotto.domain.Lotto;
+import lotto.service.LottoGame;
 import view.InputView;
 import view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
     private final InputView inputView;
@@ -14,8 +18,10 @@ public class LottoController {
 
     public void play() {
         int lottoPrice = inputView.getLottoPrice();
-        resultView.printLottoCount(lottoPrice);
+        LottoGame game = LottoGame.getInstance();
 
+        List<Lotto> lottos = game.getLottos(game.getLottoCount(lottoPrice));
 
+        resultView.priceLottoResult(lottos);
     }
 }
