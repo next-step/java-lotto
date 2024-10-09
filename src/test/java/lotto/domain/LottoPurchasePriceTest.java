@@ -17,4 +17,13 @@ class LottoPurchasePriceTest {
                 .hasMessage("올바른 구매금액이 아닙니다. 로또 개수에 맞게 금액을 넣어주세요.(1장당 1000원)");
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {-1000, 0})
+    @DisplayName("LottoPurchasePrice가 0이하의 수로 초기화 되었을 때 예외가 발생한다.")
+    void throwExceptionWhenNegativePrice(int purchasePrice) {
+        assertThatThrownBy(() -> new LottoPurchasePrice(purchasePrice))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매 금액은 0이거나 음수일 수 없습니다.");
+    }
+
 }
