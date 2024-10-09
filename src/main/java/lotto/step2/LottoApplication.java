@@ -4,16 +4,13 @@ import lotto.step2.domain.*;
 import lotto.step2.ui.InputView;
 import lotto.step2.ui.ResultView;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-
-public class LottoService {
+public class LottoApplication {
     private final InputView inputView;
     private final ResultView resultView;
 
     private LottoResult lottoResult;
 
-    public LottoService(final InputView inputView, final ResultView resultView) {
+    public LottoApplication(final InputView inputView, final ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
     }

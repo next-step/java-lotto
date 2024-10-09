@@ -10,7 +10,7 @@ public class Client {
         InputView inputView = new ConsoleInputView();
         ResultView resultView = new ConsoleResultView();
 
-        LottoService lottoService = new LottoService(inputView, resultView);
+        LottoApplication lottoService = new LottoApplication(inputView, resultView);
         lottoService.run();
     }
 }
