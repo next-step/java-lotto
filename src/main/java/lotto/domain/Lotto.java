@@ -27,4 +27,8 @@ public class Lotto {
         }
     }
 
+    public boolean hasSameNumber(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
 }
