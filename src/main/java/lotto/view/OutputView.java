@@ -20,4 +20,24 @@ public class OutputView {
 
         System.out.println(result);
     }
+
+    public static void staticsView() {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+    }
+
+    public static void matchView(MatchNumberView matchNumberView, int count) {
+        System.out.println(matchNumberView.getMessage() + count + "개");
+    }
+
+    public static void ratioView(double ratio) {
+        if (ratio < 1) {
+            System.out.println("총 수익률은 " + ratio + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+
+        if (ratio > 1) {
+            System.out.println("총 수익률은 " + ratio + "입니다.");
+        }
+    }
 }
