@@ -9,19 +9,19 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ---
-# STEP1 TODO
-- [ ] 모든 기능은 TDD로 단위테스트 존재
-- [ ] 핵심 로직과 UI담당로직 분리(InputView, ResultView)
-- [ ] indent 1까지 허용
-- [ ] 메소드 최대 15라인 까지 허용
-- [ ] else 미허용
-- [ ] 자바 코드 컨벤션 
-- [ ] 힌트
-  - [ ] 로또 자동 생성은 Collections.shuffle() 메소드 활용
-  - [ ] Collections.sort() 메소드를 활용해 정렬
-  - [ ] ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단
-# STEP1 DONE
-
+# STEP2 TODO
+# STEP2 DONE
+- [x] 모든 기능은 TDD로 단위테스트 존재
+- [x] 핵심 로직과 UI담당로직 분리(InputView, ResultView)
+- [x] indent 1까지 허용
+- [x] 메소드 최대 15라인 까지 허용
+- [x] else 미허용
+- [x] 자바 코드 컨벤션
+- [x] 힌트
+  - [x] 로또 자동 생성은 Collections.shuffle() 메소드 활용
+  - [x] Collections.sort() 메소드를 활용해 정렬
+  - [x] ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단
+  - 
 ---
 # STEP1 TODO
 # STEP1 DONE

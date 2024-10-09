@@ -1,7 +1,10 @@
-package lotto;
+package lotto.game;
 
+import lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -22,6 +25,15 @@ class WinningNumbersTest {
     void fromDuplicateNumberException() {
         assertThatIllegalArgumentException().isThrownBy(() ->
                 WinningNumber.from(List.of(1, 1, 2, 3, 4, 5))
+        );
+    }
+
+    @DisplayName("0이하, 46이상의 수를 당첨번호로 사용하면 예외로 처리한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    void InvalidLottoNumberException(int invalidLottoNumber) {
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                WinningNumber.from(List.of(1, 2, 3, 4, 5, invalidLottoNumber))
         );
     }
 

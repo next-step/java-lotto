@@ -1,5 +1,7 @@
-package lotto;
+package lotto.game;
 
+import lotto.strategy.FixedLottoNumberStrategy;
+import lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,7 +16,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @CsvSource({"1000,1", "2000,2", "3000,3"})
     void generateTicketsLottoTicket(int pay, int count) {
-        LottoMachine lottoMachine = LottoMachine.of(FixedLottoNumberStrategy.from(List.of(1, 2, 3, 4, 5, 6)));
+        LottoMachine lottoMachine = new LottoMachine(new FixedLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 6)));
 
         List<LottoTicket> lottoTickets = lottoMachine.generateTickets(pay);
 

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import stringcalculator.exception.StringCalculatorIllegalArgumentException;
 import stringcalculator.util.StringUtil;
@@ -33,10 +33,11 @@ public class InputView {
         if (StringUtil.isBlank(inputLine)) {
             throw new StringCalculatorIllegalArgumentException("입력값이 비어있습니다.");
         }
-        return splitBySpace(inputLine);
+
+        return splitByComma(inputLine);
     }
 
-    private List<Integer> splitBySpace(String text) {
+    private List<Integer> splitByComma(String text) {
         return Arrays.stream(text.split(COMMA_DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)

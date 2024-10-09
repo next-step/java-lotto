@@ -1,4 +1,4 @@
-package lotto;
+package lotto.ticket;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +25,15 @@ class LottoTicketTest {
     void fromDuplicateNumberException() {
         assertThatIllegalArgumentException().isThrownBy(() ->
                 LottoTicket.from(List.of(1, 1, 2, 3, 4, 5))
+        );
+    }
+
+    @DisplayName("0이하, 46이상의 수를 로또번호로 사용하면 예외로 처리한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    void InvalidLottoNumberException(int invalidLottoNumber) {
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                LottoTicket.from(List.of(1, 2, 3, 4, 5, invalidLottoNumber))
         );
     }
 

@@ -1,27 +1,21 @@
-package lotto;
+package lotto.result;
 
 import java.util.Objects;
 
 public class LottoResult implements Comparable<LottoResult> {
-
-
     private final int matchedLottoNumbersCount;
 
-    private LottoResult(int matchedLottoNumbersCount) {
+    public LottoResult(int matchedLottoNumbersCount) {
         this.matchedLottoNumbersCount = matchedLottoNumbersCount;
     }
 
-    public static LottoResult of(int matchedLottoNumbersCount) {
-        return new LottoResult(matchedLottoNumbersCount);
+    public int getMatchedLottoNumbersCount() {
+        return matchedLottoNumbersCount;
     }
 
     @Override
     public int compareTo(LottoResult other) {
         return Integer.compare(this.matchedLottoNumbersCount, other.matchedLottoNumbersCount);
-    }
-
-    public int getMatchedLottoNumbersCount() {
-        return matchedLottoNumbersCount;
     }
 
     @Override
