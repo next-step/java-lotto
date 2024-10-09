@@ -8,29 +8,29 @@ import static stringcalculator.model.Operator.*;
 public class OperatorTest {
     @Test
     void 한개의_사칙연산을_성공한다_덧셈() {
-        Operand actual = SUM.calculate(new Operand("2"), new Operand("3"));
-        Operand expected = new Operand("5");
+        Operand actual = SUM.calculate(Operand.of("2"), Operand.of("3"));
+        Operand expected = Operand.of("5");
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void 한개의_사칙연산을_성공한다_뺄셈() {
-        Operand actual = SUBTRACT.calculate(new Operand("3"), new Operand("2"));
-        Operand expected = new Operand("1");
+        Operand actual = SUBTRACT.calculate(Operand.of("3"), Operand.of("2"));
+        Operand expected = Operand.of("1");
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void 한개의_사칙연산을_성공한다_곱셈() {
-        Operand actual = MULTIPLY.calculate(new Operand("3"), new Operand("2"));
-        Operand expected = new Operand("6");
+        Operand actual = MULTIPLY.calculate(Operand.of("3"), Operand.of("2"));
+        Operand expected = Operand.of("6");
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void 한개의_사칙연산을_성공한다_나눗셈() {
-        Operand actual = DIVIDE.calculate(new Operand("3"), new Operand("2"));
-        Operand expected = new Operand("1");
+        Operand actual = DIVIDE.calculate(Operand.of("3"), Operand.of("2"));
+        Operand expected = Operand.of("1");
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 

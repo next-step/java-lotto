@@ -16,10 +16,10 @@ public class CalculatorTest {
     @Test
     void 문자열을_피연산자와_연산자_목록으로_계산기에_저장한다() {
         List<Operand> operands = Arrays.asList(
-                new Operand("2"),
-                new Operand("3"),
-                new Operand("4"),
-                new Operand("2")
+                Operand.of("2"),
+                Operand.of("3"),
+                Operand.of("4"),
+                Operand.of("2")
                 );
         List<Operator> operators = Arrays.asList(
                 convertToOperator("+"),
@@ -34,10 +34,10 @@ public class CalculatorTest {
         String inputString = "2 + 3 * 4 / 2";
         Input input = new Input(inputString);
         List<Operand> operands = Arrays.asList(
-                new Operand("2"),
-                new Operand("3"),
-                new Operand("4"),
-                new Operand("2")
+                Operand.of("2"),
+                Operand.of("3"),
+                Operand.of("4"),
+                Operand.of("2")
         );
         List<Operator> operators = Arrays.asList(
                 convertToOperator("+"),
@@ -61,10 +61,10 @@ public class CalculatorTest {
                              String operator3, String operand3,
                              int result) {
         List<Operand> operands = Arrays.asList(
-                new Operand(operand),
-                new Operand(operand1),
-                new Operand(operand2),
-                new Operand(operand3)
+                Operand.of(operand),
+                Operand.of(operand1),
+                Operand.of(operand2),
+                Operand.of(operand3)
         );
         List<Operator> operators = Arrays.asList(
                 convertToOperator(operator1),

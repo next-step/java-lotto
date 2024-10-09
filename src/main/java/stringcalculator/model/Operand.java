@@ -6,15 +6,15 @@ public class Operand {
     public static final String ONLY_ALLOWED_NUMBER = "피연산자에는 숫자 외에 다른 문자가 올 수 없습니다.";
     private final int number;
 
-    public Operand(final String number) {
-        this.number = parseInt(number);
+    public static Operand of(final String number) {
+        return new Operand(parseInt(number));
     }
 
     public Operand(final Integer number) {
         this.number = number;
     }
 
-    private int parseInt(String number) {
+    private static int parseInt(String number) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {

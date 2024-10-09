@@ -35,7 +35,7 @@ public class Calculator {
         for (int index = OPERAND_LOOP_START_INDEX;
              index < strings.size();
              index = index + LOOP_INCREASE) {
-            operands.add(new Operand(strings.get(index)));
+            operands.add(Operand.of(strings.get(index)));
         }
         return operands;
     }
