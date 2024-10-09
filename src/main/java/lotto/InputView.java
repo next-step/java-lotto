@@ -9,7 +9,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-
     private static final String COMMA_DELIMITER = ",";
 
     private final Scanner scanner = new Scanner(System.in);

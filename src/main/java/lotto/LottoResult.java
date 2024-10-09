@@ -2,15 +2,26 @@ package lotto;
 
 import java.util.Objects;
 
-public class LottoResult {
-    private final int matchedLottoNumbers;
+public class LottoResult implements Comparable<LottoResult> {
 
-    private LottoResult(int matchedLottoNumbers) {
-        this.matchedLottoNumbers = matchedLottoNumbers;
+
+    private final int matchedLottoNumbersCount;
+
+    private LottoResult(int matchedLottoNumbersCount) {
+        this.matchedLottoNumbersCount = matchedLottoNumbersCount;
     }
 
-    public static LottoResult of(int matchedLottoNumbers) {
-        return new LottoResult(matchedLottoNumbers);
+    public static LottoResult of(int matchedLottoNumbersCount) {
+        return new LottoResult(matchedLottoNumbersCount);
+    }
+
+    @Override
+    public int compareTo(LottoResult other) {
+        return Integer.compare(this.matchedLottoNumbersCount, other.matchedLottoNumbersCount);
+    }
+
+    public int getMatchedLottoNumbersCount() {
+        return matchedLottoNumbersCount;
     }
 
     @Override
@@ -18,18 +29,12 @@ public class LottoResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult that = (LottoResult) o;
-        return matchedLottoNumbers == that.matchedLottoNumbers;
+        return matchedLottoNumbersCount == that.matchedLottoNumbersCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(matchedLottoNumbers);
+        return Objects.hashCode(matchedLottoNumbersCount);
     }
 
-    @Override
-    public String toString() {
-        return "LottoResult{" +
-                "matchedLottoNumbers=" + matchedLottoNumbers +
-                '}';
-    }
 }
