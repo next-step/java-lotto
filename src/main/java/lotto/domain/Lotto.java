@@ -13,6 +13,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public boolean isMatch(final Lotto otherLotto) {
+        return lottoNumbers.isMatch(otherLotto.lottoNumbers);
+    }
+
+    public int matchCount(final Lotto otherLotto) {
+        return (int) lottoNumbers.matchCount(otherLotto.lottoNumbers);
+    }
+
     public int size() {
         return lottoNumbers.size();
     }
