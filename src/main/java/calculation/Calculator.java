@@ -21,17 +21,14 @@ public class Calculator {
     }
 
     public static int calculate(String symbol, int number1, int number2){
-        switch (symbol){
-            case "+" :
-                return addition(number1, number2);
-            case "-" :
-                return subtraction(number1, number2);
-            case "*" :
-                return multiplication(number1, number2);
-            case "/":
-                return division(number1, number2);
-            default:
-                break;
+        if("+".equals(symbol)){
+            return addition(number1, number2);
+        } else if("-".equals(symbol)){
+            return subtraction(number1, number2);
+        } else if("*".equals(symbol)){
+            return multiplication(number1, number2);
+        } else if("/".equals(symbol)){
+            return division(number1, number2);
         }
         return 0;
     }
