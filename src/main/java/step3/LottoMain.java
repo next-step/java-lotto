@@ -1,6 +1,6 @@
 package step3;
 
-import step3.model.BoughtLotto;
+import step3.model.PurchasedLotto;
 import step3.model.LottoConfirmation;
 import step3.model.LottoMachine;
 import step3.uiView.InputView;
@@ -15,15 +15,15 @@ public class LottoMain {
         int money = inputView.inputMoney(); //돈입력
 
         LottoMachine lottoMachine = new LottoMachine();
-        BoughtLotto boughtLotto = lottoMachine.buyLotto(money); //로또 구매
+        PurchasedLotto purchasedLotto = lottoMachine.buyLotto(money); //로또 구매
 
-        resultView.lottoView(boughtLotto);
+        resultView.lottoView(purchasedLotto);
 
         String prizeNum = inputView.inputPrizeNum(); //당첨번호 입력
         int bonusNum = inputView.inputBonusNum(); //보너스번호 입력
 
         LottoConfirmation lottoConfirmation = new LottoConfirmation();
-        lottoConfirmation.checkPrizeNum(boughtLotto, prizeNum, bonusNum); //번호 맞춰보기
+        lottoConfirmation.checkPrizeNum(purchasedLotto, prizeNum, bonusNum); //번호 맞춰보기
 
         resultView.lottoPrizeView(lottoConfirmation);
         resultView.lottoRateReturn(lottoConfirmation);
