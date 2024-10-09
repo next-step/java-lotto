@@ -19,11 +19,11 @@ public class InputView {
 
     public static int readTotalPurchasePrice() {
         System.out.println(PURCHASE_PRICE_QUESTION);
-        int totalPurchasePrice = SCANNER.nextInt();
+        int purchasePrice = SCANNER.nextInt();
         SCANNER.nextLine();
-        validatePurchasePrice(totalPurchasePrice);
-        System.out.println((totalPurchasePrice / LOTTO_TICKET_PRICE) + TICKET_COUNT_SUFFIX);
-        return totalPurchasePrice;
+        validatePurchasePrice(purchasePrice);
+        System.out.println((purchasePrice / LOTTO_TICKET_PRICE) + TICKET_COUNT_SUFFIX);
+        return purchasePrice;
     }
 
     public static List<Integer> readLastWeekWinningNumbers() {
@@ -48,8 +48,8 @@ public class InputView {
         }
     }
 
-    private static void validatePurchasePrice(final int totalPurchasePrice) {
-        if (totalPurchasePrice % LOTTO_TICKET_PRICE != 0) {
+    private static void validatePurchasePrice(final int purchasePrice) {
+        if (purchasePrice % LOTTO_TICKET_PRICE != 0) {
             throw new IllegalArgumentException("올바른 구매금액이 아닙니다. 로또 개수에 맞게 금액을 넣어주세요.(1장당 1000원)");
         }
     }

@@ -9,15 +9,15 @@ public class LottoTicket {
     private static final int LOTTO_TICKET_PRICE = 1000;
     private static final int LOTTO_BOUND = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static Random random = new Random();
+    private static Random RANDOM = new Random();
 
     private LottoTicket() {
         throw new UnsupportedOperationException("해당 클래스는 인스턴스를 생성할 수 없습니다.");
     }
 
-    public static List<List<Integer>> issue(final int totalPurchasePrice) {
-        validatePurchasePrice(totalPurchasePrice);
-        int totalLottoCount = getTotalLottoCount(totalPurchasePrice);
+    public static List<List<Integer>> issue(final int purchasePrice) {
+        validatePurchasePrice(purchasePrice);
+        int totalLottoCount = getTotalLottoCount(purchasePrice);
         List<List<Integer>> ticket = new ArrayList<>(totalLottoCount);
         for (int i = 0; i < totalLottoCount; i++) {
             ticket.add(issueLotto());
@@ -47,15 +47,15 @@ public class LottoTicket {
     }
 
     private static int generateLottoNumber() {
-        return random.nextInt(LOTTO_BOUND) + 1;
+        return RANDOM.nextInt(LOTTO_BOUND) + 1;
     }
 
-    private static int getTotalLottoCount(final int totalPurchasePrice) {
-        return totalPurchasePrice / LOTTO_TICKET_PRICE;
+    private static int getTotalLottoCount(final int purchasePrice) {
+        return purchasePrice / LOTTO_TICKET_PRICE;
     }
 
-    private static void validatePurchasePrice(final int totalPurchasePrice) {
-        if (totalPurchasePrice % LOTTO_TICKET_PRICE != 0) {
+    private static void validatePurchasePrice(final int purchasePrice) {
+        if (purchasePrice % LOTTO_TICKET_PRICE != 0) {
             throw new IllegalArgumentException("올바른 구매금액이 아닙니다. 로또 개수에 맞게 금액을 넣어주세요.(1장당 1000원)");
         }
     }
