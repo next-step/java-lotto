@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoPurchasePriceTest {
@@ -26,4 +29,11 @@ class LottoPurchasePriceTest {
                 .hasMessage("구매 금액은 0이거나 음수일 수 없습니다.");
     }
 
+    @Test
+    @DisplayName("LottoPurchasePrice 객체가 동등성을 보장한다.")
+    void equalsTest() {
+        LottoPurchasePrice price1 = new LottoPurchasePrice(1000);
+        LottoPurchasePrice price2 = new LottoPurchasePrice(1000);
+        assertThat(price1).isEqualTo(price2);
+    }
 }
