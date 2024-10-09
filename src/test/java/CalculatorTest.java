@@ -9,44 +9,33 @@ class CalculatorTest {
     @Test
     @DisplayName("덧셈 연산을 수행 확인")
     void calculate_addition() {
-        Tokens tokens = new Tokens("2 + 3");
-        Calculator calculator = new Calculator(tokens);
-
-        int result = calculator.calculate();
-
-        assertThat(result).isEqualTo(5);
+        testCalculation("2 + 3", 5);
     }
 
     @Test
     @DisplayName("뺄셈 연산을 수행 확인")
     void calculate_subtract() {
-        Tokens tokens = new Tokens("5 - 3");
-        Calculator calculator = new Calculator(tokens);
-
-        int result = calculator.calculate();
-
-        assertThat(result).isEqualTo(2);
-    }
+            testCalculation("5 - 3", 2);
+        }
 
     @Test
     @DisplayName("곱하기 연산을 수행 확인")
     void calculate_multiply() {
-        Tokens tokens = new Tokens("2 * 3");
-        Calculator calculator = new Calculator(tokens);
-
-        int result = calculator.calculate();
-
-        assertThat(result).isEqualTo(6);
+        testCalculation("2 * 3", 6);
     }
 
     @Test
     @DisplayName("나누기 연산을 수행 확인")
     void calculate_division() {
-        Tokens tokens = new Tokens("7 / 3");
+        testCalculation("7 / 3", 2);
+    }
+
+    private void testCalculation(String expression, int expected) {
+        Tokens tokens = new Tokens(expression);
         Calculator calculator = new Calculator(tokens);
 
         int result = calculator.calculate();
 
-        assertThat(result).isEqualTo(2);
+        assertThat(result).isEqualTo(expected);
     }
 }
