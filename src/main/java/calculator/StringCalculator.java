@@ -5,47 +5,41 @@ import java.util.Deque;
 
 public class StringCalculator {
 
-    private final static String OPERATORS = "+-*/";
+    private static final int CALCULATION_IMPOSSIBLE_SIZE = 1;
 
     private StringCalculator() {
     }
 
-    public static void splitAndCalculate(String expression) {
+    public static int splitAndCalculate(String expression) {
         if (isBlankOrNull(expression)) {
             throw new IllegalArgumentException("입력값이 null 또는 빈 공백 문자입니다.");
         }
 
-        createExpressionStack(expression);
+        Deque<String> expressionDeque = createExpressionDeque(expression);
+        return calculate(expressionDeque);
     }
 
     private static boolean isBlankOrNull(String expression) {
         return expression == null || expression.isEmpty();
     }
 
-    private static Deque<String> createExpressionStack(String expression) {
-        Deque<String> stack = new ArrayDeque<>();
+    private static Deque<String> createExpressionDeque(String expression) {
+        Deque<String> deque = new ArrayDeque<>();
         for (String item : expression.split(" ")) {
             validateInputValue(item);
-            stack.push(item);
+            deque.offer(item);
         }
-        return stack;
+        return deque;
     }
 
     private static void validateInputValue(String input) {
-        if (!isValidNumber(input)) {
-            throw new IllegalArgumentException("입력값에 음수가 포함되어 있습니다.");
+        if (isNumber(input)) {
+            return;
         }
 
-        if (!isValidOperator(input)) {
+        if (ArithmeticOperator.isValidOperator(input)) {
             throw new IllegalArgumentException("사칙연산 기호가 아닌 문자는 허용되지 않습니다.");
         }
-    }
-
-    private static boolean isValidNumber(String number) {
-        if (isNumber(number) && Integer.parseInt(number) < 0) {
-            return false;
-        }
-        return true;
     }
 
     private static boolean isNumber(String number) {
@@ -57,7 +51,13 @@ public class StringCalculator {
         return true;
     }
 
-    private static boolean isValidOperator(String input) {
-        return OPERATORS.contains(input);
+    private static int calculate(Deque<String> expressionDeque) {
+        while (expressionDeque.size() != CALCULATION_IMPOSSIBLE_SIZE) {
+            String operand1 = expressionDeque.poll();
+            String operator = expressionDeque.poll();
+            String operand2 = expressionDeque.poll();
+            expressionDeque.offerFirst(ArithmeticOperator.calculate(operand1, operator, operand2));
+        }
+        return Integer.parseInt(expressionDeque.pop());
     }
 }
