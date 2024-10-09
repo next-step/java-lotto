@@ -1,6 +1,5 @@
 package lotto.domain.prize;
 
-import lotto.constant.LottoPrize;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,5 +21,22 @@ public class WinningPrizeTest {
         assertThat(prize.winAmount(LottoPrize.SECOND.getMatch())).isEqualTo(1);
         assertThat(prize.winAmount(LottoPrize.THIRD.getMatch())).isEqualTo(2);
         assertThat(prize.winAmount(LottoPrize.FOURTH.getMatch())).isEqualTo(2);
+    }
+
+    @Test
+    void 입력받은_로또_당첨_번호로_상금_총액을_정상_계산() {
+        WinningPrize prize = new WinningPrize();
+
+        prize.record(LottoPrize.FIRST.getMatch());
+        prize.record(LottoPrize.SECOND.getMatch());
+        prize.record(LottoPrize.THIRD.getMatch());
+        prize.record(LottoPrize.THIRD.getMatch());
+        prize.record(LottoPrize.FOURTH.getMatch());
+        prize.record(LottoPrize.FOURTH.getMatch());
+
+        int prizeTotal = LottoPrize.FIRST.prize(1) + LottoPrize.SECOND.prize(1)
+                +LottoPrize.THIRD.prize(2) + LottoPrize.FOURTH.prize(2);
+
+        assertThat(prize.totalPrize()).isEqualTo(prizeTotal);
     }
 }

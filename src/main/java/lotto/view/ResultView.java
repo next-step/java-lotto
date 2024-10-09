@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.constant.LottoPrize;
+import lotto.domain.prize.LottoPrize;
 import lotto.domain.prize.WinningPrize;
 import lotto.domain.sales.LottoBill;
 import lotto.domain.sales.LottoBundle;
@@ -26,6 +26,12 @@ public class ResultView {
 
     private void printPrizes(WinningPrize winningPrize) {
         for (LottoPrize lottoPrize : LottoPrize.values()) {
+            printPrize(winningPrize, lottoPrize);
+        }
+    }
+
+    private static void printPrize(WinningPrize winningPrize, LottoPrize lottoPrize) {
+        if (lottoPrize != LottoPrize.NOTHING) {
             System.out.println(lottoPrize.getMatch()
                     + "개 일치 (" + lottoPrize.getPrize() + "원)- "
                     + winningPrize.winAmount(lottoPrize.getMatch()) + "개");

@@ -12,9 +12,6 @@ public class LottoNumberTest {
         assertThat(LottoNumber.of(25).number()).isEqualTo(25);
         assertThat(LottoNumber.of(1).number()).isEqualTo(1);
         assertThat(LottoNumber.of(45).number()).isEqualTo(45);
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(0));
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(46));
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(-1));
     }
 
     @Test

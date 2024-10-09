@@ -4,7 +4,7 @@ import lotto.constant.ErrorMessage;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private final static int MIN_BOUND = 1;
     private final static int MAX_BOUND = 45;
@@ -31,6 +31,11 @@ public class LottoNumber {
     }
 
     @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(number, o.number);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -47,4 +52,5 @@ public class LottoNumber {
     public String toString() {
         return String.valueOf(number);
     }
+
 }

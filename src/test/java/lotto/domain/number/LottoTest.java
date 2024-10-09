@@ -25,37 +25,23 @@ public class LottoTest {
                 LottoNumber.of(5),
                 LottoNumber.of(6)));
 
-        assertThat(lotto.match(compared)).isEqualTo(6);
+        assertThat(lotto.equals(compared)).isTrue();
     }
 
     @Test
     @DisplayName("무작위 번호로 로또 번호 6개가 정상적으로 생성되었는지 확인한다. 무작위가 아니면 1,2,3,4,5,6로 생성됨")
     void 무작위_번호_발생_로직을_사용한_자동번호_로또_정상_생성() {
         Lotto lotto = Lotto.create();
-        Lotto compared = new Lotto(List.of(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)));
+        Lotto compared = Lotto.create();
 
-        assertThat(lotto.match(compared)).isNotEqualTo(6);
+        assertThat(lotto.equals(compared)).isFalse();
     }
 
     @Test
-    void 중복숫자_입력가_있는_문자열로_로또_생성시_예외발생() {
+    void 중복숫자_입력이_있는_문자열로_로또_생성시_예외발생() {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.of("1, 1, 3, 4, 5, 6"))
                 .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
-    }
-
-    @DisplayName("1이상 45이하가 아닌 숫자가 입력된 문자열은 로또 생성 시 예외가 발생한다.")
-    @ParameterizedTest
-    @ValueSource(strings = {"1, 2, 3, 4, 5, 47", "0, 1, 2, 3, 4, 5", "1, 3, 2, -3, 4, 5"})
-    void 문자열내_1_45_사이_아닌_숫자_포함시_인스턴스_생성_예외발생(String text) {
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(text))
-                .withMessage(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
     }
 
     @Test

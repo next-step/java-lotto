@@ -1,6 +1,6 @@
 package lotto.domain.sales;
 
-import lotto.constant.LottoPrize;
+import lotto.domain.prize.LottoPrize;
 import lotto.domain.number.Lotto;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.prize.WinningPrize;
