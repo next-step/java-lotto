@@ -1,10 +1,10 @@
-package step1;
+package calculator;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.IntBinaryOperator;
 
-public class OperaterSelection {
+public class OperatorUtils {
     private static final Map<String, IntBinaryOperator> operaterMap = new HashMap<>();
 
     static {

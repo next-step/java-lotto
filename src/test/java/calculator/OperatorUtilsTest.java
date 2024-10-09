@@ -1,10 +1,10 @@
-package step1;
+package calculator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class OperaterTest {
+class OperatorUtilsTest {
     @Test
     @DisplayName("덧셈 테스트")
     void 덧셈_테스트() {
@@ -63,7 +63,7 @@ class OperaterTest {
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() ->
-                        OperaterSelection.selection("^"))
+                        OperatorUtils.selection("^"))
                 .withMessage("잘못된 기호");
 
     }

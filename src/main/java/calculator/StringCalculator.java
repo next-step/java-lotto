@@ -1,4 +1,4 @@
-package step1;
+package calculator;
 
 import java.util.function.IntBinaryOperator;
 
@@ -27,7 +27,7 @@ public class StringCalculator {
         
         for (int i = 1; i < expression.length - 1; i += 2) {
             int operand = Integer.parseInt(expression[i+1]);
-            IntBinaryOperator operator = OperaterSelection.selection(expression[i]);
+            IntBinaryOperator operator = OperatorUtils.selection(expression[i]);
             result = operator.applyAsInt(result,operand);
         }
         return result;
