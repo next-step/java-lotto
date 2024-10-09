@@ -7,7 +7,6 @@ import step3.util.StringUtil;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoConfirmation {
 
@@ -23,18 +22,18 @@ public class LottoConfirmation {
     private final static int LOTTO_PRICE = 1000;
 
     private Map<LottoPrize, Integer> prizes = new HashMap<>();
-    private BoughtLotto boughtLotto;
+    private PurchasedLotto purchasedLotto;
 
     //당첨번호를 받아 로또 당첨 개수를 확인
-    public void checkPrizeNum(BoughtLotto boughtLotto, String prizeNum, int bonusNum) {
+    public void checkPrizeNum(PurchasedLotto purchasedLotto, String prizeNum, int bonusNum) {
         String[] prizeLotto = StringUtil.divideNum(prizeNum);
-        checkBonusNum(prizeLotto, bonusNum);
-        this.boughtLotto = boughtLotto;
+        confirmBonusNumAlreadyContainsPrizeNum(prizeLotto, bonusNum);
+        this.purchasedLotto = purchasedLotto;
         resetPrize();
-        checkPrizeNum(prizeLotto);
-        for (Lotto lottoNum : boughtLotto.getBoughtLotto()) {
-            int matchCount = checkLottoNum(lottoNum, prizeLotto);
-            prize(matchCount, checkBonus(matchCount, lottoNum, bonusNum));
+        confirmPrizeNumRange(prizeLotto);
+        for (Lotto lottoNum : purchasedLotto.getPurchasedLotto()) {
+            int matchCount = confirmExistLottoNum(lottoNum, prizeLotto);
+            prize(matchCount, confirmBonusLottoCheckWhether(matchCount, lottoNum, bonusNum));
         }
     }
 
@@ -53,7 +52,7 @@ public class LottoConfirmation {
 
     //수익률을 가져온다.
     public double rateOfReturn() {
-        checkPrize();
+        confirmAlreadyCheckPrizeNum();
         return DoubleUtil.twoDecimal((double) prizeMoney() / lottoPrice());
     }
 
@@ -61,18 +60,18 @@ public class LottoConfirmation {
         return prizes;
     }
 
-    //보너스번호 일치 여부를 체크한다.
-    private boolean checkBonus(int matchCount, Lotto lotto, int bonusNum) {
+    //보너스번호를 확인할지 여부를 체크한다
+    private boolean confirmBonusLottoCheckWhether(int matchCount, Lotto lotto, int bonusNum) {
         boolean bonusMatch = false;
         if (matchCount == BONUS_MATCH_COUNT) {
-            bonusMatch = lotto.checkNum(bonusNum);
+            bonusMatch = lotto.confirmExistLottoNum(bonusNum);
         }
         return bonusMatch;
     }
 
     //현재 총 당첨금액 가져오기
     private int prizeMoney() {
-        checkPrize();
+        confirmAlreadyCheckPrizeNum();
         return prizes.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
@@ -83,41 +82,41 @@ public class LottoConfirmation {
     }
 
     private int lottoPrice() {
-        return this.boughtLotto.getBoughtLotto().size() * LOTTO_PRICE;
+        return this.purchasedLotto.getPurchasedLotto().size() * LOTTO_PRICE;
     }
 
     //로또의 동일 숫자 확인
-    private int checkLottoNum(Lotto lotto, String[] prizeLotto) {
+    private int confirmExistLottoNum(Lotto lotto, String[] prizeLotto) {
         int matchCount = 0;
         for (String s : prizeLotto) {
-            matchCount += lotto.checkNum(Integer.parseInt(s)) ? 1 : 0;
+            matchCount += lotto.confirmExistLottoNum(Integer.parseInt(s)) ? 1 : 0;
         }
         return matchCount;
     }
 
-    //입력받은 당첨금액이 로또번호 범위를 벗어나지 않았는지 체크한다.
-    private void checkPrizeNum(String[] prizeLotto) {
+    //입력받은 당첨번호가 로또번호 범위를 벗어나지 않았는지 체크한다.
+    private void confirmPrizeNumRange(String[] prizeLotto) {
         for (String num : prizeLotto) {
-            checkNum(Integer.parseInt(num));
+            confirmLottoNumRange(Integer.parseInt(num));
         }
     }
 
     //번호가 1~45 범위에 포함되는지 체크한다.
-    private void checkNum(int num) {
+    private void confirmLottoNumRange(int num) {
         if (num < MINIMUM_LOTTO_NUM || num > MAXIMUM_LOTTO_NUM) {
             throw new IllegalArgumentException(RANGE_LOTTO_NUM);
         }
     }
 
     //로또 당첨번호를 맞춰봤는지 체크한다.
-    private void checkPrize() {
+    private void confirmAlreadyCheckPrizeNum() {
         if (prizes.isEmpty()) {
             throw new IllegalArgumentException(NOT_MATCH_PRIZE);
         }
     }
 
     //보너스번호가 이미 당첨번호에 포함되어있지는 않은지 체크한다.
-    private void checkBonusNum(String[] prizeNum, int bonusNum) {
+    private void confirmBonusNumAlreadyContainsPrizeNum(String[] prizeNum, int bonusNum) {
         if (Arrays.stream(prizeNum).mapToInt(Integer::parseInt).anyMatch(num -> num == bonusNum))
             throw new IllegalArgumentException(BONUS_NUM_ALREADY_CONTAIN);
     }

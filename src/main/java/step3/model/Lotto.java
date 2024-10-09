@@ -4,17 +4,18 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
-    private final Set<Integer> lotto;
+    private final Set<LottoNumber> lotto;
 
-    public Lotto(Set<Integer> lotto) {
+    public Lotto(Set<LottoNumber> lotto) {
         this.lotto = lotto;
     }
 
-    public boolean checkNum(int num) {
-        return this.lotto.contains(num);
+    //로또번호가 이미 존재하지는 확인한다.
+    public boolean confirmExistLottoNum(int num) {
+        return this.lotto.stream().anyMatch(l -> l.confirmLottoNum(num));
     }
 
-    public Set<Integer> getLotto() {
+    public Set<LottoNumber> getLotto() {
         return lotto;
     }
 
