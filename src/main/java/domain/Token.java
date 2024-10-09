@@ -12,22 +12,22 @@ public class Token {
     }
 
     public void validateOperand() {
-        if (isOperator()) {
+        if (!isOperand()) {
             throw new IllegalArgumentException(OPERAND_ERROR_MESSAGE);
         }
     }
 
     public void validateOperator() {
-        if (isOperand()) {
+        if (!isOperator()) {
             throw new IllegalArgumentException(OPERATOR_ERROR_MESSAGE);
         }
     }
 
-    public boolean isOperand() {
+    private boolean isOperand() {
         return Token.matches(OPERAND_PATTERN);
     }
 
-    public boolean isOperator() {
+    private boolean isOperator() {
         return Token.matches(OPERATOR_PATTERN);
     }
 }

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TokenTest {
     @Test
@@ -33,19 +32,5 @@ class TokenTest {
     void validateOperator_invalidOperator() {
         Token token = new Token("5");
         assertThrows(IllegalArgumentException.class, token::validateOperator);
-    }
-
-    @Test
-    @DisplayName("피연산자인지 확인하는 함수 테스트")
-    void isOperand() {
-        Token token = new Token("5");
-        assertTrue(token.isOperand());
-    }
-
-    @Test
-    @DisplayName("연산자인지 확인하는 함수 테스트")
-    void isOperator_correctlyIdentified() {
-        Token token = new Token("+");
-        assertTrue(token.isOperator());
     }
 }
