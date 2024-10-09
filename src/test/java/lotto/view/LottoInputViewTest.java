@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoBundle;
+import lotto.domain.LottoPurchaseResult;
 import lotto.io.ConsoleMessageReader;
 import lotto.io.ConsoleMessageWriter;
 import org.junit.jupiter.api.DisplayName;
@@ -23,8 +24,8 @@ class LottoInputViewTest {
             new ConsoleMessageWriter()
         );
 
-        final LottoBundle lottoBundle = lottoInputView.inputMoney();
-        assertThat(lottoBundle.size()).isEqualTo(3);
+        final LottoPurchaseResult lottoPurchaseResult = lottoInputView.inputMoney();
+        assertThat(lottoPurchaseResult.size()).isEqualTo(3);
     }
 
     @Test

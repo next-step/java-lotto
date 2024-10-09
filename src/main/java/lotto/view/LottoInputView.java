@@ -18,16 +18,16 @@ public class LottoInputView {
         this.writer = writer;
     }
 
-    public LottoBundle inputMoney() {
+    public LottoPurchaseResult inputMoney() {
         writer.write("구입 금액을 입력해 주세요.");
         final Money money = new Money(reader.readInt());
         final LottoStore lottoStore = new LottoStore();
-        final LottoBundle lottoBundle = lottoStore.purchase(money);
-        writer.write(lottoBundle.size() + "개를 구매했습니다.");
-        for (final Lotto lotto : lottoBundle) {
+        final LottoPurchaseResult purchase = lottoStore.purchase(money);
+        writer.write(purchase.size() + "개를 구매했습니다.");
+        for (final Lotto lotto : purchase.getLottoBundle()) {
             writer.write(lotto.toString());
         }
-        return lottoBundle;
+        return purchase;
     }
 
     public Lotto inputLastWeekWinningLotto() {
