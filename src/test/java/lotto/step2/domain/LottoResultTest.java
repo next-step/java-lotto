@@ -17,9 +17,9 @@ public class LottoResultTest {
     void setUp() {
         lottos = new Lottos(
                 List.of(
-                        new Lotto(List.of(1, 2, 3, 10, 12, 13))
-                        , new Lotto(List.of(1, 2, 3, 4, 12, 13))
-                        , new Lotto(List.of(1, 2, 3, 4, 13, 14))
+                        new Lotto(List.of(1, 2, 3, 10, 12, 13)),
+                        new Lotto(List.of(1, 2, 3, 4, 12, 13)),
+                        new Lotto(List.of(1, 2, 3, 4, 13, 14))
                 )
         );
         winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));

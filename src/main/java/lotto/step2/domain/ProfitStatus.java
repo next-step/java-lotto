@@ -1,9 +1,9 @@
 package lotto.step2.domain;
 
 public enum ProfitStatus {
-    SAME("본전")
-    , LOSS("손해")
-    , GAIN("이득");
+    SAME("본전"),
+    LOSS("손해"),
+    GAIN("이득");
 
     private final String description;
 
