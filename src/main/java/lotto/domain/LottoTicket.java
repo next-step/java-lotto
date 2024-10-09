@@ -32,12 +32,10 @@ public class LottoTicket {
         }
     }
 
-    public LottoWinningResults getWinningResult(
-            final Lotto lastWeekWinningNumbers
-    ) {
+    public LottoWinningResults getWinningResult(final Lotto winningLotto) {
         LottoWinningResults lottoWinningResults = new LottoWinningResults();
         ticket.forEach(lotto -> {
-            int winningCount = lotto.getMatchingNumberCount(lastWeekWinningNumbers);
+            int winningCount = lotto.getMatchingNumberCount(winningLotto);
             lottoWinningResults.incrementWinningResults(winningCount);
         });
         return lottoWinningResults;
