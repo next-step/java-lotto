@@ -5,7 +5,6 @@ import java.util.*;
 public class Lotto {
     private static final int MAX_NUMBER = 45;
     private static final int MAX_GENERATE_COUNT = 6;
-    private static Random RANDOM = new Random();
 
     private final Set<Integer> numbers;
 
@@ -49,23 +48,17 @@ public class Lotto {
                 .count();
     }
 
-    private Lotto issue() {
-        for (int j = 0; j < MAX_GENERATE_COUNT; j++) {
-            numbers.add(generateUniqueNumber());
-        }
-        return this;
+    private void issue() {
+        numbers.addAll(getShuffleNumbers());
     }
 
-    private int generateUniqueNumber() {
-        int lottoNumber = generateLottoNumber();
-        while (numbers.contains(lottoNumber)) {
-            lottoNumber = generateLottoNumber();
+    private Set<Integer> getShuffleNumbers() {
+        List<Integer> allNumbers = new ArrayList<>();
+        for (int i = 1; i <= MAX_NUMBER; i++) {
+            allNumbers.add(i);
         }
-        return lottoNumber;
-    }
-
-    private int generateLottoNumber() {
-        return RANDOM.nextInt(MAX_NUMBER) + 1;
+        Collections.shuffle(allNumbers);
+        return new HashSet<>(allNumbers.subList(0, MAX_GENERATE_COUNT));
     }
 
     @Override
