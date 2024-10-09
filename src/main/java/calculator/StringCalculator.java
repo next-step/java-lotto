@@ -33,17 +33,11 @@ public class StringCalculator {
     }
 
     private int getResult(CalculateParameter parameter) {
-        int result = firstCalculate(parameter);
+        int result = parameter.getNumber();
         while (!parameter.isEmpty()) {
             result = calculate(result, parameter.getNumber(), parameter.getOperator());
         }
         return result;
-    }
-
-
-
-    private int firstCalculate(CalculateParameter parameter) {
-        return calculate(parameter.getNumber(), parameter.getNumber(), parameter.getOperator());
     }
 
 }
