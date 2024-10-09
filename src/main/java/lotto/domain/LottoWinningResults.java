@@ -22,9 +22,9 @@ public class LottoWinningResults {
                 .sum();
     }
 
-    public double getProfitRate(final int totalPurchasePrice) {
+    public double getProfitRate(final LottoPurchasePrice purchasePrice) {
         double totalWinningAmount = getTotalWinningAmount();
-        return Math.floor(totalWinningAmount / totalPurchasePrice * 100) / 100;
+        return Math.floor(totalWinningAmount/ purchasePrice.getValue() * 100) / 100;
     }
 
     private void initLottoWinningResults() {

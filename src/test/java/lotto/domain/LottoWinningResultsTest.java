@@ -28,12 +28,12 @@ class LottoWinningResultsTest {
     @Test
     @DisplayName("getProfitRate 메서드가 로또 결과 수익률을 반환한다.")
     void getProfitRateTest() {
-        int totalPurchasePrice = 14_000;
+        LottoPurchasePrice lottoPurchasePrice = new LottoPurchasePrice(14_000);
         double totalWinningAmount = LottoWinningStatus.THREE.getAmount();
-        double profitRate = Math.floor(totalWinningAmount / totalPurchasePrice * 100) / 100;
+        double profitRate = Math.floor(totalWinningAmount / lottoPurchasePrice.getValue() * 100) / 100;
         LottoWinningResults result = new LottoWinningResults();
         result.incrementWinningResults(LottoWinningStatus.THREE.getWinningCount());
-        assertThat(result.getProfitRate(totalPurchasePrice))
+        assertThat(result.getProfitRate(lottoPurchasePrice))
                 .isEqualTo(profitRate);
     }
 }

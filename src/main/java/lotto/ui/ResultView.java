@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.LottoPurchasePrice;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinningResult;
 import lotto.domain.LottoWinningResults;
@@ -39,7 +40,7 @@ public class ResultView {
         }
     }
 
-    public static void printProfitRate(final int totalPurchasePrice, final LottoWinningResults lottoWinningResults) {
+    public static void printProfitRate(final LottoPurchasePrice totalPurchasePrice, final LottoWinningResults lottoWinningResults) {
         double result = lottoWinningResults.getProfitRate(totalPurchasePrice);
         String suffix = result < 1 ? PROFIT_RATE_SUFFIX+PROFIT_RATE_LESS_THAN_ONE_SUFFIX : PROFIT_RATE_SUFFIX;
         System.out.println(PROFIT_RATE_PREFIX + result + suffix);
