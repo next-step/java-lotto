@@ -25,7 +25,7 @@ class OperatorParsingTest {
     void 연산식_리스트_저장_실패_테스트() {
         String[] formulas = new String[]{"2", "+", "3", "$", "5"};
 
-        assertThatThrownBy(()-> addOperator(formulas))
+        assertThatThrownBy(() -> addOperator(formulas))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("입력한 수식이 올바르지 않습니다.");
     }

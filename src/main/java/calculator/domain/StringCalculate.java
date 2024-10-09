@@ -21,19 +21,19 @@ public class StringCalculate {
     }
 
     public int calculates() {
-        int number= 0;
+        int number = 0;
         int size = operators.size();
-        for(int i=0; i< size; i++){
+        for (int i = 0; i < size; i++) {
             number = calculate();
         }
         return number;
     }
 
     private int calculate() {
-        int number=0;
+        int number = 0;
         List<Integer> findNumbers = numbers.findNumbers();
         List<String> findOperator = operators.findOperator();
-        number  = operator(findOperator.get(0)).apply(findNumbers.get(0), findNumbers.get(1));
+        number = operator(findOperator.get(0)).apply(findNumbers.get(0), findNumbers.get(1));
         numbers.addNumber(number);
         return number;
     }

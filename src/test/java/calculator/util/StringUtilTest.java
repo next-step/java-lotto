@@ -17,7 +17,7 @@ class StringUtilTest {
 
     @Test
     @DisplayName("빈 공백 입력 시 예외 발생 테스트")
-    void 빈_공백_입력_에러_테스트(){
+    void 빈_공백_입력_에러_테스트() {
         assertThatThrownBy(() -> StringUtil.isEmpty(" "))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("null 또는 빈 공백을 입력할 수 없습니다.");

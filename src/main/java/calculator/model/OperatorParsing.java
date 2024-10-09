@@ -7,7 +7,7 @@ import java.util.List;
 
 public class OperatorParsing {
 
-    private static final String ERROR_OPERATOR_MESSAGE= "입력한 수식이 올바르지 않습니다.";
+    private static final String ERROR_OPERATOR_MESSAGE = "입력한 수식이 올바르지 않습니다.";
 
     public static List<String> addOperator(String[] formulas) {
         List<String> operators = new ArrayList<>();
@@ -19,12 +19,12 @@ public class OperatorParsing {
         return operators;
     }
 
-    private static boolean isOperator(String input){
+    private static boolean isOperator(String input) {
         return input.matches("^[\\+\\-\\*\\/]$");
     }
 
     private static String parse(String input) {
-        if(!isOperator(StringUtil.isEmpty(input))){
+        if (!isOperator(StringUtil.isEmpty(input))) {
             throw new IllegalArgumentException(ERROR_OPERATOR_MESSAGE);
         }
         return input;
