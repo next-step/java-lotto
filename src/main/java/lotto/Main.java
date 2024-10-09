@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,5 +17,7 @@ public class Main {
         for (int i = 0; i < lottoCount; i++) {
             OutputView.lottoView(lottoMachine.generateLotto());
         }
+
+        List<Integer> integers = InputView.inputWinnerNumber();
     }
 }
