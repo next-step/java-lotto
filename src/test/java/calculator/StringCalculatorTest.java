@@ -29,4 +29,11 @@ class StringCalculatorTest {
             StringCalculator.splitAndCalculate("1 X 3");
         }).withMessageMatching("사칙연산 기호가 아닌 문자는 허용되지 않습니다.");
     }
+
+    @Test
+    void 입력값_음수포함() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringCalculator.splitAndCalculate("-1 * 3");
+        }).withMessageMatching("입력값에 음수가 포함되어 있습니다.");
+    }
 }
