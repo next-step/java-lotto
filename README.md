@@ -7,3 +7,18 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+### 기능 목록
+#### UI
+- [x] 입력값 받기 
+  - [x] null이거나 빈 공백인 경우 IllegalArgumentException throw
+  - [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+- [x] 연산 결과값 출력하기
+
+#### 계산기
+- [x] 덧셈
+- [x] 뺄셈
+- [x] 곱셈
+- [x] 나눗셈
+  - [x] number2는 0보다 커야한다.
