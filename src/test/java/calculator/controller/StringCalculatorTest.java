@@ -18,7 +18,7 @@ class StringCalculatorTest {
     }
 
     @Test
-    void 더하기_계산(){
+    void 더하기_계산() {
         StringCalculator stringCalculator = new StringCalculator("1 + 2");
 
         int result = stringCalculator.result();
@@ -27,7 +27,7 @@ class StringCalculatorTest {
     }
 
     @Test
-    void 빼기_계산(){
+    void 빼기_계산() {
         StringCalculator stringCalculator = new StringCalculator("10 - 2");
 
         int result = stringCalculator.result();
@@ -36,7 +36,7 @@ class StringCalculatorTest {
     }
 
     @Test
-    void 곱하기_계산(){
+    void 곱하기_계산() {
         StringCalculator stringCalculator = new StringCalculator("10 * 2");
 
         int result = stringCalculator.result();
@@ -45,7 +45,7 @@ class StringCalculatorTest {
     }
 
     @Test
-    void 나누기_계산(){
+    void 나누기_계산() {
         StringCalculator stringCalculator = new StringCalculator("10 / 2");
 
         int result = stringCalculator.result();
@@ -54,7 +54,7 @@ class StringCalculatorTest {
     }
 
     @Test
-    void 전체_계산(){
+    void 전체_계산() {
         StringCalculator stringCalculator = new StringCalculator("2 + 3 * 4 / 2");
 
         int result = stringCalculator.result();

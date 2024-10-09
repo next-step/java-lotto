@@ -2,10 +2,12 @@ package calculator.controller;
 
 import calculator.entity.Expression;
 import calculator.entity.Expressions;
+import calculator.entity.NumberSearch;
 
 public class StringCalculator {
     private static final String DEFAULT_SPLIT_DELIMITER = " ";
     private static final int INIT_RESULT_INDEX = 0;
+    private static final NumberSearch NUMBER_SEARCH = index -> index + 1;
 
     private final Expressions expressions = new Expressions();
 
@@ -13,6 +15,7 @@ public class StringCalculator {
 
     public StringCalculator(String text) {
         validate(text);
+
         String[] numberOrExpression = split(text);
         this.result = toInt(numberOrExpression[INIT_RESULT_INDEX]);
 
@@ -22,8 +25,7 @@ public class StringCalculator {
     private void calculate(String[] values) {
         for (int i = 1; i < values.length; i += 2) {
             Expression expression = this.expressions.findExpression(values[i]);
-            int number = toInt(values[i+1]);
-
+            int number = toInt(values[this.NUMBER_SEARCH.search(i)]);
             this.result = expression.result(this.result, number);
         }
     }

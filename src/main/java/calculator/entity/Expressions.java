@@ -17,13 +17,13 @@ public class Expressions {
         );
     }
 
-    public Expression findExpression(String expression){
+    public Expression findExpression(String expression) {
         Optional<Expression> optionalExpression = expressions.stream().filter(i -> i.isMatch(expression)).findFirst();
         return validate(optionalExpression);
     }
 
     private Expression validate(Optional<Expression> optionalExpression) {
-        if(optionalExpression.isEmpty()){
+        if (optionalExpression.isEmpty()) {
             throw new IllegalArgumentException("존재하지 않는 부호");
         }
         return optionalExpression.get();
