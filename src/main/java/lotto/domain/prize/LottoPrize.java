@@ -11,16 +11,16 @@ public enum LottoPrize {
     FOURTH(3, 5_000),
     NOTHING(0, 0);
 
-    private static final Map<Integer, LottoPrize> lottoPrizes;
+    private static final Map<Integer, LottoPrize> LOTTO_PRIZES;
 
     private final int match;
     private final int prize;
 
     static {
-        lottoPrizes = new HashMap<>();
+        LOTTO_PRIZES = new HashMap<>();
 
         for (LottoPrize lottoPrize : values()) {
-            lottoPrizes.put(lottoPrize.match, lottoPrize);
+            LOTTO_PRIZES.put(lottoPrize.match, lottoPrize);
         }
     }
 
@@ -30,7 +30,7 @@ public enum LottoPrize {
     }
 
     public static LottoPrize from(int match) {
-        return lottoPrizes.getOrDefault(match, NOTHING);
+        return LOTTO_PRIZES.getOrDefault(match, NOTHING);
     }
 
     public int prize(int quantity) {
