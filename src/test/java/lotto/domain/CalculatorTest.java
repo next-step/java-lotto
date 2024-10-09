@@ -1,13 +1,13 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
     @ParameterizedTest
@@ -55,6 +55,13 @@ public class CalculatorTest {
         int result = Calculator.calculate(input);
         assertThat(result).isEqualTo(Integer.parseInt(expected));
     }
+
+    @Test
+    @DisplayName("divide 연산 시 0으로 나누어지면 ArithmeticException 을 던져줍니다.")
+    void testDivideByZero() {
+        assertThatThrownBy(() -> Calculator.calculate("1 / 0")).isInstanceOf(ArithmeticException.class);
+    }
+
 
     @ParameterizedTest
     @CsvSource({"2 + 3 * 4 / 2,10", "2 + 3 / 4 + 2,3", "2 * 3 * 4 / 2 - 3,9"})
