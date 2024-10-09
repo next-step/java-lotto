@@ -4,7 +4,7 @@ public class Money {
     public static final int MONEY_UNIT = 1000;
     public static final int MINIMUM_MONEY = 1000;
 
-    private int money;
+    private final int money;
 
     public Money(final int money) {
         if (money < MINIMUM_MONEY) {
