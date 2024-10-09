@@ -7,32 +7,16 @@ import java.util.List;
 import java.util.Queue;
 
 public class CalculateParameter {
-    public static final List<String> OPERATORS = Operator.getOperators();
     public static final String SPACE = " ";
     Queue<Integer> numbers = new LinkedList<>();
     Queue<String> operators = new LinkedList<>();
 
-    public void addNumbers(String number) {
-        int parseNumber = parseNumber(number);
-        addNumbers(parseNumber);
-    }
-
-    public void addNumbers(int number) {
-        numbers.add(number);
+    public int operatorsSize() {
+        return operators.size();
     }
 
     public int numbersSize() {
         return numbers.size();
-    }
-
-    public void addOperators(String operator) {
-        if (isOperator(operator)) {
-            operators.add(operator);
-        }
-    }
-
-    public int operatorsSize() {
-        return operators.size();
     }
 
     public boolean validateQueueSize() {
@@ -40,25 +24,6 @@ public class CalculateParameter {
             throw new IllegalStateException("연산이 성립되지 않습니다.");
         }
         return true;
-    }
-
-    public boolean isOperator(String operator) {
-        if (!isContainOperator(operator)) {
-            throw new IllegalStateException("연산자가 아닌 문자는 허용하지 않습니다.");
-        }
-        return true;
-    }
-
-    private boolean isContainOperator(String operator) {
-        return OPERATORS.contains(operator);
-    }
-
-    public int parseNumber(String text) {
-        try {
-            return Integer.parseInt(text);
-        } catch (NumberFormatException ex) {
-            throw new IllegalStateException("숫자가 아닌 문자는 허용하지 않습니다.");
-        }
     }
 
     public String getOperator() {
@@ -111,4 +76,39 @@ public class CalculateParameter {
     private boolean isEven(int i) {
         return i % 2 == 0;
     }
+
+
+    public void addNumbers(String number) {
+        int parseNumber = parseNumber(number);
+        addNumbers(parseNumber);
+    }
+
+    public int parseNumber(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException ex) {
+            throw new IllegalStateException("숫자가 아닌 문자는 허용하지 않습니다.");
+        }
+    }
+
+    public void addNumbers(int number) {
+        numbers.add(number);
+    }
+
+    public void addOperators(String operator) {
+        if (isOperator(operator)) {
+            operators.add(operator);
+        }
+    }
+    public boolean isOperator(String operator) {
+        if (!isContainOperator(operator)) {
+            throw new IllegalStateException("연산자가 아닌 문자는 허용하지 않습니다.");
+        }
+        return true;
+    }
+
+    private boolean isContainOperator(String operator) {
+        return Operator.getOperators().contains(operator);
+    }
+
 }
