@@ -36,4 +36,17 @@ class LottoWinningResultsTest {
         assertThat(result.getProfitRate(lottoPurchasePrice))
                 .isEqualTo(profitRate);
     }
+
+    @Test
+    @DisplayName("incrementWinningResults 메서드가 매개변수에 따라 일치하는 LottoWinningStatus의 count를 증가시킨다.")
+    void incrementWinningResultsTest() {
+        LottoWinningResults result = new LottoWinningResults();
+        result.incrementWinningResults(3);
+        LottoWinningResult threeMatchResult = result.getWinningResults().stream()
+                .filter(winningResult -> winningResult.getLottoWinningStatus() == LottoWinningStatus.THREE)
+                .findFirst()
+                .get();
+        assertThat(threeMatchResult.getCount())
+                .isEqualTo(1);
+    }
 }
