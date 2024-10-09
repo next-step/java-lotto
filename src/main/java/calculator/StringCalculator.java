@@ -6,6 +6,7 @@ import java.util.Deque;
 public class StringCalculator {
 
     private static final int CALCULATION_IMPOSSIBLE_SIZE = 1;
+    private static final String DEFAULT_DELIMETER = " ";
 
     private StringCalculator() {
     }
@@ -15,8 +16,7 @@ public class StringCalculator {
             throw new IllegalArgumentException("입력값이 null 또는 빈 공백 문자입니다.");
         }
 
-        Deque<String> expressionDeque = createExpressionDeque(expression);
-        return calculate(expressionDeque);
+        return calculate(createExpressionDeque(expression));
     }
 
     private static boolean isBlankOrNull(String expression) {
@@ -25,7 +25,7 @@ public class StringCalculator {
 
     private static Deque<String> createExpressionDeque(String expression) {
         Deque<String> deque = new ArrayDeque<>();
-        for (String item : expression.split(" ")) {
+        for (String item : expression.split(DEFAULT_DELIMETER)) {
             validateInputValue(item);
             deque.offer(item);
         }
