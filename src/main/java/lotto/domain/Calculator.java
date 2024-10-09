@@ -10,15 +10,15 @@ public class Calculator {
     public static int calculate(String input) {
         checkInputIsNullOrEmpty(input);
         List<String> symbols = List.of(input.split(INPUT_DELIMITER));
-        int result = convertToIntOperand(symbols.get(0));
+        Operand result = Operand.valueOf(symbols.get(0));
         for (int i = 1; i < symbols.size(); i = i + 2) {
             String operatorSymbol = symbols.get(i);
             Operator operator = Operator.getInstance(operatorSymbol);
             String operandSymbol = symbols.get(i + 1);
-            int operand = convertToIntOperand(operandSymbol);
-            result = operator.calculate(result, operand);
+            Operand operand = Operand.valueOf(operandSymbol);
+            result = Operand.valueOf(operator.calculate(result, operand));
         }
-        return result;
+        return result.value();
     }
 
     private static void checkInputIsNullOrEmpty(String input) {

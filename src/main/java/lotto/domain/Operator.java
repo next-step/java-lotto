@@ -5,29 +5,29 @@ import java.util.List;
 public enum Operator {
     PLUS("+") {
         @Override
-        public int calculate(int operand1, int operand2) {
-            return operand1 + operand2;
+        public int calculate(Operand operand1, Operand operand2) {
+            return operand1.value() + operand2.value();
         }
     },
     MINUS("-") {
         @Override
-        public int calculate(int operand1, int operand2) {
-            return operand1 - operand2;
+        public int calculate(Operand operand1, Operand operand2) {
+            return operand1.value() - operand2.value();
         }
     },
     MULTIPLY("*") {
         @Override
-        public int calculate(int operand1, int operand2) {
-            return operand1 * operand2;
+        public int calculate(Operand operand1, Operand operand2) {
+            return operand1.value() * operand2.value();
         }
     },
     DIVIDE("/") {
         @Override
-        public int calculate(int operand1, int operand2) {
-            if (operand2 == 0) {
+        public int calculate(Operand operand1, Operand operand2) {
+            if (operand2.value() == 0) {
                 throw new ArithmeticException("Division by zero is not allowed.");
             }
-            return operand1 / operand2;
+            return operand1.value() / operand2.value();
         }
     },;
 
@@ -51,5 +51,5 @@ public enum Operator {
         return this.symbol;
     }
 
-    public abstract int calculate(int operand1, int operand2);
+    public abstract int calculate(Operand operand1, Operand operand2);
 }

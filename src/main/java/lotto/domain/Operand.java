@@ -6,8 +6,12 @@ public class Operand {
     private static final String NOT_NATURAL_NUMBER_MESSAGE = "자연수가 아닙니다.";
     private final int value;
 
-    Operand(int value) {
+    private Operand(int value) {
         this.value = value;
+    }
+
+    public static Operand valueOf(int value) {
+        return new Operand(value);
     }
 
     public static Operand valueOf(String value) {
