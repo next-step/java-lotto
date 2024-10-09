@@ -7,9 +7,17 @@ import org.junit.jupiter.api.Test;
 class LottoTest {
 
     @Test
-    void 입력된_금액에_맞는_로또_개수를_구한다() {
+    void 생성() {
+        Lotto lotto = new Lotto();
+
+        assertThat(lotto).isEqualTo(new Lotto());
+    }
+
+    @Test
+    void 금액으로_로또를_살_수_있는_개수를_반환한다() {
+        Lotto lotto = new Lotto();
         int money = 14000;
-        int lottoCount = Lotto.lottoCount(money);
+        int lottoCount = lotto.calculateCount(money);
 
         assertThat(lottoCount).isEqualTo(14);
     }
