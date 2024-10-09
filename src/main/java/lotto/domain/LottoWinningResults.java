@@ -35,21 +35,9 @@ public class LottoWinningResults {
     }
 
     public void incrementWinningResults(final int count) {
-        switch (count) {
-            case 3:
-                winningResults.get(0).increment();
-                break;
-            case 4:
-                winningResults.get(1).increment();
-                break;
-            case 5:
-                winningResults.get(2).increment();
-                break;
-            case 6:
-                winningResults.get(3).increment();
-                break;
-            default:
-                break;
-        }
+        winningResults.stream()
+                .filter(winningResult -> winningResult.getLottoWinningStatus().getWinningCount() == count)
+                .findFirst()
+                .ifPresent(LottoWinningResult::increment);
     }
 }
