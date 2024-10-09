@@ -3,6 +3,8 @@ package calculator.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -91,7 +93,7 @@ public class CalculateParameterTest {
     @DisplayName("문자열을 공백 기준으로 split 한다.")
     void 문자열_split() {
         CalculateParameter parameter = new CalculateParameter();
-        String[] result = parameter.split("3 + 5");
+        List<String> result = parameter.split("3 + 5");
         assertThat(result).hasSize(3);
     }
 }

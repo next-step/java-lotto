@@ -73,11 +73,11 @@ public class CalculateParameter {
         return numbers.isEmpty() || operators.isEmpty();
     }
 
-    public String[] split(String text) {
+    public List<String> split(String text) {
         if (isBlank(text)) {
             throw new IllegalStateException("문자열이 비어있습니다.");
         }
-        return text.split(SPACE);
+        return List.of(text.split(SPACE));
     }
 
     private static boolean isBlank(String text) {
@@ -85,22 +85,22 @@ public class CalculateParameter {
     }
 
     public void makeParameter(String text) {
-        String[] splitText = split(text);
+        List<String> splitText = split(text);
         addSplitTexts(splitText);
     }
 
-    private void addSplitTexts(String[] splitText) {
-        for (int i = 0; i < splitText.length; i++) {
+    private void addSplitTexts(List<String> splitText) {
+        for (int i = 0; i < splitText.size(); i++) {
             addQueue(i, splitText);
         }
     }
 
-    private void addQueue(int index, String[] splitText) {
+    private void addQueue(int index, List<String> splitText) {
         if (isEven(index)) {
-            addNumbers(splitText[index]);
+            addNumbers(splitText.get(index));
         }
         if (isOdd(index)) {
-            addOperators(splitText[index]);
+            addOperators(splitText.get(index));
         }
     }
 
