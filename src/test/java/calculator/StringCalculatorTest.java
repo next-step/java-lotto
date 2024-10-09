@@ -16,7 +16,7 @@ class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
 
         Assertions.assertThat(calculator.splitString("2 + 3 * 4 / 2"))
-                .containsExactly("2", "+", "3", "*", "4", "/","2");
+                .containsExactly("2", "+", "3", "*", "4", "/", "2");
 
     }
 

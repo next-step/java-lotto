@@ -17,7 +17,7 @@ public class OperatorUtils {
         operaterMap.put(MINUS, (a, b) -> a - b);
         operaterMap.put(MULTIPLY, (a, b) -> a * b);
         operaterMap.put(DEVIDE, (a, b) -> {
-            if(b == 0)
+            if (b == 0)
                 throw new ArithmeticException(ErrorMessage.DIVISION_BY_ZERO.getMessage());
             return a / b;
         });
