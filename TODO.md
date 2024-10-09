@@ -8,7 +8,7 @@
 4. [x] 나눗셈의 경우 결과 값을 정수로 떨어지는 값으로 한정한다
 5. [x] 문자열 계산기는 사칙연산의 계산 우선순위가 아닌 입력 값에 따라 계산 순서가 결정된다
 6. [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
-7. [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+7. [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
 
 ### 기능 분리 힌트
 

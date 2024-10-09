@@ -56,4 +56,12 @@ class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculator(null));
     }
+
+    @ParameterizedTest
+    @DisplayName("사칙연산 기호가 아닌 경우 IllegalArgumentException 나오는지 확인")
+    @ValueSource(strings = {"5 ! 6"})
+    void validationOperatorTest(String input) {
+        StringCalculator calculator = new StringCalculator();
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculator(input));
+    }
 }
