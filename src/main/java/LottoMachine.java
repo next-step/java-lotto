@@ -2,6 +2,8 @@ import model.Lotto;
 import model.LottoNumberStrategy;
 import model.LottoStatistics;
 import model.Prize;
+import view.InputView;
+import view.ResultView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,28 +13,27 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
     public static final int PRICE_OF_A_LOTTO = 1000;
+
     private List<Lotto> lottos;
     private List<Integer> winningNumbers;
     private int totalPrice;
-    private int numberOfLotto;
-    private LottoNumberStrategy lottoNumberStrategy;
+    private List<List<Integer>> lottoNumbers;
 
     public LottoMachine(
             List<Integer> winningNumbers,
             int totalPrice,
-            LottoNumberStrategy lottoNumberStrategy
+            List<List<Integer>> lottoNumbers
     ) {
-
         this.winningNumbers = winningNumbers;
         this.totalPrice = totalPrice;
-        this.lottoNumberStrategy = lottoNumberStrategy;
-        this.numberOfLotto = totalPrice / PRICE_OF_A_LOTTO;
-        this.lottos = lottoNumberStrategy.create(this.numberOfLotto).stream()
+        this.lottoNumbers = lottoNumbers;
+        this.lottos = this.lottoNumbers.stream()
                 .map(Lotto::new)
-                .peek(it -> it.calPrize(winningNumbers))
+                .peek(it -> it.calPrize(this.winningNumbers))
                 .collect(Collectors.toList());
-        this.lottos.forEach(it -> it.calPrize(winningNumbers));
+        this.lottos.forEach(it -> it.calPrize(this.winningNumbers));
     }
+
 
     public List<Lotto> getLottos() {
         return lottos;
@@ -47,18 +48,13 @@ public class LottoMachine {
     }
 
     public int getNumberOfLotto() {
-        return numberOfLotto;
-    }
-
-    public LottoNumberStrategy getLottoNumberStrategy() {
-        return lottoNumberStrategy;
+        return this.totalPrice / PRICE_OF_A_LOTTO;
     }
 
     public LottoStatistics getStatistics() {
         List<Prize> prizes = getPrizes(this.lottos);
         Map<Integer, Integer> counts = getCounts(prizes);
-        LottoStatistics lottoStatistics = new LottoStatistics(counts, this.totalPrice);
-        return lottoStatistics;
+        return new LottoStatistics(counts, this.totalPrice);
     }
 
     private Map<Integer, Integer> getCounts(List<Prize> prizes) {
@@ -78,5 +74,25 @@ public class LottoMachine {
                 .map(Lotto::getPrize)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    public static void main(String[] args) {
+        int money = InputView.getPaidMoney();
+        ResultView.printNumberOfLotto(money, PRICE_OF_A_LOTTO);
+
+        LottoNumberStrategy lottoNumberStrategy = new LottoNumberStrategy() {
+        };
+        List<List<Integer>> lottoNumbers = lottoNumberStrategy.create(money, PRICE_OF_A_LOTTO);
+        ResultView.printLottoNumbers(lottoNumbers);
+
+        List<Integer> winningNumbers = InputView.getWinningNumbers();
+
+        LottoMachine lottoMachine = new LottoMachine(
+                winningNumbers,
+                money,
+                lottoNumbers
+        );
+
+        ResultView.printLottoStatistics(lottoMachine.getStatistics());
     }
 }

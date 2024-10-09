@@ -15,18 +15,19 @@ public class LottoMachineTest {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int totalPrice = 2000;
         LottoNumberStrategy lottoNumberStrategy = new MockLottoNumberStrategyImpl();
+        List<List<Integer>> lottoNumbers = lottoNumberStrategy.create(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
 
         //when
         LottoMachine lottoMachine = new LottoMachine(
                 winningNumbers,
                 totalPrice,
-                lottoNumberStrategy
+                lottoNumbers
         );
 
         //then
         Assertions.assertThat(lottoMachine.getLottos()).hasSize(2);
         Assertions.assertThat(lottoMachine.getLottos().stream().map(it -> it.getNumbers()).collect(Collectors.toList()))
-                .hasSameElementsAs(lottoNumberStrategy.create(2));
+                .hasSameElementsAs(lottoNumbers);
         Assertions.assertThat(lottoMachine.getWinningNumbers()).hasSameElementsAs(winningNumbers);
         Assertions.assertThat(lottoMachine.getTotalPrice()).isEqualTo(totalPrice);
         Assertions.assertThat(lottoMachine.getNumberOfLotto()).isEqualTo(2);
@@ -39,18 +40,19 @@ public class LottoMachineTest {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int totalPrice = 2000;
         LottoNumberStrategy lottoNumberStrategy = new MockLottoNumberStrategyImpl();
+        List<List<Integer>> lottoNumbers = lottoNumberStrategy.create(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
 
         //when
         LottoMachine lottoMachine = new LottoMachine(
                 winningNumbers,
                 totalPrice,
-                lottoNumberStrategy
+                lottoNumbers
         );
 
         //then
         Assertions.assertThat(lottoMachine.getLottos()).hasSize(2);
         Assertions.assertThat(lottoMachine.getLottos().stream().map(it -> it.getNumbers()).collect(Collectors.toList()))
-                .hasSameElementsAs(lottoNumberStrategy.create(2));
+                .hasSameElementsAs(lottoNumbers);
         Assertions.assertThat(lottoMachine.getWinningNumbers()).hasSameElementsAs(winningNumbers);
         Assertions.assertThat(lottoMachine.getTotalPrice()).isEqualTo(totalPrice);
         Assertions.assertThat(lottoMachine.getNumberOfLotto()).isEqualTo(2);

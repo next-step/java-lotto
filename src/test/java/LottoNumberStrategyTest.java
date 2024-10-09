@@ -12,9 +12,10 @@ public class LottoNumberStrategyTest {
         //given
         LottoNumberStrategy lottoNumberStrategy = new LottoNumberStrategy() {
         };
+        final int priceOfALotto = 1000;
 
         //when
-        List<List<Integer>> numbers = lottoNumberStrategy.create(6);
+        List<List<Integer>> numbers = lottoNumberStrategy.create(6000, priceOfALotto);
 
 
         //then

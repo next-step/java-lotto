@@ -15,15 +15,23 @@ public class InputView {
 
     public static Integer getPaidMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(SC.nextLine());
+        int money = Integer.parseInt(SC.nextLine());
+        if (money <= 0) {
+            throw new IllegalArgumentException("input money must be greater than 0");
+        }
+        return money;
     }
 
     public static List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String line = SC.nextLine();
-        return Arrays.stream(line.split(", "))
+        List<Integer> result = Arrays.stream(line.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+        if (result.size() > 6) {
+            throw new IllegalArgumentException("input length must be less than or equal to 6");
+        }
+        return result;
     }
 
     public static String[] splitByEmptyString(String input) {

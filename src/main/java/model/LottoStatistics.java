@@ -1,5 +1,6 @@
 package model;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoStatistics {
@@ -38,10 +39,11 @@ public class LottoStatistics {
     }
 
     private int getTotalIncome(Map<Integer, Integer> counts) {
-        return (counts.get(3) * Prize.getPrize(3).getPrice())
-                + (counts.get(4) * Prize.getPrize(4).getPrice())
-                + (counts.get(5) * Prize.getPrize(5).getPrice())
-                + (counts.get(6) * Prize.getPrize(6).getPrice());
+        List<Integer> includeMatched = List.of(3, 4, 5, 6);
+        Integer sum = includeMatched.stream()
+                .map(it -> counts.get(it) * Prize.getPrize(it).getPrice())
+                .reduce(0, Integer::sum);
+        return sum;
     }
 
     private double calculateNetIncome(int totalPrice, int totalIncome) {

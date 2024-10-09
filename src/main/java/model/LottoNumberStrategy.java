@@ -5,7 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public interface LottoNumberStrategy {
-    default List<List<Integer>> create(int cnt) {
+    default List<List<Integer>> create(int totalPrice, int priceOfALotto) {
+        int cnt = totalPrice / priceOfALotto;
         List<List<Integer>> numberSet = new ArrayList<>();
 
         for (int i = 0; i < cnt; i++) {
