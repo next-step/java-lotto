@@ -1,8 +1,43 @@
 package calculator.controller;
 
+import calculator.entity.Expression;
+import calculator.entity.Expressions;
+
 public class StringCalculator {
+    private static final String DEFAULT_SPLIT_DELIMITER = " ";
+    private static final int INIT_RESULT_INDEX = 0;
+
+    private final Expressions expressions = new Expressions();
+
+    private int result;
+
     public StringCalculator(String text) {
         validate(text);
+        String[] numberOrExpression = split(text);
+        this.result = toInt(numberOrExpression[INIT_RESULT_INDEX]);
+
+        calculate(numberOrExpression);
+    }
+
+    private void calculate(String[] values) {
+        for (int i = 1; i < values.length; i += 2) {
+            Expression expression = this.expressions.findExpression(values[i]);
+            int number = toInt(values[i+1]);
+
+            this.result = expression.result(this.result, number);
+        }
+    }
+
+    public int result() {
+        return this.result;
+    }
+
+    private int toInt(String value) {
+        return Integer.parseInt(value);
+    }
+
+    private String[] split(String text) {
+        return text.split(DEFAULT_SPLIT_DELIMITER);
     }
 
     private void validate(String text) {
