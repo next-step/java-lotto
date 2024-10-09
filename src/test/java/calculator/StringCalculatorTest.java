@@ -31,7 +31,7 @@ class StringCalculatorTest {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() ->
                         calculator.calculate(input))
-                .withMessage("올바르지 않은 계산 식 (null 혹은 빈문자열)");
+                .withMessage("null 혹은 공백 문자열은 연산 불가능합니다산 식 (null 혹은 빈문자열)");
 
     }
 

@@ -4,6 +4,8 @@ import java.util.function.IntBinaryOperator;
 
 public class StringCalculator {
 
+    public static final String DELIMITER = " ";
+
     public StringCalculator() {
     }
 
@@ -13,12 +15,12 @@ public class StringCalculator {
     }
 
     public String[] splitString(String input) {
-        return  input.split(" ");
+        return  input.split(DELIMITER);
     }
 
     private static void validInput(String input) {
         if(input == null || input.isEmpty()){
-            throw new IllegalArgumentException("올바르지 않은 계산 식 (null 혹은 빈문자열)");
+            throw new IllegalArgumentException(ErrorMessage.NULL_OR_EMPTY_STRING.getMessage());
         }
     }
 
