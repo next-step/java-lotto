@@ -1,8 +1,8 @@
-package lotto;
+package calculator;
 
-import lotto.domain.Calculator;
-import lotto.ui.InputView;
-import lotto.ui.ResultView;
+import calculator.domain.Calculator;
+import calculator.ui.InputView;
+import calculator.ui.ResultView;
 
 public class Main {
     public static void main(String[] args) {
