@@ -26,6 +26,6 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     private List<Integer> initLottoNumbers() {
         return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed()
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toList());
     }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private final LottoNumberStrategy lottoNumberStrategy;
 
     public LottoMachine(LottoNumberStrategy lottoNumberStrategy) {

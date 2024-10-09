@@ -1,4 +1,4 @@
-package lotto.game;
+package lotto.winningnumber;
 
 import lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;

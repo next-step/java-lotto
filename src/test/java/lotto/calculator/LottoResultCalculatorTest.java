@@ -1,7 +1,8 @@
-package lotto.result;
+package lotto.calculator;
 
 import lotto.game.LottoMachine;
-import lotto.game.WinningNumber;
+import lotto.winningnumber.WinningNumber;
+import lotto.result.LottoResult;
 import lotto.strategy.FixedLottoNumberStrategy;
 import lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoResultStatisticsTest {
+class LottoResultCalculatorTest {
 
     @DisplayName("1000원으로 로또 게임 1장을 사서 당첨 결과를 확인 할 수 있다.")
     @Test
@@ -20,12 +21,10 @@ class LottoResultStatisticsTest {
         LottoMachine lottoMachine = new LottoMachine(new FixedLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 6)));
         WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 7));
         List<LottoTicket> lottoTickets = lottoMachine.generateTickets(1000);
-        LottoResultStatistics lottoResultStatistics = new LottoResultStatistics(lottoTickets, winningNumber);
+        LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
 
-        Map<LottoResult, Integer> result = lottoResultStatistics.calculateResult();
+        Map<LottoResult, Integer> result = lottoResultCalculator.calculateResult();
 
         assertThat(result).containsEntry(new LottoResult(5), 1);
-
     }
-
 }
