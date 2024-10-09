@@ -30,4 +30,8 @@ public class Token {
     private boolean isOperator() {
         return Token.matches(OPERATOR_PATTERN);
     }
+
+    public String getToken() {
+        return Token;
+    }
 }
