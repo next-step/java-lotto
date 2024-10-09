@@ -15,7 +15,7 @@ public class Lotto {
 
     public Lotto(final Set<Integer> numbers) {
         validateInitLotto(numbers);
-        this.numbers = numbers;
+        this.numbers = new TreeSet<>(numbers);
     }
 
     private void validateInitLotto(final Set<Integer> numbers) {
