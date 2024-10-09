@@ -11,8 +11,8 @@
 ## 문자열 사칙 연산 계산기 기능 요구사항
 - InputView
   - 사용자가 입력한 문자열 값 받음 (ex. 2 + 3 * 4 / 2)
-- InputValidator
-  - 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+- Tokens
+  - 토큰 값이 없을 경우 IllegalArgumentException throw
   - 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
 - ResultView
   - 계산 결과를 출력
