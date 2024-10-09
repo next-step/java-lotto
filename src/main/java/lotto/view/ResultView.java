@@ -18,6 +18,6 @@ public class ResultView {
                     .map(LottoNumber::getNumber)
                     .collect(Collectors.toList()));
         }
-
+        System.out.println();
     }
 }
