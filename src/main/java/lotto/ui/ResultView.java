@@ -1,9 +1,9 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoWinningResult;
 import lotto.domain.LottoWinningResults;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
@@ -18,9 +18,8 @@ public class ResultView {
         throw new UnsupportedOperationException("해당 클래스는 인스턴스를 생성할 수 없습니다.");
     }
 
-    public static void printLottoDetail(final List<List<Integer>> ticket) {
-        ticket.forEach(lotto ->
-                System.out.println(Arrays.toString(lotto.toArray())));
+    public static void printLottoDetail(final List<Lotto> ticket) {
+        ticket.forEach(System.out::println);
     }
 
     public static void printWinningStatistics(final LottoWinningResults lottoWinningResults) {

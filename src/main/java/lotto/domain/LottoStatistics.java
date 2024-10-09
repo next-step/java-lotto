@@ -3,20 +3,19 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoStatistics {
+    private final List<Lotto> ticket;
 
-    private LottoStatistics() {
-        throw new UnsupportedOperationException("해당 클래스는 인스턴스를 생성할 수 없습니다.");
+    public LottoStatistics(List<Lotto> ticket) {
+        this.ticket = ticket;
     }
 
-    public static LottoWinningResults winningStatistics(
-            final List<List<Integer>> lottoResults,
-            final List<Integer> lastWeekWinningNumbers
+    public static LottoWinningResults getLottoWinningResult(
+            final List<Lotto> ticket,
+            final Lotto lastWeekWinningNumbers
     ) {
         LottoWinningResults lottoWinningResults = new LottoWinningResults();
-        lottoResults.stream().forEach(lottoResult -> {
-            int winningCount = (int) lottoResult.stream()
-                    .filter(lastWeekWinningNumbers::contains)
-                    .count();
+        ticket.forEach(lotto -> {
+            int winningCount = lotto.getMatchingNumberCount(lastWeekWinningNumbers);
             lottoWinningResults.incrementWinningResults(winningCount);
         });
         return lottoWinningResults;
