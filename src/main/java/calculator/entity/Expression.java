@@ -1,5 +1,7 @@
 package calculator.entity;
 
+import java.util.Objects;
+
 public class Expression {
 
     private final CalculateExpression calculateExpression;
@@ -14,5 +16,18 @@ public class Expression {
 
     public boolean isMatch(String expression) {
         return this.calculateExpression.isMatch(expression);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expression that = (Expression) o;
+        return calculateExpression == that.calculateExpression;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(calculateExpression);
     }
 }
