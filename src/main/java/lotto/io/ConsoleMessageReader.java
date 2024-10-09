@@ -12,7 +12,9 @@ public class ConsoleMessageReader implements MessageReader {
 
     @Override
     public int readInt() {
-        return scanner.nextInt();
+        final int input = scanner.nextInt();
+        scanner.nextLine();
+        return input;
     }
 
     @Override
