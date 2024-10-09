@@ -10,7 +10,7 @@ public class Operand {
         this.value = value;
     }
 
-    public static Operand valeuOf(String value) {
+    public static Operand valueOf(String value) {
         try {
             int intValue = Integer.parseInt(value);
             return new Operand(intValue);
