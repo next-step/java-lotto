@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class OperatorTest {
@@ -39,5 +40,21 @@ public class OperatorTest {
     @DisplayName("divide enum 연산 시 0으로 나누어지면 ArithmeticException 을 던져줍니다.")
     public void testDivideByZero() {
         assertThatThrownBy(() -> Operator.DIVIDE.calculate(10, 0)).isInstanceOf(ArithmeticException.class);
+    }
+
+
+    @Test
+    @DisplayName("symbol에 해당하는 Operator를 반환합니다.")
+    public void getInstanceTest() {
+        String symbol = "+";
+        Operator operator = Operator.getInstance(symbol);
+        assertThat(operator).isEqualTo(Operator.PLUS);
+    }
+
+    @Test
+    @DisplayName("symbol에 해당하는 Operator가 없다면 IllegalArgumentException이 던져집니다.")
+    public void getInstanceExceptionTest() {
+        String symbol = ":";
+        assertThatIllegalArgumentException().isThrownBy(()-> Operator.getInstance(symbol));
     }
 }
