@@ -1,4 +1,4 @@
-package calculator.operator;
+package calculator.domain;
 
 import java.util.HashMap;
 import java.util.Map;
