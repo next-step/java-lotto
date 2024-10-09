@@ -50,7 +50,7 @@ public class CalculateParameterTest {
         parameter.addNumbers(1);
         parameter.addNumbers(2);
         parameter.addOperators("*");
-        assertThat(parameter.validQueueSize()).isTrue();
+        assertThat(parameter.validateQueueSize()).isTrue();
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CalculateParameterTest {
         CalculateParameter parameter = new CalculateParameter();
         parameter.addNumbers(1);
         parameter.addOperators("*");
-        assertThatThrownBy(parameter::validQueueSize)
+        assertThatThrownBy(parameter::validateQueueSize)
                 .isInstanceOf(IllegalStateException.class);
     }
 

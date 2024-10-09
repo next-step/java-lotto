@@ -39,7 +39,7 @@ public class StringCalculator {
     public int calculate(String text) {
         CalculateParameter parameter = new CalculateParameter();
         parameter.makeParameter(text);
-        parameter.validQueueSize();
+        parameter.validateQueueSize();
         return getResult(parameter);
     }
 

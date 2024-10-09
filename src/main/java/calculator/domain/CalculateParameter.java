@@ -35,7 +35,7 @@ public class CalculateParameter {
         return operators.size();
     }
 
-    public boolean validQueueSize() {
+    public boolean validateQueueSize() {
         if (numbers.size() != operators.size() + 1) {
             throw new IllegalStateException("연산이 성립되지 않습니다.");
         }
