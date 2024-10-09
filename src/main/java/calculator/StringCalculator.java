@@ -13,6 +13,9 @@ public class StringCalculator {
             if (operator.equals("+")) {
                 result += number;
             }
+            if (operator.equals("-")) {
+                result -= number;
+            }
         }
         return result;
     }
