@@ -48,7 +48,7 @@ public class CalculateParameterTest {
         parameter.addNumbers(1);
         parameter.addNumbers(2);
         parameter.addOperators("*");
-        assertThat(parameter.isValidQueueSize()).isTrue();
+        assertThat(parameter.validQueueSize()).isTrue();
     }
 
     @Test
@@ -57,7 +57,7 @@ public class CalculateParameterTest {
         CalculateParameter parameter = new CalculateParameter();
         parameter.addNumbers(1);
         parameter.addOperators("*");
-        assertThatThrownBy(parameter::isValidQueueSize)
+        assertThatThrownBy(parameter::validQueueSize)
                 .isInstanceOf(IllegalStateException.class);
     }
 
@@ -75,5 +75,23 @@ public class CalculateParameterTest {
         CalculateParameter parameter = new CalculateParameter();
         parameter.addNumbers(4);
         assertThat(parameter.numbersSize()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("문자열이 비어있는 경우 exception을 발생한다.")
+    void 문자열_null_또는_공백() {
+        CalculateParameter parameter = new CalculateParameter();
+        assertThatThrownBy(() -> parameter.split(""))
+                .isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(() -> parameter.split(null))
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    @DisplayName("문자열을 공백 기준으로 split 한다.")
+    void 문자열_split() {
+        CalculateParameter parameter = new CalculateParameter();
+        String[] result = parameter.split("3 + 5");
+        assertThat(result).hasSize(3);
     }
 }

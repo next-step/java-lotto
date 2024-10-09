@@ -8,6 +8,7 @@ import java.util.Queue;
 
 public class CalculateParameter {
     public static final List<String> OPERATORS = Operator.getOperators();
+    public static final String SPACE = " ";
     Queue<Integer> numbers = new LinkedList<>();
     Queue<String> operators = new LinkedList<>();
 
@@ -34,7 +35,7 @@ public class CalculateParameter {
         return operators.size();
     }
 
-    public boolean isValidQueueSize() {
+    public boolean validQueueSize() {
         if (numbers.size() != operators.size() + 1) {
             throw new IllegalStateException("연산이 성립되지 않습니다.");
         }
@@ -70,5 +71,44 @@ public class CalculateParameter {
 
     public boolean isEmpty() {
         return numbers.isEmpty() || operators.isEmpty();
+    }
+
+    public String[] split(String text) {
+        if (isBlank(text)) {
+            throw new IllegalStateException("문자열이 비어있습니다.");
+        }
+        return text.split(SPACE);
+    }
+
+    private static boolean isBlank(String text) {
+        return text == null || text.isBlank();
+    }
+
+    public void makeParameter(String text) {
+        String[] splitText = split(text);
+        addSplitTexts(splitText);
+    }
+
+    private void addSplitTexts(String[] splitText) {
+        for (int i = 0; i < splitText.length; i++) {
+            addQueue(i, splitText);
+        }
+    }
+
+    private void addQueue(int index, String[] splitText) {
+        if (isEven(index)) {
+            addNumbers(splitText[index]);
+        }
+        if (isOdd(index)) {
+            addOperators(splitText[index]);
+        }
+    }
+
+    private static boolean isOdd(int i) {
+        return i % 2 == 1;
+    }
+
+    private boolean isEven(int i) {
+        return i % 2 == 0;
     }
 }
