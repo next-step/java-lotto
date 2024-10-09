@@ -1,12 +1,26 @@
 package lotto.service;
 
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoGameTest {
+
+    @Test
+    @DisplayName("지난 주 당첨 번호를 리스트로 변환한다.")
+    void 당첨번호_리스트_변환() {
+        String lastWinnerLotto = "1, 2, 3, 4, 5, 6";
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winnerLotto = LottoGame.getInstance().getWinnerLotto(lastWinnerLotto);
+        assertThat(winnerLotto.getLottoNumbers()).hasSize(6);
+        assertThat(winnerLotto).isEqualTo(lotto);
+    }
+
 
     @Test
     @DisplayName("금액이 1000원 미만이면 exception 발생")

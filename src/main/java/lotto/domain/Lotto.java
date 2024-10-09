@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Lotto {
+public class Lotto implements Comparable<Lotto>{
 
     List<Integer> lottoNumbers;
 
@@ -27,5 +27,22 @@ public class Lotto {
 
     public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    private static int addResult(List<Integer> winner, Integer lottoNumber) {
+        if (winner.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
+
+    @Override
+    public int compareTo(Lotto winner) {
+        int result = 0;
+        for (Integer lottoNumber : lottoNumbers) {
+            result += addResult(winner.getLottoNumbers(), lottoNumber);
+        }
+        return result;
     }
 }
