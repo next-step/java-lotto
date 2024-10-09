@@ -31,4 +31,12 @@ class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertThat(calculator.calculator(input)).isEqualTo(100);
     }
+
+    @ParameterizedTest
+    @DisplayName("나눗셈이 정확하게 작동하는지 확인")
+    @ValueSource(strings = {"100 / 5 / 2"})
+    void divisionTest(String input) {
+        StringCalculator calculator = new StringCalculator();
+        assertThat(calculator.calculator(input)).isEqualTo(10);
+    }
 }
