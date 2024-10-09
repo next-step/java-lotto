@@ -27,7 +27,7 @@ public class LottoService {
         WinningNumbers winningNumbers = createWinningNumbers(inputView);
 
         this.lottoResult = new LottoResult(lottos, winningNumbers);
-        showLottoResult();
+        showLottoResult(this.lottoResult);
         showLottoProfit(purchaseAmount);
     }
 
@@ -49,28 +49,8 @@ public class LottoService {
         return WinningNumbers.create(numbers);
     }
 
-    private void showLottoResult() {
-        EnumMap<LottoRank, Integer> rankInfo = initializeRankInfo();
-        createLottoRankInfo(rankInfo);
-        resultView.showLottoResult(rankInfo);
-    }
-
-    private void createLottoRankInfo(EnumMap<LottoRank, Integer> rankInfo) {
-        LottoRank[] ranks = LottoRank.values();
-        Arrays.sort(ranks, (o1, o2) -> o1.getMatchCount() - o2.getMatchCount());
-
-        for (LottoRank rank : ranks) {
-            if(rank.isNoneRank()) continue;
-            int matchCount = rank.getMatchCount();
-            rankInfo.put(rank, lottoResult.findMatchCount(matchCount));
-        }
-    }
-
-    private static EnumMap<LottoRank, Integer> initializeRankInfo() {
-        EnumMap<LottoRank, Integer> rankInfo = new EnumMap<>(LottoRank.class);
-        Arrays.stream(LottoRank.values())
-                .forEach(rank -> rankInfo.put(rank, 0));
-        return rankInfo;
+    private void showLottoResult(LottoResult lottoResult) {
+        resultView.showLottoResult(lottoResult);
     }
 
     private void showLottoProfit(int purchaseAmount){

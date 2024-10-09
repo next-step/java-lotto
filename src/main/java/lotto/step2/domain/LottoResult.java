@@ -66,4 +66,8 @@ public class LottoResult {
 
         return prizeByRank * rankCount;
     }
+
+    public EnumMap<LottoRank, Integer> getRankInfo() {
+        return rankInfo;
+    }
 }

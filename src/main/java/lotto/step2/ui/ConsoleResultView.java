@@ -5,7 +5,10 @@ import lotto.step2.domain.LottoResult;
 import lotto.step2.domain.Lottos;
 import lotto.step2.domain.ProfitStatus;
 
+import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConsoleResultView implements ResultView{
     public static final String LOTTO_RESULT_MESSAGE = "\n당첨 통계\n---------";
@@ -24,11 +27,21 @@ public class ConsoleResultView implements ResultView{
         System.out.println(lottos.showLottos());
     }
 
-    public void showLottoResult(EnumMap<LottoRank, Integer> rankInfo){
+    public void showLottoResult(LottoResult lottoResult){
         System.out.println(LOTTO_RESULT_MESSAGE);
-        for (LottoRank rank : rankInfo.keySet()) {
+        EnumMap<LottoRank, Integer> rankInfo = lottoResult.getRankInfo();
+
+        List<LottoRank> ranks = sortLottoRankByMatchCount();
+        for (LottoRank rank : ranks) {
             System.out.printf(LOTTO_RANK_MESSAGE, rank.getMatchCount(), rank.getPrize(), rankInfo.get(rank));
         }
+    }
+
+    private List<LottoRank> sortLottoRankByMatchCount() {
+        return Arrays.stream(LottoRank.values())
+                .filter(LottoRank::isNoneRank)
+                .sorted((o1, o2) -> o1.getMatchCount() - o2.getMatchCount())
+                .collect(Collectors.toList());
     }
 
     public void showLottoProfit(double profitRate) {

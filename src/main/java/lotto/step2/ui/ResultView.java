@@ -9,7 +9,7 @@ import java.util.EnumMap;
 public interface ResultView {
     void showLottoCount(int count);
     void showLottos(Lottos lottos);
-    void showLottoResult(EnumMap<LottoRank, Integer> rankInfo);
+    void showLottoResult(LottoResult lottoResult);
     void showLottoProfit(double profitRate);
     void showProfitStatus(ProfitStatus status);
 }
