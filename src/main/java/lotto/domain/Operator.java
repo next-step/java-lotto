@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public enum Operator {
     PLUS("+") {
         @Override
@@ -33,6 +35,16 @@ public enum Operator {
 
     Operator(String symbol) {
         this.symbol = symbol;
+    }
+
+    public static Operator getInstance(String symbol) {
+        List<Operator> operators = List.of(Operator.values());
+        for(Operator operator: operators) {
+            if(operator.symbol.equals(symbol)) {
+                return operator;
+            }
+        }
+        throw new IllegalArgumentException("symbol에 해당하는 연산자가 없습니다.");
     }
 
     public String getSymbol() {
