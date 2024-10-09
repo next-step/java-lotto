@@ -23,4 +23,12 @@ class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertThat(calculator.calculator(input)).isEqualTo(3);
     }
+
+    @ParameterizedTest
+    @DisplayName("곱셈이 정확하게 작동하는지 확인")
+    @ValueSource(strings = {"10 * 5 * 2"})
+    void multipleTest(String input) {
+        StringCalculator calculator = new StringCalculator();
+        assertThat(calculator.calculator(input)).isEqualTo(100);
+    }
 }
