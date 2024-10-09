@@ -1,5 +1,6 @@
 package stringcalculator.controller;
 
+import stringcalculator.model.Calculator;
 import stringcalculator.model.Input;
 import stringcalculator.model.Result;
 import stringcalculator.view.InputView;
@@ -9,8 +10,7 @@ public class StringCalculatorController {
     public static void run() {
         Input input = new Input(InputView.input());
 
-        Result result = input.convertToCalculator()
-                .calculate();
+        Result result = Calculator.of(input).calculate();
 
         ResultView.print(result);
     }

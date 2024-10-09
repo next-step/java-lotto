@@ -1,9 +1,9 @@
 package stringcalculator.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Input {
 
@@ -12,12 +12,9 @@ public class Input {
     public static final int MIN_SIZE = 3;
     public static final int EVEN_CHECK_NUMBER = 2;
     public static final int ZERO = 0;
-    public static final int FIRST_OPERAND_INDEX = 0;
-    public static final int INDEX_INCREMENT = 2;
-    public static final int OPERAND_OFFSET = 1;
     private final List<String> inputs;
 
-    public Input(final String concatenatedInput) {
+    public Input(String concatenatedInput) {
         this.inputs = split(concatenatedInput);
     }
 
@@ -25,9 +22,11 @@ public class Input {
         return new Input(String.join(SPACE, inputs));
     }
 
-    private List<String> split(final String input) {
-        List<String> result = Arrays.asList(input.trim()
-                .split(SPACE));
+    private List<String> split(String input) {
+        String[] inputs = input.trim()
+                .split(SPACE);
+        List<String> result = Arrays.stream(inputs)
+                .collect(Collectors.toUnmodifiableList());
 
         if (isInvalidateSize(result.size())) {
             throw new IllegalArgumentException(NOT_ALLOW_BELOW_THREE_OR_LIST_SIZE_EVEN_NUMBER);
@@ -41,19 +40,8 @@ public class Input {
                 size % EVEN_CHECK_NUMBER == ZERO;
     }
 
-    public Calculator convertToCalculator() {
-        String firstOperand = inputs.get(FIRST_OPERAND_INDEX);
-
-        List<Memory> memories = new ArrayList<>();
-        for (int index = 1;
-             index < inputs.size();
-             index = index + INDEX_INCREMENT) {
-            String operator = inputs.get(index);
-            String operand = inputs.get(index + OPERAND_OFFSET);
-            memories.add(new Memory(Operator.convertToOperator(operator), new Operand(operand)));
-        }
-
-        return new Calculator(new Operand(firstOperand), memories.toArray(Memory[]::new));
+    public List<String> value() {
+        return this.inputs;
     }
 
     @Override
