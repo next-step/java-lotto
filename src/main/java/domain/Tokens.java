@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,28 +10,28 @@ public class Tokens {
     private final List<Token> tokens;
 
     public Tokens(String expression) {
-        this.tokens = expression.isEmpty() ? Collections.emptyList() : Arrays.stream(expression.split(DELIMITER))
-                                                                             .map(Token::new)
-                                                                             .collect(Collectors.toList());
+        if (expression.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_INPUT_ERROR_MESSAGE);
+        }
+        this.tokens = Arrays.stream(expression.split(DELIMITER))
+                            .map(Token::new)
+                            .collect(Collectors.toList());
 
     }
 
     public void validate() {
-        checkEmptyInput();
-        checkTokens();
-    }
-
-    private void checkEmptyInput() {
-        if (tokens.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_INPUT_ERROR_MESSAGE);
+        for (int i = 0; i < tokens.size(); i++) {
+            validateToken(i);
         }
     }
 
-    private void checkTokens() {
-        for (int i = 0; i < tokens.size(); i += 2) {
-            tokens.get(i).validateOperand();
-            tokens.get(i + 1).validateOperator();
+    private void validateToken(int index) {
+        Token token = tokens.get(index);
+        if (index % 2 == 0) {
+            token.validateOperand();
+            return;
         }
+        token.validateOperator();
     }
 
     public List<Token> getTokens() {
