@@ -7,8 +7,13 @@ public class Main {
 
     public static void main(String[] args) {
         int money = InputView.inputAmount();
-        int lottoCount = Lotto.lottoCount(money);
 
+        LottoMachine lottoMachine = new LottoMachine(new LottoNumbers(1, 45));
+        int lottoCount = lottoMachine.lottoCount(money);
         OutputView.lottoCount(lottoCount);
+
+        for (int i = 0; i < lottoCount; i++) {
+            OutputView.lottoView(lottoMachine.generateLotto());
+        }
     }
 }
