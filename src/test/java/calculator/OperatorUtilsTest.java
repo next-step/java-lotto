@@ -68,5 +68,17 @@ class OperatorUtilsTest {
 
     }
 
+    @Test
+    @DisplayName("0으로 나눌 시 예외 발생")
+    void exceptionOccuredWhenDivideByZero() {
+
+        StringCalculator calculator = new StringCalculator();
+
+        Assertions.assertThatExceptionOfType(ArithmeticException.class)
+                .isThrownBy(() ->
+                        calculator.calculate("5 / 0"))
+                .withMessage("0으로 나눌 수 없습니다");
+
+    }
 
 }

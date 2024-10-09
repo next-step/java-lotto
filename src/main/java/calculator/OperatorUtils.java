@@ -8,11 +8,8 @@ public class OperatorUtils {
     private static final Map<String, IntBinaryOperator> operaterMap = new HashMap<>();
 
     public static final String PLUS = "+";
-
     public static final String MINUS = "-";
-
     public static final String MULTIPLY = "*";
-
     public static final String DEVIDE = "/";
 
     static {
