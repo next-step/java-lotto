@@ -1,25 +1,72 @@
 package calculation;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Calculator {
+    private static final List<String> arithmeticSymbols = Arrays.asList("+", "-", "*", "/");
 
     public static int addition(int number1, int number2){
-        return 0;
+        return number1 + number2;
     }
     public static int subtraction(int number1, int number2){
-        return 0;
+        return number1 - number2;
     }
     public static int multiplication(int number1, int number2){
-        return 0;
+        return number1 * number2;
     }
     public static int division(int number1, int number2){
-        return 0;
+        return number1 / number2;
     }
 
     public static int calculate(String symbol, int number1, int number2){
+        switch (symbol){
+            case "+" :
+                return addition(number1, number2);
+            case "-" :
+                return subtraction(number1, number2);
+            case "*" :
+                return multiplication(number1, number2);
+            case "/":
+                return division(number1, number2);
+            default:
+                break;
+        }
         return 0;
     }
 
     public static int calculateExpression(String expression){
-        return 0;
+        List<String> expressionElements = List.of(expression.split(" "));
+
+        final int MAX_INPUT_NUMBERS = 2;
+        List<Integer> numbers = new ArrayList<>();
+        String symbol = "";
+
+        for (String e : expressionElements) {
+            if (isNumberic(e)) {
+                numbers.add(Integer.valueOf(e));
+            }
+            if (!isNumberic(e) && isArithmeticSymbol(e)) {
+                symbol = e;
+            }
+            if (numbers.size() == MAX_INPUT_NUMBERS) {
+                numbers.add(Calculator.calculate(symbol, numbers.remove(0), numbers.remove(0)));
+            }
+        }
+
+        return numbers.get(0);
+    }
+
+    private static boolean isNumberic(String str) {
+        return str.matches("[+-]?\\d+");
+    }
+
+    //todo private로 해도 되는 코드인데 테스트에서 사용하기 위해서 public으로 쓰는 게 맞는지
+    public static boolean isArithmeticSymbol(String symbol) {
+        if (!arithmeticSymbols.contains(symbol)) {
+            throw new IllegalArgumentException("사칙연산 기호가 아닙니다. " + symbol);
+        }
+        return true;
     }
 }

@@ -14,11 +14,11 @@
 - [x] 입력값 받기 
   - [x] null이거나 빈 공백인 경우 IllegalArgumentException throw
   - [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
-- [ ] 연산 결과값 출력하기
+- [x] 연산 결과값 출력하기
 
-#### 기능
-- [ ] 덧셈
-- [ ] 뺄셈
-- [ ] 곱셈
-- [ ] 나눗셈
-  - [ ] number2는 0보다 커야한다.
+#### 계산기
+- [x] 덧셈
+- [x] 뺄셈
+- [x] 곱셈
+- [x] 나눗셈
+  - [x] number2는 0보다 커야한다.

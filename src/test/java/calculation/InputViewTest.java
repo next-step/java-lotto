@@ -2,11 +2,8 @@ package calculation;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InputViewTest {
 
@@ -21,31 +18,6 @@ public class InputViewTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             InputView.isNullOrBlank("");
         });
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"+", "-", "*", "/"})
-    void 사칙연산_기호임(String symbol) {
-        assertTrue(InputView.isArithmeticSymbol(symbol));
-    }
-
-    @ParameterizedTest
-    @DisplayName("사칙연산 기호가 아닌 경우 IllegalArgumentException")
-    @ValueSource(strings = {"a", " ", ":", "%", "$", "?", "#", ""})
-    void 사칙연산_기호_아님(String symbol) {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    InputView.isArithmeticSymbol(symbol);
-                }).withMessageMatching("사칙연산 기호가 아닙니다. "+escapeSpecialChars(symbol));
-
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            InputView.isArithmeticSymbol(symbol);
-        });
-    }
-
-    private String escapeSpecialChars(String input) {
-        String regexSpecialChars = "[\\^\\.\\$\\|\\?\\*\\+\\-\\(\\)\\[\\{\\]]";
-        return input.replaceAll(regexSpecialChars, "\\\\$0");
     }
 
 }
