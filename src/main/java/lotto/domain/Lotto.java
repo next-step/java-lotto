@@ -19,22 +19,22 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private void validateInitLotto(Set<Integer> numbers) {
+    private void validateInitLotto(final Set<Integer> numbers) {
         validateNumberSize(numbers);
         validateNumbers(numbers);
     }
 
     private void validateNumbers(final Set<Integer> numbers) {
-        numbers.forEach(Lotto::validateNumber);
+        numbers.forEach(this::validateNumber);
     }
 
-    private void validateNumberSize(Set<Integer> numbers) {
+    private void validateNumberSize(final Set<Integer> numbers) {
         if (numbers.size() != MAX_GENERATE_COUNT) {
             throw new IllegalArgumentException("로또번호의 개수가 일치하지 않습니다.");
         }
     }
 
-    private static void validateNumber(final int lottoNumber) {
+    private void validateNumber(final int lottoNumber) {
         if (lottoNumber < 1 || lottoNumber > MAX_NUMBER) {
             throw new IllegalArgumentException("올바른 로또 번호가 아닙니다.(1이상 45이하 아님)");
         }
@@ -64,7 +64,7 @@ public class Lotto {
         return lottoNumber;
     }
 
-    private static int generateLottoNumber() {
+    private int generateLottoNumber() {
         return RANDOM.nextInt(MAX_NUMBER) + 1;
     }
 
