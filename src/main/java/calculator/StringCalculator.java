@@ -3,6 +3,10 @@ package calculator;
 public class StringCalculator {
 
     public int calculator(String input) {
+        if (input == null || input.trim().isBlank()) {
+            throw new IllegalArgumentException("빈 공백 문자는 계산되지 않습니다.");
+        }
+
         String[] inputSplit = input.split(" ");
         int result = Integer.parseInt(inputSplit[0]);
 

@@ -1,10 +1,11 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class StringCalculatorTest {
 
@@ -38,5 +39,21 @@ class StringCalculatorTest {
     void divisionTest(String input) {
         StringCalculator calculator = new StringCalculator();
         assertThat(calculator.calculator(input)).isEqualTo(10);
+    }
+
+    @ParameterizedTest
+    @DisplayName("빈 공백 문자일 경우 IllegalArgumentException 나오는지 확인")
+    @ValueSource(strings = {""})
+    void validationBlinkTest(String input) {
+        StringCalculator calculator = new StringCalculator();
+        assertThatThrownBy(() -> calculator.calculator(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력 값이 null일 경우 IllegalArgumentException 나오는지 확인")
+    void validationNullTest() {
+        StringCalculator calculator = new StringCalculator();
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculator(null));
     }
 }
