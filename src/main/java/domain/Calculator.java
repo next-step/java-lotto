@@ -1,6 +1,14 @@
 package domain;
 
+import domain.calculation.Addition;
+import domain.calculation.Calculation;
+import domain.calculation.Division;
+import domain.calculation.Multiplication;
+import domain.calculation.Subtraction;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Calculator {
     private final Tokens tokens;
@@ -33,17 +41,16 @@ public class Calculator {
     }
 
     private int performArithmetic(int result, int operand, String operator) {
-        switch (operator) {
-            case "+":
-                return result + operand;
-            case "-":
-                return result - operand;
-            case "*":
-                return result * operand;
-            case "/":
-                return result / operand;
-            default:
-                throw new IllegalArgumentException("올바른 연산자가 아닙니다.");
-        }
+        Map<String, Calculation> calculationMap = createCalculationMap();
+        return calculationMap.get(operator).calculate(result, operand);
+    }
+
+    private Map<String, Calculation> createCalculationMap() {
+        Map<String, Calculation> map = new HashMap<>();
+        map.put("+", new Addition());
+        map.put("-", new Subtraction());
+        map.put("*", new Multiplication());
+        map.put("/", new Division());
+        return map;
     }
 }
