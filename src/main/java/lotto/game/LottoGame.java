@@ -2,12 +2,14 @@ package lotto.game;
 
 
 import lotto.prize.LottoPrize;
+import lotto.calculator.LottoProfitCalculator;
 import lotto.result.LottoResult;
-import lotto.result.LottoResultStatistics;
+import lotto.calculator.LottoResultCalculator;
 import lotto.strategy.RandomLottoNumberStrategy;
 import lotto.ticket.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+import lotto.winningnumber.WinningNumber;
 
 import java.util.List;
 import java.util.Map;
@@ -33,10 +35,15 @@ public class LottoGame {
         List<Integer> winningNumbers = inputView.getWinningNumbersFromUser();
         WinningNumber winningNumber = WinningNumber.from(winningNumbers);
 
-        LottoResultStatistics lottoResultStatistics = new LottoResultStatistics(lottoTickets, winningNumber);
-        Map<LottoResult, Integer> lottoResultIntegerMap = lottoResultStatistics.calculateResult();
+        LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
+        Map<LottoResult, Integer> lottoResult = lottoResultCalculator.calculateResult();
 
-        resultView.showLottoResult(lottoResultIntegerMap, lottoPrize);
+        LottoProfitCalculator profitCalculator = new LottoProfitCalculator(lottoResult, lottoPrize);
+        double profitRate = profitCalculator.calculateProfitRate(lottoTickets.size());
+
+        resultView.showLottoTickets(lottoTickets);
+        resultView.showLottoResult(lottoResult, lottoPrize);
+        resultView.showLottoProfit(profitRate);
     }
 
 }
