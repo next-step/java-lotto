@@ -1,8 +1,10 @@
 package calculator;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
@@ -36,5 +38,12 @@ public class CalculatorTest {
     void 사칙연산_혼합() {
         String input = "2 + 3 * 4 / 2";
         assertThat(calculator.calculate(input)).isEqualTo(10);
+    }
+
+    @Test
+    void 연산_기호가_아님() {
+        assertThatThrownBy(() -> {
+           calculator.calculate("2 ! 3 * 4 / 2");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
