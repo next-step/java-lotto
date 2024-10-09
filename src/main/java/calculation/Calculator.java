@@ -7,33 +7,36 @@ import java.util.List;
 public class Calculator {
     private static final List<String> arithmeticSymbols = Arrays.asList("+", "-", "*", "/");
 
-    public static int addition(int number1, int number2){
+    public static int addition(int number1, int number2) {
         return number1 + number2;
     }
-    public static int subtraction(int number1, int number2){
+
+    public static int subtraction(int number1, int number2) {
         return number1 - number2;
     }
-    public static int multiplication(int number1, int number2){
+
+    public static int multiplication(int number1, int number2) {
         return number1 * number2;
     }
-    public static int division(int number1, int number2){
+
+    public static int division(int number1, int number2) {
         return number1 / number2;
     }
 
-    public static int calculate(String symbol, int number1, int number2){
-        if("+".equals(symbol)){
+    public static int calculate(String symbol, int number1, int number2) {
+        if ("+".equals(symbol)) {
             return addition(number1, number2);
-        } else if("-".equals(symbol)){
+        } else if ("-".equals(symbol)) {
             return subtraction(number1, number2);
-        } else if("*".equals(symbol)){
+        } else if ("*".equals(symbol)) {
             return multiplication(number1, number2);
-        } else if("/".equals(symbol)){
+        } else if ("/".equals(symbol)) {
             return division(number1, number2);
         }
         return 0;
     }
 
-    public static int calculateExpression(String expression){
+    public static int calculateExpression(String expression) {
         List<String> expressionElements = List.of(expression.split(" "));
 
         final int MAX_INPUT_NUMBERS = 2;

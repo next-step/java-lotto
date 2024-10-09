@@ -13,7 +13,7 @@ public class InputView {
         if (!isNullOrBlank(text)) {
             return text;
         }
-        
+
         return null;
     }
 
