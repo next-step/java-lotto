@@ -1,8 +1,8 @@
-package calculator.controller;
+package calculator;
 
 import static calculator.domain.Calculator.StartCalculate;
 
-public class CalculatorController {
+public class CalculatorApplication {
     public static void main(String[] args) {
         StartCalculate();
     }

@@ -4,12 +4,11 @@ import calculator.domain.Operation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static calculator.domain.ErrorMessage.*;
+import static calculator.domain.Operation.DIVDE_ZERO_ERROR;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class OperationTest {
-
     @DisplayName("숫자 2개 더하기")
     @Test
     void 덧셈() {

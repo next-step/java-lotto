@@ -4,12 +4,11 @@ import calculator.domain.OperationHandler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static calculator.domain.ErrorMessage.*;
+import static calculator.domain.OperationHandler.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class OperationHandlerTest {
-
     @DisplayName("입력받은 큐들을 계산할 수 있다.")
     @Test
     void 총_계산() {

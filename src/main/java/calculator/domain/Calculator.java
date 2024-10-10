@@ -2,11 +2,11 @@ package calculator.domain;
 
 import calculator.view.ResultView;
 
-import static calculator.domain.ErrorMessage.*;
 import static calculator.view.InputView.inputStr;
 import static calculator.view.ResultView.printResult;
 
 public class Calculator {
+    public static final String BLINK_INPUT_ERROR = "입력된 값이 없습니다.";
     private static final String DELIMETER = " ";
 
     public static void StartCalculate() {
@@ -29,5 +29,4 @@ public class Calculator {
     private static boolean isBlank(String input) {
         return (input == null || input.trim().isEmpty());
     }
-
 }
