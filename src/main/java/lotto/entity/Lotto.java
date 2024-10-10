@@ -15,5 +15,19 @@ public class Lotto {
         return numbers;
     }
 
+    public int matchCount(List<Integer> winningNumbers) {
+        Collections.sort(winningNumbers);
 
+        int winningCount = 0;
+
+        for (Integer winningNumber : winningNumbers) {
+            for(Integer number : this.numbers){
+                if(winningNumber.equals(number)){
+                    winningCount++;
+                    continue;
+                }
+            }
+        }
+        return winningCount;
+    }
 }
