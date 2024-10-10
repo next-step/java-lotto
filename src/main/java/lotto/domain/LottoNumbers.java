@@ -1,0 +1,86 @@
+package lotto.domain;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
+public class LottoNumbers {
+    private static final int START = 0;
+    private static final int END = 6;
+    private static final int SIZE = 6;
+
+    private final TreeSet<LottoNumber> lottoNumbers;
+
+    public LottoNumbers() {
+        TreeSet<LottoNumber> temporary = new TreeSet<>();
+        for (int i = 1; i <= 45; i++) {
+            temporary.add(new LottoNumber(i));
+        }
+        this.lottoNumbers = temporary;
+    }
+
+    public LottoNumbers(Integer... numbers) {
+        this(new TreeSet<>(Arrays.stream(numbers).map(LottoNumber::new).collect(Collectors.toSet())));
+    }
+
+    public LottoNumbers(List<LottoNumber> numbers) {
+        this(new TreeSet<>(Set.copyOf(numbers)));
+    }
+
+    public LottoNumbers(TreeSet<LottoNumber> numbers) {
+        if (numbers.size() != SIZE) {
+            throw new IllegalArgumentException();
+        }
+        this.lottoNumbers = numbers;
+    }
+
+    public boolean match(int number) {
+        return lottoNumbers.contains(new LottoNumber(number));
+    }
+
+    public LottoNumbers pickNumbers() {
+        ArrayList<LottoNumber> temporary = new ArrayList<>(lottoNumbers);
+
+        shuffle(temporary);
+        List<LottoNumber> pickedNumbers = temporary.subList(START, END);
+        sort(pickedNumbers);
+
+        LottoNumbers lottoNumbers1 = new LottoNumbers(pickedNumbers);
+
+        return lottoNumbers1;
+    }
+
+    public List<Integer> getValues() {
+        return lottoNumbers.stream()
+            .map(LottoNumber::getValue)
+            .collect(Collectors.toList());
+    }
+
+    private void shuffle(List<LottoNumber> baseNumbers) {
+        Collections.shuffle(baseNumbers);
+    }
+
+    private void sort(List<LottoNumber> numbers) {
+        Collections.sort(numbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof LottoNumbers))
+            return false;
+        LottoNumbers that = (LottoNumbers)o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lottoNumbers);
+    }
+}
