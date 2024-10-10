@@ -1,13 +1,14 @@
 package calculator.controller;
 
-import calculator.entity.Expression;
+import calculator.entity.CalculateExpression;
 import calculator.entity.Expressions;
-import calculator.entity.NumberSearch;
+
+import java.util.function.UnaryOperator;
 
 public class StringCalculator {
     private static final String DEFAULT_SPLIT_DELIMITER = " ";
     private static final int INIT_RESULT_INDEX = 0;
-    private static final NumberSearch NUMBER_SEARCH = index -> index + 1;
+    private static final UnaryOperator<Integer> NUMBER_SEARCH = expressionIndex -> expressionIndex + 1;
 
     private final Expressions expressions = new Expressions();
 
@@ -22,10 +23,16 @@ public class StringCalculator {
         calculate(numberOrExpression);
     }
 
+    private void validate(String text) {
+        if (text == null || text.isBlank()) {
+            throw new IllegalArgumentException("빈 값 검증");
+        }
+    }
+
     private void calculate(String[] values) {
-        for (int i = 1; i < values.length; i += 2) {
-            Expression expression = this.expressions.findExpression(values[i]);
-            int number = toInt(values[this.NUMBER_SEARCH.search(i)]);
+        for (int expressionsIndex = 1; expressionsIndex < values.length; expressionsIndex += 2) {
+            CalculateExpression expression = expressions.findExpression(values[expressionsIndex]);
+            int number = toInt(values[NUMBER_SEARCH.apply(expressionsIndex)]);
             this.result = expression.result(this.result, number);
         }
     }
@@ -42,9 +49,5 @@ public class StringCalculator {
         return text.split(DEFAULT_SPLIT_DELIMITER);
     }
 
-    private void validate(String text) {
-        if (text == null || text.isBlank()) {
-            throw new IllegalArgumentException("빈 값 검증");
-        }
-    }
+
 }
