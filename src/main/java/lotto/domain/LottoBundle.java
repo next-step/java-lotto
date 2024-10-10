@@ -15,7 +15,7 @@ public class LottoBundle implements Iterable<Lotto> {
         this.lottoBundle = new ArrayList<>(lottoBundle);
     }
 
-    public static LottoBundle issues(final int lottoBundleCount) {
+    public static LottoBundle createLottoBundle(final int lottoBundleCount) {
         final LottoNumbers lottoNumbers = new LottoNumbers();
         final List<Lotto> lottoBundle = new ArrayList<>();
         for (int i = 0; i < lottoBundleCount; i++) {

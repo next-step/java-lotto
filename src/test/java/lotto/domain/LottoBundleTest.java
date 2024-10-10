@@ -9,7 +9,7 @@ class LottoBundleTest {
     @Test
     @DisplayName("전달받은 수량만큼 로또를 발행한다.")
     void shouldIssueLottoBundleForGivenQuantity() {
-        final LottoBundle lottoBundle = LottoBundle.issues(5);
+        final LottoBundle lottoBundle = LottoBundle.createLottoBundle(5);
         assertThat(lottoBundle.size()).isEqualTo(5);
     }
 }
