@@ -1,6 +1,7 @@
 package calculator;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -13,5 +14,18 @@ public class OperationTypeTest {
 
         // then
         Assertions.assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void 덧셈_수행() {
+        // given
+        int operandA = 3;
+        int operandB = 1;
+
+        // when
+        int result = OperationType.ADD.apply(operandA, operandB);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(4);
     }
 }
