@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LottoGame {
@@ -9,10 +10,16 @@ public class LottoGame {
     private static final int gamePrice = 1000;
     private final int gameMoney;
     private final List<Lotto> lottoList;
+    private final LottoResults lottoResults;
 
     public LottoGame(int gameMoney) {
+        this(gameMoney, new LottoResults(new HashMap<>()));
+    }
+
+    public LottoGame(int gameMoney, LottoResults lottoResults){
         this.gameMoney = validateGameMoney(gameMoney);
         this.lottoList = generateLotto(gameMoney / gamePrice);
+        this.lottoResults = lottoResults;
     }
 
     private List<Lotto> generateLotto(int count) {
@@ -35,5 +42,11 @@ public class LottoGame {
 
     public List<Lotto> getLottoList() {
         return lottoList;
+    }
+
+    public void makeLottoResult(Lotto winningLotto){
+        for(int i=0;i<lottoList.size();i++){
+            lottoResults.addResult(lottoList.get(i).getLottoResult(winningLotto));
+        }
     }
 }

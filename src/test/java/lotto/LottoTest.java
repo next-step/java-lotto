@@ -36,4 +36,14 @@ class LottoTest {
                 () -> assertThat(lottoList.get(5)).isEqualTo(11)
         );
     }
+
+    @DisplayName("로또번호 일치 갯수")
+    @Test
+    void 로또번호_일치갯수() {
+        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 5, 7, 8, 9, 11));
+        Lotto lotto = new Lotto(lottoNumbers);
+        List<Integer> winningLottoNumbers = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 9, 10));
+        Lotto winningLotto = new Lotto(winningLottoNumbers);
+        assertThat(lotto.getLottoResult(winningLotto)).isEqualTo(4);
+    }
 }

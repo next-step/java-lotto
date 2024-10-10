@@ -39,4 +39,20 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public int getLottoResult(Lotto winningLotto) {
+        int equalCount = 0;
+        List<Integer> winningLottoNumbers = winningLotto.getLottoNumbers();
+        for (int i = 0; i < winningLottoNumbers.size(); i++) {
+            equalCount += addCount(winningLottoNumbers.get(i));
+        }
+        return equalCount;
+    }
+
+    private int addCount(int winningNumber) {
+        if (lottoNumbers.contains(winningNumber)) {
+            return 1;
+        }
+        return 0;
+    }
 }
