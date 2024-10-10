@@ -18,11 +18,11 @@ public enum Operator {
     });
 
     private final String operator;
-    private final OperatorMethod operatorClass;
+    private final OperatorMethod operatorMethod;
 
-    Operator(String operator, OperatorMethod operatorClass) {
+    Operator(String operator, OperatorMethod operatorMethod) {
         this.operator = operator;
-        this.operatorClass = operatorClass;
+        this.operatorMethod = operatorMethod;
     }
 
     public String getOperator() {
@@ -43,6 +43,6 @@ public enum Operator {
     }
 
     public int operate(int num1, int num2) {
-        return this.operatorClass.operate(num1, num2);
+        return this.operatorMethod.operate(num1, num2);
     }
 }
