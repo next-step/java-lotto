@@ -16,7 +16,7 @@ public class StringCalculator {
         return INSTANCE;
     }
 
-    public int calculate(Integer num1, Integer num2, Operator operator) {
+    int calculate(Integer num1, Integer num2, Operator operator) {
         return operator.operate(num1, num2);
     }
 
