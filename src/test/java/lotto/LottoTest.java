@@ -4,21 +4,16 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
+
 class LottoTest {
 
     @Test
-    void 생성() {
-        Lotto lotto = new Lotto();
+    void 로또_번호를_생성한다() {
+        Lotto lotto = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6));
+        Lotto pickLottoNumber = lotto.pickLottoNumber();
 
-        assertThat(lotto).isEqualTo(new Lotto());
-    }
-
-    @Test
-    void 금액으로_로또를_살_수_있는_개수를_반환한다() {
-        Lotto lotto = new Lotto();
-        int money = 14000;
-        int lottoCount = lotto.calculateCount(money);
-
-        assertThat(lottoCount).isEqualTo(14);
+        assertThat(pickLottoNumber).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
     }
 }
