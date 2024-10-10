@@ -6,7 +6,7 @@ public class ProfitCalculator {
     public static float calculateProfitRate(int totalPurchaseAmount, List<Integer> equalNumberCountList) {
         int totalProfitAmount = calculateTotalProfit(equalNumberCountList);
 
-        float profitRate = ((float) totalProfitAmount / totalPurchaseAmount) * 100;
+        float profitRate = (float) totalProfitAmount / totalPurchaseAmount;
         return Math.round(profitRate * 100) / 100.0f;
     }
 
