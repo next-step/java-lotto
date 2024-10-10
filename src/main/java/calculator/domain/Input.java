@@ -14,8 +14,8 @@ public class Input {
         this.value = value.trim();
     }
 
-    public Strings split() {
-        return new Strings(this.value.split(DELIMITER));
+    public String[] split() {
+        return this.value.split(DELIMITER);
     }
 
     @Override

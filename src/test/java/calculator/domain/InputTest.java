@@ -9,13 +9,13 @@ class InputTest {
     @Test
     void 공백_여러개() {
         Input input = new Input(" 2  +  3  *  4  /  2 ");
-        assertThat(input.split()).isEqualTo(new Strings(new String[]{"2", "+", "3", "*", "4", "/", "2"}));
+        assertThat(input.split()).isEqualTo(new String[]{"2", "+", "3", "*", "4", "/", "2"});
     }
 
     @Test
     void 공백_기준_문자열_나누기() {
         Input input = new Input("2 + 3 * 4 / 2");
-        assertThat(input.split()).isEqualTo(new Strings(new String[]{"2", "+", "3", "*", "4", "/", "2"}));
+        assertThat(input.split()).isEqualTo(new String[]{"2", "+", "3", "*", "4", "/", "2"});
     }
 
     @Test

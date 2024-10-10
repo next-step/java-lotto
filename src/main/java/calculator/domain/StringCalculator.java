@@ -9,7 +9,7 @@ public class StringCalculator {
         this.calculationOrderStrategy = calculationOrderStrategy;
     }
 
-    public int calculate(final Strings strings) {
-        return calculationOrderStrategy.calculate(strings);
+    public int calculate(final String[] values) {
+        return calculationOrderStrategy.calculate(values);
     }
 }
