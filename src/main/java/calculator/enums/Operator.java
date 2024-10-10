@@ -1,16 +1,21 @@
 package calculator.enums;
 
-import calculator.domain.*;
+import calculator.domain.OperatorMethod;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Operator {
-    PLUS("+", new PlusOperator()),
-    MINUS("-", new MinusOperator()),
-    MULTIPLY("*", new MultiplyOperator()),
-    DIVIDE("/", new DivideOperator());
+    PLUS("+", Integer::sum),
+    MINUS("-", (num1, num2) -> num1 - num2),
+    MULTIPLY("*", (num1, num2) -> num1 * num2),
+    DIVIDE("/", (num1, num2) -> {
+        if (num2 == 0) {
+            throw new IllegalStateException("분모가 0이 될 수 없습니다.");
+        }
+        return num1 / num2;
+    });
 
     private final String operator;
     private final OperatorMethod operatorClass;

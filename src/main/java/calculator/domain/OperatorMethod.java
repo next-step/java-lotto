@@ -1,5 +1,5 @@
 package calculator.domain;
 
 public interface OperatorMethod {
-    int operate(int firstOperand, int secondOperand);
+    int operate(int num1, int num2);
 }
