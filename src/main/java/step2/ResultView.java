@@ -26,6 +26,7 @@ public class ResultView {
         print("4개 일치 (50000원) - " + winningTickets.getFourthWinningCount());
         print("5개 일치 (1500000원) - " + winningTickets.getFifthWinningCount());
         print("6개 일치 (2000000000원) - " + winningTickets.getSixthWinningCount());
+        print("총 수익률은 " + winningTickets.getWinningPrice() / (InputView.LOTTO_TICKET_PRICE * lottoTicketsSize) + "입니다.");
     }
 
     private String[] splitByDelimiter(String winningNumbers) {

@@ -33,4 +33,12 @@ public class WinningTickets {
         return winningTickets.getOrDefault(6, new ArrayList<>()).size();
     }
 
+    public long getWinningPrice() {
+        return winningTickets.entrySet()
+                             .stream()
+                             .filter(winningTicket -> WINNING_PRICE.containsKey(winningTicket.getKey()))
+                             .mapToLong(winningTicket -> winningTicket.getValue()
+                                                                      .size() * WINNING_PRICE.get(winningTicket.getKey()))
+                             .sum();
+    }
 }

@@ -3,7 +3,7 @@ package step2;
 import java.util.Scanner;
 
 public class InputView {
-    private static final int LOTTO_TICKET_PRICE = 1000;
+    public static final int LOTTO_TICKET_PRICE = 1000;
     private static InputValidator inputValidator = new InputValidator();
 
     public int getInputAndPrint() {
