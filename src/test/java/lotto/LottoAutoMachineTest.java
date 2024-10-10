@@ -41,7 +41,7 @@ public class LottoAutoMachineTest {
         prizeCountMap.put(Prize.FIRST, 0);
         LottoMachine machine = new LottoAutoMachine(20000);
 
-        assertThat(machine.calculateProfitRate(prizeCountMap))
+        assertThat(machine.calculateProfitRate(prizeCountMap, 2))
                 .isEqualTo("2.75");
     }
 }
