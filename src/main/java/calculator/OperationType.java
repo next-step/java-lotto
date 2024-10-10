@@ -12,7 +12,9 @@ public enum OperationType {
         }
         return a / b;
     }),
-    UNKNOWN("UNKNOWN", (a, b) -> a);
+    UNKNOWN("UNKNOWN", (a, b) -> {
+        throw new IllegalArgumentException("유효하지 않은 연산자가 입력되었습니다");
+    });
 
     private final String symbol;
     private final BinaryOperator<Integer> operator;

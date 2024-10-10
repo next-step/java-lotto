@@ -79,4 +79,16 @@ public class OperationTypeTest {
             OperationType.DIVIDE.apply(operandA, operandB);
         }).withMessage("0으로 나눌 수 없습니다");
     }
+
+    @Test
+    void 유효하지_않은_연산자_계산_시도_예외_발생() {
+        // given
+        int operandA = 3;
+        int operandB = 2;
+
+        // when, then
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            OperationType.UNKNOWN.apply(operandA, operandB);
+        }).withMessage("유효하지 않은 연산자가 입력되었습니다");
+    }
 }
