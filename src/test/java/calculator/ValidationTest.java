@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ValidationTest {
+class ValidationTest {
 
     @Test
     void 공백인_경우() {
