@@ -27,4 +27,15 @@ public class Lotto {
 
         return lottoNumbersList;
     }
+
+    public static LottoStatistics createStatistics(List<Integer> equalNumberCountList) {
+        LottoStatistics lottoStatistics = LottoStatistics.createEmpty();
+
+        for (int equalNumberCount : equalNumberCountList) {
+            LottoRank lottoRank = LottoRank.fromEqualNumberCount(equalNumberCount);
+            lottoStatistics.plusCount(lottoRank);
+        }
+
+        return lottoStatistics;
+    }
 }
