@@ -49,17 +49,4 @@ public class Calculator {
         }
         return new Result(calculatedOperand.value());
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Calculator that = (Calculator) o;
-        return Objects.equals(operands, that.operands) && Objects.equals(operators, that.operators);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(operands, operators);
-    }
 }

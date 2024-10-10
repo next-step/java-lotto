@@ -29,27 +29,6 @@ public class CalculatorTest {
         new Calculator(operands, operators);
     }
 
-    @Test
-    void 입력문자열을_계산기에_저장한다() {
-        String inputString = "2 + 3 * 4 / 2";
-        Input input = new Input(inputString);
-        List<Operand> operands = Arrays.asList(
-                Operand.of("2"),
-                Operand.of("3"),
-                Operand.of("4"),
-                Operand.of("2")
-        );
-        List<Operator> operators = Arrays.asList(
-                convertToOperator("+"),
-                convertToOperator("*"),
-                convertToOperator("/")
-        );
-        Calculator actual = Calculator.of(input);
-        Calculator expected = new Calculator(operands, operators);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
     @ParameterizedTest(name = "사칙연산들을_계산한다({0} {1} {2} {3} {4} {5} {6} = {7})")
     @CsvSource(value = {
             "2,+,3,*,4,/,2,10",
