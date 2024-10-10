@@ -1,8 +1,11 @@
 package calculator;
 
 public class Calculator {
+
+    public static final String SPACE = " ";
+
     public int calculate(String input) {
-        String[] tokens = input.split(" ");
+        String[] tokens = input.split(SPACE);
         int result = Integer.parseInt(tokens[0]);
         return applyOperations(tokens, result);
     }
