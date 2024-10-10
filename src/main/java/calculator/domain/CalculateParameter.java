@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class CalculateParameter {
-    public static final String SPACE = " ";
+    public static final String DELIMITER = " ";
     Queue<Integer> numbers = new LinkedList<>();
     Queue<Operator> operators = new LinkedList<>();
 
@@ -42,7 +42,7 @@ public class CalculateParameter {
         if (isBlank(text)) {
             throw new IllegalStateException("문자열이 비어있습니다.");
         }
-        return List.of(text.split(SPACE));
+        return List.of(text.split(DELIMITER));
     }
 
     private static boolean isBlank(String text) {
