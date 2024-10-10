@@ -25,4 +25,34 @@ public class LottoTest {
         assertTrue(lotto.hasNumber(9));
         assertTrue(lotto.hasNumber(11));
     }
+
+    @DisplayName("로또는 6개의 숫자만 입력되어야 한다")
+    @Test
+    void limitCount(){
+        LottoNumbersGenerater numbersGenerater = () -> List.of(1, 2, 3);
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Lotto.create(numbersGenerater))
+                .withMessage("로또 번호를 6개 입력하세요");
+    }
+
+    @DisplayName("로또는 1-45범위 내에서 입력되어야 한다")
+    @Test
+    void limitRange(){
+        LottoNumbersGenerater numbersGenerater = () -> List.of(0, 46, 47, 1, 2, 3);
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Lotto.create(numbersGenerater))
+                .withMessage("1-45범위 내의 로또 번호를 입력하세요");
+    }
+
+    @DisplayName("로또는 중복된 번호가 없어야 한다")
+    @Test
+    void checkDuplicateNumber(){
+        LottoNumbersGenerater numbersGenerater = () -> List.of(1, 1, 1, 3, 4, 5);
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Lotto.create(numbersGenerater))
+                .withMessage("로또번호가 중복됐습니다");
+    }
 }
