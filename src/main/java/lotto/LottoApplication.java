@@ -2,12 +2,11 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
-import lotto.view.InputView;
+import lotto.domain.LottoResults;
 import lotto.view.ResultView;
 
-import static lotto.view.InputView.inputInt;
-import static lotto.view.InputView.inputStr;
-import static lotto.view.ResultView.printLottoGames;
+import static lotto.view.InputView.*;
+import static lotto.view.ResultView.*;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -16,8 +15,8 @@ public class LottoApplication {
         printLottoGames(lottoGame);
         Lotto winningLotto = new Lotto(inputStr(ResultView::printLastWeekLotto));
 
+        LottoResults lottoResults = lottoGame.makeLottoResult(winningLotto);
+        printResults(lottoResults);
+        printRatio(lottoGame.getEarnRate());
     }
-
-
-
 }

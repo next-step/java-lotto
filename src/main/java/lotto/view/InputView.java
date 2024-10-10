@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.domain.LottoRank;
+import lotto.domain.LottoResults;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

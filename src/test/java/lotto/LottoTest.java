@@ -50,7 +50,7 @@ class LottoTest {
 
     @DisplayName("당첨 로또 생성")
     @Test
-    void 당첨로또(){
+    void 당첨로또() {
         String winning = "1,2,6,4,5,3";
         Lotto lotto = new Lotto(winning);
         List<Integer> lottoList = lotto.getLottoNumbers();

@@ -6,7 +6,10 @@ public class Lotto {
     public static final String IS_NOT_LOTTO_SIZE = "번호가 6개가 아닙니다.";
     public static final String BLINK_INPUT_ERROR = "입력된 값이 없습니다.";
     public static final String INPUT_IS_NOT_NUMBER = "입력된 값이 숫자가 아닙니다.";
+    public static final String IS_NOT_LOTTO_NUMBER = "로또번호가 1~45가 아닙니다.";
     private static final String DELIMETER = ",";
+    private static final int LOTTO_MIN_NUM = 1;
+    private static final int LOTTO_MAX_NUM = 45;
     private final List<Integer> lottoNumbers;
 
     public Lotto() {
@@ -43,13 +46,13 @@ public class Lotto {
         }
     }
 
-    private static void validateNotNull(String input) {
+    private void validateNotNull(String input) {
         if (isBlank(input)) {
             throw new IllegalArgumentException(BLINK_INPUT_ERROR);
         }
     }
 
-    private static boolean isBlank(String input) {
+    private boolean isBlank(String input) {
         return (input == null || input.trim().isEmpty());
     }
 
@@ -65,11 +68,21 @@ public class Lotto {
 
     private static List<Integer> makeSortLotto(List<Integer> numbers) {
         Collections.sort(numbers);
+        validateLottoNumbers(numbers);
         return numbers;
     }
 
-    private void validateLottoSetSize(List<Integer> lottoSet) {
-        if (lottoSet.size() != 6) {
+    private static void validateLottoNumbers(List<Integer> numbers) {
+        if (numbers.get(5) > LOTTO_MAX_NUM) {
+            throw new IllegalArgumentException(IS_NOT_LOTTO_NUMBER);
+        }
+        if (numbers.get(0) < LOTTO_MIN_NUM) {
+            throw new IllegalArgumentException(IS_NOT_LOTTO_NUMBER);
+        }
+    }
+
+    private void validateLottoSetSize(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException(IS_NOT_LOTTO_SIZE);
         }
     }
