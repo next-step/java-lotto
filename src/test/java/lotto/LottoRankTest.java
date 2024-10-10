@@ -15,4 +15,16 @@ public class LottoRankTest {
         // then
         Assertions.assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
     }
+
+    @Test
+    void 당첨_액수_구하기() {
+        // given
+        int equalNumberCount = 6;
+
+        // when
+        int prizeMoneyAmount = LottoRank.findPrizeMoneyFromEqualNumberCount(equalNumberCount);
+
+        // then
+        Assertions.assertThat(prizeMoneyAmount).isEqualTo(LottoRank.FIRST.prizeMoneyAmount);
+    }
 }
