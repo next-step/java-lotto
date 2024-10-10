@@ -1,5 +1,7 @@
 package view;
 
+import model.Lotto;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -16,8 +18,8 @@ public class InputView {
     public static Integer getPaidMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         int money = Integer.parseInt(SC.nextLine());
-        if (money <= 0) {
-            throw new IllegalArgumentException("input money must be greater than 0");
+        if (money < 1000) {
+            throw new IllegalArgumentException("input money must be greater than or equal to 1000");
         }
         return money;
     }
@@ -30,6 +32,12 @@ public class InputView {
                 .collect(Collectors.toList());
         if (result.size() > 6) {
             throw new IllegalArgumentException("input length must be less than or equal to 6");
+        }
+        int cnt = (int) result.stream()
+                .filter(it -> it < Lotto.MIN_LOTTO_NUMBER || it > Lotto.MAX_LOTTO_NUMBER)
+                .count();
+        if (cnt > 0) {
+            throw new IllegalArgumentException("lotto number must be between 1 and 45");
         }
         return result;
     }

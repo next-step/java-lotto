@@ -3,6 +3,9 @@ package model;
 import java.util.List;
 
 public class Lotto {
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
+
     private List<Integer> numbers;
     private Prize prize;
 
@@ -20,13 +23,9 @@ public class Lotto {
     }
 
     public void calPrize(List<Integer> winningNumbers) {
-        int cnt = 0;
-        for (Integer elem : winningNumbers) {
-            if (this.numbers.contains(elem)) {
-                cnt++;
-            }
-        }
-
+        int cnt = (int) winningNumbers.stream()
+                .filter(it -> this.numbers.contains(it))
+                .count();
         this.prize = Prize.getPrize(cnt);
     }
 }

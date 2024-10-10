@@ -1,4 +1,6 @@
-import model.LottoNumberStrategy;
+import model.LottoMachine;
+import model.LottoNumberGenerate;
+import model.LottoNumberGenerator;
 import model.LottoStatistics;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,8 +16,9 @@ public class LottoMachineTest {
         //given
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int totalPrice = 2000;
-        LottoNumberStrategy lottoNumberStrategy = new MockLottoNumberStrategyImpl();
-        List<List<Integer>> lottoNumbers = lottoNumberStrategy.create(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
+        LottoNumberGenerate lottoNumberGenerate = new MockLottoNumberGeneratorImpl();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoNumberGenerate);
+        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
 
         //when
         LottoMachine lottoMachine = new LottoMachine(
@@ -39,8 +42,9 @@ public class LottoMachineTest {
         //given
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int totalPrice = 2000;
-        LottoNumberStrategy lottoNumberStrategy = new MockLottoNumberStrategyImpl();
-        List<List<Integer>> lottoNumbers = lottoNumberStrategy.create(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
+        LottoNumberGenerate lottoNumberGenerate = new MockLottoNumberGeneratorImpl();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoNumberGenerate);
+        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
 
         //when
         LottoMachine lottoMachine = new LottoMachine(
@@ -58,10 +62,10 @@ public class LottoMachineTest {
         Assertions.assertThat(lottoMachine.getNumberOfLotto()).isEqualTo(2);
 
         LottoStatistics statistics = lottoMachine.getStatistics();
-        Assertions.assertThat(statistics.getCnt3()).isEqualTo(1);
-        Assertions.assertThat(statistics.getCnt4()).isEqualTo(0);
-        Assertions.assertThat(statistics.getCnt5()).isEqualTo(0);
-        Assertions.assertThat(statistics.getCnt6()).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountOfPrize3()).isEqualTo(1);
+        Assertions.assertThat(statistics.getCountOfPrize4()).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountOfPrize5()).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountOfPrize6()).isEqualTo(0);
         Assertions.assertThat(statistics.getNetIncome()).isEqualTo(2.5);
     }
 }
