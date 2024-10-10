@@ -32,6 +32,8 @@
 #### UI
 - [ ] 구입금액 입력
 - [ ] 지난주 당첨번호 입력
+  - [ ] 번호 갯수 6개가 아닌 경우 IllegalArgumentException throw
+  - [ ] 번호 1 ~ 45 범위를 넘어가는 경우 IllegalArgumentException throw
 - [ ] 구매한 개수 출력
 - [ ] 구매한 로또 목록 출력
 - [ ] 당첨 통계 출력
