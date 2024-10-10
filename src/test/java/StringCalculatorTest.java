@@ -11,14 +11,13 @@ import view.InputView;
 public class StringCalculatorTest {
     @Test
     @DisplayName("덧셈 테스트")
-    void addTest(){
+    void addTest() {
         //given
         final int num1 = 1;
         final int num2 = 2;
-        Operator op = new Operator();
 
         //when
-        int result = op.add(num1, num2);
+        int result = Operator.add(num1, num2);
 
         //then
         Assertions.assertThat(result).isEqualTo(3);
@@ -26,14 +25,13 @@ public class StringCalculatorTest {
 
     @Test
     @DisplayName("뺄셈 테스트")
-    void subtractionTest(){
+    void subtractionTest() {
         //given
         final int num1 = 1;
         final int num2 = 2;
-        Operator op = new Operator();
 
         //when
-        int result = op.minus(num1, num2);
+        int result = Operator.minus(num1, num2);
 
         //then
         Assertions.assertThat(result).isEqualTo(-1);
@@ -41,14 +39,13 @@ public class StringCalculatorTest {
 
     @Test
     @DisplayName("곱셈 테스트")
-    void multiplyTest(){
+    void multiplyTest() {
         //given
         final int num1 = 2;
         final int num2 = 2;
-        Operator op = new Operator();
 
         //when
-        int result = op.multiply(num1, num2);
+        int result = Operator.multiply(num1, num2);
 
         //then
         Assertions.assertThat(result).isEqualTo(4);
@@ -56,14 +53,13 @@ public class StringCalculatorTest {
 
     @Test
     @DisplayName("나눗셈 테스트")
-    void divisionTest(){
+    void divisionTest() {
         //given
         final int num1 = 2;
         final int num2 = 2;
-        Operator op = new Operator();
 
         //when
-        int result = op.divide(num1, num2);
+        int result = Operator.divide(num1, num2);
 
         //then
         Assertions.assertThat(result).isEqualTo(1);
@@ -71,14 +67,13 @@ public class StringCalculatorTest {
 
     @Test
     @DisplayName("계산기 테스트")
-    void calculatorTest(){
+    void calculatorTest() {
         //given
         final int num1 = 2;
         final int num2 = 2;
         final String operator = "+";
 
-        Operator op = new Operator();
-        Calculator cal = new CalculatorImpl(op);
+        Calculator cal = new CalculatorImpl();
 
         //when
         int result = cal.calculate(num1, num2, operator);
@@ -88,14 +83,13 @@ public class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"2 + 3 * 4 / 2:10","2 + 3 + 4 + 2:11","2 + 3 + 4 / 2:4"}, delimiterString = ":")
+    @CsvSource(value = {"2 + 3 * 4 / 2:10", "2 + 3 + 4 + 2:11", "2 + 3 + 4 / 2:4"}, delimiterString = ":")
     @DisplayName("문자열 계산 테스트")
-    void stringCalculatorTest(String input, Integer expected){
+    void stringCalculatorTest(String input, Integer expected) {
         //given
         String[] split = InputView.splitByEmptyString(input);
 
-        Operator op = new Operator();
-        Calculator cal = new CalculatorImpl(op);
+        Calculator cal = new CalculatorImpl();
         StringCalculator stringCalculator = new StringCalculator(cal);
 
         //when

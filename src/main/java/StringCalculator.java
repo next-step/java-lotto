@@ -4,10 +4,11 @@ import model.Operator;
 import view.InputView;
 import view.ResultView;
 
+import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class StringCalculator {
     private Calculator calculator;
@@ -16,56 +17,59 @@ public class StringCalculator {
         this.calculator = calculator;
     }
 
-    public int run(String[] split){
-        Queue<String> ops = new LinkedList<>();
+    public int run(String[] split) {
+        Queue<String> ops = getOps(split);
+        Queue<Integer> nums = getNums(split);
         Stack<Integer> results = new Stack<>();
-        Queue<Integer> nums = new LinkedList<>();
 
-        init(split, ops, nums);
-
-        while(!ops.isEmpty()){
+        while (!ops.isEmpty()) {
             String op = ops.poll();
-            getResult(results, nums, op);
+            Integer result = getResult(results, nums, op);
+            if (result != null) {
+                results.push(result);
+            }
         }
 
-        int res = results.pop();
-        return res;
+        return results.pop();
     }
 
-    private void init(String[] split, Queue<String> ops, Queue<Integer> nums) {
-        for(String s : split){
-            saveOperatorsAndNums(s, ops, nums);
-        }
+    private Queue<Integer> getNums(String[] split) {
+        Queue<Integer> queue = Arrays.stream(split)
+                .filter(it -> it.matches("\\d"))
+                .map(Integer::parseInt)
+                .collect(Collectors.toCollection(LinkedList::new));
+        return queue;
     }
 
-    private void getResult(Stack<Integer> results, Queue<Integer> nums, String op) {
-        if(results.isEmpty()){
-            int num1 = nums.poll();
-            int num2 = nums.poll();
-            int result = this.calculator.calculate(num1, num2, op);
-            results.push(result);
-        }
-        else{
-            int num1 = results.pop();
-            int num2 = nums.poll();
-            int result = this.calculator.calculate(num1 ,num2, op);
-            results.push(result);
-        }
+    private Queue<String> getOps(String[] split) {
+        Queue<String> queue = Arrays.stream(split)
+                .filter(it -> Operator.VALID_OPERATORS.contains(it))
+                .collect(Collectors.toCollection(LinkedList::new));
+        return queue;
     }
 
-    private void saveOperatorsAndNums(String s, Queue<String> ops, Queue<Integer> nums) {
-        if(Operator.VALID_OPERATORS.contains(s)){
-            ops.add(s);
+
+    private Integer getResult(Stack<Integer> results, Queue<Integer> nums, String op) {
+        Integer result;
+        Integer num1;
+        Integer num2;
+        if (results.isEmpty()) {
+            num1 = nums.poll();
+            num2 = nums.poll();
+            result = this.calculator.calculate(num1, num2, op);
+            return result;
         }
-        else{
-            nums.add(Integer.parseInt(s));
-        }
+        num1 = results.pop();
+        num2 = nums.poll();
+        result = this.calculator.calculate(num1, num2, op);
+        return result;
     }
+
 
     public static void main(String[] args) {
         String[] split = InputView.splitByEmptyString(InputView.getInput());
 
-        Calculator calculator = new CalculatorImpl(new Operator());
+        Calculator calculator = new CalculatorImpl();
         StringCalculator stringCalculator = new StringCalculator(calculator);
         int result = stringCalculator.run(split);
 
