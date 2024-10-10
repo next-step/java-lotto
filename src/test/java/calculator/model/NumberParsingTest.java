@@ -14,7 +14,7 @@ class NumberParsingTest {
     @DisplayName("정상적인 숫자 리스트 저장 테스트")
     void 숫자_리스트_저장_테스트() {
         String[] input = new String[]{"3", "+", "2", "/", "2", "*", "3"};
-        assertThat(addNumber(input)).isEqualTo(List.of(new Integer[]{3, 2, 2, 3}));
+        assertThat(addNumber(input)).isEqualTo(List.of(new Number[]{new Number(3), new Number(2), new Number(2), new Number(3)}));
     }
 
     @Test
