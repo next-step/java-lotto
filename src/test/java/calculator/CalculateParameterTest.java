@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ public class CalculateParameterTest {
 
     @ParameterizedTest
     @DisplayName("연산자인 경우 true를 반환한다.")
-    @ValueSource(strings = {"+", "*","/","-"})
+    @ValueSource(strings = {"+", "*", "/", "-"})
     void 연산자인_경우(String text) {
         CalculateParameter parameter = new CalculateParameter();
         assertThat(parameter.isOperator(text)).isTrue();

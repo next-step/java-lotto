@@ -1,6 +1,6 @@
 package calculator.enums;
 
-import calculator.domain.OperatorMethod;
+import calculator.OperatorMethod;
 
 import java.util.Arrays;
 import java.util.List;

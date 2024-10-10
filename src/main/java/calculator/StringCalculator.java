@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.domain.CalculateParameter;
 import calculator.enums.Operator;
 
 public class StringCalculator {
