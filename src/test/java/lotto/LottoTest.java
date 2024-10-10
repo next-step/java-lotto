@@ -26,7 +26,7 @@ class LottoTest {
     void 로또번호_정렬() {
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 11, 8, 5, 7, 9));
         Lotto lotto = new Lotto(lottoNumbers);
-        List<Integer> lottoList = lotto.getLottoList();
+        List<Integer> lottoList = lotto.getLottoNumbers();
         assertAll(
                 () -> assertThat(lottoList.get(0)).isEqualTo(1),
                 () -> assertThat(lottoList.get(1)).isEqualTo(5),

@@ -4,15 +4,15 @@ import java.util.*;
 
 public class Lotto {
     public static final String IS_NOT_LOTTO_SIZE = "번호가 6개가 아닙니다.";
-    private final List<Integer> lottoList;
+    private final List<Integer> lottoNumbers;
 
     public Lotto() {
         this(makeAutoLotto());
     }
 
-    public Lotto(List<Integer> lottoList) {
-        validateLottoSetSize(lottoList);
-        this.lottoList = makeSortLotto(lottoList);
+    public Lotto(List<Integer> lottoNumbers) {
+        validateLottoSetSize(lottoNumbers);
+        this.lottoNumbers = makeSortLotto(lottoNumbers);
     }
 
     private static List<Integer> makeAutoLotto() {
@@ -36,7 +36,7 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getLottoList() {
-        return lottoList;
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 }
