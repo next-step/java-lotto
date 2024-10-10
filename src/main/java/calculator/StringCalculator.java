@@ -17,9 +17,6 @@ public class StringCalculator {
     }
 
     public int calculate(Integer num1, Integer num2, Operator operator) {
-        if (num1 == null || num2 == null || operator == null) {
-            throw new IllegalStateException("null을 허용하지 않습니다.");
-        }
         return operator.operate(num1, num2);
     }
 

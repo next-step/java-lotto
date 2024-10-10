@@ -30,8 +30,12 @@ public class CalculateParameter {
         return operators.poll();
     }
 
-    public Integer getNumber() {
-        return numbers.poll();
+    public int getNumber() {
+        Integer number = numbers.poll();
+        if (number == null) {
+            return 0;
+        }
+        return number;
     }
 
     public boolean isEmpty() {
@@ -101,6 +105,7 @@ public class CalculateParameter {
             operators.add(Operator.from(operator));
         }
     }
+
     public boolean isOperator(String operator) {
         if (!isContainOperator(operator)) {
             throw new IllegalStateException("연산자가 아닌 문자는 허용하지 않습니다.");
