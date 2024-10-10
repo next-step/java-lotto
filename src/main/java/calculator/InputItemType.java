@@ -40,7 +40,7 @@ public enum InputItemType {
         return item.matches("-?\\d+");
     }
 
-    private static boolean isOperator(String item) {
+    public static boolean isOperator(String item) {
         return OPERATORS.contains(item);
     }
 
