@@ -9,7 +9,7 @@ import java.util.Queue;
 public class CalculateParameter {
     public static final String SPACE = " ";
     Queue<Integer> numbers = new LinkedList<>();
-    Queue<String> operators = new LinkedList<>();
+    Queue<Operator> operators = new LinkedList<>();
 
     public int operatorsSize() {
         return operators.size();
@@ -26,7 +26,7 @@ public class CalculateParameter {
         return true;
     }
 
-    public String getOperator() {
+    public Operator getOperator() {
         return operators.poll();
     }
 
@@ -98,7 +98,7 @@ public class CalculateParameter {
 
     public void addOperators(String operator) {
         if (isOperator(operator)) {
-            operators.add(operator);
+            operators.add(Operator.from(operator));
         }
     }
     public boolean isOperator(String operator) {

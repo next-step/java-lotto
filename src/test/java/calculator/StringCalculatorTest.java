@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.enums.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,33 +25,33 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("연산자가 아닌 문자는 exception 발생")
     void 연산자가_아닌_문자() {
-        assertThatThrownBy(() -> StringCalculator.getInstance().calculate(10, 5, "_"))
+        assertThatThrownBy(() -> StringCalculator.getInstance().calculate(10, 5, Operator.from("_")))
                 .isInstanceOf(IllegalStateException.class);
     }
 
     @Test
     @DisplayName("나눗셈을 연산한다.")
     void 나눗셈() {
-        assertThat(StringCalculator.getInstance().calculate(10, 5, "/")).isEqualTo(2);
+        assertThat(StringCalculator.getInstance().calculate(10, 5, Operator.from("/"))).isEqualTo(2);
     }
 
 
     @Test
     @DisplayName("곱셈을 연산한다.")
     void 곱셈() {
-        assertThat(StringCalculator.getInstance().calculate(3, 5, "*")).isEqualTo(15);
+        assertThat(StringCalculator.getInstance().calculate(3, 5, Operator.from("*"))).isEqualTo(15);
     }
 
     @Test
     @DisplayName("뺄셈을 연산한다.")
     void 뺄셈() {
-        assertThat(StringCalculator.getInstance().calculate(3, 5, "-")).isEqualTo(-2);
+        assertThat(StringCalculator.getInstance().calculate(3, 5, Operator.from("-"))).isEqualTo(-2);
     }
 
     @Test
     @DisplayName("덧셈을 연산한다.")
     void 덧셈() {
-        assertThat(StringCalculator.getInstance().calculate(3, 5, "+")).isEqualTo(8);
+        assertThat(StringCalculator.getInstance().calculate(3, 5, Operator.from("+"))).isEqualTo(8);
     }
 
 

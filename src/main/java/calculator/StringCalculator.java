@@ -16,12 +16,11 @@ public class StringCalculator {
         return INSTANCE;
     }
 
-    public int calculate(Integer num1, Integer num2, String operator) {
+    public int calculate(Integer num1, Integer num2, Operator operator) {
         if (num1 == null || num2 == null || operator == null) {
             throw new IllegalStateException("null을 허용하지 않습니다.");
         }
-        return Operator.from(operator)
-                .operate(num1, num2);
+        return operator.operate(num1, num2);
     }
 
     public int calculate(String text) {
