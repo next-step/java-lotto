@@ -1,19 +1,42 @@
 package lotto;
 
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     public static final String IS_NOT_LOTTO_SIZE = "번호가 6개가 아닙니다.";
-    private final Set<Integer> lottoSet;
+    private final List<Integer> lottoList;
 
-    public Lotto(Set<Integer> lottoSet) {
-        this.lottoSet = validateLottoSetSize(lottoSet);
+    public Lotto() {
+        this(makeAutoLotto());
     }
 
-    private Set<Integer> validateLottoSetSize(Set<Integer> lottoSet){
-        if(lottoSet.size()!=6){
+    public Lotto(List<Integer> lottoList) {
+        validateLottoSetSize(lottoList);
+        this.lottoList = makeSortLotto(lottoList);
+    }
+
+    private static List<Integer> makeAutoLotto() {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            numbers.add(i);
+        }
+
+        Collections.shuffle(numbers);
+        return numbers.subList(0, 6);
+    }
+
+    private static List<Integer> makeSortLotto(List<Integer> numbers) {
+        Collections.sort(numbers);
+        return numbers;
+    }
+
+    private void validateLottoSetSize(List<Integer> lottoSet) {
+        if (lottoSet.size() != 6) {
             throw new IllegalArgumentException(IS_NOT_LOTTO_SIZE);
         }
-        return lottoSet;
+    }
+
+    public List<Integer> getLottoList() {
+        return lottoList;
     }
 }
