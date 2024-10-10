@@ -5,7 +5,6 @@
 ### JavaLotto(총괄 컨트롤러)
 - UI 로직 포함이라 TDD X
 
-
 ### Lotto(로또 1장)
 - 로또 1장 정렬 검증
 - 당첨자 번호와 매치 몇개 맞았는가? 검증
@@ -29,3 +28,6 @@
 
 ### WinningNumbers (당첨 번호)
 - String으로 당첨자 번호 입력 시 split() 숫자 여섯개 반환 및 중복 검증 - IllegalArgumentException
+
+### Lotto(로또 1장)
+- 로또 1장 정렬 검증
