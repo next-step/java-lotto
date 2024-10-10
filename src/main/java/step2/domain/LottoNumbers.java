@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private List<LottoNumber> lottoNumbers;
@@ -26,7 +25,8 @@ public class LottoNumbers {
         Collections.sort(this.lottoNumbers);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
+
 }
