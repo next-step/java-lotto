@@ -2,9 +2,9 @@ package calculator;
 
 public class Calculator {
     public int calculate(String input) {
-        String[] arr = input.split(" ");
-        int result = Integer.parseInt(arr[0]);
-        return applyOperations(arr, result);
+        String[] tokens = input.split(" ");
+        int result = Integer.parseInt(tokens[0]);
+        return applyOperations(tokens, result);
     }
 
     private static int applyOperations(String[] arr, int result) {
