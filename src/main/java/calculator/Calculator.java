@@ -10,7 +10,7 @@ public class Calculator {
         return applyOperations(tokens, result);
     }
 
-    private static int applyOperations(String[] arr, int result) {
+    private int applyOperations(String[] arr, int result) {
         for (int i = 1; i < arr.length; i += 2) {
             OperatorType operatorType = OperatorType.getOperator(arr[i]);
             int operand = Integer.parseInt(arr[i + 1]);
