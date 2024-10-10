@@ -17,4 +17,17 @@ public class ProfitCalculatorTest {
         // then
         Assertions.assertThat(totalProfit).isEqualTo(55000);
     }
+
+    @Test
+    void 수익률_계산() {
+        // given
+        int totalPurchaseAmount = 30000;
+        List<Integer> equalNumberCountList = List.of(3, 4);
+
+        // when
+        float profitRate = ProfitCalculator.calculateProfitRate(totalPurchaseAmount, equalNumberCountList);
+
+        // then
+        Assertions.assertThat(profitRate).isEqualTo(183.33f);
+    }
 }
