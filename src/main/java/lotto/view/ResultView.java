@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
 import lotto.domain.LottoReward;
 import lotto.domain.Lottos;
 
@@ -16,6 +15,7 @@ public class ResultView {
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String LINE_SEPARATOR = "---------";
     private static final String REWARD_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static final String PROFIT_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public ResultView() {
     }
@@ -48,5 +48,9 @@ public class ResultView {
         }
         System.out.printf(REWARD_MESSAGE, lottoReward.getMatchCount(), lottoReward.getPrize(), matchCount);
         System.out.println();
+    }
+
+    public static void printLottoProfit(double profit) {
+        System.out.printf(PROFIT_MESSAGE, profit);
     }
 }

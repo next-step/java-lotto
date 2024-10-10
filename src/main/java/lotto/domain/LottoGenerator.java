@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoGenerator {
-    private static final int PRICE_MONEY_UNIT = 1000;
+    public static final int PRICE_MONEY_UNIT = 1000;
     private static final String INCORRECT_UNIT_ERROR_MESSAGE = "구입금액은 1000원 단위입니다.";
 
     private final Lottos lottos;

@@ -23,4 +23,20 @@ public class LottoResult {
     public Map<LottoReward, Integer> getResultMap() {
         return Collections.unmodifiableMap(resultMap);
     }
+
+    public double calculateProfit() {
+        int purchaseCount = calculatePurchasedMoneyCount();
+        return calculateTotalPrize() / ((double) purchaseCount * LottoGenerator.PRICE_MONEY_UNIT);
+    }
+
+    private int calculatePurchasedMoneyCount() {
+        return resultMap.values().stream()
+                .reduce(DEFAULT_VALUE, Integer::sum);
+    }
+
+    private int calculateTotalPrize() {
+        return resultMap.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
+    }
 }
