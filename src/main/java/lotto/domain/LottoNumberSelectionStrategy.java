@@ -1,5 +1,5 @@
 package lotto.domain;
 
 public interface LottoNumberSelectionStrategy {
-    public Lotto select(int lottoNum);
+    Lotto select(int lottoNum);
 }

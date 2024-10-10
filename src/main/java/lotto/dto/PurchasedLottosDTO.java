@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PurchasedLottosDTO {
-    private List<Lotto> purchasedLottos;
+    private final List<Lotto> purchasedLottos;
 
     PurchasedLottosDTO(List<Lotto> purchasedLottos) {
         this.purchasedLottos = purchasedLottos;

@@ -9,7 +9,7 @@ public class Lotto {
     public static final int MIN_BOUND = 1;
 
     private final int lottoNum;
-    private LottoNumbers numbers;
+    private final LottoNumbers numbers;
 
     Lotto(int lottoNum, LottoNumbers numbers) {
         this.lottoNum = lottoNum;

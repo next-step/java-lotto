@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinningNumbersDTO {
-    private List<Integer> winningNumbers;
+    private final List<Integer> winningNumbers;
 
     WinningNumbersDTO(List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
