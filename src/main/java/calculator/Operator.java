@@ -3,6 +3,7 @@ package calculator;
 
 import java.util.Map;
 import java.util.function.BiFunction;
+import java.util.function.ToIntBiFunction;
 
 public enum Operator {
     PLUS("+", (x, y) -> x + y),
@@ -16,7 +17,7 @@ public enum Operator {
     });
 
     private String symbol;
-    private BiFunction<Integer, Integer, Integer> expression;
+    private ToIntBiFunction<Integer, Integer> expression;
     private static final Map<String, Operator> map = Map.of(
             "+", Operator.PLUS,
             "-", Operator.MINUS,
@@ -24,13 +25,13 @@ public enum Operator {
             "/", Operator.DIVIDE
     );
 
-    Operator(String symbol, BiFunction<Integer, Integer, Integer> expression) {
+    Operator(String symbol, ToIntBiFunction<Integer, Integer> expression) {
         this.symbol = symbol;
         this.expression = expression;
     }
 
     public static int calculate(String operator, int x, int y) {
-        return map.get(operator).expression.apply(x, y);
+        return map.get(operator).expression.applyAsInt(x, y);
     }
 
 }
