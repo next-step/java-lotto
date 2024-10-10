@@ -25,7 +25,12 @@ class LottoTicketTest {
     void getLottoWinningResultTest() {
         LottoPurchasePrice lottoPurchasePrice = LottoPurchasePrice.valueOf(1000);
         LottoTicket lottoTicket = new LottoTicket(lottoPurchasePrice);
-        Lotto winningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
         assertThat(lottoTicket.getWinningResult(winningLotto))
                 .isNotNull();
     }

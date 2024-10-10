@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchasePrice;
 
 import java.util.*;
@@ -31,9 +32,8 @@ public class InputView {
     }
 
     private static Lotto getWinningNumbers() {
-        Set<Integer> numbers = Arrays.stream(SCANNER.nextLine().split(DELIMITER))
-                .mapToInt(Integer::parseInt)
-                .boxed()
+        Set<LottoNumber> numbers = Arrays.stream(SCANNER.nextLine().split(DELIMITER))
+                .map(number -> LottoNumber.valueOf(Integer.parseInt(number)))
                 .collect(Collectors.toSet());
         return new Lotto(numbers);
     }

@@ -25,33 +25,31 @@ class LottoTest {
     @Test
     @DisplayName("getMatchingNumberCount 메서드가 일치하는 로또번호 개수를 반환한다.")
     void getMatchingNumberCountTest() {
-        Lotto lotto1 = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(Set.of(1, 2, 3, 14, 15, 16));
+        Lotto lotto1 = new Lotto(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
+        Lotto lotto2 = new Lotto(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(14),
+                LottoNumber.valueOf(15),
+                LottoNumber.valueOf(16)));
         assertThat(lotto1.getMatchingNumberCount(lotto2)).isEqualTo(3);
     }
 
     @Test
     @DisplayName("Lotto 객체를 생성할 때 로또 번호가 6개가 아니면 예외가 발생한다.")
     void initDuplicateNumberTest() {
-        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5);
-        assertThatThrownBy(() -> new Lotto(numbers))
+        Set<LottoNumber> lottoNumbers = Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5));
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또번호의 개수가 일치하지 않습니다.");
-    }
-
-    @ParameterizedTest
-    @MethodSource("initInvalidLottoNumbers")
-    @DisplayName("Lotto 객체를 생성할 때 로또번호가 1이상 45이하인 숫자가 포함되면 예외가 발생한다.")
-    void initNumberSizeTest(Set<Integer> numbers) {
-        assertThatThrownBy(() -> new Lotto(numbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("올바른 로또 번호가 아닙니다.(1이상 45이하 아님)");
-    }
-
-    private static Stream<Arguments> initInvalidLottoNumbers() {
-        return Stream.of(
-                arguments(Set.of(-1, 1, 2, 3, 4, 5)),
-                arguments(Set.of(46, 1, 2, 3, 4, 5))
-        );
     }
 }
