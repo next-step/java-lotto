@@ -1,6 +1,7 @@
 package calculator;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -8,7 +9,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
-    private static final Calculator calculator = new Calculator();
+    private Calculator calculator;
+    @BeforeEach
+    void setCalculator() {
+        calculator = new Calculator();
+    }
 
     @Test
     void 덧셈() {
