@@ -10,16 +10,20 @@ public class Tokens {
     private final List<Token> tokens;
 
     public Tokens(String expression) {
-        if (expression.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_INPUT_ERROR_MESSAGE);
-        }
+        validateSize(expression);
         this.tokens = Arrays.stream(expression.split(DELIMITER))
                             .map(Token::new)
                             .collect(Collectors.toList());
-
+        validateTokens();
     }
 
-    public void validate() {
+    private void validateSize(String expression) {
+        if (expression.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_INPUT_ERROR_MESSAGE);
+        }
+    }
+
+    private void validateTokens() {
         for (int i = 0; i < tokens.size(); i++) {
             validateToken(i);
         }

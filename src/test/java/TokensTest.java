@@ -15,21 +15,18 @@ class TokensTest {
     @Test
     @DisplayName("피연산자가 아닌 경우 예외를 던진다.")
     void validate_invalidOperand() {
-        Tokens tokens = new Tokens("1 2 + 3");
-        assertThrows(IllegalArgumentException.class, tokens::validate);
+        assertThrows(IllegalArgumentException.class, () -> new Tokens("1 2 + 3"));
     }
 
     @Test
     @DisplayName("연산자가 아닌 경우 예외를 던진다.")
     void validate_invalidOperator() {
-        Tokens tokens = new Tokens("1 + 2 3");
-        assertThrows(IllegalArgumentException.class, tokens::validate);
+        assertThrows(IllegalArgumentException.class, () -> new Tokens("1 + 2 3"));
     }
 
     @Test
     @DisplayName("식이 올바른 경우 예외를 던지지 않는다.")
     void validate_validExpression() {
-        Tokens tokens = new Tokens("1 + 2 * 3 / 4 - 5");
-        assertDoesNotThrow(tokens::validate);
+        assertDoesNotThrow(() -> new Tokens("1 + 2 * 3 / 4 - 5"));
     }
 }
