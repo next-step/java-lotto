@@ -4,19 +4,50 @@
 - 로또 1장의 가격은 1000원이다.
 
 ## 기능 요구사항 상세
-- 로또번호는 1부터 45까지이다.
-    - 범위를 벗어나는 수는 예외가 발생한다.
-- 로또는 오름차순으로 숫자가 정렬되어야 한다.
-- 로또는 6개의 로또번호를 가진다.
-- 로또는 중복된 로또번호를 가질 수 없다.
-- 천원 이하의 돈이 주어지면 예외가 발생한다.
-- 돈은 천원 단위로 주어져야 한다.
-- 천원 이하의 돈이 주어지면 예외가 발생한다.
-- 입력된 금액이 로또 금액으로 정확하게 나누어 떨어지면 로또를 발행한다.
-- 로또번들은 전달받은 수 만큼의 로또를 생성한다.
-- 당첨 번호는 6개의 숫자를 입력해야 한다.
-- 당첨은 최소 3개 최대 6개의 숫자가 일치하면 당첨처리한다.
-
+- LottoController
+  - 로또에 대한 전반적인 흐름을 관리한다.
+- Lotto
+  - 6개의 로또 번호를 가진다
+  - 다른 로또와 비교하는 기능을 가진다.
+- LottoBundle
+  - Lotto 목록을 가진다.
+  - Lotto 자동생성 및 Lotto 추가, 크기 확인 기능을 가진다.
+- LottoNumber
+  - 로또번호에 대한 원시값 래핑 객체
+- LottoRank
+  - 등수, 등수에 대한 상금을 관리하는 객체
+  - 일치하는 개수를 전달받아 등수를 판단하는 기능을 가진다.
+- LottoRankGroup
+  - 각 등수에 맞는 LottoBundle 을 관리한다.
+  - 랭크에 해당하는 LottoBundle 을 추가하는 기능
+  - 랭크에 포함된 LottoBundle 을 조회하는 기능
+- LottoStatistics
+  - 구입금액과 우승상금으로 수익률을 계산하는 역할
+- LottoStore
+  - 구입금액으로 로또를 구매하는 기능
+- LottoWinningEvaluator
+  - 지난 주 당첨번호와 구매한 로또 번호를 비교하여 어떤 랭크에 포함되는지 판단하는 역하을 한다.
+- LottoWinningResult
+  - 당첨된 로또 묶음을 가진 객체
+- LottoWinningResults
+  - LottoWinningResult 목록을 가진 일급컬렉션
+  - 모든 랭크의 당첨 개수를 조회하는 기능
+  - 모든 랭크의 당첨 상금을 조회하는 기능
+- Money
+  - 구입금액에 대한 원시값 래핑 객체
+- ConsoleMessageReader
+  - 콘솔용 사용자 입력을 전달받는 객체
+- ConsoleMessageWriter
+  - 콘솔용 문자열 출력을 담당하는 객체
+- LottoNumberGenerator
+  - 1 부터 45 까지의 LottoNumber 객체를 가지고 있음
+  - 요청에 따라 LottoNumber 를 랜덤하게 전달해주는 기능
+- ConsoleViewFactory
+  - InputView 와 ResultView 객체의 생성을 담당한다.
+- LottoInputView
+  - 초기 입력을 담당하는 객체
+- LottoResultView
+  - 로또의 결과 출력을 담당하는 객체
 ~~~text
 구입금액을 입력해 주세요.
 14000
