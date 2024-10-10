@@ -42,24 +42,41 @@ public class LottoManager {
     }
 
     public LottoStatisticsDTO getStatistics() {
+        Map<Integer, Integer> matchCountMap = countMatchingNumbers();
+        int rewardPercentage = calculateRewardPercentage(matchCountMap);
+        LottoMatchInfosDTO matchInfosDTO = convertToMatchInfosDTO(matchCountMap);
+        return LottoStatisticsDTO.valueOf(rewardPercentage, matchInfosDTO);
+    }
+
+    private Map<Integer, Integer> countMatchingNumbers() {
         List<Lotto> purchasedLottos = this.purchasedLottos.value();
         Map<Integer, Integer> matchCountMap = new HashMap<>();
         for (Lotto purchasedLotto : purchasedLottos) {
             int matchCount = purchasedLotto.getMatchCount(this.winningLottoNumbers);
             matchCountMap.put(matchCount, matchCountMap.getOrDefault(matchCount, 0) + 1);
         }
+        return matchCountMap;
+    }
 
+    private int calculateRewardPercentage(Map<Integer, Integer> matchCountMap) {
         List<LottoReward> rewards = List.of(LottoReward.values());
-        List<LottoMatchInfoDTO> matchInfoDTOs = new ArrayList<>();
         int totalReward = 0;
         for (LottoReward reward : rewards) {
             int rewardingLottoNum = matchCountMap.getOrDefault(reward.getMatchCount(), 0);
             totalReward += rewardingLottoNum * reward.getReward();
+        }
+        List<Lotto> purchasedLottos = this.purchasedLottos.value();
+        return 100 * totalReward / (purchasedLottos.size() * LOTTO_PRICE);
+    }
+
+    private LottoMatchInfosDTO convertToMatchInfosDTO(Map<Integer, Integer> matchCountMap) {
+        List<LottoMatchInfoDTO> matchInfoDTOs = new ArrayList<>();
+        List<LottoReward> rewards = List.of(LottoReward.values());
+        for (LottoReward reward : rewards) {
+            int rewardingLottoNum = matchCountMap.getOrDefault(reward.getMatchCount(), 0);
             matchInfoDTOs.add(LottoMatchInfoDTO.valueOf(reward.getMatchCount(), rewardingLottoNum, reward.getReward()));
         }
-        int rewardPercentage = 100 * totalReward / (purchasedLottos.size() * LOTTO_PRICE);
-        LottoMatchInfosDTO matchInfosDTO = LottoMatchInfosDTO.valueOf(matchInfoDTOs);
-        return LottoStatisticsDTO.valueOf(rewardPercentage, matchInfosDTO);
+        return LottoMatchInfosDTO.valueOf(matchInfoDTOs);
     }
 
     public LottoNumbers getWinningLottoNumbers() {
