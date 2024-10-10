@@ -8,16 +8,23 @@ import lotto.view.LottoResultView;
 public class LottoController {
     public void start() {
         final LottoInputView lottoInputView = ConsoleViewFactory.createLottoInputView();
-        final LottoPurchaseResult lottoPurchaseResult = lottoInputView.inputMoney();
+        final Money money = lottoInputView.inputMoney();
+        final LottoBundle lottoBundle = purchaseLottoBundle(money);
+        lottoInputView.displayPurchaseLottoBundle(lottoBundle);
         final Lotto lastWeekWinningLotto = lottoInputView.inputLastWeekWinningLotto();
 
-        final LottoWinningEvaluator evaluator = new LottoWinningEvaluator(lottoPurchaseResult.getLottoBundle(), lastWeekWinningLotto);
+        final LottoWinningEvaluator evaluator = new LottoWinningEvaluator(lottoBundle, lastWeekWinningLotto);
         final LottoWinningResults results = evaluator.evaluate();
 
         final LottoResultView lottoResultView = ConsoleViewFactory.createLottoResultView(results);
         lottoResultView.display();
 
-        final LottoStatistics statistics = new LottoStatistics(lottoPurchaseResult.getPurchasedMoney(), results);
+        final LottoStatistics statistics = new LottoStatistics(money, results);
         lottoResultView.displayRate(statistics);
+    }
+
+    private LottoBundle purchaseLottoBundle(final Money money) {
+        final LottoStore lottoStore = new LottoStore();
+        return lottoStore.purchase(money);
     }
 }

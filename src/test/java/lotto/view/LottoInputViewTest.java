@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoPurchaseResult;
 import lotto.io.ConsoleMessageReader;
 import lotto.io.ConsoleMessageWriter;
 import org.junit.jupiter.api.DisplayName;
@@ -14,19 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoInputViewTest {
-    @Test
-    @DisplayName("구입 금액을 입력하면 지정된 수량만큼의 로또번들 객체가 반환된다.")
-    void shouldReturnLottoBundleBasedOnPurchaseAmount() {
-        final String money = "3000\n";
-        final LottoInputView lottoInputView = new LottoInputView(
-            new ConsoleMessageReader(new ByteArrayInputStream(money.getBytes())),
-            new ConsoleMessageWriter()
-        );
-
-        final LottoPurchaseResult lottoPurchaseResult = lottoInputView.inputMoney();
-        assertThat(lottoPurchaseResult.size()).isEqualTo(3);
-    }
-
     @Test
     @DisplayName("지난 주 당첨 번호가 입력되지 않은 경우 예외가 발생한다.")
     void shouldThrowExceptionWhenWinningNumbersNotProvided() {
@@ -54,7 +40,7 @@ class LottoInputViewTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7" })
+    @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
     @DisplayName("지난 주 당첨 번호가 6개가 아니라면 예외가 발생한다.")
     void shouldThrowExceptionWhenWinningNumbersCountIsNotSix(final String lottoNumbers) {
         final LottoInputView lottoInputView = new LottoInputView(

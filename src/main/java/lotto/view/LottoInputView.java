@@ -18,16 +18,9 @@ public class LottoInputView {
         this.writer = writer;
     }
 
-    public LottoPurchaseResult inputMoney() {
+    public Money inputMoney() {
         writer.write("구입 금액을 입력해 주세요.");
-        final Money money = new Money(reader.readInt());
-        final LottoStore lottoStore = new LottoStore();
-        final LottoPurchaseResult purchase = lottoStore.purchase(money);
-        writer.write(purchase.size() + "개를 구매했습니다.");
-        for (final Lotto lotto : purchase.getLottoBundle()) {
-            writer.write(lotto.toString());
-        }
-        return purchase;
+        return new Money(reader.readInt());
     }
 
     public Lotto inputLastWeekWinningLotto() {
@@ -53,5 +46,12 @@ public class LottoInputView {
                 .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableList())
         );
+    }
+
+    public void displayPurchaseLottoBundle(final LottoBundle lottoBundle) {
+        writer.write(lottoBundle.size() + "개를 구매했습니다.");
+        for (final Lotto lotto : lottoBundle) {
+            writer.write(lotto.toString());
+        }
     }
 }
