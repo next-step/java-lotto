@@ -29,4 +29,19 @@ public class LottoTest {
                 .isThrownBy(() -> Lotto.purchase(purchaseAmount))
                 .withMessage("구입금액은 1000 이상이어야 합니다");
     }
+
+    @Test
+    void 당첨_통계_생성() {
+        // given
+        List<Integer> equalNumberCountList = List.of(3, 4);
+
+        // when
+        LottoStatistics statistics = Lotto.createStatistics(equalNumberCountList);
+
+        // then
+        Assertions.assertThat(statistics.getCount(LottoRank.FIRST)).isEqualTo(0);
+        Assertions.assertThat(statistics.getCount(LottoRank.SECOND)).isEqualTo(0);
+        Assertions.assertThat(statistics.getCount(LottoRank.THIRD)).isEqualTo(1);
+        Assertions.assertThat(statistics.getCount(LottoRank.FOURTH)).isEqualTo(1);
+    }
 }
