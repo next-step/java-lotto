@@ -7,6 +7,7 @@ import java.util.List;
 public class Lotto {
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final InputView inputView = new InputView();
+    private static final ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
         Lotto lotto = new Lotto();
@@ -15,7 +16,9 @@ public class Lotto {
 
     public void purchaseAndGetResult() {
         int lottoTicketCount = inputView.getInputAndPrint();
-        List<LottoTicket> lottoTickets = issue(lottoTicketCount);
+        LottoTickets lottoTickets = new LottoTickets(issue(lottoTicketCount));
+
+        resultView.getResultAndPrint(lottoTickets);
     }
 
     private List<LottoTicket> issue(int lottoTicketCount) {
@@ -30,6 +33,7 @@ public class Lotto {
 
             inputView.print(lottoTicket.toString());
         }
+        inputView.print("");
 
         return lottoTickets;
     }
