@@ -4,7 +4,7 @@ import calculator.controller.CalculatorController;
 import calculator.domain.StringCalculator;
 import calculator.service.CalculatorService;
 import calculator.strategy.CalculationOrderStrategy;
-import calculator.strategy.LeftToRight;
+import calculator.strategy.InputOrder;
 
 public class CalculatorConfig {
     public static CalculatorController calculatorController() {
@@ -20,6 +20,6 @@ public class CalculatorConfig {
     }
 
     private static CalculationOrderStrategy calculationOrderStrategy() {
-        return new LeftToRight();
+        return new InputOrder();
     }
 }

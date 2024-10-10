@@ -4,7 +4,7 @@ import calculator.domain.Operand;
 import calculator.domain.Operator;
 import calculator.domain.Strings;
 
-public class LeftToRight implements CalculationOrderStrategy {
+public class InputOrder implements CalculationOrderStrategy {
     @Override
     public Operand calculate(final Strings strings) {
         Operand left = new Operand(strings.getFirst());

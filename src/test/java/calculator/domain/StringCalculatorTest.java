@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import calculator.strategy.CalculationOrderStrategy;
-import calculator.strategy.LeftToRight;
+import calculator.strategy.InputOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class StringCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        CalculationOrderStrategy calculationOrderStrategy = new LeftToRight();
+        CalculationOrderStrategy calculationOrderStrategy = new InputOrder();
         this.calculator = new StringCalculator(calculationOrderStrategy);
     }
 
