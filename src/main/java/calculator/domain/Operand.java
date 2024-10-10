@@ -19,22 +19,6 @@ public class Operand {
         return Integer.parseInt(value);
     }
 
-    public Operand add(final Operand right) {
-        return new Operand(this.toInt() + right.toInt());
-    }
-
-    public Operand subtract(final Operand right) {
-        return new Operand(this.toInt() - right.toInt());
-    }
-
-    public Operand multiply(final Operand right) {
-        return new Operand(this.toInt() * right.toInt());
-    }
-
-    public Operand divide(final Operand right) {
-        return new Operand(this.toInt() / right.toInt());
-    }
-
     public CalculationResult toCalculationResult() {
         return new CalculationResult(this.value);
     }
