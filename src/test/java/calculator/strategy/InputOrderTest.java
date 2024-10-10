@@ -1,7 +1,6 @@
 package calculator.strategy;
 
 import calculator.domain.Input;
-import calculator.domain.Operand;
 import calculator.domain.Strings;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,6 @@ class InputOrderTest {
     void 왼쪽에서_오른쪽으로_순서대로_계산() {
         CalculationOrderStrategy calculationOrderStrategy = new InputOrder();
         Strings strings = new Input("2 + 3 * 4 / 2").split();
-
-        assertThat(calculationOrderStrategy.calculate(strings)).isEqualTo(new Operand("10"));
+        assertThat(calculationOrderStrategy.calculate(strings)).isEqualTo(10);
     }
 }

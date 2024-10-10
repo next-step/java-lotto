@@ -1,11 +1,7 @@
 package calculator.strategy;
 
-import calculator.domain.Operand;
-import calculator.domain.Operator;
-
 public class Division implements OperationStrategy {
     private static final OperationStrategy INSTANCE = new Division();
-    private static final Operator OPERATOR = new Operator("/");
 
     private Division() {
     }
@@ -15,7 +11,7 @@ public class Division implements OperationStrategy {
     }
 
     @Override
-    public Operand calculate(final Operand left, final Operand right) {
-        return OPERATOR.divide(left, right);
+    public int calculate(final int left, final int right) {
+        return left / right;
     }
 }

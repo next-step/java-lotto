@@ -1,7 +1,6 @@
 package calculator.controller;
 
 import calculator.domain.Input;
-import calculator.dto.CalculationResult;
 import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -16,8 +15,8 @@ public class CalculatorController {
     public void run() {
         Input input = InputView.input();
 
-        CalculationResult calculationResult = calculatorService.calculate(input);
+        int result = calculatorService.calculate(input);
 
-        OutputView.output(calculationResult);
+        OutputView.output(result);
     }
 }

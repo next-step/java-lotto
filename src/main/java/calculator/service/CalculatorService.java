@@ -1,9 +1,7 @@
 package calculator.service;
 
 import calculator.domain.Input;
-import calculator.domain.Operand;
 import calculator.domain.StringCalculator;
-import calculator.dto.CalculationResult;
 
 public class CalculatorService {
     private final StringCalculator stringCalculator;
@@ -12,8 +10,7 @@ public class CalculatorService {
         this.stringCalculator = stringCalculator;
     }
 
-    public CalculationResult calculate(final Input input) {
-        Operand result = stringCalculator.calculate(input.split());
-        return result.toCalculationResult();
+    public int calculate(final Input input) {
+        return stringCalculator.calculate(input.split());
     }
 }

@@ -1,6 +1,5 @@
 package calculator.enumeration;
 
-import calculator.domain.Operand;
 import calculator.strategy.*;
 
 import java.util.Arrays;
@@ -28,7 +27,7 @@ public enum OperationSymbol {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid symbol: " + symbol));
     }
 
-    public Operand calculate(final Operand left, final Operand right) {
+    public int calculate(final int left, final int right) {
         return this.operationStrategy.calculate(left, right);
     }
 }

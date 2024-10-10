@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import calculator.strategy.CalculationOrderStrategy;
 import calculator.strategy.InputOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,19 +11,16 @@ public class StringCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        CalculationOrderStrategy calculationOrderStrategy = new InputOrder();
-        this.calculator = new StringCalculator(calculationOrderStrategy);
+        this.calculator = new StringCalculator(new InputOrder());
     }
 
     @Test
     void 숫자_하나() {
-        Strings strings = new Input("10").split();
-        assertThat(calculator.calculate(strings)).isEqualTo(new Operand("10"));
+        assertThat(calculator.calculate(new Input("10").split())).isEqualTo(10);
     }
 
     @Test
     void 문자열_계산() {
-        Strings strings = new Input("2 + 3 * 4 / 2").split();
-        assertThat(calculator.calculate(strings)).isEqualTo(new Operand("10"));
+        assertThat(calculator.calculate(new Input("2 + 3 * 4 / 2").split())).isEqualTo(10);
     }
 }

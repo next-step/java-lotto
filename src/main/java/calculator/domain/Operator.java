@@ -16,23 +16,7 @@ public class Operator {
         this.value = value;
     }
 
-    public Operand add(final Operand left, final Operand right) {
-        return new Operand(left.toInt() + right.toInt());
-    }
-
-    public Operand subtract(final Operand left, final Operand right) {
-        return new Operand(left.toInt() - right.toInt());
-    }
-
-    public Operand multiply(final Operand left, final Operand right) {
-        return new Operand(left.toInt() * right.toInt());
-    }
-
-    public Operand divide(final Operand left, final Operand right) {
-        return new Operand(left.toInt() / right.toInt());
-    }
-
-    public Operand calculate(final Operand left, final Operand right) {
+    public int calculate(final int left, final int right) {
         return from(this.value).calculate(left, right);
     }
 }
