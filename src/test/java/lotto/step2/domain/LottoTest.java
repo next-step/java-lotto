@@ -15,9 +15,8 @@ public class LottoTest {
     @DisplayName("매개변수로 넣은 숫자가 로또번호에 있는지 확인 가능하다")
     @Test
     void createLotto() {
-        List<Integer> numbers = List.of(1, 3, 5, 7, 9, 11);
-
-        Lotto lotto = new Lotto(numbers);
+        LottoNumbersGenerater numbersGenerater = () -> List.of(1, 3, 5, 7, 9, 11);
+        Lotto lotto = Lotto.create(numbersGenerater);
 
         assertTrue(lotto.hasNumber(1));
         assertTrue(lotto.hasNumber(3));

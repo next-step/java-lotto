@@ -7,12 +7,14 @@ import lotto.step2.ui.ResultView;
 public class LottoApplication {
     private final InputView inputView;
     private final ResultView resultView;
+    private final LottoNumbersGenerater numbersGenerater;
 
     private LottoResult lottoResult;
 
-    public LottoApplication(final InputView inputView, final ResultView resultView) {
+    public LottoApplication(final InputView inputView, final ResultView resultView, final LottoNumbersGenerater numbersGenerater) {
         this.inputView = inputView;
         this.resultView = resultView;
+        this.numbersGenerater = numbersGenerater;
     }
 
     public void run(){
@@ -36,7 +38,7 @@ public class LottoApplication {
     }
 
     private Lottos createLottos(ResultView resultView, int lottoCount) {
-        Lottos lottos = Lottos.create(lottoCount);
+        Lottos lottos = Lottos.create(lottoCount, numbersGenerater);
         resultView.showLottos(lottos);
         return lottos;
     }

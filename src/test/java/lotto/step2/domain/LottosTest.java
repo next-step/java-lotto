@@ -12,7 +12,8 @@ public class LottosTest {
     @DisplayName("N개의 로또를 가진 로또 그룹 생성이 가능하다")
     @Test
     void createLottoGruop() {
-        Lottos lottos = Lottos.create(3);
+        LottoNumbersGenerater numbersGenerater = new RandomNumbersGenerater();
+        Lottos lottos = Lottos.create(3, numbersGenerater);
 
         assertThat(lottos.count()).isEqualTo(3);
     }

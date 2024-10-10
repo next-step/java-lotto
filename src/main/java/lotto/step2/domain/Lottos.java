@@ -10,10 +10,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos create(int lottoCount){
+    public static Lottos create(int lottoCount, LottoNumbersGenerater numbersGenerater){
         List<Lotto> lottos = new ArrayList<Lotto>();
         for(int i = 0; i < lottoCount; i++){
-            lottos.add(Lotto.create());
+            lottos.add(Lotto.create(numbersGenerater));
         }
         return new Lottos(lottos);
     }
