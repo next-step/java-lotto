@@ -1,6 +1,4 @@
-package textcalculator;
-
-import java.util.Scanner;
+package textcalculator.ui;
 
 public interface InputView {
     String getFormulaFromUser();
