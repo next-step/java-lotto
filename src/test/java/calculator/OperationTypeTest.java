@@ -28,4 +28,17 @@ public class OperationTypeTest {
         // then
         Assertions.assertThat(result).isEqualTo(4);
     }
+
+    @Test
+    void 뺄셈_수행() {
+        // given
+        int operandA = 3;
+        int operandB = 1;
+
+        // when
+        int result = OperationType.SUBTRACT.apply(operandA, operandB);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(2);
+    }
 }

@@ -4,7 +4,7 @@ import java.util.function.BinaryOperator;
 
 public enum OperationType {
     ADD("+", Integer::sum),
-    SUBTRACT("-", (a, b) -> a),
+    SUBTRACT("-", (a, b) -> a - b),
     MULTIPLY("*", (a, b) -> a),
     DIVIDE("/", (a, b) -> a),
     UNKNOWN("UNKNOWN", (a, b) -> a);
