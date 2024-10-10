@@ -1,13 +1,22 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
+    private static final String DELIMITER = " ";
+    private static final String CHECK_NUMBER_REGEXP = "^[0-9]+$";
+
     public static int calculate(String expression) {
         validateExpression(expression);
-        return operate(parseExpression(expression));
+
+        List<Integer> operands = parseOperands(expression);
+        List<String> operators = parseOperators(expression);
+        List<Operation> operations = convertToOperations(operators);
+
+        return operate(operands, operations);
     }
 
     private static void validateExpression(String expression) {
@@ -16,21 +25,33 @@ public class StringCalculator {
         }
     }
 
-    private static List<String> parseExpression(String expression) {
-        return Arrays.stream(expression.split(" "))
+    private static List<Integer> parseOperands(String expression) {
+        return Arrays.stream(expression.split(DELIMITER))
+                .filter(value -> value.matches(CHECK_NUMBER_REGEXP))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    private static int operate(List<String> expressionElements) {
-        int firstOperand = Integer.parseInt(expressionElements.get(0));
-        int index = 1;
+    private static List<String> parseOperators(String expression) {
+        return Arrays.stream(expression.split(DELIMITER))
+                .filter(value -> !value.matches(CHECK_NUMBER_REGEXP))
+                .collect(Collectors.toList());
+    }
 
-        while (index < expressionElements.size()) {
-            String operator = expressionElements.get(index++);
-            int secondOperand = Integer.parseInt(expressionElements.get(index++));
-            firstOperand = Operator.operate(firstOperand, operator, secondOperand);
+    private static List<Operation> convertToOperations(List<String> operators) {
+        return operators.stream()
+                .map(Operation::getOperation)
+                .collect(Collectors.toList());
+    }
+
+    private static int operate(List<Integer> operands, List<Operation> operations) {
+        List<Integer> copiedOperands = new ArrayList<>(operands);
+
+        for (Operation operation : operations) {
+            copiedOperands.set(1, operation.apply(copiedOperands.get(0), copiedOperands.get(1)));
+            copiedOperands.remove(0);
         }
 
-        return firstOperand;
+        return copiedOperands.get(0);
     }
 }
