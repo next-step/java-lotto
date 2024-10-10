@@ -8,7 +8,7 @@ public enum LottoNumbersValidation {
     LOTTO_NUMBERS_COUNT_INVALID("로또 숫자 갯수가 다릅니다.") {
         @Override
         boolean isValid(List<Integer> lottoNumbers) {
-            return lottoNumbers.size() == LOTTO_NUMBERS_CARDINALITY;
+            return lottoNumbers.size() == Lotto.LOTTO_NUMBERS_CARDINALITY;
         }
     },
     LOTTO_NUMBERS_IS_OUT_OF_RANGE("로또 숫자가 범위 밖입니다.") {
@@ -16,7 +16,7 @@ public enum LottoNumbersValidation {
         boolean isValid(List<Integer> lottoNumbers) {
             boolean isOutOfRange = false;
             for (int number : lottoNumbers) {
-                isOutOfRange = isOutOfRange || (number < MIN_BOUND || number > MAX_BOUND);
+                isOutOfRange = isOutOfRange || (number < Lotto.MIN_BOUND || number > Lotto.MAX_BOUND);
             }
             return !isOutOfRange;
         }
@@ -28,10 +28,6 @@ public enum LottoNumbersValidation {
             return lottoNumbersSet.size() == lottoNumbers.size();
         }
     };
-
-    private static final int LOTTO_NUMBERS_CARDINALITY = 6;
-    private static final int MAX_BOUND = 45;
-    private static final int MIN_BOUND = 1;
 
     private final String errorMsg;
 

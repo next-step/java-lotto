@@ -23,13 +23,13 @@ public class LottoManager {
         int buyingCount = price / LOTTO_PRICE;
         List<Lotto> buyingLottos = new ArrayList<>();
         for (int i = 0; i < buyingCount; i++) {
-            buyLotto(selectionStrategy, buyingLottos);
+            buyLotto(i, selectionStrategy, buyingLottos);
         }
         this.purchasedLottos = PurchasedLottos.valueOf(buyingLottos);
     }
 
-    private static void buyLotto(LottoNumberSelectionStrategy selectionStrategy, List<Lotto> buyingLottos) {
-        buyingLottos.add(selectionStrategy.select());
+    private static void buyLotto(int lottoNum, LottoNumberSelectionStrategy selectionStrategy, List<Lotto> buyingLottos) {
+        buyingLottos.add(selectionStrategy.select(lottoNum));
     }
 
     public PurchasedLottosDTO listPurchasedLottos() {
