@@ -19,7 +19,7 @@ public class InputView {
 
     public static LottoPurchasePrice readTotalPurchasePrice() {
         System.out.println(PURCHASE_PRICE_QUESTION);
-        LottoPurchasePrice purchasePrice = new LottoPurchasePrice(SCANNER.nextInt());
+        LottoPurchasePrice purchasePrice = LottoPurchasePrice.valueOf(SCANNER.nextInt());
         SCANNER.nextLine();
         System.out.println(purchasePrice.getLottoCount() + TICKET_COUNT_SUFFIX);
         return purchasePrice;
