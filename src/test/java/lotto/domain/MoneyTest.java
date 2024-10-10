@@ -20,6 +20,11 @@ public class MoneyTest {
         final Money money = new Money(3000);
 
         assertThat(money.getMoney()).isEqualTo(3000);
+    }
+
+    @Test
+    @DisplayName("돈의 단위가 천원 단위로 떨어지지 않는 경우 예외가 발생한다.")
+    void shouldThrowExceptionWhenMoneyIsNotDivisibleByThousand() {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Money(1800));
     }
