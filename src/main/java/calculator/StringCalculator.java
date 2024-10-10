@@ -3,16 +3,10 @@ package calculator;
 import calculator.enums.Operator;
 
 public class StringCalculator {
-    private static StringCalculator INSTANCE = null;
+    private final CalculateParameter parameter;
 
-    private StringCalculator() {
-    }
-
-    public static StringCalculator getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new StringCalculator();
-        }
-        return INSTANCE;
+    public StringCalculator(CalculateParameter parameter) {
+        this.parameter = parameter;
     }
 
     int calculate(Integer num1, Integer num2, Operator operator) {
@@ -20,7 +14,6 @@ public class StringCalculator {
     }
 
     public int calculate(String text) {
-        CalculateParameter parameter = new CalculateParameter();
         parameter.makeParameter(text);
         return getResult(parameter);
     }
