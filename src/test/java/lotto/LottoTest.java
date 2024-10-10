@@ -1,11 +1,12 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static lotto.Lotto.IS_NOT_LOTTO_SIZE;
+import static lotto.domain.Lotto.IS_NOT_LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -45,5 +46,21 @@ class LottoTest {
         List<Integer> winningLottoNumbers = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 9, 10));
         Lotto winningLotto = new Lotto(winningLottoNumbers);
         assertThat(lotto.getLottoResult(winningLotto)).isEqualTo(4);
+    }
+
+    @DisplayName("당첨 로또 생성")
+    @Test
+    void 당첨로또(){
+        String winning = "1,2,6,4,5,3";
+        Lotto lotto = new Lotto(winning);
+        List<Integer> lottoList = lotto.getLottoNumbers();
+        assertAll(
+                () -> assertThat(lottoList.get(0)).isEqualTo(1),
+                () -> assertThat(lottoList.get(1)).isEqualTo(2),
+                () -> assertThat(lottoList.get(2)).isEqualTo(3),
+                () -> assertThat(lottoList.get(3)).isEqualTo(4),
+                () -> assertThat(lottoList.get(4)).isEqualTo(5),
+                () -> assertThat(lottoList.get(5)).isEqualTo(6)
+        );
     }
 }

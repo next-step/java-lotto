@@ -1,17 +1,17 @@
 package lotto;
 
-import org.assertj.core.api.AssertionsForClassTypes;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoResults;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static lotto.LottoGame.CAN_NOT_BUY_LOTTO;
-import static lotto.LottoGame.CAN_NOT_BUY_LOTTO_AMOUNT;
+import static lotto.domain.LottoGame.CAN_NOT_BUY_LOTTO;
+import static lotto.domain.LottoGame.CAN_NOT_BUY_LOTTO_AMOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoGameTest {
     @DisplayName("로또 발급")
