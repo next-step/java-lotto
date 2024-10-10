@@ -41,4 +41,17 @@ public class OperationTypeTest {
         // then
         Assertions.assertThat(result).isEqualTo(2);
     }
+
+    @Test
+    void 곱셈_수행() {
+        // given
+        int operandA = 3;
+        int operandB = 2;
+
+        // when
+        int result = OperationType.MULTIPLY.apply(operandA, operandB);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(6);
+    }
 }
