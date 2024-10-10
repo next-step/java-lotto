@@ -19,4 +19,18 @@ public class WinningNumbersTest {
         // then
         Assertions.assertThat(equalNumberCount).isEqualTo(2);
     }
+
+    @Test
+    void 입력된_당첨번호로부터_생성() {
+        // given
+        String inputWinningNumbers = "1, 2, 10, 11, 12, 13";
+        Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
+
+        // when
+        WinningNumbers winningNumbers = WinningNumbers.from(inputWinningNumbers);
+        int equalNumberCount = winningNumbers.equalNumberCount(lottoNumbers);
+
+        // then
+        Assertions.assertThat(equalNumberCount).isEqualTo(2);
+    }
 }

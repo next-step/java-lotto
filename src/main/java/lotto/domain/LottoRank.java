@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum LottoRank {
     FIRST(6, 2000000000),
@@ -8,6 +9,8 @@ public enum LottoRank {
     THIRD(4, 50000),
     FOURTH(3, 5000),
     NONE(-1, 0);
+
+    public static final List<LottoRank> RANKS_WITHOUT_NONE = Arrays.asList(FIRST, SECOND, THIRD, FOURTH);
 
     public final int equalNumberCount;
     public final int prizeMoneyAmount;
