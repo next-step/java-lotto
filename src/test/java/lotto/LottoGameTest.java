@@ -43,8 +43,8 @@ class LottoGameTest {
     @Test
     void 로또_수익률_구하기() {
         Map<Integer, Integer> result = new HashMap<>();
-        result.put(5, 1);
-        LottoResults lottoResults = new LottoResults(result);
+        LottoResults lottoResults = new LottoResults();
+        lottoResults.addResult(5);
         LottoGame lottoGame = new LottoGame(14000, lottoResults);
 
         assertThat(lottoGame.getEarnRate()).isEqualTo("0.35");

@@ -13,7 +13,7 @@ public class LottoGame {
     private final LottoResults lottoResults;
 
     public LottoGame(int gameMoney) {
-        this(gameMoney, new LottoResults(new HashMap<>()));
+        this(gameMoney, new LottoResults());
     }
 
     public LottoGame(int gameMoney, LottoResults lottoResults) {
@@ -44,10 +44,11 @@ public class LottoGame {
         return lottoList;
     }
 
-    public void makeLottoResult(Lotto winningLotto) {
+    public LottoResults makeLottoResult(Lotto winningLotto) {
         for (int i = 0; i < lottoList.size(); i++) {
             setLottoResult(lottoList.get(i).getLottoResult(winningLotto));
         }
+        return lottoResults;
     }
 
     private void setLottoResult(int rank) {
