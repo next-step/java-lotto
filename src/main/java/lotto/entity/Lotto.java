@@ -4,30 +4,24 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(List<Integer> numbers){
+    public Lotto(List<Integer> numbers) {
         Collections.sort(numbers);
-        this.numbers = numbers;
+        this.lottoNumbers = new LottoNumbers(numbers);
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<Integer> getLottoNumbers() {
+        return this.lottoNumbers.getNumbers();
     }
 
     public int matchCount(List<Integer> winningNumbers) {
         Collections.sort(winningNumbers);
 
-        int winningCount = 0;
-
+        int count = 0;
         for (Integer winningNumber : winningNumbers) {
-            for(Integer number : this.numbers){
-                if(winningNumber.equals(number)){
-                    winningCount++;
-                    continue;
-                }
-            }
+            count = this.lottoNumbers.collectResult(count, winningNumber);
         }
-        return winningCount;
+        return count;
     }
 }

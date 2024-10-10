@@ -16,7 +16,7 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(10, 4, 9, 2, 5, 1);
         Lotto lotto = new Lotto(numbers);
 
-        assertThat(lotto.getNumbers()).isSortedAccordingTo((s1, s2) -> s1.compareTo(s2));
+        assertThat(lotto.getLottoNumbers()).isSortedAccordingTo((s1, s2) -> s1.compareTo(s2));
     }
 
     @Test
@@ -31,5 +31,4 @@ class LottoTest {
                 () -> assertThat(lotto.matchCount(Arrays.asList(1, 2, 3, 10, 5, 6))).isEqualTo(6)
         );
     }
-
 }
