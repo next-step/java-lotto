@@ -16,7 +16,7 @@ class LottoWinningResultsTest {
 
     @Test
     @DisplayName("getTotalWinningAmount 메서드가 로또 당첨 금액을 반환한다.")
-    void getTotalWinningAmountTest() {
+    void getWinningAmountTest() {
         int winningAmountSum = LottoWinningStatus.THREE.getAmount() + LottoWinningStatus.FOUR.getAmount();
         LottoWinningResults result = new LottoWinningResults();
         result.incrementWinningResults(LottoWinningStatus.THREE.getWinningCount());

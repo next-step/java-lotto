@@ -19,7 +19,7 @@ public class LottoWinningResults {
 
     public long getTotalWinningAmount() {
         return winningResults.stream()
-                .mapToInt(result -> result.getLottoWinningStatus().getAmount() * result.getCount())
+                .mapToInt(result -> result.getWinningAmount())
                 .sum();
     }
 
