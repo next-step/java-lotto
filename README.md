@@ -29,3 +29,4 @@
     - 덧셈, 뺄셈, 곱셈, 나눗셈 기능을 테스트할 수 있는 단위로 분리하여 구현 
       - ➡️ Calculation 인터페이스를 정의하여 기본 연산 메서드 제공 
       - ➡️ Calculation 인터페이스의 구현체로 Addition, Subtraction, Multiplication, Division 클래스를 작성
+        - 나눗셈의 경우 0으로 나눌 경우 IllegalArgumentException throw 
