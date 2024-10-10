@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.LottoNumberGenerator;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,10 +18,9 @@ public class LottoBundle implements Iterable<Lotto> {
     }
 
     public static LottoBundle createLottoBundle(final int lottoBundleCount) {
-        final LottoNumbers lottoNumbers = new LottoNumbers();
         final List<Lotto> lottoBundle = new ArrayList<>();
         for (int i = 0; i < lottoBundleCount; i++) {
-            lottoBundle.add(new Lotto(lottoNumbers.shuffleAndPickLottoNumbers()));
+            lottoBundle.add(new Lotto(LottoNumberGenerator.shuffleAndPickLottoNumbers()));
         }
         return new LottoBundle(lottoBundle);
     }

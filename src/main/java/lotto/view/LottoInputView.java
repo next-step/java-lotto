@@ -46,14 +46,12 @@ public class LottoInputView {
             throw new IllegalArgumentException("지난 주 당첨 번호를 정확히 입력 해 주세요.");
         }
 
-        final LottoNumbers winningLottoNumbers = new LottoNumbers(
+        return new Lotto(
             Arrays.stream(lottoNumbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableList())
         );
-
-        return new Lotto(winningLottoNumbers);
     }
 }
