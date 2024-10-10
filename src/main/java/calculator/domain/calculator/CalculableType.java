@@ -1,4 +1,4 @@
-package calculator.domain.cal;
+package calculator.domain.calculator;
 
 import calculator.domain.Calculable;
 
@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
 
 public enum CalculableType {
 
-    INIT_OPERATOR("", new InitOperatorCal()),
-    SUBTRACTION_OPERATOR("-", new SubtractionCal()),
-    MULTIPLICATION_OPERATOR("*", new MultiplicationCal()),
-    SUM_OPERATOR("+", new SumCal()),
-    DIVISION_OPERATOR("/", new DivisionCal());
+    INIT_OPERATOR("", new InitOperatorCalculator()),
+    SUBTRACTION_OPERATOR("-", new SubtractionCalculator()),
+    MULTIPLICATION_OPERATOR("*", new MultiplicationCalculator()),
+    SUM_OPERATOR("+", new SumCalculator()),
+    DIVISION_OPERATOR("/", new DivisionCalulcator());
 
-    private final static Map<String, CalculableType> operatorTypes;
+    private final static Map<String, CalculableType> OPERATOR_TYPES;
 
     static {
-        operatorTypes = Arrays.stream(values())
+        OPERATOR_TYPES = Arrays.stream(values())
                 .collect(Collectors.collectingAndThen(
                         Collectors.toMap(CalculableType::getOperator, Function.identity()),
                         Collections::unmodifiableMap));
@@ -35,7 +35,7 @@ public enum CalculableType {
     }
 
     public static Calculable getCalculable(String operator) {
-        CalculableType factory = Optional.ofNullable(operatorTypes.get(operator))
+        CalculableType factory = Optional.ofNullable(OPERATOR_TYPES.get(operator))
                 .orElseThrow(() ->
                         new IllegalArgumentException("유효하지 않은 연산자 입니다. [" + operator + "]"));
 

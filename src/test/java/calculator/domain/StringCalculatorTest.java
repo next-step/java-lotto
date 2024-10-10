@@ -1,6 +1,8 @@
 package calculator.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -15,111 +17,84 @@ public class StringCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 합계_2개_피연산자() {
+    @ParameterizedTest
+    @CsvSource({"1 + 1,2", "1 + 4,5"})
+    void 합계_2개_피연산자(String text, int expected) {
         StringCalculator calculator = new StringCalculator();
-        String firstExpr = "1 + 1";
-        String secondExpr = "1 + 4";
 
-        int firstResult = calculator.splitAndCalculate(firstExpr);
-        int secondResult = calculator.splitAndCalculate(secondExpr);
+        int result = calculator.splitAndCalculate(text);
 
-        assertThat(firstResult).isEqualTo(2);
-        assertThat(secondResult).isEqualTo(5);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void 합계_여러개_피연산자() {
+    @ParameterizedTest
+    @CsvSource({"1 + 1 + 1,3", "1 + 4 + 5 + 10,20"})
+    void 합계_여러개_피연산자(String text, int expected) {
         StringCalculator calculator = new StringCalculator();
-        String firstExpr = "1 + 1 + 1";
-        String secondExpr = "1 + 4 + 5 + 10";
 
-        int firstResult = calculator.splitAndCalculate(firstExpr);
-        int secondResult = calculator.splitAndCalculate(secondExpr);
+        int result = calculator.splitAndCalculate(text);
 
-        assertThat(firstResult).isEqualTo(3);
-        assertThat(secondResult).isEqualTo(20);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void 뺄셈_2개_피연산자() {
+    @ParameterizedTest
+    @CsvSource(value = {"1 - 1:0", "5 - 4:1", "1 - 4:-3"}, delimiter = ':')
+    void 뺄셈_2개_피연산자(String text, int expected) {
         StringCalculator calculator = new StringCalculator();
-        String firstExpr = "1 - 1";
-        String secondExpr = "5 - 4";
-        String thirdExpr = "1 - 4";
 
-        int firstResult = calculator.splitAndCalculate(firstExpr);
-        int secondResult = calculator.splitAndCalculate(secondExpr);
-        int thirdResult = calculator.splitAndCalculate(thirdExpr);
+        int result = calculator.splitAndCalculate(text);
 
-        assertThat(firstResult).isEqualTo(0);
-        assertThat(secondResult).isEqualTo(1);
-        assertThat(thirdResult).isEqualTo(-3);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void 뺄셈_여러개_피연산자() {
+    @ParameterizedTest
+    @CsvSource({"1 - 1 - 1,-1", "10 - 1 - 4 - 50,-45"})
+    void 뺄셈_여러개_피연산자(String text, int expected) {
         StringCalculator calculator = new StringCalculator();
-        String firstExpr = "1 - 1 - 1";
-        String secondExpr = "10 - 1 - 4 - 50";
 
-        int firstResult = calculator.splitAndCalculate(firstExpr);
-        int secondResult = calculator.splitAndCalculate(secondExpr);
+        int result = calculator.splitAndCalculate(text);
 
-        assertThat(firstResult).isEqualTo(-1);
-        assertThat(secondResult).isEqualTo(-45);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void 곱하기_2개_피연산자() {
+    @ParameterizedTest
+    @CsvSource({"1 * 1,1", "1 * 4,4"})
+    void 곱하기_2개_피연산자(String text, int expected) {
         StringCalculator calculator = new StringCalculator();
-        String firstExpr = "1 * 1";
-        String secondExpr = "1 * 4";
 
-        int firstResult = calculator.splitAndCalculate(firstExpr);
-        int secondResult = calculator.splitAndCalculate(secondExpr);
+        int result = calculator.splitAndCalculate(text);
 
-        assertThat(firstResult).isEqualTo(1);
-        assertThat(secondResult).isEqualTo(4);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void 곱하기_여러개_피연산자() {
+    @ParameterizedTest
+    @CsvSource({"1 * 1 * 3,3", "1 * 4 * 5 * 10,200"})
+    void 곱하기_여러개_피연산자(String text, int expected) {
         StringCalculator calculator = new StringCalculator();
-        String firstExpr = "1 * 1 * 3";
-        String secondExpr = "1 * 4 * 5 * 10";
 
-        int firstResult = calculator.splitAndCalculate(firstExpr);
-        int secondResult = calculator.splitAndCalculate(secondExpr);
+        int result = calculator.splitAndCalculate(text);
 
-        assertThat(firstResult).isEqualTo(3);
-        assertThat(secondResult).isEqualTo(200);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void 나누기_2개_피연산자() {
+    @ParameterizedTest
+    @CsvSource({"1 / 1,1", "1 / 4,0"})
+    void 나누기_2개_피연산자(String text, int expected) {
         StringCalculator calculator = new StringCalculator();
-        String firstExpr = "1 / 1";
-        String secondExpr = "1 / 4";
 
-        int firstResult = calculator.splitAndCalculate(firstExpr);
-        int secondResult = calculator.splitAndCalculate(secondExpr);
+        int result = calculator.splitAndCalculate(text);
 
-        assertThat(firstResult).isEqualTo(1);
-        assertThat(secondResult).isEqualTo(0);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void 나누기_여러개_피연산자() {
+    @ParameterizedTest
+    @CsvSource({"20 / 4, 5", "20 / 4 / 5, 1"})
+    void 나누기_여러개_피연산자(String text, int expected) {
         StringCalculator calculator = new StringCalculator();
-        String firstExpr = "20 / 4";
-        String secondExpr = "20 / 4 / 5";
 
-        int firstResult = calculator.splitAndCalculate(firstExpr);
-        int secondResult = calculator.splitAndCalculate(secondExpr);
+        int result = calculator.splitAndCalculate(text);
 
-        assertThat(firstResult).isEqualTo(5);
-        assertThat(secondResult).isEqualTo(1);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -131,60 +106,57 @@ public class StringCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 사칙연산() {
+    @ParameterizedTest
+    @CsvSource({"1 + 1 * 3 / 5 - 20, -19", "1 * 4 - 5 * 10 + 1 / 10, 0"})
+    void 사칙연산(String text, int expected) {
         StringCalculator calculator = new StringCalculator();
-        String firstExpr = "1 + 1 * 3 / 5 - 20";
-        String secondExpr = "1 * 4 - 5 * 10 + 1 / 10";
 
-        int firstResult = calculator.splitAndCalculate(firstExpr);
-        int secondResult = calculator.splitAndCalculate(secondExpr);
+        int result = calculator.splitAndCalculate(text);
 
-        assertThat(firstResult).isEqualTo(-19);
-        assertThat(secondResult).isEqualTo(0);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
     void 잘못된_연산자() {
         StringCalculator calculator = new StringCalculator();
-        String expr = "1 ) 1 * 3 / 5 - 20";
+        String expression = "1 ) 1 * 3 / 5 - 20";
 
-        assertThatThrownBy(() -> calculator.splitAndCalculate(expr))
+        assertThatThrownBy(() -> calculator.splitAndCalculate(expression))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 피연산자_숫자_아님() {
         StringCalculator calculator = new StringCalculator();
-        String expr = "1 + a * 3 / 5 - 20";
+        String expression = "1 + a * 3 / 5 - 20";
 
-        assertThatThrownBy(() -> calculator.splitAndCalculate(expr))
+        assertThatThrownBy(() -> calculator.splitAndCalculate(expression))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 첫번째_문자_숫자_아님() {
         StringCalculator calculator = new StringCalculator();
-        String expr = "/ 2 / 1";
+        String expression = "/ 2 / 1";
 
-        assertThatThrownBy(() -> calculator.splitAndCalculate(expr))
+        assertThatThrownBy(() -> calculator.splitAndCalculate(expression))
                 .isInstanceOf(NumberFormatException.class);
     }
 
     @Test
     void 마지막_문자_숫자_아님() {
         StringCalculator calculator = new StringCalculator();
-        String expr = "1 / 2 /";
-        assertThatThrownBy(() -> calculator.splitAndCalculate(expr))
+        String expression = "1 / 2 /";
+        assertThatThrownBy(() -> calculator.splitAndCalculate(expression))
                 .isInstanceOf(NumberFormatException.class);
     }
 
     @Test
     void 숫자_뒤에_숫자() {
         StringCalculator calculator = new StringCalculator();
-        String expr = "1 2 / 4";
+        String expression = "1 2 / 4";
 
-        assertThatThrownBy(() -> calculator.splitAndCalculate(expr))
+        assertThatThrownBy(() -> calculator.splitAndCalculate(expression))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

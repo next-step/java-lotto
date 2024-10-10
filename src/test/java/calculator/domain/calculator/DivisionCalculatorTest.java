@@ -1,4 +1,4 @@
-package calculator.domain.cal;
+package calculator.domain.calculator;
 
 import calculator.domain.Calculable;
 import org.junit.jupiter.api.Test;
@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DivisionCalTest {
+public class DivisionCalculatorTest {
 
     @Test
     void 나누기() {
-        Calculable cal = new DivisionCal();
+        Calculable cal = new DivisionCalulcator();
         int preResult = 10;
         int operand = 10;
 
@@ -19,7 +19,7 @@ public class DivisionCalTest {
 
     @Test
     void 나누기_0_에러() {
-        Calculable cal = new DivisionCal();
+        Calculable cal = new DivisionCalulcator();
 
         assertThatThrownBy(() -> cal.calculate(10, 0))
                 .isInstanceOf(IllegalArgumentException.class);

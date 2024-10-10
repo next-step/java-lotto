@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.domain.cal.CalculableType;
+import calculator.domain.calculator.CalculableType;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +8,6 @@ import java.util.Queue;
 
 public class StringCalculator {
 
-    private static final String OPERATOR_REGEX = "[+\\-*/]";
     private static final String DELIMITER = " ";
 
     public int splitAndCalculate(String expression) {
@@ -35,10 +34,8 @@ public class StringCalculator {
 
     private int calculate(Queue<String> expressions, int preResult) {
         String expression = expressions.poll();
-        if (expression != null && expression.matches(OPERATOR_REGEX)) {
-            return CalculableType.getCalculable(expression).calculate(preResult, parseInt(expressions.poll()));
-        }
-        throw new IllegalArgumentException("유효하지 않은 문자입니다. [" + expression + "]");
+        return CalculableType.getCalculable(expression)
+                .calculate(preResult, parseInt(expressions.poll()));
     }
 
     private static int parseInt(String operand) {
