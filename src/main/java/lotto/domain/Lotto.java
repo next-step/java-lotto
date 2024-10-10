@@ -14,7 +14,7 @@ public class Lotto {
     }
 
     public boolean isMatch(final Lotto otherLotto) {
-        return lottoNumbers.isMatch(otherLotto.lottoNumbers);
+        return lottoNumbers.allMatch(otherLotto.lottoNumbers);
     }
 
     public int matchCount(final Lotto otherLotto) {

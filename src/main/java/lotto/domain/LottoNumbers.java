@@ -26,7 +26,7 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public boolean isMatch(final LottoNumbers numbers) {
+    public boolean allMatch(final LottoNumbers numbers) {
         return lottoNumbers.stream().allMatch(numbers::contains);
     }
 
