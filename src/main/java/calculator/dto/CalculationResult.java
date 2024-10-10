@@ -20,9 +20,4 @@ public class CalculationResult {
         CalculationResult that = (CalculationResult) o;
         return Objects.equals(value, that.value);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(value);
-    }
 }

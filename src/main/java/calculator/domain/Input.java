@@ -29,16 +29,4 @@ public class Input {
         Input that = (Input) o;
         return Objects.equals(value, that.value);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(value);
-    }
-
-    @Override
-    public String toString() {
-        return "InputString{" +
-                "value='" + value + '\'' +
-                '}';
-    }
 }

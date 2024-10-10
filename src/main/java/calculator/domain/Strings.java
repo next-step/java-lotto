@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Strings {
@@ -37,10 +36,5 @@ public class Strings {
         }
         Strings strings = (Strings) o;
         return Objects.deepEquals(values, strings.values);
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(values);
     }
 }

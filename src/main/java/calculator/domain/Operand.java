@@ -50,16 +50,4 @@ public class Operand {
         Operand operand = (Operand) o;
         return Objects.equals(value, operand.value);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(value);
-    }
-
-    @Override
-    public String toString() {
-        return "Operand{" +
-                "value='" + value + '\'' +
-                '}';
-    }
 }
