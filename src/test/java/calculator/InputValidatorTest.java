@@ -10,6 +10,15 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class InputValidatorTest {
+    @Test
+    void 유효성_검사_통과() {
+        // given
+        String input = "1 + 2 * 3 / 4 - 5";
+
+        // when, then
+        InputValidator.validate(input);
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"", " "})
     void 빈_문자열이거나_공백으로_구성된_문자열이면_예외_발생(String input) {

@@ -69,6 +69,6 @@ public class InputValidator {
 
     private static boolean isValidExpression(Character character) {
         String characterString = character.toString();
-        return InputItemType.from(characterString) == InputItemType.UNKNOWN;
+        return InputItemType.from(characterString) != InputItemType.UNKNOWN;
     }
 }
