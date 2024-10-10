@@ -4,22 +4,24 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private List<Integer> numbers;
+    private final int lottoNum;
+    private LottoNumbers numbers;
 
-    Lotto(List<Integer> numbers) {
+    Lotto(int lottoNum, LottoNumbers numbers) {
+        this.lottoNum = lottoNum;
         this.numbers = numbers;
     }
 
-    public static Lotto valueOf(List<Integer> numbers) {
-        for (LottoNumbersValidation validation : LottoNumbersValidation.values()) {
-            validation.check(numbers);
-        }
-
-        return new Lotto(numbers);
+    public static Lotto valueOf(int lottoNum, List<Integer> numbers) {
+        return new Lotto(lottoNum, LottoNumbers.valueOf(numbers));
     }
 
     public List<Integer> getNumbers() {
-        return this.numbers;
+        return this.numbers.value();
+    }
+
+    public int getLottoNum() {
+        return this.lottoNum;
     }
 
     @Override
@@ -27,11 +29,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(getLottoNum(), lotto.getLottoNum());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(numbers);
+        return Objects.hashCode(getLottoNum());
     }
 }

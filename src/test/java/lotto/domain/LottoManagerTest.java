@@ -17,7 +17,7 @@ public class LottoManagerTest {
     @DisplayName("금액에 비례하여 Lotto가 구입됩니다.")
     void buyCardinalityTest(int price) {
         LottoManager manager = LottoManager.newInstance();
-        manager.buy(price, () -> Lotto.valueOf(List.of(1, 3, 5, 7, 9, 11)));
+        manager.buy(price, () -> Lotto.valueOf(0, List.of(1, 3, 5, 7, 9, 11)));
         PurchasedLottosDTO lottos = manager.listPurchasedLottos();
         assertThat(lottos.getPurchasedLottos().size()).isEqualTo(price / 1000);
     }
@@ -37,7 +37,7 @@ public class LottoManagerTest {
         LottoManager manager = LottoManager.newInstance();
         List<Integer> winningNumbers = List.of(1, 3, 5, 7, 9, 11);
         int buyingPrice = 10000;
-        manager.buy(buyingPrice, () -> Lotto.valueOf(winningNumbers));
+        manager.buy(buyingPrice, () -> Lotto.valueOf(0, winningNumbers));
         WinningNumbersDTO winningNumbersDTO = WinningNumbersDTO.valueOf(winningNumbers);
         manager.decideWinningNumbers(winningNumbersDTO);
         LottoStatisticsDTO statistics = manager.getStatistics();

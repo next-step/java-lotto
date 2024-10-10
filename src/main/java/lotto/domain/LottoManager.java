@@ -5,7 +5,9 @@ import lotto.dto.PurchasedLottosDTO;
 import lotto.dto.WinningNumbersDTO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoManager {
     private static final int LOTTO_PRICE = 1000;
@@ -42,7 +44,10 @@ public class LottoManager {
     }
 
     public LottoStatisticsDTO getStatistics() {
-        int percentageRateOfReturn =
+        List<Lotto> purchasedLottos = this.purchasedLottos.value();
+        Map<Integer, Integer> matchCount = new HashMap<>();
+        for(Lotto purchasedLotto: purchasedLottos) {
+        }
     }
 
     public Lotto getWinningLotto() {
