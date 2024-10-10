@@ -4,6 +4,9 @@ import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static lotto.LottoGame.CAN_NOT_BUY_LOTTO;
 import static lotto.LottoGame.CAN_NOT_BUY_LOTTO_AMOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,5 +37,16 @@ class LottoGameTest {
             new LottoGame(1001);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(CAN_NOT_BUY_LOTTO_AMOUNT);
+    }
+
+    @DisplayName("수익률 구하기")
+    @Test
+    void 로또_수익률_구하기() {
+        Map<Integer, Integer> result = new HashMap<>();
+        result.put(5, 1);
+        LottoResults lottoResults = new LottoResults(result);
+        LottoGame lottoGame = new LottoGame(14000, lottoResults);
+
+        assertThat(lottoGame.getEarnRate()).isEqualTo("0.35");
     }
 }

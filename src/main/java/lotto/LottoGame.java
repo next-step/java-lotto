@@ -16,7 +16,7 @@ public class LottoGame {
         this(gameMoney, new LottoResults(new HashMap<>()));
     }
 
-    public LottoGame(int gameMoney, LottoResults lottoResults){
+    public LottoGame(int gameMoney, LottoResults lottoResults) {
         this.gameMoney = validateGameMoney(gameMoney);
         this.lottoList = generateLotto(gameMoney / gamePrice);
         this.lottoResults = lottoResults;
@@ -44,9 +44,20 @@ public class LottoGame {
         return lottoList;
     }
 
-    public void makeLottoResult(Lotto winningLotto){
-        for(int i=0;i<lottoList.size();i++){
-            lottoResults.addResult(lottoList.get(i).getLottoResult(winningLotto));
+    public void makeLottoResult(Lotto winningLotto) {
+        for (int i = 0; i < lottoList.size(); i++) {
+            setLottoResult(lottoList.get(i).getLottoResult(winningLotto));
         }
+    }
+
+    private void setLottoResult(int rank) {
+        if (rank <= 5) {
+            lottoResults.addResult(rank);
+        }
+    }
+
+    public String getEarnRate() {
+        double rate = (double) lottoResults.getPrizeMoney() / gameMoney;
+        return String.format("%.2f", Math.floor(rate * 100) / 100);
     }
 }

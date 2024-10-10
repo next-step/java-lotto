@@ -46,7 +46,7 @@ public class Lotto {
         for (int i = 0; i < winningLottoNumbers.size(); i++) {
             equalCount += addCount(winningLottoNumbers.get(i));
         }
-        return equalCount;
+        return getRank(equalCount);
     }
 
     private int addCount(int winningNumber) {
@@ -54,5 +54,21 @@ public class Lotto {
             return 1;
         }
         return 0;
+    }
+
+    private int getRank(int equalCount){
+        if(equalCount==6){
+            return 1;
+        }
+        if(equalCount==5){
+            return 3;
+        }
+        if(equalCount==4){
+            return 4;
+        }
+        if(equalCount==3){
+            return 5;
+        }
+        return 6;
     }
 }
