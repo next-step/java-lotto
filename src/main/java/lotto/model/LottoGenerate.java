@@ -14,8 +14,12 @@ public class LottoGenerate {
             41, 42, 43, 44, 45
     ));
 
-    public List<Integer> generate(){
+    public List<Integer> generate() {
         Collections.shuffle(lottos);
+        return lottos.subList(0, 6);
+    }
+
+    public List<Integer> getLastWeekWinningNumbers() {
         return lottos.subList(0, 6);
     }
 }

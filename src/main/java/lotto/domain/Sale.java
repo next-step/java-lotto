@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Sale {
-    private static final String LOTTO_ERROR_MESSAGE="돈이 부족합니다.";
+    private static final String LOTTO_ERROR_MESSAGE = "돈이 부족합니다.";
     private static final int LOTTO_PRICE = 1000;
     private final int money;
 
@@ -14,7 +14,7 @@ public class Sale {
     }
 
     private int parse(int money) {
-        if(isValidate(money)) {
+        if (isValidate(money)) {
             throw new IllegalArgumentException(LOTTO_ERROR_MESSAGE);
         }
         return money;

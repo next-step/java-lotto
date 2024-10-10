@@ -21,7 +21,7 @@ public class SaleTest {
     @DisplayName("구매 생성자 에러 테스트 - 돈이 부족한 경우")
     void 구매_생성자_에러_테스트() {
         int money = 999;
-        assertThatThrownBy(()-> new Sale(money))
+        assertThatThrownBy(() -> new Sale(money))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("돈이 부족합니다.");
     }
