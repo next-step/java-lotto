@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoStatisticsDTO;
-import lotto.dto.PurchasedLottosDTO;
-import lotto.dto.WinningNumbersDTO;
+import lotto.dto.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +11,7 @@ public class LottoManager {
     private static final int LOTTO_PRICE = 1000;
 
     private PurchasedLottos purchasedLottos;
-    private Lotto winningLotto;
+    private LottoNumbers winningLottoNumbers;
 
     LottoManager(){}
 
@@ -40,17 +38,31 @@ public class LottoManager {
 
     public void decideWinningNumbers(WinningNumbersDTO winningNumbers) {
         List<Integer> winningNumberList = winningNumbers.getWinningNumbers();
-        this.winningLotto = Lotto.valueOf(winningNumberList);
+        this.winningLottoNumbers = LottoNumbers.valueOf(winningNumberList);
     }
 
     public LottoStatisticsDTO getStatistics() {
         List<Lotto> purchasedLottos = this.purchasedLottos.value();
-        Map<Integer, Integer> matchCount = new HashMap<>();
-        for(Lotto purchasedLotto: purchasedLottos) {
+        Map<Integer, Integer> matchCountMap = new HashMap<>();
+        for (Lotto purchasedLotto : purchasedLottos) {
+            int matchCount = purchasedLotto.getMatchCount(this.winningLottoNumbers);
+            matchCountMap.put(matchCount, matchCountMap.getOrDefault(matchCount, 0) + 1);
         }
+
+        List<LottoReward> rewards = List.of(LottoReward.values());
+        List<LottoMatchInfoDTO> matchInfoDTOs = new ArrayList<>();
+        int totalReward = 0;
+        for (LottoReward reward : rewards) {
+            int rewardingLottoNum = matchCountMap.getOrDefault(reward.getMatchCount(), 0);
+            totalReward += rewardingLottoNum * reward.getReward();
+            matchInfoDTOs.add(LottoMatchInfoDTO.valueOf(reward.getMatchCount(), rewardingLottoNum, reward.getReward()));
+        }
+        int rewardPercentage = 100 * totalReward / (purchasedLottos.size() * LOTTO_PRICE);
+        LottoMatchInfosDTO matchInfosDTO = LottoMatchInfosDTO.valueOf(matchInfoDTOs);
+        return LottoStatisticsDTO.valueOf(rewardPercentage, matchInfosDTO);
     }
 
-    public Lotto getWinningLotto() {
-        return winningLotto;
+    public LottoNumbers getWinningLottoNumbers() {
+        return winningLottoNumbers;
     }
 }

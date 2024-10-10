@@ -28,7 +28,7 @@ public class LottoManagerTest {
         LottoManager manager = LottoManager.newInstance();
         WinningNumbersDTO winningNumbers = WinningNumbersDTO.valueOf(List.of(1, 3, 5, 7, 9, 11));
         manager.decideWinningNumbers(winningNumbers);
-        assertThat(manager.getWinningLotto().getNumbers()).isEqualTo(winningNumbers.getWinningNumbers());
+        assertThat(manager.getWinningLottoNumbers().value()).isEqualTo(winningNumbers.getWinningNumbers());
     }
 
     @Test

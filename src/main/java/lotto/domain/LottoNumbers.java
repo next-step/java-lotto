@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
     private List<Integer> value;
@@ -14,7 +13,9 @@ public class LottoNumbers {
         for (LottoNumbersValidation validation : LottoNumbersValidation.values()) {
             validation.check(numbers);
         }
-        return new LottoNumbers(numbers);
+        List<Integer> mutableNumbers = new ArrayList<>(numbers);
+        Collections.sort(mutableNumbers);
+        return new LottoNumbers(mutableNumbers);
     }
 
     public List<Integer> value() {
