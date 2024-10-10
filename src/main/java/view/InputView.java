@@ -30,7 +30,7 @@ public class InputView {
         List<Integer> result = Arrays.stream(line.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        if (result.size() > 6) {
+        if (result.size() != 6) {
             throw new IllegalArgumentException("input length must be less than or equal to 6");
         }
         int cnt = (int) result.stream()
