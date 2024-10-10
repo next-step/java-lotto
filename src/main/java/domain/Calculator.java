@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Calculator {
     private final Tokens tokens;
+
     public Calculator(Tokens tokens) {
         this.tokens = tokens;
     }
