@@ -27,4 +27,18 @@ public class LottoStatistics {
     public int getCount(LottoRank lottoRank) {
         return prizeCountMap.get(lottoRank);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder allRankDescription = new StringBuilder();
+
+        for (LottoRank lottoRank : LottoRank.RANKS_WITHOUT_NONE) {
+            Integer prizeCount = prizeCountMap.get(lottoRank);
+
+            String singleRankDescription = String.format("%d개 일치 (%d원)- %d개\n", lottoRank.equalNumberCount, lottoRank.prizeMoneyAmount, prizeCount);
+            allRankDescription.append(singleRankDescription);
+        }
+
+        return allRankDescription.toString();
+    }
 }
