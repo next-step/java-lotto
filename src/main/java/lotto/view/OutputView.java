@@ -1,24 +1,29 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.Lotto;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
+import lotto.domain.Rank;
 
 public class OutputView {
+
+    private static final String DELIMITER = ", ";
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
 
     public static void lottoCount(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
     public static void lottoView(Lotto lotto) {
-        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+        LottoNumbers lottoNumbers = lotto.getLottoNumbers();
 
-        String result = lottoNumbers.stream()
-            .map(String::valueOf)
-            .collect(Collectors.joining(", ", "[", "]"));
-
-        System.out.println(result);
+        System.out.println(
+            lottoNumbers.getValues().stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX))
+        );
     }
 
     public static void staticsView() {
@@ -27,8 +32,8 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    public static void matchView(MatchNumberView matchNumberView, int count) {
-        System.out.println(matchNumberView.getMessage() + count + "개");
+    public static void matchView(Rank rank, int count) {
+        System.out.println(rank.getMessage() + count + "개");
     }
 
     public static void ratioView(double ratio) {

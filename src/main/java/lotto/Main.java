@@ -2,8 +2,11 @@ package lotto;
 
 import java.util.List;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoStatics;
+import lotto.domain.Rank;
 import lotto.view.InputView;
-import lotto.view.MatchNumberView;
 import lotto.view.OutputView;
 
 public class Main {
@@ -11,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         int money = InputView.inputAmount();
 
-        LottoMachine lottoMachine = new LottoMachine(new LottoNumbers(1, 45));
+        LottoMachine lottoMachine = new LottoMachine();
         int lottoCount = lottoMachine.lottoCount(money);
         OutputView.lottoCount(lottoCount);
 
@@ -25,10 +28,10 @@ public class Main {
         List<Integer> winNumber = InputView.inputWinnerNumber();
 
         OutputView.staticsView();
-        OutputView.matchView(MatchNumberView.THREE, lottoStatics.match(winNumber, 3));
-        OutputView.matchView(MatchNumberView.FOUR, lottoStatics.match(winNumber, 4));
-        OutputView.matchView(MatchNumberView.FIVE, lottoStatics.match(winNumber, 5));
-        OutputView.matchView(MatchNumberView.SIX, lottoStatics.match(winNumber, 6));
-        OutputView.ratioView(lottoStatics.calculateRatio(winNumber, money));
+        OutputView.matchView(Rank.THREE, lottoStatics.matchCount(winNumber, Rank.THREE));
+        OutputView.matchView(Rank.FOUR, lottoStatics.matchCount(winNumber, Rank.FOUR));
+        OutputView.matchView(Rank.FIVE, lottoStatics.matchCount(winNumber, Rank.FIVE));
+        OutputView.matchView(Rank.WIN, lottoStatics.matchCount(winNumber, Rank.WIN));
+        OutputView.ratioView(Rank.ratio(lottoStatics.totalPrize(winNumber), money));
     }
 }
