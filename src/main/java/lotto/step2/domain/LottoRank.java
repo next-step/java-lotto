@@ -28,6 +28,10 @@ public enum LottoRank {
         return this == NONE;
     }
 
+    public boolean hasRankedPrize(){
+        return !isNoneRank();
+    }
+
     public int getMatchCount() {
         return matchCount;
     }

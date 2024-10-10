@@ -39,7 +39,7 @@ public class ConsoleResultView implements ResultView{
 
     private List<LottoRank> sortLottoRankByMatchCount() {
         return Arrays.stream(LottoRank.values())
-                .filter(LottoRank::isNoneRank)
+                .filter(LottoRank::hasRankedPrize)
                 .sorted((o1, o2) -> o1.getMatchCount() - o2.getMatchCount())
                 .collect(Collectors.toList());
     }
