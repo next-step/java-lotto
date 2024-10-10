@@ -1,6 +1,7 @@
 package lotto.dto;
 
 import lotto.domain.Lotto;
+import lotto.domain.PurchasedLottos;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,8 +13,8 @@ public class PurchasedLottosDTO {
         this.purchasedLottos = purchasedLottos;
     }
 
-    public static PurchasedLottosDTO valueOf(List<Lotto> purchasedLottos) {
-        return new PurchasedLottosDTO(purchasedLottos);
+    public static PurchasedLottosDTO valueOf(PurchasedLottos purchasedLottos) {
+        return new PurchasedLottosDTO(purchasedLottos.value());
     }
 
     public List<Lotto> getPurchasedLottos() {
