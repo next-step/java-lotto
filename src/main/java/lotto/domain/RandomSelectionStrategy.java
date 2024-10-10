@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class RandomSelectionStrategy implements LottoNumberSelectionStrategy{
-    private static ArrayList<Integer> LOTTO_NUMBER_CONTAINERS = createLottoNumberContainer();
+    private final static ArrayList<Integer> LOTTO_NUMBER_CONTAINERS = createLottoNumberContainer();
 
     @Override
     public Lotto select(int lottoNum) {
