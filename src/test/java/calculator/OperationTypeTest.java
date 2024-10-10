@@ -54,4 +54,29 @@ public class OperationTypeTest {
         // then
         Assertions.assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void 나눗셈_수행() {
+        // given
+        int operandA = 3;
+        int operandB = 2;
+
+        // when
+        int result = OperationType.DIVIDE.apply(operandA, operandB);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    void 나눗셈_0으로_나눌수_없음() {
+        // given
+        int operandA = 3;
+        int operandB = 0;
+
+        // when, then
+        Assertions.assertThatExceptionOfType(ArithmeticException.class).isThrownBy(() -> {
+            OperationType.DIVIDE.apply(operandA, operandB);
+        }).withMessage("0으로 나눌 수 없습니다");
+    }
 }

@@ -6,7 +6,12 @@ public enum OperationType {
     ADD("+", Integer::sum),
     SUBTRACT("-", (a, b) -> a - b),
     MULTIPLY("*", (a, b) -> a * b),
-    DIVIDE("/", (a, b) -> a),
+    DIVIDE("/", (a, b) -> {
+        if (b == 0) {
+            throw new ArithmeticException("0으로 나눌 수 없습니다");
+        }
+        return a / b;
+    }),
     UNKNOWN("UNKNOWN", (a, b) -> a);
 
     private final String symbol;
