@@ -32,7 +32,7 @@ public enum OperatorType {
 
     public abstract int apply(int number1, int number2);
 
-    public static OperatorType getOperator(String symbol) {
+    public static OperatorType fromSymbol(String symbol) {
         return Arrays.stream(OperatorType.values())
                      .filter(operator -> operator.symbol.equals(symbol))
                      .findFirst()

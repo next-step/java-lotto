@@ -12,7 +12,7 @@ public class Calculator {
 
     private int applyOperations(String[] arr, int result) {
         for (int i = 1; i < arr.length; i += 2) {
-            OperatorType operatorType = OperatorType.getOperator(arr[i]);
+            OperatorType operatorType = OperatorType.fromSymbol(arr[i]);
             int operand = Integer.parseInt(arr[i + 1]);
             result = operatorType.apply(result, operand);
         }
