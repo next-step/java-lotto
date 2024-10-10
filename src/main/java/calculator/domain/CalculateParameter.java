@@ -52,6 +52,7 @@ public class CalculateParameter {
     public void makeParameter(String text) {
         List<String> splitText = split(text);
         addSplitTexts(splitText);
+        validateQueueSize();
     }
 
     private void addSplitTexts(List<String> splitText) {
