@@ -12,12 +12,12 @@ public class WinningLotto {
         this.winningNumbers = winningNumbers;
     }
 
-    public int calculateWinningCount(final Lotto lotto) {
+    public LottoReward calculateWinningResult(final Lotto lotto) {
         int matchCount = DEFAULT_COUNT;
         for (LottoNumber number : winningNumbers) {
             matchCount += countSameNumber(lotto, number);
         }
-        return matchCount;
+        return LottoReward.calculatePrize(matchCount);
     }
 
     private int countSameNumber(final Lotto lotto, final LottoNumber lottoNumber) {

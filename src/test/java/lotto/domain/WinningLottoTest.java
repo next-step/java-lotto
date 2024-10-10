@@ -21,6 +21,6 @@ class WinningLottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         WinningLotto winningLotto = new WinningLotto(winningNumbers);
 
-        assertThat(winningLotto.calculateWinningCount(lotto)).isEqualTo(3);
+        assertThat(winningLotto.calculateWinningResult(lotto)).isEqualTo(5000);
     }
 }

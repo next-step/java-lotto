@@ -28,4 +28,12 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
+
+    public List<LottoReward> calculateRewards(final WinningLotto winningLotto) {
+        List<LottoReward> rewards = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            rewards.add(winningLotto.calculateWinningResult(lotto));
+        }
+        return rewards;
+    }
 }

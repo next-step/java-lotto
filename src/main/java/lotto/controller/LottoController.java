@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -16,6 +17,8 @@ public class LottoController {
         LottoGenerator lottoGenerator = new LottoGenerator(InputView.getPurchasePrice());
         ResultView.printPurchaseLottoCount(lottoGenerator.getLottos());
         WinningLotto winningLotto = generateWinningLotto();
+        LottoResult lottoResult = lottoGenerator.calculateWinningLotto(winningLotto);
+        ResultView.printWinningStatistics(lottoResult.getResultMap());
     }
 
     private WinningLotto generateWinningLotto() {
