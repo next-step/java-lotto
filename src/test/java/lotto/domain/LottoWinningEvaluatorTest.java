@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoWinningEvaluatorTest {
     @Test
@@ -39,9 +40,12 @@ class LottoWinningEvaluatorTest {
         );
 
         final LottoWinningResults results = lottoWinningEvaluator.evaluate();
-        assertThat(results.winningCount(LottoRank.first())).isEqualTo(1);
-        assertThat(results.winningCount(LottoRank.third())).isEqualTo(0);
-        assertThat(results.winningCount(LottoRank.fourth())).isEqualTo(0);
-        assertThat(results.winningCount(LottoRank.fifth())).isEqualTo(0);
+
+        assertAll(
+            () -> assertThat(results.winningCount(LottoRank.first())).isEqualTo(1),
+            () -> assertThat(results.winningCount(LottoRank.third())).isEqualTo(0),
+            () -> assertThat(results.winningCount(LottoRank.fourth())).isEqualTo(0),
+            () -> assertThat(results.winningCount(LottoRank.fifth())).isEqualTo(0)
+        );
     }
 }
