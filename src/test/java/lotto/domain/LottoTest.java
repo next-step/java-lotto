@@ -2,8 +2,12 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -37,6 +41,17 @@ public class LottoTest {
     void numberIsOutOfRangeTest() {
         List<Integer> numbers = List.of(1, 2, 2, 3, 4, 500);
         assertThatIllegalArgumentException().isThrownBy(() -> Lotto.valueOf(0, numbers));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1:2:3:7:8:9,3","1:2:3:4:5:6,6","2:3:5:6:8:9,4","22:23:25:26:28:29,0"})
+    @DisplayName("로또 숫자 중에 매칭된 갯수만큼 값을 리턴한다.")
+    void getMatchCountTest(String value, String expected) {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = Lotto.valueOf(0, numbers);
+        List<Integer> winningNumbers = Arrays.stream(value.split(":")).map(Integer::parseInt).collect(Collectors.toList());
+        LottoNumbers targetNumbers = LottoNumbers.valueOf(winningNumbers);
+        assertThat(lotto.getMatchCount(targetNumbers)).isEqualTo(Integer.parseInt(expected));
     }
 
     @Test

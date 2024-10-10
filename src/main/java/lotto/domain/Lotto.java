@@ -24,6 +24,17 @@ public class Lotto {
         return this.lottoNum;
     }
 
+    public int getMatchCount(LottoNumbers winningNumbers) {
+        int matchCount = 0;
+        List<Integer> winningNumberList = winningNumbers.value();
+        for (int number : numbers.value()) {
+            if (winningNumberList.contains(number)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
