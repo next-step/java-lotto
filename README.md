@@ -15,7 +15,7 @@
   - [x] LottoResult 제거
   - [x] 로또 티켓 중복 처리를 위한 List -> Set 변경
   - [x] 로또 티켓과 WinningNumber 공통점 처리 -> 기능이 유사하여 LottoNumbers 객체로 통합
-  - [ ] List<LottoNumber> lottoNumbers Wrapping (로또 공)
+  - [x] List<LottoNumber> lottoBalls을 Wrapping (로또 공) 
 # STEP2 DONE
 - [x] 모든 기능은 TDD로 단위테스트 존재
 - [x] 핵심 로직과 UI담당로직 분리(InputView, ResultView)

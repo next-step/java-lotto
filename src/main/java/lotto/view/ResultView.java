@@ -1,39 +1,40 @@
 package lotto.view;
 
-import lotto.number.LottoNumbers;
+import lotto.prize.PrizeCount;
+import lotto.number.LottoBalls;
 import lotto.prize.LottoPrize;
 
 import java.util.List;
-import java.util.Map;
 
 public class ResultView {
     private static final int MIN_WINNING_MATCH_COUNT = 3;
 
-    public void showLottoResult(Map<Integer, Integer> result) {
+    public void showLottoResult(PrizeCount result) {
 
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        result.keySet().stream()
+        result.getResults().keySet().stream()
                 .filter(matchedLottoNumberCount -> matchedLottoNumberCount >= MIN_WINNING_MATCH_COUNT)
-                .forEach(lottoResult ->
+                .forEach(prize ->
                         System.out.printf("%d개 일치 (%d)원- %d개%n",
-                                lottoResult,
-                                LottoPrize.getPrizeAmount(lottoResult),
-                                result.get(lottoResult))
+                                prize,
+                                LottoPrize.getPrizeAmount(prize),
+                                result.calculateTotalPrize())
                 );
+
     }
 
     public void showLottoProfit(double profit) {
         System.out.printf("총 수익률은 %f입니다.%n", profit);
     }
 
-    public void showLottoTickets(List<LottoNumbers> lottoTickets) {
+    public void showLottoTickets(List<LottoBalls> lottoTickets) {
         System.out.println();
         System.out.printf("%d개를 구매했습니다.%n", lottoTickets.size());
 
-        for (LottoNumbers lottoNumbers : lottoTickets) {
-            System.out.println(lottoNumbers.toString());
+        for (LottoBalls lottoBalls : lottoTickets) {
+            System.out.println(lottoBalls.toString());
         }
 
     }

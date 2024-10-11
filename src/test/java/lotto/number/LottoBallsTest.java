@@ -10,21 +10,21 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class LottoNumbersTest {
+class LottoBallsTest {
 
     @DisplayName("로또 번호가 6개가 아니면 예외로 처리한다.")
     @Test
-    void fromSizeException() {
+    void sizeException() {
         assertThatIllegalArgumentException().isThrownBy(() ->
-                new LottoNumbers(List.of(1))
+                new LottoBalls(List.of(1))
         );
     }
 
     @DisplayName("중복된 로또 번호가 있으면 예외로 처리한다.")
     @Test
-    void fromDuplicateNumberException() {
+    void duplicateNumberException() {
         assertThatIllegalArgumentException().isThrownBy(() ->
-                new LottoNumbers(List.of(1, 1, 2, 3, 4, 5))
+                new LottoBalls(List.of(1, 1, 2, 3, 4, 5))
         );
     }
 
@@ -33,7 +33,7 @@ class LottoNumbersTest {
     @ValueSource(ints = {0, 46})
     void InvalidLottoNumberException(int invalidLottoNumber) {
         assertThatIllegalArgumentException().isThrownBy(() ->
-                new LottoNumbers(List.of(1, 2, 3, 4, 5, invalidLottoNumber))
+                new LottoBalls(List.of(1, 2, 3, 4, 5, invalidLottoNumber))
         );
     }
 
@@ -41,9 +41,9 @@ class LottoNumbersTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void match(int number) {
-        LottoNumbers lotto = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoBalls lotto = new LottoBalls(List.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(lotto.match(number)).isTrue();
+        assertThat(lotto.match(new LottoNumber(number))).isTrue();
     }
 
 }

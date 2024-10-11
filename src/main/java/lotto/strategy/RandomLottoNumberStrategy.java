@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.number.LottoNumbers.*;
+import static lotto.number.LottoBalls.*;
+import static lotto.number.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.number.LottoNumber.MIN_LOTTO_NUMBER;
 
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
@@ -21,7 +23,7 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     }
 
     private List<Integer> extractLottoNumbers(List<Integer> numbers) {
-        return numbers.subList(0, NUMBER_OF_LOTTO_NUMBERS);
+        return numbers.subList(0, NUMBER_OF_BALLS);
     }
 
     private List<Integer> initLottoNumbers() {
