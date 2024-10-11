@@ -13,7 +13,7 @@ public class LottoApplication {
         int price = inputInt(ResultView::printInputPrice);
         LottoGame lottoGame = new LottoGame(price);
         printLottoGames(lottoGame);
-        Lotto winningLotto = new Lotto(inputStr(ResultView::printLastWeekLotto));
+        Lotto winningLotto = new Lotto(inputLotto(ResultView::printLastWeekLotto));
 
         LottoResults lottoResults = lottoGame.makeLottoResult(winningLotto);
         printResults(lottoResults);

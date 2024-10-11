@@ -20,10 +20,10 @@ public class ResultView {
     }
 
     public static void printLottoGames(LottoGame lottoGame) {
-        int lottoCount = lottoGame.getLottoList().size();
+        int lottoCount = lottoGame.getLottos().size();
         printBuyLottoCount(lottoCount);
         for (int i = 0; i < lottoCount; i++) {
-            printLottoNumbers(lottoGame.getLottoList().get(i));
+            printLottoNumbers(lottoGame.getLottos().get(i));
         }
         System.out.println();
     }

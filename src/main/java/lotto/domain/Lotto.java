@@ -4,20 +4,18 @@ import java.util.*;
 
 public class Lotto {
     public static final String IS_NOT_LOTTO_SIZE = "번호가 6개가 아닙니다.";
-    public static final String BLINK_INPUT_ERROR = "입력된 값이 없습니다.";
-    public static final String INPUT_IS_NOT_NUMBER = "입력된 값이 숫자가 아닙니다.";
+    private static final String INPUT_IS_NOT_NUMBER = "입력된 값이 숫자가 아닙니다.";
     public static final String IS_NOT_LOTTO_NUMBER = "로또번호가 1~45가 아닙니다.";
-    private static final String DELIMETER = ",";
     private static final int LOTTO_MIN_NUM = 1;
     private static final int LOTTO_MAX_NUM = 45;
     private final List<Integer> lottoNumbers;
 
-    public Lotto() {
-        this(makeAutoLotto());
+    public static Lotto autoLotto() {
+        return new Lotto(makeAutoLotto());
     }
 
-    public Lotto(String input) {
-        List<Integer> lotto = splitInput(input);
+    public Lotto(String[] inputNumbers) {
+        List<Integer> lotto = splitInput(inputNumbers);
         validateLottoSetSize(lotto);
         this.lottoNumbers = makeSortLotto(lotto);
     }
@@ -27,13 +25,10 @@ public class Lotto {
         this.lottoNumbers = makeSortLotto(lottoNumbers);
     }
 
-    public List<Integer> splitInput(String input) {
-        validateNotNull(input);
-        String[] stringNumbers = input.split(DELIMETER);
-
+    public List<Integer> splitInput(String[] inputNumbers) {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < stringNumbers.length; i++) {
-            numbers.add(convertStringToInt(stringNumbers[i]));
+        for (String number : inputNumbers) {
+            numbers.add(convertStringToInt(number));
         }
         return numbers;
     }
@@ -44,16 +39,6 @@ public class Lotto {
         } catch (NumberFormatException ex) {
             throw new IllegalArgumentException(INPUT_IS_NOT_NUMBER);
         }
-    }
-
-    private void validateNotNull(String input) {
-        if (isBlank(input)) {
-            throw new IllegalArgumentException(BLINK_INPUT_ERROR);
-        }
-    }
-
-    private boolean isBlank(String input) {
-        return (input == null || input.trim().isEmpty());
     }
 
     private static List<Integer> makeAutoLotto() {
@@ -91,11 +76,11 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int getLottoResult(Lotto winningLotto) {
+    public LottoRank getLottoResult(Lotto winningLotto) {
         int equalCount = 0;
         List<Integer> winningLottoNumbers = winningLotto.getLottoNumbers();
-        for (int i = 0; i < winningLottoNumbers.size(); i++) {
-            equalCount += addCount(winningLottoNumbers.get(i));
+        for (int number : winningLottoNumbers) {
+            equalCount += addCount(number);
         }
         return getRank(equalCount);
     }
@@ -107,19 +92,7 @@ public class Lotto {
         return 0;
     }
 
-    private int getRank(int equalCount) {
-        if (equalCount == 6) {
-            return 1;
-        }
-        if (equalCount == 5) {
-            return 3;
-        }
-        if (equalCount == 4) {
-            return 4;
-        }
-        if (equalCount == 3) {
-            return 5;
-        }
-        return 6;
+    private LottoRank getRank(int equalCount) {
+        return LottoRank.matchRank(equalCount);
     }
 }

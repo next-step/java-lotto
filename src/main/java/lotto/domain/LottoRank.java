@@ -1,11 +1,14 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.EnumMap;
+
 public enum LottoRank {
-    FIRST(1, 2000000000, 6),
-    SECOND(2, 30000000, 6),
-    THIRD(3, 1500000, 5),
-    FOURTH(4, 50000, 4),
-    FIFTH(5, 5000, 3),
+    FIRST(1, 2_000_000_000, 6),
+    //    SECOND(2, 30000000, 6),
+    THIRD(3, 1_500_000, 5),
+    FOURTH(4, 50_000, 4),
+    FIFTH(5, 5_000, 3),
     NONE(0, 0, 0);
 
     private final int matchRank;
@@ -30,12 +33,18 @@ public enum LottoRank {
         return matchCount;
     }
 
-    public static LottoRank valueOf(int matchRank) {
-        for (LottoRank rank : values()) {
-            if (rank.getMatchRank() == matchRank) {
-                return rank;
-            }
+    public static LottoRank matchRank(int matchCount) {
+        return Arrays.stream(LottoRank.values())
+                .filter(it -> it.matchCount == matchCount)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public static EnumMap<LottoRank, Integer> initializePrizeCount() {
+        EnumMap<LottoRank, Integer> prizeCount = new EnumMap<>(LottoRank.class);
+        for (LottoRank rank : LottoRank.values()) {
+            prizeCount.put(rank, 0);
         }
-        return NONE;
+        return prizeCount;
     }
 }

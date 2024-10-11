@@ -1,20 +1,15 @@
 package lotto.domain;
 
-import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResults {
     private final Map<LottoRank, Integer> prizeCount;
 
     public LottoResults() {
-        prizeCount = new EnumMap<>(LottoRank.class);
-        for (LottoRank rank : LottoRank.values()) {
-            prizeCount.put(rank, 0);
-        }
+        prizeCount = LottoRank.initializePrizeCount();
     }
 
-    public void addResult(int lottoResult) {
-        LottoRank rank = LottoRank.valueOf(lottoResult);
+    public void addResult(LottoRank rank) {
         prizeCount.put(rank, prizeCount.getOrDefault(rank, 0) + 1);
     }
 

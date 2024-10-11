@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class LottoGame {
@@ -25,7 +24,7 @@ public class LottoGame {
     private List<Lotto> generateLotto(int count) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoList.add(new Lotto());
+            lottoList.add(Lotto.autoLotto());
         }
         return lottoList;
     }
@@ -40,21 +39,19 @@ public class LottoGame {
         return gameMoney;
     }
 
-    public List<Lotto> getLottoList() {
+    public List<Lotto> getLottos() {
         return lottoList;
     }
 
     public LottoResults makeLottoResult(Lotto winningLotto) {
-        for (int i = 0; i < lottoList.size(); i++) {
-            setLottoResult(lottoList.get(i).getLottoResult(winningLotto));
+        for (Lotto lotto : lottoList) {
+            setLottoResult(lotto.getLottoResult(winningLotto));
         }
         return lottoResults;
     }
 
-    private void setLottoResult(int rank) {
-        if (rank <= 5) {
-            lottoResults.addResult(rank);
-        }
+    private void setLottoResult(LottoRank rank) {
+        lottoResults.addResult(rank);
     }
 
     public String getEarnRate() {
