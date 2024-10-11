@@ -7,13 +7,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 45;
     private static final int LOTTO_PICK_COUNT = 6;
     private static final List<LottoNumber> ALL_LOTTO_NUMBERS;
 
     static {
-        ALL_LOTTO_NUMBERS = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
+        ALL_LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toUnmodifiableList());
     }
