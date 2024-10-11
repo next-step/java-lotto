@@ -79,6 +79,10 @@ public class LottoManager {
         return LottoMatchInfosDTO.valueOf(matchInfoDTOs);
     }
 
+    public PurchasedLottosDTO getPurchasedLottos(){
+        return PurchasedLottosDTO.valueOf(purchasedLottos);
+    }
+
     public LottoNumbers getWinningLottoNumbers() {
         return winningLottoNumbers;
     }
