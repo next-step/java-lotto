@@ -16,7 +16,6 @@ public class Buyer {
         initMember(initLotte(generator.genLottoNumbers(count)));
     }
 
-
     public Buyer(List<Lotto> lottoList) {
         initMember(lottoList);
     }
