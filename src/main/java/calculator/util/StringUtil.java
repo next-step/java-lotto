@@ -1,17 +1,30 @@
 package calculator.util;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class StringUtil {
 
+    private StringUtil() {
+        throw new IllegalStateException("유틸리티 클래스의 인스턴스를 생성할 수 없습니다.");
+    }
+
     public static boolean isEmpty(String input) {
-        if (input == null || input.length() == 0) {
+        if (input == null || input.isEmpty()) {
             return true;
         }
 
         String trimmed = input.trim();
-        if (trimmed.length() == 0) {
+
+        return trimmed.isEmpty();
+    }
+
+    public static boolean isEmpty(String[] array) {
+        if (array == null || array.length == 0) {
             return true;
         }
 
-        return false;
+        return Arrays.stream(array)
+                .noneMatch(Objects::nonNull);
     }
 }

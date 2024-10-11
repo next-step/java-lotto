@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import calculator.util.StringUtil;
+
 import java.util.List;
 import java.util.Set;
 
@@ -7,7 +9,7 @@ public class Operators {
 
     private final Set<String> BASIC_OPERATORS = Set.of("+", "-", "*", "/");
 
-    private List<String> operators;
+    private final List<String> operators;
 
     public Operators(String... operators) {
         validate(operators);
@@ -15,14 +17,11 @@ public class Operators {
     }
 
     private void validate(String[] operators) {
-        validateNullOrEmpty(operators);
-        validateOperators(operators);
-    }
-
-    private void validateNullOrEmpty(String[] operators) {
-        if (operators == null || operators.length == 0) {
+        if (StringUtil.isEmpty(operators)) {
             throw new IllegalArgumentException("연산자를 입력해 주세요.");
         }
+
+        validateOperators(operators);
     }
 
     private void validateOperators(String[] operators) {
