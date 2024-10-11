@@ -17,7 +17,6 @@ public class LottoGameTest {
         String lastWinnerLotto = "1, 2, 3, 4, 5, 6";
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto winnerLotto = LottoGame.getInstance().getWinnerLotto(lastWinnerLotto);
-        assertThat(winnerLotto.getLottoNumbers()).hasSize(6);
         assertThat(winnerLotto).isEqualTo(lotto);
     }
 
