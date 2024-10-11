@@ -1,16 +1,19 @@
 package lotto.domain;
 
-import java.util.List;
+import org.junit.jupiter.api.Test;
 
-public class LottoMatcher {
+import java.util.Arrays;
 
-    public static int match(List<Integer> lastWinningNumbers, List<Integer> userNumbers) {
-        int count = 0;
-        for (Integer lottoNumber : lastWinningNumbers) {
-            if (userNumbers.contains(lottoNumber)) {
-                count++;
-            }
-        }
-        return 0;
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class LottoMatcherTest {
+
+    @Test
+    void 로또번호_당첨갯수_1개() {
+        Lotto user = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumber = new Lotto("1, 4, 8, 9, 10, 11");
+
+        int result = LottoMatcher.match(user, winningNumber);
+        assertThat(result).isEqualTo(2);
     }
 }
