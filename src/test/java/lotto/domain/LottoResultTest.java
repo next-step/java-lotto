@@ -42,7 +42,7 @@ public class LottoResultTest {
         Lotto lotto4 = new Lotto(List.of(1, 2, 3, 7, 8, 9));
         List<Lotto> lottos = List.of(lotto1, lotto2, lotto3, lotto4);
         Lotto winner = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(LottoResult.getLottoResult(lottos, winner, 1000)).isEqualTo(new LottoResult(List.of(3, 4, 5, 6), 14000));
+        assertThat(LottoResult.getLottoResult(lottos, winner, 1000)).isEqualTo(new LottoResult(List.of(3, 4, 5, 6), 4000));
     }
 
     @Test

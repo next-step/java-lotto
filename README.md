@@ -43,9 +43,11 @@
 * controller에서 금액 삭제
 * parsing 로직 view로 이동
 * stream 속 변수 이름 구체화
+* enum 대문자로 변경
 
 
 ## Step2. 리팩토링 내용
 * 패키지 이동 (controller, ui 를 lotto 도메인 내부로 이동)
 * 로또 유효성 검사로직 추가 (6개, 1~45)
 * 상수 클래스 분리
+* 클래스 내 인스턴스 변수 메소드로 추출

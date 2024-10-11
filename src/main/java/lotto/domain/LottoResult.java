@@ -10,12 +10,7 @@ import java.util.Objects;
 public class LottoResult {
 
     private final List<Integer> result;
-    private int priceTotal;
     private final double returnRate;
-
-    public int getPriceTotal() {
-        return priceTotal;
-    }
 
     public double getReturnRate() {
         return returnRate;
@@ -23,27 +18,20 @@ public class LottoResult {
 
     public LottoResult(List<Integer> result, int buyPrice) {
         this.result = result;
-        for (Integer matchedNumber : result) {
-            priceTotal += LottoWinnerPrice.getPrice(matchedNumber);
-        }
-        returnRate = Math.round((double) priceTotal / buyPrice * 100.0) / 100.0;
+        this.returnRate = Math.round((double) getPriceTotal() / buyPrice * 100.0) / 100.0;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
+    int getPriceTotal() {
+        int result = 0;
+        for (Integer matchedNumber : this.result) {
+            result += LottoWinnerPrice.getPrice(matchedNumber);
         }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        LottoResult that = (LottoResult) object;
-        return priceTotal == that.priceTotal && Objects.equals(result, that.result);
+        return result;
     }
 
     public int getWinnerCount(int matchedNumber) {
         return (int) result.stream()
-                .filter(s -> s == matchedNumber)
+                .filter(count -> count == matchedNumber)
                 .count();
     }
 
@@ -56,4 +44,15 @@ public class LottoResult {
         return new LottoResult(result, lottos.size() * lottoPrice);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        LottoResult that = (LottoResult) object;
+        return Double.compare(getReturnRate(), that.getReturnRate()) == 0 && Objects.equals(result, that.result);
+    }
 }
