@@ -36,6 +36,15 @@
 * 최종 당첨금액과 구입금액을 비교해 수익률을 계산한다.
 
 ## Step2. 피드백 구현
-* 로또 유효성 검사로직 추가 (6개, 1~45)
 * Arrays.asList() -> List.of() 변경 (Arrays.asList는 값 변경 가능, null 허용)
- 
+* 로또 sort 로직 이동 (로또 번호 추출부)
+* ParameterizedTest로 중복 테스트 제거
+* 중복 테스트 제거 (isEqualTo로 했으면 size 비교는 중복)
+* controller에서 금액 삭제
+* parsing 로직 view로 이동
+
+
+## Step2. 리팩토링 내용
+* 패키지 이동 (controller, ui 를 lotto 도메인 내부로 이동)
+* 로또 유효성 검사로직 추가 (6개, 1~45)
+* 상수 클래스 분리

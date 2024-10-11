@@ -45,25 +45,8 @@ public class LottoGame {
         return Collections.unmodifiableList(result);
     }
 
-    public Lotto getWinnerLotto(String lastWinnerLotto) {
-        List<Integer> result = new ArrayList<>();
-        List<String> lottoNumbers = parseWinnerLotto(lastWinnerLotto);
-        for (String lottoNumber : lottoNumbers) {
-            result.add(parseNumber(lottoNumber));
-        }
-        return new Lotto(result);
+    public Lotto getWinnerLotto(List<Integer> lastWinnerLotto) {
+        return new Lotto(lastWinnerLotto);
     }
 
-    private int parseNumber(String lottoNumber) {
-        try {
-            return Integer.parseInt(lottoNumber);
-        } catch (NumberFormatException ex) {
-            throw new IllegalStateException("숫자 형식이 올바르지 않습니다.");
-        }
-    }
-
-    private List<String> parseWinnerLotto(String lastWinnerLotto) {
-        String text = lastWinnerLotto.replaceAll(" ", "");
-        return List.of(text.split(","));
-    }
 }

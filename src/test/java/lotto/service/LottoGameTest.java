@@ -14,7 +14,7 @@ public class LottoGameTest {
     @Test
     @DisplayName("지난 주 당첨 번호를 리스트로 변환한다.")
     void 당첨번호_리스트_변환() {
-        String lastWinnerLotto = "1, 2, 3, 4, 5, 6";
+        List<Integer> lastWinnerLotto = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto winnerLotto = LottoGame.getInstance().getWinnerLotto(lastWinnerLotto);
         assertThat(winnerLotto).isEqualTo(lotto);
