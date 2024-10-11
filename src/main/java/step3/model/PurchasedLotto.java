@@ -13,6 +13,11 @@ public class PurchasedLotto {
         this.purchasedLotto.add(lotto);
     }
 
+    //수동로또 추가
+    public void addManualLotto(ManualLotto manualLotto) {
+        this.purchasedLotto.addAll(manualLotto.getLottoList());
+    }
+
     public List<Lotto> getPurchasedLotto() {
         return purchasedLotto;
     }
