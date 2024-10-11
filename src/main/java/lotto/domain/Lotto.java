@@ -13,7 +13,6 @@ public class Lotto implements Comparable<Lotto> {
 
     public Lotto(List<Integer> lottoNumbers) {
         validateLottoNumber(lottoNumbers);
-        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 

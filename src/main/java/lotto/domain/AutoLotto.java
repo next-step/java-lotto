@@ -22,6 +22,8 @@ public class AutoLotto implements LottoStrategy {
     public Lotto getLotto(List<Integer> allList, int count) {
         List<Integer> copyList = new ArrayList<>(allList);
         Collections.shuffle(copyList, new Random());
-        return new Lotto(copyList.subList(0, count));
+        List<Integer> lottoNumbers = copyList.subList(0, count);
+        Collections.sort(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 }
