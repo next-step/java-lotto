@@ -37,7 +37,7 @@ public enum LottoRank {
         return Arrays.stream(LottoRank.values())
                 .filter(it -> it.matchCount == matchCount)
                 .findFirst()
-                .orElse(null);
+                .orElse(NONE);
     }
 
     public static EnumMap<LottoRank, Integer> initializePrizeCount() {

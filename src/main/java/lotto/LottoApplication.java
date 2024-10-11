@@ -14,7 +14,6 @@ public class LottoApplication {
         LottoGame lottoGame = new LottoGame(price);
         printLottoGames(lottoGame);
         Lotto winningLotto = new Lotto(inputLotto(ResultView::printLastWeekLotto));
-
         LottoResults lottoResults = lottoGame.makeLottoResult(winningLotto);
         printResults(lottoResults);
         printRatio(lottoGame.getEarnRate());

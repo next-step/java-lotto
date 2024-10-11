@@ -4,20 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-    public static final String CAN_NOT_BUY_LOTTO = "로또를 살 수 없는 금액입니다.";
-    public static final String CAN_NOT_BUY_LOTTO_AMOUNT = "로또는 1000원 단위로 구입 가능합니다.";
-    private static final int gamePrice = 1000;
-    private final int gameMoney;
+    private final LottoPrice lottoPrice;
     private final List<Lotto> lottoList;
     private final LottoResults lottoResults;
 
     public LottoGame(int gameMoney) {
-        this(gameMoney, new LottoResults());
+        this(new LottoPrice(gameMoney), new LottoResults());
     }
 
-    public LottoGame(int gameMoney, LottoResults lottoResults) {
-        this.gameMoney = validateGameMoney(gameMoney);
-        this.lottoList = generateLotto(gameMoney / gamePrice);
+    public LottoGame(LottoPrice lottoPrice, LottoResults lottoResults) {
+        this.lottoPrice = lottoPrice;
+        this.lottoList = generateLotto(lottoPrice.getLottoCount());
         this.lottoResults = lottoResults;
     }
 
@@ -27,16 +24,6 @@ public class LottoGame {
             lottoList.add(Lotto.autoLotto());
         }
         return lottoList;
-    }
-
-    private int validateGameMoney(int gameMoney) {
-        if (gameMoney <= 0) {
-            throw new IllegalArgumentException(CAN_NOT_BUY_LOTTO);
-        }
-        if (gameMoney % 1000 != 0) {
-            throw new IllegalArgumentException(CAN_NOT_BUY_LOTTO_AMOUNT);
-        }
-        return gameMoney;
     }
 
     public List<Lotto> getLottos() {
@@ -54,8 +41,7 @@ public class LottoGame {
         lottoResults.addResult(rank);
     }
 
-    public String getEarnRate() {
-        double rate = (double) lottoResults.getPrizeMoney() / gameMoney;
-        return String.format("%.2f", Math.floor(rate * 100) / 100);
+    public String getEarnRate(){
+        return lottoPrice.calculateEarnRate(lottoResults.getPrizeMoney());
     }
 }
