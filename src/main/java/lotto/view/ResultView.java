@@ -14,14 +14,15 @@ public class ResultView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        result.getResults().keySet().stream()
-                .filter(matchedLottoNumberCount -> matchedLottoNumberCount >= MIN_WINNING_MATCH_COUNT)
-                .forEach(prize ->
-                        System.out.printf("%d개 일치 (%d)원- %d개%n",
-                                prize,
-                                LottoPrize.getPrizeAmount(prize),
-                                result.calculateTotalPrize())
-                );
+        result.getResults().entrySet().stream()
+                .filter(entry -> entry.getKey() >= MIN_WINNING_MATCH_COUNT)
+                .forEach(entry -> {
+                    int matchedLottoNumberCount = entry.getKey();
+                    int matchedTicketCount = entry.getValue();
+                    int prizeAmount = LottoPrize.getPrizeAmount(matchedLottoNumberCount);
+
+                    System.out.printf("%d개 일치 (%d원) - %d개%n", matchedLottoNumberCount, prizeAmount, matchedTicketCount);
+                });
 
     }
 
