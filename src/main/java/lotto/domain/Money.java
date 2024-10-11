@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Money {
     public static final int MONEY_UNIT = 1000;
     public static final int MINIMUM_MONEY = 1000;
@@ -24,5 +26,18 @@ public class Money {
 
     public double calculateRate(final long gain) {
         return (double) gain / money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(money);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        final Money m = (Money) obj;
+        return money == m.money;
     }
 }
