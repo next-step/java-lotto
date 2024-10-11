@@ -13,6 +13,6 @@ class LottoPrizeTest {
     @CsvSource({"3,5000", "4,50000", "5,1500000", "6,2000000000"})
     void getLottoPrize(int matchedCount, int prize) {
 
-        assertThat(Prize.getPrizeAmount(matchedCount)).isEqualTo(prize);
+        assertThat(LottoPrize.getPrizeAmount(matchedCount)).isEqualTo(prize);
     }
 }

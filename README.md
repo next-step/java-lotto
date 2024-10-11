@@ -12,9 +12,9 @@
 # STEP2 TODO
 - [ ] 피드백
   - [x] prize를 enum으로 관리
+  - [x] LottoResult 제거
   - [ ] 로또 티켓과 WinningNumber 공통점 처리
   - [ ] 로또 티켓 중복 처리를 위한 List -> Set 변경
-  - [ ] LottoResult 제거
   - [ ] List<LottoNumber> lottoNumbers Wrapping (로또 공)
 # STEP2 DONE
 - [x] 모든 기능은 TDD로 단위테스트 존재

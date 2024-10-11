@@ -1,7 +1,6 @@
 package lotto.calculator;
 
 import lotto.game.LottoMachine;
-import lotto.result.LottoResult;
 import lotto.strategy.FixedLottoNumberStrategy;
 import lotto.ticket.LottoTicket;
 import lotto.winningnumber.WinningNumber;
@@ -23,7 +22,7 @@ class LottoProfitCalculatorTest {
         List<LottoTicket> lottoTickets = lottoMachine.generateTickets(1000);
 
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
-        Map<LottoResult, Integer> lottoResult = lottoResultCalculator.calculateResult();
+        Map<Integer, Integer> lottoResult = lottoResultCalculator.calculateResult();
         LottoProfitCalculator lottoProfitCalculator = new LottoProfitCalculator(lottoResult);
 
         double result = lottoProfitCalculator.calculateProfitRate(lottoTickets.size());
@@ -40,7 +39,7 @@ class LottoProfitCalculatorTest {
         List<LottoTicket> lottoTickets = lottoMachine.generateTickets(10000);
 
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
-        Map<LottoResult, Integer> lottoResult = lottoResultCalculator.calculateResult();
+        Map<Integer, Integer> lottoResult = lottoResultCalculator.calculateResult();
         LottoProfitCalculator lottoProfitCalculator = new LottoProfitCalculator(lottoResult);
 
         double result = lottoProfitCalculator.calculateProfitRate(lottoTickets.size());

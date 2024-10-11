@@ -1,7 +1,6 @@
 package lotto.calculator;
 
-import lotto.prize.Prize;
-import lotto.result.LottoResult;
+import lotto.prize.LottoPrize;
 
 import java.util.Map;
 
@@ -9,9 +8,9 @@ import static lotto.game.LottoMachine.LOTTO_PRICE;
 
 public class LottoProfitCalculator {
 
-    private final Map<LottoResult, Integer> lottoResults;
+    private final Map<Integer, Integer> lottoResults;
 
-    public LottoProfitCalculator(Map<LottoResult, Integer> lottoResults) {
+    public LottoProfitCalculator(Map<Integer, Integer> lottoResults) {
         this.lottoResults = lottoResults;
     }
 
@@ -23,7 +22,7 @@ public class LottoProfitCalculator {
 
     private int calculateTotalPrize() {
         return lottoResults.entrySet().stream()
-                .mapToInt(entry -> Prize.getPrizeAmount(entry.getKey().getMatchedLottoNumbersCount()) * entry.getValue())
+                .mapToInt(entry -> LottoPrize.getPrizeAmount(entry.getKey()) * entry.getValue())
                 .sum();
     }
 

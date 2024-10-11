@@ -1,8 +1,7 @@
 package lotto.calculator;
 
-import lotto.winningnumber.WinningNumber;
-import lotto.result.LottoResult;
 import lotto.ticket.LottoTicket;
+import lotto.winningnumber.WinningNumber;
 
 import java.util.List;
 import java.util.Map;
@@ -20,19 +19,19 @@ public class LottoResultCalculator {
         this.winningNumber = winningNumber;
     }
 
-    public Map<LottoResult, Integer> calculateResult() {
-        Map<LottoResult, Integer> lottoResults = initLottoResult();
+    public Map<Integer, Integer> calculateResult() {
+        Map<Integer, Integer> lottoResults = initLottoResult();
         lottoTickets.forEach(lottoTicket -> {
-            LottoResult result = new LottoResult(winningNumber.matchLottoNumbers(lottoTicket));
-            lottoResults.put(result, lottoResults.getOrDefault(result, DEFAULT_MATCHED_LOTTO_NUMBER_COUNT) + LOTTO_NUMBER_HIT);
+            int matchedLottoNumbersCount = winningNumber.matchLottoNumbers(lottoTicket);
+            lottoResults.put(matchedLottoNumbersCount, lottoResults.getOrDefault(matchedLottoNumbersCount, DEFAULT_MATCHED_LOTTO_NUMBER_COUNT) + LOTTO_NUMBER_HIT);
         });
         return lottoResults;
     }
 
-    private Map<LottoResult, Integer> initLottoResult() {
-        Map<LottoResult, Integer> lottoResults = new TreeMap<>();
+    private Map<Integer, Integer> initLottoResult() {
+        Map<Integer, Integer> lottoResults = new TreeMap<>();
         for (int numberOfMatched = 0; numberOfMatched <= LottoTicket.NUMBER_OF_LOTTO_NUMBERS; numberOfMatched++) {
-            lottoResults.put(new LottoResult(numberOfMatched), DEFAULT_MATCHED_LOTTO_NUMBER_COUNT);
+            lottoResults.put(numberOfMatched, DEFAULT_MATCHED_LOTTO_NUMBER_COUNT);
         }
         return lottoResults;
     }

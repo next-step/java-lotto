@@ -3,7 +3,6 @@ package lotto.game;
 
 import lotto.calculator.LottoProfitCalculator;
 import lotto.calculator.LottoResultCalculator;
-import lotto.result.LottoResult;
 import lotto.strategy.RandomLottoNumberStrategy;
 import lotto.ticket.LottoTicket;
 import lotto.view.InputView;
@@ -33,7 +32,7 @@ public class LottoGame {
         WinningNumber winningNumber = WinningNumber.from(winningNumbers);
 
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
-        Map<LottoResult, Integer> lottoResult = lottoResultCalculator.calculateResult();
+        Map<Integer, Integer> lottoResult = lottoResultCalculator.calculateResult();
 
         LottoProfitCalculator profitCalculator = new LottoProfitCalculator(lottoResult);
         double profitRate = profitCalculator.calculateProfitRate(lottoTickets.size());
