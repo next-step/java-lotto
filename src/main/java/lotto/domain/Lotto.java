@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -11,9 +12,21 @@ public class Lotto {
         return new Lotto(generater.generate());
     }
 
+    public Lotto(final int... numbers){
+        this(convertIntToLottoNumber(numbers));
+    }
+
     public Lotto(final List<LottoNumber> numbers){
         this.numbers = numbers;
         this.validateNumbers();
+    }
+
+    private static List<LottoNumber> convertIntToLottoNumber(int[] winningNumbers) {
+        List<LottoNumber> numbers = new ArrayList<>();
+        for (int winningNumber : winningNumbers) {
+            numbers.add(new LottoNumber(winningNumber));
+        }
+        return numbers;
     }
 
     //region [validateNumbers]
@@ -39,8 +52,12 @@ public class Lotto {
     }
     //endregion
 
-    public boolean hasNumber(LottoNumber winningNumber) {
-        return this.numbers.contains(winningNumber);
+    public boolean hasNumber(int winningNumber) {
+        return this.numbers.contains(new LottoNumber(winningNumber));
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
     @Override

@@ -11,6 +11,10 @@ public class WinningNumbers {
 
     private final List<LottoNumber> winningNumbers;
 
+    public WinningNumbers(final int... winningNumbers) {
+        this(convertIntToLottoNumber(winningNumbers));
+    }
+
     public WinningNumbers(final List<LottoNumber> winningNumbers) {
         this.winningNumbers = winningNumbers;
         this.validateNumbers();
@@ -18,6 +22,14 @@ public class WinningNumbers {
 
     public static WinningNumbers create(final String numbers){
         return new WinningNumbers(createNumbers(numbers));
+    }
+
+    private static List<LottoNumber> convertIntToLottoNumber(int[] winningNumbers) {
+        List<LottoNumber> numbers = new ArrayList<>();
+        for (int winningNumber : winningNumbers) {
+            numbers.add(new LottoNumber(winningNumber));
+        }
+        return numbers;
     }
 
     private static List<LottoNumber> createNumbers(String numbers) {

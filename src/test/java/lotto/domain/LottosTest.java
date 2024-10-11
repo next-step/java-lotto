@@ -22,7 +22,7 @@ public class LottosTest {
     @Test
     void countMatchingNumbers(){
         Lottos lottos = createLottos();
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(1, 2, 3, 4, 5, 6);
 
         /*
         첫번째 복권 당첨번호와 번호 같은 갯수 : 6
@@ -43,8 +43,8 @@ public class LottosTest {
     private Lottos createLottos() {
         Lottos lottos = new Lottos(
                 List.of(
-                        new Lotto(List.of(1, 2, 3, 4, 5, 6))
-                        , new Lotto(List.of(7, 8, 9, 10, 11, 12))
+                        new Lotto(1, 2, 3, 4, 5, 6)
+                        , new Lotto(7, 8, 9, 10, 11, 12)
                 )
         );
         return lottos;

@@ -14,7 +14,14 @@ public class LottoTest {
     @DisplayName("매개변수로 넣은 숫자가 로또번호에 있는지 확인 가능하다")
     @Test
     void createLotto() {
-        LottoNumbersGenerater numbersGenerater = () -> List.of(1, 3, 5, 7, 9, 11);
+        LottoNumbersGenerater numbersGenerater = () -> List.of(
+                new LottoNumber(1),
+                new LottoNumber(3),
+                new LottoNumber(5),
+                new LottoNumber(7),
+                new LottoNumber(9),
+                new LottoNumber(11)
+        );
         Lotto lotto = Lotto.create(numbersGenerater);
 
         assertTrue(lotto.hasNumber(1));
@@ -28,27 +35,28 @@ public class LottoTest {
     @DisplayName("로또는 6개의 숫자만 입력되어야 한다")
     @Test
     void limitCount(){
-        LottoNumbersGenerater numbersGenerater = () -> List.of(1, 2, 3);
+        LottoNumbersGenerater numbersGenerater = () -> List.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3)
+        );
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.create(numbersGenerater))
                 .withMessage("로또 번호를 6개 입력하세요");
     }
 
-    @DisplayName("로또는 1-45범위 내에서 입력되어야 한다")
-    @Test
-    void limitRange(){
-        LottoNumbersGenerater numbersGenerater = () -> List.of(0, 46, 47, 1, 2, 3);
-
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.create(numbersGenerater))
-                .withMessage("1-45범위 내의 로또 번호를 입력하세요");
-    }
-
     @DisplayName("로또는 중복된 번호가 없어야 한다")
     @Test
     void checkDuplicateNumber(){
-        LottoNumbersGenerater numbersGenerater = () -> List.of(1, 1, 1, 3, 4, 5);
+        LottoNumbersGenerater numbersGenerater = () -> List.of(
+                new LottoNumber(1),
+                new LottoNumber(1),
+                new LottoNumber(1),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5)
+        );
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.create(numbersGenerater))

@@ -17,12 +17,12 @@ public class LottoResultTest {
     void setUp() {
         lottos = new Lottos(
                 List.of(
-                        new Lotto(List.of(1, 2, 3, 10, 12, 13)),
-                        new Lotto(List.of(1, 2, 3, 4, 12, 13)),
-                        new Lotto(List.of(1, 2, 3, 4, 13, 14))
+                        new Lotto(1, 2, 3, 10, 12, 13),
+                        new Lotto(1, 2, 3, 4, 12, 13),
+                        new Lotto(1, 2, 3, 4, 13, 14)
                 )
         );
-        winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
+        winningNumbers = new WinningNumbers(1, 2, 3, 4, 5, 6);
     }
 
     @DisplayName("내가 구매한 로또들이 몇 등의 몇 번 당첨됐는지 확인이 가능하다")
