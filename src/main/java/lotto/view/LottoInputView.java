@@ -24,7 +24,7 @@ public class LottoInputView {
     }
 
     public LottoNumber inputBonusLottoNumber() {
-        writer.write("보너 볼을 입력해 주세요.");
+        writer.write("보너스 볼을 입력해 주세요.");
         return new LottoNumber(reader.readInt());
     }
 
