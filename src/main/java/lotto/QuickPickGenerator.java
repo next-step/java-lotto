@@ -21,11 +21,4 @@ public class QuickPickGenerator implements LottoNumberGenerator {
         return generatedNumbers;
     }
 
-    public static void main(String[] args) {
-        QuickPickGenerator q = new QuickPickGenerator();
-        List<List<Integer>> nbs = q.genLottoNumbers(5);
-        System.out.println(nbs.size());
-        System.out.println(nbs.toString());
-    }
-
 }

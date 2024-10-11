@@ -10,16 +10,21 @@ import java.util.Map;
 
 public class Buyer {
     private static final BigDecimal UNIT_AMOUNT = new BigDecimal(1000);
-    private List<Lotto> lottos;
+    private List<Lotto> lottoList;
     private int count;
 
     public Buyer(int count, LottoNumberGenerator generator) {
-        new Buyer( initLotte(generator.genLottoNumbers(count)));
+        initMember(initLotte(generator.genLottoNumbers(count)));
     }
 
-    public Buyer(List<Lotto> lottos) {
-        this.count = lottos.size();
-        this.lottos = lottos;
+
+    public Buyer(List<Lotto> lottoList) {
+        initMember(lottoList);
+    }
+
+    private void initMember(List<Lotto> lottoList) {
+        this.count = lottoList.size();
+        this.lottoList = lottoList;
     }
     private List<Lotto> initLotte(List<List<Integer>> lists) {
         List<Lotto> lottos = new ArrayList<>();
@@ -31,7 +36,7 @@ public class Buyer {
 
     public BigDecimal getRateOfReturn(List<Integer> winningNumbers) {
         BigDecimal sum = BigDecimal.ZERO;
-        for (Lotto lt : this.lottos) {
+        for (Lotto lt : this.lottoList) {
             LottoRankingEnum rank = lt.getRanking(winningNumbers);
             sum = sum.add(rank.getWinningAmount());
         }
@@ -43,7 +48,7 @@ public class Buyer {
 
     public Map<LottoRankingEnum, Integer> getWinningResult(List<Integer> winningNumbers) {
         Map<LottoRankingEnum, Integer> winningResult = new HashMap<>();
-        for (Lotto lt : lottos) {
+        for (Lotto lt : lottoList) {
             addResult(lt.getRanking(winningNumbers), winningResult);
         }
         return winningResult;
@@ -63,6 +68,7 @@ public class Buyer {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return this.lottoList;
     }
+
 }

@@ -16,4 +16,8 @@ public class Lotto {
         int matchCnt = (int) targetNumbers.stream().filter(x -> lottoNumbers.contains(x)).count();
         return LottoRankingEnum.getEnumByMatchCount(matchCnt);
     }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
