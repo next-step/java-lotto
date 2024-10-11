@@ -23,6 +23,7 @@ public class LottoGenerator {
             numbers.add(num);
         }
         Collections.shuffle(numbers);
+        Collections.sort(numbers);
         return new Lotto(numbers.subList(0, 6));
     }
 }
