@@ -9,6 +9,7 @@ public class LottoController {
     public void start() {
         final LottoInputView lottoInputView = ConsoleViewFactory.createLottoInputView();
         final Money money = lottoInputView.inputMoney();
+        final LottoNumber bonusLottoNumber = lottoInputView.inputBonusLottoNumber();
         final LottoBundle lottoBundle = purchaseLottoBundle(money);
         lottoInputView.displayPurchaseLottoBundle(lottoBundle);
         final Lotto lastWeekWinningLotto = lottoInputView.inputLastWeekWinningLotto();
