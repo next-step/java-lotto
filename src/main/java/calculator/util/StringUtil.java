@@ -1,8 +1,6 @@
 package calculator.util;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class StringUtil {
 
@@ -36,5 +34,15 @@ public class StringUtil {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자를 입력해 주세요.");
         }
+    }
+
+    public static List<String> splitBySpace(String input) {
+        if (isEmpty(input)) {
+            return new ArrayList<>();
+        }
+
+        String[] split = input.split(" ");
+
+        return Arrays.asList(split);
     }
 }

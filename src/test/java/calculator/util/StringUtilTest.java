@@ -3,8 +3,11 @@ package calculator.util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -53,5 +56,17 @@ class StringUtilTest {
     void toInt는_정확한_숫자만_처리할_수_있다(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> StringUtil.toInt(input))
                 .withMessage("숫자를 입력해 주세요.");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1 2 3-1,2,3", "4    5 6-4,,,,5,6", "78 9   -78,9"}, delimiter = '-')
+    void splitBySpace는_빈칸_하나를_구분자로_분리한다(String input, String expected) {
+        assertThat(StringUtil.splitBySpace(input)).containsExactly(expected.split(","));
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void splitBySpace_빈문자열을_받으면_빈리스트를_반환한다(String input) {
+        assertThat(StringUtil.splitBySpace(input)).isEmpty();
     }
 }
