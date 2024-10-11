@@ -2,33 +2,18 @@ package lotto.enums;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoWinnerPriceTest {
 
-    @Test
-    @DisplayName("여섯개가 맞으면 1등 상금을 반환한다.")
-    void 일등_상금_반환() {
-        assertThat(LottoWinnerPrice.getPrice(6)).isEqualTo(2000000000);
-    }
-
-    @Test
-    @DisplayName("다섯개가 맞으면 2등 상금을 반환한다.")
-    void 이등_상금_반환() {
-        assertThat(LottoWinnerPrice.getPrice(5)).isEqualTo(1500000);
-    }
-
-    @Test
-    @DisplayName("네개가 맞으면 3등 상금을 반환한다.")
-    void 삼등_상금_반환() {
-        assertThat(LottoWinnerPrice.getPrice(4)).isEqualTo(50000);
-    }
-
-    @Test
-    @DisplayName("세개가 맞으면 4등 상금을 반환한다.")
-    void 사등_상금_반환() {
-        assertThat(LottoWinnerPrice.getPrice(3)).isEqualTo(5000);
+    @ParameterizedTest
+    @DisplayName("맞은 개수에 따라 상금을 반환한다.")
+    @CsvSource(value = {"6,2000000000", "5,1500000", "4,50000", "3,5000"})
+    void 상금_반환(int matchCount, int price) {
+        assertThat(LottoWinnerPrice.getPrice(matchCount)).isEqualTo(price);
     }
 
     @Test
