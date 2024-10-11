@@ -1,10 +1,10 @@
-package controller;
+package lotto.controller;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.service.LottoGame;
-import view.InputView;
-import view.ResultView;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.List;
 

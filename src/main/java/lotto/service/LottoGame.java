@@ -12,9 +12,11 @@ public class LottoGame {
     private static final List<Integer> lottoNumbers = new ArrayList<>();
     public static final int LOTTO_PRICE = 1000;
     public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int LOTTO_START_NUMBER = 1;
+    public static final int LOTTO_END_NUMBER = 45;
 
     private LottoGame() {
-        IntStream.rangeClosed(1, 45)
+        IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
                 .forEach(lottoNumbers::add);
     }
 
@@ -29,7 +31,7 @@ public class LottoGame {
 
 
     public int getLottoCount(int priceTotal) {
-        if (priceTotal < 1000) {
+        if (priceTotal < LOTTO_PRICE) {
             throw new IllegalStateException("금액이 부족합니다.");
         }
         return priceTotal / LOTTO_PRICE;
