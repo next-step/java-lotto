@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /*
 - 로또 번호를 체크한다.
 - 객체를 비교한다.
+- 무작위 숫자로 입력받으면 정렬을 한다.
 */
 public class LottoTest extends GlobalTest {
 
@@ -28,5 +29,13 @@ public class LottoTest extends GlobalTest {
         Lotto lotto = createLotto(1, 2, 3, 4, 5, 6);
 
         assertThat(lotto).isEqualTo(createLotto(1, 2, 3, 4, 5, 6));
+    }
+
+    @DisplayName("무작위 숫자로 입력받으면 정렬을 한다.")
+    @Test
+    void sortLottoTest() {
+        Lotto lotto = createLotto(30, 10, 3, 4, 5, 6);
+
+        assertThat(lotto).isEqualTo(createLotto(3, 4, 5, 6, 10, 30));
     }
 }
