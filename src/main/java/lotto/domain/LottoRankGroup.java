@@ -8,11 +8,11 @@ public class LottoRankGroup {
 
     public LottoRankGroup() {
         this.lottoRankGroup = new HashMap<>();
-        lottoRankGroup.put(LottoRank.first(), new LottoBundle());
-        lottoRankGroup.put(LottoRank.third(), new LottoBundle());
-        lottoRankGroup.put(LottoRank.fourth(), new LottoBundle());
-        lottoRankGroup.put(LottoRank.fifth(), new LottoBundle());
-        lottoRankGroup.put(LottoRank.none(), new LottoBundle());
+        lottoRankGroup.put(LottoRank.FIRST, new LottoBundle());
+        lottoRankGroup.put(LottoRank.THIRD, new LottoBundle());
+        lottoRankGroup.put(LottoRank.FOURTH, new LottoBundle());
+        lottoRankGroup.put(LottoRank.FIFTH, new LottoBundle());
+        lottoRankGroup.put(LottoRank.NONE, new LottoBundle());
     }
 
     public void addLotto(final LottoRank rank, final Lotto lotto) {

@@ -12,8 +12,8 @@ class LottoRankGroupTest {
     void shouldAddLottoBundle() {
         final LottoRankGroup group = new LottoRankGroup();
 
-        group.addLotto(LottoRank.first(), new Lotto(LottoNumberGenerator.shuffleAndPickLottoNumbers()));
+        group.addLotto(LottoRank.FIRST, new Lotto(LottoNumberGenerator.shuffleAndPickLottoNumbers()));
 
-        assertThat(group.getLottoBundleByRank(LottoRank.first())).hasSize(1);
+        assertThat(group.getLottoBundleByRank(LottoRank.FIRST)).hasSize(1);
     }
 }

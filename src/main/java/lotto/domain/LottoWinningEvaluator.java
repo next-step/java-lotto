@@ -16,16 +16,16 @@ public class LottoWinningEvaluator {
 
         for (final Lotto lotto : lottoBundle) {
             final int matchedCount = lotto.matchCount(evaluationLotto);
-            final LottoRank lottoRank = LottoRank.findLottoRankByMatchedCount(matchedCount);
+            final LottoRank lottoRank = LottoRank.findLottoRankByMatchedNumber(matchedCount);
             lottoRankGroup.addLotto(lottoRank, lotto);
         }
 
         return new LottoWinningResults(
             List.of(
-                createLottoWinningResult(lottoRankGroup, LottoRank.first()),
-                createLottoWinningResult(lottoRankGroup, LottoRank.third()),
-                createLottoWinningResult(lottoRankGroup, LottoRank.fourth()),
-                createLottoWinningResult(lottoRankGroup, LottoRank.fifth())
+                createLottoWinningResult(lottoRankGroup, LottoRank.FIRST),
+                createLottoWinningResult(lottoRankGroup, LottoRank.THIRD),
+                createLottoWinningResult(lottoRankGroup, LottoRank.FOURTH),
+                createLottoWinningResult(lottoRankGroup, LottoRank.FIFTH)
             )
         );
     }

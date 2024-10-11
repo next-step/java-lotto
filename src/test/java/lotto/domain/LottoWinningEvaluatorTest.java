@@ -23,7 +23,7 @@ class LottoWinningEvaluatorTest {
         );
 
         final LottoWinningResults results = lottoWinningEvaluator.evaluate();
-        assertThat(results.winningCount(LottoRank.first())).isEqualTo(2);
+        assertThat(results.winningCount(LottoRank.FIRST)).isEqualTo(2);
     }
 
     @Test
@@ -42,10 +42,10 @@ class LottoWinningEvaluatorTest {
         final LottoWinningResults results = lottoWinningEvaluator.evaluate();
 
         assertAll(
-            () -> assertThat(results.winningCount(LottoRank.first())).isEqualTo(1),
-            () -> assertThat(results.winningCount(LottoRank.third())).isEqualTo(0),
-            () -> assertThat(results.winningCount(LottoRank.fourth())).isEqualTo(0),
-            () -> assertThat(results.winningCount(LottoRank.fifth())).isEqualTo(0)
+            () -> assertThat(results.winningCount(LottoRank.FIRST)).isEqualTo(1),
+            () -> assertThat(results.winningCount(LottoRank.THIRD)).isEqualTo(0),
+            () -> assertThat(results.winningCount(LottoRank.FOURTH)).isEqualTo(0),
+            () -> assertThat(results.winningCount(LottoRank.FIFTH)).isEqualTo(0)
         );
     }
 }

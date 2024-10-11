@@ -8,21 +8,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoRankTest {
     @Test
-    @DisplayName("당첨 된 번호 개수를 넘기면 그에 맞는 랭크가 반환된다.")
-    void shouldReturnCorrectRank() {
-        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedCount(FIRST_RANK_MATCH_NUMBER);
-
-        assertThat(lottoRankByMatchedCount).isEqualTo(first());
-    }
-
-    @Test
     @DisplayName("6개의 번호가 일치하다면, 1등이 반환된다.")
     void shouldReturnFirstRankWhenMatchedCountIsSix() {
         final int matchedCount = 6;
 
-        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedCount(matchedCount);
+        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedNumber(matchedCount);
 
-        assertThat(lottoRankByMatchedCount).isEqualTo(first());
+        assertThat(lottoRankByMatchedCount).isEqualTo(FIRST);
     }
 
     @Test
@@ -30,9 +22,9 @@ class LottoRankTest {
     void shouldReturnThirdRankWhenMatchedCountIsFive() {
         final int matchedCount = 5;
 
-        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedCount(matchedCount);
+        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedNumber(matchedCount);
 
-        assertThat(lottoRankByMatchedCount).isEqualTo(third());
+        assertThat(lottoRankByMatchedCount).isEqualTo(THIRD);
     }
 
     @Test
@@ -40,9 +32,9 @@ class LottoRankTest {
     void shouldReturnFourthRankWhenMatchedCountIsFour() {
         final int matchedCount = 4;
 
-        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedCount(matchedCount);
+        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedNumber(matchedCount);
 
-        assertThat(lottoRankByMatchedCount).isEqualTo(fourth());
+        assertThat(lottoRankByMatchedCount).isEqualTo(FOURTH);
     }
 
     @Test
@@ -50,8 +42,18 @@ class LottoRankTest {
     void shouldReturnFifthRankWhenMatchedCountIsThree() {
         final int matchedCount = 3;
 
-        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedCount(matchedCount);
+        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedNumber(matchedCount);
 
-        assertThat(lottoRankByMatchedCount).isEqualTo(fifth());
+        assertThat(lottoRankByMatchedCount).isEqualTo(FIFTH);
+    }
+
+    @Test
+    @DisplayName("2개 이하의 번호가 일치하면, NONE 가 반환된다.")
+    void shouldReturnSixthRankWhenMatchedCountIsTwo() {
+        final int matchedCount = 2;
+
+        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedNumber(matchedCount);
+
+        assertThat(lottoRankByMatchedCount).isEqualTo(NONE);
     }
 }

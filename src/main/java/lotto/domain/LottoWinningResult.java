@@ -18,6 +18,6 @@ public class LottoWinningResult {
     }
 
     public long totalWinningPrice() {
-        return (long) rank.getWinningPrice() * winningLottoBundle.size();
+        return rank.calculateWinningPrice(winningLottoBundle.size());
     }
 }
