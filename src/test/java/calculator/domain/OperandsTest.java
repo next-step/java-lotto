@@ -1,9 +1,14 @@
 package calculator.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Iterator;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class OperandsTest {
@@ -20,5 +25,17 @@ class OperandsTest {
     void 피연산자는_숫자다(String operand) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Operands(operand))
                 .withMessage("숫자를 입력해 주세요.");
+    }
+
+    @Test
+    void iterator를_제공한다() {
+        Operands operands = new Operands("1", "2", "3");
+        List<Integer> list = List.of(1, 2, 3);
+        Iterator<Integer> operandsIterator = operands.iterator();
+        Iterator<Integer> listIterator = list.iterator();
+
+        while (operandsIterator.hasNext()) {
+            assertThat(operandsIterator.next()).isEqualTo(listIterator.next());
+        }
     }
 }

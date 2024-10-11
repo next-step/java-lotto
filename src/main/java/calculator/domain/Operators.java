@@ -2,6 +2,7 @@ package calculator.domain;
 
 import calculator.util.StringUtil;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -34,5 +35,9 @@ public class Operators {
         if (!BASIC_OPERATORS.contains(operator)) {
             throw new IllegalArgumentException("사용할 수 없는 연산자입니다. : " + operator);
         }
+    }
+
+    public Iterator<String> iterator() {
+        return operators.iterator();
     }
 }
