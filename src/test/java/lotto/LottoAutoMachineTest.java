@@ -4,6 +4,7 @@ import lotto.constant.Prize;
 import lotto.domain.Lotto;
 import lotto.domain.LottoAutoMachine;
 import lotto.domain.LottoMachine;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;
@@ -15,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoAutoMachineTest {
 
     @Test
+    @DisplayName("로또 자동 생성 테스트")
     void create() {
         LottoMachine machine = new LottoAutoMachine(10000);
         List<Lotto> lottoList = machine.create();
@@ -22,6 +24,7 @@ public class LottoAutoMachineTest {
     }
 
     @Test
+    @DisplayName("전 주 당첨 번호와 로또 번호 일치 테스트")
     void match() {
         LottoMachine machine = new LottoAutoMachine(10000);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
@@ -33,6 +36,7 @@ public class LottoAutoMachineTest {
     }
 
     @Test
+    @DisplayName("수익률 계산 테스트")
     void calculateProfitRate() {
         EnumMap<Prize, Integer> prizeCountMap = new EnumMap<>(Prize.class);
         prizeCountMap.put(Prize.FOURTH, 1);
