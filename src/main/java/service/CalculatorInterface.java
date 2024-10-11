@@ -1,5 +1,5 @@
 package service;
 
-public interface CalculatorImpl {
+public interface CalculatorInterface {
     int calculate(int number, int number2);
 }

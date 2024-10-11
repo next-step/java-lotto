@@ -10,14 +10,11 @@ public class Calculator {
         Input input = new Input();
         String inputValue = input.inputValue();
 
-        // 로직
-
         CalculatorService calculatorService = new CalculatorService();
-        Integer calculatedValue = calculatorService.calculate(inputValue);
+        int calculatedValue = calculatorService.calculate(inputValue);
 
         Output output = new Output();
         output.outputValue(calculatedValue);
-
     }
 
 }

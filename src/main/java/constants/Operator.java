@@ -1,27 +1,29 @@
 package constants;
 
+import service.*;
+
 import java.util.Arrays;
 
 public enum Operator {
-      PLUS("PLUS", "+")
-    , MINUS("MINUS", "-")
-    , MULTIPLICATION("MULTIPLICATION", "*")
-    , DIVISION("DIVISION", "/");
+      PLUS("+", new Plus())
+    , MINUS("-", new Minus())
+    , MULTIPLICATION("*", new Multiplication())
+    , DIVISION("/", new Division());
 
-      private final String code;
       private final String operator;
+      private final CalculatorInterface calculatorInterface;
 
-      Operator(String code, String operator) {
-          this.code = code;
+      Operator(String operator, CalculatorInterface calculatorInterface) {
           this.operator = operator;
+          this.calculatorInterface = calculatorInterface;
       }
 
-    public String getCode() {
-        return code;
+    private String getOperator() {
+        return operator;
     }
 
-    public String getOperator() {
-        return operator;
+    public CalculatorInterface getCalculatorInterface() {
+        return calculatorInterface;
     }
 
     static public Operator find(String value) {
@@ -30,4 +32,5 @@ public enum Operator {
                   .findAny()
                   .orElse(null);
     }
+
 }

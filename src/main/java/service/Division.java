@@ -1,6 +1,6 @@
 package service;
 
-public class Division implements CalculatorImpl {
+public class Division implements CalculatorInterface {
 
     @Override
     public int calculate(int number1, int number2) {
