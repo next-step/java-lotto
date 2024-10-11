@@ -1,5 +1,7 @@
 package step3.model;
 
+import step3.ganerator.LottoNumberGenerator;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,7 +50,7 @@ public class LottoMachine {
         Set<LottoNumber> lotto = new HashSet<>();
 
         while (lotto.size() < LOTTO_NUMBER) {
-            lotto.add(new LottoNumber());  // 중복된 값은 자동으로 제외
+            lotto.add(new LottoNumber(new LottoNumberGenerator()));  // 중복된 값은 자동으로 제외
         }
 
         return new Lotto(lotto);

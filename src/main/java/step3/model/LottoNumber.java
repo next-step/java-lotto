@@ -1,6 +1,7 @@
 package step3.model;
 
 import step2.util.RandomUtil;
+import step3.ganerator.RandomGenerator;
 
 import java.util.Objects;
 
@@ -11,9 +12,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final static int MINIMUM_LOTTO_NUM = 1;
     private final static int MAXIMUM_LOTTO_NUM = 45;
 
+    private RandomGenerator randomGenerator;
     private int number;
 
-    public LottoNumber() {
+    public LottoNumber(RandomGenerator randomGenerator) {
+        this.randomGenerator = randomGenerator;
         createLottoNum();
     }
 
@@ -33,7 +36,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     //로또 번호를 생성한다.
     private void createLottoNum() {
-        this.number = RandomUtil.randomNum();
+        this.number = randomGenerator.randomNum();
     }
 
     // LottoNumber 정렬을 위해 compareTo 메서드 추가

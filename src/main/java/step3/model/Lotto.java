@@ -1,5 +1,7 @@
 package step3.model;
 
+import step3.ganerator.RandomGenerator;
+
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
