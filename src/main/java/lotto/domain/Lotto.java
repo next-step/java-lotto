@@ -4,13 +4,31 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Lotto implements Comparable<Lotto>{
+public class Lotto implements Comparable<Lotto> {
+    private static final int LOTTO_SIZE = 6;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
 
     List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
+        validateLottoNumber(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private static void validateLottoNumber(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+        }
+        if (isOutOfBoundLotto(lottoNumbers)){
+            throw new IllegalArgumentException("로또 번호의 범위는 1 ~ 45 여야 합니다.");
+        }
+    }
+
+    private static boolean isOutOfBoundLotto(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .anyMatch(number -> number > LOTTO_END_NUMBER || number < LOTTO_START_NUMBER);
     }
 
     @Override
