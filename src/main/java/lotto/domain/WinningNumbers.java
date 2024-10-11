@@ -9,9 +9,9 @@ public class WinningNumbers {
     private static final int LIMIT_WINNING_NUMBER = 45;
     private final static String WINNING_NUMBERS_SEPERATOR = ", ";
 
-    private final List<Integer> winningNumbers;
+    private final List<LottoNumber> winningNumbers;
 
-    public WinningNumbers(final List<Integer> winningNumbers) {
+    public WinningNumbers(final List<LottoNumber> winningNumbers) {
         this.winningNumbers = winningNumbers;
         this.validateNumbers();
     }
@@ -20,13 +20,13 @@ public class WinningNumbers {
         return new WinningNumbers(createNumbers(numbers));
     }
 
-    private static List<Integer> createNumbers(String numbers) {
+    private static List<LottoNumber> createNumbers(String numbers) {
         String[] splitNumbers = splitNumbers(numbers);
-        List<Integer> lottoNumbers = new ArrayList<Integer>();
+        List<LottoNumber> lottoNumbers = new ArrayList<LottoNumber>();
 
         for (String number: splitNumbers) {
             int lottoNumber = parseInt(number);
-            lottoNumbers.add(lottoNumber);
+            lottoNumbers.add(new LottoNumber(lottoNumber));
         }
         return lottoNumbers;
     }
@@ -48,29 +48,16 @@ public class WinningNumbers {
     //region [validateNumbers]
     private void validateNumbers() {
         validNumberCount(winningNumbers);
-        validNumberRange(winningNumbers);
         duplicateNumber(winningNumbers);
     }
 
-    private void validNumberCount(List<Integer> numbers) {
+    private void validNumberCount(List<LottoNumber> numbers) {
         if(numbers.size() != WINNING_NUMBER_COUNT){
             throw new IllegalArgumentException("당첨 번호를 6개 입력하세요");
         }
     }
 
-    private void validNumberRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            if(isNonValidNumber(number)){
-                throw new IllegalArgumentException("1-45범위 내의 당첨 번호를 입력하세요");
-            }
-        }
-    }
-
-    private boolean isNonValidNumber(int lottoNumber) {
-        return lottoNumber <= 0 || lottoNumber > LIMIT_WINNING_NUMBER;
-    }
-
-    private void duplicateNumber(List<Integer> lottoNumbers) {
+    private void duplicateNumber(List<LottoNumber> lottoNumbers) {
         long count = lottoNumbers.stream()
                 .distinct()
                 .count();
@@ -83,8 +70,8 @@ public class WinningNumbers {
 
     public int matchWinningNumber(Lotto lotto) {
         int matchCount = 0;
-        for (Integer winningNumber : winningNumbers) {
-            if(lotto.hasNumber(winningNumber)) matchCount++;
+        for (LottoNumber lottoNumber : winningNumbers) {
+            if(lotto.hasNumber(lottoNumber)) matchCount++;
         }
         return matchCount;
     }
