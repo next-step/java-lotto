@@ -17,10 +17,22 @@
 * 뺄셈 구현
 * 곱셈 구현
 * 나눗셈 구현
-* 
+
+## Step1. 피드백 구현
+* enum 안에서 람다식으로 함수 구현 가능
+* enum 클래스 안에 있는 method 별도로 꺼내지 않고 enum 클래스 이용
+* operatorClass -> operatorMethod 네이밍 변경
+* parameterizedTest 적용
+* validate 로직 내부로 이동
+* queue에 넣을 때 string이 아닌 enum 클래스 삽입 (변경 안해도 됨)
+* SPACE -> DELIMITER 네이밍 변경
+* 유효성 체크 로직 이동 (queue에서 꺼낼 때 체크)
+* public 한정자 제거
+
 ## Step2. 요구 사항
 * 입력 개수만큼 셔플해 로또 하나를 추첨한다. (입력 개수가 바뀔 수 있으므로)
 * 구매한 개수만큼 로또를 추첨한다.
 * 로또를 비교해 일치하는 개수를 추출한다.
 * 최종 당첨금액과 구입금액을 비교해 수익률을 계산한다.
 
+ 
