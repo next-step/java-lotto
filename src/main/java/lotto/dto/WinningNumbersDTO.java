@@ -6,7 +6,7 @@ import java.util.Objects;
 public class WinningNumbersDTO {
     private final List<Integer> winningNumbers;
 
-    WinningNumbersDTO(List<Integer> winningNumbers) {
+    private WinningNumbersDTO(List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 

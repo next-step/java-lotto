@@ -6,7 +6,7 @@ public class LottoStatisticsDTO {
     private final int percentageRateOfReturn;
     private final LottoMatchInfosDTO matchInfosDTO;
 
-    LottoStatisticsDTO(int percentageRateOfReturn, LottoMatchInfosDTO matchInfosDTO) {
+    private LottoStatisticsDTO(int percentageRateOfReturn, LottoMatchInfosDTO matchInfosDTO) {
         this.percentageRateOfReturn = percentageRateOfReturn;
         this.matchInfosDTO = matchInfosDTO;
     }

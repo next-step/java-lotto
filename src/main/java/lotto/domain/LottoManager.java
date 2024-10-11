@@ -13,7 +13,7 @@ public class LottoManager {
     private PurchasedLottos purchasedLottos;
     private LottoNumbers winningLottoNumbers;
 
-    LottoManager() {
+    private LottoManager() {
     }
 
     public static LottoManager newInstance() {

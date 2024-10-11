@@ -6,7 +6,7 @@ import java.util.Objects;
 public class LottoMatchInfosDTO {
     private final List<LottoMatchInfoDTO> matchInfoDTOs;
 
-    LottoMatchInfosDTO(List<LottoMatchInfoDTO> matchInfoDTOs) {
+    private LottoMatchInfosDTO(List<LottoMatchInfoDTO> matchInfoDTOs) {
         this.matchInfoDTOs = matchInfoDTOs;
     }
 

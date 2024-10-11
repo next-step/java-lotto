@@ -8,7 +8,7 @@ import java.util.Objects;
 public class LottoNumbers {
     private final List<Integer> value;
 
-    LottoNumbers(List<Integer> numbers) {
+    private LottoNumbers(List<Integer> numbers) {
         this.value = numbers;
     }
 

@@ -7,7 +7,7 @@ public class LottoMatchInfoDTO {
     private final int lottoNum;
     private final int reward;
 
-    LottoMatchInfoDTO(int matchCount, int lottoNum, int reward) {
+    private LottoMatchInfoDTO(int matchCount, int lottoNum, int reward) {
         this.matchCount = matchCount;
         this.lottoNum = lottoNum;
         this.reward = reward;

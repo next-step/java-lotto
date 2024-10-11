@@ -8,7 +8,6 @@ public class RandomSelectionStrategy implements LottoNumberSelectionStrategy {
     private final static ArrayList<Integer> LOTTO_NUMBER_CONTAINERS = createLottoNumberContainer();
     private final static RandomSelectionStrategy INSTANCE = new RandomSelectionStrategy();
 
-
     public static RandomSelectionStrategy getInstance() {
         return INSTANCE;
     }

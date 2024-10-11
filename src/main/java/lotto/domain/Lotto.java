@@ -11,7 +11,7 @@ public class Lotto {
     private final int lottoNum;
     private final LottoNumbers numbers;
 
-    Lotto(int lottoNum, LottoNumbers numbers) {
+    private Lotto(int lottoNum, LottoNumbers numbers) {
         this.lottoNum = lottoNum;
         this.numbers = numbers;
     }

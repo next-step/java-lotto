@@ -5,7 +5,7 @@ import java.util.List;
 public class PurchasedLottos {
     private final List<Lotto> value;
 
-    PurchasedLottos(List<Lotto> lottos) {
+    private PurchasedLottos(List<Lotto> lottos) {
         this.value = lottos;
     }
 

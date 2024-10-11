@@ -9,7 +9,7 @@ import java.util.Objects;
 public class PurchasedLottosDTO {
     private final List<Lotto> purchasedLottos;
 
-    PurchasedLottosDTO(List<Lotto> purchasedLottos) {
+    private PurchasedLottosDTO(List<Lotto> purchasedLottos) {
         this.purchasedLottos = purchasedLottos;
     }
 

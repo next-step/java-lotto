@@ -9,7 +9,7 @@ public enum LottoReward {
     private final int reward;
     private final int matchCount;
 
-    LottoReward(int reward, int matchCount) {
+    private LottoReward(int reward, int matchCount) {
         this.reward = reward;
         this.matchCount = matchCount;
     }
