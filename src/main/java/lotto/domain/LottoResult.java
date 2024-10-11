@@ -1,4 +1,4 @@
-package lotto.step2.domain;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.EnumMap;

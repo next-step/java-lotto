@@ -1,4 +1,4 @@
-package lotto.step2.ui;
+package lotto.ui;
 
 import java.util.Scanner;
 

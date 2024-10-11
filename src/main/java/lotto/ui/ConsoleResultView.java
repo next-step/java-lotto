@@ -1,9 +1,9 @@
-package lotto.step2.ui;
+package lotto.ui;
 
-import lotto.step2.domain.LottoRank;
-import lotto.step2.domain.LottoResult;
-import lotto.step2.domain.Lottos;
-import lotto.step2.domain.ProfitStatus;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
+import lotto.domain.ProfitStatus;
 
 import java.util.Arrays;
 import java.util.EnumMap;

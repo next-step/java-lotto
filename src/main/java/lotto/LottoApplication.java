@@ -1,8 +1,8 @@
-package lotto.step2;
+package lotto;
 
-import lotto.step2.domain.*;
-import lotto.step2.ui.InputView;
-import lotto.step2.ui.ResultView;
+import lotto.domain.*;
+import lotto.ui.InputView;
+import lotto.ui.ResultView;
 
 public class LottoApplication {
     private final InputView inputView;
