@@ -37,7 +37,7 @@ public enum Operator {
 
     public static Operator from(String operator) {
         return Arrays.stream(Operator.values())
-                .filter(s -> operator.equals(s.operator))
+                .filter(op -> operator.equals(op.operator))
                 .findAny()
                 .orElseThrow(() -> new IllegalStateException("해당하는 operator가 존재하지 않습니다."));
     }

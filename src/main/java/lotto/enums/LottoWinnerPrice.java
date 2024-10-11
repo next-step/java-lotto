@@ -29,7 +29,7 @@ public enum LottoWinnerPrice {
 
     public static int getPrice(int matchedCount) {
         return Arrays.stream(LottoWinnerPrice.values())
-                .filter(s -> s.matchedCount == matchedCount)
+                .filter(price -> price.matchedCount == matchedCount)
                 .findFirst()
                 .orElse(none_rank)
                 .getPrice();
@@ -37,7 +37,7 @@ public enum LottoWinnerPrice {
 
     public static List<LottoWinnerPrice> getLottoWinnerPrice() {
         return Arrays.stream(values())
-                .filter(s -> s != none_rank)
+                .filter(rank -> rank != none_rank)
                 .collect(Collectors.toUnmodifiableList());
     }
 }

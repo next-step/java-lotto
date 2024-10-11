@@ -42,6 +42,7 @@
 * 중복 테스트 제거 (isEqualTo로 했으면 size 비교는 중복)
 * controller에서 금액 삭제
 * parsing 로직 view로 이동
+* stream 속 변수 이름 구체화
 
 
 ## Step2. 리팩토링 내용
