@@ -10,6 +10,6 @@ public class LottoStatistics {
     }
 
     public double rate() {
-        return (double) winningResults.totalWinningPrice() / money.getMoney();
+        return money.calculateRate(winningResults.totalWinningPrice());
     }
 }

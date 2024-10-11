@@ -18,7 +18,11 @@ public class Money {
         this.money = money;
     }
 
-    public int getMoney() {
-        return money;
+    public int calculatePurchases(final int unitPrice) {
+        return money / unitPrice;
+    }
+
+    public double calculateRate(final long gain) {
+        return (double) gain / money;
     }
 }
