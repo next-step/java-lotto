@@ -1,4 +1,4 @@
-package step2;
+package lotto;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

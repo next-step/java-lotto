@@ -1,4 +1,4 @@
-package step2;
+package lotto;
 
 public class InputValidator {
 
