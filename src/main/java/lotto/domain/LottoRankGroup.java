@@ -9,6 +9,7 @@ public class LottoRankGroup {
     public LottoRankGroup() {
         this.lottoRankGroup = new HashMap<>();
         lottoRankGroup.put(LottoRank.FIRST, new LottoBundle());
+        lottoRankGroup.put(LottoRank.SECOND, new LottoBundle());
         lottoRankGroup.put(LottoRank.THIRD, new LottoBundle());
         lottoRankGroup.put(LottoRank.FOURTH, new LottoBundle());
         lottoRankGroup.put(LottoRank.FIFTH, new LottoBundle());

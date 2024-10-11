@@ -33,6 +33,14 @@ public class Lotto {
             .count();
     }
 
+    public boolean contains(final LottoNumber lottoNumber) {
+        if (lottoNumber == null) {
+            return false;
+        }
+
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public int size() {
         return lottoNumbers.size();
     }

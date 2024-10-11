@@ -28,6 +28,16 @@ class LottoRankTest {
     }
 
     @Test
+    @DisplayName("5개의 번호가 일치하고, 보너스번호가 일치하다면 2등이 반환된다.")
+    void shouldReturnSecondRankWhenMatchedCountIsFiveAndBonusNumber() {
+        final int matchedCount = 5;
+
+        final LottoRank lottoRankByMatchedCount = LottoRank.findLottoRankByMatchedNumber(matchedCount, true);
+
+        assertThat(lottoRankByMatchedCount).isEqualTo(SECOND);
+    }
+
+    @Test
     @DisplayName("4개의 번호가 일치하다면, 4등이 반환된다.")
     void shouldReturnFourthRankWhenMatchedCountIsFour() {
         final int matchedCount = 4;

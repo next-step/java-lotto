@@ -5,10 +5,12 @@ import java.util.List;
 public class LottoWinningEvaluator {
     private final LottoBundle lottoBundle;
     private final Lotto evaluationLotto;
+    private final LottoNumber bonusLottoNumber;
 
-    public LottoWinningEvaluator(final LottoBundle lottoBundle, final Lotto evaluationLotto) {
+    public LottoWinningEvaluator(final LottoBundle lottoBundle, final Lotto evaluationLotto, final LottoNumber bonusLottoNumber) {
         this.lottoBundle = lottoBundle;
         this.evaluationLotto = evaluationLotto;
+        this.bonusLottoNumber = bonusLottoNumber;
     }
 
     public LottoWinningResults evaluate() {
@@ -16,13 +18,15 @@ public class LottoWinningEvaluator {
 
         for (final Lotto lotto : lottoBundle) {
             final int matchedCount = lotto.matchCount(evaluationLotto);
-            final LottoRank lottoRank = LottoRank.findLottoRankByMatchedNumber(matchedCount);
+            final boolean isMatchedBonusNumber = lotto.contains(bonusLottoNumber);
+            final LottoRank lottoRank = LottoRank.findLottoRankByMatchedNumber(matchedCount, isMatchedBonusNumber);
             lottoRankGroup.addLotto(lottoRank, lotto);
         }
 
         return new LottoWinningResults(
             List.of(
                 createLottoWinningResult(lottoRankGroup, LottoRank.FIRST),
+                createLottoWinningResult(lottoRankGroup, LottoRank.SECOND),
                 createLottoWinningResult(lottoRankGroup, LottoRank.THIRD),
                 createLottoWinningResult(lottoRankGroup, LottoRank.FOURTH),
                 createLottoWinningResult(lottoRankGroup, LottoRank.FIFTH)

@@ -23,9 +23,13 @@ public class LottoInputView {
         return new Money(reader.readInt());
     }
 
-    public LottoNumber inputBonusLottoNumber() {
+    public LottoNumber inputBonusLottoNumber(final Lotto lotto) {
         writer.write("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(reader.readInt());
+        final LottoNumber lottoNumber = new LottoNumber(reader.readInt());
+        if (lotto.contains(lottoNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복 될 수 없습니다.");
+        }
+        return lottoNumber;
     }
 
     public Lotto inputLastWeekWinningLotto() {
