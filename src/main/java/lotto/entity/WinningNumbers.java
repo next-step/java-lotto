@@ -44,7 +44,6 @@ public class WinningNumbers {
         }
     }
 
-
     private static Integer toInt(String value) {
         return Integer.parseInt(value);
     }

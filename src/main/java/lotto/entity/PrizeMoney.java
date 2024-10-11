@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 
 public enum PrizeMoney {
-    LOSE(0, BigInteger.valueOf(0)),
+    LOSE(0, null),
     THREE(3, BigInteger.valueOf(5000)),
     FOUR(4, BigInteger.valueOf(50000)),
     FIVE(5, BigInteger.valueOf(1500000)),
@@ -18,7 +18,11 @@ public enum PrizeMoney {
         this.prizeMoney = prizeMoney;
     }
 
-    public boolean isMatch(int count){
+    public boolean isMatch(int count) {
         return this.count == count;
+    }
+
+    public boolean isWinner() {
+        return this.prizeMoney != null;
     }
 }

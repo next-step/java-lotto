@@ -3,12 +3,17 @@ package lotto.entity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_UNIT_PRICE = 1000;
+    private final PrizeMonies prizeMonies;
 
+    public LottoMachine() {
+        this.prizeMonies = new PrizeMonies();
+    }
 
     public List<Lotto> insert(int money) {
         int count = getLottoCount(money);
@@ -43,5 +48,14 @@ public class LottoMachine {
         return numbers;
     }
 
+    public List<WinnerLotto> winnerLottos(List<Lotto> lottos, List<Integer> winnersNumber) {
+        List<WinnerLotto> resultLottos = new ArrayList<>();
 
+        for (Lotto lotto : lottos) {
+            PrizeMoney prizeMoney = prizeMonies.result(lotto.matchCount(winnersNumber));
+            resultLottos.add(new WinnerLotto(prizeMoney, lotto));
+        }
+
+        return resultLottos.stream().filter(l -> l.isWinner()).collect(Collectors.toList());
+    }
 }
