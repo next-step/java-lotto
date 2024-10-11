@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
+import lotto.view.InputView;
+import lotto.view.ResultView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

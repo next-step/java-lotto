@@ -1,4 +1,6 @@
-package lotto;
+package lotto.view;
+
+import lotto.validator.InputValidator;
 
 import java.util.Scanner;
 
