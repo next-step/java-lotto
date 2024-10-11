@@ -1,13 +1,22 @@
 package step3.model;
 
+import step3.ganerator.RandomGenerator;
+
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
+
+    private final static int LOTTO_NUM_SIZE = 6;
+    private final static String LOTTO_NUM_SIZE_MESSAGE = "로또 번호는 6자리이여만 합니다.";
+
     private final Set<LottoNumber> lotto;
 
     public Lotto(Set<LottoNumber> lotto) {
-        this.lotto = lotto;
+        confirmLottoNumberSize(lotto);
+        this.lotto = sortLotto(lotto);
     }
 
     //로또번호가 이미 존재하지는 확인한다.
@@ -17,6 +26,13 @@ public class Lotto {
 
     public Set<LottoNumber> getLotto() {
         return lotto;
+    }
+
+    //로또를 오름차순 정렬한다.
+    private Set<LottoNumber> sortLotto(Set<LottoNumber> lotto) {
+        return lotto.stream()
+                .sorted()
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     @Override
@@ -31,4 +47,12 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(this.lotto);
     }
+
+    //로또번호의 갯수를 확인한다.
+    private void confirmLottoNumberSize(Set<LottoNumber> lotto) {
+        if (lotto.size() != LOTTO_NUM_SIZE) {
+            throw new IllegalArgumentException(LOTTO_NUM_SIZE_MESSAGE);
+        }
+    }
+
 }
