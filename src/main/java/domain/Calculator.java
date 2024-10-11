@@ -4,10 +4,11 @@ public class Calculator {
     private int result = 0;
     private int tokenCount = 0;
     private String lastOperator = "";
+    private static final String DELIMITER = " ";
 
     public int calculate(String input) {
         validateInput(input);
-        String[] tokens = input.split(" ");
+        String[] tokens = input.split(DELIMITER);
 
         for (String token : tokens) {
             tokenCount += 1;
