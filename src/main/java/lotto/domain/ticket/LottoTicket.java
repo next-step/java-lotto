@@ -1,19 +1,18 @@
 package lotto.domain.ticket;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoTicket {
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    public LottoTicket(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public long findMatchCount(String[] winningNumbers) {
-        return Arrays.stream(winningNumbers)
-                     .filter(number -> lottoNumbers.contains(Integer.parseInt(number)))
-                     .count();
+    public int findMatchCount(String[] winningNumbers) {
+        return (int) lottoNumbers.stream()
+                                 .filter(lottoNumber -> lottoNumber.isContain(winningNumbers))
+                                 .count();
     }
 
     @Override

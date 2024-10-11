@@ -15,7 +15,7 @@ public class LottoTickets {
     public WinningTickets findWinning(String[] winningNumbers) {
         return new WinningTickets(
             lottoTickets.stream()
-                        .collect(Collectors.groupingBy(lottoTicket -> (int) lottoTicket.findMatchCount(winningNumbers))));
+                        .collect(Collectors.groupingBy(lottoTicket -> lottoTicket.findMatchCount(winningNumbers))));
     }
 
     public int getLottoTicketsSize() {
