@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import javax.print.attribute.IntegerSyntax;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;

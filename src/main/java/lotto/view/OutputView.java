@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.Lotto;
-import lotto.LottoRankingEnum;
+import lotto.domain.Lotto;
+import lotto.domain.LottoRankingEnum;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,9 +1,10 @@
 package lotto;
 
+import lotto.domain.Buyer;
+import lotto.domain.QuickPickGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoMain {
