@@ -18,10 +18,10 @@
 - 사칙 연산 기호가 아닌 경우 IllegalArgumentException throw
 
 ### 피드백 사항
-- [ ] 프로세스가 시작하는 클래스를 따로 만들기
-- [ ] DELIMITER를 상수로 빼기
-- [ ] tokenCount 사용하지 않고 operator / operand 나누기
-- [ ] 사용 가능한 기호를 Enum으로 Convert / 추상화하기
+- [x] 프로세스가 시작하는 클래스를 따로 만들기
+- [x] DELIMITER를 상수로 빼기
+- [x] tokenCount 사용하지 않고 operator / operand 나누기
+- [x] 사용 가능한 기호를 Enum으로 Convert / 추상화하기
 
 # 프로그래밍 요구사항
 - indent(들여쓰기) depth를 2단계에서 1단계로 줄여라.
