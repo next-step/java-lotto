@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 class StringUtilTest {
@@ -44,5 +45,13 @@ class StringUtilTest {
             softly.assertThat(StringUtil.isEmpty(nullContainingArray)).isFalse();
             softly.assertThat(StringUtil.isEmpty(emptyStringArray)).isFalse();
         });
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"a", "가", " ", " 1", "2 ", " 3 ", "4 5"})
+    void toInt는_정확한_숫자만_처리할_수_있다(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> StringUtil.toInt(input))
+                .withMessage("숫자를 입력해 주세요.");
     }
 }

@@ -2,6 +2,7 @@ package calculator.util;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 
 public class StringUtil {
 
@@ -26,5 +27,14 @@ public class StringUtil {
 
         return Arrays.stream(array)
                 .noneMatch(Objects::nonNull);
+    }
+
+    public static int toInt(String input) {
+        try {
+            return Integer.parseInt(input);
+
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요.");
+        }
     }
 }
