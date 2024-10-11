@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class LottoConfirmation {
 
-    private final static String RANGE_LOTTO_NUM = "로또번호는 1~45범위안에 포함되야 합니다.";
-    private final static String NOT_MATCH_PRIZE = "로또 당첨번호를 맞춰보지 않았습니다.";
-    private final static String BONUS_NUM_ALREADY_CONTAIN = "보너스번호가 이미 당첨번호에 포함되어있습니다.";
+    private final static String RANGE_LOTTO_NUM_MESSAGE = "로또번호는 1~45범위안에 포함되야 합니다.";
+    private final static String NOT_MATCH_PRIZE_MESSAGE = "로또 당첨번호를 맞춰보지 않았습니다.";
+    private final static String BONUS_NUM_ALREADY_CONTAIN_MESSAGE = "보너스번호가 이미 당첨번호에 포함되어있습니다.";
 
     private final static int MATCH_COUNT_WON = 3;
     private final static int BONUS_MATCH_COUNT = 5;
@@ -104,20 +104,20 @@ public class LottoConfirmation {
     //번호가 1~45 범위에 포함되는지 체크한다.
     private void confirmLottoNumRange(int num) {
         if (num < MINIMUM_LOTTO_NUM || num > MAXIMUM_LOTTO_NUM) {
-            throw new IllegalArgumentException(RANGE_LOTTO_NUM);
+            throw new IllegalArgumentException(RANGE_LOTTO_NUM_MESSAGE);
         }
     }
 
     //로또 당첨번호를 맞춰봤는지 체크한다.
     private void confirmAlreadyCheckPrizeNum() {
         if (prizes.isEmpty()) {
-            throw new IllegalArgumentException(NOT_MATCH_PRIZE);
+            throw new IllegalArgumentException(NOT_MATCH_PRIZE_MESSAGE);
         }
     }
 
     //보너스번호가 이미 당첨번호에 포함되어있지는 않은지 체크한다.
     private void confirmBonusNumAlreadyContainsPrizeNum(String[] prizeNum, int bonusNum) {
         if (Arrays.stream(prizeNum).mapToInt(Integer::parseInt).anyMatch(num -> num == bonusNum))
-            throw new IllegalArgumentException(BONUS_NUM_ALREADY_CONTAIN);
+            throw new IllegalArgumentException(BONUS_NUM_ALREADY_CONTAIN_MESSAGE);
     }
 }
