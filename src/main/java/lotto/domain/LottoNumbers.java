@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -25,11 +24,11 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(Integer... numbers) {
-        this(new TreeSet<>(Arrays.stream(numbers).map(LottoNumber::new).collect(Collectors.toSet())));
+        this(Arrays.stream(numbers).map(LottoNumber::new).collect(Collectors.toList()));
     }
 
     public LottoNumbers(List<LottoNumber> numbers) {
-        this(new TreeSet<>(Set.copyOf(numbers)));
+        this(new TreeSet<>(numbers));
     }
 
     public LottoNumbers(TreeSet<LottoNumber> numbers) {
@@ -39,8 +38,13 @@ public class LottoNumbers {
         this.lottoNumbers = numbers;
     }
 
-    public boolean match(int number) {
-        return lottoNumbers.contains(new LottoNumber(number));
+    public int calculateMatchCount(LottoNumbers other) {
+        int matchCount = 0;
+
+        for (LottoNumber number : lottoNumbers) {
+            matchCount = other.contains(number) ? matchCount + 1 : matchCount;
+        }
+        return matchCount;
     }
 
     public LottoNumbers pickNumbers() {
@@ -59,6 +63,10 @@ public class LottoNumbers {
         return lottoNumbers.stream()
             .map(LottoNumber::getValue)
             .collect(Collectors.toList());
+    }
+
+    private boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     private void shuffle(List<LottoNumber> baseNumbers) {
