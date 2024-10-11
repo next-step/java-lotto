@@ -1,15 +1,6 @@
-import domain.Calculator;
-import view.InputView;
-import view.ResultView;
-
 public class CalculatorMain {
+    private static final CalculatorMachine calculatorMachine = new CalculatorMachine();
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-        Calculator calculator = new Calculator();
-
-        String input = inputView.getInput();
-        int result = calculator.calculate(input);
-        resultView.printResult(result);
+        calculatorMachine.start();
     }
 }
