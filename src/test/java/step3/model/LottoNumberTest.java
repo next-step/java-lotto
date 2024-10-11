@@ -1,6 +1,5 @@
 package step3.model;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +18,7 @@ public class LottoNumberTest {
     void createNumberTest() {
         LottoNumber lottoNumber = new LottoNumber();
 
-        assertThat(lottoNumber.getNumber()).isBetween(1,45);
+        assertThat(lottoNumber.getNumber()).isBetween(1, 45);
     }
 
     @DisplayName("로또 숫자를 확인한다.")

@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /*
 - 당첨번호를 입력받는다.
 */
-public class PurchasedLottoTest extends GlobalTest{
+public class PurchasedLottoTest extends GlobalTest {
 
     @DisplayName("당첨번호를 입력받는다.")
     @Test

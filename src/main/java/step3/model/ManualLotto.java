@@ -15,7 +15,7 @@ public class ManualLotto {
     private final List<Lotto> lottoList = new ArrayList<>();
 
     public ManualLotto(List<String> manualLotto) {
-        for(String lotto : manualLotto) {
+        for (String lotto : manualLotto) {
             addManualLotto(lotto);
         }
     }
@@ -33,7 +33,7 @@ public class ManualLotto {
     private Lotto createLotto(String[] lottoNum) {
         Set<LottoNumber> lotto = new HashSet<>();
 
-        for(String num : lottoNum) {
+        for (String num : lottoNum) {
             lotto.add(new LottoNumber(Integer.parseInt(num)));  // 중복된 값은 자동으로 제외
         }
 
@@ -42,7 +42,7 @@ public class ManualLotto {
 
     //로또번호의 갯수를 확인한다.
     private void confirmLottoNumberSize(String[] lottoNumbers) {
-        if(lottoNumbers.length != LOTTO_NUM_SIZE) {
+        if (lottoNumbers.length != LOTTO_NUM_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUM_SIZE_MESSAGE);
         }
     }

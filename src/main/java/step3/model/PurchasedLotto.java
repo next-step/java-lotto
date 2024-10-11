@@ -2,7 +2,6 @@ package step3.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class PurchasedLotto {
 

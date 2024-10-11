@@ -13,14 +13,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 - 수동 로또를 입력받는다.
 - 로또번호의 개수가 6이 아니면 예외가 발생한다.
  */
-public class ManualLottoTest extends GlobalTest{
+public class ManualLottoTest extends GlobalTest {
 
     @DisplayName("수동 로또를 입력받는다.")
     @Test
     void createLottoTest() {
         ManualLotto lotto = new ManualLotto(List.of("1,2,3,4,5,6"));
 
-        assertThat(lotto.getLottoList()).containsExactly(createLotto(1,2,3,4,5,6));
+        assertThat(lotto.getLottoList()).containsExactly(createLotto(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("로또번호의 개수가 6이 아니면 예외가 발생한다.")

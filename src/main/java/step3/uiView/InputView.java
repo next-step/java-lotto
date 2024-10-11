@@ -26,7 +26,7 @@ public class InputView {
     public List<String> inputManualLotto(int count) {
         System.out.println(InputMessage.INPUT_MANUAL_LOTTO.message());
         List<String> list = new ArrayList<>();
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             list.add(scanner.next());
         }
         return list;

@@ -4,7 +4,7 @@ import step2.util.RandomUtil;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private final static String RANGE_LOTTO_NUM_MESSAGE = "로또번호는 1~45범위안에 포함되야 합니다.";
 

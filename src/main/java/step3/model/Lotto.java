@@ -48,7 +48,7 @@ public class Lotto {
 
     //로또번호의 갯수를 확인한다.
     private void confirmLottoNumberSize(Set<LottoNumber> lotto) {
-        if(lotto.size() != LOTTO_NUM_SIZE) {
+        if (lotto.size() != LOTTO_NUM_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUM_SIZE_MESSAGE);
         }
     }
