@@ -48,14 +48,14 @@ public class LottoMachine {
         return numbers;
     }
 
-    public List<WinnerLotto> winnerLottos(List<Lotto> lottos, List<Integer> winnersNumber) {
-        List<WinnerLotto> resultLottos = new ArrayList<>();
+    public List<PrizeMoney> winnerResult(List<Lotto> lottos, List<Integer> winnersNumber) {
+        List<PrizeMoney> result = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
             PrizeMoney prizeMoney = prizeMonies.result(lotto.matchCount(winnersNumber));
-            resultLottos.add(new WinnerLotto(prizeMoney, lotto));
+            result.add(prizeMoney);
         }
 
-        return resultLottos.stream().filter(l -> l.isWinner()).collect(Collectors.toList());
+        return result.stream().filter(l -> l.isWinner()).collect(Collectors.toList());
     }
 }

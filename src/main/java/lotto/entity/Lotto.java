@@ -2,7 +2,6 @@ package lotto.entity;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;

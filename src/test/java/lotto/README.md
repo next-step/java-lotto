@@ -5,13 +5,6 @@
 ### JavaLotto(총괄 컨트롤러)
 - UI 로직 포함이라 TDD X
 
-
-### Winners(당첨 리스트)
-- 당첨 된 로또 리스트 합계 계산
-
-### PrizeMoneyCalculator(상금 계산)
-- 구매금액과 총 상금으로 수익률 검증
-
 ---
 
 ## Entity 및 DONE
@@ -25,13 +18,14 @@
 
 ### LottoNumbers(로또 1장의 번호 리스트)
 
-### LottoMachine(로또 기계 - 자동 번호 발급, 당첨 리스트 반환)
-- 금액이 입력되었을 때 1000원으로 나누었을 때 발급된 로또 갯수가 몇 장인가?
-
-### PrizeMoneys(PrizeMoney 감싼 클래스)
+### PrizeMonies(PrizeMoney 감싼 클래스)
 - 맞힌 갯수 입력 했을 때 결과 반환
 
 ### PrizeMoney (Enum 클래스로 상금, 맞춰야 될 갯수)
 
 ### LottoMachine(로또 기계 - 자동 번호 발급, 당첨 리스트 반환)
 - 발급 리스트와 당첨 번호 리스트 입력 시 당첨 리스트 반환 
+- 금액이 입력되었을 때 1000원으로 나누었을 때 발급된 로또 갯수가 몇 장인가?
+
+### PrizeMoneyCalculator(상금 계산)
+- 등수 당첨 갯수 검증
