@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.prize.LottoPrize;
+import lotto.prize.Prize;
 import lotto.result.LottoResult;
 import lotto.ticket.LottoTicket;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 public class ResultView {
     private static final int MIN_WINNING_MATCH_COUNT = 3;
 
-    public void showLottoResult(Map<LottoResult, Integer> result, LottoPrize lottoPrize) {
+    public void showLottoResult(Map<LottoResult, Integer> result) {
 
         System.out.println("\n당첨 통계");
         System.out.println("---------");
@@ -20,7 +20,7 @@ public class ResultView {
                 .forEach(lottoResult ->
                         System.out.printf("%d개 일치 (%d)원- %d개%n",
                                 lottoResult.getMatchedLottoNumbersCount(),
-                                lottoPrize.getLottoPrize(lottoResult),
+                                Prize.getPrizeAmount(lottoResult.getMatchedLottoNumbersCount()),
                                 result.get(lottoResult))
                 );
 

@@ -1,6 +1,5 @@
 package lotto.prize;
 
-import lotto.result.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,8 +12,7 @@ class LottoPrizeTest {
     @ParameterizedTest
     @CsvSource({"3,5000", "4,50000", "5,1500000", "6,2000000000"})
     void getLottoPrize(int matchedCount, int prize) {
-        LottoPrize lottoPrize = new LottoPrize();
 
-        assertThat(lottoPrize.getLottoPrize(new LottoResult(matchedCount))).isEqualTo(prize);
+        assertThat(Prize.getPrizeAmount(matchedCount)).isEqualTo(prize);
     }
 }

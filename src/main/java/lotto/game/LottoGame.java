@@ -1,10 +1,9 @@
 package lotto.game;
 
 
-import lotto.prize.LottoPrize;
 import lotto.calculator.LottoProfitCalculator;
-import lotto.result.LottoResult;
 import lotto.calculator.LottoResultCalculator;
+import lotto.result.LottoResult;
 import lotto.strategy.RandomLottoNumberStrategy;
 import lotto.ticket.LottoTicket;
 import lotto.view.InputView;
@@ -18,13 +17,11 @@ public class LottoGame {
     private final InputView inputView;
     private final ResultView resultView;
     private final LottoMachine lottoMachine;
-    private final LottoPrize lottoPrize;
 
     public LottoGame(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
         this.lottoMachine = new LottoMachine(new RandomLottoNumberStrategy());
-        this.lottoPrize = new LottoPrize();
     }
 
     public void run() {
@@ -38,11 +35,11 @@ public class LottoGame {
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
         Map<LottoResult, Integer> lottoResult = lottoResultCalculator.calculateResult();
 
-        LottoProfitCalculator profitCalculator = new LottoProfitCalculator(lottoResult, lottoPrize);
+        LottoProfitCalculator profitCalculator = new LottoProfitCalculator(lottoResult);
         double profitRate = profitCalculator.calculateProfitRate(lottoTickets.size());
 
         resultView.showLottoTickets(lottoTickets);
-        resultView.showLottoResult(lottoResult, lottoPrize);
+        resultView.showLottoResult(lottoResult);
         resultView.showLottoProfit(profitRate);
     }
 

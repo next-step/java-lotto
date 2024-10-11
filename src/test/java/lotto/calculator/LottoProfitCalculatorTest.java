@@ -1,11 +1,10 @@
 package lotto.calculator;
 
 import lotto.game.LottoMachine;
-import lotto.winningnumber.WinningNumber;
-import lotto.prize.LottoPrize;
 import lotto.result.LottoResult;
 import lotto.strategy.FixedLottoNumberStrategy;
 import lotto.ticket.LottoTicket;
+import lotto.winningnumber.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +24,7 @@ class LottoProfitCalculatorTest {
 
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
         Map<LottoResult, Integer> lottoResult = lottoResultCalculator.calculateResult();
-        LottoProfitCalculator lottoProfitCalculator = new LottoProfitCalculator(lottoResult, new LottoPrize());
+        LottoProfitCalculator lottoProfitCalculator = new LottoProfitCalculator(lottoResult);
 
         double result = lottoProfitCalculator.calculateProfitRate(lottoTickets.size());
 
@@ -42,7 +41,7 @@ class LottoProfitCalculatorTest {
 
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
         Map<LottoResult, Integer> lottoResult = lottoResultCalculator.calculateResult();
-        LottoProfitCalculator lottoProfitCalculator = new LottoProfitCalculator(lottoResult, new LottoPrize());
+        LottoProfitCalculator lottoProfitCalculator = new LottoProfitCalculator(lottoResult);
 
         double result = lottoProfitCalculator.calculateProfitRate(lottoTickets.size());
 
