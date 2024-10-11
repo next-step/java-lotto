@@ -1,7 +1,7 @@
 package lotto.game;
 
+import lotto.number.LottoNumbers;
 import lotto.strategy.LottoNumberStrategy;
-import lotto.ticket.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +14,13 @@ public class LottoMachine {
         this.lottoNumberStrategy = lottoNumberStrategy;
     }
 
-    public List<LottoTicket> generateTickets(int amount) {
+    public List<LottoNumbers> generateTickets(int amount) {
         int numberOfTickets = amount / LOTTO_PRICE;
 
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+        List<LottoNumbers> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < numberOfTickets; i++) {
-            lottoTickets.add(LottoTicket.from(lottoNumberStrategy.generate()));
+            lottoTickets.add(new LottoNumbers(lottoNumberStrategy.generate()));
         }
 
         return lottoTickets;

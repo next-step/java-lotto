@@ -1,7 +1,7 @@
 package lotto.view;
 
+import lotto.number.LottoNumbers;
 import lotto.prize.LottoPrize;
-import lotto.ticket.LottoTicket;
 
 import java.util.List;
 import java.util.Map;
@@ -28,12 +28,12 @@ public class ResultView {
         System.out.printf("총 수익률은 %f입니다.%n", profit);
     }
 
-    public void showLottoTickets(List<LottoTicket> lottoTickets) {
+    public void showLottoTickets(List<LottoNumbers> lottoTickets) {
         System.out.println();
         System.out.printf("%d개를 구매했습니다.%n", lottoTickets.size());
 
-        for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.toString());
+        for (LottoNumbers lottoNumbers : lottoTickets) {
+            System.out.println(lottoNumbers.toString());
         }
 
     }

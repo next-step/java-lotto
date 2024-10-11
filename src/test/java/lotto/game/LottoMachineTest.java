@@ -1,7 +1,7 @@
 package lotto.game;
 
+import lotto.number.LottoNumbers;
 import lotto.strategy.FixedLottoNumberStrategy;
-import lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,7 +18,7 @@ class LottoMachineTest {
     void generateTicketsLottoTicket(int pay, int count) {
         LottoMachine lottoMachine = new LottoMachine(new FixedLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 6)));
 
-        List<LottoTicket> lottoTickets = lottoMachine.generateTickets(pay);
+        List<LottoNumbers> lottoTickets = lottoMachine.generateTickets(pay);
 
         assertThat(lottoTickets).hasSize(count);
     }

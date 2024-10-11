@@ -1,28 +1,24 @@
-package lotto.ticket;
+package lotto.number;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LottoTicket {
+public class LottoNumbers {
     public static final int NUMBER_OF_LOTTO_NUMBERS = 6;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
     private final Set<Integer> lottoNumbers;
 
-    private LottoTicket(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<Integer> lottoNumbers) {
         this(new HashSet<>(lottoNumbers));
     }
 
-    private LottoTicket(Set<Integer> lottoNumbers) {
+    private LottoNumbers(Set<Integer> lottoNumbers) {
         validateNumberOfLottoNumbers(lottoNumbers);
         validateNumberRange(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public static LottoTicket from(List<Integer> lottoNumbers) {
-        return new LottoTicket(lottoNumbers);
     }
 
     private static void validateNumberOfLottoNumbers(Set<Integer> lottoNumbers) {
@@ -49,5 +45,12 @@ public class LottoTicket {
     @Override
     public String toString() {
         return lottoNumbers.toString();
+    }
+
+
+    public int matchLottoNumbers(LottoNumbers otherNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(otherNumbers::match)
+                .count();
     }
 }

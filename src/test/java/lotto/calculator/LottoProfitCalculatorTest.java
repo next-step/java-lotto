@@ -1,9 +1,8 @@
 package lotto.calculator;
 
 import lotto.game.LottoMachine;
+import lotto.number.LottoNumbers;
 import lotto.strategy.FixedLottoNumberStrategy;
-import lotto.ticket.LottoTicket;
-import lotto.winningnumber.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +17,8 @@ class LottoProfitCalculatorTest {
     @Test
     void calculateLottoProfit() {
         LottoMachine lottoMachine = new LottoMachine(new FixedLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 6)));
-        WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 7));
-        List<LottoTicket> lottoTickets = lottoMachine.generateTickets(1000);
+        LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
+        List<LottoNumbers> lottoTickets = lottoMachine.generateTickets(1000);
 
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
         Map<Integer, Integer> lottoResult = lottoResultCalculator.calculateResult();
@@ -35,8 +34,8 @@ class LottoProfitCalculatorTest {
     @Test
     void calculateLottoProfit2() {
         LottoMachine lottoMachine = new LottoMachine(new FixedLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 6)));
-        WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 33, 34, 35));
-        List<LottoTicket> lottoTickets = lottoMachine.generateTickets(10000);
+        LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 33, 34, 35));
+        List<LottoNumbers> lottoTickets = lottoMachine.generateTickets(10000);
 
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
         Map<Integer, Integer> lottoResult = lottoResultCalculator.calculateResult();

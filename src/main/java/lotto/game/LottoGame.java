@@ -3,11 +3,10 @@ package lotto.game;
 
 import lotto.calculator.LottoProfitCalculator;
 import lotto.calculator.LottoResultCalculator;
+import lotto.number.LottoNumbers;
 import lotto.strategy.RandomLottoNumberStrategy;
-import lotto.ticket.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import lotto.winningnumber.WinningNumber;
 
 import java.util.List;
 import java.util.Map;
@@ -26,10 +25,10 @@ public class LottoGame {
     public void run() {
 
         int amount = inputView.getAmountFromUser();
-        List<LottoTicket> lottoTickets = lottoMachine.generateTickets(amount);
+        List<LottoNumbers> lottoTickets = lottoMachine.generateTickets(amount);
 
         List<Integer> winningNumbers = inputView.getWinningNumbersFromUser();
-        WinningNumber winningNumber = WinningNumber.from(winningNumbers);
+        LottoNumbers winningNumber = new LottoNumbers(winningNumbers);
 
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, winningNumber);
         Map<Integer, Integer> lottoResult = lottoResultCalculator.calculateResult();

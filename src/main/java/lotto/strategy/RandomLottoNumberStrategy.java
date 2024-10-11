@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.ticket.LottoTicket.*;
+import static lotto.number.LottoNumbers.*;
+
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
