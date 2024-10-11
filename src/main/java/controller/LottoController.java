@@ -9,7 +9,6 @@ import view.ResultView;
 import java.util.List;
 
 public class LottoController {
-    public static final int LOTTO_PRICE = 1000;
     private final InputView inputView;
     private final ResultView resultView;
 
@@ -28,7 +27,7 @@ public class LottoController {
         String lastWinningNumber = inputView.getLastWinningNumber();
         Lotto winnerLotto = game.getWinnerLotto(lastWinningNumber);
 
-        LottoResult result = LottoResult.getLottoResult(lottos, winnerLotto, LOTTO_PRICE);
+        LottoResult result = LottoResult.getLottoResult(lottos, winnerLotto, LottoGame.LOTTO_PRICE);
 
         resultView.printLottoResult(result);
     }
