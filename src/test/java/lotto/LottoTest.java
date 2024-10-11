@@ -1,5 +1,6 @@
 package lotto;
 
+import org.assertj.core.api.Assert;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,20 +14,42 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
-    @Test
-    void getMatchCnt() {
-        List<Integer> targetNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(targetNumbers);
-        assertThat(lotto.getMatchCnt(targetNumbers)).isEqualTo(6);
-    }
     @ParameterizedTest
     @NullSource
     @EmptySource
-    @DisplayName("비교대상 로또 번호 비어있음")
-    void getMatchCnt_targetNubers_empty(List<Integer> test) {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        assertThatThrownBy(()->lotto.getMatchCnt(test))
-                .isInstanceOf(RuntimeException.class).
-                hasMessage("유효하지 않은 당첨 로또 번호 입니다");
+    void createLotto_inputValidation(List<Integer> testNumbers) {
+        assertThatThrownBy(() -> getLotto(testNumbers)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void createLotto_inputValidation_length() {
+        assertThatThrownBy(() -> getLotto(Arrays.asList(1,2,3,4,5))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void createLotto_inputValidation_duplication() {
+        assertThatThrownBy(() -> getLotto(Arrays.asList(1,2,3,4,5,5))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void createLotto_inputValidation_range() {
+        assertThatThrownBy(() -> getLotto(Arrays.asList(1,2,3,4,5,50))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void create_normal_firstPrize() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto newLotto  = getLotto(winningNumbers);
+        assertThat(newLotto.getRanking(winningNumbers)).isEqualTo(LottoRankingEnum.FIRST_PRIZE);
+    }
+    @Test
+    void create_normal_losLot() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto newLotto = getLotto(Arrays.asList(7, 8, 9, 10, 11, 12));
+        assertThat(newLotto.getRanking(winningNumbers)).isEqualTo(LottoRankingEnum.LOSING_LOT);
+    }
+    private Lotto getLotto(List<Integer> numbers) {
+        Lotto lotto = new Lotto(numbers);
+        return lotto;
     }
 }
