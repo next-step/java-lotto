@@ -29,7 +29,8 @@ public enum Operator {
             }
             return operand1.value() / operand2.value();
         }
-    },;
+    },
+    ;
 
     private final String symbol;
 
@@ -39,8 +40,8 @@ public enum Operator {
 
     public static Operator getInstance(String symbol) {
         List<Operator> operators = List.of(Operator.values());
-        for(Operator operator: operators) {
-            if(operator.symbol.equals(symbol)) {
+        for (Operator operator : operators) {
+            if (operator.symbol.equals(symbol)) {
                 return operator;
             }
         }

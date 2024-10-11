@@ -15,8 +15,8 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoTest {
     @Test
     @DisplayName("숫자로 입력받은 로또는 해당 값들을 가지고 있습니다.")
-    void containNumbersTest(){
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5,6);
+    void containNumbersTest() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = Lotto.valueOf(0, numbers);
         List<Integer> lottoNumbers = lotto.getNumbers();
         assertThat(numbers).allMatch(lottoNumbers::contains);
@@ -44,7 +44,7 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1:2:3:7:8:9,3","1:2:3:4:5:6,6","2:3:5:6:8:9,4","22:23:25:26:28:29,0"})
+    @CsvSource({"1:2:3:7:8:9,3", "1:2:3:4:5:6,6", "2:3:5:6:8:9,4", "22:23:25:26:28:29,0"})
     @DisplayName("로또 숫자 중에 매칭된 갯수만큼 값을 리턴한다.")
     void getMatchCountTest(String value, String expected) {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);

@@ -3,9 +3,7 @@ package calculator.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class OperatorTest {
     @Test
@@ -55,6 +53,6 @@ public class OperatorTest {
     @DisplayName("symbol에 해당하는 Operator가 없다면 IllegalArgumentException이 던져집니다.")
     void getInstanceExceptionTest() {
         String symbol = ":";
-        assertThatIllegalArgumentException().isThrownBy(()-> Operator.getInstance(symbol));
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.getInstance(symbol));
     }
 }

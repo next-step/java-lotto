@@ -13,10 +13,15 @@ public class LottoManager {
     private PurchasedLottos purchasedLottos;
     private LottoNumbers winningLottoNumbers;
 
-    LottoManager(){}
+    LottoManager() {
+    }
 
     public static LottoManager newInstance() {
         return new LottoManager();
+    }
+
+    private static void buyLotto(int lottoNum, LottoNumberSelectionStrategy selectionStrategy, List<Lotto> buyingLottos) {
+        buyingLottos.add(selectionStrategy.select(lottoNum));
     }
 
     public void buy(int price, LottoNumberSelectionStrategy selectionStrategy) {
@@ -26,10 +31,6 @@ public class LottoManager {
             buyLotto(i, selectionStrategy, buyingLottos);
         }
         this.purchasedLottos = PurchasedLottos.valueOf(buyingLottos);
-    }
-
-    private static void buyLotto(int lottoNum, LottoNumberSelectionStrategy selectionStrategy, List<Lotto> buyingLottos) {
-        buyingLottos.add(selectionStrategy.select(lottoNum));
     }
 
     public PurchasedLottosDTO listPurchasedLottos() {
@@ -79,7 +80,7 @@ public class LottoManager {
         return LottoMatchInfosDTO.valueOf(matchInfoDTOs);
     }
 
-    public PurchasedLottosDTO getPurchasedLottos(){
+    public PurchasedLottosDTO getPurchasedLottos() {
         return PurchasedLottosDTO.valueOf(purchasedLottos);
     }
 
