@@ -8,6 +8,8 @@ import lotto.view.ResultView;
 
 import java.util.List;
 
+import static lotto.constants.LottoConstants.LOTTO_PRICE;
+
 public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
@@ -27,7 +29,7 @@ public class LottoController {
         String lastWinningNumber = inputView.getLastWinningNumber();
         Lotto winnerLotto = game.getWinnerLotto(lastWinningNumber);
 
-        LottoResult result = LottoResult.getLottoResult(lottos, winnerLotto, LottoGame.LOTTO_PRICE);
+        LottoResult result = LottoResult.getLottoResult(lottos, winnerLotto, LOTTO_PRICE);
 
         resultView.printLottoResult(result);
     }
