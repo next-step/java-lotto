@@ -10,6 +10,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatics;
 import lotto.domain.Rank;
+import lotto.domain.WinNumber;
 
 class RankTest {
 
@@ -32,8 +33,9 @@ class RankTest {
             new Lotto(new LottoNumbers(3, 8, 27, 30, 35, 44))
         );
         LottoStatics lottoStatics = new LottoStatics(lottos);
+        WinNumber winNumber = new WinNumber(1, 2, 3, 4, 5, 6);
 
-        double ratio = Rank.ratio(lottoStatics.totalPrize(List.of(1, 2, 3, 4, 5, 6)), 14000);
+        double ratio = Rank.ratio(lottoStatics.totalPrize(winNumber), 14000);
 
         assertThat(ratio).isEqualTo(0.35);
     }

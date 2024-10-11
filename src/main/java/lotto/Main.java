@@ -1,11 +1,10 @@
 package lotto;
 
-import java.util.List;
-
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoStatics;
 import lotto.domain.Rank;
+import lotto.domain.WinNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -25,7 +24,7 @@ public class Main {
             OutputView.lottoView(lotto);
         }
 
-        List<Integer> winNumber = InputView.inputWinnerNumber();
+        WinNumber winNumber = InputView.inputWinnerNumber();
 
         OutputView.staticsView();
         OutputView.matchView(Rank.THREE, lottoStatics.matchCount(winNumber, Rank.THREE));

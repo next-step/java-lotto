@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
@@ -22,24 +21,15 @@ public class Lotto {
     }
 
     public Lotto pickLottoNumber() {
-        LottoNumbers lottoNumbers1 = lottoNumbers.pickNumbers();
-        Lotto lotto = new Lotto(lottoNumbers1);
-
-        return lotto;
+        return new Lotto(lottoNumbers.pickNumbers());
     }
 
     public int calculateCount(int money) {
         return money / PER_COST;
     }
 
-    public int match(List<Integer> winnerNumber) {
-        int matchCount = 0;
-
-        for (int number : winnerNumber) {
-            matchCount = lottoNumbers.match(number) ? matchCount + 1 : matchCount;
-        }
-
-        return matchCount;
+    public int match(WinNumber winnerNumber) {
+        return winnerNumber.matchCount(lottoNumbers);
     }
 
     public LottoNumbers getLottoNumbers() {

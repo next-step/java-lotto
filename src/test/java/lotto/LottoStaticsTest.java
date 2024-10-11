@@ -10,6 +10,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatics;
 import lotto.domain.Rank;
+import lotto.domain.WinNumber;
 
 class LottoStaticsTest {
 
@@ -39,7 +40,7 @@ class LottoStaticsTest {
             new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6))
         );
         LottoStatics lottoStatics = new LottoStatics(lottos);
-        List<Integer> winnerNumber = List.of(1, 2, 3, 4, 5, 6);
+        WinNumber winnerNumber = new WinNumber(1, 2, 3, 4, 5, 6);
 
         int resultThree = lottoStatics.matchCount(winnerNumber, Rank.THREE);
         int resultFour = lottoStatics.matchCount(winnerNumber, Rank.FOUR);
@@ -72,7 +73,7 @@ class LottoStaticsTest {
             new Lotto(new LottoNumbers(3, 8, 27, 30, 35, 44))
         );
         LottoStatics lottoStatics = new LottoStatics(lottos);
-        List<Integer> winnerNumber = List.of(1, 2, 3, 4, 5, 6);
+        WinNumber winnerNumber = new WinNumber(1, 2, 3, 4, 5, 6);
 
         long totalPrize = lottoStatics.totalPrize(winnerNumber);
 

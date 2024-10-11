@@ -43,14 +43,12 @@ class LottoNumbersTest {
     }
 
     @Test
-    void 로또_번호에_주어진_숫자가_있는지_확인한다() {
+    void 로또_번호에_주어진_숫자가_있는지_확인해서_개수를_반환한다() {
         LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
 
-        boolean result1 = lottoNumbers.match(6);
-        boolean result2 = lottoNumbers.match(7);
+        int count = lottoNumbers.calculateMatchCount(new LottoNumbers(2, 1, 6, 11, 12, 13));
 
-        assertThat(result1).isTrue();
-        assertThat(result2).isFalse();
+        assertThat(count).isEqualTo(3);
     }
 
     @Test
