@@ -6,22 +6,28 @@ import java.util.List;
 public class WinningNumbers {
 
     private static final int WINNING_NUMBER_COUNT = 6;
-    private static final int LIMIT_WINNING_NUMBER = 45;
     private final static String WINNING_NUMBERS_SEPERATOR = ", ";
 
     private final List<LottoNumber> winningNumbers;
+    private final BonusBall bonusBall;
 
-    public WinningNumbers(final int... winningNumbers) {
-        this(convertIntToLottoNumber(winningNumbers));
+    public WinningNumbers(int bonusBall, final int... winningNumbers) {
+        this(convertIntToLottoNumber(winningNumbers), new BonusBall(bonusBall));
     }
 
-    public WinningNumbers(final List<LottoNumber> winningNumbers) {
+    public WinningNumbers(final List<LottoNumber> winningNumbers, final BonusBall bonusBall) {
         this.winningNumbers = winningNumbers;
-        this.validateNumbers();
+        this.bonusBall = bonusBall;
+        this.validate();
     }
 
+    //TODO 컴파일 오류 방지용, 추후 제거할 메소드
     public static WinningNumbers create(final String numbers){
-        return new WinningNumbers(createNumbers(numbers));
+        return new WinningNumbers(createNumbers(numbers), null);
+    }
+
+    public static WinningNumbers create(final String numbers, final String bonusBall){
+        return new WinningNumbers(createNumbers(numbers), new BonusBall(bonusBall));
     }
 
     private static List<LottoNumber> convertIntToLottoNumber(int[] winningNumbers) {
@@ -57,10 +63,11 @@ public class WinningNumbers {
         return lottoNumber;
     }
 
-    //region [validateNumbers]
-    private void validateNumbers() {
+    //region [validate]
+    private void validate() {
         validNumberCount(winningNumbers);
         duplicateNumber(winningNumbers);
+        checkDuplicateFrom(winningNumbers, bonusBall);
     }
 
     private void validNumberCount(List<LottoNumber> numbers) {
@@ -78,6 +85,16 @@ public class WinningNumbers {
             throw new IllegalArgumentException("당첨 번호가 중복됐습니다");
         }
     }
+
+    private void checkDuplicateFrom(List<LottoNumber> winningNumbers, BonusBall bonusBall) {
+        long duplicateCount = winningNumbers.stream()
+                .filter((bonusBall::isBonusNumber))
+                .count();
+
+        if(duplicateCount > 0){
+            throw new IllegalArgumentException("당첨 번호와 보너스 번호가 중복됐습니다");
+        }
+    }
     //endregion
 
     public int matchWinningNumber(Lotto lotto) {
@@ -86,5 +103,9 @@ public class WinningNumbers {
             if(lotto.hasNumber(lottoNumber)) matchCount++;
         }
         return matchCount;
+    }
+
+    public boolean isMatchBonusNumber(int bonusNumber){
+        return bonusBall.isBonusNumber(bonusNumber);
     }
 }

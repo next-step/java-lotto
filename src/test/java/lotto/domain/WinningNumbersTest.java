@@ -8,10 +8,12 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class WinningNumbersTest {
 
+    private int bonusNumber = 45;
+
     @DisplayName("로또 당첨 번호와 일치한 갯수를 확인한다")
     @Test
     void matchWinningNumber(){
-        WinningNumbers winningNumbers = new WinningNumbers(1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = new WinningNumbers(bonusNumber, 1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(1, 2, 3, 43, 44, 45);
 
         int matchNumberCount = winningNumbers.matchWinningNumber(lotto);
@@ -23,7 +25,7 @@ public class WinningNumbersTest {
     @Test
     void limitCount(){
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumbers(1, 2, 3))
+                .isThrownBy(() -> new WinningNumbers(bonusNumber, 1, 2, 3))
                 .withMessage("당첨 번호를 6개 입력하세요");
     }
 
@@ -31,7 +33,16 @@ public class WinningNumbersTest {
     @Test
     void checkDuplicateNumber(){
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumbers(1, 1, 1, 3, 4, 5))
+                .isThrownBy(() -> new WinningNumbers(bonusNumber, 1, 1, 1, 3, 4, 5))
                 .withMessage("당첨 번호가 중복됐습니다");
+    }
+
+
+    @DisplayName("당첨번호와 보너스 번호는 중복되면 안된다")
+    @Test
+    void checkDuplicateNumberAndBonusNUmber(){
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new WinningNumbers(bonusNumber, 45, 1, 3, 4, 5, 6))
+                .withMessage("당첨 번호와 보너스 번호가 중복됐습니다");
     }
 }
