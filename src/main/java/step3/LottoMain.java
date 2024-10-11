@@ -1,10 +1,13 @@
 package step3;
 
+import step3.model.ManualLotto;
 import step3.model.PurchasedLotto;
 import step3.model.LottoConfirmation;
 import step3.model.LottoMachine;
 import step3.uiView.InputView;
 import step3.uiView.ResultView;
+
+import java.util.List;
 
 public class LottoMain {
 
@@ -14,10 +17,15 @@ public class LottoMain {
     public static void main(String[] args) {
         int money = inputView.inputMoney(); //돈입력
 
-        LottoMachine lottoMachine = new LottoMachine();
-        PurchasedLotto purchasedLotto = lottoMachine.buyLotto(money); //로또 구매
+        int manualLottoCount = inputView.inputManualLottoCount();
+        List<String> manualLottoList = inputView.inputManualLotto(manualLottoCount);
 
-        resultView.lottoView(purchasedLotto);
+        ManualLotto manualLotto = new ManualLotto(manualLottoList);
+
+        LottoMachine lottoMachine = new LottoMachine();
+        PurchasedLotto purchasedLotto = lottoMachine.buyLotto(money, manualLotto); //로또 구매
+
+        resultView.lottoView(purchasedLotto, manualLotto);
 
         String prizeNum = inputView.inputPrizeNum(); //당첨번호 입력
         int bonusNum = inputView.inputBonusNum(); //보너스번호 입력
