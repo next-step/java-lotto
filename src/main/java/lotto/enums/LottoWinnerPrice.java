@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum LottoWinnerPrice {
-    none_rank(0, 0),
-    fourth_rank(3, 5000),
-    third_rank(4, 50000),
-    second_rank(5, 1500000),
-    first_rank(6, 2000000000);
+    NONE_RANK(0, 0),
+    FOURTH_RANK(3, 5000),
+    THIRD_RANK(4, 50000),
+    SECOND_RANK(5, 1500000),
+    FIRST_RANK(6, 2000000000);
 
     private final int matchedCount;
     private final int price;
@@ -31,13 +31,13 @@ public enum LottoWinnerPrice {
         return Arrays.stream(LottoWinnerPrice.values())
                 .filter(price -> price.matchedCount == matchedCount)
                 .findFirst()
-                .orElse(none_rank)
+                .orElse(NONE_RANK)
                 .getPrice();
     }
 
     public static List<LottoWinnerPrice> getLottoWinnerPrice() {
         return Arrays.stream(values())
-                .filter(rank -> rank != none_rank)
+                .filter(rank -> rank != NONE_RANK)
                 .collect(Collectors.toUnmodifiableList());
     }
 }
