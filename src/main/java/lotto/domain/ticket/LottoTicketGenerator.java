@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicketGenerator {
 
-    public static LottoTickets generateTickets(int availableLottoTickets, LottoNumberGenerator generator) {
+    public static LottoTickets generateLottoTickets(int availableLottoTickets, LottoNumberGenerator generator) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < availableLottoTickets; i++) {
             lottoTickets.add(generateLottoTicket(generator.create()));
