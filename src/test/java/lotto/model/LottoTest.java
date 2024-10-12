@@ -1,10 +1,12 @@
 package lotto.model;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static lotto.model.Lotto.*;
@@ -17,6 +19,18 @@ public class LottoTest {
         assertThatNoException().isThrownBy(() -> {
             Lotto lotto = Lotto.of(6, 9, 17, 28, 39, 45);
         });
+    }
+
+    @Test
+    void 로또번호목록을_출력한다() {
+        Lotto lotto = Lotto.of(6, 9, 17, 28, 39, 45);
+
+        List<Integer> actual = lotto.numbers();
+        List<Integer> expected = List.of(6, 9, 17, 28, 39, 45);
+
+        Assertions.assertThat(actual).isEqualTo(expected);
+        // 참조필드 불변 테스트
+        Assertions.assertThatThrownBy(() -> actual.set(0, 3));
     }
 
     @Test

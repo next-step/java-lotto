@@ -23,7 +23,7 @@ public class Lotto {
             result.add(lottoNumber);
         }
         validateLottoNumbers(result);
-        return new Lotto(result);
+        return new Lotto(Collections.unmodifiableList(result));
     }
 
     private static void validateLottoNumbers(List<Integer> result) {
@@ -46,16 +46,7 @@ public class Lotto {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers);
+    public List<Integer> numbers() {
+        return this.lottoNumbers;
     }
 }

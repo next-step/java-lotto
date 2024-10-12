@@ -1,5 +1,8 @@
 package lotto.controller;
 
+import lotto.model.Buyer;
+import lotto.model.Lotto;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -18,11 +21,11 @@ public class LottoController {
         // 요구사항: 입력받은 구입금액으로 사용자의 자동 로또번호 목록을 생성한다
         // 요구사항: 로또번호를 저장한다
         // 요구사항: 유저의 로또번호 목록을 저장한다
-        List<List<Integer>> buyer = lottoNumbers(amount);
+        Buyer buyer = Buyer.of(lottoNumbers(amount));
         // 요구사항: 구매자의 로또목록의 value 를 출력한다
-        List<String> lottoNumbersFormat = lottoNumbersFormat(buyer);
+        List<String> lottoNumbersFormat = buyerLottoes(buyer);
         // 요구사항: 구매자의 로또목록의 size 를 출력한다
-        int lottoNumbersSize = lottoNumbersSize(buyer);
+        int lottoNumbersSize = buyerLottoesSize(buyer);
 
         // 요구사항: 로또번호 목록의 size 를 콘솔에 출력한다
         System.out.println(String.format("%d개를 구매했습니다.", lottoNumbersSize));
@@ -51,22 +54,22 @@ public class LottoController {
         System.out.println(totalEarningRateFormat(totalEarningRate));
     }
 
-    private static List<List<Integer>> lottoNumbers(int amount) {
+    private static List<Lotto> lottoNumbers(int amount) {
         return List.of(
-                List.of(8, 21, 23, 41, 42, 43),
-                List.of(3, 5, 11, 16, 32, 38),
-                List.of(7, 11, 16, 35, 36, 44),
-                List.of(1, 8, 11, 31, 41, 42),
-                List.of(13, 14, 16, 38, 42, 45),
-                List.of(7, 11, 30, 40, 42, 43),
-                List.of(2, 13, 22, 32, 38, 45),
-                List.of(23, 25, 33, 36, 39, 41),
-                List.of(1, 3, 5, 14, 22, 45),
-                List.of(5, 9, 38, 41, 43, 44),
-                List.of(2, 8, 9, 18, 19, 21),
-                List.of(13, 14, 18, 21, 23, 35),
-                List.of(17, 21, 29, 37, 42, 45),
-                List.of(3, 8, 27, 30, 35, 4)
+                Lotto.of(8, 21, 23, 41, 42, 43),
+                Lotto.of(3, 5, 11, 16, 32, 38),
+                Lotto.of(7, 11, 16, 35, 36, 44),
+                Lotto.of(1, 8, 11, 31, 41, 42),
+                Lotto.of(13, 14, 16, 38, 42, 45),
+                Lotto.of(7, 11, 30, 40, 42, 43),
+                Lotto.of(2, 13, 22, 32, 38, 45),
+                Lotto.of(23, 25, 33, 36, 39, 41),
+                Lotto.of(1, 3, 5, 14, 22, 45),
+                Lotto.of(5, 9, 38, 41, 43, 44),
+                Lotto.of(2, 8, 9, 18, 19, 21),
+                Lotto.of(13, 14, 18, 21, 23, 35),
+                Lotto.of(17, 21, 29, 37, 42, 45),
+                Lotto.of(3, 8, 27, 30, 35, 4)
         );
     }
 
@@ -96,14 +99,13 @@ public class LottoController {
         );
     }
 
-    private static int lottoNumbersSize(List<List<Integer>> lottoNumbers) {
-        return lottoNumbers.size();
+    private static int buyerLottoesSize(Buyer buyer) {
+        return buyer.size();
     }
 
-    private static List<String> lottoNumbersFormat(List<List<Integer>> lottoNumbers) {
-        return lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.stream().map(String::valueOf).collect(Collectors.joining(", ")))
-                .map(string -> "["+string+"]")
+    private static List<String> buyerLottoes(Buyer buyer) {
+        return buyer.value().stream()
+                .map(lotto -> "["+lotto.toString()+"]")
                 .collect(Collectors.toList());
     }
 }
