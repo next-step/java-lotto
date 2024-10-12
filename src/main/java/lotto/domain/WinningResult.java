@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 public class WinningResult {
 
+    public static final int VALID_MATCH_COUNT_MIN = 3;
+    public static final int VALID_MATCH_COUNT_MAX = 6;
+
     private final List<Integer> staticsList;
 
     public WinningResult(List<Integer> staticsList) {
@@ -29,6 +32,16 @@ public class WinningResult {
 
     public void incrementMatchCount(int matchCount) {
         staticsList.set(matchCount, staticsList.get(matchCount) + 1);
+    }
+
+    public int calculateProfitRate() {
+        int profit = 0;
+        for (int match = 3; match <= 6; ++match) {
+            int howMany = staticsList.get(match);
+            LottoMatch LottoMatch = lotto.domain.LottoMatch.findEnumByMatchCount(match);
+            profit += LottoMatch.calculatePrize(howMany);
+        }
+        return profit;
     }
 
     @Override
