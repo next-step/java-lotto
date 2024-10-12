@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
+    private static final String DELIMITER = ", ";
 
     private final List<Integer> numbers;
 
@@ -21,8 +22,18 @@ public class Lotto {
     }
 
     public Lotto(String numbers) {
-        this(Arrays.stream(numbers.split(", "))
+        this(Arrays.stream(numbers.split(DELIMITER))
                 .map(Integer::parseInt).collect(Collectors.toList()));
+    }
+
+    private void validate(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또의 숫자는 6개이어야 합니다.");
+        }
+
+        if (numbers.size() != new HashSet<>(numbers).size()) {
+            throw new IllegalArgumentException("로또는 중복된 숫자를 허용하지 않습니다.");
+        }
     }
 
     public List<Integer> getLottoNumbers() {
@@ -34,16 +45,6 @@ public class Lotto {
                 .filter(numbers::contains)
                 .mapToInt(n -> 1)
                 .sum();
-    }
-
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또의 숫자는 6개이어야 합니다.");
-        }
-
-        if (numbers.size() != new HashSet<>(numbers).size()) {
-            throw new IllegalArgumentException("로또는 중복된 숫자를 허용하지 않습니다.");
-        }
     }
 
     @Override

@@ -13,7 +13,7 @@ public class WinningResult {
         this.staticsList = staticsList;
     }
 
-    public WinningResult(int ... numbers) {
+    public WinningResult(int... numbers) {
         this(Arrays.stream(numbers)
                 .boxed()
                 .collect(Collectors.toList()));
@@ -25,6 +25,10 @@ public class WinningResult {
 
     public List<Integer> getStaticsList() {
         return staticsList;
+    }
+
+    public void incrementMatchCount(int matchCount) {
+        staticsList.set(matchCount, staticsList.get(matchCount) + 1);
     }
 
     @Override

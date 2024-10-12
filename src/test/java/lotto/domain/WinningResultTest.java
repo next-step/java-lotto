@@ -15,4 +15,11 @@ class WinningResultTest {
         WinningResult result = new WinningResult(staticsList);
         assertThat(new WinningResult(0, 0, 1, 0, 0, 0, 0)).isEqualTo(result);
     }
+
+    @Test
+    void 통계정보반영_3개맞춤() {
+        WinningResult result = new WinningResult();
+        result.incrementMatchCount(3);
+        assertThat(result).isEqualTo(new WinningResult(0, 0, 0, 1, 0, 0, 0));
+    }
 }
