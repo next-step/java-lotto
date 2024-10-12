@@ -23,7 +23,7 @@ public class Lotto {
         Map<Integer, Integer> map = new HashMap<>();
         lottoTickets.getHitNumbers(winningLottoTicket).forEach(numbers -> {
             Prize prize = Prize.get(numbers);
-            map.put(prize.getRank(), map.getOrDefault(prize.getRank(), 0) + prize.getPrice());
+            map.put(prize.getRank(), map.getOrDefault(prize.getRank(), 0) + 1);
         });
 
         return map;
@@ -57,5 +57,10 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoTickets);
+    }
+
+    @Override
+    public String toString() {
+        return lottoTickets+"";
     }
 }
