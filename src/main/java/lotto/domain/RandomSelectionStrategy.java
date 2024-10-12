@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class RandomSelectionStrategy implements LottoNumberSelectionStrategy {
     private final static ArrayList<Integer> LOTTO_NUMBER_CONTAINERS = createLottoNumberContainer();
@@ -21,9 +20,8 @@ public class RandomSelectionStrategy implements LottoNumberSelectionStrategy {
     }
 
     @Override
-    public Lotto select(int lottoNum) {
+    public LottoNumbers select() {
         Collections.shuffle(LOTTO_NUMBER_CONTAINERS);
-        List<Integer> selectingNumbers = LOTTO_NUMBER_CONTAINERS.subList(0, Lotto.LOTTO_NUMBERS_CARDINALITY);
-        return Lotto.valueOf(lottoNum, selectingNumbers);
+        return LottoNumbers.valueOf(LOTTO_NUMBER_CONTAINERS.subList(0, Lotto.LOTTO_NUMBERS_CARDINALITY));
     }
 }

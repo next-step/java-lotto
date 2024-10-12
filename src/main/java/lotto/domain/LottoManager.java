@@ -34,7 +34,7 @@ public class LottoManager {
     }
 
     private void buyLotto(int lottoNum, LottoNumberSelectionStrategy selectionStrategy) {
-        purchasedLottos.addLotto(selectionStrategy.select(lottoNum));
+        purchasedLottos.addLotto(Lotto.newInstance(lottoNum, selectionStrategy));
     }
 
     public PurchasedLottosDTO listPurchasedLottos() {

@@ -20,6 +20,10 @@ public class Lotto {
         return new Lotto(lottoNum, LottoNumbers.valueOf(numbers));
     }
 
+    public static Lotto newInstance(int lottoNum, LottoNumberSelectionStrategy strategy) {
+        return new Lotto(lottoNum, strategy.select());
+    }
+
     public List<Integer> getNumbers() {
         return this.numbers.value();
     }
