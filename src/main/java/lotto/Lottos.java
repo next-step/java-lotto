@@ -30,6 +30,12 @@ public class Lottos {
         }
     }
 
+    public void getAllMatchCount(List<Integer> winningLotto) {
+        for (Lotto lotto : lottos) {
+            lotto.getMatchCount(winningLotto);
+        }
+    }
+
     public Map<Integer, Integer> getWinningLottoStatistics() {
         Map<Integer, Integer> winningLottoMap = new HashMap<>();
         winningLottoMap.put(3, 0);
@@ -44,12 +50,6 @@ public class Lottos {
             }
         }
         return winningLottoMap;
-    }
-
-    public void getAllMatchCount(List<Integer> winningLotto) {
-        for (Lotto lotto : lottos) {
-            lotto.getMatchCount(winningLotto);
-        }
     }
 
     public int calculateTotalWinningAmount() {

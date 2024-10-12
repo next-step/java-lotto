@@ -22,6 +22,10 @@ public class Lotto {
         return this.matchCount;
     }
 
+    public String toStringLottoNumbers() {
+        return lottoNumbers.toString();
+    }
+
     public List<Integer> generateAutoLottoNumbers() {
         while (lottoNumbers.size() < 6) {
             generateLottoNumber();
@@ -31,12 +35,11 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    private List<Integer> generateLottoNumber() {
+    private void generateLottoNumber() {
         int randomNumber = random.nextInt(45) + 1;
         if (!lottoNumbers.contains(randomNumber)) {
             lottoNumbers.add(randomNumber);
         }
-        return this.lottoNumbers;
     }
 
     public int getMatchCount(List<Integer> winningNumbers) {
@@ -62,10 +65,6 @@ public class Lotto {
 
     public boolean isWinningLotto() {
         return MATCHING_COUNT_FOR_WINNING.contains(this.matchCount);
-    }
-
-    public String toStringLottoNumbers() {
-        return lottoNumbers.toString();
     }
 
     public static int determineAmountByMatchCount(int matchCount) {
