@@ -1,10 +1,9 @@
 package lotto.model;
 
+import lotto.model.enums.Ranking;
 import lotto.util.NumbersCreator;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Buyer {
     private final List<Lotto> lottoes;
@@ -40,5 +39,22 @@ public class Buyer {
 
     private static boolean isDuplicatedLotto(List<Lotto> result, Lotto lotto) {
         return result.contains(lotto);
+    }
+
+    public Map<Ranking, Integer> rankings(Seller seller) {
+        Map<Ranking, Integer> result = new HashMap<>();
+        Arrays.stream(Ranking.values()).forEach(ranking -> {
+            result.put(ranking, rankingCount(seller, ranking));
+        });
+        return result;
+    }
+
+    private int rankingCount(Seller seller, Ranking fourth) {
+        long count = this.lottoes.stream()
+                .map(lotto -> lotto.compare(seller.winningLotto()))
+                .filter(fourth::equals)
+                .count();
+        return Long.valueOf(count)
+                .intValue();
     }
 }
