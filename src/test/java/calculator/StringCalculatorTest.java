@@ -13,9 +13,9 @@ class StringCalculatorTest {
     @DisplayName("공백을 제거하는지 확인한다")
     void 입력문자열_공백제거() {
 
-        StringCalculator calculator = new StringCalculator();
+        Operator operator = Operator.getOperator();
 
-        Assertions.assertThat(calculator.splitString("2 + 3 * 4 / 2"))
+        Assertions.assertThat(operator.splitString("2 + 3 * 4 / 2"))
                 .containsExactly("2", "+", "3", "*", "4", "/", "2");
 
     }
@@ -30,7 +30,7 @@ class StringCalculatorTest {
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() ->
-                        calculator.calculate(input))
+                        calculator.validInput(input))
                 .withMessage("null 혹은 공백 문자열은 연산 불가능합니다");
 
     }

@@ -62,9 +62,11 @@ class OperatorUtilsTest {
     @DisplayName("잘못된 연산기호인지 확인한다")
     void 잘못된_연산기호_테스트() {
 
+        Operator operator = Operator.getOperator();
+
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() ->
-                        OperatorUtils.selection("^"))
+                        operator.selection("^"))
                 .withMessage("^는 잘못된 연산기호 입니다");
 
     }
