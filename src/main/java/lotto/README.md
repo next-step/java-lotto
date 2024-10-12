@@ -6,7 +6,7 @@
 * 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
 
 ## 기능 목록
-- [ ] 로또 구매화면(PurchaseLottoView)
+- [ ] 로또 구매화면(LottoPurchaseView)
     - [ ] 구매 안내, 구매 개수, 구매 로또
 - [ ] 로또 구매 개수 계산(NumberOfPurchasedLotto)
 - [ ] 로또 생성(LottoGenerator)
