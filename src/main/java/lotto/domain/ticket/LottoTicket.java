@@ -2,8 +2,14 @@ package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.result.Rank;
+import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.InvalidSizeOfLottoException;
+import lotto.exception.UnsortedLottoNumbersException;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -11,7 +17,9 @@ public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
+        checkSizeOfLottoNumbers(lottoNumbers);
+        checkIfSorted(lottoNumbers);
+        checkIfDuplicateExists(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -19,14 +27,31 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
-    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+    private boolean isInvalidSizeOfLotto(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.size() != SIZE_OF_LOTTO;
+    }
+
+    private void checkSizeOfLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (isInvalidSizeOfLotto(lottoNumbers)) {
-            throw new IllegalArgumentException("생성된 숫자 갯수 오류입니다.");
+            throw new InvalidSizeOfLottoException("로또 번호 갯수 오류입니다.");
         }
     }
 
-    private boolean isInvalidSizeOfLotto(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.size() != SIZE_OF_LOTTO;
+    private static void checkIfDuplicateExists(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(lottoNumbers);
+        if (uniqueLottoNumbers.size() != lottoNumbers.size()) {
+            throw new DuplicateLottoNumberException("중복된 로또 번호가 존재합니다.");
+        }
+    }
+
+    private void checkIfSorted(List<LottoNumber> lottoNumbers) {
+        List<LottoNumber> sortedLottoNumbers = lottoNumbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
+
+        if (!sortedLottoNumbers.equals(lottoNumbers)) {
+            throw new UnsortedLottoNumbersException("로또 번호는 정렬된 상태여야 합니다.");
+        }
     }
 
     @Override
