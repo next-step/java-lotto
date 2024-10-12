@@ -36,7 +36,7 @@ public class WinningResult {
 
     public int calculateProfitRate() {
         int profit = 0;
-        for (int match = 3; match <= 6; ++match) {
+        for (int match = VALID_MATCH_COUNT_MIN; match <= VALID_MATCH_COUNT_MAX; ++match) {
             int howMany = staticsList.get(match);
             LottoMatch LottoMatch = lotto.domain.LottoMatch.findEnumByMatchCount(match);
             profit += LottoMatch.calculatePrize(howMany);

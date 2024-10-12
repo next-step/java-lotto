@@ -8,8 +8,9 @@ import java.util.List;
 
 public class LottoGenerator {
 
-    public static final int LOTTO_MIN_VALUE = 1;
-    public static final int LOTTO_MAX_VALUE = 45;
+    private static final int LOTTO_MIN_VALUE = 1;
+    private static final int LOTTO_MAX_VALUE = 45;
+    private static final int LOTTO_SIZE = 6;
 
     public static List<Lotto> generateLottos(int size) {
         List<Lotto> lottos = new ArrayList<>();
@@ -26,7 +27,7 @@ public class LottoGenerator {
         }
 
         Collections.shuffle(numbers);
-        numbers = numbers.subList(0, 6);
+        numbers = numbers.subList(0, LOTTO_SIZE);
         Collections.sort(numbers);
 
         return new Lotto(numbers);
