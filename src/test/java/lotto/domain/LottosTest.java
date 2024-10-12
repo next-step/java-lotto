@@ -22,7 +22,7 @@ public class LottosTest {
     @Test
     void countMatchingNumbers(){
         Lottos lottos = createLottos();
-        WinningNumbers winningNumbers = new WinningNumbers(1, 2, 3, 4, 5, 6, 7);
+        WinningNumbers winningNumbers = new WinningNumbers(45, 1, 2, 3, 4, 5, 6);
 
         /*
         첫번째 복권 당첨번호와 번호 같은 갯수 : 6
@@ -35,7 +35,7 @@ public class LottosTest {
     @Test
     void matchingBonusNumbers(){
         Lottos lottos = createLottos();
-        WinningNumbers winningNumbers = new WinningNumbers(1, 1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = new WinningNumbers(1, 2, 3, 4, 5, 6, 7);
 
         assertThat(lottos.matchingBonusNumbers(winningNumbers)).containsExactly(true, false);
     }
