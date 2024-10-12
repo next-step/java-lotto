@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoBundleTest {
 
     Lotto winningLotto = new Lotto(IntStream.rangeClosed(1, 6)
-            .mapToObj(LottoNumber::of).collect(Collectors.toList()));
+            .mapToObj(LottoNumber::new).collect(Collectors.toList()));
 
     @Test
     void 입력받은_개수만큼_로또_생성() {
@@ -26,7 +26,7 @@ public class LottoBundleTest {
 
     @Test
     void 입력받은_당첨번호와_소유한_로또_비교하여_당첨내역_담긴_인스턴스_반환() {
-        LottoBundle lottoBundle = LottoBundle.of(List.of(
+        LottoBundle lottoBundle = new LottoBundle(List.of(
                 new Lotto("1,2,3,4,5,6"),
                 new Lotto("1,2,3,4,5,7"),
                 new Lotto("1,2,3,4,7,8"),
@@ -34,7 +34,7 @@ public class LottoBundleTest {
                 new Lotto("1,22,23,24,25,26"),
                 new Lotto("21,22,23,24,25,26")));
 
-        WinningPrize winningPrize = lottoBundle.winPrize(winningLotto);
+        WinningPrize winningPrize = lottoBundle.winningPrize(winningLotto);
 
         assertThat(winningPrize.winAmount(LottoPrize.FOURTH.getMatch())).isEqualTo(1);
         assertThat(winningPrize.winAmount(LottoPrize.THIRD.getMatch())).isEqualTo(1);

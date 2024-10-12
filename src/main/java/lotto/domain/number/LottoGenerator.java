@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 class LottoGenerator {
 
     private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(1, 45)
-            .mapToObj(LottoNumber::of).collect(Collectors.toList());
+            .mapToObj(LottoNumber::new).collect(Collectors.toList());
 
     private LottoGenerator() {
     }
