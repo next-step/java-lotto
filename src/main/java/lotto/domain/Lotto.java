@@ -3,34 +3,29 @@ package lotto.domain;
 import lotto.constant.LottoConstant;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public Set<Integer> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(Set<Integer> numbers) {
         if (numbers.size() != LottoConstant.LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는" + LottoConstant.LOTTO_SIZE + "개여야 합니다.");
-        }
-
-        if (numbers.stream().distinct().count() != LottoConstant.LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
         }
 
         if (numbers.stream().anyMatch(number -> !isNumberValid(number))) {
             throw new IllegalArgumentException("로또 번호는 " + LottoConstant.LOTTO_START_NUMBER + "부터 " + LottoConstant.LOTTO_END_NUMBER + "사이여야 합니다.");
         }
-
     }
 
     private boolean isNumberValid(int number) {
