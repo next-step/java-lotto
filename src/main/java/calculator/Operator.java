@@ -3,39 +3,24 @@ package calculator;
 import calculator.exception.DivisionCannotBeZeroException;
 import calculator.exception.InvalidOperatorException;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 import java.util.function.IntBinaryOperator;
 
-public class Operator {
-    private static final Map<String, IntBinaryOperator> operaterMap = new HashMap<>();
+public enum Operator {
+    PLUS("+", (a, b) -> a + b),
+    MINUS("-", (a, b) -> a - b),
+    MULTIPLY("*", (a, b) -> a * b),
+    DEVIDE("/", (a, b) -> {
+        validDivision(b);
+        return a / b;
+    });
 
-    public static final String PLUS = "+";
-    public static final String MINUS = "-";
-    public static final String MULTIPLY = "*";
-    public static final String DEVIDE = "/";
+    private final String operator;
+    private final IntBinaryOperator operatorMethod;
 
-    private static Operator operator;
-
-    static {
-        operaterMap.put(PLUS, (a, b) -> a + b);
-        operaterMap.put(MINUS, (a, b) -> a - b);
-        operaterMap.put(MULTIPLY, (a, b) -> a * b);
-        operaterMap.put(DEVIDE, (a, b) -> {
-            validDivision(b);
-            return a / b;
-        });
-    }
-
-    private Operator() {
-
-    }
-
-    public static Operator getOperator() {
-        if (operator == null) {
-            operator = new Operator();
-        }
-        return operator;
+    Operator(String operator, IntBinaryOperator operatorMethod) {
+        this.operator = operator;
+        this.operatorMethod = operatorMethod;
     }
 
     private static void validDivision(int division) {
@@ -43,11 +28,12 @@ public class Operator {
             throw new DivisionCannotBeZeroException(division);
     }
 
-    public IntBinaryOperator selection(String s) {
-        if (!operaterMap.containsKey(s)) {
-            throw new InvalidOperatorException(s);
-        }
-        return operaterMap.get(s);
+    public static IntBinaryOperator getOperatorMethod(String operatorRequest) {
+        return Arrays.stream(values())
+                .filter(op -> op.operator.equals(operatorRequest))
+                .findFirst()
+                .orElseThrow(() -> new InvalidOperatorException(operatorRequest))
+                .operatorMethod;
     }
 
 }

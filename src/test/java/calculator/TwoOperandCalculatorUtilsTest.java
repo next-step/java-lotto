@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class OperatorUtilsTest {
+class TwoOperandCalculatorUtilsTest {
     @Test
     @DisplayName("덧셈 테스트")
     void 덧셈_테스트() {
@@ -67,11 +67,11 @@ class OperatorUtilsTest {
     @DisplayName("잘못된 연산기호인지 확인한다")
     void 잘못된_연산기호_테스트() {
 
-        Operator operator = Operator.getOperator();
+        TwoOperandCalculator twoOperandCalculator = TwoOperandCalculator.getOperatorSelection();
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() ->
-                        operator.selection("^"))
+                        twoOperandCalculator.findOperator("^"))
                 .withMessage("^는 잘못된 연산기호 입니다");
 
     }
