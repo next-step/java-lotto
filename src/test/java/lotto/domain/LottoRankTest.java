@@ -26,4 +26,12 @@ class LottoRankTest {
         assertFalse(none.hasRankedPrize());
         assertTrue(first.hasRankedPrize());
     }
+    
+    @DisplayName("보너스볼 체크하는 등수인지 확인 가능하다")
+    @Test
+    void isCheckBonusNumber(){
+        LottoRank second = LottoRank.SECOND;
+
+        assertTrue(second.isCheckBonusNumber());
+    }
 }

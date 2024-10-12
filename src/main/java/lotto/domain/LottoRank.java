@@ -19,7 +19,7 @@ public enum LottoRank {
         this.prize = prize;
         this.isCheckBonusNumber = isCheckBonusNumber;
     }
-    
+
     public static LottoRank from(final int matchCount, final boolean isCheckBonusNumber) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.matchCount == matchCount
@@ -36,11 +36,19 @@ public enum LottoRank {
         return !isNoneRank();
     }
 
+    public boolean isCheckBonusNumber(){
+        return isCheckBonusNumber;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
 
     public int getPrize(){
         return prize;
+    }
+
+    public boolean getIsCheckBonusNumber() {
+        return isCheckBonusNumber;
     }
 }
