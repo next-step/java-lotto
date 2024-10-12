@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoManager;
+import lotto.domain.LottoAgent;
 import lotto.domain.RandomSelectionStrategy;
 import lotto.dto.LottoStatisticsDTO;
 import lotto.dto.PurchasedLottosDTO;
@@ -13,13 +13,13 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         int price = InputView.priceInput();
-        LottoManager lottoManager = LottoManager.newInstance();
-        lottoManager.buy(price, RandomSelectionStrategy.getInstance());
-        PurchasedLottosDTO purchasedLottos = lottoManager.getPurchasedLottos();
+        LottoAgent lottoAgent = LottoAgent.newInstance();
+        lottoAgent.buy(price, RandomSelectionStrategy.getInstance());
+        PurchasedLottosDTO purchasedLottos = lottoAgent.getPurchasedLottos();
         ResultView.printPurchasedLottos(purchasedLottos);
         List<Integer> winnerNumbers = InputView.winnerNumbersInput();
-        lottoManager.decideWinningNumbers(WinningNumbersDTO.valueOf(winnerNumbers));
-        LottoStatisticsDTO statistics = lottoManager.getStatistics();
+        lottoAgent.decideWinningNumbers(WinningNumbersDTO.valueOf(winnerNumbers));
+        LottoStatisticsDTO statistics = lottoAgent.getStatistics();
         ResultView.printLottoStatistics(statistics);
     }
 }

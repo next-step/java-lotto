@@ -11,20 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LottoManager {
+public class LottoAgent {
     private static final int LOTTO_PRICE = 1000;
 
     private final PurchasedLottos purchasedLottos;
     private LottoNumbers winningLottoNumbers;
 
-    private LottoManager() {
+    private LottoAgent() {
         purchasedLottos = PurchasedLottos.newInstance();
     }
 
-    public static LottoManager newInstance() {
-        return new LottoManager();
+    public static LottoAgent newInstance() {
+        return new LottoAgent();
     }
-
 
     public void buy(int price, LottoNumberSelectionStrategy selectionStrategy) {
         int buyingCount = price / LOTTO_PRICE;

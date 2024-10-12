@@ -14,36 +14,36 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoManagerTest {
+public class LottoAgentTest {
     @ParameterizedTest
     @ValueSource(ints = {10000, 15000, 20000})
     @DisplayName("금액에 비례하여 Lotto가 구입됩니다.")
     void buyCardinalityTest(int price) {
-        LottoManager manager = LottoManager.newInstance();
-        manager.buy(price, () -> LottoNumbers.valueOf(List.of(1, 3, 5, 7, 9, 11)));
-        PurchasedLottosDTO lottos = manager.listPurchasedLottos();
+        LottoAgent agent = LottoAgent.newInstance();
+        agent.buy(price, () -> LottoNumbers.valueOf(List.of(1, 3, 5, 7, 9, 11)));
+        PurchasedLottosDTO lottos = agent.listPurchasedLottos();
         assertThat(lottos.getPurchasedLottos().size()).isEqualTo(price / 1000);
     }
 
     @Test
     @DisplayName("당첨 번호를 입력하면 로또가 등록됨")
     void decideWinningLottoTest() {
-        LottoManager manager = LottoManager.newInstance();
+        LottoAgent agent = LottoAgent.newInstance();
         WinningNumbersDTO winningNumbers = WinningNumbersDTO.valueOf(List.of(1, 3, 5, 7, 9, 11));
-        manager.decideWinningNumbers(winningNumbers);
-        assertThat(manager.getWinningLottoNumbers().value()).isEqualTo(winningNumbers.getWinningNumbers());
+        agent.decideWinningNumbers(winningNumbers);
+        assertThat(agent.getWinningLottoNumbers().value()).isEqualTo(winningNumbers.getWinningNumbers());
     }
 
     @Test
     @DisplayName("statistics에서 당첨된 로또 번호 갯수가 포함됨")
     void getStatisticsTest() {
-        LottoManager manager = LottoManager.newInstance();
+        LottoAgent agent = LottoAgent.newInstance();
         List<Integer> winningNumbers = List.of(1, 3, 5, 7, 9, 11);
         int buyingPrice = 10000;
-        manager.buy(buyingPrice, () -> LottoNumbers.valueOf(winningNumbers));
+        agent.buy(buyingPrice, () -> LottoNumbers.valueOf(winningNumbers));
         WinningNumbersDTO winningNumbersDTO = WinningNumbersDTO.valueOf(winningNumbers);
-        manager.decideWinningNumbers(winningNumbersDTO);
-        LottoStatisticsDTO statistics = manager.getStatistics();
+        agent.decideWinningNumbers(winningNumbersDTO);
+        LottoStatisticsDTO statistics = agent.getStatistics();
         List<LottoMatchInfoDTO> infos = statistics.getMatchInfosDTO().getMatchInfoDTOs();
         assertThat(infos).isNotEmpty().anyMatch(info -> info.getMatchCount() == 6 && info.getLottoNum() > 0);
     }
