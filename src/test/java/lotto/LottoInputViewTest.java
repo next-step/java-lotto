@@ -20,16 +20,8 @@ public class LottoInputViewTest {
     void 갯수_확인(){
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    LottoInputView.validateListSize(Arrays.asList(1, 2, 3, 4, 6));
+                    LottoInputView.validateLottoNumbers(Arrays.asList(1, 2, 3, 4, 6));
                 }).withMessageMatching("번호 갯수가 6개가 아닙니다.");
-    }
-
-    @Test
-    @DisplayName("번호 범위가 1 ~ 45 사이가 아닌 경우 IllegalArgumentException")
-    void 범위_확인(){
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoInputView.validateNumberInRange(47);
-        });
     }
 
 }

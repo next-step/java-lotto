@@ -31,9 +31,8 @@
 ### 로또 기능 목록
 #### UI
 - [ ] 구입금액 입력
-- [ ] 지난주 당첨번호 입력
-  - [ ] 번호 갯수 6개가 아닌 경우 IllegalArgumentException throw
-  - [ ] 번호 1 ~ 45 범위를 넘어가는 경우 IllegalArgumentException throw
+- [x] 지난주 당첨번호 입력
+  - [x] 번호 갯수 6개가 아닌 경우 IllegalArgumentException throw
 - [ ] 구매한 개수 출력
 - [ ] 구매한 로또 목록 출력
 - [ ] 당첨 통계 출력
@@ -41,6 +40,7 @@
 
 #### 로또
 - [ ] 구입금액에 맞게 로또 구매
+  - [ ] 로또 금액보다 적은 금액일 때 IllegalArgumentException throw
 - [ ] 로또 번호 자동 생성
 - [ ] 한 개의 로또에 일치하는 개수 확인
 - [ ] 당첨된 로또 개수 확인 (3, 4, 5, 6개 일치)

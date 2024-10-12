@@ -4,14 +4,9 @@ import java.util.List;
 
 public class LottoInputView {
     public static boolean validateLottoNumbers(List<Integer> numbers){
-        return false;
-    }
-
-    public static boolean validateListSize(List<Integer> numbers){
-        return false;
-    }
-
-    public static boolean validateNumberInRange(int number){
-        return false;
+        if(numbers.size() != 6) {
+            throw new IllegalArgumentException("번호 갯수가 6개가 아닙니다.");
+        }
+        return true;
     }
 }
