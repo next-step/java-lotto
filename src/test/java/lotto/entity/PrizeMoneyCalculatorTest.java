@@ -10,6 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PrizeMoneyCalculatorTest {
+
     @Test
     void 당첨_갯수_검증() {
 
@@ -23,7 +24,7 @@ class PrizeMoneyCalculatorTest {
         PrizeMoneyCalculator calculator = new PrizeMoneyCalculator();
         ResultDto resultsDtos = calculator.result(winners, money);
 
-        RankDto rankDto = resultsDtos.getRankDtos().stream().filter(i -> i.getPrizeMoney() == PrizeMoney.THREE).findFirst().get();
+        RankDto rankDto = resultsDtos.getRankDtos().stream().filter(i -> i.getPrizeMoney() == PrizeMoney.THREE.getPrizeMoney()).findFirst().get();
 
         assertThat(rankDto.getCount()).isEqualTo(3);
     }

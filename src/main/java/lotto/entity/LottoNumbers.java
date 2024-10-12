@@ -20,4 +20,9 @@ public class LottoNumbers {
         }
         return winningCount;
     }
+
+    @Override
+    public String toString() {
+        return this.numbers.toString();
+    }
 }

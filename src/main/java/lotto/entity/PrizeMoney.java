@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 
 public enum PrizeMoney {
-    LOSE(0, null),
+    LOSE(0, BigDecimal.valueOf(0)),
     THREE(3, BigDecimal.valueOf(5000)),
     FOUR(4, BigDecimal.valueOf(50000)),
     FIVE(5, BigDecimal.valueOf(1500000)),
@@ -22,11 +22,15 @@ public enum PrizeMoney {
         return this.count == count;
     }
 
-    public boolean isWinner() {
-        return this.prizeMoney != null;
-    }
-
     public BigDecimal sum(BigDecimal winner) {
         return this.prizeMoney.add(winner);
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public BigDecimal getPrizeMoney() {
+        return prizeMoney;
     }
 }

@@ -33,8 +33,8 @@ public class PrizeMoneyCalculator {
         return new ResultDto(rankDtos, rate);
     }
 
-    private BigDecimal calculateRate(int inputMoney, BigDecimal winnerMoney) {
-        return winnerMoney.divide(BigDecimal.valueOf(inputMoney), 2, RoundingMode.HALF_UP);
+    private BigDecimal calculate(BigDecimal winner, PrizeMoney prizeMoney) {
+        return prizeMoney.sum(winner);
     }
 
     private void increase(PrizeMoney prizeMoney) {
@@ -43,10 +43,11 @@ public class PrizeMoneyCalculator {
     }
 
     private RankDto search(PrizeMoney prizeMoney) {
-        return rankDtos.stream().filter(i -> i.same(prizeMoney)).findFirst().get();
+        return rankDtos.stream().filter(i -> i.same(prizeMoney.getCount())).findFirst().get();
     }
 
-    private static BigDecimal calculate(BigDecimal winner, PrizeMoney prizeMoney) {
-        return prizeMoney.sum(winner);
+    private BigDecimal calculateRate(int inputMoney, BigDecimal winnerMoney) {
+        return winnerMoney.divide(BigDecimal.valueOf(inputMoney), 2, RoundingMode.HALF_UP);
     }
+
 }

@@ -6,14 +6,23 @@ import java.util.List;
 import java.util.Set;
 
 public class WinningNumbers {
-    private static final String DEFAULT_SPLIT_DELIMITER = ", ";
+    private static final String DEFAULT_SPLIT_DELIMITER = ",";
+    private static final String SPACING_REGEX = " ";
 
     private WinningNumbers() {
 
     }
 
     public static List<Integer> numbers(String text) {
-        return validate(toInts(text.split(DEFAULT_SPLIT_DELIMITER)));
+        return validate(toInts(split(replaceSpacing(text))));
+    }
+
+    private static String replaceSpacing(String text) {
+        return text.replaceAll(SPACING_REGEX, "");
+    }
+
+    private static String[] split(String text) {
+        return text.split(DEFAULT_SPLIT_DELIMITER);
     }
 
     private static List<Integer> toInts(String[] values) {
@@ -24,12 +33,15 @@ public class WinningNumbers {
         return result;
     }
 
+    private static Integer toInt(String value) {
+        return Integer.parseInt(value);
+    }
+
     private static List<Integer> validate(List<Integer> result) {
         validateDuplication(result);
         validateSize(result);
         return result;
     }
-
 
     private static void validateDuplication(List<Integer> result) {
         Set<Integer> distinct = new HashSet<>(result);
@@ -43,9 +55,4 @@ public class WinningNumbers {
             throw new IllegalArgumentException("당첨 번호 여섯개 아님");
         }
     }
-
-    private static Integer toInt(String value) {
-        return Integer.parseInt(value);
-    }
-
 }

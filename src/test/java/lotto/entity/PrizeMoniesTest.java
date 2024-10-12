@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class PrizeMoniesTest {
 
-
     @Test
     void 맞히지_못함() {
         PrizeMonies prizeMonies = new PrizeMonies();

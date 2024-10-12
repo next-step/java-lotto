@@ -9,6 +9,7 @@ public class LottoMachine {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_UNIT_PRICE = 1000;
+
     private final PrizeMonies prizeMonies;
 
     public LottoMachine() {
@@ -16,8 +17,18 @@ public class LottoMachine {
     }
 
     public List<Lotto> insert(int money) {
-        int count = getLottoCount(money);
-        return issue(count);
+        return issue(getLottoCount(money));
+    }
+
+    public List<PrizeMoney> winnerResult(List<Lotto> lottos, List<Integer> winnersNumber) {
+        List<PrizeMoney> result = new ArrayList<>();
+
+        for (Lotto lotto : lottos) {
+            PrizeMoney prizeMoney = prizeMonies.result(lotto.matchCount(winnersNumber));
+            result.add(prizeMoney);
+        }
+
+        return result.stream().filter(l -> l != PrizeMoney.LOSE).collect(Collectors.toList());
     }
 
     private int getLottoCount(int money) {
@@ -26,11 +37,9 @@ public class LottoMachine {
 
     private List<Lotto> issue(int count) {
         List<Lotto> lottos = new ArrayList<>();
-
         for (int i = 0; i < count; i++) {
             lottos.add(create());
         }
-
         return lottos;
     }
 
@@ -46,16 +55,5 @@ public class LottoMachine {
             numbers.add(i);
         }
         return numbers;
-    }
-
-    public List<PrizeMoney> winnerResult(List<Lotto> lottos, List<Integer> winnersNumber) {
-        List<PrizeMoney> result = new ArrayList<>();
-
-        for (Lotto lotto : lottos) {
-            PrizeMoney prizeMoney = prizeMonies.result(lotto.matchCount(winnersNumber));
-            result.add(prizeMoney);
-        }
-
-        return result.stream().filter(l -> l.isWinner()).collect(Collectors.toList());
     }
 }

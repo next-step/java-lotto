@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTest {
 
-
     @Test
     void 정렬() {
         List<Integer> numbers = Arrays.asList(10, 4, 9, 2, 5, 1);

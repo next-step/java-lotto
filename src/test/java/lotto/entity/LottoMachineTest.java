@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoMachineTest {
+
     @Test
     void 금액_입력_시_반환_되는_로또_리스트() {
         LottoMachine machine = new LottoMachine();

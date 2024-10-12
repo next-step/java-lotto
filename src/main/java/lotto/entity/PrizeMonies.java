@@ -12,6 +12,6 @@ public class PrizeMonies {
     }
 
     public PrizeMoney result(int collectCount) {
-        return this.prizeMonies.stream().filter(i -> i.isMatch(collectCount)).findFirst().orElse(null);
+        return this.prizeMonies.stream().filter(i -> i.isMatch(collectCount)).findFirst().orElse(PrizeMoney.LOSE);
     }
 }

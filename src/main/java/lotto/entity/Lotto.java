@@ -24,4 +24,10 @@ public class Lotto {
         }
         return count;
     }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.toString();
+
+    }
 }
