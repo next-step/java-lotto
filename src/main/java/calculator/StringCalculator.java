@@ -9,6 +9,8 @@ public class StringCalculator {
     private static final String DELIMITER = " ";
     private static final String CHECK_NUMBER_REGEXP = "^[0-9]+$";
 
+    private static final String VALIDATE_EXPRESSION_REGEXP = "^[0-9\\s\\+\\-\\*\\/]+$";
+
     public static int calculate(String expression) {
         validateExpression(expression);
 
@@ -20,7 +22,11 @@ public class StringCalculator {
 
     private static void validateExpression(String expression) {
         if (expression == null || expression.isBlank()) {
-            throw new IllegalArgumentException("계산식이 잘못되었습니다.");
+            throw new IllegalArgumentException("계산식이 입력되지 않았습니다.");
+        }
+
+        if (!expression.matches(VALIDATE_EXPRESSION_REGEXP)) {
+            throw new IllegalArgumentException("계산식에 유효하지 않은 문자가 포함되었습니다.");
         }
     }
 
