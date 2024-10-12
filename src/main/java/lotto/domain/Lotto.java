@@ -32,9 +32,14 @@ public class Lotto {
         int matchCount = 0;
         List<Integer> winningNumberList = winningNumbers.value();
         for (int number : numbers.value()) {
-            if (winningNumberList.contains(number)) {
-                matchCount++;
-            }
+            matchCount = updateMatchCount(number, winningNumberList, matchCount);
+        }
+        return matchCount;
+    }
+
+    private int updateMatchCount(int number, List<Integer> winningNumberList, int matchCount) {
+        if (winningNumberList.contains(number)) {
+            matchCount++;
         }
         return matchCount;
     }
