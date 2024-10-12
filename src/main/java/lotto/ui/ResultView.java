@@ -55,8 +55,7 @@ public class ResultView {
         }
     }
 
-    private static void printPercentageRateOfReturn(int percentageRateOfReturn) {
-        String percentString = percentageRateOfReturn >= 100 ? "1.00" : String.format("0.%02d", percentageRateOfReturn);
-        System.out.printf("총 수익률은 %s입니다.\n", percentString);
+    private static void printPercentageRateOfReturn(double percentageRateOfReturn) {
+        System.out.printf("총 수익률은 %.2f입니다.\n", percentageRateOfReturn);
     }
 }

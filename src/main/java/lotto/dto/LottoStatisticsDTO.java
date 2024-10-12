@@ -3,19 +3,19 @@ package lotto.dto;
 import java.util.Objects;
 
 public class LottoStatisticsDTO {
-    private final int percentageRateOfReturn;
+    private final double percentageRateOfReturn;
     private final LottoMatchInfosDTO matchInfosDTO;
 
-    private LottoStatisticsDTO(int percentageRateOfReturn, LottoMatchInfosDTO matchInfosDTO) {
+    private LottoStatisticsDTO(double percentageRateOfReturn, LottoMatchInfosDTO matchInfosDTO) {
         this.percentageRateOfReturn = percentageRateOfReturn;
         this.matchInfosDTO = matchInfosDTO;
     }
 
-    public static LottoStatisticsDTO valueOf(int percentageRateOfReturn, LottoMatchInfosDTO matchCountsDTO) {
+    public static LottoStatisticsDTO valueOf(double percentageRateOfReturn, LottoMatchInfosDTO matchCountsDTO) {
         return new LottoStatisticsDTO(percentageRateOfReturn, matchCountsDTO);
     }
 
-    public int getPercentageRateOfReturn() {
+    public double getPercentageRateOfReturn() {
         return percentageRateOfReturn;
     }
 

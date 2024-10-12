@@ -22,7 +22,7 @@ public class LottoJudge {
     public LottoStatisticsDTO getStatisticsOf(LottoAgent agent) {
         List<Lotto> purchasedLottos = agent.getPurchasedLottos().getPurchasedLottos();
         Map<Integer, Integer> matchCountMap = countMatchingNumbers(purchasedLottos);
-        int rewardPercentage = calculateRewardPercentage(matchCountMap, purchasedLottos);
+        double rewardPercentage = calculateRewardPercentage(matchCountMap, purchasedLottos);
         LottoMatchInfosDTO matchInfosDTO = convertToMatchInfosDTO(matchCountMap);
         return LottoStatisticsDTO.valueOf(rewardPercentage, matchInfosDTO);
     }
@@ -36,14 +36,14 @@ public class LottoJudge {
         return matchCountMap;
     }
 
-    private int calculateRewardPercentage(Map<Integer, Integer> matchCountMap, List<Lotto> purchasedLottos) {
+    private double calculateRewardPercentage(Map<Integer, Integer> matchCountMap, List<Lotto> purchasedLottos) {
         List<LottoReward> rewards = List.of(LottoReward.values());
         int totalReward = 0;
         for (LottoReward reward : rewards) {
             int rewardingLottoNum = matchCountMap.getOrDefault(reward.getMatchCount(), 0);
             totalReward += rewardingLottoNum * reward.getReward();
         }
-        return 100 * totalReward / (purchasedLottos.size() * Lotto.LOTTO_PRICE);
+        return (double) totalReward / (purchasedLottos.size() * Lotto.LOTTO_PRICE);
     }
 
     private LottoMatchInfosDTO convertToMatchInfosDTO(Map<Integer, Integer> matchCountMap) {
