@@ -24,4 +24,8 @@ public class PurchasePrice {
         }
     }
 
+    public int getPurchaseCount() {
+        return money / PRICE_UNIT;
+    }
+
 }
