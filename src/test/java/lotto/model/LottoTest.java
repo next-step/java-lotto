@@ -18,6 +18,8 @@ public class LottoTest {
     void 로또를_저장한다() {
         assertThatNoException().isThrownBy(() -> {
             Lotto lotto = Lotto.of(6, 9, 17, 28, 39, 45);
+            Lotto compareLotto = Lotto.of(6, 9, 17, 28, 39, 45);
+            Assertions.assertThat(lotto).isEqualTo(compareLotto);
         });
     }
 

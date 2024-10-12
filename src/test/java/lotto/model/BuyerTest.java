@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static lotto.model.Buyer.LOTTO_IS_NOT_ALLOWED_DUPLICATED;
+
 public class BuyerTest {
+
 
     @Test
     void 로또목록을_구매자에_저장한다() {
@@ -34,8 +37,21 @@ public class BuyerTest {
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
+    @Test
+    void 로또목록은_중복될수_없다() {
+        Assertions.assertThatThrownBy(() -> {
+                    Buyer duplicateBuyLottoesBuyer = Buyer.of(LOTTOES_DUPLICATED_FIXTURE);
+                }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(LOTTO_IS_NOT_ALLOWED_DUPLICATED);
+    }
+
     public static final List<Lotto> LOTTOES_FIXTURE = List.of(
             Lotto.of(8, 21, 23, 41, 42, 43),
             Lotto.of(2, 13, 22, 32, 38, 45)
+    );
+
+    public static final List<Lotto> LOTTOES_DUPLICATED_FIXTURE = List.of(
+            Lotto.of(8, 21, 23, 41, 42, 43),
+            Lotto.of(8, 21, 23, 41, 42, 43)
     );
 }

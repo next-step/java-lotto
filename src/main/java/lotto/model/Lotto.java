@@ -30,23 +30,39 @@ public class Lotto {
         int lottoNumbersSize = result.size();
 
         int distinctLottoNumbersSize = new HashSet<>(result).size();
-        if (distinctLottoNumbersSize < lottoNumbersSize) {
+        boolean isLottoNumberDuplicated = distinctLottoNumbersSize < lottoNumbersSize;
+        if (isLottoNumberDuplicated) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_NOT_ALLOWED_DUPLICATED);
         }
 
-        if (lottoNumbersSize != LOTTO_NUMBERS_SIZE) {
+        boolean isLottoNumbersSizeEqualSix = lottoNumbersSize != LOTTO_NUMBERS_SIZE;
+        if (isLottoNumbersSizeEqualSix) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_SIZE_ALLOWED_ONLY_6);
         }
     }
 
     private static void validateLottoNumber(int lottoNumber) {
-        if (lottoNumber < MIN_LOTTO_NUMBER ||
-                lottoNumber > MAX_LOTTO_NUMBER) {
+        boolean isLottoNumberValidRange = lottoNumber < MIN_LOTTO_NUMBER ||
+                lottoNumber > MAX_LOTTO_NUMBER;
+        if (isLottoNumberValidRange) {
             throw new IllegalArgumentException(LOTTO_NUMBER_ALLOWED_BETWEEN_6_TO_45_INTEGER);
         }
     }
 
     public List<Integer> numbers() {
         return this.lottoNumbers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
