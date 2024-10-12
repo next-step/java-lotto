@@ -1,9 +1,5 @@
 package step2.domain;
 
-import step2.model.Lotto;
-import step2.model.LottoBalls;
-import step2.model.LottoResult;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,7 +13,7 @@ public class LottoGenerator {
         IntStream.range(0, amount)
                 .mapToObj(i -> new Lotto(generate()))
                 .collect(Collectors.toList())
-                .forEach(lottoResult::setLottoResult);
+                .forEach(lottoResult::addLotto);
         return lottoResult;
     }
     public List<Integer> generate() {

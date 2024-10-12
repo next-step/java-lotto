@@ -12,8 +12,19 @@ public class InputView {
     public int receivePurchasingAmount() {
         this.purchasingAmount = scanner.nextInt();
         scanner.nextLine();
+        validatePurchasingAmount();
         printBuyLotto();
         return purchasingAmount / 1000;
+    }
+
+    public int getPurchasingAmount() {
+        return this.purchasingAmount;
+    }
+
+    private void validatePurchasingAmount() {
+        if (purchasingAmount / 1000 < 1) {
+            throw new IllegalArgumentException("그 돈으로는 로또를 한 장도 살 수 없습니다. 돌아가세요!");
+        }
     }
 
     private void printBuyLotto() {

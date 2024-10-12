@@ -1,10 +1,6 @@
 package step2.domain;
 
 import org.junit.jupiter.api.Test;
-import step2.model.Lotto;
-import step2.model.LottoResult;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
