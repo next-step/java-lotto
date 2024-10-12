@@ -13,9 +13,10 @@ public class ResultView {
     private static final EnumMap<Prize, String> prizeMap = new EnumMap<>(Prize.class);
 
     static {
-        prizeMap.put(Prize.FOURTH, "3개 일치 (5000원)-");
-        prizeMap.put(Prize.THIRD, "4개 일치 (50000원)-");
-        prizeMap.put(Prize.SECOND, "5개 일치 (1500000원)-");
+        prizeMap.put(Prize.FIFTH, "3개 일치 (5000원)-");
+        prizeMap.put(Prize.FOURTH, "4개 일치 (50000원)-");
+        prizeMap.put(Prize.THIRD, "5개 일치 (1500000원)-");
+        prizeMap.put(Prize.SECOND, "5개 일치, 보너스 볼 일치(30000000원) -");
         prizeMap.put(Prize.FIRST, "6개 일치 (2000000000원)-");
     }
 

@@ -29,11 +29,14 @@ public class LottoMain {
         // 과거 당첨 번호 입력
         Set<Integer> winningNumbers = inputView.getWinningNumbers();
 
+        // 보너스 볼 입력
+        int bonusNumber = inputView.getBonusNumber();
+
         // 당첨 확인
-        EnumMap<Prize, Integer> countMap = machine.checkLottoPrize(lottoList, winningNumbers);
+        EnumMap<Prize, Integer> countMap = machine.checkLottoPrize(lottoList, winningNumbers, bonusNumber);
 
         // 결과 출력
-        String profitRate = machine.calculateProfitRate(countMap, 2);
+        String profitRate = machine.calculateProfitRate(countMap);
         resultView.printResult(countMap, profitRate);
     }
 

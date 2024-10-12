@@ -12,7 +12,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoAutoMachineTest {
+public class LottoMachineTest {
 
     @Test
     @DisplayName("로또 자동 생성 테스트")
@@ -35,26 +35,44 @@ public class LottoAutoMachineTest {
                         new Lotto(Set.of(1, 2, 3, 10, 11, 12)),
                         new Lotto(Set.of(1, 2, 3, 4, 10, 11))
                 ),
-                Set.of(1, 2, 3, 4, 5, 6)
-        );
+                Set.of(1, 2, 3, 4, 5, 6),0);
 
         assertThat(map.get(Prize.FIRST)).isEqualTo(1);
-        assertThat(map.get(Prize.SECOND)).isEqualTo(2);
-        assertThat(map.get(Prize.THIRD)).isEqualTo(1);
+        assertThat(map.get(Prize.THIRD)).isEqualTo(2);
         assertThat(map.get(Prize.FOURTH)).isEqualTo(1);
+        assertThat(map.get(Prize.FIFTH)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("로또 2등 당첨 테스트")
+    void checkSecondPrize() {
+        LottoMachine machine = LottoMachine.of(5000);
+
+        EnumMap<Prize, Integer> map = machine.checkLottoPrize(
+                List.of(
+                        new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
+                        new Lotto(Set.of(1, 2, 3, 4, 5, 20)),
+                        new Lotto(Set.of(1, 2, 3, 4, 6, 7)),
+                        new Lotto(Set.of(1, 2, 3, 10, 11, 12)),
+                        new Lotto(Set.of(1, 2, 3, 4, 10, 11))
+                ),
+                Set.of(1, 2, 3, 4, 5, 6), 20);
+
+        assertThat(map.get(Prize.SECOND)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("수익률 계산 테스트")
     void calculateProfitRate() {
         EnumMap<Prize, Integer> prizeCountMap = new EnumMap<>(Prize.class);
+        prizeCountMap.put(Prize.FIFTH, 1);
         prizeCountMap.put(Prize.FOURTH, 1);
-        prizeCountMap.put(Prize.THIRD, 1);
-        prizeCountMap.put(Prize.SECOND, 0);
+        prizeCountMap.put(Prize.THIRD, 0);
+        prizeCountMap.put(Prize.SECOND, 1);
         prizeCountMap.put(Prize.FIRST, 0);
-        LottoMachine machine = LottoMachine.of(20000);
+        LottoMachine machine = LottoMachine.of(20_000_000);
 
-        assertThat(machine.calculateProfitRate(prizeCountMap, 2))
-                .isEqualTo("2.75");
+        assertThat(machine.calculateProfitRate(prizeCountMap))
+                .isEqualTo("1.50");
     }
 }
