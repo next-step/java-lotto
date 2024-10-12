@@ -1,20 +1,16 @@
 package calculator.entity;
 
-import java.util.Arrays;
+
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Expressions {
 
     private final List<CalculateExpression> expressions;
 
     public Expressions() {
-        expressions = Arrays.asList(
-                CalculateExpression.ADD,
-                CalculateExpression.SUBTRACT,
-                CalculateExpression.MULTIPLY,
-                CalculateExpression.DIVIDE
-        );
+        expressions = Stream.of(CalculateExpression.values()).collect(Collectors.toList());
     }
 
     public CalculateExpression findExpression(String expression) {
