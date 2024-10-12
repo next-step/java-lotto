@@ -28,21 +28,16 @@ public enum ArithmeticOperator {
         return !OPERATORS.contains(operator);
     }
 
-    public static String calculate(String operand1, String operator, String operand2) {
-        int result = 0;
-        ArithmeticOperator operatorEnum = findEnumByOperatorValue(operator);
-        if (operatorEnum != null) {
-            result = operatorEnum.biFunction.apply(Integer.parseInt(operand1), Integer.parseInt(operand2));
-        }
-        return String.valueOf(result);
+    public int calculate(String operand1, String operand2) {
+        return this.biFunction.apply(Integer.parseInt(operand1), Integer.parseInt(operand2));
     }
 
-    private static ArithmeticOperator findEnumByOperatorValue(String operator) {
+    public static ArithmeticOperator findEnumByOperatorValue(String operator) {
         for (ArithmeticOperator value : ArithmeticOperator.values()) {
             if (operator.equals(value.getOperator())) {
                 return value;
             }
         }
-        return null;
+        throw new IllegalArgumentException("사칙연산 기호가 아닌 문자는 허용되지 않습니다.");
     }
 }

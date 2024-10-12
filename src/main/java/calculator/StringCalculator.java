@@ -23,6 +23,7 @@ public class StringCalculator {
         return expression == null || expression.isEmpty();
     }
 
+
     private static Deque<String> createExpressionDeque(String expression) {
         Deque<String> deque = new ArrayDeque<>();
         for (String item : expression.split(DEFAULT_DELIMETER)) {
@@ -56,7 +57,10 @@ public class StringCalculator {
             String operand1 = expressionDeque.poll();
             String operator = expressionDeque.poll();
             String operand2 = expressionDeque.poll();
-            expressionDeque.offerFirst(ArithmeticOperator.calculate(operand1, operator, operand2));
+
+            ArithmeticOperator operatorEnum = ArithmeticOperator.findEnumByOperatorValue(operator);
+            String result = String.valueOf(operatorEnum.calculate(operand1, operand2));
+            expressionDeque.offerFirst(result);
         }
         return Integer.parseInt(expressionDeque.pop());
     }
