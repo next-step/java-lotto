@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.domain.operator.Operator;
 import calculator.util.StringUtil;
 
 import java.util.Iterator;
@@ -41,7 +42,7 @@ public class Expression {
         return new Operands(filtered).iterator();
     }
 
-    public Iterator<String> getOperators() {
+    public Iterator<Operator> getOperators() {
         List<String> elements = StringUtil.splitBySpace(this.expression);
 
         String[] filtered = IntStream.range(0, elements.size())
