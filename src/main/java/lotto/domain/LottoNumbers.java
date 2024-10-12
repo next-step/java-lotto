@@ -5,7 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static lotto.domain.LottoNumbersValidation.*;
+
 public class LottoNumbers {
+    private static final List<LottoNumbersValidation> LOTTO_NUMBERS_VALIDATION_LIST = List.of(LOTTO_NUMBERS_COUNT_INVALID, LOTTO_NUMBERS_IS_OUT_OF_RANGE, LOTTO_NUMBERS_HAS_DUPLICATED_NUMBER);
     private final List<Integer> value;
 
     private LottoNumbers(List<Integer> numbers) {
@@ -13,12 +16,17 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers valueOf(List<Integer> numbers) {
-        for (LottoNumbersValidation validation : LottoNumbersValidation.values()) {
+        for (LottoNumbersValidation validation : LOTTO_NUMBERS_VALIDATION_LIST) {
             validation.check(numbers);
         }
+        List<Integer> sortedNumbers = sortNumbers(numbers);
+        return new LottoNumbers(sortedNumbers);
+    }
+
+    private static List<Integer> sortNumbers(List<Integer> numbers) {
         List<Integer> mutableNumbers = new ArrayList<>(numbers);
         Collections.sort(mutableNumbers);
-        return new LottoNumbers(mutableNumbers);
+        return mutableNumbers;
     }
 
     public List<Integer> value() {
