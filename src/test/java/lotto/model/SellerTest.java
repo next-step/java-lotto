@@ -10,4 +10,11 @@ public class SellerTest {
             Seller actual = Seller.of(Lotto.of(1, 2, 3, 4, 5, 6));
         });
     }
+
+    @Test
+    void 당첨로또번호목록을_출력한다() {
+        Lotto actual = Seller.of(Lotto.of(1, 2, 3, 4, 5, 6)).winnerLotto();
+        Lotto expected = Lotto.of(1, 2, 3, 4, 5, 6);
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
 }

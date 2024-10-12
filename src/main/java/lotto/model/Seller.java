@@ -10,4 +10,8 @@ public class Seller {
     public static Seller of(Lotto winningLotto) {
         return new Seller(winningLotto);
     }
+
+    public Lotto winnerLotto() {
+        return this.winningLotto;
+    }
 }
