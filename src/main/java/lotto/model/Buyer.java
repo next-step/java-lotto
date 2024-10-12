@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.util.NumbersCreator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Buyer {
@@ -26,7 +27,7 @@ public class Buyer {
     }
 
     public List<Lotto> value() {
-        return this.lottoes;
+        return Collections.unmodifiableList(this.lottoes);
     }
 
     private static Lotto shuffledLotto(List<Lotto> result, NumbersCreator numbersCreator) {

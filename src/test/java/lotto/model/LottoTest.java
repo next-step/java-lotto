@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.fixture.LottoFixture;
 import lotto.model.enums.Ranking;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -108,9 +109,6 @@ public class LottoTest {
     }
 
     public static Stream<Arguments> falseLottoFixture() {
-        return Stream.of(
-                Arguments.of(List.of(0, 6, 17, 28, 39, 45)),
-                Arguments.of(List.of(6, 17, 28, 39, 45, 46))
-        );
+        return LottoFixture.falseLottoFixture();
     }
 }
