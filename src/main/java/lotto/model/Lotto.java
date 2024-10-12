@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.util.NumbersCreator;
+
 import java.util.*;
 
 public class Lotto {
@@ -16,7 +18,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(final int... lottoNumbers) {
+    public static Lotto of(final NumbersCreator numbersCreator) {
+        final Integer[] lottoNumbers = numbersCreator.create();
         List<Integer> result = new ArrayList<>();
         for (int lottoNumber : lottoNumbers) {
             validateLottoNumber(lottoNumber);

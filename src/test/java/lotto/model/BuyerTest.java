@@ -49,13 +49,17 @@ public class BuyerTest {
 
     }
 
-    public static final List<Lotto> LOTTOES_FIXTURE = List.of(
-            Lotto.of(8, 21, 23, 41, 42, 43),
-            Lotto.of(2, 13, 22, 32, 38, 45)
-    );
+    public static final List<Lotto> LOTTOES_FIXTURE;
+
+    static {
+        LOTTOES_FIXTURE = List.of(
+                Lotto.of(() -> new Integer[]{8, 21, 23, 41, 42, 43}),
+                Lotto.of(() -> new Integer[]{2, 13, 22, 32, 38, 45})
+        );
+    }
 
     public static final List<Lotto> LOTTOES_DUPLICATED_FIXTURE = List.of(
-            Lotto.of(8, 21, 23, 41, 42, 43),
-            Lotto.of(21, 8, 23, 41, 42, 43)
+            Lotto.of(() -> new Integer[]{8, 21, 23, 41, 42, 43}),
+            Lotto.of(() -> new Integer[]{21, 8, 23, 41, 42, 43})
     );
 }

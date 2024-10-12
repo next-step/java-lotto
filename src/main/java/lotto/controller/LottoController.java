@@ -56,20 +56,20 @@ public class LottoController {
 
     private static List<Lotto> lottoNumbers(int amount) {
         return List.of(
-                Lotto.of(8, 21, 23, 41, 42, 43),
-                Lotto.of(3, 5, 11, 16, 32, 38),
-                Lotto.of(7, 11, 16, 35, 36, 44),
-                Lotto.of(1, 8, 11, 31, 41, 42),
-                Lotto.of(13, 14, 16, 38, 42, 45),
-                Lotto.of(7, 11, 30, 40, 42, 43),
-                Lotto.of(2, 13, 22, 32, 38, 45),
-                Lotto.of(23, 25, 33, 36, 39, 41),
-                Lotto.of(1, 3, 5, 14, 22, 45),
-                Lotto.of(5, 9, 38, 41, 43, 44),
-                Lotto.of(2, 8, 9, 18, 19, 21),
-                Lotto.of(13, 14, 18, 21, 23, 35),
-                Lotto.of(17, 21, 29, 37, 42, 45),
-                Lotto.of(3, 8, 27, 30, 35, 4)
+                Lotto.of(() -> new Integer[]{8, 21, 23, 41, 42, 43}),
+                Lotto.of(() -> new Integer[]{3, 5, 11, 16, 32, 38}),
+                Lotto.of(() -> new Integer[]{7, 11, 16, 35, 36, 44}),
+                Lotto.of(() -> new Integer[]{1, 8, 11, 31, 41, 42}),
+                Lotto.of(() -> new Integer[]{13, 14, 16, 38, 42, 45}),
+                Lotto.of(() -> new Integer[]{7, 11, 30, 40, 42, 43}),
+                Lotto.of(() -> new Integer[]{2, 13, 22, 32, 38, 45}),
+                Lotto.of(() -> new Integer[]{23, 25, 33, 36, 39, 41}),
+                Lotto.of(() -> new Integer[]{1, 3, 5, 14, 22, 45}),
+                Lotto.of(() -> new Integer[]{5, 9, 38, 41, 43, 44}),
+                Lotto.of(() -> new Integer[]{2, 8, 9, 18, 19, 21}),
+                Lotto.of(() -> new Integer[]{13, 14, 18, 21, 23, 35}),
+                Lotto.of(() -> new Integer[]{17, 21, 29, 37, 42, 45}),
+                Lotto.of(() -> new Integer[]{3, 8, 27, 30, 35, 4})
         );
     }
 
