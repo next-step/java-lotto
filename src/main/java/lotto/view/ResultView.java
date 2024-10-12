@@ -16,5 +16,6 @@ public class ResultView {
                     .sorted()
                     .collect(Collectors.toList()));
         }
+        System.out.println();
     }
 }
