@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Lotto {
     private static final Random random = new Random();
-    private static final List<Integer> MATCHING_COUNT_FOR_WINNING = Arrays.asList(3,4,5,6);
+    private static final List<Integer> MATCHING_COUNT_FOR_WINNING = Arrays.asList(3, 4, 5, 6);
 
     private List<Integer> lottoNumbers;
     private int matchCount;
@@ -39,7 +39,7 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public int checkMatchNumberCount(List<Integer> winningNumbers) {
+    public int getMatchCount(List<Integer> winningNumbers) {
         for (int i = 0; i < 6; i++) {
             matchCount += checkMatchNumber(winningNumbers, lottoNumbers.get(i));
         }
@@ -53,25 +53,32 @@ public class Lotto {
         return 0;
     }
 
-    public int getWinningAmount(){
-        if(!this.isWinningLotto()) {
+    public int getAmountForWinningLotto() {
+        if (!this.isWinningLotto()) {
             return 0;
         }
+        return determineAmountByMatchCount(this.matchCount);
+    }
 
-        if(this.matchCount == 3){
+    public boolean isWinningLotto() {
+        return MATCHING_COUNT_FOR_WINNING.contains(this.matchCount);
+    }
+
+    public String toStringLottoNumbers() {
+        return lottoNumbers.toString();
+    }
+
+    public static int determineAmountByMatchCount(int matchCount) {
+        if (matchCount == 3) {
             return 5000;
-        } else if(this.matchCount == 4){
+        } else if (matchCount == 4) {
             return 50000;
-        } else if(this.matchCount == 5){
+        } else if (matchCount == 5) {
             return 1500000;
-        } else if(this.matchCount == 6){
+        } else if (matchCount == 6) {
             return 2000000000;
         }
         return 0;
-    }
-
-    public boolean isWinningLotto(){
-        return MATCHING_COUNT_FOR_WINNING.contains(this.matchCount);
     }
 
 }

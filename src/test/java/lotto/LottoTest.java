@@ -26,6 +26,6 @@ public class LottoTest {
     @DisplayName("한 개의 로또에 일치하는 개수 확인")
     void 일치하는_개수_확인() {
         lotto = new Lotto(Arrays.asList(7, 2, 4, 5, 22, 37));
-        assertThat(lotto.checkMatchNumberCount(Arrays.asList(1, 5, 13, 22, 43, 37))).isEqualTo(3);
+        assertThat(lotto.getMatchCount(Arrays.asList(1, 5, 13, 22, 43, 37))).isEqualTo(3);
     }
 }

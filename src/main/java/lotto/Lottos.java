@@ -7,33 +7,30 @@ public class Lottos {
 
     List<Lotto> lottos;
 
-    public Lottos(){
+    public Lottos() {
         this.lottos = new ArrayList<>();
     }
 
-    public Lottos(int count){
-       this.lottos = new ArrayList<>();
+    public Lottos(int count) {
+        this.lottos = new ArrayList<>();
         generateLottos(count);
     }
 
-    public Lottos(List<Lotto> lottos){
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    private void generateLottos(int count){
-        for(int i = 0 ; i < count; i++){
+    public List<Lotto> getLottos() {
+        return this.lottos;
+    }
+
+    private void generateLottos(int count) {
+        for (int i = 0; i < count; i++) {
             lottos.add(new Lotto());
         }
     }
 
-    public int countByAmount(int paidAmount){
-        if(paidAmount < PRICE) {
-            throw new IllegalArgumentException("지불한 금액이 로또 금액보다 적습니다.");
-        }
-        return paidAmount / PRICE;
-    }
-
-    public Map<Integer, Integer> getWinningLottoCount(){
+    public Map<Integer, Integer> getWinningLottoStatistics() {
         Map<Integer, Integer> winningLottoMap = new HashMap<>();
         winningLottoMap.put(3, 0);
         winningLottoMap.put(4, 0);
@@ -41,24 +38,37 @@ public class Lottos {
         winningLottoMap.put(6, 0);
 
         //todo
-        for(Lotto lotto : this.lottos){
-            if(lotto.isWinningLotto()){
+        for (Lotto lotto : this.lottos) {
+            if (lotto.isWinningLotto()) {
                 winningLottoMap.put(lotto.getMatchCount(), winningLottoMap.get(lotto.getMatchCount()) + 1);
             }
         }
         return winningLottoMap;
     }
 
-    private int calculateTotalWinningAmount(){
+    public void getAllMatchCount(List<Integer> winningLotto) {
+        for (Lotto lotto : lottos) {
+            lotto.getMatchCount(winningLotto);
+        }
+    }
+
+    public int calculateTotalWinningAmount() {
         int winningAmount = 0;
-        for(Lotto lotto : this.lottos){
-            winningAmount += lotto.getWinningAmount();
+        for (Lotto lotto : this.lottos) {
+            winningAmount += lotto.getAmountForWinningLotto();
         }
         return winningAmount;
     }
 
-    public double calculateRateOfReturn(int winningAmount, int paidAmount){
+    public double calculateRateOfReturn(int winningAmount, int paidAmount) {
         return Math.floor(((double) winningAmount / paidAmount) * 100) / 100;
+    }
+
+    public static int countByAmount(int paidAmount) {
+        if (paidAmount < PRICE) {
+            throw new IllegalArgumentException("지불한 금액이 로또 금액보다 적습니다.");
+        }
+        return paidAmount / PRICE;
     }
 
 

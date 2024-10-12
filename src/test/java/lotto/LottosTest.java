@@ -16,19 +16,19 @@ public class LottosTest {
     private Lottos lottos;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         lottos = new Lottos();
     }
 
     @Test
     @DisplayName("구입금액에 맞게 구매한 로또 개수 출력")
-    void 로또_구매(){
+    void 로또_구매() {
         assertThat(lottos.countByAmount(14000)).isEqualTo(14);
     }
 
     @Test
     @DisplayName("구입금액이 로또 금액보다 적은 금액인 경우")
-    void 로또_구매_적은_금액(){
+    void 로또_구매_적은_금액() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
                     lottos.countByAmount(900);
@@ -37,7 +37,7 @@ public class LottosTest {
 
     @Test
     @DisplayName("당첨된 로또 개수 확인")
-    void 당첨_개수(){
+    void 당첨_개수() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)));
         lottoList.add(new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)));
@@ -54,12 +54,9 @@ public class LottosTest {
         lottoList.add(new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44)));
 
         lottos = new Lottos(lottoList);
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
-        for(Lotto lotto : lottoList){
-            lotto.checkMatchNumberCount(winningNumbers);
-        }
+        lottos.getAllMatchCount(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        Map<Integer, Integer> winningLottoMap = lottos.getWinningLottoCount();
+        Map<Integer, Integer> winningLottoMap = lottos.getWinningLottoStatistics();
         assertThat(winningLottoMap.get(3)).isEqualTo(1);
         assertThat(winningLottoMap.get(4)).isEqualTo(0);
         assertThat(winningLottoMap.get(5)).isEqualTo(0);
@@ -67,7 +64,7 @@ public class LottosTest {
     }
 
     @Test
-    void 수익률_계산(){
-        assertThat(lottos.calculateRateOfReturn( 5000, 14000)).isEqualTo(0.35);
+    void 수익률_계산() {
+        assertThat(lottos.calculateRateOfReturn(5000, 14000)).isEqualTo(0.35);
     }
 }
