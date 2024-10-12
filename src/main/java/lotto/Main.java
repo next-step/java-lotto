@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoAgent;
+import lotto.domain.LottoJudge;
 import lotto.domain.RandomSelectionStrategy;
 import lotto.dto.LottoStatisticsDTO;
 import lotto.dto.PurchasedLottosDTO;
@@ -18,8 +19,8 @@ public class Main {
         PurchasedLottosDTO purchasedLottos = lottoAgent.getPurchasedLottos();
         ResultView.printPurchasedLottos(purchasedLottos);
         List<Integer> winnerNumbers = InputView.winnerNumbersInput();
-        lottoAgent.decideWinningNumbers(WinningNumbersDTO.valueOf(winnerNumbers));
-        LottoStatisticsDTO statistics = lottoAgent.getStatistics();
+        LottoJudge lottoJudge = LottoJudge.valueOf(WinningNumbersDTO.valueOf(winnerNumbers));
+        LottoStatisticsDTO statistics = lottoJudge.getStatisticsOf(lottoAgent);
         ResultView.printLottoStatistics(statistics);
     }
 }
