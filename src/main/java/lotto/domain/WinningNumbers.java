@@ -98,14 +98,12 @@ public class WinningNumbers {
     //endregion
 
     public int matchWinningNumber(Lotto lotto) {
-        int matchCount = 0;
-        for (LottoNumber lottoNumber : winningNumbers) {
-            if(lotto.hasNumber(lottoNumber)) matchCount++;
-        }
-        return matchCount;
+        return (int)winningNumbers.stream()
+                .filter(lotto::hasNumber)
+                .count();
     }
 
-    public boolean isMatchBonusNumber(int bonusNumber){
-        return bonusBall.isBonusNumber(bonusNumber);
+    public boolean matchBonusBall(Lotto lotto){
+        return bonusBall.isMatchBonusBallFrom(lotto);
     }
 }

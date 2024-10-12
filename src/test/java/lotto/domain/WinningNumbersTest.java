@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WinningNumbersTest {
 
@@ -44,5 +45,14 @@ public class WinningNumbersTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new WinningNumbers(bonusNumber, 45, 1, 3, 4, 5, 6))
                 .withMessage("당첨 번호와 보너스 번호가 중복됐습니다");
+    }
+
+    @DisplayName("로또 번호와 보너스볼 번호를 비교하여 일치 여부를 알 수 있다")
+    @Test
+    void matchBonusBall(){
+        Lotto lotto = new Lotto(1, 2, 3, 43, 44, 45);
+        WinningNumbers winningNumbers = new WinningNumbers(bonusNumber, 1, 2, 3, 4, 5, 6);
+
+        assertTrue(winningNumbers.matchBonusBall(lotto));
     }
 }
