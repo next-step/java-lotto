@@ -19,8 +19,7 @@ class LottoWinningEvaluatorTest {
         );
         final LottoWinningEvaluator lottoWinningEvaluator = new LottoWinningEvaluator(
             new LottoBundle(List.of(new Lotto(lottoNumbers), new Lotto(lottoNumbers))),
-            new Lotto(lottoNumbers),
-            new LottoNumber(4)
+            new LastWeekWinningLotto(new Lotto(lottoNumbers), new LottoNumber(4))
         );
 
         final LottoWinningResults results = lottoWinningEvaluator.evaluate();
@@ -37,8 +36,7 @@ class LottoWinningEvaluatorTest {
         );
         final LottoWinningEvaluator lottoWinningEvaluator = new LottoWinningEvaluator(
             new LottoBundle(List.of(new Lotto(lottoNumbers))),
-            new Lotto(lottoNumbers),
-            new LottoNumber(4)
+            new LastWeekWinningLotto(new Lotto(lottoNumbers), new LottoNumber(4))
         );
 
         final LottoWinningResults results = lottoWinningEvaluator.evaluate();

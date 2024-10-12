@@ -4,22 +4,18 @@ import java.util.List;
 
 public class LottoWinningEvaluator {
     private final LottoBundle lottoBundle;
-    private final Lotto evaluationLotto;
-    private final LottoNumber bonusLottoNumber;
+    private final LastWeekWinningLotto lastWeekWinningLotto;
 
-    public LottoWinningEvaluator(final LottoBundle lottoBundle, final Lotto evaluationLotto, final LottoNumber bonusLottoNumber) {
+    public LottoWinningEvaluator(final LottoBundle lottoBundle, final LastWeekWinningLotto lastWeekWinningLotto) {
         this.lottoBundle = lottoBundle;
-        this.evaluationLotto = evaluationLotto;
-        this.bonusLottoNumber = bonusLottoNumber;
+        this.lastWeekWinningLotto = lastWeekWinningLotto;
     }
 
     public LottoWinningResults evaluate() {
         final LottoRankGroup lottoRankGroup = new LottoRankGroup();
 
         for (final Lotto lotto : lottoBundle) {
-            final int matchedCount = lotto.matchCount(evaluationLotto);
-            final boolean isMatchedBonusNumber = lotto.contains(bonusLottoNumber);
-            final LottoRank lottoRank = LottoRank.findLottoRankByMatchedNumber(matchedCount, isMatchedBonusNumber);
+            final LottoRank lottoRank = lastWeekWinningLotto.calculateLottoRank(lotto);
             lottoRankGroup.addLotto(lottoRank, lotto);
         }
 
