@@ -25,6 +25,10 @@ public class BonusBall {
         return this.bonusNumber.equals(new LottoNumber(bonusNumber));
     }
 
+    public boolean isMatchBonusBallFrom(Lotto lotto) {
+        return lotto.hasNumber(this.bonusNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
