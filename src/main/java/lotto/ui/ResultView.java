@@ -28,10 +28,10 @@ public class ResultView {
     }
 
     private static void printLottoWinningResult(final LottoWinningResults lottoWinningResults) {
-        for (LottoWinningResult lottoWinningResult : lottoWinningResults.getWinningResults()) {
+        for (LottoWinningResult lottoWinningResult : lottoWinningResults.getWinningResultMap().values()) {
             System.out.println(
-                    lottoWinningResult.getLottoWinningStatus().getWinningCount()
-                            + "개 일치 ("
+                    lottoWinningResult.getLottoWinningStatus().getDescription()
+                            + " ("
                             + lottoWinningResult.getLottoWinningStatus().getAmount()
                             + "원)- "
                             + lottoWinningResult.getCount()
@@ -42,7 +42,7 @@ public class ResultView {
 
     public static void printProfitRate(final LottoPurchasePrice totalPurchasePrice, final LottoWinningResults lottoWinningResults) {
         double result = lottoWinningResults.getProfitRate(totalPurchasePrice);
-        String suffix = result < 1 ? PROFIT_RATE_SUFFIX+PROFIT_RATE_LESS_THAN_ONE_SUFFIX : PROFIT_RATE_SUFFIX;
+        String suffix = result < 1 ? PROFIT_RATE_SUFFIX + PROFIT_RATE_LESS_THAN_ONE_SUFFIX : PROFIT_RATE_SUFFIX;
         System.out.println(PROFIT_RATE_PREFIX + result + suffix);
     }
 

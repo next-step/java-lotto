@@ -7,7 +7,7 @@ public class LottoPurchasePrice {
 
     private final int value;
 
-    public LottoPurchasePrice(int value) {
+    private LottoPurchasePrice(int value) {
         validateInit(value);
         this.value = value;
     }
@@ -47,5 +47,9 @@ public class LottoPurchasePrice {
     @Override
     public int hashCode() {
         return Objects.hashCode(value);
+    }
+
+    public static LottoPurchasePrice valueOf(int value) {
+        return new LottoPurchasePrice(value);
     }
 }

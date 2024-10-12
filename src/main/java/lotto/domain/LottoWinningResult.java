@@ -19,4 +19,9 @@ public class LottoWinningResult {
     public void increment() {
         count++;
     }
+
+    public int getWinningAmount() {
+        return lottoWinningStatus.getAmount() * count;
+    }
+
 }

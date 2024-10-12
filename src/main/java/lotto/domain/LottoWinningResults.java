@@ -1,44 +1,47 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoWinningResults {
 
-    private final List<LottoWinningResult> winningResults;
+    private final Map<LottoWinningStatus, LottoWinningResult> winningResultMap;
 
     public LottoWinningResults() {
-        this.winningResults = new ArrayList<>();
+        this.winningResultMap = new TreeMap<>();
         initLottoWinningResults();
     }
 
-    public List<LottoWinningResult> getWinningResults() {
-        return Collections.unmodifiableList(winningResults);
+    public Map<LottoWinningStatus, LottoWinningResult> getWinningResultMap() {
+        return Collections.unmodifiableMap(winningResultMap);
     }
 
     public long getTotalWinningAmount() {
-        return winningResults.stream()
-                .mapToInt(result -> result.getLottoWinningStatus().getAmount() * result.getCount())
+        return winningResultMap.values().stream()
+                .mapToInt(result -> result.getWinningAmount())
                 .sum();
     }
 
     public double getProfitRate(final LottoPurchasePrice purchasePrice) {
         double totalWinningAmount = getTotalWinningAmount();
-        return Math.floor(totalWinningAmount/ purchasePrice.getValue() * 100) / 100;
+        return Math.floor(totalWinningAmount / purchasePrice.getValue() * 100) / 100;
     }
 
     private void initLottoWinningResults() {
         LottoWinningStatus[] values = LottoWinningStatus.values();
         for (int i = 0; i < values.length; i++) {
-            winningResults.add(new LottoWinningResult(values[i]));
+            winningResultMap.put(values[i], new LottoWinningResult(values[i]));
         }
     }
 
-    public void incrementWinningResults(final int count) {
-        winningResults.stream()
-                .filter(winningResult -> winningResult.getLottoWinningStatus().getWinningCount() == count)
+    public void incrementWinningResults(final LottoMatchNumberInfo matchNumberInfo) {
+        if (matchNumberInfo.isSecond()) {
+            winningResultMap.get(LottoWinningStatus.FIVE_AND_BONUS).increment();
+            return;
+        }
+        winningResultMap.values().stream()
+                .filter(winningResult -> winningResult.getLottoWinningStatus().getWinningCount() == matchNumberInfo.getCount())
                 .findFirst()
                 .ifPresent(LottoWinningResult::increment);
     }
+
 }
