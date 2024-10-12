@@ -4,11 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OperationTest {
@@ -32,11 +27,9 @@ public class OperationTest {
         assertThat(Operation.DIVIDE.apply(6, 2)).isEqualTo(3);
     }
 
-    @Test
-    void getOperation_연산자에_해당하는_enum을_반환한다() {
-        assertThat(Operation.getOperation("+")).isEqualTo(Operation.PLUS);
-        assertThat(Operation.getOperation("-")).isEqualTo(Operation.MINUS);
-        assertThat(Operation.getOperation("*")).isEqualTo(Operation.MULTIPLY);
-        assertThat(Operation.getOperation("/")).isEqualTo(Operation.DIVIDE);
+    @ParameterizedTest
+    @CsvSource(value={"+,PLUS", "-,MINUS", "*,MULTIPLY", "/,DIVIDE"})
+    void getOperation_연산자에_해당하는_enum을_반환한다(String symbol, String operation) {
+        assertThat(Operation.getOperation(symbol)).isEqualTo(Operation.valueOf(operation));
     }
 }
