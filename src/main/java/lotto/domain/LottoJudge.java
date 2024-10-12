@@ -5,10 +5,14 @@ import lotto.dto.LottoMatchInfosDTO;
 import lotto.dto.LottoStatisticsDTO;
 import lotto.dto.WinningNumbersDTO;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class LottoJudge {
-    private LottoNumbers winningLottoNumbers;
+    private final LottoNumbers winningLottoNumbers;
 
     private LottoJudge(LottoNumbers winningLottoNumbers) {
         this.winningLottoNumbers = winningLottoNumbers;
