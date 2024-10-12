@@ -1,8 +1,8 @@
-package lotto.step2;
+package lotto;
 
-import lotto.step2.domain.*;
-import lotto.step2.ui.InputView;
-import lotto.step2.ui.ResultView;
+import lotto.domain.*;
+import lotto.ui.InputView;
+import lotto.ui.ResultView;
 
 public class LottoApplication {
     private final InputView inputView;
@@ -45,7 +45,8 @@ public class LottoApplication {
 
     private WinningNumbers createWinningNumbers(InputView inputView) {
         String numbers = inputView.getWinningNumbersFromUser();
-        return WinningNumbers.create(numbers);
+        int bonusBall = inputView.getBonusBallFromUser();
+        return WinningNumbers.create(numbers, bonusBall);
     }
 
     private void showLottoResult(LottoResult lottoResult) {

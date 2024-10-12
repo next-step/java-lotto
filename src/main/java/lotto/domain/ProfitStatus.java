@@ -1,4 +1,4 @@
-package lotto.step2.domain;
+package lotto.domain;
 
 public enum ProfitStatus {
     SAME("본전"),
@@ -12,10 +12,6 @@ public enum ProfitStatus {
     }
 
     public static ProfitStatus from(double profitRate){
-        if(profitRate == 1){
-            return SAME;
-        }
-
         if(profitRate < 1){
             return LOSS;
         }
@@ -23,7 +19,7 @@ public enum ProfitStatus {
         if(profitRate > 1){
             return GAIN;
         }
-        throw new IllegalArgumentException("수익률 상태를 확인할 수 없습니다");
+        return SAME;
     }
 
     public String getDescription() {

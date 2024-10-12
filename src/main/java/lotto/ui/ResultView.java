@@ -1,10 +1,8 @@
-package lotto.step2.ui;
+package lotto.ui;
 
-import jdk.swing.interop.SwingInterOpUtils;
-import lotto.step2.domain.*;
-
-import java.util.Arrays;
-import java.util.EnumMap;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
+import lotto.domain.ProfitStatus;
 
 public interface ResultView {
     void showLottoCount(int count);

@@ -1,4 +1,4 @@
-package lotto.step2.domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class LottosTest {
     @Test
     void countMatchingNumbers(){
         Lottos lottos = createLottos();
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(45, 1, 2, 3, 4, 5, 6);
 
         /*
         첫번째 복권 당첨번호와 번호 같은 갯수 : 6
@@ -30,6 +30,17 @@ public class LottosTest {
         */
         assertThat(lottos.countMatchingNumbers(winningNumbers)).containsExactly(6, 0);
     }
+
+    @DisplayName("로또 번호들과 보너스볼 번호를 비교하여 일치 여부 목록을 알 수 있다")
+    @Test
+    void matchingBonusNumbers(){
+        Lottos lottos = createLottos();
+        WinningNumbers winningNumbers = new WinningNumbers(1, 2, 3, 4, 5, 6, 7);
+
+        assertThat(lottos.matchingBonusNumbers(winningNumbers)).containsExactly(true, false);
+    }
+
+
 
     @DisplayName("로또들을 출력할 수 있다")
     @Test
@@ -43,8 +54,8 @@ public class LottosTest {
     private Lottos createLottos() {
         Lottos lottos = new Lottos(
                 List.of(
-                        new Lotto(List.of(1, 2, 3, 4, 5, 6))
-                        , new Lotto(List.of(7, 8, 9, 10, 11, 12))
+                        new Lotto(1, 2, 3, 4, 5, 6)
+                        , new Lotto(7, 8, 9, 10, 11, 12)
                 )
         );
         return lottos;

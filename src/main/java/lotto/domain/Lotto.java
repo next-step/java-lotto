@@ -1,48 +1,47 @@
-package lotto.step2.domain;
+package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
     private static final int LOTTO_COUNT_LIMIT = 6;
-    private static final int LIMIT_LOTTO_NUMBER = 45;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public static Lotto create(LottoNumbersGenerater generater){
         return new Lotto(generater.generate());
     }
 
-    public Lotto(final List<Integer> numbers){
+    public Lotto(final int... numbers){
+        this(convertIntToLottoNumber(numbers));
+    }
+
+    public Lotto(final List<LottoNumber> numbers){
         this.numbers = numbers;
         this.validateNumbers();
+    }
+
+    private static List<LottoNumber> convertIntToLottoNumber(int[] winningNumbers) {
+        List<LottoNumber> numbers = new ArrayList<>();
+        for (int winningNumber : winningNumbers) {
+            numbers.add(new LottoNumber(winningNumber));
+        }
+        return numbers;
     }
 
     //region [validateNumbers]
     private void validateNumbers() {
         validNumberCount(this.numbers);
-        validNumberRange(this.numbers);
         duplicateNumber(this.numbers);
     }
 
-    private void validNumberCount(List<Integer> numbers) {
+    private void validNumberCount(List<LottoNumber> numbers) {
         if(numbers.size() != LOTTO_COUNT_LIMIT){
             throw new IllegalArgumentException("로또 번호를 6개 입력하세요");
         }
     }
 
-    private void validNumberRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            if(isNonValidNumber(number)){
-                throw new IllegalArgumentException("1-45범위 내의 로또 번호를 입력하세요");
-            }
-        }
-    }
-
-    private boolean isNonValidNumber(int lottoNumber) {
-        return lottoNumber <= 0 || lottoNumber > LIMIT_LOTTO_NUMBER;
-    }
-
-    private void duplicateNumber(List<Integer> lottoNumbers) {
+    private void duplicateNumber(List<LottoNumber> lottoNumbers) {
         long count = lottoNumbers.stream()
                 .distinct()
                 .count();
@@ -53,8 +52,12 @@ public class Lotto {
     }
     //endregion
 
-    public boolean hasNumber(Integer winningNumber) {
-        return this.numbers.contains(winningNumber);
+    public boolean hasNumber(int winningNumber) {
+        return this.numbers.contains(new LottoNumber(winningNumber));
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
     @Override

@@ -1,11 +1,11 @@
-package lotto.step2;
+package lotto;
 
-import lotto.step2.domain.LottoNumbersGenerater;
-import lotto.step2.domain.RandomNumbersGenerater;
-import lotto.step2.ui.ConsoleInputView;
-import lotto.step2.ui.ConsoleResultView;
-import lotto.step2.ui.InputView;
-import lotto.step2.ui.ResultView;
+import lotto.domain.LottoNumbersGenerater;
+import lotto.domain.RandomNumbersGenerater;
+import lotto.ui.ConsoleInputView;
+import lotto.ui.ConsoleResultView;
+import lotto.ui.InputView;
+import lotto.ui.ResultView;
 
 public class Client {
     public static void main(String[] args) {

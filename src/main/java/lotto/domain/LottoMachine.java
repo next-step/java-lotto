@@ -1,4 +1,4 @@
-package lotto.step2.domain;
+package lotto.domain;
 
 public class LottoMachine {
     private final int PRICE = 1000;

@@ -1,7 +1,7 @@
-package lotto.step2.domain;
+package lotto.domain;
 
 import java.util.List;
 
 public interface LottoNumbersGenerater {
-    List<Integer> generate();
+    List<LottoNumber> generate();
 }

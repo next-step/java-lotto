@@ -1,4 +1,4 @@
-package lotto.step2.domain;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,15 @@ public class Lottos {
             matchCountInfo.add(matched);
         }
         return matchCountInfo;
+    }
+
+    public List<Boolean> matchingBonusNumbers(WinningNumbers winningNumbers) {
+        List<Boolean> matchBonusNumberInfo = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            boolean matched = winningNumbers.matchBonusBall(lotto);
+            matchBonusNumberInfo.add(matched);
+        }
+        return matchBonusNumberInfo;
     }
 
     public String showLottos() {

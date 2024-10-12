@@ -1,8 +1,9 @@
-package lotto.step2.ui;
+package lotto.ui;
 
 import java.util.Scanner;
 
 public interface InputView {
     int getPurchaseAmountFromUser();
     String getWinningNumbersFromUser();
+    int getBonusBallFromUser();
 }
