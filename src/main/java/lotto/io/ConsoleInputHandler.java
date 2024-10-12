@@ -1,10 +1,9 @@
 package lotto.io;
 
-import lotto.domain.ticket.WinningLotto;
-import lotto.domain.number.LottoNumber;
-import lotto.domain.ticket.LottoTicket;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class ConsoleInputHandler implements InputHandler {
@@ -19,14 +18,13 @@ public class ConsoleInputHandler implements InputHandler {
     }
 
     @Override
-    public WinningLotto getWinningNumbersFromUser() {
+    public List<String> getWinningNumbersFromUser() {
         String[] splitted = SCANNER.nextLine().split(WINNING_NUMBER_DELIMITER);
-        List<String> trimmedStringNumbers = getTrimmedStringNumbers(splitted);
+        List<String> winningNumbers = getTrimmedStringNumbers(splitted);
 
-        validateWinningNumbers(trimmedStringNumbers);
-        List<LottoNumber> lottoNumbers = getLottoNumbers(trimmedStringNumbers);
+        validateWinningNumbers(winningNumbers);
 
-        return WinningLotto.of(LottoTicket.of(lottoNumbers));
+        return winningNumbers;
     }
 
     private List<String> getTrimmedStringNumbers(String[] splitted) {
@@ -35,12 +33,6 @@ public class ConsoleInputHandler implements InputHandler {
                 .collect(Collectors.toList());
     }
 
-    private List<LottoNumber> getLottoNumbers(List<String> winningNumbers) {
-        return winningNumbers.stream()
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-    }
 
     private void validateWinningNumbers(List<String> winningNumbers) {
         if (new HashSet<>(winningNumbers).size() != winningNumbers.size()) {

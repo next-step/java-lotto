@@ -1,10 +1,10 @@
 package lotto.io;
 
-import lotto.domain.ticket.WinningLotto;
+import java.util.List;
 
 public interface InputHandler {
 
     long getPurchaseAmountFromUser();
 
-    WinningLotto getWinningNumbersFromUser();
+    List<String> getWinningNumbersFromUser();
 }

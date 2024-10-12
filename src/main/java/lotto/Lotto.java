@@ -11,6 +11,8 @@ import lotto.domain.ticket.LottoTickets;
 import lotto.io.InputHandler;
 import lotto.io.OutputHandler;
 
+import java.util.List;
+
 public class Lotto {
 
     private final Integer lottoTicketPrice;
@@ -33,12 +35,13 @@ public class Lotto {
         outputHandler.showNumberOfTicketsBought(availableLottoTickets);
 
         // 구매한 로또 각 줄마다 출력
-        LottoTickets lottoTickets = LottoTicketGenerator.generateTickets(availableLottoTickets, new RandomLottoNumberGenerator());
+        LottoTickets lottoTickets = LottoTicketGenerator.generateLottoTickets(availableLottoTickets, new RandomLottoNumberGenerator());
         outputHandler.showLottoTickets(lottoTickets);
 
         // 당첨번호 입력
         outputHandler.showWinningNumbersText();
-        WinningLotto winningLotto = inputHandler.getWinningNumbersFromUser();
+        List<String> winningNumbers = inputHandler.getWinningNumbersFromUser();
+        WinningLotto winningLotto = WinningLotto.fromWinningNumbers(winningNumbers);
 
         // 당첨 통계 출력
         LottoStatistics lottoStatistics = LottoStatistics.of(lottoTickets, winningLotto, lottoTicketPrice);

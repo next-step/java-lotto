@@ -4,8 +4,6 @@ import lotto.domain.result.LottoStatistics;
 import lotto.domain.result.Rank;
 import lotto.domain.ticket.LottoTickets;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Map;
 
 public class ConsoleOutputHandler implements OutputHandler {
@@ -33,8 +31,8 @@ public class ConsoleOutputHandler implements OutputHandler {
     @Override
     public void showLottoStatistics(LottoStatistics lottoStatistics) {
         printStatisticsTitle();
-        printMatchResults(lottoStatistics);
-        printProfitRatio(lottoStatistics);
+        printMatchResults(lottoStatistics.getResults());
+        printAssessment(lottoStatistics.getAssessmentText());
     }
 
     private void printStatisticsTitle() {
@@ -42,28 +40,12 @@ public class ConsoleOutputHandler implements OutputHandler {
         System.out.println("---------");
     }
 
-    private void printMatchResults(LottoStatistics lottoStatistics) {
-        Map<Rank, Integer> results = lottoStatistics.getResults();
+    private void printMatchResults(Map<Rank, Integer> results) {
         for (Map.Entry<Rank, Integer> entry : results.entrySet()) {
             Rank rank = entry.getKey();
             Integer count = entry.getValue();
             printExceptRankNone(rank, count);
         }
-    }
-
-    private void printProfitRatio(LottoStatistics lottoStatistics) {
-        BigDecimal profitRatio = BigDecimal.valueOf(lottoStatistics.getProfitRatio());
-        BigDecimal truncatedProfitRatio = profitRatio.setScale(2, RoundingMode.DOWN);
-        System.out.printf(
-                "총 수익률은 %s입니다.%s",
-                truncatedProfitRatio.toPlainString(),
-                isLessThanOne(truncatedProfitRatio) ?
-                        "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" : ""
-        );
-    }
-
-    private boolean isLessThanOne(BigDecimal truncatedProfitRatio) {
-        return truncatedProfitRatio.compareTo(BigDecimal.ONE) < 0;
     }
 
     private void printExceptRankNone(Rank rank, Integer count) {
@@ -72,4 +54,9 @@ public class ConsoleOutputHandler implements OutputHandler {
             System.out.println(row);
         }
     }
+
+    private void printAssessment(String assessment) {
+        System.out.println(assessment);
+    }
+
 }
