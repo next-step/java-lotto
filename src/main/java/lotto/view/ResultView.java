@@ -1,27 +1,31 @@
 package lotto.view;
 
-import lotto.prize.PrizeCount;
 import lotto.number.LottoBalls;
 import lotto.prize.LottoPrize;
+import lotto.prize.PrizeCountMap;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ResultView {
     private static final int MIN_WINNING_MATCH_COUNT = 3;
 
-    public void showLottoResult(PrizeCount result) {
+    public void showLottoResult(PrizeCountMap result) {
 
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         result.getResults().entrySet().stream()
-                .filter(entry -> entry.getKey() >= MIN_WINNING_MATCH_COUNT)
+                .filter(entry -> entry.getKey().isWinningPrize(MIN_WINNING_MATCH_COUNT))
+                .sorted(Comparator.comparing(entry -> entry.getKey().getPrizeAmount()))
                 .forEach(entry -> {
-                    int matchedLottoNumberCount = entry.getKey();
+                    LottoPrize lottoPrize = entry.getKey();
                     int matchedTicketCount = entry.getValue();
-                    int prizeAmount = LottoPrize.getPrizeAmount(matchedLottoNumberCount);
-
-                    System.out.printf("%d개 일치 (%d원) - %d개%n", matchedLottoNumberCount, prizeAmount, matchedTicketCount);
+                    System.out.printf("%d개 일치 %s(%d원) - %d개%n",
+                            lottoPrize.getMatchedLottoNumbers(),
+                            lottoPrize.isBonusNeed() ? ",보너스 볼 일치" : "",
+                            lottoPrize.getPrizeAmount(),
+                            matchedTicketCount);
                 });
 
     }

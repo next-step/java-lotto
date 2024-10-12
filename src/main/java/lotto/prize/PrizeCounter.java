@@ -1,27 +1,29 @@
 package lotto.prize;
 
 import lotto.number.LottoBalls;
+import lotto.number.WinningNumbers;
 
 import java.util.List;
 
 public class PrizeCounter {
 
     private final List<LottoBalls> lottos;
-    private final LottoBalls winningNumber;
+    private final WinningNumbers winningNumbers;
 
-    public PrizeCounter(List<LottoBalls> lottos, LottoBalls winningNumber) {
+    public PrizeCounter(List<LottoBalls> lottos, WinningNumbers winningNumbers) {
         this.lottos = lottos;
-        this.winningNumber = winningNumber;
+        this.winningNumbers = winningNumbers;
     }
 
-    public PrizeCount countPrize() {
-        PrizeCount prizeCount = new PrizeCount();
+    public PrizeCountMap countPrize() {
+        PrizeCountMap prizeCountMap = new PrizeCountMap();
 
-        lottos.forEach(lottoBalls -> {
-            int matchedLottoNumbersCount = winningNumber.matchLottoBalls(lottoBalls);
-            prizeCount.increasePrizeCount(matchedLottoNumbersCount);
+        lottos.forEach(lotto -> {
+            int countMatchedNumber = winningNumbers.countMatchedNumber(lotto);
+            boolean bonusNumberMatched = winningNumbers.isBonusNumberMatched(lotto);
+            prizeCountMap.increasePrizeCount(countMatchedNumber, bonusNumberMatched);
         });
 
-        return prizeCount;
+        return prizeCountMap;
     }
 }

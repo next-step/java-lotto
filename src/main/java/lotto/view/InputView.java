@@ -37,6 +37,11 @@ public class InputView {
         return splitByComma(inputLine);
     }
 
+    public Integer getBonusNumberFromUser(){
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine().trim());
+    }
+
     private List<Integer> splitByComma(String text) {
         return Arrays.stream(text.split(COMMA_DELIMITER))
                 .map(String::trim)
