@@ -1,9 +1,10 @@
 package calculator.controller;
 
+
 import calculator.entity.CalculateExpression;
 import calculator.entity.Expressions;
-
 import java.util.function.UnaryOperator;
+
 
 public class StringCalculator {
     private static final String DEFAULT_SPLIT_DELIMITER = " ";
@@ -48,6 +49,4 @@ public class StringCalculator {
     private String[] split(String text) {
         return text.split(DEFAULT_SPLIT_DELIMITER);
     }
-
-
 }
