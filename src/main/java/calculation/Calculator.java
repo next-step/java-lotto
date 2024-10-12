@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-    private static final List<String> arithmeticSymbols = Arrays.asList("+", "-", "*", "/");
+    private static final List<String> ARITHMETIC_SYMBOLS = Arrays.asList("+", "-", "*", "/");
 
     public static int addition(int number1, int number2) {
         return number1 + number2;
@@ -64,7 +64,7 @@ public class Calculator {
 
     //todo private로 해도 되는 코드인데 테스트에서 사용하기 위해서 public으로 쓰는 게 맞는지
     public static boolean isArithmeticSymbol(String symbol) {
-        if (!arithmeticSymbols.contains(symbol)) {
+        if (!ARITHMETIC_SYMBOLS.contains(symbol)) {
             throw new IllegalArgumentException("사칙연산 기호가 아닙니다. " + symbol);
         }
         return true;
