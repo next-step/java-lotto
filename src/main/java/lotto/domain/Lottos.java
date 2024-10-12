@@ -28,6 +28,15 @@ public class Lottos {
         return matchCountInfo;
     }
 
+    public List<Boolean> matchingBonusNumbers(WinningNumbers winningNumbers) {
+        List<Boolean> matchBonusNumberInfo = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            boolean matched = winningNumbers.matchBonusBall(lotto);
+            matchBonusNumberInfo.add(matched);
+        }
+        return matchBonusNumberInfo;
+    }
+
     public String showLottos() {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
