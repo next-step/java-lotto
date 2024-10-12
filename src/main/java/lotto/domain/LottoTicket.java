@@ -21,8 +21,8 @@ public class LottoTicket {
     public LottoWinningResults getWinningResult(final Lotto winningLotto) {
         LottoWinningResults lottoWinningResults = new LottoWinningResults();
         ticket.forEach(lotto -> {
-            int winningCount = lotto.getMatchingNumberCount(winningLotto);
-            lottoWinningResults.incrementWinningResults(winningCount);
+            LottoMatchNumberInfo matchNumberInfo = lotto.getLottoMatchNumberInfo(winningLotto);
+            lottoWinningResults.incrementWinningResults(matchNumberInfo);
         });
         return lottoWinningResults;
     }

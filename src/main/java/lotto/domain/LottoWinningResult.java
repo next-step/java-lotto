@@ -23,4 +23,5 @@ public class LottoWinningResult {
     public int getWinningAmount() {
         return lottoWinningStatus.getAmount() * count;
     }
+
 }

@@ -11,6 +11,7 @@ public class InputView {
     private static final String PURCHASE_PRICE_QUESTION = "구입금액을 입력해 주세요.";
     private static final String TICKET_COUNT_SUFFIX = "개를 구매했습니다.";
     private static final String LAST_WEEK_WINNING_NUMBERS_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ", ";
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -28,13 +29,19 @@ public class InputView {
 
     public static Lotto readLastWeekWinningNumbers() {
         System.out.println(LAST_WEEK_WINNING_NUMBERS_QUESTION);
-        return getWinningNumbers();
+        Set<LottoNumber> winningNumbers = getWinningNumbers();
+        System.out.println(BONUS_NUMBER_QUESTION);
+        LottoNumber bonusNumber = getBonusNumber();
+        return new Lotto(winningNumbers, bonusNumber);
     }
 
-    private static Lotto getWinningNumbers() {
-        Set<LottoNumber> numbers = Arrays.stream(SCANNER.nextLine().split(DELIMITER))
+    private static Set<LottoNumber> getWinningNumbers() {
+        return Arrays.stream(SCANNER.nextLine().split(DELIMITER))
                 .map(number -> LottoNumber.valueOf(Integer.parseInt(number)))
                 .collect(Collectors.toSet());
-        return new Lotto(numbers);
+    }
+
+    private static LottoNumber getBonusNumber() {
+        return LottoNumber.valueOf(SCANNER.nextInt());
     }
 }
