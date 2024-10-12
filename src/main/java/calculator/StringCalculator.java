@@ -6,9 +6,6 @@ public class StringCalculator {
 
     public static final String DELIMITER = " ";
 
-    public StringCalculator() {
-    }
-
     public int calculate(String input) {
         validInput(input);
         return calculateExpression(splitString(input));

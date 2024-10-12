@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exception.DivisionCannotBeZeroException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -74,10 +75,10 @@ class OperatorUtilsTest {
 
         StringCalculator calculator = new StringCalculator();
 
-        Assertions.assertThatExceptionOfType(ArithmeticException.class)
+        Assertions.assertThatExceptionOfType(DivisionCannotBeZeroException.class)
                 .isThrownBy(() ->
-                        calculator.calculate("5 / 0"))
-                .withMessage("0으로 나눌 수 없습니다");
+                        calculator.calculate("1 / 0"))
+                .withMessage("0 으로 나눌 수 없습니다");
 
     }
 

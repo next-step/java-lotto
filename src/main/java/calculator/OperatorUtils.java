@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.exception.DivisionCannotBeZeroException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.IntBinaryOperator;
@@ -17,10 +19,14 @@ public class OperatorUtils {
         operaterMap.put(MINUS, (a, b) -> a - b);
         operaterMap.put(MULTIPLY, (a, b) -> a * b);
         operaterMap.put(DEVIDE, (a, b) -> {
-            if (b == 0)
-                throw new ArithmeticException(ErrorMessage.DIVISION_BY_ZERO.getMessage());
+            validDivision(b);
             return a / b;
         });
+    }
+
+    private static void validDivision(int b) {
+        if (b == 0)
+            throw new DivisionCannotBeZeroException(b);
     }
 
     public static IntBinaryOperator selection(String s) {
