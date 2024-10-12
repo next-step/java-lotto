@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class WinningResult {
     }
 
     public List<Integer> getStaticsList() {
-        return staticsList;
+        return Collections.unmodifiableList(staticsList);
     }
 
     public void incrementMatchCount(int matchCount) {
