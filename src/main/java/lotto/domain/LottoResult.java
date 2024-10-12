@@ -20,20 +20,24 @@ public class LottoResult {
         this.rankInfo = new EnumMap<>(LottoRank.class);
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> rankInfo.put(rank, 0));
-
         calculateLottoRank();
     }
 
     private void calculateLottoRank() {
-        List<Integer> matchCounts = lottos.countMatchingNumbers(winningNumbers);
-        for (int matched : matchCounts) {
-            LottoRank rank = LottoRank.from(matched);
+        List<Integer> matchedNumberCounts = lottos.countMatchingNumbers(winningNumbers);
+        List<Boolean> matchedBonusNumbers = lottos.matchingBonusNumbers(winningNumbers);
+
+        for(int i = 0; i < lottos.count(); i++){
+            int matchedNumberCount = matchedNumberCounts.get(i);
+            boolean isMatchBonusNumber = matchedBonusNumbers.get(i);
+
+            LottoRank rank = LottoRank.from(matchedNumberCount, isMatchBonusNumber);
             rankInfo.put(rank, getRankCount(rank));
         }
     }
 
-    public int findMatchCount(int match) {
-        LottoRank rank = LottoRank.from(match);
+    public int findMatchCount(int match, boolean isMatchBonusNumber) {
+        LottoRank rank = LottoRank.from(match, isMatchBonusNumber);
         return rankInfo.get(rank);
     }
 
