@@ -18,11 +18,11 @@ public class LottoController {
         // 요구사항: 입력받은 구입금액으로 사용자의 자동 로또번호 목록을 생성한다
         // 요구사항: 로또번호를 저장한다
         // 요구사항: 유저의 로또번호 목록을 저장한다
-        List<List<Integer>> lottoNumbers = lottoNumbers(amount);
-        // 요구사항: 로또번호 목록의 value 를 출력한다
-        List<String> lottoNumbersFormat = lottoNumbersFormat(lottoNumbers);
-        // 요구사항: 로또번호 목록의 size 를 출력한다
-        int lottoNumbersSize = lottoNumbersSize(lottoNumbers);
+        List<List<Integer>> buyer = lottoNumbers(amount);
+        // 요구사항: 구매자의 로또목록의 value 를 출력한다
+        List<String> lottoNumbersFormat = lottoNumbersFormat(buyer);
+        // 요구사항: 구매자의 로또목록의 size 를 출력한다
+        int lottoNumbersSize = lottoNumbersSize(buyer);
 
         // 요구사항: 로또번호 목록의 size 를 콘솔에 출력한다
         System.out.println(String.format("%d개를 구매했습니다.", lottoNumbersSize));
