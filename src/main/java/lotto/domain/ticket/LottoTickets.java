@@ -11,9 +11,6 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
-        if (lottoTickets == null) {
-            throw new IllegalArgumentException("로또 리스트가 null입니다.");
-        }
         this.lottoTickets = lottoTickets;
     }
 
