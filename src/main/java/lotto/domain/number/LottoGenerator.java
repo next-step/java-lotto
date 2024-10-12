@@ -15,9 +15,6 @@ class LottoGenerator {
 
     static List<LottoNumber> generate() {
         Collections.shuffle(LOTTO_NUMBERS);
-
-        return LOTTO_NUMBERS.subList(0, 6).stream()
-                .sorted()
-                .collect(Collectors.toList());
+        return List.copyOf(LOTTO_NUMBERS.subList(0, 6));
     }
 }
