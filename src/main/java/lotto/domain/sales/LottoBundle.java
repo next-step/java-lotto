@@ -11,7 +11,7 @@ public class LottoBundle {
 
     private final List<Lotto> lottos;
 
-    private LottoBundle(List<Lotto> lottos) {
+    public LottoBundle(List<Lotto> lottos) {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
@@ -23,10 +23,6 @@ public class LottoBundle {
         return new LottoBundle(lottos);
     }
 
-    public static LottoBundle of(List<Lotto> lottos) {
-        return new LottoBundle(lottos);
-    }
-
     public Lotto lotto(int index) {
         return lottos.get(index);
     }
@@ -35,10 +31,10 @@ public class LottoBundle {
         return lottos.size();
     }
 
-    public WinningPrize winPrize(Lotto winningLotto) {
+    public WinningPrize winningPrize(WinningLotto winningLotto) {
         WinningPrize winningPrize = new WinningPrize();
         for (Lotto lotto : lottos) {
-            winningPrize.record(winningLotto.match(lotto));
+            winningPrize.record(winningLotto.lottoPrize(lotto));
         }
         return winningPrize;
     }

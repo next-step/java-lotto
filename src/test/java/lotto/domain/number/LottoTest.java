@@ -18,12 +18,12 @@ public class LottoTest {
     void 숫자_1_45_사이_6개의_숫자_문자열_입력시_로또_정상_생성() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         Lotto compared = new Lotto(List.of(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)));
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)));
 
         assertThat(lotto.equals(compared)).isTrue();
     }
@@ -79,5 +79,13 @@ public class LottoTest {
         Lotto winningLotto = new Lotto("1,2,3,4,5,6");
 
         assertThat(winningLotto.match(new Lotto(lotto))).isEqualTo(expected);
+    }
+
+    @Test
+    void 로또번호_포함여부_확인() {
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+
+        assertThat(lotto.has(new LottoNumber(1))).isTrue();
+        assertThat(lotto.has(new LottoNumber(8))).isFalse();
     }
 }

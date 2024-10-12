@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private final static int MIN_BOUND = 1;
-    private final static int MAX_BOUND = 45;
+    private static final int MIN_BOUND = 1;
+    private static final int MAX_BOUND = 45;
 
     private final int number;
 

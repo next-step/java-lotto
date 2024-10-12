@@ -18,37 +18,32 @@ public enum LottoPrize {
 
     private final int match;
     private final long prize;
-    private final boolean hasBonus;
+    private final boolean isBonus;
 
     static {
         LOTTO_PRIZES = new HashMap<>();
         for (LottoPrize lottoPrize : values()) {
             Optional.ofNullable(LOTTO_PRIZES.putIfAbsent(lottoPrize.match, new Prize(lottoPrize)))
-                    .ifPresent(prize -> prize.save(lottoPrize.hasBonus, lottoPrize));
+                    .ifPresent(prize -> prize.save(lottoPrize.isBonus, lottoPrize));
         }
-        LOTTO_PRIZES.forEach((k, v) -> System.out.println(k + "|" + v.bonus));
     }
 
     LottoPrize(int match, long prize) {
         this(match, prize, false);
     }
 
-    LottoPrize(int match, long prize, boolean hasBonus) {
-        this.hasBonus = hasBonus;
+    LottoPrize(int match, long prize, boolean isBonus) {
+        this.isBonus = isBonus;
         this.match = match;
         this.prize = prize;
     }
 
-    public static LottoPrize from(int match) {
-        return LOTTO_PRIZES.getOrDefault(match, LOTTO_PRIZES.get(NOTHING_INDEX)).nonBonus;
-    }
-
     public static LottoPrize from(int match, boolean hasBonus) {
         Prize prize = LOTTO_PRIZES.getOrDefault(match, LOTTO_PRIZES.get(NOTHING_INDEX));
-        if (hasBonus) {
-            return prize.bonus;
+        if (!hasBonus) {
+            return prize.nonBonus;
         }
-        return prize.nonBonus;
+        return prize.bonus;
     }
 
     public long prize(int quantity) {
@@ -61,6 +56,10 @@ public enum LottoPrize {
 
     public long getPrize() {
         return prize;
+    }
+
+    public boolean isBonus() {
+        return isBonus;
     }
 
     private static class Prize {

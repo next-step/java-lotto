@@ -5,21 +5,22 @@ import java.util.Map;
 
 public class WinningPrize {
 
+    private static final int NONE = 0;
+
     private final Map<LottoPrize, Integer> winnings = new EnumMap<>(LottoPrize.class);
 
-    public void record(int match) {
-        LottoPrize lottoPrize = LottoPrize.from(match);
+    public void record(LottoPrize lottoPrize) {
         int before = winnings.getOrDefault(lottoPrize, 0);
         winnings.put(lottoPrize, ++before);
     }
 
-    public int winAmount(int match) {
-        return winnings.getOrDefault(LottoPrize.from(match), 0);
+    public int winAmount(LottoPrize lottoPrize) {
+        return winnings.getOrDefault(lottoPrize, NONE);
     }
 
-    public int totalPrize() {
+    public long totalPrize() {
         return winnings.keySet().stream()
-                .mapToInt(lottoPrize -> lottoPrize.prize(winnings.get(lottoPrize)))
+                .mapToLong(lottoPrize -> lottoPrize.prize(winnings.get(lottoPrize)))
                 .sum();
     }
 }

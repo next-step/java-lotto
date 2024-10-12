@@ -26,19 +26,28 @@ public class LottoBundleTest {
 
     @Test
     void 입력받은_당첨번호와_소유한_로또_비교하여_당첨내역_담긴_인스턴스_반환() {
+        WinningPrize winningPrize = getWinningPrize();
+
+        assertThat(winningPrize.winAmount(LottoPrize.FOURTH)).isEqualTo(1);
+        assertThat(winningPrize.winAmount(LottoPrize.THIRD)).isEqualTo(1);
+        assertThat(winningPrize.winAmount(LottoPrize.SECOND_WITH_BONUS)).isEqualTo(2);
+        assertThat(winningPrize.winAmount(LottoPrize.SECOND)).isEqualTo(1);
+        assertThat(winningPrize.winAmount(LottoPrize.FIRST)).isEqualTo(1);
+    }
+
+    private WinningPrize getWinningPrize() {
+        WinningLotto winning = new WinningLotto(winningLotto, 8);
+
         LottoBundle lottoBundle = new LottoBundle(List.of(
                 new Lotto("1,2,3,4,5,6"),
                 new Lotto("1,2,3,4,5,7"),
+                new Lotto("1,2,3,4,5,8"),
+                new Lotto("1,2,3,4,6,8"),
                 new Lotto("1,2,3,4,7,8"),
                 new Lotto("1,2,3,7,8,9"),
                 new Lotto("1,22,23,24,25,26"),
                 new Lotto("21,22,23,24,25,26")));
 
-        WinningPrize winningPrize = lottoBundle.winningPrize(winningLotto);
-
-        assertThat(winningPrize.winAmount(LottoPrize.FOURTH.getMatch())).isEqualTo(1);
-        assertThat(winningPrize.winAmount(LottoPrize.THIRD.getMatch())).isEqualTo(1);
-        assertThat(winningPrize.winAmount(LottoPrize.SECOND.getMatch())).isEqualTo(1);
-        assertThat(winningPrize.winAmount(LottoPrize.FIRST.getMatch())).isEqualTo(1);
+        return lottoBundle.winningPrize(winning);
     }
 }

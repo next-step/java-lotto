@@ -7,8 +7,8 @@ import lotto.domain.sales.LottoBundle;
 
 public class ResultView {
 
-    private final static String BELOW_ONE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    private final static String OVER_ONE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    private static final String BELOW_ONE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String OVER_ONE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
 
     public void show(LottoBundle lottoBundle) {
         for (int i = 0; i < lottoBundle.count(); i++) {
@@ -30,12 +30,21 @@ public class ResultView {
         }
     }
 
-    private static void printPrize(WinningPrize winningPrize, LottoPrize lottoPrize) {
+    private void printPrize(WinningPrize winningPrize, LottoPrize lottoPrize) {
         if (lottoPrize != LottoPrize.NOTHING) {
-            System.out.println(lottoPrize.getMatch()
-                    + "개 일치 (" + lottoPrize.getPrize() + "원)- "
-                    + winningPrize.winAmount(lottoPrize.getMatch()) + "개");
+            System.out.println(matchComment(lottoPrize.getMatch())
+                    + "," + bonusComment(lottoPrize.isBonus())
+                    + " (" + lottoPrize.getPrize() + "원)- "
+                    + winningPrize.winAmount(lottoPrize) + "개");
         }
+    }
+
+    private String matchComment(int match) {
+        return match + "개 일치";
+    }
+
+    private String bonusComment(boolean isBonus) {
+        return isBonus ?  "보너스볼 일치" : "";
     }
 
     private void printProfit(double winningRate) {

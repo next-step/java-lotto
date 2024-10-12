@@ -34,7 +34,7 @@ public class Lotto {
 
         return Arrays.stream(Objects.requireNonNull(lottoString).split(DELIMITER))
                 .map(String::trim)
-                .map(str -> LottoNumber.of(Integer.parseInt(str)))
+                .map(str -> new LottoNumber(Integer.parseInt(str)))
                 .collect(Collectors.toSet());
     }
 
@@ -45,18 +45,18 @@ public class Lotto {
     public int match(Lotto compared) {
         int match = 0;
         for (LottoNumber number : compared.lotto) {
-            match += compare(number);
+            match += lotto.contains(number) ? 1 : 0;
         }
         return match;
     }
 
-    private int compare(LottoNumber compared) {
-        return lotto.contains(compared) ? 1 : 0;
+    public boolean has(LottoNumber compared) {
+        return lotto.contains(compared);
     }
 
     @Override
     public String toString() {
-        return lotto.toString();
+        return lotto.stream().sorted().collect(Collectors.toList()).toString();
     }
 
     @Override
