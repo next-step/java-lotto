@@ -5,4 +5,5 @@ import java.util.Scanner;
 public interface InputView {
     int getPurchaseAmountFromUser();
     String getWinningNumbersFromUser();
+    int getBonusBallFromUser();
 }

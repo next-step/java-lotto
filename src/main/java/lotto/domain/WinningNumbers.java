@@ -21,12 +21,7 @@ public class WinningNumbers {
         this.validate();
     }
 
-    //TODO 컴파일 오류 방지용, 추후 제거할 메소드
-    public static WinningNumbers create(final String numbers){
-        return new WinningNumbers(createNumbers(numbers), null);
-    }
-
-    public static WinningNumbers create(final String numbers, final String bonusBall){
+    public static WinningNumbers create(final String numbers, final int bonusBall){
         return new WinningNumbers(createNumbers(numbers), new BonusBall(bonusBall));
     }
 

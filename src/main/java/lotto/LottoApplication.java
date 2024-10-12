@@ -45,7 +45,8 @@ public class LottoApplication {
 
     private WinningNumbers createWinningNumbers(InputView inputView) {
         String numbers = inputView.getWinningNumbersFromUser();
-        return WinningNumbers.create(numbers);
+        int bonusBall = inputView.getBonusBallFromUser();
+        return WinningNumbers.create(numbers, bonusBall);
     }
 
     private void showLottoResult(LottoResult lottoResult) {
