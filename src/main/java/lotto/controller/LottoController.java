@@ -16,6 +16,8 @@ public class LottoController {
         SCANNER.nextLine();
 
         // 요구사항: 입력받은 구입금액으로 사용자의 자동 로또번호 목록을 생성한다
+        // 요구사항: 로또번호를 저장한다
+        // 요구사항: 유저의 로또번호 목록을 저장한다
         List<List<Integer>> lottoNumbers = lottoNumbers(amount);
         // 요구사항: 로또번호 목록의 value 를 출력한다
         List<String> lottoNumbersFormat = lottoNumbersFormat(lottoNumbers);
