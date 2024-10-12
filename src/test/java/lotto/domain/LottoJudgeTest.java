@@ -30,6 +30,6 @@ public class LottoJudgeTest {
         LottoJudge judge = LottoJudge.valueOf(winningNumbersDTO);
         LottoStatisticsDTO statistics = judge.getStatisticsOf(agent);
         List<LottoMatchInfoDTO> infos = statistics.getMatchInfosDTO().getMatchInfoDTOs();
-        assertThat(infos).isNotEmpty().anyMatch(info -> info.getMatchCount() == 6 && info.getLottoNum() > 0);
+        assertThat(infos).isNotEmpty().anyMatch(info -> info.getMatchCount() == 6 && info.getId() > 0);
     }
 }

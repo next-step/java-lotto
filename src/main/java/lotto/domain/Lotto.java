@@ -9,28 +9,28 @@ public class Lotto {
     public static final int MIN_BOUND = 1;
     public static final int LOTTO_PRICE = 1000;
 
-    private final int lottoNum;
+    private final int id;
     private final LottoNumbers numbers;
 
-    private Lotto(int lottoNum, LottoNumbers numbers) {
-        this.lottoNum = lottoNum;
+    private Lotto(int id, LottoNumbers numbers) {
+        this.id = id;
         this.numbers = numbers;
     }
 
-    public static Lotto valueOf(int lottoNum, List<Integer> numbers) {
-        return new Lotto(lottoNum, LottoNumbers.valueOf(numbers));
+    public static Lotto valueOf(int id, List<Integer> numbers) {
+        return new Lotto(id, LottoNumbers.valueOf(numbers));
     }
 
-    public static Lotto newInstance(int lottoNum, LottoNumberSelectionStrategy strategy) {
-        return new Lotto(lottoNum, strategy.select());
+    public static Lotto newInstance(int id, LottoNumberSelectionStrategy strategy) {
+        return new Lotto(id, strategy.select());
     }
 
     public List<Integer> getNumbers() {
         return this.numbers.value();
     }
 
-    public int getLottoNum() {
-        return this.lottoNum;
+    public int getId() {
+        return this.id;
     }
 
     public int getMatchCount(LottoNumbers winningNumbers) {
@@ -54,11 +54,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(getLottoNum(), lotto.getLottoNum());
+        return Objects.equals(getId(), lotto.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getLottoNum());
+        return Objects.hashCode(getId());
     }
 }

@@ -20,8 +20,8 @@ public class LottoAgent {
         }
     }
 
-    private void buyLotto(int lottoNum, LottoNumberSelectionStrategy selectionStrategy) {
-        purchasedLottos.addLotto(Lotto.newInstance(lottoNum, selectionStrategy));
+    private void buyLotto(int id, LottoNumberSelectionStrategy selectionStrategy) {
+        purchasedLottos.addLotto(Lotto.newInstance(id, selectionStrategy));
     }
 
     public PurchasedLottosDTO getPurchasedLottos() {

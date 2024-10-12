@@ -51,7 +51,7 @@ public class ResultView {
     private static void printMatchInfos(LottoMatchInfosDTO matchInfosDTO) {
         List<LottoMatchInfoDTO> matchInfoDTOs = matchInfosDTO.getMatchInfoDTOs();
         for (LottoMatchInfoDTO matchInfoDTO : matchInfoDTOs) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", matchInfoDTO.getMatchCount(), matchInfoDTO.getReward(), matchInfoDTO.getLottoNum());
+            System.out.printf("%d개 일치 (%d원)- %d개\n", matchInfoDTO.getMatchCount(), matchInfoDTO.getReward(), matchInfoDTO.getId());
         }
     }
 
