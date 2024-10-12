@@ -7,18 +7,18 @@ public class StringCalculator {
     public static final String DELIMITER = " ";
 
     public int calculate(String input) {
-        validInput(input);
-        return calculateExpression(splitString(input));
+        return calculateExpression(splitString(validInput(input)));
+    }
+
+    public static String validInput(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.NULL_OR_EMPTY_STRING.getMessage());
+        }
+        return input;
     }
 
     public String[] splitString(String input) {
         return input.split(DELIMITER);
-    }
-
-    private static void validInput(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.NULL_OR_EMPTY_STRING.getMessage());
-        }
     }
 
     public int calculateExpression(String[] expression) {
