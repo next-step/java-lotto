@@ -13,8 +13,7 @@ public class StringCalculator {
         validateExpression(expression);
 
         List<Integer> operands = parseOperands(expression);
-        List<String> operators = parseOperators(expression);
-        List<Operation> operations = convertToOperations(operators);
+        List<Operation> operations = convertToOperations(expression);
 
         return operate(operands, operations);
     }
@@ -32,14 +31,9 @@ public class StringCalculator {
                 .collect(Collectors.toList());
     }
 
-    private static List<String> parseOperators(String expression) {
+    private static List<Operation> convertToOperations(String expression) {
         return Arrays.stream(expression.split(DELIMITER))
                 .filter(value -> !value.matches(CHECK_NUMBER_REGEXP))
-                .collect(Collectors.toList());
-    }
-
-    private static List<Operation> convertToOperations(List<String> operators) {
-        return operators.stream()
                 .map(Operation::getOperation)
                 .collect(Collectors.toList());
     }
