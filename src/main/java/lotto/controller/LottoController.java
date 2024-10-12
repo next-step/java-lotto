@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.model.Buyer;
 import lotto.model.Lotto;
+import lotto.util.LottoNumbersCreator;
 
 import java.util.List;
 import java.util.Map;
@@ -15,13 +16,13 @@ public class LottoController {
     public static void run() {
         System.out.println("구입금액을 입력해 주세요.");
         // 요구사항: 구입금액을 입력 받는다
-        int amount = SCANNER.nextInt();
+        int amount = SCANNER.nextInt()/1000;
         SCANNER.nextLine();
 
         // 요구사항: 입력받은 구입금액으로 사용자의 자동 로또번호 목록을 생성한다
         // 요구사항: 로또번호를 저장한다
         // 요구사항: 유저의 로또번호 목록을 저장한다
-        Buyer buyer = Buyer.of(lottoNumbers(amount));
+        Buyer buyer = Buyer.of(amount, new LottoNumbersCreator());
         // 요구사항: 구매자의 로또목록의 value 를 출력한다
         List<String> lottoNumbersFormat = buyerLottoes(buyer);
         // 요구사항: 구매자의 로또목록의 size 를 출력한다
@@ -54,24 +55,6 @@ public class LottoController {
         System.out.println(totalEarningRateFormat(totalEarningRate));
     }
 
-    private static List<Lotto> lottoNumbers(int amount) {
-        return List.of(
-                Lotto.of(() -> new Integer[]{8, 21, 23, 41, 42, 43}),
-                Lotto.of(() -> new Integer[]{3, 5, 11, 16, 32, 38}),
-                Lotto.of(() -> new Integer[]{7, 11, 16, 35, 36, 44}),
-                Lotto.of(() -> new Integer[]{1, 8, 11, 31, 41, 42}),
-                Lotto.of(() -> new Integer[]{13, 14, 16, 38, 42, 45}),
-                Lotto.of(() -> new Integer[]{7, 11, 30, 40, 42, 43}),
-                Lotto.of(() -> new Integer[]{2, 13, 22, 32, 38, 45}),
-                Lotto.of(() -> new Integer[]{23, 25, 33, 36, 39, 41}),
-                Lotto.of(() -> new Integer[]{1, 3, 5, 14, 22, 45}),
-                Lotto.of(() -> new Integer[]{5, 9, 38, 41, 43, 44}),
-                Lotto.of(() -> new Integer[]{2, 8, 9, 18, 19, 21}),
-                Lotto.of(() -> new Integer[]{13, 14, 18, 21, 23, 35}),
-                Lotto.of(() -> new Integer[]{17, 21, 29, 37, 42, 45}),
-                Lotto.of(() -> new Integer[]{3, 8, 27, 30, 35, 4})
-        );
-    }
 
     private static String totalEarningRateFormat(double totalEarningRate) {
         return String.format("총 수익률은 %.2f입니다.", totalEarningRate);
@@ -105,7 +88,7 @@ public class LottoController {
 
     private static List<String> buyerLottoes(Buyer buyer) {
         return buyer.value().stream()
-                .map(lotto -> "["+lotto.toString()+"]")
+                .map(Lotto::toString)
                 .collect(Collectors.toList());
     }
 }

@@ -1,8 +1,13 @@
 package lotto.model;
 
+import lotto.model.enums.Ranking;
 import lotto.util.NumbersCreator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -58,15 +63,17 @@ public class Lotto {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    public String toString() {
+        return lottoNumbers.toString();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers);
+    public Ranking compare(Lotto winning) {
+        return Ranking.result(matchedCount(winning));
+    }
+
+    private int matchedCount(Lotto winning) {
+        return (int) lottoNumbers.stream()
+                .filter(winning.lottoNumbers::contains)
+                .count();
     }
 }

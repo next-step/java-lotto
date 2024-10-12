@@ -11,7 +11,7 @@ public class Seller {
         return new Seller(winningLotto);
     }
 
-    public Lotto winnerLotto() {
+    public Lotto winningLotto() {
         return this.winningLotto;
     }
 }
