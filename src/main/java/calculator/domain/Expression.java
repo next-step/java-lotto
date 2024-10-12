@@ -1,10 +1,10 @@
 package calculator.domain;
 
-import calculator.domain.operator.Operator;
 import calculator.util.StringUtil;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.IntBinaryOperator;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
@@ -31,25 +31,33 @@ public class Expression {
         }
     }
 
-    public Iterator<Integer> getOperands() {
+    Iterator<Integer> getOperands() {
         List<String> elements = StringUtil.splitBySpace(this.expression);
 
         String[] filtered = IntStream.range(0, elements.size())
-                .filter(index -> index % 2 == 0)
+                .filter(Expression::isEvenNumber)
                 .mapToObj(elements::get)
                 .toArray(String[]::new);
 
         return new Operands(filtered).iterator();
     }
 
-    public Iterator<Operator> getOperators() {
+    private static boolean isEvenNumber(int number) {
+        return number % 2 == 0;
+    }
+
+    Iterator<IntBinaryOperator> getOperators() {
         List<String> elements = StringUtil.splitBySpace(this.expression);
 
         String[] filtered = IntStream.range(0, elements.size())
-                .filter(index -> index % 2 != 0)
+                .filter(Expression::isOddNumber)
                 .mapToObj(elements::get)
                 .toArray(String[]::new);
 
         return new Operators(filtered).iterator();
+    }
+
+    private static boolean isOddNumber(int number) {
+        return number % 2 != 0;
     }
 }

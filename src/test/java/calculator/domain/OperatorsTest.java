@@ -1,14 +1,14 @@
-package calculator.domain.operator;
+package calculator.domain;
 
-import calculator.domain.Operators;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
+import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -24,16 +24,18 @@ class OperatorsTest {
 
     @Test
     void iterator를_제공한다() {
-        Operators operators = new Operators("+", "-", "*", "/");
-        List<Operator> list = Stream.of("+", "-", "*", "/")
-                .map(Operator::new)
-                .collect(Collectors.toList());
+        String[] symbols = {"+", "-", "*", "/"};
 
-        Iterator<Operator> operatorsIterator = operators.iterator();
-        Iterator<Operator> listIterator = list.iterator();
+        Operators operators = new Operators(symbols);
+        Iterator<IntBinaryOperator> actual = operators.iterator();
 
-        while (operatorsIterator.hasNext()) {
-            assertThat(operatorsIterator.next()).isEqualTo(listIterator.next());
-        }
+        Iterator<IntBinaryOperator> expected = Arrays.stream(symbols)
+                .map(Operation::findOperatorBySymbol)
+                .collect(Collectors.toList())
+                .iterator();
+
+        Assertions.assertThat(actual)
+                .toIterable()
+                .containsExactlyElementsOf(() -> expected);
     }
 }

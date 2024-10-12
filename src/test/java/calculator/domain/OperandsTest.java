@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -30,12 +31,13 @@ class OperandsTest {
     @Test
     void iterator를_제공한다() {
         Operands operands = new Operands("1", "2", "3");
-        List<Integer> list = List.of(1, 2, 3);
-        Iterator<Integer> operandsIterator = operands.iterator();
-        Iterator<Integer> listIterator = list.iterator();
+        Iterator<Integer> actual = operands.iterator();
 
-        while (operandsIterator.hasNext()) {
-            assertThat(operandsIterator.next()).isEqualTo(listIterator.next());
-        }
+        List<Integer> list = List.of(1, 2, 3);
+        Iterator<Integer> expected = list.iterator();
+
+        Assertions.assertThat(actual)
+                .toIterable()
+                .containsExactlyElementsOf(() -> expected);
     }
 }

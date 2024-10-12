@@ -11,7 +11,7 @@ public class Operands {
 
     private final List<Integer> operands;
 
-    public Operands(String... operands) {
+    Operands(String... operands) {
         validate(operands);
 
         this.operands = Arrays.stream(operands)
@@ -25,7 +25,7 @@ public class Operands {
         }
     }
 
-    public Iterator<Integer> iterator() {
+    Iterator<Integer> iterator() {
         return operands.iterator();
     }
 }
