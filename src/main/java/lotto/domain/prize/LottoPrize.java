@@ -17,7 +17,7 @@ public enum LottoPrize {
     private static final int NOTHING_INDEX = 0;
 
     private final int match;
-    private final int prize;
+    private final long prize;
     private final boolean hasBonus;
 
     static {
@@ -29,11 +29,11 @@ public enum LottoPrize {
         LOTTO_PRIZES.forEach((k, v) -> System.out.println(k + "|" + v.bonus));
     }
 
-    LottoPrize(int match, int prize) {
+    LottoPrize(int match, long prize) {
         this(match, prize, false);
     }
 
-    LottoPrize(int match, int prize, boolean hasBonus) {
+    LottoPrize(int match, long prize, boolean hasBonus) {
         this.hasBonus = hasBonus;
         this.match = match;
         this.prize = prize;
@@ -51,7 +51,7 @@ public enum LottoPrize {
         return prize.nonBonus;
     }
 
-    public int prize(int quantity) {
+    public long prize(int quantity) {
         return prize * quantity;
     }
 
@@ -59,7 +59,7 @@ public enum LottoPrize {
         return match;
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return prize;
     }
 
