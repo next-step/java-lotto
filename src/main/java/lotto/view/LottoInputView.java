@@ -23,6 +23,11 @@ public class LottoInputView {
         return new Money(reader.readInt());
     }
 
+    public LottoNumber inputBonusLottoNumber() {
+        writer.write("보너스 볼을 입력해 주세요.");
+        return new LottoNumber(reader.readInt());
+    }
+
     public Lotto inputLastWeekWinningLotto() {
         writer.write("지난 주 당첨 번호를 입력해 주세요.");
         final String lottoNumbersInput = reader.readString();

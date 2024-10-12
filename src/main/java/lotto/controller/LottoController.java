@@ -12,8 +12,10 @@ public class LottoController {
         final LottoBundle lottoBundle = purchaseLottoBundle(money);
         lottoInputView.displayPurchaseLottoBundle(lottoBundle);
         final Lotto lastWeekWinningLotto = lottoInputView.inputLastWeekWinningLotto();
+        final LottoNumber bonusLottoNumber = lottoInputView.inputBonusLottoNumber();
+        final LastWeekWinningLotto lottoLastWinning = new LastWeekWinningLotto(lastWeekWinningLotto, bonusLottoNumber);
 
-        final LottoWinningEvaluator evaluator = new LottoWinningEvaluator(lottoBundle, lastWeekWinningLotto);
+        final LottoWinningEvaluator evaluator = new LottoWinningEvaluator(lottoBundle, lottoLastWinning);
         final LottoWinningResults results = evaluator.evaluate();
 
         final LottoResultView lottoResultView = ConsoleViewFactory.createLottoResultView(results);

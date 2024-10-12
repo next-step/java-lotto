@@ -19,7 +19,7 @@ public class MoneyTest {
     void shouldOnlyAllowAmountInThousandUnits() {
         final Money money = new Money(3000);
 
-        assertThat(money.getMoney()).isEqualTo(3000);
+        assertThat(money).isEqualTo(new Money(3000));
     }
 
     @Test

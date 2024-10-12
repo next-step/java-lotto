@@ -4,28 +4,28 @@ import java.util.List;
 
 public class LottoWinningEvaluator {
     private final LottoBundle lottoBundle;
-    private final Lotto evaluationLotto;
+    private final LastWeekWinningLotto lastWeekWinningLotto;
 
-    public LottoWinningEvaluator(final LottoBundle lottoBundle, final Lotto evaluationLotto) {
+    public LottoWinningEvaluator(final LottoBundle lottoBundle, final LastWeekWinningLotto lastWeekWinningLotto) {
         this.lottoBundle = lottoBundle;
-        this.evaluationLotto = evaluationLotto;
+        this.lastWeekWinningLotto = lastWeekWinningLotto;
     }
 
     public LottoWinningResults evaluate() {
         final LottoRankGroup lottoRankGroup = new LottoRankGroup();
 
         for (final Lotto lotto : lottoBundle) {
-            final int matchedCount = lotto.matchCount(evaluationLotto);
-            final LottoRank lottoRank = LottoRank.findLottoRankByMatchedCount(matchedCount);
+            final LottoRank lottoRank = lastWeekWinningLotto.calculateLottoRank(lotto);
             lottoRankGroup.addLotto(lottoRank, lotto);
         }
 
         return new LottoWinningResults(
             List.of(
-                createLottoWinningResult(lottoRankGroup, LottoRank.first()),
-                createLottoWinningResult(lottoRankGroup, LottoRank.third()),
-                createLottoWinningResult(lottoRankGroup, LottoRank.fourth()),
-                createLottoWinningResult(lottoRankGroup, LottoRank.fifth())
+                createLottoWinningResult(lottoRankGroup, LottoRank.FIRST),
+                createLottoWinningResult(lottoRankGroup, LottoRank.SECOND),
+                createLottoWinningResult(lottoRankGroup, LottoRank.THIRD),
+                createLottoWinningResult(lottoRankGroup, LottoRank.FOURTH),
+                createLottoWinningResult(lottoRankGroup, LottoRank.FIFTH)
             )
         );
     }
