@@ -17,6 +17,13 @@ public class InputView {
         return purchasingAmount / 1000;
     }
 
+    public List<Integer> receiveWinningNumber() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String input = scanner.nextLine();
+        validateWinningNumber(input);
+        return convertWinningNumber(input);
+    }
+
     public int getPurchasingAmount() {
         return this.purchasingAmount;
     }
@@ -36,13 +43,6 @@ public class InputView {
         if (purchasingAmount % 1000 > 0) {
             System.out.println("거스름돈 " + purchasingAmount % 1000 + "원을 받았습니다.");
         }
-    }
-
-    public List<Integer> receiveWinningNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String input = scanner.nextLine();
-        validateWinningNumber(input);
-        return convertWinningNumber(input);
     }
 
     private List<Integer> convertWinningNumber(String input) {

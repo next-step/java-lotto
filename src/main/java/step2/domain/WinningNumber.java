@@ -7,9 +7,7 @@ public class WinningNumber {
     private final List<Integer> winningNumbers;
 
     public WinningNumber(List<Integer> winningNumbers) {
-        if (winningNumbers == null || winningNumbers.isEmpty()) {
-            throw new IllegalArgumentException("당첨번호는 null 또는 빈 값이 될 수 없습니다.");
-        }
+        validate(winningNumbers);
         this.winningNumbers = Collections.unmodifiableList(winningNumbers);
     }
 
@@ -17,5 +15,11 @@ public class WinningNumber {
         return (int) lotto.getLottoNumbers().stream()
                 .filter(winningNumbers::contains)
                 .count();
+    }
+
+    private void validate(List<Integer> winningNumbers) {
+        if (winningNumbers == null || winningNumbers.isEmpty()) {
+            throw new IllegalArgumentException("당첨번호는 null 또는 빈 값이 될 수 없습니다.");
+        }
     }
 }

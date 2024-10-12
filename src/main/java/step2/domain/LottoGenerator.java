@@ -12,10 +12,10 @@ public class LottoGenerator {
         LottoResult lottoResult = new LottoResult();
         IntStream.range(0, amount)
                 .mapToObj(i -> new Lotto(generate()))
-                .collect(Collectors.toList())
                 .forEach(lottoResult::addLotto);
         return lottoResult;
     }
+
     public List<Integer> generate() {
         return lottoBalls.getLottoBalls(LOTTO_BALLS_COUNT);
     }
