@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 public class Expression {
 
-    public static final String OPERAND_OPERATOR_OPERAND = "^\\d+ [-+*/] \\d+( [-+*/] \\d+)*$";
+    public static final String OPERAND_OPERATOR_OPERAND = "^-?\\d+ [-+*/] -?\\d+( [-+*/] -?\\d+)*$";
 
     private final String expression;
 

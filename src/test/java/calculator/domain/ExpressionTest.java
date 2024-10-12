@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 class ExpressionTest {
 
@@ -22,5 +23,11 @@ class ExpressionTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Expression(input))
                 .withMessageContaining("올바르지 않은 수식입니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-10 + 5", "20 + -10"})
+    void 음수를_사용할_수_있다(String input) {
+        assertThatNoException().isThrownBy(() -> new Expression(input));
     }
 }
