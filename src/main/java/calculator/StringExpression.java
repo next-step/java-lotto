@@ -3,6 +3,7 @@ package calculator;
 public class StringExpression {
 
     public static final String DELIMITER = " ";
+    public static final String INVALID_INPUT_NULL_OR_EMPTY = "null 혹은 공백 문자열은 연산 불가능합니다";
 
     private final String expression;
 
@@ -13,7 +14,7 @@ public class StringExpression {
 
     private String validInput(String input) {
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("null 혹은 공백 문자열은 연산 불가능합니다");
+            throw new IllegalArgumentException(INVALID_INPUT_NULL_OR_EMPTY);
         }
         return input;
     }
