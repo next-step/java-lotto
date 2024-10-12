@@ -20,4 +20,10 @@ class PurchasePriceTest {
         assertThatThrownBy(() -> new PurchasePrice(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 구입개수_구하기() {
+        PurchasePrice purchasePrice = new PurchasePrice(14000);
+        assertThat(purchasePrice.calculatePurchaseCount()).isEqualTo(14);
+    }
 }
