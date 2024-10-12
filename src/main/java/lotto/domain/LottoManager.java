@@ -1,6 +1,10 @@
 package lotto.domain;
 
-import lotto.dto.*;
+import lotto.dto.PurchasedLottosDTO;
+import lotto.dto.LottoMatchInfoDTO;
+import lotto.dto.LottoMatchInfosDTO;
+import lotto.dto.LottoStatisticsDTO;
+import lotto.dto.WinningNumbersDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +14,7 @@ import java.util.Map;
 public class LottoManager {
     private static final int LOTTO_PRICE = 1000;
 
-    private PurchasedLottos purchasedLottos;
+    private final PurchasedLottos purchasedLottos;
     private LottoNumbers winningLottoNumbers;
 
     private LottoManager() {
