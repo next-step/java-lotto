@@ -10,12 +10,6 @@
 
 ---
 # STEP2 TODO
-- [ ] 피드백
-  - [x] prize를 enum으로 관리
-  - [x] LottoResult 제거
-  - [x] 로또 티켓 중복 처리를 위한 List -> Set 변경
-  - [x] 로또 티켓과 WinningNumber 공통점 처리 -> 기능이 유사하여 LottoNumbers 객체로 통합
-  - [x] List<LottoNumber> lottoBalls을 Wrapping (로또 공) 
 # STEP2 DONE
 - [x] 모든 기능은 TDD로 단위테스트 존재
 - [x] 핵심 로직과 UI담당로직 분리(InputView, ResultView)
@@ -27,7 +21,12 @@
   - [x] 로또 자동 생성은 Collections.shuffle() 메소드 활용
   - [x] Collections.sort() 메소드를 활용해 정렬
   - [x] ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단
-  - 
+- [x] 피드백
+  - [x] prize를 enum으로 관리
+  - [x] LottoResult 제거
+  - [x] 로또 티켓 중복 처리를 위한 List -> Set 변경
+  - [x] 로또 티켓과 WinningNumber 공통점 처리 -> 기능이 유사하여 LottoNumbers 객체로 통합
+  - [x] List<LottoNumber> lottoBalls을 Wrapping (로또 공)
 ---
 # STEP1 TODO
 # STEP1 DONE
