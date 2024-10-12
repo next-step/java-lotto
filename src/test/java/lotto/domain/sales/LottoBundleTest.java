@@ -27,12 +27,12 @@ public class LottoBundleTest {
     @Test
     void 입력받은_당첨번호와_소유한_로또_비교하여_당첨내역_담긴_인스턴스_반환() {
         LottoBundle lottoBundle = LottoBundle.of(List.of(
-                Lotto.of("1,2,3,4,5,6"),
-                Lotto.of("1,2,3,4,5,7"),
-                Lotto.of("1,2,3,4,7,8"),
-                Lotto.of("1,2,3,7,8,9"),
-                Lotto.of("1,22,23,24,25,26"),
-                Lotto.of("21,22,23,24,25,26")));
+                new Lotto("1,2,3,4,5,6"),
+                new Lotto("1,2,3,4,5,7"),
+                new Lotto("1,2,3,4,7,8"),
+                new Lotto("1,2,3,7,8,9"),
+                new Lotto("1,22,23,24,25,26"),
+                new Lotto("21,22,23,24,25,26")));
 
         WinningPrize winningPrize = lottoBundle.winPrize(winningLotto);
 

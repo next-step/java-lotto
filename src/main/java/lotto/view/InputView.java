@@ -21,8 +21,7 @@ public class InputView {
     public Lotto lastWinningLotto() {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String lastWinning = SCANNER.nextLine();
-        return Lotto.of(lastWinning);
+        return new Lotto(SCANNER.nextLine());
     }
 
     private void clear() {

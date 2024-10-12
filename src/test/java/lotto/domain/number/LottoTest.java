@@ -16,7 +16,7 @@ public class LottoTest {
 
     @Test
     void 숫자_1_45_사이_6개의_숫자_문자열_입력시_로또_정상_생성() {
-        Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         Lotto compared = new Lotto(List.of(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
@@ -40,20 +40,20 @@ public class LottoTest {
     @Test
     void 중복숫자_입력이_있는_문자열로_로또_생성시_예외발생() {
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.of("1, 1, 3, 4, 5, 6"))
+                .isThrownBy(() -> new Lotto("1, 1, 3, 4, 5, 6"))
                 .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
     }
 
     @Test
     void null_문자열로_로또_생성시_예외발생() {
         Assertions.assertThatNullPointerException()
-                .isThrownBy(() -> Lotto.of(null));
+                .isThrownBy(() -> new Lotto((String) null));
     }
 
     @Test
     void 빈문자열로_로또_생성시_예외발생() {
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.of(""))
+                .isThrownBy(() -> new Lotto(""))
                 .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
     }
 
@@ -61,7 +61,7 @@ public class LottoTest {
     @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
     void 문자열_내_숫자가_6개_아닐때_로또_생성시_예외발생(String text) {
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.of(text))
+                .isThrownBy(() -> new Lotto(text))
                 .withMessage(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
     }
 
@@ -76,8 +76,8 @@ public class LottoTest {
             "21,22,23,24,25,26:0"
     }, delimiter = ':')
     void 로또끼리_비교하여_일치하는_숫자_개수_정상_반환(String lotto, int expected) {
-        Lotto winningLotto = Lotto.of("1,2,3,4,5,6");
+        Lotto winningLotto = new Lotto("1,2,3,4,5,6");
 
-        assertThat(winningLotto.match(Lotto.of(lotto))).isEqualTo(expected);
+        assertThat(winningLotto.match(new Lotto(lotto))).isEqualTo(expected);
     }
 }
