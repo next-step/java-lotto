@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static lotto.model.Lotto.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -33,6 +34,16 @@ public class LottoTest {
         Assertions.assertThat(actual).isEqualTo(expected);
         // 참조필드 불변 테스트
         Assertions.assertThatThrownBy(() -> actual.set(0, 3));
+    }
+
+    @Test
+    void 로또는_로또번호순서와_상관없이_정렬된_값과_같다() {
+        Lotto lotto = Lotto.of(39, 17, 6, 9, 28, 45);
+
+        List<Integer> actual = lotto.numbers();
+        List<Integer> expected = List.of(6, 9, 17, 28, 39, 45);
+
+        Assertions.assertThat(actual).isEqualTo(expected);
     }
 
     @Test

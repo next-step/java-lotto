@@ -23,6 +23,7 @@ public class Lotto {
             result.add(lottoNumber);
         }
         validateLottoNumbers(result);
+        result.sort(Integer::compareTo);
         return new Lotto(Collections.unmodifiableList(result));
     }
 

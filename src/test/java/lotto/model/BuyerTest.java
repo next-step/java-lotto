@@ -9,7 +9,6 @@ import static lotto.model.Buyer.LOTTO_IS_NOT_ALLOWED_DUPLICATED;
 
 public class BuyerTest {
 
-
     @Test
     void 로또목록을_구매자에_저장한다() {
         Assertions.assertThatNoException().isThrownBy(() -> {
@@ -45,6 +44,11 @@ public class BuyerTest {
                 .hasMessage(LOTTO_IS_NOT_ALLOWED_DUPLICATED);
     }
 
+    @Test
+    void 로또목록과_당첨로또를_비교한다() {
+
+    }
+
     public static final List<Lotto> LOTTOES_FIXTURE = List.of(
             Lotto.of(8, 21, 23, 41, 42, 43),
             Lotto.of(2, 13, 22, 32, 38, 45)
@@ -52,6 +56,6 @@ public class BuyerTest {
 
     public static final List<Lotto> LOTTOES_DUPLICATED_FIXTURE = List.of(
             Lotto.of(8, 21, 23, 41, 42, 43),
-            Lotto.of(8, 21, 23, 41, 42, 43)
+            Lotto.of(21, 8, 23, 41, 42, 43)
     );
 }
