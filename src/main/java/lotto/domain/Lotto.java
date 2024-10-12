@@ -17,7 +17,7 @@ public class Lotto {
 
     public boolean allMatch(final Lotto otherLotto) {
         if (otherLotto == null) {
-            return false;
+            throw new IllegalArgumentException("비교 대상 로또객체는 null 일 수 없습니다.");
         }
 
         return lottoNumbers.equals(otherLotto.lottoNumbers);
@@ -25,7 +25,7 @@ public class Lotto {
 
     public int matchCount(final Lotto otherLotto) {
         if (otherLotto == null) {
-            return 0;
+            throw new IllegalArgumentException("비교 대상 로또객체는 null 일 수 없습니다.");
         }
 
         return (int) lottoNumbers.stream()
@@ -35,7 +35,7 @@ public class Lotto {
 
     public boolean contains(final LottoNumber lottoNumber) {
         if (lottoNumber == null) {
-            return false;
+            throw new IllegalArgumentException("비교 대상 로또번호는 null 일 수 없습니다.");
         }
 
         return lottoNumbers.contains(lottoNumber);
