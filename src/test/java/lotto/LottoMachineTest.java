@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoMachineTest {
 
@@ -74,5 +75,20 @@ public class LottoMachineTest {
 
         assertThat(machine.calculateProfitRate(prizeCountMap))
                 .isEqualTo("1.50");
+    }
+
+    @Test
+    void validate_로또_6개() {
+        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+    }
+
+    @Test
+    void validate_로또_6개_아닌_경우() {
+        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6, 7);
+        assertThatThrownBy(() -> {
+            new Lotto(numbers);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
