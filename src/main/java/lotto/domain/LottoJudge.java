@@ -10,7 +10,7 @@ import java.util.*;
 public class LottoJudge {
     private LottoNumbers winningLottoNumbers;
 
-    private LottoJudge(LottoNumbers winningLottoNumbers){
+    private LottoJudge(LottoNumbers winningLottoNumbers) {
         this.winningLottoNumbers = winningLottoNumbers;
     }
 
