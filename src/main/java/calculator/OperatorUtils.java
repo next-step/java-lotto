@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.exception.DivisionCannotBeZeroException;
+import calculator.exception.InvalidOperatorException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class OperatorUtils {
 
     public static IntBinaryOperator selection(String s) {
         if (!operaterMap.containsKey(s)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_OPERATOR.getMessage());
+            throw new InvalidOperatorException(s);
         }
         return operaterMap.get(s);
     }

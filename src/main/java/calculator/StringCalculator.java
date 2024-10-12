@@ -10,9 +10,9 @@ public class StringCalculator {
         return calculateExpression(splitString(validInput(input)));
     }
 
-    public static String validInput(String input) {
+    public String validInput(String input) {
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.NULL_OR_EMPTY_STRING.getMessage());
+            throw new IllegalArgumentException("null 혹은 공백 문자열은 연산 불가능합니다");
         }
         return input;
     }

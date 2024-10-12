@@ -65,7 +65,7 @@ class OperatorUtilsTest {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() ->
                         OperatorUtils.selection("^"))
-                .withMessage("잘못된 연산기호 입니다");
+                .withMessage("^는 잘못된 연산기호 입니다");
 
     }
 
