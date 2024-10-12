@@ -5,8 +5,6 @@ import lotto.domain.LottoGame;
 import lotto.domain.WinningResult;
 import lotto.view.ResultView;
 
-import java.util.List;
-
 import static lotto.view.InputView.inputAmount;
 import static lotto.view.InputView.inputLastWinningNumbers;
 
@@ -29,6 +27,6 @@ public class LottoMain {
 
         ResultView.printMatchStaticsInfo(winningResult.getStaticsList());
 
-        ResultView.printProfitRate(winningResult.calculateProfitRate());
+        ResultView.printProfitRate(winningResult.calculateProfitRate(), lottoQuantity);
     }
 }
