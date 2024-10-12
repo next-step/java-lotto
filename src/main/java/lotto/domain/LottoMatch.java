@@ -22,6 +22,10 @@ public enum LottoMatch {
         this.prize = prize;
     }
 
+    public int getPrize() {
+        return prize;
+    }
+
     public int calculatePrize(int count) {
         return this.prize * count;
     }

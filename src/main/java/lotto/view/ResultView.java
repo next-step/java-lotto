@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoMatch;
 
 import java.util.List;
 
@@ -19,7 +20,10 @@ public class ResultView {
 
     public static void printMatchStaticsInfo(List<Integer> staticsList) {
         printMatchStaticsDescription();
-
+        for (int match = 3; match <= 6; ++match) {
+            LottoMatch lottoMatch = LottoMatch.findEnumByMatchCount(match);
+            System.out.println(match + "개 일치 (" + lottoMatch.getPrize() + "원)- " + staticsList.get(match) + "개");
+        }
     }
 
     private static void printMatchStaticsDescription() {
