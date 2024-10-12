@@ -63,9 +63,9 @@ public class Calculator {
     }
 
     //todo private로 해도 되는 코드인데 테스트에서 사용하기 위해서 public으로 쓰는 게 맞는지
-    public static boolean isArithmeticSymbol(String symbol) {
+    private static boolean isArithmeticSymbol(String symbol) {
         if (!ARITHMETIC_SYMBOLS.contains(symbol)) {
-            throw new IllegalArgumentException("사칙연산 기호가 아닙니다. " + symbol);
+            throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
         }
         return true;
     }
