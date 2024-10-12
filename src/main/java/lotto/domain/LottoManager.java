@@ -14,23 +14,23 @@ public class LottoManager {
     private LottoNumbers winningLottoNumbers;
 
     private LottoManager() {
+        purchasedLottos = PurchasedLottos.newInstance();
     }
 
     public static LottoManager newInstance() {
         return new LottoManager();
     }
 
-    private static void buyLotto(int lottoNum, LottoNumberSelectionStrategy selectionStrategy, List<Lotto> buyingLottos) {
-        buyingLottos.add(selectionStrategy.select(lottoNum));
-    }
 
     public void buy(int price, LottoNumberSelectionStrategy selectionStrategy) {
         int buyingCount = price / LOTTO_PRICE;
-        List<Lotto> buyingLottos = new ArrayList<>();
         for (int i = 0; i < buyingCount; i++) {
-            buyLotto(i, selectionStrategy, buyingLottos);
+            buyLotto(i, selectionStrategy);
         }
-        this.purchasedLottos = PurchasedLottos.valueOf(buyingLottos);
+    }
+
+    private void buyLotto(int lottoNum, LottoNumberSelectionStrategy selectionStrategy) {
+        purchasedLottos.addLotto(selectionStrategy.select(lottoNum));
     }
 
     public PurchasedLottosDTO listPurchasedLottos() {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PurchasedLottos {
@@ -13,7 +14,16 @@ public class PurchasedLottos {
         return new PurchasedLottos(lottos);
     }
 
+    public static PurchasedLottos newInstance() {
+        return new PurchasedLottos(new ArrayList<>());
+    }
+
     public List<Lotto> value() {
         return this.value;
     }
+
+    public void addLotto(Lotto buytingLotto) {
+        value.add(buytingLotto);
+    }
+
 }
