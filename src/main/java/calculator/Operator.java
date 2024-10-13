@@ -24,8 +24,9 @@ public enum Operator {
     }
 
     private static void validDivision(int division) {
-        if (division == 0)
+        if (division == 0) {
             throw new DivisionCannotBeZeroException(division);
+        }
     }
 
     public static IntBinaryOperator getOperatorMethod(String operatorRequest) {
