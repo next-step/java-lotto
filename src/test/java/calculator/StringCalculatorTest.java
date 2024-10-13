@@ -3,7 +3,7 @@ package calculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class StringCalculatorTest {
+class StringCalculatorTest {
     @Test
     void 복수_연산() {
         // given

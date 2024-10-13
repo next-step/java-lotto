@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class InputValidatorTest {
+class InputValidatorTest {
     @Test
     void 유효성_검사_통과() {
         // given
@@ -24,7 +24,7 @@ public class InputValidatorTest {
     void 빈_문자열이거나_공백으로_구성된_문자열이면_예외_발생(String input) {
         // when, then
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validate(input))
-                        .withMessageMatching("빈 문자열이나 공백으로 구성된 문자열은 허용되지 않습니다");
+                .withMessageMatching("빈 문자열이나 공백으로 구성된 문자열은 허용되지 않습니다");
     }
 
     @Test
