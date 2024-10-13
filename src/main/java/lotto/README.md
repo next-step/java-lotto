@@ -6,13 +6,12 @@
 * 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
 
 ## 기능 목록
-- [ ] 로또 구매화면(LottoPurchaseView)
-    - [ ] 구매 안내, 구매 개수, 구매 로또
+- [ ] 입력 화면(InputView)
+    - [ ] 구매 금액 입력
+    - [ ] 당첨번호 입력
 - [ ] 로또 구매 개수 계산(NumberOfPurchasedLotto)
 - [ ] 로또 생성(LottoGenerator)
   - [ ] 로또 클래스 생성
-- [ ] 로또 당첨번호 입력 화면(LottoWinningNumberInputView)
-  - [ ] 당첨번호 구분
 - [ ] 당첨 확인(WinningCheck)
   - [ ] 당첨 조건
   - [ ] 수익률 계산
