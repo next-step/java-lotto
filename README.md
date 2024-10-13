@@ -21,5 +21,6 @@
 4. else를 사용하지 않아야 함
 
 ## 기능 요구 사항에 따른 필요한 예외처리 사항
-2-1. 입력 문자열과 사칙 연산 사이에 공백이 없는 경우, 또는 공백이 2개 이상인 경우에 대해 처리
+2-1. 입력값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+2-2. 입력값이 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
 3-1. 결과 값이 정수가 아닌 경우에 대해 처리
