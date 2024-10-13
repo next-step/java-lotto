@@ -1,12 +1,11 @@
 package lotto.view;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResults;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String PRINT_INPUT_PRICE = "구입금액을 입력해 주세요.";
@@ -54,7 +53,7 @@ public class ResultView {
     }
 
     private static void printRank(LottoRank rank, LottoResults lottoResults) {
-        if (rank != LottoRank.NONE && rank!=LottoRank.SECOND) {
+        if (rank != LottoRank.NONE && rank != LottoRank.SECOND) {
             System.out.printf(PRINT_RANK_LIST, rank.getMatchCount(), rank.getPrizeMoney(),
                     lottoResults.getPrizeCountByRank(rank));
         }
@@ -63,7 +62,6 @@ public class ResultView {
                     lottoResults.getPrizeCountByRank(rank));
         }
     }
-
 
     public static void printRatio(String ratio) {
         System.out.printf(PRINT_RATIO, ratio);

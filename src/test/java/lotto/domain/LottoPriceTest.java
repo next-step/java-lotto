@@ -30,7 +30,7 @@ class LottoPriceTest {
 
     @DisplayName("로또 횟수 구하기")
     @Test
-    void 로또_횟수(){
+    void 로또_횟수() {
         LottoPrice lottoPrice = new LottoPrice(20000);
         assertThat(lottoPrice.getLottoCount()).isEqualTo(20);
     }
