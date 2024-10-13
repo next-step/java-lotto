@@ -24,4 +24,28 @@ public class StringCalculatorTest {
             StringCalculator.calculate("");
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("더하기 계산 테스트")
+    void testPlus() {
+        assertThat(StringCalculator.calculate("2 + 3")).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("빼기 계산 테스트")
+    void testMinus() {
+        assertThat(StringCalculator.calculate("3 - 1")).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("곱하기 계산 테스트")
+    void testProduct() {
+        assertThat(StringCalculator.calculate("3 * 2")).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("나누기 계산 테스트")
+    void testDivide() {
+        assertThat(StringCalculator.calculate("4 / 2")).isEqualTo(2);
+    }
 }
