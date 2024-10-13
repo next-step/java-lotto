@@ -14,4 +14,10 @@ class LotteryMachineTest {
         LotteryMachine machine2 = new LotteryMachine(15000);
         assertThat(machine1).isEqualTo(machine2);
     }
+
+    @DisplayName("로또 자판기가 발급된 로또 개수를 잘 반환하는지")
+    @Test
+    void getIssuedLottoNumberTest() {
+        assertThat(new LotteryMachine(15000).getIssuedLottoNumber()).isEqualTo(15);
+    }
 }
