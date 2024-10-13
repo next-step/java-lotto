@@ -20,11 +20,4 @@ public class ResultDto {
         return rate;
     }
 
-    @Override
-    public String toString() {
-        return "ResultDto{" +
-                "rankDtos=" + rankDtos +
-                ", rate=" + rate +
-                '}';
-    }
 }

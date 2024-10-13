@@ -31,8 +31,4 @@ public class LottoNumbers {
         return count;
     }
 
-    @Override
-    public String toString() {
-        return this.numbers.toString();
-    }
 }

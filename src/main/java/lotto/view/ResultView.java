@@ -1,8 +1,9 @@
 package lotto.view;
 
+import lotto.dto.LottosDto;
+import lotto.dto.LottoNumbersDto;
 import lotto.dto.RankDto;
 import lotto.dto.ResultDto;
-import lotto.entity.Lotto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,10 +15,19 @@ public class ResultView {
     private static final String COUNT_MESSAGE = "%d개 일치 (%.0f원)- %d개 \n";
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.02f%%입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void printCreateLotto(List<Lotto> lottos) {
-        System.out.println(lottos.size() + BUY_COUNT_MESSAGE);
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
+    public static void printCreateLotto(LottosDto lottosDto) {
+        List<LottoNumbersDto> lottoNumbersDto = lottosDto.getLottoNumbersDto();
+        printLottoSize(lottoNumbersDto);
+        printNumbers(lottoNumbersDto);
+    }
+
+    private static void printLottoSize(List<LottoNumbersDto> lottoNumbersDto) {
+        System.out.println(lottoNumbersDto.size() + BUY_COUNT_MESSAGE);
+    }
+
+    private static void printNumbers(List<LottoNumbersDto> lottoNumbersDto) {
+        for (LottoNumbersDto lottoNumbers : lottoNumbersDto) {
+            System.out.println(lottoNumbers.getNumbers());
         }
     }
 

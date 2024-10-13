@@ -19,9 +19,4 @@ public class Lotto {
         return lottoNumbers.matchCount(winningNumbers);
     }
 
-    @Override
-    public String toString() {
-        return this.lottoNumbers.toString();
-
-    }
 }
