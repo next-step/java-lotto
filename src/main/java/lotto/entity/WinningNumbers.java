@@ -8,6 +8,7 @@ import java.util.Set;
 public class WinningNumbers {
     private static final String DEFAULT_SPLIT_DELIMITER = ",";
     private static final String SPACING_REGEX = " ";
+    private static final Integer LOTTO_NUMBERS_SIZE = 6;
 
     private WinningNumbers() {
 
@@ -51,7 +52,7 @@ public class WinningNumbers {
     }
 
     private static void validateSize(List<Integer> result) {
-        if (result.size() != 6) {
+        if (result.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("당첨 번호 여섯개 아님");
         }
     }
