@@ -43,21 +43,8 @@ public class Lotto {
         }
     }
 
-//    private static void validateLottoNumber(int lottoNumber) {
-//        boolean isLottoNumberValidRange = lottoNumber < MIN_LOTTO_NUMBER ||
-//                lottoNumber > MAX_LOTTO_NUMBER;
-//        if (isLottoNumberValidRange) {
-//            throw new IllegalArgumentException(LOTTO_NUMBER_ALLOWED_BETWEEN_1_TO_45_INTEGER);
-//        }
-//    }
-
     public List<LottoNumber> numbers() {
         return this.lottoNumbers;
-    }
-
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
     }
 
     public Ranking compare(Lotto winning) {
@@ -68,5 +55,10 @@ public class Lotto {
         return (int) lottoNumbers.stream()
                 .filter(winning.lottoNumbers::contains)
                 .count();
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }
