@@ -2,9 +2,9 @@ package lotto;
 
 import lotto.constant.Prize;
 import lotto.domain.Lotto;
-import lotto.domain.LottoAutoMachine;
+import lotto.domain.LottoCreateByMission;
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoManualMachine;
+import lotto.domain.MissionProfitRateStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,11 +18,12 @@ public class LottoMain {
     public static void main(String[] args) {
         // 로또 구입
         InputView inputView = new InputView();
-        LottoMachine machine = new LottoAutoMachine(inputView.getCashAmount());
-        inputView.printPurchaseCount(machine.calculatePurchaseCount());
+        LottoMachine machine = LottoMachine.of(inputView.getCashAmount()
+                , new MissionProfitRateStrategy(), new LottoCreateByMission());
+        inputView.printPurchaseCount(machine.calculatePurchaseQuantity());
 
         // 로또 생성
-        List<Lotto> lottoList = machine.create();
+        List<Lotto> lottoList = machine.createAutomatically();
 
         // 로또 출력
         ResultView resultView = new ResultView();
@@ -31,18 +32,14 @@ public class LottoMain {
         // 과거 당첨 번호 입력
         Set<Integer> winningNumbers = inputView.getWinningNumbers();
 
+        // 보너스 볼 입력
+        int bonusNumber = inputView.getBonusNumber();
+
         // 당첨 확인
-        EnumMap<Prize, Integer> countMap = new EnumMap<>(Prize.class);
-        for (Lotto lotto : lottoList) {
-            int count = machine.match(lotto, winningNumbers);
-            Prize prize = Prize.valueOf(count);
-            if (prize != null) {
-                countMap.put(Prize.valueOf(count), countMap.getOrDefault(Prize.valueOf(count), 0) + 1);
-            }
-        }
+        EnumMap<Prize, Integer> countMap = machine.checkLottoPrize(lottoList, winningNumbers, bonusNumber);
 
         // 결과 출력
-        String profitRate = machine.calculateProfitRate(countMap, 2);
+        String profitRate = machine.calculateProfitRate(countMap);
         resultView.printResult(countMap, profitRate);
     }
 
