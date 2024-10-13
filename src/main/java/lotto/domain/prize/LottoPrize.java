@@ -1,8 +1,6 @@
 package lotto.domain.prize;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,19 +13,11 @@ public enum LottoPrize {
     FIFTH(3, 5_000),
     NOTHING(0, 0);
 
-    private static final Map<Integer, Map<Boolean, LottoPrize>> LOTTO_PRIZES;
-    private static final int NOTHING_INDEX = 0;
+    private static final int BONUS_IN_LIST = 2;
 
     private final int match;
     private final long prize;
     private final boolean isBonus;
-
-    static {
-        LOTTO_PRIZES = new HashMap<>();
-        for (LottoPrize lottoPrize : values()) {
-            LOTTO_PRIZES.computeIfAbsent(lottoPrize.match, HashMap::new).put(lottoPrize.isBonus, lottoPrize);
-        }
-    }
 
     LottoPrize(int match, long prize) {
         this(match, prize, false);
@@ -40,8 +30,23 @@ public enum LottoPrize {
     }
 
     public static LottoPrize from(int match, boolean hasBonus) {
-        Map<Boolean, LottoPrize> matchedPrizes = LOTTO_PRIZES.getOrDefault(match, LOTTO_PRIZES.get(NOTHING_INDEX));
-        return matchedPrizes.containsKey(true) ? matchedPrizes.get(hasBonus) : matchedPrizes.get(false);
+        List<LottoPrize> result = Stream.of(values())
+                .filter(lottoPrize -> match == lottoPrize.getMatch())
+                .collect(Collectors.toList());
+
+        if (hasBonusWinningPrize(result.size())) {
+            result.removeIf(lottoPrize -> isNotSame(lottoPrize.isBonus(), hasBonus));
+        }
+
+        return result.isEmpty() ? NOTHING : result.get(0);
+    }
+
+    private static boolean hasBonusWinningPrize(int size) {
+        return size == BONUS_IN_LIST;
+    }
+
+    private static boolean isNotSame(boolean lottoPrizeBonus, boolean lottoBonus) {
+        return lottoPrizeBonus ^ lottoBonus;
     }
 
     public long prize(int quantity) {
