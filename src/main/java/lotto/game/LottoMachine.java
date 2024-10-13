@@ -1,5 +1,6 @@
 package lotto.game;
 
+import lotto.exception.LottoIllegalArgumentException;
 import lotto.number.LottoBalls;
 import lotto.strategy.LottoNumberStrategy;
 
@@ -25,18 +26,16 @@ public class LottoMachine {
         int autoLottoCount = totalLottoCount - manualLottoNumbers.size();
 
         List<LottoBalls> lottoTickets = new ArrayList<>();
-
-        validateManualLottoCount(manualLottoNumbers, totalLottoCount);
-
         lottoTickets.addAll(generateManualLottoNumber(manualLottoNumbers));
         lottoTickets.addAll(generateAutoLottoNumber(autoLottoCount));
 
         return lottoTickets;
     }
 
-    private void validateManualLottoCount(List<List<Integer>> manualLottoNumbers, int totalLottoCount) {
-        if (manualLottoNumbers.size() > totalLottoCount) {
-            throw new IllegalArgumentException("수동 로또를 발행하기 위한 금액이 부족합니다.");
+    public void validateManualLottoCount(int amount, int manualLottoCount) {
+        int totalLottoCount = amount / LOTTO_PRICE;
+        if (totalLottoCount < manualLottoCount) {
+            throw LottoIllegalArgumentException.INVALID_MANUAL_LOTTO_COUNT;
         }
     }
 

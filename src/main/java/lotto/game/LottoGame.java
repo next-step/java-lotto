@@ -1,11 +1,11 @@
 package lotto.game;
 
 
+import lotto.number.LottoBalls;
 import lotto.number.LottoNumber;
 import lotto.number.WinningNumbers;
 import lotto.prize.PrizeCountMap;
 import lotto.prize.PrizeCounter;
-import lotto.number.LottoBalls;
 import lotto.strategy.RandomLottoNumberStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -28,6 +28,8 @@ public class LottoGame {
         int amount = inputView.getAmountFromUser();
 
         int manualLottoCount = inputView.getManualLottoCountFromUser();
+        lottoMachine.validateManualLottoCount(amount, manualLottoCount);
+
         List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount);
         List<LottoBalls> lottoTickets = lottoMachine.generateTickets(amount, manualLottoNumbers);
 
