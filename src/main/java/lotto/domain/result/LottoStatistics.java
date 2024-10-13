@@ -40,19 +40,7 @@ public class LottoStatistics {
     }
 
     public double getProfitRatio() {
-        return profitRatio;
-    }
-
-    public String getAssessmentText() {
-        double floorProfitRatio = Math.floor(this.profitRatio * 100) / 100.0; // 소수점 2자리에서 내림 처리
-
-        return String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)",
-                floorProfitRatio,
-                isLessThanOne(floorProfitRatio) ? "손해" : "이득");
-    }
-
-    private boolean isLessThanOne(double floorProfitRatio) {
-        return floorProfitRatio < 1;
+        return Math.floor(profitRatio * 100) / 100.0;
     }
 
 }

@@ -8,6 +8,9 @@ import java.util.Map;
 
 public class ConsoleOutputHandler implements OutputHandler {
 
+    public static final String UNPROFITABLE = "손해";
+    public static final String PROFITABLE = "이득";
+
     @Override
     public void showCommentForPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -32,7 +35,7 @@ public class ConsoleOutputHandler implements OutputHandler {
     public void showLottoStatistics(LottoStatistics lottoStatistics) {
         printStatisticsTitle();
         printMatchResults(lottoStatistics.getResults());
-        printAssessment(lottoStatistics.getAssessmentText());
+        printAssessmentText(getAssessmentText(lottoStatistics.getProfitRatio()));
     }
 
     private void printStatisticsTitle() {
@@ -55,8 +58,18 @@ public class ConsoleOutputHandler implements OutputHandler {
         }
     }
 
-    private void printAssessment(String assessment) {
-        System.out.println(assessment);
+    private void printAssessmentText(String assessmentText) {
+        System.out.println(assessmentText);
+    }
+
+    public String getAssessmentText(double floorProfitRatio) {
+        return String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)",
+                floorProfitRatio,
+                isLessThanOne(floorProfitRatio) ? UNPROFITABLE : PROFITABLE);
+    }
+
+    private boolean isLessThanOne(double floorProfitRatio) {
+        return floorProfitRatio < 1;
     }
 
 }
