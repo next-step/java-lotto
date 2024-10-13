@@ -4,15 +4,11 @@ import lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.exception.InvalidLottoNumberException.ERROR_OUT_OF_SCOPE_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
-
-    private static final int FIRST_NUMBER = 1;
-    private static final int LAST_NUMBER = 45;
-    private static final String ERROR_OUT_OF_SCOPE_MESSAGE
-            = "로또 숫자의 범위는 " + FIRST_NUMBER + "부터 " + LAST_NUMBER + " 사이입니다.";
 
     @DisplayName("유효한 범위의 숫자로 로또 번호 객체를 생성할 수 있다.")
     @Test

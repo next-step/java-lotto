@@ -5,13 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static lotto.domain.number.LottoNumber.FIRST_NUMBER;
+import static lotto.domain.number.LottoNumber.LAST_NUMBER;
+import static lotto.domain.ticket.LottoTicket.SIZE_OF_LOTTO;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RandomLottoNumberGeneratorTest {
-
-    private static final int FIRST_NUMBER = 1;
-    private static final int LAST_NUMBER = 45;
-    private static final int SIZE_OF_LOTTO = 6;
 
     @DisplayName("랜덤으로 로또 번호를 생성한다.")
     @Test
