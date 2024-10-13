@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class StatisticsTest {
 
@@ -27,7 +26,7 @@ class StatisticsTest {
     @DisplayName("prizeMatch 메서드가 각 당첨 금액의 개수를 정확히 반환 테스트")
     void prize_match_메서드_테스트() {
         Statistics statistics = new Statistics(map);
-        List<Integer> prizeCountList = statistics.prizeMatch();
+        List<Integer> prizeCountList = statistics.getPrizeCounts();
 
         assertThat(prizeCountList).isEqualTo(List.of(1, 0, 0, 0));
     }
@@ -37,7 +36,7 @@ class StatisticsTest {
     void prize_all_mountPrice_메서드_테스트() {
         Statistics statistics = new Statistics(map);
         int lottoPurchaseCount = 14;
-        double rateOfReturn = statistics.allMountPrice(lottoPurchaseCount);
+        double rateOfReturn = statistics.calculateReturnRatio(lottoPurchaseCount);
 
         assertThat(rateOfReturn).isEqualTo(0.35);
     }

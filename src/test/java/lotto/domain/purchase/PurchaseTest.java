@@ -1,6 +1,5 @@
-package lotto.domain;
+package lotto.domain.purchase;
 
-import lotto.domain.purchase.Purchase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ public class PurchaseTest {
         int money = 1000;
         Purchase sale = new Purchase(money);
 
-        assertThat(sale.purchase(money)).isEqualTo(1);
+        assertThat(sale.purchase()).isEqualTo(1);
     }
 
     @Test

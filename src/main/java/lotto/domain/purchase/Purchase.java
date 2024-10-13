@@ -9,7 +9,7 @@ public class Purchase {
         this.money = parse(money);
     }
 
-    public int purchase(int money) {
+    public int purchase() {
         return money / LOTTO_PRICE;
     }
 

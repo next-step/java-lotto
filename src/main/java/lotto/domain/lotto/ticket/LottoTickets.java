@@ -39,4 +39,8 @@ public class LottoTickets {
         return Objects.hash(tickets);
     }
 
+    @Override
+    public String toString() {
+        return tickets+"";
+    }
 }

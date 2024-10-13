@@ -21,7 +21,7 @@ public class Lotto {
 
     public Map<Integer, Integer> getHitLottoNumbers(LottoTicket winningLottoTicket) {
         Map<Integer, Integer> map = new HashMap<>();
-        lottoTickets.getHitNumbers(winningLottoTicket).forEach(numbers -> {
+        lottoTickets.getHitNumbers(winningLottoTicket).stream().filter(number -> number >= 3).forEach(numbers -> {
             Prize prize = Prize.get(numbers);
             map.put(prize.getRank(), map.getOrDefault(prize.getRank(), 0) + 1);
         });
