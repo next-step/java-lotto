@@ -33,11 +33,12 @@ class MoneyTest {
     @DisplayName("유효하지 않은 금액(음수) 생성 시 예외가 발생한다.")
     @Test
     void throwExceptionWhenNotEnoughAmount() {
+        long lottoTicketPrice = 2000;
         Assertions.assertThatThrownBy(
-                        () -> Money.of(1000).availableLottoTickets(2000)
+                        () -> Money.of(1000).availableLottoTickets(lottoTicketPrice)
                 )
                 .isInstanceOf(InvalidMoneyAmountException.class)
-                .hasMessage("구입금액이 로또 티켓 1개 가격보다 작습니다.");
+                .hasMessage(String.format("구입금액이 로또 티켓 1개 가격 %d원 보다 작습니다.", lottoTicketPrice));
     }
 
 }

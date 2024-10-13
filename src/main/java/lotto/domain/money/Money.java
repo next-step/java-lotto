@@ -36,7 +36,7 @@ public class Money {
 
     private void checkIfAmountIsLessThanLottoTicketPrice(long lottoTicketPrice) {
         if (isAmountLessThanLottoTicketPrice(lottoTicketPrice)) {
-            throw new InvalidMoneyAmountException("구입금액이 로또 티켓 1개 가격보다 작습니다.");
+            throw new InvalidMoneyAmountException(String.format("구입금액이 로또 티켓 1개 가격 %d원 보다 작습니다.", lottoTicketPrice));
         }
     }
 
