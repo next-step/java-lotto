@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class LottoBalls {
     public static final int NUMBER_OF_BALLS = 6;
 
-    private final Set<LottoNumber> balls;
+    private final List<LottoNumber> balls;
 
     public LottoBalls(List<Integer> balls) {
         this(new HashSet<>(balls));
@@ -19,7 +19,8 @@ public class LottoBalls {
         validateNumberOfLottoNumbers(balls);
         this.balls = balls.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableSet());
+                .sorted()
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private void validateNumberOfLottoNumbers(Set<Integer> lottoNumbers) {
