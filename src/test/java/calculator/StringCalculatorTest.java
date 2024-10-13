@@ -48,4 +48,12 @@ public class StringCalculatorTest {
     void testDivide() {
         assertThat(StringCalculator.calculate("4 / 2")).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("사칙연산 기호가 아닌 경우 IllegalArgumentException throw")
+    void testNotOperator() {
+        assertThatThrownBy(() -> {
+            StringCalculator.calculate("2 x 3");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
