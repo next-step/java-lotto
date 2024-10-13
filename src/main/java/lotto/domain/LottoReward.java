@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public enum LottoReward {
     FIRST_PLACE(2000000000, 6, "6개 일치 (2000000000원)"),
@@ -73,9 +74,7 @@ public enum LottoReward {
 
         @Override
         public int hashCode() {
-            int result = Integer.hashCode(matchCount);
-            result = 31 * result + Boolean.hashCode(matchBonus);
-            return result;
+            return Objects.hash(matchCount, matchBonus);
         }
     }
 }
