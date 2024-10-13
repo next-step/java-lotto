@@ -24,4 +24,7 @@ public class LottoWinningResult {
         return lottoWinningStatus.getAmount() * count;
     }
 
+    public boolean isWinningCountEqual(final int number) {
+        return lottoWinningStatus.isWinningCountEqual(number);
+    }
 }
