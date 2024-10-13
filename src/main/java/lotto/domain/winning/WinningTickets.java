@@ -3,6 +3,7 @@ package lotto.domain.winning;
 import lotto.domain.ticket.LottoTicket;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,23 +17,11 @@ public class WinningTickets {
     private final Map<Integer, List<LottoTicket>> winningTickets;
 
     public WinningTickets(Map<Integer, List<LottoTicket>> winningTickets) {
-        this.winningTickets = winningTickets;
+        this.winningTickets = new HashMap<>(winningTickets);
     }
 
-    public int getThirdWinningCount() {
-        return winningTickets.getOrDefault(3, new ArrayList<>()).size();
-    }
-
-    public int getFourthWinningCount() {
-        return winningTickets.getOrDefault(4, new ArrayList<>()).size();
-    }
-
-    public int getFifthWinningCount() {
-        return winningTickets.getOrDefault(5, new ArrayList<>()).size();
-    }
-
-    public int getSixthWinningCount() {
-        return winningTickets.getOrDefault(6, new ArrayList<>()).size();
+    public int getWinningTicketCount(int winningRank) {
+        return winningTickets.getOrDefault(winningRank, new ArrayList<>()).size();
     }
 
     public long getWinningPrice() {

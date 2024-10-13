@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.winning.WinningTickets;
 import lotto.domain.ticket.LottoTickets;
+import lotto.domain.winning.WinningTickets;
 
 import java.util.Scanner;
 
@@ -25,10 +25,10 @@ public class ResultView {
         print("당첨 통계");
         print("---------");
 
-        print("3개 일치 (5000원) - " + winningTickets.getThirdWinningCount());
-        print("4개 일치 (50000원) - " + winningTickets.getFourthWinningCount());
-        print("5개 일치 (1500000원) - " + winningTickets.getFifthWinningCount());
-        print("6개 일치 (2000000000원) - " + winningTickets.getSixthWinningCount());
+        print("3개 일치 (5000원) - " + winningTickets.getWinningTicketCount(3));
+        print("4개 일치 (50000원) - " + winningTickets.getWinningTicketCount(4));
+        print("5개 일치 (1500000원) - " + winningTickets.getWinningTicketCount(5));
+        print("6개 일치 (2000000000원) - " + winningTickets.getWinningTicketCount(6));
         print("총 수익률은 " + winningTickets.getWinningPrice() / (InputView.LOTTO_TICKET_PRICE * lottoTicketsSize) + "입니다.");
     }
 
