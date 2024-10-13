@@ -33,9 +33,11 @@ public class ResultView {
 
     private static void printStatistics(EnumMap<Prize, Integer> countMap) {
         sb.append("\n").append("당첨 통계").append("\n").append("---------").append("\n");
-        Arrays.stream(Prize.values()).forEach(p -> {
-            sb.append(prizeMap.get(p)).append(" ").append(countMap.getOrDefault(p, 0)).append("개").append("\n");
-        });
+        Arrays.stream(Prize.values())
+                .filter(p -> p != Prize.MISS)
+                .forEach(p -> {
+                    sb.append(prizeMap.get(p)).append(" ").append(countMap.getOrDefault(p, 0)).append("개").append("\n");
+                });
     }
 
     private static void printProfitRate(String profitRate) {

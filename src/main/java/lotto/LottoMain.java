@@ -2,7 +2,9 @@ package lotto;
 
 import lotto.constant.Prize;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCreateByMission;
 import lotto.domain.LottoMachine;
+import lotto.domain.MissionProfitRateStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,8 +18,9 @@ public class LottoMain {
     public static void main(String[] args) {
         // 로또 구입
         InputView inputView = new InputView();
-        LottoMachine machine = LottoMachine.of(inputView.getCashAmount());
-        inputView.printPurchaseCount(machine.calculatePurchaseCount());
+        LottoMachine machine = LottoMachine.of(inputView.getCashAmount()
+                , new MissionProfitRateStrategy(), new LottoCreateByMission());
+        inputView.printPurchaseCount(machine.calculatePurchaseQuantity());
 
         // 로또 생성
         List<Lotto> lottoList = machine.createAutomatically();

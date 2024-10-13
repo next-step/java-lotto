@@ -20,6 +20,6 @@ public class PrizeTest {
     @ValueSource(ints = {0, 1, 2})
     void 개수에_따른_등수_확인_등수이외(int matchCount) {
         Prize prize = Prize.valueOf(matchCount);
-        assertThat(prize).isEqualTo(null);
+        assertThat(prize).isEqualTo(Prize.MISS);
     }
 }

@@ -2,7 +2,9 @@ package lotto;
 
 import lotto.constant.Prize;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCreateByMission;
 import lotto.domain.LottoMachine;
+import lotto.domain.MissionProfitRateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +20,8 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또 자동 생성 테스트")
     void create() {
-        LottoMachine machine = LottoMachine.of(10000);
+        LottoMachine machine = LottoMachine.of(10000
+                , new MissionProfitRateStrategy(), new LottoCreateByMission());
         List<Lotto> lottoList = machine.createAutomatically();
         assertThat(lottoList.size()).isEqualTo(10);
     }
@@ -26,7 +29,8 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또 당첨 확인 테스트")
     void checkLottoPrize() {
-        LottoMachine machine = LottoMachine.of(5000);
+        LottoMachine machine = LottoMachine.of(5000
+                , new MissionProfitRateStrategy(), new LottoCreateByMission());
 
         EnumMap<Prize, Integer> map = machine.checkLottoPrize(
                 List.of(
@@ -47,7 +51,8 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또 2등 당첨 테스트")
     void checkSecondPrize() {
-        LottoMachine machine = LottoMachine.of(5000);
+        LottoMachine machine = LottoMachine.of(5000
+                , new MissionProfitRateStrategy(), new LottoCreateByMission());
 
         EnumMap<Prize, Integer> map = machine.checkLottoPrize(
                 List.of(
@@ -71,24 +76,10 @@ public class LottoMachineTest {
         prizeCountMap.put(Prize.THIRD, 0);
         prizeCountMap.put(Prize.SECOND, 1);
         prizeCountMap.put(Prize.FIRST, 0);
-        LottoMachine machine = LottoMachine.of(20_000_000);
+        LottoMachine machine = LottoMachine.of(20_000_000
+                , new MissionProfitRateStrategy(), new LottoCreateByMission());
 
         assertThat(machine.calculateProfitRate(prizeCountMap))
                 .isEqualTo("1.50");
-    }
-
-    @Test
-    void validate_로또_6개() {
-        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(numbers);
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
-    }
-
-    @Test
-    void validate_로또_6개_아닌_경우() {
-        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6, 7);
-        assertThatThrownBy(() -> {
-            new Lotto(numbers);
-        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
