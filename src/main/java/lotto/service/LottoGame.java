@@ -2,20 +2,16 @@ package lotto.service;
 
 import lotto.domain.AutoLotto;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNum;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
-    private static final List<Integer> lottoNumbers = new ArrayList<>();
-
 
     private LottoGame() {
-        IntStream.rangeClosed(Lotto.LOTTO_START_NUMBER, Lotto.LOTTO_END_NUMBER)
-                .forEach(lottoNumbers::add);
     }
 
     private static LottoGame INSTANCE = null;
@@ -34,7 +30,7 @@ public class LottoGame {
         List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < priceTotal / LOTTO_PRICE; i++) {
             result.add(AutoLotto.getInstance()
-                    .getLotto(lottoNumbers, Lotto.LOTTO_NUMBER_COUNT));
+                    .getLotto(LottoNum.getLottoNumbers(), Lotto.LOTTO_NUMBER_COUNT));
         }
         return Collections.unmodifiableList(result);
     }

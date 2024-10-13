@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNum;
 
 import java.util.List;
 import java.util.Scanner;
@@ -35,19 +36,19 @@ public class InputView {
 
     public Lotto getWinnerLottoNumbers(String lottoNumbers) {
         List<String> lotto = parseWinnerLotto(lottoNumbers);
-        List<Integer> lastWinnerLotto = lotto.stream()
+        List<LottoNum> lastWinnerLotto = lotto.stream()
                 .map(this::parseNumber)
                 .collect(Collectors.toList());
         return getWinnerLotto(lastWinnerLotto);
     }
 
-    public Lotto getWinnerLotto(List<Integer> lastWinnerLotto) {
+    public Lotto getWinnerLotto(List<LottoNum> lastWinnerLotto) {
         return new Lotto(lastWinnerLotto);
     }
 
-    private int parseNumber(String lottoNumber) {
+    private LottoNum parseNumber(String lottoNumber) {
         try {
-            return Integer.parseInt(lottoNumber);
+            return new LottoNum(Integer.parseInt(lottoNumber));
         } catch (NumberFormatException ex) {
             throw new IllegalStateException("숫자 형식이 올바르지 않습니다.");
         }

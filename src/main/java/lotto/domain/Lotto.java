@@ -1,42 +1,45 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class Lotto implements Comparable<Lotto> {
+public class Lotto {
     public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final int LOTTO_START_NUMBER = 1;
-    public static final int LOTTO_END_NUMBER = 45;
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNum> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNum> lottoNumbers) {
         validateLottoNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private static void validateLottoNumber(List<Integer> lottoNumbers) {
+    public Lotto(String lottoNumbers) {
+        this(Arrays.stream(lottoNumbers.split(","))
+                .map(LottoNum::new)
+                .collect(Collectors.toList()));
+    }
+
+    private static void validateLottoNumber(List<LottoNum> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
-        if (isOutOfBoundLotto(lottoNumbers)) {
-            throw new IllegalArgumentException("로또 번호의 범위는 1 ~ 45 여야 합니다.");
-        }
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNum> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
     public int compareWinningNumber(Lotto winner) {
         int result = 0;
-        for (Integer lottoNumber : lottoNumbers) {
+        for (LottoNum lottoNumber : lottoNumbers) {
             result += addResult(winner.getLottoNumbers(), lottoNumber);
         }
         return result;
     }
 
-    private static int addResult(List<Integer> winner, Integer lottoNumber) {
+    private static int addResult(List<LottoNum> winner, LottoNum lottoNumber) {
         if (winner.contains(lottoNumber)) {
             return 1;
         }

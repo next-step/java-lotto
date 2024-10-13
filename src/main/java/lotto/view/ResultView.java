@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNum;
 import lotto.domain.LottoResult;
 import lotto.enums.LottoWinnerPrice;
 
@@ -36,7 +37,7 @@ public class ResultView {
     }
 
     private void getLottoNumber(StringBuilder sb, Lotto lotto) {
-        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+        List<LottoNum> lottoNumbers = lotto.getLottoNumbers();
         for (int i = 0; i < lottoNumbers.size(); i++) {
             sb.append(lottoNumbers.get(i));
             sb.append(addComma(i, lottoNumbers.size() - 1));
