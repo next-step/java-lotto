@@ -1,5 +1,6 @@
 package lotto.entity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -14,11 +15,20 @@ public class LottoNumbers {
         return numbers;
     }
 
-    public int collectResult(int winningCount, Integer winningNumber) {
-        if (this.numbers.contains(winningNumber)) {
-            return ++winningCount;
+    public int matchCount(List<Integer> winningNumbers) {
+        Collections.sort(winningNumbers);
+        int count = 0;
+        for (Integer winningNumber : winningNumbers) {
+            count = match(count, winningNumber);
         }
-        return winningCount;
+        return count;
+    }
+
+    private int match(int count, Integer winningNumber) {
+        if (this.numbers.contains(winningNumber)) {
+            return ++count;
+        }
+        return count;
     }
 
     @Override

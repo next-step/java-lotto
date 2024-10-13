@@ -16,13 +16,7 @@ public class Lotto {
     }
 
     public int matchCount(List<Integer> winningNumbers) {
-        Collections.sort(winningNumbers);
-
-        int count = 0;
-        for (Integer winningNumber : winningNumbers) {
-            count = this.lottoNumbers.collectResult(count, winningNumber);
-        }
-        return count;
+        return lottoNumbers.matchCount(winningNumbers);
     }
 
     @Override
