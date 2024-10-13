@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoMatchInfoDTO;
+import lotto.dto.LottoRewardInfoDTO;
 import lotto.dto.LottoStatisticsDTO;
 import lotto.dto.WinningNumbersDTO;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +41,7 @@ public class LottoJudgeTest {
         WinningNumbersDTO winningNumbersDTO = WinningNumbersDTO.valueOf(winningNumbers);
         LottoJudge judge = LottoJudge.valueOf(winningNumbersDTO, bonusNumber);
         LottoStatisticsDTO statistics = judge.getStatisticsOf(agent);
-        List<LottoMatchInfoDTO> infos = statistics.getMatchInfosDTO().getMatchInfoDTOs();
-        assertThat(infos).isNotEmpty().anyMatch(info -> info.getMatchCount() == 6 && info.getId() > 0);
+        List<LottoRewardInfoDTO> infos = statistics.getMatchInfosDTO().getRewardInfoDTOs();
+        assertThat(infos).isNotEmpty().anyMatch(info -> info.getReward().getMatchCount() == 6 && info.getCount() > 0);
     }
 }

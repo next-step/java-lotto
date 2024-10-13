@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.dto.LottoMatchInfoDTO;
-import lotto.dto.LottoMatchInfosDTO;
+import lotto.dto.LottoRewardInfoDTO;
+import lotto.dto.LottoRewardInfosDTO;
 import lotto.dto.LottoStatisticsDTO;
 import lotto.dto.WinningNumbersDTO;
 
@@ -32,39 +32,39 @@ public class LottoJudge {
 
     public LottoStatisticsDTO getStatisticsOf(LottoAgent agent) {
         List<Lotto> purchasedLottos = agent.getPurchasedLottos().getPurchasedLottos();
-        Map<Integer, Integer> matchCountMap = countMatchingNumbers(purchasedLottos);
-        double rewardPercentage = calculateRewardPercentage(matchCountMap, purchasedLottos);
-        LottoMatchInfosDTO matchInfosDTO = convertToMatchInfosDTO(matchCountMap);
-        return LottoStatisticsDTO.valueOf(rewardPercentage, matchInfosDTO);
+        Map<LottoReward, Integer> rewardCountMap = countRewards(purchasedLottos);
+        double rewardPercentage = calculateRewardPercentage(rewardCountMap, purchasedLottos);
+        LottoRewardInfosDTO rewardInfosDTO = convertToRewardInfosDTO(rewardCountMap);
+        return LottoStatisticsDTO.valueOf(rewardPercentage, rewardInfosDTO);
     }
 
-    private Map<Integer, Integer> countMatchingNumbers(List<Lotto> purchasedLottos) {
-        Map<Integer, Integer> matchCountMap = new HashMap<>();
+    private Map<LottoReward, Integer> countRewards(List<Lotto> purchasedLottos) {
+        Map<LottoReward, Integer> rewardCountMap = new HashMap<>();
         for (Lotto purchasedLotto : purchasedLottos) {
             int matchCount = purchasedLotto.getMatchCount(this.winningLottoNumbers);
-            matchCountMap.put(matchCount, matchCountMap.getOrDefault(matchCount, 0) + 1);
+            boolean matchBonus = purchasedLotto.hasBonusNumber(this.bonusNumber);
+            LottoReward reward = LottoReward.valueOf(matchCount, matchBonus);
+            rewardCountMap.put(reward, rewardCountMap.getOrDefault(reward, 0) + 1);
         }
-        return matchCountMap;
+        return rewardCountMap;
     }
 
-    private double calculateRewardPercentage(Map<Integer, Integer> matchCountMap, List<Lotto> purchasedLottos) {
-        List<LottoReward> rewards = List.of(LottoReward.values());
+    private double calculateRewardPercentage(Map<LottoReward, Integer> matchCountMap, List<Lotto> purchasedLottos) {
         int totalReward = 0;
-        for (LottoReward reward : rewards) {
-            int rewardingLottoNum = matchCountMap.getOrDefault(reward.getMatchCount(), 0);
-            totalReward += rewardingLottoNum * reward.getReward();
+        for (LottoReward reward : matchCountMap.keySet()) {
+            int rewardCount = matchCountMap.getOrDefault(reward, 0);
+            totalReward += rewardCount * reward.getReward();
         }
         return (double) totalReward / (purchasedLottos.size() * Lotto.LOTTO_PRICE);
     }
 
-    private LottoMatchInfosDTO convertToMatchInfosDTO(Map<Integer, Integer> matchCountMap) {
-        List<LottoMatchInfoDTO> matchInfoDTOs = new ArrayList<>();
-        List<LottoReward> rewards = List.of(LottoReward.values());
-        for (LottoReward reward : rewards) {
-            int rewardingLottoNum = matchCountMap.getOrDefault(reward.getMatchCount(), 0);
-            matchInfoDTOs.add(LottoMatchInfoDTO.valueOf(reward.getMatchCount(), rewardingLottoNum, reward.getReward()));
+    private LottoRewardInfosDTO convertToRewardInfosDTO(Map<LottoReward, Integer> matchCountMap) {
+        List<LottoRewardInfoDTO> rewardInfoDTOs = new ArrayList<>();
+        for (LottoReward reward : matchCountMap.keySet()) {
+            int rewardCount = matchCountMap.getOrDefault(reward, 0);
+            rewardInfoDTOs.add(LottoRewardInfoDTO.valueOf(rewardCount, reward));
         }
-        return LottoMatchInfosDTO.valueOf(matchInfoDTOs);
+        return LottoRewardInfosDTO.valueOf(rewardInfoDTOs);
     }
 
     public LottoNumbers getWinningLottoNumbers() {
