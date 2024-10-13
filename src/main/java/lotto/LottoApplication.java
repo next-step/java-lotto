@@ -20,8 +20,8 @@ public class LottoApplication {
     public void run(){
         int purchaseAmount = inputView.getPurchaseAmountFromUser();
 
-        int lottoCount = buyLotto(purchaseAmount);
-        Lottos lottos = createLottos(resultView, lottoCount);
+        Lottos lottos = buyLotto(purchaseAmount);
+        resultView.showLottos(lottos);
 
         WinningNumbers winningNumbers = createWinningNumbers(inputView);
 
@@ -30,17 +30,16 @@ public class LottoApplication {
         showLottoProfit(purchaseAmount);
     }
 
-    private int buyLotto(int purchaseAmount){
-        LottoMachine machine = new LottoMachine();
-        int lottoCount = machine.buyLottos(purchaseAmount);
-        resultView.showLottoCount(lottoCount);
-        return lottoCount;
-    }
+    private Lottos buyLotto(int purchaseAmount){
+        LottoMachine machine = new LottoMachine(purchaseAmount);
 
-    private Lottos createLottos(ResultView resultView, int lottoCount) {
-        Lottos lottos = Lottos.create(lottoCount, numbersGenerater);
-        resultView.showLottos(lottos);
-        return lottos;
+        String[] manualNumbers = inputView.getManualLottosFromUser();
+        Lottos manualLottos = machine.buyManualLottos(manualNumbers);
+        Lottos autoLottos = machine.buyAutoLottos(numbersGenerater);
+
+        resultView.showLottoCount(manualLottos.count(), autoLottos.count());
+        manualLottos.add(autoLottos);
+        return manualLottos;
     }
 
     private WinningNumbers createWinningNumbers(InputView inputView) {
