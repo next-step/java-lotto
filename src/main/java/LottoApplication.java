@@ -1,5 +1,6 @@
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.PurchasePrice;
 import lotto.domain.WinningNumber;
@@ -13,6 +14,8 @@ public class LottoApplication {
         ResultView.printLottos(lottos);
 
         final WinningNumber winningNumber = generateWinningNumber();
+        final LottoResult lottoResult = lottos.calculateLottoResult(winningNumber);
+        ResultView.printLottoStatistics(lottoResult);
     }
 
     private static WinningNumber generateWinningNumber() {

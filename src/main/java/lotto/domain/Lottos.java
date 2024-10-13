@@ -30,4 +30,16 @@ public class Lottos {
     public int getLottoCount() {
         return lottos.size();
     }
+
+    public LottoResult calculateLottoResult(final WinningNumber winningNumber) {
+        return new LottoResult(findLottoRewards(winningNumber));
+    }
+
+    private List<LottoRewards> findLottoRewards(final WinningNumber winningNumber) {
+        List<LottoRewards> rewards = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            rewards.add(winningNumber.findLottoRewards(lotto));
+        }
+        return rewards;
+    }
 }
