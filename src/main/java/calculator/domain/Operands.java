@@ -11,7 +11,15 @@ public class Operands {
     }
 
     public OperandNumber valueAt(int position) {
+        validateOutOfIndex(position);
         return operands.get(position);
+    }
+
+    private void validateOutOfIndex(int index) {
+        if (index >= this.operands.size()) {
+            throw new IndexOutOfBoundsException(
+                    String.format("유효하지 않은 인덱스입니다. (operands 길이: %s, 요청 인덱스: %s", operands.size(), index));
+        }
     }
 
     public int size() {
