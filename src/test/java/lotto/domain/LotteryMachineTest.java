@@ -23,6 +23,13 @@ class LotteryMachineTest {
                 .isInstanceOf(NumberFormatException.class);
     }
 
+    @DisplayName("음수로 생성된 경우 IllegalArgumentException을 잘 반환하는지")
+    @Test
+    void lotteryMachineTest_withNegativeValue() {
+        assertThatThrownBy(() -> new LotteryMachine(-1500))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("로또 자판기가 발급된 로또 개수를 잘 반환하는지")
     @Test
     void getIssuedLottoNumberTest() {
