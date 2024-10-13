@@ -17,10 +17,10 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     }
 
     private List<Integer> initCandidates() {
-        List<Integer> cadidates = new ArrayList<>();
+        List<Integer> candidates = new ArrayList<>();
         for (int number = FIRST_NUMBER; number < LAST_NUMBER; number++) {
-            cadidates.add(number);
+            candidates.add(number);
         }
-        return cadidates;
+        return candidates;
     }
 }
