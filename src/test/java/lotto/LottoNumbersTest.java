@@ -48,8 +48,9 @@ class LottoNumbersTest {
     void 로또_번호에_주어진_숫자가_있는지_확인해서_Rank를_반환한다() {
         LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         WinNumber winNumber = new WinNumber(1, 2, 3, 7, 8, 9);
+        LottoNumber bonus = new LottoNumber(10);
 
-        Rank matchedRank = lottoNumbers.calculateRank(winNumber);
+        Rank matchedRank = lottoNumbers.calculateRank(winNumber, bonus);
 
         assertThat(matchedRank).isEqualTo(Rank.THREE);
     }
@@ -70,5 +71,16 @@ class LottoNumbersTest {
         LottoNumbers result = lottoNumbers.pickNumbers();
 
         assertThat(result).isEqualTo(new LottoNumbers(1, 2, 3, 4, 5, 6));
+    }
+
+    @Test
+    void 번호4개와_보너스_번호가_맞다면_2등이다() {
+        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+        WinNumber winNumber = new WinNumber(1, 2, 3, 4, 7, 8);
+        LottoNumber bonus = new LottoNumber(6);
+
+        Rank matchedRank = lottoNumbers.calculateRank(winNumber, bonus);
+
+        assertThat(matchedRank).isEqualTo(Rank.SECOND);
     }
 }
