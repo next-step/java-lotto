@@ -7,3 +7,9 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 1단계 - 문자열 계산기
+
+### TODO
+- [ ] 입력 받은 문자열을 빈 공백으로 나눈다.
+- [ ] 피연산자 + 연산자 + 피연산자 순서대로 반복해서 계산한다.
