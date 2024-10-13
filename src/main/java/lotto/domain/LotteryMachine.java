@@ -17,8 +17,15 @@ public class LotteryMachine {
     }
 
     public LotteryMachine(final int purchasePrice) {
+        valid(purchasePrice);
         this.purchasePrice = purchasePrice;
         issuedLottoNumber = purchasePrice / LOTTO_PRICE;
+    }
+
+    private void valid(final int price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("가격은 0보다 작은 값일 수 없습니다.");
+        }
     }
 
     @Override
