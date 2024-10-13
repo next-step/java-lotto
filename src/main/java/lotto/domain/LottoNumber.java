@@ -7,7 +7,7 @@ public class LottoNumber {
     public static final int MIN_BOUND = 1;
     private static final String OUT_OF_RANGE_ERROR_MESSAGE = "로또 숫자가 범위 밖입니다.";
 
-    private int value;
+    private final int value;
 
     private LottoNumber(int value) {
         this.value = value;
