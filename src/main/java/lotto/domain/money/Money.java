@@ -11,7 +11,7 @@ public class Money {
         this.amount = amount;
     }
 
-    private static void checkIfNegativeAmount(long amount) {
+    private void checkIfNegativeAmount(long amount) {
         if (isLessThanZero(amount)) {
             throw new InvalidMoneyAmountException("구입금액은 양수여야 합니다.");
         }
