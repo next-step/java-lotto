@@ -11,20 +11,20 @@ public class WinningPrizeTest {
         WinningPrize prize = winningPrize();
 
         assertThat(prize.winAmount(LottoPrize.FIRST)).isEqualTo(1);
-        assertThat(prize.winAmount(LottoPrize.SECOND)).isEqualTo(1);
-        assertThat(prize.winAmount(LottoPrize.SECOND_WITH_BONUS)).isEqualTo(1);
         assertThat(prize.winAmount(LottoPrize.THIRD)).isEqualTo(1);
+        assertThat(prize.winAmount(LottoPrize.SECOND)).isEqualTo(1);
         assertThat(prize.winAmount(LottoPrize.FOURTH)).isEqualTo(1);
+        assertThat(prize.winAmount(LottoPrize.FIFTH)).isEqualTo(1);
     }
 
     private WinningPrize winningPrize() {
         WinningPrize prize = new WinningPrize();
 
         prize.record(LottoPrize.FIRST);
-        prize.record(LottoPrize.SECOND);
-        prize.record(LottoPrize.SECOND_WITH_BONUS);
         prize.record(LottoPrize.THIRD);
+        prize.record(LottoPrize.SECOND);
         prize.record(LottoPrize.FOURTH);
+        prize.record(LottoPrize.FIFTH);
 
         return prize;
     }
