@@ -1,7 +1,6 @@
 package lotto;
 
 
-import lotto.config.GameConfig;
 import lotto.domain.ticket.WinningLotto;
 import lotto.domain.money.Money;
 import lotto.domain.number.RandomLottoNumberGenerator;
@@ -15,14 +14,14 @@ import java.util.List;
 
 public class Lotto {
 
-    private final Integer lottoTicketPrice;
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
+    private final Integer lottoTicketPrice;
 
-    public Lotto(GameConfig gameConfig) {
-        this.lottoTicketPrice = gameConfig.getLottoTicketPrice();
-        this.inputHandler = gameConfig.getInputHandler();
-        this.outputHandler = gameConfig.getOutputHandler();
+    public Lotto(InputHandler inputHandler, OutputHandler outputHandler, Integer lottoTicketPrice) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
+        this.lottoTicketPrice = lottoTicketPrice;
     }
 
     public void run() {
