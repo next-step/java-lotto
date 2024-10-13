@@ -13,9 +13,9 @@ public class InputView {
     public static int inputInt(Runnable messagePrinter) {
         try {
             messagePrinter.run();
-            int count = SCANNER.nextInt();
+            int num = SCANNER.nextInt();
             SCANNER.nextLine();
-            return count;
+            return num;
         } catch (InputMismatchException ex) {
             SCANNER.nextLine();
             throw new IllegalArgumentException(IS_NOT_NUMBER);

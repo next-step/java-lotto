@@ -16,6 +16,7 @@ public class Lotto {
     private static final String IS_NOT_LOTTO_NUMBER = "로또번호가 1~45가 아닙니다.";
     private static final int LOTTO_MIN_NUM = 1;
     private static final int LOTTO_MAX_NUM = 45;
+    private static final String IS_DUPLICATE_NUMBER = "중복된 번호가 있습니다.";
     private final List<Integer> lottoNumbers;
 
     public static Lotto autoLotto() {
@@ -78,9 +79,9 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public LottoRank getLottoResult(Lotto winningLotto) {
+    public LottoRank getLottoResult(WinningLotto winningLotto) {
         int equalCount = 0;
-        List<Integer> winningLottoNumbers = winningLotto.getLottoNumbers();
+        List<Integer> winningLottoNumbers = winningLotto.getWinningLotto();
         for (int number : winningLottoNumbers) {
             equalCount += addCount(number);
         }
@@ -96,5 +97,11 @@ public class Lotto {
 
     private LottoRank getRank(int equalCount) {
         return LottoRank.matchRank(equalCount);
+    }
+
+    public void validateDuplicate(int number) {
+        if (lottoNumbers.contains(number)) {
+            throw new IllegalArgumentException(IS_DUPLICATE_NUMBER);
+        }
     }
 }

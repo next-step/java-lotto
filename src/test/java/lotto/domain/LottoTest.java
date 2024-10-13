@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -36,16 +35,10 @@ class LottoTest {
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 5, 7, 8, 9, 11));
         Lotto lotto = new Lotto(lottoNumbers);
         List<Integer> winningLottoNumbers = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 9, 10));
-        Lotto winningLotto = new Lotto(winningLottoNumbers);
+        int bonusNumber = 12;
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningLottoNumbers), bonusNumber);
         assertThat(lotto.getLottoResult(winningLotto)).isEqualTo(FOURTH);
     }
 
-    @DisplayName("당첨 로또 생성")
-    @Test
-    void 당첨로또() {
-        String[] winning = {"1", "2", "6", "4", "5", "3"};
-        Lotto lotto = new Lotto(winning);
-        List<Integer> lottoList = lotto.getLottoNumbers();
-        assertThat(lottoList).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
-    }
+
 }

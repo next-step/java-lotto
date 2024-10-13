@@ -30,7 +30,7 @@ public class LottoGame {
         return lottoList;
     }
 
-    public LottoResults makeLottoResult(Lotto winningLotto) {
+    public LottoResults makeLottoResult(WinningLotto winningLotto) {
         for (Lotto lotto : lottoList) {
             lottoResults.addResult(lotto.getLottoResult(winningLotto));
         }
