@@ -22,12 +22,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public static LottoNumber of(int number) {
-        return new LottoNumber(number);
-    }
-
     private boolean isOutOfScope(int number) {
         return number < FIRST_NUMBER || number > LAST_NUMBER;
+    }
+
+    public static LottoNumber of(int number) {
+        return new LottoNumber(number);
     }
 
     @Override
