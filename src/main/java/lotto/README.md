@@ -8,7 +8,7 @@
 ## 기능 목록
 - [ ] 입력 화면(InputView)
     - [x] 구매 금액 입력
-    - [ ] 당첨번호 입력
+    - [x] 당첨번호 입력
 - [x] 로또 구매 개수 계산(LottoPurchaseService)
 - [x] 로또 생성(LottoGenerator)
   - [x] shuffle()를 통한 생성(LottoShuffleGenerator)

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Objects;
 
 public class Lotto {
     List<Integer> lotto;
@@ -27,17 +26,4 @@ public class Lotto {
         }
     }
 
-    @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Lotto)) return false;
-
-        Lotto lotto1 = (Lotto) o;
-        return Objects.equals(lotto, lotto1.lotto);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(lotto);
-    }
 }
