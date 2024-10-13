@@ -51,6 +51,18 @@ public class LottosTest {
         assertThat(printLotto).isEqualTo("[1, 2, 3, 4, 5, 6]\n[7, 8, 9, 10, 11, 12]\n");
     }
 
+    @DisplayName("로또 그룹들을 합칠 수 있다")
+    @Test
+    void addLottos(){
+        Lottos lottos = new Lottos(new String[]{"1, 2, 3, 4, 5, 6"});
+        Lottos otherLottos = new Lottos(new String[]{"7, 8, 9, 10, 11, 12"});
+
+        lottos.add(otherLottos);
+
+        assertThat(lottos.count()).isEqualTo(2);
+    }
+
+
     private Lottos createLottos() {
         Lottos lottos = new Lottos(
                 List.of(

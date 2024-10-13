@@ -32,6 +32,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public void add(Lottos otherLottos){
+        this.lottos.addAll(otherLottos.getLottos());
+    }
+
     public List<Integer> countMatchingNumbers(WinningNumbers winningNumbers) {
         List<Integer> matchCountInfo = new ArrayList<>();
 
@@ -57,6 +61,10 @@ public class Lottos {
             sb.append(lotto.toString()).append("\n");
         }
         return sb.toString();
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public int count() {
