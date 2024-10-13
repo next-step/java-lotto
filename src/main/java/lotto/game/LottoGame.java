@@ -26,7 +26,10 @@ public class LottoGame {
     public void run() {
 
         int amount = inputView.getAmountFromUser();
-        List<LottoBalls> lottoTickets = lottoMachine.generateTickets(amount);
+
+        int manualLottoCount = inputView.getManualLottoCountFromUser();
+        List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount);
+        List<LottoBalls> lottoTickets = lottoMachine.generateTickets(amount, manualLottoNumbers);
 
         List<Integer> winningNumbersFromUser = inputView.getWinningNumbersFromUser();
         Integer bonusNumberFromUser = inputView.getBonusNumberFromUser();

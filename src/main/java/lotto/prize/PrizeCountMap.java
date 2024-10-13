@@ -27,14 +27,14 @@ public class PrizeCountMap {
     }
 
     public double calculateProfitRate(int lottoTicketCount) {
-        int totalCost = lottoTicketCount * LOTTO_PRICE;
-        int totalPrize = calculateTotalPrize();
+        long totalCost = (long) lottoTicketCount * LOTTO_PRICE;
+        long totalPrize = calculateTotalPrize();
         return (double) totalPrize / totalCost;
     }
 
-    private int calculateTotalPrize() {
+    private long calculateTotalPrize() {
         return prizeCountMap.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getPrizeAmount() * entry.getValue())
+                .mapToLong(entry -> (long) entry.getKey().getPrizeAmount() * entry.getValue())
                 .sum();
     }
 
