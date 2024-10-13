@@ -9,6 +9,7 @@ public final class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String PRICE_QUESTION_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNER_NUMBERS_QUESTION_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_QUESTION_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String BLANK_MESSAGE = "입력하신 값이 비어있습니다.";
     private static final String NOT_AN_INTEGER_MESSAGE = "입력하신 값이 정수가 아닙니다.";
     private static final String NOT_A_POSITIVE_NUMBER_MESSAGE = "입력하신 값이 양의 정수가 아닙니다.";
@@ -17,6 +18,10 @@ public final class InputView {
 
     public static int priceInput() {
         return input(PRICE_QUESTION_MESSAGE, InputView::isNumberInputValid, InputView::convertToNumber);
+    }
+
+    public static int bonusNumberInput() {
+        return input(BONUS_NUMBER_QUESTION_MESSAGE, InputView::isNumberInputValid, InputView::convertToNumber);
     }
 
     public static List<Integer> winnerNumbersInput() {
