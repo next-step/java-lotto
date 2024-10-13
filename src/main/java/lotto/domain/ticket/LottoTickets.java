@@ -19,6 +19,10 @@ public class LottoTickets {
                         .collect(Collectors.groupingBy(lottoTicket -> lottoTicket.findMatchCount(winningNumbers))));
     }
 
+    public String getLottoTicketString(int index) {
+        return lottoTickets.get(index).toString();
+    }
+
     public int getLottoTicketsSize() {
         return lottoTickets.size();
     }

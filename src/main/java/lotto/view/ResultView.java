@@ -1,27 +1,26 @@
 package lotto.view;
 
+import lotto.domain.ticket.Lotto;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.winning.WinningTickets;
-
-import java.util.Scanner;
+import lotto.utils.StringUtils;
 
 public class ResultView {
-    private static final String BLANK = " ";
-    private static final String COMMA = ",";
 
-    public void getResultAndPrint(LottoTickets lottoTickets) {
-        print("지난 주 당첨 번호를 입력해 주세요.");
+    public void printLottoTickets(LottoTickets lottoTickets) {
+        for (int i = 0; i < lottoTickets.getLottoTicketsSize(); i++) {
+            print(lottoTickets.getLottoTicketString(i));
+        }
 
-        Scanner scanner = new Scanner(System.in);
-        String winningNumbers = scanner.nextLine();
-        print(BLANK);
+        print(StringUtils.BLANK);
+    }
 
-        String[] splitedWinningNumbers = splitByDelimiter(winningNumbers);
-
-        printStats(lottoTickets.findWinning(splitedWinningNumbers), lottoTickets.getLottoTicketsSize());
+    public void getResultAndPrint(LottoTickets lottoTickets, String[] winningNumbers) {
+        printStats(lottoTickets.findWinning(winningNumbers), lottoTickets.getLottoTicketsSize());
     }
 
     private void printStats(WinningTickets winningTickets, int lottoTicketsSize) {
+        print(StringUtils.BLANK);
         print("당첨 통계");
         print("---------");
 
@@ -29,11 +28,8 @@ public class ResultView {
         print("4개 일치 (50000원) - " + winningTickets.getWinningTicketCount(4));
         print("5개 일치 (1500000원) - " + winningTickets.getWinningTicketCount(5));
         print("6개 일치 (2000000000원) - " + winningTickets.getWinningTicketCount(6));
-        print("총 수익률은 " + winningTickets.getWinningPrice() / (InputView.LOTTO_TICKET_PRICE * lottoTicketsSize) + "입니다.");
-    }
 
-    private String[] splitByDelimiter(String winningNumbers) {
-        return winningNumbers.split(COMMA);
+        print("총 수익률은 " + winningTickets.getWinningPrice() / ((long) Lotto.LOTTO_TICKET_PRICE * lottoTicketsSize) + "입니다.");
     }
 
     public void print(String message) {
