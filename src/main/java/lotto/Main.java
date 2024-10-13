@@ -19,7 +19,7 @@ public class Main {
         PurchasedLottosDTO purchasedLottos = lottoAgent.getPurchasedLottos();
         ResultView.printPurchasedLottos(purchasedLottos);
         List<Integer> winnerNumbers = InputView.winnerNumbersInput();
-        LottoJudge lottoJudge = LottoJudge.valueOf(WinningNumbersDTO.valueOf(winnerNumbers));
+        LottoJudge lottoJudge = LottoJudge.valueOf(WinningNumbersDTO.valueOf(winnerNumbers), 1);
         LottoStatisticsDTO statistics = lottoJudge.getStatisticsOf(lottoAgent);
         ResultView.printLottoStatistics(statistics);
     }

@@ -12,15 +12,22 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoJudge {
-    private final LottoNumbers winningLottoNumbers;
+    private static final String BONUS_NUMBER_DUPLICATED_MESSAGE = "보너스 번호가 당첨 번호와 겹칩니다.";
 
-    private LottoJudge(LottoNumbers winningLottoNumbers) {
+    private final LottoNumbers winningLottoNumbers;
+    private final int bonusNumber;
+
+    private LottoJudge(LottoNumbers winningLottoNumbers, int bonusNumber) {
         this.winningLottoNumbers = winningLottoNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static LottoJudge valueOf(WinningNumbersDTO winningNumbers) {
+    public static LottoJudge valueOf(WinningNumbersDTO winningNumbers, int bonusNumber) {
         List<Integer> winningNumberList = winningNumbers.getWinningNumbers();
-        return new LottoJudge(LottoNumbers.valueOf(winningNumberList));
+        if (winningNumberList.contains(bonusNumber)) {
+            throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATED_MESSAGE);
+        }
+        return new LottoJudge(LottoNumbers.valueOf(winningNumberList), bonusNumber);
     }
 
     public LottoStatisticsDTO getStatisticsOf(LottoAgent agent) {
@@ -64,16 +71,20 @@ public class LottoJudge {
         return this.winningLottoNumbers;
     }
 
+    public int getBonusNumber(){
+        return this.bonusNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoJudge that = (LottoJudge) o;
-        return Objects.equals(winningLottoNumbers, that.winningLottoNumbers);
+        return getBonusNumber() == that.getBonusNumber() && Objects.equals(getWinningLottoNumbers(), that.getWinningLottoNumbers());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(winningLottoNumbers);
+        return Objects.hash(getWinningLottoNumbers(), getBonusNumber());
     }
 }
