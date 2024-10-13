@@ -11,11 +11,11 @@ class LottoNumberTest {
     @Test
     void numberRange(){
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(0))
+                .isThrownBy(() -> LottoNumber.valueOf(0))
                 .withMessage("로또 숫자는 1이상 45이하 범위 이내에서 입력하세요");
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber("46"))
+                .isThrownBy(() -> LottoNumber.valueOf("46"))
                 .withMessage("로또 숫자는 1이상 45이하 범위 이내에서 입력하세요");
     }
 

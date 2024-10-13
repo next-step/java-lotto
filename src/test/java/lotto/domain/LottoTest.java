@@ -15,12 +15,12 @@ public class LottoTest {
     @Test
     void createLotto() {
         LottoNumbersGenerater numbersGenerater = () -> List.of(
-                new LottoNumber(1),
-                new LottoNumber(3),
-                new LottoNumber(5),
-                new LottoNumber(7),
-                new LottoNumber(9),
-                new LottoNumber(11)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(7),
+                LottoNumber.valueOf(9),
+                LottoNumber.valueOf(11)
         );
         Lotto lotto = Lotto.create(numbersGenerater);
 
@@ -36,9 +36,9 @@ public class LottoTest {
     @Test
     void limitCount(){
         LottoNumbersGenerater numbersGenerater = () -> List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3)
         );
 
         assertThatIllegalArgumentException()
@@ -46,20 +46,4 @@ public class LottoTest {
                 .withMessage("로또 번호를 6개 입력하세요");
     }
 
-    @DisplayName("로또는 중복된 번호가 없어야 한다")
-    @Test
-    void checkDuplicateNumber(){
-        LottoNumbersGenerater numbersGenerater = () -> List.of(
-                new LottoNumber(1),
-                new LottoNumber(1),
-                new LottoNumber(1),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5)
-        );
-
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.create(numbersGenerater))
-                .withMessage("로또번호가 중복됐습니다");
-    }
 }

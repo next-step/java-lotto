@@ -15,7 +15,7 @@ class BonusBallTest {
         BonusBall bonusBall = new BonusBall(bonusNumber);
 
         assertTrue(bonusBall.isBonusNumber(12));
-        assertFalse(bonusBall.isBonusNumber(new LottoNumber(11)));
+        assertFalse(bonusBall.isBonusNumber(LottoNumber.valueOf(11)));
     }
     
     @DisplayName("로또 1장의 번호들 중 보너스 번호와 일치하는지 확인 가능하다")

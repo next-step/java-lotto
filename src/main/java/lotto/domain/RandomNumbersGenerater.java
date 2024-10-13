@@ -12,7 +12,7 @@ public class RandomNumbersGenerater implements LottoNumbersGenerater {
     public List<LottoNumber> generate() {
         List<LottoNumber> numbers = new ArrayList<LottoNumber>();
         for (int i = 1; i < LIMIT_LOTTO_NUMBER; i++){
-            numbers.add(new LottoNumber(i));
+            numbers.add(LottoNumber.valueOf(i));
         }
         Collections.shuffle(numbers);
         return numbers.subList(0, LIMIT_LOTTO_COUNT);
