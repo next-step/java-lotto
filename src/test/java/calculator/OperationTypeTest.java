@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class OperationTypeTest {
     @ParameterizedTest
-    @CsvSource(value = {"+:ADD", "-:SUBTRACT", "*:MULTIPLY", "/:DIVIDE", "!:UNKNOWN"}, delimiter = ':')
+    @CsvSource(value = {"+:ADD", "-:SUBTRACT", "*:MULTIPLY", "/:DIVIDE"}, delimiter = ':')
     void 심볼로_타입_생성(String symbol, OperationType expected) {
         // when
         OperationType result = OperationType.fromSymbol(symbol);
@@ -81,14 +81,13 @@ public class OperationTypeTest {
     }
 
     @Test
-    void 유효하지_않은_연산자_계산_시도_예외_발생() {
+    void 타입_생성_유효하지_않은_연산자_입력_시_예외_발생() {
         // given
-        int operandA = 3;
-        int operandB = 2;
+        String symbol = "!";
 
         // when, then
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            OperationType.UNKNOWN.apply(operandA, operandB);
-        }).withMessage("유효하지 않은 연산자가 입력되었습니다");
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> OperationType.fromSymbol(symbol))
+                .withMessage("유효하지 않은 연산자가 입력되었습니다");
     }
 }

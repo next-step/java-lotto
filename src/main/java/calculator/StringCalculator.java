@@ -15,7 +15,7 @@ public class StringCalculator {
 
         Integer operandA = null;
         Integer operandB = null;
-        OperationType operation = OperationType.UNKNOWN;
+        OperationType operation = null;
 
         for (String item : inputItems) {
             if (InputItemType.isOperator(item)) {
@@ -27,6 +27,10 @@ public class StringCalculator {
             if (operandA == null) {
                 operandA = parsedOperand;
                 continue;
+            }
+
+            if (operation == null) {
+                throw new IllegalArgumentException("유효하지 않은 연산자가 입력되었습니다");
             }
 
             operandB = parsedOperand;

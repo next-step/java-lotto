@@ -11,9 +11,6 @@ public enum OperationType {
             throw new ArithmeticException("0으로 나눌 수 없습니다");
         }
         return a / b;
-    }),
-    UNKNOWN("UNKNOWN", (a, b) -> {
-        throw new IllegalArgumentException("유효하지 않은 연산자가 입력되었습니다");
     });
 
     private final String symbol;
@@ -30,7 +27,7 @@ public enum OperationType {
                 return operationType;
             }
         }
-        return UNKNOWN;
+        throw new IllegalArgumentException("유효하지 않은 연산자가 입력되었습니다");
     }
 
     public int apply(int a, int b) {
