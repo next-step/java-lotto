@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import static lotto.domain.LottoRank.SECOND;
+import static lotto.domain.LottoRank.THIRD;
+
 import java.util.*;
 
 public class Lotto {
@@ -85,7 +88,7 @@ public class Lotto {
         for (int number : winningLottoNumbers) {
             equalCount += addCount(number);
         }
-        return getRank(equalCount);
+        return getRank(equalCount, winningLotto.getBonusNumber());
     }
 
     private int addCount(int winningNumber) {
@@ -95,8 +98,19 @@ public class Lotto {
         return 0;
     }
 
-    private LottoRank getRank(int equalCount) {
-        return LottoRank.matchRank(equalCount);
+    private LottoRank getRank(int equalCount, int bonusNumber) {
+        LottoRank lottoRank = LottoRank.matchRank(equalCount);
+        if (lottoRank.equals(SECOND)) {
+            return isSecondRank(bonusNumber);
+        }
+        return lottoRank;
+    }
+
+    private LottoRank isSecondRank(int bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public void validateDuplicate(int number) {
