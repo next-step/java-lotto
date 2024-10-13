@@ -9,4 +9,7 @@ public class WinningNumber {
         this.winningNumber = new Lotto(winningNumbers);
     }
 
+    public LottoRewards findLottoRewards(final Lotto lotto) {
+        return LottoRewards.getLottoRewards(winningNumber.countMatchCount(lotto));
+    }
 }

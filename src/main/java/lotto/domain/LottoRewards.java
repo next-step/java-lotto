@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoRewards {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
@@ -21,5 +23,12 @@ public enum LottoRewards {
 
     public int getPrize() {
         return prize;
+    }
+
+    public static LottoRewards getLottoRewards(final int matchCount) {
+        return Arrays.stream(LottoRewards.values())
+                .filter(lottoRewards -> matchCount == lottoRewards.getMatchCount())
+                .findFirst()
+                .orElse(NONE);
     }
 }

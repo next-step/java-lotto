@@ -23,4 +23,10 @@ public class Lotto {
     public Set<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }
+
+    public int countMatchCount(final Lotto winningNumber) {
+        return (int) lottoNumbers.stream()
+                .filter(winningNumber.getLottoNumbers()::contains)
+                .count();
+    }
 }
