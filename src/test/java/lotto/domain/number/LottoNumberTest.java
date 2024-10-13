@@ -3,6 +3,8 @@ package lotto.domain.number;
 import lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static lotto.exception.InvalidLottoNumberException.ERROR_OUT_OF_SCOPE_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,13 +21,10 @@ class LottoNumberTest {
     }
 
     @DisplayName("유효하지 않은 범위의 숫자를 입력하면 예외가 발생한다.")
-    @Test
-    void throwExceptionWhenLottoNumberOutOfRange() {
-        assertThatThrownBy(() -> LottoNumber.of(0))
-                .isInstanceOf(InvalidLottoNumberException.class)
-                .hasMessage(ERROR_OUT_OF_SCOPE_MESSAGE);
-
-        assertThatThrownBy(() -> LottoNumber.of(46))
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    void throwExceptionWhenLottoNumberOutOfRange(int number) {
+        assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(InvalidLottoNumberException.class)
                 .hasMessage(ERROR_OUT_OF_SCOPE_MESSAGE);
     }
