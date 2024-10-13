@@ -7,16 +7,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.model.Lotto.LOTTO_NUMBERS_SIZE;
+import static lotto.model.dto.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.model.dto.LottoNumber.MIN_LOTTO_NUMBER;
+
 public class LottoNumbersCreator implements NumbersCreator {
     @Override
     public List<LottoNumber> create() {
-        List<Integer> integers = IntStream.rangeClosed(1, 45)
+        List<Integer> integers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(integers);
         return integers.stream()
-                .limit(6) // 첫 6개 요소 가져오기
-                .map(LottoNumber::new)
+                .limit(LOTTO_NUMBERS_SIZE)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 }

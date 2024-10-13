@@ -3,19 +3,12 @@ package lotto.controller;
 import lotto.model.Buyer;
 import lotto.model.Lotto;
 import lotto.model.Rankings;
-import lotto.model.Seller;
 import lotto.model.dto.LottoNumber;
 import lotto.util.LottoNumbersCreator;
-import lotto.util.NumbersCreator;
-import lotto.util.SplitUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import stringcalculator.model.Input;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class LottoController {
@@ -30,10 +23,9 @@ public class LottoController {
         ResultView.printBuyerLottosInfo(buyer);
 
         Lotto winningLotto = Lotto.of(() -> Arrays.stream(InputView.inputWinningLottoNumbers())
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList()));
-        Seller seller = Seller.of(winningLotto);
-        Rankings rankings = buyer.rankings(seller);
+        Rankings rankings = buyer.rankings(winningLotto);
 
         ResultView.printStatistics(buyCount, rankings);
     }

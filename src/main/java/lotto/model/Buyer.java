@@ -40,17 +40,17 @@ public class Buyer {
         return result.contains(lotto);
     }
 
-    public Rankings rankings(Seller seller) {
+    public Rankings rankings(Lotto winningLotto) {
         Map<Ranking, Integer> rankings = new HashMap<>();
         Arrays.stream(values())
                 .filter(ranking -> !ranking.equals(NONE))
-                .forEach(ranking -> rankings.put(ranking, rankingCount(seller, ranking)));
+                .forEach(ranking -> rankings.put(ranking, rankingCount(winningLotto, ranking)));
         return new Rankings(rankings);
     }
 
-    private int rankingCount(Seller seller, Ranking fourth) {
+    private int rankingCount(Lotto winningLotto, Ranking fourth) {
         long count = this.lottoes.stream()
-                .map(lotto -> lotto.compare(seller.winningLotto()))
+                .map(lotto -> lotto.compare(winningLotto))
                 .filter(fourth::equals)
                 .count();
         return Long.valueOf(count)

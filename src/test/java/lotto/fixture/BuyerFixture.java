@@ -4,23 +4,30 @@ import lotto.model.dto.LottoNumber;
 
 import java.util.List;
 
+import static lotto.model.dto.LottoNumber.of;
+
 public class BuyerFixture {
     public static final int LOTTOES_BUY_COUNT_FIXTURE = 14;
     //8, 21, 23, 41, 42, 43
-    public static final List<List<LottoNumber>> LOTTOES_FIXTURE = List.of(
-            List.of(new LottoNumber(8), new LottoNumber(21), new LottoNumber(23), new LottoNumber(41), new LottoNumber(42), new LottoNumber(43)),//111111-1
-            List.of(new LottoNumber(3), new LottoNumber(5), new LottoNumber(11), new LottoNumber(16), new LottoNumber(32), new LottoNumber(38)),//
-            List.of(new LottoNumber(7), new LottoNumber(11), new LottoNumber(16), new LottoNumber(35), new LottoNumber(36), new LottoNumber(44)),//
-            List.of(new LottoNumber(1), new LottoNumber(8), new LottoNumber(11), new LottoNumber(31), new LottoNumber(41), new LottoNumber(42)),//111-4
-            List.of(new LottoNumber(13), new LottoNumber(14), new LottoNumber(16), new LottoNumber(38), new LottoNumber(42), new LottoNumber(45)),//1
-            List.of(new LottoNumber(7), new LottoNumber(11), new LottoNumber(30), new LottoNumber(40), new LottoNumber(42), new LottoNumber(43)),//11
-            List.of(new LottoNumber(2), new LottoNumber(13), new LottoNumber(22), new LottoNumber(32), new LottoNumber(38), new LottoNumber(45)),//
-            List.of(new LottoNumber(23), new LottoNumber(25), new LottoNumber(33), new LottoNumber(36), new LottoNumber(39), new LottoNumber(41)),//11
-            List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(5), new LottoNumber(14), new LottoNumber(22), new LottoNumber(45)),//
-            List.of(new LottoNumber(5), new LottoNumber(9), new LottoNumber(38), new LottoNumber(41), new LottoNumber(43), new LottoNumber(44)),//11
-            List.of(new LottoNumber(2), new LottoNumber(8), new LottoNumber(9), new LottoNumber(18), new LottoNumber(19), new LottoNumber(21)),//11
-            List.of(new LottoNumber(13), new LottoNumber(14), new LottoNumber(18), new LottoNumber(21), new LottoNumber(23), new LottoNumber(35)),//11
-            List.of(new LottoNumber(17), new LottoNumber(21), new LottoNumber(29), new LottoNumber(37), new LottoNumber(42), new LottoNumber(45)),//11
-            List.of(new LottoNumber(3), new LottoNumber(8), new LottoNumber(27), new LottoNumber(30), new LottoNumber(35), new LottoNumber(44))//1
+    public static final List<LottoNumber> WINNING_LOTTOES_NUMBERS = List.of(
+            of(8), of(21),
+            of(23), of(41),
+            of(42), of(43));
+    public static final List<List<LottoNumber>> LOTTOES_NUMBERS = List.of(
+            List.of(of(8), of(21), of(23), of(41), of(42), of(43)),//111111-1
+            List.of(of(3), of(5), of(11), of(16), of(32), of(38)),//
+            List.of(of(7), of(11), of(16), of(35), of(36), of(44)),//
+            List.of(of(1), of(8), of(11), of(31), of(41), of(42)),//111-4
+            List.of(of(13), of(14), of(16), of(38), of(42), of(45)),//1
+            List.of(of(7), of(11), of(30), of(40), of(42), of(43)),//11
+            List.of(of(2), of(13), of(22), of(32), of(38), of(45)),//
+            List.of(of(23), of(25), of(33), of(36), of(39), of(41)),//11
+            List.of(of(1), of(3), of(5), of(14), of(22), of(45)),//
+            List.of(of(5), of(9), of(38), of(41), of(43), of(44)),//11
+            List.of(of(2), of(8), of(9), of(18), of(19), of(21)),//11
+            List.of(of(13), of(14), of(18), of(21), of(23), of(35)),//11
+            List.of(of(17), of(21), of(29), of(37), of(42), of(45)),//11
+            List.of(of(3), of(8), of(27), of(30), of(35), of(44))//1
+
     );
 }
