@@ -7,11 +7,11 @@
 
 ## 기능 목록
 - [ ] 입력 화면(InputView)
-    - [ ] 구매 금액 입력
+    - [x] 구매 금액 입력
     - [ ] 당첨번호 입력
-- [ ] 로또 구매 개수 계산(NumberOfPurchasedLotto)
-- [ ] 로또 생성(LottoGenerator)
-  - [ ] 로또 클래스 생성
+- [x] 로또 구매 개수 계산(LottoPurchaseService)
+- [x] 로또 생성(LottoGenerator)
+  - [x] shuffle()를 통한 생성(LottoShuffleGenerator)
 - [ ] 당첨 확인(WinningCheck)
   - [ ] 당첨 조건
   - [ ] 수익률 계산
