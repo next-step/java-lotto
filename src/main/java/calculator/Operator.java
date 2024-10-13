@@ -1,5 +1,5 @@
 package calculator;
 
 public interface Operator {
-    Integer operate(Integer left, Integer right);
+    int operate(int left, int right);
 }
