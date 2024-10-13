@@ -60,7 +60,7 @@ public class LottoJudge {
 
     private LottoRewardInfosDTO convertToRewardInfosDTO(Map<LottoReward, Integer> matchCountMap) {
         List<LottoRewardInfoDTO> rewardInfoDTOs = new ArrayList<>();
-        for (LottoReward reward : matchCountMap.keySet()) {
+        for (LottoReward reward : LottoReward.values()) {
             int rewardCount = matchCountMap.getOrDefault(reward, 0);
             rewardInfoDTOs.add(LottoRewardInfoDTO.valueOf(rewardCount, reward));
         }
