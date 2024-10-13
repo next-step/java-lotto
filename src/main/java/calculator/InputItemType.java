@@ -21,7 +21,7 @@ public enum InputItemType {
             return InputItemType.SPACE;
         }
 
-        return UNKNOWN;
+        throw new IllegalArgumentException("숫자, 사칙연산자(+, -, *, /), 공백 이외의 문자는 허용되지 않습니다");
     }
 
     public boolean isNumber() {
