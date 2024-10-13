@@ -7,17 +7,29 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+---
+
+# STEP4 TODO
+- [ ] 사용자가 수동으로 로또 번호를 입력할 수 있도록 기능 추가 
+  - [ ] 수동 로또 개수 입력
+  - [ ] 수동 로또 번호 입력
+  - [ ] 모든 원시값과 문자열을 포장한다
+  - [ ] 예외 처리를 통해 에러가 발생하지 않도록 한다
+    - 잘못된 값을 입력하면 java exception 처리
+    - Optional로 NullPointerException이 발생하지 않도록 처리  
+- [ ] 3단계 피드백
+  - [  ] PrizeCountMap에서 Map을 EnumMap으로 변경 
+# STEP4 DONE
 
 ---
 # STEP3 TODO
-
 # STEP3 DONE
 - [x] 3단계 요구사항
   -[x] 2등을 위해 보너스 번호 추가
   -[x] 당첨 통계에 2등 관련 문자열 추가 
 - [x] 2단계 피드백
-  - [x]  validateNumberOfLottoNumbers static 제거 
-  - [x] EnumMap Prize Key변경 
+  - [x] validateNumberOfLottoNumbers static 제거 
+  - [x] EnumMap Prize Key 변경 
 ---
 # STEP2 TODO
 # STEP2 DONE
