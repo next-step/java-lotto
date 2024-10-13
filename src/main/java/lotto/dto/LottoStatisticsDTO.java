@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public class LottoStatisticsDTO {
     private final double percentageRateOfReturn;
-    private final LottoMatchInfosDTO matchInfosDTO;
+    private final LottoRewardInfosDTO matchInfosDTO;
 
-    private LottoStatisticsDTO(double percentageRateOfReturn, LottoMatchInfosDTO matchInfosDTO) {
+    private LottoStatisticsDTO(double percentageRateOfReturn, LottoRewardInfosDTO matchInfosDTO) {
         this.percentageRateOfReturn = percentageRateOfReturn;
         this.matchInfosDTO = matchInfosDTO;
     }
 
-    public static LottoStatisticsDTO valueOf(double percentageRateOfReturn, LottoMatchInfosDTO matchCountsDTO) {
+    public static LottoStatisticsDTO valueOf(double percentageRateOfReturn, LottoRewardInfosDTO matchCountsDTO) {
         return new LottoStatisticsDTO(percentageRateOfReturn, matchCountsDTO);
     }
 
@@ -19,7 +19,7 @@ public class LottoStatisticsDTO {
         return percentageRateOfReturn;
     }
 
-    public LottoMatchInfosDTO getMatchInfosDTO() {
+    public LottoRewardInfosDTO getMatchInfosDTO() {
         return matchInfosDTO;
     }
 
