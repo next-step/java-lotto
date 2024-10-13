@@ -18,8 +18,8 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonus) {
         if (winningLotto.has(bonus)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_BONUS_NUMBER
-                    .getMessage().replace(":winningLotto", winningLotto.toString()));
+            throw new IllegalArgumentException(
+                    String.format(ErrorMessage.INVALID_BONUS_NUMBER.getMessage(), winningLotto));
         }
         this.winningLotto = winningLotto;
         this.bonus = bonus;
