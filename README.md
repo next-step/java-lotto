@@ -9,6 +9,16 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ---
+# STEP3 TODO
+
+# STEP3 DONE
+- [x] 3단계 요구사항
+  -[x] 2등을 위해 보너스 번호 추가
+  -[x] 당첨 통계에 2등 관련 문자열 추가 
+- [x] 2단계 피드백
+  - [x]  validateNumberOfLottoNumbers static 제거 
+  - [x] EnumMap Prize Key변경 
+---
 # STEP2 TODO
 # STEP2 DONE
 - [x] 모든 기능은 TDD로 단위테스트 존재

@@ -1,7 +1,9 @@
 package lotto.game;
 
 
-import lotto.prize.PrizeCount;
+import lotto.number.LottoNumber;
+import lotto.number.WinningNumbers;
+import lotto.prize.PrizeCountMap;
 import lotto.prize.PrizeCounter;
 import lotto.number.LottoBalls;
 import lotto.strategy.RandomLottoNumberStrategy;
@@ -26,15 +28,16 @@ public class LottoGame {
         int amount = inputView.getAmountFromUser();
         List<LottoBalls> lottoTickets = lottoMachine.generateTickets(amount);
 
-        List<Integer> numbers = inputView.getWinningNumbersFromUser();
-        LottoBalls winningNumbers = new LottoBalls(numbers);
+        List<Integer> winningNumbersFromUser = inputView.getWinningNumbersFromUser();
+        Integer bonusNumberFromUser = inputView.getBonusNumberFromUser();
+        WinningNumbers winningNumbers = new WinningNumbers(new LottoBalls(winningNumbersFromUser), new LottoNumber(bonusNumberFromUser));
 
         PrizeCounter prizeCounter = new PrizeCounter(lottoTickets, winningNumbers);
-        PrizeCount prizeCount = prizeCounter.countPrize();
+        PrizeCountMap prizeCountMap = prizeCounter.countPrize();
 
         resultView.showLottoTickets(lottoTickets);
-        resultView.showLottoResult(prizeCount);
-        resultView.showLottoProfit(prizeCount.calculateProfitRate(lottoTickets.size()));
+        resultView.showLottoResult(prizeCountMap);
+        resultView.showLottoProfit(prizeCountMap.calculateProfitRate(lottoTickets.size()));
     }
 
 }

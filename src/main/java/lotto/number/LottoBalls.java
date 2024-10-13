@@ -2,6 +2,7 @@ package lotto.number;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,14 +22,14 @@ public class LottoBalls {
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    private static void validateNumberOfLottoNumbers(Set<Integer> lottoNumbers) {
+    private void validateNumberOfLottoNumbers(Set<Integer> lottoNumbers) {
         if (lottoNumbers.size() == NUMBER_OF_BALLS) {
             return;
         }
         throw new IllegalArgumentException("로또 번호는 6개 입니다.");
     }
 
-    public int matchLottoBalls(LottoBalls otherBalls) {
+    public int countMatchedNumber(LottoBalls otherBalls) {
         return (int) balls.stream()
                 .filter(otherBalls::match)
                 .count();
@@ -39,8 +40,20 @@ public class LottoBalls {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoBalls that = (LottoBalls) o;
+        return Objects.equals(balls, that.balls);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(balls);
+    }
+
+    @Override
     public String toString() {
         return balls.toString();
     }
-
 }
