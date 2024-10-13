@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.domain.LottoResult;
+import step2.domain.Lottos;
 
 import java.text.DecimalFormat;
 
@@ -8,20 +8,20 @@ public class ResultView {
     private final int LOTTO_MIN_MATCH_COUNT = 3;
     private final int LOTTO_MAX_MATCH_COUNT = 6;
 
-    public void printLottoResult(LottoResult lottoResult) {
-        lottoResult.getLottoResults().forEach(lotto -> System.out.println(lotto.toString()));
+    public void printLottoResult(Lottos lottos) {
+        lottos.getLottos().forEach(lotto -> System.out.println(lotto.toString()));
     }
 
-    public void printLottoStatistics(LottoResult lottoResult, int lottoAmount) {
+    public void printLottoStatistics(Lottos lottoResult, int lottoAmount) {
         printLottoStatisticsStart();
         printLottoMatchCountStatistics(lottoResult);
         printLottoRateOfReturn(lottoResult, lottoAmount);
     }
 
-    private void printLottoMatchCountStatistics(LottoResult lottoResult) {
+    private void printLottoMatchCountStatistics(Lottos lottos) {
         for (int matchCount = LOTTO_MIN_MATCH_COUNT; matchCount <= LOTTO_MAX_MATCH_COUNT; matchCount++) {
-            int count = lottoResult.getCountByMatchCount(matchCount);
-            int prizeMoney = lottoResult.getPrizeMoneyByMatchCount(matchCount);
+            int count = lottos.getCountByMatchCount(matchCount);
+            int prizeMoney = lottos.getPrizeMoneyByMatchCount(matchCount);
             System.out.println(matchCount + "개 일치 " + "(" + prizeMoney + "원)- " + count + "개");
         }
     }
@@ -31,16 +31,16 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    private void printLottoRateOfReturn(LottoResult lottoResult, double purchasingAmount) {
-        double totalEarnings = calculateTotalEarnings(lottoResult);
+    private void printLottoRateOfReturn(Lottos lottos, double purchasingAmount) {
+        double totalEarnings = calculateTotalEarnings(lottos);
         double returnRate = calculateReturnRate(totalEarnings, purchasingAmount);
         printFormattedReturnRate(returnRate);
     }
 
-    private double calculateTotalEarnings(LottoResult lottoResult) {
+    private double calculateTotalEarnings(Lottos lottos) {
         double totalEarnings = 0;
         for (int matchCount = LOTTO_MIN_MATCH_COUNT; matchCount <= LOTTO_MAX_MATCH_COUNT; matchCount++) {
-            totalEarnings += lottoResult.getEarningsByMatchCount(matchCount);
+            totalEarnings += lottos.getEarningsByMatchCount(matchCount);
         }
         return totalEarnings;
     }

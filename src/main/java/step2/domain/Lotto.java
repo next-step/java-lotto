@@ -4,20 +4,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<Integer> lotto;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lotto) {
-        this.lotto = lotto;
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lotto;
+    // 로또 번호 리스트 반환
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
     public String toString() {
-        return "[" + lotto.stream()
-                .map(String::valueOf)
+        return "[" + lottoNumbers.stream()
+                .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
                 .collect(Collectors.joining(", ")) + "]";
     }
 }

@@ -1,5 +1,8 @@
 package step2.view;
 
+import step2.domain.Lotto;
+import step2.domain.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -7,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private int purchasingAmount = 0;
+    private static final int LOTTO_PRICE = 1000;
     private final Scanner scanner = new Scanner(System.in);
 
     public int receivePurchasingAmount() {
@@ -17,7 +21,7 @@ public class InputView {
         return purchasingAmount / 1000;
     }
 
-    public List<Integer> receiveWinningNumber() {
+    public List<LottoNumber> receiveWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
         validateWinningNumber(input);
@@ -29,26 +33,27 @@ public class InputView {
     }
 
     private void validatePurchasingAmount() {
-        if (purchasingAmount / 1000 < 1) {
+        if (purchasingAmount / LOTTO_PRICE < 1) {
             throw new IllegalArgumentException("그 돈으로는 로또를 한 장도 살 수 없습니다. 돌아가세요!");
         }
     }
 
     private void printBuyLotto() {
-        System.out.println(purchasingAmount / 1000 + "개를 구매했습니다.");
+        System.out.println(purchasingAmount / LOTTO_PRICE + "개를 구매했습니다.");
         printReturnChange();
     }
 
     private void printReturnChange() {
-        if (purchasingAmount % 1000 > 0) {
-            System.out.println("거스름돈 " + purchasingAmount % 1000 + "원을 받았습니다.");
+        if (purchasingAmount % LOTTO_PRICE > 0) {
+            System.out.println("거스름돈 " + purchasingAmount % LOTTO_PRICE + "원을 받았습니다.");
         }
     }
 
-    private List<Integer> convertWinningNumber(String input) {
+    private List<LottoNumber> convertWinningNumber(String input) {
         return Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -59,14 +64,6 @@ public class InputView {
 
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
-        }
-
-
-        for (String number : numbers) {
-            int num = Integer.parseInt(number.trim());
-            if (num < 1 || num > 45) {
-                throw new IllegalArgumentException("각 당첨 번호는 1과 45 사이여야 합니다.");
-            }
         }
     }
 }
