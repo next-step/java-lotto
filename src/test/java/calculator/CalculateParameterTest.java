@@ -1,7 +1,9 @@
-package calculator.domain;
+package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -25,14 +27,12 @@ public class CalculateParameterTest {
                 .isInstanceOf(IllegalStateException.class);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("연산자인 경우 true를 반환한다.")
-    void 연산자인_경우() {
+    @ValueSource(strings = {"+", "*", "/", "-"})
+    void 연산자인_경우(String text) {
         CalculateParameter parameter = new CalculateParameter();
-        assertThat(parameter.isOperator("+")).isTrue();
-        assertThat(parameter.isOperator("*")).isTrue();
-        assertThat(parameter.isOperator("/")).isTrue();
-        assertThat(parameter.isOperator("-")).isTrue();
+        assertThat(parameter.isOperator(text)).isTrue();
     }
 
     @Test

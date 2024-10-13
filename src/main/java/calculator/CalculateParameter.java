@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator;
 
 import calculator.enums.Operator;
 
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Queue;
 
 public class CalculateParameter {
-    public static final String SPACE = " ";
+    public static final String DELIMITER = " ";
     Queue<Integer> numbers = new LinkedList<>();
-    Queue<String> operators = new LinkedList<>();
+    Queue<Operator> operators = new LinkedList<>();
 
     public int operatorsSize() {
         return operators.size();
@@ -26,12 +26,16 @@ public class CalculateParameter {
         return true;
     }
 
-    public String getOperator() {
+    public Operator getOperator() {
         return operators.poll();
     }
 
-    public Integer getNumber() {
-        return numbers.poll();
+    public int getNumber() {
+        Integer number = numbers.poll();
+        if (number == null) {
+            return 0;
+        }
+        return number;
     }
 
     public boolean isEmpty() {
@@ -42,7 +46,7 @@ public class CalculateParameter {
         if (isBlank(text)) {
             throw new IllegalStateException("문자열이 비어있습니다.");
         }
-        return List.of(text.split(SPACE));
+        return List.of(text.split(DELIMITER));
     }
 
     private static boolean isBlank(String text) {
@@ -52,6 +56,7 @@ public class CalculateParameter {
     public void makeParameter(String text) {
         List<String> splitText = split(text);
         addSplitTexts(splitText);
+        validateQueueSize();
     }
 
     private void addSplitTexts(List<String> splitText) {
@@ -97,9 +102,10 @@ public class CalculateParameter {
 
     public void addOperators(String operator) {
         if (isOperator(operator)) {
-            operators.add(operator);
+            operators.add(Operator.from(operator));
         }
     }
+
     public boolean isOperator(String operator) {
         if (!isContainOperator(operator)) {
             throw new IllegalStateException("연산자가 아닌 문자는 허용하지 않습니다.");

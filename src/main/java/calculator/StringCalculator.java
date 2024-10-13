@@ -1,34 +1,20 @@
 package calculator;
 
-import calculator.domain.CalculateParameter;
-import calculator.domain.OperatorMethod;
 import calculator.enums.Operator;
 
 public class StringCalculator {
-    private static StringCalculator INSTANCE = null;
+    private final CalculateParameter parameter;
 
-    private StringCalculator() {
+    public StringCalculator(CalculateParameter parameter) {
+        this.parameter = parameter;
     }
 
-    public static StringCalculator getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new StringCalculator();
-        }
-        return INSTANCE;
-    }
-
-    public int calculate(Integer first, Integer second, String operator) {
-        if (first == null || second == null || operator == null) {
-            throw new IllegalStateException("null을 허용하지 않습니다.");
-        }
-        OperatorMethod operatorMethod = Operator.from(operator);
-        return operatorMethod.operate(first, second);
+    int calculate(Integer num1, Integer num2, Operator operator) {
+        return operator.operate(num1, num2);
     }
 
     public int calculate(String text) {
-        CalculateParameter parameter = new CalculateParameter();
         parameter.makeParameter(text);
-        parameter.validateQueueSize();
         return getResult(parameter);
     }
 

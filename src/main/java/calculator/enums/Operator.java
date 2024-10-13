@@ -1,31 +1,32 @@
 package calculator.enums;
 
-import calculator.domain.*;
+import calculator.OperatorMethod;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Operator {
-    PLUS("+", new PlusOperator()),
-    MINUS("-", new MinusOperator()),
-    MULTIPLY("*", new MultiplyOperator()),
-    DIVIDE("/", new DivideOperator());
+    PLUS("+", Integer::sum),
+    MINUS("-", (num1, num2) -> num1 - num2),
+    MULTIPLY("*", (num1, num2) -> num1 * num2),
+    DIVIDE("/", (num1, num2) -> {
+        if (num2 == 0) {
+            throw new IllegalStateException("분모가 0이 될 수 없습니다.");
+        }
+        return num1 / num2;
+    });
 
     private final String operator;
-    private final OperatorMethod operatorClass;
+    private final OperatorMethod operatorMethod;
 
-    Operator(String operator, OperatorMethod operatorClass) {
+    Operator(String operator, OperatorMethod operatorMethod) {
         this.operator = operator;
-        this.operatorClass = operatorClass;
+        this.operatorMethod = operatorMethod;
     }
 
     public String getOperator() {
         return operator;
-    }
-
-    public OperatorMethod getOperatorClass() {
-        return operatorClass;
     }
 
     public static List<String> getOperators() {
@@ -34,11 +35,14 @@ public enum Operator {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static OperatorMethod from(String operator) {
+    public static Operator from(String operator) {
         return Arrays.stream(Operator.values())
-                .filter(s -> operator.equals(s.operator))
+                .filter(op -> operator.equals(op.operator))
                 .findAny()
-                .orElseThrow(() -> new IllegalStateException("해당하는 operator가 존재하지 않습니다."))
-                .getOperatorClass();
+                .orElseThrow(() -> new IllegalStateException("해당하는 operator가 존재하지 않습니다."));
+    }
+
+    public int operate(int num1, int num2) {
+        return this.operatorMethod.operate(num1, num2);
     }
 }
