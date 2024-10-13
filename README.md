@@ -75,12 +75,12 @@
   - else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
 
 ### 피드백 사항
-- [ ] LottoBalls Stream API 적용
-- [ ] LottoBalls VO로 감싸기
-- [ ] LottoBalls 인라인 return
-- [ ] LottoBalls 메소드명 변경
-- [ ] LottoResult 클래스명 변경
-- [ ] MAP 대신 ENUM으로 다루기
-- [ ] 로또 가격 상수화
-- [ ] InputView에서의 당첨번호 validation 로또 번호 책임으로 변환
-- [ ] 반복문에서 LottoNumber로 감싸
+- [x] LottoBalls Stream API 적용
+- [x] LottoBalls VO로 감싸기
+- [x] LottoBalls 인라인 return
+- [x] LottoBalls 메소드명 변경
+- [x] LottoResult 클래스명 변경
+- [x] MAP 대신 ENUM으로 다루기
+- [x] 로또 가격 상수화
+- [x] InputView에서의 당첨번호 validation 로또 번호 책임으로 변환
+- [x] 반복문에서 LottoNumber로 감싸기

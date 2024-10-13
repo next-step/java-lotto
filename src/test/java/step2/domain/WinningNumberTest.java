@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -13,8 +14,8 @@ public class WinningNumberTest {
 
     @Test
     public void 유효한_당첨번호_생성() {
-        List<Integer> winnerNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        WinningNumber winningNumber = new WinningNumber(winnerNumber);
+        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toList());
+        WinningNumber winningNumber = new WinningNumber(lottoNumbers);
 
         assertThat(winningNumber).isNotNull();
     }
@@ -35,8 +36,12 @@ public class WinningNumberTest {
 
     @Test
     public void 일치하는_번호_개수_테스트() {
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(Arrays.asList(1, 3, 5, 7, 9, 11));
+        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        WinningNumber winningNumber = new WinningNumber(lottoNumbers);
+        Lotto lotto = new Lotto(Arrays.asList(1, 3, 5, 7, 9, 11).stream().map(LottoNumber::new).collect(Collectors.toList()));
         int matchCount = winningNumber.matchNumberCount(lotto);
 
         assertThat(matchCount).isEqualTo(3);

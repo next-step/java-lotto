@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoResult {
+public class Lottos {
     private final LottoStatistics lottoStatistics = new LottoStatistics();
-    private final List<Lotto> lottoResult = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
 
-    public List<Lotto> getLottoResults() {
-        return Collections.unmodifiableList(lottoResult);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     public int size() {
-        return lottoResult.size();
+        return lottos.size();
     }
 
     public void calculateLotto(WinningNumber winningNumber) {
-        for (Lotto lotto : lottoResult) {
+        for (Lotto lotto : lottos) {
             int matchCount = winningNumber.matchNumberCount(lotto);
             lottoStatistics.incrementMatchCount(matchCount);
         }
@@ -28,7 +28,7 @@ public class LottoResult {
     }
 
     public int getPrizeMoneyByMatchCount(int matchCount) {
-        return lottoStatistics.getPrizeMoneyByMatchCount(matchCount);
+        return lottoStatistics.getPrizeMoney(matchCount);
     }
 
     public int getEarningsByMatchCount(int matchCount) {
@@ -36,6 +36,6 @@ public class LottoResult {
     }
 
     public void addLotto(Lotto lotto) {
-        this.lottoResult.add(lotto);
+        this.lottos.add(lotto);
     }
 }
