@@ -17,7 +17,7 @@ public class LottoMachine {
         if(price > purchaseAmount){
             throw new IllegalArgumentException("로또를 구매할 돈이 부족합니다");
         }
-        return null;
+        return new Lottos(manualNumbers);
     }
 
     public Lottos buyAutoLottos(LottoNumbersGenerater generator) {

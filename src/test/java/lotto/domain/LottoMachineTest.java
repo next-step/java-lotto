@@ -51,4 +51,18 @@ public class LottoMachineTest {
                 .isThrownBy(() -> lottoMachine.buyManualLottos(manualNumbers))
                 .withMessage("로또를 구매할 돈이 부족합니다");
     }
+
+
+    @DisplayName("로또 번호를 수동 입력하여 구매 가능하다")
+    @Test
+    void buyManualLottos(){
+        int purchaseAmount = 1000;
+        LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
+
+        String[] manualNumbers = new String[]{"1, 2, 3, 4, 5, 6"};
+        Lottos manualLotto = lottoMachine.buyManualLottos(manualNumbers);
+
+        Lottos lottos = new Lottos(manualNumbers);
+        assertThat(manualLotto).isEqualTo(lottos);
+    }
 }
