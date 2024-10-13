@@ -38,7 +38,7 @@ public class LottoResult {
     public static LottoResult getLottoResult(List<Lotto> lottos, Lotto winner, int lottoPrice) {
         List<Integer> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            result.add(lotto.compareTo(winner));
+            result.add(lotto.compareWinningNumber(winner));
         }
         Collections.sort(result);
         return new LottoResult(result, lottos.size() * lottoPrice);

@@ -44,6 +44,11 @@
 * parsing 로직 view로 이동
 * stream 속 변수 이름 구체화
 * enum 대문자로 변경
+* 로또 접근제한자 추가
+* 로또 구매 buy 메소드로 변경
+* 상수 클래스로 다시 분리
+* inputView에 파싱 책임 이동
+* 로또 비교 메소드 이름 변경 및 Comparable override 제거 
 
 
 ## Step2. 리팩토링 내용

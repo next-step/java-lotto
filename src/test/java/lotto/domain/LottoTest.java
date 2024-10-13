@@ -14,7 +14,7 @@ public class LottoTest {
     void 당첨_로또와_일치하는_개수_추출() {
         Lotto winner = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(List.of(7, 8, 9, 4, 5, 6));
-        assertThat(lotto.compareTo(winner)).isEqualTo(3);
+        assertThat(lotto.compareWinningNumber(winner)).isEqualTo(3);
     }
 
 }

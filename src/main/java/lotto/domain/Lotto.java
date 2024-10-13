@@ -24,9 +24,23 @@ public class Lotto implements Comparable<Lotto> {
         }
     }
 
-    private static boolean isOutOfBoundLotto(List<Integer> lottoNumbers) {
-        return lottoNumbers.stream()
-                .anyMatch(number -> number > LOTTO_END_NUMBER || number < LOTTO_START_NUMBER);
+    public List<Integer> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public int compareWinningNumber(Lotto winner) {
+        int result = 0;
+        for (Integer lottoNumber : lottoNumbers) {
+            result += addResult(winner.getLottoNumbers(), lottoNumber);
+        }
+        return result;
+    }
+
+    private static int addResult(List<Integer> winner, Integer lottoNumber) {
+        if (winner.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override
@@ -39,26 +53,5 @@ public class Lotto implements Comparable<Lotto> {
         }
         Lotto lotto = (Lotto) object;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
-    }
-
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
-    private static int addResult(List<Integer> winner, Integer lottoNumber) {
-        if (winner.contains(lottoNumber)) {
-            return 1;
-        }
-        return 0;
-    }
-
-
-    @Override
-    public int compareTo(Lotto winner) {
-        int result = 0;
-        for (Integer lottoNumber : lottoNumbers) {
-            result += addResult(winner.getLottoNumbers(), lottoNumber);
-        }
-        return result;
     }
 }
