@@ -3,7 +3,7 @@ package lotto.fixture;
 import java.util.List;
 
 public class BuyerFixture {
-    public static final int LOTTOES_AMOUNT_FIXTURE = 14;
+    public static final int LOTTOES_BUY_COUNT_FIXTURE = 14;
     //8, 21, 23, 41, 42, 43
     public static final List<Integer[]> LOTTOES_FIXTURE = List.of(
             new Integer[]{8, 21, 23, 41, 42, 43},//111111-1

@@ -2,7 +2,10 @@ package lotto.controller;
 
 import lotto.model.Buyer;
 import lotto.model.Lotto;
+import lotto.model.Rankings;
+import lotto.model.Seller;
 import lotto.util.LottoNumbersCreator;
+import lotto.util.SplitUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -16,13 +19,13 @@ public class LottoController {
     public static void run() {
         System.out.println("구입금액을 입력해 주세요.");
         // 요구사항: 구입금액을 입력 받는다
-        int amount = SCANNER.nextInt()/1000;
+        int buyCount = SCANNER.nextInt()/1000;
         SCANNER.nextLine();
 
         // 요구사항: 입력받은 구입금액으로 사용자의 자동 로또번호 목록을 생성한다
         // 요구사항: 로또번호를 저장한다
         // 요구사항: 유저의 로또번호 목록을 저장한다
-        Buyer buyer = Buyer.of(amount, new LottoNumbersCreator());
+        Buyer buyer = Buyer.of(buyCount, new LottoNumbersCreator());
         // 요구사항: 구매자의 로또목록의 value 를 출력한다
         List<String> lottoNumbersFormat = buyerLottoes(buyer);
         // 요구사항: 구매자의 로또목록의 size 를 출력한다
@@ -36,20 +39,20 @@ public class LottoController {
         // 요구사항: 당청 번호를 콘솔에 입력받는다
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningNumbers = SCANNER.nextLine();
+        Integer[] winningNumbers = SplitUtil.stringToNumbers(SCANNER.nextLine());
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         // 요구사항: 구매한 로또번호 6자리와 당첨 번호 6자리를 비교하여 등수를 리턴한다
         // 요구사항: 구매한 로또번호 6자리 목록의 등수들을 결과로 저장한다
-        Map<String, Integer> ranking = ranking(winningNumbers);
+        Rankings rankings = buyer.rankings(Seller.of(Lotto.of(() -> winningNumbers)));
 
         // 요구사항: 수익률을 계산하여 결과를 출력한다
-        double totalEarningRate = totalEarningRate(ranking);
+        double totalEarningRate = totalEarningRate(buyCount, rankings);
 
         // 요구사항: 각 등수의 합계 결과를 콘솔에 출력한다
-        System.out.println(String.join("\n", rankingResultFormat(ranking)));
+        System.out.println(String.join("\n", rankingResultFormat(rankings)));
 
         // 요구사항: 수익률 결과를 콘솔에 출력한다
         System.out.println(totalEarningRateFormat(totalEarningRate));
@@ -60,17 +63,12 @@ public class LottoController {
         return String.format("총 수익률은 %.2f입니다.", totalEarningRate);
     }
 
-    private static List<String> rankingResultFormat(Map<String, Integer> ranking) {
-        return List.of(
-                String.format("3개 일치 (5000원)- %d개", ranking.get("fourth")),
-                String.format("4개 일치 (50000원)- %d개", ranking.get("third")),
-                String.format("5개 일치 (1500000원)- %d개", ranking.get("second")),
-                String.format("6개 일치 (2000000000원)- %d개", ranking.get("first"))
-        );
+    private static String rankingResultFormat(Rankings rankings) {
+        return rankings.result();
     }
 
-    private static double totalEarningRate(Map<String, Integer> ranking) {
-        return 0.35;
+    private static double totalEarningRate(int buyCount, Rankings rankings) {
+        return rankings.statistics(buyCount);
     }
 
     private static Map<String, Integer> ranking(String winningNumbers) {
@@ -83,7 +81,7 @@ public class LottoController {
     }
 
     private static int buyerLottoesSize(Buyer buyer) {
-        return buyer.size();
+        return buyer.value().size();
     }
 
     private static List<String> buyerLottoes(Buyer buyer) {
