@@ -1,24 +1,25 @@
 package lotto.fixture;
 
+import lotto.model.dto.LottoNumber;
 import lotto.util.NumbersCreator;
 
 import java.util.List;
 
 public class BuyerFixtureNumberCreator implements NumbersCreator {
-    private final List<Integer[]> numbersCreators;
+    private final List<List<LottoNumber>> numbersCreators;
     private int current;
 
-    public static BuyerFixtureNumberCreator of(List<Integer[]> numbersCreators) {
+    public static BuyerFixtureNumberCreator of(List<List<LottoNumber>> numbersCreators) {
         return new BuyerFixtureNumberCreator(numbersCreators);
     }
 
-    public BuyerFixtureNumberCreator(List<Integer[]> numbersCreators) {
+    public BuyerFixtureNumberCreator(List<List<LottoNumber>> numbersCreators) {
         this.numbersCreators = numbersCreators;
         this.current = 0;
     }
 
     @Override
-    public Integer[] create() {
+    public List<LottoNumber> create() {
         if (current < numbersCreators.size()) {
             return numbersCreators.get(current++);
         }

@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.fixture.BuyerFixtureNumberCreator;
+import lotto.model.dto.LottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +20,8 @@ public class BuyerTest {
         Buyer buyer = Buyer.of(LOTTOES_BUY_COUNT_FIXTURE, new BuyerFixtureNumberCreator(LOTTOES_FIXTURE));
 
         List<Lotto> value = buyer.value();
-        List<Integer[]> actual = value.stream()
-                .map(lotto -> lotto.numbers().toArray(Integer[]::new))
+        List<List<LottoNumber>> actual = value.stream()
+                .map(Lotto::numbers)
                 .collect(Collectors.toUnmodifiableList());
 
         assertThat(actual).containsExactlyElementsOf(LOTTOES_FIXTURE);
