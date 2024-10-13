@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static lotto.domain.Lotto.IS_NOT_LOTTO_SIZE;
 import static lotto.domain.LottoRank.FOURTH;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -19,8 +18,7 @@ class LottoTest {
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 9));
         assertThatThrownBy(() -> {
             new Lotto(lottoNumbers);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(IS_NOT_LOTTO_SIZE);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또 번호 정렬")
@@ -45,7 +43,7 @@ class LottoTest {
     @DisplayName("당첨 로또 생성")
     @Test
     void 당첨로또() {
-        String[] winning = {"1","2","6","4","5","3"};
+        String[] winning = {"1", "2", "6", "4", "5", "3"};
         Lotto lotto = new Lotto(winning);
         List<Integer> lottoList = lotto.getLottoNumbers();
         assertThat(lottoList).isEqualTo(List.of(1, 2, 3, 4, 5, 6));

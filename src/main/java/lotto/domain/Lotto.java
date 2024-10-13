@@ -3,9 +3,17 @@ package lotto.domain;
 import java.util.*;
 
 public class Lotto {
-    public static final String IS_NOT_LOTTO_SIZE = "번호가 6개가 아닙니다.";
+    private static final List<Integer> lottoNumbersPool = new ArrayList<>();
+
+    static {
+        for (int i = 1; i <= 45; i++) {
+            lottoNumbersPool.add(i);
+        }
+    }
+
+    private static final String IS_NOT_LOTTO_SIZE = "번호가 6개가 아닙니다.";
     private static final String INPUT_IS_NOT_NUMBER = "입력된 값이 숫자가 아닙니다.";
-    public static final String IS_NOT_LOTTO_NUMBER = "로또번호가 1~45가 아닙니다.";
+    private static final String IS_NOT_LOTTO_NUMBER = "로또번호가 1~45가 아닙니다.";
     private static final int LOTTO_MIN_NUM = 1;
     private static final int LOTTO_MAX_NUM = 45;
     private final List<Integer> lottoNumbers;
@@ -15,9 +23,7 @@ public class Lotto {
     }
 
     public Lotto(String[] inputNumbers) {
-        List<Integer> lotto = splitInput(inputNumbers);
-        validateLottoSetSize(lotto);
-        this.lottoNumbers = makeSortLotto(lotto);
+        this(splitInput(inputNumbers));
     }
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -25,7 +31,7 @@ public class Lotto {
         this.lottoNumbers = makeSortLotto(lottoNumbers);
     }
 
-    public List<Integer> splitInput(String[] inputNumbers) {
+    public static List<Integer> splitInput(String[] inputNumbers) {
         List<Integer> numbers = new ArrayList<>();
         for (String number : inputNumbers) {
             numbers.add(convertStringToInt(number));
@@ -33,7 +39,7 @@ public class Lotto {
         return numbers;
     }
 
-    private int convertStringToInt(String input) {
+    private static int convertStringToInt(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException ex) {
@@ -42,11 +48,7 @@ public class Lotto {
     }
 
     private static List<Integer> makeAutoLotto() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
-        }
-
+        List<Integer> numbers = new ArrayList<>(lottoNumbersPool);
         Collections.shuffle(numbers);
         return numbers.subList(0, 6);
     }

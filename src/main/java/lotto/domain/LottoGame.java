@@ -32,16 +32,12 @@ public class LottoGame {
 
     public LottoResults makeLottoResult(Lotto winningLotto) {
         for (Lotto lotto : lottoList) {
-            setLottoResult(lotto.getLottoResult(winningLotto));
+            lottoResults.addResult(lotto.getLottoResult(winningLotto));
         }
         return lottoResults;
     }
 
-    private void setLottoResult(LottoRank rank) {
-        lottoResults.addResult(rank);
-    }
-
-    public String getEarnRate(){
+    public String getEarnRate() {
         return lottoPrice.calculateEarnRate(lottoResults.getPrizeMoney());
     }
 }
