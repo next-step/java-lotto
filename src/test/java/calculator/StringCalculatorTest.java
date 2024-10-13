@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class StringCalculatorTest {
 
     @Test
+    @DisplayName("사칙 연산을 모두 포함하는 기능 구현")
     void testStringCalculator() {
         assertThat(StringCalculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
     }
@@ -55,5 +56,22 @@ public class StringCalculatorTest {
         assertThatThrownBy(() -> {
             StringCalculator.calculate("2 x 3");
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("사칙 연산을 모두 포함하는 기능 구현 - 반복해서 계산해도 동일한 결과 반환")
+    void testStringCalculatorRepeat() {
+        assertThat(StringCalculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+        assertThat(StringCalculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+        assertThat(StringCalculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("사칙 연산을 모두 포함하는 기능 구현 - 반복해서 계산해도 동일한 결과 반환")
+    void testCalculatorRepeat() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+        assertThat(calculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+        assertThat(calculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
     }
 }

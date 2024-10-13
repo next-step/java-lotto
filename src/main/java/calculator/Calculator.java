@@ -12,13 +12,13 @@ public class Calculator {
     private final Queue<Operator> operators;
     private final Deque<Integer> operand;
 
-    public Calculator(String text) {
+    public Calculator() {
         this.operators = new ArrayDeque<>();
         this.operand = new ArrayDeque<>();
-        parse(text);
     }
 
-    public int calculate() {
+    public int calculate(String text) {
+        parse(text);
         return calculate(this.operand.poll());
     }
 
@@ -54,7 +54,6 @@ public class Calculator {
         if (operators.isEmpty()) {
             return left;
         }
-
         Operator operator = operators.poll();
         Integer right = operand.poll();
         return calculate(operator.operate(left, right));
