@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.Rank;
+import lotto.domain.WinNumber;
 
 class LottoNumbersTest {
 
@@ -43,12 +45,22 @@ class LottoNumbersTest {
     }
 
     @Test
-    void 로또_번호에_주어진_숫자가_있는지_확인해서_개수를_반환한다() {
+    void 로또_번호에_주어진_숫자가_있는지_확인해서_Rank를_반환한다() {
+        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+        WinNumber winNumber = new WinNumber(1, 2, 3, 7, 8, 9);
+
+        Rank matchedRank = lottoNumbers.calculateRank(winNumber);
+
+        assertThat(matchedRank).isEqualTo(Rank.THREE);
+    }
+
+    @Test
+    void 로또_번호에_주어진_숫자가_있는지_확인한다() {
         LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
 
-        int count = lottoNumbers.calculateMatchCount(new LottoNumbers(2, 1, 6, 11, 12, 13));
+        boolean result = lottoNumbers.contains(new LottoNumber(2));
 
-        assertThat(count).isEqualTo(3);
+        assertThat(result).isTrue();
     }
 
     @Test

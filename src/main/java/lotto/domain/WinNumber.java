@@ -26,8 +26,8 @@ public class WinNumber {
         this.winNumbers = winNumbers;
     }
 
-    public int matchCount(LottoNumbers lottoNumbers) {
-        return lottoNumbers.calculateMatchCount(winNumbers);
+    public boolean contains(LottoNumber lottoNumber) {
+        return winNumbers.contains(lottoNumber);
     }
 
     @Override

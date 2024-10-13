@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.WinNumber;
 
@@ -35,5 +36,14 @@ class WinNumberTest {
 
         assertThatThrownBy(() -> new WinNumber(0, 2, 3, 4, 5, 6))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 당첨_번호_숫자에_주어진_숫자가_있는지_확인한다() {
+        WinNumber winNumber = new WinNumber(1, 2, 3, 4, 5, 6);
+
+        boolean result = winNumber.contains(new LottoNumber(2));
+
+        assertThat(result).isTrue();
     }
 }
