@@ -12,6 +12,14 @@ public class LottoMachine {
         this.purchaseAmount = purchaseAmount;
     }
 
+    public Lottos buyManualLottos(String[] manualNumbers){
+        int price = manualNumbers.length * PRICE;
+        if(price > purchaseAmount){
+            throw new IllegalArgumentException("로또를 구매할 돈이 부족합니다");
+        }
+        return null;
+    }
+
     public Lottos buyAutoLottos(LottoNumbersGenerater generator) {
         int lottoCount = purchaseAmount / PRICE;
         return Lottos.create(lottoCount, generator);

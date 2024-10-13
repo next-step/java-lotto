@@ -37,4 +37,18 @@ public class LottoMachineTest {
                 .withMessage("로또 구매를 위해서 최소 1000원 이상의 금액이 필요합니다");
     }
 
+    @DisplayName("구입금액이 수동 로또 가격보다 커야 한다")
+    @Test
+    void limitPriceByManualLottos(){
+        int purchaseAmount = 1500;
+        LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
+
+        String[] manualNumbers = new String[]{
+                "1, 2, 3, 4, 5, 6",
+                "7, 8, 9, 10, 11, 12"
+        };
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoMachine.buyManualLottos(manualNumbers))
+                .withMessage("로또를 구매할 돈이 부족합니다");
+    }
 }
