@@ -1,11 +1,14 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
-import lotto.dto.LottoMatchInfoDTO;
-import lotto.dto.LottoMatchInfosDTO;
+import lotto.domain.LottoReward;
+import lotto.dto.LottoRewardInfoDTO;
+import lotto.dto.LottoRewardInfosDTO;
 import lotto.dto.LottoStatisticsDTO;
 import lotto.dto.PurchasedLottosDTO;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ResultView {
@@ -48,11 +51,20 @@ public class ResultView {
         System.out.println(DASH_LINE);
     }
 
-    private static void printMatchInfos(LottoMatchInfosDTO matchInfosDTO) {
-        List<LottoMatchInfoDTO> matchInfoDTOs = matchInfosDTO.getMatchInfoDTOs();
-        for (LottoMatchInfoDTO matchInfoDTO : matchInfoDTOs) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", matchInfoDTO.getMatchCount(), matchInfoDTO.getReward(), matchInfoDTO.getId());
+    private static void printMatchInfos(LottoRewardInfosDTO rewardInfos) {
+        List<LottoRewardInfoDTO> rewardInfoDTOs = rewardInfos.getRewardInfoDTOs();
+        rewardInfoDTOs.sort(Comparator.comparing((LottoRewardInfoDTO dto) -> dto.getReward().ordinal()).reversed());
+        List<LottoRewardInfoDTO> filteredRewardInfoDTOs = filteredRewardInfoDTOs(rewardInfoDTOs);
+        for (LottoRewardInfoDTO rewardInfoDTO : filteredRewardInfoDTOs) {
+            LottoReward reward = rewardInfoDTO.getReward();
+            System.out.printf("%s- %d개\n", reward.getDescription(), rewardInfoDTO.getCount());
         }
+    }
+
+    private static List<LottoRewardInfoDTO> filteredRewardInfoDTOs(List<LottoRewardInfoDTO> rewardInfoDTOs) {
+        List<LottoRewardInfoDTO> filteredRewardInfoDTOs = new ArrayList<>(rewardInfoDTOs);
+        filteredRewardInfoDTOs.removeIf(dto -> dto.getReward().getReward() == 0);
+        return filteredRewardInfoDTOs;
     }
 
     private static void printPercentageRateOfReturn(double percentageRateOfReturn) {
