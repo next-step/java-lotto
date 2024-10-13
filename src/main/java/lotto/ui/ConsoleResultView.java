@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ConsoleResultView implements ResultView{
     public static final String LOTTO_RESULT_MESSAGE = "\n당첨 통계\n---------";
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String LOTTO_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LOTTO_RANK_MESSAGE = "%d개 일치%s (%d원)- %d개\n";
     private static final String LOTTO_RANK_BONUS_MESSGAE = ", 보너스 볼 일치";
     private static final String LOTTO_PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
@@ -21,8 +21,8 @@ public class ConsoleResultView implements ResultView{
     private static final String LOTTO_PROFIT_STATUS_LOSE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
 
-    public void showLottoCount(int count){
-        System.out.printf(LOTTO_COUNT_MESSAGE, count);
+    public void showLottoCount(int manualCount, int autoCount){
+        System.out.printf(LOTTO_COUNT_MESSAGE, manualCount, autoCount);
     }
 
     public void showLottos(Lottos lottos){
