@@ -43,6 +43,9 @@ public class PrizeMoneyCalculator {
     }
 
     private RankDto search(PrizeMoney prizeMoney) {
+
+
+
         return rankDtos.stream().filter(i -> i.same(prizeMoney.getCount())).findFirst().get();
     }
 

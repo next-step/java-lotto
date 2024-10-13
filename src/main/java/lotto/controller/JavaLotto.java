@@ -17,8 +17,7 @@ public class JavaLotto {
 
     private static final PrizeMoneyCalculator prizeMoneyCalculator = new PrizeMoneyCalculator();
     private static final InputView inputView = new InputView();
-
-
+    private static final WinningText winningText = new WinningText();
     private JavaLotto() {
 
     }
@@ -32,7 +31,7 @@ public class JavaLotto {
         ResultView.printCreateLotto(toDto(lottos));
 
         String text = inputView.requestWinnerNumber();
-        List<Integer> winningNumbers = WinningNumbers.numbers(text);
+        List<Integer> winningNumbers = winningText.numbers(text);
         List<PrizeMoney> prizeMonies = LottoWinningScanner.winnerResult(lottos, winningNumbers);
         ResultDto result = prizeMoneyCalculator.result(prizeMonies, buyMoney);
 

@@ -3,13 +3,22 @@ package lotto.entity;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumbers {
-
+public class LottoNumbers extends Numbers {
     private final List<Integer> numbers;
 
     public LottoNumbers(List<Integer> numbers) {
+        validate(numbers);
         this.numbers = numbers;
     }
+
+    private void validate(List<Integer> numbers) {
+        for (Integer number : numbers) {
+            super.validateRange(number);
+        }
+        super.validateDuplication(numbers);
+        super.validateSize(numbers);
+    }
+
 
     public List<Integer> getNumbers() {
         return numbers;
