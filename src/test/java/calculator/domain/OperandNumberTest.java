@@ -51,6 +51,6 @@ class OperandNumberTest {
     @DisplayName("객체를 Integer 타입으로 변환한다.")
     @Test
     void toInteger() {
-        assertThat(new OperandNumber("-3").toInteger()).isEqualTo(-3);
+        assertThat(new OperandNumber("-3").getValue()).isEqualTo(-3);
     }
 }

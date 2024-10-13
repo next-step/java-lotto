@@ -27,7 +27,7 @@ public class OperandNumber {
         return new OperandNumber(this.operand / second.operand);
     }
 
-    public Integer toInteger() {
+    public Integer getValue() {
         return this.operand;
     }
 
