@@ -25,7 +25,7 @@ public enum Ranking {
                 .orElseGet(() -> Ranking.NONE);
     }
 
-    public long calculate(Integer winningCount) {
+    public long totalWinningAmount(Integer winningCount) {
         return winningAmount * winningCount;
     }
 

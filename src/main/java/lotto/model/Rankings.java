@@ -5,7 +5,6 @@ import lotto.model.enums.Ranking;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Rankings {
@@ -21,9 +20,11 @@ public class Rankings {
     public double statistics(int buyCount) {
         double buyAmount = Integer.valueOf(buyCount * LOTTO_PRICE)
                 .doubleValue();
-        double winningAmount = Long.valueOf(rankings.entrySet().stream()
-                        .mapToLong(value -> value.getKey().calculate(value.getValue())).sum())
-                .doubleValue();
+        double winningAmount = Long.valueOf(rankings.entrySet()
+                        .stream()
+                        .mapToLong(value -> value.getKey().totalWinningAmount(value.getValue()))
+                        .sum()
+                ).doubleValue();
         return winningAmount / buyAmount;
     }
 
