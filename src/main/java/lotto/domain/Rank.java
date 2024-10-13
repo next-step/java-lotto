@@ -8,7 +8,9 @@ public enum Rank {
     THREE("3개 일치 (5000원)- ", 5_000, 3),
     FOUR("4개 일치 (50000원)- ", 50_000, 4),
     FIVE("5개 일치 (1500000원)- ", 1_500_000, 5),
-    WIN("6개 일치 (2000000000원)- ", 2_000_000_000, 6);
+    SECOND("5개 일치, 보너스 볼 일치(30000000원) - ", 30_000_000, 5),
+    WIN("6개 일치 (2000000000원)- ", 2_000_000_000, 6),
+    ;
 
     private final String message;
     private final int prize;
@@ -20,11 +22,11 @@ public enum Rank {
         this.matchNumber = matchNumber;
     }
 
-    public static long calculatePrize(List<Lotto> lottos, WinNumber winNumber) {
+    public static long calculatePrize(List<Lotto> lottos, WinNumber winNumber, LottoNumber lottoNumber) {
         long totalPrize = 0;
 
         for (Lotto lotto : lottos) {
-            Rank matched = lotto.match(winNumber);
+            Rank matched = lotto.match(winNumber, lottoNumber);
             totalPrize += matched.prize;
         }
 

@@ -29,10 +29,11 @@ public class Main {
         LottoNumber bonusNumber = InputView.inputBonusNumber();
 
         OutputView.staticsView();
-        OutputView.matchView(Rank.THREE, lottoStatics.findRank(winNumber, Rank.THREE));
-        OutputView.matchView(Rank.FOUR, lottoStatics.findRank(winNumber, Rank.FOUR));
-        OutputView.matchView(Rank.FIVE, lottoStatics.findRank(winNumber, Rank.FIVE));
-        OutputView.matchView(Rank.WIN, lottoStatics.findRank(winNumber, Rank.WIN));
-        OutputView.ratioView(Rank.ratio(lottoStatics.totalPrize(winNumber), money));
+        OutputView.matchView(Rank.THREE, lottoStatics.findRank(winNumber, Rank.THREE, bonusNumber));
+        OutputView.matchView(Rank.FOUR, lottoStatics.findRank(winNumber, Rank.FOUR, bonusNumber));
+        OutputView.matchView(Rank.FIVE, lottoStatics.findRank(winNumber, Rank.FIVE, bonusNumber));
+        OutputView.matchView(Rank.SECOND, lottoStatics.findRank(winNumber, Rank.SECOND, bonusNumber));
+        OutputView.matchView(Rank.WIN, lottoStatics.findRank(winNumber, Rank.WIN, bonusNumber));
+        OutputView.ratioView(Rank.ratio(lottoStatics.totalPrize(winNumber, bonusNumber), money));
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatics;
 import lotto.domain.Rank;
@@ -41,11 +42,12 @@ class LottoStaticsTest {
         );
         LottoStatics lottoStatics = new LottoStatics(lottos);
         WinNumber winnerNumber = new WinNumber(1, 2, 3, 4, 5, 6);
+        LottoNumber bonus = new LottoNumber(10);
 
-        int resultThree = lottoStatics.findRank(winnerNumber, Rank.THREE);
-        int resultFour = lottoStatics.findRank(winnerNumber, Rank.FOUR);
-        int resultFive = lottoStatics.findRank(winnerNumber, Rank.FIVE);
-        int resultSix = lottoStatics.findRank(winnerNumber, Rank.WIN);
+        int resultThree = lottoStatics.findRank(winnerNumber, Rank.THREE, bonus);
+        int resultFour = lottoStatics.findRank(winnerNumber, Rank.FOUR, bonus);
+        int resultFive = lottoStatics.findRank(winnerNumber, Rank.FIVE, bonus);
+        int resultSix = lottoStatics.findRank(winnerNumber, Rank.WIN, bonus);
 
         assertThat(resultThree).isEqualTo(1);
         assertThat(resultFour).isEqualTo(1);
@@ -55,7 +57,6 @@ class LottoStaticsTest {
 
     @Test
     void 총상금을_계산한다() {
-        int money = 14000;
         List<Lotto> lottos = List.of(
             new Lotto(new LottoNumbers(8, 21, 23, 41, 42, 43)),
             new Lotto(new LottoNumbers(3, 5, 11, 16, 32, 38)),
@@ -74,8 +75,9 @@ class LottoStaticsTest {
         );
         LottoStatics lottoStatics = new LottoStatics(lottos);
         WinNumber winnerNumber = new WinNumber(1, 2, 3, 4, 5, 6);
+        LottoNumber bonus = new LottoNumber(10);
 
-        long totalPrize = lottoStatics.totalPrize(winnerNumber);
+        long totalPrize = lottoStatics.totalPrize(winnerNumber, bonus);
 
         assertThat(totalPrize).isEqualTo(5000);
     }
