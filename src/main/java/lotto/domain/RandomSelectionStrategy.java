@@ -22,6 +22,6 @@ public class RandomSelectionStrategy implements LottoNumberSelectionStrategy {
     @Override
     public LottoNumbers select() {
         Collections.shuffle(LOTTO_NUMBER_CONTAINERS);
-        return LottoNumbers.valueOf(LOTTO_NUMBER_CONTAINERS.subList(0, Lotto.LOTTO_NUMBERS_CARDINALITY));
+        return LottoNumbers.valueOf(LOTTO_NUMBER_CONTAINERS.subList(0, LottoNumbers.LOTTO_NUMBERS_CARDINALITY));
     }
 }

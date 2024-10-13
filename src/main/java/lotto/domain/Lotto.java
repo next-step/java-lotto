@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    public static final int LOTTO_NUMBERS_CARDINALITY = 6;
     public static final int LOTTO_PRICE = 1000;
 
     private final int id;

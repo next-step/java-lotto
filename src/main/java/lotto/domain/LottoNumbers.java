@@ -2,13 +2,15 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-
-import static lotto.domain.LottoNumbersValidation.*;
+import java.util.Set;
 
 public class LottoNumbers {
-    private static final List<LottoNumbersValidation> LOTTO_NUMBERS_VALIDATION_LIST = List.of(LOTTO_NUMBERS_COUNT_INVALID, LOTTO_NUMBERS_IS_OUT_OF_RANGE, LOTTO_NUMBERS_HAS_DUPLICATED_NUMBER);
+    public static final int LOTTO_NUMBERS_CARDINALITY = 6;
+    private static final String LOTTO_NUMBERS_COUNT_INVALID_MESSAGE = "로또 숫자 갯수가 다릅니다.";
+    private static final String LOTTO_NUMBERS_HAS_DUPLICATED_NUMBER_MESSAGE = "중복된 숫자가 존재합니다.";
     private final List<LottoNumber> value;
 
     private LottoNumbers(List<LottoNumber> numbers) {
@@ -16,9 +18,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers valueOf(List<Integer> numbers) {
-        for (LottoNumbersValidation validation : LOTTO_NUMBERS_VALIDATION_LIST) {
-            validation.check(numbers);
-        }
+        checkLottoNumbersValid(numbers);
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
@@ -27,6 +27,24 @@ public class LottoNumbers {
 
         List<LottoNumber> sortedNumbers = sortNumbers(lottoNumbers);
         return new LottoNumbers(sortedNumbers);
+    }
+
+    private static void checkLottoNumbersValid(List<Integer> lottoNumbers) {
+        checkLottoNumbersCountValid(lottoNumbers);
+        checkLottoNumbersNotDuplicated(lottoNumbers);
+    }
+
+    private static void checkLottoNumbersCountValid(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() == LOTTO_NUMBERS_CARDINALITY) {
+            throw new IllegalArgumentException(LOTTO_NUMBERS_COUNT_INVALID_MESSAGE);
+        }
+    }
+
+    private static void checkLottoNumbersNotDuplicated(List<Integer> lottoNumbers) {
+        Set<Integer> lottoNumbersSet = new HashSet<>(lottoNumbers);
+        if (lottoNumbersSet.size() == lottoNumbers.size()) {
+            throw new IllegalArgumentException(LOTTO_NUMBERS_HAS_DUPLICATED_NUMBER_MESSAGE);
+        }
     }
 
     private static List<LottoNumber> sortNumbers(List<LottoNumber> numbers) {
