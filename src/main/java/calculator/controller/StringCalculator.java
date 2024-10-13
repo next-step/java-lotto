@@ -3,8 +3,8 @@ package calculator.controller;
 
 import calculator.entity.CalculateExpression;
 import calculator.entity.Expressions;
-import java.util.function.UnaryOperator;
 
+import java.util.function.UnaryOperator;
 
 public class StringCalculator {
     private static final String DEFAULT_SPLIT_DELIMITER = " ";

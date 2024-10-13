@@ -1,8 +1,6 @@
 package calculator.entity;
 
-
 import java.util.function.IntBinaryOperator;
-
 
 public enum CalculateExpression {
     ADD("+", (prevNumber, number) -> prevNumber + number),
