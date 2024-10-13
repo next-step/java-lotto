@@ -22,27 +22,27 @@ public class Calculator {
         return calculate(this.operand.poll());
     }
 
-
     private void parse(String text) {
-
         if (isEmpty(text)) {
             throw new IllegalArgumentException();
         }
-
         String[] candidates = text.split(" ");
+        this.operand.addAll(getOperands(candidates));
+        this.operators.addAll(getOperators(candidates));
+    }
 
-        List<Integer> operands = IntStream.range(0, candidates.length)
+    private static List<Integer> getOperands(String[] candidates) {
+        return IntStream.range(0, candidates.length)
                 .filter(i -> i % 2 == 0)
                 .mapToObj(i -> Integer.parseInt(candidates[i]))
                 .collect(Collectors.toList());
+    }
 
-        List<Operator> operators = IntStream.range(0, candidates.length)
+    private static List<Operator> getOperators(String[] candidates) {
+        return IntStream.range(0, candidates.length)
                 .filter(i -> i % 2 != 0)
                 .mapToObj(i -> Operators.getOperator(candidates[i]))
                 .collect(Collectors.toList());
-
-        this.operand.addAll(operands);
-        this.operators.addAll(operators);
     }
 
     private static boolean isEmpty(String s) {
