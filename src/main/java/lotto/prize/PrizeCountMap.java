@@ -1,18 +1,18 @@
 package lotto.prize;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import static lotto.game.LottoMachine.LOTTO_PRICE;
 
 public class PrizeCountMap {
     private static final int ZERO = 0;
 
-    private final Map<LottoPrize, Integer> prizeCountMap;
+    private final EnumMap<LottoPrize, Integer> prizeCountMap;
 
     public PrizeCountMap() {
-        prizeCountMap = new TreeMap<>();
+        prizeCountMap = new EnumMap<>(LottoPrize.class);
         initPrizeCountMap();
     }
 

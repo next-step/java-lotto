@@ -15,12 +15,11 @@
   - [ ] 수동 로또 번호 입력
   - [ ] 모든 원시값과 문자열을 포장한다
   - [ ] 예외 처리를 통해 에러가 발생하지 않도록 한다
-    - 잘못된 값을 입력하면 java exception 처리
-    - Optional로 NullPointerException이 발생하지 않도록 처리  
-- [ ] 3단계 피드백
-  - [  ] PrizeCountMap에서 Map을 EnumMap으로 변경 
+    - [ ] 잘못된 값을 입력하면 java exception 처리
+    - [ ] Optional로 NullPointerException이 발생하지 않도록 처리  
 # STEP4 DONE
-
+- [x] 3단계 피드백
+  - [x] PrizeCountMap에서 Map을 EnumMap으로 변경
 ---
 # STEP3 TODO
 # STEP3 DONE
