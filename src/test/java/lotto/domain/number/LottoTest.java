@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -87,5 +88,15 @@ public class LottoTest {
 
         assertThat(lotto.has(new LottoNumber(1))).isTrue();
         assertThat(lotto.has(new LottoNumber(8))).isFalse();
+    }
+
+    @Test
+    void 불변컬렉션_확인() {
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+
+        assertThatThrownBy(() -> lotto.lottoNumbers().add(new LottoNumber(10)))
+                .isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> lotto.lottoNumbers().remove(new LottoNumber(2)))
+                .isInstanceOf(UnsupportedOperationException.class);
     }
 }

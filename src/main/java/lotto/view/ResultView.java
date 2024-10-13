@@ -1,9 +1,12 @@
 package lotto.view;
 
+import lotto.domain.number.LottoNumber;
 import lotto.domain.prize.LottoPrize;
 import lotto.domain.prize.WinningPrize;
 import lotto.domain.sales.LottoBill;
 import lotto.domain.sales.LottoBundle;
+
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -12,7 +15,10 @@ public class ResultView {
 
     public void show(LottoBundle lottoBundle) {
         for (int i = 0; i < lottoBundle.count(); i++) {
-            System.out.println(lottoBundle.lotto(i));
+            System.out.println(lottoBundle.lotto(i).lottoNumbers().stream()
+                    .sorted()
+                    .map(LottoNumber::toString)
+                    .collect(Collectors.joining(", ", "[", "]")));
         }
     }
 

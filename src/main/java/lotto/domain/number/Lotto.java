@@ -54,9 +54,13 @@ public class Lotto {
         return lotto.contains(compared);
     }
 
+    public Collection<LottoNumber> lottoNumbers() {
+        return lotto;
+    }
+
     @Override
     public String toString() {
-        return lotto.stream().sorted().collect(Collectors.toList()).toString();
+        return lotto.toString();
     }
 
     @Override
