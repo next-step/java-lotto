@@ -8,8 +8,6 @@ import lotto.view.ResultView;
 
 import java.util.List;
 
-import static lotto.constants.LottoConstants.LOTTO_PRICE;
-
 public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
@@ -23,14 +21,14 @@ public class LottoController {
         int lottoPrice = inputView.getLottoPrice();
         LottoGame game = LottoGame.getInstance();
 
-        List<Lotto> lottos = game.getLottos(game.getLottoCount(lottoPrice));
+        List<Lotto> lottos = game.buy(lottoPrice);
 
         resultView.priceLottoStatus(lottos);
         String lastWinningNumber = inputView.getLastWinningNumber();
         List<Integer> winnerLottoNumbers = inputView.getWinnerLottoNumbers(lastWinningNumber);
         Lotto winnerLotto = game.getWinnerLotto(winnerLottoNumbers);
 
-        LottoResult result = LottoResult.getLottoResult(lottos, winnerLotto, LOTTO_PRICE);
+        LottoResult result = LottoResult.getLottoResult(lottos, winnerLotto, LottoGame.LOTTO_PRICE);
 
         resultView.printLottoResult(result);
     }

@@ -8,14 +8,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static lotto.constants.LottoConstants.*;
-
 public class LottoGame {
+    public static final int LOTTO_PRICE = 1000;
     private static final List<Integer> lottoNumbers = new ArrayList<>();
 
 
     private LottoGame() {
-        IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
+        IntStream.rangeClosed(Lotto.LOTTO_START_NUMBER, Lotto.LOTTO_END_NUMBER)
                 .forEach(lottoNumbers::add);
     }
 
@@ -28,19 +27,14 @@ public class LottoGame {
         return INSTANCE;
     }
 
-
-    public int getLottoCount(int priceTotal) {
+    public List<Lotto> buy(int priceTotal) {
         if (priceTotal < LOTTO_PRICE) {
             throw new IllegalStateException("금액이 부족합니다.");
         }
-        return priceTotal / LOTTO_PRICE;
-    }
-
-    public List<Lotto> getLottos(int lottoCount) {
         List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < priceTotal / LOTTO_PRICE; i++) {
             result.add(AutoLotto.getInstance()
-                    .getLotto(lottoNumbers, LOTTO_NUMBER_COUNT));
+                    .getLotto(lottoNumbers, Lotto.LOTTO_NUMBER_COUNT));
         }
         return Collections.unmodifiableList(result);
     }

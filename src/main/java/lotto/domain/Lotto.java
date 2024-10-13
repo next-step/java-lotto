@@ -4,10 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static lotto.constants.LottoConstants.*;
-
 public class Lotto implements Comparable<Lotto> {
-    List<Integer> lottoNumbers;
+    public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int LOTTO_START_NUMBER = 1;
+    public static final int LOTTO_END_NUMBER = 45;
+    private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validateLottoNumber(lottoNumbers);
@@ -18,7 +19,7 @@ public class Lotto implements Comparable<Lotto> {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
-        if (isOutOfBoundLotto(lottoNumbers)){
+        if (isOutOfBoundLotto(lottoNumbers)) {
             throw new IllegalArgumentException("로또 번호의 범위는 1 ~ 45 여야 합니다.");
         }
     }
