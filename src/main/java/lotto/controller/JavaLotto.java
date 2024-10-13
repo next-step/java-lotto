@@ -9,17 +9,15 @@ import java.util.List;
 
 public class JavaLotto {
 
-    private final LottoMachine lottoMachine;
-    private final PrizeMoneyCalculator prizeMoneyCalculator;
-    private final InputView inputView;
+    private static final LottoMachine lottoMachine = new LottoMachine();
+    private static final PrizeMoneyCalculator prizeMoneyCalculator = new PrizeMoneyCalculator();
+    private static final InputView inputView = new InputView();
 
-    public JavaLotto() {
-        lottoMachine = new LottoMachine();
-        prizeMoneyCalculator = new PrizeMoneyCalculator();
-        inputView = new InputView();
+    private JavaLotto() {
+
     }
 
-    public void run() {
+    public static void run() {
         int buyMoney = inputView.requestBuyMoney();
         List<Lotto> lottos = lottoMachine.insert(buyMoney);
 
