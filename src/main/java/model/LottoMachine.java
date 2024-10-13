@@ -12,19 +12,33 @@ public class LottoMachine {
     private List<Integer> winningNumbers;
     private int totalPrice;
     private List<List<Integer>> lottoNumbers;
+    private Integer bonusNumber;
 
     public LottoMachine(
             List<Integer> winningNumbers,
             int totalPrice,
             List<List<Integer>> lottoNumbers
     ) {
+        this(winningNumbers, totalPrice, lottoNumbers, null);
+    }
+
+    public LottoMachine(
+            List<Integer> winningNumbers,
+            int totalPrice,
+            List<List<Integer>> lottoNumbers,
+            Integer bonusNumber
+    ) {
         checkWinningNumbers(winningNumbers);
         this.winningNumbers = winningNumbers;
         this.totalPrice = totalPrice;
         this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = bonusNumber;
+        setLottos();
+    }
+
+    private void setLottos() {
         this.lottos = this.lottoNumbers.stream()
-                .map(Lotto::new)
-                .peek(it -> it.calPrize(this.winningNumbers))
+                .map(it -> new Lotto(it, this.winningNumbers))
                 .collect(Collectors.toList());
     }
 

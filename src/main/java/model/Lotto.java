@@ -10,8 +10,12 @@ public class Lotto {
     private Prize prize;
 
     public Lotto(List<Integer> numbers) {
+        this(numbers, null);
+    }
+
+    public Lotto(List<Integer> numbers, List<Integer> winningNumbers) {
         this.numbers = numbers;
-        this.prize = null;
+        calPrize(winningNumbers);
     }
 
     public List<Integer> getNumbers() {
@@ -23,6 +27,9 @@ public class Lotto {
     }
 
     public void calPrize(List<Integer> winningNumbers) {
+        if (winningNumbers == null || winningNumbers.isEmpty()) {
+            return;
+        }
         int cnt = (int) winningNumbers.stream()
                 .filter(it -> this.numbers.contains(it))
                 .count();
