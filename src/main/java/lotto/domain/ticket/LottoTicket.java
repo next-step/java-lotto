@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class LottoTicket {
 
     public static final int SIZE_OF_LOTTO = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
