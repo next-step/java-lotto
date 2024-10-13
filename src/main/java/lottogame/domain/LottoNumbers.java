@@ -1,9 +1,6 @@
-package step2.domain;
+package lottogame.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoNumbers {
     private List<LottoNumber> lottoNumbers;
@@ -29,4 +26,17 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lottoNumbers);
+    }
 }
+

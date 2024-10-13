@@ -1,4 +1,4 @@
-package step2.domain;
+package lottogame.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,8 +25,15 @@ class LottoNumbersTest {
 
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
-        List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertEquals(expected, lottoNumbers.getLottoNumbers());
+        LottoNumbers expected = new LottoNumbers(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
+        assertEquals(expected, lottoNumbers);
     }
 
     @DisplayName("중복된 로또 번호가 있을 경우 예외가 발생한다.")

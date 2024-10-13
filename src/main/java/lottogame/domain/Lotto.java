@@ -1,4 +1,4 @@
-package step2.domain;
+package lottogame.domain;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ public class Lotto {
     public Lotto(LottoStrategy strategy) {
         this.numbers = strategy.generateLottoNumbers();
     }
-
 
     public int countMatchingNumbers(Lotto other) {
         return (int) this.getNumbers().stream()
@@ -22,3 +21,4 @@ public class Lotto {
 
 
 }
+

@@ -1,4 +1,4 @@
-package step2.domain;
+package lottogame.domain;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void validate(int number) {
-        if (number <= 0 || number > 45) {
+        if (number < LottoGameConstants.MIN_LOTTO_NUMBER || number > LottoGameConstants.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("유효한 로또 번호가 아닙니다.");
         }
     }
@@ -38,3 +38,4 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Objects.hashCode(number);
     }
 }
+

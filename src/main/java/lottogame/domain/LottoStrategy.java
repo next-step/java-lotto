@@ -1,7 +1,8 @@
-package step2.domain;
+package lottogame.domain;
 
 public interface LottoStrategy {
 
     LottoNumbers generateLottoNumbers();
 
 }
+

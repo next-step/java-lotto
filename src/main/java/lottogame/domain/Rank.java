@@ -1,4 +1,4 @@
-package step2.domain;
+package lottogame.domain;
 
 import java.util.Arrays;
 
@@ -16,9 +16,9 @@ public enum Rank {
     public static final int NONE_PLACE = 0;
 
     private final int rank;
-    private final int amount;
+    private final double amount;
 
-    Rank(int rank, int amount) {
+    Rank(int rank, double amount) {
         this.rank = rank;
         this.amount = amount;
     }
@@ -30,4 +30,7 @@ public enum Rank {
                 .orElse(Rank.NONE);
     }
 
+    public double getAmount() {
+        return amount;
+    }
 }

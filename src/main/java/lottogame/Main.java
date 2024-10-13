@@ -1,6 +1,6 @@
-package step2;
+package lottogame;
 
-import step2.controller.LottoController;
+import lottogame.controller.LottoController;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,3 +8,4 @@ public class Main {
         controller.run();
     }
 }
+
