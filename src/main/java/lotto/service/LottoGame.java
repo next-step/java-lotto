@@ -39,8 +39,4 @@ public class LottoGame {
         return Collections.unmodifiableList(result);
     }
 
-    public Lotto getWinnerLotto(List<Integer> lastWinnerLotto) {
-        return new Lotto(lastWinnerLotto);
-    }
-
 }

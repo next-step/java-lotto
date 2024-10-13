@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -31,11 +33,16 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public List<Integer> getWinnerLottoNumbers(String lottoNumbers){
+    public Lotto getWinnerLottoNumbers(String lottoNumbers) {
         List<String> lotto = parseWinnerLotto(lottoNumbers);
-        return lotto.stream()
+        List<Integer> lastWinnerLotto = lotto.stream()
                 .map(this::parseNumber)
                 .collect(Collectors.toList());
+        return getWinnerLotto(lastWinnerLotto);
+    }
+
+    public Lotto getWinnerLotto(List<Integer> lastWinnerLotto) {
+        return new Lotto(lastWinnerLotto);
     }
 
     private int parseNumber(String lottoNumber) {
