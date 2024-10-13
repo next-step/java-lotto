@@ -8,6 +8,7 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
+<<<<<<< HEAD
 # 사칙연산 기능 요구사항
 - 사칙연산 수행하는 계산기 구현
   - 덧셈
@@ -57,3 +58,26 @@
 - else 예약어를 쓰지 않는다.
   - 힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
   - else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
+=======
+# 기능 요구사항
+- 사칙연산 수행하는 계산기 구현
+    - 덧셈
+    - 뺄셈
+    - 곱셈
+    - 나눗셈
+- 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+- 사칙 연산 기호가 아닌 경우 IllegalArgumentException throw
+
+### 피드백 사항
+- [x] 프로세스가 시작하는 클래스를 따로 만들기
+- [x] DELIMITER를 상수로 빼기
+- [x] tokenCount 사용하지 않고 operator / operand 나누기
+- [x] 사용 가능한 기호를 Enum으로 Convert / 추상화하기
+
+# 프로그래밍 요구사항
+- indent(들여쓰기) depth를 2단계에서 1단계로 줄여라.
+- depth의 경우 if문을 사용하는 경우 1단계의 depth가 증가한다. if문 안에 while문을 사용한다면 depth가 2단계가 된다.
+- 메소드의 크기가 최대 10라인을 넘지 않도록 구현한다.
+- method가 한 가지 일만 하도록 최대한 작게 만들어라.
+- else를 사용하지 마라.
+>>>>>>> step1
