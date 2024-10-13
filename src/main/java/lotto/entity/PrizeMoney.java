@@ -18,8 +18,20 @@ public enum PrizeMoney {
         this.prizeMoney = prizeMoney;
     }
 
-    public boolean isMatch(int count) {
-        return this.count == count;
+    public static PrizeMoney findByCount(int count) {
+        if (count == PrizeMoney.THREE.count) {
+            return PrizeMoney.THREE;
+        }
+        if (count == PrizeMoney.FOUR.count) {
+            return PrizeMoney.FOUR;
+        }
+        if (count == PrizeMoney.FIVE.count) {
+            return PrizeMoney.FIVE;
+        }
+        if (count == PrizeMoney.SIX.count) {
+            return PrizeMoney.SIX;
+        }
+        return PrizeMoney.LOSE;
     }
 
     public BigDecimal sum(BigDecimal winner) {

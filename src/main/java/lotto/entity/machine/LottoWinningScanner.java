@@ -2,14 +2,13 @@ package lotto.entity.machine;
 
 import lotto.entity.Lotto;
 import lotto.entity.PrizeMoney;
-import lotto.entity.PrizeMonies;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoWinningScanner {
-    private static final PrizeMonies prizeMonies = new PrizeMonies();
+
 
     private LottoWinningScanner() {
 
@@ -19,7 +18,7 @@ public class LottoWinningScanner {
         List<PrizeMoney> result = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
-            PrizeMoney prizeMoney = prizeMonies.result(lotto.matchCount(winnersNumber));
+            PrizeMoney prizeMoney = PrizeMoney.findByCount(lotto.matchCount(winnersNumber));
             result.add(prizeMoney);
         }
 
