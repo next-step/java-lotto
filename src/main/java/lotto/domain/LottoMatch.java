@@ -1,12 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoMatch {
 
-    DEFAULT(0, 0),
-
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
+    LOSE(0, 0),
 
     THREE(3, 5000),
     FOUR(4, 50000),
@@ -31,11 +29,9 @@ public enum LottoMatch {
     }
 
     public static LottoMatch findEnumByMatchCount(int matchCount) {
-        for (LottoMatch value : values()) {
-            if (value.matchCount == matchCount) {
-                return value;
-            }
-        }
-        return DEFAULT;
+        return Arrays.stream(values())
+                .filter(value -> value.matchCount == matchCount)
+                .findFirst()
+                .orElse(LOSE);
     }
 }
