@@ -1,7 +1,9 @@
 package lotto.io;
 
+import lotto.domain.number.LottoNumber;
 import lotto.domain.result.LottoStatistics;
 import lotto.domain.result.Rank;
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 
 import java.util.Map;
@@ -23,7 +25,26 @@ public class ConsoleOutputHandler implements OutputHandler {
 
     @Override
     public void showLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets);
+        System.out.println(generateLottoTicketsText(lottoTickets));
+    }
+
+    private String generateLottoTicketsText(LottoTickets lottoTickets) {
+        StringBuilder sb = new StringBuilder();
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            sb.append(generateLottoNumbersText(lottoTicket)).append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
+    private String generateLottoNumbersText(LottoTicket lottoTicket) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {
+            builder.append(lottoNumber.toString()).append(", ");
+        }
+        builder.delete(builder.length() - 2, builder.length());
+        builder.append("]");
+        return builder.toString();
     }
 
     @Override
@@ -53,9 +74,13 @@ public class ConsoleOutputHandler implements OutputHandler {
 
     private void printExceptRankNone(Rank rank, Integer count) {
         if (rank != Rank.NONE) {
-            String row = rank.getResultForRow(count);
+            String row = getResultForRow(rank, count);
             System.out.println(row);
         }
+    }
+
+    private String getResultForRow(Rank rank, int matchedLottoCount) {
+        return String.format("%s개 일치 (%s원)- %s개", rank.getMatchCount(), rank.getPrizeAmount(), matchedLottoCount);
     }
 
     private void printAssessmentText(String assessmentText) {

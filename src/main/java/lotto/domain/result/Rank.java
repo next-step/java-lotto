@@ -25,10 +25,6 @@ public enum Rank {
         return getRank(matchCount);
     }
 
-    public long getPrize() {
-        return money.getAmount();
-    }
-
     public static Rank getRank(long matchCount) {
         return Arrays.stream(values())
                 .filter(r -> r.matchCount == matchCount)
@@ -36,7 +32,12 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    public String getResultForRow(int matchedLottoCount) {
-        return String.format("%s개 일치 (%s원)- %s개", matchCount, money.getAmount(), matchedLottoCount);
+    public long getPrizeAmount() {
+        return money.getAmount();
     }
+
+    public long getMatchCount() {
+        return matchCount;
+    }
+
 }

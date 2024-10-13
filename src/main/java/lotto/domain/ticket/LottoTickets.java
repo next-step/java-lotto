@@ -22,6 +22,10 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
+
     public Map<Rank, Integer> countRanks(WinningLotto winningLotto) {
         Map<Rank, Integer> rankCounts = initializeRankCounts();
 
@@ -40,15 +44,5 @@ public class LottoTickets {
         }
         return countRanks;
     }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            sb.append(lottoTicket).append("\n");
-        }
-        return sb.toString();
-    }
-
 
 }

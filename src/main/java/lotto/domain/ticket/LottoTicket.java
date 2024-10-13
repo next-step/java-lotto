@@ -77,4 +77,8 @@ public class LottoTicket {
                 .count();
         return Rank.of(matchCount);
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }

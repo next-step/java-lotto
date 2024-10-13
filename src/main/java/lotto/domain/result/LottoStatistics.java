@@ -26,7 +26,7 @@ public class LottoStatistics {
     private long sumAllPrize() {
         long sumOfPrizes = 0;
         for (Rank rank : results.keySet()) {
-            sumOfPrizes += rank.getPrize() * results.get(rank);
+            sumOfPrizes += rank.getPrizeAmount() * results.get(rank);
         }
         return sumOfPrizes;
     }
