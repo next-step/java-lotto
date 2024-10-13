@@ -11,6 +11,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number));
+    }
+
     public LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
@@ -20,10 +24,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number < MIN_BOUND || number > MAX_BOUND) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
         }
-    }
-
-    public int number() {
-        return number;
     }
 
     @Override
