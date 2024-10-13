@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
 
 public enum OperationType {
     ADD("+", Integer::sum),
@@ -17,9 +17,9 @@ public enum OperationType {
     });
 
     private final String symbol;
-    private final BinaryOperator<Integer> operator;
+    private final IntBinaryOperator operator;
 
-    OperationType(String symbol, BinaryOperator<Integer> operator) {
+    OperationType(String symbol, IntBinaryOperator operator) {
         this.symbol = symbol;
         this.operator = operator;
     }
@@ -34,6 +34,6 @@ public enum OperationType {
     }
 
     public int apply(int a, int b) {
-        return operator.apply(a, b);
+        return operator.applyAsInt(a, b);
     }
 }
