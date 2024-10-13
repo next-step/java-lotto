@@ -13,7 +13,7 @@ public class RandomSelectionStrategy implements LottoNumberSelectionStrategy {
 
     private static ArrayList<Integer> createLottoNumberContainer() {
         ArrayList<Integer> container = new ArrayList<>();
-        for (int i = Lotto.MIN_BOUND; i < Lotto.MAX_BOUND + 1; i++) {
+        for (int i = LottoNumber.MIN_BOUND; i < LottoNumber.MAX_BOUND + 1; i++) {
             container.add(i);
         }
         return container;

@@ -16,7 +16,7 @@ public enum LottoNumbersValidation {
         boolean isValid(List<Integer> lottoNumbers) {
             boolean isOutOfRange = false;
             for (int number : lottoNumbers) {
-                isOutOfRange = isOutOfRange || (number < Lotto.MIN_BOUND || number > Lotto.MAX_BOUND);
+                isOutOfRange = isOutOfRange || (number < LottoNumber.MIN_BOUND || number > LottoNumber.MAX_BOUND);
             }
             return !isOutOfRange;
         }
