@@ -21,7 +21,8 @@ public class LottoApplication {
         LottoMachine lottoMachine = new LottoMachine(
                 winningNumbers,
                 money,
-                lottoNumbers
+                lottoNumbers,
+                bonusNumber
         );
 
         ResultView.printLottoStatistics(lottoMachine.getStatistics());

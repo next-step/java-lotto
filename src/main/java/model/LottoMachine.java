@@ -32,13 +32,28 @@ public class LottoMachine {
         this.winningNumbers = winningNumbers;
         this.totalPrice = totalPrice;
         this.lottoNumbers = lottoNumbers;
+        checkBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
         setLottos();
     }
 
+    private void checkBonusNumber(Integer bonusNumber) {
+        if (bonusNumber == null) {
+            return;
+        }
+        if (bonusNumber < 1 || bonusNumber > 45) {
+            throw new IllegalArgumentException("Bonus number must be between 1 and 45");
+        }
+        boolean match = this.winningNumbers.stream()
+                .anyMatch(it -> it.equals(bonusNumber));
+        if (match) {
+            throw new IllegalArgumentException("Bonus number " + bonusNumber + " is wrong.");
+        }
+    }
+
     private void setLottos() {
         this.lottos = this.lottoNumbers.stream()
-                .map(it -> new Lotto(it, this.winningNumbers))
+                .map(it -> new Lotto(it, this.winningNumbers, this.bonusNumber))
                 .collect(Collectors.toList());
     }
 
@@ -72,8 +87,7 @@ public class LottoMachine {
     }
 
     public LottoStatistics getStatistics() {
-        List<Prize> prizes = getPrizes(this.lottos);
-        return new LottoStatistics(prizes, this.totalPrice);
+        return new LottoStatistics(getPrizes(this.lottos), this.totalPrice);
     }
 
     private List<Prize> getPrizes(List<Lotto> lottos) {

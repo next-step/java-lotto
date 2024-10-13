@@ -11,10 +11,7 @@ public class LottoStatistics {
 
     public LottoStatistics(List<Prize> prizes, int totalPrice) {
         Map<Prize, Integer> counts = new HashMap<>();
-        counts.put(Prize.PRIZE3, 0);
-        counts.put(Prize.PRIZE4, 0);
-        counts.put(Prize.PRIZE5, 0);
-        counts.put(Prize.PRIZE6, 0);
+        Arrays.stream(Prize.values()).forEach(prize -> counts.put(prize, 0));
         for (Prize prize : prizes) {
             counts.put(prize, counts.get(prize) + 1);
         }
