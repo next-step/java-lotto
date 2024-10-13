@@ -15,7 +15,7 @@ public class LottoApplication {
 
         final WinningNumber winningNumber = generateWinningNumber();
         final LottoResult lottoResult = lottos.calculateLottoResult(winningNumber);
-        ResultView.printLottoStatistics(lottoResult);
+        ResultView.printLottoStatistics(lottoResult,purchasePrice);
     }
 
     private static WinningNumber generateWinningNumber() {

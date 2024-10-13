@@ -28,4 +28,7 @@ public class PurchasePrice {
         return money / PRICE_UNIT;
     }
 
+    public int getMoney() {
+        return money;
+    }
 }

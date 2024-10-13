@@ -18,4 +18,14 @@ public class LottoResult {
     public Map<LottoRewards, Integer> getResultMap() {
         return resultMap;
     }
+
+    public double calculateProfit(final PurchasePrice purchasePrice) {
+        return (double) calculateTotalPrize() / purchasePrice.getMoney();
+    }
+
+    private int calculateTotalPrize() {
+        return resultMap.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
+    }
 }
