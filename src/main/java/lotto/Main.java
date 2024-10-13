@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatics;
 import lotto.domain.Rank;
 import lotto.domain.WinNumber;
@@ -25,6 +26,7 @@ public class Main {
         }
 
         WinNumber winNumber = InputView.inputWinnerNumber();
+        LottoNumber bonusNumber = InputView.inputBonusNumber();
 
         OutputView.staticsView();
         OutputView.matchView(Rank.THREE, lottoStatics.findRank(winNumber, Rank.THREE));
