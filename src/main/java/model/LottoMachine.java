@@ -18,6 +18,7 @@ public class LottoMachine {
             int totalPrice,
             List<List<Integer>> lottoNumbers
     ) {
+        checkWinningNumbers(winningNumbers);
         this.winningNumbers = winningNumbers;
         this.totalPrice = totalPrice;
         this.lottoNumbers = lottoNumbers;
@@ -25,7 +26,18 @@ public class LottoMachine {
                 .map(Lotto::new)
                 .peek(it -> it.calPrize(this.winningNumbers))
                 .collect(Collectors.toList());
-        this.lottos.forEach(it -> it.calPrize(this.winningNumbers));
+    }
+
+    private static void checkWinningNumbers(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != 6) {
+            throw new IllegalArgumentException("input length must be less than or equal to 6");
+        }
+        int cnt = (int) winningNumbers.stream()
+                .filter(it -> it < Lotto.MIN_LOTTO_NUMBER || it > Lotto.MAX_LOTTO_NUMBER)
+                .count();
+        if (cnt > 0) {
+            throw new IllegalArgumentException("lotto number must be between 1 and 45");
+        }
     }
 
 

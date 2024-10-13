@@ -1,7 +1,5 @@
 package view;
 
-import model.Lotto;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -27,19 +25,9 @@ public class InputView {
     public static List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String line = SC.nextLine();
-        List<Integer> result = Arrays.stream(line.split(", "))
+        return Arrays.stream(line.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        if (result.size() != 6) {
-            throw new IllegalArgumentException("input length must be less than or equal to 6");
-        }
-        int cnt = (int) result.stream()
-                .filter(it -> it < Lotto.MIN_LOTTO_NUMBER || it > Lotto.MAX_LOTTO_NUMBER)
-                .count();
-        if (cnt > 0) {
-            throw new IllegalArgumentException("lotto number must be between 1 and 45");
-        }
-        return result;
     }
 
     public static String[] splitByEmptyString(String input) {

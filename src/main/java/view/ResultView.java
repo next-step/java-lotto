@@ -1,6 +1,7 @@
 package view;
 
 import model.LottoStatistics;
+import model.Prize;
 
 import java.util.List;
 
@@ -28,19 +29,19 @@ public class ResultView {
         System.out.println("---------");
         StringBuilder sb = new StringBuilder();
         sb.append("3개 일치 (5000원)- ")
-                .append(lottoStatistics.getCountOfPrize3())
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE3))
                 .append("개")
                 .append("\n")
                 .append("4개 일치 (50000원)- ")
-                .append(lottoStatistics.getCountOfPrize4())
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE4))
                 .append("개")
                 .append("\n")
                 .append("5개 일치 (1500000원)- ")
-                .append(lottoStatistics.getCountOfPrize5())
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE5))
                 .append("개")
                 .append("\n")
                 .append("6개 일치 (2000000000원)- ")
-                .append(lottoStatistics.getCountOfPrize6())
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE6))
                 .append("개")
                 .append("\n")
                 .append("총 수익률은 ")

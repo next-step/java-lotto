@@ -1,7 +1,4 @@
-import model.LottoMachine;
-import model.LottoNumberGenerate;
-import model.LottoNumberGenerator;
-import model.LottoStatistics;
+import model.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,10 +59,10 @@ public class LottoMachineTest {
         Assertions.assertThat(lottoMachine.getNumberOfLotto()).isEqualTo(2);
 
         LottoStatistics statistics = lottoMachine.getStatistics();
-        Assertions.assertThat(statistics.getCountOfPrize3()).isEqualTo(1);
-        Assertions.assertThat(statistics.getCountOfPrize4()).isEqualTo(0);
-        Assertions.assertThat(statistics.getCountOfPrize5()).isEqualTo(0);
-        Assertions.assertThat(statistics.getCountOfPrize6()).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE3)).isEqualTo(1);
+        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE4)).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE5)).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE6)).isEqualTo(0);
         Assertions.assertThat(statistics.getNetIncome()).isEqualTo(2.5);
     }
 }
