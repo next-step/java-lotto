@@ -5,11 +5,7 @@ import lotto.dto.LottoRewardInfosDTO;
 import lotto.dto.LottoStatisticsDTO;
 import lotto.dto.WinningNumbersDTO;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoJudge {
     private static final String BONUS_NUMBER_DUPLICATED_MESSAGE = "보너스 번호가 당첨 번호와 겹칩니다.";
@@ -71,7 +67,7 @@ public class LottoJudge {
         return this.winningLottoNumbers;
     }
 
-    public int getBonusNumber(){
+    public int getBonusNumber() {
         return this.bonusNumber;
     }
 

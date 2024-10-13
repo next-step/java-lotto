@@ -36,8 +36,8 @@ public class LottoNumbers {
     }
 
     public List<Integer> value() {
-        List<Integer> numbers= new ArrayList<>();
-        for(LottoNumber lottoNumber: value){
+        List<Integer> numbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : value) {
             numbers.add(lottoNumber.value());
         }
         return numbers;
