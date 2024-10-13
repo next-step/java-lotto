@@ -28,7 +28,7 @@ class StringCalculatorTest {
     @ParameterizedTest
     @DisplayName("곱셈이 정확하게 작동하는지 확인")
     @ValueSource(strings = {"10 * 5 * 2"})
-    void multipleTest(String input) {
+    void multiplyTest(String input) {
         assertThat(CALCULATOR.calculator(input)).isEqualTo(100);
     }
 
