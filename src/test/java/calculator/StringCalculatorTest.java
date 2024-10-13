@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class StringCalculatorTest {
 
     @Test
-    @DisplayName("사칙 연산을 모두 포함하는 기능 구현")
+    @DisplayName("사칙 연산을 모두 포함하는 기능 구현 - 사칙연산의 우선순위가 아닌 입력 순 연산")
     void testStringCalculator() {
         assertThat(StringCalculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
     }
