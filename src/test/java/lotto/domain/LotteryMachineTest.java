@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,9 +16,17 @@ class LotteryMachineTest {
         assertThat(machine1).isEqualTo(machine2);
     }
 
+    @DisplayName("숫자가 아닌 값으로 생성될 경우 NumberFormatException을 잘 반환하는지")
+    @Test
+    void lotteryMachineTest_withNonNumericValue() {
+        assertThatThrownBy(() -> new LotteryMachine("abcd"))
+                .isInstanceOf(NumberFormatException.class);
+    }
+
     @DisplayName("로또 자판기가 발급된 로또 개수를 잘 반환하는지")
     @Test
     void getIssuedLottoNumberTest() {
-        assertThat(new LotteryMachine(15000).getIssuedLottoNumber()).isEqualTo(15);
+        assertThat(new LotteryMachine(15000).getIssuedLottoNumber())
+                .isEqualTo(15);
     }
 }
