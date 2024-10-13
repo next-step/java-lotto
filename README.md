@@ -72,8 +72,9 @@
 - [x] DELIMITER를 상수로 빼기
 - [x] tokenCount 사용하지 않고 operator / operand 나누기
 - [x] 사용 가능한 기호를 Enum으로 Convert / 추상화하기
-- [ ] Calculator Class에서 splitTokens method 분리
-- [ ] OperateTest 중 유효한 기호 테스트 @ParameterizedTest 적용
+- [x] Calculator Class에서 splitTokens method 분리
+- [x] OperateTest 중 유효한 기호 테스트 @ParameterizedTest 적용
+
 # 프로그래밍 요구사항
 - indent(들여쓰기) depth를 2단계에서 1단계로 줄여라.
 - depth의 경우 if문을 사용하는 경우 1단계의 depth가 증가한다. if문 안에 while문을 사용한다면 depth가 2단계가 된다.

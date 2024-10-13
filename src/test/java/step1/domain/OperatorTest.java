@@ -1,9 +1,15 @@
-import domain.Operator;
+package step1.domain;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import step1.domain.Operator;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class OperatorTest {
     @Test
@@ -33,12 +39,17 @@ class OperatorTest {
                 .hasMessageMatching("0으로 나눌 수 없습니다.");
     }
 
-    @Test
-    void 유효한_기호로_인스턴스_가져오기() {
-        assertThat(Operator.PLUS).isEqualTo(Operator.getInstance("+"));
-        assertThat(Operator.MINUS).isEqualTo(Operator.getInstance("-"));
-        assertThat(Operator.MULTIPLY).isEqualTo(Operator.getInstance("*"));
-        assertThat(Operator.DIVIDE).isEqualTo(Operator.getInstance("/"));
+    @ParameterizedTest
+    @ValueSource(strings = {"+", "-", "*", "/"})
+    void 유효한_기호로_인스턴스_가져오기(String input) {
+        Map<String, Operator> operatorMaps = Map.of(
+            "+", Operator.PLUS,
+            "-", Operator.MINUS,
+            "*", Operator.MULTIPLY,
+            "/", Operator.DIVIDE
+        );
+
+        assertThat(operatorMaps.get(input)).isEqualTo(Operator.getInstance(input));
     }
 
     @Test
