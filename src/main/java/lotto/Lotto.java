@@ -81,4 +81,13 @@ public class Lotto {
         return 0;
     }
 
+    public static boolean validateLottoNumbers(List<Integer> numbers) { //todo private
+        if (numbers.size() != new HashSet<>(numbers).size()) {
+            throw new IllegalArgumentException("중복된 번호가 있습니다.");
+        }
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("번호 갯수가 6개가 아닙니다.");
+        }
+        return true;
+    }
 }

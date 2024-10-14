@@ -23,15 +23,9 @@ public class LottoInputView {
                 .mapToInt(Integer::parseInt)
                 .boxed().collect(Collectors.toList());
 
-        validateLottoNumbers(winningNumbers);
+        Lotto.validateLottoNumbers(winningNumbers);
 
         return winningNumbers;
     }
 
-    public static boolean validateLottoNumbers(List<Integer> numbers) { //todo private
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("번호 갯수가 6개가 아닙니다.");
-        }
-        return true;
-    }
 }
