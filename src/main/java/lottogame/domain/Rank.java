@@ -3,10 +3,10 @@ package lottogame.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(Rank.FIRST_PLACE, 2000000000),
-    SECOND(Rank.SECOND_PLACE, 1500000),
-    THIRD(Rank.THIRD_PLACE, 50000),
-    FOURTH(Rank.FOURTH_PLACE, 5000),
+    FIRST(Rank.FIRST_PLACE, 2_000_000_000),
+    SECOND(Rank.SECOND_PLACE, 1_500_000),
+    THIRD(Rank.THIRD_PLACE, 50_000),
+    FOURTH(Rank.FOURTH_PLACE, 5_000),
     NONE(Rank.NONE_PLACE, 0);
 
     public static final int FIRST_PLACE = 6;
@@ -28,6 +28,10 @@ public enum Rank {
                 .filter(value -> rank == value.rank)
                 .findFirst()
                 .orElse(Rank.NONE);
+    }
+
+    public int getRank() {
+        return rank;
     }
 
     public double getAmount() {

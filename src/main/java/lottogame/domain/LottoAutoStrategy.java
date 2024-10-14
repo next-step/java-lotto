@@ -10,17 +10,21 @@ public class LottoAutoStrategy implements LottoStrategy {
     @Override
     public LottoNumbers generateLottoNumbers() {
         List<LottoNumber> numbers = new ArrayList<>();
-
         while (numbers.size() < LottoGameConstants.LOTTO_NUMBER_COUNT) {
-            int randomNumber = RANDOM.nextInt(LottoGameConstants.MAX_LOTTO_NUMBER) + 1;
-            if (isContains(numbers, randomNumber)) {
-                continue;
-            }
+            addUniqueRandomNumber(numbers);
+        }
+        return new LottoNumbers(numbers);
+    }
+
+    private void addUniqueRandomNumber(List<LottoNumber> numbers) {
+        int randomNumber = generateRandomNumber();
+        if (!isContains(numbers, randomNumber)) {
             numbers.add(new LottoNumber(randomNumber));
         }
+    }
 
-
-        return new LottoNumbers(numbers);
+    private int generateRandomNumber() {
+        return RANDOM.nextInt(LottoGameConstants.MAX_LOTTO_NUMBER) + 1;
     }
 
     private boolean isContains(List<LottoNumber> numbers, int randomNumber) {

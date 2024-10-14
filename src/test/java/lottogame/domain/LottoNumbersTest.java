@@ -7,34 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoNumbersTest {
-
-    @DisplayName("로또 번호들이 정렬된다.")
-    @Test
-    void create() {
-        List<LottoNumber> numbers = Arrays.asList(
-                new LottoNumber(5),
-                new LottoNumber(1),
-                new LottoNumber(3),
-                new LottoNumber(2),
-                new LottoNumber(4),
-                new LottoNumber(6)
-        );
-
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-
-        LottoNumbers expected = new LottoNumbers(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
-        assertEquals(expected, lottoNumbers);
-    }
 
     @DisplayName("중복된 로또 번호가 있을 경우 예외가 발생한다.")
     @Test

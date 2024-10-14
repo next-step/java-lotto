@@ -30,7 +30,6 @@ public class LottoController {
     }
 
     private Lotto getWinningLotto() {
-        LottoInputView.lineRemove();
         String stringNumbers = LottoInputView.getWinningNumbers();
 
         return new Lotto(new PredefinedLottoNumberStrategy(stringNumbers));

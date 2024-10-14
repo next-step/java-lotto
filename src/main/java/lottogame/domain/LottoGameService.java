@@ -14,15 +14,11 @@ public class LottoGameService {
         this.buyAmount = buyAmount;
     }
 
-    public double calculatePrizeAmount(Lotto winingLotto) {
-        double winningAmount = 0;
-        for (Lotto lotto : lottos.getLottos()) {
-            int winningCount = lotto.countMatchingNumbers(winingLotto);
-            Rank rank = Rank.from(winningCount);
-            winningResultsByRank.merge(rank, 1, (v1, v2) -> v1 + v2);
-            winningAmount += rank.getAmount();
-        }
-        return winningAmount / buyAmount;
+    public double calculatePrizeAmount(Lotto winningLotto) {
+        winningResultsByRank = lottos.calculateWinningStatistics(winningLotto);
+        double totalPrizeAmount = lottos.calculateTotalPrizeAmount(winningLotto);
+
+        return totalPrizeAmount / buyAmount;
     }
 
     public Map<Rank, Integer> getWinningResultsByRank() {

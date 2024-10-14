@@ -7,10 +7,6 @@ import java.util.stream.Collectors;
 public class PredefinedLottoNumberStrategy implements LottoStrategy {
     private final List<Integer> numbers;
 
-    public PredefinedLottoNumberStrategy(List<Integer> numbers) {
-        this.numbers = numbers;
-    }
-
     public PredefinedLottoNumberStrategy(String stringNumbers) {
         this.numbers = Arrays.stream(stringNumbers.split(","))
                 .map(String::trim)

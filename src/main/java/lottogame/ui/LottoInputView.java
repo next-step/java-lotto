@@ -14,11 +14,8 @@ public final class LottoInputView {
         return SCANNER.nextInt();
     }
 
-    public static void lineRemove() {
-        SCANNER.nextLine();
-    }
-
     public static String getWinningNumbers() {
+        SCANNER.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         return SCANNER.nextLine();

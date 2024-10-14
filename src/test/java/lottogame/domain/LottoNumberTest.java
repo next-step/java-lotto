@@ -1,7 +1,6 @@
 package lottogame.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -10,12 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoNumberTest {
 
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45})
     @DisplayName("유효한 로또 번호가 생성된다.")
-    @Test
-    void create() {
-        LottoNumber lottoNumber = new LottoNumber(1);
+    void create(int number) {
+        LottoNumber lottoNumber = new LottoNumber(number);
 
-        assertEquals(1, lottoNumber.getNumber());
+        assertEquals(number, lottoNumber.getNumber());
 
     }
 

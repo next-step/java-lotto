@@ -8,7 +8,6 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-        sort();
     }
 
     private void validate(List<LottoNumber> numbers) {
@@ -16,10 +15,6 @@ public class LottoNumbers {
         if (uniqueNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException("중복된 로또 번호가 존재합니다.");
         }
-    }
-
-    private void sort() {
-        Collections.sort(this.lottoNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {

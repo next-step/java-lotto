@@ -1,10 +1,13 @@
 package lottogame.ui;
 
 import lottogame.domain.Lotto;
+import lottogame.domain.LottoNumber;
 import lottogame.domain.Lottos;
 import lottogame.domain.Rank;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public final class LottoOutputView {
 
@@ -17,25 +20,39 @@ public final class LottoOutputView {
 
     public static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto.getNumbers().stream()
-                    .map(n -> String.valueOf(n.getNumber()))
-                    .collect(java.util.stream.Collectors.joining(", ", "[", "]")));
+            System.out.println(formatLottoNumbers(lotto.getNumbers()));
         }
+    }
+
+    private static String formatLottoNumbers(List<LottoNumber> numbers) {
+        return numbers.stream()
+                .sorted()
+                .map(n -> String.valueOf(n.getNumber()))
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     public static void printWinningStatistics(Map<Rank, Integer> winningResults) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + winningResults.getOrDefault(Rank.FOURTH, 0) + "개");
-        System.out.println("4개 일치 (50000원)- " + winningResults.getOrDefault(Rank.THIRD, 0) + "개");
-        System.out.println("5개 일치 (1500000원)- " + winningResults.getOrDefault(Rank.SECOND, 0) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + winningResults.getOrDefault(Rank.FIRST, 0) + "개");
+        for (Rank rank : Rank.values()) {
+            if (rank != Rank.NONE) {
+                System.out.printf("%d개 일치 (%.0f원) - %d개%n",
+                        rank.getRank(),
+                        rank.getAmount(),
+                        winningResults.getOrDefault(rank, 0));
+            }
+        }
     }
 
     public static void printPrizeRate(double prizeRate) {
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n",
-                prizeRate,
-                prizeRate < 1 ? "손해" : "이득");
+        System.out.printf("총 수익률은 %.2f입니다.", prizeRate);
+
+        String result = "이득";
+        if (prizeRate < 1) {
+            result = "손해";
+        }
+
+        System.out.printf("(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n", result);
     }
 
 

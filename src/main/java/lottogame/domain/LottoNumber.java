@@ -10,7 +10,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    private static void validate(int number) {
+    private void validate(int number) {
         if (number < LottoGameConstants.MIN_LOTTO_NUMBER || number > LottoGameConstants.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("유효한 로또 번호가 아닙니다.");
         }
