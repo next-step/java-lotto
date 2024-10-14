@@ -12,10 +12,6 @@ public class LotteryMachine {
         return issuedLottoNumber;
     }
 
-    public LotteryMachine(final String purchasePrice) {
-        this(Integer.parseInt(purchasePrice));
-    }
-
     public LotteryMachine(final int purchasePrice) {
         valid(purchasePrice);
         this.purchasePrice = purchasePrice;
@@ -26,6 +22,10 @@ public class LotteryMachine {
         if (price < 0) {
             throw new IllegalArgumentException("가격은 0보다 작은 값일 수 없습니다.");
         }
+    }
+
+    public LotteryMachine(final String purchasePrice) {
+        this(Integer.parseInt(purchasePrice));
     }
 
     @Override
