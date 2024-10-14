@@ -16,7 +16,7 @@ public class LottoNumber {
 
     private void validateInputValue(int value) {
         if (value < LOTTO_MIN_NUMBER || value > LOTTO_MAX_NUMBER) {
-            throw new IllegalArgumentException("유효한 로또의 숫자가 아닙니다.");
+            throw new IllegalArgumentException("유효한 로또 숫자가 아닙니다.");
         }
     }
 
