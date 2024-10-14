@@ -4,8 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
+import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
@@ -22,7 +25,7 @@ public class LottoResultTest {
                         new Lotto(1, 2, 3, 4, 5, 45)
                 )
         );
-        winningNumbers = new WinningNumbers(45,1, 2, 3, 4, 5, 6);
+        winningNumbers = new WinningNumbers(convertIntToLottoNumber(1, 2, 3, 4, 5, 6), new BonusBall(45));
     }
 
     @DisplayName("내가 구매한 로또가 당첨번호의 숫자와 몇 개 일지하는지 확인 가능하다")
@@ -51,5 +54,10 @@ public class LottoResultTest {
         assertThat(profitRate).isEqualTo(winningAmount / purchaseAmount);
     }
 
+    private Set<LottoNumber> convertIntToLottoNumber(int... numbers){
+        return Arrays.stream(numbers)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(toSet());
+    }
 
 }

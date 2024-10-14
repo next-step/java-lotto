@@ -6,11 +6,11 @@ public class BonusBall {
     private final LottoNumber bonusNumber;
 
     public BonusBall(String bonusNumber) {
-        this(new LottoNumber(bonusNumber));
+        this(LottoNumber.valueOf(bonusNumber));
     }
 
     public BonusBall(int bonusNumber) {
-        this(new LottoNumber(bonusNumber));
+        this(LottoNumber.valueOf(bonusNumber));
     }
 
     public BonusBall(LottoNumber bonusNumber) {
@@ -22,7 +22,7 @@ public class BonusBall {
     }
 
     public boolean isBonusNumber(int bonusNumber){
-        return this.bonusNumber.equals(new LottoNumber(bonusNumber));
+        return this.bonusNumber.equals(LottoNumber.valueOf(bonusNumber));
     }
 
     public boolean isMatchBonusBallFrom(Lotto lotto) {

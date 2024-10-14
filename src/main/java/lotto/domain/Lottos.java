@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -16,6 +17,10 @@ public class Lottos {
             lottos.add(Lotto.create(numbersGenerater));
         }
         return new Lottos(lottos);
+    }
+
+    public void add(Lottos otherLottos){
+        this.lottos.addAll(otherLottos.getLottos());
     }
 
     public List<Integer> countMatchingNumbers(WinningNumbers winningNumbers) {
@@ -45,8 +50,24 @@ public class Lottos {
         return sb.toString();
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public int count() {
         return lottos.size();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lottos);
+    }
 }

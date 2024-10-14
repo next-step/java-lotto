@@ -5,7 +5,7 @@ import lotto.domain.Lottos;
 import lotto.domain.ProfitStatus;
 
 public interface ResultView {
-    void showLottoCount(int count);
+    void showLottoCount(int manualCount, int autoCount);
     void showLottos(Lottos lottos);
     void showLottoResult(LottoResult lottoResult);
     void showLottoProfit(double profitRate);
