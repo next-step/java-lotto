@@ -9,7 +9,7 @@ public class LottoWinningStatistics {
     public static int calculateTotalWinningAmount(List<Lotto> lottos) {
         int winningAmount = 0;
         for (Lotto lotto : lottos) {
-            winningAmount += lotto.getAmountForWinningLotto();
+            winningAmount += lotto.getAmount();
         }
         return winningAmount;
     }

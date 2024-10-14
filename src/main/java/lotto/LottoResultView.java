@@ -19,7 +19,7 @@ public class LottoResultView {
             Integer matchCount = (Integer) result.getKey();
             Integer resultCount = (Integer) result.getValue();
 
-            System.out.println(matchCount + "개 일치 (" + Lotto.determineAmountByMatchCount(matchCount) + "원)- " + resultCount + "개");
+            System.out.println(matchCount + "개 일치 (" + LottoResult.determineAmountByMatchCount(matchCount) + "원)- " + resultCount + "개");
         }
     }
 
