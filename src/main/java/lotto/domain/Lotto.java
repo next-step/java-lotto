@@ -7,10 +7,19 @@ import java.util.Set;
 
 public class Lotto {
 
+    private static final int LOTTO_SIZE = 6;
+
     private final Set<Integer> lottoNumbers;
 
     public Lotto(final Set<Integer> lottoNumbers) {
+        valid(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void valid(Set<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
     }
 
     public Lotto(final int... numbers) {
