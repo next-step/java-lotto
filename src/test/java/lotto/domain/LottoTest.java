@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static lotto.domain.Lotto.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
     @Test
@@ -46,5 +46,20 @@ class LottoTest {
         );
 
         assertThat(lotto1.matchCount(lotto2)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("문자열을 입력받아 수동 로또 객체를 생성 할 수 있다.")
+    void shouldCreateLottoFromStringInput() {
+        final Lotto manualLotto = createManualLotto("1, 2, 3, 4, 5, 6", ", ");
+
+        assertThat(manualLotto.isManualLotto()).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또 문자열이 올바르지 않다면 예외가 발생한다.")
+    void shouldThrowExceptionWhenInvalidLottoStringProvided() {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> createManualLotto("1, 2, 3, 4, 5, 6", "|"));
     }
 }
