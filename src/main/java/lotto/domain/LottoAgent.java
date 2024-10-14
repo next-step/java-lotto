@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.dto.PurchasedLottosDTO;
 
 public class LottoAgent {
-    private final PurchasedLottos purchasedLottos;
+    private PurchasedLottos purchasedLottos;
 
     private LottoAgent() {
         purchasedLottos = PurchasedLottos.newInstance();
@@ -21,7 +21,7 @@ public class LottoAgent {
     }
 
     private void buyLotto(int id, LottoNumberSelectionStrategy selectionStrategy) {
-        purchasedLottos.addLotto(Lotto.valueOf(id, selectionStrategy));
+        purchasedLottos = purchasedLottos.add(Lotto.valueOf(id, selectionStrategy));
     }
 
     public PurchasedLottosDTO getPurchasedLottos() {
