@@ -14,12 +14,12 @@ public class WinningStatistic {
         money = prize;
         for (PRIZE price : PRIZE.values()) {
             int count = 0;
-            putCount(prize, price, count);
+            putCount(price, count);
         }
         return statistic;
     }
 
-    private void putCount(int prize, PRIZE price, int count) {
+    private void putCount(PRIZE price, int count) {
         while(money >= price.getValue()){
             money -= price.getValue();
             count +=1;
