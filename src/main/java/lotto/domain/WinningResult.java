@@ -39,8 +39,8 @@ public class WinningResult {
         int profit = 0;
         for (int match = VALID_MATCH_COUNT_MIN; match <= VALID_MATCH_COUNT_MAX; ++match) {
             int howMany = staticsList.get(match);
-            LottoMatch LottoMatch = lotto.domain.LottoMatch.findEnumByMatchCount(match);
-            profit += LottoMatch.calculatePrize(howMany);
+            LottoMatch matchEnum = LottoMatch.findEnumByMatchCount(match);
+            profit += matchEnum.calculatePrize(howMany);
         }
         return profit;
     }

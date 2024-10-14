@@ -37,7 +37,7 @@ public class WinningLotto {
                 .sum();
     }
 
-    public int match(int ... numbers) {
+    public int match(int... numbers) {
         return Arrays.stream(numbers)
                 .filter(lotto.getLottoNumbers()::contains)
                 .map(value -> 1)

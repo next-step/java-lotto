@@ -40,13 +40,6 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
-    public int match(List<Integer> other) {
-        return other.stream()
-                .filter(numbers::contains)
-                .mapToInt(n -> 1)
-                .sum();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
