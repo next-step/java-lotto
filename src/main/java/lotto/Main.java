@@ -8,6 +8,8 @@ import lotto.service.WinningStatistic;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.Stack;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -27,9 +29,11 @@ public class Main {
         winningNumber.convertStringToIntList(inputView.inputWinnerNumber());
 
         WinningCheck winningCheck = new WinningCheck(lottos,winningNumber);
-        WinningStatistic winningStatistic = new WinningStatistic();
         int prize = winningCheck.getWinningPrize();
-        winningStatistic.calculateStatistic(prize);
+        WinningStatistic winningStatistic = new WinningStatistic(prize, new Stack<>());
+
+        winningStatistic.calculateStatistic();
+
         resultView.printResult(winningStatistic.getStatistic());
         resultView.printProfit(winningStatistic.calculateProfit(amount,prize));
     }

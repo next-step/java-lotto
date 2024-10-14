@@ -13,4 +13,5 @@ public class WinningNumberTest {
         winningNumber.convertStringToIntList("1, 2, 3, 4, 5, 6");
         Assertions.assertThat(winningNumber.getWinningNumber()).containsExactly(1, 2, 3, 4, 5, 6);
     }
+
 }

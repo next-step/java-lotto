@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import lotto.exception.PrizeOverFlowIsNegativeException;
+
 import java.util.List;
 
 public class WinningCheck {
-    Lottos myLottos;
-    WinningNumber winningNumber;
+    private final Lottos myLottos;
+    private final WinningNumber winningNumber;
 
     public WinningCheck(Lottos lottos, WinningNumber winningNumber) {
         this.myLottos = lottos;
@@ -13,26 +15,44 @@ public class WinningCheck {
 
     public int getWinningPrize() {
         List<Lotto> lottoList = myLottos.getLottos();
-        int prize=0;
-        for(Lotto lotto : lottoList) {
-            prize+=LottoWinningStatus(lotto);
+        int totalPrize = 0;
+        int eachPrize = 0;
+        for (Lotto lotto : lottoList) {
+            eachPrize = LottoWinningStatus(lotto);
+            validOverFlow(eachPrize, totalPrize);
+            validtotalPrize(eachPrize, totalPrize);
+            totalPrize += eachPrize;
         }
-        return prize;
+        return totalPrize;
     }
+
+    private static void validtotalPrize(int eachPrize, int totalPrize) {
+        if(eachPrize + totalPrize > 2_000_000_000) {
+            throw new IllegalArgumentException("총 상금 20억을 넘길 순 없음");
+        }
+    }
+
+    private static void validOverFlow(int eachPrize, int totalPrize) {
+        if(eachPrize + totalPrize < 0 ) {
+            throw new PrizeOverFlowIsNegativeException();
+        }
+    }
+
 
     private int LottoWinningStatus(Lotto lotto) {
         int count = 0;
         List<Integer> lottoNumbers = lotto.getLotto();
         List<Integer> winningNumbers = winningNumber.getWinningNumber();
 
-        for(int i = 0; i < winningNumbers.size(); i++) {
-            count += checkThisNumberIsHit(winningNumbers, i, lottoNumbers);
+        for (int i = 0; i < winningNumbers.size(); i++) {
+            count += isNumberMatched(winningNumbers, i, lottoNumbers);
         }
-        return PRIZE.getValueByHit(count);
+
+        return Prize.getValueByHit(count);
     }
 
-    private static int checkThisNumberIsHit(List<Integer> winningNumbers, int i, List<Integer> lottoNumbers) {
-        if(winningNumbers.get(i).equals(lottoNumbers.get(i))) {
+    private static int isNumberMatched(List<Integer> winningNumbers, int i, List<Integer> lottoNumbers) {
+        if (winningNumbers.get(i).equals(lottoNumbers.get(i))) {
             return 1;
         }
         return 0;

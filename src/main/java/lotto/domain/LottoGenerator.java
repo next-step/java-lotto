@@ -6,9 +6,10 @@ import java.util.stream.IntStream;
 
 public interface LottoGenerator {
 
+    int FROM_INDEX = 0;
     int LOTTO_SIZE = 6;
 
-    List<Integer> lottoGenerator = IntStream.rangeClosed(1,45)
+    List<Integer> lottoGenerator = IntStream.rangeClosed(1, 45)
             .boxed()
             .collect(Collectors.toList());
 

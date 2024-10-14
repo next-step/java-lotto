@@ -6,8 +6,6 @@ import java.util.List;
 
 public class LottoShuffleGenerator implements LottoGenerator {
 
-    public static final int FROM_INDEX = 0;
-
     private static LottoShuffleGenerator lottoShuffleGenerator;
 
     private LottoShuffleGenerator() {
@@ -20,7 +18,6 @@ public class LottoShuffleGenerator implements LottoGenerator {
         }
         return lottoShuffleGenerator;
     }
-
 
     @Override
     public Lotto generateLottos() {
