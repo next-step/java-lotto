@@ -12,8 +12,7 @@ public class LottoMain {
         LottoResultView.printLottoList(lottos.getLottos());
 
         System.out.println();
-        List<Integer> winningLotto = LottoInputView.inputWinningNumbers();
-        lottos.calculateAllMatchCount(winningLotto);
+        lottos.calculateAllMatchCount(LottoInputView.inputWinningNumbers());
 
         System.out.println();
         LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos())); //todo

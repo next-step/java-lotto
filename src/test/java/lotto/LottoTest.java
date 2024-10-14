@@ -27,7 +27,7 @@ public class LottoTest {
     @DisplayName("한 개의 로또에 일치하는 개수 확인")
     void 일치하는_개수_확인() {
         lotto = new Lotto(Arrays.asList(7, 2, 4, 5, 22, 37));
-        assertThat(lotto.calculateMatchCount(Arrays.asList(1, 5, 13, 22, 43, 37))).isEqualTo(3);
+        assertThat(lotto.calculateMatchCount(new Lotto(Arrays.asList(1, 5, 13, 22, 43, 37)))).isEqualTo(3);
     }
 
     @Test
@@ -52,5 +52,14 @@ public class LottoTest {
                 .isThrownBy(() -> {
                     Lotto.validateLottoNumbers(Arrays.asList(1, 2, 3, 4, 6));
                 }).withMessageMatching("번호 갯수가 6개가 아닙니다.");
+    }
+
+    @Test
+    @DisplayName("번호가 1~45 사이의 수가 아닌 경우 IllegalArgumentException")
+    void 유효한_번호_확인() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    Lotto.validateLottoNumbers(Arrays.asList(46, 47, 48, 33, 49, 10));
+                }).withMessageMatching("유효한 번호가 아닙니다.");
     }
 }

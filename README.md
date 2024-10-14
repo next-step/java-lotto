@@ -34,6 +34,7 @@
 - [x] 지난주 당첨번호 입력
   - [x] 번호 갯수 6개가 아닌 경우 IllegalArgumentException throw
   - [x] 중복번호가 있는 경우 IllegalArgumentException throw
+  - [x] 숫자가 1 ~ 45가 아닌 경우 IllegalArgumentException throw
 - [x] 구매한 개수 출력
 - [x] 구매한 로또 목록 출력
 - [x] 당첨 통계 출력

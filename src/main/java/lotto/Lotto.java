@@ -12,12 +12,18 @@ public class Lotto {
     public Lotto() {
         lottoNumbers = new ArrayList<>();
         lottoNumbers = generateAutoLottoNumbers();
+        validateLottoNumbers(lottoNumbers);
         lottoResult = new LottoResult();
     }
 
     public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        validateLottoNumbers(this.lottoNumbers);
         lottoResult = new LottoResult();
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
     public int isEqualMatchCount(int matchCount) {
@@ -45,8 +51,8 @@ public class Lotto {
         }
     }
 
-    public int calculateMatchCount(List<Integer> winningNumbers) {
-        return this.lottoResult.calculateMatchCount(winningNumbers, lottoNumbers);
+    public int calculateMatchCount(Lotto winningLotto) {
+        return this.lottoResult.calculateMatchCount(winningLotto.getLottoNumbers(), lottoNumbers);
     }
 
     public int getAmount() {
@@ -59,6 +65,16 @@ public class Lotto {
         }
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("번호 갯수가 6개가 아닙니다.");
+        }
+        for (Integer number : numbers) {
+            validateLottoNumber(number);
+        }
+        return true;
+    }
+
+    private static boolean validateLottoNumber(int lottoNumber) {
+        if (lottoNumber <= 0 || lottoNumber > 45) {
+            throw new IllegalArgumentException("유효한 번호가 아닙니다.");
         }
         return true;
     }

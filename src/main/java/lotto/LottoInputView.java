@@ -14,7 +14,7 @@ public class LottoInputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static Lotto inputWinningNumbers() {
         System.out.println("지난 주 당첨번호를 입력해주세요");
         scanner.nextLine();
 
@@ -23,9 +23,8 @@ public class LottoInputView {
                 .mapToInt(Integer::parseInt)
                 .boxed().collect(Collectors.toList());
 
-        Lotto.validateLottoNumbers(winningNumbers);
-
-        return winningNumbers;
+        Lotto winningLotto = new Lotto(winningNumbers);
+        return winningLotto;
     }
 
 }
