@@ -4,13 +4,13 @@ public class LotteryMachine {
 
     private static final int LOTTO_PRICE = 1_000;
 
-    public int getIssuedLottoNumber() {
-        return issuedLottoNumber;
-    }
-
     private final int purchasePrice;
 
     private final int issuedLottoNumber;
+
+    public int getIssuedLottoNumber() {
+        return issuedLottoNumber;
+    }
 
     public LotteryMachine(final String purchasePrice) {
         this(Integer.parseInt(purchasePrice));
