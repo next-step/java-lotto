@@ -9,11 +9,15 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 class WinningNumberTest {
-    @Test
-    void 당첨번호_생성() {
-        Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+    private static Set<LottoNumber> getLottoNumbers() {
+        return Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
+    }
+
+    @Test
+    void 당첨번호_생성() {
+        Set<LottoNumber> lottoNumbers = getLottoNumbers();
         WinningNumber winningNumber = new WinningNumber(lottoNumbers);
         assertThat(winningNumber).isNotNull();
     }
@@ -38,12 +42,8 @@ class WinningNumberTest {
 
     @Test
     void 일등_당첨() {
-        Set<LottoNumber> winningNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
-        Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+        Set<LottoNumber> winningNumbers = getLottoNumbers();
+        Set<LottoNumber> lottoNumbers = getLottoNumbers();
         Lotto lotto = new Lotto(lottoNumbers);
         WinningNumber winningNumber = new WinningNumber(winningNumbers);
 
