@@ -1,13 +1,14 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -16,10 +17,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void valid(Set<LottoNumber> lottoNumbers) {
+    private void valid(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
+    }
+
+    public Lotto(final List<LottoNumber> lottoNumbers) {
+        this(Set.copyOf(lottoNumbers));
     }
 
     public Lotto(final int... numbers) {
