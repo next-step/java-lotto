@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_COUNT = 6;
@@ -13,6 +15,10 @@ public class Lotto {
         }
 
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto createAutoLotto() {
+        return new Lotto(LottoNumber.getNewLottoNumbers(LOTTO_NUMBER_COUNT));
     }
 
     public boolean allMatch(final Lotto otherLotto) {
