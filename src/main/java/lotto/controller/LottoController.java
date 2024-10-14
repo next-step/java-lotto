@@ -15,7 +15,8 @@ public class LottoController {
         InputView inputView = new InputView(new Scanner(System.in));
         ResultView resultView = new ResultView(new Lotto(new LottoTickets(), new LottoGenerate()));
         int purchaseLottoCount = resultView.purchaseResultView(inputView.questionInputMoney());
-        LottoTicket lastWeekWinningNumbers = resultView.lottoTicketLastWeekResultView();
+        String winnerLottoNumber = inputView.questionWinnerNumber();
+        LottoTicket lastWeekWinningNumbers = new LottoTicket(winnerLottoNumber);
         resultView.statisticsResultView(lastWeekWinningNumbers, purchaseLottoCount);
 
     }

@@ -1,11 +1,10 @@
 package lotto.domain.lotto.ticket;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
+    private final static String LOTTO_LENGTH_ERROR = "로또 입력 숫자가 6개가 아닙니다.";
     private final List<LottoNumber> numbers;
 
     public LottoTicket(Integer... numbers) {
@@ -13,8 +12,7 @@ public class LottoTicket {
     }
 
     public LottoTicket(String numbers) {
-        String[] lottoNum = numbers.split(",");
-        this.numbers = Arrays.stream(lottoNum).map(Integer::parseInt)
+        this.numbers = Arrays.stream(parse(numbers))
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
@@ -27,8 +25,31 @@ public class LottoTicket {
         return (int) lottoNumbers.stream().filter(numbers::contains).count();
     }
 
+    public String[] parse(String input) {
+        String[] lottoNumbers = input.split(",");
+        if (!validate(lottoNumbers)) {
+            throw new IllegalArgumentException(LOTTO_LENGTH_ERROR);
+        }
+        return lottoNumbers;
+    }
+
+    public boolean validate(String[] lottoNum) {
+        return lottoNum.length == 6;
+    }
+
     public List<LottoNumber> getNumbers() {
-        return this.numbers;
+        return Collections.unmodifiableList(this.numbers);
+    }
+
+    public List<LottoNumber> sortAsc() {
+        numbers.sort(new Comparator<LottoNumber>() {
+            @Override
+            public int compare(LottoNumber o1, LottoNumber o2) {
+                return o1.getNumber() - o2.getNumber();
+            }
+        });
+
+        return numbers;
     }
 
     @Override
@@ -46,6 +67,6 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return numbers+"\n";
+        return numbers + "\n";
     }
 }

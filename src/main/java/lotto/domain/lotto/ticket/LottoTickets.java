@@ -41,6 +41,9 @@ public class LottoTickets {
 
     @Override
     public String toString() {
+        for(LottoTicket ticket : tickets) {
+            ticket.sortAsc();
+        }
         return tickets+"";
     }
 }

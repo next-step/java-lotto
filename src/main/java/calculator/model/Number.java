@@ -25,10 +25,11 @@ public class Number {
     }
 
     private static int validate(String input) {
-        if (!isNumber(StringUtil.isEmpty(input))) {
-            throw new NumberFormatException(PARSING_ERROR_MESSAGE);
-        }
-        return Integer.parseInt(input);
+       try{
+           return Integer.parseInt(input);
+       } catch (Exception e) {
+           throw new NumberFormatException(PARSING_ERROR_MESSAGE);
+       }
     }
 
     @Override

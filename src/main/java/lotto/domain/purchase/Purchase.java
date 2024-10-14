@@ -1,5 +1,7 @@
 package lotto.domain.purchase;
 
+import static lotto.domain.statistics.Statistics.*;
+
 public class Purchase {
     private static final String LOTTO_ERROR_MESSAGE = "돈이 부족합니다.";
     private static final int LOTTO_PRICE = 1000;
@@ -21,7 +23,7 @@ public class Purchase {
     }
 
     private boolean isValidate(int money) {
-        return money < 1000;
+        return money < LOTTO_PRICE;
     }
 
 }
