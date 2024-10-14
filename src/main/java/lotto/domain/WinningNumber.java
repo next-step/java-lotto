@@ -20,7 +20,7 @@ public class WinningNumber {
     }
 
     public LottoRewards findLottoRewards(final Lotto lotto) {
-        return LottoRewards.getLottoRewards(winningNumber.countMatchCount(lotto));
+        return LottoRewards.from(winningNumber.countMatchCount(lotto));
     }
 
     private void validateBonusNumber() {

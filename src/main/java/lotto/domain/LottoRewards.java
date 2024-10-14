@@ -26,10 +26,14 @@ public enum LottoRewards {
         return prize;
     }
 
-    public static LottoRewards getLottoRewards(final int matchCount) {
-        return Arrays.stream(LottoRewards.values())
-                .filter(lottoRewards -> matchCount == lottoRewards.getMatchCount())
+    public static LottoRewards from(final int matchCount) {
+        return Arrays.stream(values())
+                .filter(lottoRewards -> findByCount(lottoRewards, matchCount))
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    private static boolean findByCount(final LottoRewards lottoRewards, final int value) {
+        return lottoRewards.getMatchCount() == value;
     }
 }
