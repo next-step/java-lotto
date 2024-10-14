@@ -23,12 +23,14 @@ public class Main {
 
         resultView.NumberOfLotto(lottos.getNumberOfLotto());
         resultView.printPurchasedLottos(lottos);
+
         winningNumber.convertStringToIntList(inputView.inputWinnerNumber());
+
         WinningCheck winningCheck = new WinningCheck(lottos,winningNumber);
         WinningStatistic winningStatistic = new WinningStatistic();
         int prize = winningCheck.getWinningPrize();
         winningStatistic.calculateStatistic(prize);
         resultView.printResult(winningStatistic.getStatistic());
-        resultView.printProfit(winningStatistic.calculateProfit(1000*lottos.getNumberOfLotto(),prize));
+        resultView.printProfit(winningStatistic.calculateProfit(amount,prize));
     }
 }

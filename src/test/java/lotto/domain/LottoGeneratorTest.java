@@ -11,7 +11,7 @@ public class LottoGeneratorTest {
     @DisplayName("로또 생성 테스트")
     void 로또_생성_테스트() {
         Lottos lottos = new Lottos();
-        lottos.buyLotto(3, () -> new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        lottos.buyLotto(3000, () -> new Lotto(List.of(1, 2, 3, 4, 5, 6)));
         Assertions.assertThat(lottos.getNumberOfLotto()).isEqualTo(3);
     }
 }

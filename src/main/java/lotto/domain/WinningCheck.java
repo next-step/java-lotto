@@ -12,10 +12,10 @@ public class WinningCheck {
     }
 
     public int getWinningPrize() {
-        int loop = myLottos.getNumberOfLotto();
+        List<Lotto> lottoList = myLottos.getLottos();
         int prize=0;
-        for(int i = 0; i < loop; i++) {
-            prize+=LottoWinningStatus(myLottos.getLotto(i));
+        for(Lotto lotto : lottoList) {
+            prize+=LottoWinningStatus(lotto);
         }
         return prize;
     }

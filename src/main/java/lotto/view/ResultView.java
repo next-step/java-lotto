@@ -1,8 +1,10 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -11,7 +13,15 @@ public class ResultView {
     }
 
     public void printPurchasedLottos(Lottos lottos){
-        System.out.println(lottos.allPurchasedLottoNumber());
+        for(Lotto lotto : lottos.getLottos()){
+            System.out.println(
+            lotto.getLotto()
+                    .stream()
+                    .map(i -> String.valueOf(i))
+                    .collect(Collectors.joining(", ","[","]"))
+            );
+        }
+
     }
 
     public void printResult(Stack<Integer> money) {
@@ -31,4 +41,7 @@ public class ResultView {
         }
         System.out.println("총 수익률은 " + Math.floor(profitRate*100)/100.0+"입니다.(기준이 1이기 때문에 결과적으로 이득라는 의미임)");
     }
+
+
+
 }

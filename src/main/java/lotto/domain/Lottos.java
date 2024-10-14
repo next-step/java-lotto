@@ -14,7 +14,7 @@ public class Lottos {
 
     public void buyLotto(int purchaseAmount, LottoGenerator lottoGenerator) {
         int lottoCount = calculateNumberOfLotto(purchaseAmount);
-        for (int i = 0; i < purchaseAmount; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(lottoGenerator.generateLottos());
         }
     }
@@ -34,16 +34,8 @@ public class Lottos {
         }
     }
 
-    public String allPurchasedLottoNumber() {
-        StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            sb.append(lotto.lottoNumber() + "\n");
-        }
-        return sb.toString();
-    }
-
-    public Lotto getLotto(int number) {
-        return lottos.get(number);
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
 }
