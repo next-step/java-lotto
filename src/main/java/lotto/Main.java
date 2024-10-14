@@ -9,12 +9,10 @@ import lotto.service.WinningStatistic;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
         LottoPurchaseService lottoPurchaseService = new LottoPurchaseService();
@@ -22,12 +20,11 @@ public class Main {
 
 
         Lottos lottos = new Lottos();
-        lottos.buyLotto(lottoPurchaseService.calculateNumberOfLotto(inputView.inputPurchaseAmountGuide(sc))
+        lottos.buyLotto(lottoPurchaseService.calculateNumberOfLotto(inputView.inputPurchaseAmountGuide())
                 ,LottoShuffleGenerator.getLottoShuffleGenerator());
         resultView.NumberOfLotto(lottos.getNumberOfLotto());
         resultView.printPurchasedLottos(lottos);
-        sc.nextLine();
-        winningNumber.convertStringToIntList(inputView.inputWinnerNumber(sc));
+        winningNumber.convertStringToIntList(inputView.inputWinnerNumber());
         WinningCheck winningCheck = new WinningCheck(lottos,winningNumber);
         WinningStatistic winningStatistic = new WinningStatistic();
         int prize = winningCheck.getWinningPrize();
