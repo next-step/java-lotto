@@ -10,7 +10,7 @@ public class WinningCheck {
         this.myLottos = lottos;
         this.winningNumber = winningNumber;
     }
-git add
+
     public int getWinningPrize() {
         int loop = myLottos.getNumberOfLotto();
         int prize=0;
