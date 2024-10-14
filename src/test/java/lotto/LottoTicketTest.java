@@ -1,24 +1,16 @@
 package lotto;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class LottosTest {
-    private Lottos lottos;
-
-    @BeforeEach
-    void setUp() {
-        lottos = new Lottos();
-    }
-
+public class LottoTicketTest {
     @Test
     @DisplayName("구입금액에 맞게 구매한 로또 개수 출력")
     void 로또_구매() {
-        assertThat(lottos.countByAmount(14000)).isEqualTo(14);
+        assertThat(LottoTicket.countByAmount(14000)).isEqualTo(14);
     }
 
     @Test
@@ -26,7 +18,7 @@ public class LottosTest {
     void 로또_구매_적은_금액() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    lottos.countByAmount(900);
+                    LottoTicket.countByAmount(900);
                 }).withMessageMatching("지불한 금액이 로또 금액보다 적습니다.");
     }
 }

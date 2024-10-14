@@ -5,7 +5,7 @@ import java.util.List;
 public class LottoMain {
     public static void main(String[] args) {
         int paidAmount = LottoInputView.inputPaidAmount();
-        int lottoCount = Lottos.countByAmount(paidAmount);
+        int lottoCount = LottoTicket.countByAmount(paidAmount);
         LottoResultView.printLottoCount(lottoCount);
 
         Lottos lottos = new Lottos(lottoCount);
