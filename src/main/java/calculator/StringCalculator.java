@@ -23,13 +23,15 @@ public class StringCalculator {
         String[] inputSplit = input.split(DELIMITER);
         int result = Integer.parseInt(inputSplit[FIRST_INDEX]);
 
-        for (int i = 1; i < inputSplit.length; i += 2) {
-            String operator = inputSplit[i];
-            int number = Integer.parseInt(inputSplit[i + 1]);
-
-            result = solve(operator, result, number);
+        for (int i = 1; i < inputSplit.length; i++) {
+            result = isOdd(i) ? solve(inputSplit[i], result, Integer.parseInt(inputSplit[i + 1]))
+                    : result;
         }
         return result;
+    }
+
+    private boolean isOdd(int number) {
+        return number % 2 != 0;
     }
 
     private static int solve(String operator, int result, int number) {
