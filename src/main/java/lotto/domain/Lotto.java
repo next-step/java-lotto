@@ -1,31 +1,45 @@
 package lotto.domain;
 
-import java.util.*;
+import static java.util.stream.Collectors.toList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
-    public static final String IS_NOT_LOTTO_SIZE = "번호가 6개가 아닙니다.";
+    private static final String IS_NOT_LOTTO_SIZE = "번호가 6개가 아닙니다.";
+    private static final String IS_DUPLICATE_NUMBER = "중복된 번호가 있습니다.";
     private static final String INPUT_IS_NOT_NUMBER = "입력된 값이 숫자가 아닙니다.";
-    public static final String IS_NOT_LOTTO_NUMBER = "로또번호가 1~45가 아닙니다.";
-    private static final int LOTTO_MIN_NUM = 1;
-    private static final int LOTTO_MAX_NUM = 45;
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public static Lotto autoLotto() {
-        return new Lotto(makeAutoLotto());
+    public Lotto(List<Integer> lottoNumbers) {
+        validateLotto(lottoNumbers);
+        this.lottoNumbers = makeLotto(lottoNumbers);
+    }
+
+    public Lotto(Integer... lottoNumbers) {
+        this(Arrays.stream(lottoNumbers).collect(toList()));
     }
 
     public Lotto(String[] inputNumbers) {
-        List<Integer> lotto = splitInput(inputNumbers);
-        validateLottoSetSize(lotto);
-        this.lottoNumbers = makeSortLotto(lotto);
+        List<Integer> lottoNumbers = splitInput(inputNumbers);
+        validateLotto(lottoNumbers);
+        this.lottoNumbers = makeLotto(lottoNumbers);
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
-        validateLottoSetSize(lottoNumbers);
-        this.lottoNumbers = makeSortLotto(lottoNumbers);
+    private List<LottoNumber> makeLotto(List<Integer> lottoNumbers) {
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
+        for (int number : makeSortLotto(lottoNumbers)) {
+            lottoNumberList.add(new LottoNumber(number));
+        }
+        return lottoNumberList;
     }
 
-    public List<Integer> splitInput(String[] inputNumbers) {
+    private List<Integer> splitInput(String[] inputNumbers) {
         List<Integer> numbers = new ArrayList<>();
         for (String number : inputNumbers) {
             numbers.add(convertStringToInt(number));
@@ -41,29 +55,9 @@ public class Lotto {
         }
     }
 
-    private static List<Integer> makeAutoLotto() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
-        }
-
-        Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
-    }
-
-    private static List<Integer> makeSortLotto(List<Integer> numbers) {
-        Collections.sort(numbers);
-        validateLottoNumbers(numbers);
-        return numbers;
-    }
-
-    private static void validateLottoNumbers(List<Integer> numbers) {
-        if (numbers.get(5) > LOTTO_MAX_NUM) {
-            throw new IllegalArgumentException(IS_NOT_LOTTO_NUMBER);
-        }
-        if (numbers.get(0) < LOTTO_MIN_NUM) {
-            throw new IllegalArgumentException(IS_NOT_LOTTO_NUMBER);
-        }
+    private void validateLotto(List<Integer> lottoNumbers) {
+        validateLottoSetSize(lottoNumbers);
+        valdiateDuplicate(lottoNumbers);
     }
 
     private void validateLottoSetSize(List<Integer> lottoNumbers) {
@@ -72,27 +66,51 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getLottoNumbers() {
+    private void valdiateDuplicate(List<Integer> numbers) {
+        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
+        if (uniqueNumbers.size() != numbers.size()) {
+            throw new IllegalArgumentException(IS_DUPLICATE_NUMBER);
+        }
+    }
+
+    private List<Integer> makeSortLotto(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 
-    public LottoRank getLottoResult(Lotto winningLotto) {
-        int equalCount = 0;
-        List<Integer> winningLottoNumbers = winningLotto.getLottoNumbers();
-        for (int number : winningLottoNumbers) {
-            equalCount += addCount(number);
+    public List<Integer> getLottoNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            numbers.add(lottoNumber.getLottoNumber());
         }
-        return getRank(equalCount);
+        return Collections.unmodifiableList(numbers);
     }
 
-    private int addCount(int winningNumber) {
-        if (lottoNumbers.contains(winningNumber)) {
-            return 1;
-        }
-        return 0;
+
+    public boolean isNumberContain(int number) {
+        return lottoNumbers.contains(new LottoNumber(number));
     }
 
-    private LottoRank getRank(int equalCount) {
-        return LottoRank.matchRank(equalCount);
+    public void validateDuplicate(int number) {
+        if (isNumberContain(number)) {
+            throw new IllegalArgumentException(IS_DUPLICATE_NUMBER);
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
