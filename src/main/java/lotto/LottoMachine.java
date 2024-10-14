@@ -45,4 +45,8 @@ public class LottoMachine {
         return winLottoTicket;
     }
 
+    public double rateOfReturnResult(int totalMoney, int totalPrizeMoney) {
+        return Math.floor((double)totalPrizeMoney/totalMoney*100)/100.0;
+    }
+
 }

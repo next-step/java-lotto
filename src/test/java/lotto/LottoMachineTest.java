@@ -27,4 +27,10 @@ class LottoMachineTest {
     void 금액만큼_로또_번호를_발급() {
         assertThat(lottoMachine.makeTotalLottoTickets(14).size()).isEqualTo(14);
     }
+
+    @Test
+    @DisplayName("수익률을 확인")
+    void 수익률_확인() {
+        assertThat(0.35).isEqualTo(lottoMachine.rateOfReturnResult(14000, 5000));
+    }
 }
