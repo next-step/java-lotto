@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatics;
 import lotto.domain.Rank;
@@ -35,9 +34,9 @@ class RankTest {
         );
         LottoStatics lottoStatics = new LottoStatics(lottos);
         WinNumber winNumber = new WinNumber(1, 2, 3, 4, 5, 6);
-        LottoNumber bonus = new LottoNumber(10);
+        winNumber.addBonus(new BonusNumber(45));
 
-        double ratio = Rank.ratio(lottoStatics.totalPrize(winNumber, bonus), 14000);
+        double ratio = Rank.ratio(lottoStatics.totalPrize(winNumber), 14000);
 
         assertThat(ratio).isEqualTo(0.35);
     }
@@ -50,8 +49,9 @@ class RankTest {
             new Lotto(1, 2, 3, 9, 10, 11)
         );
         WinNumber winNumber = new WinNumber(1, 2, 3, 21, 22, 23);
-        LottoNumber bonus = new LottoNumber(41);
-        long result = Rank.calculatePrize(lottos, winNumber, bonus);
+        winNumber.addBonus(new BonusNumber(45));
+
+        long result = Rank.calculatePrize(lottos, winNumber);
 
         assertThat(result).isEqualTo(15_000);
     }
@@ -59,8 +59,9 @@ class RankTest {
     @Test
     void matchCount를_받아서_Rank를_반환한다() {
         int matchCount = 3;
+        boolean isMatchBonus = false;
 
-        Rank matchedRank = Rank.match(matchCount);
+        Rank matchedRank = Rank.match(matchCount, isMatchBonus);
 
         assertThat(matchedRank).isEqualTo(Rank.THREE);
     }

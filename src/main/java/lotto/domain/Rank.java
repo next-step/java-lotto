@@ -22,11 +22,11 @@ public enum Rank {
         this.matchNumber = matchNumber;
     }
 
-    public static long calculatePrize(List<Lotto> lottos, WinNumber winNumber, LottoNumber lottoNumber) {
+    public static long calculatePrize(List<Lotto> lottos, WinNumber winNumber) {
         long totalPrize = 0;
 
         for (Lotto lotto : lottos) {
-            Rank matched = lotto.match(winNumber, lottoNumber);
+            Rank matched = lotto.match(winNumber);
             totalPrize += matched.prize;
         }
 
@@ -39,20 +39,24 @@ public enum Rank {
         return Math.floor(ratio * 100) / 100.0;
     }
 
-    public static Rank match(int matchCount) {
-        if (matchCount == 3) {
+    public static Rank match(int matchCount, boolean isMatchBonus) {
+        if (matchCount == THREE.matchNumber) {
             return THREE;
         }
 
-        if (matchCount == 4) {
+        if (matchCount == FOUR.matchNumber && isMatchBonus) {
+            return SECOND;
+        }
+
+        if (matchCount == FOUR.matchNumber) {
             return FOUR;
         }
 
-        if (matchCount == 5) {
+        if (matchCount == FIVE.matchNumber) {
             return FIVE;
         }
 
-        if (matchCount == 6) {
+        if (matchCount == WIN.matchNumber) {
             return WIN;
         }
 
