@@ -28,6 +28,10 @@ public class Money {
         return (double) gain / money;
     }
 
+    public Money minus(final Money otherMoney) {
+        return new Money(money - otherMoney.money);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(money);
