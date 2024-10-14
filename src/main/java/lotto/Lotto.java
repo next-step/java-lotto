@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +15,12 @@ public class Lotto {
         IntStream.rangeClosed(1, 45).forEach(lottoNumbers::add);
         Collections.shuffle(lottoNumbers);
         this.lottoNumbers = lottoNumbers.subList(0, 6);
+    }
+
+    public Lotto(String winningNumbers) {
+        String[] winningNumberList = winningNumbers.replace(" ", "").split(",");
+        this.lottoNumbers = Arrays.stream(winningNumberList).map(Integer::parseInt)
+                                .collect(Collectors.toList());
     }
 
     public List<Integer> getLottoNumbers() {
