@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -32,7 +33,7 @@ public enum LottoReward {
         rewardMap.put(Key.valueOf(4, false), FORTH_PLACE);
         rewardMap.put(Key.valueOf(3, true), FIFTH_PLACE);
         rewardMap.put(Key.valueOf(3, false), FIFTH_PLACE);
-        return rewardMap;
+        return Collections.unmodifiableMap(rewardMap);
     }
 
     public static LottoReward valueOf(int matchCount, boolean matchBonus) {
