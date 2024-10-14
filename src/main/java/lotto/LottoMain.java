@@ -13,10 +13,10 @@ public class LottoMain {
 
         System.out.println();
         List<Integer> winningLotto = LottoInputView.inputWinningNumbers();
-        lottos.getAllMatchCount(winningLotto);
+        lottos.calculateAllMatchCount(winningLotto);
 
         System.out.println();
-        LottoResultView.printLottoStatistics(lottos.getWinningLottoStatistics());
-        LottoResultView.printLottoYield(lottos.calculateRateOfReturn(lottos.calculateTotalWinningAmount(), paidAmount));
+        LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos())); //todo
+        LottoResultView.printLottoYield(LottoWinningStatistics.calculateRateOfReturn(LottoWinningStatistics.calculateTotalWinningAmount(lottos.getLottos()), paidAmount));
     }
 }

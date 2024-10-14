@@ -30,38 +30,10 @@ public class Lottos {
         }
     }
 
-    public void getAllMatchCount(List<Integer> winningLotto) {
+    public void calculateAllMatchCount(List<Integer> winningLotto) {
         for (Lotto lotto : lottos) {
-            lotto.getMatchCount(winningLotto);
+            lotto.calculateMatchCount(winningLotto);
         }
-    }
-
-    public Map<Integer, Integer> getWinningLottoStatistics() {
-        Map<Integer, Integer> winningLottoMap = new HashMap<>();
-        winningLottoMap.put(3, 0);
-        winningLottoMap.put(4, 0);
-        winningLottoMap.put(5, 0);
-        winningLottoMap.put(6, 0);
-
-        //todo
-        for (Lotto lotto : this.lottos) {
-            if (lotto.isWinningLotto()) {
-                winningLottoMap.put(lotto.getMatchCount(), winningLottoMap.get(lotto.getMatchCount()) + 1);
-            }
-        }
-        return winningLottoMap;
-    }
-
-    public int calculateTotalWinningAmount() {
-        int winningAmount = 0;
-        for (Lotto lotto : this.lottos) {
-            winningAmount += lotto.getAmountForWinningLotto();
-        }
-        return winningAmount;
-    }
-
-    public double calculateRateOfReturn(int winningAmount, int paidAmount) {
-        return Math.floor(((double) winningAmount / paidAmount) * 100) / 100;
     }
 
     public static int countByAmount(int paidAmount) {
@@ -70,6 +42,5 @@ public class Lottos {
         }
         return paidAmount / PRICE;
     }
-
 
 }

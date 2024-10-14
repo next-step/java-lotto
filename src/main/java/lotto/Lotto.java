@@ -42,7 +42,7 @@ public class Lotto {
         }
     }
 
-    public int getMatchCount(List<Integer> winningNumbers) {
+    public int calculateMatchCount(List<Integer> winningNumbers) {
         for (int i = 0; i < 6; i++) {
             matchCount += checkMatchNumber(winningNumbers, lottoNumbers.get(i));
         }
