@@ -39,8 +39,8 @@ public class Lotto {
         return matchCount;
     }
 
-    public boolean hasBonusNumber(int bonusNumber) {
-        return numbers.value().contains(bonusNumber);
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return numbers.hasBonusNumber(bonusNumber);
     }
 
     private int updateMatchCount(int number, List<Integer> winningNumberList, int matchCount) {

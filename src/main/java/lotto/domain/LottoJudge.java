@@ -11,9 +11,9 @@ public class LottoJudge {
     private static final String BONUS_NUMBER_DUPLICATED_MESSAGE = "보너스 번호가 당첨 번호와 겹칩니다.";
 
     private final LottoNumbers winningLottoNumbers;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    private LottoJudge(LottoNumbers winningLottoNumbers, int bonusNumber) {
+    private LottoJudge(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
         this.winningLottoNumbers = winningLottoNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -23,7 +23,7 @@ public class LottoJudge {
         if (winningNumberList.contains(bonusNumber)) {
             throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATED_MESSAGE);
         }
-        return new LottoJudge(LottoNumbers.valueOf(winningNumberList), bonusNumber);
+        return new LottoJudge(LottoNumbers.valueOf(winningNumberList), LottoNumber.valueOf(bonusNumber));
     }
 
     public LottoStatisticsDTO getStatisticsOf(LottoAgent agent) {
@@ -67,7 +67,7 @@ public class LottoJudge {
         return this.winningLottoNumbers;
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return this.bonusNumber;
     }
 
