@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -46,17 +47,24 @@ public class InputView {
     public List<Lotto> getManualLottoNumbers(int count) {
         try {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-            List<Lotto> lottoList = new ArrayList<>();
-            for (int i = 0; i < count; i++) {
-                List<Integer> numbers = Arrays.stream(sc.nextLine().split(", "))
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList());
-                lottoList.add(new Lotto(new HashSet<>(numbers)));
-            }
-            return lottoList;
+            return IntStream.range(0, count)
+                    .mapToObj(i -> createLotto())
+                    .collect(Collectors.toList());
         } catch (Exception e) {
             sc.nextLine();
             return new ArrayList<>();
+        }
+    }
+
+    private Lotto createLotto() {
+        try {
+            Set<Integer> numbers = Arrays.stream(sc.nextLine().split(", "))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toSet());
+            return new Lotto(numbers);
+        } catch (Exception e) {
+            sc.nextLine();
+            throw new RuntimeException(e);
         }
     }
 
