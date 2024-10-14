@@ -13,7 +13,7 @@
 - [x] 로또 생성(LottoGenerator)
   - [x] shuffle()를 통한 생성(LottoShuffleGenerator)
 - [ ] 당첨 확인(WinningCheck)
-  - [ ] 당첨 조건
+  - [x] 당첨 조건
   - [ ] 수익률 계산
 - [ ] 당첨 화면(ResulView)
 

@@ -7,10 +7,6 @@ import java.util.List;
 public class WinningNumber {
     private final List<Integer> winningNumber= new ArrayList<>();
 
-    WinningNumber() {
-
-    }
-
     public void convertStringToIntList(String stringWinningNumber) {
         Arrays.stream(splitString(stringWinningNumber))
                 .map(Integer::parseInt)

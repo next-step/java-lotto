@@ -27,4 +27,8 @@ public class Lottos {
         }
         return sb.toString();
     }
+
+    public Lotto getLotto(int number) {
+        return lottos.get(number);
+    }
 }
