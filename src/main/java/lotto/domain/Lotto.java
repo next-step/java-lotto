@@ -28,8 +28,8 @@ public class Lotto {
         return money / PER_COST;
     }
 
-    public int match(WinNumber winnerNumber) {
-        return winnerNumber.matchCount(lottoNumbers);
+    public Rank match(WinNumber winnerNumber) {
+        return lottoNumbers.calculateRank(winnerNumber);
     }
 
     public LottoNumbers getLottoNumbers() {

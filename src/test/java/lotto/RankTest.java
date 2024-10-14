@@ -34,6 +34,7 @@ class RankTest {
         );
         LottoStatics lottoStatics = new LottoStatics(lottos);
         WinNumber winNumber = new WinNumber(1, 2, 3, 4, 5, 6);
+        winNumber.addBonus(new BonusNumber(45));
 
         double ratio = Rank.ratio(lottoStatics.totalPrize(winNumber), 14000);
 
@@ -41,9 +42,27 @@ class RankTest {
     }
 
     @Test
-    void 상금을_등수에_맞게_계산한다() {
-        long result = Rank.calculatePrize(3, Rank.THREE);
+    void 로또들의_총상금을_계산한다() {
+        List<Lotto> lottos = List.of(
+            new Lotto(1, 2, 3, 4, 5, 6),
+            new Lotto(1, 2, 3, 7, 8, 9),
+            new Lotto(1, 2, 3, 9, 10, 11)
+        );
+        WinNumber winNumber = new WinNumber(1, 2, 3, 21, 22, 23);
+        winNumber.addBonus(new BonusNumber(45));
 
-        assertThat(result).isEqualTo(15000);
+        long result = Rank.calculatePrize(lottos, winNumber);
+
+        assertThat(result).isEqualTo(15_000);
+    }
+
+    @Test
+    void matchCount를_받아서_Rank를_반환한다() {
+        int matchCount = 3;
+        boolean isMatchBonus = false;
+
+        Rank matchedRank = Rank.match(matchCount, isMatchBonus);
+
+        assertThat(matchedRank).isEqualTo(Rank.THREE);
     }
 }

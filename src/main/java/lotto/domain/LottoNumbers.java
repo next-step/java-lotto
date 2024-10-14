@@ -38,13 +38,8 @@ public class LottoNumbers {
         this.lottoNumbers = numbers;
     }
 
-    public int calculateMatchCount(LottoNumbers other) {
-        int matchCount = 0;
-
-        for (LottoNumber number : lottoNumbers) {
-            matchCount = other.contains(number) ? matchCount + 1 : matchCount;
-        }
-        return matchCount;
+    public Rank calculateRank(WinNumber winNumber) {
+        return winNumber.calculateRank(lottoNumbers);
     }
 
     public LottoNumbers pickNumbers() {
@@ -65,7 +60,7 @@ public class LottoNumbers {
             .collect(Collectors.toList());
     }
 
-    private boolean contains(LottoNumber number) {
+    public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 

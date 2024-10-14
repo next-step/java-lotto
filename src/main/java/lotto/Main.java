@@ -25,12 +25,13 @@ public class Main {
         }
 
         WinNumber winNumber = InputView.inputWinnerNumber();
+        winNumber.addBonus(InputView.inputBonusNumber());
 
-        OutputView.staticsView();
-        OutputView.matchView(Rank.THREE, lottoStatics.matchCount(winNumber, Rank.THREE));
-        OutputView.matchView(Rank.FOUR, lottoStatics.matchCount(winNumber, Rank.FOUR));
-        OutputView.matchView(Rank.FIVE, lottoStatics.matchCount(winNumber, Rank.FIVE));
-        OutputView.matchView(Rank.WIN, lottoStatics.matchCount(winNumber, Rank.WIN));
+        OutputView.matchView(Rank.THREE, lottoStatics.findRank(winNumber, Rank.THREE));
+        OutputView.matchView(Rank.FOUR, lottoStatics.findRank(winNumber, Rank.FOUR));
+        OutputView.matchView(Rank.FIVE, lottoStatics.findRank(winNumber, Rank.FIVE));
+        OutputView.matchView(Rank.SECOND, lottoStatics.findRank(winNumber, Rank.SECOND));
+        OutputView.matchView(Rank.WIN, lottoStatics.findRank(winNumber, Rank.WIN));
         OutputView.ratioView(Rank.ratio(lottoStatics.totalPrize(winNumber), money));
     }
 }

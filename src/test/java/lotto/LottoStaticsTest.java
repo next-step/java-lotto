@@ -41,11 +41,12 @@ class LottoStaticsTest {
         );
         LottoStatics lottoStatics = new LottoStatics(lottos);
         WinNumber winnerNumber = new WinNumber(1, 2, 3, 4, 5, 6);
+        winnerNumber.addBonus(new BonusNumber(45));
 
-        int resultThree = lottoStatics.matchCount(winnerNumber, Rank.THREE);
-        int resultFour = lottoStatics.matchCount(winnerNumber, Rank.FOUR);
-        int resultFive = lottoStatics.matchCount(winnerNumber, Rank.FIVE);
-        int resultSix = lottoStatics.matchCount(winnerNumber, Rank.WIN);
+        int resultThree = lottoStatics.findRank(winnerNumber, Rank.THREE);
+        int resultFour = lottoStatics.findRank(winnerNumber, Rank.FOUR);
+        int resultFive = lottoStatics.findRank(winnerNumber, Rank.FIVE);
+        int resultSix = lottoStatics.findRank(winnerNumber, Rank.WIN);
 
         assertThat(resultThree).isEqualTo(1);
         assertThat(resultFour).isEqualTo(1);
@@ -55,7 +56,6 @@ class LottoStaticsTest {
 
     @Test
     void 총상금을_계산한다() {
-        int money = 14000;
         List<Lotto> lottos = List.of(
             new Lotto(new LottoNumbers(8, 21, 23, 41, 42, 43)),
             new Lotto(new LottoNumbers(3, 5, 11, 16, 32, 38)),
@@ -74,6 +74,7 @@ class LottoStaticsTest {
         );
         LottoStatics lottoStatics = new LottoStatics(lottos);
         WinNumber winnerNumber = new WinNumber(1, 2, 3, 4, 5, 6);
+        winnerNumber.addBonus(new BonusNumber(45));
 
         long totalPrize = lottoStatics.totalPrize(winnerNumber);
 
