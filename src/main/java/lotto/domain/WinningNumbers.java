@@ -1,49 +1,21 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Set;
 
-import static java.util.stream.Collectors.toSet;
-
 public class WinningNumbers {
-
     private static final int WINNING_NUMBER_COUNT = 6;
-    private final static String WINNING_NUMBERS_SEPERATOR = ", ";
 
     private final Set<LottoNumber> winningNumbers;
     private final BonusBall bonusBall;
 
-    public WinningNumbers(int bonusBall, final int... winningNumbers) {
-        this(convertIntToLottoNumber(winningNumbers), new BonusBall(bonusBall));
+    public static WinningNumbers create(final Set<LottoNumber> numbers, final int bonusBall){
+        return new WinningNumbers(numbers, new BonusBall(bonusBall));
     }
 
     public WinningNumbers(final Set<LottoNumber> winningNumbers, final BonusBall bonusBall) {
         this.winningNumbers = winningNumbers;
         this.bonusBall = bonusBall;
         this.validate();
-    }
-
-    public static WinningNumbers create(final String numbers, final int bonusBall){
-        return new WinningNumbers(createNumbers(numbers), new BonusBall(bonusBall));
-    }
-
-    private static Set<LottoNumber> convertIntToLottoNumber(int[] winningNumbers) {
-        return Arrays.stream(winningNumbers)
-                .mapToObj(LottoNumber::valueOf)
-                .collect(toSet());
-    }
-
-    private static Set<LottoNumber> createNumbers(String numbers) {
-        String[] splitNumbers = splitNumbers(numbers);
-
-        return Arrays.stream(splitNumbers)
-                .mapToInt(WinningNumbers::parseInt)
-                .mapToObj(LottoNumber::valueOf)
-                .collect(toSet());
-    }
-
-    private static String[] splitNumbers(String numbers) {
-        return numbers.split(WINNING_NUMBERS_SEPERATOR);
     }
 
     private static int parseInt(String number) {

@@ -3,9 +3,16 @@ package lotto;
 import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
+
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
 
 public class LottoApplication {
+    private static final String NUMBER_SEPERATOR = ",";
+
     private final InputView inputView;
     private final ResultView resultView;
     private final LottoNumbersGenerater numbersGenerater;
@@ -46,7 +53,18 @@ public class LottoApplication {
     private WinningNumbers createWinningNumbers() {
         String numbers = inputView.getWinningNumbersFromUser();
         int bonusBall = inputView.getBonusBallFromUser();
-        return WinningNumbers.create(numbers, bonusBall);
+        return WinningNumbers.create(convertStringToLottoNumber(numbers), bonusBall);
+    }
+
+    private Set<LottoNumber> convertStringToLottoNumber(String numbers){
+        return Arrays.stream(splitNumbers(numbers))
+                .map(Integer::parseInt)
+                .map(LottoNumber::valueOf)
+                .collect(toSet());
+    }
+
+    private String[] splitNumbers(String numbers) {
+        return numbers.replace(" ", "").split(NUMBER_SEPERATOR);
     }
 
     private void showLottoResult(LottoResult lottoResult) {
