@@ -21,22 +21,15 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(int number) {
-        if (number >= LOTTO_MIN_VALUE && number <= LOTTO_MAX_VALUE){
-            return LottoNumCache.cache[number - 1];
+        if(number < LOTTO_MIN_VALUE || number > LOTTO_MAX_VALUE){
+            throw new IllegalArgumentException("로또 숫자는 1이상 45이하 범위 이내에서 입력하세요");
         }
-        return new LottoNumber(number);
+        return LottoNumCache.cache[number - 1];
     }
 
     private final int number;
 
-    private LottoNumber(final String number) {
-        this(Integer.parseInt(number));
-    }
-
-    private LottoNumber(final int number) {
-        if(number < LOTTO_MIN_VALUE || number > LOTTO_MAX_VALUE){
-            throw new IllegalArgumentException("로또 숫자는 1이상 45이하 범위 이내에서 입력하세요");
-        }
+    private LottoNumber(int number){
         this.number = number;
     }
 
