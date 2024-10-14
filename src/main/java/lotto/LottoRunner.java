@@ -10,7 +10,7 @@ public class LottoRunner {
 
         LottoTicket manualLottoTicket = InputView.readManualLotto(totalPurchasePrice);
 
-        LottoTicket lottoTicket = LottoTicketGenerator.createTicket(totalPurchasePrice, manualLottoTicket);
+        LottoTicket lottoTicket = LottoTicketGenerator.createCompleteLottoTicket(totalPurchasePrice, manualLottoTicket);
         ResultView.printLottoDetail(lottoTicket);
 
         Lotto lastWeekWinningNumbers = InputView.readLastWeekWinningNumbers();

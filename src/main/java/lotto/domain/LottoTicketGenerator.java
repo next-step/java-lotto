@@ -9,7 +9,7 @@ public class LottoTicketGenerator {
         throw new UnsupportedOperationException("인스턴스를 생성할 수 없습니다.");
     }
 
-    public static LottoTicket createTicket(final LottoPurchasePrice purchasePrice, final LottoTicket manualLottoTicket) {
+    public static LottoTicket createCompleteLottoTicket(final LottoPurchasePrice purchasePrice, final LottoTicket manualLottoTicket) {
         List<Lotto> manualTicket = manualLottoTicket.getTicket();
 
         int autoIssueCount = purchasePrice.getAutoLottoCount(manualLottoTicket.getTicketSize());
