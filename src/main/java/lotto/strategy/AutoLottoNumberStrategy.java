@@ -10,7 +10,7 @@ import static lotto.number.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.number.LottoNumber.MIN_LOTTO_NUMBER;
 
 
-public class RandomLottoNumberStrategy implements LottoNumberStrategy {
+public class AutoLottoNumberStrategy implements LottoNumberStrategy {
 
     @Override
     public List<Integer> generate() {
