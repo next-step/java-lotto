@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.model.Buyer;
 import lotto.model.Lotto;
-import lotto.model.Rankings;
+import lotto.model.Result;
 import lotto.model.dto.LottoNumber;
 import lotto.util.LottoNumbersCreator;
 import lotto.view.InputView;
@@ -22,11 +22,9 @@ public class LottoController {
 
         ResultView.printBuyerLottosInfo(buyer);
 
-        Lotto winningLotto = Lotto.of(() -> Arrays.stream(InputView.inputWinningLottoNumbers())
-                .map(LottoNumber::of)
-                .collect(Collectors.toList()));
-        Rankings rankings = buyer.rankings(winningLotto);
+        Lotto winningLotto = Lotto.of(InputView::inputWinningLottoNumbers);
+        Result result = Result.of(buyer, winningLotto);
 
-        ResultView.printStatistics(buyCount, rankings);
+        ResultView.printStatistics(buyCount, result);
     }
 }

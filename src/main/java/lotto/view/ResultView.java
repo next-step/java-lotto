@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.model.Buyer;
 import lotto.model.Lotto;
-import lotto.model.Rankings;
+import lotto.model.Result;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,9 +19,9 @@ public class ResultView {
         System.out.println(buyerLottoes(buyer));
     }
 
-    public static void printStatistics(int buyCount, Rankings rankings) {
+    public static void printStatistics(int buyCount, Result rankings) {
         System.out.println(WINNING_STATISTICS_TITLE);
-        System.out.println(rankingResult(rankings));
+        System.out.println(rankingResults(rankings));
         System.out.println(totalEarningRate(buyCount, rankings));
     }
 
@@ -37,11 +37,11 @@ public class ResultView {
         return String.join(LINE_BREAK, buyerLottoes);
     }
 
-    private static String totalEarningRate(int buyCount, Rankings rankings) {
-        return String.format(TOTAL_EARNING_RATE_FORMAT, rankings.statistics(buyCount));
+    private static String totalEarningRate(int buyCount, Result result) {
+        return String.format(TOTAL_EARNING_RATE_FORMAT, result.statistics(buyCount));
     }
 
-    private static String rankingResult(Rankings rankings) {
-        return String.join(LINE_BREAK, rankings.result());
+    private static String rankingResults(Result result) {
+        return String.join(LINE_BREAK, result.formattedRankingResults());
     }
 }

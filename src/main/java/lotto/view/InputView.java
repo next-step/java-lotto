@@ -1,8 +1,12 @@
 package lotto.view;
 
+import lotto.model.dto.LottoNumber;
 import lotto.util.SplitUtil;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -19,9 +23,12 @@ public class InputView {
         return buyAmount / DIVIDE_AMOUNT;
     }
 
-    public static Integer[] inputWinningLottoNumbers() {
+    public static List<LottoNumber> inputWinningLottoNumbers() {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return SplitUtil.stringToNumbers(SCANNER.nextLine());
+        Integer[] integers = SplitUtil.stringToNumbers(SCANNER.nextLine());
+        return Arrays.stream(integers)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 }
