@@ -1,9 +1,11 @@
 package lotto;
 
 import lotto.constant.Prize;
+import lotto.domain.CashAmount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCreateByMission;
 import lotto.domain.LottoMachine;
+import lotto.domain.ManualAmount;
 import lotto.domain.MissionProfitRateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,16 +22,25 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또 자동 생성 테스트")
     void create() {
-        LottoMachine machine = LottoMachine.of(10000
+        LottoMachine machine = LottoMachine.of(new CashAmount(10000), new ManualAmount(0)
                 , new MissionProfitRateStrategy(), new LottoCreateByMission());
         List<Lotto> lottoList = machine.createAutomatically();
         assertThat(lottoList.size()).isEqualTo(10);
     }
 
     @Test
+    @DisplayName("로또 수동 생성 테스트")
+    void createManually() {
+        LottoMachine machine = LottoMachine.of(new CashAmount(10000), new ManualAmount(1)
+                , new MissionProfitRateStrategy(), new LottoCreateByMission());
+        Lotto lotto = machine.createManually(Set.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.getNumbers()).containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6);
+    }
+
+    @Test
     @DisplayName("로또 당첨 확인 테스트")
     void checkLottoPrize() {
-        LottoMachine machine = LottoMachine.of(5000
+        LottoMachine machine = LottoMachine.of(new CashAmount(5000), new ManualAmount(0)
                 , new MissionProfitRateStrategy(), new LottoCreateByMission());
 
         EnumMap<Prize, Integer> map = machine.checkLottoPrize(
@@ -51,7 +62,7 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또 2등 당첨 테스트")
     void checkSecondPrize() {
-        LottoMachine machine = LottoMachine.of(5000
+        LottoMachine machine = LottoMachine.of(new CashAmount(5000), new ManualAmount(0)
                 , new MissionProfitRateStrategy(), new LottoCreateByMission());
 
         EnumMap<Prize, Integer> map = machine.checkLottoPrize(
@@ -76,7 +87,7 @@ public class LottoMachineTest {
         prizeCountMap.put(Prize.THIRD, 0);
         prizeCountMap.put(Prize.SECOND, 1);
         prizeCountMap.put(Prize.FIRST, 0);
-        LottoMachine machine = LottoMachine.of(20_000_000
+        LottoMachine machine = LottoMachine.of(new CashAmount(20_000_000), new ManualAmount(0)
                 , new MissionProfitRateStrategy(), new LottoCreateByMission());
 
         assertThat(machine.calculateProfitRate(prizeCountMap))

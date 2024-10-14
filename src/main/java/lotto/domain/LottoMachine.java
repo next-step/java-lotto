@@ -13,32 +13,36 @@ import java.util.stream.IntStream;
 public class LottoMachine {
 
     private static final int LOTTO_PRICE = 1000;
-    private final int cashAmount;
+    private final CashAmount cashAmount;
+    private final ManualAmount manualAmount;
     private final LottoNumbers balls;
     private final ProfitRateStrategy profitRateStrategy;
     private final LottoCreateStrategy lottoCreateStrategy;
 
-    private LottoMachine(int cashAmount, ProfitRateStrategy profitRateStrategy, LottoCreateStrategy lottoCreateStrategy) {
+    private LottoMachine(CashAmount cashAmount, ManualAmount manualAmount, ProfitRateStrategy profitRateStrategy
+            , LottoCreateStrategy lottoCreateStrategy) {
         this.cashAmount = cashAmount;
+        this.manualAmount = manualAmount;
         this.balls = new LottoNumbers();
         this.profitRateStrategy = profitRateStrategy;
         this.lottoCreateStrategy = lottoCreateStrategy;
     }
 
-    public static LottoMachine of(int cashAmount, ProfitRateStrategy profitRateStrategy,  LottoCreateStrategy lottoCreateStrategy) {
+    public static LottoMachine of(CashAmount cashAmount, ManualAmount manualAmount, ProfitRateStrategy profitRateStrategy
+            , LottoCreateStrategy lottoCreateStrategy) {
         validateCashAmount(cashAmount);
-        return new LottoMachine(cashAmount, profitRateStrategy, lottoCreateStrategy);
+        return new LottoMachine(cashAmount, manualAmount, profitRateStrategy, lottoCreateStrategy);
     }
 
-    private static void validateCashAmount(int cashAmount) {
-        if (cashAmount < LOTTO_PRICE) {
+    private static void validateCashAmount(CashAmount cashAmount) {
+        if (cashAmount.isLessThan(LOTTO_PRICE)) {
             throw new IllegalArgumentException("로또 구입 금액은 최소 " + LOTTO_PRICE + "원 이상이어야 합니다.");
         }
     }
 
     public List<Lotto> createAutomatically() {
-        int purchaseQuantity = calculatePurchaseQuantity();
-        return IntStream.range(0, purchaseQuantity)
+        int autoPurchaseQuantity = manualAmount.calculateAutoPurchaseQuantity(calculatePurchaseQuantity());
+        return IntStream.range(0, autoPurchaseQuantity)
                 .mapToObj(i -> lottoCreateStrategy.create(balls))
                 .collect(Collectors.toList());
     }
@@ -48,7 +52,7 @@ public class LottoMachine {
     }
 
     public int calculatePurchaseQuantity() {
-        return cashAmount / LOTTO_PRICE;
+        return cashAmount.calculatePurchaseQuantity(LOTTO_PRICE);
     }
 
     public EnumMap<Prize, Integer> checkLottoPrize(List<Lotto> lottoList, Set<Integer> winningNumbers, int bonusNumber) {

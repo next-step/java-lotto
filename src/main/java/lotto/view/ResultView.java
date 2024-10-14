@@ -47,4 +47,7 @@ public class ResultView {
         }
     }
 
+    public void printLottoAmount(int amount, int total) {
+        System.out.println("수동으로 " + amount + "장, 자동으로 " + (total - amount) + "개를 구매했습니다.");
+    }
 }
