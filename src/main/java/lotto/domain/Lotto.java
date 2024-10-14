@@ -29,4 +29,7 @@ public class Lotto {
                 .filter(winningNumber.lottoNumbers::contains)
                 .count();
     }
+    public boolean hasNumber(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }

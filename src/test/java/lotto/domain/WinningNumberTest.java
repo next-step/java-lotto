@@ -49,4 +49,18 @@ class WinningNumberTest {
 
         assertThat(winningNumber.findLottoRewards(lotto)).isEqualTo(LottoRewards.FIRST);
     }
+
+    @Test
+    void 보너스번호_포함_당천번호_생성() {
+        Set<LottoNumber> winningNumbers = getLottoNumbers();
+        WinningNumber winningNumber = new WinningNumber(winningNumbers, 7);
+        assertThat(winningNumber).isNotNull();
+    }
+
+    @Test
+    void 보너스번호_당천번호_중복_검증() {
+        Set<LottoNumber> winningNumbers = getLottoNumbers();
+        assertThatThrownBy(() -> new WinningNumber(winningNumbers,6))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
