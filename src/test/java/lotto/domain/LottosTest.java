@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoPurchaseServiceTest {
+class LottosTest {
 
     @Test
     @DisplayName("로또 개수 구하기(1000원 이상)")
