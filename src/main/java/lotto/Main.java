@@ -4,7 +4,6 @@ import lotto.domain.LottoShuffleGenerator;
 import lotto.domain.Lottos;
 import lotto.domain.WinningCheck;
 import lotto.domain.WinningNumber;
-import lotto.service.LottoPurchaseService;
 import lotto.service.WinningStatistic;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -15,7 +14,6 @@ public class Main {
 
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
-        LottoPurchaseService lottoPurchaseService = new LottoPurchaseService();
         WinningNumber winningNumber = new WinningNumber();
         Lottos lottos = new Lottos();
 
