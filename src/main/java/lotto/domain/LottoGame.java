@@ -21,10 +21,10 @@ public class LottoGame {
         return Collections.unmodifiableList(lottos);
     }
 
-    public WinningResult calculateLottoResult(Lotto winningNumbers) {
+    public WinningResult calculateLottoResult(WinningLotto winning) {
         WinningResult result = new WinningResult();
         for (Lotto lotto : lottos) {
-            int matchCount = winningNumbers.match(lotto.getLottoNumbers());
+            int matchCount = winning.match(lotto);
             result.incrementMatchCount(matchCount);
         }
         return result;

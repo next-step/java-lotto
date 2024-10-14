@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
+import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.view.ResultView;
 
@@ -22,8 +23,8 @@ public class LottoMain {
             ResultView.printLotto(lotto);
         }
 
-        Lotto winningNumbers = new Lotto(inputLastWinningNumbers());
-        WinningResult winningResult = lottoGame.calculateLottoResult(winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(inputLastWinningNumbers());
+        WinningResult winningResult = lottoGame.calculateLottoResult(winningLotto);
 
         ResultView.printMatchStaticsInfo(winningResult.getStaticsList());
         ResultView.printProfitRate(winningResult.calculateProfitRate(), lottoQuantity);

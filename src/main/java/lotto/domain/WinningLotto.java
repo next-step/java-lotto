@@ -1,9 +1,13 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
+
+    private static final String DELIMITER = ", ";
 
     private final Lotto lotto;
 
@@ -17,6 +21,27 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> numbers) {
         this(new Lotto(numbers));
+    }
+
+    public WinningLotto(String numbers) {
+        this(Arrays.stream(numbers.split(DELIMITER))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
+    }
+
+    public int match(Lotto userLotto) {
+        return userLotto.getLottoNumbers()
+                .stream()
+                .filter(lotto.getLottoNumbers()::contains)
+                .mapToInt(n -> 1)
+                .sum();
+    }
+
+    public int match(int ... numbers) {
+        return Arrays.stream(numbers)
+                .filter(lotto.getLottoNumbers()::contains)
+                .map(value -> 1)
+                .sum();
     }
 
     @Override
