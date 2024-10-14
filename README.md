@@ -7,3 +7,16 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 1단계 - 문자열 계산기
+
+### TODO
+- [x] 입력 받은 문자열을 빈 공백으로 나눈다.
+- [x] 피연산자 + 연산자 + 피연산자 순서대로 반복해서 계산한다.
+- [x] 테스트할 수 있는 단위로 나누어 구현 목록을 만든다. 
+- [x] 덧셈 
+- [x] 뺄셈 
+- [x] 곱셈 
+- [x] 나눗셈  
+- [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw 
+- [x] 사칙 연산을 모두 포함하는 기능 구현
