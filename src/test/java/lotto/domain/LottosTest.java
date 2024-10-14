@@ -3,8 +3,11 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
+import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
@@ -22,7 +25,9 @@ public class LottosTest {
     @Test
     void countMatchingNumbers(){
         Lottos lottos = createLottos();
-        WinningNumbers winningNumbers = new WinningNumbers(45, 1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = new WinningNumbers(
+                convertIntToLottoNumber(1, 2, 3, 4, 5, 6),
+                new BonusBall(45));
 
         /*
         첫번째 복권 당첨번호와 번호 같은 갯수 : 6
@@ -35,7 +40,9 @@ public class LottosTest {
     @Test
     void matchingBonusNumbers(){
         Lottos lottos = createLottos();
-        WinningNumbers winningNumbers = new WinningNumbers(1, 2, 3, 4, 5, 6, 7);
+        WinningNumbers winningNumbers = new WinningNumbers(
+                convertIntToLottoNumber(2, 3, 4, 5, 6, 7),
+                new BonusBall(1));
 
         assertThat(lottos.matchingBonusNumbers(winningNumbers)).containsExactly(true, false);
     }
@@ -54,12 +61,13 @@ public class LottosTest {
     @DisplayName("로또 그룹들을 합칠 수 있다")
     @Test
     void addLottos(){
-        Lottos lottos = new Lottos(new String[]{"1, 2, 3, 4, 5, 6"});
-        Lottos otherLottos = new Lottos(new String[]{"7, 8, 9, 10, 11, 12"});
+        LottoNumbersGenerater numbersGenerater = new RandomNumbersGenerater();
+        Lottos lottos = Lottos.create(1, numbersGenerater);
+        Lottos otherLottos = Lottos.create(2, numbersGenerater);
 
         lottos.add(otherLottos);
 
-        assertThat(lottos.count()).isEqualTo(2);
+        assertThat(lottos.count()).isEqualTo(3);
     }
 
 
@@ -71,5 +79,11 @@ public class LottosTest {
                 )
         );
         return lottos;
+    }
+
+    private Set<LottoNumber> convertIntToLottoNumber(int... numbers){
+        return Arrays.stream(numbers)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(toSet());
     }
 }

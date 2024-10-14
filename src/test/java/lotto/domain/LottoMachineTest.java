@@ -43,10 +43,10 @@ public class LottoMachineTest {
         int purchaseAmount = 1500;
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
 
-        String[] manualNumbers = new String[]{
+        List<String> manualNumbers = List.of(
                 "1, 2, 3, 4, 5, 6",
                 "7, 8, 9, 10, 11, 12"
-        };
+        );
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> lottoMachine.buyManualLottos(manualNumbers))
                 .withMessage("로또를 구매할 돈이 부족합니다");
@@ -59,10 +59,10 @@ public class LottoMachineTest {
         int purchaseAmount = 1000;
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
 
-        String[] manualNumbers = new String[]{"1, 2, 3, 4, 5, 6"};
+        List<String> manualNumbers = List.of("1, 2, 3, 4, 5, 6");
         Lottos manualLotto = lottoMachine.buyManualLottos(manualNumbers);
 
-        Lottos lottos = new Lottos(manualNumbers);
+        Lottos lottos = new Lottos(List.of(new Lotto("1, 2, 3, 4, 5, 6")));
         assertThat(manualLotto).isEqualTo(lottos);
     }
 }
