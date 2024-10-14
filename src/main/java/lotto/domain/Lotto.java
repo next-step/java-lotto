@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Lotto {
+
     private List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {

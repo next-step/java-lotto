@@ -12,9 +12,9 @@ public class OutputView {
         System.out.println(msg);
     }
 
-    public static void printLottoNumbers(List<Lotto> lottoList) {
-        for (Lotto lotto : lottoList) {
-            System.out.println(lotto.getLottoNumbers());
+    public static void printLottoNumbers(List<List<Integer>> lottoNumbers) {
+        for (List<Integer> lottoNumber : lottoNumbers) {
+            System.out.println(lottoNumber);
         }
     }
 

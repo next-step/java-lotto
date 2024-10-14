@@ -9,69 +9,41 @@ import java.util.Map;
 
 public class Buyer {
     private static final BigDecimal UNIT_AMOUNT = new BigDecimal(1000);
-    private List<Lotto> lottoList;
-    private int count;
+    private Lottos lottos;
 
+    public Buyer(Lottos lottos) {
+        this.lottos = lottos;
+    }
     public Buyer(int count, LottoNumberGenerator generator) {
-        initMember(initLotte(generator.genLottoNumbers(count)));
+        this(initLottes(generator.genLottoNumbers(count)));
     }
 
-    public Buyer(List<Lotto> lottoList) {
-        initMember(lottoList);
-    }
-
-    private void initMember(List<Lotto> lottoList) {
-        this.count = lottoList.size();
-        this.lottoList = lottoList;
-    }
-    private List<Lotto> initLotte(List<List<Integer>> lists) {
+    private static Lottos initLottes(List<List<Integer>> lists) {
         List<Lotto> lottos = new ArrayList<>();
         for (List<Integer> lottoNum : lists) {
             lottos.add(new Lotto(lottoNum));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public BigDecimal getRateOfReturn(List<Integer> winningNumbers) {
 
         ValidationUtils.validateLottoNunbers(winningNumbers);
 
-        BigDecimal sum = BigDecimal.ZERO;
-        for (Lotto lt : this.lottoList) {
-            LottoRankingEnum rank = lt.getRanking(winningNumbers);
-            sum = sum.add(rank.getWinningAmount());
-        }
-
-        BigDecimal totalPayAmmout = UNIT_AMOUNT.multiply(new BigDecimal(this.count));
-
-        return sum.divide(totalPayAmmout, 2, RoundingMode.DOWN);
+        return lottos.getWinningAmount(winningNumbers).divide(lottos.getTotalPaymentAmount(), 2, RoundingMode.DOWN);
     }
 
     public Map<LottoRankingEnum, Integer> getWinningResult(List<Integer> winningNumbers) {
         ValidationUtils.validateLottoNunbers(winningNumbers);
-
-        Map<LottoRankingEnum, Integer> winningResult = new HashMap<>();
-        for (Lotto lt : lottoList) {
-            addResult(lt.getRanking(winningNumbers), winningResult);
-        }
-        return winningResult;
+        return lottos.getWinningResult(winningNumbers);
     }
 
-    private void addResult(LottoRankingEnum rankingEnum, Map<LottoRankingEnum, Integer> result) {
-
-        if(LottoRankingEnum.LOSING_LOT.equals(rankingEnum)) {
-            return ;
-        }
-        int count = 1;
-        if (result.containsKey(rankingEnum)) {
-            result.put(rankingEnum, result.get(rankingEnum) + count);
-            return ;
-        }
-        result.put(rankingEnum, count);
+    public List<List<Integer>> getLottoNumbers() {
+        return lottos.getLottoNumbers();
     }
 
-    public List<Lotto> getLottos() {
-        return this.lottoList;
+    public int getBuyCount() {
+        return lottos.getSize();
     }
 
 }

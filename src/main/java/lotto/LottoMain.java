@@ -20,7 +20,7 @@ public class LottoMain {
 
         Buyer buyer = new Buyer(cnt, new QuickPickGenerator());
 
-        OutputView.printLottoNumbers(buyer.getLottos());
+        OutputView.printLottoNumbers(buyer.getLottoNumbers());
         OutputView.printMsg(LAST_WINNING_NUMBER_MSG);
 
         List<Integer> winningNumbers = InputView.inputWinningNumber();
