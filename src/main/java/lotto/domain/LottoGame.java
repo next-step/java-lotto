@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import static lotto.domain.RandomLottoNumbers.generateAutoLottoNumbers;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static lotto.domain.LottoNumber.generateAutoLottoNumbers;
 
 public class LottoGame {
     private final LottoPrice lottoPrice;
