@@ -13,9 +13,9 @@
   - 사용자가 입력한 문자열 값 받음 (ex. 2 + 3 * 4 / 2)
 - Tokens
   - 입력값이 없을 경우 IllegalArgumentException throw
-- Token
   - 연산자가 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
   - 피연산자가 숫자가 아닌 경우 IllegalArgumentException throw
+- Token
   - 토큰이 피연산자인지 확인
   - 토큰이 연산자인지 확인
 - ResultView
