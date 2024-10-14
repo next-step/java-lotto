@@ -1,9 +1,9 @@
 package lotto.domain;
 
+import static lotto.domain.LottoNumber.generateAutoLottoNumbers;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static lotto.domain.LottoNumber.generateAutoLottoNumbers;
 
 public class LottoGame {
     private final LottoPrice lottoPrice;
@@ -34,7 +34,7 @@ public class LottoGame {
 
     public LottoResults makeLottoResult(WinningLotto winningLotto) {
         for (Lotto lotto : lottoList) {
-            lottoResults.addResult(lotto.getLottoResult(winningLotto));
+            lottoResults.addResult(winningLotto.getLottoResult(lotto));
         }
         return lottoResults;
     }

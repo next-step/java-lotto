@@ -23,4 +23,15 @@ public class WinningLotto {
     public int getBonusNumber() {
         return bonusNumber;
     }
+
+    public LottoRank getLottoResult(Lotto lotto) {
+        int equalCount = getMatchCount(lotto);
+        return LottoRank.matchRank(equalCount, lotto.isNumberContain(bonusNumber));
+    }
+
+    private int getMatchCount(Lotto lotto) {
+        return (int) getWinningLotto().stream()
+                .filter(num -> lotto.isNumberContain(num))
+                .count();
+    }
 }

@@ -86,16 +86,6 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
-    public LottoRank getLottoResult(WinningLotto winningLotto) {
-        int equalCount = getMatchCount(winningLotto.getWinningLotto());
-        return LottoRank.matchRank(equalCount, isNumberContain(winningLotto.getBonusNumber()));
-    }
-
-    private int getMatchCount(List<Integer> winningLottoNumbers) {
-        return (int) winningLottoNumbers.stream()
-                .filter(num -> isNumberContain(num))
-                .count();
-    }
 
     public boolean isNumberContain(int number) {
         return lottoNumbers.contains(new LottoNumber(number));
