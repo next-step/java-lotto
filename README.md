@@ -51,6 +51,9 @@
 * 로또 비교 메소드 이름 변경 및 Comparable override 제거 
 * Integer -> LottoNum 클래스로 변경
 * 로또 뽑는 메소드 파라미터 삭제
+* 메소드 위치 변경 (맴버변수 아래 생성자 위치)
+* 매개변수 삭제
+* Collectors.joining 으로 수정
 
 
 ## Step2. 리팩토링 내용

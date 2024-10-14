@@ -6,6 +6,7 @@ import lotto.domain.LottoResult;
 import lotto.enums.LottoWinnerPrice;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -22,26 +23,24 @@ public class ResultView {
     }
 
     public void priceLottoStatus(List<Lotto> lottos) {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append(lottos.size()).append("개를 구매했습니다.");
-        sb.append(System.lineSeparator());
-        for (Lotto lotto : lottos) {
-            sb.append("[");
-            getLottoNumber(sb, lotto);
-            sb.append("]");
-            sb.append(System.lineSeparator());
-        }
+        String sb = lottos.size() + "개를 구매했습니다." +
+                System.lineSeparator() +
+                lottos.stream()
+                        .map(lotto -> "[" + getLottoNumber(lotto) + "]")
+                        .collect(Collectors.joining(System.lineSeparator()));
 
         System.out.println(sb);
     }
 
-    private void getLottoNumber(StringBuilder sb, Lotto lotto) {
+    private String getLottoNumber(Lotto lotto) {
+        StringBuilder result = new StringBuilder();
         List<LottoNum> lottoNumbers = lotto.getLottoNumbers();
         for (int i = 0; i < lottoNumbers.size(); i++) {
-            sb.append(lottoNumbers.get(i));
-            sb.append(addComma(i, lottoNumbers.size() - 1));
+            result.append(lottoNumbers.get(i));
+            result.append(addComma(i, lottoNumbers.size() - 1));
         }
+        return result.toString();
     }
 
     private static String addComma(int index, int lastIndex) {
