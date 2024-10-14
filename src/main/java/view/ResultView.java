@@ -3,7 +3,9 @@ package view;
 import model.LottoStatistics;
 import model.Prize;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printResult(int result) {
@@ -19,7 +21,10 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(List<List<Integer>> numbers) {
-        for (List<Integer> number : numbers) {
+        List<List<Integer>> sortedNumbers = numbers.stream()
+                .map(it -> it.stream().sorted(Comparator.comparingInt(Integer::intValue)).collect(Collectors.toList()))
+                .collect(Collectors.toList());
+        for (List<Integer> number : sortedNumbers) {
             System.out.println(number);
         }
     }
