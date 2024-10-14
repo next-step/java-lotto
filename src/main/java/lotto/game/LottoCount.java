@@ -12,12 +12,11 @@ public class LottoCount {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public boolean isGreaterThan(int count) {
         return value > count;
     }
 
+    public int getValue() {
+        return value;
+    }
 }

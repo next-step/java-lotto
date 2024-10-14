@@ -10,6 +10,7 @@ import java.util.List;
 
 public class LottoMachine {
     public static final int LOTTO_PRICE = 1000;
+
     private final LottoNumberStrategy lottoNumberStrategy;
 
     public LottoMachine(LottoNumberStrategy lottoNumberStrategy) {

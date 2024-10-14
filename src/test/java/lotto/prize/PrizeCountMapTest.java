@@ -1,5 +1,6 @@
 package lotto.prize;
 
+import lotto.game.LottoCount;
 import lotto.number.LottoBalls;
 import lotto.number.LottoNumber;
 import lotto.number.WinningNumbers;
@@ -28,7 +29,7 @@ class PrizeCountMapTest {
         PrizeCounter prizeCounter = new PrizeCounter(lottoBalls, new WinningNumbers(winningNumber, bonusNumber));
         PrizeCountMap prizeCountMap = prizeCounter.countPrize();
 
-        double result = prizeCountMap.calculateProfitRate(lottoBalls.size());
+        double result = prizeCountMap.calculateProfitRate(new LottoCount(lottoBalls.size()));
 
         assertThat(result).isEqualTo(5.0);
 

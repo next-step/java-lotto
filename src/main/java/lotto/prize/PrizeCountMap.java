@@ -1,5 +1,7 @@
 package lotto.prize;
 
+import lotto.game.LottoCount;
+
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
@@ -26,8 +28,8 @@ public class PrizeCountMap {
         prizeCountMap.put(prize, prizeCountMap.getOrDefault(prize, ZERO) + 1);
     }
 
-    public double calculateProfitRate(int lottoTicketCount) {
-        long totalCost = (long) lottoTicketCount * LOTTO_PRICE;
+    public double calculateProfitRate(LottoCount lottoTicketCount) {
+        long totalCost = (long) lottoTicketCount.getValue() * LOTTO_PRICE;
         long totalPrize = calculateTotalPrize();
         return (double) totalPrize / totalCost;
     }

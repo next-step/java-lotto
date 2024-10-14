@@ -48,7 +48,7 @@ public class LottoGame {
 
         resultView.showLottoTickets(lottoTickets);
         resultView.showLottoResult(prizeCountMap);
-        resultView.showLottoProfit(prizeCountMap.calculateProfitRate(lottoTickets.size()));
+        resultView.showLottoProfit(prizeCountMap.calculateProfitRate(new LottoCount(lottoTickets.size())));
     }
 
 }
