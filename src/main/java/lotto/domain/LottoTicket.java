@@ -7,11 +7,6 @@ import java.util.List;
 public class LottoTicket {
     private final List<Lotto> ticket;
 
-    public LottoTicket(final LottoPurchasePrice purchasePrice) {
-        this.ticket = new ArrayList<>();
-        issue(purchasePrice.getLottoCount());
-    }
-
     public LottoTicket(final LottoPurchasePrice purchasePrice, final List<Lotto> manualTicket) {
         this.ticket = new ArrayList<>(manualTicket);
         int autoIssueCount = purchasePrice.getAutoLottoCount(manualTicket.size());

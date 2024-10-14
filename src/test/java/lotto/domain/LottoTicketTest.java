@@ -17,7 +17,7 @@ class LottoTicketTest {
     @DisplayName("로또 구매 가격 만큼 로또를 발급한다.")
     void lottoCountTest(int purchasePrice, int count) {
         LottoPurchasePrice lottoPurchasePrice = LottoPurchasePrice.valueOf(purchasePrice);
-        LottoTicket lottoTicket = new LottoTicket(lottoPurchasePrice);
+        LottoTicket lottoTicket = new LottoTicket(lottoPurchasePrice.getLottoCount());
         assertThat(lottoTicket.getTicket()).hasSize(count);
     }
 
@@ -25,7 +25,7 @@ class LottoTicketTest {
     @DisplayName("getLottoWinningResult 메서드가 로또 결과 객체를 반환한다.")
     void getLottoWinningResultTest() {
         LottoPurchasePrice lottoPurchasePrice = LottoPurchasePrice.valueOf(1000);
-        LottoTicket lottoTicket = new LottoTicket(lottoPurchasePrice);
+        LottoTicket lottoTicket = new LottoTicket(lottoPurchasePrice.getLottoCount());
         Lotto winningLotto = new Lotto(Set.of(LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
