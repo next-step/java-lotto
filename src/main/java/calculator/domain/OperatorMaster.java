@@ -3,56 +3,39 @@ package calculator.domain;
 import calculator.exception.UnsupportedOperatorException;
 
 import java.util.Arrays;
+import java.util.function.IntBinaryOperator;
 
-public enum OperatorMaster implements Operator {
+public enum OperatorMaster {
 
-    ADDITION("+") {
-        @Override
-        public int operates(int operand1, int operand2) {
-            return operand1 + operand2;
-        }
-    },
-    SUBTRACTION("-") {
-        @Override
-        public int operates(int operand1, int operand2) {
-            return operand1 - operand2;
-        }
-    },
-    MULTIPLICATION("*") {
-        @Override
-        public int operates(int operand1, int operand2) {
-            return operand1 * operand2;
-        }
-    },
-    DIVISION("/") {
-        @Override
-        public int operates(int operand1, int operand2) {
-            return operand1 / operand2;
-        }
-    }
+    ADDITION("+", (operand1, operand2) -> operand1 + operand2),
+    SUBTRACTION("-", (operand1, operand2) -> operand1 - operand2) ,
+    MULTIPLICATION("*", (operand1, operand2) -> operand1 * operand2) ,
+    DIVISION("/", (operand1, operand2) -> operand1 / operand2);
     ;
 
     private final String operator;
+    private final IntBinaryOperator intBinaryOperator;
 
-    OperatorMaster(String operator) {
+    OperatorMaster(String operator, IntBinaryOperator intBinaryOperator) {
         this.operator = operator;
+        this.intBinaryOperator = intBinaryOperator;
     }
 
     public static int calculate(String operator, int operand1, int operand2) {
         OperatorMaster operatorMaster = findBy(operator);
-        return operatorMaster.operates(operand1, operand2);
+        return operatorMaster.intBinaryOperator.applyAsInt(operand1, operand2);
     }
 
     private static OperatorMaster findBy(String operator) {
         return Arrays.stream(values())
-                .filter(op -> op.supports(operator))
+                .filter(op -> op.isMatchingOperator(operator))
                 .findFirst()
                 .orElseThrow(() -> new UnsupportedOperatorException("지원하지 않는 연산자입니다."));
     }
 
-    @Override
-    public boolean supports(String operator) {
-        return operator.equals(this.operator);
+    private boolean isMatchingOperator(String operator) {
+        return this.operator.equals(operator);
     }
+
 }
 

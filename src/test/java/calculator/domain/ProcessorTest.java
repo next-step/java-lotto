@@ -1,7 +1,11 @@
 package calculator.domain;
 
+import calculator.io.ConsoleInputHandler;
+import calculator.io.InputHandler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayInputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,12 +16,19 @@ class ProcessorTest {
     @Test
     void processArithmeticExpressionTest() {
         // given
-        String[] expression = {"2", "+", "3", "*", "4", "/", "2", "-", "3"};
+        String simulatedUserInput = "2 + 3 * 4 / 2";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());
+        System.setIn(inputStream);
+
+        InputHandler inputHandler = new ConsoleInputHandler();
+        String[] expression = inputHandler.getArithmeticExpressionFromUser();
 
         // when
         int result = ArithmeticProcessor.processExpression(expression);
 
         // then
-        assertThat(result).isEqualTo(7);
+        assertThat(result).isEqualTo(10);
+
+        System.setIn(System.in); // 복원
     }
 }
