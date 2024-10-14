@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGenerator;
-import lotto.domain.Lottos;
-import lotto.domain.WinningNumber;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,6 +14,8 @@ public class LottoStore {
         resultView.printLottoResult(lottos);
 
         WinningNumber winningNumber = new WinningNumber(inputView.receiveWinningNumber());
+        LottoNumber bonusNo = inputView.receiveBonusNo();
+        System.out.println("보너스 번호는 " + bonusNo + "입니다.");
         lottos.calculateLotto(winningNumber);
         resultView.printLottoStatistics(lottos, inputView.getPurchasingAmount());
     }

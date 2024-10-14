@@ -6,7 +6,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
-        if (lottoNumber < LOTTO_MAX_NUMBER || lottoNumber > LOTTO_MAX_NUMBER) {
+        if (lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_MIN_NUMBER + "과 " + LOTTO_MAX_NUMBER + " 사이여야 합니다.");
         }
         this.lottoNumber = lottoNumber;
