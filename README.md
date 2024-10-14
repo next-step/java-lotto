@@ -50,6 +50,7 @@
 * inputView에 파싱 책임 이동
 * 로또 비교 메소드 이름 변경 및 Comparable override 제거 
 * Integer -> LottoNum 클래스로 변경
+* 로또 뽑는 메소드 파라미터 삭제
 
 
 ## Step2. 리팩토링 내용

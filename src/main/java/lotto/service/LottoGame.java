@@ -2,7 +2,6 @@ package lotto.service;
 
 import lotto.domain.AutoLotto;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNum;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +29,7 @@ public class LottoGame {
         List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < priceTotal / LOTTO_PRICE; i++) {
             result.add(AutoLotto.getInstance()
-                    .getLotto(LottoNum.getLottoNumbers(), Lotto.LOTTO_NUMBER_COUNT));
+                    .getLotto());
         }
         return Collections.unmodifiableList(result);
     }
