@@ -16,20 +16,14 @@ public class LottoBundle {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public static LottoBundle of(int quantity) {
+    public static LottoBundle of(int quantity, List<String> manuals) {
         List<Lotto> lottos = new ArrayList<>();
+        manuals.forEach(manual -> lottos.add(new Lotto(manual)));
+
         for (int i = 0; i < quantity; i++) {
             lottos.add(Lotto.create());
         }
         return new LottoBundle(lottos);
-    }
-
-    public Lotto lotto(int index) {
-        return lottos.get(index);
-    }
-
-    public int count() {
-        return lottos.size();
     }
 
     public WinningPrize winningPrize(WinningLotto winningLotto) {
