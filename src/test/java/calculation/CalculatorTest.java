@@ -42,29 +42,23 @@ public class CalculatorTest {
         assertThat(Calculator.calculate(symbol, number, number2)).isEqualTo(expected);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"+", "-", "*", "/"})
-    void 사칙연산_기호임(String symbol) {
-        assertTrue(Calculator.isArithmeticSymbol(symbol));
+    @Test
+    void 올바른_표현식() {
+        assertThat(Calculator.calculateExpression("1 + 2 - 1 * 5 / 2")).isEqualTo(5);
     }
 
     @ParameterizedTest
     @DisplayName("사칙연산 기호가 아닌 경우 IllegalArgumentException")
-    @ValueSource(strings = {"a", " ", ":", "%", "$", "?", "#", ""})
-    void 사칙연산_기호_아님(String symbol) {
+    @ValueSource(strings = {"1 a 2 + 3 * 7", "1   2", "5 % 6", "3 $ 6", "?", "#", ""})
+    void 잘못된_표현식(String expression) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    Calculator.isArithmeticSymbol(symbol);
-                }).withMessageMatching("사칙연산 기호가 아닙니다. " + escapeSpecialChars(symbol));
+                    Calculator.calculateExpression(expression);
+                }).withMessageMatching("사칙연산 기호가 아닙니다.");
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            Calculator.isArithmeticSymbol(symbol);
+            Calculator.calculateExpression(expression);
         });
-    }
-
-    private String escapeSpecialChars(String symbol) {
-        String regexSpecialChars = "[\\^\\.\\$\\|\\?\\*\\+\\-\\(\\)\\[\\{\\]]";
-        return symbol.replaceAll(regexSpecialChars, "\\\\$0");
     }
 
 }

@@ -9,7 +9,10 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 
-### 기능 목록
+---
+
+
+### 문자열 계산기 기능 목록
 #### UI
 - [x] 입력값 받기 
   - [x] null이거나 빈 공백인 경우 IllegalArgumentException throw
@@ -22,3 +25,25 @@
 - [x] 곱셈
 - [x] 나눗셈
   - [x] number2는 0보다 커야한다.
+
+---
+
+### 로또 기능 목록
+#### UI
+- [x] 구입금액 입력
+- [x] 지난주 당첨번호 입력
+  - [x] 번호 갯수 6개가 아닌 경우 IllegalArgumentException throw
+  - [x] 중복번호가 있는 경우 IllegalArgumentException throw
+  - [x] 숫자가 1 ~ 45가 아닌 경우 IllegalArgumentException throw
+- [x] 구매한 개수 출력
+- [x] 구매한 로또 목록 출력
+- [x] 당첨 통계 출력
+- [x] 총 수익률 출력
+
+#### 로또
+- [x] 구입금액에 맞게 로또 구매
+  - [x] 로또 금액보다 적은 금액일 때 IllegalArgumentException throw
+- [x] 로또 번호 자동 생성
+- [x] 한 개의 로또에 일치하는 개수 확인
+- [x] 당첨된 로또 개수 확인 (3, 4, 5, 6개 일치)
+- [x] 수익률 계산
