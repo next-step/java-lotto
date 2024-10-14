@@ -1,6 +1,8 @@
 package lotto.view;
 
 import lotto.exception.LottoIllegalArgumentException;
+import lotto.game.LottoCount;
+import lotto.game.Money;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,21 +16,21 @@ public class InputView {
     private static final String COMMA_DELIMITER = ",";
     private final Scanner scanner = new Scanner(System.in);
 
-    public int getAmountFromUser() {
+    public Money getAmountFromUser() {
         System.out.println(INPUT_AMOUNT);
-        return parseToInt(scanner.nextLine());
+        return new Money(parseToInt(scanner.nextLine()));
     }
 
-    public int getManualLottoCountFromUser() {
+    public LottoCount getManualLottoCountFromUser() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT);
-        return parseToInt(scanner.nextLine());
+        return new LottoCount(parseToInt(scanner.nextLine()));
     }
 
-    public List<List<Integer>> getManualLottoNumbers(int manualLottoCount) {
+    public List<List<Integer>> getManualLottoNumbers(LottoCount manualLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
 
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
+        for (int i = 0; i < manualLottoCount.getValue(); i++) {
             String inputLine = scanner.nextLine();
 
             manualLottoNumbers.add(splitByComma(inputLine));
