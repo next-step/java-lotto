@@ -23,7 +23,7 @@ public class LottMatcherTest {
     @BeforeEach
     public void setup() {
         Lotto lotto = new Lotto(10000);
-        LottoMatcher lottoMatcher = new LottoMatcher(lotto);
+        LottoMatcher lottoMatcher = new LottoMatcher(lotto, lotto.getLottoNumber("1,2,3,4,5,6"));
         lottoList = lotto.chooseLottoNumber(lotto.purchase());
         matchedLottoList = lottoMatcher.matchLottoNumber(lottoList);
     }

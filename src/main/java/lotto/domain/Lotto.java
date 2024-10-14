@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final int purchasePrice;
@@ -13,6 +14,10 @@ public class Lotto {
 
     public int purchase() {
         return this.purchaseAmount / this.purchasePrice;
+    }
+
+    public List<Integer> getLottoNumber(String winningLottoNumbers) {
+        return winningNumber(winningLottoNumbers);
     }
 
     public List<Integer> getLottoNumber() {
@@ -53,6 +58,12 @@ public class Lotto {
         return initialLottoNumbers;
     }
 
+    public List<Integer> winningNumber(String winningLottoNumbers) {
+        return Arrays.stream(winningLottoNumbers.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,4 +84,6 @@ public class Lotto {
                 ", purchaseAmount=" + purchaseAmount +
                 '}';
     }
+
+
 }

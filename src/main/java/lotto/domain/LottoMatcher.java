@@ -10,7 +10,7 @@ public class LottoMatcher {
     private final List<Integer> lottoNumber;
     private final Lotto lotto;
 
-    public LottoMatcher(Lotto lotto) {
+    public LottoMatcher(Lotto lotto, List<Integer> winningNumbers) {
         this.lotto = lotto;
         this.lottoNumber = lotto.getLottoNumber();
     }

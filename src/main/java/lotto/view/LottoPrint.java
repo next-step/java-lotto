@@ -12,7 +12,7 @@ public class LottoPrint {
     private StringBuilder stringBuilder = new StringBuilder();
 
     public void lottoResult(List<Integer> matchedLottoList, int purchasedAmount) {
-
+        stringBuilder.setLength(0);
         stringBuilder
                 .append("당첨통계")
                 .append(ENTER)
@@ -23,6 +23,8 @@ public class LottoPrint {
         rankCounts = countMatch(rankCounts, matchedLottoList);
         generateResult(rankCounts);
         calculateProfitRate(rankCounts, purchasedAmount);
+
+        System.out.println(stringBuilder);
     }
 
     private Map<String, Integer> initializeRankCounts() {
@@ -55,27 +57,24 @@ public class LottoPrint {
                     .append(rank.getRank())
                     .append(ENTER);
         }
-
-        // 순이익/투자 비용 x 100
-
-        System.out.println(stringBuilder);
     }
 
     private void calculateProfitRate(Map<String, Integer> rankCounts, int purchasedAmount) {
 
         long totalEarnings = 0;
 
-        // 각 랭크에 대해 당첨 금액 계산
         for (LottoRank rank : LottoRank.values()) {
             totalEarnings += rank.getAmount() * rankCounts.get(rank.getRank());
         }
 
         double profitRate = ((double) totalEarnings - purchasedAmount) / purchasedAmount * 100;
+
+        if (profitRate < 0) {
+            profitRate = 0;
+        }
+
         stringBuilder.append("총 수익률은: ")
                 .append(String.format("%.2f", profitRate))
                 .append("입니다.");
-
-        System.out.println(stringBuilder);
-
     }
 }
