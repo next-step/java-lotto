@@ -29,11 +29,26 @@ public class LottoTest {
         final List<Integer> winnerNumbers = List.of(8, 21, 23, 41, 42, 43);
 
         //when
-        Lotto lotto = new Lotto(numbers);
-        lotto.calPrize(winnerNumbers);
+        Lotto lotto = new Lotto(numbers, winnerNumbers);
 
         //then
         Assertions.assertThat(lotto.getNumbers()).isEqualTo(numbers);
         Assertions.assertThat(lotto.getPrize()).isEqualTo(Prize.PRIZE6);
+    }
+
+    @Test
+    @DisplayName("Lotto 클래스 생성 - 당첨 번호, 보너스 번호 포함")
+    void lottoInstantiationTest_withWinnerNumberAndBonusNumber() {
+        //given
+        final List<Integer> numbers = List.of(8, 21, 23, 41, 42, 45);
+        final List<Integer> winnerNumbers = List.of(8, 21, 23, 41, 42, 43);
+        final Integer bonusNumber = 45;
+
+        //when
+        Lotto lotto = new Lotto(numbers, winnerNumbers, bonusNumber);
+
+        //then
+        Assertions.assertThat(lotto.getNumbers()).isEqualTo(numbers);
+        Assertions.assertThat(lotto.getPrize()).isEqualTo(Prize.PRIZE5_PLUS);
     }
 }

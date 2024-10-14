@@ -1,8 +1,11 @@
 package view;
 
 import model.LottoStatistics;
+import model.Prize;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printResult(int result) {
@@ -18,7 +21,10 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(List<List<Integer>> numbers) {
-        for (List<Integer> number : numbers) {
+        List<List<Integer>> sortedNumbers = numbers.stream()
+                .map(it -> it.stream().sorted(Comparator.comparingInt(Integer::intValue)).collect(Collectors.toList()))
+                .collect(Collectors.toList());
+        for (List<Integer> number : sortedNumbers) {
             System.out.println(number);
         }
     }
@@ -28,19 +34,23 @@ public class ResultView {
         System.out.println("---------");
         StringBuilder sb = new StringBuilder();
         sb.append("3개 일치 (5000원)- ")
-                .append(lottoStatistics.getCountOfPrize3())
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE3))
                 .append("개")
                 .append("\n")
                 .append("4개 일치 (50000원)- ")
-                .append(lottoStatistics.getCountOfPrize4())
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE4))
                 .append("개")
                 .append("\n")
                 .append("5개 일치 (1500000원)- ")
-                .append(lottoStatistics.getCountOfPrize5())
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE5))
+                .append("개")
+                .append("\n")
+                .append("5개 일치, 보너스 볼 일치(30000000원)- ")
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE5_PLUS))
                 .append("개")
                 .append("\n")
                 .append("6개 일치 (2000000000원)- ")
-                .append(lottoStatistics.getCountOfPrize6())
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE6))
                 .append("개")
                 .append("\n")
                 .append("총 수익률은 ")

@@ -16,11 +16,13 @@ public class LottoApplication {
         ResultView.printLottoNumbers(lottoNumbers);
 
         List<Integer> winningNumbers = InputView.getWinningNumbers();
+        Integer bonusNumber = InputView.getBonusNumber();
 
         LottoMachine lottoMachine = new LottoMachine(
                 winningNumbers,
                 money,
-                lottoNumbers
+                lottoNumbers,
+                bonusNumber
         );
 
         ResultView.printLottoStatistics(lottoMachine.getStatistics());
