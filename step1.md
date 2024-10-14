@@ -21,7 +21,7 @@
 
 ## 테스트 설계
 - 입력받은 문자열을 검증한다.
-  - [] 입력받은 문자열이 null 이면 IllegalArgumentException을 반환한다.
+  - [x] 입력받은 문자열이 null 이면 IllegalArgumentException을 반환한다.
   - [] 입력받은 문자열이 빈 문자열 이면 IllegalArgumentException을 반환한다.
   - [] 피연산자와 연산자 사이에 공백이 반드시 빈 공백 문자열이 존재하는지 검증한다.
 - 공백을 기준으로 입력받은 문자열을 분리한다.
