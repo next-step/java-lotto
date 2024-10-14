@@ -6,7 +6,7 @@ public enum Prize {
     PRIZE3(3, 5_000),
     PRIZE4(4, 50_000),
     PRIZE5(5, 1_500_000),
-    PRIZE5PLUS(5, 30_000_000),
+    PRIZE5_PLUS(5, 30_000_000),
     PRIZE6(6, 2_000_000_000);
 
     private int matched;
@@ -30,8 +30,8 @@ public enum Prize {
     }
 
     public static Prize getPrize(int matched, boolean isBonusMatched) {
-        if (isBonusMatched && matched == PRIZE5PLUS.matched) {
-            return PRIZE5PLUS;
+        if (isBonusMatched && matched == PRIZE5_PLUS.matched) {
+            return PRIZE5_PLUS;
         }
         return Arrays.stream(Prize.values())
                 .filter(it -> it.matched == matched)

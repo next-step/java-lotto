@@ -46,7 +46,7 @@ public class ResultView {
                 .append("개")
                 .append("\n")
                 .append("5개 일치, 보너스 볼 일치(30000000원)- ")
-                .append(lottoStatistics.getCountByPrize(Prize.PRIZE5PLUS))
+                .append(lottoStatistics.getCountByPrize(Prize.PRIZE5_PLUS))
                 .append("개")
                 .append("\n")
                 .append("6개 일치 (2000000000원)- ")

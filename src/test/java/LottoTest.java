@@ -49,6 +49,6 @@ public class LottoTest {
 
         //then
         Assertions.assertThat(lotto.getNumbers()).isEqualTo(numbers);
-        Assertions.assertThat(lotto.getPrize()).isEqualTo(Prize.PRIZE5PLUS);
+        Assertions.assertThat(lotto.getPrize()).isEqualTo(Prize.PRIZE5_PLUS);
     }
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static model.Prize.PRIZE5PLUS;
+import static model.Prize.PRIZE5_PLUS;
 
 public class LottoMachineTest {
     @Test
@@ -65,7 +65,7 @@ public class LottoMachineTest {
         Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE4)).isEqualTo(0);
         Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE5)).isEqualTo(0);
         Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE5)).isEqualTo(0);
-        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE5PLUS)).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE5_PLUS)).isEqualTo(0);
         Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE6)).isEqualTo(0);
         Assertions.assertThat(statistics.getNetIncome()).isEqualTo(2.5);
     }
@@ -101,8 +101,8 @@ public class LottoMachineTest {
         Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE3)).isEqualTo(0);
         Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE4)).isEqualTo(0);
         Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE5)).isEqualTo(0);
-        Assertions.assertThat(statistics.getCountByPrize(PRIZE5PLUS)).isEqualTo(1);
+        Assertions.assertThat(statistics.getCountByPrize(PRIZE5_PLUS)).isEqualTo(1);
         Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE6)).isEqualTo(0);
-        Assertions.assertThat(statistics.getNetIncome()).isEqualTo((double) PRIZE5PLUS.getPrice() / totalPrice);
+        Assertions.assertThat(statistics.getNetIncome()).isEqualTo((double) PRIZE5_PLUS.getPrice() / totalPrice);
     }
 }
