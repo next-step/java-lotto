@@ -9,8 +9,15 @@ public class LottoController {
     public void start() {
         final LottoInputView lottoInputView = ConsoleViewFactory.createLottoInputView();
         final Money money = lottoInputView.inputMoney();
-        final LottoBundle lottoBundle = purchaseLottoBundle(money);
+
+        final LottoStore lottoStore = new LottoStore();
+        final int manualLottoCount = lottoInputView.inputManualLottoCount();
+        final LottoBundle manualLottoBundle = lottoStore.purchase(lottoInputView.inputManualLottoBundle(manualLottoCount));
+
+        final LottoBundle autoLottoBundle = lottoStore.purchase(remainingMoney(money, manualLottoCount));
+        final LottoBundle lottoBundle = LottoBundle.mergeAutoAndManualLottoBundle(manualLottoBundle, autoLottoBundle);
         lottoInputView.displayPurchaseLottoBundle(lottoBundle);
+
         final Lotto lastWeekWinningLotto = lottoInputView.inputLastWeekWinningLotto();
         final LottoNumber bonusLottoNumber = lottoInputView.inputBonusLottoNumber();
         final LastWeekWinningLotto lottoLastWinning = new LastWeekWinningLotto(lastWeekWinningLotto, bonusLottoNumber);
@@ -25,8 +32,8 @@ public class LottoController {
         lottoResultView.displayRate(statistics);
     }
 
-    private LottoBundle purchaseLottoBundle(final Money money) {
-        final LottoStore lottoStore = new LottoStore();
-        return lottoStore.purchase(money);
+    private static Money remainingMoney(final Money money, final int lottoCount) {
+        final Money purchasedMoney = new Money(lottoCount * LottoStore.LOTTO_PURCHASE_AMOUNT);
+        return money.minus(purchasedMoney);
     }
 }
