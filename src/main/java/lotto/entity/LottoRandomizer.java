@@ -1,6 +1,4 @@
-package lotto.entity.machine;
-
-import lotto.entity.Lotto;
+package lotto.entity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,10 +6,11 @@ import java.util.List;
 
 public class LottoRandomizer {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_ISSUE_NUMBER = 0;
     private static final int MAX_ISSUE_NUMBER = 6;
+
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     public static List<Integer> create() {
         List<Integer> initNumbers = init();

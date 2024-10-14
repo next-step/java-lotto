@@ -16,4 +16,5 @@ class LottoTest {
 
         assertThat(lotto.getLottoNumbers()).isEqualTo(Arrays.asList(1, 2, 4, 5, 9, 10));
     }
+
 }

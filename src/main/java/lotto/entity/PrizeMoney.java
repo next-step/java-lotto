@@ -10,25 +10,25 @@ public enum PrizeMoney {
     FIVE(5, BigDecimal.valueOf(1500000)),
     SIX(6, BigDecimal.valueOf(2000000000));
 
-    private final int count;
+    private final int collectCount;
     private final BigDecimal prizeMoney;
 
-    PrizeMoney(int count, BigDecimal prizeMoney) {
-        this.count = count;
+    PrizeMoney(int collectCount, BigDecimal prizeMoney) {
+        this.collectCount = collectCount;
         this.prizeMoney = prizeMoney;
     }
 
-    public static PrizeMoney findByCount(int count) {
-        if (count == PrizeMoney.THREE.count) {
+    public static PrizeMoney findByCount(int collectCount) {
+        if (collectCount == PrizeMoney.THREE.collectCount) {
             return PrizeMoney.THREE;
         }
-        if (count == PrizeMoney.FOUR.count) {
+        if (collectCount == PrizeMoney.FOUR.collectCount) {
             return PrizeMoney.FOUR;
         }
-        if (count == PrizeMoney.FIVE.count) {
+        if (collectCount == PrizeMoney.FIVE.collectCount) {
             return PrizeMoney.FIVE;
         }
-        if (count == PrizeMoney.SIX.count) {
+        if (collectCount == PrizeMoney.SIX.collectCount) {
             return PrizeMoney.SIX;
         }
         return PrizeMoney.LOSE;
@@ -38,8 +38,8 @@ public enum PrizeMoney {
         return this.prizeMoney.add(winner);
     }
 
-    public int getCount() {
-        return count;
+    public int getCollectCount() {
+        return collectCount;
     }
 
     public BigDecimal getPrizeMoney() {

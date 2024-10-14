@@ -33,4 +33,5 @@ public class LottoNumbersTest {
     void 중복() {
         assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(10, 4, 9, 2, 4, 1))).isInstanceOf(IllegalArgumentException.class);
     }
+
 }

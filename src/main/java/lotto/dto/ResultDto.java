@@ -4,20 +4,20 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class ResultDto {
-    private final List<RankDto> rankDtos;
+
     private final BigDecimal rate;
+    private final List<PrizeMoneyDto> prizeMoneyDto;
 
-    public ResultDto(List<RankDto> rankDtos, BigDecimal rate) {
-        this.rankDtos = rankDtos;
+    public ResultDto(BigDecimal rate, List<PrizeMoneyDto> prizeMoneyDto) {
         this.rate = rate;
-    }
-
-    public List<RankDto> getRankDtos() {
-        return rankDtos;
+        this.prizeMoneyDto = prizeMoneyDto;
     }
 
     public BigDecimal getRate() {
         return rate;
     }
 
+    public List<PrizeMoneyDto> getPrizeMoneyDto() {
+        return prizeMoneyDto;
+    }
 }

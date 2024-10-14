@@ -1,6 +1,5 @@
-package lotto.entity.machine;
+package lotto.entity;
 
-import lotto.entity.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +11,9 @@ public class LottoMachine {
 
     }
 
-    public static List<Lotto> insert(int money) {
+    public static List<Lotto> insert(int inputMoney) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < getLottoCount(money); i++) {
+        for (int i = 0; i < getLottoCount(inputMoney); i++) {
             List<Integer> numberRandomizer = LottoRandomizer.create();
             lottos.add(issue(numberRandomizer));
         }

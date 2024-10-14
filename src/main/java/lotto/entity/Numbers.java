@@ -15,16 +15,17 @@ public abstract class Numbers {
             throw new IllegalArgumentException("1 ~ 45 사이의 값을 입력해 주세요");
         }
     }
+
     public void validateDuplication(List<Integer> result) {
         Set<Integer> distinct = new HashSet<>(result);
         if (result.size() != distinct.size()) {
-            throw new IllegalArgumentException("중복 된 당첨번호");
+            throw new IllegalArgumentException("중복 된 번호");
         }
     }
 
     public void validateSize(List<Integer> result) {
         if (result.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("당첨 번호 여섯개 아님");
+            throw new IllegalArgumentException("사이즈가 여섯개 아님");
         }
     }
 }

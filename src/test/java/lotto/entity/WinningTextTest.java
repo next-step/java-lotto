@@ -32,7 +32,7 @@ class WinningTextTest {
     }
 
     @Test
-    void 당첨_숫자_범위_넘어가는_예외(){
+    void 당첨_숫자_범위_넘어가는_예외() {
         assertThatThrownBy(() -> winningText.numbers("1, 2, 3, 4, 5, 66")).isInstanceOf(IllegalArgumentException.class);
     }
 

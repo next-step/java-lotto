@@ -1,15 +1,11 @@
 package lotto.entity;
 
 
-import lotto.entity.machine.LottoMachine;
-import lotto.entity.machine.LottoWinningScanner;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoMachineTest {
 
@@ -18,25 +14,14 @@ class LottoMachineTest {
         List<Lotto> lottos = LottoMachine.insert(14000);
 
         assertThat(lottos).hasSize(14);
-
     }
 
     @Test
-    void 로또_리스트_와_당첨_번호_입력_시_당첨_복권_사이즈_검증() {
-
-        List<Lotto> lottos = Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12)),
-                new Lotto(Arrays.asList(1, 2, 3, 20, 21, 22)),
-                new Lotto(Arrays.asList(1, 2, 3, 30, 31, 32)),
-                new Lotto(Arrays.asList(1, 2, 3, 40, 41, 42))
-        );
-
-        List<Integer> winnersNumber = Arrays.asList(7, 8, 9, 10, 11, 12);
-        List<PrizeMoney> winners = LottoWinningScanner.winnerResult(lottos, winnersNumber);
-
-        assertAll(
-                () -> assertThat(winners).hasSize(1)
-        );
+    void 로또_한장의_번호_갯수_검증() {
+        List<Lotto> lottos = LottoMachine.insert(1000);
+        Lotto lotto = lottos.get(0);
+        assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
+
+
 }

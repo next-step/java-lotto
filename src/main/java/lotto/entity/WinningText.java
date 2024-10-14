@@ -1,14 +1,12 @@
 package lotto.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 public class WinningText extends Numbers {
     private static final String DEFAULT_SPLIT_DELIMITER = ",";
     private static final String SPACING_REGEX = " ";
-
 
     public WinningText() {
 

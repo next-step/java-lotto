@@ -2,9 +2,6 @@ package lotto.entity;
 
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.util.regex.Pattern;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -26,14 +23,4 @@ class PrizeMoneyTest {
                 () -> assertThat(PrizeMoney.findByCount(6)).isEqualTo(PrizeMoney.SIX)
         );
     }
-
-    @Test
-    void 합계_계산(){
-        BigDecimal fivePrizeMoney = PrizeMoney.THREE.getPrizeMoney();
-        BigDecimal sum = PrizeMoney.FOUR.sum(fivePrizeMoney);
-
-        assertThat(sum).isEqualTo(BigDecimal.valueOf(55000));
-    }
-
-
 }

@@ -1,9 +1,10 @@
 package lotto.entity;
 
-import lotto.dto.RankDto;
 import lotto.dto.ResultDto;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,20 +13,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PrizeMoneyCalculatorTest {
 
     @Test
-    void 당첨_갯수_검증() {
-
-        int money = 14000;
-        List<PrizeMoney> winners = Arrays.asList(
-                PrizeMoney.THREE,
-                PrizeMoney.THREE,
-                PrizeMoney.THREE
+    void 합계_검증() {
+        List<WinningResult> winningResults = Arrays.asList(
+                new WinningResult(PrizeMoney.THREE, 3),
+                new WinningResult(PrizeMoney.FOUR, 1)
         );
 
-        PrizeMoneyCalculator calculator = new PrizeMoneyCalculator();
-        ResultDto resultsDtos = calculator.result(winners, money);
+        BigDecimal result = PrizeMoneyCalculator.sum(winningResults);
 
-        RankDto rankDto = resultsDtos.getRankDtos().stream().filter(i -> i.getPrizeMoney() == PrizeMoney.THREE.getPrizeMoney()).findFirst().get();
+        assertThat(result).isEqualTo(BigDecimal.valueOf(65000));
+    }
 
-        assertThat(rankDto.getCount()).isEqualTo(3);
+    @Test
+    void 수익률_검증() {
+        BigDecimal calculateRate = PrizeMoneyCalculator.calculateRate(3000, BigDecimal.valueOf(15000));
+
+        assertThat(calculateRate).isEqualTo(new BigDecimal("5.00"));
     }
 }

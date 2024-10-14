@@ -2,10 +2,12 @@ package lotto.view;
 
 import lotto.dto.LottosDto;
 import lotto.dto.LottoNumbersDto;
-import lotto.dto.RankDto;
+import lotto.dto.PrizeMoneyDto;
+import lotto.entity.WinningResult;
 import lotto.dto.ResultDto;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 
 public class ResultView {
@@ -35,13 +37,14 @@ public class ResultView {
         System.out.println(TITLE);
         System.out.println(DIVIDER);
 
-        printRank(result.getRankDtos());
+        printRank(result.getPrizeMoneyDto());
         printRateOfReturn(result.getRate());
     }
 
-    private static void printRank(List<RankDto> rankDtos) {
-        for (RankDto rankDto : rankDtos) {
-            System.out.printf(COUNT_MESSAGE, rankDto.getCollectCount(), rankDto.getPrizeMoney(), rankDto.getCount());
+    private static void printRank(List<PrizeMoneyDto> prizeMoneyDto) {
+        prizeMoneyDto.sort((a, b) -> a.getCollectCount() - b.getCollectCount());
+        for (PrizeMoneyDto moneyDto : prizeMoneyDto) {
+            System.out.printf(COUNT_MESSAGE, moneyDto.getCollectCount(), moneyDto.getPrizeMoney(), moneyDto.getCount());
         }
     }
 
