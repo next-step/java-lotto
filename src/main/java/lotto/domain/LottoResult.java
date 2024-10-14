@@ -12,13 +12,13 @@ public class LottoResult {
     private final List<Integer> result;
     private final double returnRate;
 
-    public double getReturnRate() {
-        return returnRate;
-    }
-
     public LottoResult(List<Integer> result, int buyPrice) {
         this.result = result;
         this.returnRate = Math.round((double) getPriceTotal() / buyPrice * 100.0) / 100.0;
+    }
+
+    public double getReturnRate() {
+        return returnRate;
     }
 
     int getPriceTotal() {
