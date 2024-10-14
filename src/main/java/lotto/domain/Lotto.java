@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoRank.SECOND;
 import static lotto.domain.LottoRank.THIRD;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +21,10 @@ public class Lotto {
     public Lotto(List<Integer> lottoNumbers) {
         validateLotto(lottoNumbers);
         this.lottoNumbers = makeLotto(lottoNumbers);
+    }
+
+    public Lotto(Integer... lottoNumbers) {
+        this(Arrays.stream(lottoNumbers).collect(toList()));
     }
 
     public Lotto(String[] inputNumbers) {

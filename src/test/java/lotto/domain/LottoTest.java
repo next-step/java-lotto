@@ -48,7 +48,7 @@ class LottoTest {
     void 로또번호_정렬() {
         List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 11, 8, 5, 7, 9));
         Lotto lotto = new Lotto(numbers);
-        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 5, 7, 8, 9, 11)));
+        assertThat(lotto).isEqualTo(new Lotto(1, 5, 7, 8, 9, 11));
     }
 
     @DisplayName("보너스 번호 일치 여부 확인")
