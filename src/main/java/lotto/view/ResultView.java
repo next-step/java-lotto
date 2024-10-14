@@ -14,12 +14,12 @@ public class ResultView {
     private static final String OVER_ONE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
 
     public void show(LottoBundle lottoBundle) {
-        for (int i = 0; i < lottoBundle.count(); i++) {
-            System.out.println(lottoBundle.lotto(i).lottoNumbers().stream()
+        lottoBundle.lottos().forEach(lotto -> {
+            System.out.println(lotto.lottoNumbers().stream()
                     .sorted()
-                    .map(LottoNumber::toString)
+                    .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                     .collect(Collectors.joining(", ", "[", "]")));
-        }
+        });
     }
 
     public void report(WinningPrize winningPrize, LottoBill bill) {
