@@ -5,6 +5,7 @@ import lotto.domain.Lottos;
 import lotto.domain.WinningCheck;
 import lotto.domain.WinningNumber;
 import lotto.service.LottoPurchaseService;
+import lotto.service.WinningStatistic;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,6 +20,7 @@ public class Main {
         LottoPurchaseService lottoPurchaseService = new LottoPurchaseService();
         WinningNumber winningNumber = new WinningNumber();
 
+
         Lottos lottos = new Lottos();
         lottos.buyLotto(lottoPurchaseService.calculateNumberOfLotto(inputView.inputPurchaseAmountGuide(sc))
                 ,LottoShuffleGenerator.getLottoShuffleGenerator());
@@ -27,6 +29,10 @@ public class Main {
         sc.nextLine();
         winningNumber.convertStringToIntList(inputView.inputWinnerNumber(sc));
         WinningCheck winningCheck = new WinningCheck(lottos,winningNumber);
-        System.out.println(winningCheck.getWinningPrize());
+        WinningStatistic winningStatistic = new WinningStatistic();
+        int prize = winningCheck.getWinningPrize();
+        winningStatistic.calculateStatistic(prize);
+        resultView.printResult(winningStatistic.getStatistic());
+        resultView.printProfit(winningStatistic.calculateProfit(1000*lottos.getNumberOfLotto(),prize));
     }
 }

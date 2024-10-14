@@ -30,4 +30,7 @@ public class WinningStatistic {
         return statistic;
     }
 
+    public double calculateProfit(int buyPrice, int prize) {
+        return prize / (double) buyPrice ;
+    }
 }
