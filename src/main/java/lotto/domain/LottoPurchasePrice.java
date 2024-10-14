@@ -20,13 +20,22 @@ public class LottoPurchasePrice {
         return value;
     }
 
+    public int getAutoLottoCount(final int manualLottoCount) {
+        validateLottoCount(manualLottoCount);
+        return calculateAutoLottoCount(manualLottoCount);
+    }
+
     public void validateLottoCount(final int manualLottoCount) {
         if (manualLottoCount < 0) {
             throw new IllegalArgumentException("수동 로또 발급 횟수는 음수일 수 없습니다.");
         }
-        if (getLottoCount() - manualLottoCount < 0) {
+        if (calculateAutoLottoCount(manualLottoCount) < 0) {
             throw new IllegalArgumentException("로또 구매 금액보다 많은 양의 로또는 구매할 수 없습니다.");
         }
+    }
+
+    private int calculateAutoLottoCount(final int manualLottoCount) {
+        return getLottoCount() - manualLottoCount;
     }
 
     private void validateInit(int value) {

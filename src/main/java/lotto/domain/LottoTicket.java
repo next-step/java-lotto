@@ -13,7 +13,7 @@ public class LottoTicket {
     }
 
     public LottoTicket(final LottoPurchasePrice purchasePrice, final List<Lotto> manualTicket) {
-        int autoIssueCount = purchasePrice.getLottoCount() - manualTicket.size();
+        int autoIssueCount = purchasePrice.getAutoLottoCount(manualTicket.size());
         if (autoIssueCount < 0) {
             throw new IllegalArgumentException("로또 구매 금액보다 많은 양의 수동 로또가 생성되었습니다.");
         }
