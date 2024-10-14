@@ -33,6 +33,9 @@ public class Buyer {
     }
 
     public BigDecimal getRateOfReturn(List<Integer> winningNumbers) {
+
+        ValidationUtils.validateLottoNunbers(winningNumbers);
+
         BigDecimal sum = BigDecimal.ZERO;
         for (Lotto lt : this.lottoList) {
             LottoRankingEnum rank = lt.getRanking(winningNumbers);
@@ -45,6 +48,8 @@ public class Buyer {
     }
 
     public Map<LottoRankingEnum, Integer> getWinningResult(List<Integer> winningNumbers) {
+        ValidationUtils.validateLottoNunbers(winningNumbers);
+
         Map<LottoRankingEnum, Integer> winningResult = new HashMap<>();
         for (Lotto lt : lottoList) {
             addResult(lt.getRanking(winningNumbers), winningResult);
