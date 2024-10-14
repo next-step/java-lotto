@@ -21,7 +21,7 @@ public class LottoAgent {
     }
 
     private void buyLotto(int id, LottoNumberSelectionStrategy selectionStrategy) {
-        purchasedLottos.addLotto(Lotto.newInstance(id, selectionStrategy));
+        purchasedLottos.addLotto(Lotto.valueOf(id, selectionStrategy));
     }
 
     public PurchasedLottosDTO getPurchasedLottos() {
