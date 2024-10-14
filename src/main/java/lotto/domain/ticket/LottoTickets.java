@@ -1,5 +1,6 @@
 package lotto.domain.ticket;
 
+import lotto.domain.result.LottoStatistics;
 import lotto.domain.result.Rank;
 
 import java.util.EnumMap;
@@ -45,4 +46,25 @@ public class LottoTickets {
         return countRanks;
     }
 
+    public LottoStatistics generateLottoStatistics(WinningLotto winningLotto, int lottoTicketPrice) {
+        Map<Rank, Integer> results = countRanks(winningLotto);
+        return LottoStatistics.of(results, getProfitRatio(results, lottoTicketPrice));
+    }
+
+    private double getProfitRatio(Map<Rank, Integer> results, int lottoTicketPrice) {
+        double profitRatio = calculateProfitRatio(sumAllPrize(results), lottoTickets.size(), lottoTicketPrice);
+        return Math.floor(profitRatio * 100) / 100.0;
+    }
+
+    private long sumAllPrize(Map<Rank, Integer> results) {
+        long sumOfPrizes = 0;
+        for (Rank rank : results.keySet()) {
+            sumOfPrizes += rank.getPrizeAmount() * results.get(rank);
+        }
+        return sumOfPrizes;
+    }
+
+    private double calculateProfitRatio(double sumOfPrizes, long numberOfTickets, int lottoTicketPrice) {
+        return sumOfPrizes / (numberOfTickets * lottoTicketPrice);
+    }
 }

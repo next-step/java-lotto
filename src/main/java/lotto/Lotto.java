@@ -43,7 +43,7 @@ public class Lotto {
         WinningLotto winningLotto = WinningLotto.fromWinningNumbers(winningNumbers);
 
         // 당첨 통계 출력
-        LottoStatistics lottoStatistics = LottoStatistics.of(lottoTickets, winningLotto, lottoTicketPrice);
+        LottoStatistics lottoStatistics = lottoTickets.generateLottoStatistics(winningLotto, lottoTicketPrice);
         outputHandler.showLottoStatistics(lottoStatistics);
 
     }

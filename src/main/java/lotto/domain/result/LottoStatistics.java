@@ -1,8 +1,5 @@
 package lotto.domain.result;
 
-import lotto.domain.ticket.WinningLotto;
-import lotto.domain.ticket.LottoTickets;
-
 import java.util.Map;
 
 public class LottoStatistics {
@@ -10,29 +7,13 @@ public class LottoStatistics {
     private final Map<Rank, Integer> results;
     private final double profitRatio;
 
-    private LottoStatistics(LottoTickets lottoTickets, WinningLotto winningLotto, int lottoTicketPrice) {
-        results = getLottoStatistics(lottoTickets, winningLotto);
-        profitRatio = calculateProfitRatio(lottoTickets.size(), lottoTicketPrice);
+    private LottoStatistics(Map<Rank, Integer> results, double profitRatio) {
+        this.results = results;
+        this.profitRatio = profitRatio;
     }
 
-    public static LottoStatistics of(LottoTickets lottoTickets, WinningLotto winningLotto, int lottoTicketPrice) {
-        return new LottoStatistics(lottoTickets, winningLotto, lottoTicketPrice);
-    }
-
-    private double calculateProfitRatio(long numberOfTickets, int lottoTicketPrice) {
-        return (double) sumAllPrize() / (numberOfTickets * lottoTicketPrice);
-    }
-
-    private long sumAllPrize() {
-        long sumOfPrizes = 0;
-        for (Rank rank : results.keySet()) {
-            sumOfPrizes += rank.getPrizeAmount() * results.get(rank);
-        }
-        return sumOfPrizes;
-    }
-
-    public static Map<Rank, Integer> getLottoStatistics(LottoTickets lottoTickets, WinningLotto winningLotto) {
-        return lottoTickets.countRanks(winningLotto);
+    public static LottoStatistics of(Map<Rank, Integer> results, double profitRatio) {
+        return new LottoStatistics(results, profitRatio);
     }
 
     public Map<Rank, Integer> getResults() {
@@ -40,7 +21,7 @@ public class LottoStatistics {
     }
 
     public double getProfitRatio() {
-        return Math.floor(profitRatio * 100) / 100.0;
+        return profitRatio;
     }
 
 }
