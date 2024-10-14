@@ -1,23 +1,20 @@
 package controller;
 
-import service.Calculator;
+import service.calculator.Calculator;
 
 import java.util.List;
 
 public class CalculatorController {
-    private static final InputView inputView = new InputView();
-    private static final ResultView resultView = new ResultView();
-
+    private static final Calculator calculator = new Calculator();
 
     public static void main(String[] args) {
-        String calculationString = inputView.inputCalculationString();
-        List<Integer> numbers = inputView.getNumbers(calculationString);
-        List<Character> operations = inputView.getOperations(calculationString);
+        String calculationString = InputView.inputCalculationString();
+        List<Integer> numbers = InputView.getNumbers(calculationString);
+        List<Character> operations = InputView.getOperations(calculationString);
 
-        Calculator calculator = new Calculator();
         int result = calculator.calculate(numbers, operations);
 
-        resultView.printResult(result);
+        ResultView.printResult(result);
     }
 
 }

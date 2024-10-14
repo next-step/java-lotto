@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class InputParser {
 
-    public List<Integer> parseNumbers(String calculationString) {
+    public static List<Integer> parseNumbers(String calculationString) {
         calculationString = calculationString.replaceAll("\\s+", "");
 
         List<Integer> numbers = new ArrayList<>();
@@ -24,7 +24,7 @@ public class InputParser {
         return numbers;
     }
 
-    public List<Character> parseOperations(String calculationString) {
+    public static List<Character> parseOperations(String calculationString) {
         calculationString = calculationString.replaceAll("\\s+", "");
 
         List<Character> operations = new ArrayList<>();
