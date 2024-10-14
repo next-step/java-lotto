@@ -28,7 +28,7 @@ public class InputView {
     public static List<Lotto> readManualLotto(final LottoPurchasePrice purchasePrice) {
         System.out.println(MANUAL_LOTTO_COUNT_QUESTION);
         int manualLottoCount = readNextInt();
-        int autoLottoCount = purchasePrice.getLottoCount() - manualLottoCount;
+        int autoLottoCount = purchasePrice.getAutoLottoCount(manualLottoCount);
         validateLottoCount(manualLottoCount, autoLottoCount);
         System.out.println(
                 "수동으로 " + manualLottoCount

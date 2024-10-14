@@ -19,6 +19,10 @@ public class LottoPurchasePrice {
         return value;
     }
 
+    public int getAutoLottoCount(final int manualLottoCount) {
+        return getLottoCount() - manualLottoCount;
+    }
+
     private void validateInit(int value) {
         validateNegative(value);
         validatePurchasePrice(value);

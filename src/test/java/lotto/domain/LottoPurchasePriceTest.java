@@ -36,4 +36,13 @@ class LottoPurchasePriceTest {
         LottoPurchasePrice price2 = LottoPurchasePrice.valueOf(1000);
         assertThat(price1).isEqualTo(price2);
     }
+
+    @Test
+    @DisplayName("getAutoLottoCount 메서드가 총 개수에서 수동 복권 발급 개수을 제외한 자동 복권 발급 개수를 반환한다.")
+    void getAutoLottoCountTest() {
+        LottoPurchasePrice price = LottoPurchasePrice.valueOf(10000);
+        int manualLottoCount = 3;
+        assertThat(price.getAutoLottoCount(manualLottoCount))
+                .isEqualTo(7);
+    }
 }
