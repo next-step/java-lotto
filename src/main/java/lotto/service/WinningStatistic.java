@@ -14,7 +14,6 @@ public class WinningStatistic {
         this.totalPrize = totalPrize;
     }
 
-
     public Stack<Integer> calculateStatistic() {
         for (Prize price : Prize.values()) {
             int count = 0;
@@ -24,17 +23,18 @@ public class WinningStatistic {
     }
 
     private void putCount(Prize price, int count) {
-        while(totalPrize >= price.getValue()){
+        while (totalPrize >= price.getValue()) {
             totalPrize -= price.getValue();
-            count +=1;
+            count += 1;
         }
         statistic.add(count);
     }
+
     public Stack<Integer> getStatistic() {
         return statistic;
     }
 
     public double calculateProfit(int prize, int buyPrice) {
-        return Math.floor(prize / (double) buyPrice *100) / 100.0 ;
+        return Math.floor(prize / (double) buyPrice * 100) / 100.0;
     }
 }

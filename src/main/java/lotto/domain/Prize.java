@@ -5,6 +5,7 @@ public enum Prize {
     FIVE(5, 1_500_000),
     FOUR(4, 50000),
     THREE(3, 5000);
+
     private int hit;
     private int value;
 

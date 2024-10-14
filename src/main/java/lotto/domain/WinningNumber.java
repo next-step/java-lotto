@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WinningNumber {
-    private final List<Integer> winningNumber= new ArrayList<>();
+    private final List<Integer> winningNumber = new ArrayList<>();
 
     public void convertStringToIntList(String stringWinningNumber) {
         Arrays.stream(splitString(stringWinningNumber))

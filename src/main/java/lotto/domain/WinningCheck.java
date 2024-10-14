@@ -26,14 +26,14 @@ public class WinningCheck {
         return totalPrize;
     }
 
-    private static void validtotalPrize(int eachPrize, int totalPrize) {
-        if(eachPrize + totalPrize > 2_000_000_000) {
+    private void validtotalPrize(int eachPrize, int totalPrize) {
+        if (eachPrize + totalPrize > 2_000_000_000) {
             throw new IllegalArgumentException("총 상금 20억을 넘길 순 없음");
         }
     }
 
-    private static void validOverFlow(int eachPrize, int totalPrize) {
-        if(eachPrize + totalPrize < 0 ) {
+    private void validOverFlow(int eachPrize, int totalPrize) {
+        if (eachPrize + totalPrize < 0) {
             throw new PrizeOverFlowIsNegativeException();
         }
     }
@@ -51,7 +51,7 @@ public class WinningCheck {
         return Prize.getValueByHit(count);
     }
 
-    private static int isNumberMatched(List<Integer> winningNumbers, int i, List<Integer> lottoNumbers) {
+    private int isNumberMatched(List<Integer> winningNumbers, int i, List<Integer> lottoNumbers) {
         if (winningNumbers.get(i).equals(lottoNumbers.get(i))) {
             return 1;
         }
