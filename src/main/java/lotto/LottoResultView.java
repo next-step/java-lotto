@@ -27,5 +27,4 @@ public class LottoResultView {
         System.out.println("총 수익률은 " + lottoYield + "입니다.");
     }
 
-
 }

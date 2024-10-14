@@ -23,6 +23,7 @@ public class Lotto {
     }
 
     public String toStringLottoNumbers() {
+        Collections.sort(lottoNumbers);
         return lottoNumbers.toString();
     }
 
