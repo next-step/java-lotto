@@ -7,9 +7,19 @@ import java.util.List;
 public class LottoTicket {
     private final List<Lotto> ticket;
 
-    public LottoTicket(final LottoPurchasePrice purchasePrice) {
+    public LottoTicket(final LottoPurchasePrice purchasePrice, final List<Lotto> manualTicket) {
+        this.ticket = new ArrayList<>(manualTicket);
+        int autoIssueCount = purchasePrice.getAutoLottoCount(manualTicket.size());
+        issue(autoIssueCount);
+    }
+
+    public LottoTicket(final int issueCount) {
         this.ticket = new ArrayList<>();
-        issue(purchasePrice.getLottoCount());
+        issue(issueCount);
+    }
+
+    public LottoTicket(final List<Lotto> ticket) {
+        this.ticket = ticket;
     }
 
     private void issue(int lottoCount) {
@@ -29,5 +39,9 @@ public class LottoTicket {
 
     public List<Lotto> getTicket() {
         return Collections.unmodifiableList(ticket);
+    }
+
+    public int getTicketSize() {
+        return ticket.size();
     }
 }

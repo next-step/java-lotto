@@ -29,4 +29,8 @@ public enum LottoWinningStatus {
     public String getDescription() {
         return description;
     }
+
+    public boolean isWinningCountEqual(final int number) {
+        return this.winningCount == number;
+    }
 }

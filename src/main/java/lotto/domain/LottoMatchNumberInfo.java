@@ -1,6 +1,8 @@
 package lotto.domain;
 
 public class LottoMatchNumberInfo {
+    public static final int SECOND_RANK_MATCH_COUNT = 5;
+
     private final int count;
     private final boolean isBonus;
 
@@ -18,6 +20,6 @@ public class LottoMatchNumberInfo {
     }
 
     public boolean isSecond() {
-        return count == 5 && isBonus;
+        return count == SECOND_RANK_MATCH_COUNT && isBonus;
     }
 }

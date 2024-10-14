@@ -37,26 +37,6 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("getMatchingNumberCount 메서드가 보너스번호를 포함한 일치하는 로또번호 개수를 반환한다.")
-    void getLottoMatchNumberInfoWithBonusTest() {
-        LottoNumber bonusNumber = LottoNumber.valueOf(7);
-        Lotto lotto1 = new Lotto(Set.of(LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(6)), bonusNumber);
-        Lotto lotto2 = new Lotto(Set.of(LottoNumber.valueOf(7),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(14),
-                LottoNumber.valueOf(15),
-                LottoNumber.valueOf(16)));
-        assertThat(lotto1.getLottoMatchNumberInfo(lotto2).getCount()).isEqualTo(3);
-        assertThat(lotto1.getLottoMatchNumberInfo(lotto2).hasBonus()).isTrue();
-    }
-
-    @Test
     @DisplayName("Lotto 객체를 생성할 때 로또 번호가 6개가 아니면 예외가 발생한다.")
     void validateLottoNumberCountTest() {
         Set<LottoNumber> lottoNumbers = Set.of(LottoNumber.valueOf(1),

@@ -3,13 +3,15 @@ package lotto.ui;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchasePrice;
+import lotto.domain.LottoTicket;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
     private static final String PURCHASE_PRICE_QUESTION = "구입금액을 입력해 주세요.";
-    private static final String TICKET_COUNT_SUFFIX = "개를 구매했습니다.";
+    private static final String MANUAL_LOTTO_COUNT_QUESTION = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_NUMBER_QUESTION = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String LAST_WEEK_WINNING_NUMBERS_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ", ";
@@ -21,21 +23,45 @@ public class InputView {
 
     public static LottoPurchasePrice readTotalPurchasePrice() {
         System.out.println(PURCHASE_PRICE_QUESTION);
-        LottoPurchasePrice purchasePrice = LottoPurchasePrice.valueOf(SCANNER.nextInt());
+        return LottoPurchasePrice.valueOf(readNextInt());
+    }
+
+    public static LottoTicket readManualLotto(final LottoPurchasePrice purchasePrice) {
+        System.out.println(MANUAL_LOTTO_COUNT_QUESTION);
+        int manualLottoCount = readNextInt();
+        purchasePrice.validateLottoCount(manualLottoCount);
+        System.out.println(
+                "수동으로 " + manualLottoCount
+                        + "장, 자동으로 " + (purchasePrice.getLottoCount() - manualLottoCount)
+                        + "개를 구매했습니다."
+        );
+        return new LottoTicket(purchasePrice, getLottoTicket(manualLottoCount));
+    }
+
+    private static int readNextInt() {
+        int number = SCANNER.nextInt();
         SCANNER.nextLine();
-        System.out.println(purchasePrice.getLottoCount() + TICKET_COUNT_SUFFIX);
-        return purchasePrice;
+        return number;
+    }
+
+    private static List<Lotto> getLottoTicket(int manualLottoCount) {
+        List<Lotto> manualTicket = new ArrayList<>();
+        System.out.println(MANUAL_LOTTO_NUMBER_QUESTION);
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualTicket.add(new Lotto(getLottoNumbers()));
+        }
+        return manualTicket;
     }
 
     public static Lotto readLastWeekWinningNumbers() {
         System.out.println(LAST_WEEK_WINNING_NUMBERS_QUESTION);
-        Set<LottoNumber> winningNumbers = getWinningNumbers();
+        Set<LottoNumber> winningNumbers = getLottoNumbers();
         System.out.println(BONUS_NUMBER_QUESTION);
         LottoNumber bonusNumber = getBonusNumber();
         return new Lotto(winningNumbers, bonusNumber);
     }
 
-    private static Set<LottoNumber> getWinningNumbers() {
+    private static Set<LottoNumber> getLottoNumbers() {
         return Arrays.stream(SCANNER.nextLine().split(DELIMITER))
                 .map(number -> LottoNumber.valueOf(Integer.parseInt(number)))
                 .collect(Collectors.toSet());

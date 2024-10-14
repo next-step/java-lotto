@@ -39,7 +39,7 @@ public class LottoWinningResults {
             return;
         }
         winningResultMap.values().stream()
-                .filter(winningResult -> winningResult.getLottoWinningStatus().getWinningCount() == matchNumberInfo.getCount())
+                .filter(winningResult -> winningResult.isWinningCountEqual(matchNumberInfo.getCount()))
                 .findFirst()
                 .ifPresent(LottoWinningResult::increment);
     }

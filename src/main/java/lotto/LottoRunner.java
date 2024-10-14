@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoPurchasePrice;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoWinningResults;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -11,7 +8,9 @@ public class LottoRunner {
     public static void main(String[] args) {
         LottoPurchasePrice totalPurchasePrice = InputView.readTotalPurchasePrice();
 
-        LottoTicket lottoTicket = new LottoTicket(totalPurchasePrice);
+        LottoTicket manualLottoTicket = InputView.readManualLotto(totalPurchasePrice);
+
+        LottoTicket lottoTicket = LottoTicketGenerator.createCompleteLottoTicket(totalPurchasePrice, manualLottoTicket);
         ResultView.printLottoDetail(lottoTicket);
 
         Lotto lastWeekWinningNumbers = InputView.readLastWeekWinningNumbers();
