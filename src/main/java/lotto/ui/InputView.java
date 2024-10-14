@@ -28,23 +28,13 @@ public class InputView {
     public static List<Lotto> readManualLotto(final LottoPurchasePrice purchasePrice) {
         System.out.println(MANUAL_LOTTO_COUNT_QUESTION);
         int manualLottoCount = readNextInt();
-        int autoLottoCount = purchasePrice.getAutoLottoCount(manualLottoCount);
-        validateLottoCount(manualLottoCount, autoLottoCount);
+        purchasePrice.validateLottoCount(manualLottoCount);
         System.out.println(
                 "수동으로 " + manualLottoCount
                         + "장, 자동으로 " + (purchasePrice.getLottoCount() - manualLottoCount)
                         + "개를 구매했습니다."
         );
         return getLottoTicket(manualLottoCount);
-    }
-
-    private static void validateLottoCount(final int manualLottoCount, final int autoLottoCount) {
-        if (manualLottoCount < 0) {
-            throw new IllegalArgumentException("수동 로또 발급 횟수는 음수일 수 없습니다.");
-        }
-        if (autoLottoCount < 0) {
-            throw new IllegalArgumentException("로또 구매 금액보다 많은 양의 로또는 구매할 수 없습니다.");
-        }
     }
 
     private static int readNextInt() {

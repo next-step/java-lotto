@@ -38,11 +38,22 @@ class LottoPurchasePriceTest {
     }
 
     @Test
-    @DisplayName("getAutoLottoCount 메서드가 총 개수에서 수동 복권 발급 개수을 제외한 자동 복권 발급 개수를 반환한다.")
-    void getAutoLottoCountTest() {
+    @DisplayName("validateLottoCount 메서드에서 수동 로또 발급 횟수는 음수일 때 예외가 발생한다.")
+    void throwExceptionWhenManualLottoCountIsNegative() {
         LottoPurchasePrice price = LottoPurchasePrice.valueOf(10000);
+        int manualLottoCount = -1;
+        assertThatThrownBy(() -> price.validateLottoCount(manualLottoCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("수동 로또 발급 횟수는 음수일 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("validateLottoCount 메서드에서 로또 구매 금액보다 많은 양의 로또는 구매할 때 예외가 발생한다.")
+    void throwExceptionWhenManualLottoCountExceedsPurchaseLimit() {
+        LottoPurchasePrice price = LottoPurchasePrice.valueOf(2000);
         int manualLottoCount = 3;
-        assertThat(price.getAutoLottoCount(manualLottoCount))
-                .isEqualTo(7);
+        assertThatThrownBy(() -> price.validateLottoCount(manualLottoCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 구매 금액보다 많은 양의 로또는 구매할 수 없습니다.");
     }
 }
