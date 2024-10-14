@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +26,9 @@ public class LottoDisplay {
         System.out.println("---------");
 
         List<Integer> matchingCountResult = lottoMachine.checkMatchingNumber(inputWinningNumbers);
-
         Map<Integer, Integer> matchingResult = lottoMachine.winningResult(matchingCountResult);
 
-        for (int i = 3; i <= 6; i++) {
-            int matchingTicketCount = matchingResult.getOrDefault(i, 0); // 기본값 0L
-            System.out.println(i + "개 일치 - " + matchingTicketCount + "개");
-        }
+        int totalPrizeMoney = resultView.printTotalResult(matchingResult);
+        resultView.printRateOfReturn(lottoMachine.rateOfReturnResult(totalMoney, totalPrizeMoney));
     }
-
 }
