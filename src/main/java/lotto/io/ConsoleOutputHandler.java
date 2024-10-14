@@ -28,7 +28,7 @@ public class ConsoleOutputHandler implements OutputHandler {
         System.out.println(generateLottoTicketsText(lottoTickets));
     }
 
-    private String generateLottoTicketsText(LottoTickets lottoTickets) {
+    public String generateLottoTicketsText(LottoTickets lottoTickets) {
         StringBuilder sb = new StringBuilder();
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             sb.append(generateLottoNumbersText(lottoTicket)).append(System.lineSeparator());

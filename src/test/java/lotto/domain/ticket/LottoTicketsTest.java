@@ -2,6 +2,7 @@ package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.result.Rank;
+import lotto.io.ConsoleOutputHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -46,8 +47,10 @@ class LottoTicketsTest {
     @Test
     void testToStringOfLottoTickets() {
         LottoTickets lottoTickets = LottoTickets.of(tickets);
+        ConsoleOutputHandler consoleOutputHandler = new ConsoleOutputHandler();
+
         String expectedOutput = "[1, 2, 3, 4, 5, 6]\n[7, 8, 9, 10, 11, 12]\n";
-        assertThat(lottoTickets.toString()).isEqualTo(expectedOutput);
+        assertThat(consoleOutputHandler.generateLottoTicketsText(lottoTickets)).isEqualTo(expectedOutput);
     }
 
 
