@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lotto.util.LottoAutoGenerator;
 
 public class LotteryMachine {
@@ -13,6 +14,16 @@ public class LotteryMachine {
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public int getPurchasedLottoCount() {
+        return lottos.size();
+    }
+
+    public List<String> getLottoNumbers() {
+        return lottos.stream()
+                .map(Lotto::getLottoNumberInfo)
+                .collect(Collectors.toList());
     }
 
     public LotteryMachine(final int purchasePrice) {

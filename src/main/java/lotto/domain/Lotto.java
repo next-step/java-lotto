@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -12,9 +13,16 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
+    public String getLottoNumberInfo() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getValue)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
+    }
+
     public Lotto(final Set<LottoNumber> lottoNumbers) {
         valid(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
     }
 
     private void valid(final Set<LottoNumber> lottoNumbers) {
