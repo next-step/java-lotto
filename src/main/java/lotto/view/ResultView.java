@@ -42,7 +42,6 @@ public class ResultView {
     private static void printLottoRewards(final LottoResult lottoResult) {
         Map<LottoRewards, Integer> rewardsMap = lottoResult.getResultMap();
         List<LottoRewards> lottoRewards = Arrays.asList(LottoRewards.values());
-        Collections.reverse(lottoRewards);
 
         for (LottoRewards lottoReward : lottoRewards) {
             printLottoReward(lottoReward, rewardsMap.get(lottoReward));
