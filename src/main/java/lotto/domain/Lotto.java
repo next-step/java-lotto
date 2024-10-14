@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import static java.util.stream.Collectors.toList;
-import static lotto.domain.LottoRank.SECOND;
-import static lotto.domain.LottoRank.THIRD;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,7 +88,7 @@ public class Lotto {
 
     public LottoRank getLottoResult(WinningLotto winningLotto) {
         int equalCount = getMatchCount(winningLotto.getWinningLotto());
-        return getRank(equalCount, winningLotto.getBonusNumber());
+        return LottoRank.matchRank(equalCount, isNumberContain(winningLotto.getBonusNumber()));
     }
 
     private int getMatchCount(List<Integer> winningLottoNumbers) {
@@ -101,21 +99,6 @@ public class Lotto {
 
     public boolean isNumberContain(int number) {
         return lottoNumbers.contains(new LottoNumber(number));
-    }
-
-    private LottoRank getRank(int equalCount, int bonusNumber) {
-        LottoRank lottoRank = LottoRank.matchRank(equalCount);
-        if (lottoRank.equals(SECOND)) {
-            return isSecondRank(bonusNumber);
-        }
-        return lottoRank;
-    }
-
-    private LottoRank isSecondRank(int bonusNumber) {
-        if (isNumberContain(bonusNumber)) {
-            return SECOND;
-        }
-        return THIRD;
     }
 
     public void validateDuplicate(int number) {
