@@ -11,6 +11,7 @@
 
 * 입력값에 따라서 계산순서 진행하기
   * 문자열 순서대로 사칙연산 진행하기
+* 입력값 null이나 공백이면 IllegalArgumentException v
 * 문자열이 아닌 값이 있으면 Illegal
 * 기호가 없으면 Illegal
 
