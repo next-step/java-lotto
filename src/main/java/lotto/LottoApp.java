@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoSheet;
+import lotto.domain.LottoSheetResults;
 import lotto.domain.WinningLottoNumbers;
 
 import java.util.List;
@@ -8,8 +9,7 @@ import java.util.List;
 import static lotto.domain.LottoSheet.calculateSheetCount;
 import static lotto.view.InputView.inputPayment;
 import static lotto.view.InputView.inputWinningLottoNumbers;
-import static lotto.view.ResultView.printLottoSheetCount;
-import static lotto.view.ResultView.printLottoSheets;
+import static lotto.view.ResultView.*;
 
 public class LottoApp {
     public static void main(String[] args) {
@@ -20,6 +20,9 @@ public class LottoApp {
         printLottoSheets(lottoSheets);
 
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputWinningLottoNumbers());
+        LottoSheetResults lottoSheetResults = LottoSheetResults.create(
+                winningLottoNumbers, lottoSheets);
+        printLottoResults(lottoSheetResults);
     }
 }
 

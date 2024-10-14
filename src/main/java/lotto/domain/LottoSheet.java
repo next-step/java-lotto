@@ -5,14 +5,18 @@ import java.util.List;
 
 public class LottoSheet {
     public static final int LOTTO_SHEET_PRICE = 1_000;
-    public LottoNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public LottoSheet() {
         this.lottoNumbers = LottoNumbers.generate();
     }
 
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers.getLottoNumbers();
+    public LottoSheet(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public LottoNumbers getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
     public static int calculateSheetCount(int money) {

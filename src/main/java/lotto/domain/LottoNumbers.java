@@ -12,8 +12,12 @@ public class LottoNumbers {
     public static final List<Integer> LOTTO_NUMBER_SET = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
     private final List<Integer> lottoNumbers;
 
-    private LottoNumbers(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public LottoNumbers(int ...lottoNumbers) {
+        this(Arrays.stream(lottoNumbers).boxed().collect(Collectors.toList()));
     }
 
     public static LottoNumbers generate() {
