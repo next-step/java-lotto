@@ -3,6 +3,7 @@ package lotto.ui;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchasePrice;
+import lotto.domain.LottoTicket;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class InputView {
         return LottoPurchasePrice.valueOf(readNextInt());
     }
 
-    public static List<Lotto> readManualLotto(final LottoPurchasePrice purchasePrice) {
+    public static LottoTicket readManualLotto(final LottoPurchasePrice purchasePrice) {
         System.out.println(MANUAL_LOTTO_COUNT_QUESTION);
         int manualLottoCount = readNextInt();
         purchasePrice.validateLottoCount(manualLottoCount);
@@ -34,7 +35,7 @@ public class InputView {
                         + "장, 자동으로 " + (purchasePrice.getLottoCount() - manualLottoCount)
                         + "개를 구매했습니다."
         );
-        return getLottoTicket(manualLottoCount);
+        return new LottoTicket(purchasePrice, getLottoTicket(manualLottoCount));
     }
 
     private static int readNextInt() {
