@@ -1,5 +1,7 @@
 package lotto.io;
 
+import lotto.exception.InvalidWinningNumbersException;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -33,11 +35,14 @@ public class ConsoleInputHandler implements InputHandler {
                 .collect(Collectors.toList());
     }
 
-
     private void validateWinningNumbers(List<String> winningNumbers) {
-        if (new HashSet<>(winningNumbers).size() != winningNumbers.size()) {
-            throw new IllegalArgumentException("6개의 중복되지 않는 숫자를 입력하세요.");
+        if (hasDifferentSize(winningNumbers)) {
+            throw new InvalidWinningNumbersException();
         }
+    }
+
+    private boolean hasDifferentSize(List<String> winningNumbers) {
+        return new HashSet<>(winningNumbers).size() != winningNumbers.size();
     }
 
 }
