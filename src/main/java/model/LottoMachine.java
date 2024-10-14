@@ -1,8 +1,6 @@
 package model;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
@@ -41,13 +39,38 @@ public class LottoMachine {
         if (bonusNumber == null) {
             return;
         }
-        if (bonusNumber < 1 || bonusNumber > 45) {
+        if (checkLottoNumberRange(bonusNumber)) {
             throw new IllegalArgumentException("Bonus number must be between 1 and 45");
         }
-        boolean match = this.winningNumbers.stream()
-                .anyMatch(it -> it.equals(bonusNumber));
-        if (match) {
+        if (doesWinningNumbersContain(bonusNumber)) {
             throw new IllegalArgumentException("Bonus number " + bonusNumber + " is wrong.");
+        }
+    }
+
+    private boolean doesWinningNumbersContain(Integer bonusNumber) {
+        return this.winningNumbers.stream()
+                .anyMatch(it -> it.equals(bonusNumber));
+    }
+
+    private static boolean checkLottoNumberRange(Integer number) {
+        return number < Lotto.MIN_LOTTO_NUMBER || number > Lotto.MAX_LOTTO_NUMBER;
+    }
+
+    private static void checkWinningNumbers(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != 6) {
+            throw new IllegalArgumentException("input length must be less than or equal to 6");
+        }
+
+        Set<Integer> winningNumbersSet = new HashSet<>(winningNumbers);
+        if (winningNumbersSet.size() != winningNumbers.size()) {
+            throw new IllegalArgumentException("winning numbers contain duplicate numbers");
+        }
+
+        int cnt = (int) winningNumbers.stream()
+                .filter(LottoMachine::checkLottoNumberRange)
+                .count();
+        if (cnt > 0) {
+            throw new IllegalArgumentException("lotto number must be between 1 and 45");
         }
     }
 
@@ -56,19 +79,6 @@ public class LottoMachine {
                 .map(it -> new Lotto(it, this.winningNumbers, this.bonusNumber))
                 .collect(Collectors.toList());
     }
-
-    private static void checkWinningNumbers(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != 6) {
-            throw new IllegalArgumentException("input length must be less than or equal to 6");
-        }
-        int cnt = (int) winningNumbers.stream()
-                .filter(it -> it < Lotto.MIN_LOTTO_NUMBER || it > Lotto.MAX_LOTTO_NUMBER)
-                .count();
-        if (cnt > 0) {
-            throw new IllegalArgumentException("lotto number must be between 1 and 45");
-        }
-    }
-
 
     public List<Lotto> getLottos() {
         return lottos;

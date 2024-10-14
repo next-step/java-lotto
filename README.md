@@ -27,4 +27,4 @@
 * 2등 판단 로직 추가 [X]
 * 로또 번호 정렬 출력 [X]
 * PRIZE5PLUS renaming [X]
-* refactor checkBonusNumber []
+* checkBonusNumber 개선 [X]
