@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
 import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,9 +29,9 @@ public class LottoNumbersTest {
     void getBalls() {
         LottoNumbers lottoNumbers = new LottoNumbers();
 
-        assertThatThrownBy(() -> lottoNumbers.getNumbers().set(0, 10))
+        assertThatThrownBy(() -> lottoNumbers.getNumbers().set(0, new LottoNo(10)))
                 .isInstanceOf(UnsupportedOperationException.class);
-        assertThatThrownBy(() -> lottoNumbers.getNumbers().add(50))
+        assertThatThrownBy(() -> lottoNumbers.getNumbers().add(new LottoNo(50)))
                 .isInstanceOf(UnsupportedOperationException.class);
         assertThatThrownBy(() -> lottoNumbers.getNumbers().remove(0))
                 .isInstanceOf(UnsupportedOperationException.class);
@@ -38,14 +39,16 @@ public class LottoNumbersTest {
 
     @Test
     void validate_로또번호범위_이내() {
-        Set<Integer> numbers = Set.of(1, 10, 21, 31, 41, 45);
+        Set<LottoNo> numbers = Set.of(new LottoNo(1), new LottoNo(10), new LottoNo(21)
+                , new LottoNo(31), new LottoNo(41), new LottoNo(45));
         Lotto lotto = new Lotto(numbers);
         assertThat(lotto.getNumbers().size()).isEqualTo(6);
     }
 
     @Test
     void validate_로또번호범위_이외() {
-        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 46);
+        Set<LottoNo> numbers = Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                , new LottoNo(4), new LottoNo(5), new LottoNo(46));
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new Lotto(numbers);
         });

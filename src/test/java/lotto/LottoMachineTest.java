@@ -5,6 +5,7 @@ import lotto.domain.CashAmount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCreateByMission;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNo;
 import lotto.domain.ManualAmount;
 import lotto.domain.MissionProfitRateStrategy;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -33,8 +36,11 @@ public class LottoMachineTest {
     void createManually() {
         LottoMachine machine = LottoMachine.of(new CashAmount(10000), new ManualAmount(1)
                 , new MissionProfitRateStrategy(), new LottoCreateByMission());
-        Lotto lotto = machine.createManually(Set.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.getNumbers()).containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6);
+        Set<LottoNo> set = IntStream.rangeClosed(1, 6).mapToObj(LottoNo::new).collect(Collectors.toSet());
+        Lotto lotto = machine.createManually(set);
+//        assertThat(lotto.getNumbers()).containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6);
+        assertThat(lotto.getNumbers()).containsExactlyInAnyOrder(
+                new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(6));
     }
 
     @Test
@@ -45,13 +51,19 @@ public class LottoMachineTest {
 
         EnumMap<Prize, Integer> map = machine.checkLottoPrize(
                 List.of(
-                        new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
-                        new Lotto(Set.of(1, 2, 3, 4, 6, 7)),
-                        new Lotto(Set.of(1, 2, 3, 10, 11, 12)),
-                        new Lotto(Set.of(1, 2, 3, 4, 10, 11))
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(4), new LottoNo(5), new LottoNo(6))),
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(4), new LottoNo(5), new LottoNo(20))),
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(4), new LottoNo(6), new LottoNo(7))),
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(10), new LottoNo(11), new LottoNo(12))),
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(4), new LottoNo(10), new LottoNo(11)))
                 ),
-                Set.of(1, 2, 3, 4, 5, 6),0);
+                Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                        , new LottoNo(4), new LottoNo(5), new LottoNo(6)),new LottoNo(0));
 
         assertThat(map.get(Prize.FIRST)).isEqualTo(1);
         assertThat(map.get(Prize.THIRD)).isEqualTo(2);
@@ -67,13 +79,19 @@ public class LottoMachineTest {
 
         EnumMap<Prize, Integer> map = machine.checkLottoPrize(
                 List.of(
-                        new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Set.of(1, 2, 3, 4, 5, 20)),
-                        new Lotto(Set.of(1, 2, 3, 4, 6, 7)),
-                        new Lotto(Set.of(1, 2, 3, 10, 11, 12)),
-                        new Lotto(Set.of(1, 2, 3, 4, 10, 11))
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(4), new LottoNo(5), new LottoNo(6))),
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(4), new LottoNo(5), new LottoNo(20))),
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(4), new LottoNo(6), new LottoNo(7))),
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(10), new LottoNo(11), new LottoNo(12))),
+                        new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                                , new LottoNo(4), new LottoNo(10), new LottoNo(11)))
                 ),
-                Set.of(1, 2, 3, 4, 5, 6), 20);
+                Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
+                        , new LottoNo(4), new LottoNo(5), new LottoNo(6)), new LottoNo(20));
 
         assertThat(map.get(Prize.SECOND)).isEqualTo(1);
     }

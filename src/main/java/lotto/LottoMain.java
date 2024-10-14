@@ -5,6 +5,7 @@ import lotto.domain.CashAmount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCreateByMission;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNo;
 import lotto.domain.ManualAmount;
 import lotto.domain.MissionProfitRateStrategy;
 import lotto.view.InputView;
@@ -36,10 +37,10 @@ public class LottoMain {
         resultView.printLottoNumbers(autoLottoList);
 
         // 과거 당첨 번호 입력
-        Set<Integer> winningNumbers = inputView.getWinningNumbers();
+        Set<LottoNo> winningNumbers = inputView.getWinningNumbers();
 
         // 보너스 볼 입력
-        int bonusNumber = inputView.getBonusNumber();
+        LottoNo bonusNumber = inputView.getBonusNumber();
 
         // 당첨 확인
         EnumMap<Prize, Integer> countMap = machine.checkLottoPrize(manualLottoList, winningNumbers, bonusNumber);

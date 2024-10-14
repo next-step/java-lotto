@@ -47,7 +47,7 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    public Lotto createManually(Set<Integer> numbers) {
+    public Lotto createManually(Set<LottoNo> numbers) {
         return new Lotto(numbers);
     }
 
@@ -55,7 +55,7 @@ public class LottoMachine {
         return cashAmount.calculatePurchaseQuantity(LOTTO_PRICE);
     }
 
-    public EnumMap<Prize, Integer> checkLottoPrize(List<Lotto> lottoList, Set<Integer> winningNumbers, int bonusNumber) {
+    public EnumMap<Prize, Integer> checkLottoPrize(List<Lotto> lottoList, Set<LottoNo> winningNumbers, LottoNo bonusNumber) {
         EnumMap<Prize, Integer> countMap = new EnumMap<>(Prize.class);
         for (Lotto lotto : lottoList) {
             int count = match(lotto, winningNumbers);
@@ -65,13 +65,13 @@ public class LottoMachine {
         return countMap;
     }
 
-    private int match(Lotto lotto, Set<Integer> winningNumbers) {
+    private int match(Lotto lotto, Set<LottoNo> winningNumbers) {
         return lotto.getNumbers().stream()
-                .filter(winningNumbers::contains)
+                .filter(i -> i.isContains(winningNumbers))
                 .collect(Collectors.toList()).size();
     }
 
-    private boolean isBonusNumberMatch(Lotto lotto, int bonusNumber) {
+    private boolean isBonusNumberMatch(Lotto lotto, LottoNo bonusNumber) {
         return lotto.getNumbers().contains(bonusNumber);
     }
 

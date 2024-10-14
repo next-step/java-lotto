@@ -2,6 +2,7 @@ package lotto.view;
 
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,8 +59,8 @@ public class InputView {
 
     private Lotto createLotto() {
         try {
-            Set<Integer> numbers = Arrays.stream(sc.nextLine().split(", "))
-                    .map(Integer::parseInt)
+            Set<LottoNo> numbers = Arrays.stream(sc.nextLine().split(", "))
+                    .map(i -> new LottoNo(Integer.parseInt(i)))
                     .collect(Collectors.toSet());
             return new Lotto(numbers);
         } catch (Exception e) {
@@ -68,24 +69,24 @@ public class InputView {
         }
     }
 
-    public void printPurchaseCount(int purchaseCount) {
-        System.out.println(purchaseCount + PURCHASE_COUNT_MESSAGE);
-    }
+//    public void printPurchaseCount(int purchaseCount) {
+//        System.out.println(purchaseCount + PURCHASE_COUNT_MESSAGE);
+//    }
 
-    public Set<Integer> getWinningNumbers() {
+    public Set<LottoNo> getWinningNumbers() {
         System.out.println(WINNING_NUMBERS_MESSAGE);
         String[] balls = sc.nextLine().split(", ");
         return Arrays.stream(balls)
-                .map(Integer::parseInt)
+                .map(i -> new LottoNo(Integer.parseInt(i)))
                 .collect(Collectors.toSet());
     }
 
-    public int getBonusNumber() {
+    public LottoNo getBonusNumber() {
         try {
             System.out.println("보너스 볼을 입력해 주세요.");
             int number = sc.nextInt();
             sc.nextLine();
-            return number;
+            return new LottoNo(number);
         } catch (Exception e) {
             sc.nextLine();
             return getBonusNumber();
