@@ -7,6 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TokensTest {
     @Test
+    @DisplayName("입력이 null인 경우 예외를 던진다.")
+    void create_null() {
+        assertThrows(IllegalArgumentException.class, () -> new Tokens(null));
+    }
+
+    @Test
     @DisplayName("입력이 없는 경우 예외를 던진다.")
     void create_empty() {
         assertThrows(IllegalArgumentException.class, () -> new Tokens(""));

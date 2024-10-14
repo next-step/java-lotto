@@ -20,7 +20,7 @@ public class Tokens {
     }
 
     private void validateSize(String expression) {
-        if (expression.isEmpty()) {
+        if (expression == null || expression.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_INPUT_ERROR_MESSAGE);
         }
     }

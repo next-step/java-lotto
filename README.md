@@ -10,7 +10,7 @@
 
 ## 문자열 사칙 연산 계산기 기능 요구사항
 - InputView
-  - 사용자가 입력한 문자열 값 받음 (ex. 2 + 3 * 4 / 2)
+  - 사용자가 입력한 문자열 값 받아 Tokens 리턴 (ex. 2 + 3 * 4 / 2)
 - Tokens
   - 입력값이 없을 경우 IllegalArgumentException throw
   - 연산자가 사칙연산 기호가 아닌 경우 IllegalArgumentException throw

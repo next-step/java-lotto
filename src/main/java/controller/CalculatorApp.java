@@ -7,8 +7,7 @@ import view.ResultView;
 
 public class CalculatorApp {
     public static void main(String[] args) {
-        String expression = InputView.getExpression();
-        Tokens tokens = new Tokens(expression);
+        Tokens tokens = InputView.getTokens();
         Calculator calculator = new Calculator(tokens);
         int result = calculator.calculate();
         ResultView.printResult(result);
