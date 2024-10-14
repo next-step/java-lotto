@@ -9,18 +9,20 @@ import static lotto.domain.number.LottoNumber.LAST_NUMBER;
 import static lotto.domain.ticket.LottoTicket.SIZE_OF_LOTTO;
 
 public class RandomLottoNumberGenerator implements LottoNumberGenerator {
+    private static final List<Integer> CANDIDATES;
+
+    static {
+        CANDIDATES = new ArrayList<>();
+        for (int number = FIRST_NUMBER; number <= LAST_NUMBER; number++) {
+            CANDIDATES.add(number);
+        }
+    }
+
     @Override
     public List<Integer> create() {
-        List<Integer> candidates = initCandidates();
+        List<Integer> candidates = new ArrayList<>(CANDIDATES);
         Collections.shuffle(candidates);
         return candidates.subList(0, SIZE_OF_LOTTO);
     }
 
-    private List<Integer> initCandidates() {
-        List<Integer> candidates = new ArrayList<>();
-        for (int number = FIRST_NUMBER; number < LAST_NUMBER; number++) {
-            candidates.add(number);
-        }
-        return candidates;
-    }
 }
