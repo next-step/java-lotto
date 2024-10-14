@@ -39,9 +39,7 @@ public class LottoMachine {
         if (bonusNumber == null) {
             return;
         }
-        if (checkLottoNumberRange(bonusNumber)) {
-            throw new IllegalArgumentException("Bonus number must be between 1 and 45");
-        }
+        checkLottoNumberRange(bonusNumber);
         if (doesWinningNumbersContain(bonusNumber)) {
             throw new IllegalArgumentException("Bonus number " + bonusNumber + " is wrong.");
         }
@@ -52,8 +50,10 @@ public class LottoMachine {
                 .anyMatch(it -> it.equals(bonusNumber));
     }
 
-    private static boolean checkLottoNumberRange(Integer number) {
-        return number < Lotto.MIN_LOTTO_NUMBER || number > Lotto.MAX_LOTTO_NUMBER;
+    private static void checkLottoNumberRange(Integer number) {
+        if (number < Lotto.MIN_LOTTO_NUMBER || number > Lotto.MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("Bonus number must be between 1 and 45");
+        }
     }
 
     private static void checkWinningNumbers(List<Integer> winningNumbers) {
@@ -66,12 +66,7 @@ public class LottoMachine {
             throw new IllegalArgumentException("winning numbers contain duplicate numbers");
         }
 
-        int cnt = (int) winningNumbers.stream()
-                .filter(LottoMachine::checkLottoNumberRange)
-                .count();
-        if (cnt > 0) {
-            throw new IllegalArgumentException("lotto number must be between 1 and 45");
-        }
+        winningNumbers.forEach(LottoMachine::checkLottoNumberRange);
     }
 
     private void setLottos() {
