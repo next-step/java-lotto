@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
@@ -17,12 +18,16 @@ public class LottoApplication {
 
         final WinningNumber winningNumber = generateWinningNumber();
         final LottoResult lottoResult = lottos.calculateLottoResult(winningNumber);
-        ResultView.printLottoStatistics(lottoResult,purchasePrice);
+        ResultView.printLottoStatistics(lottoResult, purchasePrice);
     }
 
     private static WinningNumber generateWinningNumber() {
-        return new WinningNumber(InputView.inputWinningNumber().stream()
+        return new WinningNumber(convertToLottoNumber(), InputView.inputBonusNumber());
+    }
+
+    private static Set<LottoNumber> convertToLottoNumber() {
+        return InputView.inputWinningNumber().stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet());
     }
 }
