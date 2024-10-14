@@ -24,7 +24,7 @@ public class LottoMain {
         }
 
         WinningLotto winningLotto = new WinningLotto(inputLastWinningNumbers());
-        WinningResult winningResult = lottoGame.calculateLottoResult(winningLotto);
+        WinningResult winningResult = lottoGame.play(winningLotto);
 
         ResultView.printMatchStaticsInfo(winningResult.getStaticsList());
         ResultView.printProfitRate(winningResult.calculateProfitRate(), lottoQuantity);

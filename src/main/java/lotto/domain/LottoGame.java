@@ -21,7 +21,7 @@ public class LottoGame {
         return Collections.unmodifiableList(lottos);
     }
 
-    public WinningResult calculateLottoResult(WinningLotto winning) {
+    public WinningResult play(WinningLotto winning) {
         WinningResult result = new WinningResult();
         for (Lotto lotto : lottos) {
             int matchCount = winning.match(lotto);
