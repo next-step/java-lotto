@@ -3,7 +3,7 @@ package lotto;
 import java.util.*;
 
 public class Lotto {
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
     private static final List<Integer> MATCHING_COUNT_FOR_WINNING = Arrays.asList(3, 4, 5, 6);
 
     private List<Integer> lottoNumbers;
@@ -36,7 +36,7 @@ public class Lotto {
     }
 
     private void generateLottoNumber() {
-        int randomNumber = random.nextInt(45) + 1;
+        int randomNumber = RANDOM.nextInt(45) + 1;
         if (!lottoNumbers.contains(randomNumber)) {
             lottoNumbers.add(randomNumber);
         }
