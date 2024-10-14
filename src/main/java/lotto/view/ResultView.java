@@ -3,10 +3,13 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNum;
 import lotto.domain.LottoResult;
-import lotto.enums.LottoWinnerPrice;
+import lotto.enums.Rank;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static lotto.enums.Rank.SECOND_RANK;
+import static lotto.enums.Rank.getLottoWinnerPrice;
 
 public class ResultView {
 
@@ -53,15 +56,17 @@ public class ResultView {
     public void printLottoResult(LottoResult lottoResult) {
         StringBuilder sb = new StringBuilder();
 
-        List<LottoWinnerPrice> lottoWinnerPrice = LottoWinnerPrice.getLottoWinnerPrice();
-        for (LottoWinnerPrice winnerPrice : lottoWinnerPrice) {
-            sb.append(winnerPrice.getMatchedCount())
-                    .append("개 일치 (")
-                    .append(winnerPrice.getPrice())
+        List<Rank> ranks = getLottoWinnerPrice();
+        for (Rank rank : ranks) {
+            sb.append(rank.getMatchedCount())
+                    .append("개 일치");
+            if (rank == SECOND_RANK) {
+                sb.append(", 보너스 볼 일치");
+            }
+            sb.append(" (")
+                    .append(rank.getPrice())
                     .append(")- ")
-                    .append(lottoResult.getWinnerCount(
-                            winnerPrice.getMatchedCount()
-                    ))
+                    .append(lottoResult.getWinnerCount(rank))
                     .append("개");
             sb.append(System.lineSeparator());
         }

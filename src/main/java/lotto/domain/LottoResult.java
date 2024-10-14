@@ -1,20 +1,19 @@
 package lotto.domain;
 
-import lotto.enums.LottoWinnerPrice;
 import lotto.service.LottoGame;
+import lotto.enums.Rank;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoResult {
 
-    private final List<Integer> result;
+    private final List<Rank> results;
     private final double returnRate;
 
-    public LottoResult(List<Integer> result, int buyPrice) {
-        this.result = result;
+    public LottoResult(List<Rank> results, int buyPrice) {
+        this.results = results;
         this.returnRate = Math.round((double) getPriceTotal() / buyPrice * 100.0) / 100.0;
     }
 
@@ -24,24 +23,24 @@ public class LottoResult {
 
     int getPriceTotal() {
         int result = 0;
-        for (Integer matchedNumber : this.result) {
-            result += LottoWinnerPrice.getPrice(matchedNumber);
+        for (Rank rank : this.results) {
+            result += rank.getPrice();
         }
         return result;
     }
 
-    public int getWinnerCount(int matchedNumber) {
-        return (int) result.stream()
-                .filter(count -> count == matchedNumber)
+    public int getWinnerCount(Rank rank) {
+        return (int) results.stream()
+                .filter(result -> result == rank)
                 .count();
     }
 
-    public static LottoResult getLottoResult(List<Lotto> lottos, Lotto winner) {
-        List<Integer> result = new ArrayList<>();
+    public static LottoResult getLottoResult(List<Lotto> lottos, Lotto winner, LottoNum bonusNumber) {
+        List<Rank> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            result.add(lotto.compareWinningNumber(winner));
+            int matchedCount = lotto.compareWinningNumber(winner);
+            result.add(Rank.getRank(matchedCount, lotto.isMatchBonus(bonusNumber)));
         }
-        Collections.sort(result);
         return new LottoResult(result, lottos.size() * LottoGame.LOTTO_PRICE);
     }
 
@@ -54,6 +53,6 @@ public class LottoResult {
             return false;
         }
         LottoResult that = (LottoResult) object;
-        return Double.compare(getReturnRate(), that.getReturnRate()) == 0 && Objects.equals(result, that.result);
+        return Double.compare(getReturnRate(), that.getReturnRate()) == 0 && Objects.equals(results, that.results);
     }
 }

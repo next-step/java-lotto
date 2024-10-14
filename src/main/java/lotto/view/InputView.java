@@ -34,6 +34,11 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
+    public LottoNum getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return new LottoNum(SCANNER.nextInt());
+    }
+
     public Lotto getWinnerLottoNumbers(String lottoNumbers) {
         List<String> lotto = parseWinnerLotto(lottoNumbers);
         List<LottoNum> lastWinnerLotto = lotto.stream()
