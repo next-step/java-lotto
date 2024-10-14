@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,6 +16,7 @@ public class ResultView {
     private static final String LOTTO_STATISTICS_MESSAGE = "당첨 통계";
     private static final String LINE = "---------";
     private static final String LOTTO_REWARD = "%d개 일치 (%d원)- %d개";
+    private static final String SECOND_REWARD = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String LOTTO_PROFIT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void printLottos(final Lottos lottos) {
@@ -51,6 +51,10 @@ public class ResultView {
     private static void printLottoReward(final LottoRewards lottoReward, final int matchCount) {
         if (lottoReward.equals(LottoRewards.NONE)) {
             return;
+        }
+        if (lottoReward.equals(LottoRewards.SECOND)) {
+            System.out.printf(SECOND_REWARD, lottoReward.getMatchCount(), lottoReward.getPrize(), matchCount);
+            System.out.println();
         }
         System.out.printf(LOTTO_REWARD, lottoReward.getMatchCount(), lottoReward.getPrize(), matchCount);
         System.out.println();
