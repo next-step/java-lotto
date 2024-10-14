@@ -9,11 +9,16 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
-    @Test
-    void 로또생성() {
-        Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+
+    private static Set<LottoNumber> getLottoNumbers() {
+        return Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
+    }
+
+    @Test
+    void 로또생성() {
+        Set<LottoNumber> lottoNumbers = getLottoNumbers();
         Lotto lotto = new Lotto(lottoNumbers);
         assertThat(lotto).isNotNull();
     }
@@ -34,5 +39,15 @@ class LottoTest {
                 .collect(Collectors.toSet());
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 번호_비교() {
+        Set<LottoNumber> lottoNumbers = getLottoNumbers();
+        Set<LottoNumber> winningNumbers = getLottoNumbers();
+        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto winningLotto = new Lotto(winningNumbers);
+
+        assertThat(lotto.countMatchCount(winningLotto)).isEqualTo(6);
     }
 }
