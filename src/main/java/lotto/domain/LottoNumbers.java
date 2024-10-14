@@ -38,18 +38,8 @@ public class LottoNumbers {
         this.lottoNumbers = numbers;
     }
 
-    public Rank calculateRank(WinNumber winNumber, LottoNumber bonus) {
-        int matchCount = 0;
-
-        for (LottoNumber number : lottoNumbers) {
-            matchCount = winNumber.contains(number) ? matchCount + 1 : matchCount;
-        }
-
-        if (Rank.match(matchCount) == Rank.FOUR) {
-            return checkSecond(bonus);
-        }
-
-        return Rank.match(matchCount);
+    public Rank calculateRank(WinNumber winNumber) {
+        return winNumber.calculateRank(lottoNumbers);
     }
 
     public LottoNumbers pickNumbers() {
@@ -72,13 +62,6 @@ public class LottoNumbers {
 
     public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
-    }
-
-    private Rank checkSecond(LottoNumber bonus) {
-        if (lottoNumbers.contains(bonus)) {
-            return Rank.SECOND;
-        }
-        return Rank.FOUR;
     }
 
     private void shuffle(List<LottoNumber> baseNumbers) {

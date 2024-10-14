@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatics;
 import lotto.domain.Rank;
 import lotto.domain.WinNumber;
@@ -26,14 +25,13 @@ public class Main {
         }
 
         WinNumber winNumber = InputView.inputWinnerNumber();
-        LottoNumber bonusNumber = InputView.inputBonusNumber();
+        winNumber.addBonus(InputView.inputBonusNumber());
 
-        OutputView.staticsView();
-        OutputView.matchView(Rank.THREE, lottoStatics.findRank(winNumber, Rank.THREE, bonusNumber));
-        OutputView.matchView(Rank.FOUR, lottoStatics.findRank(winNumber, Rank.FOUR, bonusNumber));
-        OutputView.matchView(Rank.FIVE, lottoStatics.findRank(winNumber, Rank.FIVE, bonusNumber));
-        OutputView.matchView(Rank.SECOND, lottoStatics.findRank(winNumber, Rank.SECOND, bonusNumber));
-        OutputView.matchView(Rank.WIN, lottoStatics.findRank(winNumber, Rank.WIN, bonusNumber));
-        OutputView.ratioView(Rank.ratio(lottoStatics.totalPrize(winNumber, bonusNumber), money));
+        OutputView.matchView(Rank.THREE, lottoStatics.findRank(winNumber, Rank.THREE));
+        OutputView.matchView(Rank.FOUR, lottoStatics.findRank(winNumber, Rank.FOUR));
+        OutputView.matchView(Rank.FIVE, lottoStatics.findRank(winNumber, Rank.FIVE));
+        OutputView.matchView(Rank.SECOND, lottoStatics.findRank(winNumber, Rank.SECOND));
+        OutputView.matchView(Rank.WIN, lottoStatics.findRank(winNumber, Rank.WIN));
+        OutputView.ratioView(Rank.ratio(lottoStatics.totalPrize(winNumber), money));
     }
 }
