@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.enums.LottoWinnerPrice;
+import lotto.service.LottoGame;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,13 +36,13 @@ public class LottoResult {
                 .count();
     }
 
-    public static LottoResult getLottoResult(List<Lotto> lottos, Lotto winner, int lottoPrice) {
+    public static LottoResult getLottoResult(List<Lotto> lottos, Lotto winner) {
         List<Integer> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
             result.add(lotto.compareWinningNumber(winner));
         }
         Collections.sort(result);
-        return new LottoResult(result, lottos.size() * lottoPrice);
+        return new LottoResult(result, lottos.size() * LottoGame.LOTTO_PRICE);
     }
 
     @Override

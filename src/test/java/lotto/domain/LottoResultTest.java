@@ -17,7 +17,7 @@ public class LottoResultTest {
         Lotto lotto4 = new Lotto("1,2,3,7,8,9");
         List<Lotto> lottos = List.of(lotto1, lotto2, lotto3, lotto4);
         Lotto winner = new Lotto("1,2,3,4,5,6");
-        assertThat(LottoResult.getLottoResult(lottos, winner, 1000).getReturnRate()).isEqualTo(500388.75);
+        assertThat(LottoResult.getLottoResult(lottos, winner).getReturnRate()).isEqualTo(500388.75);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class LottoResultTest {
         Lotto lotto4 = new Lotto("1,2,3,7,8,9");
         List<Lotto> lottos = List.of(lotto1, lotto2, lotto3, lotto4);
         Lotto winner = new Lotto("1,2,3,4,5,6");
-        assertThat(LottoResult.getLottoResult(lottos, winner, 1000).getPriceTotal()).isEqualTo(2001555000);
+        assertThat(LottoResult.getLottoResult(lottos, winner).getPriceTotal()).isEqualTo(2001555000);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class LottoResultTest {
         Lotto lotto4 = new Lotto("1,2,3,7,8,9");
         List<Lotto> lottos = List.of(lotto1, lotto2, lotto3, lotto4);
         Lotto winner = new Lotto("1,2,3,4,5,6");
-        assertThat(LottoResult.getLottoResult(lottos, winner, 1000)).isEqualTo(new LottoResult(List.of(3, 4, 5, 6), 4000));
+        assertThat(LottoResult.getLottoResult(lottos, winner)).isEqualTo(new LottoResult(List.of(3, 4, 5, 6), 4000));
     }
 
     @Test
