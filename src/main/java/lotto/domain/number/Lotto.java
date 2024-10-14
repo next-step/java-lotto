@@ -7,48 +7,55 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final String EMPTY_STR = "";
     private static final String DELIMITER = ",";
     public static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final List<LottoNumber> lotto;
+    private final Set<LottoNumber> lotto;
+
+    public Lotto(String lottoString) {
+        this(getLottoNumbers(lottoString));
+    }
 
     public Lotto(List<LottoNumber> lotto) {
-        this.lotto = Collections.unmodifiableList(lotto);
+        this(new HashSet<>(lotto));
+    }
+
+    public Lotto(Set<LottoNumber> lotto) {
+        if (lotto.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
+        }
+        this.lotto = Set.copyOf(lotto);
+    }
+
+    private static Set<LottoNumber> getLottoNumbers(String lottoString) {
+        if (lottoString.isBlank()) {
+            throw new IllegalArgumentException(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
+        }
+
+        return Arrays.stream(Objects.requireNonNull(lottoString).split(DELIMITER))
+                .map(String::trim)
+                .map(str -> new LottoNumber(Integer.parseInt(str)))
+                .collect(Collectors.toSet());
     }
 
     public static Lotto create() {
         return new Lotto(LottoGenerator.generate());
     }
 
-    public static Lotto of(String lottoNumberString) {
-        List<String> numbers = Arrays.stream(Objects.requireNonNull(lottoNumberString).split(DELIMITER))
-                .map(String::trim)
-                .collect(Collectors.toList());
-        validateNumbers(numbers);
-
-        return new Lotto(numbers.stream()
-                .map(str -> LottoNumber.of(Integer.parseInt(str)))
-                .collect(Collectors.toList()));
-    }
-
-    private static void validateNumbers(List<String> numbers) {
-        Set<String> numberSet = new HashSet<>(numbers);
-        if (numberSet.contains(EMPTY_STR) || numberSet.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ErrorMessage.NEED_DISTINCT_SIX_NUMBERS.getMessage());
-        }
-    }
-
     public int match(Lotto compared) {
         int match = 0;
         for (LottoNumber number : compared.lotto) {
-            match += compare(number);
+            match += lotto.contains(number) ? 1 : 0;
         }
         return match;
     }
 
-    private int compare(LottoNumber compared) {
-        return lotto.contains(compared) ? 1 : 0;
+    public boolean has(LottoNumber compared) {
+        return lotto.contains(compared);
+    }
+
+    public Collection<LottoNumber> lottoNumbers() {
+        return lotto;
     }
 
     @Override

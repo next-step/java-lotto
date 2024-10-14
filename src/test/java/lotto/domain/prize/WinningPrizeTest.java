@@ -8,34 +8,32 @@ public class WinningPrizeTest {
 
     @Test
     void 입력받은_로또_당첨_번호를_소유한_로또와_비교하여_일치_개수_정상_기록() {
+        WinningPrize prize = winningPrize();
+
+        assertThat(prize.winAmount(LottoPrize.FIRST)).isEqualTo(1);
+        assertThat(prize.winAmount(LottoPrize.THIRD)).isEqualTo(1);
+        assertThat(prize.winAmount(LottoPrize.SECOND)).isEqualTo(1);
+        assertThat(prize.winAmount(LottoPrize.FOURTH)).isEqualTo(1);
+        assertThat(prize.winAmount(LottoPrize.FIFTH)).isEqualTo(1);
+    }
+
+    private WinningPrize winningPrize() {
         WinningPrize prize = new WinningPrize();
 
-        prize.record(LottoPrize.FIRST.getMatch());
-        prize.record(LottoPrize.SECOND.getMatch());
-        prize.record(LottoPrize.THIRD.getMatch());
-        prize.record(LottoPrize.THIRD.getMatch());
-        prize.record(LottoPrize.FOURTH.getMatch());
-        prize.record(LottoPrize.FOURTH.getMatch());
+        prize.record(LottoPrize.FIRST);
+        prize.record(LottoPrize.THIRD);
+        prize.record(LottoPrize.SECOND);
+        prize.record(LottoPrize.FOURTH);
+        prize.record(LottoPrize.FIFTH);
 
-        assertThat(prize.winAmount(LottoPrize.FIRST.getMatch())).isEqualTo(1);
-        assertThat(prize.winAmount(LottoPrize.SECOND.getMatch())).isEqualTo(1);
-        assertThat(prize.winAmount(LottoPrize.THIRD.getMatch())).isEqualTo(2);
-        assertThat(prize.winAmount(LottoPrize.FOURTH.getMatch())).isEqualTo(2);
+        return prize;
     }
 
     @Test
     void 입력받은_로또_당첨_번호로_상금_총액을_정상_계산() {
-        WinningPrize prize = new WinningPrize();
+        WinningPrize prize = winningPrize();
 
-        prize.record(LottoPrize.FIRST.getMatch());
-        prize.record(LottoPrize.SECOND.getMatch());
-        prize.record(LottoPrize.THIRD.getMatch());
-        prize.record(LottoPrize.THIRD.getMatch());
-        prize.record(LottoPrize.FOURTH.getMatch());
-        prize.record(LottoPrize.FOURTH.getMatch());
-
-        int prizeTotal = LottoPrize.FIRST.prize(1) + LottoPrize.SECOND.prize(1)
-                +LottoPrize.THIRD.prize(2) + LottoPrize.FOURTH.prize(2);
+        long prizeTotal = 2_000_000_000L + 30_000_000 + 1_500_000 + 50_000 + 5_000;
 
         assertThat(prize.totalPrize()).isEqualTo(prizeTotal);
     }

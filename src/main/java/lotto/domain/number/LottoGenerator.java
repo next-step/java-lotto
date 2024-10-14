@@ -8,16 +8,13 @@ import java.util.stream.IntStream;
 class LottoGenerator {
 
     private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(1, 45)
-            .mapToObj(LottoNumber::of).collect(Collectors.toList());
+            .mapToObj(LottoNumber::new).collect(Collectors.toList());
 
     private LottoGenerator() {
     }
 
     static List<LottoNumber> generate() {
         Collections.shuffle(LOTTO_NUMBERS);
-
-        return LOTTO_NUMBERS.subList(0, 6).stream()
-                .sorted()
-                .collect(Collectors.toList());
+        return List.copyOf(LOTTO_NUMBERS.subList(0, 6));
     }
 }

@@ -6,12 +6,16 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private final static int MIN_BOUND = 1;
-    private final static int MAX_BOUND = 45;
+    private static final int MIN_BOUND = 1;
+    private static final int MAX_BOUND = 45;
 
     private final int number;
 
-    private LottoNumber(int number) {
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number));
+    }
+
+    public LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
@@ -20,14 +24,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number < MIN_BOUND || number > MAX_BOUND) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
         }
-    }
-
-    public static LottoNumber of(int number) {
-        return new LottoNumber(number);
-    }
-
-    public int number() {
-        return number;
     }
 
     @Override
