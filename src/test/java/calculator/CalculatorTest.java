@@ -12,7 +12,15 @@ class CalculatorTest {
 
     Assertions.assertThatThrownBy(() -> {
       Calculator.calculate(null);
+    }).isInstanceOf(IllegalArgumentException.class);
+  }
 
+  @DisplayName("빈문자열 입력 시 IllegalArgumentException을 반환한다.")
+  @Test
+  void inputNullStringThrowsException() {
+
+    Assertions.assertThatThrownBy(() -> {
+      Calculator.calculate("");
     }).isInstanceOf(IllegalArgumentException.class);
   }
 }
