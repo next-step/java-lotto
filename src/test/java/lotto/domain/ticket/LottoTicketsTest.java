@@ -1,6 +1,6 @@
 package lotto.domain.ticket;
 
-import lotto.domain.number.LottoNumber;
+import lotto.domain.number.TestLottoNumberFactory;
 import lotto.domain.result.Rank;
 import lotto.io.ConsoleOutputHandler;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,18 +20,10 @@ class LottoTicketsTest {
     void setup() {
        tickets = List.of(
                 LottoTicket.of(
-                        List.of(
-                                LottoNumber.of(1), LottoNumber.of(2),
-                                LottoNumber.of(3), LottoNumber.of(4),
-                                LottoNumber.of(5), LottoNumber.of(6)
-                        )
+                        TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
                 ),
                 LottoTicket.of(
-                        List.of(
-                                LottoNumber.of(7), LottoNumber.of(8),
-                                LottoNumber.of(9), LottoNumber.of(10),
-                                LottoNumber.of(11), LottoNumber.of(12)
-                        )
+                        TestLottoNumberFactory.createLottoNumbers(7, 8, 9, 10, 11, 12)
                 )
         );
     }
@@ -60,11 +52,7 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = LottoTickets.of(tickets);
         WinningLotto winningLotto = WinningLotto.of(
                 LottoTicket.of(
-                        List.of(
-                                LottoNumber.of(1), LottoNumber.of(2),
-                                LottoNumber.of(3), LottoNumber.of(4),
-                                LottoNumber.of(5), LottoNumber.of(6)
-                        )
+                        TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
                 )
         );
 

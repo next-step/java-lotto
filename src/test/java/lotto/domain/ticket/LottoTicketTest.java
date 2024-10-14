@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.TestLottoNumberFactory;
 import lotto.exception.DuplicateLottoNumberException;
 import lotto.exception.InvalidSizeOfLottoException;
 import lotto.exception.UnsortedLottoNumbersException;
@@ -20,11 +21,7 @@ class LottoTicketTest {
     @Test
     void createValidLottoTicket() {
         LottoTicket lottoTicket = LottoTicket.of(
-                List.of(
-                        LottoNumber.of(1), LottoNumber.of(2),
-                        LottoNumber.of(3), LottoNumber.of(4),
-                        LottoNumber.of(5), LottoNumber.of(6)
-                )
+                TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
         );
         assertThat(lottoTicket.toString().split(",")).hasSize(SIZE_OF_LOTTO);
     }
@@ -32,10 +29,7 @@ class LottoTicketTest {
     @DisplayName("유효하지 않은 갯수의 로또 번호가 들어오는 경우 예외가 발생한다.")
     @Test
     void throwWhenExceptionWhenInvalidLottoSize() {
-        List<LottoNumber> lottoNumbers = List.of(
-                LottoNumber.of(1), LottoNumber.of(2),
-                LottoNumber.of(3), LottoNumber.of(4)
-        );
+        List<LottoNumber> lottoNumbers = TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4);
 
         assertThatThrownBy(() -> LottoTicket.of(lottoNumbers))
                 .isInstanceOf(InvalidSizeOfLottoException.class)
@@ -45,11 +39,7 @@ class LottoTicketTest {
     @DisplayName("로또 번호가 정렬되지 않은 경우 예외가 발생한다.")
     @Test
     void throwWhenExceptionWhenUnSorted() {
-        List<LottoNumber> lottoNumbers = List.of(
-                LottoNumber.of(6), LottoNumber.of(2),
-                LottoNumber.of(3), LottoNumber.of(4),
-                LottoNumber.of(1), LottoNumber.of(2)
-        );
+        List<LottoNumber> lottoNumbers =  TestLottoNumberFactory.createLottoNumbers(6, 2, 3, 4, 1, 5);
 
         assertThatThrownBy(() -> LottoTicket.of(lottoNumbers))
                 .isInstanceOf(UnsortedLottoNumbersException.class)
@@ -59,11 +49,7 @@ class LottoTicketTest {
     @DisplayName("중복된 번호가 존재하는 경우 예외가 발생한다.")
     @Test
     void throwWhenExceptionWhenDuplicate() {
-        List<LottoNumber> lottoNumbers = List.of(
-                LottoNumber.of(1), LottoNumber.of(1),
-                LottoNumber.of(3), LottoNumber.of(4),
-                LottoNumber.of(5), LottoNumber.of(6)
-        );
+        List<LottoNumber> lottoNumbers = TestLottoNumberFactory.createLottoNumbers(1, 1, 3, 4, 5, 6);
 
         assertThatThrownBy(() -> LottoTicket.of(lottoNumbers))
                 .isInstanceOf(DuplicateLottoNumberException.class)
@@ -74,11 +60,7 @@ class LottoTicketTest {
     @DisplayName("로또 번호 일치 여부 확인")
     void matchLottoNumber() {
         LottoTicket lottoTicket = LottoTicket.of(
-                List.of(
-                        LottoNumber.of(1), LottoNumber.of(2),
-                        LottoNumber.of(3), LottoNumber.of(4),
-                        LottoNumber.of(5), LottoNumber.of(6)
-                )
+                TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
         );
         assertThat(lottoTicket.match(LottoNumber.of(1))).isTrue();
         assertThat(lottoTicket.match(LottoNumber.of(7))).isFalse();

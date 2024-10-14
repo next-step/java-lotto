@@ -1,6 +1,6 @@
 package lotto.domain.result;
 
-import lotto.domain.number.LottoNumber;
+import lotto.domain.number.TestLottoNumberFactory;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLotto;
@@ -24,29 +24,17 @@ class LottoStatisticsTest {
     @BeforeEach
     void setUp() {
         LottoTicket ticket1 = LottoTicket.of(
-                List.of(
-                        LottoNumber.of(1), LottoNumber.of(2),
-                        LottoNumber.of(3), LottoNumber.of(4),
-                        LottoNumber.of(5), LottoNumber.of(6)
-                )
+                TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
         );
         LottoTicket ticket2 = LottoTicket.of(
-                List.of(
-                        LottoNumber.of(7), LottoNumber.of(8),
-                        LottoNumber.of(9), LottoNumber.of(10),
-                        LottoNumber.of(11), LottoNumber.of(12)
-                )
+                TestLottoNumberFactory.createLottoNumbers(7, 8, 9, 10, 11, 12)
         );
 
         lottoTickets = LottoTickets.of(List.of(ticket1, ticket2));
 
         winningLotto = WinningLotto.of(
                 LottoTicket.of(
-                        List.of(
-                                LottoNumber.of(1), LottoNumber.of(2),
-                                LottoNumber.of(3), LottoNumber.of(4),
-                                LottoNumber.of(5), LottoNumber.of(6)
-                        )
+                        TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
                 )
         );
     }

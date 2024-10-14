@@ -1,10 +1,9 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.TestLottoNumberFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,11 +13,7 @@ class WinningLottoTest {
     @Test
     void matchWinningNumber() {
         LottoTicket winningTicket = LottoTicket.of(
-                List.of(
-                        LottoNumber.of(1), LottoNumber.of(2),
-                        LottoNumber.of(3), LottoNumber.of(4),
-                        LottoNumber.of(5), LottoNumber.of(6)
-                )
+                TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
         );
         WinningLotto winningLotto = WinningLotto.of(winningTicket);
 
