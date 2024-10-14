@@ -20,8 +20,8 @@ public class Lotto {
         lottoResult = new LottoResult();
     }
 
-    public int getMatchCount() {
-        return this.lottoResult.getMatchCount();
+    public int isEqualMatchCount(int matchCount) {
+        return lottoResult.isEqualMatchCount(matchCount);
     }
 
     public String toStringLottoNumbers() {
@@ -51,10 +51,6 @@ public class Lotto {
 
     public int getAmount() {
         return this.lottoResult.getAmountForWinningLotto();
-    }
-
-    public boolean isWinningLotto() {
-        return this.lottoResult.isWinningLotto();
     }
 
     public static boolean validateLottoNumbers(List<Integer> numbers) { //todo private

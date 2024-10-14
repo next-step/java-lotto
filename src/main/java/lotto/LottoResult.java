@@ -8,8 +8,11 @@ public class LottoResult {
 
     private int matchCount;
 
-    public int getMatchCount() {
-        return this.matchCount;
+    public int isEqualMatchCount(int matchCount) {
+        if (this.matchCount == matchCount) {
+            return 1;
+        }
+        return 0;
     }
 
     public int calculateMatchCount(List<Integer> winningNumbers, List<Integer> lottoNumbers) {
