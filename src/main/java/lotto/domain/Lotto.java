@@ -1,9 +1,14 @@
 package lotto.domain;
 
-import java.util.*;
-
 import static lotto.domain.LottoRank.SECOND;
 import static lotto.domain.LottoRank.THIRD;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
     private static final String IS_NOT_LOTTO_SIZE = "번호가 6개가 아닙니다.";
@@ -88,7 +93,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean isNumberContain(int number) {
+    public boolean isNumberContain(int number) {
         return lottoNumbers.contains(new LottoNumber(number));
     }
 
@@ -111,5 +116,22 @@ public class Lotto {
         if (isNumberContain(number)) {
             throw new IllegalArgumentException(IS_DUPLICATE_NUMBER);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

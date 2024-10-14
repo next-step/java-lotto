@@ -15,8 +15,6 @@ public class WinningLottoTest {
         int bonusNumber = 7;
         WinningLotto winningLotto = new WinningLotto(new Lotto(winning), bonusNumber);
         List<Integer> lottoList = winningLotto.getWinningLotto();
-        assertThat(lottoList).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(bonusNumber).isEqualTo(winningLotto.getBonusNumber());
         assertAll(
                 () -> assertThat(lottoList).isEqualTo(List.of(1, 2, 3, 4, 5, 6)),
                 () -> assertThat(bonusNumber).isEqualTo(winningLotto.getBonusNumber())
