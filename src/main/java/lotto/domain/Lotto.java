@@ -13,13 +13,6 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public String getLottoNumberInfo() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getValue)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
-    }
-
     public Lotto(final Set<LottoNumber> lottoNumbers) {
         valid(lottoNumbers);
         this.lottoNumbers = new TreeSet<>(lottoNumbers);
@@ -49,6 +42,19 @@ public class Lotto {
                         .mapToInt(Integer::parseInt)
                         .toArray()
         );
+    }
+
+    public String getLottoNumberInfo() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getValue)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
+    }
+
+    public int countMatchingNumbers(Lotto winningLotto) {
+        Set<LottoNumber> matchingNumbers = new TreeSet<>(this.lottoNumbers);
+        matchingNumbers.retainAll(winningLotto.lottoNumbers);
+        return matchingNumbers.size();
     }
 
     @Override

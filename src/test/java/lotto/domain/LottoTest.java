@@ -50,7 +50,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
 
-        assertThat(lotto.match(winningLotto))
+        assertThat(lotto.countMatchingNumbers(winningLotto))
                 .isEqualTo(expected);
     }
 
