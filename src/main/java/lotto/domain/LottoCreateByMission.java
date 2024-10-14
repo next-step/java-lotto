@@ -14,8 +14,7 @@ public class LottoCreateByMission implements LottoCreateStrategy {
         return new Lotto(lottoBalls);
     }
 
-    @Override
-    public int getLottoSize() {
+    public static int getLottoSize() {
         return LOTTO_SIZE;
     }
 }

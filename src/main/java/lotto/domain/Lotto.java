@@ -18,8 +18,8 @@ public class Lotto {
     }
 
     public void validateLottoSize(Set<LottoNo> numbers) {
-        if (numbers.size() != LottoCreateStrategy.LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 " + LottoCreateStrategy.LOTTO_SIZE + "개여야 합니다.");
+        if (numbers.size() != LottoCreateByMission.getLottoSize()) {
+            throw new IllegalArgumentException("로또 번호는 " + LottoCreateByMission.getLottoSize() + "개여야 합니다.");
         }
     }
 }
