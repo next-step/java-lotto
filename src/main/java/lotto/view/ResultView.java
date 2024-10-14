@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoMatch;
+import lotto.domain.LottoNumber;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class ResultView {
     public static final int LOTTO_PRICE = 1000;
 
     public static void printLotto(Lotto lotto) {
-        List<Integer> numbers = lotto.getLottoNumbers();
+        List<LottoNumber> numbers = lotto.getLottoNumbers();
         System.out.println(numbers.toString());
     }
 

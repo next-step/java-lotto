@@ -19,5 +19,4 @@ class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
         assertThat(winningLotto.match(1, 2, 3, 4, 5, 10)).isEqualTo(5);
     }
-
 }

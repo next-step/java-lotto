@@ -20,7 +20,9 @@ public class WinningLotto {
     }
 
     public WinningLotto(List<Integer> numbers) {
-        this(new Lotto(numbers));
+        this(new Lotto(numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList())));
     }
 
     public WinningLotto(String numbers) {
@@ -39,7 +41,7 @@ public class WinningLotto {
 
     public int match(int... numbers) {
         return Arrays.stream(numbers)
-                .filter(lotto.getLottoNumbers()::contains)
+                .filter(value -> lotto.getLottoNumbers().contains(new LottoNumber(value)))
                 .map(value -> 1)
                 .sum();
     }

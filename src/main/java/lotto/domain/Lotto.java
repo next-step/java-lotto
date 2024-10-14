@@ -8,9 +8,9 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private static final String DELIMITER = ", ";
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
@@ -18,15 +18,18 @@ public class Lotto {
     public Lotto(int... numbers) {
         this(Arrays.stream(numbers)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList()));
     }
 
     public Lotto(String numbers) {
         this(Arrays.stream(numbers.split(DELIMITER))
-                .map(Integer::parseInt).collect(Collectors.toList()));
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또의 숫자는 6개이어야 합니다.");
         }
@@ -36,7 +39,7 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 
