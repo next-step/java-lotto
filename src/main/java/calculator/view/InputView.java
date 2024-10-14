@@ -4,6 +4,14 @@ import java.util.Scanner;
 
 public class InputView {
 
+    private static final InputView instance = new InputView();
+
+    private InputView() {}
+
+    public static InputView getInstance() {
+        return instance;
+    }
+
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public String askExpression() {

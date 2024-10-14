@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.util.StringUtil;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +11,7 @@ public class Operators {
     private final List<IntBinaryOperator> operators;
 
     Operators(String... symbols) {
-        if (StringUtil.isEmpty(symbols)) {
+        if (symbols == null || symbols.length == 0) {
             throw new IllegalArgumentException("연산자를 입력해 주세요.");
         }
 

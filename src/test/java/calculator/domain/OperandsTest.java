@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class OperandsTest {

@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.util.StringUtil;
-
 import java.util.Arrays;
 import java.util.function.IntBinaryOperator;
 
@@ -30,7 +28,7 @@ enum Operation {
     }
 
     static IntBinaryOperator findOperatorBySymbol(String symbol) {
-        if (StringUtil.isEmpty(symbol)) {
+        if (symbol == null || symbol.isEmpty()) {
             throw new IllegalArgumentException("기호를 입력해 주세요.");
         }
 

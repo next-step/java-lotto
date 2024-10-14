@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.util.StringUtil;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -15,13 +13,22 @@ public class Operands {
         validate(operands);
 
         this.operands = Arrays.stream(operands)
-                .map(StringUtil::toInt)
+                .map(this::toInt)
                 .collect(Collectors.toUnmodifiableList());
     }
 
     private void validate(String[] operands) {
-        if (StringUtil.isEmpty(operands)) {
+        if (operands == null || operands.length == 0) {
             throw new IllegalArgumentException("피연산자를 입력해 주세요.");
+        }
+    }
+
+    private int toInt(String input) {
+        try {
+            return Integer.parseInt(input);
+
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요.");
         }
     }
 
