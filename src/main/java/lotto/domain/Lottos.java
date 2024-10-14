@@ -1,27 +1,14 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.stream.Collectors.toList;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(String[] lottos){
-        this(convertStringToLotto(lottos));
-    }
-
     public Lottos(List<Lotto> lottos){
         this.lottos = lottos;
-    }
-
-    private static List<Lotto> convertStringToLotto(String[] lottoNumbers) {
-        return Arrays.stream(lottoNumbers)
-                .map(Lotto::new)
-                .collect(toList());
     }
 
     public static Lottos create(int lottoCount, LottoNumbersGenerater numbersGenerater){

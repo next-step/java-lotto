@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
+import java.util.List;
 
 public class LottoApplication {
     private final InputView inputView;
@@ -23,7 +24,7 @@ public class LottoApplication {
         Lottos lottos = buyLotto(purchaseAmount);
         resultView.showLottos(lottos);
 
-        WinningNumbers winningNumbers = createWinningNumbers(inputView);
+        WinningNumbers winningNumbers = createWinningNumbers();
 
         this.lottoResult = new LottoResult(lottos, winningNumbers);
         showLottoResult(this.lottoResult);
@@ -33,7 +34,7 @@ public class LottoApplication {
     private Lottos buyLotto(int purchaseAmount){
         LottoMachine machine = new LottoMachine(purchaseAmount);
 
-        String[] manualNumbers = inputView.getManualLottosFromUser();
+        List<String> manualNumbers = inputView.getManualLottosFromUser();
         Lottos manualLottos = machine.buyManualLottos(manualNumbers);
         Lottos autoLottos = machine.buyAutoLottos(numbersGenerater);
 
@@ -42,7 +43,7 @@ public class LottoApplication {
         return manualLottos;
     }
 
-    private WinningNumbers createWinningNumbers(InputView inputView) {
+    private WinningNumbers createWinningNumbers() {
         String numbers = inputView.getWinningNumbersFromUser();
         int bonusBall = inputView.getBonusBallFromUser();
         return WinningNumbers.create(numbers, bonusBall);

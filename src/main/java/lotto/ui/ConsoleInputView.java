@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInputView implements InputView{
@@ -16,21 +18,21 @@ public class ConsoleInputView implements InputView{
         return SCANNER.nextInt();
     }
 
-    public String[] getManualLottosFromUser(){
+    public List<String> getManualLottosFromUser(){
         System.out.println(MANUAL_LOTTO_COUNT_INPUT_MESSAGE);
         int manualLottoCount = SCANNER.nextInt();
 
         return getManualLottosFromUser(manualLottoCount);
     }
 
-    private String[] getManualLottosFromUser(int manualLottoCount) {
+    private List<String> getManualLottosFromUser(int manualLottoCount) {
         System.out.println(MANUAL_LOTTO_NUMBERS_INPUT_MESSAGE);
-        String[] manualLottoNumbers = new String[manualLottoCount];
+        List<String> manualLottoNumbers = new ArrayList<>();
 
         //nextInt() > nextLine() 실행 시 오류 발생 방지
         SCANNER.nextLine();
         for(int i = 0; i < manualLottoCount; i++){
-            manualLottoNumbers[i] = SCANNER.nextLine();
+            manualLottoNumbers.add(SCANNER.nextLine());
         }
         return manualLottoNumbers;
     }
