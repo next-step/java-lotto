@@ -3,8 +3,14 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
+import java.util.stream.Stream;
+import lotto.model.RankSummary;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LotteryMachineTest {
 
@@ -29,4 +35,14 @@ class LotteryMachineTest {
         assertThatThrownBy(() -> new LotteryMachine(-1500))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    private static Stream<Arguments> lottoRankSummaryArguments() {
+        return Stream.of(
+                Arguments.of("1, 2, 3, 7, 8, 9", 3),
+                Arguments.of("4, 5, 6, 10, 11, 12", 3),
+                Arguments.of("1, 2, 3, 4, 5, 6", 6),
+                Arguments.of("21, 22, 23, 24, 25, 27", 0)
+        );
+    }
+
 }

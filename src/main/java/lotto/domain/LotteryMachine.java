@@ -2,8 +2,11 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import lotto.model.RankSummary;
 import lotto.util.LottoAutoGenerator;
 
 public class LotteryMachine {
@@ -12,18 +15,8 @@ public class LotteryMachine {
 
     private final List<Lotto> lottos;
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
-    }
-
-    public int getPurchasedLottoCount() {
-        return lottos.size();
-    }
-
-    public List<String> getLottoNumbers() {
-        return lottos.stream()
-                .map(Lotto::getLottoNumberInfo)
-                .collect(Collectors.toList());
+    public LotteryMachine(final List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public LotteryMachine(final int purchasePrice) {
@@ -43,6 +36,45 @@ public class LotteryMachine {
 
     public LotteryMachine(final String purchasePrice) {
         this(Integer.parseInt(purchasePrice));
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
+    }
+
+    public int getPurchasedLottoCount() {
+        return lottos.size();
+    }
+
+
+    public List<String> getLottoNumbers() {
+        return lottos.stream()
+                .map(Lotto::getLottoNumberInfo)
+                .collect(Collectors.toList());
+    }
+
+    public RankSummary calculateRankSummary(final Lotto winningLotto) {
+        Map<Rank, Long> rankCounts = calculateRankCounts(winningLotto);
+        long totalPrize = calculateTotalPrize(rankCounts);
+        double profitRate = calculateProfitRate(totalPrize);
+
+        return new RankSummary(rankCounts, profitRate);
+    }
+
+    private Map<Rank, Long> calculateRankCounts(final Lotto winningLotto) {
+        return lottos.stream()
+                .map(lotto -> Rank.valueOfMatchCount(lotto.countMatchingNumbers(winningLotto)))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    private long calculateTotalPrize(final Map<Rank, Long> rankCounts) {
+        return rankCounts.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
+    }
+
+    private double calculateProfitRate(final long totalPrize) {
+        return totalPrize / (double) (lottos.size() * LOTTO_PRICE);
     }
 
     @Override
