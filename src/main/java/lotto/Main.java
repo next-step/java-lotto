@@ -17,11 +17,12 @@ public class Main {
         ResultView resultView = new ResultView();
         LottoPurchaseService lottoPurchaseService = new LottoPurchaseService();
         WinningNumber winningNumber = new WinningNumber();
-
-
         Lottos lottos = new Lottos();
-        lottos.buyLotto(lottoPurchaseService.calculateNumberOfLotto(inputView.inputPurchaseAmountGuide())
-                ,LottoShuffleGenerator.getLottoShuffleGenerator());
+
+        int amount = inputView.inputPurchaseAmountGuide();
+
+        lottos.buyLotto(amount,LottoShuffleGenerator.getLottoShuffleGenerator());
+
         resultView.NumberOfLotto(lottos.getNumberOfLotto());
         resultView.printPurchasedLottos(lottos);
         winningNumber.convertStringToIntList(inputView.inputWinnerNumber());
