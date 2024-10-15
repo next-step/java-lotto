@@ -8,22 +8,26 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        lottoNumbers = new ArrayList<>();
-        IntStream.rangeClosed(1, 45).forEach(lottoNumbers::add);
-        Collections.shuffle(lottoNumbers);
-        this.lottoNumbers = lottoNumbers.subList(0, 6);
+        List<Integer> numbers = new ArrayList<>();
+        IntStream.rangeClosed(1, 45).forEach(numbers::add);
+        Collections.shuffle(numbers);
+        this.lottoNumbers = numbers.subList(0, 6).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public Lotto(String winningNumbers) {
         String[] winningNumberList = winningNumbers.replace(" ", "").split(",");
-        this.lottoNumbers = Arrays.stream(winningNumberList).map(Integer::parseInt)
-                                .collect(Collectors.toList());
+        this.lottoNumbers = Arrays.stream(winningNumberList)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

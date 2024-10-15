@@ -5,6 +5,7 @@ import lotto.entity.Lotto;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.entity.LottoNumber;
 
 public class LottoMachine {
     private List<Lotto> totalLottoTicket;
@@ -30,7 +31,12 @@ public class LottoMachine {
         List<Integer> matchingLottoTickets = totalLottoTicket.stream()
                 .map(lottoTicket ->
                         (int) lottoTicket.getLottoNumbers().stream()
-                                .filter(winningLotto.getLottoNumbers()::contains)
+                                .filter(lottoNumber ->
+                                        winningLotto.getLottoNumbers().stream()
+                                                .map(LottoNumber::getNumber)
+                                                .collect(Collectors.toList())
+                                                .contains(lottoNumber.getNumber())
+                                )
                                 .count()
                 )
                 .collect(Collectors.toList());
@@ -48,7 +54,7 @@ public class LottoMachine {
     }
 
     public double rateOfReturnResult(int totalMoney, int totalPrizeMoney) {
-        return Math.floor((double)totalPrizeMoney/totalMoney*100)/100.0;
+        return Math.floor((double) totalPrizeMoney / totalMoney * 100) / 100.0;
     }
 
 }
