@@ -1,31 +1,34 @@
 package lotto.entity;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class LottoNumbers extends Numbers {
-    private final List<Integer> numbers;
+public class LottoNumbers {
+    private final Set<Integer> numbers;
 
     public LottoNumbers(List<Integer> numbers) {
+        this(new HashSet<>(numbers));
+    }
+
+    public LottoNumbers(Set<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(Set<Integer> numbers) {
         for (Integer number : numbers) {
-            super.validateRange(number);
+            LottoNumberRange.validateRange(number);
         }
-        super.validateDuplication(numbers);
-        super.validateSize(numbers);
+        LottoNumberSize.validateSize(numbers);
     }
 
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return numbers;
     }
 
-    public int matchCount(List<Integer> winningNumbers) {
-        Collections.sort(winningNumbers);
+    public int matchCount(Set<Integer> winningNumbers) {
         int count = 0;
         for (Integer winningNumber : winningNumbers) {
             count = match(count, winningNumber);

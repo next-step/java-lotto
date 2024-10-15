@@ -19,23 +19,18 @@ public enum PrizeMoney {
     }
 
     public static PrizeMoney findByCount(int collectCount) {
-        if (collectCount == PrizeMoney.THREE.collectCount) {
-            return PrizeMoney.THREE;
+        PrizeMoney result = PrizeMoney.LOSE;
+        for (PrizeMoney prizeMoney : PrizeMoney.values()) {
+            result = winning(result, prizeMoney, collectCount);
         }
-        if (collectCount == PrizeMoney.FOUR.collectCount) {
-            return PrizeMoney.FOUR;
-        }
-        if (collectCount == PrizeMoney.FIVE.collectCount) {
-            return PrizeMoney.FIVE;
-        }
-        if (collectCount == PrizeMoney.SIX.collectCount) {
-            return PrizeMoney.SIX;
-        }
-        return PrizeMoney.LOSE;
+        return result;
     }
 
-    public BigDecimal sum(BigDecimal winner) {
-        return this.prizeMoney.add(winner);
+    private static PrizeMoney winning(PrizeMoney result, PrizeMoney prizeMoney, int collectCount) {
+        if (result != PrizeMoney.LOSE) {
+            return result;
+        }
+        return prizeMoney.collectCount == collectCount ? prizeMoney : PrizeMoney.LOSE;
     }
 
     public int getCollectCount() {

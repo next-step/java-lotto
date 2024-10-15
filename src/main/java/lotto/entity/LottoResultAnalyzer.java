@@ -2,6 +2,7 @@ package lotto.entity;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class LottoResultAnalyzer {
     private final List<WinningResult> winningResults;
@@ -15,7 +16,7 @@ public class LottoResultAnalyzer {
         );
     }
 
-    public List<WinningResult> analyzer(List<Lotto> lottos, List<Integer> winnersNumber) {
+    public List<WinningResult> analyzer(List<Lotto> lottos, Set<Integer> winnersNumber) {
         for (Lotto lotto : lottos) {
             PrizeMoney prizeMoney = PrizeMoney.findByCount(lotto.matchCount(winnersNumber));
             process(prizeMoney);

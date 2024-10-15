@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PrizeMoneyCalculator {
 
-    public PrizeMoneyCalculator() {
+    private PrizeMoneyCalculator() {
 
     }
 

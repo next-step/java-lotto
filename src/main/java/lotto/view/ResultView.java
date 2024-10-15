@@ -3,12 +3,14 @@ package lotto.view;
 import lotto.dto.LottosDto;
 import lotto.dto.LottoNumbersDto;
 import lotto.dto.PrizeMoneyDto;
-import lotto.entity.WinningResult;
 import lotto.dto.ResultDto;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String BUY_COUNT_MESSAGE = "개를 구매했습니다.";
@@ -29,8 +31,14 @@ public class ResultView {
 
     private static void printNumbers(List<LottoNumbersDto> lottoNumbersDto) {
         for (LottoNumbersDto lottoNumbers : lottoNumbersDto) {
-            System.out.println(lottoNumbers.getNumbers());
+            List<Integer> collect = toList(lottoNumbers);
+            Collections.sort(collect);
+            System.out.println(collect);
         }
+    }
+
+    private static List<Integer> toList(LottoNumbersDto lottoNumbers) {
+        return lottoNumbers.getNumbers().stream().collect(Collectors.toList());
     }
 
     public static void printResult(ResultDto result) {
@@ -42,7 +50,7 @@ public class ResultView {
     }
 
     private static void printRank(List<PrizeMoneyDto> prizeMoneyDto) {
-        prizeMoneyDto.sort((a, b) -> a.getCollectCount() - b.getCollectCount());
+        prizeMoneyDto.sort(Comparator.comparingInt(PrizeMoneyDto::getCollectCount));
         for (PrizeMoneyDto moneyDto : prizeMoneyDto) {
             System.out.printf(COUNT_MESSAGE, moneyDto.getCollectCount(), moneyDto.getPrizeMoney(), moneyDto.getCount());
         }

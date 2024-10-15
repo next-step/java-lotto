@@ -12,24 +12,25 @@ import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class JavaLotto {
 
-    private static final LottoWinningScanner lottoWinningScanner = new LottoWinningScanner();
-    private static final InputView inputView = new InputView();
-    private static final WinningText winningText = new WinningText();
+    private final LottoWinningScanner lottoWinningScanner;
 
-    private JavaLotto() {
+
+    public JavaLotto() {
+        lottoWinningScanner = new LottoWinningScanner();
 
     }
 
-    public static void run() {
-        int inputMoney = inputView.requestBuyMoney();
+    public void run() {
+        int inputMoney = InputView.requestBuyMoney();
         List<Lotto> lottos = LottoMachine.insert(inputMoney);
         ResultView.printCreateLotto(toDto(lottos));
 
-        String text = inputView.requestWinnerNumber();
-        List<Integer> winningNumbers = winningText.numbers(text);
+        String[] texts = InputView.requestWinnerNumber();
+        Set<Integer> winningNumbers = WinningTexts.numbers(texts);
         LottoResult result = lottoWinningScanner.result(lottos, winningNumbers, inputMoney);
         ResultView.printResult(toDto(result));
     }

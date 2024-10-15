@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +26,7 @@ public class LottoAnalyzerTest {
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 12)),
                 new Lotto(Arrays.asList(1, 5, 10, 16, 18, 19))
         );
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
         List<WinningResult> analyzer = lottoResultAnalyzer.analyzer(lottos, winningNumbers);
 
         Map<PrizeMoney, Integer> collect = analyzer.stream().collect(Collectors.toMap(WinningResult::getPrizeMoney, WinningResult::getCount));
