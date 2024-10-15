@@ -33,4 +33,13 @@ class LottoTest {
     void 중복으로_입력으로_인한_사이즈_예외() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(10, 4, 9, 2, 4, 1))).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 보너스번호_맞았는지_검증() {
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        assertAll(
+                () -> assertThat(lotto.isCollectBonusNumber(4)).isTrue(),
+                () -> assertThat(lotto.isCollectBonusNumber(7)).isFalse()
+        );
+    }
 }

@@ -6,7 +6,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class WinningTest {
+class WinningTest {
 
     @Test
     void 보너스번호_범위_검증_예외() {
@@ -23,4 +23,6 @@ public class WinningTest {
                 () -> new Winning(Set.of(1, 2, 3, 4, 5, 6), 5)
         ).isInstanceOf(IllegalArgumentException.class);
     }
+
+
 }

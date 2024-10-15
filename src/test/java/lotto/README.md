@@ -2,7 +2,10 @@
 
 ## Entity 및 TODO 리스트
 
+### Winning
+- Winning 내부 당첨번호에서도 범위 사이즈 검증
 
+### PrizeMoney
 - 로또 맞춘 번호와 보너스 맞춘 flag로 등수 리턴 검증
 
 ---
@@ -14,10 +17,10 @@
 - UI 로직 포함이라 TDD X
 
 ### Lotto (로또 한장)
-- 정렬 검증
 - 번호 중복 예외 처리 (IllegalArgumentException)
 - 범위 밖 번호 예외 처리 (IllegalArgumentException)
 - 번호와 당첨 번호 매칭 시 몇 개 맞추었는 지
+- 로또 번호 리스트에서 보너스 번호가 포함되어 있는지 검증
 
 ### LottoMachine (로또 기계 - 금액 투입 시 로또 리스트 출력)
 - 금액 입력 시 로또 리스트 사이즈 검증

@@ -42,4 +42,8 @@ public class Lotto {
     public Set<Integer> getNumbers() {
         return numbers;
     }
+
+    public boolean isCollectBonusNumber(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
 }
