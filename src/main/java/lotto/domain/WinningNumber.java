@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WinningNumber {
+
     private final List<Integer> winningNumber = new ArrayList<>();
 
     public void convertStringToIntList(String stringWinningNumber) {
@@ -20,4 +21,5 @@ public class WinningNumber {
     public List<Integer> getWinningNumber() {
         return winningNumber;
     }
+
 }
