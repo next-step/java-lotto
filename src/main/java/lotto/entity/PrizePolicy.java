@@ -24,9 +24,13 @@ public enum PrizePolicy {
         return matchCount;
     }
 
+    public boolean match(int matchCount) {
+        return this.matchCount == matchCount;
+    }
+
     public static PrizePolicy fromMatchCount(int matchCount) {
         return Arrays.stream(PrizePolicy.values())
-                .filter(prizePolicy -> prizePolicy.getMatchCount() == matchCount)
+                .filter(prizePolicy -> prizePolicy.match(matchCount))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 매칭 숫자: " + matchCount));
     }
