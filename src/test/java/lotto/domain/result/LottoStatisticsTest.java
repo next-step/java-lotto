@@ -43,8 +43,8 @@ class LottoStatisticsTest {
         LottoStatistics statistics = lottoTickets.generateLottoStatistics(winningLotto, LOTTO_TICKET_PRICE);
         Map<Rank, Integer> results = statistics.getResults();
 
-        assertThat(results.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(results.get(Rank.NONE)).isEqualTo(1);
+        assertThat(results).containsEntry(Rank.FIRST, 1);
+        assertThat(results).containsEntry(Rank.NONE, 1);
     }
 
     @Test

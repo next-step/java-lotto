@@ -47,7 +47,7 @@ class LottoTicketsTest {
     void countRanksByWinningLotto() {
         Map<Rank, Integer> rankCounts = lottoTickets.countRanks(winningLotto);
 
-        assertThat(rankCounts.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(rankCounts.get(Rank.NONE)).isEqualTo(1);
+        assertThat(rankCounts).containsEntry(Rank.FIRST, 1);
+        assertThat(rankCounts).containsEntry(Rank.NONE, 1);
     }
 }
