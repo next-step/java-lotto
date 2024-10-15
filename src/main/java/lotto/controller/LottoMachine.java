@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.entity.LottoNumber;
+import lotto.entity.PrizePolicy;
 
 public class LottoMachine {
     private List<Lotto> totalLottoTicket;
@@ -48,7 +49,7 @@ public class LottoMachine {
     public Map<Integer, Integer> winningResult(List<Integer> matchingLottoTickets) {
         Map<Integer, Integer> winLottoTicket = new HashMap<>();
         for (Integer matchCount : matchingLottoTickets) {
-            winLottoTicket.put(matchCount, winLottoTicket.getOrDefault(matchCount, 0) + 1);
+            winLottoTicket.put(PrizePolicy.fromMatchCount(matchCount), winLottoTicket.getOrDefault(PrizePolicy.fromMatchCount(matchCount), 0) + 1);
         }
         return winLottoTicket;
     }
