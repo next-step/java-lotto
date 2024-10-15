@@ -13,19 +13,19 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public BigDecimal getWinningAmount(List<Integer> winningNumbers) {
+    public BigDecimal getWinningAmount(Lotto winningLotto) {
         BigDecimal sum = BigDecimal.ZERO;
         for (Lotto lotto : this.lottos) {
-            LottoRankingEnum rank = lotto.getRanking(winningNumbers);
+            LottoRankingEnum rank = lotto.getRanking(winningLotto);
             sum = sum.add(rank.getWinningAmount());
         }
         return sum;
     }
 
-    public Map<LottoRankingEnum, Integer> getWinningResult(List<Integer> winningNumbers) {
+    public Map<LottoRankingEnum, Integer> getWinningResult(Lotto winningLotto) {
         Map<LottoRankingEnum, Integer> winningResult = new HashMap<>();
         for (Lotto lt : lottos) {
-            addResult(lt.getRanking(winningNumbers), winningResult);
+            addResult(lt.getRanking(winningLotto), winningResult);
         }
         return winningResult;
     }

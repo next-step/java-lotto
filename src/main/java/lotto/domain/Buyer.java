@@ -26,16 +26,13 @@ public class Buyer {
         return new Lottos(lottos);
     }
 
-    public BigDecimal getRateOfReturn(List<Integer> winningNumbers) {
+    public BigDecimal getRateOfReturn(Lotto winningLotto) {
 
-        ValidationUtils.validateLottoNunbers(winningNumbers);
-
-        return lottos.getWinningAmount(winningNumbers).divide(lottos.getTotalPaymentAmount(), 2, RoundingMode.DOWN);
+        return lottos.getWinningAmount(winningLotto.getLottoNumbers()).divide(lottos.getTotalPaymentAmount(), 2, RoundingMode.DOWN);
     }
 
-    public Map<LottoRankingEnum, Integer> getWinningResult(List<Integer> winningNumbers) {
-        ValidationUtils.validateLottoNunbers(winningNumbers);
-        return lottos.getWinningResult(winningNumbers);
+    public Map<LottoRankingEnum, Integer> getWinningResult(Lotto winningLotto) {
+        return lottos.getWinningResult(winningLotto.getLottoNumbers());
     }
 
     public List<List<Integer>> getLottoNumbers() {
