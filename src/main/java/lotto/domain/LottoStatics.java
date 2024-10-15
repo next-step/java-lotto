@@ -32,6 +32,12 @@ public class LottoStatics {
         return Rank.calculatePrize(lottos, winNumber);
     }
 
+    public void addAll(List<LottoNumbers> lottoNumbers) {
+        for (LottoNumbers lottoNumber : lottoNumbers) {
+            this.lottos.add(new Lotto(lottoNumber));
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

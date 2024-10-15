@@ -81,4 +81,24 @@ class LottoStaticsTest {
 
         assertThat(totalPrize).isEqualTo(5000);
     }
+
+    @Test
+    void addAll로_LottoNumbers의_컬렉션을_받는다() {
+        List<LottoNumbers> lottoNumbers = List.of(
+            new LottoNumbers(1, 2, 3, 4, 5, 6),
+            new LottoNumbers(7, 8, 9, 10, 11, 12),
+            new LottoNumbers(13, 14, 15, 16, 17, 18)
+        );
+
+        List<Lotto> lottos = List.of(
+            new Lotto(1, 2, 3, 4, 5, 6),
+            new Lotto(7, 8, 9, 10, 11, 12),
+            new Lotto(13, 14, 15, 16, 17, 18)
+        );
+
+        LottoStatics lottoStatics = new LottoStatics();
+        lottoStatics.addAll(lottoNumbers);
+
+        assertThat(lottoStatics).isEqualTo(new LottoStatics(lottos));
+    }
 }
