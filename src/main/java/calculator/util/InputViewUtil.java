@@ -1,11 +1,11 @@
-package calculator.view;
+package calculator.util;
 
 
-public class InputView {
+public class InputViewUtil {
 
     private static final String INPUT_VIEW_MESSAGE = "숫자와 연잔를 입력한 후, 빈 공백으로 구분자를 입력하시오. ex:) 2 + 3 * 4 / 2";
 
-    public void view() {
+    public static void view() {
         System.out.println(INPUT_VIEW_MESSAGE);
     }
 
