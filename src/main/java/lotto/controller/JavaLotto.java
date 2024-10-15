@@ -44,7 +44,7 @@ public class JavaLotto {
     }
 
     private static LottoNumbersDto createNumbersDto(Lotto lotto) {
-        return new LottoNumbersDto(lotto.getLottoNumbers());
+        return new LottoNumbersDto(lotto.getNumbers());
     }
 
     private static ResultDto toDto(LottoResult result) {

@@ -12,11 +12,9 @@
 
 ### Lotto (로또 한장)
 - 정렬 검증
-
-### LottoNumbers (로또 한장의 번호 리스트)
 - 번호 중복 예외 처리 (IllegalArgumentException)
 - 범위 밖 번호 예외 처리 (IllegalArgumentException)
-- 번호와 당첨 번호 매칭 시 몇 개 맞추었는 지 
+- 번호와 당첨 번호 매칭 시 몇 개 맞추었는 지
 
 ### LottoMachine (로또 기계 - 금액 투입 시 로또 리스트 출력)
 - 금액 입력 시 로또 리스트 사이즈 검증
