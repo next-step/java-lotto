@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Scanner;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.WinNumber;
 
 public class InputView {
@@ -23,5 +24,11 @@ public class InputView {
         String[] split = inputNumber.split(DELIMITER);
 
         return new WinNumber(split);
+    }
+
+    public static BonusNumber inputBonusNumber() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return new BonusNumber(scanner.nextInt());
     }
 }
