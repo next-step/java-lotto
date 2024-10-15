@@ -1,49 +1,47 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.LottoCashPrize;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumbersResults;
 
 import java.util.List;
-import java.util.Map;
 
-import static lotto.domain.LottoSheetResults.LOTTO_CASH_PRIZES;
+import static lotto.domain.LottoCashPrize.getValuablePrizes;
 
 public class ResultView {
     public static void printLottoSheetCount(int lottoSheetCount) {
         System.out.println(lottoSheetCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoSheets(List<LottoSheet> lottoSheets) {
-        lottoSheets.forEach(lottoSheet -> printLottoNumbers(lottoSheet.getLottoNumbers()));
+    public static void printLottoSheets(List<LottoNumbers> lottoNumbersList) {
+        lottoNumbersList.forEach(lottoNumbers -> System.out.println(lottoNumbers.getLottoNumbers()
+                .toString()));
         System.out.println();
     }
 
-    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers.getLottoNumbers().toString());
-    }
+    public static void printLottoResults(LottoNumbersResults lottoSheetResults) {
+        printLottoResultsHeader();
 
-    public static void printLottoResults(LottoSheetResults lottoSheetResults) {
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-
-        Map<LottoNumberMatchCount, LottoSheetMatchCount> lottoSheetResultsValue = lottoSheetResults.getValue();
-
-
-        for (Map.Entry<LottoNumberMatchCount, LottoCashPrize> lottoCashPrizeEntry : LOTTO_CASH_PRIZES.entrySet()) {
-            LottoNumberMatchCount numberMatchCount = lottoCashPrizeEntry.getKey();
-            LottoCashPrize cashPrize = lottoCashPrizeEntry.getValue();
-            LottoSheetMatchCount sheetMatchCount = lottoSheetResultsValue
+        for (LottoCashPrize lottoCashPrize : getValuablePrizes()) {
+            int sheetMatchCount = lottoSheetResults.getValue()
                     .getOrDefault(
-                            numberMatchCount,
-                            new LottoSheetMatchCount()
+                            lottoCashPrize,
+                            0
                     );
 
             System.out.println(
-                    numberMatchCount.getValue() + "개 일치 (" + cashPrize.getValue() + "원)- " + sheetMatchCount.getValue() + "개");
+                    lottoCashPrize.getMatchedCount() + "개 일치 (" + lottoCashPrize.getPrize() + "원)- " + sheetMatchCount + "개");
         }
     }
 
-    public static void printLottoProfits(int payment, LottoSheetResults lottoSheetResults) {
-        System.out.println("총 수익률은 "+ Math.floor(lottoSheetResults.sumCashPrizes() / (double) payment * 100) / 100 + "입니다.");
+    private static void printLottoResultsHeader() {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+    }
+
+    public static void printLottoProfits(int payment, LottoNumbersResults lottoSheetResults) {
+        System.out.println(
+                "총 수익률은 " + Math.floor(lottoSheetResults.sumCashPrizes() / (double) payment * 100) / 100 + "입니다.");
     }
 }

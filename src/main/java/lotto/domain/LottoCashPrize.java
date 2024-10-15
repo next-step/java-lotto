@@ -1,28 +1,43 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
-public class LottoCashPrize {
-    private final int lottoCashPrize;
+public enum LottoCashPrize {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
 
-    public LottoCashPrize(int lottoCashPrize) {
-        this.lottoCashPrize = lottoCashPrize;
+    FIFTH(2, 0),
+    SIXTH(1, 0),
+    SEVENTH(0, 0);
+
+    private final int matchedCount;
+    private final int prize;
+
+    LottoCashPrize(int matchedCount, int prize) {
+        this.matchedCount = matchedCount;
+        this.prize = prize;
     }
 
-    public int getValue() {
-        return this.lottoCashPrize;
+    public static LottoCashPrize fromMatchedCount(int count) {
+        return Stream.of(values())
+                .filter(prize -> prize.getMatchedCount() == count)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoCashPrize that = (LottoCashPrize) o;
-        return lottoCashPrize == that.lottoCashPrize;
+    public static List<LottoCashPrize> getValuablePrizes() {
+        return Arrays.asList(LottoCashPrize.FIRST, LottoCashPrize.SECOND, LottoCashPrize.THIRD, LottoCashPrize.FOURTH);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoCashPrize);
+    public int getMatchedCount() {
+        return matchedCount;
+    }
+
+    public int getPrize() {
+        return prize;
     }
 }

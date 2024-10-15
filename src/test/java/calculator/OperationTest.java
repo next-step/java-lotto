@@ -28,7 +28,7 @@ public class OperationTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value={"+,PLUS", "-,MINUS", "*,MULTIPLY", "/,DIVIDE"})
+    @CsvSource(value = {"+,PLUS", "-,MINUS", "*,MULTIPLY", "/,DIVIDE"})
     void getOperation_연산자에_해당하는_enum을_반환한다(String symbol, String operation) {
         assertThat(Operation.getOperation(symbol)).isEqualTo(Operation.valueOf(operation));
     }

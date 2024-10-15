@@ -24,7 +24,8 @@ public class InputView {
     }
 
     private static List<Integer> convertToNumbers(String values) {
-        return Arrays.stream(values.replace(" ", "").split(","))
+        return Arrays.stream(values.replace(" ", "")
+                        .split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
