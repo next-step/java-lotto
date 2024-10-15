@@ -38,21 +38,29 @@ public class LottoTicket {
         }
     }
 
-    private static void checkIfDuplicateExists(List<LottoNumber> lottoNumbers) {
+    private void checkIfDuplicateExists(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(lottoNumbers);
-        if (uniqueLottoNumbers.size() != lottoNumbers.size()) {
+        if (isNotSameSize(lottoNumbers, uniqueLottoNumbers)) {
             throw new DuplicateLottoNumberException("중복된 로또 번호가 존재합니다.");
         }
     }
 
+    private boolean isNotSameSize(List<LottoNumber> lottoNumbers, Set<LottoNumber> uniqueLottoNumbers) {
+        return uniqueLottoNumbers.size() != lottoNumbers.size();
+    }
+
     private void checkIfSorted(List<LottoNumber> lottoNumbers) {
-        List<LottoNumber> sortedLottoNumbers = lottoNumbers.stream()
-                .sorted()
-                .collect(Collectors.toList());
+        List<LottoNumber> sortedLottoNumbers = getSortedLottoNumbers(lottoNumbers);
 
         if (!sortedLottoNumbers.equals(lottoNumbers)) {
             throw new UnsortedLottoNumbersException("로또 번호는 정렬된 상태여야 합니다.");
         }
+    }
+
+    private List<LottoNumber> getSortedLottoNumbers(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     @Override
