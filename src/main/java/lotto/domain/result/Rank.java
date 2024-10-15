@@ -21,7 +21,7 @@ public enum Rank {
         this.money = money;
     }
 
-    public static Rank findRank(long matchCount) {
+    public static Rank findRankBy(long matchCount) {
         return Arrays.stream(values())
                 .filter(r -> r.matchCount == matchCount)
                 .findFirst()
