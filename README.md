@@ -35,9 +35,14 @@
   - [x] 번호 갯수 6개가 아닌 경우 IllegalArgumentException throw
   - [x] 중복번호가 있는 경우 IllegalArgumentException throw
   - [x] 숫자가 1 ~ 45가 아닌 경우 IllegalArgumentException throw
+- [ ] 보너스 볼 입력
+  - [ ] 숫자가 아닌 경우 IllegalArgumentException throw
+  - [ ] 이미 입력한 지난주 당첨번호에 포함되는 숫자인 경우 IllegalArgumentException throw
+  - [ ] 숫자가 1 ~ 45가 아닌 경우 IllegalArgumentException throw
 - [x] 구매한 개수 출력
 - [x] 구매한 로또 목록 출력
 - [x] 당첨 통계 출력
+  - [ ] 2등 추가
 - [x] 총 수익률 출력
 
 #### 로또
@@ -46,4 +51,5 @@
 - [x] 로또 번호 자동 생성
 - [x] 한 개의 로또에 일치하는 개수 확인
 - [x] 당첨된 로또 개수 확인 (3, 4, 5, 6개 일치)
+- [ ] 보너스 볼 일치 확인
 - [x] 수익률 계산
