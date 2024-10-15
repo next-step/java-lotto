@@ -3,6 +3,7 @@ package lotto;
 import lotto.entity.Cashier;
 import lotto.entity.Lotto;
 import lotto.controller.LottoMachine;
+import lotto.entity.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -20,8 +21,8 @@ public class LottoDisplay {
         int totalTicketCount = cashier.makeLottoGamePapers(totalMoney);
         System.out.println(resultView.printTotalLottoTicketCount(totalTicketCount));
 
-        List<Lotto> totalLottoTickets = lottoMachine.makeTotalLottoTickets(totalTicketCount);
-        totalLottoTickets.stream()
+        Lottos totalLottoTickets = lottoMachine.makeTotalLottoTickets(totalTicketCount);
+        totalLottoTickets.getValues().stream()
                 .forEach(System.out::println);
 
         System.out.println();

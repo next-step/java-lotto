@@ -6,30 +6,32 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.entity.LottoNumber;
+import lotto.entity.Lottos;
 import lotto.entity.PrizePolicy;
 
 public class LottoMachine {
-    private List<Lotto> totalLottoTicket;
+    private Lottos totalLottoTicket;
 
     public LottoMachine() {
-        totalLottoTicket = new ArrayList<>();
+        totalLottoTicket = new Lottos(new ArrayList<>());
     }
 
     public Lotto makeLottoTicket() {
         return new Lotto();
     }
 
-    public List<Lotto> makeTotalLottoTickets(int totalTicketCount) {
-        IntStream.range(0, totalTicketCount)
+    public Lottos makeTotalLottoTickets(int totalTicketCount) {
+        List<Lotto> lottoList = IntStream.range(0, totalTicketCount)
                 .mapToObj(i -> makeLottoTicket())
-                .forEach(totalLottoTicket::add);
+                .collect(Collectors.toList());
+        totalLottoTicket = new Lottos(lottoList);
         return totalLottoTicket;
     }
 
     public List<Integer> checkMatchingNumber(String inputWinningNumbers) {
         Lotto winningLotto = new Lotto(inputWinningNumbers);
 
-        List<Integer> matchingLottoTickets = totalLottoTicket.stream()
+        List<Integer> matchingLottoTickets = totalLottoTicket.getValues().stream()
                 .map(lottoTicket ->
                         (int) lottoTicket.getLottoNumbers().stream()
                                 .filter(lottoNumber ->
@@ -49,7 +51,8 @@ public class LottoMachine {
     public Map<Integer, Integer> winningResult(List<Integer> matchingLottoTickets) {
         Map<Integer, Integer> winLottoTicket = new HashMap<>();
         for (Integer matchCount : matchingLottoTickets) {
-            winLottoTicket.put(PrizePolicy.fromMatchCount(matchCount), winLottoTicket.getOrDefault(PrizePolicy.fromMatchCount(matchCount), 0) + 1);
+            //winLottoTicket.put(PrizePolicy.fromMatchCount(matchCount), winLottoTicket.getOrDefault(PrizePolicy.fromMatchCount(matchCount), 0) + 1);
+            winLottoTicket.put(matchCount, winLottoTicket.getOrDefault(matchCount, 0) + 1);
         }
         return winLottoTicket;
     }

@@ -25,7 +25,7 @@ class LottoMachineTest {
     @Test
     @DisplayName("금액만큼 로또 장 수 확인")
     void 금액만큼_로또_번호를_발급() {
-        assertThat(lottoMachine.makeTotalLottoTickets(14).size()).isEqualTo(14);
+        assertThat(lottoMachine.makeTotalLottoTickets(14).getValues().size()).isEqualTo(14);
     }
 
     @Test
