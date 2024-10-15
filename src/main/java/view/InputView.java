@@ -19,4 +19,10 @@ public class InputView {
 
         return SCANNER.nextLine();
     }
+
+    public String askPriceToPay() {
+        System.out.println("구입 금액을 입력해 주세요.");
+
+        return SCANNER.nextLine();
+    }
 }

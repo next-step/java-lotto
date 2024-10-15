@@ -2,8 +2,8 @@ package calculator.controller;
 
 import calculator.domain.Calculator;
 import calculator.domain.Expression;
-import calculator.view.InputView;
-import calculator.view.OutputView;
+import view.InputView;
+import view.OutputView;
 
 public class CalculatorController {
 

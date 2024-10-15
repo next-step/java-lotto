@@ -1,8 +1,8 @@
 package calculator;
 
 import calculator.controller.CalculatorController;
-import calculator.view.InputView;
-import calculator.view.OutputView;
+import view.InputView;
+import view.OutputView;
 
 public class CalculatorMain {
 
