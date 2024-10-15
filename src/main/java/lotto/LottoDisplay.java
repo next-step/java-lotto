@@ -18,24 +18,21 @@ public class LottoDisplay {
 
     public static void main(String[] args) {
         int totalMoney = inputView.inputTotalAmount();
+
         int totalTicketCount = LOTTO_MONEY.makeLottoGamePapers(totalMoney);
-        System.out.println(resultView.printTotalLottoTicketCount(totalTicketCount));
+
+        resultView.printTotalLottoTicketCount(totalTicketCount);
 
         Lottos totalLottoTickets = lottoMachine.makeTotalLottoTickets(totalTicketCount);
-        totalLottoTickets.getValues().stream()
-                .forEach(System.out::println);
+        resultView.printLottoTickets(totalLottoTickets);
 
-        System.out.println();
         String inputWinningNumbers = inputView.inputWinningNumbers();
-
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
 
         List<Integer> matchingCountResult = lottoMachine.checkMatchingNumber(inputWinningNumbers);
         Map<PrizePolicy, Integer> matchingResult = lottoMachine.winningResult(matchingCountResult);
 
         int totalPrizeMoney = resultView.printTotalResult(matchingResult);
+
         resultView.printRateOfReturn(lottoMachine.rateOfReturnResult(totalMoney, totalPrizeMoney));
     }
 }

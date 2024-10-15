@@ -1,12 +1,17 @@
 package lotto.view;
 
+import lotto.entity.Lottos;
 import lotto.entity.PrizePolicy;
 
 import java.util.Map;
 
 public class ResultView {
-    public String printTotalLottoTicketCount(int totalLottoTicketCount) {
-        return totalLottoTicketCount + "개를 구매했습니다.";
+    public void printTotalLottoTicketCount(int totalLottoTicketCount) {
+        System.out.println(totalLottoTicketCount + "개를 구매했습니다.");
+    }
+
+    public void printLottoTickets(Lottos totalLottoTickets) {
+        totalLottoTickets.getValues().forEach(lotto -> System.out.println(lotto.toString()));
     }
 
     public int printTotalResult(Map<PrizePolicy, Integer> matchingResult) {
