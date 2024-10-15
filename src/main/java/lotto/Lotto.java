@@ -1,10 +1,14 @@
 package lotto;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final Random RANDOM = new Random();
+    private static final List<Integer> LOTTO_CANDIDATE_NUMBERS =
+            Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+                    26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45);
+
 
     private List<Integer> lottoNumbers;
     private LottoResult lottoResult;
@@ -36,19 +40,8 @@ public class Lotto {
     }
 
     public List<Integer> generateAutoLottoNumbers() {
-        while (lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
-            generateLottoNumber();
-        }
-
-        Collections.shuffle(this.lottoNumbers);
-        return this.lottoNumbers;
-    }
-
-    private void generateLottoNumber() {
-        int randomNumber = RANDOM.nextInt(45) + 1;
-        if (!lottoNumbers.contains(randomNumber)) {
-            lottoNumbers.add(randomNumber);
-        }
+        Collections.shuffle(LOTTO_CANDIDATE_NUMBERS);
+        return LOTTO_CANDIDATE_NUMBERS.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList());
     }
 
     public int calculateMatchCount(Lotto winningLotto) {
