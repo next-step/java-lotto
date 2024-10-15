@@ -8,14 +8,13 @@ public class WinningNumber {
     private final Lotto winningNumber;
     private final LottoNumber bonusNumber;
 
-    public WinningNumber(final Set<LottoNumber> winningNumbers) {
-        this.winningNumber = new Lotto(winningNumbers);
-        this.bonusNumber = null;
+    public WinningNumber(final Set<Integer> winningNumbers, final int bonusNumber) {
+        this(Lotto.from(winningNumbers), new LottoNumber(bonusNumber));
     }
 
-    public WinningNumber(final Set<LottoNumber> winningNumbers, final int bonusNumber) {
-        this.winningNumber = new Lotto(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+    public WinningNumber(final Lotto winningNumber, final LottoNumber bonusNumber) {
+        this.winningNumber = winningNumber;
+        this.bonusNumber = bonusNumber;
         validateBonusNumber();
     }
 
