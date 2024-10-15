@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.PurchasedLottosDTO;
 
 public class LottoAgent {
     private PurchasedLottos purchasedLottos;
@@ -21,10 +20,10 @@ public class LottoAgent {
     }
 
     private void buyLotto(int id, LottoNumberSelectionStrategy selectionStrategy) {
-        purchasedLottos = purchasedLottos.add(Lotto.valueOf(id, selectionStrategy));
+        purchasedLottos = purchasedLottos.add(Lotto.of(id, selectionStrategy));
     }
 
-    public PurchasedLottosDTO getPurchasedLottos() {
-        return PurchasedLottosDTO.valueOf(purchasedLottos);
+    public PurchasedLottos getPurchasedLottos() {
+        return purchasedLottos;
     }
 }
