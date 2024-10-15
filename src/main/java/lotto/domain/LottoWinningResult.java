@@ -2,9 +2,9 @@ package lotto.domain;
 
 public class LottoWinningResult {
     private final LottoRank rank;
-    private final LottoBundle winningLottoBundle;
+    private final LottoResultBundle winningLottoBundle;
 
-    public LottoWinningResult(final LottoRank rank, final LottoBundle winningLottoBundle) {
+    public LottoWinningResult(final LottoRank rank, final LottoResultBundle winningLottoBundle) {
         this.rank = rank;
         this.winningLottoBundle = winningLottoBundle;
     }

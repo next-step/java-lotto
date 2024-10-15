@@ -9,7 +9,11 @@ class LottoWinningResultTest {
     @Test
     @DisplayName("당첨된 금액을 구할 수 있다.")
     void shouldCalculateTotalWinningPrice() {
-        final LottoWinningResult lottoWinningResult = new LottoWinningResult(LottoRank.FIFTH, LottoBundle.createLottoBundle(3));
+        final LottoResultBundle resultBundle = new LottoResultBundle();
+        resultBundle.add(Lotto.createAutoLotto());
+        resultBundle.add(Lotto.createAutoLotto());
+        resultBundle.add(Lotto.createAutoLotto());
+        final LottoWinningResult lottoWinningResult = new LottoWinningResult(LottoRank.FIFTH, resultBundle);
 
         assertThat(lottoWinningResult.totalWinningPrice()).isEqualTo(15000);
     }
