@@ -4,7 +4,7 @@ import java.util.function.BiFunction;
 
 public enum Operator {
     PLUS("더하기", (a, b) -> (a + b)),
-    MINUS("빼기", (a, b) -> (a - b)),
+    SUBTRACT("빼기", (a, b) -> (a - b)),
     MULTIPLY("곱하기", (a, b) -> (a * b)),
     DIVIDE("나누기") {
         public int calculate(int a, int b) {
