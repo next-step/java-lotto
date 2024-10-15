@@ -42,7 +42,6 @@ public class BuyerTest {
     }
 
     public static class TestLottoNumberGenerator implements LottoNumberGenerator {
-
         private List<Integer> values;
 
         public TestLottoNumberGenerator(Integer... values) {
