@@ -9,23 +9,24 @@ import lotto.domain.sales.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
 public class ConsoleLottoSalesStore {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
         LottoBill bill = inputView.lottoBill();
-        List<String> manuals = inputView.manuals(bill.manualCount());
-        LottoBundle lottoBundle = LottoBundle.of(bill.quickPick(), manuals);
+        String[] manuals = inputView.manuals(bill.manualCount());
+
+        LottoBundle manualLotto = new LottoBundle(manuals);
+        LottoBundle quickPickLotto = new LottoBundle(bill.quickPick());
+        LottoBundle integrated = new LottoBundle(manualLotto, quickPickLotto);
 
         ResultView resultView = new ResultView();
         resultView.salesAmount(bill);
-        resultView.show(lottoBundle);
+        resultView.show(integrated);
 
         Lotto lastWinningLotto = inputView.lastWinningLotto();
         LottoNumber bonusNumber = inputView.bonusNumber();
-        WinningPrize winningPrize = lottoBundle.winningPrize(new WinningLotto(lastWinningLotto, bonusNumber));
+        WinningPrize winningPrize = integrated.winningPrize(new WinningLotto(lastWinningLotto, bonusNumber));
         resultView.report(winningPrize, bill);
     }
 }

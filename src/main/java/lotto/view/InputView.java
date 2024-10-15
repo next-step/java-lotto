@@ -32,16 +32,17 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public List<String> manuals(int manualCount) {
+    public String[] manuals(int manualCount) {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요. [" + manualCount + "]");
-        List<String> manuals = new ArrayList<>();
+
+        String[] manuals = new String[manualCount];
         if (manualCount == 0) {
             return manuals;
         }
 
         for (int i = 0; i < manualCount; i++) {
-            manuals.add(SCANNER.nextLine());
+            manuals[i] = SCANNER.nextLine();
         }
         return manuals;
     }
