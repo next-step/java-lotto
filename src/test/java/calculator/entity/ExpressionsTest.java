@@ -10,11 +10,9 @@ public class ExpressionsTest {
 
     @Test
     void findExpression_해당_부호_객체_찾기() {
-        Expression divide = expressions.findExpression("/");
+        CalculateExpression divide = expressions.findExpression("/");
 
-        Expression expression = new Expression(CalculateExpression.DIVIDE);
-
-        assertThat(divide).isEqualTo(expression);
+        assertThat(divide).isEqualTo(CalculateExpression.DIVIDE);
     }
 
     @Test
