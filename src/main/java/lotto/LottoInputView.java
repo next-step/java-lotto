@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -25,6 +26,19 @@ public class LottoInputView {
 
         Lotto winningLotto = new Lotto(winningNumbers);
         return winningLotto;
+    }
+
+    public static int inputBonusNumber(List<Integer> winningNumbers) {
+        System.out.println("보너스 볼을 입력해주세요");
+        int bonusNumber = scanner.nextInt();
+
+        if(winningNumbers.contains(bonusNumber)){
+            throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
+        }
+        if (bonusNumber <= 0 || bonusNumber > 45) {
+            throw new IllegalArgumentException("유효한 번호가 아닙니다.");
+        }
+        return bonusNumber;
     }
 
 }

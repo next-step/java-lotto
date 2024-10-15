@@ -10,7 +10,9 @@ public class LottoMain {
         LottoResultView.printLottoList(lottos.getLottos());
 
         System.out.println();
-        lottos.calculateAllMatchCount(LottoInputView.inputWinningNumbers());
+        Lotto winningLotto = LottoInputView.inputWinningNumbers();
+        int bonusNumber = LottoInputView.inputBonusNumber(winningLotto.getLottoNumbers());
+        lottos.calculateAllMatchCount(winningLotto);
 
         System.out.println();
         LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos()));
