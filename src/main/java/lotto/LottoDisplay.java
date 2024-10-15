@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.entity.Cashier;
+import lotto.entity.LottoMoney;
 import lotto.controller.LottoMachine;
 import lotto.entity.Lottos;
 import lotto.entity.PrizePolicy;
@@ -12,13 +12,13 @@ import java.util.Map;
 
 public class LottoDisplay {
     private static final InputView inputView = new InputView();
-    private static final Cashier cashier = new Cashier();
+    private static final LottoMoney LOTTO_MONEY = new LottoMoney();
     private static final ResultView resultView = new ResultView();
     private static final LottoMachine lottoMachine = new LottoMachine();
 
     public static void main(String[] args) {
         int totalMoney = inputView.inputTotalAmount();
-        int totalTicketCount = cashier.makeLottoGamePapers(totalMoney);
+        int totalTicketCount = LOTTO_MONEY.makeLottoGamePapers(totalMoney);
         System.out.println(resultView.printTotalLottoTicketCount(totalTicketCount));
 
         Lottos totalLottoTickets = lottoMachine.makeTotalLottoTickets(totalTicketCount);
