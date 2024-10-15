@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> lotto;
+    private final List<LottoNumber> lotto;
 
-    public Lotto(List<Integer> lotto) {
+    public Lotto(List<LottoNumber> lotto) {
         this.lotto = lotto;
     }
 
-    public List<Integer> getLotto() {
+    public List<LottoNumber> getLotto() {
         return new ArrayList<>(lotto);
     }
 

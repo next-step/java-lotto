@@ -6,11 +6,12 @@ import java.util.List;
 
 public class WinningNumber {
 
-    private final List<Integer> winningNumber = new ArrayList<>();
+    private final List<LottoNumber> winningNumber = new ArrayList<>();
 
     public void convertStringToIntList(String stringWinningNumber) {
         Arrays.stream(splitString(stringWinningNumber))
                 .map(Integer::parseInt)
+                .map(LottoNumber::createLottoNumber)
                 .forEach(winningNumber::add);
     }
 
@@ -18,7 +19,7 @@ public class WinningNumber {
         return stringWinningNumber.split(", ");
     }
 
-    public List<Integer> getWinningNumber() {
+    public List<LottoNumber> getWinningNumber() {
         return winningNumber;
     }
 

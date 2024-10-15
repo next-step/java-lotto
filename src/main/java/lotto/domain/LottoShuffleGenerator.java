@@ -24,12 +24,12 @@ public class LottoShuffleGenerator implements LottoGenerator {
         return sortLotto(shuffleLotto());
     }
 
-    List<Integer> shuffleLotto() {
+    List<LottoNumber> shuffleLotto() {
         Collections.shuffle(lottoGenerator);
         return new ArrayList<>(lottoGenerator.subList(FROM_INDEX, LOTTO_SIZE));
     }
 
-    Lotto sortLotto(List<Integer> shuffledLotto) {
+    Lotto sortLotto(List<LottoNumber> shuffledLotto) {
         Collections.sort(shuffledLotto);
         return new Lotto(shuffledLotto);
     }

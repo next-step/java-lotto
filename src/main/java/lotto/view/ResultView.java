@@ -17,7 +17,7 @@ public class ResultView {
             System.out.println(
                     lotto.getLotto()
                             .stream()
-                            .map(i -> String.valueOf(i))
+                            .map(i -> String.valueOf(i.getLottoNumber()))
                             .collect(Collectors.joining(", ", "[", "]"))
             );
         }

@@ -42,8 +42,8 @@ public class WinningCheck {
 
     private int LottoWinningStatus(Lotto lotto) {
         int count = 0;
-        List<Integer> lottoNumbers = lotto.getLotto();
-        List<Integer> winningNumbers = winningNumber.getWinningNumber();
+        List<LottoNumber> lottoNumbers = lotto.getLotto();
+        List<LottoNumber> winningNumbers = winningNumber.getWinningNumber();
 
         for (int i = 0; i < winningNumbers.size(); i++) {
             count += isNumberMatched(winningNumbers, i, lottoNumbers);
@@ -52,7 +52,7 @@ public class WinningCheck {
         return Prize.getValueByHit(count);
     }
 
-    private int isNumberMatched(List<Integer> winningNumbers, int i, List<Integer> lottoNumbers) {
+    private int isNumberMatched(List<LottoNumber> winningNumbers, int i, List<LottoNumber> lottoNumbers) {
         if (winningNumbers.get(i).equals(lottoNumbers.get(i))) {
             return 1;
         }
