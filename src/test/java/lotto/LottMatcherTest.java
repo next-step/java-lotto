@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.constants.LottoRank;
-import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoMatcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,8 +22,8 @@ public class LottMatcherTest {
 
     @BeforeEach
     public void setup() {
-        Lotto lotto = new Lotto(10000);
-        LottoMatcher lottoMatcher = new LottoMatcher(lotto, lotto.getLottoNumber("1,2,3,4,5,6"));
+        LottoGenerator lotto = new LottoGenerator(10000);
+        LottoMatcher lottoMatcher = new LottoMatcher(lotto, "1,2,3,4,5,6");
         lottoList = lotto.chooseLottoNumber(lotto.purchase());
         matchedLottoList = lottoMatcher.matchLottoNumber(lottoList);
     }

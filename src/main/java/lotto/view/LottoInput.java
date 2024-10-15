@@ -1,12 +1,25 @@
 package lotto.view;
 
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LottoInput {
 
-    private final Pattern NUMBER_PATTERN = Pattern.compile("\\d");
-    private final int LIMIT_AMOUNT = 100000;
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
+    private static final int LIMIT_AMOUNT = 100000;
+    private static Scanner scanner = new Scanner(System.in);
+
+    public int getPurchasedAmount() {
+        System.out.println("구매금액을 입력하세요.");
+        String amount = scanner.nextLine();
+        return purchaseValid(amount);
+    }
+
+    public String getWinningNumbers() {
+        System.out.println("지난 주 당첨번호를 입력하세요.");
+        return scanner.nextLine();
+    }
 
     public int purchaseValid(String amount) {
         if(amount.isBlank()) {
@@ -19,8 +32,8 @@ public class LottoInput {
 
         int purchasedAmount = Integer.parseInt(amount);
 
-        if(purchasedAmount < 0) {
-            throw new IllegalArgumentException("음수는 허용하지 않습니다.");
+        if(purchasedAmount <= 0) {
+            throw new IllegalArgumentException("구매금액은 0보다 커야 합니다.");
         }
 
         if(purchasedAmount >= LIMIT_AMOUNT) {

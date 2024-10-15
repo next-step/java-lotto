@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Lotto {
+public class LottoGenerator {
     private final int purchasePrice;
     private final int purchaseAmount;
 
-    public Lotto(int purchaseAmount) {
+    public LottoGenerator(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
         this.purchasePrice = 1000;
     }
@@ -16,23 +16,17 @@ public class Lotto {
         return this.purchaseAmount / this.purchasePrice;
     }
 
-    public List<Integer> getLottoNumber(String winningLottoNumbers) {
-        return winningNumber(winningLottoNumbers);
-    }
-
-    public List<Integer> getLottoNumber() {
-        List<Integer> initialNumbers = generateInitialLottoNumber();
-        return getWinningNumbers(initialNumbers);
+    public List<Integer> parseWinningNumbers(String winningLottoNumbers) {
+        return Arrays.stream(winningLottoNumbers.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private static List<Integer> getWinningNumbers(List<Integer> initialNumbers) {
         Collections.shuffle(initialNumbers);
-        List<Integer> winningNumbers = new ArrayList<>();
-
-        for(int i = 0; i < 6; i++) {
-            winningNumbers.add(initialNumbers.get(i));
-        }
-        return winningNumbers;
+        return initialNumbers.stream()
+                .limit(6)
+                .collect(Collectors.toList());
     }
 
     public List<List<Integer>> chooseLottoNumber(int purchaseCount) {
@@ -58,18 +52,12 @@ public class Lotto {
         return initialLottoNumbers;
     }
 
-    public List<Integer> winningNumber(String winningLottoNumbers) {
-        return Arrays.stream(winningLottoNumbers.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return purchaseAmount == lotto.purchaseAmount;
+        LottoGenerator lottoGenerator = (LottoGenerator) o;
+        return purchaseAmount == lottoGenerator.purchaseAmount;
     }
 
     @Override
