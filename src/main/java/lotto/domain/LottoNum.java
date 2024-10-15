@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNum implements Comparable<LottoNum> {
@@ -48,6 +49,11 @@ public class LottoNum implements Comparable<LottoNum> {
         }
         LottoNum lottoNum = (LottoNum) object;
         return num == lottoNum.num;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(num);
     }
 
     @Override
