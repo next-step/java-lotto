@@ -4,23 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoRankGroup {
-    private final Map<LottoRank, LottoBundle> lottoRankGroup;
+    private final Map<LottoRank, LottoResultBundle> lottoRankGroup;
 
     public LottoRankGroup() {
         this.lottoRankGroup = new HashMap<>();
-        lottoRankGroup.put(LottoRank.FIRST, new LottoBundle());
-        lottoRankGroup.put(LottoRank.SECOND, new LottoBundle());
-        lottoRankGroup.put(LottoRank.THIRD, new LottoBundle());
-        lottoRankGroup.put(LottoRank.FOURTH, new LottoBundle());
-        lottoRankGroup.put(LottoRank.FIFTH, new LottoBundle());
-        lottoRankGroup.put(LottoRank.NONE, new LottoBundle());
+        lottoRankGroup.put(LottoRank.FIRST, new LottoResultBundle());
+        lottoRankGroup.put(LottoRank.SECOND, new LottoResultBundle());
+        lottoRankGroup.put(LottoRank.THIRD, new LottoResultBundle());
+        lottoRankGroup.put(LottoRank.FOURTH, new LottoResultBundle());
+        lottoRankGroup.put(LottoRank.FIFTH, new LottoResultBundle());
+        lottoRankGroup.put(LottoRank.NONE, new LottoResultBundle());
     }
 
     public void addLotto(final LottoRank rank, final Lotto lotto) {
         lottoRankGroup.get(rank).add(lotto);
     }
 
-    public LottoBundle getLottoBundleByRank(final LottoRank rank) {
+    public LottoResultBundle getLottoBundleByRank(final LottoRank rank) {
         return lottoRankGroup.get(rank);
     }
 }

@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -13,6 +15,30 @@ public class Lotto {
         }
 
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto createAutoLotto() {
+        return new Lotto(LottoNumber.getNewLottoNumbers(LOTTO_NUMBER_COUNT));
+    }
+
+    public static Lotto createManualLotto(final String lottoNumberString, final String delimiter) {
+        if (lottoNumberString.isEmpty()) {
+            throw new IllegalArgumentException("로또 번호를 입력 해 주세요.");
+        }
+
+        if (!lottoNumberString.contains(delimiter)) {
+            throw new IllegalArgumentException("로또 번호를 정확히 입력해 주세요.");
+        }
+
+        final String[] lottoNumbers = lottoNumberString.split(delimiter);
+
+        return new Lotto(
+            Arrays.stream(lottoNumbers)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toUnmodifiableList())
+        );
     }
 
     public boolean allMatch(final Lotto otherLotto) {

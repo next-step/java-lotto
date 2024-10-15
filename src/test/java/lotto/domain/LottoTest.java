@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static lotto.domain.Lotto.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
     @Test
     @DisplayName("로또는 6개의 로또번호를 가진다.")
     void shouldContainExactlySixNumbers() {
-        final Lotto lotto = new Lotto(LottoNumber.getNewLottoNumbers(LOTTO_NUMBER_COUNT));
+        final Lotto lotto = new Lotto(LottoNumber.getNewLottoNumbers(6));
 
         assertThat(lotto.size()).isEqualTo(6);
     }
@@ -20,7 +20,7 @@ class LottoTest {
     @Test
     @DisplayName("비교대상으로 주어진 로또와 일치한지 비교할 수 있다.")
     void shouldMatchWithGivenLotto() {
-        final List<LottoNumber> pickLottoNumbers = LottoNumber.getNewLottoNumbers(LOTTO_NUMBER_COUNT);
+        final List<LottoNumber> pickLottoNumbers = LottoNumber.getNewLottoNumbers(6);
         final Lotto lotto1 = new Lotto(pickLottoNumbers);
         final Lotto lotto2 = new Lotto(pickLottoNumbers);
 
@@ -46,5 +46,12 @@ class LottoTest {
         );
 
         assertThat(lotto1.matchCount(lotto2)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("로또 문자열이 올바르지 않다면 예외가 발생한다.")
+    void shouldThrowExceptionWhenInvalidLottoStringProvided() {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> createManualLotto("1, 2, 3, 4, 5, 6", "|"));
     }
 }
