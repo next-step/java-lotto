@@ -1,7 +1,10 @@
 package lotto;
 
+import java.util.List;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatics;
 import lotto.domain.Rank;
 import lotto.domain.WinNumber;
@@ -13,6 +16,8 @@ public class Main {
     public static void main(String[] args) {
 
         int money = InputView.inputAmount();
+        int manualCount = InputView.manualAmount();
+        List<LottoNumbers> lottoNumbers = InputView.inputManualNumbers(manualCount);
 
         LottoMachine lottoMachine = new LottoMachine();
         int lottoCount = lottoMachine.lottoCount(money);
