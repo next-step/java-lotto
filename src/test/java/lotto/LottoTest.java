@@ -16,7 +16,7 @@ class LottoTest {
 
         int matchCount = lottoTicket.matchCount(winningLotto);
 
-        assertThat(0).isEqualTo(matchCount);
+        assertThat(matchCount).isEqualTo(0);
     }
 
     @Test
@@ -27,7 +27,7 @@ class LottoTest {
 
         int matchCount = lottoTicket.matchCount(winningLotto);
 
-        assertThat(3).isEqualTo(matchCount);
+        assertThat(matchCount).isEqualTo(3);
 
     }
 }
