@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public enum Prize {
+
     SIX(6, 2_000_000_000),
     FIVE(5, 1_500_000),
     FOUR(4, 50000),

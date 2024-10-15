@@ -11,6 +11,7 @@ import lotto.view.ResultView;
 import java.util.Stack;
 
 public class JavaLotto {
+
     private final InputView inputView;
     private final ResultView resultView;
 
@@ -19,7 +20,7 @@ public class JavaLotto {
         this.resultView = resultView;
     }
 
-    public void playLotto(){
+    public void playLotto() {
         WinningNumber winningNumber = new WinningNumber();
         Lottos lottos = new Lottos();
 
@@ -32,14 +33,14 @@ public class JavaLotto {
 
         winningNumber.convertStringToIntList(inputView.inputWinnerNumber());
 
-        WinningCheck winningCheck = new WinningCheck(lottos,winningNumber);
+        WinningCheck winningCheck = new WinningCheck(lottos, winningNumber);
         int prize = winningCheck.getWinningPrize();
 
         WinningStatistic winningStatistic = new WinningStatistic(prize, new Stack<>());
         winningStatistic.calculateStatistic();
 
         resultView.printResult(winningStatistic.getStatistic());
-        resultView.printProfit(winningStatistic.calculateProfit(amount,prize));
+        resultView.printProfit(winningStatistic.calculateProfit(amount, prize));
 
     }
 

@@ -5,6 +5,7 @@ import lotto.exception.PrizeOverFlowIsNegativeException;
 import java.util.List;
 
 public class WinningCheck {
+
     private final Lottos myLottos;
     private final WinningNumber winningNumber;
 
