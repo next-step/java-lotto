@@ -39,9 +39,6 @@ public class Lotto {
         }
 
         final String[] lottoNumbers = lottoNumberString.split(delimiter);
-        if (lottoNumbers.length != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 번호를 정확히 입력해 주세요.");
-        }
 
         return new Lotto(
             Arrays.stream(lottoNumbers)
