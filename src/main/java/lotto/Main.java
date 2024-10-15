@@ -14,16 +14,25 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        PurchasedLottos purchasedLottos = buyLottos();
+        
+        List<Integer> winnerNumbers = InputView.winnerNumbersInput();
+        int bonusNumber = InputView.bonusNumberInput();
+
+        printStatistics(winnerNumbers, bonusNumber, purchasedLottos);
+    }
+
+    private static PurchasedLottos buyLottos() {
         int price = InputView.priceInput();
         LottoAgent lottoAgent = LottoAgent.newInstance();
         lottoAgent.buy(price, RandomSelectionStrategy.getInstance());
         PurchasedLottos purchasedLottos = lottoAgent.getPurchasedLottos();
         ResultView.printPurchasedLottos(purchasedLottos);
+        return purchasedLottos;
+    }
 
-        List<Integer> winnerNumbers = InputView.winnerNumbersInput();
-        int bonusNumber = InputView.bonusNumberInput();
+    private static void printStatistics(List<Integer> winnerNumbers, int bonusNumber, PurchasedLottos purchasedLottos) {
         LottoJudge lottoJudge = LottoJudge.of(LottoNumbers.valueOf(winnerNumbers), LottoNumber.valueOf(bonusNumber));
-
         ResultView.printStatisticsSectionHeader();
         LottoRewardCountMap rewardCountMap = lottoJudge.countRewards(purchasedLottos);
         ResultView.printRewardCountMap(rewardCountMap);
