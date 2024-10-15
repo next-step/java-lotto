@@ -26,9 +26,7 @@ public class LottoDisplay {
         Lottos totalLottoTickets = lottoMachine.makeTotalLottoTickets(totalTicketCount);
         resultView.printLottoTickets(totalLottoTickets);
 
-        String inputWinningNumbers = inputView.inputWinningNumbers();
-
-        List<Integer> matchingCountResult = lottoMachine.checkMatchingNumber(inputWinningNumbers);
+        List<Integer> matchingCountResult = lottoMachine.checkMatchingNumber(inputView.inputWinningNumbers());
         Map<PrizePolicy, Integer> matchingResult = lottoMachine.winningResult(matchingCountResult);
 
         int totalPrizeMoney = resultView.printTotalResult(matchingResult);

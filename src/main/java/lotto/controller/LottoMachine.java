@@ -30,7 +30,7 @@ public class LottoMachine {
         return totalLottoTicket;
     }
 
-    public List<Integer> checkMatchingNumber(String inputWinningNumbers) {
+    public List<Integer> checkMatchingNumber(List<LottoNumber> inputWinningNumbers) {
         Lotto winningLotto = new Lotto(inputWinningNumbers);
 
         List<Integer> matchingLottoTickets = totalLottoTicket.getValues().stream()
