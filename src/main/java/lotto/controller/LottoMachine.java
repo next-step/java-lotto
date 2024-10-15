@@ -34,16 +34,7 @@ public class LottoMachine {
         Lotto winningLotto = new Lotto(inputWinningNumbers);
 
         List<Integer> matchingLottoTickets = totalLottoTicket.getValues().stream()
-                .map(lottoTicket ->
-                        (int) lottoTicket.getLottoNumbers().stream()
-                                .filter(lottoNumber ->
-                                        winningLotto.getLottoNumbers().stream()
-                                                .map(LottoNumber::getNumber)
-                                                .collect(Collectors.toList())
-                                                .contains(lottoNumber.getNumber())
-                                )
-                                .count()
-                )
+                .map(lottoTicket -> lottoTicket.matchCount(winningLotto))
                 .collect(Collectors.toList());
 
         Collections.sort(matchingLottoTickets);
@@ -59,7 +50,7 @@ public class LottoMachine {
     }
 
     private static void inputWinLottoTicket(Map<PrizePolicy, Integer> winLottoTicket, Integer matchCount) {
-        if(matchCount >= MIN_MATCH_COUNT) {
+        if (matchCount >= MIN_MATCH_COUNT) {
             PrizePolicy prizePolicy = PrizePolicy.fromMatchCount(matchCount);
             winLottoTicket.put(prizePolicy, winLottoTicket.getOrDefault(prizePolicy, 0) + 1);
         }

@@ -33,4 +33,10 @@ class LottoMachineTest {
     void 수익률_확인() {
         assertThat(0.35).isEqualTo(lottoMachine.rateOfReturnResult(14000, 5000));
     }
+
+    @Test
+    @DisplayName("매칭된 갯수 확인")
+    void 매칭_갯수를_확인() {
+        
+    }
 }
