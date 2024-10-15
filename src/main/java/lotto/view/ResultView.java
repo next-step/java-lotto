@@ -60,14 +60,8 @@ public class ResultView {
         for (Rank rank : ranks) {
             sb.append(rank.getMatchedCount())
                     .append("개 일치");
-            if (rank == SECOND_RANK) {
-                sb.append(", 보너스 볼 일치");
-            }
-            sb.append(" (")
-                    .append(rank.getPrice())
-                    .append(")- ")
-                    .append(lottoResult.getWinnerCount(rank))
-                    .append("개");
+            sb.append(addSecondRank(rank));
+            sb.append(String.format("(%d)-%d개", rank.getPrice(), lottoResult.getWinnerCount(rank)));
             sb.append(System.lineSeparator());
         }
         sb.append("총 수익률은 ")
@@ -75,5 +69,12 @@ public class ResultView {
                 .append("입니다.");
 
         System.out.println(sb);
+    }
+
+    private String addSecondRank(Rank rank) {
+        if (rank == SECOND_RANK) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 }
