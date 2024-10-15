@@ -3,7 +3,7 @@ package lotto;
 public class LottoMain {
     public static void main(String[] args) {
         int paidAmount = LottoInputView.inputPaidAmount();
-        int lottoCount = LottoTicket.countByAmount(paidAmount);
+        int lottoCount = LottoTicketPrice.countByAmount(paidAmount);
         LottoResultView.printLottoCount(lottoCount);
 
         Lottos lottos = new Lottos(lottoCount);
