@@ -19,25 +19,17 @@ public class LottoStatics {
         lottos.add(lotto);
     }
 
-    public int matchCount(WinNumber winNumber, Rank rank) {
+    public int findRank(WinNumber winNumber, Rank rank) {
         int result = 0;
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.match(winNumber);
-            result = rank.isMatch(matchCount) ? result + 1 : result;
+            result = rank.isMatch(lotto.match(winNumber)) ? result + 1 : result;
         }
 
         return result;
     }
 
     public long totalPrize(WinNumber winNumber) {
-        long totalPrize = 0;
-
-        totalPrize += Rank.calculatePrize(matchCount(winNumber, Rank.THREE), Rank.THREE);
-        totalPrize += Rank.calculatePrize(matchCount(winNumber, Rank.FOUR), Rank.FOUR);
-        totalPrize += Rank.calculatePrize(matchCount(winNumber, Rank.FIVE), Rank.FIVE);
-        totalPrize += Rank.calculatePrize(matchCount(winNumber, Rank.WIN), Rank.WIN);
-
-        return totalPrize;
+        return Rank.calculatePrize(lottos, winNumber);
     }
 
     @Override
