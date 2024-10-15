@@ -2,10 +2,10 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoReward;
+import lotto.domain.LottoRewardCountMap;
 import lotto.domain.PurchasedLottos;
 
 import java.util.List;
-import java.util.Map;
 
 public class ResultView {
     private static final String LOTTO_STATISTICS_TITLE = "당첨 통계";
@@ -52,9 +52,9 @@ public class ResultView {
         System.out.println(DASH_LINE);
     }
 
-    public static void printRewardCountMap(Map<LottoReward, Integer> rewardCountMap) {
+    public static void printRewardCountMap(LottoRewardCountMap rewardCountMap) {
         for (LottoReward reward : PRINT_TARGET_REWARDS) {
-            System.out.printf("%s- %d개\n", reward.getDescription(), rewardCountMap.getOrDefault(reward, 0));
+            System.out.printf("%s- %d개\n", reward.getDescription(), rewardCountMap.getRewardCount(reward));
         }
     }
 

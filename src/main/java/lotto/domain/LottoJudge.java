@@ -24,7 +24,7 @@ public class LottoJudge {
         return new LottoJudge(winningNumbers, bonusNumber);
     }
 
-    public Map<LottoReward, Integer> countRewards(PurchasedLottos purchasedLottos) {
+    public LottoRewardCountMap countRewards(PurchasedLottos purchasedLottos) {
         List<Lotto> purchaedLottoList = purchasedLottos.value();
         Map<LottoReward, Integer> rewardCountMap = new HashMap<>();
         for (Lotto purchasedLotto : purchaedLottoList) {
@@ -33,16 +33,12 @@ public class LottoJudge {
             LottoReward reward = LottoReward.valueOf(matchCount, matchBonus);
             rewardCountMap.put(reward, rewardCountMap.getOrDefault(reward, 0) + 1);
         }
-        return rewardCountMap;
+        return LottoRewardCountMap.valueOf(rewardCountMap);
     }
 
     public double calculateRewardPercentage(PurchasedLottos purchasedLottos) {
-        Map<LottoReward, Integer> matchCountMap = countRewards(purchasedLottos);
-        int totalReward = 0;
-        for (LottoReward reward : matchCountMap.keySet()) {
-            int rewardCount = matchCountMap.getOrDefault(reward, 0);
-            totalReward += rewardCount * reward.getReward();
-        }
+        LottoRewardCountMap matchCountMap = countRewards(purchasedLottos);
+        int totalReward = matchCountMap.getTotalReward();
         return (double) totalReward / (purchasedLottos.size() * Lotto.LOTTO_PRICE);
     }
 

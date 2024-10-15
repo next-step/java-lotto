@@ -37,8 +37,8 @@ public class LottoJudgeTest {
         int buyingPrice = 10000;
         agent.buy(buyingPrice, () -> winningNumbers);
         LottoJudge judge = LottoJudge.of(winningNumbers, bonusNumber);
-        Map<LottoReward, Integer> countRewardmap = judge.countRewards(agent.getPurchasedLottos());
-        assertThat(countRewardmap.get(LottoReward.FIRST_PLACE)).isGreaterThan(0);
+        LottoRewardCountMap rewardCountMap = judge.countRewards(agent.getPurchasedLottos());
+        assertThat(rewardCountMap.getRewardCount(LottoReward.FIRST_PLACE)).isGreaterThan(0);
     }
 
     @Test
