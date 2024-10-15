@@ -1,5 +1,7 @@
 package calculator;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +12,7 @@ class CalculatorTest {
   @Test
   void inputNullThrowsException() {
 
-    Assertions.assertThatThrownBy(() -> {
+    assertThatThrownBy(() -> {
       Calculator.calculate(null);
     }).isInstanceOf(IllegalArgumentException.class);
   }
@@ -19,8 +21,16 @@ class CalculatorTest {
   @Test
   void inputNullStringThrowsException() {
 
-    Assertions.assertThatThrownBy(() -> {
+    assertThatThrownBy(() -> {
       Calculator.calculate("");
     }).isInstanceOf(IllegalArgumentException.class);
   }
+
+  @DisplayName("두 숫자의 덧셈 연산이 잘 수행된다.")
+  @Test
+  void addCorrectly() {
+    int result = Calculator.calculate("2 + 3");
+    assertThat(result).isEqualTo(5);
+  }
+
 }
