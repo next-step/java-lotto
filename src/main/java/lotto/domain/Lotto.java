@@ -53,6 +53,10 @@ public class Lotto {
         return 0;
     }
 
+    public boolean isMatchBonus(LottoNum bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -63,9 +67,5 @@ public class Lotto {
         }
         Lotto lotto = (Lotto) object;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
-    }
-
-    public boolean isMatchBonus(LottoNum bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
     }
 }
