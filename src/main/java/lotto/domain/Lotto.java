@@ -18,7 +18,7 @@ public class Lotto {
         return new Lotto(id, LottoNumbers.valueOf(numbers));
     }
 
-    public static Lotto valueOf(int id, LottoNumberSelectionStrategy strategy) {
+    public static Lotto of(int id, LottoNumberSelectionStrategy strategy) {
         return new Lotto(id, strategy.select());
     }
 
