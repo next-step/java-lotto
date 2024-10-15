@@ -20,4 +20,12 @@ class BudgetTest {
         Budget budgetAfterUse = budget.use(1000);
         assertThat(budgetAfterUse).isEqualTo(Budget.valueOf(9000));
     }
+
+    @Test
+    @DisplayName("deposit하면 충전한 amount만큼 값이 많아진 budget을 반환합니다.")
+    void depositTest() {
+        Budget budget = Budget.valueOf(10000);
+        Budget budgetAfterDeposit = budget.deposit(1000);
+        assertThat(budgetAfterDeposit).isEqualTo(Budget.valueOf(11000));
+    }
 }
