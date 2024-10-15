@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
@@ -12,8 +13,8 @@ public class OutputView {
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
 
-    public static void lottoCount(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void lottoCount(int manualCount, int autoCount) {
+        System.out.format("수동으로 %d장, 자동으로 %d개를 구매했습니다\n", manualCount, autoCount);
     }
 
     public static void lottoView(Lotto lotto) {
@@ -24,6 +25,16 @@ public class OutputView {
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX))
         );
+    }
+
+    public static void manualView(List<LottoNumbers> lottoNumbers) {
+        for (LottoNumbers lottoNumber : lottoNumbers) {
+            System.out.println(
+                lottoNumber.getValues().stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX))
+            );
+        }
     }
 
     public static void staticsView() {

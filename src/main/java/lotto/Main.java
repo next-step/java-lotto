@@ -22,10 +22,13 @@ public class Main {
         LottoMachine lottoMachine = new LottoMachine();
         int lottoCount = lottoMachine.lottoCount(money);
 
-        OutputView.lottoCount(lottoCount);
+        int autoCount = lottoCount - manualCount;
+        OutputView.lottoCount(manualCount, autoCount);
+        OutputView.manualView(lottoNumbers);
 
         LottoStatics lottoStatics = new LottoStatics();
-        for (int i = 0; i < lottoCount; i++) {
+        lottoStatics.addAll(lottoNumbers);
+        for (int i = 0; i < autoCount; i++) {
             Lotto lotto = lottoMachine.generateLotto();
             lottoStatics.add(lotto);
             OutputView.lottoView(lotto);
