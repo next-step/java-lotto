@@ -1,12 +1,14 @@
 package stringcalculator.model;
 
+import stringcalculator.util.Parser;
+
 import java.util.*;
+
+import static stringcalculator.util.Parser.*;
+import static stringcalculator.util.Parser.operands;
 
 public class Calculator {
     public static final int FIRST_INDEX = 0;
-    public static final int OPERATOR_LOOP_START_INDEX = 1;
-    public static final int OPERAND_LOOP_START_INDEX = 0;
-    public static final int LOOP_INCREASE = 2;
     public static final int GET_OPERAND_OFFSET = 1;
     private final List<Operand> operands;
     private final List<Operator> operators;
@@ -19,26 +21,6 @@ public class Calculator {
     public static Calculator of(final Input input) {
         List<String> strings = input.value();
         return new Calculator(operands(strings), operators(strings));
-    }
-
-    private static List<Operator> operators(List<String> strings) {
-        List<Operator> operators = new ArrayList<>();
-        for (int index = OPERATOR_LOOP_START_INDEX;
-             index < strings.size();
-             index = index + LOOP_INCREASE) {
-            operators.add(Operator.convertToOperator(strings.get(index)));
-        }
-        return operators;
-    }
-
-    private static List<Operand> operands(List<String> strings) {
-        List<Operand> operands = new ArrayList<>();
-        for (int index = OPERAND_LOOP_START_INDEX;
-             index < strings.size();
-             index = index + LOOP_INCREASE) {
-            operands.add(Operand.of(strings.get(index)));
-        }
-        return operands;
     }
 
     public Result calculate() {
