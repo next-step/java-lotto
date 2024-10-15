@@ -25,7 +25,7 @@ public class LottoResultTest {
         Lotto lotto4 = new Lotto("1,2,3,7,8,9", DELIMITER);
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
         Lotto winner = new Lotto("1,2,3,4,5,6", DELIMITER);
-        assertThat(LottoResult.getLottoResult(lottos, winner, new LottoNum(10)).getReturnRate()).isEqualTo(500388.75);
+        assertThat(LottoResult.getLottoResult(lottos, new WinnerLotto(winner, new LottoNum(10))).getReturnRate()).isEqualTo(500388.75);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class LottoResultTest {
         Lotto lotto4 = new Lotto("1,2,3,7,8,9", DELIMITER);
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
         Lotto winner = new Lotto("1,2,3,4,5,6", DELIMITER);
-        assertThat(LottoResult.getLottoResult(lottos, winner, new LottoNum(7)).getPriceTotal()).isEqualTo(2030055000);
+        assertThat(LottoResult.getLottoResult(lottos, new WinnerLotto(winner, new LottoNum(7))).getPriceTotal()).isEqualTo(2030055000);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class LottoResultTest {
         Lotto lotto4 = new Lotto("1,2,3,7,8,9", DELIMITER);
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
         Lotto winner = new Lotto("1,2,3,4,5,6", DELIMITER);
-        assertThat(LottoResult.getLottoResult(lottos, winner, new LottoNum(20))).isEqualTo(new LottoResult(List.of(FIRST_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK), 4000));
+        assertThat(LottoResult.getLottoResult(lottos, new WinnerLotto(winner, new LottoNum(20)))).isEqualTo(new LottoResult(List.of(FIRST_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK), 4000));
     }
 
     @Test

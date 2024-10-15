@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNum;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
+import lotto.domain.WinnerLotto;
 import lotto.service.LottoGame;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -26,9 +27,9 @@ public class LottoController {
         resultView.priceLottoStatus(lottos);
         String lastWinningNumber = inputView.getLastWinningNumber();
         Lotto winnerLotto = inputView.getWinnerLottoNumbers(lastWinningNumber);
-
         LottoNum bonusNumber = inputView.getBonusNumber();
-        LottoResult result = LottoResult.getLottoResult(lottos, winnerLotto, bonusNumber);
+
+        LottoResult result = LottoResult.getLottoResult(lottos, new WinnerLotto(winnerLotto, bonusNumber));
 
         resultView.printLottoResult(result);
     }

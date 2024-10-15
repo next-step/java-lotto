@@ -38,23 +38,8 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int compareWinningNumber(Lotto winner) {
-        int result = 0;
-        for (LottoNum lottoNumber : lottoNumbers) {
-            result += addResult(winner.getLottoNumbers(), lottoNumber);
-        }
-        return result;
-    }
-
-    private static int addResult(List<LottoNum> winner, LottoNum lottoNumber) {
-        if (winner.contains(lottoNumber)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    public boolean isMatchBonus(LottoNum bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean isContains(LottoNum lottoNum) {
+        return lottoNumbers.contains(lottoNum);
     }
 
     @Override

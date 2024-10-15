@@ -40,14 +40,14 @@ public class LottoNum implements Comparable<LottoNum> {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoNum lottoNum = (LottoNum) object;
+        LottoNum lottoNum = (LottoNum) o;
         return num == lottoNum.num;
     }
 

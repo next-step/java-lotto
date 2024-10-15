@@ -74,3 +74,4 @@
 * 로또 번호 중복 체크 테스트 및 로직 추가
 * 생성자 파라미터에 구분자 추가
 * 일급 컬렉션 매핑 (List<Lotto> -> Lottos)
+* Lotto, LottoNum 조합해 당첨번호 책임지는 WinnerLotto 분리 

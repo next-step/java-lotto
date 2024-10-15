@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.service.LottoGame;
 import lotto.enums.Rank;
+import lotto.service.LottoGame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,11 @@ public class LottoResult {
                 .count();
     }
 
-    public static LottoResult getLottoResult(Lottos lottos, Lotto winner, LottoNum bonusNumber) {
+    public static LottoResult getLottoResult(Lottos lottos, WinnerLotto winnerLotto) {
         List<Rank> result = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            int matchedCount = lotto.compareWinningNumber(winner);
-            result.add(Rank.getRank(matchedCount, lotto.isMatchBonus(bonusNumber)));
+            int matchedCount = winnerLotto.compareWinningNumber(lotto);
+            result.add(Rank.getRank(matchedCount, winnerLotto.isMatchBonus(lotto)));
         }
         return new LottoResult(result, lottos.getSize() * LottoGame.LOTTO_PRICE);
     }
