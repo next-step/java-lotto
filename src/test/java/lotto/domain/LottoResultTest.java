@@ -9,39 +9,42 @@ import static lotto.enums.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
+
+    public static final String DELIMITER = ",";
+
     @Test
     @DisplayName("로또 리스트를 받았을 때,수익률 추출")
     void 당첨_금액_수익률() {
-        Lotto lotto1 = new Lotto("1,2,3,4,5,6");
-        Lotto lotto2 = new Lotto("1,2,3,4,5,7");
-        Lotto lotto3 = new Lotto("1,2,3,4,7,8");
-        Lotto lotto4 = new Lotto("1,2,3,7,8,9");
+        Lotto lotto1 = new Lotto("1,2,3,4,5,6", DELIMITER);
+        Lotto lotto2 = new Lotto("1,2,3,4,5,7", DELIMITER);
+        Lotto lotto3 = new Lotto("1,2,3,4,7,8", DELIMITER);
+        Lotto lotto4 = new Lotto("1,2,3,7,8,9", DELIMITER);
         List<Lotto> lottos = List.of(lotto1, lotto2, lotto3, lotto4);
-        Lotto winner = new Lotto("1,2,3,4,5,6");
+        Lotto winner = new Lotto("1,2,3,4,5,6", DELIMITER);
         assertThat(LottoResult.getLottoResult(lottos, winner, new LottoNum(10)).getReturnRate()).isEqualTo(500388.75);
     }
 
     @Test
     @DisplayName("로또 리스트를 받았을 때,당첨 금액 추출")
     void 당첨_금액_추출() {
-        Lotto lotto1 = new Lotto("1,2,3,4,5,6");
-        Lotto lotto2 = new Lotto("1,2,3,4,5,7");
-        Lotto lotto3 = new Lotto("1,2,3,4,7,8");
-        Lotto lotto4 = new Lotto("1,2,3,7,8,9");
+        Lotto lotto1 = new Lotto("1,2,3,4,5,6", DELIMITER);
+        Lotto lotto2 = new Lotto("1,2,3,4,5,7", DELIMITER);
+        Lotto lotto3 = new Lotto("1,2,3,4,7,8", DELIMITER);
+        Lotto lotto4 = new Lotto("1,2,3,7,8,9", DELIMITER);
         List<Lotto> lottos = List.of(lotto1, lotto2, lotto3, lotto4);
-        Lotto winner = new Lotto("1,2,3,4,5,6");
+        Lotto winner = new Lotto("1,2,3,4,5,6", DELIMITER);
         assertThat(LottoResult.getLottoResult(lottos, winner, new LottoNum(7)).getPriceTotal()).isEqualTo(2030055000);
     }
 
     @Test
     @DisplayName("로또 리스트를 받았을 때,당첨 결과 리스트 추출")
     void 로또_리스트로_당첨_결과_생성() {
-        Lotto lotto1 = new Lotto("1,2,3,4,5,6");
-        Lotto lotto2 = new Lotto("1,2,3,4,5,7");
-        Lotto lotto3 = new Lotto("1,2,3,4,7,8");
-        Lotto lotto4 = new Lotto("1,2,3,7,8,9");
+        Lotto lotto1 = new Lotto("1,2,3,4,5,6", DELIMITER);
+        Lotto lotto2 = new Lotto("1,2,3,4,5,7", DELIMITER);
+        Lotto lotto3 = new Lotto("1,2,3,4,7,8", DELIMITER);
+        Lotto lotto4 = new Lotto("1,2,3,7,8,9", DELIMITER);
         List<Lotto> lottos = List.of(lotto1, lotto2, lotto3, lotto4);
-        Lotto winner = new Lotto("1,2,3,4,5,6");
+        Lotto winner = new Lotto("1,2,3,4,5,6", DELIMITER);
         assertThat(LottoResult.getLottoResult(lottos, winner, new LottoNum(20))).isEqualTo(new LottoResult(List.of(FIRST_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK), 4000));
     }
 

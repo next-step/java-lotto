@@ -18,8 +18,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(String lottoNumbers) {
-        this(Arrays.stream(lottoNumbers.split(","))
+    public Lotto(String lottoNumbers, String delimiter) {
+        this(Arrays.stream(lottoNumbers.split(delimiter))
                 .map(LottoNum::new)
                 .collect(Collectors.toList()));
     }
@@ -28,8 +28,8 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
-        Set<LottoNum> lottoSet = new HashSet<>(lottoNumbers);
-        if (lottoSet.size() != 6) {
+        Set<LottoNum> set = new HashSet<>(lottoNumbers);
+        if (set.size() != 6) {
             throw new IllegalArgumentException("로또는 중복된 숫자가 없어야 합니다.");
         }
     }
