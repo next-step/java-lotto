@@ -8,7 +8,6 @@ public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final List<Integer> LOTTO_CANDIDATE_NUMBERS = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
-
     private List<Integer> lottoNumbers;
     private LottoResult lottoResult;
 

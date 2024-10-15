@@ -20,14 +20,14 @@ public class LottoWinningStatistics {
     public static Map<Integer, Integer> getWinningLottoStatistics(List<Lotto> lottos) {
         Map<Integer, Integer> winningLottoCountMap = lottos.stream()
                 .map(Lotto::getMatchCount)
-                .filter(WinningMatchCount.getMatchCounts()::contains)
+                .filter(LottoRank.getMatchCounts()::contains)
                 .collect(Collectors.toMap(
                         matchCount -> matchCount,
                         matchCount -> 1,
                         Integer::sum
                 ));
 
-        for (Integer matchCount : WinningMatchCount.getMatchCounts()) {
+        for (Integer matchCount : LottoRank.getMatchCounts()) {
             winningLottoCountMap.putIfAbsent(matchCount, 0);
         }
 

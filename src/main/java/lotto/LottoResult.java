@@ -9,13 +9,6 @@ public class LottoResult {
         return this.matchCount;
     }
 
-    public int isEqualMatchCount(int matchCount) {
-        if (this.matchCount == matchCount) {
-            return 1;
-        }
-        return 0;
-    }
-
     public int calculateMatchCount(List<Integer> winningNumbers, List<Integer> lottoNumbers) {
         for (int i = 0; i < lottoNumbers.size(); i++) {
             this.matchCount += checkMatchNumber(winningNumbers, lottoNumbers.get(i));
@@ -31,7 +24,7 @@ public class LottoResult {
     }
 
     public int getAmountForWinningLotto() {
-        if (!WinningMatchCount.isWinning(this.matchCount)) {
+        if (!LottoRank.isWinning(this.matchCount)) {
             return 0;
         }
         return determineAmountByMatchCount(this.matchCount);
