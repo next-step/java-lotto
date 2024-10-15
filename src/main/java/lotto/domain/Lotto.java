@@ -4,25 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoGenerationMethod.*;
-
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
-    private final LottoGenerationMethod lottoGenerationMethod;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
-        this(lottoNumbers, AUTO);
-    }
-
-    public Lotto(final List<LottoNumber> lottoNumbers, final LottoGenerationMethod lottoGenerationMethod) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 정확히" + LOTTO_NUMBER_COUNT + "개 여야 합니다.");
         }
 
         this.lottoNumbers = lottoNumbers;
-        this.lottoGenerationMethod = lottoGenerationMethod;
     }
 
     public static Lotto createAutoLotto() {
@@ -45,17 +37,8 @@ public class Lotto {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableList()),
-            MANUAL
+                .collect(Collectors.toUnmodifiableList())
         );
-    }
-
-    public boolean isAutoLotto() {
-        return lottoGenerationMethod == AUTO;
-    }
-
-    public boolean isManualLotto() {
-        return lottoGenerationMethod == MANUAL;
     }
 
     public boolean allMatch(final Lotto otherLotto) {
