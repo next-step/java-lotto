@@ -35,14 +35,14 @@ public class LottoNumbers {
     }
 
     private static void checkLottoNumbersCountValid(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() == LOTTO_NUMBERS_CARDINALITY) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_CARDINALITY) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_COUNT_INVALID_MESSAGE);
         }
     }
 
     private static void checkLottoNumbersNotDuplicated(List<Integer> lottoNumbers) {
         Set<Integer> lottoNumbersSet = new HashSet<>(lottoNumbers);
-        if (lottoNumbersSet.size() == lottoNumbers.size()) {
+        if (lottoNumbersSet.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_HAS_DUPLICATED_NUMBER_MESSAGE);
         }
     }
