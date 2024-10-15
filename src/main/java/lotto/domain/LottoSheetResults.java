@@ -35,4 +35,22 @@ public class LottoSheetResults {
     public Map<LottoNumberMatchCount, LottoSheetMatchCount> getValue() {
         return new HashMap<>(this.lottoSheetResults);
     }
+
+    public int sumCashPrizes() {
+        int totalCashPrizes = 0;
+
+        for (Map.Entry<LottoNumberMatchCount, LottoCashPrize> lottoCashPrizeEntry : LOTTO_CASH_PRIZES.entrySet()) {
+            LottoNumberMatchCount numberMatchCount = lottoCashPrizeEntry.getKey();
+            LottoCashPrize cashPrize = lottoCashPrizeEntry.getValue();
+            LottoSheetMatchCount sheetMatchCount = this.lottoSheetResults
+                    .getOrDefault(
+                            numberMatchCount,
+                            new LottoSheetMatchCount()
+                    );
+
+            totalCashPrizes += cashPrize.getValue() * sheetMatchCount.getValue();
+        }
+
+        return totalCashPrizes;
+    }
 }

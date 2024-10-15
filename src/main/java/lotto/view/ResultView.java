@@ -42,4 +42,8 @@ public class ResultView {
                     numberMatchCount.getValue() + "개 일치 (" + cashPrize.getValue() + "원)- " + sheetMatchCount.getValue() + "개");
         }
     }
+
+    public static void printLottoProfits(int payment, LottoSheetResults lottoSheetResults) {
+        System.out.println("총 수익률은 "+ Math.floor(lottoSheetResults.sumCashPrizes() / (double) payment * 100) / 100 + "입니다.");
+    }
 }

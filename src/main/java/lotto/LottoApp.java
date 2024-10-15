@@ -13,7 +13,8 @@ import static lotto.view.ResultView.*;
 
 public class LottoApp {
     public static void main(String[] args) {
-        int lottoSheetCount = calculateSheetCount(inputPayment());
+        int payment = inputPayment();
+        int lottoSheetCount = calculateSheetCount(payment);
         printLottoSheetCount(lottoSheetCount);
 
         List<LottoSheet> lottoSheets = LottoSheet.create(lottoSheetCount);
@@ -23,6 +24,8 @@ public class LottoApp {
         LottoSheetResults lottoSheetResults = LottoSheetResults.create(
                 winningLottoNumbers, lottoSheets);
         printLottoResults(lottoSheetResults);
+
+        printLottoProfits(payment, lottoSheetResults);
     }
 }
 
