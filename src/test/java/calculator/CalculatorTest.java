@@ -54,4 +54,11 @@ class CalculatorTest {
     assertThat(result).isEqualTo(2);
   }
 
+  @DisplayName("여러 숫자의 복합적 사칙연산이 잘 수행된다.")
+  @Test
+  void complexCalculateCorrectly() {
+    int result = Calculator.calculate("10 + 5 - 5 / 2");
+    assertThat(result).isEqualTo(5);
+  }
+
 }
