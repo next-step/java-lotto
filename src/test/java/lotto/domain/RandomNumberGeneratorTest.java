@@ -14,8 +14,7 @@ class RandomNumberGeneratorTest {
     @ValueSource(ints = {1, 2, 3})
     void count_갯수_만큼_숫자를_생성한다(int count) {
         RandomNumberGenerator generator = new RandomNumberGenerator(new Random());
-        int bound = count;
-        List<Integer> numbers = generator.generate(count, bound);
+        List<Integer> numbers = generator.generate(count, Lottonumber.MIN, Lottonumber.MAX);
 
         assertThat(numbers).hasSize(count);
     }
@@ -26,6 +25,6 @@ class RandomNumberGeneratorTest {
     void 중복된_숫자를_포함하면_안된다(int count) {
         RandomNumberGenerator generator = new RandomNumberGenerator(new Random());
 
-        assertThat(generator.generate(count, count)).hasSize(count);
+        assertThat(generator.generate(count, 1, count)).hasSize(count);
     }
 }

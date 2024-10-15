@@ -11,15 +11,14 @@ public class RandomNumberGenerator {
     private final Random random;
 
     public RandomNumberGenerator(Random random) {
-        this.random = new Random();
+        this.random = random;
     }
 
-    public List<Integer> generate(int count, int bound) {
+    public List<Integer> generate(int count, int lowerBound, int upperBound) {
         Set<Integer> numberSet = new HashSet<>();
 
-        int indexCorrection = 1;
         while(numberSet.size() < count) {
-            numberSet.add(random.nextInt(bound) + indexCorrection);
+            numberSet.add(random.nextInt(upperBound) + lowerBound);
         }
 
         return new ArrayList<>(numberSet);

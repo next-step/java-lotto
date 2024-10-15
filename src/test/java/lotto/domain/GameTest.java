@@ -54,7 +54,7 @@ class GameTest {
         @Test
         void 한_게임에_로또번호는_6개다() {
             RandomNumberGenerator generator = new RandomNumberGenerator(new Random());
-            List<Integer> list = generator.generate(6, 45);
+            List<Integer> list = generator.generate(Game.NUMBER_OF_LOTTONUMBER, Lottonumber.MIN, Lottonumber.MAX);
 
             assertThatNoException().isThrownBy(() -> new Game(list));
         }

@@ -18,7 +18,7 @@ public class Games {
 
         List<Game> games = new ArrayList<>();
         for (int i = 0; i < numberOfGames; i++) {
-            List<Integer> randomNumbers = generator.generate(Game.NUMBER_OF_LOTTONUMBER, Lottonumber.MAX);
+            List<Integer> randomNumbers = generator.generate(Game.NUMBER_OF_LOTTONUMBER, Lottonumber.MIN, Lottonumber.MAX);
             games.add(new Game(randomNumbers));
         }
 
