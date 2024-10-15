@@ -37,8 +37,9 @@ public class LottoWinningStatisticsTest {
         lottoList.add(new Lotto(Arrays.asList(17, 21, 29, 37, 42, 45)));
         lottoList.add(new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44)));
 
+        int bonusNumber = 7;
         lottos = new Lottos(lottoList);
-        lottos.calculateAllMatchCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottos.calculateAllMatchCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
 
         Map<Integer, Integer> winningLottoMap = LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos());
         assertThat(winningLottoMap.get(3)).isEqualTo(1);

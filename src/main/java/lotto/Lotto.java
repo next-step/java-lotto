@@ -12,16 +12,17 @@ public class Lotto {
     private LottoResult lottoResult;
 
     public Lotto() {
-        lottoNumbers = new ArrayList<>();
-        lottoNumbers = generateAutoLottoNumbers();
-        validateLottoNumbers(lottoNumbers);
-        lottoResult = new LottoResult();
+        createLotto(generateAutoLottoNumbers(), new LottoResult());
     }
 
     public Lotto(List<Integer> lottoNumbers) {
+        createLotto(lottoNumbers, new LottoResult());
+    }
+
+    private void createLotto(List<Integer> lottoNumbers, LottoResult lottoResult){
         this.lottoNumbers = lottoNumbers;
         validateLottoNumbers(this.lottoNumbers);
-        lottoResult = new LottoResult();
+        this.lottoResult = lottoResult;
     }
 
     public List<Integer> getLottoNumbers() {
@@ -42,8 +43,8 @@ public class Lotto {
         return LOTTO_CANDIDATE_NUMBERS.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList());
     }
 
-    public int calculateMatchCount(Lotto winningLotto) {
-        return this.lottoResult.calculateMatchCount(winningLotto.getLottoNumbers(), lottoNumbers);
+    public int calculateMatchCount(Lotto winningLotto, int bonusNumber) {
+        return this.lottoResult.calculateMatchCount(winningLotto.getLottoNumbers(), lottoNumbers, bonusNumber);
     }
 
     public int getAmount() {

@@ -9,9 +9,7 @@ public enum LottoRank {
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0)
-    ;
+    FIFTH(3, 5_000);
 
     private int matchCount;
     private int winningAmount;
@@ -27,5 +25,16 @@ public enum LottoRank {
 
     public static boolean isWinning(int matchCount) {
         return getMatchCounts().contains(matchCount);
+    }
+
+    private static LottoRank getLottoRank(int matchCount, boolean isBonusMatch) {
+        if (matchCount == 5) {
+            return isBonusMatch ? SECOND : THIRD;
+        }
+        return Arrays.stream(LottoRank.values()).filter(d -> d.matchCount == matchCount).findFirst().get();
+    }
+
+    public static int determineAmountByMatchCount(int matchCount, boolean isBonusMatch) {
+        return getLottoRank(matchCount, isBonusMatch).winningAmount;
     }
 }

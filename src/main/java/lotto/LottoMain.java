@@ -12,10 +12,11 @@ public class LottoMain {
         System.out.println();
         Lotto winningLotto = LottoInputView.inputWinningNumbers();
         int bonusNumber = LottoInputView.inputBonusNumber(winningLotto.getLottoNumbers());
-        lottos.calculateAllMatchCount(winningLotto);
+        lottos.calculateAllMatchCount(winningLotto, bonusNumber);
 
         System.out.println();
-        LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos()));
+        //todo
+//        LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos()));
         LottoResultView.printLottoYield(LottoWinningStatistics.calculateRateOfReturn(LottoWinningStatistics.calculateTotalWinningAmount(lottos.getLottos()), paidAmount));
     }
 }
