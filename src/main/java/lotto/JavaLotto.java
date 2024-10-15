@@ -40,7 +40,7 @@ public class JavaLotto {
         winningStatistic.calculateStatistic();
 
         resultView.printResult(winningStatistic.getStatistic());
-        resultView.printProfit(winningStatistic.calculateProfit(amount, prize));
+        resultView.printProfit(winningStatistic.calculateProfit(prize, amount));
 
     }
 
