@@ -23,6 +23,10 @@ public class LottoNumbers {
         this.lottoNumbers = temporary;
     }
 
+    public LottoNumbers(String[] strings) {
+        this(Arrays.stream(strings).map(LottoNumber::new).collect(Collectors.toList()));
+    }
+
     public LottoNumbers(Integer... numbers) {
         this(Arrays.stream(numbers).map(LottoNumber::new).collect(Collectors.toList()));
     }
