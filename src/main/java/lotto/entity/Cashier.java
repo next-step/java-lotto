@@ -1,4 +1,4 @@
-package lotto;
+package lotto.entity;
 
 public class Cashier {
     public static final int LOTTO_TICKET_PRICE = 1000;

@@ -1,4 +1,6 @@
-package lotto;
+package lotto.view;
+
+import lotto.entity.PrizePolicy;
 
 import java.util.Map;
 
@@ -10,7 +12,7 @@ public class ResultView {
     public int printTotalResult(Map<Integer, Integer> matchingResult) {
         int totalPrizeMoney = 0;
         for (int i = 3; i <= 6; i++) {
-            int matchingTicketCount = matchingResult.getOrDefault(i, 0); // 기본값 0L
+            int matchingTicketCount = matchingResult.getOrDefault(i, 0);
             long prize = PrizePolicy.fromMatchCount(i);
             System.out.println(i + "개 일치 - (" + prize + "원) - " + matchingTicketCount + "개");
 

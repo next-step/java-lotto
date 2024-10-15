@@ -1,5 +1,11 @@
 package lotto;
 
+import lotto.entity.Cashier;
+import lotto.entity.Lotto;
+import lotto.controller.LottoMachine;
+import lotto.view.InputView;
+import lotto.view.ResultView;
+
 import java.util.List;
 import java.util.Map;
 

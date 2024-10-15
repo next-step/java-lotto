@@ -1,4 +1,6 @@
-package lotto;
+package lotto.controller;
+
+import lotto.entity.Lotto;
 
 import java.util.*;
 import java.util.stream.Collectors;
