@@ -17,7 +17,7 @@ public class Money {
         }
     }
 
-    private static boolean isLessThanZero(long amount) {
+    private boolean isLessThanZero(long amount) {
         return amount < 0;
     }
 
