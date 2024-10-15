@@ -54,14 +54,15 @@ public class ResultView {
 
     private static void printRank(LottoRank rank, LottoResults lottoResults) {
         if (rank != LottoRank.NONE && rank != LottoRank.SECOND) {
-            System.out.printf(PRINT_RANK_LIST, rank.getMatchCount(), rank.getPrizeMoney(),
+            System.out.printf(PRINT_RANK_LIST, rank.getMatchCounts().get(0), rank.getPrizeMoney(),
                     lottoResults.getPrizeCountByRank(rank));
         }
         if (rank == LottoRank.SECOND) {
-            System.out.printf(PRINT_SENCOND_RANK, rank.getMatchCount(), rank.getPrizeMoney(),
+            System.out.printf(PRINT_SENCOND_RANK, rank.getMatchCounts().get(0), rank.getPrizeMoney(),
                     lottoResults.getPrizeCountByRank(rank));
         }
     }
+
 
     public static void printRatio(String ratio) {
         System.out.printf(PRINT_RATIO, ratio);

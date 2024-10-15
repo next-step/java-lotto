@@ -15,6 +15,7 @@ public class Lotto {
     private static final String IS_DUPLICATE_NUMBER = "중복된 번호가 있습니다.";
     private static final String INPUT_IS_NOT_NUMBER = "입력된 값이 숫자가 아닙니다.";
     private final List<LottoNumber> lottoNumbers;
+    public static final int LOTTO_SIZE = 6;
 
     public Lotto(List<Integer> lottoNumbers) {
         validateLotto(lottoNumbers);
@@ -26,20 +27,18 @@ public class Lotto {
     }
 
     public Lotto(String[] inputNumbers) {
-        List<Integer> lottoNumbers = splitInput(inputNumbers);
-        validateLotto(lottoNumbers);
-        this.lottoNumbers = makeLotto(lottoNumbers);
+        this(splitInput(inputNumbers));
     }
 
     private List<LottoNumber> makeLotto(List<Integer> lottoNumbers) {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
         for (int number : makeSortLotto(lottoNumbers)) {
-            lottoNumberList.add(new LottoNumber(number));
+            lottoNumberList.add(LottoNumber.of(number));
         }
         return lottoNumberList;
     }
 
-    private List<Integer> splitInput(String[] inputNumbers) {
+    private static List<Integer> splitInput(String[] inputNumbers) {
         List<Integer> numbers = new ArrayList<>();
         for (String number : inputNumbers) {
             numbers.add(convertStringToInt(number));
@@ -47,7 +46,7 @@ public class Lotto {
         return numbers;
     }
 
-    private int convertStringToInt(String input) {
+    private static int convertStringToInt(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException ex) {
@@ -61,7 +60,7 @@ public class Lotto {
     }
 
     private void validateLottoSetSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(IS_NOT_LOTTO_SIZE);
         }
     }
@@ -88,7 +87,7 @@ public class Lotto {
 
 
     public boolean isNumberContain(int number) {
-        return lottoNumbers.contains(new LottoNumber(number));
+        return lottoNumbers.contains(LottoNumber.of(number));
     }
 
     public void validateDuplicate(int number) {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.domain.Lotto.LOTTO_SIZE;
 import static lotto.domain.LottoNumber.generateAutoLottoNumbers;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class LottoGame {
     private List<Lotto> generateLotto(int count) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoList.add(new Lotto(generateAutoLottoNumbers()));
+            lottoList.add(new Lotto(generateAutoLottoNumbers(LOTTO_SIZE)));
         }
         return lottoList;
     }
