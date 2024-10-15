@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 public class Game {
 
+    public static final int PRICE = 1000;
+    public static final int NUMBER_OF_LOTTONUMBER = 6;
+
     private final List<Lottonumber> lottonumbers;
 
     public Game(List<Integer> numbers) {

@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Lottonumber {
 
-    private static final int MININUM = 1;
-    private static final int MAXIMUM = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
     private final int number;
 
     public Lottonumber(int number) {
-        if (number < MININUM || number > MAXIMUM) {
+        if (number < MIN || number > MAX) {
             throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 사용할 수 있습니다.");
         }
 
