@@ -24,11 +24,17 @@ public enum PrizePolicy {
         return matchCount;
     }
 
-    public static int fromMatchCount(int matchCount) {
+//    public static int fromMatchCount(int matchCount) {
+//        return Arrays.stream(PrizePolicy.values())
+//                .filter(prizePolicy -> prizePolicy.getMatchCount() == matchCount)
+//                .findFirst()
+//                .map(PrizePolicy::getPrize)
+//                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 매칭 숫자: " + matchCount));
+//    }
+    public static PrizePolicy fromMatchCount(int matchCount) {
         return Arrays.stream(PrizePolicy.values())
                 .filter(prizePolicy -> prizePolicy.getMatchCount() == matchCount)
                 .findFirst()
-                .map(PrizePolicy::getPrize)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 매칭 숫자: " + matchCount));
     }
 }

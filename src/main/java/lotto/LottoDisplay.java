@@ -1,9 +1,9 @@
 package lotto;
 
 import lotto.entity.Cashier;
-import lotto.entity.Lotto;
 import lotto.controller.LottoMachine;
 import lotto.entity.Lottos;
+import lotto.entity.PrizePolicy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -33,7 +33,7 @@ public class LottoDisplay {
         System.out.println("---------");
 
         List<Integer> matchingCountResult = lottoMachine.checkMatchingNumber(inputWinningNumbers);
-        Map<Integer, Integer> matchingResult = lottoMachine.winningResult(matchingCountResult);
+        Map<PrizePolicy, Integer> matchingResult = lottoMachine.winningResult(matchingCountResult);
 
         int totalPrizeMoney = resultView.printTotalResult(matchingResult);
         resultView.printRateOfReturn(lottoMachine.rateOfReturnResult(totalMoney, totalPrizeMoney));

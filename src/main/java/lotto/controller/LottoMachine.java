@@ -5,11 +5,13 @@ import lotto.entity.Lotto;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import lotto.entity.LottoNumber;
 import lotto.entity.Lottos;
 import lotto.entity.PrizePolicy;
 
 public class LottoMachine {
+    public static final int MIN_MATCH_COUNT = 3;
     private Lottos totalLottoTicket;
 
     public LottoMachine() {
@@ -48,13 +50,19 @@ public class LottoMachine {
         return matchingLottoTickets;
     }
 
-    public Map<Integer, Integer> winningResult(List<Integer> matchingLottoTickets) {
-        Map<Integer, Integer> winLottoTicket = new HashMap<>();
+    public Map<PrizePolicy, Integer> winningResult(List<Integer> matchingLottoTickets) {
+        Map<PrizePolicy, Integer> winLottoTicket = new HashMap<>();
         for (Integer matchCount : matchingLottoTickets) {
-            //winLottoTicket.put(PrizePolicy.fromMatchCount(matchCount), winLottoTicket.getOrDefault(PrizePolicy.fromMatchCount(matchCount), 0) + 1);
-            winLottoTicket.put(matchCount, winLottoTicket.getOrDefault(matchCount, 0) + 1);
+            inputWinLottoTicket(winLottoTicket, matchCount);
         }
         return winLottoTicket;
+    }
+
+    private static void inputWinLottoTicket(Map<PrizePolicy, Integer> winLottoTicket, Integer matchCount) {
+        if(matchCount >= MIN_MATCH_COUNT) {
+            PrizePolicy prizePolicy = PrizePolicy.fromMatchCount(matchCount);
+            winLottoTicket.put(prizePolicy, winLottoTicket.getOrDefault(prizePolicy, 0) + 1);
+        }
     }
 
     public double rateOfReturnResult(int totalMoney, int totalPrizeMoney) {
