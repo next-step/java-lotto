@@ -61,4 +61,11 @@ class CalculatorTest {
     assertThat(result).isEqualTo(5);
   }
 
+  @DisplayName("연산자 자리에 +,-,*,/ 이외의 값이 존재할 경우 예외를 발생한다.")
+  @Test
+  void operatorInvalid() {
+    assertThatThrownBy(() -> {
+      Calculator.calculate("3 + 3 # 2");
+    }).isInstanceOf(IllegalArgumentException.class);
+  }
 }
