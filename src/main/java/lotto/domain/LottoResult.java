@@ -35,13 +35,13 @@ public class LottoResult {
                 .count();
     }
 
-    public static LottoResult getLottoResult(List<Lotto> lottos, Lotto winner, LottoNum bonusNumber) {
+    public static LottoResult getLottoResult(Lottos lottos, Lotto winner, LottoNum bonusNumber) {
         List<Rank> result = new ArrayList<>();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             int matchedCount = lotto.compareWinningNumber(winner);
             result.add(Rank.getRank(matchedCount, lotto.isMatchBonus(bonusNumber)));
         }
-        return new LottoResult(result, lottos.size() * LottoGame.LOTTO_PRICE);
+        return new LottoResult(result, lottos.getSize() * LottoGame.LOTTO_PRICE);
     }
 
     @Override

@@ -2,9 +2,9 @@ package lotto.service;
 
 import lotto.domain.AutoLotto;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoGame {
@@ -22,7 +22,7 @@ public class LottoGame {
         return INSTANCE;
     }
 
-    public List<Lotto> buy(int priceTotal) {
+    public Lottos buy(int priceTotal) {
         if (priceTotal < LOTTO_PRICE) {
             throw new IllegalStateException("금액이 부족합니다.");
         }
@@ -31,7 +31,7 @@ public class LottoGame {
             result.add(AutoLotto.getInstance()
                     .getLotto());
         }
-        return Collections.unmodifiableList(result);
+        return new Lottos(result);
     }
 
 }

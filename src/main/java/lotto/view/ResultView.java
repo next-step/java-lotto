@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNum;
 import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
 import lotto.enums.Rank;
 
 import java.util.List;
@@ -25,11 +26,11 @@ public class ResultView {
         return INSTANCE;
     }
 
-    public void priceLottoStatus(List<Lotto> lottos) {
+    public void priceLottoStatus(Lottos lottos) {
 
-        String sb = lottos.size() + "개를 구매했습니다." +
+        String sb = lottos.getSize() + "개를 구매했습니다." +
                 System.lineSeparator() +
-                lottos.stream()
+                lottos.getLottos().stream()
                         .map(lotto -> "[" + getLottoNumber(lotto) + "]")
                         .collect(Collectors.joining(System.lineSeparator()));
 
