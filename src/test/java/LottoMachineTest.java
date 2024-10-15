@@ -17,7 +17,7 @@ public class LottoMachineTest {
         int totalPrice = 2000;
         LottoNumberGenerate lottoNumberGenerate = new MockLottoNumberGeneratorImpl();
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoNumberGenerate);
-        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
+        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice / LottoMachine.PRICE_OF_A_LOTTO);
 
         //when
         LottoMachine lottoMachine = new LottoMachine(
@@ -43,7 +43,7 @@ public class LottoMachineTest {
         int totalPrice = 2000;
         LottoNumberGenerate lottoNumberGenerate = new MockLottoNumberGeneratorImpl();
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoNumberGenerate);
-        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
+        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice / LottoMachine.PRICE_OF_A_LOTTO);
 
         //when
         LottoMachine lottoMachine = new LottoMachine(
@@ -79,7 +79,7 @@ public class LottoMachineTest {
         final Integer bonusNumber = 7;
         LottoNumberGenerate lottoNumberGenerate = new MockLottoNumberGeneratorImplFroBonusNumber();
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoNumberGenerate);
-        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
+        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice / LottoMachine.PRICE_OF_A_LOTTO);
 
         //when
         LottoMachine lottoMachine = new LottoMachine(

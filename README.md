@@ -28,3 +28,4 @@
 * 로또 번호 정렬 출력 [X]
 * PRIZE5PLUS renaming [X]
 * checkBonusNumber 개선 [X]
+* 수동 번호 입력 기능 [X]

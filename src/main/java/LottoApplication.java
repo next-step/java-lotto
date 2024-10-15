@@ -4,15 +4,24 @@ import model.RandomLottoNumberGenerateImpl;
 import view.InputView;
 import view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
         int money = InputView.getPaidMoney();
-        ResultView.printNumberOfLotto(money, LottoMachine.PRICE_OF_A_LOTTO);
+
+        int countOfManualLottoNumbers = InputView.getCountOfManualLottoNumbers();
+        List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(countOfManualLottoNumbers);
 
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(new RandomLottoNumberGenerateImpl());
-        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(money, LottoMachine.PRICE_OF_A_LOTTO);
+        int countOfRandomLottoNumbers = money / LottoMachine.PRICE_OF_A_LOTTO - countOfManualLottoNumbers;
+        List<List<Integer>> randomLottoNumbers = lottoNumberGenerator.run(countOfRandomLottoNumbers);
+
+        List<List<Integer>> lottoNumbers = new ArrayList<>(manualLottoNumbers);
+        lottoNumbers.addAll(randomLottoNumbers);
+
+        ResultView.printNumberOfLotto(countOfRandomLottoNumbers, countOfManualLottoNumbers);
         ResultView.printLottoNumbers(lottoNumbers);
 
         List<Integer> winningNumbers = InputView.getWinningNumbers();

@@ -36,6 +36,6 @@ public class LottoStatistics {
 
     private double calculateNetIncome(int totalPrice, int totalIncome) {
         double netIncome = ((double) totalIncome / (double) totalPrice);
-        return Double.parseDouble(String.format("%.2f", netIncome));
+        return Math.floor(netIncome * 100) / 100;
     }
 }

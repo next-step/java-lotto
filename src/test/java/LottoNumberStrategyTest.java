@@ -19,7 +19,7 @@ public class LottoNumberStrategyTest {
         final int totalPrice = 6000;
 
         //when
-        List<List<Integer>> numbers = lottoNumberGenerator.run(totalPrice, priceOfALotto);
+        List<List<Integer>> numbers = lottoNumberGenerator.run(totalPrice / priceOfALotto);
 
 
         //then

@@ -12,12 +12,9 @@ public class ResultView {
         System.out.println("계산 결과 : " + result);
     }
 
-    public static void printNumberOfLotto(int totalPrice, int priceOfALotto) {
-        if (priceOfALotto <= 0) {
-            throw new IllegalArgumentException("priceOfALotto must be greater than 0");
-        }
-        int cnt = totalPrice / priceOfALotto;
-        System.out.println(cnt + "개를 구매했습니다.");
+    public static void printNumberOfLotto(int countOfRandomLotto, int countOfManualLotto) {
+        System.out.println();
+        System.out.println("수동으로 " + countOfManualLotto + "장, 자동으로 " + countOfRandomLotto + "개를 구매했습니다.");
     }
 
     public static void printLottoNumbers(List<List<Integer>> numbers) {
@@ -30,6 +27,7 @@ public class ResultView {
     }
 
     public static void printLottoStatistics(LottoStatistics lottoStatistics) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         StringBuilder sb = new StringBuilder();
