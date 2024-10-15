@@ -52,7 +52,7 @@ public class LottoTicket {
     private void checkIfSorted(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> sortedLottoNumbers = getSortedLottoNumbers(lottoNumbers);
 
-        if (!sortedLottoNumbers.equals(lottoNumbers)) {
+        if (isNotEqual(lottoNumbers, sortedLottoNumbers)) {
             throw new UnsortedLottoNumbersException();
         }
     }
@@ -61,6 +61,10 @@ public class LottoTicket {
         return lottoNumbers.stream()
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    private boolean isNotEqual(List<LottoNumber> lottoNumbers, List<LottoNumber> sortedLottoNumbers) {
+        return !sortedLottoNumbers.equals(lottoNumbers);
     }
 
     @Override
