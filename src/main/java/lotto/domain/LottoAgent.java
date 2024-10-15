@@ -12,12 +12,13 @@ public class LottoAgent {
         return new LottoAgent();
     }
 
-    public void buy(int price, LottoNumberSelectionStrategy selectionStrategy) {
+    public void buy(int price, int manualLottoCount, LottoNumberSelectionStrategy selectionStrategy) {
         int buyingCount = price / Lotto.LOTTO_PRICE;
         for (int i = 0; i < buyingCount; i++) {
             buyLotto(i, selectionStrategy);
         }
     }
+
 
     private void buyLotto(int id, LottoNumberSelectionStrategy selectionStrategy) {
         purchasedLottos = purchasedLottos.add(Lotto.of(id, selectionStrategy));

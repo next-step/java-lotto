@@ -25,7 +25,8 @@ public class Main {
     private static PurchasedLottos buyLottos() {
         int price = InputView.priceInput();
         LottoAgent lottoAgent = LottoAgent.newInstance();
-        lottoAgent.buy(price, RandomSelectionStrategy.getInstance());
+        int manualLottoCount = InputView.manualLottoCountInput();
+        lottoAgent.buy(price, manualLottoCount, RandomSelectionStrategy.getInstance());
         PurchasedLottos purchasedLottos = lottoAgent.getPurchasedLottos();
         ResultView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
