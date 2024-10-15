@@ -34,14 +34,14 @@ public class LottoTicket {
 
     private void checkSizeOfLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (isInvalidSizeOfLotto(lottoNumbers)) {
-            throw new InvalidSizeOfLottoException("로또 번호 갯수 오류입니다.");
+            throw new InvalidSizeOfLottoException();
         }
     }
 
     private void checkIfDuplicateExists(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(lottoNumbers);
         if (isNotSameSize(lottoNumbers, uniqueLottoNumbers)) {
-            throw new DuplicateLottoNumberException("중복된 로또 번호가 존재합니다.");
+            throw new DuplicateLottoNumberException();
         }
     }
 
@@ -53,7 +53,7 @@ public class LottoTicket {
         List<LottoNumber> sortedLottoNumbers = getSortedLottoNumbers(lottoNumbers);
 
         if (!sortedLottoNumbers.equals(lottoNumbers)) {
-            throw new UnsortedLottoNumbersException("로또 번호는 정렬된 상태여야 합니다.");
+            throw new UnsortedLottoNumbersException();
         }
     }
 
