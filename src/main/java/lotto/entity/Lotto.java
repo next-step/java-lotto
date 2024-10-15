@@ -39,12 +39,8 @@ public class Lotto {
     }
 
     public int matchCount(Lotto winningLotto) {
-        List<Integer> winningNumbers = winningLotto.getLottoNumbers().stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
-
         return (int) this.lottoNumbers.stream()
-                .filter(lottoNumber -> winningNumbers.contains(lottoNumber.getNumber()))
+                .filter(winningLotto.getLottoNumbers()::contains)
                 .count();
     }
 }
