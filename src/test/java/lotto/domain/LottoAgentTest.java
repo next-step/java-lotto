@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.PurchasedLottosDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,7 +15,7 @@ public class LottoAgentTest {
     void buyCardinalityTest(int price) {
         LottoAgent agent = LottoAgent.newInstance();
         agent.buy(price, () -> LottoNumbers.valueOf(List.of(1, 3, 5, 7, 9, 11)));
-        PurchasedLottosDTO lottos = agent.getPurchasedLottos();
-        assertThat(lottos.getPurchasedLottos().size()).isEqualTo(price / 1000);
+        PurchasedLottos lottos = agent.getPurchasedLottos();
+        assertThat(lottos.size()).isEqualTo(price / 1000);
     }
 }

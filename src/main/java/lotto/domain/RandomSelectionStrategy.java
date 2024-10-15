@@ -13,7 +13,7 @@ public class RandomSelectionStrategy implements LottoNumberSelectionStrategy {
 
     private static ArrayList<Integer> createLottoNumberContainer() {
         ArrayList<Integer> container = new ArrayList<>();
-        for (int i = Lotto.MIN_BOUND; i < Lotto.MAX_BOUND + 1; i++) {
+        for (int i = LottoNumber.MIN_BOUND; i < LottoNumber.MAX_BOUND + 1; i++) {
             container.add(i);
         }
         return container;
@@ -22,6 +22,6 @@ public class RandomSelectionStrategy implements LottoNumberSelectionStrategy {
     @Override
     public LottoNumbers select() {
         Collections.shuffle(LOTTO_NUMBER_CONTAINERS);
-        return LottoNumbers.valueOf(LOTTO_NUMBER_CONTAINERS.subList(0, Lotto.LOTTO_NUMBERS_CARDINALITY));
+        return LottoNumbers.valueOf(LOTTO_NUMBER_CONTAINERS.subList(0, LottoNumbers.LOTTO_NUMBERS_CARDINALITY));
     }
 }

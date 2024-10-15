@@ -1,21 +1,27 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
-import lotto.dto.LottoMatchInfoDTO;
-import lotto.dto.LottoMatchInfosDTO;
-import lotto.dto.LottoStatisticsDTO;
-import lotto.dto.PurchasedLottosDTO;
+import lotto.domain.LottoReward;
+import lotto.domain.LottoRewardCountMap;
+import lotto.domain.PurchasedLottos;
 
 import java.util.List;
 
 public class ResultView {
     private static final String LOTTO_STATISTICS_TITLE = "당첨 통계";
     private static final String DASH_LINE = "---------";
+    private static final List<LottoReward> PRINT_TARGET_REWARDS = List.of(
+            LottoReward.FIFTH_PLACE,
+            LottoReward.FORTH_PLACE,
+            LottoReward.THIRD_PLACE,
+            LottoReward.SECOND_PLACE,
+            LottoReward.FIRST_PLACE
+    );
 
-    public static void printPurchasedLottos(PurchasedLottosDTO purchasedLottosDTO) {
-        List<Lotto> purchasedLottos = purchasedLottosDTO.getPurchasedLottos();
-        printPurchasedLottosCount(purchasedLottos);
-        printPurchasedLottoNumbers(purchasedLottos);
+    public static void printPurchasedLottos(PurchasedLottos purchasedLottos) {
+        List<Lotto> purchasedLottoList = purchasedLottos.value();
+        printPurchasedLottosCount(purchasedLottoList);
+        printPurchasedLottoNumbers(purchasedLottoList);
     }
 
     private static void printPurchasedLottosCount(List<Lotto> purchasedLottos) {
@@ -28,12 +34,10 @@ public class ResultView {
         }
     }
 
-    public static void printLottoStatistics(LottoStatisticsDTO lottoStatistics) {
+    public static void printStatisticsSectionHeader() {
         addBlankLine();
         printStatisticsTitle();
         addDashLine();
-        printMatchInfos(lottoStatistics.getMatchInfosDTO());
-        printPercentageRateOfReturn(lottoStatistics.getPercentageRateOfReturn());
     }
 
     private static void addBlankLine() {
@@ -48,14 +52,13 @@ public class ResultView {
         System.out.println(DASH_LINE);
     }
 
-    private static void printMatchInfos(LottoMatchInfosDTO matchInfosDTO) {
-        List<LottoMatchInfoDTO> matchInfoDTOs = matchInfosDTO.getMatchInfoDTOs();
-        for (LottoMatchInfoDTO matchInfoDTO : matchInfoDTOs) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", matchInfoDTO.getMatchCount(), matchInfoDTO.getReward(), matchInfoDTO.getLottoNum());
+    public static void printRewardCountMap(LottoRewardCountMap rewardCountMap) {
+        for (LottoReward reward : PRINT_TARGET_REWARDS) {
+            System.out.printf("%s- %d개\n", reward.getDescription(), rewardCountMap.getRewardCount(reward));
         }
     }
 
-    private static void printPercentageRateOfReturn(double percentageRateOfReturn) {
+    public static void printPercentageRateOfReturn(double percentageRateOfReturn) {
         System.out.printf("총 수익률은 %.2f입니다.\n", percentageRateOfReturn);
     }
 }
