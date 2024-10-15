@@ -7,10 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoTicketGenerator {
-
-    private LottoTicketGenerator() {
-    }
+public abstract class LottoTicketGenerator {
 
     public static LottoTickets generateLottoTickets(int availableLottoTickets, LottoNumberGenerator generator) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
