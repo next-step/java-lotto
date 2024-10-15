@@ -68,4 +68,12 @@ class CalculatorTest {
       Calculator.calculate("3 + 3 # 2");
     }).isInstanceOf(IllegalArgumentException.class);
   }
+
+  @DisplayName("피연산자가 숫자가 아닐 경우 예외를 발생한다.")
+  @Test
+  void operandInvalid() {
+    assertThatThrownBy(() -> {
+      Calculator.calculate("1 + 2 - a");
+    }).isInstanceOf(IllegalArgumentException.class);
+  }
 }
