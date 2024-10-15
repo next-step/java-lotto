@@ -1,10 +1,12 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum PrizePolicy {
-    THREE(3, 5000),   // 3개 일치
-    FOUR(4, 50000),   // 4개 일치
-    FIVE(5, 1500000), // 5개 일치
-    SIX(6, 2000000000); // 6개 일치
+    THREE(3, 5_000),
+    FOUR(4, 50_000),
+    FIVE(5, 1_500_000),
+    SIX(6, 2_000_000_000);
 
     private final int matchCount;
     private final int prize;
@@ -23,11 +25,10 @@ public enum PrizePolicy {
     }
 
     public static int fromMatchCount(int matchCount) {
-        for (PrizePolicy policy : PrizePolicy.values()) {
-            if (policy.getMatchCount() == matchCount) {
-                return policy.getPrize();
-            }
-        }
-        throw new IllegalArgumentException("유효하지 않은 매칭 숫자: " + matchCount);
+        return Arrays.stream(PrizePolicy.values())
+                .filter(prizePolicy -> prizePolicy.getMatchCount() == matchCount)
+                .findFirst()
+                .map(PrizePolicy::getPrize)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 매칭 숫자: " + matchCount));
     }
 }
