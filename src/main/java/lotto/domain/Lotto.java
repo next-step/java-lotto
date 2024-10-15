@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
@@ -12,6 +13,11 @@ public class Lotto {
     public Lotto(final Set<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto from(final Set<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = convertToLottoNumber(numbers);
+        return new Lotto(lottoNumbers);
     }
 
     private void validateSize(final Set<LottoNumber> lottoNumbers) {
@@ -29,7 +35,14 @@ public class Lotto {
                 .filter(winningNumber.lottoNumbers::contains)
                 .count();
     }
+
     public boolean hasNumber(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    private static Set<LottoNumber> convertToLottoNumber(final Set<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 }

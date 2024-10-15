@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
@@ -22,12 +23,6 @@ public class LottoApplication {
     }
 
     private static WinningNumber generateWinningNumber() {
-        return new WinningNumber(convertToLottoNumber(), InputView.inputBonusNumber());
-    }
-
-    private static Set<LottoNumber> convertToLottoNumber() {
-        return InputView.inputWinningNumber().stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+        return new WinningNumber(InputView.inputWinningNumber(), InputView.inputBonusNumber());
     }
 }
