@@ -1,5 +1,7 @@
 package lotto.number;
 
+import lotto.exception.LottoIllegalArgumentException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +11,7 @@ import java.util.stream.Collectors;
 public class LottoBalls {
     public static final int NUMBER_OF_BALLS = 6;
 
-    private final Set<LottoNumber> balls;
+    private final List<LottoNumber> balls;
 
     public LottoBalls(List<Integer> balls) {
         this(new HashSet<>(balls));
@@ -19,14 +21,15 @@ public class LottoBalls {
         validateNumberOfLottoNumbers(balls);
         this.balls = balls.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableSet());
+                .sorted()
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private void validateNumberOfLottoNumbers(Set<Integer> lottoNumbers) {
         if (lottoNumbers.size() == NUMBER_OF_BALLS) {
             return;
         }
-        throw new IllegalArgumentException("로또 번호는 6개 입니다.");
+        throw LottoIllegalArgumentException.INVALID_LOTTO_NUMBERS_COUNT;
     }
 
     public int countMatchedNumber(LottoBalls otherBalls) {

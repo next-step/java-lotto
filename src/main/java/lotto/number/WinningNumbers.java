@@ -1,5 +1,7 @@
 package lotto.number;
 
+import lotto.exception.LottoIllegalArgumentException;
+
 import java.util.Objects;
 
 public class WinningNumbers {
@@ -8,7 +10,7 @@ public class WinningNumbers {
 
     public WinningNumbers(LottoBalls lottoBalls, LottoNumber bonusNumber) {
         if (lottoBalls.match(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 숫자는 당첨 숫자에 포함된 수를 사용할 수 없습니다.");
+            throw LottoIllegalArgumentException.DUPLICATED_BONUS_NUMBER;
         }
         this.winNumbers = lottoBalls;
         this.bonusNumber = bonusNumber;

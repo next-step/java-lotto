@@ -1,18 +1,20 @@
 package lotto.prize;
 
+import lotto.game.LottoCount;
+
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import static lotto.game.LottoMachine.LOTTO_PRICE;
 
 public class PrizeCountMap {
     private static final int ZERO = 0;
 
-    private final Map<LottoPrize, Integer> prizeCountMap;
+    private final EnumMap<LottoPrize, Integer> prizeCountMap;
 
     public PrizeCountMap() {
-        prizeCountMap = new TreeMap<>();
+        prizeCountMap = new EnumMap<>(LottoPrize.class);
         initPrizeCountMap();
     }
 
@@ -26,15 +28,15 @@ public class PrizeCountMap {
         prizeCountMap.put(prize, prizeCountMap.getOrDefault(prize, ZERO) + 1);
     }
 
-    public double calculateProfitRate(int lottoTicketCount) {
-        int totalCost = lottoTicketCount * LOTTO_PRICE;
-        int totalPrize = calculateTotalPrize();
+    public double calculateProfitRate(LottoCount lottoTicketCount) {
+        long totalCost = (long) lottoTicketCount.getValue() * LOTTO_PRICE;
+        long totalPrize = calculateTotalPrize();
         return (double) totalPrize / totalCost;
     }
 
-    private int calculateTotalPrize() {
+    private long calculateTotalPrize() {
         return prizeCountMap.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getPrizeAmount() * entry.getValue())
+                .mapToLong(entry -> (long) entry.getKey().getPrizeAmount() * entry.getValue())
                 .sum();
     }
 

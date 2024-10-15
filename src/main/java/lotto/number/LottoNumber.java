@@ -1,8 +1,10 @@
 package lotto.number;
 
+import lotto.exception.LottoIllegalArgumentException;
+
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber  implements Comparable<LottoNumber>  {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
@@ -10,7 +12,7 @@ public class LottoNumber {
 
     public LottoNumber(Integer number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 " + MIN_LOTTO_NUMBER + "부터 " + MAX_LOTTO_NUMBER + "까지 입니다.");
+            throw LottoIllegalArgumentException.INVALID_LOTTO_NUMBERS_RANGE;
         }
 
         this.number = number;
@@ -32,5 +34,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return number.toString();
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.number, o.number);
     }
 }

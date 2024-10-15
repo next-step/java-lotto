@@ -1,15 +1,16 @@
 package lotto.game;
 
 
+import lotto.number.LottoBalls;
 import lotto.number.LottoNumber;
 import lotto.number.WinningNumbers;
 import lotto.prize.PrizeCountMap;
 import lotto.prize.PrizeCounter;
-import lotto.number.LottoBalls;
-import lotto.strategy.RandomLottoNumberStrategy;
+import lotto.strategy.AutoLottoNumberStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -20,13 +21,23 @@ public class LottoGame {
     public LottoGame(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
-        this.lottoMachine = new LottoMachine(new RandomLottoNumberStrategy());
+        this.lottoMachine = new LottoMachine(new AutoLottoNumberStrategy());
     }
 
     public void run() {
 
-        int amount = inputView.getAmountFromUser();
-        List<LottoBalls> lottoTickets = lottoMachine.generateTickets(amount);
+        Money amount = inputView.getAmountFromUser();
+
+        LottoCount manualLottoCount = inputView.getManualLottoCountFromUser();
+        lottoMachine.validateManualLottoCount(amount, manualLottoCount);
+
+        List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount);
+
+        List<LottoBalls> lottoTickets = new ArrayList<>();
+        lottoTickets.addAll(lottoMachine.generateManualLottoTicket(manualLottoNumbers));
+
+        LottoCount autoLottoCount = new LottoCount(amount.divideByLottoPrice() - manualLottoNumbers.size());
+        lottoTickets.addAll(lottoMachine.generateAutoLottoTicket(autoLottoCount));
 
         List<Integer> winningNumbersFromUser = inputView.getWinningNumbersFromUser();
         Integer bonusNumberFromUser = inputView.getBonusNumberFromUser();
@@ -37,7 +48,7 @@ public class LottoGame {
 
         resultView.showLottoTickets(lottoTickets);
         resultView.showLottoResult(prizeCountMap);
-        resultView.showLottoProfit(prizeCountMap.calculateProfitRate(lottoTickets.size()));
+        resultView.showLottoProfit(prizeCountMap.calculateProfitRate(new LottoCount(lottoTickets.size())));
     }
 
 }
