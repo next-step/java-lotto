@@ -23,6 +23,12 @@ public class ResultView {
             int count = lottos.getCountByMatchCount(matchCount);
             int prizeMoney = lottos.getPrizeMoneyByMatchCount(matchCount);
             System.out.println(matchCount + "개 일치 " + "(" + prizeMoney + "원)- " + count + "개");
+
+            if (matchCount == 5) {
+                count = lottos.getCountByMatchCount(matchCount, true);
+                prizeMoney = lottos.getPrizeMoneyByMatchCount(matchCount, true);
+                System.out.println(matchCount + "개 일치, 보너스 볼 일치" + "(" + prizeMoney + "원)- " + count + "개");
+            }
         }
     }
 
@@ -40,8 +46,18 @@ public class ResultView {
     private double calculateTotalEarnings(Lottos lottos) {
         double totalEarnings = 0;
         for (int matchCount = LOTTO_MIN_MATCH_COUNT; matchCount <= LOTTO_MAX_MATCH_COUNT; matchCount++) {
-            totalEarnings += lottos.getEarningsByMatchCount(matchCount);
+            totalEarnings += calculateEarningsForMatchCount(lottos, matchCount);
         }
+        return totalEarnings;
+    }
+
+    private double calculateEarningsForMatchCount(Lottos lottos, int matchCount) {
+        double totalEarnings = lottos.getEarningsByMatchCount(matchCount);
+
+        if (matchCount == 5) {
+            totalEarnings += lottos.getEarningsByMatchCount(matchCount, true);
+        }
+
         return totalEarnings;
     }
 
@@ -55,6 +71,13 @@ public class ResultView {
     private void printFormattedReturnRate(double returnRate) {
         DecimalFormat df = new DecimalFormat("0.00");
         System.out.print("총 수익률은 " + df.format(returnRate) + "입니다.");
+
+        if (returnRate < 1) {
+            printLossMessage();
+        }
+    }
+
+    private void printLossMessage() {
         System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

@@ -4,6 +4,8 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoStore {
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
@@ -13,10 +15,10 @@ public class LottoStore {
         Lottos lottos = lottoGenerator.getLottos(lottoAmount);
         resultView.printLottoResult(lottos);
 
-        WinningNumber winningNumber = new WinningNumber(inputView.receiveWinningNumber());
-        LottoNumber bonusNo = inputView.receiveBonusNo();
-        System.out.println("보너스 번호는 " + bonusNo + "입니다.");
-        lottos.calculateLotto(winningNumber);
+        List<LottoNumber> winningNumber = inputView.receiveWinningNumber();
+        LottoNumber bonusNumber = inputView.receiveBonusNo();
+
+        lottos.calculateLotto(new WinningNumber(winningNumber, bonusNumber));
         resultView.printLottoStatistics(lottos, inputView.getPurchasingAmount());
     }
 }

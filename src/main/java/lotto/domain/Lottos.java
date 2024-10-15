@@ -19,20 +19,33 @@ public class Lottos {
     public void calculateLotto(WinningNumber winningNumber) {
         for (Lotto lotto : lottos) {
             int matchCount = winningNumber.matchNumberCount(lotto);
-            lottoStatistics.incrementMatchCount(matchCount);
+            boolean bonusMatched = lotto.checkBonusNumber(winningNumber);
+            lottoStatistics.incrementMatchCount(matchCount, bonusMatched);
         }
     }
 
+    public int getCountByMatchCount(int matchCount, boolean bonusMatched) {
+        return lottoStatistics.getCountByMatchCount(matchCount, bonusMatched);
+    }
+
     public int getCountByMatchCount(int matchCount) {
-        return lottoStatistics.getCountByMatchCount(matchCount);
+        return lottoStatistics.getCountByMatchCount(matchCount, false);
+    }
+
+    public int getPrizeMoneyByMatchCount(int matchCount, boolean bonusMatched) {
+        return lottoStatistics.getPrizeMoney(matchCount, bonusMatched);
     }
 
     public int getPrizeMoneyByMatchCount(int matchCount) {
-        return lottoStatistics.getPrizeMoney(matchCount);
+        return lottoStatistics.getPrizeMoney(matchCount, false);
+    }
+
+    public int getEarningsByMatchCount(int matchCount, boolean bonusMatched) {
+        return lottoStatistics.getEarningsByMatchCount(matchCount, bonusMatched);
     }
 
     public int getEarningsByMatchCount(int matchCount) {
-        return lottoStatistics.getEarningsByMatchCount(matchCount);
+        return lottoStatistics.getEarningsByMatchCount(matchCount, false);
     }
 
     public void addLotto(Lotto lotto) {

@@ -10,7 +10,6 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    // 로또 번호 리스트 반환
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
@@ -21,4 +20,9 @@ public class Lotto {
                 .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
                 .collect(Collectors.joining(", ")) + "]";
     }
+
+    public boolean checkBonusNumber(WinningNumber winningNumber) {
+        return lottoNumbers.contains(winningNumber.getBonusNumber());
+    }
+
 }

@@ -3,10 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    THREE_MATCHES(3, 5000),
-    FOUR_MATCHES(4, 50000),
-    FIVE_MATCHES(5, 1500000),
-    SIX_MATCHES(6, 2000000000),
+    THREE_MATCHES(3, 5_000),
+    FOUR_MATCHES(4, 50_000),
+    FIVE_MATCHES(5, 1_500_000),
+    BONUS_MATCHES(5, 30_000_000),
+    SIX_MATCHES(6, 2_000_000_000),
     NO_MATCH(0, 0);
 
     private final int matchCount;
@@ -17,6 +18,17 @@ public enum LottoRank {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
         this.count = 0;
+    }
+
+    public static LottoRank valueOfMatchCount(int matchCount, boolean bonusMatched) {
+        if (matchCount == 5 && bonusMatched) {
+            return BONUS_MATCHES;
+        }
+
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank.getMatchCount() == matchCount)
+                .findFirst()
+                .orElse(NO_MATCH);
     }
 
     public int getMatchCount() {
@@ -33,12 +45,5 @@ public enum LottoRank {
 
     public void incrementCount() {
         this.count++;
-    }
-
-    public static LottoRank valueOfMatchCount(int matchCount) {
-        return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.getMatchCount() == matchCount)
-                .findFirst()
-                .orElse(NO_MATCH);
     }
 }
