@@ -13,6 +13,7 @@ public class LottoTicket {
 
     public LottoTicket(String numbers) {
         this.numbers = Arrays.stream(parse(numbers))
+                .map(String::trim)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
@@ -52,6 +53,10 @@ public class LottoTicket {
         return numbers;
     }
 
+    public List<String> displayNumbers() {
+        return numbers.stream().map(LottoNumber::getNumber).map(String::valueOf).collect(Collectors.toList());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,6 +72,8 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return numbers + "\n";
+        return "LottoTicket{" +
+                "numbers=" + numbers +
+                '}';
     }
 }

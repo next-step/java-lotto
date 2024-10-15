@@ -13,7 +13,7 @@ public class LottoTickets {
         this.tickets = tickets;
     }
 
-    public LottoTickets(LottoTicket ... ticket){
+    public LottoTickets(LottoTicket... ticket) {
         this.tickets = Arrays.stream(ticket).collect(Collectors.toList());
     }
 
@@ -24,6 +24,10 @@ public class LottoTickets {
     public List<Integer> getHitNumbers(LottoTicket winninglottoTicket) {
         return tickets.stream().map(lottoTicket -> lottoTicket.hitNumber(winninglottoTicket.getNumbers()))
                 .collect(Collectors.toList());
+    }
+
+    public List<LottoTicket> getTickets() {
+        return this.tickets;
     }
 
     @Override
@@ -41,9 +45,8 @@ public class LottoTickets {
 
     @Override
     public String toString() {
-        for(LottoTicket ticket : tickets) {
-            ticket.sortAsc();
-        }
-        return tickets+"";
+        return "LottoTickets{" +
+                "tickets=" + tickets +
+                '}';
     }
 }

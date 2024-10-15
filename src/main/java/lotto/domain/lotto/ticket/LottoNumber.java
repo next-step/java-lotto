@@ -19,7 +19,7 @@ public class LottoNumber {
     }
 
     private int parseInt(String number) {
-        try{
+        try {
             return Integer.parseInt(number);
         } catch (Exception e) {
             throw new NumberFormatException(LOTTO_NUMBER_ERROR);
@@ -41,6 +41,8 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return number+"";
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
     }
 }

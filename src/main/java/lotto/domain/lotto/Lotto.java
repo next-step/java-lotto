@@ -4,8 +4,8 @@ import lotto.domain.Prize;
 import lotto.domain.lotto.generate.Generate;
 import lotto.domain.lotto.ticket.LottoTicket;
 import lotto.domain.lotto.ticket.LottoTickets;
-
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -29,21 +29,13 @@ public class Lotto {
         return map;
     }
 
-    public LottoTickets purchaseLotto(int count) {
-        for (int i = 0; i < count; i++) {
-            LottoTicket ticket = lottoGenerate.generate();
-            add(ticket);
-        }
-
-        return lottoTickets;
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets.getTickets();
     }
+
 
     public LottoTicket getLastWeekWinningNumbers() {
         return lottoGenerate.generate();
-    }
-
-    private void add(LottoTicket ticket) {
-        lottoTickets.add(ticket);
     }
 
     @Override
@@ -59,8 +51,4 @@ public class Lotto {
         return Objects.hash(lottoTickets);
     }
 
-    @Override
-    public String toString() {
-        return lottoTickets+"";
-    }
 }

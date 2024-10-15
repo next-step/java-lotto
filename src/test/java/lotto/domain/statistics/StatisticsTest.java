@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.domain.statistics.Statistics.*;
 import static org.assertj.core.api.Assertions.*;
 
 class StatisticsTest {
@@ -25,8 +26,7 @@ class StatisticsTest {
     @Test
     @DisplayName("prizeMatch 메서드가 각 당첨 금액의 개수를 정확히 반환 테스트")
     void prize_match_메서드_테스트() {
-        Statistics statistics = new Statistics(map);
-        List<Integer> prizeCountList = statistics.getPrizeCounts();
+        List<Integer> prizeCountList = getPrizeCounts(map);
 
         assertThat(prizeCountList).isEqualTo(List.of(1, 0, 0, 0));
     }
@@ -34,9 +34,8 @@ class StatisticsTest {
     @Test
     @DisplayName("prizeAllMountPrice 메서드가 총 당첨 금액을 정확히 반환 테스트")
     void prize_all_mountPrice_메서드_테스트() {
-        Statistics statistics = new Statistics(map);
         int lottoPurchaseCount = 14;
-        double rateOfReturn = statistics.calculateReturnRatio(lottoPurchaseCount);
+        double rateOfReturn = calculateReturnRatio(lottoPurchaseCount, map);
 
         assertThat(rateOfReturn).isEqualTo(0.35);
     }

@@ -9,13 +9,8 @@ public class Statistics {
     private static final List<Integer> PRIZE_AMOUNTS = List.of(5000, 50000, 1500000, 2000000000);
     private static final int LOTTO_TICKET_PRICE = 1000;
     private static final int PRICE_TYPES_COUNT = 4;
-    private final Map<Integer, Integer> prizeCountMap;
 
-    public Statistics(Map<Integer, Integer> prizeCountMap) {
-        this.prizeCountMap = prizeCountMap;
-    }
-
-    public List<Integer> getPrizeCounts() {
+    public static List<Integer> getPrizeCounts(Map<Integer, Integer> prizeCountMap) {
         List<Integer> prizeCounts = new ArrayList<>();
         for (int i = 0; i < PRICE_TYPES_COUNT; i++) {
             int priceCount = prizeCountMap.getOrDefault(PRIZE_MATCH_COUNT.get(i), 0);
@@ -24,11 +19,11 @@ public class Statistics {
         return prizeCounts;
     }
 
-    public double calculateReturnRatio(int lottoPurchaseCount) {
-        return Math.floor(calculateRatio(lottoPurchaseCount, calculateTotalPrizeAmount(getTotalPrizeAmounts())) * 100.0) / 100.0;
+    public static double calculateReturnRatio(int lottoPurchaseCount, Map<Integer, Integer> prizeCountMap) {
+        return Math.floor(calculateRatio(lottoPurchaseCount, calculateTotalPrizeAmount(getTotalPrizeAmounts(prizeCountMap))) * 100.0) / 100.0;
     }
 
-    public List<Integer> getTotalPrizeAmounts() {
+    public static List<Integer> getTotalPrizeAmounts(Map<Integer, Integer> prizeCountMap) {
         List<Integer> totalPrizeAmounts = new ArrayList<>();
         for (int i = 0; i < PRICE_TYPES_COUNT; i++) {
             int prizeCount = prizeCountMap.getOrDefault(PRIZE_MATCH_COUNT.get(i), 0);
@@ -45,7 +40,7 @@ public class Statistics {
         return totalPrizeAmount;
     }
 
-    private double calculateRatio(int lottoPurchaseCount, int totalPrizeAmount) {
+    private static double calculateRatio(int lottoPurchaseCount, int totalPrizeAmount) {
         int totalPurchaseMount = lottoPurchaseCount * LOTTO_TICKET_PRICE;
         return (double) totalPrizeAmount / totalPurchaseMount;
     }

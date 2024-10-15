@@ -23,4 +23,11 @@ class LottoTicketTest {
 
         assertThat(lottoTicket.sortAsc()).isEqualTo(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
     }
+
+    @Test
+    void 로또_displayNumber_테스트() {
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 5, 6);
+        assertThat(lottoTicket.displayNumbers()).isEqualTo(List.of("1", "2", "3", "4", "5", "6"));
+
+    }
 }

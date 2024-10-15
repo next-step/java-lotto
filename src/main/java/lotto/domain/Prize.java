@@ -25,14 +25,8 @@ public enum Prize {
         this.price = price;
     }
 
-    // 당첨 번호 일치 개수 반환
     public int getRank() {
         return rank;
-    }
-
-    // 당첨 상금 반환
-    public int getPrice() {
-        return price;
     }
 
     public static Prize get(int rank) {
