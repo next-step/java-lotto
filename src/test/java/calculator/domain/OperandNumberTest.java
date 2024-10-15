@@ -26,7 +26,9 @@ class OperandNumberTest {
         OperandNumber first = new OperandNumber(-1);
         OperandNumber second = new OperandNumber(1);
 
-        assertThat(first.plus(second)).isEqualTo(new OperandNumber(0));
+        OperandNumber result = first.plus(second);
+
+        assertThat(result).isEqualTo(new OperandNumber(0));
     }
 
     @DisplayName("전달하는 두 값을 뺄셈하여 반환한다.")
