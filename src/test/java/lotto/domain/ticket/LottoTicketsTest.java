@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.TestLottoNumberFactory;
+import lotto.domain.result.LottoStatistics;
 import lotto.domain.result.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketsTest {
 
+    private static final int LOTTO_TICKET_PRICE = 1000;
     private LottoTickets lottoTickets;
     private WinningLotto winningLotto;
 
@@ -45,7 +47,8 @@ class LottoTicketsTest {
     @Test
     @DisplayName("당첨 결과에 따른 순위 집계 테스트")
     void countRanksByWinningLotto() {
-        Map<Rank, Integer> rankCounts = lottoTickets.countRanks(winningLotto);
+        LottoStatistics lottoStatistics = lottoTickets.generateLottoStatistics(winningLotto, LOTTO_TICKET_PRICE);
+        Map<Rank, Integer> rankCounts = lottoStatistics.getResults();
 
         assertThat(rankCounts).containsEntry(Rank.FIRST, 1);
         assertThat(rankCounts).containsEntry(Rank.NONE, 1);
