@@ -4,7 +4,6 @@ import lotto.domain.LottoAgent;
 import lotto.domain.LottoJudge;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoReward;
 import lotto.domain.LottoRewardCountMap;
 import lotto.domain.PurchasedLottos;
 import lotto.domain.RandomSelectionStrategy;
@@ -12,7 +11,6 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
