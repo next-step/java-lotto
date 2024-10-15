@@ -1,0 +1,17 @@
+package lotto.domain;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+
+class LottoNumberTest {
+    @DisplayName("로또 번호는 1~45 사이의 숫자여야 한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    void throw_IllegalArgumentException_when_lottoNumber_is_not_between_1_and_45(int given) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(given))
+                .withMessage("로또 번호는 1~45 사이의 숫자여야 합니다.");
+    }
+}
