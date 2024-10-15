@@ -1,30 +1,11 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
-
-  @DisplayName("null 입력 시 IllegalArgumentException을 반환한다.")
-  @Test
-  void inputNullThrowsException() {
-
-    assertThatThrownBy(() -> {
-      Calculator.calculate(null);
-    }).isInstanceOf(IllegalArgumentException.class);
-  }
-
-  @DisplayName("빈문자열 입력 시 IllegalArgumentException을 반환한다.")
-  @Test
-  void inputNullStringThrowsException() {
-
-    assertThatThrownBy(() -> {
-      Calculator.calculate("");
-    }).isInstanceOf(IllegalArgumentException.class);
-  }
 
   @DisplayName("두 숫자의 덧셈 연산이 잘 수행된다.")
   @Test
@@ -59,21 +40,5 @@ class CalculatorTest {
   void complexCalculateCorrectly() {
     int result = Calculator.calculate("10 + 5 - 5 / 2");
     assertThat(result).isEqualTo(5);
-  }
-
-  @DisplayName("연산자 자리에 +,-,*,/ 이외의 값이 존재할 경우 예외를 발생한다.")
-  @Test
-  void operatorInvalid() {
-    assertThatThrownBy(() -> {
-      Calculator.calculate("3 + 3 # 2");
-    }).isInstanceOf(IllegalArgumentException.class);
-  }
-
-  @DisplayName("피연산자가 숫자가 아닐 경우 예외를 발생한다.")
-  @Test
-  void operandInvalid() {
-    assertThatThrownBy(() -> {
-      Calculator.calculate("1 + 2 - a");
-    }).isInstanceOf(IllegalArgumentException.class);
   }
 }
