@@ -14,8 +14,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto of(int id, List<Integer> numbers) {
-        return new Lotto(id, LottoNumbers.valueOf(numbers));
+    public static Lotto of(int id, LottoNumbers numbers) {
+        return new Lotto(id, numbers);
     }
 
     public static Lotto of(int id, LottoNumberSelectionStrategy strategy) {
