@@ -2,8 +2,10 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -12,11 +14,12 @@ public class Lotto {
 
     public Lotto(List<LottoNum> lottoNumbers) {
         validateLottoNumber(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(String lottoNumbers) {
-        this(Arrays.stream(lottoNumbers.split(","))
+    public Lotto(String lottoNumbers, String delimiter) {
+        this(Arrays.stream(lottoNumbers.split(delimiter))
                 .map(LottoNum::new)
                 .collect(Collectors.toList()));
     }
@@ -25,25 +28,18 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
+        Set<LottoNum> set = new HashSet<>(lottoNumbers);
+        if (set.size() != 6) {
+            throw new IllegalArgumentException("로또는 중복된 숫자가 없어야 합니다.");
+        }
     }
 
     public List<LottoNum> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int compareWinningNumber(Lotto winner) {
-        int result = 0;
-        for (LottoNum lottoNumber : lottoNumbers) {
-            result += addResult(winner.getLottoNumbers(), lottoNumber);
-        }
-        return result;
-    }
-
-    private static int addResult(List<LottoNum> winner, LottoNum lottoNumber) {
-        if (winner.contains(lottoNumber)) {
-            return 1;
-        }
-        return 0;
+    public boolean isContains(LottoNum lottoNum) {
+        return lottoNumbers.contains(lottoNum);
     }
 
     @Override

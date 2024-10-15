@@ -19,11 +19,10 @@ public class AutoLotto implements LottoStrategy {
     }
 
     @Override
-    public Lotto getLotto(List<LottoNum> allList, int count) {
-        List<LottoNum> copyList = new ArrayList<>(allList);
+    public Lotto getLotto() {
+        List<LottoNum> copyList = new ArrayList<>(LottoNum.getLottoNumbers());
         Collections.shuffle(copyList, new Random());
-        List<LottoNum> lottoNumbers = copyList.subList(0, count);
-        Collections.sort(lottoNumbers);
+        List<LottoNum> lottoNumbers = copyList.subList(0, Lotto.LOTTO_NUMBER_COUNT);
         return new Lotto(lottoNumbers);
     }
 }
