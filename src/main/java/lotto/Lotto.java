@@ -3,6 +3,7 @@ package lotto;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -36,6 +37,14 @@ public class Lotto {
 
     private int pick() {
         return this.random.nextInt(MAX_NUMBER_OF_LOTTO) + 1;
+    }
+
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        builder.append(this.numbers.stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")));
+        builder.append("]");
+        return builder.toString();
     }
 
 }

@@ -11,6 +11,10 @@ public class Orders {
         this.orders = makeOrders(total);
     }
 
+    public Orders(List<Lotto> orders) {
+        this.orders = orders;
+    }
+
     public List<Lotto> getLOrders() {
         return this.orders;
     }
@@ -21,5 +25,14 @@ public class Orders {
             result.add(new Lotto());
         }
         return result;
+    }
+
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (Lotto lotto : orders) {
+            builder.append(lotto);
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 }
