@@ -23,7 +23,6 @@ public class AutoLotto implements LottoStrategy {
         List<LottoNum> copyList = new ArrayList<>(LottoNum.getLottoNumbers());
         Collections.shuffle(copyList, new Random());
         List<LottoNum> lottoNumbers = copyList.subList(0, Lotto.LOTTO_NUMBER_COUNT);
-        Collections.sort(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 }
