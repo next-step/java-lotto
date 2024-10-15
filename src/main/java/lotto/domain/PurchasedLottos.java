@@ -23,6 +23,10 @@ public class PurchasedLottos {
         return this.value;
     }
 
+    public int size() {
+        return value.size();
+    }
+
     public PurchasedLottos add(Lotto buytingLotto) {
         List<Lotto> addingLottos = new ArrayList<>(value);
         addingLottos.add(buytingLotto);
