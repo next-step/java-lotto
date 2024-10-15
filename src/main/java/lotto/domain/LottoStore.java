@@ -8,11 +8,11 @@ public class LottoStore {
     public static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     public LottoBundle purchase(final Money money) {
-        return LottoBundle.createLottoBundle(money.calculatePurchases(LOTTO_PURCHASE_AMOUNT));
+        return LottoBundle.createAutoLottoBundle(money.calculatePurchases(LOTTO_PURCHASE_AMOUNT));
     }
 
     public LottoBundle purchase(final List<String> manualLottoBundle) {
-        return new LottoBundle(
+        return LottoBundle.createManualLottoBundle(
             manualLottoBundle.stream()
                 .map(string -> Lotto.createManualLotto(string, LOTTO_NUMBER_DELIMITER))
                 .collect(Collectors.toUnmodifiableList())

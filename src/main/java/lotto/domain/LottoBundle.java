@@ -1,61 +1,53 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoBundle implements Iterable<Lotto> {
-    private final List<Lotto> lottoBundle;
+    private final List<Lotto> manualLottoBundle;
+    private final List<Lotto> autoLottoBundle;
 
-    public LottoBundle() {
-        this.lottoBundle = new ArrayList<>();
+    public LottoBundle(final List<Lotto> manualLottoBundle, final List<Lotto> autoLottoBundle) {
+        this.manualLottoBundle = manualLottoBundle;
+        this.autoLottoBundle = autoLottoBundle;
     }
 
-    public LottoBundle(final List<Lotto> lottoBundle) {
-        this.lottoBundle = new ArrayList<>(lottoBundle);
+    public static LottoBundle createLottoBundle(final LottoBundle manualLottoBundle, final LottoBundle autoLottoBundle) {
+        return new LottoBundle(manualLottoBundle.manualLottoBundle, autoLottoBundle.autoLottoBundle);
     }
 
-    public static LottoBundle mergeAutoAndManualLottoBundle(final LottoBundle manualLottoBundle, final LottoBundle autoLottoBundle) {
-        return new LottoBundle(
-            Stream.concat(
-                manualLottoBundle.lottoBundle.stream(),
-                autoLottoBundle.lottoBundle.stream()
-            ).collect(Collectors.toUnmodifiableList())
-        );
-    }
-
-    public static LottoBundle createLottoBundle(final int lottoBundleCount) {
+    public static LottoBundle createAutoLottoBundle(final int lottoBundleCount) {
         final List<Lotto> lottoBundle = new ArrayList<>();
         for (int i = 0; i < lottoBundleCount; i++) {
             lottoBundle.add(Lotto.createAutoLotto());
         }
-        return new LottoBundle(lottoBundle);
+        return new LottoBundle(Collections.emptyList(), lottoBundle);
+    }
+
+    public static LottoBundle createManualLottoBundle(final List<Lotto> manualLottoBundle) {
+        return new LottoBundle(manualLottoBundle, Collections.emptyList());
     }
 
     public int manualSize() {
-        return (int) lottoBundle.stream()
-            .filter(Lotto::isManualLotto)
-            .count();
+        return manualLottoBundle.size();
     }
 
     public int autoSize() {
-        return (int) lottoBundle.stream()
-            .filter(Lotto::isAutoLotto)
-            .count();
+        return autoLottoBundle.size();
     }
 
     public int size() {
-        return lottoBundle.size();
-    }
-
-    public void add(final Lotto lotto) {
-        lottoBundle.add(lotto);
+        return manualSize() + autoSize();
     }
 
     @Override
     public Iterator<Lotto> iterator() {
-        return lottoBundle.iterator();
+        return Stream.concat(manualLottoBundle.stream(), autoLottoBundle.stream())
+            .collect(Collectors.toUnmodifiableList())
+            .iterator();
     }
 }

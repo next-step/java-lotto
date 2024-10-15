@@ -15,7 +15,7 @@ public class LottoController {
         final LottoBundle manualLottoBundle = lottoStore.purchase(lottoInputView.inputManualLottoBundle(manualLottoCount));
 
         final LottoBundle autoLottoBundle = lottoStore.purchase(remainingMoney(money, manualLottoCount));
-        final LottoBundle lottoBundle = LottoBundle.mergeAutoAndManualLottoBundle(manualLottoBundle, autoLottoBundle);
+        final LottoBundle lottoBundle = LottoBundle.createLottoBundle(manualLottoBundle, autoLottoBundle);
         lottoInputView.displayPurchaseLottoBundle(lottoBundle);
 
         final Lotto lastWeekWinningLotto = lottoInputView.inputLastWeekWinningLotto();
