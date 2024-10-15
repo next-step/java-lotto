@@ -31,7 +31,8 @@ public class ResultView {
     }
 
     private static String buyerLottoes(Buyer buyer) {
-        List<String> buyerLottoes = buyer.value().stream()
+        List<String> buyerLottoes = buyer.value()
+                .stream()
                 .map(Lotto::toString)
                 .collect(Collectors.toList());
         return String.join(LINE_BREAK, buyerLottoes);

@@ -13,8 +13,10 @@ import static lotto.model.enums.Ranking.values;
 
 public class Result {
     public static final int LOTTO_PRICE = 1000;
-    public static final String RANKING_FORMAT = "%d개 일치 (%d원)- %d개";
+    public static final String RANKING_FORMAT = "%d개 일치 %s(%d원)- %d개";
     public static final String LINE_BREAK = "\n";
+    public static final String BONUS_MATCHED_STRINGS = ",보너스 볼 일치";
+    public static final String SPACE = " ";
     private final Buyer buyer;
     private final Lotto winningLotto;
 
@@ -56,8 +58,13 @@ public class Result {
     }
 
     private static String formattedRankingResult(Map.Entry<Ranking, Integer> entry) {
+        String bonus = SPACE;
+        if (entry.getKey().equals(Ranking.SECOND)) {
+            bonus = BONUS_MATCHED_STRINGS;
+        }
         return String.format(RANKING_FORMAT,
                 entry.getKey().matchedCount(),
+                bonus,
                 entry.getKey().winningAmount(),
                 entry.getValue()
         );
