@@ -8,9 +8,11 @@ public class CalculatorString {
     public static final String NON_CALCULATOR_REGEX = "[^0-9+\\-*/\\s]";
     public static final String OPERATOR_REGEX = "[+\\-*/]";
     private final String calculatorString;
+    private CurrentNumber currentNumber;
 
     public CalculatorString(String calculatorString) {
-        this.calculatorString = calculatorString;
+        this.calculatorString = calculatorString.replaceAll("\\s+","");
+        currentNumber = new CurrentNumber(calculatorString);
     }
 
     public void checkNullAndEmpty() {
@@ -20,18 +22,29 @@ public class CalculatorString {
     }
 
     public void checkCalculatorExpression() {
-        Pattern pattern = Pattern.compile(NON_CALCULATOR_REGEX);
-        Matcher matcher = pattern.matcher(calculatorString);
+        Matcher matcher = customMatcher(NON_CALCULATOR_REGEX,calculatorString);
         if (matcher.find()) {
             throw new IllegalArgumentException();
         }
     }
 
     public void checkNonOperator() {
-        Pattern pattern = Pattern.compile(OPERATOR_REGEX);
-        Matcher matcher = pattern.matcher(calculatorString);
+        Matcher matcher = customMatcher(OPERATOR_REGEX,calculatorString);
         if (!matcher.find()) {
             throw new IllegalArgumentException();
         }
     }
+
+    private Matcher customMatcher(String operatorRegex, String mathExpression) {
+        return currentNumber.customMatcher(operatorRegex, mathExpression);
+    }
+
+    public int calculate() {
+        return currentNumber.calculate(calculatorString);
+    }
+
+
+
+
+
 }
