@@ -10,7 +10,7 @@ public class DevideTest {
 
     @Test
     public void 나눗셈() {
-        Devide devide = new Devide();
+        Devide devide = Devide.getInstance();
         assertThat(devide.calculate(4, 2)).isEqualTo(2);
     }
 }

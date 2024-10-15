@@ -9,7 +9,7 @@ public class MultiplyTest {
 
     @Test
     public void 곱셈() {
-        Multiply multiply = new Multiply();
+        Multiply multiply = Multiply.getInstance();
         assertThat(multiply.calculate(3, 4)).isEqualTo(12);
     }
 }

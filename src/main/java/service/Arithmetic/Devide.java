@@ -2,6 +2,18 @@ package service.Arithmetic;
 
 public class Devide implements Arithmetic {
 
+    private static Devide instance;
+
+    public static Devide getInstance() {
+        if (instance == null) {
+            instance = new Devide();
+        }
+
+        return instance;
+    }
+
+    private Devide() {}
+
     @Override
     public int calculate(int num1, int num2) {
         isInteger(num1, num2);

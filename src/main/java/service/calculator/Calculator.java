@@ -33,22 +33,22 @@ public class Calculator {
 
     public int calculate(int num1, int num2, Character operation) {
         if (operation == '+') {
-            Plus plus = new Plus();
+            Plus plus = Plus.getInstance();
             return plus.calculate(num1, num2);
         }
 
         if (operation == '-') {
-            Subtract subtract = new Subtract();
+            Subtract subtract = Subtract.getInstance();
             return subtract.calculate(num1, num2);
         }
 
         if (operation == '*') {
-            Multiply multiply = new Multiply();
+            Multiply multiply = Multiply.getInstance();
             return multiply.calculate(num1, num2);
         }
 
         if (operation == '/') {
-            Devide devide = new Devide();
+            Devide devide = Devide.getInstance();
             return devide.calculate(num1, num2);
         }
 
