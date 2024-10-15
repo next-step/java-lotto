@@ -54,7 +54,7 @@ public class ResultView {
 
     public static void printRewardCountMap(Map<LottoReward, Integer> rewardCountMap) {
         for (LottoReward reward : PRINT_TARGET_REWARDS) {
-            System.out.printf("%s- %d개\n", reward.getDescription(), rewardCountMap.get(reward));
+            System.out.printf("%s- %d개\n", reward.getDescription(), rewardCountMap.getOrDefault(reward, 0));
         }
     }
 
