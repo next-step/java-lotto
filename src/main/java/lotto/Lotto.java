@@ -26,8 +26,8 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public int isEqualMatchCount(int matchCount) {
-        return lottoResult.isEqualMatchCount(matchCount);
+    public int getMatchCount() {
+        return this.lottoResult.getMatchCount();
     }
 
     public String toStringLottoNumbers() {

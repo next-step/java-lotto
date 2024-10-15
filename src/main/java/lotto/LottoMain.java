@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 public class LottoMain {
     public static void main(String[] args) {
         int paidAmount = LottoInputView.inputPaidAmount();
@@ -15,7 +13,7 @@ public class LottoMain {
         lottos.calculateAllMatchCount(LottoInputView.inputWinningNumbers());
 
         System.out.println();
-        LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos())); //todo
+        LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos()));
         LottoResultView.printLottoYield(LottoWinningStatistics.calculateRateOfReturn(LottoWinningStatistics.calculateTotalWinningAmount(lottos.getLottos()), paidAmount));
     }
 }

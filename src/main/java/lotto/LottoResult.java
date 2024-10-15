@@ -1,12 +1,13 @@
 package lotto;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoResult {
-    private static final List<Integer> MATCHING_COUNT_FOR_WINNING = Arrays.asList(3, 4, 5, 6);
-
     private int matchCount;
+
+    public int getMatchCount() {
+        return this.matchCount;
+    }
 
     public int isEqualMatchCount(int matchCount) {
         if (this.matchCount == matchCount) {
@@ -29,12 +30,8 @@ public class LottoResult {
         return 0;
     }
 
-    public boolean isWinningLotto() {
-        return MATCHING_COUNT_FOR_WINNING.contains(this.matchCount);
-    }
-
     public int getAmountForWinningLotto() {
-        if (!isWinningLotto()) {
+        if (!WinningMatchCount.isWinning(this.matchCount)) {
             return 0;
         }
         return determineAmountByMatchCount(this.matchCount);
