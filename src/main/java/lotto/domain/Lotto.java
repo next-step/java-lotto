@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoGenerationMethod.*;
 
 public class Lotto {
-    public static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
     private final LottoGenerationMethod lottoGenerationMethod;
