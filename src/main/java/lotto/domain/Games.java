@@ -41,7 +41,7 @@ public class Games {
         return numberOfGames;
     }
 
-    public List<Game> getGames() {
-        return games;
+    public int count() {
+        return games.size();
     }
 }

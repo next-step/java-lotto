@@ -37,6 +37,6 @@ class GamesTest {
         RandomNumberGenerator generator = new RandomNumberGenerator(new Random());
         Games games = new Games(money, generator);
 
-        assertThat(games.getGames()).hasSize(expected);
+        assertThat(games.count()).isEqualTo(expected);
     }
 }

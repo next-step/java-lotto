@@ -1,7 +1,11 @@
 package lotto.controller;
 
+import lotto.domain.Games;
+import lotto.domain.RandomNumberGenerator;
 import view.InputView;
 import view.OutputView;
+
+import java.util.Random;
 
 public class LottoController {
 
@@ -15,5 +19,6 @@ public class LottoController {
 
     public void play() {
         String input = inputView.askPriceToPay();
+        Games games = new Games(input, new RandomNumberGenerator(new Random()));
     }
 }
