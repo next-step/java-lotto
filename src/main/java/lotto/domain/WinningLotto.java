@@ -4,11 +4,11 @@ import java.util.List;
 
 public class WinningLotto {
     private final Lotto winningLotto;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningLotto, int bonusNumber) {
         this.winningLotto = winningLotto;
-        this.bonusNumber = validateBonusNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(validateBonusNumber(bonusNumber));
     }
 
     public int validateBonusNumber(int bonusNumber) {
@@ -21,12 +21,12 @@ public class WinningLotto {
     }
 
     public int getBonusNumber() {
-        return bonusNumber;
+        return bonusNumber.getLottoNumber();
     }
 
     public LottoRank getLottoResult(Lotto lotto) {
         int equalCount = getMatchCount(lotto);
-        return LottoRank.matchRank(equalCount, lotto.isNumberContain(bonusNumber));
+        return LottoRank.matchRank(equalCount, lotto.isNumberContain(bonusNumber.getLottoNumber()));
     }
 
     private int getMatchCount(Lotto lotto) {
