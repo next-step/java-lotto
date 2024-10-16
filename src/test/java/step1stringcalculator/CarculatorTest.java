@@ -20,7 +20,7 @@ public class CarculatorTest {
 
 
     @ParameterizedTest(name = "나눗셈 정수 반환.반올림연산")
-    @CsvSource(value = {"2 + 1 * 3 / 2,4","7 / 2 + 2 - 5,0"})
+    @CsvSource(value = {"2 + 1 * 3 / 2,4","7 / 2 + 2 - 5,0","2 + 1 * 3 / 2,4"})
     public void 입력문자열_사칙연산_테스트(String calculaterString, int resultNumber) {
         System.out.println(calculaterString);
         calculator = new Calculator(calculaterString);

@@ -11,6 +11,11 @@ public class Calculator {
         this.calculatorString = new CalculatorString(calculatorString);
     }
 
+    public void checkCalculateString() {
+        calculatorString.checkCalculatorExpression();
+        calculatorString.checkNonOperator();
+        calculatorString.checkNullAndEmpty();
+    }
 
     public int calculate() {
         return calculatorString.calculate();

@@ -7,12 +7,12 @@ import java.util.regex.Pattern;
 public class CalculatorString {
     public static final String NON_CALCULATOR_REGEX = "[^0-9+\\-*/\\s]";
     public static final String OPERATOR_REGEX = "[+\\-*/]";
-    private final String calculatorString;
+    private String calculatorString;
     private CurrentNumber currentNumber;
 
     public CalculatorString(String calculatorString) {
-        this.calculatorString = calculatorString.replaceAll("\\s+","");
-        currentNumber = new CurrentNumber(calculatorString);
+        this.calculatorString = calculatorString;
+        currentNumber = new CurrentNumber(0);
     }
 
     public void checkNullAndEmpty() {
@@ -40,11 +40,13 @@ public class CalculatorString {
     }
 
     public int calculate() {
+        removeWhiteSpace();
         return currentNumber.calculate(calculatorString);
     }
 
-
-
+    private void removeWhiteSpace() {
+        this.calculatorString = calculatorString.replaceAll("\\s+","");
+    }
 
 
 }
