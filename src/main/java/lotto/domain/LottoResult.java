@@ -35,4 +35,13 @@ public class LottoResult {
                 })
                 .reduce(0L, Long::sum);
     }
+
+    public double calculateEarningRate() {
+        double rate = (double) calculatePrize() / games.count() / Game.PRICE;
+
+        int decimalPlaces = 2;
+        double decimalPlacesCorrectionValue = Math.pow(10, decimalPlaces);
+
+        return Math.round(rate * decimalPlacesCorrectionValue) / decimalPlacesCorrectionValue;
+    }
 }
