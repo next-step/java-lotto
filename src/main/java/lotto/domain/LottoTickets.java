@@ -34,9 +34,9 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public List<Integer> matchCount(LottoTicket winningNumbers) {
+    public List<Winning> calculateWinningResults(LottoTicket winningNumbers) {
         return lottoTickets.stream()
-                           .map(ticket -> ticket.matchCount(winningNumbers))
+                           .map(ticket -> Winning.fromMatchCount(ticket.matchCount(winningNumbers)))
                            .collect(Collectors.toList());
     }
 }

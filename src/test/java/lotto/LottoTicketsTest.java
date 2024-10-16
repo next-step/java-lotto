@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.Winning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +22,8 @@ class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("로또 티켓들 일치 확인")
-    void lottoTicketMatchCount() {
+    @DisplayName("로또 티켓들 Winning 확인")
+    void calculateWinningResults() {
         List<LottoTicket> tickets = new ArrayList<>();
         tickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)));
         tickets.add(new LottoTicket(List.of(1, 2, 3, 4, 7, 8)));
@@ -31,6 +32,6 @@ class LottoTicketsTest {
 
         LottoTicket winningNumbers = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottoTickets.matchCount(winningNumbers)).containsExactly(6, 4, 0);
+        assertThat(lottoTickets.calculateWinningResults(winningNumbers)).containsExactly(Winning.SIX_MATCH, Winning.FOUR_MATCH, Winning.NONE);
     }
 }
