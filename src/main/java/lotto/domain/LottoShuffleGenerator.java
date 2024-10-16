@@ -23,7 +23,7 @@ public class LottoShuffleGenerator implements LottoGenerator {
     public List<Lotto> generateLottos(int purchaseAmount) {
         List<Lotto> purChasedLotto = new ArrayList<>();
         int lottoCount = calculateNumberOfLotto(purchaseAmount);
-        for (int i = 0; i < lottoCount; i++) { // 이 책임을 LottoShuffleGenerator한테 넘겨보자
+        for (int i = 0; i < lottoCount; i++) {
             purChasedLotto.add(sortLotto(shuffleLotto()));
         }
         return purChasedLotto;

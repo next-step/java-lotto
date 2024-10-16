@@ -13,9 +13,10 @@ public class WinningStatisticTest {
     @Test
     @DisplayName("우승자 통계 테스트")
     void 우승자_통계_테스트() {
-        WinningStatistic ws = new WinningStatistic(2_000_005_000, new Stack<>());
-        ws.calculateStatistic();
-        Assertions.assertThat(ws.getStatistic()).containsExactly(1,0,0,1);
+        Lottos lottos = Lottos.createLottos(1000 , purChaseAmount -> new ArrayList<>());
+
+        Assertions.assertThat(lottos.calculateStatistic(2_000_005_000, new Stack<>())
+        ).containsExactly(1,0,0,1);
     }
 
     @Test

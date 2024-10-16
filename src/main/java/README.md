@@ -9,13 +9,13 @@
 - [x] 입력 화면(InputView)
     - [x] 구매 금액 입력
     - [x] 당첨번호 입력
-- [x] 로또 구매 개수 계산(LottoPurchaseService)
 - [x] 로또 생성(LottoGenerator)
   - [x] shuffle()를 통한 생성(LottoShuffleGenerator)
-- [x] 당첨 확인(WinningCheck)
+- [x] 당첨 확인(Lottos)
   - [x] 당첨 조건
-- [x] 당첨 통계
+  - [x] 당첨 통계
   - [x] 수익률 계산
+- [x] 로또 구매 개수 계산(Lottos)
 - [x] 당첨 화면(ResulView)
 
 ## 온라인 코드 리뷰 과정

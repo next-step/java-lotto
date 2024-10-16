@@ -8,7 +8,6 @@ import java.util.Stack;
 public class Lottos {
     private final List<Lotto> lottos;
 
-
     public static Lottos createLottos(int purchaseAmount, LottoGenerator lottoGenerator) {
         List<Lotto> lottos = lottoGenerator.generateLottos(purchaseAmount);
         return new Lottos(lottos);
@@ -21,7 +20,6 @@ public class Lottos {
     public int getNumberOfLotto() {
         return lottos.size();
     }
-
 
     public List<Lotto> getLottos() {
         return lottos;
