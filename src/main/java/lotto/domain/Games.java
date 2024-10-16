@@ -50,6 +50,13 @@ public class Games {
         return games.size();
     }
 
+    public List<Rank> checkResult(Game winner) {
+        return games.stream()
+                .map(game -> game.countIdenticalLottonumber(winner))
+                .map(hits -> Rank.of(hits))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
     @Override
     public String toString() {
         return games.stream()
