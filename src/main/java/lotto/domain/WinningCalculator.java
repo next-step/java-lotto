@@ -28,9 +28,7 @@ public class WinningCalculator {
     }
 
     public double calculateRateOfReturn() {
-        int totalTicketCount = winningCountMap.values().stream().mapToInt(Integer::intValue).sum();
-        int totalPurchasePrice = LottoTicket.PRICE * totalTicketCount;
-        return (double) calculateTotalPrize() / totalPurchasePrice;
+        return (double) calculateTotalPrize() / calculateTotalPurchasePrice();
     }
 
     private int calculateTotalPrize() {
@@ -38,5 +36,10 @@ public class WinningCalculator {
                               .stream()
                               .mapToInt(winningCount -> winningCount.getKey().getPrize() * winningCount.getValue())
                               .sum();
+    }
+
+    private int calculateTotalPurchasePrice() {
+        int totalTicketCount = winningCountMap.values().stream().mapToInt(Integer::intValue).sum();
+        return LottoTicket.PRICE * totalTicketCount;
     }
 }
