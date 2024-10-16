@@ -45,4 +45,9 @@ public class Lotto {
         Lotto lotto = (Lotto) object;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 }

@@ -10,14 +10,14 @@ public class LottoNum implements Comparable<LottoNum> {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
 
-    private final int num;
+    private final Integer num;
 
-    public LottoNum(int num) {
+    public LottoNum(Integer num) {
         isBoundLottoNumber(num);
         this.num = num;
     }
 
-    private static void isBoundLottoNumber(int num) {
+    private static void isBoundLottoNumber(Integer num) {
         if (num < LOTTO_START_NUMBER || num > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException("로또 번호의 범위는 1 ~ 45 여야 합니다.");
         }
@@ -48,7 +48,7 @@ public class LottoNum implements Comparable<LottoNum> {
             return false;
         }
         LottoNum lottoNum = (LottoNum) o;
-        return num == lottoNum.num;
+        return Objects.equals(num, lottoNum.num);
     }
 
     @Override

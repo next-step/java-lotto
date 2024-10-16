@@ -49,4 +49,9 @@ public class LottoResult {
         LottoResult that = (LottoResult) object;
         return Double.compare(getReturnRate(), that.getReturnRate()) == 0 && Objects.equals(results, that.results);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(results, returnRate);
+    }
 }
