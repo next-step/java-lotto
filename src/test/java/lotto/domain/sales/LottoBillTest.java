@@ -10,23 +10,16 @@ public class LottoBillTest {
 
     @Test
     void 수동_자동_동시구매() {
-        int money = 10000;
-        int quantity = money / 1000;
-        int manual = 2;
+        LottoBill bill = new LottoBill(10000, 2);
 
-        LottoBill bill = new LottoBill(money, manual);
-
-        assertThat(bill.quickPick()).isEqualTo(quantity - 2);
+        assertThat(bill.quickPick()).isEqualTo((10000 / 1000) - 2);
     }
 
     @Test
     void 구매금액_입력시_구매수량_담긴_인스턴스_정상_생성() {
-        int money = 10000;
-        int quantity = 10000 / 1000;
+        LottoBill bill = new LottoBill(10000);
 
-        LottoBill bill = new LottoBill(money);
-
-        assertThat(bill.quickPick()).isEqualTo(quantity);
+        assertThat(bill.quickPick()).isEqualTo(10000 / 1000);
     }
 
     @Test
