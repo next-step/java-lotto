@@ -1,4 +1,7 @@
-import model.*;
+import model.LottoBundle;
+import model.LottoMachine;
+import model.LottoStatistics;
+import model.Prize;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,21 +18,23 @@ public class LottoMachineTest {
         //given
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int totalPrice = 2000;
-        LottoNumberGenerate lottoNumberGenerate = new MockLottoNumberGeneratorImpl();
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoNumberGenerate);
-        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
+
+        LottoBundle lottoBundle = new LottoBundle(
+                totalPrice,
+                new MockLottoNumberGeneratorImpl()
+        );
 
         //when
         LottoMachine lottoMachine = new LottoMachine(
                 winningNumbers,
                 totalPrice,
-                lottoNumbers
+                lottoBundle.getLottoNumbers()
         );
 
         //then
         Assertions.assertThat(lottoMachine.getLottos()).hasSize(2);
         Assertions.assertThat(lottoMachine.getLottos().stream().map(it -> it.getNumbers()).collect(Collectors.toList()))
-                .hasSameElementsAs(lottoNumbers);
+                .hasSameElementsAs(lottoBundle.getLottoNumbers());
         Assertions.assertThat(lottoMachine.getWinningNumbers()).hasSameElementsAs(winningNumbers);
         Assertions.assertThat(lottoMachine.getTotalPrice()).isEqualTo(totalPrice);
         Assertions.assertThat(lottoMachine.getNumberOfLotto()).isEqualTo(2);
@@ -41,21 +46,23 @@ public class LottoMachineTest {
         //given
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int totalPrice = 2000;
-        LottoNumberGenerate lottoNumberGenerate = new MockLottoNumberGeneratorImpl();
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoNumberGenerate);
-        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
+
+        LottoBundle lottoBundle = new LottoBundle(
+                totalPrice,
+                new MockLottoNumberGeneratorImpl()
+        );
 
         //when
         LottoMachine lottoMachine = new LottoMachine(
                 winningNumbers,
                 totalPrice,
-                lottoNumbers
+                lottoBundle.getLottoNumbers()
         );
 
         //then
         Assertions.assertThat(lottoMachine.getLottos()).hasSize(2);
         Assertions.assertThat(lottoMachine.getLottos().stream().map(it -> it.getNumbers()).collect(Collectors.toList()))
-                .hasSameElementsAs(lottoNumbers);
+                .hasSameElementsAs(lottoBundle.getLottoNumbers());
         Assertions.assertThat(lottoMachine.getWinningNumbers()).hasSameElementsAs(winningNumbers);
         Assertions.assertThat(lottoMachine.getTotalPrice()).isEqualTo(totalPrice);
         Assertions.assertThat(lottoMachine.getNumberOfLotto()).isEqualTo(2);
@@ -77,22 +84,24 @@ public class LottoMachineTest {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int totalPrice = 1000;
         final Integer bonusNumber = 7;
-        LottoNumberGenerate lottoNumberGenerate = new MockLottoNumberGeneratorImplFroBonusNumber();
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(lottoNumberGenerate);
-        List<List<Integer>> lottoNumbers = lottoNumberGenerator.run(totalPrice, LottoMachine.PRICE_OF_A_LOTTO);
+
+        LottoBundle lottoBundle = new LottoBundle(
+                totalPrice,
+                new MockLottoNumberGeneratorImplForBonusNumber()
+        );
 
         //when
         LottoMachine lottoMachine = new LottoMachine(
                 winningNumbers,
                 totalPrice,
-                lottoNumbers,
+                lottoBundle.getLottoNumbers(),
                 bonusNumber
         );
 
         //then
         Assertions.assertThat(lottoMachine.getLottos()).hasSize(1);
         Assertions.assertThat(lottoMachine.getLottos().stream().map(it -> it.getNumbers()).collect(Collectors.toList()))
-                .hasSameElementsAs(lottoNumbers);
+                .hasSameElementsAs(lottoBundle.getLottoNumbers());
         Assertions.assertThat(lottoMachine.getWinningNumbers()).hasSameElementsAs(winningNumbers);
         Assertions.assertThat(lottoMachine.getTotalPrice()).isEqualTo(totalPrice);
         Assertions.assertThat(lottoMachine.getNumberOfLotto()).isEqualTo(1);
@@ -104,5 +113,45 @@ public class LottoMachineTest {
         Assertions.assertThat(statistics.getCountByPrize(PRIZE5_PLUS)).isEqualTo(1);
         Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE6)).isEqualTo(0);
         Assertions.assertThat(statistics.getNetIncome()).isEqualTo((double) PRIZE5_PLUS.getPrice() / totalPrice);
+    }
+
+    @Test
+    @DisplayName("당첨통계 - 보너스 번호, 수동 번호")
+    void createLottoMachineStatisticsTest_WithBonusNumberAndManualLottoNumbers() {
+        //given
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int totalPrice = 2000;
+        final Integer bonusNumber = 7;
+        List<List<Integer>> numbers = List.of(List.of(1, 2, 3, 4, 6, 7));
+
+        LottoBundle lottoBundle = new LottoBundle(
+                numbers,
+                totalPrice,
+                new MockLottoNumberGeneratorImplForBonusNumber()
+        );
+
+        //when
+        LottoMachine lottoMachine = new LottoMachine(
+                winningNumbers,
+                totalPrice,
+                lottoBundle.getLottoNumbers(),
+                bonusNumber
+        );
+
+        //then
+        Assertions.assertThat(lottoMachine.getLottos()).hasSize(2);
+        Assertions.assertThat(lottoMachine.getLottos().stream().map(it -> it.getNumbers()).collect(Collectors.toList()))
+                .hasSameElementsAs(lottoBundle.getLottoNumbers());
+        Assertions.assertThat(lottoMachine.getWinningNumbers()).hasSameElementsAs(winningNumbers);
+        Assertions.assertThat(lottoMachine.getTotalPrice()).isEqualTo(totalPrice);
+        Assertions.assertThat(lottoMachine.getNumberOfLotto()).isEqualTo(2);
+
+        LottoStatistics statistics = lottoMachine.getStatistics();
+        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE3)).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE4)).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE5)).isEqualTo(0);
+        Assertions.assertThat(statistics.getCountByPrize(PRIZE5_PLUS)).isEqualTo(2);
+        Assertions.assertThat(statistics.getCountByPrize(Prize.PRIZE6)).isEqualTo(0);
+        Assertions.assertThat(statistics.getNetIncome()).isEqualTo((double) PRIZE5_PLUS.getPrice() * 2 / totalPrice);
     }
 }

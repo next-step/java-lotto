@@ -12,9 +12,7 @@ public class LottoNumberGenerator {
         this.lottoNumberGenerate = lottoNumberGenerate;
     }
 
-    public List<List<Integer>> run(int totalPrice, int priceOfALotto) {
-        int cnt = totalPrice / priceOfALotto;
-
+    public List<List<Integer>> run(int cnt) {
         this.lottoNumbers = lottoNumberGenerate.multiGenerate(0, cnt);
         return this.lottoNumbers;
     }
