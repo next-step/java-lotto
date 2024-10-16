@@ -1,9 +1,5 @@
 package lotto;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.PurchasePrice;
