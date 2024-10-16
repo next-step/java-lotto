@@ -22,7 +22,7 @@ class LottoProgramTest {
             }
         });
 
-        List<Lotto> result = lottoProgram.generateLottoTickets(1);
+        List<Lotto> result = lottoProgram.generateLottos(1);
 
         assertThat(result).hasSize(1)
                 .containsExactly(lotto);

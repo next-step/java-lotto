@@ -16,7 +16,7 @@ public class OutputView {
         return lottoCount;
     }
 
-    public static void printLottoTickets(List<Lotto> lottoTickets) {
+    public static void printLottos(List<Lotto> lottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         lottoTickets.forEach(lottoNumbers -> stringBuilder.append(lottoNumbers.values()).append(NEW_LINE));
         System.out.println(stringBuilder);
@@ -27,9 +27,9 @@ public class OutputView {
         printReturnRate(lottoTicketPurchaseAmount, winningStatistics);
     }
 
-    private static void printReturnRate(int lottoTicketPurchaseAmount, LottoWinningStatistics winningStatistics) {
-        int winningAmount = winningStatistics.calculateWinningAmount();
-        float returnRate = winningAmount / (float) lottoTicketPurchaseAmount;
+    private static void printReturnRate(int lottoPurchaseAmount, LottoWinningStatistics winningStatistics) {
+        int lottoWinningAmount = winningStatistics.calculateWinningAmount();
+        float returnRate = LottoWinningStatistics.calculateReturnRate(lottoWinningAmount, lottoPurchaseAmount);
 
         System.out.printf("총 수익률은 %.2f입니다.", returnRate);
         if (returnRate < 1.0) {

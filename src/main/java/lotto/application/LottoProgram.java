@@ -12,12 +12,12 @@ public class LottoProgram {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public List<Lotto> generateLottoTickets(int lottoTicketQuantity) {
-        return lottoNumberGenerator.generate(lottoTicketQuantity);
+    public List<Lotto> generateLottos(int lottoQuantity) {
+        return lottoNumberGenerator.generate(lottoQuantity);
     }
 
-    public LottoWinningStatistics getWinningStatistics(List<Lotto> userLottoTicket, String[] winningLottoNumbersInput) {
-        return new LottoWinningStatistics(userLottoTicket, new Lotto(winningLottoNumbersInput));
+    public LottoWinningStatistics createWinningStatistics(List<Lotto> userLotto, String[] winningLottoNumbersInput) {
+        return new LottoWinningStatistics(userLotto, new Lotto(winningLottoNumbersInput));
     }
 
 }
