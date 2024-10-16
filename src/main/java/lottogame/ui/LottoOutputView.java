@@ -6,6 +6,7 @@ import lottogame.domain.Lottos;
 import lottogame.domain.Rank;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,14 +42,22 @@ public final class LottoOutputView {
     private static List<Rank> getWinningRanks() {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.NONE)
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 
     private static void printRankStatistics(Rank rank, Map<Rank, Integer> winningResults) {
-        System.out.printf("%d개 일치 (%.0f원) - %d개%n",
-                rank.getMatchCount(),
+        System.out.printf("%s (%.0f원) - %d개%n",
+                getMatchDescription(rank),
                 rank.getPrizeMoney(),
                 winningResults.getOrDefault(rank, 0));
+    }
+
+    private static String getMatchDescription(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return String.format("%d개 일치, 보너스 볼 일치", rank.getMatchCount());
+        }
+        return String.format("%d개 일치", rank.getMatchCount());
     }
 
     public static void printPrizeRate(double prizeRate) {
