@@ -6,6 +6,6 @@ import java.util.EnumMap;
 
 public abstract class ProfitRateStrategy {
 
-    public abstract String calculateProfitRate(EnumMap<Prize, Integer> countMap, CashAmount cashAmount);
+    public abstract String calculateProfitRate(EnumMap<Prize, Integer> countMap, Amount cashAmount);
 
 }

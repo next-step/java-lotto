@@ -1,12 +1,11 @@
 package lotto;
 
 import lotto.constant.Prize;
-import lotto.domain.CashAmount;
+import lotto.domain.Amount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCreateByMission;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNo;
-import lotto.domain.ManualAmount;
 import lotto.domain.MissionProfitRateStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -22,14 +21,15 @@ public class LottoMain {
         // 로또 구입
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
-//        inputView.printPurchaseCount(machine.calculatePurchaseQuantity());
 
         // 로또 생성
         int cashAmount = inputView.getCashAmount();
         List<Lotto> manualLottoList = inputView.getManualLottoNumbers(inputView.getManualLottoCount());
-        LottoMachine machine = LottoMachine.of(new CashAmount(cashAmount), new ManualAmount(manualLottoList.size())
-                , new MissionProfitRateStrategy(), new LottoCreateByMission());
-        resultView.printLottoAmount(manualLottoList.size(), machine.calculatePurchaseQuantity());
+        LottoMachine machine = LottoMachine.builder().cashAmount(new Amount(cashAmount))
+                .manualAmount(new Amount(manualLottoList.size()))
+                .profitRateStrategy(new MissionProfitRateStrategy())
+                .lottoCreateStrategy(new LottoCreateByMission())
+                .build();
         List<Lotto> autoLottoList = machine.createAutomatically();
 
         manualLottoList.addAll(autoLottoList);

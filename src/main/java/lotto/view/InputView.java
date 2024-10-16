@@ -60,7 +60,7 @@ public class InputView {
     private Lotto createLotto() {
         try {
             Set<LottoNo> numbers = Arrays.stream(sc.nextLine().split(", "))
-                    .map(i -> new LottoNo(Integer.parseInt(i)))
+                    .map(i -> LottoNo.of(Integer.parseInt(i)))
                     .collect(Collectors.toSet());
             return new Lotto(numbers);
         } catch (Exception e) {
@@ -69,15 +69,11 @@ public class InputView {
         }
     }
 
-//    public void printPurchaseCount(int purchaseCount) {
-//        System.out.println(purchaseCount + PURCHASE_COUNT_MESSAGE);
-//    }
-
     public Set<LottoNo> getWinningNumbers() {
         System.out.println(WINNING_NUMBERS_MESSAGE);
         String[] balls = sc.nextLine().split(", ");
         return Arrays.stream(balls)
-                .map(i -> new LottoNo(Integer.parseInt(i)))
+                .map(i -> LottoNo.of(Integer.parseInt(i)))
                 .collect(Collectors.toSet());
     }
 
@@ -86,7 +82,7 @@ public class InputView {
             System.out.println("보너스 볼을 입력해 주세요.");
             int number = sc.nextInt();
             sc.nextLine();
-            return new LottoNo(number);
+            return LottoNo.of(number);
         } catch (Exception e) {
             sc.nextLine();
             return getBonusNumber();

@@ -1,20 +1,26 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
-    private final List<LottoNo> numbers = new ArrayList<>();
+    private final List<LottoNo> numbers;
 
-    public LottoNumbers() {
-        IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
-                .forEach(i -> numbers.add(new LottoNo(i)));
+    private LottoNumbers(List<LottoNo> numbers) {
+        this.numbers = numbers;
+    }
+
+    public static LottoNumbers of() {
+        List<LottoNo> numbers = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
+                .mapToObj(LottoNo::of)
+                .collect(Collectors.toList());
+        return new LottoNumbers(numbers);
     }
 
     public List<LottoNo> getNumbers() {

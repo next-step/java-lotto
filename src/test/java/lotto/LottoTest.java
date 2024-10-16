@@ -18,10 +18,10 @@ class LottoTest {
     @Test
     @DisplayName("로또 변경 불가능 테스트")
     void getBalls() {
-        Lotto lotto = new Lotto(Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
-                , new LottoNo(4), new LottoNo(5), new LottoNo(6)));
+        Lotto lotto = new Lotto(Set.of(LottoNo.of(1), LottoNo.of(2), LottoNo.of(3)
+                , LottoNo.of(4), LottoNo.of(5), LottoNo.of(6)));
 
-        assertThatThrownBy(() -> lotto.getNumbers().add(new LottoNo(50)))
+        assertThatThrownBy(() -> lotto.getNumbers().add(LottoNo.of(40)))
                 .isInstanceOf(UnsupportedOperationException.class);
         assertThatThrownBy(() -> lotto.getNumbers().remove(0))
                 .isInstanceOf(UnsupportedOperationException.class);
@@ -29,16 +29,16 @@ class LottoTest {
 
     @Test
     void validate_로또번호_6개() {
-        Set<LottoNo> numbers = Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
-                , new LottoNo(4), new LottoNo(5), new LottoNo(6));
+        Set<LottoNo> numbers = Set.of(LottoNo.of(1), LottoNo.of(2), LottoNo.of(3)
+                , LottoNo.of(4), LottoNo.of(5), LottoNo.of(6));
         Lotto lotto = new Lotto(numbers);
         assertThat(lotto.getNumbers().size()).isEqualTo(6);
     }
 
     @Test
     void validate_로또번호_6개_이외() {
-        Set<LottoNo> numbers = Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3)
-                , new LottoNo(4), new LottoNo(5), new LottoNo(6), new LottoNo(7));
+        Set<LottoNo> numbers = Set.of(LottoNo.of(1), LottoNo.of(2), LottoNo.of(3)
+                , LottoNo.of(4), LottoNo.of(5), LottoNo.of(6), LottoNo.of(7));
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new Lotto(numbers);
         });

@@ -13,28 +13,22 @@ import java.util.stream.IntStream;
 public class LottoMachine {
 
     private static final int LOTTO_PRICE = 1000;
-    private final CashAmount cashAmount;
-    private final ManualAmount manualAmount;
+    private final Amount cashAmount;
+    private final Amount manualAmount;
     private final LottoNumbers balls;
     private final ProfitRateStrategy profitRateStrategy;
     private final LottoCreateStrategy lottoCreateStrategy;
 
-    private LottoMachine(CashAmount cashAmount, ManualAmount manualAmount, ProfitRateStrategy profitRateStrategy
-            , LottoCreateStrategy lottoCreateStrategy) {
-        this.cashAmount = cashAmount;
-        this.manualAmount = manualAmount;
-        this.balls = new LottoNumbers();
-        this.profitRateStrategy = profitRateStrategy;
-        this.lottoCreateStrategy = lottoCreateStrategy;
+    private LottoMachine(Builder builder) {
+        validateCashAmount(builder.cashAmount);
+        this.cashAmount = builder.cashAmount;
+        this.manualAmount = builder.manualAmount;
+        this.balls = LottoNumbers.of();
+        this.profitRateStrategy = builder.profitRateStrategy;
+        this.lottoCreateStrategy = builder.lottoCreateStrategy;
     }
 
-    public static LottoMachine of(CashAmount cashAmount, ManualAmount manualAmount, ProfitRateStrategy profitRateStrategy
-            , LottoCreateStrategy lottoCreateStrategy) {
-        validateCashAmount(cashAmount);
-        return new LottoMachine(cashAmount, manualAmount, profitRateStrategy, lottoCreateStrategy);
-    }
-
-    private static void validateCashAmount(CashAmount cashAmount) {
+    private static void validateCashAmount(Amount cashAmount) {
         if (cashAmount.isLessThan(LOTTO_PRICE)) {
             throw new IllegalArgumentException("로또 구입 금액은 최소 " + LOTTO_PRICE + "원 이상이어야 합니다.");
         }
@@ -67,7 +61,7 @@ public class LottoMachine {
 
     private int match(Lotto lotto, Set<LottoNo> winningNumbers) {
         return lotto.getNumbers().stream()
-                .filter(i -> i.isContains(winningNumbers))
+                .filter(winningNumbers::contains)
                 .collect(Collectors.toList()).size();
     }
 
@@ -79,4 +73,38 @@ public class LottoMachine {
         return profitRateStrategy.calculateProfitRate(countMap, cashAmount);
     }
 
+    public static class Builder {
+        private Amount cashAmount;
+        private Amount manualAmount;
+        private ProfitRateStrategy profitRateStrategy;
+        private LottoCreateStrategy lottoCreateStrategy;
+
+        public Builder cashAmount(Amount cashAmount) {
+            this.cashAmount = cashAmount;
+            return this;
+        }
+
+        public Builder manualAmount(Amount manualAmount) {
+            this.manualAmount = manualAmount;
+            return this;
+        }
+
+        public Builder profitRateStrategy(ProfitRateStrategy profitRateStrategy) {
+            this.profitRateStrategy = profitRateStrategy;
+            return this;
+        }
+
+        public Builder lottoCreateStrategy(LottoCreateStrategy lottoCreateStrategy) {
+            this.lottoCreateStrategy = lottoCreateStrategy;
+            return this;
+        }
+
+        public LottoMachine build() {
+            return new LottoMachine(this);
+        }
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 }

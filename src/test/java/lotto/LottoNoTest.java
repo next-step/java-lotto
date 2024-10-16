@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoNoTest {
     @Test
     void isContains() {
-        LottoNo lottoNo = new LottoNo(1);
-        boolean isContains = lottoNo.isContains(Set.of(new LottoNo(1), new LottoNo(2)));
+        LottoNo lottoNo = LottoNo.of(1);
+        boolean isContains = Set.of(LottoNo.of(1), LottoNo.of(2)).contains(lottoNo);
         assertThat(isContains).isTrue();
     }
 }

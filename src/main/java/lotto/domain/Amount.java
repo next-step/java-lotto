@@ -1,9 +1,9 @@
 package lotto.domain;
 
-public class CashAmount {
+public class Amount {
     private final int value;
 
-    public CashAmount(int value) {
+    public Amount(int value) {
         this.value = value;
     }
 
@@ -17,5 +17,9 @@ public class CashAmount {
 
     public double calculateProfitRate(int sum) {
         return (double) sum / value;
+    }
+
+    public int calculateAutoPurchaseQuantity(int total) {
+        return total - value;
     }
 }
