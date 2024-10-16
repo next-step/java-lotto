@@ -35,7 +35,8 @@
 
 ## 로또 기능 요구사항
 - InputView
-  - 구매금액 입력 받아 LottoTickets를 리턴
+  - 구매금액 입력 받아 LottoTickets 리턴
+  - 당첨 번호 입력 받아 당첨 LottoTicket 리턴
 - ResultView
   - 구매한 로또 출력
   - 당첨 통계 출력
