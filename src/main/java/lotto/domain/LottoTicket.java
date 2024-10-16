@@ -47,8 +47,12 @@ public class LottoTicket {
 
     public int matchCount(LottoTicket winningNumbers) {
         return (int) lottoNumbers.stream()
-                                 .filter(winningNumbers.getLottoNumbers()::contains)
+                                 .filter(winningNumbers::contains)
                                  .count();
+    }
+
+    private boolean contains(int number) {
+        return lottoNumbers.contains(number);
     }
 
     public List<Integer> getLottoNumbers() {
