@@ -36,7 +36,7 @@ public class OutputView {
         printEarningRate(lottoResult);
     }
 
-    private static void printEarningRate(LottoResult lottoResult) {
+    private void printEarningRate(LottoResult lottoResult) {
         double earningRate = lottoResult.calculateEarningRate();
         final int breakEven = 1;
 
@@ -48,7 +48,7 @@ public class OutputView {
         System.out.println(String.format("총 수익률은 %.2f입니다. (%s)", earningRate, profit));
     }
 
-    private static void printEachRankResult(LottoResult lottoResult) {
+    private void printEachRankResult(LottoResult lottoResult) {
         Map<Rank, Integer> result = lottoResult.countPerRank();
         result.entrySet()
                 .stream()
