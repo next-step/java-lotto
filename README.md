@@ -47,12 +47,12 @@
   - 다른 LottoTicket과 몇개 일치하는지 확인 (ArrayList의 contains() 확인)
 - LottoTickets
   - 구입 금액에 해당하는 로또 발급 (로또 1장의 가격은 1000원)
-  - 일치 개수에 따른 통계 계산하고 WinningCalculator에 저장
+  - 일치 개수들 계산
 - WinningCalculator
-  - 당첨 통계 저장
+  - 일채 개수들 계산한 것을 받아 당첨 통계 저장
   - 당첨 금액 저장
   - 수익률 계산
-    - 당첨금액 / 구입금액 출력
+    - 당첨금액 / 구입금액
 - Winning
   - 당첨 관련 Enum
     - 3개 일치 5000원

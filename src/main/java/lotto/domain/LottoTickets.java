@@ -7,6 +7,10 @@ import java.util.stream.IntStream;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
+
     public LottoTickets(int price) {
         this.lottoTickets = generateLottoTickets(price);
     }
@@ -28,5 +32,11 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public List<Integer> matchCount(LottoTicket winningNumbers) {
+        return lottoTickets.stream()
+                           .map(ticket -> ticket.matchCount(winningNumbers))
+                           .collect(Collectors.toList());
     }
 }
