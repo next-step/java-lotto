@@ -30,8 +30,8 @@ public class Lottos {
         return winningResult;
     }
 
-    public List<List<Integer>> getLottoNumbers() {
-        List<List<Integer>> lottoNumbers = new ArrayList<>();
+    public List<LottoNumbers> getLottoNumbers() {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (Lotto lt : lottos) {
             lottoNumbers.add(lt.getLottoNumbers());
         }

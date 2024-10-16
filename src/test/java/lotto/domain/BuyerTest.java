@@ -16,9 +16,10 @@ public class BuyerTest {
     @Test
     void create() {
         List<Lotto> lottoList = new ArrayList<>();
-        List<Integer> lottoNumber = Arrays.asList(1,2,3,4,5,6);
+        Integer[] numbers = {1,2,3,4,5,6};
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
-        lottoList.add(new Lotto(lottoNumber));
+        lottoList.add(new Lotto(lottoNumbers));
         Lottos lottos = new Lottos(lottoList);
 
         Buyer buyer = new Buyer(lottos);
@@ -34,6 +35,7 @@ public class BuyerTest {
     void create_usingNumberGenInterface() {
 
         List<Integer> lottoNumber = Arrays.asList(1,2,3,4,5,6);
+        Lotto winningLotto = new Lotto(new LottoNumbers());
 
         Buyer buyer = new Buyer(1, new TestLottoNumberGenerator(1,2,3,4,5,6));
         assertThat(buyer.getLottoNumbers().get(0)).isEqualTo(lottoNumber);

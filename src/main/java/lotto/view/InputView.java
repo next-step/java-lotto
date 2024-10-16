@@ -13,9 +13,8 @@ public class InputView {
         return scanner.nextInt() / 1000;
     }
 
-    public static List<Integer> inputWinningNumber() {
+    public static String[] inputWinningNumber() {
         Scanner scanner = new Scanner(System.in).useDelimiter(",");
-        String[] winingNumbers = scanner.nextLine().replaceAll(" ", "").split(",");
-        return Arrays.stream(winingNumbers).map(Integer::parseInt).collect(Collectors.toList());
+        return scanner.nextLine().replaceAll(" ", "").split(",");
     }
 }

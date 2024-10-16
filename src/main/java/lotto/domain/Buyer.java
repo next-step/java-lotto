@@ -3,7 +3,6 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,24 +17,24 @@ public class Buyer {
         this(initLottes(generator.genLottoNumbers(count)));
     }
 
-    private static Lottos initLottes(List<List<Integer>> lists) {
+    private static Lottos initLottes(List<LottoNumbers> lottoNumbersList) {
         List<Lotto> lottos = new ArrayList<>();
-        for (List<Integer> lottoNum : lists) {
-            lottos.add(new Lotto(lottoNum));
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+            lottos.add(new Lotto(lottoNumbers));
         }
         return new Lottos(lottos);
     }
 
     public BigDecimal getRateOfReturn(Lotto winningLotto) {
 
-        return lottos.getWinningAmount(winningLotto.getLottoNumbers()).divide(lottos.getTotalPaymentAmount(), 2, RoundingMode.DOWN);
+        return lottos.getWinningAmount(winningLotto).divide(lottos.getTotalPaymentAmount(), 2, RoundingMode.DOWN);
     }
 
     public Map<LottoRankingEnum, Integer> getWinningResult(Lotto winningLotto) {
-        return lottos.getWinningResult(winningLotto.getLottoNumbers());
+        return lottos.getWinningResult(winningLotto);
     }
 
-    public List<List<Integer>> getLottoNumbers() {
+    public List<LottoNumbers> getLottoNumbers() {
         return lottos.getLottoNumbers();
     }
 

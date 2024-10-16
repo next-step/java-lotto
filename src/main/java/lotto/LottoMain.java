@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Buyer;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import lotto.domain.QuickPickGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,7 +25,7 @@ public class LottoMain {
         OutputView.printLottoNumbers(buyer.getLottoNumbers());
         OutputView.printMsg(LAST_WINNING_NUMBER_MSG);
 
-        Lotto winningLotto = new Lotto(InputView.inputWinningNumber());
+        Lotto winningLotto = new Lotto(new LottoNumbers(InputView.inputWinningNumber()));
 
         OutputView.printWinningResult(buyer.getWinningResult(winningLotto));
         OutputView.printRateOfReturnInfo(buyer.getRateOfReturn(winningLotto));

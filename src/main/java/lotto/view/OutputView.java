@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRankingEnum;
 
 import java.math.BigDecimal;
@@ -12,9 +13,9 @@ public class OutputView {
         System.out.println(msg);
     }
 
-    public static void printLottoNumbers(List<List<Integer>> lottoNumbers) {
-        for (List<Integer> lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber);
+    public static void printLottoNumbers(List<LottoNumbers> lottoNumbers) {
+        for (LottoNumbers numbers : lottoNumbers) {
+            System.out.println(numbers.toString());
         }
     }
 
