@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.enums.Rank;
 import lotto.service.LottoGame;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,11 +35,7 @@ public class LottoResult {
     }
 
     public static LottoResult getLottoResult(Lottos lottos, WinnerLotto winnerLotto) {
-        List<Rank> result = new ArrayList<>();
-        for (Lotto lotto : lottos.getLottos()) {
-            result.add(winnerLotto.match(lotto));
-        }
-        return new LottoResult(result, lottos.getSize() * LottoGame.LOTTO_PRICE);
+        return new LottoResult(lottos.getRanks(winnerLotto), lottos.getSize() * LottoGame.LOTTO_PRICE);
     }
 
     @Override

@@ -77,3 +77,4 @@
 * Lotto, LottoNum 조합해 당첨번호 책임지는 WinnerLotto 분리 
 * 로또 매치하는 메소드 WinnerLotto 클래스로 이동 (Rank -> WinnerLotto)
 * 생성자로 문자열 파싱로직 제거 및 테스트에서 InputView로 로또객체 생성
+* Rank 구하는 메소드 LottoResult -> Lottos로 이동
