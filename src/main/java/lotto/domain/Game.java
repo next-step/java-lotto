@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Game {
 
@@ -72,14 +71,14 @@ public class Game {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<Lottonumber> filterMatchingLottonumber(Game that) {
-        return IntStream.range(0, this.lottonumbers.size())
-                .filter(index -> {
-                    Lottonumber lottonumber = this.lottonumbers.get(index);
-                    return that.lottonumbers.contains(lottonumber);
-                })
-                .mapToObj(this.lottonumbers::get)
-                .collect(Collectors.toList());
+    public int countIdenticalLottonumber(Game that) {
+        Set<Lottonumber> control = new HashSet<>(this.lottonumbers);
+        Set<Lottonumber> compare = new HashSet<>(that.lottonumbers);
+        compare.addAll(control);
+
+        int difference = compare.size() - control.size();
+
+        return control.size() - difference;
     }
 
     @Override
