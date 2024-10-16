@@ -1,7 +1,7 @@
 package lotto.application;
 
 import lotto.application.strategy.LottoNumberGenerator;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ public class LottoProgram {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public List<LottoNumbers> generateLottoTickets(int lottoTicketQuantity) {
+    public List<Lotto> generateLottoTickets(int lottoTicketQuantity) {
         return lottoNumberGenerator.generate(lottoTicketQuantity);
     }
 
-    public LottoWinningStatistics getWinningStatistics(List<LottoNumbers> userLottoTicket, String[] winningLottoNumbersInput) {
-        return new LottoWinningStatistics(userLottoTicket, new LottoNumbers(winningLottoNumbersInput));
+    public LottoWinningStatistics getWinningStatistics(List<Lotto> userLottoTicket, String[] winningLottoNumbersInput) {
+        return new LottoWinningStatistics(userLottoTicket, new Lotto(winningLottoNumbersInput));
     }
 
 }

@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.application.strategy.RandomGenerator;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.application.LottoProgram;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -14,7 +14,7 @@ public class LottoInterface {
         int lottoTicketQuantityPurchased = OutputView.printLottoTicketQuantityPurchased(lottoTicketPurchaseAmount);
 
         LottoProgram lottoProgram = new LottoProgram(new RandomGenerator());
-        List<LottoNumbers> lottoTickets = lottoProgram.generateLottoTickets(lottoTicketQuantityPurchased);
+        List<Lotto> lottoTickets = lottoProgram.generateLottoTickets(lottoTicketQuantityPurchased);
         OutputView.printLottoTickets(lottoTickets);
 
         String[] lastWinningLottoNumberInput = InputView.getLastWinningLottoNumbers();

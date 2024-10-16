@@ -1,6 +1,6 @@
 package lotto.application;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.LottoRankingSystem;
 
 import java.util.*;
@@ -8,11 +8,11 @@ import java.util.*;
 public class LottoWinningStatistics {
     private final Map<LottoRankingSystem, Integer> values;
 
-    public LottoWinningStatistics(List<LottoNumbers> userLottoTicket, LottoNumbers winningLottoNumbers) {
+    public LottoWinningStatistics(List<Lotto> userLottoTicket, Lotto winningLotto) {
         Map<LottoRankingSystem, Integer> result = new EnumMap<>(LottoRankingSystem.class);
 
-        for (LottoNumbers userLottoNumbers : userLottoTicket) {
-            putRankedLottoNumbersQuantity(result, userLottoNumbers, winningLottoNumbers);
+        for (Lotto userLotto : userLottoTicket) {
+            putRankedLottoNumbersQuantity(result, userLotto, winningLotto);
         }
         this.values = result;
     }
@@ -22,9 +22,9 @@ public class LottoWinningStatistics {
     }
 
     private void putRankedLottoNumbersQuantity(Map<LottoRankingSystem, Integer> result,
-                                                                           LottoNumbers userLottoNumbers,
-                                                                           LottoNumbers winningLottoNumbers) {
-        int matchingCount = winningLottoNumbers.countMatchingNumbers(userLottoNumbers);
+                                                                           Lotto userLotto,
+                                                                           Lotto winningLotto) {
+        int matchingCount = winningLotto.countMatchingNumbers(userLotto);
         if (checkNonRanked(matchingCount)) {
             return;
         }

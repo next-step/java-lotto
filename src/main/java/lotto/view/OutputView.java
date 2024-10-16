@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.application.LottoWinningStatistics;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.LottoRankingSystem;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class OutputView {
         return lottoCount;
     }
 
-    public static void printLottoTickets(List<LottoNumbers> lottoTickets) {
+    public static void printLottoTickets(List<Lotto> lottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         lottoTickets.forEach(lottoNumbers -> stringBuilder.append(lottoNumbers.values()).append(NEW_LINE));
         System.out.println(stringBuilder);

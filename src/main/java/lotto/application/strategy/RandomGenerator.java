@@ -1,6 +1,6 @@
 package lotto.application.strategy;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,20 +18,20 @@ public class RandomGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public List<LottoNumbers> generate(int generateCount) {
-        List<LottoNumbers> result = new ArrayList<>();
+    public List<Lotto> generate(int generateCount) {
+        List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < generateCount; i++) {
             result.add(this.generate());
         }
         return result;
     }
 
-    private LottoNumbers generate() {
+    private Lotto generate() {
         Collections.shuffle(baseNumbers);
 
         List<Integer> numbers = baseNumbers.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(numbers);
 
-        return new LottoNumbers(numbers);
+        return new Lotto(numbers);
     }
 }

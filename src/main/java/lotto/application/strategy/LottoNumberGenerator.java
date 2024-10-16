@@ -1,10 +1,10 @@
 package lotto.application.strategy;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 
 import java.util.List;
 
 public interface LottoNumberGenerator {
-    List<LottoNumbers> generate(int generateCount);
+    List<Lotto> generate(int generateCount);
 
 }

@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(Integer... input) {
+    public Lotto(Integer... input) {
         this(Arrays.stream(input).collect(Collectors.toList()));
     }
 
-    public LottoNumbers(String[] input) {
+    public Lotto(String[] input) {
         this(Arrays.stream(input).map(Integer::valueOf).collect(Collectors.toList()));
     }
 
-    public LottoNumbers(List<Integer> input) {
+    public Lotto(List<Integer> input) {
         validatePolicy(input);
         this.lottoNumbers = input.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
@@ -27,8 +27,8 @@ public class LottoNumbers {
         }
     }
 
-    public int countMatchingNumbers(LottoNumbers lottoNumbers) {
-        return (int) lottoNumbers.lottoNumbers.stream()
+    public int countMatchingNumbers(Lotto lotto) {
+        return (int) lotto.lottoNumbers.stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
     }

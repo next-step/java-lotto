@@ -1,6 +1,6 @@
 package lotto.application;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.LottoRankingSystem;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
@@ -17,13 +17,13 @@ class LottoWinningStatisticsTest {
     @DisplayName("사용자 로또 번호와 당첨 번호를 매칭하여 당첨 통계 객체를 생성한다.")
     @Test
     void create() {
-        LottoNumbers twoMatchingCount = new LottoNumbers(List.of(1, 2, 9, 10, 11, 12));
-        LottoNumbers threeMatchingCount = new LottoNumbers(List.of(1, 2, 3, 7, 8, 9));
-        LottoNumbers allMatchingCount = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        List<LottoNumbers> usersLottoTicket = List.of(twoMatchingCount, threeMatchingCount, allMatchingCount);
-        LottoNumbers winningLottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+        Lotto twoMatchingCount = new Lotto(List.of(1, 2, 9, 10, 11, 12));
+        Lotto threeMatchingCount = new Lotto(List.of(1, 2, 3, 7, 8, 9));
+        Lotto allMatchingCount = new Lotto(1, 2, 3, 4, 5, 6);
+        List<Lotto> usersLottoTicket = List.of(twoMatchingCount, threeMatchingCount, allMatchingCount);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        LottoWinningStatistics winningStatistics = new LottoWinningStatistics(usersLottoTicket, winningLottoNumbers);
+        LottoWinningStatistics winningStatistics = new LottoWinningStatistics(usersLottoTicket, winningLotto);
 
         assertThat(winningStatistics)
                 .extracting("values", as(InstanceOfAssertFactories.MAP))

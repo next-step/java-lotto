@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 
-class LottoNumbersTest {
+class LottoTest {
 
     static Stream<Arguments> generateLottoNumbers() {
         return Stream.of(
@@ -26,7 +26,7 @@ class LottoNumbersTest {
     @DisplayName("인자로 받은 로또 번호 크기가 6개가 아니면 IllegalArgumentException을 발생시킨다.")
     @Test
     void throw_IllegalArgumentException_when_size_is_not_6() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(List.of(1, 2, 3, 4, 5)))
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
                 .withMessage("로또는 6개의 로또 번호로 구성되어야 합니다.");
     }
 
@@ -34,9 +34,9 @@ class LottoNumbersTest {
     @MethodSource("generateLottoNumbers")
     @ParameterizedTest(name = "LottoNumbers: {0}, matchingCount: {1}개")
     void return_counting_of_matching_lottoNumbers(List<Integer> given, int expected) {
-        LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-        int actual = winningLottoNumbers.countMatchingNumbers(new LottoNumbers(given));
+        int actual = winningLotto.countMatchingNumbers(new Lotto(given));
 
         assertThat(actual).isEqualTo(expected);
     }
