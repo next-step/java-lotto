@@ -13,6 +13,10 @@ public class Lotto {
         return this.numbers.countMatchingNumbers(other.numbers);
     }
 
+    public boolean isMatchingBonus(LottoNumber number) {
+        return this.numbers.isMatchingBonus(number);
+    }
+
     public List<LottoNumber> getNumbers() {
         return numbers.getLottoNumbers();
     }

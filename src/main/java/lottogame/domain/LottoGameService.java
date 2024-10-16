@@ -14,9 +14,9 @@ public class LottoGameService {
         this.buyAmount = buyAmount;
     }
 
-    public double calculatePrizeAmount(Lotto winningLotto) {
-        winningResultsByRank = lottos.calculateWinningStatistics(winningLotto);
-        double totalPrizeAmount = lottos.calculateTotalPrizeAmount(winningLotto);
+    public double calculatePrizeAmount(Lotto winningLotto, LottoNumber bonusNumber) {
+        winningResultsByRank = lottos.calculateWinningStatistics(winningLotto, bonusNumber);
+        double totalPrizeAmount = lottos.calculateTotalPrizeAmount(winningLotto, bonusNumber);
 
         return totalPrizeAmount / buyAmount;
     }

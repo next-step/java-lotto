@@ -1,6 +1,9 @@
 package lottogame.domain;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class LottoNumbers {
     private List<LottoNumber> lottoNumbers;
@@ -25,6 +28,11 @@ public class LottoNumbers {
         return (int) this.lottoNumbers.stream()
                 .filter(other.lottoNumbers::contains)
                 .count();
+    }
+
+    public boolean isMatchingBonus(LottoNumber bonusNumber) {
+        return this.lottoNumbers.stream()
+                .anyMatch(number -> number.equals(bonusNumber));
     }
 
     @Override
