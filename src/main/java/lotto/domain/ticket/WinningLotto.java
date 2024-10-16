@@ -8,18 +8,20 @@ import java.util.stream.Collectors;
 public class WinningLotto {
 
     private final LottoTicket winningTicket;
+    private final LottoNumber bonusNumber;
 
-    private WinningLotto(LottoTicket winningTicket) {
+    private WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
         this.winningTicket = winningTicket;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto of(LottoTicket winningTicket) {
-        return new WinningLotto(winningTicket);
+    public static WinningLotto of(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        return new WinningLotto(winningTicket, bonusNumber);
     }
 
-    public static WinningLotto fromWinningNumbers(List<String> winningNumbers) {
+    public static WinningLotto fromWinningNumbersAndBonusNumber(List<String> winningNumbers, int bonusNumber) {
         List<LottoNumber> lottoNumbers = generateLottoNumbers(winningNumbers);
-        return WinningLotto.of(LottoTicket.of(lottoNumbers));
+        return WinningLotto.of(LottoTicket.of(lottoNumbers), LottoNumber.of(bonusNumber));
     }
 
     private static List<LottoNumber> generateLottoNumbers(List<String> winningNumbers) {
@@ -31,5 +33,9 @@ public class WinningLotto {
 
     public boolean winningMatch(LottoNumber number) {
         return winningTicket.match(number);
+    }
+
+    public boolean isBonusMatch(LottoNumber number) {
+        return bonusNumber.equals(number);
     }
 }

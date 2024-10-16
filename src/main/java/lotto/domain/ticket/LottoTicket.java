@@ -87,7 +87,11 @@ public class LottoTicket {
         long matchCount = lottoNumbers.stream()
                 .filter(winningLotto::winningMatch)
                 .count();
-        return Rank.findRankBy(matchCount);
+
+        boolean bonusMatch = lottoNumbers.stream()
+                .anyMatch(winningLotto::isBonusMatch);
+
+        return Rank.findRankBy(matchCount, bonusMatch);
     }
 
     public List<LottoNumber> getLottoNumbers() {

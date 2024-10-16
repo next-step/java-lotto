@@ -59,6 +59,11 @@ public class ConsoleOutputHandler implements OutputHandler {
         printAssessmentText(getAssessmentText(lottoStatistics.getProfitRatio()));
     }
 
+    @Override
+    public void showBonusBallText() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     private void printStatisticsTitle() {
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -80,6 +85,9 @@ public class ConsoleOutputHandler implements OutputHandler {
     }
 
     private String getResultForRow(Rank rank, int matchedLottoCount) {
+        if (rank == Rank.SECOND) {
+            return String.format("%s개 일치, 보너스 볼 일치(%s원)- %s개", rank.getMatchCount(), rank.getPrizeAmount(), matchedLottoCount);
+        }
         return String.format("%s개 일치 (%s원)- %s개", rank.getMatchCount(), rank.getPrizeAmount(), matchedLottoCount);
     }
 

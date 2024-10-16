@@ -29,6 +29,12 @@ public class ConsoleInputHandler implements InputHandler {
         return winningNumbers;
     }
 
+    @Override
+    public int getBonusBallFromUser() {
+        String userInput = SCANNER.nextLine();
+        return Integer.parseInt(userInput);
+    }
+
     private List<String> getTrimmedStringNumbers(String[] splitted) {
         return Arrays.stream(splitted)
                 .map(String::trim)

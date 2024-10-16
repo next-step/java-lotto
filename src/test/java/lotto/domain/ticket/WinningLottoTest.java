@@ -15,7 +15,7 @@ class WinningLottoTest {
         LottoTicket winningTicket = LottoTicket.of(
                 TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
         );
-        WinningLotto winningLotto = WinningLotto.of(winningTicket);
+        WinningLotto winningLotto = WinningLotto.of(winningTicket, LottoNumber.of(7));
 
         assertThat(winningLotto.winningMatch(LottoNumber.of(1))).isTrue();
         assertThat(winningLotto.winningMatch(LottoNumber.of(7))).isFalse();

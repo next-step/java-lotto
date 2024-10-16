@@ -1,5 +1,6 @@
 package lotto.domain.ticket;
 
+import lotto.domain.number.LottoNumber;
 import lotto.domain.number.TestLottoNumberFactory;
 import lotto.domain.result.LottoStatistics;
 import lotto.domain.result.Rank;
@@ -34,7 +35,8 @@ class LottoTicketsTest {
         winningLotto = WinningLotto.of(
                 LottoTicket.of(
                         TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
-                )
+                ),
+                LottoNumber.of(7)
         );
     }
 
