@@ -33,10 +33,11 @@ class LottoNumbersTest {
     @DisplayName("두 개의 LottoNumbers가 주어졌을 때 매칭되는 갯수를 반환한다.")
     @MethodSource("generateLottoNumbers")
     @ParameterizedTest(name = "LottoNumbers: {0}, matchingCount: {1}개")
-    void return_counting_of_matching_lottoNumbers(List<Integer> given, int result) {
-
+    void return_counting_of_matching_lottoNumbers(List<Integer> given, int expected) {
         LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(winningLottoNumbers.countMatchingNumbers(new LottoNumbers(given))).isEqualTo(result);
+        int actual = winningLottoNumbers.countMatchingNumbers(new LottoNumbers(given));
+
+        assertThat(actual).isEqualTo(expected);
     }
 }
