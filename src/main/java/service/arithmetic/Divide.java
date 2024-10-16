@@ -1,18 +1,18 @@
-package service.Arithmetic;
+package service.arithmetic;
 
-public class Devide implements Arithmetic {
+public class Divide implements Arithmetic {
 
-    private static Devide instance;
+    private static Divide instance;
 
-    public static Devide getInstance() {
+    public static Divide getInstance() {
         if (instance == null) {
-            instance = new Devide();
+            instance = new Divide();
         }
 
         return instance;
     }
 
-    private Devide() {}
+    private Divide() {}
 
     @Override
     public int calculate(int num1, int num2) {

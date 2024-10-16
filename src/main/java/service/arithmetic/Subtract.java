@@ -1,4 +1,4 @@
-package service.Arithmetic;
+package service.arithmetic;
 
 public class Subtract implements Arithmetic {
 

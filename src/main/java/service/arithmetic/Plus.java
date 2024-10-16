@@ -1,4 +1,4 @@
-package service.Arithmetic;
+package service.arithmetic;
 
 public class Plus implements Arithmetic {
 
