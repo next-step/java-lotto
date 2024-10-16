@@ -24,6 +24,6 @@ class PurchasePriceTest {
     @Test
     void 구입개수_구하기() {
         PurchasePrice purchasePrice = new PurchasePrice(14000);
-        assertThat(purchasePrice.calculatePurchaseCount()).isEqualTo(14);
+        assertThat(purchasePrice.calculateAutoCount()).isEqualTo(14);
     }
 }

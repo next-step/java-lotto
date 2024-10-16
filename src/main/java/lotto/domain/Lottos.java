@@ -10,7 +10,7 @@ public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(final PurchasePrice purchasePrice) {
-        for (int i = 0; i < purchasePrice.calculatePurchaseCount(); i++) {
+        for (int i = 0; i < purchasePrice.calculateAutoCount(); i++) {
             lottos.add(generate());
         }
     }
