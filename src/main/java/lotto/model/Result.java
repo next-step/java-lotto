@@ -19,17 +19,16 @@ public class Result {
     public static final String BONUS_MATCHED_STRINGS = ", 보너스 볼 일치";
     public static final String SPACE = " ";
     private final Buyer buyer;
-    private final Lotto winningLotto;
-    private final LottoNumber bonusNumber;
+    private final Winning winning;
 
-    private Result(Buyer buyer, Lotto winningLotto, LottoNumber bonusNumber) {
+    private Result(Buyer buyer, Winning winning) {
         this.buyer = buyer;
-        this.winningLotto = winningLotto;
-        this.bonusNumber = bonusNumber;
+        this.winning = winning;
     }
 
-    public static Result of(Buyer buyer, Lotto winningLotto, LottoNumber bonusNumber) {
-        return new Result(buyer, winningLotto,bonusNumber);
+
+    public static Result of(Buyer buyer, Winning winning) {
+        return new Result(buyer, winning);
     }
 
     public double statistics(int buyCount) {
@@ -47,7 +46,7 @@ public class Result {
     public String formattedRankingResults() {
         return rankings().entrySet()
                 .stream()
-                .sorted(Comparator.comparingInt(o -> o.getKey().matchedCount()))
+                .sorted(Comparator.comparingLong(ranking -> ranking.getKey().winningAmount()))
                 .map(Result::formattedRankingResult)
                 .collect(Collectors.joining(LINE_BREAK));
     }
@@ -76,7 +75,7 @@ public class Result {
     private int rankingCount(Ranking fourth) {
         long count = this.buyer.value()
                 .stream()
-                .map(lotto -> lotto.compare(winningLotto, bonusNumber))
+                .map(lotto -> lotto.compare(winning))
                 .filter(fourth::equals)
                 .count();
         return Long.valueOf(count)

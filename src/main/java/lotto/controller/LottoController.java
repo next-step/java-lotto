@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.model.Buyer;
 import lotto.model.Lotto;
 import lotto.model.Result;
+import lotto.model.Winning;
 import lotto.model.dto.LottoNumber;
 import lotto.util.LottoNumbersCreator;
 import lotto.view.InputView;
@@ -19,7 +20,8 @@ public class LottoController {
 
         Lotto winningLotto = Lotto.of(InputView::inputWinningLottoNumbers);
         LottoNumber bonusNumber = InputView.inputBonusLottoNumber();
-        Result result = Result.of(buyer, winningLotto, bonusNumber);
+        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Result result = Result.of(buyer, winning);
 
         ResultView.printStatistics(buyCount, result);
     }

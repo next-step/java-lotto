@@ -15,8 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultTest {
     private Buyer buyer;
-    private Lotto winningLotto;
-    private LottoNumber bonusNumber;
+    private Winning winning;
 
     @BeforeEach
     void setUp() {
@@ -27,15 +26,16 @@ public class ResultTest {
                         List.of(of(8), of(21), of(23), of(41), of(42), of(44)),
                         List.of(of(1), of(8), of(11), of(31), of(41), of(42))
                 )));
-        this.winningLotto = Lotto.of(
+        Lotto winningLotto = Lotto.of(
                 () -> List.of(of(8), of(21), of(23), of(41), of(42), of(43))
         );
-        this.bonusNumber = of(44);
+        LottoNumber bonusNumber = of(44);
+        this.winning = Winning.of(winningLotto, bonusNumber);
     }
 
     @Test
     void 수익률을_출력한다() {
-        Result result = Result.of(buyer, winningLotto, bonusNumber);
+        Result result = Result.of(buyer, winning);
 
         double actual = result.statistics(3);
 
@@ -50,7 +50,7 @@ public class ResultTest {
 
     @Test
     void 구매한_로또번호_6자리_목록의_등수들을_리턴한다() {
-        Map<Ranking, Integer> actual = Result.of(buyer, winningLotto, bonusNumber).rankings();
+        Map<Ranking, Integer> actual = Result.of(buyer, winning).rankings();
         Map<Ranking, Integer> expected = Map.of(
                 FIFTH, 1,
                 FOURTH, 0,

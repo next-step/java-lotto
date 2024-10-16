@@ -59,12 +59,13 @@ public class LottoTest {
                 () -> List.of(of(7), of(8), of(9), of(10), of(11), of(12))
         );
 
-        Lotto winning = Lotto.of(
+        Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
-        LottoNumber bonusNumber = of(13);//TODO:7~12일때 고려
+        LottoNumber bonusNumber = of(13);
+        Winning winning = Winning.of(winningLotto, bonusNumber);
 
-        Ranking actual = buy.compare(winning, bonusNumber);
+        Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.NONE;
 
         assertThat(actual).isEqualTo(expected);
@@ -75,12 +76,13 @@ public class LottoTest {
         Lotto buy = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(7), of(8), of(9))
         );
-        Lotto winning = Lotto.of(
+        Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(13);
+        Winning winning = Winning.of(winningLotto, bonusNumber);
 
-        Ranking actual = buy.compare(winning, bonusNumber);
+        Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.FIFTH;
 
         assertThat(actual).isEqualTo(expected);
@@ -91,12 +93,13 @@ public class LottoTest {
         Lotto buy = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(8), of(9))
         );
-        Lotto winning = Lotto.of(
+        Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(13);
+        Winning winning = Winning.of(winningLotto, bonusNumber);
 
-        Ranking actual = buy.compare(winning, bonusNumber);
+        Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.FOURTH;
 
         assertThat(actual).isEqualTo(expected);
@@ -107,12 +110,13 @@ public class LottoTest {
         Lotto buy = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(9))
         );
-        Lotto winning = Lotto.of(
+        Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(13);
+        Winning winning = Winning.of(winningLotto, bonusNumber);
 
-        Ranking actual = buy.compare(winning, bonusNumber);
+        Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.THIRD;
 
         assertThat(actual).isEqualTo(expected);
@@ -123,12 +127,13 @@ public class LottoTest {
         Lotto buy = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(9))
         );
-        Lotto winning = Lotto.of(
+        Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(9);
+        Winning winning = Winning.of(winningLotto, bonusNumber);
 
-        Ranking actual = buy.compare(winning, bonusNumber);
+        Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.SECOND;
 
         assertThat(actual).isEqualTo(expected);
@@ -139,13 +144,13 @@ public class LottoTest {
         Lotto buy = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
-        Lotto winning = Lotto.of(
+        Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
-
         LottoNumber bonusNumber = of(13);
+        Winning winning = Winning.of(winningLotto, bonusNumber);
 
-        Ranking actual = buy.compare(winning, bonusNumber);
+        Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.FIRST;
 
         assertThat(actual).isEqualTo(expected);

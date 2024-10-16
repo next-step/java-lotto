@@ -46,8 +46,10 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public Ranking compare(Lotto winning, LottoNumber bonusNumber) {
-        return Ranking.result(matchedCount(winning), isMatchedBonus(bonusNumber));
+    public Ranking compare(Winning winning) {
+        Lotto winningLotto = winning.winningLotto();
+        LottoNumber bonusNumber = winning.bonusNumber();
+        return Ranking.result(matchedCount(winningLotto), isMatchedBonus(bonusNumber));
     }
 
     private boolean isMatchedBonus(LottoNumber bonusNumber) {
