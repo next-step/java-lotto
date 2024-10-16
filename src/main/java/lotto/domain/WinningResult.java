@@ -34,12 +34,10 @@ public class WinningResult {
     }
 
     public int calculateProfitRate() {
-        int profit = 0;
-        for (LottoRank rank : staticsMap.keySet()) {
-            int count = staticsMap.get(rank);
-            profit += rank.calculatePrize(count);
-        }
-        return profit;
+        return staticsMap.keySet()
+                .stream()
+                .mapToInt(rank -> rank.calculatePrize(staticsMap.get(rank)))
+                .sum();
     }
 
     @Override
