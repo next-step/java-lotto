@@ -29,18 +29,18 @@ public class WinningLotto {
                 .collect(Collectors.toList()), bonus);
     }
 
-    public int match(Lotto userLotto) {
-        return userLotto.getLottoNumbers()
-                .stream()
-                .filter(lotto.getLottoNumbers()::contains)
-                .mapToInt(n -> 1)
-                .sum();
+    public LottoRank match(Lotto userLotto) {
+        return LottoRank.valueOf(getCountOfMatch(userLotto.getLottoNumbers()), userLotto.containBonus(bonus));
     }
 
-    public int match(int... numbers) {
-        return Arrays.stream(numbers)
-                .filter(value -> lotto.getLottoNumbers().contains(new LottoNumber(value)))
-                .map(value -> 1)
+    public LottoRank match(int... numbers) {
+        return match(new Lotto(numbers));
+    }
+
+    private int getCountOfMatch(List<LottoNumber> numbers) {
+        return numbers.stream()
+                .filter(value -> lotto.getLottoNumbers().contains(value))
+                .mapToInt(value -> 1)
                 .sum();
     }
 

@@ -43,6 +43,10 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
+    public boolean containBonus(int bonus) {
+        return numbers.contains(bonus);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

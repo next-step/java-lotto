@@ -24,8 +24,7 @@ public class LottoGame {
     public WinningResult play(WinningLotto winning) {
         WinningResult result = new WinningResult();
         for (Lotto lotto : lottos) {
-            int matchCount = winning.match(lotto);
-            result.incrementMatchCount(matchCount);
+            result.incrementMatchCount(winning.match(lotto));
         }
         return result;
     }
