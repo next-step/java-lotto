@@ -8,11 +8,11 @@ import java.util.*;
 public class LottoWinningStatistics {
     private final Map<LottoRankingSystem, Integer> values;
 
-    public LottoWinningStatistics(List<Lotto> userLottoTicket, Lotto winningLotto) {
+    public LottoWinningStatistics(List<Lotto> userLottos, Lotto winningLotto) {
         Map<LottoRankingSystem, Integer> result = new EnumMap<>(LottoRankingSystem.class);
 
-        for (Lotto userLotto : userLottoTicket) {
-            putRankedLottoNumbersQuantity(result, userLotto, winningLotto);
+        for (Lotto userLotto : userLottos) {
+            putRankedLottoQuantity(result, userLotto, winningLotto);
         }
         this.values = result;
     }
@@ -21,9 +21,9 @@ public class LottoWinningStatistics {
         this.values = values;
     }
 
-    private void putRankedLottoNumbersQuantity(Map<LottoRankingSystem, Integer> result,
-                                                                           Lotto userLotto,
-                                                                           Lotto winningLotto) {
+    private void putRankedLottoQuantity(Map<LottoRankingSystem, Integer> result,
+                                        Lotto userLotto,
+                                        Lotto winningLotto) {
         int matchingCount = winningLotto.countMatchingNumbers(userLotto);
         if (checkNonRanked(matchingCount)) {
             return;
@@ -48,4 +48,7 @@ public class LottoWinningStatistics {
         return Objects.isNull(this.values.get(ranking)) ? 0 : this.values.get(ranking);
     }
 
+    public static float calculateReturnRate(int lottoWinningAmount, int lottoPurchaseAmount) {
+        return lottoWinningAmount / (float) lottoPurchaseAmount;
+    }
 }

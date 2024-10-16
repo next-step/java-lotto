@@ -55,4 +55,12 @@ class LottoWinningStatisticsTest {
 
         assertThat(result).isEqualTo(2);
     }
+
+    @DisplayName("로또 당첨금액과 로또 구입금액을 전달받아서 수익률을 계산하여 반환한다.")
+    @Test
+    void calculate_returnRate() {
+        float actual = LottoWinningStatistics.calculateReturnRate(1_500_000, 5000);
+
+        assertThat(actual).isEqualTo(300.0f);
+    }
 }
