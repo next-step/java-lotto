@@ -6,8 +6,7 @@ import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.view.ResultView;
 
-import static lotto.view.InputView.inputAmount;
-import static lotto.view.InputView.inputLastWinningNumbers;
+import static lotto.view.InputView.*;
 
 public class LottoMain {
 
@@ -23,7 +22,7 @@ public class LottoMain {
             ResultView.printLotto(lotto);
         }
 
-        WinningLotto winningLotto = new WinningLotto(inputLastWinningNumbers());
+        WinningLotto winningLotto = new WinningLotto(inputLastWinningNumbers(), inputBonusNumber());
         WinningResult winningResult = lottoGame.play(winningLotto);
 
         ResultView.printMatchStaticsInfo(winningResult.getStaticsList());

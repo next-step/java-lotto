@@ -29,7 +29,7 @@ public class LottoGenerator {
         }
         Collections.shuffle(numbers);
         numbers = numbers.subList(0, LOTTO_SIZE);
-        Collections.sort(numbers, (Comparator.comparingInt(LottoNumber::getLottoNumber)));
+        numbers.sort((Comparator.comparingInt(LottoNumber::getLottoNumber)));
         return new Lotto(numbers);
     }
 }
