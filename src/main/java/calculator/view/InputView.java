@@ -1,7 +1,7 @@
-package controller;
+package calculator.view;
 
-import parser.InputParser;
-import validator.Validator;
+import calculator.utility.parser.InputParser;
+import calculator.utility.validator.Validator;
 
 import java.util.List;
 import java.util.Scanner;

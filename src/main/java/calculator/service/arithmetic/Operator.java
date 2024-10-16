@@ -1,4 +1,4 @@
-package service.arithmetic;
+package calculator.service.arithmetic;
 
 import java.util.function.BiFunction;
 

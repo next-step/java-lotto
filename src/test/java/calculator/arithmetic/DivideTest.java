@@ -1,7 +1,7 @@
-package arithmetic;
+package calculator.arithmetic;
 
+import calculator.service.arithmetic.Divide;
 import org.junit.jupiter.api.Test;
-import service.arithmetic.Divide;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

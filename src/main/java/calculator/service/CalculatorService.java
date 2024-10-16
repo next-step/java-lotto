@@ -1,13 +1,15 @@
-package service.calculator;
+package calculator.service;
 
-import parser.InputParser;
+import calculator.arithmetic.*;
+import calculator.utility.parser.InputParser;
 import service.arithmetic.*;
+import calculator.service.arithmetic.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Calculator {
+public class CalculatorService {
 
     private static final Map<Character, Arithmetic> arithmetics = new HashMap<>();
 
@@ -18,7 +20,7 @@ public class Calculator {
         arithmetics.put('/', Divide.getInstance());
     }
 
-    private Calculator() {
+    private CalculatorService() {
     }
 
     public static int calculate(String calculateString) {

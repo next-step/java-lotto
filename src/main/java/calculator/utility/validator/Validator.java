@@ -1,4 +1,4 @@
-package validator;
+package calculator.utility.validator;
 
 public class Validator {
     private static final String operationsPattern = "^[\\d+\\-*/\\s]+";

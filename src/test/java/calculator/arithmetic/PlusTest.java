@@ -1,7 +1,7 @@
-package arithmetic;
+package calculator.arithmetic;
 
+import calculator.service.arithmetic.Plus;
 import org.junit.jupiter.api.Test;
-import service.arithmetic.Plus;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
