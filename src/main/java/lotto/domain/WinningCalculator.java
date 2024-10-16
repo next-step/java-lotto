@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +10,8 @@ public class WinningCalculator {
     private final Map<Winning, Integer> winningCountMap;
 
     public WinningCalculator(List<Integer> matchCounts) {
-        winningCountMap = new LinkedHashMap<>();
-        for (Winning winning : Winning.values()) {
-            winningCountMap.put(winning, 0);
-        }
-
+        winningCountMap = Arrays.stream(Winning.values())
+                                .collect(Collectors.toMap(winning -> winning, winning -> 0, (e1, e2) -> e1, LinkedHashMap::new));
         for (int matchCount : matchCounts) {
             Winning winning = Winning.fromMatchCount(matchCount);
             winningCountMap.put(winning, winningCountMap.get(winning) + 1);
