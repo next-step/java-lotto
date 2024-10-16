@@ -12,7 +12,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         final PurchasePrice purchasePrice = new PurchasePrice(InputView.inputPurchasePrice());
         final LottoPurchaseInfo lottoPurchaseInfo = generateLottoPurchaseInfo(purchasePrice);
-        final Lottos lottos = new Lottos(purchasePrice);
+        final Lottos lottos = new Lottos(InputView.inputManualLottos(lottoPurchaseInfo.getManualCount()), lottoPurchaseInfo);
         ResultView.printLottos(lottos);
 
         final WinningNumber winningNumber = generateWinningNumber();

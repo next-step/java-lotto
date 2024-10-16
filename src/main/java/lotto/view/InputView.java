@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -12,6 +13,8 @@ public class InputView {
     private static final String NUMBER_ERROR = "숫자만 입력가능합니다.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_MANUAL_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private static String inputValue() {
@@ -33,13 +36,7 @@ public class InputView {
 
     public static Set<Integer> inputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        List<String> values = List.of(inputValue().split(REGEX));
-        for (String value : values) {
-            validateNumber(value);
-        }
-        return values.stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toSet());
+        return convertToInt();
     }
 
     public static int inputBonusNumber() {
@@ -56,5 +53,24 @@ public class InputView {
         String inputValue = inputValue();
         validateNumber(inputValue);
         return Integer.parseInt(inputValue);
+    }
+
+    public static List<Set<Integer>> inputManualLottos(final int manualCount) {
+        System.out.println(INPUT_MANUAL_NUMBERS_MESSAGE);
+        List<Set<Integer>> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            manualNumbers.add(convertToInt());
+        }
+        return manualNumbers;
+    }
+
+    private static Set<Integer> convertToInt() {
+        List<String> values = List.of(inputValue().split(REGEX));
+        for (String value : values) {
+            validateNumber(value);
+        }
+        return values.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
     }
 }

@@ -2,14 +2,24 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class LottosTest {
     @Test
     void 로또_구매_테스트() {
-        PurchasePrice purchasePrice = new PurchasePrice(14000);
-        Lottos lottos = new Lottos(purchasePrice);
-        assertThat(lottos.getLottos().size()).isEqualTo(14);
+        LottoPurchaseInfo lottoPurchaseInfo = new LottoPurchaseInfo(3, 14);
+        List<Set<Integer>> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            manualNumbers.add(getLottoNumbers());
+        }
+        Lottos lottos = new Lottos(manualNumbers, lottoPurchaseInfo);
+        assertThat(lottos.getLottos().size()).isEqualTo(17);
     }
 
+    private static Set<Integer> getLottoNumbers() {
+        return Set.of(1, 2, 3, 4, 5, 6);
+    }
 }

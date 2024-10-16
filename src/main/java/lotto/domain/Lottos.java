@@ -9,13 +9,16 @@ import java.util.Set;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(final PurchasePrice purchasePrice) {
-        for (int i = 0; i < purchasePrice.calculateAutoCount(); i++) {
-            lottos.add(generate());
+    public Lottos(final List<Set<Integer>> manualNumbers, final LottoPurchaseInfo lottoPurchaseInfo) {
+        for (Set<Integer> manualNumber : manualNumbers) {
+            lottos.add(Lotto.from(manualNumber));
+        }
+        for (int i = 0; i < lottoPurchaseInfo.getAutoCount(); i++) {
+            lottos.add(generateAuto());
         }
     }
 
-    private Lotto generate() {
+    private Lotto generateAuto() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() != Lotto.LOTTO_SIZE) {
             lottoNumbers.add(LottoNumber.from());
