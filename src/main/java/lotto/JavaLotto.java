@@ -22,11 +22,10 @@ public class JavaLotto {
 
     public void playLotto() {
         WinningNumber winningNumber = new WinningNumber();
-        Lottos lottos = new Lottos();
 
         int amount = inputView.inputPurchaseAmountGuide();
 
-        lottos.buyLotto(amount, LottoShuffleGenerator.getLottoShuffleGenerator());
+        Lottos lottos = Lottos.createLottos(amount, LottoShuffleGenerator.getLottoShuffleGenerator());
 
         resultView.NumberOfLotto(lottos.getNumberOfLotto());
         resultView.printPurchasedLottos(lottos);

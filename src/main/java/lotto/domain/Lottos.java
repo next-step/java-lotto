@@ -1,38 +1,24 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+    private final List<Lotto> lottos;
 
-    private static final int PRICE_OF_LOTTO = 1000;
 
-    private final List<Lotto> lottos = new ArrayList<>();
-
-    public Lottos() {
+    public static Lottos createLottos(int purchaseAmount, LottoGenerator lottoGenerator) {
+        List<Lotto> lottos = lottoGenerator.generateLottos(purchaseAmount);
+        return new Lottos(lottos);
     }
 
-    public void buyLotto(int purchaseAmount, LottoGenerator lottoGenerator) {
-        int lottoCount = calculateNumberOfLotto(purchaseAmount);
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(lottoGenerator.generateLottos());
-        }
-    }
-
-    public int calculateNumberOfLotto(int purchaseAmount) {
-        checkIfCanPurchaseLotto(purchaseAmount);
-        return purchaseAmount / PRICE_OF_LOTTO;
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public int getNumberOfLotto() {
         return lottos.size();
     }
 
-    private void checkIfCanPurchaseLotto(int totalAmount) {
-        if (totalAmount < PRICE_OF_LOTTO) {
-            throw new IllegalArgumentException("1000원 미만으론 살 수 없음");
-        }
-    }
 
     public List<Lotto> getLottos() {
         return lottos;

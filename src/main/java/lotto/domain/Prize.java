@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Prize {
 
     SIX(6, 2_000_000_000),
@@ -20,12 +22,11 @@ public enum Prize {
     }
 
     public static int getValueByHit(int hit) {
-        for (Prize prize : Prize.values()) {
-            if (prize.hit == hit) {
-                return prize.getValue();
-            }
-        }
-        return 0;
+        return Arrays.stream(Prize.values())
+                .filter(prize -> prize.hit == hit)
+                .map(Prize::getValue)
+                .findFirst()
+                .orElse(0);
     }
 
 }
