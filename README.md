@@ -38,6 +38,3 @@
   - https://google.github.io/styleguide/javaguide.html
   - https://myeonguni.tistory.com/1596
 - else 예약어를 쓰지 않는다.
-
-## 네이밍
-- LottoSheet: 로또 번호 6개 모음, 한 장을 의미한다. 예) [1, 2, 3, 4, 5, 6]
