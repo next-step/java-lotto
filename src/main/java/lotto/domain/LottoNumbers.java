@@ -28,13 +28,9 @@ public class LottoNumbers {
     }
 
     public int countMatchingNumbers(LottoNumbers lottoNumbers) {
-        int matchingCount = 0;
-        for (LottoNumber number : lottoNumbers.lottoNumbers) {
-            if (this.lottoNumbers.contains(number)) {
-                matchingCount += 1;
-            }
-        }
-        return matchingCount;
+        return (int) lottoNumbers.lottoNumbers.stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
     }
 
     public List<LottoNumber> values() {
