@@ -15,7 +15,10 @@ class RankTest {
                 Arguments.arguments(Rank.FIRST, 6, 2_000_000_000),
                 Arguments.arguments(Rank.SECOND, 5, 1_500_000),
                 Arguments.arguments(Rank.THIRD, 4, 50_000),
-                Arguments.arguments(Rank.FOURTH, 3, 5000)
+                Arguments.arguments(Rank.FOURTH, 3, 5000),
+                Arguments.arguments(Rank.NONE, 2, 0),
+                Arguments.arguments(Rank.NONE, 1, 0),
+                Arguments.arguments(Rank.NONE, 0, 0)
         );
     }
 
