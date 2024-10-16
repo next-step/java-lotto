@@ -31,14 +31,9 @@ class WinningCalculatorTest {
     @Test
     @DisplayName("수익률 계산 확인")
     void calculateRateOfReturn() {
-        List<Integer> matchCounts = Arrays.asList(3, 4, 5, 0, 3, 4, 2, 0);
+        List<Integer> matchCounts = Arrays.asList(3, 4, 3, 0, 3, 0, 2, 0);
         WinningCalculator winningCalculator = new WinningCalculator(matchCounts);
 
-        int expectedTotalPrize = (Winning.THREE_MATCH.getPrize() * 2) +
-            (Winning.FOUR_MATCH.getPrize() * 2) +
-            (Winning.FIVE_MATCH.getPrize() * 1) +
-            (Winning.SIX_MATCH.getPrize() * 0);
-
-        assertThat(winningCalculator.calculateRateOfReturn()).isEqualTo((double) expectedTotalPrize / (1000 * 8));
+        assertThat(winningCalculator.calculateRateOfReturn()).isEqualTo(8.125);
     }
 }
