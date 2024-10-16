@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.domain.Prize;
+import lotto.domain.lotto.ticket.LottoNumber;
 import lotto.domain.lotto.ticket.LottoTicket;
 import lotto.domain.lotto.ticket.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
@@ -25,9 +27,9 @@ public class LottoTest {
     void 당첨_금액_별_개수_계산() {
         Lotto lotto = new Lotto(new LottoTickets(new LottoTicket("1,2,3,4,5,6"), new LottoTicket("1,2,3,4,5,7")), () -> null);
 
-        assertThat(lotto.getHitLottoNumbers(new LottoTicket(1, 2, 3, 4, 5, 6))).containsAllEntriesOf(Map.of(
-                5, 1, // 1등이 1번 나와야 함
-                6, 1  // 2등이 1번 나와야 함
+        assertThat(lotto.getHitLottoNumbers(new LottoTicket(1, 2, 3, 4, 5, 6), new LottoNumber(7))).containsAllEntriesOf(Map.of(
+                Prize.FIRST, 1, // 1등이 1번 나와야 함
+                Prize.SECOND, 1  // 2등이 1번 나와야 함
         ));
     }
 

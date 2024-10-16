@@ -21,13 +21,8 @@ public class LottoTickets {
         tickets.add(ticket);
     }
 
-    public List<Integer> getHitNumbers(LottoTicket winninglottoTicket) {
-        return tickets.stream().map(lottoTicket -> lottoTicket.hitNumber(winninglottoTicket.getNumbers()))
-                .collect(Collectors.toList());
-    }
-
     public List<LottoTicket> getTickets() {
-        return this.tickets;
+        return tickets;
     }
 
     @Override

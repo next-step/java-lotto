@@ -30,4 +30,16 @@ class LottoTicketTest {
         assertThat(lottoTicket.displayNumbers()).isEqualTo(List.of("1", "2", "3", "4", "5", "6"));
 
     }
+
+    @Test
+    void 보너스_번호_존재_성공_테스트() {
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 5, 6);
+        assertThat(lottoTicket.isBonus(new LottoNumber(3))).isTrue();
+    }
+
+    @Test
+    void 보너스_번호_존재_실패_테스트() {
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 5, 6);
+        assertThat(lottoTicket.isBonus(new LottoNumber(11))).isFalse();
+    }
 }

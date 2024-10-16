@@ -1,5 +1,6 @@
 package lotto.domain.statistics;
 
+import lotto.domain.Prize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,14 +14,16 @@ import static org.assertj.core.api.Assertions.*;
 
 class StatisticsTest {
 
-    private Map<Integer, Integer> map = new HashMap<>();
+    private Map<Prize, Integer> map = new HashMap<>();
 
     @BeforeEach
     void setUp() {
-        map.put(3, 1);
-        map.put(4, 0);
-        map.put(5, 0);
-        map.put(6, 0);
+        map.put(Prize.FIRST, 0);
+        map.put(Prize.SECOND, 0);
+        map.put(Prize.THIRD, 0);
+        map.put(Prize.FOURTH, 0);
+        map.put(Prize.FIFTH, 1);
+        map.put(Prize.MISS, 0);
     }
 
     @Test
@@ -28,7 +31,7 @@ class StatisticsTest {
     void prize_match_메서드_테스트() {
         List<Integer> prizeCountList = getPrizeCounts(map);
 
-        assertThat(prizeCountList).isEqualTo(List.of(1, 0, 0, 0));
+        assertThat(prizeCountList).isEqualTo(List.of(0, 1, 0, 0, 0, 0));
     }
 
     @Test

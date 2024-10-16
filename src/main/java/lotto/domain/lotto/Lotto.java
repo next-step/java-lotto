@@ -2,12 +2,15 @@ package lotto.domain.lotto;
 
 import lotto.domain.Prize;
 import lotto.domain.lotto.generate.Generate;
+import lotto.domain.lotto.ticket.LottoNumber;
 import lotto.domain.lotto.ticket.LottoTicket;
 import lotto.domain.lotto.ticket.LottoTickets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static lotto.domain.Prize.getMap;
 
 public class Lotto {
 
@@ -19,11 +22,14 @@ public class Lotto {
         this.lottoGenerate = lottoGenerate;
     }
 
-    public Map<Integer, Integer> getHitLottoNumbers(LottoTicket winningLottoTicket) {
-        Map<Integer, Integer> map = new HashMap<>();
-        lottoTickets.getHitNumbers(winningLottoTicket).stream().filter(number -> number >= 3).forEach(numbers -> {
-            Prize prize = Prize.get(numbers);
-            map.put(prize.getRank(), map.getOrDefault(prize.getRank(), 0) + 1);
+    public Map<Prize, Integer> getHitLottoNumbers(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+        Map<Prize, Integer> map = getMap();
+
+        this.lottoTickets.getTickets().forEach(ticket -> {
+            int hitNumber = ticket.hitNumber(winningLottoTicket.getNumbers());
+            boolean isBonus = ticket.isBonus(bonusNumber);
+            Prize prize = Prize.valueOf(hitNumber, isBonus);
+            map.put(prize, map.getOrDefault(prize, 0) + 1);
         });
 
         return map;
