@@ -1,15 +1,15 @@
 package lotto.dto;
 
-import java.util.List;
+import java.util.Set;
 
 public class LottoNumbersDto {
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public LottoNumbersDto(List<Integer> numbers) {
+    public LottoNumbersDto(Set<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return numbers;
     }
 

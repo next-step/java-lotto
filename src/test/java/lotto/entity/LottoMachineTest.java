@@ -20,8 +20,6 @@ class LottoMachineTest {
     void 로또_한장의_번호_갯수_검증() {
         List<Lotto> lottos = LottoMachine.insert(1000);
         Lotto lotto = lottos.get(0);
-        assertThat(lotto.getLottoNumbers()).hasSize(6);
+        assertThat(lotto.getNumbers()).hasSize(6);
     }
-
-
 }

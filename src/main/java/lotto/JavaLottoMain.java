@@ -5,6 +5,7 @@ import lotto.controller.JavaLotto;
 public class JavaLottoMain {
 
     public static void main(String[] args) {
-        JavaLotto.run();
+        JavaLotto javaLotto = new JavaLotto();
+        javaLotto.run();
     }
 }

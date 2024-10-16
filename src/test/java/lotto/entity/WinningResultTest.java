@@ -10,16 +10,16 @@ public class WinningResultTest {
 
     @Test
     void 당첨_금액과_갯수_합() {
-        WinningResult winningResult = new WinningResult(PrizeMoney.FOUR, 3);
+        WinningResult winningResult = new WinningResult(Rank.THIRD, 3);
         BigDecimal result = winningResult.add(BigDecimal.valueOf(0));
 
-        BigDecimal multiply = PrizeMoney.FOUR.getPrizeMoney().multiply(BigDecimal.valueOf(3));
+        BigDecimal multiply = Rank.THIRD.getPrizeMoney().multiply(BigDecimal.valueOf(3));
         assertThat(result).isEqualTo(multiply);
     }
 
     @Test
     void increase() {
-        WinningResult winningResult = new WinningResult(PrizeMoney.FOUR, 3);
+        WinningResult winningResult = new WinningResult(Rank.THIRD, 3);
         winningResult.increase();
 
         assertThat(winningResult.getCount()).isEqualTo(4);
@@ -27,7 +27,7 @@ public class WinningResultTest {
 
     @Test
     void PrizeMoney_같은지() {
-        WinningResult winningResult = new WinningResult(PrizeMoney.FIVE, 3);
-        assertThat(winningResult.isSame(PrizeMoney.FIVE)).isTrue();
+        WinningResult winningResult = new WinningResult(Rank.SECOND, 3);
+        assertThat(winningResult.isSame(Rank.SECOND)).isTrue();
     }
 }

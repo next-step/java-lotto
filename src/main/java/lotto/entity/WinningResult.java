@@ -5,15 +5,15 @@ import java.math.BigDecimal;
 
 public class WinningResult {
 
-    private final PrizeMoney prizeMoney;
+    private final Rank rank;
     private int count;
 
-    public WinningResult(PrizeMoney prizeMoney) {
-        this(prizeMoney, 0);
+    public WinningResult(Rank rank) {
+        this(rank, 0);
     }
 
-    public WinningResult(PrizeMoney prizeMoney, int count) {
-        this.prizeMoney = prizeMoney;
+    public WinningResult(Rank rank, int count) {
+        this.rank = rank;
         this.count = count;
     }
 
@@ -21,8 +21,8 @@ public class WinningResult {
         this.count++;
     }
 
-    public boolean isSame(PrizeMoney prizeMoney) {
-        return this.prizeMoney == prizeMoney;
+    public boolean isSame(Rank rank) {
+        return this.rank == rank;
     }
 
     public BigDecimal add(BigDecimal sum) {
@@ -30,14 +30,14 @@ public class WinningResult {
     }
 
     private BigDecimal calculateTotalAmount() {
-        return BigDecimal.valueOf(this.count).multiply(this.prizeMoney.getPrizeMoney());
+        return BigDecimal.valueOf(this.count).multiply(this.rank.getPrizeMoney());
     }
 
     public int getCount() {
         return count;
     }
 
-    public PrizeMoney getPrizeMoney() {
-        return prizeMoney;
+    public Rank getRank() {
+        return rank;
     }
 }
