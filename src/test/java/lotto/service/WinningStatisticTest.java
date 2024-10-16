@@ -1,9 +1,11 @@
 package lotto.service;
 
+import lotto.domain.Lottos;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class WinningStatisticTest {
@@ -20,9 +22,9 @@ public class WinningStatisticTest {
     @DisplayName("수익률 계산 테스트")
     void 수익률_계산_테스트() {
 
-        WinningStatistic ws = new WinningStatistic(14000,new Stack<>());
+        Lottos lottos = Lottos.createLottos(1000 , purChaseAmount -> new ArrayList<>());
 
-        Assertions.assertThat(ws.calculateProfit(5000,14000)).isEqualTo(0.35);
+        Assertions.assertThat(lottos.calculateProfit(5000,14000)).isEqualTo(0.35);
 
     }
 

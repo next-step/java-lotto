@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.PrizeOverFlowIsNegativeException;
 
 import java.util.List;
+import java.util.Stack;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -72,6 +73,20 @@ public class Lottos {
 
     public void additionalLotto(Lotto lotto){
         lottos.add(lotto);
+    }
+
+    public Stack<Integer> calculateStatistic(int totalPrize, Stack<Integer> stack) {
+        int prize = totalPrize;
+        Stack<Integer> statistic = stack;
+        for (Prize price : Prize.values()) {
+            statistic.push( prize / price.getValue());
+            prize %= price.getValue();
+        }
+        return statistic;
+    }
+
+    public double calculateProfit(int prize, int buyPrice) {
+        return Math.floor(prize / (double) buyPrice * 100) / 100.0;
     }
 
 }
