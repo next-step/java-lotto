@@ -38,7 +38,7 @@ public enum LottoRank {
             return LottoRank.SECOND;
         }
 
-        if (THIRD.countOfMatch == countOfMatch) {
+        if (isThirdRank(countOfMatch)) {
             return LottoRank.THIRD;
         }
 
@@ -50,5 +50,9 @@ public enum LottoRank {
 
     private static boolean isSecondRank(int countOfMatch, boolean matchBonus) {
         return SECOND.countOfMatch == countOfMatch && matchBonus;
+    }
+
+    private static boolean isThirdRank(int countOfMatch) {
+        return THIRD.countOfMatch == countOfMatch;
     }
 }
