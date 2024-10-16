@@ -9,14 +9,11 @@ import java.util.stream.Collectors;
 public class WinningCalculator {
     private final Map<Winning, Integer> winningCountMap;
 
-    public WinningCalculator(List<Integer> matchCounts) {
+    public WinningCalculator(List<Winning> winnings) {
         winningCountMap = Arrays.stream(Winning.values())
                                 .collect(Collectors.toMap(winning -> winning, winning -> 0, (e1, e2) -> e1, LinkedHashMap::new));
-        for (int matchCount : matchCounts) {
-            Winning winning = Winning.fromMatchCount(matchCount);
-            winningCountMap.put(winning, winningCountMap.get(winning) + 1);
-        }
-    }
+        winnings.forEach(winning -> winningCountMap.put(winning, winningCountMap.get(winning) + 1));
+}
 
     public Map<Winning, Integer> getWinningCountMap() {
         return winningCountMap.entrySet()
