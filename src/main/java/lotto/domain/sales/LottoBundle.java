@@ -1,11 +1,13 @@
 package lotto.domain.sales;
 
+import lotto.constant.ErrorMessage;
 import lotto.domain.number.Lotto;
 import lotto.domain.prize.WinningPrize;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoBundle {
 
@@ -15,20 +17,31 @@ public class LottoBundle {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public static LottoBundle of(int quantity) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(Lotto.create());
+    public static LottoBundle of(int quickPick) {
+        return new LottoBundle(IntStream.range(0, quickPick)
+            .mapToObj(i -> Lotto.create())
+            .collect(Collectors.toList()));
+    }
+
+    public static LottoBundle of(String... manuals) {
+        validateVariableArguments(manuals, ErrorMessage.INVALID_MANUAL_LOTTO);
+
+        return new LottoBundle(Stream.of(manuals).map(Lotto::new).collect(Collectors.toList()));
+    }
+
+    private static void validateVariableArguments(Object[] objects, ErrorMessage errorMessage) {
+        Objects.requireNonNull(objects);
+        if (objects.length == 0) {
+            throw new IllegalArgumentException(errorMessage.getMessage());
         }
-        return new LottoBundle(lottos);
     }
 
-    public Lotto lotto(int index) {
-        return lottos.get(index);
-    }
+    public static LottoBundle of(LottoBundle... lottoBundles) {
+        validateVariableArguments(lottoBundles, ErrorMessage.INVALID_LOTTO_INTEGRATION);
 
-    public int count() {
-        return lottos.size();
+        return new LottoBundle(Arrays.stream(lottoBundles)
+            .flatMap(lottoBundle -> lottoBundle.lottos().stream())
+            .collect(Collectors.toList()));
     }
 
     public WinningPrize winningPrize(WinningLotto winningLotto) {
@@ -37,6 +50,10 @@ public class LottoBundle {
             winningPrize.record(winningLotto.lottoPrize(lotto));
         }
         return winningPrize;
+    }
+
+    public Collection<Lotto> lottos() {
+        return lottos;
     }
 
     @Override

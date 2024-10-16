@@ -4,6 +4,8 @@ import lotto.domain.number.Lotto;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.sales.LottoBill;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -11,12 +13,38 @@ public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public LottoBill lottoBill() {
-        System.out.println("구입 금액을 입력해주세요.");
-        int money = SCANNER.nextInt();
-        LottoBill bill = new LottoBill(money);
-        System.out.println(bill.quantity() + "개를 구매했습니다.");
+        int money = salesAmount();
+        int manualCount = manualCount();
+        LottoBill bill = new LottoBill(money, manualCount);
+
         clear();
         return bill;
+    }
+
+    private int salesAmount() {
+        System.out.println("구입 금액을 입력해주세요.");
+        return SCANNER.nextInt();
+    }
+
+    private int manualCount() {
+        System.out.println();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
+
+    public String[] manuals(int manualCount) {
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요. [" + manualCount + "]");
+
+        String[] manuals = new String[manualCount];
+        if (manualCount == 0) {
+            return manuals;
+        }
+
+        for (int i = 0; i < manualCount; i++) {
+            manuals[i] = SCANNER.nextLine();
+        }
+        return manuals;
     }
 
     public Lotto lastWinningLotto() {
