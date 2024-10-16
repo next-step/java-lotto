@@ -26,9 +26,13 @@ public class ResultView {
         return INSTANCE;
     }
 
-    public void priceLottoStatus(Lottos lottos) {
+    public void priceLottoStatus(Lottos lottos, Lottos manualLottos) {
 
-        String sb = lottos.getSize() + "개를 구매했습니다." +
+        String sb = String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottos.getSize(), lottos.getSize()) +
+                System.lineSeparator() +
+                manualLottos.getLottos().stream()
+                        .map(lotto -> "[" + getLottoNumber(lotto) + "]")
+                        .collect(Collectors.joining(System.lineSeparator())) +
                 System.lineSeparator() +
                 lottos.getLottos().stream()
                         .map(lotto -> "[" + getLottoNumber(lotto) + "]")

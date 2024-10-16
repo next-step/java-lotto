@@ -80,3 +80,9 @@
 * Rank 구하는 메소드 LottoResult -> Lottos로 이동
 * hashCode 메소드 추가
 * int -> Integer 변경 (IntegerCache 사용)
+
+## Step4. 요구 사항
+* 수동으로 구매할 로또 수를 입력 받는다.
+* 수동으로 구매할 수 만큼 로또를 입력 받는다.
+* 출력 로직에 수동으로 구매한 로또를 추가한다.
+* 수동, 자동 로또를 합친다.
