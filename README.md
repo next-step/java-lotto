@@ -75,3 +75,4 @@
 * 생성자 파라미터에 구분자 추가
 * 일급 컬렉션 매핑 (List<Lotto> -> Lottos)
 * Lotto, LottoNum 조합해 당첨번호 책임지는 WinnerLotto 분리 
+* 로또 매치하는 메소드 WinnerLotto 클래스로 이동 (Rank -> WinnerLotto)

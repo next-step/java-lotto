@@ -3,11 +3,20 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.enums.Rank.FIRST_RANK;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class WinnerLottoTest {
 
     public static final String DELIMITER = ",";
+
+    @Test
+    @DisplayName("로또가 들어오면 알맞은 Rank를 반환한다.")
+    void 로또_매치() {
+        Lotto lotto = new Lotto("7,8,9,4,5,6", DELIMITER);
+        WinnerLotto winnerLotto = new WinnerLotto(lotto, new LottoNum(11));
+        assertThat(winnerLotto.match(lotto)).isEqualTo(FIRST_RANK);
+    }
 
     @Test
     @DisplayName("보너스 넘버가 없으면 false 반환")

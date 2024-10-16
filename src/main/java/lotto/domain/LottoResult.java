@@ -38,8 +38,7 @@ public class LottoResult {
     public static LottoResult getLottoResult(Lottos lottos, WinnerLotto winnerLotto) {
         List<Rank> result = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            int matchedCount = winnerLotto.compareWinningNumber(lotto);
-            result.add(Rank.getRank(matchedCount, winnerLotto.isMatchBonus(lotto)));
+            result.add(winnerLotto.match(lotto));
         }
         return new LottoResult(result, lottos.getSize() * LottoGame.LOTTO_PRICE);
     }
