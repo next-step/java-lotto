@@ -39,7 +39,8 @@ public enum LottoRank {
 
     public static LottoRank matchRank(int matchCount, boolean matchBonus) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.getMatchCounts().contains(matchCount) && (rank.matchBonus == matchBonus))
+                .filter(rank -> rank.getMatchCounts().contains(matchCount) &&
+                        (rank.matchBonus == matchBonus || !rank.matchBonus))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NOT_MATCH_COUNT));
     }

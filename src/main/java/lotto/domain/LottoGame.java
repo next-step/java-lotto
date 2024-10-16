@@ -36,6 +36,9 @@ public class LottoGame {
         return lottos;
     }
 
+    public LottoCount getLottoCount() {
+        return lottoCount;
+    }
 
     public List<Lotto> getLottos() {
         return lottoList;
