@@ -26,7 +26,7 @@ public enum LottoRank {
         }
 
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.getMatchCount() == matchCount)
+                .filter(rank -> rank != BONUS_MATCHES && rank.getMatchCount() == matchCount)
                 .findFirst()
                 .orElse(NO_MATCH);
     }

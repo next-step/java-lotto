@@ -8,14 +8,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoBalls {
-    private final List<LottoNumber> lottoBalls;
+    private static final List<LottoNumber> lottoBalls;
 
-    public LottoBalls() {
-        this.lottoBalls = createLottoBalls();
-    }
-
-    private List<LottoNumber> createLottoBalls() {
-        return IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
+    static {
+        lottoBalls = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableList());
     }

@@ -1,23 +1,21 @@
 package calculator;
 
 import calculator.domain.Calculator;
+import calculator.domain.PreProcessor;
 import calculator.exception.WrongCalculationException;
-import calculator.model.Operands;
-import calculator.model.Operators;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 
 public class CalculatorMachine {
-    private final InputView inputView;
+    private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
-    private final Calculator calculator;
+    private final PreProcessor preProcessor = new PreProcessor();
+    private Calculator calculator;
 
-    public CalculatorMachine(Operands operands, Operators operators) {
-        this.inputView = new InputView(operands, operators);
-        this.calculator = new Calculator(operands, operators);
-    }
     public void start() throws WrongCalculationException {
-        inputView.receiveInput();
+        String input = inputView.receiveInput();
+        preProcessor.process(input);
+        this.calculator = new Calculator(preProcessor.getOperands(), preProcessor.getOperators());
         int result = calculator.calculate();
         resultView.printResult(result);
     }

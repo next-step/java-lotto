@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.BonusLottoNumber;
 import lotto.domain.LottoNumber;
 
 import java.util.Arrays;
@@ -71,6 +70,6 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         int input = scanner.nextInt();
         scanner.nextLine();
-        return new BonusLottoNumber(input);
+        return new LottoNumber(input);
     }
 }

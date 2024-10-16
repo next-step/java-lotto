@@ -12,7 +12,7 @@ public class LottosTest {
     private final List<LottoNumber> lottoNumbers1 = IntStream.rangeClosed(1, 6)
             .mapToObj(index -> new LottoNumber(index))
             .collect(Collectors.toList());
-    private final LottoNumber bonusNumber = new BonusLottoNumber(1);
+    private final LottoNumber bonusNumber = new LottoNumber(1);
 
     @Test
     public void 로또_결과를_추가할_수_있다() {
@@ -44,7 +44,7 @@ public class LottosTest {
         Lotto lotto = new Lotto(lottoNumbers1);
         lottos.addLotto(lotto);
 
-        WinningNumber winningNumber = new WinningNumber(lottoNumbers1);
+        WinningNumber winningNumber = new WinningNumber(lottoNumbers1, 7);
 
         lottos.calculateLotto(winningNumber);
 
@@ -59,7 +59,7 @@ public class LottosTest {
         Lotto lotto = new Lotto(lottoNumbers1);
         lottos.addLotto(lotto);
 
-        WinningNumber winningNumber = new WinningNumber(lottoNumbers1);
+        WinningNumber winningNumber = new WinningNumber(lottoNumbers1, 6);
         lottos.calculateLotto(winningNumber);
 
         int prizeMoney = lottos.getEarningsByMatchCount(6);
@@ -84,8 +84,8 @@ public class LottosTest {
         WinningNumber winningNumber = new WinningNumber(lottoNumbers1, new LottoNumber(7));
         lottos.calculateLotto(winningNumber);
 
-        int prizeMoney = lottos.getEarningsByMatchCount(1);
+        int prizeMoney = lottos.getEarningsByMatchCount(5, true);
 
-        assertThat(prizeMoney).isEqualTo(lottos.getPrizeMoneyByMatchCount(1));
+        assertThat(prizeMoney).isEqualTo(lottos.getPrizeMoneyByMatchCount(5, true));
     }
 }
