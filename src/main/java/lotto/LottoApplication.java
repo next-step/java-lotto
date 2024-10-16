@@ -29,7 +29,7 @@ public class LottoApplication {
         printRatio(lottoGame.getEarnRate());
     }
 
-    public static LottoGame makeLottoGame() {
+    private static LottoGame makeLottoGame() {
         LottoPrice lottoPrice = new LottoPrice(inputInt(ResultView::printInputPrice));
         LottoCount lottoCount = new LottoCount(lottoPrice, inputInt(ResultView::printManualLottoCount));
 
@@ -41,7 +41,7 @@ public class LottoApplication {
         return new LottoGame(lottoPrice);
     }
 
-    public static List<Lotto> makeManualLotto(LottoCount lottoCount) {
+    private static List<Lotto> makeManualLotto(LottoCount lottoCount) {
         List<Lotto> manualLottoList = new ArrayList<>();
         manualLottoList.add(new Lotto(inputLotto(ResultView::printManualLottoInput)));
 
