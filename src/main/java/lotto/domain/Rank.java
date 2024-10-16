@@ -32,4 +32,12 @@ public enum Rank {
     private static boolean isRank(Rank rank, int numberOfIdentical) {
         return rank.hit == numberOfIdentical;
     }
+
+    public int getHit() {
+        return hit;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
 }

@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Game;
 import lotto.domain.Games;
+import lotto.domain.LottoResult;
 import lotto.domain.RandomNumberGenerator;
 import view.InputView;
 import view.OutputView;
@@ -24,5 +25,8 @@ public class LottoController {
         outputView.printPurchasedGames(games);
 
         Game winner = new Game(inputView.askWinnerLottonumber());
+        LottoResult lottoResult = new LottoResult(winner, games);
+
+        outputView.printResult(lottoResult);
     }
 }
