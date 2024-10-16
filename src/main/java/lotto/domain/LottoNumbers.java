@@ -57,6 +57,6 @@ public class LottoNumbers {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        return numbers.toString().equals(((LottoNumbers)obj).numbers.toString());
     }
 }
