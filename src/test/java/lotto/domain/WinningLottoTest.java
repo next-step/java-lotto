@@ -15,14 +15,20 @@ class WinningLottoTest {
     }
 
     @Test
-    void 당첨로또와_매칭_테스트_5개() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        assertThat(winningLotto.match(1, 2, 3, 4, 5, 10)).isEqualTo(5);
+    void 당첨로또_비교_1등() {
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 20);
+        assertThat(winningLotto.match(1, 2, 3, 4, 5, 6)).isEqualTo(LottoRank.FIRST);
     }
 
     @Test
-    void 당첨로또_비교_보너스볼_포함() {
+    void 당첨로또와_비교_2등() {
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
+        assertThat(winningLotto.match(1, 2, 3, 4, 5, 10)).isEqualTo(LottoRank.SECOND);
+    }
+
+    @Test
+    void 당첨로또_비교_3등() {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 20);
-        assertThat(winningLotto.match(1, 2, 3, 4, 5, 10)).isEqualTo(5);
+        assertThat(winningLotto.match(1, 2, 3, 4, 5, 10)).isEqualTo(LottoRank.THIRD);
     }
 }

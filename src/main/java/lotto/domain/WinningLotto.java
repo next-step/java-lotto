@@ -10,9 +10,9 @@ public class WinningLotto {
     private static final String DELIMITER = ", ";
 
     private final Lotto lotto;
-    private final int bonus;
+    private final LottoNumber bonus;
 
-    public WinningLotto(Lotto lotto, int bonus) {
+    public WinningLotto(Lotto lotto, LottoNumber bonus) {
         this.lotto = lotto;
         this.bonus = bonus;
     }
@@ -20,7 +20,7 @@ public class WinningLotto {
     public WinningLotto(List<Integer> numbers, int bonus) {
         this(new Lotto(numbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList())), bonus);
+                .collect(Collectors.toList())), new LottoNumber(bonus));
     }
 
     public WinningLotto(String numbers, int bonus) {

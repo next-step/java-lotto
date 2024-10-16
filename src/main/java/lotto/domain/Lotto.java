@@ -43,7 +43,7 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
-    public boolean containBonus(int bonus) {
+    public boolean containBonus(LottoNumber bonus) {
         return numbers.contains(bonus);
     }
 

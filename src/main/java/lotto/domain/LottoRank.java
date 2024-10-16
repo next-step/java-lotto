@@ -38,6 +38,10 @@ public enum LottoRank {
             return LottoRank.SECOND;
         }
 
+        if (THIRD.countOfMatch == countOfMatch) {
+            return LottoRank.THIRD;
+        }
+
         return Arrays.stream(values())
                 .filter(value -> value.countOfMatch == countOfMatch)
                 .findFirst()
