@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static step1.StringCalculator.calculate;
 
-public class StringCalculatorTest {
+class StringCalculatorTest {
 
     @Test
     void 빈공백_구분자로_구분() {
@@ -36,5 +36,12 @@ public class StringCalculatorTest {
     @CsvSource(value = {"2 + 3 * 4 / 2=10", "2 + 3 * 4 / 2 - 5=5"}, delimiter = '=')
     void 사칙연산(String input, int expected) {
         assertThat(calculate(input)).isEqualTo(expected);
+    }
+
+    @Test
+    void 사칙연산_0으로_나눌때() {
+        assertThatThrownBy(() -> {
+            calculate("2 + 3 / 0");
+        }).isInstanceOf(RuntimeException.class);
     }
 }
