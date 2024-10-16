@@ -34,7 +34,7 @@ public class Games {
         this.games = List.of(games);
     }
 
-    private static int calculateNumberOfGames(String money) {
+    private int calculateNumberOfGames(String money) {
         int numberOfGames;
         try {
             Expression expression = new Expression(money + " / " + PRICE);

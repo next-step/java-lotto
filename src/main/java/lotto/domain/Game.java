@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Game {
 
@@ -16,13 +18,20 @@ public class Game {
         validateCount(numbers);
         validateDuplicateNumber(numbers);
 
-        this.lottonumbers = numbers.stream()
-                .sorted()
-                .map(Lottonumber::new)
-                .collect(Collectors.toUnmodifiableList());
+        this.lottonumbers = toLottonumberList(numbers);
     }
 
-    private static void validateCount(List<Integer> numbers) {
+    public Game(String input) {
+        validateEmptyInput(input);
+        List<Integer> numbers = toIntegerList(input);
+
+        validateCount(numbers);
+        validateDuplicateNumber(numbers);
+
+        this.lottonumbers = toLottonumberList(numbers);
+    }
+
+    private void validateCount(List<Integer> numbers) {
         if (numbers == null || numbers.size() != 6) {
             throw new IllegalArgumentException("6개의 로또번호가 필요합니다.");
         }
@@ -34,6 +43,43 @@ public class Game {
         if (lottonumberSet.size() != lottonumberList.size()) {
             throw new IllegalArgumentException("중복된 로또번호를 사용할 수 없습니다.");
         }
+    }
+
+    private void validateEmptyInput(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("당첨번호를 입력해 주세요.");
+        }
+    }
+
+    private List<Integer> toIntegerList(String input) {
+        try {
+            String[] split = input.split(",");
+
+            return Arrays.stream(split)
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+        } catch (NumberFormatException e){
+            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+        }
+    }
+
+    private static List<Lottonumber> toLottonumberList(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .map(Lottonumber::new)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    public List<Lottonumber> filterMatchingLottonumber(Game that) {
+        return IntStream.range(0, this.lottonumbers.size())
+                .filter(index -> {
+                    Lottonumber lottonumber = this.lottonumbers.get(index);
+                    return that.lottonumbers.contains(lottonumber);
+                })
+                .mapToObj(this.lottonumbers::get)
+                .collect(Collectors.toList());
     }
 
     @Override

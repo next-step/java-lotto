@@ -85,5 +85,4 @@ class GameTest {
             assertThat(game).hasToString(expected);
         }
     }
-
 }

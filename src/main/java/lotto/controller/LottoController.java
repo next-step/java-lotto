@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.Game;
 import lotto.domain.Games;
 import lotto.domain.RandomNumberGenerator;
 import view.InputView;
@@ -22,6 +23,6 @@ public class LottoController {
         Games games = new Games(moneyInput, new RandomNumberGenerator(new Random()));
         outputView.printPurchasedGames(games);
 
-        String winningLottonumberInput = inputView.askWinnerLottonumber();
+        Game winner = new Game(inputView.askWinnerLottonumber());
     }
 }
