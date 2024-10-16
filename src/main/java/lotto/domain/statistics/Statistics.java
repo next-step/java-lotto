@@ -1,16 +1,17 @@
 package lotto.domain.statistics;
 
+import lotto.domain.Prize;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Statistics {
-    private static final List<Integer> PRIZE_MATCH_COUNT = List.of(3, 4, 5, 6);
-    private static final List<Integer> PRIZE_AMOUNTS = List.of(5000, 50000, 1500000, 2000000000);
+    private static final List<Prize> PRIZE_MATCH_COUNT = List.of(Prize.MISS, Prize.FIFTH, Prize.FOURTH, Prize.THIRD, Prize.SECOND, Prize.FIRST);
     private static final int LOTTO_TICKET_PRICE = 1000;
-    private static final int PRICE_TYPES_COUNT = 4;
+    private static final int PRICE_TYPES_COUNT = 6;
 
-    public static List<Integer> getPrizeCounts(Map<Integer, Integer> prizeCountMap) {
+    public static List<Integer> getPrizeCounts(Map<Prize, Integer> prizeCountMap) {
         List<Integer> prizeCounts = new ArrayList<>();
         for (int i = 0; i < PRICE_TYPES_COUNT; i++) {
             int priceCount = prizeCountMap.getOrDefault(PRIZE_MATCH_COUNT.get(i), 0);
@@ -19,15 +20,15 @@ public class Statistics {
         return prizeCounts;
     }
 
-    public static double calculateReturnRatio(int lottoPurchaseCount, Map<Integer, Integer> prizeCountMap) {
+    public static double calculateReturnRatio(int lottoPurchaseCount, Map<Prize, Integer> prizeCountMap) {
         return Math.floor(calculateRatio(lottoPurchaseCount, calculateTotalPrizeAmount(getTotalPrizeAmounts(prizeCountMap))) * 100.0) / 100.0;
     }
 
-    public static List<Integer> getTotalPrizeAmounts(Map<Integer, Integer> prizeCountMap) {
+    public static List<Integer> getTotalPrizeAmounts(Map<Prize, Integer> prizeCountMap) {
         List<Integer> totalPrizeAmounts = new ArrayList<>();
         for (int i = 0; i < PRICE_TYPES_COUNT; i++) {
             int prizeCount = prizeCountMap.getOrDefault(PRIZE_MATCH_COUNT.get(i), 0);
-            totalPrizeAmounts.add(prizeCount * PRIZE_AMOUNTS.get(i));
+            totalPrizeAmounts.add(prizeCount * PRIZE_MATCH_COUNT.get(i).getPrice());
         }
         return totalPrizeAmounts;
     }

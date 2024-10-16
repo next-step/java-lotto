@@ -22,6 +22,10 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
+    public boolean isBonus(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
     public int hitNumber(List<LottoNumber> lottoNumbers) {
         return (int) lottoNumbers.stream().filter(numbers::contains).count();
     }
