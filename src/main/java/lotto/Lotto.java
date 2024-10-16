@@ -19,7 +19,7 @@ public class Lotto {
         createLotto(lottoNumbers, new LottoResult());
     }
 
-    private void createLotto(List<Integer> lottoNumbers, LottoResult lottoResult){
+    private void createLotto(List<Integer> lottoNumbers, LottoResult lottoResult) {
         this.lottoNumbers = lottoNumbers;
         validateLottoNumbers(this.lottoNumbers);
         this.lottoResult = lottoResult;
@@ -31,6 +31,10 @@ public class Lotto {
 
     public int getMatchCount() {
         return this.lottoResult.getMatchCount();
+    }
+
+    public boolean getIsBonusMatch() {
+        return this.lottoResult.getIsBonusMatch();
     }
 
     public String toStringLottoNumbers() {

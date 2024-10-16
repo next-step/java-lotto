@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class LottoWinningStatistics {
     public static int calculateTotalWinningAmount(List<Lotto> lottos) {
@@ -17,21 +15,25 @@ public class LottoWinningStatistics {
         return Math.floor(((double) winningAmount / paidAmount) * 100) / 100;
     }
 
-    public static Map<Integer, Integer> getWinningLottoStatistics(List<Lotto> lottos) {
-        Map<Integer, Integer> winningLottoCountMap = lottos.stream()
-                .map(Lotto::getMatchCount)
-                .filter(LottoRank.getMatchCounts()::contains)
-                .collect(Collectors.toMap(
-                        matchCount -> matchCount,
-                        matchCount -> 1,
-                        Integer::sum
-                ));
+    public static Map<LottoRank, Integer> getWinningLottoStatistics(List<Lotto> lottos) {
 
-        for (Integer matchCount : LottoRank.getMatchCounts()) {
-            winningLottoCountMap.putIfAbsent(matchCount, 0);
+        Map<LottoRank, Integer> winningLottoCountMap = new EnumMap<>(LottoRank.class);
+        for (Lotto lotto : lottos) {
+            LottoRank lottoRank = LottoRank.getLottoRank(lotto.getMatchCount(), lotto.getIsBonusMatch());
+            winningLottoCountMap.merge(lottoRank, 1, Integer::sum);
         }
 
-        return winningLottoCountMap;
+        // 내림차순으로 삽입
+        List<LottoRank> sortedRanks = LottoRank.getAllLottoRank();
+        Collections.reverse(sortedRanks); // 내림차순으로 정렬
+
+        Map<LottoRank, Integer> finalMap = new LinkedHashMap<>();
+        for (LottoRank rank : sortedRanks) {
+            finalMap.put(rank, winningLottoCountMap.getOrDefault(rank, 0));
+        }
+        winningLottoCountMap.remove(LottoRank.MISS);
+
+        return finalMap;
     }
 
 }

@@ -15,8 +15,7 @@ public class LottoMain {
         lottos.calculateAllMatchCount(winningLotto, bonusNumber);
 
         System.out.println();
-        //todo
-//        LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos()));
+        LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos()));
         LottoResultView.printLottoYield(LottoWinningStatistics.calculateRateOfReturn(LottoWinningStatistics.calculateTotalWinningAmount(lottos.getLottos()), paidAmount));
     }
 }

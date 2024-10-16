@@ -10,6 +10,10 @@ public class LottoResult {
         return this.matchCount;
     }
 
+    public boolean getIsBonusMatch() {
+        return this.isBonusMatch;
+    }
+
     public int calculateMatchCount(List<Integer> winningNumbers, List<Integer> lottoNumbers, int bonusNumber) {
         calculateWinningMatchCount(winningNumbers, lottoNumbers);
         checkBonusMatch(lottoNumbers, bonusNumber);
@@ -33,7 +37,6 @@ public class LottoResult {
     private void checkBonusMatch(List<Integer> lottoNumbers, int bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
             this.isBonusMatch = true;
-            matchCount++;
         }
     }
 

@@ -36,16 +36,18 @@ public class LottoWinningStatisticsTest {
         lottoList.add(new Lotto(Arrays.asList(13, 14, 18, 21, 23, 35)));
         lottoList.add(new Lotto(Arrays.asList(17, 21, 29, 37, 42, 45)));
         lottoList.add(new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44)));
+        lottoList.add(new Lotto(Arrays.asList(3, 2, 4, 5, 7, 1)));
 
         int bonusNumber = 7;
         lottos = new Lottos(lottoList);
         lottos.calculateAllMatchCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
 
-        Map<Integer, Integer> winningLottoMap = LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos());
-        assertThat(winningLottoMap.get(3)).isEqualTo(1);
-        assertThat(winningLottoMap.get(4)).isEqualTo(0);
-        assertThat(winningLottoMap.get(5)).isEqualTo(0);
-        assertThat(winningLottoMap.get(6)).isEqualTo(0);
+        Map<LottoRank, Integer> winningLottoMap = LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos());
+        assertThat(winningLottoMap.get(LottoRank.FIRST)).isEqualTo(0);
+        assertThat(winningLottoMap.get(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(winningLottoMap.get(LottoRank.THIRD)).isEqualTo(0);
+        assertThat(winningLottoMap.get(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(winningLottoMap.get(LottoRank.FIFTH)).isEqualTo(1);
     }
 
     @Test
