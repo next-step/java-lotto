@@ -3,7 +3,10 @@ package lotto.entity;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,12 +24,14 @@ public class LottoWinningScannerTest {
         );
 
         Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
-        LottoResult result = lottoWinningScanner.result(lottos, winningNumbers, 1000);
+        Winning winning = new Winning(winningNumbers, 7);
 
-        Map<PrizeMoney, Integer> collect = result.getWinningResults().stream().collect(Collectors.toMap(WinningResult::getPrizeMoney, WinningResult::getCount));
+        LottoResult result = lottoWinningScanner.result(lottos, winning, 1000);
+
+        Map<Rank, Integer> collect = result.getWinningResults().stream().collect(Collectors.toMap(WinningResult::getRank, WinningResult::getCount));
 
         assertAll(
-                () -> assertThat(collect.get(PrizeMoney.SIX)).isEqualTo(1),
+                () -> assertThat(collect.get(Rank.FIRST)).isEqualTo(1),
                 () -> assertThat(result.getRate()).isEqualTo(new BigDecimal("2000000.00"))
         );
 

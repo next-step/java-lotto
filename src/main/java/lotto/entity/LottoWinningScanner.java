@@ -3,7 +3,6 @@ package lotto.entity;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 public class LottoWinningScanner {
 
@@ -13,11 +12,11 @@ public class LottoWinningScanner {
         this.lottoResultAnalyzer = new LottoResultAnalyzer();
     }
 
-    public LottoResult result(List<Lotto> lottos, Set<Integer> winnersNumber, int inputMoney) {
+    public LottoResult result(List<Lotto> lottos, Winning winning, int inputMoney) {
 
-        List<WinningResult> analyzer = lottoResultAnalyzer.analyzer(lottos, winnersNumber);
-        BigDecimal totalPrizeMoney = PrizeMoneyCalculator.sum(analyzer);
-        BigDecimal rate = PrizeMoneyCalculator.calculateRate(inputMoney, totalPrizeMoney);
+        List<WinningResult> analyzer = lottoResultAnalyzer.analyzer(lottos, winning);
+        BigDecimal totalPrizeMoney = RankCalculator.sum(analyzer);
+        BigDecimal rate = RankCalculator.calculateRate(inputMoney, totalPrizeMoney);
 
         return new LottoResult(rate, analyzer);
     }

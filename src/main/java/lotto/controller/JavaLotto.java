@@ -1,12 +1,10 @@
 package lotto.controller;
 
-import lotto.dto.LottosDto;
 import lotto.dto.LottoNumbersDto;
+import lotto.dto.LottosDto;
 import lotto.dto.PrizeMoneyDto;
 import lotto.dto.ResultDto;
 import lotto.entity.*;
-import lotto.entity.LottoMachine;
-import lotto.entity.LottoWinningScanner;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -31,7 +29,12 @@ public class JavaLotto {
 
         String[] texts = InputView.requestWinnerNumber();
         Set<Integer> winningNumbers = WinningTexts.numbers(texts);
-        LottoResult result = lottoWinningScanner.result(lottos, winningNumbers, inputMoney);
+
+        int bonusNumber = InputView.requestBonusNumber();
+
+        Winning winning = new Winning(winningNumbers, bonusNumber);
+
+        LottoResult result = lottoWinningScanner.result(lottos, winning, inputMoney);
         ResultView.printResult(toDto(result));
     }
 
@@ -55,8 +58,8 @@ public class JavaLotto {
     private static List<PrizeMoneyDto> toDtos(List<WinningResult> winningResults) {
         List<PrizeMoneyDto> dtos = new ArrayList<>();
         for (WinningResult winningResult : winningResults) {
-            PrizeMoney prizeMoney = winningResult.getPrizeMoney();
-            dtos.add(new PrizeMoneyDto(prizeMoney.getPrizeMoney(), winningResult.getCount(), prizeMoney.getCollectCount()));
+            Rank rank = winningResult.getRank();
+            dtos.add(new PrizeMoneyDto(rank.getPrizeMoney(), winningResult.getCount(), rank.getCollectCount(), rank == Rank.SECOND));
         }
         return dtos;
     }

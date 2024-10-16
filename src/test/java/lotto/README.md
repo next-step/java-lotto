@@ -3,10 +3,10 @@
 ## Entity 및 TODO 리스트
 
 ### Winning
-- Winning 내부 당첨번호에서도 범위 사이즈 검증
+
 
 ### PrizeMoney
-- 로또 맞춘 번호와 보너스 맞춘 flag로 등수 리턴 검증
+
 
 ---
 
@@ -44,9 +44,10 @@
 ### LottoAnalyzer (로또 결과 분석기 - 로또 리스트와 당첨 번호 매칭 시 각 당첨 별 갯수 반환)
 - 등수별 몇개 맞췄는지 검증
 
-### PrizeMoney (Enum 클래스 - 등수 별 몇 개 맞춰야 되고 상금은 얼마인지)
+### Rank (Enum 클래스 - 등수 별 몇 개 맞춰야 되고 상금은 얼마인지)
 - 맞히지 못했을 시 LOSE 객체 반환
 - 당첨 된 것들 검증
+- 로또 맞춘 번호와 보너스 맞춘 flag로 등수 리턴 검증
 
 ### PrizeMoneyCalculator (당첨된 로또 합계 및 수익률 계산 해주는 클래스)
 - 등수별 당첨된 리스트의 합계 검증
@@ -55,12 +56,10 @@
 ### WinningResult (각 등수 별 몇개 맞추었는지 결과 도메인)
 - 등수 당첨 금액과 갯수 곱 금액 검증
 - increase 검증
-- 같은 PrizeMoney인지 메소드 검증
+- 같은 Rank인지 메소드 검증
 
 ### WinningText(당첨 번호 String 입력 시 리스트 반환 클래스)
-- 범위 초과된 값 입력 시 예외 처리 (IllegalArgumentException)
-- 중복 숫자 입력 시 예외 처리 (IllegalArgumentException)
-- 리스트 크기 넘어갈 시 예외 처리 (IllegalArgumentException)
+- 당첨 숫자 리스트 반환 검증
 
 ### LottoWinningScanner (매칭 시 결과 반환 메소드 - 수익률 및 결과 도출)
 - 전체 검증 계산
@@ -68,3 +67,6 @@
 ### Winning(당첨번호, 보너스번호 도메인)
 - 보너스 번호 범위 검증
 - 당첨번호에 보너스 번호 포함되어 있으면 예외 처리
+
+# WinningNumber(당첨번호 일급 콜렉션)
+- 당첨번호 범위, 사이즈 검증

@@ -9,26 +9,29 @@ public class LottoResultAnalyzer {
 
     public LottoResultAnalyzer() {
         winningResults = Arrays.asList(
-                new WinningResult(PrizeMoney.THREE),
-                new WinningResult(PrizeMoney.FOUR),
-                new WinningResult(PrizeMoney.FIVE),
-                new WinningResult(PrizeMoney.SIX)
+                new WinningResult(Rank.FIFTH),
+                new WinningResult(Rank.FOURTH),
+                new WinningResult(Rank.THIRD),
+                new WinningResult(Rank.SECOND),
+                new WinningResult(Rank.FIRST)
         );
     }
 
-    public List<WinningResult> analyzer(List<Lotto> lottos, Set<Integer> winnersNumber) {
+    public List<WinningResult> analyzer(List<Lotto> lottos, Winning winning) {
         for (Lotto lotto : lottos) {
-            PrizeMoney prizeMoney = PrizeMoney.findByCount(lotto.matchCount(winnersNumber));
-            process(prizeMoney);
+            Set<Integer> winningNumbers = winning.getWinningNumbers().getNumbers();
+            int bonusNumber = winning.getBonusNumber();
+            Rank rank = Rank.valueOf(lotto.matchCount(winningNumbers), lotto.isCollectBonusNumber(bonusNumber));
+            process(rank);
         }
         return winningResults;
     }
 
-    private void process(PrizeMoney prizeMoney) {
-        if (prizeMoney == PrizeMoney.LOSE) {
+    private void process(Rank rank) {
+        if (rank == Rank.MISS) {
             return;
         }
-        winningResults.stream().filter(w -> w.isSame(prizeMoney)).forEach(w -> increase(w));
+        winningResults.stream().filter(w -> w.isSame(rank)).forEach(w -> increase(w));
     }
 
     private void increase(WinningResult search) {

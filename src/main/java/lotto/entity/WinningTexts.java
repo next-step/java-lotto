@@ -6,22 +6,20 @@ import java.util.List;
 import java.util.Set;
 
 
-public class WinningTexts extends LottoNumberRange {
+public class WinningTexts {
 
     private WinningTexts() {
 
     }
 
     public static Set<Integer> numbers(String[] text) {
-        return validate(toInts(text));
+        return toInts(text);
     }
 
     private static Set<Integer> toInts(String[] values) {
         List<Integer> result = new ArrayList<>();
         for (String value : values) {
-            Integer winningNumber = toInt(value);
-            validateRange(winningNumber);
-            result.add(winningNumber);
+            result.add(toInt(value));
         }
         return new HashSet<>(result);
     }
@@ -30,8 +28,4 @@ public class WinningTexts extends LottoNumberRange {
         return Integer.parseInt(value);
     }
 
-    private static Set<Integer> validate(Set<Integer> result) {
-        LottoNumberSize.validateSize(result);
-        return result;
-    }
 }
