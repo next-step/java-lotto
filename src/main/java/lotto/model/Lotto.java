@@ -2,7 +2,6 @@ package lotto.model;
 
 import lotto.model.dto.LottoNumber;
 import lotto.model.enums.Ranking;
-import lotto.util.BonusCreator;
 import lotto.util.NumbersCreator;
 
 import java.util.ArrayList;
@@ -15,20 +14,17 @@ public class Lotto {
     public static final String LOTTO_NUMBERS_SIZE_ALLOWED_ONLY_6 = "로또번호목록은 반드시 6개의 로또번호를 입력해야 합니다..(6,7,17,28,39,45)";
     public static final int LOTTO_NUMBERS_SIZE = 6;
     public static final int BONUS_NUMBER_SIZE = 1;
-    public static final String COMMA = ", ";
     private final List<LottoNumber> lottoNumbers;
-    private final LottoNumber bonusNumber;
 
-    private Lotto(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
+    private Lotto(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        this.bonusNumber = bonusNumber;
     }
 
-    public static Lotto of(final NumbersCreator numbersCreator, final BonusCreator bonusNumber) {
+    public static Lotto of(final NumbersCreator numbersCreator) {
         List<LottoNumber> result = new ArrayList<>(numbersCreator.create());
         validateLottoNumbers(result);
         result.sort(LottoNumber::compareTo);
-        return new Lotto(Collections.unmodifiableList(result), bonusNumber.create());
+        return new Lotto(Collections.unmodifiableList(result));
     }
 
     private static void validateLottoNumbers(List<LottoNumber> result) {
@@ -50,8 +46,12 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public Ranking compare(Lotto winning) {
-        return Ranking.result(matchedCount(winning));
+    public Ranking compare(Lotto winning, LottoNumber bonusNumber) {
+        return Ranking.result(matchedCount(winning), isMatchedBonus(bonusNumber));
+    }
+
+    private boolean isMatchedBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.stream().anyMatch(bonusNumber::equals);
     }
 
     private int matchedCount(Lotto winning) {
@@ -62,6 +62,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString() + COMMA + bonusNumber;
+        return lottoNumbers.toString();
     }
 }

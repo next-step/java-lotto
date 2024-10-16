@@ -3,7 +3,6 @@ package lotto.model;
 import lotto.fixture.BuyerFixtureNumberCreator;
 import lotto.model.dto.LottoNumber;
 import lotto.model.enums.Ranking;
-import lotto.util.BonusCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,39 +16,46 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResultTest {
     private Buyer buyer;
     private Lotto winningLotto;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
         this.buyer = Buyer.of(
-                2,
+                3,
                 new BuyerFixtureNumberCreator(List.of(
                         List.of(of(8), of(21), of(23), of(41), of(42), of(43)),
+                        List.of(of(8), of(21), of(23), of(41), of(42), of(44)),
                         List.of(of(1), of(8), of(11), of(31), of(41), of(42))
-                )),
-                () -> of(3));
+                )));
         this.winningLotto = Lotto.of(
-                () -> List.of(of(8), of(21), of(23), of(41), of(42), of(43)),
-                () -> of(3));
+                () -> List.of(of(8), of(21), of(23), of(41), of(42), of(43))
+        );
+        this.bonusNumber = of(44);
     }
 
     @Test
     void 수익률을_출력한다() {
-        Result result = Result.of(buyer, winningLotto);
+        Result result = Result.of(buyer, winningLotto, bonusNumber);
 
-        double actual = result.statistics(2);
-        double expected =
-                (Long.valueOf(2000000000L).doubleValue() + Long.valueOf(5000L).doubleValue()) /
-                        Integer.valueOf(2000).doubleValue();
+        double actual = result.statistics(3);
+
+        double expectedSum = Long.valueOf(2_000_000_000).doubleValue() +
+                Long.valueOf(30_000_000).doubleValue() +
+                Long.valueOf(5_000).doubleValue();
+        double expectedDivider = Integer.valueOf(3000).doubleValue();
+        double expected = expectedSum / expectedDivider;
 
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void 구매한_로또번호_6자리_목록의_등수들을_리턴한다() {
-        Map<Ranking, Integer> actual = Result.of(buyer, winningLotto).rankings();
-        Map<Ranking, Integer> expected = Map.of(FOURTH, 1,
+        Map<Ranking, Integer> actual = Result.of(buyer, winningLotto, bonusNumber).rankings();
+        Map<Ranking, Integer> expected = Map.of(
+                FIFTH, 1,
+                FOURTH, 0,
                 THIRD, 0,
-                SECOND, 0,
+                SECOND, 1,
                 FIRST, 1);
 
         assertThat(actual).isEqualTo(expected);

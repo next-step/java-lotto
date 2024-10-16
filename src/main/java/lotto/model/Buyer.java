@@ -12,10 +12,10 @@ public class Buyer {
         this.lottoes = Collections.unmodifiableList(lottoes);
     }
 
-    public static Buyer of(final int buyCount, final NumbersCreator numbersCreator, final BonusCreator bonusCreator) {
+    public static Buyer of(final int buyCount, final NumbersCreator numbersCreator) {
         List<Lotto> result = new ArrayList<>();
         for (int index = 0; index < buyCount; index++) {
-            result.add(Lotto.of(numbersCreator, bonusCreator));
+            result.add(Lotto.of(numbersCreator));
         }
         return new Buyer(result);
     }

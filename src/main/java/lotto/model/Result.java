@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.dto.LottoNumber;
 import lotto.model.enums.Ranking;
 
 import java.util.Arrays;
@@ -13,20 +14,22 @@ import static lotto.model.enums.Ranking.values;
 
 public class Result {
     public static final int LOTTO_PRICE = 1000;
-    public static final String RANKING_FORMAT = "%d개 일치 %s(%d원)- %d개";
+    public static final String RANKING_FORMAT = "%d개 일치%s(%d원)- %d개";
     public static final String LINE_BREAK = "\n";
-    public static final String BONUS_MATCHED_STRINGS = ",보너스 볼 일치";
+    public static final String BONUS_MATCHED_STRINGS = ", 보너스 볼 일치";
     public static final String SPACE = " ";
     private final Buyer buyer;
     private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-    private Result(Buyer buyer, Lotto winningLotto) {
+    private Result(Buyer buyer, Lotto winningLotto, LottoNumber bonusNumber) {
         this.buyer = buyer;
         this.winningLotto = winningLotto;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static Result of(Buyer buyer, Lotto winningLotto) {
-        return new Result(buyer, winningLotto);
+    public static Result of(Buyer buyer, Lotto winningLotto, LottoNumber bonusNumber) {
+        return new Result(buyer, winningLotto,bonusNumber);
     }
 
     public double statistics(int buyCount) {
@@ -53,7 +56,7 @@ public class Result {
         Map<Ranking, Integer> rankings = new HashMap<>();
         Arrays.stream(values())
                 .filter(ranking -> !ranking.equals(NONE))
-                .forEach(ranking -> rankings.put(ranking, rankingCount(winningLotto, ranking)));
+                .forEach(ranking -> rankings.put(ranking, rankingCount(ranking)));
         return rankings;
     }
 
@@ -70,10 +73,10 @@ public class Result {
         );
     }
 
-    private int rankingCount(Lotto winningLotto, Ranking fourth) {
+    private int rankingCount(Ranking fourth) {
         long count = this.buyer.value()
                 .stream()
-                .map(lotto -> lotto.compare(winningLotto))
+                .map(lotto -> lotto.compare(winningLotto, bonusNumber))
                 .filter(fourth::equals)
                 .count();
         return Long.valueOf(count)

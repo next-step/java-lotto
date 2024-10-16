@@ -19,8 +19,7 @@ public class BuyerTest {
                 new BuyerFixtureNumberCreator(List.of(
                         List.of(of(8), of(21), of(23), of(41), of(42), of(43)),//111111-1
                         List.of(of(1), of(8), of(11), of(31), of(41), of(42))//111-5
-                )),
-                () -> of(3)
+                ))
         );
 
         List<List<LottoNumber>> actual = buyer.value()
