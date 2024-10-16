@@ -5,6 +5,10 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
+    public LottoNumber(String string) {
+        this(Integer.parseInt(string));
+    }
+
     public LottoNumber(int number) {
         if (number > 45 || number < 1) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이 숫자입니다");
