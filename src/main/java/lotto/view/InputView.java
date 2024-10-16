@@ -11,6 +11,7 @@ public class InputView {
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String NUMBER_ERROR = "숫자만 입력가능합니다.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String INPUT_MANUAL_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private static String inputValue() {
@@ -19,9 +20,7 @@ public class InputView {
 
     public static int inputPurchasePrice() {
         System.out.println(INPUT_PURCHASE_PRICE_MESSAGE);
-        String inputValue = inputValue();
-        validateNumber(inputValue);
-        return Integer.parseInt(inputValue);
+        return inputNumberValue();
     }
 
     private static void validateNumber(final String inputValue) {
@@ -45,6 +44,15 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
+        return inputNumberValue();
+    }
+
+    public static int inputManualCount() {
+        System.out.println(INPUT_MANUAL_COUNT_MESSAGE);
+        return inputNumberValue();
+    }
+
+    private static int inputNumberValue() {
         String inputValue = inputValue();
         validateNumber(inputValue);
         return Integer.parseInt(inputValue);
