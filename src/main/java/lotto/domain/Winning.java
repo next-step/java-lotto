@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Winning {
     NONE(0, 0),
     THREE_MATCH(3, 5000),
@@ -16,12 +18,10 @@ public enum Winning {
     }
 
     public static Winning fromMatchCount(int matchCount) {
-        for (Winning winning : values()) {
-            if (winning.matchCount == matchCount) {
-                return winning;
-            }
-        }
-        return NONE;
+        return Arrays.stream(values())
+                     .filter(winning -> winning.matchCount == matchCount)
+                     .findFirst()
+                     .orElse(NONE);
     }
 
     public int getMatchCount() {
