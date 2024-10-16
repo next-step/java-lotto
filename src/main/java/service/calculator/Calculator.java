@@ -1,23 +1,34 @@
 package service.calculator;
 
 import parser.InputParser;
-import service.Arithmetic.*;
+import service.arithmetic.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Calculator {
 
-    public Calculator() {
+    private static final Map<Character, Arithmetic> arithmetics = new HashMap<>();
+
+    static {
+        arithmetics.put('+', Plus.getInstance());
+        arithmetics.put('-', Subtract.getInstance());
+        arithmetics.put('*', Multiply.getInstance());
+        arithmetics.put('/', Divide.getInstance());
     }
 
-    public int calculate(String calculateString) {
+    private Calculator() {
+    }
+
+    public static int calculate(String calculateString) {
         List<Integer> numbers = InputParser.parseNumbers(calculateString);
         List<Character> operations = InputParser.parseOperations(calculateString);
 
         return calculate(numbers, operations);
     }
 
-    public int calculate(List<Integer> numbers, List<Character> operations) {
+    private static int calculate(List<Integer> numbers, List<Character> operations) {
 
         int result = numbers.get(0);
 
@@ -31,28 +42,9 @@ public class Calculator {
         return result;
     }
 
-    public int calculate(int num1, int num2, Character operation) {
-        if (operation == '+') {
-            Plus plus = Plus.getInstance();
-            return plus.calculate(num1, num2);
-        }
-
-        if (operation == '-') {
-            Subtract subtract = Subtract.getInstance();
-            return subtract.calculate(num1, num2);
-        }
-
-        if (operation == '*') {
-            Multiply multiply = Multiply.getInstance();
-            return multiply.calculate(num1, num2);
-        }
-
-        if (operation == '/') {
-            Devide devide = Devide.getInstance();
-            return devide.calculate(num1, num2);
-        }
-
-        return -1;
+    private static int calculate(int num1, int num2, Character operation) {
+        Arithmetic arithmetic = arithmetics.get(operation);
+        return arithmetic.calculate(num1, num2);
     }
 
 }
