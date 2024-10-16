@@ -14,12 +14,13 @@ public class LottoResultView {
         }
     }
 
-    public static void printLottoStatistics(Map<Integer, Integer> lottosStatistics) {
+    //todo
+    public static void printLottoStatistics(Map<LottoRank, Integer> lottosStatistics) {
         for (Map.Entry result : lottosStatistics.entrySet()) {
-            Integer matchCount = (Integer) result.getKey();
+            LottoRank lottoRank = (LottoRank) result.getKey();
             Integer resultCount = (Integer) result.getValue();
 
-            System.out.println(matchCount + "개 일치 (" + LottoResult.determineAmountByMatchCount(matchCount) + "원)- " + resultCount + "개");
+            System.out.println(lottoRank.getMatchCount() + "개 일치" + (lottoRank == LottoRank.SECOND ? ", 보너스 볼 일치" : "") + " (" + lottoRank.getWinningAmount() + "원)- " + resultCount + "개");
         }
     }
 

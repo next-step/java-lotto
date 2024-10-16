@@ -1,13 +1,8 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoWinningStatistics {
-    private static final List<Integer> MATCHING_COUNT_FOR_WINNING = Arrays.asList(3, 4, 5, 6);
-
     public static int calculateTotalWinningAmount(List<Lotto> lottos) {
         int winningAmount = 0;
         for (Lotto lotto : lottos) {
@@ -20,23 +15,25 @@ public class LottoWinningStatistics {
         return Math.floor(((double) winningAmount / paidAmount) * 100) / 100;
     }
 
-    //todo 이 메서드의 위치가 LottoWinningStatistics에 있어야 할 것 같아서 이곳에 작성
-    // MATCHING_COUNT_FOR_WINNING 중복 작성됨
-    public static Map<Integer, Integer> getWinningLottoStatistics(List<Lotto> lottos) {
-        Map<Integer, Integer> winningLottoCountMap = new HashMap<>();
+    public static Map<LottoRank, Integer> getWinningLottoStatistics(List<Lotto> lottos) {
 
-        for (Integer matchCount : MATCHING_COUNT_FOR_WINNING) {
-            winningLottoCountMap.put(matchCount, getWinningLottoCountByMatchCount(lottos, matchCount));
-        }
-        return winningLottoCountMap;
-    }
-
-    private static int getWinningLottoCountByMatchCount(List<Lotto> lottos, int matchCount) {
-        int lottoCount = 0;
+        Map<LottoRank, Integer> winningLottoCountMap = new EnumMap<>(LottoRank.class);
         for (Lotto lotto : lottos) {
-            lottoCount += lotto.isEqualMatchCount(matchCount);
+            LottoRank lottoRank = LottoRank.getLottoRank(lotto.getMatchCount(), lotto.getIsBonusMatch());
+            winningLottoCountMap.merge(lottoRank, 1, Integer::sum);
         }
-        return lottoCount;
+
+        // 내림차순으로 삽입
+        List<LottoRank> sortedRanks = LottoRank.getAllLottoRank();
+        Collections.reverse(sortedRanks); // 내림차순으로 정렬
+
+        Map<LottoRank, Integer> finalMap = new LinkedHashMap<>();
+        for (LottoRank rank : sortedRanks) {
+            finalMap.put(rank, winningLottoCountMap.getOrDefault(rank, 0));
+        }
+        winningLottoCountMap.remove(LottoRank.MISS);
+
+        return finalMap;
     }
 
 }

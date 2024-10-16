@@ -27,4 +27,17 @@ public class LottoInputView {
         return winningLotto;
     }
 
+    public static int inputBonusNumber(List<Integer> winningNumbers) {
+        System.out.println("보너스 볼을 입력해주세요");
+        int bonusNumber = scanner.nextInt();
+
+        if(winningNumbers.contains(bonusNumber)){
+            throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
+        }
+        if (bonusNumber <= 0 || bonusNumber > 45) {
+            throw new IllegalArgumentException("유효한 번호가 아닙니다.");
+        }
+        return bonusNumber;
+    }
+
 }

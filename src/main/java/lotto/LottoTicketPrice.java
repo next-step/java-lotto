@@ -1,6 +1,6 @@
 package lotto;
 
-public class LottoTicket {
+public class LottoTicketPrice {
     private static final int PRICE = 1000;
 
     public static int countByAmount(int paidAmount) {
