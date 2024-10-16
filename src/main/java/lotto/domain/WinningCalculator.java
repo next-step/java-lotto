@@ -28,7 +28,11 @@ public class WinningCalculator {
     }
 
     public double calculateRateOfReturn() {
-        return (double) calculateTotalPrize() / calculateTotalPurchasePrice();
+        int  totalPurchasePrice = calculateTotalPurchasePrice();
+        if (totalPurchasePrice == 0) {
+            return 0;
+        }
+        return (double) calculateTotalPrize() / totalPurchasePrice;
     }
 
     private int calculateTotalPrize() {
