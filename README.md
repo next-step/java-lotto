@@ -32,3 +32,30 @@
         - 나눗셈의 경우 0으로 나눌 경우 IllegalArgumentException throw 
 - Operators
   - 사칙연산 기호에 해당하는 Calculation 인터페이스 구현체를 반환
+
+## 로또 기능 요구사항
+- InputView
+  - 구매금액 입력 받아 LottoTickets를 리턴
+- ResultView
+  - 구매한 로또 출력
+  - 당첨 통계 출력
+  - 수익률 출력
+- LottoApp
+  - 전체 로또 실행 수행
+- LottoTicket
+  - 로또 자동 생성 (Collections.shuffle() 생성, Collections.sort() 정렬)
+  - 다른 LottoTicket과 몇개 일치하는지 확인 (ArrayList의 contains() 확인)
+- LottoTickets
+  - 구입 금액에 해당하는 로또 발급 (로또 1장의 가격은 1000원)
+  - 일치 개수에 따른 통계 계산하고 WinningCalculator에 저장
+- WinningCalculator
+  - 당첨 통계 저장
+  - 당첨 금액 저장
+  - 수익률 계산
+    - 당첨금액 / 구입금액 출력
+- Winning
+  - 당첨 관련 Enum
+    - 3개 일치 5000원
+    - 4개 일치 50000원
+    - 5개 일치 1500000원
+    - 6개 일치 2000000000원
