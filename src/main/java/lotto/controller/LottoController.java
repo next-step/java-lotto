@@ -26,7 +26,7 @@ public class LottoController {
 
         resultView.priceLottoStatus(lottos);
         String lastWinningNumber = inputView.getLastWinningNumber();
-        Lotto winnerLotto = inputView.getWinnerLottoNumbers(lastWinningNumber);
+        Lotto winnerLotto = inputView.getLottoNumbers(lastWinningNumber);
         LottoNum bonusNumber = inputView.getBonusNumber();
 
         LottoResult result = LottoResult.getLottoResult(lottos, new WinnerLotto(winnerLotto, bonusNumber));

@@ -39,15 +39,15 @@ public class InputView {
         return new LottoNum(SCANNER.nextInt());
     }
 
-    public Lotto getWinnerLottoNumbers(String lottoNumbers) {
+    public Lotto getLottoNumbers(String lottoNumbers) {
         List<String> lotto = parseWinnerLotto(lottoNumbers);
         List<LottoNum> lastWinnerLotto = lotto.stream()
                 .map(this::parseNumber)
                 .collect(Collectors.toList());
-        return getWinnerLotto(lastWinnerLotto);
+        return getLotto(lastWinnerLotto);
     }
 
-    public Lotto getWinnerLotto(List<LottoNum> lastWinnerLotto) {
+    public Lotto getLotto(List<LottoNum> lastWinnerLotto) {
         return new Lotto(lastWinnerLotto);
     }
 
