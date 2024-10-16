@@ -25,7 +25,7 @@ public class LottoResult {
                         rank -> Collections.frequency(rankForGames, rank)));
     }
 
-    public long calculatePrize() {
+    private long calculatePrize() {
         return countPerRank().entrySet()
                 .stream()
                 .map(entry -> {

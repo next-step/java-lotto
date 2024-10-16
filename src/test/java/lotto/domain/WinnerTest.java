@@ -65,43 +65,6 @@ class WinnerTest {
     }
 
     @ParameterizedTest
-    @MethodSource("gamesAndPrize")
-    void 전체_게임에_대한_상금을_구할_수_있다(Games games, int expected) {
-        Game winner = new Game(List.of(1, 2, 3, 4, 5, 6));
-        LottoResult lottoResult = new LottoResult(winner, games);
-
-        assertThat(lottoResult.calculatePrize()).isEqualTo(expected);
-    }
-
-    private static Stream<Arguments> gamesAndPrize() {
-        List<Integer> first = List.of(1, 2, 3, 4, 5, 6);
-        List<Integer> second = List.of(1, 2, 3, 4, 5, 7);
-        List<Integer> third = List.of(1, 2, 3, 4, 7, 8);
-        List<Integer> fourth = List.of(1, 2, 3, 7, 8, 9);
-        List<Integer> none = List.of(1, 2, 7, 8, 9, 10);
-
-        return Stream.of(
-                Arguments.arguments(new Games(new Game(first)), FIRST.wins()),
-                Arguments.arguments(new Games(new Game(second)), SECOND.wins()),
-                Arguments.arguments(new Games(new Game(third)), THIRD.wins()),
-                Arguments.arguments(new Games(new Game(fourth)), FOURTH.wins()),
-                Arguments.arguments(new Games(new Game(none)), NONE.wins()),
-                Arguments.arguments(
-                        new Games(new Game(first), new Game(second)),
-                        FIRST.wins() + SECOND.wins()
-                ),
-                Arguments.arguments(
-                        new Games(new Game(third), new Game(fourth)),
-                        THIRD.wins() + FOURTH.wins()
-                ),
-                Arguments.arguments(
-                        new Games(new Game(none), new Game(first)),
-                        NONE.wins() + FIRST.wins()
-                )
-        );
-    }
-
-    @ParameterizedTest
     @MethodSource("gamesAndEarningRate")
     void 전체_게임에_대한_수익률을_구할_수_있다(Games games, double expected) {
         Game winner = new Game(List.of(1, 2, 3, 4, 5, 6));
