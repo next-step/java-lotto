@@ -25,4 +25,8 @@ public class LottoTickets {
     public int size() {
         return lottoTickets.size();
     }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
 }
