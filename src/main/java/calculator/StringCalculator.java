@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,13 +44,14 @@ public class StringCalculator {
     }
 
     private static int operate(List<Integer> operands, List<Operation> operations) {
-        List<Integer> copiedOperands = new ArrayList<>(operands);
+        int result = operands.get(0);
+        int nextOperandIndex = 1;
 
         for (Operation operation : operations) {
-            copiedOperands.set(1, operation.apply(copiedOperands.get(0), copiedOperands.get(1)));
-            copiedOperands.remove(0);
+            result = operation.apply(result, operands.get(nextOperandIndex));
+            nextOperandIndex += 1;
         }
 
-        return copiedOperands.get(0);
+        return result;
     }
 }
