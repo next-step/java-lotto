@@ -20,5 +20,11 @@ public final class LottoInputView {
 
         return SCANNER.nextLine();
     }
+
+    public static int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        return SCANNER.nextInt();
+    }
 }
 
