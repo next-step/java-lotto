@@ -25,7 +25,7 @@ public class WinningCalculator {
     public Map<Winning, Integer> getWinningCountMap() {
         return winningCountMap.entrySet()
                               .stream()
-                              .filter(entry -> entry.getKey() != Winning.NONE)
+                              .filter(winningCount -> winningCount.getKey() != Winning.NONE)
                               .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
