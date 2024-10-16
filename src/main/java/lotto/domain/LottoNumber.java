@@ -2,39 +2,43 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
     private static final String IS_NOT_LOTTO_NUMBER = "로또번호가 1~45가 아닙니다.";
     private static final int LOTTO_MIN_NUM = 1;
     private static final int LOTTO_MAX_NUM = 45;
-    private static final List<Integer> randomLottoNumbers = new ArrayList<>();
+    private static final Map<Integer, LottoNumber> cache = new HashMap<>();
 
     static {
         for (int i = LOTTO_MIN_NUM; i <= LOTTO_MAX_NUM; i++) {
-            randomLottoNumbers.add(i);
+            cache.put(i, new LottoNumber(i));
         }
     }
 
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
-        validateLottoNumbers(lottoNumber);
+    private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    public static List<Integer> generateAutoLottoNumbers() {
-        List<Integer> numbers = new ArrayList<>(randomLottoNumbers);
+    public static List<Integer> generateAutoLottoNumbers(int requestSize) {
+        List<LottoNumber> numbers = new ArrayList<>(cache.values());
         Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
+        return numbers.subList(0, requestSize).stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
     }
 
-
-    private void validateLottoNumbers(int lottoNumber) {
+    public static LottoNumber of(int lottoNumber) {
         if (lottoNumber < LOTTO_MIN_NUM || lottoNumber > LOTTO_MAX_NUM) {
             throw new IllegalArgumentException(IS_NOT_LOTTO_NUMBER);
         }
+        return cache.get(lottoNumber);
     }
 
     public int getLottoNumber() {

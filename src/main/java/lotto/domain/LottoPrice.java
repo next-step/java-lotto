@@ -4,7 +4,7 @@ public class LottoPrice {
     public static final String CAN_NOT_BUY_LOTTO = "로또를 살 수 없는 금액입니다.";
     public static final String CAN_NOT_BUY_LOTTO_AMOUNT = "로또는 1000원 단위로 구입 가능합니다.";
 
-    private static final int gamePrice = 1000;
+    public static final int GAME_PRICE = 1000;
     private final int gameMoney;
 
     public LottoPrice(int gameMoney) {
@@ -21,8 +21,8 @@ public class LottoPrice {
         return gameMoney;
     }
 
-    public int getLottoCount() {
-        return gameMoney / gamePrice;
+    public int getGameMoney() {
+        return gameMoney;
     }
 
     public String calculateEarnRate(int prizeMoney) {

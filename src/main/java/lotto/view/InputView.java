@@ -25,7 +25,9 @@ public class InputView {
     }
 
     public static String[] inputLotto(Runnable messagePrinter) {
-        messagePrinter.run();
+        if (messagePrinter != null) {
+            messagePrinter.run();
+        }
         String input = SCANNER.nextLine().replaceAll("\\s+", "");
         return splitInput(input);
     }

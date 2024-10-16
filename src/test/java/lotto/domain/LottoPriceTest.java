@@ -1,13 +1,11 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import static lotto.domain.LottoPrice.CAN_NOT_BUY_LOTTO;
 import static lotto.domain.LottoPrice.CAN_NOT_BUY_LOTTO_AMOUNT;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class LottoPriceTest {
     @DisplayName("로또 금액 0이하")
@@ -26,12 +24,5 @@ class LottoPriceTest {
             new LottoPrice(1001);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(CAN_NOT_BUY_LOTTO_AMOUNT);
-    }
-
-    @DisplayName("로또 횟수 구하기")
-    @Test
-    void 로또_횟수() {
-        LottoPrice lottoPrice = new LottoPrice(20000);
-        assertThat(lottoPrice.getLottoCount()).isEqualTo(20);
     }
 }
