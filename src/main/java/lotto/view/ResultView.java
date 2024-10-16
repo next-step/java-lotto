@@ -12,7 +12,7 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(List<Integer>[] lottos) {
-        for(List<Integer> lotto : lottos) {
+        for (List<Integer> lotto : lottos) {
             System.out.println(lotto);
         }
     }
