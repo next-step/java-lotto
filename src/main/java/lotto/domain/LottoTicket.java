@@ -38,10 +38,10 @@ public class LottoTicket {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 정확히 6개여야 합니다.");
         }
-        for (int number : lottoNumbers) {
-            if (number < MIN_NUMBER || number > MAX_NUMBER) {
-                throw new IllegalArgumentException("로또 번호는 1에서 45 사이여야 합니다.");
-            }
+
+        if (lottoNumbers.stream()
+                        .anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER)) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45 사이여야 합니다.");
         }
     }
 
