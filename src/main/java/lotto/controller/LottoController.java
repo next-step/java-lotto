@@ -21,6 +21,6 @@ public class LottoController {
         String input = inputView.askPriceToPay();
         Games games = new Games(input, new RandomNumberGenerator(new Random()));
 
-        outputView.printNumberOfGames(games.count());
+        outputView.printPurchasedGames(games);
     }
 }

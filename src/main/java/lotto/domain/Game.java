@@ -35,5 +35,14 @@ public class Game {
             throw new IllegalArgumentException("중복된 로또번호를 사용할 수 없습니다.");
         }
     }
+
+    @Override
+    public String toString() {
+        String[] numbers = lottonumbers.stream()
+                .map(Lottonumber::toString)
+                .toArray(String[]::new);
+
+        return "[" + String.join(", ", numbers) + "]";
+    }
 }
 

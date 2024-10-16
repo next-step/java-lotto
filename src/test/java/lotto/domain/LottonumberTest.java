@@ -22,4 +22,12 @@ class LottonumberTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lottonumber(number))
                 .withMessage("1 ~ 45 사이의 숫자만 사용할 수 있습니다.");
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 20, 45})
+    void toString은_숫자를_반환한다(int number) {
+        Lottonumber lottonumber = new Lottonumber(number);
+
+        assertThat(lottonumber.toString()).hasToString(String.valueOf(number));
+    }
 }

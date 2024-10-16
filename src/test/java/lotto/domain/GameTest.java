@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -45,6 +46,15 @@ class GameTest {
             assertThatIllegalArgumentException().isThrownBy(() -> new Game(list))
                     .withMessage("중복된 로또번호를 사용할 수 없습니다.");
         }
+
+        @Test
+        @DisplayName("toString() 은[번호, 번호] 형식의 문자열을 반환한다.")
+        void toString은_게임_내_숫자를_반환한다() {
+            List<Integer> list = List.of(1, 2, 3, 4, 5, 6);
+            Game game = new Game(list);
+
+            assertThat(game).hasToString("[1, 2, 3, 4, 5, 6]");
+        }
     }
 
     @Nested
@@ -58,5 +68,22 @@ class GameTest {
 
             assertThatNoException().isThrownBy(() -> new Game(list));
         }
+
+        @Test
+        @DisplayName("toString() 은[번호, 번호] 형식의 문자열을 반환한다.")
+        void toString은_게임_내_숫자를_반환한다() {
+            RandomNumberGenerator generator = new RandomNumberGenerator(new Random());
+            List<Integer> list = generator.generate(Game.NUMBER_OF_LOTTONUMBER, Lottonumber.MIN, Lottonumber.MAX);
+            Game game = new Game(list);
+
+            String[] array = list.stream()
+                    .sorted()
+                    .map(String::valueOf)
+                    .toArray(String[]::new);
+            String expected = "[" + String.join(", ", array) + "]";
+
+            assertThat(game).hasToString(expected);
+        }
     }
+
 }

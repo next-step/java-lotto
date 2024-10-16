@@ -1,5 +1,7 @@
 package view;
 
+import lotto.domain.Games;
+
 public class OutputView {
 
     private static final OutputView instance = new OutputView();
@@ -14,7 +16,8 @@ public class OutputView {
         System.out.println("계산 결과 : " + result);
     }
 
-    public void printNumberOfGames(int number) {
-        System.out.println(number + "개를 구매했습니다.");
+    public void printPurchasedGames(Games games) {
+        System.out.println(games.count() + "개를 구매했습니다.");
+        System.out.println(games);
     }
 }

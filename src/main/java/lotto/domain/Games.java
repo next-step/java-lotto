@@ -6,6 +6,7 @@ import calculator.domain.Expression;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.domain.Game.PRICE;
 
@@ -29,6 +30,10 @@ public class Games {
         this.games = Collections.unmodifiableList(games);
     }
 
+    public Games(Game... games) {
+        this.games = List.of(games);
+    }
+
     private static int calculateNumberOfGames(String money) {
         int numberOfGames;
         try {
@@ -43,5 +48,12 @@ public class Games {
 
     public int count() {
         return games.size();
+    }
+
+    @Override
+    public String toString() {
+        return games.stream()
+                .map(Game::toString)
+                .collect(Collectors.joining("\n"));
     }
 }
