@@ -2,8 +2,6 @@ package lotto;
 
 import lotto.domain.LottoShuffleGenerator;
 import lotto.domain.Lottos;
-import lotto.domain.WinningCheck;
-import lotto.domain.WinningNumber;
 import lotto.service.WinningStatistic;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -21,7 +19,6 @@ public class JavaLotto {
     }
 
     public void playLotto() {
-        WinningNumber winningNumber = new WinningNumber();
 
         int amount = inputView.inputPurchaseAmountGuide();
 
@@ -30,10 +27,7 @@ public class JavaLotto {
         resultView.NumberOfLotto(lottos.getNumberOfLotto());
         resultView.printPurchasedLottos(lottos);
 
-        winningNumber.convertStringToIntList(inputView.inputWinnerNumber());
-
-        WinningCheck winningCheck = new WinningCheck(lottos, winningNumber);
-        int prize = winningCheck.getWinningPrize();
+        int prize = lottos.getWinningPrize(inputView.inputWinnerNumber());
 
         WinningStatistic winningStatistic = new WinningStatistic(prize, new Stack<>());
         winningStatistic.calculateStatistic();

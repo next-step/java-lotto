@@ -1,6 +1,12 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -15,14 +21,25 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public String inputWinnerNumber() {
+    public Lotto inputWinnerNumber() {
         clearBuffer();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        return new Lotto(convertStringToIntList(scanner.nextLine()));
     }
 
     private void clearBuffer() {
         scanner.nextLine();
+    }
+
+    public List<LottoNumber> convertStringToIntList(String stringWinningNumber) {
+        return Arrays.stream(splitString(stringWinningNumber))
+                .map(Integer::parseInt)
+                .map(LottoNumber::createLottoNumber)
+                .collect(Collectors.toList());
+    }
+
+    private String[] splitString(String stringWinningNumber) {
+        return stringWinningNumber.split(", ");
     }
 
 }
