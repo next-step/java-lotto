@@ -29,3 +29,4 @@
 * PRIZE5PLUS renaming [X]
 * checkBonusNumber 개선 [X]
 * 수동 번호 입력 기능 [X]
+* LottoBundle 클래스 생성 [X]
