@@ -64,7 +64,7 @@ class GameTest {
         @Test
         void 한_게임에_로또번호는_6개다() {
             RandomNumberGenerator generator = new RandomNumberGenerator(new Random());
-            List<Integer> list = generator.generate(Game.NUMBER_OF_LOTTONUMBER, Lottonumber.MIN, Lottonumber.MAX);
+            List<Integer> list = generator.generate(Game.NUMBER_OF_LOTTONUMBER, LottoNumber.MIN, LottoNumber.MAX);
 
             assertThatNoException().isThrownBy(() -> new Game(list));
         }
@@ -73,7 +73,7 @@ class GameTest {
         @DisplayName("toString() 은[번호, 번호] 형식의 문자열을 반환한다.")
         void toString은_게임_내_숫자를_반환한다() {
             RandomNumberGenerator generator = new RandomNumberGenerator(new Random());
-            List<Integer> list = generator.generate(Game.NUMBER_OF_LOTTONUMBER, Lottonumber.MIN, Lottonumber.MAX);
+            List<Integer> list = generator.generate(Game.NUMBER_OF_LOTTONUMBER, LottoNumber.MIN, LottoNumber.MAX);
             Game game = new Game(list);
 
             String[] array = list.stream()

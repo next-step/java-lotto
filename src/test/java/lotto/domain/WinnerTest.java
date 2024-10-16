@@ -37,14 +37,14 @@ class WinnerTest {
     }
 
     @ParameterizedTest
-    @MethodSource("comparingIdenticalLottonumber")
+    @MethodSource("comparingIdenticalLottoNumber")
     void 두_게임의_일치하는_로또번호_갯수를_확인한다(Game game1, Game game2, int expected) {
-        int count = game1.countIdenticalLottonumber(game2);
+        int count = game1.countIdenticalLottoNumber(game2);
 
         assertThat(count).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> comparingIdenticalLottonumber() {
+    private static Stream<Arguments> comparingIdenticalLottoNumber() {
         return Stream.of(
                 Arguments.arguments(new Game(List.of(1, 2, 3, 4, 5, 6)), new Game(List.of(7, 8, 9, 10, 11, 12)), 0),
                 Arguments.arguments(new Game(List.of(1, 2, 3, 4, 5, 6)), new Game(List.of(1, 10, 20, 30, 40, 45)), 1),

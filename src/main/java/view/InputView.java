@@ -22,7 +22,7 @@ public class InputView {
         return askMessage("구입 금액을 입력해 주세요.");
     }
 
-    public String askWinnerLottonumber() {
+    public String askWinnerLottoNumber() {
         return askMessage("지난 주 당첨 번호를 입력해 주세요.(예 - 1, 3, 5, 7, 9, 11)");
     }
 

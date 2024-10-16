@@ -19,7 +19,7 @@ public class Games {
 
         List<Game> games = new ArrayList<>();
         for (int i = 0; i < numberOfGames; i++) {
-            List<Integer> randomNumbers = generator.generate(Game.NUMBER_OF_LOTTONUMBER, Lottonumber.MIN, Lottonumber.MAX);
+            List<Integer> randomNumbers = generator.generate(Game.NUMBER_OF_LOTTONUMBER, LottoNumber.MIN, LottoNumber.MAX);
             games.add(new Game(randomNumbers));
         }
 
@@ -52,7 +52,7 @@ public class Games {
 
     public List<Rank> checkResult(Game winner) {
         return games.stream()
-                .map(game -> game.countIdenticalLottonumber(winner))
+                .map(game -> game.countIdenticalLottoNumber(winner))
                 .map(hits -> Rank.of(hits))
                 .collect(Collectors.toUnmodifiableList());
     }

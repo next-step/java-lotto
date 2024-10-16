@@ -11,13 +11,13 @@ public class Game {
     public static final int PRICE = 1000;
     public static final int NUMBER_OF_LOTTONUMBER = 6;
 
-    private final List<Lottonumber> lottonumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Game(List<Integer> numbers) {
         validateCount(numbers);
         validateDuplicateNumber(numbers);
 
-        this.lottonumbers = toLottonumberList(numbers);
+        this.lottoNumbers = toLottoNumberList(numbers);
     }
 
     public Game(String input) {
@@ -27,7 +27,7 @@ public class Game {
         validateCount(numbers);
         validateDuplicateNumber(numbers);
 
-        this.lottonumbers = toLottonumberList(numbers);
+        this.lottoNumbers = toLottoNumberList(numbers);
     }
 
     private void validateCount(List<Integer> numbers) {
@@ -36,10 +36,10 @@ public class Game {
         }
     }
 
-    private void validateDuplicateNumber(List<Integer> lottonumberList) {
-        Set<Integer> lottonumberSet = new HashSet<>(lottonumberList);
+    private void validateDuplicateNumber(List<Integer> lottoNumberList) {
+        Set<Integer> lottoNumberSet = new HashSet<>(lottoNumberList);
 
-        if (lottonumberSet.size() != lottonumberList.size()) {
+        if (lottoNumberSet.size() != lottoNumberList.size()) {
             throw new IllegalArgumentException("중복된 로또번호를 사용할 수 없습니다.");
         }
     }
@@ -64,16 +64,16 @@ public class Game {
         }
     }
 
-    private static List<Lottonumber> toLottonumberList(List<Integer> numbers) {
+    private static List<LottoNumber> toLottoNumberList(List<Integer> numbers) {
         return numbers.stream()
                 .sorted()
-                .map(Lottonumber::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public int countIdenticalLottonumber(Game that) {
-        Set<Lottonumber> control = new HashSet<>(this.lottonumbers);
-        Set<Lottonumber> compare = new HashSet<>(that.lottonumbers);
+    public int countIdenticalLottoNumber(Game that) {
+        Set<LottoNumber> control = new HashSet<>(this.lottoNumbers);
+        Set<LottoNumber> compare = new HashSet<>(that.lottoNumbers);
         compare.addAll(control);
 
         int difference = compare.size() - control.size();
@@ -83,8 +83,8 @@ public class Game {
 
     @Override
     public String toString() {
-        String[] numbers = lottonumbers.stream()
-                .map(Lottonumber::toString)
+        String[] numbers = lottoNumbers.stream()
+                .map(LottoNumber::toString)
                 .toArray(String[]::new);
 
         return "[" + String.join(", ", numbers) + "]";

@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Lottonumber {
+public class LottoNumber {
 
     public static final int MIN = 1;
     public static final int MAX = 45;
 
     private final int number;
 
-    public Lottonumber(int number) {
+    public LottoNumber(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 사용할 수 있습니다.");
         }
@@ -27,7 +27,7 @@ public class Lottonumber {
             return false;
         }
 
-        Lottonumber that = (Lottonumber) o;
+        LottoNumber that = (LottoNumber) o;
 
         return this.number == that.number;
     }
