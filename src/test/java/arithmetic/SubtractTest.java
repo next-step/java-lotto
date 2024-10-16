@@ -1,7 +1,7 @@
 package arithmetic;
 
 import org.junit.jupiter.api.Test;
-import service.Arithmetic.Subtract;
+import service.arithmetic.Subtract;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
