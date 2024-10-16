@@ -1,5 +1,6 @@
 package lotto.domain.sales;
 
+import lotto.constant.ErrorMessage;
 import lotto.domain.number.Lotto;
 import lotto.domain.prize.WinningPrize;
 
@@ -12,24 +13,35 @@ public class LottoBundle {
 
     private final List<Lotto> lottos;
 
-    public LottoBundle(int quickPick) {
-        this(IntStream.range(0, quickPick)
-                .mapToObj(i -> Lotto.create())
-                .collect(Collectors.toList()));
-    }
-
-    public LottoBundle(String... manuals) {
-        this(Stream.of(manuals).map(Lotto::new).collect(Collectors.toList()));
-    }
-
-    public LottoBundle(LottoBundle... lottoBundles) {
-        this(Arrays.stream(lottoBundles)
-                .flatMap(lottoBundle -> lottoBundle.lottos().stream())
-                .collect(Collectors.toList()));
-    }
-
     public LottoBundle(List<Lotto> lottos) {
         this.lottos = Collections.unmodifiableList(lottos);
+    }
+
+    public static LottoBundle of(int quickPick) {
+        return new LottoBundle(IntStream.range(0, quickPick)
+            .mapToObj(i -> Lotto.create())
+            .collect(Collectors.toList()));
+    }
+
+    public static LottoBundle of(String... manuals) {
+        validateVariableArguments(manuals, ErrorMessage.INVALID_MANUAL_LOTTO);
+
+        return new LottoBundle(Stream.of(manuals).map(Lotto::new).collect(Collectors.toList()));
+    }
+
+    private static void validateVariableArguments(Object[] objects, ErrorMessage errorMessage) {
+        Objects.requireNonNull(objects);
+        if (objects.length == 0) {
+            throw new IllegalArgumentException(errorMessage.getMessage());
+        }
+    }
+
+    public static LottoBundle of(LottoBundle... lottoBundles) {
+        validateVariableArguments(lottoBundles, ErrorMessage.INVALID_LOTTO_INTEGRATION);
+
+        return new LottoBundle(Arrays.stream(lottoBundles)
+            .flatMap(lottoBundle -> lottoBundle.lottos().stream())
+            .collect(Collectors.toList()));
     }
 
     public WinningPrize winningPrize(WinningLotto winningLotto) {
