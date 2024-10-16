@@ -1,4 +1,4 @@
-package domain.calculation;
+package stringcalculator.domain.calculation;
 
 public class Multiplication implements Calculation {
     @Override

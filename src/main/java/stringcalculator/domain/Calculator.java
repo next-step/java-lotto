@@ -1,6 +1,6 @@
-package domain;
+package stringcalculator.domain;
 
-import domain.calculation.Calculation;
+import stringcalculator.domain.calculation.Calculation;
 
 import java.util.List;
 
