@@ -37,7 +37,7 @@ public class LottoNumbers {
         return LOTTO_CANDIDATE_NUMBERS.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList());
     }
 
-    public boolean validateLottoNumbers(List<Integer> lottoNumbers) { //todo private
+    private boolean validateLottoNumbers(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
             throw new IllegalArgumentException("중복된 번호가 있습니다.");
         }
