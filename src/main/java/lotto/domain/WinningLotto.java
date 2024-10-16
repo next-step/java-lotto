@@ -10,25 +10,23 @@ public class WinningLotto {
     private static final String DELIMITER = ", ";
 
     private final Lotto lotto;
+    private final int bonus;
 
-    public WinningLotto(Lotto lotto) {
+    public WinningLotto(Lotto lotto, int bonus) {
         this.lotto = lotto;
+        this.bonus = bonus;
     }
 
-    public WinningLotto(int... numbers) {
-        this(new Lotto(numbers));
-    }
-
-    public WinningLotto(List<Integer> numbers) {
+    public WinningLotto(List<Integer> numbers, int bonus) {
         this(new Lotto(numbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toList())), bonus);
     }
 
-    public WinningLotto(String numbers) {
+    public WinningLotto(String numbers, int bonus) {
         this(Arrays.stream(numbers.split(DELIMITER))
                 .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), bonus);
     }
 
     public int match(Lotto userLotto) {
