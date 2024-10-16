@@ -31,6 +31,7 @@
 - [x] 사용 가능한 기호를 Enum으로 Convert / 추상화하기
 - [x] Calculator Class에서 splitTokens method 분리
 - [x] OperateTest 중 유효한 기호 테스트 @ParameterizedTest 적용
+- [ ] 객체 상태 들고다니지 않기
 
 # 2단계
 ### 로또(자동) 기능 요구사항
@@ -89,3 +90,7 @@
 - [x] 로또 가격 상수화
 - [x] InputView에서의 당첨번호 validation 로또 번호 책임으로 변환
 - [x] 반복문에서 LottoNumber로 감싸기
+- [ ] BonusNumber에 별다른 기능이 없을 시 삭제
+- [ ] LottoBalls 생성 시 초기 Balls를 static으로 구현
+- [ ] Rank 집계 시 BONUS_MATCHES 중복 filter로 거르기
+- [ ] bonusNumber 받지 않는 WinningNumber 생성자 삭제
