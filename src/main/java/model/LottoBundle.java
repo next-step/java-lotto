@@ -22,8 +22,14 @@ public class LottoBundle {
             LottoNumberGenerate lottoNumberGenerate
     ) {
         this.manualLottoNumbers = manualLottoNumbers;
+        checkLottoNumberRange(this.manualLottoNumbers);
         this.lottoNumberGenerator = new LottoNumberGenerator(lottoNumberGenerate);
         this.randomLottoNumbers = this.lottoNumberGenerator.run(getCountOfRandomLottoNumbers(totalPrice));
+        checkLottoNumberRange(this.randomLottoNumbers);
+    }
+
+    private void checkLottoNumberRange(List<List<Integer>> numbers) {
+        numbers.stream().flatMap(List::stream).forEach(LottoNumberValidator::checkLottoNumberRange);
     }
 
     private int getCountOfRandomLottoNumbers(int totalPrice) {
