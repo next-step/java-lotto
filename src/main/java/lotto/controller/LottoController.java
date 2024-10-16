@@ -18,9 +18,10 @@ public class LottoController {
     }
 
     public void play() {
-        String input = inputView.askPriceToPay();
-        Games games = new Games(input, new RandomNumberGenerator(new Random()));
-
+        String moneyInput = inputView.askPriceToPay();
+        Games games = new Games(moneyInput, new RandomNumberGenerator(new Random()));
         outputView.printPurchasedGames(games);
+
+        String winningLottonumberInput = inputView.askWinnerLottonumber();
     }
 }
