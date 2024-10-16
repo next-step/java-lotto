@@ -1,12 +1,10 @@
 package lotto;
 
-import lotto.domain.Buyer;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.QuickPickGenerator;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMain {
@@ -20,14 +18,15 @@ public class LottoMain {
         int cnt = InputView.getCount();
         OutputView.printMsg(cnt + BUY_CNT_MSG);
 
-        Buyer buyer = new Buyer(cnt, new QuickPickGenerator());
+        Lottos lottos = new Lottos(QuickPickGenerator.genLottoNumbers(cnt));
 
-        OutputView.printLottoNumbers(buyer.getLottoNumbers());
+        OutputView.printLottoNumbers(lottos.getLottoNumbers());
+
         OutputView.printMsg(LAST_WINNING_NUMBER_MSG);
 
         Lotto winningLotto = new Lotto(new LottoNumbers(InputView.inputWinningNumber()));
 
-        OutputView.printWinningResult(buyer.getWinningResult(winningLotto));
-        OutputView.printRateOfReturnInfo(buyer.getRateOfReturn(winningLotto));
+        OutputView.printWinningResult(lottos.getWinningResult(winningLotto));
+        OutputView.printRateOfReturnInfo(lottos.getRateOfReturn(winningLotto));
     }
 }

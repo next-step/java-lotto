@@ -1,25 +1,30 @@
 package lotto.domain;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private static final BigDecimal UNIT_AMOUNT = new BigDecimal(1000);
     private final List<Lotto> lottos ;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(List<LottoNumbers> lottoNumbersList) {
+        this.lottos = initLottos(lottoNumbersList);
+    }
+
+    private static List<Lotto> initLottos(List<LottoNumbers> numberList) {
+        return numberList.stream().map(lottoNum -> new Lotto(lottoNum)).collect(Collectors.toList());
     }
 
     public BigDecimal getWinningAmount(Lotto winningLotto) {
-        BigDecimal sum = BigDecimal.ZERO;
-        for (Lotto lotto : this.lottos) {
-            LottoRankingEnum rank = lotto.getRanking(winningLotto);
-            sum = sum.add(rank.getWinningAmount());
-        }
-        return sum;
+        return lottos.stream().map(lotto->lotto.getRankingAmount(winningLotto)).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal getRateOfReturn(Lotto winningLotto) {
+        return getWinningAmount(winningLotto).divide(getTotalPaymentAmount(), 2, RoundingMode.DOWN);
     }
 
     public Map<LottoRankingEnum, Integer> getWinningResult(Lotto winningLotto) {
@@ -28,14 +33,6 @@ public class Lottos {
             addResult(lt.getRanking(winningLotto), winningResult);
         }
         return winningResult;
-    }
-
-    public List<LottoNumbers> getLottoNumbers() {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (Lotto lt : lottos) {
-            lottoNumbers.add(lt.getLottoNumbers());
-        }
-        return lottoNumbers;
     }
 
     private void addResult(LottoRankingEnum rankingEnum, Map<LottoRankingEnum, Integer> result) {
@@ -51,12 +48,13 @@ public class Lottos {
         result.put(rankingEnum, count);
     }
 
+    public List<LottoNumbers> getLottoNumbers() {
+        return lottos.stream().map(lotto->lotto.getLottoNumbers()).collect(Collectors.toList());
+    }
     public BigDecimal getTotalPaymentAmount() {
         return UNIT_AMOUNT.multiply(BigDecimal.valueOf(lottos.size()));
     }
-
     public int getSize() {
         return lottos.size();
     }
-
 }

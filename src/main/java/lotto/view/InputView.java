@@ -13,8 +13,8 @@ public class InputView {
         return scanner.nextInt() / 1000;
     }
 
-    public static String[] inputWinningNumber() {
+    public static int[] inputWinningNumber() {
         Scanner scanner = new Scanner(System.in).useDelimiter(",");
-        return scanner.nextLine().replaceAll(" ", "").split(",");
+        return Arrays.stream(scanner.nextLine().replaceAll(" ", "").split(",")).mapToInt(Integer::parseInt).toArray();
     }
 }

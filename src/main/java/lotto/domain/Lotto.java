@@ -12,8 +12,10 @@ public class Lotto {
     }
 
     public LottoRankingEnum getRanking(Lotto winningLotto) {
-
-        return LottoRankingEnum.getEnumByMatchCount(lottoNumbers.getMatchCount(winningLotto.lottoNumbers));
+        return lottoNumbers.getRanking(winningLotto);
+    }
+    public BigDecimal getRankingAmount(Lotto winningLotto) {
+        return lottoNumbers.getRanking(winningLotto).getWinningAmount();
     }
 
     public LottoNumbers getLottoNumbers() {

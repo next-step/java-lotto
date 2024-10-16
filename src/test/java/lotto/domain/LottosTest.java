@@ -14,37 +14,38 @@ public class LottosTest {
     @Test
     @DisplayName("1등 2장 구매 당첨금")
     void getWinningAmount() {
-        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lottos lottos = getLottos(Arrays.asList(new Lotto(lottoNumber), new Lotto(lottoNumber)));
-        assertThat(lottos.getWinningAmount(lottoNumber)).isEqualTo(LottoRankingEnum.FIRST_PRIZE.getWinningAmount().multiply(BigDecimal.valueOf(2)));
+        int[] lottoNumber = new int[]{1, 2, 3, 4, 5, 6};
+
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumber);
+        Lottos lottos = getLottos(Arrays.asList(lottoNumbers, lottoNumbers));
+        assertThat(lottos.getWinningAmount(new Lotto(lottoNumbers))).isEqualTo(LottoRankingEnum.FIRST_PRIZE.getWinningAmount().multiply(BigDecimal.valueOf(2)));
     }
 
     @Test
     @DisplayName("꽝 당첨금")
     void getWinningAmount2() {
-        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<Integer> winningNumber = Arrays.asList(7,8,9,10,11,12);
-        Lottos lottos = getLottos(Arrays.asList(new Lotto(lottoNumber), new Lotto(lottoNumber)));
-        assertThat(lottos.getWinningAmount(winningNumber)).isEqualTo(LottoRankingEnum.LOSING_LOT.getWinningAmount());
+        LottoNumbers lottoNumbers = new LottoNumbers(new int[] {1,2,3,4,5,6});
+        Lotto winningLotto = new Lotto(new LottoNumbers(new int[]{7,8,9,10,11,12}));
+        Lottos lottos = getLottos(Arrays.asList(lottoNumbers));
+        assertThat(lottos.getWinningAmount(winningLotto)).isEqualTo(LottoRankingEnum.LOSING_LOT.getWinningAmount());
     }
 
     @Test
-    @DisplayName("1당첨 건수 2건")
+    @DisplayName("1등 당첨 건수 2건")
     void getWinningResult() {
-        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lottos lottos = getLottos(Arrays.asList(new Lotto(lottoNumber), new Lotto(lottoNumber)));
-        assertThat(lottos.getWinningResult(lottoNumber).keySet()).hasSize(1);
-        assertThat(lottos.getWinningResult(lottoNumber).get(LottoRankingEnum.FIRST_PRIZE)).isEqualTo(2);
+        LottoNumbers lottoNumbers = new LottoNumbers(new int[] {1,2,3,4,5,6});
+        Lotto winningLotto = new Lotto(lottoNumbers);
+        Lottos lottos = getLottos(Arrays.asList(lottoNumbers, lottoNumbers));
+
+        assertThat(lottos.getWinningResult(winningLotto).keySet()).hasSize(1);
+        assertThat(lottos.getWinningResult(winningLotto).get(LottoRankingEnum.FIRST_PRIZE)).isEqualTo(2);
     }
 
     @Test
     @DisplayName("3장 로또 구매 총금액")
     void getTotalPaymentAmount() {
-        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lottos lottos = getLottos(Arrays.asList(
-                new Lotto(lottoNumber)
-                ,new Lotto(lottoNumber)
-                ,new Lotto(lottoNumber)));
+        LottoNumbers lottoNumbers = new LottoNumbers(new int[]{1,2,3,4,5,6});
+        Lottos lottos = new Lottos(Arrays.asList(lottoNumbers,lottoNumbers,lottoNumbers));
 
         assertThat(lottos.getTotalPaymentAmount()).isEqualTo(BigDecimal.valueOf(3000));
 
@@ -52,17 +53,14 @@ public class LottosTest {
 
     @Test
     void getSize() {
-        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lottos lottos = getLottos(Arrays.asList(
-                new Lotto(lottoNumber)
-                ,new Lotto(lottoNumber)
-                ,new Lotto(lottoNumber)));
+        LottoNumbers lottoNumbers = new LottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
+        Lottos lottos = new Lottos(Arrays.asList(lottoNumbers,lottoNumbers,lottoNumbers));
 
         assertThat(lottos.getSize()).isEqualTo(3);
 
     }
 
-    private Lottos getLottos(List<Lotto> lottoList) {
+    private Lottos getLottos(List<LottoNumbers> lottoList) {
         return new Lottos(lottoList);
     }
 
