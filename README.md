@@ -31,6 +31,7 @@
 - [x] 사용 가능한 기호를 Enum으로 Convert / 추상화하기
 - [x] Calculator Class에서 splitTokens method 분리
 - [x] OperateTest 중 유효한 기호 테스트 @ParameterizedTest 적용
+- [x] 객체 상태 들고다니지 않기
 
 # 2단계
 ### 로또(자동) 기능 요구사항
@@ -43,9 +44,14 @@
 - 지난 주 당첨번호를 입력한다.
   - 번호 6개를 ","로 구분하여 입력한다.
   - 번호가 6개가 아닐 경우 IllegalArgumentException을 반환한다.
+  - 보너스 볼을 입력 받는다.
+    - 보너스 볼은 기존의 6개의 번호와 중복될 수 없다.
+    - 보너스 볼도 1~45 사이의 숫자여야한다.
 - 당첨 통계를 계산한다.
   - 4등부터 1등까지 계산하여 결과를 반환한다.
+  - 5개가 일치하고, 보너스볼이 일치할 경우 2등으로 계산한다. 
   - 총 수익률은 수익금/구매금액으로 계산하여 반환한다.
+
   ```
    당첨 통계
   ---------
@@ -84,3 +90,7 @@
 - [x] 로또 가격 상수화
 - [x] InputView에서의 당첨번호 validation 로또 번호 책임으로 변환
 - [x] 반복문에서 LottoNumber로 감싸기
+- [x] BonusNumber에 별다른 기능이 없을 시 삭제
+- [x] LottoBalls 생성 시 초기 Balls를 static으로 구현
+- [x] Rank 집계 시 BONUS_MATCHES 중복 filter로 거르기
+- [x] bonusNumber 받지 않는 WinningNumber 생성자 삭제
