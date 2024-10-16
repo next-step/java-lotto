@@ -12,7 +12,7 @@ class WinningNumberTest {
     @Test
     void 당첨번호_생성() {
         Set<Integer> lottoNumbers = getLottoNumbers();
-        WinningNumber winningNumber = new WinningNumber(lottoNumbers,7);
+        WinningNumber winningNumber = new WinningNumber(lottoNumbers, 7);
         assertThat(winningNumber).isNotNull();
     }
 
@@ -20,7 +20,7 @@ class WinningNumberTest {
     void 당첨번호_중복검증() {
         Set<Integer> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 5)
                 .collect(Collectors.toSet());
-        assertThatThrownBy(() -> new WinningNumber(lottoNumbers,7))
+        assertThatThrownBy(() -> new WinningNumber(lottoNumbers, 7))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -28,7 +28,7 @@ class WinningNumberTest {
     void 당첨번호_개수검증() {
         Set<Integer> lottoNumbers = Stream.of(1, 2, 3, 4, 5)
                 .collect(Collectors.toSet());
-        assertThatThrownBy(() -> new WinningNumber(lottoNumbers,7))
+        assertThatThrownBy(() -> new WinningNumber(lottoNumbers, 7))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -37,7 +37,7 @@ class WinningNumberTest {
         Set<Integer> winningNumbers = getLottoNumbers();
         Set<Integer> lottoNumbers = getLottoNumbers();
         Lotto lotto = Lotto.from(lottoNumbers);
-        WinningNumber winningNumber = new WinningNumber(winningNumbers,7);
+        WinningNumber winningNumber = new WinningNumber(winningNumbers, 7);
 
         assertThat(winningNumber.findLottoRewards(lotto)).isEqualTo(LottoRewards.FIRST);
     }
@@ -57,7 +57,6 @@ class WinningNumberTest {
     }
 
     private static Set<Integer> getLottoNumbers() {
-        return Stream.of(1, 2, 3, 4, 5, 6)
-                .collect(Collectors.toSet());
+        return Set.of(1, 2, 3, 4, 5, 6);
     }
 }
