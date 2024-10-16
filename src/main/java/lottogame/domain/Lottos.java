@@ -22,7 +22,7 @@ public class Lottos {
 
     public double calculateTotalPrizeAmount(Lotto winningLotto) {
         return lottos.stream()
-                .mapToDouble(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto)).getAmount())
+                .mapToDouble(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto)).getPrizeMoney())
                 .sum();
     }
 

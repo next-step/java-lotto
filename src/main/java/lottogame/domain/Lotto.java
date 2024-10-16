@@ -10,9 +10,7 @@ public class Lotto {
     }
 
     public int countMatchingNumbers(Lotto other) {
-        return (int) this.getNumbers().stream()
-                .filter(number -> other.getNumbers().contains(number))
-                .count();
+        return this.numbers.countMatchingNumbers(other.numbers);
     }
 
     public List<LottoNumber> getNumbers() {

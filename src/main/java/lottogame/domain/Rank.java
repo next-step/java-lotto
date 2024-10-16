@@ -15,26 +15,26 @@ public enum Rank {
     public static final int FOURTH_PLACE = 3;
     public static final int NONE_PLACE = 0;
 
-    private final int rank;
-    private final double amount;
+    private final int matchCount;
+    private final double prizeMoney;
 
-    Rank(int rank, double amount) {
-        this.rank = rank;
-        this.amount = amount;
+    Rank(int matchCount, double prizeMoney) {
+        this.matchCount = matchCount;
+        this.prizeMoney = prizeMoney;
     }
 
     public static Rank from(int rank) {
         return Arrays.stream(values())
-                .filter(value -> rank == value.rank)
+                .filter(value -> rank == value.matchCount)
                 .findFirst()
                 .orElse(Rank.NONE);
     }
 
-    public int getRank() {
-        return rank;
+    public int getMatchCount() {
+        return matchCount;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getPrizeMoney() {
+        return prizeMoney;
     }
 }

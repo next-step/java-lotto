@@ -21,6 +21,12 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    public int countMatchingNumbers(LottoNumbers other) {
+        return (int) this.lottoNumbers.stream()
+                .filter(other.lottoNumbers::contains)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
