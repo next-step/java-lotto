@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.model.dto.LottoNumber;
 import lotto.model.enums.Ranking;
 
 import java.util.Arrays;
@@ -32,15 +31,13 @@ public class Result {
     }
 
     public double statistics(int buyCount) {
-        double winningAmount = Long.valueOf(rankings()
-                        .entrySet()
-                        .stream()
-                        .mapToLong(value -> value.getKey().totalWinningAmount(value.getValue()))
-                        .sum())
-                .doubleValue();
-        double buyAmount = Integer.valueOf(buyCount * LOTTO_PRICE)
-                .doubleValue();
-        return winningAmount / buyAmount;
+        long winningAmount = rankings()
+                .entrySet()
+                .stream()
+                .mapToLong(value -> value.getKey().totalWinningAmount(value.getValue()))
+                .sum();
+        int buyAmount = buyCount * LOTTO_PRICE;
+        return Long.valueOf(winningAmount).doubleValue() / Integer.valueOf(buyAmount).doubleValue();
     }
 
     public String formattedRankingResults() {
@@ -72,11 +69,11 @@ public class Result {
         );
     }
 
-    private int rankingCount(Ranking fourth) {
+    private int rankingCount(Ranking ranking) {
         long count = this.buyer.value()
                 .stream()
                 .map(lotto -> lotto.compare(winning))
-                .filter(fourth::equals)
+                .filter(ranking::equals)
                 .count();
         return Long.valueOf(count)
                 .intValue();

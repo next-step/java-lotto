@@ -3,7 +3,10 @@ package lotto.model;
 import lotto.model.dto.LottoNumber;
 import lotto.model.enums.Ranking;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static lotto.model.Lotto.LOTTO_NUMBERS_NOT_ALLOWED_DUPLICATED;
@@ -12,6 +15,8 @@ import static lotto.model.dto.LottoNumber.of;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
+
+    public static final String DELIMITER = ",";
 
     @Test
     void 로또번호목록과_보너스번호를_저장한다() {
@@ -53,16 +58,22 @@ public class LottoTest {
                 .hasMessage(LOTTO_NUMBERS_SIZE_ALLOWED_ONLY_6);
     }
 
-    @Test
-    void 로또_등수_없음() {
+    @ParameterizedTest(name = "로또_등수_없음({0})")
+    @ValueSource(strings = {
+            "7,8,9,10,11,12,13",//NOTE: 0개
+            "1,8,9,10,11,12,13",// NOTE: 1개
+            "1,2,9,10,11,12,13"//NOTE: 2개
+    })
+    void 로또_등수_없음(String numberStrings) {
+        int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = Lotto.of(
-                () -> List.of(of(7), of(8), of(9), of(10), of(11), of(12))
+                () -> List.of(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
         );
 
         Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
-        LottoNumber bonusNumber = of(13);
+        LottoNumber bonusNumber = of(numbers[6]);
         Winning winning = Winning.of(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
@@ -154,6 +165,11 @@ public class LottoTest {
         Ranking expected = Ranking.FIRST;
 
         assertThat(actual).isEqualTo(expected);
+    }
+
+
+    private static int[] convertStringToNumbers(String numberStrings) {
+        return Arrays.stream(numberStrings.split(DELIMITER)).mapToInt(Integer::parseInt).toArray();
     }
 
 }
