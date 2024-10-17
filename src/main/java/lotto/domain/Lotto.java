@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.LottoDuplicateNumberException;
+import lotto.exception.NumberOfLottoNumberException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,11 +11,19 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    public static final int SIX = 6;
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
+        validNumberOfLottoNumber(lotto);
         validDuplicate(lotto);
         this.lotto = lotto;
+    }
+
+    private void validNumberOfLottoNumber(List<LottoNumber> lotto) {
+        if (lotto.size() != SIX) {
+            throw new NumberOfLottoNumberException(String.valueOf(lotto.size()));
+        }
     }
 
     private void validDuplicate(List<LottoNumber> lotto) {
