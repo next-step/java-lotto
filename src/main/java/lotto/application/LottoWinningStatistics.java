@@ -9,12 +9,19 @@ public class LottoWinningStatistics {
     private final Map<LottoRankingSystem, Integer> values;
 
     public LottoWinningStatistics(List<Lotto> userLottos, Lotto winningLotto) {
-        Map<LottoRankingSystem, Integer> result = new EnumMap<>(LottoRankingSystem.class);
+        Map<LottoRankingSystem, Integer> result = initStatistics();
 
         for (Lotto userLotto : userLottos) {
             putRankedLottoQuantity(result, userLotto, winningLotto);
         }
         this.values = result;
+    }
+
+    private Map<LottoRankingSystem, Integer> initStatistics() {
+        Map<LottoRankingSystem, Integer> statistics = new EnumMap<>(LottoRankingSystem.class);
+        Arrays.stream(LottoRankingSystem.values())
+                .forEach(value -> statistics.put(value, 0));
+        return statistics;
     }
 
     public LottoWinningStatistics(Map<LottoRankingSystem, Integer> values) {
@@ -29,7 +36,7 @@ public class LottoWinningStatistics {
             return;
         }
         LottoRankingSystem key = LottoRankingSystem.from(matchingCount);
-        result.put(key, result.getOrDefault(key, 0) + 1);
+        result.put(key, result.get(key) + 1);
     }
 
     private static boolean checkNonRanked(int matchingCount) {
