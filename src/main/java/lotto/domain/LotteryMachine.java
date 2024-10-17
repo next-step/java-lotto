@@ -17,17 +17,17 @@ public class LotteryMachine {
     }
 
     public LotteryMachine(final int purchasePrice) {
-        valid(purchasePrice);
-        this.lottos = purchaseLotto(purchasePrice);
+        this(purchaseLotto(purchasePrice));
     }
 
-    private void valid(final int price) {
+    private static void valid(final int price) {
         if (price < 0) {
             throw new IllegalArgumentException("가격은 0보다 작은 값일 수 없습니다.");
         }
     }
 
-    private List<Lotto> purchaseLotto(final int purchasePrice) {
+    private static List<Lotto> purchaseLotto(final int purchasePrice) {
+        valid(purchasePrice);
         return LottoAutoGenerator.generate(purchasePrice / LOTTO_PRICE);
     }
 
