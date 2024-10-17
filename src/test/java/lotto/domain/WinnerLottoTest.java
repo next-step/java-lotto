@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.view.InputView;
+import fixture.LottoFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("로또가 들어오면 알맞은 Rank를 반환한다.")
     void 로또_매치() {
-        Lotto lotto = InputView.getInstance().getLottoNumbers("7,8,9,4,5,6");
+        Lotto lotto = LottoFixture.createLottoFixture(7, 8, 9, 4, 5, 6);
         WinnerLotto winnerLotto = new WinnerLotto(lotto, new LottoNum(11));
         assertThat(winnerLotto.match(lotto)).isEqualTo(FIRST_RANK);
     }
@@ -20,7 +20,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("보너스 넘버가 없으면 false 반환")
     void 보너스_번호_없음() {
-        Lotto lotto = InputView.getInstance().getLottoNumbers("7,8,9,4,5,6");
+        Lotto lotto = LottoFixture.createLottoFixture(7, 8, 9, 4, 5, 6);
         WinnerLotto winnerLotto = new WinnerLotto(lotto, new LottoNum(11));
         assertThat(winnerLotto.isMatchBonus(lotto)).isFalse();
     }
@@ -28,7 +28,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("보너스 넘버가 있으면 true 반환")
     void 보너스_번호_있음() {
-        Lotto lotto = InputView.getInstance().getLottoNumbers("7,8,9,4,5,6");
+        Lotto lotto = LottoFixture.createLottoFixture(7, 8, 9, 4, 5, 6);
         WinnerLotto winnerLotto = new WinnerLotto(lotto, new LottoNum(7));
         assertThat(winnerLotto.isMatchBonus(lotto)).isTrue();
     }
@@ -36,8 +36,8 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("당첨 로또와 일치하는 개수 추출")
     void 당첨_로또와_일치하는_개수_추출() {
-        Lotto lotto1 = InputView.getInstance().getLottoNumbers("7,8,9,4,5,6");
-        Lotto lotto2 = InputView.getInstance().getLottoNumbers("1,2,3,4,5,6");
+        Lotto lotto1 = LottoFixture.createLottoFixture(7, 8, 9, 4, 5, 6);
+        Lotto lotto2 = LottoFixture.createLottoFixture(1, 2, 3, 4, 5, 6);
         WinnerLotto winnerLotto = new WinnerLotto(lotto1, new LottoNum(7));
         assertThat(winnerLotto.compareWinningNumber(lotto2)).isEqualTo(3);
     }
