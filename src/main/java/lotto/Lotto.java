@@ -27,6 +27,10 @@ public class Lotto {
         return this.numbers;
     }
 
+    public boolean contains(int n) {
+        return this.numbers.contains(n);
+    }
+
     private Set<Integer> create() {
         Set<Integer> result = new HashSet<>();
         while (result.size() < TOTAL_PER_LOTTO) {

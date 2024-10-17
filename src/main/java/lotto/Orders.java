@@ -15,7 +15,7 @@ public class Orders {
         this.orders = orders;
     }
 
-    public List<Lotto> getLOrders() {
+    public List<Lotto> getOrders() {
         return this.orders;
     }
 

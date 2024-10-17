@@ -13,7 +13,7 @@ public class OrdersTest {
     @DisplayName("총 구매 개수 만큼 로또를 발급 한다.")
     void testCreateOrders() {
         Orders orders = new Orders(5);
-        assertThat(orders.getLOrders()).hasSize(5);
+        assertThat(orders.getOrders()).hasSize(5);
     }
 
     @Test
