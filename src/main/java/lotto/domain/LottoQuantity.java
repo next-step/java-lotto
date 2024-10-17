@@ -36,6 +36,10 @@ public class LottoQuantity {
         return totalQuantity - manualQuantity;
     }
 
+    public int getPurchaseAmount() {
+        return LOTTO_PRICE * totalQuantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

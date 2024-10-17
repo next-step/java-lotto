@@ -11,7 +11,6 @@ import static lotto.domain.LottoRank.*;
 
 public class ResultView {
 
-    private static final int LOTTO_PRICE = 1000;
     private static final String MATCH_RESULT_PRINT_FORMAT = "%d개 일치%s(%d원)- %d개\n";
 
     public static void printLotto(Lotto lotto) {
@@ -41,8 +40,7 @@ public class ResultView {
         System.out.printf(MATCH_RESULT_PRINT_FORMAT, rank.getCountOfMatch(), matchBonusDesc, rank.getPrize(), staticsMap.getOrDefault(rank, 0));
     }
 
-    public static void printProfitRate(int profitAmount, int quantity) {
-        Double profitRate = (double) profitAmount / (quantity * LOTTO_PRICE);
+    public static void printProfitRate(double profitRate) {
         System.out.printf("총수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)\n", profitRate, getResultMessage(profitRate));
     }
 

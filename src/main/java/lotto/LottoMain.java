@@ -7,6 +7,8 @@ import static lotto.view.InputView.*;
 
 public class LottoMain {
 
+    private static final int LOTTO_PRICE = 1000;
+
     public static void main(String[] args) {
 
         LottoQuantity lottoQuantity = new LottoQuantity(inputAmount());
@@ -24,6 +26,6 @@ public class LottoMain {
         WinningResult winningResult = lottoGame.play(winningLotto);
 
         ResultView.printMatchStaticsInfo(winningResult.getStaticsList());
-        ResultView.printProfitRate(winningResult.calculateProfitRate(), lottoQuantity.getTotalQuantity());
+        ResultView.printProfitRate(winningResult.calculateProfitRate(lottoQuantity.getPurchaseAmount()));
     }
 }

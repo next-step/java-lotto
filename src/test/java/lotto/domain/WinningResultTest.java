@@ -8,6 +8,7 @@ import java.util.List;
 
 import static lotto.domain.LottoRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 class WinningResultTest {
 
@@ -27,9 +28,9 @@ class WinningResultTest {
     }
 
     @Test
-    @DisplayName("3등 1개, 5등 1개 = 1505000원")
-    void 당첨금액_계산() {
-        WinningResult result = new WinningResult(THIRD, FIFTH);
-        assertThat(result.calculateProfitRate()).isEqualTo(1505000);
+    @DisplayName("3등 1개 (5_000원) / 구입금액 = 1_000_000")
+    void 수익률_계산() {
+        WinningResult result = new WinningResult(FIFTH);
+        assertThat(result.calculateProfitRate(1_000_000)).isCloseTo(0.005, within(0.001));
     }
 }
