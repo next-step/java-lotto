@@ -85,7 +85,7 @@ public class ConsoleOutputHandler implements OutputHandler {
     }
 
     private String getResultForRow(Rank rank, int matchedLottoCount) {
-        if (rank == Rank.SECOND) {
+        if (rank.isSecond()) {
             return String.format("%s개 일치, 보너스 볼 일치(%s원)- %s개", rank.getMatchCount(), rank.getPrizeAmount(), matchedLottoCount);
         }
         return String.format("%s개 일치 (%s원)- %s개", rank.getMatchCount(), rank.getPrizeAmount(), matchedLottoCount);

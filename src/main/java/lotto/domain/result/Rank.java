@@ -55,4 +55,7 @@ public enum Rank {
         return matchCount;
     }
 
+    public boolean isSecond() {
+        return this == Rank.SECOND;
+    }
 }
