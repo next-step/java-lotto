@@ -3,7 +3,7 @@ package lotto;
 import lotto.application.AutoGenerator;
 import lotto.domain.ticket.Lotto;
 import lotto.domain.ticket.LottoTickets;
-import lotto.utils.StringUtils;
+import lotto.domain.winning.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,7 +21,7 @@ public class LottoMain {
         LottoTickets lottoTickets = lotto.issue(lottoTicketCount);
         resultView.printLottoTickets(lottoTickets);
 
-        String[] winningNumbers = StringUtils.splitByComma(inputView.getWinningNumbers());
+        WinningNumbers winningNumbers = inputView.getWinningNumbers();
         resultView.getResultAndPrint(lottoTickets, winningNumbers);
     }
 
