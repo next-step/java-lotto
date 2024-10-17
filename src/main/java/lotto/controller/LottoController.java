@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.domain.LotteryMachine;
 import lotto.domain.Lotto;
-import lotto.model.RankSummary;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -14,7 +13,5 @@ public class LottoController {
         ResultView.printLottoInfo(lotteryMachine);
 
         Lotto winningLotto = new Lotto(InputView.readWinningLottoNumber());
-        RankSummary rankSummary = lotteryMachine.calculateRankSummary(winningLotto);
-        ResultView.printRankSummary(rankSummary);
     }
 }

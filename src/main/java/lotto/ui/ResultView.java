@@ -1,9 +1,6 @@
 package lotto.ui;
 
-import java.util.Map;
 import lotto.domain.LotteryMachine;
-import lotto.domain.Rank;
-import lotto.model.RankSummary;
 
 public class ResultView {
 
@@ -36,22 +33,6 @@ public class ResultView {
     private static void printLotto(LotteryMachine machine) {
         machine.getLottoNumbers()
                 .forEach(numbers -> System.out.printf("[%s]%n", numbers));
-    }
-
-    public static void printRankSummary(RankSummary rankSummary) {
-        printBlankLine();
-        System.out.println(RANK_SUMMARY_MESSAGE);
-
-        Map<Rank, Long> rankCounts = rankSummary.getRankCounts();
-
-        System.out.println(THREE_MATCHES_MESSAGE + rankCounts.getOrDefault(Rank.THREE_MATCHES, 0L) + COUNT_UNIT);
-        System.out.println(FOUR_MATCHES_MESSAGE + rankCounts.getOrDefault(Rank.FOUR_MATCHES, 0L) + COUNT_UNIT);
-        System.out.println(FIVE_MATCHES_MESSAGE + rankCounts.getOrDefault(Rank.FIVE_MATCHES, 0L) + COUNT_UNIT);
-        System.out.println(SIX_MATCHES_MESSAGE + rankCounts.getOrDefault(Rank.SIX_MATCHES, 0L) + COUNT_UNIT);
-
-        System.out.printf(PROFIT_RATE_MESSAGE,
-                rankSummary.getProfitRate(),
-                rankSummary.getProfitRate() >= 1 ? PROFIT : LOSS);
     }
 
     private static void printBlankLine() {
