@@ -2,7 +2,7 @@ package calculator;
 
 import java.util.Objects;
 
-public class NumberExpression {
+public class NumberExpression implements Expression {
 
     private final int number;
 
@@ -16,6 +16,11 @@ public class NumberExpression {
 
     public NumberExpression sum(NumberExpression rightExpression) {
         return new NumberExpression(this.number + rightExpression.number);
+    }
+
+    @Override
+    public NumberExpression calc() {
+        return this;
     }
 
     @Override

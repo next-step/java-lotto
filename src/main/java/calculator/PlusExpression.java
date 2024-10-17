@@ -1,16 +1,19 @@
 package calculator;
 
-public class PlusExpression {
+public class PlusExpression  implements Expression{
 
-    private NumberExpression leftExpression;
-    private NumberExpression rightExpression;
+    private Expression leftExpression;
+    private Expression rightExpression;
 
-    public PlusExpression(NumberExpression leftExpression, NumberExpression rightExpression) {
+    public PlusExpression(Expression leftExpression, Expression rightExpression) {
         this.leftExpression = leftExpression;
         this.rightExpression = rightExpression;
     }
 
+    @Override
     public NumberExpression calc() {
-        return leftExpression.sum(rightExpression);
+        NumberExpression left = leftExpression.calc();
+        NumberExpression right = rightExpression.calc();
+        return left.sum(right);
     }
 }
