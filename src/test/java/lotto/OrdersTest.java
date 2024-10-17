@@ -14,6 +14,7 @@ public class OrdersTest {
     void testCreateOrders() {
         Orders orders = new Orders(5);
         assertThat(orders.getOrders()).hasSize(5);
+        assertThat(orders.getTotalOrders()).isEqualTo(5);
     }
 
     @Test

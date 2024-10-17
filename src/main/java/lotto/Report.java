@@ -11,6 +11,15 @@ public class Report {
         this.winningRules = winningRules;
     }
 
+    public String reportTotalOrders(Orders orders) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(orders.getTotalOrders()).append("개를 구매했습니다.\n");
+        builder.append(orders);
+
+        String result = builder.toString();
+        System.out.println(result);
+        return result;
+    }
 
     /**
      * 당첨 통계
@@ -45,6 +54,8 @@ public class Report {
             totalReward += statistics.get(winningRule.getMatch()) * winningRule.getReward();
         }
 
-        return String.format("총 수익률은 %.2f입니다.", BigDecimal.valueOf(totalReward).divide(BigDecimal.valueOf(input), 2, RoundingMode.FLOOR));
+        String result = String.format("총 수익률은 %.2f입니다.", BigDecimal.valueOf(totalReward).divide(BigDecimal.valueOf(input), 2, RoundingMode.FLOOR));
+        System.out.println(result);
+        return result;
     }
 }
