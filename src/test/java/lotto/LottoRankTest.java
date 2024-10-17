@@ -4,7 +4,7 @@ import lotto.domain.LottoRank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LottoRankTest {
+class LottoRankTest {
     @Test
     void 당첨_등수_구하기() {
         // given

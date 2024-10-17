@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-public class WinningNumbersTest {
+class WinningNumbersTest {
     @Test
     void 당첨번호와_일치하는_번호_개수_구하기() {
         // given

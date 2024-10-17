@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-public class LottoNumberGeneratorTest {
+class LottoNumberGeneratorTest {
     @Test
     void 고정_로또번호_6개_뽑기() {
         // given

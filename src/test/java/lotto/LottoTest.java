@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 
-public class LottoTest {
+class LottoTest {
     @Test
     void 구매금액에_맞게_로또번호_리스트_생성() {
         // given
