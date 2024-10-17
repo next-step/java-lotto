@@ -1,7 +1,11 @@
 package lotto.service;
 
+import lotto.utility.LottoWinningStaticsCalculator;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoService {
     private final static int lottoPrice = 1000;
@@ -20,7 +24,24 @@ public class LottoService {
         lottoSeller.sellLottos(lottoCount);
     }
 
-    public Map<Integer, List<Integer>> getLottos() {
+    public Map<Integer, Integer> provideWinningStatics(String lastWeekWinningNumbers, Map<Integer, List<Integer>> lottos) {
+        List<Integer> winningNumber = parseWinningNumber(lastWeekWinningNumbers);
+
+        return LottoWinningStaticsCalculator.calculateWinningStatics(winningNumber, lottos);
+    }
+
+    private static List<Integer> parseWinningNumber(String lastWeekWinningNumber) {
+        return Arrays.stream(lastWeekWinningNumber.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    public float provideReturnRate(int purchaseAmount, Map<Integer, Integer> statics) {
+        return LottoWinningStaticsCalculator.calculateReturnRate(purchaseAmount, statics);
+    }
+
+    public Map<Integer, List<Integer>> provideLottos() {
         return lottoSeller.provideLottos();
     }
 

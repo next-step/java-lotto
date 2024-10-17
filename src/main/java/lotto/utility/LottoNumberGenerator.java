@@ -1,9 +1,6 @@
 package lotto.utility;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class LottoNumberGenerator {
 
@@ -13,11 +10,13 @@ public class LottoNumberGenerator {
     }
 
     public static List<Integer> generateLottoNumber() {
-        List<Integer> lotto = new ArrayList<>();
+        Set<Integer> lottoSet = new HashSet<>();
 
-        for (int i = 1; i <= 6; i++) {
-            lotto.add(LottoNumberGenerator.generateRandomNumber());
+        while(lottoSet.size() < 6) {
+            lottoSet.add(LottoNumberGenerator.generateRandomNumber());
         }
+
+        List<Integer> lotto = new ArrayList<>(lottoSet);
 
         shuffleLottoNumber(lotto);
 

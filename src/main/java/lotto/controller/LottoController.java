@@ -17,8 +17,15 @@ public class LottoController {
         ResultView.printPurchaseLottoCount(lottoCount);
 
         lottoService.purchaseLottos(lottoCount);
-        Map<Integer, List<Integer>> lottos = lottoService.getLottos();
-
+        Map<Integer, List<Integer>> lottos = lottoService.provideLottos();
         ResultView.printLottoNumbers(lottos);
+
+        String lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
+
+        Map<Integer, Integer> winningStatics = lottoService.provideWinningStatics(lastWeekWinningNumbers, lottos);
+        ResultView.printWinningStatics(winningStatics);
+
+        float returnRate = lottoService.provideReturnRate(purchaseAmount, winningStatics);
+        ResultView.printReturnRate(returnRate);
     }
 }

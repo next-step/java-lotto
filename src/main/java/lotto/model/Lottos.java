@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.utility.LottoNumberGenerator;
-
 import java.util.*;
 
 public class Lottos {
