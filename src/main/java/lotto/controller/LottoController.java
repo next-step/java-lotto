@@ -19,8 +19,8 @@ public class LottoController {
     }
 
     public void play() {
-        int lottoPrice = inputView.getLottoPrice();
         LottoGame game = LottoGame.getInstance();
+        int lottoPrice = inputView.getLottoPrice();
 
         Lottos manualLottos = inputView.getManualLottos();
         Lottos autoLottos = game.buy(lottoPrice);

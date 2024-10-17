@@ -89,3 +89,4 @@
 
 ## Step4. 피드백 구현
 * InputView 일부 메소드 private 변경 및 위치 조정
+* priceTotal int -> long 변경 (int 범위 초과)

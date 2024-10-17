@@ -20,8 +20,8 @@ public class LottoResult {
         return returnRate;
     }
 
-    int getPriceTotal() {
-        int result = 0;
+    long getPriceTotal() {
+        long result = 0;
         for (Rank rank : this.results) {
             result += rank.getPrice();
         }
