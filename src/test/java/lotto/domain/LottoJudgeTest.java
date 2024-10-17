@@ -34,7 +34,8 @@ public class LottoJudgeTest {
         LottoNumbers winningNumbers = LottoNumbers.valueOf(List.of(1, 3, 5, 7, 9, 11));
         LottoNumber bonusNumber = LottoNumber.valueOf(4);
         int buyingPrice = 10000;
-        agent.buy(buyingPrice, 0, () -> winningNumbers);
+        agent.deposit(buyingPrice);
+        agent.buyAutomatically(() -> winningNumbers);
         LottoJudge judge = LottoJudge.of(winningNumbers, bonusNumber);
         LottoRewardCountMap rewardCountMap = judge.countRewards(agent.getPurchasedLottos());
         assertThat(rewardCountMap.getRewardCount(LottoReward.FIRST_PLACE)).isGreaterThan(0);
@@ -47,8 +48,9 @@ public class LottoJudgeTest {
         LottoNumbers winningNumbers = LottoNumbers.valueOf(List.of(1, 3, 5, 7, 9, 11));
         LottoNumber bonusNumber = LottoNumber.valueOf(4);
         int buyingPrice = 1000;
+        agent.deposit(buyingPrice);
         LottoNumbers buyingNumbers = LottoNumbers.valueOf(List.of(1, 3, 4, 5, 7, 9));
-        agent.buy(buyingPrice, 0, () -> buyingNumbers);
+        agent.buyAutomatically(() -> buyingNumbers);
         LottoJudge judge = LottoJudge.of(winningNumbers, bonusNumber);
         Double rewardPercentage = judge.calculateRewardPercentage(agent.getPurchasedLottos());
         assertThat(rewardPercentage).isGreaterThan(0);
