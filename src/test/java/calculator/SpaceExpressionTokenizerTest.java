@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 public class SpaceExpressionTokenizerTest {
 
     @Test
-    public void 공백으로_토큰화_테스트(){
+    public void 공백으로_토큰화_테스트() {
         String input = "1 3 4 5";
         ExpressionTokenizer expressionTokenizer = new SpaceExpressionTokenizer();
 
-        List<String> tokenize= expressionTokenizer.tokenize(input);
+        List<String> tokenize = expressionTokenizer.tokenize(input);
 
-        assertThat(tokenize).containsSequence("1","3","4","5");
+        assertThat(tokenize).containsSequence("1", "3", "4", "5");
     }
 
 }

@@ -16,7 +16,7 @@ public class SpaceExpressionTokenizer implements ExpressionTokenizer {
         return input.split(SPLIT_PATTERN);
     }
 
-    private List<String> toList(String[] value){
+    private List<String> toList(String[] value) {
         return Arrays.asList(value);
     }
 }
