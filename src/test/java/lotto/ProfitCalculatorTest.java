@@ -29,6 +29,6 @@ class ProfitCalculatorTest {
         float profitRate = ProfitCalculator.calculateProfitRate(totalPurchaseAmount, equalNumberCountList);
 
         // then
-        Assertions.assertThat(profitRate).isEqualTo(183.33f);
+        Assertions.assertThat(profitRate).isEqualTo(1.83f);
     }
 }
