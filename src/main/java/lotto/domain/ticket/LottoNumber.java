@@ -1,7 +1,8 @@
 package lotto.domain.ticket;
 
+import lotto.domain.winning.WinningNumbers;
+
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class LottoNumber {
     public static final int LOTTO_NUMBER_MIN = 1;
@@ -13,10 +14,10 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public boolean isContain(String[] winningNumbers) {
-        return Stream.of(winningNumbers)
-                     .map(Integer::parseInt)
-                     .anyMatch(lottoNumber::equals);
+    public boolean matchWinningNumbers(WinningNumbers winningNumbers) {
+        return winningNumbers.getWinningNumbers()
+                             .stream()
+                             .anyMatch(lottoNumber::equals);
     }
 
     @Override
