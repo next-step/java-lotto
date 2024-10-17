@@ -25,4 +25,12 @@ public class SpaceExpressionTokenizerTest {
         assertThatIllegalArgumentException().isThrownBy(()->expressionTokenizer.tokenize(" "));
     }
 
+
+    @Test
+    public void null값_예외_테스트() {
+        ExpressionTokenizer expressionTokenizer = new SpaceExpressionTokenizer();
+
+        assertThatIllegalArgumentException().isThrownBy(()->expressionTokenizer.tokenize(null));
+    }
+
 }
