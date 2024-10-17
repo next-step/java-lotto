@@ -7,7 +7,7 @@ public interface OutputHandler {
 
     void showCommentForPurchaseAmount();
 
-    void showNumberOfTicketsBought(int availableLottoTickets);
+    void showNumberOfTicketsBought(int manualLottoPurchaseCount, int autoLottoPurchaseCount);
 
     void showLottoTickets(LottoTickets lottoTickets);
 
@@ -16,4 +16,8 @@ public interface OutputHandler {
     void showLottoStatistics(LottoStatistics lottoStatistics);
 
     void showBonusBallText();
+
+    void showCommentForManualLottoPurchaseCount();
+
+    void showCommentForManualLottoNumbers();
 }
