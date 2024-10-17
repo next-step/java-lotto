@@ -2,12 +2,14 @@ package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.TestLottoNumberFactory;
+import lotto.exception.DuplicateBonusNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoTest {
 
@@ -48,5 +50,16 @@ class WinningLottoTest {
 
         assertThat(winningLotto.isBonusMatch(LottoNumber.of(bonusNumber))).isTrue();
         assertThat(winningLotto.isBonusMatch(LottoNumber.of(1))).isFalse();
+    }
+
+    @DisplayName("당첨번호와 보너스 번호의 중복여부를 확인할 수 있다.")
+    @Test
+    void bonusNumberDuplicateExceptionTest() {
+        List<String> winningNumbers = List.of("1", "2", "3", "4", "5", "6");
+        int bonusNumber = 6;
+
+        assertThatThrownBy(() -> WinningLotto.fromWinningNumbersAndBonusNumber(winningNumbers, bonusNumber))
+                .isInstanceOf(DuplicateBonusNumberException.class)
+                .hasMessage("보너스번호가 당첨번호와 중복됩니다.");
     }
 }
