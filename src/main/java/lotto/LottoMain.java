@@ -1,23 +1,21 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.WinningLotto;
-import lotto.domain.WinningResult;
+import lotto.domain.*;
 import lotto.view.ResultView;
 
 import static lotto.view.InputView.*;
 
 public class LottoMain {
 
-    private static final int LOTTO_PRICE = 1000;
-
     public static void main(String[] args) {
 
-        int lottoQuantity = inputAmount() / LOTTO_PRICE;
-        ResultView.printPurchaseQuantity(lottoQuantity);
+        LottoQuantity lottoQuantity = new LottoQuantity(inputAmount());
+        ResultView.printPurchaseQuantity(lottoQuantity.getTotalQuantity());
 
-        LottoGame lottoGame = new LottoGame(lottoQuantity);
+        lottoQuantity.setManualQuantity(inputManualQuantity());
+        inputManualLottoNumbers(lottoQuantity.getManualQuantity());
+
+        LottoGame lottoGame = new LottoGame(lottoQuantity.getAutoQuantity());
         for (Lotto lotto : lottoGame.getLottos()) {
             ResultView.printLotto(lotto);
         }
@@ -26,6 +24,6 @@ public class LottoMain {
         WinningResult winningResult = lottoGame.play(winningLotto);
 
         ResultView.printMatchStaticsInfo(winningResult.getStaticsList());
-        ResultView.printProfitRate(winningResult.calculateProfitRate(), lottoQuantity);
+        ResultView.printProfitRate(winningResult.calculateProfitRate(), lottoQuantity.getTotalQuantity());
     }
 }
