@@ -41,7 +41,7 @@ public final class LottoOutputView {
 
     private static List<Rank> getWinningRanks() {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.NONE)
+                .filter(rank -> !rank.isNone())
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }

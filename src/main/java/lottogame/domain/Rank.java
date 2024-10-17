@@ -35,6 +35,10 @@ public enum Rank {
                 .orElse(Rank.NONE);
     }
 
+    public boolean isNone() {
+        return this == NONE;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }

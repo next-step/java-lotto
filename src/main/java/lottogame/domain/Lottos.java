@@ -14,6 +14,10 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public Map<Rank, Integer> calculateWinningStatistics(Lotto winningLotto, LottoNumber bonusNumber) {
         return lottos.stream()
                 .map(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto), lotto.isMatchingBonus(bonusNumber)))

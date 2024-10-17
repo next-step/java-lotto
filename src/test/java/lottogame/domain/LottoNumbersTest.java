@@ -23,6 +23,14 @@ class LottoNumbersTest {
         });
     }
 
+    @DisplayName("로또 번호가 6개가 아닌 경우 예외가 발생한다.")
+    @Test
+    void throwExceptionForMismatchSize() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoNumbers(createLottoNumbers(1, 2, 3, 4, 5, 6, 7));
+        });
+    }
+
     @DisplayName("일치하는 번호의 개수를 반환한다.")
     @Test
     void countMatchingNumbers() {
