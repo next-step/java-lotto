@@ -1,4 +1,4 @@
-package step1stringcalculator;
+package stringcalculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,13 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CarculatorTest {
 
     private Calculator calculator;
-
-    @BeforeEach
-    public void init() {
-         calculator = new Calculator();
-
-    }
-
 
 
     @ParameterizedTest(name = "나눗셈 정수 반환.반올림연산")
