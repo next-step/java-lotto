@@ -40,8 +40,7 @@ public class InputView {
         return new LottoNum(SCANNER.nextInt());
     }
 
-    public Lottos getManualLottos() {
-        int count = getManualLottoCount();
+    public Lottos getManualLottos(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         clearBuffer();
         List<Lotto> lottos = new ArrayList<>();
@@ -51,7 +50,7 @@ public class InputView {
         return new Lottos(lottos);
     }
 
-    private int getManualLottoCount() {
+    public int getManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return SCANNER.nextInt();
     }

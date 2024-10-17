@@ -22,16 +22,24 @@ public class LottoGame {
         return INSTANCE;
     }
 
-    public Lottos buy(int priceTotal) {
-        if (priceTotal < LOTTO_PRICE) {
-            throw new IllegalStateException("금액이 부족합니다.");
-        }
+    public Lottos buyAuto(int priceTotal) {
+        int lottoCount = priceTotal / LOTTO_PRICE;
+        validateBuy(priceTotal, lottoCount);
         List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < priceTotal / LOTTO_PRICE; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             result.add(AutoLotto.getInstance()
                     .getLotto());
         }
         return new Lottos(result);
     }
 
+    public void validateBuy(int priceTotal, int count) {
+        if (priceTotal < count * LOTTO_PRICE) {
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
+    }
+
+    public int buyManual(int priceTotal, int buyCount) {
+        return priceTotal - (buyCount * LOTTO_PRICE);
+    }
 }

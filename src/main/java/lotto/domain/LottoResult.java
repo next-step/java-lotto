@@ -35,6 +35,9 @@ public class LottoResult {
     }
 
     public static LottoResult getLottoResult(Lottos lottos, WinnerLotto winnerLotto) {
+        if (lottos.getSize() == 0) {
+            throw new IllegalStateException("구매한 로또가 존재하지 않습니다.");
+        }
         return new LottoResult(lottos.getRanks(winnerLotto), lottos.getSize() * LottoGame.LOTTO_PRICE);
     }
 

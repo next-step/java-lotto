@@ -22,8 +22,12 @@ public class LottoController {
         LottoGame game = LottoGame.getInstance();
         int lottoPrice = inputView.getLottoPrice();
 
-        Lottos manualLottos = inputView.getManualLottos();
-        Lottos autoLottos = game.buy(lottoPrice);
+        final int manualLottoCount = inputView.getManualLottoCount();
+
+        game.validateBuy(lottoPrice, manualLottoCount);
+        Lottos manualLottos = inputView.getManualLottos(manualLottoCount);
+        lottoPrice = game.buyManual(lottoPrice, manualLottoCount);
+        Lottos autoLottos = game.buyAuto(lottoPrice);
 
         Lottos total = Lottos.of(manualLottos, autoLottos);
 
