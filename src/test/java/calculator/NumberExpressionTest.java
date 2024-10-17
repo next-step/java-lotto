@@ -19,4 +19,12 @@ public class NumberExpressionTest {
 
         assertThat(five.sum(six)).isEqualTo(new NumberExpression(11));
     }
+
+    @Test
+    public void 빼기_테스트(){
+        NumberExpression five = new NumberExpression(5);
+        NumberExpression six = new NumberExpression(6);
+
+        assertThat(five.subtract(six)).isEqualTo(new NumberExpression(-1));
+    }
 }

@@ -18,6 +18,10 @@ public class NumberExpression implements Expression {
         return new NumberExpression(this.number + rightExpression.number);
     }
 
+    public NumberExpression subtract(NumberExpression expression) {
+        return new NumberExpression(this.number - expression.number);
+    }
+
     @Override
     public NumberExpression calc() {
         return this;
