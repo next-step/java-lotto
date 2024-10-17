@@ -28,14 +28,13 @@ public class View {
         return SCANNER.nextLine();
     }
 
-    public List<Lotto> outputLottos(final List<Lotto> lottos) {
+    public void outputLottos(final List<Lotto> lottos) {
         StringBuilder sb = new StringBuilder();
         sb.append(lottos.size()).append(OUTPUT_PURCHASE_LOTTOS).append(SEPARATOR);
         for (Lotto lotto : lottos) {
             sb.append(lotto).append(SEPARATOR);
         }
         System.out.println(sb);
-        return lottos;
     }
 
     public String inputWinningNumber() {

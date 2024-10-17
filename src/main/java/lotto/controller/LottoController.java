@@ -16,15 +16,20 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public List<Lotto> create() {
-        String input = view.inputMoney();
-
-        List<Lotto> lottos = lottoService.create(input);
-
-        return view.outputLottos(lottos);
+    public void play() {
+        winning(create());
     }
 
-    public void winning(final List<Lotto> lottos) {
+    private List<Lotto> create() {
+        String inputMoney = view.inputMoney();
+
+        List<Lotto> lottos = lottoService.create(inputMoney);
+
+        view.outputLottos(lottos);
+        return lottos;
+    }
+
+    private void winning(final List<Lotto> lottos) {
         String winningNumber = view.inputWinningNumber();
 
         WinningResult winningResult = lottoService.match(lottos, winningNumber);
