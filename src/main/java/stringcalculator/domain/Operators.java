@@ -1,10 +1,10 @@
-package domain;
+package stringcalculator.domain;
 
-import domain.calculation.Addition;
-import domain.calculation.Calculation;
-import domain.calculation.Division;
-import domain.calculation.Multiplication;
-import domain.calculation.Subtraction;
+import stringcalculator.domain.calculation.Addition;
+import stringcalculator.domain.calculation.Calculation;
+import stringcalculator.domain.calculation.Division;
+import stringcalculator.domain.calculation.Multiplication;
+import stringcalculator.domain.calculation.Subtraction;
 
 import java.util.Map;
 

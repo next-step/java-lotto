@@ -1,8 +1,10 @@
-import domain.Operators;
-import domain.calculation.Addition;
-import domain.calculation.Division;
-import domain.calculation.Multiplication;
-import domain.calculation.Subtraction;
+package stringcalculator;
+
+import stringcalculator.domain.Operators;
+import stringcalculator.domain.calculation.Addition;
+import stringcalculator.domain.calculation.Division;
+import stringcalculator.domain.calculation.Multiplication;
+import stringcalculator.domain.calculation.Subtraction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

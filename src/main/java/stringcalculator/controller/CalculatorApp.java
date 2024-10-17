@@ -1,9 +1,9 @@
-package controller;
+package stringcalculator.controller;
 
-import domain.Calculator;
-import domain.Tokens;
-import view.InputView;
-import view.ResultView;
+import stringcalculator.domain.Calculator;
+import stringcalculator.domain.Tokens;
+import stringcalculator.view.InputView;
+import stringcalculator.view.ResultView;
 
 public class CalculatorApp {
     public static void main(String[] args) {

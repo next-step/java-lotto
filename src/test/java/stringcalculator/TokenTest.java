@@ -1,4 +1,6 @@
-import domain.Token;
+package stringcalculator;
+
+import stringcalculator.domain.Token;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
-package view;
+package stringcalculator.view;
 
-import domain.Tokens;
+import stringcalculator.domain.Tokens;
 
 import java.util.Scanner;
 

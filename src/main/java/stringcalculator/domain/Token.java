@@ -1,4 +1,4 @@
-package domain;
+package stringcalculator.domain;
 
 public class Token {
     private static final String OPERAND_PATTERN = "[0-9]+";

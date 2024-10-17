@@ -1,0 +1,44 @@
+package lotto.domain;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class WinningCalculator {
+    private final Map<Winning, Integer> winningCountMap;
+
+    public WinningCalculator(List<Winning> winnings) {
+        winningCountMap = Arrays.stream(Winning.values())
+                                .collect(Collectors.toMap(winning -> winning, winning -> 0, (e1, e2) -> e1, LinkedHashMap::new));
+        winnings.forEach(winning -> winningCountMap.put(winning, winningCountMap.get(winning) + 1));
+}
+
+    public Map<Winning, Integer> getWinningCountMap() {
+        return winningCountMap.entrySet()
+                              .stream()
+                              .filter(winningCount -> winningCount.getKey() != Winning.NONE)
+                              .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    }
+
+    public double calculateRateOfReturn() {
+        int  totalPurchasePrice = calculateTotalPurchasePrice();
+        if (totalPurchasePrice == 0) {
+            return 0;
+        }
+        return (double) calculateTotalPrize() / totalPurchasePrice;
+    }
+
+    private int calculateTotalPrize() {
+        return winningCountMap.entrySet()
+                              .stream()
+                              .mapToInt(winningCount -> winningCount.getKey().getPrize() * winningCount.getValue())
+                              .sum();
+    }
+
+    private int calculateTotalPurchasePrice() {
+        int totalTicketCount = winningCountMap.values().stream().mapToInt(Integer::intValue).sum();
+        return LottoTicket.PRICE * totalTicketCount;
+    }
+}
