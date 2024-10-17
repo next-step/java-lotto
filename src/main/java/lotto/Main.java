@@ -51,8 +51,7 @@ public class Main {
     }
 
     private static int buyLottosAutomatically(LottoAgent lottoAgent) {
-        int automaticLottoCount = lottoAgent.buyAutomatically(RandomSelectionStrategy.getInstance());
-        return automaticLottoCount;
+        return lottoAgent.buyAutomatically(RandomSelectionStrategy.getInstance());
     }
 
     private static LottoMatchNumbers inputMatchNumbers() {
