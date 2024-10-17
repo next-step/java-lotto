@@ -2,8 +2,14 @@ package calculator.expression;
 
 public class PlusExpression extends OperationExpression {
 
+    private static final String OPERATION = "+";
+
     public PlusExpression(Expression leftExpression, Expression rightExpression) {
         super(leftExpression, rightExpression);
+    }
+
+    static boolean isSupport(String operation) {
+        return OPERATION.equals(operation);
     }
 
     @Override

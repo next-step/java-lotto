@@ -2,8 +2,14 @@ package calculator.expression;
 
 public class DivideExpression extends OperationExpression {
 
+    private static final String OPERATION = "/";
+
     public DivideExpression(Expression leftExpression, Expression rightExpression) {
         super(leftExpression, rightExpression);
+    }
+
+    static boolean isSupport(String operation) {
+        return OPERATION.equals(operation);
     }
 
     @Override
