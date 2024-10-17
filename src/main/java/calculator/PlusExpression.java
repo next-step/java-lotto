@@ -1,6 +1,6 @@
 package calculator;
 
-public class PlusExpression  implements Expression{
+public class PlusExpression implements Expression {
 
     private Expression leftExpression;
     private Expression rightExpression;
