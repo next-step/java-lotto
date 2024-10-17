@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LotteryMachine;
 import lotto.domain.Lotto;
+import lotto.domain.WinningStatistics;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -13,5 +14,6 @@ public class LottoController {
         ResultView.printLottoInfo(lotteryMachine);
 
         Lotto winningLotto = new Lotto(InputView.readWinningLottoNumber());
+        ResultView.printWinningStatistics(new WinningStatistics(lotteryMachine, winningLotto));
     }
 }

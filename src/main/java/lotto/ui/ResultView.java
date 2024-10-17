@@ -1,6 +1,8 @@
 package lotto.ui;
 
 import lotto.domain.LotteryMachine;
+import lotto.domain.Rank;
+import lotto.domain.WinningStatistics;
 
 public class ResultView {
 
@@ -33,6 +35,25 @@ public class ResultView {
     private static void printLotto(LotteryMachine machine) {
         machine.getLottoNumbers()
                 .forEach(numbers -> System.out.printf("[%s]%n", numbers));
+    }
+
+    public static void printWinningStatistics(WinningStatistics statistics) {
+        printBlankLine();
+        System.out.println(RANK_SUMMARY_MESSAGE);
+        printDividingLine();
+
+        System.out.printf((THREE_MATCHES_MESSAGE) + "%d" + COUNT_UNIT + "%n", statistics.getRankCount(Rank.THREE_MATCHES));
+        System.out.printf((FOUR_MATCHES_MESSAGE) + "%d" + COUNT_UNIT + "%n", statistics.getRankCount(Rank.FOUR_MATCHES));
+        System.out.printf((FIVE_MATCHES_MESSAGE) + "%d" + COUNT_UNIT + "%n", statistics.getRankCount(Rank.FIVE_MATCHES));
+        System.out.printf((SIX_MATCHES_MESSAGE) + "%d" + COUNT_UNIT + "%n", statistics.getRankCount(Rank.SIX_MATCHES));
+
+        printProfitRate(statistics);
+    }
+
+    private static void printProfitRate(WinningStatistics statistics) {
+        double profitRate = statistics.calculateProfitRate();
+        String result = profitRate >= 1.0 ? PROFIT : LOSS;
+        System.out.printf(PROFIT_RATE_MESSAGE, profitRate, result);
     }
 
     private static void printBlankLine() {

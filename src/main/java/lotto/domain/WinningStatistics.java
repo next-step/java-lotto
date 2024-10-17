@@ -34,7 +34,6 @@ public class WinningStatistics {
         int totalPrize = rankCounts.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
-        System.out.println(totalPrize);
         return (double) totalPrize / (double) lotteryMachine.getTotalPurchasePrice();
     }
 }
