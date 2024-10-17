@@ -43,14 +43,15 @@ class LottoTest {
         );
     }
 
-    @DisplayName("로또가 다른 로또와 비교해서 등수를 잘 반환하는지")
+    @DisplayName("로또가 다른 로또와 비교해서 겹치는 숫자의 개수를 잘 반환하는지")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6/6", "1,2,3,4,5,7/5", "1,2,3,4,7,8/4", "1,2,3,7,8,9/3", "1,2,7,8,9,10/2", "1,7,8,9,10,11/1", "7,8,9,10,11,12/0"}, delimiter = '/')
     void matchTest(String lottoNumbers, int expected) {
         Lotto lotto = new Lotto(lottoNumbers);
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
 
-        assertThat(lotto.calculateRank(winningLotto))
-                .isEqualTo(Rank.valueOfMatchCount(expected));
+        assertThat(lotto.countMatchingNumbers(winningLotto))
+                .isEqualTo(expected);
     }
+
 }
