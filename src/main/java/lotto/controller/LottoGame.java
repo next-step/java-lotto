@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoMatcher;
 import lotto.view.LottoInput;
@@ -19,15 +20,13 @@ public class LottoGame {
         int purchasedAmount = lottoInput.getPurchasedAmount();
         LottoGenerator lottoGenerator = new LottoGenerator(purchasedAmount);
 
-        int purchaseCount = lottoGenerator.purchase();
-        System.out.println(purchaseCount +"개를 구매했습니다.");
-
-        List<List<Integer>> lottoPurchaseAmounts = lottoGenerator.chooseLottoNumber(purchaseCount);
-        lottoPurchaseAmounts.forEach(System.out::println);
+        List<Lotto> lottoTickets = lottoGenerator.generateLottoTickets();
+        System.out.println(lottoTickets.size() +"개를 구매했습니다.");
+        lottoTickets.forEach(System.out::println);
 
         String winningLottoNumbers = lottoInput.getWinningNumbers();
         LottoMatcher matcher = new LottoMatcher(lottoGenerator, winningLottoNumbers);
-        List<Integer> matchedLottoList = matcher.matchLottoNumber(lottoPurchaseAmounts);
+        List<Integer> matchedLottoList = matcher.matchLottoNumber(lottoTickets);
 
         LottoPrint lottoPrint = new LottoPrint();
         lottoPrint.lottoResult(matchedLottoList, purchasedAmount);

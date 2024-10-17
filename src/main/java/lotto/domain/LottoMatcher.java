@@ -10,11 +10,9 @@ public class LottoMatcher {
         this.winningNumbers = lottoGenerator.parseWinningNumbers(winningNumbers);
     }
 
-    public List<Integer> matchLottoNumber(List<List<Integer>> userLottoList) {
+    public List<Integer> matchLottoNumber(List<Lotto> userLottoList) {
         return userLottoList.stream()
-                .map(userLotto -> (int) userLotto.stream()
-                        .filter(winningNumbers::contains)
-                        .count())
+                .map(userLotto -> userLotto.countMatches(winningNumbers))
                 .collect(Collectors.toList());
     }
 

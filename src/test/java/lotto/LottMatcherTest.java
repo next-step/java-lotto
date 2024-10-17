@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.constants.LottoRank;
+import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoMatcher;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottMatcherTest {
 
     List<Integer> matchedLottoList = new ArrayList<>();
-    List<List<Integer>> lottoList = new ArrayList<>();
+    List<Lotto> lottoList;
 
     @BeforeEach
     public void setup() {
@@ -33,7 +34,7 @@ public class LottMatcherTest {
     @DisplayName("LottoRank라는 Enum클래스 값을 테스트한다.")
     public void checkLottoRank(String values) {
         assertThatThrownBy(() -> {
-            LottoRank.findByCount(values);
+            LottoRank.findByCount(Integer.parseInt(values));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

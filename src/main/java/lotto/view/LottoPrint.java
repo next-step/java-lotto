@@ -2,9 +2,7 @@ package lotto.view;
 
 import lotto.constants.LottoRank;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoPrint {
 
@@ -14,6 +12,7 @@ public class LottoPrint {
     public void lottoResult(List<Integer> matchedLottoList, int purchasedAmount) {
         stringBuilder.setLength(0);
         stringBuilder
+                .append(ENTER)
                 .append("당첨통계")
                 .append(ENTER)
                 .append("----------")
@@ -39,7 +38,7 @@ public class LottoPrint {
     private Map<String, Integer> countMatch(Map<String, Integer> rankCounts, List<Integer> matchedLottoList) {
 
         for (Integer count : matchedLottoList) {
-            LottoRank lottoRank = LottoRank.findByCount(String.valueOf(count));
+            LottoRank lottoRank = LottoRank.findByCount(count);
             rankCounts.put(lottoRank.getRank(), rankCounts.get(lottoRank.getRank()) + 1);
         }
 
@@ -48,33 +47,30 @@ public class LottoPrint {
     }
 
     private void generateResult(Map<String, Integer> rankCounts) {
-
-        for (LottoRank rank : LottoRank.values()) {
-            stringBuilder.append(rankCounts.get(rank.getRank()))
-                    .append("개 일치 (")
-                    .append(rank.getAmount())
-                    .append("원) - ")
-                    .append(rank.getRank())
-                    .append(ENTER);
-        }
+        Arrays.stream(LottoRank.values())
+                .filter(rank -> rank.getCount() >= 3)
+                .sorted(Comparator.comparingInt(LottoRank::getCount))
+                .forEach(rank -> stringBuilder.append(rank.getCount())
+                        .append("개 일치 (")
+                        .append(rank.getAmount())
+                        .append("원)- ")
+                        .append(rankCounts.get(rank.getRank()))
+                        .append("개")
+                        .append(ENTER));
     }
 
     private void calculateProfitRate(Map<String, Integer> rankCounts, int purchasedAmount) {
 
         long totalEarnings = 0;
-
         for (LottoRank rank : LottoRank.values()) {
             totalEarnings += rank.getAmount() * rankCounts.get(rank.getRank());
         }
 
-        double profitRate = ((double) totalEarnings - purchasedAmount) / purchasedAmount * 100;
+        double profitRate = (double) totalEarnings / purchasedAmount;
 
-        if (profitRate < 0) {
-            profitRate = 0;
-        }
-
-        stringBuilder.append("총 수익률은: ")
+        stringBuilder.append("총 수익률은 ")
                 .append(String.format("%.2f", profitRate))
                 .append("입니다.");
     }
+
 }
