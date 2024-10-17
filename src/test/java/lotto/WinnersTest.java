@@ -10,6 +10,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinnersTest {
 
     @Test
+    @DisplayName("지난 주 당첨 번호를 입력 받는다.")
+    void testWinners() {
+        Winners winners = new Winners("14, 16, 21, 25, 38, 40");
+        assertThat(winners.toString()).isEqualTo("[14, 16, 21, 25, 38, 40]");
+    }
+
+    @Test
     @DisplayName("당첨 통계를 계산한다.")
     void testPrintWinners() {
         List<Lotto> lottos = List.of(new Lotto(1L), new Lotto(2L));

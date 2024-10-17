@@ -47,6 +47,9 @@ public class Report {
         return result;
     }
 
+    public String reportRateOfReturn(Money input, Statistics statistics) {
+        return reportRateOfReturn(input.get(), statistics);
+    }
     public String reportRateOfReturn(int input, Statistics statistics) {
         int totalReward = 0;
 

@@ -40,4 +40,9 @@ public class Winners {
     private static boolean isEmpty(String s) {
         return s == null || s.isEmpty();
     }
+
+    @Override
+    public String toString() {
+        return winNumbers.toString();
+    }
 }
