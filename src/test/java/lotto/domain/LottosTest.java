@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import fixture.LottoFixture;
-import lotto.enums.Rank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,9 +29,9 @@ public class LottosTest {
     void 결과_리스트_반환() {
         Lottos lottos = new Lottos(List.of(LottoFixture.createLottoFixture(1, 2, 3, 4, 5, 6), LottoFixture.createLottoFixture(2, 3, 4, 5, 6, 7)));
         WinnerLotto winner = new WinnerLotto(LottoFixture.createLottoFixture(1, 2, 3, 4, 5, 6), LottoNum.valueOf(7));
-        List<Rank> ranks = lottos.getRanks(winner);
-        assertThat(ranks).hasSize(2);
-        assertThat(ranks).contains(FIRST_RANK, SECOND_RANK);
+        Ranks ranks = lottos.getRanks(winner);
+        assertThat(ranks.getSize()).isEqualTo(2);
+        assertThat(ranks.getResults()).contains(FIRST_RANK, SECOND_RANK);
     }
 
     @Test

@@ -48,24 +48,24 @@ public class LottoResultTest {
         Lotto lotto4 = LottoFixture.createLottoFixture(1, 2, 3, 7, 8, 9);
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
         Lotto winner = LottoFixture.createLottoFixture(1, 2, 3, 4, 5, 6);
-        assertThat(LottoResult.getLottoResult(lottos, new WinnerLotto(winner, LottoNum.valueOf(20)))).isEqualTo(new LottoResult(List.of(FIRST_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK), 4000));
+        assertThat(LottoResult.getLottoResult(lottos, new WinnerLotto(winner, LottoNum.valueOf(20)))).isEqualTo(new LottoResult(new Ranks(List.of(FIRST_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK)), 4000));
     }
 
     @Test
     @DisplayName("로또 결과에서 수익률 반환")
     void 당첨_수익률_생성() {
-        assertThat(new LottoResult(List.of(FIRST_RANK, THIRD_RANK), 10000).getReturnRate()).isEqualTo(200150);
+        assertThat(new LottoResult(new Ranks(List.of(FIRST_RANK, THIRD_RANK)), 10000).getReturnRate()).isEqualTo(200150);
     }
 
     @Test
     @DisplayName("로또 결과에서 당첨금액 합산한 값 반환")
     void 당첨_결과_2등() {
-        assertThat(new LottoResult(List.of(SECOND_RANK), 14000).getPriceTotal()).isEqualTo(30000000);
+        assertThat(new LottoResult(new Ranks(List.of(SECOND_RANK)), 14000).getPriceTotal()).isEqualTo(30000000);
     }
 
     @Test
     @DisplayName("로또 결과에서 당첨금액 합산한 값 반환")
     void 당첨_결과_생성() {
-        assertThat(new LottoResult(List.of(FIRST_RANK, THIRD_RANK), 14000).getPriceTotal()).isEqualTo(2001500000);
+        assertThat(new LottoResult(new Ranks(List.of(FIRST_RANK, THIRD_RANK)), 14000).getPriceTotal()).isEqualTo(2001500000);
     }
 }

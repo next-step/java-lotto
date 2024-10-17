@@ -21,7 +21,6 @@ public class Lottos {
         return new Lottos(result);
     }
 
-
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
@@ -30,12 +29,12 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Rank> getRanks(WinnerLotto winnerLotto) {
+    public Ranks getRanks(WinnerLotto winnerLotto) {
         List<Rank> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
             result.add(winnerLotto.match(lotto));
         }
-        return result;
+        return new Ranks(result);
     }
 
     @Override
