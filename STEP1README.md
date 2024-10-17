@@ -12,6 +12,6 @@
 *[x] 입력값 null이나 공백이면 IllegalArgumentException 
 *[x] 문자열이 아닌 값이 있으면 Illegal
 *[x] 기호가 없으면 Illegal 
-*[x] step1stringcalculator.Calculator
+*[x] stringcalculator.Calculator
 *[x] InputView
 *[x] ResultView
