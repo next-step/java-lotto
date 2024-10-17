@@ -1,7 +1,9 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
+import lotto.exception.DuplicateBonusNumberException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +22,18 @@ public class WinningLotto {
     }
 
     public static WinningLotto fromWinningNumbersAndBonusNumber(List<String> winningNumbers, int bonusNumber) {
-        List<LottoNumber> lottoNumbers = generateLottoNumbers(winningNumbers);
-        return WinningLotto.of(LottoTicket.of(lottoNumbers), LottoNumber.of(bonusNumber));
+        checkBonusNumberDuplicate(winningNumbers, bonusNumber);
+        return WinningLotto.of(LottoTicket.of(generateLottoNumbers(winningNumbers)), LottoNumber.of(bonusNumber));
+    }
+
+    private static void checkBonusNumberDuplicate(List<String> winningNumbers, int bonusNumber) {
+        if (hasBonusNumberDuplicated(winningNumbers, bonusNumber)) {
+            throw new DuplicateBonusNumberException();
+        }
+    }
+
+    private static boolean hasBonusNumberDuplicated(List<String> winningNumbers, int bonusNumber) {
+        return new HashSet<>(winningNumbers).contains(String.valueOf(bonusNumber));
     }
 
     private static List<LottoNumber> generateLottoNumbers(List<String> winningNumbers) {
