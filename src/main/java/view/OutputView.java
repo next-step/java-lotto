@@ -53,6 +53,7 @@ public class OutputView {
         result.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                .filter(entry -> entry.getKey() != Rank.NONE)
                 .forEach(entry -> {
                     Rank rank = entry.getKey();
                     int hit = rank.getHit();
