@@ -1,6 +1,7 @@
 package lotto.model.enums;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Ranking {
     NONE(0, false, 0),
@@ -24,17 +25,21 @@ public enum Ranking {
     public static Ranking result(int matchedCount, boolean isMatchedBonusNumber) {
         return Arrays.stream(Ranking.values())
                 .filter(ranking -> isEqualMatchedCount(matchedCount, ranking))
-                .filter(ranking -> isEqualMatchedBonusNumber(isMatchedBonusNumber, ranking))
+                .filter(ranking -> isMatchesSecondOrThird(isMatchedBonusNumber, ranking))
                 .findFirst()
                 .orElseGet(() -> Ranking.NONE);
     }
 
-    private static boolean isEqualMatchedBonusNumber(boolean isMatchedBonusNumber, Ranking ranking) {
-        return isMatchedBonusNumber == ranking.isMatchedBonusNumber();
+    private static boolean isMatchesSecondOrThird(boolean isMatchedBonusNumber, Ranking ranking) {
+        if (List.of(SECOND, THIRD).contains(ranking)) {
+            return isMatchedBonusNumber == ranking.isMatchedBonusNumber();
+        }
+        return true;
     }
 
     private static boolean isEqualMatchedCount(int matchedCount, Ranking ranking) {
-        return Integer.valueOf(matchedCount).equals(ranking.matchedCount);
+        return Integer.valueOf(matchedCount)
+                .equals(ranking.matchedCount);
     }
 
     public long totalWinningAmount(Integer winningCount) {

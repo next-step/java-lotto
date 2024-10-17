@@ -82,15 +82,20 @@ public class LottoTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
-    void 로또5등() {
+    @ParameterizedTest(name = "로또5등({0})")
+    @ValueSource(strings = {
+            "1,2,3,7,8,9,13",
+            "1,2,3,7,8,13,13"
+    })
+    void 로또5등(String numberStrings) {
+        int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = Lotto.of(
-                () -> List.of(of(1), of(2), of(3), of(7), of(8), of(9))
+                () -> List.of(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
         );
         Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
-        LottoNumber bonusNumber = of(13);
+        LottoNumber bonusNumber = of(numbers[6]);
         Winning winning = Winning.of(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
@@ -99,15 +104,20 @@ public class LottoTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
-    void 로또4등() {
+    @ParameterizedTest(name = "로또4등({0})")
+    @ValueSource(strings = {
+            "1,2,3,4,8,9,13",
+            "1,2,3,4,8,13,13"
+    })
+    void 로또4등(String numberStrings) {
+        int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = Lotto.of(
-                () -> List.of(of(1), of(2), of(3), of(4), of(8), of(9))
+                () -> List.of(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
         );
         Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
-        LottoNumber bonusNumber = of(13);
+        LottoNumber bonusNumber = of(numbers[6]);
         Winning winning = Winning.of(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
@@ -116,15 +126,20 @@ public class LottoTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
-    void 로또3등() {
+    @ParameterizedTest(name = "로또3등({0})")
+    @ValueSource(strings = {
+            "1,2,3,4,5,9,13",
+            "1,2,3,4,5,12,13"
+    })
+    void 로또3등(String numberStrings) {
+        int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = Lotto.of(
-                () -> List.of(of(1), of(2), of(3), of(4), of(5), of(9))
+                () -> List.of(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
         );
         Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
-        LottoNumber bonusNumber = of(13);
+        LottoNumber bonusNumber = of(numbers[6]);
         Winning winning = Winning.of(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
@@ -133,15 +148,20 @@ public class LottoTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
-    void 로또2등() {
+    @ParameterizedTest(name = "로또2등({0})")
+    @ValueSource(strings = {
+            "1,2,3,4,5,13,13",
+            "1,2,3,4,5,12,12"
+    })
+    void 로또2등(String numberStrings) {
+        int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = Lotto.of(
-                () -> List.of(of(1), of(2), of(3), of(4), of(5), of(9))
+                () -> List.of(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
         );
         Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
-        LottoNumber bonusNumber = of(9);
+        LottoNumber bonusNumber = of(numbers[6]);
         Winning winning = Winning.of(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
@@ -150,15 +170,19 @@ public class LottoTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
-    void 로또1등() {
+    @ParameterizedTest(name = "로또1등({0})")
+    @ValueSource(strings = {
+            "1,2,3,4,5,6,13"
+    })
+    void 로또1등(String numberStrings) {
+        int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = Lotto.of(
-                () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
+                () -> List.of(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
         );
         Lotto winningLotto = Lotto.of(
                 () -> List.of(of(1), of(2), of(3), of(4), of(5), of(6))
         );
-        LottoNumber bonusNumber = of(13);
+        LottoNumber bonusNumber = of(numbers[6]);
         Winning winning = Winning.of(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
