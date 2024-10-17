@@ -5,6 +5,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
     public static void main(String[] args) {
@@ -15,7 +16,9 @@ public class LottoController {
         int lottoCount = lottoService.calculateLottoCount(purchaseAmount);
         ResultView.printPurchaseLottoCount(lottoCount);
 
-        List<Integer>[] lottos = lottoService.purchaseLotto(lottoCount);
+        lottoService.purchaseLottos(lottoCount);
+        Map<Integer, List<Integer>> lottos = lottoService.getLottos();
+
         ResultView.printLottoNumbers(lottos);
     }
 }
