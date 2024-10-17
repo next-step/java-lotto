@@ -5,21 +5,21 @@ import java.util.Set;
 
 public class Lotto {
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNo> numbers;
 
-    public Lotto(Set<Integer> numbers) {
+    public Lotto(Set<LottoNo> numbers) {
         validateLottoSize(numbers);
         LottoNumbers.validate(numbers);
         this.numbers = numbers;
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNo> getNumbers() {
         return Collections.unmodifiableSet(numbers);
     }
 
-    public void validateLottoSize(Set<Integer> numbers) {
-        if (numbers.size() != LottoCreateStrategy.LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 " + LottoCreateStrategy.LOTTO_SIZE + "개여야 합니다.");
+    public void validateLottoSize(Set<LottoNo> numbers) {
+        if (numbers.size() != LottoCreateByMission.getLottoSize()) {
+            throw new IllegalArgumentException("로또 번호는 " + LottoCreateByMission.getLottoSize() + "개여야 합니다.");
         }
     }
 }

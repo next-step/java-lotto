@@ -1,10 +1,17 @@
 package lotto.view;
 
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -14,28 +21,71 @@ public class InputView {
     private static final String WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     public int getCashAmount() {
-        System.out.println(CASH_AMOUNT_MESSAGE);
-        int cashAmount = sc.nextInt();
-        sc.nextLine();
-        return cashAmount;
+        try {
+            int cashAmount = 0;
+            System.out.println(CASH_AMOUNT_MESSAGE);
+            cashAmount = sc.nextInt();
+            sc.nextLine();
+            return cashAmount;
+        } catch (Exception e) {
+            sc.nextLine();
+            return 0;
+        }
     }
 
-    public void printPurchaseCount(int purchaseCount) {
-        System.out.println(purchaseCount + PURCHASE_COUNT_MESSAGE);
+    public int getManualLottoCount() {
+        try {
+            System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+            int count = sc.nextInt();
+            sc.nextLine();
+            return count;
+        } catch (Exception e) {
+            sc.nextLine();
+            return 0;
+        }
     }
 
-    public Set<Integer> getWinningNumbers() {
+    public List<Lotto> getManualLottoNumbers(int count) {
+        try {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+            return IntStream.range(0, count)
+                    .mapToObj(i -> createLotto())
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            sc.nextLine();
+            return new ArrayList<>();
+        }
+    }
+
+    private Lotto createLotto() {
+        try {
+            Set<LottoNo> numbers = Arrays.stream(sc.nextLine().split(", "))
+                    .map(i -> LottoNo.of(Integer.parseInt(i)))
+                    .collect(Collectors.toSet());
+            return new Lotto(numbers);
+        } catch (Exception e) {
+            sc.nextLine();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Set<LottoNo> getWinningNumbers() {
         System.out.println(WINNING_NUMBERS_MESSAGE);
         String[] balls = sc.nextLine().split(", ");
         return Arrays.stream(balls)
-                .map(Integer::parseInt)
+                .map(i -> LottoNo.of(Integer.parseInt(i)))
                 .collect(Collectors.toSet());
     }
 
-    public int getBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        int number = sc.nextInt();
-        sc.nextLine();
-        return number;
+    public LottoNo getBonusNumber() {
+        try {
+            System.out.println("보너스 볼을 입력해 주세요.");
+            int number = sc.nextInt();
+            sc.nextLine();
+            return LottoNo.of(number);
+        } catch (Exception e) {
+            sc.nextLine();
+            return getBonusNumber();
+        }
     }
 }

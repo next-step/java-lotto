@@ -8,11 +8,11 @@ import java.util.EnumMap;
 public class MissionProfitRateStrategy extends ProfitRateStrategy{
 
     @Override
-    public String calculateProfitRate(EnumMap<Prize, Integer> countMap, int cashAmount) {
+    public String calculateProfitRate(EnumMap<Prize, Integer> countMap, Amount cashAmount) {
         int sum = Arrays.stream(Prize.values())
                 .mapToInt(p -> p.getPrizeMoney() * countMap.getOrDefault(p, 0))
                 .sum();
-        double profitRate = (double) sum / cashAmount;
+        double profitRate = cashAmount.calculateProfitRate(sum);
         return String.format("%.2f", profitRate);
     }
 
