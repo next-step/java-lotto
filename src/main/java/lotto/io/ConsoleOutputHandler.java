@@ -59,6 +59,11 @@ public class ConsoleOutputHandler implements OutputHandler {
         printAssessmentText(getAssessmentText(lottoStatistics.getProfitRatio()));
     }
 
+    @Override
+    public void showBonusBallText() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     private void printStatisticsTitle() {
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -80,6 +85,9 @@ public class ConsoleOutputHandler implements OutputHandler {
     }
 
     private String getResultForRow(Rank rank, int matchedLottoCount) {
+        if (rank.isSecond()) {
+            return String.format("%s개 일치, 보너스 볼 일치(%s원)- %s개", rank.getMatchCount(), rank.getPrizeAmount(), matchedLottoCount);
+        }
         return String.format("%s개 일치 (%s원)- %s개", rank.getMatchCount(), rank.getPrizeAmount(), matchedLottoCount);
     }
 
@@ -88,9 +96,14 @@ public class ConsoleOutputHandler implements OutputHandler {
     }
 
     public String getAssessmentText(double floorProfitRatio) {
-        return String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)",
-                floorProfitRatio,
-                isLessThanOne(floorProfitRatio) ? UNPROFITABLE : PROFITABLE);
+        return String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", floorProfitRatio, getAssessmentWord(floorProfitRatio));
+    }
+
+    public String getAssessmentWord(double floorProfitRatio) {
+        if (isLessThanOne(floorProfitRatio)) {
+            return UNPROFITABLE;
+        }
+        return PROFITABLE;
     }
 
     private boolean isLessThanOne(double floorProfitRatio) {

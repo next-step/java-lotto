@@ -14,4 +14,6 @@ public interface OutputHandler {
     void showWinningNumbersText();
 
     void showLottoStatistics(LottoStatistics lottoStatistics);
+
+    void showBonusBallText();
 }

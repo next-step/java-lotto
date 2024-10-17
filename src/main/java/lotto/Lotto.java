@@ -1,12 +1,12 @@
 package lotto;
 
 
-import lotto.domain.ticket.WinningLotto;
 import lotto.domain.money.Money;
 import lotto.domain.number.RandomLottoNumberGenerator;
 import lotto.domain.result.LottoStatistics;
 import lotto.domain.ticket.LottoTicketGenerator;
 import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.WinningLotto;
 import lotto.io.InputHandler;
 import lotto.io.OutputHandler;
 
@@ -37,10 +37,12 @@ public class Lotto {
         LottoTickets lottoTickets = LottoTicketGenerator.generateLottoTickets(availableLottoTickets, new RandomLottoNumberGenerator());
         outputHandler.showLottoTickets(lottoTickets);
 
-        // 당첨번호 입력
+        // 당첨번호와 보너스번호 입력
         outputHandler.showWinningNumbersText();
         List<String> winningNumbers = inputHandler.getWinningNumbersFromUser();
-        WinningLotto winningLotto = WinningLotto.fromWinningNumbers(winningNumbers);
+        outputHandler.showBonusBallText();
+        int bonusNumber = inputHandler.getBonusBallFromUser();
+        WinningLotto winningLotto = WinningLotto.fromWinningNumbersAndBonusNumber(winningNumbers, bonusNumber);
 
         // 당첨 통계 출력
         LottoStatistics lottoStatistics = lottoTickets.generateLottoStatistics(winningLotto, lottoTicketPrice);

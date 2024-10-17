@@ -1,10 +1,10 @@
 package lotto.domain.result;
 
+import lotto.domain.number.LottoNumber;
 import lotto.domain.number.TestLottoNumberFactory;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLotto;
-import lotto.io.ConsoleOutputHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,17 +12,15 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.io.ConsoleOutputHandler.PROFITABLE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsTest {
 
-    public static final int LOTTO_TICKET_PRICE = 1000;
-    private LottoTickets lottoTickets;
-    private WinningLotto winningLotto;
+    private static final int LOTTO_TICKET_PRICE = 1000;
 
-    @BeforeEach
-    void setUp() {
+    @Test
+    @DisplayName("당첨 순위별 통계 결과를 확인할 수 있다.")
+    void calculateLottoStatistics() {
         LottoTicket ticket1 = LottoTicket.of(
                 TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
         );
@@ -30,39 +28,72 @@ class LottoStatisticsTest {
                 TestLottoNumberFactory.createLottoNumbers(7, 8, 9, 10, 11, 12)
         );
 
-        lottoTickets = LottoTickets.of(List.of(ticket1, ticket2));
+        LottoTickets lottoTickets = LottoTickets.of(List.of(ticket1, ticket2));
 
-        winningLotto = WinningLotto.of(
+        WinningLotto winningLotto = WinningLotto.of(
                 LottoTicket.of(
                         TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
-                )
+                ),
+                LottoNumber.of(7)
         );
-    }
 
-    @Test
-    @DisplayName("당첨 순위별 통계 결과를 확인할 수 있다.")
-    void calculateLottoStatistics() {
         LottoStatistics statistics = lottoTickets.generateLottoStatistics(winningLotto, LOTTO_TICKET_PRICE);
+
         Map<Rank, Integer> results = statistics.getResults();
 
-        assertThat(results.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(results.get(Rank.NONE)).isEqualTo(1);
+        assertThat(results).containsEntry(Rank.FIRST, 1);
+        assertThat(results).containsEntry(Rank.NONE, 1);
     }
 
     @Test
     @DisplayName("수익률 계산 테스트")
     void calculateProfitRatio() {
+        LottoTicket ticket1 = LottoTicket.of(
+                TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
+        );
+        LottoTicket ticket2 = LottoTicket.of(
+                TestLottoNumberFactory.createLottoNumbers(7, 8, 9, 10, 11, 12)
+        );
+
+        LottoTickets lottoTickets = LottoTickets.of(List.of(ticket1, ticket2));
+
+        WinningLotto winningLotto = WinningLotto.of(
+                LottoTicket.of(
+                        TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
+                ),
+                LottoNumber.of(7)
+        );
+
         LottoStatistics statistics = lottoTickets.generateLottoStatistics(winningLotto, LOTTO_TICKET_PRICE);
 
         assertThat(statistics.getProfitRatio()).isGreaterThan(1.0);
     }
 
     @Test
-    @DisplayName("수익률에 따른 평가 메시지를 확인할 수 있다.")
-    void getAssessmentBasedOnProfitRatio() {
-        LottoStatistics statistics = lottoTickets.generateLottoStatistics(winningLotto, LOTTO_TICKET_PRICE);
-        ConsoleOutputHandler consoleOutputHandler = new ConsoleOutputHandler();
+    @DisplayName("5개가 일치한 3등과 5개와 보너스번호까지 일치한 2등을 확인할 수 있다.")
+    void secondRankWithBonusNumberTest() {
+        LottoTicket ticket1 = LottoTicket.of(
+                TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,7)
+        );
+        LottoTicket ticket2 = LottoTicket.of(
+                TestLottoNumberFactory.createLottoNumbers(1, 2 ,3, 4, 5, 8)
+        );
 
-        assertThat(consoleOutputHandler.getAssessmentText(statistics.getProfitRatio())).contains(PROFITABLE);
+        LottoTickets lottoTickets = LottoTickets.of(List.of(ticket1, ticket2));
+
+        WinningLotto winningLotto = WinningLotto.of(
+                LottoTicket.of(
+                        TestLottoNumberFactory.createLottoNumbers(1, 2, 3, 4, 5 ,6)
+                ),
+                LottoNumber.of(7)
+        );
+
+        LottoStatistics statistics = lottoTickets.generateLottoStatistics(winningLotto, LOTTO_TICKET_PRICE);
+
+        Map<Rank, Integer> results = statistics.getResults();
+
+        assertThat(results).containsEntry(Rank.SECOND, 1);
+        assertThat(results).containsEntry(Rank.THIRD, 1);
     }
+
 }
