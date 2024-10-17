@@ -18,7 +18,6 @@ public class StringCalculator {
     }
 
     public static int calculate(final String input) {
-        validateInput(input);
         String[] elements = getElements(input);
         int calculatedValue = toInt(elements[0]);
         for (int i = 1; i < elements.length; i = i + 2) {
@@ -43,12 +42,9 @@ public class StringCalculator {
     }
 
     private static String[] getElements(final String input) {
-        return input.split(" ");
-    }
-
-    private static void validateInput(final String input) {
         if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException("입력값에 null 또는 공백만 존재하여 계산을 할 수 없습니다.");
         }
+        return input.split(" ");
     }
 }
