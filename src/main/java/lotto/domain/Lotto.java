@@ -11,8 +11,7 @@ public class Lotto {
     private final LottoNumber bonusNumber;
 
     public Lotto() {
-        this.numbers = new TreeSet<>(getShuffleNumbers());
-        this.bonusNumber = null;
+        this(new TreeSet<>(getShuffleNumbers()));
     }
 
     public Lotto(final Set<LottoNumber> numbers) {
@@ -46,7 +45,7 @@ public class Lotto {
         }
     }
 
-    private Set<LottoNumber> getShuffleNumbers() {
+    private static Set<LottoNumber> getShuffleNumbers() {
         List<LottoNumber> allNumbers = new ArrayList<>();
         for (int i = 1; i <= MAX_NUMBER; i++) {
             allNumbers.add(LottoNumber.valueOf(i));
