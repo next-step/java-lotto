@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class LottoNumber {
     private final static String LOTTO_NUMBER_ERROR = "로또번호는 숫자만 입력해주세요.";
+    private final static String LOTTO_NUMBER_RANGE_ERROR = "1에서 45사이의 숫자만 입력해주세요.";
     private final int number;
 
     public LottoNumber(int number) {
@@ -11,7 +12,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(String number) {
-        this.number = parseInt(number);
+        this.number = validate(parseInt(number));
     }
 
     public int getNumber() {
@@ -24,6 +25,13 @@ public class LottoNumber {
         } catch (Exception e) {
             throw new NumberFormatException(LOTTO_NUMBER_ERROR);
         }
+    }
+
+    private int validate(int number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR);
+        }
+        return number;
     }
 
     @Override

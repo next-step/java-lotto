@@ -46,19 +46,12 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.numbers);
     }
 
-    public List<LottoNumber> sortAsc() {
-        numbers.sort(new Comparator<LottoNumber>() {
-            @Override
-            public int compare(LottoNumber o1, LottoNumber o2) {
-                return o1.getNumber() - o2.getNumber();
-            }
-        });
-
-        return numbers;
-    }
-
     public List<String> displayNumbers() {
-        return numbers.stream().map(LottoNumber::getNumber).map(String::valueOf).collect(Collectors.toList());
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .sorted()
+                .map(String::valueOf)
+                .collect(Collectors.toList());
     }
 
     @Override
