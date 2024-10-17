@@ -5,20 +5,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
-public class CurrentNumber {
+public class CurrentCalculationResult {
     public static final String OPERATOR_REGEX = "[+\\-*/]";
     public static final int FIRST_NUMBER_INDEX = 0;
-    private int currentNumber;
+    private int currentCalculationResult;
 
-    public CurrentNumber(int currentNumber) {
-        this.currentNumber = currentNumber;
+    public CurrentCalculationResult(int currentCalculationResult) {
+        this.currentCalculationResult = currentCalculationResult;
     }
 
     public int calculate(String calculatorString) {
-        currentNumber = Integer.parseInt(String.valueOf(calculatorString.charAt(FIRST_NUMBER_INDEX)));
+        currentCalculationResult = Integer.parseInt(String.valueOf(calculatorString.charAt(FIRST_NUMBER_INDEX)));
         IntStream.range(1, calculatorString.length() - 1)
                 .forEachOrdered(i -> runCalculate(calculatorString, i));
-        return currentNumber;
+        return currentCalculationResult;
     }
 
     public void runCalculate(String calculatorString, int i) {
@@ -32,13 +32,13 @@ public class CurrentNumber {
 
     public void choiceCalculate(String currentOperator, int nextNumber) {
         if ("+".equals(currentOperator)) {
-            currentNumber = sum(currentNumber, nextNumber);
+            currentCalculationResult = sum(currentCalculationResult, nextNumber);
         } else if ("-".equals(currentOperator)) {
-            currentNumber = decrease(currentNumber, nextNumber);
+            currentCalculationResult = decrease(currentCalculationResult, nextNumber);
         } else if ("*".equals(currentOperator)) {
-            currentNumber = multiplication(currentNumber, nextNumber);
+            currentCalculationResult = multiplication(currentCalculationResult, nextNumber);
         } else if ("/".equals(currentOperator)) {
-            currentNumber = division(currentNumber, nextNumber);
+            currentCalculationResult = division(currentCalculationResult, nextNumber);
         }
 
     }
@@ -69,12 +69,12 @@ public class CurrentNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CurrentNumber that = (CurrentNumber) o;
-        return currentNumber == that.currentNumber;
+        CurrentCalculationResult that = (CurrentCalculationResult) o;
+        return currentCalculationResult == that.currentCalculationResult;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(currentNumber);
+        return Objects.hashCode(currentCalculationResult);
     }
 }

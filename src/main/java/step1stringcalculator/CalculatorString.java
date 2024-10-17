@@ -2,17 +2,16 @@ package step1stringcalculator;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CalculatorString {
     public static final String NON_CALCULATOR_REGEX = "[^0-9+\\-*/\\s]";
     public static final String OPERATOR_REGEX = "[+\\-*/]";
     private String calculatorString;
-    private CurrentNumber currentNumber;
+    private CurrentCalculationResult currentCalculationResult;
 
     public CalculatorString(String calculatorString) {
         this.calculatorString = calculatorString;
-        currentNumber = new CurrentNumber(0);
+        currentCalculationResult = new CurrentCalculationResult(0);
     }
 
     public void checkNullAndEmpty() {
@@ -36,12 +35,12 @@ public class CalculatorString {
     }
 
     private Matcher customMatcher(String operatorRegex, String mathExpression) {
-        return currentNumber.customMatcher(operatorRegex, mathExpression);
+        return currentCalculationResult.customMatcher(operatorRegex, mathExpression);
     }
 
     public int calculate() {
         removeWhiteSpace();
-        return currentNumber.calculate(calculatorString);
+        return currentCalculationResult.calculate(calculatorString);
     }
 
     private void removeWhiteSpace() {
