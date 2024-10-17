@@ -1,5 +1,3 @@
-package lotto;
-
 import lotto.domain.LottoPurchaseInfo;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
