@@ -1,4 +1,4 @@
-package calculator;
+package calculator.expression;
 
 import java.util.Objects;
 
@@ -14,25 +14,25 @@ public class NumberExpression implements Expression {
         this(Integer.parseInt(value));
     }
 
-    public NumberExpression sum(NumberExpression expression) {
-        return new NumberExpression(this.number + expression.number);
-    }
-
-    public NumberExpression subtract(NumberExpression expression) {
-        return new NumberExpression(this.number - expression.number);
-    }
-
-    public NumberExpression multiply(NumberExpression expression) {
-        return new NumberExpression(this.number * expression.number);
-    }
-
-    public NumberExpression divide(NumberExpression expression) {
-        return new NumberExpression(this.number / expression.number);
-    }
-
     @Override
     public NumberExpression calc() {
         return this;
+    }
+
+    NumberExpression sum(NumberExpression expression) {
+        return new NumberExpression(this.number + expression.number);
+    }
+
+    NumberExpression subtract(NumberExpression expression) {
+        return new NumberExpression(this.number - expression.number);
+    }
+
+    NumberExpression multiply(NumberExpression expression) {
+        return new NumberExpression(this.number * expression.number);
+    }
+
+    NumberExpression divide(NumberExpression expression) {
+        return new NumberExpression(this.number / expression.number);
     }
 
     @Override

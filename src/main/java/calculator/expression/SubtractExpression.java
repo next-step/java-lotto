@@ -1,4 +1,4 @@
-package calculator;
+package calculator.expression;
 
 public class SubtractExpression extends OperationExpression {
 

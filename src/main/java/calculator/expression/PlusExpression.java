@@ -1,4 +1,4 @@
-package calculator;
+package calculator.expression;
 
 public class PlusExpression extends OperationExpression {
 
