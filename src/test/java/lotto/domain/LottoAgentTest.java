@@ -15,7 +15,7 @@ public class LottoAgentTest {
     void buyCardinalityTest(int price) {
         LottoAgent agent = LottoAgent.newInstance();
         agent.deposit(price);
-        agent.buyAutomatically( () -> LottoNumbers.valueOf(List.of(1, 3, 5, 7, 9, 11)));
+        agent.buyAutomatically(() -> LottoNumbers.valueOf(List.of(1, 3, 5, 7, 9, 11)));
         PurchasedLottos lottos = agent.getPurchasedLottos();
         assertThat(lottos.size()).isEqualTo(price / 1000);
     }

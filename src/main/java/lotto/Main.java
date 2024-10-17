@@ -15,7 +15,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         PurchasedLottos purchasedLottos = buyLottos();
-        
+
         List<Integer> winnerNumbers = InputView.winnerNumbersInput();
         int bonusNumber = InputView.bonusNumberInput();
 
@@ -29,7 +29,7 @@ public class Main {
         int manualLottoCount = InputView.manualLottoCountInput();
 
         List<LottoNumbers> manuallyLottoNumbersList = InputView.manualNumbersInputs(manualLottoCount);
-        for(LottoNumbers manualLottoNumbers :manuallyLottoNumbersList ) {
+        for (LottoNumbers manualLottoNumbers : manuallyLottoNumbersList) {
             lottoAgent.buyManually(manualLottoNumbers);
         }
         int automaticLottoCount = lottoAgent.buyAutomatically(RandomSelectionStrategy.getInstance());
