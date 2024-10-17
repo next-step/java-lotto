@@ -39,8 +39,8 @@ public enum Rank {
         return matchCount == SECOND.matchCount && bonusMatch;
     }
 
-    private static boolean isNotSecond(Rank r) {
-        return !r.equals(SECOND);
+    private static boolean isNotSecond(Rank rank) {
+        return rank != SECOND;
     }
 
     private static boolean isSameMatchCount(long matchCount, Rank r) {
