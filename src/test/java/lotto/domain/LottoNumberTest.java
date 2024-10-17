@@ -25,9 +25,12 @@ class LottoNumberTest {
     }
 
     @Test
-    @DisplayName("LottoPurchasePrice 객체가 동등성을 보장한다.")
+    @DisplayName("LottoPurchasePrice 객체가 동일성과 동등성을 보장한다.")
     void equalsTest() {
-        assertThat(LottoNumber.valueOf(1))
-                .isEqualTo(LottoNumber.valueOf(1));
+        LottoNumber lottoNumber1 = LottoNumber.valueOf(1);
+        LottoNumber lottoNumber2 = LottoNumber.valueOf(1);
+        assertThat(lottoNumber1)
+                .isEqualTo(lottoNumber2)
+                .isSameAs(lottoNumber2);
     }
 }
