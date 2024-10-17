@@ -17,8 +17,8 @@ class LottoWinningStatisticsTest {
     @DisplayName("사용자 로또 번호와 당첨 번호를 매칭하여 당첨 통계 객체를 생성한다.")
     @Test
     void create() {
-        Lotto twoMatchingCount = new Lotto(List.of(1, 2, 9, 10, 11, 12));
-        Lotto threeMatchingCount = new Lotto(List.of(1, 2, 3, 7, 8, 9));
+        Lotto twoMatchingCount = new Lotto(1, 2, 9, 10, 11, 12);
+        Lotto threeMatchingCount = new Lotto(1, 2, 3, 7, 8, 9);
         Lotto allMatchingCount = new Lotto(1, 2, 3, 4, 5, 6);
         List<Lotto> usersLottoTicket = List.of(twoMatchingCount, threeMatchingCount, allMatchingCount);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
