@@ -11,11 +11,12 @@ public class LottoController {
         printPurchaseInfo(lottos);
 
         Lotto winningLotto = getWinningLotto();
+        LottoNumber bonusNumber = getBonusNumber();
 
         LottoGameService gameService = new LottoGameService(lottos, buyAmount);
-        double prizeRate = gameService.calculatePrizeAmount(winningLotto);
-        LottoOutputView.printWinningStatistics(gameService.getWinningResultsByRank());
+        double prizeRate = gameService.calculatePrizeAmount(winningLotto, bonusNumber);
 
+        LottoOutputView.printWinningStatistics(gameService.getWinningResultsByRank());
         LottoOutputView.printPrizeRate(prizeRate);
     }
 
@@ -35,4 +36,9 @@ public class LottoController {
         return new Lotto(new PredefinedLottoNumberStrategy(stringNumbers));
     }
 
+    private LottoNumber getBonusNumber() {
+        int bonusNumber = LottoInputView.getBonusNumber();
+
+        return new LottoNumber(bonusNumber);
+    }
 }

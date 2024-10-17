@@ -1,6 +1,11 @@
 package lottogame.domain;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+import static lottogame.domain.LottoGameConstants.LOTTO_NUMBER_COUNT;
 
 public class LottoNumbers {
     private List<LottoNumber> lottoNumbers;
@@ -15,10 +20,24 @@ public class LottoNumbers {
         if (uniqueNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException("중복된 로또 번호가 존재합니다.");
         }
+
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 정확히 " + LOTTO_NUMBER_COUNT + "개여야 합니다.");
+        }
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int countMatchingNumbers(LottoNumbers other) {
+        return (int) this.lottoNumbers.stream()
+                .filter(other.lottoNumbers::contains)
+                .count();
+    }
+
+    public boolean isMatchingBonus(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     @Override

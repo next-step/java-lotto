@@ -14,15 +14,19 @@ public class Lottos {
         }
     }
 
-    public Map<Rank, Integer> calculateWinningStatistics(Lotto winningLotto) {
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public Map<Rank, Integer> calculateWinningStatistics(Lotto winningLotto, LottoNumber bonusNumber) {
         return lottos.stream()
-                .map(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto)))
+                .map(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto), lotto.isMatchingBonus(bonusNumber)))
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.summingInt(rank -> 1)));
     }
 
-    public double calculateTotalPrizeAmount(Lotto winningLotto) {
+    public double calculateTotalPrizeAmount(Lotto winningLotto, LottoNumber bonusNumber) {
         return lottos.stream()
-                .mapToDouble(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto)).getAmount())
+                .mapToDouble(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto), lotto.isMatchingBonus(bonusNumber)).getPrizeMoney())
                 .sum();
     }
 
