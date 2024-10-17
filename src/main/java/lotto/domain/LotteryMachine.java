@@ -53,30 +53,6 @@ public class LotteryMachine {
                 .collect(Collectors.toList());
     }
 
-    public RankSummary calculateRankSummary(final Lotto winningLotto) {
-        Map<Rank, Long> rankCounts = calculateRankCounts(winningLotto);
-        long totalPrize = calculateTotalPrize(rankCounts);
-        double profitRate = calculateProfitRate(totalPrize);
-
-        return new RankSummary(rankCounts, profitRate);
-    }
-
-    private Map<Rank, Long> calculateRankCounts(final Lotto winningLotto) {
-        return lottos.stream()
-                .map(lotto -> Rank.valueOfMatchCount(lotto.countMatchingNumbers(winningLotto)))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-    }
-
-    private long calculateTotalPrize(final Map<Rank, Long> rankCounts) {
-        return rankCounts.entrySet().stream()
-                .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
-                .sum();
-    }
-
-    private double calculateProfitRate(final long totalPrize) {
-        return totalPrize / (double) (lottos.size() * LOTTO_PRICE);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
