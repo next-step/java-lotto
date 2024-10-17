@@ -5,8 +5,10 @@ import java.util.EnumMap;
 public class WinningStatistics {
 
     private final EnumMap<Rank, Integer> rankCounts = new EnumMap<>(Rank.class);
+    private final LotteryMachine lotteryMachine;
 
     public WinningStatistics(LotteryMachine machine, Lotto winningLotto) {
+        this.lotteryMachine = machine;
         calculateStatistics(machine, winningLotto);
     }
 
@@ -26,5 +28,13 @@ public class WinningStatistics {
 
     public int getRankCount(Rank rank) {
         return rankCounts.get(rank);
+    }
+
+    public double calculateProfitRate() {
+        int totalPrize = rankCounts.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
+        System.out.println(totalPrize);
+        return (double) totalPrize / (double) lotteryMachine.getTotalPurchasePrice();
     }
 }

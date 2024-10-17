@@ -43,6 +43,10 @@ public class LotteryMachine {
         return lottos.size();
     }
 
+    public int getTotalPurchasePrice() {
+        return lottos.size() * LOTTO_PRICE;
+    }
+
 
     public List<String> getLottoNumbers() {
         return lottos.stream()

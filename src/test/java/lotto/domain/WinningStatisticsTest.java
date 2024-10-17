@@ -37,4 +37,27 @@ public class WinningStatisticsTest {
                 Arguments.of(machine, winningLotto, expectedRankCounts)
         );
     }
+
+    @DisplayName("당첨 통계 객체가 구매한 로또와 당첨 로또를 비교하여 수익률을 잘 반환하는지")
+    @ParameterizedTest
+    @MethodSource("lottoRankProfitArguments")
+    void getWinningStatistics (LotteryMachine machine, Lotto winningLotto, double profitRate) {
+        WinningStatistics winningStatistics = new WinningStatistics(machine, winningLotto);
+
+        assertThat(profitRate).isEqualTo(winningStatistics.calculateProfitRate());
+    }
+
+    private static Stream<Arguments> lottoRankProfitArguments() {
+        LotteryMachine machine = new LotteryMachine(
+                List.of(
+                        new Lotto(1, 2, 3, 7, 8, 9)
+                )
+        );
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        double profitRate = 5.00;
+        return Stream.of(
+                Arguments.of(machine, winningLotto, profitRate)
+        );
+    }
+
 }
