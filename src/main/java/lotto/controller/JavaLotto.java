@@ -28,8 +28,6 @@ public class JavaLotto {
 
         int prize = lottos.getWinningPrize(inputView.inputWinnerNumber());
 
-        lottos.calculateStatistic(prize, new Stack<>());
-
         resultView.printResult(lottos.calculateStatistic(prize, new Stack<>()));
         resultView.printProfit(lottos.calculateProfit(prize, amount));
 

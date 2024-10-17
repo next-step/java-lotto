@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void validLottoNumberRange(int lottoNumber) {
-        if (lottoNumber < 0 || lottoNumber > 45) {
+        if (lottoNumber < 1 || lottoNumber > 45) {
             throw new IllegalArgumentException("로또 범위는 1~45의 범위를 가짐");
         }
     }

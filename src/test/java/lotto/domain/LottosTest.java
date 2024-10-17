@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 
 import static lotto.domain.LottoGenerator.lottoGenerator;
 
-public class WinningCheckTest {
+public class LottosTest {
 
     private final Lotto lottoHitAll = new Lotto(IntStream.rangeClosed(1, 6)
             .mapToObj(LottoNumber::createLottoNumber)

@@ -29,7 +29,7 @@ public class Lottos {
         int totalPrize = 0;
         int eachPrize = 0;
         for (Lotto lotto : lottos) {
-            eachPrize = LottoWinningStatus(lotto, winningLotto);
+            eachPrize = lottoWinningStatus(lotto, winningLotto);
             validOverFlow(eachPrize, totalPrize);
             validtotalPrize(eachPrize, totalPrize);
             totalPrize += eachPrize;
@@ -50,7 +50,7 @@ public class Lottos {
     }
 
 
-    private int LottoWinningStatus(Lotto lotto, Lotto winningLotto) {
+    private int lottoWinningStatus(Lotto lotto, Lotto winningLotto) {
         int count = 0;
         List<LottoNumber> lottoNumbers = lotto.getLotto();
         List<LottoNumber> winningNumbers = winningLotto.getLotto();
