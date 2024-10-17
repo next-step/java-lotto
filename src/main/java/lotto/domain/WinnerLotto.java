@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
+
 public class WinnerLotto {
     private final Lotto winnerLotto;
     private final LottoNum winnerBonusNum;
@@ -9,7 +11,7 @@ public class WinnerLotto {
         this.winnerBonusNum = lottoNum;
     }
 
-    public int compareWinningNumber(Lotto lotto) {
+    int compareWinningNumber(Lotto lotto) {
         int result = 0;
         for (LottoNum lottoNumber : lotto.getLottoNumbers()) {
             result += addResult(lottoNumber);
@@ -18,13 +20,17 @@ public class WinnerLotto {
     }
 
     private int addResult(LottoNum lottoNumber) {
-        if (winnerLotto.getLottoNumbers().contains(lottoNumber)) {
+        if (winnerLotto.isContains(lottoNumber)) {
             return 1;
         }
         return 0;
     }
 
-    public boolean isMatchBonus(Lotto lotto) {
+    boolean isMatchBonus(Lotto lotto) {
         return lotto.isContains(winnerBonusNum);
+    }
+
+    public Rank match(Lotto lotto) {
+        return Rank.getRank(compareWinningNumber(lotto), isMatchBonus(lotto));
     }
 }
