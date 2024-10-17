@@ -29,6 +29,10 @@ public class Budget {
         return new Budget(this.amount + amount);
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
