@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class OperatorsTest {
