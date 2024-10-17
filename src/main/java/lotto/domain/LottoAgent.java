@@ -31,8 +31,8 @@ public class LottoAgent {
     }
 
     private void buyLotto(LottoNumbers numbers) {
-        purchasedLottos = purchasedLottos.add(Lotto.of(purchasedLottos.generateNextId(), numbers));
         budget = budget.use(Lotto.LOTTO_PRICE);
+        purchasedLottos = purchasedLottos.add(Lotto.of(purchasedLottos.generateNextId(), numbers));
     }
 
     public PurchasedLottos getPurchasedLottos() {
