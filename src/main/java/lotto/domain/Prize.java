@@ -40,4 +40,7 @@ public enum Prize {
         return statistic;
     }
 
+    public static double calculateProfit(int prize, int buyPrice) {
+        return Math.floor(prize / (double) buyPrice * 100) / 100.0;
+    }
 }

@@ -52,8 +52,4 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public double calculateProfit(int prize, int buyPrice) {
-        return Math.floor(prize / (double) buyPrice * 100) / 100.0;
-    }
-
 }

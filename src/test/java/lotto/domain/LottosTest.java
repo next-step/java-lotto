@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.LottoGenerator.lottoGenerator;
-
 public class LottosTest {
 
     private final Lotto lottoHitAll = new Lotto(IntStream.rangeClosed(1, 6)
@@ -25,7 +23,7 @@ public class LottosTest {
     @Test
     @DisplayName("로또 금액 여부를 확인한다")
     void 로또_당첨_금액_확인() {
-        Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> List.of(new Lotto(lottoGenerator.subList(0, LottoGenerator.LOTTO_SIZE))));
+        Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> List.of(lottoHitAll));
 
         Assertions.assertThat(lottos.getWinningPrize(lottoHitAll)).isEqualTo(2_000_000_000);
 
@@ -60,16 +58,6 @@ public class LottosTest {
                         () -> lottos.getWinningPrize(lottoHitAll)
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("총 상금 20억을 넘길 순 없음");
-
-    }
-
-    @Test
-    @DisplayName("수익률 계산 테스트")
-    void 수익률_계산_테스트() {
-
-        Lottos lottos = Lottos.createLottos(1000 , purChaseAmount -> new ArrayList<>());
-
-        Assertions.assertThat(lottos.calculateProfit(5000,14000)).isEqualTo(0.35);
 
     }
 

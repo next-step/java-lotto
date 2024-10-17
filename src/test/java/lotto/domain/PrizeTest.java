@@ -13,4 +13,12 @@ public class PrizeTest {
         ).containsExactly(1,0,0,1);
     }
 
+    @Test
+    @DisplayName("수익률 계산 테스트")
+    void 수익률_계산_테스트() {
+
+        Assertions.assertThat(Prize.calculateProfit(5000,14000)).isEqualTo(0.35);
+
+    }
+
 }
