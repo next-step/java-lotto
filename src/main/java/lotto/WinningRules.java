@@ -23,4 +23,8 @@ public class WinningRules {
                 .map(rules::get)
                 .collect(Collectors.toList());
     }
+
+    public Integer getReward(Integer match) {
+        return this.rules.get(match).getReward();
+    }
 }

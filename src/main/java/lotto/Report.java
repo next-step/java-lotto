@@ -1,5 +1,8 @@
 package lotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Report {
 
     private final WinningRules winningRules;
@@ -33,5 +36,15 @@ public class Report {
         String result = builder.toString();
         System.out.println(result);
         return result;
+    }
+
+    public String reportRateOfReturn(int input, Statistics statistics) {
+        int totalReward = 0;
+
+        for (WinningRule winningRule : winningRules.getAllRules()) {
+            totalReward += statistics.get(winningRule.getMatch()) * winningRule.getReward();
+        }
+
+        return String.format("총 수익률은 %.2f입니다.", BigDecimal.valueOf(totalReward).divide(BigDecimal.valueOf(input), 2, RoundingMode.FLOOR));
     }
 }
