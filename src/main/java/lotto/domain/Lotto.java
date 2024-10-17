@@ -39,6 +39,14 @@ public class Lotto {
         }
     }
 
+    public int countMatchingNumbers(Lotto other) {
+        return other.getLottoNumbers()
+                .stream()
+                .filter(numbers::contains)
+                .mapToInt(n -> 1)
+                .sum();
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(numbers);
     }

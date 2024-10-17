@@ -30,18 +30,11 @@ public class WinningLotto {
     }
 
     public LottoRank match(Lotto userLotto) {
-        return LottoRank.valueOf(getCountOfMatch(userLotto.getLottoNumbers()), userLotto.containBonus(bonus));
+        return LottoRank.valueOf(userLotto.countMatchingNumbers(lotto), userLotto.containBonus(bonus));
     }
 
     public LottoRank match(int... numbers) {
         return match(new Lotto(numbers));
-    }
-
-    private int getCountOfMatch(List<LottoNumber> numbers) {
-        return numbers.stream()
-                .filter(value -> lotto.getLottoNumbers().contains(value))
-                .mapToInt(value -> 1)
-                .sum();
     }
 
     @Override
