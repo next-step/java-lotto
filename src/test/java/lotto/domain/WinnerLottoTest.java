@@ -13,7 +13,7 @@ public class WinnerLottoTest {
     @DisplayName("로또가 들어오면 알맞은 Rank를 반환한다.")
     void 로또_매치() {
         Lotto lotto = LottoFixture.createLottoFixture(7, 8, 9, 4, 5, 6);
-        WinnerLotto winnerLotto = new WinnerLotto(lotto, new LottoNum(11));
+        WinnerLotto winnerLotto = new WinnerLotto(lotto, LottoNum.valueOf(11));
         assertThat(winnerLotto.match(lotto)).isEqualTo(FIRST_RANK);
     }
 
@@ -21,7 +21,7 @@ public class WinnerLottoTest {
     @DisplayName("보너스 넘버가 없으면 false 반환")
     void 보너스_번호_없음() {
         Lotto lotto = LottoFixture.createLottoFixture(7, 8, 9, 4, 5, 6);
-        WinnerLotto winnerLotto = new WinnerLotto(lotto, new LottoNum(11));
+        WinnerLotto winnerLotto = new WinnerLotto(lotto, LottoNum.valueOf(11));
         assertThat(winnerLotto.isMatchBonus(lotto)).isFalse();
     }
 
@@ -29,7 +29,7 @@ public class WinnerLottoTest {
     @DisplayName("보너스 넘버가 있으면 true 반환")
     void 보너스_번호_있음() {
         Lotto lotto = LottoFixture.createLottoFixture(7, 8, 9, 4, 5, 6);
-        WinnerLotto winnerLotto = new WinnerLotto(lotto, new LottoNum(7));
+        WinnerLotto winnerLotto = new WinnerLotto(lotto, LottoNum.valueOf(7));
         assertThat(winnerLotto.isMatchBonus(lotto)).isTrue();
     }
 
@@ -38,7 +38,7 @@ public class WinnerLottoTest {
     void 당첨_로또와_일치하는_개수_추출() {
         Lotto lotto1 = LottoFixture.createLottoFixture(7, 8, 9, 4, 5, 6);
         Lotto lotto2 = LottoFixture.createLottoFixture(1, 2, 3, 4, 5, 6);
-        WinnerLotto winnerLotto = new WinnerLotto(lotto1, new LottoNum(7));
+        WinnerLotto winnerLotto = new WinnerLotto(lotto1, LottoNum.valueOf(7));
         assertThat(winnerLotto.compareWinningNumber(lotto2)).isEqualTo(3);
     }
 }

@@ -29,7 +29,7 @@ public class LottosTest {
     @DisplayName("로또 결과 리스트를 반환한다.")
     void 결과_리스트_반환() {
         Lottos lottos = new Lottos(List.of(LottoFixture.createLottoFixture(1, 2, 3, 4, 5, 6), LottoFixture.createLottoFixture(2, 3, 4, 5, 6, 7)));
-        WinnerLotto winner = new WinnerLotto(LottoFixture.createLottoFixture(1, 2, 3, 4, 5, 6), new LottoNum(7));
+        WinnerLotto winner = new WinnerLotto(LottoFixture.createLottoFixture(1, 2, 3, 4, 5, 6), LottoNum.valueOf(7));
         List<Rank> ranks = lottos.getRanks(winner);
         assertThat(ranks).hasSize(2);
         assertThat(ranks).contains(FIRST_RANK, SECOND_RANK);

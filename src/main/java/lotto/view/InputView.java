@@ -37,7 +37,7 @@ public class InputView {
 
     public LottoNum getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LottoNum(SCANNER.nextInt());
+        return LottoNum.valueOf(SCANNER.nextInt());
     }
 
     public Lottos getManualLottos(int count) {
@@ -74,7 +74,7 @@ public class InputView {
 
     private LottoNum parseNumber(String lottoNumber) {
         try {
-            return new LottoNum(Integer.parseInt(lottoNumber));
+            return LottoNum.valueOf(Integer.parseInt(lottoNumber));
         } catch (NumberFormatException ex) {
             throw new IllegalStateException("숫자 형식이 올바르지 않습니다.");
         }
