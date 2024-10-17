@@ -35,4 +35,12 @@ public class NumberExpressionTest {
 
         assertThat(five.multiply(six)).isEqualTo(new NumberExpression(30));
     }
+
+    @Test
+    public void 나누기_테스트(){
+        NumberExpression five = new NumberExpression(7);
+        NumberExpression six = new NumberExpression(3);
+
+        assertThat(five.divide(six)).isEqualTo(new NumberExpression(2));
+    }
 }
