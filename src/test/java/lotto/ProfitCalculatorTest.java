@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class ProfitCalculatorTest {
+class ProfitCalculatorTest {
     @Test
     void 수익_금액_계산() {
         // given
