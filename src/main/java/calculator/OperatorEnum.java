@@ -26,7 +26,7 @@ public enum OperatorEnum {
     }
 
     public static OperatorEnum getEnumByValue(String inputValue) {
-        return Arrays.stream(values()).filter(e -> e.getValue().equals(inputValue)).findFirst().orElse(null);
+        return Arrays.stream(values()).filter(e -> e.getValue().equals(inputValue)).findFirst().orElseThrow();
     }
 
 }
