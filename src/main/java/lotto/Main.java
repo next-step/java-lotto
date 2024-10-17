@@ -15,36 +15,62 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         PurchasedLottos purchasedLottos = buyLottos();
-
-        List<Integer> winnerNumbers = InputView.winnerNumbersInput();
-        int bonusNumber = InputView.bonusNumberInput();
-
-        printStatistics(winnerNumbers, bonusNumber, purchasedLottos);
+        LottoMatchNumbers matchNumbers = inputMatchNumbers();
+        printStatistics(matchNumbers, purchasedLottos);
     }
 
     private static PurchasedLottos buyLottos() {
         LottoAgent lottoAgent = LottoAgent.newInstance();
-        int price = InputView.priceInput();
-        lottoAgent.deposit(price);
-        int manualLottoCount = InputView.manualLottoCountInput();
-
-        List<LottoNumbers> manuallyLottoNumbersList = InputView.manualNumbersInputs(manualLottoCount);
-        for (LottoNumbers manualLottoNumbers : manuallyLottoNumbersList) {
-            lottoAgent.buyManually(manualLottoNumbers);
-        }
-        int automaticLottoCount = lottoAgent.buyAutomatically(RandomSelectionStrategy.getInstance());
+        setBudget(lottoAgent);
+        int manualLottoCount = buyLottosManually(lottoAgent);
+        int automaticLottoCount = buyLottosAutomatically(lottoAgent);
         PurchasedLottos purchasedLottos = lottoAgent.getPurchasedLottos();
         ResultView.printPurchasedLottosCount(manualLottoCount, automaticLottoCount);
         ResultView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }
 
-    private static void printStatistics(List<Integer> winnerNumbers, int bonusNumber, PurchasedLottos purchasedLottos) {
-        LottoJudge lottoJudge = LottoJudge.of(LottoNumbers.valueOf(winnerNumbers), LottoNumber.valueOf(bonusNumber));
+    private static void setBudget(LottoAgent lottoAgent) {
+        int price = InputView.priceInput();
+        lottoAgent.deposit(price);
+    }
+
+    private static int buyLottosManually(LottoAgent lottoAgent) {
+        int manualLottoCount = InputView.manualLottoCountInput();
+        List<LottoNumbers> manuallyLottoNumbersList = InputView.manualNumbersInputs(manualLottoCount);
+        for (LottoNumbers manualLottoNumbers : manuallyLottoNumbersList) {
+            lottoAgent.buyManually(manualLottoNumbers);
+        }
+        return manualLottoCount;
+    }
+
+    private static int buyLottosAutomatically(LottoAgent lottoAgent) {
+        int automaticLottoCount = lottoAgent.buyAutomatically(RandomSelectionStrategy.getInstance());
+        return automaticLottoCount;
+    }
+
+    private static LottoMatchNumbers inputMatchNumbers() {
+        List<Integer> winnerNumbers = InputView.winnerNumbersInput();
+        int bonusNumber = InputView.bonusNumberInput();
+        return new LottoMatchNumbers(winnerNumbers, bonusNumber);
+    }
+
+    private static void printStatistics(LottoMatchNumbers matchNumbers, PurchasedLottos purchasedLottos) {
         ResultView.printStatisticsSectionHeader();
+        LottoJudge lottoJudge = LottoJudge.of(LottoNumbers.valueOf(matchNumbers.winnerNumbers), LottoNumber.valueOf(matchNumbers.bonusNumber));
         LottoRewardCountMap rewardCountMap = lottoJudge.countRewards(purchasedLottos);
         ResultView.printRewardCountMap(rewardCountMap);
         double rewardPercentage = lottoJudge.calculateRewardPercentage(purchasedLottos);
         ResultView.printPercentageRateOfReturn(rewardPercentage);
+    }
+
+    private static class LottoMatchNumbers {
+        public final List<Integer> winnerNumbers;
+        public final int bonusNumber;
+
+        public LottoMatchNumbers(List<Integer> winnerNumbers, int bonusNumber) {
+            this.winnerNumbers = winnerNumbers;
+            this.bonusNumber = bonusNumber;
+        }
     }
 }
