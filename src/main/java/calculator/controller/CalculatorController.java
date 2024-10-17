@@ -2,21 +2,22 @@ package calculator.controller;
 
 import calculator.domain.Input;
 import calculator.service.CalculatorService;
-import calculator.view.InputView;
-import calculator.view.OutputView;
+import calculator.view.View;
 
 public class CalculatorController {
     private final CalculatorService calculatorService;
+    private final View view;
 
-    public CalculatorController(final CalculatorService calculatorService) {
+    public CalculatorController(final CalculatorService calculatorService, final View view) {
         this.calculatorService = calculatorService;
+        this.view = view;
     }
 
     public void run() {
-        Input input = InputView.input();
+        Input input = view.input();
 
         int result = calculatorService.calculate(input);
 
-        OutputView.output(result);
+        view.output(result);
     }
 }

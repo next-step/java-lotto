@@ -5,10 +5,11 @@ import calculator.domain.StringCalculator;
 import calculator.service.CalculatorService;
 import calculator.strategy.CalculationOrderStrategy;
 import calculator.strategy.InputOrder;
+import calculator.view.View;
 
 public class CalculatorConfig {
     public static CalculatorController calculatorController() {
-        return new CalculatorController(calculatorService());
+        return new CalculatorController(calculatorService(), new View());
     }
 
     private static CalculatorService calculatorService() {

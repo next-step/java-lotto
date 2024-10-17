@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public enum OperationSymbol {
-    ADDITION("+", Addition.getInstance()),
-    SUBTRACTION("-", Subtraction.getInstance()),
-    MULTIPLICATION("*", Multiplication.getInstance()),
-    DIVISION("/", Division.getInstance()),
+    ADDITION("+", (left, right) -> left + right),
+    SUBTRACTION("-", (left, right) -> left - right),
+    MULTIPLICATION("*", (left, right) -> left * right),
+    DIVISION("/", (left, right) -> left / right),
     ;
 
     private final String symbol;
