@@ -93,4 +93,6 @@
 * 테스트 로또 생성 inputview -> fixture 적용
 * 로또 validation 로직 수동에도 적용 및 0개 구매해도 익셉션 안나게 수정
 * IntegerCache 비슷하게 LottoNumCache 적용 -> equals and hashcode 삭제해서 테스트
+
+## Step4. 리팩토링
 * List<Rank> -> Ranks 로 리팩토링 (일급 콜렉션 래핑)
