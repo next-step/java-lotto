@@ -6,6 +6,9 @@ public abstract class OperationExpression implements Expression {
     private final Expression rightExpression;
 
     public OperationExpression(Expression leftExpression, Expression rightExpression) {
+        if (leftExpression == null || rightExpression == null) {
+            throw new IllegalArgumentException("올바른 연산 구조가 아닙니다.");
+        }
         this.leftExpression = leftExpression;
         this.rightExpression = rightExpression;
     }
