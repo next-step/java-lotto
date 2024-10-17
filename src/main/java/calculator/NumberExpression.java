@@ -22,6 +22,10 @@ public class NumberExpression implements Expression {
         return new NumberExpression(this.number - expression.number);
     }
 
+    public NumberExpression multiply(NumberExpression expression) {
+        return new NumberExpression(this.number * expression.number);
+    }
+
     @Override
     public NumberExpression calc() {
         return this;

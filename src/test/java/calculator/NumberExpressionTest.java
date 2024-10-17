@@ -27,4 +27,12 @@ public class NumberExpressionTest {
 
         assertThat(five.subtract(six)).isEqualTo(new NumberExpression(-1));
     }
+
+    @Test
+    public void 곱하기_테스트(){
+        NumberExpression five = new NumberExpression(5);
+        NumberExpression six = new NumberExpression(6);
+
+        assertThat(five.multiply(six)).isEqualTo(new NumberExpression(30));
+    }
 }
