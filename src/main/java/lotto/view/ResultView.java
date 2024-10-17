@@ -2,8 +2,9 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Prize;
 
-import java.util.Stack;
+import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -24,14 +25,14 @@ public class ResultView {
 
     }
 
-    public void printResult(Stack<Integer> money) {
+    public void printResult(LinkedHashMap<Prize,Integer> money) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + money.pop());
-        System.out.println("4개 일치 (50000원)- " + money.pop());
-        System.out.println("5개 일치 (1500000원)- " + money.pop());
-        System.out.println("6개 일치 (2000000000원)- " + money.pop());
+        System.out.println("3개 일치 (5000원)- " + money.get(Prize.THREE));
+        System.out.println("4개 일치 (50000원)- " + money.get(Prize.FOUR));
+        System.out.println("5개 일치 (1500000원)- " + money.get(Prize.FIVE));
+        System.out.println("6개 일치 (2000000000원)- " + money.get(Prize.SIX));
     }
 
     public void printProfit(double profitRate) {

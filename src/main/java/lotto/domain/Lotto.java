@@ -47,4 +47,23 @@ public class Lotto {
         return new ArrayList<>(lotto);
     }
 
+    public int lottoWinningStatus(Lotto lotto, Lotto winningLotto) {
+        int count = 0;
+        List<LottoNumber> lottoNumbers = lotto.getLotto();
+        List<LottoNumber> winningNumbers = winningLotto.getLotto();
+
+        for (int i = 0; i < winningNumbers.size(); i++) {
+            count += isNumberMatched(winningNumbers, i, lottoNumbers);
+        }
+
+        return Prize.getValueByHit(count);
+    }
+
+    private int isNumberMatched(List<LottoNumber> winningNumbers, int i, List<LottoNumber> lottoNumbers) {
+        if (winningNumbers.contains(lottoNumbers.get(i))) {
+            return 1;
+        }
+        return 0;
+    }
+
 }

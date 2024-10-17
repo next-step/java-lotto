@@ -63,4 +63,14 @@ public class LottosTest {
 
     }
 
+    @Test
+    @DisplayName("수익률 계산 테스트")
+    void 수익률_계산_테스트() {
+
+        Lottos lottos = Lottos.createLottos(1000 , purChaseAmount -> new ArrayList<>());
+
+        Assertions.assertThat(lottos.calculateProfit(5000,14000)).isEqualTo(0.35);
+
+    }
+
 }

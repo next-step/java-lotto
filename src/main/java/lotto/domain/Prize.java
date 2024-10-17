@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 
 public enum Prize {
 
@@ -27,6 +28,16 @@ public enum Prize {
                 .map(Prize::getValue)
                 .findFirst()
                 .orElse(0);
+    }
+
+    public static LinkedHashMap<Prize, Integer> calculateStatistic(int totalPrize) {
+        LinkedHashMap<Prize, Integer> statistic = new LinkedHashMap<>();
+        int prize = totalPrize;
+        for (Prize price : Prize.values()) {
+            statistic.put(price, prize / price.getValue());
+            prize %= price.getValue();
+        }
+        return statistic;
     }
 
 }
