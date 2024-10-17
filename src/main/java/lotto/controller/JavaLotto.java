@@ -14,15 +14,11 @@ import java.util.Set;
 
 public class JavaLotto {
 
-    private final LottoWinningScanner lottoWinningScanner;
-
-
-    public JavaLotto() {
-        lottoWinningScanner = new LottoWinningScanner();
+    private JavaLotto() {
 
     }
 
-    public void run() {
+    public static void run() {
         int inputMoney = InputView.requestBuyMoney();
         List<Lotto> lottos = LottoMachine.insert(inputMoney);
         ResultView.printCreateLotto(toDto(lottos));
@@ -34,7 +30,7 @@ public class JavaLotto {
 
         Winning winning = new Winning(winningNumbers, bonusNumber);
 
-        LottoResult result = lottoWinningScanner.result(lottos, winning, inputMoney);
+        LottoResult result = LottoWinningScanner.result(lottos, winning, inputMoney);
         ResultView.printResult(toDto(result));
     }
 

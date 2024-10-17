@@ -11,7 +11,8 @@ public class LottoNumberRangeTest {
 
     @Test
     void 번호_리스트_초기화() {
-        List<Integer> numbers = LottoNumberRange.initNumber();
+        LottoNumberRange lottoNumberRange = new LottoNumberRange();
+        List<Integer> numbers = lottoNumberRange.getLottoNumbers();
 
         assertThat(numbers).hasSize(45);
     }

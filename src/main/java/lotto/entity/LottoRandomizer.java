@@ -11,7 +11,8 @@ public class LottoRandomizer {
     }
 
     public static List<Integer> create() {
-        List<Integer> initNumbers = LottoNumberRange.initNumber();
+        final LottoNumberRange lottoNumberRange = new LottoNumberRange();
+        List<Integer> initNumbers = lottoNumberRange.getLottoNumbers();
         Collections.shuffle(initNumbers);
         return LottoNumberSize.sliceLottoNumbers(initNumbers);
     }

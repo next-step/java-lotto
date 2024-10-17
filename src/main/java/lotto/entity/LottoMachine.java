@@ -13,6 +13,7 @@ public class LottoMachine {
 
     public static List<Lotto> insert(int inputMoney) {
         List<Lotto> lottos = new ArrayList<>();
+
         for (int i = 0; i < getLottoCount(inputMoney); i++) {
             List<Integer> numberRandomizer = LottoRandomizer.create();
             lottos.add(issue(numberRandomizer));

@@ -17,8 +17,6 @@ public class LottoWinningScannerTest {
     @Test
     void 전체_검증_계산() {
 
-        LottoWinningScanner lottoWinningScanner = new LottoWinningScanner();
-
         List<Lotto> lottos = Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
         );
@@ -26,7 +24,7 @@ public class LottoWinningScannerTest {
         Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
         Winning winning = new Winning(winningNumbers, 7);
 
-        LottoResult result = lottoWinningScanner.result(lottos, winning, 1000);
+        LottoResult result = LottoWinningScanner.result(lottos, winning, 1000);
 
         Map<Rank, Integer> collect = result.getWinningResults().stream().collect(Collectors.toMap(WinningResult::getRank, WinningResult::getCount));
 

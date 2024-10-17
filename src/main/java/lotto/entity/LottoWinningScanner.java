@@ -6,13 +6,12 @@ import java.util.List;
 
 public class LottoWinningScanner {
 
-    private final LottoResultAnalyzer lottoResultAnalyzer;
+    private LottoWinningScanner() {
 
-    public LottoWinningScanner() {
-        this.lottoResultAnalyzer = new LottoResultAnalyzer();
     }
 
-    public LottoResult result(List<Lotto> lottos, Winning winning, int inputMoney) {
+    public static LottoResult result(List<Lotto> lottos, Winning winning, int inputMoney) {
+        final LottoResultAnalyzer lottoResultAnalyzer = new LottoResultAnalyzer();
 
         List<WinningResult> analyzer = lottoResultAnalyzer.analyzer(lottos, winning);
         BigDecimal totalPrizeMoney = RankCalculator.sum(analyzer);
