@@ -14,8 +14,8 @@ public class NumberExpression implements Expression {
         this(Integer.parseInt(value));
     }
 
-    public NumberExpression sum(NumberExpression rightExpression) {
-        return new NumberExpression(this.number + rightExpression.number);
+    public NumberExpression sum(NumberExpression expression) {
+        return new NumberExpression(this.number + expression.number);
     }
 
     public NumberExpression subtract(NumberExpression expression) {
