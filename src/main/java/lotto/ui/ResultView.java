@@ -20,12 +20,11 @@ public class ResultView {
 
     public static void printPurchasedLottos(PurchasedLottos purchasedLottos) {
         List<Lotto> purchasedLottoList = purchasedLottos.value();
-        printPurchasedLottosCount(purchasedLottoList);
         printPurchasedLottoNumbers(purchasedLottoList);
     }
 
-    private static void printPurchasedLottosCount(List<Lotto> purchasedLottos) {
-        System.out.printf("%d개를 구입했습니다.\n", purchasedLottos.size());
+    public static void printPurchasedLottosCount(int manualLottoCount, int automaticLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, automaticLottoCount);
     }
 
     private static void printPurchasedLottoNumbers(List<Lotto> purchasedLottos) {

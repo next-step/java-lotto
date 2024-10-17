@@ -23,11 +23,18 @@ public class Main {
     }
 
     private static PurchasedLottos buyLottos() {
-        int price = InputView.priceInput();
         LottoAgent lottoAgent = LottoAgent.newInstance();
+        int price = InputView.priceInput();
+        lottoAgent.deposit(price);
         int manualLottoCount = InputView.manualLottoCountInput();
-        lottoAgent.buy(price, manualLottoCount, RandomSelectionStrategy.getInstance());
+
+        List<LottoNumbers> manuallyLottoNumbersList = InputView.manualNumbersInputs(manualLottoCount);
+        for(LottoNumbers manualLottoNumbers :manuallyLottoNumbersList ) {
+            lottoAgent.buyManually(manualLottoNumbers);
+        }
+        int automaticLottoCount = lottoAgent.buyAutomatically(RandomSelectionStrategy.getInstance());
         PurchasedLottos purchasedLottos = lottoAgent.getPurchasedLottos();
+        ResultView.printPurchasedLottosCount(manualLottoCount, automaticLottoCount);
         ResultView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }

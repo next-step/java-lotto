@@ -17,12 +17,13 @@ public class LottoAgent {
         budget = budget.deposit(price);
     }
 
-    public void buyAutomatically(LottoNumberSelectionStrategy selectionStrategy) {
+    public int buyAutomatically(LottoNumberSelectionStrategy selectionStrategy) {
         int buyingCount = budget.getAmount() / Lotto.LOTTO_PRICE;
         for (int i = 0; i < buyingCount; i++) {
             LottoNumbers automaticallySelected = selectionStrategy.select();
             buyLotto(automaticallySelected);
         }
+        return buyingCount;
     }
 
     public void buyManually(LottoNumbers manuallySelected) {
