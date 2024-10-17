@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.domain.LottoNumbers;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +10,8 @@ import java.util.function.Function;
 public final class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String PRICE_QUESTION_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String WINNER_NUMBERS_QUESTION_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_QUESTION_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String BLANK_MESSAGE = "입력하신 값이 비어있습니다.";
@@ -20,12 +24,26 @@ public final class InputView {
         return input(PRICE_QUESTION_MESSAGE, InputView::isNumberInputValid, InputView::convertToNumber);
     }
 
+    public static int manualLottoCountInput() {
+        return input(MANUAL_LOTTO_COUNT_MESSAGE, InputView::isNumberInputValid, InputView::convertToNumber);
+    }
+
+    public static List<LottoNumbers> manualNumbersInputs(int manuallyLottoCount) {
+        System.out.println(MANUAL_LOTTO_INPUT_MESSAGE);
+        List<LottoNumbers> manuallySelectedNumbers = new ArrayList<>();
+        for (int i = 0; i < manuallyLottoCount; i++) {
+            List<Integer> lottoNumberInputs = inputWithoutMessage(InputView::isLottoNumbersInputValid, InputView::convertToWinnerNumbers);
+            manuallySelectedNumbers.add(LottoNumbers.valueOf(lottoNumberInputs));
+        }
+        return manuallySelectedNumbers;
+    }
+
     public static int bonusNumberInput() {
         return input(BONUS_NUMBER_QUESTION_MESSAGE, InputView::isNumberInputValid, InputView::convertToNumber);
     }
 
     public static List<Integer> winnerNumbersInput() {
-        return input(WINNER_NUMBERS_QUESTION_MESSAGE, InputView::isWinnerNumbersInputValid, InputView::convertToWinnerNumbers);
+        return input(WINNER_NUMBERS_QUESTION_MESSAGE, InputView::isLottoNumbersInputValid, InputView::convertToWinnerNumbers);
     }
 
     private static boolean isNumberInputValid(String rawInput) {
@@ -51,7 +69,7 @@ public final class InputView {
         return Integer.parseInt(rawInput);
     }
 
-    private static boolean isWinnerNumbersInputValid(String rawInput) {
+    private static boolean isLottoNumbersInputValid(String rawInput) {
         if (rawInput == null || rawInput.isEmpty()) {
             System.out.println(BLANK_MESSAGE);
             return false;
@@ -83,6 +101,17 @@ public final class InputView {
         T input = null;
         while (!hasValidInput) {
             System.out.println(questionMessage);
+            String rawInput = SCANNER.nextLine();
+            hasValidInput = inputValidationFunction.apply(rawInput);
+            input = convertInputFunction.apply(rawInput);
+        }
+        return input;
+    }
+
+    private static <T> T inputWithoutMessage(Function<String, Boolean> inputValidationFunction, Function<String, T> convertInputFunction) {
+        boolean hasValidInput = false;
+        T input = null;
+        while (!hasValidInput) {
             String rawInput = SCANNER.nextLine();
             hasValidInput = inputValidationFunction.apply(rawInput);
             input = convertInputFunction.apply(rawInput);

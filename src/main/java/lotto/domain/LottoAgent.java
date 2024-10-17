@@ -1,26 +1,38 @@
 package lotto.domain;
 
-
 public class LottoAgent {
     private PurchasedLottos purchasedLottos;
+    private Budget budget;
 
-    private LottoAgent() {
+    private LottoAgent(Budget budget) {
         purchasedLottos = PurchasedLottos.newInstance();
+        this.budget = budget;
     }
 
     public static LottoAgent newInstance() {
-        return new LottoAgent();
+        return new LottoAgent(Budget.valueOf(0));
     }
 
-    public void buy(int price, LottoNumberSelectionStrategy selectionStrategy) {
-        int buyingCount = price / Lotto.LOTTO_PRICE;
+    public void deposit(int price) {
+        budget = budget.deposit(price);
+    }
+
+    public int buyAutomatically(LottoNumberSelectionStrategy selectionStrategy) {
+        int buyingCount = budget.getAmount() / Lotto.LOTTO_PRICE;
         for (int i = 0; i < buyingCount; i++) {
-            buyLotto(i, selectionStrategy);
+            LottoNumbers automaticallySelected = selectionStrategy.select();
+            buyLotto(automaticallySelected);
         }
+        return buyingCount;
     }
 
-    private void buyLotto(int id, LottoNumberSelectionStrategy selectionStrategy) {
-        purchasedLottos = purchasedLottos.add(Lotto.of(id, selectionStrategy));
+    public void buyManually(LottoNumbers manuallySelected) {
+        buyLotto(manuallySelected);
+    }
+
+    private void buyLotto(LottoNumbers numbers) {
+        budget = budget.use(Lotto.LOTTO_PRICE);
+        purchasedLottos = purchasedLottos.add(Lotto.of(purchasedLottos.generateNextId(), numbers));
     }
 
     public PurchasedLottos getPurchasedLottos() {
