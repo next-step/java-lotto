@@ -9,6 +9,9 @@ public class SpaceExpressionTokenizer implements ExpressionTokenizer {
 
     @Override
     public List<String> tokenize(String input) {
+        if(input.isBlank()){
+            throw new IllegalArgumentException("입력은 null이거나 빈값 일 수 없습니다.");
+        }
         return toList(split(input));
     }
 

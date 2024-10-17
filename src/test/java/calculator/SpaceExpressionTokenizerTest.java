@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,13 @@ public class SpaceExpressionTokenizerTest {
         List<String> tokenize = expressionTokenizer.tokenize(input);
 
         assertThat(tokenize).containsSequence("1", "3", "4", "5");
+    }
+
+    @Test
+    public void 빈문자_예외_테스트() {
+        ExpressionTokenizer expressionTokenizer = new SpaceExpressionTokenizer();
+
+        assertThatIllegalArgumentException().isThrownBy(()->expressionTokenizer.tokenize(" "));
     }
 
 }
