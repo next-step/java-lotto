@@ -10,7 +10,8 @@ public class StringCalculator {
             new AdditionOperator(),
             new SubtractionOperator(),
             new MultiplicationOperator(),
-            new DivisionOperator());
+            new DivisionOperator(),
+            new RemainOperator());
 
     private StringCalculator() {
         throw new UnsupportedOperationException("유틸 클래스는 생성할 수 없습니다.");
@@ -28,13 +29,13 @@ public class StringCalculator {
         return calculatedValue;
     }
 
-    private static int toInt(String elements) {
+    private static int toInt(final String elements) {
         return Optional.ofNullable(elements)
                 .map(Integer::parseInt)
                 .orElseThrow(() -> new IllegalArgumentException("숫자로 변환할 수 없습니다."));
     }
 
-    private static Operators getOperators(String operator) {
+    private static Operators getOperators(final String operator) {
         return OPERATORS.stream()
                 .filter(it -> it.matchOperator(operator))
                 .findFirst()

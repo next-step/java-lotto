@@ -1,6 +1,7 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -56,5 +57,12 @@ class StringCalculatorTest {
     void priorityTest(String input, int expected) {
         assertThat(StringCalculator.calculate(input))
                 .isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("입력값이 나눗셈 연산으로만 이루어졌을 때 calculate 메서드가 나머지 연산을 수행한다.")
+    void remainTest() {
+        assertThat(StringCalculator.calculate("3 % 2"))
+                .isEqualTo(3 % 2);
     }
 }
