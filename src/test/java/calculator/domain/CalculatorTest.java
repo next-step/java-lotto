@@ -16,11 +16,12 @@ class CalculatorTest {
     @DisplayName("연산자와 피연산자를 전달받으면 Calculator 객체를 생성한다.")
     @Test
     void create() {
-        Operands operands = new Operands(List.of(new OperandNumber("3"), new OperandNumber("3"), new OperandNumber("2"), new OperandNumber("4"), new OperandNumber("2")));
+        Operands operands = new Operands(List.of(new OperandNumber(3), new OperandNumber(3), new OperandNumber(2), new OperandNumber(4), new OperandNumber(2)));
         Operators operators = new Operators(List.of(PLUS, MINUS, TIMES, DIVISION));
 
         assertThat(Calculator.create("3 + 3 - 2 * 4 / 2"))
-                .isEqualTo(new Calculator(operands, operators));
+                .extracting("operands", "operators")
+                .contains(operands, operators);
     }
 
     @DisplayName("입력 값이 null이거나 빈 공백 문자일 때 IllegalArgumentException을 발생시킨다.")
@@ -36,6 +37,6 @@ class CalculatorTest {
     void return_calculated_result() {
         Calculator calculator = Calculator.create("3 + 3 - 2 * 4 / 2");
 
-        assertThat(calculator.calculate()).isEqualTo(new OperandNumber("8"));
+        assertThat(calculator.calculate()).isEqualTo(new OperandNumber(8));
     }
 }

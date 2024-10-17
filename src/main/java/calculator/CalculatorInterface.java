@@ -5,7 +5,7 @@ import calculator.domain.*;
 public class CalculatorInterface {
     public Integer start(String input) {
         Calculator calculator = Calculator.create(input);
-        return calculator.calculate().toInteger();
+        return calculator.calculate().getValue();
     }
 
     public static void main(String[] args) {

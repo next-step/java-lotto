@@ -21,7 +21,7 @@ class OperatorsTest {
     void execute() {
         Operators operators = new Operators(List.of(OperatorType.PLUS, OperatorType.MINUS));
 
-        assertThat(operators.execute(0, new OperandNumber("0"), new OperandNumber("1")))
-                .isEqualTo(new OperandNumber("1"));
+        assertThat(operators.execute(0, new OperandNumber(0), new OperandNumber(1)))
+                .isEqualTo(new OperandNumber(1));
     }
 }

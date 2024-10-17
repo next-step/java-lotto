@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class Calculator {
-    private Operands operands;
-    private Operators operators;
+    private final Operands operands;
+    private final Operators operators;
 
-    Calculator(Operands operands, Operators operators) {
+    private Calculator(Operands operands, Operators operators) {
         this.operands = operands;
         this.operators = operators;
     }
@@ -20,18 +20,15 @@ public class Calculator {
         return create(input.split(" "));
     }
 
-    public static Calculator create(String[] operatorsOperands) {
+    private static Calculator create(String[] operatorsOperands) {
         return new Calculator(extractOperands(operatorsOperands), extractOperators(operatorsOperands));
     }
-
 
     private static Operators extractOperators(String[] operatorsOperands) {
         List<OperatorType> operators = new ArrayList<>();
 
-        int position = 1;
-        while (position < operatorsOperands.length) {
+        for (int position = 1; position < operatorsOperands.length; position+=2) {
             operators.add(OperatorType.from(operatorsOperands[position]));
-            position += 2;
         }
         return new Operators(operators);
     }
@@ -39,10 +36,8 @@ public class Calculator {
     private static Operands extractOperands(String[] operatorsOperands) {
         List<OperandNumber> operands = new ArrayList<>();
 
-        int position = 0;
-        while (position < operatorsOperands.length) {
-            operands.add(new OperandNumber(operatorsOperands[position]));
-            position += 2;
+        for (int position = 0; position < operatorsOperands.length; position+=2) {
+            operands.add(OperandNumber.create(operatorsOperands[position]));
         }
         return new Operands(operands);
     }

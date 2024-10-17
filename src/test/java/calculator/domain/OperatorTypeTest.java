@@ -27,7 +27,8 @@ class OperatorTypeTest {
     @Test
     @DisplayName("사칙 연산자 외 값 입력 시 IllegalArgumentException을 발생시킨다.")
     void throw_IllegalArgumentException_when_input_is_not_arithmetic_operators() {
-        assertThatIllegalArgumentException().isThrownBy(() -> OperatorType.from("&"))
-                .withMessage("해당 값 '&'은 사칙 연산자에 해당하지 않습니다.");
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> OperatorType.from("&"))
+                .withMessage("연산자 '&'에 해당하는 OperatorType이 존재하지 않습니다.");
     }
 }
