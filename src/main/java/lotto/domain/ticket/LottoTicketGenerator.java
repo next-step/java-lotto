@@ -9,11 +9,17 @@ import java.util.stream.Collectors;
 
 public abstract class LottoTicketGenerator {
 
-    public static LottoTickets generateLottoTickets(int availableLottoTickets, LottoNumberGenerator generator) {
+    public static LottoTickets generateLottoTickets(List<List<Integer>> manualPurchaseLottoNumbers, int autoLottoPurchaseCount, LottoNumberGenerator generator) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < availableLottoTickets; i++) {
+
+        for (List<Integer> manualPurchaseLottoNumber : manualPurchaseLottoNumbers) {
+            lottoTickets.add(generateLottoTicket(manualPurchaseLottoNumber));
+        }
+
+        for (int i = 0; i < autoLottoPurchaseCount; i++) {
             lottoTickets.add(generateLottoTicket(generator.create()));
         }
+
         return LottoTickets.of(lottoTickets);
     }
 

@@ -1,11 +1,8 @@
 package lotto.io;
 
-import lotto.exception.InvalidWinningNumbersException;
+import lotto.exception.InvalidLottoNumbersException;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ConsoleInputHandler implements InputHandler {
@@ -20,35 +17,53 @@ public class ConsoleInputHandler implements InputHandler {
     }
 
     @Override
-    public List<String> getWinningNumbersFromUser() {
-        String[] splitted = SCANNER.nextLine().split(WINNING_NUMBER_DELIMITER);
-        List<String> winningNumbers = getTrimmedStringNumbers(splitted);
+    public List<Integer> getLottoNumbersFromUser() {
+        String[] split = SCANNER.nextLine().split(WINNING_NUMBER_DELIMITER);
+        List<String> numbers = getTrimmedStringNumbers(split);
 
-        validateWinningNumbers(winningNumbers);
+        validateLottoNumbers(numbers);
 
-        return winningNumbers;
+        return toIntegers(numbers);
+    }
+
+    private List<Integer> toIntegers(List<String> numbers) {
+        return numbers.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public int getBonusBallFromUser() {
+    public int getOneNumberFromUser() {
         String userInput = SCANNER.nextLine();
         return Integer.parseInt(userInput);
     }
 
-    private List<String> getTrimmedStringNumbers(String[] splitted) {
-        return Arrays.stream(splitted)
+    @Override
+    public List<List<Integer>> getManualPurchaseLottoNumbers(int manualLottoPurchaseCount) {
+        List<List<Integer>> lottoNumbers = new ArrayList<>();
+
+        for (int i = 0; i < manualLottoPurchaseCount; i++) {
+            List<Integer> lottoNumbersFromUser = getLottoNumbersFromUser();
+            lottoNumbers.add(lottoNumbersFromUser);
+        }
+
+        return lottoNumbers;
+    }
+
+    private List<String> getTrimmedStringNumbers(String[] split) {
+        return Arrays.stream(split)
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
 
-    private void validateWinningNumbers(List<String> winningNumbers) {
-        if (hasDifferentSize(winningNumbers)) {
-            throw new InvalidWinningNumbersException();
+    private void validateLottoNumbers(List<String> lottoNumbers) {
+        if (hasDifferentSize(lottoNumbers)) {
+            throw new InvalidLottoNumbersException();
         }
     }
 
-    private boolean hasDifferentSize(List<String> winningNumbers) {
-        return new HashSet<>(winningNumbers).size() != winningNumbers.size();
+    private boolean hasDifferentSize(List<String> lottoNumbers) {
+        return new HashSet<>(lottoNumbers).size() != lottoNumbers.size();
     }
 
 }
