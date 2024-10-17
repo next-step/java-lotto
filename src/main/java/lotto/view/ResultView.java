@@ -27,7 +27,6 @@ public class ResultView {
     }
 
     public void priceLottoStatus(Lottos lottos, Lottos manualLottos) {
-
         String sb = String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottos.getSize(), lottos.getSize()) +
                 System.lineSeparator() +
                 manualLottos.getLottos().stream()
@@ -37,7 +36,6 @@ public class ResultView {
                 lottos.getLottos().stream()
                         .map(lotto -> "[" + getLottoNumber(lotto) + "]")
                         .collect(Collectors.joining(System.lineSeparator()));
-
         System.out.println(sb);
     }
 

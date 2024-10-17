@@ -40,15 +40,6 @@ public class InputView {
         return new LottoNum(SCANNER.nextInt());
     }
 
-    public int getManualLottoCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return SCANNER.nextInt();
-    }
-
-    public Lotto getManualLotto() {
-        return getLottoNumbers(SCANNER.nextLine());
-    }
-
     public Lottos getManualLottos() {
         int count = getManualLottoCount();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
@@ -60,6 +51,15 @@ public class InputView {
         return new Lottos(lottos);
     }
 
+    private int getManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
+
+    private Lotto getManualLotto() {
+        return getLottoNumbers(SCANNER.nextLine());
+    }
+
 
     public Lotto getLottoNumbers(String lottoNumbers) {
         List<String> lotto = parseWinnerLotto(lottoNumbers);
@@ -69,7 +69,7 @@ public class InputView {
         return getLotto(lastWinnerLotto);
     }
 
-    public Lotto getLotto(List<LottoNum> lastWinnerLotto) {
+    private Lotto getLotto(List<LottoNum> lastWinnerLotto) {
         return new Lotto(lastWinnerLotto);
     }
 
