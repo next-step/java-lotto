@@ -14,9 +14,15 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        PurchasedLottos purchasedLottos = buyLottos();
-        LottoMatchNumbers matchNumbers = inputMatchNumbers();
-        printStatistics(matchNumbers, purchasedLottos);
+        try {
+            PurchasedLottos purchasedLottos = buyLottos();
+            LottoMatchNumbers matchNumbers = inputMatchNumbers();
+            printStatistics(matchNumbers, purchasedLottos);
+        } catch (IllegalArgumentException e) {
+            System.out.printf("잘못된 입력입니다: %s\n", e.getMessage());
+        } catch (Exception e) {
+            System.out.printf("알 수 없는 예외입니다: %s\n", e.getMessage());
+        }
     }
 
     private static PurchasedLottos buyLottos() {
