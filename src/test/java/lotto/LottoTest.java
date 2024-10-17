@@ -1,30 +1,20 @@
 package lotto;
 
-import lotto.model.Lotto;
+import lotto.model.Lottos;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
-
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoTest {
 
-    private final Lotto lotto = new Lotto();
+    private final Lottos lottos = new Lottos();
 
     @Test
-    public void 로또_구매() {
-        List<Integer>[] lottos = lotto.purchaseLotto(14);
+    public void 로또_저장() {
+        lottos.saveLotto(1, List.of(15, 23, 13, 44, 5, 34));
 
-        assertThat(lottos)
-                .hasSize(14);
-
-        Arrays.stream(lottos)
-                .map(lotto -> lotto.stream()
-                        .map(number -> assertThat(number)
-                                .isGreaterThanOrEqualTo(1)
-                                .isLessThanOrEqualTo(45)));
+        assertThat(lottos.provideLottosInfo().get(1)).isEqualTo(List.of(15, 23, 13, 44, 5, 34));
     }
 }
