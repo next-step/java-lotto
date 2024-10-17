@@ -1,6 +1,7 @@
 package lotto.strategy;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,25 +24,25 @@ public class AutoLottoGenerator implements LottoGenerator {
     }
 
     private Lotto generate() {
-        List<Integer> numbers = numbers();
+        List<LottoNumber> numbers = numbers();
         Collections.shuffle(numbers);
-        List<Integer> sixNumbers = sixNumbers(numbers);
+        List<LottoNumber> sixNumbers = sixNumbers(numbers);
         Collections.sort(sixNumbers);
         return new Lotto(sixNumbers);
     }
 
-    private static List<Integer> sixNumbers(final List<Integer> numbers) {
-        List<Integer> result = new ArrayList<>();
+    private static List<LottoNumber> sixNumbers(final List<LottoNumber> numbers) {
+        List<LottoNumber> result = new ArrayList<>();
         for (int i = FIRST_INDEX; i < LAST_INDEX; i++) {
             result.add(numbers.get(i));
         }
         return result;
     }
 
-    private static List<Integer> numbers() {
-        List<Integer> numbers = new ArrayList<>();
+    private static List<LottoNumber> numbers() {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (int i = FIRST_NUMBER; i <= LAST_NUMBER; i++) {
-            numbers.add(i);
+            numbers.add(new LottoNumber(i));
         }
         return numbers;
     }

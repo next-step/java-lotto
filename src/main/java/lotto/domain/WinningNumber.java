@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumber {
-    private final String value;
+    private final List<LottoNumber> numbers;
 
-    public WinningNumber(final String value) {
-        this.value = value;
+    public WinningNumber(final List<LottoNumber> numbers) {
+        this.numbers = numbers;
     }
 
     public Matches countMatches(final List<Lotto> lottos) {
         List<Integer> countMatches = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int countMatch = lotto.countMatch(value);
+            int countMatch = lotto.countMatch(numbers);
             countMatches.add(countMatch);
         }
         return new Matches(countMatches);

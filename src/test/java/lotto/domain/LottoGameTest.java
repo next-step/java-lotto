@@ -14,18 +14,18 @@ public class LottoGameTest {
 
     @BeforeEach
     void setUp() {
-        lottoGame = new LottoGame((count) -> List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6))));
+        lottoGame = new LottoGame((count) -> List.of(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))));
     }
 
     @Test
     void 당첨_결과() {
         String winningNumber = "1, 2, 3, 4, 5, 6";
-        WinningResult result = lottoGame.match(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6))), winningNumber);
+        WinningResult result = lottoGame.match(List.of(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))), winningNumber);
         assertThat(result).isEqualTo(new WinningResult(List.of(new Winning(3, 0), new Winning(4, 0), new Winning(5, 0), new Winning(6, 1)), new BigDecimal("2000000.00")));
     }
 
     @Test
     void 로또_발급() {
-        assertThat(lottoGame.create("1000")).isEqualTo(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6))));
+        assertThat(lottoGame.create("1000")).isEqualTo(List.of(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))));
     }
 }

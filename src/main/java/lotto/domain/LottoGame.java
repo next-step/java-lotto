@@ -20,7 +20,8 @@ public class LottoGame {
     }
 
     public WinningResult match(final List<Lotto> lottos, final String winningNumber) {
-        Match match = new Match(lottos, winningNumber);
+        List<LottoNumber> winningNumbers = LottoNumber.createWinningNumbers(winningNumber);
+        Match match = new Match(lottos, winningNumbers);
         Winnings winnings = match.winnings();
         return winnings.result(lottos);
     }

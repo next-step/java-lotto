@@ -10,9 +10,9 @@ public class Match {
     private final List<Lotto> lottos;
     private final WinningNumber winningNumber;
 
-    public Match(final List<Lotto> lottos, final String winningNumber) {
+    public Match(final List<Lotto> lottos, final List<LottoNumber> winningNumbers) {
         this.lottos = lottos;
-        this.winningNumber = new WinningNumber(winningNumber);
+        this.winningNumber = new WinningNumber(winningNumbers);
     }
 
     public Winnings winnings() {
