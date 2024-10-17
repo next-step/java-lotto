@@ -12,16 +12,19 @@ public enum Rank {
     private final int count;
     private final int price;
 
-    Rank(final int count, int price) {
+    Rank(final int count, final int price) {
         this.count = count;
         this.price = price;
     }
 
-    public static int price(final int count) {
+    public int getPrice() {
+        return price;
+    }
+
+    public static Rank rank(final int count) {
         return Arrays.stream(values())
-                .filter(rank -> Objects.equals(rank.count, count))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Invalid count " + count))
-                .price;
+            .filter(rank -> Objects.equals(rank.count, count))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("Invalid count " + count));
     }
 }

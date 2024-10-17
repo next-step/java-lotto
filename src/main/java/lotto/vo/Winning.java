@@ -1,6 +1,4 @@
-package lotto.domain;
-
-import lotto.enumeration.Rank;
+package lotto.vo;
 
 public class Winning {
     private final int countMatching;
@@ -9,10 +7,6 @@ public class Winning {
     public Winning(final int countMatching, final int countWinning) {
         this.countMatching = countMatching;
         this.countWinning = countWinning;
-    }
-
-    public int price() {
-        return this.countWinning * Rank.price(countMatching);
     }
 
     public int getCountMatching() {

@@ -4,39 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public class Number implements Comparable<Number> {
     public static final String DELIMITER = ", ";
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public Number(int number) {
         if (number < 0 || number > 45) {
             throw new IllegalArgumentException("Number must be between 0 and 45");
         }
         this.number = number;
     }
 
-    public static List<LottoNumber> createWinningNumbers(final String winningNumber) {
-        List<LottoNumber> winningNumbers = new ArrayList<>();
+    public static List<Number> createWinningNumbers(final String winningNumber) {
+        List<Number> winningNumbers = new ArrayList<>();
         String[] numbers = winningNumber.split(DELIMITER);
         for (String number : numbers) {
-            winningNumbers.add(new LottoNumber(Integer.parseInt(number)));
+            winningNumbers.add(new Number(Integer.parseInt(number)));
         }
         return winningNumbers;
     }
 
-    public int countMatch(int countMatch, final LottoNumber winningNumber) {
-        if (Objects.equals(this, winningNumber)) {
-            countMatch += 1;
-        }
-        return countMatch;
-    }
-
-    public int countMatch(final List<LottoNumber> winningNumbers, int countMatch) {
-        for (LottoNumber winningNumber : winningNumbers) {
-            countMatch = this.countMatch(countMatch, winningNumber);
-        }
-        return countMatch;
+    public int countMatch(final List<Number> numbers) {
+        return (int) numbers.stream()
+                .filter(number -> Objects.equals(number, this))
+                .count();
     }
 
     @Override
@@ -47,7 +39,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoNumber that = (LottoNumber) o;
+        Number that = (Number) o;
         return number == that.number;
     }
 
@@ -57,7 +49,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public int compareTo(LottoNumber other) {
+    public int compareTo(Number other) {
         return this.number - other.number;
     }
 }

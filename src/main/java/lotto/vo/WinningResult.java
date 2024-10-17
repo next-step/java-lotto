@@ -1,6 +1,4 @@
-package lotto.dto;
-
-import lotto.domain.Winning;
+package lotto.vo;
 
 import java.math.BigDecimal;
 import java.util.List;
