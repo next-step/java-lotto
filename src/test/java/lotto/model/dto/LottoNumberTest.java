@@ -13,22 +13,22 @@ public class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     void 로또번호는_1부터_45사이이다(int validLottoNumber) {
         Assertions.assertThatNoException().isThrownBy(() -> {
-            LottoNumber lottoNumber = of(validLottoNumber);
+            LottoNumber lottoNumber = new LottoNumber(validLottoNumber);
         });
     }
 
     @ParameterizedTest(name = "로또번호는_1부터_45사이가_아니면_오류")
     @ValueSource(ints = {0, 46})
     void 로또번호는_1부터_45사이가_아니면_오류(int illegalLottoNumber) {
-        Assertions.assertThatThrownBy(() -> of(illegalLottoNumber))
+        Assertions.assertThatThrownBy(() -> new LottoNumber(illegalLottoNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LOTTO_NUMBER_ALLOWED_BETWEEN_1_TO_45_INTEGER);
     }
 
     @Test
     void 로또번호_크기비교() {
-        LottoNumber lottoNumber1 = of(1);
-        LottoNumber lottoNumber3 = of(3);
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber3 = new LottoNumber(3);
 
         int actual = lottoNumber1.compareTo(lottoNumber3);
         int expected = -1;

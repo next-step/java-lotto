@@ -11,7 +11,6 @@ import java.util.Arrays;
 
 import static lotto.model.Lotto.LOTTO_NUMBERS_NOT_ALLOWED_DUPLICATED;
 import static lotto.model.Lotto.LOTTO_NUMBERS_SIZE_ALLOWED_ONLY_6;
-import static lotto.model.dto.LottoNumber.of;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
@@ -22,7 +21,7 @@ public class LottoTest {
     void 로또번호목록과_보너스번호를_저장한다() {
         assertThatNoException().isThrownBy(() -> {
             Lotto lottoManual = new Lotto(6, 9, 17, 28, 39, 45);
-            Lotto lottoAuto = new Lotto(() -> Arrays.asList(of(6), of(9), of(17), of(28), of(39), of(45)));
+            Lotto lottoAuto = new Lotto(() -> Arrays.asList(new LottoNumber(6), new LottoNumber(9), new LottoNumber(17), new LottoNumber(28), new LottoNumber(39), new LottoNumber(45)));
         });
     }
 
@@ -53,7 +52,7 @@ public class LottoTest {
     @Test
     void 로또번호목록은_로또번호_존재여부를_리턴한다() {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        boolean actual = lotto.contains(of(1));
+        boolean actual = lotto.contains(new LottoNumber(1));
         Assertions.assertThat(actual).isTrue();
     }
 
@@ -67,7 +66,7 @@ public class LottoTest {
         int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = of(numbers[6]);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
         Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
@@ -85,7 +84,7 @@ public class LottoTest {
         int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = of(numbers[6]);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
         Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
@@ -103,7 +102,7 @@ public class LottoTest {
         int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = of(numbers[6]);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
         Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
@@ -121,7 +120,7 @@ public class LottoTest {
         int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = of(numbers[6]);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
         Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
@@ -139,7 +138,7 @@ public class LottoTest {
         int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = of(numbers[6]);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
         Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
@@ -156,7 +155,7 @@ public class LottoTest {
         int[] numbers = convertStringToNumbers(numberStrings);
         Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = of(numbers[6]);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
         Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);

@@ -31,13 +31,13 @@ public class InputView {
         System.out.println(INPUT_WINNING_NUMBERS);
         Integer[] integers = SplitUtil.stringToNumbers(SCANNER.nextLine());
         return Arrays.stream(integers)
-                .map(LottoNumber::of)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
     public static LottoNumber inputBonusLottoNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
-        LottoNumber bonusNumber = LottoNumber.of(SCANNER.nextInt());
+        LottoNumber bonusNumber = new LottoNumber(SCANNER.nextInt());
         SCANNER.nextLine();
         return bonusNumber;
     }

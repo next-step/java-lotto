@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Map;
 
-import static lotto.model.dto.LottoNumber.of;
 import static lotto.model.enums.Ranking.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +22,7 @@ public class ResultTest {
         int[] lotto2 = new int[]{8, 21, 23, 41, 42, 44};
         int[] lotto3 = new int[]{1, 8, 11, 31, 41, 42};
         Lotto winningLotto = new Lotto(lotto1);
-        LottoNumber bonusNumber = of(44);
+        LottoNumber bonusNumber = new LottoNumber(44);
 
         this.buyer = new Buyer(3, new BuyerFixtureNumberCreator(Arrays.asList(lotto1, lotto2, lotto3)));
         this.winning = new Winning(winningLotto, bonusNumber);
