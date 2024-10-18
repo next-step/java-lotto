@@ -9,6 +9,10 @@ public class WinningNumbers {
     private final List<Integer> winningNumbers;
     private final LottoNumber bonusNumber;
 
+    public WinningNumbers(List<Integer> winningNumbers, Integer bonusNumber) {
+        this(winningNumbers, new LottoNumber(bonusNumber));
+    }
+
     public WinningNumbers(List<Integer> winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;

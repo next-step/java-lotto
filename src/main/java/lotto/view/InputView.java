@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.domain.ticket.LottoNumber;
-import lotto.domain.winning.WinningNumbers;
 import lotto.utils.StringUtils;
 import lotto.validator.InputValidator;
 
@@ -23,20 +21,20 @@ public class InputView {
         return Integer.parseInt(inputPrice);
     }
 
-    public WinningNumbers getWinningNumbers() {
+    public List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        List<Integer> winningNumbers = Arrays.stream(StringUtils.splitByComma(scanner.nextLine()))
-                                             .map(Integer::parseInt)
-                                             .collect(Collectors.toList());
+        String inputWinningNumbers = scanner.nextLine();
 
-        return new WinningNumbers(winningNumbers, getBonusNumber());
+        return Arrays.stream(StringUtils.splitByComma(inputWinningNumbers))
+                     .map(Integer::parseInt)
+                     .collect(Collectors.toList());
     }
 
-    public LottoNumber getBonusNumber() {
+    public int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
 
-        return new LottoNumber(Integer.parseInt(scanner.nextLine()));
+        return Integer.parseInt(scanner.nextLine());
     }
 
 }

@@ -7,6 +7,8 @@ import lotto.domain.winning.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoMain {
     private static final InputView inputView = new InputView();
     private static final ResultView resultView = new ResultView();
@@ -21,8 +23,10 @@ public class LottoMain {
         LottoTickets lottoTickets = lotto.issue(lottoTicketCount);
         resultView.printLottoTickets(lottoTickets);
 
-        WinningNumbers winningNumbers = inputView.getWinningNumbers();
-        resultView.getResultAndPrint(lottoTickets, winningNumbers);
+        List<Integer> winningNumbers = inputView.getWinningNumbers();
+        int bonusNumber = inputView.getBonusNumber();
+
+        resultView.getResultAndPrint(lottoTickets, new WinningNumbers(winningNumbers, bonusNumber));
     }
 
 }
