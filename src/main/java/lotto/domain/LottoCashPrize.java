@@ -10,9 +10,7 @@ public enum LottoCashPrize {
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
 
-    FIFTH(2, 0),
-    SIXTH(1, 0),
-    SEVENTH(0, 0);
+    NO_PRIZE(0, 0);
 
     private final int matchedCount;
     private final int prize;
@@ -26,7 +24,7 @@ public enum LottoCashPrize {
         return Stream.of(values())
                 .filter(prize -> prize.getMatchedCount() == count)
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(LottoCashPrize.NO_PRIZE);
     }
 
     public static List<LottoCashPrize> getValuablePrizes() {

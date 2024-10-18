@@ -49,21 +49,8 @@ public class LottoNumbers {
         return money / LOTTO_SHEET_PRICE;
     }
 
-    private static void validate(int lottoNumber) {
-        if (!LottoNumbers.LOTTO_NUMBER_SET.contains(lottoNumber)) {
-            throw new IllegalArgumentException("로또 번호의 범위는 1~45까지입니다.");
-        }
-    }
-
     public List<Integer> getLottoNumbers() {
         return new ArrayList<>(this.lottoNumbers);
-    }
-
-    public int getMatchedCount(LottoNumbers targetNumbers) {
-        return (int) targetNumbers.getLottoNumbers()
-                .stream()
-                .filter(this.lottoNumbers::contains)
-                .count();
     }
 
     public LottoNumbersResults getResult(List<LottoNumbers> lottoNumbersList) {
@@ -78,5 +65,18 @@ public class LottoNumbers {
         }
 
         return new LottoNumbersResults(lottoSheetResults);
+    }
+
+    private static void validate(int lottoNumber) {
+        if (!LottoNumbers.LOTTO_NUMBER_SET.contains(lottoNumber)) {
+            throw new IllegalArgumentException("로또 번호의 범위는 1~45까지입니다.");
+        }
+    }
+
+    private int getMatchedCount(LottoNumbers targetNumbers) {
+        return (int) targetNumbers.getLottoNumbers()
+                .stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
     }
 }

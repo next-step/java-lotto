@@ -39,14 +39,6 @@ class LottoNumbersTest {
     }
 
     @Test
-    void getMatchedNumberCount_입력받은_로또번호와_일치하는_개수를_반환한다() {
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumbers targetNumbers = new LottoNumbers(1, 2, 3, 7, 8, 9);
-
-        assertThat(lottoNumbers.getMatchedCount(targetNumbers)).isEqualTo(3);
-    }
-
-    @Test
     void getResult_로또_여러_장의_당첨_결과를_생성한다() {
         LottoNumbers winningLottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumbers lottoNumbers1 = new LottoNumbers(1, 2, 3, 7, 8, 9);
@@ -57,6 +49,6 @@ class LottoNumbersTest {
                 .getValue();
 
         assertThat(results.get(LottoCashPrize.valueOf("FOURTH"))).isEqualTo(1);
-        assertThat(results.get(LottoCashPrize.valueOf("FIFTH"))).isEqualTo(1);
+        assertThat(results.get(LottoCashPrize.valueOf("NO_PRIZE"))).isEqualTo(1);
     }
 }
