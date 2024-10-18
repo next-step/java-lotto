@@ -13,7 +13,7 @@ public class InputView {
     public static LottoTickets getLottoTickets() {
         System.out.println("구입금액을 입력해 주세요.");
         int price = Integer.parseInt(SCANNER.nextLine());
-        return new LottoTickets(price);
+        return LottoTickets.createByPrice(price);
     }
 
     public static LottoTicket getWinningNumbers() {

@@ -7,19 +7,14 @@ import java.util.stream.Stream;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int price) {
-        this(generateLottoTickets(price));
-    }
-
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    private static List<LottoTicket> generateLottoTickets(int price) {
-        int ticketCount = calculateTicketCount(price);
-        return Stream.generate(LottoTicket::new)
-                     .limit(ticketCount)
-                     .collect(Collectors.toList());
+    public static LottoTickets createByPrice(int price) {
+        return new LottoTickets(Stream.generate(LottoTicket::new)
+                                      .limit(calculateTicketCount(price))
+                                      .collect(Collectors.toList()));
     }
 
     private static int calculateTicketCount(int price) {

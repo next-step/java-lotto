@@ -16,7 +16,7 @@ class LottoTicketsTest {
     @DisplayName("로또 티켓 개수 확인")
     void lottoTicketCount() {
         int price = 3000;
-        LottoTickets lottoTickets = new LottoTickets(price);
+        LottoTickets lottoTickets = LottoTickets.createByPrice(price);
 
         assertThat(lottoTickets.size()).isEqualTo(3);
     }
