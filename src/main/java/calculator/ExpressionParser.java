@@ -19,8 +19,8 @@ public class ExpressionParser {
         return createExpression(tokenize);
     }
 
-    private static Expression createExpression(List<String> tokenize) {
-        if (tokenize.size() < 3) {
+    private Expression createExpression(List<String> tokenize) {
+        if (isUnValid(tokenize)) {
             throw new IllegalArgumentException("잘못된 문법 입니다.");
         }
 
@@ -30,5 +30,9 @@ public class ExpressionParser {
             before = Expression.createOperation(tokenize.get(i), before, numberExpression);
         }
         return before;
+    }
+
+    private boolean isUnValid(List<String> tokenize) {
+        return tokenize.size() < 3;
     }
 }
