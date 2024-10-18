@@ -11,7 +11,8 @@ import java.util.stream.IntStream;
 
 public class Expression {
 
-    public static final Pattern EXPRESSION_PATTERN = Pattern.compile("^-?\\d+ [-+*/] -?\\d+( [-+*/] -?\\d+)*$");
+    private static final Pattern EXPRESSION_PATTERN = Pattern.compile("^-?\\d+ [-+*/] -?\\d+( [-+*/] -?\\d+)*$");
+    private static final String SPACE = " ";
 
     private final String expression;
 
@@ -59,7 +60,7 @@ public class Expression {
             return new ArrayList<>();
         }
 
-        String[] split = input.split(" ");
+        String[] split = input.split(SPACE);
 
         return Arrays.asList(split);
     }
