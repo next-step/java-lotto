@@ -3,7 +3,6 @@ package lotto.domain.purchase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static lotto.domain.purchase.PassivityLottoCount.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +16,7 @@ class PassivityLottoCountTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("수동 로또 구매 개수가 구매 가능한 로또 개수를 초과할 때 예외가 발생해야 한다")
     void 수동_개수_입력_validate_에러_테스트() {
         assertThatThrownBy(() -> isValidate(new Money(3000), 4))
                 .isInstanceOf(IllegalArgumentException.class)

@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTicketsTest {
 
     @Test
-    @DisplayName("")
+    @DisplayName("문자열 입력으로 LottoTickets 생성 테스트")
     void 문자열_생성자_생성_테스트() {
         List<String> input = Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12");
         LottoTickets lottoTickets = LottoTickets.fromStringList(input);

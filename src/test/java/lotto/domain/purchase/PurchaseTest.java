@@ -40,7 +40,7 @@ public class PurchaseTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("로또 수동 구매 성공: 수동 로또 구매 개수가 올바르게 처리되는지 확인")
     void 로또_수동_구매_성공() {
         Purchase purchase = new Purchase(2000, 2, () -> new LottoTicket(1, 2, 3, 4, 5, 6), new LottoTickets());
 
@@ -48,6 +48,7 @@ public class PurchaseTest {
     }
 
     @Test
+    @DisplayName("로또 수동/자동 구매 성공: 수동 로또와 자동 로또가 함께 구매되는지 확인")
     void 로또_수동_자동_구매_성공() {
         Purchase purchase = new Purchase(3000, 1, () -> new LottoTicket(1, 2, 3, 4, 5, 6), new LottoTickets(List.of(new LottoTicket(1, 2, 3, 4, 5, 7))));
 
