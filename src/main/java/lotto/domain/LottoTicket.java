@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,13 @@ public class LottoTicket {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.sort(this.lottoNumbers);
+    }
+
+    public static LottoTicket createByString(String lottoNumbers) {
+        return new LottoTicket(Arrays.stream(lottoNumbers.split(", "))
+                                     .map(Integer::parseInt)
+                                     .collect(Collectors.toList())
+        );
     }
 
     private List<Integer> generateLottoNumbers() {
