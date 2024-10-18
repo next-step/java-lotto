@@ -1,5 +1,6 @@
 package lotto.domain.winning;
 
+import lotto.domain.LottoRank;
 import lotto.domain.ticket.LottoTicket;
 
 import java.util.ArrayList;
@@ -8,28 +9,19 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningTickets {
-    private static final Map<Integer, Long> WINNING_PRICE = Map.of(
-        3, 5000L,
-        4, 50000L,
-        5, 1500000L,
-        6, 2000000000L
-    );
-    private final Map<Integer, List<LottoTicket>> winningTickets;
+    private final Map<LottoRank, List<LottoTicket>> winningTickets;
 
-    public WinningTickets(Map<Integer, List<LottoTicket>> winningTickets) {
+    public WinningTickets(Map<LottoRank, List<LottoTicket>> winningTickets) {
         this.winningTickets = new HashMap<>(winningTickets);
     }
 
-    public int getWinningTicketCount(int winningRank) {
-        return winningTickets.getOrDefault(winningRank, new ArrayList<>()).size();
+    public int getWinningTicketCount(LottoRank lottoRank) {
+        return winningTickets.getOrDefault(lottoRank, new ArrayList<>()).size();
     }
 
     public long getWinningPrice() {
-        return winningTickets.entrySet()
-                             .stream()
-                             .filter(winningTicket -> WINNING_PRICE.containsKey(winningTicket.getKey()))
-                             .mapToLong(winningTicket -> winningTicket.getValue()
-                                                                      .size() * WINNING_PRICE.get(winningTicket.getKey()))
+        return winningTickets.keySet().stream()
+                             .mapToLong(LottoRank::getWinningPrice)
                              .sum();
     }
 }

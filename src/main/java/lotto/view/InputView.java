@@ -1,8 +1,12 @@
 package lotto.view;
 
+import lotto.utils.StringUtils;
 import lotto.validator.InputValidator;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);
@@ -17,10 +21,20 @@ public class InputView {
         return Integer.parseInt(inputPrice);
     }
 
-    public String getWinningNumbers() {
+    public List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        return scanner.nextLine();
+        String inputWinningNumbers = scanner.nextLine();
+
+        return Arrays.stream(StringUtils.splitByComma(inputWinningNumbers))
+                     .map(Integer::parseInt)
+                     .collect(Collectors.toList());
+    }
+
+    public int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        return Integer.parseInt(scanner.nextLine());
     }
 
 }
