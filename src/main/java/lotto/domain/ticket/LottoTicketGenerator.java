@@ -10,7 +10,7 @@ public class LottoTicketGenerator {
     }
 
     public LottoTicket getTicket() {
-        return lottoGenerator.generateLottoTicket();
+        return new LottoTicket(lottoGenerator.getLottoNumbers());
     }
 
 }
