@@ -9,12 +9,10 @@ import static lotto.view.InputView.*;
 public class LottoMain {
 
     public static void main(String[] args) {
-
         LottoQuantity lottoQuantity = new LottoQuantity(inputAmount());
         lottoQuantity.setManualQuantity(inputManualQuantity());
 
-        LottoGame lottoGame = new LottoGame(LottoUtils.generateLottos(lottoQuantity.getAutoQuantity()));
-        lottoGame.addAllLottos(LottoUtils.extractLottosFromStrings(inputManualLottoNumbers(lottoQuantity.getManualQuantity())));
+        LottoGame lottoGame = createUserLottos(lottoQuantity);
 
         ResultView.printPurchaseQuantity(lottoQuantity.getManualQuantity(), lottoQuantity.getAutoQuantity());
         printUserLottos(lottoGame);
@@ -24,6 +22,12 @@ public class LottoMain {
 
         ResultView.printMatchStaticsInfo(winningResult.getStaticsList());
         ResultView.printProfitRate(winningResult.calculateProfitRate(lottoQuantity.getPurchaseAmount()));
+    }
+
+    private static LottoGame createUserLottos(LottoQuantity lottoQuantity) {
+        LottoGame lottoGame = new LottoGame(LottoUtils.extractLottosFromStrings(inputManualLottoNumbers(lottoQuantity.getManualQuantity())));
+        lottoGame.addAllLottos(LottoUtils.generateLottos(lottoQuantity.getAutoQuantity()));
+        return lottoGame;
     }
 
     private static void printUserLottos(LottoGame lottoGame) {
