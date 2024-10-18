@@ -18,6 +18,10 @@ public class Lotto {
         return lottoNumbers.getRanking(winningLotto).getWinningAmount();
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
     }

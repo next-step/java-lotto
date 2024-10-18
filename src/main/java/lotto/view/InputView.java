@@ -10,11 +10,15 @@ import java.util.stream.Collectors;
 public class InputView {
 
 
-    public static int getCount() {
+    public static int inputNumber() {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt() / LottoUnitAmount.getIntVal();
+        return scanner.nextInt();
     }
 
+    public static int getCount() {
+           return inputNumber()/LottoUnitAmount.getIntVal();
+    }
+    
     public static int[] inputWinningNumber() {
         Scanner scanner = new Scanner(System.in).useDelimiter(",");
         return Arrays.stream(scanner.nextLine().replaceAll(" ", "").split(",")).mapToInt(Integer::parseInt).toArray();

@@ -18,11 +18,12 @@ public class Lottos {
         return numberList.stream().map(lottoNum -> new Lotto(lottoNum)).collect(Collectors.toList());
     }
 
-    public BigDecimal getWinningAmount(Lotto winningLotto) {
+    public BigDecimal getWinningAmount(WinningLotto winningLotto) {
+
         return lottos.stream().map(lotto->lotto.getRankingAmount(winningLotto)).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public BigDecimal getRateOfReturn(Lotto winningLotto) {
+    public BigDecimal getRateOfReturn(WinningLotto winningLotto) {
         return getWinningAmount(winningLotto).divide(getTotalPaymentAmount(), 2, RoundingMode.DOWN);
     }
 
