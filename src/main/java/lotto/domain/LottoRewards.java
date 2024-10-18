@@ -37,11 +37,14 @@ public enum LottoRewards {
     }
 
     private static boolean isSecond(final int matchCount, final boolean hasBonusNumber) {
-
-        return matchCount == SECOND.matchCount && hasBonusNumber;
+        return findByCount(SECOND, matchCount) && hasBonusNumber;
     }
 
     private static boolean findByCount(final LottoRewards lottoRewards, final int value) {
-        return lottoRewards.matchCount == value;
+        return lottoRewards.matches(value);
+    }
+
+    private boolean matches(final int matchCount) {
+        return this.matchCount == matchCount;
     }
 }
