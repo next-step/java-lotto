@@ -7,6 +7,7 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     private final int matchingCount;
@@ -17,9 +18,12 @@ public enum LottoRank {
         this.distributionRatioPrice = distributionRatioPrice;
     }
 
-    public static LottoRank from(int matchingCount) {
+    public static LottoRank from(int matchingCount, Boolean isBonusBallMatched) {
         if (isNotRankEligible(matchingCount)) {
             return NON_RANKED;
+        }
+        if (isSecondWinner(matchingCount, isBonusBallMatched)) {
+            return SECOND;
         }
         return Arrays.stream(LottoRank.values())
                 .filter(value -> value.getMatchingCount() == matchingCount)
@@ -27,8 +31,12 @@ public enum LottoRank {
                 .orElseThrow(() -> new IllegalArgumentException(String.format("로또 번호 매칭 갯수 '%s'은 적합하지 않습니다.", matchingCount)));
     }
 
+    private static boolean isSecondWinner(int matchingCount, Boolean isBonusBallMatched) {
+        return matchingCount == THIRD.getMatchingCount() && isBonusBallMatched;
+    }
+
     private static boolean isNotRankEligible(int matchingCount) {
-        return 0 <= matchingCount && matchingCount <= 2;
+        return 0 <= matchingCount && matchingCount <= NON_RANKED.matchingCount;
     }
 
     public static LottoRank[] winningRanks() {
