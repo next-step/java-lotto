@@ -30,10 +30,6 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int getLottoCount() {
-        return lottos.size();
-    }
-
     public LottoResult calculateLottoResult(final WinningNumber winningNumber) {
         return new LottoResult(findLottoRewards(winningNumber));
     }
