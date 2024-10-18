@@ -18,7 +18,7 @@ public class LottoController {
 
         ResultView.printBuyerLottosInfo(buyer);
 
-        Lotto winningLotto = Lotto.of(InputView::inputWinningLottoNumbers);
+        Lotto winningLotto = new Lotto(InputView::inputWinningLottoNumbers);
         LottoNumber bonusNumber = InputView.inputBonusLottoNumber();
         Winning winning = Winning.of(winningLotto, bonusNumber);
         Result result = Result.of(buyer, winning);

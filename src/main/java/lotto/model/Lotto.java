@@ -17,14 +17,18 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     private Lotto(final List<LottoNumber> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(final NumbersCreator numbersCreator) {
-        List<LottoNumber> result = new ArrayList<>(numbersCreator.create());
-        validateLottoNumbers(result);
-        result.sort(LottoNumber::compareTo);
-        return new Lotto(Collections.unmodifiableList(result));
+    public Lotto(final NumbersCreator numbersCreator) {
+        this(createLottoNumber(numbersCreator));
+    }
+
+    private static List<LottoNumber> createLottoNumber(NumbersCreator numbersCreator) {
+        List<LottoNumber> lottoNumbers = numbersCreator.create();
+        lottoNumbers.sort(LottoNumber::compareTo);
+        return lottoNumbers;
     }
 
     private static void validateLottoNumbers(List<LottoNumber> result) {
@@ -42,6 +46,7 @@ public class Lotto {
         }
     }
 
+    // TODO: numbers -> contains 로 수정
     public List<LottoNumber> numbers() {
         return this.lottoNumbers;
     }

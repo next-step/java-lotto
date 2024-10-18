@@ -15,7 +15,7 @@ public class Buyer {
     public static Buyer of(final int buyCount, final NumbersCreator numbersCreator) {
         List<Lotto> result = new ArrayList<>();
         for (int index = 0; index < buyCount; index++) {
-            result.add(Lotto.of(numbersCreator));
+            result.add(new Lotto(numbersCreator));
         }
         return new Buyer(result);
     }
