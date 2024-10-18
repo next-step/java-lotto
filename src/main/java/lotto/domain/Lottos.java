@@ -19,8 +19,6 @@ public class Lottos {
     }
 
     public BigDecimal getWinningAmount(WinningLotto winningLotto) {
-
-
         return lottos.stream().map(lotto->lotto.getWinningAmount(winningLotto)).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 

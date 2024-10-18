@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,8 @@ public class LottosTest {
 
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumber);
         Lottos lottos = getLottos(Arrays.asList(lottoNumbers, lottoNumbers));
-        assertThat(lottos.getWinningAmount(new Lotto(lottoNumbers))).isEqualTo(LottoRankingEnum.FIRST_PRIZE.getWinningAmount().multiply(BigDecimal.valueOf(2)));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(7));
+        assertThat(lottos.getWinningAmount(winningLotto)).isEqualTo(LottoRankEnum.FIRST.getWinningAmount().multiply(BigDecimal.valueOf(2)));
     }
 
     @Test
@@ -26,8 +26,9 @@ public class LottosTest {
     void getWinningAmount2() {
         LottoNumbers lottoNumbers = new LottoNumbers(new int[] {1,2,3,4,5,6});
         Lotto winningLotto = new Lotto(new LottoNumbers(new int[]{7,8,9,10,11,12}));
+        WinningLotto winningLottoWithBonus = new WinningLotto(winningLotto, new LottoNumber(20));
         Lottos lottos = getLottos(Arrays.asList(lottoNumbers));
-        assertThat(lottos.getWinningAmount(winningLotto)).isEqualTo(LottoRankingEnum.LOSING_LOT.getWinningAmount());
+        assertThat(lottos.getWinningAmount(winningLottoWithBonus)).isEqualTo(LottoRankEnum.LOSING_LOT.getWinningAmount());
     }
 
     @Test
@@ -35,10 +36,11 @@ public class LottosTest {
     void getWinningResult() {
         LottoNumbers lottoNumbers = new LottoNumbers(new int[] {1,2,3,4,5,6});
         Lotto winningLotto = new Lotto(lottoNumbers);
+        WinningLotto winningLottoWithBonus = new WinningLotto(winningLotto, new LottoNumber(20));
         Lottos lottos = getLottos(Arrays.asList(lottoNumbers, lottoNumbers));
 
-        assertThat(lottos.getWinningResult(winningLotto).keySet()).hasSize(1);
-        assertThat(lottos.getWinningResult(winningLotto).get(LottoRankingEnum.FIRST_PRIZE)).isEqualTo(2);
+        assertThat(lottos.getWinningResult(winningLottoWithBonus).keySet()).hasSize(1);
+        assertThat(lottos.getWinningResult(winningLottoWithBonus).get(LottoRankEnum.FIRST)).isEqualTo(2);
     }
 
     @Test
