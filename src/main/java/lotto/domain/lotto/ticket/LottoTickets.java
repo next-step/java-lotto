@@ -10,11 +10,12 @@ public class LottoTickets {
     private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>(tickets);
     }
 
     public LottoTickets(LottoTicket... ticket) {
-        this.tickets = Arrays.stream(ticket).collect(Collectors.toList());
+        this.tickets = Arrays.stream(ticket)
+                .collect(Collectors.toList());
     }
 
     public void add(LottoTicket ticket) {
@@ -23,6 +24,13 @@ public class LottoTickets {
 
     public List<LottoTicket> getTickets() {
         return tickets;
+    }
+
+    public static LottoTickets fromStringList(List<String> tickets) {
+        List<LottoTicket> lottoTickets = tickets.stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+        return new LottoTickets(lottoTickets);
     }
 
     public Map<Prize, Integer> getHitLottoNumbers(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {

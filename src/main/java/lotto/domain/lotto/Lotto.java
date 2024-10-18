@@ -5,8 +5,6 @@ import lotto.domain.lotto.generate.Generate;
 import lotto.domain.lotto.ticket.LottoNumber;
 import lotto.domain.lotto.ticket.LottoTicket;
 import lotto.domain.lotto.ticket.LottoTickets;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
