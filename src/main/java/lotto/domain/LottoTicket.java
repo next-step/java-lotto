@@ -9,13 +9,11 @@ import java.util.stream.IntStream;
 
 public class LottoTicket {
     public static final int PRICE = 1000;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.sort(this.lottoNumbers);
@@ -23,29 +21,24 @@ public class LottoTicket {
 
     public static LottoTicket createByString(String lottoNumbers) {
         return new LottoTicket(Arrays.stream(lottoNumbers.split(", "))
-                                     .map(Integer::parseInt)
+                                     .map(num -> new LottoNumber(Integer.parseInt(num)))
                                      .collect(Collectors.toList())
         );
     }
 
     public static LottoTicket createRandom() {
-        List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-                                         .boxed()
-                                         .collect(Collectors.toList());
+        List<LottoNumber> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+                                             .mapToObj(LottoNumber::new)
+                                             .collect(Collectors.toList());
         Collections.shuffle(numbers);
-        List<Integer> selectedNumbers = numbers.subList(0, LOTTO_SIZE);
+        List<LottoNumber> selectedNumbers = numbers.subList(0, LOTTO_SIZE);
         Collections.sort(selectedNumbers);
         return new LottoTicket(selectedNumbers);
     }
 
-    private void validateLottoNumbers(List<Integer> lottoNumbers) {
+    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 정확히 6개여야 합니다.");
-        }
-
-        if (lottoNumbers.stream()
-                        .anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER)) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이여야 합니다.");
         }
     }
 
@@ -55,11 +48,11 @@ public class LottoTicket {
                                  .count();
     }
 
-    private boolean contains(int number) {
+    private boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 }

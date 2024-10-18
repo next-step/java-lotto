@@ -43,6 +43,11 @@
   - 수익률 출력
 - LottoApp
   - 전체 로또 실행 수행
+- LottoNumber
+  - 로또 번호 생성
+    - 1~45 사이의 숫자인지 검증
+  - 로또 번호 비교
+  - 로또 번호 정렬
 - LottoTicket
   - 로또 자동 생성 (Collections.shuffle() 생성, Collections.sort() 정렬)
   - 다른 LottoTicket과 몇개 일치하는지 확인 (ArrayList의 contains() 확인)
