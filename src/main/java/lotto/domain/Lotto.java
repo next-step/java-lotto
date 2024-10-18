@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.exception.LottoDuplicateNumberException;
 import lotto.exception.NumberOfLottoNumberException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -21,6 +18,7 @@ public class Lotto {
     }
 
     private void validNumberOfLottoNumber(List<LottoNumber> lotto) {
+        Set<LottoNumber> duplicate = new HashSet<>(lotto);
         if (lotto.size() != SIX) {
             throw new NumberOfLottoNumberException(String.valueOf(lotto.size()));
         }
@@ -31,29 +29,21 @@ public class Lotto {
                 .filter(i -> Collections.frequency(lotto,i) > 1)
                 .collect(Collectors.toSet());
 
-        if (duplicateLottoNumber.size() >= 1) {
-            throw new LottoDuplicateNumberException(makeDuplicateLottoNumberMessage(duplicateLottoNumber));
+        if (duplicateLottoNumber.size()>=1) {
+            throw new LottoDuplicateNumberException(duplicateLottoNumber);
         }
-
-    }
-
-    private String makeDuplicateLottoNumberMessage(Set<LottoNumber> duplicateLottoNumber) {
-        return duplicateLottoNumber.stream()
-                .map(i -> String.valueOf(i.getLottoNumber()))
-                .collect(Collectors.joining(" ","중복 요소: ","가 하나 이상 존재"));
     }
 
     public List<LottoNumber> getLotto() {
         return new ArrayList<>(lotto);
     }
 
-    public int lottoWinningStatus(Lotto lotto, Lotto winningLotto) {
+    public int lottoWinningStatus(Lotto winningLotto) {
         int count = 0;
-        List<LottoNumber> lottoNumbers = lotto.getLotto();
         List<LottoNumber> winningNumbers = winningLotto.getLotto();
 
         for (int i = 0; i < winningNumbers.size(); i++) {
-            count += isNumberMatched(winningNumbers, i, lottoNumbers);
+            count += isNumberMatched(winningNumbers, i, lotto);
         }
 
         return Prize.getValueByHit(count);

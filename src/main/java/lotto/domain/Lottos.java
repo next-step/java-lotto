@@ -2,7 +2,9 @@ package lotto.domain;
 
 import lotto.exception.PrizeOverFlowIsNegativeException;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -28,7 +30,7 @@ public class Lottos {
         int totalPrize = 0;
         int eachPrize = 0;
         for (Lotto lotto : lottos) {
-            eachPrize = lotto.lottoWinningStatus(lotto, winningLotto);
+            eachPrize = lotto.lottoWinningStatus(winningLotto);
             validOverFlow(eachPrize, totalPrize);
             validtotalPrize(eachPrize, totalPrize);
             totalPrize += eachPrize;
@@ -50,6 +52,20 @@ public class Lottos {
 
     public void additionalLotto(Lotto lotto){
         lottos.add(lotto);
+    }
+
+    public Map<Prize, Integer> calculateStatistic(int totalPrize) {
+        LinkedHashMap<Prize, Integer> statistic = new LinkedHashMap<>();
+        int prize = totalPrize;
+        for (Prize price : Prize.values()) {
+            statistic.put(price, prize / price.getValue());
+            prize %= price.getValue();
+        }
+        return statistic;
+    }
+
+    public double calculateProfit(int prize, int buyPrice) {
+        return Math.floor(prize / (double) buyPrice * 100) / 100.0;
     }
 
 }

@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.domain.LottoShuffleGenerator;
 import lotto.domain.Lottos;
-import lotto.domain.Prize;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -27,8 +26,8 @@ public class JavaLotto {
 
         int prize = lottos.getWinningPrize(inputView.inputWinnerNumber());
 
-        resultView.printResult(Prize.calculateStatistic(prize));
-        resultView.printProfit(Prize.calculateProfit(prize, amount));
+        resultView.printResult(lottos.calculateStatistic(prize));
+        resultView.printProfit(lottos.calculateProfit(prize, amount));
 
     }
 

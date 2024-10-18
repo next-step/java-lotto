@@ -4,7 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Prize;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -25,7 +25,7 @@ public class ResultView {
 
     }
 
-    public void printResult(LinkedHashMap<Prize,Integer> money) {
+    public void printResult(Map<Prize,Integer> money) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");

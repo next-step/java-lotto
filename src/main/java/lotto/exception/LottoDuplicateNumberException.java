@@ -1,8 +1,17 @@
 package lotto.exception;
 
+import lotto.domain.LottoNumber;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class LottoDuplicateNumberException extends IllegalArgumentException{
 
-    public LottoDuplicateNumberException(String message){
-        super(message);}
+    public LottoDuplicateNumberException(Set<LottoNumber> duplicateLottoNumber){
+        super(duplicateLottoNumber.stream()
+                .map(i -> String.valueOf(i.getLottoNumber()))
+                .collect(Collectors.joining(", ","중복 요소: ","가 하나 이상 존재"))
+       );
+    }
 
 }
