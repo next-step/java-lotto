@@ -52,7 +52,7 @@ public class LottoWinningStatistics {
     }
 
     public Integer getLottoQuantityOfRanking(LottoRankingSystem ranking) {
-        return Objects.isNull(this.values.get(ranking)) ? 0 : this.values.get(ranking);
+        return this.values.get(ranking);
     }
 
     public static float calculateReturnRate(int lottoWinningAmount, int lottoPurchaseAmount) {
