@@ -1,40 +1,32 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
     public static final int MIN = 1;
     public static final int MAX = 45;
+    private static final LottoNumber[] CACHE;
+
+    static {
+        CACHE = IntStream.rangeClosed(MIN, MAX)
+                .mapToObj(LottoNumber::new)
+                .toArray(LottoNumber[]::new);
+    }
 
     private final int number;
 
-    public LottoNumber(int number) {
-        if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 사용할 수 있습니다.");
-        }
-
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+    public static LottoNumber valueOf(int number) {
+        try {
+            return CACHE[number - 1];
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 사용할 수 있습니다.");
         }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        LottoNumber that = (LottoNumber) o;
-
-        return this.number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(number);
     }
 
     @Override

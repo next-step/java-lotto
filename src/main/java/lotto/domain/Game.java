@@ -67,7 +67,7 @@ public class Game {
     private List<LottoNumber> toLottoNumberList(List<Integer> numbers) {
         return numbers.stream()
                 .sorted()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toUnmodifiableList());
     }
 
