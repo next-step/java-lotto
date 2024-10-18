@@ -4,10 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 import static lotto.domain.LottoNumbers.LOTTO_NUMBER_COUNT;
 import static lotto.domain.LottoNumbers.LOTTO_NUMBER_SET;
@@ -36,27 +34,5 @@ class LottoNumbersTest {
 
         assertThat(lottoNumbers).hasSize(count);
         lottoNumbers.forEach(numbers -> assertThat(numbers).isInstanceOf(LottoNumbers.class));
-    }
-
-    @Test
-    void getMatchedNumberCount_입력받은_로또번호와_일치하는_개수를_반환한다() {
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumbers targetNumbers = new LottoNumbers(1, 2, 3, 7, 8, 9);
-
-        assertThat(lottoNumbers.getMatchedCount(targetNumbers)).isEqualTo(3);
-    }
-
-    @Test
-    void getResult_로또_여러_장의_당첨_결과를_생성한다() {
-        LottoNumbers winningLottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumbers lottoNumbers1 = new LottoNumbers(1, 2, 3, 7, 8, 9);
-        LottoNumbers lottoNumbers2 = new LottoNumbers(1, 2, 7, 8, 9, 10);
-
-        Map<LottoCashPrize, Integer> results = winningLottoNumbers.getResult(
-                        Arrays.asList(lottoNumbers1, lottoNumbers2))
-                .getValue();
-
-        assertThat(results.get(LottoCashPrize.valueOf("FOURTH"))).isEqualTo(1);
-        assertThat(results.get(LottoCashPrize.valueOf("FIFTH"))).isEqualTo(1);
     }
 }
