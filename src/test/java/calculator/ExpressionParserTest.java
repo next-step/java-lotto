@@ -22,7 +22,7 @@ public class ExpressionParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2 a 3","5"})
+    @ValueSource(strings = {"2 a 3","5","4 + +"})
     public void 잘못된_문법_테스트(String value) {
         ExpressionParser parser = new ExpressionParser(new SpaceExpressionTokenizer());
 
