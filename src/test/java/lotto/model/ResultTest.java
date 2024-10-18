@@ -31,7 +31,7 @@ public class ResultTest {
                 () -> Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(43))
         );
         LottoNumber bonusNumber = of(44);
-        this.winning = Winning.of(winningLotto, bonusNumber);
+        this.winning = new Winning(winningLotto, bonusNumber);
     }
 
     @Test

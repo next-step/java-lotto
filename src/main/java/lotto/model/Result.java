@@ -25,10 +25,6 @@ public class Result {
         this.winning = winning;
     }
 
-    public static Result of(Buyer buyer, Winning winning) {
-        return new Result(buyer, winning);
-    }
-
     public double statistics(int buyCount) {
         long winningAmount = rankings()
                 .entrySet()

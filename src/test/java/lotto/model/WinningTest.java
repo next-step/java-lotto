@@ -16,7 +16,7 @@ public class WinningTest {
         Lotto winningLotto = new Lotto(() -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6)));
         LottoNumber bonusNumber = of(7);
 
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Winning winning = new Winning(winningLotto, bonusNumber);
         Lotto actualWinningLotto = winning.winningLotto();
         LottoNumber actualBonusNumber = winning.bonusNumber();
 
@@ -29,12 +29,8 @@ public class WinningTest {
         Lotto winningLotto = new Lotto(() -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6)));
         LottoNumber bonusNumber = of(6);
         Assertions.assertThatThrownBy(() -> {
-                    Winning duplicatedWinning = Winning.of(winningLotto, bonusNumber);
+                    Winning duplicatedWinning = new Winning(winningLotto, bonusNumber);
                 }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_BONUS_NUMBER);
-    }
-
-    @Test
-    void 당첨번호목록_() {
     }
 }

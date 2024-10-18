@@ -84,7 +84,7 @@ public class LottoTest {
                 () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Winning winning = new Winning(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.NONE;
@@ -106,7 +106,7 @@ public class LottoTest {
                 () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Winning winning = new Winning(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.FIFTH;
@@ -128,7 +128,7 @@ public class LottoTest {
                 () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Winning winning = new Winning(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.FOURTH;
@@ -150,7 +150,7 @@ public class LottoTest {
                 () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Winning winning = new Winning(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.THIRD;
@@ -172,7 +172,7 @@ public class LottoTest {
                 () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Winning winning = new Winning(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.SECOND;
@@ -193,7 +193,7 @@ public class LottoTest {
                 () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
         );
         LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Winning winning = new Winning(winningLotto, bonusNumber);
 
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.FIRST;
