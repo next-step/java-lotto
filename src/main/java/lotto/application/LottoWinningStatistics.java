@@ -43,7 +43,11 @@ public class LottoWinningStatistics {
         return LottoRank.isNotRankEligible(matchingCount);
     }
 
-    public int calculateWinningAmount() {
+    public float calculateReturnRate(int lottoPurchaseAmount) {
+        return Math.round((this.calculateWinningAmount() / (float) lottoPurchaseAmount) * 100) / 100.0f;
+    }
+
+    private int calculateWinningAmount() {
         int winningAmount = 0;
         for (Map.Entry<LottoRank, Integer> result : this.values.entrySet()) {
             winningAmount += result.getKey().getDistributionRatioPrice() * result.getValue();
@@ -53,9 +57,5 @@ public class LottoWinningStatistics {
 
     public Integer getLottoQuantityOfRanking(LottoRank ranking) {
         return this.values.get(ranking);
-    }
-
-    public static float calculateReturnRate(int lottoWinningAmount, int lottoPurchaseAmount) {
-        return lottoWinningAmount / (float) lottoPurchaseAmount;
     }
 }

@@ -28,10 +28,9 @@ public class OutputView {
     }
 
     private static void printReturnRate(int lottoPurchaseAmount, LottoWinningStatistics winningStatistics) {
-        int lottoWinningAmount = winningStatistics.calculateWinningAmount();
-        float returnRate = LottoWinningStatistics.calculateReturnRate(lottoWinningAmount, lottoPurchaseAmount);
+        float returnRate = winningStatistics.calculateReturnRate(lottoPurchaseAmount);
 
-        System.out.printf("총 수익률은 %.2f입니다.", returnRate);
+        System.out.printf("총 수익률은 %f입니다.", returnRate);
         if (returnRate < 1.0) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
@@ -40,7 +39,7 @@ public class OutputView {
     private static void printWinningCount(LottoWinningStatistics winningStatistics) {
         StringBuilder stringBuilder = new StringBuilder("당첨 통계").append(NEW_LINE).append("---------").append(NEW_LINE);
 
-        for (LottoRank ranking : LottoRank.values()) {
+        for (LottoRank ranking : LottoRank.winningLank()) {
             stringBuilder
                     .append(String.format("%d개 일치 (%d원)- %d개",
                             ranking.getMatchingCount(), ranking.getDistributionRatioPrice(), winningStatistics.getLottoQuantityOfRanking(ranking)))

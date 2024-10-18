@@ -31,19 +31,6 @@ class LottoWinningStatisticsTest {
                 .containsExactly(1, 1, 0, 0);
     }
 
-    @DisplayName("당첨된 로또의 금액을 계산한다.")
-    @Test
-    void calculate_winning_amount() {
-        Map<LottoRank, Integer> statistics = new HashMap<>();
-        statistics.put(LottoRank.FIRST, 1);
-        statistics.put(LottoRank.FIFTH, 1);
-        LottoWinningStatistics winningStatistics = new LottoWinningStatistics(statistics);
-
-        int result = winningStatistics.calculateWinningAmount();
-
-        assertThat(result).isEqualTo(2000000000 + 5000);
-    }
-
     @DisplayName("인자로 전달받은 등수에 해당하는 로또의 갯수를 반환한다.")
     @Test
     void return_lotto_quantity_by_ranking() {
@@ -56,11 +43,16 @@ class LottoWinningStatisticsTest {
         assertThat(result).isEqualTo(2);
     }
 
-    @DisplayName("로또 당첨금액과 로또 구입금액을 전달받아서 수익률을 계산하여 반환한다.")
+    @DisplayName("로또 구입금액을 전달받아서 로또 당첨금액 계산 후 수익률을 계산하여 반환한다.")
     @Test
     void calculate_returnRate() {
-        float actual = LottoWinningStatistics.calculateReturnRate(1_500_000, 5000);
+        Map<LottoRank, Integer> statistics = new HashMap<>();
+        statistics.put(LottoRank.FIFTH, 2);
+        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(statistics);
+        int lottoPurchaseAmount = 12000;
 
-        assertThat(actual).isEqualTo(300.0f);
+        float actual = lottoWinningStatistics.calculateReturnRate(lottoPurchaseAmount);
+
+        assertThat(actual).isEqualTo(0.83f);
     }
 }
