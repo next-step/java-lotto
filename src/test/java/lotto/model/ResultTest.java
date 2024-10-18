@@ -36,7 +36,7 @@ public class ResultTest {
 
     @Test
     void 수익률을_출력한다() {
-        Result result = Result.of(buyer, winning);
+        Result result = new Result(buyer, winning);
 
         double actual = result.statistics(3);
 
@@ -51,7 +51,7 @@ public class ResultTest {
 
     @Test
     void 구매한_로또번호_6자리_목록의_등수들을_리턴한다() {
-        Map<Ranking, Integer> actual = Result.of(buyer, winning).rankings();
+        Map<Ranking, Integer> actual = new Result(buyer, winning).rankings();
         Map<Ranking, Integer> expected = Map.of(
                 FIFTH, 1,
                 FOURTH, 0,

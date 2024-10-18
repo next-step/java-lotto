@@ -20,11 +20,10 @@ public class Result {
     private final Buyer buyer;
     private final Winning winning;
 
-    private Result(Buyer buyer, Winning winning) {
+    public Result(Buyer buyer, Winning winning) {
         this.buyer = buyer;
         this.winning = winning;
     }
-
 
     public static Result of(Buyer buyer, Winning winning) {
         return new Result(buyer, winning);
