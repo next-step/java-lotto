@@ -10,8 +10,7 @@ import lotto.view.ResultView;
 public class LottoApplication {
     public static void main(String[] args) {
         final LottoPurchaseInfo lottoPurchaseInfo = generatePurchaseInfo();
-        final Lottos lottos = new Lottos(InputView.inputManualLottos(lottoPurchaseInfo.getManualCount()),
-                lottoPurchaseInfo.calculateAutoCount());
+        final Lottos lottos = generateLottos(lottoPurchaseInfo);
         ResultView.printLottos(lottos, lottoPurchaseInfo);
 
         final WinningNumber winningNumber = generateWinningNumber();
@@ -56,7 +55,38 @@ public class LottoApplication {
         }
     }
 
+    private static Optional<Lottos> createLottos(LottoPurchaseInfo lottoPurchaseInfo) {
+        try {
+            return Optional.of(new Lottos(InputView.inputManualLottos(lottoPurchaseInfo.getManualCount()),
+                    lottoPurchaseInfo.calculateAutoCount()));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return Optional.empty();
+        }
+    }
+
+    private static Lottos generateLottos(LottoPurchaseInfo lottoPurchaseInfo) {
+        Optional<Lottos> lottosOptional;
+        do {
+            lottosOptional = createLottos(lottoPurchaseInfo);
+        } while (lottosOptional.isEmpty());
+        return lottosOptional.get();
+    }
+
+    private static Optional<WinningNumber> createWinningNumber() {
+        try {
+            return Optional.of(new WinningNumber(InputView.inputWinningNumber(), InputView.inputBonusNumber()));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return Optional.empty();
+        }
+    }
+
     private static WinningNumber generateWinningNumber() {
-        return new WinningNumber(InputView.inputWinningNumber(), InputView.inputBonusNumber());
+        Optional<WinningNumber> winningNumberOptional;
+        do {
+            winningNumberOptional = createWinningNumber();
+        } while (winningNumberOptional.isEmpty());
+        return winningNumberOptional.get();
     }
 }
