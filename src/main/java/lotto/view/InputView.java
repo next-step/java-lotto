@@ -26,7 +26,6 @@ public class InputView {
         int manualPurchasingAmount = receiveManualLottoAmount();
         List<Lotto> lottoNumbers = receiveManualLottoNumbers(manualPurchasingAmount);
         return lottoNumbers;
-    }
 
     public List<LottoNumber> receiveWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
@@ -100,11 +99,10 @@ public class InputView {
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-
+      
         lottoNumbers.sort(Comparator.naturalOrder());
         return lottoNumbers;
     }
-
 
     private void validateLottoNumber(String input) {
         Set<String> numbers = Arrays.stream(input.split(","))
@@ -114,5 +112,12 @@ public class InputView {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
         }
+    }
+
+    public LottoNumber receiveBonusNo() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int input = scanner.nextInt();
+        scanner.nextLine();
+        return new LottoNumber(input);
     }
 }

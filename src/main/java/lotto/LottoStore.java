@@ -21,13 +21,11 @@ public class LottoStore {
         int lottoAmount = inputView.receivePurchasingAmount();
         List<Lotto> manualLottoNumbers = inputView.receiveManualLotto();
         Lottos lottos = lottoGenerator.getLottos(lottoAmount, manualLottoNumbers);
-
         resultView.printLottoResult(lottos);
 
         List<LottoNumber> winningNumber = inputView.receiveWinningNumber();
         LottoNumber bonusNumber = inputView.receiveBonusNo();
         lottos.calculateLotto(new WinningNumber(winningNumber, bonusNumber));
-
         resultView.printLottoStatistics(lottos, inputView.getPurchasingAmount());
     }
 }

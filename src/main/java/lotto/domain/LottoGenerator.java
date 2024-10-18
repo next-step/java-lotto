@@ -23,7 +23,6 @@ public class LottoGenerator {
         IntStream.range(0, amount)
                 .mapToObj(i -> new Lotto(generate()))
                 .forEach(lottoResult::addLotto);
-
         return lottoResult;
     }
 
