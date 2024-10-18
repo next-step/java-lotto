@@ -7,6 +7,7 @@ import lottogame.ui.LottoOutputView;
 public class LottoController {
     public void run() {
         int buyAmount = LottoInputView.getBuyAmount();
+        int predefinedLottoCount = LottoInputView.getBuyPredefinedLottoCount();
         Lottos lottos = purchaseLottos(buyAmount);
         printPurchaseInfo(lottos);
 
