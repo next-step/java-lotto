@@ -9,11 +9,11 @@ import java.util.Set;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(final List<Set<Integer>> manualNumbers, final LottoPurchaseInfo lottoPurchaseInfo) {
+    public Lottos(final List<Set<Integer>> manualNumbers, final int autoCount) {
         for (Set<Integer> manualNumber : manualNumbers) {
             lottos.add(Lotto.from(manualNumber));
         }
-        for (int i = 0; i < lottoPurchaseInfo.getAutoCount(); i++) {
+        for (int i = 0; i < autoCount; i++) {
             lottos.add(generateAuto());
         }
     }

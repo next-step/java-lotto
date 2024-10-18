@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 class LottosTest {
     @Test
     void 로또_구매_테스트() {
-        LottoPurchaseInfo lottoPurchaseInfo = new LottoPurchaseInfo(3, 14);
+        LottoPurchaseInfo lottoPurchaseInfo = new LottoPurchaseInfo(14000, 3);
         List<Set<Integer>> manualNumbers = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             manualNumbers.add(getLottoNumbers());
         }
-        Lottos lottos = new Lottos(manualNumbers, lottoPurchaseInfo);
-        assertThat(lottos.getLottos().size()).isEqualTo(17);
+        Lottos lottos = new Lottos(manualNumbers, lottoPurchaseInfo.calculateAutoCount());
+        assertThat(lottos.getLottos().size()).isEqualTo(14);
     }
 
     private static Set<Integer> getLottoNumbers() {

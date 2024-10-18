@@ -3,18 +3,24 @@ package lotto.domain;
 public class LottoPurchaseInfo {
     private static final int MIN_COUNT = 0;
     private static final String LOTTO_COUNT_ERROR = "로또 갯수는 음수일 수 없습니다.";
+    private static final String OVER_TOTAL_LOTTO_COUNT_ERROR = "수동으로 구입하는 로또 갯수가 구입가능한 개수보다 많습니다.";
 
+    private final PurchasePrice purchasePrice;
     private final int manualCount;
-    private final int autoCount;
 
-    public LottoPurchaseInfo(int manualCount, int autoCount) {
-        validateRange(manualCount, autoCount);
-        this.manualCount = manualCount;
-        this.autoCount = autoCount;
+    public LottoPurchaseInfo(int money, int manualCount) {
+        this(new PurchasePrice(money), manualCount);
     }
 
-    private void validateRange(final int manualCount, final int autoCount) {
-        if (manualCount < MIN_COUNT || autoCount < MIN_COUNT) {
+    public LottoPurchaseInfo(PurchasePrice purchasePrice, int manualCount) {
+        validateRange(manualCount);
+        this.purchasePrice = purchasePrice;
+        this.manualCount = manualCount;
+        validateManualCount(manualCount);
+    }
+
+    private void validateRange(final int manualCount) {
+        if (manualCount < MIN_COUNT) {
             throw new IllegalArgumentException(LOTTO_COUNT_ERROR);
         }
     }
@@ -23,7 +29,17 @@ public class LottoPurchaseInfo {
         return manualCount;
     }
 
-    public int getAutoCount() {
-        return autoCount;
+    public int getMoney() {
+        return purchasePrice.getMoney();
+    }
+
+    private void validateManualCount(final int manualCount) {
+        if (manualCount > calculateAutoCount()) {
+            throw new IllegalArgumentException(OVER_TOTAL_LOTTO_COUNT_ERROR);
+        }
+    }
+
+    public int calculateAutoCount() {
+        return purchasePrice.calculateAutoCount() - manualCount;
     }
 }

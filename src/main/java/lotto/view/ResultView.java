@@ -24,7 +24,7 @@ public class ResultView {
     private static final int BENEFIT_STANDARD = 1;
 
     public static void printLottos(final Lottos lottos, final LottoPurchaseInfo lottoPurchaseInfo) {
-        System.out.printf(LOTTO_COUNT_MESSAGE, lottoPurchaseInfo.getManualCount(), lottoPurchaseInfo.getAutoCount());
+        System.out.printf(LOTTO_COUNT_MESSAGE, lottoPurchaseInfo.getManualCount(), lottoPurchaseInfo.calculateAutoCount());
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getLottoNumbers().stream()
                     .map(LottoNumber::getNumber)
@@ -34,13 +34,13 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printLottoStatistics(final LottoResult lottoResult, final PurchasePrice purchasePrice) {
+    public static void printLottoStatistics(final LottoResult lottoResult, final LottoPurchaseInfo lottoPurchaseInfo) {
         System.out.println();
         System.out.println(LOTTO_STATISTICS_MESSAGE);
         System.out.println(LINE);
 
         printLottoRewards(lottoResult);
-        printLottoProfit(lottoResult.calculateProfit(purchasePrice));
+        printLottoProfit(lottoResult.calculateProfit(lottoPurchaseInfo));
     }
 
     private static void printLottoRewards(final LottoResult lottoResult) {
@@ -67,9 +67,11 @@ public class ResultView {
     private static void printLottoProfit(final double profit) {
         if (profit > BENEFIT_STANDARD) {
             System.out.printf(LOTTO_PROFIT_BENEFIT, profit);
+            return;
         }
         if (profit < BENEFIT_STANDARD) {
             System.out.printf(LOTTO_PROFIT_LOSS, profit);
+            return;
         }
         System.out.printf(LOTTO_PROFIT_NOTHING, profit);
     }

@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 class LottoPurchaseInfoTest {
     @Test
     void 로또구매정보_생성() {
-        LottoPurchaseInfo lottoPurchaseInfo = new LottoPurchaseInfo(1, 3);
+        LottoPurchaseInfo lottoPurchaseInfo = new LottoPurchaseInfo(10000, 3);
         assertThat(lottoPurchaseInfo).isNotNull();
     }
 
