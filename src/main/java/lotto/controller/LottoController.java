@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.InputNumber;
 import lotto.vo.WinningResult;
 import lotto.service.LottoService;
 import lotto.view.View;
@@ -30,9 +31,9 @@ public class LottoController {
     }
 
     private void winning(final List<Lotto> lottos) {
-        String winningNumber = view.inputWinningNumber();
+        InputNumber inputNumber = view.inputNumber();
 
-        WinningResult winningResult = lottoService.match(lottos, winningNumber);
+        WinningResult winningResult = lottoService.match(lottos, inputNumber);
 
         view.outputWinningResult(winningResult);
     }

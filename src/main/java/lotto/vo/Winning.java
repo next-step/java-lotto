@@ -1,16 +1,21 @@
 package lotto.vo;
 
-public class Winning {
-    private final int countMatching;
+import lotto.enumeration.Rank;
+
+public class Winning implements Comparable<Winning> {
+    private final Rank rank;
     private final int countWinning;
 
-    public Winning(final int countMatching, final int countWinning) {
-        this.countMatching = countMatching;
+    public Winning(final Rank rank, Integer countWinning) {
+        if (countWinning == null) {
+            countWinning = 0;
+        }
+        this.rank = rank;
         this.countWinning = countWinning;
     }
 
-    public int getCountMatching() {
-        return countMatching;
+    public Rank getRank() {
+        return rank;
     }
 
     public int getCountWinning() {
@@ -26,6 +31,11 @@ public class Winning {
             return false;
         }
         Winning winning = (Winning) o;
-        return countMatching == winning.countMatching && countWinning == winning.countWinning;
+        return countWinning == winning.countWinning && rank == winning.rank;
+    }
+
+    @Override
+    public int compareTo(final Winning other) {
+        return rank.compareTo(other.getRank());
     }
 }

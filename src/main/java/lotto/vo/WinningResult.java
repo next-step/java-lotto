@@ -13,7 +13,7 @@ public class WinningResult {
         this.totalReturn = totalReturn;
     }
 
-    public List<Winning> getCounts() {
+    public List<Winning> getWinnings() {
         return winnings;
     }
 
