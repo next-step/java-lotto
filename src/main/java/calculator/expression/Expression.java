@@ -17,6 +17,6 @@ public interface Expression {
         if (DivideExpression.isSupport(operation)) {
             return new DivideExpression(before, numberExpression);
         }
-        return null;
+        throw new IllegalArgumentException("연산자를 찾을 수 없습니다.");
     }
 }
