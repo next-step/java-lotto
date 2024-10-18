@@ -18,7 +18,10 @@ public class ResultView {
     private static final String LINE = "---------";
     private static final String LOTTO_REWARD = "%d개 일치 (%d원)- %d개";
     private static final String SECOND_REWARD = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
-    private static final String LOTTO_PROFIT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String LOTTO_PROFIT_LOSS = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String LOTTO_PROFIT_NOTHING = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 본전이라는 의미임)";
+    private static final String LOTTO_PROFIT_BENEFIT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    private static final int BENEFIT_STANDARD = 1;
 
     public static void printLottos(final Lottos lottos, final LottoPurchaseInfo lottoPurchaseInfo) {
         System.out.printf(LOTTO_COUNT_MESSAGE, lottoPurchaseInfo.getManualCount(), lottoPurchaseInfo.getAutoCount());
@@ -62,6 +65,13 @@ public class ResultView {
     }
 
     private static void printLottoProfit(final double profit) {
-        System.out.printf(LOTTO_PROFIT, profit);
+        if (profit > BENEFIT_STANDARD) {
+            System.out.printf(LOTTO_PROFIT_BENEFIT, profit);
+        }
+        if (profit < BENEFIT_STANDARD) {
+            System.out.printf(LOTTO_PROFIT_LOSS, profit);
+        }
+
+        System.out.printf(LOTTO_PROFIT_NOTHING, profit);
     }
 }
