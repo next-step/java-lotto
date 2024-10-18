@@ -21,24 +21,23 @@ public class WinningLotto {
         return new WinningLotto(winningTicket, bonusNumber);
     }
 
-    public static WinningLotto fromWinningNumbersAndBonusNumber(List<String> winningNumbers, int bonusNumber) {
+    public static WinningLotto fromWinningNumbersAndBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
         checkBonusNumberDuplicate(winningNumbers, bonusNumber);
         return WinningLotto.of(LottoTicket.of(generateLottoNumbers(winningNumbers)), LottoNumber.of(bonusNumber));
     }
 
-    private static void checkBonusNumberDuplicate(List<String> winningNumbers, int bonusNumber) {
+    private static void checkBonusNumberDuplicate(List<Integer> winningNumbers, int bonusNumber) {
         if (hasBonusNumberDuplicated(winningNumbers, bonusNumber)) {
             throw new DuplicateBonusNumberException();
         }
     }
 
-    private static boolean hasBonusNumberDuplicated(List<String> winningNumbers, int bonusNumber) {
-        return new HashSet<>(winningNumbers).contains(String.valueOf(bonusNumber));
+    private static boolean hasBonusNumberDuplicated(List<Integer> winningNumbers, int bonusNumber) {
+        return new HashSet<>(winningNumbers).contains(bonusNumber);
     }
 
-    private static List<LottoNumber> generateLottoNumbers(List<String> winningNumbers) {
+    private static List<LottoNumber> generateLottoNumbers(List<Integer> winningNumbers) {
         return winningNumbers.stream()
-                .map(Integer::parseInt)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }

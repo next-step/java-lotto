@@ -43,7 +43,7 @@ class WinningLottoTest {
     @DisplayName("보너스 번호와 일치여부를 확인할 수 있다.")
     @Test
     void fromWinningNumbersAndBonusNumberTest() {
-        List<String> winningNumbers = List.of("1", "2", "3", "4", "5", "6");
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int bonusNumber = 8;
 
         WinningLotto winningLotto = WinningLotto.fromWinningNumbersAndBonusNumber(winningNumbers, bonusNumber);
@@ -55,7 +55,7 @@ class WinningLottoTest {
     @DisplayName("당첨번호와 보너스 번호의 중복여부를 확인할 수 있다.")
     @Test
     void bonusNumberDuplicateExceptionTest() {
-        List<String> winningNumbers = List.of("1", "2", "3", "4", "5", "6");
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int bonusNumber = 6;
 
         assertThatThrownBy(() -> WinningLotto.fromWinningNumbersAndBonusNumber(winningNumbers, bonusNumber))

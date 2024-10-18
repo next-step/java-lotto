@@ -6,7 +6,9 @@ public interface InputHandler {
 
     long getPurchaseAmountFromUser();
 
-    List<String> getWinningNumbersFromUser();
+    List<Integer> getLottoNumbersFromUser();
 
-    int getBonusBallFromUser();
+    int getOneNumberFromUser();
+
+    List<List<Integer>> getManualPurchaseLottoNumbers(int manualLottoPurchaseCount);
 }
