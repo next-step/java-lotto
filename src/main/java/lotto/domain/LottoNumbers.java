@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -49,34 +52,24 @@ public class LottoNumbers {
         return money / LOTTO_SHEET_PRICE;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return new ArrayList<>(this.lottoNumbers);
-    }
-
-    public LottoNumbersResults getResult(List<LottoNumbers> lottoNumbersList) {
-        Map<LottoCashPrize, Integer> lottoSheetResults = new HashMap<>();
-
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            int matchedCount = this.getMatchedCount(lottoNumbers);
-            LottoCashPrize prize = LottoCashPrize.fromMatchedCount(matchedCount);
-
-            lottoSheetResults.put(
-                    prize, lottoSheetResults.getOrDefault(prize, 0) + 1);
-        }
-
-        return new LottoNumbersResults(lottoSheetResults);
-    }
-
     private static void validate(int lottoNumber) {
         if (!LottoNumbers.LOTTO_NUMBER_SET.contains(lottoNumber)) {
             throw new IllegalArgumentException("로또 번호의 범위는 1~45까지입니다.");
         }
     }
 
-    private int getMatchedCount(LottoNumbers targetNumbers) {
+    public List<Integer> getLottoNumbers() {
+        return new ArrayList<>(this.lottoNumbers);
+    }
+
+    protected int getMatchedCount(LottoNumbers targetNumbers) {
         return (int) targetNumbers.getLottoNumbers()
                 .stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
+    }
+
+    protected boolean isContained(int targetNumber) {
+        return this.lottoNumbers.contains(targetNumber);
     }
 }

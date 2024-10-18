@@ -19,10 +19,7 @@ public class LottoNumbersResults {
 
         for (LottoCashPrize lottoCashPrize : LottoCashPrize.values()) {
             int cashPrize = lottoCashPrize.getPrize();
-            Integer sheetMatchCount = this.lottoNumbersResults.getOrDefault(
-                    lottoCashPrize,
-                    0
-            );
+            Integer sheetMatchCount = this.lottoNumbersResults.getOrDefault(lottoCashPrize, 0);
             totalCashPrizes += cashPrize * sheetMatchCount;
         }
 

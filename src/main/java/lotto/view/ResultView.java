@@ -4,6 +4,7 @@ import lotto.domain.LottoCashPrize;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumbersResults;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static lotto.domain.LottoCashPrize.getValuablePrizes;
@@ -19,19 +20,12 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printLottoResults(LottoNumbersResults lottoSheetResults) {
+    public static void printLottoResults(LottoNumbersResults lottoNumbersResults) {
         printLottoResultsHeader();
-
-        for (LottoCashPrize lottoCashPrize : getValuablePrizes()) {
-            int sheetMatchCount = lottoSheetResults.getValue()
-                    .getOrDefault(
-                            lottoCashPrize,
-                            0
-                    );
-
-            System.out.println(
-                    lottoCashPrize.getMatchedCount() + "개 일치 (" + lottoCashPrize.getPrize() + "원)- " + sheetMatchCount + "개");
-        }
+        getValuablePrizes().stream()
+                .sorted(Comparator.comparing(LottoCashPrize::getMatchedCount)
+                        .thenComparing(LottoCashPrize::hasBonus))
+                .forEach(prize -> printLottoResultsRow(prize, lottoNumbersResults));
     }
 
     private static void printLottoResultsHeader() {
@@ -43,5 +37,19 @@ public class ResultView {
     public static void printLottoProfits(int payment, LottoNumbersResults lottoSheetResults) {
         System.out.println(
                 "총 수익률은 " + Math.floor(lottoSheetResults.sumCashPrizes() / (double) payment * 100) / 100 + "입니다.");
+    }
+
+    public static void printLottoResultsRow(LottoCashPrize lottoCashPrize, LottoNumbersResults lottoNumbersResults) {
+        int count = lottoNumbersResults.getValue()
+                .getOrDefault(lottoCashPrize, 0);
+
+        if (lottoCashPrize.hasBonus()) {
+            System.out.println(
+                    lottoCashPrize.getMatchedCount() + "개 일치, 보너스볼 일치 (" + lottoCashPrize.getPrize() + "원)- " + count + "개");
+            return;
+        }
+
+        System.out.println(
+                lottoCashPrize.getMatchedCount() + "개 일치 (" + lottoCashPrize.getPrize() + "원)- " + count + "개");
     }
 }

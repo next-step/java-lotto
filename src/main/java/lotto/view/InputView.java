@@ -23,6 +23,12 @@ public class InputView {
         return convertToNumbers(scanner.nextLine());
     }
 
+    public static int inputLottoBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        return scanner.nextInt();
+    }
+
     private static List<Integer> convertToNumbers(String values) {
         return Arrays.stream(values.replace(" ", "")
                         .split(","))
