@@ -23,12 +23,7 @@ public class InputView {
 
     public static int inputPurchasePrice() {
         System.out.println(INPUT_PURCHASE_PRICE_MESSAGE);
-        try {
-            return inputNumberValue();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputPurchasePrice();
-        }
+        return inputNumberValue();
     }
 
     private static void validateNumber(final String inputValue) {
@@ -41,32 +36,17 @@ public class InputView {
 
     public static Set<Integer> inputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        try {
-            return convertToInt();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputWinningNumber();
-        }
+        return convertToInt();
     }
 
     public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
-        try {
-            return inputNumberValue();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputBonusNumber();
-        }
+        return inputNumberValue();
     }
 
     public static int inputManualCount() {
         System.out.println(INPUT_MANUAL_COUNT_MESSAGE);
-        try {
-            return inputNumberValue();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputManualCount();
-        }
+        return inputNumberValue();
     }
 
     private static int inputNumberValue() {
@@ -79,18 +59,9 @@ public class InputView {
         System.out.println(INPUT_MANUAL_NUMBERS_MESSAGE);
         List<Set<Integer>> manualNumbers = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {
-            manualNumbers.add(inputManualLotto());
+            manualNumbers.add(convertToInt());
         }
         return manualNumbers;
-    }
-
-    private static Set<Integer> inputManualLotto() {
-        try {
-            return convertToInt();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputManualLotto();
-        }
     }
 
     private static Set<Integer> convertToInt() {
