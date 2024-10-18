@@ -3,16 +3,23 @@ package lotto.utils;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public class LottoGenerator {
+public class LottoUtils {
 
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MIN_VALUE = 1;
     private static final int LOTTO_MAX_VALUE = 45;
+
+    private LottoUtils() {
+    }
+
+    public static List<Lotto> extractLottosFromStrings(String[] lottosStr) {
+        return Arrays.stream(lottosStr)
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+    }
 
     public static List<Lotto> generateLottos(int size) {
         List<Lotto> lottos = new ArrayList<>();
@@ -29,7 +36,8 @@ public class LottoGenerator {
         }
         Collections.shuffle(numbers);
         numbers = numbers.subList(0, LOTTO_SIZE);
-        Collections.sort(numbers, (Comparator.comparingInt(LottoNumber::getLottoNumber)));
+        numbers.sort((Comparator.comparingInt(LottoNumber::getLottoNumber)));
         return new Lotto(numbers);
     }
+
 }

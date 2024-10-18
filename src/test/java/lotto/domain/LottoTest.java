@@ -3,8 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -17,7 +15,7 @@ class LottoTest {
         assertThat(lotto).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
 
         Lotto lotto2 = new Lotto("6, 7, 8, 9, 10, 11");
-        assertThat(lotto2).isEqualTo(new Lotto(6, 7, 8, 9, 10, 11)) ;
+        assertThat(lotto2).isEqualTo(new Lotto(6, 7, 8, 9, 10, 11));
     }
 
     @Test
@@ -32,5 +30,12 @@ class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(1, 2, 3, 4, 5, 1);
         }).hasMessage("로또는 중복된 숫자를 허용하지 않습니다.");
+    }
+
+    @Test
+    void 로또와_당첨로또_일치숫자_빤환() {
+        Lotto userLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(1, 2, 5, 10, 22, 40);
+        assertThat(userLotto.countMatchingNumbers(winningLotto)).isEqualTo(3);
     }
 }
