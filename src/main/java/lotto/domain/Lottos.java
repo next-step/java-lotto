@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lottos {
-    private static final BigDecimal UNIT_AMOUNT = new BigDecimal(1000);
     private final List<Lotto> lottos ;
 
     public Lottos(List<LottoNumbers> lottoNumbersList) {
@@ -52,7 +51,7 @@ public class Lottos {
         return lottos.stream().map(lotto->lotto.getLottoNumbers()).collect(Collectors.toList());
     }
     public BigDecimal getTotalPaymentAmount() {
-        return UNIT_AMOUNT.multiply(BigDecimal.valueOf(lottos.size()));
+        return LottoUnitAmount.getBigDecimalVal().multiply(BigDecimal.valueOf(lottos.size()));
     }
     public int getSize() {
         return lottos.size();
