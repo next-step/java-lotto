@@ -4,9 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoMain {
     private final static String INPUT_MSG = "구매금액을 입력해 주세요";
     private final static String BUY_CNT_MSG = "개를 구매했습니다.";
@@ -32,7 +29,7 @@ public class LottoMain {
 
         WinningLotto winningLottoWithBonus = new WinningLotto(winningLotto, bonus);
 
-        OutputView.printWinningResult(lottos.getWinningResult(winningLotto));
-        OutputView.printRateOfReturnInfo(lottos.getRateOfReturn(winningLotto));
+        OutputView.printWinningResult(lottos.getWinningResult(winningLottoWithBonus));
+        OutputView.printRateOfReturnInfo(lottos.getRateOfReturn(winningLottoWithBonus));
     }
 }

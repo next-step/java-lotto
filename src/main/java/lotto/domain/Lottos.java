@@ -1,7 +1,7 @@
 package lotto.domain;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,24 +20,25 @@ public class Lottos {
 
     public BigDecimal getWinningAmount(WinningLotto winningLotto) {
 
-        return lottos.stream().map(lotto->lotto.getRankingAmount(winningLotto)).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return lottos.stream().map(lotto->lotto.getWinningAmount(winningLotto)).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public BigDecimal getRateOfReturn(WinningLotto winningLotto) {
         return getWinningAmount(winningLotto).divide(getTotalPaymentAmount(), 2, RoundingMode.DOWN);
     }
 
-    public Map<LottoRankingEnum, Integer> getWinningResult(Lotto winningLotto) {
-        Map<LottoRankingEnum, Integer> winningResult = new HashMap<>();
+    public Map<LottoRankEnum, Integer> getWinningResult(WinningLotto winningLotto) {
+        Map<LottoRankEnum, Integer> winningResult = new HashMap<>();
         for (Lotto lt : lottos) {
-            addResult(lt.getRanking(winningLotto), winningResult);
+            addResult(lt.getRank(winningLotto), winningResult);
         }
         return winningResult;
     }
 
-    private void addResult(LottoRankingEnum rankingEnum, Map<LottoRankingEnum, Integer> result) {
+    private void addResult(LottoRankEnum rankingEnum, Map<LottoRankEnum, Integer> result) {
 
-        if(LottoRankingEnum.LOSING_LOT.equals(rankingEnum)) {
+        if(LottoRankEnum.LOSING_LOT.equals(rankingEnum)) {
             return ;
         }
         int count = 1;
