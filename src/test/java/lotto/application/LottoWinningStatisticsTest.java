@@ -27,8 +27,8 @@ class LottoWinningStatisticsTest {
 
         assertThat(winningStatistics)
                 .extracting("values", as(InstanceOfAssertFactories.MAP))
-                .extractingByKeys(LottoRank.FIFTH, LottoRank.FIRST)
-                .containsExactly(1, 1);
+                .extractingByKeys(LottoRank.FIFTH, LottoRank.FIRST, LottoRank.THIRD, LottoRank.FOURTH)
+                .containsExactly(1, 1, 0, 0);
     }
 
     @DisplayName("당첨된 로또의 금액을 계산한다.")
