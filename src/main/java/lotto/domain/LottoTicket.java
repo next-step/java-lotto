@@ -15,10 +15,6 @@ public class LottoTicket {
 
     private final List<Integer> lottoNumbers;
 
-    public LottoTicket() {
-        this.lottoNumbers = generateLottoNumbers();
-    }
-
     public LottoTicket(List<Integer> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
@@ -32,14 +28,14 @@ public class LottoTicket {
         );
     }
 
-    private List<Integer> generateLottoNumbers() {
+    public static LottoTicket createRandom() {
         List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
                                          .boxed()
                                          .collect(Collectors.toList());
         Collections.shuffle(numbers);
         List<Integer> selectedNumbers = numbers.subList(0, LOTTO_SIZE);
         Collections.sort(selectedNumbers);
-        return selectedNumbers;
+        return new LottoTicket(selectedNumbers);
     }
 
     private void validateLottoNumbers(List<Integer> lottoNumbers) {
