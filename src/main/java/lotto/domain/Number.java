@@ -1,34 +1,34 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Number implements Comparable<Number> {
-    public static final String DELIMITER = ", ";
+    public static final int START_NUMBER = 1;
+    public static final int END_NUMBER = 45;
 
     private final int number;
 
     public Number(int number) {
-        if (number < 0 || number > 45) {
-            throw new IllegalArgumentException("Number must be between 0 and 45");
+        if (number < START_NUMBER || number > END_NUMBER) {
+            throw new IllegalArgumentException("Number must be between 1 and 45");
         }
         this.number = number;
-    }
-
-    public static List<Number> createWinningNumbers(final String winningNumber) {
-        List<Number> winningNumbers = new ArrayList<>();
-        String[] numbers = winningNumber.split(DELIMITER);
-        for (String number : numbers) {
-            winningNumbers.add(new Number(Integer.parseInt(number)));
-        }
-        return winningNumbers;
     }
 
     public int countMatch(final List<Number> numbers) {
         return (int) numbers.stream()
                 .filter(number -> Objects.equals(number, this))
                 .count();
+    }
+
+    public int sum(int sum, final List<Number> numbers) {
+        for (Number number : numbers) {
+            if (number.equals(this)) {
+                sum++;
+            }
+        }
+        return sum;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Number implements Comparable<Number> {
     }
 
     @Override
-    public int compareTo(Number other) {
+    public int compareTo(final Number other) {
         return this.number - other.number;
     }
 }

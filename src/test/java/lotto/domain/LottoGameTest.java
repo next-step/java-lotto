@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enumeration.Rank;
 import lotto.vo.Winning;
 import lotto.vo.WinningResult;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,9 +21,8 @@ public class LottoGameTest {
 
     @Test
     void 당첨_결과() {
-        String winningNumber = "1, 2, 3, 4, 5, 6";
-        WinningResult result = lottoGame.match(List.of(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(11, 12, 13, 14, 15, 16)), winningNumber);
-        assertThat(result).isEqualTo(new WinningResult(List.of(new Winning(3, 0), new Winning(4, 0), new Winning(5, 0), new Winning(6, 1)), new BigDecimal("1000000.00")));
+        WinningResult result = lottoGame.match(List.of(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(11, 12, 13, 14, 15, 16), new Lotto(1, 2, 3, 4, 5, 7)), new InputNumber("1, 2, 3, 4, 5, 6", "7"));
+        assertThat(result).isEqualTo(new WinningResult(List.of(new Winning(Rank.FIRST, 1), new Winning(Rank.SECOND, 1), new Winning(Rank.MISS, 1)), new BigDecimal("676666.66")));
     }
 
     @Test
