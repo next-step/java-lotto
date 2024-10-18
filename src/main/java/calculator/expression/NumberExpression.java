@@ -19,6 +19,10 @@ public class NumberExpression implements Expression {
         return this;
     }
 
+    public int value() {
+        return this.number;
+    }
+
     NumberExpression sum(NumberExpression expression) {
         return new NumberExpression(this.number + expression.number);
     }

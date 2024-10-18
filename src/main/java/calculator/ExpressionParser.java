@@ -20,12 +20,12 @@ public class ExpressionParser {
     }
 
     private static Expression createExpression(List<String> tokenize) {
-        if (tokenize.size() >= 3) {
+        if (tokenize.size() < 3) {
             throw new IllegalArgumentException("잘못된 문법 입니다.");
         }
 
         Expression before = new NumberExpression(tokenize.get(0));
-        for (int i = 1; i < tokenize.size() - 1; i++) {
+        for (int i = 1; i < tokenize.size() - 1; i+=2) {
             NumberExpression numberExpression = new NumberExpression(tokenize.get(i + 1));
             before = Expression.createOperation(tokenize.get(i), before, numberExpression);
         }
