@@ -1,16 +1,16 @@
 package lotto.domain.ticket;
 
-import lotto.application.LottoGeneratorService;
+import lotto.application.LottoGenerator;
 
 public class LottoTicketGenerator {
-    private final LottoGeneratorService lottoGeneratorService;
+    private final LottoGenerator lottoGenerator;
 
-    public LottoTicketGenerator(LottoGeneratorService lottoGeneratorService) {
-        this.lottoGeneratorService = lottoGeneratorService;
+    public LottoTicketGenerator(LottoGenerator lottoGenerator) {
+        this.lottoGenerator = lottoGenerator;
     }
 
     public LottoTicket getTicket() {
-        return lottoGeneratorService.generateLottoTicket();
+        return lottoGenerator.generateLottoTicket();
     }
 
 }

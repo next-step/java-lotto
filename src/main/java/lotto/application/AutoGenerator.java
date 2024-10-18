@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoGenerator implements LottoGeneratorService {
+public class AutoGenerator implements LottoGenerator {
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
     @Override
