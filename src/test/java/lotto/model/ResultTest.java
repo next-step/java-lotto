@@ -20,7 +20,7 @@ public class ResultTest {
 
     @BeforeEach
     void setUp() {
-        this.buyer = Buyer.of(
+        this.buyer = new Buyer(
                 3,
                 new BuyerFixtureNumberCreator(Arrays.asList(
                         Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(43)),

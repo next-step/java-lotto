@@ -14,7 +14,7 @@ public class LottoController {
         int buyAmount = InputView.inputBuyAmount();
         int buyCount = InputView.calculateBuyCount(buyAmount);
 
-        Buyer buyer = Buyer.of(buyCount, new LottoNumbersCreator());
+        Buyer buyer = new Buyer(buyCount, new LottoNumbersCreator());
 
         ResultView.printBuyerLottosInfo(buyer);
 
