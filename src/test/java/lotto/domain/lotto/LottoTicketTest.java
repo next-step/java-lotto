@@ -3,9 +3,6 @@ package lotto.domain.lotto;
 import lotto.domain.lotto.ticket.LottoNumber;
 import lotto.domain.lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

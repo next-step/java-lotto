@@ -3,7 +3,6 @@ package lotto.domain.purchase;
 public class Money {
     private static final int LOTTO_PRICE = 1000;
     private static final String LOTTO_ERROR_MESSAGE = "돈이 부족합니다.";
-
     private final int money;
 
     public Money(int money) {
