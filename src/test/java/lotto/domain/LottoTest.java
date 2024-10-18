@@ -5,9 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
@@ -36,13 +33,15 @@ public class LottoTest {
     @Test
     void gerRanking_firstPrize() {
         Lotto lotto = new Lotto(new LottoNumbers(new int[]{1,2,3,4,5,6}));
-        assertThat(lotto.getRanking(lotto)).isEqualTo(LottoRankingEnum.FIRST_PRIZE);
+        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(10));
+        assertThat(lotto.getRank(winningLotto)).isEqualTo(LottoRankEnum.FIRST);
     }
     @Test
     void gerRanking_losLot() {
         Lotto winningLotto = new Lotto(new LottoNumbers(new int[]{1, 2, 3, 4, 5, 6}));
+        WinningLotto winningLottoWithBonus = new WinningLotto(winningLotto, new LottoNumber(9));
         Lotto newLotto = new Lotto(new LottoNumbers(new int[]{7, 8, 9, 10, 11, 12}));
-        assertThat(newLotto.getRanking(winningLotto)).isEqualTo(LottoRankingEnum.LOSING_LOT);
+        assertThat(newLotto.getRank(winningLottoWithBonus)).isEqualTo(LottoRankEnum.LOSING_LOT);
     }
 
     private Lotto getLotto(int[] numbers) {
