@@ -20,7 +20,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(int... numbers) {
+    public Lotto(final int... numbers) {
         this(createLottoNumbers(numbers));
     }
 
