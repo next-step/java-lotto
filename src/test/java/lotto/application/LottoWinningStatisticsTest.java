@@ -1,6 +1,7 @@
 package lotto.application;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoRank;
 import org.assertj.core.api.InstanceOfAssertFactories;
@@ -24,7 +25,7 @@ class LottoWinningStatisticsTest {
         List<Lotto> usersLottoTicket = List.of(twoMatchingCount, threeMatchingCount, allMatchingCount);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        LottoWinningStatistics winningStatistics = new LottoWinningStatistics(usersLottoTicket, winningLotto);
+        LottoWinningStatistics winningStatistics = new LottoWinningStatistics(usersLottoTicket, winningLotto, new LottoNumber(13));
 
         assertThat(winningStatistics)
                 .extracting("values", as(InstanceOfAssertFactories.MAP))

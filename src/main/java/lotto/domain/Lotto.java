@@ -41,4 +41,8 @@ public class Lotto {
     public List<LottoNumber> values() {
         return lottoNumbers;
     }
+
+    public Boolean checkContainsLottoNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
 }

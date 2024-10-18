@@ -1,6 +1,7 @@
 package lotto.application;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoRank;
 
@@ -9,11 +10,14 @@ import java.util.*;
 public class LottoWinningStatistics {
     private final Map<LottoRank, Integer> values;
 
-    public LottoWinningStatistics(List<Lotto> userLottos, Lotto winningLotto) {
+    public LottoWinningStatistics(List<Lotto> userLottos, Lotto winningLotto, LottoNumber bonusBall) {
         Map<LottoRank, Integer> result = initStatistics();
 
         for (Lotto userLotto : userLottos) {
-            putRankedLottoQuantity(result, userLotto, winningLotto);
+            LottoRank key = LottoRank.from(winningLotto.countMatchingNumbers(userLotto),
+                    userLotto.checkContainsLottoNumber(bonusBall)
+            );
+            putRankedLottoQuantity(key, result);
         }
         this.values = result;
     }
@@ -29,10 +33,7 @@ public class LottoWinningStatistics {
         this.values = values;
     }
 
-    private void putRankedLottoQuantity(Map<LottoRank, Integer> result,
-                                        Lotto userLotto,
-                                        Lotto winningLotto) {
-        LottoRank key = LottoRank.from(winningLotto.countMatchingNumbers(userLotto));
+    private void putRankedLottoQuantity(LottoRank key, Map<LottoRank, Integer> result) {
         result.put(key, result.get(key) + 1);
     }
 

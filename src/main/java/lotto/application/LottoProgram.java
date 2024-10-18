@@ -2,6 +2,7 @@ package lotto.application;
 
 import lotto.application.strategy.LottoNumberGenerator;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.List;
 
@@ -16,8 +17,9 @@ public class LottoProgram {
         return lottoNumberGenerator.generate(lottoQuantity);
     }
 
-    public LottoWinningStatistics createWinningStatistics(List<Lotto> userLotto, String[] winningLottoNumbersInput) {
-        return new LottoWinningStatistics(userLotto, new Lotto(winningLottoNumbersInput));
+    public LottoWinningStatistics createWinningStatistics(List<Lotto> userLotto,
+                                                          String[] winningLottoNumbersInput, LottoNumber bonusBall) {
+        return new LottoWinningStatistics(userLotto, new Lotto(winningLottoNumbersInput), bonusBall);
     }
 
 }
