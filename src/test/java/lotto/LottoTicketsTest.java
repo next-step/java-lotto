@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Winning;
@@ -26,24 +25,12 @@ class LottoTicketsTest {
     @DisplayName("로또 티켓들 Winning 확인")
     void calculateWinningResults() {
         List<LottoTicket> tickets = new ArrayList<>();
-        tickets.add(new LottoTicket(List.of(
-            new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-        )));
-        tickets.add(new LottoTicket(List.of(
-            new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-            new LottoNumber(4), new LottoNumber(7), new LottoNumber(8)
-        )));
-        tickets.add(new LottoTicket(List.of(
-            new LottoNumber(9), new LottoNumber(10), new LottoNumber(11),
-            new LottoNumber(12), new LottoNumber(13), new LottoNumber(14)
-        )));
+        tickets.add(new LottoTicket(1, 2, 3, 4, 5, 6));
+        tickets.add(new LottoTicket(1, 2, 3, 4, 7, 8));
+        tickets.add(new LottoTicket(9, 10, 11, 12, 13, 14));
         LottoTickets lottoTickets = new LottoTickets(tickets);
 
-        LottoTicket winningNumbers = new LottoTicket(List.of(
-            new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-        ));
+        LottoTicket winningNumbers = new LottoTicket(1, 2, 3, 4, 5, 6);
 
         assertThat(lottoTickets.calculateWinningResults(winningNumbers)).containsExactly(Winning.SIX_MATCH, Winning.FOUR_MATCH, Winning.NONE);
     }

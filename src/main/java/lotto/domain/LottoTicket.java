@@ -13,6 +13,13 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public LottoTicket(Integer... lottoNumbers) {
+        this(Arrays.stream(lottoNumbers)
+                   .map(LottoNumber::new)
+                   .collect(Collectors.toList())
+        );
+    }
+
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
