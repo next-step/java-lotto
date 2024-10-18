@@ -4,18 +4,21 @@ import lotto.model.dto.LottoNumber;
 import lotto.util.BonusCreator;
 import lotto.util.NumbersCreator;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BuyerFixtureNumberCreator implements NumbersCreator {
     private final List<List<LottoNumber>> numbersCreators;
     private int current;
 
-    public static BuyerFixtureNumberCreator of(List<List<LottoNumber>> numbersCreators) {
-        return new BuyerFixtureNumberCreator(numbersCreators);
-    }
-
-    public BuyerFixtureNumberCreator(List<List<LottoNumber>> numbersCreators) {
-        this.numbersCreators = numbersCreators;
+    public BuyerFixtureNumberCreator(List<int[]> numbersCreators) {
+        this.numbersCreators = numbersCreators.stream()
+                .map(ints -> Arrays.stream(ints)
+                        .mapToObj(LottoNumber::new)
+                        .collect(Collectors.toList())
+                )
+                .collect(Collectors.toList());
         this.current = 0;
     }
 

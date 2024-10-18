@@ -13,7 +13,7 @@ import static lotto.model.dto.LottoNumber.of;
 public class WinningTest {
     @Test
     void 생성() {
-        Lotto winningLotto = new Lotto(() -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6)));
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = of(7);
 
         Winning winning = new Winning(winningLotto, bonusNumber);
@@ -26,7 +26,7 @@ public class WinningTest {
 
     @Test
     void 당첨번호목록_보너스번호_중복() {
-        Lotto winningLotto = new Lotto(() -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6)));
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = of(6);
         Assertions.assertThatThrownBy(() -> {
                     Winning duplicatedWinning = new Winning(winningLotto, bonusNumber);

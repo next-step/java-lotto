@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static lotto.model.dto.LottoNumber.of;
@@ -20,17 +19,13 @@ public class ResultTest {
 
     @BeforeEach
     void setUp() {
-        this.buyer = new Buyer(
-                3,
-                new BuyerFixtureNumberCreator(Arrays.asList(
-                        Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(43)),
-                        Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(44)),
-                        Arrays.asList(of(1), of(8), of(11), of(31), of(41), of(42))
-                )));
-        Lotto winningLotto = new Lotto(
-                () -> Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(43))
-        );
+        int[] lotto1 = new int[]{8, 21, 23, 41, 42, 43};
+        int[] lotto2 = new int[]{8, 21, 23, 41, 42, 44};
+        int[] lotto3 = new int[]{1, 8, 11, 31, 41, 42};
+        Lotto winningLotto = new Lotto(lotto1);
         LottoNumber bonusNumber = of(44);
+
+        this.buyer = new Buyer(3, new BuyerFixtureNumberCreator(Arrays.asList(lotto1, lotto2, lotto3)));
         this.winning = new Winning(winningLotto, bonusNumber);
     }
 

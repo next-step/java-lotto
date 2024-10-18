@@ -5,6 +5,7 @@ import lotto.model.enums.Ranking;
 import lotto.util.NumbersCreator;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final String LOTTO_NUMBERS_NOT_ALLOWED_DUPLICATED = "로또번호목록은 중복될수 없습니다.";
@@ -15,17 +16,26 @@ public class Lotto {
 
     private Lotto(final List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
+        lottoNumbers.sort(LottoNumber::compareTo);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(final NumbersCreator numbersCreator) {
-        this(createLottoNumber(numbersCreator));
+    public Lotto(int... numbers) {
+        this(createLottoNumbers(numbers));
     }
 
-    private static List<LottoNumber> createLottoNumber(NumbersCreator numbersCreator) {
-        List<LottoNumber> lottoNumbers = numbersCreator.create();
-        lottoNumbers.sort(LottoNumber::compareTo);
-        return lottoNumbers;
+    public Lotto(final NumbersCreator numbersCreator) {
+        this(createLottoNumbers(numbersCreator));
+    }
+
+    private static List<LottoNumber> createLottoNumbers(int[] numbers) {
+        return Arrays.stream(numbers)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    private static List<LottoNumber> createLottoNumbers(NumbersCreator numbersCreator) {
+        return new ArrayList<>(numbersCreator.create());
     }
 
     private static void validateLottoNumbers(List<LottoNumber> result) {
