@@ -8,19 +8,19 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class LottoRankingSystemTest {
+class LottoRankTest {
 
     @DisplayName("매칭 카운트를 전달하면 LottoRankingSystem 객체를 전달한다.")
     @Test
     void create() {
-        assertThat(LottoRankingSystem.from(6)).isEqualTo(LottoRankingSystem.FIRST);
+        assertThat(LottoRank.from(6)).isEqualTo(LottoRank.FIRST);
     }
 
     @DisplayName("랭킹 시스템 등수에 포함되지 않는 매칭 카운트를 전달하면 IllegalArgumentException 를 발생시킨다.")
     @Test
     void throw_IllegalArgumentException_when_matchingCount_is_not_() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRankingSystem.from(2))
+                .isThrownBy(() -> LottoRank.from(2))
                 .withMessage("인자 로또 번호 매칭 갯수 '2'에 적합한 등수가 없습니다.");
     }
 
@@ -30,7 +30,7 @@ class LottoRankingSystemTest {
         int notRankEligible = 2;
         int rankEligible = 6;
 
-        assertTrue(LottoRankingSystem.isNotRankEligible(notRankEligible));
-        assertFalse(LottoRankingSystem.isNotRankEligible(rankEligible));
+        assertTrue(LottoRank.isNotRankEligible(notRankEligible));
+        assertFalse(LottoRank.isNotRankEligible(rankEligible));
     }
 }

@@ -1,7 +1,7 @@
 package lotto.application;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoRankingSystem;
+import lotto.domain.LottoRank;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,16 +27,16 @@ class LottoWinningStatisticsTest {
 
         assertThat(winningStatistics)
                 .extracting("values", as(InstanceOfAssertFactories.MAP))
-                .extractingByKeys(LottoRankingSystem.FIFTH, LottoRankingSystem.FIRST)
+                .extractingByKeys(LottoRank.FIFTH, LottoRank.FIRST)
                 .containsExactly(1, 1);
     }
 
     @DisplayName("당첨된 로또의 금액을 계산한다.")
     @Test
     void calculate_winning_amount() {
-        Map<LottoRankingSystem, Integer> statistics = new HashMap<>();
-        statistics.put(LottoRankingSystem.FIRST, 1);
-        statistics.put(LottoRankingSystem.FIFTH, 1);
+        Map<LottoRank, Integer> statistics = new HashMap<>();
+        statistics.put(LottoRank.FIRST, 1);
+        statistics.put(LottoRank.FIFTH, 1);
         LottoWinningStatistics winningStatistics = new LottoWinningStatistics(statistics);
 
         int result = winningStatistics.calculateWinningAmount();
@@ -47,11 +47,11 @@ class LottoWinningStatisticsTest {
     @DisplayName("인자로 전달받은 등수에 해당하는 로또의 갯수를 반환한다.")
     @Test
     void return_lotto_quantity_by_ranking() {
-        Map<LottoRankingSystem, Integer> statistics = new HashMap<>();
-        statistics.put(LottoRankingSystem.FIRST, 2);
+        Map<LottoRank, Integer> statistics = new HashMap<>();
+        statistics.put(LottoRank.FIRST, 2);
         LottoWinningStatistics winningStatistics = new LottoWinningStatistics(statistics);
 
-        int result = winningStatistics.getLottoQuantityOfRanking(LottoRankingSystem.FIRST);
+        int result = winningStatistics.getLottoQuantityOfRanking(LottoRank.FIRST);
 
         assertThat(result).isEqualTo(2);
     }

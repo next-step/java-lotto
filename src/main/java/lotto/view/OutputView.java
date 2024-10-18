@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.application.LottoWinningStatistics;
 import lotto.domain.Lotto;
-import lotto.domain.LottoRankingSystem;
+import lotto.domain.LottoRank;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class OutputView {
     private static void printWinningCount(LottoWinningStatistics winningStatistics) {
         StringBuilder stringBuilder = new StringBuilder("당첨 통계").append(NEW_LINE).append("---------").append(NEW_LINE);
 
-        for (LottoRankingSystem ranking : LottoRankingSystem.values()) {
+        for (LottoRank ranking : LottoRank.values()) {
             stringBuilder
                     .append(String.format("%d개 일치 (%d원)- %d개",
                             ranking.getMatchingCount(), ranking.getDistributionRatioPrice(), winningStatistics.getLottoQuantityOfRanking(ranking)))

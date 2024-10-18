@@ -1,15 +1,15 @@
 package lotto.application;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoRankingSystem;
+import lotto.domain.LottoRank;
 
 import java.util.*;
 
 public class LottoWinningStatistics {
-    private final Map<LottoRankingSystem, Integer> values;
+    private final Map<LottoRank, Integer> values;
 
     public LottoWinningStatistics(List<Lotto> userLottos, Lotto winningLotto) {
-        Map<LottoRankingSystem, Integer> result = initStatistics();
+        Map<LottoRank, Integer> result = initStatistics();
 
         for (Lotto userLotto : userLottos) {
             putRankedLottoQuantity(result, userLotto, winningLotto);
@@ -17,41 +17,41 @@ public class LottoWinningStatistics {
         this.values = result;
     }
 
-    private Map<LottoRankingSystem, Integer> initStatistics() {
-        Map<LottoRankingSystem, Integer> statistics = new EnumMap<>(LottoRankingSystem.class);
-        Arrays.stream(LottoRankingSystem.values())
+    private Map<LottoRank, Integer> initStatistics() {
+        Map<LottoRank, Integer> statistics = new EnumMap<>(LottoRank.class);
+        Arrays.stream(LottoRank.values())
                 .forEach(value -> statistics.put(value, 0));
         return statistics;
     }
 
-    public LottoWinningStatistics(Map<LottoRankingSystem, Integer> values) {
+    public LottoWinningStatistics(Map<LottoRank, Integer> values) {
         this.values = values;
     }
 
-    private void putRankedLottoQuantity(Map<LottoRankingSystem, Integer> result,
+    private void putRankedLottoQuantity(Map<LottoRank, Integer> result,
                                         Lotto userLotto,
                                         Lotto winningLotto) {
         int matchingCount = winningLotto.countMatchingNumbers(userLotto);
         if (checkNonRanked(matchingCount)) {
             return;
         }
-        LottoRankingSystem key = LottoRankingSystem.from(matchingCount);
+        LottoRank key = LottoRank.from(matchingCount);
         result.put(key, result.get(key) + 1);
     }
 
     private static boolean checkNonRanked(int matchingCount) {
-        return LottoRankingSystem.isNotRankEligible(matchingCount);
+        return LottoRank.isNotRankEligible(matchingCount);
     }
 
     public int calculateWinningAmount() {
         int winningAmount = 0;
-        for (Map.Entry<LottoRankingSystem, Integer> result : this.values.entrySet()) {
+        for (Map.Entry<LottoRank, Integer> result : this.values.entrySet()) {
             winningAmount += result.getKey().getDistributionRatioPrice() * result.getValue();
         }
         return winningAmount;
     }
 
-    public Integer getLottoQuantityOfRanking(LottoRankingSystem ranking) {
+    public Integer getLottoQuantityOfRanking(LottoRank ranking) {
         return this.values.get(ranking);
     }
 

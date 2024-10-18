@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum LottoRankingSystem {
+public enum LottoRank {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
@@ -11,13 +11,13 @@ public enum LottoRankingSystem {
     private final int matchingCount;
     private final int distributionRatioPrice;
 
-    LottoRankingSystem(int matchingCount, int distributionRatioPrice) {
+    LottoRank(int matchingCount, int distributionRatioPrice) {
         this.matchingCount = matchingCount;
         this.distributionRatioPrice = distributionRatioPrice;
     }
 
-    public static LottoRankingSystem from(int matchingCount) {
-        return Arrays.stream(LottoRankingSystem.values())
+    public static LottoRank from(int matchingCount) {
+        return Arrays.stream(LottoRank.values())
                 .filter(value -> value.getMatchingCount() == matchingCount)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("인자 로또 번호 매칭 갯수 '%s'에 적합한 등수가 없습니다.", matchingCount)));
