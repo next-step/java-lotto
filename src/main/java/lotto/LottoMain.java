@@ -13,7 +13,6 @@ public class LottoMain {
         lottoQuantity.setManualQuantity(inputManualQuantity());
 
         LottoGame lottoGame = createUserLottos(lottoQuantity);
-
         ResultView.printPurchaseQuantity(lottoQuantity.getManualQuantity(), lottoQuantity.getAutoQuantity());
         printUserLottos(lottoGame);
 

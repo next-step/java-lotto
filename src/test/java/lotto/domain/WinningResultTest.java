@@ -15,8 +15,8 @@ class WinningResultTest {
     @Test
     void create() {
         List<LottoRank> staticsList = Arrays.asList(MISS, MISS, THIRD);
-        WinningResult result = new WinningResult(staticsList);
-        assertThat(new WinningResult(MISS, MISS, THIRD, THIRD)).isEqualTo(result);
+        WinningResult result = WinningResult.fromList(staticsList);
+        assertThat(WinningResult.fromRanks(MISS, MISS, THIRD, THIRD)).isEqualTo(result);
     }
 
     @Test
@@ -24,13 +24,13 @@ class WinningResultTest {
         WinningResult result = new WinningResult();
         result.incrementMatchCount(FIFTH);
         result.incrementMatchCount(THIRD);
-        assertThat(result).isEqualTo(new WinningResult(FIFTH, THIRD));
+        assertThat(result).isEqualTo(WinningResult.fromRanks(FIFTH, THIRD));
     }
 
     @Test
     @DisplayName("3등 1개 (5_000원) / 구입금액 = 1_000_000")
     void 수익률_계산() {
-        WinningResult result = new WinningResult(FIFTH);
+        WinningResult result = WinningResult.fromRanks(FIFTH);
         assertThat(result.calculateProfitRate(1_000_000)).isCloseTo(0.005, within(0.001));
     }
 }

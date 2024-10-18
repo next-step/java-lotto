@@ -14,15 +14,16 @@ public class WinningResult {
         this(new HashMap<>());
     }
 
-    public WinningResult(List<LottoRank> staticsList) {
-        this();
-        staticsList.forEach(this::incrementMatchCount);
+    public static WinningResult fromList(List<LottoRank> staticsList) {
+        WinningResult result = new WinningResult();
+        staticsList.forEach(result::incrementMatchCount);
+        return result;
     }
 
-    public WinningResult(LottoRank... ranks) {
-        this();
-        Arrays.stream(ranks)
-                .forEach(this::incrementMatchCount);
+    public static WinningResult fromRanks(LottoRank... ranks) {
+        WinningResult result = new WinningResult();
+        Arrays.stream(ranks).forEach(result::incrementMatchCount);
+        return result;
     }
 
     public Map<LottoRank, Integer> getStaticsList() {
