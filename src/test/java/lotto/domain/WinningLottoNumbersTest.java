@@ -29,4 +29,28 @@ class WinningLottoNumbersTest {
         assertThat(results.get(LottoCashPrize.valueOf("FIFTH"))).isEqualTo(1);
         assertThat(results.get(LottoCashPrize.valueOf("NO_PRIZE"))).isEqualTo(1);
     }
+
+    @Test
+    void getResult_2등을_제외한_나머지_등수는_보너스_번호_일치하더라도_같은_결과를_반환한다() {
+        int bounsNumber = 7;
+
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(List.of(1, 2, 3, 4, 5, 6), bounsNumber);
+        LottoNumbers firstNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers secondNumbers = new LottoNumbers(1, 2, 3, 4, 5, bounsNumber);
+        LottoNumbers thirdNumbers = new LottoNumbers(1, 2, 3, 4, 5, 8);
+        LottoNumbers fourthNumbers = new LottoNumbers(1, 2, 3, 4, 8, bounsNumber);
+        LottoNumbers fifthNumbers = new LottoNumbers(1, 2, 3, 8, 9, bounsNumber);
+        LottoNumbers noPrizeNumbers = new LottoNumbers(1, 2, 8, 9, 10, bounsNumber);
+
+        Map<LottoCashPrize, Integer> results = winningLottoNumbers.getResult(
+                        List.of(firstNumbers, secondNumbers, thirdNumbers, fourthNumbers, fifthNumbers, noPrizeNumbers))
+                .getValue();
+
+        assertThat(results.get(LottoCashPrize.valueOf("FIRST"))).isEqualTo(1);
+        assertThat(results.get(LottoCashPrize.valueOf("SECOND"))).isEqualTo(1);
+        assertThat(results.get(LottoCashPrize.valueOf("THIRD"))).isEqualTo(1);
+        assertThat(results.get(LottoCashPrize.valueOf("FOURTH"))).isEqualTo(1);
+        assertThat(results.get(LottoCashPrize.valueOf("FIFTH"))).isEqualTo(1);
+        assertThat(results.get(LottoCashPrize.valueOf("NO_PRIZE"))).isEqualTo(1);
+    }
 }
