@@ -2,6 +2,7 @@ package lotto.model;
 
 import lotto.model.dto.LottoNumber;
 import lotto.model.enums.Ranking;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -30,11 +31,12 @@ public class LottoTest {
 
     @Test
     void 로또는_로또번호순서와_상관없이_정렬된_값과_같다() {
-        List<LottoNumber> actual = new Lotto(
-                        () -> Arrays.asList(of(39), of(17), of(6), of(9), of(28), of(45))
-                )
-                .numbers();
-        List<LottoNumber> expected = Arrays.asList(of(6), of(9), of(17), of(28), of(39), of(45));
+        Lotto actual = new Lotto(
+                () -> Arrays.asList(of(39), of(17), of(6), of(9), of(28), of(45))
+        );
+        Lotto expected = new Lotto(
+                () -> Arrays.asList(of(6), of(9), of(17), of(28), of(39), of(45))
+        );
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -57,6 +59,13 @@ public class LottoTest {
             );
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LOTTO_NUMBERS_SIZE_ALLOWED_ONLY_6);
+    }
+
+    @Test
+    void 로또번호목록은_로또번호_존재여부를_리턴한다() {
+        Lotto lotto = new Lotto(() -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6)));
+        boolean actual = lotto.contains(of(1));
+        Assertions.assertThat(actual).isTrue();
     }
 
     @ParameterizedTest(name = "로또_등수_없음({0})")

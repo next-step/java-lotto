@@ -13,7 +13,7 @@ public class Winning {
     }
 
     public static Winning of(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.numbers().contains(bonusNumber)) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER);
         }
         return new Winning(winningLotto, bonusNumber);

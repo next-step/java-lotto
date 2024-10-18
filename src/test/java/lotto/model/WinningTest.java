@@ -34,5 +34,7 @@ public class WinningTest {
                 .hasMessage(INVALID_BONUS_NUMBER);
     }
 
-
+    @Test
+    void 당첨번호목록_() {
+    }
 }

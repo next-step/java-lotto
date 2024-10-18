@@ -4,10 +4,7 @@ import lotto.model.dto.LottoNumber;
 import lotto.model.enums.Ranking;
 import lotto.util.NumbersCreator;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
     public static final String LOTTO_NUMBERS_NOT_ALLOWED_DUPLICATED = "로또번호목록은 중복될수 없습니다.";
@@ -46,15 +43,14 @@ public class Lotto {
         }
     }
 
-    // TODO: numbers -> contains 로 수정
-    public List<LottoNumber> numbers() {
-        return this.lottoNumbers;
-    }
-
     public Ranking compare(Winning winning) {
         Lotto winningLotto = winning.winningLotto();
         LottoNumber bonusNumber = winning.bonusNumber();
         return Ranking.result(matchedCount(winningLotto), isMatchedBonus(bonusNumber));
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private boolean isMatchedBonus(LottoNumber bonusNumber) {
@@ -70,5 +66,18 @@ public class Lotto {
     @Override
     public String toString() {
         return lottoNumbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
