@@ -1,8 +1,10 @@
-package calculator;
+package calculator.tokenizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import calculator.tokenizer.ExpressionTokenizer;
+import calculator.tokenizer.SpaceExpressionTokenizer;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
