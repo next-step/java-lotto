@@ -71,7 +71,6 @@ public class ResultView {
         if (profit < BENEFIT_STANDARD) {
             System.out.printf(LOTTO_PROFIT_LOSS, profit);
         }
-
         System.out.printf(LOTTO_PROFIT_NOTHING, profit);
     }
 }
