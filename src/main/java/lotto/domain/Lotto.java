@@ -18,7 +18,6 @@ public class Lotto {
     }
 
     private void validNumberOfLottoNumber(List<LottoNumber> lotto) {
-        Set<LottoNumber> duplicate = new HashSet<>(lotto);
         if (lotto.size() != SIX) {
             throw new NumberOfLottoNumberException(String.valueOf(lotto.size()));
         }
@@ -29,7 +28,7 @@ public class Lotto {
                 .filter(i -> Collections.frequency(lotto,i) > 1)
                 .collect(Collectors.toSet());
 
-        if (duplicateLottoNumber.size()>=1) {
+        if (!duplicateLottoNumber.isEmpty()) {
             throw new LottoDuplicateNumberException(duplicateLottoNumber);
         }
     }

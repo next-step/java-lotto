@@ -12,7 +12,8 @@
 - [x] 로또 생성(LottoGenerator)
   - [x] shuffle()를 통한 생성(LottoShuffleGenerator)
 - [x] 당첨 확인(Lottos)
-  - [x] 당첨 조건
+  - [x] 당첨 조건(Lotto)
+    - [ ] 보너스 번호에 의한 2, 3등 구분
   - [x] 당첨 통계
   - [x] 수익률 계산
 - [x] 로또 구매 개수 계산(Lottos)
