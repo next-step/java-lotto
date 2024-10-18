@@ -7,7 +7,11 @@ import java.util.List;
 
 public class LottoGame {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
+
+    public LottoGame(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
 
     public LottoGame(int lottoCnt) {
         lottos = createLottos(lottoCnt);
@@ -19,6 +23,10 @@ public class LottoGame {
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public void addManualLottos(List<Lotto> manualLottos) {
+        lottos.addAll(manualLottos);
     }
 
     public WinningResult play(WinningLotto winning) {
