@@ -3,6 +3,7 @@ package lotto;
 import lotto.application.strategy.RandomGenerator;
 import lotto.domain.Lotto;
 import lotto.application.LottoProgram;
+import lotto.domain.LottoPrice;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -10,8 +11,7 @@ import java.util.List;
 
 public class LottoInterface {
     public void start() {
-        int lottoPurchaseAmount = InputView.getLottoTicketPurchaseAmountFromUser();
-        Lotto.validatePurchaseAmount(lottoPurchaseAmount);
+        LottoPrice lottoPurchaseAmount = new LottoPrice(InputView.getLottoTicketPurchaseAmountFromUser());
 
         int lottoTicketQuantityPurchased = OutputView.printLottoTicketQuantityPurchased(lottoPurchaseAmount);
 

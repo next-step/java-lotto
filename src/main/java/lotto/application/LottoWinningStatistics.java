@@ -1,6 +1,7 @@
 package lotto.application;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrice;
 import lotto.domain.LottoRank;
 
 import java.util.*;
@@ -43,8 +44,8 @@ public class LottoWinningStatistics {
         return LottoRank.isNotRankEligible(matchingCount);
     }
 
-    public float calculateReturnRate(int lottoPurchaseAmount) {
-        return Math.round((this.calculateWinningAmount() / (float) lottoPurchaseAmount) * 100) / 100.0f;
+    public float calculateReturnRate(LottoPrice lottoPurchaseAmount) {
+        return Math.round((this.calculateWinningAmount() / lottoPurchaseAmount.floatValue()) * 100) / 100.0f;
     }
 
     private int calculateWinningAmount() {

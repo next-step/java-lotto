@@ -1,6 +1,7 @@
 package lotto.application;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrice;
 import lotto.domain.LottoRank;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
@@ -49,7 +50,7 @@ class LottoWinningStatisticsTest {
         Map<LottoRank, Integer> statistics = new HashMap<>();
         statistics.put(LottoRank.FIFTH, 2);
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(statistics);
-        int lottoPurchaseAmount = 12000;
+        LottoPrice lottoPurchaseAmount = new LottoPrice(12000);
 
         float actual = lottoWinningStatistics.calculateReturnRate(lottoPurchaseAmount);
 

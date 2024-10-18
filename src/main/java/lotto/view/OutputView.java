@@ -2,16 +2,16 @@ package lotto.view;
 
 import lotto.application.LottoWinningStatistics;
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrice;
 import lotto.domain.LottoRank;
 
 import java.util.List;
 
 public class OutputView {
-    private static final int LOTTO_PRICE_PER_ONE = 1000;
     private static final String NEW_LINE = System.lineSeparator();
 
-    public static int printLottoTicketQuantityPurchased(int lottoPurchaseAmount) {
-        int lottoCount = lottoPurchaseAmount / LOTTO_PRICE_PER_ONE;
+    public static int printLottoTicketQuantityPurchased(LottoPrice lottoPurchaseAmount) {
+        int lottoCount = lottoPurchaseAmount.countLottoPurchased();
         System.out.println(lottoCount + "개를 구매했습니다.");
         return lottoCount;
     }
@@ -22,12 +22,12 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    public static void printWinningStatistics(int lottoTicketPurchaseAmount, LottoWinningStatistics winningStatistics) {
+    public static void printWinningStatistics(LottoPrice lottoTicketPurchaseAmount, LottoWinningStatistics winningStatistics) {
         printWinningCount(winningStatistics);
         printReturnRate(lottoTicketPurchaseAmount, winningStatistics);
     }
 
-    private static void printReturnRate(int lottoPurchaseAmount, LottoWinningStatistics winningStatistics) {
+    private static void printReturnRate(LottoPrice lottoPurchaseAmount, LottoWinningStatistics winningStatistics) {
         float returnRate = winningStatistics.calculateReturnRate(lottoPurchaseAmount);
 
         System.out.printf("총 수익률은 %f입니다.", returnRate);
@@ -39,7 +39,7 @@ public class OutputView {
     private static void printWinningCount(LottoWinningStatistics winningStatistics) {
         StringBuilder stringBuilder = new StringBuilder("당첨 통계").append(NEW_LINE).append("---------").append(NEW_LINE);
 
-        for (LottoRank ranking : LottoRank.winningLank()) {
+        for (LottoRank ranking : LottoRank.winningRanks()) {
             stringBuilder
                     .append(String.format("%d개 일치 (%d원)- %d개",
                             ranking.getMatchingCount(), ranking.getDistributionRatioPrice(), winningStatistics.getLottoQuantityOfRanking(ranking)))

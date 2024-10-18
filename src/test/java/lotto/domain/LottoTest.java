@@ -38,11 +38,4 @@ class LottoTest {
 
         assertThat(actual).isEqualTo(expected);
     }
-
-    @DisplayName("로또 구입금액이 1000원 미만이면 IllegalArgumentException을 발생시킨다.")
-    @Test
-    void throw_IllegalArgumentException_when_purchaseAmount_is_underThan_1000() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.validatePurchaseAmount(999))
-                .withMessage("구입금액은 최소 1000원 이상이어야 합니다.");
-    }
 }
