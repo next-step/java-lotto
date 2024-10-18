@@ -75,3 +75,24 @@
 * 생성자 파라미터에 구분자 추가
 * 일급 컬렉션 매핑 (List<Lotto> -> Lottos)
 * Lotto, LottoNum 조합해 당첨번호 책임지는 WinnerLotto 분리 
+* 로또 매치하는 메소드 WinnerLotto 클래스로 이동 (Rank -> WinnerLotto)
+* 생성자로 문자열 파싱로직 제거 및 테스트에서 InputView로 로또객체 생성
+* Rank 구하는 메소드 LottoResult -> Lottos로 이동
+* hashCode 메소드 추가
+* int -> Integer 변경 (IntegerCache 사용)
+
+## Step4. 요구 사항
+* 수동으로 구매할 로또 수를 입력 받는다.
+* 수동으로 구매할 수 만큼 로또를 입력 받는다.
+* 출력 로직에 수동으로 구매한 로또를 추가한다.
+* 수동, 자동 로또를 합친다.
+
+## Step4. 피드백 구현
+* InputView 일부 메소드 private 변경 및 위치 조정
+* priceTotal int -> long 변경 (int 범위 초과)
+* 테스트 로또 생성 inputview -> fixture 적용
+* 로또 validation 로직 수동에도 적용 및 0개 구매해도 익셉션 안나게 수정
+* IntegerCache 비슷하게 LottoNumCache 적용 -> equals and hashcode 삭제해서 테스트
+
+## Step4. 리팩토링
+* List<Rank> -> Ranks 로 리팩토링 (일급 콜렉션 래핑)

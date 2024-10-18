@@ -17,8 +17,8 @@ public class LottoNumTest {
     @Test
     @DisplayName("로또 숫자 정렬 테스트")
     void 로또_숫자_정렬() {
-        LottoNum lotto3 = new LottoNum(3);
-        LottoNum lotto2 = new LottoNum(2);
+        LottoNum lotto3 = LottoNum.valueOf(3);
+        LottoNum lotto2 = LottoNum.valueOf(2);
         List<LottoNum> lottoNums = Arrays.asList(lotto3, lotto2);
         Collections.sort(lottoNums);
         assertThat(lottoNums.get(0)).isEqualTo(lotto2);
@@ -35,7 +35,7 @@ public class LottoNumTest {
     @DisplayName("숫자의 범위가 1~45를 벗어나면 예외를 발생시킨다.")
     @ValueSource(ints = {0, 46})
     void 로또_숫자_범위_예외(int number) {
-        assertThatThrownBy(() -> new LottoNum(number))
+        assertThatThrownBy(() -> LottoNum.valueOf(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -19,17 +19,24 @@ public class LottoController {
     }
 
     public void play() {
-        int lottoPrice = inputView.getLottoPrice();
         LottoGame game = LottoGame.getInstance();
+        int lottoPrice = inputView.getLottoPrice();
 
-        Lottos lottos = game.buy(lottoPrice);
+        final int manualLottoCount = inputView.getManualLottoCount();
 
-        resultView.priceLottoStatus(lottos);
+        game.validateBuy(lottoPrice, manualLottoCount);
+        Lottos manualLottos = inputView.getManualLottos(manualLottoCount);
+        lottoPrice = game.buyManual(lottoPrice, manualLottoCount);
+        Lottos autoLottos = game.buyAuto(lottoPrice);
+
+        Lottos total = Lottos.of(manualLottos, autoLottos);
+
+        resultView.priceLottoStatus(autoLottos, manualLottos);
         String lastWinningNumber = inputView.getLastWinningNumber();
-        Lotto winnerLotto = inputView.getWinnerLottoNumbers(lastWinningNumber);
+        Lotto winnerLotto = inputView.getLottoNumbers(lastWinningNumber);
         LottoNum bonusNumber = inputView.getBonusNumber();
 
-        LottoResult result = LottoResult.getLottoResult(lottos, new WinnerLotto(winnerLotto, bonusNumber));
+        LottoResult result = LottoResult.getLottoResult(total, new WinnerLotto(winnerLotto, bonusNumber));
 
         resultView.printLottoResult(result);
     }

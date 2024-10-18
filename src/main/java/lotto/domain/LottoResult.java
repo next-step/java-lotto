@@ -3,17 +3,15 @@ package lotto.domain;
 import lotto.enums.Rank;
 import lotto.service.LottoGame;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class LottoResult {
 
-    private final List<Rank> results;
+    private final Ranks ranks;
     private final double returnRate;
 
-    public LottoResult(List<Rank> results, int buyPrice) {
-        this.results = results;
+    public LottoResult(Ranks ranks, int buyPrice) {
+        this.ranks = ranks;
         this.returnRate = Math.round((double) getPriceTotal() / buyPrice * 100.0) / 100.0;
     }
 
@@ -21,38 +19,35 @@ public class LottoResult {
         return returnRate;
     }
 
-    int getPriceTotal() {
-        int result = 0;
-        for (Rank rank : this.results) {
-            result += rank.getPrice();
-        }
-        return result;
+    long getPriceTotal() {
+        return ranks.getPriceTotal();
     }
 
     public int getWinnerCount(Rank rank) {
-        return (int) results.stream()
-                .filter(result -> result == rank)
-                .count();
+        return ranks.getWinnerCount(rank);
     }
 
     public static LottoResult getLottoResult(Lottos lottos, WinnerLotto winnerLotto) {
-        List<Rank> result = new ArrayList<>();
-        for (Lotto lotto : lottos.getLottos()) {
-            int matchedCount = winnerLotto.compareWinningNumber(lotto);
-            result.add(Rank.getRank(matchedCount, winnerLotto.isMatchBonus(lotto)));
+        if (lottos.getSize() == 0) {
+            throw new IllegalStateException("구매한 로또가 존재하지 않습니다.");
         }
-        return new LottoResult(result, lottos.getSize() * LottoGame.LOTTO_PRICE);
+        return new LottoResult(lottos.getRanks(winnerLotto), lottos.getSize() * LottoGame.LOTTO_PRICE);
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoResult that = (LottoResult) object;
-        return Double.compare(getReturnRate(), that.getReturnRate()) == 0 && Objects.equals(results, that.results);
+        LottoResult that = (LottoResult) o;
+        return Double.compare(returnRate, that.returnRate) == 0 && Objects.equals(ranks, that.ranks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ranks, returnRate);
     }
 }
