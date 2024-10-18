@@ -27,7 +27,9 @@ public class InputView {
 
     public static int inputManualQuantity() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+        int manualQuantity = scanner.nextInt();
+        scanner.nextLine();
+        return manualQuantity;
     }
 
     public static String[] inputManualLottoNumbers(int quantity) {

@@ -18,8 +18,8 @@ public class ResultView {
         System.out.println(numbers.toString());
     }
 
-    public static void printPurchaseQuantity(int quantity) {
-        System.out.println(quantity + "개를 구매했습니다.");
+    public static void printPurchaseQuantity(int manualQuantity, int autoQuantity) {
+        System.out.println("수동으로 " + manualQuantity + "장, 자동으로" + autoQuantity + "개를 구매했습니다.");
     }
 
     public static void printMatchStaticsInfo(Map<LottoRank, Integer> staticsMap) {
