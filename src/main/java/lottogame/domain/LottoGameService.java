@@ -14,19 +14,12 @@ public class LottoGameService {
         this.buyAmount = buyAmount;
     }
 
-    public double calculatePrizeAmount(Lotto winningLotto, LottoNumber bonusNumber) {
-        validate(winningLotto, bonusNumber);
+    public double calculatePrizeAmount(WinningLotto winningLotto) {
 
-        winningResultsByRank = lottos.calculateWinningStatistics(winningLotto, bonusNumber);
-        double totalPrizeAmount = lottos.calculateTotalPrizeAmount(winningLotto, bonusNumber);
+        winningResultsByRank = lottos.calculateWinningStatistics(winningLotto);
+        double totalPrizeAmount = lottos.calculateTotalPrizeAmount(winningLotto);
 
         return totalPrizeAmount / buyAmount;
-    }
-
-    private static void validate(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.isMatchingBonus(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
-        }
     }
 
     public Map<Rank, Integer> getWinningResultsByRank() {

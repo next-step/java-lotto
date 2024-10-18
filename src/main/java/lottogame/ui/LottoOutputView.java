@@ -54,7 +54,7 @@ public final class LottoOutputView {
     }
 
     private static String getMatchDescription(Rank rank) {
-        if (rank == Rank.SECOND) {
+        if (rank.isSecond()) {
             return String.format("%d개 일치, 보너스 볼 일치", rank.getMatchCount());
         }
         return String.format("%d개 일치", rank.getMatchCount());

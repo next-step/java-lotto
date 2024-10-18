@@ -14,7 +14,7 @@ public class LottoController {
         LottoNumber bonusNumber = getBonusNumber();
 
         LottoGameService gameService = new LottoGameService(lottos, buyAmount);
-        double prizeRate = gameService.calculatePrizeAmount(winningLotto, bonusNumber);
+        double prizeRate = gameService.calculatePrizeAmount(new WinningLotto(winningLotto, bonusNumber));
 
         LottoOutputView.printWinningStatistics(gameService.getWinningResultsByRank());
         LottoOutputView.printPrizeRate(prizeRate);

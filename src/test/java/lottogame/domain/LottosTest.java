@@ -36,7 +36,7 @@ class LottosTest {
         Lotto winingLotto = new Lotto(new PredefinedLottoNumberStrategy("1,2,3,4,5,6"));
         LottoNumber bonusNumber = new LottoNumber(7);
 
-        Map<Rank, Integer> actual = lottos.calculateWinningStatistics(winingLotto, bonusNumber);
+        Map<Rank, Integer> actual = lottos.calculateWinningStatistics(new WinningLotto(winingLotto, bonusNumber));
 
         assertThat(actual).containsOnly(
                 entry(Rank.FIRST, 1),
@@ -57,7 +57,7 @@ class LottosTest {
         Lotto winingLotto = new Lotto(new PredefinedLottoNumberStrategy("1,2,3,4,5,6"));
         LottoNumber bonusNumber = new LottoNumber(7);
 
-        double actual = lottos.calculateTotalPrizeAmount(winingLotto, bonusNumber);
+        double actual = lottos.calculateTotalPrizeAmount(new WinningLotto(winingLotto, bonusNumber));
         double expected = Rank.FIRST.getPrizeMoney() + Rank.SECOND.getPrizeMoney() + Rank.THIRD.getPrizeMoney();
 
         assertEquals(expected, actual);

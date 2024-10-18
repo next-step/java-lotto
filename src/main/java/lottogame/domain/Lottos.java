@@ -18,15 +18,15 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Map<Rank, Integer> calculateWinningStatistics(Lotto winningLotto, LottoNumber bonusNumber) {
+    public Map<Rank, Integer> calculateWinningStatistics(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto), lotto.isMatchingBonus(bonusNumber)))
+                .map(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto.getWinningLotto()), lotto.isMatchingBonus(winningLotto.getBonusNumber())))
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.summingInt(rank -> 1)));
     }
 
-    public double calculateTotalPrizeAmount(Lotto winningLotto, LottoNumber bonusNumber) {
+    public double calculateTotalPrizeAmount(WinningLotto winningLotto) {
         return lottos.stream()
-                .mapToDouble(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto), lotto.isMatchingBonus(bonusNumber)).getPrizeMoney())
+                .mapToDouble(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto.getWinningLotto()), lotto.isMatchingBonus(winningLotto.getBonusNumber())).getPrizeMoney())
                 .sum();
     }
 
