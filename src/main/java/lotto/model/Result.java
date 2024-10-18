@@ -13,36 +13,37 @@ import static lotto.model.enums.Ranking.values;
 
 public class Result {
     public static final int LOTTO_PRICE = 1000;
-    public static final String RANKING_FORMAT = "%d개 일치 (%d원)- %d개";
+    public static final String RANKING_FORMAT = "%d개 일치%s(%d원)- %d개";
     public static final String LINE_BREAK = "\n";
+    public static final String BONUS_MATCHED_STRINGS = ", 보너스 볼 일치";
+    public static final String SPACE = " ";
     private final Buyer buyer;
-    private final Lotto winningLotto;
+    private final Winning winning;
 
-    private Result(Buyer buyer, Lotto winningLotto) {
+    private Result(Buyer buyer, Winning winning) {
         this.buyer = buyer;
-        this.winningLotto = winningLotto;
+        this.winning = winning;
     }
 
-    public static Result of(Buyer buyer, Lotto winningLotto) {
-        return new Result(buyer, winningLotto);
+
+    public static Result of(Buyer buyer, Winning winning) {
+        return new Result(buyer, winning);
     }
 
     public double statistics(int buyCount) {
-        double winningAmount = Long.valueOf(rankings()
-                        .entrySet()
-                        .stream()
-                        .mapToLong(value -> value.getKey().totalWinningAmount(value.getValue()))
-                        .sum())
-                .doubleValue();
-        double buyAmount = Integer.valueOf(buyCount * LOTTO_PRICE)
-                .doubleValue();
-        return winningAmount / buyAmount;
+        long winningAmount = rankings()
+                .entrySet()
+                .stream()
+                .mapToLong(value -> value.getKey().totalWinningAmount(value.getValue()))
+                .sum();
+        int buyAmount = buyCount * LOTTO_PRICE;
+        return Long.valueOf(winningAmount).doubleValue() / Integer.valueOf(buyAmount).doubleValue();
     }
 
     public String formattedRankingResults() {
         return rankings().entrySet()
                 .stream()
-                .sorted(Comparator.comparingInt(o -> o.getKey().matchedCount()))
+                .sorted(Comparator.comparingLong(ranking -> ranking.getKey().winningAmount()))
                 .map(Result::formattedRankingResult)
                 .collect(Collectors.joining(LINE_BREAK));
     }
@@ -51,23 +52,28 @@ public class Result {
         Map<Ranking, Integer> rankings = new HashMap<>();
         Arrays.stream(values())
                 .filter(ranking -> !ranking.equals(NONE))
-                .forEach(ranking -> rankings.put(ranking, rankingCount(winningLotto, ranking)));
+                .forEach(ranking -> rankings.put(ranking, rankingCount(ranking)));
         return rankings;
     }
 
     private static String formattedRankingResult(Map.Entry<Ranking, Integer> entry) {
+        String bonus = SPACE;
+        if (entry.getKey().equals(Ranking.SECOND)) {
+            bonus = BONUS_MATCHED_STRINGS;
+        }
         return String.format(RANKING_FORMAT,
                 entry.getKey().matchedCount(),
+                bonus,
                 entry.getKey().winningAmount(),
                 entry.getValue()
         );
     }
 
-    private int rankingCount(Lotto winningLotto, Ranking fourth) {
+    private int rankingCount(Ranking ranking) {
         long count = this.buyer.value()
                 .stream()
-                .map(lotto -> lotto.compare(winningLotto))
-                .filter(fourth::equals)
+                .map(lotto -> lotto.compare(winning))
+                .filter(ranking::equals)
                 .count();
         return Long.valueOf(count)
                 .intValue();
