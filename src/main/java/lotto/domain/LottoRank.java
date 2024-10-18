@@ -23,8 +23,13 @@ public enum LottoRank {
                 .orElseThrow(() -> new IllegalArgumentException(String.format("인자 로또 번호 매칭 갯수 '%s'에 적합한 등수가 없습니다.", matchingCount)));
     }
 
+
     public static boolean isNotRankEligible(int matchingCount) {
         return matchingCount < FIFTH.getMatchingCount();
+    }
+
+    public static LottoRank[] winningRanks() {
+        return new LottoRank[]{FIFTH, FOURTH, THIRD, FIRST};
     }
 
     public int getMatchingCount() {

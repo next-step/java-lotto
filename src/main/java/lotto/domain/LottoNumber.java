@@ -41,8 +41,4 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int compareTo(LottoNumber o) {
         return this.value.compareTo(o.value);
     }
-
-    public LottoNumber deepCopy() {
-        return new LottoNumber(this.value);
-    }
 }
