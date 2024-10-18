@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
+    NON_RANKED(2, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
@@ -17,15 +18,17 @@ public enum LottoRank {
     }
 
     public static LottoRank from(int matchingCount) {
+        if (isNotRankEligible(matchingCount)) {
+            return NON_RANKED;
+        }
         return Arrays.stream(LottoRank.values())
                 .filter(value -> value.getMatchingCount() == matchingCount)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("인자 로또 번호 매칭 갯수 '%s'에 적합한 등수가 없습니다.", matchingCount)));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("로또 번호 매칭 갯수 '%s'은 적합하지 않습니다.", matchingCount)));
     }
 
-
-    public static boolean isNotRankEligible(int matchingCount) {
-        return matchingCount < FIFTH.getMatchingCount();
+    private static boolean isNotRankEligible(int matchingCount) {
+        return 0 <= matchingCount && matchingCount <= 2;
     }
 
     public static LottoRank[] winningRanks() {

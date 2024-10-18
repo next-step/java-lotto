@@ -32,16 +32,8 @@ public class LottoWinningStatistics {
     private void putRankedLottoQuantity(Map<LottoRank, Integer> result,
                                         Lotto userLotto,
                                         Lotto winningLotto) {
-        int matchingCount = winningLotto.countMatchingNumbers(userLotto);
-        if (checkNonRanked(matchingCount)) {
-            return;
-        }
-        LottoRank key = LottoRank.from(matchingCount);
+        LottoRank key = LottoRank.from(winningLotto.countMatchingNumbers(userLotto));
         result.put(key, result.get(key) + 1);
-    }
-
-    private static boolean checkNonRanked(int matchingCount) {
-        return LottoRank.isNotRankEligible(matchingCount);
     }
 
     public float calculateReturnRate(LottoPrice lottoPurchaseAmount) {
