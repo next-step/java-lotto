@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
 
 
 public class ResultView {
-    private final static List<Prize> PRIZE_LIST = List.of(Prize.FIFTH, Prize.FOURTH, Prize.THIRD, Prize.SECOND, Prize.FIRST);
-    private final static String ALL_RATIO_SENTENCE = "총 수익률은 ";
-    private final static String PURCHASE_SENTENCE = "개를 구매했습니다.";
-    private final static String WINNER_STATISTICS = "당첨 통계\n---------\n";
+    private static final List<Prize> PRIZE_LIST = List.of(Prize.FIFTH, Prize.FOURTH, Prize.THIRD, Prize.SECOND, Prize.FIRST);
+    private static final String ALL_RATIO_SENTENCE = "총 수익률은 ";
+    private static final String PURCHASE_SENTENCE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+    private static final String WINNER_STATISTICS = "당첨 통계\n---------\n";
 
-    public static void purchaseResultView(int purchaseLottoCount) {
-        purchaseSentence(purchaseLottoCount);
+    public static void purchaseResultView(int purchasePassivityCount, int purchaseAutoLottoCount) {
+        purchaseSentence(purchasePassivityCount, purchaseAutoLottoCount);
     }
 
     public static void getLottoNumbersSentence(Lotto lotto) {
@@ -27,8 +27,8 @@ public class ResultView {
         System.out.println(result);
     }
 
-    public static void purchaseSentence(int purchaseLottoCount) {
-        System.out.println(purchaseLottoCount + PURCHASE_SENTENCE);
+    public static void purchaseSentence(int purchasePassivityCount, int purchaseAutoLottoCount) {
+        System.out.println(String.format(PURCHASE_SENTENCE, purchasePassivityCount,purchaseAutoLottoCount));
     }
 
     public static void statisticsResultView(double ratio) {

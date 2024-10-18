@@ -1,20 +1,21 @@
 package lotto.domain.lotto.ticket;
 
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import lotto.domain.Prize;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>(tickets);
     }
 
     public LottoTickets(LottoTicket... ticket) {
-        this.tickets = Arrays.stream(ticket).collect(Collectors.toList());
+        this.tickets = Arrays.stream(ticket)
+                .collect(Collectors.toList());
     }
 
     public void add(LottoTicket ticket) {
@@ -23,6 +24,25 @@ public class LottoTickets {
 
     public List<LottoTicket> getTickets() {
         return tickets;
+    }
+
+    public static LottoTickets fromStringList(List<String> tickets) {
+        List<LottoTicket> lottoTickets = tickets.stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+        return new LottoTickets(lottoTickets);
+    }
+
+    public Map<Prize, Integer> getHitLottoNumbers(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+        Map<Prize, Integer> map = initialMap();
+        this.tickets.forEach(ticket -> {
+            int hitNumber = ticket.hitNumber(winningLottoTicket.getNumbers());
+            boolean isBonus = ticket.isBonus(bonusNumber);
+            Prize prize = Prize.valueOf(hitNumber, isBonus);
+            map.put(prize, map.getOrDefault(prize, 0) + 1);
+        });
+
+        return map;
     }
 
     @Override
@@ -43,5 +63,13 @@ public class LottoTickets {
         return "LottoTickets{" +
                 "tickets=" + tickets +
                 '}';
+    }
+
+    private Map<Prize, Integer> initialMap() {
+        Map<Prize, Integer> map = new HashMap<>();
+        for (Prize prize : Prize.values()) {
+            map.put(prize, 0);
+        }
+        return map;
     }
 }

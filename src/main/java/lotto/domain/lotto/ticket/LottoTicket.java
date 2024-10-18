@@ -4,33 +4,42 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final static String LOTTO_LENGTH_ERROR = "로또 입력 숫자가 6개가 아닙니다.";
-    private final List<LottoNumber> numbers;
+    private static final int LOTTO_SIZE = 6;
+    private static final String LOTTO_LENGTH_ERROR = "로또 입력 숫자가 6개가 아닙니다.";
+    private final Set<LottoNumber> numbers;
 
     public LottoTicket(Integer... numbers) {
-        this(Arrays.stream(numbers).map(LottoNumber::new).collect(Collectors.toList()));
+        this(Arrays.stream(numbers).map(LottoNumber::of).collect(Collectors.toList()));
     }
 
     public LottoTicket(String numbers) {
-        this.numbers = Arrays.stream(parse(numbers))
+        this(Arrays.stream(parse(numbers))
                 .map(String::trim)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
+    }
+
+    public LottoTicket(Set<LottoNumber> numbers) {
+        this.numbers = numbers;
     }
 
     public LottoTicket(List<LottoNumber> numbers) {
-        this.numbers = numbers;
+        this.numbers = new HashSet<>(numbers);
+
+        if(this.numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(LOTTO_LENGTH_ERROR);
+        }
     }
 
     public boolean isBonus(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 
-    public int hitNumber(List<LottoNumber> lottoNumbers) {
+    public int hitNumber(Set<LottoNumber> lottoNumbers) {
         return (int) lottoNumbers.stream().filter(numbers::contains).count();
     }
 
-    public String[] parse(String input) {
+    public static String[] parse(String input) {
         String[] lottoNumbers = input.split(",");
         if (!validate(lottoNumbers)) {
             throw new IllegalArgumentException(LOTTO_LENGTH_ERROR);
@@ -38,27 +47,20 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public boolean validate(String[] lottoNum) {
+    public static boolean validate(String[] lottoNum) {
         return lottoNum.length == 6;
     }
 
-    public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(this.numbers);
-    }
-
-    public List<LottoNumber> sortAsc() {
-        numbers.sort(new Comparator<LottoNumber>() {
-            @Override
-            public int compare(LottoNumber o1, LottoNumber o2) {
-                return o1.getNumber() - o2.getNumber();
-            }
-        });
-
-        return numbers;
+    public Set<LottoNumber> getNumbers() {
+        return Collections.unmodifiableSet(this.numbers);
     }
 
     public List<String> displayNumbers() {
-        return numbers.stream().map(LottoNumber::getNumber).map(String::valueOf).collect(Collectors.toList());
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .sorted()
+                .map(String::valueOf)
+                .collect(Collectors.toList());
     }
 
     @Override
