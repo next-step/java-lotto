@@ -10,17 +10,22 @@ public class Lotto {
     public static final String LOTTO_NUMBERS_NOT_ALLOWED_DUPLICATED = "로또번호목록은 중복될수 없습니다.";
     public static final String LOTTO_NUMBERS_SIZE_ALLOWED_ONLY_6 = "로또번호목록은 반드시 6개의 로또번호를 입력해야 합니다..(6,7,17,28,39,45)";
     public static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int BONUS_NUMBER_SIZE = 1;
     private final List<LottoNumber> lottoNumbers;
 
     private Lotto(final List<LottoNumber> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(final NumbersCreator numbersCreator) {
-        List<LottoNumber> result = new ArrayList<>(numbersCreator.create());
-        validateLottoNumbers(result);
-        result.sort(LottoNumber::compareTo);
-        return new Lotto(Collections.unmodifiableList(result));
+    public Lotto(final NumbersCreator numbersCreator) {
+        this(createLottoNumber(numbersCreator));
+    }
+
+    private static List<LottoNumber> createLottoNumber(NumbersCreator numbersCreator) {
+        List<LottoNumber> lottoNumbers = numbersCreator.create();
+        lottoNumbers.sort(LottoNumber::compareTo);
+        return lottoNumbers;
     }
 
     private static void validateLottoNumbers(List<LottoNumber> result) {
@@ -38,12 +43,18 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> numbers() {
-        return this.lottoNumbers;
+    public Ranking compare(Winning winning) {
+        Lotto winningLotto = winning.winningLotto();
+        LottoNumber bonusNumber = winning.bonusNumber();
+        return Ranking.result(matchedCount(winningLotto), isMatchedBonus(bonusNumber));
     }
 
-    public Ranking compare(Lotto winning) {
-        return Ranking.result(matchedCount(winning));
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    private boolean isMatchedBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.stream().anyMatch(bonusNumber::equals);
     }
 
     private int matchedCount(Lotto winning) {
@@ -55,5 +66,18 @@ public class Lotto {
     @Override
     public String toString() {
         return lottoNumbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

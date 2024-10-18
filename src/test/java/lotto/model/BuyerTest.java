@@ -4,6 +4,7 @@ import lotto.fixture.BuyerFixtureNumberCreator;
 import lotto.model.dto.LottoNumber;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,20 +15,20 @@ public class BuyerTest {
 
     @Test
     void 구매자의_로또목록을_출력한다() {
-        Buyer buyer = Buyer.of(2, new BuyerFixtureNumberCreator(List.of(
-                List.of(of(8), of(21), of(23), of(41), of(42), of(43)),//111111-1
-                List.of(of(1), of(8), of(11), of(31), of(41), of(42))//111-4
-        )));
-
-        List<List<LottoNumber>> actual = buyer.value()
-                .stream()
-                .map(Lotto::numbers)
-                .collect(Collectors.toUnmodifiableList());
-        List<List<LottoNumber>> expected = List.of(
-                List.of(of(8), of(21), of(23), of(41), of(42), of(43)),//111111-1
-                List.of(of(1), of(8), of(11), of(31), of(41), of(42))//111-4
+        Buyer buyer = Buyer.of(
+                2,
+                new BuyerFixtureNumberCreator(Arrays.asList(
+                        Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(43)),
+                        Arrays.asList(of(1), of(8), of(11), of(31), of(41), of(42))
+                ))
         );
 
-        assertThat(actual).containsExactlyElementsOf(expected);
+        List<Lotto> actual = buyer.value();
+        List<Lotto> expected = Arrays.asList(
+                new Lotto(() -> Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(43))),
+                new Lotto(() -> Arrays.asList(of(1), of(8), of(11), of(31), of(41), of(42)))
+        );
+
+        assertThat(actual).isEqualTo(expected);
     }
 }
