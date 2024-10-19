@@ -10,40 +10,31 @@ public class WinningLotto {
     private static final String DELIMITER = ", ";
 
     private final Lotto lotto;
+    private final LottoNumber bonus;
 
-    public WinningLotto(Lotto lotto) {
+    public WinningLotto(Lotto lotto, LottoNumber bonus) {
         this.lotto = lotto;
+        this.bonus = bonus;
     }
 
-    public WinningLotto(int... numbers) {
-        this(new Lotto(numbers));
-    }
-
-    public WinningLotto(List<Integer> numbers) {
+    public WinningLotto(List<Integer> numbers, int bonus) {
         this(new Lotto(numbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toList())), new LottoNumber(bonus));
     }
 
-    public WinningLotto(String numbers) {
+    public WinningLotto(String numbers, int bonus) {
         this(Arrays.stream(numbers.split(DELIMITER))
                 .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), bonus);
     }
 
-    public int match(Lotto userLotto) {
-        return userLotto.getLottoNumbers()
-                .stream()
-                .filter(lotto.getLottoNumbers()::contains)
-                .mapToInt(n -> 1)
-                .sum();
+    public LottoRank match(Lotto userLotto) {
+        return LottoRank.valueOf(userLotto.countMatchingNumbers(lotto), userLotto.containBonus(bonus));
     }
 
-    public int match(int... numbers) {
-        return Arrays.stream(numbers)
-                .filter(value -> lotto.getLottoNumbers().contains(new LottoNumber(value)))
-                .map(value -> 1)
-                .sum();
+    public LottoRank match(int... numbers) {
+        return match(new Lotto(numbers));
     }
 
     @Override

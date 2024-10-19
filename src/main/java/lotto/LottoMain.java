@@ -1,32 +1,37 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.WinningLotto;
-import lotto.domain.WinningResult;
+import lotto.domain.*;
+import lotto.utils.LottoUtils;
 import lotto.view.ResultView;
 
-import static lotto.view.InputView.inputAmount;
-import static lotto.view.InputView.inputLastWinningNumbers;
+import static lotto.view.InputView.*;
 
 public class LottoMain {
 
-    private static final int LOTTO_PRICE = 1000;
-
     public static void main(String[] args) {
+        LottoQuantity lottoQuantity = new LottoQuantity(inputAmount());
+        lottoQuantity.setManualQuantity(inputManualQuantity());
 
-        int lottoQuantity = inputAmount() / LOTTO_PRICE;
-        ResultView.printPurchaseQuantity(lottoQuantity);
+        LottoGame lottoGame = createUserLottos(lottoQuantity);
+        ResultView.printPurchaseQuantity(lottoQuantity.getManualQuantity(), lottoQuantity.getAutoQuantity());
+        printUserLottos(lottoGame);
 
-        LottoGame lottoGame = new LottoGame(lottoQuantity);
-        for (Lotto lotto : lottoGame.getLottos()) {
-            ResultView.printLotto(lotto);
-        }
-
-        WinningLotto winningLotto = new WinningLotto(inputLastWinningNumbers());
+        WinningLotto winningLotto = new WinningLotto(inputLastWinningNumbers(), inputBonusNumber());
         WinningResult winningResult = lottoGame.play(winningLotto);
 
         ResultView.printMatchStaticsInfo(winningResult.getStaticsList());
-        ResultView.printProfitRate(winningResult.calculateProfitRate(), lottoQuantity);
+        ResultView.printProfitRate(winningResult.calculateProfitRate(lottoQuantity.getPurchaseAmount()));
+    }
+
+    private static LottoGame createUserLottos(LottoQuantity lottoQuantity) {
+        LottoGame lottoGame = new LottoGame(LottoUtils.extractLottosFromStrings(inputManualLottoNumbers(lottoQuantity.getManualQuantity())));
+        lottoGame.addAllLottos(LottoUtils.generateLottos(lottoQuantity.getAutoQuantity()));
+        return lottoGame;
+    }
+
+    private static void printUserLottos(LottoGame lottoGame) {
+        for (Lotto lotto : lottoGame.getLottos()) {
+            ResultView.printLotto(lotto);
+        }
     }
 }
