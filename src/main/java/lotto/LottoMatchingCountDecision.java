@@ -1,10 +1,12 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum LottoMatchingCountDecision {
-    THREE(3,Constants.LOTTO_THREE_COUNT_INDEX),
-    FOUR(4,Constants.LOTTO_FOUR_COUNT_INDEX),
-    FIVE(5,Constants.LOTTO_FIVE_COUNT_INDEX),
-    SIX(6,Constants.LOTTO_SIX_COUNT_INDEX);
+    THREE(Constants.MATCHING_THREE_COUNT,Constants.LOTTO_THREE_COUNT_INDEX),
+    FOUR(Constants.MATCHING_FOUR_COUNT,Constants.LOTTO_FOUR_COUNT_INDEX),
+    FIVE(Constants.FIVE_COUNT_NUMBER,Constants.LOTTO_FIVE_COUNT_INDEX),
+    SIX(Constants.SIX_COUNT_NUMBER,Constants.LOTTO_SIX_COUNT_INDEX);
 
 
     private int numberCount;
@@ -17,12 +19,10 @@ public enum LottoMatchingCountDecision {
     }
 
     public static int convertMatchingNumberToIndex(int numberCount) {
-        for (LottoMatchingCountDecision lottoMatchingCountDecision :values()) {
-            if (lottoMatchingCountDecision.numberCount == numberCount) {
-                return lottoMatchingCountDecision.convertingNumberIndex;
-            }
-        }
-        throw new IllegalArgumentException();
+        return Arrays.stream(values()).filter(i -> i.numberCount == numberCount)
+                .mapToInt(i-> i.convertingNumberIndex)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private static class Constants {
@@ -30,5 +30,9 @@ public enum LottoMatchingCountDecision {
         public static final int LOTTO_FOUR_COUNT_INDEX = 1;
         public static final int LOTTO_FIVE_COUNT_INDEX = 2;
         public static final int LOTTO_SIX_COUNT_INDEX = 3;
+        public static final int MATCHING_THREE_COUNT = 3;
+        public static final int MATCHING_FOUR_COUNT = 4;
+        public static final int FIVE_COUNT_NUMBER = 5;
+        public static final int SIX_COUNT_NUMBER = 6;
     }
 }
