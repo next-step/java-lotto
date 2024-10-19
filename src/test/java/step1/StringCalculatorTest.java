@@ -5,8 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static step1.StringCalculator.calculate;
 
 class StringCalculatorTest {
@@ -20,16 +19,16 @@ class StringCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void null_또는_빈공백_입력값(String input) {
-        assertThatThrownBy(() -> {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             calculate(input);
-        }).isInstanceOf(RuntimeException.class);
+        });
     }
 
     @Test
     void 사칙연산_기호_아님() {
-        assertThatThrownBy(() -> {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             calculate("1 & 2");
-        }).isInstanceOf(RuntimeException.class);
+        });
     }
 
     @ParameterizedTest
@@ -40,8 +39,8 @@ class StringCalculatorTest {
 
     @Test
     void 사칙연산_0으로_나눌때() {
-        assertThatThrownBy(() -> {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             calculate("2 + 3 / 0");
-        }).isInstanceOf(RuntimeException.class);
+        });
     }
 }

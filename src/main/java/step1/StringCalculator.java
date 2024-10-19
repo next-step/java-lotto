@@ -15,10 +15,9 @@ public class StringCalculator {
     public static int calculate(String text) {
         throwIfNullOrEmpty(text);
 
-        String[] strings = text.split(SPACE_DELIMITER);
-        List<String> operators = new ArrayList<>();
         List<Integer> operands = new ArrayList<>();
-        separateOperatorAndOperand(strings, operands, operators);
+        List<String> operators = new ArrayList<>();
+        separateOperatorAndOperand(splitText(text), operands, operators);
 
         operators.forEach(StringCalculator::throwIfInvalidOperator);
 
@@ -29,6 +28,10 @@ public class StringCalculator {
         if (text == null || text.isBlank()) {
             throw new IllegalArgumentException("입력값으로 null이나 빈 문자열은 허용하지 않습니다.");
         }
+    }
+
+    private static String[] splitText(String text) {
+        return text.split(SPACE_DELIMITER);
     }
 
     private static void separateOperatorAndOperand(String[] strings, List<Integer> operands, List<String> operators) {
@@ -50,12 +53,12 @@ public class StringCalculator {
     private static int calculation(List<Integer> operands, List<String> operators) {
         int result = operands.get(0);
         for (int i = 0; i < operators.size(); i++) {
-            result = fourFundamentalOperations(operands, operators, i, result);
+            result = fourBasicOperations(operands, operators, i, result);
         }
         return result;
     }
 
-    private static int fourFundamentalOperations(List<Integer> operands, List<String> operators, int i, int result) {
+    private static int fourBasicOperations(List<Integer> operands, List<String> operators, int i, int result) {
         if (operators.get(i).equals(ADDITION.getValue())) {
             result += operands.get(i + 1);
         }
