@@ -31,29 +31,11 @@ public class LottoMachine {
     }
 
     public List<Integer> checkMatchingNumber(List<LottoNumber> inputWinningNumbers) {
-        Lotto winningLotto = new Lotto(inputWinningNumbers);
-
-        List<Integer> matchingLottoTickets = totalLottoTicket.getValues().stream()
-                .map(lottoTicket -> lottoTicket.matchCount(winningLotto))
-                .collect(Collectors.toList());
-
-        Collections.sort(matchingLottoTickets);
-        return matchingLottoTickets;
+        return totalLottoTicket.getMatchingCounts(new Lotto(inputWinningNumbers));
     }
 
     public Map<PrizePolicy, Integer> winningResult(List<Integer> matchingLottoTickets) {
-        Map<PrizePolicy, Integer> winLottoTicket = new HashMap<>();
-        for (Integer matchCount : matchingLottoTickets) {
-            inputWinLottoTicket(winLottoTicket, matchCount);
-        }
-        return winLottoTicket;
-    }
-
-    private static void inputWinLottoTicket(Map<PrizePolicy, Integer> winLottoTicket, Integer matchCount) {
-        if (matchCount >= MIN_MATCH_COUNT) {
-            PrizePolicy prizePolicy = PrizePolicy.fromMatchCount(matchCount);
-            winLottoTicket.put(prizePolicy, winLottoTicket.getOrDefault(prizePolicy, 0) + 1);
-        }
+        return totalLottoTicket.calculateWinLottoTicket(matchingLottoTickets);
     }
 
     public double rateOfReturnResult(int totalMoney, int totalPrizeMoney) {
