@@ -56,7 +56,7 @@ class WinnerTest {
     @Test
     void 결과에는_모든_등수에_대한_당첨갯수가_있어야_한다() {
         Game winner = new Game(List.of(1, 2, 3, 4, 5, 6));
-        Games games = new Games(winner, winner);
+        Games games = new Games(List.of(winner, winner));
 
         LottoResult lottoResult = new LottoResult(winner, games);
         Set<Entry<Rank, Integer>> entrySet = lottoResult.countPerRank().entrySet();
@@ -89,7 +89,7 @@ class WinnerTest {
         );
     }
 
-    private static Game[] getFourthAndNoneGame(int fourth, int none) {
+    private static List<Game> getFourthAndNoneGame(int fourth, int none) {
         List<Game> fourthGames = IntStream.range(0, fourth)
                 .mapToObj(i -> new Game((List.of(1, 2, 3, 7, 8, 9))))
                 .collect(Collectors.toList());
@@ -98,6 +98,6 @@ class WinnerTest {
                 .collect(Collectors.toList());
         fourthGames.addAll(noneGames);
 
-        return fourthGames.toArray(Game[]::new);
+        return fourthGames;
     }
 }

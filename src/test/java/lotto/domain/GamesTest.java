@@ -39,7 +39,7 @@ class GamesTest {
         Game game1 = new Game(List.of(1, 2, 3, 4, 5, 6));
         Game game2 = new Game(List.of(7, 8, 9, 10, 11, 12));
         Game game3 = new Game(List.of(13, 14, 15, 16, 17, 18));
-        Games games = new Games(game1, game2, game3);
+        Games games = new Games(List.of(game1, game2, game3));
 
         String[] toStringArray = {game1.toString(), game2.toString(), game3.toString()};
         String expected = String.join("\n", toStringArray);

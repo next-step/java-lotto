@@ -25,8 +25,8 @@ public class Games {
         this.games = Collections.unmodifiableList(games);
     }
 
-    public Games(Game... games) {
-        this.games = List.of(games);
+    public Games(List<Game> games) {
+        this.games = games;
     }
 
     public int count() {
