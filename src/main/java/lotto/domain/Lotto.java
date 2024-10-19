@@ -42,7 +42,7 @@ public class Lotto {
 
     private static Set<LottoNumber> convertToLottoNumber(final Set<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toSet());
     }
 }

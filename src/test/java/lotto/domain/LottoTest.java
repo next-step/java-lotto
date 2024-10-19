@@ -20,7 +20,7 @@ class LottoTest {
     @Test
     void 로또_번호개수_검증() {
         Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toSet());
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -29,7 +29,7 @@ class LottoTest {
     @Test
     void 로또_중복_검증() {
         Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 5)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toSet());
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -47,7 +47,7 @@ class LottoTest {
 
     private static Set<LottoNumber> getLottoNumbers() {
         return Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toSet());
     }
 }

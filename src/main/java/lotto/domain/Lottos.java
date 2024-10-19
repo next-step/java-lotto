@@ -21,7 +21,7 @@ public class Lottos {
     private Lotto generateAuto() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() != Lotto.LOTTO_SIZE) {
-            lottoNumbers.add(LottoNumber.from());
+            lottoNumbers.add(LottoNumber.generateRandomNumber());
         }
         return new Lotto(lottoNumbers);
     }
