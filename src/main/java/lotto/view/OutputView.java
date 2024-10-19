@@ -41,8 +41,8 @@ public class OutputView {
 
         for (LottoRank ranking : LottoRank.winningRanks()) {
             stringBuilder
-                    .append(String.format("%d개 일치 (%d원)- %d개",
-                            ranking.getMatchingCount(), ranking.getDistributionRatioPrice(), winningStatistics.getLottoQuantityOfRanking(ranking)))
+                    .append(ranking.description())
+                    .append(String.format(" (%d원)- %d개", ranking.getDistributionRatioPrice(), winningStatistics.getLottoQuantityOfRanking(ranking)))
                     .append(NEW_LINE);
         }
         System.out.println(stringBuilder);

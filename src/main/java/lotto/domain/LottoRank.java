@@ -25,7 +25,7 @@ public enum LottoRank {
         if (isSecondWinner(matchingCount, isBonusBallMatched)) {
             return SECOND;
         }
-        return Arrays.stream(LottoRank.values())
+        return Arrays.stream(LottoRank.winningRanks())
                 .filter(value -> value.getMatchingCount() == matchingCount)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("로또 번호 매칭 갯수 '%s'은 적합하지 않습니다.", matchingCount)));
@@ -40,7 +40,14 @@ public enum LottoRank {
     }
 
     public static LottoRank[] winningRanks() {
-        return new LottoRank[]{FIFTH, FOURTH, THIRD, FIRST};
+        return new LottoRank[]{FIFTH, FOURTH, THIRD, SECOND, FIRST};
+    }
+
+    public String description() {
+        if (LottoRank.SECOND.equals(this)) {
+            return String.format("%d개 일치, 보너스 볼 일치", this.getMatchingCount());
+        }
+        return String.format("%d개 일치", this.getMatchingCount());
     }
 
     public int getMatchingCount() {
