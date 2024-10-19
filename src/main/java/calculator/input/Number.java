@@ -1,12 +1,15 @@
 package calculator.input;
 
 
+import java.util.regex.Pattern;
+
 public class Number {
-    public static final String REGEX_NUMBER = "-?\\d+(\\.\\d+)?";
+    private static final String REGEX_NUMBER = "-?\\d+(\\.\\d+)?";
+    private static final Pattern PATTERN_NUMBER = Pattern.compile(REGEX_NUMBER);
 
     private int number;
 
-    public Number(final int number){
+    public Number(final int number) {
         this.number = number;
     }
 
@@ -28,7 +31,7 @@ public class Number {
             throw new IllegalArgumentException("숫자에 빈 값이 존재합니다.");
         }
 
-        if (!str.matches(REGEX_NUMBER)) {
+        if (!PATTERN_NUMBER.matcher(str).matches()) {
             throw new IllegalArgumentException("숫자가 아닙니다.");
         }
     }

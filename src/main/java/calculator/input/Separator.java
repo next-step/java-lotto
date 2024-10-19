@@ -36,11 +36,7 @@ public class Separator {
     }
 
     private static void checkValidation(String[] result) {
-        if (result.length < 3) {
-            throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
-        }
-
-        if (result.length % 2 == 0) {
+        if (result.length < 3 || result.length % 2 == 0) {
             throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
         }
     }

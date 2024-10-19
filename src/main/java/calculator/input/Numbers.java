@@ -34,4 +34,12 @@ public class Numbers {
     private static boolean isNumberPosition(int i) {
         return (i + 1) % 2 != 0;
     }
+
+    public int findByNumber(int idx) {
+        return numbers.get(idx).getNumber();
+    }
+
+    public int getFirst() {
+        return findByNumber(0);
+    }
 }

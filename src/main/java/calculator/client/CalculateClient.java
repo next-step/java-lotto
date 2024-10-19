@@ -5,6 +5,10 @@ import calculator.view.InputView;
 import calculator.view.ResultView;
 
 public class CalculateClient {
+    //생성자 제한
+    private CalculateClient() {
+    }
+
     public static void main(String[] args) {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();

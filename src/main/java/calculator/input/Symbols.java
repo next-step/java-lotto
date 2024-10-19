@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Symbols {
+
     private List<Symbol> symbols;
-    private Symbol symbol;
 
     public Symbols() {
         this.symbols = new ArrayList<>();
-    }
-
-    public Symbols(List<Symbol> ss) {
-        this.symbols = symbols;
     }
 
     public Symbols generateSymbols(String[] str) {
@@ -23,8 +19,8 @@ public class Symbols {
     }
 
     private void generateSymbols(String[] str, int i) {
-        if(isSymbolPosition(i)){
-            symbols.add(new Symbol(str[i]));
+        if (isSymbolPosition(i)) {
+            symbols.add(Symbol.fromSymbol((str[i])));
         }
     }
 
@@ -34,6 +30,14 @@ public class Symbols {
 
     public List<Symbol> getSymbols() {
         return symbols;
+    }
+
+    public int getSize() {
+        return symbols.size();
+    }
+
+    public String findBySymbol(int idx) {
+        return symbols.get(idx).getSymbol();
     }
 
 }
