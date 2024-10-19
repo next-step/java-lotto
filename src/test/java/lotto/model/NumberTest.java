@@ -9,19 +9,19 @@ public class NumberTest {
 
     @Test
     void 생성자_테스트() {
-        Number number = new Number(1);
+        LottoNumber number = new LottoNumber(1);
 
-        assertThat(number).isEqualTo(new Number(1));
+        assertThat(number).isEqualTo(new LottoNumber(1));
     }
 
     @Test
     void 생성자_예외() {
         assertThatThrownBy(() -> {
-            Number number = new Number(-1);
+            LottoNumber number = new LottoNumber(-1);
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            Number number = new Number(46);
+            LottoNumber number = new LottoNumber(46);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
