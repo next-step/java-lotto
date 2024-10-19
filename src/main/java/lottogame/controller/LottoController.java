@@ -1,12 +1,13 @@
 package lottogame.controller;
 
-import lottogame.domain.*;
+import lottogame.domain.LottoGameService;
 import lottogame.domain.lotto.*;
 import lottogame.domain.strategy.PredefinedLottoNumberStrategy;
 import lottogame.ui.LottoInputView;
 import lottogame.ui.LottoOutputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
     public void run() {
@@ -15,8 +16,9 @@ public class LottoController {
         int LottoCount = getLottoCount(buyAmount);
         int manualLottoCount = LottoInputView.getBuyManualLottoCount();
         List<String> manualLottoNumbers = LottoInputView.getBuyManualLottoNumbers(manualLottoCount);
-
-        Lottos lottos = getAutuLottos(LottoCount - manualLottoCount);
+        Lottos manualLottos = getManualLottos(manualLottoNumbers);
+        Lottos autoLottos = getAutuLottos(LottoCount - manualLottoCount);
+        Lottos lottos = Lottos.merge(manualLottos, autoLottos);
         printPurchaseInfo(lottos);
 
         Lotto winningLotto = getWinningLotto();
@@ -46,6 +48,13 @@ public class LottoController {
         String stringNumbers = LottoInputView.getWinningNumbers();
 
         return new Lotto(new PredefinedLottoNumberStrategy(stringNumbers));
+    }
+
+    private Lottos getManualLottos(List<String> manualLottoNumbers) {
+        List<Lotto> lottos = manualLottoNumbers.stream()
+                .map(numbers -> new Lotto(new PredefinedLottoNumberStrategy(numbers)))
+                .collect(Collectors.toList());
+        return new Lottos(lottos);
     }
 
     private LottoNumber getBonusNumber() {

@@ -32,6 +32,12 @@ public class Lottos {
                 .sum();
     }
 
+    public static Lottos merge(Lottos first, Lottos second) {
+        List<Lotto> mergedLottos = new ArrayList<>(first.getLottos());
+        mergedLottos.addAll(second.getLottos());
+        return new Lottos(mergedLottos);
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
