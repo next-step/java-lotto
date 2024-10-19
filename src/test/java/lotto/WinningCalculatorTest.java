@@ -15,21 +15,22 @@ class WinningCalculatorTest {
     @Test
     @DisplayName("당첨 통계 생성 확인")
     void generateWinningCountMap() {
-        List<Winning> winnings = Arrays.asList(Winning.THREE_MATCH,
-                                               Winning.FOUR_MATCH,
-                                               Winning.FIVE_MATCH,
+        List<Winning> winnings = Arrays.asList(Winning.FIFTH,
+                                               Winning.FOURTH,
+                                               Winning.THIRD,
                                                Winning.NONE,
-                                               Winning.THREE_MATCH,
-                                               Winning.FOUR_MATCH,
+                                               Winning.FIFTH,
+                                               Winning.FOURTH,
                                                Winning.NONE,
                                                Winning.NONE);
         WinningCalculator winningCalculator = new WinningCalculator(winnings);
 
         Map<Winning, Integer> expected = Map.of(
-            Winning.THREE_MATCH, 2,
-            Winning.FOUR_MATCH, 2,
-            Winning.FIVE_MATCH, 1,
-            Winning.SIX_MATCH, 0
+            Winning.FIFTH, 2,
+            Winning.FOURTH, 2,
+            Winning.THIRD, 1,
+            Winning.SECOND, 0,
+            Winning.FIRST, 0
         );
         assertThat(winningCalculator.getWinningCountMap()).isEqualTo(expected);
     }
@@ -37,11 +38,11 @@ class WinningCalculatorTest {
     @Test
     @DisplayName("수익률 계산 확인")
     void calculateRateOfReturn() {
-        List<Winning> winnings = Arrays.asList(Winning.THREE_MATCH,
-                                               Winning.FOUR_MATCH,
-                                               Winning.THREE_MATCH,
+        List<Winning> winnings = Arrays.asList(Winning.FIFTH,
+                                               Winning.FOURTH,
+                                               Winning.FIFTH,
                                                Winning.NONE,
-                                               Winning.THREE_MATCH,
+                                               Winning.FIFTH,
                                                Winning.NONE,
                                                Winning.NONE,
                                                Winning.NONE);

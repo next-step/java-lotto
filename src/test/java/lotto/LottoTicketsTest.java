@@ -32,6 +32,6 @@ class LottoTicketsTest {
 
         LottoTicket winningNumbers = new LottoTicket(1, 2, 3, 4, 5, 6);
 
-        assertThat(lottoTickets.calculateWinningResults(winningNumbers)).containsExactly(Winning.SIX_MATCH, Winning.FOUR_MATCH, Winning.NONE);
+        assertThat(lottoTickets.calculateWinningResults(winningNumbers)).containsExactly(Winning.FIRST, Winning.FOURTH, Winning.NONE);
     }
 }
