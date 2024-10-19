@@ -2,17 +2,16 @@ package lotto.view;
 
 import lotto.model.BuyAmount;
 import lotto.model.Lotto;
+import lotto.model.ManualCount;
 import lotto.model.Winning;
 import lotto.model.dto.LottoNumber;
-import lotto.util.SplitUtil;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static lotto.model.Result.LOTTO_PRICE;
+import static lotto.util.SplitUtil.*;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -22,11 +21,6 @@ public class InputView {
     public static final String RETRY_INPUT_MESSAGE = "다시 입력해주세요.";
     public static final String INPUT_MANUAL_LOTTO_BUY_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     public static final String INPUT_MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
-    public static final int START_NUMBER = 0;
-    public static final String ERROR_MANUAL_COUNT_BIGGER_THAN_BUY_COUNT = "수동으로 구매하고자 하는 로또의 갯수가 구입금액보다 큽니다.";
-    public static final String ERROR_MANUAL_COUNT_NOT_ALLOWED_NEGATIVE_NUMBER = "수동으로 구매하고자 하는 로또의 갯수는 음수가 될 수 없습니다";
-    public static final String ERROR_LOWER_MINIMUM_BUY_AMOUNT = "최소 구매금액보다 작습니다.";
-    public static final String LOTTO_NOT_ALLOWED_REMAINDER = "로또는 천원단위로 구매가 가능합니다.";
 
     public static BuyAmount inputBuyAmount() {
         try {
@@ -35,6 +29,16 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage() + RETRY_INPUT_MESSAGE);
             return inputBuyAmount();
+        }
+    }
+
+    public static ManualCount inputManualCount(BuyAmount buyAmount) {
+        try {
+            System.out.println(INPUT_MANUAL_LOTTO_BUY_COUNT_MESSAGE);
+            return new ManualCount(scannerNextInt(), buyAmount);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage() + RETRY_INPUT_MESSAGE);
+            return inputManualCount(buyAmount);
         }
     }
 
@@ -48,39 +52,13 @@ public class InputView {
         }
     }
 
-    public static int inputManualBuyCount(int buyCount) {
-        try {
-            System.out.println(INPUT_MANUAL_LOTTO_BUY_COUNT_MESSAGE);
-            int manualBuyCount = scannerNextInt();
-
-            boolean isManualCountBiggerThanBuyCount = buyCount < manualBuyCount;
-            if (isManualCountBiggerThanBuyCount) {
-                throw new IllegalArgumentException(ERROR_MANUAL_COUNT_BIGGER_THAN_BUY_COUNT);
-            }
-
-            boolean isMinus = manualBuyCount < 0;
-            if (isMinus) {
-                throw new IllegalArgumentException(ERROR_MANUAL_COUNT_NOT_ALLOWED_NEGATIVE_NUMBER);
-            }
-
-            return manualBuyCount;
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage() + RETRY_INPUT_MESSAGE);
-            return inputManualBuyCount(buyCount);
-        }
-    }
-
-    public static List<Lotto> inputManualLottoes(final int manualBuyCount) {
+    public static List<Lotto> inputManualLottoes(final ManualCount manualCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
         try {
-            return IntStream.range(START_NUMBER, manualBuyCount)
-                    .mapToObj(i -> {
-                        int[] numbers = SplitUtil.stringToNumbers(SCANNER.nextLine());
-                        return new Lotto(numbers);
-                    }).collect(Collectors.toList());
+            return manualCount.createLotto(i -> new Lotto(stringToNumbers(SCANNER.nextLine())));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage() + RETRY_INPUT_MESSAGE);
-            return inputManualLottoes(manualBuyCount);
+            return inputManualLottoes(manualCount);
         }
     }
 
@@ -98,11 +76,10 @@ public class InputView {
         try {
             System.out.println();
             System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
-            int[] parsedLottoNumbers = SplitUtil.stringToNumbers(SCANNER.nextLine());
-            List<LottoNumber> lottoNumbers = Arrays.stream(parsedLottoNumbers)
+            int[] parsedLottoNumbers = stringToNumbers(SCANNER.nextLine());
+            return new Lotto(() -> Arrays.stream(parsedLottoNumbers)
                     .mapToObj(LottoNumber::new)
-                    .collect(Collectors.toList());
-            return new Lotto(() -> lottoNumbers);
+                    .collect(Collectors.toList()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputWinningLotto();
