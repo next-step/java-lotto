@@ -17,6 +17,10 @@ public class LottoPurchase {
         return totalCount - manualCount;
     }
 
+    public int getTotalCount() {
+        return manualCount + autoCount;
+    }
+
     public int getManualCount() {
         return manualCount;
     }

@@ -10,22 +10,27 @@ import java.util.List;
 
 public class LottoGameController {
     public void run() {
-        int buyAmount = LottoInputView.getBuyAmount();
-        int manualLottoCount = LottoInputView.getBuyManualLottoCount();
-        List<String> manualLottoNumbers = LottoInputView.getBuyManualLottoNumbers(manualLottoCount);
+        try {
+            int buyAmount = LottoInputView.getBuyAmount();
+            int manualLottoCount = LottoInputView.getBuyManualLottoCount();
+            List<String> manualLottoNumbers = LottoInputView.getBuyManualLottoNumbers(manualLottoCount);
 
-        LottoGameService gameService = new LottoGameService(buyAmount, manualLottoCount, manualLottoNumbers);
+            LottoGameService lottoGameService = new LottoGameService(buyAmount, manualLottoCount, manualLottoNumbers);
 
-        printPurchaseInfo(gameService.getLottoPurchase());
-        LottoOutputView.printLottos(gameService.getLottos());
+            printPurchaseInfo(lottoGameService.getLottoPurchase());
+            LottoOutputView.printLottos(lottoGameService.getLottos());
 
-        String winningNumbers = LottoInputView.getWinningNumbers();
-        int bonusNumber = LottoInputView.getBonusNumber();
+            String winningNumbers = LottoInputView.getWinningNumbers();
+            int bonusNumber = LottoInputView.getBonusNumber();
 
-        WinningLotto winningLotto = gameService.createWinningLotto(winningNumbers, bonusNumber);
+            WinningLotto winningLotto = lottoGameService.createWinningLotto(winningNumbers, bonusNumber);
 
-        LottoOutputView.printWinningStatistics(gameService.getWinningResults(winningLotto));
-        LottoOutputView.printPrizeRate(gameService.calculatePrizeRate(winningLotto));
+            LottoOutputView.printWinningStatistics(lottoGameService.calculateWinningResults(winningLotto));
+            LottoOutputView.printPrizeRate(lottoGameService.calculatePrizeRate(winningLotto));
+        } catch (Exception e) {
+            System.out.println("잘못된 동작입니다.");
+        }
+
     }
 
     private void printPurchaseInfo(LottoPurchase lottoPurchase) {

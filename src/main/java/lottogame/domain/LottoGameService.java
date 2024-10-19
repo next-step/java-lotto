@@ -17,8 +17,8 @@ public class LottoGameService {
     }
 
     private Lottos createLottos(List<String> manualLottoNumbers) {
-        Lottos manualLottos = getManualLottos(manualLottoNumbers);
-        Lottos autoLottos = getAutoLottos(lottoPurchase.getAutoCount());
+        Lottos manualLottos = createManualLottos(manualLottoNumbers);
+        Lottos autoLottos = createAutoLottos(lottoPurchase.getAutoCount());
 
         return Lottos.merge(manualLottos, autoLottos);
     }
@@ -30,14 +30,24 @@ public class LottoGameService {
         return new WinningLotto(winningLotto, bonus);
     }
 
-    private Lottos getAutoLottos(int count) {
+    private Lottos createAutoLottos(int count) {
         return new Lottos(count);
     }
 
-    private Lottos getManualLottos(List<String> manualLottoNumbers) {
+    private Lottos createManualLottos(List<String> manualLottoNumbers) {
         return new Lottos(manualLottoNumbers.stream()
                 .map(numbers -> new Lotto(new PredefinedLottoNumberStrategy(numbers)))
                 .collect(Collectors.toList()));
+    }
+
+    public Map<Rank, Integer> calculateWinningResults(WinningLotto winningLotto) {
+        return lottos.calculateWinningStatistics(winningLotto);
+    }
+
+    public double calculatePrizeRate(WinningLotto winningLotto) {
+        double totalPrizeAmount = lottos.calculateTotalPrizeAmount(winningLotto);
+
+        return totalPrizeAmount / lottoPurchase.getTotalAmount();
     }
 
     public LottoPurchase getLottoPurchase() {
@@ -46,15 +56,5 @@ public class LottoGameService {
 
     public Lottos getLottos() {
         return lottos;
-    }
-
-    public Map<Rank, Integer> getWinningResults(WinningLotto winningLotto) {
-        return lottos.calculateWinningStatistics(winningLotto);
-    }
-
-    public double calculatePrizeRate(WinningLotto winningLotto) {
-        double totalPrizeAmount = lottos.calculateTotalPrizeAmount(winningLotto);
-
-        return totalPrizeAmount / lottoPurchase.getTotalAmount();
     }
 }
