@@ -18,7 +18,11 @@ public enum Winning {
         this.prize = prize;
     }
 
-    public static Winning fromMatchCount(int matchCount) {
+    public static Winning fromMatchCount(int matchCount, boolean hasBonus) {
+        if (matchCount == THIRD.matchCount) {
+            return hasBonus ? SECOND : THIRD;
+        }
+
         return Arrays.stream(values())
                      .filter(winning -> winning.matchCount == matchCount)
                      .findFirst()

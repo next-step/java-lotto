@@ -29,9 +29,9 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public List<Winning> calculateWinningResults(LottoTicket winningNumbers) {
+    public List<Winning> calculateWinningResults(LottoTicket winningNumbers, LottoNumber bonusNumber) {
         return lottoTickets.stream()
-                           .map(ticket -> Winning.fromMatchCount(ticket.matchCount(winningNumbers)))
+                           .map(ticket -> Winning.fromMatchCount(ticket.matchCount(winningNumbers), ticket.contains(bonusNumber)))
                            .collect(Collectors.toList());
     }
 }

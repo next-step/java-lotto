@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Winning;
@@ -26,12 +27,14 @@ class LottoTicketsTest {
     void calculateWinningResults() {
         List<LottoTicket> tickets = new ArrayList<>();
         tickets.add(new LottoTicket(1, 2, 3, 4, 5, 6));
-        tickets.add(new LottoTicket(1, 2, 3, 4, 7, 8));
+        tickets.add(new LottoTicket(1, 2, 3, 4, 5, 7));
+        tickets.add(new LottoTicket(1, 2, 3, 4, 5, 8));
         tickets.add(new LottoTicket(9, 10, 11, 12, 13, 14));
         LottoTickets lottoTickets = new LottoTickets(tickets);
 
         LottoTicket winningNumbers = new LottoTicket(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(7);
 
-        assertThat(lottoTickets.calculateWinningResults(winningNumbers)).containsExactly(Winning.FIRST, Winning.FOURTH, Winning.NONE);
+        assertThat(lottoTickets.calculateWinningResults(winningNumbers, bonusNumber)).containsExactly(Winning.FIRST, Winning.SECOND, Winning.THIRD, Winning.NONE);
     }
 }
