@@ -22,7 +22,8 @@ public class WinningStatisticsTest {
         assertThat(expectedRankCounts[0]).isEqualTo(winningStatistics.getRankCount(Rank.THREE_MATCHES));
         assertThat(expectedRankCounts[1]).isEqualTo(winningStatistics.getRankCount(Rank.FOUR_MATCHES));
         assertThat(expectedRankCounts[2]).isEqualTo(winningStatistics.getRankCount(Rank.FIVE_MATCHES));
-        assertThat(expectedRankCounts[3]).isEqualTo(winningStatistics.getRankCount(Rank.SIX_MATCHES));
+        assertThat(expectedRankCounts[3]).isEqualTo(winningStatistics.getRankCount(Rank.FIVE_MATCHES_WITH_BONUS));
+        assertThat(expectedRankCounts[4]).isEqualTo(winningStatistics.getRankCount(Rank.SIX_MATCHES));
     }
 
     private static Stream<Arguments> lottoRankSummaryArguments() {
@@ -30,11 +31,12 @@ public class WinningStatisticsTest {
                 List.of(
                         new Lotto(1, 2, 3, 7, 8, 9),
                         new Lotto(1, 2, 3, 4, 5, 9),
+                        new Lotto(1, 2, 3, 4, 5, 45),
                         new Lotto(11, 12, 13, 14, 15, 16)
                 )
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        int[] expectedRankCounts = {1, 0, 1, 0};
+        int[] expectedRankCounts = {1, 0, 1, 1, 0};
         return Stream.of(
                 Arguments.of(machine, winningLotto, expectedRankCounts)
         );
