@@ -27,4 +27,8 @@ public class ResultView {
         System.out.println();
     }
 
+    public static void printWinningRate(double winningRate) {
+        double formattedNumber = Math.floor(winningRate * 100) / 100;
+        System.out.printf("총 수익률은 " + formattedNumber + "입니다.");
+    }
 }

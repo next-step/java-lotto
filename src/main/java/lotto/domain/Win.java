@@ -19,4 +19,7 @@ public class Win {
         return WinningPrize.getPrizeMoney(matchCount);
     }
 
+    public double calculateWinningRate(int money, int totalWinningAmount) {
+        return (double) totalWinningAmount / money;
+    }
 }

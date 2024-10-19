@@ -53,5 +53,8 @@ public class LottoController {
             int count = matchCountMap.get(matchCount);
             ResultView.printMatchCount(matchCount, prizeMoney, count);
         }
+
+        double winningRate = win.calculateWinningRate(money, totalWinningAmount);
+        ResultView.printWinningRate(winningRate);
     }
 }

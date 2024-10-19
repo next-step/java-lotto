@@ -23,4 +23,17 @@ public class WinningTest {
         assertThat(matchCount).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("당첨 수익률이 정확하게 반환되는지 확인")
+    void calculateWinningRate() {
+
+        int money = 14000;
+        int totalWinningAmount = 5000;
+
+        Win win = new Win();
+        double winningRate = win.calculateWinningRate(money, totalWinningAmount);
+        double formattedNumber = Math.floor(winningRate * 100) / 100;
+        assertThat(formattedNumber).isEqualTo(0.35);
+    }
+
 }
