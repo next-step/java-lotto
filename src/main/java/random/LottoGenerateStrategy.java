@@ -1,5 +1,7 @@
 package random;
 
+import java.util.List;
+
 public class LottoGenerateStrategy implements LottoGenerator {
     private LottoGenerator lottoGeneratorStrategy;
 
@@ -8,7 +10,7 @@ public class LottoGenerateStrategy implements LottoGenerator {
     }
 
     @Override
-    public int executeStrategy() {
+    public List<Integer> executeStrategy() {
         return lottoGeneratorStrategy.executeStrategy();
     }
 

@@ -21,4 +21,8 @@ public class TryLottoCount {
     public int hashCode() {
         return Objects.hashCode(tryLottoCount);
     }
+
+    public int currentCount() {
+        return tryLottoCount;
+    }
 }

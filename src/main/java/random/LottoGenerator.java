@@ -1,6 +1,8 @@
 package random;
 
+import java.util.List;
+
 @FunctionalInterface
 public interface LottoGenerator {
-    int executeStrategy();
+    List<Integer> executeStrategy();
 }
