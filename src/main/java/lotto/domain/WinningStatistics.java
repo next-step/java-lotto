@@ -10,7 +10,7 @@ public class WinningStatistics {
     public WinningStatistics(LotteryMachine machine, Lotto winningLotto, LottoNumber bonusNumber) {
         this.lotteryMachine = machine;
         validateBonusNumber(winningLotto, bonusNumber);
-        calculateStatistics(machine, winningLotto);
+        calculateStatistics(machine, winningLotto, bonusNumber);
     }
 
     private void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
@@ -19,10 +19,12 @@ public class WinningStatistics {
         }
     }
 
-    private void calculateStatistics(LotteryMachine machine, Lotto winningLotto) {
+    private void calculateStatistics(LotteryMachine machine, Lotto winningLotto, LottoNumber bonusNumber) {
         initialRankStatistics();
         for (Lotto lotto : machine.getLottos()) {
-            Rank rank = Rank.valueOfMatchCount(lotto.countMatchingNumbers(winningLotto));
+            int matchCount = lotto.countMatchingNumbers(winningLotto);
+            boolean isBonusMatch = lotto.contains(bonusNumber);
+            Rank rank = Rank.valueOfMatchCount(matchCount, isBonusMatch);
             rankCounts.put(rank, rankCounts.getOrDefault(rank, 0) + 1);
         }
     }
