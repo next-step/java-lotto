@@ -20,13 +20,7 @@ public class LottoService {
     }
 
     public Lottos generateLottos(Price price) {
-        List<Lotto> lotto = new ArrayList<>();
-
-        price.foreach(() -> {
-            lotto.add(new Lotto(numberGenerateStrategy.generateNumber()));
-        });
-
-        return new Lottos(lotto);
+        return price.generateLottos(numberGenerateStrategy);
     }
 
     public Statistics generateStatistics(Lottos lottos, Lotto winningLotto, Price price) {

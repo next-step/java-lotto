@@ -1,7 +1,12 @@
 package lotto.model;
 
+import lotto.strategy.NumberGenerateStrategy;
+
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Price {
 
@@ -25,11 +30,14 @@ public class Price {
         return Integer.parseInt(text);
     }
 
-    public void foreach(Runnable runnable) {
-        long count = this.price / LOTTO_PRICE;
-        for (int i = 0 ; i < count ; i++) {
-            runnable.run();
-        }
+    public Lottos generateLottos(NumberGenerateStrategy numberGenerateStrategy) {
+        int count = (int) this.price / LOTTO_PRICE;
+
+        List<Lotto> lottos = IntStream.range(0, count)
+                .mapToObj(i -> new Lotto(numberGenerateStrategy.generateNumber()))
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
     }
 
     public double calculateRateOfProfit(long profit) {
