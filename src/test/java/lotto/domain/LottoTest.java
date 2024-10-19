@@ -54,4 +54,15 @@ class LottoTest {
                 .isEqualTo(expected);
     }
 
+    @DisplayName("로또의 Contains 메서드가 올바른 결과를 반환하는지")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6/1/true", "1,2,3,4,5,6/7/false"}, delimiter = '/')
+    void containsTest(String lottoNumbers, int number, boolean expected) {
+        Lotto lotto = new Lotto(lottoNumbers);
+        LottoNumber lottoNumber = new LottoNumber(number);
+
+        assertThat(lotto.contains(lottoNumber))
+                .isEqualTo(expected);
+    }
+
 }
