@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.model.Lottoes;
 import lotto.model.Lotto;
+import lotto.model.Lottoes;
 import lotto.model.Result;
 
 import java.util.List;
@@ -26,11 +26,6 @@ public class ResultView {
         System.out.println(WINNING_STATISTICS_TITLE);
         System.out.println(rankingResults(rankings));
         System.out.println(totalEarningRate(buyCount, rankings));
-    }
-
-    private static String buyCountMessage(Lottoes lottoes) {
-        int buyerLottoesSize = lottoes.value().size();
-        return String.format(BUY_COUNT_MESSAGE_FORMAT, buyerLottoesSize);
     }
 
     private static String printLottoes(Lottoes lottoes) {

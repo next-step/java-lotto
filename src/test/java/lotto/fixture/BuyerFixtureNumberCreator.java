@@ -1,7 +1,6 @@
 package lotto.fixture;
 
 import lotto.model.dto.LottoNumber;
-import lotto.util.BonusCreator;
 import lotto.util.NumbersCreator;
 
 import java.util.Arrays;
