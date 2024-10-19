@@ -13,9 +13,14 @@ public class ProfitMargin {
         this.purchaseAmount = purchaseAmount;
     }
 
+    public void printMargin() {
+        double profitMargin = calculateMargin();
+        System.out.println("총 수익률은 " + profitMargin + "입니다.");
+    }
+
     public double calculateMargin() {
         return new BigDecimal(winningAmount)
-                .divide(new BigDecimal(purchaseAmount),2, RoundingMode.FLOOR)
+                .divide(new BigDecimal(purchaseAmount), 2, RoundingMode.FLOOR)
                 .doubleValue();
-         }
+    }
 }

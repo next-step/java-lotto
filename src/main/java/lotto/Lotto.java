@@ -48,4 +48,7 @@ public class Lotto {
         return Objects.hashCode(tryLottoCount);
     }
 
+    public void runWinner(LottoWinner lottoWinner) {
+        lottoNumberList.runWinner(lottoWinner);
+    }
 }

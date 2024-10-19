@@ -17,4 +17,9 @@ public class OneTimeRoundLottoNumberList {
                 .collect(Collectors.joining(", "));
         return "[" + format +']';
     }
+
+    public void runWinner(LottoWinner lottoWinner) {
+        int matchingCount = lottoWinner.findMachingCount(lottoNumberList);
+        lottoWinner.updateMatchingCount(matchingCount);
+    }
 }

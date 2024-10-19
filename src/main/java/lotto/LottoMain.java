@@ -11,7 +11,7 @@ public class LottoMain {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
         int perchaseAmount = scanner.nextInt();
-        System.out.println(perchaseAmount);
+        scanner.nextLine();
 
         Lotto lotto = Lotto.InitLotto();
         System.out.println(lotto.calculateLottoTryCount(perchaseAmount) + "개를 구매했습니다.");
@@ -20,11 +20,17 @@ public class LottoMain {
         lotto.printLottoList();
 
         System.out.println("지난주 당첨 번호를 입력해주세요");
+        String lottoWinnerNumbers = scanner.nextLine();
+        LottoWinner lottoWinner = new LottoWinner(lottoWinnerNumbers);
 
-        //TODO 당첨번호 입력 문자열로 받아서 배열처리
-        //TODO 당첨 통계 작성.
+        lotto.runWinner(lottoWinner);
+        System.out.println("당첨 통계");
+        System.out.println("---------");
 
-
+        lottoWinner.printMatchingCount();
+        int winningAmount = lottoWinner.winningAmount();
+        ProfitMargin profitMargin = new ProfitMargin(winningAmount, perchaseAmount);
+        profitMargin.printMargin();
     }
 
 }

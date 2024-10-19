@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumberList {
@@ -22,4 +21,9 @@ public class LottoNumberList {
         }
     }
 
+    public void runWinner(LottoWinner lottoWinner) {
+        for (OneTimeRoundLottoNumberList numberList : lottoNumberList) {
+            numberList.runWinner(lottoWinner);
+        }
+    }
 }
