@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LottoWinnerNumber {
     List<Integer> lottoWinnerNumberList;
@@ -11,5 +12,18 @@ public class LottoWinnerNumber {
 
     public boolean contains(int requestLottoNumber) {
         return lottoWinnerNumberList.contains(requestLottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoWinnerNumber that = (LottoWinnerNumber) o;
+        return Objects.equals(lottoWinnerNumberList, that.lottoWinnerNumberList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lottoWinnerNumberList);
     }
 }
