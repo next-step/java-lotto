@@ -14,7 +14,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(int number) {
-        if (!(MIN_NUMBER <= number && number <= MAX_NUMBER)) {
+        if (number < MIN_NUMBER || MAX_NUMBER < number) {
             throw new IllegalArgumentException(NUMBER_INIT_ERROR_MESSAGE);
         }
         this.number = number;
