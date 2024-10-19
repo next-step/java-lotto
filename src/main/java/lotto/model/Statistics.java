@@ -2,12 +2,10 @@ package lotto.model;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class Statistics {
-
-    private static final List<String> MATCH_STATIC_MESSAGES = List.of("3개 일치 (5000원)- %d개", "4개 일치 (50000원)- %d개", "5개 일치 (1500000원)- %d개", "6개 일치 (2000000000원)- %d개");
-    public static final String PROFIT_STATIC_MESSAGE = "총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     List<Long> matchingCounts;
     Double profit;
@@ -17,11 +15,14 @@ public class Statistics {
         this.profit = profit;
     }
 
-    public void foreach(Consumer consumer) {
+    public void forEachMatchingCount(BiConsumer<Integer, Long> consumer) {
         for (int i = 0 ; i < matchingCounts.size() ; i++) {
-            consumer.accept(String.format(MATCH_STATIC_MESSAGES.get(i), matchingCounts.get(i)));
+            consumer.accept(i, matchingCounts.get(i));
         }
-        consumer.accept(String.format(PROFIT_STATIC_MESSAGE, this.profit));
+    }
+
+    public void applyToProfit(Consumer consumer) {
+        consumer.accept(this.profit);
     }
 
     @Override
@@ -36,4 +37,5 @@ public class Statistics {
     public int hashCode() {
         return Objects.hash(matchingCounts, profit);
     }
+
 }
