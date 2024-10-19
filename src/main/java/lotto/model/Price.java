@@ -1,33 +1,24 @@
 package lotto.model;
 
 import lotto.strategy.NumberGenerateStrategy;
+import lotto.util.Utils;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Price {
 
-    private static final Pattern pricePattern = Pattern.compile("^[0-9]+$");
-    public static final String PRICE_INIT_EXCEPT_MESSAGE = "양의 정수 하나를 입력해주세요!";
     public static final int LOTTO_PRICE = 1000;
     private long price;
 
     public Price(String text) {
-        this(toInt(text));
+        this(Utils.stringToLong(text));
     }
 
-    public Price(int price) {
+    public Price(long price) {
         this.price = price;
-    }
-
-    private static int toInt(String text) {
-        if (!pricePattern.matcher(text).matches()) {
-            throw new IllegalArgumentException(PRICE_INIT_EXCEPT_MESSAGE);
-        }
-        return Integer.parseInt(text);
     }
 
     public Lottos generateLottos(NumberGenerateStrategy numberGenerateStrategy) {

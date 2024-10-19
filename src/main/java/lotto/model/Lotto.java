@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.util.Utils;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -11,15 +13,15 @@ public class Lotto {
     private final Set<LottoNumber> numbers;
 
     public Lotto(int... numbers) {
-        this(Set.of(Arrays.stream(numbers).mapToObj(LottoNumber::new).toArray(LottoNumber[]::new)));
+        this(Utils.intsToSet(numbers));
     }
 
     public Lotto(List<Integer> numbers) {
-        this(Set.of(numbers.stream().map(LottoNumber::new).toArray(LottoNumber[]::new)));
+        this(Utils.integersToSet(numbers));
     }
 
     public Lotto(String text) {
-        this(Set.of(Arrays.stream(text.split(NUMBER_SEPERATOR)).map(LottoNumber::new).toArray(LottoNumber[]::new)));
+        this(Utils.stringToSet(text));
     }
 
     public Lotto(Set<LottoNumber> numbers) {
