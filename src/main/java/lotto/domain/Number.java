@@ -1,7 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Number implements Comparable<Number> {
     public static final int START_NUMBER = 1;
@@ -16,19 +17,10 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
-    public int countMatch(final List<Number> numbers) {
-        return (int) numbers.stream()
-                .filter(number -> Objects.equals(number, this))
-                .count();
-    }
-
-    public int sum(int sum, final List<Number> numbers) {
-        for (Number number : numbers) {
-            if (number.equals(this)) {
-                sum++;
-            }
-        }
-        return sum;
+    public static List<Number> numbers(final Integer... numbers) {
+        return Arrays.stream(numbers)
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
     @Override

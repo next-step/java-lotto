@@ -1,11 +1,7 @@
 package lotto.domain;
 
-import lotto.enumeration.Rank;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Number> numbers;
@@ -14,18 +10,16 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Lotto(final Integer... numbers) {
-        this.numbers = Arrays.stream(numbers)
-                .map(Number::new)
-                .collect(Collectors.toList());
+    public int countWinningNumbers(final InputNumber inputNumber) {
+        return inputNumber.countWinningNumbers(numbers);
     }
 
-    public Rank rank(final InputNumber inputNumber) {
-        int count = inputNumber.sumMatchCount(numbers);
-        if (count == 5 && inputNumber.isMatchBonusNo(numbers)) {
-            return Rank.SECOND;
+    public boolean containsBonusNumber(final InputNumber inputNumber) {
+        boolean isMatch = false;
+        for (Number number : numbers) {
+            isMatch = inputNumber.existBonusNumber(number);
         }
-        return Rank.rank(count);
+        return isMatch;
     }
 
     @Override

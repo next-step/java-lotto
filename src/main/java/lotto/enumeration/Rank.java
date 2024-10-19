@@ -1,5 +1,8 @@
 package lotto.enumeration;
 
+import lotto.domain.InputNumber;
+import lotto.domain.Lotto;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -19,18 +22,26 @@ public enum Rank {
         this.price = price;
     }
 
+    public static Rank rank(final Lotto lotto, final InputNumber inputNumber) {
+        int matchCount = lotto.countWinningNumbers(inputNumber);
+        if (matchCount == SECOND.count && lotto.containsBonusNumber(inputNumber)) {
+            return SECOND;
+        }
+        return rank(matchCount);
+    }
+
+    private static Rank rank(final int count) {
+        return Arrays.stream(values())
+                .filter(rank -> Objects.equals(rank.count, count))
+                .findFirst()
+                .orElse(Rank.MISS);
+    }
+
     public int getCount() {
         return count;
     }
 
     public int getPrice() {
         return price;
-    }
-
-    public static Rank rank(final int count) {
-        return Arrays.stream(values())
-                .filter(rank -> Objects.equals(rank.count, count))
-                .findFirst()
-                .orElse(Rank.MISS);
     }
 }
