@@ -1,19 +1,19 @@
-package lotto.utility;
+package lotto.service;
 
 import java.util.*;
 
-public class LottoNumberGenerator {
+public class LottoGenerator {
 
     private static final Random RANDOM = new Random();
 
-    private LottoNumberGenerator() {
+    private LottoGenerator() {
     }
 
     public static List<Integer> generateLottoNumber() {
         Set<Integer> lottoSet = new HashSet<>();
 
-        while(lottoSet.size() < 6) {
-            lottoSet.add(LottoNumberGenerator.generateRandomNumber());
+        while (lottoSet.size() < 6) {
+            lottoSet.add(LottoGenerator.generateRandomNumber());
         }
 
         List<Integer> lotto = new ArrayList<>(lottoSet);

@@ -1,48 +1,38 @@
 package lotto.service;
 
-import lotto.utility.LottoWinningStaticsCalculator;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoService {
-    private final static int lottoPrice = 1000;
-
-    private final LottoSeller lottoSeller;
+    private static final int LOTTO_PRICE = 1000;
 
     public LottoService() {
-        lottoSeller = new LottoSeller();
     }
 
-    public int calculateLottoCount(int purchaseAmount) {
-        return purchaseAmount / lottoPrice;
+    public int canBuyLottoCount(int purchaseAmount) {
+        return purchaseAmount / LOTTO_PRICE;
     }
 
-    public void purchaseLottos(int lottoCount) {
-        lottoSeller.sellLottos(lottoCount);
+    public List<Integer> buyLotto() {
+        return LottoSeller.sellLotto();
     }
 
-    public Map<Integer, Integer> provideWinningStatics(String lastWeekWinningNumbers, Map<Integer, List<Integer>> lottos) {
+    public int[] provideWinningStatics(String lastWeekWinningNumbers, List<Integer>[] lotto) {
         List<Integer> winningNumber = parseWinningNumber(lastWeekWinningNumbers);
 
-        return LottoWinningStaticsCalculator.calculateWinningStatics(winningNumber, lottos);
+        return LottoWinningStaticsCalculator.calculateWinningStatics(winningNumber, lotto);
     }
 
-    private static List<Integer> parseWinningNumber(String lastWeekWinningNumber) {
+    private List<Integer> parseWinningNumber(String lastWeekWinningNumber) {
         return Arrays.stream(lastWeekWinningNumber.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public float provideReturnRate(int purchaseAmount, Map<Integer, Integer> statics) {
-        return LottoWinningStaticsCalculator.calculateReturnRate(purchaseAmount, statics);
-    }
-
-    public Map<Integer, List<Integer>> provideLottos() {
-        return lottoSeller.provideLottos();
+    public float provideReturnRate(int purchaseAmount, int[] winningStatics) {
+        return LottoWinningStaticsCalculator.calculateReturnRate(purchaseAmount, winningStatics);
     }
 
 }
