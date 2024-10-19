@@ -1,4 +1,6 @@
-package lottogame.domain;
+package lottogame.domain.lotto;
+
+import lottogame.domain.strategy.LottoAutoStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
 package lottogame.ui;
 
-import lottogame.domain.Lotto;
-import lottogame.domain.LottoNumber;
-import lottogame.domain.Lottos;
-import lottogame.domain.Rank;
+import lottogame.domain.lotto.Lotto;
+import lottogame.domain.lotto.LottoNumber;
+import lottogame.domain.lotto.Lottos;
+import lottogame.domain.lotto.Rank;
 
 import java.util.Arrays;
 import java.util.Comparator;

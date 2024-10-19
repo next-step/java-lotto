@@ -1,4 +1,4 @@
-package lottogame.domain;
+package lottogame.domain.lotto;
 
 public class WinningLotto {
     private final Lotto winningLotto;

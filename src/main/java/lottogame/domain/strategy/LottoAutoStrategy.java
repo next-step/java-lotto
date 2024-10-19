@@ -1,4 +1,8 @@
-package lottogame.domain;
+package lottogame.domain.strategy;
+
+import lottogame.domain.lotto.LottoGameConstants;
+import lottogame.domain.lotto.LottoNumber;
+import lottogame.domain.lotto.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,6 +1,8 @@
 package lottogame.controller;
 
 import lottogame.domain.*;
+import lottogame.domain.lotto.*;
+import lottogame.domain.strategy.PredefinedLottoNumberStrategy;
 import lottogame.ui.LottoInputView;
 import lottogame.ui.LottoOutputView;
 

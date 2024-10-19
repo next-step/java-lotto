@@ -1,5 +1,10 @@
 package lottogame.domain;
 
+import lottogame.domain.lotto.LottoNumber;
+import lottogame.domain.lotto.LottoNumbers;
+import lottogame.domain.strategy.LottoAutoStrategy;
+import lottogame.domain.strategy.LottoStrategy;
+import lottogame.domain.strategy.PredefinedLottoNumberStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
