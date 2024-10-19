@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Lotto;
-import lotto.model.Lottoes;
-import lotto.model.Result;
-import lotto.model.Winning;
+import lotto.model.*;
 import lotto.util.LottoNumbersCreator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -12,8 +9,8 @@ import static lotto.model.Result.LOTTO_PRICE;
 
 public class LottoController {
     public static void run() {
-        int buyAmount = InputView.inputBuyAmount();
-        int buyCount = calculateBuyCount(buyAmount);
+        BuyAmount buyAmount = InputView.inputBuyAmount();
+        int buyCount = buyAmount.count();
         int manualBuyCount = InputView.inputManualBuyCount(buyCount);
         int autoBuyCount = calculateAutoBuyCount(buyCount, manualBuyCount);
 

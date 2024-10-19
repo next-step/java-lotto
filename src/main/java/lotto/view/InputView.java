@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.BuyAmount;
 import lotto.model.Lotto;
 import lotto.model.Winning;
 import lotto.model.dto.LottoNumber;
@@ -27,22 +28,10 @@ public class InputView {
     public static final String ERROR_LOWER_MINIMUM_BUY_AMOUNT = "최소 구매금액보다 작습니다.";
     public static final String LOTTO_NOT_ALLOWED_REMAINDER = "로또는 천원단위로 구매가 가능합니다.";
 
-    public static int inputBuyAmount() {
+    public static BuyAmount inputBuyAmount() {
         try {
             System.out.println(INPUT_BUY_AMOUNT_MESSAGE);
-            int buyAmount = scannerNextInt();// TODO: 객체 추출
-
-            boolean lowerMinimumBuyAmount = buyAmount < LOTTO_PRICE;
-            if (lowerMinimumBuyAmount) {
-                throw new IllegalArgumentException(ERROR_LOWER_MINIMUM_BUY_AMOUNT);
-            }
-
-            boolean isNotBuyAmountRemainderZero = buyAmount % LOTTO_PRICE != 0;
-            if (isNotBuyAmountRemainderZero) {
-                throw new IllegalArgumentException(LOTTO_NOT_ALLOWED_REMAINDER);
-            }
-
-            return buyAmount;
+            return new BuyAmount(scannerNextInt());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage() + RETRY_INPUT_MESSAGE);
             return inputBuyAmount();
