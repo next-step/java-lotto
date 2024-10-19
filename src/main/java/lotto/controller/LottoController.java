@@ -1,31 +1,33 @@
 package lotto.controller;
 
+import lotto.model.LottoBuyer;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoController {
     public static void main(String[] args) {
-        int purchaseAmount = InputView.inputPurchaseAmount();
+        int buyAmount = InputView.inputBuyAmount();
 
         LottoService lottoService = new LottoService();
 
-        int lottoCount = lottoService.calculateLottoCount(purchaseAmount);
-        ResultView.printPurchaseLottoCount(lottoCount);
+        int canBuyLottoCount = lottoService.canBuyLottoCount(buyAmount);
+        LottoBuyer lottoBuyer = new LottoBuyer(canBuyLottoCount);
+        ResultView.printCanBuyLottoCount(canBuyLottoCount);
 
-        lottoService.purchaseLottos(lottoCount);
-        Map<Integer, List<Integer>> lottos = lottoService.provideLottos();
-        ResultView.printLottoNumbers(lottos);
+        for (int count = 0; count < canBuyLottoCount; count++) {
+            List<Integer> lotto = lottoService.buyLotto();
+            lottoBuyer.saveLotto(count, lotto);
+            ResultView.printLottoNumber(lotto);
+        }
 
         String lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
-
-        Map<Integer, Integer> winningStatics = lottoService.provideWinningStatics(lastWeekWinningNumbers, lottos);
+        int[] winningStatics = lottoService.provideWinningStatics(lastWeekWinningNumbers, lottoBuyer.giveLottos());
         ResultView.printWinningStatics(winningStatics);
 
-        float returnRate = lottoService.provideReturnRate(purchaseAmount, winningStatics);
+        float returnRate = lottoService.provideReturnRate(buyAmount, winningStatics);
         ResultView.printReturnRate(returnRate);
     }
 }

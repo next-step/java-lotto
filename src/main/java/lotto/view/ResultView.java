@@ -10,27 +10,22 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseLottoCount(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printCanBuyLottoCount(int canBuyLottoCount) {
+        System.out.println(canBuyLottoCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoNumbers(Map<Integer, List<Integer>> lottos) {
-        for (int count = 1; count <= lottos.size(); count++) {
-            List<Integer> lotto = lottos.get(count);
+    public static void printLottoNumber(List<Integer> lotto) {
+        Collections.sort(lotto);
 
-            Collections.sort(lotto);
-
-            System.out.println(lotto);
-        }
-        System.out.println();
+        System.out.println(lotto);
     }
 
-    public static void printWinningStatics(Map<Integer, Integer> winningStatics) {
+    public static void printWinningStatics(int[] winningStatics) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
         for (int count = 3; count <= 6; count++) {
-            System.out.println(count + "개 일치 (" + PRIZE[count] + "원)- " + winningStatics.get(count) + "개");
+            System.out.println(count + "개 일치 (" + PRIZE[count] + "원)- " + winningStatics[count] + "개");
         }
     }
 
