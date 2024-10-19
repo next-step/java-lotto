@@ -4,10 +4,11 @@ import java.util.Arrays;
 
 public enum Prize {
 
-    SIX(6, 2_000_000_000),
-    FIVE(5, 1_500_000),
-    FOUR(4, 50000),
-    THREE(3, 5000);
+    FIRST(6, 2_000_000_000),
+    SECOND(5,30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000);
 
     private int hit;
     private int value;
@@ -27,6 +28,13 @@ public enum Prize {
                 .map(Prize::getValue)
                 .findFirst()
                 .orElse(0);
+    }
+
+    public static int getSecondPrizeOrThirdPrize(boolean bonusNumber) {
+        if(bonusNumber) {
+            return SECOND.getValue();
+        }
+        return THIRD.getValue();
     }
 
 }

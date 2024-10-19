@@ -4,7 +4,6 @@ import lotto.exception.PrizeOverFlowIsNegativeException;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -26,11 +25,11 @@ public class Lottos {
         return lottos;
     }
 
-    public int getWinningPrize(Lotto winningLotto) {
+    public int getWinningPrize(Lotto winningLotto, LottoNumber bonusNumber) {
         int totalPrize = 0;
         int eachPrize = 0;
         for (Lotto lotto : lottos) {
-            eachPrize = lotto.lottoWinningStatus(winningLotto);
+            eachPrize = lotto.lottoWinningStatus(winningLotto, bonusNumber);
             validOverFlow(eachPrize, totalPrize);
             validtotalPrize(eachPrize, totalPrize);
             totalPrize += eachPrize;
@@ -54,14 +53,14 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public Map<Prize, Integer> calculateStatistic(int totalPrize) {
+    public LottoResultStatistic calculateStatistic(int totalPrize) {
         LinkedHashMap<Prize, Integer> statistic = new LinkedHashMap<>();
         int prize = totalPrize;
         for (Prize price : Prize.values()) {
             statistic.put(price, prize / price.getValue());
             prize %= price.getValue();
         }
-        return statistic;
+        return new LottoResultStatistic(statistic);
     }
 
     public double calculateProfit(int prize, int buyPrice) {

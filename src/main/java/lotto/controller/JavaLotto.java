@@ -24,7 +24,7 @@ public class JavaLotto {
         resultView.NumberOfLotto(lottos.getNumberOfLotto());
         resultView.printPurchasedLottos(lottos);
 
-        int prize = lottos.getWinningPrize(inputView.inputWinnerNumber());
+        int prize = lottos.getWinningPrize(inputView.inputWinnerNumber(), inputView.inputBonusNumber());
 
         resultView.printResult(lottos.calculateStatistic(prize));
         resultView.printProfit(lottos.calculateProfit(prize, amount));
