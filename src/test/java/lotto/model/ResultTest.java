@@ -13,7 +13,7 @@ import static lotto.model.enums.Ranking.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultTest {
-    private Buyer buyer;
+    private Lottoes lottoes;
     private Winning winning;
 
     @BeforeEach
@@ -24,13 +24,13 @@ public class ResultTest {
         Lotto winningLotto = new Lotto(lotto1);
         LottoNumber bonusNumber = new LottoNumber(44);
 
-        this.buyer = new Buyer(3, new BuyerFixtureNumberCreator(Arrays.asList(lotto1, lotto2, lotto3)));
+        this.lottoes = new Lottoes(3, new BuyerFixtureNumberCreator(Arrays.asList(lotto1, lotto2, lotto3)));
         this.winning = new Winning(winningLotto, bonusNumber);
     }
 
     @Test
     void 수익률을_출력한다() {
-        Result result = new Result(buyer, winning);
+        Result result = new Result(lottoes, winning);
 
         double actual = result.statistics(3);
 
@@ -45,7 +45,7 @@ public class ResultTest {
 
     @Test
     void 구매한_로또번호_6자리_목록의_등수들을_리턴한다() {
-        Map<Ranking, Integer> actual = new Result(buyer, winning).rankings();
+        Map<Ranking, Integer> actual = new Result(lottoes, winning).rankings();
         Map<Ranking, Integer> expected = Map.of(
                 FIFTH, 1,
                 FOURTH, 0,
