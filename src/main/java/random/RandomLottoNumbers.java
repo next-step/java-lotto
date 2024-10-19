@@ -1,12 +1,19 @@
 package random;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class RandomLottoNumbers implements LottoGenerator {
     @Override
     public List<Integer> executeStrategy() {
-        Random random = new Random();
-        return List.of(1,2,3,4,5,6);//TODO 임시로 지정.
+        List<Integer> lottoList = new ArrayList<>();
+        for ( int i = 1; i <=45; i++) {
+            lottoList.add(i);
+        }
+        Collections.shuffle(lottoList);
+        lottoList = lottoList.subList(0,6);
+        Collections.sort(lottoList);
+        return lottoList;
     }
 }
