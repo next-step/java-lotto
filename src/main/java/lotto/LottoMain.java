@@ -1,10 +1,13 @@
 package lotto;
 
+import lotto.application.AutoGenerator;
 import lotto.domain.ticket.Lotto;
 import lotto.domain.ticket.LottoTickets;
-import lotto.utils.StringUtils;
+import lotto.domain.winning.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoMain {
     private static final InputView inputView = new InputView();
@@ -13,15 +16,17 @@ public class LottoMain {
     public static void main(String[] args) {
         int purchasePrice = inputView.getPurchasePrice();
 
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(new AutoGenerator());
         int lottoTicketCount = lotto.getLottoTicketCount(purchasePrice);
         resultView.print(lottoTicketCount + "개를 구매했습니다.");
 
         LottoTickets lottoTickets = lotto.issue(lottoTicketCount);
         resultView.printLottoTickets(lottoTickets);
 
-        String[] winningNumbers = StringUtils.splitByComma(inputView.getWinningNumbers());
-        resultView.getResultAndPrint(lottoTickets, winningNumbers);
+        List<Integer> winningNumbers = inputView.getWinningNumbers();
+        int bonusNumber = inputView.getBonusNumber();
+
+        resultView.getResultAndPrint(lottoTickets, new WinningNumbers(winningNumbers, bonusNumber));
     }
 
 }
