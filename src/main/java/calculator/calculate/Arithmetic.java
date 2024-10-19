@@ -1,58 +1,49 @@
 package calculator.calculate;
 
+
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Arithmetic {
-    ADD("+") {
-        public int apply(int a, int b) {
-            return a + b;
-        }
-    },
-    MINUS("-") {
-        public int apply(int a, int b) {
-            return a - b;
-        }
-    },
-    MULTIPLY("*") {
-        public int apply(int a, int b) {
-            return a * b;
-        }
-    },
-    DIVIDE("/") {
-        public int apply(int a, int b) {
-            if (b == 0) {
-                throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
-            }
-            return a / b;
-        }
-    };
 
-    Arithmetic(String symbol) {
+    ADD("+", (a, b) -> a + b),
+    MINUS("-", (a, b) -> a - b),
+    MULTIPLY("*", (a, b) -> a * b),
+    DIVIDE("/", (a, b) -> {
+        if (b == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+        return a / b;
+    });
+
+    private final String symbol;
+    private final Operation operation;
+    private final static Map<String, Arithmetic> operations = new HashMap<>();
+
+    Arithmetic(final String symbol, Operation operation) {
         this.symbol = symbol;
+        this.operation = operation;
     }
-
-    private String symbol;
-
 
     public String getSymbol() {
         return symbol;
     }
 
-    public abstract int apply(int a, int b);
+    public int apply(int a, int b) {
+        return operation.apply(a, b);
+    }
+
+    static {
+        operations.put(ADD.getSymbol(), ADD);
+        operations.put(MINUS.getSymbol(), MINUS);
+        operations.put(MULTIPLY.getSymbol(), MULTIPLY);
+        operations.put(DIVIDE.getSymbol(), DIVIDE);
+    }
 
     public static Arithmetic fromSymbol(String symbol) {
-        for (Arithmetic arithmetic : Arithmetic.values()) {
-            if (isSame(symbol, arithmetic)) {
-                return arithmetic;
-            }
+        if (operations.containsKey(symbol)) {
+            return operations.get(symbol);
         }
         throw new IllegalArgumentException("유효하지 않는 기호입니다.");
     }
-
-    private static boolean isSame(String symbol, Arithmetic arithmetic) {
-        return arithmetic.getSymbol().equals(symbol);
-    }
-
-    public int getCalculate(int a, int b) {
-        return 1;
-    }
-
 }
