@@ -8,8 +8,7 @@ import java.util.stream.IntStream;
 
 public class Lottos {
 
-    private static final List<Integer> PRIZE_STATIC_VALUES = List.of(5000, 50000, 1500000, 2000000000);
-    private static final List<Integer> MATCHING_COUNT_VALUES = List.of(3, 4, 5, 6);
+    private static final List<LottoRank> lottoRanks = List.of(LottoRank.FOUR, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
 
     private final List<Lotto> lottos;
 
@@ -34,14 +33,14 @@ public class Lottos {
     }
 
     public List<Long> calculateMatchingCounts(Lotto lotto) {
-        return MATCHING_COUNT_VALUES.stream()
-                .map(number -> match(lotto, number))
+        return lottoRanks.stream()
+                .map(rank -> match(lotto, rank.getMatchCount()))
                 .collect(Collectors.toList());
     }
 
     public long calculateProfit(Lotto winningLotto) {
-        return IntStream.range(0, PRIZE_STATIC_VALUES.size())
-        .mapToLong(i -> match(winningLotto, MATCHING_COUNT_VALUES.get(i)) * PRIZE_STATIC_VALUES.get(i))
+        return IntStream.range(0, lottoRanks.size())
+        .mapToLong(i -> match(winningLotto, lottoRanks.get(i).getMatchCount()) * lottoRanks.get(i).getPrizeMoney())
         .sum();
     }
 
