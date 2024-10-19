@@ -51,4 +51,14 @@ class LottoTicketTest {
         LottoTicket winningNumbers = new LottoTicket(11, 12, 25, 27, 44, 45);
         assertThat(lottoTicket.matchCount(winningNumbers)).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("로또 번호 포함 확인")
+    void contains() {
+        LottoTicket lottoTicket = new LottoTicket(6, 11, 25, 27, 34, 43);
+        LottoNumber includedNumber = new LottoNumber(6);
+        LottoNumber notIncludedNumber = new LottoNumber(7);
+        assertThat(lottoTicket.contains(includedNumber)).isTrue();
+        assertThat(lottoTicket.contains(notIncludedNumber)).isFalse();
+    }
 }
