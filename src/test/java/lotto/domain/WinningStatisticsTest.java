@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -60,4 +62,18 @@ public class WinningStatisticsTest {
         );
     }
 
+    @DisplayName("당첨 통계가 생성되었을 때, 보너스 번호와 당첨 로또의 번호가 겹치면 예외가 발생하는지")
+    @Test
+    void createWinningStatisticsWithBonusBall() {
+        LotteryMachine machine = new LotteryMachine(
+                List.of(
+                        new Lotto(1, 2, 3, 4, 5, 6)
+                )
+        );
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonus = new LottoNumber(6);
+
+        assertThatThrownBy(() -> new WinningStatistics(machine, winningLotto, bonusBall))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
