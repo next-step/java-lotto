@@ -47,4 +47,14 @@ class LottoRankTest {
 
         assertThat(actual).doesNotContain(LottoRank.NON_RANKED);
     }
+
+    @DisplayName("랭킹 등수 별 설명 값을 반환한다.")
+    @Test
+    void return_description_by_LottoRank() {
+        String actualSecondWinning = LottoRank.SECOND.description();
+        String actualFirstWinning = LottoRank.FIRST.description();
+
+        assertThat(actualSecondWinning).isEqualTo("5개 일치, 보너스 볼 일치");
+        assertThat(actualFirstWinning).isEqualTo("6개 일치");
+    }
 }
