@@ -7,9 +7,16 @@ public class WinningStatistics {
     private final EnumMap<Rank, Integer> rankCounts = new EnumMap<>(Rank.class);
     private final LotteryMachine lotteryMachine;
 
-    public WinningStatistics(LotteryMachine machine, Lotto winningLotto) {
+    public WinningStatistics(LotteryMachine machine, Lotto winningLotto, LottoNumber bonusNumber) {
         this.lotteryMachine = machine;
+        validateBonusNumber(winningLotto, bonusNumber);
         calculateStatistics(machine, winningLotto);
+    }
+
+    private void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 우승 로또 번호와 겹칠 수 없습니다.");
+        }
     }
 
     private void calculateStatistics(LotteryMachine machine, Lotto winningLotto) {

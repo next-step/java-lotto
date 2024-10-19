@@ -17,7 +17,7 @@ public class WinningStatisticsTest {
     @ParameterizedTest
     @MethodSource("lottoRankSummaryArguments")
     void getWinningStatistics (LotteryMachine machine, Lotto winningLotto, int[] expectedRankCounts) {
-        WinningStatistics winningStatistics = new WinningStatistics(machine, winningLotto);
+        WinningStatistics winningStatistics = new WinningStatistics(machine, winningLotto, new LottoNumber(45));
 
         assertThat(expectedRankCounts[0]).isEqualTo(winningStatistics.getRankCount(Rank.THREE_MATCHES));
         assertThat(expectedRankCounts[1]).isEqualTo(winningStatistics.getRankCount(Rank.FOUR_MATCHES));
@@ -44,7 +44,7 @@ public class WinningStatisticsTest {
     @ParameterizedTest
     @MethodSource("lottoRankProfitArguments")
     void getWinningStatistics (LotteryMachine machine, Lotto winningLotto, double profitRate) {
-        WinningStatistics winningStatistics = new WinningStatistics(machine, winningLotto);
+        WinningStatistics winningStatistics = new WinningStatistics(machine, winningLotto, new LottoNumber(45));
 
         assertThat(profitRate).isEqualTo(winningStatistics.calculateProfitRate());
     }
@@ -71,9 +71,9 @@ public class WinningStatisticsTest {
                 )
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonus = new LottoNumber(6);
+        LottoNumber bonusNumber = new LottoNumber(6);
 
-        assertThatThrownBy(() -> new WinningStatistics(machine, winningLotto, bonusBall))
+        assertThatThrownBy(() -> new WinningStatistics(machine, winningLotto, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

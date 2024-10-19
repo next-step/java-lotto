@@ -9,6 +9,7 @@ public class InputView {
 
     private static final String PURCHASE_PRICE_QUESTION = "구입금액을 입력해 주세요.";
     private static final String WINNING_LOTTO_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요.";
 
     private InputView() {
         throw new UnsupportedOperationException("유틸형 클래스는 생성할 수 없습니다");
@@ -29,5 +30,10 @@ public class InputView {
         printBlankLine();
         System.out.println(WINNING_LOTTO_NUMBER_QUESTION);
         return SCANNER.nextLine();
+    }
+
+    public static int readBonusNumber() {
+        System.out.println(BONUS_NUMBER_QUESTION);
+        return SCANNER.nextInt();
     }
 }
