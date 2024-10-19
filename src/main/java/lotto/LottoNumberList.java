@@ -15,4 +15,11 @@ public class LottoNumberList {
     public void add(OneTimeRoundLottoNumberList oneTimeRoundLottoNumberList) {
         lottoNumberList.add(oneTimeRoundLottoNumberList);
     }
+
+    public void printLottoList() {
+        for (OneTimeRoundLottoNumberList numberList : lottoNumberList) {
+            System.out.println(numberList);
+        }
+    }
+
 }

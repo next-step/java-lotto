@@ -17,14 +17,22 @@ public class Lotto {
         this.lottoNumberList = new LottoNumberList(new ArrayList<>());
     }
 
-    public static Lotto InitLotto(int purchaseAmount) {
-        return new Lotto(new TryLottoCount(Math.floorDiv(purchaseAmount, 1000)));
+    public static Lotto InitLotto() {
+        return new Lotto(new TryLottoCount(0));
+    }
+
+    public int calculateLottoTryCount(int purchaseAmount) {
+        return tryLottoCount.calculateLottoTryCount(purchaseAmount);
     }
 
     public void makeLottoList(LottoGenerator lottoGenerator) {
         for (int i = 0; i < tryLottoCount.currentCount(); i++) {
             lottoNumberList.add(new OneTimeRoundLottoNumberList(lottoGenerator.executeStrategy()));
         }
+    }
+
+    public void printLottoList() {
+        lottoNumberList.printLottoList();
     }
 
     @Override

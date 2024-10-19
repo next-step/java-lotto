@@ -25,4 +25,9 @@ public class TryLottoCount {
     public int currentCount() {
         return tryLottoCount;
     }
+
+    public int calculateLottoTryCount(int purchaseAmount) {
+        tryLottoCount = Math.floorDiv(purchaseAmount, 1000);
+        return tryLottoCount;
+    }
 }

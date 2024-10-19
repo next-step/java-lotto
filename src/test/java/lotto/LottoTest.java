@@ -18,14 +18,16 @@ public class LottoTest {
     @Test
     public void 금액_개수_변환테스트() {
         int purchaseAmount = 3000;
-        Lotto lotto = Lotto.InitLotto(purchaseAmount);
+        Lotto lotto = Lotto.InitLotto();
+        lotto.calculateLottoTryCount(purchaseAmount);
         assertThat(lotto).isEqualTo(new Lotto(new TryLottoCount(TEST_TRY_LOTTO_COUNT)));
     }
 
     @Test
     public void 로또번호_생성테스트() {
         int purchaseAmount = 1000;
-        Lotto lotto = Lotto.InitLotto(purchaseAmount);
+        Lotto lotto = Lotto.InitLotto();
+        lotto.calculateLottoTryCount(purchaseAmount);
         OneTimeRoundLottoNumberList testNumberList = new OneTimeRoundLottoNumberList(lottoGenerator.executeStrategy());
         LottoNumberList lottoNumberList = new LottoNumberList(List.of(testNumberList));
 
