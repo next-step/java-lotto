@@ -15,4 +15,8 @@ public class Win {
         return matchCount;
     }
 
+    public int getPrizeMoney(int matchCount) {
+        return WinningPrize.getPrizeMoney(matchCount);
+    }
+
 }
