@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoGameService {
-    private Lottos lottos;
-    private Integer buyAmount;
+    private final Lottos lottos;
+    private final Integer buyAmount;
     private Map<Rank, Integer> winningResultsByRank = new HashMap<>();
 
 

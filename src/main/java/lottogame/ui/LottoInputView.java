@@ -1,5 +1,7 @@
 package lottogame.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public final class LottoInputView {
@@ -15,7 +17,7 @@ public final class LottoInputView {
     }
 
     public static String getWinningNumbers() {
-        SCANNER.nextLine();
+        newLineRemove();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         return SCANNER.nextLine();
@@ -27,10 +29,27 @@ public final class LottoInputView {
         return SCANNER.nextInt();
     }
 
-    public static int getBuyPredefinedLottoCount() {
+    public static int getBuyManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
 
         return SCANNER.nextInt();
     }
+
+    public static List<String> getBuyManualLottoNumbers(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        newLineRemove();
+
+        List<String> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            manualLottoNumbers.add(SCANNER.nextLine());
+        }
+
+        return manualLottoNumbers;
+    }
+
+    public static void newLineRemove() {
+        SCANNER.nextLine();
+    }
+
 }
 

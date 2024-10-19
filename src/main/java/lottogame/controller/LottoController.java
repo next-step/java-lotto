@@ -4,11 +4,17 @@ import lottogame.domain.*;
 import lottogame.ui.LottoInputView;
 import lottogame.ui.LottoOutputView;
 
+import java.util.List;
+
 public class LottoController {
     public void run() {
         int buyAmount = LottoInputView.getBuyAmount();
-        int predefinedLottoCount = LottoInputView.getBuyPredefinedLottoCount();
-        Lottos lottos = purchaseLottos(buyAmount);
+
+        int LottoCount = getLottoCount(buyAmount);
+        int manualLottoCount = LottoInputView.getBuyManualLottoCount();
+        List<String> manualLottoNumbers = LottoInputView.getBuyManualLottoNumbers(manualLottoCount);
+
+        Lottos lottos = getAutuLottos(LottoCount - manualLottoCount);
         printPurchaseInfo(lottos);
 
         Lotto winningLotto = getWinningLotto();
@@ -21,9 +27,12 @@ public class LottoController {
         LottoOutputView.printPrizeRate(prizeRate);
     }
 
-    private Lottos purchaseLottos(int buyAmount) {
-        int lottoCount = buyAmount / LottoGameConstants.LOTTO_PRICE;
-        return new Lottos(lottoCount);
+    private int getLottoCount(int buyAmount) {
+        return buyAmount / LottoGameConstants.LOTTO_PRICE;
+    }
+
+    private Lottos getAutuLottos(int count) {
+        return new Lottos(count);
     }
 
     private void printPurchaseInfo(Lottos lottos) {
