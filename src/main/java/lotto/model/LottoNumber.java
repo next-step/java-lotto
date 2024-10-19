@@ -5,7 +5,7 @@ import java.util.Objects;
 public class LottoNumber {
 
     public static final String NUMBER_INIT_ERROR_MESSAGE = "0 ~ 45 사이에 숫자를 입력하세요!";
-    public static final int MIN_NUMBER = 0;
+    public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
     private int number;
 

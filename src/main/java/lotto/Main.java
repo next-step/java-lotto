@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         InputView input = new ConsoleInputView();
-        LottoService service = new LottoService(new RandomNumberGenerateStrategy());
+        LottoService service = new LottoService(RandomNumberGenerateStrategy.newInstance());
         OutputView output = new ConsoleOutputView();
 
         LottoGame lottoGame = new LottoGame(service, input, output);

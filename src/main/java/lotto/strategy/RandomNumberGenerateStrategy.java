@@ -9,20 +9,16 @@ public class RandomNumberGenerateStrategy implements NumberGenerateStrategy{
 
     private final List<Integer> numbers;
 
-    public RandomNumberGenerateStrategy() {
-        this(newInstance());
-    }
-
     public RandomNumberGenerateStrategy(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    private static List<Integer> newInstance() {
+    public static RandomNumberGenerateStrategy newInstance() {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 0 ; i <= 45 ; i++) {
+        for (int i = 1 ; i <= 45 ; i++) {
             numbers.add(i);
         }
-        return numbers;
+        return new RandomNumberGenerateStrategy(numbers);
     }
 
     @Override
