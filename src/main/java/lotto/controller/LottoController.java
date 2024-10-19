@@ -6,12 +6,14 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoController {
 
     public void play() {
 
         int money = InputView.getMoney();
+
         Money userMoney = new Money();
         int amount = userMoney.calculateLottoAmount(money);
         ResultView.printLottoAmount(amount);
@@ -21,5 +23,8 @@ public class LottoController {
             List<Integer> selectedNumbers = lotto.generateLotto();
             ResultView.printLottoNumbers(selectedNumbers);
         }
+
+        Set<Integer> winningMoney = InputView.getWinningNumbers();
+        System.out.println(winningMoney.toString());
     }
 }
