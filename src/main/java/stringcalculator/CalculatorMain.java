@@ -7,7 +7,6 @@ public class CalculatorMain {
         Scanner scanner = new Scanner(System.in);
         String calculatorString = insertMathExpression(scanner);
         Calculator calculator = new Calculator(calculatorString);
-        calculator.checkMathExpression();
         int resultNumber = calculator.calculate();
         System.out.println("결과 값 : " + resultNumber);
     }
