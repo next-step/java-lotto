@@ -30,9 +30,4 @@ public enum LottoRank {
                 .findFirst()
                 .orElse(NONE);
     }
-
-    public static int findPrizeMoneyFromEqualNumberCount(int equalNumberCount) {
-        LottoRank rank = fromEqualNumberCount(equalNumberCount);
-        return rank.prizeMoneyAmount;
-    }
 }
