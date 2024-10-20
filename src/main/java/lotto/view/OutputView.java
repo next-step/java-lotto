@@ -39,11 +39,18 @@ public class OutputView {
 
         for (LottoRank ranking : LottoRank.winningRanks()) {
             stringBuilder
-                    .append(ranking.description())
+                    .append(OutputView.rankingDescription(ranking))
                     .append(String.format(" (%d원)- %d개", ranking.getDistributionRatioPrice(), winningStatistics.getLottoQuantityOfRanking(ranking)))
                     .append(NEW_LINE);
         }
         System.out.println(stringBuilder);
+    }
+
+    private static String rankingDescription(LottoRank ranking) {
+        if (LottoRank.SECOND.equals(ranking)) {
+            return String.format("%d개 일치, 보너스 볼 일치", ranking.getMatchingCounts());
+        }
+        return String.format("%d개 일치", ranking.getMatchingCounts());
     }
 
 }
