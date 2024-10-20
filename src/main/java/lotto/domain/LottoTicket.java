@@ -38,9 +38,7 @@ public class LottoTicket {
                                              .mapToObj(LottoNumber::new)
                                              .collect(Collectors.toList());
         Collections.shuffle(numbers);
-        List<LottoNumber> selectedNumbers = numbers.subList(0, LOTTO_SIZE);
-        Collections.sort(selectedNumbers);
-        return new LottoTicket(selectedNumbers);
+        return new LottoTicket(numbers.subList(0, LOTTO_SIZE));
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
