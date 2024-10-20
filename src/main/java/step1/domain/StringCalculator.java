@@ -3,16 +3,20 @@ package step1.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import step1.exception.DivideZeroException;
+
 public final class StringCalculator {
+
 	public static int calculate(String userInput) {
-		List<String> splittedStringArray = splitUserInput(userInput);
+		Expression expression = new Expression(userInput);
+		List<String> splittedStringArray = splitUserInput(expression.get());
 		List<Integer> numbers = getNumberList(splittedStringArray);
 		List<String> operators = getOperatorList(splittedStringArray);
 		return calculateWithParams(numbers, operators);
 	}
 
-	private static List<String> splitUserInput(String userInput) {
-		return List.of(userInput.split(" "));
+	private static List<String> splitUserInput(String expression) {
+		return List.of(expression.split(" "));
 	}
 
 	private static List<String> getOperatorList(List<String> splittedStringArray) {
@@ -55,13 +59,16 @@ public final class StringCalculator {
 			return result * number;
 		}
 		if (isDivide(operator)) {
+			if (number == 0) {
+				throw new DivideZeroException();
+			}
 			return result / number;
 		}
-		throw new RuntimeException("Invalid operator: " + operator);
+		throw new RuntimeException("알수 없는 에러");
 	}
 
 	private static boolean isDivide(String operator) {
-		return operator.equals("%");
+		return operator.equals("%") || operator.equals("/");
 	}
 
 	private static boolean isMultiply(String operator) {
