@@ -3,7 +3,6 @@ package lotto;
 import lotto.application.strategy.RandomGenerator;
 import lotto.domain.Lotto;
 import lotto.application.LottoProgram;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -26,7 +25,7 @@ public class LottoInterface {
 
         OutputView.printWinningStatistics(
                 lottoAmountPurchased,
-                lottoProgram.createWinningStatistics(lottos, lastWinningLottoNumberInput, new LottoNumber(bonusBall)));
+                lottoProgram.createWinningStatistics(lottos, lastWinningLottoNumberInput, bonusBall));
     }
 
     public static void main(String[] args) {

@@ -1,23 +1,18 @@
 package lotto.application;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoPrice;
-import lotto.domain.LottoRank;
+import lotto.domain.*;
 
 import java.util.*;
 
 public class LottoWinningStatistics {
     private final Map<LottoRank, Integer> values;
 
-    public LottoWinningStatistics(List<Lotto> userLottos, Lotto winningLotto, LottoNumber bonusBall) {
+    public LottoWinningStatistics(List<Lotto> userLottos, WinningLotto winningLotto) {
         Map<LottoRank, Integer> result = initStatistics();
 
         for (Lotto userLotto : userLottos) {
-            LottoRank key = LottoRank.from(winningLotto.countMatchingNumbers(userLotto),
-                    userLotto.checkContainsLottoNumber(bonusBall)
-            );
-            putRankedLottoQuantity(key, result);
+            LottoRank key = winningLotto.createLottoRank(userLotto);
+            this.putRankedLottoQuantity(key, result);
         }
         this.values = result;
     }

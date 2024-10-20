@@ -3,6 +3,7 @@ package lotto.application;
 import lotto.application.strategy.LottoNumberGenerator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.WinningLotto;
 
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class LottoProgram {
     }
 
     public LottoWinningStatistics createWinningStatistics(List<Lotto> userLotto,
-                                                          String[] winningLottoNumbersInput, LottoNumber bonusBall) {
-        return new LottoWinningStatistics(userLotto, new Lotto(winningLottoNumbersInput), bonusBall);
+                                                          String[] winningLottoNumbersInput, int bonusBall) {
+        return new LottoWinningStatistics(userLotto, new WinningLotto(new Lotto(winningLottoNumbersInput), new LottoNumber(bonusBall)));
     }
 
 }
