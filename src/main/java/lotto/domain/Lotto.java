@@ -1,12 +1,16 @@
 package lotto.domain;
 
+import lotto.enumeration.LottoType;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    private final LottoType lottoType;
     private final List<Number> numbers;
 
-    public Lotto(final List<Number> numbers) {
+    public Lotto(final LottoType lottoType, final List<Number> numbers) {
+        this.lottoType = lottoType;
         this.numbers = numbers;
     }
 
@@ -20,6 +24,10 @@ public class Lotto {
             isMatch = inputNumber.existBonusNumber(number);
         }
         return isMatch;
+    }
+
+    public boolean isManual() {
+        return lottoType == LottoType.MANUAL;
     }
 
     @Override
