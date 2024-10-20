@@ -22,7 +22,7 @@ public enum LottoRank {
     }
 
     public static LottoRank from(int matchingCount, Boolean isBonusBallMatched) {
-        return Arrays.stream(LottoRank.winningRanks())
+        return Arrays.stream(LottoRank.values())
                 .filter(value -> value.getMatchingCounts().contains(matchingCount) && value.isBonusBallMatching.equals(isBonusBallMatched))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("로또 번호 매칭 갯수 '%s'은 적합하지 않습니다.", matchingCount)));

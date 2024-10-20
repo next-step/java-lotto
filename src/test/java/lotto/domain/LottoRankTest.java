@@ -16,7 +16,7 @@ class LottoRankTest {
         assertThat(actual).isEqualTo(LottoRank.FIRST);
     }
 
-    @DisplayName("로또 번호 일치 갯수가 로또 랭킹에 들지않는 갯수라면 NOT_RANKED 필드를 반환한다.")
+    @DisplayName("로또 번호 일치 갯수가 로또 랭킹에 들지않는 갯수라면 NON_RANKED 필드를 반환한다.")
     @Test
     void return_NOT_RANKED_when_matchingCount_is_not_included_in_rankingSystem() {
         LottoRank actual = LottoRank.from(2, Boolean.FALSE);
