@@ -1,15 +1,18 @@
 package lotto.domain;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoStatistics {
-    private Map<LottoRank, Integer> prizeCountMap;
+    private final Map<LottoRank, Integer> prizeCountMap;
 
-    public static LottoStatistics createEmpty() {
-        Map<LottoRank, Integer> prizeCountMap = new EnumMap<>(LottoRank.class);
-        for (LottoRank lottoRank : LottoRank.values()) {
-            prizeCountMap.put(lottoRank, 0);
+    public static LottoStatistics create(List<Integer> winningNumberCountList) {
+        Map<LottoRank, Integer> prizeCountMap = createEmptyPrizeCountMap();
+
+        for (int winningNumberCount : winningNumberCountList) {
+            LottoRank lottoRank = LottoRank.fromEqualNumberCount(winningNumberCount);
+            prizeCountMap.merge(lottoRank, 1, Integer::sum);
         }
 
         return new LottoStatistics(prizeCountMap);
@@ -17,11 +20,6 @@ public class LottoStatistics {
 
     public LottoStatistics(Map<LottoRank, Integer> prizeCountMap) {
         this.prizeCountMap = prizeCountMap;
-    }
-
-    public void plusCount(LottoRank lottoRank) {
-        Integer count = prizeCountMap.get(lottoRank);
-        prizeCountMap.put(lottoRank, count + 1);
     }
 
     public int getCount(LottoRank lottoRank) {
@@ -40,5 +38,15 @@ public class LottoStatistics {
         }
 
         return allRankDescription.toString();
+    }
+
+    private static Map<LottoRank, Integer> createEmptyPrizeCountMap() {
+        Map<LottoRank, Integer> prizeCountMap = new EnumMap<>(LottoRank.class);
+
+        for (LottoRank lottoRank : LottoRank.values()) {
+            prizeCountMap.put(lottoRank, 0);
+        }
+
+        return prizeCountMap;
     }
 }
