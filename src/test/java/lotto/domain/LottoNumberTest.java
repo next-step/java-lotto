@@ -2,8 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.from;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -20,5 +20,11 @@ class LottoNumberTest {
     void 로또번호_검증(int value) {
         assertThatThrownBy(() -> LottoNumber.from(value))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 같은번호_확인() {
+        LottoNumber lottoNumber = LottoNumber.from(5);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.from(5));
     }
 }
