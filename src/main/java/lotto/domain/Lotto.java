@@ -10,10 +10,16 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int sumMatchCount(final List<Number> others) {
-        return others.stream()
-                .mapToInt(other -> other.countMatch(numbers))
-                .sum();
+    public int countWinningNumbers(final InputNumber inputNumber) {
+        return inputNumber.countWinningNumbers(numbers);
+    }
+
+    public boolean containsBonusNumber(final InputNumber inputNumber) {
+        boolean isMatch = false;
+        for (Number number : numbers) {
+            isMatch = inputNumber.existBonusNumber(number);
+        }
+        return isMatch;
     }
 
     @Override

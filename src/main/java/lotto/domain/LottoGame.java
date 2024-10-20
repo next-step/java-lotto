@@ -12,11 +12,9 @@ import lotto.strategy.LottoGenerator;
 import java.util.*;
 
 public class LottoGame {
-    public static final int THREE_MATCH = 3;
-    public static final int SIX_MATCH = 6;
     public static final int LOTTO_PRICE = 1000;
     public static final int TWO_DECIMAL_PLACE = 2;
-    public static final int DEFAULT_COUNT_WINNING = 0;
+    public static final int DEFAULT_RANK_COUNT = 0;
 
     private final LottoGenerator lottoGenerator;
 
@@ -29,29 +27,37 @@ public class LottoGame {
         return lottoGenerator.generate(count);
     }
 
-
-    public WinningResult match(final List<Lotto> lottos, final String winningNumber) {
-        List<Number> winningNumbers = Number.createWinningNumbers(winningNumber);
-        Map<Integer, Integer> matchCountMap = new HashMap<>();
-        for (Lotto lotto : lottos) {
-            int sumMatchCount = lotto.sumMatchCount(winningNumbers);
-            matchCountMap.put(sumMatchCount, matchCountMap.getOrDefault(sumMatchCount, 0) + 1);
-        }
-        return winningResult(lottos, matchCountMap);
+    public WinningResult match(final List<Lotto> lottos, final InputNumber inputNumber) {
+        Map<Rank, Integer> rankCountMap = rankCountMap(lottos, inputNumber);
+        List<Winning> winnings = winnings(rankCountMap);
+        BigDecimal totalReturn = totalReturn(lottos, winnings);
+        return new WinningResult(winnings, totalReturn);
     }
 
-    private static WinningResult winningResult(List<Lotto> lottos, Map<Integer, Integer> rankCountMap) {
-        BigDecimal buyPrice = new BigDecimal(lottos.size() * LOTTO_PRICE);
-        int winningPrice = 0;
-        List<Winning> list = new ArrayList<>();
-        for (int countMatch = THREE_MATCH; countMatch <= SIX_MATCH; countMatch++) {
-            Rank rank = Rank.rank(countMatch);
-            int countWinning = rankCountMap.getOrDefault(countMatch, DEFAULT_COUNT_WINNING);
-            list.add(new Winning(countMatch, countWinning));
-            winningPrice += rank.getPrice() * countWinning;
+    private static Map<Rank, Integer> rankCountMap(final List<Lotto> lottos, final InputNumber inputNumber) {
+        Map<Rank, Integer> rankCountMap = new HashMap<>();
+        for (Lotto lotto : lottos) {
+            Rank rank = Rank.rank(lotto, inputNumber);
+            int count = rankCountMap.getOrDefault(rank, DEFAULT_RANK_COUNT) + 1;
+            rankCountMap.put(rank, count);
         }
-        BigDecimal totalWinningPrice = new BigDecimal(winningPrice);
-        BigDecimal divide = totalWinningPrice.divide(buyPrice, TWO_DECIMAL_PLACE, RoundingMode.DOWN);
-        return new WinningResult(list, divide);
+        return rankCountMap;
+    }
+
+    private static List<Winning> winnings(final Map<Rank, Integer> rankCountMap) {
+        List<Winning> list = new ArrayList<>();
+        for (Rank rank : Rank.values()) {
+            list.add(new Winning(rank, rankCountMap.getOrDefault(rank, DEFAULT_RANK_COUNT)));
+        }
+        return list;
+    }
+
+    private static BigDecimal totalReturn(final List<Lotto> lottos, final List<Winning> rankCountMap) {
+        BigDecimal buyPrice = new BigDecimal(lottos.size() * LOTTO_PRICE);
+        BigDecimal sumWinningPrice = new BigDecimal(
+                rankCountMap.stream()
+                        .mapToInt(it -> it.getRank().getPrice() * it.getCountWinning())
+                        .sum());
+        return sumWinningPrice.divide(buyPrice, TWO_DECIMAL_PLACE, RoundingMode.DOWN);
     }
 }
