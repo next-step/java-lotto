@@ -33,16 +33,6 @@ public class LottoStatistics {
         return Math.round(profitRate * 100) / 100.0f;
     }
 
-    private static Map<LottoRank, Integer> createEmptyPrizeCountMap() {
-        Map<LottoRank, Integer> prizeCountMap = new EnumMap<>(LottoRank.class);
-
-        for (LottoRank lottoRank : LottoRank.values()) {
-            prizeCountMap.put(lottoRank, 0);
-        }
-
-        return prizeCountMap;
-    }
-
     public int calculateTotalProfit() {
         int profit = 0;
 
