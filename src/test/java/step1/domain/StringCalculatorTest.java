@@ -38,9 +38,14 @@ class StringCalculatorTest {
 	@Test
 	@DisplayName("나누기 테스트")
 	void divideTest() {
-		assertThat(calculate("5 % 2")).isEqualTo(2);
 		assertThat(calculate("4 % 1")).isEqualTo(4);
 		assertThat(calculate("8 % 2 % 2")).isEqualTo(2);
+	}
+
+	@Test
+	@DisplayName("나눗셈 결과는 정수로 떨어지는지 체크하는 테스트")
+	void isDivideReturnNaturalNumberTest() {
+		assertThat(calculate("5 % 2")).isEqualTo(2);
 	}
 
 	@Test
