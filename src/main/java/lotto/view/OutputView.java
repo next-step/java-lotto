@@ -26,9 +26,6 @@ public class OutputView {
         LottoRankEnum.valuesWithoutMiss().stream().
                 forEach(x-> System.out.println
                         (x.getDescription() + winningResult.getRankCount(x) + "개"));
-//        for (LottoRankEnum rank : LottoRankEnum.valuesWithoutMiss()) {
-//            printResultByRankingInfo(winningResultMap, rank);
-//        }
     }
 
     private static void printResultByRankingInfo(Map<LottoRankEnum, Integer> winningResultMap, LottoRankEnum rank) {
