@@ -5,10 +5,10 @@ import java.util.Set;
 
 public class Win {
 
-    public int countMatchingNumbers(Set<Integer> lottoNumbers, List<Integer> winningNumbers) {
+    public int countMatchingNumbers(Set<Integer> lottoNumbers, LottoNumbers winningNumbers) {
         int matchCount = 0;
         for (Integer number : lottoNumbers) {
-            if (winningNumbers.contains(number)) {
+            if (winningNumbers.getNumbers().contains(number)) {
                 matchCount++;
             }
         }

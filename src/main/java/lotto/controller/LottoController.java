@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.Money;
-import lotto.domain.Win;
-import lotto.domain.WinningPrize;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -22,10 +19,10 @@ public class LottoController {
         Lotto lotto = new Lotto();
         Win win = new Win();
 
-        List<List> userLottos = new ArrayList<>();
+        List<LottoNumbers> userLottos = new ArrayList<>();
 
         for (int i = 1; i <= amount; i++) {
-            List<Integer> selectedNumbers = lotto.generateLotto();
+            LottoNumbers selectedNumbers = lotto.generateLotto();
             ResultView.printLottoNumbers(selectedNumbers);
             userLottos.add(selectedNumbers);
         }
@@ -39,7 +36,7 @@ public class LottoController {
 
         int totalWinningAmount = 0;
 
-        for (List<Integer> userLotto : userLottos) {
+        for (LottoNumbers userLotto : userLottos) {
             int matchCount = win.countMatchingNumbers(winningNumbers, userLotto);
             if (matchCount >= 3) {
                 matchCountMap.put(matchCount, matchCountMap.get(matchCount) + 1);

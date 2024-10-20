@@ -1,6 +1,6 @@
 package lotto.view;
 
-import java.util.List;
+import lotto.domain.LottoNumbers;
 
 public class ResultView {
 
@@ -9,11 +9,11 @@ public class ResultView {
     }
 
     public static void printLottoAmount(int amount) {
-        System.out.println("총" + amount + "개를 구매했습니다.");
+        System.out.println(String.format("총 %d개를 구매하였습니다.개", amount));
     }
 
-    public static void printLottoNumbers(List<Integer> selectedNumbers) {
-        System.out.println(selectedNumbers);
+    public static void printLottoNumbers(LottoNumbers selectedNumbers) {
+        System.out.println(selectedNumbers.getNumbers());
     }
 
     public static void printResult() {
@@ -23,12 +23,11 @@ public class ResultView {
     }
 
     public static void printMatchCount(int prizeCount, int prizeMoney, int matchCount) {
-        System.out.printf(prizeCount + "개 일치 (" + prizeMoney + "원) - " + matchCount + "개");
-        System.out.println();
+        System.out.println(String.format("%d개 일치 (%d원) - %d개", prizeCount, prizeMoney, matchCount));
     }
 
     public static void printWinningRate(double winningRate) {
         double formattedNumber = Math.floor(winningRate * 100) / 100;
-        System.out.printf("총 수익률은 " + formattedNumber + "입니다.");
+        System.out.println(String.format("총 수익률은 %.2f입니다.", formattedNumber));
     }
 }
