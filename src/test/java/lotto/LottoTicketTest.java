@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.Winning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -45,11 +46,15 @@ class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("로또 번호 일치 확인")
-    void matchCount() {
-        LottoTicket lottoTicket = new LottoTicket(6, 11, 25, 27, 34, 43);
-        LottoTicket winningNumbers = new LottoTicket(11, 12, 25, 27, 44, 45);
-        assertThat(lottoTicket.matchCount(winningNumbers)).isEqualTo(3);
+    @DisplayName("로또 티켓 Winning 확인")
+    void calculateWinningResult() {
+        LottoTicket winningNumbers = new LottoTicket(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(7);
+
+        assertThat(new LottoTicket(1, 2, 3, 4, 5, 6).calculateWinningResult(winningNumbers, bonusNumber)).isEqualTo(Winning.FIRST);
+        assertThat(new LottoTicket(1, 2, 3, 4, 5, 7).calculateWinningResult(winningNumbers, bonusNumber)).isEqualTo(Winning.SECOND);
+        assertThat(new LottoTicket(1, 2, 3, 4, 5, 8).calculateWinningResult(winningNumbers, bonusNumber)).isEqualTo(Winning.THIRD);
+        assertThat(new LottoTicket(9, 10, 11, 12, 13, 14).calculateWinningResult(winningNumbers, bonusNumber)).isEqualTo(Winning.NONE);
     }
 
     @Test

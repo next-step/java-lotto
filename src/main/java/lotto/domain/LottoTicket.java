@@ -49,7 +49,13 @@ public class LottoTicket {
         }
     }
 
-    public int matchCount(LottoTicket winningNumbers) {
+    public Winning calculateWinningResult(LottoTicket winningNumbers, LottoNumber bonusNumber) {
+        int matchCount = matchCount(winningNumbers);
+        boolean matchBonus = contains(bonusNumber);
+        return Winning.fromMatchCount(matchCount, matchBonus);
+    }
+
+    private int matchCount(LottoTicket winningNumbers) {
         return (int) lottoNumbers.stream()
                                  .filter(winningNumbers::contains)
                                  .count();

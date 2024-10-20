@@ -31,7 +31,7 @@ public class LottoTickets {
 
     public List<Winning> calculateWinningResults(LottoTicket winningNumbers, LottoNumber bonusNumber) {
         return lottoTickets.stream()
-                           .map(ticket -> Winning.fromMatchCount(ticket.matchCount(winningNumbers), ticket.contains(bonusNumber)))
+                           .map(ticket -> ticket.calculateWinningResult(winningNumbers, bonusNumber))
                            .collect(Collectors.toList());
     }
 }

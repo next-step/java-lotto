@@ -52,11 +52,12 @@
 - LottoTicket
   - 로또 자동 생성 (Collections.shuffle() 생성, Collections.sort() 정렬)
   - 다른 LottoTicket과 몇개 일치하는지 확인 (ArrayList의 contains() 확인)
+  - 일치 개수에 따라 Winning 객체 리턴
+    - 보너스볼 당첨여부에 따라 2등/3등 구분
   - 보너스볼 당첨여부 확인
 - LottoTickets
   - 구입 금액에 해당하는 로또 발급 (로또 1장의 가격은 1000원)
-  - 일치 개수들 계산하여 Winning 객체를 WinningCalculator에 전달
-    - 보너스볼 당첨여부에 따라 2등/3등 구분
+  - Winning 객체 리스트 WinningCalculator에 전달
 - WinningCalculator
   - Winning 객체를 받아 당첨 통계 저장
   - 당첨 금액 저장
