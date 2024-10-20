@@ -26,6 +26,12 @@ public class LottoTicket {
         Collections.sort(this.lottoNumbers);
     }
 
+    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 정확히 6개여야 합니다.");
+        }
+    }
+
     public static LottoTicket createByString(String lottoNumbers) {
         return new LottoTicket(Arrays.stream(lottoNumbers.split(","))
                                      .map(num -> new LottoNumber(Integer.parseInt(num.trim())))
@@ -39,12 +45,6 @@ public class LottoTicket {
                                              .collect(Collectors.toList());
         Collections.shuffle(numbers);
         return new LottoTicket(numbers.subList(0, LOTTO_SIZE));
-    }
-
-    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 정확히 6개여야 합니다.");
-        }
     }
 
     public Winning calculateWinningResult(LottoTicket winningNumbers, LottoNumber bonusNumber) {
