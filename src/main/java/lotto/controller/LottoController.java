@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.Lotteries;
 import lotto.domain.Lottery;
 import lotto.domain.LottoStatistics;
@@ -16,6 +17,9 @@ public class LottoController {
 
         String inputLastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
         Lottery winningNumbers = Lottery.from(inputLastWeekWinningNumbers);
+
+        Integer inputBonusNumber = InputView.inputBonusNumber();
+        BonusNumber bonusNumber = new BonusNumber(inputBonusNumber);
 
         List<Integer> winningNumberCountList = purchasedLottoNumbersList.getWinningNumberCountList(winningNumbers);
         LottoStatistics lottoStatistics = LottoStatistics.create(winningNumberCountList);

@@ -13,6 +13,11 @@ public class InputView {
         return getInputString();
     }
 
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return getInputInteger();
+    }
+
     private static int getInputInteger() {
         try {
             Scanner scanner = new Scanner(System.in);
