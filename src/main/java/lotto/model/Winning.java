@@ -8,15 +8,11 @@ public class Winning {
     private final LottoNumber bonusNumber;
 
     public Winning(Lotto winningLotto, LottoNumber bonusNumber) {
-        this.winningLotto = winningLotto;
-        this.bonusNumber = bonusNumber;
-    }
-
-    public static Winning of(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER);
         }
-        return new Winning(winningLotto, bonusNumber);
+        this.winningLotto = winningLotto;
+        this.bonusNumber = bonusNumber;
     }
 
     public LottoNumber bonusNumber() {

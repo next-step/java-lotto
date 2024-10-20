@@ -1,7 +1,5 @@
 package stringcalculator.model;
 
-import java.util.Objects;
-
 public class Result {
     private final int value;
 

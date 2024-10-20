@@ -7,14 +7,15 @@ public class LottoNumber {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     private final int number;
-    private LottoNumber(final int number) {
+    public LottoNumber(final int number) {
+        validateNumber(number);
         this.number = number;
     }
-    public static LottoNumber of(final int number) {
+
+    private static void validateNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_ALLOWED_BETWEEN_1_TO_45_INTEGER);
         }
-        return new LottoNumber(number);
     }
 
     public int compareTo(LottoNumber another) {

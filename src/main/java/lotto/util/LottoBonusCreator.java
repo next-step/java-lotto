@@ -22,7 +22,7 @@ public class LottoBonusCreator implements BonusCreator {
         Collections.shuffle(integers);
         return integers.stream()
                 .limit(BONUS_NUMBER_SIZE)
-                .map(LottoNumber::of)
+                .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableList())
                 .get(FIRST_INDEX);
     }

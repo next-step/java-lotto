@@ -2,7 +2,6 @@ package stringcalculator.model;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
-import java.util.stream.Stream;
 
 public enum Operator {
     SUM("+", (left, right) -> left + right),

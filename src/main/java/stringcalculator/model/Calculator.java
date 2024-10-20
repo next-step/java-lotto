@@ -1,11 +1,10 @@
 package stringcalculator.model;
 
-import stringcalculator.util.Parser;
+import java.util.Collections;
+import java.util.List;
 
-import java.util.*;
-
-import static stringcalculator.util.Parser.*;
 import static stringcalculator.util.Parser.operands;
+import static stringcalculator.util.Parser.operators;
 
 public class Calculator {
     public static final int FIRST_INDEX = 0;

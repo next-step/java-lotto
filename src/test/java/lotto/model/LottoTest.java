@@ -8,12 +8,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 
 import static lotto.model.Lotto.LOTTO_NUMBERS_NOT_ALLOWED_DUPLICATED;
 import static lotto.model.Lotto.LOTTO_NUMBERS_SIZE_ALLOWED_ONLY_6;
-import static lotto.model.dto.LottoNumber.of;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
@@ -23,20 +20,15 @@ public class LottoTest {
     @Test
     void 로또번호목록과_보너스번호를_저장한다() {
         assertThatNoException().isThrownBy(() -> {
-            Lotto lotto = new Lotto(
-                    () -> Arrays.asList(of(6), of(9), of(17), of(28), of(39), of(45))
-            );
+            Lotto lottoManual = new Lotto(6, 9, 17, 28, 39, 45);
+            Lotto lottoAuto = new Lotto(() -> Arrays.asList(new LottoNumber(6), new LottoNumber(9), new LottoNumber(17), new LottoNumber(28), new LottoNumber(39), new LottoNumber(45)));
         });
     }
 
     @Test
     void 로또는_로또번호순서와_상관없이_정렬된_값과_같다() {
-        Lotto actual = new Lotto(
-                () -> Arrays.asList(of(39), of(17), of(6), of(9), of(28), of(45))
-        );
-        Lotto expected = new Lotto(
-                () -> Arrays.asList(of(6), of(9), of(17), of(28), of(39), of(45))
-        );
+        Lotto actual = new Lotto(39, 17, 6, 9, 28, 45);
+        Lotto expected = new Lotto(6, 9, 17, 28, 39, 45);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -44,9 +36,7 @@ public class LottoTest {
     @Test
     void 로또번호는_중복되면_오류() {
         assertThatThrownBy(() -> {
-            Lotto duplicatedLotto = new Lotto(
-                    () -> Arrays.asList(of(6), of(6), of(17), of(28), of(39), of(45))
-            );
+            Lotto duplicatedLotto = new Lotto(6, 6, 17, 28, 39, 45);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LOTTO_NUMBERS_NOT_ALLOWED_DUPLICATED);
     }
@@ -54,17 +44,15 @@ public class LottoTest {
     @Test
     void 로또번호목록은_반드시_6개가_저장되어야_한다() {
         assertThatThrownBy(() -> {
-            Lotto lottoNumbersSizeIsNotSix = new Lotto(
-                    () -> Arrays.asList(of(6), of(17), of(28), of(39))
-            );
+            Lotto lottoNumbersSizeIsNotSix = new Lotto(6, 17, 28, 39);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LOTTO_NUMBERS_SIZE_ALLOWED_ONLY_6);
     }
 
     @Test
     void 로또번호목록은_로또번호_존재여부를_리턴한다() {
-        Lotto lotto = new Lotto(() -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6)));
-        boolean actual = lotto.contains(of(1));
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        boolean actual = lotto.contains(new LottoNumber(1));
         Assertions.assertThat(actual).isTrue();
     }
 
@@ -76,16 +64,11 @@ public class LottoTest {
     })
     void 로또_등수_없음(String numberStrings) {
         int[] numbers = convertStringToNumbers(numberStrings);
-        Lotto buy = new Lotto(
-                () -> Arrays.asList(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
-        );
+        Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
-        Lotto winningLotto = new Lotto(
-                () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
-        );
-        LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
-
+        Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.NONE;
 
@@ -99,15 +82,11 @@ public class LottoTest {
     })
     void 로또5등(String numberStrings) {
         int[] numbers = convertStringToNumbers(numberStrings);
-        Lotto buy = new Lotto(
-                () -> Arrays.asList(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
-        );
-        Lotto winningLotto = new Lotto(
-                () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
-        );
-        LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
+        Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.FIFTH;
 
@@ -121,15 +100,11 @@ public class LottoTest {
     })
     void 로또4등(String numberStrings) {
         int[] numbers = convertStringToNumbers(numberStrings);
-        Lotto buy = new Lotto(
-                () -> Arrays.asList(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
-        );
-        Lotto winningLotto = new Lotto(
-                () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
-        );
-        LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
+        Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.FOURTH;
 
@@ -143,15 +118,11 @@ public class LottoTest {
     })
     void 로또3등(String numberStrings) {
         int[] numbers = convertStringToNumbers(numberStrings);
-        Lotto buy = new Lotto(
-                () -> Arrays.asList(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
-        );
-        Lotto winningLotto = new Lotto(
-                () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
-        );
-        LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
+        Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.THIRD;
 
@@ -165,15 +136,11 @@ public class LottoTest {
     })
     void 로또2등(String numberStrings) {
         int[] numbers = convertStringToNumbers(numberStrings);
-        Lotto buy = new Lotto(
-                () -> Arrays.asList(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
-        );
-        Lotto winningLotto = new Lotto(
-                () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
-        );
-        LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
+        Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.SECOND;
 
@@ -186,21 +153,16 @@ public class LottoTest {
     })
     void 로또1등(String numberStrings) {
         int[] numbers = convertStringToNumbers(numberStrings);
-        Lotto buy = new Lotto(
-                () -> Arrays.asList(of(numbers[0]), of(numbers[1]), of(numbers[2]), of(numbers[3]), of(numbers[4]), of(numbers[5]))
-        );
-        Lotto winningLotto = new Lotto(
-                () -> Arrays.asList(of(1), of(2), of(3), of(4), of(5), of(6))
-        );
-        LottoNumber bonusNumber = of(numbers[6]);
-        Winning winning = Winning.of(winningLotto, bonusNumber);
+        Lotto buy = new Lotto(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5]);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(numbers[6]);
 
+        Winning winning = new Winning(winningLotto, bonusNumber);
         Ranking actual = buy.compare(winning);
         Ranking expected = Ranking.FIRST;
 
         assertThat(actual).isEqualTo(expected);
     }
-
 
     private static int[] convertStringToNumbers(String numberStrings) {
         return Arrays.stream(numberStrings.split(DELIMITER)).mapToInt(Integer::parseInt).toArray();

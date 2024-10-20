@@ -1,7 +1,7 @@
 package lotto.model.enums;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 public enum Ranking {
     NONE(0, false, 0),
@@ -31,7 +31,7 @@ public enum Ranking {
     }
 
     private static boolean isMatchesSecondOrThird(boolean isMatchedBonusNumber, Ranking ranking) {
-        if (List.of(SECOND, THIRD).contains(ranking)) {
+        if (Set.of(SECOND, THIRD).contains(ranking)) {
             return isMatchedBonusNumber == ranking.isMatchedBonusNumber();
         }
         return true;

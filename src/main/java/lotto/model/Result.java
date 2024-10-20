@@ -17,17 +17,12 @@ public class Result {
     public static final String LINE_BREAK = "\n";
     public static final String BONUS_MATCHED_STRINGS = ", 보너스 볼 일치";
     public static final String SPACE = " ";
-    private final Buyer buyer;
+    private final Lottoes lottoes;
     private final Winning winning;
 
-    private Result(Buyer buyer, Winning winning) {
-        this.buyer = buyer;
+    public Result(Lottoes lottoes, Winning winning) {
+        this.lottoes = lottoes;
         this.winning = winning;
-    }
-
-
-    public static Result of(Buyer buyer, Winning winning) {
-        return new Result(buyer, winning);
     }
 
     public double statistics(int buyCount) {
@@ -70,7 +65,7 @@ public class Result {
     }
 
     private int rankingCount(Ranking ranking) {
-        long count = this.buyer.value()
+        long count = this.lottoes.value()
                 .stream()
                 .map(lotto -> lotto.compare(winning))
                 .filter(ranking::equals)

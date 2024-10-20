@@ -7,36 +7,30 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
-import static lotto.model.dto.LottoNumber.of;
 import static lotto.model.enums.Ranking.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultTest {
-    private Buyer buyer;
+    private Lottoes lottoes;
     private Winning winning;
 
     @BeforeEach
     void setUp() {
-        this.buyer = Buyer.of(
-                3,
-                new BuyerFixtureNumberCreator(Arrays.asList(
-                        Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(43)),
-                        Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(44)),
-                        Arrays.asList(of(1), of(8), of(11), of(31), of(41), of(42))
-                )));
-        Lotto winningLotto = new Lotto(
-                () -> Arrays.asList(of(8), of(21), of(23), of(41), of(42), of(43))
-        );
-        LottoNumber bonusNumber = of(44);
-        this.winning = Winning.of(winningLotto, bonusNumber);
+        int[] lotto1 = new int[]{8, 21, 23, 41, 42, 43};
+        int[] lotto2 = new int[]{8, 21, 23, 41, 42, 44};
+        int[] lotto3 = new int[]{1, 8, 11, 31, 41, 42};
+        Lotto winningLotto = new Lotto(lotto1);
+        LottoNumber bonusNumber = new LottoNumber(44);
+
+        this.lottoes = new Lottoes(3, new BuyerFixtureNumberCreator(Arrays.asList(lotto1, lotto2, lotto3)));
+        this.winning = new Winning(winningLotto, bonusNumber);
     }
 
     @Test
     void 수익률을_출력한다() {
-        Result result = Result.of(buyer, winning);
+        Result result = new Result(lottoes, winning);
 
         double actual = result.statistics(3);
 
@@ -51,7 +45,7 @@ public class ResultTest {
 
     @Test
     void 구매한_로또번호_6자리_목록의_등수들을_리턴한다() {
-        Map<Ranking, Integer> actual = Result.of(buyer, winning).rankings();
+        Map<Ranking, Integer> actual = new Result(lottoes, winning).rankings();
         Map<Ranking, Integer> expected = Map.of(
                 FIFTH, 1,
                 FOURTH, 0,

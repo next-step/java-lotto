@@ -20,7 +20,7 @@ public class LottoNumbersCreator implements NumbersCreator {
         Collections.shuffle(integers);
         return integers.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
-                .map(LottoNumber::of)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }
