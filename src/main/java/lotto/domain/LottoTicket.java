@@ -27,8 +27,8 @@ public class LottoTicket {
     }
 
     public static LottoTicket createByString(String lottoNumbers) {
-        return new LottoTicket(Arrays.stream(lottoNumbers.split(", "))
-                                     .map(num -> new LottoNumber(Integer.parseInt(num)))
+        return new LottoTicket(Arrays.stream(lottoNumbers.split(","))
+                                     .map(num -> new LottoNumber(Integer.parseInt(num.trim())))
                                      .collect(Collectors.toList())
         );
     }
