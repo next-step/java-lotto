@@ -1,18 +1,17 @@
 package lotto.view;
 
+import lotto.domain.Lotteries;
+import lotto.domain.Lottery;
 import lotto.domain.LottoStatistics;
-
-import java.util.List;
-import java.util.Set;
 
 public class ResultView {
     private static final String RESULT_TITLE = "당첨 통계";
     private static final String PURCHASED_LOTTO_NUMBER_LIST_POSTFIX = "개를 구매했습니다.";
 
-    public static void printPurchasedLottoNumberList(List<Set<Integer>> purchasedLottoNumbersList) {
-        System.out.println(purchasedLottoNumbersList.size() + PURCHASED_LOTTO_NUMBER_LIST_POSTFIX);
-        for (Set<Integer> lottoNumbers : purchasedLottoNumbersList) {
-            System.out.println(lottoNumbers);
+    public static void printPurchasedLottoNumberList(Lotteries purchasedLotteries) {
+        System.out.println(purchasedLotteries.size() + PURCHASED_LOTTO_NUMBER_LIST_POSTFIX);
+        for (Lottery lottery : purchasedLotteries.getLotteries()) {
+            System.out.println(lottery.toString());
         }
         System.out.println();
     }

@@ -1,15 +1,10 @@
 package lotto;
 
 import lotto.domain.Lotteries;
-import lotto.domain.Lotto;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoStatistics;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-class LottoTest {
+public class LotteriesTest {
     @Test
     void 구매금액에_맞게_로또번호_리스트_생성() {
         // given
@@ -31,20 +26,5 @@ class LottoTest {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> Lotteries.purchase(purchaseAmount))
                 .withMessage("구입금액은 1000 이상이어야 합니다");
-    }
-
-    @Test
-    void 당첨_통계_생성() {
-        // given
-        List<Integer> equalNumberCountList = List.of(3, 4);
-
-        // when
-        LottoStatistics statistics = Lotto.createStatistics(equalNumberCountList);
-
-        // then
-        Assertions.assertThat(statistics.getCount(LottoRank.FIRST)).isEqualTo(0);
-        Assertions.assertThat(statistics.getCount(LottoRank.SECOND)).isEqualTo(0);
-        Assertions.assertThat(statistics.getCount(LottoRank.THIRD)).isEqualTo(1);
-        Assertions.assertThat(statistics.getCount(LottoRank.FOURTH)).isEqualTo(1);
     }
 }
