@@ -33,20 +33,6 @@ public class LottoStatistics {
         return Math.round(profitRate * 100) / 100.0f;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder allRankDescription = new StringBuilder();
-
-        for (LottoRank lottoRank : LottoRank.RANKS_WITHOUT_NONE) {
-            Integer prizeCount = prizeCountMap.get(lottoRank);
-
-            String singleRankDescription = String.format("%d개 일치 (%d원)- %d개\n", lottoRank.equalNumberCount, lottoRank.prizeMoneyAmount, prizeCount);
-            allRankDescription.append(singleRankDescription);
-        }
-
-        return allRankDescription.toString();
-    }
-
     private static Map<LottoRank, Integer> createEmptyPrizeCountMap() {
         Map<LottoRank, Integer> prizeCountMap = new EnumMap<>(LottoRank.class);
 

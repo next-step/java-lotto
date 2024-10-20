@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotteries;
 import lotto.domain.Lottery;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 
 public class ResultView {
@@ -24,7 +25,16 @@ public class ResultView {
     }
 
     private static void printLottoStatistics(LottoStatistics lottoStatistics) {
-        System.out.println(lottoStatistics.toString());
+        StringBuilder allRankDescription = new StringBuilder();
+
+        for (LottoRank lottoRank : LottoRank.RANKS_WITHOUT_NONE) {
+            Integer prizeCount = lottoStatistics.getCount(lottoRank);
+
+            String singleRankDescription = String.format("%d개 일치 (%d원)- %d개\n", lottoRank.equalNumberCount, lottoRank.prizeMoneyAmount, prizeCount);
+            allRankDescription.append(singleRankDescription);
+        }
+
+        System.out.println(allRankDescription);
     }
 
     private static void printProfitRate(float profitRate) {
