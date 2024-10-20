@@ -13,7 +13,7 @@ public class LottoMain {
         Lotto lotto = Lotto.InitLotto(purchaseAmount, new LottoGenerateStrategy(new RandomLottoNumbers()));
         LottoWinner lottoWinner = new LottoWinner(InputView.lottoWinnerNumbers(scanner));
         lotto.searchWinningCount(lottoWinner);
-        lottoWinner.printMatchingCount();
+        lottoWinner.printWinningCount();
         ProfitMargin profitMargin = new ProfitMargin(lottoWinner.winningAmount(), purchaseAmount);
         profitMargin.printMargin();
     }

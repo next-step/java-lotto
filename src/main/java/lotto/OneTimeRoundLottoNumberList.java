@@ -20,6 +20,6 @@ public class OneTimeRoundLottoNumberList {
 
     public void searchWinningCount(LottoWinner lottoWinner) {
         int matchingCount = lottoWinner.diffLottoAndWinningLotto(lottoNumberList);
-        lottoWinner.updateMatchingCount(matchingCount);
+        lottoWinner.recordWinningCount(matchingCount);
     }
 }

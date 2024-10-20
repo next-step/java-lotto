@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.Arrays;
 
-public enum LottoMatchingCountDecision {
+public enum LottoWinningCountDecision {
     THREE(Constants.MATCHING_THREE_COUNT,Constants.LOTTO_THREE_COUNT_INDEX),
     FOUR(Constants.MATCHING_FOUR_COUNT,Constants.LOTTO_FOUR_COUNT_INDEX),
     FIVE(Constants.FIVE_COUNT_NUMBER,Constants.LOTTO_FIVE_COUNT_INDEX),
@@ -13,7 +13,7 @@ public enum LottoMatchingCountDecision {
     private int convertingNumberIndex;
 
 
-    LottoMatchingCountDecision(int numberCount, int convertingNumberIndex) {
+    LottoWinningCountDecision(int numberCount, int convertingNumberIndex) {
         this.numberCount = numberCount;
         this.convertingNumberIndex = convertingNumberIndex;
     }

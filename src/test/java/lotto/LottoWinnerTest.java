@@ -29,7 +29,7 @@ public class LottoWinnerTest {
 
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerNumberList);
         int matchingCount = lottoWinner.diffLottoAndWinningLotto(lottoNumberList);
-        lottoWinner.updateMatchingCount(matchingCount);
+        lottoWinner.recordWinningCount(matchingCount);
         assertThat(lottoWinner).isEqualTo(new LottoWinner(lottoWinnerNumberList,TEST_MATCHING_COUNT_LIST));
     }
 }

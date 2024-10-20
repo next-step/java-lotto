@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public class LottoWinner {
     public static final List<Integer> DEFAULT_WINNER_NUMBERLIST = List.of(0, 0, 0, 0);
     LottoWinnerNumber lottoWinnerNumber;
-    LottoNumberMatchCount lottoNumberMatchCountList;
+    WinningLottoCount winningLottoCountList;
 
     public LottoWinner(String lottoWinnerNumbers) {
         this(stringToArrayList(lottoWinnerNumbers), new ArrayList<>(DEFAULT_WINNER_NUMBERLIST));
@@ -27,7 +27,7 @@ public class LottoWinner {
 
     public LottoWinner(List<Integer> lottoWinnerNumberList, List<Integer> lottoNumberMatchCountList) {
         this.lottoWinnerNumber = new LottoWinnerNumber(lottoWinnerNumberList);
-        this.lottoNumberMatchCountList = new LottoNumberMatchCount(lottoNumberMatchCountList);
+        this.winningLottoCountList = new WinningLottoCount(lottoNumberMatchCountList);
     }
 
     public int diffLottoAndWinningLotto(List<Integer> lottoNumberList) {
@@ -37,19 +37,19 @@ public class LottoWinner {
                 .sum();
     }
 
-    public void updateMatchingCount(int matchingCount) {
+    public void recordWinningCount(int matchingCount) {
         if (matchingCount >= 3) {
-            int matchingCountIndex = LottoMatchingCountDecision.convertMatchingNumberToIndex(matchingCount);
-            lottoNumberMatchCountList.updateMatchingCount(matchingCountIndex);
+            int winningCountIndex = LottoWinningCountDecision.convertMatchingNumberToIndex(matchingCount);
+            winningLottoCountList.recordWinningCount(winningCountIndex);
         }
     }
 
-    public void printMatchingCount() {
-        lottoNumberMatchCountList.printMatchingCount();
+    public void printWinningCount() {
+        winningLottoCountList.printWinningCount();
     }
 
     public int winningAmount() {
-        return lottoNumberMatchCountList.winningAmount();
+        return winningLottoCountList.winningAmount();
     }
 
     @Override
@@ -57,11 +57,11 @@ public class LottoWinner {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoWinner that = (LottoWinner) o;
-        return Objects.equals(lottoWinnerNumber, that.lottoWinnerNumber) && Objects.equals(lottoNumberMatchCountList, that.lottoNumberMatchCountList);
+        return Objects.equals(lottoWinnerNumber, that.lottoWinnerNumber) && Objects.equals(winningLottoCountList, that.winningLottoCountList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoWinnerNumber, lottoNumberMatchCountList);
+        return Objects.hash(lottoWinnerNumber, winningLottoCountList);
     }
 }

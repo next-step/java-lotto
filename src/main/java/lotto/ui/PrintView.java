@@ -23,7 +23,7 @@ public class PrintView {
         System.out.println("---------");
     }
 
-    public static void printMatchingCount(List<Integer> lottoNumberMatchCountList) {
+    public static void printWinningCount(List<Integer> lottoNumberMatchCountList) {
         for (int i = 0; i < lottoNumberMatchCountList.size(); i++) {
             System.out.printf("%d개 일치 (%d원)- %d개\n", i + 3, LOTTO_WINNING_AMOUNT_ARRAY[i], lottoNumberMatchCountList.get(i));
         }
