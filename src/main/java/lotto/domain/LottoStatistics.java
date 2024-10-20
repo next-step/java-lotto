@@ -52,4 +52,14 @@ public class LottoStatistics {
 
         return profit;
     }
+
+    private static Map<LottoRank, Integer> createEmptyPrizeCountMap() {
+        Map<LottoRank, Integer> prizeCountMap = new EnumMap<>(LottoRank.class);
+
+        for (LottoRank lottoRank : LottoRank.values()) {
+            prizeCountMap.put(lottoRank, 0);
+        }
+
+        return prizeCountMap;
+    }
 }
