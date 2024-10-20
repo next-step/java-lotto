@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.domain.Lotteries;
 import lotto.domain.Lottery;
 import lotto.domain.LottoStatistics;
-import lotto.domain.ProfitCalculator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,9 +17,9 @@ public class LottoController {
         String inputLastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
         Lottery winningNumbers = Lottery.from(inputLastWeekWinningNumbers);
 
-        List<Integer> equalNumberCountList = purchasedLottoNumbersList.getWinningNumberCountList(winningNumbers);
-        LottoStatistics lottoStatistics = LottoStatistics.create(equalNumberCountList);
-        float profitRate = ProfitCalculator.calculateProfitRate(totalPurchaseAmount, equalNumberCountList);
+        List<Integer> winningNumberCountList = purchasedLottoNumbersList.getWinningNumberCountList(winningNumbers);
+        LottoStatistics lottoStatistics = LottoStatistics.create(winningNumberCountList);
+        float profitRate = lottoStatistics.calculateProfitRate(totalPurchaseAmount);
         ResultView.printResult(lottoStatistics, profitRate);
     }
 }

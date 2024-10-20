@@ -26,6 +26,13 @@ public class LottoStatistics {
         return prizeCountMap.get(lottoRank);
     }
 
+    public float calculateProfitRate(int totalPurchaseAmount) {
+        int totalProfitAmount = calculateTotalProfit();
+
+        float profitRate = (float) totalProfitAmount / totalPurchaseAmount;
+        return Math.round(profitRate * 100) / 100.0f;
+    }
+
     @Override
     public String toString() {
         StringBuilder allRankDescription = new StringBuilder();
@@ -48,5 +55,15 @@ public class LottoStatistics {
         }
 
         return prizeCountMap;
+    }
+
+    public int calculateTotalProfit() {
+        int profit = 0;
+
+        for (LottoRank lottoRank : prizeCountMap.keySet()) {
+            profit += lottoRank.prizeMoneyAmount * getCount(lottoRank);
+        }
+
+        return profit;
     }
 }
