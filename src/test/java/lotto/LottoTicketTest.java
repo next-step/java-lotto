@@ -55,7 +55,7 @@ class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("로또(수동) 번호가 중복된 경우 예외 발수")
+    @DisplayName("로또(수동) 번호가 중복된 경우 예외 발생")
     void generateLottoTicket_duplicate() {
         assertThatThrownBy(() -> new LottoTicket(1, 2, 3, 4, 5, 5))
             .isInstanceOf(IllegalArgumentException.class)

@@ -34,7 +34,7 @@ class LottoWinningNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨번호 개수 확인 ")
+    @DisplayName("당첨번호 개수 확인")
     void matchCount() {
         LottoTicket winningNumbers = new LottoTicket(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(7);
