@@ -31,19 +31,14 @@ public class LottoTest {
     }
 
     @Test
-    void gerRanking_firstPrize() {
-        Lotto lotto = new Lotto(new LottoNumbers(new int[]{1,2,3,4,5,6}));
-        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(10));
-        assertThat(lotto.getRank(winningLotto)).isEqualTo(LottoRankEnum.FIRST);
-    }
-    @Test
-    void gerRanking_losLot() {
-        Lotto winningLotto = new Lotto(new LottoNumbers(new int[]{1, 2, 3, 4, 5, 6}));
-        WinningLotto winningLottoWithBonus = new WinningLotto(winningLotto, new LottoNumber(9));
-        Lotto newLotto = new Lotto(new LottoNumbers(new int[]{7, 8, 9, 10, 11, 12}));
-        assertThat(newLotto.getRank(winningLottoWithBonus)).isEqualTo(LottoRankEnum.LOSING_LOT);
+    void contains() {
+        assertThat(getLotto(new int[]{1, 2, 3, 4, 5, 6}).contains(new LottoNumber(3))).isTrue();
     }
 
+    @Test
+    void eqauls() {
+        assertThat(getLotto(new int[]{1, 2, 3, 4, 5, 6}).equals(new Lotto(new LottoNumbers(new int[]{1,2,3,4,5,6}))));
+    }
     private Lotto getLotto(int[] numbers) {
         Lotto lotto = new Lotto(new LottoNumbers(numbers));
         return lotto;

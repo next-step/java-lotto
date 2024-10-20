@@ -1,22 +1,22 @@
 package lotto.domain;
 
 public class WinningLotto {
-    private Lotto lotto;
+    private Lotto winningLotto;
     private LottoNumber lottoNumber;
 
-    public WinningLotto(Lotto lotto, LottoNumber lottoNumber) {
-        if (lotto.contains(lottoNumber)) {
+    public WinningLotto(Lotto winningLotto, LottoNumber lottoNumber) {
+        if (winningLotto.contains(lottoNumber)) {
             throw new IllegalArgumentException("보너스 번호는 로또번호와 중복한 번호일 수 없다.");
         }
-        this.lotto = lotto;
+        this.winningLotto = winningLotto;
         this.lottoNumber = lottoNumber;
     }
 
-    public Lotto getWinningLotto() {
-        return lotto;
+    public int getMatchCount(Lotto lotto) {
+        return winningLotto.getLottoNumbers().getMatchCount(lotto);
     }
 
-    public LottoNumber getBonusLottoNumber() {
-        return lottoNumber;
+    public boolean isBonusMatch(Lotto lotto) {
+        return lotto.contains(lottoNumber);
     }
 }

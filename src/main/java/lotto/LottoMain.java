@@ -13,10 +13,10 @@ public class LottoMain {
 
     public static void main(String[] args) {
         OutputView.printMsg(INPUT_MSG);
-        int cnt = InputView.getCount();
-        OutputView.printMsg(cnt + BUY_CNT_MSG);
+        int lottoTotalCount = InputView.getCount();
+        OutputView.printMsg(lottoTotalCount + BUY_CNT_MSG);
 
-        Lottos lottos = new Lottos(QuickPickGenerator.genLottoNumbers(cnt));
+        Lottos lottos = new Lottos(QuickPickGenerator.genLottoNumbers(lottoTotalCount));
 
         OutputView.printLottoNumbers(lottos.getLottoNumbers());
 
@@ -27,9 +27,9 @@ public class LottoMain {
         OutputView.printMsg(INPUT_BONUS_MSG);
         LottoNumber bonus = new LottoNumber(InputView.inputNumber());
 
-        WinningLotto winningLottoWithBonus = new WinningLotto(winningLotto, bonus);
+        WinningResult winningResult = lottos.getWinningResult(new WinningLotto(winningLotto, bonus));
 
-        OutputView.printWinningResult(lottos.getWinningResult(winningLottoWithBonus));
-        OutputView.printRateOfReturnInfo(lottos.getRateOfReturn(winningLottoWithBonus));
+        OutputView.printWinningResult(winningResult);
+        OutputView.printRateOfReturnInfo(winningResult.getRateOfReturn(lottoTotalCount));
     }
 }

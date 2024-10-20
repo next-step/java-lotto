@@ -7,42 +7,42 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoRankEnumTest {
 
-    public static WinningLotto WINNING_LOTTO = new WinningLotto(new Lotto(new LottoNumbers(new int[]{1, 2, 3, 4, 5, 6})), new LottoNumber(8));
+//    public static WinningLotto WINNING_LOTTO = new WinningLotto(new Lotto(new LottoNumbers(new int[]{1, 2, 3, 4, 5, 6})), new LottoNumber(8));
 
     @Test
-    void FIRST() {
-        Lotto lotto =  new Lotto(new LottoNumbers(new int[]{1,2,3,4,5,6}));
-        assertThat(LottoRankEnum.FIRST.isMatch(WINNING_LOTTO, lotto)).isTrue();
-
+    void getRank_FIRST() {
+        LottoRankEnum expectedRank = LottoRankEnum.getRank(6, false);
+        Assertions.assertThat(expectedRank).isEqualTo(LottoRankEnum.FIRST);
     }
 
     @Test
-    void SECOND() {
-        Lotto lotto =  new Lotto(new LottoNumbers(new int[]{1,2,3,4,5,8}));
-        assertThat(LottoRankEnum.SECOND.isMatch(WINNING_LOTTO, lotto)).isTrue();
+    void getRank_SECOND() {
+        LottoRankEnum expectedRank = LottoRankEnum.getRank(5, true);
+        Assertions.assertThat(expectedRank).isEqualTo(LottoRankEnum.SECOND);
+    }
+
+
+    @Test
+    void getRank_THIRD() {
+        LottoRankEnum expectedRank = LottoRankEnum.getRank(5, false);
+        Assertions.assertThat(expectedRank).isEqualTo(LottoRankEnum.THIRD);
     }
 
     @Test
-    void THIRD() {
-        Lotto lotto =  new Lotto(new LottoNumbers(new int[]{1,2,3,4,5,10}));
-        assertThat(LottoRankEnum.THIRD.isMatch(WINNING_LOTTO, lotto)).isTrue();
+    void getRank_LOSING_LOT() {
+        LottoRankEnum expectedRank = LottoRankEnum.getRank(1, false);
+        Assertions.assertThat(expectedRank).isEqualTo(LottoRankEnum.LOSING_LOT);
     }
 
     @Test
-    void FOURTH() {
-        Lotto lotto =  new Lotto(new LottoNumbers(new int[]{1,2,3,4,8,10}));
-        assertThat(LottoRankEnum.FOURTH.isMatch(WINNING_LOTTO, lotto)).isTrue();
+    void getRank_FOURTH() {
+        LottoRankEnum expectedRank = LottoRankEnum.getRank(4, false);
+        Assertions.assertThat(expectedRank).isEqualTo(LottoRankEnum.FOURTH);
     }
 
     @Test
-    void FIVE() {
-        Lotto lotto =  new Lotto(new LottoNumbers(new int[]{1,2,3,44,8,10}));
-        assertThat(LottoRankEnum.FIVE.isMatch(WINNING_LOTTO, lotto)).isTrue();
-    }
-
-    @Test
-    void LOS_LOT() {
-        Lotto lotto =  new Lotto(new LottoNumbers(new int[]{1,2,45,44,8,10}));
-        assertThat(LottoRankEnum.LOSING_LOT.isMatch(WINNING_LOTTO, lotto)).isTrue();
+    void getRank_FIVE() {
+        LottoRankEnum expectedRank = LottoRankEnum.getRank(3, false);
+        Assertions.assertThat(expectedRank).isEqualTo(LottoRankEnum.FIVE);
     }
 }

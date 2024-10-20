@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRankEnum;
+import lotto.domain.WinningResult;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,13 +19,16 @@ public class OutputView {
         }
     }
 
-    public static void printWinningResult(Map<LottoRankEnum, Integer> winningResultMap) {
+    public static void printWinningResult(WinningResult winningResult) {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        for (LottoRankEnum rank : LottoRankEnum.values()) {
-            printResultByRankingInfo(winningResultMap, rank);
-        }
+        LottoRankEnum.valuesWithoutMiss().stream().
+                forEach(x-> System.out.println
+                        (x.getDescription() + winningResult.getRankCount(x) + "개"));
+//        for (LottoRankEnum rank : LottoRankEnum.valuesWithoutMiss()) {
+//            printResultByRankingInfo(winningResultMap, rank);
+//        }
     }
 
     private static void printResultByRankingInfo(Map<LottoRankEnum, Integer> winningResultMap, LottoRankEnum rank) {

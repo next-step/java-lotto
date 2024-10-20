@@ -21,6 +21,8 @@ public class WinningLottoTest {
         Lotto lotto = new Lotto(new LottoNumbers(new int[]{1, 2, 3, 4, 5, 6}));
         LottoNumber bonusNum = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNum);
-        assertThat(winningLotto.getWinningLotto().equals(lotto)).isTrue();
+        Assertions.assertThat(winningLotto.getMatchCount(lotto)).isEqualTo(6);
+        Assertions.assertThat(winningLotto.isBonusMatch(lotto)).isFalse();
+
     }
 }
