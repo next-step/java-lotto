@@ -19,14 +19,18 @@ public enum Winning {
     }
 
     public static Winning fromMatchCount(int matchCount, boolean hasBonus) {
-        if (matchCount == THIRD.matchCount) {
-            return hasBonus ? SECOND : THIRD;
+        if (isSecond(matchCount, hasBonus)) {
+            return SECOND;
         }
 
         return Arrays.stream(values())
                      .filter(winning -> winning.matchCount == matchCount)
                      .findFirst()
                      .orElse(NONE);
+    }
+
+    private static boolean isSecond(int matchCount, boolean hasBonus) {
+        return matchCount == SECOND.matchCount && hasBonus;
     }
 
     public int getMatchCount() {
