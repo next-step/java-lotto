@@ -38,7 +38,7 @@ class LottoPriceTest {
     @DisplayName("로또 금액을 float으로 반환한다.")
     @Test
     void return_float_type() {
-        float actual = new LottoPrice(2000).floatValue();
+        float actual = new LottoPrice(2000).value();
 
         assertThat(actual).isEqualTo(2000.f);
     }

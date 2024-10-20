@@ -38,7 +38,7 @@ public class LottoWinningStatistics {
     }
 
     public float calculateReturnRate(LottoPrice lottoPurchaseAmount) {
-        return Math.round((this.calculateWinningAmount() / lottoPurchaseAmount.floatValue()) * 100) / 100.0f;
+        return Math.round((this.calculateWinningAmount() / lottoPurchaseAmount.value()) * 100) / 100.0f;
     }
 
     private int calculateWinningAmount() {

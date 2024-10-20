@@ -22,7 +22,7 @@ public class LottoPrice {
         return this.lottoPrice / SINGLE_LOTTO_PRICE;
     }
 
-    public float floatValue() {
+    public float value() {
         return this.lottoPrice;
     }
 
