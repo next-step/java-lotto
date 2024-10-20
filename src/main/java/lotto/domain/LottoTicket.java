@@ -3,7 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,8 +29,9 @@ public class LottoTicket {
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 정확히 6개여야 합니다.");
+        Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(lottoNumbers);
+        if (uniqueLottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 정확히 서로 다른 숫자 6개여야 합니다.");
         }
     }
 

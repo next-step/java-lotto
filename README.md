@@ -57,6 +57,8 @@
   - LottoTicket이 당첨 번호와 몇개 일치 하는지 확인
 - LottoTicket
   - 로또 자동 생성 (Collections.shuffle() 생성, Collections.sort() 정렬)
+  - 로또 숫자 리스트 입력 받아 생성
+    - 서로 다른 6개의 숫자가 아닐 경우 IllegalArgumentException throw
   - 다른 LottoTicket과 몇개 일치하는지 확인 (ArrayList의 contains() 확인)
   - 일치 개수에 따라 Winning 객체 리턴
     - 보너스볼 당첨여부에 따라 2등/3등 구분
