@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
@@ -7,7 +8,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
 
 class LottoTest {
     @Test
@@ -16,10 +16,10 @@ class LottoTest {
         int purchaseAmount = 14000;
 
         // when
-        List<Set<Integer>> lottoList = Lotto.purchase(purchaseAmount);
+        Lotteries lottoList = Lotteries.purchase(purchaseAmount);
 
         // then
-        Assertions.assertThat(lottoList).hasSize(14);
+        Assertions.assertThat(lottoList.size()).isEqualTo(14);
     }
 
     @Test
@@ -29,7 +29,7 @@ class LottoTest {
 
         // when, then
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Lotto.purchase(purchaseAmount))
+                .isThrownBy(() -> Lotteries.purchase(purchaseAmount))
                 .withMessage("구입금액은 1000 이상이어야 합니다");
     }
 
