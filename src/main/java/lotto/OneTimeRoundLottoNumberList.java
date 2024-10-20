@@ -18,8 +18,8 @@ public class OneTimeRoundLottoNumberList {
         return "[" + format +']';
     }
 
-    public void runWinner(LottoWinner lottoWinner) {
-        int matchingCount = lottoWinner.findMachingCount(lottoNumberList);
+    public void searchWinningCount(LottoWinner lottoWinner) {
+        int matchingCount = lottoWinner.diffLottoAndWinningLotto(lottoNumberList);
         lottoWinner.updateMatchingCount(matchingCount);
     }
 }

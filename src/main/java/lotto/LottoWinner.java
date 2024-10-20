@@ -30,7 +30,7 @@ public class LottoWinner {
         this.lottoNumberMatchCountList = new LottoNumberMatchCount(lottoNumberMatchCountList);
     }
 
-    public int findMachingCount(List<Integer> lottoNumberList) {
+    public int diffLottoAndWinningLotto(List<Integer> lottoNumberList) {
         return lottoNumberList.stream()
                 .filter(lottoWinnerNumber::contains)
                 .mapToInt(e -> 1)

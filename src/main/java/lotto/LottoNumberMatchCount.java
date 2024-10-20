@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.ui.PrintView;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +20,19 @@ public class LottoNumberMatchCount {
         lottoNumberMatchCountList.set(matchingCountIndex, countValue + 1);
     }
 
+    public void printMatchingCount() {
+        PrintView.printWinningStatisticsPreview();
+        PrintView.printMatchingCount(lottoNumberMatchCountList);
+    }
+
+    public int winningAmount() {
+        int winningAmount = 0;
+        for (int i = 0; i < lottoNumberMatchCountList.size(); i++) {
+            winningAmount += LOTTO_WINNING_AMOUNT_ARRAY[i] * lottoNumberMatchCountList.get(i);
+        }
+        return winningAmount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -31,17 +46,5 @@ public class LottoNumberMatchCount {
         return Objects.hashCode(lottoNumberMatchCountList);
     }
 
-    public void printMatchingCount() {
-        for (int i = 0; i < lottoNumberMatchCountList.size(); i++) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", i + 3, LOTTO_WINNING_AMOUNT_ARRAY[i], lottoNumberMatchCountList.get(i));
-        }
-    }
 
-    public int winningAmount() {
-        int winningAmount = 0;
-        for (int i = 0; i < lottoNumberMatchCountList.size(); i++) {
-            winningAmount += LOTTO_WINNING_AMOUNT_ARRAY[i] * lottoNumberMatchCountList.get(i);
-        }
-        return winningAmount;
-    }
 }

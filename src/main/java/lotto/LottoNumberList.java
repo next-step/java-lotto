@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.ui.PrintView;
+
 import java.util.List;
 
 public class LottoNumberList {
@@ -16,14 +18,12 @@ public class LottoNumberList {
     }
 
     public void printLottoList() {
-        for (OneTimeRoundLottoNumberList numberList : lottoNumberList) {
-            System.out.println(numberList);
-        }
+        PrintView.printLottoList(lottoNumberList);
     }
 
-    public void runWinner(LottoWinner lottoWinner) {
+    public void searchWinningCount(LottoWinner lottoWinner) {
         for (OneTimeRoundLottoNumberList numberList : lottoNumberList) {
-            numberList.runWinner(lottoWinner);
+            numberList.searchWinningCount(lottoWinner);
         }
     }
 }

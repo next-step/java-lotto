@@ -9,6 +9,15 @@ public class TryLottoCount {
         this.tryLottoCount = tryLottoCount;
     }
 
+    public int currentCount() {
+        return tryLottoCount;
+    }
+
+    public int calculateLottoTryCount(int purchaseAmount) {
+        tryLottoCount = Math.floorDiv(purchaseAmount, 1000);
+        return tryLottoCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -20,14 +29,5 @@ public class TryLottoCount {
     @Override
     public int hashCode() {
         return Objects.hashCode(tryLottoCount);
-    }
-
-    public int currentCount() {
-        return tryLottoCount;
-    }
-
-    public int calculateLottoTryCount(int purchaseAmount) {
-        tryLottoCount = Math.floorDiv(purchaseAmount, 1000);
-        return tryLottoCount;
     }
 }

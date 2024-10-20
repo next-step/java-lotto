@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.ui.PrintView;
 import random.LottoGenerator;
 
 import java.util.ArrayList;
@@ -17,12 +18,16 @@ public class Lotto {
         this.lottoNumberList = new LottoNumberList(new ArrayList<>());
     }
 
-    public static Lotto InitLotto() {
-        return new Lotto(new TryLottoCount(0));
+    public static Lotto InitLotto(int purchaseAmount, LottoGenerator lottoGenerator) {
+        Lotto lotto = new Lotto(new TryLottoCount(0));
+        lotto.convertPurchaseToLottoTryCount(purchaseAmount);
+        lotto.makeLottoList(lottoGenerator);
+        lotto.printLottoList();
+        return lotto;
     }
 
-    public int calculateLottoTryCount(int purchaseAmount) {
-        return tryLottoCount.calculateLottoTryCount(purchaseAmount);
+    public void convertPurchaseToLottoTryCount(int purchaseAmount) {
+        PrintView.printLottoTryCount(tryLottoCount.calculateLottoTryCount(purchaseAmount));
     }
 
     public void makeLottoList(LottoGenerator lottoGenerator) {
@@ -33,6 +38,10 @@ public class Lotto {
 
     public void printLottoList() {
         lottoNumberList.printLottoList();
+    }
+
+    public void searchWinningCount(LottoWinner lottoWinner) {
+        lottoNumberList.searchWinningCount(lottoWinner);
     }
 
     @Override
@@ -48,7 +57,5 @@ public class Lotto {
         return Objects.hashCode(tryLottoCount);
     }
 
-    public void runWinner(LottoWinner lottoWinner) {
-        lottoNumberList.runWinner(lottoWinner);
-    }
+
 }

@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.ui.PrintView;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -14,8 +16,7 @@ public class ProfitMargin {
     }
 
     public void printMargin() {
-        double profitMargin = calculateMargin();
-        System.out.println("총 수익률은 " + profitMargin + "입니다.");
+        PrintView.printMargin(calculateMargin());
     }
 
     public double calculateMargin() {

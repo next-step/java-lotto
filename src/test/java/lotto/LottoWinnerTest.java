@@ -18,7 +18,7 @@ public class LottoWinnerTest {
         List<Integer> lottoWinnerNumberList = LOTTO_WINNER_NUMBER_LIST;
         List<Integer> lottoNumberList = LOTTO_NUMBER_LIST;
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerNumberList);
-        assertThat(lottoWinner.findMachingCount(lottoNumberList)).isEqualTo(EXPECTED_MATCHING_COUNT);
+        assertThat(lottoWinner.diffLottoAndWinningLotto(lottoNumberList)).isEqualTo(EXPECTED_MATCHING_COUNT);
 
     }
 
@@ -28,7 +28,7 @@ public class LottoWinnerTest {
         List<Integer> lottoNumberList = LOTTO_NUMBER_LIST;
 
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerNumberList);
-        int matchingCount = lottoWinner.findMachingCount(lottoNumberList);
+        int matchingCount = lottoWinner.diffLottoAndWinningLotto(lottoNumberList);
         lottoWinner.updateMatchingCount(matchingCount);
         assertThat(lottoWinner).isEqualTo(new LottoWinner(lottoWinnerNumberList,TEST_MATCHING_COUNT_LIST));
     }
