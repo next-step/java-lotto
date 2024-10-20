@@ -47,9 +47,9 @@ public class LottoTicket {
         return new LottoTicket(numbers.subList(0, LOTTO_SIZE));
     }
 
-    public Winning calculateWinningResult(LottoTicket winningNumbers, LottoNumber bonusNumber) {
-        int matchCount = matchCount(winningNumbers);
-        boolean matchBonus = contains(bonusNumber);
+    public Winning calculateWinningResult(LottoWinningNumbers lottoWinningNumbers) {
+        int matchCount = matchCount(lottoWinningNumbers.getWinningNumbers());
+        boolean matchBonus = contains(lottoWinningNumbers.getBonusNumber());
         return Winning.fromMatchCount(matchCount, matchBonus);
     }
 

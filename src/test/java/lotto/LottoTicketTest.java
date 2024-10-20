@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Winning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,11 +51,12 @@ class LottoTicketTest {
     void calculateWinningResult() {
         LottoTicket winningNumbers = new LottoTicket(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(7);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers, bonusNumber);
 
-        assertThat(new LottoTicket(1, 2, 3, 4, 5, 6).calculateWinningResult(winningNumbers, bonusNumber)).isEqualTo(Winning.FIRST);
-        assertThat(new LottoTicket(1, 2, 3, 4, 5, 7).calculateWinningResult(winningNumbers, bonusNumber)).isEqualTo(Winning.SECOND);
-        assertThat(new LottoTicket(1, 2, 3, 4, 5, 8).calculateWinningResult(winningNumbers, bonusNumber)).isEqualTo(Winning.THIRD);
-        assertThat(new LottoTicket(9, 10, 11, 12, 13, 14).calculateWinningResult(winningNumbers, bonusNumber)).isEqualTo(Winning.NONE);
+        assertThat(new LottoTicket(1, 2, 3, 4, 5, 6).calculateWinningResult(lottoWinningNumbers)).isEqualTo(Winning.FIRST);
+        assertThat(new LottoTicket(1, 2, 3, 4, 5, 7).calculateWinningResult(lottoWinningNumbers)).isEqualTo(Winning.SECOND);
+        assertThat(new LottoTicket(1, 2, 3, 4, 5, 8).calculateWinningResult(lottoWinningNumbers)).isEqualTo(Winning.THIRD);
+        assertThat(new LottoTicket(9, 10, 11, 12, 13, 14).calculateWinningResult(lottoWinningNumbers)).isEqualTo(Winning.NONE);
     }
 
     @Test

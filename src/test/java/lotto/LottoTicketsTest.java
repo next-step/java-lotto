@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Winning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,9 +33,8 @@ class LottoTicketsTest {
         tickets.add(new LottoTicket(9, 10, 11, 12, 13, 14));
         LottoTickets lottoTickets = new LottoTickets(tickets);
 
-        LottoTicket winningNumbers = new LottoTicket(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoTicket(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
-        assertThat(lottoTickets.calculateWinningResults(winningNumbers, bonusNumber)).containsExactly(Winning.FIRST, Winning.SECOND, Winning.THIRD, Winning.NONE);
+        assertThat(lottoTickets.calculateWinningResults(lottoWinningNumbers)).containsExactly(Winning.FIRST, Winning.SECOND, Winning.THIRD, Winning.NONE);
     }
 }

@@ -49,6 +49,10 @@
     - 1~45 사이의 숫자인지 검증
   - 로또 번호 비교
   - 로또 번호 정렬
+- LottoWinningNumbers
+  - 당첨 번호 생성
+  - 보너스 볼 생성
+  - 보너스 볼이 당첨 번호에 포함되는지 확인
 - LottoTicket
   - 로또 자동 생성 (Collections.shuffle() 생성, Collections.sort() 정렬)
   - 다른 LottoTicket과 몇개 일치하는지 확인 (ArrayList의 contains() 확인)
