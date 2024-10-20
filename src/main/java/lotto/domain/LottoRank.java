@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum LottoRank {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     NONE(-1, 0);
 
     public static final List<LottoRank> RANKS_WITHOUT_NONE = Arrays.asList(FIRST, SECOND, THIRD, FOURTH);
