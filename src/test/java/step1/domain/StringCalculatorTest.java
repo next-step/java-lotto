@@ -49,6 +49,12 @@ class StringCalculatorTest {
 	}
 
 	@Test
+	@DisplayName("사칙연산의 우선순위가 입력 순인지 체크하는 테스트")
+	void calculateSequenceTest() {
+		assertThat(calculate("1 + 2 * 3")).isEqualTo(9);
+	}
+
+	@Test
 	@DisplayName("나누기 0 할시 throw 테스트")
 	void divideZeroTest() {
 		assertThatThrownBy(() -> {
