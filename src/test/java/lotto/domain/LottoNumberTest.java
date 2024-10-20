@@ -38,15 +38,4 @@ class LottoNumberTest {
 
         assertThat(lotto).containsExactly(new LottoNumber(20), new LottoNumber(30), new LottoNumber(40));
     }
-
-    @DisplayName("객체에 대해 깊은 복사하여 반환한다.")
-    @Test
-    void deepCopy() {
-        LottoNumber given = new LottoNumber(1);
-
-        LottoNumber actual = given.deepCopy();
-
-        assertThat(actual).isEqualTo(given)
-                .isNotSameAs(given);
-    }
 }

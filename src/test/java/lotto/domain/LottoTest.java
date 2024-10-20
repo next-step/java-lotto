@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -39,10 +40,13 @@ class LottoTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("로또 구입금액이 1000원 미만이면 IllegalArgumentException을 발생시킨다.")
-    @Test
-    void throw_IllegalArgumentException_when_purchaseAmount_is_underThan_1000() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.validatePurchaseAmount(999))
-                .withMessage("구입금액은 최소 1000원 이상이어야 합니다.");
+    @DisplayName("로또 한장에 특정 로또 번호가 포함되어있는지 여부를 반환한다.")
+    @ParameterizedTest(name = "LottoNumber: {0}, 로또에 포함 여부: {1}")
+    @CsvSource(value = {"6, true", "7, false"})
+    void return_check_Lotto_contains_LottoNumber(int lottoNumber, boolean expected) {
+        LottoNumber number = new LottoNumber(lottoNumber);
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+
+        assertThat(lotto.checkContainsLottoNumber(number)).isEqualTo(expected);
     }
 }

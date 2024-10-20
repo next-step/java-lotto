@@ -3,6 +3,7 @@ package lotto;
 import lotto.application.strategy.RandomGenerator;
 import lotto.domain.Lotto;
 import lotto.application.LottoProgram;
+import lotto.domain.LottoPrice;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -10,17 +11,21 @@ import java.util.List;
 
 public class LottoInterface {
     public void start() {
-        int lottoPurchaseAmount = InputView.getLottoTicketPurchaseAmountFromUser();
-        Lotto.validatePurchaseAmount(lottoPurchaseAmount);
+        LottoPrice lottoAmountPurchased = new LottoPrice(InputView.getLottoPricePurchased());
 
-        int lottoTicketQuantityPurchased = OutputView.printLottoTicketQuantityPurchased(lottoPurchaseAmount);
+        int lottoQuantityPurchased = lottoAmountPurchased.countLottoPurchased();
+        OutputView.printLottoQuantityPurchased(lottoQuantityPurchased);
 
         LottoProgram lottoProgram = new LottoProgram(new RandomGenerator());
-        List<Lotto> lottos = lottoProgram.generateLottos(lottoTicketQuantityPurchased);
+        List<Lotto> lottos = lottoProgram.generateLottos(lottoQuantityPurchased);
         OutputView.printLottos(lottos);
 
         String[] lastWinningLottoNumberInput = InputView.getLastWinningLottoNumbers();
-        OutputView.printWinningStatistics(lottoPurchaseAmount, lottoProgram.createWinningStatistics(lottos, lastWinningLottoNumberInput));
+        int bonusBall = InputView.getBonusBallFromUser();
+
+        OutputView.printWinningStatistics(
+                lottoAmountPurchased,
+                lottoProgram.createWinningStatistics(lottos, lastWinningLottoNumberInput, bonusBall));
     }
 
     public static void main(String[] args) {

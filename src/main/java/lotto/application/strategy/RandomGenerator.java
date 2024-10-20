@@ -32,7 +32,6 @@ public class RandomGenerator implements LottoNumberGenerator {
         Collections.shuffle(baseNumbers);
 
         return new Lotto(baseNumbers.subList(0, LOTTO_NUMBER_COUNT).stream()
-                .map(LottoNumber::deepCopy)
                 .sorted()
                 .collect(Collectors.toList())
         );
