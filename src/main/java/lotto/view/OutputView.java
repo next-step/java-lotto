@@ -10,10 +10,8 @@ import java.util.List;
 public class OutputView {
     private static final String NEW_LINE = System.lineSeparator();
 
-    public static int printLottoTicketQuantityPurchased(LottoPrice lottoPurchaseAmount) {
-        int lottoCount = lottoPurchaseAmount.countLottoPurchased();
+    public static void printLottoQuantityPurchased(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
-        return lottoCount;
     }
 
     public static void printLottos(List<Lotto> lottoTickets) {

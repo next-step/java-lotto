@@ -12,19 +12,20 @@ import java.util.List;
 
 public class LottoInterface {
     public void start() {
-        LottoPrice lottoPurchaseAmount = new LottoPrice(InputView.getLottoTicketPurchaseAmountFromUser());
+        LottoPrice lottoAmountPurchased = new LottoPrice(InputView.getLottoPricePurchased());
 
-        int lottoTicketQuantityPurchased = OutputView.printLottoTicketQuantityPurchased(lottoPurchaseAmount);
+        int lottoQuantityPurchased = lottoAmountPurchased.countLottoPurchased();
+        OutputView.printLottoQuantityPurchased(lottoQuantityPurchased);
 
         LottoProgram lottoProgram = new LottoProgram(new RandomGenerator());
-        List<Lotto> lottos = lottoProgram.generateLottos(lottoTicketQuantityPurchased);
+        List<Lotto> lottos = lottoProgram.generateLottos(lottoQuantityPurchased);
         OutputView.printLottos(lottos);
 
         String[] lastWinningLottoNumberInput = InputView.getLastWinningLottoNumbers();
         int bonusBall = InputView.getBonusBallFromUser();
 
         OutputView.printWinningStatistics(
-                lottoPurchaseAmount,
+                lottoAmountPurchased,
                 lottoProgram.createWinningStatistics(lottos, lastWinningLottoNumberInput, new LottoNumber(bonusBall)));
     }
 
