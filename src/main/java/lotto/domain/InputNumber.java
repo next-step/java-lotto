@@ -12,21 +12,21 @@ public class InputNumber {
 
     public InputNumber(final String winningNo, final String bonusNo) {
         this.winningNumbers = winningNumbers(winningNo);
-        this.bonusNumber = bonusNumber(bonusNo);
+        this.bonusNumber = number(bonusNo);
     }
 
 
     private List<Number> winningNumbers(final String winningNo) {
         List<Number> winningNumbers = new ArrayList<>();
-        String[] numbers = winningNo.split(DELIMITER);
-        for (String number : numbers) {
-            winningNumbers.add(bonusNumber(number));
+        String[] values = winningNo.split(DELIMITER);
+        for (String value : values) {
+            winningNumbers.add(number(value));
         }
         return winningNumbers;
     }
 
-    private static Number bonusNumber(final String bonusNo) {
-        return new Number(Integer.parseInt(bonusNo));
+    private static Number number(final String value) {
+        return new Number(Integer.parseInt(value));
     }
 
     public int countWinningNumbers(final List<Number> numbers) {
