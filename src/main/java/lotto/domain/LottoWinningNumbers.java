@@ -16,6 +16,17 @@ public class LottoWinningNumbers {
         }
     }
 
+    public int matchCount(LottoTicket lottoTicket) {
+        return (int) lottoTicket.getLottoNumbers()
+                                 .stream()
+                                 .filter(winningNumbers::contains)
+                                 .count();
+    }
+
+    public boolean hasBonus(LottoTicket lottoTicket) {
+        return lottoTicket.contains(bonusNumber);
+    }
+
     public LottoTicket getWinningNumbers() {
         return winningNumbers;
     }

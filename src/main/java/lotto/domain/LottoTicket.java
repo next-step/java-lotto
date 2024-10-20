@@ -48,15 +48,9 @@ public class LottoTicket {
     }
 
     public Winning calculateWinningResult(LottoWinningNumbers lottoWinningNumbers) {
-        int matchCount = matchCount(lottoWinningNumbers.getWinningNumbers());
-        boolean matchBonus = contains(lottoWinningNumbers.getBonusNumber());
+        int matchCount = lottoWinningNumbers.matchCount(this);
+        boolean matchBonus = lottoWinningNumbers.hasBonus(this);
         return Winning.fromMatchCount(matchCount, matchBonus);
-    }
-
-    private int matchCount(LottoTicket winningNumbers) {
-        return (int) lottoNumbers.stream()
-                                 .filter(winningNumbers::contains)
-                                 .count();
     }
 
     public boolean contains(LottoNumber number) {
