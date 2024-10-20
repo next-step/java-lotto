@@ -13,14 +13,14 @@ import java.util.List;
 public class LottoApp {
     public static void main(String[] args) {
         LottoTickets lottoTickets = InputView.getLottoTickets();
+        ResultView.printTicketCount(lottoTickets.size());
+        ResultView.printTickets(lottoTickets);
+
         LottoTicket winningNumbers = InputView.getWinningNumbers();
         LottoNumber bonusNumber = InputView.getBonusNumber();
 
         List<Winning> winnings = lottoTickets.calculateWinningResults(winningNumbers, bonusNumber);
         WinningCalculator winningCalculator = new WinningCalculator(winnings);
-
-        ResultView.printTicketCount(lottoTickets.size());
-        ResultView.printTickets(lottoTickets);
         ResultView.printWinningResult(winningCalculator);
     }
 }
