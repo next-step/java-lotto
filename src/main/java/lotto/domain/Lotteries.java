@@ -27,6 +27,16 @@ public class Lotteries {
         return lotteries.size();
     }
 
+    public List<LottoResult> getLottoResults(Lottery winningLottery, BonusNumber bonusNumber) {
+        List<LottoResult> lottoResults = new ArrayList<>();
+
+        for (Lottery lottery : lotteries) {
+            lottoResults.add(lottery.createLottoResult(winningLottery, bonusNumber));
+        }
+
+        return lottoResults;
+    }
+
     public List<Integer> getWinningNumberCountList(Lottery winningLottery) {
         return lotteries.stream()
                 .map(lottery -> lottery.countWinningNumbers(winningLottery))

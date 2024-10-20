@@ -35,4 +35,15 @@ public class Lottery {
     public String toString() {
         return lottoNumbers.toString();
     }
+
+    public LottoResult createLottoResult(Lottery winningNumbers, BonusNumber bonusNumber) {
+        int equalNumberCount = countWinningNumbers(winningNumbers);
+        boolean hasBonusNumber = hasBonusNumber(bonusNumber.getBonusNumber());
+
+        return new LottoResult(hasBonusNumber, equalNumberCount);
+    }
+
+    private boolean hasBonusNumber(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

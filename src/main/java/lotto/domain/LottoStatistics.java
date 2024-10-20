@@ -7,11 +7,11 @@ import java.util.Map;
 public class LottoStatistics {
     private final Map<LottoRank, Integer> prizeCountMap;
 
-    public static LottoStatistics create(List<Integer> winningNumberCountList) {
+    public static LottoStatistics create(List<LottoResult> lottoResults) {
         Map<LottoRank, Integer> prizeCountMap = createEmptyPrizeCountMap();
 
-        for (int winningNumberCount : winningNumberCountList) {
-            LottoRank lottoRank = LottoRank.fromEqualNumberCount(winningNumberCount);
+        for (LottoResult result : lottoResults) {
+            LottoRank lottoRank = LottoRank.of(result.getEqualNumberCount(), result.hasBonusNumber());
             prizeCountMap.merge(lottoRank, 1, Integer::sum);
         }
 

@@ -28,13 +28,20 @@ public class ResultView {
         StringBuilder allRankDescription = new StringBuilder();
 
         for (LottoRank lottoRank : LottoRank.RANKS_WITHOUT_NONE) {
-            Integer prizeCount = lottoStatistics.getCount(lottoRank);
+            int prizeCount = lottoStatistics.getCount(lottoRank);
 
-            String singleRankDescription = String.format("%d개 일치 (%d원)- %d개\n", lottoRank.equalNumberCount, lottoRank.prizeMoneyAmount, prizeCount);
+            String singleRankDescription = makeRankDescription(lottoRank, prizeCount);
             allRankDescription.append(singleRankDescription);
         }
 
         System.out.println(allRankDescription);
+    }
+
+    private static String makeRankDescription(LottoRank lottoRank, int prizeCount) {
+        if (lottoRank == LottoRank.SECOND) {
+            return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", lottoRank.equalNumberCount, lottoRank.prizeMoneyAmount, prizeCount);
+        }
+        return String.format("%d개 일치 (%d원)- %d개\n", lottoRank.equalNumberCount, lottoRank.prizeMoneyAmount, prizeCount);
     }
 
     private static void printProfitRate(float profitRate) {
