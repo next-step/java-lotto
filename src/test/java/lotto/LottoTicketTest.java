@@ -13,21 +13,21 @@ class LottoTicketTest {
     @Test
     @DisplayName("로또 번호 중복 확인")
     void generateLottoNumbers_duplicate() {
-        LottoTicket lottoTicket = LottoTicket.createRandom();
+        LottoTicket lottoTicket = LottoTicket.createAuto();
         assertThat(lottoTicket.getLottoNumbers()).doesNotHaveDuplicates();
     }
 
     @Test
     @DisplayName("로또 번호 개수 확인")
     void generateLottoNumbers_size() {
-        LottoTicket lottoTicket = LottoTicket.createRandom();
+        LottoTicket lottoTicket = LottoTicket.createAuto();
         assertThat(lottoTicket.getLottoNumbers()).hasSize(6);
     }
 
     @Test
     @DisplayName("로또 번호 범위 확인")
     void generateLottoNumbers_range() {
-        LottoTicket lottoTicket = LottoTicket.createRandom();
+        LottoTicket lottoTicket = LottoTicket.createAuto();
         for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {
             assertThat(lottoNumber.getNumber()).isBetween(1, 45);
         }

@@ -12,7 +12,7 @@ public class LottoTickets {
     }
 
     public static LottoTickets createByPrice(int price) {
-        return new LottoTickets(Stream.generate(LottoTicket::createRandom)
+        return new LottoTickets(Stream.generate(LottoTicket::createAuto)
                                       .limit(calculateTicketCount(price))
                                       .collect(Collectors.toList()));
     }

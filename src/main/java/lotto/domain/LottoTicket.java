@@ -33,7 +33,7 @@ public class LottoTicket {
         );
     }
 
-    public static LottoTicket createRandom() {
+    public static LottoTicket createAuto() {
         List<LottoNumber> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
                                              .mapToObj(LottoNumber::new)
                                              .collect(Collectors.toList());
