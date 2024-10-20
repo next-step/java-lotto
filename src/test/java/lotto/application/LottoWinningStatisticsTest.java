@@ -1,36 +1,44 @@
 package lotto.application;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoPrice;
-import lotto.domain.LottoRank;
+import lotto.domain.*;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.as;
 
 class LottoWinningStatisticsTest {
     @DisplayName("사용자 로또 번호와 당첨 번호를 매칭하여 당첨 통계 객체를 생성한다.")
-    @Test
-    void create() {
-        Lotto twoMatchingCount = new Lotto(1, 2, 9, 10, 11, 12);
-        Lotto threeMatchingCount = new Lotto(1, 2, 3, 7, 8, 9);
-        Lotto allMatchingCount = new Lotto(1, 2, 3, 4, 5, 6);
-        List<Lotto> usersLottoTicket = List.of(twoMatchingCount, threeMatchingCount, allMatchingCount);
+    @MethodSource("generateUserLottos")
+    @ParameterizedTest(name = "결과= {1}")
+    void create(Lotto userLotto, LottoRank lottoRank) {
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        LottoWinningStatistics winningStatistics = new LottoWinningStatistics(usersLottoTicket, winningLotto, new LottoNumber(13));
+        LottoWinningStatistics winningStatistics = new LottoWinningStatistics(List.of(userLotto), new WinningLotto(winningLotto, new LottoNumber(13)));
 
         assertThat(winningStatistics)
                 .extracting("values", as(InstanceOfAssertFactories.MAP))
-                .extractingByKeys(LottoRank.FIFTH, LottoRank.FIRST, LottoRank.THIRD, LottoRank.FOURTH)
-                .containsExactly(1, 1, 0, 0);
+                .extractingByKeys(lottoRank)
+                .containsExactly(1);
+    }
+
+
+    static Stream<Arguments> generateUserLottos() {
+        return Stream.of(
+                Arguments.arguments(new Lotto(1, 2, 9, 10, 11, 12), LottoRank.NON_RANKED),
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 7), LottoRank.THIRD),
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 13), LottoRank.SECOND),
+                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 6), LottoRank.FIRST)
+        );
     }
 
     @DisplayName("인자로 전달받은 등수에 해당하는 로또의 갯수를 반환한다.")
