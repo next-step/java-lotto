@@ -41,12 +41,17 @@
 
 ## 입출력 예시 , 테스트 방법
 
-- 입출력 예시
+- 입출력 예시 (성공, 실패)
+
+![success.PNG](success.PNG)
+![fail.PNG](fail.PNG)
 
 - 테스트
     - StringCalculatorTest 실행 후 정상동작을 확인한다.
 
 ## 시퀀스 다이어그램
+
+![sequenceDiagram.PNG](sequenceDiagram.PNG)
 
 ## 라이브러리
 
