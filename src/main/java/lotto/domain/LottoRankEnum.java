@@ -1,66 +1,37 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 public enum LottoRankEnum {
 
-    FIRST(new BigDecimal(2000000000), 6, "6개 일치 (2000000000원)- ") {
-        @Override
-        public Boolean isMatch(WinningLotto winningLotto, Lotto userLotto) {
-            return winningLotto.getWinningLotto().equals(userLotto);
-        }
-
-    },
-    SECOND(new BigDecimal(30000000), 5, "5개 일치 , 보너스 볼 일치(30000000원)- ") {
-        @Override
-        public Boolean isMatch(WinningLotto winningLotto, Lotto userLotto) {
-            if (userLotto.getMatchCount(winningLotto.getWinningLotto()) != getMatchCnt()) {
-                return false;
-            }
-            return userLotto.contains(winningLotto.getBonusLottoNumber());
-        }
-    },
-    THIRD(new BigDecimal(15000000), 5, "5개 일치 (15000000원)- ") {
-        @Override
-        public Boolean isMatch(WinningLotto winningLotto, Lotto userLotto) {
-            return winningLotto.getWinningLotto().getMatchCount(userLotto) == getMatchCnt();
-        }
-
-    },
-    FOURTH(new BigDecimal(50000), 4, "4개 일치 (50000원)- ") {
-        @Override
-        public Boolean isMatch(WinningLotto winningLotto, Lotto userLotto) {
-            return winningLotto.getWinningLotto().getMatchCount(userLotto) == getMatchCnt();
-        }
-
-    },
-    FIVE(new BigDecimal(5000), 3, "3개 일치 (5000)- ") {
-        @Override
-        public Boolean isMatch(WinningLotto winningLotto, Lotto userLotto) {
-            return winningLotto.getWinningLotto().getMatchCount(userLotto) == getMatchCnt();
-        }
-
-    },
-    LOSING_LOT(BigDecimal.ZERO, 2, "") {
-        @Override
-        public Boolean isMatch(WinningLotto winningLotto, Lotto userLotto) {
-            return winningLotto.getWinningLotto().getMatchCount(userLotto) <= getMatchCnt();
-        }
-
-    };
+    FIRST(new BigDecimal(2000000000), 6,  "6개 일치 (2000000000원)- "),
+    SECOND(new BigDecimal(30000000), 5,  "5개 일치 , 보너스 볼 일치(30000000원)- "),
+    THIRD(new BigDecimal(15000000), 5,  "5개 일치 (15000000원)- "),
+    FOURTH(new BigDecimal(50000), 4,  "4개 일치 (50000원)- "),
+    FIVE(new BigDecimal(5000), 3,  "3개 일치 (5000)- "),
+    LOSING_LOT(BigDecimal.ZERO, 2,  "");
 
 
     private BigDecimal winningAmount;
     private int matchCnt;
     private String description;
 
-    private LottoRankEnum(BigDecimal winningAmount, int matchCnt, String description) {
+    private LottoRankEnum(BigDecimal winningAmount, int matchCnt,  String description) {
         this.winningAmount = winningAmount;
         this.matchCnt = matchCnt;
         this.description = description;
     }
 
-    public abstract Boolean isMatch(WinningLotto winningLotto, Lotto lotto);
+    public static LottoRankEnum getRank(int matchCnt, boolean isBonusMatch) {
+        if (matchCnt != SECOND.getMatchCnt()) {
+            return Arrays.stream(values()).filter(rank -> rank.matchCnt == matchCnt).findFirst().orElse(LOSING_LOT);
+        }
+        if (isBonusMatch) {
+            return SECOND;
+        }
+        return THIRD;
+    }
 
     public int getMatchCnt() {
         return matchCnt;
@@ -73,4 +44,5 @@ public enum LottoRankEnum {
     public String getDescription() {
         return description;
     }
+
 }
