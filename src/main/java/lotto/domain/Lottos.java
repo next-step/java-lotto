@@ -22,7 +22,7 @@ public class Lottos {
         return lottos;
     }
 
-    public LottoResultStatistic getWinningPrize(WinningLotto winningLotto) {
+    public LottoResultStatistic getResultStatistic(WinningLotto winningLotto) {
         LottoResultStatistic statistic = new LottoResultStatistic();
         for (Lotto lotto : lottos) {
             int count = lotto.lottoWinningStatus(winningLotto);

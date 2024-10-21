@@ -14,8 +14,16 @@ public class LottoResultStatistic {
                 .forEach(prize -> lottoResultStatistics.put(prize, 0));
     }
 
-    public String getResult(Prize prize) {
+    public String getPrizeFromStatistic(Prize prize) {
         return String.valueOf(lottoResultStatistics.get(prize));
+    }
+
+    public double calculateProfit(int buyPrice) {
+        return Math.floor(getTotalPrize() / (double) buyPrice * 100) / 100.0;
+    }
+
+    public void updatePrize(Prize hit, int prize) {
+        lottoResultStatistics.put(hit, lottoResultStatistics.get(hit) + prize);
     }
 
     public int getTotalPrize() {
@@ -27,23 +35,15 @@ public class LottoResultStatistic {
         return totalPrize;
     }
 
-    public double calculateProfit(int buyPrice) {
-        return Math.floor(getTotalPrize() / (double) buyPrice * 100) / 100.0;
-    }
-
-    public void updatePrize(Prize hit, int prize) {
-        lottoResultStatistics.put(hit, lottoResultStatistics.get(hit) + prize);
+    private void validtotalPrize(int totalPrize) {
+        if (totalPrize > 2_000_000_000) {
+            throw new IllegalArgumentException("총 상금 20억을 넘길 순 없음");
+        }
     }
 
     private void validOverflow(int totalPrize) {
         if (totalPrize < 0) {
             throw new PrizeOverFlowIsNegativeException();
-        }
-    }
-
-    private void validtotalPrize(int totalPrize) {
-        if (totalPrize > 2_000_000_000) {
-            throw new IllegalArgumentException("총 상금 20억을 넘길 순 없음");
         }
     }
 

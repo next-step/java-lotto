@@ -25,15 +25,15 @@ public class ResultView {
 
     }
 
-    public void printResult(LottoResultStatistic money) {
+    public void printResult(LottoResultStatistic lottoResultStatistic) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + money.getResult(Prize.FIFTH));
-        System.out.println("4개 일치 (50000원)- " + money.getResult(Prize.FOURTH));
-        System.out.println("5개 일치 (1500000원)- " + money.getResult(Prize.THIRD));
-        System.out.println("5개 일치, 보너스볼 일치(30000000원)- " + money.getResult(Prize.SECOND));
-        System.out.println("6개 일치 (2000000000원)- " + money.getResult(Prize.FIRST));
+        System.out.println("3개 일치 (5000원)- " + lottoResultStatistic.getPrizeFromStatistic(Prize.FIFTH));
+        System.out.println("4개 일치 (50000원)- " + lottoResultStatistic.getPrizeFromStatistic(Prize.FOURTH));
+        System.out.println("5개 일치 (1500000원)- " + lottoResultStatistic.getPrizeFromStatistic(Prize.THIRD));
+        System.out.println("5개 일치, 보너스볼 일치(30000000원)- " + lottoResultStatistic.getPrizeFromStatistic(Prize.SECOND));
+        System.out.println("6개 일치 (2000000000원)- " + lottoResultStatistic.getPrizeFromStatistic(Prize.FIRST));
     }
 
     public void printProfit(double profitRate) {

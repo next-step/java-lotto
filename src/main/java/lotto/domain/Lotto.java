@@ -44,8 +44,6 @@ public class Lotto {
         for (int i = 0; i < winningNumbers.size(); i++) {
             count += isNumberMatched(winningNumbers, i, lotto);
         }
-        //boolean bonusHit = lotto.contains(winningLotto.getBonusLottoNumber());
-        //return Prize.getValueByHit(count, bonusHit);
         return count;
     }
 

@@ -23,7 +23,7 @@ public class LottoResultStatisticTest {
 
         Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> new ArrayList<>());
         lottos.additionalLotto(lottoHitAll);
-        LottoResultStatistic resultStatistic = lottos.getWinningPrize(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(10)));
+        LottoResultStatistic resultStatistic = lottos.getResultStatistic(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(10)));
         Assertions.assertThat(resultStatistic.calculateProfit(5000)).isEqualTo(300.0);
     }
 }
