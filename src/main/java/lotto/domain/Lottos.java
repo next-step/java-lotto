@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.PrizeOverFlowIsNegativeException;
-
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Lottos {
@@ -25,47 +22,18 @@ public class Lottos {
         return lottos;
     }
 
-    public int getWinningPrize(WinningLotto winningLotto) {
-        LinkedHashMap<Prize, Integer> statistic = new LinkedHashMap<>();
-        int totalPrize = 0;
-        int eachPrize = 0;
+    public LottoResultStatistic getWinningPrize(WinningLotto winningLotto) {
+        LottoResultStatistic statistic = new LottoResultStatistic();
         for (Lotto lotto : lottos) {
-            eachPrize = lotto.lottoWinningStatus(winningLotto);
-            validOverFlow(eachPrize, totalPrize);
-            validtotalPrize(eachPrize, totalPrize);
-            totalPrize += eachPrize;
+            int count = lotto.lottoWinningStatus(winningLotto);
+            boolean bonusHit = lotto.contains(winningLotto.getBonusLottoNumber());
+            statistic.updatePrize(Prize.getHit(count),Prize.getValueByHit(count,bonusHit));
         }
-        return totalPrize;
-    }
-
-    private void validtotalPrize(int eachPrize, int totalPrize) {
-        if (eachPrize + totalPrize > 2_000_000_000) {
-            throw new IllegalArgumentException("총 상금 20억을 넘길 순 없음");
-        }
-    }
-
-    private void validOverFlow(int eachPrize, int totalPrize) {
-        if (eachPrize + totalPrize < 0) {
-            throw new PrizeOverFlowIsNegativeException();
-        }
+        return statistic;
     }
 
     public void additionalLotto(Lotto lotto){
         lottos.add(lotto);
-    }
-
-    public LottoResultStatistic calculateStatistic(int totalPrize) {
-        LinkedHashMap<Prize, Integer> statistic = new LinkedHashMap<>();
-        int prize = totalPrize;
-        for (Prize price : Prize.values()) {
-            statistic.put(price, prize / price.getValue());
-            prize %= price.getValue();
-        }
-        return new LottoResultStatistic(statistic);
-    }
-
-    public double calculateProfit(int prize, int buyPrice) {
-        return Math.floor(prize / (double) buyPrice * 100) / 100.0;
     }
 
 }

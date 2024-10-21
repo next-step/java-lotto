@@ -1,31 +1,29 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 public class LottoResultStatisticTest {
 
-    @Test
-    @DisplayName("우승자 통계 테스트")
-    void 우승자_통계_테스트() {
-        Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> new ArrayList<>());
-        LottoResultStatistic lottoResultStatistic= lottos.calculateStatistic(2_000_005_000);
+    private final Lotto lottoHitAll = new Lotto(IntStream.rangeClosed(1, 6)
+            .mapToObj(LottoNumber::createLottoNumber)
+            .collect(Collectors.toList()));
 
-        Assertions.assertThat(lottoResultStatistic.getAllResult()
-        ).isEqualTo("1, 0, 0, 0, 1");
-    }
+    private final Lotto lottoHitFive = new Lotto(IntStream.rangeClosed(2, 7)
+            .mapToObj(LottoNumber::createLottoNumber)
+            .collect(Collectors.toList()));
 
     @Test
-    @DisplayName("특정 등수 몇번 당첨되었는지 잘 가져오는지 테스트")
-    void 특정_등수_당첨_횟수_5등_2번() {
+    @DisplayName("수익률 테스트 한장 구매 시 3등으로 테스트하므로 300.0")
+    void 수익률_테스트() {
+
         Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> new ArrayList<>());
-        LottoResultStatistic lottoResultStatistic= lottos.calculateStatistic(10000);
-
-        Assertions.assertThat(lottoResultStatistic.getResult(Prize.FIFTH)
-        ).isEqualTo("2");
+        lottos.additionalLotto(lottoHitAll);
+        LottoResultStatistic resultStatistic = lottos.getWinningPrize(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(10)));
+        Assertions.assertThat(resultStatistic.calculateProfit(5000)).isEqualTo(300.0);
     }
-
 }

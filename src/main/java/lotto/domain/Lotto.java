@@ -44,8 +44,9 @@ public class Lotto {
         for (int i = 0; i < winningNumbers.size(); i++) {
             count += isNumberMatched(winningNumbers, i, lotto);
         }
-        boolean bonusHit = lotto.contains(winningLotto.getBonusLottoNumber());
-        return Prize.getValueByHit(count, bonusHit);
+        //boolean bonusHit = lotto.contains(winningLotto.getBonusLottoNumber());
+        //return Prize.getValueByHit(count, bonusHit);
+        return count;
     }
 
     private int isNumberMatched(List<LottoNumber> winningNumbers, int i, List<LottoNumber> lottoNumbers) {
@@ -55,4 +56,7 @@ public class Lotto {
         return 0;
     }
 
+    public boolean contains(LottoNumber bonusLottoNumber) {
+        return lotto.contains(bonusLottoNumber);
+    }
 }

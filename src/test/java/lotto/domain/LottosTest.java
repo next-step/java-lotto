@@ -25,7 +25,7 @@ public class LottosTest {
     void 로또_당첨_금액_확인() {
         Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> List.of(lottoHitAll));
 
-        Assertions.assertThat(lottos.getWinningPrize(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7)))).isEqualTo(2_000_000_000);
+        Assertions.assertThat(lottos.getWinningPrize(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7))).getTotalPrize()).isEqualTo(2_000_000_000);
 
     }
 
@@ -39,7 +39,7 @@ public class LottosTest {
         lottos.additionalLotto(lottoHitAll);
 
         Assertions.assertThatThrownBy(
-                        () -> lottos.getWinningPrize(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7)))
+                        () -> lottos.getWinningPrize(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7))).getTotalPrize()
                 ).isInstanceOf(PrizeOverFlowIsNegativeException.class)
                 .hasMessage("당첨금 계산 중 오버플로 발생");
 
@@ -55,7 +55,7 @@ public class LottosTest {
         lottos.additionalLotto(lottoHitFive);
 
         Assertions.assertThatThrownBy(
-                        () -> lottos.getWinningPrize(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7)))
+                        () -> lottos.getWinningPrize(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7))).getTotalPrize()
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("총 상금 20억을 넘길 순 없음");
 
@@ -68,17 +68,7 @@ public class LottosTest {
         Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> new ArrayList<>());
         lottos.additionalLotto(lottoHitAll);
 
-        Assertions.assertThat(lottos.getWinningPrize(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(1)))).isEqualTo(30_000_000);
-    }
-
-    @Test
-    @DisplayName("수익률 계산 테스트")
-    void 수익률_계산_테스트() {
-
-        Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> new ArrayList<>());
-
-        Assertions.assertThat(lottos.calculateProfit(5000, 14000)).isEqualTo(0.35);
-
+        Assertions.assertThat(lottos.getWinningPrize(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(1))).getTotalPrize()).isEqualTo(30_000_000);
     }
 
 }

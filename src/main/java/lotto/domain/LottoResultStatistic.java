@@ -1,22 +1,50 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
+import lotto.exception.PrizeOverFlowIsNegativeException;
 
 public class LottoResultStatistic {
     Map<Prize, Integer> lottoResultStatistics;
 
-    public LottoResultStatistic(Map<Prize, Integer> lottoResultStatistics) {
-        this.lottoResultStatistics = lottoResultStatistics;
+    public LottoResultStatistic() {
+        lottoResultStatistics = new HashMap<>();
+        Arrays.stream(Prize.values())
+                .forEach(prize -> lottoResultStatistics.put(prize, 0));
     }
+
     public String getResult(Prize prize) {
         return String.valueOf(lottoResultStatistics.get(prize));
     }
 
-    public String getAllResult() {
-        return lottoResultStatistics.values()
+    public int getTotalPrize() {
+        int totalPrize = lottoResultStatistics.values()
                 .stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
+                .reduce(0, Integer::sum);
+        validtotalPrize(totalPrize);
+        validOverflow(totalPrize);
+        return totalPrize;
     }
+
+    public double calculateProfit(int buyPrice) {
+        return Math.floor(getTotalPrize() / (double) buyPrice * 100) / 100.0;
+    }
+
+    public void updatePrize(Prize hit, int prize) {
+        lottoResultStatistics.put(hit, lottoResultStatistics.get(hit) + prize);
+    }
+
+    private void validOverflow(int totalPrize) {
+        if (totalPrize < 0) {
+            throw new PrizeOverFlowIsNegativeException();
+        }
+    }
+
+    private void validtotalPrize(int totalPrize) {
+        if (totalPrize > 2_000_000_000) {
+            throw new IllegalArgumentException("총 상금 20억을 넘길 순 없음");
+        }
+    }
+
 }
