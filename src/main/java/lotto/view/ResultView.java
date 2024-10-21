@@ -2,12 +2,7 @@ package lotto.view;
 
 import lotto.common.Prize;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 public class ResultView {
-
     private ResultView() {
     }
 

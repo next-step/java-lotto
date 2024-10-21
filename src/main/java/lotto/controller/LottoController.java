@@ -24,6 +24,7 @@ public class LottoController {
         ResultView.printWinningStatics(winningStatics);
 
         float returnRate = lottoBuyer.checkReturnRate(buyAmount, winningStatics);
+
         ResultView.printReturnRate(returnRate);
     }
 }

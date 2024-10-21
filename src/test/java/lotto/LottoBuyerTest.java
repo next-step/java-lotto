@@ -9,7 +9,6 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoBuyerTest {
-
     private final LottoBuyer lottoBuyer = new LottoBuyer();
 
     @Test
