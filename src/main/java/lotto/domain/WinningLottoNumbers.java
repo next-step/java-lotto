@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningLottoNumbers extends LottoNumbers {
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningLottoNumbers(List<Integer> lottoNumbers, int bonusNumber) {
         super(lottoNumbers);
 
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public LottoNumbersResults getResult(List<LottoNumbers> lottoNumbersList) {
