@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoWinnerNumber {
-    List<Integer> lottoWinnerNumberList;
+    private List<Integer> lottoWinnerNumberList;
 
     public LottoWinnerNumber(List<Integer> lottoWinnerNumberList) {
         this.lottoWinnerNumberList = lottoWinnerNumberList;

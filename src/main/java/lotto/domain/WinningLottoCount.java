@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class WinningLottoCount {
 
-    Map<Integer, Integer> winningLottoCountMap;
+    private Map<Integer, Integer> winningLottoCountMap;
 
     public WinningLottoCount(Map<Integer, Integer> winningLottoCountMap) {
         this.winningLottoCountMap = winningLottoCountMap;

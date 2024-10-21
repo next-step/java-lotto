@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OneTimeRoundLottoNumberList {
-    List<Integer> lottoNumberList;
+    private List<Integer> lottoNumberList;
 
     public OneTimeRoundLottoNumberList(List<Integer> lottoNumberList) {
         this.lottoNumberList = lottoNumberList;

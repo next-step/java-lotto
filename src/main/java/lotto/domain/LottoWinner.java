@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoWinner {
-    LottoWinnerNumber lottoWinnerNumber;
-    WinningLottoCount winningLottoCountList;
+    private LottoWinnerNumber lottoWinnerNumber;
+    private WinningLottoCount winningLottoCountList;
 
     public LottoWinner(String lottoWinnerNumbers) {
         this(stringToArrayList(lottoWinnerNumbers), new HashMap<>());

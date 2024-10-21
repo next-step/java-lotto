@@ -5,7 +5,7 @@ import lotto.ui.PrintView;
 import java.util.List;
 
 public class LottoNumberList {
-    List<OneTimeRoundLottoNumberList> lottoNumberList;
+    private List<OneTimeRoundLottoNumberList> lottoNumberList;
 
 
 

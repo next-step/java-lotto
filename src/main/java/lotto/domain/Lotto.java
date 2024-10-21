@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Lotto {
-    TryLottoCount tryLottoCount;
-    LottoNumberList lottoNumberList;
+    private TryLottoCount tryLottoCount;
+    private LottoNumberList lottoNumberList;
 
     public Lotto(TryLottoCount tryLottoCount) {
         this(tryLottoCount,new LottoNumberList(new ArrayList<>()));

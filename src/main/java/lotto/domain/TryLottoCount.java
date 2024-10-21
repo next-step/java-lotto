@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class TryLottoCount {
-    int tryLottoCount;
+    private int tryLottoCount;
 
     public TryLottoCount(int tryLottoCount) {
         this.tryLottoCount = tryLottoCount;

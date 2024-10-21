@@ -7,8 +7,8 @@ import java.math.RoundingMode;
 
 public class ProfitMargin {
 
-    int winningAmount;
-    int purchaseAmount;
+    private int winningAmount;
+    private int purchaseAmount;
 
     public ProfitMargin(int winningAmount, int purchaseAmount) {
         this.winningAmount = winningAmount;
