@@ -19,8 +19,8 @@ public class LottoResult {
         return resultMap;
     }
 
-    public double calculateProfit(final PurchasePrice purchasePrice) {
-        return (double) calculateTotalPrize() / purchasePrice.getMoney();
+    public double calculateProfit(final LottoPurchaseInfo lottoPurchaseInfo) {
+        return (double) calculateTotalPrize() / lottoPurchaseInfo.getMoney();
     }
 
     private int calculateTotalPrize() {

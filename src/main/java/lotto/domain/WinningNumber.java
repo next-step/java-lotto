@@ -9,7 +9,7 @@ public class WinningNumber {
     private final LottoNumber bonusNumber;
 
     public WinningNumber(final Set<Integer> winningNumbers, final int bonusNumber) {
-        this(Lotto.from(winningNumbers), new LottoNumber(bonusNumber));
+        this(Lotto.from(winningNumbers), LottoNumber.from(bonusNumber));
     }
 
     public WinningNumber(final Lotto winningNumber, final LottoNumber bonusNumber) {
