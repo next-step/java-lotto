@@ -11,7 +11,7 @@ class LottosTest {
     @Test
     void 로또_구매_테스트() {
         LottoPurchaseInfo lottoPurchaseInfo = new LottoPurchaseInfo(14000, 3);
-        List<Set<Integer>> manualNumbers = new ArrayList<>();
+        List<Lotto> manualNumbers = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             manualNumbers.add(getLottoNumbers());
         }
@@ -19,7 +19,7 @@ class LottosTest {
         assertThat(lottos.getLottos().size()).isEqualTo(14);
     }
 
-    private static Set<Integer> getLottoNumbers() {
-        return Set.of(1, 2, 3, 4, 5, 6);
+    private static Lotto getLottoNumbers() {
+        return Lotto.from(Set.of(1, 2, 3, 4, 5, 6));
     }
 }

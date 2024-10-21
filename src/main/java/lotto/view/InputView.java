@@ -1,10 +1,14 @@
 package lotto.view;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.PurchasePrice;
+import lotto.domain.WinningNumber;
 
 public class InputView {
     private static final String REGEX = ",|, ";
@@ -21,9 +25,14 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static int inputPurchasePrice() {
+    public static PurchasePrice inputPurchasePrice() {
         System.out.println(INPUT_PURCHASE_PRICE_MESSAGE);
-        return inputNumberValue();
+        try {
+            return new PurchasePrice(inputNumberValue());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputPurchasePrice();
+        }
     }
 
     private static void validateNumber(final String inputValue) {
@@ -34,9 +43,14 @@ public class InputView {
         }
     }
 
-    public static Set<Integer> inputWinningNumber() {
+    public static WinningNumber inputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        return convertToInt();
+        try {
+            return new WinningNumber(convertToInt(), inputBonusNumber());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputWinningNumber();
+        }
     }
 
     public static int inputBonusNumber() {
@@ -55,13 +69,22 @@ public class InputView {
         return Integer.parseInt(inputValue);
     }
 
-    public static List<Set<Integer>> inputManualLottos(final int manualCount) {
+    public static List<Lotto> inputManualLottos(final int manualCount) {
         System.out.println(INPUT_MANUAL_NUMBERS_MESSAGE);
-        List<Set<Integer>> manualNumbers = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            manualNumbers.add(convertToInt());
+        List<Lotto> manualNumbers = new ArrayList<>();
+        try {
+            inputManualNumber(manualCount, manualNumbers);
+            return manualNumbers;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputManualLottos(manualCount);
         }
-        return manualNumbers;
+    }
+
+    private static void inputManualNumber(final int manualCount, final List<Lotto> manualNumbers) {
+        for (int i = 0; i < manualCount; i++) {
+            manualNumbers.add(Lotto.from(convertToInt()));
+        }
     }
 
     private static Set<Integer> convertToInt() {

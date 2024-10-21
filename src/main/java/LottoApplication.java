@@ -10,10 +10,11 @@ import lotto.view.ResultView;
 public class LottoApplication {
     public static void main(String[] args) {
         final LottoPurchaseInfo lottoPurchaseInfo = generatePurchaseInfo();
-        final Lottos lottos = generateLottos(lottoPurchaseInfo);
+        final Lottos lottos = new Lottos(InputView.inputManualLottos(lottoPurchaseInfo.getManualCount()),
+                lottoPurchaseInfo.calculateAutoCount());
         ResultView.printLottos(lottos, lottoPurchaseInfo);
 
-        final WinningNumber winningNumber = generateWinningNumber();
+        final WinningNumber winningNumber = InputView.inputWinningNumber();
         final LottoResult lottoResult = lottos.calculateLottoResult(winningNumber);
         ResultView.printLottoStatistics(lottoResult, lottoPurchaseInfo);
     }
@@ -21,7 +22,7 @@ public class LottoApplication {
     private static LottoPurchaseInfo generatePurchaseInfo() {
         Optional<LottoPurchaseInfo> lottoPurchaseInfoOptional;
         do {
-            final PurchasePrice purchasePrice = generatePurchasePrice();
+            final PurchasePrice purchasePrice = InputView.inputPurchasePrice();
             int manualCount = InputView.inputManualCount();
             lottoPurchaseInfoOptional = createLottoPurchaseInfo(purchasePrice, manualCount);
         } while (lottoPurchaseInfoOptional.isEmpty());
@@ -36,57 +37,5 @@ public class LottoApplication {
             System.out.println(e.getMessage());
             return Optional.empty();
         }
-    }
-
-    private static PurchasePrice generatePurchasePrice() {
-        Optional<PurchasePrice> purchasePriceOptional;
-        do {
-            purchasePriceOptional = createPurchasePrice();
-        } while (purchasePriceOptional.isEmpty());
-        return purchasePriceOptional.get();
-    }
-
-    private static Optional<PurchasePrice> createPurchasePrice() {
-        try {
-            return Optional.of(new PurchasePrice(InputView.inputPurchasePrice()));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return Optional.empty();
-        }
-    }
-
-    private static Optional<Lottos> createLottos(LottoPurchaseInfo lottoPurchaseInfo) {
-        try {
-            return Optional.of(new Lottos(InputView.inputManualLottos(lottoPurchaseInfo.getManualCount()),
-                    lottoPurchaseInfo.calculateAutoCount()));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return Optional.empty();
-        }
-    }
-
-    private static Lottos generateLottos(LottoPurchaseInfo lottoPurchaseInfo) {
-        Optional<Lottos> lottosOptional;
-        do {
-            lottosOptional = createLottos(lottoPurchaseInfo);
-        } while (lottosOptional.isEmpty());
-        return lottosOptional.get();
-    }
-
-    private static Optional<WinningNumber> createWinningNumber() {
-        try {
-            return Optional.of(new WinningNumber(InputView.inputWinningNumber(), InputView.inputBonusNumber()));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return Optional.empty();
-        }
-    }
-
-    private static WinningNumber generateWinningNumber() {
-        Optional<WinningNumber> winningNumberOptional;
-        do {
-            winningNumberOptional = createWinningNumber();
-        } while (winningNumberOptional.isEmpty());
-        return winningNumberOptional.get();
     }
 }

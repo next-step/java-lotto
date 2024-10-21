@@ -9,10 +9,8 @@ import java.util.Set;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(final List<Set<Integer>> manualNumbers, final int autoCount) {
-        for (Set<Integer> manualNumber : manualNumbers) {
-            lottos.add(Lotto.from(manualNumber));
-        }
+    public Lottos(List<Lotto> manualNumbers, int autoCount) {
+        lottos.addAll(manualNumbers);
         for (int i = 0; i < autoCount; i++) {
             lottos.add(generateAuto());
         }
