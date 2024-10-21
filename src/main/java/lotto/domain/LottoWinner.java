@@ -1,18 +1,15 @@
-package lotto;
+package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoWinner {
-    public static final List<Integer> DEFAULT_WINNER_NUMBERLIST = List.of(0, 0, 0, 0);
     LottoWinnerNumber lottoWinnerNumber;
     WinningLottoCount winningLottoCountList;
 
     public LottoWinner(String lottoWinnerNumbers) {
-        this(stringToArrayList(lottoWinnerNumbers), new ArrayList<>(DEFAULT_WINNER_NUMBERLIST));
+        this(stringToArrayList(lottoWinnerNumbers), new HashMap<>());
     }
 
     private static List<Integer> stringToArrayList(String lottoWinnerNumbers) {
@@ -22,12 +19,12 @@ public class LottoWinner {
     }
 
     public LottoWinner(List<Integer> lottoWinnerNumberList) {
-        this(lottoWinnerNumberList, new ArrayList<>(DEFAULT_WINNER_NUMBERLIST));
+        this(lottoWinnerNumberList, new HashMap<>());
     }
 
-    public LottoWinner(List<Integer> lottoWinnerNumberList, List<Integer> lottoNumberMatchCountList) {
+    public LottoWinner(List<Integer> lottoWinnerNumberList,  Map<Integer, Integer> winningLottoCountMap) {
         this.lottoWinnerNumber = new LottoWinnerNumber(lottoWinnerNumberList);
-        this.winningLottoCountList = new WinningLottoCount(lottoNumberMatchCountList);
+        this.winningLottoCountList = new WinningLottoCount(winningLottoCountMap);
     }
 
     public int diffLottoAndWinningLotto(List<Integer> lottoNumberList) {
@@ -39,8 +36,8 @@ public class LottoWinner {
 
     public void recordWinningCount(int matchingCount) {
         if (matchingCount >= 3) {
-            int winningCountIndex = LottoWinningCountDecision.convertMatchingNumberToIndex(matchingCount);
-            winningLottoCountList.recordWinningCount(winningCountIndex);
+            int winningRank = LottoWinningCountDecision.convertMatchingNumberToRank(matchingCount);
+            winningLottoCountList.recordWinningCount(winningRank);
         }
     }
 

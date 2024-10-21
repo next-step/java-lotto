@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.ui.PrintView;
 import random.LottoGenerator;

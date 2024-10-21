@@ -1,7 +1,9 @@
 package lotto;
 
+import lotto.domain.LottoWinner;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +32,6 @@ public class LottoWinnerTest {
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerNumberList);
         int matchingCount = lottoWinner.diffLottoAndWinningLotto(lottoNumberList);
         lottoWinner.recordWinningCount(matchingCount);
-        assertThat(lottoWinner).isEqualTo(new LottoWinner(lottoWinnerNumberList,TEST_MATCHING_COUNT_LIST));
+        assertThat(lottoWinner).isEqualTo(new LottoWinner(lottoWinnerNumberList,new HashMap<>()));
     }
 }

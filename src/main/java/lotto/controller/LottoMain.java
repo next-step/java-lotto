@@ -1,5 +1,8 @@
-package lotto;
+package lotto.controller;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoWinner;
+import lotto.domain.ProfitMargin;
 import lotto.ui.InputView;
 import random.LottoGenerateStrategy;
 import random.RandomLottoNumbers;
