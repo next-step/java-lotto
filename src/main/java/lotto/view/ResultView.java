@@ -12,7 +12,7 @@ public class ResultView {
     public static void printPurchasedLottoNumberList(Lotteries purchasedLotteries) {
         System.out.println(purchasedLotteries.size() + PURCHASED_LOTTO_NUMBER_LIST_POSTFIX);
         for (Lottery lottery : purchasedLotteries.getLotteries()) {
-            System.out.println(lottery.toString());
+            System.out.println(lottery.getSortedLottoNumbers());
         }
         System.out.println();
     }
