@@ -23,6 +23,7 @@ public class LottoNumbers {
 
         this.lottoNumbers = numbers.stream()
                 .limit(NUMBER_OF_LOTTO_NUMBER)
+                .sorted()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toUnmodifiableList());
     }
