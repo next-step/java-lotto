@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import lotto.exception.PrizeOverFlowIsNegativeException;
 
@@ -9,7 +9,7 @@ public class LottoResultStatistic {
     Map<Prize, Integer> lottoResultStatistics;
 
     public LottoResultStatistic() {
-        lottoResultStatistics = new HashMap<>();
+        lottoResultStatistics = new EnumMap<>(Prize.class);
         Arrays.stream(Prize.values())
                 .forEach(prize -> lottoResultStatistics.put(prize, 0));
     }
