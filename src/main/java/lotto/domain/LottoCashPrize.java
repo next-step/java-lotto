@@ -25,13 +25,7 @@ public enum LottoCashPrize {
 
     public static LottoCashPrize from(int matchedCount, boolean hasBonus) {
         return Stream.of(values())
-                .filter(prize -> {
-                    if (matchedCount == 5) {
-                        return prize.getMatchedCount() == matchedCount && prize.hasBonus() == hasBonus;
-                    }
-
-                    return prize.getMatchedCount() == matchedCount;
-                })
+                .filter(prize -> isMatchedPrize(prize, matchedCount, hasBonus))
                 .findFirst()
                 .orElse(LottoCashPrize.NO_PRIZE);
     }
@@ -50,5 +44,13 @@ public enum LottoCashPrize {
 
     public boolean hasBonus() {
         return hasBonus;
+    }
+
+    private static boolean isMatchedPrize(LottoCashPrize prize, int matchedCount, boolean hasBonus) {
+        if (matchedCount == 5) {
+            return prize.getMatchedCount() == matchedCount && prize.hasBonus() == hasBonus;
+        }
+
+        return prize.getMatchedCount() == matchedCount;
     }
 }
