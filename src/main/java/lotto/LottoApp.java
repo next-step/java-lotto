@@ -2,12 +2,12 @@ package lotto;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumbersResults;
+import lotto.domain.WinningLottoNumbers;
 
 import java.util.List;
 
 import static lotto.domain.LottoNumbers.calculateSheetCount;
-import static lotto.view.InputView.inputPayment;
-import static lotto.view.InputView.inputWinningLottoNumbers;
+import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
 public class LottoApp {
@@ -19,11 +19,13 @@ public class LottoApp {
         List<LottoNumbers> lottoNumbersList = LottoNumbers.generate(lottoSheetCount);
         printLottoSheets(lottoNumbersList);
 
-        LottoNumbers winningLottoNumbers = new LottoNumbers(inputWinningLottoNumbers());
-        LottoNumbersResults lottoSheetResults = winningLottoNumbers.getResult(lottoNumbersList);
-        printLottoResults(lottoSheetResults);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(
+                inputWinningLottoNumbers(), inputLottoBonusNumber());
 
-        printLottoProfits(payment, lottoSheetResults);
+        LottoNumbersResults lottoNumbersResults = winningLottoNumbers.getResult(lottoNumbersList);
+        printLottoResults(lottoNumbersResults);
+
+        printLottoProfits(payment, lottoNumbersResults);
     }
 }
 

@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -59,24 +62,14 @@ public class LottoNumbers {
         return new ArrayList<>(this.lottoNumbers);
     }
 
-    public int getMatchedCount(LottoNumbers targetNumbers) {
+    protected int getMatchedCount(LottoNumbers targetNumbers) {
         return (int) targetNumbers.getLottoNumbers()
                 .stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
     }
 
-    public LottoNumbersResults getResult(List<LottoNumbers> lottoNumbersList) {
-        Map<LottoCashPrize, Integer> lottoSheetResults = new HashMap<>();
-
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            int matchedCount = this.getMatchedCount(lottoNumbers);
-            LottoCashPrize prize = LottoCashPrize.fromMatchedCount(matchedCount);
-
-            lottoSheetResults.put(
-                    prize, lottoSheetResults.getOrDefault(prize, 0) + 1);
-        }
-
-        return new LottoNumbersResults(lottoSheetResults);
+    protected boolean isContained(int targetNumber) {
+        return this.lottoNumbers.contains(targetNumber);
     }
 }
