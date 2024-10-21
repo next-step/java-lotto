@@ -9,7 +9,7 @@ public class LottoGenerator {
     private LottoGenerator() {
     }
 
-    public static List<Integer> generateLottoNumber() {
+    public static List<Integer> generateLotto() {
         Set<Integer> lottoSet = new HashSet<>();
 
         while (lottoSet.size() < 6) {
