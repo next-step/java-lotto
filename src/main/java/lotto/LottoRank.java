@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -49,16 +50,28 @@ public enum LottoRank {
     }
 
     public static LottoRank getLottoRank(int matchCount, boolean isBonusMatch) {
-        if (matchCount == 6) {
-            return FIRST;
-        } else if (matchCount == 5) {
-            return isBonusMatch ? SECOND : THIRD;
-        } else if (matchCount == 4) {
-            return FOURTH;
-        } else if (matchCount == 3) {
-            return FIFTH;
+        if(matchCount < FIFTH.matchCount) {
+            return MISS;
         }
-        return MISS;
+        if(SECOND.matchCount == matchCount){
+            return rankSecondAndThird(isBonusMatch);
+        }
+
+        return Arrays.stream(values())
+                .filter(rank -> rank.isMatch(matchCount))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+    private boolean isMatch(int matchCount){
+        return this.matchCount == matchCount;
+    }
+
+    private static LottoRank rankSecondAndThird(boolean isBonusMatch){
+        if(isBonusMatch) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public static int determineAmountByMatchCount(int matchCount, boolean isBonusMatch) {
