@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
@@ -47,6 +48,21 @@ class LottoNumbersTest {
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(list))
                 .withMessage("중복된 로또번호를 사용할 수 없습니다.");
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 당첨번호는_필수다(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(input))
+                .withMessage("당첨번호를 입력해 주세요.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,,,3,4,5,6", "1,나,3,4,5,6"})
+    @DisplayName("당첨 번호는 쉼표로 구분된 숫자만 입력 가능하다.")
+    void 당첨_번호_확인(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(input))
+                .withMessage("숫자만 입력할 수 있습니다.");
     }
 
     @ParameterizedTest
