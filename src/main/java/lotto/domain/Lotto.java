@@ -37,9 +37,9 @@ public class Lotto {
         return new ArrayList<>(lotto);
     }
 
-    public int lottoWinningStatus(WinningLotto winningLotto) {
+    public int lottoWinningStatus(Lotto winningLotto) {
         int count = 0;
-        List<LottoNumber> winningNumbers = winningLotto.getWinningLotto();
+        List<LottoNumber> winningNumbers = winningLotto.getLotto();
 
         for (int i = 0; i < winningNumbers.size(); i++) {
             count += isNumberMatched(winningNumbers, i, lotto);

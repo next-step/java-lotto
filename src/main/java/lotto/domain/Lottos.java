@@ -25,7 +25,7 @@ public class Lottos {
     public LottoResultStatistic getResultStatistic(WinningLotto winningLotto) {
         LottoResultStatistic statistic = new LottoResultStatistic();
         for (Lotto lotto : lottos) {
-            int count = lotto.lottoWinningStatus(winningLotto);
+            int count = lotto.lottoWinningStatus(winningLotto.getWinningLotto());
             boolean bonusHit = lotto.checkContainsBonusNumber(winningLotto.getBonusLottoNumber());
             statistic.updatePrize(Prize.getHit(count),Prize.getValueByHit(count,bonusHit));
         }
