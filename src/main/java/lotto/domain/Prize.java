@@ -1,46 +1,39 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 
 public enum Prize {
 
-    SIX(6, 2_000_000_000),
-    FIVE(5, 1_500_000),
-    FOUR(4, 50000),
-    THREE(3, 5000);
+    FIRST(6, 2_000_000_000, Constants.BONUS_MISS),
+    SECOND(5, 30_000_000, Constants.BONUS_HIT),
+    THIRD(5, 1_500_000, Constants.BONUS_MISS),
+    FOURTH(4, 50000, Constants.BONUS_MISS),
+    FIFTH(3, 5000, Constants.BONUS_MISS),
+    MISS(0,0,Constants.BONUS_MISS);
 
     private int hit;
     private int value;
+    private boolean bonus;
 
-    Prize(int hit, int value) {
+    Prize(int hit, int value, boolean bonus) {
         this.hit = hit;
         this.value = value;
+        this.bonus = bonus;
+    }
+
+    public static Prize getHit(int hit, boolean bonus) {
+        return Arrays.stream(Prize.values())
+                .filter(prize -> prize.hit == hit && prize.bonus == bonus)
+                .findFirst()
+                .orElse(Prize.MISS);
     }
 
     public int getValue() {
         return value;
     }
 
-    public static int getValueByHit(int hit) {
-        return Arrays.stream(Prize.values())
-                .filter(prize -> prize.hit == hit)
-                .map(Prize::getValue)
-                .findFirst()
-                .orElse(0);
-    }
-
-    public static LinkedHashMap<Prize, Integer> calculateStatistic(int totalPrize) {
-        LinkedHashMap<Prize, Integer> statistic = new LinkedHashMap<>();
-        int prize = totalPrize;
-        for (Prize price : Prize.values()) {
-            statistic.put(price, prize / price.getValue());
-            prize %= price.getValue();
-        }
-        return statistic;
-    }
-
-    public static double calculateProfit(int prize, int buyPrice) {
-        return Math.floor(prize / (double) buyPrice * 100) / 100.0;
+    private static class Constants {
+        public static final boolean BONUS_HIT = true;
+        public static final boolean BONUS_MISS = false;
     }
 }

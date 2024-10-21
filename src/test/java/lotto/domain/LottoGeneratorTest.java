@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static lotto.domain.LottoGenerator.lottoGenerator;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static lotto.domain.LottoGenerator.lottoGenerator;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class LottoGeneratorTest {
     @Test
@@ -40,4 +39,6 @@ public class LottoGeneratorTest {
 
         Assertions.assertThat(lottos.getNumberOfLotto()).isEqualTo(3);
     }
+
 }
+

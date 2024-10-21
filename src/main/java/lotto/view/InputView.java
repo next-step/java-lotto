@@ -27,6 +27,11 @@ public class InputView {
         return new Lotto(convertStringToIntList(scanner.nextLine()));
     }
 
+    public LottoNumber inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return LottoNumber.createLottoNumber(scanner.nextInt());
+    }
+
     private void clearBuffer() {
         scanner.nextLine();
     }

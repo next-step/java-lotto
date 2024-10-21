@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.PrizeOverFlowIsNegativeException;
-
 import java.util.List;
 
 public class Lottos {
@@ -24,28 +22,14 @@ public class Lottos {
         return lottos;
     }
 
-    public int getWinningPrize(Lotto winningLotto) {
-        int totalPrize = 0;
-        int eachPrize = 0;
+    public LottoResultStatistic getResultStatistic(WinningLotto winningLotto) {
+        LottoResultStatistic statistic = new LottoResultStatistic();
         for (Lotto lotto : lottos) {
-            eachPrize = lotto.lottoWinningStatus(lotto, winningLotto);
-            validOverFlow(eachPrize, totalPrize);
-            validtotalPrize(eachPrize, totalPrize);
-            totalPrize += eachPrize;
+            int count = lotto.lottoWinningStatus(winningLotto.getWinningLotto());
+            boolean bonusHit = lotto.checkContainsBonusNumber(winningLotto.getBonusLottoNumber());
+            statistic.updatePrize(Prize.getHit(count,bonusHit));
         }
-        return totalPrize;
-    }
-
-    private void validtotalPrize(int eachPrize, int totalPrize) {
-        if (eachPrize + totalPrize > 2_000_000_000) {
-            throw new IllegalArgumentException("총 상금 20억을 넘길 순 없음");
-        }
-    }
-
-    private void validOverFlow(int eachPrize, int totalPrize) {
-        if (eachPrize + totalPrize < 0) {
-            throw new PrizeOverFlowIsNegativeException();
-        }
+        return statistic;
     }
 
     public void additionalLotto(Lotto lotto){
