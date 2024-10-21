@@ -7,11 +7,11 @@ import java.util.Map;
 public class LottoStatistics {
     private final Map<LottoRank, Integer> prizeCountMap;
 
-    public static LottoStatistics create(List<Integer> winningNumberCountList) {
+    public static LottoStatistics create(List<LottoResult> lottoResults) {
         Map<LottoRank, Integer> prizeCountMap = createEmptyPrizeCountMap();
 
-        for (int winningNumberCount : winningNumberCountList) {
-            LottoRank lottoRank = LottoRank.fromEqualNumberCount(winningNumberCount);
+        for (LottoResult result : lottoResults) {
+            LottoRank lottoRank = LottoRank.of(result.getEqualNumberCount(), result.hasBonusNumber());
             prizeCountMap.merge(lottoRank, 1, Integer::sum);
         }
 
@@ -33,16 +33,6 @@ public class LottoStatistics {
         return Math.round(profitRate * 100) / 100.0f;
     }
 
-    private static Map<LottoRank, Integer> createEmptyPrizeCountMap() {
-        Map<LottoRank, Integer> prizeCountMap = new EnumMap<>(LottoRank.class);
-
-        for (LottoRank lottoRank : LottoRank.values()) {
-            prizeCountMap.put(lottoRank, 0);
-        }
-
-        return prizeCountMap;
-    }
-
     public int calculateTotalProfit() {
         int profit = 0;
 
@@ -51,5 +41,15 @@ public class LottoStatistics {
         }
 
         return profit;
+    }
+
+    private static Map<LottoRank, Integer> createEmptyPrizeCountMap() {
+        Map<LottoRank, Integer> prizeCountMap = new EnumMap<>(LottoRank.class);
+
+        for (LottoRank lottoRank : LottoRank.values()) {
+            prizeCountMap.put(lottoRank, 0);
+        }
+
+        return prizeCountMap;
     }
 }

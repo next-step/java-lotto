@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Lottery;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,5 +17,16 @@ class LotteryTest {
 
         // then
         Assertions.assertThat(equalNumberCount).isEqualTo(2);
+    }
+
+    @Test
+    void 로또번호가_6개가_아니면_예외_발생() {
+        // given
+        Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5);
+
+        // when, then
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Lottery(lottoNumbers))
+                .withMessageMatching("로또번호는 \\d+개 이어야 합니다");
     }
 }
