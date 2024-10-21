@@ -18,18 +18,29 @@ public class LottoInput {
     }
 
     public int purchaseValid(String amount) {
+
         if(amount.isBlank()) {
             throw new IllegalArgumentException("구매금액이 없을수는 없습니다.");
         }
-        try {
-            int purchasedAmount = Integer.parseInt(amount);
 
-            if (purchasedAmount <= 0) {
-                throw new IllegalArgumentException("구매금액은 0보다 커야 합니다.");
-            }
-            return purchasedAmount;
+        int purchasedAmount = parseAmount(amount);
+        validateAmountPositive(purchasedAmount);
+
+        return purchasedAmount;
+    }
+
+    private int parseAmount(String amount) {
+        try {
+          return Integer.parseInt(amount);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구매금액은 유효한 숫자여야 합니다.", e);
         }
     }
+
+    private void validateAmountPositive(int purchasedAmount) {
+        if (purchasedAmount <= 0) {
+            throw new IllegalArgumentException("구매금액은 0보다 커야 합니다.");
+        }
+    }
+
 }

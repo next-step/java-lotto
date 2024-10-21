@@ -1,10 +1,12 @@
-import controller.Calculator;
+package calculator;
+
+import calculator.controller.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import service.CalculatorService;
-import service.Preprocessor;
+import calculator.service.CalculatorService;
+import calculator.service.Preprocessor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottMatcherTest {
 
@@ -23,9 +22,10 @@ public class LottMatcherTest {
 
     @BeforeEach
     public void setup() {
-        LottoGenerator lotto = new LottoGenerator(10000);
-        LottoMatcher lottoMatcher = new LottoMatcher(lotto, "1,2,3,4,5,6");
-        lottoList = lotto.chooseLottoNumber(lotto.purchase());
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoMatcher lottoMatcher = new LottoMatcher(lottoGenerator, "1,2,3,4,5,6");
+
+        lottoList = lottoGenerator.chooseLottoNumber(10000);
         matchedLottoList = lottoMatcher.matchLottoNumber(lottoList);
     }
 
@@ -33,9 +33,7 @@ public class LottMatcherTest {
     @ValueSource(strings = {"7", "-2"})
     @DisplayName("LottoRank라는 Enum클래스 값을 테스트한다.")
     public void checkLottoRank(String values) {
-        assertThatThrownBy(() -> {
-            LottoRank.findByCount(Integer.parseInt(values));
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThat(LottoRank.findByCount(Integer.parseInt(values))).isEqualTo(LottoRank.NON_WINNER);
     }
 
     @Test

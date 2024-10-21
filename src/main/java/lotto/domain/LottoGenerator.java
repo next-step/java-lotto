@@ -4,23 +4,22 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGenerator {
-    private final int purchaseAmount;
     private static final int PURCHASE_PRICE = 1000;
     private static final int LIMIT_AMOUNT = 100000;
 
-    public LottoGenerator(int purchaseAmount) {
-        if(purchaseAmount > LIMIT_AMOUNT) {
+    public List<Lotto> generateLottoTickets(int purchaseAmount) {
+        validatePurchaseAmount(purchaseAmount);
+        return chooseLottoNumber(getPurchaseCount(purchaseAmount));
+    }
+
+    private void validatePurchaseAmount(int purchaseAmount) {
+        if (purchaseAmount > LIMIT_AMOUNT) {
             throw new IllegalArgumentException("구매금액은 " + LIMIT_AMOUNT + "를 초과할 수 없습니다.");
         }
-        this.purchaseAmount = purchaseAmount;
     }
 
-    public List<Lotto> generateLottoTickets() {
-        return chooseLottoNumber(purchase());
-    }
-
-    public int purchase() {
-        return this.purchaseAmount / PURCHASE_PRICE;
+    public static int getPurchaseCount(int purchaseAmount) {
+        return purchaseAmount / PURCHASE_PRICE;
     }
 
     public List<Lotto> chooseLottoNumber(int purchaseCount) {
@@ -51,33 +50,12 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> parseWinningNumbers(String winningLottoNumbers) {
-        return Arrays.stream(winningLottoNumbers.split(","))
+    public Lotto parseWinningNumbers(String winningLottoNumbers) {
+        return new Lotto(Arrays.stream(winningLottoNumbers.split(","))
                 .map(String::trim)
                 .filter(number -> !number.isBlank())
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoGenerator lottoGenerator = (LottoGenerator) o;
-        return purchaseAmount == lottoGenerator.purchaseAmount;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(purchaseAmount);
-    }
-
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                ", purchaseAmount=" + purchaseAmount +
-                '}';
-    }
-
 
 }

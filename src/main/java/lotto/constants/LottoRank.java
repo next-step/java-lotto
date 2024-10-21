@@ -10,9 +10,9 @@ public enum LottoRank {
     , FOURTH_PRIZE (3, "4", 5000)
     , NON_WINNER (0, "낙첨", 0);
 
-    private int count;
-    private String rank;
-    private long amount;
+    private final int count;
+    private final String rank;
+    private final long amount;
 
     LottoRank(int count, String rank, long amount) {
         this.count = count;
@@ -33,10 +33,6 @@ public enum LottoRank {
     }
 
     static public LottoRank findByCount(int count) {
-
-        if (count >= 0 && count <= 2) {
-            return NON_WINNER;
-        }
         return Arrays.stream(values())
                 .filter(rank -> rank.getCount() == count)
                 .findFirst()

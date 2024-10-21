@@ -1,8 +1,8 @@
-package controller;
+package calculator.controller;
 
-import service.CalculatorService;
-import view.Input;
-import view.Output;
+import calculator.service.CalculatorService;
+import calculator.view.Input;
+import calculator.view.Output;
 
 public class Calculator {
 

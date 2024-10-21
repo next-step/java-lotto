@@ -1,4 +1,4 @@
-package service;
+package calculator.service;
 
 public class Minus implements CalculatorInterface {
 

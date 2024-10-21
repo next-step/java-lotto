@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.constants.LottoRank;
+import lotto.domain.Lotto;
 
 import java.util.*;
 
@@ -9,7 +10,12 @@ public class LottoPrint {
     private final String ENTER = "\n";
     private StringBuilder stringBuilder = new StringBuilder();
 
-    public void lottoResult(List<Integer> matchedLottoList, int purchasedAmount) {
+    public void lottoPurchasedCount(List<Lotto> lottoTickets) {
+        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+        lottoTickets.forEach(System.out::println);
+    }
+
+    public void lottoResult(Map<String, Integer> rankCounts, double profitRate) {
         stringBuilder.setLength(0);
         stringBuilder
                 .append(ENTER)
@@ -18,32 +24,10 @@ public class LottoPrint {
                 .append("----------")
                 .append(ENTER);
 
-        Map<String, Integer> rankCounts  = initializeRankCounts();
-        rankCounts = countMatch(rankCounts, matchedLottoList);
         generateResult(rankCounts);
-        calculateProfitRate(rankCounts, purchasedAmount);
+        profitRateResult(profitRate);
 
         System.out.println(stringBuilder);
-    }
-
-    private Map<String, Integer> initializeRankCounts() {
-        Map<String, Integer> rankCounts = new HashMap<>();
-
-        for (LottoRank rank : LottoRank.values()) {
-            rankCounts.put(rank.getRank(), 0);
-        }
-        return rankCounts;
-    }
-
-    private Map<String, Integer> countMatch(Map<String, Integer> rankCounts, List<Integer> matchedLottoList) {
-
-        for (Integer count : matchedLottoList) {
-            LottoRank lottoRank = LottoRank.findByCount(count);
-            rankCounts.put(lottoRank.getRank(), rankCounts.get(lottoRank.getRank()) + 1);
-        }
-
-        return rankCounts;
-
     }
 
     private void generateResult(Map<String, Integer> rankCounts) {
@@ -57,20 +41,14 @@ public class LottoPrint {
                         .append(rankCounts.get(rank.getRank()))
                         .append("개")
                         .append(ENTER));
+
     }
 
-    private void calculateProfitRate(Map<String, Integer> rankCounts, int purchasedAmount) {
-
-        long totalEarnings = 0;
-        for (LottoRank rank : LottoRank.values()) {
-            totalEarnings += rank.getAmount() * rankCounts.get(rank.getRank());
-        }
-
-        double profitRate = (double) totalEarnings / purchasedAmount;
-
+    private void profitRateResult(double profitRate) {
         stringBuilder.append("총 수익률은 ")
                 .append(String.format("%.2f", profitRate))
                 .append("입니다.");
+
     }
 
 }

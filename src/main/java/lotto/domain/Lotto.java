@@ -1,25 +1,31 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
+    private final int REQUIRED_NUMBERS = 6;
 
     public Lotto(List<Integer> numbers) {
-        if(numbers.size() != 6) {
-            throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
+        if(numbers.size() != REQUIRED_NUMBERS) {
+            throw new IllegalArgumentException("로또번호는 " + REQUIRED_NUMBERS + "개여야 합니다.");
         }
-        this.numbers = numbers;
+        this.numbers = new HashSet<>(numbers);
+        if(this.numbers.size() != REQUIRED_NUMBERS) {
+            throw  new IllegalArgumentException("로또번호는 중복될 수 없습니다.");
+        }
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return this.numbers;
     }
 
-    public int countMatches(List<Integer> winningNumbers) {
+    public int countMatches(Lotto winningNumbers) {
         return (int) numbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(winningNumbers.getNumbers()::contains)
                 .count();
     }
 

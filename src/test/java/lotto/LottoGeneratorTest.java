@@ -16,8 +16,8 @@ public class LottoGeneratorTest {
     @RepeatedTest(value = 6)
     @DisplayName("사용자가 사용할 로또 숫자를 뽑는다.")
     public void randomLottoNumber(RepetitionInfo repetitionInfo) {
-        LottoGenerator lotto = new LottoGenerator(12000);
-        List<Lotto> lottoList = lotto.chooseLottoNumber(lotto.purchase());
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        List<Lotto> lottoList = lottoGenerator.generateLottoTickets(12000);
 
         assertThat(lottoList.size()).isEqualTo(12);
         assertThat(lottoList.get(repetitionInfo.getCurrentRepetition()).getNumbers().size()).isEqualTo(6);
@@ -26,10 +26,8 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("로또를 구매한다.")
     public void purchase() {
-        LottoGenerator lotto = new LottoGenerator(12000);
-
-        assertThat(lotto).isEqualTo(new LottoGenerator(12000));
-        assertThat(lotto.purchase()).isEqualTo(12);
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        assertThat(lottoGenerator.getPurchaseCount(12000)).isEqualTo(12);
     }
 
 }

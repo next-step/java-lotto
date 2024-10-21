@@ -21,7 +21,7 @@ public class LottoInputTest {
 
     @DisplayName("로또구입금액 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"", "lotto test", "-1", "120000"})
+    @ValueSource(strings = {"", "lotto test", "-1"})
     public void purchaseValid(String amount) {
         assertThatThrownBy(() -> {
             lotto.purchaseValid(amount);

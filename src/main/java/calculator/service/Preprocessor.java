@@ -1,4 +1,4 @@
-package service;
+package calculator.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
