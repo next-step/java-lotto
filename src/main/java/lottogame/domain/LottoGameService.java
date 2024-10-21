@@ -4,7 +4,6 @@ import lottogame.domain.lotto.*;
 import lottogame.domain.strategy.PredefinedLottoNumberStrategy;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoGameService {
@@ -40,12 +39,12 @@ public class LottoGameService {
                 .collect(Collectors.toList()));
     }
 
-    public Map<Rank, Integer> calculateWinningResults(WinningLotto winningLotto) {
+    public WinningResult calculateWinningResults(WinningLotto winningLotto) {
         return lottos.calculateWinningStatistics(winningLotto);
     }
 
-    public double calculatePrizeRate(WinningLotto winningLotto) {
-        double totalPrizeAmount = lottos.calculateTotalPrizeAmount(winningLotto);
+    public double calculatePrizeRate(WinningResult result) {
+        double totalPrizeAmount = result.calculateTotalPrizeAmount();
 
         return totalPrizeAmount / lottoPurchase.getTotalAmount();
     }

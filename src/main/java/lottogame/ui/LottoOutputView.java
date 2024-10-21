@@ -1,14 +1,9 @@
 package lottogame.ui;
 
-import lottogame.domain.lotto.Lotto;
-import lottogame.domain.lotto.LottoNumber;
-import lottogame.domain.lotto.Lottos;
-import lottogame.domain.lotto.Rank;
-
+import lottogame.domain.lotto.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public final class LottoOutputView {
@@ -29,10 +24,10 @@ public final class LottoOutputView {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public static void printWinningStatistics(Map<Rank, Integer> winningResults) {
+    public static void printWinningStatistics(WinningResult winningResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        getWinningRanks().forEach(rank -> printRankStatistics(rank, winningResults));
+        getWinningRanks().forEach(rank -> printRankStatistics(rank, winningResult));
     }
 
     private static List<Rank> getWinningRanks() {
@@ -42,11 +37,11 @@ public final class LottoOutputView {
                 .collect(Collectors.toList());
     }
 
-    private static void printRankStatistics(Rank rank, Map<Rank, Integer> winningResults) {
+    private static void printRankStatistics(Rank rank, WinningResult winningResult) {
         System.out.printf("%s (%.0f원) - %d개%n",
                 getMatchDescription(rank),
                 rank.getPrizeMoney(),
-                winningResults.getOrDefault(rank, 0));
+                winningResult.getCountForRank(rank));
     }
 
     private static String getMatchDescription(Rank rank) {
@@ -68,7 +63,7 @@ public final class LottoOutputView {
     }
 
     public static void printPurchaseInfo(int manualCount, int autoCount) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, autoCount);
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, autoCount);
     }
 
 }

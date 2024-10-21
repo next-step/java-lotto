@@ -20,16 +20,12 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Map<Rank, Integer> calculateWinningStatistics(WinningLotto winningLotto) {
-        return lottos.stream()
-                .map(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto.getWinningLotto()), lotto.isMatchingBonus(winningLotto.getBonusNumber())))
+    public WinningResult calculateWinningStatistics(WinningLotto winningLotto) {
+        Map<Rank, Integer> rankCounts = lottos.stream()
+                .map(lotto -> Rank.from(winningLotto.countMatchingNumbers(lotto), winningLotto.isMatchingBonus(lotto)))
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.summingInt(rank -> 1)));
-    }
 
-    public double calculateTotalPrizeAmount(WinningLotto winningLotto) {
-        return lottos.stream()
-                .mapToDouble(lotto -> Rank.from(lotto.countMatchingNumbers(winningLotto.getWinningLotto()), lotto.isMatchingBonus(winningLotto.getBonusNumber())).getPrizeMoney())
-                .sum();
+        return new WinningResult(rankCounts);
     }
 
     public static Lottos merge(Lottos first, Lottos second) {

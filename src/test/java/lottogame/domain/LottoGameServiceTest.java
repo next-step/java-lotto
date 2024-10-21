@@ -1,16 +1,12 @@
 package lottogame.domain;
 
-import lottogame.domain.lotto.LottoPurchase;
-import lottogame.domain.lotto.Lottos;
-import lottogame.domain.lotto.Rank;
-import lottogame.domain.lotto.WinningLotto;
+import lottogame.domain.lotto.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
@@ -64,9 +60,9 @@ class LottoGameServiceTest {
     void calculateWinningResults() {
         WinningLotto lotto = lottoGameService.createWinningLotto("1,2,3,4,5,6", 7);
 
-        Map<Rank, Integer> actual = lottoGameService.calculateWinningResults(lotto);
+        WinningResult actual = lottoGameService.calculateWinningResults(lotto);
 
-        assertThat(actual).contains(
+        assertThat(actual.getRankCounts()).contains(
                 entry(Rank.FIRST, 1),
                 entry(Rank.SECOND, 1)
         );
@@ -77,7 +73,8 @@ class LottoGameServiceTest {
     void calculatePrizeRate() {
         WinningLotto lotto = lottoGameService.createWinningLotto("1,2,3,4,5,6", 7);
 
-        double actual = lottoGameService.calculatePrizeRate(lotto);
+        WinningResult winningResult = lottoGameService.calculateWinningResults(lotto);
+        double actual = lottoGameService.calculatePrizeRate(winningResult);
         double expected = (double) 2_030_000_000 / 5000;
 
         assertEquals(expected, actual);

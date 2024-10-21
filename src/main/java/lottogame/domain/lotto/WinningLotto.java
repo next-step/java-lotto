@@ -16,6 +16,14 @@ public class WinningLotto {
         }
     }
 
+    public int countMatchingNumbers(Lotto other) {
+        return this.winningLotto.countMatchingNumbers(other);
+    }
+
+    public boolean isMatchingBonus(Lotto other) {
+        return other.isMatchingBonus(this.bonusNumber);
+    }
+
     public Lotto getWinningLotto() {
         return winningLotto;
     }

@@ -3,6 +3,7 @@ package lottogame.controller;
 import lottogame.domain.LottoGameService;
 import lottogame.domain.lotto.LottoPurchase;
 import lottogame.domain.lotto.WinningLotto;
+import lottogame.domain.lotto.WinningResult;
 import lottogame.ui.LottoInputView;
 import lottogame.ui.LottoOutputView;
 
@@ -24,9 +25,9 @@ public class LottoGameController {
             int bonusNumber = LottoInputView.getBonusNumber();
 
             WinningLotto winningLotto = lottoGameService.createWinningLotto(winningNumbers, bonusNumber);
-
-            LottoOutputView.printWinningStatistics(lottoGameService.calculateWinningResults(winningLotto));
-            LottoOutputView.printPrizeRate(lottoGameService.calculatePrizeRate(winningLotto));
+            WinningResult result = lottoGameService.calculateWinningResults(winningLotto);
+            LottoOutputView.printWinningStatistics(result);
+            LottoOutputView.printPrizeRate(lottoGameService.calculatePrizeRate(result));
         } catch (Exception e) {
             System.out.println("잘못된 동작입니다.");
         }
