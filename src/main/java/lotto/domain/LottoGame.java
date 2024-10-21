@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import java.math.RoundingMode;
 
+import lotto.vo.LottoCreateRequest;
+import lotto.vo.LottoCreateResponse;
 import lotto.vo.Winning;
 import lotto.vo.WinningResult;
 import lotto.enumeration.Rank;
@@ -22,9 +24,11 @@ public class LottoGame {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public List<Lotto> create(final String money) {
-        int count = Integer.parseInt(money) / LOTTO_PRICE;
-        return lottoGenerator.generate(count);
+    public LottoCreateResponse create(final LottoCreateRequest lottoCreateRequest) {
+        List<Lotto> lottos = lottoGenerator.generate(lottoCreateRequest);
+        int countManual = (int) lottos.stream().filter(Lotto::isManual).count();
+        int countAuto = lottos.size() - countManual;
+        return new LottoCreateResponse(countManual, countAuto, lottos);
     }
 
     public WinningResult match(final List<Lotto> lottos, final InputNumber inputNumber) {

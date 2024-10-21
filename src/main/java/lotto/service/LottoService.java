@@ -3,6 +3,8 @@ package lotto.service;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.InputNumber;
+import lotto.vo.LottoCreateRequest;
+import lotto.vo.LottoCreateResponse;
 import lotto.vo.WinningResult;
 
 import java.util.List;
@@ -14,8 +16,8 @@ public class LottoService {
         this.lottoGame = lottoGame;
     }
 
-    public List<Lotto> create(final String money) {
-        return lottoGame.create(money);
+    public LottoCreateResponse create(final LottoCreateRequest lottoCreateRequest) {
+        return lottoGame.create(lottoCreateRequest);
     }
 
     public WinningResult match(final List<Lotto> lottos, final InputNumber inputNumber) {

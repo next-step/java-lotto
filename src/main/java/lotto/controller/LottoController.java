@@ -2,8 +2,10 @@ package lotto.controller;
 
 import lotto.domain.Lotto;
 import lotto.domain.InputNumber;
-import lotto.vo.WinningResult;
+import lotto.vo.LottoCreateRequest;
 import lotto.service.LottoService;
+import lotto.vo.LottoCreateResponse;
+import lotto.vo.WinningResult;
 import lotto.view.View;
 
 import java.util.List;
@@ -22,12 +24,12 @@ public class LottoController {
     }
 
     private List<Lotto> create() {
-        String inputMoney = view.inputMoney();
+        LottoCreateRequest lottoCreateRequest = view.input();
 
-        List<Lotto> lottos = lottoService.create(inputMoney);
+        LottoCreateResponse lottos = lottoService.create(lottoCreateRequest);
 
         view.outputLottos(lottos);
-        return lottos;
+        return lottos.getLottos();
     }
 
     private void winning(final List<Lotto> lottos) {
