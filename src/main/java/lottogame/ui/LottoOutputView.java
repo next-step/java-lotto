@@ -1,23 +1,14 @@
 package lottogame.ui;
 
-import lottogame.domain.Lotto;
-import lottogame.domain.LottoNumber;
-import lottogame.domain.Lottos;
-import lottogame.domain.Rank;
-
+import lottogame.domain.lotto.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public final class LottoOutputView {
 
     private LottoOutputView() {
-    }
-
-    public static void printBuyAmount(int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
     }
 
     public static void printLottos(Lottos lottos) {
@@ -33,10 +24,10 @@ public final class LottoOutputView {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public static void printWinningStatistics(Map<Rank, Integer> winningResults) {
+    public static void printWinningStatistics(WinningResult winningResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        getWinningRanks().forEach(rank -> printRankStatistics(rank, winningResults));
+        getWinningRanks().forEach(rank -> printRankStatistics(rank, winningResult));
     }
 
     private static List<Rank> getWinningRanks() {
@@ -46,15 +37,15 @@ public final class LottoOutputView {
                 .collect(Collectors.toList());
     }
 
-    private static void printRankStatistics(Rank rank, Map<Rank, Integer> winningResults) {
+    private static void printRankStatistics(Rank rank, WinningResult winningResult) {
         System.out.printf("%s (%.0f원) - %d개%n",
                 getMatchDescription(rank),
                 rank.getPrizeMoney(),
-                winningResults.getOrDefault(rank, 0));
+                winningResult.getCountForRank(rank));
     }
 
     private static String getMatchDescription(Rank rank) {
-        if (rank == Rank.SECOND) {
+        if (rank.isSecond()) {
             return String.format("%d개 일치, 보너스 볼 일치", rank.getMatchCount());
         }
         return String.format("%d개 일치", rank.getMatchCount());
@@ -71,5 +62,8 @@ public final class LottoOutputView {
         System.out.printf("(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n", result);
     }
 
+    public static void printPurchaseInfo(int manualCount, int autoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, autoCount);
+    }
 
 }

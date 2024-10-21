@@ -1,35 +1,59 @@
 package lottogame.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import lottogame.domain.lotto.*;
+import lottogame.domain.strategy.PredefinedLottoNumberStrategy;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGameService {
-    private Lottos lottos;
-    private Integer buyAmount;
-    private Map<Rank, Integer> winningResultsByRank = new HashMap<>();
+    private final LottoPurchase lottoPurchase;
+    private final Lottos lottos;
 
-
-    public LottoGameService(Lottos lottos, Integer buyAmount) {
-        this.lottos = lottos;
-        this.buyAmount = buyAmount;
+    public LottoGameService(int buyAmount, int manualLottoCount, List<String> manualLottoNumbers) {
+        this.lottoPurchase = new LottoPurchase(buyAmount, manualLottoCount);
+        this.lottos = createLottos(manualLottoNumbers);
     }
 
-    public double calculatePrizeAmount(Lotto winningLotto, LottoNumber bonusNumber) {
-        validate(winningLotto, bonusNumber);
+    private Lottos createLottos(List<String> manualLottoNumbers) {
+        Lottos manualLottos = createManualLottos(manualLottoNumbers);
+        Lottos autoLottos = createAutoLottos(lottoPurchase.getAutoCount());
 
-        winningResultsByRank = lottos.calculateWinningStatistics(winningLotto, bonusNumber);
-        double totalPrizeAmount = lottos.calculateTotalPrizeAmount(winningLotto, bonusNumber);
-
-        return totalPrizeAmount / buyAmount;
+        return Lottos.merge(manualLottos, autoLottos);
     }
 
-    private static void validate(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.isMatchingBonus(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
-        }
+    public WinningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
+        Lotto winningLotto = new Lotto(new PredefinedLottoNumberStrategy(winningNumbers));
+        LottoNumber bonus = new LottoNumber(bonusNumber);
+
+        return new WinningLotto(winningLotto, bonus);
     }
 
-    public Map<Rank, Integer> getWinningResultsByRank() {
-        return winningResultsByRank;
+    private Lottos createAutoLottos(int count) {
+        return new Lottos(count);
+    }
+
+    private Lottos createManualLottos(List<String> manualLottoNumbers) {
+        return new Lottos(manualLottoNumbers.stream()
+                .map(numbers -> new Lotto(new PredefinedLottoNumberStrategy(numbers)))
+                .collect(Collectors.toList()));
+    }
+
+    public WinningResult calculateWinningResults(WinningLotto winningLotto) {
+        return lottos.calculateWinningStatistics(winningLotto);
+    }
+
+    public double calculatePrizeRate(WinningResult result) {
+        double totalPrizeAmount = result.calculateTotalPrizeAmount();
+
+        return totalPrizeAmount / lottoPurchase.getTotalAmount();
+    }
+
+    public LottoPurchase getLottoPurchase() {
+        return lottoPurchase;
+    }
+
+    public Lottos getLottos() {
+        return lottos;
     }
 }
