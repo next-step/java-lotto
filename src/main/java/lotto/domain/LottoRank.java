@@ -11,7 +11,7 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     NONE(-1, 0);
 
-    public static final List<LottoRank> RANKS_WITHOUT_NONE = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+    public static final List<LottoRank> RANKS_WITHOUT_NONE = List.of(FOURTH, THIRD, SECOND, FIRST);
 
     public final int equalNumberCount;
     public final int prizeMoneyAmount;
