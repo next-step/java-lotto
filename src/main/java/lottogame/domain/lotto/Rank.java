@@ -1,4 +1,4 @@
-package lottogame.domain;
+package lottogame.domain.lotto;
 
 import java.util.Arrays;
 import java.util.function.BiPredicate;
@@ -45,5 +45,9 @@ public enum Rank {
 
     public double getPrizeMoney() {
         return prizeMoney;
+    }
+
+    public boolean isSecond() {
+        return this == SECOND;
     }
 }

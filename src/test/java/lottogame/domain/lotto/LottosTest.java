@@ -1,5 +1,6 @@
-package lottogame.domain;
+package lottogame.domain.lotto;
 
+import lottogame.domain.strategy.PredefinedLottoNumberStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,7 +8,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
@@ -36,31 +36,14 @@ class LottosTest {
         Lotto winingLotto = new Lotto(new PredefinedLottoNumberStrategy("1,2,3,4,5,6"));
         LottoNumber bonusNumber = new LottoNumber(7);
 
-        Map<Rank, Integer> actual = lottos.calculateWinningStatistics(winingLotto, bonusNumber);
+        WinningResult actual = lottos.calculateWinningStatistics(new WinningLotto(winingLotto, bonusNumber));
 
-        assertThat(actual).containsOnly(
+        assertThat(actual.getRankCounts()).containsOnly(
                 entry(Rank.FIRST, 1),
                 entry(Rank.SECOND, 1),
                 entry(Rank.THIRD, 1)
         );
     }
 
-    @DisplayName("총 상금 계산")
-    @Test
-    void calculateTotalPrizeAmount() {
-        List<Lotto> predefinedLottos = Arrays.asList(
-                new Lotto(new PredefinedLottoNumberStrategy("1,2,3,4,5,6")),
-                new Lotto(new PredefinedLottoNumberStrategy("1,2,3,4,5,7")),
-                new Lotto(new PredefinedLottoNumberStrategy("1,2,3,4,5,8"))
-        );
-        Lottos lottos = new Lottos(predefinedLottos);
-        Lotto winingLotto = new Lotto(new PredefinedLottoNumberStrategy("1,2,3,4,5,6"));
-        LottoNumber bonusNumber = new LottoNumber(7);
-
-        double actual = lottos.calculateTotalPrizeAmount(winingLotto, bonusNumber);
-        double expected = Rank.FIRST.getPrizeMoney() + Rank.SECOND.getPrizeMoney() + Rank.THIRD.getPrizeMoney();
-
-        assertEquals(expected, actual);
-    }
-
 }
+
