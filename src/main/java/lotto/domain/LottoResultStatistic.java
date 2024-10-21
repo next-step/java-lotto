@@ -23,7 +23,7 @@ public class LottoResultStatistic {
     }
 
     public void updatePrize(Prize hit, int prize) {
-        lottoResultStatistics.put(hit, lottoResultStatistics.get(hit) + prize);
+        lottoResultStatistics.put(hit, lottoResultStatistics.getOrDefault(hit,0) + 1);
     }
 
     public int getTotalPrize() {

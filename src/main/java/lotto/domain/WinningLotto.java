@@ -8,8 +8,7 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusLottoNumber;
 
-    public
-    WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         validWinningLotto(winningLotto);
         validBonusNumber(bonusLottoNumber);
         this.winningLotto = winningLotto;
