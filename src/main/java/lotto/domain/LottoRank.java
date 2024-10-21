@@ -21,17 +21,6 @@ public enum LottoRank {
         this.prizeMoneyAmount = prizeMoneyAmount;
     }
 
-    public static LottoRank fromEqualNumberCount(int equalNumberCount) {
-        if (equalNumberCount < FOURTH.equalNumberCount) {
-            return NONE;
-        }
-
-        return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.equalNumberCount == equalNumberCount)
-                .findFirst()
-                .orElse(NONE);
-    }
-
     public static LottoRank of(int equalNumberCount, boolean hasBonusNumber) {
         if (equalNumberCount < FIFTH.equalNumberCount) {
             return NONE;
