@@ -6,16 +6,22 @@ import lotto.domain.LottoNumber;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoUtils {
+public class LottoGenerator {
 
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MIN_VALUE = 1;
     private static final int LOTTO_MAX_VALUE = 45;
 
-    private LottoUtils() {
+    private LottoGenerator() {
     }
 
-    public static List<Lotto> extractLottosFromStrings(String[] lottosStr) {
+    public static List<Lotto> generatorLottos(String[] manualLottos, int totalQuantity) {
+        List<Lotto> lottos = new ArrayList<>(extractLottosFromStrings(manualLottos));
+        lottos.addAll(generateLottos(totalQuantity - manualLottos.length));
+        return lottos;
+    }
+
+    private static List<Lotto> extractLottosFromStrings(String[] lottosStr) {
         return Arrays.stream(lottosStr)
                 .map(Lotto::new)
                 .collect(Collectors.toList());
@@ -39,5 +45,4 @@ public class LottoUtils {
         numbers.sort((Comparator.comparingInt(LottoNumber::getLottoNumber)));
         return new Lotto(numbers);
     }
-
 }
