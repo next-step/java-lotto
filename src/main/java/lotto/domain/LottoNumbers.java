@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private List<LottoNumber> numbers;
@@ -29,9 +28,11 @@ public class LottoNumbers {
         return numbers;
     }
 
-    public LottoRankingEnum getRanking(Lotto winningLotto) {
-        return  LottoRankingEnum.getEnumByMatchCount((int)winningLotto.getLottoNumbers().numbers.stream().filter(x-> contains(x)).count());
+
+    public int getMatchCount(Lotto winningLotto) {
+        return (int)winningLotto.getLottoNumbers().numbers.stream().filter(x-> contains(x)).count();
     }
+
 
     public boolean contains(LottoNumber lottoNumber) {
         int matchCount = (int)numbers.stream().map(LottoNumber::getValue).filter(num -> num == lottoNumber.getValue()).count();

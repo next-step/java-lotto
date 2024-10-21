@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Arrays;
 
 public class Lotto {
 
@@ -11,11 +11,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoRankingEnum getRanking(Lotto winningLotto) {
-        return lottoNumbers.getRanking(winningLotto);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
-    public BigDecimal getRankingAmount(Lotto winningLotto) {
-        return lottoNumbers.getRanking(winningLotto).getWinningAmount();
+
+    public boolean equals(Lotto lotto) {
+        return lottoNumbers.equals(lotto.getLottoNumbers());
     }
 
     public LottoNumbers getLottoNumbers() {
