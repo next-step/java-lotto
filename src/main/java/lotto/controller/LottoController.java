@@ -5,6 +5,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoController {
     public static void purchaseAutoLotto() {
@@ -12,8 +13,8 @@ public class LottoController {
         Lotteries lotteries = Lotteries.purchase(totalPurchaseAmount);
         ResultView.printPurchasedLottoNumberList(lotteries);
 
-        String inputLastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
-        Lottery winningLottery = Lottery.from(inputLastWeekWinningNumbers);
+        Set<Integer> inputWinningNumbers = InputView.inputLastWeekWinningNumbers();
+        Lottery winningLottery = new Lottery(inputWinningNumbers);
 
         Integer inputBonusNumber = InputView.inputBonusNumber();
         BonusNumber bonusNumber = new BonusNumber(inputBonusNumber);

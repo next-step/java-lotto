@@ -1,23 +1,10 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lottery {
-    private static final String DELIMITER = ", ";
-
     private final Set<Integer> lottoNumbers;
-
-    public static Lottery from(String inputLottoNumbers) {
-        Set<Integer> lottoNumbers = Arrays.stream(inputLottoNumbers.split(DELIMITER))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toSet());
-
-        return new Lottery(lottoNumbers);
-    }
 
     public Lottery(Set<Integer> lottoNumbers) {
         LottoNumberValidator.validateLottoNumbers(lottoNumbers);
