@@ -37,18 +37,34 @@
 - InputView
   - 구매금액 입력 받아 LottoTickets 리턴
   - 당첨 번호 입력 받아 당첨 LottoTicket 리턴
+  - 보너스 번호 입력 받아 LottoNumber 리턴
 - ResultView
   - 구매한 로또 출력
   - 당첨 통계 출력
   - 수익률 출력
 - LottoApp
   - 전체 로또 실행 수행
+- LottoNumber
+  - 로또 번호 생성
+    - 1~45 사이의 숫자인지 검증
+  - 로또 번호 비교
+  - 로또 번호 정렬
+- LottoWinningNumbers
+  - 당첨 번호 생성
+  - 보너스 볼 생성
+    - 보너스 볼이 당첨 번호에 포함되는지 확인
+  - LottoTicket이 보너스볼 당첨여부 확인
+  - LottoTicket이 당첨 번호와 몇개 일치 하는지 확인
 - LottoTicket
   - 로또 자동 생성 (Collections.shuffle() 생성, Collections.sort() 정렬)
+  - 로또 숫자 리스트 입력 받아 생성
+    - 서로 다른 6개의 숫자가 아닐 경우 IllegalArgumentException throw
   - 다른 LottoTicket과 몇개 일치하는지 확인 (ArrayList의 contains() 확인)
+  - 일치 개수에 따라 Winning 객체 리턴
+    - 보너스볼 당첨여부에 따라 2등/3등 구분
 - LottoTickets
   - 구입 금액에 해당하는 로또 발급 (로또 1장의 가격은 1000원)
-  - 일치 개수들 계산하여 Winning 객체를 WinningCalculator에 전달
+  - Winning 객체 리스트 WinningCalculator에 전달
 - WinningCalculator
   - Winning 객체를 받아 당첨 통계 저장
   - 당첨 금액 저장
@@ -59,4 +75,5 @@
     - 3개 일치 5000원
     - 4개 일치 50000원
     - 5개 일치 1500000원
+    - 5개 일치, 보너스 볼 일치 30000000원
     - 6개 일치 2000000000원

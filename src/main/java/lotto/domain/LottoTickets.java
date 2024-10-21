@@ -11,18 +11,13 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoTickets(int price) {
-        this.lottoTickets = generateLottoTickets(price);
+    public static LottoTickets createByPrice(int price) {
+        return new LottoTickets(Stream.generate(LottoTicket::createAuto)
+                                      .limit(calculateTicketCount(price))
+                                      .collect(Collectors.toList()));
     }
 
-    private List<LottoTicket> generateLottoTickets(int price) {
-        int ticketCount = calculateTicketCount(price);
-        return Stream.generate(LottoTicket::new)
-                     .limit(ticketCount)
-                     .collect(Collectors.toList());
-    }
-
-    private int calculateTicketCount(int price) {
+    private static int calculateTicketCount(int price) {
         return price / LottoTicket.PRICE;
     }
 
@@ -34,9 +29,9 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public List<Winning> calculateWinningResults(LottoTicket winningNumbers) {
+    public List<Winning> calculateWinningResults(LottoWinningNumbers lottoWinningNumbers) {
         return lottoTickets.stream()
-                           .map(ticket -> Winning.fromMatchCount(ticket.matchCount(winningNumbers)))
+                           .map(ticket -> ticket.calculateWinningResult(lottoWinningNumbers))
                            .collect(Collectors.toList());
     }
 }
