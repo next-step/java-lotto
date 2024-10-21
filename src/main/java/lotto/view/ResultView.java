@@ -2,6 +2,9 @@ package lotto.view;
 
 import lotto.common.Prize;
 
+import java.util.Collections;
+import java.util.List;
+
 public class ResultView {
     private ResultView() {
     }
