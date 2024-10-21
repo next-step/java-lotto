@@ -1,6 +1,6 @@
-package service;
+package calculator.service;
 
-import constants.Operator;
+import calculator.constants.Operator;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package service;
+package calculator.service;
 
 public interface CalculatorInterface {
     int calculate(int number, int number2);

@@ -1,6 +1,6 @@
-package constants;
+package calculator.constants;
 
-import service.*;
+import calculator.service.*;
 
 import java.util.Arrays;
 

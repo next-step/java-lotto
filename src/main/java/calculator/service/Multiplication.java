@@ -1,4 +1,4 @@
-package service;
+package calculator.service;
 
 public class Multiplication implements CalculatorInterface {
 
