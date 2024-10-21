@@ -25,11 +25,12 @@ public class Lottos {
         return lottos;
     }
 
-    public int getWinningPrize(Lotto winningLotto, LottoNumber bonusNumber) {
+    public int getWinningPrize(WinningLotto winningLotto) {
+        LinkedHashMap<Prize, Integer> statistic = new LinkedHashMap<>();
         int totalPrize = 0;
         int eachPrize = 0;
         for (Lotto lotto : lottos) {
-            eachPrize = lotto.lottoWinningStatus(winningLotto, bonusNumber);
+            eachPrize = lotto.lottoWinningStatus(winningLotto);
             validOverFlow(eachPrize, totalPrize);
             validtotalPrize(eachPrize, totalPrize);
             totalPrize += eachPrize;

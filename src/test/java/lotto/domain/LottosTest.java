@@ -25,7 +25,7 @@ public class LottosTest {
     void 로또_당첨_금액_확인() {
         Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> List.of(lottoHitAll));
 
-        Assertions.assertThat(lottos.getWinningPrize(lottoHitAll, LottoNumber.createLottoNumber(7))).isEqualTo(2_000_000_000);
+        Assertions.assertThat(lottos.getWinningPrize(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7)))).isEqualTo(2_000_000_000);
 
     }
 
@@ -39,7 +39,7 @@ public class LottosTest {
         lottos.additionalLotto(lottoHitAll);
 
         Assertions.assertThatThrownBy(
-                        () -> lottos.getWinningPrize(lottoHitAll, LottoNumber.createLottoNumber(7))
+                        () -> lottos.getWinningPrize(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7)))
                 ).isInstanceOf(PrizeOverFlowIsNegativeException.class)
                 .hasMessage("당첨금 계산 중 오버플로 발생");
 
@@ -55,7 +55,7 @@ public class LottosTest {
         lottos.additionalLotto(lottoHitFive);
 
         Assertions.assertThatThrownBy(
-                        () -> lottos.getWinningPrize(lottoHitAll, LottoNumber.createLottoNumber(7))
+                        () -> lottos.getWinningPrize(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7)))
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("총 상금 20억을 넘길 순 없음");
 
@@ -68,7 +68,7 @@ public class LottosTest {
         Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> new ArrayList<>());
         lottos.additionalLotto(lottoHitAll);
 
-        Assertions.assertThat(lottos.getWinningPrize(lottoHitFive, LottoNumber.createLottoNumber(1))).isEqualTo(30_000_000);
+        Assertions.assertThat(lottos.getWinningPrize(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(1)))).isEqualTo(30_000_000);
     }
 
     @Test

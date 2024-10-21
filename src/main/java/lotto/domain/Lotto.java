@@ -37,14 +37,14 @@ public class Lotto {
         return new ArrayList<>(lotto);
     }
 
-    public int lottoWinningStatus(Lotto winningLotto, LottoNumber bonusNumber) {
+    public int lottoWinningStatus(WinningLotto winningLotto) {
         int count = 0;
-        List<LottoNumber> winningNumbers = winningLotto.getLotto();
+        List<LottoNumber> winningNumbers = winningLotto.getWinningLotto();
 
         for (int i = 0; i < winningNumbers.size(); i++) {
             count += isNumberMatched(winningNumbers, i, lotto);
         }
-        return calculatePrizeWithStatus(bonusNumber, count);
+        return calculatePrizeWithStatus(winningLotto.getBonusLottoNumber(), count);
     }
 
     private int isNumberMatched(List<LottoNumber> winningNumbers, int i, List<LottoNumber> lottoNumbers) {
