@@ -4,22 +4,27 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OneTimeRoundLottoNumberList {
-    private List<Integer> lottoNumberList;
+    private final List<LottoNumber> oneTimeRoundLottoNumberList;
 
-    public OneTimeRoundLottoNumberList(List<Integer> lottoNumberList) {
-        this.lottoNumberList = lottoNumberList;
+    public OneTimeRoundLottoNumberList(List<Integer> oneTimeRoundLottoNumberList) {
+        this.oneTimeRoundLottoNumberList = oneTimeRoundLottoNumberList.stream()
+                .map(LottoNumber::new).collect(Collectors.toList());
+        checkLottoNumberListSize();
     }
 
-    @Override
-    public String toString() {
-        String format = lottoNumberList.stream().
-                map(String::valueOf)
-                .collect(Collectors.joining(", "));
-        return "[" + format +']';
+    private void checkLottoNumberListSize() {
+        if (oneTimeRoundLottoNumberList.size() != 6) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public List<Integer> convertLottoNumberList() {
+        return oneTimeRoundLottoNumberList.stream()
+                .map(LottoNumber::getLottoNumber).collect(Collectors.toList());
     }
 
     public void searchWinningCount(LottoWinner lottoWinner) {
-        int matchingCount = lottoWinner.diffLottoAndWinningLotto(lottoNumberList);
+        int matchingCount = lottoWinner.diffLottoAndWinningLotto(convertLottoNumberList());
         lottoWinner.recordWinningCount(matchingCount);
     }
 }

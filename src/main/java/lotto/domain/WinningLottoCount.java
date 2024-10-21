@@ -14,7 +14,7 @@ public class WinningLottoCount {
     }
 
     public void recordWinningCount(int rank) {
-        winningLottoCountMap.compute(rank, (key, rankCount) -> (key == null) ? 1 : rankCount + 1);
+        winningLottoCountMap.compute(rank, (key, rankCount) -> (rankCount == null) ? 1 : rankCount + 1);
     }
 
     public void printWinningCount() {

@@ -5,11 +5,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoWinner {
+    public static final int DEFAULT_WINNING_COUNT = 0;
     private LottoWinnerNumber lottoWinnerNumber;
     private WinningLottoCount winningLottoCountList;
 
     public LottoWinner(String lottoWinnerNumbers) {
-        this(stringToArrayList(lottoWinnerNumbers), new HashMap<>());
+        this(stringToArrayList(lottoWinnerNumbers), initWinnigLottoCountMap());
+    }
+
+    private static Map<Integer, Integer> initWinnigLottoCountMap() {
+        Map<Integer, Integer> winningLottoCountMap = new TreeMap<>(Comparator.reverseOrder());
+        Arrays.asList(1,2,3,4).forEach(i -> winningLottoCountMap.put(i, DEFAULT_WINNING_COUNT));
+        return winningLottoCountMap;
     }
 
     private static List<Integer> stringToArrayList(String lottoWinnerNumbers) {
@@ -19,7 +26,7 @@ public class LottoWinner {
     }
 
     public LottoWinner(List<Integer> lottoWinnerNumberList) {
-        this(lottoWinnerNumberList, new HashMap<>());
+        this(lottoWinnerNumberList, initWinnigLottoCountMap());
     }
 
     public LottoWinner(List<Integer> lottoWinnerNumberList,  Map<Integer, Integer> winningLottoCountMap) {
