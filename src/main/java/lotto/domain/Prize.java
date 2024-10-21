@@ -4,37 +4,36 @@ import java.util.Arrays;
 
 public enum Prize {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5,30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000);
+    FIRST(6, 2_000_000_000, Constants.BONUS_MISS),
+    SECOND(5,30_000_000, Constants.BONUS_HIT),
+    THIRD(5, 1_500_000, Constants.BONUS_MISS),
+    FOURTH(4, 50000, Constants.BONUS_MISS),
+    FIFTH(3, 5000, Constants.BONUS_MISS);
 
     private int hit;
     private int value;
+    private boolean bonus;
 
-    Prize(int hit, int value) {
+    Prize(int hit, int value, boolean bonus) {
         this.hit = hit;
         this.value = value;
+        this.bonus = bonus;
     }
 
     public int getValue() {
         return value;
     }
 
-    public static int getValueByHit(int hit) {
+    public static int getValueByHit(int hit, boolean bonus) {
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.hit == hit)
+                .filter(prize -> prize.hit == hit && prize.bonus == bonus)
                 .map(Prize::getValue)
                 .findFirst()
                 .orElse(0);
     }
 
-    public static int getSecondPrizeOrThirdPrize(boolean bonusNumber) {
-        if(bonusNumber) {
-            return SECOND.getValue();
-        }
-        return THIRD.getValue();
+    private static class Constants {
+        public static final boolean BONUS_HIT = true;
+        public static final boolean BONUS_MISS = false;
     }
-
 }
