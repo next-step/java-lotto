@@ -33,7 +33,7 @@ class LottoTest {
     }
 
     @Test
-    void 로또와_당첨로또_일치숫자_빤환() {
+    void 로또와_당첨로또_일치개수_반환() {
         Lotto userLotto = new Lotto(1, 2, 3, 4, 5, 6);
         Lotto winningLotto = new Lotto(1, 2, 5, 10, 22, 40);
         assertThat(userLotto.countMatchingNumbers(winningLotto)).isEqualTo(3);
