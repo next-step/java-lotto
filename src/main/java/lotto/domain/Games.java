@@ -9,7 +9,7 @@ public class Games {
 
     private final List<LottoNumbers> games;
 
-    public Games(int money, RandomNumberGenerator generator) {
+    public Games(int money) {
         int numberOfGames = money / LottoNumbers.PRICE;
 
         List<LottoNumbers> games = new ArrayList<>();

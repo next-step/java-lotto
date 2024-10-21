@@ -18,17 +18,14 @@ class GamesTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 500, 999})
     void 최소_구매_금액_이상이_필요하다(int money) {
-        RandomNumberGenerator generator = new RandomNumberGenerator(new Random());
-
-        assertThatIllegalArgumentException().isThrownBy(() -> new Games(money, generator))
+        assertThatIllegalArgumentException().isThrownBy(() -> new Games(money))
                 .withMessage(String.format("최소 %d원이 필요합니다.", LottoNumbers.PRICE));
     }
 
     @ParameterizedTest
     @CsvSource({"1000, 1", "10500, 10"})
     void 구매_금액에_맞는_갯수의_게임을_생성한다(int money, int expected) {
-        RandomNumberGenerator generator = new RandomNumberGenerator(new Random());
-        Games games = new Games(money, generator);
+        Games games = new Games(money);
 
         assertThat(games.count()).isEqualTo(expected);
     }

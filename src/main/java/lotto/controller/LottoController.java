@@ -3,11 +3,8 @@ package lotto.controller;
 import lotto.domain.Games;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
-import lotto.domain.RandomNumberGenerator;
 import view.InputView;
 import view.OutputView;
-
-import java.util.Random;
 
 public class LottoController {
 
@@ -21,7 +18,7 @@ public class LottoController {
 
     public void play() {
         int money = inputView.askPriceToPay();
-        Games games = new Games(money, new RandomNumberGenerator(new Random()));
+        Games games = new Games(money);
 
         outputView.printPurchasedGames(games);
 
