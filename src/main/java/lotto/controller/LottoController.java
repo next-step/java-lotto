@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.Game;
 import lotto.domain.Games;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
 import lotto.domain.RandomNumberGenerator;
 import view.InputView;
@@ -22,9 +22,10 @@ public class LottoController {
     public void play() {
         int money = inputView.askPriceToPay();
         Games games = new Games(money, new RandomNumberGenerator(new Random()));
+
         outputView.printPurchasedGames(games);
 
-        Game winner = new Game(inputView.askWinnerLottoNumber());
+        LottoNumbers winner = new LottoNumbers(inputView.askWinnerLottoNumber());
         LottoResult lottoResult = new LottoResult(winner, games);
 
         outputView.printResult(lottoResult);

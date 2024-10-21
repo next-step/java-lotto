@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
+    public static final int PRICE = 1000;
     public static final int NUMBER_OF_LOTTO_NUMBER = 6;
 
     private final List<LottoNumber> lottoNumbers;
@@ -26,6 +28,16 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> numbers) {
+        validateCount(numbers);
+        validateDuplicateNumber(numbers);
+
+        this.lottoNumbers = toLottoNumberList(numbers);
+    }
+
+    public LottoNumbers(String input) {
+        validateEmptyInput(input);
+        List<Integer> numbers = toIntegerList(input);
+
         validateCount(numbers);
         validateDuplicateNumber(numbers);
 
@@ -51,6 +63,26 @@ public class LottoNumbers {
                 .sorted()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    private void validateEmptyInput(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("당첨번호를 입력해 주세요.");
+        }
+    }
+
+    private List<Integer> toIntegerList(String input) {
+        try {
+            String[] split = input.split(",");
+
+            return Arrays.stream(split)
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+        } catch (NumberFormatException e){
+            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+        }
     }
 
     public int countIdenticalLottoNumber(LottoNumbers that) {

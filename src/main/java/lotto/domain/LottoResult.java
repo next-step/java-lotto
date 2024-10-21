@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private final Game winner;
+    private final LottoNumbers winner;
     private final Games games;
 
-    public LottoResult(Game winner, Games games) {
+    public LottoResult(LottoNumbers winner, Games games) {
         this.winner = winner;
         this.games = games;
     }
@@ -37,7 +37,7 @@ public class LottoResult {
     }
 
     public double calculateEarningRate() {
-        double rate = (double) calculatePrize() / games.count() / Game.PRICE;
+        double rate = (double) calculatePrize() / games.count() / LottoNumbers.PRICE;
 
         int decimalPlaces = 2;
         double decimalPlacesCorrectionValue = Math.pow(10, decimalPlaces);
