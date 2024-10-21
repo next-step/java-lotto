@@ -40,7 +40,7 @@ public enum MathOperator {
                 return mathOperator;
             }
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     public abstract int apply(int currentCalculationResult, int nextNumber);
