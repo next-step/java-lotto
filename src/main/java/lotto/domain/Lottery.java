@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoNumberGenerator.LOTTO_NUMBERS_SIZE;
+
 public class Lottery {
     private final Set<Integer> lottoNumbers;
 
     public Lottery(Set<Integer> lottoNumbers) {
-        LottoNumberValidator.validateLottoNumbers(lottoNumbers);
+        validateLottoNumberSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -36,6 +38,12 @@ public class Lottery {
         boolean hasBonusNumber = hasBonusNumber(bonusNumber.getBonusNumber());
 
         return new LottoResult(hasBonusNumber, equalNumberCount);
+    }
+
+    private void validateLottoNumberSize(Set<Integer> lottoNumbers) {
+        if (lottoNumbers == null || lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(String.format("로또번호는 %d개 이어야 합니다", LOTTO_NUMBERS_SIZE));
+        }
     }
 
     private boolean hasBonusNumber(int bonusNumber) {
