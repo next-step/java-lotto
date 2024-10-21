@@ -1,9 +1,6 @@
 package lotto.service;
 
-import lotto.model.Lotto;
-import lotto.model.Lottos;
-import lotto.model.Price;
-import lotto.model.Statistics;
+import lotto.model.*;
 import lotto.strategy.NumberGenerateStrategy;
 
 import java.util.ArrayList;
@@ -23,8 +20,8 @@ public class LottoService {
         return price.generateLottos(numberGenerateStrategy);
     }
 
-    public Statistics generateStatistics(Lottos lottos, Lotto winningLotto, Price price) {
-        List<Long> matchingCounts = lottos.calculateMatchingCounts(winningLotto);
+    public Statistics generateStatistics(Lottos lottos, WinningLotto winningLotto, Price price) {
+        List<Long> matchingCounts = lottos.calculateCountOfMatch(winningLotto);
 
         double rateOfProfit = price.calculateRateOfProfit(lottos.calculateProfit(winningLotto));
 
