@@ -1,22 +1,27 @@
 package lotto.view;
 
 import lotto.domain.LottoCashPrize;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumbersResults;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoCashPrize.getValuablePrizes;
 
 public class ResultView {
-    public static void printLottoSheetCount(int lottoSheetCount) {
-        System.out.println(lottoSheetCount + "개를 구매했습니다.");
+
+    public static void printLottoNumbersCount(int sheetCount, int manualSheetCount) {
+        System.out.println("수동으로 " + manualSheetCount + "장, 자동으로 " + (sheetCount - manualSheetCount) + "개를 구매했습니다.");
     }
 
-    public static void printLottoSheets(List<LottoNumbers> lottoNumbersList) {
+    public static void printLottoNumbersList(List<LottoNumbers> lottoNumbersList) {
         lottoNumbersList.forEach(lottoNumbers -> System.out.println(lottoNumbers.getLottoNumbers()
-                .toString()));
+                .stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList())));
         System.out.println();
     }
 

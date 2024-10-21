@@ -1,17 +1,12 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoCashPrize {
-    FIRST(6, 2_000_000_000, false),
-    SECOND(5, 30_000_000, true),
-    THIRD(5, 1_500_000, false),
-    FOURTH(4, 50_000, false),
-    FIFTH(3, 5_000, false),
-    NO_PRIZE(0, 0, false);
+    FIRST(6, 2_000_000_000, false), SECOND(5, 30_000_000, true), THIRD(5, 1_500_000, false), FOURTH(
+            4, 50_000, false), FIFTH(3, 5_000, false), NO_PRIZE(0, 0, false);
 
     private final int matchedCount;
     private final int prize;
@@ -31,7 +26,17 @@ public enum LottoCashPrize {
     }
 
     public static List<LottoCashPrize> getValuablePrizes() {
-        return Stream.of(values()).filter(prize -> prize != LottoCashPrize.NO_PRIZE).collect(Collectors.toList());
+        return Stream.of(values())
+                .filter(prize -> prize != LottoCashPrize.NO_PRIZE)
+                .collect(Collectors.toList());
+    }
+
+    private static boolean isMatchedPrize(LottoCashPrize prize, int matchedCount, boolean hasBonus) {
+        if (matchedCount == 5) {
+            return prize.getMatchedCount() == matchedCount && prize.hasBonus() == hasBonus;
+        }
+
+        return prize.getMatchedCount() == matchedCount;
     }
 
     public int getMatchedCount() {
@@ -44,13 +49,5 @@ public enum LottoCashPrize {
 
     public boolean hasBonus() {
         return hasBonus;
-    }
-
-    private static boolean isMatchedPrize(LottoCashPrize prize, int matchedCount, boolean hasBonus) {
-        if (matchedCount == 5) {
-            return prize.getMatchedCount() == matchedCount && prize.hasBonus() == hasBonus;
-        }
-
-        return prize.getMatchedCount() == matchedCount;
     }
 }
