@@ -26,4 +26,5 @@ public class LottoResultStatisticTest {
         LottoResultStatistic resultStatistic = lottos.getResultStatistic(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(10)));
         Assertions.assertThat(resultStatistic.calculateProfit(5000)).isEqualTo(300.0);
     }
+
 }
