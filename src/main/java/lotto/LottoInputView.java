@@ -14,7 +14,7 @@ public class LottoInputView {
         return scanner.nextInt();
     }
 
-    public static Lotto inputWinningNumbers() {
+    public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨번호를 입력해주세요");
         scanner.nextLine();
 
@@ -23,18 +23,14 @@ public class LottoInputView {
                 .mapToInt(Integer::parseInt)
                 .boxed().collect(Collectors.toList());
 
-        Lotto winningLotto = new Lotto(winningNumbers);
-        return winningLotto;
+        return winningNumbers;
     }
 
-    public static int inputBonusNumber(List<Integer> winningNumbers) {
+    public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해주세요");
         int bonusNumber = scanner.nextInt();
 
-        if(winningNumbers.contains(bonusNumber)){
-            throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
-        }
-        if (bonusNumber <= 0 || bonusNumber > 45) {
+        if (bonusNumber <= 0 || bonusNumber > 45) { //todo
             throw new IllegalArgumentException("유효한 번호가 아닙니다.");
         }
         return bonusNumber;

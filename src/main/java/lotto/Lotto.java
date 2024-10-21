@@ -15,6 +15,12 @@ public class Lotto {
         createLotto(new LottoNumbers(lottoNumbers), new LottoResult());
     }
 
+
+    public Lotto(List<Integer> lottoNumbers, int bonusNumber) {
+        createLotto(new LottoNumbers(lottoNumbers), new LottoResult());
+        this.hasLottoNumber(bonusNumber);
+    }
+
     private void createLotto(LottoNumbers lottoNumbers, LottoResult lottoResult) {
         this.lottoNumbers = lottoNumbers;
         this.lottoResult = lottoResult;
@@ -42,5 +48,9 @@ public class Lotto {
 
     public int getAmount() {
         return this.lottoResult.getAmountForWinningLotto();
+    }
+
+    public boolean hasLottoNumber(int lottoNumber){
+        return this.lottoNumbers.hasLottoNumber(lottoNumber);
     }
 }

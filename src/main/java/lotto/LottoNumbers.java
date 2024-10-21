@@ -56,4 +56,11 @@ public class LottoNumbers {
         }
         return true;
     }
+
+    public boolean hasLottoNumber(int lottoNumber){
+        if(this.lottoNumbers.contains(lottoNumber)){
+            throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
+        }
+        return false;
+    }
 }
