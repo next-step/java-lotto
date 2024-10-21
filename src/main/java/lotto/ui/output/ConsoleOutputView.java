@@ -7,11 +7,13 @@ import java.util.List;
 
 public class ConsoleOutputView implements OutputView{
 
-    private static final List<String> MATCH_STATIC_MESSAGES = List.of("3개 일치 (5000원)- %d개", "4개 일치 (50000원)- %d개", "5개 일치 (1500000원)- %d개", "6개 일치 (2000000000원)- %d개");
+    private static final List<String> MATCH_STATIC_MESSAGES = List.of("3개 일치 (5000원)- %d개", "4개 일치 (50000원)- %d개", "5개 일치 (1500000원)- %d개", "5개 일치, 보너스 볼 일치(30000000원) - %d개", "6개 일치 (2000000000원)- %d개");
     public static final String PROFIT_STATIC_MESSAGE = "총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static final String LOTTO_SIZE_POSTFIX_MESSAGE = "개를 구매했습니다.";
     public static final String NEW_LINE = "\n";
+    public static final String STATISTICS_INIT_MESSAGE = "당첨 통계";
+    public static final String SEPERATE_MESSAGE = "---------";
 
     @Override
     public void printLotto(Lottos lottos) {
@@ -26,6 +28,8 @@ public class ConsoleOutputView implements OutputView{
     @Override
     public void printStatistics(Statistics statistics) {
         StringBuilder sb = new StringBuilder();
+        sb.append(STATISTICS_INIT_MESSAGE).append(NEW_LINE);
+        sb.append(SEPERATE_MESSAGE).append(NEW_LINE);
         statistics.forEachMatchingCount((i, o) -> {
             sb.append(String.format(MATCH_STATIC_MESSAGES.get(i), o)).append(NEW_LINE);
         });

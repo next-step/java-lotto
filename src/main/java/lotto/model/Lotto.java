@@ -35,12 +35,20 @@ public class Lotto {
         return numbers.size() == length;
     }
 
-    public boolean match(Lotto winningLotto, long count) {
-        long cnt = this.numbers.stream()
-                .filter(winningLotto.numbers::contains)
+    public boolean match(WinningLotto winningLotto, LottoRank rank) {
+        long countOfLottoMatch = this.numbers.stream()
+                .filter(winningLotto::containLottoNumber)
                 .count();
 
-        return cnt == count;
+        long countOfBonusMatch = this.numbers.stream()
+                .filter(winningLotto::isSameBonusNumber)
+                .count();
+
+        return rank.isMatch(countOfLottoMatch, countOfBonusMatch);
+    }
+
+    public boolean contain(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
     @Override

@@ -1,21 +1,42 @@
 package lotto.model;
 
 public enum LottoRank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOUR(3, 5_000);
+    FIRST(6, 2_000_000_000) {
+        public boolean isMatch(long countOfLottoMatch, long countOfBonusMatch) {
+            return getMatchCount() == countOfLottoMatch;
+        }
+    },
+    SECOND(5, 30_000_000) {
+        public boolean isMatch(long countOfLottoMatch, long countOfBonusMatch) {
+            return getMatchCount() == countOfLottoMatch && countOfBonusMatch == 1;
+        }
+    },
+    THIRD(5, 1_500_000) {
+        public boolean isMatch(long countOfLottoMatch, long countOfBonusMatch) {
+            return getMatchCount() == countOfLottoMatch && countOfBonusMatch == 0;
+        }
+    },
+    FOUR(4, 50_000){
+        public boolean isMatch(long countOfLottoMatch, long countOfBonusMatch) {
+            return getMatchCount() == countOfLottoMatch;
+        }
+    },
+    FIFTH(3, 5_000) {
+        public boolean isMatch(long countOfLottoMatch, long countOfBonusMatch) {
+            return getMatchCount() == countOfLottoMatch;
+        }
+    };
 
-    private final int matchCount;
+    private final int countOfMatch;
     private final int prizeMoney;
 
-    LottoRank(int matchCount, int prizeMoney) {
-        this.matchCount = matchCount;
+    LottoRank(int countOfMatch, int prizeMoney) {
+        this.countOfMatch = countOfMatch;
         this.prizeMoney = prizeMoney;
     }
 
     public int getMatchCount() {
-        return matchCount;
+        return countOfMatch;
     }
 
     public int getPrizeMoney() {
@@ -23,4 +44,5 @@ public enum LottoRank {
     }
 
 
+    public abstract boolean isMatch(long countOfLottoMatch, long countOfBonusMatch);
 }
