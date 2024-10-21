@@ -38,7 +38,7 @@ public class LottoGenerator {
     private static Lotto createLotto() {
         List<LottoNumber> numbers = new ArrayList<>();
         for (int num = LOTTO_MIN_VALUE; num <= LOTTO_MAX_VALUE; ++num) {
-            numbers.add(new LottoNumber(num));
+            numbers.add(LottoNumber.from(num));
         }
         Collections.shuffle(numbers);
         numbers = numbers.subList(0, LOTTO_SIZE);
