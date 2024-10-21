@@ -15,11 +15,12 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class LottoTest {
 
-    static Stream<Arguments> generateLottoNumbers() {
-        return Stream.of(
-                Arguments.of(new Integer[]{1, 2, 3, 4, 5, 6}, 6),
-                Arguments.of(new Integer[]{7, 8, 9, 10, 11, 12}, 0)
-        );
+    @DisplayName("Lotto는 6개의 로또 번호가 동일하면 일치한 객체이다.")
+    @Test
+    void create() {
+        Lotto lotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
+
+        assertThat(lotto).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("인자로 받은 로또 번호 크기가 6개가 아니면 IllegalArgumentException을 발생시킨다.")
@@ -38,6 +39,13 @@ class LottoTest {
         int actual = winningLotto.countMatchingNumbers(new Lotto(given));
 
         assertThat(actual).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> generateLottoNumbers() {
+        return Stream.of(
+                Arguments.of(new Integer[]{1, 2, 3, 4, 5, 6}, 6),
+                Arguments.of(new Integer[]{7, 8, 9, 10, 11, 12}, 0)
+        );
     }
 
     @DisplayName("로또 한장에 특정 로또 번호가 포함되어있는지 여부를 반환한다.")

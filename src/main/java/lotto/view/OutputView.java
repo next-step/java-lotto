@@ -10,13 +10,17 @@ import java.util.List;
 public class OutputView {
     private static final String NEW_LINE = System.lineSeparator();
 
-    public static void printLottoQuantityPurchased(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printLottoQuantityPurchased(int manualLottoQuantity, int lottoQuantityWithoutManual) {
+        if (manualLottoQuantity == 0) {
+            System.out.printf("자동으로 %d장을 구매했습니다.%s", lottoQuantityWithoutManual, NEW_LINE);
+            return;
+        }
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.%s", manualLottoQuantity, lottoQuantityWithoutManual, NEW_LINE);
     }
 
-    public static void printLottos(List<Lotto> lottoTickets) {
+    public static void printLottos(List<Lotto> lottos) {
         StringBuilder stringBuilder = new StringBuilder();
-        lottoTickets.forEach(lottoNumbers -> stringBuilder.append(lottoNumbers.values()).append(NEW_LINE));
+        lottos.forEach(lottoNumbers -> stringBuilder.append(lottoNumbers.values()).append(NEW_LINE));
         System.out.println(stringBuilder);
     }
 
@@ -39,18 +43,18 @@ public class OutputView {
 
         for (LottoRank ranking : LottoRank.winningRanks()) {
             stringBuilder
-                    .append(OutputView.rankingDescription(ranking))
+                    .append(OutputView.winningRankDescription(ranking))
                     .append(String.format(" (%d원)- %d개", ranking.getDistributionRatioPrice(), winningStatistics.getLottoQuantityOfRanking(ranking)))
                     .append(NEW_LINE);
         }
         System.out.println(stringBuilder);
     }
 
-    private static String rankingDescription(LottoRank ranking) {
-        if (LottoRank.SECOND.equals(ranking)) {
-            return String.format("%d개 일치, 보너스 볼 일치", ranking.getMatchingCounts());
+    private static String winningRankDescription(LottoRank winningRank) {
+        if (LottoRank.SECOND.equals(winningRank)) {
+            return String.format("%d개 일치, 보너스 볼 일치", winningRank.getWinningRankMatchingCount());
         }
-        return String.format("%d개 일치", ranking.getMatchingCounts());
+        return String.format("%d개 일치", winningRank.getWinningRankMatchingCount());
     }
 
 }
