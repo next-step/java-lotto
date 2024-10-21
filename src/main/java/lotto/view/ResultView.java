@@ -1,11 +1,12 @@
 package lotto.view;
 
+import lotto.common.Prize;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    private static final String[] PRIZE = {"0", "0", "0", "5000", "50000", "1500000", "2000000000"};
 
     private ResultView() {
     }
@@ -25,11 +26,11 @@ public class ResultView {
         System.out.println("----------");
 
         for (int count = 3; count <= 6; count++) {
-            System.out.println(count + "개 일치 (" + PRIZE[count] + "원)- " + winningStatics[count] + "개");
+            System.out.println(count + "개 일치 (" + Prize.PRIZE[count] + "원)- " + winningStatics[count] + "개");
         }
     }
 
     public static void printReturnRate(float returnRate) {
-        System.out.println("총 수익률은" + " " + String.format("%.2f", returnRate) + "입니다.");
+        System.out.println("총 수익률은 " + String.format("%.2f", returnRate) + "입니다.");
     }
 }

@@ -38,29 +38,36 @@ public class InputView {
     }
 
     private static void isValidWinningNumberInput(String lastWeekWinningNumbers) {
-        checkFormat(lastWeekWinningNumbers);
+        isValidFormat(lastWeekWinningNumbers);
 
         String[] numbers = lastWeekWinningNumbers.split(", ");
         Set<String> uniqueNumbers = new HashSet<>();
 
-        checkData(numbers, uniqueNumbers);
+        isValidNumber(numbers, uniqueNumbers);
     }
 
-    private static void checkFormat(String lastWeekWinningNumbers) {
+    private static void isValidFormat(String lastWeekWinningNumbers) {
         if (!lastWeekWinningNumbers.matches(WINNING_NUMBERS_FORMAT)) {
             throw new IllegalArgumentException("잘못된 입력형식입니다. 1, 2, 3, 4, 5, 6과 같은 형태로 입력해주세요");
         }
     }
 
-    private static void checkData(String[] numbers, Set<String> uniqueNumbers) {
+    private static void isValidNumber(String[] numbers, Set<String> uniqueNumbers) {
         for (String number : numbers) {
-            if (Integer.parseInt(number) < 1 || Integer.parseInt(number) > 45) {
-                throw new IllegalArgumentException("1부터 45 사이의 숫자만 입력 가능합니다.");
-            }
+            checkNumberRange(number);
+            checkDuplicateNumber(number, uniqueNumbers);
+        }
+    }
 
-            if (!uniqueNumbers.add(number)) {
-                throw new IllegalArgumentException("중복된 당첨번호가 입력되었습니다.");
-            }
+    private static void checkNumberRange(String number) {
+        if (Integer.parseInt(number) < 1 || Integer.parseInt(number) > 45) {
+            throw new IllegalArgumentException("1부터 45 사이의 숫자만 입력 가능합니다.");
+        }
+    }
+
+    private static void checkDuplicateNumber(String number, Set<String> uniqueNumbers) {
+        if (!uniqueNumbers.add(number)) {
+            throw new IllegalArgumentException("중복된 당첨번호가 입력되었습니다.");
         }
     }
 }
