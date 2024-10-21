@@ -27,7 +27,7 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             int count = lotto.lottoWinningStatus(winningLotto.getWinningLotto());
             boolean bonusHit = lotto.checkContainsBonusNumber(winningLotto.getBonusLottoNumber());
-            statistic.updatePrize(Prize.getHit(count),Prize.getValueByHit(count,bonusHit));
+            statistic.updatePrize(Prize.getHit(count,bonusHit));
         }
         return statistic;
     }

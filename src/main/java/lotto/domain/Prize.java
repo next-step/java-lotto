@@ -21,23 +21,15 @@ public enum Prize {
         this.bonus = bonus;
     }
 
-    public static Prize getHit(int hit) {
+    public static Prize getHit(int hit, boolean bonus) {
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.hit == hit)
+                .filter(prize -> prize.hit == hit && prize.bonus == bonus)
                 .findFirst()
                 .orElse(Prize.MISS);
     }
 
     public int getValue() {
         return value;
-    }
-
-    public static int getValueByHit(int hit, boolean bonus) {
-        return Arrays.stream(Prize.values())
-                .filter(prize -> prize.hit == hit && prize.bonus == bonus)
-                .map(Prize::getValue)
-                .findFirst()
-                .orElse(0);
     }
 
     private static class Constants {
