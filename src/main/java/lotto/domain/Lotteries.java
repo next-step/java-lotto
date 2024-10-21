@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotteries {
     private static final int LOTTO_PRICE = 1000;
@@ -27,7 +26,12 @@ public class Lotteries {
         return lotteries.size();
     }
 
-    public List<LottoResult> getLottoResults(Lottery winningLottery, BonusNumber bonusNumber) {
+    public LottoStatistics createStatistics(Lottery winningLottery, BonusNumber bonusNumber) {
+        List<LottoResult> lottoResults = getLottoResults(winningLottery, bonusNumber);
+        return LottoStatistics.create(lottoResults);
+    }
+
+    private List<LottoResult> getLottoResults(Lottery winningLottery, BonusNumber bonusNumber) {
         List<LottoResult> lottoResults = new ArrayList<>();
 
         for (Lottery lottery : lotteries) {
@@ -35,12 +39,6 @@ public class Lotteries {
         }
 
         return lottoResults;
-    }
-
-    public List<Integer> getWinningNumberCountList(Lottery winningLottery) {
-        return lotteries.stream()
-                .map(lottery -> lottery.countWinningNumbers(winningLottery))
-                .collect(Collectors.toList());
     }
 
     public List<Lottery> getLotteries() {
