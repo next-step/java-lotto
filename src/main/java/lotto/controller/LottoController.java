@@ -1,8 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.BonusNumber;
 import lotto.domain.Lotteries;
 import lotto.domain.Lottery;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -19,7 +19,7 @@ public class LottoController {
         Lottery winningLottery = new Lottery(inputWinningNumbers);
 
         Integer inputBonusNumber = InputView.inputBonusNumber();
-        BonusNumber bonusNumber = new BonusNumber(inputBonusNumber);
+        LottoNumber bonusNumber = new LottoNumber(inputBonusNumber);
 
         LottoStatistics lottoStatistics = lotteries.createStatistics(winningLottery, bonusNumber);
         float profitRate = lottoStatistics.calculateProfitRate(totalPurchaseAmount);

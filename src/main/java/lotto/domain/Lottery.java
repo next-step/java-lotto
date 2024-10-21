@@ -8,15 +8,18 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoNumberGenerator.LOTTO_NUMBERS_SIZE;
 
 public class Lottery {
-    private final Set<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lottery(Set<Integer> lottoNumbers) {
         validateLottoNumberSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
     public int countWinningNumbers(Lottery winningNumbers) {
-        Set<Integer> equalNumbers = new HashSet<>(this.lottoNumbers);
+        Set<LottoNumber> equalNumbers = new HashSet<>(this.lottoNumbers);
         equalNumbers.retainAll(winningNumbers.lottoNumbers);
 
         return equalNumbers.size();
@@ -29,13 +32,14 @@ public class Lottery {
 
     public List<Integer> getSortedLottoNumbers() {
         return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
                 .sorted()
                 .collect(Collectors.toList());
     }
 
-    public LottoResult createLottoResult(Lottery winningNumbers, BonusNumber bonusNumber) {
+    public LottoResult createLottoResult(Lottery winningNumbers, LottoNumber lottoNumber) {
         int equalNumberCount = countWinningNumbers(winningNumbers);
-        boolean hasBonusNumber = hasBonusNumber(bonusNumber.getBonusNumber());
+        boolean hasBonusNumber = hasBonusNumber(lottoNumber);
 
         return new LottoResult(hasBonusNumber, equalNumberCount);
     }
@@ -46,7 +50,7 @@ public class Lottery {
         }
     }
 
-    private boolean hasBonusNumber(int bonusNumber) {
+    private boolean hasBonusNumber(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 }

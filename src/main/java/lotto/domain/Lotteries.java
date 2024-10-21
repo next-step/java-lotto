@@ -26,12 +26,12 @@ public class Lotteries {
         return lotteries.size();
     }
 
-    public LottoStatistics createStatistics(Lottery winningLottery, BonusNumber bonusNumber) {
+    public LottoStatistics createStatistics(Lottery winningLottery, LottoNumber bonusNumber) {
         List<LottoResult> lottoResults = getLottoResults(winningLottery, bonusNumber);
         return LottoStatistics.create(lottoResults);
     }
 
-    private List<LottoResult> getLottoResults(Lottery winningLottery, BonusNumber bonusNumber) {
+    private List<LottoResult> getLottoResults(Lottery winningLottery, LottoNumber bonusNumber) {
         List<LottoResult> lottoResults = new ArrayList<>();
 
         for (Lottery lottery : lotteries) {
