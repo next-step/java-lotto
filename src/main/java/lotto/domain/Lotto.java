@@ -18,14 +18,14 @@ public class Lotto {
     public Lotto(int... numbers) {
         this(Arrays.stream(numbers)
                 .boxed()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList()));
     }
 
     public Lotto(String numbers) {
         this(Arrays.stream(numbers.split(DELIMITER))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList()));
     }
 

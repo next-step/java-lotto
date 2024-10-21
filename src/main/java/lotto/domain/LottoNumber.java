@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -8,10 +10,26 @@ public class LottoNumber {
     private static final int LOTTO_MAX_NUMBER = 45;
 
     private final int lottoNumber;
+    private static final Map<Integer, LottoNumber> cachedLottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    static {
+        cachedLottoNumber = new HashMap<>();
+        for (int num = LOTTO_MIN_NUMBER; num <= LOTTO_MAX_NUMBER; num++) {
+            cachedLottoNumber.put(num, new LottoNumber(num));
+        }
+    }
+
+    private LottoNumber(int lottoNumber) {
         validateInputValue(lottoNumber);
         this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber from(int number) {
+        LottoNumber lottoNumber = cachedLottoNumber.get(number);
+        if (lottoNumber != null) {
+            return lottoNumber;
+        }
+        return new LottoNumber(number);
     }
 
     private void validateInputValue(int value) {

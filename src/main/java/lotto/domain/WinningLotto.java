@@ -19,8 +19,8 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> numbers, int bonus) {
         this(new Lotto(numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(bonus));
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(bonus));
     }
 
     public WinningLotto(String numbers, int bonus) {

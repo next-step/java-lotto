@@ -13,8 +13,8 @@ class LottoQuantityTest {
     }
 
     @Test
-    void 구입금액_변환_수량() {
+    void 구입금액_반환() {
         LottoQuantity lottoQuantity = new LottoQuantity(100000);
-        assertThat(lottoQuantity.getTotalQuantity()).isEqualTo(100);
+        assertThat(lottoQuantity.getPurchaseAmount()).isEqualTo(100000);
     }
 }

@@ -7,7 +7,6 @@ public class LottoQuantity {
     private static final int LOTTO_PRICE = 1000;
 
     private final int totalQuantity;
-    private int manualQuantity;
 
     public LottoQuantity(int amount) {
         validateInputValue(amount);
@@ -20,24 +19,12 @@ public class LottoQuantity {
         }
     }
 
-    public void setManualQuantity(int manualQuantity) {
-        this.manualQuantity = manualQuantity;
-    }
-
     public int getTotalQuantity() {
         return totalQuantity;
     }
 
-    public int getManualQuantity() {
-        return manualQuantity;
-    }
-
-    public int getAutoQuantity() {
-        return totalQuantity - manualQuantity;
-    }
-
     public int getPurchaseAmount() {
-        return LOTTO_PRICE * totalQuantity;
+        return totalQuantity * LOTTO_PRICE;
     }
 
     @Override
@@ -45,11 +32,11 @@ public class LottoQuantity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoQuantity that = (LottoQuantity) o;
-        return totalQuantity == that.totalQuantity && manualQuantity == that.manualQuantity;
+        return totalQuantity == that.totalQuantity;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalQuantity, manualQuantity);
+        return Objects.hash(totalQuantity);
     }
 }

@@ -15,10 +15,6 @@ public class LottoGame {
         return Collections.unmodifiableList(lottos);
     }
 
-    public void addAllLottos(List<Lotto> manualLottos) {
-        lottos.addAll(manualLottos);
-    }
-
     public WinningResult play(WinningLotto winning) {
         WinningResult result = new WinningResult();
         for (Lotto lotto : lottos) {
