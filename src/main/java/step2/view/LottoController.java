@@ -1,6 +1,8 @@
 package step2.view;
 
-import step2.domain.LottoHistory;
+import java.util.List;
+
+import step2.domain.Lotto;
 import step2.domain.LottoStast;
 import step2.domain.Money;
 import step2.service.LottoGame;
@@ -8,10 +10,10 @@ import step2.service.LottoGame;
 public class LottoController {
 	public static void main(String[] args) {
 		Money money = InputView.getMoney();
-		LottoHistory result = LottoGame.playLotto(money);
-		ResultView.printLottoResult(result);
+		List<Lotto> lottos = LottoGame.playLotto(money);
+		ResultView.printLottoResult(lottos);
 		String winningNumbers = InputView.getWinningNumbers();
-		LottoStast stastResult = LottoGame.getLottoStast(result, winningNumbers);
+		LottoStast stastResult = LottoGame.getLottoStast(lottos, winningNumbers);
 		ResultView.printLottoStast(stastResult);
 	}
 }

@@ -1,7 +1,7 @@
 package step2.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static step2.service.LottoGame.*;
+import static step2.domain.var.LottoConstant.*;
 
 import java.util.List;
 

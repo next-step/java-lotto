@@ -1,9 +1,11 @@
 package step2.service;
 
+import static step2.domain.var.LottoConstant.*;
+
 import java.util.List;
 
 import step2.domain.Lotto;
-import step2.domain.LottoHistory;
+import step2.domain.LottoNumber;
 import step2.domain.LottoShop;
 import step2.domain.LottoStast;
 import step2.domain.Money;
@@ -11,15 +13,10 @@ import step2.exception.MoneyOverLimitException;
 import step2.exception.NotEnoughMoneyException;
 
 public class LottoGame {
-	public static final int LOTTO_PRICE = 1_000;
-	public static final int MAX_LOTTO_PURCHASE_AMOUNT = 100_000;
 
-	public static LottoHistory playLotto(Money money) {
+	public static List<Lotto> playLotto(Money money) {
 		moneyRangeCheck(money);
-		LottoHistory result = new LottoHistory();
-		List<Lotto> lotto = LottoShop.buyLottos(money);
-		result.addHistory(lotto);
-		return result;
+		return LottoShop.buyLottos(money);
 	}
 
 	private static void moneyRangeCheck(Money money) {
@@ -31,7 +28,7 @@ public class LottoGame {
 		}
 	}
 
-	public static LottoStast getLottoStast(LottoHistory result, String winningNumbers) {
-		return null;
+	public static LottoStast getLottoStast(List<Lotto> result, String winningNumbers) {
+		return new LottoStast(result, LottoNumber.listFrom(winningNumbers));
 	}
 }

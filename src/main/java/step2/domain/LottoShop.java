@@ -9,16 +9,16 @@ public class LottoShop {
 		int amount = money.getMoney() / 1000;
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < amount; i++) {
-			lottos.add(new Lotto(getShuffledLotto()));
+			lottos.add(new Lotto(shuffleSixNumbers()));
 		}
 		return lottos;
 	}
 
-	private static List<LottoNumber> getShuffledLotto() {
+	private static List<LottoNumber> shuffleSixNumbers() {
 		List<LottoNumber> numberList = LottoNumber.getLottoNumbers();
 		Collections.shuffle(numberList);
-		List<LottoNumber> result = numberList.subList(0, 6);
-		Collections.sort(result);
-		return result;
+		List<LottoNumber> lottoNumbers = numberList.subList(0, 6);
+		Collections.sort(lottoNumbers);
+		return lottoNumbers;
 	}
 }
