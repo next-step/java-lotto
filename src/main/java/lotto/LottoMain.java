@@ -18,6 +18,8 @@ public class LottoMain {
 
         int passiveLottoTicketCount = inputView.getPassiveLottoTicketCount();
 
+        List<List<Integer>> passiveLottoNumbers = inputView.getPassiveLottoNumbers(passiveLottoTicketCount);
+
         Lotto lotto = new Lotto(new AutoGenerator());
         int lottoTicketCount = lotto.getLottoTicketCount(purchasePrice);
         resultView.print(lottoTicketCount + "개를 구매했습니다.");
