@@ -5,25 +5,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import static lotto.domain.LottoNumber.LOTTO_NUMBER_SET;
 
 public class LottoNumbers {
     public static final int LOTTO_SHEET_PRICE = 1_000;
     public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final List<Integer> LOTTO_NUMBER_SET = IntStream.rangeClosed(1, 45)
-            .boxed()
-            .collect(Collectors.toList());
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호 개수는 6개입니다.");
         }
 
-        lottoNumbers.forEach(LottoNumbers::validate);
-
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public LottoNumbers(int... lottoNumbers) {
@@ -48,17 +46,11 @@ public class LottoNumbers {
         return lottoNumbersList;
     }
 
-    public static int calculateSheetCount(int money) {
+    public static int calculateNumbersCount(int money) {
         return money / LOTTO_SHEET_PRICE;
     }
 
-    private static void validate(int lottoNumber) {
-        if (!LottoNumbers.LOTTO_NUMBER_SET.contains(lottoNumber)) {
-            throw new IllegalArgumentException("로또 번호의 범위는 1~45까지입니다.");
-        }
-    }
-
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(this.lottoNumbers);
     }
 
@@ -69,7 +61,8 @@ public class LottoNumbers {
                 .count();
     }
 
-    protected boolean isContained(int targetNumber) {
-        return this.lottoNumbers.contains(targetNumber);
+    protected boolean isContained(LottoNumber targetNumber) {
+        return getLottoNumbers().stream()
+                .anyMatch(targetNumber::equals);
     }
 }
