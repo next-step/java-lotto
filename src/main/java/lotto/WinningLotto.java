@@ -9,7 +9,15 @@ public class WinningLotto {
     public WinningLotto(List<Integer> lottoNumbers, int bonusNumber) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers); //중복 숫자, 갯수 확인
         this.bonusNumber = new LottoNumber(bonusNumber); //숫자 범위 확인
-        this.lottoNumbers.hasLottoNumber(this.bonusNumber); //이미 입력한 당첨번호 확인
+        this.hasDuplicateBonusNumber(); //이미 입력한 당첨번호 확인
+    }
+
+
+    public boolean hasDuplicateBonusNumber(){
+        if(this.lottoNumbers.hasLottoNumber(bonusNumber)){
+            throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
+        }
+        return false;
     }
 
     public boolean hasLottoNumber(LottoNumber lottoNumber){
