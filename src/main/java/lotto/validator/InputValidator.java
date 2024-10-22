@@ -10,7 +10,7 @@ public class InputValidator {
 
     private void isEmpty(String input) {
         if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException("구매 금액을 입력해 주세요.");
+            throw new IllegalArgumentException("값을 입력해 주세요.");
         }
     }
 
@@ -18,13 +18,13 @@ public class InputValidator {
         try {
             int price = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입 금액을 확인해 주세요.");
+            throw new IllegalArgumentException("값을 확인해 주세요.");
         }
     }
 
     private void isNegativePrice(String input) {
         if (Integer.parseInt(input) < 0) {
-            throw new IllegalArgumentException("구매 금액은 음수일 수 없습니다.");
+            throw new IllegalArgumentException("값은 음수일 수 없습니다.");
         }
     }
 

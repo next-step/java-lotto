@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.utils.StringUtils;
 import lotto.validator.InputValidator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -19,6 +20,35 @@ public class InputView {
         inputValidator.validate(inputPrice);
 
         return Integer.parseInt(inputPrice);
+    }
+
+    public int getPassiveLottoTicketCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        String inputPassiveLottoTicketCount = scanner.nextLine();
+        inputValidator.validate(inputPassiveLottoTicketCount);
+
+        return Integer.parseInt(inputPassiveLottoTicketCount);
+    }
+
+    public List<List<Integer>> getPassiveLottoNumbers(int passiveLottoTicketCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<List<Integer>> passiveLottoNumberList = new ArrayList<>();
+
+        for (int i = 0; i < passiveLottoTicketCount; i++) {
+            passiveLottoNumberList.add(getInputPassiveLottoNumbers());
+        }
+
+        return passiveLottoNumberList;
+    }
+
+    private List<Integer> getInputPassiveLottoNumbers() {
+        String inputLottoNumbers = scanner.nextLine();
+
+        return Arrays.stream(StringUtils.splitByComma(inputLottoNumbers))
+                     .map(Integer::parseInt)
+                     .collect(Collectors.toList());
     }
 
     public List<Integer> getWinningNumbers() {

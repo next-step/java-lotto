@@ -2,14 +2,18 @@ package lotto.domain.ticket;
 
 import lotto.application.LottoGenerator;
 
-public class LottoTicketGenerator {
-    private final LottoGenerator lottoGenerator;
+import java.util.List;
+import java.util.stream.Collectors;
 
-    public LottoTicketGenerator(LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
+public class LottoTicketGenerator {
+
+    public LottoTicket getPassiveTicket(List<Integer> passiveLottoNumbers) {
+        return new LottoTicket(passiveLottoNumbers.stream()
+                                                  .map(LottoNumber::new)
+                                                  .collect(Collectors.toList()));
     }
 
-    public LottoTicket getTicket() {
+    public LottoTicket getAutoTicket(LottoGenerator lottoGenerator) {
         return new LottoTicket(lottoGenerator.getLottoNumbers());
     }
 

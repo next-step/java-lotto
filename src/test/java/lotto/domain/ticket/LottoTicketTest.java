@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
     private WinningNumbers winningNumbers;
@@ -16,6 +17,18 @@ public class LottoTicketTest {
     @BeforeEach
     void before() {
         winningNumbers = getWinningNumbers();
+    }
+
+    @Test
+    @DisplayName("로또 번호의 수가 6개가 아닌 경우 IllegalArgumentException이 발생한다.")
+    void 로또번호_수가_6개가_아닌_경우() {
+        List<Integer> lottoNumbers = List.of(10, 13, 39, 5, 23);
+
+        assertThatThrownBy(() -> {
+            LottoTicket lottoTicket = new LottoTicket(lottoNumbers.stream()
+                                                                  .map(LottoNumber::new)
+                                                                  .collect(Collectors.toList()));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

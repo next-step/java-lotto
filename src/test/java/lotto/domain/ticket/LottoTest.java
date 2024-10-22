@@ -5,6 +5,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class LottoTest {
 
     @Test
@@ -20,12 +23,29 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 구입 티켓 수만큼 로또를 발행하여 반환한다.")
-    void 로또_티켓_수만큼_로또_발행() {
+    @DisplayName("자동로또 구입 티켓 수만큼 로또를 발행하여 반환한다.")
+    void 자동로또_티켓_수만큼_로또_발행() {
         Lotto lotto = new Lotto(new AutoGenerator());
 
-        LottoTickets issuedTickets = lotto.issue(10);
+        LottoTickets issuedTickets = lotto.issue(10, null);
 
         Assertions.assertThat(issuedTickets.getLottoTicketsSize()).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("수동로또 번호 리스트 수만큼 수동로또를 발행한다.")
+    void 수동로또_발행() {
+        Lotto lotto = new Lotto(new AutoGenerator());
+
+        List<Integer> passiveLottoNumbers1 = List.of(10, 39, 4, 1, 23, 31);
+        List<Integer> passiveLottoNumbers2 = List.of(1, 2, 3, 4, 5, 6);
+
+        List<List<Integer>> passiveLottoNumbersList = new ArrayList<>();
+        passiveLottoNumbersList.add(passiveLottoNumbers1);
+        passiveLottoNumbersList.add(passiveLottoNumbers2);
+
+        LottoTickets issuedTickets = lotto.issue(0, passiveLottoNumbersList);
+
+        Assertions.assertThat(issuedTickets.getLottoTicketsSize()).isEqualTo(2);
     }
 }

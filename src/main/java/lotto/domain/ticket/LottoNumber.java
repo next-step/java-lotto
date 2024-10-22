@@ -11,6 +11,9 @@ public class LottoNumber {
     private final Integer lottoNumber;
 
     public LottoNumber(Integer lottoNumber) {
+        if (lottoNumber < LOTTO_NUMBER_MIN || lottoNumber > LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException("[" + lottoNumber + "] 허용 범위를 벗어난 로또 번호입니다.");
+        }
         this.lottoNumber = lottoNumber;
     }
 
