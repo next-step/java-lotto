@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +24,7 @@ public class LottoCountTest {
     void getTotalLottoCount() {
         LottoCount lottoCount = new LottoCount(15000);
         assertThat(lottoCount.getTotalLottoCount()).isEqualTo(15);
-        assertThat(lottoCount.getManualLottoCount()).isEqualTo(1);
+        assertThat(lottoCount.getManualLottoCount()).isEqualTo(0);
     }
 
     @Test
@@ -51,6 +50,38 @@ public class LottoCountTest {
         assertThat(lottoCount.getManualLottoCount()).isEqualTo(1);
         assertThat(lottoCount.getTotalLottoCount()).isEqualTo(15);
         assertThat(lottoCount.getAutoLottoCount()).isEqualTo(14);
+    }
+
+    @Test
+    void isMix1() {
+        LottoCount lottoCount = new LottoCount(3000, 1);
+        assertThat(lottoCount.isMix()).isTrue();
+    }
+    @Test
+    void isMix2() {
+        LottoCount lottoCount = new LottoCount(3000);
+        assertThat(lottoCount.isMix()).isFalse();
+        assertThat(lottoCount.isAuto()).isTrue();
+    }
+
+    @Test
+    void getLottoNumberGenerator_Auto() {
+        LottoCount lottoCount = new LottoCount(3000);
+        assertThat(lottoCount.getLottoNumberGenerator()).isInstanceOf(AutoLottoNumberGenerator.class);
+
+    }
+
+    @Test
+    void getLottoNumberGenerator_Mix() {
+        LottoCount lottoCount = new LottoCount(3000, 1);
+        assertThat(lottoCount.getLottoNumberGenerator()).isInstanceOf(MixLottoNumberGenerator.class);
+
+    }
+
+    @Test
+    void getLottoNumberGenerator_Manual() {
+        LottoCount lottoCount = new LottoCount(3000, 3);
+        assertThat(lottoCount.getLottoNumberGenerator()).isInstanceOf(ManualLottoNumberGenerator.class);
     }
 
 }

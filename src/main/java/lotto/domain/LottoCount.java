@@ -23,9 +23,6 @@ public class LottoCount {
         }
         this.manualLottoCount = manualLottoCount;
     }
-
-
-
     public int getTotalLottoCount() {
         return totalLottoCount;
     }
@@ -38,10 +35,29 @@ public class LottoCount {
         return totalLottoCount - manualLottoCount;
     }
 
+    public boolean isAuto() {
+        return totalLottoCount == getAutoLottoCount();
+    }
 
+    public boolean isManual() {
+        return totalLottoCount == manualLottoCount;
+    }
+
+    public boolean isMix() {
+        return manualLottoCount>0 && getAutoLottoCount()>0;
+    }
 
     public BigDecimal getTotalPaymentAmount() {
         return new BigDecimal(UNIT_AMOUNT).multiply(BigDecimal.valueOf(totalLottoCount));
     }
 
+    public LottoNumberGenerator getLottoNumberGenerator() {
+        if (isMix()) {
+            return new MixLottoNumberGenerator(this);
+        }
+        if (isAuto()) {
+            return new AutoLottoNumberGenerator(getAutoLottoCount());
+        }
+        return new ManualLottoNumberGenerator(manualLottoCount);
+    }
 }
