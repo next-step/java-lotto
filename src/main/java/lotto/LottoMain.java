@@ -13,11 +13,11 @@ public class LottoMain {
     public static void main(String[] args) {
         LottoGenerator generator = new LottoGenerator(inputAmount());
 
-        String[] manualLottoNumbers = inputManualLottoNumbers(inputManualQuantity());
+        List<String> manualLottoNumbers = inputManualLottoNumbers(inputManualQuantity());
         List<Lotto> userLottos = generator.generatorLottos(manualLottoNumbers);
 
         LottoGame lottoGame = new LottoGame(userLottos);
-        ResultView.printPurchaseQuantity(manualLottoNumbers.length, userLottos.size() - manualLottoNumbers.length);
+        ResultView.printPurchaseQuantity(manualLottoNumbers.size(), userLottos.size() - manualLottoNumbers.size());
         printUserLottos(lottoGame);
 
         WinningLotto winningLotto = new WinningLotto(inputLastWinningNumbers(), inputBonusNumber());

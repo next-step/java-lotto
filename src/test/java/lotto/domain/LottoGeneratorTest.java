@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +26,7 @@ class LottoGeneratorTest {
         Lotto lotto2 = new Lotto(LOTTONUMBERS2);
 
         LottoGenerator generator = new LottoGenerator(3_000);
-        List<Lotto> issuedLottos = generator.generatorLottos(new String[]{LOTTONUMBERS1, LOTTONUMBERS2});
+        List<Lotto> issuedLottos = generator.generatorLottos(Arrays.asList(LOTTONUMBERS1, LOTTONUMBERS2));
         assertThat(issuedLottos).contains(lotto1, lotto2);
     }
 
@@ -33,7 +34,7 @@ class LottoGeneratorTest {
     @DisplayName("수동로또 용지와 총 갯수를 입력하면 갯수만큼 로또를 반환한다.")
     void 수동로또_자동로또_반환_사이즈검증() {
         LottoGenerator generator = new LottoGenerator(5_000);
-        List<Lotto> issuedLottos = generator.generatorLottos(new String[]{LOTTONUMBERS1, LOTTONUMBERS2});
+        List<Lotto> issuedLottos = generator.generatorLottos(Arrays.asList(LOTTONUMBERS1, LOTTONUMBERS2));
         assertThat(issuedLottos).hasSize(5);
     }
 }

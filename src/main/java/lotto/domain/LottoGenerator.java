@@ -29,15 +29,15 @@ public class LottoGenerator {
         }
     }
 
-    public List<Lotto> generatorLottos(String[] manualLottos) {
+    public List<Lotto> generatorLottos(List<String> manualLottos) {
         validateInputValue(manualLottos);
         List<Lotto> lottos = new ArrayList<>(extractLottosFromStrings(manualLottos));
         lottos.addAll(generateLottos(purchasableLottoCount()));
         return lottos;
     }
 
-    private void validateInputValue(String[] manualLottos) {
-        int quantity = manualLottos.length;
+    private void validateInputValue(List<String> manualLottos) {
+        int quantity = manualLottos.size();
         if (money < quantity * LOTTO_PRICE) {
             throw new IllegalArgumentException("현재 금액으로 수동 로또 " + quantity + "장을 살 수 없습니다.");
         }
@@ -45,8 +45,8 @@ public class LottoGenerator {
         this.purchaseCount += quantity;
     }
 
-    private List<Lotto> extractLottosFromStrings(String[] lottosStr) {
-        return Arrays.stream(lottosStr)
+    private List<Lotto> extractLottosFromStrings(List<String> lottosStr) {
+        return lottosStr.stream()
                 .map(Lotto::new)
                 .collect(Collectors.toList());
     }
