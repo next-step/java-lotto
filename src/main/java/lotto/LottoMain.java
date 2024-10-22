@@ -16,6 +16,8 @@ public class LottoMain {
     public static void main(String[] args) {
         int purchasePrice = inputView.getPurchasePrice();
 
+        int passiveLottoTicketCount = inputView.getPassiveLottoTicketCount();
+
         Lotto lotto = new Lotto(new AutoGenerator());
         int lottoTicketCount = lotto.getLottoTicketCount(purchasePrice);
         resultView.print(lottoTicketCount + "개를 구매했습니다.");

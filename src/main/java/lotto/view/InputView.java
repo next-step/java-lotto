@@ -21,6 +21,15 @@ public class InputView {
         return Integer.parseInt(inputPrice);
     }
 
+    public int getPassiveLottoTicketCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        String inputPassiveLottoTicketCount = scanner.nextLine();
+        inputValidator.validate(inputPassiveLottoTicketCount);
+
+        return Integer.parseInt(inputPassiveLottoTicketCount);
+    }
+
     public List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
