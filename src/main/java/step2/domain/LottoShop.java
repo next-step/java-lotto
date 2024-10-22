@@ -8,13 +8,17 @@ public class LottoShop {
 	public static List<Lotto> buyLottos(Money money) {
 		int amount = money.getMoney() / 1000;
 		List<Lotto> lottos = new ArrayList<>();
-		List<LottoNumber> numbers = LottoNumber.getLottoNumbers();
 		for (int i = 0; i < amount; i++) {
-			Collections.shuffle(numbers);
-			Collections.sort(numbers);
-			Lotto lotto = new Lotto(numbers.subList(0, 6));
-			lottos.add(lotto);
+			lottos.add(new Lotto(getShuffledLotto()));
 		}
 		return lottos;
+	}
+
+	private static List<LottoNumber> getShuffledLotto() {
+		List<LottoNumber> numberList = LottoNumber.getLottoNumbers();
+		Collections.shuffle(numberList);
+		List<LottoNumber> result = numberList.subList(0, 6);
+		Collections.sort(result);
+		return result;
 	}
 }

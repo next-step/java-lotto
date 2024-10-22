@@ -32,4 +32,8 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 	public int compareTo(LottoNumber o) {
 		return Integer.compare(this.number, o.number);
 	}
+
+	public int getNumber() {
+		return number;
+	}
 }

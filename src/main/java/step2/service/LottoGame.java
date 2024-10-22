@@ -3,7 +3,7 @@ package step2.service;
 import java.util.List;
 
 import step2.domain.Lotto;
-import step2.domain.LottoResult;
+import step2.domain.LottoHistory;
 import step2.domain.LottoShop;
 import step2.domain.LottoStast;
 import step2.domain.Money;
@@ -14,9 +14,9 @@ public class LottoGame {
 	public static final int LOTTO_PRICE = 1_000;
 	public static final int MAX_LOTTO_PURCHASE_AMOUNT = 100_000;
 
-	public static LottoResult playLotto(Money money) {
+	public static LottoHistory playLotto(Money money) {
 		moneyRangeCheck(money);
-		LottoResult result = new LottoResult();
+		LottoHistory result = new LottoHistory();
 		List<Lotto> lotto = LottoShop.buyLottos(money);
 		result.addHistory(lotto);
 		return result;
@@ -31,7 +31,7 @@ public class LottoGame {
 		}
 	}
 
-	public static LottoStast getLottoStast(LottoResult result, String winningNumbers) {
+	public static LottoStast getLottoStast(LottoHistory result, String winningNumbers) {
 		return null;
 	}
 }

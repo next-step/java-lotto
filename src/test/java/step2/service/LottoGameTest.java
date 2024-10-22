@@ -6,11 +6,20 @@ import static step2.service.LottoGame.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import step2.domain.LottoHistory;
 import step2.domain.Money;
 import step2.exception.MoneyOverLimitException;
 import step2.exception.NotEnoughMoneyException;
 
 class LottoGameTest {
+	@Test
+	@DisplayName("구입 금액만큼 자동으로 발급하는지 이력을 확인하는 테스트")
+	public void playLottoTest() {
+		Money money = new Money(5 * LOTTO_PRICE);
+		LottoHistory lottoHistory = LottoGame.playLotto(money);
+		assertThat(lottoHistory.getHistory().size()).isEqualTo(5);
+	}
+
 	@Test
 	@DisplayName("구입 금액이 1000원보다 낮을경우 익셉션을 던지는 테스트")
 	public void minMoneyCheckTest() {
@@ -27,6 +36,5 @@ class LottoGameTest {
 			Money money = new Money(MAX_LOTTO_PURCHASE_AMOUNT + 1000);
 			playLotto(money);
 		}).isInstanceOf(MoneyOverLimitException.class);
-
 	}
 }
