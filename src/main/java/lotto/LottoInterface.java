@@ -27,11 +27,11 @@ public class LottoInterface {
         OutputView.printLottos(totalLottos);
 
         String[] lastWinningLottoNumbersInput = InputView.getLastWinningLottoNumbers();
-        int bonusBall = InputView.getBonusBallFromUser();
+        int bonusLottoNumber = InputView.getBonusBallFromUser();
 
         OutputView.printWinningStatistics(
                 lottoAmountPurchased,
-                lottoProgram.createWinningStatistics(totalLottos, lastWinningLottoNumbersInput, bonusBall));
+                lottoProgram.createWinningStatistics(totalLottos, lastWinningLottoNumbersInput, bonusLottoNumber));
     }
 
     private static void validateInputManualLottos(List<String[]> manualLottos, int manualLottoQuantity) {

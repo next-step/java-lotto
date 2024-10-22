@@ -37,9 +37,9 @@ public class LottoProgram {
     }
 
     public LottoWinningStatistics createWinningStatistics(List<Lotto> userLotto,
-                                                          String[] winningLottoNumbersInput, int bonusBall) {
+                                                          String[] winningLottoNumbersInput, int bonusLottoNumber) {
         return new LottoWinningStatistics(
                 userLotto,
-                new WinningLotto(new Lotto(winningLottoNumbersInput), new LottoNumber(bonusBall)));
+                new WinningLotto(winningLottoNumbersInput, bonusLottoNumber));
     }
 }
