@@ -45,7 +45,7 @@
 - increase 검증
 - 같은 Rank인지 메소드 검증
 
-### WinningText(당첨 번호 String 입력 시 리스트 반환 클래스)
+### WinningTexts(당첨 번호 String 입력 시 리스트 반환 클래스)
 - 당첨 숫자 리스트 반환 검증
 
 ### LottoWinningScanner (매칭 시 결과 반환 메소드 - 수익률 및 결과 도출)
@@ -54,3 +54,6 @@
 ### Winning(당첨번호, 보너스번호 도메인)
 - 보너스 번호 범위 검증
 - 당첨번호에 보너스 번호 포함되어 있으면 예외 처리
+
+### LottoNumbers(번호)
+- 범위 검증
