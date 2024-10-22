@@ -15,7 +15,7 @@ public class LottoAnalyzerTest {
 
     @Test
     void 각_등수별_몇개_맞추었는지_검증() {
-        LottoResultAnalyzer lottoResultAnalyzer = new LottoResultAnalyzer();
+        LottoAnalyzer lottoAnalyzer = new LottoAnalyzer();
 
         List<Lotto> lottos = Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), // 1등
@@ -29,7 +29,7 @@ public class LottoAnalyzerTest {
         Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
         Winning winning = new Winning(winningNumbers, 7);
 
-        List<WinningResult> analyzer = lottoResultAnalyzer.analyzer(lottos, winning);
+        List<WinningResult> analyzer = lottoAnalyzer.analyzer(lottos, winning);
 
         Map<Rank, Integer> collect = analyzer.stream().collect(Collectors.toMap(WinningResult::getRank, WinningResult::getCount));
 

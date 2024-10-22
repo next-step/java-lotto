@@ -12,11 +12,10 @@ public class LottoMachine {
     }
 
     public static List<Lotto> insert(int inputMoney) {
+        final LottoRandomizer lottoRandomizer = new LottoRandomizer();
         List<Lotto> lottos = new ArrayList<>();
-
         for (int i = 0; i < getLottoCount(inputMoney); i++) {
-            List<Integer> numberRandomizer = LottoRandomizer.create();
-            lottos.add(issue(numberRandomizer));
+            lottos.add(issue(lottoRandomizer.lottoShuffle()));
         }
         return lottos;
     }

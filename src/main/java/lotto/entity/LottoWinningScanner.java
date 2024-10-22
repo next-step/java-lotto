@@ -11,9 +11,9 @@ public class LottoWinningScanner {
     }
 
     public static LottoResult result(List<Lotto> lottos, Winning winning, int inputMoney) {
-        final LottoResultAnalyzer lottoResultAnalyzer = new LottoResultAnalyzer();
+        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer();
 
-        List<WinningResult> analyzer = lottoResultAnalyzer.analyzer(lottos, winning);
+        List<WinningResult> analyzer = lottoAnalyzer.analyzer(lottos, winning);
         BigDecimal totalPrizeMoney = RankCalculator.sum(analyzer);
         BigDecimal rate = RankCalculator.calculateRate(inputMoney, totalPrizeMoney);
 

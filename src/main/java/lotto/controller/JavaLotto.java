@@ -43,7 +43,7 @@ public class JavaLotto {
     }
 
     private static LottoNumbersDto createNumbersDto(Lotto lotto) {
-        return new LottoNumbersDto(lotto.getNumbers());
+        return new LottoNumbersDto(lotto.getLottoNumbers());
     }
 
     private static ResultDto toDto(LottoResult result) {

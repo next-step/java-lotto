@@ -68,7 +68,6 @@ public class ResultView {
 
     }
 
-
     private static void printRateOfReturn(BigDecimal rate) {
         System.out.printf(RATE_OF_RETURN_MESSAGE, rate);
     }

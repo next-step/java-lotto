@@ -2,12 +2,11 @@ package lotto.entity;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
-public class LottoResultAnalyzer {
+public class LottoAnalyzer {
     private final List<WinningResult> winningResults;
 
-    public LottoResultAnalyzer() {
+    public LottoAnalyzer() {
         winningResults = Arrays.asList(
                 new WinningResult(Rank.FIFTH),
                 new WinningResult(Rank.FOURTH),
@@ -19,9 +18,10 @@ public class LottoResultAnalyzer {
 
     public List<WinningResult> analyzer(List<Lotto> lottos, Winning winning) {
         for (Lotto lotto : lottos) {
-            Set<Integer> winningNumbers = winning.getWinningNumbers().getNumbers();
-            int bonusNumber = winning.getBonusNumber();
-            Rank rank = Rank.valueOf(lotto.matchCount(winningNumbers), lotto.isCollectBonusNumber(bonusNumber));
+            int matchCount = winning.matchCount(lotto);
+            boolean isCollectBonus = winning.isCollectBonus(lotto);
+
+            Rank rank = Rank.valueOf(matchCount, isCollectBonus);
             process(rank);
         }
         return winningResults;
@@ -31,7 +31,7 @@ public class LottoResultAnalyzer {
         if (rank == Rank.MISS) {
             return;
         }
-        winningResults.stream().filter(w -> w.isSame(rank)).forEach(w -> increase(w));
+        winningResults.stream().filter(winningResult -> winningResult.isSame(rank)).forEach(winningResult -> increase(winningResult));
     }
 
     private void increase(WinningResult search) {

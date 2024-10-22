@@ -3,22 +3,17 @@ package lotto.entity;
 import java.util.Set;
 
 public class Winning {
-    private final WinningNumbers winningNumbers;
-    private final int bonusNumber;
+    private final Lotto winningNumbers;
+    private final LottoNumber bonusNumber;
 
     public Winning(Set<Integer> numbers, int bonusNumber) {
         validate(numbers, bonusNumber);
-        winningNumbers = new WinningNumbers(numbers);
-        this.bonusNumber = bonusNumber;
+        this.winningNumbers = new Lotto(numbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     private void validate(Set<Integer> numbers, int bonusNumber) {
-        validateRange(bonusNumber);
         checkForDuplicates(numbers, bonusNumber);
-    }
-
-    private void validateRange(int bonusNumber) {
-        LottoNumberRange.validateRange(bonusNumber);
     }
 
     private void checkForDuplicates(Set<Integer> numbers, int bonusNumber) {
@@ -27,11 +22,11 @@ public class Winning {
         }
     }
 
-    public WinningNumbers getWinningNumbers() {
-        return winningNumbers;
+    public int matchCount(Lotto lotto) {
+        return lotto.matchCount(winningNumbers);
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
+    public boolean isCollectBonus(Lotto lotto) {
+        return lotto.isCollectBonusNumber(this.bonusNumber);
     }
 }

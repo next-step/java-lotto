@@ -1,57 +1,40 @@
 package lotto.entity;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 
 public enum Rank {
-    FIRST(6, BigDecimal.valueOf(2_000_000_000)),
-    SECOND(5, BigDecimal.valueOf(30_000_000)),
-    THIRD(5, BigDecimal.valueOf(1_500_000)),
-    FOURTH(4, BigDecimal.valueOf(55_000)),
-    FIFTH(3, BigDecimal.valueOf(5_000)),
-    MISS(0, BigDecimal.valueOf(0));
+    FIRST(6, BigDecimal.valueOf(2_000_000_000), false),
+    SECOND(5, BigDecimal.valueOf(30_000_000), true),
+    THIRD(5, BigDecimal.valueOf(1_500_000), false),
+    FOURTH(4, BigDecimal.valueOf(55_000), false),
+    FIFTH(3, BigDecimal.valueOf(5_000), false),
+    MISS(0, BigDecimal.valueOf(0), false);
 
     private static final int MAX_MISS_COUNT = 2;
     private static final int BONUS_MATCH_COUNT = 5;
     private final int collectCount;
     private final BigDecimal prizeMoney;
+    private final boolean matchBonus;
 
-    Rank(int collectCount, BigDecimal prizeMoney) {
+    Rank(int collectCount, BigDecimal prizeMoney, boolean matchBonus) {
         this.collectCount = collectCount;
         this.prizeMoney = prizeMoney;
+        this.matchBonus = matchBonus;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        Rank result = Rank.MISS;
-        if (countOfMatch <= MAX_MISS_COUNT) {
-            return Rank.MISS;
+    public static Rank valueOf(int countOfMatch, boolean bonus) {
+        if (countOfMatch == Rank.BONUS_MATCH_COUNT) {
+            return Arrays.stream(Rank.values()).filter(rank -> rank.collectCount == countOfMatch && rank.matchBonus == bonus).findFirst().orElse(Rank.MISS);
         }
 
-        for (Rank rank : Rank.values()) {
-            result = winning(result, rank, countOfMatch, matchBonus);
+        if (countOfMatch > MAX_MISS_COUNT) {
+            return Arrays.stream(Rank.values()).filter(rank -> rank.collectCount == countOfMatch).findFirst().orElse(Rank.MISS);
         }
 
-        return result;
+        return Rank.MISS;
     }
-
-    private static Rank winning(Rank result, Rank rank, int collectCount, boolean matchBonus) {
-        if (result != Rank.MISS) {
-            return result;
-        }
-        if (collectCount == BONUS_MATCH_COUNT && matchBonus == true) {
-            return Rank.SECOND;
-        }
-
-        if (collectCount == BONUS_MATCH_COUNT && matchBonus != true) {
-            return Rank.THIRD;
-        }
-
-        if (rank.collectCount == collectCount) {
-            return rank;
-        }
-        return result;
-    }
-
 
     public int getCollectCount() {
         return collectCount;
