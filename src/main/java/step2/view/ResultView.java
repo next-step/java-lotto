@@ -4,6 +4,7 @@ import java.util.List;
 
 import step2.domain.Lotto;
 import step2.domain.LottoStast;
+import step2.domain.Money;
 import step2.domain.var.LottoPrize;
 
 public class ResultView {
@@ -28,5 +29,9 @@ public class ResultView {
 			LottoPrize.FIRST_WINNER.getPrize() + "원) - " + stastResult.getFirstWinnerCount() + "개");
 
 		System.out.println("총 수익률은 " + stastResult.getProfitRatio() + "% 입니다.");
+	}
+
+	public static void printChange(Money change) {
+		System.out.println("로또를 사고 남은 거스름돈 " + change + "원을 받았습니다.");
 	}
 }

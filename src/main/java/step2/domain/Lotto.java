@@ -1,5 +1,7 @@
 package step2.domain;
 
+import static step2.domain.var.LottoConstant.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +14,10 @@ public class Lotto {
 			throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
 		}
 		this.lottoNumbers = lottoNumbers;
+	}
+
+	public static int getAmountByMoney(Money money) {
+		return money.getMoney() / LOTTO_PRICE;
 	}
 
 	public List<LottoNumber> getLottoNumbers() {
