@@ -5,6 +5,7 @@ import lotto.model.Lotto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoBuyer {
@@ -26,13 +27,13 @@ public class LottoBuyer {
         return lottoNumber;
     }
 
-    public int[] checkLottoResult(String lastWeekWinningNumbers) {
+    public Map<Integer, Integer> checkLottoResult(String lastWeekWinningNumbers, int bonusNumber) {
         List<Integer> winningNumber = parseWinningNumber(lastWeekWinningNumbers);
 
-        return LottoAnalyzer.calculateWinningStatics(winningNumber, lottos);
+        return LottoAnalyzer.calculateWinningStatics(winningNumber, bonusNumber, lottos);
     }
 
-    public float checkReturnRate(int buyAmount, int[] winningStatics) {
+    public float checkReturnRate(int buyAmount, Map<Integer, Integer> winningStatics) {
         return LottoAnalyzer.calculateReturnRate(buyAmount, winningStatics);
     }
 

@@ -17,4 +17,12 @@ public class LottoTest {
         assertThat(lotto.countMatchingNumber(List.of(5, 33, 45, 6, 21, 42)))
                 .isEqualTo(3);
     }
+
+    @Test
+    public void 보너스번호_포함() {
+        Lotto lotto = new Lotto(new ArrayList<>(List.of(5, 2, 13, 23, 21, 43)));
+        int bonusNumber = 13;
+
+        assertThat(lotto.containsBonusNumber(13)).isTrue();
+    }
 }

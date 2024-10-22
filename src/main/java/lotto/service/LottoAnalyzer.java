@@ -1,37 +1,52 @@
 package lotto.service;
 
-import lotto.common.Prize;
+import lotto.common.WinningInfo;
 import lotto.model.Lotto;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoAnalyzer {
 
     private LottoAnalyzer() {
     }
 
-    public static int[] calculateWinningStatics(List<Integer> winningNumbers, List<Lotto> lottos) {
-        int[] winningStatics = new int[7];
+    public static Map<Integer, Integer> calculateWinningStatics(List<Integer> winningNumbers, int bonusNumber, List<Lotto> lottos) {
+        Map<Integer, Integer> winningStatics = createWinningStatisticsMap();
 
         for (Lotto lotto : lottos) {
-            int matchingNumberCount = lotto.countMatchingNumber(winningNumbers);
-            winningStatics[matchingNumberCount]++;
+            int matchingCount = lotto.countMatchingNumber(winningNumbers);
+            boolean isMatchBonusNumber = lotto.containsBonusNumber(bonusNumber);
+            int lottoRank = LottoRank.determineRank(matchingCount, isMatchBonusNumber);
+
+            winningStatics.put(lottoRank, winningStatics.get(lottoRank) + 1);
         }
 
         return winningStatics;
     }
 
-    public static float calculateReturnRate(int buyAmount, int[] winningStatics) {
+    private static Map<Integer, Integer> createWinningStatisticsMap() {
+        Map<Integer, Integer> winningStatics = new HashMap<>();
+
+        for(int rank = 0; rank <= 5; rank++) {
+            winningStatics.putIfAbsent(rank, 0);
+        }
+
+        return winningStatics;
+    }
+
+    public static float calculateReturnRate(int buyAmount, Map<Integer, Integer> winningStatics) {
         int totalPrize = calculatePrize(winningStatics);
 
         return (float) totalPrize / buyAmount;
     }
 
-    private static int calculatePrize(int[] winningStatics) {
+    private static int calculatePrize(Map<Integer, Integer> winningStatics) {
         int totalPrize = 0;
 
-        for (int count = 3; count <= 6; count++) {
-            totalPrize += winningStatics[count] * Prize.PRIZE[count];
+        for (int rank = 1; rank <= 5; rank++) {
+            totalPrize += winningStatics.get(rank) * WinningInfo.PRIZE[rank];
         }
 
         return totalPrize;
