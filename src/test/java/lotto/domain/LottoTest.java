@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -46,15 +45,5 @@ class LottoTest {
                 Arguments.of(new Integer[]{1, 2, 3, 4, 5, 6}, 6),
                 Arguments.of(new Integer[]{7, 8, 9, 10, 11, 12}, 0)
         );
-    }
-
-    @DisplayName("로또 한장에 특정 로또 번호가 포함되어있는지 여부를 반환한다.")
-    @ParameterizedTest(name = "LottoNumber: {0}, 로또에 포함 여부: {1}")
-    @CsvSource(value = {"6, true", "7, false"})
-    void return_check_Lotto_contains_LottoNumber(int lottoNumber, boolean expected) {
-        LottoNumber number = new LottoNumber(lottoNumber);
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-
-        assertThat(lotto.checkContainsLottoNumber(number)).isEqualTo(expected);
     }
 }

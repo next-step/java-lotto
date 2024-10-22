@@ -38,10 +38,6 @@ public class Lotto {
                 .count();
     }
 
-    public Boolean checkContainsLottoNumber(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
-    }
-
     public List<LottoNumber> values() {
         return lottoNumbers;
     }
