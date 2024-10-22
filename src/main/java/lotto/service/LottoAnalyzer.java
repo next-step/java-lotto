@@ -18,7 +18,7 @@ public class LottoAnalyzer {
         for (Lotto lotto : lottos) {
             int matchingCount = lotto.countMatchingNumber(winningNumbers);
             boolean isMatchBonusNumber = lotto.containsBonusNumber(bonusNumber);
-            int lottoRank = LottoRank.determineRank(matchingCount, isMatchBonusNumber);
+            int lottoRank = LottoRankCalculator.determineRank(matchingCount, isMatchBonusNumber);
 
             winningStatics.put(lottoRank, winningStatics.get(lottoRank) + 1);
         }

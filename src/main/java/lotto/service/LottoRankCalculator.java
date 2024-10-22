@@ -1,6 +1,6 @@
 package lotto.service;
 
-public enum LottoRank {
+public enum LottoRankCalculator {
     FIRST(1),
     SECOND(2),
     THIRD(3),
@@ -10,7 +10,7 @@ public enum LottoRank {
 
     private int rank;
 
-    private LottoRank(int rank) {
+    private LottoRankCalculator(int rank) {
         this.rank = rank;
     }
 
