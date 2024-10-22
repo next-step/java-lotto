@@ -20,7 +20,7 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호 자동 생성 및 유효한 로또번호인지 확인")
     void 자동_생성_및_번호_확인() {
-        assertThat(lottoNumbers.getLottoNumbers()).hasSize(6);
+        assertThat(lottoNumbers.getValues()).hasSize(6);
     }
 
     @Test

@@ -40,7 +40,7 @@ public class LottoWinningStatisticsTest {
 
         int bonusNumber = 7;
         lottos = new Lottos(lottoList);
-        lottos.calculateAllMatchCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
+        lottos.calculateAllMatchCount(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(bonusNumber));
 
         Map<LottoRank, Integer> winningLottoMap = LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos());
         assertThat(winningLottoMap.get(LottoRank.FIRST)).isEqualTo(0);

@@ -26,8 +26,8 @@ public class Lotto {
         this.lottoResult = lottoResult;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers.getLottoNumbers();
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers.getValues();
     }
 
     public int getMatchCount() {
@@ -42,15 +42,20 @@ public class Lotto {
         return lottoNumbers.toStringLottoNumbers();
     }
 
-    public int calculateMatchCount(Lotto winningLotto, int bonusNumber) {
-        return this.lottoResult.calculateMatchCount(winningLotto.getLottoNumbers(), lottoNumbers.getLottoNumbers(), bonusNumber);
+    public int calculateMatchCount(Lotto winningLotto, LottoNumber bonusNumber) {
+        return this.lottoResult.calculateMatchCount2(winningLotto.getLottoNumbers(), lottoNumbers.getValues(), bonusNumber);
     }
 
     public int getAmount() {
         return this.lottoResult.getAmountForWinningLotto();
     }
 
-    public boolean hasLottoNumber(int lottoNumber){
+    public boolean hasLottoNumber(int lottoNumber){ //todo
         return this.lottoNumbers.hasLottoNumber(lottoNumber);
     }
+
+//    public boolean hasLottoNumber(LottoNumber lottoNumber){
+//        return this.lottoNumbers.hasLottoNumber(lottoNumber);
+//    }
+
 }

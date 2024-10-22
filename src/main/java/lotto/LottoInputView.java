@@ -29,10 +29,7 @@ public class LottoInputView {
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해주세요");
         int bonusNumber = scanner.nextInt();
-
-        if (bonusNumber <= 0 || bonusNumber > 45) { //todo
-            throw new IllegalArgumentException("유효한 번호가 아닙니다.");
-        }
+        LottoNumber.validateLottoNumber(bonusNumber); //todo
         return bonusNumber;
     }
 

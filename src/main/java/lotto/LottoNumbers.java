@@ -11,56 +11,56 @@ public class LottoNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final List<Integer> LOTTO_CANDIDATE_NUMBERS = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
         this.lottoNumbers = generateAutoLottoNumbers();
-        validateLottoNumbers(this.getLottoNumbers());
+        this.validateLottoNumbers();
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-        validateLottoNumbers(this.getLottoNumbers());
+        this.lottoNumbers = lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+        this.validateLottoNumbers();
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getValues() {
         return lottoNumbers;
     }
 
     public String toStringLottoNumbers() {
         Collections.sort(lottoNumbers);
-        return lottoNumbers.toString();
+        return lottoNumbers.stream().map(d -> String.valueOf(d.getValue())).collect(Collectors.joining(", "));
     }
 
-    public List<Integer> generateAutoLottoNumbers() {
+    public List<LottoNumber> generateAutoLottoNumbers() {
         Collections.shuffle(LOTTO_CANDIDATE_NUMBERS);
-        return LOTTO_CANDIDATE_NUMBERS.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList());
+        return LOTTO_CANDIDATE_NUMBERS.stream().limit(LOTTO_NUMBER_COUNT).map(LottoNumber::new).collect(Collectors.toList());
     }
 
-    private boolean validateLottoNumbers(List<Integer> lottoNumbers) {
+    private boolean validateLottoNumbers() {
         if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
             throw new IllegalArgumentException("중복된 번호가 있습니다.");
         }
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("번호 갯수가 6개가 아닙니다.");
         }
-        for (Integer number : lottoNumbers) {
-            validateLottoNumber(number);
+        for (LottoNumber number : lottoNumbers) {
+            number.validateLottoNumber();
         }
         return true;
     }
 
-    private boolean validateLottoNumber(int lottoNumber) {
-        if (lottoNumber <= 0 || lottoNumber > 45) {
-            throw new IllegalArgumentException("유효한 번호가 아닙니다.");
-        }
-        return true;
-    }
-
-    public boolean hasLottoNumber(int lottoNumber){
+    public boolean hasLottoNumber(int lottoNumber){ //todo LottoNumber ? int ?
         if(this.lottoNumbers.contains(lottoNumber)){
             throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
         }
         return false;
     }
+
+//    public boolean hasLottoNumber(LottoNumber lottoNumber){
+//        if(this.lottoNumbers.contains(lottoNumber)){
+//            throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
+//        }
+//        return false;
+//    }
 }

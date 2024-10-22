@@ -29,7 +29,7 @@ public class Lottos {
         }
     }
 
-    public void calculateAllMatchCount(Lotto winningLotto, int bonusNumber) {
+    public void calculateAllMatchCount(Lotto winningLotto, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos) {
             lotto.calculateMatchCount(winningLotto, bonusNumber);
         }
