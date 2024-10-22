@@ -7,12 +7,11 @@ import java.util.*;
 public class LottoWinningStatistics {
     private final Map<LottoRank, Integer> values;
 
-    public LottoWinningStatistics(List<Lotto> userLottos, WinningLotto winningLotto) {
+    public LottoWinningStatistics(Lottos userLottos, WinningLotto winningLotto) {
         Map<LottoRank, Integer> result = initStatistics();
 
-        for (Lotto userLotto : userLottos) {
-            LottoRank key = winningLotto.createLottoRank(userLotto);
-            this.putRankedLottoQuantity(key, result);
+        for (int i = 0; i < userLottos.size(); i++) {
+            this.putRankedLottoQuantity(winningLotto.createLottoRank(userLottos.valueAt(i)), result);
         }
         this.values = result;
     }

@@ -2,11 +2,15 @@ package lotto.domain;
 
 public class WinningLotto {
     private final Lotto winningLotto;
-    private final LottoNumber lottoNumber;
+    private final LottoNumber bonusLottoNumber;
 
-    public WinningLotto(Lotto winningLotto, LottoNumber lottoNumber) {
+    public WinningLotto(String[] winningLotto, int bonusLottoNumber) {
+        this(new Lotto(winningLotto), new LottoNumber(bonusLottoNumber));
+    }
+
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         this.winningLotto = winningLotto;
-        this.lottoNumber = lottoNumber;
+        this.bonusLottoNumber = bonusLottoNumber;
     }
 
     public LottoRank createLottoRank(Lotto userLotto) {
@@ -20,7 +24,7 @@ public class WinningLotto {
     }
 
     private Boolean isBonusBallMatching(Lotto userLotto) {
-        return userLotto.values().contains(this.lottoNumber);
+        return userLotto.values().contains(this.bonusLottoNumber);
     }
 
 }

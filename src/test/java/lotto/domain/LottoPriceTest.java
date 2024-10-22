@@ -30,7 +30,7 @@ class LottoPriceTest {
     void return_lottoTicketQuantity_purchased() {
         LottoPrice lottoPricePurchased = new LottoPrice(2000);
 
-        int actual = lottoPricePurchased.countLottoPurchased();
+        int actual = lottoPricePurchased.countLottoQuantity();
 
         assertThat(actual).isEqualTo(2);
     }

@@ -1,9 +1,9 @@
 package lotto;
 
 import lotto.application.strategy.RandomGenerator;
-import lotto.domain.Lotto;
 import lotto.application.LottoProgram;
 import lotto.domain.LottoPrice;
+import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -13,19 +13,31 @@ public class LottoInterface {
     public void start() {
         LottoPrice lottoAmountPurchased = new LottoPrice(InputView.getLottoPricePurchased());
 
-        int lottoQuantityPurchased = lottoAmountPurchased.countLottoPurchased();
-        OutputView.printLottoQuantityPurchased(lottoQuantityPurchased);
+        int manualLottoQuantity = InputView.getManualLottoQuantityPurchased();
+        int lottoQuantityWithoutManual = lottoAmountPurchased.countLottoQuantity() - manualLottoQuantity;
+
+        List<String[]> manualLottosInput = InputView.getManualLottos(manualLottoQuantity);
+        validateInputManualLottos(manualLottosInput, manualLottoQuantity);
+
+        OutputView.printLottoQuantityPurchased(manualLottoQuantity, lottoQuantityWithoutManual);
 
         LottoProgram lottoProgram = new LottoProgram(new RandomGenerator());
-        List<Lotto> lottos = lottoProgram.generateLottos(lottoQuantityPurchased);
-        OutputView.printLottos(lottos);
 
-        String[] lastWinningLottoNumberInput = InputView.getLastWinningLottoNumbers();
-        int bonusBall = InputView.getBonusBallFromUser();
+        Lottos totalLottos = lottoProgram.generateLottos(lottoQuantityWithoutManual, manualLottosInput);
+        OutputView.printLottos(totalLottos);
+
+        String[] lastWinningLottoNumbersInput = InputView.getLastWinningLottoNumbers();
+        int bonusLottoNumber = InputView.getBonusBallFromUser();
 
         OutputView.printWinningStatistics(
                 lottoAmountPurchased,
-                lottoProgram.createWinningStatistics(lottos, lastWinningLottoNumberInput, bonusBall));
+                lottoProgram.createWinningStatistics(totalLottos, lastWinningLottoNumbersInput, bonusLottoNumber));
+    }
+
+    private static void validateInputManualLottos(List<String[]> manualLottos, int manualLottoQuantity) {
+        if (manualLottoQuantity != manualLottos.size()) {
+            throw new IllegalArgumentException("수동으로 구매한 로또 수만큼만 로또를 입력해주세요");
+        }
     }
 
     public static void main(String[] args) {

@@ -18,7 +18,7 @@ public class LottoPrice {
         }
     }
 
-    public int countLottoPurchased() {
+    public int countLottoQuantity() {
         return this.lottoPrice / SINGLE_LOTTO_PRICE;
     }
 

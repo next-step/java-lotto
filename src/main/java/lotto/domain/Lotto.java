@@ -16,7 +16,7 @@ public class Lotto {
     public Lotto(String[] input) {
         this(Arrays.stream(
                 Optional.ofNullable(input).orElseGet(() -> new String[0]))
-                .map(Integer::valueOf)
+                .map(it -> Integer.valueOf(it.trim()))
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
     }
@@ -42,7 +42,21 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Boolean checkContainsLottoNumber(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

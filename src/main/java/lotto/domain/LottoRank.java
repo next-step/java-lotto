@@ -21,19 +21,30 @@ public enum LottoRank {
         this.isBonusBallMatching = isBonusBallMatching;
     }
 
-    public static LottoRank from(int matchingCount, Boolean isBonusBallMatched) {
+    public static LottoRank from(Integer matchingCount, Boolean isBonusBallMatched) {
         return Arrays.stream(LottoRank.values())
-                .filter(value -> value.getMatchingCounts().contains(matchingCount) && value.isBonusBallMatching.equals(isBonusBallMatched))
+                .filter(lottoRank -> lottoRank.matchingCounts.contains(matchingCount))
                 .findAny()
+                .map(lottoRank -> lottoRank.match(matchingCount, isBonusBallMatched))
                 .orElseThrow(() -> new IllegalArgumentException(String.format("로또 번호 매칭 갯수 '%s'은 적합하지 않습니다.", matchingCount)));
+    }
+
+    private LottoRank match(Integer matchingCount, Boolean isBonusBallMatched) {
+        if (SECOND.matchingCounts.contains(matchingCount)) {
+            return isBonusBallMatched.equals(SECOND.isBonusBallMatching) ? SECOND : THIRD;
+        }
+        return this;
     }
 
     public static LottoRank[] winningRanks() {
         return new LottoRank[]{FIFTH, FOURTH, THIRD, SECOND, FIRST};
     }
 
-    public List<Integer> getMatchingCounts() {
-        return matchingCounts;
+    public Integer getWinningRankMatchingCount() {
+        if (LottoRank.NON_RANKED.equals(this)) {
+            throw new IllegalArgumentException("로또 등수에 포함되는 값만 호출해주세요.");
+        }
+        return this.matchingCounts.get(0);
     }
 
     public int getDistributionRatioPrice() {
