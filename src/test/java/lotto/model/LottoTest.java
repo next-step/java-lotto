@@ -2,6 +2,7 @@ package lotto.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,5 +29,16 @@ public class LottoTest {
             new Lotto(1, 2, 3, 4, 5, 6, 7);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void match_테스트() {
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+        WinningLotto winningLotto = new WinningLotto(List.of(1,2,3,4,8,9), 6);
+        LottoRank rank = LottoRank.FOUR;
+        boolean expected = lotto.match(winningLotto, rank);
+
+        assertThat(expected).isEqualTo(true);
+    }
+
 
 }

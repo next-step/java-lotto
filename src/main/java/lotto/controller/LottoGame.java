@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Lotto;
-import lotto.model.Lottos;
-import lotto.model.Price;
-import lotto.model.Statistics;
+import lotto.model.*;
 import lotto.service.LottoService;
 import lotto.ui.input.InputView;
 import lotto.ui.output.OutputView;
@@ -27,7 +24,7 @@ public class LottoGame {
 
         outputView.printLotto(lottos);
 
-        Lotto winningLotto = inputView.readWinningLotto();
+        WinningLotto winningLotto = inputView.readWinningLotto();
 
         Statistics statistics = lottoService.generateStatistics(lottos, winningLotto, price);
 
