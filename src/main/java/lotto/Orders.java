@@ -40,13 +40,4 @@ public class Orders {
         }
         return result;
     }
-
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (Lotto lotto : orders) {
-            builder.append(lotto);
-            builder.append("\n");
-        }
-        return builder.toString();
-    }
 }

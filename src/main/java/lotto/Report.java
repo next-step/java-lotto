@@ -2,6 +2,7 @@ package lotto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.stream.Collectors;
 
 public class Report {
 
@@ -14,8 +15,10 @@ public class Report {
     public String reportTotalOrders(Orders orders) {
         StringBuilder builder = new StringBuilder();
         builder.append(orders.getTotalOrders()).append("개를 구매했습니다.\n");
-        builder.append(orders);
-
+        for(Lotto lotto: orders.getOrders()) {
+            builder.append(ofLotto(lotto));
+            builder.append("\n");
+        }
         String result = builder.toString();
         System.out.println(result);
         return result;
@@ -50,6 +53,7 @@ public class Report {
     public String reportRateOfReturn(Money input, Statistics statistics) {
         return reportRateOfReturn(input.get(), statistics);
     }
+
     public String reportRateOfReturn(int input, Statistics statistics) {
         int totalReward = 0;
 
@@ -60,5 +64,13 @@ public class Report {
         String result = String.format("총 수익률은 %.2f입니다.", BigDecimal.valueOf(totalReward).divide(BigDecimal.valueOf(input), 2, RoundingMode.FLOOR));
         System.out.println(result);
         return result;
+    }
+
+    private String ofLotto(Lotto lotto) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        builder.append(lotto.getNumbers().stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")));
+        builder.append("]");
+        return builder.toString();
     }
 }

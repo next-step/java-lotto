@@ -22,9 +22,6 @@ public class WinnersTest {
         List<Lotto> lottos = List.of(new Lotto(1L), new Lotto(2L));
         Orders orders = new Orders(lottos);
 
-        assertThat(new Orders(lottos).toString())
-                .isEqualTo("[5, 16, 29, 34, 38, 45]\n[14, 16, 21, 25, 38, 43]\n");
-
         Winners winners = new Winners("14, 16, 21, 25, 38, 40");
         Statistics statistics = winners.match(orders);
 
