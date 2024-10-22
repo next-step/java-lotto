@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.lotto.LottoMargin;
+import lotto.lotto.LottoMarginCalculator;
 import lotto.lotto.LottoResult;
 import lotto.lotto.LottoService;
 import lotto.view.InputView;
@@ -21,14 +22,14 @@ public class LottoController {
 
         LottoService lottoService = new LottoService();
 
-        LottoResult result = lottoService.createLotto(price); //로또 실행
+        LottoResult result = lottoService.createLotto(price);
 
-        resultView.printCreateLotto(result);//몇장 구매
+        resultView.printCreateLotto(result);
 
         String answer = inputView.inputAnswer();
-        lottoService.calculateLotto(answer, result); //로또 당첨 계산
+        lottoService.calculateLotto(answer, result);
 
-        LottoMargin lottoMargin = lottoService.calculateMarginRate(price, result); //로또 수익률 계산
+        LottoMargin lottoMargin = lottoService.calculateMarginRate(price, result);
 
         resultView.printResult(LottoResult.from(result, lottoMargin));
     }
