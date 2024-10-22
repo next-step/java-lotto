@@ -4,22 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Statistics {
-    Map<Integer, Integer> statistics;
+    Map<LottoWinnersEnum, Integer> statistics;
 
     public Statistics() {
         this.statistics = new HashMap<>(Map.of(
-                3, 0,
-                4, 0,
-                5, 0,
-                6, 0
+                LottoWinnersEnum.THREE, 0,
+                LottoWinnersEnum.FOUR, 0,
+                LottoWinnersEnum.FIVE, 0,
+                LottoWinnersEnum.SIX, 0
         ));
     }
 
     public Integer get(Integer key) {
+        return statistics.get(LottoWinnersEnum.findByValue(key));
+    }
+
+    public Integer get(LottoWinnersEnum key) {
         return statistics.get(key);
     }
 
     public void put(Integer key, Integer value) {
-        this.statistics.put(key, value);
+        this.statistics.put(LottoWinnersEnum.findByValue(key), value);
     }
 }
