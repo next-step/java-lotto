@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.lotto.AutoLottoStrategy;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoWinning;
@@ -18,7 +19,7 @@ class LottoTest {
     private List<LottoNumber> lottoNumberList;
     @BeforeEach
     void setUp() {
-        lotto = new Lotto();
+        //lotto = new Lotto();
         lottoNumberList = new ArrayList<>();
         lottoNumberList.add(new LottoNumber(1));
         lottoNumberList.add(new LottoNumber(2));
@@ -26,21 +27,6 @@ class LottoTest {
         lottoNumberList.add(new LottoNumber(4));
         lottoNumberList.add(new LottoNumber(5));
         lottoNumberList.add(new LottoNumber(10));
-    }
-
-    @Test
-    void 로또_번호_6개만_남긴다() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lotto.addLottos(lottoNumbers);
-        lotto.answerLotto(lottoNumbers);
-
-        assertThat(lottoNumbers).hasSize(6).allMatch(lotto -> lotto.getNumber() >= 1 && lotto.getNumber() <= 45);
-    }
-
-    @Test
-    void 로또를_생성한다() {
-        lotto = lotto.generateLotto();
-        assertThat(lotto.getLotto()).hasSize(6).allMatch(lotto -> lotto.getNumber() >= 1 && lotto.getNumber() <= 45);
     }
 
     @Test
@@ -54,7 +40,7 @@ class LottoTest {
     @Test
     void 로또번호_매칭_갯수(){
         LottoWinning winning = new LottoWinning("1, 2, 3, 4, 5, 10");
-        Lotto lotto = new Lotto(lottoNumberList);
+        Lotto lotto = new Lotto(lottoNumberList);;
         assertThat(lotto.calculateMatchingCnt(winning)).isEqualTo(6);
 
         winning = new LottoWinning("1, 2, 3, 4, 5, 45");

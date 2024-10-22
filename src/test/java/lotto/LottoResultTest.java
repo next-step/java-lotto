@@ -1,14 +1,12 @@
 package lotto;
-import lotto.lotto.Lotto;
-import lotto.lotto.LottoNumber;
-import lotto.lotto.LottoResult;
-import lotto.lotto.LottoWinning;
+import lotto.lotto.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 class LottoResultTest {
@@ -24,7 +22,6 @@ class LottoResultTest {
         lottoNumbers.add(new LottoNumber(4));
         lottoNumbers.add(new LottoNumber(5));
         lottoNumbers.add(new LottoNumber(10));
-
         lottos.add(new Lotto(lottoNumbers));
         lottos.add(new Lotto(lottoNumbers));
         lottos.add(new Lotto(lottoNumbers));
@@ -46,4 +43,5 @@ class LottoResultTest {
         assertThat(result.getResultMap().get(5)).isEqualTo(3);
 
     }
+
 }
