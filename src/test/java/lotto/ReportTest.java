@@ -12,13 +12,7 @@ public class ReportTest {
     @Test
     @DisplayName("발급된 로또를 1장씩 화면에 출력한다.")
     void testPrintLotto() {
-        WinningRules winningRules = new WinningRules(List.of(
-                new WinningRule(3, 5000),
-                new WinningRule(4, 50000),
-                new WinningRule(5, 1500000),
-                new WinningRule(6, 2000000000)
-        ));
-        Report report = new Report(winningRules);
+        Report report = new Report(WinningRules.getDefaultWinningRules());
 
         List<Lotto> lottos = List.of(new Lotto(1L), new Lotto(2L));
 
@@ -29,13 +23,7 @@ public class ReportTest {
     @Test
     @DisplayName("당첨 통계를 출력한다.")
     void testReportWinners() {
-        WinningRules winningRules = new WinningRules(List.of(
-                new WinningRule(3, 5000),
-                new WinningRule(4, 50000),
-                new WinningRule(5, 1500000),
-                new WinningRule(6, 2000000000)
-        ));
-        Report report = new Report(winningRules);
+        Report report = new Report(WinningRules.getDefaultWinningRules());
 
         Statistics statistics = new Statistics();
         statistics.put(3, 10);
@@ -49,13 +37,7 @@ public class ReportTest {
     @Test
     @DisplayName("총 수익률을 출력한다.")
     void testReportRateOfReturn() {
-        WinningRules winningRules = new WinningRules(List.of(
-                new WinningRule(3, 5000),
-                new WinningRule(4, 50000),
-                new WinningRule(5, 1500000),
-                new WinningRule(6, 2000000000)
-        ));
-        Report report = new Report(winningRules);
+        Report report = new Report(WinningRules.getDefaultWinningRules());
 
         Statistics statistics = new Statistics();
         statistics.put(3, 1);
