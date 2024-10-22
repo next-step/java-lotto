@@ -2,12 +2,15 @@ package lotto.application;
 
 import lotto.application.strategy.LottoNumberGenerator;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoProgramTest {
@@ -22,14 +25,16 @@ class LottoProgramTest {
 
         LottoProgram lottoProgram = new LottoProgram(new LottoNumberGenerator() {
             @Override
-            public List<Lotto> generate(int generateCount) {
-                return List.of(quickPickLotto);
+            public Lottos generate(int generateCount) {
+                return new Lottos(List.of(quickPickLotto));
             }
         });
 
-        List<Lotto> result = lottoProgram.generateLottos(totalLottoQuantity, manualLottos);
+        Lottos result = lottoProgram.generateLottos(totalLottoQuantity, manualLottos);
 
-        assertThat(result).containsExactly(new Lotto(7, 8, 9, 10, 11, 12), quickPickLotto);
+        assertThat(result)
+                .extracting("lottos", as(InstanceOfAssertFactories.LIST))
+                .containsExactlyInAnyOrder(new Lotto(7, 8, 9, 10, 11, 12), quickPickLotto);
     }
 
 }

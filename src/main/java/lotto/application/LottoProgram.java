@@ -2,10 +2,9 @@ package lotto.application;
 
 import lotto.application.strategy.LottoNumberGenerator;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,30 +15,30 @@ public class LottoProgram {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public List<Lotto> generateLottos(int lottoQuantityWithoutManual, List<String[]> manualLottosInput) {
-        List<Lotto> totalLottos = new ArrayList<>();
+    public Lottos generateLottos(int lottoQuantityWithoutManual, List<String[]> manualLottosInput) {
+        Lottos totalLottos = this.generateLottos(lottoQuantityWithoutManual);
+
         if (!manualLottosInput.isEmpty()) {
-            totalLottos.addAll(this.generateManualLottos(manualLottosInput));
+            return Lottos.from(totalLottos, this.generateManualLottos(manualLottosInput));
         }
 
-        totalLottos.addAll(this.generateLottos(lottoQuantityWithoutManual));
         return totalLottos;
     }
 
-    private List<Lotto> generateManualLottos(List<String[]> manualLottosInput) {
-        return manualLottosInput.stream()
+    private Lottos generateManualLottos(List<String[]> manualLottosInput) {
+        return new Lottos(manualLottosInput.stream()
                 .map(Lotto::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
-    private List<Lotto> generateLottos(int lottoQuantity) {
+    private Lottos generateLottos(int lottoQuantity) {
         return lottoNumberGenerator.generate(lottoQuantity);
     }
 
-    public LottoWinningStatistics createWinningStatistics(List<Lotto> userLotto,
+    public LottoWinningStatistics createWinningStatistics(Lottos userLottos,
                                                           String[] winningLottoNumbersInput, int bonusLottoNumber) {
         return new LottoWinningStatistics(
-                userLotto,
+                userLottos,
                 new WinningLotto(winningLottoNumbersInput, bonusLottoNumber));
     }
 }

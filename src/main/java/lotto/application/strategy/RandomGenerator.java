@@ -2,6 +2,7 @@ package lotto.application.strategy;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,12 +21,12 @@ public class RandomGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public List<Lotto> generate(int generateCount) {
+    public Lottos generate(int generateCount) {
         List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < generateCount; i++) {
             result.add(this.generate());
         }
-        return result;
+        return new Lottos(result);
     }
 
     private Lotto generate() {

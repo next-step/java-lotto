@@ -1,9 +1,9 @@
 package lotto;
 
 import lotto.application.strategy.RandomGenerator;
-import lotto.domain.Lotto;
 import lotto.application.LottoProgram;
 import lotto.domain.LottoPrice;
+import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -23,7 +23,7 @@ public class LottoInterface {
 
         LottoProgram lottoProgram = new LottoProgram(new RandomGenerator());
 
-        List<Lotto> totalLottos = lottoProgram.generateLottos(lottoQuantityWithoutManual, manualLottosInput);
+        Lottos totalLottos = lottoProgram.generateLottos(lottoQuantityWithoutManual, manualLottosInput);
         OutputView.printLottos(totalLottos);
 
         String[] lastWinningLottoNumbersInput = InputView.getLastWinningLottoNumbers();

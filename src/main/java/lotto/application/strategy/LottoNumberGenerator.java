@@ -1,11 +1,9 @@
 package lotto.application.strategy;
 
-import lotto.domain.Lotto;
-
-import java.util.List;
+import lotto.domain.Lottos;
 
 @FunctionalInterface
 public interface LottoNumberGenerator {
-    List<Lotto> generate(int generateCount);
+    Lottos generate(int generateCount);
 
 }

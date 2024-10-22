@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -20,10 +19,10 @@ class LottoWinningStatisticsTest {
     @DisplayName("사용자 로또 번호와 당첨 번호를 매칭하여 당첨 통계 객체를 생성한다.")
     @MethodSource("generateUserLottos")
     @ParameterizedTest(name = "결과= {1}")
-    void create(Lotto userLotto, LottoRank lottoRank) {
+    void create(Lottos userLottos, LottoRank lottoRank) {
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        LottoWinningStatistics winningStatistics = new LottoWinningStatistics(List.of(userLotto), new WinningLotto(winningLotto, new LottoNumber(13)));
+        LottoWinningStatistics winningStatistics = new LottoWinningStatistics(userLottos, new WinningLotto(winningLotto, new LottoNumber(13)));
 
         assertThat(winningStatistics)
                 .extracting("values", as(InstanceOfAssertFactories.MAP))
@@ -34,10 +33,10 @@ class LottoWinningStatisticsTest {
 
     static Stream<Arguments> generateUserLottos() {
         return Stream.of(
-                Arguments.arguments(new Lotto(1, 2, 9, 10, 11, 12), LottoRank.NON_RANKED),
-                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 7), LottoRank.THIRD),
-                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 13), LottoRank.SECOND),
-                Arguments.arguments(new Lotto(1, 2, 3, 4, 5, 6), LottoRank.FIRST)
+                Arguments.arguments(new Lottos(new Lotto(1, 2, 9, 10, 11, 12)), LottoRank.NON_RANKED),
+                Arguments.arguments(new Lottos(new Lotto(1, 2, 3, 4, 5, 7)), LottoRank.THIRD),
+                Arguments.arguments(new Lottos(new Lotto(1, 2, 3, 4, 5, 13)), LottoRank.SECOND),
+                Arguments.arguments(new Lottos(new Lotto(1, 2, 3, 4, 5, 6)), LottoRank.FIRST)
         );
     }
 
