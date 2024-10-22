@@ -13,15 +13,15 @@ public class LottoNumber implements Comparable{
         this.number = number;
     }
 
-    public int getValue(){
-        return this.number;
-    }
-
     private static boolean validateLottoNumber(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("유효한 번호가 아닙니다.");
         }
         return true;
+    }
+
+    public int getValue(){
+        return this.number;
     }
 
     @Override

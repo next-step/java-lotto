@@ -26,10 +26,6 @@ public class Lotto {
         this.lottoResult = lottoResult;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers.getValues();
-    }
-
     public int getMatchCount() {
         return this.lottoResult.getMatchCount();
     }
@@ -42,8 +38,8 @@ public class Lotto {
         return lottoNumbers.toStringLottoNumbers();
     }
 
-    public int calculateMatchCount(Lotto winningLotto, LottoNumber bonusNumber) {
-        return this.lottoResult.calculateMatchCount(winningLotto.getLottoNumbers(), lottoNumbers.getValues(), bonusNumber);
+    public int calculateMatchCount(WinningLotto winningLotto) {
+        return this.lottoResult.calculateMatchCount(winningLotto, lottoNumbers.getValues());
     }
 
     public int getAmount() {

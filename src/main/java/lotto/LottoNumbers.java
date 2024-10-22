@@ -23,6 +23,16 @@ public class LottoNumbers {
         this.validateLottoNumbers();
     }
 
+    private boolean validateLottoNumbers() {
+        if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
+            throw new IllegalArgumentException("중복된 번호가 있습니다.");
+        }
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("번호 갯수가 6개가 아닙니다.");
+        }
+        return true;
+    }
+
     public List<LottoNumber> getValues() {
         return lottoNumbers;
     }
@@ -35,16 +45,6 @@ public class LottoNumbers {
     public List<LottoNumber> generateAutoLottoNumbers() {
         Collections.shuffle(LOTTO_CANDIDATE_NUMBERS);
         return LOTTO_CANDIDATE_NUMBERS.stream().limit(LOTTO_NUMBER_COUNT).map(LottoNumber::new).collect(Collectors.toList());
-    }
-
-    private boolean validateLottoNumbers() {
-        if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
-            throw new IllegalArgumentException("중복된 번호가 있습니다.");
-        }
-        if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("번호 갯수가 6개가 아닙니다.");
-        }
-        return true;
     }
 
     public boolean hasLottoNumber(LottoNumber lottoNumber){ //todo LottoNumber ? int ?

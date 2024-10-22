@@ -14,43 +14,25 @@ public class LottoResult {
         return this.isBonusMatch;
     }
 
-    public int calculateMatchCount(List<LottoNumber> winningNumbers, List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
-        calculateWinningMatchCount(winningNumbers, lottoNumbers);
-        checkBonusMatch2(lottoNumbers, bonusNumber);
+    public int calculateMatchCount(WinningLotto winningLotto, List<LottoNumber> lottoNumbers) {
+        calculateWinningMatchCount(winningLotto, lottoNumbers);
+        winningLotto.checkBonusMatch(lottoNumbers); //todo
         return matchCount;
     }
 
-    private int calculateWinningMatchCount(List<LottoNumber> winningNumbers, List<LottoNumber> lottoNumbers) {
+    //todo
+    private int calculateWinningMatchCount(WinningLotto winningLotto, List<LottoNumber> lottoNumbers) {
         for (int i = 0; i < lottoNumbers.size(); i++) {
-            this.matchCount += checkWinningMatchNumber(winningNumbers, lottoNumbers.get(i));
+            this.matchCount += checkWinningMatchNumber(winningLotto, lottoNumbers.get(i));
         }
         return this.matchCount;
     }
 
-    private int checkWinningMatchNumber(List<Integer> winningNumbers, int number) {
-        if (winningNumbers.contains(number)) {
+    private int checkWinningMatchNumber(WinningLotto winningLotto, LottoNumber number) {
+        if (winningLotto.hasLottoNumber(number)) {
             return 1;
         }
         return 0;
-    }
-
-    private int checkWinningMatchNumber(List<LottoNumber> winningNumbers, LottoNumber number) {
-        if (winningNumbers.contains(number)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    private void checkBonusMatch(List<Integer> lottoNumbers, int bonusNumber) {
-        if (lottoNumbers.contains(bonusNumber)) {
-            this.isBonusMatch = true;
-        }
-    }
-
-    private void checkBonusMatch2(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
-        if (lottoNumbers.contains(bonusNumber)) {
-            this.isBonusMatch = true;
-        }
     }
 
     public int getAmountForWinningLotto() {

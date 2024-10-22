@@ -15,7 +15,8 @@ public class LottoMain {
         List<Integer> winningLottoNumbers = LottoInputView.inputWinningNumbers();
         int bonusNumber = LottoInputView.inputBonusNumber();
         Lotto winningLotto = new Lotto(winningLottoNumbers, bonusNumber); //todo
-        lottos.calculateAllMatchCount(winningLotto, new LottoNumber(bonusNumber));
+        WinningLotto winningLotto2 = new WinningLotto(winningLottoNumbers, bonusNumber);
+        lottos.calculateAllMatchCount(winningLotto2);
 
         System.out.println();
         LottoResultView.printLottoStatistics(LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos()));
