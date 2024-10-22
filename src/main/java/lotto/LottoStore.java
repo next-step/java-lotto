@@ -1,14 +1,17 @@
 package lotto;
 
-import java.util.List;
+import lotto.domain.*;
+import lotto.view.Report;
+import lotto.view.UserInput;
 
 public class LottoStore {
 
     public static void main(String[] args) {
-        Report report = new Report(WinningRules.getDefaultWinningRules());
 
         Money money = UserInput.inputMoney();
         Orders orders = new Orders(money);
+
+        Report report = new Report(WinningRules.getDefaultWinningRules());
         report.reportTotalOrders(orders);
 
         Winners winners = UserInput.inputWinners();

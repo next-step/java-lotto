@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.Orders;
+import lotto.domain.Statistics;
+import lotto.domain.WinningRules;
+import lotto.view.Report;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

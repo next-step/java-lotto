@@ -1,6 +1,9 @@
 package lotto;
 
-import calculator.StringCalculator;
+import lotto.domain.Lotto;
+import lotto.domain.Orders;
+import lotto.domain.Statistics;
+import lotto.domain.Winners;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
