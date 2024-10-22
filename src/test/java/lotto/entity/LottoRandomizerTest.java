@@ -10,10 +10,10 @@ public class LottoRandomizerTest {
 
     @Test
     void 로또_번호_size_검증() {
+        LottoRandomizer lottoRandomizer = new LottoRandomizer();
+        List<Integer> numbers = lottoRandomizer.lottoShuffle();
 
-        List<Integer> numbers = LottoRandomizer.create();
-
-        assertThat(numbers).hasSize(6);
+        assertThat(numbers).hasSize(45);
     }
 
 }

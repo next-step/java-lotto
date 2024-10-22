@@ -6,17 +6,16 @@ import java.util.List;
 
 public class LottoWinningScanner {
 
-    private final LottoResultAnalyzer lottoResultAnalyzer;
+    private LottoWinningScanner() {
 
-    public LottoWinningScanner() {
-        this.lottoResultAnalyzer = new LottoResultAnalyzer();
     }
 
-    public LottoResult result(List<Lotto> lottos, List<Integer> winnersNumber, int inputMoney) {
+    public static LottoResult result(List<Lotto> lottos, Winning winning, int inputMoney) {
+        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer();
 
-        List<WinningResult> analyzer = lottoResultAnalyzer.analyzer(lottos, winnersNumber);
-        BigDecimal totalPrizeMoney = PrizeMoneyCalculator.sum(analyzer);
-        BigDecimal rate = PrizeMoneyCalculator.calculateRate(inputMoney, totalPrizeMoney);
+        List<WinningResult> analyzer = lottoAnalyzer.analyzer(lottos, winning);
+        BigDecimal totalPrizeMoney = RankCalculator.sum(analyzer);
+        BigDecimal rate = RankCalculator.calculateRate(inputMoney, totalPrizeMoney);
 
         return new LottoResult(rate, analyzer);
     }

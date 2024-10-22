@@ -5,12 +5,14 @@ import java.math.BigDecimal;
 public class PrizeMoneyDto {
     private final int collectCount;
     private final int count;
+    private final boolean matchBonus;
     private final BigDecimal prizeMoney;
 
-    public PrizeMoneyDto(BigDecimal prizeMoney, int count, int collectCount) {
+    public PrizeMoneyDto(BigDecimal prizeMoney, int count, int collectCount, boolean matchBounus) {
         this.prizeMoney = prizeMoney;
         this.count = count;
         this.collectCount = collectCount;
+        this.matchBonus = matchBounus;
     }
 
     public int getCount() {
@@ -25,4 +27,7 @@ public class PrizeMoneyDto {
         return prizeMoney;
     }
 
+    public boolean isMatchBonus() {
+        return matchBonus;
+    }
 }

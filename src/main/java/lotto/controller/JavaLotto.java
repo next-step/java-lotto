@@ -1,36 +1,36 @@
 package lotto.controller;
 
-import lotto.dto.LottosDto;
 import lotto.dto.LottoNumbersDto;
+import lotto.dto.LottosDto;
 import lotto.dto.PrizeMoneyDto;
 import lotto.dto.ResultDto;
 import lotto.entity.*;
-import lotto.entity.LottoMachine;
-import lotto.entity.LottoWinningScanner;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class JavaLotto {
-
-    private static final LottoWinningScanner lottoWinningScanner = new LottoWinningScanner();
-    private static final InputView inputView = new InputView();
-    private static final WinningText winningText = new WinningText();
 
     private JavaLotto() {
 
     }
 
     public static void run() {
-        int inputMoney = inputView.requestBuyMoney();
+        int inputMoney = InputView.requestBuyMoney();
         List<Lotto> lottos = LottoMachine.insert(inputMoney);
         ResultView.printCreateLotto(toDto(lottos));
 
-        String text = inputView.requestWinnerNumber();
-        List<Integer> winningNumbers = winningText.numbers(text);
-        LottoResult result = lottoWinningScanner.result(lottos, winningNumbers, inputMoney);
+        String[] texts = InputView.requestWinnerNumber();
+        Set<Integer> winningNumbers = WinningTexts.numbers(texts);
+
+        int bonusNumber = InputView.requestBonusNumber();
+
+        Winning winning = new Winning(winningNumbers, bonusNumber);
+
+        LottoResult result = LottoWinningScanner.result(lottos, winning, inputMoney);
         ResultView.printResult(toDto(result));
     }
 
@@ -54,8 +54,8 @@ public class JavaLotto {
     private static List<PrizeMoneyDto> toDtos(List<WinningResult> winningResults) {
         List<PrizeMoneyDto> dtos = new ArrayList<>();
         for (WinningResult winningResult : winningResults) {
-            PrizeMoney prizeMoney = winningResult.getPrizeMoney();
-            dtos.add(new PrizeMoneyDto(prizeMoney.getPrizeMoney(), winningResult.getCount(), prizeMoney.getCollectCount()));
+            Rank rank = winningResult.getRank();
+            dtos.add(new PrizeMoneyDto(rank.getPrizeMoney(), winningResult.getCount(), rank.getCollectCount(), rank == Rank.SECOND));
         }
         return dtos;
     }

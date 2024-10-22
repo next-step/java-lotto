@@ -22,6 +22,4 @@ class LottoMachineTest {
         Lotto lotto = lottos.get(0);
         assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
-
-
 }
