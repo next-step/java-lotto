@@ -3,10 +3,14 @@ package lotto.domain;
 public class LottoNumber {
     private int value;
 
+    public LottoNumber(String value) {
+        this(Integer.parseInt(value));
+    }
     public LottoNumber(int value) {
         validate(value);
         this.value = value;
     }
+
 
     private void validate(int value) {
         if (value > 0 && value < 46) {

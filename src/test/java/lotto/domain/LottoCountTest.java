@@ -12,7 +12,7 @@ public class LottoCountTest {
 
     @Test
     void create_inputvalidation_amount() {
-        assertThatThrownBy(()->new LottoCount(1450)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoCount(1450, 1)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class LottoCountTest {
     void getTotalLottoCount() {
         LottoCount lottoCount = new LottoCount(15000);
         assertThat(lottoCount.getTotalLottoCount()).isEqualTo(15);
-        assertThat(lottoCount.getManualLottoCount()).isEqualTo(0);
+        assertThat(lottoCount.getManualLottoCount()).isEqualTo(1);
     }
 
     @Test
@@ -35,13 +35,22 @@ public class LottoCountTest {
         assertThat(lottoCount.getTotalPaymentAmount()).isEqualTo(new BigDecimal(15000));
     }
 
+
     @Test
-    @DisplayName("수동건수 추가")
-    void addManualLottoCount() {
-        LottoCount lottoCount = new LottoCount(15000);
-        lottoCount.addManualLottoCount(3);
-        assertThat(lottoCount.getTotalLottoCount()).isEqualTo(15);
-        assertThat(lottoCount.getManualLottoCount()).isEqualTo(3);
-        assertThat(lottoCount.getAutoLottoCount()).isEqualTo(12);
+    @DisplayName("수동 구매 건수 검증")
+    void getManualLottoCount_validation() {
+        assertThatThrownBy(()->new LottoCount(1000, 2))
+                .isInstanceOf(IllegalArgumentException.class);
+
     }
+
+    @Test
+    @DisplayName("수동 구매 건수")
+    void getManualLottoCount() {
+        LottoCount lottoCount = new LottoCount(15000, 1);
+        assertThat(lottoCount.getManualLottoCount()).isEqualTo(1);
+        assertThat(lottoCount.getTotalLottoCount()).isEqualTo(15);
+        assertThat(lottoCount.getAutoLottoCount()).isEqualTo(14);
+    }
+
 }
