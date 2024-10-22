@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public enum LottoRank {
     NON_RANKED(List.of(0, 1, 2), 0, Boolean.FALSE),
@@ -23,11 +24,14 @@ public enum LottoRank {
 
     public static LottoRank from(int matchingCount, Boolean isBonusBallMatched) {
         return Arrays.stream(LottoRank.values())
-                .filter(value -> SECOND.matchingCounts.contains(matchingCount)
-                        ? value.matchingCounts.contains(matchingCount) && value.isBonusBallMatching.equals(isBonusBallMatched)
-                        : value.matchingCounts.contains(matchingCount))
+                .filter(checkLottoRank(matchingCount, isBonusBallMatched))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("로또 번호 매칭 갯수 '%s'은 적합하지 않습니다.", matchingCount)));
+    }
+
+    private static Predicate<LottoRank> checkLottoRank(int matchingCount, Boolean isBonusBallMatched) {
+        return value -> SECOND.matchingCounts.contains(matchingCount) ?
+                value.isBonusBallMatching.equals(isBonusBallMatched) : value.matchingCounts.contains(matchingCount);
     }
 
     public static LottoRank[] winningRanks() {
