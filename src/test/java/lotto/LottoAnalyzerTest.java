@@ -16,13 +16,20 @@ public class LottoAnalyzerTest {
     public void 당첨통계_계산() {
         List<Lotto> lottos = new ArrayList<>();
 
-        lottos.add(new Lotto(new ArrayList<>(List.of(2, 5, 9, 10, 23, 31))));
-        lottos.add(new Lotto(new ArrayList<>(List.of(2, 5, 16, 41, 18, 42))));
+        lottos.add(new Lotto(List.of(2, 5, 9, 10, 23, 31)));
+        lottos.add(new Lotto(List.of(2, 5, 16, 41, 18, 42)));
 
-        List<Integer> winningNumbers = new ArrayList<>(List.of(2, 5, 9, 33, 35, 44));
+        List<Integer> winningNumbers = List.of(2, 5, 9, 33, 35, 44);
         int bonusNumber = 16;
 
-        assertThat(LottoAnalyzer.calculateWinningStatics(winningNumbers, bonusNumber, lottos)).isEqualTo(Map.of(1,0,2,0,3,0,4,0,5,1,0,1));
+        Map<Integer, Integer> winningStatics = LottoAnalyzer.calculateWinningStatics(winningNumbers, bonusNumber, lottos);
+
+        assertThat(winningStatics.get(1)).isEqualTo(0);  // 1등
+        assertThat(winningStatics.get(2)).isEqualTo(0);  // 2등
+        assertThat(winningStatics.get(3)).isEqualTo(0);  // 3등
+        assertThat(winningStatics.get(4)).isEqualTo(0);  // 4등
+        assertThat(winningStatics.get(5)).isEqualTo(1);  // 5등
+        assertThat(winningStatics.get(0)).isEqualTo(1);  // 미당첨
     }
 
     @Test

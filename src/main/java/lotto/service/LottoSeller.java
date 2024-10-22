@@ -8,7 +8,7 @@ public class LottoSeller {
     }
 
     public static List<Integer> sellLotto() {
-        return LottoGenerator.generateLotto();
+        return LottoGenerator.generateLottoNumbers();
     }
 
 }

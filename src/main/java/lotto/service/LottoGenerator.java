@@ -9,25 +9,25 @@ public class LottoGenerator {
     private LottoGenerator() {
     }
 
-    public static List<Integer> generateLotto() {
-        Set<Integer> lottoSet = new HashSet<>();
+    public static List<Integer> generateLottoNumbers() {
+        Set<Integer> numbersSet = new HashSet<>();
 
-        while (lottoSet.size() < 6) {
-            lottoSet.add(LottoGenerator.generateRandomNumber());
+        while (numbersSet.size() < 6) {
+            numbersSet.add(LottoGenerator.generateRandomNumber());
         }
 
-        List<Integer> lotto = new ArrayList<>(lottoSet);
+        List<Integer> numbers = new ArrayList<>(numbersSet);
 
-        shuffleLottoNumber(lotto);
+        shuffleLottoNumbers(numbers);
 
-        return lotto;
+        return numbers;
     }
 
     private static int generateRandomNumber() {
         return RANDOM.nextInt(45) + 1;
     }
 
-    private static void shuffleLottoNumber(List<Integer> lotto) {
-        Collections.shuffle(lotto);
+    private static void shuffleLottoNumbers(List<Integer> numbers) {
+        Collections.shuffle(numbers);
     }
 }

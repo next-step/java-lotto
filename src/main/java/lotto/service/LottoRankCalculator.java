@@ -21,4 +21,5 @@ public enum LottoRankCalculator {
                                 (matchingCount == 3) ? (!isMatchBonus ? FIFTH.rank : MISS.rank) :
                                         MISS.rank;
     }
+
 }
