@@ -9,25 +9,26 @@ import java.util.Objects;
 public class Lotto {
     private TryLottoCount tryLottoCount;
     private LottoNumberList lottoNumberList;
+    private LottoWinner lottoWinner;
+
+    public static Lotto InitLotto(int purchaseAmount, LottoGenerator lottoGenerator) {
+        Lotto lotto = new Lotto(new TryLottoCount(0,purchaseAmount));
+        lotto.convertPurchaseToLottoTryCount();
+        lotto.makeLottoList(lottoGenerator);
+        lotto.printLottoList();
+        return lotto;
+    }
 
     public Lotto(TryLottoCount tryLottoCount) {
         this(tryLottoCount,new LottoNumberList(new ArrayList<>()));
     }
     public Lotto(TryLottoCount tryLottoCount, LottoNumberList lottoNumberList) {
         this.tryLottoCount = tryLottoCount;
-        this.lottoNumberList = new LottoNumberList(new ArrayList<>());
+        this.lottoNumberList = lottoNumberList;
     }
 
-    public static Lotto InitLotto(int purchaseAmount, LottoGenerator lottoGenerator) {
-        Lotto lotto = new Lotto(new TryLottoCount(0));
-        lotto.convertPurchaseToLottoTryCount(purchaseAmount);
-        lotto.makeLottoList(lottoGenerator);
-        lotto.printLottoList();
-        return lotto;
-    }
-
-    public void convertPurchaseToLottoTryCount(int purchaseAmount) {
-        PrintView.printLottoTryCount(tryLottoCount.calculateLottoTryCount(purchaseAmount));
+    public void convertPurchaseToLottoTryCount() {
+        PrintView.printLottoTryCount(tryLottoCount.calculateLottoTryCount());
     }
 
     public void makeLottoList(LottoGenerator lottoGenerator) {
@@ -40,8 +41,20 @@ public class Lotto {
         lottoNumberList.printLottoList();
     }
 
-    public void searchWinningCount(LottoWinner lottoWinner) {
-        lottoNumberList.searchWinningCount(lottoWinner);
+    public void insertWinningLottoNumber(LottoWinner lottoWinner) {
+        this.lottoWinner = lottoWinner;
+    }
+
+    public void recordWinningCount() {
+        lottoNumberList.recordWinningCount(lottoWinner);
+    }
+
+    public void printWinningCount() {
+        lottoWinner.printWinningCount();
+    }
+
+    public int winningAmount() {
+        return lottoWinner.winningAmount();
     }
 
     @Override
@@ -56,6 +69,7 @@ public class Lotto {
     public int hashCode() {
         return Objects.hashCode(tryLottoCount);
     }
+
 
 
 }

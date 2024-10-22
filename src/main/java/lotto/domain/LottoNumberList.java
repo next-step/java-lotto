@@ -13,6 +13,7 @@ public class LottoNumberList {
         this.lottoNumberList = lottoNumberList;
     }
 
+
     public void add(OneTimeRoundLottoNumberList oneTimeRoundLottoNumberList) {
         lottoNumberList.add(oneTimeRoundLottoNumberList);
     }
@@ -21,9 +22,10 @@ public class LottoNumberList {
         PrintView.printLottoList(lottoNumberList);
     }
 
-    public void searchWinningCount(LottoWinner lottoWinner) {
+    public void recordWinningCount(LottoWinner lottoWinner) {
         for (OneTimeRoundLottoNumberList numberList : lottoNumberList) {
-            numberList.searchWinningCount(lottoWinner);
+            int matchingCount = lottoWinner.diffLottoAndWinningLotto(numberList.convertLottoNumberList());
+            lottoWinner.recordWinningCount(matchingCount);
         }
     }
 }

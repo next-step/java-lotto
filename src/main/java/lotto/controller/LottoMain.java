@@ -14,10 +14,11 @@ public class LottoMain {
         Scanner scanner = new Scanner(System.in);
         int purchaseAmount = InputView.purchaseAmount(scanner);
         Lotto lotto = Lotto.InitLotto(purchaseAmount, new LottoGenerateStrategy(new RandomLottoNumbers()));
-        LottoWinner lottoWinner = new LottoWinner(InputView.lottoWinnerNumbers(scanner));
-        lotto.searchWinningCount(lottoWinner);
-        lottoWinner.printWinningCount();
-        ProfitMargin profitMargin = new ProfitMargin(lottoWinner.winningAmount(), purchaseAmount);
+        lotto.insertWinningLottoNumber(new LottoWinner(InputView.lottoWinnerNumbers(scanner)));
+        lotto.recordWinningCount();
+
+        lotto.printWinningCount();
+        ProfitMargin profitMargin = new ProfitMargin(lotto.winningAmount(), purchaseAmount);
         profitMargin.printMargin();
     }
 

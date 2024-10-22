@@ -17,4 +17,8 @@ public class LottoNumber {
     public int getLottoNumber() {
         return lottoNumber;
     }
+
+    public boolean compareNumber(int insertLottoNumber) {
+        return lottoNumber == insertLottoNumber;
+    }
 }

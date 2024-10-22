@@ -12,8 +12,8 @@ public class TryLottoCountTest {
     @Test
     public void convertPurchaseToLottoTryCount_테스트() {
         int purchaseAmount = 3000;
-        TryLottoCount tryLottoCount = new TryLottoCount(0);
-        assertThat(tryLottoCount.calculateLottoTryCount(purchaseAmount))
+        TryLottoCount tryLottoCount = new TryLottoCount(0, purchaseAmount);
+        assertThat(tryLottoCount.calculateLottoTryCount())
                 .isEqualTo(EXPECTED_TRYCOUNT);
     }
 

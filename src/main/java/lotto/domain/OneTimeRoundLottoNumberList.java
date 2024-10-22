@@ -23,8 +23,10 @@ public class OneTimeRoundLottoNumberList {
                 .map(LottoNumber::getLottoNumber).collect(Collectors.toList());
     }
 
-    public void searchWinningCount(LottoWinner lottoWinner) {
-        int matchingCount = lottoWinner.diffLottoAndWinningLotto(convertLottoNumberList());
-        lottoWinner.recordWinningCount(matchingCount);
+
+    public boolean compareNumber(int insertLottoNumber) {
+        return oneTimeRoundLottoNumberList.stream()
+                .anyMatch(lottoNumber -> lottoNumber.compareNumber(insertLottoNumber));
     }
+
 }
