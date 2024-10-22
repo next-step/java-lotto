@@ -44,23 +44,13 @@ public class LottoNumbers {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("번호 갯수가 6개가 아닙니다.");
         }
-        for (LottoNumber number : lottoNumbers) {
-            number.validateLottoNumber();
-        }
         return true;
     }
 
-    public boolean hasLottoNumber(int lottoNumber){ //todo LottoNumber ? int ?
+    public boolean hasLottoNumber(LottoNumber lottoNumber){ //todo LottoNumber ? int ?
         if(this.lottoNumbers.contains(lottoNumber)){
             throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
         }
         return false;
     }
-
-//    public boolean hasLottoNumber(LottoNumber lottoNumber){
-//        if(this.lottoNumbers.contains(lottoNumber)){
-//            throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
-//        }
-//        return false;
-//    }
 }

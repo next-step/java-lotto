@@ -28,9 +28,7 @@ public class LottoInputView {
 
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해주세요");
-        int bonusNumber = scanner.nextInt();
-        LottoNumber.validateLottoNumber(bonusNumber); //todo
-        return bonusNumber;
+        return scanner.nextInt();
     }
 
 }

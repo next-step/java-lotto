@@ -14,25 +14,13 @@ public class LottoResult {
         return this.isBonusMatch;
     }
 
-    public int calculateMatchCount(List<Integer> winningNumbers, List<Integer> lottoNumbers, int bonusNumber) {
+    public int calculateMatchCount(List<LottoNumber> winningNumbers, List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         calculateWinningMatchCount(winningNumbers, lottoNumbers);
-        checkBonusMatch(lottoNumbers, bonusNumber);
-        return matchCount;
-    }
-    public int calculateMatchCount2(List<LottoNumber> winningNumbers, List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
-        calculateWinningMatchCount2(winningNumbers, lottoNumbers);
         checkBonusMatch2(lottoNumbers, bonusNumber);
         return matchCount;
     }
 
-    private int calculateWinningMatchCount(List<Integer> winningNumbers, List<Integer> lottoNumbers) {
-        for (int i = 0; i < lottoNumbers.size(); i++) {
-            this.matchCount += checkWinningMatchNumber(winningNumbers, lottoNumbers.get(i));
-        }
-        return this.matchCount;
-    }
-
-    private int calculateWinningMatchCount2(List<LottoNumber> winningNumbers, List<LottoNumber> lottoNumbers) {
+    private int calculateWinningMatchCount(List<LottoNumber> winningNumbers, List<LottoNumber> lottoNumbers) {
         for (int i = 0; i < lottoNumbers.size(); i++) {
             this.matchCount += checkWinningMatchNumber(winningNumbers, lottoNumbers.get(i));
         }

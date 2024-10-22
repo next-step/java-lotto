@@ -18,7 +18,7 @@ public class Lotto {
 
     public Lotto(List<Integer> lottoNumbers, int bonusNumber) {
         createLotto(new LottoNumbers(lottoNumbers), new LottoResult());
-        this.hasLottoNumber(bonusNumber);
+        this.hasLottoNumber(new LottoNumber(bonusNumber)); //todo
     }
 
     private void createLotto(LottoNumbers lottoNumbers, LottoResult lottoResult) {
@@ -43,19 +43,15 @@ public class Lotto {
     }
 
     public int calculateMatchCount(Lotto winningLotto, LottoNumber bonusNumber) {
-        return this.lottoResult.calculateMatchCount2(winningLotto.getLottoNumbers(), lottoNumbers.getValues(), bonusNumber);
+        return this.lottoResult.calculateMatchCount(winningLotto.getLottoNumbers(), lottoNumbers.getValues(), bonusNumber);
     }
 
     public int getAmount() {
         return this.lottoResult.getAmountForWinningLotto();
     }
 
-    public boolean hasLottoNumber(int lottoNumber){ //todo
+    public boolean hasLottoNumber(LottoNumber lottoNumber){ //todo
         return this.lottoNumbers.hasLottoNumber(lottoNumber);
     }
-
-//    public boolean hasLottoNumber(LottoNumber lottoNumber){
-//        return this.lottoNumbers.hasLottoNumber(lottoNumber);
-//    }
 
 }

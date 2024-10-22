@@ -9,21 +9,16 @@ public class LottoNumber implements Comparable{
     private int number;
 
     public LottoNumber(int number){
+        validateLottoNumber(number);
         this.number = number;
     }
 
     public int getValue(){
         return this.number;
     }
-    public static boolean validateLottoNumber(int lottoNumber) {
-        if (lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER) {
-            throw new IllegalArgumentException("유효한 번호가 아닙니다.");
-        }
-        return true;
-    }
 
-    public boolean validateLottoNumber() {
-        if (this.number < MIN_NUMBER || this.number > MAX_NUMBER) {
+    private static boolean validateLottoNumber(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("유효한 번호가 아닙니다.");
         }
         return true;
