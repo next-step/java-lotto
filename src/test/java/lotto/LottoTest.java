@@ -1,11 +1,12 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.ui.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import random.DefaultLottoList;
-import random.LottoGenerateStrategy;
-import random.LottoGenerator;
+import lotto.random.DefaultLottoList;
+import lotto.random.LottoGenerateStrategy;
+import lotto.random.LottoGenerator;
 
 import java.util.List;
 
@@ -15,12 +16,9 @@ public class LottoTest {
 
 
     public static final int TEST_TRY_LOTTO_COUNT = 3;
-    public static final String TEST_LOTTO_WINNER_NUMBERS = "4, 5, 6, 7, 8, 9";
-    public static final List<Integer> TEST_LOTTO_GENERATED_NUMBER_LIST = List.of(1, 2, 3, 4, 5, 6);
+     public static final List<Integer> TEST_LOTTO_GENERATED_NUMBER_LIST = List.of(1, 2, 3, 4, 5, 6);
     private LottoGenerator lottoGenerator = new LottoGenerateStrategy(new DefaultLottoList());
 
-    @BeforeEach
-    void setup() {}
 
 
     @Test
@@ -48,8 +46,7 @@ public class LottoTest {
     public void recordWinningCount_당첨횟수_테스트() {
         int purchaseAmount = 1000;
         Lotto lotto = Lotto.InitLotto(purchaseAmount, lottoGenerator);
-        String lottoWinnerNumbers = TEST_LOTTO_WINNER_NUMBERS;
-        LottoWinner lottoWinner = new LottoWinner(lottoWinnerNumbers);
+        LottoWinner lottoWinner = new LottoWinner(TEST_LOTTO_GENERATED_NUMBER_LIST);
         lotto.insertWinningLottoNumber(lottoWinner);
         lotto.recordWinningCount();
 

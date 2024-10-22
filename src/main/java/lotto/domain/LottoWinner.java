@@ -11,15 +11,12 @@ public class LottoWinner {
 
     private WinningLottoCount winningLottoCountMap;
 
-    public LottoWinner(String lottoWinnerNumbers) {
-        this(stringToArrayList(lottoWinnerNumbers), initWinnigLottoCountMap());
-    }
 
     public LottoWinner(List<Integer> lottoWinnerNumberList) {
         this(lottoWinnerNumberList, initWinnigLottoCountMap());
     }
 
-    public LottoWinner(List<Integer> lottoWinnerNumberList,  Map<Integer, Integer> winningLottoCountMap) {
+    public LottoWinner(List<Integer> lottoWinnerNumberList, Map<Integer, Integer> winningLottoCountMap) {
         this.winnerLottoNumberList = new OneTimeRoundLottoNumberList(lottoWinnerNumberList);
         this.winningLottoCountMap = new WinningLottoCount(winningLottoCountMap);
     }
@@ -48,16 +45,9 @@ public class LottoWinner {
 
     private static Map<Integer, Integer> initWinnigLottoCountMap() {
         Map<Integer, Integer> winningLottoCountMap = new TreeMap<>(Comparator.reverseOrder());
-        Arrays.asList(1,2,3,4).forEach(i -> winningLottoCountMap.put(i, DEFAULT_WINNING_COUNT));
+        Arrays.asList(1, 2, 3, 4).forEach(i -> winningLottoCountMap.put(i, DEFAULT_WINNING_COUNT));
         return winningLottoCountMap;
     }
-
-    private static List<Integer> stringToArrayList(String lottoWinnerNumbers) {
-        return Stream.of(lottoWinnerNumbers.replaceAll("\\s","").split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
 
     @Override
     public boolean equals(Object o) {

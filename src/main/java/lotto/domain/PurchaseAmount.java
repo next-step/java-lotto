@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class PurchaseAmount {
-    public static final int CONVERTING_NUMBER = 1000;
+    public static final int CONVERTING_FLOOR_NUMBER = 1000;
     private final int purchaseAmount;
 
     public PurchaseAmount(int purchaseAmount) {
@@ -11,7 +11,10 @@ public class PurchaseAmount {
     }
 
     public int convertAmountToTryLottoCount() {
-        return Math.floorDiv(purchaseAmount, CONVERTING_NUMBER);
+        if (purchaseAmount < CONVERTING_FLOOR_NUMBER) {
+            throw new IllegalArgumentException();
+        }
+        return Math.floorDiv(purchaseAmount, CONVERTING_FLOOR_NUMBER);
     }
 
     @Override

@@ -4,8 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoWinner;
 import lotto.domain.ProfitMargin;
 import lotto.ui.InputView;
-import random.LottoGenerateStrategy;
-import random.RandomLottoNumbers;
+import lotto.random.LottoGenerateStrategy;
+import lotto.random.RandomLottoNumbers;
 
 import java.util.Scanner;
 

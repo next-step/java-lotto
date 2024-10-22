@@ -1,6 +1,10 @@
 package lotto.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
 
@@ -11,9 +15,12 @@ public class InputView {
         return purchaseAmount;
     }
 
-   public static String lottoWinnerNumbers(Scanner scanner) {
+   public static List<Integer> lottoWinnerNumbers(Scanner scanner) {
        System.out.println("지난주 당첨 번호를 입력해주세요");
-       return scanner.nextLine();
+       String winnserNumbers = scanner.nextLine();
+       return Stream.of(winnserNumbers.replaceAll("\\s","").split(","))
+               .map(Integer::parseInt)
+               .collect(Collectors.toList( ));
    }
 
 }

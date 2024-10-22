@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.ui.PrintView;
-import random.LottoGenerator;
+import lotto.random.LottoGenerator;
 
 import java.util.ArrayList;
 import java.util.Objects;
