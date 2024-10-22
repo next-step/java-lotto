@@ -1,9 +1,10 @@
 package lotto.view;
 
-import lotto.common.Prize;
+import lotto.common.WinningInfo;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     private ResultView() {
@@ -19,13 +20,25 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public static void printWinningStatics(int[] winningStatics) {
+    public static void printWinningStatics(Map<Integer, Integer> winningStatics) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
-        for (int count = 3; count <= 6; count++) {
-            System.out.println(count + "개 일치 (" + Prize.PRIZE[count] + "원)- " + winningStatics[count] + "개");
+        for (int rank = 5; rank >= 1; rank--) {
+            int matchCount = WinningInfo.MATCH_COUNT[rank];
+            int prize = WinningInfo.PRIZE[rank];
+
+           printWinningResult(rank, matchCount, prize, winningStatics);
         }
+    }
+
+    private static void printWinningResult(int rank, int matchCount, int prize, Map<Integer, Integer> winningStatics) {
+        if (rank == 2) {
+            System.out.println(matchCount + "개 일치, 보너스 볼 일치(" + prize + "원)- " + winningStatics.get(rank) + "개");
+            return;
+        }
+
+        System.out.println(matchCount + "개 일치 (" + prize + "원)- " + winningStatics.get(rank) + "개");
     }
 
     public static void printReturnRate(float returnRate) {

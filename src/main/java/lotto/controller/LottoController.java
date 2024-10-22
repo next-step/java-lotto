@@ -6,6 +6,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
     public static void main(String[] args) {
@@ -20,7 +21,10 @@ public class LottoController {
             ResultView.printLottoNumber(lotto);
         }
 
-        int[] winningStatics = lottoBuyer.checkLottoResult(InputView.inputLastWeekWinningNumbers());
+        String lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber();
+
+        Map<Integer, Integer> winningStatics = lottoBuyer.checkLottoResult(lastWeekWinningNumbers, bonusNumber);
         ResultView.printWinningStatics(winningStatics);
 
         float returnRate = lottoBuyer.checkReturnRate(buyAmount, winningStatics);

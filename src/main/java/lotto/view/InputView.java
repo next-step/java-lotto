@@ -29,12 +29,19 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String lastWeekWinningNumbers = SCANNER.nextLine();
-
-        System.out.println();
-
         isValidWinningNumberInput(lastWeekWinningNumbers);
 
         return lastWeekWinningNumbers;
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+
+        int bonusNumber = SCANNER.nextInt();
+
+        System.out.println();
+
+        return bonusNumber;
     }
 
     private static void isValidWinningNumberInput(String lastWeekWinningNumbers) {
