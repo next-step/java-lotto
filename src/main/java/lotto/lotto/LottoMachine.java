@@ -8,16 +8,16 @@ public class LottoMachine {
     private final static int MIN_PRICE = 1000;
 
     private final int price;
-    private final LottoGenerator lottoGenerator;
+    private final LottoGeneratorStrategy lottoGeneratorStrategy;
     private final int executeIdx;
     private final List<Lotto> lottos;
 
-    public LottoMachine(final int price, LottoGenerator lottoGenerator) {
+    public LottoMachine(final int price, LottoGeneratorStrategy lottoGeneratorStrategy) {
         validatePrice(price);
         this.price = price;
-        this.lottoGenerator = lottoGenerator; //FakeLotto를 위해 만들어짐
         this.executeIdx = getExecuteIdx();
         this.lottos = new ArrayList<>();
+        this.lottoGeneratorStrategy = lottoGeneratorStrategy;
     }
 
     /**
@@ -25,7 +25,7 @@ public class LottoMachine {
      * */
     public void createLottos() {
         for (int i = 0; i < executeIdx; i++) {
-            Lotto lotto = lottoGenerator.generateLotto();
+            Lotto lotto = lottoGeneratorStrategy.generateLotto();
             lottos.add(lotto);
         }
     }

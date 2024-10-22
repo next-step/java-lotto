@@ -4,8 +4,8 @@ package calculator.input;
 import java.util.regex.Pattern;
 
 public class Number {
-    private static final String REGEX_NUMBER = "-?\\d+(\\.\\d+)?";
-    private static final Pattern PATTERN_NUMBER = Pattern.compile(REGEX_NUMBER);
+
+    private static final Pattern PATTERN_NUMBER = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     private int number;
 

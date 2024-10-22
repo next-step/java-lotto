@@ -3,8 +3,8 @@ package lotto.lotto;
 public class LottoService {
 
     public LottoResult createLotto(int price) {
-        LottoGenerator generator = new Lotto();
-        LottoMachine machine = new LottoMachine(price, generator);
+        LottoGeneratorStrategy autoLottoStrategy = new AutoLottoStrategy();
+        LottoMachine machine = new LottoMachine(price, autoLottoStrategy);
         machine.createLottos();
 
         LottoResult result = new LottoResult(machine.getLottos());

@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.lotto.Lotto;
-import lotto.lotto.LottoGenerator;
+import lotto.lotto.LottoGeneratorStrategy;
 import lotto.lotto.LottoMachine;
 import lotto.lotto.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,29 +15,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMachineTest {
-    private LottoGenerator lottoGenerator;
+    private LottoGeneratorStrategy lottoGeneratorStrategy;
 
     @BeforeEach
     void setUp() {
-        lottoGenerator = new FakeLotto();
+        lottoGeneratorStrategy = new FakeLottoStrategy();
     }
 
     @Test
     void 로또_생성_횟수_구하기() {
-        LottoMachine lottoMachine = new LottoMachine(3000, lottoGenerator);
+        LottoMachine lottoMachine = new LottoMachine(3000, lottoGeneratorStrategy);
         assertThat(lottoMachine.getExecuteIdx()).isEqualTo(3);
     }
 
     @Test
     void 로또_금액은_1000원_미만_IllegalArgumentException() {
         assertThatThrownBy(() -> {
-            LottoMachine lottoMachine = new LottoMachine(500, lottoGenerator);
+            LottoMachine lottoMachine = new LottoMachine(500, lottoGeneratorStrategy);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 로또_생성_테스트() {
-        LottoMachine lottoMachine = new LottoMachine(3000, lottoGenerator);
+        LottoMachine lottoMachine = new LottoMachine(3000, lottoGeneratorStrategy);
         lottoMachine.createLottos();
 
         List<LottoNumber> lottoNumberList = new ArrayList<>();
