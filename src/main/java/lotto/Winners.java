@@ -9,7 +9,7 @@ public class Winners {
     private final List<Integer> winNumbers;
 
     public Winners(String text) {
-        this.winNumbers = parse(text);
+        this.winNumbers = validate(parse(text));
     }
 
     public Statistics match(Orders orders) {
@@ -35,6 +35,17 @@ public class Winners {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private List<Integer> validate(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException();
+        }
+        numbers.stream().filter(n -> n < 1 || n > 45).findAny().ifPresent(n -> {
+            throw new IllegalArgumentException();
+        });
+
+        return numbers;
     }
 
     private static boolean isEmpty(String s) {
