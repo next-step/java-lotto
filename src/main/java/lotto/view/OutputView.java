@@ -1,11 +1,9 @@
 package lotto.view;
 
 import lotto.application.LottoWinningStatistics;
-import lotto.domain.Lotto;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoRank;
-
-import java.util.List;
+import lotto.domain.Lottos;
 
 public class OutputView {
     private static final String NEW_LINE = System.lineSeparator();
@@ -18,9 +16,12 @@ public class OutputView {
         System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.%s", manualLottoQuantity, lottoQuantityWithoutManual, NEW_LINE);
     }
 
-    public static void printLottos(List<Lotto> lottos) {
+    public static void printLottos(Lottos lottos) {
         StringBuilder stringBuilder = new StringBuilder();
-        lottos.forEach(lottoNumbers -> stringBuilder.append(lottoNumbers.values()).append(NEW_LINE));
+
+        for (int i = 0; i < lottos.size(); i++) {
+            stringBuilder.append(lottos.valueAt(i)).append(NEW_LINE);
+        }
         System.out.println(stringBuilder);
     }
 
