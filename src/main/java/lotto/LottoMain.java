@@ -17,14 +17,13 @@ public class LottoMain {
         int purchasePrice = inputView.getPurchasePrice();
 
         int passiveLottoTicketCount = inputView.getPassiveLottoTicketCount();
-
         List<List<Integer>> passiveLottoNumbers = inputView.getPassiveLottoNumbers(passiveLottoTicketCount);
 
         Lotto lotto = new Lotto(new AutoGenerator());
-        int lottoTicketCount = lotto.getLottoTicketCount(purchasePrice);
-        resultView.print(lottoTicketCount + "개를 구매했습니다.");
+        int autoLottoTicketCount = lotto.getLottoTicketCount(purchasePrice) - passiveLottoTicketCount;
+        resultView.print("수동으로 " + passiveLottoTicketCount + "장, 자동으로 " + autoLottoTicketCount + "개를 구매했습니다.");
 
-        LottoTickets lottoTickets = lotto.issue(lottoTicketCount);
+        LottoTickets lottoTickets = lotto.issue(autoLottoTicketCount, passiveLottoNumbers);
         resultView.printLottoTickets(lottoTickets);
 
         List<Integer> winningNumbers = inputView.getWinningNumbers();
