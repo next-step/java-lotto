@@ -1,12 +1,14 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.domain.PurchaseInfo;
 
 public class InputView {
 
@@ -21,19 +23,24 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public Lotto inputWinnerNumber() {
+    public int inputManualLottoPurchaseAmount() {
         clearBuffer();
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
+        return inputPurchaseAmount();
+    }
+
+    private void clearBuffer() {
+        scanner.nextLine();
+    }
+
+    public Lotto inputWinnerNumber() {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return new Lotto(convertStringToIntList(scanner.nextLine()));
     }
 
     public LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return LottoNumber.createLottoNumber(scanner.nextInt());
-    }
-
-    private void clearBuffer() {
-        scanner.nextLine();
     }
 
     public List<LottoNumber> convertStringToIntList(String stringWinningNumber) {
@@ -45,6 +52,20 @@ public class InputView {
 
     private String[] splitString(String stringWinningNumber) {
         return stringWinningNumber.split(", ");
+    }
+
+    public Lottos inputManualLottoGuide(PurchaseInfo purchaseInfo) {
+        clearBuffer();
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        return Lottos.createLottosByManual(inputManualLottos(purchaseInfo), purchaseInfo);
+    }
+
+    private List<Lotto> inputManualLottos(PurchaseInfo purchaseInfo) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchaseInfo.getNumberOfManualPurchase(); i++) {
+            lottos.add(new Lotto(convertStringToIntList(scanner.nextLine())));
+        }
+        return lottos;
     }
 
 }

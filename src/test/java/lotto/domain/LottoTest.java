@@ -14,6 +14,7 @@ public class LottoTest {
     @Test
     @DisplayName("중복 번호가 있는지 확인한다")
     void 중복_번호_확인() {
+
         Assertions.assertThatThrownBy(
                 () ->new Lotto(IntStream.of(1,2,3,4,5,5)
                         .mapToObj(LottoNumber::createLottoNumber)
