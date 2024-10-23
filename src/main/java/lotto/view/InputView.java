@@ -62,7 +62,7 @@ public class InputView {
 
     private List<Lotto> inputManualLottos(int purchaseAmount) {
         List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0; i < purchaseAmount; i++) {
+        for (int i = 0; i < purchaseAmount; i++) {
             lottos.add(new Lotto(convertStringToIntList(scanner.nextLine())));
         }
         return lottos;

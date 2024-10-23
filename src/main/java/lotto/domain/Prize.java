@@ -10,7 +10,7 @@ public enum Prize {
     THIRD(5, 1_500_000, Constants.BONUS_IRRELEVANT),
     FOURTH(4, 50000, Constants.BONUS_IRRELEVANT),
     FIFTH(3, 5000, Constants.BONUS_IRRELEVANT),
-    MISS(0,0,Constants.BONUS_IRRELEVANT);
+    MISS(0, 0, Constants.BONUS_IRRELEVANT);
 
     private int hit;
     private int value;
@@ -36,6 +36,6 @@ public enum Prize {
     private static class Constants {
         public static final List<Boolean> BONUS_HIT = List.of(true);
         public static final List<Boolean> BONUS_MISS = List.of(false);
-        public static final List<Boolean> BONUS_IRRELEVANT = List.of(true,false);
+        public static final List<Boolean> BONUS_IRRELEVANT = List.of(true, false);
     }
 }

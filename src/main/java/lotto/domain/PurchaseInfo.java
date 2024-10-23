@@ -12,7 +12,7 @@ public class PurchaseInfo {
     }
 
     private void validNumberOfManualLotto() {
-        if(numberOfManualPurchase > totalNumberOfLotto) {
+        if (numberOfManualPurchase > totalNumberOfLotto) {
             throw new IllegalArgumentException("구매한 로또 수량보다 많의 수의 로또를 수동 구매 할 수 없습니다");
         }
     }
@@ -24,11 +24,11 @@ public class PurchaseInfo {
 
     public int getNumberOfManualPurchase() {
         return numberOfManualPurchase;
-   }
+    }
 
-   public int getNumberOfAutoPurchase() {
+    public int getNumberOfAutoPurchase() {
         return totalNumberOfLotto - numberOfManualPurchase;
-   }
+    }
 
     public int getPruchaseAmount() {
         return 1000 * totalNumberOfLotto;

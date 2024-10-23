@@ -33,12 +33,12 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             int count = lotto.lottoWinningStatus(winningLotto.getWinningLotto());
             boolean bonusHit = lotto.checkContainsBonusNumber(winningLotto.getBonusLottoNumber());
-            statistic.updatePrize(Prize.getHit(count,bonusHit));
+            statistic.updatePrize(Prize.getHit(count, bonusHit));
         }
         return statistic;
     }
 
-    public void additionalLotto(Lotto lotto){
+    public void additionalLotto(Lotto lotto) {
         lottos.add(lotto);
     }
 

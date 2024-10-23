@@ -29,7 +29,7 @@ public class LottoResultStatistic {
     public int getTotalPrize() {
         int totalPrize = lottoResultStatistics.entrySet()
                 .stream()
-                .filter(count -> count.getValue()>=1)
+                .filter(count -> count.getValue() >= 1)
                 .map(prize -> prize.getKey().getValue() * prize.getValue())
                 .reduce(0, Integer::sum);
         validtotalPrize(totalPrize);
