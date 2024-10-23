@@ -22,29 +22,19 @@ public class LottoController {
         int moneyAmount = InputView.getMoney();
         LottoMoney money = new LottoMoney(moneyAmount);
 
-        int amount = money.calculateLottoAmount();
-        ResultView.printLottoAmount(amount);
-
-        Lotto lotto = new Lotto();
-        Win win = new Win();
-
-        List<LottoNumbers> userLottos = new ArrayList<>();
-
-        for (int i = 1; i <= amount; i++) {
-            LottoNumbers selectedNumbers = lotto.generateLotto();
-            ResultView.printLottoNumbers(selectedNumbers);
-            userLottos.add(selectedNumbers);
-        }
+        int amount = calculateLottoAmount(money);
+        List<LottoNumbers> userLottos = generateLottoNumbers(amount);
 
         Set<Integer> winningNumbers = InputView.getWinningNumbers();
+        Map<Integer, Integer> matchCountMap = initializeMatchCountMap();
 
-        Map<Integer, Integer> matchCountMap = new HashMap<>();
-        for (WinningPrize prize : WinningPrize.values()) {
-            matchCountMap.put(prize.getMatchCount(), 0);
-        }
+        int totalWinningAmount = getTotalWinningAmount(userLottos, winningNumbers, matchCountMap);
+        printResults(matchCountMap, moneyAmount, totalWinningAmount);
+    }
 
+    private static int getTotalWinningAmount(List<LottoNumbers> userLottos, Set<Integer> winningNumbers, Map<Integer, Integer> matchCountMap) {
         int totalWinningAmount = 0;
-
+        Win win = new Win();
         for (LottoNumbers userLotto : userLottos) {
             int matchCount = win.countMatchingNumbers(winningNumbers, userLotto);
             if (matchCount >= 3) {
@@ -52,7 +42,11 @@ public class LottoController {
                 totalWinningAmount += win.getPrizeMoney(matchCount);
             }
         }
+        return totalWinningAmount;
+    }
 
+    private static void printResults(Map<Integer, Integer> matchCountMap, int moneyAmount, int totalWinningAmount) {
+        Win win = new Win();
         ResultView.printResult();
         for (int matchCount : matchCountMap.keySet()) {
             int prizeMoney = win.getPrizeMoney(matchCount);
@@ -62,5 +56,32 @@ public class LottoController {
 
         double winningRate = win.calculateWinningRate(moneyAmount, totalWinningAmount);
         ResultView.printWinningRate(winningRate);
+    }
+
+    private static Map<Integer, Integer> initializeMatchCountMap() {
+        Map<Integer, Integer> matchCountMap = new HashMap<>();
+        for (WinningPrize prize : WinningPrize.values()) {
+            matchCountMap.put(prize.getMatchCount(), 0);
+        }
+        return matchCountMap;
+    }
+
+    private static List<LottoNumbers> generateLottoNumbers(int amount) {
+        Lotto lotto = new Lotto();
+
+        List<LottoNumbers> userLottos = new ArrayList<>();
+
+        for (int i = 1; i <= amount; i++) {
+            LottoNumbers selectedNumbers = lotto.generateLotto();
+            ResultView.printLottoNumbers(selectedNumbers);
+            userLottos.add(selectedNumbers);
+        }
+        return userLottos;
+    }
+
+    private static int calculateLottoAmount(LottoMoney money) {
+        int amount = money.calculateLottoAmount();
+        ResultView.printLottoAmount(amount);
+        return amount;
     }
 }
