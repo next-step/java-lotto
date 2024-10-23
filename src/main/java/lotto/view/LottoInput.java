@@ -17,6 +17,11 @@ public class LottoInput {
         return scanner.nextLine();
     }
 
+    public int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return parseAmount(scanner.nextLine());
+    }
+
     public int purchaseValid(String amount) {
 
         if(amount.isBlank()) {

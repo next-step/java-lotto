@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoDetailMatch;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoMatcher;
 import lotto.view.LottoInput;
@@ -27,11 +28,11 @@ public class LottoGame {
         lottoPrint.lottoPurchasedCount(lottoTickets);
 
         String winningLottoNumbers = lottoInput.getWinningNumbers();
-        LottoMatcher matcher = new LottoMatcher(lottoGenerator, winningLottoNumbers);
-        List<Integer> matchedLottoList = matcher.matchLottoNumber(lottoTickets);
+        int bonusNumber = lottoInput.getBonusNumber();
 
-        // 결과 출력
-        Map<String, Integer> rankCounts = matcher.countMatch(matchedLottoList);
+        LottoMatcher matcher = new LottoMatcher(lottoGenerator, winningLottoNumbers);
+
+        Map<String, Integer> rankCounts = matcher.matchAndCount(lottoTickets, bonusNumber);
         double profitRate = matcher.calculateProfitRate(rankCounts, purchasedAmount);
         lottoPrint.lottoResult(rankCounts, profitRate);
 

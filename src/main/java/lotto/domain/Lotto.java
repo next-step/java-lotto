@@ -23,10 +23,14 @@ public class Lotto {
         return this.numbers;
     }
 
-    public int countMatches(Lotto winningNumbers) {
-        return (int) numbers.stream()
-                .filter(winningNumbers.getNumbers()::contains)
-                .count();
+    public LottoDetailMatch countMatches(Lotto winningNumbers, int bonusNumber) {
+        int matchCount = (int) numbers.stream()
+                                .filter(winningNumbers.getNumbers()::contains)
+                                .count();
+
+        boolean isMatchedBonusNumber = bonusNumber != 0 && numbers.contains(bonusNumber);
+
+        return new LottoDetailMatch(matchCount, isMatchedBonusNumber) ;
     }
 
     @Override
