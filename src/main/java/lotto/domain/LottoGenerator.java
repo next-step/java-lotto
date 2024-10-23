@@ -8,7 +8,6 @@ public interface LottoGenerator {
 
     int FROM_INDEX = 0;
     int LOTTO_SIZE = 6;
-    int PRICE_OF_LOTTO = 1000;
 
     List<LottoNumber> lottoGenerator = IntStream.rangeClosed(1, 45)
             .boxed()
