@@ -26,7 +26,12 @@ public class ResultView {
 
     }
 
-    public void printResult(LottoResultStatistic lottoResultStatistic) {
+    public void printResult(LottoResultStatistic lottoResultStatistic, PurchaseInfo purchaseInfo) {
+        printStatistic(lottoResultStatistic);
+        printProfit(lottoResultStatistic.calculateProfit(purchaseInfo.getPruchaseAmount()));
+    }
+
+    private static void printStatistic(LottoResultStatistic lottoResultStatistic) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");

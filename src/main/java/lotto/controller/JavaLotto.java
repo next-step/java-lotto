@@ -32,8 +32,7 @@ public class JavaLotto {
         LottoResultStatistic lottoResultStatistic
                 = lottos.getResultStatistic(new WinningLotto(inputView.inputWinnerNumber(), inputView.inputBonusNumber()));
 
-        resultView.printResult(lottoResultStatistic);
-        resultView.printProfit(lottoResultStatistic.calculateProfit(purchaseInfo.getPruchaseAmount()));
+        resultView.printResult(lottoResultStatistic, purchaseInfo);
 
     }
 
