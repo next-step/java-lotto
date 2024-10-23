@@ -6,7 +6,7 @@ import static lotto.domain.LottoNumberGenerator.LOTTO_NUMBER_LOWER_LIMIT;
 import static lotto.domain.LottoNumberGenerator.LOTTO_NUMBER_UPPER_LIMIT;
 
 public class LottoNumber {
-    private final Integer lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(Integer lottoNumber) {
         validateLottoNumberRange(lottoNumber);
@@ -28,7 +28,7 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(lottoNumber, that.lottoNumber);
+        return lottoNumber == that.lottoNumber;
     }
 
     @Override
