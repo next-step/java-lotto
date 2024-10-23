@@ -4,19 +4,15 @@ import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos;
-    PurchaseInfo purchaseInfo;
+    private final PurchaseInfo purchaseInfo;
 
-    public static Lottos createLottos(int purchaseAmount, LottoGenerator lottoGenerator) {
-        List<Lotto> lottos = lottoGenerator.generateLottos(purchaseAmount);
-        return new Lottos(lottos);
+    public static Lottos createLottos(PurchaseInfo purchaseInfo, LottoGenerator lottoGenerator) {
+        List<Lotto> lottos = lottoGenerator.generateLottos(purchaseInfo.getNumberOfAutoPurchase());
+        return new Lottos(lottos, purchaseInfo);
     }
 
     public static Lottos createLottosByManual(List<Lotto> lottos, PurchaseInfo purchaseInfo) {
         return new Lottos(lottos, purchaseInfo);
-    }
-
-    private Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
     }
 
     private Lottos(List<Lotto> lottos, PurchaseInfo purchaseInfo) {
@@ -51,4 +47,7 @@ public class Lottos {
                 .forEach(lotto -> this.lottos.add(lotto));
     }
 
+    public PurchaseInfo getPurchaseInfo() {
+        return purchaseInfo;
+    }
 }
