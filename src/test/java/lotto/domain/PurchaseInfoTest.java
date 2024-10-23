@@ -58,4 +58,15 @@ public class PurchaseInfoTest {
 
     }
 
+    @Test
+    @DisplayName("수동 로또의 개수는 음수일 수 없다")
+    void 수동_로또_개수는_음수일_수_없다(){
+
+        Assertions.assertThatThrownBy(() ->
+                new PurchaseInfo(1000, -1)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("0 이상의 숫자를 입력해야 합니다");
+
+    }
+
 }

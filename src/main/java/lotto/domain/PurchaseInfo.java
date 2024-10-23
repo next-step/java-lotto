@@ -6,14 +6,21 @@ public class PurchaseInfo {
     private final int numberOfManualPurchase;
 
     public PurchaseInfo(int purchaseAmount, int manualPurchase) {
+        validNumberOfManualLotto(purchaseAmount, manualPurchase);
+        validmanualPurchaseIsNegatibe(manualPurchase);
         this.totalNumberOfLotto = calculateNumberOfTotalPurchase(purchaseAmount);
         this.numberOfManualPurchase = manualPurchase;
-        validNumberOfManualLotto();
     }
 
-    private void validNumberOfManualLotto() {
-        if (numberOfManualPurchase > totalNumberOfLotto) {
+    private void validNumberOfManualLotto(int purchaseAmount, int manualPurchase) {
+        if (manualPurchase > purchaseAmount) {
             throw new IllegalArgumentException("구매한 로또 수량보다 많의 수의 로또를 수동 구매 할 수 없습니다");
+        }
+    }
+
+    private void validmanualPurchaseIsNegatibe(int manualPurchase) {
+        if (manualPurchase < 0) {
+            throw new IllegalArgumentException("0 이상의 숫자를 입력해야 합니다");
         }
     }
 
