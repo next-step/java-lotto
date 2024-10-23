@@ -4,22 +4,30 @@ import java.util.Arrays;
 import java.util.Map;
 
 public enum LottoMarginCalculator {
-    RANK_ONE(6, (map) -> map.getOrDefault(6, 0) * WinningPrice.TWO_HUNDRED_MILLION.winPrice),
-    RANK_TWO(5, (map) -> map.getOrDefault(5, 0) * WinningPrice.ONE_MILLION_FIVE_HUNDRED.winPrice),
-    RANK_THREE(4, (map) -> map.getOrDefault(4, 0) * WinningPrice.FIFTY_THOUSAND.winPrice),
-    RANK_FOUR(3, (map) -> map.getOrDefault(3, 0) * WinningPrice.FIVE_THOUSAND.winPrice);
+
+    RANK_ONE(6, WinningPrice.TWO_HUNDRED_MILLION.winPrice),
+    RANK_TWO(5, WinningPrice.ONE_MILLION_FIVE_HUNDRED.winPrice),
+    RANK_TWO_BONUS(5, WinningPrice.THIRTY_MILLION.winPrice),
+    RANK_THREE(4, WinningPrice.FIFTY_THOUSAND.winPrice),
+    RANK_FOUR(3, WinningPrice.FIVE_THOUSAND.winPrice);
 
     private final int machingCnt;
-    private final MarginOperation marginOperation;
+    private final long winPrice;
 
-    LottoMarginCalculator(final int machingCnt, MarginOperation marginOperation) {
+    LottoMarginCalculator(final int machingCnt, final long winPrice) {
         this.machingCnt = machingCnt;
-        this.marginOperation = marginOperation;
+        this.winPrice = winPrice;
     }
 
-    public static double calculateMarginRate(long price, Map<Integer, Integer> resultMap) {
-        return Arrays.stream(LottoMarginCalculator.values()).mapToLong(value -> value.marginOperation.multiply(resultMap)).sum() / (double) price;
+    public static double calculateMarginRate(long price, Map<LottoMarginCalculator, Integer> resultMap) {
+        return Arrays.stream(LottoMarginCalculator.values()).mapToLong(value -> value.winPrice * resultMap.getOrDefault(value,0)).sum() / (double) price;
     }
 
+    public int getMachingCnt() {
+        return machingCnt;
+    }
 
+    public long getWinPrice() {
+        return winPrice;
+    }
 }

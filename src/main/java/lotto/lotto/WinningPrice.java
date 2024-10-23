@@ -1,11 +1,11 @@
 package lotto.lotto;
 
 public enum WinningPrice {
-    TWO_HUNDRED_MILLION(200000000), // 2억
-    THIRTY_MILLION(30000000), // 3천만원
-    ONE_MILLION_FIVE_HUNDRED(1500000), // 150만
-    FIFTY_THOUSAND(50000), // 5만
-    FIVE_THOUSAND(5000); // 5천
+    TWO_HUNDRED_MILLION(2_000_000_000),
+    THIRTY_MILLION(30_000_000),
+    ONE_MILLION_FIVE_HUNDRED(1_500_000),
+    FIFTY_THOUSAND(50_000),
+    FIVE_THOUSAND(5_000);
     public final long winPrice;
 
     WinningPrice(long winPrice) {

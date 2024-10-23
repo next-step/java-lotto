@@ -1,17 +1,19 @@
 package lotto.dto;
 
+import lotto.lotto.LottoMarginCalculator;
+
 import java.util.Map;
 
 public class LottoResultDTO {
-    private Map<Integer, Integer> resultMap;
+    private Map<LottoMarginCalculator, Integer> resultMap;
     private double marginRate;
 
-    public LottoResultDTO(Map<Integer, Integer> resultMap, double marginRate) {
+    public LottoResultDTO(Map<LottoMarginCalculator, Integer> resultMap, double marginRate) {
         this.resultMap = resultMap;
         this.marginRate = marginRate;
     }
 
-    public Map<Integer, Integer> getResultMap() {
+    public Map<LottoMarginCalculator, Integer> getResultMap() {
         return resultMap;
     }
 

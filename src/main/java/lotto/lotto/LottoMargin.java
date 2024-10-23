@@ -5,12 +5,10 @@ import java.util.Map;
 public class LottoMargin {
 
     private final double marginRate;
-    private final int price;
-    private final  Map<Integer, Integer> resultMap;
+    private final  Map<LottoMarginCalculator, Integer> resultMap;
 
-    public LottoMargin(int price, Map<Integer, Integer> resultMap) {
+    public LottoMargin(int price, Map<LottoMarginCalculator, Integer> resultMap) {
         this.marginRate = LottoMarginCalculator.calculateMarginRate(price, resultMap);
-        this.price = price;
         this.resultMap = resultMap;
     }
 

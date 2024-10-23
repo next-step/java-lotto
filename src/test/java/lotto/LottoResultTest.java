@@ -1,18 +1,21 @@
 package lotto;
+
 import lotto.lotto.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 class LottoResultTest {
 
     private List<LottoNumber> lottoNumbers;
     List<Lotto> lottos = new ArrayList<>();
+
     @BeforeEach
     void setUp() {
         lottoNumbers = new ArrayList<>();
@@ -27,21 +30,23 @@ class LottoResultTest {
         lottos.add(new Lotto(lottoNumbers));
 
     }
+
     @Test
-    void 로또_맷칭_결과_계산() {
+    void 로또_일치하는_맷칭_개수_저장() {
         LottoResult result = new LottoResult(lottos);
-        LottoWinning winning = new LottoWinning("1, 2, 3, 4, 5, 10");
+        LottoWinning winning = new LottoWinning("1, 2, 3, 4, 5, 10", 10);
 
         result.calculateLotto(winning);
 
-        assertThat(result.getResultMap().get(6)).isEqualTo(3);
+        assertThat(result.getResultMap().get(LottoMarginCalculator.RANK_ONE)).isEqualTo(3);
 
-        winning = new LottoWinning("1, 2, 3, 4, 5, 33");
+        winning = new LottoWinning("1, 2, 3, 4, 5, 33", 10);
 
         result.calculateLotto(winning);
 
-        assertThat(result.getResultMap().get(5)).isEqualTo(3);
-
+        assertThat(result.getResultMap().get(LottoMarginCalculator.RANK_ONE)).isEqualTo(3);
+        assertThat(result.getResultMap().values().stream().filter(value -> value == 0).count()).isEqualTo(3);
+        assertThat(result.getResultMap().values().stream().filter(value -> value == 3).count()).isEqualTo(2);
     }
 
 }
