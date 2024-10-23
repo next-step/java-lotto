@@ -7,10 +7,10 @@ import lotto.domain.LottoStatistics;
 
 public class ResultView {
     private static final String RESULT_TITLE = "당첨 통계";
-    private static final String PURCHASED_LOTTO_NUMBER_LIST_POSTFIX = "개를 구매했습니다.";
 
-    public static void printPurchasedLottoNumberList(Lotteries purchasedLotteries) {
-        System.out.println(purchasedLotteries.size() + PURCHASED_LOTTO_NUMBER_LIST_POSTFIX);
+    public static void printPurchasedLottoNumberList(Lotteries purchasedLotteries, int manualLottoCount) {
+        int autoLottoCount = purchasedLotteries.size() - manualLottoCount;
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.%n", manualLottoCount, autoLottoCount);
         for (Lottery lottery : purchasedLotteries.getLotteries()) {
             System.out.println(lottery.getSortedLottoNumbers());
         }

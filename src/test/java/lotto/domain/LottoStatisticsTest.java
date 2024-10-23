@@ -9,12 +9,10 @@ public class LottoStatisticsTest {
     @Test
     void 당첨_통계_생성() {
         // given
-        LottoResult secondRankResult = new LottoResult(true, LottoRank.SECOND.equalNumberCount);
-        LottoResult thirdRankResult = new LottoResult(false, LottoRank.THIRD.equalNumberCount);
-        List<LottoResult> lottoResults = List.of(secondRankResult, thirdRankResult);
+        List<LottoRank> lottoRanks = List.of(LottoRank.SECOND, LottoRank.THIRD);
 
         // when
-        LottoStatistics statistics = LottoStatistics.create(lottoResults);
+        LottoStatistics statistics = LottoStatistics.create(lottoRanks);
 
         // then
         Assertions.assertThat(statistics.getCount(LottoRank.FIRST)).isEqualTo(0);
@@ -27,10 +25,8 @@ public class LottoStatisticsTest {
     @Test
     void 수익_금액_계산() {
         // given
-        LottoResult secondRankResult = new LottoResult(false, LottoRank.FOURTH.equalNumberCount);
-        LottoResult thirdRankResult = new LottoResult(false, LottoRank.FIFTH.equalNumberCount);
-        List<LottoResult> lottoResults = List.of(secondRankResult, thirdRankResult);
-        LottoStatistics lottoStatistics = LottoStatistics.create(lottoResults);
+        List<LottoRank> lottoRanks = List.of(LottoRank.FOURTH, LottoRank.FIFTH);
+        LottoStatistics lottoStatistics = LottoStatistics.create(lottoRanks);
 
         // when
         int totalProfit = lottoStatistics.calculateTotalProfit();
@@ -43,10 +39,8 @@ public class LottoStatisticsTest {
     void 수익률_계산() {
         // given
         int totalPurchaseAmount = 30000;
-        LottoResult secondRankResult = new LottoResult(false, LottoRank.FOURTH.equalNumberCount);
-        LottoResult thirdRankResult = new LottoResult(false, LottoRank.FIFTH.equalNumberCount);
-        List<LottoResult> lottoResults = List.of(secondRankResult, thirdRankResult);
-        LottoStatistics lottoStatistics = LottoStatistics.create(lottoResults);
+        List<LottoRank> lottoRanks = List.of(LottoRank.FOURTH, LottoRank.FIFTH);
+        LottoStatistics lottoStatistics = LottoStatistics.create(lottoRanks);
 
         // when
         float profitRate = lottoStatistics.calculateProfitRate(totalPurchaseAmount);
