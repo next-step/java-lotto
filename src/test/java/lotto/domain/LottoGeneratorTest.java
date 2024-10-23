@@ -13,7 +13,9 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void 로또_생성_테스트() {
-        Lottos lottos = Lottos.createLottos(3, purchaseAmount -> {
+        PurchaseInfo purchasInfo = new PurchaseInfo(3000, 0);
+
+        Lottos lottos = Lottos.createLottos(purchasInfo, purchaseAmount -> {
             List<Lotto> generatedLottos = new ArrayList<>();
             for (int i = 0; i < purchaseAmount; i++) {
                 generatedLottos.add(new Lotto(lottoGenerator.subList(0, LottoGenerator.LOTTO_SIZE)));
