@@ -8,6 +8,13 @@ public class PurchaseInfo {
     public PurchaseInfo(int purchaseAmount, int manualPurchase) {
         this.totalNumberOfLotto = calculateNumberOfTotalPurchase(purchaseAmount);
         this.numberOfManualPurchase = manualPurchase;
+        validNumberOfManualLotto();
+    }
+
+    private void validNumberOfManualLotto() {
+        if(numberOfManualPurchase > totalNumberOfLotto) {
+            throw new IllegalArgumentException("구매한 로또 수량보다 많의 수의 로또를 수동 구매 할 수 없습니다");
+        }
     }
 
     private int calculateNumberOfTotalPurchase(int totalAmount) {

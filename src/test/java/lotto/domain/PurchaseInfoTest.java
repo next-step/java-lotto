@@ -40,5 +40,13 @@ public class PurchaseInfoTest {
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("1000원 미만으론 살 수 없음");
     }
+    @Test
+    @DisplayName("수동 로또의 개수는 전체 로또의 개수와 같거나 적어야 한다")
+    void 수동_로또_개수는_전체_로또_개수보다_작다(){
+        Assertions.assertThatThrownBy(() ->
+                new PurchaseInfo(1000, 2)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매한 로또 수량보다 많의 수의 로또를 수동 구매 할 수 없습니다");
+    }
 
 }
