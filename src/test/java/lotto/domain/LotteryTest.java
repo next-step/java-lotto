@@ -9,7 +9,10 @@ class LotteryTest {
     @Test
     void 당첨번호와_일치하는_번호_개수_구하기() {
         // given
-        Lottery winningLottery = new Lottery(Set.of(1, 2, 3, 4, 5, 6));
+        WinningLottery winningLottery = new WinningLottery(
+                new Lottery(Set.of(1, 2, 3, 4, 5, 6)),
+                new LottoNumber(7)
+        );
         Lottery lottery = new Lottery(Set.of(1, 2, 10, 11, 12, 13));
 
         // when

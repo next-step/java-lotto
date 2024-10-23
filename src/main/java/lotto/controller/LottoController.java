@@ -1,9 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.Lotteries;
-import lotto.domain.Lottery;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
+import lotto.domain.WinningLottery;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,12 +15,10 @@ public class LottoController {
         ResultView.printPurchasedLottoNumberList(lotteries);
 
         Set<Integer> inputWinningNumbers = InputView.inputLastWeekWinningNumbers();
-        Lottery winningLottery = new Lottery(inputWinningNumbers);
+        int inputBonusNumber = InputView.inputBonusNumber();
+        WinningLottery winningLottery = new WinningLottery(inputWinningNumbers, inputBonusNumber);
 
-        Integer inputBonusNumber = InputView.inputBonusNumber();
-        LottoNumber bonusNumber = new LottoNumber(inputBonusNumber);
-
-        LottoStatistics lottoStatistics = lotteries.createStatistics(winningLottery, bonusNumber);
+        LottoStatistics lottoStatistics = lotteries.createStatistics(winningLottery);
         float profitRate = lottoStatistics.calculateProfitRate(totalPurchaseAmount);
         ResultView.printResult(lottoStatistics, profitRate);
     }

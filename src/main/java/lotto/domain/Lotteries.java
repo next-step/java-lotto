@@ -26,16 +26,16 @@ public class Lotteries {
         return lotteries.size();
     }
 
-    public LottoStatistics createStatistics(Lottery winningLottery, LottoNumber bonusNumber) {
-        List<LottoRank> lottoRanks = getLottoRanks(winningLottery, bonusNumber);
+    public LottoStatistics createStatistics(WinningLottery winningLottery) {
+        List<LottoRank> lottoRanks = getLottoRanks(winningLottery);
         return LottoStatistics.create(lottoRanks);
     }
 
-    private List<LottoRank> getLottoRanks(Lottery winningLottery, LottoNumber bonusNumber) {
+    private List<LottoRank> getLottoRanks(WinningLottery winningLottery) {
         List<LottoRank> ranks = new ArrayList<>();
 
         for (Lottery lottery : lotteries) {
-            ranks.add(lottery.createLottoRank(winningLottery, bonusNumber));
+            ranks.add(lottery.createLottoRank(winningLottery));
         }
 
         return ranks;

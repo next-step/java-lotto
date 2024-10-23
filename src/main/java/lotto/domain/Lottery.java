@@ -18,11 +18,15 @@ public class Lottery {
                 .collect(Collectors.toSet());
     }
 
-    public int countWinningNumbers(Lottery winningNumbers) {
+    public int countWinningNumbers(WinningLottery winningLottery) {
         Set<LottoNumber> equalNumbers = new HashSet<>(this.lottoNumbers);
-        equalNumbers.retainAll(winningNumbers.lottoNumbers);
+        equalNumbers.retainAll(winningLottery.getWinningLottery().lottoNumbers);
 
         return equalNumbers.size();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
@@ -37,9 +41,9 @@ public class Lottery {
                 .collect(Collectors.toList());
     }
 
-    public LottoRank createLottoRank(Lottery winningNumbers, LottoNumber lottoNumber) {
-        int equalNumberCount = countWinningNumbers(winningNumbers);
-        boolean hasBonusNumber = hasBonusNumber(lottoNumber);
+    public LottoRank createLottoRank(WinningLottery winningLottery) {
+        int equalNumberCount = countWinningNumbers(winningLottery);
+        boolean hasBonusNumber = hasBonusNumber(winningLottery.getBonusNumber());
 
         return LottoRank.of(equalNumberCount, hasBonusNumber);
     }
