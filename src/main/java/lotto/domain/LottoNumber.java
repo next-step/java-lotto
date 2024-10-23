@@ -13,14 +13,6 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public boolean isEqualTo(LottoNumber lottoNumber) {
-        return this.lottoNumber.equals(lottoNumber.lottoNumber);
-    }
-
-    public boolean isEqualTo(int lottoNumber) {
-        return this.lottoNumber.equals(lottoNumber);
-    }
-
     public Integer getLottoNumber() {
         return lottoNumber;
     }
