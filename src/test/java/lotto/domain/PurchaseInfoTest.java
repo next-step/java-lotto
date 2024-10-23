@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,7 @@ public class PurchaseInfoTest {
     void 자동_구매_정보_확인() {
         PurchaseInfo purchaseInfo = new PurchaseInfo(10000, 3);
 
-        Assertions.assertThat(purchaseInfo.getNumberOfAutoPurchase()).isEqualTo(7);
+        assertThat(purchaseInfo.getNumberOfAutoPurchase()).isEqualTo(7);
     }
 
     @Test
@@ -19,7 +21,7 @@ public class PurchaseInfoTest {
     void 수동_구매_정보_확인() {
         PurchaseInfo purchaseInfo = new PurchaseInfo(10000, 3);
 
-        Assertions.assertThat(purchaseInfo.getNumberOfManualPurchase()).isEqualTo(3);
+        assertThat(purchaseInfo.getNumberOfManualPurchase()).isEqualTo(3);
     }
 
     @Test
@@ -27,7 +29,16 @@ public class PurchaseInfoTest {
     void 전체_구매_금액_확인() {
         PurchaseInfo purchaseInfo = new PurchaseInfo(10000, 3);
 
-        Assertions.assertThat(purchaseInfo.getPruchaseAmount()).isEqualTo(10000);
+        assertThat(purchaseInfo.getPruchaseAmount()).isEqualTo(10000);
+    }
+
+    @Test
+    @DisplayName("1000원 미만 입력 시 예외 발생")
+    void 로또_구매_불가_1000원_미만(){
+        Assertions.assertThatThrownBy(() ->
+                new PurchaseInfo(999, 2)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("1000원 미만으론 살 수 없음");
     }
 
 }

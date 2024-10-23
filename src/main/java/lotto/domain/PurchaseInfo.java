@@ -6,12 +6,13 @@ public class PurchaseInfo {
     private final int numberOfManualPurchase;
 
     public PurchaseInfo(int purchaseAmount, int manualPurchase) {
-        this.totalNumberOfLotto = calculateNumberOfAutoPurchase(purchaseAmount);
+        this.totalNumberOfLotto = calculateNumberOfTotalPurchase(purchaseAmount);
         this.numberOfManualPurchase = manualPurchase;
     }
 
-    private int calculateNumberOfAutoPurchase(int autoPurchase) {
-        return autoPurchase / LOTTO_PRICE;
+    private int calculateNumberOfTotalPurchase(int totalAmount) {
+        checkIfCanPurchaseLotto(totalAmount);
+        return totalAmount / LOTTO_PRICE;
     }
 
     public int getNumberOfManualPurchase() {
@@ -22,8 +23,14 @@ public class PurchaseInfo {
         return totalNumberOfLotto - numberOfManualPurchase;
    }
 
-
     public int getPruchaseAmount() {
         return 1000 * totalNumberOfLotto;
     }
+
+    private void checkIfCanPurchaseLotto(int totalAmount) {
+        if (totalAmount < LOTTO_PRICE) {
+            throw new IllegalArgumentException("1000원 미만으론 살 수 없음");
+        }
+    }
+
 }

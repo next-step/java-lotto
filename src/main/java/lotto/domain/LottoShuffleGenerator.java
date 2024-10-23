@@ -20,9 +20,9 @@ public class LottoShuffleGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<Lotto> generateLottos(int purchaseAmount) {
+    public List<Lotto> generateLottos(int numberOfLotto) {
         List<Lotto> purChasedLotto = new ArrayList<>();
-        int lottoCount = calculateNumberOfLotto(purchaseAmount);
+        int lottoCount = numberOfLotto;
         for (int i = 0; i < lottoCount; i++) {
             purChasedLotto.add(sortLotto(shuffleLotto()));
         }
@@ -37,17 +37,6 @@ public class LottoShuffleGenerator implements LottoGenerator {
     Lotto sortLotto(List<LottoNumber> shuffledLotto) {
         Collections.sort(shuffledLotto);
         return new Lotto(shuffledLotto);
-    }
-
-    public static int calculateNumberOfLotto(int purchaseAmount) {
-        checkIfCanPurchaseLotto(purchaseAmount);
-        return purchaseAmount / PRICE_OF_LOTTO;
-    }
-
-    private static void checkIfCanPurchaseLotto(int totalAmount) {
-        if (totalAmount < PRICE_OF_LOTTO) {
-            throw new IllegalArgumentException("1000원 미만으론 살 수 없음");
-        }
     }
 
 }
