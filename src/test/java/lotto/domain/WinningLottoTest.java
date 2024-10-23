@@ -30,4 +30,13 @@ public class WinningLottoTest {
                 .hasMessage("보너스 번호가 입력되지 않음");
     }
 
+    @Test
+    @DisplayName("당첨번호와 보너스 번호 중복 시 예외 발생")
+    void 당첨번호와_보너스번호_중복_시_예외_발생() {
+        Assertions.assertThatThrownBy(
+                        () -> new WinningLotto(lotto, LottoNumber.createLottoNumber(6)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("당첨 번호와 보너스 번호가 중복됩니다");
+    }
+
 }
