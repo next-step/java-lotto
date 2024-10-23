@@ -14,6 +14,10 @@ public class Lotteries {
             throw new IllegalArgumentException("구입금액은 1000 이상이어야 합니다");
         }
 
+        if (LOTTO_PRICE * manualLottoNumbersList.size() > totalPurchaseAmount) {
+            throw new IllegalArgumentException("수동 구매 수량의 가격이 구입금액을 초과했습니다");
+        }
+
         int autoLottoCount = calculateAutoLottoCount(totalPurchaseAmount, manualLottoNumbersList.size());
 
         return new Lotteries(generateLotteries(autoLottoCount, manualLottoNumbersList));
