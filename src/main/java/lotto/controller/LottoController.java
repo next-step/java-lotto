@@ -6,12 +6,13 @@ import lotto.domain.WinningLottery;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Set;
 
 public class LottoController {
     public static void purchaseAutoLotto() {
         int totalPurchaseAmount = InputView.inputTotalPurchaseAmount();
-        int manualLottoAmount = InputView.inputManualLottoAmount();
+        List<Set<Integer>> manualLottoNumbers = InputView.inputManualLotteries();
 
         Lotteries lotteries = Lotteries.purchase(totalPurchaseAmount);
         ResultView.printPurchasedLottoNumberList(lotteries);
