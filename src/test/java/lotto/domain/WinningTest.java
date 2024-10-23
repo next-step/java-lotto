@@ -16,7 +16,7 @@ public class WinningTest {
     @DisplayName("당첨 번호가 일치하는 숫자 개수를 반환하는지 확인")
     void checkContainsLottoNumber() {
         Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<Integer> userLottoNumbers = Arrays.asList(1, 11, 12, 13, 14, 15);
+        LottoNumbers userLottoNumbers = new LottoNumbers(Arrays.asList(1, 11, 12, 13, 14, 15));
 
         Win win = new Win();
         int matchCount = win.countMatchingNumbers(winningNumbers, userLottoNumbers);
