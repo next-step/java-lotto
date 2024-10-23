@@ -58,8 +58,8 @@ public class Lotteries {
     private static List<Lottery> generateLotteries(int autoLottoCount, List<Set<Integer>> manualLottoNumbersList) {
         List<Lottery> lotteries = new ArrayList<>();
 
-        lotteries.addAll(generateLottoNumbersList(autoLottoCount));
         lotteries.addAll(generateManualLotteries(manualLottoNumbersList));
+        lotteries.addAll(generateLottoNumbersList(autoLottoCount));
 
         return lotteries;
     }
