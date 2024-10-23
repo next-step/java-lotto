@@ -6,12 +6,12 @@ public class Calculator {
 
     public Calculator(String mathExpression) {
         this(mathExpression,0);
-
     }
 
     public Calculator(String mathExpression, int inputCurrentCalculationResult ) {
         this.mathExpression = new MathExpression(mathExpression);
         this.currentCalculationResult = new CurrentCalculationResult(inputCurrentCalculationResult);
+        checkMathExpression();
     }
 
     public void checkMathExpression() {

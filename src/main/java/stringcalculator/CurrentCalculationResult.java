@@ -2,7 +2,6 @@ package stringcalculator;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class CurrentCalculationResult {
@@ -23,7 +22,7 @@ public class CurrentCalculationResult {
 
     public void runCalculate(String mathExpression, int MathExpressionIndex) {
         String currentOperator = String.valueOf(mathExpression.charAt(MathExpressionIndex));
-        Matcher matcher = MatcherUtil.customMatcher(OPERATOR_REGEX, currentOperator);
+        Matcher matcher = MatcherGenerator.customMatcher(OPERATOR_REGEX, currentOperator);
         if (matcher.find()) {
             int nextNumber = Integer.parseInt(String.valueOf(mathExpression.charAt(MathExpressionIndex + 1)));
             choiceCalculate(currentOperator, nextNumber);
