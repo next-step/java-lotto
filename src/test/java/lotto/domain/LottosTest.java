@@ -20,6 +20,10 @@ public class LottosTest {
             .mapToObj(LottoNumber::createLottoNumber)
             .collect(Collectors.toList()));
 
+    private final Lotto lottoHitFour = new Lotto(IntStream.rangeClosed(3, 8)
+            .mapToObj(LottoNumber::createLottoNumber)
+            .collect(Collectors.toList()));
+
     @Test
     @DisplayName("로또 금액 여부를 확인한다")
     void 로또_당첨_금액_확인() {
@@ -69,6 +73,16 @@ public class LottosTest {
         lottos.additionalLotto(lottoHitAll);
 
         Assertions.assertThat(lottos.getResultStatistic(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(1))).getTotalPrize()).isEqualTo(30_000_000);
+    }
+
+    @Test
+    @DisplayName("4개 + 보너스 번호 맞출 시 4등 금액 정상 수령 되는지")
+    void 로또_2등_제외_보너스번호_상금_테스트() {
+
+        Lottos lottos = Lottos.createLottos(1000, purchaseAmount -> new ArrayList<>());
+        lottos.additionalLotto(lottoHitAll);
+
+        Assertions.assertThat(lottos.getResultStatistic(new WinningLotto(lottoHitFour, LottoNumber.createLottoNumber(1))).getTotalPrize()).isEqualTo(50000);
     }
 
 }
