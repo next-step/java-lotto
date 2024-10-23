@@ -30,6 +30,7 @@ public class WinningLottoCount {
         return winningAmount;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
