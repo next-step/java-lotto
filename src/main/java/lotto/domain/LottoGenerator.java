@@ -68,7 +68,7 @@ public class LottoGenerator {
         return purchaseCount * LOTTO_PRICE;
     }
 
-    private static Lotto createLotto() {
+    private Lotto createLotto() {
         List<LottoNumber> numbers = new ArrayList<>();
         for (int num = LOTTO_MIN_VALUE; num <= LOTTO_MAX_VALUE; ++num) {
             numbers.add(LottoNumber.from(num));
