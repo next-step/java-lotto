@@ -29,4 +29,3 @@
 * to-be
 - LottoMarginCalculator enum으로 상수 각 규칙 정리, 마진률 계산 (MarginOperation) 함수형 인터페이스 적용, 규칙이 늘어나도 계산 로직이 깨지지 않도록 수정
 - WinningPrice 당첨금액 관리 
-
