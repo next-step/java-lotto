@@ -24,7 +24,7 @@ public class LottoMachine {
         return money / LOTTO_UNIT_PRICE;
     }
 
-    private static Lotto issue(List<Integer> numberRandomizer) {
-        return new Lotto(numberRandomizer);
+    private static Lotto issue(List<LottoNumber> lottoNumbers) {
+        return Lotto.valueOf(lottoNumbers);
     }
 }

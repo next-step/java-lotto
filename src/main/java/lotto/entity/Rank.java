@@ -24,17 +24,42 @@ public enum Rank {
         this.matchBonus = matchBonus;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean bonus) {
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch == Rank.BONUS_MATCH_COUNT) {
-            return Arrays.stream(Rank.values()).filter(rank -> rank.collectCount == countOfMatch && rank.matchBonus == bonus).findFirst().orElse(Rank.MISS);
+            return searchRankBonus(matchBonus);
         }
 
         if (countOfMatch > MAX_MISS_COUNT) {
-            return Arrays.stream(Rank.values()).filter(rank -> rank.collectCount == countOfMatch).findFirst().orElse(Rank.MISS);
+            Rank currentRank = Rank.MISS;
+
+            return matchRank(currentRank, countOfMatch);
         }
 
         return Rank.MISS;
     }
+
+    private static Rank searchRankBonus(boolean matchBonus) {
+        if (matchBonus) {
+            return Rank.SECOND;
+        }
+        return Rank.THIRD;
+    }
+
+    private static Rank matchRank(Rank currentRank, int countOfMatch) {
+        for (Rank rank : Rank.values()) {
+            currentRank = search(currentRank, rank, countOfMatch);
+        }
+        return currentRank;
+    }
+
+    private static Rank search(Rank currentRank, Rank rank, int countOfMatch) {
+        if (rank.collectCount == countOfMatch) {
+            return rank;
+        }
+        return currentRank;
+    }
+
+
 
     public int getCollectCount() {
         return collectCount;

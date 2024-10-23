@@ -24,11 +24,11 @@ public class JavaLotto {
         ResultView.printCreateLotto(toDto(lottos));
 
         String[] texts = InputView.requestWinnerNumber();
-        Set<Integer> winningNumbers = WinningTexts.numbers(texts);
+        Set<LottoNumber> winningNumbers = WinningTexts.numbers(texts);
 
         int bonusNumber = InputView.requestBonusNumber();
 
-        Winning winning = new Winning(winningNumbers, bonusNumber);
+        Winning winning = new Winning(winningNumbers, new LottoNumber(bonusNumber));
 
         LottoResult result = LottoWinningScanner.result(lottos, winning, inputMoney);
         ResultView.printResult(toDto(result));

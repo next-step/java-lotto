@@ -12,14 +12,14 @@ public class WinningTexts {
 
     }
 
-    public static Set<Integer> numbers(String[] text) {
-        return toInts(text);
+    public static Set<LottoNumber> numbers(String[] text) {
+        return toLottoNumbers(text);
     }
 
-    private static Set<Integer> toInts(String[] values) {
-        List<Integer> result = new ArrayList<>();
+    private static Set<LottoNumber> toLottoNumbers(String[] values) {
+        List<LottoNumber> result = new ArrayList<>();
         for (String value : values) {
-            result.add(toInt(value));
+            result.add(new LottoNumber(toInt(value)));
         }
         return new HashSet<>(result);
     }

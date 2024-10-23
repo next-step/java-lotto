@@ -6,9 +6,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
-
     @Test
-    void 범위_검증() {
-        assertThatThrownBy(() -> new LottoNumber(56)).isInstanceOf(IllegalArgumentException.class);
+    void 당첨_숫자_범위_넘어가는_예외() {
+        assertThatThrownBy(() -> new LottoNumber(65)).isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -18,11 +18,11 @@ public class LottoWinningScannerTest {
     void 전체_검증_계산() {
 
         List<Lotto> lottos = Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
+                Lotto.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(number -> new LottoNumber(number)).collect(Collectors.toList()))
         );
 
-        Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
-        Winning winning = new Winning(winningNumbers, 7);
+        Set<LottoNumber> winningNumbers = Set.of(1, 2, 3, 4, 5, 6).stream().map(number -> new LottoNumber(number)).collect(Collectors.toSet());
+        Winning winning = new Winning(winningNumbers, new LottoNumber(7));
 
         LottoResult result = LottoWinningScanner.result(lottos, winning, 1000);
 
