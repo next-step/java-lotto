@@ -3,33 +3,46 @@ package lotto;
 import java.util.Map;
 import java.util.Objects;
 
+import static lotto.LottoRank.*;
+import static lotto.LottoRank.FIRST;
+
 public class LottoResults {
 
-    private final Map<LottoRankEnum, Integer> lottoResults;
+    private final Map<LottoRank, Integer> lottoResults;
 
-    public LottoResults(Map<LottoRankEnum, Integer> lottoResults) {
+    public LottoResults(Map<LottoRank, Integer> lottoResults) {
         this.lottoResults = lottoResults;
     }
 
     public int firstPrize() {
-        return lottoResults.get(LottoRankEnum.FIRST);
+        return lottoResults.get(LottoRank.FIRST);
     }
 
     public int secondPrize() {
-        return lottoResults.get(LottoRankEnum.SECOND);
+        return lottoResults.get(LottoRank.SECOND);
     }
 
     public int thirdPrize() {
-        return lottoResults.get(LottoRankEnum.THIRD);
+        return lottoResults.get(LottoRank.THIRD);
     }
 
     public int fourthPrize() {
-        return lottoResults.get(LottoRankEnum.FOURTH);
+        return lottoResults.get(LottoRank.FOURTH);
     }
 
     public int fifthPrize() {
-        return lottoResults.get(LottoRankEnum.FIFTH);
+        return lottoResults.get(LottoRank.FIFTH);
     }
+
+    public int calculateWinningPrize() {
+        return fifthPrize() * FIFTH.getPrize() + fourthPrize() * FOURTH.getPrize() + thirdPrize() * THIRD.getPrize() + firstPrize() * FIRST.getPrize();
+    }
+
+    public double calculateProfitability(int amount, int winningPrize) {
+        return (double) winningPrize / amount;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
