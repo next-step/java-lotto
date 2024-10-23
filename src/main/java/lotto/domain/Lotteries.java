@@ -27,18 +27,18 @@ public class Lotteries {
     }
 
     public LottoStatistics createStatistics(Lottery winningLottery, LottoNumber bonusNumber) {
-        List<LottoResult> lottoResults = getLottoResults(winningLottery, bonusNumber);
-        return LottoStatistics.create(lottoResults);
+        List<LottoRank> lottoRanks = getLottoRanks(winningLottery, bonusNumber);
+        return LottoStatistics.create(lottoRanks);
     }
 
-    private List<LottoResult> getLottoResults(Lottery winningLottery, LottoNumber bonusNumber) {
-        List<LottoResult> lottoResults = new ArrayList<>();
+    private List<LottoRank> getLottoRanks(Lottery winningLottery, LottoNumber bonusNumber) {
+        List<LottoRank> ranks = new ArrayList<>();
 
         for (Lottery lottery : lotteries) {
-            lottoResults.add(lottery.createLottoResult(winningLottery, bonusNumber));
+            ranks.add(lottery.createLottoRank(winningLottery, bonusNumber));
         }
 
-        return lottoResults;
+        return ranks;
     }
 
     public List<Lottery> getLotteries() {

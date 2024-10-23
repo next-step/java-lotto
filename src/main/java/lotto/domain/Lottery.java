@@ -37,11 +37,11 @@ public class Lottery {
                 .collect(Collectors.toList());
     }
 
-    public LottoResult createLottoResult(Lottery winningNumbers, LottoNumber lottoNumber) {
+    public LottoRank createLottoRank(Lottery winningNumbers, LottoNumber lottoNumber) {
         int equalNumberCount = countWinningNumbers(winningNumbers);
         boolean hasBonusNumber = hasBonusNumber(lottoNumber);
 
-        return new LottoResult(hasBonusNumber, equalNumberCount);
+        return LottoRank.of(equalNumberCount, hasBonusNumber);
     }
 
     private void validateLottoNumberSize(Set<Integer> lottoNumbers) {
