@@ -14,7 +14,7 @@ public class LottoController {
         int totalPurchaseAmount = InputView.inputTotalPurchaseAmount();
         List<Set<Integer>> manualLottoNumbers = InputView.inputManualLotteries();
 
-        Lotteries lotteries = Lotteries.purchase(totalPurchaseAmount);
+        Lotteries lotteries = Lotteries.purchase(totalPurchaseAmount, manualLottoNumbers);
         ResultView.printPurchasedLottoNumberList(lotteries);
 
         Set<Integer> inputWinningNumbers = InputView.inputLastWeekWinningNumbers();

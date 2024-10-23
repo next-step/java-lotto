@@ -9,13 +9,14 @@ public class Lotteries {
 
     private final List<Lottery> lotteries;
 
-    public static Lotteries purchase(int purchaseAmount) {
-        if (purchaseAmount < LOTTO_PRICE) {
+    public static Lotteries purchase(int totalPurchaseAmount, List<Set<Integer>> manualLottoNumbersList) {
+        if (totalPurchaseAmount < LOTTO_PRICE) {
             throw new IllegalArgumentException("구입금액은 1000 이상이어야 합니다");
         }
 
-        int lottoCount = purchaseAmount / LOTTO_PRICE;
-        return generateLottoNumbersList(lottoCount);
+        int autoLottoCount = calculateAutoLottoCount(totalPurchaseAmount, manualLottoNumbersList.size());
+
+        return new Lotteries(generateLotteries(autoLottoCount, manualLottoNumbersList));
     }
 
     public Lotteries(List<Lottery> lotteries) {
@@ -45,7 +46,21 @@ public class Lotteries {
         return lotteries;
     }
 
-    private static Lotteries generateLottoNumbersList(int lottoCount) {
+    private static int calculateAutoLottoCount(int totalPurchaseAmount, int manualLottoCount) {
+        int manualLottoPurchaseAmount = LOTTO_PRICE * manualLottoCount;
+        return (totalPurchaseAmount - manualLottoPurchaseAmount) / LOTTO_PRICE;
+    }
+
+    private static List<Lottery> generateLotteries(int autoLottoCount, List<Set<Integer>> manualLottoNumbersList) {
+        List<Lottery> lotteries = new ArrayList<>();
+
+        lotteries.addAll(generateLottoNumbersList(autoLottoCount));
+        lotteries.addAll(generateManualLotteries(manualLottoNumbersList));
+
+        return lotteries;
+    }
+
+    private static List<Lottery> generateLottoNumbersList(int lottoCount) {
         LottoNumberGenerator lottoNumberGenerator = new RandomLottoNumberGenerator();
         List<Lottery> lotteries = new ArrayList<>();
 
@@ -54,6 +69,16 @@ public class Lotteries {
             lotteries.add(new Lottery(generatedNumbers));
         }
 
-        return new Lotteries(lotteries);
+        return lotteries;
+    }
+
+    private static List<Lottery> generateManualLotteries(List<Set<Integer>> lottoNumbersList) {
+        List<Lottery> lotteries = new ArrayList<>();
+
+        for (Set<Integer> lottoNumbers : lottoNumbersList) {
+            lotteries.add(new Lottery(lottoNumbers));
+        }
+
+        return lotteries;
     }
 }
