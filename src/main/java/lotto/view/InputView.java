@@ -29,6 +29,10 @@ public class InputView {
         return inputPurchaseAmount();
     }
 
+    private void clearBuffer() {
+        scanner.nextLine();
+    }
+
     public Lotto inputWinnerNumber() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return new Lotto(convertStringToIntList(scanner.nextLine()));
@@ -37,10 +41,6 @@ public class InputView {
     public LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return LottoNumber.createLottoNumber(scanner.nextInt());
-    }
-
-    private void clearBuffer() {
-        scanner.nextLine();
     }
 
     public List<LottoNumber> convertStringToIntList(String stringWinningNumber) {
