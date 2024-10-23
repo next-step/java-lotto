@@ -4,18 +4,24 @@ import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos;
+    PurchaseInfo purchaseInfo;
 
     public static Lottos createLottos(int purchaseAmount, LottoGenerator lottoGenerator) {
         List<Lotto> lottos = lottoGenerator.generateLottos(purchaseAmount);
         return new Lottos(lottos);
     }
 
-    public static Lottos createLottosByManual(List<Lotto> lottos) {
-        return new Lottos(lottos);
+    public static Lottos createLottosByManual(List<Lotto> lottos, PurchaseInfo purchaseInfo) {
+        return new Lottos(lottos, purchaseInfo);
     }
 
     private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    private Lottos(List<Lotto> lottos, PurchaseInfo purchaseInfo) {
+        this.lottos = lottos;
+        this.purchaseInfo = purchaseInfo;
     }
 
     public int getNumberOfLotto() {

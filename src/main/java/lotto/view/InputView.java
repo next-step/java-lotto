@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.PurchaseInfo;
 
 public class InputView {
 
@@ -53,10 +54,10 @@ public class InputView {
         return inputPurchaseAmount();
     }
 
-    public Lottos inputManualLottoGuide(int purchaseAmount) {
+    public Lottos inputManualLottoGuide(int purchaseAmount, PurchaseInfo purchaseInfo) {
         clearBuffer();
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        return Lottos.createLottosByManual(inputManualLottos(purchaseAmount));
+        return Lottos.createLottosByManual(inputManualLottos(purchaseAmount), purchaseInfo);
     }
 
     private List<Lotto> inputManualLottos(int purchaseAmount) {
