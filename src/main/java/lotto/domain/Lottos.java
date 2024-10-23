@@ -10,6 +10,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public static Lottos createLottosByManual(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
     private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
@@ -34,6 +38,11 @@ public class Lottos {
 
     public void additionalLotto(Lotto lotto){
         lottos.add(lotto);
+    }
+
+    public void additionalLottos(Lottos lottos) {
+        lottos.getLottos()
+                .forEach(lotto -> this.lottos.add(lotto));
     }
 
 }

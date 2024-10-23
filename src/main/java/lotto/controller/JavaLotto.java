@@ -23,7 +23,8 @@ public class JavaLotto {
         PurchaseInfo purchaseInfo
                 = new PurchaseInfo(inputView.inputPurchaseAmountGuide(),inputView.inputManualLottoPurchaseAmount());
 
-        Lottos lottos = Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), LottoShuffleGenerator.getLottoShuffleGenerator());
+        Lottos lottos = inputView.inputManualLottoGuide(purchaseInfo.getNumberOfManualPurchase());
+        lottos.additionalLottos(Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), LottoShuffleGenerator.getLottoShuffleGenerator()));
 
         resultView.NumberOfLotto(purchaseInfo);
         resultView.printPurchasedLottos(lottos);

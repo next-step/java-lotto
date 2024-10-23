@@ -1,12 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 public class InputView {
 
@@ -22,8 +23,7 @@ public class InputView {
     }
 
     public Lotto inputWinnerNumber() {
-        clearBuffer();
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return new Lotto(convertStringToIntList(scanner.nextLine()));
     }
 
@@ -48,7 +48,23 @@ public class InputView {
     }
 
     public int inputManualLottoPurchaseAmount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+        clearBuffer();
+        System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
         return inputPurchaseAmount();
     }
+
+    public Lottos inputManualLottoGuide(int purchaseAmount) {
+        clearBuffer();
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        return Lottos.createLottosByManual(inputManualLottos(purchaseAmount));
+    }
+
+    private List<Lotto> inputManualLottos(int purchaseAmount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for(int i = 0; i < purchaseAmount; i++) {
+            lottos.add(new Lotto(convertStringToIntList(scanner.nextLine())));
+        }
+        return lottos;
+    }
+
 }
