@@ -37,10 +37,15 @@ public class LottoController {
         Win win = new Win();
         for (LottoNumbers userLotto : userLottos) {
             int matchCount = win.countMatchingNumbers(winningNumbers, userLotto);
-            if (matchCount >= 3) {
-                matchCountMap.put(matchCount, matchCountMap.get(matchCount) + 1);
-                totalWinningAmount += win.getPrizeMoney(matchCount);
-            }
+            totalWinningAmount = processMatchingLotto(matchCountMap, matchCount, totalWinningAmount, win);
+        }
+        return totalWinningAmount;
+    }
+
+    private static int processMatchingLotto(Map<Integer, Integer> matchCountMap, int matchCount, int totalWinningAmount, Win win) {
+        if (matchCount >= 3) {
+            matchCountMap.put(matchCount, matchCountMap.get(matchCount) + 1);
+            totalWinningAmount += win.getPrizeMoney(matchCount);
         }
         return totalWinningAmount;
     }

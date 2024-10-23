@@ -33,7 +33,7 @@
 
 - [x] Money - 이름 변경 및 책임 분리
 - [x] LottoController - play 메소드에서 수행하는 여러 역할을 각각의 독립된 메소드로 분리
-- [ ] LottoController - 한 함수내의 블럭{}이 두 번 중첩되지 않도록 
+- [x] LottoController - 한 함수 내의 블럭이 두 번 중첩 되지 않도록 수정
 - [ ] Lotto - 로또와 로또넘버와의 관계 개선
 - [ ] LottoNumbers - 재생성 필요없음
 - [ ] Win - 해당 클래스 개선 및 전환
