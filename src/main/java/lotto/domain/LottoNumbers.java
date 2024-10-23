@@ -8,7 +8,16 @@ public class LottoNumbers {
 
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
-    public static final int LOTTO_COUNT = 6;
+    private static final int LOTTO_COUNT = 6;
+
+    private static final List<Integer> ALL_LOTTO_NUMBERS;
+
+    static {
+        ALL_LOTTO_NUMBERS = new ArrayList<>();
+        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
+            ALL_LOTTO_NUMBERS.add(i);
+        }
+    }
 
     private final List<Integer> numbers;
 
@@ -17,12 +26,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers generateLotto() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-
-        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
-            lottoNumbers.add(i);
-        }
-
+        List<Integer> lottoNumbers = new ArrayList<>(ALL_LOTTO_NUMBERS);
         Collections.shuffle(lottoNumbers);
         List<Integer> selectedNumbers = lottoNumbers.subList(0, LOTTO_COUNT);
         Collections.sort(selectedNumbers);

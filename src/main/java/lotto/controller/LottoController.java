@@ -77,7 +77,7 @@ public class LottoController {
         List<LottoNumbers> userLottos = new ArrayList<>();
 
         for (int i = 1; i <= amount; i++) {
-            LottoNumbers selectedNumbers = lotto.generateLotto();
+            LottoNumbers selectedNumbers = LottoNumbers.generateLotto();
             ResultView.printLottoNumbers(selectedNumbers);
             userLottos.add(selectedNumbers);
         }
