@@ -4,7 +4,7 @@ import java.util.Map;
 
 @FunctionalInterface
 public interface MarginOperation {
-    long multiply(Map<LottoMarginCalculator, Integer> map);
+    long multiply(Map<LottoRank, Integer> map);
 
 
 }

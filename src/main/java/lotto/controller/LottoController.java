@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.lotto.LottoMargin;
-import lotto.lotto.LottoMarginCalculator;
 import lotto.lotto.LottoResult;
 import lotto.lotto.LottoService;
 import lotto.view.InputView;

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,13 +37,13 @@ class LottoResultTest {
 
         result.calculateLotto(winning);
 
-        assertThat(result.getResultMap().get(LottoMarginCalculator.RANK_ONE)).isEqualTo(3);
+        assertThat(result.getResultMap().get(LottoRank.RANK_ONE)).isEqualTo(3);
 
         winning = new LottoWinning("1, 2, 3, 4, 5, 33", 10);
 
         result.calculateLotto(winning);
 
-        assertThat(result.getResultMap().get(LottoMarginCalculator.RANK_ONE)).isEqualTo(3);
+        assertThat(result.getResultMap().get(LottoRank.RANK_ONE)).isEqualTo(3);
         assertThat(result.getResultMap().values().stream().filter(value -> value == 0).count()).isEqualTo(3);
         assertThat(result.getResultMap().values().stream().filter(value -> value == 3).count()).isEqualTo(2);
     }

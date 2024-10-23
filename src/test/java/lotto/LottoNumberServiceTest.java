@@ -35,7 +35,7 @@ public class LottoNumberServiceTest {
         String answer = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 10;
         lottoService.calculateLotto(answer, result, bonusNumber);
-        assertThat(result.getResultMap().get(LottoMarginCalculator.RANK_TWO_BONUS)).isEqualTo(1);
+        assertThat(result.getResultMap().get(LottoRank.RANK_TWO_BONUS)).isEqualTo(1);
     }
 
     @Test

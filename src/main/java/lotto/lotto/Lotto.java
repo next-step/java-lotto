@@ -48,7 +48,7 @@ public class Lotto {
     }
 
     public boolean isTwoBonusWin(int matchingCount, LottoWinning winning) {
-        if (matchingCount == LottoMarginCalculator.RANK_TWO_BONUS.getMachingCnt()) {
+        if (matchingCount == LottoRank.RANK_TWO_BONUS.getMachingCnt()) {
             return lottoNumbers.stream().anyMatch(lottoNumber -> winning.getBonusNumber() == lottoNumber.getNumber());
         }
         return false;
