@@ -11,8 +11,7 @@ public class MoneyTest {
     @Test
     @DisplayName("구입 금액이 로또 금액인 1000원 보다 낮을 시 에러를 반환하는지 확인")
     void lottoMoneyThrowsExceptionWhenNotEnough() {
-        LottoMoney lottoMoney = new LottoMoney(500);
-        assertThatThrownBy(() -> lottoMoney.calculateLottoAmount())
+        assertThatThrownBy(() -> new LottoMoney(500))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("금액이 부족합니다.");
     }

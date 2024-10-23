@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoMoney;
-import lotto.domain.Win;
+import lotto.util.WinningUtils;
 import lotto.domain.WinningPrize;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -34,32 +34,30 @@ public class LottoController {
 
     private static int getTotalWinningAmount(List<LottoNumbers> userLottos, Set<Integer> winningNumbers, Map<Integer, Integer> matchCountMap) {
         int totalWinningAmount = 0;
-        Win win = new Win();
         for (LottoNumbers userLotto : userLottos) {
-            int matchCount = win.countMatchingNumbers(winningNumbers, userLotto);
-            totalWinningAmount = processMatchingLotto(matchCountMap, matchCount, totalWinningAmount, win);
+            int matchCount = WinningUtils.countMatchingNumbers(winningNumbers, userLotto);
+            totalWinningAmount = processMatchingLotto(matchCountMap, matchCount, totalWinningAmount);
         }
         return totalWinningAmount;
     }
 
-    private static int processMatchingLotto(Map<Integer, Integer> matchCountMap, int matchCount, int totalWinningAmount, Win win) {
+    private static int processMatchingLotto(Map<Integer, Integer> matchCountMap, int matchCount, int totalWinningAmount) {
         if (matchCount >= 3) {
             matchCountMap.put(matchCount, matchCountMap.get(matchCount) + 1);
-            totalWinningAmount += win.getPrizeMoney(matchCount);
+            totalWinningAmount += WinningUtils.getPrizeMoney(matchCount);
         }
         return totalWinningAmount;
     }
 
     private static void printResults(Map<Integer, Integer> matchCountMap, int moneyAmount, int totalWinningAmount) {
-        Win win = new Win();
         ResultView.printResult();
         for (int matchCount : matchCountMap.keySet()) {
-            int prizeMoney = win.getPrizeMoney(matchCount);
+            int prizeMoney = WinningUtils.getPrizeMoney(matchCount);
             int count = matchCountMap.get(matchCount);
             ResultView.printMatchCount(matchCount, prizeMoney, count);
         }
 
-        double winningRate = win.calculateWinningRate(moneyAmount, totalWinningAmount);
+        double winningRate = WinningUtils.calculateWinningRate(moneyAmount, totalWinningAmount);
         ResultView.printWinningRate(winningRate);
     }
 

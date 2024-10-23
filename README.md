@@ -36,4 +36,4 @@
 - [x] LottoController - 한 함수 내의 블럭이 두 번 중첩 되지 않도록 수정
 - [x] Lotto - 로또와 로또넘버와의 관계 개선
 - [x] LottoNumbers - 재생성 필요없음
-- [ ] Win - 해당 클래스 개선 및 전환
+- [x] Win - 해당 클래스 개선 및 전환
