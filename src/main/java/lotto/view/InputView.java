@@ -23,6 +23,12 @@ public class InputView {
         return scanner.nextInt();
     }
 
+    public int inputManualLottoPurchaseAmount() {
+        clearBuffer();
+        System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
+        return inputPurchaseAmount();
+    }
+
     public Lotto inputWinnerNumber() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return new Lotto(convertStringToIntList(scanner.nextLine()));
@@ -48,21 +54,15 @@ public class InputView {
         return stringWinningNumber.split(", ");
     }
 
-    public int inputManualLottoPurchaseAmount() {
-        clearBuffer();
-        System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
-        return inputPurchaseAmount();
-    }
-
-    public Lottos inputManualLottoGuide(int purchaseAmount, PurchaseInfo purchaseInfo) {
+    public Lottos inputManualLottoGuide(PurchaseInfo purchaseInfo) {
         clearBuffer();
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        return Lottos.createLottosByManual(inputManualLottos(purchaseAmount), purchaseInfo);
+        return Lottos.createLottosByManual(inputManualLottos(purchaseInfo), purchaseInfo);
     }
 
-    private List<Lotto> inputManualLottos(int purchaseAmount) {
+    private List<Lotto> inputManualLottos(PurchaseInfo purchaseInfo) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchaseAmount; i++) {
+        for (int i = 0; i < purchaseInfo.getNumberOfManualPurchase(); i++) {
             lottos.add(new Lotto(convertStringToIntList(scanner.nextLine())));
         }
         return lottos;
