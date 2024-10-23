@@ -1,14 +1,12 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoGenerator {
 
     private static final int LOTTO_PRICE = 1_000;
-    private static final int LOTTO_SIZE = 6;
-    private static final int LOTTO_MIN_VALUE = 1;
-    private static final int LOTTO_MAX_VALUE = 45;
 
     private int money;
     private int purchaseCount;
@@ -31,8 +29,9 @@ public class LottoGenerator {
 
     public List<Lotto> generatorLottos(List<String> manualLottos) {
         validateInputValue(manualLottos);
-        List<Lotto> lottos = new ArrayList<>(extractLottosFromStrings(manualLottos));
-        lottos.addAll(generateLottos(purchasableLottoCount()));
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(generateLottosByStrategy(new ManualLottoGeneratorStrategy(manualLottos)));
+        lottos.addAll(generateLottosByStrategy(new AutoLottoGeneratorStrategy(purchasableLottoCount())));
         return lottos;
     }
 
@@ -45,38 +44,16 @@ public class LottoGenerator {
         this.purchaseCount += quantity;
     }
 
-    private List<Lotto> extractLottosFromStrings(List<String> lottosStr) {
-        return lottosStr.stream()
-                .map(Lotto::new)
-                .collect(Collectors.toList());
+    private List<Lotto> generateLottosByStrategy(LottoGeneratorStrategy strategy) {
+        return strategy.generateLottos();
     }
 
     private int purchasableLottoCount() {
         return money / LOTTO_PRICE;
     }
 
-    public List<Lotto> generateLottos(int size) {
-        this.purchaseCount += size;
-        List<Lotto> lottos = new ArrayList<>();
-        for (int cnt = 0; cnt < size; cnt++) {
-            lottos.add(createLotto());
-        }
-        return lottos;
-    }
-
     public int getPurchaseAmount() {
         return purchaseCount * LOTTO_PRICE;
-    }
-
-    private Lotto createLotto() {
-        List<LottoNumber> numbers = new ArrayList<>();
-        for (int num = LOTTO_MIN_VALUE; num <= LOTTO_MAX_VALUE; ++num) {
-            numbers.add(LottoNumber.from(num));
-        }
-        Collections.shuffle(numbers);
-        numbers = numbers.subList(0, LOTTO_SIZE);
-        numbers.sort((Comparator.comparingInt(LottoNumber::getLottoNumber)));
-        return new Lotto(numbers);
     }
 
     @Override
