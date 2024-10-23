@@ -1,19 +1,28 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoMoney;
+import lotto.domain.Win;
+import lotto.domain.WinningPrize;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 
 public class LottoController {
 
     public void play() {
 
-        int money = InputView.getMoney();
+        int moneyAmount = InputView.getMoney();
+        LottoMoney money = new LottoMoney(moneyAmount);
 
-        Money userMoney = new Money();
-        int amount = userMoney.calculateLottoAmount(money);
+        int amount = money.calculateLottoAmount();
         ResultView.printLottoAmount(amount);
 
         Lotto lotto = new Lotto();
@@ -51,7 +60,7 @@ public class LottoController {
             ResultView.printMatchCount(matchCount, prizeMoney, count);
         }
 
-        double winningRate = win.calculateWinningRate(money, totalWinningAmount);
+        double winningRate = win.calculateWinningRate(moneyAmount, totalWinningAmount);
         ResultView.printWinningRate(winningRate);
     }
 }
