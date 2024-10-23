@@ -9,7 +9,7 @@ public class ResultView {
     }
 
     public static void printLottoAmount(int amount) {
-        System.out.println(String.format("총 %d개를 구매하였습니다.개", amount));
+        System.out.println(String.format("총 %d개를 구매하였습니다.", amount));
     }
 
     public static void printLottoNumbers(LottoNumbers selectedNumbers) {
