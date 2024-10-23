@@ -1,16 +1,17 @@
 package lotto.view;
 
+import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResultStatistic;
 import lotto.domain.Lottos;
 import lotto.domain.Prize;
-
-import java.util.stream.Collectors;
+import lotto.domain.PurchaseInfo;
 
 public class ResultView {
 
-    public void NumberOfLotto(int numberOfLotto) {
-        System.out.println(numberOfLotto + "개를 구매했습니다");
+    public void NumberOfLotto(PurchaseInfo purchaseInfo) {
+        System.out.println("수동으로 " + purchaseInfo.getNumberOfManualPurchase() +
+                "장, 자동으로 " + purchaseInfo.getNumberOfAutoPurchase() + "개를 구매했습니다");
     }
 
     public void printPurchasedLottos(Lottos lottos) {

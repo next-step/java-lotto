@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoResultStatistic;
 import lotto.domain.LottoShuffleGenerator;
 import lotto.domain.Lottos;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -19,18 +20,19 @@ public class JavaLotto {
 
     public void playLotto() {
 
-        int amount = inputView.inputPurchaseAmountGuide();
+        PurchaseInfo purchaseInfo
+                = new PurchaseInfo(inputView.inputPurchaseAmountGuide(),inputView.inputManualLottoPurchaseAmount());
 
-        Lottos lottos = Lottos.createLottos(amount, LottoShuffleGenerator.getLottoShuffleGenerator());
+        Lottos lottos = Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), LottoShuffleGenerator.getLottoShuffleGenerator());
 
-        resultView.NumberOfLotto(lottos.getNumberOfLotto());
+        resultView.NumberOfLotto(purchaseInfo);
         resultView.printPurchasedLottos(lottos);
 
         LottoResultStatistic lottoResultStatistic
                 = lottos.getResultStatistic(new WinningLotto(inputView.inputWinnerNumber(), inputView.inputBonusNumber()));
 
         resultView.printResult(lottoResultStatistic);
-        resultView.printProfit(lottoResultStatistic.calculateProfit(amount));
+        resultView.printProfit(lottoResultStatistic.calculateProfit(purchaseInfo.getPruchaseAmount()));
 
     }
 
