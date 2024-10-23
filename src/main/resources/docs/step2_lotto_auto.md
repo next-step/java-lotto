@@ -15,7 +15,6 @@
 -[x] 수익률을 계산한다. - LottoMargin
       LottoMarginCalculator 매칭수 * 금액 계산식과 실제 계산하는 기능    
 
-
 ## 진행 중 특이사항 
 ## 전략패턴으로 수정 내용 정리
 * as-is 
@@ -30,3 +29,4 @@
 * to-be
 - LottoMarginCalculator enum으로 상수 각 규칙 정리, 마진률 계산 (MarginOperation) 함수형 인터페이스 적용, 규칙이 늘어나도 계산 로직이 깨지지 않도록 수정
 - WinningPrice 당첨금액 관리 
+

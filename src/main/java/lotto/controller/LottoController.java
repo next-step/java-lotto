@@ -27,7 +27,9 @@ public class LottoController {
         resultView.printCreateLotto(result);
 
         String answer = inputView.inputAnswer();
-        lottoService.calculateLotto(answer, result);
+        int bonusNumber = inputView.inputBonus();
+
+        lottoService.calculateLotto(answer, result, bonusNumber);
 
         LottoMargin lottoMargin = lottoService.calculateMarginRate(price, result);
 

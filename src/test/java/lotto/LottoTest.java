@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.lotto.AutoLottoStrategy;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoWinning;
@@ -15,11 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
 
-    private Lotto lotto;
-    private List<LottoNumber> lottoNumberList;
+    private List<LottoNumber> lottoNumberList = new ArrayList<>();
+
     @BeforeEach
     void setUp() {
-        //lotto = new Lotto();
         lottoNumberList = new ArrayList<>();
         lottoNumberList.add(new LottoNumber(1));
         lottoNumberList.add(new LottoNumber(2));
@@ -38,16 +36,36 @@ class LottoTest {
     }
 
     @Test
-    void 로또번호_매칭_갯수(){
-        LottoWinning winning = new LottoWinning("1, 2, 3, 4, 5, 10");
-        Lotto lotto = new Lotto(lottoNumberList);;
+    void 로또번호_매칭_갯수() {
+        LottoWinning winning = new LottoWinning("1, 2, 3, 4, 5, 10", 11);
+        Lotto lotto = new Lotto(lottoNumberList);
+
         assertThat(lotto.calculateMatchingCnt(winning)).isEqualTo(6);
 
-        winning = new LottoWinning("1, 2, 3, 4, 5, 45");
-        assertThat(lotto.calculateMatchingCnt(winning)).isEqualTo(5);
+        winning = new LottoWinning("41, 42, 30, 44, 6", 10);
 
-        winning = new LottoWinning("41, 42, 30, 44, 6");
         assertThat(lotto.calculateMatchingCnt(winning)).isEqualTo(0);
+
+    }
+
+    @Test
+    void 로또_2등_보너스_여부() {
+
+        LottoWinning winning = new LottoWinning("1, 2, 3, 4, 5, 45", 10);
+        Lotto lotto = new Lotto(lottoNumberList);;
+
+        assertThat(lotto.isTwoBonusWin(5, winning)).isTrue();
+
+
+        winning = new LottoWinning("1, 2, 3, 4, 7, 45", 10);
+        Lotto notMatchingCntLotto = new Lotto(lottoNumberList);;
+
+        assertThat(notMatchingCntLotto.isTwoBonusWin(4, winning)).isFalse();
+
+        winning = new LottoWinning("1, 2, 3, 4, 7, 45", 44);
+        Lotto noBonustNumberLotto = new Lotto(lottoNumberList);;
+
+        assertThat(noBonustNumberLotto.isTwoBonusWin(5, winning)).isFalse();
 
     }
 }

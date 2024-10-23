@@ -11,8 +11,8 @@ public class LottoService {
         return result;
     }
 
-    public void calculateLotto(String answer, LottoResult result) {
-        LottoWinning winning = new LottoWinning(answer);
+    public void calculateLotto(String answer, LottoResult result, int bonusNumber) {
+        LottoWinning winning = new LottoWinning(answer, bonusNumber);
         result.calculateLotto(winning);
     }
 

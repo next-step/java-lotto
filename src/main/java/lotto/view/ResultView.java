@@ -2,6 +2,7 @@ package lotto.view;
 
 
 import lotto.dto.LottoResultDTO;
+import lotto.lotto.LottoMarginCalculator;
 import lotto.lotto.LottoResult;
 
 import java.util.Map;
@@ -11,12 +12,13 @@ public class ResultView {
     public static void printResult(LottoResultDTO result) {
         System.out.println("당첨통계");
         System.out.println("============");
-        Map<Integer, Integer> map = result.getResultMap();
+        Map<LottoMarginCalculator, Integer> map = result.getResultMap();
 
-        System.out.println("3개 일치 (5000원)- " + map.get(3));
-        System.out.println("4개 일치 (50000원)- " + map.get(4));
-        System.out.println("5개 일치 (1500000원)- " + map.get(5));
-        System.out.println("6개 일치 (2000000000원)- " + map.get(6));
+        System.out.println("3개 일치 (5000원)- " + map.get(LottoMarginCalculator.RANK_FOUR));
+        System.out.println("4개 일치 (50000원)- " + map.get(LottoMarginCalculator.RANK_THREE));
+        System.out.println("5개 일치 (1500000원)- " + map.get(LottoMarginCalculator.RANK_TWO));
+        System.out.println("5개 일치 (30000000원)- " + map.get(LottoMarginCalculator.RANK_TWO_BONUS));
+        System.out.println("6개 일치 (2000000000원)- " + map.get(LottoMarginCalculator.RANK_ONE));
         System.out.printf("총 수익률은 %.2f 입니다.", result.getMarginRate() );
     }
 
