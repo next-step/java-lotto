@@ -11,6 +11,8 @@ import java.util.Set;
 public class LottoController {
     public static void purchaseAutoLotto() {
         int totalPurchaseAmount = InputView.inputTotalPurchaseAmount();
+        int manualLottoAmount = InputView.inputManualLottoAmount();
+
         Lotteries lotteries = Lotteries.purchase(totalPurchaseAmount);
         ResultView.printPurchasedLottoNumberList(lotteries);
 

@@ -13,6 +13,11 @@ public class InputView {
         return getInputInteger();
     }
 
+    public static int inputManualLottoAmount() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return getInputInteger();
+    }
+
     public static Set<Integer> inputLastWeekWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputWinningNumbers = getInputString();
