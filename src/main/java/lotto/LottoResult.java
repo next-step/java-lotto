@@ -16,7 +16,7 @@ public class LottoResult {
 
     public int calculateMatchCount(WinningLotto winningLotto, List<LottoNumber> lottoNumbers) {
         calculateWinningMatchCount(winningLotto, lottoNumbers);
-        winningLotto.checkBonusMatch(lottoNumbers); //todo
+        this.isBonusMatch = winningLotto.checkBonusMatch(lottoNumbers);
         return matchCount;
     }
 
