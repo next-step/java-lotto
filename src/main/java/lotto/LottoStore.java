@@ -16,7 +16,7 @@ public class LottoStore {
 
         ArrayList<Lotto> result = new ArrayList<>();
         for (int i = 0; i < fee / BASE_AMOUNT; i++) {
-            List<Integer> numbers = IntStream.range(1, 7).boxed().collect(Collectors.toList());
+            List<Integer> numbers = UniqueRandomNumberProvider.provideInRange(1, 45, 6);
             result.add(new Lotto(numbers));
         }
         return result;
