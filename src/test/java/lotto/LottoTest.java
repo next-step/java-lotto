@@ -4,7 +4,10 @@ import lotto.lotto.Lotto;
 import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoWinning;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,37 +38,54 @@ class LottoTest {
         });
     }
 
-    @Test
-    void 로또번호_매칭_갯수() {
-        LottoWinning winning = new LottoWinning("1, 2, 3, 4, 5, 10", 11);
+    @ParameterizedTest
+    @DisplayName("당첨번호와 로또번호의 매칭 개수를 계산")
+    @CsvSource({
+            "'1, 2, 3, 4, 5, 10' , 44, 6",
+            "'41, 42, 30, 44, 6' , 7, 0"
+    })
+    void calculateMatchingCnt(String winNumber, int bonusNumber, int expectedResult) {
+        LottoWinning winning = new LottoWinning(winNumber, bonusNumber);
         Lotto lotto = new Lotto(lottoNumberList);
 
-        assertThat(lotto.calculateMatchingCnt(winning)).isEqualTo(6);
-
-        winning = new LottoWinning("41, 42, 30, 44, 6", 10);
-
-        assertThat(lotto.calculateMatchingCnt(winning)).isEqualTo(0);
-
+        assertThat(lotto.calculateMatchingCnt(winning)).isEqualTo(expectedResult);
     }
 
-    @Test
-    void 로또_2등_보너스_여부() {
+    @ParameterizedTest
+    @DisplayName("보너스번호는 당첨번호와 로또번호의 매칭 개수에서 제외")
+    @CsvSource({
+            "'1, 2, 3, 4, 5, 11' , 10, 5"
+    })
+    void calculateMatchingCntIncludeBonusNumber(String winNumber, int bonusNumber, int expectedResult) {
+        LottoWinning winning = new LottoWinning(winNumber, bonusNumber);
+        Lotto lotto = new Lotto(lottoNumberList);
 
-        LottoWinning winning = new LottoWinning("1, 2, 3, 4, 5, 45", 10);
+        assertThat(lotto.calculateMatchingCnt(winning)).isEqualTo(expectedResult);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'1, 2, 3, 4, 5, 45' , 5, 10 ",
+            "'1, 2, 3, 4, 7, 45' , 5, 44 "
+    })
+    @DisplayName("5개 일치하고 보너스번호가있는경우 보너스여부는 true, 없는경우 false")
+    void isTwoBonusWin(String abc, int matchingCnt, int bonusNumber) {
+        LottoWinning winning = new LottoWinning(abc, bonusNumber);
         Lotto lotto = new Lotto(lottoNumberList);;
+        boolean result = bonusNumber == 10;
 
-        assertThat(lotto.isTwoBonusWin(5, winning)).isTrue();
+        assertThat(lotto.isTwoBonusWin(matchingCnt, winning)).isEqualTo(result);
+    }
 
-
-        winning = new LottoWinning("1, 2, 3, 4, 7, 45", 10);
-        Lotto notMatchingCntLotto = new Lotto(lottoNumberList);;
-
-        assertThat(notMatchingCntLotto.isTwoBonusWin(4, winning)).isFalse();
-
-        winning = new LottoWinning("1, 2, 3, 4, 7, 45", 44);
-        Lotto noBonustNumberLotto = new Lotto(lottoNumberList);;
-
-        assertThat(noBonustNumberLotto.isTwoBonusWin(5, winning)).isFalse();
-
+    @ParameterizedTest
+    @CsvSource({
+            "'1, 2, 3, 4, 7, 45' , 4, 10 ",
+            "'1, 2, 3, 4, 7, 45' , 4, 44 "
+    })
+    @DisplayName("4개 일치하고 보너스번호가 있든 없든 false")
+    void notTwoBonusWin(String abc, int matchingCnt, int bonusNumber) {
+        LottoWinning winning = new LottoWinning(abc, bonusNumber);
+        Lotto lotto = new Lotto(lottoNumberList);;
+        assertThat(lotto.isTwoBonusWin(matchingCnt, winning)).isFalse();
     }
 }
