@@ -34,11 +34,9 @@ public class WinningResult {
         staticsMap.putIfAbsent(rank, staticsMap.getOrDefault(rank, 0) + 1);
     }
 
-
     public double calculateProfitRate(int purchaseAmount) {
         return (double) calculateProfitAmount() / purchaseAmount;
     }
-
 
     private int calculateProfitAmount() {
         return staticsMap.keySet()

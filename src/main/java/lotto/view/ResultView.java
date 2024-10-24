@@ -19,7 +19,7 @@ public class ResultView {
     }
 
     public static void printPurchaseQuantity(int manualQuantity, int autoQuantity) {
-        System.out.println("수동으로 " + manualQuantity + "장, 자동으로" + autoQuantity + "개를 구매했습니다.");
+        System.out.println("\n수동으로 " + manualQuantity + "장, 자동으로 " + autoQuantity + "장을 구매했습니다.");
     }
 
     public static void printMatchStaticsInfo(Map<LottoRank, Integer> staticsMap) {
