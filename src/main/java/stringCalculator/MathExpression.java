@@ -1,12 +1,13 @@
 package stringCalculator;
 
 import java.util.List;
+import java.util.Queue;
 
 public class MathExpression {
-    private final List<Integer> numbers;
-    private final List<String> operations;
+    private final Queue<Integer> numbers;
+    private final Queue<String> operations;
 
-    MathExpression(List<Integer> numbers, List<String> operations) {
+    MathExpression(Queue<Integer> numbers, Queue<String> operations) {
         this.numbers = numbers;
         this.operations = operations;
     }
@@ -17,5 +18,21 @@ public class MathExpression {
 
     public Boolean operationsContains(List<String> contains) {
         return operations.containsAll(contains);
+    }
+
+    public Integer numberPoll(){
+        return numbers.poll();
+    }
+
+    public String operationPoll(){
+        return operations.poll();
+    }
+
+    public Boolean numberHasNext(){
+        return numbers.iterator().hasNext();
+    }
+
+    public Boolean operationHasNext(){
+        return operations.iterator().hasNext();
     }
 }

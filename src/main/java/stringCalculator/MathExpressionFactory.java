@@ -1,7 +1,7 @@
 package stringCalculator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class MathExpressionFactory {
 
@@ -9,8 +9,8 @@ public class MathExpressionFactory {
         checkNullAndThrowException(input);
 
         String[] inputList = input.split(" ");
-        List<Integer> numbers = new ArrayList<>();
-        List<String> operations = new ArrayList<>();
+        Queue<Integer> numbers = new LinkedList<>();
+        Queue<String> operations = new LinkedList<>();
 
         for (int i = 0; i < inputList.length; i += 2) {
             numbers.add(Integer.parseInt(inputList[i]));

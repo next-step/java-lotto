@@ -23,13 +23,19 @@ public class StringCalculatorTest {
     @Test
     public void stringInputExceptionCheck() {
 
-        assertThatThrownBy(()->
+        assertThatThrownBy(() ->
                 MathExpressionFactory.seperateAndCreateMathExpression("null"))
                 .isInstanceOf(IllegalArgumentException.class);
 
-        assertThatThrownBy(()->
+        assertThatThrownBy(() ->
                 MathExpressionFactory.seperateAndCreateMathExpression("1 $ 2 & 3"))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("입력받은 문자열의 덧셈 테스트")
+    @Test
+    public void addTest() {
+        assertThat(StringCalculator.add("+", 1, 5)).isEqualTo(6);
     }
 }
 
