@@ -44,6 +44,6 @@
 -[ ] 1000원 단위로 입력하지 않는다.
 -[ ] 로또 숫자가 중복인 경우 IllegalArgumentException
 -[ ] 당첨번호에 숫자가 아닌 값을 입력하는 경우
--[ ] 당첨번호가 6자리가 아닌경우 IllegalArgumentException를 발생한다.
+-[x] 당첨번호가 6자리가 아닌경우 IllegalArgumentException를 발생한다.
 -[ ] 금액에 음수로 입력하는 경우 IllegalArgumentException를 발생한다.
 -[x] 당첨번호에 1~45사이의 숫자가 아닌 숫자를 넣는 경우 IllegalArgumentException를 발생한다.
