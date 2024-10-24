@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.model.Lotto;
+import lotto.model.WinningInfo;
+import lotto.service.LottoRank;
 import lotto.service.LottoAnalyzer;
 import org.junit.jupiter.api.Test;
 
@@ -16,25 +18,41 @@ public class LottoAnalyzerTest {
     public void 당첨통계_계산() {
         List<Lotto> lottos = new ArrayList<>();
 
-        lottos.add(new Lotto(List.of(2, 5, 9, 10, 23, 31)));
-        lottos.add(new Lotto(List.of(2, 5, 16, 41, 18, 42)));
+        lottos.add(new Lotto(List.of(2, 5, 9, 10, 23, 31))); // 1등 -> 6개
+        lottos.add(new Lotto(List.of(2, 5, 9, 10, 23, 16))); // 2등 -> 5개 + 보너스번호
+        lottos.add(new Lotto(List.of(2, 5, 9, 10, 23, 12))); // 3등 -> 5개
+        lottos.add(new Lotto(List.of(2, 5, 9, 10, 16, 14))); // 4등 -> 4개 + 보너스번호
 
-        List<Integer> winningNumbers = List.of(2, 5, 9, 33, 35, 44);
+        List<Integer> winningNumbers = List.of(2, 5, 9, 10, 23, 31);
         int bonusNumber = 16;
 
-        Map<Integer, Integer> winningStatics = LottoAnalyzer.calculateWinningStatics(winningNumbers, bonusNumber, lottos);
+        LottoAnalyzer lottoAnalyzer = new LottoAnalyzer();
 
-        assertThat(winningStatics.get(1)).isEqualTo(0);  // 1등
-        assertThat(winningStatics.get(2)).isEqualTo(0);  // 2등
-        assertThat(winningStatics.get(3)).isEqualTo(0);  // 3등
-        assertThat(winningStatics.get(4)).isEqualTo(0);  // 4등
-        assertThat(winningStatics.get(5)).isEqualTo(1);  // 5등
-        assertThat(winningStatics.get(0)).isEqualTo(1);  // 미당첨
+        Map<Integer, WinningInfo> winningStatics = lottoAnalyzer.calculateWinningStatics(winningNumbers, bonusNumber, lottos);
+
+        assertThat(winningStatics.get(1).getWinningCount()).isEqualTo(1);  // 1등
+        assertThat(winningStatics.get(2).getWinningCount()).isEqualTo(1);  // 2등
+        assertThat(winningStatics.get(3).getWinningCount()).isEqualTo(1);  // 3등
+        assertThat(winningStatics.get(4).getWinningCount()).isEqualTo(1);  // 4등
+        assertThat(winningStatics.get(5).getWinningCount()).isEqualTo(0);  // 5등
+        assertThat(winningStatics.get(0).getWinningCount()).isEqualTo(0);  // 미당첨
     }
 
     @Test
     public void 총수익률_계산() {
-        assertThat(LottoAnalyzer.calculateReturnRate(10000, Map.of(1,0, 2,0, 3,0, 4,0, 5,1, 0,0))).isEqualTo(0.5f);
+        List<Lotto> lottos = new ArrayList<>();
+
+        lottos.add(new Lotto(List.of(2, 5, 9, 10, 23, 31)));
+        lottos.add(new Lotto(List.of(2, 5, 9, 23, 18, 16)));
+
+        List<Integer> winningNumbers = List.of(2, 5, 9, 41, 7, 44);
+        int bonusNumber = 16;
+
+        LottoAnalyzer lottoAnalyzer = new LottoAnalyzer();
+
+        Map<Integer, WinningInfo> winningStatics = lottoAnalyzer.calculateWinningStatics(winningNumbers, bonusNumber, lottos);
+
+        assertThat(lottoAnalyzer.calculateReturnRate(10000)).isEqualTo(1.0f);
     }
 
 }

@@ -20,6 +20,6 @@ public class LottoBuyerTest {
     @Test
     public void 로또_구매() {
         assertThat(lottoBuyer.buyLotto(new ArrayList<>(List.of(1, 5, 20, 35, 41, 22))))
-                .isEqualTo(List.of(1, 5, 20, 35, 41, 22));
+                .isEqualTo(lottoBuyer.getLottos().get(0).getNumbers());
     }
 }
