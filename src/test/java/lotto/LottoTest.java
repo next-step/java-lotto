@@ -26,6 +26,12 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(numbers));
     }
 
+    @Test
+    public void 로또_번호가_6자리가_아닌_경우_예외가_발생한다() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(5, 4, 3, 2, 1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(7, 6, 5, 4, 3, 2, 1)));
+    }
+
     static Stream<Arguments> provideInvalidLottoNumbers() {
         return Stream.of(
                 arguments(List.of(0, 1, 2, 3, 4, 5)),
