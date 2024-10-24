@@ -14,12 +14,12 @@ public class Money {
         this.amount = amount;
     }
 
-    public static Money zero() {
-        return ZERO;
-    }
-
     private boolean isNegative(int fee) {
         return fee < 0;
+    }
+
+    public static Money zero() {
+        return ZERO;
     }
 
     public int divide(Money baseAmount) {
