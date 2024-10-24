@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.common.WinningInfo;
+import lotto.model.WinningInfo;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,26 +20,31 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public static void printWinningStatics(Map<Integer, Integer> winningStatics) {
+    public static void printWinningStatics(Map<Integer, WinningInfo> winningStatics) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
         for (int rank = 5; rank >= 1; rank--) {
-            int matchCount = WinningInfo.MATCH_COUNT[rank];
-            int prize = WinningInfo.PRIZE[rank];
+            WinningInfo info = winningStatics.get(rank);
 
-           printWinningResult(rank, matchCount, prize, winningStatics);
+            int matchCount = info.getMatchCount();
+            int prize = info.getPrize();
+            int winningCount = info.getWinningCount();
+
+            printWinningResult(rank, matchCount, prize, winningCount);
         }
     }
 
-    private static void printWinningResult(int rank, int matchCount, int prize, Map<Integer, Integer> winningStatics) {
+    private static void printWinningResult(int rank, int matchCount, int prize, int winningCount) {
+        String resultMessage = matchCount + "개 일치 (" + prize + "원)- " + winningCount + "개";
+
         if (rank == 2) {
-            System.out.println(matchCount + "개 일치, 보너스 볼 일치(" + prize + "원)- " + winningStatics.get(rank) + "개");
-            return;
+            resultMessage = matchCount + "개 일치, 보너스 볼 일치(" + prize + "원)- " + winningCount + "개";
         }
 
-        System.out.println(matchCount + "개 일치 (" + prize + "원)- " + winningStatics.get(rank) + "개");
+        System.out.println(resultMessage);
     }
+
 
     public static void printReturnRate(float returnRate) {
         System.out.println("총 수익률은 " + String.format("%.2f", returnRate) + "입니다.");

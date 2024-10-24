@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.model.WinningInfo;
 import lotto.service.LottoBuyer;
 import lotto.service.LottoSeller;
 import lotto.view.InputView;
@@ -17,17 +18,17 @@ public class LottoController {
         ResultView.printCanBuyLottoCount(canBuyLottoCount);
 
         for (int count = 0; count < canBuyLottoCount; count++) {
-            List<Integer> lotto =  lottoBuyer.buyLotto(LottoSeller.sellLotto());
+            List<Integer> lotto = lottoBuyer.buyLotto(LottoSeller.sellLotto());
             ResultView.printLottoNumber(lotto);
         }
 
         String lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
+        int bonusNumber = InputView.inputBonusNumber(lastWeekWinningNumbers);
 
-        Map<Integer, Integer> winningStatics = lottoBuyer.checkLottoResult(lastWeekWinningNumbers, bonusNumber);
+        Map<Integer, WinningInfo> winningStatics = lottoBuyer.checkLottoResult(lastWeekWinningNumbers, bonusNumber);
         ResultView.printWinningStatics(winningStatics);
 
-        float returnRate = lottoBuyer.checkReturnRate(buyAmount, winningStatics);
+        float returnRate = lottoBuyer.checkReturnRate(buyAmount);
         ResultView.printReturnRate(returnRate);
     }
 }

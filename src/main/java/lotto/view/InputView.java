@@ -2,7 +2,10 @@ package lotto.view;
 
 import lotto.utility.Validator;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -53,17 +56,27 @@ public class InputView {
         }
     }
 
-    public static int inputBonusNumber() {
+    public static int inputBonusNumber(String lastWeekWinningNumbers) {
         System.out.println("보너스 볼을 입력해주세요.");
 
         int bonusNumber = SCANNER.nextInt();
 
         System.out.println();
 
+        isValidBonusNumberInput(lastWeekWinningNumbers, bonusNumber);
+
         return bonusNumber;
     }
 
+    private static void isValidBonusNumberInput(String lastWeekWinningNumbers, int bonusNumber) {
+        List<Integer> winningNumbers = Arrays.stream(lastWeekWinningNumbers.split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
 
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("지난 주 당첨 번호와 보너스 볼이 중복되었습니다.");
+        }
+    }
 
 
 }
