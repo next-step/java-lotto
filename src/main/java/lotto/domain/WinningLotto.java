@@ -13,10 +13,12 @@ public class WinningLotto {
     }
 
     public int getMatchCount(Lotto lotto) {
+
         return winningLotto.getLottoNumbers().getMatchCount(lotto);
     }
 
     public boolean isBonusMatch(Lotto lotto) {
+
         return lotto.contains(lottoNumber);
     }
 }

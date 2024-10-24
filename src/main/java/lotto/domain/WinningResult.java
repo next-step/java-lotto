@@ -28,14 +28,14 @@ public class WinningResult {
         mapOfResultl.put(rank, count);
     }
 
-    public BigDecimal getRateOfReturn(LottoCount lottoCount) {
+    public BigDecimal getRateOfReturn(LottoBuyDetails lottoBuyDetails) {
         if (mapOfResultl.isEmpty()) {
             return BigDecimal.ZERO;
         }
 
         BigDecimal totalReturn = mapOfResultl.entrySet().stream().map(x -> x.getKey().getWinningAmount().multiply(BigDecimal.valueOf(x.getValue()))).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return totalReturn.divide(lottoCount.getTotalPaymentAmount(), 2,RoundingMode.DOWN);
+        return totalReturn.divide(lottoBuyDetails.getTotalPaymentAmount(), 2,RoundingMode.DOWN);
     }
 
     public int getRankCount(LottoRankEnum rankEnum) {

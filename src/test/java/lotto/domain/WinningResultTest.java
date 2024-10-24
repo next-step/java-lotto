@@ -25,7 +25,7 @@ public class WinningResultTest {
     @Test
     void getRateOfReturn() {
         WinningResult winningResult = new WinningResult();
-        Assertions.assertThat(winningResult.getRateOfReturn(new LottoCount(1000))).isEqualTo(BigDecimal.ZERO);
+        Assertions.assertThat(winningResult.getRateOfReturn(new LottoBuyDetails(1000))).isEqualTo(BigDecimal.ZERO);
     }
 
 
@@ -34,8 +34,8 @@ public class WinningResultTest {
         Map<LottoRankEnum, Integer> resultMap = new HashMap<>();
         resultMap.put(LottoRankEnum.FIRST, 1);
         WinningResult winningResult = new WinningResult(resultMap);
-        LottoCount lottoCount = new LottoCount(1000);
-        Assertions.assertThat(winningResult.getRateOfReturn(lottoCount)).isEqualTo(LottoRankEnum.FIRST.getWinningAmount().divide(lottoCount.getTotalPaymentAmount(), 2, RoundingMode.DOWN));
+        LottoBuyDetails lottoBuyDetails = new LottoBuyDetails(1000);
+        Assertions.assertThat(winningResult.getRateOfReturn(lottoBuyDetails)).isEqualTo(LottoRankEnum.FIRST.getWinningAmount().divide(lottoBuyDetails.getTotalPaymentAmount(), 2, RoundingMode.DOWN));
     }
 
 

@@ -8,22 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-    private LottoCount lottoCount;
     private Lottos lottos;
 
-    public LottoGame(LottoCount lottoCount) {
-        this.lottoCount = lottoCount;
-        this.lottos = new Lottos(lottoCount.getLottoNumberGenerator().generate());
-    }
+    public LottoGame(LottoNumberGenerator lottoNumberGenerator) {
 
-    private Lottos createLotto(LottoNumberGenerator lottoNumberGenerator) {
-        return new Lottos(lottoNumberGenerator.generate());
+        this.lottos = new Lottos(lottoNumberGenerator.generate());
     }
-
     public List<LottoNumbers> getLottoNumbers() {
         return lottos.getLottoNumbers();
     }
-
 
     public WinningResult getWinningResult(WinningLotto winningLotto) {
         return lottos.getWinningResult(winningLotto);

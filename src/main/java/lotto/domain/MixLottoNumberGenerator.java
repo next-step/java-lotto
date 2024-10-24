@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MixLottoNumberGenerator implements LottoNumberGenerator {
-    private LottoCount lottoCount ;
+    private LottoBuyDetails lottoBuyDetails;
 
-    public MixLottoNumberGenerator(LottoCount lottoCount) {
-        this.lottoCount = lottoCount;
+    public MixLottoNumberGenerator(LottoBuyDetails lottoBuyDetails) {
+        this.lottoBuyDetails = lottoBuyDetails;
     }
 
 
     @Override
     public List<LottoNumbers> generate() {
         List<LottoNumbers> newGeneratedNumbers = new ArrayList<>();
-        newGeneratedNumbers.addAll(new ManualLottoNumberGenerator(lottoCount.getManualLottoCount()).generate());
-        newGeneratedNumbers.addAll(new AutoLottoNumberGenerator(lottoCount.getAutoLottoCount()).generate());
+        newGeneratedNumbers.addAll(new ManualLottoNumberGenerator(lottoBuyDetails.getManualBuyDetails()).generate());
+        newGeneratedNumbers.addAll(new AutoLottoNumberGenerator(lottoBuyDetails.getAutoLottoCount()).generate());
         return newGeneratedNumbers;
     }
 }

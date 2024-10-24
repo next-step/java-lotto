@@ -4,9 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoMain {
 
     private final static String LAST_WINNING_NUMBER_MSG = "지난주 당첨 번호를 입력해 주세요.";
@@ -14,12 +11,11 @@ public class LottoMain {
 
 
     public static void main(String[] args) {
-        LottoCount lottoCount = InputView.inputBuyDetails();
+        LottoBuyDetails lottoBuyDetails = InputView.inputBuyDetails();
 
-        LottoGame lottoGame = new LottoGame(lottoCount);
+        LottoGame lottoGame = new LottoGame(new LottoNumberGeneratorFactory(lottoBuyDetails).createGenerator());
 
-        OutputView.printPurchaseDetails(lottoCount);
-
+        OutputView.printPurchaseDetails(lottoBuyDetails);
         OutputView.printLottoNumbers(lottoGame.getLottoNumbers());
 
         OutputView.printMsg(LAST_WINNING_NUMBER_MSG);
@@ -31,7 +27,7 @@ public class LottoMain {
         WinningResult winningResult = lottoGame.getWinningResult(new WinningLotto(winningLotto, bonus));
 
         OutputView.printWinningResult(winningResult);
-        OutputView.printRateOfReturnInfo(winningResult.getRateOfReturn(lottoCount));
+        OutputView.printRateOfReturnInfo(winningResult.getRateOfReturn(lottoBuyDetails));
     }
 
 }

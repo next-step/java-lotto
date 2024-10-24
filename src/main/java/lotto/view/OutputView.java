@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoCount;
+import lotto.domain.LottoBuyDetails;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRankEnum;
 import lotto.domain.WinningResult;
@@ -42,8 +42,8 @@ public class OutputView {
         System.out.println("총 수익률이" + rateOfReturn + "입니다. (기준이 1이기 때문에 결과적으로 " + result + "입니다.)");
     }
 
-    public static void printPurchaseDetails(LottoCount lottoCount) {
-        System.out.println("수동으로" + lottoCount.getManualLottoCount() + "장" + "자동으로" + lottoCount.getAutoLottoCount() + "개를 구매했습니다.");
+    public static void printPurchaseDetails(LottoBuyDetails lottoBuyDetails) {
+        System.out.println("수동으로" + lottoBuyDetails.getManualLottoCount() + "장" + "자동으로" + lottoBuyDetails.getAutoLottoCount() + "개를 구매했습니다.");
 
     }
 }
