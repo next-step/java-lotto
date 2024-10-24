@@ -19,6 +19,10 @@ public class LottoStore {
         return result;
     }
 
+    private boolean isInvalidBaseUnit(int fee) {
+        return fee % BASE_AMOUNT != 0;
+    }
+
     private boolean isNegative(int fee) {
         return fee < 0;
     }
@@ -28,9 +32,5 @@ public class LottoStore {
         int max = LottoSettings.MAX.value();
         int size = LottoSettings.SIZE.value();
         return UniqueRandomNumberProvider.provideInRange(min, max, size);
-    }
-
-    private boolean isInvalidBaseUnit(int fee) {
-        return fee % BASE_AMOUNT != 0;
     }
 }
