@@ -8,8 +8,8 @@ public class LottoStore {
     private static final int BASE_AMOUNT = 1000;
 
     public List<Lotto> buy(int fee) {
-        if (isInvalidBaseUnit(fee)) {
-            throw new IllegalArgumentException("1000원 단위로 입력해주세요");
+        if (isInvalidBaseUnit(fee) || isNegative(fee)) {
+            throw new IllegalArgumentException("올바르지 않은 입력입니다.");
         }
 
         List<Lotto> result = new ArrayList<>();
@@ -17,6 +17,10 @@ public class LottoStore {
             result.add(new Lotto(generateRandomNumbers()));
         }
         return result;
+    }
+
+    private boolean isNegative(int fee) {
+        return fee < 0;
     }
 
     private List<Integer> generateRandomNumbers() {
