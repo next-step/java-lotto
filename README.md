@@ -41,7 +41,7 @@
 -[ ] 로또 번호는 숫자 오름차순으로 출력한다.
 
 ### 예외 케이스
--[ ] 1000원 단위로 입력하지 않는다.
+-[x] 1000원 단위로 입력하지 않으면 IllegalArgumentException가 발생한다.
 -[x] 로또 숫자가 중복인 경우 IllegalArgumentException를 발생한다.
 -[ ] 당첨번호에 숫자가 아닌 값을 입력하는 경우
 -[x] 당첨번호가 6자리가 아닌경우 IllegalArgumentException를 발생한다.
