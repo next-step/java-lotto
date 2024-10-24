@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -26,7 +25,7 @@ public class WinningResultTest {
     @Test
     void getRateOfReturn() {
         WinningResult winningResult = new WinningResult();
-        Assertions.assertThat(winningResult.getRateOfReturn(1)).isEqualTo(BigDecimal.ZERO);
+        Assertions.assertThat(winningResult.getRateOfReturn(new LottoBuyDetails(1000))).isEqualTo(BigDecimal.ZERO);
     }
 
 
@@ -35,7 +34,8 @@ public class WinningResultTest {
         Map<LottoRankEnum, Integer> resultMap = new HashMap<>();
         resultMap.put(LottoRankEnum.FIRST, 1);
         WinningResult winningResult = new WinningResult(resultMap);
-        Assertions.assertThat(winningResult.getRateOfReturn(1)).isEqualTo(LottoRankEnum.FIRST.getWinningAmount().divide(LottoUnitAmount.getBigDecimalVal(), 2, RoundingMode.DOWN));
+        LottoBuyDetails lottoBuyDetails = new LottoBuyDetails(1000);
+        Assertions.assertThat(winningResult.getRateOfReturn(lottoBuyDetails)).isEqualTo(LottoRankEnum.FIRST.getWinningAmount().divide(lottoBuyDetails.getTotalPaymentAmount(), 2, RoundingMode.DOWN));
     }
 
 

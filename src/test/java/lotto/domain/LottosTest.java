@@ -24,6 +24,26 @@ public class LottosTest {
         assertThat(result.getRankCount(LottoRankEnum.FIRST)).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("add Lottos")
+    void add() {
+        Lottos lottosEmpty = new Lottos();
+        LottoNumbers lottoNumbers = new LottoNumbers(new int[] {1,2,3,4,5,6});
+        Lottos lottos = getLottos(Arrays.asList(lottoNumbers, lottoNumbers));
+        lottosEmpty.addLottos(lottos);
+        assertThat(lottosEmpty.asList()).hasSize(2);
+    }
+
+    @Test
+    @DisplayName("add List of Lotto")
+    void add2() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new int[] {1,2,3,4,5,6});
+        Lottos lottos = getLottos(Arrays.asList(lottoNumbers, lottoNumbers));
+        lottos.addLottos(Arrays.asList(new Lotto(lottoNumbers)));
+        assertThat(lottos.asList()).hasSize(3);
+    }
+
+
     private Lottos getLottos(List<LottoNumbers> lottoList) {
         return new Lottos(lottoList);
     }

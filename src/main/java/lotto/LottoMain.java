@@ -1,35 +1,34 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.numbergenerator.LottoNumberGeneratorFactory;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoMain {
-    private final static String INPUT_MSG = "구매금액을 입력해 주세요";
-    private final static String BUY_CNT_MSG = "개를 구매했습니다.";
+
     private final static String LAST_WINNING_NUMBER_MSG = "지난주 당첨 번호를 입력해 주세요.";
     private final static String INPUT_BONUS_MSG = "보너스 번호를 입력해 주세요";
 
 
     public static void main(String[] args) {
-        OutputView.printMsg(INPUT_MSG);
-        int lottoTotalCount = InputView.getCount();
-        OutputView.printMsg(lottoTotalCount + BUY_CNT_MSG);
+        LottoBuyDetails lottoBuyDetails = InputView.inputBuyDetails();
 
-        Lottos lottos = new Lottos(QuickPickGenerator.genLottoNumbers(lottoTotalCount));
+        LottoGame lottoGame = new LottoGame(new LottoNumberGeneratorFactory(lottoBuyDetails).createGenerator());
 
-        OutputView.printLottoNumbers(lottos.getLottoNumbers());
+        OutputView.printPurchaseDetails(lottoBuyDetails);
+        OutputView.printLottoNumbers(lottoGame.getLottoNumbers());
 
         OutputView.printMsg(LAST_WINNING_NUMBER_MSG);
-
         Lotto winningLotto = new Lotto(new LottoNumbers(InputView.inputWinningNumber()));
 
         OutputView.printMsg(INPUT_BONUS_MSG);
         LottoNumber bonus = new LottoNumber(InputView.inputNumber());
 
-        WinningResult winningResult = lottos.getWinningResult(new WinningLotto(winningLotto, bonus));
+        WinningResult winningResult = lottoGame.getWinningResult(new WinningLotto(winningLotto, bonus));
 
         OutputView.printWinningResult(winningResult);
-        OutputView.printRateOfReturnInfo(winningResult.getRateOfReturn(lottoTotalCount));
+        OutputView.printRateOfReturnInfo(winningResult.getRateOfReturn(lottoBuyDetails));
     }
+
 }
