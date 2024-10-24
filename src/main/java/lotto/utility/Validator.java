@@ -7,6 +7,7 @@ import java.util.Set;
 public class Validator {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     public static void isValidNumber(int number) {
         checkNumberRange(number);
@@ -31,7 +32,7 @@ public class Validator {
     }
 
     private static void checkNumberCount(List<Integer> numbers) {
-        if(numbers.size() != 6) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 숫자의 개수는 반드시 6개여야 합니다.");
         }
     }

@@ -1,54 +1,53 @@
 package lotto.service;
 
-import lotto.common.WinningInfo;
 import lotto.model.Lotto;
+import lotto.model.WinningInfo;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoAnalyzer {
+    private final static int[] prize = {0, 2_000_000_000, 30_000_000, 1_500_000, 50_000, 5_000};
 
-    private LottoAnalyzer() {
+    private final Map<Integer, WinningInfo> winningStatics;
+
+    public LottoAnalyzer() {
+        this.winningStatics = createWinningStatics();
     }
 
-    public static Map<Integer, Integer> calculateWinningStatics(List<Integer> winningNumbers, int bonusNumber, List<Lotto> lottos) {
-        Map<Integer, Integer> winningStatics = createWinningStatisticsMap();
+    public Map<Integer, WinningInfo> calculateWinningStatics(List<Integer> winningNumbers, int bonusNumber, List<Lotto> lottos) {
 
         for (Lotto lotto : lottos) {
-            int matchingCount = lotto.countMatchingNumber(winningNumbers);
-            boolean isMatchBonusNumber = lotto.containsBonusNumber(bonusNumber);
-            int lottoRank = LottoRankCalculator.determineRank(matchingCount, isMatchBonusNumber);
+            int matchCount = lotto.countMatchingNumber(winningNumbers, bonusNumber);
+            boolean matchBonus = lotto.containsBonusNumber(bonusNumber);
+            int rank = LottoRank.getRankByMatchCount(matchCount, matchBonus);
 
-            winningStatics.put(lottoRank, winningStatics.get(lottoRank) + 1);
+            WinningInfo winningInfo = winningStatics.get(rank);
+            winningInfo.increaseWinningCount();
         }
 
         return winningStatics;
     }
 
-    private static Map<Integer, Integer> createWinningStatisticsMap() {
-        Map<Integer, Integer> winningStatics = new HashMap<>();
+    private Map<Integer, WinningInfo> createWinningStatics() {
+        Map<Integer, WinningInfo> winningStatics = new HashMap<>();
 
-        for(int rank = 0; rank <= 5; rank++) {
-            winningStatics.putIfAbsent(rank, 0);
+        for (int rank = 0; rank <= 5; rank++) {
+            winningStatics.put(rank, new WinningInfo(rank, prize[rank], 0));
         }
 
         return winningStatics;
     }
 
-    public static float calculateReturnRate(int buyAmount, Map<Integer, Integer> winningStatics) {
-        int totalPrize = calculatePrize(winningStatics);
-
-        return (float) totalPrize / buyAmount;
-    }
-
-    private static int calculatePrize(Map<Integer, Integer> winningStatics) {
+    public float calculateReturnRate(int buyAmount) {
         int totalPrize = 0;
 
         for (int rank = 1; rank <= 5; rank++) {
-            totalPrize += winningStatics.get(rank) * WinningInfo.PRIZE[rank];
+            WinningInfo info = winningStatics.get(rank);
+            totalPrize += info.calculateTotalPrize();
         }
 
-        return totalPrize;
+        return (float) totalPrize / buyAmount;
     }
 }

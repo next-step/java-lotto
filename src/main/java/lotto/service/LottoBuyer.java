@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.model.Lotto;
+import lotto.model.WinningInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +13,7 @@ public class LottoBuyer {
     private static final int LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottos;
+    private LottoAnalyzer winningStatics;
 
     public LottoBuyer() {
         lottos = new ArrayList<>();
@@ -27,14 +29,16 @@ public class LottoBuyer {
         return lottoNumber;
     }
 
-    public Map<Integer, Integer> checkLottoResult(String lastWeekWinningNumbers, int bonusNumber) {
+    public Map<Integer, WinningInfo> checkLottoResult(String lastWeekWinningNumbers, int bonusNumber) {
         List<Integer> winningNumber = parseWinningNumber(lastWeekWinningNumbers);
 
-        return LottoAnalyzer.calculateWinningStatics(winningNumber, bonusNumber, lottos);
+        winningStatics = new LottoAnalyzer();
+
+        return winningStatics.calculateWinningStatics(winningNumber, bonusNumber, lottos);
     }
 
-    public float checkReturnRate(int buyAmount, Map<Integer, Integer> winningStatics) {
-        return LottoAnalyzer.calculateReturnRate(buyAmount, winningStatics);
+    public float checkReturnRate(int buyAmount) {
+        return winningStatics.calculateReturnRate(buyAmount);
     }
 
     private List<Integer> parseWinningNumber(String lastWeekWinningNumber) {
@@ -42,5 +46,9 @@ public class LottoBuyer {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
