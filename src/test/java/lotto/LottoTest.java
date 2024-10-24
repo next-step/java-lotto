@@ -1,5 +1,6 @@
 package lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -35,6 +36,12 @@ public class LottoTest {
     @Test
     public void 로또_번호가_중복_되면_예외가_발생한다() {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(6, 5, 5, 3, 2, 1)));
+    }
+
+    @Test
+    public void 로또_문자로_생성() {
+        Lotto lotto = Lotto.from("1,2,3,4,5,6");
+        assertThat(lotto).isEqualTo(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     static Stream<Arguments> provideInvalidLottoNumbers() {
