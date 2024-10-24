@@ -16,7 +16,7 @@ public class LottoTest {
         assertThat(lotto.getIsBonusMatch()).isEqualTo(false);
 
         Lotto lotto2 = new Lotto(Arrays.asList(7, 2, 4, 5, 22, 37));
-        assertThat(lotto.calculateMatchCount(new WinningLotto(Arrays.asList(1, 5, 13, 22, 43, 37), 7))).isEqualTo(3);
+        assertThat(lotto2.calculateMatchCount(new WinningLotto(Arrays.asList(1, 5, 13, 22, 43, 37), 7))).isEqualTo(3);
         assertThat(lotto2.getIsBonusMatch()).isEqualTo(true);
     }
 
