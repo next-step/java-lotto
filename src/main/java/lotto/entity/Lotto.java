@@ -2,6 +2,7 @@ package lotto.entity;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,14 +12,6 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-//    public Lotto(List<Integer> numbers) {
-//        this(new HashSet<>(numbers.subList(SUB_LIST_INIT_INDEX, SUB_LIST_LAST_INDEX)));
-//    }
-//
-//    public Lotto(Set<Integer> numbers) {
-//        validateSize(numbers);
-//        lottoNumbers = numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toSet());
-//    }
     private Lotto(Set<LottoNumber> numbers) {
         validateSize(numbers);
         lottoNumbers = numbers;
@@ -47,12 +40,6 @@ public class Lotto {
         return lottoNumbers.stream().map(lottoNumber -> lottoNumber.getInteger()).collect(Collectors.toSet());
     }
 
-//    private void validateSize(Set<Integer> result) {
-//        if (result.size() != SUB_LIST_LAST_INDEX) {
-//            throw new IllegalArgumentException("사이즈가 여섯 개 아님");
-//        }
-//    }
-
     private void validateSize(Set<LottoNumber> result) {
         if (result.size() != SUB_LIST_LAST_INDEX) {
             throw new IllegalArgumentException("사이즈가 여섯 개 아님");
@@ -60,9 +47,15 @@ public class Lotto {
     }
 
     @Override
-    public String toString() {
-        return "Lotto{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return lottoNumbers.equals(lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

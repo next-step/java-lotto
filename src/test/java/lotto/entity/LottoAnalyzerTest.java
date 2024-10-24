@@ -13,12 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoAnalyzerTest {
 
-    List<LottoNumber> toList(List<Integer>numbers){
+    List<LottoNumber> toList(List<Integer> numbers) {
         return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toList());
     }
-    Set<LottoNumber> toSet(Set<Integer>numbers){
+
+    Set<LottoNumber> toSet(Set<Integer> numbers) {
         return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toSet());
     }
+
     @Test
     void 각_등수별_몇개_맞추었는지_검증() {
         LottoAnalyzer lottoAnalyzer = new LottoAnalyzer();

@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Set;
 
 
-public class WinningTexts {
+public class LottoText {
 
-    private WinningTexts() {
+    private LottoText() {
 
     }
 
-    public static Set<LottoNumber> numbers(String[] text) {
+    public static Set<LottoNumber> ofValues(String[] text) {
         return toLottoNumbers(text);
     }
 

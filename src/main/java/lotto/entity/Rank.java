@@ -1,7 +1,6 @@
 package lotto.entity;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 
 public enum Rank {
@@ -58,7 +57,6 @@ public enum Rank {
         }
         return currentRank;
     }
-
 
 
     public int getCollectCount() {

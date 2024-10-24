@@ -11,20 +11,10 @@ public class Winning {
         this.winningNumbers = Lotto.valueOf(numbers);
         this.bonusNumber = bonusNumber;
     }
-//
-//    private void validate(Set<Integer> numbers, int bonusNumber) {
-//        checkForDuplicates(numbers, bonusNumber);
-//    }
 
     private void validate(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
         checkForDuplicates(numbers, bonusNumber);
     }
-//
-//    private void checkForDuplicates(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
-//        if (numbers.contains(bonusNumber)) {
-//            throw new IllegalArgumentException("당첨번호와 보너스 번호 중복입니다");
-//        }
-//    }
 
     private void checkForDuplicates(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
         if (numbers.contains(bonusNumber)) {
