@@ -15,10 +15,10 @@ public class Lotto {
     }
 
     private boolean hasIncorrectSize(List<Integer> numbers) {
-        return numbers.size() != 6;
+        return !LottoSettings.isValidSize(numbers.size());
     }
 
     private boolean hasInvalidNumber(List<Integer> numbers) {
-        return numbers.stream().anyMatch(i -> i < 1 || 45 < i);
+        return numbers.stream().anyMatch(i -> !LottoSettings.isNumberInValidRange(i));
     }
 }
