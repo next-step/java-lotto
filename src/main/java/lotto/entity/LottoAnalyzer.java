@@ -31,7 +31,16 @@ public class LottoAnalyzer {
         if (rank == Rank.MISS) {
             return;
         }
-        winningResults.stream().filter(winningResult -> winningResult.isSame(rank)).forEach(winningResult -> increase(winningResult));
+
+        for (WinningResult result : winningResults) {
+            countUpSame(rank, result);
+        }
+    }
+
+    private void countUpSame(Rank rank, WinningResult result) {
+        if (result.isSame(rank)) {
+            increase(result);
+        }
     }
 
     private void increase(WinningResult search) {

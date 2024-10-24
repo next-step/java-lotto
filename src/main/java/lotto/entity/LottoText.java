@@ -6,20 +6,20 @@ import java.util.List;
 import java.util.Set;
 
 
-public class WinningTexts {
+public class LottoText {
 
-    private WinningTexts() {
+    private LottoText() {
 
     }
 
-    public static Set<Integer> numbers(String[] text) {
-        return toInts(text);
+    public static Set<LottoNumber> ofValues(String[] text) {
+        return toLottoNumbers(text);
     }
 
-    private static Set<Integer> toInts(String[] values) {
-        List<Integer> result = new ArrayList<>();
+    private static Set<LottoNumber> toLottoNumbers(String[] values) {
+        List<LottoNumber> result = new ArrayList<>();
         for (String value : values) {
-            result.add(toInt(value));
+            result.add(new LottoNumber(toInt(value)));
         }
         return new HashSet<>(result);
     }
