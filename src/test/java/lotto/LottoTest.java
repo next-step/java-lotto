@@ -32,6 +32,11 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(7, 6, 5, 4, 3, 2, 1)));
     }
 
+    @Test
+    public void 로또_번호가_중복_되면_예외가_발생한다() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(6, 5, 5, 3, 2, 1)));
+    }
+
     static Stream<Arguments> provideInvalidLottoNumbers() {
         return Stream.of(
                 arguments(List.of(0, 1, 2, 3, 4, 5)),
