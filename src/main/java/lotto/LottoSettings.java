@@ -18,4 +18,8 @@ public enum LottoSettings {
     public static boolean isNumberInValidRange(int value) {
         return MIN.value <= value && value <= MAX.value;
     }
+
+    public int value() {
+        return value;
+    }
 }

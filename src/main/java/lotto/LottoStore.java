@@ -2,8 +2,6 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoStore {
 
@@ -14,12 +12,18 @@ public class LottoStore {
             throw new IllegalArgumentException("1000원 단위로 입력해주세요");
         }
 
-        ArrayList<Lotto> result = new ArrayList<>();
+        List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < fee / BASE_AMOUNT; i++) {
-            List<Integer> numbers = UniqueRandomNumberProvider.provideInRange(1, 45, 6);
-            result.add(new Lotto(numbers));
+            result.add(new Lotto(generateRandomNumbers()));
         }
         return result;
+    }
+
+    private List<Integer> generateRandomNumbers() {
+        int min = LottoSettings.MIN.value();
+        int max = LottoSettings.MAX.value();
+        int size = LottoSettings.SIZE.value();
+        return UniqueRandomNumberProvider.provideInRange(min, max, size);
     }
 
     private boolean isInvalidBaseUnit(int fee) {
