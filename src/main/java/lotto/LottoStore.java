@@ -5,26 +5,23 @@ import java.util.List;
 
 public class LottoStore {
 
-    private static final int BASE_AMOUNT = 1000;
+    private static final Money BASE_AMOUNT = new Money(1000);
 
     public List<Lotto> buy(int fee) {
-        if (isInvalidBaseUnit(fee) || isNegative(fee)) {
-            throw new IllegalArgumentException("올바르지 않은 입력입니다.");
+        Money money = new Money(fee);
+        if (isInvalidBaseUnit(money)) {
+            throw new IllegalArgumentException("로또는 1000원 단위이여야 합니다.");
         }
 
         List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < fee / BASE_AMOUNT; i++) {
+        for (int i = 0; i < money.divide(BASE_AMOUNT); i++) {
             result.add(new Lotto(generateRandomNumbers()));
         }
         return result;
     }
 
-    private boolean isInvalidBaseUnit(int fee) {
-        return fee % BASE_AMOUNT != 0;
-    }
-
-    private boolean isNegative(int fee) {
-        return fee < 0;
+    private boolean isInvalidBaseUnit(Money fee) {
+        return !fee.change(BASE_AMOUNT).equals(Money.zero());
     }
 
     private List<Integer> generateRandomNumbers() {

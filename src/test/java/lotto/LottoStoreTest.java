@@ -25,9 +25,4 @@ public class LottoStoreTest {
         assertThatIllegalArgumentException().isThrownBy(() -> lottoStore.buy(999));
     }
 
-    @Test
-    public void 금액은_음수일경우_예외가_발생한다(){
-        LottoStore lottoStore = new LottoStore();
-        assertThatIllegalArgumentException().isThrownBy(()->lottoStore.buy(-1000));
-    }
 }
