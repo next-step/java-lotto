@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.numbergenerator;
+
+import lotto.domain.LottoBuyDetails;
 
 public class LottoNumberGeneratorFactory {
     private LottoBuyDetails lottoBuyDetails;

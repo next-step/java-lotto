@@ -52,5 +52,7 @@
 - [x] : 수동 로또 번호 입력 기능  + exception 처리
 
 
-* ManualLottoGenerator 수동 로또 생성 기능 추가 
-- [ ] : 입력받은 수동 로또 번호로 로또 생성 
+* ManualLottoNumberGenerator 수동 로또 생성 기능 추가 
+- [x] : 입력받은 수동 로또 번호로 로또 생성 
+* MixLottoNumberGenerator 수동 로또 생성 기능 추가
+- [x] : 자동 & 수동 복합 생성 

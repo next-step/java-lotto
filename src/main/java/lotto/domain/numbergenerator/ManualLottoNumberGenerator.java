@@ -1,7 +1,7 @@
-package lotto.domain;
+package lotto.domain.numbergenerator;
 
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.domain.LottoNumbers;
+import lotto.domain.ManualBuyDetails;
 
 import java.util.List;
 

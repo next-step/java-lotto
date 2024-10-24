@@ -1,10 +1,8 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.domain.numbergenerator.LottoNumberGenerator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
