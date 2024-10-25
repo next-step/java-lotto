@@ -14,16 +14,16 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private int matchCount;
+    private MatchCount matchCount;
     private int winningAmount;
 
     LottoRank(int matchCount, int winningAmount) {
-        this.matchCount = matchCount;
+        this.matchCount = new MatchCount(matchCount);
         this.winningAmount = winningAmount;
     }
 
     public int getMatchCount() {
-        return matchCount;
+        return matchCount.getMatchCount();
     }
 
     public int getWinningAmount() {
@@ -37,23 +37,38 @@ public enum LottoRank {
                 .collect(Collectors.toList());
     }
 
-    public static Set<Integer> getMatchCounts() {
+    public static Set<MatchCount> getMatchCounts() {
         return EnumSet.allOf(LottoRank.class)
                 .stream()
-                .filter(d -> d.matchCount != 0)
+                .filter(d -> !d.matchCount.equals(new MatchCount(0)))
                 .map(d -> d.matchCount)
                 .collect(Collectors.toSet());
     }
 
-    public static boolean isWinning(int matchCount) {
+    public static boolean isWinning(MatchCount matchCount) {
         return getMatchCounts().contains(matchCount);
     }
 
     public static LottoRank getLottoRank(int matchCount, boolean isBonusMatch) {
-        if (matchCount < FIFTH.matchCount) {
+        if (matchCount < FIFTH.matchCount.getMatchCount()) {
             return MISS;
         }
-        if (SECOND.matchCount == matchCount) {
+        if (SECOND.matchCount.getMatchCount() == matchCount) {
+            return rankSecondAndThird(isBonusMatch);
+        }
+
+        return Arrays.stream(values())
+                .filter(rank -> rank.isMatch(new MatchCount(matchCount)))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+
+    public static LottoRank getLottoRank(MatchCount matchCount, boolean isBonusMatch) {
+        if (matchCount.getMatchCount() < FIFTH.matchCount.getMatchCount()) {
+            return MISS;
+        }
+        if (SECOND.matchCount.equals(matchCount)) {
             return rankSecondAndThird(isBonusMatch);
         }
 
@@ -63,8 +78,8 @@ public enum LottoRank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    private boolean isMatch(int matchCount) {
-        return this.matchCount == matchCount;
+    private boolean isMatch(MatchCount matchCount) {
+        return this.matchCount.equals(matchCount);
     }
 
     private static LottoRank rankSecondAndThird(boolean isBonusMatch) {
@@ -74,7 +89,7 @@ public enum LottoRank {
         return THIRD;
     }
 
-    public static int determineAmountByMatchCount(int matchCount, boolean isBonusMatch) {
+    public static int determineAmountByMatchCount(MatchCount matchCount, boolean isBonusMatch) {
         return getLottoRank(matchCount, isBonusMatch).winningAmount;
     }
 }

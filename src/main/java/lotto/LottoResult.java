@@ -3,27 +3,24 @@ package lotto;
 import java.util.List;
 
 public class LottoResult {
-    private int matchCount;
+    private MatchCount matchCount;
     private boolean isBonusMatch = false;
 
+    public LottoResult() {
+        this.matchCount = new MatchCount(0);
+    }
+
     public int getMatchCount() {
-        return this.matchCount;
+        return this.matchCount.getMatchCount();
     }
 
     public boolean getIsBonusMatch() {
         return this.isBonusMatch;
     }
 
-    public int calculateMatchCount(WinningLotto winningLotto, List<LottoNumber> lottoNumbers) {
-        calculateWinningMatchCount(winningLotto, lottoNumbers);
+    public void calculateMatchCount(WinningLotto winningLotto, List<LottoNumber> lottoNumbers) {
+        this.matchCount.calculateWinningMatchCount(winningLotto, lottoNumbers);
         this.isBonusMatch = winningLotto.checkBonusMatch(lottoNumbers);
-        return matchCount;
-    }
-
-    private void calculateWinningMatchCount(WinningLotto winningLotto, List<LottoNumber> lottoNumbers) {
-        for (int i = 0; i < lottoNumbers.size(); i++) {
-            this.matchCount += winningLotto.hasLottoNumber(lottoNumbers.get(i)) ? 1 : 0;
-        }
     }
 
     public int getAmountForWinningLotto() {

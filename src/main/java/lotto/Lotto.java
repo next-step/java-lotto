@@ -32,8 +32,8 @@ public class Lotto {
         return this.lottoResult.getIsBonusMatch();
     }
 
-    public int calculateMatchCount(WinningLotto winningLotto) {
-        return this.lottoResult.calculateMatchCount(winningLotto, lottoNumbers.getValues());
+    public void calculateMatchCount(WinningLotto winningLotto) {
+        this.lottoResult.calculateMatchCount(winningLotto, lottoNumbers.getValues());
     }
 
     public int getAmount() {
