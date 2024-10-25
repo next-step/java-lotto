@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import org.junit.jupiter.params.provider.Arguments;
 
 class LotteryMachineTest {
 
-    @DisplayName("로또 자판기가 구매 금액을 기반으로 알맞은 로또 개수를 잘 구매하는지")
+    @DisplayName("로또 자판기가 구매 금액과 수동 로또 번호를 기반으로 알맞은 로또 개수를 잘 구매하는지")
     @Test
     void getIssuedLottoNumberTest() {
         assertThat(new LotteryMachine(14500).getLottos()
@@ -39,6 +40,13 @@ class LotteryMachineTest {
                 Arguments.of("1, 2, 3, 4, 5, 6", 6),
                 Arguments.of("21, 22, 23, 24, 25, 27", 0)
         );
+    }
+
+    @DisplayName("로또 구매 금액과 수동 발급 로또 번호로 잘 생성되는지")
+    @Test
+    void lotteryMachineTest() {
+        assertThat(new LotteryMachine(2000, List.of("1, 2, 3, 6, 7, 8", "2, 4, 5, 6, 8, 25")).getLottos().size())
+                .isEqualTo(2);
     }
 
 }
