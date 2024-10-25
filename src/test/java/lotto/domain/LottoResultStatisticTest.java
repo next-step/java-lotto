@@ -21,7 +21,7 @@ public class LottoResultStatisticTest {
     @DisplayName("수익률 테스트 한장 구매 시 3등으로 테스트하므로 300.0")
     void 수익률_테스트() {
 
-        PurchaseInfo purchaseInfo = new PurchaseInfo(1000, 0);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(1, 0);
         Lottos lottos = Lottos.createAutoLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
         lottos.additionalLotto(lottoHitAll);
 
