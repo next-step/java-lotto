@@ -1,7 +1,10 @@
 package lotto;
 
 import lotto.lotto.LottoRank;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +51,7 @@ class LottoRankTest {
     }
 
     @Test
+    @DisplayName("마진율 계산기를 호출하여 로또 마진율을 구함")
     void lottoMarginCalculate() {
         Map<LottoRank, Integer> mmap = new HashMap<>();
         mmap.put(LottoRank.RANK_FOUR, 3);
@@ -56,14 +60,21 @@ class LottoRankTest {
         mmap.put(LottoRank.RANK_TWO_BONUS, 2);
         mmap.put(LottoRank.RANK_ONE, 1);
 
-        double result2 = ((5_000 * 3) + 50000 + (30_000_000 * 2) + 2_000_000_000) / 4000.0;
+        double result2 = ((5_000 * 3) + 50_000 + (30_000_000 * 2) + 2_000_000_000) / 4000.0;
 
         assertThat(LottoRank.calculateMarginRate(4000, mmap)).isEqualTo(result2);
     }
 
-    @Test
-    void 보너스_2등() {
-
+    @ParameterizedTest
+    @DisplayName("매칭키와 보너스볼 여부로 등수 및 가격을 구함")
+    @CsvSource({
+            "5, true, RANK_TWO_BONUS", "5, false, RANK_TWO",
+            "4, true, RANK_THREE", "4, false, RANK_THREE",
+            "3, true, RANK_FOUR", "3, false, RANK_FOUR",
+    })
+    void findWinPrice(int machingCnt, boolean bonusMatch, String resultRank) {
+        LottoRank lottoRank = LottoRank.findWinPrice(machingCnt, bonusMatch);
+        assertThat(lottoRank).isEqualTo(LottoRank.valueOf(resultRank));
     }
 
 }
