@@ -38,8 +38,12 @@
 - [x] 보너스 볼 입력
   - [x] 이미 입력한 지난주 당첨번호에 포함되는 숫자인 경우 IllegalArgumentException throw
   - [x] 숫자가 1 ~ 45가 아닌 경우 IllegalArgumentException throw
-- [x] 구매한 개수 출력
+- [x] 수동으로 구매할 로또 수 입력
+  - [x] 구매할 수 있는 로또 수보다 수동으로 구매할 로또가 더 많은 경우 throw IllegalArgumentException
+- [x] 수동으로 구매할 로또 수만큼 번호 입력
+- [x] 수동, 자동 각각 구매한 개수 출력
 - [x] 구매한 로또 목록 출력
+  - [x] 수동 로또 + 자동 로또 함께 출력
 - [x] 당첨 통계 출력
   - [x] 2등 추가 (5개 일치, 보너스 번호 일치)
 - [x] 총 수익률 출력
@@ -52,3 +56,10 @@
 - [x] 당첨된 로또 개수 확인 (3, 4, 5, 6개 일치)
   - [x] 보너스 볼 일치 확인
 - [x] 수익률 계산
+
+- [x] 모든 원시값과 문자열을 포장한다.
+  - [x] MatchCount 분리
+  - [x] BonusMatch 분리
+- [ ] 예외처리를 통해 에러가 발생하지 않도록 한다. 
+  - [ ] Optional 사용하여 NullPointException
+  - [x] IllegalArgumentException 처리

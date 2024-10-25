@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -14,30 +15,40 @@ public class LottoInputView {
         return scanner.nextInt();
     }
 
-    public static Lotto inputWinningNumbers() {
+    public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨번호를 입력해주세요");
-        scanner.nextLine();
+        return inputNumbers();
+    }
 
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요");
+        return scanner.nextInt();
+    }
+
+    public static int inputManualLottoCount(int totalLottoCount) {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요");
+        int manualLottoCount = scanner.nextInt();
+        LottoTicketValidator.checkManualLottoCount(totalLottoCount, manualLottoCount);
+        return manualLottoCount;
+    }
+
+    public static Lottos inputAllManualLottos(int manualLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해주세요");
+        scanner.nextLine();
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottos.add(new Lotto(inputNumbers()));
+        }
+        return new Lottos(manualLottos);
+    }
+
+    private static List<Integer> inputNumbers() {
         String numberStr = scanner.nextLine();
-        List<Integer> winningNumbers = Arrays.stream(numberStr.replaceAll(" ", "").split(","))
+        List<Integer> numbers = Arrays.stream(numberStr.replaceAll(" ", "").split(","))
                 .mapToInt(Integer::parseInt)
                 .boxed().collect(Collectors.toList());
 
-        Lotto winningLotto = new Lotto(winningNumbers);
-        return winningLotto;
-    }
-
-    public static int inputBonusNumber(List<Integer> winningNumbers) {
-        System.out.println("보너스 볼을 입력해주세요");
-        int bonusNumber = scanner.nextInt();
-
-        if(winningNumbers.contains(bonusNumber)){
-            throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
-        }
-        if (bonusNumber <= 0 || bonusNumber > 45) {
-            throw new IllegalArgumentException("유효한 번호가 아닙니다.");
-        }
-        return bonusNumber;
+        return numbers;
     }
 
 }

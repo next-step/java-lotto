@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.*;
+import java.util.List;
 
 public class Lotto {
 
@@ -20,24 +20,20 @@ public class Lotto {
         this.lottoResult = lottoResult;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers.getLottoNumbers();
-    }
-
-    public int getMatchCount() {
-        return this.lottoResult.getMatchCount();
-    }
-
-    public boolean getIsBonusMatch() {
-        return this.lottoResult.getIsBonusMatch();
-    }
-
     public String toStringLottoNumbers() {
         return lottoNumbers.toStringLottoNumbers();
     }
 
-    public int calculateMatchCount(Lotto winningLotto, int bonusNumber) {
-        return this.lottoResult.calculateMatchCount(winningLotto.getLottoNumbers(), lottoNumbers.getLottoNumbers(), bonusNumber);
+    public MatchCount getMatchCount() {
+        return this.lottoResult.getMatchCount();
+    }
+
+    public BonusMatch getBonusMatch() {
+        return this.lottoResult.getBonusMatch();
+    }
+
+    public void calculateMatchCount(WinningLotto winningLotto) {
+        this.lottoResult.calculateMatchCount(winningLotto, lottoNumbers.getValues());
     }
 
     public int getAmount() {

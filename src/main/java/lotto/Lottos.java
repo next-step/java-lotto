@@ -1,6 +1,7 @@
 package lotto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Lottos {
 
@@ -19,7 +20,11 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
+    public Lottos(Lottos lottos) {
+        this.lottos = lottos.lottos;
+    }
+
+    public List<Lotto> getValues() {
         return this.lottos;
     }
 
@@ -29,9 +34,13 @@ public class Lottos {
         }
     }
 
-    public void calculateAllMatchCount(Lotto winningLotto, int bonusNumber) {
+    public void calculateAllMatchCount(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            lotto.calculateMatchCount(winningLotto, bonusNumber);
+            lotto.calculateMatchCount(winningLotto);
         }
+    }
+
+    public void addAll(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
     }
 }
