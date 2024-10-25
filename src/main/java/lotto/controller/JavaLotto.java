@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.LottoResultStatistic;
-import lotto.domain.LottoShuffleGenerator;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseInfo;
 import lotto.domain.WinningLotto;
@@ -23,8 +22,7 @@ public class JavaLotto {
         PurchaseInfo purchaseInfo
                 = new PurchaseInfo(inputView.inputPurchaseAmountGuide(),inputView.inputManualLottoPurchaseAmount());
 
-        Lottos lottos = inputView.inputManualLottoGuide(purchaseInfo);
-        lottos.additionalLottos(Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), LottoShuffleGenerator.getLottoShuffleGenerator()));
+        Lottos lottos = Lottos.createLottos(inputView.inputManualLottoGuide(purchaseInfo), purchaseInfo.getNumberOfAutoPurchase());
 
         resultView.printPurchaseLottoResult(lottos, purchaseInfo);
 

@@ -29,7 +29,7 @@ public class LottosTest {
     void 로또_당첨_금액_확인() {
 
         PurchaseInfo purchaseInfo = new PurchaseInfo(2000, 0);
-        Lottos lottos = Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> List.of(lottoHitAll));
+        Lottos lottos = Lottos.createAutoLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> List.of(lottoHitAll));
 
         Assertions.assertThat(lottos.getResultStatistic(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7))).getTotalPrize()).isEqualTo(2_000_000_000);
 
@@ -40,7 +40,7 @@ public class LottosTest {
     void 로또_당첨_오버플로() {
 
         PurchaseInfo purchaseInfo = new PurchaseInfo(2000, 0);
-        Lottos lottos = Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
+        Lottos lottos = Lottos.createAutoLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
 
         lottos.additionalLotto(lottoHitAll);
         lottos.additionalLotto(lottoHitAll);
@@ -57,7 +57,7 @@ public class LottosTest {
     void 로또_상금_초과() {
 
         PurchaseInfo purchaseInfo = new PurchaseInfo(2000, 0);
-        Lottos lottos = Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
+        Lottos lottos = Lottos.createAutoLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
 
         lottos.additionalLotto(lottoHitAll);
         lottos.additionalLotto(lottoHitFive);
@@ -74,7 +74,7 @@ public class LottosTest {
     void 로또_2등_상금() {
 
         PurchaseInfo purchaseInfo = new PurchaseInfo(1000, 0);
-        Lottos lottos = Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
+        Lottos lottos = Lottos.createAutoLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
 
         lottos.additionalLotto(lottoHitAll);
 
@@ -86,7 +86,7 @@ public class LottosTest {
     void 로또_2등_제외_보너스번호_상금_테스트() {
 
         PurchaseInfo purchaseInfo = new PurchaseInfo(1000, 0);
-        Lottos lottos = Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
+        Lottos lottos = Lottos.createAutoLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
 
         lottos.additionalLotto(lottoHitAll);
 

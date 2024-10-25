@@ -5,7 +5,14 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public static Lottos createLottos(int autoAmount, LottoGenerator lottoGenerator) {
+    public static Lottos createLottos(Lottos manual, int autoAmount) {
+        Lottos auto = Lottos.createAutoLottos(autoAmount,
+                LottoShuffleGenerator.getLottoShuffleGenerator());
+        manual.additionalLottos(auto);
+        return manual;
+    }
+
+    public static Lottos createAutoLottos(int autoAmount, LottoGenerator lottoGenerator) {
         List<Lotto> lottos = lottoGenerator.generateLottos(autoAmount);
         return new Lottos(lottos);
     }
