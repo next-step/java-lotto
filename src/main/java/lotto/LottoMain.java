@@ -1,11 +1,8 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
+import lotto.controller.LottoController;
 import lotto.domain.Lotto;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoStore;
-import lotto.domain.Rank;
 import lotto.dto.RankResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -13,15 +10,11 @@ import lotto.view.OutputView;
 public class LottoMain {
 
     public static void main(String[] args) {
-        LottoStore store = new LottoStore();
-        List<Lotto> lottos = store.buy(InputView.readAmount());
+        LottoController controller = new LottoController();
+        List<Lotto> lottos = controller.buy(InputView.readAmount());
         OutputView.renderingLottos(lottos);
 
-        List<Rank> result = new ArrayList<>();
-        Lotto winningLotto = Lotto.from(InputView.readWinningNumber());
-        for (Lotto lotto : lottos) {
-            result.add(store.check(lotto, winningLotto));
-        }
-        OutputView.renderingWinningStatistics(new RankResult(result));
+        RankResult result = controller.check(InputView.readWinningNumber(), lottos);
+        OutputView.renderingWinningStatistics(result);
     }
 }
