@@ -10,11 +10,11 @@ import lotto.domain.PurchaseInfo;
 public class ResultView {
 
     public void printPurchaseLottoResult(Lottos lottos, PurchaseInfo purchaseInfo) {
-        NumberOfLotto(purchaseInfo);
+        numberOfLotto(purchaseInfo);
         printPurchasedLottos(lottos);
     }
 
-    private void NumberOfLotto(PurchaseInfo purchaseInfo) {
+    private void numberOfLotto(PurchaseInfo purchaseInfo) {
         System.out.println("\n수동으로 " + purchaseInfo.getNumberOfManualPurchase() +
                 "장, 자동으로 " + purchaseInfo.getNumberOfAutoPurchase() + "개를 구매했습니다");
     }
