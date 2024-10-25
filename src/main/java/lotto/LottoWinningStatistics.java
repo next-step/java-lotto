@@ -19,7 +19,7 @@ public class LottoWinningStatistics {
 
         Map<LottoRank, Integer> winningLottoCountMap = new EnumMap<>(LottoRank.class);
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = LottoRank.getLottoRank(lotto.getMatchCount(), lotto.getIsBonusMatch());
+            LottoRank lottoRank = LottoRank.getLottoRank(lotto.getMatchCount(), lotto.getBonusMatch());
             winningLottoCountMap.merge(lottoRank, 1, Integer::sum);
         }
 

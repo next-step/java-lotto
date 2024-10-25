@@ -3,7 +3,7 @@ package lotto;
 import java.util.List;
 import java.util.Objects;
 
-public class MatchCount {
+public class MatchCount implements Comparable<MatchCount> {
 
     private int matchCount;
 
@@ -32,5 +32,10 @@ public class MatchCount {
     @Override
     public int hashCode() {
         return Objects.hash(matchCount);
+    }
+
+    @Override
+    public int compareTo(MatchCount o) {
+        return Integer.compare(this.matchCount, o.matchCount);
     }
 }

@@ -24,12 +24,12 @@ public class Lotto {
         return lottoNumbers.toStringLottoNumbers();
     }
 
-    public int getMatchCount() {
+    public MatchCount getMatchCount() {
         return this.lottoResult.getMatchCount();
     }
 
-    public boolean getIsBonusMatch() {
-        return this.lottoResult.getIsBonusMatch();
+    public BonusMatch getBonusMatch() {
+        return this.lottoResult.getBonusMatch();
     }
 
     public void calculateMatchCount(WinningLotto winningLotto) {

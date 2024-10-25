@@ -49,27 +49,12 @@ public enum LottoRank {
         return getMatchCounts().contains(matchCount);
     }
 
-    public static LottoRank getLottoRank(int matchCount, boolean isBonusMatch) {
-        if (matchCount < FIFTH.matchCount.getMatchCount()) {
-            return MISS;
-        }
-        if (SECOND.matchCount.getMatchCount() == matchCount) {
-            return rankSecondAndThird(isBonusMatch);
-        }
-
-        return Arrays.stream(values())
-                .filter(rank -> rank.isMatch(new MatchCount(matchCount)))
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
-    }
-
-
-    public static LottoRank getLottoRank(MatchCount matchCount, boolean isBonusMatch) {
-        if (matchCount.getMatchCount() < FIFTH.matchCount.getMatchCount()) {
+    public static LottoRank getLottoRank(MatchCount matchCount, BonusMatch bonusMatch) {
+        if (matchCount.compareTo(FIFTH.matchCount) < 0) {
             return MISS;
         }
         if (SECOND.matchCount.equals(matchCount)) {
-            return rankSecondAndThird(isBonusMatch);
+            return rankSecondAndThird(bonusMatch.getIsBonusMatch());
         }
 
         return Arrays.stream(values())
@@ -89,7 +74,7 @@ public enum LottoRank {
         return THIRD;
     }
 
-    public static int determineAmountByMatchCount(MatchCount matchCount, boolean isBonusMatch) {
-        return getLottoRank(matchCount, isBonusMatch).winningAmount;
+    public static int determineAmountByMatchCount(MatchCount matchCount, BonusMatch bonusMatch) {
+        return getLottoRank(matchCount, bonusMatch).winningAmount;
     }
 }
