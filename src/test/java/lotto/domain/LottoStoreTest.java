@@ -38,7 +38,7 @@ public class LottoStoreTest {
         Lotto userLottos = new Lotto(userNumbers);
         Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-        LottoRank result = lottoStore.check(userLottos, winningLotto);
+        Rank result = lottoStore.check(userLottos, winningLotto);
 
         assertThat(result).isEqualTo(expectedRank);
     }
