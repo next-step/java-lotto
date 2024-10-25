@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResultStatistic;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseInfo;
@@ -18,19 +20,23 @@ public class JavaLotto {
     }
 
     public void playLotto() {
+        int purchaseAmount = inputView.inputPurchaseAmountGuide();
+        int numberOfManualLotto = inputView.inputManualLottoPurchaseAmount();
 
-        PurchaseInfo purchaseInfo
-                = new PurchaseInfo(inputView.inputPurchaseAmountGuide(),inputView.inputManualLottoPurchaseAmount());
+        PurchaseInfo purchaseInfo = new PurchaseInfo(purchaseAmount, numberOfManualLotto);
 
-        Lottos lottos = Lottos.createLottos(inputView.inputManualLottoGuide(purchaseInfo), purchaseInfo.getNumberOfAutoPurchase());
+        Lottos manual = inputView.inputManualLottoGuide(purchaseInfo);
+        int numberOfAutoLotto = purchaseInfo.getNumberOfAutoPurchase();
+        Lottos lottos = Lottos.createLottos(manual, numberOfAutoLotto);
 
         resultView.printPurchaseLottoResult(lottos, purchaseInfo);
 
-        LottoResultStatistic lottoResultStatistic
-                = lottos.getResultStatistic(new WinningLotto(inputView.inputWinnerNumber(), inputView.inputBonusNumber()));
+        Lotto winningLotto = inputView.inputWinnerNumber();
+        LottoNumber bonusLottoNumber = inputView.inputBonusNumber();
+        WinningLotto winningLottoInfo = new WinningLotto(winningLotto, bonusLottoNumber);
+        LottoResultStatistic lottoResultStatistic = lottos.getResultStatistic(winningLottoInfo);
 
         resultView.printResult(lottoResultStatistic, purchaseInfo);
-
     }
 
 }
