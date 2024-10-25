@@ -46,7 +46,15 @@ public class LottoTest {
 
     @Test
     public void 숫자아닌_문자로_생성되면_예외가_발생한다() {
-       assertThatIllegalArgumentException().isThrownBy(()->Lotto.from("1,2,a,4,5,6"));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.from("1,2,a,4,5,6"));
+    }
+
+    @Test
+    public void 당첨된_결과를_반환한다() {
+        Lotto userLotto = new Lotto(List.of(1, 2, 3, 7, 8, 9));
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        assertThat(winningLotto.matchCount(userLotto)).isEqualTo(3);
     }
 
     static Stream<Arguments> provideInvalidLottoNumbers() {

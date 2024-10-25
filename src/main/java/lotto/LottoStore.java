@@ -30,4 +30,8 @@ public class LottoStore {
         int size = LottoSettings.SIZE.value();
         return UniqueRandomNumberProvider.provideInRange(min, max, size);
     }
+
+    public LottoRank check(Lotto userLottos, Lotto winning) {
+        return LottoRank.match(userLottos.matchCount(winning));
+    }
 }

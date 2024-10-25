@@ -40,6 +40,11 @@ public class Lotto {
         return Arrays.stream(value).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
     }
 
+
+    public int matchCount(Lotto winning) {
+        return (int) numbers.stream().filter(winning.numbers::contains).count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
