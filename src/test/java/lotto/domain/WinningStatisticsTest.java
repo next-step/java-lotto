@@ -29,11 +29,12 @@ public class WinningStatisticsTest {
     private static Stream<Arguments> lottoRankSummaryArguments() {
         LotteryMachine machine = new LotteryMachine(
                 List.of(
-                        new Lotto(1, 2, 3, 7, 8, 9),
-                        new Lotto(1, 2, 3, 4, 5, 9),
-                        new Lotto(1, 2, 3, 4, 5, 45),
-                        new Lotto(11, 12, 13, 14, 15, 16)
-                )
+                        "1, 2, 3, 7, 8, 9",
+                        "1, 2, 3, 4, 5, 9",
+                        "1, 2, 3, 4, 5, 45",
+                        "11, 12, 13, 14, 15, 16"
+                ),
+                "4000"
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         int[] expectedRankCounts = {1, 0, 1, 1, 0};
@@ -53,9 +54,8 @@ public class WinningStatisticsTest {
 
     private static Stream<Arguments> lottoRankProfitArguments() {
         LotteryMachine machine = new LotteryMachine(
-                List.of(
-                        new Lotto(1, 2, 3, 7, 8, 9)
-                )
+                List.of("1, 2, 3, 7, 8, 9"),
+                "1000"
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         double profitRate = 5.00;
@@ -68,9 +68,8 @@ public class WinningStatisticsTest {
     @Test
     void createWinningStatisticsWithBonusBall() {
         LotteryMachine machine = new LotteryMachine(
-                List.of(
-                        new Lotto(1, 2, 3, 4, 5, 6)
-                )
+                List.of("1, 2, 3, 4, 5, 6"),
+                "1000"
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(6);

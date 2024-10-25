@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
 import lotto.util.LottoAutoGenerator;
 
 public class LotteryMachine {
@@ -12,27 +14,45 @@ public class LotteryMachine {
 
     private final List<Lotto> lottos;
 
-    public LotteryMachine(final List<Lotto> lottos) {
-        this.lottos = lottos;
+    public LotteryMachine(final List<Lotto> manualLottos, final int purchaseAmount) {
+        int remainingAmount = purchaseAmount - (manualLottos.size() * LOTTO_PRICE);
+        List<Lotto> autoLottos = purchaseLottos(remainingAmount);
+        this.lottos = combineLottos(manualLottos, autoLottos);
     }
 
     public LotteryMachine(final int purchasePrice) {
-        this(purchaseLotto(purchasePrice));
+        this(Collections.emptyList(), purchasePrice);
     }
 
-    private static void valid(final int price) {
+    public LotteryMachine(final List<String> manualLottoNumbers, final String purchasePrice) {
+        this(createManualLottos(manualLottoNumbers), Integer.parseInt(purchasePrice));
+    }
+
+    public LotteryMachine(final String purchasePrice) {
+        this(Integer.parseInt(purchasePrice));
+    }
+
+    private static void validatePrice(final int price) {
         if (price < 0) {
             throw new IllegalArgumentException("가격은 0보다 작은 값일 수 없습니다.");
         }
     }
 
-    private static List<Lotto> purchaseLotto(final int purchasePrice) {
-        valid(purchasePrice);
+    private static List<Lotto> purchaseLottos(final int purchasePrice) {
+        validatePrice(purchasePrice);
         return LottoAutoGenerator.generate(purchasePrice / LOTTO_PRICE);
     }
 
-    public LotteryMachine(final String purchasePrice) {
-        this(Integer.parseInt(purchasePrice));
+    private static List<Lotto> createManualLottos(final List<String> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+    }
+
+    private List<Lotto> combineLottos(final List<Lotto> manualLottos, final List<Lotto> autoLottos) {
+        List<Lotto> combinedLottos = new ArrayList<>(manualLottos);
+        combinedLottos.addAll(autoLottos);
+        return combinedLottos;
     }
 
     public List<Lotto> getLottos() {
@@ -46,7 +66,6 @@ public class LotteryMachine {
     public int getTotalPurchasePrice() {
         return lottos.size() * LOTTO_PRICE;
     }
-
 
     public List<String> getLottoNumbers() {
         return lottos.stream()
