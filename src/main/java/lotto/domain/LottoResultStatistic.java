@@ -29,7 +29,7 @@ public class LottoResultStatistic {
         Long totalPrize = lottoResultStatistics.entrySet()
                 .stream()
                 .filter(count -> count.getValue() >= 1)
-                .map(prize -> calculateEachPrize(prize.getKey(), prize.getKey().getValue()))
+                .map(prize -> calculateEachPrize(prize.getKey(), prize.getValue()))
                 .mapToLong(Long::valueOf)
                 .sum();
         return totalPrize;
@@ -37,10 +37,11 @@ public class LottoResultStatistic {
 
     private int calculateEachPrize(Prize prize, int numberOfLotto) {
         int eachPrize = prize.getValue();
-        if (eachPrize >= Prize.FOURTH.getValue()) {
+        if (eachPrize > Prize.FOURTH.getValue()) {
             return eachPrize;
         }
-        return eachPrize * numberOfLotto;
+        int result = eachPrize * numberOfLotto;
+        return result;
     }
 
 }
