@@ -39,7 +39,7 @@ public class LottoNumbers {
 
     public String toStringLottoNumbers() {
         Collections.sort(lottoNumbers);
-        return lottoNumbers.stream().map(d -> String.valueOf(d.getValue())).collect(Collectors.joining(", "));
+        return lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", "));
     }
 
     public List<LottoNumber> generateAutoLottoNumbers() {
@@ -47,7 +47,7 @@ public class LottoNumbers {
         return LOTTO_CANDIDATE_NUMBERS.stream().limit(LOTTO_NUMBER_COUNT).map(LottoNumber::new).collect(Collectors.toList());
     }
 
-    public boolean hasLottoNumber(LottoNumber lottoNumber){ //todo LottoNumber ? int ?
+    public boolean hasLottoNumber(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 }

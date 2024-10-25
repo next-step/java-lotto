@@ -20,8 +20,9 @@ public class LottoNumber implements Comparable{
         return true;
     }
 
-    public int getValue(){
-        return this.number;
+    @Override
+    public String toString() {
+        return String.valueOf(this.number);
     }
 
     @Override

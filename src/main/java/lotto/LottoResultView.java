@@ -14,7 +14,6 @@ public class LottoResultView {
         }
     }
 
-    //todo
     public static void printLottoStatistics(Map<LottoRank, Integer> lottosStatistics) {
         for (Map.Entry result : lottosStatistics.entrySet()) {
             LottoRank lottoRank = (LottoRank) result.getKey();

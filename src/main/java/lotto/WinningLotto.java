@@ -13,14 +13,14 @@ public class WinningLotto {
     }
 
 
-    public boolean hasDuplicateBonusNumber(){
-        if(this.lottoNumbers.hasLottoNumber(bonusNumber)){
+    public boolean hasDuplicateBonusNumber() {
+        if (this.lottoNumbers.hasLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
         }
         return false;
     }
 
-    public boolean hasLottoNumber(LottoNumber lottoNumber){
+    public boolean hasLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.hasLottoNumber(lottoNumber);
     }
 
