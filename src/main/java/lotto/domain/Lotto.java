@@ -40,7 +40,6 @@ public class Lotto {
         return Arrays.stream(value).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
     }
 
-
     public int matchCount(Lotto winning) {
         return (int) numbers.stream().filter(winning.numbers::contains).count();
     }
@@ -60,5 +59,10 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
