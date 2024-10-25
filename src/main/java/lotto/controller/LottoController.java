@@ -12,10 +12,10 @@ import java.util.List;
 public class LottoController {
 
     public static void main(String[] args) {
-        int purchasePrice = InputView.readPurchasePrice();
+        String purchasePrice = InputView.readPurchasePrice();
         List<String> manualLottoNumbers = InputView.readManualLottoNumbers();
-        LotteryMachine lotteryMachine = new LotteryMachine(purchasePrice);
-        ResultView.printLottoInfo(lotteryMachine);
+        LotteryMachine lotteryMachine = new LotteryMachine(manualLottoNumbers, purchasePrice);
+        ResultView.printLottoInfo(lotteryMachine, manualLottoNumbers.size());
 
         Lotto winningLotto = new Lotto(InputView.readWinningLottoNumber());
         LottoNumber bonusNumber = new LottoNumber(InputView.readBonusNumber());

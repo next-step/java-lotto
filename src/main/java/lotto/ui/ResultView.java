@@ -6,7 +6,7 @@ import lotto.domain.WinningStatistics;
 
 public class ResultView {
 
-    private static final String PURCHASED_LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
+    private static final String PURCHASED_LOTTO_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String RANK_SUMMARY_MESSAGE = "당첨 통계";
     private static final String DIVIDING_LINE = "---------";
     private static final String COUNT_UNIT = "개";
@@ -24,14 +24,14 @@ public class ResultView {
         throw new UnsupportedOperationException("유틸형 클래스는 생성할 수 없습니다");
     }
 
-    public static void printLottoInfo(LotteryMachine machine) {
+    public static void printLottoInfo(LotteryMachine machine, int manualLottoCount) {
         printBlankLine();
-        printPurchasedLottoCount(machine);
+        printPurchasedLottoCount(machine, manualLottoCount);
         printLotto(machine);
     }
 
-    private static void printPurchasedLottoCount(LotteryMachine machine) {
-        System.out.printf((PURCHASED_LOTTO_COUNT_MESSAGE) + "%n", machine.getPurchasedLottoCount());
+    private static void printPurchasedLottoCount(LotteryMachine machine, int manualLottoCount) {
+        System.out.printf((PURCHASED_LOTTO_COUNT_MESSAGE) + "%n", manualLottoCount, machine.getPurchasedLottoCount() - manualLottoCount);
     }
 
     private static void printLotto(LotteryMachine machine) {
