@@ -1,4 +1,6 @@
-package lotto.random;
+package lotto.domain;
+
+import lotto.random.LottoGenerator;
 
 import java.util.List;
 

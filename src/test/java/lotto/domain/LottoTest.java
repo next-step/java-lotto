@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
-import lotto.random.DefaultLottoList;
 import lotto.random.LottoGenerateStrategy;
 import lotto.random.LottoGenerator;
 
