@@ -1,41 +1,48 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum Prize {
 
-    FIRST(6, 2_000_000_000, Constants.BONUS_IRRELEVANT),
-    SECOND(5, 30_000_000, Constants.BONUS_HIT),
-    THIRD(5, 1_500_000, Constants.BONUS_IRRELEVANT),
-    FOURTH(4, 50000, Constants.BONUS_IRRELEVANT),
-    FIFTH(3, 5000, Constants.BONUS_IRRELEVANT),
-    MISS(0, 0, Constants.BONUS_IRRELEVANT);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
+    MISS(0, 0);
 
     private int hit;
     private int value;
-    private List<Boolean> bonus;
 
-    Prize(int hit, int value, List<Boolean> bonus) {
+    Prize(int hit, int value) {
         this.hit = hit;
         this.value = value;
-        this.bonus = bonus;
     }
 
     public static Prize getHit(int hit, boolean bonus) {
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.hit == hit && prize.bonus.contains(bonus))
+                .filter(prize -> prize.hit == hit)
+                .map(prize -> checkHitFive(prize, hit, bonus))
                 .findFirst()
                 .orElse(Prize.MISS);
+    }
+
+    private static Prize checkHitFive(Prize prize, int hit, boolean bonus) {
+        if (hit == Prize.SECOND.hit || hit == Prize.THIRD.hit) {
+            return checkHitBonus(bonus);
+        }
+        return prize;
+    }
+
+    private static Prize checkHitBonus(boolean bonus) {
+        if (bonus) {
+            return Prize.SECOND;
+        }
+        return Prize.THIRD;
     }
 
     public int getValue() {
         return value;
     }
 
-    private static class Constants {
-        public static final List<Boolean> BONUS_HIT = List.of(true);
-        public static final List<Boolean> BONUS_MISS = List.of(false);
-        public static final List<Boolean> BONUS_IRRELEVANT = List.of(true, false);
-    }
 }
