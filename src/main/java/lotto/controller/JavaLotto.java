@@ -20,10 +20,10 @@ public class JavaLotto {
     }
 
     public void playLotto() {
-        int purchaseAmount = inputView.inputPurchaseAmountGuide();
-        int numberOfManualLotto = inputView.inputManualLottoPurchaseAmount(purchaseAmount);
+        int totalNumberOfLotto = inputView.inputPurchaseAmountGuide();
+        int numberOfManualLotto = inputView.inputManualLottoPurchaseAmount(totalNumberOfLotto);
 
-        PurchaseInfo purchaseInfo = new PurchaseInfo(purchaseAmount, numberOfManualLotto);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(totalNumberOfLotto, numberOfManualLotto);
 
         Lottos manual = inputView.inputManualLottoGuide(purchaseInfo);
         int numberOfAutoLotto = purchaseInfo.getNumberOfAutoPurchase();

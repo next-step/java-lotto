@@ -48,7 +48,7 @@ public class InputView {
         try {
             numberOfManualLotto = scanner.nextInt();
             validManualPurchaseIsNegative(numberOfManualLotto);
-            validNumberOfManualLotto(calculateNumberOfTotalPurchase(purchaseAmount), numberOfManualLotto);
+            validNumberOfManualLotto(purchaseAmount, numberOfManualLotto);
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage()+"\n");
             return inputManualLottoPurchaseAmount(purchaseAmount);
