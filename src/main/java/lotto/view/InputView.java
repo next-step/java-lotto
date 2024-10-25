@@ -11,6 +11,7 @@ import lotto.domain.Lottos;
 import lotto.domain.PurchaseInfo;
 
 public class InputView {
+    private static final int LOTTO_PRICE = 1000;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -20,13 +21,39 @@ public class InputView {
     }
 
     private int inputPurchaseAmount() {
-        return scanner.nextInt();
+        int amount;
+        try {
+            amount = scanner.nextInt();
+            validCanPurchaseLotto(amount);
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage()+"\n");
+            clearBuffer();
+            return inputPurchaseAmountGuide();
+        }
+        return calculateNumberOfTotalLotto(amount) ;
     }
 
-    public int inputManualLottoPurchaseAmount() {
+    private int calculateNumberOfTotalLotto(int amount) {
+        return amount / LOTTO_PRICE;
+    }
+
+    public int inputManualLottoPurchaseAmount(int purchaseAmount) {
         clearBuffer();
         System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
-        return inputPurchaseAmount();
+        return inputNumberOfManualLotto(purchaseAmount);
+    }
+
+    private int inputNumberOfManualLotto(int purchaseAmount) {
+        int numberOfManualLotto;
+        try {
+            numberOfManualLotto = scanner.nextInt();
+            validManualPurchaseIsNegative(numberOfManualLotto);
+            validNumberOfManualLotto(calculateNumberOfTotalPurchase(purchaseAmount), numberOfManualLotto);
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage()+"\n");
+            return inputManualLottoPurchaseAmount(purchaseAmount);
+        }
+        return numberOfManualLotto;
     }
 
     private void clearBuffer() {
@@ -66,6 +93,28 @@ public class InputView {
             lottos.add(new Lotto(convertStringToIntList(scanner.nextLine())));
         }
         return lottos;
+    }
+
+    public void validCanPurchaseLotto(int totalAmount) {
+        if (totalAmount < LOTTO_PRICE) {
+            throw new IllegalArgumentException("1000원 미만으론 살 수 없음");
+        }
+    }
+
+    public void validNumberOfManualLotto(int purchaseAmount, int manualPurchase) {
+        if (manualPurchase > purchaseAmount) {
+            throw new IllegalArgumentException("구매한 로또 수량보다 많의 수의 로또를 수동 구매 할 수 없습니다");
+        }
+    }
+
+    public void validManualPurchaseIsNegative(int manualPurchase) {
+        if (manualPurchase < 0) {
+            throw new IllegalArgumentException("0 이상의 숫자를 입력해야 합니다");
+        }
+    }
+
+    private int calculateNumberOfTotalPurchase(int totalAmount) {
+        return totalAmount / LOTTO_PRICE;
     }
 
 }

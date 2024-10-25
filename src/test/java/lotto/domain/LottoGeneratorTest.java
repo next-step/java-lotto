@@ -13,7 +13,7 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("로또 자동 생성 테스트")
     void 로또_자동_생성_테스트() {
-        PurchaseInfo purchasInfo = new PurchaseInfo(3000, 0);
+        PurchaseInfo purchasInfo = new PurchaseInfo(3, 0);
 
         Lottos lottos = Lottos.createAutoLottos(purchasInfo.getNumberOfAutoPurchase(), purchaseAmount -> {
             List<Lotto> generatedLottos = new ArrayList<>();

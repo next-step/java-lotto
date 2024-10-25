@@ -21,7 +21,7 @@ public class JavaLotto {
 
     public void playLotto() {
         int purchaseAmount = inputView.inputPurchaseAmountGuide();
-        int numberOfManualLotto = inputView.inputManualLottoPurchaseAmount();
+        int numberOfManualLotto = inputView.inputManualLottoPurchaseAmount(purchaseAmount);
 
         PurchaseInfo purchaseInfo = new PurchaseInfo(purchaseAmount, numberOfManualLotto);
 
