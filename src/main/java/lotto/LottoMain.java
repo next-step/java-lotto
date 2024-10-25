@@ -12,5 +12,6 @@ public class LottoMain {
         LottoStore store = new LottoStore();
         List<Lotto> lottos = store.buy(InputView.readAmount());
         OutputView.renderingLottos(lottos);
+        System.out.println(InputView.readWinningNumber());
     }
 }
