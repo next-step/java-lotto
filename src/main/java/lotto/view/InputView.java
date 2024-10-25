@@ -25,12 +25,12 @@ public class InputView {
         try {
             amount = scanner.nextInt();
             validCanPurchaseLotto(amount);
-        } catch(IllegalArgumentException e) {
-            System.out.println(e.getMessage()+"\n");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage() + "\n");
             clearBuffer();
             return inputPurchaseAmountGuide();
         }
-        return calculateNumberOfTotalLotto(amount) ;
+        return calculateNumberOfTotalLotto(amount);
     }
 
     private int calculateNumberOfTotalLotto(int amount) {
@@ -49,8 +49,8 @@ public class InputView {
             numberOfManualLotto = scanner.nextInt();
             validManualPurchaseIsNegative(numberOfManualLotto);
             validNumberOfManualLotto(purchaseAmount, numberOfManualLotto);
-        } catch(IllegalArgumentException e) {
-            System.out.println(e.getMessage()+"\n");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage() + "\n");
             return inputManualLottoPurchaseAmount(purchaseAmount);
         }
         return numberOfManualLotto;

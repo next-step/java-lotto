@@ -19,7 +19,7 @@ public class PurchaseInfo {
     }
 
     public int getPruchaseAmount() {
-        return 1000 * purchaseAmount;
+        return LOTTO_PRICE * purchaseAmount;
     }
 
 }

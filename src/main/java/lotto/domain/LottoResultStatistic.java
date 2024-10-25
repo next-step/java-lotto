@@ -37,7 +37,7 @@ public class LottoResultStatistic {
 
     private int calculateEachPrize(Prize prize, int numberOfLotto) {
         int eachPrize = prize.getValue();
-        if(eachPrize>=Prize.FOURTH.getValue()) {
+        if (eachPrize >= Prize.FOURTH.getValue()) {
             return eachPrize;
         }
         return eachPrize * numberOfLotto;
