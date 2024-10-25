@@ -6,6 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStore;
 import lotto.domain.Rank;
+import lotto.dto.RankResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,6 +22,6 @@ public class LottoMain {
         for (Lotto lotto : lottos) {
             result.add(store.check(lotto, winningLotto));
         }
-        OutputView.renderingWinningStatistics(result);
+        OutputView.renderingWinningStatistics(new RankResult(result));
     }
 }

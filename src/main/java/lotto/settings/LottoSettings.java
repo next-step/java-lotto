@@ -1,9 +1,10 @@
-package lotto.domain;
+package lotto.settings;
 
 public enum LottoSettings {
     MIN(1),
     MAX(45),
-    SIZE(6);
+    SIZE(6),
+    DEFAULT_PRICE(1000);
 
     private final int value;
 

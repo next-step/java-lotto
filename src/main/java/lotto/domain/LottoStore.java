@@ -2,11 +2,12 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.settings.LottoSettings;
 import lotto.util.UniqueRandomNumberProvider;
 
 public class LottoStore {
 
-    private static final Money BASE_AMOUNT = new Money(1000);
+    private static final Money BASE_AMOUNT = new Money(LottoSettings.DEFAULT_PRICE.value());
 
     public List<Lotto> buy(int fee) {
         Money money = new Money(fee);
