@@ -6,9 +6,10 @@ public class PurchaseInfo {
     private final int numberOfManualPurchase;
 
     public PurchaseInfo(int purchaseAmount, int manualPurchase) {
-        validNumberOfManualLotto(purchaseAmount, manualPurchase);
+        int totalNumberOfLotto = calculateNumberOfTotalPurchase(purchaseAmount);
+        validNumberOfManualLotto(totalNumberOfLotto, manualPurchase);
         validmanualPurchaseIsNegatibe(manualPurchase);
-        this.totalNumberOfLotto = calculateNumberOfTotalPurchase(purchaseAmount);
+        this.totalNumberOfLotto = totalNumberOfLotto;
         this.numberOfManualPurchase = manualPurchase;
     }
 
