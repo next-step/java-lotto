@@ -40,13 +40,13 @@ public class InputView {
 
     public LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return LottoNumber.createLottoNumber(scanner.nextInt());
+        return LottoNumber.of(scanner.nextInt());
     }
 
     public List<LottoNumber> convertStringToIntList(String stringWinningNumber) {
         return Arrays.stream(splitString(stringWinningNumber))
                 .map(Integer::parseInt)
-                .map(LottoNumber::createLottoNumber)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

@@ -1,11 +1,24 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int LOTTO_NUMBER_MIN = 1;
+    public static final int LOTTO_NUMBER_MAX = 45;
+    private static Map<Integer , LottoNumber> lottoNumbers = new HashMap<>();
+
     private int lottoNumber;
 
-    public static LottoNumber createLottoNumber(int lottoNumber) {
+    static {
+        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
+    public static LottoNumber of(int lottoNumber) {
         validLottoNumberRange(lottoNumber);
-        return new LottoNumber(lottoNumber);
+        return lottoNumbers.get(lottoNumber);
     }
 
     private static void validLottoNumberRange(int lottoNumber) {
@@ -16,10 +29,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private LottoNumber(int number) {
         this.lottoNumber = number;
-    }
-
-    public Integer getLottoNumber() {
-        return lottoNumber;
     }
 
     @Override
@@ -43,5 +52,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return lottoNumber;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
     }
 }

@@ -9,7 +9,7 @@ public class LottoDuplicateNumberException extends IllegalArgumentException {
 
     public LottoDuplicateNumberException(Set<LottoNumber> duplicateLottoNumber) {
         super(duplicateLottoNumber.stream()
-                .map(i -> String.valueOf(i.getLottoNumber()))
+                .map(i -> i.toString())
                 .collect(Collectors.joining(", ", "중복 요소: ", "가 하나 이상 존재"))
         );
     }

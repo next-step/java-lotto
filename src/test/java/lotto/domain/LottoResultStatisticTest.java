@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 public class LottoResultStatisticTest {
 
     private final Lotto lottoHitAll = new Lotto(IntStream.rangeClosed(1, 6)
-            .mapToObj(LottoNumber::createLottoNumber)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList()));
 
     private final Lotto lottoHitFive = new Lotto(IntStream.rangeClosed(2, 7)
-            .mapToObj(LottoNumber::createLottoNumber)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList()));
 
     @Test
@@ -25,7 +25,7 @@ public class LottoResultStatisticTest {
         Lottos lottos = Lottos.createAutoLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
         lottos.additionalLotto(lottoHitAll);
 
-        LottoResultStatistic resultStatistic = lottos.getResultStatistic(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(10)));
+        LottoResultStatistic resultStatistic = lottos.getResultStatistic(new WinningLotto(lottoHitFive, LottoNumber.of(10)));
 
         Assertions.assertThat(resultStatistic.calculateProfit(5000)).isEqualTo(300.0);
     }

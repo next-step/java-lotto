@@ -9,9 +9,9 @@ public interface LottoGenerator {
     int FROM_INDEX = 0;
     int LOTTO_SIZE = 6;
 
-    List<LottoNumber> lottoGenerator = IntStream.rangeClosed(1, 45)
+    List<LottoNumber> lottoGenerator = IntStream.rangeClosed(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX)
             .boxed()
-            .map(LottoNumber::createLottoNumber)
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
 
     List<Lotto> generateLottos(int purchaseAmount);

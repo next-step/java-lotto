@@ -13,15 +13,15 @@ import java.util.stream.IntStream;
 public class LottosTest {
 
     private final Lotto lottoHitAll = new Lotto(IntStream.rangeClosed(1, 6)
-            .mapToObj(LottoNumber::createLottoNumber)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList()));
 
     private final Lotto lottoHitFive = new Lotto(IntStream.rangeClosed(2, 7)
-            .mapToObj(LottoNumber::createLottoNumber)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList()));
 
     private final Lotto lottoHitFour = new Lotto(IntStream.rangeClosed(3, 8)
-            .mapToObj(LottoNumber::createLottoNumber)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList()));
 
     @Test
@@ -31,7 +31,7 @@ public class LottosTest {
         PurchaseInfo purchaseInfo = new PurchaseInfo(2000, 0);
         Lottos lottos = Lottos.createAutoLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> List.of(lottoHitAll));
 
-        Assertions.assertThat(lottos.getResultStatistic(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7))).getTotalPrize()).isEqualTo(2_000_000_000);
+        Assertions.assertThat(lottos.getResultStatistic(new WinningLotto(lottoHitAll, LottoNumber.of(7))).getTotalPrize()).isEqualTo(2_000_000_000);
 
     }
 
@@ -46,7 +46,7 @@ public class LottosTest {
         lottos.additionalLotto(lottoHitAll);
 
         Assertions.assertThatThrownBy(
-                        () -> lottos.getResultStatistic(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7))).getTotalPrize()
+                        () -> lottos.getResultStatistic(new WinningLotto(lottoHitAll, LottoNumber.of(7))).getTotalPrize()
                 ).isInstanceOf(PrizeOverFlowIsNegativeException.class)
                 .hasMessage("당첨금 계산 중 오버플로 발생");
 
@@ -63,7 +63,7 @@ public class LottosTest {
         lottos.additionalLotto(lottoHitFive);
 
         Assertions.assertThatThrownBy(
-                        () -> lottos.getResultStatistic(new WinningLotto(lottoHitAll, LottoNumber.createLottoNumber(7))).getTotalPrize()
+                        () -> lottos.getResultStatistic(new WinningLotto(lottoHitAll, LottoNumber.of(7))).getTotalPrize()
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("총 상금 20억을 넘길 순 없음");
 
@@ -78,7 +78,7 @@ public class LottosTest {
 
         lottos.additionalLotto(lottoHitAll);
 
-        Assertions.assertThat(lottos.getResultStatistic(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(1))).getTotalPrize()).isEqualTo(30_000_000);
+        Assertions.assertThat(lottos.getResultStatistic(new WinningLotto(lottoHitFive, LottoNumber.of(1))).getTotalPrize()).isEqualTo(30_000_000);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class LottosTest {
 
         lottos.additionalLotto(lottoHitAll);
 
-        Assertions.assertThat(lottos.getResultStatistic(new WinningLotto(lottoHitFour, LottoNumber.createLottoNumber(1))).getTotalPrize()).isEqualTo(50000);
+        Assertions.assertThat(lottos.getResultStatistic(new WinningLotto(lottoHitFour, LottoNumber.of(1))).getTotalPrize()).isEqualTo(50000);
     }
 
 }

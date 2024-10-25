@@ -17,7 +17,7 @@ public class LottoTest {
 
         Assertions.assertThatThrownBy(
                 () ->new Lotto(IntStream.of(1,2,3,4,5,5)
-                        .mapToObj(LottoNumber::createLottoNumber)
+                        .mapToObj(LottoNumber::of)
                         .collect(Collectors.toList()))
         ).isInstanceOf(LottoDuplicateNumberException.class)
                 .hasMessage("중복 요소: 5가 하나 이상 존재");
@@ -29,7 +29,7 @@ public class LottoTest {
     void 로또_숫자_6개(){
         Assertions.assertThatThrownBy(
                         () ->new Lotto(IntStream.of(1,2,3,4,5)
-                                .mapToObj(LottoNumber::createLottoNumber)
+                                .mapToObj(LottoNumber::of)
                                 .collect(Collectors.toList()))
                 ).isInstanceOf(NumberOfLottoNumberException.class)
                 .hasMessage("현재 로또 번호 개수 : 5 하나의 로또의 로또 번호 개수는 6개여야 함");

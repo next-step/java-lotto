@@ -13,7 +13,7 @@ public class LottoNumberTest {
     void 로또_숫자_범위_밖_예외(int input) {
 
         Assertions.assertThatThrownBy(
-                () -> LottoNumber.createLottoNumber(input)
+                () -> LottoNumber.of(input)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 범위는 1~45의 범위를 가짐");
 
