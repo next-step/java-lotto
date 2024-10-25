@@ -20,7 +20,11 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
+    public Lottos(Lottos lottos) {
+        this.lottos = lottos.lottos;
+    }
+
+    public List<Lotto> getValues() {
         return this.lottos;
     }
 
@@ -34,5 +38,9 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             lotto.calculateMatchCount(winningLotto);
         }
+    }
+
+    public void addAll(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
     }
 }

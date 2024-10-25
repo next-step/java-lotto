@@ -41,7 +41,7 @@ public class LottoWinningStatisticsTest {
         lottos = new Lottos(lottoList);
         lottos.calculateAllMatchCount(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
 
-        Map<LottoRank, Integer> winningLottoMap = LottoWinningStatistics.getWinningLottoStatistics(lottos.getLottos());
+        Map<LottoRank, Integer> winningLottoMap = LottoWinningStatistics.getWinningLottoStatistics(lottos.getValues());
         assertThat(winningLottoMap.get(LottoRank.FIRST)).isEqualTo(0);
         assertThat(winningLottoMap.get(LottoRank.SECOND)).isEqualTo(1);
         assertThat(winningLottoMap.get(LottoRank.THIRD)).isEqualTo(0);

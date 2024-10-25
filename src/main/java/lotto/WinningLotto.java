@@ -12,7 +12,6 @@ public class WinningLotto {
         this.hasDuplicateBonusNumber(); //이미 입력한 당첨번호 확인
     }
 
-
     public boolean hasDuplicateBonusNumber() {
         if (this.lottoNumbers.hasLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException("이미 입력한 당첨번호입니다.");
