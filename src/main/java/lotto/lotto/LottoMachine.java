@@ -9,29 +9,20 @@ public class LottoMachine {
 
     private final int price;
     private final LottoGeneratorStrategy lottoGeneratorStrategy;
-    private final int executeIdx;
-    private final List<Lotto> lottos;
 
     public LottoMachine(final int price, LottoGeneratorStrategy lottoGeneratorStrategy) {
         validatePrice(price);
         this.price = price;
-        this.executeIdx = getExecuteIdx();
-        this.lottos = new ArrayList<>();
         this.lottoGeneratorStrategy = lottoGeneratorStrategy;
     }
 
-    /**
-     * 로또 금액만큼 생성
-     * */
-    public void createLottos() {
-        for (int i = 0; i < executeIdx; i++) {
+    public Lottos createLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < getExecuteIdx(); i++) {
             Lotto lotto = lottoGeneratorStrategy.generateLotto();
             lottos.add(lotto);
         }
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public int getExecuteIdx() {

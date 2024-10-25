@@ -2,8 +2,7 @@ package lotto.view;
 
 
 import lotto.dto.LottoResultDTO;
-import lotto.lotto.LottoRank;
-import lotto.lotto.LottoResult;
+import lotto.lotto.*;
 
 import java.util.Map;
 
@@ -19,16 +18,13 @@ public class ResultView {
         System.out.println("5개 일치 (1500000원)- " + map.get(LottoRank.RANK_TWO));
         System.out.println("5개 일치 (30000000원)- " + map.get(LottoRank.RANK_TWO_BONUS));
         System.out.println("6개 일치 (2000000000원)- " + map.get(LottoRank.RANK_ONE));
-        System.out.printf("총 수익률은 %.2f 입니다.", result.getMarginRate() );
+        System.out.printf("총 수익률은 %.2f 입니다.", result.getMarginRate());
     }
 
-    public void printCreateLotto(LottoResult result) {
-        System.out.println(result.getLottoSize() + "개를 구매했습니다.");
-
-        for (int i = 0; i < result.getLottoSize(); i++) {
-            System.out.println(result.getLotto(i).toString());
+    public void printCreateLotto(Lottos lottos) {
+        System.out.println(lottos.getSize());
+        for (int i = 0; i < lottos.getSize(); i++) {
+            System.out.println(lottos.getLottos().get(i).toString());
         }
-
-
     }
 }

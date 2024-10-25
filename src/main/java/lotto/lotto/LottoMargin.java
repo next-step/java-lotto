@@ -16,5 +16,8 @@ public class LottoMargin {
         return marginRate;
     }
 
+    public Map<LottoRank, Integer> getResultMap() {
+        return resultMap;
+    }
 
 }

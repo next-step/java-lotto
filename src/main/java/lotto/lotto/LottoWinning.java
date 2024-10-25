@@ -46,4 +46,9 @@ public class LottoWinning {
     public int getBonusNumber(){
         return bonusNumber;
     }
+
+    public int matchCount(Lotto lotto) {
+        return lotto.calculateMatchingCnt(this);
+    }
+
 }

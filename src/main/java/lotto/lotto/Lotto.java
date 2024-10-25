@@ -54,4 +54,7 @@ public class Lotto {
         return false;
     }
 
+    public boolean containNumber(int bonusNumber) {
+        return lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.getNumber() == bonusNumber);
+    }
 }
