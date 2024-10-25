@@ -1,8 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
+import lotto.domain.LottoRank;
 import org.junit.jupiter.api.Test;
 
 class LottoRankTest {
