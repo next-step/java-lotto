@@ -1,12 +1,12 @@
 package lotto.view;
 
+import lotto.model.WinningInfo;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    private static final String[] PRIZE = {"0", "0", "0", "5000", "50000", "1500000", "2000000000"};
-
     private ResultView() {
     }
 
@@ -20,16 +20,33 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public static void printWinningStatics(int[] winningStatics) {
+    public static void printWinningStatics(Map<Integer, WinningInfo> winningStatics) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
-        for (int count = 3; count <= 6; count++) {
-            System.out.println(count + "개 일치 (" + PRIZE[count] + "원)- " + winningStatics[count] + "개");
+        for (int rank = 5; rank >= 1; rank--) {
+            WinningInfo info = winningStatics.get(rank);
+
+            int matchCount = info.getMatchCount();
+            int prize = info.getPrize();
+            int winningCount = info.getWinningCount();
+
+            printWinningResult(rank, matchCount, prize, winningCount);
         }
     }
 
+    private static void printWinningResult(int rank, int matchCount, int prize, int winningCount) {
+        String resultMessage = matchCount + "개 일치 (" + prize + "원)- " + winningCount + "개";
+
+        if (rank == 2) {
+            resultMessage = matchCount + "개 일치, 보너스 볼 일치(" + prize + "원)- " + winningCount + "개";
+        }
+
+        System.out.println(resultMessage);
+    }
+
+
     public static void printReturnRate(float returnRate) {
-        System.out.println("총 수익률은" + " " + String.format("%.2f", returnRate) + "입니다.");
+        System.out.println("총 수익률은 " + String.format("%.2f", returnRate) + "입니다.");
     }
 }

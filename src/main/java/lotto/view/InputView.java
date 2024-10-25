@@ -1,6 +1,12 @@
 package lotto.view;
 
-import java.util.*;
+import lotto.utility.Validator;
+
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final String WINNING_NUMBERS_FORMAT = "^\\d{1,2}(,\\s\\d{1,2}){5}$";
@@ -29,38 +35,48 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String lastWeekWinningNumbers = SCANNER.nextLine();
-
-        System.out.println();
-
-        isValidWinningNumberInput(lastWeekWinningNumbers);
+        isValidWinningNumbersInput(lastWeekWinningNumbers);
 
         return lastWeekWinningNumbers;
     }
 
-    private static void isValidWinningNumberInput(String lastWeekWinningNumbers) {
-        checkFormat(lastWeekWinningNumbers);
+    private static void isValidWinningNumbersInput(String lastWeekWinningNumbers) {
+        isValidFormat(lastWeekWinningNumbers);
 
-        String[] numbers = lastWeekWinningNumbers.split(", ");
-        Set<String> uniqueNumbers = new HashSet<>();
+        List<Integer> winningNumbers = Arrays.stream(lastWeekWinningNumbers.split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
 
-        checkData(numbers, uniqueNumbers);
+        Validator.isValidNumbers(winningNumbers);
     }
 
-    private static void checkFormat(String lastWeekWinningNumbers) {
+    private static void isValidFormat(String lastWeekWinningNumbers) {
         if (!lastWeekWinningNumbers.matches(WINNING_NUMBERS_FORMAT)) {
             throw new IllegalArgumentException("잘못된 입력형식입니다. 1, 2, 3, 4, 5, 6과 같은 형태로 입력해주세요");
         }
     }
 
-    private static void checkData(String[] numbers, Set<String> uniqueNumbers) {
-        for (String number : numbers) {
-            if (Integer.parseInt(number) < 1 || Integer.parseInt(number) > 45) {
-                throw new IllegalArgumentException("1부터 45 사이의 숫자만 입력 가능합니다.");
-            }
+    public static int inputBonusNumber(String lastWeekWinningNumbers) {
+        System.out.println("보너스 볼을 입력해주세요.");
 
-            if (!uniqueNumbers.add(number)) {
-                throw new IllegalArgumentException("중복된 당첨번호가 입력되었습니다.");
-            }
+        int bonusNumber = SCANNER.nextInt();
+
+        System.out.println();
+
+        isValidBonusNumberInput(lastWeekWinningNumbers, bonusNumber);
+
+        return bonusNumber;
+    }
+
+    private static void isValidBonusNumberInput(String lastWeekWinningNumbers, int bonusNumber) {
+        List<Integer> winningNumbers = Arrays.stream(lastWeekWinningNumbers.split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("지난 주 당첨 번호와 보너스 볼이 중복되었습니다.");
         }
     }
+
+
 }
