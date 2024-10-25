@@ -63,6 +63,7 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return numbers.toString();
+        List<Integer> sortNumbers = numbers.stream().sorted().collect(Collectors.toList());
+        return sortNumbers.toString();
     }
 }
