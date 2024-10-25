@@ -25,6 +25,7 @@ public class ResultView {
     }
 
     public static void printLottoInfo(LotteryMachine machine) {
+        printBlankLine();
         printPurchasedLottoCount(machine);
         printLotto(machine);
     }

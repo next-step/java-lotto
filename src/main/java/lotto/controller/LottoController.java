@@ -7,10 +7,13 @@ import lotto.domain.WinningStatistics;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.util.List;
+
 public class LottoController {
 
     public static void main(String[] args) {
         int purchasePrice = InputView.readPurchasePrice();
+        List<String> manualLottoNumbers = InputView.readManualLottoNumbers();
         LotteryMachine lotteryMachine = new LotteryMachine(purchasePrice);
         ResultView.printLottoInfo(lotteryMachine);
 
