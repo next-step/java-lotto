@@ -6,7 +6,7 @@ public class LottoMain {
     public static void main(String[] args) {
         int paidAmount = LottoInputView.inputPaidAmount();
 
-        int lottoCount = LottoTicketPrice.countByAmount(paidAmount);
+        int lottoCount = LottoTicketValidator.countByAmount(paidAmount);
         int manualLottoCount = LottoInputView.inputManualLottoCount(lottoCount);
         Lottos manualLottos = LottoInputView.inputAllManualLottos(manualLottoCount);
 

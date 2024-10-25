@@ -28,10 +28,7 @@ public class LottoInputView {
     public static int inputManualLottoCount(int totalLottoCount) {
         System.out.println("수동으로 구매할 로또 수를 입력해주세요");
         int manualLottoCount = scanner.nextInt();
-        //todo 유효성 체크 위치
-        if (totalLottoCount < manualLottoCount) {
-            throw new IllegalArgumentException("구매할 수 있는 로또 수보다 수동으로 구매할 로또의 수가 더 많습니다.");
-        }
+        LottoTicketValidator.checkManualLottoCount(totalLottoCount, manualLottoCount);
         return manualLottoCount;
     }
 
