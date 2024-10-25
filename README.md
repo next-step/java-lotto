@@ -60,4 +60,6 @@
 - [x] 모든 원시값과 문자열을 포장한다.
   - [x] MatchCount 분리
   - [x] BonusMatch 분리
-- [ ] 예외처리를 통해 에러가 발생하지 않도록 한다. (Optional 사용)
+- [ ] 예외처리를 통해 에러가 발생하지 않도록 한다. 
+  - [ ] Optional 사용하여 NullPointException
+  - [x] IllegalArgumentException 처리
