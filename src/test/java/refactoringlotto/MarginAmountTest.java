@@ -1,6 +1,7 @@
 package refactoringlotto;
 
 import org.junit.jupiter.api.Test;
+import refactoringlotto.domain.MarginAmount;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

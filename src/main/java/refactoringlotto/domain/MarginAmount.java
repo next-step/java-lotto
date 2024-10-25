@@ -1,4 +1,4 @@
-package refactoringlotto;
+package refactoringlotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
