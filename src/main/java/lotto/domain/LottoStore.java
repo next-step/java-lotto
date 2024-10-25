@@ -9,8 +9,7 @@ public class LottoStore {
 
     private static final Money BASE_AMOUNT = new Money(LottoSettings.DEFAULT_PRICE.value());
 
-    public List<Lotto> buy(int fee) {
-        Money money = new Money(fee);
+    public List<Lotto> buy(Money money) {
         if (isInvalidBaseUnit(money)) {
             throw new IllegalArgumentException("로또는 1000원 단위이여야 합니다.");
         }

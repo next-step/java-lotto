@@ -5,9 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.Lotto;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoStore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -21,14 +18,14 @@ public class LottoStoreTest {
     public void 로또는_천원단위로_생선된다(int fee) {
         LottoStore lottoStore = new LottoStore();
 
-        List<Lotto> result = lottoStore.buy(fee);
+        List<Lotto> result = lottoStore.buy(new Money(fee));
         assertThat(result).hasSize(fee / 1000);
     }
 
     @Test
     public void 로또는_천원단위가_아니면_예외가_발생한다() {
         LottoStore lottoStore = new LottoStore();
-        assertThatIllegalArgumentException().isThrownBy(() -> lottoStore.buy(999));
+        assertThatIllegalArgumentException().isThrownBy(() -> lottoStore.buy(new Money(999)));
     }
 
     @ParameterizedTest
