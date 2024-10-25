@@ -9,8 +9,8 @@ import lotto.domain.PurchaseInfo;
 
 public class ResultView {
 
-    public void printPurchaseLottoResult(Lottos lottos) {
-        NumberOfLotto(lottos.getPurchaseInfo());
+    public void printPurchaseLottoResult(Lottos lottos, PurchaseInfo purchaseInfo) {
+        NumberOfLotto(purchaseInfo);
         printPurchasedLottos(lottos);
     }
 

@@ -22,7 +22,7 @@ public class LottoResultStatisticTest {
     void 수익률_테스트() {
 
         PurchaseInfo purchaseInfo = new PurchaseInfo(1000, 0);
-        Lottos lottos = Lottos.createLottos(purchaseInfo, purchaseAmount -> new ArrayList<>());
+        Lottos lottos = Lottos.createLottos(purchaseInfo.getNumberOfAutoPurchase(), purchaseAmount -> new ArrayList<>());
         lottos.additionalLotto(lottoHitAll);
 
         LottoResultStatistic resultStatistic = lottos.getResultStatistic(new WinningLotto(lottoHitFive, LottoNumber.createLottoNumber(10)));
