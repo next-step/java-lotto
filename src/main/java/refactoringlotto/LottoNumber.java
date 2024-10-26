@@ -7,6 +7,13 @@ public class LottoNumber {
 
     public LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
+        checkNumberRange();
+    }
+
+    private void checkNumberRange() {
+        if (lottoNumber<=0 || lottoNumber>45) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override

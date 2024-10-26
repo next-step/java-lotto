@@ -12,6 +12,13 @@ public class LottoNumbers {
         for (int winningNumber : lottoWinningList) {
             lottoNumbers.add(new LottoNumber(winningNumber));
         }
+        checkSize();
+    }
+
+    private void checkSize() {
+        if (lottoNumbers.size()!=6) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public int lottoRank(List<LottoNumber> lottoNumbers) {
