@@ -20,18 +20,17 @@ public class JavaLotto {
 
     public static void run() {
         int inputMoney = InputView.requestBuyMoney();
-        List<Lotto> lottos = LottoMachine.insert(inputMoney);
-        ResultView.printCreateLotto(toDto(lottos));
+        int manualCount = InputView.requestManualCount();
+        List<String[]> manualTexts = InputView.requestManualNumbers(manualCount);
 
-        String[] texts = InputView.requestWinnerNumber();
-        Set<Integer> winningNumbers = WinningTexts.numbers(texts);
+        List<Lotto> lottos = LottoMachine.createLotto(inputMoney, manualCount, manualTexts);
 
-        int bonusNumber = InputView.requestBonusNumber();
+        ResultView.printCreateLotto(manualCount, toDto(lottos));
+        Set<LottoNumber> winningNumbers = LottoText.ofValues(InputView.requestWinnerNumber());
 
-        Winning winning = new Winning(winningNumbers, bonusNumber);
+        Winning winning = new Winning(winningNumbers, new LottoNumber(InputView.requestBonusNumber()));
 
-        LottoResult result = LottoWinningScanner.result(lottos, winning, inputMoney);
-        ResultView.printResult(toDto(result));
+        ResultView.printResult(toDto(LottoWinningScanner.result(lottos, winning, inputMoney)));
     }
 
     private static LottosDto toDto(List<Lotto> lottos) {

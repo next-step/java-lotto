@@ -1,30 +1,26 @@
 package lotto.entity;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class LottoMachine {
-    private static final int LOTTO_UNIT_PRICE = 1000;
 
     private LottoMachine() {
 
     }
 
-    public static List<Lotto> insert(int inputMoney) {
-        final LottoRandomizer lottoRandomizer = new LottoRandomizer();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < getLottoCount(inputMoney); i++) {
-            lottos.add(issue(lottoRandomizer.lottoShuffle()));
-        }
-        return lottos;
+    public static List<Lotto> createLotto(int inputMoney, int manualCount, List<String[]> manualTexts) {
+        List<Lotto> result = new ArrayList<>();
+        List<Lotto> manualLottos = ManualLottoMachine.createLotto(inputMoney, manualCount, manualTexts);
+        result.addAll(manualLottos);
+        List<Lotto> autoLottos = AutoLottoMachine.createLotto(getAutoCount(inputMoney, manualCount));
+        result.addAll(autoLottos);
+        return result;
     }
 
-    private static int getLottoCount(int money) {
-        return money / LOTTO_UNIT_PRICE;
+    private static int getAutoCount(int inputMoney, int manualCount) {
+        return LottoMoney.getLottoCount(inputMoney) - manualCount;
     }
 
-    private static Lotto issue(List<Integer> numberRandomizer) {
-        return new Lotto(numberRandomizer);
-    }
 }

@@ -1,5 +1,6 @@
 package lotto.entity;
 
+import lotto.LottoMethod;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -18,16 +19,16 @@ public class LottoAnalyzerTest {
         LottoAnalyzer lottoAnalyzer = new LottoAnalyzer();
 
         List<Lotto> lottos = Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), // 1등
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), // 2등
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), // 1등
-                new Lotto(Arrays.asList(1, 3, 6, 7, 9, 11)), // 5등
-                new Lotto(Arrays.asList(1, 2, 3, 8, 10, 12)), // 5등
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 12)), // 3등
-                new Lotto(Arrays.asList(1, 5, 6, 16, 18, 19)) // 5등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 4, 5, 6))), // 1등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 4, 5, 7))), // 2등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 4, 5, 6))), // 1등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 3, 6, 7, 9, 11))), // 5등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 8, 10, 12))), // 5등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 4, 5, 12))), // 3등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 5, 6, 16, 18, 19))) // 5등
         );
-        Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
-        Winning winning = new Winning(winningNumbers, 7);
+        Set<LottoNumber> winningNumbers = LottoMethod.toSet(Set.of(1, 2, 3, 4, 5, 6));
+        Winning winning = new Winning(winningNumbers, new LottoNumber(7));
 
         List<WinningResult> analyzer = lottoAnalyzer.analyzer(lottos, winning);
 
