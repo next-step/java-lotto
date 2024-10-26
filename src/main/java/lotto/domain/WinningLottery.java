@@ -19,11 +19,10 @@ public class WinningLottery {
         this.bonusNumber = bonusNumber;
     }
 
-    public Lottery getWinningLottery() {
-        return winningLottery;
-    }
+    public LottoRank createLottoRank(Lottery lottery) {
+        int equalNumberCount = lottery.countMatchedNumbers(winningLottery);
+        boolean hasBonusNumber = lottery.contains(bonusNumber);
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+        return LottoRank.of(equalNumberCount, hasBonusNumber);
     }
 }

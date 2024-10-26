@@ -18,9 +18,9 @@ public class Lottery {
                 .collect(Collectors.toSet());
     }
 
-    public int countWinningNumbers(WinningLottery winningLottery) {
+    public int countMatchedNumbers(Lottery lottery) {
         Set<LottoNumber> equalNumbers = new HashSet<>(this.lottoNumbers);
-        equalNumbers.retainAll(winningLottery.getWinningLottery().lottoNumbers);
+        equalNumbers.retainAll(lottery.lottoNumbers);
 
         return equalNumbers.size();
     }
@@ -39,13 +39,6 @@ public class Lottery {
                 .map(LottoNumber::getLottoNumber)
                 .sorted()
                 .collect(Collectors.toList());
-    }
-
-    public LottoRank createLottoRank(WinningLottery winningLottery) {
-        int equalNumberCount = countWinningNumbers(winningLottery);
-        boolean hasBonusNumber = contains(winningLottery.getBonusNumber());
-
-        return LottoRank.of(equalNumberCount, hasBonusNumber);
     }
 
     private void validateLottoNumberSize(Set<Integer> lottoNumbers) {

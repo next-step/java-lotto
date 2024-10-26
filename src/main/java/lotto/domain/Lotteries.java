@@ -40,7 +40,7 @@ public class Lotteries {
         List<LottoRank> ranks = new ArrayList<>();
 
         for (Lottery lottery : lotteries) {
-            ranks.add(lottery.createLottoRank(winningLottery));
+            ranks.add(winningLottery.createLottoRank(lottery));
         }
 
         return ranks;
