@@ -14,22 +14,12 @@ public class WinningUtils {
 
     }
 
-    public static int countMatchingNumbers(Set<Integer> lottoNumbers, LottoNumbers winningNumbers) {
-        int matchCount = 0;
+    public static int countMatchingNumbers(Set<Integer> winningNumbers, LottoNumbers userLottoNumbers) {
+        List<Integer> userLottoNumberList = userLottoNumbers.getNumbers();
 
-        List<Integer> sortedLottoNumbers = new ArrayList<>(lottoNumbers);
-        Collections.sort(sortedLottoNumbers);
-
-        List<Integer> sortedWinningNumvers = winningNumbers.getNumbers();
-
-        int minSize = Math.min(sortedLottoNumbers.size(), sortedLottoNumbers.size());
-
-        for (int i = 0; i < minSize; i++) {
-            if (sortedLottoNumbers.get(i).equals(sortedWinningNumvers.get(i))) {
-                matchCount++;
-            }
-        }
-        return matchCount;
+        return (int) userLottoNumberList.stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 
     public static int getPrizeMoney(int matchCount) {
