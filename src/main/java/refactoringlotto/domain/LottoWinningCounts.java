@@ -1,9 +1,8 @@
 package refactoringlotto.domain;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Objects;
-import java.util.TreeMap;
+import lotto.domain.LottoWinningCountDecision;
+
+import java.util.*;
 
 public class LottoWinningCounts {
     private final static int DEFAULT_WINNING_COUNT = 0;
@@ -14,7 +13,7 @@ public class LottoWinningCounts {
     }
 
     private static Map<Integer, Integer> initCountsMap() {
-        Map<Integer, Integer> winningLottoCountMap = new TreeMap<>();
+        Map<Integer, Integer> winningLottoCountMap = new TreeMap<>(Comparator.reverseOrder());
         Arrays.asList(4, 3, 2, 1).forEach(i -> winningLottoCountMap.put(i, DEFAULT_WINNING_COUNT));
         return winningLottoCountMap;
     }
@@ -23,9 +22,29 @@ public class LottoWinningCounts {
         lottoWinningCountsMap = winningCountsMap;
     }
 
+    public void updateWinningCountList(List<Integer> lottoRankList) {
+        for (int lottoRank : lottoRankList) {
+            updateWinningCount(lottoRank);
+        }
+    }
+
     public void updateWinningCount(int lottoRank) {
         lottoWinningCountsMap.compute(lottoRank, (key, value) -> value + 1);
     }
+
+    public Map<Integer, Integer> getLottoWinningCountsMap() {
+        return lottoWinningCountsMap;
+    }
+
+    public int winningAmount() {
+        int winningAmount = 0;
+        for (int rank : lottoWinningCountsMap.keySet()) {
+            winningAmount += LottoWinningCountDecision.convertMatchingRankToAmount(rank) * lottoWinningCountsMap.get(rank);
+        }
+        return winningAmount;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

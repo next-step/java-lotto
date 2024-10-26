@@ -1,9 +1,9 @@
-package refactoringlotto;
+package refactoringlotto.domain;
 
 import java.util.Objects;
 
 public class LottoNumber {
-    int lottoNumber;
+    private int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
@@ -14,6 +14,9 @@ public class LottoNumber {
         if (lottoNumber<=0 || lottoNumber>45) {
             throw new IllegalArgumentException();
         }
+    }
+    protected int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override

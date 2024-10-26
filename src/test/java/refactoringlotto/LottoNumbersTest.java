@@ -1,6 +1,8 @@
 package refactoringlotto;
 
 import org.junit.jupiter.api.Test;
+import refactoringlotto.domain.LottoNumber;
+import refactoringlotto.domain.LottoNumbers;
 
 import java.util.List;
 import java.util.stream.Collectors;

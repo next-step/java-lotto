@@ -1,4 +1,4 @@
-package refactoringlotto;
+package refactoringlotto.domain;
 
 import java.util.Objects;
 
@@ -18,6 +18,9 @@ public class TryCount {
         return Math.floorDiv(purchaseAmount, CONVERTING_FLOOR_NUMBER);
     }
 
+    public int getTryCount() {
+        return tryCount;
+    }
 
     @Override
     public boolean equals(Object o) {

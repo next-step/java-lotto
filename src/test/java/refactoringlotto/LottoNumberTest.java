@@ -1,12 +1,8 @@
 package refactoringlotto;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import refactoringlotto.domain.LottoNumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;

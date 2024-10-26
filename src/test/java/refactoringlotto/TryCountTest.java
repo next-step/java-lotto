@@ -1,9 +1,9 @@
 package refactoringlotto;
 
 import org.junit.jupiter.api.Test;
+import refactoringlotto.domain.TryCount;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class TryCountTest {
 

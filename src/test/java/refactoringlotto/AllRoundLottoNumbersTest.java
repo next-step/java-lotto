@@ -1,14 +1,14 @@
 package refactoringlotto;
 
 import org.junit.jupiter.api.Test;
+import refactoringlotto.domain.AllRoundLottoNumbers;
+import refactoringlotto.domain.LottoNumbers;
 import refactoringlotto.random.LottoGenerator;
-import refactoringlotto.random.RandomLottoNumbers;
 import refactoringlotto.testrandom.DefaultLottoList;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AllRoundLottoNumbersTest {
 
