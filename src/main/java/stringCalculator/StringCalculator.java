@@ -24,4 +24,10 @@ public class StringCalculator {
             return result - number;
         return result;
     }
+
+    public static Integer multiply(String operation, Integer result, Integer number) {
+        if (operation.equals("*"))
+            return result * number;
+        return result;
+    }
 }

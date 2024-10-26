@@ -43,6 +43,12 @@ public class StringCalculatorTest {
     public void subtractTest() {
         assertThat(StringCalculator.subtract("-", 5, 1)).isEqualTo(4);
     }
+
+    @DisplayName("입력받은 문자열의 곱셈 테스트")
+    @Test
+    public void multiplyTest() {
+        assertThat(StringCalculator.multiply("*", 5, 2)).isEqualTo(10);
+    }
 }
 
 
