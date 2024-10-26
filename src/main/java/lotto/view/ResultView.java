@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.LottoNumbers;
 
+import java.util.List;
+
 public class ResultView {
 
     private ResultView() {
@@ -12,8 +14,10 @@ public class ResultView {
         System.out.println(String.format("총 %d개를 구매하였습니다.", amount));
     }
 
-    public static void printLottoNumbers(LottoNumbers selectedNumbers) {
-        System.out.println(selectedNumbers.getNumbers());
+    public static void printLottoNumbers(List<LottoNumbers> selectedNumbers) {
+        for (LottoNumbers lottoNumbers : selectedNumbers) {
+            System.out.println(lottoNumbers.getNumbers());
+        }
     }
 
     public static void printResult() {
