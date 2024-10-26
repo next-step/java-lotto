@@ -13,9 +13,15 @@ public class StringCalculator {
         return result;
     }
 
-    public static Integer add(String operation, Integer number, Integer result) {
+    public static Integer add(String operation, Integer result, Integer number) {
         if (operation.equals("+"))
             return result + number;
+        return result;
+    }
+
+    public static Integer subtract(String operation, Integer result, Integer number) {
+        if (operation.equals("-"))
+            return result - number;
         return result;
     }
 }

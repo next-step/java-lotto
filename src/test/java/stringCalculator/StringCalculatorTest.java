@@ -35,7 +35,13 @@ public class StringCalculatorTest {
     @DisplayName("입력받은 문자열의 덧셈 테스트")
     @Test
     public void addTest() {
-        assertThat(StringCalculator.add("+", 1, 5)).isEqualTo(6);
+        assertThat(StringCalculator.add("+", 5, 1)).isEqualTo(6);
+    }
+
+    @DisplayName("입력받은 문자열의 뺄셈 테스트")
+    @Test
+    public void subtractTest() {
+        assertThat(StringCalculator.subtract("-", 5, 1)).isEqualTo(4);
     }
 }
 
