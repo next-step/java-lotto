@@ -14,18 +14,6 @@ public class WinningUtils {
 
     }
 
-    // 원래 잘 돌아가는 애
-    public static int countMatchingNumbers2(Set<Integer> lottoNumbers, LottoNumbers winningNumbers) {
-        int matchCount = 0;
-        for (Integer number : lottoNumbers) {
-            if (winningNumbers.getNumbers().contains(number)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
-    }
-
-    // 테스트
     public static int countMatchingNumbers(Set<Integer> lottoNumbers, LottoNumbers winningNumbers) {
         int matchCount = 0;
 
