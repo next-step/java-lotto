@@ -4,13 +4,13 @@ import java.util.*;
 
 public class Lotto {
 
-    public List<LottoNumber> lottoNumbers = new ArrayList<>();
+    public final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto() {
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers.addAll(lottoNumbers);
     }
 
     public List<LottoNumber> getLotto() {
@@ -45,5 +45,16 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hashCode(lottoNumbers);
+    }
+
+    public boolean isTwoBonusWin(int matchingCount, LottoWinning winning) {
+        if (matchingCount == LottoRank.RANK_TWO_BONUS.getMachingCnt()) {
+            return lottoNumbers.stream().anyMatch(lottoNumber -> winning.getBonusNumber() == lottoNumber.getNumber());
+        }
+        return false;
+    }
+
+    public boolean containNumber(int bonusNumber) {
+        return lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.getNumber() == bonusNumber);
     }
 }

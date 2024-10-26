@@ -1,9 +1,9 @@
 package lotto.controller;
 
 import lotto.lotto.LottoMargin;
-import lotto.lotto.LottoMarginCalculator;
 import lotto.lotto.LottoResult;
 import lotto.lotto.LottoService;
+import lotto.lotto.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -22,13 +22,14 @@ public class LottoController {
 
         LottoService lottoService = new LottoService();
 
-        LottoResult result = lottoService.createLotto(price);
+        Lottos lottos = lottoService.createLotto(price);
 
-        resultView.printCreateLotto(result);
+        resultView.printCreateLotto(lottos);
 
         String answer = inputView.inputAnswer();
-        lottoService.calculateLotto(answer, result);
+        int bonusNumber = inputView.inputBonus();
 
+        LottoResult result = lottoService.calculateLottoRank(answer, lottos, bonusNumber);
         LottoMargin lottoMargin = lottoService.calculateMarginRate(price, result);
 
         resultView.printResult(LottoResult.from(result, lottoMargin));

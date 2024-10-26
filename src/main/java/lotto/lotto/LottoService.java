@@ -2,18 +2,23 @@ package lotto.lotto;
 
 public class LottoService {
 
-    public LottoResult createLotto(int price) {
+    public Lottos createLotto(int price) {
         LottoGeneratorStrategy autoLottoStrategy = new AutoLottoStrategy();
-        LottoMachine machine = new LottoMachine(price, autoLottoStrategy);
-        machine.createLottos();
-
-        LottoResult result = new LottoResult(machine.getLottos());
-        return result;
+        LottoMachine lottoMachine = new LottoMachine(price, autoLottoStrategy);
+        return lottoMachine.createLottos();
     }
 
-    public void calculateLotto(String answer, LottoResult result) {
-        LottoWinning winning = new LottoWinning(answer);
-        result.calculateLotto(winning);
+    public LottoResult calculateLottoRank(String answer, Lottos lottos, int bonusNumber) {
+        LottoWinning winning = new LottoWinning(answer, bonusNumber);
+        LottoResult result = new LottoResult();
+
+        for (Lotto lotto : lottos.getLottos()) {
+            int matchCount = winning.matchCount(lotto);
+            boolean isBonusMatch = lotto.containNumber(winning.getBonusNumber());
+            LottoRank rank = LottoRank.findWinPrice(matchCount, isBonusMatch);
+            result.updateResult(rank);
+        }
+        return result;
     }
 
     public LottoMargin calculateMarginRate(int price, LottoResult result) {

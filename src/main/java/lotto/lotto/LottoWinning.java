@@ -8,10 +8,19 @@ import java.util.Set;
 public class LottoWinning {
 
     private final Set<LottoNumber> winningLotto;
+    private final int bonusNumber;
 
-    public LottoWinning(String winLotto) {
+    public LottoWinning(String winLotto, int bonusNumber) {
         this.winningLotto = new HashSet<>();
         addWinNumber(winLotto);
+        duplicateBonusNumber(bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
+
+    private void duplicateBonusNumber(int bonusNumber) {
+        if(winningLotto.stream().anyMatch(winningNumber ->  bonusNumber == winningNumber.getNumber())) {
+            throw new IllegalArgumentException("보너스볼은 당첨번호에 포함될 수 없습니다.");
+        }
     }
 
     private void addWinNumber(String str) {
@@ -33,4 +42,13 @@ public class LottoWinning {
     public boolean isMany(String[] nums){
         return nums.length > Const.LOTTO_CNT;
     }
+
+    public int getBonusNumber(){
+        return bonusNumber;
+    }
+
+    public int matchCount(Lotto lotto) {
+        return lotto.calculateMatchingCnt(this);
+    }
+
 }

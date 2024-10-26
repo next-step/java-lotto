@@ -1,10 +1,8 @@
 package lotto;
 
-import lotto.lotto.Lotto;
-import lotto.lotto.LottoGeneratorStrategy;
-import lotto.lotto.LottoMachine;
-import lotto.lotto.LottoNumber;
+import lotto.lotto.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -36,9 +34,10 @@ class LottoMachineTest {
     }
 
     @Test
-    void 로또_생성_테스트() {
+    @DisplayName("로또생성을 주어진 횟수만큼 생성")
+    void createLottos() {
         LottoMachine lottoMachine = new LottoMachine(3000, lottoGeneratorStrategy);
-        lottoMachine.createLottos();
+        Lottos lottos = lottoMachine.createLottos();
 
         List<LottoNumber> lottoNumberList = new ArrayList<>();
         lottoNumberList.add(new LottoNumber(1));
@@ -48,12 +47,11 @@ class LottoMachineTest {
         lottoNumberList.add(new LottoNumber(5));
         lottoNumberList.add(new LottoNumber(10));
 
-        // 각 로또가 횟수만큼 잘 생성하는지 확인
-        IntStream.range(0, lottoMachine.getLottos().size()).forEach(idx -> {
-            Lotto lotto = lottoMachine.getLottos().get(idx);
+        IntStream.range(0, lottos.getSize()).forEach(idx -> {
+            Lotto lotto = lottos.get(idx);
             assertThat(lotto.findLottoNumber(idx)).isEqualTo(lottoNumberList.get(idx).getNumber());
         });
 
-        assertThat(lottoMachine.getLottos()).hasSize(3);
+        assertThat(lottos.getSize()).isEqualTo(3);
     }
 }

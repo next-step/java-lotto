@@ -1,47 +1,27 @@
 package lotto;
+
+import lotto.lotto.LottoResult;
 import lotto.lotto.*;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 class LottoResultTest {
 
-    private List<LottoNumber> lottoNumbers;
-    List<Lotto> lottos = new ArrayList<>();
-    @BeforeEach
-    void setUp() {
-        lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(10));
-        lottos.add(new Lotto(lottoNumbers));
-        lottos.add(new Lotto(lottoNumbers));
-        lottos.add(new Lotto(lottoNumbers));
-
-    }
     @Test
-    void 로또_맷칭_결과_계산() {
-        LottoResult result = new LottoResult(lottos);
-        LottoWinning winning = new LottoWinning("1, 2, 3, 4, 5, 10");
+    @DisplayName("LottoRank의 모든 값을 결과에 넣으면 결과에 +1씩 증가")
+    void updateResult() {
+        LottoResult result = new LottoResult();
+        Arrays.stream(LottoRank.values()).forEach(lottoRank -> {
+            result.updateResult(lottoRank);
+        });
 
-        result.calculateLotto(winning);
-
-        assertThat(result.getResultMap().get(6)).isEqualTo(3);
-
-        winning = new LottoWinning("1, 2, 3, 4, 5, 33");
-
-        result.calculateLotto(winning);
-
-        assertThat(result.getResultMap().get(5)).isEqualTo(3);
-
+        assertThat(result.getResultMap().keySet()).containsExactlyInAnyOrder(LottoRank.values());
+        Arrays.stream(LottoRank.values()).forEach((lottoRank) ->
+                assertThat(result.getResultMap().get(lottoRank)).isEqualTo(1));
     }
 
 }
