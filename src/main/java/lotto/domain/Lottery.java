@@ -43,7 +43,7 @@ public class Lottery {
 
     public LottoRank createLottoRank(WinningLottery winningLottery) {
         int equalNumberCount = countWinningNumbers(winningLottery);
-        boolean hasBonusNumber = hasBonusNumber(winningLottery.getBonusNumber());
+        boolean hasBonusNumber = contains(winningLottery.getBonusNumber());
 
         return LottoRank.of(equalNumberCount, hasBonusNumber);
     }
@@ -52,9 +52,5 @@ public class Lottery {
         if (lottoNumbers == null || lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(String.format("로또번호는 %d개 이어야 합니다", LOTTO_NUMBERS_SIZE));
         }
-    }
-
-    private boolean hasBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
     }
 }
