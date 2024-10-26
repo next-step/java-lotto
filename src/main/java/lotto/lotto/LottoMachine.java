@@ -18,7 +18,8 @@ public class LottoMachine {
 
     public Lottos createLottos() {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < getExecuteIdx(); i++) {
+        int executeIdx = getExecuteIdx();
+        for (int i = 0; i < executeIdx; i++) {
             Lotto lotto = lottoGeneratorStrategy.generateLotto();
             lottos.add(lotto);
         }
