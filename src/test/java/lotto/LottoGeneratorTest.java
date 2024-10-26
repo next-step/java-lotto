@@ -23,4 +23,5 @@ public class LottoGeneratorTest {
             assertThat(number).isLessThanOrEqualTo(45);
         });
     }
+
 }
