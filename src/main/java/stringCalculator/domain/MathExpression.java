@@ -1,4 +1,4 @@
-package stringCalculator;
+package stringCalculator.domain;
 
 import java.util.List;
 import java.util.Queue;

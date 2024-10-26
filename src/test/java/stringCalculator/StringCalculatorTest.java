@@ -2,6 +2,9 @@ package stringCalculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import stringCalculator.domain.MathExpression;
+import stringCalculator.domain.MathExpressionFactory;
+import stringCalculator.domain.StringCalculator;
 
 import java.util.Arrays;
 
@@ -35,25 +38,33 @@ public class StringCalculatorTest {
     @DisplayName("입력받은 문자열의 덧셈 테스트")
     @Test
     public void addTest() {
-        assertThat(StringCalculator.add("+", 5, 1)).isEqualTo(6);
+        assertThat(StringCalculator.calculate("+", 5, 1)).isEqualTo(6);
     }
 
     @DisplayName("입력받은 문자열의 뺄셈 테스트")
     @Test
     public void subtractTest() {
-        assertThat(StringCalculator.subtract("-", 5, 1)).isEqualTo(4);
+        assertThat(StringCalculator.calculate("-", 5, 1)).isEqualTo(4);
     }
 
     @DisplayName("입력받은 문자열의 곱셈 테스트")
     @Test
     public void multiplyTest() {
-        assertThat(StringCalculator.multiply("*", 5, 2)).isEqualTo(10);
+        assertThat(StringCalculator.calculate("*", 5, 2)).isEqualTo(10);
     }
 
     @DisplayName("입력받은 문자열의 나눗셈 테스트")
     @Test
     public void divideTest() {
-        assertThat(StringCalculator.divide("/", 6, 2)).isEqualTo(3);
+        assertThat(StringCalculator.calculate("/", 6, 2)).isEqualTo(3);
+    }
+
+    @DisplayName("입력받은 문자열의 사칙연산 계산 테스트")
+    @Test
+    public void calculateTest() {
+        MathExpression expression = MathExpressionFactory
+                .seperateAndCreateMathExpression("1 + 2 * 3 - 2");
+        assertThat(StringCalculator.calculateWithMathExpression(expression)).isEqualTo(7);
     }
 }
 
