@@ -13,6 +13,8 @@ import java.util.Set;
 
 public class LottoService {
 
+    public static final int MINIMUM_MATCH_COUNT = 3;
+
     public int calculateLottoAmount(LottoMoney money) {
         return money.calculateLottoAmount();
     }
@@ -38,10 +40,15 @@ public class LottoService {
         int totalWinningAmount = 0;
         for (LottoNumbers userLotto : userLottos) {
             int matchCount = WinningUtils.countMatchingNumbers(winningNumbers, userLotto);
-            if (matchCount >= 3) {
-                matchCountMap.put(matchCount, matchCountMap.get(matchCount) + 1);
-                totalWinningAmount += WinningUtils.getPrizeMoney(matchCount);
-            }
+            totalWinningAmount = calculateWinningAmount(matchCountMap, matchCount, totalWinningAmount);
+        }
+        return totalWinningAmount;
+    }
+
+    private static int calculateWinningAmount(Map<Integer, Integer> matchCountMap, int matchCount, int totalWinningAmount) {
+        if (matchCount >= MINIMUM_MATCH_COUNT) {
+            matchCountMap.put(matchCount, matchCountMap.get(matchCount) + 1);
+            totalWinningAmount += WinningUtils.getPrizeMoney(matchCount);
         }
         return totalWinningAmount;
     }
