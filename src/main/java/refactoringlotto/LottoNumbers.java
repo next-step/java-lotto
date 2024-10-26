@@ -2,6 +2,7 @@ package refactoringlotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoNumbers {
     public static final int RANK_SUB_NUMBER = 7;
@@ -17,5 +18,18 @@ public class LottoNumbers {
         return RANK_SUB_NUMBER - (int) lottoNumbers.stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lottoNumbers);
     }
 }

@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinningNumbersTest {
+public class LottoNumbersTest {
 
     public static final List<Integer> TEST_WINNING_NUMBER_LIST = List.of(1, 2, 3, 4, 5, 6);
     public static final int EXPECTED_RANK = 4;
@@ -18,7 +18,8 @@ public class WinningNumbersTest {
         List<LottoNumber> numberList = IntStream.range(4,10)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(TEST_WINNING_NUMBER_LIST);;
+
+        LottoNumbers lottoWinningNumbers = new LottoNumbers(TEST_WINNING_NUMBER_LIST);;
         assertThat(lottoWinningNumbers.lottoRank(numberList)).isEqualTo(EXPECTED_RANK);
     }
 }
