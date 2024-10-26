@@ -5,8 +5,19 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public static Lottos createLottos(int purchaseAmount, LottoGenerator lottoGenerator) {
-        List<Lotto> lottos = lottoGenerator.generateLottos(purchaseAmount);
+    public static Lottos createLottos(Lottos manual, int autoAmount) {
+        Lottos auto = Lottos.createAutoLottos(autoAmount,
+                LottoShuffleGenerator.getLottoShuffleGenerator());
+        manual.additionalLottos(auto);
+        return manual;
+    }
+
+    public static Lottos createAutoLottos(int autoAmount, LottoGenerator lottoGenerator) {
+        List<Lotto> lottos = lottoGenerator.generateLottos(autoAmount);
+        return new Lottos(lottos);
+    }
+
+    public static Lottos createLottosByManual(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
@@ -27,13 +38,18 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             int count = lotto.lottoWinningStatus(winningLotto.getWinningLotto());
             boolean bonusHit = lotto.checkContainsBonusNumber(winningLotto.getBonusLottoNumber());
-            statistic.updatePrize(Prize.getHit(count,bonusHit));
+            statistic.updatePrize(Prize.getHit(count, bonusHit));
         }
         return statistic;
     }
 
-    public void additionalLotto(Lotto lotto){
+    public void additionalLotto(Lotto lotto) {
         lottos.add(lotto);
+    }
+
+    public void additionalLottos(Lottos lottos) {
+        lottos.getLottos()
+                .forEach(lotto -> this.lottos.add(lotto));
     }
 
 }

@@ -4,36 +4,45 @@ import java.util.Arrays;
 
 public enum Prize {
 
-    FIRST(6, 2_000_000_000, Constants.BONUS_MISS),
-    SECOND(5, 30_000_000, Constants.BONUS_HIT),
-    THIRD(5, 1_500_000, Constants.BONUS_MISS),
-    FOURTH(4, 50000, Constants.BONUS_MISS),
-    FIFTH(3, 5000, Constants.BONUS_MISS),
-    MISS(0,0,Constants.BONUS_MISS);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
+    MISS(0, 0);
 
     private int hit;
     private int value;
-    private boolean bonus;
 
-    Prize(int hit, int value, boolean bonus) {
+    Prize(int hit, int value) {
         this.hit = hit;
         this.value = value;
-        this.bonus = bonus;
     }
 
     public static Prize getHit(int hit, boolean bonus) {
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.hit == hit && prize.bonus == bonus)
+                .filter(prize -> prize.hit == hit)
+                .map(prize -> checkHitFive(prize, hit, bonus))
                 .findFirst()
                 .orElse(Prize.MISS);
+    }
+
+    private static Prize checkHitFive(Prize prize, int hit, boolean bonus) {
+        if (hit == Prize.SECOND.hit || hit == Prize.THIRD.hit) {
+            return checkHitBonus(bonus);
+        }
+        return prize;
+    }
+
+    private static Prize checkHitBonus(boolean bonus) {
+        if (bonus) {
+            return Prize.SECOND;
+        }
+        return Prize.THIRD;
     }
 
     public int getValue() {
         return value;
     }
 
-    private static class Constants {
-        public static final boolean BONUS_HIT = true;
-        public static final boolean BONUS_MISS = false;
-    }
 }

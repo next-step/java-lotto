@@ -25,7 +25,7 @@ public class Lotto {
 
     private void validDuplicate(List<LottoNumber> lotto) {
         Set<LottoNumber> duplicateLottoNumber = lotto.stream()
-                .filter(i -> Collections.frequency(lotto,i) > 1)
+                .filter(i -> Collections.frequency(lotto, i) > 1)
                 .collect(Collectors.toSet());
 
         if (!duplicateLottoNumber.isEmpty()) {
