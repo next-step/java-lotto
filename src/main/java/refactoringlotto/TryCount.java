@@ -1,0 +1,34 @@
+package refactoringlotto;
+
+import java.util.Objects;
+
+public class TryCount {
+    public static final int CONVERTING_FLOOR_NUMBER = 1000;
+    int tryCount;
+
+    public TryCount(int tryCount) {
+        this.tryCount = tryCount;
+    }
+
+    public static TryCount initTryCount(int purchaseAmount) {
+        return new TryCount(amountToTryCount(purchaseAmount));
+    }
+
+    private static int amountToTryCount(int purchaseAmount) {
+        return Math.floorDiv(purchaseAmount, CONVERTING_FLOOR_NUMBER);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TryCount tryCount1 = (TryCount) o;
+        return tryCount == tryCount1.tryCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(tryCount);
+    }
+}
