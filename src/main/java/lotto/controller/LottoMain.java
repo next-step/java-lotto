@@ -1,11 +1,10 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoWinner;
-import lotto.domain.ProfitMargin;
-import lotto.ui.InputView;
-import lotto.random.LottoGenerateStrategy;
+import lotto.domain.*;
+import lotto.random.LottoGenerator;
 import lotto.random.RandomLottoNumbers;
+import lotto.ui.InputView;
+import lotto.ui.PrintView;
 
 import java.util.Scanner;
 
@@ -13,13 +12,17 @@ public class LottoMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int purchaseAmount = InputView.purchaseAmount(scanner);
-        Lotto lotto = Lotto.InitLotto(purchaseAmount, new LottoGenerateStrategy(new RandomLottoNumbers()));
-        lotto.insertWinningLottoNumber(new LottoWinner(InputView.lottoWinnerNumbers(scanner)));
-        lotto.recordWinningCount();
+        LottoGenerator lottoGenerator = new RandomLottoNumbers();
+        Lotto lotto = new Lotto(lottoGenerator,purchaseAmount);
 
-        lotto.printWinningCount();
-        ProfitMargin profitMargin = new ProfitMargin(lotto.winningAmount(), purchaseAmount);
-        profitMargin.printMargin();
+        PrintView.printLottoTryCount(lotto.getTryCount());
+        PrintView.printLottoList(lotto.totalRoundLottoNumberList());
+
+        LottoWinner lottoWinner = new LottoWinner();
+        lottoWinner.updateWinningCountList(lotto.lottoRankList(new LottoNumbers(InputView.lottoWinnerNumbers(scanner))));
+
+        PrintView.printWinningStatisticsPreview();
+        PrintView.printWinningCount(lottoWinner.getLottoWinningCountsMap());
+        PrintView.printMargin(lottoWinner.calculateMarginPercent(purchaseAmount));
     }
-
 }

@@ -1,64 +1,67 @@
 package lotto.domain;
 
+import deprecatedlotto.domain.LottoWinningCountDecision;
+
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoWinner {
-    public static final int DEFAULT_WINNING_COUNT = 0;
+    private final static int DEFAULT_WINNING_COUNT = 0;
+    Map<Integer, Integer> lottoWinningCountsMap;
 
-    private OneTimeRoundLottoNumberList winnerLottoNumberList;
-
-    private WinningLottoCount winningLottoCountMap;
-
-
-    public LottoWinner(List<Integer> lottoWinnerNumberList) {
-        this(lottoWinnerNumberList, initWinnigLottoCountMap());
+    public LottoWinner() {
+        this(initCountsMap());
     }
 
-    public LottoWinner(List<Integer> lottoWinnerNumberList, Map<Integer, Integer> winningLottoCountMap) {
-        this.winnerLottoNumberList = new OneTimeRoundLottoNumberList(lottoWinnerNumberList);
-        this.winningLottoCountMap = new WinningLottoCount(winningLottoCountMap);
+    public LottoWinner(Map<Integer, Integer> winningCountsMap) {
+        lottoWinningCountsMap = winningCountsMap;
+
     }
 
-    public int diffLottoAndWinningLotto(List<Integer> lottoNumberList) {
-        return lottoNumberList.stream()
-                .filter(winnerLottoNumberList::compareNumber)
-                .mapToInt(e -> 1)
-                .sum();
+    private static Map<Integer, Integer> initCountsMap() {
+        Map<Integer, Integer> winningLottoCountMap = new TreeMap<>(Comparator.reverseOrder());
+        Arrays.asList(4, 3, 2, 1).forEach(i -> winningLottoCountMap.put(i, DEFAULT_WINNING_COUNT));
+
+        return winningLottoCountMap;
     }
 
-    public void recordWinningCount(int matchingCount) {
-        if (matchingCount >= 3) {
-            int winningRank = LottoWinningCountDecision.convertMatchingNumberToRank(matchingCount);
-            winningLottoCountMap.recordWinningCount(winningRank);
+    public void updateWinningCountList(List<Integer> lottoRankList) {
+        for (int lottoRank : lottoRankList) {
+            updateWinningCount(lottoRank);
         }
     }
 
-    public void printWinningCount() {
-        winningLottoCountMap.printWinningCount();
+    public void updateWinningCount(int lottoRank) {
+        lottoWinningCountsMap.compute(lottoRank, (key, value) -> value + 1);
+    }
+
+    public Map<Integer, Integer> getLottoWinningCountsMap() {
+        return lottoWinningCountsMap;
     }
 
     public int winningAmount() {
-        return winningLottoCountMap.winningAmount();
+        int winningAmount = 0;
+        for (int rank : lottoWinningCountsMap.keySet()) {
+            winningAmount += LottoWinningCountDecision.convertMatchingRankToAmount(rank) * lottoWinningCountsMap.get(rank);
+        }
+        return winningAmount;
     }
 
-    private static Map<Integer, Integer> initWinnigLottoCountMap() {
-        Map<Integer, Integer> winningLottoCountMap = new TreeMap<>(Comparator.reverseOrder());
-        Arrays.asList(1, 2, 3, 4).forEach(i -> winningLottoCountMap.put(i, DEFAULT_WINNING_COUNT));
-        return winningLottoCountMap;
+    public double calculateMarginPercent(int purchaseAmount) {
+        MarginAmount marginAmount = new MarginAmount(winningAmount());
+        return marginAmount.calculateMarginPercent(purchaseAmount);
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoWinner that = (LottoWinner) o;
-        return Objects.equals(winnerLottoNumberList, that.winnerLottoNumberList) && Objects.equals(winningLottoCountMap, that.winningLottoCountMap);
+        return Objects.equals(lottoWinningCountsMap, that.lottoWinningCountsMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winnerLottoNumberList, winningLottoCountMap);
+        return Objects.hashCode(lottoWinningCountsMap);
     }
 }

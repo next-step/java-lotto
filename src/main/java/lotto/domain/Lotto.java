@@ -1,75 +1,28 @@
 package lotto.domain;
 
-import lotto.ui.PrintView;
 import lotto.random.LottoGenerator;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
 
 public class Lotto {
-    private TryLottoCount tryLottoCount;
-    private LottoNumberList lottoNumberList;
-    private LottoWinner lottoWinner;
+    private final AllRoundLottoNumbers allRoundLottoNumbers;
+    private final TryCount tryCount;
 
-    public static Lotto InitLotto(int purchaseAmount, LottoGenerator lottoGenerator) {
-        Lotto lotto = new Lotto(new TryLottoCount(0,purchaseAmount));
-        lotto.convertPurchaseToLottoTryCount();
-        lotto.makeLottoList(lottoGenerator);
-        lotto.printLottoList();
-        return lotto;
+    public Lotto(LottoGenerator lottoGenerator, int purchaseAmount) {
+        tryCount = TryCount.initTryCount(purchaseAmount);
+        allRoundLottoNumbers = AllRoundLottoNumbers.initAllRoundLottoNumbers(lottoGenerator,tryCount.getTryCount());
     }
 
-    public Lotto(TryLottoCount tryLottoCount) {
-        this(tryLottoCount,new LottoNumberList(new ArrayList<>()));
+    public int getTryCount() {
+        return tryCount.getTryCount();
     }
-    public Lotto(TryLottoCount tryLottoCount, LottoNumberList lottoNumberList) {
-        this.tryLottoCount = tryLottoCount;
-        this.lottoNumberList = lottoNumberList;
-    }
-
-    public void convertPurchaseToLottoTryCount() {
-        PrintView.printLottoTryCount(tryLottoCount.calculateLottoTryCount());
+    public List<List<Integer>> totalRoundLottoNumberList(){
+        return allRoundLottoNumbers.totalRoundLottoNumberList();
     }
 
-    public void makeLottoList(LottoGenerator lottoGenerator) {
-        for (int i = 0; i < tryLottoCount.currentCount(); i++) {
-            lottoNumberList.add(new OneTimeRoundLottoNumberList(lottoGenerator.executeStrategy()));
-        }
+    public List<Integer> lottoRankList(LottoNumbers winningLottoNumbers){
+        return allRoundLottoNumbers.lottoRankList(winningLottoNumbers);
+
     }
-
-    public void printLottoList() {
-        lottoNumberList.printLottoList();
-    }
-
-    public void insertWinningLottoNumber(LottoWinner lottoWinner) {
-        this.lottoWinner = lottoWinner;
-    }
-
-    public void recordWinningCount() {
-        lottoNumberList.recordWinningCount(lottoWinner);
-    }
-
-    public void printWinningCount() {
-        lottoWinner.printWinningCount();
-    }
-
-    public int winningAmount() {
-        return lottoWinner.winningAmount();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(tryLottoCount, lotto.tryLottoCount);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(tryLottoCount);
-    }
-
-
 
 }

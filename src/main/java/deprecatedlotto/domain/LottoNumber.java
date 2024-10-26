@@ -1,25 +1,27 @@
-package lotto.domain;
+package deprecatedlotto.domain;
 
 import java.util.Objects;
 
 public class LottoNumber {
-    public static final int MINIMUM_LOTTO_NUMBER = 1;
-    public static final int MAXIMUM_LOTTO_NUMBER = 45;
     private int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
-        checkNumberRange();
+        checkLottoNumber();
     }
 
-    private void checkNumberRange() {
-        if (lottoNumber < MINIMUM_LOTTO_NUMBER || lottoNumber > MAXIMUM_LOTTO_NUMBER) {
+    private void checkLottoNumber() {
+        if (lottoNumber < 1 || lottoNumber > 45) {
             throw new IllegalArgumentException();
         }
     }
 
-    protected int getLottoNumber() {
+    public int getLottoNumber() {
         return lottoNumber;
+    }
+
+    public boolean compareNumber(int insertLottoNumber) {
+        return lottoNumber == insertLottoNumber;
     }
 
     @Override

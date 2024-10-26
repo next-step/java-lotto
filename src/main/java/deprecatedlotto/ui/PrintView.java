@@ -1,6 +1,7 @@
-package lotto.ui;
+package deprecatedlotto.ui;
 
 import deprecatedlotto.domain.LottoWinningCountDecision;
+import deprecatedlotto.domain.OneTimeRoundLottoNumberList;
 
 import java.util.List;
 import java.util.Map;
@@ -13,9 +14,9 @@ public class PrintView {
 
     }
 
-    public static void printLottoList(List<List<Integer>> lottoNumberList) {
-        for (List<Integer> LottoNumbers : lottoNumberList) {
-            System.out.println("[" + LottoNumbers.stream().
+    public static void printLottoList(List<OneTimeRoundLottoNumberList> lottoNumberList) {
+        for (OneTimeRoundLottoNumberList oneTimeRoundLottoNumberList : lottoNumberList) {
+            System.out.println("[" + oneTimeRoundLottoNumberList.convertLottoNumberList().stream().
                     map(String::valueOf)
                     .collect(Collectors.joining(", ")) + "]");
         }
