@@ -49,6 +49,12 @@ public class StringCalculatorTest {
     public void multiplyTest() {
         assertThat(StringCalculator.multiply("*", 5, 2)).isEqualTo(10);
     }
+
+    @DisplayName("입력받은 문자열의 나눗셈 테스트")
+    @Test
+    public void divideTest() {
+        assertThat(StringCalculator.divide("/", 6, 2)).isEqualTo(3);
+    }
 }
 
 
