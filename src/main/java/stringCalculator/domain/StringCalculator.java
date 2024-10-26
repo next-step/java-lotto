@@ -19,4 +19,19 @@ public class StringCalculator {
                 .apply(firstOperand, secondOperand);
     }
 
+    public static Integer add(Integer firstOperand, Integer secondOperand) {
+        return OperationEnum.findOperationEnum("+").apply(firstOperand, secondOperand);
+    }
+
+    public static Integer subtract(Integer firstOperand, Integer secondOperand) {
+        return OperationEnum.findOperationEnum("-").apply(firstOperand, secondOperand);
+    }
+
+    public static Integer multiply(Integer firstOperand, Integer secondOperand) {
+        return OperationEnum.findOperationEnum("*").apply(firstOperand, secondOperand);
+    }
+
+    public static Integer divide(Integer firstOperand, Integer secondOperand) {
+        return OperationEnum.findOperationEnum("/").apply(firstOperand, secondOperand);
+    }
 }
