@@ -1,54 +1,61 @@
 package lotto.service;
 
-import lotto.model.Lotto;
+import lotto.model.BoughtLotto;
 import lotto.model.WinningInfo;
+import lotto.model.WinningLotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class LottoBuyer {
     private static final int LOTTO_PRICE = 1000;
 
-    private final List<Lotto> lottos;
-    private LottoAnalyzer winningStatics;
+    private final List<BoughtLotto> boughtLottos;
+    private WinningAnalyzer winningAnalyzer;
 
     public LottoBuyer() {
-        lottos = new ArrayList<>();
+        boughtLottos = new ArrayList<>();
     }
 
-    public int canBuyLottoCount(int buyAmount) {
+    public static void checkCanBuyLotto(int buyAmount, int manualLottoCount) {
+        if (manualLottoCount * LOTTO_PRICE > buyAmount) {
+            throw new IllegalArgumentException("구매할 수 있는 로또의 최대 개수를 초과하였습니다.");
+        }
+    }
+
+    public static int calculateAutoLottoCount(int buyAmount, int manualLottoCount) {
+        buyAmount -= manualLottoCount * LOTTO_PRICE;
         return buyAmount / LOTTO_PRICE;
     }
 
-    public List<Integer> buyLotto(List<Integer> lottoNumber) {
-        this.lottos.add(new Lotto(lottoNumber));
+    public List<Integer> buyManualLotto(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+        this.boughtLottos.add(new BoughtLotto(lottoNumbers));
 
-        return lottoNumber;
+        return lottoNumbers;
     }
 
-    public Map<Integer, WinningInfo> checkLottoResult(String lastWeekWinningNumbers, int bonusNumber) {
-        List<Integer> winningNumber = parseWinningNumber(lastWeekWinningNumbers);
+    public List<Integer> buyAutoLotto() {
+        List<Integer> lottoNumbers = LottoSeller.sellLotto();
+        Collections.sort(lottoNumbers);
+        this.boughtLottos.add(new BoughtLotto(lottoNumbers));
 
-        winningStatics = new LottoAnalyzer();
+        return lottoNumbers;
+    }
 
-        return winningStatics.calculateWinningStatics(winningNumber, bonusNumber, lottos);
+    public Map<Integer, WinningInfo> checkLottoResult(String winningNumbers, int bonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+
+        winningAnalyzer = new WinningAnalyzer();
+
+        return winningAnalyzer.calculateWinningStatics(winningLotto, boughtLottos);
     }
 
     public float checkReturnRate(int buyAmount) {
-        return winningStatics.calculateReturnRate(buyAmount);
+        return winningAnalyzer.calculateReturnRate(buyAmount);
     }
 
-    private List<Integer> parseWinningNumber(String lastWeekWinningNumber) {
-        return Arrays.stream(lastWeekWinningNumber.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+    public List<BoughtLotto> getBoughtLottos() {
+        return boughtLottos;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
 }

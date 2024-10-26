@@ -1,26 +1,27 @@
 package lotto.service;
 
-import lotto.model.Lotto;
+import lotto.model.BoughtLotto;
 import lotto.model.WinningInfo;
+import lotto.model.WinningLotto;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LottoAnalyzer {
-    private final static int[] prize = {0, 2_000_000_000, 30_000_000, 1_500_000, 50_000, 5_000};
+public class WinningAnalyzer {
+    private static final int[] prize = {0, 2_000_000_000, 30_000_000, 1_500_000, 50_000, 5_000};
 
     private final Map<Integer, WinningInfo> winningStatics;
 
-    public LottoAnalyzer() {
+    public WinningAnalyzer() {
         this.winningStatics = createWinningStatics();
     }
 
-    public Map<Integer, WinningInfo> calculateWinningStatics(List<Integer> winningNumbers, int bonusNumber, List<Lotto> lottos) {
+    public Map<Integer, WinningInfo> calculateWinningStatics(WinningLotto winningLotto, List<BoughtLotto> boughtLottos) {
 
-        for (Lotto lotto : lottos) {
-            int matchCount = lotto.countMatchingNumber(winningNumbers, bonusNumber);
-            boolean matchBonus = lotto.containsBonusNumber(bonusNumber);
+        for (BoughtLotto boughtLotto : boughtLottos) {
+            int matchCount = boughtLotto.countMatchNumber(winningLotto);
+            boolean matchBonus = boughtLotto.checkContainsBonusNumber(winningLotto);
             int rank = LottoRank.getRankByMatchCount(matchCount, matchBonus);
 
             WinningInfo winningInfo = winningStatics.get(rank);
@@ -50,4 +51,5 @@ public class LottoAnalyzer {
 
         return (float) totalPrize / buyAmount;
     }
+
 }

@@ -25,4 +25,5 @@ public class PrizeInfo {
     public int getWinningCount() {
         return this.winningCount;
     }
+
 }

@@ -21,19 +21,15 @@ public enum LottoRank {
     public static int getRankByMatchCount(int matchCount, boolean matchBonus) {
         LottoRank[] rank = values();
 
-        if (matchCount == 6 && !matchBonus) {
-            return rank[0].rank;
-        }
-
         if (matchCount == 6) {
-            return rank[1].rank;
+            return FIRST.rank;
         }
 
-        if (matchBonus) {
-            matchCount--;
-            matchCount = Math.max(0, matchCount);
+        if (matchCount == 5 && matchBonus) {
+            matchCount++;
         }
 
         return rank[7 - matchCount].rank;
     }
+
 }

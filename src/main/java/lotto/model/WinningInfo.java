@@ -30,4 +30,5 @@ public class WinningInfo {
     public int getMatchCount() {
         return this.matchCount;
     }
+
 }

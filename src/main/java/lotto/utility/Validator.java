@@ -5,9 +5,19 @@ import java.util.List;
 import java.util.Set;
 
 public class Validator {
+    private static final String NUMBERS_FORMAT = "^\\d{1,2}(,\\s\\d{1,2}){5}$";
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
+
+    private Validator() {
+    }
+
+    public static void isValidFormat(String lastWeekWinningNumbers) {
+        if (!lastWeekWinningNumbers.matches(NUMBERS_FORMAT)) {
+            throw new IllegalArgumentException("잘못된 입력형식입니다. 1, 2, 3, 4, 5, 6과 같은 형태로 입력해주세요");
+        }
+    }
 
     public static void isValidNumber(int number) {
         checkNumberRange(number);
