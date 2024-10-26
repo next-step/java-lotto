@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Lottery;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,11 +11,6 @@ public class InputView {
     public static int inputTotalPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         return getInputInteger();
-    }
-
-    public static List<Set<Integer>> inputManualLotteries() {
-        int manualLottoAmount = inputManualLottoAmount();
-        return inputAndParseManualLottoNumbersList(manualLottoAmount);
     }
 
     public static Set<Integer> inputLastWeekWinningNumbers() {
@@ -42,16 +39,16 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    private static int inputManualLottoAmount() {
+    public static int inputManualLottoAmount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return getInputInteger();
     }
 
-    private static List<Set<Integer>> inputAndParseManualLottoNumbersList(int manualLottoAmount) {
+    public static List<Lottery> inputAndParseManualLotteries(int manualLottoAmount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-
         List<String> manualLottoNumbersList = inputManualLottoNumbersList(manualLottoAmount);
-        return parseStringsToIntegerSetList(manualLottoNumbersList);
+
+        return parseStringsToLotteryList(manualLottoNumbersList);
     }
 
     private static List<String> inputManualLottoNumbersList(int manualLottoAmount) {
@@ -63,9 +60,10 @@ public class InputView {
         return inputManualLottoNumbersList;
     }
 
-    private static List<Set<Integer>> parseStringsToIntegerSetList(List<String> strings) {
+    private static List<Lottery> parseStringsToLotteryList(List<String> strings) {
         return strings.stream()
                 .map(InputView::parseStringToIntegerSet)
+                .map(Lottery::new)
                 .collect(Collectors.toList());
     }
 

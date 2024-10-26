@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotteries;
-import lotto.domain.LottoStatistics;
-import lotto.domain.WinningLottery;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,9 +10,11 @@ import java.util.Set;
 public class LottoController {
     public static void purchaseAutoLotto() {
         int totalPurchaseAmount = InputView.inputTotalPurchaseAmount();
-        List<Set<Integer>> manualLottoNumbers = InputView.inputManualLotteries();
+        int manualLottoAmount = InputView.inputManualLottoAmount();
+        LotteryBuyer lotteryBuyer = LotteryBuyer.of(totalPurchaseAmount, manualLottoAmount);
 
-        Lotteries lotteries = Lotteries.purchase(totalPurchaseAmount, manualLottoNumbers);
+        List<Lottery> manualLottoNumbers = InputView.inputAndParseManualLotteries(manualLottoAmount);
+        Lotteries lotteries = lotteryBuyer.purchaseLotteries(manualLottoNumbers);
         ResultView.printPurchasedLottoNumberList(lotteries, manualLottoNumbers.size());
 
         Set<Integer> inputWinningNumbers = InputView.inputLastWeekWinningNumbers();
