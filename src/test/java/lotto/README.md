@@ -24,13 +24,16 @@
 
 ### ManualLottoMachine (수동 로또 생성기)
 - 배열 입력 시 로또 발급 검증
+- 금액, 숫자, 배열 입력 시 예외 검증
 
 ### AutoLottoMachine (자동 수동 생성기)
 - 금액 입력 시 로또 갯수, 번호 갯수 사이즈 검증
 
 
 ### LottoRandomizer (로또 번호 생성기)
-- 랜덤이라 사이즈만 검증
+
+### AllLottoNumbers (1~45개 로또번호)
+- 45개 사이즈인지 검증
 
 ### LottoResult (로또 결과 - 수익률 및 결과 리스트 도메인)
 
@@ -63,3 +66,6 @@
 
 ### LottoNumbers(번호)
 - 범위 검증
+
+## LottoMoney (로또 1장당 금액)
+- 금액을 입력했을때 몇장 발급 되는지

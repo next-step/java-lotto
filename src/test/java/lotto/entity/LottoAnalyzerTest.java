@@ -1,5 +1,6 @@
 package lotto.entity;
 
+import lotto.LottoMethod;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -13,28 +14,20 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoAnalyzerTest {
 
-    List<LottoNumber> toList(List<Integer> numbers) {
-        return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toList());
-    }
-
-    Set<LottoNumber> toSet(Set<Integer> numbers) {
-        return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toSet());
-    }
-
     @Test
     void 각_등수별_몇개_맞추었는지_검증() {
         LottoAnalyzer lottoAnalyzer = new LottoAnalyzer();
 
         List<Lotto> lottos = Arrays.asList(
-                Lotto.valueOf(toList(Arrays.asList(1, 2, 3, 4, 5, 6))), // 1등
-                Lotto.valueOf(toList(Arrays.asList(1, 2, 3, 4, 5, 7))), // 2등
-                Lotto.valueOf(toList(Arrays.asList(1, 2, 3, 4, 5, 6))), // 1등
-                Lotto.valueOf(toList(Arrays.asList(1, 3, 6, 7, 9, 11))), // 5등
-                Lotto.valueOf(toList(Arrays.asList(1, 2, 3, 8, 10, 12))), // 5등
-                Lotto.valueOf(toList(Arrays.asList(1, 2, 3, 4, 5, 12))), // 3등
-                Lotto.valueOf(toList(Arrays.asList(1, 5, 6, 16, 18, 19))) // 5등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 4, 5, 6))), // 1등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 4, 5, 7))), // 2등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 4, 5, 6))), // 1등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 3, 6, 7, 9, 11))), // 5등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 8, 10, 12))), // 5등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 2, 3, 4, 5, 12))), // 3등
+                Lotto.valueOf(LottoMethod.toList(Arrays.asList(1, 5, 6, 16, 18, 19))) // 5등
         );
-        Set<LottoNumber> winningNumbers = toSet(Set.of(1, 2, 3, 4, 5, 6));
+        Set<LottoNumber> winningNumbers = LottoMethod.toSet(Set.of(1, 2, 3, 4, 5, 6));
         Winning winning = new Winning(winningNumbers, new LottoNumber(7));
 
         List<WinningResult> analyzer = lottoAnalyzer.analyzer(lottos, winning);

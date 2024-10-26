@@ -5,21 +5,14 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+import static lotto.LottoMethod.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTest {
 
-    List<LottoNumber> toList(List<Integer> numbers) {
-        return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toList());
-    }
-
-    Set<LottoNumber> toList(Set<Integer> numbers) {
-        return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toSet());
-    }
 
     @Test
     void 로또_생성_시_범위_외_번호_예외() {

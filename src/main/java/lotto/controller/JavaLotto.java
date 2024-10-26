@@ -21,9 +21,9 @@ public class JavaLotto {
     public static void run() {
         int inputMoney = InputView.requestBuyMoney();
         int manualCount = InputView.requestManualCount();
-        LottoMachine.validate(inputMoney, manualCount);
+        List<String[]> manualTexts = InputView.requestManualNumbers(manualCount);
 
-        List<Lotto> lottos = LottoMachine.createLotto(InputView.requestManualNumbers(manualCount), inputMoney);
+        List<Lotto> lottos = LottoMachine.createLotto(inputMoney, manualCount, manualTexts);
 
         ResultView.printCreateLotto(manualCount, toDto(lottos));
         Set<LottoNumber> winningNumbers = LottoText.ofValues(InputView.requestWinnerNumber());
