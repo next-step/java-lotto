@@ -9,7 +9,7 @@ public class LottoWinningNumbers {
         lottoWinningNumbers = new LottoNumbers(lottoWinningList);
     }
 
-    public int lottoMatchCount(List<LottoNumber> lottoNumbers) {
-        return lottoWinningNumbers.lottoMatchCount(lottoNumbers);
+    public int lottoRank(List<LottoNumber> lottoNumbers) {
+        return lottoWinningNumbers.lottoRank(lottoNumbers);
     }
 }
