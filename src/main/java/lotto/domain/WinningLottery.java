@@ -7,7 +7,7 @@ public class WinningLottery {
     private final LottoNumber bonusNumber;
 
     public WinningLottery(Set<Integer> inputWinningNumbers, int bonusNumber) {
-        this(new Lottery(inputWinningNumbers), new LottoNumber(bonusNumber));
+        this(new Lottery(inputWinningNumbers), LottoNumber.of(bonusNumber));
     }
 
     public WinningLottery(Lottery winningLottery, LottoNumber bonusNumber) {

@@ -14,7 +14,7 @@ public class Lottery {
         validateLottoNumberSize(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 

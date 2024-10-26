@@ -11,7 +11,7 @@ class LotteryTest {
         // given
         WinningLottery winningLottery = new WinningLottery(
                 new Lottery(Set.of(1, 2, 3, 4, 5, 6)),
-                new LottoNumber(7)
+                LottoNumber.of(7)
         );
         Lottery lottery = new Lottery(Set.of(1, 2, 10, 11, 12, 13));
 
