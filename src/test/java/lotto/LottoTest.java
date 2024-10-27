@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoChecker;
 import lotto.domain.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,5 +31,19 @@ public class LottoTest {
         assertThatThrownBy(() ->
                 LottoFactory.createLotto(null))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("당첨 번호를 입력받아 로또 체크 객체를 생성하는 테스트")
+    @Test
+    public void createWinnerLottoAndCheckerTest() {
+        Lotto winnerLotto = LottoFactory.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(new LottoChecker(null, winnerLotto)
+                .containsWinnerNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))
+                .isTrue();
+
+        assertThatThrownBy(() ->
+                new LottoChecker(null, null))
+                .isInstanceOf(IllegalArgumentException.class);
+
     }
 }

@@ -7,7 +7,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        numberExceptionCheck(numbers);
+        numberEmptyCheck(numbers);
         duplicateNumberCheck(numbers);
 
         Collections.sort(numbers);
@@ -23,8 +23,12 @@ public class Lotto {
             throw new IllegalArgumentException("중복된 숫자가 있습니다.");
     }
 
-    private void numberExceptionCheck(List<Integer> numbers) {
+    private void numberEmptyCheck(List<Integer> numbers) {
         if (numbers == null || numbers.isEmpty())
             throw new IllegalArgumentException("로또 번호가 없습니다.");
+    }
+
+    public Boolean containsNumbers(List<Integer> numbers) {
+        return this.numbers.containsAll(numbers);
     }
 }
