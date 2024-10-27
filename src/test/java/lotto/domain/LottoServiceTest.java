@@ -51,9 +51,24 @@ public class LottoServiceTest {
         );
 
         Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int totalWinningAmount = lottoService.getTotalWinningAmount(userLottos, winningNumbers);
+        int totalWinningAmount = lottoService.getTotalWinningAmount(0, userLottos, winningNumbers);
 
         assertEquals(WinningPrize.SIX.getPrizeMoney(), totalWinningAmount);
+    }
+
+    @Test
+    @DisplayName("로또 숫자 5개와 보너스 볼 숫자가 같을 때 30,000,000 상금을 타는지 확인")
+    void matchBonusBall() {
+        List<LottoNumbers> userLottos = Arrays.asList(
+                new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new LottoNumbers(Arrays.asList(7, 8, 9, 10, 11, 12))
+        );
+
+        Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 45));
+        int bonusBall = 6;
+        int totalWinningAmount = lottoService.getTotalWinningAmount(bonusBall, userLottos, winningNumbers);
+
+        assertEquals(WinningPrize.FIVE_WITH_BONUS.getPrizeMoney(), totalWinningAmount);
     }
 
 }
