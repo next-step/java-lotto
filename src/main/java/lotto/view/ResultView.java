@@ -1,10 +1,11 @@
 package lotto.view;
 
 import lotto.model.BoughtLotto;
-import lotto.model.WinningInfo;
+import lotto.model.WinningRecord;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private ResultView() {
@@ -16,26 +17,26 @@ public class ResultView {
 
     public static void printBoughtLottos(List<BoughtLotto> boughtLottos) {
         for (BoughtLotto boughtLotto : boughtLottos) {
-            System.out.println(boughtLotto.getNumbers());
+            System.out.println(boughtLotto.getIntegerTypeNumbers());
         }
     }
 
-    public static void printWinningStatics(Map<Integer, WinningInfo> winningStatics) {
+    public static void printWinningStatics(Map<Integer, WinningRecord> winningStatics) {
         System.out.println("\n당첨 통계");
         System.out.println("----------");
 
         for (int rank = 5; rank >= 1; rank--) {
-            WinningInfo info = winningStatics.get(rank);
+            WinningRecord winningRecord = winningStatics.get(rank);
 
-            int matchCount = info.getMatchCount();
-            int prize = info.getPrize();
-            int winningCount = info.getWinningCount();
-
-            printWinningResult(rank, matchCount, prize, winningCount);
+            printWinningResult(rank, winningRecord);
         }
     }
 
-    private static void printWinningResult(int rank, int matchCount, int prize, int winningCount) {
+    private static void printWinningResult(int rank, WinningRecord winningRecord) {
+        int matchCount = winningRecord.getMatchCount();
+        int prize = winningRecord.getPrize();
+        int winningCount = winningRecord.getWinningCount();
+
         String resultMessage = matchCount + "개 일치";
 
         if (rank == 2) {
@@ -43,6 +44,7 @@ public class ResultView {
         }
 
         resultMessage += " (" + prize + "원)- " + winningCount + "개";
+
         System.out.println(resultMessage);
     }
 
