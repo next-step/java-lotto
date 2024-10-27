@@ -31,4 +31,8 @@ public class Lotto {
     public Boolean containsNumbers(List<Integer> numbers) {
         return this.numbers.containsAll(numbers);
     }
+
+    public Integer getNumberByIndex(Integer index) {
+        return this.numbers.get(index);
+    }
 }

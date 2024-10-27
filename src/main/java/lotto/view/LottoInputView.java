@@ -27,7 +27,7 @@ public class LottoInputView {
 
     public static Lotto createLottoWithScan(String numberString) {
         String[] numbers = numberString.split(", ");
-        
+
         return LottoFactory.createLotto(
                 Arrays.stream(numbers)
                         .map(Integer::parseInt)
