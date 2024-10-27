@@ -8,16 +8,13 @@ import java.util.stream.Collectors;
 
 public class Report {
 
-    private final WinningRules winningRules;
-
-    public Report(WinningRules winningRules) {
-        this.winningRules = winningRules;
+    public Report() {
     }
 
     public String reportTotalOrders(Orders orders) {
         StringBuilder builder = new StringBuilder();
         builder.append(orders.getTotalOrders()).append("개를 구매했습니다.\n");
-        for(Lotto lotto: orders.getOrders()) {
+        for (Lotto lotto : orders.getOrders()) {
             builder.append(ofLotto(lotto));
             builder.append("\n");
         }
@@ -34,7 +31,7 @@ public class Report {
      * 5개 일치 (1500000원)- 0개
      * 6개 일치 (2000000000원)- 0개
      */
-    public String reportWinners(Statistics statistics) {
+    public String reportWinners(Statistics statistics, WinningRules winningRules) {
         StringBuilder builder = new StringBuilder();
         builder.append("당첨 통계\n");
         builder.append("---------\n");
@@ -52,11 +49,11 @@ public class Report {
         return result;
     }
 
-    public String reportRateOfReturn(Money input, Statistics statistics) {
-        return reportRateOfReturn(input.get(), statistics);
+    public void reportRateOfReturn(Money input, Statistics statistics, WinningRules winningRules) {
+        reportRateOfReturn(input.get(), statistics, winningRules);
     }
 
-    public String reportRateOfReturn(int input, Statistics statistics) {
+    public String reportRateOfReturn(int input, Statistics statistics, WinningRules winningRules) {
         int totalReward = 0;
 
         for (WinningRule winningRule : winningRules.getAllRules()) {

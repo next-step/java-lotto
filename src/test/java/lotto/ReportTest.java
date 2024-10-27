@@ -17,7 +17,7 @@ public class ReportTest {
     @Test
     @DisplayName("발급된 로또를 1장씩 화면에 출력한다.")
     void testPrintLotto() {
-        Report report = new Report(WinningRules.getDefaultWinningRules());
+        Report report = new Report();
 
         List<Lotto> lottos = List.of(new Lotto(1L), new Lotto(2L));
 
@@ -28,7 +28,7 @@ public class ReportTest {
     @Test
     @DisplayName("당첨 통계를 출력한다.")
     void testReportWinners() {
-        Report report = new Report(WinningRules.getDefaultWinningRules());
+        Report report = new Report();
 
         Statistics statistics = new Statistics();
         statistics.put(3, 10);
@@ -36,13 +36,13 @@ public class ReportTest {
         statistics.put(5, 0);
         statistics.put(6, 0);
 
-        assertThat(report.reportWinners(statistics)).isEqualTo("당첨 통계\n---------\n3개 일치 (5000원)- 10개\n4개 일치 (50000원)- 1개\n5개 일치 (1500000원)- 0개\n6개 일치 (2000000000원)- 0개\n");
+        assertThat(report.reportWinners(statistics, WinningRules.getDefaultWinningRules())).isEqualTo("당첨 통계\n---------\n3개 일치 (5000원)- 10개\n4개 일치 (50000원)- 1개\n5개 일치 (1500000원)- 0개\n6개 일치 (2000000000원)- 0개\n");
     }
 
     @Test
     @DisplayName("총 수익률을 출력한다.")
     void testReportRateOfReturn() {
-        Report report = new Report(WinningRules.getDefaultWinningRules());
+        Report report = new Report();
 
         Statistics statistics = new Statistics();
         statistics.put(3, 1);
@@ -50,7 +50,7 @@ public class ReportTest {
         statistics.put(5, 0);
         statistics.put(6, 0);
 
-        assertThat(report.reportRateOfReturn(14000, statistics)).isEqualTo("총 수익률은 0.35입니다.");
+        assertThat(report.reportRateOfReturn(14000, statistics, WinningRules.getDefaultWinningRules())).isEqualTo("총 수익률은 0.35입니다.");
 
     }
 }
