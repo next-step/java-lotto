@@ -21,7 +21,8 @@ public class LottoFactory {
     }
 
     public static Lotto createLottoWithRandomNumbers() {
-        Collections.shuffle(numbers, random);
-        return createLotto(numbers.subList(0, 6));
+        List<Integer> copyOfNumbers = new ArrayList<>(numbers);
+        Collections.shuffle(copyOfNumbers, random);
+        return createLotto(copyOfNumbers.subList(0, 6));
     }
 }

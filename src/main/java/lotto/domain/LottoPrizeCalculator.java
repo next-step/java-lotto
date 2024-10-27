@@ -8,12 +8,16 @@ public class LottoPrizeCalculator {
     public static Double calculateRateOfReturn(LottoChecker lottoChecker) {
         int prize = 0;
         for (int i = 3; i < 7; i++) {
-            prize += calculatePrizeByNumberAndCount(i, lottoChecker.countMatchNumber(i));
+            prize += calculatePrizeByNumberAndCount(i, lottoChecker.getWinnerCount(i));
         }
         return (double) prize / (lottoChecker.getPurchaseCount() * LOTTO_PRICE);
     }
 
     public static Integer calculatePrizeByNumberAndCount(int numberOfMatch, int count) {
         return count * prizeMoney[numberOfMatch];
+    }
+
+    public static Integer getPrizeByIndex(int index) {
+        return prizeMoney[index];
     }
 }

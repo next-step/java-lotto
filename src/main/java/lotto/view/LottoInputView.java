@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoChecker;
 import lotto.domain.LottoFactory;
 
 import java.util.ArrayList;
@@ -30,13 +29,6 @@ public class LottoInputView {
     public static String scanWinNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
-    }
-
-    public static LottoChecker createLottoCheckerWithScan() {
-        Integer amount = scanAmount();
-        String winnerNumbers = scanWinNumbers();
-
-        return new LottoChecker(createPurchasedLottos(amount), createLottoWithScan(winnerNumbers));
     }
 
     public static Lotto createLottoWithScan(String numberString) {
