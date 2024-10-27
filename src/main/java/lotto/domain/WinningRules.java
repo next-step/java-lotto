@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 public class WinningRules {
@@ -22,5 +24,13 @@ public class WinningRules {
                 WinningRule.FIVE,
                 WinningRule.SIX
         ));
+    }
+
+    public BigDecimal getTotalRateOfReturn(int input, Statistics statistics) {
+        int totalReward = 0;
+        for (WinningRule winningRule : this.rules) {
+            totalReward += statistics.get(winningRule.getMatch()) * winningRule.getReward();
+        }
+        return BigDecimal.valueOf(totalReward).divide(BigDecimal.valueOf(input), 2, RoundingMode.FLOOR);
     }
 }

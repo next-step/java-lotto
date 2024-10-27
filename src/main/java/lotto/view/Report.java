@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.stream.Collectors;
 
 public class Report {
@@ -53,16 +52,9 @@ public class Report {
         reportRateOfReturn(input.get(), statistics, winningRules);
     }
 
-    public String reportRateOfReturn(int input, Statistics statistics, WinningRules winningRules) {
-        int totalReward = 0;
-
-        for (WinningRule winningRule : winningRules.getAllRules()) {
-            totalReward += statistics.get(winningRule.getMatch()) * winningRule.getReward();
-        }
-
-        String result = String.format("총 수익률은 %.2f입니다.", BigDecimal.valueOf(totalReward).divide(BigDecimal.valueOf(input), 2, RoundingMode.FLOOR));
-        System.out.println(result);
-        return result;
+    public void reportRateOfReturn(int input, Statistics statistics, WinningRules winningRules) {
+        BigDecimal totalRateOfReturn = winningRules.getTotalRateOfReturn(input, statistics);
+        System.out.println(String.format("총 수익률은 %.2f입니다.", totalRateOfReturn));
     }
 
     private String ofLotto(Lotto lotto) {
