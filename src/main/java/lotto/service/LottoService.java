@@ -14,7 +14,7 @@ import java.util.Set;
 public class LottoService {
 
     public static final int MINIMUM_MATCH_COUNT = 3;
-    private static int[] matchCount = new int[WinningPrize.values().length];
+    private static final int[] matchCount = new int[WinningPrize.values().length];
 
     public static int[] getMatchCount() {
         return matchCount;
@@ -31,14 +31,6 @@ public class LottoService {
             userLottos.add(selectedNumbers);
         }
         return userLottos;
-    }
-
-    private Map<Integer, Integer> initializeMatchCountMap() {
-        Map<Integer, Integer> matchCountMap = new HashMap<>();
-        for (WinningPrize prize : WinningPrize.values()) {
-            matchCountMap.put(prize.getMatchCount(), 0);
-        }
-        return matchCountMap;
     }
 
     public int getTotalWinningAmount(List<LottoNumbers> userLottos, Set<Integer> winningNumbers) {
