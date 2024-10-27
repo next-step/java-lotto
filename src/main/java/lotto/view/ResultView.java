@@ -20,9 +20,13 @@ public class ResultView {
     }
 
     public void printCreateLotto(Lottos lottos) {
-        System.out.println(lottos.getSize());
         for (int i = 0; i < lottos.getSize(); i++) {
             System.out.println(lottos.getLottos().get(i).toString());
         }
     }
+
+    public void printLottoCnt(LottoMachine lottoMachine) {
+        System.out.println("수동으로 " + lottoMachine.getManualCnt() + "장, " + "자동으로 " + lottoMachine.getAutoCnt() + "개를 구매했습니다.");
+    }
+
 }
