@@ -34,7 +34,8 @@ public class LottoController {
         ResultView.printLottoNumbers(userLottos);
 
         Set<Integer> winningNumbers = InputView.getWinningNumbers();
-        int totalWinningAmount = lottoService.getTotalWinningAmount(userLottos, winningNumbers);
+        int bonusBall = InputView.getBonusBall();
+        int totalWinningAmount = lottoService.getTotalWinningAmount(bonusBall, userLottos, winningNumbers);
         ResultView.printResult();
 
         int[] matchCount = lottoService.getMatchCount();
