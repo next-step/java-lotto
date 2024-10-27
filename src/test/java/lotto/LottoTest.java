@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoChecker;
 import lotto.domain.LottoFactory;
+import lotto.domain.LottoPrizeCalculator;
 import lotto.view.LottoInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -58,5 +59,14 @@ public class LottoTest {
     @Test
     public void purchaseLottoTest() {
         assertThat(LottoInputView.createPurchasedLottos(14000).size()).isEqualTo(14);
+    }
+
+    @DisplayName("로또의 수익률을 계산하는 테스트")
+    @Test
+    public void calculateRateOfReturnTest() {
+        List<Lotto> purchasedLotto = Arrays.asList(LottoFactory.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoFactory.createLotto(Arrays.asList(21, 22, 23, 24, 25, 26)), LottoFactory.createLotto(Arrays.asList(21, 22, 23, 24, 25, 26)), LottoFactory.createLotto(Arrays.asList(21, 22, 23, 24, 25, 26)), LottoFactory.createLotto(Arrays.asList(21, 22, 23, 24, 25, 26)));
+        Lotto winnerLotto = LottoFactory.createLotto(Arrays.asList(1, 2, 3, 14, 15, 16));
+
+        assertThat(LottoPrizeCalculator.calculateRateOfReturn(new LottoChecker(purchasedLotto, winnerLotto))).isEqualTo(1);
     }
 }

@@ -50,4 +50,9 @@ public class LottoChecker {
     public Integer getWinnerCount(int index) {
         return this.matchCounts[index];
     }
+
+    public Integer getPurchaseCount() {
+        return this.purchasedLottos.size();
+    }
+
 }
