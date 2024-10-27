@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.lotto.AutoLottoStrategy;
-import lotto.lotto.Lotto;
-import lotto.lotto.LottoGeneratorStrategy;
-import lotto.lotto.LottoNumber;
+import lotto.lotto.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,7 @@ public class FakeLottoStrategy implements LottoGeneratorStrategy {
     }
 
     @Override
-    public Lotto generateLotto() {
+    public Lottos generateLotto() {
         List<LottoNumber> newLottoNumbers = new ArrayList<>();
         newLottoNumbers.add(new LottoNumber(1));
         newLottoNumbers.add(new LottoNumber(2));
@@ -28,7 +25,9 @@ public class FakeLottoStrategy implements LottoGeneratorStrategy {
         newLottoNumbers.add(new LottoNumber(4));
         newLottoNumbers.add(new LottoNumber(5));
         newLottoNumbers.add(new LottoNumber(10));
-        return new Lotto(newLottoNumbers);
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(newLottoNumbers));
+        return new Lottos(lottos);
     }
 
     public List<LottoNumber> getLotto() {

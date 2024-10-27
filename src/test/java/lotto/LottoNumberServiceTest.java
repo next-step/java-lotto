@@ -5,9 +5,6 @@ import lotto.lotto.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumberServiceTest {
@@ -18,7 +15,8 @@ public class LottoNumberServiceTest {
     @Test
     @DisplayName("로또 금액만큼 로또를 생성")
     public void createLottoTest() {
-        Lottos lottos = lottoService.createLotto(3000);
+        LottoMachine lottoMachine = new LottoMachine(3000, 0);
+        Lottos lottos = lottoService.createLotto(lottoMachine, null);
 
         assertThat(lottos.getLottos().size()).isEqualTo(3);
     }
@@ -27,9 +25,7 @@ public class LottoNumberServiceTest {
     @DisplayName("보너스2등이 1번 나머지는 당첨되지않으면 보너스 2등에 1번, 나머지0으로 저장됨")
     public void calculateLottoRank() {
         FakeLottoStrategy fakeLottoStrategy = new FakeLottoStrategy();
-        List<Lotto> createLotto = new ArrayList<>();
-        createLotto.add(fakeLottoStrategy.generateLotto());
-        Lottos lottos = new Lottos(createLotto);
+        Lottos lottos = fakeLottoStrategy.generateLotto();
         int bonusNumber = 10;
 
         result = lottoService.calculateLottoRank("1, 2, 3, 4, 5, 6", lottos, bonusNumber);
