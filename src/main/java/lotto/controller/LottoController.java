@@ -12,9 +12,9 @@ import java.util.List;
 public class LottoController {
 
     public static void main(String[] args) {
-        String purchasePrice = InputView.readPurchasePrice();
+        int purchasePrice = InputView.readPurchasePrice();
         List<String> manualLottoNumbers = InputView.readManualLottoNumbers();
-        LotteryMachine lotteryMachine = new LotteryMachine(manualLottoNumbers, purchasePrice);
+        LotteryMachine lotteryMachine = LotteryMachine.createWithManualLottos(manualLottoNumbers, purchasePrice);
         ResultView.printLottoInfo(lotteryMachine, manualLottoNumbers.size());
 
         Lotto winningLotto = new Lotto(InputView.readWinningLottoNumber());

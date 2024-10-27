@@ -27,14 +27,14 @@ public class WinningStatisticsTest {
     }
 
     private static Stream<Arguments> lottoRankSummaryArguments() {
-        LotteryMachine machine = new LotteryMachine(
+        LotteryMachine machine = LotteryMachine.createWithManualLottos(
                 List.of(
                         "1, 2, 3, 7, 8, 9",
                         "1, 2, 3, 4, 5, 9",
                         "1, 2, 3, 4, 5, 45",
                         "11, 12, 13, 14, 15, 16"
                 ),
-                "4000"
+                4000
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         int[] expectedRankCounts = {1, 0, 1, 1, 0};
@@ -53,9 +53,9 @@ public class WinningStatisticsTest {
     }
 
     private static Stream<Arguments> lottoRankProfitArguments() {
-        LotteryMachine machine = new LotteryMachine(
+        LotteryMachine machine = LotteryMachine.createWithManualLottos(
                 List.of("1, 2, 3, 7, 8, 9"),
-                "1000"
+                1000
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         double profitRate = 5.00;
@@ -67,9 +67,9 @@ public class WinningStatisticsTest {
     @DisplayName("당첨 통계가 생성되었을 때, 보너스 번호와 당첨 로또의 번호가 겹치면 예외가 발생하는지")
     @Test
     void createWinningStatisticsWithBonusBall() {
-        LotteryMachine machine = new LotteryMachine(
+        LotteryMachine machine = LotteryMachine.createWithManualLottos(
                 List.of("1, 2, 3, 4, 5, 6"),
-                "1000"
+                1000
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(6);

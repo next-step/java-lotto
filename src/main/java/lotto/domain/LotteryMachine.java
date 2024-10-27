@@ -14,22 +14,16 @@ public class LotteryMachine {
 
     private final List<Lotto> lottos;
 
-    public LotteryMachine(final List<Lotto> manualLottos, final int purchaseAmount) {
-        int remainingAmount = purchaseAmount - (manualLottos.size() * LOTTO_PRICE);
+    public LotteryMachine(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public static LotteryMachine createWithManualLottos(final List<String> manualLottoNumbers, final int purchaseAmount) {
+        final int remainingAmount = purchaseAmount - (manualLottoNumbers.size() * LOTTO_PRICE);
+        List<Lotto> manualLottos = createManualLottos(manualLottoNumbers);
         List<Lotto> autoLottos = purchaseLottos(remainingAmount);
-        this.lottos = combineLottos(manualLottos, autoLottos);
-    }
-
-    public LotteryMachine(final int purchasePrice) {
-        this(Collections.emptyList(), purchasePrice);
-    }
-
-    public LotteryMachine(final List<String> manualLottoNumbers, final String purchasePrice) {
-        this(createManualLottos(manualLottoNumbers), Integer.parseInt(purchasePrice));
-    }
-
-    public LotteryMachine(final String purchasePrice) {
-        this(Integer.parseInt(purchasePrice));
+        List<Lotto> combinedLottos = combineLottos(manualLottos, autoLottos);
+        return new LotteryMachine(combinedLottos);
     }
 
     private static void validatePrice(final int price) {
@@ -49,7 +43,8 @@ public class LotteryMachine {
                 .collect(Collectors.toList());
     }
 
-    private List<Lotto> combineLottos(final List<Lotto> manualLottos, final List<Lotto> autoLottos) {
+    private static List<Lotto> combineLottos(final List<Lotto> manualLottos,
+            final List<Lotto> autoLottos) {
         List<Lotto> combinedLottos = new ArrayList<>(manualLottos);
         combinedLottos.addAll(autoLottos);
         return combinedLottos;

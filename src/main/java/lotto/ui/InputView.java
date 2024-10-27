@@ -19,9 +19,9 @@ public class InputView {
         throw new UnsupportedOperationException("유틸형 클래스는 생성할 수 없습니다");
     }
 
-    public static String readPurchasePrice() {
+    public static int readPurchasePrice() {
         System.out.println(PURCHASE_PRICE_QUESTION);
-        return SCANNER.nextLine();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     private static void printBlankLine() {
