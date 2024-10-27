@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
+import lotto.domain.WinningPrize;
 
 import java.util.List;
 
@@ -29,8 +30,12 @@ public class ResultView {
         System.out.println("-".repeat(10));
     }
 
-    public static void printMatchCount(int prizeCount, int prizeMoney, int matchCount) {
-        System.out.println(String.format("%d개 일치 (%d원) - %d개", prizeCount, prizeMoney, matchCount));
+    public static void printMatchCount(WinningPrize prize, int count) {
+        if (prize == WinningPrize.FIVE_WITH_BONUS) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", prize.getMatchCount(), prize.getPrizeMoney(), count);
+            return;
+        }
+        System.out.printf("%d개 일치 (%d원) - %d개%n", prize.getMatchCount(), prize.getPrizeMoney(), count);
     }
 
     public static void printWinningRate(double winningRate) {
