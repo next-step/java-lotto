@@ -5,7 +5,7 @@ public class WinningRule {
     private final int match;
     private final int reward;
 
-    public WinningRule(LottoWinnersEnum match, int reward) {
+    public WinningRule(LottoWinners match, int reward) {
         this.match = match.getValue();
         this.reward = reward;
     }

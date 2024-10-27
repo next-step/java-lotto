@@ -41,13 +41,4 @@ public class Lotto {
         }
         return result;
     }
-
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-        builder.append(this.numbers.stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")));
-        builder.append("]");
-        return builder.toString();
-    }
-
 }

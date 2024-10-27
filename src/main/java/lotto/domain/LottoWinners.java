@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum LottoWinnersEnum {
+public enum LottoWinners {
     THREE(3),
     FOUR(4),
     FIVE(5),
@@ -10,7 +10,7 @@ public enum LottoWinnersEnum {
 
     private final int value;
 
-    LottoWinnersEnum(int value) {
+    LottoWinners(int value) {
         this.value = value;
     }
 
@@ -18,8 +18,8 @@ public enum LottoWinnersEnum {
         return value;
     }
 
-    public static LottoWinnersEnum findByValue(int value) {
-        return Arrays.stream(LottoWinnersEnum.values())
+    public static LottoWinners findByValue(int value) {
+        return Arrays.stream(LottoWinners.values())
                 .filter(item -> item.getValue() == value)
                 .findFirst()
                 .orElseThrow(null);
