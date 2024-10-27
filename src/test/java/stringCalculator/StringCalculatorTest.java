@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import stringCalculator.domain.MathExpression;
 import stringCalculator.domain.MathExpressionFactory;
+import stringCalculator.domain.OperationEnum;
 import stringCalculator.domain.StringCalculator;
 
 import java.util.Arrays;
@@ -19,7 +20,7 @@ public class StringCalculatorTest {
 
         MathExpression expression = MathExpressionFactory.seperateAndCreateMathExpression("1 + 2 * 3");
         assertThat(expression.numbersContains(Arrays.asList(1, 2, 3))).isTrue();
-        assertThat(expression.operationsContains(Arrays.asList("+", "*"))).isTrue();
+        assertThat(expression.operationsContains(Arrays.asList(OperationEnum.findOperationEnum("+"), OperationEnum.findOperationEnum("*")))).isTrue();
     }
 
     @DisplayName("입력받은 문자열의 예외사항을 확인하는 테스트")
@@ -50,7 +51,7 @@ public class StringCalculatorTest {
     @DisplayName("입력받은 문자열의 곱셈 테스트")
     @Test
     public void multiplyTest() {
-        assertThat(StringCalculator.multiply(5, 1)).isEqualTo(10);
+        assertThat(StringCalculator.multiply(5, 2)).isEqualTo(10);
     }
 
     @DisplayName("입력받은 문자열의 나눗셈 테스트")

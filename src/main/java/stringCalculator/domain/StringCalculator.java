@@ -13,10 +13,9 @@ public class StringCalculator {
         return result;
     }
 
-    public static Integer calculate(String operation, int firstOperand, int secondOperand) {
+    public static Integer calculate(OperationEnum operation, int firstOperand, int secondOperand) {
 
-        return OperationEnum.findOperationEnum(operation)
-                .apply(firstOperand, secondOperand);
+        return operation.apply(firstOperand, secondOperand);
     }
 
     public static Integer add(Integer firstOperand, Integer secondOperand) {

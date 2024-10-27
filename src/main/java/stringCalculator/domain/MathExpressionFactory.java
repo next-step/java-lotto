@@ -10,29 +10,21 @@ public class MathExpressionFactory {
 
         String[] inputList = input.split(" ");
         Queue<Integer> numbers = new LinkedList<>();
-        Queue<String> operations = new LinkedList<>();
+        Queue<OperationEnum> operations = new LinkedList<>();
 
         for (int i = 0; i < inputList.length; i += 2) {
             numbers.add(Integer.parseInt(inputList[i]));
         }
 
         for (int i = 1; i < inputList.length; i += 2) {
-            checkOperationAndThrowException(inputList[i]);
-            operations.add(inputList[i]);
+            operations.add(OperationEnum.findOperationEnum(inputList[i]));
         }
 
         return new MathExpression(numbers, operations);
     }
 
-    public static void checkNullAndThrowException(String input) {
-        if (input == null)
+    private static void checkNullAndThrowException(String input) {
+        if (input == null || input.isEmpty())
             throw new IllegalArgumentException();
     }
-
-    public static void checkOperationAndThrowException(String operation) {
-        if (operation.equals("+") || operation.equals("-") || operation.equals("*") || operation.equals("/"))
-            return;
-        throw new IllegalArgumentException();
-    }
-
 }
