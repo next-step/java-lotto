@@ -3,6 +3,9 @@ package lotto.utility;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
 
 public class Validator {
     private static final String NUMBERS_FORMAT = "^\\d{1,2}(,\\s\\d{1,2}){5}$";
@@ -13,8 +16,8 @@ public class Validator {
     private Validator() {
     }
 
-    public static void isValidFormat(String lastWeekWinningNumbers) {
-        if (!lastWeekWinningNumbers.matches(NUMBERS_FORMAT)) {
+    public static void isValidFormat(String input) {
+        if (!input.matches(NUMBERS_FORMAT)) {
             throw new IllegalArgumentException("잘못된 입력형식입니다. 1, 2, 3, 4, 5, 6과 같은 형태로 입력해주세요");
         }
     }
@@ -31,7 +34,6 @@ public class Validator {
         for (Integer number : numbers) {
             checkNumberRange(number);
             checkDuplicateNumber(number, uniqueNumbers);
-
         }
     }
 
@@ -50,6 +52,16 @@ public class Validator {
     private static void checkDuplicateNumber(Integer number, Set<Integer> uniqueNumbers) {
         if (!uniqueNumbers.add(number)) {
             throw new IllegalArgumentException("중복된 당첨번호가 입력되었습니다.");
+        }
+    }
+
+    public static void isValidBonusNumber(String lastWeekWinningNumbers, int bonusNumber) {
+        List<Integer> winningNumbers = stream(lastWeekWinningNumbers.split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("지난 주 당첨 번호와 보너스 볼이 중복 되었습니다.");
         }
     }
 

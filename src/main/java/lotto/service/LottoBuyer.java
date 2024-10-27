@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.model.BoughtLotto;
-import lotto.model.WinningInfo;
+import lotto.model.WinningRecord;
 import lotto.model.WinningLotto;
 
 import java.util.*;
@@ -10,7 +10,6 @@ public class LottoBuyer {
     private static final int LOTTO_PRICE = 1000;
 
     private final List<BoughtLotto> boughtLottos;
-    private WinningAnalyzer winningAnalyzer;
 
     public LottoBuyer() {
         boughtLottos = new ArrayList<>();
@@ -36,22 +35,21 @@ public class LottoBuyer {
 
     public List<Integer> buyAutoLotto() {
         List<Integer> lottoNumbers = LottoSeller.sellLotto();
+
         Collections.sort(lottoNumbers);
         this.boughtLottos.add(new BoughtLotto(lottoNumbers));
 
         return lottoNumbers;
     }
 
-    public Map<Integer, WinningInfo> checkLottoResult(String winningNumbers, int bonusNumber) {
+    public Map<Integer, WinningRecord> checkLottoResult(String winningNumbers, int bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        winningAnalyzer = new WinningAnalyzer();
-
-        return winningAnalyzer.calculateWinningStatics(winningLotto, boughtLottos);
+        return WinningAnalyzer.calculateWinningStatistics(winningLotto, boughtLottos);
     }
 
-    public float checkReturnRate(int buyAmount) {
-        return winningAnalyzer.calculateReturnRate(buyAmount);
+    public float checkReturnRate(int buyAmount, Map<Integer, WinningRecord> winningStatistics) {
+        return WinningAnalyzer.calculateReturnRate(buyAmount, winningStatistics);
     }
 
     public List<BoughtLotto> getBoughtLottos() {

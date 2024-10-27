@@ -1,11 +1,11 @@
 package lotto.model;
 
-public class PrizeInfo {
+public class PrizeRecord {
 
     private int prize;
     private int winningCount;
 
-    public PrizeInfo(int prize, int winningCount) {
+    public PrizeRecord(int prize, int winningCount) {
         this.prize = prize;
         this.winningCount = winningCount;
     }

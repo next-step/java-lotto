@@ -16,15 +16,11 @@ public class BoughtLotto {
                 .collect(Collectors.toList());
     }
 
-    public int countMatchNumber(WinningLotto winningLotto) {
-        return winningLotto.countMatchNumber(numbers);
+    public List<LottoNumber> getNumbers() {
+        return numbers;
     }
 
-    public boolean checkContainsBonusNumber(WinningLotto winningLotto) {
-        return winningLotto.checkContainsBonusNumber(numbers);
-    }
-
-    public List<Integer> getNumbers() {
+    public List<Integer> getIntegerTypeNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
