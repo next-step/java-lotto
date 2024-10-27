@@ -1,14 +1,10 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 public class Lotto {
 
     private static final int TOTAL_PER_LOTTO = 6;
 
-    private final Set<Integer> numbers;
+    private final LottoNumbers numbers;
 
     public Lotto() {
         this(new LottoRandomGenerator());
@@ -22,15 +18,12 @@ public class Lotto {
         this(generator.generate(TOTAL_PER_LOTTO));
     }
 
-    public Lotto(Set<Integer> numbers) {
+    public Lotto(LottoNumbers numbers) {
         this.numbers = numbers;
     }
 
-    public Set<Integer> getNumbers() {
+    public LottoNumbers getNumbers() {
         return this.numbers;
     }
 
-    public boolean contains(int n) {
-        return this.numbers.contains(n);
-    }
 }

@@ -71,7 +71,7 @@ public class Report {
     private String ofLotto(Lotto lotto) {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
-        builder.append(lotto.getNumbers().stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")));
+        builder.append(lotto.getNumbers().getNumbers().stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")));
         builder.append("]");
         return builder.toString();
     }

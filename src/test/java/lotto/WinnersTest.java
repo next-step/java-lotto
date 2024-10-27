@@ -15,13 +15,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class WinnersTest {
 
     @Test
-    @DisplayName("지난 주 당첨 번호를 입력 받는다.")
-    void testWinners() {
-        Winners winners = new Winners("14, 16, 21, 25, 38, 40");
-        assertThat(winners.toString()).isEqualTo("[14, 16, 21, 25, 38, 40]");
-    }
-
-    @Test
     @DisplayName("당첨 번호도 로또 번호와 동일한 제약 설정")
     void testWinnersConstraint() {
         assertThatThrownBy(() -> {

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.domain.Winners;
 
@@ -25,6 +26,6 @@ public class UserInput {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
-        return new Winners(str);
+        return new Winners(new LottoNumbers(str));
     }
 }
