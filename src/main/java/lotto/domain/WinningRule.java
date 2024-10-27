@@ -6,8 +6,7 @@ public class WinningRule {
     private final int reward;
 
     public WinningRule(LottoWinners match, int reward) {
-        this.match = match.getValue();
-        this.reward = reward;
+        this(match.getValue(), reward);
     }
 
     public WinningRule(int match, int reward) {

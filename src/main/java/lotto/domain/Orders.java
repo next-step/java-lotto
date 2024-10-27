@@ -10,11 +10,11 @@ public class Orders {
     private final List<Lotto> orders;
 
     public Orders(int total) {
-        this.orders = makeOrders(total);
+        this(makeOrders(total));
     }
 
     public Orders(Money money) {
-        this.orders = makeOrders(howManyPurchase(money));
+        this(makeOrders(howManyPurchase(money)));
     }
 
     public Orders(List<Lotto> orders) {
@@ -29,11 +29,11 @@ public class Orders {
         return this.orders;
     }
 
-    private int howManyPurchase(Money money) {
+    private static int howManyPurchase(Money money) {
         return money.get() / PRICE;
     }
 
-    private List<Lotto> makeOrders(int total) {
+    private static List<Lotto> makeOrders(int total) {
         List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < total; i++) {
             result.add(new Lotto());

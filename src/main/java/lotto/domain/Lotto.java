@@ -9,21 +9,21 @@ public class Lotto {
     private static final int TOTAL_PER_LOTTO = 6;
 
     private final Set<Integer> numbers;
-    private final LottoRandomGenerator generator;
 
     public Lotto() {
-        this.generator = new LottoRandomGenerator();
-        this.numbers = create();
+        this(new LottoRandomGenerator());
     }
 
     public Lotto(Long seed) {
-        this.generator = new LottoRandomGenerator(seed);
-        this.numbers = create();
+        this(new LottoRandomGenerator(seed));
     }
 
     public Lotto(LottoRandomGenerator generator) {
-        this.generator = generator;
-        this.numbers = create();
+        this(generator.generate(TOTAL_PER_LOTTO));
+    }
+
+    public Lotto(Set<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public Set<Integer> getNumbers() {
@@ -32,13 +32,5 @@ public class Lotto {
 
     public boolean contains(int n) {
         return this.numbers.contains(n);
-    }
-
-    private Set<Integer> create() {
-        Set<Integer> result = new HashSet<>();
-        while (result.size() < TOTAL_PER_LOTTO) {
-            result.add(generator.pick());
-        }
-        return result;
     }
 }
