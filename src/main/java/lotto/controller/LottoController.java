@@ -46,7 +46,7 @@ public class LottoController {
         for (WinningPrize prize : WinningPrize.values()) {
             int prizeMoney = prize.getPrizeMoney();
             int count = matchCount[prize.ordinal()];
-            ResultView.printMatchCount(prize.getMatchCount(), prizeMoney, count);
+            ResultView.printMatchCount(prize, count);
         }
 
         double winningRate = WinningUtils.calculateWinningRate(moneyAmount, totalWinningAmount);

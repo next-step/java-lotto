@@ -2,13 +2,12 @@ package lotto.service;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoResult;
 import lotto.util.WinningUtils;
 import lotto.domain.WinningPrize;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class LottoService {
@@ -33,25 +32,25 @@ public class LottoService {
         return userLottos;
     }
 
-    public int getTotalWinningAmount(List<LottoNumbers> userLottos, Set<Integer> winningNumbers) {
+    public int getTotalWinningAmount(int bonusBall, List<LottoNumbers> userLottos, Set<Integer> winningNumbers) {
         int totalWinningAmount = 0;
 
         for (LottoNumbers userLotto : userLottos) {
-            int count = WinningUtils.countMatchingNumbers(winningNumbers, userLotto);
-            totalWinningAmount = addTotalWinningAmount(count, totalWinningAmount);
+            LottoResult lottoResult = WinningUtils.countMatchingNumbers(bonusBall, winningNumbers, userLotto);
+            totalWinningAmount = addTotalWinningAmount(lottoResult, totalWinningAmount);
         }
         return totalWinningAmount;
     }
 
-    private int addTotalWinningAmount(int count, int totalWinningAmount) {
-        if (count >= MINIMUM_MATCH_COUNT) {
-            totalWinningAmount = processWinningLotto(count, matchCount, totalWinningAmount);
+    private int addTotalWinningAmount(LottoResult lottoResult, int totalWinningAmount) {
+        if (lottoResult.getMatchCount() >= MINIMUM_MATCH_COUNT) {
+            totalWinningAmount = processWinningLotto(lottoResult, totalWinningAmount);
         }
         return totalWinningAmount;
     }
 
-    private int processWinningLotto(int count, int[] matchCount, int totalWinningAmount) {
-        WinningPrize prize = WinningPrize.getPrizeByMatchCount(count);
+    private int processWinningLotto(LottoResult lottoResult, int totalWinningAmount) {
+        WinningPrize prize = WinningPrize.getPrizeByMatchCount(lottoResult.getMatchCount(), lottoResult.isBonus());
         if (prize != null) {
             matchCount[prize.ordinal()]++;
             totalWinningAmount += prize.getPrizeMoney();
