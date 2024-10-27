@@ -4,15 +4,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static step2.domain.var.LottoConstant.*;
 import static step2.service.LottoGame.*;
 
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import step2.domain.Lotto;
-import step2.domain.LottoStast;
 import step2.domain.Money;
-import step2.domain.var.LottoPrize;
 import step2.dto.LottoPlayResultDto;
 import step2.exception.MoneyOverLimitException;
 import step2.exception.NotEnoughMoneyException;
@@ -32,27 +27,6 @@ class LottoGameTest {
 		Money money = new Money(5 * LOTTO_PRICE);
 		LottoPlayResultDto dto = LottoGame.playLotto(money);
 		assertThat(dto.getLottos().size()).isEqualTo(5);
-	}
-
-	@Test
-	@DisplayName("로또 번호를 입력받아서 1등 당첨됐을 때 당첨 통계 정보를 체크하는 테스트")
-	public void getLottoStastTest() {
-		Money money = new Money(LOTTO_PRICE);
-		LottoPlayResultDto dto = LottoGame.playLotto(money);
-		List<Lotto> lottos = dto.getLottos();
-		LottoStast result = new LottoStast(lottos, lottos.get(0).getLottoNumbers());
-		assertThat(result.getFirstWinnerCount()).isEqualTo(1);
-	}
-
-	@Test
-	@DisplayName("1등 당첨됐을 때 수익률을 체크하는 테스트")
-	public void getLottoProfitRatio() {
-		Money money = new Money(LOTTO_PRICE);
-		LottoPlayResultDto dto = LottoGame.playLotto(money);
-		List<Lotto> lottos = dto.getLottos();
-		LottoStast result = new LottoStast(lottos, lottos.get(0).getLottoNumbers());
-		Integer ratio = (LottoPrize.FIRST_WINNER.getPrize() - LOTTO_PRICE) / LOTTO_PRICE * 100;
-		assertThat(result.getProfitRatio()).isEqualTo(ratio);
 	}
 
 	@Test

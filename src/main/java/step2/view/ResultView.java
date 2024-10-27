@@ -8,30 +8,32 @@ import step2.domain.Money;
 import step2.domain.var.LottoPrize;
 
 public class ResultView {
-
 	public static void printLottoResult(List<Lotto> result) {
-		System.out.println(result.size() + " 개를 구매했습니다.");
+		StringBuilder sb = new StringBuilder();
+		sb.append(result.size()).append(" 개를 구매했습니다.\n");
 		for (Lotto lotto : result) {
-			System.out.println(lotto.toString());
+			sb.append(lotto.toString()).append("\n");
 		}
+		System.out.println(sb);
 	}
 
 	public static void printLottoStast(LottoStast stastResult) {
-		System.out.println("당첨 통계");
-		System.out.println("---------");
-		System.out.println(LottoPrize.FOURTH_WINNER.getCount() + "개 일치 (" +
-			LottoPrize.FOURTH_WINNER.getPrize() + "원) - " + stastResult.getFourthWinnerCount() + "개");
-		System.out.println(LottoPrize.THIRD_WINNER.getCount() + "개 일치 (" +
-			LottoPrize.THIRD_WINNER.getPrize() + "원) - " + stastResult.getThirdWinnerCount() + "개");
-		System.out.println(LottoPrize.SECOND_WINNER.getCount() + "개 일치 (" +
-			LottoPrize.SECOND_WINNER.getPrize() + "원) - " + stastResult.getSecondWinnerCount() + "개");
-		System.out.println(LottoPrize.FIRST_WINNER.getCount() + "개 일치 (" +
-			LottoPrize.FIRST_WINNER.getPrize() + "원) - " + stastResult.getFirstWinnerCount() + "개");
-
-		System.out.println("총 수익률은 " + stastResult.getProfitRatio() + "% 입니다.");
+		StringBuilder sb = new StringBuilder();
+		sb.append("당첨 통계").append("\n");
+		sb.append("---------").append("\n");
+		for (LottoPrize prize : LottoPrize.values()) {
+			sb.append(prize.getCount())
+				.append("개 일치 (")
+				.append(prize.getPrize())
+				.append("원) - ")
+				.append(stastResult.getWinnerCount(prize))
+				.append("개\n");
+		}
+		sb.append("총 수익률은 ").append(stastResult.getProfitRatio()).append("% 입니다.\n");
+		System.out.println(sb);
 	}
 
 	public static void printChange(Money change) {
-		System.out.println("로또를 사고 남은 거스름돈 " + change + "원을 받았습니다.");
+		System.out.println("로또를 사고 남은 거스름돈 " + change.getMoney() + "원을 받았습니다.");
 	}
 }

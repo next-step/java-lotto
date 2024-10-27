@@ -10,6 +10,7 @@ public class LottoController {
 		Money money = InputView.getMoney();
 		LottoPlayResultDto resultDto = LottoGame.playLotto(money);
 		ResultView.printLottoResult(resultDto.getLottos());
+
 		String winningNumbers = InputView.getWinningNumbers();
 		LottoStast stastResult = LottoGame.getLottoStast(resultDto.getLottos(), winningNumbers);
 		ResultView.printLottoStast(stastResult);

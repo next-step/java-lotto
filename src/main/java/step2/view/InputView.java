@@ -9,14 +9,12 @@ public class InputView {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("구입금액을 입력해 주세요.");
 		String input = scanner.nextLine();
-		int money;
 		try {
-			money = Integer.parseInt(input);
+			int money = Integer.parseInt(input);
+			return new Money(money);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("입력값이 잘못되었습니다.");
 		}
-
-		return new Money(money);
 	}
 
 	public static String getWinningNumbers() {

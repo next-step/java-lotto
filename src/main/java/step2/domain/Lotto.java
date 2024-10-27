@@ -2,7 +2,6 @@ package step2.domain;
 
 import static step2.domain.var.LottoConstant.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,18 +9,18 @@ public class Lotto {
 	private final List<LottoNumber> lottoNumbers;
 
 	public Lotto(List<LottoNumber> lottoNumbers) {
-		if (lottoNumbers.size() != 6) {
-			throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+		if (lottoNumbers.size() != LOTTO_COUNT) {
+			throw new IllegalArgumentException("로또 번호는 " + LOTTO_COUNT + "개여야 합니다.");
 		}
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	public static int getAmountByMoney(Money money) {
+	public static int getPossibleAmountByMoney(Money money) {
 		return money.getMoney() / LOTTO_PRICE;
 	}
 
-	public List<LottoNumber> getLottoNumbers() {
-		return new ArrayList<>(lottoNumbers);
+	public boolean contains(LottoNumber winNumber) {
+		return lottoNumbers.contains(winNumber);
 	}
 
 	@Override
@@ -52,4 +51,5 @@ public class Lotto {
 	public int hashCode() {
 		return Objects.hashCode(lottoNumbers);
 	}
+
 }
