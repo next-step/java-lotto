@@ -14,15 +14,19 @@ public class Lottery {
         validateLottoNumberSize(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 
-    public int countWinningNumbers(Lottery winningNumbers) {
+    public int countMatchedNumbers(Lottery lottery) {
         Set<LottoNumber> equalNumbers = new HashSet<>(this.lottoNumbers);
-        equalNumbers.retainAll(winningNumbers.lottoNumbers);
+        equalNumbers.retainAll(lottery.lottoNumbers);
 
         return equalNumbers.size();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
@@ -37,20 +41,9 @@ public class Lottery {
                 .collect(Collectors.toList());
     }
 
-    public LottoResult createLottoResult(Lottery winningNumbers, LottoNumber lottoNumber) {
-        int equalNumberCount = countWinningNumbers(winningNumbers);
-        boolean hasBonusNumber = hasBonusNumber(lottoNumber);
-
-        return new LottoResult(hasBonusNumber, equalNumberCount);
-    }
-
     private void validateLottoNumberSize(Set<Integer> lottoNumbers) {
         if (lottoNumbers == null || lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(String.format("로또번호는 %d개 이어야 합니다", LOTTO_NUMBERS_SIZE));
         }
-    }
-
-    private boolean hasBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
     }
 }

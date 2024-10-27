@@ -3,27 +3,23 @@ package lotto.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Set;
+
 public class LotteriesTest {
     @Test
-    void 구매금액에_맞게_로또번호_리스트_생성() {
+    void 수동로또번호와_자동로또개수에_맞게_로또_생성() {
         // given
-        int purchaseAmount = 14000;
+        List<Lottery> manualLottoNumbersList = List.of(
+                new Lottery(Set.of(1, 2, 3, 4, 5, 6)),
+                new Lottery(Set.of(7, 8, 9, 10, 11, 12))
+        );
+        int autoLotteryCount = 12;
 
         // when
-        Lotteries lottoList = Lotteries.purchase(purchaseAmount);
+        Lotteries lotteries = new Lotteries(manualLottoNumbersList, autoLotteryCount);
 
         // then
-        Assertions.assertThat(lottoList.size()).isEqualTo(14);
-    }
-
-    @Test
-    void 구매금액이_1000_보다_낮으면_예외_발생() {
-        // given
-        int purchaseAmount = 999;
-
-        // when, then
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Lotteries.purchase(purchaseAmount))
-                .withMessage("구입금액은 1000 이상이어야 합니다");
+        Assertions.assertThat(lotteries.size()).isEqualTo(14);
     }
 }

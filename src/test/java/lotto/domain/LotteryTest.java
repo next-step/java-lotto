@@ -13,7 +13,7 @@ class LotteryTest {
         Lottery lottery = new Lottery(Set.of(1, 2, 10, 11, 12, 13));
 
         // when
-        int equalNumberCount = lottery.countWinningNumbers(winningLottery);
+        int equalNumberCount = lottery.countMatchedNumbers(winningLottery);
 
         // then
         Assertions.assertThat(equalNumberCount).isEqualTo(2);

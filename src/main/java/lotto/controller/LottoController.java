@@ -1,27 +1,27 @@
 package lotto.controller;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Lottery;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoStatistics;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Set;
 
 public class LottoController {
     public static void purchaseAutoLotto() {
         int totalPurchaseAmount = InputView.inputTotalPurchaseAmount();
-        Lotteries lotteries = Lotteries.purchase(totalPurchaseAmount);
-        ResultView.printPurchasedLottoNumberList(lotteries);
+        int manualLottoAmount = InputView.inputManualLottoAmount();
+        LotteryBuyer lotteryBuyer = LotteryBuyer.of(totalPurchaseAmount, manualLottoAmount);
+
+        List<Lottery> manualLottoNumbers = InputView.inputAndParseManualLotteries(manualLottoAmount);
+        Lotteries lotteries = lotteryBuyer.purchaseLotteries(manualLottoNumbers);
+        ResultView.printPurchasedLottoNumberList(lotteries, manualLottoNumbers.size());
 
         Set<Integer> inputWinningNumbers = InputView.inputLastWeekWinningNumbers();
-        Lottery winningLottery = new Lottery(inputWinningNumbers);
+        int inputBonusNumber = InputView.inputBonusNumber();
+        WinningLottery winningLottery = new WinningLottery(inputWinningNumbers, inputBonusNumber);
 
-        Integer inputBonusNumber = InputView.inputBonusNumber();
-        LottoNumber bonusNumber = new LottoNumber(inputBonusNumber);
-
-        LottoStatistics lottoStatistics = lotteries.createStatistics(winningLottery, bonusNumber);
+        LottoStatistics lottoStatistics = lotteries.createStatistics(winningLottery);
         float profitRate = lottoStatistics.calculateProfitRate(totalPurchaseAmount);
         ResultView.printResult(lottoStatistics, profitRate);
     }

@@ -5,47 +5,49 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotteries {
-    private static final int LOTTO_PRICE = 1000;
 
     private final List<Lottery> lotteries;
 
-    public static Lotteries purchase(int purchaseAmount) {
-        if (purchaseAmount < LOTTO_PRICE) {
-            throw new IllegalArgumentException("구입금액은 1000 이상이어야 합니다");
-        }
-
-        int lottoCount = purchaseAmount / LOTTO_PRICE;
-        return generateLottoNumbersList(lottoCount);
+    private Lotteries(List<Lottery> lotteries) {
+        this.lotteries = lotteries;
     }
 
-    public Lotteries(List<Lottery> lotteries) {
-        this.lotteries = lotteries;
+    public Lotteries(List<Lottery> manualLotteries, int lottoCount) {
+        this(mergeLotteries(manualLotteries, generateAutoLotteries(lottoCount)));
     }
 
     public int size() {
         return lotteries.size();
     }
 
-    public LottoStatistics createStatistics(Lottery winningLottery, LottoNumber bonusNumber) {
-        List<LottoResult> lottoResults = getLottoResults(winningLottery, bonusNumber);
-        return LottoStatistics.create(lottoResults);
+    public LottoStatistics createStatistics(WinningLottery winningLottery) {
+        List<LottoRank> lottoRanks = getLottoRanks(winningLottery);
+        return LottoStatistics.create(lottoRanks);
     }
 
-    private List<LottoResult> getLottoResults(Lottery winningLottery, LottoNumber bonusNumber) {
-        List<LottoResult> lottoResults = new ArrayList<>();
+    private List<LottoRank> getLottoRanks(WinningLottery winningLottery) {
+        List<LottoRank> ranks = new ArrayList<>();
 
         for (Lottery lottery : lotteries) {
-            lottoResults.add(lottery.createLottoResult(winningLottery, bonusNumber));
+            ranks.add(winningLottery.createLottoRank(lottery));
         }
 
-        return lottoResults;
+        return ranks;
     }
 
     public List<Lottery> getLotteries() {
         return lotteries;
     }
 
-    private static Lotteries generateLottoNumbersList(int lottoCount) {
+    private static List<Lottery> mergeLotteries(List<Lottery> manualLotteries, List<Lottery> autoLotteries) {
+        List<Lottery> lotteries = new ArrayList<>();
+        lotteries.addAll(manualLotteries);
+        lotteries.addAll(autoLotteries);
+
+        return lotteries;
+    }
+
+    private static List<Lottery> generateAutoLotteries(int lottoCount) {
         LottoNumberGenerator lottoNumberGenerator = new RandomLottoNumberGenerator();
         List<Lottery> lotteries = new ArrayList<>();
 
@@ -54,6 +56,6 @@ public class Lotteries {
             lotteries.add(new Lottery(generatedNumbers));
         }
 
-        return new Lotteries(lotteries);
+        return lotteries;
     }
 }
