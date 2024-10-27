@@ -14,6 +14,11 @@ import java.util.Set;
 public class LottoService {
 
     public static final int MINIMUM_MATCH_COUNT = 3;
+    private static int[] matchCount = new int[WinningPrize.values().length];
+
+    public static int[] getMatchCount() {
+        return matchCount;
+    }
 
     public int calculateLottoAmount(LottoMoney money) {
         return money.calculateLottoAmount();
@@ -28,7 +33,7 @@ public class LottoService {
         return userLottos;
     }
 
-    public Map<Integer, Integer> initializeMatchCountMap() {
+    private Map<Integer, Integer> initializeMatchCountMap() {
         Map<Integer, Integer> matchCountMap = new HashMap<>();
         for (WinningPrize prize : WinningPrize.values()) {
             matchCountMap.put(prize.getMatchCount(), 0);
@@ -36,20 +41,30 @@ public class LottoService {
         return matchCountMap;
     }
 
-    public int getTotalWinningAmount(List<LottoNumbers> userLottos, Set<Integer> winningNumbers, Map<Integer, Integer> matchCountMap) {
+    public int getTotalWinningAmount(List<LottoNumbers> userLottos, Set<Integer> winningNumbers) {
         int totalWinningAmount = 0;
+
         for (LottoNumbers userLotto : userLottos) {
-            int matchCount = WinningUtils.countMatchingNumbers(winningNumbers, userLotto);
-            totalWinningAmount = calculateWinningAmount(matchCountMap, matchCount, totalWinningAmount);
+            int count = WinningUtils.countMatchingNumbers(winningNumbers, userLotto);
+            totalWinningAmount = addTotalWinningAmount(count, totalWinningAmount);
         }
         return totalWinningAmount;
     }
 
-    private static int calculateWinningAmount(Map<Integer, Integer> matchCountMap, int matchCount, int totalWinningAmount) {
-        if (matchCount >= MINIMUM_MATCH_COUNT) {
-            matchCountMap.put(matchCount, matchCountMap.get(matchCount) + 1);
-            totalWinningAmount += WinningUtils.getPrizeMoney(matchCount);
+    private int addTotalWinningAmount(int count, int totalWinningAmount) {
+        if (count >= MINIMUM_MATCH_COUNT) {
+            totalWinningAmount = processWinningLotto(count, matchCount, totalWinningAmount);
         }
         return totalWinningAmount;
     }
+
+    private int processWinningLotto(int count, int[] matchCount, int totalWinningAmount) {
+        WinningPrize prize = WinningPrize.getPrizeByMatchCount(count);
+        if (prize != null) {
+            matchCount[prize.ordinal()]++;
+            totalWinningAmount += prize.getPrizeMoney();
+        }
+        return totalWinningAmount;
+    }
+
 }

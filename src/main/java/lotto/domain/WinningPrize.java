@@ -6,6 +6,15 @@ public enum WinningPrize {
     FIVE(5, 1_500_000),
     SIX(6, 2_000_000_000);
 
+    public static WinningPrize getPrizeByMatchCount(int matchCount) {
+        for (WinningPrize prize : values()) {
+            if (prize.getMatchCount() == matchCount) {
+                return prize;
+            }
+        }
+        return null;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }

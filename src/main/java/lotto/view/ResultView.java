@@ -15,9 +15,12 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(List<LottoNumbers> selectedNumbers) {
+        StringBuilder stringBuilder = new StringBuilder();
+
         for (LottoNumbers lottoNumbers : selectedNumbers) {
-            System.out.println(lottoNumbers.getNumbers());
+            stringBuilder.append(lottoNumbers.getNumbers()).append(System.lineSeparator());
         }
+        System.out.println(stringBuilder.toString());
     }
 
     public static void printResult() {

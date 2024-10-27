@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoMoney;
+import lotto.domain.WinningPrize;
 import lotto.service.LottoService;
 import lotto.util.WinningUtils;
 import lotto.view.InputView;
@@ -33,19 +34,18 @@ public class LottoController {
         ResultView.printLottoNumbers(userLottos);
 
         Set<Integer> winningNumbers = InputView.getWinningNumbers();
-        Map<Integer, Integer> matchCountMap = lottoService.initializeMatchCountMap();
-
-        int totalWinningAmount = lottoService.getTotalWinningAmount(userLottos, winningNumbers, matchCountMap);
+        int totalWinningAmount = lottoService.getTotalWinningAmount(userLottos, winningNumbers);
         ResultView.printResult();
 
-        printResults(matchCountMap, moneyAmount, totalWinningAmount);
+        int[] matchCount = lottoService.getMatchCount();
+        printResults(moneyAmount, totalWinningAmount, matchCount);
     }
 
-    private static void printResults(Map<Integer, Integer> matchCountMap, int moneyAmount, int totalWinningAmount) {
-        for (int matchCount : matchCountMap.keySet()) {
-            int prizeMoney = WinningUtils.getPrizeMoney(matchCount);
-            int count = matchCountMap.get(matchCount);
-            ResultView.printMatchCount(matchCount, prizeMoney, count);
+    private void printResults(int moneyAmount, int totalWinningAmount, int[] matchCount) {
+        for (WinningPrize prize : WinningPrize.values()) {
+            int prizeMoney = prize.getPrizeMoney();
+            int count = matchCount[prize.ordinal()];
+            ResultView.printMatchCount(prize.getMatchCount(), prizeMoney, count);
         }
 
         double winningRate = WinningUtils.calculateWinningRate(moneyAmount, totalWinningAmount);
