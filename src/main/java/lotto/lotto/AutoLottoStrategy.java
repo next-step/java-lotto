@@ -8,15 +8,25 @@ import java.util.List;
 
 public class AutoLottoStrategy implements LottoGeneratorStrategy {
 
-    @Override
-    public Lotto generateLotto() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        addLottos(lottoNumbers);
-        shuffleLotto(lottoNumbers);
-        List<LottoNumber> newLottoNumbers = answerLotto(lottoNumbers);
-        sortLotto(newLottoNumbers);
+    public final int autoCnt;
 
-        return new Lotto(newLottoNumbers);
+    public AutoLottoStrategy(int autoCnt) {
+        this.autoCnt = autoCnt;
+    }
+
+    @Override
+    public Lottos generateLotto() {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < autoCnt; i++) {
+            List<LottoNumber> lottoNumbers = new ArrayList<>();
+            addLottos(lottoNumbers);
+            shuffleLotto(lottoNumbers);
+            List<LottoNumber> newLottoNumbers = answerLotto(lottoNumbers);
+            sortLotto(newLottoNumbers);
+            Lotto lotto = new Lotto(newLottoNumbers);
+            lottos.add(lotto);
+        }
+        return new Lottos(lottos);
     }
 
     public void addLottos(List<LottoNumber> lottoNumbers) {

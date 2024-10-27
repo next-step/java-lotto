@@ -1,7 +1,6 @@
 package lotto.lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -9,6 +8,11 @@ public class Lottos {
 
     public Lottos(List<Lotto> createLotto) {
         lottos.addAll(createLotto);
+    }
+
+    public Lottos(List<Lotto> autoLotto, List<Lotto> manualLotto) {
+        lottos.addAll(autoLotto);
+        lottos.addAll(manualLotto);
     }
 
     public List<Lotto> getLottos() {
