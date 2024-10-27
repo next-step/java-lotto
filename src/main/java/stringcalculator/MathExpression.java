@@ -21,14 +21,14 @@ public class MathExpression {
     }
 
     public void checkMathExpressionRegex() {
-        Matcher matcher = MatcherUtil.customMatcher(NON_CALCULATOR_REGEX, mathExpression);
+        Matcher matcher = MatcherGenerator.customMatcher(NON_CALCULATOR_REGEX, mathExpression);
         if (matcher.find()) {
             throw new IllegalArgumentException();
         }
     }
 
     public void checkNonOperator() {
-        Matcher matcher = MatcherUtil.customMatcher(OPERATOR_REGEX, mathExpression);
+        Matcher matcher = MatcherGenerator.customMatcher(OPERATOR_REGEX, mathExpression);
         if (!matcher.find()) {
             throw new IllegalArgumentException();
         }
