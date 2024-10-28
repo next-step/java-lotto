@@ -21,8 +21,7 @@ public class LottoApp {
         LottoTicketMaker lottoTicketMaker = new LottoTicketMaker(price, manualNumbers);
         LottoTickets lottoTickets = lottoTicketMaker.createLottoTickets();
 
-        ResultView.printTicketCount(lottoTickets.size());
-        ResultView.printTickets(lottoTickets);
+        ResultView.printTicketInfo(lottoTickets);
 
         LottoTicket winningNumbers = InputView.getWinningNumbers();
         LottoNumber bonusNumber = InputView.getBonusNumber();

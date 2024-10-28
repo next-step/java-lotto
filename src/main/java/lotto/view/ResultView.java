@@ -6,14 +6,20 @@ import lotto.domain.Winning;
 import lotto.domain.WinningCalculator;
 
 public class ResultView {
-    public static void printTicketCount(int size) {
+    public static void printTicketInfo(LottoTickets lottoTickets) {
+        printTicketCount(lottoTickets.size());
+        printTickets(lottoTickets);
+    }
+
+    private static void printTicketCount(int size) {
         System.out.println(size + "개를 구매했습니다.");
     }
 
-    public static void printTickets(LottoTickets lottoTickets) {
-        for (LottoTicket ticket : lottoTickets.getLottoTickets()) {
-            System.out.println(ticket.getLottoNumbers());
-        }
+    private static void printTickets(LottoTickets lottoTickets) {
+        lottoTickets.getLottoTickets()
+                    .stream()
+                    .map(LottoTicket::getLottoNumbers)
+                    .forEach(System.out::println);
     }
 
     public static void printWinningResult(WinningCalculator winningCalculator) {
