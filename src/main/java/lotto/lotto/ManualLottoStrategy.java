@@ -1,5 +1,7 @@
 package lotto.lotto;
 
+import lotto.system.Const;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,15 +9,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ManualLottoStrategy implements LottoGeneratorStrategy {
-    private String[] lottoArray;
 
-    public ManualLottoStrategy(String[] manualLottos) {
-        this.lottoArray = manualLottos;
+    public ManualLottoStrategy() {
     }
 
     @Override
-    public Lottos generateLotto() {
-        Optional<String[]> optional = Optional.ofNullable(lottoArray);
+    public Lottos generateLotto(LottoParameters lottoParameters) {
+        Optional<String[]> optional = Optional.ofNullable(lottoParameters.getManualLottos());
         List<Lotto> lottos = new ArrayList<>();
 
         if (optional.isPresent()) {
@@ -29,7 +29,7 @@ public class ManualLottoStrategy implements LottoGeneratorStrategy {
         List<Lotto> result = new ArrayList<>();
 
         for (String str : array) {
-            List<String> lottoStr = Arrays.asList(str.split(", "));
+            List<String> lottoStr = Arrays.asList(str.split(Const.DELIMITER));
             List<LottoNumber> lottoNumber = lottoStr.stream()
                     .map(LottoNumber::from)
                     .collect(Collectors.toList());
@@ -44,7 +44,7 @@ public class ManualLottoStrategy implements LottoGeneratorStrategy {
     }
 
     private void validateLottoNumberCnt(List<LottoNumber> lottoNumber) {
-        if (lottoNumber.size() != 6) {
+        if (lottoNumber.size() != Const.LOTTO_CNT) {
             throw new IllegalArgumentException("로또 번호는 6개 입니다.");
         }
     }

@@ -15,8 +15,8 @@ public class LottoMachine {
         validatePrice(price);
     }
 
-    public Lottos createLottos(LottoGeneratorStrategy lottoGeneratorStrategy) {
-        return lottoGeneratorStrategy.generateLotto();
+    public Lottos createLottos(LottoGeneratorStrategy lottoGeneratorStrategy, LottoParameters lottoParameters) {
+        return lottoGeneratorStrategy.generateLotto(lottoParameters);
     }
 
     public int getAutoCnt() {

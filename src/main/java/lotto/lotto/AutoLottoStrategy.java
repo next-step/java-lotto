@@ -2,28 +2,22 @@ package lotto.lotto;
 
 import lotto.system.Const;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class AutoLottoStrategy implements LottoGeneratorStrategy {
 
-    public final int autoCnt;
-
-    public AutoLottoStrategy(int autoCnt) {
-        this.autoCnt = autoCnt;
+    public AutoLottoStrategy() {
     }
 
     @Override
-    public Lottos generateLotto() {
+    public Lottos generateLotto(LottoParameters lottoParameters) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < autoCnt; i++) {
+        for (int i = 0; i < lottoParameters.getAutoCount(); i++) {
             List<LottoNumber> lottoNumbers = new ArrayList<>();
             addLottos(lottoNumbers);
             shuffleLotto(lottoNumbers);
-            List<LottoNumber> newLottoNumbers = answerLotto(lottoNumbers);
-            sortLotto(newLottoNumbers);
-            Lotto lotto = new Lotto(newLottoNumbers);
+            SortedSet<LottoNumber> resultNumbers = answerLotto(lottoNumbers);
+            Lotto lotto = new Lotto(resultNumbers);
             lottos.add(lotto);
         }
         return new Lottos(lottos);
@@ -39,12 +33,8 @@ public class AutoLottoStrategy implements LottoGeneratorStrategy {
         Collections.shuffle(lottoNumbers);
     }
 
-    private void sortLotto(List<LottoNumber> lottoNumbers) {
-        Collections.sort(lottoNumbers);
-    }
-
-    public List<LottoNumber> answerLotto(List<LottoNumber> lottoNumbers) {
-        return new ArrayList<>(lottoNumbers.subList(0, Const.LOTTO_CNT));
+    public SortedSet<LottoNumber> answerLotto(List<LottoNumber> lottoNumbers) {
+        return new TreeSet<>(lottoNumbers.subList(0, Const.LOTTO_CNT));
     }
 
 }

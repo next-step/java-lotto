@@ -9,6 +9,9 @@ public class Lotto {
     public Lotto() {
     }
 
+    public Lotto(SortedSet<LottoNumber> lottoNumbers) {
+        this(new ArrayList<>(lottoNumbers));
+    }
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers.addAll(lottoNumbers);
     }

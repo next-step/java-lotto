@@ -8,8 +8,10 @@ public class LottoService {
     }
 
     public Lottos createLotto(LottoMachine lottoMachine, String[] inputLottos) {
-        Lottos autoLottos = lottoMachine.createLottos(new AutoLottoStrategy(lottoMachine.getAutoCnt()));
-        Lottos manuaLottos = lottoMachine.createLottos(new ManualLottoStrategy(inputLottos));
+        LottoParameters lottoParameters = new LottoParameters(inputLottos, lottoMachine.getAutoCnt());
+
+        Lottos autoLottos = lottoMachine.createLottos(new AutoLottoStrategy(), lottoParameters);
+        Lottos manuaLottos = lottoMachine.createLottos(new ManualLottoStrategy(), lottoParameters);
 
         return new Lottos(autoLottos.getLottos(), manuaLottos.getLottos());
     }
