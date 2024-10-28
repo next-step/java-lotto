@@ -9,7 +9,7 @@ import lotto.domain.WinningCalculator;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static void printTicketInfo(LottoTickets lottoTickets) {
+    public static void printTicketsInfo(LottoTickets lottoTickets) {
         printTicketCount(lottoTickets.size());
         printTickets(lottoTickets);
     }

@@ -14,7 +14,7 @@ public class LottoApp {
     public static void main(String[] args) {
         LottoTicketMaker lottoTicketMaker = InputView.getLottoTicketMaker();
         LottoTickets lottoTickets = lottoTicketMaker.createLottoTickets();
-        ResultView.printTicketInfo(lottoTickets);
+        ResultView.printTicketsInfo(lottoTickets);
 
         LottoWinningNumbers lottoWinningNumbers = InputView.getLottoWinningNumbers();
         List<Winning> winnings = lottoTickets.calculateWinningResults(lottoWinningNumbers);
