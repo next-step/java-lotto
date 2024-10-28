@@ -12,9 +12,19 @@ public class LottoTickets {
     }
 
     public static LottoTickets createByCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("로또 티켓은 0개 이상이어야 합니다.");
+        }
         return new LottoTickets(Stream.generate(LottoTicket::createAuto)
                                       .limit(count)
                                       .collect(Collectors.toList()));
+    }
+
+    public static LottoTickets createByPrice(int price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("구매 금액은 0원 이상이어야 합니다.");
+        }
+        return createByCount(calculateTicketCount(price));
     }
 
     private static int calculateTicketCount(int price) {
