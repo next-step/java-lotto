@@ -7,12 +7,15 @@ import lotto.domain.WinningStatistics;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.util.List;
+
 public class LottoController {
 
     public static void main(String[] args) {
         int purchasePrice = InputView.readPurchasePrice();
-        LotteryMachine lotteryMachine = new LotteryMachine(purchasePrice);
-        ResultView.printLottoInfo(lotteryMachine);
+        List<String> manualLottoNumbers = InputView.readManualLottoNumbers();
+        LotteryMachine lotteryMachine = LotteryMachine.createWithManualLottos(manualLottoNumbers, purchasePrice);
+        ResultView.printLottoInfo(lotteryMachine, manualLottoNumbers.size());
 
         Lotto winningLotto = new Lotto(InputView.readWinningLottoNumber());
         LottoNumber bonusNumber = new LottoNumber(InputView.readBonusNumber());
