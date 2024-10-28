@@ -32,7 +32,7 @@ public class LottoStore {
         return UniqueRandomNumberProvider.provideInRange(min, max, size);
     }
 
-    public Rank check(Lotto userLottos, WinningLotto winning) {
-        return LottoRank.match(userLottos.matchCount(winning),winning.hasBonusNumber(userLottos));
+    public Rank check(Lotto lotto, WinningLotto winning) {
+        return winning.match(lotto);
     }
 }

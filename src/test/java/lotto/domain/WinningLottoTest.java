@@ -16,13 +16,13 @@ public class WinningLottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), bonusNumber));
     }
 
-    @CsvSource(value = {"7,true", "8,false"}, delimiter = ',')
+    @CsvSource(value = {"7,SECOND", "8,THIRD"}, delimiter = ',')
     @ParameterizedTest
-    public void 로또보너스_번호가_존재확인(int bonusNumber, boolean result) {
+    public void 로또보너스_번호가_존재확인(int bonusNumber, LottoRank rank) {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
-        WinningLotto winningLotto = new WinningLotto(List.of(33, 34, 35, 36, 37, 38), bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 9), bonusNumber);
 
-        assertThat(winningLotto.hasBonusNumber(lotto)).isEqualTo(result);
+        assertThat(winningLotto.match(lotto)).isEqualTo(rank);
     }
 
 }

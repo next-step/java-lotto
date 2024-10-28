@@ -11,12 +11,13 @@ import lotto.dto.RankResult;
 
 public class LottoController {
     private static final LottoStore store = new LottoStore();
+
     public List<Lotto> buy(int fee) {
         return store.buy(new Money(fee));
     }
 
-    public RankResult check(String winningNumbers,int bonus, List<Lotto> lottos) {
-        WinningLotto winningLotto = Lotto.createWinningLotto(winningNumbers,bonus);
+    public RankResult check(String winningNumbers, int bonus, List<Lotto> lottos) {
+        WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonus);
         List<Rank> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
             result.add(store.check(lotto, winningLotto));

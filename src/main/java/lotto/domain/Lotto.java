@@ -8,13 +8,13 @@ import lotto.settings.LottoSettings;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        if (hasInvalidNumber(numbers) || hasIncorrectSize(numbers) || hasDuplicates(numbers)) {
+        if (hasIncorrectSize(numbers) || hasDuplicates(numbers)) {
             throw new IllegalArgumentException("올바르지 않은 입력 입니다.");
         }
-        this.numbers = numbers;
+        this.numbers = toLottoNumber(numbers);
     }
 
     private boolean hasDuplicates(List<Integer> numbers) {
@@ -25,20 +25,12 @@ public class Lotto {
         return !LottoSettings.isValidSize(numbers.size());
     }
 
-    private boolean hasInvalidNumber(List<Integer> numbers) {
-        return numbers.stream().anyMatch(i -> outOfRange(i));
-    }
-
-    protected static boolean outOfRange(Integer i) {
-        return !LottoSettings.isNumberInValidRange(i);
+    private List<LottoNumber> toLottoNumber(List<Integer> numbers) {
+        return numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
     public static Lotto from(String value) {
         return new Lotto(toNumbers(split(value)));
-    }
-
-    public static WinningLotto createWinningLotto(String value, int bonusNumber) {
-        return new WinningLotto(toNumbers(split(value)), bonusNumber);
     }
 
     private static String[] split(String value) {
@@ -53,7 +45,7 @@ public class Lotto {
         return (int) winning.numbers.stream().filter(this::containNumber).count();
     }
 
-    protected boolean containNumber(int number) {
+    public boolean containNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
 
@@ -76,7 +68,7 @@ public class Lotto {
 
     @Override
     public String toString() {
-        List<Integer> sortNumbers = numbers.stream().sorted().collect(Collectors.toList());
+        List<LottoNumber> sortNumbers = numbers.stream().sorted().collect(Collectors.toList());
         return sortNumbers.toString();
     }
 }

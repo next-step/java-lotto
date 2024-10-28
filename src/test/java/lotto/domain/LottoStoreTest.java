@@ -33,7 +33,7 @@ public class LottoStoreTest {
     public void 로또_결과를_확인한다(List<Integer> userNumbers, LottoRank expectedRank) {
         LottoStore lottoStore = new LottoStore();
         Lotto userLottos = new Lotto(userNumbers);
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6),7);
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
 
         Rank result = lottoStore.check(userLottos, winningLotto);
 
