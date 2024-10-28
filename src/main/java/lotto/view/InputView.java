@@ -41,10 +41,14 @@ public class InputView {
         String[] lottoManual = new String[manual];
         if(manual > 0){
             System.out.print(INPUT_MANUAL_LOTTOS + " ");
-            for (int i = 0; i < lottoManual.length; i++) {
-                lottoManual[i] = scanner.nextLine();
-            }
+            inputManualLotto(lottoManual);
         }
         return lottoManual;
+    }
+
+    private static void inputManualLotto(String[] lottoManual) {
+        for (int i = 0; i < lottoManual.length; i++) {
+            lottoManual[i] = scanner.nextLine();
+        }
     }
 }
