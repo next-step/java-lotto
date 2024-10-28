@@ -1,52 +1,55 @@
 package lotto.view;
 
-import lotto.model.WinningInfo;
+import lotto.model.BoughtLotto;
+import lotto.model.WinningRecord;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private ResultView() {
     }
 
-    public static void printCanBuyLottoCount(int canBuyLottoCount) {
-        System.out.println(canBuyLottoCount + "개를 구매했습니다.");
+    public static void printBuyLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println("\n수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoNumber(List<Integer> lotto) {
-        Collections.sort(lotto);
-
-        System.out.println(lotto);
+    public static void printBoughtLottos(List<BoughtLotto> boughtLottos) {
+        for (BoughtLotto boughtLotto : boughtLottos) {
+            System.out.println(boughtLotto.getIntegerTypeNumbers());
+        }
     }
 
-    public static void printWinningStatics(Map<Integer, WinningInfo> winningStatics) {
-        System.out.println("당첨 통계");
+    public static void printWinningStatics(Map<Integer, WinningRecord> winningStatics) {
+        System.out.println("\n당첨 통계");
         System.out.println("----------");
 
         for (int rank = 5; rank >= 1; rank--) {
-            WinningInfo info = winningStatics.get(rank);
+            WinningRecord winningRecord = winningStatics.get(rank);
 
-            int matchCount = info.getMatchCount();
-            int prize = info.getPrize();
-            int winningCount = info.getWinningCount();
-
-            printWinningResult(rank, matchCount, prize, winningCount);
+            printWinningResult(rank, winningRecord);
         }
     }
 
-    private static void printWinningResult(int rank, int matchCount, int prize, int winningCount) {
-        String resultMessage = matchCount + "개 일치 (" + prize + "원)- " + winningCount + "개";
+    private static void printWinningResult(int rank, WinningRecord winningRecord) {
+        int matchCount = winningRecord.getMatchCount();
+        int prize = winningRecord.getPrize();
+        int winningCount = winningRecord.getWinningCount();
+
+        String resultMessage = matchCount + "개 일치";
 
         if (rank == 2) {
-            resultMessage = matchCount + "개 일치, 보너스 볼 일치(" + prize + "원)- " + winningCount + "개";
+            resultMessage += ", 보너스 볼 일치";
         }
+
+        resultMessage += " (" + prize + "원)- " + winningCount + "개";
 
         System.out.println(resultMessage);
     }
 
-
     public static void printReturnRate(float returnRate) {
         System.out.println("총 수익률은 " + String.format("%.2f", returnRate) + "입니다.");
     }
+
 }

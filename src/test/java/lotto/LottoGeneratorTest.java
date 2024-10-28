@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.service.LottoGenerator;
 import lotto.utility.Validator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 public class LottoGeneratorTest {
 
     @Test
-    public void 로또번호_생성() {
+    @DisplayName("1에서 45사이의 랜덤한 로또번호 생성 테스트")
+    public void generateLottoNumbers() {
         List<Integer> numbers = LottoGenerator.generateLottoNumbers();
 
         assertThat(numbers.size()).isEqualTo(6);
@@ -23,4 +25,5 @@ public class LottoGeneratorTest {
             assertThat(number).isLessThanOrEqualTo(45);
         });
     }
+
 }

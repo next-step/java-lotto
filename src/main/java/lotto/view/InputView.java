@@ -1,82 +1,97 @@
 package lotto.view;
 
+import lotto.service.LottoBuyer;
 import lotto.utility.Validator;
 
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-    private static final String WINNING_NUMBERS_FORMAT = "^\\d{1,2}(,\\s\\d{1,2}){5}$";
-
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
     }
 
     public static int inputBuyAmount() {
-        int purchaseAmount = 0;
+        System.out.println("구입금액을 입력해 주세요.");
+
+        int buyAmount = 0;
 
         try {
-            System.out.println("구입금액을 입력해 주세요.");
-            purchaseAmount = SCANNER.nextInt();
-            SCANNER.nextLine();
-        } catch (InputMismatchException e) {
+            buyAmount = Integer.parseInt(SCANNER.nextLine());
+        } catch (NumberFormatException e) {
             System.out.println("잘못된 입력입니다. 다시 입력해주세요");
+            System.exit(1);
         }
 
-        return purchaseAmount;
+        return buyAmount;
     }
 
-    public static String inputLastWeekWinningNumbers() {
-        System.out.println();
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    public static int inputManualLottoCount(int buyAmount) {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
 
-        String lastWeekWinningNumbers = SCANNER.nextLine();
-        isValidWinningNumbersInput(lastWeekWinningNumbers);
+        int manualLottoCount = 0;
 
-        return lastWeekWinningNumbers;
+        try {
+            manualLottoCount = Integer.parseInt(SCANNER.nextLine());
+
+            LottoBuyer.checkCanBuyLotto(buyAmount, manualLottoCount);
+        } catch (NumberFormatException e) {
+            System.out.println("잘못된 입력입니다. 다시 입력해주세요");
+            System.exit(1);
+        }
+
+        return manualLottoCount;
     }
 
-    private static void isValidWinningNumbersInput(String lastWeekWinningNumbers) {
-        isValidFormat(lastWeekWinningNumbers);
+    public static void printPromptForManualLottoNumbers() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
 
-        List<Integer> winningNumbers = Arrays.stream(lastWeekWinningNumbers.split(", "))
+    public static List<Integer> inputManualLottoNumbers() {
+        String lottoNumbers = SCANNER.nextLine();
+
+        isValidInput(lottoNumbers);
+
+        return Arrays.stream(lottoNumbers.split(", ")).map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    public static String inputWinningNumbers() {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+
+        String winningNumbers = SCANNER.nextLine();
+        isValidInput(winningNumbers);
+
+        return winningNumbers;
+    }
+
+    private static void isValidInput(String input) {
+        Validator.isValidFormat(input);
+
+        List<Integer> numbers = Arrays.stream(input.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        Validator.isValidNumbers(winningNumbers);
-    }
-
-    private static void isValidFormat(String lastWeekWinningNumbers) {
-        if (!lastWeekWinningNumbers.matches(WINNING_NUMBERS_FORMAT)) {
-            throw new IllegalArgumentException("잘못된 입력형식입니다. 1, 2, 3, 4, 5, 6과 같은 형태로 입력해주세요");
-        }
+        Validator.isValidNumbers(numbers);
     }
 
     public static int inputBonusNumber(String lastWeekWinningNumbers) {
-        System.out.println("보너스 볼을 입력해주세요.");
+        System.out.println("보너스 볼을 입력해 주세요.");
 
-        int bonusNumber = SCANNER.nextInt();
+        int bonusNumber = 0;
 
-        System.out.println();
+        try {
+            bonusNumber = Integer.parseInt(SCANNER.nextLine());
 
-        isValidBonusNumberInput(lastWeekWinningNumbers, bonusNumber);
+            Validator.isValidBonusNumber(lastWeekWinningNumbers, bonusNumber);
+
+            } catch (NumberFormatException e) {
+                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+            }
 
         return bonusNumber;
     }
-
-    private static void isValidBonusNumberInput(String lastWeekWinningNumbers, int bonusNumber) {
-        List<Integer> winningNumbers = Arrays.stream(lastWeekWinningNumbers.split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("지난 주 당첨 번호와 보너스 볼이 중복되었습니다.");
-        }
-    }
-
 
 }

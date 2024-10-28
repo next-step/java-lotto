@@ -10,24 +10,17 @@ public class LottoGenerator {
     }
 
     public static List<Integer> generateLottoNumbers() {
-        Set<Integer> numbersSet = new HashSet<>();
+        Set<Integer> uniqueNumbers = new HashSet<>();
 
-        while (numbersSet.size() < 6) {
-            numbersSet.add(LottoGenerator.generateRandomNumber());
+        while (uniqueNumbers.size() < 6) {
+            uniqueNumbers.add(LottoGenerator.generateRandomNumber());
         }
 
-        List<Integer> numbers = new ArrayList<>(numbersSet);
-
-        shuffleLottoNumbers(numbers);
-
-        return numbers;
+        return new ArrayList<>(uniqueNumbers);
     }
 
     private static int generateRandomNumber() {
         return RANDOM.nextInt(45) + 1;
     }
 
-    private static void shuffleLottoNumbers(List<Integer> numbers) {
-        Collections.shuffle(numbers);
-    }
 }

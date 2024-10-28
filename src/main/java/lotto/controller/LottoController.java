@@ -1,12 +1,10 @@
 package lotto.controller;
 
-import lotto.model.WinningInfo;
+import lotto.model.WinningRecord;
 import lotto.service.LottoBuyer;
-import lotto.service.LottoSeller;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -14,21 +12,30 @@ public class LottoController {
         LottoBuyer lottoBuyer = new LottoBuyer();
 
         int buyAmount = InputView.inputBuyAmount();
-        int canBuyLottoCount = lottoBuyer.canBuyLottoCount(buyAmount);
-        ResultView.printCanBuyLottoCount(canBuyLottoCount);
 
-        for (int count = 0; count < canBuyLottoCount; count++) {
-            List<Integer> lotto = lottoBuyer.buyLotto(LottoSeller.sellLotto());
-            ResultView.printLottoNumber(lotto);
+        int manualLottoCount = InputView.inputManualLottoCount(buyAmount);
+        int autoLottoCount = LottoBuyer.calculateAutoLottoCount(buyAmount, manualLottoCount);
+
+        InputView.printPromptForManualLottoNumbers();
+        for (int count = 1; count <= manualLottoCount; count++) {
+            lottoBuyer.buyManualLotto(InputView.inputManualLottoNumbers());
         }
 
-        String lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber(lastWeekWinningNumbers);
+        for (int count = 1; count <= autoLottoCount; count++) {
+            lottoBuyer.buyAutoLotto();
+        }
 
-        Map<Integer, WinningInfo> winningStatics = lottoBuyer.checkLottoResult(lastWeekWinningNumbers, bonusNumber);
-        ResultView.printWinningStatics(winningStatics);
+        ResultView.printBuyLottoCount(manualLottoCount, autoLottoCount);
+        ResultView.printBoughtLottos(lottoBuyer.getBoughtLottos());
 
-        float returnRate = lottoBuyer.checkReturnRate(buyAmount);
+        String winningNumbers = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber(winningNumbers);
+
+        Map<Integer, WinningRecord> winningStatistics = lottoBuyer.checkLottoResult(winningNumbers, bonusNumber);
+        ResultView.printWinningStatics(winningStatistics);
+
+        float returnRate = lottoBuyer.checkReturnRate(buyAmount, winningStatistics);
         ResultView.printReturnRate(returnRate);
     }
+    
 }
