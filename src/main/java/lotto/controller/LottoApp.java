@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketMaker;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinningNumbers;
@@ -23,10 +21,7 @@ public class LottoApp {
 
         ResultView.printTicketInfo(lottoTickets);
 
-        LottoTicket winningNumbers = InputView.getWinningNumbers();
-        LottoNumber bonusNumber = InputView.getBonusNumber();
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers, bonusNumber);
-
+        LottoWinningNumbers lottoWinningNumbers = InputView.getLottoWinningNumbers();
         List<Winning> winnings = lottoTickets.calculateWinningResults(lottoWinningNumbers);
         WinningCalculator winningCalculator = new WinningCalculator(winnings);
         ResultView.printWinningResult(winningCalculator);
