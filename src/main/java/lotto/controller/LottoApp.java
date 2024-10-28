@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketMaker;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Winning;
@@ -13,7 +14,15 @@ import java.util.List;
 
 public class LottoApp {
     public static void main(String[] args) {
-        LottoTickets lottoTickets = InputView.getLottoTickets();
+        int price = InputView.getPrice();
+        int manualCount = InputView.getManualLottoCount();
+        List<String> manualNumbers = InputView.getManualLottoNumbers(manualCount);
+
+        LottoTicketMaker lottoTicketMaker = new LottoTicketMaker(price, manualNumbers);
+        LottoTickets manualLottoTickets = lottoTicketMaker.createManualLottoTickets();
+        LottoTickets autoLottoTickets = lottoTicketMaker.createAutoLottoTickets();
+        LottoTickets lottoTickets = manualLottoTickets.merge(autoLottoTickets);
+
         ResultView.printTicketCount(lottoTickets.size());
         ResultView.printTickets(lottoTickets);
 
