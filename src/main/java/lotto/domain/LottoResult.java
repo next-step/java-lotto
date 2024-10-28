@@ -1,18 +1,20 @@
 package lotto.domain;
 
-import deprecatedlotto.domain.LottoWinningCountDecision;
+;
+
+import lotto.LottoWinningCountDecision;
 
 import java.util.*;
 
-public class LottoWinner {
+public class LottoResult {
     private final static int DEFAULT_WINNING_COUNT = 0;
     Map<Integer, Integer> lottoWinningCountsMap;
 
-    public LottoWinner() {
+    public LottoResult() {
         this(initCountsMap());
     }
 
-    public LottoWinner(Map<Integer, Integer> winningCountsMap) {
+    public LottoResult(Map<Integer, Integer> winningCountsMap) {
         lottoWinningCountsMap = winningCountsMap;
 
     }
@@ -46,9 +48,9 @@ public class LottoWinner {
         return winningAmount;
     }
 
-    public double calculateMarginPercent(int purchaseAmount) {
-        MarginAmount marginAmount = new MarginAmount(winningAmount());
-        return marginAmount.calculateMarginPercent(purchaseAmount);
+    public MarginAmount calculateMarginPercent() {
+        return new MarginAmount(winningAmount());
+
     }
 
 
@@ -56,7 +58,7 @@ public class LottoWinner {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoWinner that = (LottoWinner) o;
+        LottoResult that = (LottoResult) o;
         return Objects.equals(lottoWinningCountsMap, that.lottoWinningCountsMap);
     }
 

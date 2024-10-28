@@ -1,14 +1,14 @@
 package lotto;
 
 import org.junit.jupiter.api.Test;
-import lotto.domain.LottoWinner;
+import lotto.domain.LottoResult;
 
 import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoWinnerTest {
+public class LottoResultTest {
 
 
     public static final int LOTTO_RANK = 4;
@@ -20,30 +20,31 @@ public class LottoWinnerTest {
 
     @Test
     public void 당첨횟수저장_테스트() {
-        LottoWinner lottoWinner = new LottoWinner();
-        lottoWinner.updateWinningCount(LOTTO_RANK);
-        assertThat(lottoWinner).isEqualTo(new LottoWinner(WINNING_COUNT_MAP));
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.updateWinningCount(LOTTO_RANK);
+        assertThat(lottoResult).isEqualTo(new LottoResult(WINNING_COUNT_MAP));
     }
 
     @Test
     public void 당첨횟수리스트_저장_테스트() {
-        LottoWinner lottoWinner = new LottoWinner();
-        lottoWinner.updateWinningCountList(WINNING_COUNTS_LIST);
-        assertThat(lottoWinner).isEqualTo(new LottoWinner(WINNING_COUNTS_MAP));
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.updateWinningCountList(WINNING_COUNTS_LIST);
+        assertThat(lottoResult).isEqualTo(new LottoResult(WINNING_COUNTS_MAP));
     }
 
     @Test
     public void 당첨금액_테스트() {
-        LottoWinner lottoWinner = new LottoWinner();
-        lottoWinner.updateWinningCount(LOTTO_RANK);
-        assertThat(lottoWinner.winningAmount()).isEqualTo(WINNING_AMOUNT);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.updateWinningCount(LOTTO_RANK);
+        assertThat(lottoResult.winningAmount()).isEqualTo(WINNING_AMOUNT);
     }
 
     @Test
     public void 당첨비율_테스트() {
         int purchaseAmount = 1000;
-        LottoWinner lottoWinner = new LottoWinner();
-        lottoWinner.updateWinningCount(LOTTO_RANK);
-        assertThat(lottoWinner.calculateMarginPercent(purchaseAmount)).isEqualTo(EXPECTED_MARGIN);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.updateWinningCount(LOTTO_RANK);
+        assertThat(lottoResult.calculateMarginPercent().calculateMarginPercent(purchaseAmount)).isEqualTo(EXPECTED_MARGIN);
     }
+
 }

@@ -1,6 +1,8 @@
 package lotto.ui;
 
-import deprecatedlotto.domain.LottoWinningCountDecision;
+
+
+import lotto.LottoWinningCountDecision;
 
 import java.util.List;
 import java.util.Map;
@@ -28,13 +30,13 @@ public class PrintView {
 
     public static void printWinningCount(Map<Integer, Integer> winningLottoCountMap) {
         for (int rank : winningLottoCountMap.keySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", LottoWinningCountDecision.convertRankToMatchingNumber(rank),
+            System.out.printf("%d개 일치 (%d원)- %d개\n", LottoWinningCountDecision.convertMatchingRankToAmount(rank),
                     LottoWinningCountDecision.convertMatchingRankToAmount(rank), winningLottoCountMap.get(rank));
         }
     }
 
-    public static void printMargin(double profitMargin) {
-        System.out.println("총 수익률은 " + profitMargin + "입니다.");
+    public static void printMargin(double marginAmount) {
+        System.out.println("총 수익률은 " + marginAmount + "입니다.");
 
     }
 

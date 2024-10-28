@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.LottoRank;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,13 +26,14 @@ public class LottoNumbers {
     }
 
     public int lottoRank(List<LottoNumber> lottoNumbers) {
-        int matchingCount = (int) lottoNumbers.stream()
+        int matchingCount = getMatchingCount(lottoNumbers);
+        return LottoRank.convertMatchingCountToRank(matchingCount);
+    }
+
+    private int getMatchingCount(List<LottoNumber> lottoNumbers) {
+        return (int) lottoNumbers.stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
-        if (matchingCount < MINIMUM_MATCHING_NUMBER) {
-            return DEFAULT_NUMBER;
-        }
-        return RANK_SUB_NUMBER - matchingCount;
     }
 
     protected List<Integer> convertIntLottoNumbersList() {

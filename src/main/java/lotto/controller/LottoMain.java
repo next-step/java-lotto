@@ -13,16 +13,19 @@ public class LottoMain {
         Scanner scanner = new Scanner(System.in);
         int purchaseAmount = InputView.purchaseAmount(scanner);
         LottoGenerator lottoGenerator = new RandomLottoNumbers();
-        Lotto lotto = new Lotto(lottoGenerator,purchaseAmount);
+        TryCount tryCount = TryCount.initTryCount(purchaseAmount);
 
-        PrintView.printLottoTryCount(lotto.getTryCount());
+        int tryNumber = tryCount.getTryCount();
+        Lotto lotto = Lotto.initAllRoundLottoNumbers(lottoGenerator, tryNumber);
+
+        PrintView.printLottoTryCount(tryNumber);
         PrintView.printLottoList(lotto.totalRoundLottoNumberList());
 
-        LottoWinner lottoWinner = new LottoWinner();
-        lottoWinner.updateWinningCountList(lotto.lottoRankList(new LottoNumbers(InputView.lottoWinnerNumbers(scanner))));
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.updateWinningCountList(lotto.lottoRankList(new LottoNumbers(InputView.lottoWinnerNumbers(scanner))));
 
         PrintView.printWinningStatisticsPreview();
-        PrintView.printWinningCount(lottoWinner.getLottoWinningCountsMap());
-        PrintView.printMargin(lottoWinner.calculateMarginPercent(purchaseAmount));
+        PrintView.printWinningCount(lottoResult.getLottoWinningCountsMap());
+        PrintView.printMargin(lottoResult.calculateMarginPercent().calculateMarginPercent(purchaseAmount));
     }
 }

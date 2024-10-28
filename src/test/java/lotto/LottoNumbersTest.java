@@ -13,12 +13,11 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoNumbersTest {
 
-    public static final List<Integer> TEST_WINNING_NUMBER_LIST = List.of(1, 2, 3, 4, 5, 6);
-    public static final List<Integer> TEST_WRONG_RANGE_LIST = List.of(1, 2, 3, 4, 5);
-    public static final int EXPECTED_RANK = 4;
 
     @Test
-    public void 당첨번호일치개수별랭크_테스트() {
+    public void 당첨번호_일치개수별_랭크테스트() {
+        final List<Integer> TEST_WINNING_NUMBER_LIST = List.of(1, 2, 3, 4, 5, 6);
+        final int EXPECTED_RANK = 4;
         List<LottoNumber> numberList = IntStream.range(4, 10)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
@@ -28,6 +27,7 @@ public class LottoNumbersTest {
 
     @Test
     public void 개수_6개_불일치_테스트() {
+        final List<Integer> TEST_WRONG_RANGE_LIST = List.of(1, 2, 3, 4, 5);
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoNumbers lottoWinningNumbers = new LottoNumbers(TEST_WRONG_RANGE_LIST);
         });
