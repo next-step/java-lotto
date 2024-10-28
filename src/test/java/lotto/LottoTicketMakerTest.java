@@ -10,6 +10,17 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketMakerTest {
+    @DisplayName("전체 로또 티켓 생성 테스트")
+    @Test
+    void createLottoTickets() {
+        int price = 12000;
+        List<String> manualNumbers = List.of("1,2,3,4,5,6", "7,8,9,10,11,12");
+        LottoTicketMaker lottoTicketMaker = new LottoTicketMaker(price, manualNumbers);
+        LottoTickets allTickets = lottoTicketMaker.createLottoTickets();
+
+        assertThat(allTickets.size()).isEqualTo(12);
+    }
+
     @DisplayName("수동 로또 티켓 생성 테스트")
     @Test
     void createManualLottoTickets() {

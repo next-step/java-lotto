@@ -19,9 +19,7 @@ public class LottoApp {
         List<String> manualNumbers = InputView.getManualLottoNumbers(manualCount);
 
         LottoTicketMaker lottoTicketMaker = new LottoTicketMaker(price, manualNumbers);
-        LottoTickets manualLottoTickets = lottoTicketMaker.createManualLottoTickets();
-        LottoTickets autoLottoTickets = lottoTicketMaker.createAutoLottoTickets();
-        LottoTickets lottoTickets = manualLottoTickets.merge(autoLottoTickets);
+        LottoTickets lottoTickets = lottoTicketMaker.createLottoTickets();
 
         ResultView.printTicketCount(lottoTickets.size());
         ResultView.printTickets(lottoTickets);

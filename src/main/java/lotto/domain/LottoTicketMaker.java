@@ -12,6 +12,10 @@ public class LottoTicketMaker {
         this.manualNumbers = manualNumbers;
     }
 
+    public LottoTickets createLottoTickets() {
+        return createManualLottoTickets().merge(createAutoLottoTickets());
+    }
+
     public LottoTickets createManualLottoTickets() {
         List<LottoTicket> lottoTickets = manualNumbers.stream()
                                                       .map(LottoTicket::createByString)
