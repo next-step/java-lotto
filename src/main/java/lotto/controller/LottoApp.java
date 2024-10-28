@@ -12,13 +12,8 @@ import java.util.List;
 
 public class LottoApp {
     public static void main(String[] args) {
-        int price = InputView.getPrice();
-        int manualCount = InputView.getManualLottoCount();
-        List<String> manualNumbers = InputView.getManualLottoNumbers(manualCount);
-
-        LottoTicketMaker lottoTicketMaker = new LottoTicketMaker(price, manualNumbers);
+        LottoTicketMaker lottoTicketMaker = InputView.getLottoTicketMaker();
         LottoTickets lottoTickets = lottoTicketMaker.createLottoTickets();
-
         ResultView.printTicketInfo(lottoTickets);
 
         LottoWinningNumbers lottoWinningNumbers = InputView.getLottoWinningNumbers();
