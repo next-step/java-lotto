@@ -14,7 +14,7 @@ public class LottoMain {
         List<Lotto> lottos = controller.buy(InputView.readAmount());
         OutputView.renderingLottos(lottos);
 
-        RankResult result = controller.check(InputView.readWinningNumber(), lottos);
+        RankResult result = controller.check(InputView.readWinningNumber(),0, lottos);
         OutputView.renderingWinningStatistics(result);
     }
 }

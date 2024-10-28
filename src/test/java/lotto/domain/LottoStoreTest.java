@@ -33,7 +33,7 @@ public class LottoStoreTest {
     public void 로또_결과를_확인한다(List<Integer> userNumbers, LottoRank expectedRank) {
         LottoStore lottoStore = new LottoStore();
         Lotto userLottos = new Lotto(userNumbers);
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6),7);
 
         Rank result = lottoStore.check(userLottos, winningLotto);
 
@@ -42,9 +42,9 @@ public class LottoStoreTest {
 
     private static Stream<Arguments> provideLottoScenarios() {
         return Stream.of(
-                Arguments.of(List.of(1, 2, 3, 4, 5, 6), LottoRank.SIX_MATCH),
-                Arguments.of(List.of(1, 2, 3, 4, 5, 7), LottoRank.FIVE_MATCH),
-                Arguments.of(List.of(1, 2, 3, 7, 8, 9), LottoRank.THREE_MATCH)
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
+                Arguments.of(List.of(1, 2, 3, 7, 8, 9), LottoRank.FIFTH)
         );
     }
 

@@ -33,6 +33,10 @@ public class Lotto {
         return new Lotto(toNumbers(split(value)));
     }
 
+    public static WinningLotto createWinningLotto(String value,int bonusNumber){
+        return new WinningLotto(toNumbers(split(value)),bonusNumber);
+    }
+
     private static String[] split(String value) {
         return value.split(",");
     }
@@ -42,7 +46,11 @@ public class Lotto {
     }
 
     public int matchCount(Lotto winning) {
-        return (int) numbers.stream().filter(winning.numbers::contains).count();
+        return (int) winning.numbers.stream().filter(this::containNumber).count();
+    }
+
+    protected boolean containNumber(int number){
+        return this.numbers.contains(number);
     }
 
     @Override
