@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.lotto.*;
+import lotto.lotto.LottoParameters;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,8 +45,8 @@ class LottoMachineTest {
     @DisplayName("로또 자동생성을 주어진 횟수만큼 생성")
     void createLottosAuto() {
         LottoMachine lottoMachine = new LottoMachine(3000, 0);
-        LottoGeneratorStrategy autoLottoStrategy = new FakeAutoLottoStrategy(3);
-        Lottos lottos = lottoMachine.createLottos(autoLottoStrategy);
+        LottoGeneratorStrategy autoLottoStrategy = new FakeAutoLottoStrategy();
+        Lottos lottos = lottoMachine.createLottos(autoLottoStrategy, new LottoParameters( 3));
 
         List<LottoNumber> lottoNumberList = compareLottos();
 
@@ -76,8 +77,8 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(3000, 2);
         String[] lottoArray = {"1, 2, 3, 4, 5, 6", "11, 12, 13, 14, 15, 16"};
 
-        ManualLottoStrategy manualLottoStrategy = new ManualLottoStrategy(lottoArray);
-        Lottos resultLottos = lottoMachine.createLottos(manualLottoStrategy);
+        ManualLottoStrategy manualLottoStrategy = new ManualLottoStrategy();
+        Lottos resultLottos = lottoMachine.createLottos(manualLottoStrategy, new LottoParameters(lottoArray));
 
         IntStream.range(0, resultLottos.getSize()).forEach(idx -> {
             Lotto lotto = resultLottos.get(idx);

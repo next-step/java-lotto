@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.lotto.LottoParameters;
 import lotto.lotto.LottoResult;
 import lotto.lotto.*;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +26,7 @@ public class LottoNumberServiceTest {
     @DisplayName("보너스2등이 1번 나머지는 당첨되지않으면 보너스 2등에 1번, 나머지0으로 저장됨")
     public void calculateLottoRank() {
         FakeLottoStrategy fakeLottoStrategy = new FakeLottoStrategy();
-        Lottos lottos = fakeLottoStrategy.generateLotto();
+        Lottos lottos = fakeLottoStrategy.generateLotto(new LottoParameters(1));
         int bonusNumber = 10;
 
         result = lottoService.calculateLottoRank("1, 2, 3, 4, 5, 6", lottos, bonusNumber);
