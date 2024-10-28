@@ -26,15 +26,19 @@ public class Lotto {
     }
 
     private boolean hasInvalidNumber(List<Integer> numbers) {
-        return numbers.stream().anyMatch(i -> !LottoSettings.isNumberInValidRange(i));
+        return numbers.stream().anyMatch(i -> outOfRange(i));
+    }
+
+    protected static boolean outOfRange(Integer i) {
+        return !LottoSettings.isNumberInValidRange(i);
     }
 
     public static Lotto from(String value) {
         return new Lotto(toNumbers(split(value)));
     }
 
-    public static WinningLotto createWinningLotto(String value,int bonusNumber){
-        return new WinningLotto(toNumbers(split(value)),bonusNumber);
+    public static WinningLotto createWinningLotto(String value, int bonusNumber) {
+        return new WinningLotto(toNumbers(split(value)), bonusNumber);
     }
 
     private static String[] split(String value) {
@@ -49,7 +53,7 @@ public class Lotto {
         return (int) winning.numbers.stream().filter(this::containNumber).count();
     }
 
-    protected boolean containNumber(int number){
+    protected boolean containNumber(int number) {
         return this.numbers.contains(number);
     }
 
