@@ -11,9 +11,9 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets createByPrice(int price) {
+    public static LottoTickets createByCount(int count) {
         return new LottoTickets(Stream.generate(LottoTicket::createAuto)
-                                      .limit(calculateTicketCount(price))
+                                      .limit(count)
                                       .collect(Collectors.toList()));
     }
 
@@ -33,5 +33,15 @@ public class LottoTickets {
         return lottoTickets.stream()
                            .map(ticket -> ticket.calculateWinningResult(lottoWinningNumbers))
                            .collect(Collectors.toList());
+    }
+
+    public LottoTickets merge(LottoTickets other) {
+        List<LottoTicket> mergedTickets = Stream.concat(this.lottoTickets.stream(), other.lottoTickets.stream())
+                                                .collect(Collectors.toList());
+        return new LottoTickets(mergedTickets);
+    }
+
+    public LottoTicket get(int index) {
+        return lottoTickets.get(index);
     }
 }
