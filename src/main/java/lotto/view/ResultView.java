@@ -1,9 +1,12 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Winning;
 import lotto.domain.WinningCalculator;
+
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printTicketInfo(LottoTickets lottoTickets) {
@@ -17,9 +20,16 @@ public class ResultView {
 
     private static void printTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottoTickets()
-                    .stream()
-                    .map(LottoTicket::getLottoNumbers)
-                    .forEach(System.out::println);
+                     .forEach(ResultView::printTicket);
+    }
+
+    private static void printTicket(LottoTicket lottoTicket) {
+        String ticketNumbers = lottoTicket.getLottoNumbers()
+                                          .stream()
+                                          .map(LottoNumber::getNumber)
+                                          .map(String::valueOf)
+                                          .collect(Collectors.joining(", "));
+        System.out.println(ticketNumbers);
     }
 
     public static void printWinningResult(WinningCalculator winningCalculator) {
