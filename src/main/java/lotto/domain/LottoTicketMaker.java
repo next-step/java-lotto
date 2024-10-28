@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class LottoTicketMaker {
@@ -9,7 +11,8 @@ public class LottoTicketMaker {
 
     public LottoTicketMaker(int price, List<String> manualNumbers) {
         this.price = price;
-        this.manualNumbers = manualNumbers;
+        this.manualNumbers = Optional.ofNullable(manualNumbers)
+                                     .orElse(Collections.emptyList());
     }
 
     public LottoTickets createLottoTickets() {
