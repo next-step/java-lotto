@@ -8,13 +8,13 @@ import lotto.settings.LottoSettings;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        if (hasInvalidNumber(numbers) || hasIncorrectSize(numbers) || hasDuplicates(numbers)) {
+        if (hasIncorrectSize(numbers) || hasDuplicates(numbers)) {
             throw new IllegalArgumentException("올바르지 않은 입력 입니다.");
         }
-        this.numbers = numbers;
+        this.numbers = toLottoNumber(numbers);
     }
 
     private boolean hasDuplicates(List<Integer> numbers) {
@@ -24,9 +24,9 @@ public class Lotto {
     private boolean hasIncorrectSize(List<Integer> numbers) {
         return !LottoSettings.isValidSize(numbers.size());
     }
-
-    private boolean hasInvalidNumber(List<Integer> numbers) {
-        return numbers.stream().anyMatch(i -> !LottoSettings.isNumberInValidRange(i));
+  
+    private List<LottoNumber> toLottoNumber(List<Integer> numbers) {
+        return numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
     public static Lotto from(String value) {
@@ -42,7 +42,11 @@ public class Lotto {
     }
 
     public int matchCount(Lotto winning) {
-        return (int) numbers.stream().filter(winning.numbers::contains).count();
+        return (int) winning.numbers.stream().filter(this::containNumber).count();
+    }
+
+    public boolean containNumber(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 
     @Override
@@ -64,7 +68,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        List<Integer> sortNumbers = numbers.stream().sorted().collect(Collectors.toList());
+        List<LottoNumber> sortNumbers = numbers.stream().sorted().collect(Collectors.toList());
+
         return sortNumbers.toString();
     }
 }
