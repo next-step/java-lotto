@@ -4,22 +4,35 @@ import java.util.Arrays;
 import java.util.Map;
 
 public enum LottoRank {
-    RANK_ONE(6, 2_000_000_000),
-    RANK_TWO_BONUS(5, 30_000_000),
-    RANK_TWO(5, 1_500_000),
-    RANK_THREE(4, 50_000),
-    RANK_FOUR(3, 5_000);
+    RANK_ONE(6, 2_000_000_000, (matchingCnt, bonusMatch) -> {
+        return matchingCnt == 6;
+    }),
+    RANK_TWO_BONUS(5, 30_000_000, (matchingCnt, bonusMatch) -> {
+        return bonusMatch && matchingCnt == 5;
+    }),
+
+    RANK_TWO(5, 1_500_000, (matchingCnt, bonusMatch) -> {
+        return !bonusMatch && matchingCnt == 5;
+    }),
+    RANK_THREE(4, 50_000, (matchingCnt, bonusMatch) -> {
+        return matchingCnt == 4;
+    }),
+    RANK_FOUR(3, 5_000, (matchingCnt, bonusMatch) -> {
+        return matchingCnt == 3;
+    });
 
     private final int machingCnt;
     private final long winPrice;
+    private final RankOperation rankOperation;
 
-    LottoRank(final int machingCnt, final long winPrice) {
+    LottoRank(final int machingCnt, final long winPrice, RankOperation rankOperation) {
         this.machingCnt = machingCnt;
         this.winPrice = winPrice;
+        this.rankOperation = rankOperation;
     }
 
     public static double calculateMarginRate(long price, Map<LottoRank, Integer> resultMap) {
-        return Arrays.stream(LottoRank.values()).mapToLong(value -> value.winPrice * resultMap.getOrDefault(value,0)).sum() / (double) price;
+        return Arrays.stream(LottoRank.values()).mapToLong(value -> value.winPrice * resultMap.getOrDefault(value, 0)).sum() / (double) price;
     }
 
     public int getMachingCnt() {
@@ -32,24 +45,6 @@ public enum LottoRank {
 
     public static LottoRank findWinPrice(int machingCnt, boolean bonusMatch) {
         return Arrays.stream(LottoRank.values()).filter(lottoRank -> lottoRank.getMachingCnt() == machingCnt)
-                .map(lottoRank -> {
-                    LottoRank rankTwoBonus = checkRankTwoAndBonus(machingCnt, bonusMatch);
-                    if (rankTwoBonus != null) {
-                        return rankTwoBonus;
-                    }
-                    return lottoRank;
-                }).findFirst().orElse(null);
+                .filter(lottoRank -> lottoRank.rankOperation.isRank(machingCnt, bonusMatch)).findFirst().orElse(null);
     }
-
-    private static LottoRank checkRankTwoAndBonus(int machingCnt, boolean bonusMatch) {
-        if (bonusMatch && machingCnt == LottoRank.RANK_TWO_BONUS.getMachingCnt()) {
-            return LottoRank.RANK_TWO_BONUS;
-        }
-
-        if (!bonusMatch && machingCnt == LottoRank.RANK_TWO_BONUS.getMachingCnt()) {
-            return LottoRank.RANK_TWO;
-        }
-        return null;
-    }
-
 }

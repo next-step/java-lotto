@@ -10,8 +10,13 @@ public class Lottos {
         lottos.addAll(createLotto);
     }
 
+    public Lottos(List<Lotto> autoLotto, List<Lotto> manualLotto) {
+        lottos.addAll(autoLotto);
+        lottos.addAll(manualLotto);
+    }
+
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
     public int getSize() {

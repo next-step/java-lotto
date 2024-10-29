@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.lotto.LottoMargin;
-import lotto.lotto.LottoResult;
-import lotto.lotto.LottoService;
-import lotto.lotto.Lottos;
+import lotto.lotto.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,11 +16,15 @@ public class LottoController {
 
     public void startLotto() {
         int price = inputView.inputPrice();
+        int manualCnt = inputView.inputManualCnt();
+        String[] inputManualLotto = inputView.inputManualLotto(manualCnt);
 
         LottoService lottoService = new LottoService();
 
-        Lottos lottos = lottoService.createLotto(price);
+        LottoMachine lottoMachine = lottoService.createLottoMachine(price, manualCnt);
+        Lottos lottos = lottoService.createLotto(lottoMachine, inputManualLotto);
 
+        resultView.printLottoCnt(lottoMachine);
         resultView.printCreateLotto(lottos);
 
         String answer = inputView.inputAnswer();

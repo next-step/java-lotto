@@ -1,32 +1,38 @@
 package lotto.lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoMachine {
 
     private final static int MIN_PRICE = 1000;
 
     private final int price;
-    private final LottoGeneratorStrategy lottoGeneratorStrategy;
+    private final int manualCnt;
+    private final int autoCnt;
 
-    public LottoMachine(final int price, LottoGeneratorStrategy lottoGeneratorStrategy) {
-        validatePrice(price);
+    public LottoMachine(final int price, final int manualCnt) {
         this.price = price;
-        this.lottoGeneratorStrategy = lottoGeneratorStrategy;
+        this.manualCnt = manualCnt;
+        this.autoCnt = calculateAutoCnt();
+        validatePrice(price);
     }
 
-    public Lottos createLottos() {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < getExecuteIdx(); i++) {
-            Lotto lotto = lottoGeneratorStrategy.generateLotto();
-            lottos.add(lotto);
+    public Lottos createLottos(LottoGeneratorStrategy lottoGeneratorStrategy, LottoParameters lottoParameters) {
+        return lottoGeneratorStrategy.generateLotto(lottoParameters);
+    }
+
+    public int getAutoCnt() {
+        return autoCnt;
+    }
+
+    public int getManualCnt() {
+        return manualCnt;
+    }
+
+    public int calculateAutoCnt() {
+        int autoCnt = price / MIN_PRICE - manualCnt;
+        if (autoCnt < 0) {
+            throw new IllegalArgumentException("금액을 초과하였습니다.");
         }
-        return new Lottos(lottos);
-    }
-
-    public int getExecuteIdx() {
-        return price / 1000;
+        return autoCnt;
     }
 
     private void validatePrice(int price) {
@@ -34,4 +40,5 @@ public class LottoMachine {
             throw new IllegalArgumentException("1000원 이상입니다.");
         }
     }
+
 }
