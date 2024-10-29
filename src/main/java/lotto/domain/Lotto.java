@@ -24,7 +24,7 @@ public class Lotto {
     private boolean hasIncorrectSize(List<Integer> numbers) {
         return !LottoSettings.isValidSize(numbers.size());
     }
-
+  
     private List<LottoNumber> toLottoNumber(List<Integer> numbers) {
         return numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
@@ -69,6 +69,7 @@ public class Lotto {
     @Override
     public String toString() {
         List<LottoNumber> sortNumbers = numbers.stream().sorted().collect(Collectors.toList());
+
         return sortNumbers.toString();
     }
 }

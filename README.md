@@ -59,3 +59,4 @@
 -[x] 당첨번호에 1~45사이의 숫자가 아닌 숫자를 넣는 경우 IllegalArgumentException를 발생한다.
 - [x] 보너스볼 번호는 당첨번호에 포함되면 IllegalArgumentException를 발생한다.
 - [x] 보너스볼 번호는 1~45사이 외의 숫자를 포함되면 IllegalArgumentException를 발생한다.
+
