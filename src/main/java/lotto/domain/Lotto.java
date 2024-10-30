@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int MINIMUM_LOTTO_NUMBE = 0;
+    public static final int MINIMUM_LOTTO_NUMBER = 0;
     public static final int MAXIMUM_LOTTO_NUMBER = 6;
     private final List<LottoNumbers> lottoNumbersList;
 
@@ -33,16 +33,10 @@ public class Lotto {
     }
 
     public List<Integer> lottoRankList(LottoNumbers winningLottoNumbers, BonusBall bonusBall) {
-        List<Integer> list = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            boolean isBonusMatched = bonusBall.checkMatching(lottoNumbers.getLottoNumberList());
-            int lottoRank = winningLottoNumbers.lottoRank(lottoNumbers.getLottoNumberList(), isBonusMatched);
-            if (lottoRank > MINIMUM_LOTTO_NUMBE && lottoRank < MAXIMUM_LOTTO_NUMBER) {
-                Integer i = lottoRank;
-                list.add(i);
-            }
-        }
-        return list;
+        return lottoNumbersList.stream()
+                .mapToInt(lottoNumbers -> winningLottoNumbers.lottoRank(lottoNumbers.getLottoNumberList(), bonusBall.checkMatching(lottoNumbers.getLottoNumberList())))
+                .filter(lottoRank -> lottoRank > MINIMUM_LOTTO_NUMBER && lottoRank < MAXIMUM_LOTTO_NUMBER)
+                .boxed().collect(Collectors.toList());
     }
 
 
