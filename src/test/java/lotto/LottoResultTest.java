@@ -11,12 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
 
-
     public static final int LOTTO_RANK = 5;
-    public static final Map<Integer, Integer> WINNING_COUNT_MAP = Map.of(1, 0, 2, 0, 3, 0, 4, 0,5,1);
-    public static final Map<Integer, Integer> WINNING_COUNTS_MAP = Map.of(1, 1, 2, 1, 3, 0, 4, 0,5,0);
-    public static final List<Integer> WINNING_COUNTS_LIST = List.of(1, 2);
-    public static final int WINNING_AMOUNT = 5000;
     public static final double EXPECTED_MARGIN = 5.0;
     LottoResult lottoResult;
 
@@ -28,21 +23,24 @@ public class LottoResultTest {
 
     @Test
     public void 당첨횟수저장_테스트() {
-
+        final Map<Integer, Integer> winningCountMap = Map.of(1, 0, 2, 0, 3, 0, 4, 0, 5, 1);
         lottoResult.updateWinningCount(LOTTO_RANK);
-        assertThat(lottoResult).isEqualTo(new LottoResult(WINNING_COUNT_MAP));
+        assertThat(lottoResult).isEqualTo(new LottoResult(winningCountMap));
     }
 
     @Test
     public void 당첨횟수리스트_저장_테스트() {
-        lottoResult.updateWinningCountList(WINNING_COUNTS_LIST);
-        assertThat(lottoResult).isEqualTo(new LottoResult(WINNING_COUNTS_MAP));
+        final Map<Integer, Integer> winningCountsMap = Map.of(1, 1, 2, 1, 3, 0, 4, 0, 5, 0);
+        final List<Integer> winningCountsList = List.of(1, 2);
+        lottoResult.updateWinningCountList(winningCountsList);
+        assertThat(lottoResult).isEqualTo(new LottoResult(winningCountsMap));
     }
 
     @Test
     public void 당첨금액_테스트() {
+        final int winningAmount = 5000;
         lottoResult.updateWinningCount(LOTTO_RANK);
-        assertThat(lottoResult.winningAmount()).isEqualTo(WINNING_AMOUNT);
+        assertThat(lottoResult.winningAmount()).isEqualTo(winningAmount);
     }
 
     @Test
