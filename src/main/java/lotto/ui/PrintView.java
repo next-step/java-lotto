@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static lotto.LottoRank.convertRankTomatchingCount;
+
 public class PrintView {
 
     public static void printLottoTryCount(int lottoTryCount) {
@@ -30,7 +32,7 @@ public class PrintView {
 
     public static void printWinningCount(Map<Integer, Integer> winningLottoCountMap) {
         for (int rank : winningLottoCountMap.keySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", LottoWinningCountDecision.convertMatchingRankToAmount(rank),
+            System.out.printf("%d개 일치 (%d원)- %d개\n", convertRankTomatchingCount(rank), LottoWinningCountDecision.convertMatchingRankToAmount(rank),
                     LottoWinningCountDecision.convertMatchingRankToAmount(rank), winningLottoCountMap.get(rank));
         }
     }

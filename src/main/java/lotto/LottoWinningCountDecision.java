@@ -3,9 +3,10 @@ package lotto;
 import java.util.Arrays;
 
 public enum LottoWinningCountDecision {
-    THREE(4, 5000),
-    FOUR(3, 50000),
-    FIVE(2, 1500000),
+    THREE(5, 5000),
+    FOUR(4, 50000),
+    FIVE(3, 1500000),
+    FIVEBONUS(2, 30000000),
     SIX(1, 2000000000);
 
     private int rank;

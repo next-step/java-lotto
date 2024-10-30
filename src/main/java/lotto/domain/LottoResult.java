@@ -21,7 +21,7 @@ public class LottoResult {
 
     private static Map<Integer, Integer> initCountsMap() {
         Map<Integer, Integer> winningLottoCountMap = new TreeMap<>(Comparator.reverseOrder());
-        Arrays.asList(4, 3, 2, 1).forEach(i -> winningLottoCountMap.put(i, DEFAULT_WINNING_COUNT));
+        Arrays.asList(5, 4, 3, 2, 1).forEach(i -> winningLottoCountMap.put(i, DEFAULT_WINNING_COUNT));
 
         return winningLottoCountMap;
     }

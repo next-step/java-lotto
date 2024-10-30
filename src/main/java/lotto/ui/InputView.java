@@ -1,9 +1,12 @@
 package lotto.ui;
 
+import lotto.domain.BonusBall;
+import lotto.domain.LottoNumber;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class InputView {
 
@@ -14,12 +17,17 @@ public class InputView {
         return purchaseAmount;
     }
 
-   public static List<Integer> lottoWinnerNumbers(Scanner scanner) {
-       System.out.println("지난주 당첨 번호를 입력해주세요");
-       String winnserNumbers = scanner.nextLine();
-       return Stream.of(winnserNumbers.replaceAll("\\s","").split(","))
-               .map(Integer::parseInt)
-               .collect(Collectors.toList( ));
-   }
+    public static List<LottoNumber> lottoWinnerNumbers(Scanner scanner) {
+        System.out.println("지난주 당첨 번호를 입력해주세요");
+        String winnserNumbers = scanner.nextLine();
+        List<LottoNumber> list = Arrays.stream(winnserNumbers.replaceAll("\\s", "").split(","))
+                .map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
+        return list;
+    }
 
+    public static BonusBall lottoBonusNumbers(Scanner scanner) {
+        System.out.println("보너스볼을 입력해주세요");
+        scanner.nextLine();
+        return new BonusBall(scanner.nextInt());
+    }
 }

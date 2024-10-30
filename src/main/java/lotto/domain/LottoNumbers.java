@@ -7,15 +7,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoNumbers {
-    public static final int RANK_SUB_NUMBER = 7;
-    public static final int DEFAULT_NUMBER = 0;
-    public static final int MINIMUM_MATCHING_NUMBER = 3;
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers(List<Integer> lottoWinningList) {
-        for (int winningNumber : lottoWinningList) {
-            lottoNumbers.add(new LottoNumber(winningNumber));
-        }
+    public LottoNumbers(List<LottoNumber> lottoWinningList) {
+        lottoNumbers.addAll(lottoWinningList);
         checkSize();
     }
 
@@ -25,9 +20,9 @@ public class LottoNumbers {
         }
     }
 
-    public int lottoRank(List<LottoNumber> lottoNumbers) {
+    public int lottoRank(List<LottoNumber> lottoNumbers, boolean isBonusMatched) {
         int matchingCount = getMatchingCount(lottoNumbers);
-        return LottoRank.convertMatchingCountToRank(matchingCount);
+        return LottoRank.convertMatchingCountToRank(matchingCount, isBonusMatched);
     }
 
     private int getMatchingCount(List<LottoNumber> lottoNumbers) {
