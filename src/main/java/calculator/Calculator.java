@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.domain.Operation;
-import calculator.service.OperationFactory;
+import calculator.domain.OperationFactory;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 
