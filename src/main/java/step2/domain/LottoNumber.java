@@ -7,10 +7,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
+	private static final List<LottoNumber> CACHE_NUMBER = new ArrayList<>();
+	private static final String COMMA_DELIMITER = ",";
+
 	private static final int MIN_NUMBER = 1;
 	private static final int MAX_NUMBER = 45;
-
-	private static final List<LottoNumber> CACHE_NUMBER = new ArrayList<>();
 
 	static {
 		for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
@@ -31,13 +32,17 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 		return new ArrayList<>(CACHE_NUMBER);
 	}
 
-	public static List<LottoNumber> listFromString(String winningNumbers) {
+	public static List<LottoNumber> asList(String winningNumbers) {
+		return Arrays.stream(winningNumbers.split(COMMA_DELIMITER))
+			.map(LottoNumber::parseAndCreate)
+			.collect(Collectors.toList());
+	}
+
+	private static LottoNumber parseAndCreate(String numberStr) {
 		try {
-			String[] splittedNumbers = winningNumbers.split(",");
-			return Arrays.stream(splittedNumbers)
-				.map((numberStr) -> new LottoNumber(Integer.parseInt(numberStr.trim())))
-				.collect(Collectors.toList());
-		} catch (Exception e) {
+			int number = Integer.parseInt(numberStr.trim());
+			return new LottoNumber(number);
+		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("지난 주 당첨번호를 올바른 형식으로 넣어주세요. \nex) 1, 2, 3, 4, 5, 6");
 		}
 	}

@@ -8,27 +8,26 @@ import java.util.Map;
 
 import step2.domain.var.LottoPrize;
 
-public class LottoStast {
+public class LottoStatistics {
 	private final Map<LottoPrize, Integer> winCountMap = new HashMap<>();
-	private Double profitRatio;
-	private int gainnedMoney = 0;
+	private final Double profitRatio;
+	private int gainedMoney = 0;
 
-	public LottoStast(List<Lotto> lottos, List<LottoNumber> winNumbers) {
-		setWinCountMap(lottos, winNumbers);
-
-		int inputtedMoney = lottos.size() * LOTTO_PRICE;
-		setProfitRatio(inputtedMoney);
+	public LottoStatistics(List<Lotto> lottos, Lotto winningLotto) {
+		setWinCountMap(lottos, winningLotto);
+		Money inputtedMoney = new Money(lottos.size() * LOTTO_PRICE);
+		this.profitRatio = inputtedMoney.getProfitByGainedMoney(gainedMoney);
 	}
 
-	private void setWinCountMap(List<Lotto> lottos, List<LottoNumber> winNumbers) {
+	private void setWinCountMap(List<Lotto> lottos, Lotto winningLotto) {
 		for (Lotto lotto : lottos) {
-			int correctCount = (int)winNumbers
+			int correctCount = (int)winningLotto.getLottoNumbers()
 				.stream()
 				.filter(lotto::contains)
 				.count();
 			LottoPrize lottoPrize = LottoPrize.getByCount(correctCount);
 			winCountMap.put(lottoPrize, winCountMap.getOrDefault(lottoPrize, 0) + 1);
-			gainnedMoney += lottoPrize.getPrize();
+			gainedMoney += lottoPrize.getPrize();
 		}
 	}
 
@@ -38,9 +37,5 @@ public class LottoStast {
 
 	public Integer getProfitRatio() {
 		return profitRatio.intValue();
-	}
-
-	private void setProfitRatio(int inputtedMoney) {
-		this.profitRatio = (double)(gainnedMoney - inputtedMoney) / inputtedMoney * 100;
 	}
 }

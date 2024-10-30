@@ -2,6 +2,9 @@ package step2.domain;
 
 import java.util.Objects;
 
+import step2.exception.MoneyOverLimitException;
+import step2.exception.NotEnoughMoneyException;
+
 public class Money {
 	private final int money;
 
@@ -17,6 +20,19 @@ public class Money {
 		return new Money(this.money - payMoney);
 	}
 
+	public void checkMaxMoney(int maxMoney) {
+		if (this.money > maxMoney) {
+			throw new MoneyOverLimitException();
+		}
+	}
+
+	public int getPurchasableCount(int price) {
+		if (this.money < price) {
+			throw new NotEnoughMoneyException();
+		}
+		return this.money / price;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -30,5 +46,9 @@ public class Money {
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(money);
+	}
+
+	public Double getProfitByGainedMoney(int gainedMoney) {
+		return (double)(gainedMoney - this.money) / this.money * 100;
 	}
 }

@@ -1,9 +1,11 @@
 package step2.view;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import step2.domain.Lotto;
-import step2.domain.LottoStast;
+import step2.domain.LottoNumber;
+import step2.domain.LottoStatistics;
 import step2.domain.Money;
 import step2.domain.var.LottoPrize;
 
@@ -11,13 +13,28 @@ public class ResultView {
 	public static void printLottoResult(List<Lotto> result) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(result.size()).append(" 개를 구매했습니다.\n");
-		for (Lotto lotto : result) {
-			sb.append(lotto.toString()).append("\n");
-		}
+		printLottos(result, sb);
 		System.out.println(sb);
 	}
 
-	public static void printLottoStast(LottoStast stastResult) {
+	private static void printLottos(List<Lotto> result, StringBuilder sb) {
+		result.forEach((lotto) -> {
+			List<Integer> numbers = lotto.getLottoNumbers()
+				.stream()
+				.map(LottoNumber::getNumber)
+				.collect(Collectors.toList());
+			sb.append("[");
+			for (int i = 0; i < numbers.size(); i++) {
+				sb.append(numbers.get(i));
+				if (i < numbers.size() - 1) {
+					sb.append(", ");
+				}
+			}
+			sb.append("]\n");
+		});
+	}
+
+	public static void printLottoStast(LottoStatistics stastResult) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("당첨 통계").append("\n");
 		sb.append("---------").append("\n");

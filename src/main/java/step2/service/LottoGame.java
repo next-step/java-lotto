@@ -8,41 +8,29 @@ import java.util.List;
 
 import step2.domain.Lotto;
 import step2.domain.LottoNumber;
-import step2.domain.LottoStast;
+import step2.domain.LottoStatistics;
 import step2.domain.Money;
 import step2.dto.LottoPlayResultDto;
-import step2.exception.MoneyOverLimitException;
-import step2.exception.NotEnoughMoneyException;
 
 public class LottoGame {
 
 	public static LottoPlayResultDto playLotto(Money money) {
-		checkMoneyRange(money);
+		money.checkMaxMoney(MAX_LOTTO_PURCHASE_AMOUNT);
 		List<Lotto> lottos = buyLotto(money);
 		Money change = money.pay(lottos.size() * LOTTO_PRICE);
 		return new LottoPlayResultDto(lottos, change);
 	}
 
-	public static List<Lotto> buyLotto(Money money) {
-		int amount = Lotto.getPossibleAmountByMoney(money);
+	public static LottoStatistics getLottoStast(List<Lotto> lastWeekLottos, String winningNumbers) {
+		return new LottoStatistics(lastWeekLottos, new Lotto(LottoNumber.asList(winningNumbers)));
+	}
+
+	private static List<Lotto> buyLotto(Money money) {
+		int amount = money.getPurchasableCount(LOTTO_PRICE);
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < amount; i++) {
 			lottos.add(new Lotto(shuffleSixNumbers()));
 		}
 		return lottos;
 	}
-
-	private static void checkMoneyRange(Money money) {
-		if (money.getMoney() < LOTTO_PRICE) {
-			throw new NotEnoughMoneyException();
-		}
-		if (money.getMoney() > MAX_LOTTO_PURCHASE_AMOUNT) {
-			throw new MoneyOverLimitException();
-		}
-	}
-
-	public static LottoStast getLottoStast(List<Lotto> result, String winningNumbers) {
-		return new LottoStast(result, LottoNumber.listFromString(winningNumbers));
-	}
-
 }

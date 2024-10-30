@@ -11,30 +11,23 @@ import org.junit.jupiter.api.Test;
 
 import step2.domain.var.LottoPrize;
 
-class LottoStastTest {
-	private LottoStast ONE_BUY_FIRST_PRIZE;
+class LottoStatisticsTest {
+	private LottoStatistics lottoStatistics;
 
 	@BeforeEach
 	void setUp() {
 		// 1개 사서 1등 하나 당첨된 경우
-		List<LottoNumber> winNumbers = LottoNumber.listFromString("1, 2, 3, 4, 5, 6");
+		List<LottoNumber> winNumbers = LottoNumber.asList("1, 2, 3, 4, 5, 6");
 		Lotto lotto = new Lotto(winNumbers);
 		List<Lotto> lottos = new ArrayList<>();
 		lottos.add(lotto);
-		ONE_BUY_FIRST_PRIZE = new LottoStast(lottos, winNumbers);
+		lottoStatistics = new LottoStatistics(lottos, lotto);
 	}
 
 	@Test
 	@DisplayName("당첨됐을 때 당첨 통계 정보를 체크하는 테스트")
 	public void getLottoStastTest() {
-		assertThat(ONE_BUY_FIRST_PRIZE.getWinnerCount(LottoPrize.FIRST_WINNER))
+		assertThat(lottoStatistics.getWinnerCount(LottoPrize.FIRST_WINNER))
 			.isEqualTo(1);
-	}
-
-	@Test
-	@DisplayName("1등 당첨됐을 때 수익률을 체크하는 테스트")
-	public void getLottoProfitRatio() {
-		assertThat(ONE_BUY_FIRST_PRIZE.getProfitRatio())
-			.isEqualTo(199999900);
 	}
 }
