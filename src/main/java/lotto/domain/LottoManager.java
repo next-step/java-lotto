@@ -17,7 +17,6 @@ public class LottoManager {
         }
     }
 
-
     public int countPurchasedLottos() {
         return lottos.size();
     }

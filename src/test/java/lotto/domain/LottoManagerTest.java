@@ -17,4 +17,5 @@ class LottoManagerTest {
 
     }
 
+
 }
