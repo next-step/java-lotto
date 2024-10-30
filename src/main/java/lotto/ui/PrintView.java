@@ -3,6 +3,7 @@ package lotto.ui;
 
 
 import lotto.LottoWinningCountDecision;
+import lotto.ResultText;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class PrintView {
 
     public static void printWinningCount(Map<Integer, Integer> winningLottoCountMap) {
         for (int rank : winningLottoCountMap.keySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", convertRankTomatchingCount(rank), LottoWinningCountDecision.convertMatchingRankToAmount(rank),
+            System.out.printf(ResultText.convertRankToText(rank), convertRankTomatchingCount(rank),
                     LottoWinningCountDecision.convertMatchingRankToAmount(rank), winningLottoCountMap.get(rank));
         }
     }

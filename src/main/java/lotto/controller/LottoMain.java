@@ -22,9 +22,7 @@ public class LottoMain {
         PrintView.printLottoList(lotto.totalRoundLottoNumberList());
 
         LottoResult lottoResult = new LottoResult();
-        LottoNumbers lottoNumbers = new LottoNumbers(InputView.lottoWinnerNumbers(scanner));
-
-        lottoResult.updateWinningCountList(lotto.lottoRankList(lottoNumbers
+        lottoResult.updateWinningCountList(lotto.lottoRankList(new LottoNumbers(InputView.lottoWinnerNumbers(scanner))
                 ,InputView.lottoBonusNumbers(new Scanner(System.in))));
 
         PrintView.printWinningStatisticsPreview();
