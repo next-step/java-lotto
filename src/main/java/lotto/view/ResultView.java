@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoManager;
 import lotto.domain.LottoPrize;
+import lotto.domain.PrizeManager;
 
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class ResultView {
         }
     }
 
-    public static void printResults(Map<Integer, Integer> results) {
+    public static void printResults(Map<Integer, Integer> results, int purchaseAmount) {
 
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -28,9 +29,17 @@ public class ResultView {
         for (int matchCount = MIN_MATCH_COUNT; matchCount <= MAX_MATCH_COUNT; matchCount++) {
             int count = results.get(matchCount);
 
-            int prizeAmount = LottoPrize.getWinningAmount(matchCount);
+            long prizeAmount = LottoPrize.getWinningAmount(matchCount);
 
             System.out.printf("%d개 일치 (%d원) - %d개%n", matchCount, prizeAmount, count);
+        }
+
+        double profitMargin = new PrizeManager(results).getProfitMargin(purchaseAmount);
+
+        System.out.printf("총 수익률은 %f입니다.", profitMargin);
+
+        if(profitMargin < 1){
+            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
 
     }

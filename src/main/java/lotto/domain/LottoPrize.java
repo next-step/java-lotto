@@ -10,18 +10,19 @@ public enum LottoPrize {
     SIX_MATCH(6, 2000000000);
 
     private final int matchCount;
-    private final int amount;
+    private final long amount;
 
     LottoPrize(int matchCount, int amount) {
         this.matchCount = matchCount;
         this.amount = amount;
     }
 
-    public static int getWinningAmount(int count) {
+    public static long getWinningAmount(int count) {
+
         return Arrays.stream(values())
                 .filter(prize -> prize.matchCount == count)
                 .findFirst()
                 .map(prize -> prize.amount)
-                .orElse(0);
+                .orElse(0L);
     }
 }

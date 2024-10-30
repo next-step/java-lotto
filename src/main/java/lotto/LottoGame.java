@@ -19,7 +19,7 @@ public class LottoGame {
 
         WinningResults winningResults = new WinningResults(lottoManager, winningLotto);
 
-        ResultView.printResults(winningResults.getResults());
+        ResultView.printResults(winningResults.getResults(), lottoManager.purchaseAmount());
 
     }
 }

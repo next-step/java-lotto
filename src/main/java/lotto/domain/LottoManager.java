@@ -5,6 +5,8 @@ import java.util.List;
 public class LottoManager {
     private final List<Lotto> lottos;
 
+    private static final int LOTTO_PRICE = 1000;
+
     public LottoManager(List<Lotto> lottos) {
         validate(lottos);
 
@@ -19,6 +21,10 @@ public class LottoManager {
 
     public int countPurchasedLottos() {
         return lottos.size();
+    }
+
+    public int purchaseAmount() {
+        return lottos.size() * LOTTO_PRICE;
     }
 
     public List<Lotto> purchasedLottos() {
