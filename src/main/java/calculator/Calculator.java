@@ -6,6 +6,7 @@ import calculator.view.InputView;
 import calculator.view.ResultView;
 
 public class Calculator {
+    private static final String DELIMITER = " ";
 
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
@@ -13,22 +14,17 @@ public class Calculator {
         ResultView.print(calculator.calculate(InputView.input()));
     }
 
-    public int calculate(String input) {
+    public int calculate(String input) throws IllegalArgumentException {
 
-        String[] split = validateData(input.split(" "));
+        String[] split = validateData(input.split(DELIMITER));
 
-        // 홀수는 -> 숫자 /// 짝수는 연산
-        int num1 = validateInt(split[0]);
+        int num1 = getFirstOperand(split[0]);
 
         for (int i = 1; i < split.length - 1; i += 2) {
-            Operation operation = validateOperation(OperationFactory.getOperation(split[i]));
+            Operation operation = OperationFactory.getOperation(split[i]);
 
-            try {
-                num1 = operation.calculate(num1, validateInt(split[i + 1]));
-            } catch (Exception e) {
-                System.out.println(e);
-                System.out.println(e.getMessage());
-            }
+            num1 = operation.calculate(num1, getFirstOperand(split[i + 1]));
+
         }
 
         return num1;
@@ -42,16 +38,8 @@ public class Calculator {
         return split;
     }
 
-    private Operation validateOperation(Operation operation) {
 
-        if (operation == null) {
-            throw new IllegalArgumentException("유효하지 않은 연산");
-        }
-
-        return operation;
-    }
-
-    private static int validateInt(String value) {
+    private int getFirstOperand(String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
