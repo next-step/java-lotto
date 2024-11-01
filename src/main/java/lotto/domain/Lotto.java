@@ -4,6 +4,7 @@ import java.util.Set;
 
 public class Lotto {
     private static final int REQUIRED_NUMBERS = 6;
+
     private final Set<Integer> numbers;
 
     public Lotto(Set<Integer> numbers) {
