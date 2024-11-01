@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.BonusBall;
 import org.junit.jupiter.api.Test;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -20,14 +19,14 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"3,9,6,3","2,8,1,3","2,8,6,2","1,7,7,1","1,7,6,1"})
     public void 당첨번호_일치개수별_랭크테스트_보너스볼포함(int startNumber, int endNumber, int bonusNumber, int expectedRankNumber) {
-        BonusBall bonusBall = new BonusBall(bonusNumber);
+        LottoNumber bonusBall = new LottoNumber(bonusNumber);
 
         List<LottoNumber> winnerNumberList = IntStream.range(1, 7)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
-        List<LottoNumber> numberList = IntStream.range(startNumber, endNumber)
+        LottoNumbers numberList = new LottoNumbers(IntStream.range(startNumber, endNumber)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
 
         LottoNumbers lottoWinningNumbers = new LottoNumbers(winnerNumberList);
         assertThat(lottoWinningNumbers.lottoRank(numberList, bonusBall)).isEqualTo(expectedRankNumber);

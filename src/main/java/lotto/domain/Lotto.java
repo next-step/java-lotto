@@ -24,17 +24,17 @@ public class Lotto {
         this.lottoNumbersList = lottoNumbersList;
     }
 
-    public List<List<Integer>> totalRoundLottoNumberList() {
-        List<List<Integer>> totalNumbersList = new ArrayList<>();
+    public List<LottoNumbers> totalRoundLottoNumberList() {
+     /*   List<List<Integer>> totalNumbersList = new ArrayList<>();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
             totalNumbersList.add(lottoNumbers.convertIntLottoNumbersList());
-        }
-        return totalNumbersList;
+        }*/
+        return lottoNumbersList;
     }
 
-    public List<Integer> lottoRankList(LottoNumbers winningLottoNumbers, BonusBall bonusBall) {
+    public List<Integer> lottoRankList(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
         return lottoNumbersList.stream()
-                .mapToInt(lottoNumbers -> winningLottoNumbers.lottoRank(lottoNumbers.getLottoNumberList(), bonusBall))
+                .mapToInt(lottoNumbers -> winningLottoNumbers.lottoRank(lottoNumbers, bonusNumber))
                 .filter(lottoRank -> lottoRank > MINIMUM_LOTTO_NUMBER && lottoRank < MAXIMUM_LOTTO_NUMBER)
                 .boxed().collect(Collectors.toList());
     }

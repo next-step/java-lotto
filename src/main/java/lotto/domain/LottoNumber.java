@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -20,6 +21,11 @@ public class LottoNumber {
 
     protected int getLottoNumber() {
         return lottoNumber;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
     }
 
     @Override

@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.BonusBall;
 import lotto.domain.LottoNumber;
-import lotto.ui.InputView;
 import org.junit.jupiter.api.Test;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
@@ -36,7 +34,7 @@ class LottoTest {
         LottoNumbers winningLottoNumbers = new LottoNumbers(TEST_WINNING_NUMBER_LIST);
         Lotto lotto = Lotto.initAllRoundLottoNumbers(lottoGenerator, tryCount);
         int bonusNumber = 7;
-        BonusBall bonusBall = new BonusBall(bonusNumber);
+        LottoNumber bonusBall = new LottoNumber(bonusNumber);
         assertThat( lotto.lottoRankList(winningLottoNumbers, bonusBall))
                 .isEqualTo(EXPECTED_RANK_LIST);
     }

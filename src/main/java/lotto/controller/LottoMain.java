@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class LottoMain {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int purchaseAmount = InputView.purchaseAmount(scanner);
+
+        int purchaseAmount = InputView.purchaseAmount();
         LottoGenerator lottoGenerator = new RandomLottoNumbers();
         TryCount tryCount = TryCount.initTryCount(purchaseAmount);
 
@@ -19,11 +19,11 @@ public class LottoMain {
         Lotto lotto = Lotto.initAllRoundLottoNumbers(lottoGenerator, tryNumber);
 
         PrintView.printLottoTryCount(tryNumber);
-        PrintView.printLottoList(lotto.totalRoundLottoNumberList());
+        PrintView.printLottoList(lotto);
 
         LottoResult lottoResult = new LottoResult();
-        lottoResult.updateWinningCountList(lotto.lottoRankList(new LottoNumbers(InputView.lottoWinnerNumbers(scanner))
-                ,InputView.lottoBonusNumbers(new Scanner(System.in))));
+        lottoResult.updateWinningCountList(lotto.lottoRankList(new LottoNumbers(InputView.lottoWinnerNumbers())
+                ,InputView.lottoBonusNumbers()));
 
         PrintView.printWinningStatisticsPreview();
         PrintView.printWinningCount(lottoResult.getLottoWinningCountsMap());

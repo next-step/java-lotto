@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum LottoRank {
 
     FIRST(1, 6),
-    SECOND(2, 6),
+    SECOND(2, 5),
     THIRD(3, 5),
     FOURTH(4, 4),
     FIFTH(5, 3);
@@ -21,11 +21,15 @@ public enum LottoRank {
 
     //머니볼이 true이면서 5개면 랭크 2 아니면 랭크 3
     public static int convertMatchingCountToRank(int matchingCount, int matchingCountWithBonus) {
-
+        if (matchingCountWithBonus == 7) {
+            return FIRST.rank;
+        }
         if (matchingCountWithBonus == 6 && matchingCount == 5) {
             return SECOND.rank;
         }
-
+        if (matchingCountWithBonus == 5 && matchingCount == 5) {
+            return THIRD.rank;
+        }
         return getRank(matchingCountWithBonus);
     }
 

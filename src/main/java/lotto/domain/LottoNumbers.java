@@ -20,27 +20,48 @@ public class LottoNumbers {
         }
     }
 
-    public int lottoRank(List<LottoNumber> lottoNumbers, BonusBall bonusBall) {
+    public int lottoRank(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         int matchingCount = getMatchingCount(lottoNumbers);
-        return LottoRank.convertMatchingCountToRank(matchingCount, bonusBall.matchingCountWithBonus(lottoNumbers,matchingCount));
+        int matchingCountWithBonus =matchingCount + lottoNumbers.matchingCountWithBonus(bonusNumber);
+        return LottoRank.convertMatchingCountToRank(matchingCount, matchingCountWithBonus);
+    }
+
+    public int matchingCountWithBonus(LottoNumber bonusNumber) {
+        return this.lottoNumbers.stream()
+                .filter(lottoNumber -> checkMatching(bonusNumber)) // 필터링 조건
+                .findAny() // 일치하는 요소가 있는지 확인
+                .map(lottoNumber -> 1) // 일치하는 경우 1로 매핑
+                .orElse(0);
+      }
+
+    public boolean checkMatching(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    private int getMatchingCount(LottoNumbers lottoNumbers) {
+        return lottoNumbers.getMatchingCount(this.lottoNumbers);
     }
 
     private int getMatchingCount(List<LottoNumber> lottoNumbers) {
-        int count = (int) lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
-        return count;
+        List<LottoNumber> copyLottoNumbers = new ArrayList<>(this.lottoNumbers);
+        copyLottoNumbers.retainAll(lottoNumbers);
+        return copyLottoNumbers.size();
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+/*
     protected List<Integer> convertIntLottoNumbersList() {
         List<Integer> totalLottoNumbersList = new ArrayList<>();
         for (LottoNumber lottoNumber : lottoNumbers) {
-            totalLottoNumbersList.add(lottoNumber.getLottoNumber());
+            totalLottoNumbersList.add(lottoNumber);
         }
         return totalLottoNumbersList;
     }
+*/
 
-    protected List<LottoNumber> getLottoNumberList() {
-        return lottoNumbers;
-    }
+
 
     @Override
     public boolean equals(Object o) {
