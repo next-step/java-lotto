@@ -2,42 +2,40 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 public class WinningResults {
-    private static final int MIN_MATCH_COUNT = 3;
-    private static final int MAX_MATCH_COUNT = 6;
+    private Map<LottoRank, Integer> results = new HashMap<>();
 
-    private Map<Integer, Integer> results = new HashMap<>();;
-
-    public WinningResults(LottoManager lottoManager, WinningLotto winningLotto) {
+    public WinningResults(LottoManager lottoManager, Lotto winningLotto) {
         init();
         calculateResults(lottoManager, winningLotto);
     }
 
     private void init() {
-        IntStream.rangeClosed(MIN_MATCH_COUNT, MAX_MATCH_COUNT)
-                .forEachOrdered(matchCount -> results.put(matchCount, 0));
+        for (LottoRank prize : LottoRank.values()) {
+            results.put(prize, 0);
+        }
     }
 
-    private void calculateResults(LottoManager lottoManager, WinningLotto winningLotto) {
+    private void calculateResults(LottoManager lottoManager, Lotto winningLotto) {
+
         lottoManager.purchasedLottos()
                 .stream()
-                .mapToInt(winningLotto::countMatchingNumbers)
+                .map(v -> v.countMatchingNumbers(winningLotto))
                 .forEach(this::updateResults);
     }
 
-    private void updateResults(int matchCount) {
-        if (matchCount < MIN_MATCH_COUNT) {
+    private void updateResults(LottoRank lottoRank) {
+        if (lottoRank == null) {
             return;
         }
-        
-        if (results.containsKey(matchCount)) {
-            results.put(matchCount, results.get(matchCount) + 1);
+
+        if (results.containsKey(lottoRank)) {
+            results.put(lottoRank, results.get(lottoRank) + 1);
         }
     }
 
-    public Map<Integer, Integer> getResults() {
+    public Map<LottoRank, Integer> getResults() {
         return results;
     }
 

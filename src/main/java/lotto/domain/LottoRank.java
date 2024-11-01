@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum LottoPrize {
+public enum LottoRank {
 
     THREE_MATCH(3, 5000),
     FOUR_MATCH(4, 50000),
@@ -12,17 +12,24 @@ public enum LottoPrize {
     private final int matchCount;
     private final long amount;
 
-    LottoPrize(int matchCount, int amount) {
+    LottoRank(int matchCount, int amount) {
         this.matchCount = matchCount;
         this.amount = amount;
     }
 
-    public static long getWinningAmount(int count) {
+    public static LottoRank getLottoRank(int count) {
 
         return Arrays.stream(values())
                 .filter(prize -> prize.matchCount == count)
                 .findFirst()
-                .map(prize -> prize.amount)
-                .orElse(0L);
+                .orElse(null);
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public long getPrizeAmount() {
+        return amount;
     }
 }

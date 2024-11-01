@@ -11,11 +11,11 @@ class PrizeManagerTest {
 
     @Test
     void 수익률_구하기() {
-        Map<Integer, Integer> results = new HashMap<>();
-        results.put(3, 1);
-        results.put(4, 0);
-        results.put(5, 0);
-        results.put(6, 0);
+        Map<LottoRank, Integer> results = new HashMap<>();
+        results.put(LottoRank.THREE_MATCH, 1);
+        results.put(LottoRank.FOUR_MATCH, 0);
+        results.put(LottoRank.FIVE_MATCH, 0);
+        results.put(LottoRank.SIX_MATCH, 0);
 
         double profitMargin = new PrizeManager(results).getProfitMargin(10000);
 

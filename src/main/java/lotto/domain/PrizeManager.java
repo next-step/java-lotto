@@ -6,20 +6,18 @@ public class PrizeManager {
 
     private final long prize;
 
-    public PrizeManager(Map<Integer, Integer> results) {
-        this.prize = calculate(results);
+    public PrizeManager(Map<LottoRank, Integer> results) {
+        this.prize = calculatePrize(results);
     }
 
 
-    private long calculate(Map<Integer, Integer> results){
+    private long calculatePrize(Map<LottoRank, Integer> results){
         long amount = 0L;
 
-        for (Integer value : results.keySet()) {
+        for (LottoRank value : results.keySet()) {
             int count = results.get(value);
 
-            long prizeAmount = LottoPrize.getWinningAmount(value);
-
-            amount += (count * prizeAmount);
+            amount += (count * value.getPrizeAmount());
         }
 
         return amount;
