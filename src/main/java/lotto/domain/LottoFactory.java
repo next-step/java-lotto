@@ -8,11 +8,9 @@ public class LottoFactory {
     private static final int LOTTO_MAX = 45;
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_PRICE = 1000;
-    private static final String LOTTO_AMOUNT_PATTERN = "^[1-9]\\d+\\s*원";
-    private static final String NON_DIGIT_REGEX = "[^0-9]";
 
 
-    public static List<Lotto> issueLottos(String purchaseAmount) {
+    public static List<Lotto> issueLottos(int purchaseAmount) {
 
         List<Lotto> lottos = new ArrayList<>();
 
@@ -23,14 +21,13 @@ public class LottoFactory {
         return lottos;
     }
 
-    private static int calculateLottoCount(String purchaseAmount) {
-        if (!purchaseAmount.trim().matches(LOTTO_AMOUNT_PATTERN)) {
-            throw new IllegalArgumentException("올바른 형식의 금액을 입력해주세요!");
+    private static int calculateLottoCount(int purchaseAmount) {
+
+        if (purchaseAmount < 0) {
+            throw new IllegalArgumentException("음수는 허용하지 않습니다.");
         }
 
-        String numericAmount = purchaseAmount.replaceAll(NON_DIGIT_REGEX, "");
-
-        return Integer.parseInt(numericAmount) / LOTTO_PRICE;
+        return purchaseAmount / LOTTO_PRICE;
     }
 
     private static Lotto issueLotto() {
