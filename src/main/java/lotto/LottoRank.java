@@ -1,34 +1,42 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum LottoRank {
-    FIRST(1,6,false),
-    SECOND(2, 5,true),
-    THIRD(3, 5,false),
-    FOURTH(4, 4,false),
-    FIFTH(5, 3,false);
+
+    FIRST(1, 6),
+    SECOND(2, 6),
+    THIRD(3, 5),
+    FOURTH(4, 4),
+    FIFTH(5, 3);
 
     private int rank;
-    private int lottoMatchingCount;
-    private boolean isBonusMatched;
+    private int lottoMatchingCountWithBonus;
 
-    LottoRank(int rank, int lottoMatchingCount, boolean isBonusMatched) {
+    LottoRank(int rank, int lottoMatchingCountWithBonus) {
         this.rank = rank;
-        this.lottoMatchingCount = lottoMatchingCount;
-        this.isBonusMatched = isBonusMatched;
+        this.lottoMatchingCountWithBonus = lottoMatchingCountWithBonus;
+
     }
 
-    public static int convertMatchingCountToRank(int matchingCount, boolean isBonusMatched) {
-        for (LottoRank i : values()) {
-            if (i.lottoMatchingCount == matchingCount && i.isBonusMatched == isBonusMatched) {
-                return i.rank;
-            }
+    //머니볼이 true이면서 5개면 랭크 2 아니면 랭크 3
+    public static int convertMatchingCountToRank(int matchingCount, int matchingCountWithBonus) {
+
+        if (matchingCountWithBonus == 6 && matchingCount == 5) {
+            return SECOND.rank;
         }
-        return 0;
+
+        return getRank(matchingCountWithBonus);
     }
-    public static int convertRankTomatchingCount(int rank) {
+
+    private static int getRank(int matchingCount) {
+        return Arrays.stream(values()).filter(i -> i.lottoMatchingCountWithBonus == matchingCount).findFirst().map(i -> i.rank).orElse(0);
+    }
+
+    public static int convertRankToMatchingCount(int rank) {
         for (LottoRank i : values()) {
             if (i.rank == rank) {
-                return i.lottoMatchingCount;
+                return i.lottoMatchingCountWithBonus;
             }
         }
         return 0;

@@ -20,15 +20,14 @@ public class LottoNumbers {
         }
     }
 
-    public int lottoRank(List<LottoNumber> lottoNumbers, boolean isBonusMatched) {
+    public int lottoRank(List<LottoNumber> lottoNumbers, BonusBall bonusBall) {
         int matchingCount = getMatchingCount(lottoNumbers);
-        return LottoRank.convertMatchingCountToRank(matchingCount, isBonusMatched);
+        return LottoRank.convertMatchingCountToRank(matchingCount, bonusBall.matchingCountWithBonus(lottoNumbers,matchingCount));
     }
 
     private int getMatchingCount(List<LottoNumber> lottoNumbers) {
-        return (int) lottoNumbers.stream()
-                .filter(this.lottoNumbers::contains)
-                .count();
+        int count = (int) lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
+        return count;
     }
 
     protected List<Integer> convertIntLottoNumbersList() {

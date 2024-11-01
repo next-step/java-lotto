@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.AssertionsKt.assertDoesNotThrow;
 
 class BonusBallTest {
@@ -25,5 +26,15 @@ class BonusBallTest {
                 .collect(Collectors.toList());
         assertThat(bonusBall.checkMatching(numberList)).isEqualTo(matchingTrue);
     }
-    
+
+    @Test
+    public void 로또_자리수_번호_테스트() {
+        final int bonusNumber = 100;
+        final boolean matchingTrue = true;
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            BonusBall bonusBall = new BonusBall(bonusNumber);
+        });
+
+    }
+
 }

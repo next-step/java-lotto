@@ -2,6 +2,7 @@ package lotto.ui;
 
 
 
+import lotto.LottoRank;
 import lotto.LottoWinningCountDecision;
 import lotto.ResultText;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static lotto.LottoRank.convertRankTomatchingCount;
+
 
 public class PrintView {
 
@@ -33,7 +34,7 @@ public class PrintView {
 
     public static void printWinningCount(Map<Integer, Integer> winningLottoCountMap) {
         for (int rank : winningLottoCountMap.keySet()) {
-            System.out.printf(ResultText.convertRankToText(rank), convertRankTomatchingCount(rank),
+            System.out.printf(ResultText.convertRankToText(rank), LottoRank.convertRankToMatchingCount(rank),
                     LottoWinningCountDecision.convertMatchingRankToAmount(rank), winningLottoCountMap.get(rank));
         }
     }

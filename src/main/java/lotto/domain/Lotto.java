@@ -34,7 +34,7 @@ public class Lotto {
 
     public List<Integer> lottoRankList(LottoNumbers winningLottoNumbers, BonusBall bonusBall) {
         return lottoNumbersList.stream()
-                .mapToInt(lottoNumbers -> winningLottoNumbers.lottoRank(lottoNumbers.getLottoNumberList(), bonusBall.checkMatching(lottoNumbers.getLottoNumberList())))
+                .mapToInt(lottoNumbers -> winningLottoNumbers.lottoRank(lottoNumbers.getLottoNumberList(), bonusBall))
                 .filter(lottoRank -> lottoRank > MINIMUM_LOTTO_NUMBER && lottoRank < MAXIMUM_LOTTO_NUMBER)
                 .boxed().collect(Collectors.toList());
     }
