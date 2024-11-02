@@ -34,10 +34,10 @@ public class Lotto {
     }
 
 
-    public LottoRank countMatchingNumbers(Lotto lotto) {
+    public LottoRank getLottoRank(Lotto winningLotto) {
 
         long matchCount = this.numbers.stream()
-                .filter(lotto.getLottoNumbers()::contains)
+                .filter(winningLotto.getLottoNumbers()::contains)
                 .count();
 
         return LottoRank.getLottoRank((int) matchCount);

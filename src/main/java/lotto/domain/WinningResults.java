@@ -21,7 +21,7 @@ public class WinningResults {
 
         lottos.purchasedLottos()
                 .stream()
-                .map(v -> v.countMatchingNumbers(winningLotto))
+                .map(v -> v.getLottoRank(winningLotto))
                 .forEach(this::updateResults);
     }
 
