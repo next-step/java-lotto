@@ -9,7 +9,7 @@ import java.util.List;
 public class LottoGame {
 
     public static void main(String[] args) {
-        List<Lotto> lottos = lottoStore.issueLottos(InputView.inputPurchaseAmount());
+        List<Lotto> lottos = LottoStore.issueLottos(InputView.inputPurchaseAmount());
 
         Lottos lottoManager = new Lottos(lottos);
 
