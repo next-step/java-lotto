@@ -7,11 +7,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoFactoryTest {
+class lottoStoreTest {
 
     @Test
     void 로또_발행() {
-        List<Lotto> lottos = LottoFactory.issueLottos(10000);
+        List<Lotto> lottos = lottoStore.issueLottos(10000);
 
         assertThat(lottos).hasSize(10);
     }
@@ -20,7 +20,7 @@ class LottoFactoryTest {
     void 로또_발행_음수_허용X() {
 
         assertThatThrownBy(() ->
-                LottoFactory.issueLottos(-10000)
+                lottoStore.issueLottos(-10000)
         ).isInstanceOf(IllegalArgumentException.class);
 
     }

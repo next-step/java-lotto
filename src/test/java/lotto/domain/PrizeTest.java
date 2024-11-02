@@ -7,7 +7,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PrizeManagerTest {
+class PrizeTest {
 
     @Test
     void 수익률_구하기() {
@@ -17,7 +17,7 @@ class PrizeManagerTest {
         results.put(LottoRank.FIVE_MATCH, 0);
         results.put(LottoRank.SIX_MATCH, 0);
 
-        double profitMargin = new PrizeManager(results).getProfitMargin(10000);
+        double profitMargin = new Prize(results).getProfitMargin(10000);
 
         assertThat(profitMargin).isEqualTo(0.5);
     }

@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
-public class LottoFactory {
+public class lottoStore {
 
     private static final int LOTTO_MIN = 1;
     private static final int LOTTO_MAX = 45;

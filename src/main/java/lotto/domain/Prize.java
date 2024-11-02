@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.Map;
 
-public class PrizeManager {
+public class Prize {
 
-    private final long prize;
+    private final long value;
 
-    public PrizeManager(Map<LottoRank, Integer> results) {
-        this.prize = calculatePrize(results);
+    public Prize(Map<LottoRank, Integer> results) {
+        this.value = calculatePrize(results);
     }
 
 
@@ -24,7 +24,7 @@ public class PrizeManager {
     }
 
     public double getProfitMargin(int purchaseAmount){
-        return (double) prize /purchaseAmount;
+        return (double) value /purchaseAmount;
     }
 
 }

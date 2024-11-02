@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoManagerTest {
+class LottosTest {
 
     @Test
     void _0개_구매_허용X() {
 
         assertThatThrownBy(() ->
-                new LottoManager(new ArrayList<>())
+                new Lottos(new ArrayList<>())
         ).isInstanceOf(IllegalArgumentException.class);
 
     }

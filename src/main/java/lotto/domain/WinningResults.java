@@ -6,9 +6,9 @@ import java.util.Map;
 public class WinningResults {
     private Map<LottoRank, Integer> results = new HashMap<>();
 
-    public WinningResults(LottoManager lottoManager, Lotto winningLotto) {
+    public WinningResults(Lottos lottos, Lotto winningLotto) {
         init();
-        calculateResults(lottoManager, winningLotto);
+        calculateResults(lottos, winningLotto);
     }
 
     private void init() {
@@ -17,9 +17,9 @@ public class WinningResults {
         }
     }
 
-    private void calculateResults(LottoManager lottoManager, Lotto winningLotto) {
+    private void calculateResults(Lottos lottos, Lotto winningLotto) {
 
-        lottoManager.purchasedLottos()
+        lottos.purchasedLottos()
                 .stream()
                 .map(v -> v.countMatchingNumbers(winningLotto))
                 .forEach(this::updateResults);

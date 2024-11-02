@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.List;
 
-public class LottoManager {
+public class Lottos {
 
     private static final int LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottos;
 
 
-    public LottoManager(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         validate(lottos);
 
         this.lottos = lottos;

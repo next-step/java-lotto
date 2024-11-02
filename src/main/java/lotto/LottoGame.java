@@ -9,9 +9,9 @@ import java.util.List;
 public class LottoGame {
 
     public static void main(String[] args) {
-        List<Lotto> lottos = LottoFactory.issueLottos(InputView.inputPurchaseAmount());
+        List<Lotto> lottos = lottoStore.issueLottos(InputView.inputPurchaseAmount());
 
-        LottoManager lottoManager = new LottoManager(lottos);
+        Lottos lottoManager = new Lottos(lottos);
 
         ResultView.printLottos(lottoManager);
 
