@@ -29,11 +29,11 @@ public class LottoService {
         return userLottos;
     }
 
-    public int getTotalWinningAmount(int bonusBall, List<LottoNumbers> userLottos, Set<Integer> winningNumbers) {
+    public int getTotalWinningAmount(List<LottoNumbers> userLottos, List<Integer> winningNumbers) {
         int totalWinningAmount = 0;
 
         for (LottoNumbers userLotto : userLottos) {
-            LottoResult lottoResult = WinningUtils.countMatchingNumbers(bonusBall, winningNumbers, userLotto);
+            LottoResult lottoResult = WinningUtils.countMatchingNumbers(winningNumbers, userLotto);
             totalWinningAmount = addTotalWinningAmount(lottoResult, totalWinningAmount);
         }
         return totalWinningAmount;

@@ -10,14 +10,25 @@ public enum WinningPrize {
     SECOND(5, 30_000_000, 2, true),
     FIRST(6, 2_000_000_000, 1);
 
+    private final int matchCount;
+    private final int prizeMoney;
+    private final int rank;
+    private final boolean isBonus;
+    private int count = 0;
+
     public static WinningPrize getPrizeByMatchCount(int matchCount, boolean isBonus) {
         if (matchCount == 5 && isBonus) {
             return SECOND;
         }
         for (WinningPrize prize : values()) {
-            if (prize.getMatchCount() == matchCount && !prize.isBonus()) {
-                return prize;
-            }
+            return getPrize(matchCount, prize);
+        }
+        return null;
+    }
+
+    private static WinningPrize getPrize(int matchCount, WinningPrize prize) {
+        if (prize.getMatchCount() == matchCount && !prize.isBonus()) {
+            return prize;
         }
         return null;
     }
@@ -37,12 +48,6 @@ public enum WinningPrize {
     public boolean isBonus() {
         return isBonus;
     }
-
-    private final int matchCount;
-    private final int prizeMoney;
-    private final int rank;
-    private final boolean isBonus;
-    private int count = 0;
 
     WinningPrize(int matchCount, int prizeMoney, int rank) {
         this(matchCount, prizeMoney, rank, false);

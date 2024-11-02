@@ -8,6 +8,7 @@ import lotto.util.WinningUtils;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,8 +35,10 @@ public class LottoController {
         ResultView.printLottoNumbers(userLottos);
 
         Set<Integer> winningNumbers = InputView.getWinningNumbers();
+        List<Integer> winningNumbersList = new ArrayList<>(winningNumbers);
         int bonusBall = InputView.getBonusBall();
-        int totalWinningAmount = lottoService.getTotalWinningAmount(bonusBall, userLottos, winningNumbers);
+        winningNumbersList.add(bonusBall);
+        int totalWinningAmount = lottoService.getTotalWinningAmount(userLottos, winningNumbersList);
         ResultView.printResult();
 
         printResults(moneyAmount, totalWinningAmount);

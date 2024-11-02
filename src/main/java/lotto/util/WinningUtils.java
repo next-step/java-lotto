@@ -4,10 +4,8 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningPrize;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WinningUtils {
 
@@ -15,11 +13,16 @@ public class WinningUtils {
 
     }
 
-    public static LottoResult countMatchingNumbers(int bonusBall, Set<Integer> winningNumbers, LottoNumbers userLottoNumbers) {
+    public static LottoResult countMatchingNumbers(List<Integer> winningNumbers, LottoNumbers userLottoNumbers) {
+        int bonusBall = winningNumbers.stream().reduce((first, second) -> second).orElse(-1);
+
+        List<Integer> winningCopyList = winningNumbers.stream().collect(Collectors.toList());
+        winningCopyList.remove(winningNumbers.size() - 1);
+
         List<Integer> userLottoNumberList = userLottoNumbers.getNumbers();
 
         long matchCount = userLottoNumberList.stream()
-                .filter(winningNumbers::contains)
+                .filter(winningCopyList::contains)
                 .count();
 
         boolean isBonus = false;
