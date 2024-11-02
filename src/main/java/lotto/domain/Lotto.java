@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.LottoRank;
 import lotto.random.LottoGenerator;
 
 import java.util.ArrayList;
@@ -8,9 +9,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int MINIMUM_LOTTO_NUMBER = 0;
-    public static final int MAXIMUM_LOTTO_NUMBER = 6;
+
     private final List<LottoNumbers> lottoNumbersList;
+    private LottoResult lottoResult;
 
     public static Lotto initAllRoundLottoNumbers(LottoGenerator lottoGenerator, int tryCount) {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
@@ -25,20 +26,26 @@ public class Lotto {
     }
 
     public List<LottoNumbers> totalRoundLottoNumberList() {
-     /*   List<List<Integer>> totalNumbersList = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            totalNumbersList.add(lottoNumbers.convertIntLottoNumbersList());
-        }*/
         return lottoNumbersList;
     }
 
-    public List<Integer> lottoRankList(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
-        return lottoNumbersList.stream()
-                .mapToInt(lottoNumbers -> winningLottoNumbers.lottoRank(lottoNumbers, bonusNumber))
-                .filter(lottoRank -> lottoRank > MINIMUM_LOTTO_NUMBER && lottoRank < MAXIMUM_LOTTO_NUMBER)
-                .boxed().collect(Collectors.toList());
+    public void updateWinningRankList(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+        lottoResult = new LottoResult(lottoRankList(winningLottoNumbers, bonusNumber));
     }
 
+    public List<LottoRank> lottoRankList(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+        return lottoNumbersList.stream()
+                .map(lottoNumbers -> winningLottoNumbers.lottoRank(lottoNumbers, bonusNumber))
+                .filter(lottoRank -> lottoRank != LottoRank.NONE).collect(Collectors.toList());
+    }
+
+    public LottoResult getLottoResult() {
+        return lottoResult;
+    }
+
+    public double calculateMarginPercent(int purchaseAmount) {
+        return lottoResult.calculateMarginPercent(purchaseAmount);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -52,4 +59,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hashCode(lottoNumbersList);
     }
+
 }

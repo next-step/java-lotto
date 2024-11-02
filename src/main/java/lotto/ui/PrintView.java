@@ -1,20 +1,16 @@
 package lotto.ui;
 
 
-import lotto.LottoWinningCountDecision;
+import lotto.LottoRank;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoResult;
 
 import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
-
-import static lotto.LottoRank.convertRankToMatchingCount;
 
 
 public class PrintView {
-
+    private static final List<LottoRank> PRINT_RANKS = List.of(LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
     public static final String LOTTO_RESULT_WITH_BONUS_TEXT = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     public static final String LOTTO_RESULT_TEXT = "%d개 일치 (%d원)- %d개\n";
 
@@ -34,10 +30,10 @@ public class PrintView {
         System.out.println("---------");
     }
 
-    public static void printWinningCount(Map<Integer, Integer> winningLottoCountMap) {
-        for (int rank : winningLottoCountMap.keySet()) {
-            System.out.printf(convertRankToText(rank), convertRankToMatchingCount(rank),
-                    LottoWinningCountDecision.convertMatchingRankToAmount(rank), winningLottoCountMap.get(rank));
+    public static void printWinningCount(LottoResult lottoResult) {
+        for (LottoRank lottoRank : PRINT_RANKS) {
+            System.out.printf(convertRankToText(lottoRank),lottoRank.lottoMatchingCount(), lottoRank.lottoWinningAmount(),
+                    lottoResult.countRank(lottoRank));
         }
     }
 
@@ -46,8 +42,8 @@ public class PrintView {
 
     }
 
-    public static String convertRankToText(int rank) {
-        if (rank == 2) {
+    public static String convertRankToText(LottoRank rank) {
+        if (rank.equals(LottoRank.SECOND)) {
             return LOTTO_RESULT_WITH_BONUS_TEXT;
         }
         return LOTTO_RESULT_TEXT;

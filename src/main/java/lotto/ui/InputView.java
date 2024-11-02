@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,12 +18,13 @@ public class InputView {
         return purchaseAmount;
     }
 
-    public static List<LottoNumber> lottoWinnerNumbers() {
+    public static LottoNumbers lottoWinnerNumbers() {
         System.out.println("지난주 당첨 번호를 입력해주세요");
         String winnserNumbers = scanner.nextLine();
         List<LottoNumber> list = Arrays.stream(winnserNumbers.replaceAll("\\s", "").split(","))
                 .map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
-        return list;
+
+        return new LottoNumbers(list);
     }
 
     public static LottoNumber lottoBonusNumbers() {

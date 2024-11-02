@@ -4,21 +4,25 @@ import org.junit.jupiter.api.Test;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoNumbersTest {
 
-//
+//,"2,8,1,3","2,8,6,2","1,7,7,1","1,7,6,1"
     @ParameterizedTest
-    @CsvSource(value = {"3,9,6,3","2,8,1,3","2,8,6,2","1,7,7,1","1,7,6,1"})
-    public void 당첨번호_일치개수별_랭크테스트_보너스볼포함(int startNumber, int endNumber, int bonusNumber, int expectedRankNumber) {
+    @MethodSource(value = "lottoProvider")
+    public void 당첨번호_일치개수별_랭크테스트_보너스볼포함(int startNumber, int endNumber, int bonusNumber, LottoRank lottoRank) {
         LottoNumber bonusBall = new LottoNumber(bonusNumber);
 
         List<LottoNumber> winnerNumberList = IntStream.range(1, 7)
@@ -29,7 +33,7 @@ public class LottoNumbersTest {
                 .collect(Collectors.toList()));
 
         LottoNumbers lottoWinningNumbers = new LottoNumbers(winnerNumberList);
-        assertThat(lottoWinningNumbers.lottoRank(numberList, bonusBall)).isEqualTo(expectedRankNumber);
+        assertThat(lottoWinningNumbers.lottoRank(numberList, bonusBall)).isEqualTo(lottoRank);
     }
 
     @Test
@@ -40,6 +44,16 @@ public class LottoNumbersTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoNumbers lottoWinningNumbers = new LottoNumbers(testNumberList);
         });
+    }
+
+    static Stream<Object> lottoProvider() {
+        return Stream.of(
+                Arguments.of(3,9,6,LottoRank.FOURTH),
+                Arguments.of(2,8,1,LottoRank.THIRD),
+                Arguments.of(2,8,6,LottoRank.SECOND),
+                Arguments.of(1,7,7,LottoRank.FIRST),
+                Arguments.of(1,7,6,LottoRank.FIRST)
+                );
     }
 
 

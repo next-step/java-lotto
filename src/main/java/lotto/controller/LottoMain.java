@@ -6,8 +6,6 @@ import lotto.random.RandomLottoNumbers;
 import lotto.ui.InputView;
 import lotto.ui.PrintView;
 
-import java.util.Scanner;
-
 public class LottoMain {
     public static void main(String[] args) {
 
@@ -21,12 +19,10 @@ public class LottoMain {
         PrintView.printLottoTryCount(tryNumber);
         PrintView.printLottoList(lotto);
 
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.updateWinningCountList(lotto.lottoRankList(new LottoNumbers(InputView.lottoWinnerNumbers())
-                ,InputView.lottoBonusNumbers()));
+        lotto.updateWinningRankList(InputView.lottoWinnerNumbers(), InputView.lottoBonusNumbers());
 
         PrintView.printWinningStatisticsPreview();
-        PrintView.printWinningCount(lottoResult.getLottoWinningCountsMap());
-        PrintView.printMargin(lottoResult.calculateMarginPercent().calculateMarginPercent(purchaseAmount));
+        PrintView.printWinningCount(lotto.getLottoResult());
+        PrintView.printMargin(lotto.calculateMarginPercent(purchaseAmount));
     }
 }

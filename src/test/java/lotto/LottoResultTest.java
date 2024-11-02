@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,37 +24,30 @@ public class LottoResultTest {
 
     @Test
     public void 당첨횟수저장_테스트() {
-        final Map<Integer, Integer> winningCountMap = Map.of(1, 0, 2, 0, 3, 0, 4, 0, 5, 1);
-        lottoResult.updateWinningCount(LOTTO_RANK);
-        assertThat(lottoResult).isEqualTo(new LottoResult(winningCountMap));
-    }
-
-    @Test
-    public void 당첨횟수리스트_저장_테스트() {
-        final Map<Integer, Integer> winningCountsMap = Map.of(1, 1, 2, 1, 3, 0, 4, 0, 5, 0);
-        final List<Integer> winningCountsList = List.of(1, 2);
-        lottoResult.updateWinningCountList(winningCountsList);
-        assertThat(lottoResult).isEqualTo(new LottoResult(winningCountsMap));
+        final LottoResult testResult = new LottoResult(List.of(LottoRank.FIFTH));
+        lottoResult.updateWinningCount(LottoRank.FIFTH);
+        assertThat(testResult).isEqualTo(lottoResult);
     }
 
     @Test
     public void 당첨금액_테스트() {
         final int winningAmount = 5000;
-        lottoResult.updateWinningCount(LOTTO_RANK);
+        lottoResult.updateWinningCount(LottoRank.FIFTH);
         assertThat(lottoResult.winningAmount()).isEqualTo(winningAmount);
     }
 
     @Test
     public void 당첨비율_테스트() {
         int purchaseAmount = 1000;
-        lottoResult.updateWinningCount(LOTTO_RANK);
-        assertThat(lottoResult.calculateMarginPercent().calculateMarginPercent(purchaseAmount)).isEqualTo(EXPECTED_MARGIN);
+        lottoResult.updateWinningCount(LottoRank.FIFTH);
+        assertThat(lottoResult.calculateMarginPercent(purchaseAmount)).isEqualTo(EXPECTED_MARGIN);
     }
 
     @Test
-    public void 보너스볼당첨_테스트() {
-        int purchaseAmount = 1000;
-        lottoResult.updateWinningCount(LOTTO_RANK);
-        assertThat(lottoResult.calculateMarginPercent().calculateMarginPercent(purchaseAmount)).isEqualTo(EXPECTED_MARGIN);
+    public void 당첨개수_테스트() {
+        lottoResult.updateWinningCount(LottoRank.FIFTH);
+        int expected_count = 1;
+        assertThat(lottoResult.countRank(LottoRank.FIFTH)).isEqualTo(expected_count);
     }
+
 }

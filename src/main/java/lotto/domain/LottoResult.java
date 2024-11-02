@@ -1,69 +1,49 @@
 package lotto.domain;
 
-;
-
-import lotto.LottoWinningCountDecision;
+import lotto.LottoRank;
 
 import java.util.*;
 
 public class LottoResult {
-    private final static int DEFAULT_WINNING_COUNT = 0;
-    Map<Integer, Integer> lottoWinningCountsMap;
+
+    List<LottoRank> winningRankList = new ArrayList<>();
 
     public LottoResult() {
-        this(initCountsMap());
     }
 
-    public LottoResult(Map<Integer, Integer> winningCountsMap) {
-        lottoWinningCountsMap = winningCountsMap;
-
+    public LottoResult(List<LottoRank> lottoRanks) {
+        winningRankList = lottoRanks;
     }
 
-    private static Map<Integer, Integer> initCountsMap() {
-        Map<Integer, Integer> winningLottoCountMap = new TreeMap<>(Comparator.reverseOrder());
-        Arrays.asList(5, 4, 3, 2, 1).forEach(i -> winningLottoCountMap.put(i, DEFAULT_WINNING_COUNT));
-
-        return winningLottoCountMap;
+    public void updateWinningCount(LottoRank lottoRank) {
+        winningRankList.add(lottoRank);
     }
 
-    public void updateWinningCountList(List<Integer> lottoRankList) {
-        for (int lottoRank : lottoRankList) {
-            updateWinningCount(lottoRank);
-        }
-    }
-
-    public void updateWinningCount(int lottoRank) {
-        lottoWinningCountsMap.compute(lottoRank, (key, value) -> value + 1);
-    }
-
-    public Map<Integer, Integer> getLottoWinningCountsMap() {
-        return lottoWinningCountsMap;
+    public long countRank(LottoRank lottoRank) {
+        return winningRankList.stream()
+                .filter(rank -> rank.equals(lottoRank)).count();
     }
 
     public int winningAmount() {
-        int winningAmount = 0;
-        for (int rank : lottoWinningCountsMap.keySet()) {
-            winningAmount += LottoWinningCountDecision.convertMatchingRankToAmount(rank) * lottoWinningCountsMap.get(rank);
-        }
-        return winningAmount;
+        return winningRankList.stream().mapToInt(LottoRank::lottoWinningAmount).sum();
     }
 
-    public MarginAmount calculateMarginPercent() {
-        return new MarginAmount(winningAmount());
-
+    public double calculateMarginPercent(int purchaseAmount) {
+        MarginAmount marginAmount = new MarginAmount(winningAmount());
+        return marginAmount.calculateMarginPercent(purchaseAmount);
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult that = (LottoResult) o;
-        return Objects.equals(lottoWinningCountsMap, that.lottoWinningCountsMap);
+        return Objects.equals(winningRankList, that.winningRankList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(lottoWinningCountsMap);
+        return Objects.hashCode(winningRankList);
     }
+
 }

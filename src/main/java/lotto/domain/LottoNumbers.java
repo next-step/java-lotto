@@ -20,18 +20,15 @@ public class LottoNumbers {
         }
     }
 
-    public int lottoRank(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+    public LottoRank lottoRank(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         int matchingCount = getMatchingCount(lottoNumbers);
-        int matchingCountWithBonus =matchingCount + lottoNumbers.matchingCountWithBonus(bonusNumber);
-        return LottoRank.convertMatchingCountToRank(matchingCount, matchingCountWithBonus);
+        boolean ismatchingBonus = lottoNumbers.bonusMatchingCount(bonusNumber);
+        return LottoRank.rank(matchingCount, ismatchingBonus);
     }
 
-    public int matchingCountWithBonus(LottoNumber bonusNumber) {
+    public boolean bonusMatchingCount(LottoNumber bonusNumber) {
         return this.lottoNumbers.stream()
-                .filter(lottoNumber -> checkMatching(bonusNumber)) // 필터링 조건
-                .findAny() // 일치하는 요소가 있는지 확인
-                .map(lottoNumber -> 1) // 일치하는 경우 1로 매핑
-                .orElse(0);
+                .anyMatch(lottoNumber -> checkMatching(bonusNumber));
       }
 
     public boolean checkMatching(LottoNumber bonusNumber) {
@@ -51,17 +48,6 @@ public class LottoNumbers {
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
-/*
-    protected List<Integer> convertIntLottoNumbersList() {
-        List<Integer> totalLottoNumbersList = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            totalLottoNumbersList.add(lottoNumber);
-        }
-        return totalLottoNumbersList;
-    }
-*/
-
-
 
     @Override
     public boolean equals(Object o) {
