@@ -1,15 +1,18 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public enum WinningPrize {
-    THREE(3, 5000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    FIVE_WITH_BONUS(5, 30_000_000, true),
-    SIX(6, 2_000_000_000);
+    FIFTH(3, 5000, 5),
+    FOURTH(4, 50_000, 4),
+    THIRD(5, 1_500_000, 3),
+    SECOND(5, 30_000_000, 2, true),
+    FIRST(6, 2_000_000_000, 1);
 
     public static WinningPrize getPrizeByMatchCount(int matchCount, boolean isBonus) {
         if (matchCount == 5 && isBonus) {
-            return FIVE_WITH_BONUS;
+            return SECOND;
         }
         for (WinningPrize prize : values()) {
             if (prize.getMatchCount() == matchCount && !prize.isBonus()) {
@@ -27,21 +30,28 @@ public enum WinningPrize {
         return prizeMoney;
     }
 
+    public int getRank() {
+        return rank;
+    }
+
     public boolean isBonus() {
         return isBonus;
     }
 
     private final int matchCount;
     private final int prizeMoney;
+    private final int rank;
     private final boolean isBonus;
+    private int count = 0;
 
-    WinningPrize(int matchCount, int prizeMoney) {
-        this(matchCount, prizeMoney, false);
+    WinningPrize(int matchCount, int prizeMoney, int rank) {
+        this(matchCount, prizeMoney, rank, false);
     }
 
-    WinningPrize(int matchCount, int prizeMoney, boolean isBonus) {
+    WinningPrize(int matchCount, int prizeMoney, int rank, boolean isBonus) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
+        this.rank = rank;
         this.isBonus = isBonus;
     }
 
@@ -52,4 +62,19 @@ public enum WinningPrize {
         }
         return 0;
     }
+
+    public static WinningPrize[] valuesSortedByRank() {
+        return Arrays.stream(values())
+                .sorted(Comparator.comparingInt(WinningPrize::getRank).reversed())
+                .toArray(WinningPrize[]::new);
+    }
+
+    public void incrementCount() {
+        this.count++;
+    }
+
+    public int getCount() {
+        return this.count;
+    }
+    
 }

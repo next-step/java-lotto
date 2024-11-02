@@ -7,17 +7,14 @@ import lotto.util.WinningUtils;
 import lotto.domain.WinningPrize;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class LottoService {
 
     public static final int MINIMUM_MATCH_COUNT = 3;
-    private static final int[] matchCount = new int[WinningPrize.values().length];
-
-    public static int[] getMatchCount() {
-        return matchCount;
-    }
 
     public int calculateLottoAmount(LottoMoney money) {
         return money.calculateLottoAmount();
@@ -52,10 +49,19 @@ public class LottoService {
     private int processWinningLotto(LottoResult lottoResult, int totalWinningAmount) {
         WinningPrize prize = WinningPrize.getPrizeByMatchCount(lottoResult.getMatchCount(), lottoResult.isBonus());
         if (prize != null) {
-            matchCount[prize.ordinal()]++;
+            prize.incrementCount();
             totalWinningAmount += prize.getPrizeMoney();
         }
         return totalWinningAmount;
+    }
+
+    public Map<WinningPrize, Integer> calculateWinningResults() {
+        Map<WinningPrize, Integer> results = new LinkedHashMap<>();
+
+        for (WinningPrize prize : WinningPrize.values()) {
+            results.put(prize, prize.getCount());
+        }
+        return results;
     }
 
 }

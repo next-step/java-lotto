@@ -38,19 +38,14 @@ public class LottoController {
         int totalWinningAmount = lottoService.getTotalWinningAmount(bonusBall, userLottos, winningNumbers);
         ResultView.printResult();
 
-        int[] matchCount = lottoService.getMatchCount();
-        printResults(moneyAmount, totalWinningAmount, matchCount);
+        printResults(moneyAmount, totalWinningAmount);
     }
 
-    private void printResults(int moneyAmount, int totalWinningAmount, int[] matchCount) {
-        for (WinningPrize prize : WinningPrize.values()) {
-            int prizeMoney = prize.getPrizeMoney();
-            int count = matchCount[prize.ordinal()];
-            ResultView.printMatchCount(prize, count);
-        }
+    private void printResults(int moneyAmount, int totalWinningAmount) {
+        Map<WinningPrize, Integer> winningResults = lottoService.calculateWinningResults();
+        ResultView.printWinningResults(winningResults);
 
         double winningRate = WinningUtils.calculateWinningRate(moneyAmount, totalWinningAmount);
         ResultView.printWinningRate(winningRate);
     }
-
 }

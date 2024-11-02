@@ -4,6 +4,7 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.WinningPrize;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -30,8 +31,14 @@ public class ResultView {
         System.out.println("-".repeat(10));
     }
 
+    public static void printWinningResults(Map<WinningPrize, Integer> winningResults) {
+        for (Map.Entry<WinningPrize, Integer> entry : winningResults.entrySet()) {
+            printMatchCount(entry.getKey(), entry.getValue());
+        }
+    }
+
     public static void printMatchCount(WinningPrize prize, int count) {
-        if (prize == WinningPrize.FIVE_WITH_BONUS) {
+        if (prize == WinningPrize.SECOND) {
             System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", prize.getMatchCount(), prize.getPrizeMoney(), count);
             return;
         }
