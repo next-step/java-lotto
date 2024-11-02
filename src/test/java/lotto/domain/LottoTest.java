@@ -19,17 +19,14 @@ class LottoTest {
 
     }
 
+    @Test
+    void 당첨_순위() {
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 7));
 
-
-//    @Test
-//    void 당첨_갯수() {
-//        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
-//
-//        int countMatchingNumbers = winningLotto
-//                .countMatchingNumbers(new Lotto(Set.of(1, 3, 5, 7, 9, 11)));
-//
-//        assertThat(countMatchingNumbers).isEqualTo(3);
-//    }
+        assertThat(lotto.getLottoRank(winningLotto))
+                .isEqualTo(LottoRank.FIVE_MATCH);
+    }
 
     @Test
     void 중복_입력_불가() {
