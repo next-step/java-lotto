@@ -9,11 +9,11 @@ public class Division implements Operation {
 
     private static void validateDivision(int a, int b) {
         if (b == 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("0으로 나눌수 없습니다.");
         }
 
         if (a % b > 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("결과 값이 정수 여야 합니다.");
         }
     }
 }
