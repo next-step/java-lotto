@@ -6,23 +6,23 @@ import lotto.random.RandomLottoNumbers;
 import lotto.ui.InputView;
 import lotto.ui.PrintView;
 
-import java.util.Scanner;
-
 public class LottoMain {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int purchaseAmount = InputView.purchaseAmount(scanner);
+
+        int purchaseAmount = InputView.purchaseAmount();
         LottoGenerator lottoGenerator = new RandomLottoNumbers();
-        Lotto lotto = new Lotto(lottoGenerator,purchaseAmount);
+        TryCount tryCount = TryCount.initTryCount(purchaseAmount);
 
-        PrintView.printLottoTryCount(lotto.getTryCount());
-        PrintView.printLottoList(lotto.totalRoundLottoNumberList());
+        int tryNumber = tryCount.getTryCount();
+        Lotto lotto = Lotto.initAllRoundLottoNumbers(lottoGenerator, tryNumber);
 
-        LottoWinner lottoWinner = new LottoWinner();
-        lottoWinner.updateWinningCountList(lotto.lottoRankList(new LottoNumbers(InputView.lottoWinnerNumbers(scanner))));
+        PrintView.printLottoTryCount(tryNumber);
+        PrintView.printLottoList(lotto);
+
+        lotto.updateWinningRankList(InputView.lottoWinnerNumbers(), InputView.lottoBonusNumbers());
 
         PrintView.printWinningStatisticsPreview();
-        PrintView.printWinningCount(lottoWinner.getLottoWinningCountsMap());
-        PrintView.printMargin(lottoWinner.calculateMarginPercent(purchaseAmount));
+        PrintView.printWinningCount(lotto.getLottoResult());
+        PrintView.printMargin(lotto.calculateMarginPercent(purchaseAmount));
     }
 }

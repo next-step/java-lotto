@@ -1,19 +1,16 @@
 package lotto.domain;
 
+import lotto.LottoRank;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoNumbers {
-    public static final int RANK_SUB_NUMBER = 7;
-    public static final int DEFAULT_NUMBER = 0;
-    public static final int MINIMUM_MATCHING_NUMBER = 3;
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers(List<Integer> lottoWinningList) {
-        for (int winningNumber : lottoWinningList) {
-            lottoNumbers.add(new LottoNumber(winningNumber));
-        }
+    public LottoNumbers(List<LottoNumber> lottoWinningList) {
+        lottoNumbers.addAll(lottoWinningList);
         checkSize();
     }
 
@@ -23,25 +20,32 @@ public class LottoNumbers {
         }
     }
 
-    public int lottoRank(List<LottoNumber> lottoNumbers) {
-        int matchingCount = (int) lottoNumbers.stream()
-                .filter(this.lottoNumbers::contains)
-                .count();
-        if (matchingCount < MINIMUM_MATCHING_NUMBER) {
-            return DEFAULT_NUMBER;
-        }
-        return RANK_SUB_NUMBER - matchingCount;
+    public LottoRank lottoRank(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        int matchingCount = getMatchingCount(lottoNumbers);
+        boolean ismatchingBonus = lottoNumbers.bonusMatchingCount(bonusNumber);
+        return LottoRank.rank(matchingCount, ismatchingBonus);
     }
 
-    protected List<Integer> convertIntLottoNumbersList() {
-        List<Integer> totalLottoNumbersList = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            totalLottoNumbersList.add(lottoNumber.getLottoNumber());
-        }
-        return totalLottoNumbersList;
+    public boolean bonusMatchingCount(LottoNumber bonusNumber) {
+        return this.lottoNumbers.stream()
+                .anyMatch(lottoNumber -> checkMatching(bonusNumber));
+      }
+
+    public boolean checkMatching(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
-    protected List<LottoNumber> getLottoNumberList() {
+    private int getMatchingCount(LottoNumbers lottoNumbers) {
+        return lottoNumbers.getMatchingCount(this.lottoNumbers);
+    }
+
+    private int getMatchingCount(List<LottoNumber> lottoNumbers) {
+        List<LottoNumber> copyLottoNumbers = new ArrayList<>(this.lottoNumbers);
+        copyLottoNumbers.retainAll(lottoNumbers);
+        return copyLottoNumbers.size();
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
