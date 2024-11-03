@@ -18,8 +18,8 @@ public class WinningUtilsTest {
         Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers userLottoNumbers = new LottoNumbers(Arrays.asList(1, 11, 12, 13, 14, 15));
 
-        int matchCount = WinningUtils.countMatchingNumbers(winningNumbers, userLottoNumbers);
-        assertThat(matchCount).isEqualTo(1);
+        LottoResult lottoResult = WinningUtils.countMatchingNumbers(2, winningNumbers, userLottoNumbers);
+        assertThat(lottoResult.getMatchCount()).isEqualTo(1);
     }
 
     @Test

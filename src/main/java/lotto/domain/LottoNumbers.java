@@ -22,7 +22,8 @@ public class LottoNumbers {
     private final List<Integer> numbers;
 
     public LottoNumbers(List<Integer> numbers) {
-        this.numbers = numbers;
+        validateNumbers(numbers);
+        this.numbers = new ArrayList<>(numbers);
     }
 
     public static LottoNumbers generateLotto() {
@@ -33,8 +34,13 @@ public class LottoNumbers {
         return new LottoNumbers(selectedNumbers);
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    private void validateNumbers(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
     }
 
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
 }

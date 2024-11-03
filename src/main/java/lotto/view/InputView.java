@@ -68,4 +68,11 @@ public class InputView {
             return null;
         }
     }
+
+    public static int getBonusBall() {
+        System.out.println(String.format("보너스 볼을 입력해 주세요."));
+        int bonusBall = SCANNER.nextInt();
+        SCANNER.nextLine();
+        return bonusBall;
+    }
 }
