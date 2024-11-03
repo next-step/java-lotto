@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningPrize;
 
 import java.util.List;
@@ -16,11 +16,11 @@ public class ResultView {
         System.out.println(String.format("총 %d개를 구매하였습니다.", amount));
     }
 
-    public static void printLottoNumbers(List<LottoNumbers> selectedNumbers) {
+    public static void printLottoNumbers(List<LottoTicket> selectedNumbers) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (LottoNumbers lottoNumbers : selectedNumbers) {
-            stringBuilder.append(lottoNumbers.getNumbers()).append(System.lineSeparator());
+        for (LottoTicket lottoTicket : selectedNumbers) {
+            stringBuilder.append(lottoTicket.getNumbersAsString()).append(System.lineSeparator());
         }
         System.out.println(stringBuilder.toString());
     }

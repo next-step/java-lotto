@@ -1,16 +1,14 @@
 package lotto.service;
 
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
-import lotto.util.WinningUtils;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningPrize;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoService {
 
@@ -20,23 +18,25 @@ public class LottoService {
         return money.calculateLottoAmount();
     }
 
-    public List<LottoNumbers> generateLottoNumbers(int amount) {
-        List<LottoNumbers> userLottos = new ArrayList<>();
+    public List<LottoTicket> generateLottoTickets(int amount) {
+        List<LottoTicket> userLottos = new ArrayList<>();
         for (int i = 1; i <= amount; i++) {
-            LottoNumbers selectedNumbers = LottoNumbers.generateLotto();
-            userLottos.add(selectedNumbers);
+            userLottos.add(new LottoTicket(LottoTicket.generateRandomNumbers()));
         }
         return userLottos;
     }
 
-    public int getTotalWinningAmount(List<LottoNumbers> userLottos, List<Integer> winningNumbers) {
-        int totalWinningAmount = 0;
+    public LottoResult getLottoResult(LottoTicket userTicket, LottoTicket winningTicket) {
+        int matchCount = userTicket.countMatchingNumbers(winningTicket);
+        boolean isBonus = userTicket.isBonusMatched(winningTicket);
+        return new LottoResult(matchCount, isBonus);
+    }
 
-        for (LottoNumbers userLotto : userLottos) {
-            LottoResult lottoResult = WinningUtils.countMatchingNumbers(winningNumbers, userLotto);
-            totalWinningAmount = addTotalWinningAmount(lottoResult, totalWinningAmount);
-        }
-        return totalWinningAmount;
+    public int getTotalWinningAmount(List<LottoTicket> userLottos, LottoTicket winningTicket) {
+        return userLottos.stream()
+                .map(userTicket -> getLottoResult(userTicket, winningTicket))
+                .mapToInt(lottoResult -> addTotalWinningAmount(lottoResult, 0))
+                .sum();
     }
 
     private int addTotalWinningAmount(LottoResult lottoResult, int totalWinningAmount) {
@@ -64,4 +64,10 @@ public class LottoService {
         return results;
     }
 
+    public double calculateWinningRate(int moneyAmount, int totalWinningAmount) {
+        if (moneyAmount == 0) {
+            return 0.0;
+        }
+        return (double) totalWinningAmount / moneyAmount * 100;
+    }
 }

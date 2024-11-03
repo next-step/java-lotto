@@ -1,18 +1,15 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoMoney;
 import lotto.domain.WinningPrize;
 import lotto.service.LottoService;
-import lotto.util.WinningUtils;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 
 public class LottoController {
 
@@ -22,7 +19,6 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-
     public void play() {
 
         int moneyAmount = InputView.getMoney();
@@ -31,14 +27,15 @@ public class LottoController {
         int amount = lottoService.calculateLottoAmount(money);
         ResultView.printLottoAmount(amount);
 
-        List<LottoNumbers> userLottos = lottoService.generateLottoNumbers(amount);
+        List<LottoTicket> userLottos = lottoService.generateLottoTickets(amount);
         ResultView.printLottoNumbers(userLottos);
 
         Set<Integer> winningNumbers = InputView.getWinningNumbers();
-        List<Integer> winningNumbersList = new ArrayList<>(winningNumbers);
         int bonusBall = InputView.getBonusBall();
-        winningNumbersList.add(bonusBall);
-        int totalWinningAmount = lottoService.getTotalWinningAmount(userLottos, winningNumbersList);
+
+        LottoTicket winningTicket = LottoTicket.generateWinningTicket(winningNumbers, bonusBall);
+
+        int totalWinningAmount = lottoService.getTotalWinningAmount(userLottos, winningTicket);
         ResultView.printResult();
 
         printResults(moneyAmount, totalWinningAmount);
@@ -48,7 +45,7 @@ public class LottoController {
         Map<WinningPrize, Integer> winningResults = lottoService.calculateWinningResults();
         ResultView.printWinningResults(winningResults);
 
-        double winningRate = WinningUtils.calculateWinningRate(moneyAmount, totalWinningAmount);
+        double winningRate = lottoService.calculateWinningRate(moneyAmount, totalWinningAmount);
         ResultView.printWinningRate(winningRate);
     }
 }

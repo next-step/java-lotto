@@ -17,20 +17,10 @@ public enum WinningPrize {
     private int count = 0;
 
     public static WinningPrize getPrizeByMatchCount(int matchCount, boolean isBonus) {
-        if (matchCount == 5 && isBonus) {
-            return SECOND;
-        }
-        for (WinningPrize prize : values()) {
-            return getPrize(matchCount, prize);
-        }
-        return null;
-    }
-
-    private static WinningPrize getPrize(int matchCount, WinningPrize prize) {
-        if (prize.getMatchCount() == matchCount && !prize.isBonus()) {
-            return prize;
-        }
-        return null;
+        return Arrays.stream(values())
+                .filter(prize -> prize.matchCount == matchCount && prize.isBonus == isBonus)
+                .findFirst()
+                .orElse(null);
     }
 
     public int getMatchCount() {
@@ -81,5 +71,5 @@ public enum WinningPrize {
     public int getCount() {
         return this.count;
     }
-    
+
 }
