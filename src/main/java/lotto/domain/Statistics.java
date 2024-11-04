@@ -11,19 +11,16 @@ public class Statistics {
                 WinningRule.THREE, 0,
                 WinningRule.FOUR, 0,
                 WinningRule.FIVE, 0,
+                WinningRule.FIVE_BONUS, 0,
                 WinningRule.SIX, 0
         ));
-    }
-
-    public int get(int key) {
-        return statistics.get(WinningRule.findByValue(key));
     }
 
     public int get(WinningRule key) {
         return statistics.get(key);
     }
 
-    public void put(int key, int value) {
-        this.statistics.put(WinningRule.findByValue(key), value);
+    public void put(WinningRule key, int value) {
+        this.statistics.put(key, value);
     }
 }

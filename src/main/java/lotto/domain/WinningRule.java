@@ -6,7 +6,9 @@ public enum WinningRule {
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000);
+    FIVE_BONUS(5, 30_000_000),
+    SIX(6, 2_000_000_000)
+    ;
 
 
     private final int match;
@@ -28,7 +30,6 @@ public enum WinningRule {
         return Arrays.stream(WinningRule.values())
                 .filter(item -> item.getMatch() == match)
                 .findFirst()
-                .orElseThrow(null);
+                .orElse(null);
     }
-
 }

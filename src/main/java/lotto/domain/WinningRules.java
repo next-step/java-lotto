@@ -22,6 +22,7 @@ public class WinningRules {
                 WinningRule.THREE,
                 WinningRule.FOUR,
                 WinningRule.FIVE,
+                WinningRule.FIVE_BONUS,
                 WinningRule.SIX
         ));
     }
@@ -29,7 +30,7 @@ public class WinningRules {
     public BigDecimal getTotalRateOfReturn(int input, Statistics statistics) {
         int totalReward = 0;
         for (WinningRule winningRule : this.rules) {
-            totalReward += statistics.get(winningRule.getMatch()) * winningRule.getReward();
+            totalReward += statistics.get(winningRule) * winningRule.getReward();
         }
         return BigDecimal.valueOf(totalReward).divide(BigDecimal.valueOf(input), 2, RoundingMode.FLOOR);
     }

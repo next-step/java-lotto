@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Orders;
-import lotto.domain.Statistics;
-import lotto.domain.WinningRules;
+import lotto.domain.*;
 import lotto.view.Report;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,11 +28,12 @@ public class ReportTest {
         Report report = new Report();
 
         Statistics statistics = new Statistics();
-        statistics.put(3, 10);
-        statistics.put(4, 1);
-        statistics.put(5, 0);
-        statistics.put(6, 0);
+        statistics.put(WinningRule.THREE, 10);
+        statistics.put(WinningRule.FOUR, 1);
+        statistics.put(WinningRule.FIVE, 0);
+        statistics.put(WinningRule.FIVE_BONUS, 1);
+        statistics.put(WinningRule.SIX, 0);
 
-        assertThat(report.reportWinners(statistics, WinningRules.getDefaultWinningRules())).isEqualTo("당첨 통계\n---------\n3개 일치 (5000원)- 10개\n4개 일치 (50000원)- 1개\n5개 일치 (1500000원)- 0개\n6개 일치 (2000000000원)- 0개\n");
+        assertThat(report.reportWinners(statistics, WinningRules.getDefaultWinningRules())).isEqualTo("당첨 통계\n---------\n3개 일치 (5000원)- 10개\n4개 일치 (50000원)- 1개\n5개 일치 (1500000원)- 0개\n5개 일치, 보너스 볼 일치 (30000000원)- 1개\n6개 일치 (2000000000원)- 0개\n");
     }
 }

@@ -28,6 +28,7 @@ public class Report {
      * 3개 일치 (5000원)- 1개
      * 4개 일치 (50000원)- 0개
      * 5개 일치 (1500000원)- 0개
+     * 5개 일치, 보너스 볼 일치 (30000000원)- 0개
      * 6개 일치 (2000000000원)- 0개
      */
     public String reportWinners(Statistics statistics, WinningRules winningRules) {
@@ -36,16 +37,23 @@ public class Report {
         builder.append("---------\n");
 
         for (WinningRule winningRule : winningRules.getAllRules()) {
-            builder.append(String.format("%d개 일치 (%d원)- %d개\n",
+            builder.append(String.format(getMessage(winningRule),
                     winningRule.getMatch(),
                     winningRule.getReward(),
-                    statistics.get(winningRule.getMatch()))
+                    statistics.get(winningRule))
             );
         }
 
         String result = builder.toString();
         System.out.println(result);
         return result;
+    }
+
+    private String getMessage(WinningRule winningRule) {
+        if (WinningRule.FIVE_BONUS == winningRule) {
+            return "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
+        }
+        return "%d개 일치 (%d원)- %d개\n";
     }
 
     public void reportRateOfReturn(Money input, Statistics statistics, WinningRules winningRules) {

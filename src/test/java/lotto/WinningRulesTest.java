@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Statistics;
+import lotto.domain.WinningRule;
 import lotto.domain.WinningRules;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,10 +18,10 @@ public class WinningRulesTest {
         WinningRules winningRules = WinningRules.getDefaultWinningRules();
 
         Statistics statistics = new Statistics();
-        statistics.put(3, 1);
-        statistics.put(4, 0);
-        statistics.put(5, 0);
-        statistics.put(6, 0);
+        statistics.put(WinningRule.THREE, 1);
+        statistics.put(WinningRule.FOUR, 0);
+        statistics.put(WinningRule.FIVE, 0);
+        statistics.put(WinningRule.SIX, 0);
 
         assertThat(winningRules.getTotalRateOfReturn(14000, statistics)).isEqualTo(BigDecimal.valueOf(0.35));
     }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,8 +17,13 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public int match(LottoNumbers numbers) {
-        return (int) numbers.getNumbers().stream().filter(this.numbers::contains).count();
+    public WinningRule matchRule(LottoNumbers numbers) {
+        long count = numbers.getNumbers().stream().filter(this.numbers::contains).count();
+        return WinningRule.findByValue((int)count);
+    }
+
+    public List<LottoNumber> notMatchedNumbers(LottoNumbers numbers) {
+        return numbers.getNumbers().stream().filter(n -> !this.numbers.contains(n)).collect(Collectors.toList());
     }
 
     public Set<LottoNumber> getNumbers() {
