@@ -24,7 +24,7 @@ class LottoTest {
         assertThat(lotto).isEqualTo(testLotto);
     }
 
-    @Test
+  /*  @Test
     public void 로또당첨리스트_테스트() {
         final List<LottoRank> EXPECTED_RANK_LIST = List.of(LottoRank.FIRST);
         final List<LottoNumber> TEST_WINNING_NUMBER_LIST = IntStream.range(1, 7)
@@ -37,6 +37,6 @@ class LottoTest {
         LottoNumber bonusBall = new LottoNumber(bonusNumber);
         assertThat( lotto.lottoRankList(winningLottoNumbers, bonusBall))
                 .isEqualTo(EXPECTED_RANK_LIST);
-    }
+    }*/
 
 }

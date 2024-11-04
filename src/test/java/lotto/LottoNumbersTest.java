@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.Test;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -33,7 +34,7 @@ public class LottoNumbersTest {
                 .collect(Collectors.toList()));
 
         LottoNumbers lottoWinningNumbers = new LottoNumbers(winnerNumberList);
-        assertThat(lottoWinningNumbers.lottoRank(numberList, bonusBall)).isEqualTo(lottoRank);
+        assertThat(new WinningLotto(numberList, bonusBall).lottoRank(lottoWinningNumbers)).isEqualTo(lottoRank);
     }
 
     @Test

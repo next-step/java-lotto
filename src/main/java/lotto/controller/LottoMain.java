@@ -19,10 +19,10 @@ public class LottoMain {
         PrintView.printLottoTryCount(tryNumber);
         PrintView.printLottoList(lotto);
 
-        lotto.updateWinningRankList(InputView.lottoWinnerNumbers(), InputView.lottoBonusNumbers());
+        LottoResult lottoResult = lotto.updateWinningRankList(new WinningLotto(InputView.lottoWinnerNumbers(), InputView.lottoBonusNumbers()));
 
         PrintView.printWinningStatisticsPreview();
-        PrintView.printWinningCount(lotto.getLottoResult());
-        PrintView.printMargin(lotto.calculateMarginPercent(purchaseAmount));
+        PrintView.printWinningCount(lottoResult);
+        PrintView.printMargin(lottoResult.calculateMarginPercent(purchaseAmount));
     }
 }

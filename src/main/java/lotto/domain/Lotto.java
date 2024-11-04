@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private final List<LottoNumbers> lottoNumbersList;
-    private LottoResult lottoResult;
 
     public static Lotto initAllRoundLottoNumbers(LottoGenerator lottoGenerator, int tryCount) {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
@@ -29,22 +28,19 @@ public class Lotto {
         return lottoNumbersList;
     }
 
-    public void updateWinningRankList(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
-        lottoResult = new LottoResult(lottoRankList(winningLottoNumbers, bonusNumber));
+    public LottoResult updateWinningRankList(WinningLotto winningLotto) {
+        return new LottoResult(lottoRankList(winningLotto));
     }
 
-    public List<LottoRank> lottoRankList(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
-        return lottoNumbersList.stream()
-                .map(lottoNumbers -> winningLottoNumbers.lottoRank(lottoNumbers, bonusNumber))
-                .filter(lottoRank -> lottoRank != LottoRank.NONE).collect(Collectors.toList());
-    }
-
-    public LottoResult getLottoResult() {
-        return lottoResult;
-    }
-
-    public double calculateMarginPercent(int purchaseAmount) {
-        return lottoResult.calculateMarginPercent(purchaseAmount);
+    public List<LottoRank> lottoRankList(WinningLotto winningLotto) {
+        List<LottoRank> list = new ArrayList<>();
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+            LottoRank lottoRank = winningLotto.lottoRank(lottoNumbers);
+            if (lottoRank != LottoRank.NONE) {
+                list.add(lottoRank);
+            }
+        }
+        return list;
     }
 
     @Override

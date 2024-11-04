@@ -20,11 +20,6 @@ public class LottoNumbers {
         }
     }
 
-    public LottoRank lottoRank(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
-        int matchingCount = getMatchingCount(lottoNumbers);
-        boolean ismatchingBonus = lottoNumbers.bonusMatchingCount(bonusNumber);
-        return LottoRank.rank(matchingCount, ismatchingBonus);
-    }
 
     public boolean bonusMatchingCount(LottoNumber bonusNumber) {
         return this.lottoNumbers.stream()
@@ -35,15 +30,6 @@ public class LottoNumbers {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    private int getMatchingCount(LottoNumbers lottoNumbers) {
-        return lottoNumbers.getMatchingCount(this.lottoNumbers);
-    }
-
-    private int getMatchingCount(List<LottoNumber> lottoNumbers) {
-        List<LottoNumber> copyLottoNumbers = new ArrayList<>(this.lottoNumbers);
-        copyLottoNumbers.retainAll(lottoNumbers);
-        return copyLottoNumbers.size();
-    }
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
@@ -63,4 +49,9 @@ public class LottoNumbers {
     }
 
 
+    public int getMatchingCount(LottoNumbers lottoNumbers) {
+        List<LottoNumber> copyLottoNumbers = new ArrayList<>(lottoNumbers.getLottoNumbers());
+        copyLottoNumbers.retainAll(this.lottoNumbers);
+        return copyLottoNumbers.size();
+    }
 }
