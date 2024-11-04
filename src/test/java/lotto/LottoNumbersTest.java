@@ -25,16 +25,15 @@ public class LottoNumbersTest {
     @MethodSource(value = "lottoProvider")
     public void 당첨번호_일치개수별_랭크테스트_보너스볼포함(int startNumber, int endNumber, int bonusNumber, LottoRank lottoRank) {
         LottoNumber bonusBall = new LottoNumber(bonusNumber);
-
-        List<LottoNumber> winnerNumberList = IntStream.range(1, 7)
+        List<LottoNumber> winnerNumberList = IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
-        LottoNumbers numberList = new LottoNumbers(IntStream.range(startNumber, endNumber)
+
+        LottoNumbers lottonumbers = new LottoNumbers(IntStream.range(startNumber, endNumber)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList()));
-
         LottoNumbers lottoWinningNumbers = new LottoNumbers(winnerNumberList);
-        assertThat(new WinningLotto(numberList, bonusBall).lottoRank(lottoWinningNumbers)).isEqualTo(lottoRank);
+        assertThat(new WinningLotto(lottoWinningNumbers, bonusBall).lottoRank(lottonumbers)).isEqualTo(lottoRank);
     }
 
     @Test

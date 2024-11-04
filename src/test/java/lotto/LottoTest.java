@@ -1,11 +1,12 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
-import org.junit.jupiter.api.Test;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.WinningLotto;
 import lotto.random.LottoGenerator;
 import lotto.testrandom.DefaultLottoList;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ class LottoTest {
         assertThat(lotto).isEqualTo(testLotto);
     }
 
-  /*  @Test
+    @Test
     public void 로또당첨리스트_테스트() {
         final List<LottoRank> EXPECTED_RANK_LIST = List.of(LottoRank.FIRST);
         final List<LottoNumber> TEST_WINNING_NUMBER_LIST = IntStream.range(1, 7)
@@ -35,8 +36,9 @@ class LottoTest {
         Lotto lotto = Lotto.initAllRoundLottoNumbers(lottoGenerator, tryCount);
         int bonusNumber = 7;
         LottoNumber bonusBall = new LottoNumber(bonusNumber);
-        assertThat( lotto.lottoRankList(winningLottoNumbers, bonusBall))
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
+        assertThat(lotto.lottoRankList(winningLotto))
                 .isEqualTo(EXPECTED_RANK_LIST);
-    }*/
+    }
 
 }
