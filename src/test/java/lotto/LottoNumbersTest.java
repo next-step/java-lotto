@@ -20,7 +20,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoNumbersTest {
 
-//,"2,8,1,3","2,8,6,2","1,7,7,1","1,7,6,1"
     @ParameterizedTest
     @MethodSource(value = "lottoProvider")
     public void 당첨번호_일치개수별_랭크테스트_보너스볼포함(int startNumber, int endNumber, int bonusNumber, LottoRank lottoRank) {
