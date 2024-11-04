@@ -29,6 +29,17 @@ public class TryCount {
         return tryCount;
     }
 
+    public void validateManualTry(int manualTry) {
+        if ( tryCount< manualTry) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void updateWithManualTry(int manualTry) {
+        validateManualTry(manualTry);
+        tryCount -= manualTry;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,4 +52,7 @@ public class TryCount {
     public int hashCode() {
         return Objects.hashCode(tryCount);
     }
+
+
+
 }
