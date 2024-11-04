@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 
@@ -16,14 +17,16 @@ public class InputView {
         return manualTryCount;
     }
 
-    public static List<LottoNumbers> manualLottoNumber(int manualTryCount) {
+    public static Lotto manualLottoNumber(int manualTryCount) {
+        if (manualTryCount == 0) {
+            return new Lotto(new ArrayList<>());
+        }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<LottoNumbers> manualLotto = new ArrayList<>();
         for (int i = 1; i <= manualTryCount; i++) {
             manualLotto.add(getLottoNumbers(scanner.nextLine()));
         }
-        scanner.nextLine();
-        return manualLotto;
+        return new Lotto(manualLotto);
     }
 
     public static int purchaseAmount() {

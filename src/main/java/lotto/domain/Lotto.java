@@ -13,15 +13,34 @@ public class Lotto {
     private final List<LottoNumbers> lottoNumbersList;
 
     public static Lotto initAllRoundLottoNumbers(LottoGenerator lottoGenerator, int tryCount) {
+        return initAllRoundLottoNumbers(new Lotto(new ArrayList<>()), lottoGenerator, tryCount);
+    }
+
+    public static Lotto initAllRoundLottoNumbers(Lotto manualLotto, LottoGenerator lottoGenerator, int tryCount) {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (int i = 0; i < tryCount; i++) {
-            lottoNumbersList.add(new LottoNumbers(lottoGenerator.executeStrategy()));
-        }
+        insertManualLotto(manualLotto, lottoNumbersList);
+        insertRandomLotto(lottoGenerator, tryCount, lottoNumbersList);
         return new Lotto(lottoNumbersList);
     }
 
     public Lotto(List<LottoNumbers> lottoNumbersList) {
         this.lottoNumbersList = lottoNumbersList;
+    }
+
+    private static void insertRandomLotto(LottoGenerator lottoGenerator, int tryCount, List<LottoNumbers> lottoNumbersList) {
+        for (int i = 0; i < tryCount; i++) {
+            lottoNumbersList.add(new LottoNumbers(lottoGenerator.executeStrategy()));
+        }
+    }
+
+    private static void insertManualLotto(Lotto manaulLotto, List<LottoNumbers> lottoNumbersList) {
+        if (!manaulLotto.isEmpty()) {
+            lottoNumbersList.addAll(manaulLotto.totalRoundLottoNumberList());
+        }
+    }
+
+    public boolean isEmpty() {
+        return lottoNumbersList.isEmpty();
     }
 
     public List<LottoNumbers> totalRoundLottoNumberList() {
@@ -33,14 +52,10 @@ public class Lotto {
     }
 
     public List<LottoRank> lottoRankList(WinningLotto winningLotto) {
-        List<LottoRank> list = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            LottoRank lottoRank = winningLotto.lottoRank(lottoNumbers);
-            if (lottoRank != LottoRank.NONE) {
-                list.add(lottoRank);
-            }
-        }
-        return list;
+        return lottoNumbersList.stream()
+                .map(winningLotto::lottoRank)
+                .filter(lottoRank -> lottoRank != LottoRank.NONE)
+                .collect(Collectors.toList());
     }
 
     @Override

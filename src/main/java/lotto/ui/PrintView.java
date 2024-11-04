@@ -19,8 +19,13 @@ public class PrintView {
 
     }
 
+    public static void printManualAndRandomTryCount(int manualTryCount, int lottoTryCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualTryCount, lottoTryCount);
+        System.out.println();
+    }
+
     public static void printLottoList(Lotto lotto) {
-        for(LottoNumbers lottoNumbers :lotto.totalRoundLottoNumberList()) {
+        for (LottoNumbers lottoNumbers : lotto.totalRoundLottoNumberList()) {
             System.out.println(lottoNumbers.getLottoNumbers());
         }
     }
@@ -32,7 +37,7 @@ public class PrintView {
 
     public static void printWinningCount(LottoResult lottoResult) {
         for (LottoRank lottoRank : PRINT_RANKS) {
-            System.out.printf(convertRankToText(lottoRank),lottoRank.lottoMatchingCount(), lottoRank.lottoWinningAmount(),
+            System.out.printf(convertRankToText(lottoRank), lottoRank.lottoMatchingCount(), lottoRank.lottoWinningAmount(),
                     lottoResult.countRank(lottoRank));
         }
     }

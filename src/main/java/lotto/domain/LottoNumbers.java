@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.LottoRank;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +22,7 @@ public class LottoNumbers {
     public boolean bonusMatchingCount(LottoNumber bonusNumber) {
         return this.lottoNumbers.stream()
                 .anyMatch(lottoNumber -> checkMatching(bonusNumber));
-      }
+    }
 
     public boolean checkMatching(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);

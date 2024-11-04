@@ -4,11 +4,12 @@ import java.util.Objects;
 
 public class TryCount {
     public static final int CONVERTING_FLOOR_NUMBER = 1000;
-    int tryCount;
+    private int tryCount;
 
     public TryCount(int tryCount) {
         this.tryCount = tryCount;
     }
+
 
     public static TryCount initTryCount(int purchaseAmount) {
         checkAmount(purchaseAmount);
@@ -30,7 +31,7 @@ public class TryCount {
     }
 
     public void validateManualTry(int manualTry) {
-        if ( tryCount< manualTry) {
+        if (tryCount < manualTry) {
             throw new IllegalArgumentException();
         }
     }
@@ -52,7 +53,6 @@ public class TryCount {
     public int hashCode() {
         return Objects.hashCode(tryCount);
     }
-
 
 
 }
