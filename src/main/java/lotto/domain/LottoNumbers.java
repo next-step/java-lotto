@@ -26,6 +26,11 @@ public class LottoNumbers {
         return unmodifiableList(list);
     }
 
+    public boolean contains(int number) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.isSame(number));
+    }
+
     private static Set<LottoNumber> toLottoNumber(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(LottoNumber::new)

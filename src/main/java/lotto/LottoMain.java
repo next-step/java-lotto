@@ -16,7 +16,8 @@ public class LottoMain {
 
         String lastWinningLottoNumbers = InputView.inputLastWinningLotto();
         Lotto lastWinningLotto = new Lotto(lastWinningLottoNumbers);
-        LottoResult lottoResult = lottos.getLottoResult(lastWinningLotto);
+        int bonusNumber = InputView.inputBonusNumber();
+        LottoResult lottoResult = lottos.getLottoResult(lastWinningLotto, bonusNumber);
         ResultView.printLottoResult(lottoResult, lottos.calculateProfitability(lottoResult, amount));
     }
 }

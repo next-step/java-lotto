@@ -17,11 +17,15 @@ public class LottoTest {
     @Test
     void 등수_반환() {
         Lotto lastWinningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 45;
 
         Lotto lotto1 = new Lotto(1, 2, 3, 4, 5, 6);
-        assertThat(lotto1.determineRank(lastWinningLotto)).isEqualTo(LottoRank.FIRST);
+        assertThat(lotto1.determineRank(lastWinningLotto, bonusNumber)).isEqualTo(LottoRank.FIRST);
 
-        Lotto lotto2 = new Lotto(1, 2, 3, 7, 8, 9);
-        assertThat(lotto2.determineRank(lastWinningLotto)).isEqualTo(LottoRank.FIFTH);
+        Lotto lotto2 = new Lotto(1, 2, 3, 4, 5, 45);
+        assertThat(lotto2.determineRank(lastWinningLotto, bonusNumber)).isEqualTo(LottoRank.SECOND);
+
+        Lotto lottos3 = new Lotto(1, 2, 7, 8, 9, 19);
+        assertThat(lottos3.determineRank(lastWinningLotto, bonusNumber)).isEqualTo(LottoRank.ETC);
     }
 }

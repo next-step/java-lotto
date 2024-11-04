@@ -34,8 +34,8 @@ public class Lottos {
         return unmodifiableList(lottoNumbers);
     }
 
-    public LottoResult getLottoResult(Lotto lastWinningLotto) {
-        return new LottoResult(createLottoResult(lastWinningLotto));
+    public LottoResult getLottoResult(Lotto lastWinningLotto, int bonusNumber) {
+        return new LottoResult(createLottoResult(lastWinningLotto, bonusNumber));
     }
 
     public double calculateProfitability(LottoResult lottoResult, double amount) {
@@ -67,10 +67,10 @@ public class Lottos {
         return randomNumbers.subList(ZERO, LOTTO_SIZE);
     }
 
-    private Map<LottoRank, Integer> createLottoResult(Lotto lastWinningLotto) {
+    private Map<LottoRank, Integer> createLottoResult(Lotto lastWinningLotto, int bonusNumber) {
         Map<LottoRank, Integer> resultMap = new HashMap<>();
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = lotto.determineRank(lastWinningLotto);
+            LottoRank lottoRank = lotto.determineRank(lastWinningLotto, bonusNumber);
             resultMap.put(lottoRank, resultMap.getOrDefault(lottoRank, 0) + 1);
         }
         resultMap.remove(LottoRank.ETC);

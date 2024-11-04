@@ -14,8 +14,13 @@ public class InputView {
 
     public static String inputLastWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String lastWinningLotto = scanner.nextLine();
-        System.out.println();
-        return lastWinningLotto;
+        return scanner.nextLine();
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+        scanner.nextLine();
+        return bonusNumber;
     }
 }

@@ -31,9 +31,10 @@ public class Lotto {
         return lottoNumbers.getLottoNumbers();
     }
 
-    public LottoRank determineRank(Lotto lastWinningLotto) {
+    public LottoRank determineRank(Lotto lastWinningLotto, int bonusNumber) {
         int matchCount = countMatchingNumbers(lastWinningLotto);
-        return LottoRank.findRankByMatchCount(matchCount);
+        boolean hasBonusNumber = lottoNumbers.contains(bonusNumber);
+        return LottoRank.findRankByMatchCount(matchCount, hasBonusNumber);
     }
 
     private int countMatchingNumbers(Lotto lastWinningLotto) {

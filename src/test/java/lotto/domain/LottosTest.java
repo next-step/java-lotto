@@ -19,18 +19,21 @@ public class LottosTest {
     void 당첨결과() {
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(1, 2, 3, 4, 5, 45),
                 new Lotto(1, 2, 3, 4, 5, 7),
                 new Lotto(1, 2, 3, 4, 7, 8),
                 new Lotto(1, 2, 3, 7, 8, 9)
         ));
         Lotto lastWinningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 45;
         Map<LottoRank, Integer> resultMap = new HashMap<>();
         resultMap.put(LottoRank.FIRST, 1);
+        resultMap.put(LottoRank.SECOND, 1);
         resultMap.put(LottoRank.THIRD, 1);
         resultMap.put(LottoRank.FOURTH, 1);
         resultMap.put(LottoRank.FIFTH, 1);
         LottoResult lottoResult = new LottoResult(resultMap);
 
-        assertThat(lottos.getLottoResult(lastWinningLotto)).isEqualTo(lottoResult);
+        assertThat(lottos.getLottoResult(lastWinningLotto, bonusNumber)).isEqualTo(lottoResult);
     }
 }
