@@ -1,4 +1,4 @@
-package step1;
+package stringcalculator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.*;
-import static step1.StringCalculator.calculate;
+import static stringcalculator.StringCalculator.calculate;
 
 class StringCalculatorTest {
 

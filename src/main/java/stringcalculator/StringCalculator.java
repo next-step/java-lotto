@@ -1,10 +1,10 @@
-package step1;
+package stringcalculator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static step1.FourBasicOperatorEnum.*;
+import static stringcalculator.FourBasicOperatorEnum.*;
 
 public class StringCalculator {
 

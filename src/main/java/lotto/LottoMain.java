@@ -1,23 +1,22 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
+import lotto.view.InputView;
+import lotto.view.ResultView;
+
 public class LottoMain {
-
     public static void main(String[] args) {
-
-        int amount = InputView.inputPurchaseAmount();
-
+        int amount = InputView.inputAmount();
         Lottos lottos = new Lottos(amount);
-
-        int quantity = lottos.returnPurchaseQuantity();
-
+        int quantity = lottos.getQuantity();
         ResultView.printQuantity(quantity);
+        ResultView.printLottos(lottos.getLottoNumbers());
 
-        ResultView.printLottos(lottos.getLottoList());
-
-        Lotto lastWinningLotto = new Lotto(InputView.inputLastWinningNumbers());
-        System.out.println();
-
-        LottoResults lottoResults = lottos.createLottoResults(lastWinningLotto);
-        ResultView.printResult(lottoResults, amount);
+        String lastWinningLottoNumbers = InputView.inputLastWinningLotto();
+        Lotto lastWinningLotto = new Lotto(lastWinningLottoNumbers);
+        LottoResult lottoResult = lottos.getLottoResult(lastWinningLotto);
+        ResultView.printLottoResult(lottoResult, lottos.calculateProfitability(lottoResult, amount));
     }
 }
