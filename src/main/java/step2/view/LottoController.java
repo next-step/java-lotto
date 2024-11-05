@@ -12,8 +12,11 @@ public class LottoController {
 			LottoPlayResultDto resultDto = LottoGame.playLotto(money);
 			ResultView.printLottoResult(resultDto.getLottos());
 
-			String winningNumbers = InputView.getWinningNumbers();
-			LottoStatistics stastResult = LottoGame.getLottoStast(resultDto.getLottos(), winningNumbers);
+			String winningSixNumbers = InputView.getWinningNumbers();
+			String bonusNumber = InputView.getBonusNumber();
+
+			LottoStatistics stastResult = LottoGame.getLottoStast(resultDto.getLottos(), winningSixNumbers,
+				bonusNumber);
 			ResultView.printLottoStast(stastResult);
 			ResultView.printChange(resultDto.getChange());
 		} catch (Exception e) {

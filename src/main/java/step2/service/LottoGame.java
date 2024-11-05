@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import step2.domain.Lotto;
-import step2.domain.LottoNumber;
 import step2.domain.LottoStatistics;
 import step2.domain.Money;
+import step2.domain.WinningNumber;
 import step2.dto.LottoPlayResultDto;
 
 public class LottoGame {
@@ -21,8 +21,11 @@ public class LottoGame {
 		return new LottoPlayResultDto(lottos, change);
 	}
 
-	public static LottoStatistics getLottoStast(List<Lotto> lastWeekLottos, String winningNumbers) {
-		return new LottoStatistics(lastWeekLottos, new Lotto(LottoNumber.asList(winningNumbers)));
+	public static LottoStatistics getLottoStast(List<Lotto> lastWeekLottos, String winningSixNumbers,
+		String bonusNumber) {
+		WinningNumber winningNumber = new WinningNumber(winningSixNumbers, bonusNumber);
+
+		return new LottoStatistics(lastWeekLottos, winningNumber);
 	}
 
 	private static List<Lotto> buyLotto(Money money) {

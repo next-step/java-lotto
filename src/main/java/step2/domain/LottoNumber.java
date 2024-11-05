@@ -38,6 +38,10 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 			.collect(Collectors.toList());
 	}
 
+	public static LottoNumber as(String number) {
+		return parseAndCreate(number);
+	}
+
 	private static LottoNumber parseAndCreate(String numberStr) {
 		try {
 			int number = Integer.parseInt(numberStr.trim());

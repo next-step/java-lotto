@@ -13,19 +13,20 @@ public class LottoStatistics {
 	private final Double profitRatio;
 	private int gainedMoney = 0;
 
-	public LottoStatistics(List<Lotto> lottos, Lotto winningLotto) {
-		setWinCountMap(lottos, winningLotto);
+	public LottoStatistics(List<Lotto> lottos, WinningNumber winningNumbers) {
+		setWinCountMap(lottos, winningNumbers);
 		Money inputtedMoney = new Money(lottos.size() * LOTTO_PRICE);
 		this.profitRatio = inputtedMoney.getProfitByGainedMoney(gainedMoney);
 	}
 
-	private void setWinCountMap(List<Lotto> lottos, Lotto winningLotto) {
+	private void setWinCountMap(List<Lotto> lottos, WinningNumber winningNumbers) {
 		for (Lotto lotto : lottos) {
-			int correctCount = (int)winningLotto.getLottoNumbers()
+			int correctCount = (int)winningNumbers.getWinningNumbers()
 				.stream()
 				.filter(lotto::contains)
 				.count();
-			LottoPrize lottoPrize = LottoPrize.getByCount(correctCount);
+			boolean matchBonus = lotto.contains(winningNumbers.getBonusNumber());
+			LottoPrize lottoPrize = LottoPrize.valueOf(correctCount, matchBonus);
 			winCountMap.put(lottoPrize, winCountMap.getOrDefault(lottoPrize, 0) + 1);
 			gainedMoney += lottoPrize.getPrize();
 		}

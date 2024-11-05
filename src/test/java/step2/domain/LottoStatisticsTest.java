@@ -21,13 +21,15 @@ class LottoStatisticsTest {
 		Lotto lotto = new Lotto(winNumbers);
 		List<Lotto> lottos = new ArrayList<>();
 		lottos.add(lotto);
-		lottoStatistics = new LottoStatistics(lottos, lotto);
+
+		WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6", "7");
+		lottoStatistics = new LottoStatistics(lottos, winningNumber);
 	}
 
 	@Test
 	@DisplayName("당첨됐을 때 당첨 통계 정보를 체크하는 테스트")
 	public void getLottoStastTest() {
-		assertThat(lottoStatistics.getWinnerCount(LottoPrize.FIRST_WINNER))
+		assertThat(lottoStatistics.getWinnerCount(LottoPrize.FIRST))
 			.isEqualTo(1);
 	}
 }
