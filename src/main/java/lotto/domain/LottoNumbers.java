@@ -26,9 +26,9 @@ public class LottoNumbers {
         return unmodifiableList(list);
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNumber otherLottoNumber) {
         return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.isSame(number));
+                .anyMatch(lottoNumber -> lottoNumber.isSame(otherLottoNumber));
     }
 
     private static Set<LottoNumber> toLottoNumber(List<Integer> lottoNumbers) {

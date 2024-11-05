@@ -33,7 +33,7 @@ public class Lotto {
 
     public LottoRank determineRank(Lotto lastWinningLotto, int bonusNumber) {
         int matchCount = countMatchingNumbers(lastWinningLotto);
-        boolean hasBonusNumber = lottoNumbers.contains(bonusNumber);
+        boolean hasBonusNumber = lottoNumbers.contains(new LottoNumber(bonusNumber));
         return LottoRank.findRankByMatchCount(matchCount, hasBonusNumber);
     }
 
