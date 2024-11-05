@@ -7,14 +7,6 @@ public class Winners {
     private final LottoNumbers winNumbers;
     private final LottoNumber bonusNumber;
 
-    public Winners(String text) {
-        this(new LottoNumbers(text));
-    }
-
-    public Winners(LottoNumbers winNumbers) {
-        this(winNumbers, null);
-    }
-
     public Winners(LottoNumbers winNumbers, LottoNumber bonusNumber) {
         this.winNumbers = winNumbers;
         this.bonusNumber = bonusNumber;
