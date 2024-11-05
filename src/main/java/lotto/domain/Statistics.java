@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,7 +8,7 @@ public class Statistics {
     private final Map<WinningRule, Integer> statistics;
 
     public Statistics() {
-        this.statistics = new HashMap<>(Map.of(
+        this.statistics = new EnumMap<>(Map.of(
                 WinningRule.THREE, 0,
                 WinningRule.FOUR, 0,
                 WinningRule.FIVE, 0,
