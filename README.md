@@ -56,3 +56,4 @@
 - [x] 당첨 통계에 2등도 추가해야 한다.
 - [x] 3단계 피드백 반영 - LottoNumber 매직넘버 상수화 및 테스트 케이스 추가
 - [x] 3단계 피드백 반영 - LottoNumber public 메소드 테스트 케이스 추가
+- [x] 3단계 피드백 반영 - LottoNumbers 에서 로또 당첨 결과를 확인하는 부분을 WinningRule 로 이관 

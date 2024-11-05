@@ -32,7 +32,7 @@ public class Winners {
     }
 
     private WinningRule matchWinningRule(Lotto lotto) {
-        WinningRule totalMatch = this.winNumbers.matchRule(lotto.getNumbers());
+        WinningRule totalMatch = WinningRule.match(this.winNumbers, lotto.getNumbers());
         if (totalMatch == WinningRule.FIVE) {
             return getTotalMatchWithBonus(lotto, totalMatch);
         }

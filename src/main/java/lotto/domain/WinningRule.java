@@ -32,4 +32,11 @@ public enum WinningRule {
                 .findFirst()
                 .orElse(null);
     }
+
+    public static WinningRule match(LottoNumbers winNumbers, LottoNumbers tryNumbers) {
+        int count = (int) tryNumbers.getNumbers().stream()
+                .filter(n -> winNumbers.getNumbers().contains(n))
+                .count();
+        return WinningRule.findByValue(count);
+    }
 }
