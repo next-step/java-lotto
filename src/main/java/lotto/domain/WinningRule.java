@@ -39,4 +39,20 @@ public enum WinningRule {
                 .count();
         return WinningRule.findByValue(count);
     }
+
+    public static WinningRule match(LottoNumbers winNumbers, LottoNumbers tryNumbers, LottoNumber bonusNumber) {
+        WinningRule result = match(winNumbers, tryNumbers);
+        if (result == WinningRule.FIVE && isSecondWinners(winNumbers, tryNumbers, bonusNumber)) {
+            return WinningRule.FIVE_BONUS;
+        }
+        return result;
+    }
+
+    private static boolean isSecondWinners(LottoNumbers winNumbers, LottoNumbers tryNumbers, LottoNumber bonusNumber) {
+        LottoNumber candidate = tryNumbers.getNumbers().stream()
+                .filter(n -> !winNumbers.getNumbers().contains(n))
+                .findFirst()
+                .orElse(null);
+        return bonusNumber.equals(candidate);
+    }
 }
