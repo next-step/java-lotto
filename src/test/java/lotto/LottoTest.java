@@ -54,7 +54,7 @@ class LottoTest {
         int bonusNumber = 7;
         LottoNumber bonusBall = new LottoNumber(bonusNumber);
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
-        assertThat(lotto.lottoRankList(winningLotto))
+        assertThat(lotto.winningRanks(winningLotto))
                 .isEqualTo(EXPECTED_RANK_LIST);
     }
 

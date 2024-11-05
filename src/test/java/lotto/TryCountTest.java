@@ -26,9 +26,10 @@ class TryCountTest {
     @DisplayName(value = "수동로또회수가 전체 회수 초과시 실패")
     void checkManualTryTest() {
         final int MANUAL_TRY = 6;
+
         TryCount tryCount = TryCount.initTryCount(PURCHASE_AMOUNT);
         assertThatThrownBy(() -> {
-            tryCount.validateManualTry(MANUAL_TRY);
+            tryCount.validateManualTry(TRY_COUNT, MANUAL_TRY);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -37,9 +38,9 @@ class TryCountTest {
     void updateManualTryTest() {
         final int MANUAL_TRY = 3;
         final int UPDATED_TRYCOUNT = 2;
-        TryCount tryCount = TryCount.initTryCount(PURCHASE_AMOUNT);
-        tryCount.updateWithManualTry(MANUAL_TRY);
-        assertThat(tryCount).isEqualTo(new TryCount(UPDATED_TRYCOUNT));
+
+        int updatedTryCount = TryCount.updateWithManualTry(TRY_COUNT, MANUAL_TRY);
+        assertThat(updatedTryCount).isEqualTo(UPDATED_TRYCOUNT);
     }
 
 

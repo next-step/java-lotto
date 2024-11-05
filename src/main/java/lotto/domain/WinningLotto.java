@@ -2,9 +2,6 @@ package lotto.domain;
 
 import lotto.LottoRank;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class WinningLotto {
     private final LottoNumbers winningLottoNumbers;
     private final LottoNumber bonusNumber;
@@ -12,12 +9,20 @@ public class WinningLotto {
     public WinningLotto(LottoNumbers lottoNumbers, LottoNumber lottoNumber) {
         this.winningLottoNumbers = lottoNumbers;
         this.bonusNumber = lottoNumber;
+
+    }
+
+    public void checkBonusInWinningLotto(LottoNumbers lottoNumbers) {
+        if (lottoNumbers.checkMatching(bonusNumber)) {
+           throw new IllegalArgumentException("보너스볼은 당첨번호와");
+        }
     }
 
 
     public LottoRank lottoRank(LottoNumbers lottoNumbers) {
+        checkBonusInWinningLotto(lottoNumbers);
         int matchingCount = winningLottoNumbers.getMatchingCount(lottoNumbers);
-        boolean ismatchingBonus = lottoNumbers.bonusMatchingCount(bonusNumber);
+        boolean ismatchingBonus = lottoNumbers.checkMatching(bonusNumber);
         return LottoRank.rank(matchingCount, ismatchingBonus);
     }
 

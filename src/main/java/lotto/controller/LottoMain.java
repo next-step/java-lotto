@@ -11,10 +11,9 @@ public class LottoMain {
 
         LottoGenerator lottoGenerator = new RandomLottoNumbers();
         int purchaseAmount = InputView.purchaseAmount();
-        TryCount tryCount = TryCount.initTryCount(purchaseAmount);
-
         int manualTryCount = InputView.manualTryCount();
-        tryCount.updateWithManualTry(manualTryCount);
+        TryCount tryCount = TryCount.initTryCount(purchaseAmount, manualTryCount);
+
         Lotto manualLotto = InputView.manualLottoNumber(manualTryCount);
         int tryNumber = tryCount.getTryCount();
         Lotto lotto = Lotto.initAllRoundLottoNumbers(manualLotto, lottoGenerator, tryNumber);
@@ -22,7 +21,7 @@ public class LottoMain {
         PrintView.printManualAndRandomTryCount(manualTryCount, tryNumber);
         PrintView.printLottoList(lotto);
 
-        LottoResult lottoResult = lotto.updateWinningRankList(new WinningLotto(InputView.lottoWinnerNumbers(), InputView.lottoBonusNumbers()));
+        LottoResult lottoResult = lotto.winningRanks(new WinningLotto(InputView.lottoWinnerNumbers(), InputView.lottoBonusNumbers()));
 
         PrintView.printWinningStatisticsPreview();
         PrintView.printWinningCount(lottoResult);

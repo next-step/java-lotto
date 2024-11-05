@@ -47,15 +47,12 @@ public class Lotto {
         return lottoNumbersList;
     }
 
-    public LottoResult updateWinningRankList(WinningLotto winningLotto) {
-        return new LottoResult(lottoRankList(winningLotto));
-    }
-
-    public List<LottoRank> lottoRankList(WinningLotto winningLotto) {
-        return lottoNumbersList.stream()
+    public LottoResult winningRanks(WinningLotto winningLotto) {
+        List<LottoRank> lottoRanks = lottoNumbersList.stream()
                 .map(winningLotto::lottoRank)
                 .filter(lottoRank -> lottoRank != LottoRank.NONE)
                 .collect(Collectors.toList());
+        return new LottoResult(lottoRanks);
     }
 
     @Override

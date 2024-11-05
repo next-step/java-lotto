@@ -18,16 +18,9 @@ public class LottoNumbers {
         }
     }
 
-
-    public boolean bonusMatchingCount(LottoNumber bonusNumber) {
-        return this.lottoNumbers.stream()
-                .anyMatch(lottoNumber -> checkMatching(bonusNumber));
-    }
-
     public boolean checkMatching(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
-
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;

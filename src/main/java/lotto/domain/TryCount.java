@@ -10,10 +10,14 @@ public class TryCount {
         this.tryCount = tryCount;
     }
 
-
     public static TryCount initTryCount(int purchaseAmount) {
+        return initTryCount(purchaseAmount, 0);
+    }
+
+    public static TryCount initTryCount(int purchaseAmount, int manualTry) {
         checkAmount(purchaseAmount);
-        return new TryCount(amountToTryCount(purchaseAmount));
+        int tryCount = updateWithManualTry(amountToTryCount(purchaseAmount), manualTry);
+        return new TryCount(tryCount);
     }
 
     private static void checkAmount(int purchaseAmount) {
@@ -30,16 +34,17 @@ public class TryCount {
         return tryCount;
     }
 
-    public void validateManualTry(int manualTry) {
-        if (tryCount < manualTry) {
-            throw new IllegalArgumentException();
+    public static int updateWithManualTry(int tryCount, int manualTry) {
+        validateManualTry(tryCount, manualTry);
+        return tryCount - manualTry;
+    }
+
+    public static void validateManualTry(int tryCount, int manualTry) {
+        if (manualTry < 0 || tryCount < manualTry) {
+            throw new IllegalArgumentException("수동로또 번호가 0미만이거나 로또 구매 횟수를 초과합니다.");
         }
     }
 
-    public void updateWithManualTry(int manualTry) {
-        validateManualTry(manualTry);
-        tryCount -= manualTry;
-    }
 
     @Override
     public boolean equals(Object o) {

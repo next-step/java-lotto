@@ -14,11 +14,6 @@ public class PrintView {
     public static final String LOTTO_RESULT_WITH_BONUS_TEXT = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     public static final String LOTTO_RESULT_TEXT = "%d개 일치 (%d원)- %d개\n";
 
-    public static void printLottoTryCount(int lottoTryCount) {
-        System.out.println(lottoTryCount + "개를 구매했습니다.");
-
-    }
-
     public static void printManualAndRandomTryCount(int manualTryCount, int lottoTryCount) {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualTryCount, lottoTryCount);
         System.out.println();
