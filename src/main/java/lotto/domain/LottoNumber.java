@@ -3,10 +3,12 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber>{
+    public static final int MIN = 1;
+    public static final int MAX = 45;
     private final int value;
 
     public LottoNumber(int value) {
-        if (value < 1 || value > 45) {
+        if (value < MIN || value > MAX) {
             throw new IllegalArgumentException();
         }
         this.value = value;
