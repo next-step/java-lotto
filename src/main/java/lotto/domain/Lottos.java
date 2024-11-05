@@ -29,7 +29,7 @@ public class Lottos {
     public List<List<LottoNumber>> getLottoNumbers() {
         List<List<LottoNumber>> lottoNumbers = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            lottoNumbers.add(lotto.getLottoNumbers());
+            lottoNumbers.add(lotto.getLottoNumberList());
         }
         return unmodifiableList(lottoNumbers);
     }

@@ -26,6 +26,12 @@ public class LottoNumbers {
         return unmodifiableList(list);
     }
 
+    public int countMatchingNumbers(LottoNumbers otherLottoNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(otherLottoNumbers::contains)
+                .count();
+    }
+
     public boolean contains(LottoNumber otherLottoNumber) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.isSame(otherLottoNumber));

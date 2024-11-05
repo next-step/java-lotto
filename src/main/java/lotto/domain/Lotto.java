@@ -27,20 +27,18 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumberList() {
         return lottoNumbers.getLottoNumbers();
     }
 
-    public LottoRank determineRank(Lotto lastWinningLotto, int bonusNumber) {
-        int matchCount = countMatchingNumbers(lastWinningLotto);
-        boolean hasBonusNumber = lottoNumbers.contains(new LottoNumber(bonusNumber));
-        return LottoRank.findRankByMatchCount(matchCount, hasBonusNumber);
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 
-    private int countMatchingNumbers(Lotto lastWinningLotto) {
-        return (int) getLottoNumbers().stream()
-                .filter(lottoNumber -> lastWinningLotto.getLottoNumbers().contains(lottoNumber))
-                .count();
+    public LottoRank determineRank(Lotto lastWinningLotto, int bonusNumber) {
+        int matchCount = lottoNumbers.countMatchingNumbers(lastWinningLotto.getLottoNumbers());
+        boolean hasBonusNumber = lottoNumbers.contains(new LottoNumber(bonusNumber));
+        return LottoRank.findRankByMatchCount(matchCount, hasBonusNumber);
     }
 
     private static List<Integer> toInts(String textNumbers) {
