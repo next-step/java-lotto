@@ -22,7 +22,8 @@ public class LottosTest {
                 new Lotto(1, 2, 3, 4, 5, 45),
                 new Lotto(1, 2, 3, 4, 5, 7),
                 new Lotto(1, 2, 3, 4, 7, 8),
-                new Lotto(1, 2, 3, 7, 8, 9)
+                new Lotto(1, 2, 3, 7, 8, 9),
+                new Lotto(1, 2, 7, 8, 9, 10)
         ));
         Lotto lastWinningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         int bonusNumber = 45;

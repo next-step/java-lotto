@@ -21,12 +21,8 @@ public enum LottoRank {
     }
 
     public static LottoRank findRankByMatchCount(int matchCount, boolean hasBonusNumber) {
-        if (matchCount == 5 && hasBonusNumber) {
-            return SECOND;
-        }
-
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> !lottoRank.hasBonusNumber && lottoRank.matchCount == matchCount)
+                .filter(lottoRank -> lottoRank.hasBonusNumber == hasBonusNumber && lottoRank.matchCount == matchCount)
                 .findFirst()
                 .orElse(ETC);
     }

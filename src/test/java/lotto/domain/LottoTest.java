@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -25,7 +26,16 @@ public class LottoTest {
         Lotto lotto2 = new Lotto(1, 2, 3, 4, 5, 45);
         assertThat(lotto2.determineRank(lastWinningLotto, bonusNumber)).isEqualTo(LottoRank.SECOND);
 
-        Lotto lottos3 = new Lotto(1, 2, 7, 8, 9, 19);
-        assertThat(lottos3.determineRank(lastWinningLotto, bonusNumber)).isEqualTo(LottoRank.ETC);
+        Lotto lotto3 = new Lotto(1, 2, 3, 4, 5, 7);
+        assertThat(lotto3.determineRank(lastWinningLotto, bonusNumber)).isEqualTo(LottoRank.THIRD);
+
+        Lotto lotto4 = new Lotto(1, 2, 3, 4, 7, 8);
+        assertThat(lotto4.determineRank(lastWinningLotto, bonusNumber)).isEqualTo(LottoRank.FOURTH);
+
+        Lotto lotto5 = new Lotto(1, 2, 3, 7, 8, 9);
+        assertThat(lotto5.determineRank(lastWinningLotto, bonusNumber)).isEqualTo(LottoRank.FIFTH);
+
+        Lotto lotto6 = new Lotto(1, 2, 7, 8, 9, 10);
+        assertThat(lotto6.determineRank(lastWinningLotto, bonusNumber)).isEqualTo(LottoRank.ETC);
     }
 }
