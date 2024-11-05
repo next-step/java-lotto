@@ -6,13 +6,24 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
+    private static final int TOTAL_PER_LOTTO = 6;
+
     private final Set<LottoNumber> numbers;
+
+    public LottoNumbers() {
+        this(new LottoRandomGenerator());
+    }
+
+    public LottoNumbers(LottoRandomGenerator generator) {
+        this(generator.generate(TOTAL_PER_LOTTO));
+    }
 
     public LottoNumbers(String text) {
         this(parse(text));
     }
 
     public LottoNumbers(Set<LottoNumber> numbers) {
+        validate(numbers);
         this.numbers = numbers;
     }
 
@@ -39,7 +50,7 @@ public class LottoNumbers {
     }
 
     private static void validate(Set<LottoNumber> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != TOTAL_PER_LOTTO) {
             throw new IllegalArgumentException();
         }
     }

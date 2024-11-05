@@ -16,7 +16,7 @@ public class Winners {
         Statistics statistics = new Statistics();
 
         orders.getOrders().stream()
-                .map(lotto -> WinningRule.match(this.winNumbers, lotto.getNumbers(), this.bonusNumber))
+                .map(orderNumbers -> WinningRule.match(this.winNumbers, orderNumbers, this.bonusNumber))
                 .filter(Objects::nonNull)
                 .forEach(n -> statistics.put(n, statistics.get(n) + 1));
 

@@ -24,11 +24,11 @@ public class LottoRandomGenerator {
         return this.random.nextInt(MAX_NUMBER_OF_LOTTO) + 1;
     }
 
-    public LottoNumbers generate(int totalSize) {
+    public Set<LottoNumber> generate(int totalSize) {
         Set<LottoNumber> result = new HashSet<>();
         while (result.size() < totalSize) {
             result.add(new LottoNumber(pick()));
         }
-        return new LottoNumbers(result);
+        return result;
     }
 }

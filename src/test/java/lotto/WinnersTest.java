@@ -30,7 +30,10 @@ public class WinnersTest {
     @Test
     @DisplayName("당첨 통계를 계산한다.")
     void testPrintWinners() {
-        List<Lotto> lottos = List.of(new Lotto(1L), new Lotto(2L));
+        List<LottoNumbers> lottos = List.of(
+                new LottoNumbers(new LottoRandomGenerator(1L)),
+                new LottoNumbers(new LottoRandomGenerator(2L))
+        );
         Orders orders = new Orders(lottos);
 
         Winners winners = new Winners(new LottoNumbers("14, 16, 21, 25, 38, 40"), new LottoNumber(1));
@@ -45,7 +48,10 @@ public class WinnersTest {
     @Test
     @DisplayName("보너스 번호를 포함한 당첨 통계를 계산한다.")
     void testPrintWinnersWithBonus() {
-        List<Lotto> lottos = List.of(new Lotto(1L), new Lotto(2L));
+        List<LottoNumbers> lottos = List.of(
+                new LottoNumbers(new LottoRandomGenerator(1L)),
+                new LottoNumbers(new LottoRandomGenerator(2L))
+        );
         Orders orders = new Orders(lottos);
 
         Winners winners = new Winners(new LottoNumbers("14, 16, 21, 25, 38, 40"), new LottoNumber(43));

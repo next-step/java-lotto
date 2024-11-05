@@ -58,4 +58,5 @@
 - [x] 3단계 피드백 반영 - LottoNumber public 메소드 테스트 케이스 추가
 - [x] 3단계 피드백 반영 - LottoNumbers 에서 로또 당첨 결과를 확인하는 부분을 WinningRule 로 이관
 - [x] 3단계 피드백 반영 - 2등 기능이 구현된 시점에서 보너스 번호는 반드시 존재하도록 처리
-- [x] 3단계 피드백 반영 - WinningRule 에서 보너스 번호와 함께 로또 당첨 결과를 확인한다. 
+- [x] 3단계 피드백 반영 - WinningRule 에서 보너스 번호와 함께 로또 당첨 결과를 확인한다.
+- [x] 3단계 피드백 반영 - Lotto 를 LottoNumbers 에 통합

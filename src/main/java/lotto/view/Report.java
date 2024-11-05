@@ -13,8 +13,8 @@ public class Report {
     public String reportTotalOrders(Orders orders) {
         StringBuilder builder = new StringBuilder();
         builder.append(orders.getTotalOrders()).append("개를 구매했습니다.\n");
-        for (Lotto lotto : orders.getOrders()) {
-            builder.append(ofLotto(lotto));
+        for (LottoNumbers lottoNumbers : orders.getOrders()) {
+            builder.append(ofLotto(lottoNumbers));
             builder.append("\n");
         }
         String result = builder.toString();
@@ -65,10 +65,10 @@ public class Report {
         System.out.println(String.format("총 수익률은 %.2f입니다.", totalRateOfReturn));
     }
 
-    private String ofLotto(Lotto lotto) {
+    private String ofLotto(LottoNumbers lottoNumers) {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
-        builder.append(lotto.getNumbers().getNumbers().stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")));
+        builder.append(lottoNumers.getNumbers().stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")));
         builder.append("]");
         return builder.toString();
     }

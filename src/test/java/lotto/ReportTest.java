@@ -16,7 +16,10 @@ public class ReportTest {
     void testPrintLotto() {
         Report report = new Report();
 
-        List<Lotto> lottos = List.of(new Lotto(1L), new Lotto(2L));
+        List<LottoNumbers> lottos = List.of(
+                new LottoNumbers(new LottoRandomGenerator(1L)),
+                new LottoNumbers(new LottoRandomGenerator(2L))
+        );
 
         assertThat(report.reportTotalOrders(new Orders(lottos)))
                 .isEqualTo("2개를 구매했습니다.\n[5, 16, 29, 34, 38, 45]\n[14, 16, 21, 25, 38, 43]\n");
