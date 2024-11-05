@@ -3,11 +3,13 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
-    private int value;
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 45;
 
-    // 주생성자
+    private final int value;
+
     public LottoNumber(int value) {
-        if (value < 1 || value > 45) {
+        if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new IllegalArgumentException("로또번호는 1 이상 45 이하의 값이어야 합니다.");
         }
         this.value = value;
@@ -15,10 +17,6 @@ public class LottoNumber {
 
     public int getValue() {
         return value;
-    }
-
-    public boolean isSame(LottoNumber otherLottoNumber) {
-        return equals(otherLottoNumber);
     }
 
     @Override

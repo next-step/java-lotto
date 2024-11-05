@@ -13,7 +13,7 @@ public class LottoMain {
 
         int quantity = lottos.getQuantity();
         ResultView.printQuantity(quantity);
-        ResultView.printLottos(lottos.getLottoNumbers());
+        ResultView.printLottos(lottos.getLottos());
 
         String lastWinningLottoNumbers = InputView.inputLastWinningLotto();
         Lotto lastWinningLotto = new Lotto(lastWinningLottoNumbers);

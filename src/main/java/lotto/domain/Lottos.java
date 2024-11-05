@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.Collections.*;
 
@@ -17,7 +18,6 @@ public class Lottos {
         this(createLottos(amount));
     }
 
-    // 주생성자
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
@@ -26,12 +26,8 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<List<LottoNumber>> getLottoNumbers() {
-        List<List<LottoNumber>> lottoNumbers = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            lottoNumbers.add(lotto.getLottoNumberList());
-        }
-        return unmodifiableList(lottoNumbers);
+    public List<Lotto> getLottos() {
+        return unmodifiableList(lottos);
     }
 
     public LottoResult getLottoResult(Lotto lastWinningLotto, int bonusNumber) {
@@ -53,9 +49,16 @@ public class Lottos {
         int quantity = amount / LOTTO_PRICE;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto(createLottoNumbers()));
+            lottos.add(new Lotto(createLotto()));
         }
         return lottos;
+    }
+
+    private static List<LottoNumber> createLotto() {
+        List<Integer> lottoNumbers = createLottoNumbers();
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private static List<Integer> createLottoNumbers() {

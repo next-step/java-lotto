@@ -1,51 +1,57 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class Lotto {
+import static java.util.Collections.*;
 
-    public static final String DELIMITER = ",";
-    private final LottoNumbers lottoNumbers;
+public class Lotto {
+    private static final String DELIMITER = ",";
+    private static final int LOTTO_SIZE = 6;
+
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(String textNumbers) {
-        this(toInts(textNumbers));
+        this(toIntegers(textNumbers).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
     public Lotto(Integer... lottoNumbers) {
-        this(Arrays.asList(lottoNumbers));
+        this(Arrays.stream(lottoNumbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
-        this(new LottoNumbers(lottoNumbers));
-    }
-
-    // 주생성자
-    public Lotto(LottoNumbers lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        if (Set.copyOf(lottoNumbers).size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또는 6개의 번호로 구성되어야 합니다.");
+        }
+        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getValue));
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> getLottoNumberList() {
-        return lottoNumbers.getLottoNumbers();
-    }
-
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoNumber> getLottoNumbers() {
+        return unmodifiableList(lottoNumbers);
     }
 
     public LottoRank determineRank(Lotto lastWinningLotto, int bonusNumber) {
-        int matchCount = lottoNumbers.countMatchingNumbers(lastWinningLotto.getLottoNumbers());
+        int matchCount = countMatchingNumbers(lastWinningLotto);
         boolean hasBonusNumber = lottoNumbers.contains(new LottoNumber(bonusNumber));
         return LottoRank.findRankByMatchCount(matchCount, hasBonusNumber);
     }
 
-    private static List<Integer> toInts(String textNumbers) {
+    private static List<Integer> toIntegers(String textNumbers) {
         String[] strings = textNumbers.split(DELIMITER);
         return Arrays.stream(strings)
                 .map(string -> Integer.parseInt(string.trim()))
                 .collect(Collectors.toList());
+    }
+
+    private int countMatchingNumbers(Lotto otherLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(otherLotto.lottoNumbers::contains)
+                .count();
     }
 
     @Override
