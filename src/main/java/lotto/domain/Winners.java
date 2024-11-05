@@ -17,7 +17,7 @@ public class Winners {
 
         orders.getOrders().stream()
                 .map(orderNumbers -> WinningRule.match(this.winNumbers, orderNumbers, this.bonusNumber))
-                .filter(Objects::nonNull)
+                .filter(n -> n != WinningRule.NONE)
                 .forEach(n -> statistics.put(n, statistics.get(n) + 1));
 
         return statistics;

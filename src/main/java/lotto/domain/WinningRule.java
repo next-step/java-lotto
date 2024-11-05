@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum WinningRule {
+    NONE(0, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
@@ -30,7 +31,7 @@ public enum WinningRule {
         return Arrays.stream(WinningRule.values())
                 .filter(item -> item.getMatch() == match)
                 .findFirst()
-                .orElse(null);
+                .orElse(NONE);
     }
 
     public static WinningRule match(LottoNumbers winNumbers, LottoNumbers tryNumbers) {

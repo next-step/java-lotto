@@ -61,3 +61,4 @@
 - [x] 3단계 피드백 반영 - WinningRule 에서 보너스 번호와 함께 로또 당첨 결과를 확인한다.
 - [x] 3단계 피드백 반영 - Lotto 를 LottoNumbers 에 통합
 - [x] 3단계 피드백 반영 - Statistics 멤버 변수의 구현체를 EnumMap 타입으로 사용
+- [x] 3단계 피드백 반영 - WinningRule 에서 null 대신 미당첨 타입 추가
