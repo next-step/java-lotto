@@ -11,13 +11,14 @@ public class LottoStore {
         Money money = UserInput.inputMoney();
         Orders orders = new Orders(money);
 
-        Report report = new Report(WinningRules.getDefaultWinningRules());
+        Report report = new Report();
         report.reportTotalOrders(orders);
 
         Winners winners = UserInput.inputWinners();
         Statistics statistics = winners.match(orders);
 
-        report.reportWinners(statistics);
-        report.reportRateOfReturn(money, statistics);
+        WinningRules winningRules = WinningRules.getDefaultWinningRules();
+        report.reportWinners(statistics, winningRules);
+        report.reportRateOfReturn(money, statistics, winningRules);
     }
 }

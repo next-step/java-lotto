@@ -1,29 +1,27 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Statistics {
-    Map<LottoWinnersEnum, Integer> statistics;
+    private final Map<WinningRule, Integer> statistics;
 
     public Statistics() {
-        this.statistics = new HashMap<>(Map.of(
-                LottoWinnersEnum.THREE, 0,
-                LottoWinnersEnum.FOUR, 0,
-                LottoWinnersEnum.FIVE, 0,
-                LottoWinnersEnum.SIX, 0
+        this.statistics = new EnumMap<>(Map.of(
+                WinningRule.THREE, 0,
+                WinningRule.FOUR, 0,
+                WinningRule.FIVE, 0,
+                WinningRule.FIVE_BONUS, 0,
+                WinningRule.SIX, 0
         ));
     }
 
-    public Integer get(Integer key) {
-        return statistics.get(LottoWinnersEnum.findByValue(key));
-    }
-
-    public Integer get(LottoWinnersEnum key) {
+    public int get(WinningRule key) {
         return statistics.get(key);
     }
 
-    public void put(Integer key, Integer value) {
-        this.statistics.put(LottoWinnersEnum.findByValue(key), value);
+    public void put(WinningRule key, int value) {
+        this.statistics.put(key, value);
     }
 }

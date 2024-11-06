@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Orders;
-import lotto.domain.Statistics;
-import lotto.domain.Winners;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,40 +12,55 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class WinnersTest {
 
     @Test
-    @DisplayName("지난 주 당첨 번호를 입력 받는다.")
-    void testWinners() {
-        Winners winners = new Winners("14, 16, 21, 25, 38, 40");
-        assertThat(winners.toString()).isEqualTo("[14, 16, 21, 25, 38, 40]");
-    }
-
-    @Test
     @DisplayName("당첨 번호도 로또 번호와 동일한 제약 설정")
     void testWinnersConstraint() {
         assertThatThrownBy(() -> {
-            new Winners("100");
+            new Winners(new LottoNumbers("100"), new LottoNumber(1));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            new Winners("0, 16, 21, 25, 38, 40");
+            new Winners(new LottoNumbers("0, 16, 21, 25, 38, 40"), new LottoNumber(1));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            new Winners("46, 16, 21, 25, 38, 40");
+            new Winners(new LottoNumbers("46, 16, 21, 25, 38, 40"), new LottoNumber(1));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("당첨 통계를 계산한다.")
     void testPrintWinners() {
-        List<Lotto> lottos = List.of(new Lotto(1L), new Lotto(2L));
+        List<LottoNumbers> lottos = List.of(
+                new LottoNumbers(new LottoRandomGenerator(1L)),
+                new LottoNumbers(new LottoRandomGenerator(2L))
+        );
         Orders orders = new Orders(lottos);
 
-        Winners winners = new Winners("14, 16, 21, 25, 38, 40");
+        Winners winners = new Winners(new LottoNumbers("14, 16, 21, 25, 38, 40"), new LottoNumber(1));
         Statistics statistics = winners.match(orders);
 
-        assertThat(statistics.get(3)).isEqualTo(0);
-        assertThat(statistics.get(4)).isEqualTo(0);
-        assertThat(statistics.get(5)).isEqualTo(1);
-        assertThat(statistics.get(6)).isEqualTo(0);
+        assertThat(statistics.get(WinningRule.THREE)).isEqualTo(0);
+        assertThat(statistics.get(WinningRule.FOUR)).isEqualTo(0);
+        assertThat(statistics.get(WinningRule.FIVE)).isEqualTo(1);
+        assertThat(statistics.get(WinningRule.SIX)).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("보너스 번호를 포함한 당첨 통계를 계산한다.")
+    void testPrintWinnersWithBonus() {
+        List<LottoNumbers> lottos = List.of(
+                new LottoNumbers(new LottoRandomGenerator(1L)),
+                new LottoNumbers(new LottoRandomGenerator(2L))
+        );
+        Orders orders = new Orders(lottos);
+
+        Winners winners = new Winners(new LottoNumbers("14, 16, 21, 25, 38, 40"), new LottoNumber(43));
+        Statistics statistics = winners.match(orders);
+
+        assertThat(statistics.get(WinningRule.THREE)).isEqualTo(0);
+        assertThat(statistics.get(WinningRule.FOUR)).isEqualTo(0);
+        assertThat(statistics.get(WinningRule.FIVE)).isEqualTo(0);
+        assertThat(statistics.get(WinningRule.FIVE_BONUS)).isEqualTo(1);
+        assertThat(statistics.get(WinningRule.SIX)).isEqualTo(0);
     }
 }
