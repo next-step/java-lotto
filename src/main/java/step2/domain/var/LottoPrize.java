@@ -3,13 +3,12 @@ package step2.domain.var;
 import java.util.Arrays;
 
 public enum LottoPrize {
-	CORRECT_ZERO(0, 0),
-	CORRECT_ONE(1, 0),
-	CORRECT_TWO(2, 0),
-	FOURTH_WINNER(3, 5_000),
-	THIRD_WINNER(4, 50_000),
-	SECOND_WINNER(5, 1_500_000),
-	FIRST_WINNER(6, 2_000_000_000);
+	MISS(0, 0),
+	FIFTH(3, 5_000),
+	FOURTH(4, 50_000),
+	THIRD(5, 1_500_000),
+	SECOND(5, 30_000_000),
+	FIRST(6, 2_000_000_000);
 
 	private final int count;
 	private final int prize;
@@ -19,7 +18,14 @@ public enum LottoPrize {
 		this.prize = prize;
 	}
 
-	public static LottoPrize getByCount(int count) {
+	public static LottoPrize valueOf(int count, boolean matchBonus) {
+		if (count < FIFTH.getCount()) {
+			return MISS;
+		}
+		if (matchBonus && count == SECOND.getCount()) {
+			return SECOND;
+		}
+
 		return Arrays
 			.stream(LottoPrize.values())
 			.filter((item) -> item.getCount() == count)
