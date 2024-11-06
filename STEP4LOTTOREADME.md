@@ -16,3 +16,4 @@
 
 
 ## 주요 피드백
+1. Collectors.collectingAndThen으로 리스트를 클래스인수로 넣어서 스트림에서 활용할 수 있다.

@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.random.LottoGenerator;
 import lotto.testrandom.DefaultLottoList;
 import org.junit.jupiter.api.DisplayName;
@@ -44,7 +41,7 @@ class LottoTest {
 
     @Test
     public void 로또당첨리스트_테스트() {
-        final List<LottoRank> EXPECTED_RANK_LIST = List.of(LottoRank.FIRST);
+        final LottoResult lottoResult = new LottoResult(List.of(LottoRank.FIRST));
         final List<LottoNumber> TEST_WINNING_NUMBER_LIST = IntStream.range(1, 7)
                 .mapToObj(LottoNumber::new).collect(Collectors.toList());
         int tryCount = 1;
@@ -55,7 +52,7 @@ class LottoTest {
         LottoNumber bonusBall = new LottoNumber(bonusNumber);
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusBall);
         assertThat(lotto.winningRanks(winningLotto))
-                .isEqualTo(EXPECTED_RANK_LIST);
+                .isEqualTo(lottoResult);
     }
 
 }

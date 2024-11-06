@@ -48,11 +48,10 @@ public class Lotto {
     }
 
     public LottoResult winningRanks(WinningLotto winningLotto) {
-        List<LottoRank> lottoRanks = lottoNumbersList.stream()
+        return lottoNumbersList.stream()
                 .map(winningLotto::lottoRank)
                 .filter(lottoRank -> lottoRank != LottoRank.NONE)
-                .collect(Collectors.toList());
-        return new LottoResult(lottoRanks);
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResult::new));
     }
 
     @Override

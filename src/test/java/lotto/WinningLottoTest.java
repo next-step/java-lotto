@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class WinningLottoTest {
@@ -28,5 +29,25 @@ public class WinningLottoTest {
             winningLotto.checkBonusInWinningLotto(testInputNumbers);
         });
     }
+
+    @Test
+    @DisplayName(value = "랭크 구하기 테스트")
+    public void lottoRankWinningLottoTest() {
+        LottoNumber bonusBall = new LottoNumber(11);
+        List<LottoNumber> numberList = IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+        List<LottoNumber> winnerNumberList = IntStream.rangeClosed(3, 8)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        LottoNumbers testInputNumbers = new LottoNumbers(numberList);
+        LottoNumbers winningNumbers = new LottoNumbers(winnerNumberList);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
+
+        assertThat(winningLotto.lottoRank(testInputNumbers)).isEqualTo(LottoRank.FOURTH);
+
+    }
+
 
 }

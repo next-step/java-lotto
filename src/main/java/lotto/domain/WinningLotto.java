@@ -14,7 +14,7 @@ public class WinningLotto {
 
     public void checkBonusInWinningLotto(LottoNumbers lottoNumbers) {
         if (lottoNumbers.checkMatching(bonusNumber)) {
-           throw new IllegalArgumentException("보너스볼은 당첨번호와");
+           throw new IllegalArgumentException("보너스볼은 당첨번호와 중복될 수 없습니다.");
         }
     }
 
@@ -22,7 +22,7 @@ public class WinningLotto {
     public LottoRank lottoRank(LottoNumbers lottoNumbers) {
         checkBonusInWinningLotto(lottoNumbers);
         int matchingCount = winningLottoNumbers.getMatchingCount(lottoNumbers);
-        boolean ismatchingBonus = lottoNumbers.checkMatching(bonusNumber);
+        boolean ismatchingBonus = winningLottoNumbers.checkMatching(bonusNumber);
         return LottoRank.rank(matchingCount, ismatchingBonus);
     }
 

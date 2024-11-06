@@ -47,11 +47,10 @@ public class LottoNumbersTest {
 
     static Stream<Object> lottoProvider() {
         return Stream.of(
-                Arguments.of(3,9,6,LottoRank.FOURTH),
-                Arguments.of(2,8,1,LottoRank.THIRD),
-                Arguments.of(2,8,6,LottoRank.SECOND),
-                Arguments.of(1,7,7,LottoRank.FIRST),
-                Arguments.of(1,7,6,LottoRank.FIRST)
+                Arguments.of(3,9,10,LottoRank.FOURTH),
+                Arguments.of(2,8,10,LottoRank.THIRD),
+                Arguments.of(2,8,1,LottoRank.SECOND),
+                Arguments.of(1,7,7,LottoRank.FIRST)
                 );
     }
 
