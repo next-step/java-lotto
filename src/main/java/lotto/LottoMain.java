@@ -7,11 +7,15 @@ import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoMain {
     public static void main(String[] args) {
         int amount = InputView.inputAmount();
         int manualLottoQuantity = InputView.inputManualLottoQuantity();
-        Lottos lottos = LottoGenerator.createLottos(amount);
+        List<String> manualLottos = InputView.inputManualLottoNumbers(manualLottoQuantity);
+        Lottos lottos = LottoGenerator.createLottos(amount, manualLottoQuantity, manualLottos);
 
         int quantity = lottos.getQuantity();
         ResultView.printQuantity(quantity);

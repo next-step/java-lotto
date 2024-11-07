@@ -13,12 +13,21 @@ public class LottoGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    public static Lottos createLottos(int amount) {
+    public static Lottos createLottos(int amount, int manualLottoQuantity, List<String> manualLottos) {
         int quantity = amount / LOTTO_PRICE;
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
+        if (manualLottoQuantity < ZERO || quantity < manualLottoQuantity) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수가 유효하지 않습니다.");
+        }
+
+        List<Lotto> lottoList = manualLottos.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+
+        int autoLottoQuantity = quantity - manualLottoQuantity;
+        for (int i = 0; i < autoLottoQuantity; i++) {
             lottoList.add(new Lotto(createLotto()));
         }
+
         return new Lottos(lottoList);
     }
 
