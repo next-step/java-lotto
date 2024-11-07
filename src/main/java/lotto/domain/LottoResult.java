@@ -15,6 +15,7 @@ public class LottoResult {
         winningRankList = lottoRanks;
     }
 
+
     public void updateWinningCount(LottoRank lottoRank) {
         winningRankList.add(lottoRank);
     }

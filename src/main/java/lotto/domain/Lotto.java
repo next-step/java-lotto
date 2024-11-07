@@ -11,13 +11,15 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private final List<LottoNumbers> lottoNumbersList;
-    private LottoResult lottoResult;
 
     public static Lotto initAllRoundLottoNumbers(LottoGenerator lottoGenerator, int tryCount) {
+        return initAllRoundLottoNumbers(new Lotto(new ArrayList<>()), lottoGenerator, tryCount);
+    }
+
+    public static Lotto initAllRoundLottoNumbers(Lotto manualLotto, LottoGenerator lottoGenerator, int tryCount) {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (int i = 0; i < tryCount; i++) {
-            lottoNumbersList.add(new LottoNumbers(lottoGenerator.executeStrategy()));
-        }
+        insertManualLotto(manualLotto, lottoNumbersList);
+        insertRandomLotto(lottoGenerator, tryCount, lottoNumbersList);
         return new Lotto(lottoNumbersList);
     }
 
@@ -25,26 +27,31 @@ public class Lotto {
         this.lottoNumbersList = lottoNumbersList;
     }
 
+    private static void insertRandomLotto(LottoGenerator lottoGenerator, int tryCount, List<LottoNumbers> lottoNumbersList) {
+        for (int i = 0; i < tryCount; i++) {
+            lottoNumbersList.add(new LottoNumbers(lottoGenerator.executeStrategy()));
+        }
+    }
+
+    private static void insertManualLotto(Lotto manaulLotto, List<LottoNumbers> lottoNumbersList) {
+        if (!manaulLotto.isEmpty()) {
+            lottoNumbersList.addAll(manaulLotto.totalRoundLottoNumberList());
+        }
+    }
+
+    public boolean isEmpty() {
+        return lottoNumbersList.isEmpty();
+    }
+
     public List<LottoNumbers> totalRoundLottoNumberList() {
         return lottoNumbersList;
     }
 
-    public void updateWinningRankList(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
-        lottoResult = new LottoResult(lottoRankList(winningLottoNumbers, bonusNumber));
-    }
-
-    public List<LottoRank> lottoRankList(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+    public LottoResult winningRanks(WinningLotto winningLotto) {
         return lottoNumbersList.stream()
-                .map(lottoNumbers -> winningLottoNumbers.lottoRank(lottoNumbers, bonusNumber))
-                .filter(lottoRank -> lottoRank != LottoRank.NONE).collect(Collectors.toList());
-    }
-
-    public LottoResult getLottoResult() {
-        return lottoResult;
-    }
-
-    public double calculateMarginPercent(int purchaseAmount) {
-        return lottoResult.calculateMarginPercent(purchaseAmount);
+                .map(winningLotto::lottoRank)
+                .filter(lottoRank -> lottoRank != LottoRank.NONE)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResult::new));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.Test;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -19,21 +20,19 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoNumbersTest {
 
-//,"2,8,1,3","2,8,6,2","1,7,7,1","1,7,6,1"
     @ParameterizedTest
     @MethodSource(value = "lottoProvider")
     public void 당첨번호_일치개수별_랭크테스트_보너스볼포함(int startNumber, int endNumber, int bonusNumber, LottoRank lottoRank) {
         LottoNumber bonusBall = new LottoNumber(bonusNumber);
-
-        List<LottoNumber> winnerNumberList = IntStream.range(1, 7)
+        List<LottoNumber> winnerNumberList = IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
-        LottoNumbers numberList = new LottoNumbers(IntStream.range(startNumber, endNumber)
+
+        LottoNumbers lottonumbers = new LottoNumbers(IntStream.range(startNumber, endNumber)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList()));
-
         LottoNumbers lottoWinningNumbers = new LottoNumbers(winnerNumberList);
-        assertThat(lottoWinningNumbers.lottoRank(numberList, bonusBall)).isEqualTo(lottoRank);
+        assertThat(new WinningLotto(lottoWinningNumbers, bonusBall).lottoRank(lottonumbers)).isEqualTo(lottoRank);
     }
 
     @Test
@@ -48,11 +47,10 @@ public class LottoNumbersTest {
 
     static Stream<Object> lottoProvider() {
         return Stream.of(
-                Arguments.of(3,9,6,LottoRank.FOURTH),
-                Arguments.of(2,8,1,LottoRank.THIRD),
-                Arguments.of(2,8,6,LottoRank.SECOND),
-                Arguments.of(1,7,7,LottoRank.FIRST),
-                Arguments.of(1,7,6,LottoRank.FIRST)
+                Arguments.of(3,9,10,LottoRank.FOURTH),
+                Arguments.of(2,8,10,LottoRank.THIRD),
+                Arguments.of(2,8,1,LottoRank.SECOND),
+                Arguments.of(1,7,7,LottoRank.FIRST)
                 );
     }
 

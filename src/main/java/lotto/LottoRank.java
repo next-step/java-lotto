@@ -24,9 +24,7 @@ public enum LottoRank {
     }
 
     LottoRank(int lottoMatchingCount, int lottoWinningAmount) {
-        this.lottoMatchingCount = lottoMatchingCount;
-        this.lottoWinningAmount = lottoWinningAmount;
-        this.matchBonus = matchBonus.NONE;
+        this(lottoMatchingCount,lottoWinningAmount, MatchBonus.NONE);
     }
 
     //머니볼이 true이면서 5개면 랭크 2 아니면 랭크 3
