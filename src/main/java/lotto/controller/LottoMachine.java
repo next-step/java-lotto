@@ -34,8 +34,8 @@ public class LottoMachine {
         return totalLottoTicket.getMatchingCounts(new Lotto(inputWinningNumbers));
     }
 
-    public Map<PrizePolicy, Integer> winningResult(List<Integer> matchingLottoTickets) {
-        return totalLottoTicket.calculateWinLottoTicket(matchingLottoTickets);
+    public Map<PrizePolicy, Integer> winningResult(List<Integer> matchingLottoTickets, LottoNumber bonusBall) {
+        return totalLottoTicket.calculateWinLottoTicket(matchingLottoTickets, bonusBall);
     }
 
     public double rateOfReturnResult(int totalMoney, int totalPrizeMoney) {

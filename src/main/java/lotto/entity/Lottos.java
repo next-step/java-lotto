@@ -25,10 +25,13 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public Map<PrizePolicy, Integer> calculateWinLottoTicket(List<Integer> matchingLottoTickets) {
+    public Map<PrizePolicy, Integer> calculateWinLottoTicket(List<Integer> matchingLottoTickets, LottoNumber bonusBall) {
         Map<PrizePolicy, Integer> winLottoTicket = new HashMap<>();
-        for (Integer matchCount : matchingLottoTickets) {
-            inputWinLottoTicket(winLottoTicket, matchCount);
+        for (int i = 0; i < matchingLottoTickets.size(); i++) {
+            int matchCount = matchingLottoTickets.get(i);
+            Lotto lottoTicket = values.get(i);
+            PrizePolicy prizePolicy = PrizePolicy.fromMatchCountAndBonus(matchCount, lottoTicket.containsBonusBall(bonusBall));
+            winLottoTicket.put(prizePolicy, winLottoTicket.getOrDefault(prizePolicy, 0) + 1);
         }
         return winLottoTicket;
     }

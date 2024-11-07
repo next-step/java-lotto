@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.entity.LottoMoney;
 import lotto.controller.LottoMachine;
+import lotto.entity.LottoNumber;
 import lotto.entity.Lottos;
 import lotto.entity.PrizePolicy;
 import lotto.view.InputView;
@@ -27,7 +28,8 @@ public class LottoDisplay {
         resultView.printLottoTickets(totalLottoTickets);
 
         List<Integer> matchingCountResult = lottoMachine.checkMatchingNumber(inputView.inputWinningNumbers());
-        Map<PrizePolicy, Integer> matchingResult = lottoMachine.winningResult(matchingCountResult);
+        LottoNumber bonusBall = inputView.inputBonusBall();
+        Map<PrizePolicy, Integer> matchingResult = lottoMachine.winningResult(matchingCountResult, bonusBall);
 
         int totalPrizeMoney = resultView.printTotalResult(matchingResult);
 

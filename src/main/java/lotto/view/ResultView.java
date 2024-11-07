@@ -6,6 +6,9 @@ import lotto.entity.PrizePolicy;
 import java.util.Map;
 
 public class ResultView {
+
+    public static final int MIN_MATCH_COUNT = 3;
+
     public void printTotalLottoTicketCount(int totalLottoTicketCount) {
         System.out.println(totalLottoTicketCount + "개를 구매했습니다.");
     }
@@ -21,8 +24,14 @@ public class ResultView {
             int matchingTicketCount = matchingResult.getOrDefault(prizePolicy, 0);
             int prize = prizePolicy.getPrize();
             int matchCount = prizePolicy.getMatchCount();
-
-            System.out.println(matchCount + "개 일치 - (" + prize + "원) - " + matchingTicketCount + "개");
+            if (matchCount >= MIN_MATCH_COUNT) {
+                String bonusMessage = (prizePolicy == PrizePolicy.FIVE_BONUS) ? ", 보너스 볼 일치" : "";
+                System.out.println(String.format("%d개 일치%s - (%d원) - %d개",
+                                                  matchCount,
+                                                  bonusMessage,
+                                                  prize,
+                                                  matchingTicketCount));
+            }
 
             totalPrizeMoney += prize * matchingTicketCount;
         }

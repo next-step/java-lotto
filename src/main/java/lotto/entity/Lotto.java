@@ -49,4 +49,8 @@ public class Lotto {
                 .filter(winningLotto.getLottoNumbers()::contains)
                 .count();
     }
+
+    public boolean containsBonusBall(LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
+    }
 }
