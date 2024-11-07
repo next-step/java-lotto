@@ -13,7 +13,9 @@ class LottoRankTest {
         assertThat(LottoRank.findRankByMatchCount(5, true)).isEqualTo(LottoRank.SECOND);
         assertThat(LottoRank.findRankByMatchCount(5, false)).isEqualTo(LottoRank.THIRD);
         assertThat(LottoRank.findRankByMatchCount(4, false)).isEqualTo(LottoRank.FOURTH);
+        assertThat(LottoRank.findRankByMatchCount(4, true)).isEqualTo(LottoRank.FOURTH);
         assertThat(LottoRank.findRankByMatchCount(3, false)).isEqualTo(LottoRank.FIFTH);
+        assertThat(LottoRank.findRankByMatchCount(3, true)).isEqualTo(LottoRank.FIFTH);
         assertThat(LottoRank.findRankByMatchCount(2, false)).isEqualTo(LottoRank.ETC);
         assertThat(LottoRank.findRankByMatchCount(1, false)).isEqualTo(LottoRank.ETC);
         assertThat(LottoRank.findRankByMatchCount(0, false)).isEqualTo(LottoRank.ETC);

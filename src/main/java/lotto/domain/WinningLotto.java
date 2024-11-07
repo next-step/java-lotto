@@ -38,7 +38,7 @@ public class WinningLotto {
     private static List<Integer> toIntegers(String textNumbers) {
         String[] strings = textNumbers.split(DELIMITER);
         return Arrays.stream(strings)
-                .map(Integer::parseInt)
+                .map(string -> Integer.parseInt(string.trim()))
                 .collect(Collectors.toList());
     }
 
