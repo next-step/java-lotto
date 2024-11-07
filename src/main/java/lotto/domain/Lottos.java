@@ -12,6 +12,7 @@ public class Lottos {
     private static final int ZERO = 0;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
+
     private final List<Lotto> lottos;
 
     public Lottos(int amount) {
@@ -30,8 +31,8 @@ public class Lottos {
         return unmodifiableList(lottos);
     }
 
-    public LottoResult getLottoResult(Lotto lastWinningLotto, int bonusNumber) {
-        return new LottoResult(createLottoResult(lastWinningLotto, bonusNumber));
+    public LottoResult getLottoResult(WinningLotto lastWinningLotto) {
+        return new LottoResult(createLottoResult(lastWinningLotto));
     }
 
     public double calculateProfitability(LottoResult lottoResult, double amount) {
@@ -70,10 +71,10 @@ public class Lottos {
         return randomNumbers.subList(ZERO, LOTTO_SIZE);
     }
 
-    private Map<LottoRank, Integer> createLottoResult(Lotto lastWinningLotto, int bonusNumber) {
+    private Map<LottoRank, Integer> createLottoResult(WinningLotto lastWinningLotto) {
         Map<LottoRank, Integer> resultMap = new HashMap<>();
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = lotto.determineRank(lastWinningLotto, bonusNumber);
+            LottoRank lottoRank = lastWinningLotto.findRank(lotto);
             resultMap.put(lottoRank, resultMap.getOrDefault(lottoRank, 0) + 1);
         }
         resultMap.remove(LottoRank.ETC);

@@ -35,23 +35,11 @@ public class Lotto {
         return unmodifiableList(lottoNumbers);
     }
 
-    public LottoRank determineRank(Lotto lastWinningLotto, int bonusNumber) {
-        int matchCount = countMatchingNumbers(lastWinningLotto);
-        boolean hasBonusNumber = lottoNumbers.contains(new LottoNumber(bonusNumber));
-        return LottoRank.findRankByMatchCount(matchCount, hasBonusNumber);
-    }
-
     private static List<Integer> toIntegers(String textNumbers) {
         String[] strings = textNumbers.split(DELIMITER);
         return Arrays.stream(strings)
                 .map(string -> Integer.parseInt(string.trim()))
                 .collect(Collectors.toList());
-    }
-
-    private int countMatchingNumbers(Lotto otherLotto) {
-        return (int) lottoNumbers.stream()
-                .filter(otherLotto.lottoNumbers::contains)
-                .count();
     }
 
     @Override

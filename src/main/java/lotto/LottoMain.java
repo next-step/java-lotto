@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,10 +17,10 @@ public class LottoMain {
         ResultView.printLottos(lottos.getLottos());
 
         String lastWinningLottoNumbers = InputView.inputLastWinningLotto();
-        Lotto lastWinningLotto = new Lotto(lastWinningLottoNumbers);
-
         int bonusNumber = InputView.inputBonusNumber();
-        LottoResult lottoResult = lottos.getLottoResult(lastWinningLotto, bonusNumber);
+        WinningLotto lastWinningLotto = new WinningLotto(lastWinningLottoNumbers, bonusNumber);
+
+        LottoResult lottoResult = lottos.getLottoResult(lastWinningLotto);
         ResultView.printLottoResult(lottoResult, lottos.calculateProfitability(lottoResult, amount));
     }
 }
