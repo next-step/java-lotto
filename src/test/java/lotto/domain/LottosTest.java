@@ -11,8 +11,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
     @Test
     void create() {
-        Lottos lottos = new Lottos(14000);
-        assertThat(lottos.getQuantity()).isEqualTo(14);
+        Lottos lottos = new Lottos(Arrays.asList(
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(1, 2, 3, 4, 5, 7),
+                new Lotto(1, 2, 3, 4, 5, 8)
+        ));
+
+        assertThat(lottos).isEqualTo(new Lottos(Arrays.asList(
+                new Lotto("1, 2, 3, 4, 5, 6"),
+                new Lotto("1, 2, 3, 4, 5, 7"),
+                new Lotto("1, 2, 3, 4, 5, 8")
+        )));
     }
 
     @Test

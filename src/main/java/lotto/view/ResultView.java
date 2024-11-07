@@ -27,7 +27,6 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Map<LottoRank, Integer> resultMap = lottoResult.getResultMap();
-
         System.out.println(LottoRank.FIFTH.getMatchCount() + "개 일치 (" + LottoRank.FIFTH.getWinningPrize() + "원)- " + resultMap.getOrDefault(LottoRank.FIFTH, 0) + "개");
         System.out.println(LottoRank.FOURTH.getMatchCount() + "개 일치 (" + LottoRank.FOURTH.getWinningPrize() + "원)- " + resultMap.getOrDefault(LottoRank.FOURTH, 0) + "개");
         System.out.println(LottoRank.THIRD.getMatchCount() + "개 일치 (" + LottoRank.THIRD.getWinningPrize() + "원)- " + resultMap.getOrDefault(LottoRank.THIRD, 0) + "개");

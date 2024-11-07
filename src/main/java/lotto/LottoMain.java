@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
@@ -9,7 +10,8 @@ import lotto.view.ResultView;
 public class LottoMain {
     public static void main(String[] args) {
         int amount = InputView.inputAmount();
-        Lottos lottos = new Lottos(amount);
+        int manualLottoQuantity = InputView.inputManualLottoQuantity();
+        Lottos lottos = LottoGenerator.createLottos(amount);
 
         int quantity = lottos.getQuantity();
         ResultView.printQuantity(quantity);
