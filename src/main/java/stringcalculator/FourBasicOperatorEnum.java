@@ -1,4 +1,4 @@
-package step1;
+package stringcalculator;
 
 import java.util.Arrays;
 
