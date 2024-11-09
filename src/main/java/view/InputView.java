@@ -33,6 +33,10 @@ public class InputView {
         return askMessage("지난 주 당첨 번호를 입력해 주세요.(예 - 1, 3, 5, 7, 9, 11)");
     }
 
+    public String askBonusNumber() {
+        return askMessage("보너스 볼을 입력해 주세요.");
+    }
+
     private String askMessage(String message) {
         System.out.println(message);
 
