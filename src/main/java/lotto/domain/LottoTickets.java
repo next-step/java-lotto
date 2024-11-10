@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,8 +8,7 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = Optional.ofNullable(lottoTickets)
-                                    .orElse(Collections.emptyList());
+        this.lottoTickets = lottoTickets;
     }
 
     public static LottoTickets createByCount(int count) {

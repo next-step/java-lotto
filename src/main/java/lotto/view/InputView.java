@@ -24,7 +24,11 @@ public class InputView {
 
     private static int getManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return Integer.parseInt(SCANNER.nextLine());
+        int manualLottoCount = Integer.parseInt(SCANNER.nextLine());
+        if (manualLottoCount < 0) {
+            throw new IllegalArgumentException("로또 수는 0개 이상이어야 합니다.");
+        }
+        return manualLottoCount;
     }
 
     private static List<LottoTicket> getManualLottoTickets(int count) {
