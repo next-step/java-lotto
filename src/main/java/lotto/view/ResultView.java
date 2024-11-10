@@ -1,19 +1,35 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Winning;
 import lotto.domain.WinningCalculator;
 
+import java.util.stream.Collectors;
+
 public class ResultView {
-    public static void printTicketCount(int size) {
+    public static void printTicketsInfo(LottoTickets lottoTickets) {
+        printTicketCount(lottoTickets.size());
+        printTickets(lottoTickets);
+    }
+
+    private static void printTicketCount(int size) {
         System.out.println(size + "개를 구매했습니다.");
     }
 
-    public static void printTickets(LottoTickets lottoTickets) {
-        for (LottoTicket ticket : lottoTickets.getLottoTickets()) {
-            System.out.println(ticket.getLottoNumbers());
-        }
+    private static void printTickets(LottoTickets lottoTickets) {
+        lottoTickets.getLottoTickets()
+                     .forEach(ResultView::printTicket);
+    }
+
+    private static void printTicket(LottoTicket lottoTicket) {
+        String ticketNumbers = lottoTicket.getLottoNumbers()
+                                          .stream()
+                                          .map(LottoNumber::getNumber)
+                                          .map(String::valueOf)
+                                          .collect(Collectors.joining(", "));
+        System.out.println(ticketNumbers);
     }
 
     public static void printWinningResult(WinningCalculator winningCalculator) {

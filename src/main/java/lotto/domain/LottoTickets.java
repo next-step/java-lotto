@@ -11,14 +11,13 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets createByPrice(int price) {
+    public static LottoTickets createByCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("로또 티켓은 0개 이상이어야 합니다.");
+        }
         return new LottoTickets(Stream.generate(LottoTicket::createAuto)
-                                      .limit(calculateTicketCount(price))
+                                      .limit(count)
                                       .collect(Collectors.toList()));
-    }
-
-    private static int calculateTicketCount(int price) {
-        return price / LottoTicket.PRICE;
     }
 
     public int size() {
@@ -33,5 +32,15 @@ public class LottoTickets {
         return lottoTickets.stream()
                            .map(ticket -> ticket.calculateWinningResult(lottoWinningNumbers))
                            .collect(Collectors.toList());
+    }
+
+    public LottoTickets merge(LottoTickets other) {
+        List<LottoTicket> mergedTickets = Stream.concat(this.lottoTickets.stream(), other.lottoTickets.stream())
+                                                .collect(Collectors.toList());
+        return new LottoTickets(mergedTickets);
+    }
+
+    public LottoTicket get(int index) {
+        return lottoTickets.get(index);
     }
 }

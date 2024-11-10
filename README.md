@@ -35,7 +35,7 @@
 
 ## 로또 기능 요구사항
 - InputView
-  - 구매금액 입력 받아 LottoTickets 리턴
+  - 구매금액, 수동으로 구매할 로또 수 입력 받기
   - 당첨 번호 입력 받아 당첨 LottoTicket 리턴
   - 보너스 번호 입력 받아 LottoNumber 리턴
 - ResultView
@@ -44,6 +44,14 @@
   - 수익률 출력
 - LottoApp
   - 전체 로또 실행 수행
+- LottoTicketMaker
+  - 전체 로또 생성할 수 있는 개수 리턴 (가격 / 1000)
+  - 수동인 경우
+    - 수동 개수만큼 생성
+    - 개수만큼 수동번호 입력받아 LottoTicket 생성
+  - 자동인 경우
+    - (생성할 수 있는 개수 - 수동 개수) 만큼 생성
+    - 자동으로 LottoTicket 생성
 - LottoNumber
   - 로또 번호 생성
     - 1~45 사이의 숫자인지 검증
@@ -63,7 +71,7 @@
   - 일치 개수에 따라 Winning 객체 리턴
     - 보너스볼 당첨여부에 따라 2등/3등 구분
 - LottoTickets
-  - 구입 금액에 해당하는 로또 발급 (로또 1장의 가격은 1000원)
+  - 개수에 해당하는 로또 발급 (로또 1장의 가격은 1000원)
   - Winning 객체 리스트 WinningCalculator에 전달
 - WinningCalculator
   - Winning 객체를 받아 당첨 통계 저장
