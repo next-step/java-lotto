@@ -20,17 +20,6 @@ public class LottoTickets {
                                       .collect(Collectors.toList()));
     }
 
-    public static LottoTickets createByPrice(int price) {
-        if (price < 0) {
-            throw new IllegalArgumentException("구매 금액은 0원 이상이어야 합니다.");
-        }
-        return createByCount(calculateTicketCount(price));
-    }
-
-    private static int calculateTicketCount(int price) {
-        return price / LottoTicket.PRICE;
-    }
-
     public int size() {
         return lottoTickets.size();
     }

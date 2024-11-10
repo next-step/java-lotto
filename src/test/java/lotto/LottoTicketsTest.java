@@ -33,23 +33,6 @@ class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("로또 가격으로 생성할 때 티켓 개수 확인")
-    void createByPrice() {
-        int price = 3000;
-        LottoTickets lottoTickets = LottoTickets.createByPrice(price);
-
-        assertThat(lottoTickets.size()).isEqualTo(3);
-    }
-
-    @Test
-    @DisplayName("로또 가격으로 생성할 때 음수 입력시 예외 발생")
-    void createByPrice_Negative() {
-        assertThatThrownBy(() -> LottoTickets.createByPrice(-1))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("구매 금액은 0원 이상이어야 합니다.");
-    }
-
-    @Test
     @DisplayName("로또 티켓들 Winning 확인")
     void calculateWinningResults() {
         List<LottoTicket> tickets = new ArrayList<>();
