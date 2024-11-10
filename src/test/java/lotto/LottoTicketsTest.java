@@ -59,7 +59,7 @@ class LottoTicketsTest {
 
         LottoTickets mergedTickets = firstTickets.merge(secondTickets);
 
-        assertThat(3).isEqualTo( mergedTickets.size());
+        assertThat(mergedTickets.size()).isEqualTo( 3);
         assertThat(mergedTickets.get(0)).isEqualTo(ticket1);
         assertThat(mergedTickets.get(1)).isEqualTo(ticket2);
         assertThat(mergedTickets.get(2)).isEqualTo(ticket3);
