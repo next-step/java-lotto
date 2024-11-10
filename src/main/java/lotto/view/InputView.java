@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketMaker;
 import lotto.domain.LottoWinningNumbers;
 
 import java.util.List;
@@ -13,16 +12,14 @@ import java.util.stream.Stream;
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static LottoTicketMaker getLottoTicketMaker() {
-        int price = getPrice();
-        int manualCount = getManualLottoCount();
-        List<LottoTicket> manualNumbers = getManualLottoNumbers(manualCount);
-        return new LottoTicketMaker(price, manualNumbers);
-    }
-
-    private static int getPrice() {
+    public static int getPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static List<LottoTicket> getManualLottoTickets() {
+        int manualCount = getManualLottoCount();
+        return getManualLottoTickets(manualCount);
     }
 
     private static int getManualLottoCount() {
@@ -30,10 +27,10 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    private static List<LottoTicket> getManualLottoNumbers(int manualCount) {
+    private static List<LottoTicket> getManualLottoTickets(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         return Stream.generate(() -> LottoTicket.createByString(SCANNER.nextLine()))
-                     .limit(manualCount)
+                     .limit(count)
                      .collect(Collectors.toList());
     }
 
