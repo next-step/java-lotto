@@ -22,11 +22,11 @@ public class LottoTicketMaker {
         return createManualLottoTickets().merge(createAutoLottoTickets());
     }
 
-    public LottoTickets createManualLottoTickets() {
+    private LottoTickets createManualLottoTickets() {
         return new LottoTickets(manualNumbers);
     }
 
-    public LottoTickets createAutoLottoTickets() {
+    private LottoTickets createAutoLottoTickets() {
         return LottoTickets.createByCount(getAutoCount());
     }
 
