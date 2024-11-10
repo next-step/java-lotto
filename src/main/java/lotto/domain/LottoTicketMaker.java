@@ -1,13 +1,12 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTicketMaker {
     private final int price;
-    private final List<String> manualNumbers;
+    private final List<LottoTicket> manualNumbers;
 
-    public LottoTicketMaker(int price, List<String> manualNumbers) {
+    public LottoTicketMaker(int price, List<LottoTicket> manualNumbers) {
         this.price = price;
         this.manualNumbers = manualNumbers;
         validateLottoTicketMaker();
@@ -24,10 +23,7 @@ public class LottoTicketMaker {
     }
 
     public LottoTickets createManualLottoTickets() {
-        List<LottoTicket> lottoTickets = manualNumbers.stream()
-                                                      .map(LottoTicket::createByString)
-                                                      .collect(Collectors.toList());
-        return new LottoTickets(lottoTickets);
+        return new LottoTickets(manualNumbers);
     }
 
     public LottoTickets createAutoLottoTickets() {

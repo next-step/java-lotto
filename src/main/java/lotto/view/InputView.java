@@ -16,7 +16,7 @@ public class InputView {
     public static LottoTicketMaker getLottoTicketMaker() {
         int price = getPrice();
         int manualCount = getManualLottoCount();
-        List<String> manualNumbers = getManualLottoNumbers(manualCount);
+        List<LottoTicket> manualNumbers = getManualLottoNumbers(manualCount);
         return new LottoTicketMaker(price, manualNumbers);
     }
 
@@ -30,9 +30,9 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    private static List<String> getManualLottoNumbers(int manualCount) {
+    private static List<LottoTicket> getManualLottoNumbers(int manualCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        return Stream.generate(SCANNER::nextLine)
+        return Stream.generate(() -> LottoTicket.createByString(SCANNER.nextLine()))
                      .limit(manualCount)
                      .collect(Collectors.toList());
     }

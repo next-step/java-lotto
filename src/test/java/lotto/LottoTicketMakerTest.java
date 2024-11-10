@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketMaker;
 import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +16,8 @@ class LottoTicketMakerTest {
     @DisplayName("LottoTicketMaker 생성 테스트")
     void createLottoTicketMaker() {
         int price = 12000;
-        List<String> manualNumbers = List.of("1,2,3,4,5,6", "7,8,9,10,11,12");
+        List<LottoTicket> manualNumbers = List.of(new LottoTicket(1, 2, 3, 4, 5, 6),
+                                                  new LottoTicket(7, 8, 9, 10, 11, 12));
         LottoTicketMaker lottoTicketMaker = new LottoTicketMaker(price, manualNumbers);
 
         assertThat(lottoTicketMaker).isNotNull();
@@ -25,7 +27,9 @@ class LottoTicketMakerTest {
     @DisplayName("LottoTicketMaker 생성할 때 수동으로 구매할 로또 수가 총 로또 수보다 많은 경우 예외 발생")
     void createLottoTicketMakerException() {
         int price = 1000;
-        List<String> manualNumbers = List.of("1,2,3,4,5,6", "7,8,9,10,11,12", "13,14,15,16,17,18");
+        List<LottoTicket> manualNumbers = List.of(new LottoTicket(1, 2, 3, 4, 5, 6),
+                                                  new LottoTicket(7, 8, 9, 10, 11, 12),
+                                                  new LottoTicket(13, 14, 15, 16, 17, 18));
         assertThatThrownBy(() -> new LottoTicketMaker(price, manualNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("수동으로 구매할 로또 수가 총 로또 수보다 많습니다.");
@@ -35,7 +39,8 @@ class LottoTicketMakerTest {
     @Test
     void createLottoTickets() {
         int price = 12000;
-        List<String> manualNumbers = List.of("1,2,3,4,5,6", "7,8,9,10,11,12");
+        List<LottoTicket> manualNumbers = List.of(new LottoTicket(1, 2, 3, 4, 5, 6),
+                                             new LottoTicket(7, 8, 9, 10, 11, 12));
         LottoTicketMaker lottoTicketMaker = new LottoTicketMaker(price, manualNumbers);
         LottoTickets allTickets = lottoTicketMaker.createLottoTickets();
 
@@ -46,7 +51,8 @@ class LottoTicketMakerTest {
     @Test
     void createManualLottoTickets() {
         int price = 12000;
-        List<String> manualNumbers = List.of("1,2,3,4,5,6", "7,8,9,10,11,12");
+        List<LottoTicket> manualNumbers = List.of(new LottoTicket(1, 2, 3, 4, 5, 6),
+                                                  new LottoTicket(7, 8, 9, 10, 11, 12));
         LottoTicketMaker lottoTicketMaker = new LottoTicketMaker(price, manualNumbers);
 
         LottoTickets manualTickets = lottoTicketMaker.createManualLottoTickets();
@@ -58,7 +64,7 @@ class LottoTicketMakerTest {
     @Test
     void createAutoLottoTickets() {
         int price = 12000;
-        List<String> manualNumbers = List.of("1,2,3,4,5,6");
+        List<LottoTicket> manualNumbers = List.of(new LottoTicket(1, 2, 3, 4, 5, 6));
         LottoTicketMaker lottoTicketMaker = new LottoTicketMaker(price, manualNumbers);
 
         LottoTickets autoTickets = lottoTicketMaker.createAutoLottoTickets();
