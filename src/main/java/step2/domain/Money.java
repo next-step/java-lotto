@@ -8,6 +8,14 @@ import step2.exception.NotEnoughMoneyException;
 public class Money {
 	private final int money;
 
+	public Money(String moneyString) {
+		try {
+			money = Integer.parseInt(moneyString);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("입력값이 잘못되었습니다.");
+		}
+	}
+
 	public Money(int money) {
 		this.money = money;
 	}

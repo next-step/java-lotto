@@ -10,12 +10,7 @@ public class InputView {
 	public static Money getMoney() {
 		System.out.println("구입금액을 입력해 주세요.");
 		String input = scanner.nextLine();
-		try {
-			int money = Integer.parseInt(input);
-			return new Money(money);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("입력값이 잘못되었습니다.");
-		}
+		return new Money(input);
 	}
 
 	public static String getWinningNumbers() {

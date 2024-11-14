@@ -4,6 +4,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static step2.domain.var.LottoConstant.*;
 import static step2.service.LottoGame.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -53,5 +56,41 @@ class LottoGameTest {
 			Money money = new Money(MAX_LOTTO_PURCHASE_AMOUNT + 1000);
 			playLotto(money);
 		}).isInstanceOf(MoneyOverLimitException.class);
+	}
+
+	@Test
+	@DisplayName("수동 로또번호를 받을경우 수동 로또가 잘 생성되는지 테스트")
+	public void manualTest() {
+		final int MANUAL_LOTTO_COUNT = 3;
+		final int TOTAL_LOTTO_COUNT = 10;
+
+		String moneyString = Integer.toString(TOTAL_LOTTO_COUNT * LOTTO_PRICE);
+		List<String> manualLottoNumber = new ArrayList<>();
+		for (int i = 0; i < MANUAL_LOTTO_COUNT; i++) {
+			manualLottoNumber.add("1,2,3,4,5,6");
+		}
+		PlayLottoDto playLottoDto = new PlayLottoDto(moneyString, manualLottoNumber);
+
+		LottoPlayResultDto resultDto = playLotto(playLottoDto);
+
+		assertThat(resultDto.getManualLottos().size()).isEqualTo(MANUAL_LOTTO_COUNT);
+	}
+
+	@Test
+	@DisplayName("돈과 수동 로또번호를 받을경우 나머지 금액이 자동 로또로 잘 생성되는지 테스트")
+	public void manualAndAutoTest() {
+		final int MANUAL_LOTTO_COUNT = 3;
+		final int TOTAL_LOTTO_COUNT = 10;
+
+		String moneyString = Integer.toString(TOTAL_LOTTO_COUNT * LOTTO_PRICE);
+		List<String> manualLottoNumber = new ArrayList<>();
+		for (int i = 0; i < MANUAL_LOTTO_COUNT; i++) {
+			manualLottoNumber.add("1,2,3,4,5,6");
+		}
+		PlayLottoDto playLottoDto = new PlayLottoDto(moneyString, manualLottoNumber);
+
+		LottoPlayResultDto resultDto = playLotto(playLottoDto);
+
+		assertThat(resultDto.getAutoLottos().size()).isEqualTo(10 - MANUAL_LOTTO_COUNT);
 	}
 }
