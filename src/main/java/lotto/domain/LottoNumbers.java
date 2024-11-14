@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,7 +14,7 @@ public class LottoNumbers {
     public static final int PRICE = 1000;
     public static final int NUMBER_OF_LOTTO_NUMBER = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumberSet;
 
     public LottoNumbers() {
         List<Integer> numbers = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
@@ -21,49 +22,45 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
         Collections.shuffle(numbers);
 
-        this.lottoNumbers = numbers.stream()
+        this.lottoNumberSet = numbers.stream()
                 .limit(NUMBER_OF_LOTTO_NUMBER)
                 .sorted()
                 .map(LottoNumber::valueOf)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toCollection(TreeSet::new),
+                        Collections::unmodifiableSortedSet
+                ));
     }
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(Set<Integer> numbers) {
         validateCount(numbers);
-        validateDuplicateNumber(numbers);
 
-        this.lottoNumbers = toLottoNumberList(numbers);
+        this.lottoNumberSet = toLottoNumberSet(numbers);
     }
 
     public LottoNumbers(String input) {
         validateEmptyInput(input);
-        List<Integer> numbers = toIntegerList(input);
 
+        Set<Integer> numbers = toIntegerSet(input);
         validateCount(numbers);
-        validateDuplicateNumber(numbers);
 
-        this.lottoNumbers = toLottoNumberList(numbers);
+        this.lottoNumberSet = toLottoNumberSet(numbers);
     }
 
-    private void validateCount(List<Integer> numbers) {
+    private void validateCount(Set<Integer> numbers) {
         if (numbers == null || numbers.size() != NUMBER_OF_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(NUMBER_OF_LOTTO_NUMBER + "개의 로또번호가 필요합니다.");
+            throw new IllegalArgumentException("중복되지 않은 " + NUMBER_OF_LOTTO_NUMBER + "개의 로또번호가 필요합니다.");
         }
     }
 
-    private void validateDuplicateNumber(List<Integer> lottoNumberList) {
-        Set<Integer> lottoNumberSet = new HashSet<>(lottoNumberList);
-
-        if (lottoNumberSet.size() != lottoNumberList.size()) {
-            throw new IllegalArgumentException("중복된 로또번호를 사용할 수 없습니다.");
-        }
-    }
-
-    private List<LottoNumber> toLottoNumberList(List<Integer> numbers) {
+    private Set<LottoNumber> toLottoNumberSet(Set<Integer> numbers) {
         return numbers.stream()
                 .sorted()
                 .map(LottoNumber::valueOf)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toCollection(TreeSet::new),
+                        Collections::unmodifiableSortedSet
+                ));
     }
 
     private void validateEmptyInput(String input) {
@@ -72,33 +69,33 @@ public class LottoNumbers {
         }
     }
 
-    private List<Integer> toIntegerList(String input) {
+    private Set<Integer> toIntegerSet(String input) {
         try {
             String[] split = input.split(",");
 
             return Arrays.stream(split)
                     .map(String::trim)
                     .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
 
         } catch (NumberFormatException e){
             throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
         }
     }
 
-    public int countIdenticalLottoNumber(LottoNumbers that) {
-        Set<LottoNumber> control = new HashSet<>(this.lottoNumbers);
-        Set<LottoNumber> compare = new HashSet<>(that.lottoNumbers);
-        compare.addAll(control);
+    public int countIdenticalLottoNumberSet(LottoNumbers that) {
+        Set<LottoNumber> compare = new HashSet<>();
+        compare.addAll(this.lottoNumberSet);
+        compare.addAll(that.lottoNumberSet);
 
-        int difference = compare.size() - control.size();
+        int difference = compare.size() - this.lottoNumberSet.size();
 
-        return control.size() - difference;
+        return this.lottoNumberSet.size() - difference;
     }
 
     @Override
     public String toString() {
-        String[] numbers = lottoNumbers.stream()
+        String[] numbers = lottoNumberSet.stream()
                 .map(LottoNumber::toString)
                 .toArray(String[]::new);
 

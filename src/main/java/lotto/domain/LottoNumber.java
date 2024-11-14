@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MIN = 1;
     public static final int MAX = 45;
@@ -32,6 +32,11 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber that) {
+        return this.number - that.number;
     }
 }
 

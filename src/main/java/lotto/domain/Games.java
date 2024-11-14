@@ -34,7 +34,7 @@ public class Games {
 
     public List<Rank> checkResult(LottoNumbers winner) {
         return games.stream()
-                .map(game -> game.countIdenticalLottoNumber(winner))
+                .map(game -> game.countIdenticalLottoNumberSet(winner))
                 .map(hits -> Rank.of(hits))
                 .collect(Collectors.toUnmodifiableList());
     }
