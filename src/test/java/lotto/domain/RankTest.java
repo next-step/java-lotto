@@ -12,28 +12,29 @@ class RankTest {
 
     private static Stream<Arguments> rank() {
         return Stream.of(
-                Arguments.arguments(Rank.FIRST, 6, 2_000_000_000),
-                Arguments.arguments(Rank.SECOND, 5, 1_500_000),
-                Arguments.arguments(Rank.THIRD, 4, 50_000),
-                Arguments.arguments(Rank.FOURTH, 3, 5000),
-                Arguments.arguments(Rank.NONE, 2, 0),
-                Arguments.arguments(Rank.NONE, 1, 0),
-                Arguments.arguments(Rank.NONE, 0, 0)
+                Arguments.arguments(Rank.FIRST, 6, 2_000_000_000, false),
+                Arguments.arguments(Rank.SECOND, 5, 30_000_000, true),
+                Arguments.arguments(Rank.THIRD, 5, 1_500_000, false),
+                Arguments.arguments(Rank.FOURTH, 4, 50_000, false),
+                Arguments.arguments(Rank.FIFTH, 3, 5000, false),
+                Arguments.arguments(Rank.NONE, 2, 0, false),
+                Arguments.arguments(Rank.NONE, 1, 0, false),
+                Arguments.arguments(Rank.NONE, 0, 0, false)
         );
     }
 
     @ParameterizedTest
     @MethodSource("rank")
-    void 맞춘_갯수에_따른_등수를_가져온다(Rank rank, int hits, int prize) {
-        Rank ranking = Rank.of(hits);
+    void 맞춘_갯수에_따른_등수를_가져온다(Rank rank, int hits, int prize, boolean hasBonus) {
+        Rank ranking = Rank.of(hits, hasBonus);
 
         assertThat(ranking).isEqualTo(rank);
     }
 
     @ParameterizedTest
     @MethodSource("rank")
-    void 맞춘_갯수에_따른_상금을_가져온다(Rank rank, int hits, int prize) {
-        Rank ranking = Rank.of(hits);
+    void 맞춘_갯수에_따른_상금을_가져온다(Rank rank, int hits, int prize, boolean hasBonus) {
+        Rank ranking = Rank.of(hits, hasBonus);
 
         assertThat(ranking.wins()).isEqualTo(prize);
     }
