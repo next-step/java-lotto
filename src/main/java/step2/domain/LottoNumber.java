@@ -32,8 +32,8 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 		return new ArrayList<>(CACHE_NUMBER);
 	}
 
-	public static List<LottoNumber> asList(String winningNumbers) {
-		return Arrays.stream(winningNumbers.split(COMMA_DELIMITER))
+	public static List<LottoNumber> asList(String lottoNumberString) {
+		return Arrays.stream(lottoNumberString.split(COMMA_DELIMITER))
 			.map(LottoNumber::parseAndCreate)
 			.collect(Collectors.toList());
 	}
@@ -47,7 +47,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 			int number = Integer.parseInt(numberStr.trim());
 			return new LottoNumber(number);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("지난 주 당첨번호를 올바른 형식으로 넣어주세요. \nex) 1, 2, 3, 4, 5, 6");
+			throw new IllegalArgumentException("당첨번호를 올바른 형식으로 넣어주세요. \nex) 1, 2, 3, 4, 5, 6");
 		}
 	}
 
