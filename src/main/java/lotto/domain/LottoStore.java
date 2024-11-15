@@ -15,14 +15,29 @@ public class LottoStore {
     }
 
     public Lottos buy(Money money, List<String> passivityLosttsInput) {
-        if (isInvalidBaseUnit(money)) {
-            throw new IllegalArgumentException("로또는 1000원 단위이여야 합니다.");
-        }
+        validMoney(money, passivityLosttsInput);
 
         List<Lotto> passivityLostts = passivityLostts(passivityLosttsInput);
         List<Lotto> autoLottos = autoLottos(money.subtracted(BASE_AMOUNT.multiply(passivityLostts.size())));
 
         return new Lottos(passivityLostts, autoLottos);
+    }
+
+    private void validMoney(Money money, List<String> passivityLosttsInput) {
+        if (isInvalidBaseUnit(money)) {
+            throw new IllegalArgumentException("로또는 1000원 단위이여야 합니다.");
+        }
+        if (isOverPassivityLottos(money, passivityLottosFee(passivityLosttsInput))) {
+            throw new IllegalArgumentException("수동 로또는 구매금액보다 많은 수 없습니다");
+        }
+    }
+
+    private static Money passivityLottosFee(List<String> passivityLosttsInput) {
+        return BASE_AMOUNT.multiply(passivityLosttsInput.size());
+    }
+
+    private boolean isOverPassivityLottos(Money money, Money passivityLottosFee) {
+        return passivityLottosFee.isOver(money);
     }
 
     private List<Lotto> autoLottos(Money money) {

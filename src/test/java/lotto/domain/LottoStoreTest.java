@@ -17,6 +17,12 @@ public class LottoStoreTest {
     private static final LottoStore LOTTO_STORE = new LottoStore((min, max, size) -> List.of(1, 2, 3, 4, 5, 6));
 
     @Test
+    public void 수동로또_금액은_구매금액을_넘는_경우_예외가_발생한다() {
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> LOTTO_STORE.buy(new Money(1000), List.of("8, 21, 23, 41, " + "42, 43", "8, 21, 23, 41, 42, 43")));
+    }
+
+    @Test
     public void 수동로또를_포함하여_로또를_발급한다() {
         Lottos result = LOTTO_STORE.buy(new Money(2000), List.of("8, 21, 23, 41, 42, 43"));
         assertThat(result).isEqualTo(new Lottos(List.of(new Lotto(List.of(8, 21, 23, 41, 42, 43))),

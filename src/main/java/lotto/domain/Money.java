@@ -41,6 +41,10 @@ public class Money {
         return new Money(this.amount - value.amount);
     }
 
+    public boolean isOver(Money value) {
+        return this.amount > value.amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
