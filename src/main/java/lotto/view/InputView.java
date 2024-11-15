@@ -38,6 +38,7 @@ public class InputView {
     }
 
     public static List<String> readPassivityLotts(int count) {
+        validPassivityLottoCount(count);
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         ArrayList<String> result = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
@@ -45,5 +46,11 @@ public class InputView {
             result.add(scanner.nextLine());
         }
         return result;
+    }
+
+    private static void validPassivityLottoCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("로또 발급 개수는 음수일 수 없습니다");
+        }
     }
 }
