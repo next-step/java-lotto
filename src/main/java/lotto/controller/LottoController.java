@@ -15,8 +15,8 @@ public class LottoController {
 
     public Lottos buy() {
         Money fee = new Money(InputView.readAmount());
-        List<String> passivityLostts = InputView.readPassivityLostts();
-        Lottos lottos = store.buy(fee, passivityLostts);
+        List<String> passivityLotts = InputView.readPassivityLotts(InputView.readPassivityLottoCount());
+        Lottos lottos = store.buy(fee, passivityLotts);
 
         OutputView.renderingLottos(lottos);
         return lottos;

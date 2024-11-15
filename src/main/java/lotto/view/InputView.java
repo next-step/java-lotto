@@ -31,13 +31,18 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<String> readPassivityLostts() {
+    public static int readPassivityLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    public static List<String> readPassivityLotts(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         ArrayList<String> result = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        String line;
-        while (!(line = scanner.nextLine()).isBlank()) {
-            result.add(line);
+        for (int i = 0; i < count; i++) {
+            result.add(scanner.nextLine());
         }
         return result;
     }
