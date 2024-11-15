@@ -33,6 +33,14 @@ public class Money {
         return new Money(amount % money.amount);
     }
 
+    public Money multiply(int value) {
+        return new Money(amount * value);
+    }
+
+    public Money subtracted(Money value) {
+        return new Money(this.amount - value.amount);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

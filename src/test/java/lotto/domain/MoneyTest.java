@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import lotto.domain.Money;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,6 +18,16 @@ public class MoneyTest {
     @CsvSource(value = {"0,1", "1000,1000", "4,0"})
     public void 거스름돈_계산(int amount1, int amount2) {
         assertThat(new Money(amount1).change(new Money(amount2))).isEqualTo(createChange(amount1, amount2));
+    }
+
+    @Test
+    public void 두_돈을_곱한다() {
+        assertThat(new Money(1000).multiply(3)).isEqualTo(new Money(1000 * 3));
+    }
+
+    @Test
+    public void 두_돈을_밴다() {
+        assertThat(new Money(1000).subtracted(new Money(999))).isEqualTo(new Money(1000 - 999));
     }
 
     private Money createChange(int amount1, int amount2) {
