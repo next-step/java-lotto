@@ -42,7 +42,7 @@ public class Lottos implements Iterable<Lotto> {
 
     @Override
     public Iterator<Lotto> iterator() {
-        return autoLottos.iterator();
+        return totalLottos().iterator();
     }
 
     @Override
