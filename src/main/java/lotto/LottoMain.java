@@ -10,8 +10,7 @@ public class LottoMain {
 
     public static void main(String[] args) {
         LottoController controller = new LottoController();
-        Lottos lottos = controller.buy(InputView.readAmount());
-        OutputView.renderingLottos(lottos);
+        Lottos lottos = controller.buy();
 
         RankResult result = controller.check(InputView.readWinningNumber(), InputView.readBonusNumber(), lottos);
         OutputView.renderingWinningStatistics(result);

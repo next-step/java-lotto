@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -27,5 +29,16 @@ public class InputView {
     private static int readInt() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
+    }
+
+    public static List<String> readPassivityLostts() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        ArrayList<String> result = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        String line;
+        while (!(line = scanner.nextLine()).isBlank()) {
+            result.add(line);
+        }
+        return result;
     }
 }
