@@ -1,16 +1,16 @@
 package step2.view;
 
 import step2.domain.LottoStatistics;
-import step2.domain.Money;
 import step2.dto.LottoPlayResultDto;
+import step2.dto.PlayLottoDto;
 import step2.service.LottoGame;
 
 public class LottoController {
 	public static void main(String[] args) {
 		try {
-			Money money = InputView.getMoney();
-			LottoPlayResultDto resultDto = LottoGame.playLotto(money);
-			ResultView.printLottoResult(resultDto.getLottos());
+			PlayLottoDto playLottoDto = InputView.getPlayLottoParams();
+			LottoPlayResultDto resultDto = LottoGame.playLotto(playLottoDto);
+			ResultView.printLottoResult(resultDto);
 
 			String winningSixNumbers = InputView.getWinningNumbers();
 			String bonusNumber = InputView.getBonusNumber();

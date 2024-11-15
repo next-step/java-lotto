@@ -8,12 +8,17 @@ import step2.domain.LottoNumber;
 import step2.domain.LottoStatistics;
 import step2.domain.Money;
 import step2.domain.var.LottoPrize;
+import step2.dto.LottoPlayResultDto;
 
 public class ResultView {
-	public static void printLottoResult(List<Lotto> result) {
+	public static void printLottoResult(LottoPlayResultDto resultDto) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(result.size()).append(" 개를 구매했습니다.\n");
-		printLottos(result, sb);
+		sb.append("수동으로 ")
+			.append(resultDto.getManualLottos().size())
+			.append("장, 자동으로")
+			.append(resultDto.getAutoLottos().size())
+			.append("개를 구매했습니다. \n");
+		printLottos(resultDto.getLottos(), sb);
 		System.out.println(sb);
 	}
 
