@@ -39,8 +39,6 @@ public class LottoGeneratorTest {
         "15500, 15"
     })
     void gen_lotto_match_to_money(int money, int lottoCount){
-        ArrayList<Lotto> lottos = lottoGenerator.generate(money);
-
-        assertThat(lottos).hasSize(lottoCount);
+        assertThat(lottoGenerator.generate(money)).hasSize(lottoCount);
     }
 }

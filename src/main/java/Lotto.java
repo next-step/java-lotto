@@ -19,6 +19,16 @@ public class Lotto {
         return this.nums.contains(num);
     }
 
+    public MatchCount match(Lotto other) {
+        MatchCount count = new MatchCount();
+
+        for(int num : this.nums){
+            count.tryIncrement(other.has(num));
+        }
+
+        return count;
+    }
+
     public String print() {
         String str = "[";
 
