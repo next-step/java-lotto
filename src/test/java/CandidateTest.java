@@ -12,7 +12,6 @@ public class CandidateTest {
 
         Lotto winning = new Lotto(new ArrayList<>(Arrays.asList(1,2,3,14,15,16))); // match 3
 
-        assertThat(candidate.getMoney(winning)).isEqualTo(5000);
-
+        assertThat(candidate.match(winning).is(3)).isTrue();
     }
 }

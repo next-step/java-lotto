@@ -23,7 +23,7 @@ public class LottoGenerator {
     }
 
     public ArrayList<Lotto> generate(Money money){
-        return generate(money.AvailLottoCount());
+        return generate(money.availLottoCount());
     }
 
     public Lotto generate(ArrayList<Integer> nums) {

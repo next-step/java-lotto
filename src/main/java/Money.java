@@ -5,11 +5,15 @@ public class Money {
         this(0);
     }
 
+    public Money(String str) throws NumberFormatException{
+        this(Integer.parseInt(str));
+    }
+
     public Money(int value) {
         this.value = value;
     }
 
-    public int AvailLottoCount(){
+    public int availLottoCount(){
         return this.value / 1000;
     }
 
