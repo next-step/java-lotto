@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGeneratorTest {
 
-    private final LottoGenerator lottoGenerator = new LottoGenerator();
+    private final LottoGenerator lottoGenerator = new LottoGenerator(new RandomGenerator());
 
     @Test
     void gen_lotto(){
@@ -39,6 +39,6 @@ public class LottoGeneratorTest {
         "15500, 15"
     })
     void gen_lotto_match_to_money(int money, int lottoCount){
-        assertThat(lottoGenerator.generate(money)).hasSize(lottoCount);
+        assertThat(lottoGenerator.generate(new Money(money))).hasSize(lottoCount);
     }
 }

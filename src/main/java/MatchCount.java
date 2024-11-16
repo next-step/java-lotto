@@ -15,7 +15,6 @@ public class MatchCount {
         }
     }
 
-
     @Override
     public boolean equals(Object obj) {
         return this.value == ((MatchCount) obj).value;

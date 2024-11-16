@@ -1,37 +1,32 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 public class LottoGenerator {
 
+    private final RandomGenerator randomGenerator;
+
+    public LottoGenerator(RandomGenerator randomGenerator) {
+        this.randomGenerator = randomGenerator;
+    }
+
     public Lotto generate(){
-        ArrayList<Integer> nums = new ArrayList<>();
-
-        Random rand = new Random();
-
-        for(int i = 0; i < 6; i++){
-            nums.add(rand.nextInt(45) + 1);
-        }
-
-        return generate(nums);
+        return generate(this.randomGenerator.generate(6));
     }
 
-    public Lotto generate(ArrayList<Integer> nums) {
-        return new Lotto(nums);
-    }
-
-    public ArrayList<Lotto> generate(int money){
-        if (money < 1000) {
-            return new ArrayList<>();
-        }
-
-        int lottoCnt = money / 1000;
-
+    public ArrayList<Lotto> generate(int lottoCount){
         ArrayList<Lotto> lottos = new ArrayList<>();
 
-        for(int i = 0; i < lottoCnt; i++){
+        for(int i = 0; i < lottoCount; i++){
             lottos.add(this.generate());
         }
 
         return lottos;
+    }
+
+    public ArrayList<Lotto> generate(Money money){
+        return generate(money.AvailLottoCount());
+    }
+
+    public Lotto generate(ArrayList<Integer> nums) {
+        return new Lotto(nums);
     }
 }

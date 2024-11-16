@@ -7,10 +7,6 @@ public class Lotto {
         return this.nums.size();
     }
 
-    public Lotto(){
-        this.nums = new ArrayList<>();
-    }
-
     public Lotto(ArrayList<Integer> nums){
         this.nums = nums;
     }
