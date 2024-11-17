@@ -5,9 +5,10 @@ import lotto.settings.LottoSettings;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    private static final LottoNumberCache cache = LottoNumberCache.getInstance();
     private final int number;
 
-    public LottoNumber(int value) {
+    private LottoNumber(int value) {
         if (outOfRange(value)) {
             throw new IllegalArgumentException("로또의 숫자는 1~45사이의 숫자여야 합니다");
         }
@@ -16,6 +17,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static boolean outOfRange(int value) {
         return !LottoSettings.isNumberInValidRange(value);
+    }
+
+    public static LottoNumber of(int value) {
+        return cache.find(value).orElseGet(() -> addToCache(value));
+    }
+
+    private static LottoNumber addToCache(int value) {
+        LottoNumber result = new LottoNumber(value);
+        cache.add(value, result);
+        return result;
     }
 
     @Override

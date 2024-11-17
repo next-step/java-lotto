@@ -8,7 +8,7 @@ public class WinningLotto {
     private final Lotto lotto;
 
     public WinningLotto(Lotto lotto, int bonusNumber) {
-        LottoNumber lottoNumber = new LottoNumber(bonusNumber);
+        LottoNumber lottoNumber = LottoNumber.of(bonusNumber);
         if (lotto.containNumber(lottoNumber)) {
             throw new IllegalArgumentException("올바르지 않은 입력 입니다.");
         }
