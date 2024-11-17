@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -17,29 +15,23 @@ public class LottoStoreTest {
     private static final LottoStore LOTTO_STORE = new LottoStore((min, max, size) -> List.of(1, 2, 3, 4, 5, 6));
 
     @Test
-    public void 수동로또_금액은_구매금액을_넘는_경우_예외가_발생한다() {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> LOTTO_STORE.buy(new Money(1000), List.of("8, 21, 23, 41, " + "42, 43", "8, 21, 23, 41, 42, 43")));
+    public void 수동로또를_생성한다() {
+        List<String> input = List.of("1,2,3,4,5,6", "4,5,6,7,8,45");
+
+        List<Lotto> lottos = LOTTO_STORE.passivityLostts(input);
+
+        List<Lotto> result = List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(4, 5, 6, 7, 8, 45)));
+        assertThat(lottos).containsExactlyInAnyOrderElementsOf(result);
     }
 
-    @Test
-    public void 수동로또를_포함하여_로또를_발급한다() {
-        Lottos result = LOTTO_STORE.buy(new Money(2000), List.of("8, 21, 23, 41, 42, 43"));
-        assertThat(result).isEqualTo(new Lottos(List.of(new Lotto(List.of(8, 21, 23, 41, 42, 43))),
-                List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)))));
-    }
 
     @ParameterizedTest
     @ValueSource(ints = {1000, 2000, 15000})
     public void 로또는_천원단위로_생선된다(int fee) {
-        Lottos result = LOTTO_STORE.buy(new Money(fee), Collections.EMPTY_LIST);
+        List<Lotto> result = LOTTO_STORE.autoLottos(new Money(fee));
         assertThat(result).hasSize(fee / 1000);
     }
 
-    @Test
-    public void 로또는_천원단위가_아니면_예외가_발생한다() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LOTTO_STORE.buy(new Money(999), Collections.EMPTY_LIST));
-    }
 
     @ParameterizedTest
     @MethodSource("provideLottoScenarios")

@@ -1,44 +1,44 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.settings.LottoSettings;
 
 public class Money {
 
-    private static Money ZERO = new Money(0);
     private final int amount;
 
     public Money(int amount) {
+        validMoney(amount);
+        this.amount = amount;
+    }
+
+    private void validMoney(int amount) {
         if (isNegative(amount)) {
             throw new IllegalArgumentException("돈은 음수일수 없습니다.");
         }
-        this.amount = amount;
+        if (isInvalidBaseUnit(amount)) {
+            throw new IllegalArgumentException("돈은 1000원 단위이여야 합니다.");
+        }
     }
 
     private boolean isNegative(int fee) {
         return fee < 0;
     }
 
-    public static Money zero() {
-        return ZERO;
+    private boolean isInvalidBaseUnit(int fee) {
+        return fee % baseAmount() != 0;
     }
 
-    public int divide(Money baseAmount) {
-        return this.amount / baseAmount.amount;
+    private static int baseAmount() {
+        return LottoSettings.DEFAULT_PRICE.value();
     }
 
-    public Money change(Money money) {
-        if (ZERO.equals(money)) {
-            return this;
-        }
-        return new Money(amount % money.amount);
+    public Money subtractedBill(int count) {
+        return new Money(this.amount - baseAmount() * count);
     }
 
-    public Money multiply(int value) {
-        return new Money(amount * value);
-    }
-
-    public Money subtracted(Money value) {
-        return new Money(this.amount - value.amount);
+    public int countBill() {
+        return this.amount / baseAmount();
     }
 
     public boolean isOver(Money value) {

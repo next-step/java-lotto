@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -14,11 +15,27 @@ public class LottoController {
     private static final LottoStore store = new LottoStore(new RandomLottoNumberGenerator());
 
     public Lottos buy() {
-        Money fee = new Money(InputView.readAmount());
-        List<String> passivityLotts = InputView.readPassivityLotts(InputView.readPassivityLottoCount());
-        Lottos lottos = store.buy(fee, passivityLotts);
+        Money fee = readBuyLottoFee();
+        List<String> passivityLottosInput = readPassivityLottos();
+
+        Lottos lottos = buyLottos(passivityLottosInput, fee);
 
         OutputView.renderingLottos(lottos);
+        return lottos;
+    }
+
+    private static Money readBuyLottoFee() {
+        return new Money(InputView.readAmount());
+    }
+
+    private static List<String> readPassivityLottos() {
+        return InputView.readPassivityLotts(InputView.readPassivityLottoCount());
+    }
+
+    private static Lottos buyLottos(List<String> passivityLottosInput, Money fee) {
+        List<Lotto> passivityLottos = store.passivityLostts(passivityLottosInput);
+        List<Lotto> autoLottos = store.autoLottos(fee.subtractedBill(passivityLottos.size()));
+        Lottos lottos = new Lottos(passivityLottos, autoLottos);
         return lottos;
     }
 

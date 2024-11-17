@@ -2,11 +2,11 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import lotto.settings.LottoSettings;
 
 public class LottoStore {
 
-    private static final Money BASE_AMOUNT = new Money(LottoSettings.DEFAULT_PRICE.value());
 
     private final LottoNumberGenerator lottoNumberGenerator;
 
@@ -14,50 +14,20 @@ public class LottoStore {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public Lottos buy(Money money, List<String> passivityLosttsInput) {
-        validMoney(money, passivityLosttsInput);
-
-        List<Lotto> passivityLostts = passivityLostts(passivityLosttsInput);
-        List<Lotto> autoLottos = autoLottos(money.subtracted(BASE_AMOUNT.multiply(passivityLostts.size())));
-
-        return new Lottos(passivityLostts, autoLottos);
+    public List<Lotto> autoLottos(Money money) {
+        return createLottoList(money.countBill(), (idx) -> new Lotto(generateRandomNumbers()));
     }
 
-    private void validMoney(Money money, List<String> passivityLosttsInput) {
-        if (isInvalidBaseUnit(money)) {
-            throw new IllegalArgumentException("로또는 1000원 단위이여야 합니다.");
-        }
-        if (isOverPassivityLottos(money, passivityLottosFee(passivityLosttsInput))) {
-            throw new IllegalArgumentException("수동 로또는 구매금액보다 많은 수 없습니다");
-        }
+    public List<Lotto> passivityLostts(List<String> passivityLostts) {
+        return createLottoList(passivityLostts.size(), (idx) -> Lotto.from(passivityLostts.get(idx)));
     }
 
-    private static Money passivityLottosFee(List<String> passivityLosttsInput) {
-        return BASE_AMOUNT.multiply(passivityLosttsInput.size());
-    }
-
-    private boolean isOverPassivityLottos(Money money, Money passivityLottosFee) {
-        return passivityLottosFee.isOver(money);
-    }
-
-    private List<Lotto> autoLottos(Money money) {
+    private List<Lotto> createLottoList(int size, Function<Integer, Lotto> lottoGenerator) {
         List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < money.divide(BASE_AMOUNT); i++) {
-            result.add(new Lotto(generateRandomNumbers()));
+        for (int i = 0; i < size; i++) {
+            result.add(lottoGenerator.apply(i));
         }
         return result;
-    }
-
-    private static List<Lotto> passivityLostts(List<String> passivityLostts) {
-        List<Lotto> result = new ArrayList<>();
-        for (String passivityLostt : passivityLostts) {
-            result.add(Lotto.from(passivityLostt));
-        }
-        return result;
-    }
-
-    private boolean isInvalidBaseUnit(Money fee) {
-        return !fee.change(BASE_AMOUNT).equals(Money.zero());
     }
 
     private List<Integer> generateRandomNumbers() {
