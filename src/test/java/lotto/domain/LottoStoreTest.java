@@ -18,7 +18,7 @@ public class LottoStoreTest {
     public void 수동로또를_생성한다() {
         List<String> input = List.of("1,2,3,4,5,6", "4,5,6,7,8,45");
 
-        List<Lotto> lottos = LOTTO_STORE.passivityLostts(input);
+        List<Lotto> lottos = LOTTO_STORE.passivityLottos(input);
 
         List<Lotto> result = List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(4, 5, 6, 7, 8, 45)));
         assertThat(lottos).containsExactlyInAnyOrderElementsOf(result);

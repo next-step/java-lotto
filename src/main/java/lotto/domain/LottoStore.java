@@ -18,7 +18,7 @@ public class LottoStore {
         return createLottoList(money.countBill(), (idx) -> new Lotto(generateRandomNumbers()));
     }
 
-    public List<Lotto> passivityLostts(List<String> passivityLostts) {
+    public List<Lotto> passivityLottos(List<String> passivityLostts) {
         return createLottoList(passivityLostts.size(), (idx) -> Lotto.from(passivityLostts.get(idx)));
     }
 

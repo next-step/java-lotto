@@ -2,9 +2,6 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.Lottos;
-import lotto.dto.RankResult;
-import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class LottoMain {
 
@@ -12,7 +9,6 @@ public class LottoMain {
         LottoController controller = new LottoController();
         Lottos lottos = controller.buy();
 
-        RankResult result = controller.check(InputView.readWinningNumber(), InputView.readBonusNumber(), lottos);
-        OutputView.renderingWinningStatistics(result);
+        controller.check(lottos);
     }
 }
