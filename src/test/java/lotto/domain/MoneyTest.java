@@ -11,7 +11,7 @@ public class MoneyTest {
 
     @Test
     public void 금액은_음수일경우_예외가_발생한다() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Money(-1000));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Money(-1_000));
     }
 
     @ParameterizedTest
@@ -22,12 +22,12 @@ public class MoneyTest {
 
     @Test
     public void 두_돈을_곱한다() {
-        assertThat(new Money(1000).multiply(3)).isEqualTo(new Money(1000 * 3));
+        assertThat(new Money(1_000).multiply(3)).isEqualTo(new Money(1_000 * 3));
     }
 
     @Test
     public void 두_돈을_밴다() {
-        assertThat(new Money(1000).subtracted(new Money(999))).isEqualTo(new Money(1000 - 999));
+        assertThat(new Money(1_000).subtracted(new Money(999))).isEqualTo(new Money(1_000 - 999));
     }
 
     @ParameterizedTest
