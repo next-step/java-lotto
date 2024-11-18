@@ -32,13 +32,6 @@ public class Games {
         return games.size();
     }
 
-    public List<Rank> checkResult(LottoNumbers winner) {
-        return games.stream()
-                .map(game -> game.countIdenticalLottoNumberSet(winner))
-                .map(hits -> Rank.of(hits))
-                .collect(Collectors.toUnmodifiableList());
-    }
-
     public List<Rank> checkResult(LottoNumbers winner, LottoNumber bonusLottoNumber) {
         return games.stream()
                 .map(game -> Rank.of(

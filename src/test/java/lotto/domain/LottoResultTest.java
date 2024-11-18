@@ -20,9 +20,10 @@ class LottoResultTest {
     @Test
     void 결과에는_모든_등수에_대한_당첨갯수가_있어야_한다() {
         LottoNumbers winner = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
         Games games = new Games(List.of(winner, winner));
 
-        LottoResult lottoResult = new LottoResult(winner, games);
+        LottoResult lottoResult = new LottoResult(winner, bonusLottoNumber, games);
         Set<Entry<Rank, Integer>> entrySet = lottoResult.countPerRank().entrySet();
 
         assertThat(entrySet).hasSize(values().length);
@@ -32,7 +33,8 @@ class LottoResultTest {
     @MethodSource("gamesAndEarningRate")
     void 전체_게임에_대한_수익률을_구할_수_있다(Games games, double expected) {
         LottoNumbers winner = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
-        LottoResult lottoResult = new LottoResult(winner, games);
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
+        LottoResult lottoResult = new LottoResult(winner, bonusLottoNumber, games);
 
         assertThat(lottoResult.calculateEarningRate()).isEqualTo(expected);
     }

@@ -12,11 +12,6 @@ public class LottoResult {
     private final Games games;
     private LottoNumber bonusLottoNumber;
 
-    public LottoResult(LottoNumbers winner, Games games) {
-        this.winner = winner;
-        this.games = games;
-    }
-
     public LottoResult(LottoNumbers winner, LottoNumber bonusLottoNumber, Games games) {
         this.winner = winner;
         this.bonusLottoNumber = bonusLottoNumber;
