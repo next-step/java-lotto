@@ -60,7 +60,8 @@ public class OutputView {
                     int prize = rank.getPrize();
                     int frequency = entry.getValue();
 
-                    System.out.println(String.format("%s개 일치 (%d원) - %d개", hit, prize, frequency));
+                    String bonusMessage = rank == Rank.SECOND ? ", 보너스 볼 일치" : "";
+                    System.out.println(String.format("%s개 일치%s (%d원) - %d개", hit, bonusMessage, prize, frequency));
                 });
     }
 }
