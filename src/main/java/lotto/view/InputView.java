@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -27,5 +29,28 @@ public class InputView {
     private static int readInt() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
+    }
+
+    public static int readPassivityLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    public static List<String> readPassivityLotts(int count) {
+        validPassivityLottoCount(count);
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        ArrayList<String> result = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < count; i++) {
+            result.add(scanner.nextLine());
+        }
+        return result;
+    }
+
+    private static void validPassivityLottoCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("로또 발급 개수는 음수일 수 없습니다");
+        }
     }
 }

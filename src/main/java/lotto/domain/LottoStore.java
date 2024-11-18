@@ -2,34 +2,39 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import lotto.settings.LottoSettings;
-import lotto.util.UniqueRandomNumberProvider;
 
 public class LottoStore {
 
-    private static final Money BASE_AMOUNT = new Money(LottoSettings.DEFAULT_PRICE.value());
 
-    public List<Lotto> buy(Money money) {
-        if (isInvalidBaseUnit(money)) {
-            throw new IllegalArgumentException("로또는 1000원 단위이여야 합니다.");
-        }
+    private final LottoNumberGenerator lottoNumberGenerator;
 
-        List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < money.divide(BASE_AMOUNT); i++) {
-            result.add(new Lotto(generateRandomNumbers()));
-        }
-        return result;
+    public LottoStore(LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    private boolean isInvalidBaseUnit(Money fee) {
-        return !fee.change(BASE_AMOUNT).equals(Money.zero());
+    public List<Lotto> autoLottos(Money money) {
+        return createLottoList(money.countBill(), (idx) -> new Lotto(generateRandomNumbers()));
+    }
+
+    public List<Lotto> passivityLottos(List<String> passivityLostts) {
+        return createLottoList(passivityLostts.size(), (idx) -> Lotto.from(passivityLostts.get(idx)));
+    }
+
+    private List<Lotto> createLottoList(int size, Function<Integer, Lotto> lottoGenerator) {
+        List<Lotto> result = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            result.add(lottoGenerator.apply(i));
+        }
+        return result;
     }
 
     private List<Integer> generateRandomNumbers() {
         int min = LottoSettings.MIN.value();
         int max = LottoSettings.MAX.value();
         int size = LottoSettings.SIZE.value();
-        return UniqueRandomNumberProvider.provideInRange(min, max, size);
+        return lottoNumberGenerator.generate(min, max, size);
     }
 
     public Rank check(Lotto lotto, WinningLotto winning) {
