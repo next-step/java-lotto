@@ -10,19 +10,27 @@ public class LottoResult {
 
     private final LottoNumbers winner;
     private final Games games;
+    private LottoNumber bonusLottoNumber;
 
     public LottoResult(LottoNumbers winner, Games games) {
         this.winner = winner;
         this.games = games;
     }
 
+    public LottoResult(LottoNumbers winner, LottoNumber bonusLottoNumber, Games games) {
+        this.winner = winner;
+        this.bonusLottoNumber = bonusLottoNumber;
+        this.games = games;
+    }
+
     public Map<Rank, Integer> countPerRank() {
-        List<Rank> rankForGames = games.checkResult(winner);
+        List<Rank> rankForGames = games.checkResult(winner, bonusLottoNumber);
 
         return Arrays.stream(Rank.values())
                 .collect(Collectors.toUnmodifiableMap(
                         rank -> rank,
-                        rank -> Collections.frequency(rankForGames, rank)));
+                        rank -> Collections.frequency(rankForGames, rank))
+                );
     }
 
     private long calculatePrize() {

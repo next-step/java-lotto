@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.Games;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
 
@@ -14,7 +15,7 @@ public class LottoService {
         return new LottoNumbers(input);
     }
 
-    public LottoResult checkResult(LottoNumbers winner, Games games) {
-        return new LottoResult(winner, games);
+    public LottoResult checkResult(LottoNumbers winner, LottoNumber bonusLottoNumber, Games games) {
+        return new LottoResult(winner, bonusLottoNumber, games);
     }
 }

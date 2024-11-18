@@ -39,6 +39,15 @@ public class Games {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    public List<Rank> checkResult(LottoNumbers winner, LottoNumber bonusLottoNumber) {
+        return games.stream()
+                .map(game -> Rank.of(
+                        game.countIdenticalLottoNumberSet(winner),
+                        game.hasBonusLottoNumber(bonusLottoNumber)
+                ))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
     @Override
     public String toString() {
         return games.stream()

@@ -93,6 +93,10 @@ public class LottoNumbers {
         return this.lottoNumberSet.size() - difference;
     }
 
+    public boolean hasBonusLottoNumber(LottoNumber number) {
+        return this.lottoNumberSet.contains(number);
+    }
+
     @Override
     public String toString() {
         String[] numbers = lottoNumberSet.stream()
