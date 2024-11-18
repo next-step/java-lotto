@@ -14,7 +14,7 @@ public class LottoNumbers {
     public static final int PRICE = 1000;
     public static final int NUMBER_OF_LOTTO_NUMBER = 6;
 
-    private final Set<LottoNumber> lottoNumberSet;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
         List<Integer> numbers = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
@@ -22,7 +22,7 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
         Collections.shuffle(numbers);
 
-        this.lottoNumberSet = numbers.stream()
+        this.lottoNumbers = numbers.stream()
                 .limit(NUMBER_OF_LOTTO_NUMBER)
                 .sorted()
                 .map(LottoNumber::valueOf)
@@ -35,7 +35,7 @@ public class LottoNumbers {
     public LottoNumbers(Set<Integer> numbers) {
         validateCount(numbers);
 
-        this.lottoNumberSet = toLottoNumberSet(numbers);
+        this.lottoNumbers = toLottoNumberSet(numbers);
     }
 
     public LottoNumbers(String input) {
@@ -44,7 +44,7 @@ public class LottoNumbers {
         Set<Integer> numbers = toIntegerSet(input);
         validateCount(numbers);
 
-        this.lottoNumberSet = toLottoNumberSet(numbers);
+        this.lottoNumbers = toLottoNumberSet(numbers);
     }
 
     private void validateCount(Set<Integer> numbers) {
@@ -85,21 +85,21 @@ public class LottoNumbers {
 
     public int countIdenticalLottoNumberSet(LottoNumbers that) {
         Set<LottoNumber> compare = new HashSet<>();
-        compare.addAll(this.lottoNumberSet);
-        compare.addAll(that.lottoNumberSet);
+        compare.addAll(this.lottoNumbers);
+        compare.addAll(that.lottoNumbers);
 
-        int difference = compare.size() - this.lottoNumberSet.size();
+        int difference = compare.size() - this.lottoNumbers.size();
 
-        return this.lottoNumberSet.size() - difference;
+        return this.lottoNumbers.size() - difference;
     }
 
     public boolean hasBonusLottoNumber(LottoNumber number) {
-        return this.lottoNumberSet.contains(number);
+        return this.lottoNumbers.contains(number);
     }
 
     @Override
     public String toString() {
-        String[] numbers = lottoNumberSet.stream()
+        String[] numbers = lottoNumbers.stream()
                 .map(LottoNumber::toString)
                 .toArray(String[]::new);
 
