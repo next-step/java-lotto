@@ -38,6 +38,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
+    public static LottoNumber bonusLottoNumberOf(String number, LottoNumbers winner) {
+        LottoNumber bonusLottoNumber = valueOf(Integer.parseInt(number));
+        if (winner.hasBonusLottoNumber(bonusLottoNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨번호에 포함될 수 없습니다.");
+        }
+
+        return bonusLottoNumber;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(number);

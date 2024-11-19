@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -43,6 +46,15 @@ class LottoNumberTest {
     void 숫자_이외의_문자를_사용할_수_없다(String number) {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.valueOf(number))
                 .withMessage("1 ~ 45 사이의 숫자만 사용할 수 있습니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "3", "4", "5", "6"})
+    void 당첨번호는_보너스번호로_사용될_수_없다(String number) {
+        LottoNumbers winner = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.bonusLottoNumberOf(number, winner))
+                .withMessage("보너스 번호는 당첨번호에 포함될 수 없습니다.");
     }
 
     @ParameterizedTest

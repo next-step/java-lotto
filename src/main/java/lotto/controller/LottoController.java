@@ -25,7 +25,7 @@ public class LottoController {
         outputView.printPurchasedGames(games);
 
         LottoNumbers winner = lottoService.findWinner(inputView.askWinnerLottoNumber());
-        LottoNumber bonusLottoNumber = LottoNumber.valueOf(inputView.askBonusNumber());
+        LottoNumber bonusLottoNumber = lottoService.getBonusLottoNumber(inputView.askBonusNumber(), winner);
         LottoResult lottoResult = lottoService.checkResult(winner, bonusLottoNumber, games);
 
         outputView.printResult(lottoResult);

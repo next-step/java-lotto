@@ -15,6 +15,10 @@ public class LottoService {
         return new LottoNumbers(input);
     }
 
+    public LottoNumber getBonusLottoNumber(String input, LottoNumbers winner) {
+        return LottoNumber.bonusLottoNumberOf(input, winner);
+    }
+
     public LottoResult checkResult(LottoNumbers winner, LottoNumber bonusLottoNumber, Games games) {
         return new LottoResult(winner, bonusLottoNumber, games);
     }
