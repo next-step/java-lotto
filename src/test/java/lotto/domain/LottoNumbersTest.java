@@ -85,6 +85,22 @@ class LottoNumbersTest {
         );
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    void 특정_로또번호의_포함여부를_확인한다_true(int number) {
+        LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+
+        assertThat(lottoNumbers.contains(LottoNumber.valueOf(number))).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {7, 8, 9})
+    void 특정_로또번호의_포함여부를_확인한다_false(int number) {
+        LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+
+        assertThat(lottoNumbers.contains(LottoNumber.valueOf(number))).isFalse();
+    }
+
     @Test
     @DisplayName("toString() 은[번호, 번호] 형식의 문자열을 반환한다.")
     void toString은_게임_내_숫자를_반환한다() {
