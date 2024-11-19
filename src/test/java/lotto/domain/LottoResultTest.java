@@ -19,7 +19,7 @@ class LottoResultTest {
 
     @Test
     void 결과에는_모든_등수에_대한_당첨갯수가_있어야_한다() {
-        LottoNumbers winner = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers winner = new LottoNumbers("1,2,3,4,5,6");
         LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
         Games games = new Games(List.of(winner, winner));
 
@@ -32,7 +32,7 @@ class LottoResultTest {
     @ParameterizedTest
     @MethodSource("gamesAndEarningRate")
     void 전체_게임에_대한_수익률을_구할_수_있다(Games games, double expected) {
-        LottoNumbers winner = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers winner = new LottoNumbers("1,2,3,4,5,6");
         LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
         LottoResult lottoResult = new LottoResult(winner, bonusLottoNumber, games);
 
@@ -57,10 +57,10 @@ class LottoResultTest {
 
     private static List<LottoNumbers> getFourthAndNoneGame(int fourth, int none) {
         List<LottoNumbers> fourthGames = IntStream.range(0, fourth)
-                .mapToObj(i -> new LottoNumbers((Set.of(1, 2, 3, 7, 8, 9))))
+                .mapToObj(i -> new LottoNumbers("1,2,3,7,8,9"))
                 .collect(Collectors.toList());
         List<LottoNumbers> noneGames = IntStream.range(0, none)
-                .mapToObj(i -> new LottoNumbers((Set.of(1, 2, 7, 8, 9, 10))))
+                .mapToObj(i -> new LottoNumbers("1,2,7,8,9,10"))
                 .collect(Collectors.toList());
         fourthGames.addAll(noneGames);
 

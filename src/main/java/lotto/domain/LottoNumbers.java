@@ -32,12 +32,6 @@ public class LottoNumbers {
                 ));
     }
 
-    public LottoNumbers(Set<Integer> numbers) {
-        validateCount(numbers);
-
-        this.lottoNumbers = toLottoNumberSet(numbers);
-    }
-
     public LottoNumbers(String input) {
         validateEmptyInput(input);
 

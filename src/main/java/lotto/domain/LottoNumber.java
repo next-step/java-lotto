@@ -29,15 +29,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public static LottoNumber valueOf(String number) {
-        try {
-            return valueOf(Integer.parseInt(number));
-
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 사용할 수 있습니다.");
-        }
-    }
-
     public static LottoNumber bonusLottoNumberOf(String number, LottoNumbers winner) {
         LottoNumber bonusLottoNumber = valueOf(Integer.parseInt(number));
         if (winner.contains(bonusLottoNumber)) {

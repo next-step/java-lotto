@@ -27,31 +27,9 @@ class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1", "10", "45"})
-    void 로또번호는_1에서_45사이이다(String number) {
-        LottoNumber lottoNumber = LottoNumber.valueOf(number);
-
-        assertThat(lottoNumber).hasToString(number);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"-1", "0", "46"})
-    void 로또번호는_1미만_45초과일_수_없다(String number) {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.valueOf(number))
-                .withMessage("1 ~ 45 사이의 숫자만 사용할 수 있습니다.");
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"가", " ", "a"})
-    void 숫자_이외의_문자를_사용할_수_없다(String number) {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.valueOf(number))
-                .withMessage("1 ~ 45 사이의 숫자만 사용할 수 있습니다.");
-    }
-
-    @ParameterizedTest
     @ValueSource(strings = {"1", "2", "3", "4", "5", "6"})
     void 당첨번호는_보너스번호로_사용될_수_없다(String number) {
-        LottoNumbers winner = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers winner = new LottoNumbers("1,2,3,4,5,6");
 
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.bonusLottoNumberOf(number, winner))
                 .withMessage("보너스 번호는 당첨번호에 포함될 수 없습니다.");

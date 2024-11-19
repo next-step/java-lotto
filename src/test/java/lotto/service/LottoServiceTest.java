@@ -40,7 +40,8 @@ class LottoServiceTest {
     private static void softAssertContainsEveryLottoNumber(SoftAssertions softly, String input, LottoNumbers winner) {
         String[] split = input.split(",");
         for (String number : split) {
-            softly.assertThat(winner.contains(LottoNumber.valueOf(number))).isTrue();
+            LottoNumber lottoNumber = LottoNumber.valueOf(Integer.parseInt(number));
+            softly.assertThat(winner.contains(lottoNumber)).isTrue();
         }
     }
 

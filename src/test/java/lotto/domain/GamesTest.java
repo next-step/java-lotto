@@ -34,9 +34,9 @@ class GamesTest {
     @Test
     @DisplayName("toString()은 [번호, 번호]\n[번호, 번호] 형식의 문자열을 반환한다.")
     void toString은_전체_게임의_로또번호를_반환한다() {
-        LottoNumbers game1 = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers game2 = new LottoNumbers(Set.of(7, 8, 9, 10, 11, 12));
-        LottoNumbers game3 = new LottoNumbers(Set.of(13, 14, 15, 16, 17, 18));
+        LottoNumbers game1 = new LottoNumbers("1,2,3,4,5,6");
+        LottoNumbers game2 = new LottoNumbers("7,8,9,10,11,12");
+        LottoNumbers game3 = new LottoNumbers("13,14,15,16,17,18");
         Games games = new Games(List.of(game1, game2, game3));
 
         String[] toStringArray = {game1.toString(), game2.toString(), game3.toString()};

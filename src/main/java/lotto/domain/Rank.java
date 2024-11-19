@@ -25,17 +25,6 @@ public enum Rank {
         return this.prize;
     }
 
-    public static Rank of(int numberOfIdentical) {
-        return Arrays.stream(values())
-                .filter(rank -> isRank(rank, numberOfIdentical))
-                .findFirst()
-                .orElseGet(() -> NONE);
-    }
-
-    private static boolean isRank(Rank rank, int numberOfIdentical) {
-        return rank.hit == numberOfIdentical;
-    }
-
     public static Rank of(int numberOfIdentical, boolean hasBonus) {
         return Arrays.stream(values())
                 .filter(rank -> isRank(rank, numberOfIdentical, hasBonus))
