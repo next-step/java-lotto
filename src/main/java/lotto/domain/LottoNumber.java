@@ -40,7 +40,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber bonusLottoNumberOf(String number, LottoNumbers winner) {
         LottoNumber bonusLottoNumber = valueOf(Integer.parseInt(number));
-        if (winner.hasBonusLottoNumber(bonusLottoNumber)) {
+        if (winner.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨번호에 포함될 수 없습니다.");
         }
 

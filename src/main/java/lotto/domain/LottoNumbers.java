@@ -93,7 +93,7 @@ public class LottoNumbers {
         return this.lottoNumbers.size() - difference;
     }
 
-    public boolean hasBonusLottoNumber(LottoNumber number) {
+    public boolean contains(LottoNumber number) {
         return this.lottoNumbers.contains(number);
     }
 

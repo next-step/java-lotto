@@ -36,7 +36,7 @@ public class Games {
         return games.stream()
                 .map(game -> Rank.of(
                         game.countIdenticalLottoNumberSet(winner),
-                        game.hasBonusLottoNumber(bonusLottoNumber)
+                        game.contains(bonusLottoNumber)
                 ))
                 .collect(Collectors.toUnmodifiableList());
     }

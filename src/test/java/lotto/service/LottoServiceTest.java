@@ -4,7 +4,6 @@ import lotto.domain.Games;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
-import lotto.domain.Rank;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,9 +12,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +40,7 @@ class LottoServiceTest {
     private static void softAssertContainsEveryLottoNumber(SoftAssertions softly, String input, LottoNumbers winner) {
         String[] split = input.split(",");
         for (String number : split) {
-            softly.assertThat(winner.hasBonusLottoNumber(LottoNumber.valueOf(number))).isTrue();
+            softly.assertThat(winner.contains(LottoNumber.valueOf(number))).isTrue();
         }
     }
 
