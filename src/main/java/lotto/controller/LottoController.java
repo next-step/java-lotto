@@ -4,7 +4,6 @@ import lotto.domain.Games;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
-import lotto.service.LottoService;
 import view.InputView;
 import view.OutputView;
 
@@ -12,21 +11,19 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoService lottoService;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoService = lottoService;
     }
 
     public void play() {
-        Games games = lottoService.purchaseLotto(inputView.askPriceToPay());
+        Games games = new Games(inputView.askPriceToPay());
         outputView.printPurchasedGames(games);
 
-        LottoNumbers winner = lottoService.findWinner(inputView.askWinnerLottoNumber());
-        LottoNumber bonusLottoNumber = lottoService.getBonusLottoNumber(inputView.askBonusNumber(), winner);
-        LottoResult lottoResult = lottoService.checkResult(winner, bonusLottoNumber, games);
+        LottoNumbers winner = new LottoNumbers(inputView.askWinnerLottoNumber());
+        LottoNumber bonusLottoNumber = LottoNumber.bonusLottoNumberOf(inputView.askBonusNumber(), winner);
+        LottoResult lottoResult = new LottoResult(winner, bonusLottoNumber, games);
 
         outputView.printResult(lottoResult);
     }
