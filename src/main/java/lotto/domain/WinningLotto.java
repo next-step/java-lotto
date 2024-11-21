@@ -21,6 +21,16 @@ public class WinningLotto {
         this.bonusLottoNumber = bonusLottoNumber;
     }
 
+    public Map<Rank, Integer> countPerRank(Games games) {
+        List<Rank> rankForGames = games.checkResult(lottoNumbers, bonusLottoNumber);
+
+        return Arrays.stream(Rank.values())
+                .collect(Collectors.toUnmodifiableMap(
+                        rank -> rank,
+                        rank -> Collections.frequency(rankForGames, rank))
+                );
+    }
+
     public double calculateEarningRate(Games games) {
         double rate = (double) calculatePrize(games) / games.count() / LottoNumbers.PRICE;
 
@@ -39,15 +49,5 @@ public class WinningLotto {
                     return (long) rank.wins() * count;
                 })
                 .reduce(0L, Long::sum);
-    }
-
-    private Map<Rank, Integer> countPerRank(Games games) {
-        List<Rank> rankForGames = games.checkResult(lottoNumbers, bonusLottoNumber);
-
-        return Arrays.stream(Rank.values())
-                .collect(Collectors.toUnmodifiableMap(
-                        rank -> rank,
-                        rank -> Collections.frequency(rankForGames, rank))
-                );
     }
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -13,6 +14,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.junit.jupiter.params.provider.Arguments.*;
 
 class WinningLottoTest {
 
@@ -34,6 +36,29 @@ class WinningLottoTest {
     }
 
     @ParameterizedTest
+    @MethodSource("gamesAndRank")
+    void 구매한_게임에_대한_등수_빈도를_반환한다(Games games, Rank rank, Integer expected) {
+        LottoNumbers winningLottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+        String bonusNumber = "7";
+
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
+        Map<Rank, Integer> rankFrequency = winningLotto.countPerRank(games);
+
+        assertThat(rankFrequency).containsEntry(rank, expected);
+    }
+
+    private static Stream<Arguments> gamesAndRank() {
+        return Stream.of(
+                arguments(new Games(List.of(new LottoNumbers("1,2,3,4,5,6"))), Rank.FIRST, 1),
+                arguments(new Games(List.of(new LottoNumbers("1,2,3,4,5,7"))), Rank.SECOND, 1),
+                arguments(new Games(List.of(new LottoNumbers("1,2,3,4,5,8"))), Rank.THIRD, 1),
+                arguments(new Games(List.of(new LottoNumbers("1,2,3,4,7,8"))), Rank.FOURTH, 1),
+                arguments(new Games(List.of(new LottoNumbers("1,2,3,7,8,9"))), Rank.FIFTH, 1),
+                arguments(new Games(List.of(new LottoNumbers("1,2,7,8,9,10"))), Rank.NONE, 1)
+        );
+    }
+
+    @ParameterizedTest
     @MethodSource("gamesAndEarningRate")
     void 전체_게임에_대한_수익률을_구할_수_있다(Games games, double expected) {
         LottoNumbers winner = new LottoNumbers("1,2,3,4,5,6");
@@ -50,11 +75,11 @@ class WinningLottoTest {
         double oneThird = 0.33;
 
         return Stream.of(
-                Arguments.arguments(new Games(getFifthAndNoneGame(2, 3)), twice),
-                Arguments.arguments(new Games(getFifthAndNoneGame(1, 4)), breakEven),
-                Arguments.arguments(new Games(getFifthAndNoneGame(2, 13)), twoThird),
-                Arguments.arguments(new Games(getFifthAndNoneGame(1, 9)), half),
-                Arguments.arguments(new Games(getFifthAndNoneGame(1, 14)), oneThird)
+                arguments(new Games(getFifthAndNoneGame(2, 3)), twice),
+                arguments(new Games(getFifthAndNoneGame(1, 4)), breakEven),
+                arguments(new Games(getFifthAndNoneGame(2, 13)), twoThird),
+                arguments(new Games(getFifthAndNoneGame(1, 9)), half),
+                arguments(new Games(getFifthAndNoneGame(1, 14)), oneThird)
         );
     }
 
