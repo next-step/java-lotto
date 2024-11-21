@@ -4,8 +4,9 @@ import lotto.domain.Games;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Map;
+import java.util.List;
 
 public class OutputView {
 
@@ -37,7 +38,7 @@ public class OutputView {
     }
 
     private void printEarningRate(LottoResult lottoResult) {
-        double earningRate = lottoResult.calculateEarningRate();
+        double earningRate = lottoResult.getEarningRate();
         final int breakEven = 1;
 
         String profit = "수익";
@@ -49,18 +50,15 @@ public class OutputView {
     }
 
     private void printEachRankResult(LottoResult lottoResult) {
-        Map<Rank, Integer> result = lottoResult.countPerRank();
-        result.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
-                .filter(entry -> entry.getKey() != Rank.NONE)
-                .forEach(entry -> {
-                    Rank rank = entry.getKey();
+        List<Rank> rankList = Arrays.asList(Rank.values());
+        rankList.stream()
+                .sorted(Comparator.reverseOrder())
+                .forEach(rank -> {
                     int hit = rank.getHit();
                     int prize = rank.getPrize();
-                    int frequency = entry.getValue();
-
+                    int frequency = lottoResult.of(rank);
                     String bonusMessage = rank == Rank.SECOND ? ", 보너스 볼 일치" : "";
+
                     System.out.println(String.format("%s개 일치%s (%d원) - %d개", hit, bonusMessage, prize, frequency));
                 });
     }

@@ -1,9 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.Games;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
+import lotto.domain.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
@@ -22,8 +22,8 @@ public class LottoController {
         outputView.printPurchasedGames(games);
 
         LottoNumbers winner = new LottoNumbers(inputView.askWinnerLottoNumber());
-        LottoNumber bonusLottoNumber = LottoNumber.bonusLottoNumberOf(inputView.askBonusNumber(), winner);
-        LottoResult lottoResult = new LottoResult(winner, bonusLottoNumber, games);
+        WinningLotto winningLotto = new WinningLotto(winner, inputView.askBonusNumber());
+        LottoResult lottoResult = new LottoResult(winningLotto.countPerRank(games), winningLotto.calculateEarningRate(games));
 
         outputView.printResult(lottoResult);
     }
