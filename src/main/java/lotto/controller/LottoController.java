@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Games;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
+import lotto.domain.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
@@ -17,13 +18,12 @@ public class LottoController {
     }
 
     public void play() {
-        int money = inputView.askPriceToPay();
-        Games games = new Games(money);
-
+        Games games = new Games(inputView.askPriceToPay());
         outputView.printPurchasedGames(games);
 
         LottoNumbers winner = new LottoNumbers(inputView.askWinnerLottoNumber());
-        LottoResult lottoResult = new LottoResult(winner, games);
+        WinningLotto winningLotto = new WinningLotto(winner, inputView.askBonusNumber());
+        LottoResult lottoResult = new LottoResult(winningLotto.countPerRank(games), winningLotto.calculateEarningRate(games));
 
         outputView.printResult(lottoResult);
     }

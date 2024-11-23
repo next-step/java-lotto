@@ -32,10 +32,12 @@ public class Games {
         return games.size();
     }
 
-    public List<Rank> checkResult(LottoNumbers winner) {
+    public List<Rank> checkResult(LottoNumbers winner, LottoNumber bonusLottoNumber) {
         return games.stream()
-                .map(game -> game.countIdenticalLottoNumber(winner))
-                .map(hits -> Rank.of(hits))
+                .map(game -> Rank.of(
+                        game.countIdenticalLottoNumberSet(winner),
+                        game.contains(bonusLottoNumber)
+                ))
                 .collect(Collectors.toUnmodifiableList());
     }
 
