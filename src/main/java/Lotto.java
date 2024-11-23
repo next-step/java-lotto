@@ -1,15 +1,22 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final ArrayList<Integer> nums;
+    private final List<Integer> nums;
 
-    public int numCount() {
-        return this.nums.size();
+    public Lotto(String numStr){
+        this((List<Integer>)Arrays.stream(numStr.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toCollection(ArrayList::new)));
     }
 
-    public Lotto(ArrayList<Integer> nums){
+    public Lotto(int... nums) {
+        this(new ArrayList<>(Arrays.asList(Arrays.stream(nums).boxed().toArray(Integer[]::new))));
+    }
+
+    public Lotto(List<Integer> nums){
         if(nums.stream().anyMatch(num -> num < 1 || num > 46)){
             throw new IllegalArgumentException("로또 번호는 1~46 범위이어야 합니다.");
         }
@@ -17,10 +24,8 @@ public class Lotto {
         this.nums = nums;
     }
 
-    public Lotto(String numStr){
-        this.nums = Arrays.stream(numStr.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toCollection(ArrayList::new));
+    public int numCount() {
+        return this.nums.size();
     }
 
     public boolean has(int num){

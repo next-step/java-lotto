@@ -15,6 +15,10 @@ public class MatchCounts {
         this.values.add(new MatchCount(matchInteger));
     }
 
+    public void clear(){
+        this.values.clear();
+    }
+
     public long count(MatchCount matchCount) {
         return this.values.stream()
                 .filter(m -> m.equals(matchCount))

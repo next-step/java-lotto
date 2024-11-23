@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class LottoGenerator {
 
@@ -12,8 +13,8 @@ public class LottoGenerator {
         return generate(this.randomGenerator.generate(6));
     }
 
-    public ArrayList<Lotto> generate(int lottoCount){
-        ArrayList<Lotto> lottos = new ArrayList<>();
+    public List<Lotto> generate(int lottoCount){
+        List<Lotto> lottos = new ArrayList<>();
 
         for(int i = 0; i < lottoCount; i++){
             lottos.add(this.generate());
@@ -22,7 +23,7 @@ public class LottoGenerator {
         return lottos;
     }
 
-    public ArrayList<Lotto> generate(Money money){
+    public List<Lotto> generate(Money money){
         return generate(money.availLottoCount());
     }
 

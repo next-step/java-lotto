@@ -1,10 +1,17 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Candidates {
-    private final ArrayList<Candidate> values;
+    private final List<Candidate> values;
+    private final MatchCounts matchCounts;
 
     public Candidates() {
-        values = new ArrayList<>();
+        this(new ArrayList<>());
+    }
+
+    public Candidates(List<Candidate> candidates) {
+        this.values = candidates;
+        this.matchCounts = new MatchCounts();
     }
 
     public void add(Lotto lotto) {
@@ -19,14 +26,25 @@ public class Candidates {
         return this.values.size();
     }
 
-    public long countByMatchCount(Lotto winning, MatchCount matchCount){
-        MatchCounts matchCounts = new MatchCounts();
-
-        for(Candidate candidate : this.values){
-            matchCounts.add(candidate.match(winning));
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Candidate candidate : values) {
+            sb.append(candidate.toString());
+            sb.append("\n");
         }
 
-        return matchCounts.count(matchCount);
+        return sb.toString();
+    }
+
+    public long countMatch(Lotto winning, MatchCount matchCount){
+        this.matchCounts.clear();
+
+        for(Candidate candidate : this.values){
+            this.matchCounts.add(candidate.match(winning));
+        }
+
+        return this.matchCounts.count(matchCount);
     }
 
     public double calculateRatio(Lotto winning) {
@@ -43,10 +61,10 @@ public class Candidates {
     }
 
     private double calcMoney(MatchCount matchCount) {
-        if (matchCount.is(3)){ return 5000; }
-        if (matchCount.is(4)){ return 50000; }
-        if (matchCount.is(5)){ return 1500000; }
-        if (matchCount.is(6)){ return 2000000000; }
+        if (matchCount.is(3)){ return 5_000; }
+        if (matchCount.is(4)){ return 50_000; }
+        if (matchCount.is(5)){ return 1_500_000; }
+        if (matchCount.is(6)){ return 2_000_000_000; }
 
         return 0;
     }
