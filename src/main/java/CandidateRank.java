@@ -1,36 +1,38 @@
 public class CandidateRank {
 
-    private Rank rank;
+    private final Rank rank;
 
-    public CandidateRank(MatchCount matchCount) {
-        this.rank = this.convertRank(matchCount);
+    public CandidateRank(boolean bonusMatched, MatchCount matchCount){
+        this.rank = this.convertRank(bonusMatched, matchCount);
     }
 
-    public CandidateRank(Lotto winning, Lotto candidateLotto) {
-        this.rank = this.calcRank(winning, candidateLotto);
+    public CandidateRank(Lotto winning, BonusBall bonusBall, Lotto candidateLotto) {
+        this.rank = this.calcRank(winning, bonusBall, candidateLotto);
     }
 
     public boolean is(Rank rank) {
         return this.rank == rank;
     }
 
-    private Rank calcRank(Lotto winning, Lotto candidateLotto) {
-        return this.convertRank(winning.match(candidateLotto));
+    private Rank calcRank(Lotto winning, BonusBall bonusBall, Lotto candidateLotto) {
+        return this.convertRank(candidateLotto.has(bonusBall), winning.match(candidateLotto));
     }
 
-    private Rank convertRank(MatchCount matchCount) {
-        if (matchCount.is(3)) {
-            return Rank.FIFTH;
+    private Rank convertRank(boolean bonusMatched, MatchCount matchCount) {
+        if (matchCount.is(6)) {
+            return Rank.FIRST;
         }
-        if (matchCount.is(4)) {
-            return Rank.FOURTH;
+        if(matchCount.is(5) && bonusMatched) {
+            return Rank.SECOND;
         }
         if (matchCount.is(5)) {
             return Rank.THIRD;
         }
-        // TODO: bonus
-        if (matchCount.is(6)) {
-            return Rank.FIRST;
+        if (matchCount.is(4)) {
+            return Rank.FOURTH;
+        }
+        if (matchCount.is(3)) {
+            return Rank.FIFTH;
         }
 
         return Rank.UNRANKED;

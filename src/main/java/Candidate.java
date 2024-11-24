@@ -13,4 +13,8 @@ public class Candidate {
     public String toString() {
         return "[" + lotto.toString() + "]";
     }
+
+    public boolean matchBonus(BonusBall bonusBall) {
+        return this.lotto.has(bonusBall);
+    }
 }

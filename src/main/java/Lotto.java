@@ -17,7 +17,7 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> nums){
-        if(nums.stream().anyMatch(num -> num < 1 || num > 46)){
+        if(nums.stream().anyMatch(num -> num < Constants.MIN_LOTTO_NUMBER || num > Constants.MAX_LOTTO_NUMBER)){
             throw new IllegalArgumentException("로또 번호는 1~46 범위이어야 합니다.");
         }
 
@@ -30,6 +30,10 @@ public class Lotto {
 
     public boolean has(int num){
         return this.nums.contains(num);
+    }
+
+    public boolean has(BonusBall bonusBall){
+        return bonusBall.isOneOf(this.nums);
     }
 
     public MatchCount match(Lotto other) {

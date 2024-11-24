@@ -5,17 +5,17 @@ public class LottoGame {
         this.lottoGenerator = new LottoGenerator(new RandomGenerator());
     }
 
-    public Candidates setup(Money money) {
-        Candidates candidates = new Candidates();
+    public Candidates appendAutoCandidates(Money money, Candidates manualCandidates) {
+        int autoLottoCount = money.availLottoCount() - manualCandidates.size();
 
-        for (int i = 0; i < money.availLottoCount(); i++){
-            candidates.add(new Candidate(lottoGenerator.generate()));
+        for (int i = 0; i < autoLottoCount; i++){
+            manualCandidates.add(new Candidate(lottoGenerator.generate()));
         }
 
-        return candidates;
+        return manualCandidates;
     }
 
-    public CandidateRanks play(Lotto winning, Candidates candidates) {
-        return candidates.calcRanks(winning);
+    public CandidateRanks play(Lotto winning, BonusBall bonusBall, Candidates candidates) {
+        return candidates.calcRanks(winning, bonusBall);
     }
 }

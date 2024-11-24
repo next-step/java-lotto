@@ -12,8 +12,8 @@ public class CandidateRanks {
         this.values = values;
     }
 
-    public void add(MatchCount matchCount) {
-        this.values.add(new CandidateRank(matchCount));
+    public void add(boolean bonusMatched, MatchCount matchCount) {
+        this.values.add(new CandidateRank(bonusMatched, matchCount));
     }
 
     public void add(CandidateRank candidateRank) {
@@ -22,6 +22,10 @@ public class CandidateRanks {
 
     public long countFirst() {
         return this.values.stream().filter(v -> v.is(Rank.FIRST)).count();
+    }
+
+    public long countSecond() {
+        return this.values.stream().filter(v -> v.is(Rank.SECOND)).count();
     }
 
     public long countThird() {
@@ -50,10 +54,11 @@ public class CandidateRanks {
     }
 
     private double convertMoney(CandidateRank candidateRank) {
-        if (candidateRank.is(Rank.FIFTH)){ return 5_000; }
-        if (candidateRank.is(Rank.FOURTH)){ return 50_000; }
-        if (candidateRank.is(Rank.THIRD)){ return 1_500_000; }
         if (candidateRank.is(Rank.FIRST)){ return 2_000_000_000; }
+        if (candidateRank.is(Rank.SECOND)){ return 30_000_000; }
+        if (candidateRank.is(Rank.THIRD)){ return 1_500_000; }
+        if (candidateRank.is(Rank.FOURTH)){ return 50_000; }
+        if (candidateRank.is(Rank.FIFTH)){ return 5_000; }
 
         return 0;
     }

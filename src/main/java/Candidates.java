@@ -26,8 +26,11 @@ public class Candidates {
         return this.values.size();
     }
 
-    public void clear() {
-        this.values.clear();
+    public Candidates concat(Candidates other) {
+        List<Candidate> combined = new ArrayList<>(this.values);
+        combined.addAll(other.values);
+
+        return new Candidates(combined);
     }
 
     @Override
@@ -51,11 +54,11 @@ public class Candidates {
         return this.matchCounts.count(matchCount);
     }
 
-    public CandidateRanks calcRanks(Lotto winning) {
+    public CandidateRanks calcRanks(Lotto winning, BonusBall bonusBall) {
         CandidateRanks ranks = new CandidateRanks();
 
         for(Candidate candidate : this.values){
-            ranks.add(new CandidateRank(candidate.match(winning)));
+            ranks.add(new CandidateRank(candidate.matchBonus(bonusBall), candidate.match(winning)));
         }
 
         return ranks;
