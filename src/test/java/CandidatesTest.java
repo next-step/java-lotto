@@ -12,15 +12,21 @@ public class CandidatesTest {
     }
 
     @Test
-    void calculate_benefit_when_buy_three_lottos(){
+    void calc_ranks() {
+        Lotto winning = new Lotto(1, 2, 3, 4, 5, 6);
+
         Candidates candidates = new Candidates();
+        candidates.add(new Lotto(1, 2, 3, 4, 5, 6)); // 1
+        candidates.add(new Lotto(1, 2, 3, 4, 5, 16)); // 3
+        candidates.add(new Lotto(1, 2, 3, 4, 15, 16)); // 4
+        candidates.add(new Lotto(1, 2, 3, 14, 15, 16)); // 5
+        candidates.add(new Lotto(1, 2, 13, 14, 15, 16)); // unranked
 
-        candidates.add(new Lotto(1, 2, 3, 4, 13, 14)); // match count : 4
-        candidates.add(new Lotto(3, 4, 5, 6, 20, 30)); // match count : 0
-        candidates.add(new Lotto(20, 35, 40, 41, 42, 43)); // match count : 1
+        CandidateRanks ranks = candidates.calcRanks(winning);
 
-        double benefit = candidates.calculateRatio(new Lotto(new ArrayList<>(Arrays.asList(1, 2, 13, 14, 35, 36)))); // winning
-
-        assertThat(benefit).isEqualTo(16.67);
+        assertThat(ranks.countFirst()).isEqualTo(1);
+        assertThat(ranks.countThird()).isEqualTo(1);
+        assertThat(ranks.countFourth()).isEqualTo(1);
+        assertThat(ranks.countFifth()).isEqualTo(1);
     }
 }

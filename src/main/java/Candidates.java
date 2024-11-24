@@ -26,6 +26,10 @@ public class Candidates {
         return this.values.size();
     }
 
+    public void clear() {
+        this.values.clear();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -47,25 +51,13 @@ public class Candidates {
         return this.matchCounts.count(matchCount);
     }
 
-    public double calculateRatio(Lotto winning) {
-        double earn = 0;
+    public CandidateRanks calcRanks(Lotto winning) {
+        CandidateRanks ranks = new CandidateRanks();
 
-        for (Candidate candidate : this.values) {
-            earn += calcMoney(candidate.match(winning));
+        for(Candidate candidate : this.values){
+            ranks.add(new CandidateRank(candidate.match(winning)));
         }
 
-        double earnRatio = earn / (this.values.size() * 1000);
-        earnRatio = Math.round(earnRatio * 100) / 100.0;
-
-        return earnRatio;
-    }
-
-    private double calcMoney(MatchCount matchCount) {
-        if (matchCount.is(3)){ return 5_000; }
-        if (matchCount.is(4)){ return 50_000; }
-        if (matchCount.is(5)){ return 1_500_000; }
-        if (matchCount.is(6)){ return 2_000_000_000; }
-
-        return 0;
+        return ranks;
     }
 }

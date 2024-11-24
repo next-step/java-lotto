@@ -7,9 +7,11 @@ public class Main {
         ResultView.prntLottoCount(money);
 
         Lotto winning = InputView.askWinning();
-        GameResult result = game.play(money, winning);
 
-        ResultView.prntCandidates(result.getCandidates());
-        ResultView.prntStatistics(game.play(money, winning));
+        Candidates candidates = game.setup(money);
+        CandidateRanks ranks = game.play(winning, candidates);
+
+        ResultView.prntCandidates(candidates);
+        ResultView.prntStatistics(ranks);
     }
 }
