@@ -14,7 +14,7 @@ public class Candidate {
         return "[" + lotto.toString() + "]";
     }
 
-    public boolean matchBonus(BonusBall bonusBall) {
+    public boolean matchBonus(LottoNumber bonusBall) {
         return this.lotto.has(bonusBall);
     }
 }

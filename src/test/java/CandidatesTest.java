@@ -19,7 +19,7 @@ public class CandidatesTest {
         candidates.add(new Lotto(1, 2, 3, 14, 15, 16)); // 5
         candidates.add(new Lotto(1, 2, 13, 14, 15, 16)); // unranked
 
-        CandidateRanks ranks = candidates.calcRanks(winning, new BonusBall(16));
+        CandidateRanks ranks = candidates.calcRanks(winning, new LottoNumber(16));
 
         assertThat(ranks.countFirst()).isEqualTo(1);
         assertThat(ranks.countSecond()).isEqualTo(1);

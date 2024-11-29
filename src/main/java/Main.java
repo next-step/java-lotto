@@ -12,7 +12,7 @@ public class Main {
         ResultView.prntTotalCandidates(manualCount, totalCandidates.size() - manualCount, totalCandidates);
 
         Lotto winning = InputView.askWinning();
-        BonusBall bonusBall = InputView.askBonusBall();
+        LottoNumber bonusBall = InputView.askBonusBall();
 
         CandidateRanks ranks = game.play(winning, bonusBall, totalCandidates);
 

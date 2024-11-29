@@ -54,7 +54,7 @@ public class Candidates {
         return this.matchCounts.count(matchCount);
     }
 
-    public CandidateRanks calcRanks(Lotto winning, BonusBall bonusBall) {
+    public CandidateRanks calcRanks(Lotto winning, LottoNumber bonusBall) {
         CandidateRanks ranks = new CandidateRanks();
 
         for(Candidate candidate : this.values){

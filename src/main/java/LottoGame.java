@@ -15,7 +15,7 @@ public class LottoGame {
         return manualCandidates;
     }
 
-    public CandidateRanks play(Lotto winning, BonusBall bonusBall, Candidates candidates) {
+    public CandidateRanks play(Lotto winning, LottoNumber bonusBall, Candidates candidates) {
         return candidates.calcRanks(winning, bonusBall);
     }
 }

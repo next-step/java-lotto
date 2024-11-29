@@ -17,11 +17,11 @@ public class InputView {
         return new Lotto(winningStr);
     }
 
-    public static BonusBall askBonusBall() {
+    public static LottoNumber askBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusNumStr = scanner.nextLine();
 
-        return new BonusBall(bonusNumStr);
+        return new LottoNumber(bonusNumStr);
     }
 
     public static int askManualLottoCount() {

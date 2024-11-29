@@ -17,11 +17,11 @@ public class CandidatesRanksTest {
         Lotto candidate_bonus = new Lotto("1,2,3,4,5,16");
 
         CandidateRanks ranks = new CandidateRanks();
-        ranks.add(new CandidateRank(winning, new BonusBall(10), candidate_1));
-        ranks.add(new CandidateRank(winning, new BonusBall(10),  candidate_2));
-        ranks.add(new CandidateRank(winning, new BonusBall(10),  candidate_3));
-        ranks.add(new CandidateRank(winning, new BonusBall(10),  candidate_4));
-        ranks.add(new CandidateRank(winning, new BonusBall(bonusNum),  candidate_bonus));
+        ranks.add(new CandidateRank(winning, new LottoNumber(10), candidate_1));
+        ranks.add(new CandidateRank(winning, new LottoNumber(10),  candidate_2));
+        ranks.add(new CandidateRank(winning, new LottoNumber(10),  candidate_3));
+        ranks.add(new CandidateRank(winning, new LottoNumber(10),  candidate_4));
+        ranks.add(new CandidateRank(winning, new LottoNumber(bonusNum),  candidate_bonus));
 
         assertThat(ranks.countFirst()).isEqualTo(2);
         assertThat(ranks.countSecond()).isEqualTo(1);

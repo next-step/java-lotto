@@ -44,22 +44,12 @@ public class CandidateRanks {
         double earn = 0;
 
         for(CandidateRank candidateRank : this.values) {
-            earn += convertMoney(candidateRank);
+            earn += candidateRank.convertMoney();
         }
 
         double earnRatio = earn / (this.values.size() * 1000);
         earnRatio = Math.round(earnRatio * 100) / 100.0;
 
         return earnRatio;
-    }
-
-    private double convertMoney(CandidateRank candidateRank) {
-        if (candidateRank.is(Rank.FIRST)){ return 2_000_000_000; }
-        if (candidateRank.is(Rank.SECOND)){ return 30_000_000; }
-        if (candidateRank.is(Rank.THIRD)){ return 1_500_000; }
-        if (candidateRank.is(Rank.FOURTH)){ return 50_000; }
-        if (candidateRank.is(Rank.FIFTH)){ return 5_000; }
-
-        return 0;
     }
 }

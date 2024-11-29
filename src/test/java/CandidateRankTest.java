@@ -15,11 +15,11 @@ public class CandidateRankTest {
 
         Lotto candidate_bonus = new Lotto("1,2,3,4,5,16");
 
-        assertThat(new CandidateRank(winning, new BonusBall(10), candidate_1).is(Rank.FIRST)).isTrue();
-        assertThat(new CandidateRank(winning, new BonusBall(10), candidate_2).is(Rank.THIRD)).isTrue();
-        assertThat(new CandidateRank(winning, new BonusBall(10), candidate_3).is(Rank.FOURTH)).isTrue();
-        assertThat(new CandidateRank(winning, new BonusBall(10), candidate_4).is(Rank.FIFTH)).isTrue();
+        assertThat(new CandidateRank(winning, new LottoNumber(10), candidate_1).is(Rank.FIRST)).isTrue();
+        assertThat(new CandidateRank(winning, new LottoNumber(10), candidate_2).is(Rank.THIRD)).isTrue();
+        assertThat(new CandidateRank(winning, new LottoNumber(10), candidate_3).is(Rank.FOURTH)).isTrue();
+        assertThat(new CandidateRank(winning, new LottoNumber(10), candidate_4).is(Rank.FIFTH)).isTrue();
 
-        assertThat(new CandidateRank(winning, new BonusBall(bonusNum),candidate_bonus).is(Rank.SECOND)).isTrue();
+        assertThat(new CandidateRank(winning, new LottoNumber(bonusNum),candidate_bonus).is(Rank.SECOND)).isTrue();
     }
 }

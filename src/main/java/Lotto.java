@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<Integer> nums;
+    private final List<LottoNumber> lottoNums;
 
     public Lotto(String numStr){
         this((List<Integer>)Arrays.stream(numStr.split(","))
@@ -17,29 +17,27 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> nums){
-        if(nums.stream().anyMatch(num -> num < Constants.MIN_LOTTO_NUMBER || num > Constants.MAX_LOTTO_NUMBER)){
-            throw new IllegalArgumentException("로또 번호는 1~46 범위이어야 합니다.");
-        }
-
-        this.nums = nums;
+        this.lottoNums = nums.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public int numCount() {
-        return this.nums.size();
+        return this.lottoNums.size();
     }
 
     public boolean has(int num){
-        return this.nums.contains(num);
+        return this.lottoNums.contains(num);
     }
 
-    public boolean has(BonusBall bonusBall){
-        return bonusBall.isOneOf(this.nums);
+    public boolean has(LottoNumber bonusBall){
+        return bonusBall.isOneOf(this.lottoNums);
     }
 
     public MatchCount match(Lotto other) {
         MatchCount count = new MatchCount();
 
-        for(int num : this.nums){
+        for(LottoNumber num : this.lottoNums){
             count.tryIncrement(other.has(num));
         }
 
@@ -51,7 +49,7 @@ public class Lotto {
         String str = "";
         boolean isFirst = true;
 
-        for(int num : this.nums) {
+        for(LottoNumber num : this.lottoNums) {
             str = concatNums(str, num, isFirst);
             isFirst = false;
         }
@@ -59,12 +57,12 @@ public class Lotto {
         return str;
     }
 
-    private String concatNums(String numStr, int num, boolean isFirst){
+    private String concatNums(String numStr, LottoNumber num, boolean isFirst){
         if(!isFirst){
             numStr += ", ";
         }
 
-        numStr += num;
+        numStr += num.toString();
 
         return numStr;
     }
