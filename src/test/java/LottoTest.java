@@ -1,8 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -19,11 +16,11 @@ public class LottoTest {
     @Test
     void invalid(){
         assertThatThrownBy(
-                () -> new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 47)))
+                () -> new Lotto(1, 2, 3, 4, 5, 47)
         ).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(
-                () -> new Lotto(new ArrayList<>(Arrays.asList(-1, -2, -3, -4, -5, -6)))
+                () -> new Lotto(-1, -2, -3, -4, -5, -6)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -3,7 +3,6 @@ import java.util.List;
 
 public class Candidates {
     private final List<Candidate> values;
-    private final MatchCounts matchCounts;
 
     public Candidates() {
         this(new ArrayList<>());
@@ -11,7 +10,6 @@ public class Candidates {
 
     public Candidates(List<Candidate> candidates) {
         this.values = candidates;
-        this.matchCounts = new MatchCounts();
     }
 
     public void add(Lotto lotto) {
@@ -42,16 +40,6 @@ public class Candidates {
         }
 
         return sb.toString();
-    }
-
-    public long countMatch(Lotto winning, MatchCount matchCount){
-        this.matchCounts.clear();
-
-        for(Candidate candidate : this.values){
-            this.matchCounts.add(candidate.match(winning));
-        }
-
-        return this.matchCounts.count(matchCount);
     }
 
     public CandidateRanks calcRanks(Lotto winning, LottoNumber bonusBall) {

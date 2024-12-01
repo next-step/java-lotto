@@ -13,6 +13,6 @@ public class LottoGenerator {
     }
 
     private Lotto generate(ArrayList<Integer> nums) {
-        return new Lotto(nums);
+        return new Lotto( nums.stream().mapToInt(Integer::intValue).toArray());
     }
 }

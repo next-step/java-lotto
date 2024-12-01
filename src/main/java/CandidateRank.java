@@ -14,7 +14,7 @@ public class CandidateRank {
         return this.rank == rank;
     }
 
-    public int convertMoney() {
-        return this.rank.getMoney();
+    public int exchange() {
+        return Rank.toMoney(rank);
     }
 }

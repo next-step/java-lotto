@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,27 +6,23 @@ public class Lotto {
     private final List<LottoNumber> lottoNums;
 
     public Lotto(String numStr){
-        this((List<Integer>)Arrays.stream(numStr.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toCollection(ArrayList::new)));
+        this(Arrays.stream(numStr.split(","))
+                .map(LottoNumberCache::get)
+                .collect(Collectors.toList()));
     }
 
     public Lotto(int... nums) {
-        this(new ArrayList<>(Arrays.asList(Arrays.stream(nums).boxed().toArray(Integer[]::new))));
+        this(Arrays.stream(nums)
+                .mapToObj(LottoNumberCache::get)
+                .collect(Collectors.toList()));
     }
 
-    public Lotto(List<Integer> nums){
-        this.lottoNums = nums.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toCollection(ArrayList::new));
+    public Lotto(List<LottoNumber> nums) {
+        this.lottoNums = nums;
     }
 
     public int numCount() {
         return this.lottoNums.size();
-    }
-
-    public boolean has(int num){
-        return this.lottoNums.contains(num);
     }
 
     public boolean has(LottoNumber bonusBall){
@@ -37,7 +32,7 @@ public class Lotto {
     public MatchCount match(Lotto other) {
         MatchCount count = new MatchCount();
 
-        for(LottoNumber num : this.lottoNums){
+        for (LottoNumber num : this.lottoNums){
             count.tryIncrement(other.has(num));
         }
 

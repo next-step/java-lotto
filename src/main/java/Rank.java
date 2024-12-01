@@ -1,39 +1,37 @@
-public enum Rank {
-    UNRANKED(0),
-    FIRST(2_000_000_000),
-    SECOND(30_000_000),
-    THIRD(1_500_000),
-    FOURTH(50_000),
-    FIFTH(5_000);
+import java.util.Arrays;
+import java.util.Optional;
 
+public enum Rank {
+    UNRANKED(0,0),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000);
+
+    private final int matchCount;
     private final int money;
 
-    Rank(int money) {
+    Rank(int value, int money) {
+        this.matchCount = value;
         this.money = money;
     }
 
-    // enum형이라 getter 쓸만하지 않을까? DTO 느낌으로..
-    public int getMoney() {
-        return money;
+    public static Rank from(boolean bonusMatched, MatchCount matchCount) {
+        Optional<Rank> rank = Arrays.stream(Rank.values()).filter(r -> matchCount.is(r.matchCount)).findFirst();
+
+        if (rank.isEmpty()) {
+            return UNRANKED;
+        }
+
+        if (rank.get().matchCount == SECOND.matchCount && !bonusMatched) {
+            return THIRD;
+        }
+
+        return rank.get();
     }
 
-    public static Rank from(boolean bonusMatched, MatchCount matchCount) {
-        if (matchCount.is(6)) {
-            return Rank.FIRST;
-        }
-        if(matchCount.is(5) && bonusMatched) {
-            return Rank.SECOND;
-        }
-        if (matchCount.is(5)) {
-            return Rank.THIRD;
-        }
-        if (matchCount.is(4)) {
-            return Rank.FOURTH;
-        }
-        if (matchCount.is(3)) {
-            return Rank.FIFTH;
-        }
-
-        return Rank.UNRANKED;
+    public static int toMoney(Rank rank) {
+        return rank.money;
     }
 }

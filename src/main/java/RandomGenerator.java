@@ -7,7 +7,7 @@ public class RandomGenerator {
 
         Random rand = new Random();
         for(int i = 0; i < cnt; i++){
-            randNums.add(rand.nextInt(45) + 1);
+            randNums.add(rand.nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1);
         }
 
         return randNums;

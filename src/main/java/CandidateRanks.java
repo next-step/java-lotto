@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CandidateRanks {
-    private List<CandidateRank> values;
+    private final List<CandidateRank> values;
 
     public CandidateRanks(){
         this(new ArrayList<>());
@@ -43,8 +43,8 @@ public class CandidateRanks {
     public double calcBenefitPercent() {
         double earn = 0;
 
-        for(CandidateRank candidateRank : this.values) {
-            earn += candidateRank.convertMoney();
+        for (CandidateRank candidateRank : this.values) {
+            earn += candidateRank.exchange();
         }
 
         double earnRatio = earn / (this.values.size() * 1000);
