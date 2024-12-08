@@ -19,8 +19,8 @@ public class LottoNumber {
         return value;
     }
 
-    public boolean isSame(int number) {
-        return value == number;
+    public boolean isSame(LottoNumber otherLottoNumber) {
+        return equals(otherLottoNumber);
     }
 
     @Override
