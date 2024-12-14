@@ -19,6 +19,10 @@ public class LottoNumber {
         return value;
     }
 
+    public boolean isSame(LottoNumber otherLottoNumber) {
+        return equals(otherLottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

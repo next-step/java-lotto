@@ -15,7 +15,7 @@ public class ResultView {
     public static void printQuantity(int quantity) {
         System.out.println(quantity + "개를 구매했습니다.");
     }
-    
+
     public static void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers());
@@ -27,7 +27,6 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Map<LottoRank, Integer> resultMap = lottoResult.getResultMap();
-
         System.out.println(LottoRank.FIFTH.getMatchCount() + "개 일치 (" + LottoRank.FIFTH.getWinningPrize() + "원)- " + resultMap.getOrDefault(LottoRank.FIFTH, 0) + "개");
         System.out.println(LottoRank.FOURTH.getMatchCount() + "개 일치 (" + LottoRank.FOURTH.getWinningPrize() + "원)- " + resultMap.getOrDefault(LottoRank.FOURTH, 0) + "개");
         System.out.println(LottoRank.THIRD.getMatchCount() + "개 일치 (" + LottoRank.THIRD.getWinningPrize() + "원)- " + resultMap.getOrDefault(LottoRank.THIRD, 0) + "개");
