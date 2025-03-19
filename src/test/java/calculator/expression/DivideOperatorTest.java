@@ -32,4 +32,13 @@ public class DivideOperatorTest {
                     operator.operate(3, 2);
                 }).withMessageMatching("The division does not result in an integer.");
     }
+
+    @Test
+    void 값_꺼내기_불가() {
+        DivideOperator operator = new DivideOperator();
+        assertThatExceptionOfType(UnsupportedOperationException.class)
+                .isThrownBy(() -> {
+                    operator.getValue();
+                }).withMessageMatching("not supported in Operator");
+    }
 }
