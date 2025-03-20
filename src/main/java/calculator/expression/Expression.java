@@ -22,5 +22,4 @@ public class Expression {
         return result;
     }
 
-
 }

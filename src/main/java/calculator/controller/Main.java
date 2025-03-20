@@ -1,4 +1,4 @@
-package controller;
+package calculator.controller;
 
 import calculator.Calculator;
 import view.InputView;

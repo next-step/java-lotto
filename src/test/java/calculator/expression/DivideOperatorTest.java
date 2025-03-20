@@ -8,9 +8,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class DivideOperatorTest {
+
     @ParameterizedTest
     @CsvSource(value = {"2:1:2", "12:4:3", "21:3:7"}, delimiter = ':')
-    void 연산_확인(int left, int right, int result){
+    void 연산_확인(int left, int right, int result) {
         DivideOperator operator = new DivideOperator();
         assertThat(operator.operate(left, right)).isEqualTo(result);
     }
@@ -31,14 +32,5 @@ public class DivideOperatorTest {
                 .isThrownBy(() -> {
                     operator.operate(3, 2);
                 }).withMessageMatching("The division does not result in an integer.");
-    }
-
-    @Test
-    void 값_꺼내기_불가() {
-        DivideOperator operator = new DivideOperator();
-        assertThatExceptionOfType(UnsupportedOperationException.class)
-                .isThrownBy(() -> {
-                    operator.getValue();
-                }).withMessageMatching("not supported in Operator");
     }
 }

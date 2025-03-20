@@ -4,7 +4,7 @@ import calculator.expression.Expression;
 
 public class Calculator {
 
-    Expression expression;
+    private final Expression expression;
 
     public Calculator(String input) {
         this.expression = Expression.of(input);

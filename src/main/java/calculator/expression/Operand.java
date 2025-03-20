@@ -1,6 +1,7 @@
 package calculator.expression;
 
-public class Operand extends ExpressionComponent{
+public class Operand implements ExpressionComponent {
+
     private final int value;
 
     public Operand(String value) {
