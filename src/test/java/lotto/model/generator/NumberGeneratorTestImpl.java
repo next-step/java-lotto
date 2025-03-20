@@ -1,4 +1,4 @@
-package lotto.generator;
+package lotto.model.generator;
 
 public class NumberGeneratorTestImpl implements NumberGenerator {
     @Override

@@ -1,9 +1,9 @@
-package lotto.generator;
+package lotto.model.generator;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.Lotto;
-import lotto.LottoWallet;
+import lotto.model.Lotto;
+import lotto.model.LottoWallet;
 
 public class LottoMachine {
 

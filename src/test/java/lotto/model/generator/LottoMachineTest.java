@@ -1,11 +1,11 @@
-package lotto.generator;
+package lotto.model.generator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.LottoWallet;
+import lotto.model.LottoWallet;
 import org.junit.jupiter.api.Test;
 
-public class LottoMachineTest {
+class LottoMachineTest {
 
     @Test
     void 로또_번호_생성() {

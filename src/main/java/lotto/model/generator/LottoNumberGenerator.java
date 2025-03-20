@@ -1,4 +1,4 @@
-package lotto.generator;
+package lotto.model.generator;
 
 import java.util.Random;
 
