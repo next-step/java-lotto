@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWallet {
@@ -17,12 +18,13 @@ public class LottoWallet {
         return lottos.get(index);
     }
 
-    public int calculateProfit(LottoWinningNumber winningNumber){
-        int profit = 0;
+    public LottoResult calculateResult(LottoWinningNumber winningNumber){
+        List<LottoPrize> lottoPrizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
             LottoPrize rank = winningNumber.getRank(lotto);
-            profit += rank.getAmount();
+            lottoPrizes.add(rank);
         }
-        return profit;
+        return new LottoResult(lottoPrizes);
     }
+
 }

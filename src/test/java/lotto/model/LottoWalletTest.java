@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class LottoWalletTest {
 
     @Test
-    void 수익_계산(){
+    void 결과_계산(){
         LottoWallet lottoWallet = new LottoWallet(
                 List.of(
                         new Lotto(List.of(1,2,3,4,5,6)),
@@ -20,9 +20,15 @@ class LottoWalletTest {
         );
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(new Lotto(List.of(1,2,3,4,5,6)));
 
-        int profit = lottoWallet.calculateProfit(lottoWinningNumber);
+        LottoResult lottoResult = lottoWallet.calculateResult(lottoWinningNumber);
 
-        assertThat(profit).isEqualTo(2000000000 + 1500000 + 50000 + 5000 + 0);
+        assertThat(lottoResult).isEqualTo(new LottoResult(List.of(
+                LottoPrize.FIRST,
+                LottoPrize.SECOND,
+                LottoPrize.THIRD,
+                LottoPrize.FOURTH,
+                LottoPrize.NONE
+        )));
     }
 
 }
