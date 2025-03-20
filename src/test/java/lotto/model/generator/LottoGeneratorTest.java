@@ -14,7 +14,7 @@ class LottoGeneratorTest {
         List<Integer> numbers = lottoGenerator.generate();
 
         assertThat(numbers).hasSize(6);
-        assertThat(numbers.get(0)).isEqualTo(45);
+        assertThat(numbers.get(0)).isEqualTo(1);
     }
 
 }

@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.LottoResult;
 import lotto.model.LottoShop;
@@ -20,7 +19,7 @@ public class Main {
 
         String winningNumbers = InputView.getWinningNumbers();
 
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(new Lotto(List.of(1,2,3,4,5,6)));
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(new Lotto(winningNumbers));
         LottoResult lottoResult = lottoWallet.calculateResult(lottoWinningNumber);
 
         OutputView.printLottoResult(lottoResult);

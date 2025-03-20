@@ -1,7 +1,9 @@
 package lotto.model.generator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoGenerator {
     private static final int LOTTO_MAX_NUMBER = 45;
@@ -14,11 +16,14 @@ public class LottoGenerator {
     }
 
     public List<Integer> generate() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-            numbers.add(numberGenerator.generate(LOTTO_MAX_NUMBER));
+        Set<Integer> uniqueNumbers = new HashSet<>();
+
+        while (uniqueNumbers.size() < LOTTO_NUMBER_COUNT) {
+            int number = numberGenerator.generate(LOTTO_MAX_NUMBER);
+            uniqueNumbers.add(number);
         }
-        return numbers;
+
+        return new ArrayList<>(uniqueNumbers);
     }
 
 }
