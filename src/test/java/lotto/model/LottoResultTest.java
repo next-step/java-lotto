@@ -45,8 +45,7 @@ class LottoResultTest {
         );
         double returnRate = lottoResult.calculateReturnRate();
 
-        double truncatedReturnRate = Math.floor(returnRate * 100) / 100.0;
-        assertThat(truncatedReturnRate).isEqualTo(0.35);
+        assertThat(returnRate).isEqualTo(0.35);
     }
 
 }

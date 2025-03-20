@@ -25,6 +25,11 @@ public class Lotto {
     }
 
     @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()){
             return false;

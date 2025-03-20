@@ -18,8 +18,15 @@ public class LottoResult {
         return profit;
     }
 
+    public int getPrizeCount(LottoPrize prize) {
+        return (int) lottoPrizes.stream()
+            .filter(p -> p.equals(prize))
+            .count();
+    }
+
     public double calculateReturnRate() {
-        return (double) calculateProfit() / (lottoPrizes.size() * LottoShop.LOTTO_PRICE);
+        double returnRate = (double) calculateProfit() / (lottoPrizes.size() * LottoShop.LOTTO_PRICE);
+        return Math.floor(returnRate * 100) / 100.0;
     }
 
     @Override

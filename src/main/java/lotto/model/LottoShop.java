@@ -8,6 +8,10 @@ import lotto.model.generator.LottoNumberGenerator;
 public class LottoShop {
     public static final int LOTTO_PRICE = 1000;
 
+    public LottoWallet buy(int money) {
+        return getLottoNumbers(buyChance(money));
+    }
+
     public int buyChance(int money) {
         return money / LOTTO_PRICE;
     }
