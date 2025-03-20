@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWallet {
+
     private final List<Lotto> lottos;
 
     public LottoWallet(List<Lotto> lottos) {
@@ -18,7 +19,7 @@ public class LottoWallet {
         return lottos.get(index);
     }
 
-    public LottoResult calculateResult(LottoWinningNumber winningNumber){
+    public LottoResult calculateResult(LottoWinningNumber winningNumber) {
         List<LottoPrize> lottoPrizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
             LottoPrize rank = winningNumber.getRank(lotto);

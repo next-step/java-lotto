@@ -23,7 +23,8 @@ class LottoWinningNumberTest {
     @ParameterizedTest
     @MethodSource("prizeTestGenerator")
     void 결과_판단(List<Integer> numbers, LottoPrize expectedPrize) {
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)));
         Lotto myLotto = new Lotto(numbers);
 
         LottoPrize rank = lottoWinningNumber.getRank(myLotto);

@@ -1,6 +1,7 @@
 package lotto.model;
 
 public class LottoWinningNumber {
+
     private final Lotto winnerNumber;
 
     public LottoWinningNumber(Lotto winnerNumber) {

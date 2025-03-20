@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoGenerator {
+
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
 

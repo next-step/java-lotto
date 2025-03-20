@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -37,7 +38,7 @@ public class Lotto {
 
     public int getMatchCount(Lotto lotto) {
         Set<Integer> intersection = new HashSet<>(this.numbers);
-        intersection.retainAll( new HashSet<>(lotto.getLottoNumbers()));
+        intersection.retainAll(new HashSet<>(lotto.getLottoNumbers()));
         return intersection.size();
     }
 
@@ -55,7 +56,7 @@ public class Lotto {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 

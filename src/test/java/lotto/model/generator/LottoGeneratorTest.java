@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class LottoGeneratorTest {
+
     @Test
     void 로또_번호_생성() {
         NumberGenerator testGenerator = new NumberGeneratorTestImpl();

@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoResult {
+
     private final List<LottoPrize> lottoPrizes;
 
     public LottoResult(List<LottoPrize> lottoPrizes) {
         this.lottoPrizes = lottoPrizes;
     }
 
-    public int calculateProfit(){
+    public int calculateProfit() {
         int profit = 0;
         for (LottoPrize prize : lottoPrizes) {
             profit += prize.getAmount();
@@ -20,12 +21,13 @@ public class LottoResult {
 
     public int getPrizeCount(LottoPrize prize) {
         return (int) lottoPrizes.stream()
-            .filter(p -> p.equals(prize))
-            .count();
+                .filter(p -> p.equals(prize))
+                .count();
     }
 
     public double calculateReturnRate() {
-        double returnRate = (double) calculateProfit() / (lottoPrizes.size() * LottoShop.LOTTO_PRICE);
+        double returnRate =
+                (double) calculateProfit() / (lottoPrizes.size() * LottoShop.LOTTO_PRICE);
         return Math.floor(returnRate * 100) / 100.0;
     }
 

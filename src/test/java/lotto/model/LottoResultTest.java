@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class LottoResultTest {
 
     @Test
-    void 결과_계산(){
+    void 결과_계산() {
         LottoResult lottoResult = new LottoResult(
                 List.of(
                         LottoPrize.FIRST,
@@ -24,7 +24,7 @@ class LottoResultTest {
     }
 
     @Test
-    void 수익률_계산(){
+    void 수익률_계산() {
         LottoResult lottoResult = new LottoResult(
                 List.of(
                         LottoPrize.NONE,

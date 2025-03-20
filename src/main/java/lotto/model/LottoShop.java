@@ -6,6 +6,7 @@ import lotto.model.generator.LottoGenerator;
 import lotto.model.generator.LottoNumberGenerator;
 
 public class LottoShop {
+
     public static final int LOTTO_PRICE = 1000;
 
     public LottoWallet buy(int money) {
@@ -20,7 +21,7 @@ public class LottoShop {
         LottoGenerator lottoGenerator = new LottoGenerator(new LottoNumberGenerator());
 
         List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             lottos.add(new Lotto(lottoGenerator.generate()));
         }
 
