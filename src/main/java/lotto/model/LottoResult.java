@@ -18,6 +18,9 @@ public class LottoResult {
         return profit;
     }
 
+    public double calculateReturnRate() {
+        return (double) calculateProfit() / (lottoPrizes.size() * LottoShop.LOTTO_PRICE);
+    }
 
     @Override
     public boolean equals(Object o) {
