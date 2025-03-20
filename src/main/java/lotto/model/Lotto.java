@@ -23,4 +23,19 @@ public class Lotto {
                 .filter(i -> lotto.getLottoNumber(i).equals(this.numbers.get(i)))
                 .count();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+
+        Lotto lotto = (Lotto) o;
+        return numbers.equals(lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return numbers.hashCode();
+    }
 }

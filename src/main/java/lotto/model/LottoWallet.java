@@ -16,4 +16,13 @@ public class LottoWallet {
     public Lotto getLotto(int index) {
         return lottos.get(index);
     }
+
+    public int calculateProfit(LottoWinningNumber winningNumber){
+        int profit = 0;
+        for (Lotto lotto : lottos) {
+            LottoPrize rank = winningNumber.getRank(lotto);
+            profit += rank.getAmount();
+        }
+        return profit;
+    }
 }
