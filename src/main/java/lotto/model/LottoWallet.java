@@ -1,9 +1,11 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class LottoWallet {
+public class LottoWallet implements Iterable<Lotto> {
 
     private final List<Lotto> lottos;
 
@@ -15,8 +17,9 @@ public class LottoWallet {
         return lottos.size();
     }
 
-    public Lotto getLotto(int index) {
-        return lottos.get(index);
+    @Override
+    public Iterator<Lotto> iterator() {
+        return Collections.unmodifiableList(lottos).iterator();
     }
 
     public LottoResult calculateResult(LottoWinningNumber winningNumber) {

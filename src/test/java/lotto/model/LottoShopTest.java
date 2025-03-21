@@ -20,7 +20,10 @@ class LottoShopTest {
         LottoShop lottoShop = new LottoShop();
         LottoWallet lottoWallet = lottoShop.getLottoNumbers(5);
         assertThat(lottoWallet.getLottoCount()).isEqualTo(5);
-        assertThat(lottoWallet.getLotto(0).getLottoNumbers()).hasSize(6);
+
+        for (Lotto lotto : lottoWallet) {
+            assertThat(lotto.getLottoNumbers()).hasSize(6);
+        }
     }
 
 }

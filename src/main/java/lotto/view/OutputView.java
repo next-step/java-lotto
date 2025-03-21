@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.Lotto;
 import lotto.model.LottoPrize;
 import lotto.model.LottoResult;
 import lotto.model.LottoWallet;
@@ -9,8 +10,8 @@ public class OutputView {
     public static void printLottoWallet(LottoWallet wallet) {
         int size = wallet.getLottoCount();
         System.out.println(size + "개를 구매했습니다");
-        for (int i = 0; i < size; i++) {
-            System.out.println(wallet.getLotto(i));
+        for (Lotto lotto : wallet) {
+            System.out.println(lotto);
         }
     }
 
