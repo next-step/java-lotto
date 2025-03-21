@@ -1,20 +1,22 @@
 package lotto.model;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(Set<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = numbers
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
-    public Lotto(String lottoNumbers) {
+    public Lotto(List<String> lottoNumbers) {
         this(parse(lottoNumbers));
     }
 
@@ -24,18 +26,18 @@ public class Lotto {
         }
     }
 
-    public Set<Integer> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return numbers;
     }
 
     public int getMatchCount(Lotto lotto) {
-        Set<Integer> intersection = new HashSet<>(this.numbers);
-        intersection.retainAll(new HashSet<>(lotto.getLottoNumbers()));
+        Set<LottoNumber> intersection = this.numbers;
+        intersection.retainAll(lotto.getLottoNumbers());
         return intersection.size();
     }
 
-    private static Set<Integer> parse(String lottoNumbers) {
-        return Arrays.stream(lottoNumbers.split(","))
+    private static Set<Integer> parse(List<String> lottoNumbers) {
+        return lottoNumbers.stream()
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());

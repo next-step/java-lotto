@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.LottoResult;
 import lotto.model.LottoShop;
@@ -18,7 +19,8 @@ public class Main {
 
         OutputView.printLottoWallet(lottoWallet);
 
-        String winningNumbers = InputView.getWinningNumbers();
+        String inputStr = InputView.getWinningNumbers();
+        List<String> winningNumbers = List.of(inputStr.split(","));
 
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(new Lotto(winningNumbers));
         LottoResult lottoResult = lottoWallet.calculateResult(lottoWinningNumber);

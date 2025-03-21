@@ -1,11 +1,12 @@
 package lotto.model.generator;
 
+import static lotto.model.LottoNumber.LOTTO_MAX_NUMBER;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class LottoGenerator {
 
-    private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final NumberGenerator numberGenerator;
