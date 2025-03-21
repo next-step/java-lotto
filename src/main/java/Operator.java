@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
@@ -17,5 +18,12 @@ public enum Operator {
 
     public Integer calculate(Integer a, Integer b) {
         return this.function.apply(a, b);
+    }
+
+    public static Operator of(String operator) {
+        return Arrays.stream(Operator.values())
+                .filter(o -> o.operator.equals(operator))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("invalid operator =" + operator));
     }
 }
