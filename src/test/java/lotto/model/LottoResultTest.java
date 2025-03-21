@@ -48,4 +48,31 @@ class LottoResultTest {
         assertThat(returnRate).isEqualTo(0.35);
     }
 
+    @Test
+    void 상별_카운트() {
+        LottoResult lottoResult = new LottoResult(
+                List.of(
+                        LottoPrize.NONE,
+                        LottoPrize.NONE,
+                        LottoPrize.NONE,
+                        LottoPrize.NONE,
+                        LottoPrize.FIRST,
+                        LottoPrize.NONE,
+                        LottoPrize.THIRD,
+                        LottoPrize.THIRD,
+                        LottoPrize.THIRD,
+                        LottoPrize.NONE,
+                        LottoPrize.FOURTH,
+                        LottoPrize.NONE,
+                        LottoPrize.NONE,
+                        LottoPrize.NONE
+                )
+        );
+        assertThat(lottoResult.getPrizeCount(LottoPrize.FIRST)).isEqualTo(1);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.SECOND)).isEqualTo(0);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.THIRD)).isEqualTo(3);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.FOURTH)).isEqualTo(1);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.NONE)).isEqualTo(9);
+    }
+
 }
