@@ -3,8 +3,8 @@ import java.util.List;
 
 public class Expression {
     private static final String DELIMITER = " ";
-    private List<Operator> operators;
-    private List<Integer> numbers;
+    private final List<Operator> operators;
+    private final List<Integer> numbers;
 
     public Expression(List<Operator> operators, List<Integer> numbers) {
         this.operators = operators;
@@ -30,5 +30,17 @@ public class Expression {
         if (expression == null || expression.isEmpty()) {
             throw new IllegalArgumentException("null or empty expression");
         }
+    }
+
+    public Operator getCurrentOperator(int index) {
+        return operators.get(index);
+    }
+
+    public int getCurrentNumber(int index) {
+        return numbers.get(index);
+    }
+
+    public int getOperatorSize() {
+        return operators.size();
     }
 }

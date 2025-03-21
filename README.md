@@ -15,4 +15,4 @@
 - [x] 숫자와 사칙연산 사이에는 반드시 빈 공백 문자열이 있다.
   - [x] 입력값이 없는 경우 IllegalArgumentExceptionm을 반환한다.
   - [x] 기호가 맞지 않는 경우에는 IllegalArgumentException 반환한다.
-- [ ] 입력 값에 따라 계산 순서가 결정된다.
+- [x] 입력 값에 따라 계산 순서가 결정된다.
