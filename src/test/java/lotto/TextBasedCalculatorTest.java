@@ -1,17 +1,30 @@
 package lotto;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TextBasedCalculatorTest {
+    @ParameterizedTest
+    @ValueSource(strings = {"11 22 +", "+ 11 - 22", "11 - 22 / 0", " "})
+    void invalidate_format(String input) {
+        assertThatThrownBy(() -> new TextBasedCalculator(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("invalid format text :");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"11", "11 - 22", "11 - 22 / 1", "-11 - 22 / 2"})
+    void validate_format(String input) {
+        assertThat(new TextBasedCalculator(input)).isNotNull();
+    }
+
     @Test
-    void validate_input() {
-        assertThat(TextBasedCalculator.validate("11 22 +")).isFalse();
-        assertThat(TextBasedCalculator.validate("+ 11 - 22")).isFalse();
-        assertThat(TextBasedCalculator.validate("11 - 22 / 0")).isFalse();
-        assertThat(TextBasedCalculator.validate("11 - 22 / -0")).isFalse();
-        assertThat(TextBasedCalculator.validate("11 - 22 / 1")).isTrue();
-        assertThat(TextBasedCalculator.validate("-11 - 22 / 1")).isTrue();
+    void test_calculate() {
+        assertThat(new TextBasedCalculator("11 + 22").calculate()).isEqualTo(33);
+        assertThat(new TextBasedCalculator("2 + 3 * 4 / 2").calculate()).isEqualTo(10);
     }
 }
