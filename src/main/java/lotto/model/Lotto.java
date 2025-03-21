@@ -2,37 +2,29 @@ package lotto.model;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
     }
 
     public Lotto(String lottoNumbers) {
-        List<Integer> parsedNumbers = parse(lottoNumbers);
-        validateNumbers(parsedNumbers);
-        this.numbers = parsedNumbers;
+        this(parse(lottoNumbers));
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers(Set<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또는 6개입니다.");
         }
-
-        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
-        if (uniqueNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException("로또 번호 중복 불가!");
-        }
     }
 
-    public List<Integer> getLottoNumbers() {
+    public Set<Integer> getLottoNumbers() {
         return numbers;
     }
 
@@ -42,11 +34,11 @@ public class Lotto {
         return intersection.size();
     }
 
-    private List<Integer> parse(String lottoNumbers) {
+    private static Set<Integer> parse(String lottoNumbers) {
         return Arrays.stream(lottoNumbers.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Override

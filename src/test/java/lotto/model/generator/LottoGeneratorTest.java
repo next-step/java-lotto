@@ -2,7 +2,7 @@ package lotto.model.generator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class LottoGeneratorTest {
@@ -12,10 +12,10 @@ class LottoGeneratorTest {
         NumberGenerator testGenerator = new NumberGeneratorTestImpl();
         LottoGenerator lottoGenerator = new LottoGenerator(testGenerator);
 
-        List<Integer> numbers = lottoGenerator.generate();
+        Set<Integer> numbers = lottoGenerator.generate();
 
         assertThat(numbers).hasSize(6);
-        assertThat(numbers.get(0)).isEqualTo(1);
+        assertThat(numbers).containsExactly(1, 2, 3, 4, 5, 6);
     }
 
 }
