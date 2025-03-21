@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -40,6 +41,17 @@ public class StringCalculatorTest {
         int actual = calculator.calculate("3 / 2");
 
         assertThat(actual).isEqualTo(1);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "2 + 3 * 4 / 2, 10",
+        "2 + 3 * 4 / 2 - 1, 9",
+        "2 + 3 * 4 / 2 - 1 - 9 + 10000, 10000"})
+    void 복잡한_연산도_정상동작_한다(String expression, int expected) {
+         int actual = calculator.calculate(expression);
+
+         assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
