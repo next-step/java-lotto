@@ -1,8 +1,9 @@
 package lotto.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Set;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,7 +30,7 @@ class LottoWinningNumberTest {
 
         LottoPrize rank = lottoWinningNumber.getRank(myLotto);
 
-        Assertions.assertEquals(expectedPrize, rank);
+        assertThat(rank).isEqualTo(expectedPrize);
     }
 
 }
