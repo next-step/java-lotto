@@ -26,8 +26,8 @@
 > - else를 사용하지 마라.
 
 구현 목록
-- [ ] 사용자로부터 값을 입력받는다.
-  - [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException를 던진다.
+- [x] 사용자로부터 값을 입력받는다.
+  - [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException를 던진다.
 - [ ] 입력받은 값을 숫자와 연산 기호로 분리한다.
   - [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException를 던진다.
 - [ ] 덧셈에 대해 테스트한다.
