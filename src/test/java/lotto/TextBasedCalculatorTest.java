@@ -11,7 +11,7 @@ public class TextBasedCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"11 22 +", "+ 11 - 22", "11 - 22 / 0", " "})
     void invalidate_format(String input) {
-        assertThatThrownBy(() -> new TextBasedCalculator(input))
+        assertThatThrownBy(() -> TextBasedCalculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("invalid format text :");
     }
@@ -19,12 +19,12 @@ public class TextBasedCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"11", "11 - 22", "11 - 22 / 1", "-11 - 22 / 2"})
     void validate_format(String input) {
-        assertThat(new TextBasedCalculator(input)).isNotNull();
+        assertThat(TextBasedCalculator.calculate(input)).isNotNull();
     }
 
     @Test
     void test_calculate() {
-        assertThat(new TextBasedCalculator("11 + 22").calculate()).isEqualTo(33);
-        assertThat(new TextBasedCalculator("2 + 3 * 4 / 2").calculate()).isEqualTo(10);
+        assertThat(TextBasedCalculator.calculate("11 + 22")).isEqualTo(33);
+        assertThat(TextBasedCalculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
     }
 }

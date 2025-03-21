@@ -3,14 +3,19 @@ package lotto;
 import java.util.regex.Pattern;
 
 public class TextBasedCalculator {
-    private final String inputExpression;
+    public static int calculate(String inputExpression) {
+        validate(inputExpression);
 
-    public TextBasedCalculator(String inputText) {
-        validate(inputText);
-        this.inputExpression = inputText;
+        String[] tokens = inputExpression.split(" ");
+
+        int result = Integer.parseInt(tokens[0]);
+        for (int i = 1; i < tokens.length; i += 2) {
+            result = applyOperator(result, tokens[i], Integer.parseInt(tokens[i + 1]));
+        }
+        return result;
     }
 
-    private void validate(String input) {
+    private static void validate(String input) {
         String validFormatRegex = "^-?\\d+(\\s[+\\-*/]\\s-?\\d+)*$";
         String divideByZeroRegex = ".*\\/\\s-?0(\\s|$).*";
 
@@ -21,16 +26,6 @@ public class TextBasedCalculator {
         if (Pattern.matches(divideByZeroRegex, input)) {
             throw new IllegalArgumentException("invalid format text : " + input);
         }
-    }
-
-    public int calculate() {
-        String[] tokens = inputExpression.split(" ");
-
-        int result = Integer.parseInt(tokens[0]);
-        for (int i = 1; i < tokens.length; i += 2) {
-            result = applyOperator(result, tokens[i], Integer.parseInt(tokens[i + 1]));
-        }
-        return result;
     }
 
     private static int applyOperator(int left, String operator, int right) {
