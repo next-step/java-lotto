@@ -5,9 +5,9 @@ import stringcalcaulator.token.ExpressionTokenResolvers;
 
 public class StringCalculator {
 
-    public int calculate(String text) {
+    public int calculate(String expression) {
 
-        ExpressionIterator iterator = new ExpressionIterator(text);
+        ExpressionIterator iterator = new ExpressionIterator(expression);
         ExpressionTokenVisitor visitor = new ExpressionTokenVisitor();
 
         while (iterator.hasNext()) {

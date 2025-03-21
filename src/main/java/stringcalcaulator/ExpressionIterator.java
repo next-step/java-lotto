@@ -5,15 +5,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExpressionIterator implements Iterator<String> {
-    private final List<String> inputs;
+    private final List<String> expressions;
     private int index = 0;
 
-    public ExpressionIterator(String input) {
-        if (isBlank(input)) {
+    public ExpressionIterator(String expression) {
+        if (isBlank(expression)) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
 
-        inputs = Arrays.asList(split(input));
+        expressions = Arrays.asList(split(expression));
     }
 
     private static String[] split(String text) {
@@ -26,7 +26,7 @@ public class ExpressionIterator implements Iterator<String> {
 
     @Override
     public boolean hasNext() {
-        return index < inputs.size();
+        return index < expressions.size();
     }
 
     @Override
@@ -35,6 +35,6 @@ public class ExpressionIterator implements Iterator<String> {
             throw new IllegalStateException("더 이상 가져올 요소가 없습니다.");
         }
 
-        return inputs.get(index++);
+        return expressions.get(index++);
     }
 }
