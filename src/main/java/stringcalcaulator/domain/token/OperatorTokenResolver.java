@@ -1,4 +1,4 @@
-package stringcalcaulator.token;
+package stringcalcaulator.domain.token;
 
 import java.util.Arrays;
 

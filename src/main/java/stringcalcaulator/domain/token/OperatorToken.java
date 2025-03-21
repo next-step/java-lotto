@@ -1,6 +1,6 @@
-package stringcalcaulator.token;
+package stringcalcaulator.domain.token;
 
-import stringcalcaulator.ExpressionTokenVisitor;
+import stringcalcaulator.domain.ExpressionTokenVisitor;
 
 public enum OperatorToken implements ExpressionToken {
     ADD("+") {

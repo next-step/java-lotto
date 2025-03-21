@@ -1,9 +1,8 @@
-package stringcalcaulator;
+package stringcalcaulator.domain;
 
-import java.util.StringTokenizer;
-
-import stringcalcaulator.token.ExpressionToken;
-import stringcalcaulator.token.ExpressionTokenResolvers;
+import stringcalcaulator.ExpressionIterator;
+import stringcalcaulator.domain.token.ExpressionToken;
+import stringcalcaulator.domain.token.ExpressionTokenResolvers;
 
 public class StringCalculator {
 

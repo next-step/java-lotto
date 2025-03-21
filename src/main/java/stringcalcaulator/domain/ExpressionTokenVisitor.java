@@ -1,7 +1,7 @@
-package stringcalcaulator;
+package stringcalcaulator.domain;
 
-import stringcalcaulator.token.OperandToken;
-import stringcalcaulator.token.OperatorToken;
+import stringcalcaulator.domain.token.OperandToken;
+import stringcalcaulator.domain.token.OperatorToken;
 
 public class ExpressionTokenVisitor {
 

@@ -1,4 +1,4 @@
-package stringcalcaulator.token;
+package stringcalcaulator.domain.token;
 
 public interface ExpressionTokenResolver {
     boolean supports(String token);
