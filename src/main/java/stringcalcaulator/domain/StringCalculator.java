@@ -1,6 +1,5 @@
 package stringcalcaulator.domain;
 
-import stringcalcaulator.ExpressionIterator;
 import stringcalcaulator.domain.token.ExpressionToken;
 import stringcalcaulator.domain.token.ExpressionTokenResolvers;
 

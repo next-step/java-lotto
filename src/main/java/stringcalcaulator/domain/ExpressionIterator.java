@@ -1,4 +1,4 @@
-package stringcalcaulator;
+package stringcalcaulator.domain;
 
 import java.util.Iterator;
 import java.util.StringTokenizer;
