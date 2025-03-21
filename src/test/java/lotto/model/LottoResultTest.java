@@ -15,12 +15,13 @@ class LottoResultTest {
                         LottoPrize.SECOND,
                         LottoPrize.THIRD,
                         LottoPrize.FOURTH,
+                        LottoPrize.FOURTH,
                         LottoPrize.NONE
                 )
         );
         int profit = lottoResult.calculateProfit();
 
-        assertThat(profit).isEqualTo(2000000000 + 1500000 + 50000 + 5000 + 0);
+        assertThat(profit).isEqualTo(2000000000 * 1 + 1500000 * 1 + 50000 * 1 + 5000 * 2 + 0 * 1);
     }
 
     @Test
