@@ -17,6 +17,14 @@ public class UserInput {
         return userInput;
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public List<Operator> getOperators() {
+        return operators;
+    }
+
     private static String[] split(String input) {
         return input.split(DEFAULT_DELIMITER);
     }
