@@ -7,3 +7,7 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+### Step 1 : 문자열 사칙 연산 계산기 구현
+- 입력 받은 문자의 유효성 검사 : 숫자 + [공백 + [+/8-] + 숫자]
+- +, -, *, / 의 계산 기능 구현
