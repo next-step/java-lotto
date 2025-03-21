@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoFactoryTest {
@@ -10,7 +12,8 @@ class LottoFactoryTest {
 
     @Test
     void createLottoTest() {
-        Lotto lotto = lottoFactory.createLotto();
-        System.out.println(lotto);
+        Lotto actual = lottoFactory.createLotto();
+
+        assertThat(actual).isNotNull();
     }
 }
