@@ -1,5 +1,7 @@
 package carculator.domain;
 
+import carculator.domain.token.Operand;
+
 public class Calculator {
 
     public Integer plus(Operand a, Operand b) {
