@@ -31,8 +31,8 @@ public enum OperatorToken implements ExpressionToken {
 
     private final String symbol;
 
-    public String getSymbol() {
-        return symbol;
+    public boolean isMatchSymbol(String symbol) {
+        return this.symbol.equals(symbol);
     }
 
     OperatorToken(String symbol) {
