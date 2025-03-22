@@ -4,15 +4,22 @@ public class Operand {
     Integer value;
 
     public Operand(Integer value) {
+        validateNotNull(value);
+        validatePositive(value);
+
+        this.value = value;
+    }
+
+    private static void validateNotNull(Integer value) {
         if (value == null) {
             throw new NullPointerException("value is null");
         }
+    }
 
-        if (value < 0) {
-            throw new IllegalArgumentException("Value cannot be negative");
+    private static void validatePositive(Integer value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("Value cannot be negative: " + value);
         }
-
-        this.value = value;
     }
 
     public Integer plus(Operand b) {
