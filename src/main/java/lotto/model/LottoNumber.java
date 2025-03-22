@@ -21,6 +21,11 @@ public class LottoNumber {
     }
 
     @Override
+    public String toString(){
+        return String.valueOf(number);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
