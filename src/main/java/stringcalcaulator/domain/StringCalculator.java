@@ -7,7 +7,7 @@ public class StringCalculator {
 
     public int calculate(String expression) {
         ExpressionIterator iterator = new ExpressionIterator(expression);
-        ExpressionTokenVisitor visitor = new ExpressionTokenVisitor();
+        ExpressionTokenCalculatorVisitor visitor = new ExpressionTokenCalculatorVisitor();
 
         while (iterator.hasNext()) {
             String token = iterator.next();

@@ -1,6 +1,6 @@
 package stringcalcaulator.domain.token;
 
-import stringcalcaulator.domain.ExpressionTokenVisitor;
+import stringcalcaulator.domain.ExpressionTokenCalculatorVisitor;
 
 public enum OperatorToken implements ExpressionToken {
     ADD("+") {
@@ -42,7 +42,7 @@ public enum OperatorToken implements ExpressionToken {
     public abstract OperandToken calculate(OperandToken token1, OperandToken token2);
 
     @Override
-    public void accept(ExpressionTokenVisitor visitor) {
+    public void accept(ExpressionTokenCalculatorVisitor visitor) {
         visitor.visit(this);
     }
 }

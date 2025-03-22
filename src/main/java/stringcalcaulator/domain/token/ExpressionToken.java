@@ -1,7 +1,7 @@
 package stringcalcaulator.domain.token;
 
-import stringcalcaulator.domain.ExpressionTokenVisitor;
+import stringcalcaulator.domain.ExpressionTokenCalculatorVisitor;
 
 public interface ExpressionToken {
-    void accept(ExpressionTokenVisitor visitor);
+    void accept(ExpressionTokenCalculatorVisitor visitor);
 }

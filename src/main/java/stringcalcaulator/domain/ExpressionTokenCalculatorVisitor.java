@@ -3,7 +3,7 @@ package stringcalcaulator.domain;
 import stringcalcaulator.domain.token.OperandToken;
 import stringcalcaulator.domain.token.OperatorToken;
 
-public class ExpressionTokenVisitor {
+public class ExpressionTokenCalculatorVisitor {
 
     private OperandToken lastOperand;
     private OperatorToken lastOperator;

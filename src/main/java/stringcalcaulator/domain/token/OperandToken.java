@@ -1,6 +1,6 @@
 package stringcalcaulator.domain.token;
 
-import stringcalcaulator.domain.ExpressionTokenVisitor;
+import stringcalcaulator.domain.ExpressionTokenCalculatorVisitor;
 
 public class OperandToken implements ExpressionToken {
 
@@ -31,7 +31,7 @@ public class OperandToken implements ExpressionToken {
     }
 
     @Override
-    public void accept(ExpressionTokenVisitor visitor) {
+    public void accept(ExpressionTokenCalculatorVisitor visitor) {
         visitor.visit(this);
     }
 }
