@@ -1,7 +1,7 @@
 package carculator.domain;
 
 import carculator.domain.token.ExpressionParser;
-import carculator.view.FakeInputView;
+import carculator.view.fake.FakeInputView;
 import carculator.view.output.OutputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

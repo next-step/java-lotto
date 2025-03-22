@@ -1,4 +1,4 @@
-package carculator.view;
+package carculator.view.fake;
 
 import carculator.view.input.BaseInputView;
 

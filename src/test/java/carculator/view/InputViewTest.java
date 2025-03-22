@@ -3,6 +3,7 @@ package carculator.view;
 import carculator.domain.token.ExpressionParser;
 import carculator.domain.token.Operator;
 import carculator.domain.token.Token;
+import carculator.view.fake.FakeInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

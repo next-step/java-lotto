@@ -20,6 +20,6 @@ public class OperandTest {
     @DisplayName("계산 대상이 되는 값은 음수가 될 수 없다.")
     public void operandNegativeTest() {
         assertThatIllegalArgumentException()
-        .isThrownBy(() -> new Operand(-1));
+            .isThrownBy(() -> new Operand(-1));
     }
 }
