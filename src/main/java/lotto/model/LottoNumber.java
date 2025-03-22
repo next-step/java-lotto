@@ -21,7 +21,7 @@ public class LottoNumber {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.valueOf(number);
     }
 
