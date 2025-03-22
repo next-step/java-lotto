@@ -1,7 +1,8 @@
-package carculator.domain;
+package carculator.domain.token;
 
-public class Operand {
-    Integer value;
+public class Operand implements Token {
+
+    private final Integer value;
 
     public Operand(Integer value) {
         validateNotNull(value);
