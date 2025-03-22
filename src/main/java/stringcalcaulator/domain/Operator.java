@@ -31,10 +31,6 @@ public enum Operator {
 
     private final String symbol;
 
-    public boolean isMatchSymbol(String symbol) {
-        return this.symbol.equals(symbol);
-    }
-
     public static boolean isOperator(String token) {
         return Arrays.stream(Operator.values())
             .anyMatch(operatorToken -> operatorToken.isMatchSymbol(token));
@@ -45,6 +41,10 @@ public enum Operator {
             .filter(operatorToken -> operatorToken.isMatchSymbol(token))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("해당 연산자를 찾을 수 없습니다."));
+    }
+
+    private boolean isMatchSymbol(String symbol) {
+        return this.symbol.equals(symbol);
     }
 
     Operator(String symbol) {
