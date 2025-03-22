@@ -3,23 +3,27 @@ package calculator;
 public class Calculator {
     public static int calculate(OperationUnit unit) {
         int left = unit.getLeft();
-        char operand = unit.getOperand();
+        String operand = unit.getOperand();
         int right = unit.getRight();
 
-        if ('+' == operand) {
-            return plus(left, right);
+        int result = 0;
+
+        if ("+".equals(operand)) {
+            result = plus(left, right);
         }
-        if ('-' == operand) {
-            return minus(left, right);
+        if ("-".equals(operand)) {
+            result =  minus(left, right);
         }
-        if ('*' == operand) {
-            return multiply(left, right);
+        if ("*".equals(operand)) {
+            result =  multiply(left, right);
         }
-        if ('/' == operand) {
-            return divide(left, right);
+        if ("/".equals(operand)) {
+            result =  divide(left, right);
         }
 
-        return 0;
+        unit.initialize();
+
+        return result;
     }
 
     private static int plus(int left, int right) {
