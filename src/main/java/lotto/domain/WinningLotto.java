@@ -5,21 +5,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class WinningLotto {
-    private final Set<Integer> lottoNumbers;
+    private final Lotto lotto;
 
-    public WinningLotto(Collection<Integer> lottoNumbers) {
-        this.lottoNumbers = new HashSet<>(lottoNumbers);
-        this.validate();
+    public WinningLotto(Collection<LottoNumber> lottoNumbers) {
+        this.lotto = new Lotto(lottoNumbers);
     }
 
-    private void validate() {
-        if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
-        }
+    public WinningLotto(int... numbers) {
+        this.lotto = new Lotto(numbers);
     }
 
-    public boolean contains(int lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 
+    @Override
+    public String toString() {
+        return lotto.toString();
+    }
 }

@@ -6,10 +6,11 @@ import java.util.stream.IntStream;
 
 public class LottoShop {
 
+    public static final int LOTTO_PRICE = 1000;
     public final LottoFactory lottoFactory = new LottoFactory();
 
     public List<Lotto> buy(int money) {
-        int lottoCount = money / 1000;
+        int lottoCount = money / LOTTO_PRICE;
 
         return IntStream.range(0, lottoCount)
             .mapToObj(i -> lottoFactory.createLotto())

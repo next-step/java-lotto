@@ -8,21 +8,13 @@ import java.util.stream.Collectors;
 
 public class LottoFactory {
 
-    private final List<Integer> allLottoNumbers = new ArrayList<>();
-
-    public LottoFactory() {
-        for (int i = 1; i <= 45; i++) {
-            allLottoNumbers.add(i);
-        }
-    }
-
     public Lotto createLotto() {
-        List<Integer> allLottoNumbers = new ArrayList<>(this.allLottoNumbers);
+        List<LottoNumber> allLottoNumbers = new ArrayList<>(LottoNumber.getAllNumbers());
         Collections.shuffle(allLottoNumbers);
 
-        List<Integer> lottoNumbers = allLottoNumbers
+        List<LottoNumber> lottoNumbers = allLottoNumbers
             .stream()
-            .limit(6)
+            .limit(Lotto.LOTTO_SIZE)
             .collect(Collectors.toList());
 
         return new Lotto(lottoNumbers);

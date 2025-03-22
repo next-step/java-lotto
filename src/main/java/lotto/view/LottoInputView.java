@@ -22,7 +22,7 @@ public class LottoInputView {
     }
 
     private List<Integer> toNumbers(String text) {
-        return Arrays.stream(text.split(","))
+        return Arrays.stream(text.split("[,\\s]+"))
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }

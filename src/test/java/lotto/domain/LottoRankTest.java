@@ -12,8 +12,8 @@ class LottoRankTest {
 
     @Test
     void MATCH6_일치_테스트() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 
         assertThat(LottoRank.getRank(winningLotto, lotto))
             .isEqualTo(LottoRank.MATCH_6);
@@ -21,8 +21,8 @@ class LottoRankTest {
 
     @Test
     void MATCH5_일치_테스트() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 7);
 
         assertThat(LottoRank.getRank(winningLotto, lotto))
             .isEqualTo(LottoRank.MATCH_5);
@@ -30,8 +30,8 @@ class LottoRankTest {
 
     @Test
     void MATCH4_일치_테스트() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9));
+        WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(1, 2, 3, 4, 8, 9);
 
         assertThat(LottoRank.getRank(winningLotto, lotto))
             .isEqualTo(LottoRank.MATCH_4);
@@ -39,8 +39,8 @@ class LottoRankTest {
 
     @Test
     void MATCH3_일치_테스트() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
+        WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(1, 2, 3, 10, 11, 12);
 
         assertThat(LottoRank.getRank(winningLotto, lotto))
             .isEqualTo(LottoRank.MATCH_3);
@@ -48,8 +48,8 @@ class LottoRankTest {
 
     @Test
     void NO_MATCH_테스트() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(Arrays.asList(7, 8, 9, 10, 1, 2));
+        WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(7, 8, 9, 10, 1, 2);
 
         assertThat(LottoRank.getRank(winningLotto, lotto))
             .isEqualTo(LottoRank.NO_MATCH);

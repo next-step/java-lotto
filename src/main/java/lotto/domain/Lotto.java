@@ -1,22 +1,29 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final Set<Integer> lottoNumbers;
+    public static final int LOTTO_SIZE = 6;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Collection<Integer> lottoNumbers) {
+    public Lotto(Collection<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new HashSet<>(lottoNumbers);
         this.validate();
     }
 
+    public Lotto(int... lottoNumbers) {
+        this(Arrays.stream(lottoNumbers)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList()));
+    }
+
     private void validate() {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
@@ -27,15 +34,21 @@ public class Lotto {
             .count();
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     public LottoRank getRank(WinningLotto winningLotto) {
         return LottoRank.getRank(winningLotto, this);
     }
 
     @Override
     public String toString() {
-        List<Integer> lottoNumbers
-            = new ArrayList<>(this.lottoNumbers);
-        Collections.sort(lottoNumbers);
+        List<Integer> lottoNumbers = this.lottoNumbers
+            .stream()
+            .map(LottoNumber::getNumber)
+            .sorted()
+            .collect(Collectors.toList());
         return lottoNumbers.toString();
     }
 }
