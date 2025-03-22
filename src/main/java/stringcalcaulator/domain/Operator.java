@@ -31,11 +31,6 @@ public enum Operator {
 
     private final String symbol;
 
-    public static boolean isOperator(String token) {
-        return Arrays.stream(Operator.values())
-            .anyMatch(operatorToken -> operatorToken.isMatchSymbol(token));
-    }
-
     public static Operator from(String token) {
         return Arrays.stream(Operator.values())
             .filter(operatorToken -> operatorToken.isMatchSymbol(token))
