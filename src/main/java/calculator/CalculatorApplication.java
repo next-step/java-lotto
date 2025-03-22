@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.Scanner;
-
 public class CalculatorApplication {
     private static final InputView INPUT_VIEW = new InputView();
 
