@@ -5,14 +5,8 @@ import step1.calc.operation.Operation;
 
 public class Subtraction implements Operation {
 
-    private final Operand result;
-
-    public Subtraction(Operand a, Operand b) {
-        result = new Operand(a.operand() - b.operand());
-    }
-
     @Override
-    public Operand operate() {
-        return result;
+    public Operand operate(Operand a, Operand b) {
+        return new Operand(a.operand() - b.operand());
     }
 }

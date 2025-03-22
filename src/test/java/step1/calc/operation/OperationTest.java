@@ -16,8 +16,8 @@ public class OperationTest {
         Operand aOperand = new Operand("1");
         Operand bOperand = new Operand("2");
 
-        Operation operation = new Addition(aOperand, bOperand);
-        assertThat(operation.operate().operand()).isEqualTo(3);
+        Operation operation = new Addition();
+        assertThat(operation.operate(aOperand, bOperand).operand()).isEqualTo(3);
     }
 
     @Test
@@ -25,8 +25,8 @@ public class OperationTest {
         Operand aOperand = new Operand("3");
         Operand bOperand = new Operand("2");
 
-        Operation operation = new Subtraction(aOperand, bOperand);
-        assertThat(operation.operate().operand()).isEqualTo(1);
+        Operation operation = new Subtraction();
+        assertThat(operation.operate(aOperand, bOperand).operand()).isEqualTo(1);
     }
 
     @Test
@@ -34,8 +34,8 @@ public class OperationTest {
         Operand aOperand = new Operand("3");
         Operand bOperand = new Operand("2");
 
-        Operation operation = new Multiplication(aOperand, bOperand);
-        assertThat(operation.operate().operand()).isEqualTo(6);
+        Operation operation = new Multiplication();
+        assertThat(operation.operate(aOperand, bOperand).operand()).isEqualTo(6);
     }
 
     @Test
@@ -43,8 +43,8 @@ public class OperationTest {
         Operand aOperand = new Operand("6");
         Operand bOperand = new Operand("2");
 
-        Operation operation = new Division(aOperand, bOperand);
-        assertThat(operation.operate().operand()).isEqualTo(3);
+        Operation operation = new Division();
+        assertThat(operation.operate(aOperand, bOperand).operand()).isEqualTo(3);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class OperationTest {
         Operand aOperand = new Operand("5");
         Operand bOperand = new Operand("2");
 
-        Operation operation = new Division(aOperand, bOperand);
-        assertThat(operation.operate().operand()).isEqualTo(2);
+        Operation operation = new Division();
+        assertThat(operation.operate(aOperand, bOperand).operand()).isEqualTo(2);
     }
 }

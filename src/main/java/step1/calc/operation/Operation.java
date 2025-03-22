@@ -4,5 +4,5 @@ import step1.calc.operand.Operand;
 
 public interface Operation {
 
-    Operand operate();
+    Operand operate(Operand a, Operand b);
 }

@@ -1,5 +1,6 @@
 package step1.calc.operator;
 
+import java.util.Map;
 import step1.calc.operand.Operand;
 import step1.calc.operation.Operation;
 import step1.calc.operation.addition.Addition;
@@ -9,30 +10,24 @@ import step1.calc.operation.subtraction.Subtraction;
 
 public class Operator {
 
+    private static final Map<String, Operation> OPERATION_MAP = Map.of(
+        "+", new Addition(),
+        "-", new Subtraction(),
+        "*", new Multiplication(),
+        "/", new Division()
+    );
+
     private final Operation operation;
 
-    public Operator(String operation, Operand a, Operand b) {
-        this.operation = classifyOperator(operation, a, b);
+    public Operator(String symbol) {
+        this.operation = OPERATION_MAP.get(symbol);
+        if (this.operation == null) {
+            throw new IllegalArgumentException("지원하지 않는 연산자입니다: " + symbol);
+        }
     }
 
-    private Operation classifyOperator(String operator, Operand a, Operand b) {
-        if (operator.equals("+")) {
-            return new Addition(a, b);
-        }
-        if (operator.equals("-")) {
-            return new Subtraction(a, b);
-        }
-        if (operator.equals("*")) {
-            return new Multiplication(a, b);
-        }
-        if (operator.equals("/")) {
-            return new Division(a, b);
-        }
-        throw new IllegalArgumentException("지원하지 않는 연산자입니다.");
+    public Operand operate(Operand a, Operand b) {
+        return operation.operate(a, b);
     }
-
-    public Operand operate() {
-        return operation.operate();
-    }
-
 }
+
