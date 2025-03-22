@@ -17,17 +17,13 @@ public class Operator {
         "/", new Division()
     );
 
-    private final Operation operation;
-
-    public Operator(String symbol) {
-        this.operation = OPERATION_MAP.get(symbol);
-        if (this.operation == null) {
+    public static Operation getOperation(String symbol) {
+        Operation operation = OPERATION_MAP.get(symbol);
+        if (operation == null) {
             throw new IllegalArgumentException("지원하지 않는 연산자입니다: " + symbol);
         }
+        return operation;
     }
 
-    public Operand operate(Operand a, Operand b) {
-        return operation.operate(a, b);
-    }
 }
 

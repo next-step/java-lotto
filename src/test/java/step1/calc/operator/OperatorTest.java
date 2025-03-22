@@ -8,7 +8,7 @@ public class OperatorTest {
     @Test
     void 사칙연산_기호가_아닌경우(){
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Operator("a");
+            Operator.getOperation("a");
         }).withMessage("지원하지 않는 연산자입니다: a");
 
     }
