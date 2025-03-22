@@ -18,24 +18,24 @@ public class Operand implements Token {
     }
 
     private static void validatePositive(Integer value) {
-        if (value <= 0) {
+        if (value < 0) {
             throw new IllegalArgumentException("Value cannot be negative: " + value);
         }
     }
 
-    public Integer plus(Operand b) {
+    protected Integer plus(Operand b) {
         return this.value + b.value;
     }
 
-    public Integer minus(Operand b) {
+    protected Integer minus(Operand b) {
         return this.value - b.value;
     }
 
-    public Integer multiply(Operand b) {
+    protected Integer multiply(Operand b) {
         return this.value * b.value;
     }
 
-    public Integer divide(Operand b) {
+    protected Integer divide(Operand b) {
         return this.value / b.value;
     }
 }

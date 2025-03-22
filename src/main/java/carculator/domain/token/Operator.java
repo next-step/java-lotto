@@ -5,26 +5,26 @@ import java.util.Arrays;
 public enum Operator implements Token {
     PLUS("+") {
         @Override
-        public int apply(int a, int b) {
-            return a + b;
+        public int apply(Operand a, Operand b) {
+            return a.plus(b);
         }
     },
     MINUS("-") {
         @Override
-        public int apply(int a, int b) {
-            return a - b;
+        public int apply(Operand a, Operand b) {
+            return a.minus(b);
         }
     },
     MULTIPLY("*") {
         @Override
-        public int apply(int a, int b) {
-            return a * b;
+        public int apply(Operand a, Operand b) {
+            return a.multiply(b);
         }
     },
     DIVIDE("/") {
         @Override
-        public int apply(int a, int b) {
-            return a / b;
+        public int apply(Operand a, Operand b) {
+            return a.divide(b);
         }
     };
 
@@ -34,7 +34,7 @@ public enum Operator implements Token {
         this.symbol = symbol;
     }
 
-    public abstract int apply(int a, int b);
+    public abstract int apply(Operand a, Operand b);
 
     public static Operator from(String symbol) {
         return Arrays.stream(values())
