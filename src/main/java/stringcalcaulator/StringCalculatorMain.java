@@ -1,9 +1,6 @@
 package stringcalcaulator;
 
-import java.util.Scanner;
-
 import stringcalcaulator.controller.StringCalcController;
-import stringcalcaulator.domain.StringCalculator;
 
 public class StringCalculatorMain {
 
