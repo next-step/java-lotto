@@ -3,21 +3,31 @@ package carculator.domain.token;
 import java.util.ArrayList;
 import java.util.List;
 
+import static carculator.domain.Calculator.TOKEN_STEP;
+
 public class ExpressionParser {
 
     public static List<Token> parseTokens(String expression) {
         String[] tokens = expression.split(" ");
         List<Token> result = new ArrayList<>();
 
-        for (int i = 0; i < tokens.length; i++) {
-            if (i % 2 == 0) {
-                result.add(new Operand(parseInt(tokens[i])));
-            } else {
-                result.add(Operator.from(tokens[i]));
-            }
+        for (int index = 0; index < tokens.length; index++) {
+            makeToken(index, result, tokens);
         }
 
         return result;
+    }
+
+    private static void makeToken(int index, List<Token> result, String[] tokens) {
+        if (isOperandPosition(index)) {
+            result.add(new Operand(parseInt(tokens[index])));
+            return;
+        }
+        result.add(Operator.from(tokens[index]));
+    }
+
+    private static boolean isOperandPosition(int index) {
+        return index % TOKEN_STEP == 0;
     }
 
     private static Integer parseInt(String expression) {
