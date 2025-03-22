@@ -11,11 +11,19 @@ public class ExpressionIterator implements Iterator<String> {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
 
+        if (isInvalidInput(expression)) {
+            throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
+        }
+
         this.tokenizer = new StringTokenizer(expression, " ");
     }
 
     private static boolean isBlank(String input) {
         return input == null || input.isBlank();
+    }
+
+    private static boolean isInvalidInput(String input) {
+        return !input.matches("^[0-9+\\-*/\\s]+$");
     }
 
     @Override

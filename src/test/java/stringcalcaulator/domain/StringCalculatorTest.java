@@ -67,7 +67,7 @@ public class StringCalculatorTest {
         IllegalArgumentException e = catchThrowableOfType(
             () -> calculator.calculate(input), IllegalArgumentException.class);
 
-        assertThat(e).hasMessage("숫자 또는 연산자만 입력이 가능합니다.");
+        assertThat(e).hasMessage("입력값이 올바르지 않습니다.");
     }
 
 }
