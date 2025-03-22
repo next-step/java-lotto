@@ -7,6 +7,15 @@ public class ExpressionIterator implements Iterator<String> {
     private final StringTokenizer tokenizer;
 
     public ExpressionIterator(String expression) {
+        validate(expression);
+        this.tokenizer = new StringTokenizer(expression, " ");
+    }
+
+    private static boolean isBlank(String input) {
+        return input == null || input.isBlank();
+    }
+
+    private static void validate(String expression) {
         if (isBlank(expression)) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
@@ -14,12 +23,6 @@ public class ExpressionIterator implements Iterator<String> {
         if (isInvalidInput(expression)) {
             throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
         }
-
-        this.tokenizer = new StringTokenizer(expression, " ");
-    }
-
-    private static boolean isBlank(String input) {
-        return input == null || input.isBlank();
     }
 
     private static boolean isInvalidInput(String input) {
