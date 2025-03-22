@@ -10,9 +10,10 @@ public enum LottoPrize {
     FOURTH(3, 5_000),
     NONE(0, 0);
 
+    private static final Map<Integer, LottoPrize> map = new HashMap<>();
+
     private final int matchCount;
     private final int amount;
-    private static final Map<Integer, LottoPrize> map = new HashMap<>();
 
     LottoPrize(int matchCount, int amount) {
         this.matchCount = matchCount;
