@@ -10,26 +10,45 @@ import java.util.List;
 
 public class Calculator {
 
-    InputView inputView;
-    OutputView outputView;
+    public static final int TOKEN_STEP = 2;
+
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    private Integer result;
 
     public Calculator(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
+        result = 0;
     }
 
     public void run() {
-        List<Token> tokens = inputView.getTokens();
-        Integer result = 0;
+        List<Token> tokens = parseInput();
+        printResult(calculate(tokens));
+    }
 
-        for (int i = 0; i < tokens.size() - 1; i += 2) {
-            Operand operand = (Operand) tokens.get(i);
-            Operator operator = (Operator) tokens.get(i + 1);
-
-            result += operator.apply(new Operand(result), operand);
-        }
-
+    private void printResult(Integer result) {
         outputView.printResult(result);
+    }
+
+    public Integer calculate(List<Token> tokens) {
+        for (int i = 0; i < tokens.size() - 1; i += TOKEN_STEP) {
+            this.result = calculateTokenPair(tokens, i);
+        }
+        return result;
+    }
+
+    private Integer calculateTokenPair(List<Token> tokens, int index) {
+        Operand operand = (Operand) tokens.get(index);
+        Operator operator = (Operator) tokens.get(index + 1);
+
+        this.result += operator.apply(new Operand(result), operand);
+        return result;
+    }
+
+    private List<Token> parseInput() {
+        return inputView.getTokens();
     }
 
 }

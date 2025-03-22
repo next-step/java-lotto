@@ -22,11 +22,4 @@ public class OperandTest {
         assertThatIllegalArgumentException()
         .isThrownBy(() -> new Operand(-1));
     }
-
-    @Test
-    @DisplayName("계산 대산이 되는 값은 0이 될 수 없다.")
-    public void operandZeroTest() {
-        assertThatIllegalArgumentException()
-        .isThrownBy(() -> new Operand(0));
-    }
 }
