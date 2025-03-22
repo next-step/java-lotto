@@ -1,98 +1,73 @@
 package calculator;
 
 public class OperationUnit {
-    private int left;
-    private boolean isLeftSet;
-    private String operand;
-    private boolean isOperandSet;
-    private int right;
-    private boolean isRightSet;
-
+    private Operand left;
+    private Operand right;
+    private Operator operator;
 
     public OperationUnit() {
     }
 
-    public OperationUnit(int left, String operand, int right) {
-        checkSupportedOperand(operand);
-
-        this.left = left;
-        this.operand = operand;
-        this.right = right;
-    }
-
-    private void checkSupportedOperand(String operand) {
-        String[] supportedOperands = {"+", "-", "*", "/"};
-        for (String supportedOperand : supportedOperands) {
-            if (supportedOperand.equals(operand)) {
-                return;
-            }
-        }
-
-        throw new IllegalArgumentException("지원하지 않는 연산자 입니다. 입력 연산자:" + operand);
+    public OperationUnit(Integer left, String operator, Integer right) {
+        this.left = new Operand(left);
+        this.operator = new Operator(operator);
+        this.right = new Operand(right);
     }
 
     public void add(String element) {
         // element 가 정수인 경우
-        if (isNumber(element)) {
-            addNumber(Integer.parseInt(element));
+        if (Operand.isNumber(element)) {
+            addOperand(Integer.parseInt(element));
             return;
         }
 
         // element 가 연산자인 경우
-        addOperand(element);
+        Operator.checkSupportedOperator(element);
+        addOperator(element);
     }
 
-    private void addOperand(String operand) {
-        if (isOperandSet) {
+    private void addOperand(Integer operand) {
+        if (this.left == null) {
+            this.left = new Operand(operand);
             return;
         }
 
-        checkSupportedOperand(operand);
-
-        this.operand = operand;
-        isOperandSet = true;
+        this.right = new Operand(operand);
     }
 
-    private boolean isNumber(String element) {
-        try {
-            Integer.parseInt(element);
-        } catch (NumberFormatException e) {
-            return false;
+    private void addOperator(String operator) {
+        if (this.operator == null) {
+            this.operator = new Operator(operator);
         }
-
-        return true;
-    }
-
-    public void addNumber(int number) {
-        if (isLeftSet) {
-            this.right = number;
-            this.isRightSet = true;
-            return;
-        }
-
-        this.left = number;
-        this.isLeftSet = true;
     }
 
     public boolean isCalculable() {
-        return isLeftSet && isOperandSet && isRightSet;
+        return left != null && operator != null && right != null;
+    }
+
+    public void clear() {
+        left = null;
+        operator = null;
+        right = null;
+    }
+
+    public void passPreviousResult(int result) {
+        left = new Operand(result);
+    }
+
+    public int getResult() {
+        return getLeft();
     }
 
     public int getLeft() {
-        return left;
-    }
-
-    public String getOperand() {
-        return operand;
+        return left.getValue();
     }
 
     public int getRight() {
-        return right;
+        return right.getValue();
     }
 
-    public void initialize() {
-        isLeftSet = false;
-        isOperandSet = false;
-        isRightSet = false;
+    public String getOperator() {
+        return operator.getValue();
     }
 }

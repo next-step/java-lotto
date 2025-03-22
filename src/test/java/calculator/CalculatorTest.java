@@ -10,7 +10,7 @@ class CalculatorTest {
     @DisplayName("덧셈")
     public void plus() {
         OperationUnit unit = new OperationUnit(1, "+", 2);
-        int actual = Calculator.calculate(unit);
+        int actual = Calculator.calculateOperationUnit(unit);
 
         int expected = 3;
         assertThat(actual).isEqualTo(expected);
@@ -20,7 +20,7 @@ class CalculatorTest {
     @DisplayName("뺄셈")
     public void minus() {
         OperationUnit unit = new OperationUnit(5, "-", 2);
-        int actual = Calculator.calculate(unit);
+        int actual = Calculator.calculateOperationUnit(unit);
 
         int expected = 3;
         assertThat(actual).isEqualTo(expected);
@@ -30,7 +30,7 @@ class CalculatorTest {
     @DisplayName("곱셈")
     public void multiply() {
         OperationUnit unit = new OperationUnit(3, "*", 3);
-        int actual = Calculator.calculate(unit);
+        int actual = Calculator.calculateOperationUnit(unit);
 
         int expected = 9;
         assertThat(actual).isEqualTo(expected);
@@ -40,7 +40,7 @@ class CalculatorTest {
     @DisplayName("나눗셈")
     public void divide() {
         OperationUnit unit = new OperationUnit(4, "/", 2);
-        int actual = Calculator.calculate(unit);
+        int actual = Calculator.calculateOperationUnit(unit);
 
         int expected = 2;
         assertThat(actual).isEqualTo(expected);

@@ -1,27 +1,37 @@
 package calculator;
 
 public class Calculator {
-    public static int calculate(OperationUnit unit) {
-        int left = unit.getLeft();
-        String operand = unit.getOperand();
-        int right = unit.getRight();
+    private static final String PLUS = "+";
+    private static final String MINUS = "-";
+    private static final String MULTIPLY = "*";
+    private static final String DIVIDE = "/";
 
+    public static int calculateOperationUnit(OperationUnit operationUnit) {
+        int left = operationUnit.getLeft();
+        String operator = operationUnit.getOperator();
+        int right = operationUnit.getRight();
+
+        int result = calculate(left, operator, right);
+        operationUnit.clear();
+
+        return result;
+    }
+
+    public static int calculate(int left, String operator, int right) {
         int result = 0;
 
-        if ("+".equals(operand)) {
+        if (PLUS.equals(operator)) {
             result = plus(left, right);
         }
-        if ("-".equals(operand)) {
-            result =  minus(left, right);
+        if (MINUS.equals(operator)) {
+            result = minus(left, right);
         }
-        if ("*".equals(operand)) {
-            result =  multiply(left, right);
+        if (MULTIPLY.equals(operator)) {
+            result = multiply(left, right);
         }
-        if ("/".equals(operand)) {
-            result =  divide(left, right);
+        if (DIVIDE.equals(operator)) {
+            result = divide(left, right);
         }
-
-        unit.initialize();
 
         return result;
     }
