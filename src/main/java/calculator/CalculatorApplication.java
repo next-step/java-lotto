@@ -1,5 +1,8 @@
 package calculator;
 
+import calculator.domain.OperationUnit;
+import calculator.view.InputView;
+
 public class CalculatorApplication {
     private static final InputView INPUT_VIEW = new InputView();
 
@@ -11,8 +14,7 @@ public class CalculatorApplication {
             operationUnit.add(element);
 
             if (operationUnit.isCalculable()) {
-                int result = Calculator.calculateOperationUnit(operationUnit);
-                operationUnit.passPreviousResult(result);
+                operationUnit.calculate();
             }
         }
 

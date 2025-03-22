@@ -1,21 +1,10 @@
-package calculator;
+package calculator.domain;
 
 public class Calculator {
     private static final String PLUS = "+";
     private static final String MINUS = "-";
     private static final String MULTIPLY = "*";
     private static final String DIVIDE = "/";
-
-    public static int calculateOperationUnit(OperationUnit operationUnit) {
-        int left = operationUnit.getLeft();
-        String operator = operationUnit.getOperator();
-        int right = operationUnit.getRight();
-
-        int result = calculate(left, operator, right);
-        operationUnit.clear();
-
-        return result;
-    }
 
     public static int calculate(int left, String operator, int right) {
         int result = 0;

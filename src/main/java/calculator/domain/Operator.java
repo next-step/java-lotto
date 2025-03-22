@@ -1,22 +1,25 @@
-package calculator;
+package calculator.domain;
 
 public class Operator {
     private final String value;
 
     public Operator(String input) {
-        checkSupportedOperator(input);
+        if (!isSupportedOperator(input)) {
+            throw new IllegalArgumentException("지원하지 않는 연산자 입니다. 입력 연산자:" + input);
+        }
+
         this.value = input;
     }
 
-    public static void checkSupportedOperator(String operator) {
+    public static boolean isSupportedOperator(String operator) {
         String[] supportedOperators = {"+", "-", "*", "/"};
         for (String supportedOperator : supportedOperators) {
             if (supportedOperator.equals(operator)) {
-                return;
+                return true;
             }
         }
 
-        throw new IllegalArgumentException("지원하지 않는 연산자 입니다. 입력 연산자:" + operator);
+        return false;
     }
 
     public String getValue() {
