@@ -6,12 +6,19 @@ import java.util.List;
 
 public class LottoNumberGenerator implements NumberGenerator {
 
-    public int generate(int maxNumber) {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= maxNumber; i++) {
-            numbers.add(i);
+    private static final List<Integer> BASE_NUMBERS;
+
+    static {
+        BASE_NUMBERS = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            BASE_NUMBERS.add(i);
         }
-        Collections.shuffle(numbers);
-        return numbers.get(0);
+    }
+
+    @Override
+    public int generate(int maxNumber) {
+        List<Integer> shuffledNumbers = new ArrayList<>(BASE_NUMBERS.subList(0, maxNumber));
+        Collections.shuffle(shuffledNumbers);
+        return shuffledNumbers.get(0);
     }
 }
