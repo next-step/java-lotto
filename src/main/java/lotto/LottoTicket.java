@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoTicket {
@@ -21,5 +22,17 @@ public class LottoTicket {
         return (int) other.numbers.stream()
                 .filter(this.numbers::contains)
                 .count();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numbers);
     }
 }
