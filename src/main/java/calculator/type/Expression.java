@@ -1,6 +1,5 @@
 package calculator.type;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
@@ -67,22 +66,14 @@ public class Expression {
     }
   }
 
-  public int getFirstOperand() {
-    return Integer.parseInt(splitExpression.get(0));
-  }
+  public int run() {
+    int res = Integer.parseInt(splitExpression.get(0));
 
-  public List<ExpressionUnit> toExpressionUnits() {
-
-    List<ExpressionUnit> res = new ArrayList<>();
     for (int i = 1; i < splitExpression.size() - 1; i += 2) {
-      res.add(
-          ExpressionUnit.valueOf(
-              OperatorType.fromSymbol(splitExpression.get(i)),
-              Integer.parseInt(splitExpression.get(i + 1))
-          )
-      );
+      res =  OperatorType.fromSymbol(splitExpression.get(i)).execute(res, Integer.parseInt(splitExpression.get(i + 1)));
     }
 
     return res;
   }
+
 }

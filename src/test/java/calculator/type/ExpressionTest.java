@@ -70,15 +70,9 @@ class ExpressionTest {
     );
   }
 
-  @DisplayName("중간 단위 표현식 가져오기")
+  @DisplayName("연산 수행")
   @Test
   public void testToIntermediateUnitExpression() {
-    Expression expression = Expression.valueOf("2 + 3 * 4 / 2");
-    assertThat(expression.toExpressionUnits())
-        .containsExactly(
-            ExpressionUnit.valueOf(OperatorType.ADD, 3),
-            ExpressionUnit.valueOf(OperatorType.MULTIPLY, 4),
-            ExpressionUnit.valueOf(OperatorType.DIVIDE, 2)
-        );
+    assertThat(Expression.valueOf("2 + 3 * 4 / 2").run()).isEqualTo(10);
   }
 }
