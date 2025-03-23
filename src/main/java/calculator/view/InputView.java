@@ -6,6 +6,7 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public String getInput() {
+        System.out.println("수식을 입력하세요.");
         String input = scanner.nextLine();
 
         checkNotBlank(input);

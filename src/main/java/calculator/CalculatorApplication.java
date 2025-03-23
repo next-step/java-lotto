@@ -2,9 +2,11 @@ package calculator;
 
 import calculator.domain.OperationUnit;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorApplication {
     private static final InputView INPUT_VIEW = new InputView();
+    private static final OutputView OUTPUT_VIEW = new OutputView();
 
     public static void main(String[] args) {
         String[] elements = INPUT_VIEW.getInput().split(" ");
@@ -18,7 +20,7 @@ public class CalculatorApplication {
             }
         }
 
-        System.out.println(operationUnit.getResult());
+        OUTPUT_VIEW.printOutput(operationUnit.getResult());
     }
 
 }
