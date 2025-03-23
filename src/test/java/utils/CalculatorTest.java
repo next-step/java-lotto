@@ -3,6 +3,8 @@ package utils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
@@ -36,5 +38,11 @@ public class CalculatorTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             Calculator.calculate(4, 2, "&");
         });
+    }
+
+    @Test
+    @DisplayName("문자열을 입력받았을 때 사칙연산을 진행한다.")
+    void operate() {
+        assertThat(Calculator.evaluateExpression(List.of("2", "+", "3", "*", "4", "/", "2"))).isEqualTo(10);
     }
 }
