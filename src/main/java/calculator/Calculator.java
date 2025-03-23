@@ -1,5 +1,8 @@
 package calculator;
 
+import calculator.domain.NumbersAndOperatorsGroup;
+import calculator.domain.Operator;
+
 import java.util.List;
 
 public class Calculator {
