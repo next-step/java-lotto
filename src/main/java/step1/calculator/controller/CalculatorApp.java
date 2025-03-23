@@ -64,6 +64,10 @@ public class CalculatorApp {
     }
 
     public int calculates(String[] tokens) {
+        if (tokens == null || tokens.length == 0) {
+            throw new IllegalArgumentException();
+        }
+
         int result = Integer.parseInt(tokens[0]);
         for (int i = 1; i < tokens.length; i += 2) {
             result = calculate(result, tokens[i], Integer.parseInt(tokens[i + 1]));
