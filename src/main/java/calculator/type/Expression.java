@@ -15,7 +15,7 @@ public class Expression {
       throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
     }
 
-    List<String> splitExpression = List.of(expression.trim().split(" "));
+    List<String> splitExpression = List.of(expression.split(" "));
 
     if (isNotValidFormat(splitExpression) || isNotValidElement(splitExpression)) {
       throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
@@ -29,7 +29,7 @@ public class Expression {
       return true;
     }
 
-    return expression.trim().isEmpty();
+    return expression.isEmpty();
   }
 
   private boolean isNotValidFormat(List<String> splitExpression) {
