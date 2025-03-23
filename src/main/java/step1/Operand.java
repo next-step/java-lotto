@@ -7,7 +7,7 @@ public class Operand {
         this.value = value;
     }
 
-    int getValue() {
+    public int value() {
         return this.value;
     }
 }
