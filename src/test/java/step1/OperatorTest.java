@@ -22,26 +22,46 @@ public class OperatorTest {
     }
     @Test
     void MINUS_연산자는_피연산자_2개로_빼기_연산을_한다() {
-        Operator plus = Operator.MINUS;
+        Operator minus = Operator.MINUS;
         Operand operand1 = new Operand(1);
         Operand operand2 = new Operand(1);
 
-        assertThat(plus.apply(operand1, operand2)).isEqualTo(new Operand(0));
+        assertThat(minus.apply(operand1, operand2)).isEqualTo(new Operand(0));
     }
     @Test
     void MULTIPLY_연산자는_피연산자_2개로_곱하기_연산을_한다() {
-        Operator plus = Operator.MULTIPLY;
+        Operator multiply = Operator.MULTIPLY;
         Operand operand1 = new Operand(2);
         Operand operand2 = new Operand(3);
 
-        assertThat(plus.apply(operand1, operand2)).isEqualTo(new Operand(6));
+        assertThat(multiply.apply(operand1, operand2)).isEqualTo(new Operand(6));
     }
     @Test
     void DIVIDE_연산자는_피연산자_2개로_나누기_연산을_한다() {
-        Operator plus = Operator.DIVIDE;
+        Operator divide = Operator.DIVIDE;
         Operand operand1 = new Operand(6);
         Operand operand2 = new Operand(2);
 
-        assertThat(plus.apply(operand1, operand2)).isEqualTo(new Operand(3));
+        assertThat(divide.apply(operand1, operand2)).isEqualTo(new Operand(3));
+    }
+
+    @Test
+    void 나눗셈_결과가_정수로_떨어지지_않는다면_에러() {
+        Operator divide = Operator.DIVIDE;
+        Operand operand1 = new Operand(4);
+        Operand operand2 = new Operand(3);
+
+        assertThatThrownBy(() -> divide.apply(operand1, operand2))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void 나눗셈_우항이_0이면_에러() {
+        Operator divide = Operator.DIVIDE;
+        Operand operand1 = new Operand(4);
+        Operand operand2 = new Operand(0);
+
+        assertThatThrownBy(() -> divide.apply(operand1, operand2))
+                .isInstanceOf(RuntimeException.class);
     }
 }

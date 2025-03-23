@@ -22,6 +22,12 @@ public enum Operator {
     DIVIDE('/') {
         @Override
         public Operand apply(Operand left, Operand right) {
+            if (left.value() % right.value() != 0) {
+                throw new RuntimeException("나눗셈 결과는 정수로 떨어져야 합니다.");
+            }
+            if (right.value() == 0) {
+                throw new RuntimeException("0으로 나눌 수 없습니다.");
+            }
             return new Operand(left.value() / right.value());
         }
     };
