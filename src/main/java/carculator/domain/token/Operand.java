@@ -1,5 +1,7 @@
 package carculator.domain.token;
 
+import java.util.Objects;
+
 public class Operand implements Token {
 
     private final Integer value;
@@ -23,19 +25,31 @@ public class Operand implements Token {
         }
     }
 
-    protected Integer plus(Operand b) {
-        return this.value + b.value;
+    protected Integer plus(Operand that) {
+        return this.value + that.value;
     }
 
-    protected Integer minus(Operand b) {
-        return this.value - b.value;
+    protected Integer minus(Operand that) {
+        return this.value - that.value;
     }
 
-    protected Integer multiply(Operand b) {
-        return this.value * b.value;
+    protected Integer multiply(Operand that) {
+        return this.value * that.value;
     }
 
-    protected Integer divide(Operand b) {
-        return this.value / b.value;
+    protected Integer divide(Operand that) {
+        return this.value / that.value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Operand operand = (Operand) o;
+        return Objects.equals(value, operand.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(value);
     }
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class OperandTest {
 
@@ -21,5 +22,12 @@ public class OperandTest {
     public void operandNegativeTest() {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Operand(-1));
+    }
+
+    @Test
+    @DisplayName("동일한 숫자의 Operand의 경우 동일한 값이다.")
+    public void sameOperandTest() {
+        Operand one = new Operand(1);
+        assertThat(one).isEqualTo(new Operand(1));
     }
 }
