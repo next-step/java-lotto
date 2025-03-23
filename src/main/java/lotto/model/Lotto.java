@@ -1,8 +1,6 @@
 package lotto.model;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -50,7 +48,9 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return numbers.toString();
+        List<LottoNumber> sortedList = new ArrayList<>(numbers);
+        Collections.sort(sortedList);
+        return sortedList.toString();
     }
 
     @Override
