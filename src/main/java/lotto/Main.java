@@ -9,7 +9,7 @@ import lotto.view.ResultView;
 import java.util.List;
 
 public class Main {
-    private static long run(String input) {
+    public static long run(String input) {
         List<Long> numbers = Extractor.extract_numbers(input);
         List<Operator> operators = Extractor.extract_operators(input);
         checkInputSize(numbers, operators);
