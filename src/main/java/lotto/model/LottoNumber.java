@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int LOTTO_MAX_NUMBER = 45;
     public static final int LOTTO_MIN_NUMBER = 1;
