@@ -36,7 +36,7 @@ public class ExpressionTest {
         ));
 
         Expression expression = new Expression(operands, operators);
-        assertThat(expression.evaluate()).isEqualTo(10);
+        assertThat(expression.evaluate()).isEqualTo(new Operand(10));
     }
 
 
@@ -85,8 +85,8 @@ public class ExpressionTest {
         ));
 
         Expression expression = new Expression(operands, operators);
-        assertThat(expression.evaluate()).isEqualTo(10);
-        assertThat(expression.evaluate()).isEqualTo(10);
-        assertThat(expression.evaluate()).isEqualTo(10);
+        assertThat(expression.evaluate()).isEqualTo(new Operand(10));
+        assertThat(expression.evaluate()).isEqualTo(new Operand(10));
+        assertThat(expression.evaluate()).isEqualTo(new Operand(10));
     }
 }

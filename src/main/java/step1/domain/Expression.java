@@ -23,7 +23,7 @@ public class Expression {
     }
 
 
-    public int evaluate() {
+    public Operand evaluate() {
         Queue<Operand> operands = new LinkedList<>(_operands);
         Queue<Operator> operators = new LinkedList<>(_operators);
 
@@ -42,7 +42,7 @@ public class Expression {
             throw new RuntimeException("잘못된 수식입니다.");
         }
 
-        return left.getValue();
+        return left;
     }
 
 
