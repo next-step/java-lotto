@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -11,5 +12,9 @@ public class InputView {
 
     public static int toInt(String number) {
         return Integer.parseInt(number);
+    }
+
+    public static List<String> parse(String input) {
+        return List.of(input.split(" "));
     }
 }
