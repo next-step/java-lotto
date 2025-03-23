@@ -10,7 +10,7 @@ public class StringCalculator {
   public static int run(String expression) {
     Expression calculatorExpression = Expression.valueOf(expression);
 
-    List<ExpressionUnit> expressionUnits = calculatorExpression.toIntermediateUnitExpressions();
+    List<ExpressionUnit> expressionUnits = calculatorExpression.toExpressionUnits();
 
     int res = calculatorExpression.getFirstOperand();
     for (ExpressionUnit expressionUnit : expressionUnits) {

@@ -71,7 +71,7 @@ public class Expression {
     return Integer.parseInt(splitExpression.get(0));
   }
 
-  public List<ExpressionUnit> toIntermediateUnitExpressions() {
+  public List<ExpressionUnit> toExpressionUnits() {
 
     List<ExpressionUnit> res = new ArrayList<>();
     for (int i = 1; i < splitExpression.size() - 1; i += 2) {

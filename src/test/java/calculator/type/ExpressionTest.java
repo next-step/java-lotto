@@ -74,7 +74,7 @@ class ExpressionTest {
   @Test
   public void testToIntermediateUnitExpression() {
     Expression expression = Expression.valueOf("2 + 3 * 4 / 2");
-    assertThat(expression.toIntermediateUnitExpressions())
+    assertThat(expression.toExpressionUnits())
         .containsExactly(
             ExpressionUnit.valueOf(OperatorType.ADD, 3),
             ExpressionUnit.valueOf(OperatorType.MULTIPLY, 4),
