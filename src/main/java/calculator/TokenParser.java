@@ -1,6 +1,7 @@
 package calculator;
 
-import calculator.domain.NumbersAndOperatorsGroup;
+import calculator.domain.OperandAndOperatorGroup;
+import calculator.domain.Operand;
 import calculator.domain.Operator;
 
 import java.util.ArrayList;
@@ -9,17 +10,17 @@ import java.util.List;
 public class TokenParser {
   private static final String DELIMITER = " ";
 
-  public static NumbersAndOperatorsGroup parse(String input) {
+  public static OperandAndOperatorGroup parse(String input) {
     String[] tokens = input.split(DELIMITER);
     List<Operator> operators = extractOperators(tokens);
-    List<Integer> numbers = extractNumbers(tokens);
-    return new NumbersAndOperatorsGroup(numbers, operators);
+    List<Operand> operands = extractOperands(tokens);
+    return new OperandAndOperatorGroup(operands, operators);
   }
 
-  private static List<Integer> extractNumbers(String[] tokens) {
-    List<Integer> numbers = new ArrayList<>();
+  private static List<Operand> extractOperands(String[] tokens) {
+    List<Operand> numbers = new ArrayList<>();
     for (int i = 0; i < tokens.length; i += 2) {
-      numbers.add(Integer.parseInt(tokens[i]));
+      numbers.add(Operand.fromString(tokens[i]));
     }
     return numbers;
   }

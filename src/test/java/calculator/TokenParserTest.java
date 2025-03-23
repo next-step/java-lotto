@@ -1,6 +1,7 @@
 package calculator;
 
-import calculator.domain.NumbersAndOperatorsGroup;
+import calculator.domain.Operand;
+import calculator.domain.OperandAndOperatorGroup;
 import calculator.domain.Operator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,20 +20,20 @@ class TokenParserTest {
           "'10 * 2 / 5', '10:2:5', '*:/'"
   })
   void parse_shouldSplitInputIntoNumbersAndOperators(String input, String expectedNums, String expectedOps) {
-    List<Integer> expectedNumbers = parseNumbers(expectedNums);
+    List<Operand> expectedOperands = parseOperands(expectedNums);
     List<Operator> expectedOperators = parseOperators(expectedOps);
 
-    NumbersAndOperatorsGroup result = TokenParser.parse(input);
+    OperandAndOperatorGroup result = TokenParser.parse(input);
 
-    assertThat(result.getNumbers()).isEqualTo(expectedNumbers);
+    assertThat(result.getOperands()).isEqualTo(expectedOperands);
     assertThat(result.getOperators()).isEqualTo(expectedOperators);
   }
 
-  private List<Integer> parseNumbers(String colonSeparated) {
+  private List<Operand> parseOperands(String colonSeparated) {
     if (colonSeparated.isEmpty()) return List.of();
     String[] tokens = colonSeparated.split(":");
     return java.util.Arrays.stream(tokens)
-            .map(Integer::parseInt)
+            .map(Operand::fromString)
             .collect(Collectors.toList());
   }
 

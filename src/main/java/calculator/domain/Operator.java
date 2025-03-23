@@ -30,8 +30,9 @@ public enum Operator {
     return operator;
   }
 
-  public int apply(int left, int right) {
-    return operation.applyAsInt(left, right);
+  public Operand apply(Operand left, Operand right) {
+    int result = operation.applyAsInt(left.toInt(), right.toInt());
+    return new Operand(result);
   }
 
   private static int safeDivide(int left, int right) {

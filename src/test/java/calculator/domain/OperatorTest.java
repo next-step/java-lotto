@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 class OperatorTest {
 
   @Nested
-  @DisplayName("from() 메서드는")
+  @DisplayName("fromString() 메서드는")
   class FromMethod {
 
     @Test
@@ -36,31 +36,41 @@ class OperatorTest {
     @Test
     @DisplayName("덧셈을 수행한다")
     void applyPlus() {
-      assertThat(Operator.PLUS.apply(2, 3)).isEqualTo(5);
+      Operand left = Operand.fromString("2");
+      Operand right = Operand.fromString("3");
+      assertThat(Operator.PLUS.apply(left, right)).isEqualTo(Operand.fromString("5"));
     }
 
     @Test
     @DisplayName("뺄셈을 수행한다")
     void applyMinus() {
-      assertThat(Operator.MINUS.apply(5, 2)).isEqualTo(3);
+      Operand left = Operand.fromString("5");
+      Operand right = Operand.fromString("2");
+      assertThat(Operator.MINUS.apply(left, right)).isEqualTo(Operand.fromString("3"));
     }
 
     @Test
     @DisplayName("곱셈을 수행한다")
     void applyMultiply() {
-      assertThat(Operator.MULTIPLY.apply(4, 3)).isEqualTo(12);
+      Operand left = Operand.fromString("5");
+      Operand right = Operand.fromString("2");
+      assertThat(Operator.MULTIPLY.apply(left, right)).isEqualTo(Operand.fromString("10"));
     }
 
     @Test
     @DisplayName("나눗셈을 수행한다")
     void applyDivide() {
-      assertThat(Operator.DIVIDE.apply(10, 2)).isEqualTo(5);
+      Operand left = Operand.fromString("10");
+      Operand right = Operand.fromString("2");
+      assertThat(Operator.DIVIDE.apply(left, right)).isEqualTo(Operand.fromString("5"));
     }
 
     @Test
     @DisplayName("0으로 나눌 경우 ArithmeticException 발생")
     void divideByZero() {
-      assertThatThrownBy(() -> Operator.DIVIDE.apply(10, 0))
+      Operand left = Operand.fromString("10");
+      Operand right = Operand.fromString("0");
+      assertThatThrownBy(() -> Operator.DIVIDE.apply(left, right))
               .isInstanceOf(ArithmeticException.class)
               .hasMessage("0으로 나눌 수 없습니다.");
     }

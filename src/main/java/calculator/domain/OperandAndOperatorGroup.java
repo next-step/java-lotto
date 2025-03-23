@@ -2,19 +2,19 @@ package calculator.domain;
 
 import java.util.List;
 
-public class NumbersAndOperatorsGroup {
+public class OperandAndOperatorGroup {
 
-  private final List<Integer> numbers;
+  private final List<Operand> operands;
   private final List<Operator> operators;
 
-  public NumbersAndOperatorsGroup(List<Integer> numbers, List<Operator> operators) {
-    this.numbers = numbers;
+  public OperandAndOperatorGroup(List<Operand> operands, List<Operator> operators) {
+    this.operands = operands;
     this.operators = operators;
     validate();
   }
 
-  public List<Integer> getNumbers() {
-    return numbers;
+  public List<Operand> getOperands() {
+    return operands;
   }
 
   public List<Operator> getOperators() {
@@ -22,7 +22,7 @@ public class NumbersAndOperatorsGroup {
   }
 
   private void validate() {
-    if (numbers.size() - operators.size() != 1) {
+    if (operands.size() - operators.size() != 1) {
       throw new IllegalArgumentException("숫자와 연산자의 개수가 맞지 않습니다.");
     }
   }
