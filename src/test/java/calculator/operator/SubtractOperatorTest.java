@@ -1,4 +1,4 @@
-package operator;
+package calculator.operator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +11,6 @@ public class SubtractOperatorTest {
   @Test
   void testSubtractOperator() {
     Operator operator = new SubtractOperator();
-    assertThat(operator.calculate(6, 3)).isEqualTo(18);
+    assertThat(operator.calculate(6, 3)).isEqualTo(3);
   }
 }

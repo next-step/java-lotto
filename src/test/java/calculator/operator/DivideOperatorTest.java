@@ -1,5 +1,7 @@
-package operator;
+package calculator.operator;
 
+import calculator.operator.DivideOperator;
+import calculator.operator.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
