@@ -2,12 +2,12 @@ package calculator;
 
 import java.util.List;
 
-public class ParsedExpression {
+public class NumbersAndOperatorsGroup {
 
   private final List<Integer> numbers;
   private final List<String> operators;
 
-  public ParsedExpression(List<Integer> numbers, List<String> operators) {
+  public NumbersAndOperatorsGroup(List<Integer> numbers, List<String> operators) {
     this.numbers = numbers;
     this.operators = operators;
   }

@@ -3,12 +3,12 @@ package calculator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpressionParser {
+public class TokenParser {
 
-  public static ParsedExpression parse(String[] tokens) {
+  public static NumbersAndOperatorsGroup parse(String[] tokens) {
     List<Integer> numbers = extractNumbers(tokens);
     List<String> operators = extractOperators(tokens);
-    return new ParsedExpression(numbers, operators);
+    return new NumbersAndOperatorsGroup(numbers, operators);
   }
 
   private static List<Integer> extractNumbers(String[] tokens) {

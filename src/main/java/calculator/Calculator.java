@@ -6,8 +6,8 @@ public class Calculator {
   public static int calculate(String input) {
     validate(input);
     String[] tokens = input.split(" ");
-    ParsedExpression parsedExpression = ExpressionParser.parse(tokens);
-    return evaluate(parsedExpression.getNumbers(), parsedExpression.getOperators());
+    NumbersAndOperatorsGroup numbersAndOperatorsGroup = TokenParser.parse(tokens);
+    return evaluate(numbersAndOperatorsGroup.getNumbers(), numbersAndOperatorsGroup.getOperators());
   }
 
   private static void validate(String input) {
