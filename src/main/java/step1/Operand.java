@@ -9,7 +9,19 @@ public class Operand {
         this.value = value;
     }
 
-    public int value() {
+    public Operand(String value) {
+        this.value = Integer.parseInt(value);
+    }
+
+    private void validateOperand(String value) {
+        try {
+            Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("잘못된 수식");
+        }
+    }
+
+    public int getValue() {
         return this.value;
     }
 

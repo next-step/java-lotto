@@ -1,6 +1,7 @@
 package step1;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
 public class Expression {
@@ -9,7 +10,7 @@ public class Expression {
 
     public Expression(Queue<Operand> operands, Queue<Operator> operators) {
         if (operands.isEmpty()) {
-            throw new RuntimeException("잘못된 수식입니다.");
+            throw new RuntimeException("피연산자가 없는 수식입니다.");
         }
         this._operands = operands;
         this._operators = operators;
@@ -20,7 +21,7 @@ public class Expression {
         Queue<Operator> operators = new LinkedList<>(_operators);
 
         if (operands.isEmpty()) {
-            throw new RuntimeException("잘못된 수식입니다.");
+            throw new RuntimeException("피연산자가 없는 수식입니다.");
         }
 
         Operand left = operands.poll();
@@ -34,6 +35,19 @@ public class Expression {
             throw new RuntimeException("잘못된 수식입니다.");
         }
 
-        return left.value();
+        return left.getValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expression that = (Expression) o;
+        return Objects.equals(_operands, that._operands) && Objects.equals(_operators, that._operators);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_operands, _operators);
     }
 }

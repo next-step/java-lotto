@@ -9,7 +9,7 @@ public class OperatorTest {
     @Test
     void 연산자는_정해진_기호를_가진다() {
         Operator operator = Operator.PLUS;
-        assertThat(operator.symbol()).isEqualTo('+');
+        assertThat(operator.getSymbol()).isEqualTo('+');
     }
 
     @Test
@@ -62,6 +62,12 @@ public class OperatorTest {
         Operand operand2 = new Operand(0);
 
         assertThatThrownBy(() -> divide.apply(operand1, operand2))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void 잘못된_연산자는_에러() {
+        assertThatThrownBy(() -> Operator.fromSymbol('!'))
                 .isInstanceOf(RuntimeException.class);
     }
 }
