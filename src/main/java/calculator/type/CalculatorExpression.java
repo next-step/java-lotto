@@ -23,7 +23,7 @@ public class CalculatorExpression {
       throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
     }
 
-    List<String> splitExpression =  List.of(trimmedExpression.split(" "));
+    List<String> splitExpression = List.of(trimmedExpression.split(" "));
 
     if (splitExpression.size() < 3) {
       throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
@@ -33,14 +33,14 @@ public class CalculatorExpression {
       throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
     }
 
-    for (int i = 0 ; i < splitExpression.size(); i++) {
+    for (int i = 0; i < splitExpression.size(); i++) {
       String element = splitExpression.get(i);
 
-      if (i % 2  == 0 && !isNumeric(element)) {
+      if (i % 2 == 0 && !isNumeric(element)) {
         throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
       }
 
-      if (i % 2  == 1 && !isOperatorType(element)) {
+      if (i % 2 == 1 && !isOperatorType(element)) {
         throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
       }
     }
@@ -91,5 +91,4 @@ public class CalculatorExpression {
 
     return res;
   }
-
 }

@@ -8,5 +8,4 @@ public class StringCalculatorExecutor {
   public static void main(String[] args) {
     OutputView.showResult(StringCalculator.run(InputView.showExpressionInput()));
   }
-
 }

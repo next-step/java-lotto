@@ -15,11 +15,10 @@ public class StringCalculator {
     List<IntermediateUnitExpression> intermediateUnitExpressions = calculatorExpression.toIntermediateUnitExpressions();
 
     int res = initialUnitExpression.run();
-    for (IntermediateUnitExpression intermediateUnitExpression: intermediateUnitExpressions) {
+    for (IntermediateUnitExpression intermediateUnitExpression : intermediateUnitExpressions) {
       res = intermediateUnitExpression.run(res);
     }
 
     return res;
   }
-
 }
