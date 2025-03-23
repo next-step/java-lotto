@@ -56,5 +56,13 @@ class OperatorTest {
     void applyDivide() {
       assertThat(Operator.DIVIDE.apply(10, 2)).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("0으로 나눌 경우 ArithmeticException 발생")
+    void divideByZero() {
+      assertThatThrownBy(() -> Operator.DIVIDE.apply(10, 0))
+              .isInstanceOf(ArithmeticException.class)
+              .hasMessage("0으로 나눌 수 없습니다.");
+    }
   }
 }
