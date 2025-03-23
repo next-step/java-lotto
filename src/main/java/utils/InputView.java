@@ -7,7 +7,15 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public String inputExpression() {
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        isNullOrBlank(input);
+        return input;
+    }
+
+    private static void isNullOrBlank(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException("입력값이 비어 있거나 null입니다.");
+        }
     }
 
     public static int toInt(String number) {
