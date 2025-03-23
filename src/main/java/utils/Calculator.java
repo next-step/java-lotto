@@ -15,6 +15,9 @@ public class Calculator {
             return multiply(number1, number2);
         }
 
+        if (operator.equals("/")) {
+            return divide(number1, number2);
+        }
         return 0;
     }
 
@@ -28,5 +31,9 @@ public class Calculator {
 
     public static int multiply(int number1, int number2) {
         return number1 * number2;
+    }
+
+    public static int divide(int number1, int number2) {
+        return number1 / number2;
     }
 }
