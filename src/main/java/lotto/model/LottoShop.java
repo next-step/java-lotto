@@ -22,7 +22,7 @@ public class LottoShop {
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            lottos.add(new Lotto(lottoGenerator.generate()));
+            lottos.add(lottoGenerator.generate());
         }
 
         return new LottoWallet(lottos);

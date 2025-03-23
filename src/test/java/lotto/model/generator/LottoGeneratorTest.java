@@ -3,6 +3,8 @@ package lotto.model.generator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Set;
+
+import lotto.model.Lotto;
 import org.junit.jupiter.api.Test;
 
 class LottoGeneratorTest {
@@ -12,10 +14,9 @@ class LottoGeneratorTest {
         NumberGenerator testGenerator = new NumberGeneratorTestImpl();
         LottoGenerator lottoGenerator = new LottoGenerator(testGenerator);
 
-        Set<Integer> numbers = lottoGenerator.generate();
+        Lotto lotto = lottoGenerator.generate();
 
-        assertThat(numbers).hasSize(6);
-        assertThat(numbers).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lotto).isEqualTo(new Lotto(Set.of(1,2,3,4,5,6)));
     }
 
 }

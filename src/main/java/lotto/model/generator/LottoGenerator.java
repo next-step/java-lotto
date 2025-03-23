@@ -1,5 +1,7 @@
 package lotto.model.generator;
 
+import lotto.model.Lotto;
+
 import static lotto.model.LottoNumber.LOTTO_MAX_NUMBER;
 
 import java.util.HashSet;
@@ -15,7 +17,7 @@ public class LottoGenerator {
         this.numberGenerator = generator;
     }
 
-    public Set<Integer> generate() {
+    public Lotto generate() {
         Set<Integer> uniqueNumbers = new HashSet<>();
 
         while (uniqueNumbers.size() < LOTTO_NUMBER_COUNT) {
@@ -23,7 +25,7 @@ public class LottoGenerator {
             uniqueNumbers.add(number);
         }
 
-        return uniqueNumbers;
+        return new Lotto(uniqueNumbers);
     }
 
 }
