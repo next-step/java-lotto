@@ -1,6 +1,7 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -38,14 +39,12 @@ class LottoWinningNumberTest {
 
 
     @Test
-    void 결과_판단2() {
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)), new LottoNumber(40));
-        Lotto myLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 40));
-
-        LottoPrize rank = lottoWinningNumber.getRank(myLotto);
-
-        assertThat(rank).isEqualTo(LottoPrize.SECOND);
+    void 보너스_에러() {
+        assertThatThrownBy(() -> {
+            new LottoWinningNumber(
+                    new Lotto(Set.of(1, 2, 3, 4, 5, 6)), new LottoNumber(6));
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("보너스 넘버는 당첨 번호와 일치할 수 없습니다.");
     }
 
 

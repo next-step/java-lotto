@@ -1,11 +1,8 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.model.Lotto;
-import lotto.model.LottoResult;
-import lotto.model.LottoShop;
-import lotto.model.LottoWallet;
-import lotto.model.LottoWinningNumber;
+
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,8 +18,9 @@ public class Main {
 
         String inputStr = InputView.getWinningNumbers();
         List<String> winningNumbers = List.of(inputStr.split(","));
+        int bonusNumber = InputView.getBonusNumbers();
 
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(new Lotto(winningNumbers), null);
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(new Lotto(winningNumbers), new LottoNumber(bonusNumber));
         LottoResult lottoResult = lottoWallet.calculateResult(lottoWinningNumber);
 
         OutputView.printLottoResult(lottoResult);
