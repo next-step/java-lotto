@@ -1,5 +1,7 @@
 package calculator.type;
 
+import java.util.Objects;
+
 public class InitialUnitExpression {
   private final int leftOperand;
   private final OperatorType operatorType;
@@ -17,5 +19,18 @@ public class InitialUnitExpression {
 
   public int run() {
     return operatorType.execute(leftOperand, rightOperand);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    InitialUnitExpression that = (InitialUnitExpression) o;
+    return leftOperand == that.leftOperand && rightOperand == that.rightOperand && operatorType == that.operatorType;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(leftOperand, operatorType, rightOperand);
   }
 }

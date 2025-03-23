@@ -3,13 +3,13 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-
 class StringCalculatorTest {
 
-  @DisplayName("문자에 따라 적절한 Operator를 반환한다.")
+  @DisplayName("계산기 동작 테스트")
   @Test
-  void testGetOperator() {
-
+  void testRun() {
+    assertThat(StringCalculator.run("2 + 3 * 4 / 2")).isEqualTo(10);
   }
 }

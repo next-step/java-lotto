@@ -74,7 +74,7 @@ public class CalculatorExpression {
     );
   }
 
-  public List<IntermediateUnitExpression> toIntermediateUnitExpression() {
+  public List<IntermediateUnitExpression> toIntermediateUnitExpressions() {
     if (splitExpression.size() < 3) {
       return Collections.emptyList();
     }
@@ -83,12 +83,13 @@ public class CalculatorExpression {
     for (int i = 3; i < splitExpression.size() - 1; i += 2) {
       res.add(
           IntermediateUnitExpression.valueOf(
-              OperatorType.fromSymbol(splitExpression.get(i + 1)),
-              Integer.parseInt(splitExpression.get(i))
+              OperatorType.fromSymbol(splitExpression.get(i)),
+              Integer.parseInt(splitExpression.get(i + 1))
           )
       );
     }
 
     return res;
   }
+
 }

@@ -3,7 +3,6 @@ package calculator.type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +12,7 @@ class CalculatorExpressionTest {
   @DisplayName("유효한 표현식 생성자 테스트")
   @Test
   public void constructorWithValidExpression() {
-    CalculatorExpression expression = CalculatorExpression.valueOf("3 + 5 - 2");
+    CalculatorExpression expression = CalculatorExpression.valueOf("2 + 3 * 4 / 2");
     assertNotNull(expression);
   }
 
@@ -83,7 +82,7 @@ class CalculatorExpressionTest {
   @Test
   public void testToIntermediateUnitExpression() {
     CalculatorExpression expression = CalculatorExpression.valueOf("2 + 3 * 4 / 2");
-    assertThat(expression.toIntermediateUnitExpression())
+    assertThat(expression.toIntermediateUnitExpressions())
         .containsExactly(
             IntermediateUnitExpression.valueOf(OperatorType.MULTIPLY, 4),
             IntermediateUnitExpression.valueOf(OperatorType.DIVIDE, 2)
