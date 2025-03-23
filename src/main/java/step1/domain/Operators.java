@@ -12,4 +12,12 @@ public class Operators {
     public List<Operator> getOperators() {
         return List.copyOf(operators);
     }
+
+    public int size() {
+        return operators.size();
+    }
+
+    public Operator get(int index) {
+        return operators.get(index);
+    }
 }
