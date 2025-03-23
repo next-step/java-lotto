@@ -22,4 +22,10 @@ public class CalculatorTest {
     void multiply() {
         Assertions.assertThat(Calculator.calculate(1, 2, "*")).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("/가 주어졌을 때 두 숫자에 대해 나눗셈을 진행한다.")
+    void divide() {
+        Assertions.assertThat(Calculator.calculate(4, 2, "/")).isEqualTo(2);
+    }
 }
