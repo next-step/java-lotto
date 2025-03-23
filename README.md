@@ -7,3 +7,12 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+<br/>
+
+## 구현사항
+- [x] 사칙 연산을 수행할 수 있는 계산기를 구현
+- [x] 숫자와 사칙연산 사이에는 반드시 빈 공백 문자열이 있다.
+  - [x] 입력값이 없는 경우 IllegalArgumentExceptionm을 반환한다.
+  - [x] 기호가 맞지 않는 경우에는 IllegalArgumentException 반환한다.
+- [x] 입력 값에 따라 계산 순서가 결정된다.
