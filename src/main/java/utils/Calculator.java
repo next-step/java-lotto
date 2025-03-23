@@ -1,21 +1,25 @@
 package utils;
 
 public class Calculator {
+    private static final String PLUS_SYMBOL = "+";
+    private static final String MINUS_SYMBOL = "-";
+    private static final String MULTIPLY_SYMBOL = "*";
+    private static final String DIVIDE_SYMBOL = "/";
 
     public static int calculate(int number1, int number2, String operator) {
-        if (operator.equals("+")) {
+        if (operator.equals(PLUS_SYMBOL)) {
             return sum(number1, number2);
         }
 
-        if (operator.equals("-")) {
+        if (operator.equals(MINUS_SYMBOL)) {
             return subtract(number1, number2);
         }
 
-        if (operator.equals("*")) {
+        if (operator.equals(MULTIPLY_SYMBOL)) {
             return multiply(number1, number2);
         }
 
-        if (operator.equals("/")) {
+        if (operator.equals(DIVIDE_SYMBOL)) {
             return divide(number1, number2);
         }
 
