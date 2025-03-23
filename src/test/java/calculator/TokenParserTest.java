@@ -19,10 +19,10 @@ class TokenParserTest {
           "'10 * 2 / 5', '10:2:5', '*:/'"
   })
   void parse_shouldSplitInputIntoNumbersAndOperators(String input, String expectedNums, String expectedOps) {
-    NumbersAndOperatorsGroup result = TokenParser.parse(input);
-
     List<Integer> expectedNumbers = parseNumbers(expectedNums);
     List<Operator> expectedOperators = parseOperators(expectedOps);
+
+    NumbersAndOperatorsGroup result = TokenParser.parse(input);
 
     assertThat(result.getNumbers()).isEqualTo(expectedNumbers);
     assertThat(result.getOperators()).isEqualTo(expectedOperators);

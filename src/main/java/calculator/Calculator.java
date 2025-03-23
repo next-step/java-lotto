@@ -9,7 +9,7 @@ public class Calculator {
   public static int calculate(String input) {
     validate(input);
     NumbersAndOperatorsGroup numbersAndOperatorsGroup = TokenParser.parse(input);
-    return evaluate(numbersAndOperatorsGroup.getNumbers(), numbersAndOperatorsGroup.getOperators());
+    return calculate(numbersAndOperatorsGroup.getNumbers(), numbersAndOperatorsGroup.getOperators());
   }
 
   private static void validate(String input) {
@@ -21,7 +21,7 @@ public class Calculator {
     }
   }
 
-  private static int evaluate(List<Integer> numbers, List<Operator> operators) {
+  private static int calculate(List<Integer> numbers, List<Operator> operators) {
     int result = numbers.get(0);
     for (int i = 0; i < operators.size(); i++) {
       Operator op = operators.get(i);
