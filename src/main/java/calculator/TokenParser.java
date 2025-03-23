@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TokenParser {
+  private static final String DELIMITER = " ";
 
-  public static NumbersAndOperatorsGroup parse(String[] tokens) {
+  public static NumbersAndOperatorsGroup parse(String input) {
+    String[] tokens = input.split(DELIMITER);
     List<Integer> numbers = extractNumbers(tokens);
     List<String> operators = extractOperators(tokens);
     return new NumbersAndOperatorsGroup(numbers, operators);

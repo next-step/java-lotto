@@ -5,8 +5,7 @@ import java.util.List;
 public class Calculator {
   public static int calculate(String input) {
     validate(input);
-    String[] tokens = input.split(" ");
-    NumbersAndOperatorsGroup numbersAndOperatorsGroup = TokenParser.parse(tokens);
+    NumbersAndOperatorsGroup numbersAndOperatorsGroup = TokenParser.parse(input);
     return evaluate(numbersAndOperatorsGroup.getNumbers(), numbersAndOperatorsGroup.getOperators());
   }
 
@@ -19,26 +18,12 @@ public class Calculator {
     }
   }
 
-  private static int evaluate(List<Integer> numbers, List<String> operators) {
+  private static int evaluate(List<Integer> numbers, List<Operator> operators) {
     int result = numbers.get(0);
     for (int i = 0; i < operators.size(); i++) {
-      result = calculate(result, numbers.get(i + 1), operators.get(i));
+      Operator op = operators.get(i);
+      result = op.apply(result, numbers.get(i + 1));
     }
     return result;
-  }
-
-  private static int calculate(int left, int right, String operator) {
-    switch (operator) {
-      case "+":
-        return left + right;
-      case "-":
-        return left - right;
-      case "*":
-        return left * right;
-      case "/":
-        return left / right;
-      default:
-        throw new IllegalArgumentException("잘못된 연산자입니다.");
-    }
   }
 }
