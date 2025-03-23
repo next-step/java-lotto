@@ -1,7 +1,6 @@
 package calculator.expression;
 
-public abstract class ExpressionComponent {
-
-    public abstract int operate(int left, int right);
-    public abstract int getValue();
+public interface ExpressionComponent {
+    int operate(int left, int right);
+    int getValue();
 }

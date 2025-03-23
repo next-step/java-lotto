@@ -10,21 +10,21 @@ import org.junit.jupiter.api.Test;
 public class ExpressionParserTest {
 
     @Test
-    void 입력문자열_공백_예외처리(){
+    void 입력문자열_공백_예외처리() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             ExpressionParser.parse("");
         });
     }
 
     @Test
-    void 입력문자열_null_예외처리(){
+    void 입력문자열_null_예외처리() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             ExpressionParser.parse(null);
         });
     }
 
     @Test
-    void 입력문자열_나누기(){
+    void 입력문자열_나누기() {
         List<String> token = ExpressionParser.split("2 + 13 * 4 / 2");
 
         assertThat(Objects.requireNonNull(token)).hasSize(7);
@@ -37,7 +37,7 @@ public class ExpressionParserTest {
     }
 
     @Test
-    void 입력문자열_파싱(){
+    void 입력문자열_파싱() {
         List<ExpressionComponent> parse = ExpressionParser.parse("2 + 13 * 4 / 2");
 
         assertThat(Objects.requireNonNull(parse)).hasSize(7);
