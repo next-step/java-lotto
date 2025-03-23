@@ -10,6 +10,11 @@ public class Calculator {
         if (operator.equals("-")) {
             return subtract(number1, number2);
         }
+
+        if (operator.equals("*")) {
+            return multiply(number1, number2);
+        }
+
         return 0;
     }
 
@@ -19,5 +24,9 @@ public class Calculator {
 
     public static int subtract(int number1, int number2) {
         return number1 - number2;
+    }
+
+    public static int multiply(int number1, int number2) {
+        return number1 * number2;
     }
 }
