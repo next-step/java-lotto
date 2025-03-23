@@ -46,4 +46,14 @@ public class CalculatorTest {
 
     assertThat(result).isEqualTo(5);
   }
+
+  @DisplayName("여러 연산자 테스트")
+  @Test
+  void testMultipleOperators() {
+    String input = "10 + 2 * 3 / 9 - 1";
+
+    int result = Calculator.calculate(input);
+
+    assertThat(result).isEqualTo(3);
+  }
 }
