@@ -63,7 +63,7 @@ public class CalculatorApp {
         return token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/");
     }
 
-    private int calculates(String[] tokens) {
+    public int calculates(String[] tokens) {
         int result = Integer.parseInt(tokens[0]);
         for (int i = 1; i < tokens.length; i += 2) {
             result = calculate(result, tokens[i], Integer.parseInt(tokens[i + 1]));
