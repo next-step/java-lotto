@@ -1,4 +1,4 @@
-public class OperatorFactory {
+public final class OperatorFactory {
     public static Operator createOperator(String operator) {
         switch (operator) {
             case "+":
@@ -13,4 +13,6 @@ public class OperatorFactory {
                 throw new IllegalArgumentException("Invalid operator: " + operator);
         }
     }
+
+    private OperatorFactory() {}
 }
