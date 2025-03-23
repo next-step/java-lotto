@@ -12,6 +12,8 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(
                 List.of(
                         LottoPrize.FIRST,
+                        LottoPrize.SECOND,
+                        LottoPrize.SECOND,
                         LottoPrize.THIRD,
                         LottoPrize.FOURTH,
                         LottoPrize.FIFTH,
@@ -21,7 +23,7 @@ class LottoResultTest {
         );
         int profit = lottoResult.calculateProfit();
 
-        assertThat(profit).isEqualTo(2000000000 * 1 + 1500000 * 1 + 50000 * 1 + 5000 * 2 + 0 * 1);
+        assertThat(profit).isEqualTo(2_000_000_000 * 1 + 30_000_000 * 2 + 1_500_000 * 1 + 50_000 * 1 + 5_000 * 2 + 0 * 1);
     }
 
     @Test
@@ -55,7 +57,8 @@ class LottoResultTest {
                 List.of(
                         LottoPrize.NONE,
                         LottoPrize.NONE,
-                        LottoPrize.NONE,
+                        LottoPrize.SECOND,
+                        LottoPrize.SECOND,
                         LottoPrize.NONE,
                         LottoPrize.FIRST,
                         LottoPrize.NONE,
@@ -70,10 +73,10 @@ class LottoResultTest {
                 )
         );
         assertThat(lottoResult.getPrizeCount(LottoPrize.FIRST)).isEqualTo(1);
-        assertThat(lottoResult.getPrizeCount(LottoPrize.SECOND)).isEqualTo(0);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.SECOND)).isEqualTo(2);
         assertThat(lottoResult.getPrizeCount(LottoPrize.THIRD)).isEqualTo(3);
         assertThat(lottoResult.getPrizeCount(LottoPrize.FOURTH)).isEqualTo(1);
-        assertThat(lottoResult.getPrizeCount(LottoPrize.NONE)).isEqualTo(9);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.NONE)).isEqualTo(8);
     }
 
 }
