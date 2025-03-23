@@ -43,10 +43,6 @@ public enum Operator{
                 .orElseThrow(() -> new IllegalArgumentException("지원하지 않는 연산자입니다. 입력된 연산자: " + symbol));
     }
 
-    public String getSymbol() {
-        return symbol;
-    }
-
     private boolean isSameSymbol(String symbol) {
         return this.symbol.equals(symbol);
     }
