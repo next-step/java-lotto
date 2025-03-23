@@ -10,6 +10,7 @@ public class Operand {
     }
 
     public Operand(String value) {
+        validateOperand(value);
         this.value = Integer.parseInt(value);
     }
 
@@ -17,7 +18,7 @@ public class Operand {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new RuntimeException("잘못된 수식");
+            throw new RuntimeException("피연산자는 숫자여야합니다.");
         }
     }
 
