@@ -16,4 +16,10 @@ public class CalculatorTest {
     void substract() {
         Assertions.assertThat(Calculator.calculate(1, 2, "-")).isEqualTo(-1);
     }
+
+    @Test
+    @DisplayName("*가 주어졌을 때 두 숫자에 대해 곱셈을 진행한다.")
+    void multiply() {
+        Assertions.assertThat(Calculator.calculate(1, 2, "*")).isEqualTo(2);
+    }
 }
