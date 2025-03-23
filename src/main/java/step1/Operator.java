@@ -1,10 +1,30 @@
 package step1;
 
 public enum Operator {
-    PLUS('+'),
-    MINUS('-'),
-    MULTIPLY('*'),
-    DIVIDE('/');
+    PLUS('+') {
+        @Override
+        public Operand apply(Operand left, Operand right) {
+            return new Operand(left.value() + right.value());
+        }
+    },
+    MINUS('-') {
+        @Override
+        public Operand apply(Operand left, Operand right) {
+            return new Operand(left.value() - right.value());
+        }
+    },
+    MULTIPLY('*') {
+        @Override
+        public Operand apply(Operand left, Operand right) {
+            return new Operand(left.value() * right.value());
+        }
+    },
+    DIVIDE('/') {
+        @Override
+        public Operand apply(Operand left, Operand right) {
+            return new Operand(left.value() / right.value());
+        }
+    };
 
     private final char symbol;
 
@@ -15,4 +35,6 @@ public enum Operator {
     public char symbol() {
         return this.symbol;
     }
+
+    public abstract Operand apply(Operand left, Operand right);
 }
