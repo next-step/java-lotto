@@ -4,38 +4,33 @@ import calculator.domain.OperationUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 class OperationUnitTest {
 
     @Test
-    @DisplayName("정확한 사용자 입력값을 기반으로 하나의 Operation Unit (연산단위) 를 정상적으로 생성한다.")
-    public void generate_operationUnit_basedOn_userInput() {
-        int left = 3;
-        String operator = "*";
-        int right = 7;
-
-        List<String> userInputList = List.of(String.valueOf(left), operator, String.valueOf(right));
-
+    @DisplayName("미완성된 Operation Unit (연산단위) 으로 계산을 시도하면 IllegalStateException 이 발생한다.")
+    public void calculate_with_uncompleted_OperationUnit_throwsIllegalStateException() {
         OperationUnit operationUnit = new OperationUnit();
-        for (String userInput : userInputList) {
-            operationUnit.add(userInput);
-        }
+        operationUnit.add("2");
+        operationUnit.add("*");
 
-        int actualLeft = operationUnit.getLeft();
-        String actualOperator = operationUnit.getOperator();
-        int actualRight = operationUnit.getRight();
-
-        assertThat(actualLeft).isEqualTo(left);
-        assertThat(actualOperator).isEqualTo(operator);
-        assertThat(actualRight).isEqualTo(right);
+        assertThatIllegalStateException()
+                .isThrownBy(operationUnit::calculate);
     }
 
     @Test
-    @DisplayName("생성된 Operation Unit (연산단위) 를 기반으로 정확한 계산 결과를 반환한다.")
-    public void get_result_basedOn_operationUnit() {
+    @DisplayName("완성된 Operation Unit (연산단위) 에 사용자 입력값을 추가하게 되면 IllegalStateException 이 발생한다.")
+    public void add_input_afterCompletion_throwsIllegalStateException() {
+        OperationUnit operationUnit = new OperationUnit(10, "/", 2);
+        assertThatIllegalStateException()
+                .isThrownBy(() -> operationUnit.add("3"));
+    }
+
+    @Test
+    @DisplayName("완성된 Operation Unit (연산단위) 를 기반으로 정확한 계산 결과를 반환한다.")
+    public void calculate_with_completed_OperationUnit() {
         OperationUnit operationUnit = new OperationUnit(10, "/", 2);
         operationUnit.calculate();
 

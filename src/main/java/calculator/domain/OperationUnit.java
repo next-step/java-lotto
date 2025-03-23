@@ -8,23 +8,29 @@ public class OperationUnit {
     public OperationUnit() {
     }
 
-    public OperationUnit(int left, String operator, int right) {
+    public OperationUnit(int left, String symbol, int right) {
         this.left = new Operand(left);
-        this.operator = new Operator(operator);
+        this.operator = Operator.getOperatorBySymbol(symbol);
         this.right = new Operand(right);
     }
 
     public void add(String element) {
-        // element 가 정수인 경우
-        if (Operand.isNumber(element)) {
-            addOperand(Integer.parseInt(element));
+        if (left == null) {
+            left = new Operand(element);
             return;
         }
 
-        // element 가 연산자인 경우
-        if (Operator.isSupportedOperator(element)) {
-            addOperator(element);
+        if (operator == null) {
+            operator = Operator.getOperatorBySymbol(element);
+            return;
         }
+
+        if (right == null) {
+            right = new Operand(element);
+            return;
+        }
+
+        throw new IllegalStateException("연산 단위가 이미 완성되었습니다.");
     }
 
     public boolean isCalculable() {
@@ -32,36 +38,23 @@ public class OperationUnit {
     }
 
     public void calculate() {
-        if (isCalculable()) {
-            int left = getLeft();
-            String operator = getOperator();
-            int right = getRight();
-
-            int result = Calculator.calculate(left, operator, right);
-
-            clear();
-
-            passPreviousResult(result);
+        if (!isCalculable()) {
+            throw new IllegalStateException("연산 단위가 완성되지 않았습니다.");
         }
+
+        int left = this.left.getValue();
+        int right = this.right.getValue();
+
+        int result = operator.calculate(left, right);
+        clear();
+        passPreviousResult(result);
     }
 
     public int getResult() {
-        return getLeft();
-    }
-
-    private void addOperand(Integer input) {
-        if (isNotSet(left)) {
-            left = new Operand(input);
-            return;
+        if (left == null) {
+            throw new IllegalStateException("결과값이 존재하지 않습니다.");
         }
-
-        right = new Operand(input);
-    }
-
-    private void addOperator(String input) {
-        if (isNotSet(operator)) {
-            operator = new Operator(input);
-        }
+        return left.getValue();
     }
 
     private void clear() {
@@ -70,23 +63,7 @@ public class OperationUnit {
         right = null;
     }
 
-    private boolean isNotSet(Object object) {
-        return object == null;
-    }
-
     private void passPreviousResult(int result) {
         left = new Operand(result);
-    }
-
-    public int getLeft() {
-        return left.getValue();
-    }
-
-    public int getRight() {
-        return right.getValue();
-    }
-
-    public String getOperator() {
-        return operator.getValue();
     }
 }
