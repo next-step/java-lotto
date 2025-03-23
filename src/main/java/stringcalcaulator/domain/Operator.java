@@ -1,35 +1,17 @@
 package stringcalcaulator.domain;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public enum Operator {
-    ADD("+") {
-        @Override
-        public int calculate(int left, int right) {
-            return left + right;
-        }
-    },
-    SUB("-") {
-        @Override
-        public int calculate(int left, int right) {
-            return left - right;
-        }
-    },
-    MUL("*") {
-        @Override
-        public int calculate(int left, int right) {
-            return left * right;
-        }
-    },
-    DIV("/") {
-        @Override
-        public int calculate(int left, int right) {
-            return left / right;
-        }
-    },
+    ADD("+", Integer::sum),
+    SUB("-", (left, right) -> left - right),
+    MUL("*", (left, right) -> left * right),
+    DIV("/", (left, right) -> left / right),
     ;
 
     private final String symbol;
+    private final BiFunction<Integer, Integer, Integer> operation;
 
     public static Operator from(String token) {
         return Arrays.stream(Operator.values())
@@ -42,9 +24,12 @@ public enum Operator {
         return this.symbol.equals(symbol);
     }
 
-    Operator(String symbol) {
+    Operator(String symbol, BiFunction<Integer, Integer, Integer> operation) {
         this.symbol = symbol;
+        this.operation = operation;
     }
 
-    public abstract int calculate(int left, int right);
+    public int calculate(int left, int right) {
+        return operation.apply(left, right);
+    }
 }
