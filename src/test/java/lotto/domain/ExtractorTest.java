@@ -22,4 +22,15 @@ public class ExtractorTest {
             extractor.extract_operators("1 + 2 ? 3");
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 문자열_예외() {
+        Extractor extractor = new Extractor();
+        assertThatThrownBy(() -> {
+            extractor.extract_numbers("");
+        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> {
+            extractor.extract_operators("");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

@@ -27,6 +27,9 @@ public class Extractor {
     }
 
     private List<String> split(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException();
+        }
         return Arrays.asList(input.split(delimiter));
     }
 
