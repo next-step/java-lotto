@@ -12,6 +12,7 @@ public class CalculatorApp {
 
     private static final InputView inputView = new InputView();
     private static final OutputView outputView = new OutputView();
+
     private static final AddModule addModule = new AddModule();
     private static final SubtractModule subtractModule = new SubtractModule();
     private static final MultiplyModule multiplyModule = new MultiplyModule();
@@ -39,16 +40,14 @@ public class CalculatorApp {
         if (tokens == null || tokens.length / 2 == 0) {
             throw new IllegalArgumentException();
         }
-        IntStream.range(0, tokens.length)
-            .filter(i -> i % 2 == 0)
-            .filter(i -> !isNumber(tokens[i]))
-            .findFirst()
-            .ifPresent(i -> { throw new IllegalArgumentException(); });
-        IntStream.range(0, tokens.length)
-            .filter(i -> i % 2 == 1)
-            .filter(i -> !isOperator(tokens[i]))
-            .findFirst()
-            .ifPresent(i -> { throw new IllegalArgumentException(); });
+        IntStream.range(0, tokens.length).filter(i -> i % 2 == 0).filter(i -> !isNumber(tokens[i])).findFirst()
+            .ifPresent(i -> {
+                throw new IllegalArgumentException();
+            });
+        IntStream.range(0, tokens.length).filter(i -> i % 2 == 1).filter(i -> !isOperator(tokens[i])).findFirst()
+            .ifPresent(i -> {
+                throw new IllegalArgumentException();
+            });
     }
 
     private boolean isNumber(String token) {
@@ -86,6 +85,5 @@ public class CalculatorApp {
                 throw new IllegalArgumentException();
         }
     }
-
 
 }
