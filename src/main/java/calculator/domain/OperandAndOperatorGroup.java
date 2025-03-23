@@ -8,9 +8,9 @@ public class OperandAndOperatorGroup {
   private final List<Operator> operators;
 
   public OperandAndOperatorGroup(List<Operand> operands, List<Operator> operators) {
+    validate(operands, operators);
     this.operands = operands;
     this.operators = operators;
-    validate();
   }
 
   public List<Operand> getOperands() {
@@ -21,7 +21,7 @@ public class OperandAndOperatorGroup {
     return operators;
   }
 
-  private void validate() {
+  private void validate(List<Operand> operands, List<Operator> operators) {
     if (operands.size() - operators.size() != 1) {
       throw new IllegalArgumentException("숫자와 연산자의 개수가 맞지 않습니다.");
     }
