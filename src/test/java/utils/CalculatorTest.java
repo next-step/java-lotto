@@ -10,4 +10,10 @@ public class CalculatorTest {
     void sum() {
         Assertions.assertThat(Calculator.calculate(1, 2, "+")).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("-가 주어졌을 때 두 숫자에 대해 뺄셈을 진행한다.")
+    void substract() {
+        Assertions.assertThat(Calculator.calculate(1, 2, "-")).isEqualTo(-1);
+    }
 }
