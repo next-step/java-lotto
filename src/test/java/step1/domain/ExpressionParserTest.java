@@ -1,6 +1,5 @@
-package step1;
+package step1.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -8,7 +7,7 @@ import java.util.List;
 import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static step1.Operator.*;
+import static step1.domain.Operator.*;
 
 public class ExpressionParserTest {
 

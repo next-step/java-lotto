@@ -1,4 +1,4 @@
-package step1;
+package step1.domain;
 
 import java.util.LinkedList;
 import java.util.Objects;
