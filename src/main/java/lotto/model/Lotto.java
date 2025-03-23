@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,9 +32,13 @@ public class Lotto {
     }
 
     public int getMatchCount(Lotto lotto) {
-        Set<LottoNumber> intersection = this.numbers;
+        Set<LottoNumber> intersection = new HashSet<>(this.numbers);
         intersection.retainAll(lotto.getLottoNumbers());
         return intersection.size();
+    }
+
+    public boolean hasNumber(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     private static Set<Integer> parse(List<String> lottoNumbers) {

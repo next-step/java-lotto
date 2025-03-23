@@ -22,7 +22,7 @@ public class Main {
         String inputStr = InputView.getWinningNumbers();
         List<String> winningNumbers = List.of(inputStr.split(","));
 
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(new Lotto(winningNumbers));
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(new Lotto(winningNumbers), null);
         LottoResult lottoResult = lottoWallet.calculateResult(lottoWinningNumber);
 
         OutputView.printLottoResult(lottoResult);

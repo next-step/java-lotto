@@ -31,7 +31,11 @@ public enum LottoPrize {
         return amount;
     }
 
-    public static LottoPrize valueOf(int matchCount) {
-        return map.getOrDefault(matchCount, NONE);
+    public static LottoPrize valueOf(int matchCount, boolean matchBonus) {
+        LottoPrize prize = map.getOrDefault(matchCount, NONE);
+        if (prize.equals(LottoPrize.THIRD) && matchBonus) {
+            prize = LottoPrize.SECOND;
+        }
+        return prize;
     }
 }
