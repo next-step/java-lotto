@@ -67,4 +67,25 @@ public class CalculatorTest {
       .isInstanceOf(IllegalArgumentException.class)
       .hasMessage("잘못된 연산자입니다.");
   }
+
+  @DisplayName("입력값이 null일 때 IllegalArgumentException 발생")
+  @Test
+  void testNullInput() {
+    String input = null;
+
+    assertThatThrownBy(() -> Calculator.calculate(input))
+      .isInstanceOf(IllegalArgumentException.class)
+      .hasMessage("입력값이 null입니다.");
+  }
+
+  @DisplayName("입력값이 빈 문자열일 때 IllegalArgumentException 발생")
+  @Test
+  void testEmptyInput() {
+    String input = "";
+
+    assertThatThrownBy(() -> Calculator.calculate(input))
+      .isInstanceOf(IllegalArgumentException.class)
+      .hasMessage("입력값이 빈 문자열입니다.");
+  }
+
 }
