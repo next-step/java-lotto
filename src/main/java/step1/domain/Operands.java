@@ -12,4 +12,8 @@ public class Operands {
     public List<Operand> getOperands() {
         return List.copyOf(operands);
     }
+
+    public Operand get(int index) {
+        return operands.get(index);
+    }
 }

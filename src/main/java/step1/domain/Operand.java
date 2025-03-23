@@ -15,4 +15,8 @@ public class Operand {
         }
     }
 
+    public int getOperand() {
+        return number;
+    }
+
 }
