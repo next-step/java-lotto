@@ -14,7 +14,14 @@ public class Expression {
         }
         this._operands = operands;
         this._operators = operators;
+
+        validateExpression();
     }
+
+    private void validateExpression() {
+        evaluate();
+    }
+
 
     public int evaluate() {
         Queue<Operand> operands = new LinkedList<>(_operands);
@@ -37,6 +44,7 @@ public class Expression {
 
         return left.getValue();
     }
+
 
     @Override
     public boolean equals(Object o) {

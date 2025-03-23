@@ -51,8 +51,7 @@ public class ExpressionTest {
                 PLUS
         ));
 
-        Expression expression = new Expression(operands, operators);
-        assertThatThrownBy(expression::evaluate)
+        assertThatThrownBy(() -> new Expression(operands, operators))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -67,8 +66,7 @@ public class ExpressionTest {
                 DIVIDE
         ));
 
-        Expression expression = new Expression(operands, operators);
-        assertThatThrownBy(expression::evaluate)
+        assertThatThrownBy(() -> new Expression(operands, operators))
                 .isInstanceOf(RuntimeException.class);
     }
 
