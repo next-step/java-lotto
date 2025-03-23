@@ -1,38 +1,15 @@
 package lotto;
 
-import java.util.regex.Pattern;
-
 public class TextBasedCalculator {
-    public static int calculate(String inputExpression) {
-        validate(inputExpression);
+    public static final String DELIMITER = " ";
 
-        String[] tokens = inputExpression.split(" ");
+    public static NumberToken calculate(String inputExpression) {
+        String[] tokens = inputExpression.split(DELIMITER);
 
-        int result = Integer.parseInt(tokens[0]);
+        NumberToken result = new NumberToken(tokens[0]);
         for (int i = 1; i < tokens.length; i += 2) {
-            result = applyOperator(result, tokens[i], Integer.parseInt(tokens[i + 1]));
+            result = result.operate(new NumberToken(tokens[i + 1]), new OperatorToken(tokens[i]));
         }
         return result;
-    }
-
-    private static void validate(String input) {
-        String validFormatRegex = "^-?\\d+(\\s[+\\-*/]\\s-?\\d+)*$";
-        String divideByZeroRegex = ".*\\/\\s-?0(\\s|$).*";
-
-        if (!Pattern.matches(validFormatRegex, input)) {
-            throw new IllegalArgumentException("invalid format text : " + input);
-        }
-
-        if (Pattern.matches(divideByZeroRegex, input)) {
-            throw new IllegalArgumentException("invalid format text : " + input);
-        }
-    }
-
-    private static int applyOperator(int left, String operator, int right) {
-        if (operator.equals("+")) return left + right;
-        if (operator.equals("-")) return left - right;
-        if (operator.equals("*")) return left * right;
-        if (operator.equals("/")) return left / right;
-        throw new IllegalArgumentException("unsupported operator : " + operator);
     }
 }
