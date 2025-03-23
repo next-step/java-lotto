@@ -16,7 +16,7 @@ public class CalculatorAppTest {
 
         // when
         CalculatorApp calculator = new CalculatorApp();
-        int result = calculator.calculates(input.split(" "));
+        int result = calculator.calculates(input);
 
         // then
         assertThat(result).isEqualTo(5);
@@ -30,7 +30,7 @@ public class CalculatorAppTest {
 
         // when
         CalculatorApp calculator = new CalculatorApp();
-        int result = calculator.calculates(input.split(" "));
+        int result = calculator.calculates(input);
 
         // then
         assertThat(result).isEqualTo(10);
@@ -44,7 +44,7 @@ public class CalculatorAppTest {
 
         // when
         CalculatorApp calculator = new CalculatorApp();
-        int result = calculator.calculates(input.split(" "));
+        int result = calculator.calculates(input);
 
         // then
         assertThat(result).isEqualTo(-6);
@@ -59,7 +59,7 @@ public class CalculatorAppTest {
         // when
         // then
         CalculatorApp calculator = new CalculatorApp();
-        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculates(input.split(" ")));
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculates(input));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class CalculatorAppTest {
         // when
         // then
         CalculatorApp calculator = new CalculatorApp();
-        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculates(input.split(" ")));
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculates(input));
     }
 
     @Test
@@ -83,7 +83,43 @@ public class CalculatorAppTest {
         // when
         // then
         CalculatorApp calculator = new CalculatorApp();
-        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculates(input.split(" ")));
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculates(input));
+    }
+
+    @Test
+    @DisplayName("CalculatorApp 테스트 #7 - 연산자로 끝나는 유효하지 않은 문자열")
+    void run7() {
+        // given
+        String input = "1 + 2 +";
+
+        // when
+        // then
+        CalculatorApp calculator = new CalculatorApp();
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculates(input));
+    }
+
+    @Test
+    @DisplayName("CalculatorApp 테스트 #8 - 연산자로 시작하는 유효하지 않은 문자열")
+    void run8() {
+        // given
+        String input = "+ 1 + 2";
+
+        // when
+        // then
+        CalculatorApp calculator = new CalculatorApp();
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculates(input));
+    }
+
+    @Test
+    @DisplayName("CalculatorApp 테스트 #9 - 연산자로 시작하고 연산자로 끝나는 유효하지 않은 문자열")
+    void run9() {
+        // given
+        String input = "+ 1 + 2 +";
+
+        // when
+        // then
+        CalculatorApp calculator = new CalculatorApp();
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculates(input));
     }
 
 }

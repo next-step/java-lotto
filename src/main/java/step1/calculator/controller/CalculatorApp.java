@@ -20,13 +20,7 @@ public class CalculatorApp {
 
     public void run() {
         String input = inputView.getInput();
-        validate(input);
-
-        String[] tokens = input.split(" ");
-        validate(tokens);
-
-        int result = calculates(tokens);
-
+        int result = calculates(input);
         outputView.print(result);
     }
 
@@ -37,7 +31,7 @@ public class CalculatorApp {
     }
 
     private void validate(String[] tokens) {
-        if (tokens == null || tokens.length / 2 == 0) {
+        if (tokens == null || tokens.length % 2 == 0) {
             throw new IllegalArgumentException();
         }
         IntStream.range(0, tokens.length).filter(i -> i % 2 == 0).filter(i -> !isNumber(tokens[i])).findFirst()
@@ -61,6 +55,13 @@ public class CalculatorApp {
 
     private boolean isOperator(String token) {
         return token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/");
+    }
+
+    public int calculates(String input) {
+        validate(input);
+        String[] tokens = input.split(" ");
+        validate(tokens);
+        return calculates(tokens);
     }
 
     public int calculates(String[] tokens) {
