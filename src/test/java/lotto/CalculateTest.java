@@ -16,4 +16,10 @@ public class CalculateTest {
         Calculator calculator = new Calculator();
         assertThat(calculator.subtract(1, 2)).isEqualTo(-1);
     }
+
+    @Test
+    void 곱셈() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.multiply(2, 3)).isEqualTo(6);
+    }
 }
