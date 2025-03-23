@@ -1,4 +1,4 @@
-package lotto;
+package calculator;
 
 public class CalculatorMachine {
     public static void main(String[] args) {

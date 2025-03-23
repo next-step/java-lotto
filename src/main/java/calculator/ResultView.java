@@ -1,4 +1,4 @@
-package lotto;
+package calculator;
 
 public class ResultView {
     public static void printResult(NumberToken result) {

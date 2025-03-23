@@ -1,4 +1,4 @@
-package lotto;
+package calculator;
 
 public class TextBasedCalculator {
     public static final String DELIMITER = " ";
