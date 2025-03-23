@@ -12,10 +12,10 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(
                 List.of(
                         LottoPrize.FIRST,
-                        LottoPrize.SECOND,
                         LottoPrize.THIRD,
                         LottoPrize.FOURTH,
-                        LottoPrize.FOURTH,
+                        LottoPrize.FIFTH,
+                        LottoPrize.FIFTH,
                         LottoPrize.NONE
                 )
         );
@@ -38,7 +38,7 @@ class LottoResultTest {
                         LottoPrize.NONE,
                         LottoPrize.NONE,
                         LottoPrize.NONE,
-                        LottoPrize.FOURTH,
+                        LottoPrize.FIFTH,
                         LottoPrize.NONE,
                         LottoPrize.NONE,
                         LottoPrize.NONE

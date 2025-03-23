@@ -13,10 +13,10 @@ class LottoWinningNumberTest {
     private static Stream<Arguments> prizeTestGenerator() {
         return Stream.of(
                 Arguments.of(Set.of(1, 2, 3, 4, 5, 6), LottoPrize.FIRST),
-                Arguments.of(Set.of(1, 2, 3, 4, 5, 7), LottoPrize.SECOND),
-                Arguments.of(Set.of(10, 2, 3, 4, 5, 6), LottoPrize.SECOND),
-                Arguments.of(Set.of(1, 2, 3, 4, 8, 9), LottoPrize.THIRD),
-                Arguments.of(Set.of(1, 20, 3, 10, 5, 12), LottoPrize.FOURTH),
+                Arguments.of(Set.of(1, 2, 3, 4, 5, 7), LottoPrize.THIRD),
+                Arguments.of(Set.of(10, 2, 3, 4, 5, 6), LottoPrize.THIRD),
+                Arguments.of(Set.of(1, 2, 3, 4, 8, 9), LottoPrize.FOURTH),
+                Arguments.of(Set.of(1, 20, 3, 10, 5, 12), LottoPrize.FIFTH),
                 Arguments.of(Set.of(1, 2, 13, 14, 15, 16), LottoPrize.NONE)
         );
     }

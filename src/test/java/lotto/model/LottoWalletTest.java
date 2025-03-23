@@ -26,9 +26,9 @@ class LottoWalletTest {
 
         assertThat(lottoResult).isEqualTo(new LottoResult(List.of(
                 LottoPrize.FIRST,
-                LottoPrize.SECOND,
                 LottoPrize.THIRD,
                 LottoPrize.FOURTH,
+                LottoPrize.FIFTH,
                 LottoPrize.NONE
         )));
     }
