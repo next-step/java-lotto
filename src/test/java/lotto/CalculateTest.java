@@ -10,4 +10,10 @@ public class CalculateTest {
         Calculator calculator = new Calculator();
         assertThat(calculator.add(1, 2)).isEqualTo(3);
     }
+
+    @Test
+    void 뺄셈() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.subtract(1, 2)).isEqualTo(-1);
+    }
 }
