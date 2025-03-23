@@ -1,22 +1,20 @@
 package calculator;
 
-import calculator.type.CalculatorExpression;
-import calculator.type.InitialUnitExpression;
-import calculator.type.IntermediateUnitExpression;
+import calculator.type.Expression;
+import calculator.type.ExpressionUnit;
 
 import java.util.List;
 
 public class StringCalculator {
 
   public static int run(String expression) {
-    CalculatorExpression calculatorExpression = CalculatorExpression.valueOf(expression);
+    Expression calculatorExpression = Expression.valueOf(expression);
 
-    InitialUnitExpression initialUnitExpression = calculatorExpression.toInitialUnitExpression();
-    List<IntermediateUnitExpression> intermediateUnitExpressions = calculatorExpression.toIntermediateUnitExpressions();
+    List<ExpressionUnit> expressionUnits = calculatorExpression.toIntermediateUnitExpressions();
 
-    int res = initialUnitExpression.run();
-    for (IntermediateUnitExpression intermediateUnitExpression : intermediateUnitExpressions) {
-      res = intermediateUnitExpression.run(res);
+    int res = calculatorExpression.getFirstOperand();
+    for (ExpressionUnit expressionUnit : expressionUnits) {
+      res = expressionUnit.run(res);
     }
 
     return res;

@@ -2,15 +2,16 @@ package calculator.type;
 
 import java.util.Objects;
 
-public class IntermediateUnitExpression {
+public class ExpressionUnit {
+
   private final OperatorType operatorType;
   private final int rightOperand;
 
-  public static IntermediateUnitExpression valueOf(OperatorType operatorType, int rightOperand) {
-    return new IntermediateUnitExpression(operatorType, rightOperand);
+  public static ExpressionUnit valueOf(OperatorType operatorType, int rightOperand) {
+    return new ExpressionUnit(operatorType, rightOperand);
   }
 
-  private IntermediateUnitExpression(OperatorType operatorType, int rightOperand) {
+  private ExpressionUnit(OperatorType operatorType, int rightOperand) {
     this.operatorType = operatorType;
     this.rightOperand = rightOperand;
   }
@@ -23,7 +24,7 @@ public class IntermediateUnitExpression {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    IntermediateUnitExpression that = (IntermediateUnitExpression) o;
+    ExpressionUnit that = (ExpressionUnit) o;
     return rightOperand == that.rightOperand && operatorType == that.operatorType;
   }
 

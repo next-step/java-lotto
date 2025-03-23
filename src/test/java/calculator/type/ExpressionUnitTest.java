@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-class InitialUnitExpressionTest {
+class ExpressionUnitTest {
 
   @DisplayName("생성자 테스트")
   @Test
   public void testConstructor1() {
-    assertDoesNotThrow(() -> InitialUnitExpression.valueOf(2, OperatorType.ADD, 3));
+    assertDoesNotThrow(() -> ExpressionUnit.valueOf(OperatorType.ADD, 3));
   }
 }

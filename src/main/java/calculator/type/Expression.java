@@ -1,18 +1,17 @@
 package calculator.type;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class CalculatorExpression {
+public class Expression {
 
   List<String> splitExpression;
 
-  public static CalculatorExpression valueOf(String expression) {
-    return new CalculatorExpression(expression);
+  public static Expression valueOf(String expression) {
+    return new Expression(expression);
   }
 
-  private CalculatorExpression(String expression) {
+  private Expression(String expression) {
     if (isExpressionNullOrEmpty(expression)) {
       throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
     }
@@ -68,23 +67,16 @@ public class CalculatorExpression {
     }
   }
 
-  public InitialUnitExpression toInitialUnitExpression() {
-    return InitialUnitExpression.valueOf(
-        Integer.parseInt(splitExpression.get(0)),
-        OperatorType.fromSymbol(splitExpression.get(1)),
-        Integer.parseInt(splitExpression.get(2))
-    );
+  public int getFirstOperand() {
+    return Integer.parseInt(splitExpression.get(0));
   }
 
-  public List<IntermediateUnitExpression> toIntermediateUnitExpressions() {
-    if (splitExpression.size() < 3) {
-      return Collections.emptyList();
-    }
+  public List<ExpressionUnit> toIntermediateUnitExpressions() {
 
-    List<IntermediateUnitExpression> res = new ArrayList<>();
-    for (int i = 3; i < splitExpression.size() - 1; i += 2) {
+    List<ExpressionUnit> res = new ArrayList<>();
+    for (int i = 1; i < splitExpression.size() - 1; i += 2) {
       res.add(
-          IntermediateUnitExpression.valueOf(
+          ExpressionUnit.valueOf(
               OperatorType.fromSymbol(splitExpression.get(i)),
               Integer.parseInt(splitExpression.get(i + 1))
           )
