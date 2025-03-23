@@ -8,29 +8,25 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class CalculatorTest {
     @Test
     void 덧셈() {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.add(1, 2)).isEqualTo(3);
+        assertThat(Calculator.run(1, 2, Operator.PLUS)).isEqualTo(3);
     }
 
     @Test
     void 뺄셈() {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.subtract(1, 2)).isEqualTo(-1);
+        assertThat(Calculator.run(1, 2, Operator.MINUS)).isEqualTo(-1);
     }
 
     @Test
     void 곱셈() {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.multiply(2, 3)).isEqualTo(6);
+        assertThat(Calculator.run(2, 3, Operator.MULTIPLY)).isEqualTo(6);
     }
 
     @Test
     void 나눗셈() {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.divide(4, 2)).isEqualTo(2);
+        assertThat(Calculator.run(4, 2,  Operator.DIVIDE)).isEqualTo(2);
 
         assertThatThrownBy(() ->
-                calculator.divide(2, 3)
+                Calculator.run(2, 3, Operator.DIVIDE)
         ).isInstanceOf(ArithmeticException.class);
     }
 }
