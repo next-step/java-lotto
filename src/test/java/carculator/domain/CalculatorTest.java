@@ -1,6 +1,6 @@
 package carculator.domain;
 
-import carculator.domain.token.ExpressionParser;
+import carculator.view.ExpressionParser;
 import carculator.view.fake.FakeInputView;
 import carculator.view.output.OutputView;
 import org.junit.jupiter.api.DisplayName;
