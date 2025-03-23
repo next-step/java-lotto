@@ -14,4 +14,4 @@
 - [x] 곱셈 기호가 있을 시 기호 앞의 숫자와 뒤의 숫자를 곱셈한다.
 - [x] 나눗셈 기호가 있을 시 기호 앞의 숫자와 뒤의 숫자를 나눗셈한다.
 - [ ] 입력 값이 null이거나 빈 공백 문자열일 경우 IllegalArgumentException을 던진다.
-- [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException을 던진다.
+- [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException을 던진다.

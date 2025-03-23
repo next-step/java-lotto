@@ -18,7 +18,8 @@ public class Calculator {
         if (operator.equals("/")) {
             return divide(number1, number2);
         }
-        return 0;
+
+        throw new IllegalArgumentException("지원하지 않는 연산자입니다.");
     }
 
     public static int sum(int number1, int number2) {
