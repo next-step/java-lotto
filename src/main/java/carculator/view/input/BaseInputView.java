@@ -1,6 +1,6 @@
 package carculator.view.input;
 
-import carculator.domain.token.ExpressionParser;
+import carculator.view.ExpressionParser;
 import carculator.domain.token.Token;
 
 import java.util.List;
