@@ -12,4 +12,12 @@ public class CalculatorApp {
 
     }
 
+    public void run() {
+        String input = inputView.getInput();
+
+        int result = -1;
+
+        outputView.print(result);
+    }
+
 }
