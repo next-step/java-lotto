@@ -1,13 +1,15 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.function.IntBinaryOperator;
+import java.util.stream.Collectors;
 
 public enum Operator {
   PLUS("+", (a, b) -> a + b),
   MINUS("-", (a, b) -> a - b),
   MULTIPLY("*", (a, b) -> a * b),
-  DIVIDE("/", (a, b) -> safeDivide(a, b));
+  DIVIDE("/", Operator::safeDivide);
 
   private final String symbol;
   private final IntBinaryOperator operation;
@@ -17,11 +19,15 @@ public enum Operator {
     this.operation = operation;
   }
 
+  private static final Map<String, Operator> SYMBOL_MAP = Arrays.stream(values())
+          .collect(Collectors.toMap(op -> op.symbol, op -> op));
+
   public static Operator from(String symbol) {
-    return Arrays.stream(values())
-            .filter(op -> op.symbol.equals(symbol))
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("잘못된 연산자입니다."));
+    Operator operator = SYMBOL_MAP.get(symbol);
+    if (operator == null) {
+      throw new IllegalArgumentException("잘못된 연산자입니다: " + symbol);
+    }
+    return operator;
   }
 
   public int apply(int left, int right) {

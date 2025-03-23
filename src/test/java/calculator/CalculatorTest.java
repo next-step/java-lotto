@@ -65,7 +65,7 @@ public class CalculatorTest {
 
     assertThatThrownBy(() -> Calculator.calculate(input))
       .isInstanceOf(IllegalArgumentException.class)
-      .hasMessage("잘못된 연산자입니다.");
+      .hasMessage("잘못된 연산자입니다: %");
   }
 
   @DisplayName("입력값이 null일 때 IllegalArgumentException 발생")
@@ -88,4 +88,33 @@ public class CalculatorTest {
       .hasMessage("입력값이 빈 문자열입니다.");
   }
 
+  @DisplayName("연산자 개수 + 1 = 숫자 개수 테스트")
+  @Test
+  void testInvalidInput() {
+    String input = "10 + 2 * 3 / 9 -";
+
+    assertThatThrownBy(() -> Calculator.calculate(input))
+      .isInstanceOf(IllegalArgumentException.class)
+      .hasMessage("숫자와 연산자의 개수가 맞지 않습니다.");
+  }
+
+  @DisplayName("숫자가 연속되서 나오는 경우 테스트")
+  @Test
+  void testInvalidInput2() {
+    String input = "10 2 * 3 / 9 - 1";
+
+    assertThatThrownBy(() -> Calculator.calculate(input))
+      .isInstanceOf(IllegalArgumentException.class)
+      .hasMessage("잘못된 연산자입니다: 2");
+  }
+
+  @DisplayName("연산자가 연속되서 나오는 경우 테스트")
+  @Test
+  void testInvalidInput3() {
+    String input = "10 + 2 * 3 / 9 - + 1";
+
+    assertThatThrownBy(() -> Calculator.calculate(input))
+      .isInstanceOf(IllegalArgumentException.class)
+      .hasMessage("잘못된 연산자입니다: 1");
+  }
 }

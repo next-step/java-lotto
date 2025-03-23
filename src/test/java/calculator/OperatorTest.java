@@ -25,7 +25,7 @@ class OperatorTest {
     void throwExceptionForInvalidSymbol() {
       assertThatIllegalArgumentException()
               .isThrownBy(() -> Operator.from("%"))
-              .withMessage("잘못된 연산자입니다.");
+              .withMessage("잘못된 연산자입니다: %");
     }
   }
 

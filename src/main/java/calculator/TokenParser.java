@@ -8,8 +8,8 @@ public class TokenParser {
 
   public static NumbersAndOperatorsGroup parse(String input) {
     String[] tokens = input.split(DELIMITER);
+    List<Operator> operators = extractOperators(tokens);
     List<Integer> numbers = extractNumbers(tokens);
-    List<String> operators = extractOperators(tokens);
     return new NumbersAndOperatorsGroup(numbers, operators);
   }
 
@@ -21,10 +21,10 @@ public class TokenParser {
     return numbers;
   }
 
-  private static List<String> extractOperators(String[] tokens) {
-    List<String> operators = new ArrayList<>();
+  private static List<Operator> extractOperators(String[] tokens) {
+    List<Operator> operators = new ArrayList<>();
     for (int i = 1; i < tokens.length; i += 2) {
-      operators.add(tokens[i]);
+      operators.add(Operator.from(tokens[i]));
     }
     return operators;
   }

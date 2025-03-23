@@ -1,16 +1,16 @@
 package calculator;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class NumbersAndOperatorsGroup {
 
   private final List<Integer> numbers;
   private final List<Operator> operators;
 
-  public NumbersAndOperatorsGroup(List<Integer> numbers, List<String> operators) {
+  public NumbersAndOperatorsGroup(List<Integer> numbers, List<Operator> operators) {
     this.numbers = numbers;
-    this.operators = operators.stream().map(Operator::from).collect(Collectors.toList());
+    this.operators = operators;
+    validate();
   }
 
   public List<Integer> getNumbers() {
@@ -19,5 +19,11 @@ public class NumbersAndOperatorsGroup {
 
   public List<Operator> getOperators() {
     return operators;
+  }
+
+  private void validate() {
+    if (numbers.size() - operators.size() != 1) {
+      throw new IllegalArgumentException("숫자와 연산자의 개수가 맞지 않습니다.");
+    }
   }
 }
