@@ -53,6 +53,24 @@ class CalculatorExpressionTest {
     );
   }
 
+  @DisplayName("유효하지 않은 표현식 생성자 테스트 (빈값)")
+  @Test
+  public void constructorWithInValidExpressionFormat5() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> CalculatorExpression.valueOf("")
+    );
+  }
+
+  @DisplayName("유효하지 않은 표현식 생성자 테스트 (null인 경우)")
+  @Test
+  public void constructorWithInValidExpressionFormat6() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> CalculatorExpression.valueOf(null)
+    );
+  }
+
   @DisplayName("맨 처음 단위 표현식 가져오기")
   @Test
   public void testToInitialUnitExpression() {

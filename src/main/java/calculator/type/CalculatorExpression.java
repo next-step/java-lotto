@@ -13,7 +13,17 @@ public class CalculatorExpression {
   }
 
   private CalculatorExpression(String expression) {
-    List<String> splitExpression =  List.of(expression.split(" "));
+    if (expression == null) {
+      throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
+    }
+
+    String trimmedExpression = expression.trim();
+
+    if (trimmedExpression.isEmpty()) {
+      throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
+    }
+
+    List<String> splitExpression =  List.of(trimmedExpression.split(" "));
 
     if (splitExpression.size() < 3) {
       throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
