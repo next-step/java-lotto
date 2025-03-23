@@ -1,5 +1,7 @@
 package step1.calculator.model;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +9,7 @@ public class AddModuleTest {
 
     @Test
     @DisplayName("Add(+) 테스트")
-    void given_two_integers_when_add_then_return_sum() {
+    void givenTwoIntegers_whenAdd_thenReturnSum() {
         // given
         int a = 1;
         int b = 2;
@@ -17,7 +19,7 @@ public class AddModuleTest {
         int result = addModule.calculate(a, b);
 
         // then
-        assert result == 3;
+        assertThat(result).isEqualTo(3);
     }
 
 }
