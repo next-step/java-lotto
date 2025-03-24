@@ -16,5 +16,4 @@ class LottoNumGeneratorTest {
     LottoNumGenerator lottoNumGenerator = candidates -> candidates;
     assertThat(lottoNumGenerator.generate()).isEqualTo(new LottoNumList(List.of(1, 2, 3, 4, 5, 6)));
   }
-
 }

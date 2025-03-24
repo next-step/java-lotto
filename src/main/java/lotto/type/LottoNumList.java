@@ -11,14 +11,14 @@ public class LottoNumList {
   private final List<Integer> nums;
 
   public LottoNumList(List<Integer> nums) {
-    if (new HashSet<>(nums).size() !=  LottoProperty.LOTTO_NUM_SIZE){
+    if (new HashSet<>(nums).size() != LottoProperty.LOTTO_NUM_SIZE) {
       throw new IllegalArgumentException("유효하지 않은 숫자 수입니다.");
     }
     this.nums = nums;
   }
 
   public int getMatchCount(List<Integer> winningNums) {
-    if (new HashSet<>(winningNums).size() !=  LottoProperty.LOTTO_NUM_SIZE) {
+    if (new HashSet<>(winningNums).size() != LottoProperty.LOTTO_NUM_SIZE) {
       throw new IllegalArgumentException("당첨 번호가 유효하지 않은 숫자 수입니다.");
     }
     return (int) nums.stream()

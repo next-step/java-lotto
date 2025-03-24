@@ -26,9 +26,9 @@ class LottoNumListTest {
     assertAll(
         () -> assertThat(lottoNumList.getMatchCount(List.of(1, 2, 3, 4, 5, 6)))
             .isEqualTo(6),
-        () -> assertThat(lottoNumList.getMatchCount(List.of(7, 8, 9, 10 ,11, 12)))
+        () -> assertThat(lottoNumList.getMatchCount(List.of(7, 8, 9, 10, 11, 12)))
             .isEqualTo(0),
-        () ->  assertThrows(RuntimeException.class, () -> lottoNumList.getMatchCount(List.of(7, 8, 9, 10)))
+        () -> assertThrows(RuntimeException.class, () -> lottoNumList.getMatchCount(List.of(7, 8, 9, 10)))
     );
   }
 }
