@@ -12,9 +12,9 @@
 ## TODO
 ### 1단계 - 문자열 계산기
 - [X] 사용자로부터 입력값 받기 
-  - [ ] 숫자와 사칙연산 사이에는 빈 공백 문자열
-  - [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
-  - [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+  - [X] 숫자와 사칙연산 사이에는 빈 공백 문자열
+  - [X] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+  - [X] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
 - [ ] 덧셈
 - [ ] 뺄셈
 - [ ] 곱셈
