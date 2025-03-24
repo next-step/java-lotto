@@ -9,7 +9,9 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers.stream()
+                .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
+                .collect(Collectors.toList());
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
