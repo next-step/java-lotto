@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumbers {
     protected static final List<Integer> LOTTO_NUMBERS = initNumbers();
@@ -11,11 +13,9 @@ public class LottoNumbers {
     }
 
     private static List<Integer> initNumbers() {
-        List<Integer> nums = new ArrayList<>();
-        for (int i = 0; i < 45; i++) {
-            nums.add(i + 1);
-        }
-        return nums;
+        return IntStream.rangeClosed(1, 45)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     public static List<Integer> shuffleLottoNumbers() {
