@@ -12,4 +12,10 @@ public class PurchaseAmountTest {
         PurchaseAmount amount = new PurchaseAmount(14000);
         assertThat(amount.countOfLotto()).isEqualTo(14);
     }
+
+    @Test
+    @DisplayName("구입 금액이 1000원보다 작을 때 IllegalArgumentException을 던진다.")
+    void 로또_금액_1000이하() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new PurchaseAmount(900));
+    }
 }
