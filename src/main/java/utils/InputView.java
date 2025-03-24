@@ -8,4 +8,8 @@ public class InputView {
     public String inputExpression() {
         return scanner.nextLine();
     }
+
+    public static String inputPurchaseAmount() {
+        return scanner.nextLine();
+    }
 }
