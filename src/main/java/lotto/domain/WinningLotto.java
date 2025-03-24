@@ -26,9 +26,4 @@ public class WinningLotto {
             .max(Comparator.comparing(LottoRank::getPrize))
             .orElseThrow();
     }
-
-    @Override
-    public String toString() {
-        return lotto.toString();
-    }
 }
