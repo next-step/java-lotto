@@ -1,4 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,5 +20,21 @@ public class CalculatorInputTest {
         String input = "2 + 3 * 4 / 2";
         CalculatorInput calculatorInput = new CalculatorInput(input);
         assertThat(calculatorInput.getTokens()).containsExactly("2", "+", "3", "*", "4", "/", "2");
+    }
+
+    @Test
+    @DisplayName("입력값이 null이거나 빈 문자열일 경우 예외 발생")
+    void throwsExceptionWhenInputIsNull() {
+        assertThatThrownBy(() -> new CalculatorInput(null))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("입력값은 null이거나 빈 문자열일 수 없습니다.");
+
+        assertThatThrownBy(() -> new CalculatorInput(""))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("입력값은 null이거나 빈 문자열일 수 없습니다.");
+
+        assertThatThrownBy(() -> new CalculatorInput("   "))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("입력값은 null이거나 빈 문자열일 수 없습니다.");
     }
 }
