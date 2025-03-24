@@ -38,4 +38,10 @@ public class Lotto {
     public int hashCode() {
         return Objects.hashCode(numbers);
     }
+
+    public int getMatchNum(Lotto other) {
+        return (int) numbers.stream()
+                .filter(other.numbers::contains)
+                .count();
+    }
 }

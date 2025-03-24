@@ -6,23 +6,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.util.Price.LOTTO_PRICE;
+
 public class Generator {
-    private final int LOTTO_PRICE = 1000;
-    private final List<Integer> numbers = IntStream.rangeClosed(1, 45)
+    private final List<Integer> NUMBERS = IntStream.rangeClosed(1, 45)
             .boxed()
             .collect(Collectors.toList());
 
-    public List<Lotto> run(int inputPrice) {
+    public Lottos run(int inputPrice) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < inputPrice / LOTTO_PRICE; i++) {
             lottos.add(makeLotto());
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public Lotto makeLotto() {
-        Collections.shuffle(numbers);
-        return new Lotto(numbers.subList(0, 6)
+        Collections.shuffle(NUMBERS);
+        return new Lotto(NUMBERS.subList(0, 6)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList()));
