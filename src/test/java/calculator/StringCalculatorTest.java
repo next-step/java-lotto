@@ -1,5 +1,5 @@
-import calculator.StringCalculator;
-import calculator.UserInput;
+package calculator;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
