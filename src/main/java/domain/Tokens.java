@@ -25,10 +25,6 @@ public class Tokens {
         return tokens.size();
     }
 
-    public void addToken(String token) {
-        tokens.add(token);
-    }
-
     private String[] splitTokens(String tokenString) {
         return tokenString.split(" ");
     }

@@ -63,3 +63,23 @@
 - 둘의 형태가 동일하므로 제너릭으로 묶음
 ### 계산식에서 연산자와 피연산자 분리
 - 연산자와 피연산자가 올바른 순서로 배치되어 있는지 검증할 책임은 누구에게 있는가? -> Calculation
+### while - try 문 분리하기
+```java
+private static Calculation createCalculationWithQuery(String query) {
+    Calculation calculation = null;
+    while (calculation == null) {
+        String formula = InputView.inputExpression(query);
+        calculation = getCalculation(formula);
+    }
+    return calculation;
+}
+
+private static Calculation getCalculation(String formula) {
+    try {
+        return parseFormula(formula);
+    } catch (IllegalArgumentException e) {
+        ResultView.printMessage("올바른 수식이 아닙니다.");
+    }
+    return null;
+}
+```

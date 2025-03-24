@@ -12,11 +12,6 @@ public class SymbolSequence<T> {
         this.currIndex = 0;
     }
 
-    public SymbolSequence(List<T> symbols) {
-        this.symbols = symbols;
-        this.currIndex = 0;
-    }
-
     public void add(T operand) {
         this.symbols.add(operand);
     }
