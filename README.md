@@ -7,3 +7,11 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## To-Do
+### 1단계
+- [ ] 기본 기능 구현
+  - [x] 덧셈 구현
+  - [ ] 뺄셈 구현
+  - [ ] 곱셈 구현
+  - [ ] 나눗셈 구현

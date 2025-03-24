@@ -8,9 +8,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class CalculatorTest {
 
     @DisplayName("덧셈 테스트")
-    @CsvSource({"1 + 2, 3", "2 + 3, 5", "-1 + 2, 1"})
+    @CsvSource({"1 + 2, 3", "2 + 3, 5", "-1 + 2, 1", "1 + 3 + 5, 9", "1 + 2 + 3 + 4, 10"})
     @ParameterizedTest
-    void calculate(String string, Integer expected) {
+    void calculateAdd(String string, Integer expected) {
         // When
         int result = Calculator.calculate(string);
 
