@@ -13,10 +13,10 @@ import lotto.domain.Money;
 
 public class LottoResultView {
 
-    public void printPurchaseLotto(List<Lotto> lottos) {
+    public void printPurchaseLotto(List<LottoResult> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
+        for (LottoResult lotto : lottos) {
+            System.out.println(lotto.display());
         }
         System.out.println();
     }
@@ -36,7 +36,7 @@ public class LottoResultView {
 
     private void printRankStat(Map<LottoRank, Integer> statistics, LottoRank rank) {
         System.out.println(
-            rank.getMatchCount() + "개 일치 (" + rank.getPrize() + "원)- " + statistics.getOrDefault(rank, 0) + "개");
+            rank.getMatchCount() + "개 일치 (" + rank.getPrize().getValue()+ "원)- " + statistics.getOrDefault(rank, 0) + "개");
     }
 
     public void printRoi(BigDecimal roi) {

@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +17,14 @@ public class WinningLotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
+    }
+
+
+    public LottoRank getRank(Lotto lotto) {
+        return Arrays.stream(LottoRank.values())
+            .filter(rank -> rank.match(this, lotto))
+            .max(Comparator.comparing(LottoRank::getPrize))
+            .orElseThrow();
     }
 
     @Override

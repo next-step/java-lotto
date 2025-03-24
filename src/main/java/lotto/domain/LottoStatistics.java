@@ -11,7 +11,7 @@ public class LottoStatistics {
 
     public LottoStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            LottoRank rank = lotto.getRank(winningLotto);
+            LottoRank rank = winningLotto.getRank(lotto);
             statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
         }
     }

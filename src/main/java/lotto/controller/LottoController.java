@@ -11,6 +11,7 @@ import lotto.domain.LottoStatistics;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoInputView;
+import lotto.view.LottoResult;
 import lotto.view.LottoResultView;
 
 public class LottoController {
@@ -24,7 +25,7 @@ public class LottoController {
         LottoShop lottoShop = new LottoShop();
         LottoPurchase lottoPurchase = lottoShop.purchase(money);
 
-        resultView.printPurchaseLotto(lottoPurchase.getLottos());
+        resultView.printPurchaseLotto(LottoResult.from(lottoPurchase.getLottos()));
 
         WinningLotto winningLotto = new WinningLotto(inputView.getWinningLotto());
 

@@ -51,9 +51,4 @@ public class Money implements Comparable<Money> {
     public int compareTo(Money o) {
         return Integer.compare(value, o.value);
     }
-
-    @Override
-    public String toString() {
-        return this.value + "";
-    }
 }

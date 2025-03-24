@@ -1,18 +1,21 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
+
+import lotto.view.LottoResult;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
-    private final Set<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(Collection<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new HashSet<>(lottoNumbers);
+        this.lottoNumbers = lottoNumbers
+            .stream()
+            .distinct()
+            .sorted()
+            .collect(Collectors.toList());
         this.validate();
     }
 
@@ -32,17 +35,12 @@ public class Lotto {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public LottoRank getRank(WinningLotto winningLotto) {
-        return LottoRank.getRank(winningLotto, this);
-    }
-
-    @Override
-    public String toString() {
-        List<Integer> lottoNumbers = this.lottoNumbers
+    public LottoResult toResult() {
+        List<Integer> numbers = this.lottoNumbers
             .stream()
             .map(LottoNumber::getNumber)
-            .sorted()
             .collect(Collectors.toList());
-        return lottoNumbers.toString();
+        return new LottoResult(numbers);
     }
+
 }

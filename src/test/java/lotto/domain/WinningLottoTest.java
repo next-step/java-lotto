@@ -4,17 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class LottoRankTest {
+class WinningLottoTest {
 
     @Test
     void MATCH6_일치_테스트() {
-        ;
         WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = LottoFactory.createManual(asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(LottoRank.getRank(winningLotto, lotto))
+        assertThat(winningLotto.getRank(lotto))
             .isEqualTo(LottoRank.MATCH_6);
     }
 
@@ -23,7 +21,7 @@ class LottoRankTest {
         WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = LottoFactory.createManual(asList(1, 2, 3, 4, 5, 7));
 
-        assertThat(LottoRank.getRank(winningLotto, lotto))
+        assertThat(winningLotto.getRank(lotto))
             .isEqualTo(LottoRank.MATCH_5);
     }
 
@@ -32,7 +30,7 @@ class LottoRankTest {
         WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = LottoFactory.createManual(asList(1, 2, 3, 4, 8, 9));
 
-        assertThat(LottoRank.getRank(winningLotto, lotto))
+        assertThat(winningLotto.getRank(lotto))
             .isEqualTo(LottoRank.MATCH_4);
     }
 
@@ -41,7 +39,7 @@ class LottoRankTest {
         WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = LottoFactory.createManual(asList(1, 2, 3, 10, 11, 12));
 
-        assertThat(LottoRank.getRank(winningLotto, lotto))
+        assertThat(winningLotto.getRank(lotto))
             .isEqualTo(LottoRank.MATCH_3);
     }
 
@@ -50,7 +48,7 @@ class LottoRankTest {
         WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = LottoFactory.createManual(asList(7, 8, 9, 10, 1, 2));
 
-        assertThat(LottoRank.getRank(winningLotto, lotto))
+        assertThat(winningLotto.getRank(lotto))
             .isEqualTo(LottoRank.NO_MATCH);
     }
 

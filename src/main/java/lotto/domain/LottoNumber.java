@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final List<LottoNumber> ALL_NUMBERS = new ArrayList<>();
     private static final int MIN = 1;
@@ -48,5 +48,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hashCode(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(number, o.number);
     }
 }
