@@ -20,4 +20,10 @@ public class LottoStatistics {
         return statistics;
     }
 
+    public Money getTotalPrize() {
+        return statistics.entrySet().stream()
+            .map(entry -> entry.getKey().getPrize().mul(new Money(entry.getValue())))
+            .reduce(Money.ZERO, Money::add);
+    }
+
 }

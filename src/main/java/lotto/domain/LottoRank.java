@@ -4,27 +4,27 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public enum LottoRank {
-    MATCH_3(3, 5000),
-    MATCH_4(4, 50000),
-    MATCH_5(5, 1500000),
-    MATCH_6(6, 2000000000),
-    NO_MATCH(0, 0)
+    MATCH_3(3, new Money(5000)),
+    MATCH_4(4, new Money(50000)),
+    MATCH_5(5, new Money(1500000)),
+    MATCH_6(6, new Money(2000000000)),
+    NO_MATCH(0, Money.ZERO)
     ;
 
     private final int matchCount;
-    private final int prizeMoney;
+    private final Money prize;
 
-    LottoRank(int matchCount, int prizeMoney) {
+    LottoRank(int matchCount, Money prize) {
         this.matchCount = matchCount;
-        this.prizeMoney = prizeMoney;
+        this.prize = prize;
     }
 
     public int getMatchCount() {
         return matchCount;
     }
 
-    public int getPrizeMoney() {
-        return prizeMoney;
+    public Money getPrize() {
+        return prize;
     }
 
     public boolean match(WinningLotto winningLotto, Lotto lotto) {
@@ -34,7 +34,7 @@ public enum LottoRank {
     public static LottoRank getRank(WinningLotto winningLotto, Lotto lotto) {
         return Arrays.stream(LottoRank.values())
             .filter(rank -> rank.match(winningLotto, lotto))
-            .max(Comparator.comparingInt(LottoRank::getPrizeMoney))
+            .max(Comparator.comparing(LottoRank::getPrize))
             .orElseThrow();
     }
 

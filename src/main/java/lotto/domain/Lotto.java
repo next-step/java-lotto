@@ -16,12 +16,6 @@ public class Lotto {
         this.validate();
     }
 
-    public Lotto(int... lottoNumbers) {
-        this(Arrays.stream(lottoNumbers)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList()));
-    }
-
     private void validate() {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");

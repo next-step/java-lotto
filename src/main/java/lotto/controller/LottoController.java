@@ -5,8 +5,10 @@ import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPurchase;
 import lotto.domain.LottoShop;
 import lotto.domain.LottoStatistics;
+import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
@@ -17,22 +19,18 @@ public class LottoController {
     private final LottoResultView resultView = new LottoResultView();
 
     public void run() {
-        int money = inputView.getMoney();
+        Money money = new Money(inputView.getMoney());
 
         LottoShop lottoShop = new LottoShop();
-        List<Lotto> lottos = lottoShop.buy(money);
+        LottoPurchase lottoPurchase = lottoShop.purchase(money);
 
-        resultView.printPurchaseLotto(lottos);
+        resultView.printPurchaseLotto(lottoPurchase.getLottos());
 
-        List<LottoNumber> winningLottoNumbers = inputView.getWinningLotto()
-            .stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+        WinningLotto winningLotto = new WinningLotto(inputView.getWinningLotto());
 
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
-
-        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto, lottos);
-        resultView.printStatistics(money, lottoStatistics);
+        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto, lottoPurchase.getLottos());
+        resultView.printStatistics(lottoStatistics);
+        resultView.printRoi(lottoPurchase.getRoi(lottoStatistics.getTotalPrize()));
     }
 
 }
