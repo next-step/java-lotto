@@ -10,7 +10,7 @@ public class WinningNums {
 
   private final List<Integer> winningNums;
 
-  public static  WinningNums valueOf(String expression) {
+  public static WinningNums valueOf(String expression) {
     return new WinningNums(expression);
   }
 

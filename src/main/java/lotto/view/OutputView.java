@@ -20,7 +20,7 @@ public class OutputView {
     System.out.printf("%n당첨 통계%n---------%n");
     Arrays.stream(LottoPrize.values()).filter(LottoPrize::hasPrize).forEach(lottoPrizeType -> System.out.printf(
         "%s - %d개%n",
-        lottoPrizeType ,
+        lottoPrizeType,
         lottoPrizeList.stream().filter(lottoPrize -> lottoPrize.equals(lottoPrizeType)).count()
     ));
   }
