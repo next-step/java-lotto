@@ -1,6 +1,5 @@
 package step1.calculator.controller;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
@@ -49,7 +48,5 @@ public class CalculatorAppTest {
         // then
         assertThat(result).isEqualTo(-6);
     }
-
-
 
 }

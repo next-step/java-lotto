@@ -26,11 +26,7 @@ public enum Operation {
         }
     };
 
-    public static final Map<String, Operation> OPERATIONS = Map.of(
-        "+", ADD,
-        "-", SUBTRACT,
-        "*", MULTIPLY,
-        "/", DIVIDE);
+    public static final Map<String, Operation> OPERATIONS = Map.of("+", ADD, "-", SUBTRACT, "*", MULTIPLY, "/", DIVIDE);
 
     public abstract int calculate(int x, int y);
 
