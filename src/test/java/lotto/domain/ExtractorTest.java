@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ExtractorTest {
     @Test
     void 숫자_추출() {
-        assertThat(Extractor.extract_numbers("1 + 2 / 3")).isEqualTo(List.of(1L, 2L, 3L));
+        assertThat(Extractor.extract_numbers("1 + 2 / 3")).isEqualTo(List.of(new Number(1), new Number(2), new Number(3)));
     }
 
     @Test
