@@ -16,12 +16,12 @@ public class Expression {
         List<Operator> operators = new ArrayList<>();
         List<Integer> numbers = new ArrayList<>();
 
-        String[] tokens = Splitter.split(expression, DELIMITER);
+        String[] tokens = split(expression, DELIMITER);
         for (int index = 0; index < tokens.length - 1; index += 2) {
-            numbers.add(StringParser.toInt(tokens[index]));
+            numbers.add(toInt(tokens[index]));
             operators.add(Operator.of(tokens[index + 1]));
         }
-        numbers.add(StringParser.toInt(tokens[tokens.length - 1]));
+        numbers.add(toInt(tokens[tokens.length - 1]));
 
         return new Expression(operators, numbers);
     }
@@ -42,5 +42,13 @@ public class Expression {
 
     public int getOperatorSize() {
         return operators.size();
+    }
+
+    private static String[] split(String input, String delimiter){
+        return input.split(delimiter);
+    }
+
+    private static int toInt(String input){
+        return Integer.parseInt(input);
     }
 }
