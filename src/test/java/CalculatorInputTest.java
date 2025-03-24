@@ -37,4 +37,20 @@ public class CalculatorInputTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("입력값은 null이거나 빈 문자열일 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("숫자가 아닌 값이 입력되면 예외가 발생한다.")
+    void shouldThrowExceptionWhenInputIsNotNumber() {
+        assertThatThrownBy(() -> new CalculatorInput("a + 3"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("숫자가 아닌 값이 입력되었습니다: a");
+    }
+
+    @Test
+    @DisplayName("지원하지 않는 연산자가 입력되면 예외가 발생한다.")
+    void shouldThrowExceptionWhenOperatorIsNotSupported() {
+        assertThatThrownBy(() -> new CalculatorInput("2 % 3"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("지원하지 않는 연산자입니다: %");
+    }
 }
