@@ -7,5 +7,6 @@ public class Main {
         Lottos lottos = Lottos.buyLotto(lottoPrice);
         View.printLottoCount(lottos.getLottoCount());
         View.printLottos(lottos);
+        Lotto winningLotto = View.inputWinningLotto();
     }
 }

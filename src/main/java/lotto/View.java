@@ -1,6 +1,10 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class View {
 
@@ -18,4 +22,18 @@ public class View {
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.toString());
     }
+
+    public static Lotto inputWinningLotto() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return createWinningLotto(SCANNER.nextLine());
+    }
+
+    private static Lotto createWinningLotto(String winningLotto) {
+        List<Integer> lottoNumbers = Arrays.stream(winningLotto.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        return Lotto.create(lottoNumbers);
+    }
+
 }
