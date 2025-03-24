@@ -38,4 +38,48 @@ class OperandTest {
 
         assertThat(operand).isEqualTo(new Operand(12));
     }
+
+    @Test
+    @DisplayName("더하기 테스트")
+    void add() {
+        Operand left = new Operand(1);
+        Operand right = new Operand(2);
+
+        Operand result = left.add(right);
+
+        assertThat(result).isEqualTo(new Operand(3));
+    }
+
+    @Test
+    @DisplayName("빼기 테스트")
+    void minus() {
+        Operand left = new Operand(1);
+        Operand right = new Operand(2);
+
+        Operand result = left.minus(right);
+
+        assertThat(result).isEqualTo(new Operand(-1));
+    }
+
+    @Test
+    @DisplayName("곱하기 테스트")
+    void mul() {
+        Operand left = new Operand(1);
+        Operand right = new Operand(2);
+
+        Operand result = left.mul(right);
+
+        assertThat(result).isEqualTo(new Operand(2));
+    }
+
+    @Test
+    @DisplayName("나누기 테스트")
+    void div() {
+        Operand left = new Operand(4);
+        Operand right = new Operand(2);
+
+        Operand result = left.div(right);
+
+        assertThat(result).isEqualTo(new Operand(2));
+    }
 }

@@ -25,6 +25,18 @@ public class Operand {
         return new Operand(value + right.value);
     }
 
+    public Operand minus(Operand right) {
+        return new Operand(value - right.value);
+    }
+
+    public Operand mul(Operand right) {
+        return new Operand(value * right.value);
+    }
+
+    public Operand div(Operand right) {
+        return new Operand(value / right.value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -41,4 +53,5 @@ public class Operand {
     public int hashCode() {
         return Objects.hash(value);
     }
+
 }

@@ -20,6 +20,12 @@ public class Operator {
     public Operand calculate(Operand left, Operand right) {
         if (value.equals("+")) {
             return left.add(right);
+        } else if (value.equals("-")) {
+            return left.minus(right);
+        } else if (value.equals("*")) {
+            return left.mul(right);
+        } else if (value.equals("/")) {
+            return left.div(right);
         }
 
         return left.add(right);
