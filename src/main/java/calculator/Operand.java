@@ -4,6 +4,19 @@ import java.util.Objects;
 
 public class Operand {
     private final int value;
+    public Operand(String value) {
+        if (value == null || value.isEmpty()) {
+            throw new IllegalArgumentException("피연산자는 null이 될 수 없습니다");
+        }
+
+        try {
+            this.value = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("피연산자가 숫자가 아닌 값이 입력되었습니다");
+        }
+
+    }
+
     public Operand(int value) {
         this.value = value;
     }
