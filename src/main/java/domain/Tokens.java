@@ -14,7 +14,7 @@ public class Tokens {
     }
 
     private Boolean validateString(String tokenString) {
-        return tokenString != null && tokenString.isEmpty();
+        return tokenString != null && !tokenString.isEmpty();
     }
 
     public String getToken(int index) {
