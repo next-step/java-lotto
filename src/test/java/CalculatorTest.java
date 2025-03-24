@@ -20,4 +20,12 @@ public class CalculatorTest {
         CalculatorInput input = new CalculatorInput("2 + 3");
         assertThat(calculator.calculate(input)).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("두 개의 숫자로 이루어진 뺼셈을 할 수 있다.")
+    void subtractionTest() {
+        Calculator calculator = new Calculator();
+        CalculatorInput input = new CalculatorInput("5 - 3");
+        assertThat(calculator.calculate(input)).isEqualTo(2);
+    }
 }
