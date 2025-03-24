@@ -5,11 +5,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StringParserTest {
 
-    private StringParser parser = new StringParser();
+    private final StringParser parser = new StringParser();
 
     @Test
     public void testSplitExpression_ValidInput() {
@@ -24,13 +24,13 @@ class StringParserTest {
 
     @Test
     public void testSplitExpression_InvalidInput_Null() {
-        assertThatThrownBy(() -> parser.splitExpression(null))
+        assertThatIllegalArgumentException().isThrownBy(() -> parser.splitExpression(null))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void testSplitExpression_InvalidInput_EmptyString() {
-        assertThatThrownBy(() -> parser.splitExpression(""))
+        assertThatIllegalArgumentException().isThrownBy(() -> parser.splitExpression(""))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

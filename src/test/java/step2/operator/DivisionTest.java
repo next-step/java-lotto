@@ -1,12 +1,12 @@
 package step2.operator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class DivisionTest {
     @ParameterizedTest
@@ -30,7 +30,7 @@ class DivisionTest {
     void testDivisionByZero() {
         Division division = new Division();
 
-        Assertions.assertThatThrownBy(() -> division.calculate(10, 0))
+        assertThatIllegalArgumentException().isThrownBy(() -> division.calculate(10, 0))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
