@@ -34,12 +34,34 @@
 * 로또 1장의 가격은 1000원이다.
 
 ### 기능 목록
+#### view
 * 구입 금액을 입력받는다. - InputView
-* 입력 금액에 해당하는 로또를 발급한다. - LottoMachine
-* 로또 한 장의 가격은 1000원이다. - Lotto
-* 로또 한 장은 6개의 숫자를 가진다. - Lotto
-* 로또 숫자는 1부터 45까지의 숫자다. - Lotto
-* 로또 숫자는 중복되지 않는다. - Lotto
 * 지난 주 당첨 번호를 입력받는다. - InputView
-* 당첨 통계를 계산한다. - LottoResult
 * 계산한 당첨 통계를 출력한다. - OutputView
+
+#### domain
+* Lotto : 로또 한 장을 의미한다.
+  * 로또 한 장은 6개의 숫자를 가진다. 중복x (Set<Integer> numbers)
+  * 로또 숫자는 1부터 45까지의 숫자다.
+* LottoSet : 발급받은 로또 전체를 의미한다. (List<Lotto> lottos)
+  * 한 장당 가격(1000원) : 상수 LOTTO_PRICE
+  * 로또 몇 장인지 : 입력값 기반
+* LottoGame : Main 클래스
+  * 장 수 입력 받음 (-> InputView)
+  * 로또 발급 (-> LottoGenerator를 통해 LottoSet 생성)
+  * 이전 당첨 번호 입력 받음 (-> InputView)
+  * 결과 생성 (-> LottoResultAnalyzer)
+  * 결과 출력 (-> ResultView)
+* LottoGenerator : 로또를 발급한다. 
+  * 로또 자동 생성은 Collection.shuffle()를 활용한다.
+* LottoResultAnalyzer : 당첨 통계를 계산한다.
+  * 당첨 번호와 비교하여 등수를 계산한다.
+  * 수익률을 계산한다. 
+* LottoResult : 로또 결과를 의미한다.
+  * 당첨 통계를 저장한다.
+  * 수익률을 저장한다.
+* WinningRank : 당첨 등수와 당첨 금액을 의미한다. (enum)
+  * 1등 : 6개 일치 (2000000000원)
+  * 2등 : 5개 일치 (1500000원)
+  * 3등 : 4개 일치 (50000원)
+  * 4등 : 3개 일치 (5000원)
