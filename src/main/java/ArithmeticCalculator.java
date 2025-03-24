@@ -1,8 +1,8 @@
 import java.util.List;
 
-public class Calculator {
+public class ArithmeticCalculator {
 
-    public Integer calculate(CalculatorInput input) {
+    public static Integer calculate(CalculatorInput input) {
         List<String> tokens = input.getTokens();
         int result = parseNumber(tokens.get(0));
         
@@ -15,7 +15,7 @@ public class Calculator {
         return result;
     }
 
-    private Integer calculateWithOperator(String operator, int firstNumber, int secondNumber) {
+    private static Integer calculateWithOperator(String operator, int firstNumber, int secondNumber) {
         switch (operator) {
             case "+":
                 return firstNumber + secondNumber;
@@ -30,18 +30,18 @@ public class Calculator {
         }
     }
 
-    private int divide(int dividend, int divisor) {
+    private static int divide(int dividend, int divisor) {
         validateDivision(divisor);
         return dividend / divisor;
     }
 
-    private void validateDivision(int divisor) {
+    private static void validateDivision(int divisor) {
         if (divisor == 0) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
     }
 
-    private int parseNumber(String token) {
+    private static int parseNumber(String token) {
         return Integer.parseInt(token);
     }
 }
