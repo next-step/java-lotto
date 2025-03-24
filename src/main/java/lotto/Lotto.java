@@ -14,6 +14,24 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(List<Integer> numbers) {
         this.numbers = numbers;
+    }
+
+    public static Lotto createRandomly() {
+        List<Integer> participants = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+        Collections.shuffle(participants);
+        List<Integer> selectedNumbers = participants.subList(0, LOTTO_NUMBER_COUNT);
+        Collections.sort(selectedNumbers);
+        return new Lotto(selectedNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
 }

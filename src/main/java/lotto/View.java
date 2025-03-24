@@ -14,4 +14,8 @@ public class View {
     public static void printLottoCount(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
+
+    public static void printLottos(Lottos lottos) {
+        System.out.println(lottos.toString());
+    }
 }

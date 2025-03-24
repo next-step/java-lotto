@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -30,12 +31,19 @@ public class Lottos {
     private static List<Lotto> createLottos(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(List.of()));
+            lottos.add(Lotto.createRandomly());
         }
         return lottos;
     }
 
     public int getLottoCount() {
         return lottos.size();
+    }
+
+    @Override
+    public String toString() {
+        return lottos.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 }
