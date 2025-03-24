@@ -18,4 +18,12 @@ public class LottoNumberTest {
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("로또의 숫자는 1 - 45 사이만 가능합니다.");
     }
+
+    @Test
+    void 로또값_비교() {
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(2);
+        assertThat(lottoNumber2).isGreaterThan(lottoNumber1);
+    }
+
 }
