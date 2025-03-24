@@ -3,17 +3,16 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.generate.LottoGenerator;
 
 public class LottoSet {
 
   private final List<Lotto> lottos;
   private final int totalPrice;
 
-  public LottoSet(int totalPrice, LottoGenerator lottoGenerator) {
+  public LottoSet(int totalPrice, RandomLottoGenerator lottoGenerator) {
     this.totalPrice = totalPrice;
     this.lottos = IntStream.range(0, totalPrice / Lotto.PRICE)
-        .mapToObj(i -> Lotto.generateLotto(lottoGenerator))
+        .mapToObj(i -> Lotto.generateRandomLotto(lottoGenerator))
         .collect(Collectors.toList());
   }
 

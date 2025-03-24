@@ -52,7 +52,7 @@
   * 이전 당첨 번호 입력 받음 (-> InputView)
   * 결과 생성 (-> LottoResultAnalyzer)
   * 결과 출력 (-> ResultView)
-* LottoGenerator : 로또를 발급한다. 
+* RadomLottoGenerator : 자동 로또를 발급한다. 
   * 로또 자동 생성은 Collection.shuffle()를 활용한다.
 * LottoResultAnalyzer : 당첨 통계를 계산한다.
   * 당첨 번호와 비교하여 등수를 계산한다.
@@ -65,3 +65,6 @@
   * 2등 : 5개 일치 (1500000원)
   * 3등 : 4개 일치 (50000원)
   * 4등 : 3개 일치 (5000원)
+* LottoMachine : 로또를 발급한다. 
+  * 랜덤 번호 
+  * 고정 번호

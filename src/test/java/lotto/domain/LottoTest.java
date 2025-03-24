@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.List;
-import lotto.domain.generate.LottoGenerator;
-import lotto.domain.generate.RandomLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +11,8 @@ class LottoTest {
   @Test
   @DisplayName("로또 한 장은 6개의 숫자로 이루어져있다.")
   void lottoSize() {
-    LottoGenerator lottoGenerator = new RandomLottoGenerator();
-    Lotto lotto = Lotto.generateLotto(lottoGenerator);
+    RandomLottoGenerator lottoGenerator = new RandomLottoGenerator();
+    Lotto lotto = Lotto.generateRandomLotto(lottoGenerator);
 
     assertThat(lotto.size()).isEqualTo(Lotto.SIZE);
   }
@@ -22,8 +20,8 @@ class LottoTest {
   @Test
   @DisplayName("로또 숫자는 Lotto.MIN_NUMBER(1)부터 Lotto.MAX_NUMBER(45)까지의 숫자다.")
   void lottoNumberRange() {
-    LottoGenerator lottoGenerator = new RandomLottoGenerator();
-    Lotto lotto = Lotto.generateLotto(lottoGenerator);
+    RandomLottoGenerator lottoGenerator = new RandomLottoGenerator();
+    Lotto lotto = Lotto.generateRandomLotto(lottoGenerator);
 
     assertThat(lotto.getNumbers()).allMatch(number -> number >= Lotto.MIN_NUMBER && number <= Lotto.MAX_NUMBER);
   }

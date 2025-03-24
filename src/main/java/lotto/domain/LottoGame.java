@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.generate.RandomLottoGenerator;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoResultAnalyzer;
 import lotto.domain.result.LottoResultAnalyzerImpl;
@@ -10,7 +9,7 @@ import lotto.view.ResultView;
 public class LottoGame {
   public static void main(String[] args) {
     int cost = InputView.inputCost();
-    LottoSet lottoSet = new LottoSet(cost, new RandomLottoGenerator());
+    LottoSet lottoSet = LottoMachine.generateRandomLotto(cost);
     ResultView.printLottoSet(lottoSet);
 
     Lotto winningLotto = InputView.inputWinningLotto();

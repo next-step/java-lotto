@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.generate.LottoGenerator;
 
 public class Lotto {
   private final List<Integer> numbers;
@@ -38,7 +37,7 @@ public class Lotto {
         && numbers.stream().allMatch(number -> number >= MIN_NUMBER && number <= MAX_NUMBER);
   }
 
-  public static Lotto generateLotto(LottoGenerator lottoGenerator) {
+  public static Lotto generateRandomLotto(RandomLottoGenerator lottoGenerator) {
     return lottoGenerator.generate();
   }
 

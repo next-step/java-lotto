@@ -20,7 +20,7 @@ class LottoResultAnalyzerTest {
     Lotto lotto3 = Lotto.of("1, 2, 3, 4, 7, 8");
     Lotto lotto4 = Lotto.of("1, 2, 3, 7, 8, 9");
 
-    LottoSet lottoSet = new LottoSet(List.of(lotto1, lotto2, lotto3, lotto4));
+    LottoSet lottoSet = LottoMachine.generateManualLotto(List.of(lotto1, lotto2, lotto3, lotto4));
     Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
 
     LottoResultAnalyzer analyzer = new LottoResultAnalyzerImpl();
@@ -40,7 +40,7 @@ class LottoResultAnalyzerTest {
     Lotto lotto3 = Lotto.of("1, 2, 3, 4, 7, 8");
     Lotto lotto4 = Lotto.of("1, 2, 3, 7, 8, 9");
 
-    LottoSet lottoSet = new LottoSet(List.of(lotto1, lotto2, lotto3, lotto4));
+    LottoSet lottoSet = LottoMachine.generateManualLotto(List.of(lotto1, lotto2, lotto3, lotto4));
     Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
 
     LottoResultAnalyzer analyzer = new LottoResultAnalyzerImpl();
