@@ -4,22 +4,26 @@ import java.util.Objects;
 
 public class LottoResult {
     private final LottoTicket ticket;
-    private final MatchCount matchCount;
+    private final PrizeRank rank;
 
     public LottoResult(LottoTicket ticket, MatchCount matchCount) {
         this.ticket = ticket;
-        this.matchCount = matchCount;
+        this.rank = PrizeRank.of(matchCount);
+    }
+
+    public int getPrize() {
+        return rank.getPrize();
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult that = (LottoResult) o;
-        return Objects.equals(ticket, that.ticket) && Objects.equals(matchCount, that.matchCount);
+        return Objects.equals(ticket, that.ticket) && rank == that.rank;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticket, matchCount);
+        return Objects.hash(ticket, rank);
     }
 }
