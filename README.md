@@ -15,3 +15,4 @@
   - [x] 뺄셈 구현
   - [x] 곱셈 구현
   - [x] 나눗셈 구현
+  - [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
