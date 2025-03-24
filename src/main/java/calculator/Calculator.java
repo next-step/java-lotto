@@ -3,10 +3,15 @@ package calculator;
 
 import data.Messages;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
+
 public class Calculator {
 
     private int result = 0;
     private final Formula formula;
+    private final Map<String, Consumer<Integer>> calculateConsumerMap;
 
     Calculator(int init) {
         this(init, "0");
@@ -19,6 +24,12 @@ public class Calculator {
     public Calculator(int init, String formula) {
         this.result = init;
         this.formula = new Formula(formula);
+
+        calculateConsumerMap = new HashMap<>();
+        calculateConsumerMap.put("+", this::add);
+        calculateConsumerMap.put("-", this::subtract);
+        calculateConsumerMap.put("*", this::multiply);
+        calculateConsumerMap.put("/", this::divide);
     }
 
     public int getResult() {
@@ -45,23 +56,10 @@ public class Calculator {
     }
 
     public void calculate(String sign, String numStr) {
-        int num = Integer.parseInt(numStr);
-        switch (sign) {
-            case "+":
-                add(num);
-                return;
-            case "-":
-                subtract(num);
-                return;
-            case "*":
-                multiply(num);
-                return;
-            case "/":
-                divide(num);
-                return;
-            default:
-                throw new IllegalArgumentException(Messages.TYPE_ERROR);
+        if(!calculateConsumerMap.containsKey(sign)){
+            throw new IllegalArgumentException(Messages.TYPE_ERROR);
         }
+        calculateConsumerMap.get(sign).accept(Integer.parseInt(numStr));
     }
 
     public int calculateFormula() {
