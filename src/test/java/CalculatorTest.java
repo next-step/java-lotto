@@ -45,4 +45,12 @@ public class CalculatorTest {
         assertThat(calculator.calculate(input)).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("둘 이상의 연산으로 이루어진 표현식을 계산할 수 있다.")
+    void multipleOperationsTest() {
+        Calculator calculator = new Calculator();
+        CalculatorInput input = new CalculatorInput("2 + 3 * 4 / 2");
+        assertThat(calculator.calculate(input)).isEqualTo(10);
+    }
+
 }
