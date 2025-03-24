@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Extractor {
-    private static final String delimiter = " ";
+    private static final String DELIMITER = " ";
 
     private Extractor() {}
 
@@ -32,6 +32,6 @@ public class Extractor {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException();
         }
-        return Arrays.asList(input.split(delimiter));
+        return Arrays.asList(input.split(DELIMITER));
     }
 }
