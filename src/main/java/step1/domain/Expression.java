@@ -31,48 +31,5 @@ public class Expression {
         return new Operators(operators);
     }
 
-    public void validate(String[] expression) {
-        if (expression == null || expression.length == 0) {
-            throw new IllegalArgumentException("수식은 빈 값일 수 없습니다.");
-        }
-
-        if (expression.length % 2 == 0) {
-            throw new IllegalArgumentException("수식의 길이는 홀수여야 합니다.");
-        }
-
-        for (int i = 0; i < expression.length; i++) {
-            validateTokenOrder(expression, i);
-        }
-    }
-
-    private void validateTokenOrder(String[] expression, int i) {
-        boolean isEvenIndex = (i % 2 == 0);
-
-        if (isEvenIndex && !isNumber(expression[i])) {
-            throw new IllegalArgumentException("숫자가 있어야 할 자리에 연산자가 있습니다: " + expression[i]);
-        }
-
-        if (!isEvenIndex && !isOperator(expression[i])) {
-            throw new IllegalArgumentException("연산자가 있어야 할 자리에 숫자가 있습니다: " + expression[i]);
-        }
-    }
-
-    private boolean isNumber(String token) {
-        try {
-            Integer.parseInt(token);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private boolean isOperator(String token) {
-        try {
-            Operator.from(token);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-    }
 
 }
