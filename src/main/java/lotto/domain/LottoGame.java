@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.LottoResultAnalyzer;
-import lotto.domain.result.LottoResultAnalyzerImpl;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,7 +12,7 @@ public class LottoGame {
     ResultView.printLottoSet(lottoSet);
 
     Lotto winningLotto = InputView.inputWinningLotto();
-    LottoResultAnalyzer analyzer = new LottoResultAnalyzerImpl();
+    LottoResultAnalyzer analyzer = new LottoResultAnalyzer();
     LottoResult lottoResult = analyzer.analyze(lottoSet, winningLotto);
     ResultView.printLottoStatistics(lottoResult);
 

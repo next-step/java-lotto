@@ -43,9 +43,9 @@ public class Lotto {
   }
 
   public String getFormattedNumbers() {
-    return numbers.stream()
+    return "[" + numbers.stream()
         .map(LottoNumber::getNumber)
         .map(String::valueOf)
-        .collect(Collectors.joining(", "));
+        .collect(Collectors.joining(", ")) + "]";
   }
 }
