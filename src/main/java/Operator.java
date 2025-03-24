@@ -44,7 +44,7 @@ public enum Operator {
 
     public static Operator fromSymbol(String symbol) {
         Operator operator = SYMBOL_MAP.get(symbol);
-        if (operator == null) {
+        if (!SYMBOL_MAP.containsKey(symbol)) {
             throw new IllegalArgumentException("Unknown operator: " + symbol);
         }
         return operator;
