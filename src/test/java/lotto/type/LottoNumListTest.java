@@ -28,6 +28,8 @@ class LottoNumListTest {
             .isEqualTo(6),
         () -> assertThat(lottoNumList.getMatchCount(new WinningNums("7, 8, 9, 10, 11, 12")))
             .isEqualTo(0),
+        () -> assertThat(lottoNumList.getMatchCount(new WinningNums("1, 2, 3, 10, 11, 12")))
+            .isEqualTo(3),
         () -> assertThrows(RuntimeException.class, () -> lottoNumList.getMatchCount(new WinningNums("7, 8, 9, 10")))
     );
   }
