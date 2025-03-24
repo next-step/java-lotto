@@ -62,6 +62,12 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
+    public int getMatchCount(Lotto winningLotto) {
+        return winningLotto.numbers.stream()
+                .mapToInt(number -> numbers.contains(number) ? 1 : 0)
+                .sum();
+    }
+
     @Override
     public String toString() {
         return numbers.stream()

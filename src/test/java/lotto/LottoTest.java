@@ -103,6 +103,21 @@ class LottoTest {
         );
     }
 
+    @ParameterizedTest(name = "[{index}] 입력: {0}")
+    @MethodSource("provideMatchCases")
+    @DisplayName("로또 번호가 일치하는 개수를 반환한다")
+    void testMatchCount(Lotto lotto, Lotto otherLotto, int expectedMatchCount) {
+        Assertions.assertThat(lotto.getMatchCount(otherLotto)).isEqualTo(expectedMatchCount);
+    }
+
+    static Stream<Arguments> provideMatchCases() {
+        return Stream.of(
+                Arguments.of(Lotto.create(List.of(1, 2, 3, 4, 5, 6)), Lotto.create(List.of(1, 2, 3, 4, 5, 6)), 6),
+                Arguments.of(Lotto.create(List.of(1, 2, 3, 4, 5, 6)), Lotto.create(List.of(1, 2, 3, 4, 5, 16)), 5),
+                Arguments.of(Lotto.create(List.of(1, 2, 3, 4, 5, 6)), Lotto.create(List.of(1, 2, 3, 14, 15, 16)), 3)
+        );
+    }
+
     private static class LottoParserForTest {
 
         private static final String DELIMITER = ",";

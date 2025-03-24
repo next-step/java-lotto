@@ -12,7 +12,9 @@ public class View {
 
     public static int inputLottoPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        return SCANNER.nextInt();
+        int lottoPrice = SCANNER.nextInt();
+        SCANNER.nextLine(); // newline character 제거
+        return lottoPrice;
     }
 
     public static void printLottoCount(int lottoCount) {
@@ -36,4 +38,15 @@ public class View {
         return Lotto.create(lottoNumbers);
     }
 
+    public static void printLottoStatistics(LottoStatistics statistics) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (LottoResult lottoResult : LottoResult.values()) {
+            if (lottoResult == LottoResult.NONE) {
+                continue;
+            }
+            System.out.println(lottoResult.getMatchCount() + "개 일치 (" + lottoResult.getPrize() + "원) - " + statistics.getCount(lottoResult) + "개");
+        }
+        System.out.println("총 수익률은 " + statistics.calculateYield() + "입니다.");
+    }
 }

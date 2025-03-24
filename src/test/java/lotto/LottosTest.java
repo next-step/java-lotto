@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottosTest {
@@ -28,5 +31,24 @@ class LottosTest {
     void getLottoCount() {
         Lottos lottos = Lottos.buyLotto(14000);
         assertEquals(14, lottos.getLottoCount());
+    }
+
+    @Test
+    @DisplayName("당첨 로또에 대한 결과를 반환한다")
+    void getResultMap() {
+        Lotto winningLotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
+        Lottos lottos = new Lottos(List.of(
+                Lotto.create(List.of(1, 2, 3, 4, 5, 6)),
+                Lotto.create(List.of(1, 2, 3, 4, 5, 16)),
+                Lotto.create(List.of(1, 2, 3, 4, 15, 6)),
+                Lotto.create(List.of(1, 2, 3, 4, 15, 16)),
+                Lotto.create(List.of(11, 12, 13, 14, 15, 16))
+        ));
+        Map<LottoResult, Integer> resultMap = lottos.getResultMap(winningLotto);
+        assertEquals(1, resultMap.get(LottoResult.FIRST));
+        assertEquals(2, resultMap.get(LottoResult.SECOND));
+        assertEquals(1, resultMap.get(LottoResult.THIRD));
+        assertNull(resultMap.get(LottoResult.FOURTH));
+        assertEquals(1, resultMap.get(LottoResult.NONE));
     }
 }
