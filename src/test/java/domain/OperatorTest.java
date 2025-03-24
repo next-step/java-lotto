@@ -89,4 +89,11 @@ class OperatorTest {
         assertThatThrownBy(() -> operator.operate(operand1, operand2))
                 .isInstanceOf(ArithmeticException.class);
     }
+
+    @DisplayName("연산자가 아닌 경우 예외 발생")
+    @Test
+    void invalidOperatorTest() {
+        assertThatThrownBy(() -> new Operator("!"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

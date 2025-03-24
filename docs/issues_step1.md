@@ -19,3 +19,43 @@
   - 정수끼리 나눌 경우 결과는 항상 소수점 이하를 버린 정수 (몫) 
 - Operand
   - 피연산자를 반환
+### OperatorType
+- for-if 구문 indent depth 줄이기
+  ```java
+  public static OperatorType findOperatorByString(String value) {
+      for (OperatorType candidateOperatorType : OperatorType.values()) {
+        if (operatorType.value.equals(value)) {
+        return operatorType;
+        }
+      }
+
+      throw new IllegalArgumentException("Invalid operator");
+  }
+  ```
+
+  ```java
+  public static OperatorType findOperatorByString(String value) {
+      OperatorType operatorType = null;
+      for (OperatorType candidateOperatorType : OperatorType.values()) {
+          operatorType = matchValue(value, operatorType, candidateOperatorType);
+      }
+
+      if (operatorType == null) {
+          throw new IllegalArgumentException("Invalid operator");
+      }
+
+      return operatorType;
+  }
+
+  private static OperatorType matchValue(String value, OperatorType currentOperatorType, OperatorType operatorType) {
+      if (currentOperatorType != null) {
+          return currentOperatorType;
+      }
+
+      if (operatorType.value.equals(value)) {
+          return operatorType;
+      }
+      return null;
+  }
+  ```
+  - 이것이 정말 효율적인가?

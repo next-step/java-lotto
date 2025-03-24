@@ -1,13 +1,10 @@
 package domain;
 
 public class Operator {
-    private final String value;
+    private final OperatorType value;
 
     public Operator(String value) {
-        if (!validateOperator(value)) {
-            throw new IllegalArgumentException("Invalid operator");
-        }
-        this.value = value;
+        this.value = OperatorType.findOperatorByString(value);
     }
 
     public static Operator of(String value) {
@@ -15,26 +12,22 @@ public class Operator {
     }
 
     public Integer operate(Operand firstOperand, Operand secondOperand) {
-        if (this.value.equals("+")) {
+        if (this.value.equals(OperatorType.ADD)) {
             return firstOperand.value() + secondOperand.value();
         }
 
-        if (this.value.equals("-")) {
+        if (this.value.equals(OperatorType.SUBTRACT)) {
             return firstOperand.value() - secondOperand.value();
         }
 
-        if (this.value.equals("*")) {
+        if (this.value.equals(OperatorType.MULTIPLY)) {
             return firstOperand.value() * secondOperand.value();
         }
 
-        if (this.value.equals("/")) {
+        if (this.value.equals(OperatorType.DIVIDE)) {
             return firstOperand.value() / secondOperand.value();
         }
 
         throw new IllegalArgumentException("Invalid operator");
-    }
-
-    private boolean validateOperator(String value) {
-        return value.equals("+") || value.equals("-") || value.equals("*") || value.equals("/");
     }
 }
