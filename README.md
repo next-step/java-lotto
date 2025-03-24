@@ -7,3 +7,19 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## To-Do
+### 1단계
+- [x] 기본 기능 구현
+  - [x] 덧셈 구현
+  - [x] 뺄셈 구현
+  - [x] 곱셈 구현
+  - [x] 나눗셈 구현
+- [x] 예외 처리 구현
+  - [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+  - [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+- [x] 여러 개의 연산 처리 구현
+- [x] 계산식 검증 구현
+- [x] Views 구현
+  - [x] InputView 구현
+  - [x] ResultView 구현
