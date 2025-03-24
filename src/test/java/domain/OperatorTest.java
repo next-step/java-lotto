@@ -36,4 +36,19 @@ class OperatorTest {
         // Then
         assertEquals(-1, result);
     }
+
+    @DisplayName("곱셈 연산 테스트")
+    @Test
+    void operateMultiplyTest() {
+        // Given
+        Operand operand1 = new Operand(1);
+        Operand operand2 = new Operand(2);
+
+        // When
+        Operator operator = new Operator("*");
+        Integer result = operator.operate(operand1, operand2);
+
+        // Then
+        assertEquals(2, result);
+    }
 }
