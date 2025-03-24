@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum OperatorType {
-  ADD("+", (left, right) -> left + right) ,
+  ADD("+", (left, right) -> left + right),
   SUBTRACT("-", (left, right) -> left - right),
   MULTIPLY("*", (left, right) -> left * right),
   DIVIDE("/", (left, right) -> left / right);

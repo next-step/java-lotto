@@ -1,6 +1,5 @@
 package calculator.type;
 
-import calculator.util.TypeChecker;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -30,10 +29,12 @@ public class Expression {
     IntStream.range(0, splitExpression.size())
         .filter(i ->
             (i % 2 == 0 && !isNumeric(splitExpression.get(i))) ||
-            (i % 2 != 0 && !isOperatorType(splitExpression.get(i)))
+                (i % 2 != 0 && !isOperatorType(splitExpression.get(i)))
         )
         .findFirst()
-        .ifPresent(i -> {throw new IllegalArgumentException("유효하지 않은 표현식입니다."); });
+        .ifPresent(i -> {
+          throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
+        });
 
     this.splitExpression = splitExpression;
   }
@@ -43,7 +44,7 @@ public class Expression {
     int res = Integer.parseInt(splitExpression.get(0));
 
     for (int i = 1; i < splitExpression.size() - 1; i += 2) {
-      res =  OperatorType.fromSymbol(splitExpression.get(i)).execute(res, Integer.parseInt(splitExpression.get(i + 1)));
+      res = OperatorType.fromSymbol(splitExpression.get(i)).execute(res, Integer.parseInt(splitExpression.get(i + 1)));
     }
 
     return res;
