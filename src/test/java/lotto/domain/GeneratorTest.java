@@ -10,7 +10,7 @@ public class GeneratorTest {
     @Test
     void 로또_자동_생성() {
         Generator generator = new Generator();
-        Lotto lotto = generator.run();
+        Lotto lotto = generator.makeLotto();
         assertThat(lotto.hasSize(6)).isTrue();
         assertThat(lotto.isValidRangeNumbers()).isTrue();
     }
@@ -18,7 +18,7 @@ public class GeneratorTest {
     @Test
     void 로또_정렬() {
         Generator generator = new Generator();
-        Lotto lotto = generator.run();
+        Lotto lotto = generator.makeLotto();
         assertThat(lotto.isSorted()).isTrue();
     }
 }
