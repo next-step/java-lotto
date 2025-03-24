@@ -2,7 +2,6 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import views.ResultView;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -34,6 +33,6 @@ class CalculatorTest {
 
         String formula = "2 + 3 * 4 / 2";
 
-        ResultView.println(new Calculator(formula).calculateFormula());
+        assertThat(new Calculator(formula).calculateFormula()).isEqualTo(10);
     }
 }

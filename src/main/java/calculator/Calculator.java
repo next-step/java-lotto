@@ -1,12 +1,12 @@
 package calculator;
 
 
+import data.Messages;
+
 public class Calculator {
 
     private int result = 0;
-    private final String formula;
-    private static final String PREFIX = "+ ";
-    private static final String TYPE_ERROR = "유효하지 않은 타입입니다.";
+    private final Formula formula;
 
     Calculator(int init) {
         this(init, "0");
@@ -17,15 +17,8 @@ public class Calculator {
     }
 
     public Calculator(int init, String formula) {
-        if (formula == null || formula.isBlank()) {
-            throw new IllegalArgumentException(TYPE_ERROR);
-        }
         this.result = init;
-        this.formula = formula;
-    }
-
-    public String[] getCalTargetArr() {
-        return PREFIX.concat(formula).split(" ");
+        this.formula = new Formula(formula);
     }
 
     public int getResult() {
@@ -46,7 +39,7 @@ public class Calculator {
 
     public int divide(int num) {
         if (result % num != 0) {
-            throw new IllegalArgumentException(TYPE_ERROR);
+            throw new IllegalArgumentException(Messages.TYPE_ERROR);
         }
         return result /= num;
     }
@@ -67,12 +60,12 @@ public class Calculator {
                 divide(num);
                 return;
             default:
-                throw new IllegalArgumentException(TYPE_ERROR);
+                throw new IllegalArgumentException(Messages.TYPE_ERROR);
         }
     }
 
     public int calculateFormula() {
-        String[] calTargetArr = this.getCalTargetArr();
+        String[] calTargetArr = this.formula.getCalculateTarget();
         for (int i = 0; i < calTargetArr.length / 2; i++) {
             this.calculate(calTargetArr[i * 2], calTargetArr[i * 2 + 1]);
         }
