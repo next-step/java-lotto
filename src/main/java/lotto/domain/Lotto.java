@@ -1,0 +1,40 @@
+package lotto.domain;
+
+import java.util.List;
+
+public class Lotto {
+    private static final int LOTTO_PRICE = 1000;
+
+    private final List<Integer> lottoNumbers;
+
+    public Lotto() {
+        this.lottoNumbers = LottoNumbers.shuffleLottoNumbers();
+    }
+
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public static int calculateLottoCount(int totalAmount) {
+        return totalAmount / LOTTO_PRICE;
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return this.lottoNumbers;
+    }
+
+    public int confirmWinning(List<Integer> winningNumbers) {
+        int count = 0;
+        for (Integer lottoNumber : this.lottoNumbers) {
+            count += match(winningNumbers, lottoNumber);
+        }
+        return count;
+    }
+
+    private static int match(List<Integer> winningNumbers, Integer lottoNumber) {
+        if (winningNumbers.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+}
