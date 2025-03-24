@@ -14,7 +14,7 @@ public class LottoSet {
     this.totalPrice = totalPrice;
     this.lottos = IntStream.range(0, totalPrice / Lotto.PRICE)
         .mapToObj(i -> Lotto.generateLotto(lottoGenerator))
-        .collect(Collectors.toList()); // List에 추가
+        .collect(Collectors.toList());
   }
 
   public int size() {
@@ -23,5 +23,9 @@ public class LottoSet {
 
   public int totalPrice() {
     return totalPrice;
+  }
+
+  public List<Lotto> getLottos() {
+    return lottos;
   }
 }

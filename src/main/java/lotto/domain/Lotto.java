@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Lotto {
@@ -16,6 +17,19 @@ public class Lotto {
     }
 
     this.numbers = numbers;
+  }
+
+  public static Lotto of(String input) {
+    Set<Integer> numbers = new HashSet<>();
+    String[] tokens = input.split(",");
+    for (String token : tokens) {
+      try {
+        numbers.add(Integer.parseInt(token.trim()));
+      } catch (NumberFormatException e) {
+        throw new IllegalArgumentException("잘못된 입력입니다. 숫자만 입력하세요.");
+      }
+    }
+    return new Lotto(numbers);
   }
 
   public boolean validateChecks(Set<Integer> numbers) {

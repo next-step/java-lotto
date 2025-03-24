@@ -37,4 +37,11 @@ class LottoTest {
   void invalidLottoSize() {
     assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Set.of(1, 2, 3, 4, 5)));
   }
+
+  @Test
+  @DisplayName("입력 받은 로또 번호를 로또 객체로 변환할 수 있다.")
+  void of() {
+    Lotto lotto = Lotto.of("1,2,3,4,5,6");
+    assertThat(lotto.size()).isEqualTo(Lotto.SIZE);
+  }
 }
