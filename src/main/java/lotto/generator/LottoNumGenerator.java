@@ -19,7 +19,7 @@ public interface LottoNumGenerator {
   private List<Integer> getCandidateNumbers() {
     List<Integer> numbers = new ArrayList<>();
 
-    for (int i = 1; i <= LottoProperty.LOTTO_CANDIDATE_SIZE; i++) {
+    for (int i = 1; i <= LottoProperty.MAX_LOTTO_CANDIDATE_NUM; i++) {
       numbers.add(i);
     }
 

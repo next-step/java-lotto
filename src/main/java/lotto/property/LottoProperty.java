@@ -1,7 +1,7 @@
 package lotto.property;
 
 public class LottoProperty {
-  public static final int LOTTO_CANDIDATE_SIZE = 45;
+  public static final int MAX_LOTTO_CANDIDATE_NUM = 45;
   public static final int LOTTO_NUM_SIZE = 6;
 
   public static final int NO_PRIZE_AMOUNT = 0;
