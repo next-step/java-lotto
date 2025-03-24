@@ -9,7 +9,7 @@ import java.util.List;
 class StringCalculatorTest {
 
     @Test
-    @DisplayName("주어진 elements대로 계산해야 한다")
+    @DisplayName("연산자에 맞게 계산한다")
     void calculate() {
         List<Element> elements = List.of(
                 new Element(Operator.START, 2),
