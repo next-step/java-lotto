@@ -24,17 +24,6 @@ public class Lotto {
     }
 
     public int confirmWinning(List<Integer> winningNumbers) {
-        int count = 0;
-        for (Integer lottoNumber : this.lottoNumbers) {
-            count += match(winningNumbers, lottoNumber);
-        }
-        return count;
-    }
-
-    private static int match(List<Integer> winningNumbers, Integer lottoNumber) {
-        if (winningNumbers.contains(lottoNumber)) {
-            return 1;
-        }
-        return 0;
+        return (int) this.lottoNumbers.stream().filter(winningNumbers::contains).count();
     }
 }
