@@ -18,10 +18,7 @@ public class LottoNumList {
     this.nums = nums;
   }
 
-  public int getMatchCount(List<Integer> winningNums) {
-    if (new HashSet<>(winningNums).size() != LottoProperty.LOTTO_NUM_SIZE) {
-      throw new IllegalArgumentException("당첨 번호가 유효하지 않은 숫자 수입니다.");
-    }
+  public int getMatchCount(WinningNums winningNums) {
     return (int) nums.stream()
         .filter(winningNums::contains).count();
   }

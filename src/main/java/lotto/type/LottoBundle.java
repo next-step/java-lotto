@@ -26,7 +26,7 @@ public class LottoBundle {
     return lottoBundle;
   }
 
-  public List<LottoPrize> getLottoPrizes(List<Integer> winningNums) {
+  public List<LottoPrize> getLottoPrizes(WinningNums winningNums) {
     return bundle.stream()
         .map(lottoNumList -> LottoPrize.findByMatchCount(lottoNumList.getMatchCount(winningNums)))
         .collect(Collectors.toList());

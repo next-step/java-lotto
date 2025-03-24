@@ -30,12 +30,10 @@ class LottoBundleTest {
   @DisplayName("결과 가져오기")
   @Test
   void testGetResults() {
-    List<Integer> winningNums = List.of(1, 2, 3, 4, 5, 6);
-
     LottoBundle bundle = new LottoBundle(
         List.of(new LottoNumList(List.of(1, 2, 3, 4, 5, 6)), new LottoNumList(List.of(10, 11, 12, 13, 15, 16)))
     );
 
-    assertThat(bundle.getLottoPrizes(winningNums)).containsExactly(LottoPrize.SIX_MATCHES, LottoPrize.ZERO_MATCHES);
+    assertThat(bundle.getLottoPrizes(new WinningNums("1, 2, 3, 4, 5, 6"))).containsExactly(LottoPrize.SIX_MATCHES, LottoPrize.ZERO_MATCHES);
   }
 }
