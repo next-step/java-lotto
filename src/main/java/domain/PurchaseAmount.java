@@ -15,11 +15,18 @@ public class PurchaseAmount {
 
     private void validate(int amount) {
         validateMinimumAmount(amount);
+        validateDivisibleByLottoPrice(amount);
     }
 
     private void validateMinimumAmount(int amount) {
         if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다.");
+        }
+    }
+
+    private void validateDivisibleByLottoPrice(int amount) {
+        if (amount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다.");
         }
     }
 }
