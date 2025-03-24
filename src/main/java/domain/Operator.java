@@ -11,23 +11,34 @@ public class Operator {
         return new Operator(value);
     }
 
-    public Integer operate(Operand firstOperand, Operand secondOperand) {
-        if (this.value.equals(OperatorType.ADD)) {
-            return firstOperand.value() + secondOperand.value();
+    public Operand operate(Operand firstOperand, Operand secondOperand) {
+        switch (this.value) {
+            case ADD:
+                return new Operand(add(firstOperand, secondOperand));
+            case SUBTRACT:
+                return new Operand(subtract(firstOperand, secondOperand));
+            case MULTIPLY:
+                return new Operand(multiply(firstOperand, secondOperand));
+            case DIVIDE:
+                return new Operand(divide(firstOperand, secondOperand));
+            default:
+                throw new IllegalArgumentException("Invalid operator");
         }
+    }
 
-        if (this.value.equals(OperatorType.SUBTRACT)) {
-            return firstOperand.value() - secondOperand.value();
-        }
+    private Integer add(Operand firstOperand, Operand secondOperand) {
+        return firstOperand.value() + secondOperand.value();
+    }
 
-        if (this.value.equals(OperatorType.MULTIPLY)) {
-            return firstOperand.value() * secondOperand.value();
-        }
+    private Integer subtract(Operand firstOperand, Operand secondOperand) {
+        return firstOperand.value() - secondOperand.value();
+    }
 
-        if (this.value.equals(OperatorType.DIVIDE)) {
-            return firstOperand.value() / secondOperand.value();
-        }
+    private Integer multiply(Operand firstOperand, Operand secondOperand) {
+        return firstOperand.value() * secondOperand.value();
+    }
 
-        throw new IllegalArgumentException("Invalid operator");
+    private Integer divide(Operand firstOperand, Operand secondOperand) {
+        return firstOperand.value() / secondOperand.value();
     }
 }

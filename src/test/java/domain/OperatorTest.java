@@ -20,11 +20,11 @@ class OperatorTest {
 
         // When
         Operator operator = new Operator("+");
-        Integer result = operator.operate(operand1, operand2);
+        Operand result = operator.operate(operand1, operand2);
 
         // Then
         int expected = 3;
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(new Operand(expected));
     }
 
     @DisplayName("뺄셈 연산 테스트")
@@ -36,11 +36,11 @@ class OperatorTest {
 
         // When
         Operator operator = new Operator("-");
-        Integer result = operator.operate(operand1, operand2);
+        Operand result = operator.operate(operand1, operand2);
 
         // Then
         int expected = -1;
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(new Operand(expected));
     }
 
     @DisplayName("곱셈 연산 테스트")
@@ -52,11 +52,11 @@ class OperatorTest {
 
         // When
         Operator operator = new Operator("*");
-        Integer result = operator.operate(operand1, operand2);
+        Operand result = operator.operate(operand1, operand2);
 
         // Then
         int expected = 2;
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(new Operand(expected));
     }
 
     @DisplayName("나눗셈 연산 테스트")
@@ -69,10 +69,10 @@ class OperatorTest {
 
         // When
         Operator operator = new Operator("/");
-        Integer result = operator.operate(operand1, operand2);
+        Operand result = operator.operate(operand1, operand2);
 
         // Then
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(new Operand(expected));
     }
 
     @DisplayName("0으로 나누는 경우 예외 발생")
