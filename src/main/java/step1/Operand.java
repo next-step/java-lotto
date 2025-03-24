@@ -1,4 +1,4 @@
-package domain;
+package step1;
 
 public class Operand {
     private final int value;
