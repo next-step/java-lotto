@@ -7,3 +7,11 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 요구사항
+### step1
+- [x] 문자열을 입력 받을 수 있고 반드시 사칙 연산 사이에는 반드시 빈 공백 문자열이 있다고 가정한다.
+- [x] 입력 값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException 을 던진다.
+- [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException 을 던진다.
+- [x] 나눗셈의 경우 결과 값을 정수로 떨어지는 값을 반환한다.
+- [x] 사칙연산의 계산 우선순위가 아닌 입력 값에 따라 계산 순서가 결정된다.
