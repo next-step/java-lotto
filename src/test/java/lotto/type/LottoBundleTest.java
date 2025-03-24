@@ -27,7 +27,6 @@ class LottoBundleTest {
         .isEqualTo(new LottoBundle(List.of(new LottoNumList(List.of(1, 2, 3, 4, 5, 6)))));
   }
 
-
   @DisplayName("결과 가져오기")
   @Test
   void testGetResults() {

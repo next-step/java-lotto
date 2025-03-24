@@ -5,6 +5,7 @@ import lotto.property.LottoProperty;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumList {
 
@@ -36,5 +37,12 @@ public class LottoNumList {
   @Override
   public int hashCode() {
     return Objects.hashCode(nums);
+  }
+
+  @Override
+  public String toString() {
+    return nums.stream()
+        .map(String::valueOf)
+        .collect(Collectors.joining(", ", "[", "]"));
   }
 }

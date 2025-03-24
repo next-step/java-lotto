@@ -44,4 +44,11 @@ public class LottoBundle {
   public int hashCode() {
     return Objects.hashCode(bundle);
   }
+
+  @Override
+  public String toString() {
+    return bundle.stream()
+        .map(LottoNumList::toString)
+        .collect(Collectors.joining("\n"));
+  }
 }
