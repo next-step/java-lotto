@@ -1,17 +1,16 @@
 package lotto;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProfitCalculator {
-
-    public static final int TICKET_PRICE = 1000;
-
-    public static float calculate(List<LottoResult> results) {
-        int count = results.size();
+    public static float calculate(Map<PrizeRank, Integer> summary) {
+        int count = 0;
         int sum = 0;
-        for (LottoResult result : results) {
-            sum += result.getPrize();
+        for (PrizeRank prize : summary.keySet()) {
+            count += summary.get(prize);
+            sum += prize.getPrize() * summary.get(prize);
         }
-        return (float) sum / (count * TICKET_PRICE);
+        return (float) sum / (count * LottoTicket.PRICE);
     }
 }

@@ -11,7 +11,7 @@ public class LottoTicketTest {
         LottoTicket ticket2 = new LottoTicket(new int[]{1, 2, 3, 4, 5, 6});
         LottoTicket ticket3 = new LottoTicket(new int[]{1, 12, 13, 14, 5, 6});
 
-        assertThat(ticket1.getMatchCount(ticket2)).isEqualTo(6);
-        assertThat(ticket1.getMatchCount(ticket3)).isEqualTo(3);
+        assertThat(ticket1.matchWinner(ticket2)).isEqualTo(new LottoResult(ticket1, new MatchCount(6)));
+        assertThat(ticket1.matchWinner(ticket3)).isEqualTo(new LottoResult(ticket1, new MatchCount(3)));
     }
 }

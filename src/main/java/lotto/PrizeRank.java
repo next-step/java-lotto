@@ -34,4 +34,13 @@ public enum PrizeRank {
     public int getPrize() {
         return prize;
     }
+
+    @Override
+    public String toString() {
+        return matchCount.toString() + "개 일치 (" + formatMoney(prize) + ")";
+    }
+
+    public String formatMoney(int amount) {
+        return String.format("%,d원", amount);
+    }
 }

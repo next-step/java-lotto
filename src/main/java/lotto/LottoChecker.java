@@ -1,15 +1,22 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoChecker {
-    public static List<LottoResult> checkTickets(List<LottoTicket> tickets, LottoTicket winningTicket) {
+    public static Map<PrizeRank, Integer> getSummary(List<LottoTicket> tickets, LottoTicket winningTicket) {
         List<LottoResult> results = new ArrayList<>();
         for (LottoTicket ticket : tickets) {
-            int matchCount = ticket.getMatchCount(winningTicket);
-            results.add(new LottoResult(ticket, new MatchCount(matchCount)));
+            results.add(ticket.matchWinner(winningTicket));
         }
-        return results;
+
+        Map<PrizeRank, Integer> summary = new HashMap<>();
+        for (LottoResult result : results) {
+            summary.put(result.getRank(), summary.getOrDefault(result.getRank(), 0) + 1);
+        }
+
+        return summary;
     }
 }

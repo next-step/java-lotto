@@ -18,6 +18,11 @@ public class LottoNumber {
     }
 
     @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;

@@ -18,6 +18,11 @@ public class MatchCount {
     }
 
     @Override
+    public String toString() {
+        return String.valueOf(count);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         MatchCount that = (MatchCount) o;

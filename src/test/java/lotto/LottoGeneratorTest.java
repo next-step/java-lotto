@@ -7,6 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGeneratorTest {
     @Test
     void generate() {
-        assertThat(LottoGenerator.generate()).isNotNull();
+        assertThat(LottoGenerator.generate(1_000)).isNotEmpty();
     }
 }

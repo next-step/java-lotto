@@ -11,8 +11,8 @@ public class LottoResult {
         this.rank = PrizeRank.of(matchCount);
     }
 
-    public int getPrize() {
-        return rank.getPrize();
+    public PrizeRank getRank() {
+        return this.rank;
     }
 
     @Override
