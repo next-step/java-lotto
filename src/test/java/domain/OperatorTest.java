@@ -1,7 +1,7 @@
 package domain;
 
 import domain.symbol.Operand;
-import domain.symbol.Operator;
+import domain.symbol.OperatorType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +21,7 @@ class OperatorTest {
         Operand operand2 = new Operand(2);
 
         // When
-        Operator operator = new Operator("+");
+        OperatorType operator = OperatorType.findOperatorByString("+");
         Operand result = operator.operate(operand1, operand2);
 
         // Then
@@ -37,7 +37,7 @@ class OperatorTest {
         Operand operand2 = new Operand(2);
 
         // When
-        Operator operator = new Operator("-");
+        OperatorType operator = OperatorType.findOperatorByString("-");
         Operand result = operator.operate(operand1, operand2);
 
         // Then
@@ -53,7 +53,7 @@ class OperatorTest {
         Operand operand2 = new Operand(2);
 
         // When
-        Operator operator = new Operator("*");
+        OperatorType operator = OperatorType.findOperatorByString("*");
         Operand result = operator.operate(operand1, operand2);
 
         // Then
@@ -70,7 +70,7 @@ class OperatorTest {
         Operand operand2 = new Operand(second);
 
         // When
-        Operator operator = new Operator("/");
+        OperatorType operator = OperatorType.findOperatorByString("/");
         Operand result = operator.operate(operand1, operand2);
 
         // Then
@@ -85,7 +85,7 @@ class OperatorTest {
         Operand operand2 = new Operand(0);
 
         // When
-        Operator operator = new Operator("/");
+        OperatorType operator = OperatorType.findOperatorByString("/");
 
         // Then
         assertThatThrownBy(() -> operator.operate(operand1, operand2))
@@ -95,7 +95,7 @@ class OperatorTest {
     @DisplayName("연산자가 아닌 경우 예외 발생")
     @Test
     void invalidOperatorTest() {
-        assertThatThrownBy(() -> new Operator("!"))
+        assertThatThrownBy(() -> OperatorType.findOperatorByString("!"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

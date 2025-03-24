@@ -1,13 +1,13 @@
 package domain;
 
 import domain.symbol.Operand;
-import domain.symbol.Operator;
+import domain.symbol.OperatorType;
 import domain.symbol.SymbolSequence;
 
 public class Calculation {
 
     private final SymbolSequence<Operand> operands;
-    private final SymbolSequence<Operator> operators;
+    private final SymbolSequence<OperatorType> operators;
 
     public Calculation(Tokens tokens) {
         this.operands = new SymbolSequence<>();
@@ -26,7 +26,7 @@ public class Calculation {
     private Operand calculateLoop() {
         Operand firstOperand = operands.getNext();
         Operand secondOperand = operands.getNext();
-        Operator operator = operators.getNext();
+        OperatorType operator = operators.getNext();
 
         while (operators.hasNext()) {
             firstOperand = operator.operate(firstOperand, secondOperand);
@@ -57,7 +57,7 @@ public class Calculation {
 
     private void addIfValidOperator(String inputSymbol) {
         try {
-            operators.add(Operator.of(inputSymbol));
+            operators.add(OperatorType.findOperatorByString(inputSymbol));
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid Formula");
         }
