@@ -49,6 +49,10 @@ public class Operand {
         return value == operand.value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(value);
