@@ -23,8 +23,11 @@ public class CalculatorTest {
 
     @Test
     void 나눗셈() {
-        assertThat(Calculator.run(4, 2,  Operator.DIVIDE)).isEqualTo(2);
+        assertThat(Calculator.run(4, 2, Operator.DIVIDE)).isEqualTo(2);
+    }
 
+    @Test
+    void 나눗셈_예외() {
         assertThatThrownBy(() ->
                 Calculator.run(2, 3, Operator.DIVIDE)
         ).isInstanceOf(ArithmeticException.class);
