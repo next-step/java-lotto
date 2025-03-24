@@ -1,42 +1,81 @@
 package calculator;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class Calculator {
 
     private int result = 0;
+    private final String formula;
+    private static final String PREFIX = "+ ";
+    private static final String TYPE_ERROR = "유효하지 않은 타입입니다.";
+
+    Calculator(int init) {
+        this(init, "0");
+    }
+
+    public Calculator(String formula) {
+        this(0, formula);
+    }
+
+    public Calculator(int init, String formula) {
+        if (formula == null || formula.isBlank()) {
+            throw new IllegalArgumentException(TYPE_ERROR);
+        }
+        this.result = init;
+        this.formula = formula;
+    }
+
+    public String[] getCalTargetArr() {
+        return PREFIX.concat(formula).split(" ");
+    }
 
     public int getResult() {
         return result;
     }
 
     public int add(int num) {
-        return result + num;
+        return result += num;
     }
 
     public int subtract(int num) {
-        return result - num;
+        return result -= num;
     }
 
     public int multiply(int num) {
-        return result * num;
+        return result *= num;
     }
 
     public int divide(int num) {
-        return result / num;
+        if (result % num != 0) {
+            throw new IllegalArgumentException(TYPE_ERROR);
+        }
+        return result /= num;
     }
 
-    public int calculate(String sign, int num) {
+    public void calculate(String sign, String numStr) {
+        int num = Integer.parseInt(numStr);
         switch (sign) {
             case "+":
-                return add(num);
+                add(num);
+                return;
             case "-":
-                return subtract(num);
+                subtract(num);
+                return;
             case "*":
-                return multiply(num);
+                multiply(num);
+                return;
             case "/":
-                return divide(num);
+                divide(num);
+                return;
+            default:
+                throw new IllegalArgumentException(TYPE_ERROR);
         }
+    }
+
+    public int calculateFormula() {
+        String[] calTargetArr = this.getCalTargetArr();
+        for (int i = 0; i < calTargetArr.length / 2; i++) {
+            this.calculate(calTargetArr[i * 2], calTargetArr[i * 2 + 1]);
+        }
+        return this.getResult();
     }
 }
