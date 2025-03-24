@@ -6,7 +6,6 @@ public class InputView {
     public static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
-        throw new IllegalStateException("인스턴스를 생성할 수 없는 클래스입니다.");
     }
 
     public static int inputLottoPurchaseAmount() {
