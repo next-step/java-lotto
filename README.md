@@ -37,3 +37,5 @@
 
 - [X] ExpressionParser Delimiter 상수 추출, 토큰 만드는거 함수로 추출
 - [X] Expression 검증 로직 생성자로 이동
+- [X] operand 테스트 추가
+- [X] operator 테스트 변경

@@ -1,15 +1,17 @@
 package step1.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class OperatorTest {
 
-    @Test
-    void 연산자는_정해진_기호를_가진다() {
-        Operator operator = Operator.PLUS;
-        assertThat(operator.getSymbol()).isEqualTo('+');
+    @ParameterizedTest
+    @EnumSource(Operator.class)
+    void 연산자는_정해진_기호를_가진다(Operator operator) {
+        assertThat(operator.getSymbol()).isIn('+', '-', '*', '/');
     }
 
     @Test
