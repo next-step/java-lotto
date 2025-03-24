@@ -5,6 +5,7 @@ public class PurchaseAmount {
     private final int amount;
 
     public PurchaseAmount(int amount) {
+        validate(amount);
         this.amount = amount;
     }
 
@@ -12,4 +13,13 @@ public class PurchaseAmount {
         return amount / LOTTO_PRICE;
     }
 
+    private void validate(int amount) {
+        validateMinimumAmount(amount);
+    }
+
+    private void validateMinimumAmount(int amount) {
+        if (amount < LOTTO_PRICE) {
+            throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다.");
+        }
+    }
 }
