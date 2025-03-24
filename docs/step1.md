@@ -22,4 +22,4 @@
 - [x] 공백 문자열을 빈 공백 문자로 분리하려면 String 클래스의 split(" ") 메소드를 활용한다. 
   - [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
 - [x] 사용자를 위한 입출력 클래스를 생성한다.
-- [ ] Main 클래스를 생성한다.
+- [x] Main 클래스를 생성한다.
