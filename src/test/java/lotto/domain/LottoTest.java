@@ -14,16 +14,16 @@ class LottoTest {
     LottoGenerator lottoGenerator = new RandomLottoGenerator();
     Lotto lotto = Lotto.generateLotto(lottoGenerator);
 
-    assertThat(lotto.size()).isEqualTo(6);
+    assertThat(lotto.size()).isEqualTo(Lotto.SIZE);
   }
 
   @Test
-  @DisplayName("로또 숫자는 1부터 45까지의 숫자다.")
+  @DisplayName("로또 숫자는 Lotto.MIN_NUMBER(1)부터 Lotto.MAX_NUMBER(45)까지의 숫자다.")
   void lottoNumberRange() {
     LottoGenerator lottoGenerator = new RandomLottoGenerator();
     Lotto lotto = Lotto.generateLotto(lottoGenerator);
 
-    assertThat(lotto.getNumbers()).allMatch(number -> number >= 1 && number <= 45);
+    assertThat(lotto.getNumbers()).allMatch(number -> number >= Lotto.MIN_NUMBER && number <= Lotto.MAX_NUMBER);
   }
 
   @Test

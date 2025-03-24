@@ -5,9 +5,10 @@ import java.util.Set;
 public class Lotto {
   private final Set<Integer> numbers;
 
-  private static final int LOTTO_SIZE = 6;
-  private static final int LOTTO_MIN_NUMBER = 1;
-  private static final int LOTTO_MAX_NUMBER = 45;
+  public static final int SIZE = 6;
+  public static final int MIN_NUMBER = 1;
+  public static final int MAX_NUMBER = 45;
+  public static final int PRICE = 1000;
 
   public Lotto(Set<Integer> numbers) {
     if (!validateChecks(numbers)) {
@@ -18,8 +19,8 @@ public class Lotto {
   }
 
   public boolean validateChecks(Set<Integer> numbers) {
-    return numbers.size() == LOTTO_SIZE
-        && numbers.stream().allMatch(number -> number >= LOTTO_MIN_NUMBER && number <= LOTTO_MAX_NUMBER);
+    return numbers.size() == SIZE
+        && numbers.stream().allMatch(number -> number >= MIN_NUMBER && number <= MAX_NUMBER);
   }
 
   public static Lotto generateLotto(LottoGenerator lottoGenerator) {
