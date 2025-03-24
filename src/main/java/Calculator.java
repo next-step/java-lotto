@@ -22,6 +22,9 @@ public class Calculator {
         if ("-".equals(operator)) {
             return firstNumber - secondNumber;
         }
+        if ("/".equals(operator)) {
+            return firstNumber / secondNumber;
+        }
         throw new IllegalArgumentException("지원하지 않는 연산자입니다: " + operator);
     }
 

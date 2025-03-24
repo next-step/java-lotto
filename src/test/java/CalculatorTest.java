@@ -28,4 +28,14 @@ public class CalculatorTest {
         CalculatorInput input = new CalculatorInput("5 - 3");
         assertThat(calculator.calculate(input)).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("두 개의 숫자로 이루어진 나눗셈을 할 수 있다.")
+    void divisionTest() {
+        Calculator calculator = new Calculator();
+        CalculatorInput input = new CalculatorInput("6 / 3");
+        assertThat(calculator.calculate(input)).isEqualTo(2);
+    }
+
+
 }
