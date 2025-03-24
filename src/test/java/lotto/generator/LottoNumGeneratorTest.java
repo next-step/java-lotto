@@ -30,12 +30,12 @@ class LottoNumGeneratorTest {
         () -> assertThat(lottoNumGeneratorReverseShuffle.generate())
             .isEqualTo(LottoNumList.valueOf(
                 List.of(
-                    LottoProperty.LOTTO_CANDIDATE_SIZE - 5,
-                    LottoProperty.LOTTO_CANDIDATE_SIZE - 4,
-                    LottoProperty.LOTTO_CANDIDATE_SIZE - 3,
-                    LottoProperty.LOTTO_CANDIDATE_SIZE - 2,
-                    LottoProperty.LOTTO_CANDIDATE_SIZE - 1,
-                    LottoProperty.LOTTO_CANDIDATE_SIZE
+                    LottoProperty.MAX_LOTTO_CANDIDATE_NUM - 5,
+                    LottoProperty.MAX_LOTTO_CANDIDATE_NUM - 4,
+                    LottoProperty.MAX_LOTTO_CANDIDATE_NUM - 3,
+                    LottoProperty.MAX_LOTTO_CANDIDATE_NUM - 2,
+                    LottoProperty.MAX_LOTTO_CANDIDATE_NUM - 1,
+                    LottoProperty.MAX_LOTTO_CANDIDATE_NUM
                 )
             ))
     );
