@@ -1,18 +1,17 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
     private final List<Integer> numbers;
 
     public WinningNumbers(String input) {
-        String[] split = input.split(",");
-        List<Integer> arr = new ArrayList<>();
-        for (String s : split) {
-            arr.add(Integer.parseInt(s.trim()));
-        }
+        List<Integer> arr = Arrays.stream(input.split(","))
+                .map(s -> Integer.parseInt(s.trim()))
+                .collect(Collectors.toList());
         validateWinningNumbers(arr);
         this.numbers = arr;
     }
@@ -24,13 +23,7 @@ public class WinningNumbers {
         if (new HashSet<>(arr).size() != arr.size()) {
             throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
         }
-        for (Integer num : arr) {
-            validateWinningNumberRange(num);
-        }
-    }
-
-    private void validateWinningNumberRange(Integer num) {
-        if (num < 1 || num > 45) {
+        if (arr.stream().anyMatch(num -> num < 1 || num > 45)) {
             throw new IllegalArgumentException("당첨 번호는 1부터 45까지의 숫자여야 합니다.");
         }
     }

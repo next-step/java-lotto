@@ -2,20 +2,21 @@ package lotto.domain;
 
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
     private final List<Lotto> values;
 
     public Lottos(int lottoCount) {
-        List<Lotto> arr = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = new Lotto();
-            ResultView.printLotto(lotto);
-            arr.add(lotto);
-        }
-        this.values = arr;
+        this.values = IntStream.range(0, lottoCount)
+                .mapToObj(i -> {
+                    Lotto lotto = new Lotto();
+                    ResultView.printLotto(lotto);
+                    return lotto;
+                })
+                .collect(Collectors.toList());
     }
 
     public Lottos(List<Lotto> values) {
@@ -23,10 +24,8 @@ public class Lottos {
     }
 
     public Rewards getResult(WinningNumbers winningNumbers) {
-        List<Reward> rewards = new ArrayList<>();
-        for (Lotto lotto : this.values) {
-            rewards.add(new Reward(winningNumbers.countNumberMatching(lotto)));
-        }
-        return new Rewards(rewards);
+        return new Rewards(this.values.stream()
+                .map(value -> new Reward(winningNumbers.countNumberMatching(value)))
+                .collect(Collectors.toList()));
     }
 }
