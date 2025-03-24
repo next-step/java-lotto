@@ -1,4 +1,4 @@
-package domain;
+package domain.symbol;
 
 public enum OperatorType {
     ADD("+"),

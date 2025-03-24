@@ -18,4 +18,4 @@
 - [x] 예외 처리 구현
   - [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
   - [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
-- [ ] 여러 개의 연산 처리 구현
+- [x] 여러 개의 연산 처리 구현

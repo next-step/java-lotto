@@ -1,4 +1,4 @@
-package domain;
+package domain.symbol;
 
 public class Operand {
     private final Integer value;

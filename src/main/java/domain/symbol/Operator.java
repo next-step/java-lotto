@@ -1,4 +1,4 @@
-package domain;
+package domain.symbol;
 
 public class Operator {
     private final OperatorType value;
