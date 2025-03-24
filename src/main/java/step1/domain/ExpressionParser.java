@@ -5,19 +5,26 @@ import java.util.Queue;
 
 public class ExpressionParser {
 
+    public static final String DELIMITER = " ";
+
     public static Expression parse(String input) {
-        String[] tokens = input.split(" ");
+        String[] tokens = input.split(DELIMITER);
 
         Queue<Operand> operands = new LinkedList<>();
         Queue<Operator> operators = new LinkedList<>();
 
-        for (int i = 0; i < tokens.length; i+=2) {
-            operands.offer(new Operand(tokens[i]));
-        }
-        for (int i = 1; i < tokens.length; i+=2) {
-            operators.offer(Operator.fromSymbol(tokens[i].charAt(0)));
+        for (String token : tokens) {
+            processToken(token, operands, operators);
         }
 
         return new Expression(operands, operators);
+    }
+
+    private static void processToken(String token, Queue<Operand> operands, Queue<Operator> operators) {
+        if (operands.size() == operators.size()) {
+            operands.offer(new Operand(token));
+            return;
+        }
+        operators.offer(Operator.fromSymbol(token.charAt(0)));
     }
 }

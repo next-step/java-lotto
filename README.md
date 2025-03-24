@@ -34,3 +34,5 @@
 - [X] 수식생성기는 문자열을 받아서 수식을 반환한다.
 - [X] 수식 생성자에서 예외 처리
 - [X] 계산기, inputView, resultView
+
+- [X] ExpressionParser Delimiter 상수 추출, 토큰 만드는거 함수로 추출
