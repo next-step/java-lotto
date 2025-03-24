@@ -1,30 +1,29 @@
 package lotto;
 
-import lotto.generator.LottoNumGenerator;
+import lotto.generator.CollectionShuffleLottoNumGenerator;
 import lotto.type.LottoBundle;
-import lotto.type.LottoNumList;
 import lotto.type.LottoPrize;
+import lotto.type.WinningNums;
+import lotto.util.LottoPurchaseCalculator;
+import lotto.util.ReturnRateCalculator;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static lotto.view.InputView.showPriceInput;
+import static lotto.view.InputView.showWinningNums;
+import static lotto.view.OutputView.*;
+
 
 public class LottoSystem {
 
-
-
-//  public LottoBundle createLottoBundle(int lottoCount, LottoNumGenerator lottoNumGenerator) {
-//    List<LottoNumList> lottoBundle = new ArrayList<>();
-//    for (int i = 0; i < lottoCount; i++) {
-//      lottoBundle.add(lottoNumGenerator.generate());
-//    }
-//    return new LottoBundle(lottoBundle);
-//  }
-//
-//  public List<LottoPrize> getLottoPrize(LottoBundle lottoBundle, List<Integer> winningNums) {
-//    return lottoBundle.getLottoPrizes(winningNums);
-//  }
-//
-//  public int getTotalPrize(List<LottoPrize> lottoPrizes) {
-//    return LottoPrize.getTotalPrize(lottoPrizes);
-//  }
+  public static void main(String[] args) {
+    int price = showPriceInput();
+    int lottoCount = LottoPurchaseCalculator.toLottoCount(price);
+    showLottoCount(lottoCount);
+    LottoBundle lottoBundle = new LottoBundle(lottoCount, new CollectionShuffleLottoNumGenerator());
+    showLottoBundle(lottoBundle);
+    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(new WinningNums(showWinningNums()));
+    showLottoPrize(lottoPrizeList);
+    showReturnRate(ReturnRateCalculator.calculate(price, LottoPrize.getTotalPrize(lottoPrizeList)));
+  }
 }

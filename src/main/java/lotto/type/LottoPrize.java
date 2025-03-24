@@ -44,4 +44,13 @@ public enum LottoPrize {
         .mapToInt(lottoPrize -> lottoPrize.prizeAmount)
         .sum();
   }
+
+  public boolean hasPrize() {
+    return prizeAmount != LottoProperty.NO_PRIZE_AMOUNT;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%d개 일치 (%d원)", matchCount, prizeAmount);
+  }
 }
