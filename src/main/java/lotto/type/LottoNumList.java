@@ -11,15 +11,15 @@ public class LottoNumList {
 
   private final List<Integer> nums;
 
-  public static LottoNumList valueOf(List<Integer> nums) {
-    return new LottoNumList(nums);
-  }
-
   private LottoNumList(List<Integer> nums) {
     if (new HashSet<>(nums).size() != LottoProperty.LOTTO_NUM_SIZE) {
       throw new IllegalArgumentException("유효하지 않은 숫자 수입니다.");
     }
     this.nums = nums;
+  }
+
+  public static LottoNumList valueOf(List<Integer> nums) {
+    return new LottoNumList(nums);
   }
 
   public int getMatchCount(WinningNums winningNums) {

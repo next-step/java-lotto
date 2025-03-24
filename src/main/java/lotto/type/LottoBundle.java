@@ -10,14 +10,6 @@ import java.util.stream.Collectors;
 public class LottoBundle {
   private final List<LottoNumList> bundle;
 
-  public static LottoBundle generate(int lottoCount, LottoNumGenerator lottoNumGenerator) {
-    return new LottoBundle(lottoCount, lottoNumGenerator);
-  }
-
-  public static LottoBundle valueOf(List<LottoNumList> bundle) {
-    return new LottoBundle(bundle);
-  }
-
   private LottoBundle(int lottoCount, LottoNumGenerator lottoNumGenerator) {
     this(generateBundle(lottoCount, lottoNumGenerator));
   }
@@ -32,6 +24,14 @@ public class LottoBundle {
       lottoBundle.add(lottoNumGenerator.generate());
     }
     return lottoBundle;
+  }
+
+  public static LottoBundle generate(int lottoCount, LottoNumGenerator lottoNumGenerator) {
+    return new LottoBundle(lottoCount, lottoNumGenerator);
+  }
+
+  public static LottoBundle valueOf(List<LottoNumList> bundle) {
+    return new LottoBundle(bundle);
   }
 
   public List<LottoPrize> getLottoPrizes(WinningNums winningNums) {

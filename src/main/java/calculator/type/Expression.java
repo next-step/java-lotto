@@ -11,10 +11,6 @@ public class Expression {
 
   List<String> splitExpression;
 
-  public static Expression valueOf(String expression) {
-    return new Expression(expression);
-  }
-
   private Expression(String expression) {
     if (expression == null || expression.isEmpty()) {
       throw new IllegalArgumentException("유효하지 않은 표현식입니다.");
@@ -39,6 +35,9 @@ public class Expression {
     this.splitExpression = splitExpression;
   }
 
+  public static Expression valueOf(String expression) {
+    return new Expression(expression);
+  }
 
   public int run() {
     int res = Integer.parseInt(splitExpression.get(0));
