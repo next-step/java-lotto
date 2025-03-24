@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
-    protected static final List<Integer> LOTTO_NUMBERS = initNumbers();
+    private static final List<Integer> LOTTO_NUMBERS = initNumbers();
 
     private LottoNumbers() {
     }
