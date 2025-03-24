@@ -47,7 +47,7 @@
   * 한 장당 가격(1000원) : 상수 LOTTO_PRICE
   * 로또 몇 장인지 : 입력값 기반
 * LottoGame : Main 클래스
-  * 장 수 입력 받음 (-> InputView)
+  * 금액 입력 받음 (-> InputView)
   * 로또 발급 (-> LottoGenerator를 통해 LottoSet 생성)
   * 이전 당첨 번호 입력 받음 (-> InputView)
   * 결과 생성 (-> LottoResultAnalyzer)

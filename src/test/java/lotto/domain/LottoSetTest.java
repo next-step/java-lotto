@@ -14,6 +14,6 @@ class LottoSetTest {
     Lotto lotto1 = Lotto.generateLotto(new RandomLottoGenerator());
     Lotto lotto2 = Lotto.generateLotto(new RandomLottoGenerator());
     LottoSet lottoSet = new LottoSet(List.of(lotto1, lotto2));
-    assertThat(lottoSet.getLottos().size()).isEqualTo(2);
+    assertThat(lottoSet.size()).isEqualTo(2);
   }
 }
