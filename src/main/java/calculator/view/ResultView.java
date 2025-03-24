@@ -1,6 +1,6 @@
-package lotto.view;
+package calculator.view;
 
-import lotto.domain.Number;
+import calculator.domain.Number;
 
 public class ResultView {
     public static void printResult(Number number) {

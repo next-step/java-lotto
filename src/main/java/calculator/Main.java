@@ -1,11 +1,11 @@
-package lotto;
+package calculator;
 
-import lotto.domain.Calculator;
-import lotto.domain.Extractor;
-import lotto.domain.Number;
-import lotto.domain.Operator;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import calculator.domain.Calculator;
+import calculator.domain.Extractor;
+import calculator.domain.Number;
+import calculator.domain.Operator;
+import calculator.view.InputView;
+import calculator.view.ResultView;
 
 import java.util.List;
 
