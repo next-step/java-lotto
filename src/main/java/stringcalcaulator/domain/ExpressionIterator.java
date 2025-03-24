@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 
 public class ExpressionIterator implements Iterator<String> {
+    private static final String INVALID_INPUT_REGEX = "^[0-9+\\-*/\\s]+$";
+
     private final StringTokenizer tokenizer;
 
     public ExpressionIterator(String expression) {
@@ -26,7 +28,7 @@ public class ExpressionIterator implements Iterator<String> {
     }
 
     private static boolean isInvalidInput(String input) {
-        return !input.matches("^[0-9+\\-*/\\s]+$");
+        return !input.matches(INVALID_INPUT_REGEX);
     }
 
     @Override
