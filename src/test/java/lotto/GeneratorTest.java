@@ -13,7 +13,16 @@ public class GeneratorTest {
         List<Integer> result = generator.run();
         assertThat(result).hasSize(6);
         for (Integer i : result) {
-            assertThat(i >= 1 && i <= 45).isTrue();
+            assertThat(i).isGreaterThanOrEqualTo(1).isLessThanOrEqualTo(45);
+        }
+    }
+
+    @Test
+    void 로또_정렬() {
+        Generator generator = new Generator();
+        List<Integer> result = generator.run();
+        for (int i = 0; i < result.size() - 1; i++) {
+            assertThat(result.get(i)).isLessThan(result.get(i + 1));
         }
     }
 }
