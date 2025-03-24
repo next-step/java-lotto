@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
     PLUS("+", (left, right) -> left + right),
@@ -13,9 +13,9 @@ public enum Operator {
     DIVIDE("/", (left, right) -> left / right);
 
     private final String symbol;
-    private final BiFunction<Integer, Integer, Integer> calculator;
+    private final BinaryOperator<Integer> calculator;
 
-    Operator(String symbol, BiFunction<Integer, Integer, Integer> calculator) {
+    Operator(String symbol, BinaryOperator<Integer> calculator) {
         this.symbol = symbol;
         this.calculator = calculator;
     }
