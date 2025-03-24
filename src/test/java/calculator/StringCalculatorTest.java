@@ -11,31 +11,35 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringCalculatorTest {
-    @Test
-    public void 더하기(){
-        assertThat(Operator.calculate("+", 1,2)).isEqualTo(3);
-    }
-    @Test
-    public void 빼기(){
-        assertThat(Operator.calculate("-", 3,2)).isEqualTo(1);
-    }
-    @Test
-    public void 곱셈(){
-        assertThat(Operator.calculate("*", 1,2)).isEqualTo(2);
-    }
-    @Test
-    public void 나누기(){
-        assertThat(Operator.calculate("/", 4,2)).isEqualTo(2);
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", "  "})
+    public void splitAndCalculate_빈갑체크(String input){
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringCalculator.splitAndCalculate(input);
+        });
     }
 
     @Test
-    public void split(){
+    public void splitAndCalculate(){
+        String input = "2 + 3 * 4 / 2";
+        assertThat(StringCalculator.splitAndCalculate(input)).isEqualTo(10);
+    }
+
+    @Test
+    public void calculateInOrder() {
+        String[] inputs = {"2", "+", "3", "*", "4", "/", "2"};
+        assertThat(StringCalculator.calculateInOrder(inputs)).isEqualTo(10);
+    }
+
+    @Test
+    public void split() {
         String[] result = StringCalculator.split("3 * 2");
         assertThat(result).containsExactly("3", "*", "2");
     }
 
     @Test
-    public void toInt(){
+    public void toInt() {
         int result = StringCalculator.toInt("3");
         assertThat(result).isEqualTo(3);
     }
@@ -43,7 +47,9 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"", "  "})
     public void 빈값체크(String input) {
-        assertTrue(StringCalculator.isBlank(input));
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringCalculator.isBlank(input);
+        });
     }
 
     @ParameterizedTest

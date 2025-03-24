@@ -9,16 +9,16 @@ public enum Operator {
     MULTIPLY("*", (num1, num2) -> num1 * num2),
     DIVIDE("/", (num1, num2) -> num1 / num2);
 
-    private String operator;
-    private BiFunction<Integer, Integer, Integer> expression;
+    private final String operator;
+    private final BiFunction<Integer, Integer, Integer> expression;
 
     Operator(String operator, BiFunction<Integer, Integer, Integer> expression) {
         this.operator = operator;
         this.expression = expression;
     }
 
-    public static int calculate(String operator, int num1, int num2) {
-        return getOperator(operator).expression.apply(num1, num2);
+    public static int calculate(String operator, int result, int next) {
+        return getOperator(operator).expression.apply(result, next);
     }
 
     public static Operator getOperator(String operator) {
