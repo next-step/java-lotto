@@ -1,17 +1,18 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import lotto.domain.generate.LottoGenerator;
 
 public class Lotto {
-  private final Set<Integer> numbers;
+  private final List<Integer> numbers;
 
   public static final int SIZE = 6;
   public static final int MIN_NUMBER = 1;
   public static final int MAX_NUMBER = 45;
   public static final int PRICE = 1000;
 
-  public Lotto(Set<Integer> numbers) {
+  public Lotto(List<Integer> numbers) {
     if (!validateChecks(numbers)) {
       throw new IllegalArgumentException("로또 번호가 유효하지 않습니다.");
     }
@@ -20,7 +21,7 @@ public class Lotto {
   }
 
   public static Lotto of(String input) {
-    Set<Integer> numbers = new HashSet<>();
+    List<Integer> numbers = new ArrayList<>();
     String[] tokens = input.split(",");
     for (String token : tokens) {
       try {
@@ -32,7 +33,7 @@ public class Lotto {
     return new Lotto(numbers);
   }
 
-  public boolean validateChecks(Set<Integer> numbers) {
+  public boolean validateChecks(List<Integer> numbers) {
     return numbers.size() == SIZE
         && numbers.stream().allMatch(number -> number >= MIN_NUMBER && number <= MAX_NUMBER);
   }
@@ -45,7 +46,7 @@ public class Lotto {
     return numbers.size();
   }
 
-  public Set<Integer> getNumbers() {
+  public List<Integer> getNumbers() {
     return numbers;
   }
 

@@ -3,7 +3,9 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import java.util.Set;
+import java.util.List;
+import lotto.domain.generate.LottoGenerator;
+import lotto.domain.generate.RandomLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,13 +31,13 @@ class LottoTest {
   @Test
   @DisplayName("유효하지 않는 로또 번호로 발행 시 IllegalArgumentException 예외를 발생시킨다.")
   void invalidLottoNumberRange() {
-    assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Set.of(1, 2, 3, 4, 5, 46)));
+    assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 46)));
   }
 
   @Test
   @DisplayName("로또 번호가 6개가 아닐 경우 IllegalArgumentException 예외를 발생시킨다.")
   void invalidLottoSize() {
-    assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Set.of(1, 2, 3, 4, 5)));
+    assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)));
   }
 
   @Test

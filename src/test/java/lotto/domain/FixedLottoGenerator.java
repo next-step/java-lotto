@@ -1,6 +1,8 @@
 package lotto.domain;
 
-public class FixedLottoGenerator implements LottoGenerator{
+import lotto.domain.generate.LottoGenerator;
+
+public class FixedLottoGenerator implements LottoGenerator {
 
   @Override
   public Lotto generate() {

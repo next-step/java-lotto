@@ -3,6 +3,10 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.LottoResultAnalyzer;
+import lotto.domain.result.LottoResultAnalyzerImpl;
+import lotto.domain.result.WinningRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +23,8 @@ class LottoResultAnalyzerTest {
     LottoSet lottoSet = new LottoSet(List.of(lotto1, lotto2, lotto3, lotto4));
     Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
 
-    LottoResult lottoResult = LottoResultAnalyzer.analyze(lottoSet, winningLotto);
+    LottoResultAnalyzer analyzer = new LottoResultAnalyzerImpl();
+    LottoResult lottoResult = analyzer.analyze(lottoSet, winningLotto);
 
     for (WinningRank rank : WinningRank.values()) {
       int count = lottoResult.getMatchCount().getOrDefault(rank, 0);
@@ -38,7 +43,9 @@ class LottoResultAnalyzerTest {
     LottoSet lottoSet = new LottoSet(List.of(lotto1, lotto2, lotto3, lotto4));
     Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
 
-    LottoResult lottoResult = LottoResultAnalyzer.analyze(lottoSet, winningLotto);
+    LottoResultAnalyzer analyzer = new LottoResultAnalyzerImpl();
+    LottoResult lottoResult = analyzer.analyze(lottoSet, winningLotto);
+
     assertThat(lottoResult.getProfitRate()).isEqualTo(500388.75);
   }
 }

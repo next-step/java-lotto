@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.generate.LottoGenerator;
 
 public class LottoSet {
 
@@ -15,6 +15,11 @@ public class LottoSet {
     this.lottos = IntStream.range(0, totalPrice / Lotto.PRICE)
         .mapToObj(i -> Lotto.generateLotto(lottoGenerator))
         .collect(Collectors.toList());
+  }
+
+  public LottoSet(List<Lotto> lottos) {
+    this.lottos = lottos;
+    this.totalPrice = lottos.size() * Lotto.PRICE;
   }
 
   public int size() {
