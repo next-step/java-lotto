@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class Lotto {
@@ -24,5 +25,17 @@ public class Lotto {
 
     public String toString() {
         return numbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numbers);
     }
 }

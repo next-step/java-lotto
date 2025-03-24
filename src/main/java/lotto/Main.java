@@ -12,6 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         List<Lotto> lottos = purchageLottos();
+        Lotto winningNumbers = inputWinningNumbers();
     }
 
     private static List<Lotto> purchageLottos() {
@@ -19,5 +20,9 @@ public class Main {
         List<Lotto> lottos = generator.run(inputPrice);
         ResultView.printLottos(lottos);
         return lottos;
+    }
+
+    private static Lotto inputWinningNumbers() {
+        return InputView.winningNumbers();
     }
 }
