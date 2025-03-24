@@ -26,9 +26,9 @@ class LottoNumGeneratorTest {
 
     assertAll(
         () -> assertThat(lottoNumGeneratorNotShuffle.generate())
-            .isEqualTo(new LottoNumList(List.of(1, 2, 3, 4, 5, 6))),
+            .isEqualTo(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6))),
         () -> assertThat(lottoNumGeneratorReverseShuffle.generate())
-            .isEqualTo(new LottoNumList(
+            .isEqualTo(LottoNumList.valueOf(
                 List.of(
                     LottoProperty.LOTTO_CANDIDATE_SIZE - 5,
                     LottoProperty.LOTTO_CANDIDATE_SIZE - 4,

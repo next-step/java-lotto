@@ -20,9 +20,9 @@ public class LottoSystem {
     int price = showPriceInput();
     int lottoCount = LottoPurchaseCalculator.toLottoCount(price);
     showLottoCount(lottoCount);
-    LottoBundle lottoBundle = new LottoBundle(lottoCount, new CollectionShuffleLottoNumGenerator());
+    LottoBundle lottoBundle = LottoBundle.generate(lottoCount, new CollectionShuffleLottoNumGenerator());
     showLottoBundle(lottoBundle);
-    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(new WinningNums(showWinningNums()));
+    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(WinningNums.valueOf(showWinningNums()));
     showLottoPrize(lottoPrizeList);
     showReturnRate(ReturnRateCalculator.calculate(price, LottoPrize.getTotalPrize(lottoPrizeList)));
   }

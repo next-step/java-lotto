@@ -10,11 +10,19 @@ import java.util.stream.Collectors;
 public class LottoBundle {
   private final List<LottoNumList> bundle;
 
-  public LottoBundle(int lottoCount, LottoNumGenerator lottoNumGenerator) {
+  public static LottoBundle generate(int lottoCount, LottoNumGenerator lottoNumGenerator) {
+    return new LottoBundle(lottoCount, lottoNumGenerator);
+  }
+
+  public static LottoBundle valueOf(List<LottoNumList> bundle) {
+    return new LottoBundle(bundle);
+  }
+
+  private LottoBundle(int lottoCount, LottoNumGenerator lottoNumGenerator) {
     this(generateBundle(lottoCount, lottoNumGenerator));
   }
 
-  public LottoBundle(List<LottoNumList> bundle) {
+  private LottoBundle(List<LottoNumList> bundle) {
     this.bundle = bundle;
   }
 

@@ -13,7 +13,7 @@ public interface LottoNumGenerator {
   default LottoNumList generate() {
     List<Integer> res = shuffle(getCandidateNumbers()).subList(0, LottoProperty.LOTTO_NUM_SIZE);
     Collections.sort(res);
-    return new LottoNumList(res);
+    return LottoNumList.valueOf(res);
   }
 
   private List<Integer> getCandidateNumbers() {

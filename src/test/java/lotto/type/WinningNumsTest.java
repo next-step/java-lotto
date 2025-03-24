@@ -11,8 +11,8 @@ class WinningNumsTest {
   @Test
   void testConstructor() {
     assertAll(
-        () -> assertDoesNotThrow(() -> new WinningNums("1, 2, 3, 4, 5, 6")),
-        () -> assertThrows(RuntimeException.class, () -> new WinningNums("1, 2, 3, 4, 5"))
+        () -> assertDoesNotThrow(() -> WinningNums.valueOf("1, 2, 3, 4, 5, 6")),
+        () -> assertThrows(RuntimeException.class, () -> WinningNums.valueOf("1, 2, 3, 4, 5"))
     );
   }
 }

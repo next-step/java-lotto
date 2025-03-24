@@ -10,6 +10,10 @@ public class WinningNums {
 
   private final List<Integer> winningNums;
 
+  public static  WinningNums valueOf(String expression) {
+    return new WinningNums(expression);
+  }
+
   public WinningNums(String expression) {
     List<String> expressionToken = List.of(expression.split(","));
     this.winningNums = expressionToken.stream()
