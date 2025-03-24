@@ -4,14 +4,18 @@ import org.junit.jupiter.api.Test;
 import step1.domain.Expression;
 import step1.domain.Operands;
 import step1.domain.Operators;
+import step1.util.ExpressionTokens;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class ExpressionRulesTest {
+class ExpressionTokensTest {
+    private Expression expr(String input) {
+        return new Expression(ExpressionTokens.parseTokens(input));
+    }
     @Test
     void splitToken() {
-        Expression expression = new Expression("3 + 5 * 2 / 10");
+        Expression expression = expr("3 + 5 * 2 / 10");
 
         Operands operands = expression.generateOperands();
         Operators operators = expression.generateOperators();
@@ -23,10 +27,10 @@ class ExpressionRulesTest {
     @Test
     void validTokenException() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Expression("3 3 * 4"));
+                .isThrownBy(() -> expr("3 3 * 4"));
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Expression("3 * 3 * 4 /"));
+                .isThrownBy(() -> expr("3 * 3 * 4 /"));
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Expression("3 * 3 */ 4"));
+                .isThrownBy(() -> expr("3 * 3 */ 4"));
     }
 }
