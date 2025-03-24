@@ -5,6 +5,11 @@ import step1.symbol.operator.DivideOperator;
 import step1.symbol.operator.MultiplyOperator;
 import step1.symbol.operator.SubtractOperator;
 
+import domain.symbol.operator.AddOperator;
+import domain.symbol.operator.DivideOperator;
+import domain.symbol.operator.MultiplyOperator;
+import domain.symbol.operator.SubtractOperator;
+
 public enum OperatorType {
     ADD("+", new AddOperator()),
     SUBTRACT("-", new SubtractOperator()),
