@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,11 +10,11 @@ public class Generator {
             .boxed()
             .collect(Collectors.toList());
 
-    public List<Integer> run () {
+    public Lotto run () {
         Collections.shuffle(numbers);
-        return numbers.subList(0, 6)
+        return new Lotto(numbers.subList(0, 6)
                 .stream()
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 }
