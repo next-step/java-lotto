@@ -1,15 +1,13 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorInput {
-    private static final List<String> VALID_OPERATORS = List.of("+", "-", "*", "/");
 
-    private final String input;
     private final List<String> tokens;
 
     public CalculatorInput(String input) {
         validateInput(input);
-        this.input = input;
-        this.tokens = List.of(input.split(" "));
+        this.tokens = new ArrayList<>(List.of(input.split(" ")));
         validateTokens();
     }
 
@@ -37,14 +35,10 @@ public class CalculatorInput {
         }
     }
 
-    private void validateOperator(String token) {
-        if (!VALID_OPERATORS.contains(token)) {
-            throw new IllegalArgumentException("지원하지 않는 연산자입니다: " + token);
+    private void validateOperator(String operator) {
+        if (!ArithmeticOperator.isValidOperator(operator)) {
+            throw new IllegalArgumentException("지원하지 않는 연산자입니다: " + operator);
         }
-    }
-
-    public String getInput() {
-        return input;
     }
 
     public List<String> getTokens() {
