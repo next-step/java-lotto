@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 public class Extractor {
     private static final String delimiter = " ";
 
+    private Extractor() {}
+
     public static List<Long> extract_numbers(String input) {
         List<String> tokens = split(input);
         return IntStream.range(0, tokens.size())

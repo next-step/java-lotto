@@ -1,6 +1,8 @@
 package lotto.domain;
 
 public class Calculator {
+    private Calculator() {}
+
     public static long run(long a, long b, Operator operator) {
         if (operator.equals(Operator.PLUS)) {
             return add(a, b);
