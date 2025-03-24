@@ -39,11 +39,11 @@ public class Calculation {
 
     private void initializeOperatorsAndOperands(Tokens tokens) {
         for (int i = 0; i < tokens.size(); i += 2) {
-            addIfValidOperand(tokens, i);
+            addIfValidOperand(tokens.getToken(i));
         }
 
         for (int i = 1; i < tokens.size(); i += 2) {
-            addIfValidOperator(tokens, i);
+            addIfValidOperator(tokens.getToken(i));
         }
 
         if (isValidFormula()) {
@@ -55,17 +55,17 @@ public class Calculation {
         return operands.size() != operators.size() + 1;
     }
 
-    private void addIfValidOperator(Tokens tokens, int i) {
+    private void addIfValidOperator(String inputSymbol) {
         try {
-            operators.add(Operator.of(tokens.getToken(i)));
+            operators.add(Operator.of(inputSymbol));
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid Formula");
         }
     }
 
-    private void addIfValidOperand(Tokens tokens, int i) {
+    private void addIfValidOperand(String inputValue) {
         try {
-            operands.add(Operand.of(tokens.getToken(i)));
+            operands.add(Operand.of(inputValue));
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid Formula");
         }
