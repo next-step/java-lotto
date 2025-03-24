@@ -1,7 +1,5 @@
 package calculator.type;
 
-import calculator.operator.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
