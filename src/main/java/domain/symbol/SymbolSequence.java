@@ -28,4 +28,8 @@ public class SymbolSequence<T> {
     public boolean hasNext() {
         return currIndex < symbols.size();
     }
+
+    public Integer size() {
+        return symbols.size();
+    }
 }
