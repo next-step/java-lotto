@@ -27,10 +27,14 @@ public class Operator {
             return firstOperand.value() * secondOperand.value();
         }
 
+        if (this.value.equals("/")) {
+            return firstOperand.value() / secondOperand.value();
+        }
+
         throw new IllegalArgumentException("Invalid operator");
     }
 
     private boolean validateOperator(String value) {
-        return value.equals("+") || value.equals("-") || value.equals("*");
+        return value.equals("+") || value.equals("-") || value.equals("*") || value.equals("/");
     }
 }
