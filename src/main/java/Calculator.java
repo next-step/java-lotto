@@ -22,6 +22,9 @@ public class Calculator {
         if ("-".equals(operator)) {
             return firstNumber - secondNumber;
         }
+        if ("*".equals(operator)) {
+            return firstNumber * secondNumber;
+        }
         if ("/".equals(operator)) {
             return firstNumber / secondNumber;
         }
