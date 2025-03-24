@@ -14,9 +14,9 @@
 ### 문자열 계산기 요구사항
 
 - 입력 관련 처리
-    - [] split 메소드를 활용하여 수와 연산기호를 분리한다.
-    - [] 입력 값이 null or blank인 경우 IllegalArgumentException을 발생시킨다.
-    - [] 사칙연산 기호 (+, -, *, /)가 아닌 경우 IllegalArgumentException을 발생시킨다.
+    - [x] split 메소드를 활용하여 수와 연산기호를 분리한다.
+    - [x] 입력 값이 null or blank인 경우 IllegalArgumentException을 발생시킨다.
+    - [x] 사칙연산 기호 (+, -, *, /)가 아닌 경우 IllegalArgumentException을 발생시킨다.
 - 기능 관련 처리
     - [] 문자열 값에 따른 사칙연산을 수행할 수 있는 계산기를 구현한다.
     - [] 사칙연산 우선순위 아닌 앞에서 부터 계산 처리한다.
