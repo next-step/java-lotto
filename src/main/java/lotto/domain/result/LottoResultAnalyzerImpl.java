@@ -22,7 +22,7 @@ public class LottoResultAnalyzerImpl implements LottoResultAnalyzer {
 
     lottoSet.getLottos().stream()
         .map(lotto -> (int) lotto.getNumbers().stream().filter(winningLotto.getNumbers()::contains).count())
-        .filter(match -> match >= 3) // 3개 이상 일치한 경우만 처리
+        .filter(match -> match >= 3)
         .map(WinningRank::fromMatchCount)
         .filter(rank -> rank != null)
         .forEach(rank -> matchCount.put(rank, matchCount.getOrDefault(rank, 0) + 1));

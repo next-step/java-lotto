@@ -18,24 +18,9 @@ class LottoTest {
   }
 
   @Test
-  @DisplayName("로또 숫자는 Lotto.MIN_NUMBER(1)부터 Lotto.MAX_NUMBER(45)까지의 숫자다.")
-  void lottoNumberRange() {
-    RandomLottoGenerator lottoGenerator = new RandomLottoGenerator();
-    Lotto lotto = Lotto.generateRandomLotto(lottoGenerator);
-
-    assertThat(lotto.getNumbers()).allMatch(number -> number >= Lotto.MIN_NUMBER && number <= Lotto.MAX_NUMBER);
-  }
-
-  @Test
-  @DisplayName("유효하지 않는 로또 번호로 발행 시 IllegalArgumentException 예외를 발생시킨다.")
-  void invalidLottoNumberRange() {
-    assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 46)));
-  }
-
-  @Test
   @DisplayName("로또 번호가 6개가 아닐 경우 IllegalArgumentException 예외를 발생시킨다.")
   void invalidLottoSize() {
-    assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)));
+    assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of("1, 2, 3, 4, 5"));
   }
 
   @Test

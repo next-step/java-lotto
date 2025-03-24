@@ -40,19 +40,23 @@
 * 계산한 당첨 통계를 출력한다. - OutputView
 
 #### domain
-* Lotto : 로또 한 장을 의미한다.
-  * 로또 한 장은 6개의 숫자를 가진다. 중복x (Set<Integer> numbers)
+* LottoNumber : 로또 한 장의 숫자 하나를 의미한다. 
   * 로또 숫자는 1부터 45까지의 숫자다.
+* Lotto : 로또 한 장을 의미한다. (List<LottoNumber> numbers)
+  * 로또 한 장은 6개의 숫자를 가진다. 중복x 
 * LottoSet : 발급받은 로또 전체를 의미한다. (List<Lotto> lottos)
   * 한 장당 가격(1000원) : 상수 LOTTO_PRICE
   * 로또 몇 장인지 : 입력값 기반
+* LottoMachine : 로또를 발급한다.
+  * 랜덤 번호
+  * 고정 번호
 * LottoGame : Main 클래스
   * 금액 입력 받음 (-> InputView)
-  * 로또 발급 (-> LottoGenerator를 통해 LottoSet 생성)
+  * 로또 발급 (-> LottoMachine)
   * 이전 당첨 번호 입력 받음 (-> InputView)
   * 결과 생성 (-> LottoResultAnalyzer)
   * 결과 출력 (-> ResultView)
-* RadomLottoGenerator : 자동 로또를 발급한다. 
+* RandomLottoGenerator : 자동 로또를 발급한다. 
   * 로또 자동 생성은 Collection.shuffle()를 활용한다.
 * LottoResultAnalyzer : 당첨 통계를 계산한다.
   * 당첨 번호와 비교하여 등수를 계산한다.
@@ -65,6 +69,4 @@
   * 2등 : 5개 일치 (1500000원)
   * 3등 : 4개 일치 (50000원)
   * 4등 : 3개 일치 (5000원)
-* LottoMachine : 로또를 발급한다. 
-  * 랜덤 번호 
-  * 고정 번호
+

@@ -7,13 +7,14 @@ import java.util.stream.IntStream;
 
 public class RandomLottoGenerator {
     public Lotto generate() {
-        List<Integer> numbers = IntStream.rangeClosed(Lotto.MIN_NUMBER, Lotto.MAX_NUMBER)
+        List<Integer> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
         Collections.shuffle(numbers);
 
-        List<Integer> selectedNumbersList = numbers.subList(0, Lotto.SIZE);
-        Collections.sort(selectedNumbersList);
+        List<LottoNumber> selectedNumbersList = numbers.subList(0, Lotto.SIZE).stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
 
         return new Lotto(selectedNumbersList);
     }

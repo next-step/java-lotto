@@ -10,8 +10,8 @@ public class ResultView {
     System.out.println(lottoSet.size() + "개를 구매했습니다.");
 
     lottoSet.getLottos().stream()
-        .map(Lotto::getNumbers)
-        .forEach(numbers -> System.out.println(numbers));
+        .map(Lotto::getFormattedNumbers)
+        .forEach(System.out::println);
   }
 
   public static void printLottoStatistics(LottoResult lottoResult) {
