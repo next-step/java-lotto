@@ -1,4 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,6 +52,16 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         CalculatorInput input = new CalculatorInput("2 + 3 * 4 / 2");
         assertThat(calculator.calculate(input)).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("0으로 나누기를 시도하면 예외가 발생한다.")
+    void shouldThrowExceptionWhenDividingByZero() {
+        Calculator calculator = new Calculator();
+        CalculatorInput input = new CalculatorInput("2 / 0");
+        assertThatThrownBy(() -> calculator.calculate(input))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("0으로 나눌 수 없습니다.");
     }
 
 }
