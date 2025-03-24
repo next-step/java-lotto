@@ -12,14 +12,6 @@ import static step1.domain.Operator.*;
 
 public class ExpressionTest {
 
-    @Test
-    void 피연산자가_없는_수식은_에러_반환() {
-        Queue<Operand> operands = new LinkedList<>();
-        Queue<Operator> operators = new LinkedList<>(List.of(PLUS));
-
-        assertThatThrownBy(() -> new Expression(operands, operators))
-                .isInstanceOf(RuntimeException.class);
-    }
 
     @Test
     void 수식은_연산자와_피연산자를_담고_식의_결과를_만들어낸다() {
@@ -41,7 +33,17 @@ public class ExpressionTest {
 
 
     @Test
-    void 연산이_끝났는데_피연산자가_남아있다면_에러() {
+    void 피연산자가_없는_수식은_에러_반환() {
+        Queue<Operand> operands = new LinkedList<>();
+        Queue<Operator> operators = new LinkedList<>(List.of(PLUS));
+
+        assertThatThrownBy(() -> new Expression(operands, operators))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("피연산자가 없는 수식입니다.");
+    }
+
+    @Test
+    void 피연산자가_너무_많은_수식은_에러() {
         Queue<Operand> operands = new LinkedList<>(List.of(
                 new Operand(2),
                 new Operand(3),
@@ -52,11 +54,12 @@ public class ExpressionTest {
         ));
 
         assertThatThrownBy(() -> new Expression(operands, operators))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("피연산자가 너무 많습니다.");
     }
 
     @Test
-    void 연산이_끝났는데_연산자가_남아있다면_에러() {
+    void 연산자가_너무_많은_수식은_에러() {
         Queue<Operand> operands = new LinkedList<>(List.of(
                 new Operand(2)
         ));
@@ -67,7 +70,8 @@ public class ExpressionTest {
         ));
 
         assertThatThrownBy(() -> new Expression(operands, operators))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("연산자가 너무 많습니다.");
     }
 
     @Test

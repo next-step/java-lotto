@@ -9,9 +9,6 @@ public class Expression {
     private final Queue<Operator> _operators;
 
     public Expression(Queue<Operand> operands, Queue<Operator> operators) {
-        if (operands.isEmpty()) {
-            throw new RuntimeException("피연산자가 없는 수식입니다.");
-        }
         this._operands = operands;
         this._operators = operators;
 
@@ -19,7 +16,15 @@ public class Expression {
     }
 
     private void validateExpression() {
-        evaluate();
+        if (_operands.isEmpty()) {
+            throw new RuntimeException("피연산자가 없는 수식입니다.");
+        }
+        if (_operands.size() > _operators.size() + 1) {
+            throw new RuntimeException("피연산자가 너무 많습니다.");
+        }
+        if (_operands.size() < _operators.size() + 1) {
+            throw new RuntimeException("연산자가 너무 많습니다.");
+        }
     }
 
 
@@ -27,19 +32,11 @@ public class Expression {
         Queue<Operand> operands = new LinkedList<>(_operands);
         Queue<Operator> operators = new LinkedList<>(_operators);
 
-        if (operands.isEmpty()) {
-            throw new RuntimeException("피연산자가 없는 수식입니다.");
-        }
-
         Operand left = operands.poll();
         while (!operands.isEmpty() && !operators.isEmpty()) {
             Operator operator = operators.poll();
             Operand right = operands.poll();
             left = operator.apply(left, right);
-        }
-
-        if (!operands.isEmpty() || !operators.isEmpty()) {
-            throw new RuntimeException("잘못된 수식입니다.");
         }
 
         return left;

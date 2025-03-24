@@ -36,3 +36,4 @@
 - [X] 계산기, inputView, resultView
 
 - [X] ExpressionParser Delimiter 상수 추출, 토큰 만드는거 함수로 추출
+- [X] Expression 검증 로직 생성자로 이동
