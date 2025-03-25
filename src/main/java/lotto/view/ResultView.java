@@ -27,9 +27,6 @@ public class ResultView {
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank -> {
                     String bonusMessage = (rank == Rank.SECOND) ? ", 보너스 볼 일치" : " ";
-                    if (rank == Rank.MISS) {
-                        return;
-                    }
                     System.out.printf("%d개 일치%s(%d원)- %d개%n", rank.getCountOfMatch(), bonusMessage, rank.getWinningMoney(), matchCounts.getOrDefault(rank, 0));
                 });
 

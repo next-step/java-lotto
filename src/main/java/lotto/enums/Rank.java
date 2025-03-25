@@ -49,6 +49,9 @@ public enum Rank {
     }
 
     public void applyMatchCount(Map<Rank, Integer> matchMap) {
+        if (this == Rank.MISS) {
+            return;
+        }
         matchMap.put(this, matchMap.getOrDefault(this, 0) + 1);
     }
 }
