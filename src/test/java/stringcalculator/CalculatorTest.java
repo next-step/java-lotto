@@ -37,6 +37,35 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(-1);
     }
 
+    @Test
+    @DisplayName("두 숫자를 곱한다.")
+    void multiplyTest() {
+        //given
+        int a = 3;
+        int b = 5;
+        final Calculator calculator = new Calculator();
+
+        //when
+        int result = calculator.multiply(a, b);
+
+        //then
+        assertThat(result).isEqualTo(15);
+    }
+
+    @Test
+    @DisplayName("두 숫자를 나눈다.")
+    void divideTest() {
+        //given
+        int a = 10;
+        int b = 5;
+        final Calculator calculator = new Calculator();
+
+        //when
+        int result = calculator.divide(a, b);
+
+        //then
+        assertThat(result).isEqualTo(2);
+    }
 
 
 }
