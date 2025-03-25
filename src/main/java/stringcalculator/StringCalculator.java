@@ -21,6 +21,9 @@ public class StringCalculator {
         if (curTarget.equals("+")) {
             result += stringToInt(targets.get(++idx));
         }
+        else if (curTarget.equals("-")) {
+            result -= stringToInt(targets.get(++idx));
+        }
         return result;
     }
 

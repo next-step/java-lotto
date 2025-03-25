@@ -11,4 +11,10 @@ public class StringCalculatorTest {
     void add() {
         assertThat(StringCalculator.calculate("1 + 2 + -3")).isEqualTo(0);
     }
+
+    @DisplayName("뺄셈 기능 테스트")
+    @Test
+    void minus() {
+        assertThat(StringCalculator.calculate("10 - 2 - -3")).isEqualTo(11);
+    }
 }
