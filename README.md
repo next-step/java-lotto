@@ -28,3 +28,48 @@
 * 공백 문자열을 빈 공백 문자로 분리하려면 String 클래스의 split(" ") 메소드를 활용한다.
 * 반복적인 패턴을 찾아 반복문으로 구현한다.
 
+## Step2 로또(자동)
+### 기능 요구사항
+* 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+* 로또 1장의 가격은 1000원이다.
+
+### 기능 목록
+#### view
+* 구입 금액을 입력받는다. - InputView
+* 지난 주 당첨 번호를 입력받는다. - InputView
+* 계산한 당첨 통계를 출력한다. - OutputView
+
+#### domain
+* LottoNumber : 로또 한 장의 숫자 하나를 의미한다. 
+  * 로또 숫자는 1부터 45까지의 숫자다.
+* Lotto : 로또 한 장을 의미한다. (List<LottoNumber> numbers)
+  * 로또 한 장은 6개의 숫자를 가진다. 중복x 
+* LottoSet : 발급받은 로또 전체를 의미한다. (List<Lotto> lottos)
+  * 한 장당 가격(1000원) : 상수 LOTTO_PRICE
+  * 로또 몇 장인지 : 입력값 기반
+* LottoMachine : 로또를 발급한다.
+  * 랜덤 번호
+  * 고정 번호
+* LottoPurchase : 로또 구매 정보를 의미한다.
+  * 로또 1장 금액
+  * 사용자가 입력한 금액
+  * 그로 인한 구매 개수
+* LottoGame : Main 클래스
+  * 금액 입력 받음 (-> InputView)
+  * 로또 발급 (-> LottoMachine)
+  * 이전 당첨 번호 입력 받음 (-> InputView)
+  * 결과 생성 (-> LottoSet (LottoResultProvider))
+  * 결과 출력 (-> ResultView)
+* RandomLottoGenerator : 자동 로또를 발급한다. 
+  * 로또 자동 생성은 Collection.shuffle()를 활용한다.
+* LottoResult : 로또 결과를 의미한다.
+  * 당첨 통계를 저장한다.
+  * 수익률을 저장한다.
+* WinningRank : 당첨 등수와 당첨 금액을 의미한다. (enum)
+  * 1등 : 6개 일치 (2,000,000,000원)
+  * 2등 : 5개 일치 (1,500,000원)
+  * 3등 : 4개 일치 (50,000원)
+  * 4등 : 3개 일치 (5,000원)
+* LottoResultProvider : 로또 당첨 결과 계산 인터페이스
+  * 당첨 번호와 비교하여 등수를 계산한다.
+  * 수익률을 계산한다.
