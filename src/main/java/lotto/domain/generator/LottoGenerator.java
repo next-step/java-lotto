@@ -29,9 +29,11 @@ public class LottoGenerator {
         for (int i = 1; i <= LOTTO_MAX_NUMBER; i++) {
             numbers.add(i);
         }
-
         Collections.shuffle(numbers);
 
-        return new Lotto(numbers.subList(0, LOTTO_PICK_COUNT));
+        List<Integer> lottoNumbers = numbers.subList(0, LOTTO_PICK_COUNT);
+        Collections.sort(lottoNumbers);
+
+        return new Lotto(lottoNumbers);
     }
 }
