@@ -1,6 +1,7 @@
-package lotto.domain.generator;
+package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.generator.LottoGenerator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
