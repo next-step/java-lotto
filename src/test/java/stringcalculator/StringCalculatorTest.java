@@ -29,4 +29,10 @@ public class StringCalculatorTest {
     void divide() {
         assertThat(StringCalculator.calculate("100 / 2 / -2")).isEqualTo(-25);
     }
+
+    @DisplayName(" 모든 연산 포함하는 계산 기능 테스트")
+    @Test
+    void all_operator() {
+        assertThat(StringCalculator.calculate("100 / 10 + 60 - 20 * 4")).isEqualTo(200);
+    }
 }
