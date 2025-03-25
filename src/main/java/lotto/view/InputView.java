@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.util.Parser;
+import lotto.domain.Parser;
 
 import java.util.Scanner;
 

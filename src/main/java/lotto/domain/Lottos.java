@@ -11,6 +11,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
