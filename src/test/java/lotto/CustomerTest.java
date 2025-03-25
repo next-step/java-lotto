@@ -5,12 +5,23 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class CustomerTest {
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -100, -1000})
+    public void 구입금액이_0이하인경우_예외가_발생한다(int amount) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Customer(amount).purchaseLottos());
+    }
+
     @Test
     public void 구매한_로또의_당첨통계와_구입금액_기반으로_수익률_반환() {
         Lotto thirdRankLotto = new Lotto(Rank.THIRD);

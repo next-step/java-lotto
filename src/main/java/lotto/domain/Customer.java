@@ -16,6 +16,10 @@ public class Customer {
     }
 
     public void purchaseLottos() {
+        if(purchaseAmount <= 0) {
+            throw new IllegalArgumentException("구입금액은 0 이하일 수 없습니다. 입력한 구입금액: " + purchaseAmount);
+        }
+
         lottos = LottoGenerator.generateLottosByAmount(purchaseAmount);
     }
 
