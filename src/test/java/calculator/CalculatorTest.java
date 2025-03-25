@@ -47,5 +47,12 @@ class CalculatorTest {
             String text = "8 / 2";
             assertThat(calculator.calculate(text)).isEqualTo(4);
         }
+
+        @DisplayName("여러 연산자가 섞인 사칙연산을 수행할 수 있다.")
+        @Test
+        void multipleCalculate() {
+            String text = "1 + 2 * 3 - 1 / 2";
+            assertThat(calculator.calculate(text)).isEqualTo(4);
+        }
     }
 }

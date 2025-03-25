@@ -5,23 +5,31 @@ import calculator.exception.UnexpectedOperatorException;
 public class Calculator {
 
     public int calculate(String input) {
+
         String[] tokens = input.split(" ");
-        int left = Integer.parseInt(tokens[0]);
-        String operator = tokens[1];
-        int right = Integer.parseInt(tokens[2]);
 
-        switch (operator) {
-            case "+":
-                return left + right;
-            case "-":
-                return left - right;
-            case "*":
-                return left * right;
-            case "/":
-                return left / right;
+        int result = Integer.parseInt(tokens[0]);
+
+        for (int i = 1; i < tokens.length; i += 2) {
+            String operator = tokens[i];
+            int right = Integer.parseInt(tokens[i + 1]);
+            switch (operator) {
+                case "+":
+                    result += right;
+                    break;
+                case "-":
+                    result -= right;
+                    break;
+                case "*":
+                    result *= right;
+                    break;
+                case "/":
+                    result /= right;
+                    break;
+                default:
+                    throw new UnexpectedOperatorException();
+            }
         }
-
-        throw new UnexpectedOperatorException();
+        return result;
     }
-
 }
