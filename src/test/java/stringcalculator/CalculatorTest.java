@@ -1,7 +1,13 @@
 package stringcalculator;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -67,5 +73,20 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(2);
     }
 
+    @ParameterizedTest
+    @DisplayName("null 이거나 blank 인 문자열을 받는 경우 에러를 던진다.")
+    @MethodSource("provideNullOrBlankStrings")
+    void nullOrBlankThenThrow(String input) {
+        //given
+        final Calculator calculator = new Calculator();
 
+        //when & then
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.splitWithSpace(input))
+                .withMessageContaining("유효하지 않은 문자열입니다");
+    }
+
+    static Stream<String> provideNullOrBlankStrings() {
+        return Stream.of(null, "", " ");
+    }
 }
