@@ -12,8 +12,16 @@ public class Lotto {
         this.lottoNumbers = sortLottoNumbers(lottoNumbers);
     }
 
+    public static Lotto of(List<Integer> rawLottoNumbers) {
+        List<LottoNumber> lottoNumbers = rawLottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
+    }
+
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            System.out.println(lottoNumbers);
             throw new RuntimeException("로또의 숫자가 6개가 아닙니다.");
         }
         if (new HashSet<>(lottoNumbers).size() != LOTTO_NUMBER_COUNT) {
@@ -25,6 +33,12 @@ public class Lotto {
         return lottoNumbers.stream()
                 .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
                 .collect(Collectors.toList());
+    }
+
+    public int getMatchCount(Lotto otherLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(otherLotto.lottoNumbers::contains)
+                .count();
     }
 
     List<LottoNumber> getLottoNumbers() {

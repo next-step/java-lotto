@@ -1,6 +1,6 @@
 package step2;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,7 +13,7 @@ public class LottoMachine {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public List<Lotto> generateLottos(int money) {
+    public List<Lotto> buyLottos(int money) {
         int numberOfLottos = money / LOTTO_PRICE;
         return IntStream.range(0, numberOfLottos)
                 .mapToObj(i -> lottoGenerator.generate())
