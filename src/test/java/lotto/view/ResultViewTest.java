@@ -1,5 +1,7 @@
-package lotto;
+package lotto.view;
 
+import lotto.Lotto;
+import lotto.LottoGeneratorTest.TestLottoGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +11,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.LottoGeneratorTest.*;
 
 public class ResultViewTest {
 
@@ -31,5 +32,4 @@ public class ResultViewTest {
     System.setOut(originalOut);
     Assertions.assertEquals(expected, outputStream.toString());
   }
-
 }

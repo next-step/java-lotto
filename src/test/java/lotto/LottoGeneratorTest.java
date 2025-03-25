@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-class LottoGeneratorTest {
+public class LottoGeneratorTest {
   public static class TestLottoGenerator implements LottoGenerator {
     @Override
     public Lotto generate() {

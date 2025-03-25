@@ -1,4 +1,7 @@
-package lotto;
+package lotto.view;
+
+import lotto.Lotto;
+import lotto.LottoNumber;
 
 import java.util.List;
 
