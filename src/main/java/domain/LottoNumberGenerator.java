@@ -11,6 +11,10 @@ public class LottoNumberGenerator {
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, 6);
+
+        return lottoNumbers.subList(0, 6)
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 }
