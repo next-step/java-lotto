@@ -1,6 +1,9 @@
 package stringcalculator;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.function.BiFunction;
 
 public class Calculator {
 
@@ -10,21 +13,37 @@ public class Calculator {
     public static final String MULTIPLY = "*";
     public static final String DIVIDE = "/";
 
-    public int add(int a, int b) {
+    public void init() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("사칙연산을 수행하기 위한 문자열을 입력해주세요: ");
+        final String input = scanner.nextLine();
+        final List<String> subjects = splitWithSpace(input);
+        System.out.println(process(subjects));
+    }
+
+    public static int add(int a, int b) {
         return a + b;
     }
 
-    public int subtract(int a, int b) {
+    public static int subtract(int a, int b) {
         return a - b;
     }
 
-    public int multiply(int a, int b) {
+    public static int multiply(int a, int b) {
         return a * b;
     }
 
-    public int divide(int a, int b) {
+    public static int divide(int a, int b) {
         return a / b;
     }
+
+    private static final Map<String, BiFunction<Integer, Integer, Integer>> OPERATIONS = Map.of(
+            ADD, Calculator::add,
+            SUBTRACT, Calculator::subtract,
+            MULTIPLY, Calculator::multiply,
+            DIVIDE, Calculator::divide
+    );
 
     public List<String> splitWithSpace(String input) {
         if (input == null || input.isBlank()) {
@@ -39,30 +58,19 @@ public class Calculator {
 
         for (int i = 1; i < input.size(); i = i + 2) {
             int number = this.parseOrThrow(input.get(i + 1));
-            result = this.operate(input.get(i), result, number);
+            final String operator = input.get(i);
+            result = this.operate(operator, result, number);
         }
 
         return result;
     }
 
     private int operate(String operator, int a, int b) {
-        if (operator.equals(ADD)) {
-            return add(a, b);
+        BiFunction<Integer, Integer, Integer> operation = OPERATIONS.get(operator);
+        if (operation == null) {
+            throw new IllegalArgumentException("사칙연산을 수행할 수 없는 문자열을 포함합니다: " + operator);
         }
-
-        if (operator.equals(SUBTRACT)) {
-            return subtract(a, b);
-        }
-
-        if (operator.equals(MULTIPLY)) {
-            return multiply(a, b);
-        }
-
-        if (operator.equals(DIVIDE)) {
-            return divide(a, b);
-        }
-
-        throw new IllegalArgumentException("사칙연산을 수행할 수 없는 문자열을 포함합니다: " + operator);
+        return operation.apply(a, b);
     }
 
     private int parseOrThrow(String element) {
@@ -71,9 +79,5 @@ public class Calculator {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("사칙연산을 수행할 수 없는 문자열을 포함합니다: " + element);
         }
-    }
-
-    private boolean isEven(int i) {
-        return i % 2 == 0;
     }
 }
