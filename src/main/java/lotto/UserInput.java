@@ -19,4 +19,8 @@ public class UserInput {
     private void setMoney(int amount) {
         this.money = new Money(amount);
     }
+
+    public int getMoneyAmount() {
+        return money.getAmount();
+    }
 }

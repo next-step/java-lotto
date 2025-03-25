@@ -15,7 +15,7 @@ class LottoSellerTest {
             "3500, 3",
             "14000, 14"
     })
-    void lottoCountTest(int input, int expected) {
-        assertEquals(expected, lottoSeller.getPurchasableLottoCount(new Money(input)));
+    void lottoCountTest(String input, int expected) {
+        assertEquals(expected, lottoSeller.getPurchasableLottoCount(UserInput.from(input)));
     }
 }
