@@ -30,11 +30,12 @@ public class LottoTicket {
         }
     }
 
-    public LottoResult matchWinner(LottoTicket other) {
+    public LottoResult matchWinner(LottoTicket other, int bonusNumber) {
         int matchCount = (int) other.numbers.stream()
                 .filter(this.numbers::contains)
                 .count();
-        return new LottoResult(this, PrizeRank.of(matchCount, false));
+        boolean isBonusMatch = this.numbers.contains(LottoNumber.of(bonusNumber));
+        return new LottoResult(this, PrizeRank.of(matchCount, isBonusMatch));
     }
 
     @Override

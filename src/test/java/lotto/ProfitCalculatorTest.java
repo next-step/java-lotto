@@ -19,7 +19,7 @@ public class ProfitCalculatorTest {
 
         List<LottoResult> results = new ArrayList<>();
         for (LottoTicket ticket : tickets) {
-            results.add(ticket.matchWinner(winner));
+            results.add(ticket.matchWinner(winner, 45));
         }
 
         assertThat(ProfitCalculator.calculate(LottoChecker.getSummary(results))).isEqualTo(2.5f);

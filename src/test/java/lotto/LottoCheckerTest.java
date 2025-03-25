@@ -20,7 +20,7 @@ public class LottoCheckerTest {
 
         List<LottoResult> results = new ArrayList<>();
         for (LottoTicket ticket : tickets) {
-            results.add(ticket.matchWinner(ticket6));
+            results.add(ticket.matchWinner(ticket6, 45));
         }
 
         Map<PrizeRank, Integer> expected = new HashMap<>();

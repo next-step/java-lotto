@@ -21,7 +21,7 @@ public class LottoMachine {
 
         List<LottoResult> results = new ArrayList<>();
         for (LottoTicket ticket : lottoTickets) {
-            results.add(ticket.matchWinner(winningTicket));
+            results.add(ticket.matchWinner(winningTicket, 45));
         }
 
         ResultView.printSummary(LottoChecker.getSummary(results));
