@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.generator.LottoGenerator;
+
 import java.util.List;
 
 public class Customer {
@@ -10,8 +12,8 @@ public class Customer {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public void purchaseLottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public void purchaseLottos() {
+        lottos = LottoGenerator.generateLottosByAmount(purchaseAmount);
     }
 
     public double calculateROI() {
@@ -22,5 +24,9 @@ public class Customer {
         }
 
         return totalPrize / purchaseAmount;
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
