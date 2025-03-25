@@ -1,24 +1,31 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
   private final List<LottoNumber> numbers;
-
   public static final int SIZE = 6;
-  public static final int PRICE = 1000;
 
   public Lotto(List<LottoNumber> numbers) {
-    if (numbers.size() != SIZE) {
-      throw new IllegalArgumentException("로또 번호는 " + SIZE + "개여야 합니다.");
-    }
+    validateChecks(numbers);
 
     this.numbers = numbers.stream()
         .sorted((n1, n2) -> Integer.compare(n1.getNumber(), n2.getNumber()))
         .collect(Collectors.toList());
+  }
+
+  private void validateChecks(List<LottoNumber> numbers) {
+    if (numbers.size() != SIZE) {
+      throw new IllegalArgumentException("로또 번호는 " + SIZE + "개여야 합니다.");
+    }
+
+    Set<LottoNumber> uniqueNumbers = numbers.stream().collect(Collectors.toSet());
+    if (uniqueNumbers.size() != numbers.size()) {
+      throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+    }
   }
 
   public static Lotto of(String input) {
@@ -42,10 +49,4 @@ public class Lotto {
     return numbers;
   }
 
-  public String getFormattedNumbers() {
-    return "[" + numbers.stream()
-        .map(LottoNumber::getNumber)
-        .map(String::valueOf)
-        .collect(Collectors.joining(", ")) + "]";
-  }
 }

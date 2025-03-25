@@ -1,9 +1,9 @@
 package lotto.view;
 
-import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.result.LottoResult;
 import lotto.domain.LottoSet;
 import lotto.domain.result.WinningRank;
@@ -13,7 +13,10 @@ public class ResultView {
     System.out.println(lottoSet.size() + "개를 구매했습니다.");
 
     lottoSet.getLottos().stream()
-        .map(Lotto::getFormattedNumbers)
+        .map(lotto -> "[" + lotto.getNumbers().stream()
+            .map(LottoNumber::getNumber)
+            .map(String::valueOf)
+            .collect(Collectors.joining(", ")) + "]")  // 포맷팅 과정 바로 처리
         .forEach(System.out::println);
   }
 

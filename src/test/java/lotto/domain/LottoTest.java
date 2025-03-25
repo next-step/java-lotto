@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +27,11 @@ class LottoTest {
   void of() {
     Lotto lotto = Lotto.of("1,2,3,4,5,6");
     assertThat(lotto.size()).isEqualTo(Lotto.SIZE);
+  }
+
+  @Test
+  @DisplayName("로또 번호는 중복될 수 없다.")
+  void duplicateNumber() {
+    assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of("1,1,1,1,1,1"));
   }
 }

@@ -1,19 +1,18 @@
 package lotto.domain;
 
 import lotto.domain.result.LottoResult;
-import lotto.domain.result.LottoResultAnalyzer;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoGame {
   public static void main(String[] args) {
     int cost = InputView.inputCost();
-    LottoSet lottoSet = LottoMachine.generateRandomLotto(cost);
+    LottoPurchase lottoPurchase = new LottoPurchase(cost);
+    LottoSet lottoSet = LottoMachine.generateRandomLotto(lottoPurchase);
     ResultView.printLottoSet(lottoSet);
 
     Lotto winningLotto = InputView.inputWinningLotto();
-    LottoResultAnalyzer analyzer = new LottoResultAnalyzer();
-    LottoResult lottoResult = analyzer.analyze(lottoSet, winningLotto);
+    LottoResult lottoResult = lottoSet.calculateResult(winningLotto);
     ResultView.printLottoStatistics(lottoResult);
 
     InputView.closeScanner();

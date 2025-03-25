@@ -6,13 +6,18 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomLottoGenerator {
-    public Lotto generate() {
-        List<Integer> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+    private final List<Integer> allNumbers;
+
+    public RandomLottoGenerator() {
+        this.allNumbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
-        Collections.shuffle(numbers);
+    }
 
-        List<LottoNumber> selectedNumbersList = numbers.subList(0, Lotto.SIZE).stream()
+    public Lotto generate() {
+        Collections.shuffle(allNumbers);
+
+        List<LottoNumber> selectedNumbersList = allNumbers.subList(0, Lotto.SIZE).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 

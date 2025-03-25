@@ -1,23 +1,14 @@
 package lotto.domain.result;
 
-
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 public class LottoResult {
-  private Map<WinningRank, Integer> matchCount;
-  private double profitRate;
+  private final Map<WinningRank, Integer> matchCount;
+  private final double profitRate;
 
-  public LottoResult() {
-    this.matchCount = new HashMap<>();
-    this.profitRate = 0;
-  }
-
-  public void setMatchCount(Map<WinningRank, Integer> matchCount) {
-    this.matchCount = matchCount;
-  }
-
-  public void setProfitRate(double profitRate) {
+  public LottoResult(Map<WinningRank, Integer> matchCount, double profitRate) {
+    this.matchCount = Collections.unmodifiableMap(matchCount);
     this.profitRate = profitRate;
   }
 
