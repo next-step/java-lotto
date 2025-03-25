@@ -20,7 +20,7 @@ public class ResultView {
         System.out.println("---------");
         for (PrizeRank prize : summary.keySet()) {
             if (prize == PrizeRank.NONE) continue;
-            System.out.printf("%s개 일치 (%s)- %d개\n", prize.getMatchCount().toString(), formatMoney(prize.getPrize()), summary.get(prize));
+            System.out.printf("%s개 일치 (%s)- %d개\n", prize.getMatchCount().getCount(), formatMoney(prize.getPrize()), summary.get(prize));
         }
 
         float profit = ProfitCalculator.calculate(summary);

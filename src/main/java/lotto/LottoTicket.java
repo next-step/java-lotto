@@ -34,7 +34,7 @@ public class LottoTicket {
         int matchCount = (int) other.numbers.stream()
                 .filter(this.numbers::contains)
                 .count();
-        return new LottoResult(this, MatchCount.of(matchCount));
+        return new LottoResult(this, PrizeRank.of(matchCount, false));
     }
 
     @Override

@@ -32,9 +32,8 @@ public class MatchCount {
         return CACHE.get(count);
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(count);
+    public int getCount() {
+        return this.count;
     }
 
     @Override
@@ -42,11 +41,11 @@ public class MatchCount {
         if (this == obj) return true;
         if (!(obj instanceof MatchCount)) return false;
         MatchCount other = (MatchCount) obj;
-        return count == other.count;
+        return this.count == other.count;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(count);
+        return Objects.hashCode(this.count);
     }
 }

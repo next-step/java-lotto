@@ -25,7 +25,7 @@ public class LottoCheckerTest {
 
         Map<PrizeRank, Integer> expected = new HashMap<>();
         expected.put(PrizeRank.FIRST, 1);
-        expected.put(PrizeRank.FOURTH, 1);
+        expected.put(PrizeRank.FIFTH, 1);
 
         assertThat(LottoChecker.getSummary(results)).containsAllEntriesOf(expected);
     }

@@ -6,9 +6,9 @@ public class LottoResult {
     private final LottoTicket ticket;
     private final PrizeRank rank;
 
-    public LottoResult(LottoTicket ticket, MatchCount matchCount) {
+    public LottoResult(LottoTicket ticket, PrizeRank rank) {
         this.ticket = ticket;
-        this.rank = PrizeRank.of(matchCount);
+        this.rank = rank;
     }
 
     public PrizeRank getRank() {
