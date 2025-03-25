@@ -18,10 +18,15 @@ public class LottoCheckerTest {
         tickets.add(ticket6);
         tickets.add(ticket3);
 
+        List<LottoResult> results = new ArrayList<>();
+        for (LottoTicket ticket : tickets) {
+            results.add(ticket.matchWinner(ticket6));
+        }
+
         Map<PrizeRank, Integer> expected = new HashMap<>();
         expected.put(PrizeRank.FIRST, 1);
         expected.put(PrizeRank.FOURTH, 1);
 
-        assertThat(LottoChecker.getSummary(tickets, ticket6)).containsAllEntriesOf(expected);
+        assertThat(LottoChecker.getSummary(results)).containsAllEntriesOf(expected);
     }
 }

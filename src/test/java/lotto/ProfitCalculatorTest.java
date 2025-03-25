@@ -16,6 +16,12 @@ public class ProfitCalculatorTest {
         tickets.add(ticket6);
         tickets.add(ticket3);
         LottoTicket winner = new LottoTicket(new int[]{4, 5, 6, 7, 8, 9});
-        assertThat(ProfitCalculator.calculate(LottoChecker.getSummary(tickets, winner))).isEqualTo(2.5f);
+
+        List<LottoResult> results = new ArrayList<>();
+        for (LottoTicket ticket : tickets) {
+            results.add(ticket.matchWinner(winner));
+        }
+
+        assertThat(ProfitCalculator.calculate(LottoChecker.getSummary(results))).isEqualTo(2.5f);
     }
 }

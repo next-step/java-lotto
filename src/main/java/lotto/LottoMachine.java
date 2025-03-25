@@ -3,6 +3,7 @@ package lotto;
 import view.InputView;
 import view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
@@ -18,6 +19,11 @@ public class LottoMachine {
         String[] winningNumber = InputView.getStringListInput(WINNING_LOTTERY_NUMBERS_MESSAGE, ",");
         LottoTicket winningTicket = new LottoTicket(winningNumber);
 
-        ResultView.printSummary(LottoChecker.getSummary(lottoTickets, winningTicket));
+        List<LottoResult> results = new ArrayList<>();
+        for (LottoTicket ticket : lottoTickets) {
+            results.add(ticket.matchWinner(winningTicket));
+        }
+
+        ResultView.printSummary(LottoChecker.getSummary(results));
     }
 }
