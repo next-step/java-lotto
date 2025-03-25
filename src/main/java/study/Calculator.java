@@ -34,9 +34,9 @@ public class Calculator {
             int a = Integer.parseInt(parts[0]);
             int b = Integer.parseInt(parts[1]);
             return a / b;
+        } else {
+            throw new IllegalArgumentException("Invalid expression");
         }
-
-        throw new IllegalArgumentException("Invalid expression: " + expression);
     }
 
     interface Operation extends BiFunction<Integer, Integer, Integer> {
