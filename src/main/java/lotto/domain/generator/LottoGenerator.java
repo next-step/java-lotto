@@ -11,7 +11,7 @@ public class LottoGenerator {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_PRICE = 1000;
 
-    public static List<Lotto> purchaseLottos(int amount) {
+    public static List<Lotto> generateLottosByAmount(int amount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < calculateLottosCount(amount); i++) {
             lottos.add(generate());

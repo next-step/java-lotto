@@ -14,7 +14,7 @@ class LottoGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {1000, 5000, 10000})
     public void 입력한_금액만큼_로또를_구매한다(int amount) {
-        List<Lotto> lottos = LottoGenerator.purchaseLottos(amount);
+        List<Lotto> lottos = LottoGenerator.generateLottosByAmount(amount);
 
         int expected = LottoGenerator.calculateLottosCount(amount);
         assertThat(lottos.size()).isEqualTo(expected);
