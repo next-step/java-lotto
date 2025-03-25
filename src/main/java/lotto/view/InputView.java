@@ -12,7 +12,9 @@ public class InputView {
   public int receiveMoney() {
     System.out.println("구입금액을 입력해 주세요.");
     try {
-      return scanner.nextInt();
+      int money = scanner.nextInt();
+      scanner.nextLine();
+      return money;
     } catch (Exception e) {
       throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
     }
