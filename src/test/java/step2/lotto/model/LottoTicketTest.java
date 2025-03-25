@@ -1,0 +1,67 @@
+package step2.lotto.model;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import step2.lotto.exception.LottoTicketException;
+
+public class LottoTicketTest {
+
+    @Test
+    @DisplayName("로또 번호 6개로 생성된 올바른 로또 티켓")
+    void givenSixLottoNumbers_whenCreateLottoTicket_thenSuccess() {
+        // given
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(2);
+        LottoNumber lottoNumber3 = new LottoNumber(3);
+        LottoNumber lottoNumber4 = new LottoNumber(4);
+        LottoNumber lottoNumber5 = new LottoNumber(5);
+        LottoNumber lottoNumber6 = new LottoNumber(6);
+
+        // when & then
+        assertDoesNotThrow(() -> new LottoTicket(
+            List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5, lottoNumber6)));
+    }
+
+    @Test
+    @DisplayName("로또 번호 7개로 생성된 유효하지 않은 로또 티켓")
+    void givenSevenLottoNumbers_whenCreateLottoTicket_thenSuccess() {
+        // given
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(2);
+        LottoNumber lottoNumber3 = new LottoNumber(3);
+        LottoNumber lottoNumber4 = new LottoNumber(4);
+        LottoNumber lottoNumber5 = new LottoNumber(5);
+        LottoNumber lottoNumber6 = new LottoNumber(6);
+        LottoNumber lottoNumber7 = new LottoNumber(7);
+
+        // when
+        assertThatThrownBy(() -> new LottoTicket(
+            List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5, lottoNumber6, lottoNumber7)))
+
+            // then
+            .isExactlyInstanceOf(LottoTicketException.class);
+    }
+
+    @Test
+    @DisplayName("로또 번호 5개로 생성된 유효하지 않은 로또 티켓")
+    void givenFiveLottoNumbers_whenCreateLottoTicket_thenSuccess() {
+        // given
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(2);
+        LottoNumber lottoNumber3 = new LottoNumber(3);
+        LottoNumber lottoNumber4 = new LottoNumber(4);
+        LottoNumber lottoNumber5 = new LottoNumber(5);
+
+        // when
+        assertThatThrownBy(() -> new LottoTicket(
+            List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5)))
+
+            // then
+            .isExactlyInstanceOf(LottoTicketException.class);
+    }
+
+}

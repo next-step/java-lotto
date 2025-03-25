@@ -10,6 +10,9 @@ public class LottoMain {
         InputView inputView = new InputView();
         String purchaseAmount = inputView.getPurchaseAmount();
         Money money = new Money(purchaseAmount);
+
+        LottoApp lottoApp = new LottoApp();
+
     }
 
 }
