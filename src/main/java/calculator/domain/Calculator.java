@@ -2,16 +2,22 @@ package calculator.domain;
 
 public class Calculator {
     public long calculate(String input) {
+        validateNotBlank(input);
+        return calculate(slice(input));
+    }
+
+    private static void validateNotBlank(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("input should not be blank");
         }
+    }
 
+    private static String[] slice(String input) {
         String[] elements = input.split(" ");
         if (elements.length % 2 == 0) {
             throw new IllegalArgumentException("input is invalid format");
         }
-
-        return calculate(elements);
+        return elements;
     }
 
     private long calculate(String[] elements) {
