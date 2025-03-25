@@ -57,4 +57,11 @@ public class StringCalculatorTest {
         assertThatThrownBy(() -> StringCalculator.calculate("T + D + D"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("사칙연산 기호가 아닌 경우 테스트")
+    @Test
+    void non_arithmetic_input() {
+        assertThatThrownBy(() -> StringCalculator.calculate("100 / 10 a 60 B 20 ㅁ 4"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

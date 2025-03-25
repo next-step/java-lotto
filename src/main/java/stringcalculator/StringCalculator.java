@@ -13,7 +13,7 @@ public class StringCalculator {
         int result = stringToInt(targets.get(0));
         for (int i = 1; i < targets.size(); i += 2) {
             validateString(targets.get(i));
-            result = calculateOneOperation(targets, result, i);
+            result = calculateOneOperation(result, targets.get(i), stringToInt(targets.get(i+1)));
         }
         return result;
     }
@@ -30,18 +30,17 @@ public class StringCalculator {
         }
     }
 
-    private static int calculateOneOperation(List<String> targets, int result, int idx) {
-        String curTarget = targets.get(idx);
-        if (curTarget.equals("+")) {
-            result += stringToInt(targets.get(++idx));
-        } else if (curTarget.equals("-")) {
-            result -= stringToInt(targets.get(++idx));
-        } else if (curTarget.equals("*")) {
-            result *= stringToInt(targets.get(++idx));
-        } else if (curTarget.equals("/")) {
-            result /= stringToInt(targets.get(++idx));
+    private static int calculateOneOperation(int previousOperand, String curOperation, int nextOperand) {
+        if (curOperation.equals("+")) {
+            return previousOperand + nextOperand;
+        } else if (curOperation.equals("-")) {
+            return previousOperand - nextOperand;
+        } else if (curOperation.equals("*")) {
+            return previousOperand * nextOperand;
+        } else if (curOperation.equals("/")) {
+            return previousOperand / nextOperand;
         }
-        return result;
+        throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
     }
 
     private static int stringToInt(String string) {
