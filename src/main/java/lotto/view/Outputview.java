@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.Lotto;
-import lotto.LottoResult;
+import lotto.domain.model.Lotto;
+import lotto.domain.model.LottoResult;
 
 public class Outputview {
     public static void printPurchasedAmount(int amount) {

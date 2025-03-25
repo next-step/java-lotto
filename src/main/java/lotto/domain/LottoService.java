@@ -1,7 +1,12 @@
-package lotto;
+package lotto.domain;
 
+import lotto.domain.model.Lotto;
+import lotto.domain.model.LottoResult;
+import lotto.domain.model.LottoSeller;
+import lotto.view.model.UserMoneyInput;
+import lotto.view.model.WinningNumberInput;
 import lotto.view.Outputview;
-import lotto.view.UserInputProcessor;
+import lotto.view.InputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +15,7 @@ public class LottoService {
     private final LottoSeller lottoSeller = new LottoSeller();
 
     public void purchase() {
-        UserMoneyInput userInput = UserInputProcessor.getMoneyInput();
+        UserMoneyInput userInput = InputView.getMoneyInput();
         int purchasedAmount = lottoSeller.getPurchasableLottoCount(userInput);
         Outputview.printPurchasedAmount(purchasedAmount);
 
@@ -21,7 +26,7 @@ public class LottoService {
             purchasedLottos.add(purchasedLotto);
         }
 
-        WinnerNumberInput winnerNumberInput = UserInputProcessor.getWinnerInput();
+        WinningNumberInput winnerNumberInput = InputView.getWinnerInput();
         Lotto winningLotto = winnerNumberInput.getWinningLotto();
 
         LottoResult lottoResult = LottoResult.from(purchasedLottos, winningLotto);

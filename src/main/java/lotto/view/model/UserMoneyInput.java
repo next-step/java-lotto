@@ -1,4 +1,6 @@
-package lotto;
+package lotto.view.model;
+
+import lotto.domain.model.Money;
 
 public class UserMoneyInput {
     private Money money;

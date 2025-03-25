@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.model.Lotto;
+import lotto.domain.model.LottoRank;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

@@ -1,21 +1,23 @@
-package lotto;
+package lotto.view.model;
+
+import lotto.domain.model.Lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class WinnerNumberInput {
+public class WinningNumberInput {
     private static final String DEFAULT_DELIMITER = ",";
     private final Lotto lotto;
 
-    private WinnerNumberInput(Lotto lotto) {
+    private WinningNumberInput(Lotto lotto) {
         this.lotto = lotto;
     }
 
-    public static WinnerNumberInput from(String input) {
+    public static WinningNumberInput from(String input) {
         List<Integer> nums = convertStringToInt(input);
         Lotto lotto = Lotto.create(nums);
-        return new WinnerNumberInput(lotto);
+        return new WinningNumberInput(lotto);
     }
 
     public Lotto getWinningLotto() {

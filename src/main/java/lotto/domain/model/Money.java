@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain.model;
 
 public class Money {
     private final int amount;

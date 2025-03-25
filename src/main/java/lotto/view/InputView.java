@@ -1,11 +1,11 @@
 package lotto.view;
 
-import lotto.UserMoneyInput;
-import lotto.WinnerNumberInput;
+import lotto.view.model.UserMoneyInput;
+import lotto.view.model.WinningNumberInput;
 
 import java.util.Scanner;
 
-public class UserInputProcessor {
+public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static UserMoneyInput getMoneyInput() {
@@ -13,8 +13,8 @@ public class UserInputProcessor {
         return UserMoneyInput.from(scanner.nextLine());
     }
 
-    public static WinnerNumberInput getWinnerInput() {
+    public static WinningNumberInput getWinnerInput() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return WinnerNumberInput.from(scanner.nextLine());
+        return WinningNumberInput.from(scanner.nextLine());
     }
 }

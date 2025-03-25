@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.view.model.WinningNumberInput;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -12,7 +13,7 @@ class WinnerNumberInputTest {
             "1,2,3,4,5,6,7"
     })
     void nullInputTest(String input) {
-        assertThatThrownBy(() -> WinnerNumberInput.from(input))
+        assertThatThrownBy(() -> WinningNumberInput.from(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -22,7 +23,7 @@ class WinnerNumberInputTest {
             "1,2,3,4,5,!"
     })
     void notNumberInputTest(String input) {
-        assertThatThrownBy(() -> WinnerNumberInput.from(input))
+        assertThatThrownBy(() -> WinningNumberInput.from(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -31,7 +32,7 @@ class WinnerNumberInputTest {
             "1,2,3,4,5,5"
     })
     void outOfRangeInputTest(String input) {
-        assertThatThrownBy(() -> WinnerNumberInput.from(input))
+        assertThatThrownBy(() -> WinningNumberInput.from(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
