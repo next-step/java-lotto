@@ -15,7 +15,7 @@ public class LottoMachine {
         List<LottoTicket> lottoTickets = LottoGenerator.generate(paidMoney);
         ResultView.printTickets(lottoTickets);
 
-        String[] winningNumber = InputView.getStringInput(WINNING_LOTTERY_NUMBERS_MESSAGE, ",");
+        String[] winningNumber = InputView.getStringListInput(WINNING_LOTTERY_NUMBERS_MESSAGE, ",");
         LottoTicket winningTicket = new LottoTicket(winningNumber);
 
         ResultView.printSummary(LottoChecker.getSummary(lottoTickets, winningTicket));
