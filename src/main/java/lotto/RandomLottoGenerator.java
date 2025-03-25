@@ -6,12 +6,10 @@ import java.util.List;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
-    private static final int MAX_NUMBER = 45;
-    private static final int MIN_NUMBER = 1;
     private static final List<LottoNumber> numbers = new ArrayList<>();
 
     static {
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+        for (int i = Lotto.MIN_LOTTO_NUMBER; i <= Lotto.MAX_LOTTO_NUMBER; i++) {
             numbers.add(new LottoNumber(i));
         }
     }

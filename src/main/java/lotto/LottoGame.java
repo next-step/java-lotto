@@ -39,15 +39,7 @@ public class LottoGame {
   private Lotto receiveWinningLotto() {
     InputView inputView = new InputView(scanner);
     String winninLottoNumbers = inputView.receiveWinningLotto();
-    return createWinningLotto(winninLottoNumbers);
-  }
-
-  private Lotto createWinningLotto(String winninLottoNumbers) {
-    List<LottoNumber> numbers = Arrays.stream(winninLottoNumbers.split(","))
-            .map(String::trim)
-            .map(num -> new LottoNumber(Integer.parseInt(num)))
-            .collect(Collectors.toList());
-    return new Lotto(numbers);
+    return new Lotto(winninLottoNumbers);
   }
 
   private void printResult(Lotto winningLotto, Lottos lottos) {
