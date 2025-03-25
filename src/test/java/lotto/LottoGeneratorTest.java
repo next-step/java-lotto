@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.generator.LottoGenerator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,7 +15,7 @@ class LottoGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {1000, 5000, 10000})
     public void 입력한_금액만큼_로또를_구매한다(int amount) {
-        List<Lotto> lottos = LottoGenerator.generateLottosByAmount(amount);
+        Lottos lottos = LottoGenerator.generateLottosByAmount(amount);
 
         int expected = LottoGenerator.calculateLottosCount(amount);
         assertThat(lottos.size()).isEqualTo(expected);

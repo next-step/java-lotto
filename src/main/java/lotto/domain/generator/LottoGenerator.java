@@ -1,6 +1,7 @@
 package lotto.domain.generator;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,13 +12,13 @@ public class LottoGenerator {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_PRICE = 1000;
 
-    public static List<Lotto> generateLottosByAmount(int amount) {
+    public static Lottos generateLottosByAmount(int amount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < calculateLottosCount(amount); i++) {
             lottos.add(generate());
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public static int calculateLottosCount(int amount) {

@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Customer;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 
@@ -16,11 +17,11 @@ class CustomerTest {
         Lotto noPrizeRankLotto = new Lotto(Rank.NO_PRIZE);
 
         int purchaseAmount = 3000;
-        List<Lotto> purchaseLotto = List.of(thirdRankLotto, thirdRankLotto, noPrizeRankLotto); // 3등x2, 꽝x1
-        Customer customer = new Customer(3000, purchaseLotto);
+        Lottos lottos = new Lottos(List.of(thirdRankLotto, thirdRankLotto, noPrizeRankLotto)); // 3등x2, 꽝x1
+        Customer customer = new Customer(3000, lottos);
 
         double actual = customer.calculateROI();
-        double expected = (double) purchaseLotto.stream().mapToInt(Lotto::getPrize).sum() / purchaseAmount;
+        double expected = (double) lottos.getLottoList().stream().mapToInt(Lotto::getPrize).sum() / purchaseAmount;
 
         assertThat(actual).isEqualTo(expected);
     }

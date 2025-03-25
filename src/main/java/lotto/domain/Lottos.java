@@ -5,21 +5,21 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
-    private final List<Lotto> lottos;
+    private final List<Lotto> lottoList;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
     public void checkAllLottosResult(List<Integer> winningNumbers) {
-        lottos.forEach((lotto) -> lotto.checkLottoResult(winningNumbers));
+        lottoList.forEach((lotto) -> lotto.checkLottoResult(winningNumbers));
     }
 
     public Map<Rank, Integer> getStatistics() {
         Map<Rank, Integer> statistics = new HashMap<>();
         initializeStatistics(statistics);
 
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottoList) {
             Rank rank = lotto.getRank();
             statistics.put(rank, statistics.get(rank) + 1);
         }
@@ -31,5 +31,13 @@ public class Lottos {
         for (Rank rank : Rank.values()) {
             statistics.put(rank, 0);
         }
+    }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
+
+    public int size() {
+        return lottoList.size();
     }
 }
