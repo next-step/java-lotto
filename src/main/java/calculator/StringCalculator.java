@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.operator.*;
+import com.google.common.annotations.VisibleForTesting;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +19,8 @@ public class StringCalculator {
         return calculateTokens(tokens);
     }
 
-    public String[] splitInput(String input) {
+    @VisibleForTesting
+    String[] splitInput(String input) {
         return input.split(" ");
     }
 
@@ -47,7 +49,8 @@ public class StringCalculator {
         return parseNumber(token);
     }
 
-    private int parseNumber(String token) {
+    @VisibleForTesting
+    int parseNumber(String token) {
         try {
             return Integer.parseInt(token);
         } catch (NumberFormatException e) {
