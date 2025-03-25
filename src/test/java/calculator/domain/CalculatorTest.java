@@ -21,6 +21,14 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"2 / 3", "3 / 2"})
+    @DisplayName("입력 문자열의 나눗셈 결과가 정수가 아니면 예외가 발생한다.")
+    void validateDivideNumber(String input) {
+        assertThatThrownBy(() -> calculator.calculate(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"1", "-1", "0"})
     @DisplayName("연산자가 없고 단일 숫자이면, 단일 숫자를 반환한다.")
     void calculateOneNumber(String input) {

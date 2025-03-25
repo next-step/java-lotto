@@ -2,6 +2,10 @@ package calculator.domain;
 
 public class Calculator {
     public long calculate(String input) {
+        if(input == null || input.isBlank()) {
+            throw new IllegalArgumentException("input should not be blank");
+        }
+
         String[] elements = input.split(" ");
         if(elements.length % 2 == 0) {
             throw new IllegalArgumentException("input is invalid format");
@@ -49,7 +53,10 @@ public class Calculator {
         return result * number;
     }
     private long divide(long result, long number) {
-        return result / number;
+        long value = result / number;
+        if (value * number != result)
+            throw new IllegalArgumentException("result of division should be integer");
+        return value;
     }
 
 }
