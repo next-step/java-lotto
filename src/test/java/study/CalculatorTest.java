@@ -90,4 +90,12 @@ public class CalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Invalid expression");
     }
+
+    @Test
+    @DisplayName("잘못된 연산자 테스트")
+    void invalidOperatorTest() {
+        Assertions.assertThatThrownBy(() -> Calculator.calculate("2 % 3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Invalid expression");
+    }
 }
