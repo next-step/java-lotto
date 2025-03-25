@@ -3,20 +3,27 @@ package calculator.domain;
 public class Calculator {
     public long calculate(String input) {
         String[] elements = input.split(" ");
-        if(elements.length == 0) {
-            throw new IllegalArgumentException("input should not be null");
-        } else if(elements.length == 1) {
-           return Long.parseLong(elements[0]);
+        if(elements.length % 2 == 0) {
+            throw new IllegalArgumentException("input is invalid format");
         }
 
-        long result = Long.parseLong(elements[0]);
+        long result = parseNumber(elements[0]);
+
         for(int i=1; i<elements.length; i=i+2) {
             String operator = elements[i];
-            long number = Long.parseLong(elements[i+1]);
+            long number = parseNumber(elements[i+1]);
             result = calculateOnce(operator, result, number);
         }
 
         return result;
+    }
+
+    private long parseNumber(String element) {
+        try {
+            return Long.parseLong(element);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("element '%s' is not number", element));
+        }
     }
 
     private long calculateOnce(String operator, long result, long number) {
