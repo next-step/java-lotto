@@ -5,8 +5,8 @@ import step2.lotto.exception.LottoNumberException;
 public class LottoNumber {
 
     private final int value;
-    private final static int MIN_VALUE = 1;
-    private final static int MAX_VALUE = 45;
+    public final static int MIN_VALUE = 1;
+    public final static int MAX_VALUE = 45;
 
     public LottoNumber(String value) {
         validate(value);
