@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.util.Prize;
 import lotto.util.Reporter;
 
 import java.util.Map;
@@ -19,11 +20,11 @@ public class ResultView {
         StringBuilder sb = new StringBuilder();
         sb.append("당첨 통계\n");
         sb.append("---------\n");
-        for (int i = 3; i <= 6; i++) {
-            sb.append(i).append("개 일치 (")
-                    .append(Reporter.prizes.get(i))
+        for (Prize prize : Prize.values()) {
+            sb.append(prize.number()).append("개 일치 (")
+                    .append(prize.money())
                     .append("원)- ")
-                    .append(matchNums.getOrDefault(i, 0))
+                    .append(matchNums.getOrDefault(prize.number(), 0))
                     .append("개)\n");
         }
         sb.append("총 수익률은 ").append(Reporter.getROI(matchNums, lottos.getSize())).append("입니다\n");
