@@ -4,16 +4,15 @@ import step2.lotto.exception.MoneyException;
 
 public class Money {
 
-    private final int value;
+    private int value;
 
-    public Money() {
-        value = 0;
+    public Money(int value) {
+        this.value = value;
     }
 
-    public Money(String purchaseAmount) {
-        validate(purchaseAmount);
-        value = Integer.parseInt(purchaseAmount);
-
+    public Money(String value) {
+        validate(value);
+        this.value = Integer.parseInt(value);
     }
 
     private void validate(String purchaseAmount) {
@@ -30,6 +29,14 @@ public class Money {
 
     public int value() {
         return value;
+    }
+
+    public void add(Money money) {
+        this.value += money.value;
+    }
+
+    public void multiply(Count count) {
+        this.value *= count.value();
     }
 
 }

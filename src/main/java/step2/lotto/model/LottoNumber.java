@@ -2,11 +2,11 @@ package step2.lotto.model;
 
 import step2.lotto.exception.LottoNumberException;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
-    private final int value;
     public final static int MIN_VALUE = 1;
     public final static int MAX_VALUE = 45;
+    private final int value;
 
     public LottoNumber(String value) {
         validate(value);
@@ -40,6 +40,19 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof LottoNumber) {
+            return value == ((LottoNumber) obj).value;
+        }
+        return false;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(value, o.value);
     }
 
 }

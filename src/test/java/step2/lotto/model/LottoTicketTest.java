@@ -12,7 +12,7 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("로또 번호 6개로 생성된 올바른 로또 티켓")
-    void givenSixLottoNumbers_whenCreateLottoTicket_thenSuccess() {
+    void given6LottoNumbers_whenCreateLottoTicket_thenSuccess() {
         // given
         LottoNumber lottoNumber1 = new LottoNumber(1);
         LottoNumber lottoNumber2 = new LottoNumber(2);
@@ -28,7 +28,7 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("로또 번호 7개로 생성된 유효하지 않은 로또 티켓")
-    void givenSevenLottoNumbers_whenCreateLottoTicket_thenSuccess() {
+    void given7LottoNumbers_whenCreateLottoTicket_thenSuccess() {
         // given
         LottoNumber lottoNumber1 = new LottoNumber(1);
         LottoNumber lottoNumber2 = new LottoNumber(2);
@@ -48,7 +48,7 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("로또 번호 5개로 생성된 유효하지 않은 로또 티켓")
-    void givenFiveLottoNumbers_whenCreateLottoTicket_thenSuccess() {
+    void given5LottoNumbers_whenCreateLottoTicket_thenSuccess() {
         // given
         LottoNumber lottoNumber1 = new LottoNumber(1);
         LottoNumber lottoNumber2 = new LottoNumber(2);
@@ -59,6 +59,42 @@ public class LottoTicketTest {
         // when
         assertThatThrownBy(() -> new LottoTicket(
             List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5)))
+
+            // then
+            .isExactlyInstanceOf(LottoTicketException.class);
+    }
+
+    @Test
+    @DisplayName("로또 번호 6개를 문자열로 입력받아 생성된 로또 티켓")
+    void givenString6LottoNumbers_whenCreateLottoTicket_thenSuccess() {
+        // given
+        String lottoNumbers = "1, 2, 3, 4, 5, 6";
+
+        // when & then
+        assertDoesNotThrow(() -> new LottoTicket(lottoNumbers));
+    }
+
+    @Test
+    @DisplayName("로또 번호 7개를 문자열로 입력받아서 생성된 유효하지 않은 로또 티켓")
+    void givenString7LottoNumbers_whenCreateLottoTicket_thenSuccess() {
+        // given
+        String lottoNumbers = "1, 2, 3, 4, 5, 6, 7";
+
+        // when
+        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+
+            // then
+            .isExactlyInstanceOf(LottoTicketException.class);
+    }
+
+    @Test
+    @DisplayName("로또 번호 5개를 문자열로 입력받아서 생성된 유효하지 않은 로또 티켓")
+    void givenString5LottoNumbers_whenCreateLottoTicket_thenSuccess() {
+        // given
+        String lottoNumbers = "1, 2, 3, 4, 5";
+
+        // when
+        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
 
             // then
             .isExactlyInstanceOf(LottoTicketException.class);
