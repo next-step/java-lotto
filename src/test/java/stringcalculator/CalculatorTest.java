@@ -104,4 +104,18 @@ public class CalculatorTest {
         Assertions.assertThat(result)
                 .containsExactly("2", "+", "3", "*", "4", "/", "2");
     }
+
+    @Test
+    @DisplayName("주어진 문자열 리스트로 사칙연산을 수행한다.")
+    void processTest() {
+        //given
+        final List<String> input = List.of("2", "+", "3", "*", "4", "/", "2");
+        final Calculator calculator = new Calculator();
+
+        //when
+        final int result = calculator.process(input);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(10);
+    }
 }

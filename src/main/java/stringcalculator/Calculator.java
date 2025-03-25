@@ -31,4 +31,8 @@ public class Calculator {
 
         return List.of(input.split(DELIMITER));
     }
+
+    public int process(List<String> input) {
+        return 0;
+    }
 }
