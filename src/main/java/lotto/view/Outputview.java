@@ -3,13 +3,15 @@ package lotto.view;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.LottoResult;
 
+import java.util.List;
+
 public class Outputview {
     public static void printPurchasedAmount(int amount) {
         System.out.printf("%d개를 구매했습니다.\n", amount);
     }
 
-    public static void printLotto(Lotto lotto) {
-        System.out.println(lotto);
+    public static void printLottos(List<Lotto> lottos) {
+        lottos.forEach(System.out::println);
     }
 
     public static void printResult(LottoResult lottoResult) {

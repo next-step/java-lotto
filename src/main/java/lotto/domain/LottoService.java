@@ -8,27 +8,36 @@ import lotto.view.model.WinningNumberInput;
 import lotto.view.Outputview;
 import lotto.view.InputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
     private final LottoSeller lottoSeller = new LottoSeller();
 
     public void purchase() {
+        List<Lotto> purchasedLottos = purchaseLotto();
+        Lotto winningLotto = getWinningLotto();
+        displayResult(purchasedLottos, winningLotto);
+
+    }
+
+    private List<Lotto> purchaseLotto() {
         UserMoneyInput userInput = InputView.getMoneyInput();
+
         int purchasedAmount = lottoSeller.getPurchasableLottoCount(userInput);
         Outputview.printPurchasedAmount(purchasedAmount);
 
-        List<Lotto> purchasedLottos = new ArrayList<>();
-        for (int i = 0; i < purchasedAmount; i++) {
-            Lotto purchasedLotto = Lotto.create();
-            Outputview.printLotto(purchasedLotto);
-            purchasedLottos.add(purchasedLotto);
-        }
+        List<Lotto> purchasedLotto = lottoSeller.generateAndSell(purchasedAmount);
+        Outputview.printLottos(purchasedLotto);
 
+        return purchasedLotto;
+    }
+
+    private Lotto getWinningLotto() {
         WinningNumberInput winnerNumberInput = InputView.getWinnerInput();
-        Lotto winningLotto = winnerNumberInput.getWinningLotto();
+        return winnerNumberInput.getWinningLotto();
+    }
 
+    private void displayResult(List<Lotto> purchasedLottos, Lotto winningLotto) {
         LottoResult lottoResult = LottoResult.from(purchasedLottos, winningLotto);
         Outputview.printResult(lottoResult);
     }
