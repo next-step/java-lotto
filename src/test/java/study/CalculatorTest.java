@@ -99,11 +99,22 @@ public class CalculatorTest {
                 .hasMessage("Invalid expression");
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("allOperatorTestData")
     @DisplayName("모든 연산기호 포함하는 수식 테스트")
-    void allOperatorTest() {
-        var result = Calculator.calculate("2 + 3 - 4 * 5 / 2");
+    void allOperatorTest(String expression, int expected) {
+        var result = Calculator.calculate(expression);
 
-        Assertions.assertThat(result).isEqualTo(0);
+        Assertions.assertThat(result).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> allOperatorTestData() {
+        return Stream.of(
+                Arguments.of("2 + 3 * 4 / 2", 10),
+                Arguments.of("5 + 6 * 3 / 3", 11),
+                Arguments.of("10 - 2 * 3 + 4", 28),
+                Arguments.of("8 / 2 + 3 * 2", 14),
+                Arguments.of("7 * 2 - 5 / 1", 9)
+        );
     }
 }
