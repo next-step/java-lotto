@@ -1,6 +1,7 @@
 package model;
 
 import generator.RandomNumberGenerator;
+import model.lotto.LottoShop;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

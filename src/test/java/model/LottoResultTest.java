@@ -1,5 +1,7 @@
 package model;
 
+import model.lotto.Lotto;
+import model.lotto.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

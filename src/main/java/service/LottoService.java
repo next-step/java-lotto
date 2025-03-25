@@ -1,9 +1,9 @@
 package service;
 
 import generator.RandomNumberGenerator;
-import model.Lotto;
-import model.LottoResult;
-import model.LottoShop;
+import model.lotto.Lotto;
+import model.lotto.LottoResult;
+import model.lotto.LottoShop;
 import ui.InputView;
 import ui.ResultView;
 

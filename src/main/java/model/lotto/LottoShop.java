@@ -1,4 +1,4 @@
-package model;
+package model.lotto;
 
 import generator.NumberGenerator;
 

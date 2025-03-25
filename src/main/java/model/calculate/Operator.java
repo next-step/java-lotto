@@ -1,3 +1,5 @@
+package model.calculate;
+
 import java.util.Arrays;
 import java.util.function.BiFunction;
 

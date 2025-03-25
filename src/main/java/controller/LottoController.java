@@ -1,3 +1,5 @@
+package controller;
+
 import service.LottoService;
 
 public class LottoController {

@@ -1,8 +1,8 @@
 package ui;
 
-import model.Lotto;
-import model.LottoResult;
-import model.Rank;
+import model.lotto.Lotto;
+import model.lotto.LottoResult;
+import model.lotto.Rank;
 
 import java.util.List;
 

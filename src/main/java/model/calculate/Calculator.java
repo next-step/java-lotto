@@ -1,3 +1,5 @@
+package model.calculate;
+
 public class Calculator {
     public int calculate(Expression expression) {
         int operatorSize = expression.getOperatorSize();
