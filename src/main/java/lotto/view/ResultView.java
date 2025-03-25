@@ -9,9 +9,13 @@ import java.util.Map;
 
 public class ResultView {
     public static void printLottos(Lottos lottos) {
-        System.out.printf("%s개를 구매했습니다.\n", lottos.getSize());
-        System.out.println(lottos);
-        System.out.println();
+        StringBuilder sb = new StringBuilder();
+        sb.append(lottos.getSize()).append("개를 구매했습니다.\n");
+        for (Lotto lotto : lottos.getAllLottos()) {
+            sb.append(lotto.toString());
+            sb.append("\n");
+        }
+        System.out.println(sb);
     }
 
     public static void printReport(Lottos lottos, Lotto winningNumbers) {

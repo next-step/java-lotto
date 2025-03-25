@@ -27,14 +27,8 @@ public class Lottos {
         return new Lottos(result);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            sb.append(lotto.toString());
-            sb.append("\n");
-        }
-        return sb.toString();
+    public List<Lotto> getAllLottos() {
+        return lottos;
     }
 
     public int getSize() {
