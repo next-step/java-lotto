@@ -4,9 +4,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.LottoNumber;
-import lotto.domain.result.LottoResult;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoSet;
-import lotto.domain.result.WinningRank;
+import lotto.domain.WinningRank;
 
 public class ResultView {
   public static void printLottoSet(LottoSet lottoSet) {

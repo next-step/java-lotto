@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.result.LottoResult;
-import lotto.domain.result.WinningRank;
 
 public class LottoSet {
   private static final int MINIMUM_MATCH_COUNT = 3;
