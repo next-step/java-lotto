@@ -38,12 +38,10 @@ public class Lotto {
     }
 
     public LottoRank getRank(Lotto winner) {
-        List<LottoNumber> winNumbers = winner.getLottoNumbers();
-        int numOfWin = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (winNumbers.contains(lottoNumber)) numOfWin++;
-        }
-        return LottoRank.fromMatchedNum(numOfWin);
+        int matchedNum = (int) lottoNumbers.stream()
+                .filter(winner.getLottoNumbers()::contains)
+                .count();
+        return LottoRank.fromMatchedNum(matchedNum);
     }
 
     public List<LottoNumber> getLottoNumbers() {
