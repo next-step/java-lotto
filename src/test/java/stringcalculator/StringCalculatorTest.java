@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringCalculatorTest {
     @DisplayName("덧셈 기능 테스트")
@@ -30,9 +31,30 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.calculate("100 / 2 / -2")).isEqualTo(-25);
     }
 
-    @DisplayName(" 모든 연산 포함하는 계산 기능 테스트")
+    @DisplayName("모든 연산 포함하는 계산 기능 테스트")
     @Test
     void all_operator() {
         assertThat(StringCalculator.calculate("100 / 10 + 60 - 20 * 4")).isEqualTo(200);
+    }
+
+    @DisplayName("입력 값이 빈 공백 하나일 경우 테스트")
+    @Test
+    void empty_input() {
+        assertThatThrownBy(() -> StringCalculator.calculate(" "))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("입력 값이 null이거나 빈 공백 문자, 숫자가 아닐 경우 테스트")
+    @Test
+    void null_empty_input() {
+        assertThatThrownBy(() -> StringCalculator.calculate("10   * 3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("피연산자 입력 값이 숫자가 아닐 경우 테스트")
+    @Test
+    void non_number_input() {
+        assertThatThrownBy(() -> StringCalculator.calculate("T + D + D"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
