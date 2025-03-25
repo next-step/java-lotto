@@ -5,11 +5,16 @@ import lotto.domain.generator.LottoGenerator;
 import java.util.List;
 
 public class Customer {
-    private int purchaseAmount;
+    private final int purchaseAmount;
     private List<Lotto> lottos;
 
     public Customer(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
+    }
+
+    public Customer(int purchaseAmount, List<Lotto> lottos) {
+        this.purchaseAmount = purchaseAmount;
+        this.lottos = lottos;
     }
 
     public void purchaseLottos() {

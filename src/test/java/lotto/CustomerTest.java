@@ -15,14 +15,12 @@ class CustomerTest {
         Lotto thirdRankLotto = new Lotto(Rank.THIRD);
         Lotto noPrizeRankLotto = new Lotto(Rank.NO_PRIZE);
 
-        int purchaseAmount = 10000;
-        Customer customer = new Customer(10000);
-
-        List<Lotto> lottos = List.of(thirdRankLotto, thirdRankLotto, noPrizeRankLotto); // 3등x2, 꽝x1
-        customer.purchaseLottos(lottos);
+        int purchaseAmount = 3000;
+        List<Lotto> purchaseLotto = List.of(thirdRankLotto, thirdRankLotto, noPrizeRankLotto); // 3등x2, 꽝x1
+        Customer customer = new Customer(3000, purchaseLotto);
 
         double actual = customer.calculateROI();
-        double expected = (double) lottos.stream().mapToInt(Lotto::getPrize).sum() / purchaseAmount;
+        double expected = (double) purchaseLotto.stream().mapToInt(Lotto::getPrize).sum() / purchaseAmount;
 
         assertThat(actual).isEqualTo(expected);
     }
