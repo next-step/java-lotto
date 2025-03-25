@@ -57,3 +57,25 @@
 - [ ] 로또 구매 금액이 음수이거나 잔돈이 발생하는 경우 예외가 발생한다.
 ### 고칠것들
 - [x] 로또 생성 시, 오름차순 정렬
+---
+## 주요 클래스별 설명
+### Lotto
+- 로또 번호 `numbers` 와 결과 `rank` 에 대한 정보를 갖는다.
+- `determineLottoResult` : 당첨 번호와 현재 로또 번호 `numbers` 를 대조하여 결과 `rank` 를 확정 짓는다. 
+### Lottos
+- `Lotto` 클래스의 일급 컬렉션
+- `determineAllLottoResult` : 당첨 번호와 구매한 모든 로또 번호를 대조하여 결과를 확정 짓는다.
+- `getStatistics` : 확정된 로또 결과를 바탕으로 `Map<Rank, Integer>` 형식으로 통계를 만들어 반환한다.
+  - `[FIRST, 1] / [SECOND, 3] / ...` → 1등 1개, 2등 3개, ...
+### LottoGenerator
+- `Lotto` 생성을 담당하는 클래스
+- `generate` : 로또를 생성한다. (1개)
+- `generateLottosByAmount` : 로또를 생성한다. (구입 금액 만큼)
+### Rank
+- Lotto 등수를 관리하며, 각 등수별 몇개를 적중해야 하는지, 상금은 얼마인지에 대한 정보도 포함한다.
+- `getRankByMatchCount` : 적중하는 개수를 인자로 받으면 해당하는 Rank 를 반환한다.
+### Customer
+- 로또를 구매하는 행위를 담당하는 클래스
+- 로또 구매를 위한 구입 금액 `purchaseAmount` 과 구매한 Lotto `Lottos` 에 대한 정보를 갖는다.
+- `purchaseLottos` : 인자로 전달받은 구입금액을 바탕으로 로또 구매를 진행한다.
+- `calculateROI` : 가지고 있는 로또의 결과에 해당하는 당첨금액의 누적합과 로또 구입 금액을 활용하여 수익률을 반환한다.
