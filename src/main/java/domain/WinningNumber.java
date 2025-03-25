@@ -13,6 +13,10 @@ public class WinningNumber {
         this.numbers = inputNumbers;
     }
 
+    public boolean contains(int lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
     private List<Integer> from(String input) {
         return Arrays.stream(input.split(","))
                 .map(String::trim)
