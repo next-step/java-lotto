@@ -7,7 +7,7 @@ public class Parser {
     private Parser() {}
 
     public static Lotto parseWinningNumbers(String input) {
-        return new Lotto(Arrays.stream(input.split(","))
+        return Lotto.from(Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));

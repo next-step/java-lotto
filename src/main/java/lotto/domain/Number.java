@@ -9,7 +9,11 @@ public class Number {
         this.value = value;
     }
 
-    public boolean isValidRangeNumber() {
+    public int getValue() {
+        return value;
+    }
+
+    public boolean isValidRange() {
         return value >= 1 && value <= 45;
     }
 

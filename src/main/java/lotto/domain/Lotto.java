@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -8,22 +9,20 @@ import java.util.stream.IntStream;
 public class Lotto {
     private final List<Number> numbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers.stream().map(Number::new).collect(Collectors.toList());
+    public Lotto(List<Number> numbers) {
+        this.numbers = numbers;
     }
 
-    public boolean hasSize(int number) {
-        return this.numbers.size() == number;
+    public static Lotto from(List<Integer> numbers) {
+        return new Lotto(
+                numbers.stream()
+                        .sorted(Comparator.comparingInt(Integer::intValue))
+                        .map(Number::new)
+                        .collect(Collectors.toList())
+        );
     }
 
-    public boolean isValidRangeNumbers() {
-        return this.numbers.stream().allMatch(Number::isValidRangeNumber);
-    }
-
-    public boolean isSorted() {
-        return IntStream.range(0, numbers.size() - 1).allMatch(i -> numbers.get(i).isSmallerThan(numbers.get(i + 1)));
-    }
-
+    @Override
     public String toString() {
         return numbers.toString();
     }
@@ -44,5 +43,14 @@ public class Lotto {
         return (int) numbers.stream()
                 .filter(other.numbers::contains)
                 .count();
+    }
+
+    public boolean isValidRange() {
+        return numbers.stream().allMatch(Number::isValidRange);
+    }
+
+    public boolean isSorted() {
+        return IntStream.range(0, numbers.size()-1)
+                .allMatch(i -> numbers.get(i).isSmallerThan(numbers.get(i+1)));
     }
 }

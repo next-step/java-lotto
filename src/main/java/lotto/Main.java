@@ -1,14 +1,11 @@
 package lotto;
 
-import lotto.domain.Generator;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class Main {
-    private static final Generator generator = new Generator();
-
     public static void main(String[] args) {
         Lottos lottos = purchageLottos();
         Lotto winningNumbers = inputWinningNumbers();
@@ -17,7 +14,7 @@ public class Main {
 
     private static Lottos purchageLottos() {
         int inputPrice = InputView.purchase();
-        Lottos lottos = generator.run(inputPrice);
+        Lottos lottos = Lottos.from(inputPrice);
         ResultView.printLottos(lottos);
         return lottos;
     }
