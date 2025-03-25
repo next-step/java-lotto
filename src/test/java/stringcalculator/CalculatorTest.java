@@ -89,4 +89,19 @@ public class CalculatorTest {
     static Stream<String> provideNullOrBlankStrings() {
         return Stream.of(null, "", " ");
     }
+
+    @Test
+    @DisplayName("주어진 문자열을 공백 문자열로 나눠진 문자열 리스트를 반환한다.")
+    void splitWithSpaceTest() {
+        //given
+        final String input = "2 + 3 * 4 / 2";
+        final Calculator calculator = new Calculator();
+
+        //when
+        final List<String> result = calculator.splitWithSpace(input);
+
+        //then
+        Assertions.assertThat(result)
+                .containsExactly("2", "+", "3", "*", "4", "/", "2");
+    }
 }
