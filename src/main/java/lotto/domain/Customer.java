@@ -19,7 +19,8 @@ public class Customer {
             throw new IllegalArgumentException("구입금액은 0 이하일 수 없습니다. 입력한 구입금액: " + purchaseAmount);
         }
 
-        lottos = LottoGenerator.generateLottosByAmount(purchaseAmount);
+        this.purchaseAmount = purchaseAmount;
+        this.lottos = LottoGenerator.generateLottosByAmount(purchaseAmount);
     }
 
     public double calculateROI() {
