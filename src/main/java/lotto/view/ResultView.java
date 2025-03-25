@@ -14,4 +14,8 @@ public class ResultView {
     System.out.println(lottoReport.createCountReport());
     System.out.println(lottoReport.createMoneyReport());
   }
+
+  public static void printLottoCount(Lottos lottos) {
+    System.out.println(lottos.getCount() + "개를 구매했습니다.");
+  }
 }
