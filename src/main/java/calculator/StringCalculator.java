@@ -11,7 +11,7 @@ public class StringCalculator {
         int result = elements.get(0).getOperand();
         for (int i = 1; i < elements.size(); i++) {
             Element element = elements.get(i);
-            result = element.getOperator().calculate(result, element.getOperand());
+            result = element.calculate(result);
         }
         return result;
     }

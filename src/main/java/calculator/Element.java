@@ -20,6 +20,10 @@ public class Element {
         return operand;
     }
 
+    public int calculate(int operand) {
+        return this.operator.calculate(operand, this.operand);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {
