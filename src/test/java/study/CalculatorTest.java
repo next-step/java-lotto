@@ -27,8 +27,6 @@ public class CalculatorTest {
         );
     }
 
-
-
     @ParameterizedTest
     @MethodSource("subtractionTestData")
     @DisplayName("뺼셈 테스트")
@@ -43,6 +41,23 @@ public class CalculatorTest {
                 Arguments.of("2 - 3", -1),
                 Arguments.of("2 - 4", -2),
                 Arguments.of("2 - 5", -3)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("multiplicationTestData")
+    @DisplayName("곱셈 테스트")
+    void multiplicationTest(String expression, int expected) {
+        var result = Calculator.calculate(expression);
+
+        Assertions.assertThat(result).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> multiplicationTestData() {
+        return Stream.of(
+                Arguments.of("2 * 3", 6),
+                Arguments.of("2 * 4", 8),
+                Arguments.of("2 * 5", 10)
         );
     }
 }
