@@ -1,10 +1,10 @@
 package lotto.util;
 
-import lotto.property.LottoProperty;
-
 public class LottoPurchaseCalculator {
 
+  public static final int LOTTO_PRICE = 1_000;
+
   public static int toLottoCount(int price) {
-    return price / LottoProperty.LOTTO_PRICE;
+    return price / LOTTO_PRICE;
   }
 }

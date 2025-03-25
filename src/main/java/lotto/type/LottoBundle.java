@@ -1,6 +1,7 @@
 package lotto.type;
 
 import lotto.generator.LottoNumGenerator;
+import lotto.generator.ShuffleStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,24 +11,19 @@ import java.util.stream.Collectors;
 public class LottoBundle {
   private final List<LottoNumList> bundle;
 
-  private LottoBundle(int lottoCount, LottoNumGenerator lottoNumGenerator) {
-    this(generateBundle(lottoCount, lottoNumGenerator));
+  private LottoBundle(int lottoCount, LottoNumGenerator lottoNumGenerator, ShuffleStrategy shuffleStrategy) {
+    this(new ArrayList<>());
+    for (int i = 0; i < lottoCount; i++) {
+      this.bundle.add(lottoNumGenerator.generate(shuffleStrategy));
+    }
   }
 
   private LottoBundle(List<LottoNumList> bundle) {
     this.bundle = bundle;
   }
 
-  private static List<LottoNumList> generateBundle(int lottoCount, LottoNumGenerator lottoNumGenerator) {
-    List<LottoNumList> lottoBundle = new ArrayList<>();
-    for (int i = 0; i < lottoCount; i++) {
-      lottoBundle.add(lottoNumGenerator.generate());
-    }
-    return lottoBundle;
-  }
-
-  public static LottoBundle generate(int lottoCount, LottoNumGenerator lottoNumGenerator) {
-    return new LottoBundle(lottoCount, lottoNumGenerator);
+  public static LottoBundle generate(int lottoCount, LottoNumGenerator lottoNumGenerator, ShuffleStrategy shuffleStrategy) {
+    return new LottoBundle(lottoCount, lottoNumGenerator, shuffleStrategy);
   }
 
   public static LottoBundle valueOf(List<LottoNumList> bundle) {

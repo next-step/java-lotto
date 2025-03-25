@@ -1,6 +1,5 @@
 package lotto.type;
 
-import lotto.property.LottoProperty;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -59,11 +58,11 @@ class LottoPrizeTest {
   public void testGetTotalPrize() {
     assertAll(
         () -> assertThat(LottoPrize.getTotalPrize(List.of(SIX_MATCHES, FIVE_MATCHES)))
-            .isEqualTo(LottoProperty.FIRST_PRIZE_AMOUNT + LottoProperty.SECOND_PRIZE_AMOUNT),
+            .isEqualTo(2_001_500_000),
         () -> assertThat(LottoPrize.getTotalPrize(List.of(SIX_MATCHES, TWO_MATCHES)))
-            .isEqualTo(LottoProperty.FIRST_PRIZE_AMOUNT + LottoProperty.NO_PRIZE_AMOUNT),
+            .isEqualTo(2_000_000_000),
         () -> assertThat(LottoPrize.getTotalPrize(List.of(ZERO_MATCHES, TWO_MATCHES)))
-            .isEqualTo(LottoProperty.NO_PRIZE_AMOUNT + LottoProperty.NO_PRIZE_AMOUNT)
+            .isEqualTo(0)
     );
   }
 }

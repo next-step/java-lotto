@@ -1,6 +1,7 @@
 package lotto;
 
-import lotto.generator.CollectionShuffleLottoNumGenerator;
+import lotto.generator.LottoNumGenerator;
+import lotto.generator.CollectionsShuffleStrategy;
 import lotto.type.LottoBundle;
 import lotto.type.LottoPrize;
 import lotto.type.WinningNums;
@@ -16,13 +17,25 @@ import static lotto.view.OutputView.*;
 
 public class LottoSystem {
 
+  private static final int MAX_LOTTO_CANDIDATE_NUM = 45;
+  private static final int LOTTO_NUM_SIZE = 6;
+
   public static void main(String[] args) {
     int price = showPriceInput();
     int lottoCount = LottoPurchaseCalculator.toLottoCount(price);
+
     showLottoCount(lottoCount);
-    LottoBundle lottoBundle = LottoBundle.generate(lottoCount, new CollectionShuffleLottoNumGenerator());
+
+    LottoBundle lottoBundle = LottoBundle.generate(
+        lottoCount,
+        new LottoNumGenerator(LOTTO_NUM_SIZE, MAX_LOTTO_CANDIDATE_NUM),
+        new CollectionsShuffleStrategy()
+    );
     showLottoBundle(lottoBundle);
-    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(WinningNums.valueOf(showWinningNums()));
+
+    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(
+        WinningNums.valueOf(showWinningNums(), LOTTO_NUM_SIZE)
+    );
     showLottoPrize(lottoPrizeList);
     showReturnRate(ReturnRateCalculator.calculate(price, LottoPrize.getTotalPrize(lottoPrizeList)));
   }

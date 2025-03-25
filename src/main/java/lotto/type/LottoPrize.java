@@ -1,19 +1,17 @@
 package lotto.type;
 
-import lotto.property.LottoProperty;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public enum LottoPrize {
-  ZERO_MATCHES(0, LottoProperty.NO_PRIZE_AMOUNT),
-  ONE_MATCHES(1, LottoProperty.NO_PRIZE_AMOUNT),
-  TWO_MATCHES(2, LottoProperty.NO_PRIZE_AMOUNT),
-  THREE_MATCHES(3, LottoProperty.FOURTH_PRIZE_AMOUNT),
-  FOUR_MATCHES(4, LottoProperty.THIRD_PRIZE_AMOUNT),
-  FIVE_MATCHES(5, LottoProperty.SECOND_PRIZE_AMOUNT),
-  SIX_MATCHES(6, LottoProperty.FIRST_PRIZE_AMOUNT);
+  ZERO_MATCHES(0, 0),
+  ONE_MATCHES(1, 0),
+  TWO_MATCHES(2, 0),
+  THREE_MATCHES(3, 5_000),
+  FOUR_MATCHES(4, 50_000),
+  FIVE_MATCHES(5, 1_500_000),
+  SIX_MATCHES(6, 2_000_000_000);
 
   private static final Map<Integer, LottoPrize> MATCH_COUNT_TO_PRIZE_MAP = new HashMap<>();
 
@@ -46,7 +44,7 @@ public enum LottoPrize {
   }
 
   public boolean hasPrize() {
-    return prizeAmount != LottoProperty.NO_PRIZE_AMOUNT;
+    return prizeAmount != 0;
   }
 
   @Override

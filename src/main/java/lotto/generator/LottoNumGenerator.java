@@ -1,28 +1,33 @@
 package lotto.generator;
 
-import lotto.property.LottoProperty;
+
 import lotto.type.LottoNumList;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public interface LottoNumGenerator {
-  List<Integer> shuffle(List<Integer> candidates);
+public class LottoNumGenerator {
 
-  default LottoNumList generate() {
-    List<Integer> res = shuffle(getCandidateNumbers()).subList(0, LottoProperty.LOTTO_NUM_SIZE);
-    Collections.sort(res);
-    return LottoNumList.valueOf(res);
+  private final int lottoNumSize;
+  private final int maxLottoCandidateNum;
+
+  public LottoNumGenerator(int lottoNumSize, int maxLottoCandidateNum) {
+    this.lottoNumSize = lottoNumSize;
+    this.maxLottoCandidateNum = maxLottoCandidateNum;
   }
 
-  private List<Integer> getCandidateNumbers() {
-    List<Integer> numbers = new ArrayList<>();
+  public LottoNumList generate(ShuffleStrategy shuffleStrategy) {
+    List<Integer> res =  IntStream
+        .rangeClosed(1, maxLottoCandidateNum)
+        .boxed()
+        .collect(Collectors.toList());
 
-    for (int i = 1; i <= LottoProperty.MAX_LOTTO_CANDIDATE_NUM; i++) {
-      numbers.add(i);
-    }
+    res = shuffleStrategy.shuffle(res);
+    res = res.subList(0, lottoNumSize);
+    Collections.sort(res);
 
-    return numbers;
+    return LottoNumList.valueOf(res);
   }
 }

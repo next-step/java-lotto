@@ -1,5 +1,6 @@
 package lotto.type;
 
+import lotto.generator.LottoNumGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,11 @@ class LottoBundleTest {
   @DisplayName("생성자 테스트2")
   @Test
   void constructorTest2() {
-    LottoBundle bundle = LottoBundle.generate(1, candidates -> candidates);
+    LottoBundle bundle = LottoBundle.generate(
+        1,
+        new LottoNumGenerator(6, 45),
+        nums -> nums
+    );
 
     assertThat(bundle)
         .isEqualTo(LottoBundle.valueOf(List.of(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6)))));
@@ -34,6 +39,6 @@ class LottoBundleTest {
         List.of(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6)), LottoNumList.valueOf(List.of(10, 11, 12, 13, 15, 16)))
     );
 
-    assertThat(bundle.getLottoPrizes(WinningNums.valueOf("1, 2, 3, 4, 5, 6"))).containsExactly(LottoPrize.SIX_MATCHES, LottoPrize.ZERO_MATCHES);
+    assertThat(bundle.getLottoPrizes(WinningNums.valueOf("1, 2, 3, 4, 5, 6", 6))).containsExactly(LottoPrize.SIX_MATCHES, LottoPrize.ZERO_MATCHES);
   }
 }
