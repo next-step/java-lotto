@@ -19,9 +19,10 @@ public class LottoApplication {
 
         String winningNumber = InputView.inputWinningNumber();
         WinningNumbers winningNumbers = new WinningNumbers(winningNumber);
+        int bonusNumber = InputView.inputBonusNumber();
         ResultView.printResultOverview();
 
-        Rewards result = lottos.getResult(winningNumbers);
+        Rewards result = lottos.getResult(winningNumbers, bonusNumber);
         ResultView.printResult(initialAmount, result);
     }
 }

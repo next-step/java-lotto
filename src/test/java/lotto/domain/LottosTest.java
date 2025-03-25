@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,12 +18,12 @@ class LottosTest {
                 new Lotto(List.of(1, 2, 3, 4, 5, 8))
         ));
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        int bonusNumber = 7;
 
         // when
-        Rewards result = lottos.getResult(winningNumbers);
+        Rewards result = lottos.getResult(winningNumbers, bonusNumber);
 
         // then
-        Map<Integer, Integer> matchCounts = result.getMatchCounts();
-        assertThat(matchCounts).isEqualTo(Map.of(5, 2, 6, 1));
+        assertThat(result.getMatchCounts()).isEqualTo(Map.of(Rank.FIRST, 1, Rank.SECOND, 1, Rank.THIRD, 1));
     }
 }

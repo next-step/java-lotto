@@ -23,7 +23,11 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public int confirmWinning(List<Integer> winningNumbers) {
+    public int getMatchCount(List<Integer> winningNumbers) {
         return (int) this.lottoNumbers.stream().filter(winningNumbers::contains).count();
+    }
+
+    public boolean matchBonusNumber(int bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 }

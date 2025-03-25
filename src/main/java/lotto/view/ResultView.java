@@ -1,9 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Reward;
 import lotto.domain.Rewards;
+import lotto.enums.Rank;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
 
 public class ResultView {
@@ -20,10 +22,16 @@ public class ResultView {
     }
 
     public static void printResult(int initialAmount, Rewards rewards) {
-        Map<Integer, Integer> matchCounts = rewards.getMatchCounts();
-        for (int i = 3; i <= 6; i++) {
-            System.out.printf("%d개 일치(%d원)- %d개%n", i, Reward.PRIZES.get(i), matchCounts.getOrDefault(i, 0));
-        }
+        Map<Rank, Integer> matchCounts = rewards.getMatchCounts();
+        Arrays.stream(Rank.values())
+                .sorted(Comparator.reverseOrder())
+                .forEach(rank -> {
+                    String bonusMessage = (rank == Rank.SECOND) ? ", 보너스 볼 일치" : " ";
+                    if (rank == Rank.MISS) {
+                        return;
+                    }
+                    System.out.printf("%d개 일치%s(%d원)- %d개%n", rank.getCountOfMatch(), bonusMessage, rank.getWinningMoney(), matchCounts.getOrDefault(rank, 0));
+                });
 
         double rateOfReturn = rewards.getRateOfReturn(initialAmount);
         String additionalMessage = rateOfReturn < 1 ? "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" : "";
