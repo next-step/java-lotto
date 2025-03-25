@@ -37,6 +37,19 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
+    public LottoRank getRank(Lotto winner) {
+        List<LottoNumber> winNumbers = winner.getLottoNumbers();
+        int numOfWin = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (winNumbers.contains(lottoNumber)) numOfWin++;
+        }
+        return LottoRank.fromMatchedNum(numOfWin);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     public String toString() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)

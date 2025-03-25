@@ -1,0 +1,34 @@
+package lotto;
+
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public enum LottoRank {
+    FOURTH(3, new Money(5_000)),
+    THIRD(4, new Money(50_000)),
+    SECOND(5, new Money(1_500_000)),
+    FIRST(6, new Money(2_000_000_000));
+
+    private int numOfMatch;
+    private Money amountOfPrize;
+
+    private static final Map<Integer, LottoRank> RANK_MAP = Stream.of(values()).collect(Collectors.toMap(LottoRank::getNumOfMatch, rank -> rank));
+
+    LottoRank(int numOfMatch, Money amountOfPrize) {
+        this.numOfMatch = numOfMatch;
+        this.amountOfPrize = amountOfPrize;
+    }
+
+    public int getNumOfMatch() {
+        return numOfMatch;
+    }
+
+    public int getPrize() {
+        return amountOfPrize.getAmount();
+    }
+
+    public static LottoRank fromMatchedNum(int numOfMatch) {
+        return RANK_MAP.getOrDefault(numOfMatch, null);
+    }
+}

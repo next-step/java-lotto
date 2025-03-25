@@ -18,6 +18,10 @@ public class WinnerNumberInput {
         return new WinnerNumberInput(lotto);
     }
 
+    public Lotto getWinningLotto() {
+        return lotto;
+    }
+
     private static List<Integer> convertStringToInt(String input) {
         String[] splitInput = split(input);
         return Stream.of(splitInput)
