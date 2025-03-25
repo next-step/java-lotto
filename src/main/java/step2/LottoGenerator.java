@@ -8,20 +8,20 @@ import java.util.stream.IntStream;
 import static step2.Lotto.*;
 import static step2.LottoNumber.*;
 
-public class LottoNumberGenerator {
+public class LottoGenerator {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumberGenerator() {
+    public LottoGenerator() {
         this.lottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());;
     }
 
-    public List<LottoNumber> generate() {
+    public Lotto generate() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream()
+        return new Lotto(lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 }
