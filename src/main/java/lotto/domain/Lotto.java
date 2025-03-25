@@ -21,7 +21,7 @@ public class Lotto {
         return numbers;
     }
 
-    public void checkLottoResult(List<Integer> winningNumbers) {
+    public void determineLottoResult(List<Integer> winningNumbers) {
         int matchCount = 0;
 
         for (Integer number : numbers) {

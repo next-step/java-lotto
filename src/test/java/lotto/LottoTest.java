@@ -17,13 +17,13 @@ class LottoTest {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
         Lotto firstRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        firstRankLotto.checkLottoResult(winningNumbers);
+        firstRankLotto.determineLottoResult(winningNumbers);
 
         Lotto thirdRankLotto = new Lotto(List.of(1, 2, 3, 4, 10, 20));
-        thirdRankLotto.checkLottoResult(winningNumbers);
+        thirdRankLotto.determineLottoResult(winningNumbers);
 
         Lotto noPrizeRankLotto = new Lotto(List.of(1, 2, 11, 23, 33, 38));
-        noPrizeRankLotto.checkLottoResult(winningNumbers);
+        noPrizeRankLotto.determineLottoResult(winningNumbers);
 
         assertThat(firstRankLotto.getRank()).isEqualTo(Rank.FIRST);
         assertThat(thirdRankLotto.getRank()).isEqualTo(Rank.THIRD);

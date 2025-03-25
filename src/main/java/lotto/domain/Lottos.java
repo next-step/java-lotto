@@ -11,8 +11,8 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
-    public void checkAllLottosResult(List<Integer> winningNumbers) {
-        lottoList.forEach((lotto) -> lotto.checkLottoResult(winningNumbers));
+    public void determineAllLottoResult(List<Integer> winningNumbers) {
+        lottoList.forEach((lotto) -> lotto.determineLottoResult(winningNumbers));
     }
 
     public Map<Rank, Integer> getStatistics() {

@@ -22,7 +22,7 @@ class LottosTest {
 
         Lottos lottos = new Lottos(List.of(firstRankLotto, thirdRankLotto, noPrizeRankLotto));
 
-        lottos.checkAllLottosResult(winningNumbers);
+        lottos.determineAllLottoResult(winningNumbers);
         Map<Rank, Integer> result = lottos.getStatistics();
 
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);
