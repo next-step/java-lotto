@@ -72,7 +72,7 @@ class ExpressionTest {
     );
   }
 
-  @DisplayName("연산 수행 (복잡한 연산)")
+  @DisplayName("연산 수행")
   @ParameterizedTest
   @CsvSource(value = {"2 + 3:5", "3 - 2:1", "3 * 4:12", "11 / 6:1", "2 + 3 * 4 / 2:10"}, delimiter = ':')
   public void testToRunExpression(String expression, int result) {
