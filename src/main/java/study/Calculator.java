@@ -14,31 +14,35 @@ public class Calculator {
             throw new IllegalArgumentException("Invalid expression");
         }
 
-        var replacedExpression = expression.replace(" ", "");
+        var splitExpression = expression.split(" ");
 
-        if (replacedExpression.contains("+")) {
-            String[] parts = replacedExpression.split("\\+");
-            int a = Integer.parseInt(parts[0]);
-            int b = Integer.parseInt(parts[1]);
-            return ADDITION.apply(a, b);
-        } else if (replacedExpression.contains("-")) {
-            String[] parts = replacedExpression.split("-");
-            int a = Integer.parseInt(parts[0]);
-            int b = Integer.parseInt(parts[1]);
-            return SUBTRACTION.apply(a, b);
-        } else if (replacedExpression.contains("*")) {
-            String[] parts = replacedExpression.split("\\*");
-            int a = Integer.parseInt(parts[0]);
-            int b = Integer.parseInt(parts[1]);
-            return MULTIPLICATION.apply(a, b);
-        } else if (replacedExpression.contains("/")) {
-            String[] parts = replacedExpression.split("/");
-            int a = Integer.parseInt(parts[0]);
-            int b = Integer.parseInt(parts[1]);
-            return DIVISION.apply(a, b);
-        } else {
-            throw new IllegalArgumentException("Invalid expression");
+        int result = 0;
+        var operator = ADDITION;
+
+        for (int i = 0; i < splitExpression.length; i++) {
+            if (i % 2 == 0) {
+                result = operator.apply(result, Integer.parseInt(splitExpression[i]));
+            } else {
+                switch (splitExpression[i]) {
+                    case "+":
+                        operator = ADDITION;
+                        break;
+                    case "-":
+                        operator = SUBTRACTION;
+                        break;
+                    case "*":
+                        operator = MULTIPLICATION;
+                        break;
+                    case "/":
+                        operator = DIVISION;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid expression");
+                }
+            }
         }
+
+        return result;
     }
 
     interface Operation extends BiFunction<Integer, Integer, Integer> {
