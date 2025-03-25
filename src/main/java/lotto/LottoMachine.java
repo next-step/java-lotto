@@ -10,6 +10,7 @@ public class LottoMachine {
 
     public static final String PAID_MONEY_MESSAGE = "구입금액을 입력해 주세요.\n";
     public static final String WINNING_LOTTERY_NUMBERS_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.\n";
+    public static final String BONUS_NUMBERS_MESSAGE = "보너스 볼을 입력해 주세요.\n";
 
     public static void main(String[] args) {
         int paidMoney = InputView.getNumberInput(PAID_MONEY_MESSAGE);
@@ -19,9 +20,11 @@ public class LottoMachine {
         String[] winningNumber = InputView.getStringListInput(WINNING_LOTTERY_NUMBERS_MESSAGE, ",");
         LottoTicket winningTicket = new LottoTicket(winningNumber);
 
+        int bonusNumber = InputView.getNumberInput(BONUS_NUMBERS_MESSAGE);
+
         List<LottoResult> results = new ArrayList<>();
         for (LottoTicket ticket : lottoTickets) {
-            results.add(ticket.matchWinner(winningTicket, 45));
+            results.add(ticket.matchWinner(winningTicket, bonusNumber));
         }
 
         ResultView.printSummary(LottoChecker.getSummary(results));

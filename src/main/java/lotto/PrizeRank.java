@@ -20,8 +20,8 @@ public enum PrizeRank {
         this.prize = prize;
     }
 
-    public MatchCount getMatchCount() {
-        return matchCount;
+    public int getMatchCount() {
+        return matchCount.getCount();
     }
 
     public int getPrize() {
