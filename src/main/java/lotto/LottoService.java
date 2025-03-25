@@ -24,11 +24,7 @@ public class LottoService {
         WinnerNumberInput winnerNumberInput = UserInputProcessor.getWinnerInput();
         Lotto winningLotto = winnerNumberInput.getWinningLotto();
 
-        // 구입한 로또와 당첨번호를 비교
-        LottoResult lottoResult = new LottoResult();
-        for (Lotto purchasedLotto : purchasedLottos) {
-            lottoResult.addLottoResult(purchasedLotto, winningLotto);
-        }
+        LottoResult lottoResult = LottoResult.from(purchasedLottos, winningLotto);
         Outputview.printResult(lottoResult);
     }
 }

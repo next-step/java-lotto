@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoTest {
     @ParameterizedTest(name = "로또 번호가 일치한 갯수에 따라 올바른 rank를 반환한다. 입력값: {0}")
     @MethodSource("provideLottoTestCases")
-    void invalidNumberTest(Lotto purchased, Lotto winning, LottoRank expected) {
+    void lottoRankTest(Lotto purchased, Lotto winning, LottoRank expected) {
         LottoRank result = purchased.getRank(winning);
         assertEquals(expected, result);
     }
