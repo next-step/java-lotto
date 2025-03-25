@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class LottoTest {
 
@@ -39,5 +40,30 @@ class LottoTest {
       ));
     }).isInstanceOf(IllegalArgumentException.class)
       .hasMessage("로또 번호는 6개여야 합니다.");
+  }
+
+  @DisplayName("당첨 로또와 비교하여 일치하는 번호의 갯수를 구한다.")
+  @Test
+  void testCountMatchingNumbers() {
+    Lotto lotto = new Lotto(List.of(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)
+    ));
+
+    Lotto winningLotto = new Lotto(List.of(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)
+    ));
+
+    int count = lotto.countMatchingNumbers(winningLotto);
+    assertThat(count).isEqualTo(6);
   }
 }

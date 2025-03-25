@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -17,5 +20,14 @@ public class Lottos {
   public void printAllLottos() {
     lottoList.forEach(System.out::println);
   }
-}
 
+  public Map<LottoPrize, Integer> calculatePrize(Lotto winningLotto) {
+    Map<LottoPrize, Integer> prizeMap = Arrays.stream(LottoPrize.values())
+            .collect(Collectors.toMap(prize -> prize, prize -> 0));
+    for (Lotto lotto : lottoList) {
+      int count = lotto.countMatchingNumbers(winningLotto);
+      prizeMap.put(LottoPrize.fromMatchCount(count), prizeMap.get(LottoPrize.fromMatchCount(count)) + 1);
+    }
+    return prizeMap;
+  }
+}
