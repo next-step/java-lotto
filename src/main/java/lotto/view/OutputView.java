@@ -13,7 +13,7 @@ public class OutputView {
     }
 
     public static void printStatistics(Map<Rank, Integer> statistics) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("----------");
 
         for (Rank rank : Rank.values()) {
@@ -28,5 +28,9 @@ public class OutputView {
 
             System.out.println(String.format(messageFormat, matchCount, prize, winningLottoCount));
         }
+    }
+
+    public static void printROI(double ROI) {
+        System.out.println("총 수익률은 " + ROI + "입니다.");
     }
 }

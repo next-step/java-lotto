@@ -21,6 +21,6 @@ public class LottoApplication {
         lottos.checkAllLottosResult(winningNumbers);
         OutputView.printStatistics(lottos.getStatistics());
 
-
+        OutputView.printROI(customer.calculateROI());
     }
 }

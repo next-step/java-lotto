@@ -1,12 +1,9 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.generator.LottoGenerator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
