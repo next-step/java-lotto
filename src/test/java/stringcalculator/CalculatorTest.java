@@ -105,6 +105,26 @@ public class CalculatorTest {
                 .containsExactly("2", "+", "3", "*", "4", "/", "2");
     }
 
+    @ParameterizedTest
+    @DisplayName("문자열 리스트의 짝수 번째에 사칙연산 기호, 홀수 번째에 정수가 아닌 경우 에러를 던진다.")
+    @MethodSource("provideInvalidStringListToProcess")
+    void processTestOrThrow(List<String> invalidInput) {
+        //given
+        final Calculator calculator = new Calculator();
+
+        //when & then
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.process(invalidInput))
+                .withMessageContaining("사칙연산을 수행할 수 없는 문자열을 포함합니다");
+    }
+
+    static Stream<List<String>> provideInvalidStringListToProcess() {
+        return Stream.of(
+                List.of("2", "3", "3", "*", "4", "/", "2"),
+                List.of("2", "+", "3", "*", "4", "/", "-" )
+        );
+    }
+
     @Test
     @DisplayName("주어진 문자열 리스트로 사칙연산을 수행한다.")
     void processTest() {
