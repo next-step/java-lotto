@@ -4,27 +4,33 @@ import java.util.Map;
 
 public enum Operation {
 
-    ADD {
+    ADD("+") {
         @Override
         public int calculate(int x, int y) {
             return x + y;
         }
-    }, SUBTRACT {
+    }, SUBTRACT("-") {
         @Override
         public int calculate(int x, int y) {
             return x - y;
         }
-    }, MULTIPLY {
+    }, MULTIPLY("*") {
         @Override
         public int calculate(int x, int y) {
             return x * y;
         }
-    }, DIVIDE {
+    }, DIVIDE("/") {
         @Override
         public int calculate(int x, int y) {
             return x / y;
         }
     };
+
+    private final String sign;
+
+    Operation(String sign) {
+        this.sign = sign;
+    }
 
     public static final Map<String, Operation> OPERATIONS = Map.of("+", ADD, "-", SUBTRACT, "*", MULTIPLY, "/", DIVIDE);
 
