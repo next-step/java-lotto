@@ -23,6 +23,10 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
+    public Lotto(String value) {
+        this(value.split(NUMBER_DELIMITER));
+    }
+
     private List<LottoNumber> toLottoNumber(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
