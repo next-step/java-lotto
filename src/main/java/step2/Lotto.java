@@ -9,19 +9,22 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers.stream()
-                .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
-                .collect(Collectors.toList());
+        this.lottoNumbers = sortLottoNumbers(lottoNumbers);
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new RuntimeException("로또의 숫자가 6개가 아닙니다.");
         }
-
         if (new HashSet<>(lottoNumbers).size() != LOTTO_NUMBER_COUNT) {
             throw new RuntimeException("로또의 숫자가 중복입니다.");
         }
+    }
+
+    private List<LottoNumber> sortLottoNumbers(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
+                .collect(Collectors.toList());
     }
 
     List<LottoNumber> getLottoNumbers() {
