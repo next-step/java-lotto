@@ -98,4 +98,12 @@ public class CalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Invalid expression");
     }
+
+    @Test
+    @DisplayName("모든 연산기호 포함하는 수식 테스트")
+    void allOperatorTest() {
+        var result = Calculator.calculate("2 + 3 - 4 * 5 / 2");
+
+        Assertions.assertThat(result).isEqualTo(0);
+    }
 }
