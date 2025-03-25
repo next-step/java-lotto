@@ -25,4 +25,13 @@ class CalculatorTest {
         assertThat(calculator.calculate(input)).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource(delimiter = ',', value = {"1 + 2 + 1 * 3 / 2 - 1,5"})
+    @DisplayName("입력값에 연산자가 여러개있을 때, 연산 결과를 반환한다.")
+    void calculateTwoOrMoreOperator(String input, long expected) {
+        assertThat(calculator.calculate(input)).isEqualTo(expected);
+    }
+
+
+
 }
