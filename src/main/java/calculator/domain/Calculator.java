@@ -2,20 +2,24 @@ package calculator.domain;
 
 public class Calculator {
     public long calculate(String input) {
-        if(input == null || input.isBlank()) {
+        if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("input should not be blank");
         }
 
         String[] elements = input.split(" ");
-        if(elements.length % 2 == 0) {
+        if (elements.length % 2 == 0) {
             throw new IllegalArgumentException("input is invalid format");
         }
 
+        return calculate(elements);
+    }
+
+    private long calculate(String[] elements) {
         long result = parseNumber(elements[0]);
 
-        for(int i=1; i<elements.length; i=i+2) {
+        for (int i = 1; i < elements.length; i = i + 2) {
             String operator = elements[i];
-            long number = parseNumber(elements[i+1]);
+            long number = parseNumber(elements[i + 1]);
             result = calculateOnce(operator, result, number);
         }
 
@@ -26,37 +30,40 @@ public class Calculator {
         try {
             return Long.parseLong(element);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("element '%s' is not number", element));
+            throw new IllegalArgumentException(String.format("element '%s' is not valid number", element));
         }
     }
 
-    private long calculateOnce(String operator, long result, long number) {
+    private long calculateOnce(String operator, long number1, long number2) {
         if (operator.equals("+")) {
-            return add(result, number);
+            return add(number1, number2);
         } else if (operator.equals("-")) {
-            return subtract(result, number);
+            return subtract(number1, number2);
         } else if (operator.equals("*")) {
-            return multiple(result, number);
+            return multiple(number1, number2);
         } else if (operator.equals("/")) {
-            return divide(result, number);
+            return divide(number1, number2);
         }
         throw new IllegalArgumentException("operator is not allowed except +,-,*,/");
     }
 
-    private long add(long result, long number) {
-        return result + number;
+    private long add(long number1, long number2) {
+        return number1 + number2;
     }
-    private long subtract(long result, long number) {
-        return result - number;
+
+    private long subtract(long number1, long number2) {
+        return number1 - number2;
     }
-    private long multiple(long result, long number) {
-        return result * number;
+
+    private long multiple(long number1, long number2) {
+        return number1 * number2;
     }
-    private long divide(long result, long number) {
-        long value = result / number;
-        if (value * number != result)
+
+    private long divide(long number1, long number2) {
+        long result = number1 / number2;
+        if (result * number2 != number1)
             throw new IllegalArgumentException("result of division should be integer");
-        return value;
+        return result;
     }
 
 }
