@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.domain.Customer;
+import lotto.domain.Lotto;
+import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,6 +17,11 @@ public class LottoApplication {
         OutputView.printLottos(customer.getLottos());
 
         List<Integer> winningNumbers = InputView.getWinningNumbers();
+        List<Lotto> purchasedLottos = customer.getLottos();
+        for (Lotto purchasedLotto : purchasedLottos) {
+            purchasedLotto.checkLottoResult(winningNumbers);
+            Rank rank = purchasedLotto.getRank();
+        }
 
     }
 }
