@@ -9,12 +9,12 @@ import static org.assertj.core.api.Assertions.*;
 import static step2.Lotto.*;
 import static step2.LottoNumber.*;
 
-public class RandomLottoNumberGeneratorTest {
+public class LottoNumberGeneratorTest {
 
     @Test
     void 서로_같지_않은_로또_숫자_6개_생성() {
-        RandomLottoNumberGenerator randomLottoNumberGenerator = new RandomLottoNumberGenerator();
-        List<LottoNumber> lottoNumbers = randomLottoNumberGenerator.generate();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
 
         assertThat(lottoNumbers).hasSize(LOTTO_NUMBER_COUNT);
         assertThat(new HashSet<>(lottoNumbers)).hasSize(LOTTO_NUMBER_COUNT);
