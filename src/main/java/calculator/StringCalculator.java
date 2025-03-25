@@ -14,8 +14,12 @@ public class StringCalculator {
     }
 
     public int calculate(String input) {
-        String[] tokens = input.split(" ");
+        String[] tokens = splitInput(input);
         return calculateTokens(tokens);
+    }
+
+    public String[] splitInput(String input) {
+        return input.split(" ");
     }
 
     private int calculateTokens(String[] tokens) {
