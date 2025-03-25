@@ -20,6 +20,8 @@ public class RandomLottoGenerator implements LottoGenerator {
     public Lotto generate() {
       List<LottoNumber> numbersCopied = new ArrayList<>(numbers);
       Collections.shuffle(numbersCopied);
-      return new Lotto(numbersCopied.subList(0, Lotto.SIZE));
+      List<LottoNumber> sublist = numbersCopied.subList(0, Lotto.SIZE);
+      Collections.sort(sublist);
+      return new Lotto(sublist);
     }
 }
