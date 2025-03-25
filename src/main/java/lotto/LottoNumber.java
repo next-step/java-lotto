@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,6 +21,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber other) {
         return Integer.compare(this.number, other.number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoNumber)) return false;
+        LottoNumber that = (LottoNumber) o;
+        return getNumber() == that.getNumber();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getNumber());
     }
 
     private void validateNumber(int number) {

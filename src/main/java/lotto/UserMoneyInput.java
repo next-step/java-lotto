@@ -1,10 +1,10 @@
 package lotto;
 
-public class UserInput {
+public class UserMoneyInput {
     private Money money;
 
-    public static UserInput from(String input) {
-        UserInput userInput = new UserInput();
+    public static UserMoneyInput from(String input) {
+        UserMoneyInput userInput = new UserMoneyInput();
 
         validateBlankInput(input);
         userInput.setMoney(Integer.parseInt(input));

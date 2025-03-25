@@ -7,12 +7,14 @@ public class LottoService {
     private final LottoSeller lottoSeller = new LottoSeller();
 
     public void purchase() {
-        UserInput userInput = UserInputProcessor.getInput();
+        UserMoneyInput userInput = UserInputProcessor.getMoneyInput();
         int purchasedAmount = lottoSeller.getPurchasableLottoCount(userInput);
         Outputview.printPurchasedAmount(purchasedAmount);
 
         for (int i = 0; i < purchasedAmount; i++) {
             Outputview.printLotto(Lotto.create());
         }
+
+        WinnerNumberInput winnerNumberInput = UserInputProcessor.getWinnerInput();
     }
 }

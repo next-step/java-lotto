@@ -28,6 +28,15 @@ public class Lotto {
         return new Lotto(selectedNums);
     }
 
+    public static Lotto create(List<Integer> nums) {
+        List<LottoNumber> lottoNumbers = nums.stream()
+                .map(LottoNumber::new)
+                .distinct()
+                .collect(Collectors.toList());
+
+        return new Lotto(lottoNumbers);
+    }
+
     public String toString() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
