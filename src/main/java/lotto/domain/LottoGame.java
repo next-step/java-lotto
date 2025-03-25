@@ -11,7 +11,7 @@ public class LottoGame {
     ResultView.printLottoSet(lottoSet);
 
     Lotto winningLotto = InputView.inputWinningLotto();
-    LottoResult lottoResult = lottoSet.calculateResult(winningLotto);
+    LottoResult lottoResult = lottoSet.provideLottoResult(winningLotto);
     ResultView.printLottoStatistics(lottoResult);
 
     InputView.closeScanner();

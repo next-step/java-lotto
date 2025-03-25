@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoSet {
+public class LottoSet implements LottoResultProvider {
   private static final int MINIMUM_MATCH_COUNT = 3;
 
   private final List<Lotto> lottos;
@@ -35,7 +35,15 @@ public class LottoSet {
     return lottos;
   }
 
-  public LottoResult calculateResult(Lotto winningLotto) {
+  @Override
+  public LottoResult provideLottoResult(Lotto winningLotto) {
+    Map<WinningRank, Integer> matchCount = getMatchCount(winningLotto);
+    double profitRate = getProfitRate(matchCount);
+
+    return new LottoResult(matchCount, profitRate);
+  }
+
+  private Map<WinningRank, Integer> getMatchCount(Lotto winningLotto) {
     Map<WinningRank, Integer> matchCount = new HashMap<>();
 
     lottos.stream()
@@ -45,13 +53,14 @@ public class LottoSet {
         .filter(rank -> rank != null)
         .forEach(rank -> matchCount.put(rank, matchCount.getOrDefault(rank, 0) + 1));
 
+    return matchCount;
+  }
+
+  private double getProfitRate(Map<WinningRank, Integer> matchCount) {
     long totalPrice = matchCount.entrySet().stream()
         .mapToLong(entry -> entry.getKey().getPrice() * entry.getValue())
         .sum();
 
-    double profitRate = totalPrice == 0 ? 0 : (double) totalPrice / lottoPurchase.getPurchaseAmount();
-
-    return new LottoResult(matchCount, profitRate);
+    return totalPrice == 0 ? 0 : (double) totalPrice / lottoPurchase.getPurchaseAmount();
   }
-
 }

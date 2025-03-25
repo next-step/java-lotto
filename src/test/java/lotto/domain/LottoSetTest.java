@@ -27,7 +27,7 @@ class LottoSetTest {
     LottoSet lottoSet = LottoMachine.generateManualLotto(new LottoPurchase(4000), List.of(lotto1, lotto2, lotto3, lotto4));
     Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
 
-    LottoResult lottoResult = lottoSet.calculateResult(winningLotto);
+    LottoResult lottoResult = lottoSet.provideLottoResult(winningLotto);
 
     for (WinningRank rank : WinningRank.values()) {
       int count = lottoResult.getMatchCount().getOrDefault(rank, 0);
@@ -46,7 +46,7 @@ class LottoSetTest {
     LottoSet lottoSet = LottoMachine.generateManualLotto(new LottoPurchase(4000), List.of(lotto1, lotto2, lotto3, lotto4));
     Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
 
-    LottoResult lottoResult = lottoSet.calculateResult(winningLotto);
+    LottoResult lottoResult = lottoSet.provideLottoResult(winningLotto);
 
     assertThat(lottoResult.getProfitRate()).isEqualTo(500388.75);
   }

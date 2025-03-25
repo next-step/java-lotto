@@ -58,13 +58,10 @@
   * 금액 입력 받음 (-> InputView)
   * 로또 발급 (-> LottoMachine)
   * 이전 당첨 번호 입력 받음 (-> InputView)
-  * 결과 생성 (-> LottoResultAnalyzer)
+  * 결과 생성 (-> LottoSet (LottoResultProvider))
   * 결과 출력 (-> ResultView)
 * RandomLottoGenerator : 자동 로또를 발급한다. 
   * 로또 자동 생성은 Collection.shuffle()를 활용한다.
-* LottoResultAnalyzer : 당첨 통계를 계산한다.
-  * 당첨 번호와 비교하여 등수를 계산한다.
-  * 수익률을 계산한다. 
 * LottoResult : 로또 결과를 의미한다.
   * 당첨 통계를 저장한다.
   * 수익률을 저장한다.
@@ -73,4 +70,6 @@
   * 2등 : 5개 일치 (1,500,000원)
   * 3등 : 4개 일치 (50,000원)
   * 4등 : 3개 일치 (5,000원)
-
+* LottoResultProvider : 로또 당첨 결과 계산 인터페이스
+  * 당첨 번호와 비교하여 등수를 계산한다.
+  * 수익률을 계산한다.
