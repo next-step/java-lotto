@@ -18,7 +18,7 @@ public class CalculatorApp {
     }
 
     private int calculate(int result, String operator, int number) {
-        return Operation.OPERATIONS.get(operator).calculate(result, number);
+        return Operation.from(operator).calculate(result, number);
     }
 
 }

@@ -1,6 +1,7 @@
 package step1.calculator.model;
 
 import java.util.Map;
+import java.util.Optional;
 
 public enum Operation {
 
@@ -26,13 +27,17 @@ public enum Operation {
         }
     };
 
-    private final String sign;
+    private final String operator;
 
-    Operation(String sign) {
-        this.sign = sign;
+    Operation(String operator) {
+        this.operator = operator;
     }
 
-    public static final Map<String, Operation> OPERATIONS = Map.of("+", ADD, "-", SUBTRACT, "*", MULTIPLY, "/", DIVIDE);
+    private static final Map<String, Operation> OPERATIONS = Map.of("+", ADD, "-", SUBTRACT, "*", MULTIPLY, "/", DIVIDE);
+
+    public static Operation from(String operator) {
+        return Optional.ofNullable(OPERATIONS.get(operator)).orElseThrow(IllegalArgumentException::new);
+    }
 
     public abstract int calculate(int x, int y);
 
