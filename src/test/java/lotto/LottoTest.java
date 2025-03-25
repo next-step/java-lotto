@@ -2,11 +2,13 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
+import lotto.domain.generator.LottoGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
@@ -26,5 +28,12 @@ class LottoTest {
         assertThat(firstRankLotto.getRank()).isEqualTo(Rank.FIRST);
         assertThat(thirdRankLotto.getRank()).isEqualTo(Rank.THIRD);
         assertThat(noPrizeRankLotto.getRank()).isEqualTo(Rank.NO_PRIZE);
+    }
+
+    @Test
+    public void 생성된_로또_번호에_대해_조작연산을_진행하면_예외_발생() {
+        List<Integer> numbers = LottoGenerator.generate().getNumbers();
+        assertThatThrownBy(() -> numbers.add(1))
+                .isInstanceOf(UnsupportedOperationException.class);
     }
 }

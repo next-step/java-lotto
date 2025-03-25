@@ -25,7 +25,7 @@ public class LottoGenerator {
         return amount / LOTTO_PRICE;
     }
 
-    private static Lotto generate() {
+    public static Lotto generate() {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 1; i <= LOTTO_MAX_NUMBER; i++) {
             numbers.add(i);
