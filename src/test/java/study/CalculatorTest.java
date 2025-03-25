@@ -60,4 +60,21 @@ public class CalculatorTest {
                 Arguments.of("2 * 5", 10)
         );
     }
+
+    @ParameterizedTest
+    @MethodSource("divisionTestData")
+    @DisplayName("나눗셈 테스트")
+    void divisionTest(String expression, int expected) {
+        var result = Calculator.calculate(expression);
+
+        Assertions.assertThat(result).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> divisionTestData() {
+        return Stream.of(
+                Arguments.of("6 / 3", 2),
+                Arguments.of("10 / 2", 5),
+                Arguments.of("2 * 1", 2)
+        );
+    }
 }
