@@ -24,6 +24,9 @@ public class LottoShop {
     }
 
     private int getLottoCounts(int price) {
+        if(price < LOTTO_PER_AMOUNT) {
+            throw new IllegalArgumentException("구입 금액은 1000원을 넘어야합니다.");
+        }
         return price / LOTTO_PER_AMOUNT;
     }
 }
