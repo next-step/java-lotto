@@ -4,8 +4,6 @@ import lotto.LottoGeneratorTest.TestLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,9 +15,9 @@ public class LottoShopTest {
     int money = 1000;
 
     LottoShop lottoShop = new LottoShop(new TestLottoGenerator());
-    List<Lotto> lottos = lottoShop.buyLottos(money);
+    Lottos lottos = lottoShop.buyLottos(money);
 
-    assertEquals(1, lottos.size());
+    assertEquals(1, lottos.getCount());
   }
 
   @DisplayName("0 미만의 금액을 지불할 경우 로또 티켓을 구매할 수 없다.")

@@ -10,8 +10,6 @@ public class LottoJudge {
 
   public int judgeCount(Lotto lotto) {
 
-    return (int)lotto.getNumbers().stream()
-            .filter(winningLotto.getNumbers()::contains)
-            .count();
+    return lotto.countMatchingNumbers(winningLotto);
   }
 }

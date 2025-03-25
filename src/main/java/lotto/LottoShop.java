@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoShop {
 
@@ -11,7 +13,7 @@ public class LottoShop {
     this.lottoGenerator = lottoGenerator;
   }
 
-  public List<Lotto> buyLottos(int money) {
+  public Lottos buyLottos(int money) {
     validateMoney(money);
     int lottoTicketCount = calculateLottoTicketCount(money);
     return generateLottos(lottoTicketCount);
@@ -26,12 +28,12 @@ public class LottoShop {
     }
   }
 
-  private List<Lotto> generateLottos(int lottoTicketCount) {
-    List<Lotto> lottos = new ArrayList<>();
-    for (int i = 0; i < lottoTicketCount; i++) {
-      lottos.add(lottoGenerator.generate());
-    }
-    return lottos;
+  private Lottos generateLottos(int lottoTicketCount) {
+    return new Lottos(
+            IntStream.range(0, lottoTicketCount)
+                    .mapToObj(i -> lottoGenerator.generate())
+                    .collect(Collectors.toList())
+    );
   }
 
   private static int calculateLottoTicketCount(int money) {

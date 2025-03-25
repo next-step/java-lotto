@@ -1,14 +1,13 @@
 package lotto.view;
 
-import lotto.Lotto;
 import lotto.LottoGeneratorTest.TestLottoGenerator;
+import lotto.Lottos;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,7 +20,7 @@ public class ResultViewTest {
     PrintStream originalOut = System.out;
     System.setOut(new PrintStream(outputStream));
 
-    List<Lotto> lottos = new ArrayList<>(List.of(
+    Lottos lottos = new Lottos(List.of(
             new TestLottoGenerator().generate(),
             new TestLottoGenerator().generate()
     ));
