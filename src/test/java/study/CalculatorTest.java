@@ -11,15 +11,15 @@ import java.util.stream.Stream;
 public class CalculatorTest {
 
     @ParameterizedTest
-    @MethodSource("addTestData")
+    @MethodSource("additionTestData")
     @DisplayName("덧셈 테스트")
-    void addTest(String expression, int expected) {
+    void additionTest(String expression, int expected) {
         var result = Calculator.calculate(expression);
 
         Assertions.assertThat(result).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> addTestData() {
+    private static Stream<Arguments> additionTestData() {
         return Stream.of(
                 Arguments.of("2 + 3", 5),
                 Arguments.of("2 + 4", 6),
