@@ -6,6 +6,8 @@ public class Calculator {
 
     private static final Operation ADDITION = Integer::sum;
     private static final Operation SUBTRACTION = (a, b) -> a - b;
+    private static final Operation MULTIPLICATION = (a, b) -> a * b;
+    private static final Operation DIVISION = (a, b) -> a / b;
 
     public static int calculate(String expression) {
         if (expression == null || expression.isBlank()) {
@@ -28,12 +30,12 @@ public class Calculator {
             String[] parts = replacedExpression.split("\\*");
             int a = Integer.parseInt(parts[0]);
             int b = Integer.parseInt(parts[1]);
-            return a * b;
+            return MULTIPLICATION.apply(a, b);
         } else if (replacedExpression.contains("/")) {
             String[] parts = replacedExpression.split("/");
             int a = Integer.parseInt(parts[0]);
             int b = Integer.parseInt(parts[1]);
-            return a / b;
+            return DIVISION.apply(a, b);
         } else {
             throw new IllegalArgumentException("Invalid expression");
         }
