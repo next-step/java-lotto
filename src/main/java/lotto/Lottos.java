@@ -26,6 +26,9 @@ public class Lottos {
             .collect(Collectors.toMap(prize -> prize, prize -> 0));
     for (Lotto lotto : lottoList) {
       int count = lotto.countMatchingNumbers(winningLotto);
+      if (count < LottoPrize.THREE_MATCHES.getMatchCount()) {
+        continue;
+      }
       prizeMap.put(LottoPrize.fromMatchCount(count), prizeMap.get(LottoPrize.fromMatchCount(count)) + 1);
     }
     return prizeMap;
