@@ -28,3 +28,12 @@
   * '비교결과 객체'를 반환
 * '수익률계산기'
   * 총 수익률 계산
+
+### Step 3 : 로또(2등)
+* PrizeRank 객체 수정
+  * 기존에는 match count 가 유일한 key 값이어서 해당 PrizeRank of 의 구현을 Map 형태로 했으나, 추가로 bonus 번호 일치 여부를 확인해야 함
+* LottoTicket 객체 수정
+  * 기존(match count) 로직 + bonus 값 일치 여부 확인 필요
+* ResultView 객체 수정
+  * 일치하지 않는 갯수도 표현해야 함
+  * 보너스 볼 일치 여부도 표현해야 함
