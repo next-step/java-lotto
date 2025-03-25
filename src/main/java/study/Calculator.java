@@ -25,6 +25,11 @@ public class Calculator {
             int a = Integer.parseInt(parts[0]);
             int b = Integer.parseInt(parts[1]);
             return a * b;
+        } else if (replacedExpression.contains("/")) {
+            String[] parts = replacedExpression.split("/");
+            int a = Integer.parseInt(parts[0]);
+            int b = Integer.parseInt(parts[1]);
+            return a / b;
         }
 
         throw new IllegalArgumentException("Invalid expression: " + expression);
