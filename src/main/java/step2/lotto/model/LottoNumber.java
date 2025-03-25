@@ -37,4 +37,9 @@ public class LottoNumber {
         return value;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
 }
