@@ -8,6 +8,10 @@ public class Calculator {
     private static final Operation SUBTRACTION = (a, b) -> a - b;
 
     public static int calculate(String expression) {
+        if (expression == null || expression.isBlank()) {
+            throw new IllegalArgumentException("Invalid expression");
+        }
+
         var replacedExpression = expression.replace(" ", "");
 
         if (replacedExpression.contains("+")) {
