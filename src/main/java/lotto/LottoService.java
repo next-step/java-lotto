@@ -10,5 +10,9 @@ public class LottoService {
         UserInput userInput = UserInputProcessor.getInput();
         int purchasedAmount = lottoSeller.getPurchasableLottoCount(userInput);
         Outputview.printPurchasedAmount(purchasedAmount);
+
+        for (int i = 0; i < purchasedAmount; i++) {
+            Outputview.printLotto(Lotto.create());
+        }
     }
 }
