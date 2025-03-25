@@ -3,19 +3,18 @@ package lotto.type;
 import lotto.generator.LottoNumGenerator;
 import lotto.generator.ShuffleStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoBundle {
   private final List<LottoNumList> bundle;
 
   private LottoBundle(int lottoCount, LottoNumGenerator lottoNumGenerator, ShuffleStrategy shuffleStrategy) {
-    this(new ArrayList<>());
-    for (int i = 0; i < lottoCount; i++) {
-      this.bundle.add(lottoNumGenerator.generate(shuffleStrategy));
-    }
+    this(IntStream.range(0, lottoCount)
+        .mapToObj(i -> lottoNumGenerator.generate(shuffleStrategy))
+        .collect(java.util.stream.Collectors.toList()));
   }
 
   private LottoBundle(List<LottoNumList> bundle) {
