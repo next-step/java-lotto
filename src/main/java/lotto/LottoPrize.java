@@ -30,4 +30,8 @@ public enum LottoPrize {
   public int getTotalPrizeMoney(int count) {
     return count * prizeMoney;
   }
+
+  public int getMatchCount() {
+    return matchCount;
+  }
 }

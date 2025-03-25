@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoReport {
 
@@ -15,10 +18,11 @@ public class LottoReport {
 
   public String createCountReport() {
     Map<LottoPrize, Integer> prizeCounts = lottos.calculatePrize(winningLotto);
-    return prizeCounts.entrySet().stream()
-            .map(entry -> entry.getKey().getPrizeAndCountStatus(entry.getValue()))
-            .reduce((a, b) -> a + "\n" + b)
-            .orElse("");
+    return Arrays.stream(LottoPrize.values())
+            .filter(prizeCounts::containsKey)
+            .sorted(Comparator.comparingInt(LottoPrize::getMatchCount))
+            .map(prize -> prize.getPrizeAndCountStatus(prizeCounts.get(prize)))
+            .collect(Collectors.joining("\n"));
   }
 
   public String createMoneyReport() {
