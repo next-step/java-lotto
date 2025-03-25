@@ -10,4 +10,8 @@ public class Lotto {
   public Lotto(List<LottoNumber> numbers) {
     this.numbers = numbers;
   }
+
+  public List<LottoNumber> getNumbers() {
+    return numbers;
+  }
 }
