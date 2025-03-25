@@ -36,4 +36,16 @@ class InputViewTest {
             .hasMessage("숫자가 아닌 값이 포함되어 있습니다.");
 
   }
+
+  @DisplayName("지난 주 당첨번호를 입력받는 기능 테스트")
+  @Test
+  void testReceiveWinningLotto() {
+    String testInput = "1, 2, 3, 4, 5, 6";
+    InputView inputView = new InputView(getTestScanner(testInput));
+
+    String actual = inputView.receiveWinningLotto();
+
+    assertEquals("1, 2, 3, 4, 5, 6", actual);
+  }
+
 }

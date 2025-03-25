@@ -17,4 +17,9 @@ public class InputView {
       throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
     }
   }
+
+  public String receiveWinningLotto() {
+    System.out.println("지난 주 당첨 번호를 입력해주세요.");
+    return scanner.nextLine();
+  }
 }
