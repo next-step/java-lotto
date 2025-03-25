@@ -46,11 +46,10 @@ public class Lotto {
                 .collect(Collectors.toSet());
     }
 
-    @Override
-    public String toString() {
+    public List<LottoNumber> numbers(){
         List<LottoNumber> sortedList = new ArrayList<>(numbers);
         Collections.sort(sortedList);
-        return sortedList.toString();
+        return sortedList;
     }
 
     @Override
