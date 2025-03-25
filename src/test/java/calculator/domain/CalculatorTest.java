@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -32,6 +33,16 @@ class CalculatorTest {
         assertThat(calculator.calculate(input)).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("연산 순서는 입력 값의 순서에 따라 결정된다.")
+    void calculateOrder() {
+        String input = "1 + 2 * 3";
+        long expected = 9;
+        long unExpected = 7;
 
+        assertThat(calculator.calculate(input))
+                .isEqualTo(expected)
+                .isNotEqualTo(unExpected);
+    }
 
 }
