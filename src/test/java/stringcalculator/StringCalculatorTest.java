@@ -23,4 +23,10 @@ public class StringCalculatorTest {
     void multiply() {
         assertThat(StringCalculator.calculate("100 * 2 * -3")).isEqualTo(-600);
     }
+
+    @DisplayName("나눗셈 기능 테스트")
+    @Test
+    void divide() {
+        assertThat(StringCalculator.calculate("100 / 2 / -2")).isEqualTo(-25);
+    }
 }
