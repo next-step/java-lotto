@@ -2,7 +2,47 @@ package calculator.domain;
 
 public class Calculator {
     public long calculate(String input) {
-        return Long.parseLong(input);
+        String[] elements = input.split(" ");
+        if(elements.length == 0) {
+            throw new IllegalArgumentException("input should not be null");
+        } else if(elements.length == 1) {
+           return Long.parseLong(elements[0]);
+        }
+
+        long result = Long.parseLong(elements[0]);
+        for(int i=1; i<elements.length; i=i+2) {
+            String operator = elements[i];
+            long number = Long.parseLong(elements[i+1]);
+            result = calculateOnce(operator, result, number);
+        }
+
+        return result;
+    }
+
+    private long calculateOnce(String operator, long result, long number) {
+        if (operator.equals("+")) {
+            return add(result, number);
+        } else if (operator.equals("-")) {
+            return subtract(result, number);
+        } else if (operator.equals("*")) {
+            return multiple(result, number);
+        } else if (operator.equals("/")) {
+            return divide(result, number);
+        }
+        throw new IllegalArgumentException("operator is not allowed except +,-,*,/");
+    }
+
+    private long add(long result, long number) {
+        return result + number;
+    }
+    private long subtract(long result, long number) {
+        return result - number;
+    }
+    private long multiple(long result, long number) {
+        return result * number;
+    }
+    private long divide(long result, long number) {
+        return result / number;
     }
 
 }
