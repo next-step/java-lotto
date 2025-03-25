@@ -19,7 +19,7 @@ class CustomerTest {
     @ValueSource(ints = {0, -100, -1000})
     public void 구입금액이_0이하인경우_예외가_발생한다(int amount) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Customer(amount).purchaseLottos());
+                .isThrownBy(() -> new Customer().purchaseLottos(amount));
     }
 
     @Test

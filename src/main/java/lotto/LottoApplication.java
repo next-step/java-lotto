@@ -9,9 +9,8 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        int purchaseAmount = InputView.getPurchaseAmount();
-        Customer customer = new Customer(purchaseAmount);
-        customer.purchaseLottos();
+        Customer customer = new Customer();
+        customer.purchaseLottos(InputView.getPurchaseAmount());
 
         OutputView.printLottos(customer.getLottos());
 

@@ -3,11 +3,10 @@ package lotto.domain;
 import lotto.domain.generator.LottoGenerator;
 
 public class Customer {
-    private final int purchaseAmount;
+    private int purchaseAmount;
     private Lottos lottos;
 
-    public Customer(int purchaseAmount) {
-        this.purchaseAmount = purchaseAmount;
+    public Customer() {
     }
 
     public Customer(int purchaseAmount, Lottos lottos) {
@@ -15,7 +14,7 @@ public class Customer {
         this.lottos = lottos;
     }
 
-    public void purchaseLottos() {
+    public void purchaseLottos(int purchaseAmount) {
         if(purchaseAmount <= 0) {
             throw new IllegalArgumentException("구입금액은 0 이하일 수 없습니다. 입력한 구입금액: " + purchaseAmount);
         }
