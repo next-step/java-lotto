@@ -2,6 +2,7 @@ package study;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -76,5 +77,17 @@ public class CalculatorTest {
                 Arguments.of("10 / 2", 5),
                 Arguments.of("2 * 1", 2)
         );
+    }
+
+    @Test
+    @DisplayName("입력값이 null이거나 빈 공백 문자 테스트")
+    void nullOrBlankTest() {
+        Assertions.assertThatThrownBy(() -> Calculator.calculate(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Invalid expression");
+
+        Assertions.assertThatThrownBy(() -> Calculator.calculate(""))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Invalid expression");
     }
 }
