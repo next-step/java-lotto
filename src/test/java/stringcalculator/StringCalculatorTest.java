@@ -17,4 +17,10 @@ public class StringCalculatorTest {
     void minus() {
         assertThat(StringCalculator.calculate("10 - 2 - -3")).isEqualTo(11);
     }
+
+    @DisplayName("곱셈 기능 테스트")
+    @Test
+    void multiply() {
+        assertThat(StringCalculator.calculate("100 * 2 * -3")).isEqualTo(-600);
+    }
 }

@@ -20,9 +20,10 @@ public class StringCalculator {
         String curTarget = targets.get(idx);
         if (curTarget.equals("+")) {
             result += stringToInt(targets.get(++idx));
-        }
-        else if (curTarget.equals("-")) {
+        } else if (curTarget.equals("-")) {
             result -= stringToInt(targets.get(++idx));
+        } else if (curTarget.equals("*")) {
+            result *= stringToInt(targets.get(++idx));
         }
         return result;
     }
