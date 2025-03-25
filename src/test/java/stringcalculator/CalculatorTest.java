@@ -22,4 +22,21 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("두 숫자를 뺀다.")
+    void subtractTest() {
+        //given
+        int a = 1;
+        int b = 2;
+        final Calculator calculator = new Calculator();
+
+        //when
+        int result = calculator.subtract(a, b);
+
+        //then
+        assertThat(result).isEqualTo(-1);
+    }
+
+
+
 }
