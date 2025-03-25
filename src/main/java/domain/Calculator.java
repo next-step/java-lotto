@@ -14,23 +14,18 @@ public class Calculator {
     private static Calculation createCalculationWithQuery(String query) {
         Calculation calculation = null;
         while (calculation == null) {
-            String formula = InputView.inputExpression(query);
-            calculation = getCalculation(formula);
+            Tokens tokens = InputView.promptForTokens(query);
+            calculation = getCalculation(tokens);
         }
         return calculation;
     }
 
-    private static Calculation getCalculation(String formula) {
+    private static Calculation getCalculation(Tokens tokens) {
         try {
-            return parseFormula(formula);
+            return new Calculation(tokens);
         } catch (IllegalArgumentException e) {
             ResultView.printMessage("올바른 수식이 아닙니다.");
         }
         return null;
-    }
-
-    private static Calculation parseFormula(String formula) {
-        Tokens tokens = new Tokens(formula);
-        return new Calculation(tokens);
     }
 }
