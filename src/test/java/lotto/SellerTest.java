@@ -2,6 +2,7 @@ package lotto;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,11 +11,20 @@ import java.util.stream.Stream;
 
 public class SellerTest {
 
+    @Test
+    @DisplayName("판매자는 로또기계 하나를 가지고 있다.")
+    void sellerHasLottoMachineTest() {
+        var seller = new Seller(new LottoTicketMachine());
+
+        Assertions.assertThat(seller.countLottoTicketMachine()).isEqualTo(1);
+    }
+
     @ParameterizedTest
     @MethodSource("sellTestData")
     @DisplayName("구매 금액을 받아 1000원당 1장으로 로또를 판매한다.")
     void sellTest(int money, int expected) {
-        var lottos = Seller.sell(money);
+        var seller = new Seller(new LottoTicketMachine());
+        var lottos = seller.sell(money);
 
         Assertions.assertThat(lottos).hasSize(expected);
     }
