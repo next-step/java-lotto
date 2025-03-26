@@ -12,3 +12,8 @@
 - Validator는 Rule에서 조건을 참고하여 객체가 조건에 맞는지 검증
 - 그러나 Rule이 getter를 노출하여 단순 DTO가 되는 것은 지양해야 함
 - 조건에 맞는 객체를 Generator라는 객체가 생성하고 Factory는 그 객체를 사용만 하도록 구현
+### WinningLotto
+- Lotto와 WinningLotto 모두 일급 컬렉션
+- 두 객체를 비교하는 방법은?
+  - 두 객체의 필드는 모두 private이므로 getter를 한 쪽에서 꺼내야 함
+  - getter를 사용하지 않을 경우 package-private 메소드를 사용해야 함
