@@ -4,32 +4,31 @@ import calculator.domain.exception.UnexpectedOperatorException;
 
 public class Calculator {
 
-    public int calculate(String input) {
-
+    public Number calculate(String input) {
         String[] tokens = input.split(" ");
-
-        int result = Integer.parseInt(tokens[0]);
+        Number result = new Number(tokens[0]);
 
         for (int i = 1; i < tokens.length; i += 2) {
             String operator = tokens[i];
-            int right = Integer.parseInt(tokens[i + 1]);
-            switch (operator) {
-                case "+":
-                    result += right;
-                    break;
-                case "-":
-                    result -= right;
-                    break;
-                case "*":
-                    result *= right;
-                    break;
-                case "/":
-                    result /= right;
-                    break;
-                default:
-                    throw new UnexpectedOperatorException();
-            }
+            Number right = new Number(tokens[i + 1]);
+            result = operate(operator, result, right);
         }
         return result;
+    }
+
+    private Number operate(String operator, Number left, Number right) {
+        if (operator.equals("+")) {
+            return left.add(right);
+        }
+        if (operator.equals("-")) {
+            return left.subtract(right);
+        }
+        if (operator.equals("*")) {
+            return left.multiplyBy(right);
+        }
+        if (operator.equals("/")) {
+            return left.divideBy(right);
+        }
+        throw new UnexpectedOperatorException();
     }
 }
