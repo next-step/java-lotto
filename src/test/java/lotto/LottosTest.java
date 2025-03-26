@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,7 +14,7 @@ class LottosTest {
 
     @Test
     public void 구매한_전체_로또의_당첨_통계를_반환한다() {
-        List<LottoNumber> winningNumbers = List.of(1, 2, 3, 4, 5, 6).stream()
+        List<LottoNumber> winningNumbers = Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
