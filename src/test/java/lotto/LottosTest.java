@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 class LottosTest {
     @DisplayName("로또 리스트 (로또 여러 개) 생성 테스트")
@@ -32,5 +33,17 @@ class LottosTest {
 
     }
 
+    @DisplayName("로또 여러 개 비교 후 순위 개수 리스트 생성 테스트")
+    @Test
+    void compare_lottos () {
+        Lottos lottos = new Lottos(2,
+                Arrays.asList(
+                        new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1)),
+                        new Lotto(Arrays.asList(35, 23, 5, 9, 3, 8))
+                )
+        );
+        assertThat(lottos.compareNumbers(new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1))))
+                .contains(entry(Division.FIRST, 1));
 
+    }
 }

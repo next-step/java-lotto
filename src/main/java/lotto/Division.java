@@ -1,6 +1,8 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.Map;
 
 public enum Division {
     FIRST(6, 2000000000),
@@ -10,6 +12,14 @@ public enum Division {
 
     private int matchCount;
     private int prize;
+
+    private static Map<Division, Integer> matchCountMap = new EnumMap<>(Division.class);
+
+    static {
+        for (Division division : Division.values()) {
+            matchCountMap.put(division, 0);
+        }
+    }
 
     private Division(int matchCount, int prize) {
         this.matchCount = matchCount;
@@ -24,6 +34,14 @@ public enum Division {
         return Arrays.stream(values())
                 .filter(division -> division.matchCount == matchCount)
                 .findFirst()
+                .map(division -> {
+                    matchCountMap.put(division, matchCountMap.get(division) + 1);
+                    return division;
+                })
                 .orElse(null);
+    }
+
+    public static final Map<Division, Integer> getMatchCountMap() {
+        return matchCountMap;
     }
 }
