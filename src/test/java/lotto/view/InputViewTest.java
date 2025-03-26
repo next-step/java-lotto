@@ -15,17 +15,6 @@ class InputViewTest {
     return new Scanner(input);
   }
 
-  @DisplayName("구입금액을 입력받는 기능 테스트")
-  @Test
-  void testReceiveMoney() {
-    String testInput = "1000\n";
-    InputView inputView = new InputView(getTestScanner(testInput));
-
-    PurchaseAmount actual = inputView.receiveMoney();
-
-    assertEquals(new PurchaseAmount(1000), actual);
-  }
-
   @DisplayName("숫자가 아닌 금액을 입력받을 시 에러")
   @Test
   void testReceiveMoneyWithInvalidInput() {

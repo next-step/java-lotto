@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.Objects;
-
 public class PurchaseAmount {
   private final int customerMoney;
 
@@ -25,18 +23,5 @@ public class PurchaseAmount {
 
   public double calculateProfitRate(int totalPrizeMoney) {
     return (double) totalPrizeMoney / (Lotto.PRICE * calculateLottoCount());
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    PurchaseAmount that = (PurchaseAmount) o;
-    return customerMoney == that.customerMoney;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(customerMoney);
   }
 }
