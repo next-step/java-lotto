@@ -15,6 +15,9 @@ public class LottoFactory {
     }
 
     public Lottos buy(int money) {
+        if (money < 1000) {
+            throw new IllegalArgumentException("로또 구입은 최소 1000원부터 가능합니다.");
+        }
         return new Lottos(
                 IntStream.range(0, getCount(money))
                 .mapToObj(i -> new Lotto(lottoStrategy.generateLottoNumbers()))
