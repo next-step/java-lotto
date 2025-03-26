@@ -2,16 +2,20 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsTest {
 
-    @Test
+    @ParameterizedTest
     @DisplayName("로또들의 당첨 통계를 계산한다")
-    void 당첨_통계_계산() {
+    @CsvSource({"FIRST, 1", "SECOND, 1", "THIRD, 1", "FOURTH, 1"})
+    void 당첨_통계_계산(Rank rank, int expectedCount) {
         WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
 
         Lotto first = new Lotto(List.of(1,2,3,4,5,6));
@@ -20,12 +24,12 @@ class LottoStatisticsTest {
         Lotto fourth = new Lotto(List.of(1,2,3,10,11,12));
 
         List<Lotto> lottos = List.of(first, second, third, fourth);
-        LottoStatistics stats = new LottoStatistics(lottos, winningNumber);
+        List<Rank> ranks = lottos.stream()
+                .map(lotto -> RankDecider.decide(lotto, winningNumber))
+                .collect(Collectors.toList());
+        LottoStatistics stats = new LottoStatistics(ranks);
 
-        assertThat(stats.getCountByRank(Rank.FIRST)).isEqualTo(1);
-        assertThat(stats.getCountByRank(Rank.SECOND)).isEqualTo(1);
-        assertThat(stats.getCountByRank(Rank.THIRD)).isEqualTo(1);
-        assertThat(stats.getCountByRank(Rank.FOURTH)).isEqualTo(1);
+        assertThat(stats.getCountByRank(rank)).isEqualTo(expectedCount);
     }
 
     @Test
@@ -37,7 +41,10 @@ class LottoStatisticsTest {
         Lotto none = new Lotto(List.of(10,11,12,13,14,15));
 
         List<Lotto> lottos = List.of(first, none);
-        LottoStatistics stats = new LottoStatistics(lottos, winningNumber);
+        List<Rank> ranks = lottos.stream()
+                .map(lotto -> RankDecider.decide(lotto, winningNumber))
+                .collect(Collectors.toList());
+        LottoStatistics stats = new LottoStatistics(ranks);
 
         double rate = stats.calculateProfitRate(2_000);
 
