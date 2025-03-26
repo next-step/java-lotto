@@ -2,9 +2,17 @@ package lotto.domain.model;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static lotto.domain.model.LottoNumber.LOWER_BOUND;
+import static lotto.domain.model.LottoNumber.UPPER_BOUND;
 
 public class Lotto {
     private static final int NUM_OF_LOTTO_NUM = 6;
+    private static final List<LottoNumber> LOTTO_NUMBER_CANDIDATES = IntStream.rangeClosed(LOWER_BOUND, UPPER_BOUND)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
+
     private final List<LottoNumber> lottoNumbers;
 
     private Lotto(List<LottoNumber> lottoNumbers) {
@@ -13,14 +21,10 @@ public class Lotto {
     }
 
     public static Lotto create() {
-        List<LottoNumber> shuffledNumbers = LottoNumber.NUM_RANGE
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        List<LottoNumber> numbersForShuffle = new ArrayList<>(LOTTO_NUMBER_CANDIDATES);
+        Collections.shuffle(numbersForShuffle);
 
-        Collections.shuffle(shuffledNumbers);
-
-        List<LottoNumber> selectedNums = shuffledNumbers.stream()
+        List<LottoNumber> selectedNums = numbersForShuffle.stream()
                 .limit(NUM_OF_LOTTO_NUM)
                 .sorted()
                 .collect(Collectors.toList());
