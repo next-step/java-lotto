@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+
 import java.util.List;
 
 public class LottoGeneratorTest {

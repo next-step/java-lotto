@@ -1,5 +1,9 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoPrize;
+import lotto.domain.Lottos;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.LottoGeneratorTest.TestLottoGenerator;
+import lotto.domain.Lottos;
+import lotto.domain.PurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
