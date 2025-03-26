@@ -1,0 +1,20 @@
+package step2;
+
+public class LotteryCount {
+    private final int lottoCount;
+    private final int LOTTO_PRICE = 1000;
+
+    public LotteryCount(int purchaseAmount) {
+        if (purchaseAmount < 0) {
+            throw new IllegalArgumentException("음수 값이 입력되었습니다. 값 : " + purchaseAmount);
+        }
+        if (purchaseAmount < LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또 한 장의 가격보다 작은 금액입니다. 값 : " + purchaseAmount);
+        }
+        this.lottoCount = purchaseAmount / LOTTO_PRICE;
+    }
+
+    public int getLottoCount() {
+        return lottoCount;
+    }
+}
