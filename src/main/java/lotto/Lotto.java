@@ -1,7 +1,9 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
@@ -32,7 +34,8 @@ public class Lotto {
     if (numbers.size() != SIZE) {
       throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
     }
-    if (numbers.stream().distinct().count() != 6) {
+    Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);
+    if (uniqueNumbers.size() != SIZE) {
       throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
     }
   }

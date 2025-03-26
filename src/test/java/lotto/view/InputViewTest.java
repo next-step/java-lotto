@@ -17,7 +17,7 @@ class InputViewTest {
   @DisplayName("구입금액을 입력받는 기능 테스트")
   @Test
   void testReceiveMoney() {
-    String testInput = "1000";
+    String testInput = "1000\n";
     InputView inputView = new InputView(getTestScanner(testInput));
 
     int actual = inputView.receiveMoney();
