@@ -12,5 +12,6 @@ public class LottoMain {
 
         ResultView.printLottoNumber(lottoTicket.getLottoRowList());
 
+        
     }
 }

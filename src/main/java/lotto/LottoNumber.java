@@ -34,4 +34,8 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+    public Boolean isSame(LottoNumber lottoNumber) {
+        return this == lottoNumber;
+    }
 }

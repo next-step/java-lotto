@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -40,4 +39,14 @@ public class LottoRow {
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
+
+    public int isContainCount(LottoRow winningNumbers) {
+        List<Integer> winningSet = new ArrayList<>(winningNumbers.getLottoNumbers());
+
+        return (int) winningNumbers.getLottoNumbers().stream()
+            .filter(winningSet::contains)
+            .count();
+    }
+
+
 }
