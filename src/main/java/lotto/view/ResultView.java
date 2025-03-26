@@ -19,11 +19,6 @@ public class ResultView {
       System.out.println( i + "개 일치 (" + getPrize(i) + "원)- " + results.getOrDefault(i, 0L) + "개");
     }
 
-//    System.out.println( "4개 일치 (" + getPrize(4) + "원)- " + results.getOrDefault(4, 0L) + "개");
-//    System.out.println( "5개 일치 (" + getPrize(5) + "원)- " + results.getOrDefault(5, 0L) + "개");
-//    System.out.println( "6개 일치 (" + getPrize(6) + "원)- " + results.getOrDefault(6, 0L) + "개");
-
-
     System.out.printf("총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)\n",
         profitRate, profitRate >= 1 ? "이득" : "손해");
   }
