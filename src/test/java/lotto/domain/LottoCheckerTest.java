@@ -10,9 +10,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoCheckerTest {
     @Test
     @DisplayName("당첨 여부 테스트 (로또 구매가 없는 경우)")
-    void checkLottosTestByEmpty() throws Exception {
+    void checkLottosTestByEmpty() {
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoWinningStatistics stats = new LottoChecker().check(winningLotto, List.of());
+        LottoWinningStatistics stats = new LottoChecker(winningLotto).check(List.of());
 
         assertThat(stats.generateFormattedReport()).containsExactly(
             "6개 일치 (2000000000원) - 0개",
@@ -35,7 +35,7 @@ class LottoCheckerTest {
         );
 
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoWinningStatistics stats = new LottoChecker().check(winningLotto, lottos);
+        LottoWinningStatistics stats = new LottoChecker(winningLotto).check(lottos);
 
         assertThat(stats.generateFormattedReport()).containsExactly(
             "6개 일치 (2000000000원) - 1개",
