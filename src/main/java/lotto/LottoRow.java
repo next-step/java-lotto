@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoRow {
     private final List<LottoNumber> lottoNumber = new ArrayList<>();
@@ -18,6 +19,12 @@ public class LottoRow {
         for (Integer randomNumber : sortedNumbers) {
             this.lottoNumber.add(new LottoNumber(randomNumber));
         }
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumber.stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
     }
 
     @Override

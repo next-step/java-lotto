@@ -7,18 +7,23 @@ import java.util.Random;
 public class LottoTicket {
 
     private final int count;
+    private final static int LOTTO_PRICE = 1000;
     private final List<LottoRow> lottoRowList = new ArrayList<>();
 
     public LottoTicket(int count) {
-        this.count = count;
+        this.count = count/LOTTO_PRICE;
 
-        for (int i = 0; i < count; i++) {
-            GenerateNumber generateNumber = new GenerateNumber();
+        GenerateNumber generateNumber = new GenerateNumber();
+        for (int i = 0; i < this.count; i++) {
             this.lottoRowList.add(new LottoRow(generateNumber.generateRandomNumbers()));
         }
     }
 
     public int getCount() {
         return count;
+    }
+
+    public List<LottoRow> getLottoRowList() {
+        return lottoRowList;
     }
 }
