@@ -9,7 +9,7 @@ public class RandomLottoGenerator implements LottoGenerator {
   private static final List<LottoNumber> numbers = new ArrayList<>();
 
   static {
-    for (int i = Lotto.MIN_LOTTO_NUMBER; i <= Lotto.MAX_LOTTO_NUMBER; i++) {
+    for (int i = LottoNumber.MIN_LOTTO_NUMBER; i <= LottoNumber.MAX_LOTTO_NUMBER; i++) {
       numbers.add(new LottoNumber(i));
     }
   }

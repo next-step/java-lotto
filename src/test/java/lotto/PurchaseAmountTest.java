@@ -37,5 +37,4 @@ class PurchaseAmountTest {
     double profitRate = purchaseAmount.calculateProfitRate(totalPrizeMoney);
     assertEquals(2, profitRate);
   }
-
 }
