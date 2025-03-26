@@ -22,6 +22,6 @@ public class LottoMain {
         Lotto winningLotto = new ManualStrategy(enteredWinningNumbers).generate();
 
         LottoWinningChecker lottoWinningChecker = new LottoWinningChecker(lottos, winningLotto);
-        OutputView.printStatics(lottoWinningChecker.getRanks());
+        OutputView.printStatics(lottoWinningChecker.getRanks(), lottoWinningChecker.getProfitRate());
     }
 }

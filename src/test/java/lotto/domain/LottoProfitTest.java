@@ -16,9 +16,9 @@ class LottoProfitTest {
         int totalCount = 14;
 
         // when
-        Double profit = LottoProfit.calculate(ranks, totalCount);
+        LottoProfit lottoProfit = new LottoProfit(ranks, totalCount);
 
         // then
-        assertThat(profit).isEqualTo(0.35);
+        assertThat(lottoProfit.getProfitRate()).isEqualTo(0.35);
     }
 }

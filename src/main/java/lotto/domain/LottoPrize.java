@@ -20,11 +20,11 @@ public enum LottoPrize {
         return prize;
     }
 
-    public static LottoPrize from(int match) {
+    public static Integer getPrize(int match) {
         return Arrays.stream(LottoPrize.values())
                 .filter(prize -> prize.match.equals(match))
+                .map(LottoPrize::getPrize)
                 .findFirst()
-                .orElse(null);
+                .orElse(0);
     }
-
 }

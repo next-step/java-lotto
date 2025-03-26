@@ -6,13 +6,14 @@ import java.util.Map;
 
 public class LottoWinningChecker {
     private final Map<Integer, Integer> ranks = new HashMap<>();
+    private final LottoProfit lottoProfit;
 
     public LottoWinningChecker(List<Lotto> lottos, Lotto winLotto) {
         for (Lotto lotto : lottos) {
             int matchCount = getMatchCount(winLotto.getLottoNumbers(), lotto.getLottoNumbers());
             ranks.put(matchCount, ranks.getOrDefault(matchCount, 0) + 1);
         }
-        LottoProfit.calculate(ranks, lottos.size());
+        lottoProfit = new LottoProfit(ranks, lottos.size());
     }
 
     private int getMatchCount(List<LottoNumber> lottoNumbers, List<LottoNumber> winNumbers) {
@@ -34,5 +35,9 @@ public class LottoWinningChecker {
 
     public Map<Integer, Integer> getRanks() {
         return ranks;
+    }
+
+    public Double getProfitRate() {
+        return lottoProfit.getProfitRate();
     }
 }
