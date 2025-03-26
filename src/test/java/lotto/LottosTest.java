@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -27,7 +24,7 @@ class LottosTest {
         Lottos lottos = new Lottos(List.of(firstRankLotto, thirdRankLotto, noPrizeRankLotto));
 
         lottos.determineAllLottoResult(winningNumbers);
-        Map<Rank, Integer> result = lottos.getStatistics();
+        Map<Rank, Integer> result = LottoResultAnalyzer.analyzeLottosStatistics(lottos);
 
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);
         assertThat(result.get(Rank.SECOND)).isEqualTo(0);

@@ -29,14 +29,8 @@ public class Customer {
         lottos.determineAllLottoResult(winningNumbers);
     }
 
-    public double calculateROI() {
-        double totalPrize = 0;
-
-        for (Lotto lotto : lottos.getLottoList()) {
-            totalPrize += lotto.getPrize();
-        }
-
-        return totalPrize / purchaseAmount;
+    public int getPurchaseAmount() {
+        return purchaseAmount;
     }
 
     public Lottos getLottos() {

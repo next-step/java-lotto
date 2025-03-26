@@ -1,19 +1,31 @@
 package lotto;
 
 import lotto.domain.Customer;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoResultAnalyzer;
+import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.List;
+import java.util.Map;
 
 public class LottoApplication {
     public static void main(String[] args) {
         Customer customer = new Customer();
-        customer.purchaseLottos(InputView.getPurchaseAmount());
+
+        int purchaseAmount = InputView.getPurchaseAmount();
+        customer.purchaseLottos(purchaseAmount);
 
         OutputView.printLottos(customer.getLottos());
 
-        customer.checkLottosResult(InputView.getWinningNumbers());
-//        OutputView.printStatistics(lottos.getStatistics());
+        List<LottoNumber> winningNumbers = InputView.getWinningNumbers();
+        customer.checkLottosResult(winningNumbers);
 
-        OutputView.printROI(customer.calculateROI());
+        Map<Rank, Integer> statistics = LottoResultAnalyzer.generateStatistics(customer);
+        OutputView.printStatistics(statistics);
+
+        double ROI = LottoResultAnalyzer.getROI(customer);
+        OutputView.printROI(ROI);
     }
 }

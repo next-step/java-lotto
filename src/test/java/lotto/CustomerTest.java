@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Customer;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -31,7 +28,7 @@ class CustomerTest {
         Lottos lottos = new Lottos(List.of(thirdRankLotto, thirdRankLotto, noPrizeRankLotto)); // 3등x2, 꽝x1
         Customer customer = new Customer(3000, lottos);
 
-        double actual = customer.calculateROI();
+        double actual = LottoResultAnalyzer.getROI(customer);
         double expected = (double) lottos.getLottoList().stream().mapToInt(Lotto::getPrize).sum() / purchaseAmount;
 
         assertThat(actual).isEqualTo(expected);
