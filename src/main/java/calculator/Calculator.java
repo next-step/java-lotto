@@ -13,17 +13,18 @@ public class Calculator {
   }
 
   private int calculate(int left, String operator, int right) {
-    switch (operator) {
-      case "+":
-        return left + right;
-      case "-":
-        return left - right;
-      case "*":
-        return left * right;
-      case "/":
-        return left / right;
-      default:
-        throw new IllegalArgumentException("지원하지 않는 연산자입니다.");
+    if (operator.equals("+")) {
+      return left + right;
     }
+    if (operator.equals("-")) {
+      return left - right;
+    }
+    if (operator.equals("*")) {
+      return left * right;
+    }
+    if (operator.equals("/")) {
+      return left / right;
+    }
+    throw new IllegalArgumentException("지원하지 않는 연산자입니다.");
   }
 } 
