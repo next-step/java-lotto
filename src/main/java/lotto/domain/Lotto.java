@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,5 +57,9 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hashCode(numbers);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

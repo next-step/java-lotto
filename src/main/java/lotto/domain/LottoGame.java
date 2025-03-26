@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Map;
@@ -37,5 +37,13 @@ public class LottoGame {
            earning += entry.getKey().getPrize() * entry.getValue();
         }
         return (double)earning / (count * LOTTO_PRICE);
+    }
+
+    public List<List<Integer>> getLottos() {
+        return lottos.getLottos();
+    }
+
+    public Map<Division, Integer> getWinnerCountMap() {
+        return winnerCountMap;
     }
 }

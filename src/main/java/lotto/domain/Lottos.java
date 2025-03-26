@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +25,18 @@ public class Lottos {
         for (Lotto lotto: lottos) {
             Division division = lotto.compareNumbers(comparingLotto);
         }
-        System.out.println(Division.getMatchCountMap());
         return Division.getMatchCountMap();
     }
 
     public int size() {
         return lottos.size();
+    }
+
+    public List<List<Integer>> getLottos() {
+        List<List<Integer>> returnLottos = new ArrayList<>();
+        for (Lotto lotto: lottos) {
+            returnLottos.add(lotto.getNumbers());
+        }
+        return returnLottos;
     }
 }
