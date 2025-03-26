@@ -41,16 +41,6 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int matchCount(Lotto lastWeekLotto) {
-        int count = 0;
-        for (int number : lottoNumbers) {
-            if (lastWeekLotto.lottoNumbers().contains(number)) {
-                count++;
-            }
-        }
-        return count;
-    }
-
     public static List<Integer> convertStringToList(String lastWeekLottoResult) {
         String[] split = lastWeekLottoResult.trim().split(",");
         List<Integer> lastWeekLotto = new ArrayList<>();

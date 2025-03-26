@@ -16,9 +16,15 @@ public class Statistic {
 
     public void calculate(Lottos lottos, Lotto lastWeekLotto) {
         for (Lotto lotto : lottos.getLottos()) {
-            int match = lotto.matchCount(lastWeekLotto);
+            int match = matchCount(lotto, lastWeekLotto);
             statistic(match);
         }
+    }
+
+    private int matchCount(Lotto lotto, Lotto lastWeekLotto) {
+        return (int) lotto.lottoNumbers().stream()
+            .filter(lastWeekLotto.lottoNumbers()::contains)
+            .count();
     }
 
     public Map<Integer, Integer> getMatchCountMap() {
