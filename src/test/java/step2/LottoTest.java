@@ -1,6 +1,5 @@
 package step2;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
@@ -10,6 +9,7 @@ import step2.util.LottoStrategy;
 
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static step2.util.LottoNumberUtils.of;
 
@@ -31,9 +31,10 @@ class LottoTest {
     }
 
     @Test
-    void sameCount() {
+    @DisplayName("로또번호와 당첨번호가 5개 같은 경우")
+    void countMatch() {
         Lotto lotto = new Lotto(of(2, 4, 5, 6, 3, 9));
         Set<LottoNum> winningNums = of(1, 2, 3, 4, 5, 6);
-        Assertions.assertThat(lotto.isSameCount(winningNums)).isEqualTo(5);
+        assertThat(lotto.countMatch(winningNums)).isEqualTo(5);
     }
 }
