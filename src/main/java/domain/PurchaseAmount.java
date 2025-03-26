@@ -1,7 +1,7 @@
 package domain;
 
 public class PurchaseAmount {
-    private final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
     private final int amount;
 
     public PurchaseAmount(int amount) {
