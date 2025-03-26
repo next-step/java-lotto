@@ -11,6 +11,12 @@ public class Money {
         this.amount = BigDecimal.valueOf(amount);
     }
 
+    public Integer divideBy(Integer price) {
+        return this.amount
+                .divide(BigDecimal.valueOf(price))
+                .intValue();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
