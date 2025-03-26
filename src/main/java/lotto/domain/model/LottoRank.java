@@ -15,8 +15,11 @@ public enum LottoRank {
     private final int numOfMatch;
     private final Money amountOfPrize;
 
-    private static final Map<Integer, LottoRank> RANK_MAP = Stream.of(values()).collect(Collectors.toMap(LottoRank::getNumOfMatch, rank -> rank));
-    public static final List<LottoRank> RANK_WITH_PRIZE = Stream.of(values()).filter(rank -> rank.getPrize() != 0).collect(Collectors.toList());
+    private static final Map<Integer, LottoRank> RANK_MAP = Stream.of(values())
+            .collect(Collectors.toMap(LottoRank::getNumOfMatch, rank -> rank));
+    public static final List<LottoRank> RANK_WITH_PRIZE = Stream.of(values())
+            .filter(rank -> rank.getPrize() != 0)
+            .collect(Collectors.toList());
 
     LottoRank(int numOfMatch, Money amountOfPrize) {
         this.numOfMatch = numOfMatch;
