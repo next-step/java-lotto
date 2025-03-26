@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static util.ErrorMessage.INVALID_INPUT;
 
@@ -25,5 +26,25 @@ public class CalculatorTest {
         assertThatThrownBy(() -> Calculator.create().run(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_INPUT);
+    }
+
+    @Test
+    @DisplayName("사칙연산 우선순위 없이 왼쪽부터 순차적으로 계산한다")
+    void calculate_left() {
+        Calculator calculator = Calculator.create();
+
+        int result = calculator.run("2 + 3 * 4 / 2");
+
+        assertThat(result).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("왼쪽부터 순차적으로 계산한다.")
+    void complex_left_2() {
+        Calculator calculator = Calculator.create();
+
+        int result = calculator.run("10 - 3 + 2 * 2 / 2");
+
+        assertThat(result).isEqualTo(9);
     }
 }
