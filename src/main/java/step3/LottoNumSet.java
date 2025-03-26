@@ -1,11 +1,9 @@
 package step3;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class LottoNumSet {
+    public static final int LOTTO_NUM_COUNT = 6;
     private final Set<LottoNum> lottoNumSet;
 
     public LottoNumSet(List<LottoNum> lottoNums) {
@@ -14,10 +12,10 @@ public class LottoNumSet {
     }
 
     private void validateLottoNums(List<LottoNum> lottoNums) {
-        if (lottoNums.size() != 6) {
+        if (lottoNums.size() != LOTTO_NUM_COUNT) {
             throw new RuntimeException("로또 숫자는 6개여야합니다.");
         }
-        if (new HashSet<>(lottoNums).size() != 6) {
+        if (new HashSet<>(lottoNums).size() != LOTTO_NUM_COUNT) {
             throw new RuntimeException("로또 숫자는 중복될 수 없습니다.");
         }
     }

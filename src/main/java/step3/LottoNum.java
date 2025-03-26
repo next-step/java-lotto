@@ -3,6 +3,8 @@ package step3;
 import java.util.Objects;
 
 public class LottoNum {
+    public static final int MIN_LOTTO_NUM = 1;
+    public static final int MAX_LOTTO_NUM = 45;
     private final int lottoNum;
 
     public LottoNum(int lottoNum) {
@@ -11,7 +13,7 @@ public class LottoNum {
     }
 
     private void validateLottoNumber(int lottoNum) {
-        if (lottoNum < 1 || lottoNum > 45) {
+        if (lottoNum < MIN_LOTTO_NUM || lottoNum > MAX_LOTTO_NUM) {
             throw new RuntimeException("로또의 숫자는 1 - 45 사이만 가능합니다.");
         }
     }
