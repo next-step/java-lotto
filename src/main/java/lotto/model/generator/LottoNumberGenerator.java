@@ -1,5 +1,7 @@
 package lotto.model.generator;
 
+import lotto.model.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +12,7 @@ public class LottoNumberGenerator implements NumberGenerator {
 
     static {
         BASE_NUMBERS = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = LottoNumber.LOTTO_MIN_NUMBER; i <= LottoNumber.LOTTO_MAX_NUMBER; i++) {
             BASE_NUMBERS.add(i);
         }
     }

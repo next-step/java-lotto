@@ -11,17 +11,18 @@ public class OutputView {
         int size = wallet.getLottoCount();
         System.out.println(size + "개를 구매했습니다");
         for (Lotto lotto : wallet) {
-            System.out.println(lotto);
+            System.out.println(lotto.numbers());
         }
     }
 
     public static void printLottoResult(LottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + result.getPrizeCount(LottoPrize.FOURTH) + "개");
-        System.out.println("4개 일치 (50000원)- " + result.getPrizeCount(LottoPrize.THIRD) + "개");
-        System.out.println("5개 일치 (1500000원)- " + result.getPrizeCount(LottoPrize.SECOND) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + result.getPrizeCount(LottoPrize.FIRST) + "개");
+
+        LottoPrize[] prize = LottoPrize.values();
+        for (int i = prize.length - 2; i >= 0; i--) {
+            System.out.println(prize[i].comment() + "- " + result.getPrizeCount(prize[i]) + "개");
+        }
 
         double returnRate = result.calculateReturnRate();
 
