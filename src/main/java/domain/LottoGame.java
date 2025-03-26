@@ -1,17 +1,24 @@
 package domain;
 
 import domain.lotto.LottoContainer;
+import domain.lotto.WinningLotto;
 
 public class LottoGame {
     private final LottoContainer lottoContainer;
+    private final WinningLotto winningLotto;
 
-    public LottoGame(int purchaseAmount, int lottoPrice) {
+    public LottoGame(int purchaseAmount, int lottoPrice, WinningLotto winningLotto) {
         if (isValid(purchaseAmount, lottoPrice)) {
             String validationMessage = String.format("로또 구입 금액은 %d원 이상이어야 하며 %d원 단위로 가능합니다.",
                     lottoPrice, lottoPrice);
             throw new IllegalArgumentException(validationMessage);
         }
         this.lottoContainer = new LottoContainer(purchaseAmount / lottoPrice);
+        this.winningLotto = winningLotto;
+    }
+
+    public LottoGameResult play() {
+        return lottoContainer.checkWinningResults(winningLotto);
     }
 
     public int getLottoCount() {

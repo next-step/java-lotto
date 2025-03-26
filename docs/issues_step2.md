@@ -25,3 +25,5 @@
 ### 당첨 통계
 - Map 사용 필요? 당첨된 복권만 모아서 당첨 정보를 추출
   - 물론 이 경우에도 Map은 필요
+### LottoContainer
+- Lotto 무작위 생성 기능이 LottoContainer에 있으면 안됨

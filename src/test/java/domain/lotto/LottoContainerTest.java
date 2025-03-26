@@ -30,4 +30,12 @@ public class LottoContainerTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 개수는 1개 이상이어야 합니다.");
     }
+
+    @DisplayName("1등 1개, 0등 1개")
+    @Test
+    void checkWinningResults() {
+        // given
+        int lottoCount = 5;
+        LottoContainer lottoContainer = new LottoContainer(lottoCount);
+    }
 }

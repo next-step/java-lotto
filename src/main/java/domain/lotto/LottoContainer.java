@@ -1,5 +1,7 @@
 package domain.lotto;
 
+import domain.LottoGameResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,5 +21,14 @@ public class LottoContainer {
 
     public int size() {
         return lottos.size();
+    }
+
+    public LottoGameResult checkWinningResults(WinningLotto winningLotto) {
+        List<Rank> ranks = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            Rank rank = lotto.determineRank(winningLotto);
+            ranks.add(rank);
+        }
+        return new LottoGameResult(ranks);
     }
 }
