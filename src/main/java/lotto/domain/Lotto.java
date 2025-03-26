@@ -17,4 +17,8 @@ public class Lotto {
             throw new IllegalArgumentException("lotto size is not 6");
         }
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }

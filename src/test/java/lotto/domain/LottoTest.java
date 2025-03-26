@@ -29,6 +29,16 @@ class LottoTest {
                 .withMessage("lotto size is not 6");
     }
 
+    @DisplayName("로또 번호 목록을 가져올 수 있다.")
+    @Test
+    void getLottoNumbersTest() {
+        List<LottoNumber> lottoNumbers = getLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        assertThat(lotto.getLottoNumbers()).isEqualTo(lottoNumbers);
+    }
+
     private List<LottoNumber> getLottoNumbers(List<Integer> numbers) {
         return numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     }

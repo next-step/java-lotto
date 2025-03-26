@@ -5,6 +5,10 @@ import java.util.Objects;
 public class LottoNumber {
     private final int value;
 
+    public LottoNumber(String value) {
+        this(Integer.parseInt(value));
+    }
+
     public LottoNumber(int value) {
         checkValue(value);
         this.value = value;
@@ -28,5 +32,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hashCode(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

@@ -14,6 +14,7 @@ public class LottoMain {
 
         LottoSeller lottoSeller = new LottoSeller(money);
         List<Lotto> lottos = lottoSeller.generateLottos(new AutomaticStrategy());
+        OutputView.printLottos(lottos);
 
     }
 }
