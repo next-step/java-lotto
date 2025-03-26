@@ -1,3 +1,5 @@
+import model.calculate.Calculator;
+import model.calculate.Expression;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +11,6 @@ class CalculatorTest {
     void calculate() {
         Expression expression = Expression.createExpression("2 + 3 * 4 / 2");
         Calculator calculator = new Calculator();
-        calculator.calculate(expression);
         assertThat(calculator.calculate(expression)).isEqualTo(10);
     }
 }
