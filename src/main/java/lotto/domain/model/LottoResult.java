@@ -7,7 +7,7 @@ import java.util.Map;
 public class LottoResult {
     private final Map<LottoRank, Integer> lottoResult = new HashMap<>();
 
-    public static LottoResult from(List<Lotto> purchasedLottos, Lotto winningLotto) {
+    public static LottoResult of(List<Lotto> purchasedLottos, Lotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
         purchasedLottos.forEach(lotto -> lottoResult.addLottoResult(lotto, winningLotto));
         return lottoResult;

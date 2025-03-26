@@ -38,7 +38,7 @@ public class LottoService {
     }
 
     private void displayResult(List<Lotto> purchasedLottos, Lotto winningLotto) {
-        LottoResult lottoResult = LottoResult.from(purchasedLottos, winningLotto);
+        LottoResult lottoResult = LottoResult.of(purchasedLottos, winningLotto);
         Outputview.printResult(lottoResult);
     }
 }

@@ -19,7 +19,7 @@ class LottoResultTest {
         Lotto nonWinningLotto2 = Lotto.create(List.of(13, 14, 15, 16, 17, 18));
 
         List<Lotto> purchasedLottos = Arrays.asList(nonWinningLotto1, nonWinningLotto2);
-        LottoResult lottoResult = LottoResult.from(purchasedLottos, winningLotto);
+        LottoResult lottoResult = LottoResult.of(purchasedLottos, winningLotto);
 
         assertThat(lottoResult.getReturnRate()).isZero();
     }
@@ -32,7 +32,7 @@ class LottoResultTest {
         Lotto nonWinningLotto = Lotto.create(List.of(10, 11, 12, 13, 14, 15));
 
         List<Lotto> purchasedLottos = Arrays.asList(thirdRankLotto, nonWinningLotto);
-        LottoResult lottoResult = LottoResult.from(purchasedLottos, winningLotto);
+        LottoResult lottoResult = LottoResult.of(purchasedLottos, winningLotto);
 
         long expectedPrize = LottoRank.FOURTH.getPrize();
         int purchaseAmount = purchasedLottos.size() * LottoSeller.PRICE;
@@ -51,7 +51,7 @@ class LottoResultTest {
         Lotto nonWinningLotto = Lotto.create(List.of(10, 11, 12, 13, 14, 15));
 
         List<Lotto> purchasedLottos = Arrays.asList(firstRankLotto, secondRankLotto, thirdRankLotto, nonWinningLotto);
-        LottoResult lottoResult = LottoResult.from(purchasedLottos, winningLotto);
+        LottoResult lottoResult = LottoResult.of(purchasedLottos, winningLotto);
 
         long expectedPrize = LottoRank.FIRST.getPrize() + LottoRank.SECOND.getPrize() + LottoRank.THIRD.getPrize();
         int purchaseAmount = purchasedLottos.size() * LottoSeller.PRICE;
