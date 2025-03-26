@@ -18,7 +18,7 @@ public class LottoStrategyTest {
 
         Winning winning = new Winning(of(1,3,4,5,6,8));
         
-        assertThat(lotto.isSameCount(winning.get())).isEqualTo(4);
+        assertThat(lotto.isSameCount(winning.getWinning())).isEqualTo(4);
     }
 
     @Test
@@ -28,6 +28,6 @@ public class LottoStrategyTest {
 
         Winning winning = new Winning(of(1,3,4,5,6,8));
 
-        assertThat(lotto.isSameCount(winning.get())).isEqualTo(4);
+        assertThat(lotto.isSameCount(winning.getWinning())).isEqualTo(4);
     }
 }

@@ -16,7 +16,7 @@ public class Winning {
         }
     }
 
-    public Set<LottoNum> get() {
+    public Set<LottoNum> getWinning() {
         return Set.copyOf(nums);
     }
 }
