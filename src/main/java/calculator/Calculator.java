@@ -1,6 +1,6 @@
 package calculator;
 
-import util.ErrorMessage;
+import util.InputValidator;
 
 public class Calculator {
     private Calculator() {
@@ -11,14 +11,7 @@ public class Calculator {
     }
 
     public int run(String input) {
-        validateInput(input);
-
+        InputValidator.validateInput(input);
         return 0;
-    }
-
-    private void validateInput(String input) {
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT);
-        }
     }
 }
