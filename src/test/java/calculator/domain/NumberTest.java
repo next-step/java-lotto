@@ -1,9 +1,8 @@
-package calculator;
+package calculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import calculator.domain.Number;
 import calculator.domain.exception.InvalidNumberInputException;
 import calculator.domain.exception.UnexpectedCharacterException;
 import org.junit.jupiter.api.DisplayName;

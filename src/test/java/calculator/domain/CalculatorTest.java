@@ -1,9 +1,7 @@
-package calculator;
+package calculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.domain.Calculator;
-import calculator.domain.Number;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
