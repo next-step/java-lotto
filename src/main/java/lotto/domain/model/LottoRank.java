@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-    FAIL(2, new Money(0)),
+    FAIL_NONE(0, new Money(0)),
+    FAIL_ONE(1, new Money(0)),
+    FAIL_TWO(2, new Money(0)),
     FOURTH(3, new Money(5_000)),
     THIRD(4, new Money(50_000)),
     SECOND(5, new Money(1_500_000)),
@@ -35,6 +37,7 @@ public enum LottoRank {
     }
 
     public static LottoRank fromMatchedNum(int numOfMatch) {
-        return RANK_MAP.getOrDefault(numOfMatch, FAIL);
+        if (!RANK_MAP.containsKey(numOfMatch)) throw new IllegalArgumentException("유효하지 않은 로또 당첨 번호 갯수입니다.");
+        return RANK_MAP.get(numOfMatch);
     }
 }
