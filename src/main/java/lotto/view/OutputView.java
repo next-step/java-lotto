@@ -19,7 +19,6 @@ public class OutputView {
     private static String printLotto(Lotto lotto) {
         return String.join(",", lotto.getLottoNumbers().stream()
             .map(String::valueOf)
-            .sorted()
             .toArray(String[]::new)
         );
     }
