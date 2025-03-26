@@ -24,6 +24,10 @@ public enum Rank {
         return rankMatcher.matches(matchedCount);
     }
 
+    public int getTotalWinnings(int count) {
+        return winnings * count;
+    }
+
     public String displayRank() {
         return String.format("%d개 일치 (%d)원", requiredMatches, winnings);
     }
