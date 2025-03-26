@@ -3,6 +3,7 @@ package step2;
 import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
 import step2.domain.MatchResult;
+import step2.domain.Rank;
 import step2.domain.Winning;
 import step2.util.FixLottoStrategy;
 import step2.util.LottoStrategy;
@@ -18,7 +19,7 @@ public class LottoStrategyTest {
         Lotto lotto = new Lotto(lottoStrategy.generateLottoNumbers());
         Winning winning = new Winning(of(1,3,4,5,6,8));
         MatchResult matchResult = winning.match(lotto);
-        assertThat(matchResult.getMatchedCount()).isEqualTo(4);
+        assertThat(matchResult.getRank()).isEqualTo(Rank.THIRD);
     }
 
     @Test
@@ -28,6 +29,6 @@ public class LottoStrategyTest {
         Winning winning = new Winning(of(1,3,4,5,6,8));
         MatchResult matchResult = winning.match(lotto);
 
-        assertThat(matchResult.getMatchedCount()).isEqualTo(4);
+        assertThat(matchResult.getRank()).isEqualTo(Rank.THIRD);
     }
 }

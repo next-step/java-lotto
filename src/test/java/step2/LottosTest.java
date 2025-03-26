@@ -1,12 +1,8 @@
 package step2;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.Lotto;
-import step2.domain.Lottos;
-import step2.domain.MatchResult;
-import step2.domain.Winning;
+import step2.domain.*;
 
 import java.util.List;
 
@@ -25,7 +21,7 @@ public class LottosTest {
         List<MatchResult> matchResults = lottos.matchAll(winning);
 
         Assertions.assertThat(matchResults)
-                .extracting(MatchResult::getMatchedCount)
-                .containsExactly(6, 5, 0);
+                .extracting(MatchResult::getRank)
+                .containsExactly(Rank.FIRST, Rank.SECOND, Rank.NONE);
     }
 }
