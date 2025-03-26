@@ -30,9 +30,10 @@ public class LottoSystem {
     );
     showLottoBundle(lottoBundle);
 
-    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(
-        WinningNums.valueOf(showWinningNums()),BonusNum.valueOf(showBonusNumInput())
-    );
+    WinningNums winningNums = WinningNums.valueOf(showWinningNums());
+    BonusNum bonusNum = BonusNum.valueOf(showBonusNumInput(), winningNums);
+    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(winningNums, bonusNum);
+
     showLottoPrize(lottoPrizeList);
     showReturnRate(ReturnRateCalculator.calculate(price, LottoPrize.getTotalPrize(lottoPrizeList)));
   }
