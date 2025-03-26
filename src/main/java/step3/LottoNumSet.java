@@ -20,6 +20,11 @@ public class LottoNumSet {
         }
     }
 
+    public boolean contains(LottoNum lottoNum) {
+        return lottoNumSet.contains(lottoNum);
+    }
+
+
     public Set<LottoNum> getLottoNumSet() {
         return lottoNumSet;
     }

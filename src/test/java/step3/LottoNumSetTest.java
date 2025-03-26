@@ -55,4 +55,18 @@ public class LottoNumSetTest {
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("로또 숫자는 6개여야합니다.");
     }
+
+    @Test
+    void 숫자가_포함되는지_확인하는_메서드() {
+        LottoNumSet lottoNumSet = new LottoNumSet(List.of(
+                new LottoNum(1),
+                new LottoNum(2),
+                new LottoNum(3),
+                new LottoNum(4),
+                new LottoNum(5),
+                new LottoNum(6)
+        ));
+        assertThat(lottoNumSet.contains(new LottoNum(1))).isTrue();
+        assertThat(lottoNumSet.contains(new LottoNum(7))).isFalse();
+    }
 }
