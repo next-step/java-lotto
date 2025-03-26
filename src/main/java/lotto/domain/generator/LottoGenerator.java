@@ -12,6 +12,9 @@ public class LottoGenerator {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_PRICE = 1000;
 
+    private LottoGenerator() {
+    }
+
     public static Lottos generateLottosByAmount(int amount) {
         if (amount % LOTTO_PRICE != 0) {
             String messageFormat = "거스름돈이 생기지 않는 구입금액을 입력하여야 합니다. 현재 입력 구입금액: %d (로또 1장 금액: %d)";
