@@ -54,7 +54,7 @@ public class Formula {
     }
   }
 
-  public String[] getTokens() {
-    return tokens.clone();
+  public int calculateBy(Calculator calculator) {
+    return calculator.calculate(tokens.clone());
   }
 }

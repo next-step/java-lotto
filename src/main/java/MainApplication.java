@@ -6,8 +6,7 @@ public class MainApplication {
     ResultView resultView = new ResultView();
     Calculator calculator = new Calculator();
 
-    int result = calculator.calculate(formula.getTokens());
-
+    int result = formula.calculateBy(calculator);
     resultView.showResult(result);
   }
 }

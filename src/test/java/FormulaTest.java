@@ -12,6 +12,13 @@ class FormulaTest {
   }
 
   @Test
+  void 공백_문자열_입력_시_예외_발생() {
+    assertThatThrownBy(() -> new Formula("   "))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("식은 빈 값일 수 없습니다.");
+  }
+
+  @Test
   void 식은_숫자로_시작해야_한다() {
     assertThatThrownBy(() -> new Formula("+ 2 * 3"))
         .isInstanceOf(IllegalArgumentException.class)
