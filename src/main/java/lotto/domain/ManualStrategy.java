@@ -15,7 +15,7 @@ public class ManualStrategy implements GeneratorStrategy {
     public Lotto generate() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String number : input.split(REGEX)) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(number)));
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(number.strip())));
         }
         return new Lotto(lottoNumbers);
     }

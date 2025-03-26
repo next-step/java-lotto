@@ -10,7 +10,7 @@ class ManualStrategyTest {
     @Test
     void generateTest() {
         // given
-        ManualStrategy manualStrategy = new ManualStrategy("1,2,3,4,5,6");
+        ManualStrategy manualStrategy = new ManualStrategy("1, 2, 3, 4, 5, 6");
 
         // when
         Lotto lotto = manualStrategy.generate();
