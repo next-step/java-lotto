@@ -1,3 +1,5 @@
+package calculator;
+
 public class ResultView {
 
   public void showResult(int result) {
