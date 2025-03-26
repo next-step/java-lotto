@@ -1,12 +1,13 @@
 package step2.domain;
 
 public class MatchResult {
-    private final int matchedCount;
+    private final Rank rank;
 
     public MatchResult(int matchedCount) {
-        this.matchedCount = matchedCount;
+        this.rank = Rank.from(matchedCount);
     }
-    public int getMatchedCount() {
-        return matchedCount;
+
+    public Rank getRank() {
+        return rank;
     }
 }
