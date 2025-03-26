@@ -1,36 +1,38 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoReport {
 
-  private static final String TOTAL_PRIZE_RATE = "총 수익률은 %.2f입니다.";
-  private final Lotto winningLotto;
-  private final Lottos lottos;
+  private static final String TOTAL_PRIZE_RATE_FORMAT = "총 수익률은 %.2f입니다.";
+  private static final String TOTAL_COUNT_FORMAT = "%d개 일치 (%d원)- %d개";
 
-  public LottoReport(Lotto winningLotto, Lottos lottos) {
-    this.winningLotto = winningLotto;
-    this.lottos = lottos;
+  private final LottoReward lottoReward;
+  private final PurchaseAmount purchaseAmount;
+
+  public LottoReport(PurchaseAmount purchaseAmount, Lotto winningLotto, Lottos lottos) {
+    this.lottoReward = new LottoReward(lottos, winningLotto);
+    this.purchaseAmount = purchaseAmount;
   }
 
   public String createCountReport() {
-    Map<LottoPrize, Integer> prizeCounts = lottos.calculatePrize(winningLotto);
-    return Arrays.stream(LottoPrize.values())
-            .filter(prizeCounts::containsKey)
-            .sorted(Comparator.comparingInt(LottoPrize::getMatchCount))
-            .map(prize -> prize.getPrizeAndCountStatus(prizeCounts.get(prize)))
-            .collect(Collectors.joining("\n"));
+    List<String> countReportContent = new ArrayList<>();
+
+    for (LottoPrize prize : LottoPrize.values()) {
+      int count = lottoReward.getPrizeCount(prize);
+      countReportContent.add(getPrizeAndCountStatus(prize, count));
+    }
+    return String.join("\n", countReportContent);
+  }
+
+  private String getPrizeAndCountStatus(LottoPrize prize, int count) {
+    return String.format(TOTAL_COUNT_FORMAT, prize.getMatchCount(), prize.getPrizeMoney(), count);
   }
 
   public String createMoneyReport() {
-    Map<LottoPrize, Integer> prizeCounts = lottos.calculatePrize(winningLotto);
-    int totalMoney = prizeCounts.entrySet().stream()
-            .map(entry -> entry.getKey().getTotalPrizeMoney(entry.getValue()))
-            .reduce(Integer::sum).orElse(0);
-
-    return String.format(TOTAL_PRIZE_RATE, (double) totalMoney / (lottos.getCount() * Lotto.PRICE));
+    int totalMoney = lottoReward.calculateTotalWinningMoney();
+    double totalRevenue = purchaseAmount.calculateProfitRate(totalMoney);
+    return String.format(TOTAL_PRIZE_RATE_FORMAT, totalRevenue);
   }
 }

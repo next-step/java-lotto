@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -21,16 +19,9 @@ public class Lottos {
     lottoList.forEach(lotto -> System.out.println(lotto.getNumberRepresentation()));
   }
 
-  public Map<LottoPrize, Integer> calculatePrize(Lotto winningLotto) {
-    Map<LottoPrize, Integer> prizeMap = Arrays.stream(LottoPrize.values())
-            .collect(Collectors.toMap(prize -> prize, prize -> 0));
-    for (Lotto lotto : lottoList) {
-      int count = lotto.countMatchingNumbers(winningLotto);
-      if (count < LottoPrize.THREE_MATCHES.getMatchCount()) {
-        continue;
-      }
-      prizeMap.put(LottoPrize.fromMatchCount(count), prizeMap.get(LottoPrize.fromMatchCount(count)) + 1);
-    }
-    return prizeMap;
+  public List<Integer> countMatchingNumbers(Lotto winningLotto) {
+    return lottoList.stream().map(
+        lotto -> lotto.countMatchingNumbers(winningLotto)
+    ).collect(Collectors.toList());
   }
 }

@@ -1,6 +1,8 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public enum LottoPrize {
   THREE_MATCHES(3, 5000),
@@ -16,22 +18,24 @@ public enum LottoPrize {
     this.prizeMoney = prizeMoney;
   }
 
-  public static LottoPrize fromMatchCount(int count) {
+  public static LottoPrize getPrizeFromMatchCount(int count) {
     return Arrays.stream(values())
             .filter(prize -> prize.matchCount == count)
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("일치하는 LottoPrize가 없습니다."));
   }
 
-  public String getPrizeAndCountStatus(int count) {
-    return String.format("%d개 일치 (%d원)- %d개", matchCount, prizeMoney, count);
-  }
-
-  public int getTotalPrizeMoney(int count) {
-    return count * prizeMoney;
+  public static Set<Integer> getAllMatchCounts() {
+    return Arrays.stream(values())
+            .map(prize -> prize.matchCount)
+            .collect(Collectors.toSet());
   }
 
   public int getMatchCount() {
     return matchCount;
+  }
+
+  public int getPrizeMoney() {
+    return prizeMoney;
   }
 }

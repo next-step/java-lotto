@@ -14,20 +14,20 @@ public class LottoGame {
   }
 
   public void play() {
-    int money = receiveMoney();
-    Lottos lottos = buyLottos(money);
+    PurchaseAmount purchaseAmount = receiveMoney();
+    Lottos lottos = buyLottos(purchaseAmount);
     Lotto winningLotto = receiveWinningLotto();
-    printResult(winningLotto, lottos);
+    printResult(purchaseAmount, winningLotto, lottos);
   }
 
-  private int receiveMoney() {
+  private PurchaseAmount receiveMoney() {
     InputView inputView = new InputView(scanner);
     return inputView.receiveMoney();
   }
 
-  private Lottos buyLottos(int money) {
+  private Lottos buyLottos(PurchaseAmount purchaseAmount) {
     LottoShop lottoShop = new LottoShop(new RandomLottoGenerator());
-    Lottos lottos = lottoShop.buyLottos(money);
+    Lottos lottos = lottoShop.buyLottos(purchaseAmount);
     ResultView.printLottoCount(lottos);
     ResultView.printLottos(lottos);
     return lottos;
@@ -39,8 +39,8 @@ public class LottoGame {
     return new Lotto(winninLottoNumbers);
   }
 
-  private void printResult(Lotto winningLotto, Lottos lottos) {
-    LottoReport lottoReport = new LottoReport(winningLotto, lottos);
+  private void printResult(PurchaseAmount purchaseAmount, Lotto winningLotto, Lottos lottos) {
+    LottoReport lottoReport = new LottoReport(purchaseAmount, winningLotto, lottos);
     ResultView.printStatistics(lottoReport);
   }
 }

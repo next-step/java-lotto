@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.PurchaseAmount;
 import java.util.Scanner;
 
 public class InputView {
@@ -9,12 +10,12 @@ public class InputView {
     this.scanner = scanner;
   }
 
-  public int receiveMoney() {
+  public PurchaseAmount receiveMoney() {
     System.out.println("구입금액을 입력해 주세요.");
     try {
       int money = scanner.nextInt();
       scanner.nextLine();
-      return money;
+      return new PurchaseAmount(money);
     } catch (Exception e) {
       throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
     }
