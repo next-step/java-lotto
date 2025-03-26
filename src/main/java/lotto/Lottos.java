@@ -3,20 +3,20 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoList {
-    private List<Lotto> lottoList;
+public class Lottos {
+    private List<Lotto> lottos;
 
-    public LottoList(int count) {
-        lottoList = new ArrayList<>();
+    public Lottos(int count) {
+        lottos = new ArrayList<>();
         for (int i = 0; i < count; ++i) {
-            lottoList.add(new Lotto());
+            lottos.add(new Lotto());
         }
     }
 
-    public LottoList(int count, List<Lotto> lottos) {
-        lottoList = new ArrayList<>();
+    public Lottos(int count, List<Lotto> lottos) {
+        this.lottos = new ArrayList<>();
         for (int i = 0; i < count; ++i) {
-            lottoList.add(lottos.get(i));
+            this.lottos.add(lottos.get(i));
         }
     }
 }
