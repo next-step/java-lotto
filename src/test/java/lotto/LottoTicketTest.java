@@ -12,8 +12,7 @@ class LottoTicketTest {
     @DisplayName("구매한 로또 개수 구하기")
     void 구매_로또_개수_계산() {
         int money = 14000;
-        int price = 1000;
-        LottoTicket lotto = new LottoTicket(money / price);
+        LottoTicket lotto = new LottoTicket(money);
 
         assertThat(lotto.getCount()).isEqualTo(14);
     }

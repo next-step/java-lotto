@@ -14,7 +14,7 @@ class LottoRowTest {
     @Test
     @DisplayName("로또 번호 한줄 생성")
     void 로또_번호_한줄_생성() {
-        List<Integer> numbers = new ArrayList<>(List.of(30,31,1,5,9,6));
+        List<Integer> numbers = new ArrayList<>(List.of(1, 5, 6, 9, 30, 31));
         LottoRow expectedLottoRow = new LottoRow(List.of(1, 5, 6, 9, 30, 31));
 
         LottoRow lottoRow = new LottoRow(numbers);

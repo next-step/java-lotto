@@ -18,6 +18,7 @@ public class GenerateNumber {
 
     public List<Integer> generateRandomNumbers() {
         Collections.shuffle(numbers);
+        Collections.sort(numbers);
         return numbers.subList(0,6);
     }
 
