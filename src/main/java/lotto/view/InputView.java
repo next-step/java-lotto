@@ -17,4 +17,11 @@ public class InputView {
     System.out.printf("%n지난 주 당첨 번호를 입력해 주세요.%n");
     return SCANNER.nextLine();
   }
+
+  public static int showBonusNumInput() {
+    System.out.println("보너스 볼을 입력해 주세요.");
+    int bonusNum = SCANNER.nextInt();
+    SCANNER.nextLine();
+    return bonusNum;
+  }
 }
