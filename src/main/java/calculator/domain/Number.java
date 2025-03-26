@@ -1,7 +1,7 @@
-package calculator;
+package calculator.domain;
 
-import calculator.exception.InvalidNumberInputException;
-import calculator.exception.UnexpectedCharacterException;
+import calculator.domain.exception.InvalidNumberInputException;
+import calculator.domain.exception.UnexpectedCharacterException;
 import java.util.Objects;
 
 public class Number {

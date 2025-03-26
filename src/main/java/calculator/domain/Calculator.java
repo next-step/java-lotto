@@ -1,6 +1,6 @@
-package calculator;
+package calculator.domain;
 
-import calculator.exception.UnexpectedOperatorException;
+import calculator.domain.exception.UnexpectedOperatorException;
 
 public class Calculator {
 

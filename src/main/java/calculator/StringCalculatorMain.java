@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.domain.Calculator;
+
 public class StringCalculatorMain {
 
     public static void main(String[] args) {

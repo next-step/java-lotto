@@ -1,4 +1,4 @@
-package calculator.exception;
+package calculator.domain.exception;
 
 public class UnexpectedOperatorException extends RuntimeException {
 
