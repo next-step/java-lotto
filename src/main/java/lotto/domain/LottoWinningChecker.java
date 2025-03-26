@@ -12,6 +12,7 @@ public class LottoWinningChecker {
             int matchCount = getMatchCount(winLotto.getLottoNumbers(), lotto.getLottoNumbers());
             ranks.put(matchCount, ranks.getOrDefault(matchCount, 0) + 1);
         }
+        LottoProfit.calculate(ranks, lottos.size());
     }
 
     private int getMatchCount(List<LottoNumber> lottoNumbers, List<LottoNumber> winNumbers) {
