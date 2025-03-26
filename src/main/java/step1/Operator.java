@@ -1,36 +1,25 @@
 package step1;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+") {
-        public int apply(int a, int b) {
-            return a + b;
-        }
-    },
-    MINUS("-") {
-        public int apply(int a, int b) {
-            return a - b;
-        }
-    },
-    MULTIPLY("*") {
-        public int apply(int a, int b) {
-            return a * b;
-        }
-    },
-    DIVIDE("/") {
-        public int apply(int a, int b) {
-            return a / b;
-        }
-    };
+    PLUS("+", (a, b) -> a + b),
+    MINUS("-", (a, b) -> a - b),
+    MULTIPLY("*", (a, b) -> a * b),
+    DIVIDE("/", (a, b) -> a / b);
 
     private final String symbol;
+    private final BiFunction<Integer, Integer, Integer> operation;
 
-    Operator(String symbol) {
+    Operator(String symbol, BiFunction<Integer, Integer, Integer> operation) {
         this.symbol = symbol;
+        this.operation = operation;
     }
 
-    public abstract int apply(int a, int b);
+    public int apply(int a, int b) {
+        return operation.apply(a, b);
+    }
 
     public static Operator from(String symbol) {
         return Arrays.stream(values())
