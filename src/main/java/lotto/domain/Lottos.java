@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.Prize;
 import lotto.util.TotalNumbers;
 
 import java.util.*;
@@ -42,6 +43,19 @@ public class Lottos {
             matchNums.put(matchNum, matchNums.getOrDefault(matchNum, 0) + 1);
         }
         return matchNums;
+    }
+
+    public float calculateROI(Map<Integer, Integer> matchNums) {
+        if (lottos.isEmpty()) {
+            return 0;
+        }
+
+        long result = 0;
+        for (Prize prize : Prize.values()) {
+            result += (long) prize.money() * matchNums.getOrDefault(prize.number(), 0);
+        }
+
+        return (float) result / (lottos.size() * LOTTO_PRICE);
     }
 
     public boolean isAllValidRange() {

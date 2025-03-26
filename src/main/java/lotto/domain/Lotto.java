@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -13,13 +13,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto from(List<Integer> numbers) {
-        return new Lotto(
-                numbers.stream()
-                        .sorted(Comparator.comparingInt(Integer::intValue))
-                        .map(Number::new)
-                        .collect(Collectors.toList())
-        );
+    public static Lotto from(String input) {
+        return new Lotto(Arrays.stream(input.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .sorted()
+                .map(Number::new)
+                .collect(Collectors.toList()));
     }
 
     public String combine(String seperator) {

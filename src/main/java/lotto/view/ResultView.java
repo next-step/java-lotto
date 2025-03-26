@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.util.Prize;
-import lotto.util.Reporter;
 
 import java.util.Map;
 
@@ -31,7 +30,8 @@ public class ResultView {
                     .append(matchNums.getOrDefault(prize.number(), 0))
                     .append("개)\n");
         }
-        sb.append("총 수익률은 ").append(Reporter.getROI(matchNums, lottos.getSize())).append("입니다\n");
+
+        sb.append("총 수익률은 ").append(lottos.calculateROI(matchNums)).append("입니다\n");
         System.out.println(sb);
     }
 }
