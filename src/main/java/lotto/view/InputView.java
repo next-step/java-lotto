@@ -13,10 +13,9 @@ public class InputView {
   public PurchaseAmount receiveMoney() {
     System.out.println("구입금액을 입력해 주세요.");
     try {
-      int money = scanner.nextInt();
-      scanner.nextLine();
+      int money = Integer.parseInt(scanner.nextLine().trim());
       return new PurchaseAmount(money);
-    } catch (Exception e) {
+    } catch (NumberFormatException e) {
       throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
     }
   }
