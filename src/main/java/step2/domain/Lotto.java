@@ -21,4 +21,14 @@ public class Lotto {
                 .filter(winningNums::contains)
                 .count();
     }
+
+    public Set<LottoNum> getNumbers() {
+        return lotto;
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
+
+    }
 }

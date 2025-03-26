@@ -21,14 +21,19 @@ public class LottoNum {
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj) return true;
-        if(!(obj instanceof LottoNum)) return false;
-        LottoNum other = (LottoNum)obj;
+        if (this == obj) return true;
+        if (!(obj instanceof LottoNum)) return false;
+        LottoNum other = (LottoNum) obj;
         return num == other.num;
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(num);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(num);
     }
 }
