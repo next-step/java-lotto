@@ -2,7 +2,6 @@ package views;
 
 import data.Messages;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;

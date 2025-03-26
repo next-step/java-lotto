@@ -12,8 +12,8 @@ public class LottoMain {
         int ticketCount = InputView.inputBuyAmountGetTicketCount();
 
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++){
-            lottos.add(new Lotto().auto());
+        for (int i = 0; i < ticketCount; i++) {
+            lottos.add(new Lotto());
         }
 
         ResultView.printLottoNumber(lottos);

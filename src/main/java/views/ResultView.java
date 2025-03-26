@@ -2,6 +2,7 @@ package views;
 
 import data.Messages;
 import domain.Lotto;
+import domain.PrizeEnum;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -11,13 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-
-    private static final Map<Long, BigDecimal> prizeMap = new HashMap<>() {{
-        put(3L, BigDecimal.valueOf(5000));
-        put(4L, BigDecimal.valueOf(50000));
-        put(5L, BigDecimal.valueOf(1500000));
-        put(6L, BigDecimal.valueOf(2000000000));
-    }};
 
     public static void println(int num) {
         System.out.println(num);
@@ -43,13 +37,13 @@ public class ResultView {
 
         BigDecimal sumPrizeAmount = BigDecimal.ZERO;
 
-        for (Map.Entry<Long, BigDecimal> entry : prizeMap.entrySet()) {
+        for (PrizeEnum prizeEnum : PrizeEnum.values()) {
 
-            long exactCnt = entry.getKey();
-            BigDecimal prizeAmt = entry.getValue();
-            int exactTicketCnt = summaryMap.getOrDefault(entry.getKey(), 0);
+            long hitCnt = prizeEnum.getHit();
+            BigDecimal prizeAmt = prizeEnum.getPrizeAmt();
+            int exactTicketCnt = summaryMap.getOrDefault(hitCnt, 0);
 
-            System.out.printf(Messages.PRIZE_RESULT, exactCnt, prizeAmt.intValue(), exactTicketCnt);
+            System.out.printf(Messages.PRIZE_RESULT, hitCnt, prizeAmt.toPlainString(), exactTicketCnt);
 
             sumPrizeAmount = sumPrizeAmount.add(prizeAmt.multiply(BigDecimal.valueOf(exactTicketCnt)));
         }

@@ -1,6 +1,5 @@
 package calculator;
 
-
 import data.Messages;
 
 import java.util.Arrays;
