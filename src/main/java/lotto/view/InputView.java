@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Amount;
 import lotto.domain.Lotto;
+import lotto.domain.Number;
 
 import java.util.Scanner;
 
@@ -18,5 +19,12 @@ public class InputView {
     public static Lotto winningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return Lotto.from(scanner.nextLine());
+    }
+
+    public static Number BonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int number = scanner.nextInt();
+        scanner.nextLine();
+        return new Number(number);
     }
 }

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.util.Rank;
 import lotto.util.TotalNumbers;
 
 import java.util.*;
@@ -36,26 +35,24 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Integer, Integer> getMatchNums(Lotto winningNumbers) {
-        Map<Integer, Integer> matchNums = new HashMap<>();
-        for (Lotto lotto : lottos) {
-            int matchNum = lotto.getMatchNum(winningNumbers);
-            matchNums.put(matchNum, matchNums.getOrDefault(matchNum, 0) + 1);
-        }
-        return matchNums;
+    public List<Rank> getRanks(Lotto winningNumbers, Number bonusNumber) {
+        return lottos.stream()
+                .map(lotto -> lotto.getRank(winningNumbers, bonusNumber))
+                .collect(Collectors.toList());
     }
 
-    public float calculateROI(Map<Integer, Integer> matchNums) {
-        if (lottos.isEmpty()) {
-            return 0;
-        }
+    public float calculateROI(List<Rank> ranks) {
+        return (float) totalWinningMoney(ranks) / totalPayment();
+    }
 
-        long result = 0;
-        for (Rank rank : Rank.values()) {
-            result += (long) rank.winningMoney() * matchNums.getOrDefault(rank.countOfMatch(), 0);
-        }
+    private long totalWinningMoney(List<Rank> ranks) {
+        return ranks.stream()
+            .mapToInt(Rank::winningMoney)
+            .sum();
+    }
 
-        return (float) result / (lottos.size() * LOTTO_PRICE);
+    private long totalPayment() {
+        return (long) lottos.size() * LOTTO_PRICE;
     }
 
     public boolean isAllValidRange() {

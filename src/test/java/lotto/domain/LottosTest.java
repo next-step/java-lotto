@@ -3,16 +3,15 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static lotto.util.Price.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
     @Test
-    void 당첨_개수() {
-        Lottos lottos = new Lottos(List.of(Lotto.from("1,2,3,4,5,6"), Lotto.from("4,5,6,7,8,9")));
-        assertThat(lottos.getMatchNums(Lotto.from("4,5,6,11,12,13"))).isEqualTo(Map.of(3, 2));
+    void 당첨_등수() {
+        Lottos lottos = new Lottos(List.of(Lotto.from("1,2,3,4,5,6"), Lotto.from("1,2,3,4,5,44")));
+        assertThat(lottos.getRanks(Lotto.from("1,2,3,4,5,12"), new Number(6))).isEqualTo(List.of(Rank.SECOND, Rank.THIRD));
     }
 
     @Test
@@ -36,7 +35,7 @@ public class LottosTest {
     @Test
     void ROI_계산() {
         Lottos lottos = new Lottos(List.of(Lotto.from("1,2,3,4,5,6")));
-        Map<Integer, Integer> matchNums = lottos.getMatchNums(Lotto.from("1,2,3,11,12,13"));
-        assertThat(lottos.calculateROI(matchNums)).isEqualTo(5f);
+        List<Rank> ranks = lottos.getRanks(Lotto.from("1,2,3,4,12,13"), new Number(5));
+        assertThat(lottos.calculateROI(ranks)).isEqualTo(50f);
     }
 }
