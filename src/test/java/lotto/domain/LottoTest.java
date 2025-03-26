@@ -9,18 +9,19 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoTest {
 
     @Test
-    @DisplayName("사용자는 요구사항에 따라 입력할 수 있다.")
-    public void inputTest() {
-        FakeInputView inputView = new FakeInputView("10000");
-        assertThat(inputView.read()).isEqualTo("10000");
-    }
-
-    @Test
     @DisplayName("사용자는 구매 금액을 입력할 수 있다.")
     public void lottoTest() {
         FakeInputView inputView = new FakeInputView("10000");
         Money money = new Money(inputView.parseInt());
         assertThat(money).isEqualTo(new Money(10000));
     }
+
+    @Test
+    @DisplayName("로또 번호를 자동으로 생성할 수 있다.")
+    public void makeLotto() {
+        Lotto lotto = new Lotto();
+        assertThat(lotto.getLottoNumbersCount()).isEqualTo(6);
+    }
+
 
 }
