@@ -4,13 +4,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoTicketMachineTest {
+public class LottoTicketTicketMachineTest {
 
     @Test
     @DisplayName("로또 발행한다.")
     void lottoIssueTest() {
         var lotto = LottoTicketMachine.issue();
 
-        Assertions.assertThat(lotto).isInstanceOf(Lotto.class);
+        Assertions.assertThat(lotto).isInstanceOf(LottoTicket.class);
     }
 }
