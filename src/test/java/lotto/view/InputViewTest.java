@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.PurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,9 +21,9 @@ class InputViewTest {
     String testInput = "1000\n";
     InputView inputView = new InputView(getTestScanner(testInput));
 
-    int actual = inputView.receiveMoney();
+    PurchaseAmount actual = inputView.receiveMoney();
 
-    assertEquals(1000, actual);
+    assertEquals(new PurchaseAmount(1000), actual);
   }
 
   @DisplayName("숫자가 아닌 금액을 입력받을 시 에러")
