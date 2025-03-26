@@ -41,12 +41,10 @@ public class LottoRow {
     }
 
     public int isContainCount(LottoRow winningNumbers) {
-        List<Integer> winningSet = new ArrayList<>(winningNumbers.getLottoNumbers());
+        List<Integer> winningList = winningNumbers.getLottoNumbers();
 
-        return (int) winningNumbers.getLottoNumbers().stream()
-            .filter(winningSet::contains)
+        return (int) this.getLottoNumbers().stream()
+            .filter(winningList::contains)
             .count();
     }
-
-
 }

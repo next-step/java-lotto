@@ -18,6 +18,11 @@ public class LottoTicket {
         }
     }
 
+    public LottoTicket(List<LottoRow> rows) {
+        this.count = rows.size();
+        this.lottoRowList.addAll(rows);
+    }
+
     public int getCount() {
         return count;
     }
