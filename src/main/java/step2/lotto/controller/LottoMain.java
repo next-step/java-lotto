@@ -1,12 +1,11 @@
 package step2.lotto.controller;
 
-import java.util.stream.IntStream;
 import step2.lotto.model.Count;
+import step2.lotto.model.LottoMachine;
 import step2.lotto.model.LottoResult;
 import step2.lotto.model.LottoTicket;
 import step2.lotto.model.LottoTicketList;
 import step2.lotto.model.Money;
-import step2.lotto.model.PrizeMoney;
 import step2.lotto.view.InputView;
 import step2.lotto.view.ResultView;
 
@@ -20,8 +19,8 @@ public class LottoMain {
         String purchaseAmount = inputView.getPurchaseAmount();
         Money money = new Money(purchaseAmount);
 
-        LottoApp lottoApp = new LottoApp();
-        LottoTicketList lottoTicketList = lottoApp.buyLottoTickets(money);
+        LottoMachine lottoMachine = new LottoMachine();
+        LottoTicketList lottoTicketList = lottoMachine.buyLottoTickets(money);
         resultView.printLottoTicketCount(lottoTicketList);
 
         String winningNumbers = inputView.getLastWeekWinningNumbers();
