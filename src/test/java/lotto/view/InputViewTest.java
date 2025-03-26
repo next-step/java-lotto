@@ -1,8 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Money;
 import lotto.domain.UserPaid;
+import lotto.domain.product.LotteryTicket;
 import lotto.view.fake.FakeInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,8 +22,8 @@ public class InputViewTest {
     public void countLottoTest() {
         FakeInputView inputView = new FakeInputView("10000");
 
-        Integer count = new UserPaid(new Money(inputView.parseInt()))
-                .getUserCountBy(new Lotto());
+        Integer count = new UserPaid(inputView.read())
+                .getUserCountBy(new LotteryTicket());
         assertThat(count).isEqualTo(10);
     }
 
@@ -32,7 +31,7 @@ public class InputViewTest {
     @DisplayName("사용자는 최종 로또 번호를 입력할 수 있다.")
     public void makeInputLottoNumber() {
         FakeInputView inputView = new FakeInputView("5, 6, 7, 8, 9, 10");
-        Lotto lotto = new Lotto(inputView.read());
-        assertThat(lotto.getLottoNumbersCount()).isEqualTo(6);
+        LotteryTicket lotteryTicket = new LotteryTicket(inputView.read());
+        assertThat(lotteryTicket.getLottoNumbersCount()).isEqualTo(6);
     }
 }
