@@ -13,7 +13,7 @@ public class LottoContainer {
 
         lottos = new ArrayList<>(lottoCount);
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(List.of(1,2,3,4,5,6)));
         }
     }
 
