@@ -9,16 +9,6 @@ import java.util.Set;
 
 public class BasicLottoStrategy implements LottoStrategy {
 
-    private final Set<LottoNum> lottoNumbers;
-
-    public BasicLottoStrategy() {
-        this.lottoNumbers = generateLottoNumbers();
-    }
-
-    public Set<LottoNum> getLottoNumbers() {
-        return Set.copyOf(lottoNumbers);
-    }
-
     @Override
     public Set<LottoNum> generateLottoNumbers() {
         return toSet(pick(shuffle(generateNumbers())));
@@ -33,8 +23,9 @@ public class BasicLottoStrategy implements LottoStrategy {
     }
 
     private List<LottoNum> shuffle(List<LottoNum> lottoNumbers) {
-        Collections.shuffle(new ArrayList<>(lottoNumbers));
-        return lottoNumbers;
+        List<LottoNum> lottoNums = new ArrayList<>(lottoNumbers);
+        Collections.shuffle(lottoNums);
+        return lottoNums;
     }
 
     private List<LottoNum> pick(List<LottoNum> lottoNumbers) {
