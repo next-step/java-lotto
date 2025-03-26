@@ -1,6 +1,7 @@
 package lotto.domain.generator;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 
 import java.util.ArrayList;
@@ -11,9 +12,8 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
     private static final int LOTTO_PICK_COUNT = 6;
-    private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_PRICE = 1000;
-    private static final List<Integer> LOTTO_NUMBER_CACHE = IntStream.rangeClosed(1, LOTTO_MAX_NUMBER)
+    private static final List<Integer> LOTTO_NUMBER_CACHE = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 
@@ -41,7 +41,7 @@ public class LottoGenerator {
     public static Lotto generate() {
         Collections.shuffle(LOTTO_NUMBER_CACHE);
 
-        List<Integer> lottoNumbers = numbers.subList(0, LOTTO_PICK_COUNT);
+        List<Integer> lottoNumbers = LOTTO_NUMBER_CACHE.subList(0, LOTTO_PICK_COUNT);
         Collections.sort(lottoNumbers);
 
         return new Lotto(lottoNumbers);

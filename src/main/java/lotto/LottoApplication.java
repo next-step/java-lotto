@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.Customer;
-import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,9 +11,8 @@ public class LottoApplication {
 
         OutputView.printLottos(customer.getLottos());
 
-        Lottos lottos = customer.getLottos();
-        lottos.determineAllLottoResult(InputView.getWinningNumbers());
-        OutputView.printStatistics(lottos.getStatistics());
+        customer.compareAllLotto(InputView.getWinningNumbers());
+//        OutputView.printStatistics(lottos.getStatistics());
 
         OutputView.printROI(customer.calculateROI());
     }

@@ -2,13 +2,14 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
     private Rank rank;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = List.copyOf(numbers);
+        this.numbers = List.copyOf(convertToLottoNumber(numbers));
         this.rank = Rank.PENDING;
     }
 
@@ -17,20 +18,26 @@ public class Lotto {
         this.rank = rank;
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    public void determineLottoResult(List<Integer> winningNumbers) {
+    public void determineLottoResult(List<LottoNumber> winningNumbers) {
         int matchCount = 0;
 
-        for (Integer number : numbers) {
+        for (LottoNumber number : numbers) {
             if (winningNumbers.contains(number)) {
                 matchCount++;
             }
         }
 
         rank = Rank.getRankByMatchCount(matchCount);
+    }
+
+    private List<LottoNumber> convertToLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public Rank getRank() {
@@ -40,5 +47,4 @@ public class Lotto {
     public int getPrize() {
         return rank.getPrize();
     }
-
 }

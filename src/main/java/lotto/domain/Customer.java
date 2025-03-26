@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.domain.generator.LottoGenerator;
 
+import java.util.List;
+
 public class Customer {
     private int purchaseAmount;
     private Lottos lottos;
@@ -15,12 +17,16 @@ public class Customer {
     }
 
     public void purchaseLottos(int purchaseAmount) {
-        if(purchaseAmount <= 0) {
+        if (purchaseAmount <= 0) {
             throw new IllegalArgumentException("구입금액은 0 이하일 수 없습니다. 입력한 구입금액: " + purchaseAmount);
         }
 
         this.purchaseAmount = purchaseAmount;
         this.lottos = LottoGenerator.generateLottosByAmount(purchaseAmount);
+    }
+
+    public void compareAllLotto(List<LottoNumber> winningNumbers) {
+        lottos.determineAllLottoResult(winningNumbers);
     }
 
     public double calculateROI() {

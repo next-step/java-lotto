@@ -1,12 +1,14 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +16,9 @@ class LottosTest {
 
     @Test
     public void 구매한_전체_로또의_당첨_통계를_반환한다() {
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> winningNumbers = List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
 
         Lotto firstRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto thirdRankLotto = new Lotto(List.of(1, 2, 3, 4, 10, 20));

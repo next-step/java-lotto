@@ -1,11 +1,13 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.generator.LottoGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,7 +16,9 @@ class LottoTest {
 
     @Test
     public void 당첨번호와_로또정보를_기반으로_등수정보를_반환한다() {
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> winningNumbers = List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
 
         Lotto firstRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         firstRankLotto.determineLottoResult(winningNumbers);
@@ -32,8 +36,8 @@ class LottoTest {
 
     @Test
     public void 생성된_로또_번호에_대해_조작연산을_진행하면_예외_발생() {
-        List<Integer> numbers = LottoGenerator.generate().getNumbers();
-        assertThatThrownBy(() -> numbers.add(1))
+        List<LottoNumber> numbers = LottoGenerator.generate().getNumbers();
+        assertThatThrownBy(() -> numbers.add(new LottoNumber(1)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 }

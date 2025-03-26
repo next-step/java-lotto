@@ -11,7 +11,7 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
-    public void determineAllLottoResult(List<Integer> winningNumbers) {
+    public void determineAllLottoResult(List<LottoNumber> winningNumbers) {
         lottoList.forEach((lotto) -> lotto.determineLottoResult(winningNumbers));
     }
 
