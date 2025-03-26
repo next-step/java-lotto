@@ -15,13 +15,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos from(int inputPrice) {
+    public static Lottos from(Amount amount) {
         List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < inputPrice / LOTTO_PRICE; i++) {
+        for (int i = 0; i < amount.lottoCount(); i++) {
             Collections.shuffle(TotalNumbers.NUMBERS);
             result.add(new Lotto(TotalNumbers.NUMBERS.subList(0, 6)
                             .stream()
-                            .sorted(Comparator.comparingInt(Number::getValue))
+                            .sorted(Comparator.comparingInt(Number::value))
                             .collect(Collectors.toList())
             ));
         }

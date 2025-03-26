@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Amount;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.view.InputView;
@@ -13,8 +14,8 @@ public class Main {
     }
 
     private static Lottos purchageLottos() {
-        int inputPrice = InputView.purchase();
-        Lottos lottos = Lottos.from(inputPrice);
+        Amount amount = InputView.purchase();
+        Lottos lottos = Lottos.from(amount);
         ResultView.printLottos(lottos);
         return lottos;
     }

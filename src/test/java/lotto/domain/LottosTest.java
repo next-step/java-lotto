@@ -17,19 +17,19 @@ public class LottosTest {
 
     @Test
     void 가격으로_생성_시_개수_검증() {
-        Lottos lottos = Lottos.from(2000);
+        Lottos lottos = Lottos.from(new Amount(2000));
         assertThat(lottos.getSize()).isEqualTo(2000 / LOTTO_PRICE);
     }
 
     @Test
     void 가격으로_생성_시_값_검증() {
-        Lottos lottos = Lottos.from(2000);
+        Lottos lottos = Lottos.from(new Amount(2000));
         assertThat(lottos.isAllValidRange()).isTrue();
     }
 
     @Test
     void 가격으로_생성_시_정렬_검증() {
-        Lottos lottos = Lottos.from(2000);
+        Lottos lottos = Lottos.from(new Amount(2000));
         assertThat(lottos.isAllSorted()).isTrue();
     }
 
