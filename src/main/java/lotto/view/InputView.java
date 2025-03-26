@@ -1,6 +1,10 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
+import static lotto.util.StringUtil.split;
 
 public class InputView {
     private final Scanner scanner;
@@ -9,13 +13,15 @@ public class InputView {
         this.scanner = scanner;
     }
 
-    public String inputPurchaseAmount() {
+    public int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextLine();
+        return parseInt(scanner.nextLine());
     }
 
-    public String inputWinningNumbers() {
+    public List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        return split(scanner.nextLine());
     }
+
+
 }
