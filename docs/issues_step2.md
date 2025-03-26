@@ -15,5 +15,10 @@
 ### WinningLotto
 - Lotto와 WinningLotto 모두 일급 컬렉션
 - 두 객체를 비교하는 방법은?
-  - 두 객체의 필드는 모두 private이므로 getter를 한 쪽에서 꺼내야 함
-  - getter를 사용하지 않을 경우 package-private 메소드를 사용해야 함
+  - 두 객체의 필드는 모두 private이므로 getter를 한 쪽에서 꺼내야 함?
+  - getter를 사용하지 않을 경우 package-private 메소드를 사용해야 함?
+  - 두 객체는 각자의 요청을 메시지, 즉 **객체 자신의 메소드**로 보냄
+    - `Lotto.determineRank` <-> `WinningLotto.countMatchedNumbers`
+      - `countMatchedNumbers`는 `List<Integer>`를 파라미터로 받음
+      - `Lotto` 객체가 자신의 `determineRank`로 `winningLotto.countMatchedNumbers`를 호출,
+        `private` 필드인 `Lotto.lottoNumbers`를 파라미터로 보냄

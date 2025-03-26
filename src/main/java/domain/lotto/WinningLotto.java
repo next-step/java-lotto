@@ -1,6 +1,8 @@
 package domain.lotto;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class WinningLotto {
     public final List<Integer> winningNumbers;
@@ -9,15 +11,11 @@ public class WinningLotto {
         this.winningNumbers = winningNumbers;
     }
 
-    boolean hasSameNumbersWithSameOrder(List<Integer> numbers) {
-        boolean result = true;
-        for (int i = 0; i < numbers.size(); i++) {
-            result =  areSame(numbers.get(i), winningNumbers.get(i));
-        }
-        return result;
+    public int countMatchedNumbers(List<Integer> lottoNumbers) {
+        Set<Integer> winningSet = new HashSet<>(winningNumbers);
+        Set<Integer> lottoSet = new HashSet<>(lottoNumbers);
+        winningSet.retainAll(lottoSet);
+        return winningSet.size();
     }
 
-    private boolean areSame(int x, int y) {
-        return x == y;
-    }
 }
