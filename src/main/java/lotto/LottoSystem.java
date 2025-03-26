@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.generator.LottoNumGenerator;
 import lotto.generator.CollectionsShuffleStrategy;
+import lotto.generator.LottoNumGenerator;
 import lotto.type.BonusNum;
 import lotto.type.LottoBundle;
 import lotto.type.LottoPrize;

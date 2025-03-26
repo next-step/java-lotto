@@ -1,7 +1,8 @@
 package lotto;
 
 public class LottoSystemConstants {
-  private LottoSystemConstants() {}
+  private LottoSystemConstants() {
+  }
 
   public static final int LOTTO_MAX_NUM = 45;
 

@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 public class LottoNumGenerator {
 
   public LottoNumList generate(ShuffleStrategy shuffleStrategy) {
-    List<Integer> res =  IntStream
+    List<Integer> res = IntStream
         .rangeClosed(LottoSystemConstants.LOTTO_MIN_NUM, LottoSystemConstants.LOTTO_MAX_NUM)
         .boxed()
         .collect(Collectors.toList());

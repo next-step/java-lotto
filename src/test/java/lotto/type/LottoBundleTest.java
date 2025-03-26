@@ -42,10 +42,10 @@ class LottoBundleTest {
 
     assertAll(
         () -> assertThat(bundle.getLottoPrizes(
-            WinningNums.valueOf("1, 2, 3, 4, 5, 6"), BonusNum.valueOf(7,  WinningNums.valueOf("1, 2, 3, 4, 5, 6")))
+            WinningNums.valueOf("1, 2, 3, 4, 5, 6"), BonusNum.valueOf(7, WinningNums.valueOf("1, 2, 3, 4, 5, 6")))
         ).containsExactly(LottoPrize.SIX_MATCHES, LottoPrize.ZERO_MATCHES),
         () -> assertThat(bundle.getLottoPrizes(
-            WinningNums.valueOf("1, 2, 3, 4, 5, 7"), BonusNum.valueOf(6,  WinningNums.valueOf("1, 2, 3, 4, 5, 7")))
+            WinningNums.valueOf("1, 2, 3, 4, 5, 7"), BonusNum.valueOf(6, WinningNums.valueOf("1, 2, 3, 4, 5, 7")))
         ).containsExactly(LottoPrize.FIVE_WITH_BONUS_MATCHES, LottoPrize.ZERO_MATCHES),
         () -> assertThat(bundle.getLottoPrizes(
             WinningNums.valueOf("1, 2, 3, 4, 5, 7"), BonusNum.valueOf(8, WinningNums.valueOf("1, 2, 3, 4, 5, 7")))
