@@ -31,15 +31,12 @@
       - [x] 로또 구입 금액이 1000원 단위가 아닌 경우 IllegalArgumentException throw
       - [x] 로또 구입 금액이 0원 이하인 경우 IllegalArgumentException throw
     - [x] 리팩토링
-  - [ ] 로또 생성
-    - [x] 예외 처리 구현
-      - [x] 로또 번호가 6개가 아닌 경우 IllegalArgumentException throw
-      - [x] 로또 번호가 1~45 사이의 숫자가 아닌 경우 IllegalArgumentException throw
-      - [x] 로또 번호가 중복된 경우 IllegalArgumentException throw
-    - [ ] 리팩토링
+  - [x] 로또 생성
+    - [x] 조건에 맞는 무작위 번호 생성 구현
   - [ ] 지난 주 당첨 번호 입력
   - [ ] 당첨 통계 출력
   - [ ] 수익률 계산
+  - [ ] 리팩토링
 - [ ] Views 구현
   - [ ] InputView 구현
   - [ ] ResultView 구현
