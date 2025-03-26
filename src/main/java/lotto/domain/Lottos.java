@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
 import lotto.view.ResultView;
 
 import java.util.List;
@@ -23,9 +24,9 @@ public class Lottos {
         this.values = values;
     }
 
-    public Rewards getResult(WinningNumbers winningNumbers) {
+    public Rewards getResult(WinningNumbers winningNumbers, int bonusNumber) {
         return new Rewards(this.values.stream()
-                .map(value -> new Reward(winningNumbers.countNumberMatching(value)))
+                .map(lotto -> Rank.valueOf(winningNumbers.countNumberMatching(lotto), lotto.matchBonusNumber(bonusNumber)))
                 .collect(Collectors.toList()));
     }
 }

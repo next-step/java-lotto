@@ -29,6 +29,6 @@ public class WinningNumbers {
     }
 
     public int countNumberMatching(Lotto lotto) {
-        return lotto.confirmWinning(this.numbers);
+        return lotto.getMatchCount(this.numbers);
     }
 }
