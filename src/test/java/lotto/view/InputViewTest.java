@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.PurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
