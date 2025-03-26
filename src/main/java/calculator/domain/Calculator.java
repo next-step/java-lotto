@@ -41,35 +41,7 @@ public class Calculator {
     }
 
     private long calculateOnce(String operator, long number1, long number2) {
-        if (operator.equals("+")) {
-            return add(number1, number2);
-        } else if (operator.equals("-")) {
-            return subtract(number1, number2);
-        } else if (operator.equals("*")) {
-            return multiple(number1, number2);
-        } else if (operator.equals("/")) {
-            return divide(number1, number2);
-        }
-        throw new IllegalArgumentException("operator is not allowed except +,-,*,/");
-    }
-
-    private long add(long number1, long number2) {
-        return number1 + number2;
-    }
-
-    private long subtract(long number1, long number2) {
-        return number1 - number2;
-    }
-
-    private long multiple(long number1, long number2) {
-        return number1 * number2;
-    }
-
-    private long divide(long number1, long number2) {
-        long result = number1 / number2;
-        if (result * number2 != number1)
-            throw new IllegalArgumentException("result of division should be integer");
-        return result;
+        return Operator.of(operator).execute(number1, number2);
     }
 
 }
