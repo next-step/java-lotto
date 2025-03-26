@@ -1,28 +1,24 @@
 package domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
-    @Test
+    @ParameterizedTest
     @DisplayName("일치 개수에 따라 올바른 Rank를 반환한다")
-    void Rank_매치() {
-        assertThat(Rank.of(3)).isEqualTo(Rank.FOURTH);
-        assertThat(Rank.of(4)).isEqualTo(Rank.THIRD);
-        assertThat(Rank.of(5)).isEqualTo(Rank.SECOND);
-        assertThat(Rank.of(6)).isEqualTo(Rank.FIRST);
-        assertThat(Rank.of(2)).isNull();
+    @CsvSource({"3, FOURTH", "4, THIRD", "5, SECOND", "6, FIRST"})
+    void Rank_매치(int matchCount, Rank expectedRank) {
+        assertThat(Rank.of(matchCount)).isEqualTo(expectedRank);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("Rank 별 상금을 반환한다")
-    void 상금_반환() {
-        assertThat(Rank.FOURTH.getPrize()).isEqualTo(5_000);
-        assertThat(Rank.THIRD.getPrize()).isEqualTo(50_000);
-        assertThat(Rank.SECOND.getPrize()).isEqualTo(1_500_000);
-        assertThat(Rank.FIRST.getPrize()).isEqualTo(2_000_000_000);
+    @CsvSource({"FOURTH, 5000", "THIRD, 50000", "SECOND, 1500000", "FIRST, 2000000000"})
+    void 상금_반환(Rank rank, int expectedPrize) {
+        assertThat(rank.getPrize()).isEqualTo(expectedPrize);
     }
 }
