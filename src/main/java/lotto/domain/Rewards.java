@@ -22,10 +22,6 @@ public class Rewards {
     }
 
     public double getRateOfReturn(int initialAmount) {
-        long totalPrize = 0L;
-        for (Rank rank : this.values) {
-            totalPrize += rank.getWinningMoney();
-        }
-        return (double) totalPrize / initialAmount;
+        return this.values.stream().mapToLong(Rank::getWinningMoney).sum() / (double) initialAmount;
     }
 }
