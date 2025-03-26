@@ -1,24 +1,25 @@
-package lotto.domain;
+package lotto.domain.product;
+
+import lotto.domain.Money;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Lotto implements Product {
+public class LotteryTicket implements Product {
 
     public static final int LOTTO_PRICE = 1000;
     public static final int MAX_LOTTO_SIZE = 6;
     public static final String NUMBER_DELIMITER = ", ";
 
     private final Set<LottoNumber> numbers;
-    private static final Money PRICE = new Money(LOTTO_PRICE);
 
-    public Lotto() {
+    public LotteryTicket() {
         this.numbers = makeRandomNumbers();
     }
 
-    public Lotto(String input) {
+    public LotteryTicket(String input) {
         this.numbers = parseNumbers(input);
     }
 
@@ -48,4 +49,19 @@ public class Lotto implements Product {
     public Integer getLottoNumbersCount() {
         return numbers.size();
     }
+
+    public Integer getResultBy(LotteryTicket winningTicket) {
+        return Math.toIntExact(this.numbers.stream()
+                .filter(winningTicket.numbers::contains)
+                .count());
+    }
+
+    public String getValues() {
+        return numbers.stream()
+                .map(LottoNumber::getValue)
+                .sorted()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
+
 }

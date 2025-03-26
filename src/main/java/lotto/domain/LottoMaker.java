@@ -1,0 +1,40 @@
+package lotto.domain;
+
+import lotto.domain.product.FinalResult;
+import lotto.domain.product.LotteryTicket;
+import lotto.domain.product.LotteryTickets;
+import lotto.view.input.InputView;
+import lotto.view.output.OutputView;
+
+public class LottoMaker {
+
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    private final LotteryTickets tickets;
+
+    public LottoMaker(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        tickets = new LotteryTickets();
+    }
+
+    public void run() {
+        UserPaid paid = inputView.purchase();
+        Integer count = paid.getUserCountBy(new LotteryTicket());
+        outputView.userPurchased(count);
+
+        for (int i = 0; i < count; i++) {
+            tickets.add(new LotteryTicket());
+        }
+
+        outputView.printAutoLottery(tickets);
+
+        LotteryTicket winningTicket = inputView.lastWeekNumber();
+        FinalResult result = tickets.getResult(winningTicket);
+
+        outputView.printResult(result, paid);
+
+        inputView.closeScanner();
+    }
+}
