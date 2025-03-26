@@ -4,7 +4,6 @@ import lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,6 +23,8 @@ class LottosTest {
         Rewards result = lottos.getResult(winningNumbers, bonusNumber);
 
         // then
-        assertThat(result.getMatchCounts()).isEqualTo(Map.of(Rank.FIRST, 1, Rank.SECOND, 1, Rank.THIRD, 1));
+        assertThat(result.getMatchCountsByRank(Rank.FIRST)).isEqualTo(1);
+        assertThat(result.getMatchCountsByRank(Rank.SECOND)).isEqualTo(1);
+        assertThat(result.getMatchCountsByRank(Rank.THIRD)).isEqualTo(1);
     }
 }

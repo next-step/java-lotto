@@ -1,7 +1,5 @@
 package lotto.enums;
 
-import java.util.Map;
-
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -46,12 +44,5 @@ public enum Rank {
             return FIRST;
         }
         throw new IllegalStateException("적합하지 않은 숫자입니다.");
-    }
-
-    public void applyMatchCount(Map<Rank, Integer> matchMap) {
-        if (this == Rank.MISS) {
-            return;
-        }
-        matchMap.put(this, matchMap.getOrDefault(this, 0) + 1);
     }
 }

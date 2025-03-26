@@ -2,9 +2,7 @@ package lotto.domain;
 
 import lotto.enums.Rank;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Rewards {
     private final List<Rank> values;
@@ -13,12 +11,8 @@ public class Rewards {
         this.values = values;
     }
 
-    public Map<Rank, Integer> getMatchCounts() {
-        Map<Rank, Integer> result = new HashMap<>();
-        for (Rank rank : this.values) {
-            rank.applyMatchCount(result);
-        }
-        return result;
+    public int getMatchCountsByRank(Rank rank) {
+        return (int) this.values.stream().filter(value -> value == rank).count();
     }
 
     public double getRateOfReturn(int initialAmount) {

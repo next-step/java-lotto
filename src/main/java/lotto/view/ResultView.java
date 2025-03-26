@@ -6,7 +6,6 @@ import lotto.enums.Rank;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Map;
 
 public class ResultView {
     private ResultView() {
@@ -22,12 +21,12 @@ public class ResultView {
     }
 
     public static void printResult(int initialAmount, Rewards rewards) {
-        Map<Rank, Integer> matchCounts = rewards.getMatchCounts();
         Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.MISS)
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank -> {
                     String bonusMessage = (rank == Rank.SECOND) ? ", 보너스 볼 일치" : " ";
-                    System.out.printf("%d개 일치%s(%d원)- %d개%n", rank.getCountOfMatch(), bonusMessage, rank.getWinningMoney(), matchCounts.getOrDefault(rank, 0));
+                    System.out.printf("%d개 일치%s(%d원)- %d개%n", rank.getCountOfMatch(), bonusMessage, rank.getWinningMoney(), rewards.getMatchCountsByRank(rank));
                 });
 
         double rateOfReturn = rewards.getRateOfReturn(initialAmount);

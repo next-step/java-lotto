@@ -4,15 +4,16 @@ import lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RewardsTest {
     @Test
     void 로또_결과_테스트() {
-        Rewards rewards = new Rewards(List.of(Rank.FIRST, Rank.SECOND, Rank.MISS));
-        assertThat(rewards.getMatchCounts()).isEqualTo(Map.of(Rank.FIRST, 1, Rank.SECOND, 1));
+        Rewards rewards = new Rewards(List.of(Rank.FIRST, Rank.SECOND, Rank.FIFTH, Rank.FIFTH));
+        assertThat(rewards.getMatchCountsByRank(Rank.FIRST)).isEqualTo(1);
+        assertThat(rewards.getMatchCountsByRank(Rank.SECOND)).isEqualTo(1);
+        assertThat(rewards.getMatchCountsByRank(Rank.FIFTH)).isEqualTo(2);
     }
 
     @Test
