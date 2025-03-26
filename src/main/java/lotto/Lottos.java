@@ -25,6 +25,7 @@ public class Lottos {
         for (Lotto lotto: lottos) {
             Division division = lotto.compareNumbers(comparingLotto);
         }
+        System.out.println(Division.getMatchCountMap());
         return Division.getMatchCountMap();
     }
 

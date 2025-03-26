@@ -41,7 +41,7 @@ public enum Division {
                 .orElse(null);
     }
 
-    public static final Map<Division, Integer> getMatchCountMap() {
+    public static Map<Division, Integer> getMatchCountMap() {
         return matchCountMap;
     }
 }

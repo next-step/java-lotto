@@ -7,7 +7,6 @@ public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
 
     private int count;
-    private Lotto winningLotto;
     private Lottos lottos;
     Map<Division, Integer> winnerCountMap;
 
@@ -29,12 +28,7 @@ public class LottoGame {
     }
 
     public void draw(List<Integer> numbers) {
-        winningLotto = new Lotto(numbers);
-    }
-
-    public final Map<Division, Integer> lottoWinning() {
-        winnerCountMap = lottos.compareNumbers(winningLotto);
-        return winnerCountMap;
+        winnerCountMap = lottos.compareNumbers(new Lotto(numbers));
     }
 
     public double calculateEarningRate() {
@@ -42,7 +36,6 @@ public class LottoGame {
         for (Map.Entry<Division, Integer> entry: winnerCountMap.entrySet()) {
            earning += entry.getKey().getPrize() * entry.getValue();
         }
-        System.out.println((double)earning / (count * LOTTO_PRICE));
         return (double)earning / (count * LOTTO_PRICE);
     }
 }

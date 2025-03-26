@@ -5,4 +5,4 @@
 + [X] 로또 당첨 번호 받기 ((List<Integer>) -> Lotto)
 + [X] 로또 하나 당첨 번호와 비교 ((List<Integer>) -> Division)
 + [X] 로또 여러 개 당첨 번호와 비교 ((List<List<Integer>>) -> List<Integer>)
-+ [ ] 수익률 계산 ((List<Integer>) -> double)
++ [X] 수익률 계산 ((List<Integer>) -> double)
