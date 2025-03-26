@@ -5,10 +5,10 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public enum Division {
-    FIRST(6, 2000000000),
-    THIRD(5, 1500000),
+    FIFTH(3, 5000),
     FORTH(4, 50000),
-    FIFTH(3, 5000);
+    THIRD(5, 1500000),
+    FIRST(6, 2000000000);
 
     private int matchCount;
     private int prize;

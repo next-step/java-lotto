@@ -14,9 +14,9 @@ public class Lottos {
         }
     }
 
-    public Lottos(int count, List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<>();
-        for (int i = 0; i < count; ++i) {
+        for (int i = 0; i < lottos.size(); ++i) {
             this.lottos.add(lottos.get(i));
         }
     }
@@ -26,5 +26,9 @@ public class Lottos {
             Division division = lotto.compareNumbers(comparingLotto);
         }
         return Division.getMatchCountMap();
+    }
+
+    public int size() {
+        return lottos.size();
     }
 }
