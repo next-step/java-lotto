@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static util.ErrorMessage.INVALID_NUMBER;
-import static util.ErrorMessage.INVALID_OPERATOR;
+import static util.ErrorMessage.*;
 
 public class OperatorTest {
 
@@ -40,5 +39,16 @@ public class OperatorTest {
     void division_should_be_integer_division() {
         assertThat(Operator.from("/").apply(7, 3)).isEqualTo(2);
         assertThat(Operator.from("/").apply(9, 4)).isEqualTo(2);
+    }
+
+
+    @Test
+    @DisplayName("숫자가 아닌 값이 숫자 자리에 올 경우 NumberFormatException 발생시킨다")
+    void invalid_number_should_throw_exception() {
+        Calculator calculator = Calculator.create();
+
+        assertThatThrownBy(() -> calculator.run("a + 3"))
+                .isInstanceOf(NumberFormatException.class)
+                .hasMessage(INVALID_STRING);
     }
 }

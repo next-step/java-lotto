@@ -40,9 +40,9 @@
 
 ### 예외 처리
 
-- [ ] 연산자 자리에 사칙연산이 아닌 기호가 올 경우 IllegalArgumentException 발생
-- [ ] 숫자 자리에 숫자가 아닌 값이 들어오면 NumberFormatException 발생
-- [ ] 0으로 나눌 경우 ArithmeticException 발생
+- [x] 연산자 자리에 사칙연산이 아닌 기호가 올 경우 IllegalArgumentException 발생
+- [x] 숫자 자리에 숫자가 아닌 값이 들어오면 NumberFormatException 발생
+- [x] 0으로 나눌 경우 ArithmeticException 발생
 
 ### 계산 흐름
 

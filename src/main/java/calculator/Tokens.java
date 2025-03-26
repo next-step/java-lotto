@@ -26,6 +26,10 @@ public class Tokens {
         return Collections.unmodifiableList(tokens);
     }
 
+    public String get(int index) {
+        return tokens.get(index);
+    }
+
     public int size() {
         return tokens.size();
     }
