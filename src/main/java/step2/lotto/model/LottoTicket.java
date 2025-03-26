@@ -6,6 +6,7 @@ import step2.lotto.exception.LottoTicketException;
 
 public class LottoTicket {
 
+    public final static Money PRICE = new Money(1000);
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
@@ -13,17 +14,23 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket(String lastWeekWinningNumbers) {
-        validate(lastWeekWinningNumbers);
+    public LottoTicket(String lottoNumbersDelimitedByComma) {
+        validate(lottoNumbersDelimitedByComma);
         lottoNumbers = new ArrayList<>();
-        String[] splitedLastWeekWinningNumbers = lastWeekWinningNumbers.replaceAll(" ", "").split(",");
-        for (String winningNumber : splitedLastWeekWinningNumbers) {
-            lottoNumbers.add(new LottoNumber(winningNumber));
+        String[] stringLottoNumbers = lottoNumbersDelimitedByComma.replaceAll(" ", "").split(",");
+        for (String stringLottoNumber : stringLottoNumbers) {
+            lottoNumbers.add(new LottoNumber(stringLottoNumber));
         }
     }
 
     public List<LottoNumber> value() {
         return lottoNumbers;
+    }
+
+    public Count match(LottoTicket lastWeekWinningNumbers) {
+        Count matchCount = new Count(0);
+        lottoNumbers.stream().filter(lastWeekWinningNumbers.value()::contains).forEach(i -> matchCount.increase());
+        return matchCount;
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {

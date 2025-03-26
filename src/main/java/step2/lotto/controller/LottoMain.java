@@ -2,6 +2,7 @@ package step2.lotto.controller;
 
 import java.util.stream.IntStream;
 import step2.lotto.model.Count;
+import step2.lotto.model.LottoResult;
 import step2.lotto.model.LottoTicket;
 import step2.lotto.model.LottoTicketList;
 import step2.lotto.model.Money;
@@ -26,17 +27,15 @@ public class LottoMain {
         String winningNumbers = inputView.getLastWeekWinningNumbers();
         LottoTicket lastWeekWinningTicket = new LottoTicket(winningNumbers);
 
-        Money prizeMoney = new Money("0");
-        resultView.printMatchTicketCountTitle();
-        for (int i = 3; i <= 6; i++) {
-            Count matchCount = new Count(i);
-            Count matchTicketCount = lottoApp.calculateLottoTicketsCountOfMatchTargetCount(lastWeekWinningTicket,
-                lottoTicketList, matchCount);
-            resultView.printMatchTicketCount(matchTicketCount, matchCount);
-
-            IntStream.range(0, matchTicketCount.value()).forEach(j -> prizeMoney.add(PrizeMoney.of(matchCount)));
+        LottoResult lottoResult = new LottoResult();
+        resultView.printLottoResultTitle();
+        for (LottoTicket lottoTicket : lottoTicketList.value()) {
+            Count matchCount = lottoTicket.match(lastWeekWinningTicket);
+            lottoResult.reflect(matchCount);
         }
+        resultView.printLottoResult(lottoResult);
 
+        Money prizeMoney = lottoResult.prizeMoney();
         double rateOfReturn = (double) prizeMoney.value() / money.value();
         resultView.printRateOfReturn(rateOfReturn);
     }

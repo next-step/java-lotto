@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class PrizeMoney {
 
-    private final static Map<Integer, Integer> prizeMoney = Map.of(
-        3, 5000,
-        4, 50000,
-        5, 1500000,
-        6, 2000000000
+    private final static Map<Long, Long> prizeMoney = Map.of(
+        3L, 5000L,
+        4L, 50000L,
+        5L, 1500000L,
+        6L, 2000000000L
     );
 
     public static Money of(Count matchCount) {

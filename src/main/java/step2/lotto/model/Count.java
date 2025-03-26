@@ -5,19 +5,19 @@ import step2.lotto.exception.CountException;
 
 public class Count {
 
-    private int value;
+    private long value;
 
     public Count(String value) {
         validate(value);
         this.value = Integer.parseInt(value);
     }
 
-    public Count(int value) {
+    public Count(long value) {
         validate(value);
         this.value = value;
     }
 
-    public int value() {
+    public long value() {
         return value;
     }
 
@@ -25,7 +25,7 @@ public class Count {
         value++;
     }
 
-    public void validate(int value) {
+    public void validate(long value) {
         if (value < 0) {
             throw new CountException();
         }

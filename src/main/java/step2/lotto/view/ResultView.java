@@ -1,6 +1,7 @@
 package step2.lotto.view;
 
 import step2.lotto.model.Count;
+import step2.lotto.model.LottoResult;
 import step2.lotto.model.LottoTicket;
 import step2.lotto.model.LottoTicketList;
 import step2.lotto.model.Money;
@@ -20,7 +21,7 @@ public class ResultView {
         System.out.println(lottoTicket);
     }
 
-    public void printMatchTicketCountTitle() {
+    public void printLottoResultTitle() {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -43,4 +44,10 @@ public class ResultView {
         }
     }
 
+    public void printLottoResult(LottoResult lottoResult) {
+        printMatchTicketCount(lottoResult.match3LottoTicketCount(), new Count(3));
+        printMatchTicketCount(lottoResult.match4LottoTicketCount(), new Count(4));
+        printMatchTicketCount(lottoResult.match5LottoTicketCount(), new Count(5));
+        printMatchTicketCount(lottoResult.match6LottoTicketCount(), new Count(6));
+    }
 }

@@ -4,9 +4,9 @@ import step2.lotto.exception.MoneyException;
 
 public class Money {
 
-    private int value;
+    private long value;
 
-    public Money(int value) {
+    public Money(long value) {
         this.value = value;
     }
 
@@ -27,7 +27,7 @@ public class Money {
         }
     }
 
-    public int value() {
+    public long value() {
         return value;
     }
 
