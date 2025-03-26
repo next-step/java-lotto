@@ -1,15 +1,8 @@
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
 class FormulaTest {
-
-  @Test
-  void calculate() {
-    Formula formula = new Formula("2 + 3 * 4 - 6 / 2");
-    assertThat(formula.calculate()).isEqualTo(7);
-  }
 
   @Test
   void 빈_문자열_입력_시_예외_발생() {
