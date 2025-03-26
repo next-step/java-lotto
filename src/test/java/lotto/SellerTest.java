@@ -14,9 +14,10 @@ public class SellerTest {
     @Test
     @DisplayName("판매자는 로또기계 하나를 가지고 있다.")
     void sellerHasLottoMachineTest() {
-        var seller = new Seller(new LottoTicketMachine());
+        var machine = new LottoTicketMachine();
+        var seller = new Seller(machine);
 
-        Assertions.assertThat(seller.countLottoTicketMachine()).isEqualTo(1);
+        Assertions.assertThat(seller.hasSameMachine(machine)).isTrue();
     }
 
     @ParameterizedTest
