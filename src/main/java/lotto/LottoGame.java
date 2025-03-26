@@ -22,4 +22,6 @@ public class LottoGame {
     public void draw(List<Integer> numbers) {
         winningLotto = new Lotto(numbers);
     }
+
+
 }

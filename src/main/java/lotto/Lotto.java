@@ -32,6 +32,21 @@ public class Lotto {
         return numbers;
     }
 
+    public Division compareNumbers(Lotto lotto) {
+        int matchCount = 0;
+        for (int number: lotto.numbers) {
+            matchCount += isInNumbers(number);
+        }
+        return Division.getDivision(matchCount);
+    }
+
+    private int isInNumbers(int number) {
+        if (this.numbers.contains(number)) {
+            return 1;
+        }
+        return 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
