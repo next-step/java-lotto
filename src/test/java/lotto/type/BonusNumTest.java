@@ -12,9 +12,9 @@ class BonusNumTest {
   @Test
   void testConstructor() {
     assertAll(
-        () -> assertDoesNotThrow(() -> BonusNum.valueOf(4, 45)),
-        () -> assertThrows(RuntimeException.class, () -> BonusNum.valueOf(46, 45)),
-        () -> assertThrows(RuntimeException.class, () -> BonusNum.valueOf(-1, 45))
+        () -> assertDoesNotThrow(() -> BonusNum.valueOf(4)),
+        () -> assertThrows(RuntimeException.class, () -> BonusNum.valueOf(46)),
+        () -> assertThrows(RuntimeException.class, () -> BonusNum.valueOf(-1))
     );
   }
 
@@ -22,8 +22,8 @@ class BonusNumTest {
   @Test
   void testIsMatch() {
     assertAll(
-        () -> assertThat(BonusNum.valueOf(4, 45).isMatch(4)).isEqualTo(true),
-        () -> assertThat(BonusNum.valueOf(4, 45).isMatch(3)).isEqualTo(false)
+        () -> assertThat(BonusNum.valueOf(4).isMatch(4)).isEqualTo(true),
+        () -> assertThat(BonusNum.valueOf(4).isMatch(3)).isEqualTo(false)
     );
   }
 }

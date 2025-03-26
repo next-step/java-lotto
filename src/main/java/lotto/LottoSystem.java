@@ -28,7 +28,7 @@ public class LottoSystem {
 
     LottoBundle lottoBundle = LottoBundle.generate(
         lottoCount,
-        new LottoNumGenerator(LOTTO_SIZE, LOTTO_MAX_NUM),
+        new LottoNumGenerator(),
         new CollectionsShuffleStrategy()
     );
     showLottoBundle(lottoBundle);

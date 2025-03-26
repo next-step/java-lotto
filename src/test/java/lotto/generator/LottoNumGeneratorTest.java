@@ -10,16 +10,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 class LottoNumGeneratorTest {
 
-  @DisplayName("생성자 테스트")
-  @Test
-  void testConstructor() {
-    assertDoesNotThrow(() -> new LottoNumGenerator(6, 45));
-  }
-
   @DisplayName("로또 숫자 생성 테스트")
   @Test
   void testGenerate() {
-    LottoNumGenerator generator = new LottoNumGenerator(6, 45);
+    LottoNumGenerator generator = new LottoNumGenerator();
 
     LottoNumList lottoNumList = generator.generate(nums -> nums);
 

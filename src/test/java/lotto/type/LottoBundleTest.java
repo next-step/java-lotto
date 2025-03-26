@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoBundleTest {
 
@@ -24,7 +25,7 @@ class LottoBundleTest {
   void constructorTest2() {
     LottoBundle bundle = LottoBundle.generate(
         1,
-        new LottoNumGenerator(6, 45),
+        new LottoNumGenerator(),
         nums -> nums
     );
 
@@ -39,6 +40,16 @@ class LottoBundleTest {
         List.of(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6)), LottoNumList.valueOf(List.of(10, 11, 12, 13, 15, 16)))
     );
 
-    assertThat(bundle.getLottoPrizes(WinningNums.valueOf("1, 2, 3, 4, 5, 6", 6, 45), BonusNum.valueOf(7, 45))).containsExactly(LottoPrize.SIX_MATCHES, LottoPrize.ZERO_MATCHES);
+    assertAll(
+        () -> assertThat(bundle.getLottoPrizes(
+            WinningNums.valueOf("1, 2, 3, 4, 5, 6"), BonusNum.valueOf(7))
+        ).containsExactly(LottoPrize.SIX_MATCHES, LottoPrize.ZERO_MATCHES),
+        () -> assertThat(bundle.getLottoPrizes(
+            WinningNums.valueOf("1, 2, 3, 4, 5, 7"), BonusNum.valueOf(6))
+        ).containsExactly(LottoPrize.FIVE_WITH_BONUS_MATCHES, LottoPrize.ZERO_MATCHES),
+        () -> assertThat(bundle.getLottoPrizes(
+            WinningNums.valueOf("1, 2, 3, 4, 5, 7"), BonusNum.valueOf(8))
+        ).containsExactly(LottoPrize.FIVE_MATCHES, LottoPrize.ZERO_MATCHES)
+    );
   }
 }
