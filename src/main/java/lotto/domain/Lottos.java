@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.Prize;
+import lotto.util.Rank;
 import lotto.util.TotalNumbers;
 
 import java.util.*;
@@ -51,8 +51,8 @@ public class Lottos {
         }
 
         long result = 0;
-        for (Prize prize : Prize.values()) {
-            result += (long) prize.money() * matchNums.getOrDefault(prize.number(), 0);
+        for (Rank rank : Rank.values()) {
+            result += (long) rank.winningMoney() * matchNums.getOrDefault(rank.countOfMatch(), 0);
         }
 
         return (float) result / (lottos.size() * LOTTO_PRICE);

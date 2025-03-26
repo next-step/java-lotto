@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.util.Prize;
+import lotto.util.Rank;
 
 import java.util.Map;
 
@@ -23,11 +23,11 @@ public class ResultView {
         StringBuilder sb = new StringBuilder();
         sb.append("당첨 통계\n");
         sb.append("---------\n");
-        for (Prize prize : Prize.values()) {
-            sb.append(prize.number()).append("개 일치 (")
-                    .append(prize.money())
+        for (Rank rank : Rank.values()) {
+            sb.append(rank.countOfMatch()).append("개 일치 (")
+                    .append(rank.winningMoney())
                     .append("원)- ")
-                    .append(matchNums.getOrDefault(prize.number(), 0))
+                    .append(matchNums.getOrDefault(rank.countOfMatch(), 0))
                     .append("개)\n");
         }
 
