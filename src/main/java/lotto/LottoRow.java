@@ -1,6 +1,14 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoRow {
 
-    private LottoNumber lottoNumber;
+    private List<LottoNumber> lottoNumber = new ArrayList<>();
+
+    public LottoRow() {
+
+    }
+
 }
