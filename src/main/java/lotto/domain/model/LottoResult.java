@@ -13,9 +13,20 @@ public class LottoResult {
         return lottoResult;
     }
 
-    public double getReturnRate() {
+    public double calculateReturnRate() {
         int sumOfPurchaseAmount = lottoResult.values().stream().mapToInt(Integer::intValue).sum() * LottoSeller.PRICE;
-        return (double) getEntirePrize() / sumOfPurchaseAmount;
+        return (double) calculateTotalPrize() / sumOfPurchaseAmount;
+    }
+
+    public String generateStatistics() {
+        StringBuilder sb = new StringBuilder();
+
+        for (LottoRank rank : LottoRank.RANK_WITH_PRIZE) {
+            int count = lottoResult.getOrDefault(rank, 0);
+            sb.append(formatLottoRankResult(rank, count));
+        }
+
+        return sb.toString();
     }
 
     private void addLottoResult(Lotto purchasedLotto, Lotto winningLotto) {
@@ -23,7 +34,7 @@ public class LottoResult {
         lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
     }
 
-    private long getEntirePrize() {
+    private long calculateTotalPrize() {
         long sumOfPrize = 0;
         for (LottoRank rank : LottoRank.RANK_WITH_PRIZE) {
             sumOfPrize += (long) lottoResult.getOrDefault(rank, 0) * rank.getPrize();
@@ -31,16 +42,7 @@ public class LottoResult {
         return sumOfPrize;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (LottoRank rank : LottoRank.RANK_WITH_PRIZE) {
-            int count = lottoResult.getOrDefault(rank, 0);
-            String message = String.format("%d개 일치 (%d원)- %d개\n", rank.getNumOfMatch(), rank.getPrize(), count);
-            sb.append(message);
-        }
-
-        return sb.toString();
+    private String formatLottoRankResult(LottoRank rank, int count) {
+        return String.format("%d개 일치 (%d원)- %d개\n", rank.getNumOfMatch(), rank.getPrize(), count);
     }
 }

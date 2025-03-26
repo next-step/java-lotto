@@ -21,7 +21,7 @@ class LottoResultTest {
         List<Lotto> purchasedLottos = Arrays.asList(nonWinningLotto1, nonWinningLotto2);
         LottoResult lottoResult = LottoResult.of(purchasedLottos, winningLotto);
 
-        assertThat(lottoResult.getReturnRate()).isZero();
+        assertThat(lottoResult.calculateReturnRate()).isZero();
     }
 
     @Test
@@ -38,7 +38,7 @@ class LottoResultTest {
         int purchaseAmount = purchasedLottos.size() * LottoSeller.PRICE;
         double expectedReturnRate = (double) expectedPrize / purchaseAmount;
 
-        assertThat(lottoResult.getReturnRate()).isEqualTo(expectedReturnRate);
+        assertThat(lottoResult.calculateReturnRate()).isEqualTo(expectedReturnRate);
     }
 
     @Test
@@ -57,6 +57,6 @@ class LottoResultTest {
         int purchaseAmount = purchasedLottos.size() * LottoSeller.PRICE;
         double expectedReturnRate = (double) expectedPrize / purchaseAmount;
 
-        assertThat(lottoResult.getReturnRate()).isEqualTo(expectedReturnRate);
+        assertThat(lottoResult.calculateReturnRate()).isEqualTo(expectedReturnRate);
     }
 }
