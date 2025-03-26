@@ -1,39 +1,26 @@
 package calculator.domain;
 
+import calculator.AddStrategy;
+import calculator.DivideStrategy;
+import calculator.MultiplyStrategy;
+import calculator.OperateStrategy;
+import calculator.SubtractStrategy;
 import calculator.domain.exception.UnexpectedOperatorException;
 import java.util.Arrays;
 
 public enum Operator {
 
-    PLUS("+") {
-        @Override
-        public Number apply(Number left, Number right) {
-            return left.add(right);
-        }
-    },
-    MINUS("-") {
-        @Override
-        public Number apply(Number left, Number right) {
-            return left.subtract(right);
-        }
-    },
-    MULTIPLY("*") {
-        @Override
-        public Number apply(Number left, Number right) {
-            return left.multiplyBy(right);
-        }
-    },
-    DIVIDE("/") {
-        @Override
-        public Number apply(Number left, Number right) {
-            return left.divideBy(right);
-        }
-    };
+    PLUS("+", new AddStrategy()),
+    MINUS("-", new SubtractStrategy()),
+    MULTIPLY("*", new MultiplyStrategy()),
+    DIVIDE("/", new DivideStrategy());
 
     private final String operator;
+    private final OperateStrategy operateStrategy;
 
-    Operator(String operator) {
+    Operator(String operator, OperateStrategy operateStrategy) {
         this.operator = operator;
+        this.operateStrategy = operateStrategy;
     }
 
     public static Operator from(String operator) {
@@ -43,6 +30,7 @@ public enum Operator {
             .orElseThrow(UnexpectedOperatorException::new);
     }
 
-    public abstract Number apply(Number left, Number right);
-
+    public Number apply(Number left, Number right) {
+        return this.operateStrategy.apply(left, right);
+    }
 }
