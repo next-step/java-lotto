@@ -19,8 +19,8 @@
 ### 입력 값 검증
 
 ### 입력 유효성 검사
-- [ ] 입력이 null이면 IllegalArgumentException 발생시킨다.
-- [ ] 입력이 빈 문자열이거나 공백만 있을 경우 IllegalArgumentException 발생시킨다.
+- [x] 입력이 null이면 IllegalArgumentException 발생시킨다.
+- [x] 입력이 빈 문자열이거나 공백만 있을 경우 IllegalArgumentException 발생시킨다.
 
 ### 입력 문자열 파싱
 - [ ] 문자열을 " " 기준으로 파싱한다.
