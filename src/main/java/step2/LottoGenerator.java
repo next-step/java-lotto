@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,5 +24,13 @@ public class LottoGenerator {
         return new Lotto(lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList()));
+    }
+
+    public Lotto generateFromString(String input) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
     }
 }

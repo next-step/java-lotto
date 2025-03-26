@@ -21,10 +21,22 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
+    public Lotto createWinningLotto(String input) {
+        return lottoGenerator.generateFromString(input);
+    }
+
     public Map<LottoResult, Integer> getLottoResults(List<Lotto> lottos, Lotto winningLotto) {
         return lottos.stream()
                 .map(lotto -> LottoResult.getResult(lotto, winningLotto))
                 .collect(Collectors.groupingBy(lottoResult ->
                         lottoResult, Collectors.summingInt(e -> 1)));
+    }
+
+    public LottoStatistics makeStatistics(int money, Map<LottoResult, Integer> lottoResults) {
+        int totalPrize = lottoResults.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
+        double profitRate = (double) totalPrize / money;
+        return new LottoStatistics(lottoResults, profitRate);
     }
 }

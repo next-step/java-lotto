@@ -24,4 +24,12 @@ public enum LottoResult {
                 .findFirst()
                 .orElse(NONE);
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
 }
