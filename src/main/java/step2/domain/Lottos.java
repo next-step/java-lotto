@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class Lottos {
@@ -14,5 +15,11 @@ public class Lottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public List<MatchResult> matchAll(Winning winning) {
+        return lottos.stream()
+                .map(winning::match)
+                .collect(Collectors.toList());
     }
 }
