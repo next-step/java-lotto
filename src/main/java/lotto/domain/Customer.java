@@ -25,7 +25,7 @@ public class Customer {
         this.lottos = LottoGenerator.generateLottosByAmount(purchaseAmount);
     }
 
-    public void compareAllLotto(List<LottoNumber> winningNumbers) {
+    public void checkLottosResult(List<LottoNumber> winningNumbers) {
         lottos.determineAllLottoResult(winningNumbers);
     }
 

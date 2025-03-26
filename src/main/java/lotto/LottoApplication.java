@@ -11,7 +11,7 @@ public class LottoApplication {
 
         OutputView.printLottos(customer.getLottos());
 
-        customer.compareAllLotto(InputView.getWinningNumbers());
+        customer.checkLottosResult(InputView.getWinningNumbers());
 //        OutputView.printStatistics(lottos.getStatistics());
 
         OutputView.printROI(customer.calculateROI());
