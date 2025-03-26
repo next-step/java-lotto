@@ -7,26 +7,14 @@ import java.util.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CalculatorServiceTest {
-    @Test
-    @DisplayName("덧셈")
-    void plus() {
-        Operand left = new Operand(10);
-        Operand right = new Operand(20);
-
-        CalculatorService calculatorService = new CalculatorService();
-        Operand result = calculatorService.calculator(new Operator("+"), left, right);
-
-        assertThat(result).isEqualTo(new Operand(30));
-    }
-
+class ParserTest {
     @Test
     @DisplayName("문자열 나누기 null 체크")
     void split_null_체크() {
         String input = "";
-        CalculatorService calculatorService = new CalculatorService();
+        Parser parser = new Parser();
 
-        assertThatThrownBy(() ->  calculatorService.split(input))
+        assertThatThrownBy(() ->  parser.split(input))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("입력값이 비어있습니다");
     }
@@ -34,9 +22,9 @@ class CalculatorServiceTest {
     @DisplayName("문자열 나누기 성공")
     void split_성공() {
         String input = "2 + 3 * 4 / 2";
-        CalculatorService calculatorService = new CalculatorService();
+        Parser parser = new Parser();
 
-        List<String> result = calculatorService.split(input);
+        List<String> result = parser.split(input);
 
         assertThat(result).isEqualTo(List.of("2", "+", "3", "*", "4", "/", "2"));
 

@@ -4,11 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CalculatorService {
-
-    public Operand calculator(Operator operator, Operand left, Operand right) {
-        return operator.calculate(left, right);
-    }
+public class Parser {
 
     public List<String> split(String input) {
         if (input == null || input.isEmpty()) {

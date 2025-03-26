@@ -4,9 +4,10 @@ import java.util.List;
 
 public class CalculatorController {
     public int start(String input) {
-        CalculatorService calculatorService = new CalculatorService();
+        Parser parser = new Parser();
+        Calculator calculator = new Calculator();
 
-        List<String> tokens = calculatorService.split(input);
+        List<String> tokens = parser.split(input);
 
         Operand result = new Operand(tokens.get(0));
 
@@ -14,7 +15,7 @@ public class CalculatorController {
             Operator operator = new Operator(tokens.get(i));
             Operand right = new Operand(tokens.get(i+1));
 
-            result = calculatorService.calculator(operator, result, right);
+            result = calculator.calculator(operator, result, right);
         }
 
         return result.getValue();
