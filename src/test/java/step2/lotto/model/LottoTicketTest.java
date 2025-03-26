@@ -1,5 +1,6 @@
 package step2.lotto.model;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -98,6 +99,34 @@ public class LottoTicketTest {
 
             // then
             .isExactlyInstanceOf(LottoTicketException.class);
+    }
+
+    @Test
+    @DisplayName("맞춘 로또 개수 테스트 #1")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount1_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicket lastWeekWinningTicket = new LottoTicket("6, 7, 8, 9, 10, 11");
+
+        // when
+        assertThat(lottoTicket.match(lastWeekWinningTicket))
+
+            // then
+            .isEqualTo(new Count(1));
+    }
+
+    @Test
+    @DisplayName("맞춘 로또 개수 테스트 #2")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount2_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicket lastWeekWinningTicket = new LottoTicket("5, 6, 7, 8, 9, 10");
+
+        // when
+        assertThat(lottoTicket.match(lastWeekWinningTicket))
+
+            // then
+            .isEqualTo(new Count(2));
     }
 
 }
