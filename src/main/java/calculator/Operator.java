@@ -18,16 +18,15 @@ public class Operator {
         this.value = value;
     }
     public Operand calculate(Operand left, Operand right) {
-        if (value.equals("+")) {
+        if (Operators.PLUS.isSame(value)) {
             return left.add(right);
-        } else if (value.equals("-")) {
+        } else if (Operators.MINUS.isSame(value)) {
             return left.minus(right);
-        } else if (value.equals("*")) {
+        } else if (Operators.MUL.isSame(value)) {
             return left.mul(right);
-        } else if (value.equals("/")) {
+        } else if (Operators.DIV.isSame(value)) {
             return left.div(right);
         }
-
         return left.add(right);
     }
 
