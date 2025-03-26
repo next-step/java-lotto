@@ -1,4 +1,4 @@
-package lotto.domain;
+package calculator.domain;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,14 +6,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Extractor {
-    private static final String delimiter = " ";
+    private static final String DELIMITER = " ";
 
-    public static List<Long> extract_numbers(String input) {
+    private Extractor() {}
+
+    public static List<Number> extract_numbers(String input) {
         List<String> tokens = split(input);
         return IntStream.range(0, tokens.size())
                 .filter(i -> i % 2 == 0)
-                .mapToObj(tokens::get)
-                .map(Long::parseLong)
+                .mapToObj(i -> new Number(Long.parseLong(tokens.get(i))))
                 .collect(Collectors.toList());
     }
 
@@ -21,8 +22,7 @@ public class Extractor {
         List<String> tokens = split(input);
         return IntStream.range(0, tokens.size())
                 .filter(i -> i % 2 != 0)
-                .mapToObj(tokens::get)
-                .map(Operator::fromValue)
+                .mapToObj(i -> Operator.fromValue(tokens.get(i)))
                 .collect(Collectors.toList());
     }
 
@@ -30,6 +30,6 @@ public class Extractor {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException();
         }
-        return Arrays.asList(input.split(delimiter));
+        return Arrays.asList(input.split(DELIMITER));
     }
 }
