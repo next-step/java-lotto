@@ -6,11 +6,16 @@ import lotto.domain.Lottos;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
     private static final int LOTTO_PICK_COUNT = 6;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_PRICE = 1000;
+    private static final List<Integer> LOTTO_NUMBER_CACHE = IntStream.rangeClosed(1, LOTTO_MAX_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
 
     private LottoGenerator() {
     }
@@ -34,11 +39,7 @@ public class LottoGenerator {
     }
 
     public static Lotto generate() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= LOTTO_MAX_NUMBER; i++) {
-            numbers.add(i);
-        }
-        Collections.shuffle(numbers);
+        Collections.shuffle(LOTTO_NUMBER_CACHE);
 
         List<Integer> lottoNumbers = numbers.subList(0, LOTTO_PICK_COUNT);
         Collections.sort(lottoNumbers);
