@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicketTest {
 
@@ -17,14 +19,17 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("로또는 6자리 보다 적거나 많은 숫자를 받을 수 없다.")
+    @DisplayName("로또의 자릿수 이상의 갯수의 숫자를 받을 수 없다.")
     void lottoCreateNumbersSizeTest2() {
-        Assertions.assertThatThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또는 6자리여야 합니다.");
+        var lessCase = IntStream.range(0, LottoTicket.DIGIT - 1).boxed().collect(Collectors.toUnmodifiableList());
+        var moreCase = IntStream.range(0, LottoTicket.DIGIT + 1).boxed().collect(Collectors.toUnmodifiableList());
 
-        Assertions.assertThatThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 6, 7)))
+        Assertions.assertThatThrownBy(() -> new LottoTicket(lessCase))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또는 6자리여야 합니다.");
+                .hasMessage("로또는 " + LottoTicket.DIGIT + "자리여야 합니다.");
+
+        Assertions.assertThatThrownBy(() -> new LottoTicket(moreCase))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또는 " + LottoTicket.DIGIT + "자리여야 합니다.");
     }
 }

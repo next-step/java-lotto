@@ -9,7 +9,8 @@ public class LottoTicketTicketMachineTest {
     @Test
     @DisplayName("로또 발행한다.")
     void lottoIssueTest() {
-        var lotto = LottoTicketMachine.issue();
+        var machine = new LottoTicketMachine();
+        var lotto = machine.issue();
 
         Assertions.assertThat(lotto).isInstanceOf(LottoTicket.class);
     }
