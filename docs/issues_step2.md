@@ -22,3 +22,6 @@
       - `countMatchedNumbers`는 `List<Integer>`를 파라미터로 받음
       - `Lotto` 객체가 자신의 `determineRank`로 `winningLotto.countMatchedNumbers`를 호출,
         `private` 필드인 `Lotto.lottoNumbers`를 파라미터로 보냄
+### 당첨 통계
+- Map 사용 필요? 당첨된 복권만 모아서 당첨 정보를 추출
+  - 물론 이 경우에도 Map은 필요
