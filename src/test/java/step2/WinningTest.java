@@ -19,7 +19,7 @@ class WinningTest {
     @DisplayName("유효한 당첨번호")
     void valid() {
         Winning winning = new Winning(of(1,3,4,5,6,8));
-        assertThat(winning.getWinning()).hasSize(6);
+        assertThat(winning.size()).isEqualTo(6);
     }
 
     @ParameterizedTest

@@ -16,7 +16,11 @@ public class Winning {
         }
     }
 
-    public Set<LottoNum> getWinning() {
-        return Set.copyOf(nums);
+    public int size() {
+        return nums.size();
+    }
+
+    public MatchResult match(Lotto lotto) {
+        return new MatchResult(lotto.countMatch(this.nums));
     }
 }
