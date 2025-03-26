@@ -10,7 +10,7 @@ import static java.lang.String.format;
 
 public class LottoWinningStatistics {
     private static final String RESULT_FORMAT = "%s - %d개";
-    public static final String PROFIT_RATE_FORMAT = "%.2f";
+    private static final String PROFIT_RATE_FORMAT = "%.2f";
     private final Map<PrizeLevel, Integer> statistics;
 
     public LottoWinningStatistics(Map<PrizeLevel, Integer> statistics) {
