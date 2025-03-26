@@ -30,7 +30,7 @@ public enum LottoPrize {
         .collect(Collectors.toList());
 
     if (prizes.isEmpty()) {
-      throw new IllegalArgumentException("No prize available for this match count: " + matchCount);
+      throw new IllegalArgumentException("유효하지 않은 일치 수입니다.");
     }
 
     if (prizes.size() == 1) {
@@ -38,7 +38,7 @@ public enum LottoPrize {
     }
 
     if (!(prizes.contains(FIVE_MATCHES) && prizes.contains(FIVE_WITH_BONUS_MATCHES) && prizes.size() == 2)) {
-      throw new IllegalStateException("fail to get lotto prizes");
+      throw new IllegalStateException("로또 상금 정보를 가져오는데 실패했습니다.");
     }
 
     return matchBonus ? FIVE_WITH_BONUS_MATCHES : FIVE_MATCHES;
