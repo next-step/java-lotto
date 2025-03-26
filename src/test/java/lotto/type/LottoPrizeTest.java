@@ -14,43 +14,64 @@ class LottoPrizeTest {
   @DisplayName("0개 일치 가져오기")
   @Test
   public void testGetZeroMatches() {
-    assertThat(LottoPrize.findByMatchCount(0)).isEqualTo(LottoPrize.ZERO_MATCHES);
+    assertAll(
+        () -> assertThat(LottoPrize.findByMatchCount(0, false)).isEqualTo(ZERO_MATCHES),
+        () -> assertThat(LottoPrize.findByMatchCount(0, true)).isEqualTo(ZERO_MATCHES)
+    );
   }
 
   @DisplayName("1개 일치 가져오기")
   @Test
   public void testGetOneMatches() {
-    assertThat(LottoPrize.findByMatchCount(1)).isEqualTo(LottoPrize.ONE_MATCHES);
+    assertAll(
+        () -> assertThat(LottoPrize.findByMatchCount(1, false)).isEqualTo(ONE_MATCHES),
+        () -> assertThat(LottoPrize.findByMatchCount(1, true)).isEqualTo(ONE_MATCHES)
+    );
   }
 
   @DisplayName("2개 일치 가져오기")
   @Test
   public void testGetTwoMatches() {
-    assertThat(LottoPrize.findByMatchCount(2)).isEqualTo(LottoPrize.TWO_MATCHES);
+    assertAll(
+        () -> assertThat(LottoPrize.findByMatchCount(2, false)).isEqualTo(TWO_MATCHES),
+        () -> assertThat(LottoPrize.findByMatchCount(2, true)).isEqualTo(TWO_MATCHES)
+    );
   }
 
   @DisplayName("3개 일치 가져오기")
   @Test
   public void testGetThreeMatches() {
-    assertThat(LottoPrize.findByMatchCount(3)).isEqualTo(LottoPrize.THREE_MATCHES);
+    assertAll(
+        () -> assertThat(LottoPrize.findByMatchCount(3, false)).isEqualTo(THREE_MATCHES),
+        () -> assertThat(LottoPrize.findByMatchCount(3, true)).isEqualTo(THREE_MATCHES)
+    );
   }
 
   @DisplayName("4개 일치 가져오기")
   @Test
   public void testGetFourMatches() {
-    assertThat(LottoPrize.findByMatchCount(4)).isEqualTo(LottoPrize.FOUR_MATCHES);
+    assertAll(
+        () -> assertThat(LottoPrize.findByMatchCount(4, false)).isEqualTo(FOUR_MATCHES),
+        () -> assertThat(LottoPrize.findByMatchCount(4, true)).isEqualTo(FOUR_MATCHES)
+    );
   }
 
   @DisplayName("5개 일치 가져오기")
   @Test
   public void testGetFiveMatches() {
-    assertThat(LottoPrize.findByMatchCount(5)).isEqualTo(LottoPrize.FIVE_MATCHES);
+    assertAll(
+        () -> assertThat(LottoPrize.findByMatchCount(5, false)).isEqualTo(FIVE_MATCHES),
+        () -> assertThat(LottoPrize.findByMatchCount(5, true)).isEqualTo(FIVE_WITH_BONUS_MATCHES)
+    );
   }
 
   @DisplayName("6개 일치 가져오기")
   @Test
   public void testGetSixMatches() {
-    assertThat(LottoPrize.findByMatchCount(6)).isEqualTo(SIX_MATCHES);
+    assertAll(
+        () -> assertThat(LottoPrize.findByMatchCount(6, false)).isEqualTo(SIX_MATCHES),
+        () -> assertThat(LottoPrize.findByMatchCount(6, true)).isEqualTo(SIX_MATCHES)
+    );
   }
 
   @DisplayName("상금의 총 합을 가져오기")

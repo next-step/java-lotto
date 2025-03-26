@@ -23,6 +23,10 @@ public class LottoNumList {
         .filter(winningNums::contains).count();
   }
 
+  public boolean isMatch(BonusNum bonusNum) {
+    return nums.stream().anyMatch(bonusNum::isMatch);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

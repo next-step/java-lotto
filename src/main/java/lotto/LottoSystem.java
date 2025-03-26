@@ -17,8 +17,8 @@ import static lotto.view.OutputView.*;
 
 public class LottoSystem {
 
-  private static final int MAX_LOTTO_CANDIDATE_NUM = 45;
-  private static final int LOTTO_NUM_SIZE = 6;
+  private static final int LOTTO_MAX_NUM = 45;
+  private static final int LOTTO_SIZE = 6;
 
   public static void main(String[] args) {
     int price = showPriceInput();
@@ -28,15 +28,15 @@ public class LottoSystem {
 
     LottoBundle lottoBundle = LottoBundle.generate(
         lottoCount,
-        new LottoNumGenerator(LOTTO_NUM_SIZE, MAX_LOTTO_CANDIDATE_NUM),
+        new LottoNumGenerator(LOTTO_SIZE, LOTTO_MAX_NUM),
         new CollectionsShuffleStrategy()
     );
     showLottoBundle(lottoBundle);
 
-    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(
-        WinningNums.valueOf(showWinningNums(), LOTTO_NUM_SIZE)
-    );
-    showLottoPrize(lottoPrizeList);
-    showReturnRate(ReturnRateCalculator.calculate(price, LottoPrize.getTotalPrize(lottoPrizeList)));
+//    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(
+//        WinningNums.valueOf(showWinningNums(), LOTTO_SIZE)
+//    );
+//    showLottoPrize(lottoPrizeList);
+//    showReturnRate(ReturnRateCalculator.calculate(price, LottoPrize.getTotalPrize(lottoPrizeList)));
   }
 }

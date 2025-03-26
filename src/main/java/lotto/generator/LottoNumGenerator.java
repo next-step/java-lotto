@@ -10,11 +10,11 @@ import java.util.stream.IntStream;
 
 public class LottoNumGenerator {
 
-  private final int lottoNumSize;
+  private final int lottoSize;
   private final int maxLottoCandidateNum;
 
-  public LottoNumGenerator(int lottoNumSize, int maxLottoCandidateNum) {
-    this.lottoNumSize = lottoNumSize;
+  public LottoNumGenerator(int lottoSize, int maxLottoCandidateNum) {
+    this.lottoSize = lottoSize;
     this.maxLottoCandidateNum = maxLottoCandidateNum;
   }
 
@@ -25,7 +25,7 @@ public class LottoNumGenerator {
         .collect(Collectors.toList());
 
     res = shuffleStrategy.shuffle(res);
-    res = res.subList(0, lottoNumSize);
+    res = res.subList(0, lottoSize);
     Collections.sort(res);
 
     return LottoNumList.valueOf(res);

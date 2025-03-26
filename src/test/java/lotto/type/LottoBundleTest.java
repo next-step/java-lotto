@@ -39,6 +39,6 @@ class LottoBundleTest {
         List.of(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6)), LottoNumList.valueOf(List.of(10, 11, 12, 13, 15, 16)))
     );
 
-    assertThat(bundle.getLottoPrizes(WinningNums.valueOf("1, 2, 3, 4, 5, 6", 6))).containsExactly(LottoPrize.SIX_MATCHES, LottoPrize.ZERO_MATCHES);
+    assertThat(bundle.getLottoPrizes(WinningNums.valueOf("1, 2, 3, 4, 5, 6", 6, 45), BonusNum.valueOf(7, 45))).containsExactly(LottoPrize.SIX_MATCHES, LottoPrize.ZERO_MATCHES);
   }
 }
