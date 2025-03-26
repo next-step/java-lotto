@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTest {
+class LottoTest {
     @DisplayName("로또 생성하면서 숫자 정렬되는지 테스트")
     @Test
     void create_lotto() {
