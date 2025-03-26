@@ -5,6 +5,7 @@ import java.util.List;
 import lotto.domain.AutomaticStrategy;
 import lotto.domain.Lotto;
 import lotto.domain.LottoSeller;
+import lotto.domain.LottoWinningChecker;
 import lotto.domain.ManualStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -18,7 +19,9 @@ public class LottoMain {
         OutputView.printLottos(lottos);
 
         String enteredWinningNumbers = InputView.inputWinLotto();
-        Lotto winLotto = new ManualStrategy(enteredWinningNumbers).generate();
+        Lotto winningLotto = new ManualStrategy(enteredWinningNumbers).generate();
+
+        LottoWinningChecker lottoWinningChecker = new LottoWinningChecker(lottos, winningLotto);
 
     }
 }
