@@ -18,7 +18,7 @@ public class Lottos {
   }
 
   public void printAllLottos() {
-    lottoList.forEach(System.out::println);
+    lottoList.forEach(lotto -> System.out.println(lotto.getNumberRepresentation()));
   }
 
   public Map<LottoPrize, Integer> calculatePrize(Lotto winningLotto) {

@@ -22,9 +22,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     return Objects.hashCode(value);
   }
 
-  @Override
-  public String toString() {
-    return String.valueOf(value);
+  public int getNumber() {
+    return value;
   }
 
   @Override

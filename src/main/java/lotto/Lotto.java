@@ -50,8 +50,10 @@ public class Lotto {
     return numbers.contains(lottoNumber);
   }
 
-  @Override
-  public String toString() {
-    return "[" + numbers.stream().map(LottoNumber::toString).collect(joining(", ")) + "]";
+  public String getNumberRepresentation() {
+    return "[" + numbers.stream()
+            .map(LottoNumber::getNumber)
+            .map(String::valueOf)
+            .collect(joining(", ")) + "]";
   }
 }
