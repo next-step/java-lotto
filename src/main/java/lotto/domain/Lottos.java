@@ -27,7 +27,7 @@ public class Lottos {
         return new Lottos(result);
     }
 
-    public List<Lotto> getAllLottos() {
+    public List<Lotto> values() {
         return lottos;
     }
 

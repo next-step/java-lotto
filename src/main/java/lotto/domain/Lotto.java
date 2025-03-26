@@ -22,9 +22,11 @@ public class Lotto {
         );
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
+    public String combine(String seperator) {
+        return numbers.stream()
+                .map(Number::value)
+                .map(String::valueOf)
+                .collect(Collectors.joining(seperator));
     }
 
     @Override

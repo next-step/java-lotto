@@ -11,8 +11,8 @@ public class ResultView {
     public static void printLottos(Lottos lottos) {
         StringBuilder sb = new StringBuilder();
         sb.append(lottos.getSize()).append("개를 구매했습니다.\n");
-        for (Lotto lotto : lottos.getAllLottos()) {
-            sb.append(lotto.toString());
+        for (Lotto lotto : lottos.values()) {
+            sb.append(lotto.combine(", "));
             sb.append("\n");
         }
         System.out.println(sb);

@@ -33,8 +33,7 @@ public class Number {
         return Objects.hashCode(value);
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(value);
+    public int value() {
+        return value;
     }
 }
