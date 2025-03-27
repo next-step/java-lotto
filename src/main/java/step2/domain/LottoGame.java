@@ -5,7 +5,7 @@ import step2.domain.lotto.LottoGenerator;
 import step2.domain.lotto.WinningLotto;
 
 public class LottoGame {
-    private final LottoContainer lottoContainer;
+    private final LottoCount lottoCount;
     private final WinningLotto winningLotto;
     private final LottoGenerator lottoGenerator;
 
@@ -16,16 +16,16 @@ public class LottoGame {
             throw new IllegalArgumentException(validationMessage);
         }
         this.lottoGenerator = lottoGenerator;
-        this.lottoContainer = new LottoContainer(purchaseAmount / lottoPrice, lottoGenerator);
+        this.lottoCount = new LottoCount(purchaseAmount, lottoPrice);
         this.winningLotto = winningLotto;
     }
 
     public LottoGameResult play() {
-        return lottoContainer.checkWinningResults(winningLotto);
+        return lottoContainer().checkWinningResults(winningLotto);
     }
 
-    public int getLottoCount() {
-        return lottoContainer.size();
+    private LottoContainer lottoContainer() {
+        return lottoCount.generateLottoContainer(lottoGenerator);
     }
 
     private boolean isValid(int purchaseAmount, int lottoPrice) {

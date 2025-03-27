@@ -26,4 +26,8 @@
 - Map 사용 필요? 당첨된 복권만 모아서 당첨 정보를 추출
   - 물론 이 경우에도 Map은 필요
 ### LottoContainer
-- Lotto 무작위 생성 기능이 LottoContainer에 있으면 안됨
+- Lotto 무작위 생성 기능이 LottoContainer에 있으면 안됨 -> LottoGenerator 주입
+- LottoContainer는 LottoGame에서 생성됨 -> LottoGame은 LottoContainer에서 사용할 LottoGenerator를 주입 받음
+## LottoGame
+- LottoGame의 역할은 로또 게임을 진행하는 것
+- 구입 금액과 로또 금액을 검증하고 로또 개수를 구하는 일까지 하는 것은 SRP 위반 -> LottoCount로 분리 

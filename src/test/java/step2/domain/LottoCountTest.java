@@ -1,0 +1,35 @@
+package step2.domain;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import step2.domain.lotto.LottoContainer;
+import step2.domain.lotto.LottoGenerator;
+
+class LottoCountTest {
+
+    @DisplayName("로또 구입 금액이 로또 1개 가격 단위가 아니거나 1개 가격 이하인 경우 IllegalArgumentException throw")
+    @CsvSource(value={"0, 500", "500, 1000", "1500, 1000"})
+    @ParameterizedTest
+    void shouldNotAllowInvalidLottoPurchaseAmount(int purchaseAmount, int lottoPrice) {
+        Assertions.assertThatThrownBy(() -> new LottoCount(purchaseAmount, lottoPrice))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("해당하는 갯수만큼의 로또 생성")
+    @Test
+    void generateLottoTest() {
+        // given
+        int purchaseAmount = 14000;
+        int lottoPrice = 1000;
+        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
+
+        // when
+        LottoContainer lottoContainer = lottoCount.generateLottoContainer(new LottoGenerator(1, 45, 6));
+
+        // then
+        Assertions.assertThat(lottoContainer.size()).isEqualTo(purchaseAmount / lottoPrice);
+    }
+}

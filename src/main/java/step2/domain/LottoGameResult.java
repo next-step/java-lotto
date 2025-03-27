@@ -18,4 +18,8 @@ public class LottoGameResult {
         }
         return rankCounters;
     }
+
+    public Integer lottoCount() {
+        return ranks.size();
+    }
 }

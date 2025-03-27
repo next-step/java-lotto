@@ -1,19 +1,17 @@
-package domain;
+package step2.domain;
 
-import step2.domain.LottoGame;
-import step2.domain.LottoGameResult;
-import step2.domain.lotto.LottoGenerator;
-import step2.domain.lotto.Rank;
-import step2.domain.lotto.WinningLotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step2.domain.lotto.LottoGenerator;
+import step2.domain.lotto.Rank;
+import step2.domain.lotto.WinningLotto;
 
 import java.util.List;
 
-public class LottoGameTest {
+class LottoGameResultTest {
 
     private static final WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
     private static final LottoGenerator lottoGenerator = new LottoGenerator(1, 45, 6);
@@ -24,18 +22,10 @@ public class LottoGameTest {
     void createLotto(int purchaseAmount, int lottoPrice, int expected) {
         // when
         LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, winningLotto, lottoGenerator);
+        LottoGameResult lottoGameResult = lottoGame.play();
 
         // then
-        Assertions.assertThat(lottoGame.getLottoCount()).isEqualTo(expected);
-    }
-
-    @DisplayName("로또 구입 금액이 로또 1개 가격 단위가 아니거나 1개 가격 이하인 경우 IllegalArgumentException throw")
-    @CsvSource(value={"0, 500", "500, 1000", "1500, 1000"})
-    @ParameterizedTest
-    void createLottoException(int purchaseAmount, int lottoPrice) {
-        // when
-        Assertions.assertThatThrownBy(() -> new LottoGame(purchaseAmount, lottoPrice, winningLotto, lottoGenerator))
-                .isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThat(lottoGameResult.lottoCount()).isEqualTo(expected);
     }
 
     @DisplayName("로또 결과 반환")
@@ -51,6 +41,6 @@ public class LottoGameTest {
         for (Rank rank: Rank.values()) {
             actual += result.getRankCounters().getCount(rank);
         }
-        Assertions.assertThat(actual).isEqualTo(lottoGame.getLottoCount());
+        Assertions.assertThat(actual).isEqualTo(result.lottoCount());
     }
 }

@@ -1,10 +1,9 @@
-package domain;
+package step2.domain;
 
-import step2.domain.RankCounter;
-import step2.domain.lotto.Rank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.lotto.Rank;
 
 public class RankCounterTest {
 
