@@ -13,7 +13,7 @@ public class LottoOutputView extends OutputView {
 
     public void printTickets(List<LottoTicket> tickets) {
         System.out.println(String.format("%d개를 구매했습니다.", tickets.size()));
-        for(LottoTicket ticket : tickets) {
+        for (LottoTicket ticket : tickets) {
             System.out.println(ticket.getNumbers());
         }
         System.out.println();
@@ -22,11 +22,12 @@ public class LottoOutputView extends OutputView {
     public void printStatistic(Map<LottoRank, Integer> stats) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(String.format("%d개 일치 (%d원)- %d개", FOURTH.getMatchNumberCount(), FOURTH.getWinningAmount(), stats.get(FOURTH)));
-        System.out.println(String.format("%d개 일치 (%d원)- %d개", THIRD.getMatchNumberCount(), THIRD.getWinningAmount(), stats.get(THIRD)));
-        System.out.println(String.format("%d개 일치 (%d원)- %d개", SECOND.getMatchNumberCount(), SECOND.getWinningAmount(), stats.get(SECOND)));
-        System.out.println(String.format("%d개 일치 (%d원)- %d개", FIRST.getMatchNumberCount(), FIRST.getWinningAmount(), stats.get(FIRST)));
 
+        String statisticMessage = "%d개 일치 (%d원)- %d개";
+        System.out.println(String.format(statisticMessage, FOURTH.getMatchCount(), FOURTH.getPrize(), stats.get(FOURTH)));
+        System.out.println(String.format(statisticMessage, THIRD.getMatchCount(), THIRD.getPrize(), stats.get(THIRD)));
+        System.out.println(String.format(statisticMessage, SECOND.getMatchCount(), SECOND.getPrize(), stats.get(SECOND)));
+        System.out.println(String.format(statisticMessage, FIRST.getMatchCount(), FIRST.getPrize(), stats.get(FIRST)));
     }
 
     public void printIncomeRatio(double ratio) {

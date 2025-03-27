@@ -21,7 +21,7 @@ public class LottoInputView {
         System.out.println();
 
         List<Integer> result = new ArrayList<>();
-        for(String numberText : numberTexts) {
+        for (String numberText : numberTexts) {
             result.add(Integer.parseInt(numberText));
         }
         return result;

@@ -30,7 +30,7 @@ class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {TICKET_AMOUNT-1, TICKET_AMOUNT+1})
+    @ValueSource(ints = {TICKET_AMOUNT - 1, TICKET_AMOUNT + 1})
     @DisplayName("로또 발행 머신은 구입 금액을 장당 가격으로 나누었을 때, 정수가 아니면 에러를 반환한다.")
     void validateAmount(int amount) {
         assertThatThrownBy(() -> new LottoMachine(amount))
@@ -41,14 +41,14 @@ class LottoMachineTest {
     @DisplayName("로또 발행 머신은 당첨번호를 입력하면 N개의 번호가 일치하는 티켓 개수와 상금을 각각 반환한다.")
     void getWinningStatistics() {
         List<LottoTicket> tickets = Arrays.asList(
-                new LottoTicket(List.of(1,7,8,9,10,11)),
-                new LottoTicket(List.of(1,2,8,9,10,11)),
-                new LottoTicket(List.of(1,2,3,9,10,11)),
-                new LottoTicket(List.of(1,2,3,4,5,6))
+                new LottoTicket(List.of(1, 7, 8, 9, 10, 11)),
+                new LottoTicket(List.of(1, 2, 8, 9, 10, 11)),
+                new LottoTicket(List.of(1, 2, 3, 9, 10, 11)),
+                new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
         );
         LottoMachine lottoMachine = new LottoMachine(TICKET_AMOUNT, tickets);
 
-        LottoTicket winningTicket = new LottoTicket(List.of(1,2,3,4,5,6));
+        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoMachine.compare(winningTicket))
                 .containsEntry(LottoRank.FOURTH, 1)
@@ -61,14 +61,14 @@ class LottoMachineTest {
     @DisplayName("로또 머신은 총수익률을 반환한다")
     void getTotalIncomeRatio() {
         List<LottoTicket> tickets = Arrays.asList(
-                new LottoTicket(List.of(1,7,8,9,10,11)),
-                new LottoTicket(List.of(1,2,3,9,10,11)),
-                new LottoTicket(List.of(1,2,3,4,5,6))
+                new LottoTicket(List.of(1, 7, 8, 9, 10, 11)),
+                new LottoTicket(List.of(1, 2, 3, 9, 10, 11)),
+                new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
         );
         LottoMachine lottoMachine = new LottoMachine(TICKET_AMOUNT, tickets);
-        LottoTicket winningTicket = new LottoTicket(List.of(1,2,3,4,5,6));
+        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
 
-        double expected =(double)(LottoRank.FOURTH.getWinningAmount() + LottoRank.FIRST.getWinningAmount()) /TICKET_AMOUNT;
+        double expected = (double) (LottoRank.FOURTH.getPrize() + LottoRank.FIRST.getPrize()) / TICKET_AMOUNT;
         assertThat(lottoMachine.calculateRevenue(winningTicket)).isEqualTo(expected);
     }
 }
