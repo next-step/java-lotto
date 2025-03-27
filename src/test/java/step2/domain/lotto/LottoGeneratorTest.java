@@ -23,8 +23,8 @@ public class LottoGeneratorTest {
 
         // then
         Assertions.assertThat(generated)
-                .hasSize(SIZE) // 정해진 로또 개수 조건
-                .doesNotHaveDuplicates() // 중복되지 않은 번호 조건
-                .allSatisfy(number -> Assertions.assertThat(number).isBetween(MIN_NUMBER, MAX_NUMBER)); // 범위 조건
+                .hasSize(SIZE)
+                .doesNotHaveDuplicates()
+                .allSatisfy(number -> Assertions.assertThat(number).isBetween(MIN_NUMBER, MAX_NUMBER));
     }
 }

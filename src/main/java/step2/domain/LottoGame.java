@@ -2,7 +2,10 @@ package step2.domain;
 
 import step2.domain.lotto.LottoContainer;
 import step2.domain.lotto.LottoGenerator;
+import step2.domain.lotto.Rank;
 import step2.domain.lotto.WinningLotto;
+
+import java.util.List;
 
 public class LottoGame {
     private final LottoCount lottoCount;
@@ -21,10 +24,12 @@ public class LottoGame {
     }
 
     public LottoGameResult play() {
-        return lottoContainer().checkWinningResults(winningLotto);
+        LottoContainer lottoContainer = generatelottoContainer();
+        List<Rank> ranks = lottoContainer.checkWinningResults(winningLotto);
+        return new LottoGameResult(ranks);
     }
 
-    private LottoContainer lottoContainer() {
+    private LottoContainer generatelottoContainer() {
         return lottoCount.generateLottoContainer(lottoGenerator);
     }
 
