@@ -1,6 +1,5 @@
 package ui;
 
-import model.lotto.Lotto;
 import model.lotto.WinningLotto;
 
 import java.util.Scanner;
@@ -18,7 +17,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
         System.out.println("보너스 볼을 입력해 주세요.");
-        int bonusBall =  scanner.nextInt();
+        int bonusBall = scanner.nextInt();
         return new WinningLotto(input, bonusBall);
     }
 
