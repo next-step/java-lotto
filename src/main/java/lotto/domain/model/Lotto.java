@@ -41,11 +41,14 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public LottoRank getRank(Lotto winner) {
+    public LottoRank calculateRank(WinningLotto winner) {
+        boolean isBonusMatched = lottoNumbers.contains(winner.getBonusNumber());
+
         int matchedNum = (int) lottoNumbers.stream()
-                .filter(winner.lottoNumbers::contains)
+                .filter(winner.getLotto().lottoNumbers::contains)
                 .count();
-        return LottoRank.fromMatchedNum(matchedNum);
+
+        return LottoRank.of(matchedNum, isBonusMatched);
     }
 
     public String toString() {

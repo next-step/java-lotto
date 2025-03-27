@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.view.model.UserMoneyInput;
-import lotto.view.model.WinningNumberInput;
+import lotto.domain.model.WinningLotto;
 
 import java.util.Scanner;
 
@@ -13,8 +13,15 @@ public class InputView {
         return UserMoneyInput.from(scanner.nextLine());
     }
 
-    public static WinningNumberInput getWinnerInput() {
+    public static WinningLotto getWinnerInput() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return WinningNumberInput.from(scanner.nextLine());
+        String winningNumbers = scanner.nextLine();
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+
+        return WinningLotto.of(winningNumbers, bonusNumber);
     }
+
+
 }

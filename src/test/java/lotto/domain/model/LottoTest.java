@@ -12,18 +12,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoTest {
     @ParameterizedTest(name = "로또 번호가 일치한 갯수에 따라 올바른 rank를 반환한다. 입력값: {0}")
     @MethodSource("provideLottoTestCases")
-    void lottoRankTest(Lotto purchased, Lotto winning, LottoRank expected) {
-        LottoRank result = purchased.getRank(winning);
+    void lottoRankTest(Lotto purchased, WinningLotto winning, LottoRank expected) {
+        LottoRank result = purchased.calculateRank(winning);
         assertEquals(expected, result);
     }
 
     static Stream<Arguments> provideLottoTestCases() {
-        Lotto winningLotto = Lotto.createManual(List.of(1,2,3,4,5,6));
+        WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6", 7);
         return Stream.of(
                 Arguments.of(Lotto.createManual(List.of(1,2,3,4,5,6)), winningLotto, LottoRank.FIRST),
                 Arguments.of(Lotto.createManual(List.of(1,2,3,4,5,7)), winningLotto, LottoRank.SECOND),
-                Arguments.of(Lotto.createManual(List.of(1,2,3,4,7,8)), winningLotto, LottoRank.THIRD),
-                Arguments.of(Lotto.createManual(List.of(1,2,3,7,8,9)), winningLotto, LottoRank.FOURTH)
+                Arguments.of(Lotto.createManual(List.of(1,2,3,4,5,8)), winningLotto, LottoRank.THIRD),
+                Arguments.of(Lotto.createManual(List.of(1,2,3,4,7,9)), winningLotto, LottoRank.FOURTH),
+                Arguments.of(Lotto.createManual(List.of(1,2,3,4,8,9)), winningLotto, LottoRank.FOURTH)
         );
     }
 }

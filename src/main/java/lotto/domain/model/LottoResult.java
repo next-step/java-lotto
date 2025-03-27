@@ -8,7 +8,7 @@ import java.util.Map;
 public class LottoResult {
     private final Map<LottoRank, Integer> lottoResult = new HashMap<>();
 
-    public static LottoResult of(List<Lotto> purchasedLottos, Lotto winningLotto) {
+    public static LottoResult of(List<Lotto> purchasedLottos, WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
         purchasedLottos.forEach(lotto -> lottoResult.addLottoResult(lotto, winningLotto));
         return lottoResult;
@@ -30,8 +30,8 @@ public class LottoResult {
         return statisticsMap;
     }
 
-    private void addLottoResult(Lotto purchasedLotto, Lotto winningLotto) {
-        LottoRank rank = purchasedLotto.getRank(winningLotto);
+    private void addLottoResult(Lotto purchasedLotto, WinningLotto winningLotto) {
+        LottoRank rank = purchasedLotto.calculateRank(winningLotto);
         lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
     }
 

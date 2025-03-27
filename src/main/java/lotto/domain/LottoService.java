@@ -4,7 +4,7 @@ import lotto.domain.model.Lotto;
 import lotto.domain.model.LottoResult;
 import lotto.domain.model.LottoSeller;
 import lotto.view.model.UserMoneyInput;
-import lotto.view.model.WinningNumberInput;
+import lotto.domain.model.WinningLotto;
 import lotto.view.OutputView;
 import lotto.view.InputView;
 
@@ -15,9 +15,8 @@ public class LottoService {
 
     public void purchase() {
         List<Lotto> purchasedLottos = purchaseLotto();
-        Lotto winningLotto = getWinningLotto();
+        WinningLotto winningLotto = getWinningLotto();
         displayResult(purchasedLottos, winningLotto);
-
     }
 
     private List<Lotto> purchaseLotto() {
@@ -32,12 +31,11 @@ public class LottoService {
         return purchasedLotto;
     }
 
-    private Lotto getWinningLotto() {
-        WinningNumberInput winnerNumberInput = InputView.getWinnerInput();
-        return winnerNumberInput.getWinningLotto();
+    private WinningLotto getWinningLotto() {
+        return InputView.getWinnerInput();
     }
 
-    private void displayResult(List<Lotto> purchasedLottos, Lotto winningLotto) {
+    private void displayResult(List<Lotto> purchasedLottos, WinningLotto winningLotto) {
         LottoResult lottoResult = LottoResult.of(purchasedLottos, winningLotto);
         OutputView.printResult(lottoResult);
     }
