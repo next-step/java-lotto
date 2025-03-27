@@ -19,10 +19,12 @@ public class OutputView {
     }
 
     public static void printStatics(Map<Integer, Integer> ranks, double profitRate) {
+        System.out.println("당첨 통계");
+        System.out.println("--------");
         System.out.println("3개 일치 (5000원) : " + ranks.getOrDefault(FOURTH_PRIZE, 0) + "개");
-        System.out.println("4개 일치 (5000원) : " + ranks.getOrDefault(THIRD_PRIZE, 0) + "개");
-        System.out.println("5개 일치 (5000원) : " + ranks.getOrDefault(SECOND_PRIZE, 0) + "개");
-        System.out.println("6개 일치 (5000원) : " + ranks.getOrDefault(FIRST_PRIZE, 0) + "개");
+        System.out.println("4개 일치 (50000원) : " + ranks.getOrDefault(THIRD_PRIZE, 0) + "개");
+        System.out.println("5개 일치 (1500000원) : " + ranks.getOrDefault(SECOND_PRIZE, 0) + "개");
+        System.out.println("6개 일치 (2000000000원) : " + ranks.getOrDefault(FIRST_PRIZE, 0) + "개");
         System.out.println("총 수익률은 " + profitRate + "입니다.");
     }
 

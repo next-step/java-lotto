@@ -20,9 +20,11 @@ public class LottoMain {
         OutputView.printLottos(lottos);
 
         String enteredWinningNumbers = InputView.inputWinLotto();
+        String bonusLottoNumber = InputView.inputBonusLottoNumber();
         Lotto winningLotto = new ManualStrategy(enteredWinningNumbers).generate();
 
         LottoWinningChecker lottoWinningChecker = new LottoWinningChecker(lottos, winningLotto);
         OutputView.printStatics(lottoWinningChecker.getRanks(), lottoWinningChecker.getProfitRate());
+
     }
 }
