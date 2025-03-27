@@ -1,8 +1,8 @@
 package step1;
 
 import step1.symbol.Operand;
-import step1.views.InputView;
-import step1.views.ResultView;
+import views.InputView;
+import views.ResultView;
 
 public class Calculator {
 

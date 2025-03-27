@@ -1,4 +1,4 @@
-package step1.views;
+package views;
 
 import step1.symbol.Operand;
 
