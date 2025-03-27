@@ -13,14 +13,6 @@ public enum Division {
     private int matchCount;
     private int prize;
 
-    private static Map<Division, Integer> matchCountMap = new EnumMap<>(Division.class);
-
-    static {
-        for (Division division : Division.values()) {
-            matchCountMap.put(division, 0);
-        }
-    }
-
     private Division(int matchCount, int prize) {
         this.matchCount = matchCount;
         this.prize = prize;
@@ -34,14 +26,6 @@ public enum Division {
         return Arrays.stream(values())
                 .filter(division -> division.matchCount == matchCount)
                 .findFirst()
-                .map(division -> {
-                    matchCountMap.put(division, matchCountMap.get(division) + 1);
-                    return division;
-                })
                 .orElse(null);
-    }
-
-    public static Map<Division, Integer> getMatchCountMap() {
-        return matchCountMap;
     }
 }

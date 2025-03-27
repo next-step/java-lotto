@@ -8,7 +8,7 @@ public class LottoGame {
 
     private int count;
     private Lottos lottos;
-    Map<Division, Integer> winnerCountMap;
+    private Map<Division, Integer> winnerCountMap;
 
     public LottoGame(int money) {
         validateMoney(money);
