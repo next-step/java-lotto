@@ -20,7 +20,9 @@ public class ResultView {
         RankCounter rankCounters = lottoGameResult.getRankCounters();
         printMessage("당첨 통계\n---------");
         for (Rank rank : Rank.validValues()) {
-            String rankDisplayMessage = String.format("%s - %d개", rank.displayRank(), rankCounters.getCount(rank));
+            RankFormatter rankFormatter = rank.generateFormatter();
+            String formattedRankInformation = rankFormatter.format("%d개 일치 (%d)원");
+            String rankDisplayMessage = String.format("%s - %d개", formattedRankInformation, rankCounters.getCount(rank));
             printMessage(rankDisplayMessage);
         }
     }

@@ -1,5 +1,7 @@
 package step2.domain.rank;
 
+import views.RankFormatter;
+
 import java.util.EnumSet;
 
 public enum Rank {
@@ -26,8 +28,8 @@ public enum Rank {
         return winnings * count;
     }
 
-    public String displayRank() {
-        return String.format("%d개 일치 (%d)원", requiredMatches, winnings);
+    public RankFormatter generateFormatter() {
+        return new RankFormatter(this.requiredMatches, this.winnings);
     }
 
     public static Rank[] validValues() {

@@ -53,6 +53,6 @@
   - [x] LottoGenerator 이름 변경
   - [x] LottoFactory 제거 후 Lotto에 정적 팩토리 메서드 도입
   - [ ] MatchedCount equals 및 hashCode 구현
-  - [ ] Rank.displayRank 변경
+  - [x] Rank.displayRank 변경
   - [ ] toString 대신 String 반환 메소드 생성
   - [ ] LottoGameResult에서 winningRate 계산하도록 변경
