@@ -1,5 +1,6 @@
 package domain;
 
+import domain.lotto.LottoGenerator;
 import domain.lotto.Rank;
 import domain.lotto.WinningLotto;
 import org.assertj.core.api.Assertions;
@@ -13,13 +14,14 @@ import java.util.List;
 public class LottoGameTest {
 
     private static final WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
+    private static final LottoGenerator lottoGenerator = new LottoGenerator(1, 45, 6);
 
     @DisplayName("구매 금액에 해당하는 갯수의 로또 발급")
     @CsvSource(value = {"1000, 1000, 1", "14000, 2000, 7", "5000, 5000, 1"})
     @ParameterizedTest
     void createLotto(int purchaseAmount, int lottoPrice, int expected) {
         // when
-        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, winningLotto);
+        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, winningLotto, lottoGenerator);
 
         // then
         Assertions.assertThat(lottoGame.getLottoCount()).isEqualTo(expected);
@@ -30,7 +32,7 @@ public class LottoGameTest {
     @ParameterizedTest
     void createLottoException(int purchaseAmount, int lottoPrice) {
         // when
-        Assertions.assertThatThrownBy(() -> new LottoGame(purchaseAmount, lottoPrice, winningLotto))
+        Assertions.assertThatThrownBy(() -> new LottoGame(purchaseAmount, lottoPrice, winningLotto, lottoGenerator))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -40,7 +42,7 @@ public class LottoGameTest {
         int purchaseAmount = 10000;
         int lottoPrice = 1000;
 
-        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, winningLotto);
+        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, winningLotto, lottoGenerator);
         LottoGameResult result = lottoGame.play();
 
         int actual = 0;

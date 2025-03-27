@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class LottoContainerTest {
 
+    private static final LottoGenerator lottoGenerator = new LottoGenerator(1, 45, 6);
+
     @DisplayName("주어진 개수만큼 로또 발급")
     @Test
     void createLottoContainer() {
@@ -13,7 +15,7 @@ public class LottoContainerTest {
         int lottoCount = 5;
 
         // when
-        LottoContainer lottoContainer = new LottoContainer(lottoCount);
+        LottoContainer lottoContainer = new LottoContainer(lottoCount, lottoGenerator);
 
         // then
          Assertions.assertThat(lottoContainer.size()).isEqualTo(lottoCount);
@@ -26,7 +28,7 @@ public class LottoContainerTest {
         int lottoCount = 0;
 
         // when
-        Assertions.assertThatThrownBy(() -> new LottoContainer(lottoCount))
+        Assertions.assertThatThrownBy(() -> new LottoContainer(lottoCount, lottoGenerator))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 개수는 1개 이상이어야 합니다.");
     }
@@ -36,6 +38,6 @@ public class LottoContainerTest {
     void checkWinningResults() {
         // given
         int lottoCount = 5;
-        LottoContainer lottoContainer = new LottoContainer(lottoCount);
+        LottoContainer lottoContainer = new LottoContainer(lottoCount, lottoGenerator);
     }
 }
