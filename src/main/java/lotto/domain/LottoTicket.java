@@ -6,6 +6,8 @@ import java.util.Random;
 
 public class LottoTicket {
     private static final Random RANDOM = new Random();
+    private static final int NUMBER_UPPER_BOUND = 45;
+    private static final int NUMBER_LOWER_BOUND = 1;
     private final List<Integer> numbers = new ArrayList<>();
 
     public List<Integer> issue() {
@@ -16,6 +18,6 @@ public class LottoTicket {
     }
 
     private static int generateNumber() {
-        return RANDOM.nextInt(45);
+        return RANDOM.nextInt(NUMBER_UPPER_BOUND) + NUMBER_LOWER_BOUND;
     }
 }
