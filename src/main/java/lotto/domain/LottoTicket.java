@@ -56,4 +56,8 @@ public class LottoTicket {
         }
         return LottoRank.of(matchCount);
     }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
 }
