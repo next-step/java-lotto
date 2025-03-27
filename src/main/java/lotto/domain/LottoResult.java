@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public class LottoResult {
     }
 
     public static Map<Rank, Integer> analyzeLottoStatistics(List<Lotto> lottoList, Lotto winningLotto) {
-        Map<Rank, Integer> statistics = new HashMap<>();
+        Map<Rank, Integer> statistics = new EnumMap<>(Rank.class);
         initializeStatistics(statistics);
 
         for (Lotto lotto : lottoList) {
