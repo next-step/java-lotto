@@ -1,6 +1,6 @@
-package domain;
+package step2.domain;
 
-import domain.lotto.Rank;
+import step2.domain.lotto.Rank;
 
 import java.util.HashMap;
 import java.util.Map;

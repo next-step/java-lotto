@@ -1,8 +1,8 @@
-package domain;
+package step2.domain;
 
-import domain.lotto.LottoContainer;
-import domain.lotto.LottoGenerator;
-import domain.lotto.WinningLotto;
+import step2.domain.lotto.LottoContainer;
+import step2.domain.lotto.LottoGenerator;
+import step2.domain.lotto.WinningLotto;
 
 public class LottoGame {
     private final LottoContainer lottoContainer;

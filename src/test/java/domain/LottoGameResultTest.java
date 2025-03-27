@@ -1,6 +1,8 @@
 package domain;
 
-import domain.lotto.Rank;
+import step2.domain.LottoGameResult;
+import step2.domain.RankCounter;
+import step2.domain.lotto.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

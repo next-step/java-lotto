@@ -1,6 +1,6 @@
-package domain.lotto;
+package step2.domain.lotto;
 
-import domain.MatchedCount;
+import step2.domain.MatchedCount;
 
 public enum Rank {
     FIRST("1등", 6, 2000000000),

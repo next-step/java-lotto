@@ -1,4 +1,4 @@
-package domain;
+package step2.domain;
 
 public class MatchedCount {
     private final int matchedCount;

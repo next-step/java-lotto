@@ -1,8 +1,10 @@
 package domain;
 
-import domain.lotto.LottoGenerator;
-import domain.lotto.Rank;
-import domain.lotto.WinningLotto;
+import step2.domain.LottoGame;
+import step2.domain.LottoGameResult;
+import step2.domain.lotto.LottoGenerator;
+import step2.domain.lotto.Rank;
+import step2.domain.lotto.WinningLotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

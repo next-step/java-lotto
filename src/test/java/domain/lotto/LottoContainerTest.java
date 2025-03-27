@@ -3,6 +3,8 @@ package domain.lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.lotto.LottoContainer;
+import step2.domain.lotto.LottoGenerator;
 
 public class LottoContainerTest {
 

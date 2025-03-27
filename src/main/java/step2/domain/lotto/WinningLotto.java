@@ -1,4 +1,4 @@
-package domain.lotto;
+package step2.domain.lotto;
 
 import java.util.HashSet;
 import java.util.List;

@@ -1,6 +1,6 @@
-package domain.lotto;
+package step2.domain.lotto;
 
-import domain.LottoGameResult;
+import step2.domain.LottoGameResult;
 
 import java.util.ArrayList;
 import java.util.List;
