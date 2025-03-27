@@ -1,6 +1,6 @@
 package lotto.view.input;
 
-import lotto.domain.UserPaid;
+import lotto.domain.PaymentReceipt;
 import lotto.domain.product.LotteryTicket;
 
 import java.util.Scanner;
@@ -14,9 +14,9 @@ public class ConsoleInputView extends BaseInputView {
         return scanner.nextLine();
     }
 
-    public UserPaid purchase() {
+    public PaymentReceipt purchase() {
         System.out.println("구입 금액을 입력 해 주세요.");
-        return new UserPaid(scanner.nextLine());
+        return new PaymentReceipt(scanner.nextLine());
     }
 
     @Override

@@ -1,7 +1,7 @@
 package lotto.view.fake;
 
 
-import lotto.domain.UserPaid;
+import lotto.domain.PaymentReceipt;
 import lotto.domain.product.LotteryTicket;
 import lotto.view.input.BaseInputView;
 
@@ -19,8 +19,8 @@ public class FakeInputView extends BaseInputView {
     }
 
     @Override
-    public UserPaid purchase() {
-        return new UserPaid(input);
+    public PaymentReceipt purchase() {
+        return new PaymentReceipt(input);
     }
 
     @Override

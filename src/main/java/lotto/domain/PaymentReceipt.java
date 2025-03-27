@@ -2,11 +2,11 @@ package lotto.domain;
 
 import lotto.domain.product.Product;
 
-public class UserPaid {
+public class PaymentReceipt {
 
     private final Money money;
 
-    public UserPaid(String money) {
+    public PaymentReceipt(String money) {
         this.money = new Money(money);
     }
 

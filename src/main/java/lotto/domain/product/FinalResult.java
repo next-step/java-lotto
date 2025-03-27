@@ -1,7 +1,7 @@
 package lotto.domain.product;
 
 import lotto.domain.Money;
-import lotto.domain.UserPaid;
+import lotto.domain.PaymentReceipt;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class FinalResult {
         return result.get(number);
     }
 
-    public double returnRate(UserPaid paid) {
+    public double returnRate(PaymentReceipt paid) {
         Money totalPrize = getTotalPrize();
         return paid.getRateBy(totalPrize);
     }

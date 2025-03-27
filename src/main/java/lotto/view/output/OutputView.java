@@ -1,13 +1,13 @@
 package lotto.view.output;
 
-import lotto.domain.UserPaid;
+import lotto.domain.PaymentReceipt;
 import lotto.domain.product.FinalResult;
 import lotto.domain.product.LotteryTickets;
 import lotto.domain.product.LottoRank;
 
 public class OutputView {
 
-    public void printResult(FinalResult result, UserPaid paid) {
+    public void printResult(FinalResult result, PaymentReceipt paid) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.UserPaid;
+import lotto.domain.PaymentReceipt;
 import lotto.domain.product.LotteryTicket;
 import lotto.view.fake.FakeInputView;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +22,7 @@ public class InputViewTest {
     public void countLottoTest() {
         FakeInputView inputView = new FakeInputView("10000");
 
-        Integer count = new UserPaid(inputView.read())
+        Integer count = new PaymentReceipt(inputView.read())
                 .getUserCountBy(new LotteryTicket());
         assertThat(count).isEqualTo(10);
     }

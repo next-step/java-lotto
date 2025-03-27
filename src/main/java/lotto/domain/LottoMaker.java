@@ -20,7 +20,7 @@ public class LottoMaker {
     }
 
     public void run() {
-        UserPaid paid = inputView.purchase();
+        PaymentReceipt paid = inputView.purchase();
         Integer count = paid.getUserCountBy(new LotteryTicket());
         outputView.userPurchased(count);
 
@@ -32,7 +32,7 @@ public class LottoMaker {
         inputView.closeScanner();
     }
 
-    private void getResult(LotteryTicket winningTicket, UserPaid paid) {
+    private void getResult(LotteryTicket winningTicket, PaymentReceipt paid) {
         FinalResult result = tickets.getResult(winningTicket);
         outputView.printResult(result, paid);
     }
