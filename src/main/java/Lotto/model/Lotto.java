@@ -2,6 +2,7 @@ package Lotto.model;
 
 import Lotto.model.NumberExtractor.NumberExtractor;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -14,6 +15,7 @@ public class Lotto {
 
     public void draw(int size, int min, int max) {
         numbers = this.extractor.extract(size, min, max);
+        Collections.sort(numbers);
     }
 
     public int checkMatched(int[] winNumbers) {
