@@ -10,12 +10,12 @@
 
 ## 기능목록
 ### 뮨자열 계산기
-- [] 입력값을 공백을 기준으로 토큰을 분리
-- [] 분리된 토큰에서 '숫자'와 '사칙연산 부호'을 분리
-- [] 순서대로 계산
-  - [] 덧셈 계산기
-  - [] 뺄셈 계산기
-  - [] 곱셈 계산기
-  - [] 나눗셈 계산기
-- [] 입력값이 null or blank일 때 IllegalArgumentException throw
-- [] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+- [x] 입력값을 공백을 기준으로 토큰을 분리
+- [x] 분리된 토큰에서 '숫자'와 '사칙연산 부호'을 분리
+- [x] 순서대로 계산
+  - [x] 덧셈 계산기
+  - [x] 뺄셈 계산기
+  - [x] 곱셈 계산기
+  - [x] 나눗셈 계산기
+- [x] 입력값이 null or blank일 때 IllegalArgumentException throw
+- [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
