@@ -31,8 +31,12 @@ public class LottoReward {
     for (int i = 0; i < matchingNumberCounts.size(); i++) {
       int matchCount = matchingNumberCounts.get(i);
       boolean isBonus = matchingBonusCounts.get(i);
-      if (!LottoPrize.contains(matchCount, isBonus)) continue;
+      updateOnlyExistingPrize(prizeMap, matchCount, isBonus);
+    }
+  }
 
+  private static void updateOnlyExistingPrize(Map<LottoPrize, Integer> prizeMap, int matchCount, boolean isBonus) {
+    if (LottoPrize.contains(matchCount, isBonus)) {
       LottoPrize prize = LottoPrize.getPrizeFromMatchCount(matchCount, isBonus);
       prizeMap.put(prize, prizeMap.get(prize) + 1);
     }
