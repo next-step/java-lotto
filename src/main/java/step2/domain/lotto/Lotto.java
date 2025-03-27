@@ -8,8 +8,15 @@ import java.util.List;
 public class Lotto {
     private final List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers, LottoRule lottoRule) {
+        if (!lottoRule.isSatisfied(lottoNumbers)) {
+            throw new IllegalArgumentException("규칙을 만족하지 않는 숫자 입력입니다");
+        }
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public Lotto(LottoRule lottoRule) {
+        this.lottoNumbers = lottoRule.generateLotto();
     }
 
     public Rank determineRank(WinningLotto winningLotto) {

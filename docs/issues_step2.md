@@ -35,3 +35,7 @@
 ### Lotto 생성 시 검증 추가
 - LottoGenerator에서 사용하는 Parameter를 검증 시에도 사용하고 싶은데
   Lotto 생성자에서 Validator를 주입받는 것이 맞는가?
+  - LottoRule이라는 객체는 규칙 그 자체를 의미
+    - 규칙에 맞게 Lotto를 생성
+    - 규칙에 맞는지 검증
+  

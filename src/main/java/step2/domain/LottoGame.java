@@ -7,12 +7,12 @@ import java.util.List;
 
 public class LottoGame {
     private final LottoCount lottoCount;
-    private final LottoFactory lottoFactory;
+    private final LottoRule lottoRule;
     private final LottoContainer purchasedLotto;
 
-    public LottoGame(LottoCount lottoCount, LottoFactory lottoFactory) {
+    public LottoGame(LottoCount lottoCount, LottoRule lottoRule) {
         this.lottoCount = lottoCount;
-        this.lottoFactory = lottoFactory;
+        this.lottoRule = lottoRule;
         this.purchasedLotto = generatelottoContainer();
     }
 
@@ -22,7 +22,7 @@ public class LottoGame {
     }
 
     private LottoContainer generatelottoContainer() {
-        return lottoCount.generateLottoContainer(lottoFactory);
+        return lottoCount.generateLottoContainer(lottoRule);
     }
 
     @Override

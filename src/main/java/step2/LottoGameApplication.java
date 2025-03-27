@@ -38,9 +38,8 @@ public class LottoGameApplication {
     }
 
     private static LottoGame setUpLottoGame(LottoCount lottoCount) {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(1, 45, 6);
-        LottoFactory lottoFactory = new LottoFactory(lottoNumberGenerator);
-        return new LottoGame(lottoCount, lottoFactory);
+        LottoRule lottoRule = new LottoRule(1, 45, 6);
+        return new LottoGame(lottoCount, lottoRule);
     }
 
     private static LottoCount createLottoCountWithQuery() {

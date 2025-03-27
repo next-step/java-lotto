@@ -9,8 +9,7 @@ import java.util.List;
 
 public class LottoContainerTest {
 
-    private static final LottoNumberGenerator LOTTO_NUMBER_GENERATOR = new LottoNumberGenerator(1, 45, 6);
-    private static final LottoFactory lottoFactory = new LottoFactory(LOTTO_NUMBER_GENERATOR);
+    private static final LottoRule LOTTO_RULE = new LottoRule(1, 45, 6);
 
     @DisplayName("주어진 개수만큼 로또 발급")
     @Test
@@ -19,7 +18,7 @@ public class LottoContainerTest {
         int lottoCount = 5;
 
         // when
-        LottoContainer lottoContainer = new LottoContainer(lottoCount, lottoFactory);
+        LottoContainer lottoContainer = new LottoContainer(lottoCount, LOTTO_RULE);
 
         // then
          Assertions.assertThat(lottoContainer.size()).isEqualTo(lottoCount);
@@ -32,7 +31,7 @@ public class LottoContainerTest {
         int lottoCount = 0;
 
         // when
-        Assertions.assertThatThrownBy(() -> new LottoContainer(lottoCount, lottoFactory))
+        Assertions.assertThatThrownBy(() -> new LottoContainer(lottoCount, LOTTO_RULE))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 개수는 1개 이상이어야 합니다.");
     }
@@ -43,8 +42,8 @@ public class LottoContainerTest {
         // given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
 
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12));
+        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12), LOTTO_RULE);
         LottoContainer lottoContainer = new LottoContainer(List.of(lotto1, lotto2));
 
         // when

@@ -12,12 +12,14 @@ import java.util.List;
 
 public class LottoTest {
 
+    public static final LottoRule LOTTO_RULE = new LottoRule(1, 45, 6);
+
     @DisplayName("6개 번호가 일치하면 1등")
     @Test
     void determineFirstRank() {
         // given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
 
         // when
         Rank actual = lotto.determineRank(winningLotto);
@@ -32,7 +34,7 @@ public class LottoTest {
     void determineSecondRank() {
         // given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7), LOTTO_RULE);
 
         // when
         Rank actual = lotto.determineRank(winningLotto);
@@ -47,7 +49,7 @@ public class LottoTest {
     void determineThirdRank() {
         // given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 7, 8));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 7, 8), LOTTO_RULE);
 
         // when
         Rank actual = lotto.determineRank(winningLotto);
@@ -62,7 +64,7 @@ public class LottoTest {
     void determineFourthRank() {
         // given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 9, 7, 8));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 9, 7, 8), LOTTO_RULE);
 
         // when
         Rank actual = lotto.determineRank(winningLotto);
@@ -79,7 +81,7 @@ public class LottoTest {
         // given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
         List<Integer> lottoNumbers = getLottoNumbersFromString(lottoNumbersString);
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(lottoNumbers, LOTTO_RULE);
 
         // when
         Rank actual = lotto.determineRank(winningLotto);

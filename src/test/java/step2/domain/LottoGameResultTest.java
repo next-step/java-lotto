@@ -12,9 +12,8 @@ import java.util.List;
 
 class LottoGameResultTest {
 
-    private static final WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
-    private static final LottoNumberGenerator LOTTO_NUMBER_GENERATOR = new LottoNumberGenerator(1, 6, 6);
-    private static final LottoFactory lottoFactory = new LottoFactory(LOTTO_NUMBER_GENERATOR);
+    private static final WinningLotto WINNING_LOTTO = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
+    private static final LottoRule LOTTO_RULE = new LottoRule(1, 6, 6);
 
     @DisplayName("구매 금액에 해당하는 갯수의 로또 발급")
     @CsvSource(value = {"1000, 1000, 1", "14000, 2000, 7", "5000, 5000, 1"})
@@ -24,8 +23,8 @@ class LottoGameResultTest {
         LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
         // when
-        LottoGame lottoGame = new LottoGame(lottoCount, lottoFactory);
-        LottoGameResult lottoGameResult = lottoGame.play(winningLotto);
+        LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
+        LottoGameResult lottoGameResult = lottoGame.play(WINNING_LOTTO);
 
         // then
         Assertions.assertThat(lottoGameResult.lottoCount()).isEqualTo(expected);
@@ -38,8 +37,8 @@ class LottoGameResultTest {
         int lottoPrice = 1000;
         LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
-        LottoGame lottoGame = new LottoGame(lottoCount, lottoFactory);
-        LottoGameResult result = lottoGame.play(winningLotto);
+        LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
+        LottoGameResult result = lottoGame.play(WINNING_LOTTO);
 
         int actual = 0;
         for (Rank rank: Rank.values()) {
@@ -56,8 +55,8 @@ class LottoGameResultTest {
         int lottoPrice = 1000;
         LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
-        LottoGame lottoGame = new LottoGame(lottoCount, lottoFactory);
-        LottoGameResult result = lottoGame.play(winningLotto);
+        LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
+        LottoGameResult result = lottoGame.play(WINNING_LOTTO);
 
         long actual = result.getWinningsSum();
         long expected = Rank.FIRST.getTotalWinnings(10);

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class LottoNumberGeneratorTest {
+public class LottoRuleTest {
 
     private static final Integer MIN_NUMBER = 1;
     private static final Integer MAX_NUMBER = 45;
@@ -16,10 +16,10 @@ public class LottoNumberGeneratorTest {
     @Test
     void createLottoWithAllConditions() {
         // given
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(MIN_NUMBER, MAX_NUMBER, SIZE);
+        LottoRule lottoRule = new LottoRule(MIN_NUMBER, MAX_NUMBER, SIZE);
 
         // when
-        List<Integer> generated = lottoNumberGenerator.generateLotto();
+        List<Integer> generated = lottoRule.generateLotto();
 
         // then
         Assertions.assertThat(generated)

@@ -5,10 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.domain.lotto.LottoContainer;
-import step2.domain.lotto.LottoCount;
-import step2.domain.lotto.LottoFactory;
-import step2.domain.lotto.LottoNumberGenerator;
+import step2.domain.lotto.*;
 
 class LottoCountTest {
 
@@ -29,9 +26,8 @@ class LottoCountTest {
         LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
         // when
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(1, 45, 6);
-        LottoFactory lottoFactory = new LottoFactory(lottoNumberGenerator);
-        LottoContainer lottoContainer = lottoCount.generateLottoContainer(lottoFactory);
+        LottoRule lottoRule = new LottoRule(1, 45, 6);
+        LottoContainer lottoContainer = lottoCount.generateLottoContainer(lottoRule);
 
         // then
         Assertions.assertThat(lottoContainer.size()).isEqualTo(purchaseAmount / lottoPrice);
