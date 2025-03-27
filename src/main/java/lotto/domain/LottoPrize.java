@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public enum LottoPrize {
   THREE_MATCHES(3, false, 5_000),
@@ -23,14 +21,26 @@ public enum LottoPrize {
 
   public static LottoPrize getPrizeFromMatchCount(int count, boolean matchesBonus) {
     return Arrays.stream(values())
-            .filter(prize -> prize.matchCount == count && prize.isBonus == matchesBonus)
+            .filter(p -> p.matches(count, matchesBonus))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("일치하는 LottoPrize가 없습니다."));
   }
 
+  private boolean matches(int count, boolean matchesBonus) {
+    if (this.matchCount != count) return false;
+    if (hasBonusVariant()) return this.isBonus == matchesBonus;
+    return true;
+  }
+
+  private boolean hasBonusVariant() {
+    return Arrays.stream(values())
+            .filter(p -> p.matchCount == this.matchCount)
+            .count() > 1;
+  }
+
   public static boolean contains(int count, boolean matchesBonus) {
     return Arrays.stream(values())
-            .anyMatch(prize -> prize.matchCount == count && prize.isBonus == matchesBonus);
+            .anyMatch(p -> p.matches(count, matchesBonus));
   }
 
   public int getMatchCount() {

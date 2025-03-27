@@ -23,6 +23,8 @@ public class LottoReward {
 
     List<Integer> matchingNumberCounts = lottoList.countMatchingNumbers(winningLotto);
     List<Boolean> matchingBonusCounts = lottoList.countMatchingBonus(bonusNumber);
+    System.out.println("matchingBonusCounts = " + matchingBonusCounts);
+    System.out.println("matchingNumberCounts = " + matchingNumberCounts);
 
     for (int i = 0; i < matchingNumberCounts.size(); i++) {
       int matchCount = matchingNumberCounts.get(i);

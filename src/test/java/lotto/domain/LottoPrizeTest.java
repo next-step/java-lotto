@@ -28,25 +28,22 @@ class LottoPrizeTest {
             .hasMessage("일치하는 LottoPrize가 없습니다.");
   }
 
-  @DisplayName("일치 카운트 & 보너스가 존재하지 않는 LottoPrize를 반환하면 예외를 발생한다.")
-  @Test
-  void testGetPrizeFromMatchCountAndBonusException() {
-    assertThatThrownBy(() -> LottoPrize.getPrizeFromMatchCount(4, true))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("일치하는 LottoPrize가 없습니다.");
-  }
-
   @DisplayName("일치 카운트와 보너스 여부에 따른 LottoPrize가 존재하는지 확인한다.")
   @Test
   void testContainsPrizeMap() {
     assertTrue(LottoPrize.contains(3, false));
+    assertTrue(LottoPrize.contains(3, true));
     assertTrue(LottoPrize.contains(4, false));
+    assertTrue(LottoPrize.contains(4, true));
     assertTrue(LottoPrize.contains(5, false));
     assertTrue(LottoPrize.contains(5, true));
     assertTrue(LottoPrize.contains(6, false));
+    assertTrue(LottoPrize.contains(6, true));
 
+
+    assertFalse(LottoPrize.contains(1, false));
+    assertFalse(LottoPrize.contains(1, true));
     assertFalse(LottoPrize.contains(2, false));
-    assertFalse(LottoPrize.contains(3, true));
-    assertFalse(LottoPrize.contains(4, true));
+    assertFalse(LottoPrize.contains(2, true));
   }
 }
