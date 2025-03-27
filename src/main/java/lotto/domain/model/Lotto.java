@@ -20,7 +20,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto create() {
+    public static Lotto createAuto() {
         List<LottoNumber> numbersForShuffle = new ArrayList<>(LOTTO_NUMBER_CANDIDATES);
         Collections.shuffle(numbersForShuffle);
 
@@ -32,7 +32,7 @@ public class Lotto {
         return new Lotto(selectedNums);
     }
 
-    public static Lotto create(List<Integer> nums) {
+    public static Lotto createManual(List<Integer> nums) {
         List<LottoNumber> lottoNumbers = nums.stream()
                 .map(LottoNumber::new)
                 .distinct()
@@ -43,13 +43,9 @@ public class Lotto {
 
     public LottoRank getRank(Lotto winner) {
         int matchedNum = (int) lottoNumbers.stream()
-                .filter(winner.getLottoNumbers()::contains)
+                .filter(winner.lottoNumbers::contains)
                 .count();
         return LottoRank.fromMatchedNum(matchedNum);
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
     }
 
     public String toString() {

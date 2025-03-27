@@ -16,7 +16,7 @@ public class WinningNumberInput {
 
     public static WinningNumberInput from(String input) {
         List<Integer> nums = convertStringToInt(input);
-        Lotto lotto = Lotto.create(nums);
+        Lotto lotto = Lotto.createManual(nums);
         return new WinningNumberInput(lotto);
     }
 

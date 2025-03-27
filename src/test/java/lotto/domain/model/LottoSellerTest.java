@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain.model;
 
-import lotto.domain.model.LottoSeller;
 import lotto.view.model.UserMoneyInput;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

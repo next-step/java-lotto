@@ -14,7 +14,7 @@ public class LottoSeller {
     }
 
     public List<Lotto> generateAndSell(int amount) {
-        return Stream.generate(Lotto::create)
+        return Stream.generate(Lotto::createAuto)
                 .limit(amount)
                 .collect(Collectors.toList());
     }

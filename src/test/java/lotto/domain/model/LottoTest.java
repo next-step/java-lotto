@@ -1,7 +1,5 @@
-package lotto;
+package lotto.domain.model;
 
-import lotto.domain.model.Lotto;
-import lotto.domain.model.LottoRank;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,12 +18,12 @@ class LottoTest {
     }
 
     static Stream<Arguments> provideLottoTestCases() {
-        Lotto winningLotto = Lotto.create(List.of(1,2,3,4,5,6));
+        Lotto winningLotto = Lotto.createManual(List.of(1,2,3,4,5,6));
         return Stream.of(
-                Arguments.of(Lotto.create(List.of(1,2,3,4,5,6)), winningLotto, LottoRank.FIRST),
-                Arguments.of(Lotto.create(List.of(1,2,3,4,5,7)), winningLotto, LottoRank.SECOND),
-                Arguments.of(Lotto.create(List.of(1,2,3,4,7,8)), winningLotto, LottoRank.THIRD),
-                Arguments.of(Lotto.create(List.of(1,2,3,7,8,9)), winningLotto, LottoRank.FOURTH)
+                Arguments.of(Lotto.createManual(List.of(1,2,3,4,5,6)), winningLotto, LottoRank.FIRST),
+                Arguments.of(Lotto.createManual(List.of(1,2,3,4,5,7)), winningLotto, LottoRank.SECOND),
+                Arguments.of(Lotto.createManual(List.of(1,2,3,4,7,8)), winningLotto, LottoRank.THIRD),
+                Arguments.of(Lotto.createManual(List.of(1,2,3,7,8,9)), winningLotto, LottoRank.FOURTH)
         );
     }
 }

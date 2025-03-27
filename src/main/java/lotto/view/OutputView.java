@@ -1,9 +1,11 @@
 package lotto.view;
 
 import lotto.domain.model.Lotto;
+import lotto.domain.model.LottoRank;
 import lotto.domain.model.LottoResult;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     public static void printPurchasedAmount(int amount) {
@@ -17,7 +19,12 @@ public class OutputView {
     public static void printResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(lottoResult.generateStatistics());
+
+        Map<LottoRank, Integer> result = lottoResult.generateStatistics();
+        for (Map.Entry<LottoRank, Integer> entry : result.entrySet()) {
+            LottoRank rank = entry.getKey();
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getNumOfMatch(), rank.getPrize(), entry.getValue());
+        }
 
         double returnRate = lottoResult.calculateReturnRate();
         String isLose = (returnRate < 1) ? "손해" : "이득이";
