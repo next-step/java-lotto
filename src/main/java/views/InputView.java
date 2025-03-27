@@ -10,8 +10,8 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static List<Integer> promptForIntegerList(String query) {
-        Tokens tokens = promptForTokens(query);
+    public static List<Integer> promptForIntegerList(String query, String delimiter) {
+        Tokens tokens = promptForTokens(query, delimiter);
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < tokens.size(); i++ ) {
             result.add(Integer.parseInt(tokens.getToken(i)));
@@ -19,8 +19,8 @@ public class InputView {
         return result;
     }
 
-    public static Tokens promptForTokens(String query) {
-        return tokenize(inputExpression(query));
+    public static Tokens promptForTokens(String query, String delimiter) {
+        return tokenize(inputExpression(query), delimiter);
     }
 
     public static Integer promptForInteger(String query) {
@@ -32,7 +32,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static Tokens tokenize(String string) {
-        return new Tokens(string);
+    public static Tokens tokenize(String string, String delimiter) {
+        return new Tokens(string, delimiter);
     }
 }

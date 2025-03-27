@@ -23,8 +23,8 @@ class LottoGameResultTest {
     @ParameterizedTest
     void createLotto(int purchaseAmount, int lottoPrice, int expected) {
         // when
-        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, winningLotto, lottoFactory);
-        LottoGameResult lottoGameResult = lottoGame.play();
+        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, lottoFactory);
+        LottoGameResult lottoGameResult = lottoGame.play(winningLotto);
 
         // then
         Assertions.assertThat(lottoGameResult.lottoCount()).isEqualTo(expected);
@@ -36,8 +36,8 @@ class LottoGameResultTest {
         int purchaseAmount = 10000;
         int lottoPrice = 1000;
 
-        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, winningLotto, lottoFactory);
-        LottoGameResult result = lottoGame.play();
+        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, lottoFactory);
+        LottoGameResult result = lottoGame.play(winningLotto);
 
         int actual = 0;
         for (Rank rank: Rank.values()) {
@@ -53,8 +53,8 @@ class LottoGameResultTest {
         int purchaseAmount = 10000;
         int lottoPrice = 1000;
 
-        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, winningLotto, lottoFactory);
-        LottoGameResult result = lottoGame.play();
+        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, lottoFactory);
+        LottoGameResult result = lottoGame.play(winningLotto);
 
         long actual = result.getWinningsSum();
         long expected = Rank.FIRST.getTotalWinnings(10);

@@ -1,13 +1,27 @@
 package views;
 
 import step1.symbol.Operand;
+import step2.domain.LottoGameResult;
+import step2.domain.RankCounter;
+import step2.domain.lotto.Rank;
 
 public class ResultView {
     public static void printMessage(String message) {
         System.out.println(message);
     }
 
+
+
     public static void printResult(Operand result) {
         System.out.println("계산 결과는 " + result.value() + "입니다.");
+    }
+
+    public static void printResult(LottoGameResult lottoGameResult) {
+        RankCounter rankCounters = lottoGameResult.getRankCounters();
+        printMessage("당첨 통계\n---------");
+        for (Rank rank : Rank.validValues()) {
+            String rankDisplayMessage = String.format("%s - %d개", rank.displayRank(), rankCounters.getCount(rank));
+            printMessage(rankDisplayMessage);
+        }
     }
 }

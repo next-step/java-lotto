@@ -13,7 +13,7 @@ public class LottoGameResult {
 
     public RankCounter getRankCounters() {
         RankCounter rankCounters = new RankCounter();
-        for (Rank rank: ranks) {
+        for (Rank rank : ranks) {
             rankCounters.increaseCount(rank);
         }
         return rankCounters;
@@ -26,7 +26,7 @@ public class LottoGameResult {
     public long getWinningsSum() {
         long sum = 0;
         RankCounter rankCounters = getRankCounters();
-        for (Rank rank: Rank.values()) {
+        for (Rank rank : Rank.validValues()) {
             sum += rank.getTotalWinnings(rankCounters.getCount(rank));
         }
         return sum;

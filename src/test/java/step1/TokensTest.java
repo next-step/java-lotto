@@ -11,7 +11,7 @@ class TokensTest {
     @Test
     void emptyStringTest() {
         // When & Then
-        assertThatThrownBy(() -> new Tokens(" "))
+        assertThatThrownBy(() -> new Tokens(" ", " "))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Invalid String");
     }
@@ -20,7 +20,7 @@ class TokensTest {
     @Test
     void nullStringTest() {
         // When & Then
-        assertThatThrownBy(() -> new Tokens(null))
+        assertThatThrownBy(() -> new Tokens(null, ""))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Invalid String");
     }

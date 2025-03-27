@@ -30,4 +30,9 @@ public class Lotto {
         int matchedCount = winningLotto.countMatchedNumbers(this.lottoNumbers);
         return new MatchedCount(matchedCount);
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }

@@ -22,7 +22,7 @@ class CalculationTest {
     })
     @ParameterizedTest
     void calculateTest(String formula, Integer expected) {
-        Tokens tokens = new Tokens(formula);
+        Tokens tokens = new Tokens(formula, " ");
         Calculation calculation = new Calculation(tokens);
         Operand result = calculation.calculate();
 
@@ -41,7 +41,7 @@ class CalculationTest {
     })
     @ParameterizedTest
     void invalidFormulaTest(String formula) {
-        Tokens tokens = new Tokens(formula);
+        Tokens tokens = new Tokens(formula, " ");
 
         Assertions.assertThatThrownBy(() -> new Calculation(tokens))
                 .isInstanceOf(IllegalArgumentException.class)

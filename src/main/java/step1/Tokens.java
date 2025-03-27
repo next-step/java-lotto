@@ -6,11 +6,11 @@ import java.util.List;
 public class Tokens {
     private final List<String> tokens;
 
-    public Tokens(String tokenString) {
+    public Tokens(String tokenString, String delimiter) {
         if (!validateString(tokenString)) {
             throw new IllegalArgumentException("Invalid String");
         }
-        this.tokens = new ArrayList<>(List.of(splitTokens(tokenString)));
+        this.tokens = new ArrayList<>(List.of(splitTokens(tokenString, delimiter)));
     }
 
     private Boolean validateString(String tokenString) {
@@ -25,7 +25,7 @@ public class Tokens {
         return tokens.size();
     }
 
-    private String[] splitTokens(String tokenString) {
-        return tokenString.split(" ");
+    private String[] splitTokens(String tokenString, String delimiter) {
+        return tokenString.split(delimiter);
     }
 }

@@ -44,4 +44,13 @@ public class LottoContainer {
         }
         return lottos;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Lotto lotto : lottos) {
+            sb.append(lotto).append("\n");
+        }
+        return sb.toString();
+    }
 }
