@@ -8,6 +8,7 @@ import java.util.List;
 import static lotto.type.LottoPrize.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoPrizeTest {
 
@@ -71,6 +72,17 @@ class LottoPrizeTest {
     assertAll(
         () -> assertThat(LottoPrize.findByMatchCount(6, false)).isEqualTo(SIX_MATCHES),
         () -> assertThat(LottoPrize.findByMatchCount(6, true)).isEqualTo(SIX_MATCHES)
+    );
+  }
+
+  @DisplayName("유효하지 않은 match count로 가져올 시 예외 발생")
+  @Test
+  public void testGetLottoPrizeThrowException() {
+    assertAll(
+        () -> assertThrows(RuntimeException.class, () -> LottoPrize.findByMatchCount(7, true)),
+        () -> assertThrows(RuntimeException.class, () -> LottoPrize.findByMatchCount(7, false)),
+        () -> assertThrows(RuntimeException.class, () -> LottoPrize.findByMatchCount(-1, true)),
+        () -> assertThrows(RuntimeException.class, () -> LottoPrize.findByMatchCount(-1, false))
     );
   }
 

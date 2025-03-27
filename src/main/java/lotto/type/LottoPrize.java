@@ -17,29 +17,24 @@ public enum LottoPrize {
   private final int matchCount;
   private final int prizeAmount;
 
+  private boolean hasMatchCount(int matchCount) {
+    return this.matchCount == matchCount;
+  }
+
   LottoPrize(int matchCount, int prizeAmount) {
     this.matchCount = matchCount;
     this.prizeAmount = prizeAmount;
   }
 
   public static LottoPrize findByMatchCount(int matchCount, boolean matchBonus) {
-    List<LottoPrize> prizes = Arrays.stream(values())
-        .filter(lottoPrize -> lottoPrize.matchCount == matchCount)
-        .collect(Collectors.toList());
-
-    if (prizes.isEmpty()) {
-      throw new IllegalArgumentException("유효하지 않은 일치 수입니다.");
+    if (matchCount == 5) {
+      return matchBonus ? FIVE_WITH_BONUS_MATCHES : FIVE_MATCHES;
     }
 
-    if (prizes.size() == 1) {
-      return prizes.get(0);
-    }
-
-    if (!(prizes.contains(FIVE_MATCHES) && prizes.contains(FIVE_WITH_BONUS_MATCHES) && prizes.size() == 2)) {
-      throw new IllegalStateException("로또 상금 정보를 가져오는데 실패했습니다.");
-    }
-
-    return matchBonus ? FIVE_WITH_BONUS_MATCHES : FIVE_MATCHES;
+    return Arrays.stream(values())
+        .filter(lottoPrize -> lottoPrize.hasMatchCount(matchCount))
+        .findFirst()
+        .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 일치 수입니다."));
   }
 
   public static int getTotalPrize(List<LottoPrize> lottoPrizes) {
