@@ -1,15 +1,24 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final int LOTTO_MIN_NUMBER = 1;
-    public static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
     private final int number;
 
     public LottoNumber(int number) {
         checkNumberRange(number);
         this.number = number;
+    }
+
+    public static List<LottoNumber> generateLottoNumberList() {
+        return IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private void checkNumberRange(int number) {

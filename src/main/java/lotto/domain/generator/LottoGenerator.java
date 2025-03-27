@@ -6,15 +6,11 @@ import lotto.domain.LottoNumber;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int LOTTO_PRICE = 1000;
-    private static final List<LottoNumber> LOTTO_NUMBER_CACHE = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
+    private static final List<LottoNumber> LOTTO_NUMBER_CACHE = LottoNumber.generateLottoNumberList();
 
     private LottoGenerator() {
     }
