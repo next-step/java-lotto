@@ -9,6 +9,7 @@ import java.util.List;
 public class LottoContainerTest {
 
     private static final LottoGenerator lottoGenerator = new LottoGenerator(1, 45, 6);
+    private static final LottoFactory lottoFactory = new LottoFactory(lottoGenerator);
 
     @DisplayName("주어진 개수만큼 로또 발급")
     @Test
@@ -17,7 +18,7 @@ public class LottoContainerTest {
         int lottoCount = 5;
 
         // when
-        LottoContainer lottoContainer = new LottoContainer(lottoCount, lottoGenerator);
+        LottoContainer lottoContainer = new LottoContainer(lottoCount, lottoFactory);
 
         // then
          Assertions.assertThat(lottoContainer.size()).isEqualTo(lottoCount);
@@ -30,7 +31,7 @@ public class LottoContainerTest {
         int lottoCount = 0;
 
         // when
-        Assertions.assertThatThrownBy(() -> new LottoContainer(lottoCount, lottoGenerator))
+        Assertions.assertThatThrownBy(() -> new LottoContainer(lottoCount, lottoFactory))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 개수는 1개 이상이어야 합니다.");
     }

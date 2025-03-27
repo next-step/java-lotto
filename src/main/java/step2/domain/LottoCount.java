@@ -1,7 +1,7 @@
 package step2.domain;
 
 import step2.domain.lotto.LottoContainer;
-import step2.domain.lotto.LottoGenerator;
+import step2.domain.lotto.LottoFactory;
 
 public class LottoCount {
     private final int count;
@@ -15,8 +15,8 @@ public class LottoCount {
         this.count = purchaseAmount / lottoPrice;
     }
 
-    public LottoContainer generateLottoContainer(LottoGenerator lottoGenerator) {
-        return new LottoContainer(count, lottoGenerator);
+    public LottoContainer generateLottoContainer(LottoFactory lottoFactory) {
+        return new LottoContainer(count, lottoFactory);
     }
 
     private boolean isValid(int purchaseAmount, int lottoPrice) {
