@@ -24,8 +24,12 @@ public class FinalResult {
     }
 
     public double returnRate(UserPaid paid) {
-        Money totalPrize = new Money(0);
+        Money totalPrize = getTotalPrize();
+        return paid.getRateBy(totalPrize);
+    }
 
+    public Money getTotalPrize() {
+        Money totalPrize = new Money(0);
         for (Map.Entry<Integer, Integer> entry : result.entrySet()) {
             int matchCount = entry.getKey();
             int count = entry.getValue();
@@ -35,8 +39,7 @@ public class FinalResult {
 
             totalPrize = totalPrize.add(new Money(prizePerWin * count));
         }
-
-        return paid.getRateBy(totalPrize);
+        return totalPrize;
     }
 
 }

@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.product.FinalResult;
 import lotto.domain.product.LotteryTicket;
+import lotto.domain.product.LottoRank;
 import lotto.view.fake.FakeInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,5 +26,20 @@ public class LotteryTicketTest {
         assertThat(lotteryTicket.getLottoNumbersCount()).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("로또 번호의 맞춘 개수에 따라 받는 가격을 알 수 있다.")
+    public void getRank() {
+        LottoRank lottoRank = LottoRank.of(3);
+        assertThat(lottoRank.getPrize()).isEqualTo(5000);
+    }
 
+    @Test
+    @DisplayName("맞춘 개수에 따라 받는 총 상금을 알 수 있다.")
+    public void getPrize() {
+        FinalResult result = new FinalResult();
+        result.put(3);
+        result.put(4);
+        Money totalPrize = result.getTotalPrize();
+        assertThat(totalPrize).isEqualTo(new Money(55_000));
+    }
 }
