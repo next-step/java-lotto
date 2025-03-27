@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money {
@@ -17,12 +18,12 @@ public class Money {
 
     public Integer divideBy(Integer price) {
         return this.amount
-                .divide(BigDecimal.valueOf(price), BigDecimal.ROUND_DOWN)
+                .divide(BigDecimal.valueOf(price), RoundingMode.DOWN)
                 .intValue();
     }
 
-    public Money add(Money other) {
-        return new Money(this.amount.add(other.amount).intValue());
+    public Money add(Money that) {
+        return new Money(this.amount.add(that.amount).intValue());
     }
 
     public double rate(Money investment) {
@@ -30,12 +31,8 @@ public class Money {
             return 0.0;
         }
         return this.amount
-                .divide(investment.amount, 2, BigDecimal.ROUND_DOWN)
+                .divide(investment.amount, 2, RoundingMode.DOWN)
                 .doubleValue();
-    }
-
-    public int intValue() {
-        return amount.intValue();
     }
 
     @Override

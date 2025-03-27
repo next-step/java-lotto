@@ -9,9 +9,13 @@ import java.util.stream.Collectors;
 
 public class LotteryTicket implements Product {
 
+    public static final String NUMBER_INPUT_DELIMITER = ", ";
+    public static final String NUMBER_OUTPUT_DELIMITER = ", ";
+    public static final String OUTPUT_PREFIX = "[";
+    public static final String OUTPUT_SUFFIX = "]";
+
     public static final int LOTTO_PRICE = 1000;
     public static final int MAX_LOTTO_SIZE = 6;
-    public static final String NUMBER_DELIMITER = ", ";
 
     private final Set<LottoNumber> numbers;
 
@@ -24,7 +28,7 @@ public class LotteryTicket implements Product {
     }
 
     private Set<LottoNumber> parseNumbers(String input) {
-        return Arrays.stream(input.split(NUMBER_DELIMITER))
+        return Arrays.stream(input.split(NUMBER_INPUT_DELIMITER))
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
@@ -61,7 +65,7 @@ public class LotteryTicket implements Product {
                 .map(LottoNumber::getValue)
                 .sorted()
                 .map(String::valueOf)
-                .collect(Collectors.joining(", ", "[", "]"));
+                .collect(Collectors.joining(NUMBER_OUTPUT_DELIMITER, OUTPUT_PREFIX, OUTPUT_SUFFIX));
     }
 
 }
