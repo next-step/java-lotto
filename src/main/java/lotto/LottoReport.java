@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrize;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
@@ -16,8 +17,8 @@ public class LottoReport {
   private final LottoReward lottoReward;
   private final PurchaseAmount purchaseAmount;
 
-  public LottoReport(PurchaseAmount purchaseAmount, Lotto winningLotto, Lottos lottos) {
-    this.lottoReward = new LottoReward(lottos, winningLotto);
+  public LottoReport(PurchaseAmount purchaseAmount, Lotto winningLotto, Lottos lottos, LottoNumber bonusNumber) {
+    this.lottoReward = new LottoReward(lottos, winningLotto, bonusNumber);
     this.purchaseAmount = purchaseAmount;
   }
 

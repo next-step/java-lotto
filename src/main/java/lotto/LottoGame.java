@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.view.InputView;
@@ -20,7 +21,8 @@ public class LottoGame {
     PurchaseAmount purchaseAmount = receiveMoney();
     Lottos lottos = buyLottos(purchaseAmount);
     Lotto winningLotto = receiveWinningLotto();
-    printResult(purchaseAmount, winningLotto, lottos);
+    LottoNumber bonusNumber = new LottoNumber(0);
+    printResult(purchaseAmount, winningLotto, lottos, bonusNumber);
   }
 
   private PurchaseAmount receiveMoney() {
@@ -42,8 +44,8 @@ public class LottoGame {
     return new Lotto(winninLottoNumbers);
   }
 
-  private void printResult(PurchaseAmount purchaseAmount, Lotto winningLotto, Lottos lottos) {
-    LottoReport lottoReport = new LottoReport(purchaseAmount, winningLotto, lottos);
+  private void printResult(PurchaseAmount purchaseAmount, Lotto winningLotto, Lottos lottos, LottoNumber bonusNumber) {
+    LottoReport lottoReport = new LottoReport(purchaseAmount, winningLotto, lottos, bonusNumber);
     ResultView.printStatistics(lottoReport);
   }
 }

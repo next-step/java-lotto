@@ -47,6 +47,7 @@ public class ResultViewTest {
             new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
     ));
+    LottoNumber bonusNumber = new LottoNumber(7);
     PurchaseAmount purchaseAmount = new PurchaseAmount(3000);
     Lottos lottos = getLottos();
 
@@ -57,7 +58,7 @@ public class ResultViewTest {
             "6개 일치 (2000000000원)- 1개\n" +
             "총 수익률은 666685.00입니다.\n";
 
-    ResultView.printStatistics(new LottoReport(purchaseAmount, winningLotto, lottos));
+    ResultView.printStatistics(new LottoReport(purchaseAmount, winningLotto, lottos, bonusNumber));
 
     System.setOut(originalOut);
     Assertions.assertEquals(expected, outputStream.toString());

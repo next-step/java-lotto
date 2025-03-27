@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrize;
 import lotto.domain.Lottos;
 
@@ -12,21 +13,26 @@ import java.util.stream.Collectors;
 public class LottoReward {
   private final Map<LottoPrize, Integer> prizeMap;
 
-  public LottoReward(Lottos lottos, Lotto winningLotto) {
-    this.prizeMap = createPrizeMap(lottos, winningLotto);
+  public LottoReward(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
+    this.prizeMap = createPrizeMap(lottos, winningLotto, bonusNumber);
   }
 
-  private Map<LottoPrize, Integer> createPrizeMap(Lottos lottoList, Lotto winningLotto) {
+  private Map<LottoPrize, Integer> createPrizeMap(Lottos lottoList, Lotto winningLotto, LottoNumber bonusNumber) {
     Map<LottoPrize, Integer> prizeMap = Arrays.stream(LottoPrize.values())
             .collect(Collectors.toMap(prize -> prize, prize -> 0));
 
     List<Integer> matchingNumberCounts = lottoList.countMatchingNumbers(winningLotto);
-    List<Integer> filteredMatchingNumberCounts = matchingNumberCounts.stream().filter(
-            count -> LottoPrize.getAllMatchCounts().contains(count)).collect(Collectors.toList());
-    for (Integer count: filteredMatchingNumberCounts) {
-      LottoPrize prize = LottoPrize.getPrizeFromMatchCount(count);
+    List<Boolean> matchingBonusCounts = lottoList.countMatchingBonus(bonusNumber);
+
+    for (int i = 0; i < matchingNumberCounts.size(); i++) {
+      int matchCount = matchingNumberCounts.get(i);
+      boolean isBonus = matchingBonusCounts.get(i);
+      if (!LottoPrize.contains(matchCount, isBonus)) continue;
+
+      LottoPrize prize = LottoPrize.getPrizeFromMatchCount(matchCount, isBonus);
       prizeMap.put(prize, prizeMap.get(prize) + 1);
     }
+
     return prizeMap;
   }
 

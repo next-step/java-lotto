@@ -24,4 +24,10 @@ public class Lottos {
         lotto -> lotto.countMatchingNumbers(winningLotto)
     ).collect(Collectors.toList());
   }
+
+  public List<Boolean> countMatchingBonus(LottoNumber bonusNumber) {
+    return lottoList.stream().map(
+        lotto -> lotto.contains(bonusNumber)
+    ).collect(Collectors.toList());
+  }
 }
