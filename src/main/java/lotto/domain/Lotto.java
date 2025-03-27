@@ -15,16 +15,6 @@ public class Lotto {
     this.lottoNumbers = drawingStrategy.draw();
   }
 
-  public int confirmWinning(List<Integer> winningNumbers) {
-    int count = 0;
-    for (int winningNumber : winningNumbers) {
-      if (lottoNumbers.contains(winningNumber)) {
-        count++;
-      }
-    }
-    return count;
-  }
-
   public List<Integer> getLottoNumbers() {
     return lottoNumbers;
   }

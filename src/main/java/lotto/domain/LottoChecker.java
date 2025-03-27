@@ -14,9 +14,9 @@ public class LottoChecker {
   );
 
   public static Map<Integer, Long> calculateResults(List<Lotto> tickets,
-      List<Integer> winningNumbers) {
+      WinningLotto winningLotto) {
     return tickets.stream()
-        .map(lotto -> lotto.confirmWinning(winningNumbers))
+        .map(lotto -> winningLotto.matchingWinningNumber(lotto))
         .filter(PRIZES::containsKey)
         .collect(Collectors.groupingBy(matchCount -> matchCount, Collectors.counting()));
   }

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.WinningLotto;
 
 public class InputView {
 
@@ -15,13 +16,13 @@ public class InputView {
     return purchaseAmount;
   }
 
-  public static List<Integer> getWinningNumbers() {
+  public static WinningLotto getWinningNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     scanner.nextLine();
-    return Arrays.stream(scanner.nextLine().split(","))
+    return new WinningLotto(Arrays.stream(scanner.nextLine().split(","))
         .map(String::trim)
         .map(Integer::parseInt)
-        .collect(Collectors.toList());
+        .collect(Collectors.toList()));
   }
 
 }

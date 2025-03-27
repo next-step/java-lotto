@@ -6,6 +6,7 @@ import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoChecker;
 import lotto.domain.RandomDrawingStrategy;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -26,9 +27,9 @@ public class LottoApplication {
 
     ResultView.showLottos(tickets);
 
-    List<Integer> winningNumbers = InputView.getWinningNumbers();
+    WinningLotto winningLotto = InputView.getWinningNumbers();
 
-    Map<Integer, Long> lottoResults = LottoChecker.calculateResults(tickets, winningNumbers);
+    Map<Integer, Long> lottoResults = LottoChecker.calculateResults(tickets, winningLotto);
     double profitRate = LottoChecker.calculateProfitRate(lottoResults, purchaseAmount);
     ResultView.printResults(lottoResults, profitRate);
   }
