@@ -11,10 +11,16 @@ public class Lotto {
     this.lottoNumbers = lottoNumbers;
   }
 
+  public Lotto(DrawingStrategy drawingStrategy) {
+    this.lottoNumbers = drawingStrategy.draw();
+  }
+
   public int confirmWinning(List<Integer> winningNumbers) {
     int count = 0;
-    for (int winningNumber :winningNumbers) {
-      if(lottoNumbers.contains(winningNumber)) count++;
+    for (int winningNumber : winningNumbers) {
+      if (lottoNumbers.contains(winningNumber)) {
+        count++;
+      }
     }
     return count;
   }
