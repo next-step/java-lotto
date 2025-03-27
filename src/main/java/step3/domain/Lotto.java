@@ -25,6 +25,16 @@ public class Lotto {
                 .count();
     }
 
+    public boolean containsBonus(LottoNum bonusNum) {
+        return this.lottoNumSet.contains(bonusNum);
+    }
+
+    public Rank getRank(WinningLotto winningLotto) {
+        int matchCount = getMatchCount(winningLotto.getWinningLotto());
+        boolean matchBonus = containsBonus(winningLotto.getBonusNum());
+        return Rank.valueOf(matchCount, matchBonus);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
