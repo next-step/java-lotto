@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoNumberTest {
+public class LottoNumTest {
 
     @Test
     void create() {

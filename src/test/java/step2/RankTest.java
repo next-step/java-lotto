@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoResultTest {
+public class RankTest {
 
     @Test
     void 결과_매칭() {
