@@ -17,17 +17,19 @@ class LottoSetTest {
 
 
   @Test
-  @DisplayName("로또 결과 1등~4등까지의 당첨 통계를 생성한다.")
+  @DisplayName("로또 결과 1등~5등까지의 당첨 통계를 생성한다.")
   void createLottoStatistics() {
     Lotto lotto1 = Lotto.of("1, 2, 3, 4, 5, 6");
-    Lotto lotto2 = Lotto.of("1, 2, 3, 4, 5, 7");
-    Lotto lotto3 = Lotto.of("1, 2, 3, 4, 7, 8");
-    Lotto lotto4 = Lotto.of("1, 2, 3, 7, 8, 9");
+    Lotto lotto2 = Lotto.of("1, 2, 3, 4, 5, 30");
+    Lotto lotto3 = Lotto.of("1, 2, 3, 4, 5, 7");
+    Lotto lotto4 = Lotto.of("1, 2, 3, 4, 7, 8");
+    Lotto lotto5 = Lotto.of("1, 2, 3, 7, 8, 9");
 
     LottoSet lottoSet = LottoMachine.generateManualLotto(new LottoPurchase(4000), List.of(lotto1, lotto2, lotto3, lotto4));
     Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
+    LottoNumber bonusNumber = LottoNumber.of(30);
 
-    LottoResult lottoResult = lottoSet.provideLottoResult(winningLotto);
+    LottoResult lottoResult = lottoSet.provideLottoResult(winningLotto, bonusNumber);
 
     for (WinningRank rank : WinningRank.values()) {
       int count = lottoResult.getMatchCount().getOrDefault(rank, 0);
