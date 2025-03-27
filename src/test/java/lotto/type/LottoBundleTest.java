@@ -14,10 +14,10 @@ class LottoBundleTest {
   @DisplayName("생성자 테스트1")
   @Test
   void constructorTest1() {
-    LottoBundle bundle = LottoBundle.valueOf(List.of(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6))));
+    LottoBundle bundle = LottoBundle.valueOf(List.of(LottoNums.valueOf(List.of(1, 2, 3, 4, 5, 6))));
 
     assertThat(bundle)
-        .isEqualTo(LottoBundle.valueOf(List.of(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6)))));
+        .isEqualTo(LottoBundle.valueOf(List.of(LottoNums.valueOf(List.of(1, 2, 3, 4, 5, 6)))));
   }
 
   @DisplayName("생성자 테스트2")
@@ -30,14 +30,14 @@ class LottoBundleTest {
     );
 
     assertThat(bundle)
-        .isEqualTo(LottoBundle.valueOf(List.of(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6)))));
+        .isEqualTo(LottoBundle.valueOf(List.of(LottoNums.valueOf(List.of(1, 2, 3, 4, 5, 6)))));
   }
 
   @DisplayName("결과 가져오기")
   @Test
   void testGetResults() {
     LottoBundle bundle = LottoBundle.valueOf(
-        List.of(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6)), LottoNumList.valueOf(List.of(10, 11, 12, 13, 15, 16)))
+        List.of(LottoNums.valueOf(List.of(1, 2, 3, 4, 5, 6)), LottoNums.valueOf(List.of(10, 11, 12, 13, 15, 16)))
     );
 
     assertAll(

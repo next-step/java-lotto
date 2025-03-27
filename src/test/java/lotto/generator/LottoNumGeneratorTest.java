@@ -1,6 +1,6 @@
 package lotto.generator;
 
-import lotto.type.LottoNumList;
+import lotto.type.LottoNums;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +15,8 @@ class LottoNumGeneratorTest {
   void testGenerate() {
     LottoNumGenerator generator = new LottoNumGenerator();
 
-    LottoNumList lottoNumList = generator.generate(nums -> nums);
+    LottoNums lottoNums = generator.generate(nums -> nums);
 
-    assertThat(lottoNumList).isEqualTo(LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6)));
+    assertThat(lottoNums).isEqualTo(LottoNums.valueOf(List.of(1, 2, 3, 4, 5, 6)));
   }
 }

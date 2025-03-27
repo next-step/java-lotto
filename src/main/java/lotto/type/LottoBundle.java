@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoBundle {
-  private final List<LottoNumList> bundle;
+  private final List<LottoNums> bundle;
 
   private LottoBundle(int lottoCount, LottoNumGenerator lottoNumGenerator, ShuffleStrategy shuffleStrategy) {
     this(IntStream.range(0, lottoCount)
@@ -17,7 +17,7 @@ public class LottoBundle {
         .collect(java.util.stream.Collectors.toList()));
   }
 
-  private LottoBundle(List<LottoNumList> bundle) {
+  private LottoBundle(List<LottoNums> bundle) {
     this.bundle = bundle;
   }
 
@@ -25,7 +25,7 @@ public class LottoBundle {
     return new LottoBundle(lottoCount, lottoNumGenerator, shuffleStrategy);
   }
 
-  public static LottoBundle valueOf(List<LottoNumList> bundle) {
+  public static LottoBundle valueOf(List<LottoNums> bundle) {
     return new LottoBundle(bundle);
   }
 
@@ -51,7 +51,7 @@ public class LottoBundle {
   @Override
   public String toString() {
     return bundle.stream()
-        .map(LottoNumList::toString)
+        .map(LottoNums::toString)
         .collect(Collectors.joining("\n"));
   }
 }

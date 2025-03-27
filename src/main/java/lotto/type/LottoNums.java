@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 import static lotto.LottoSystemConstants.LOTTO_MAX_NUM;
 import static lotto.LottoSystemConstants.LOTTO_MIN_NUM;
 
-public class LottoNumList {
+public class LottoNums {
 
   private final List<Integer> lottoNums;
 
-  private LottoNumList(List<Integer> lottoNums) {
+  private LottoNums(List<Integer> lottoNums) {
     if (new HashSet<>(lottoNums).size() != LottoSystemConstants.LOTTO_SIZE) {
       throw new IllegalArgumentException("로또 번호 수가 유효하지 않습니다.");
     }
@@ -26,8 +26,8 @@ public class LottoNumList {
     this.lottoNums = lottoNums;
   }
 
-  public static LottoNumList valueOf(List<Integer> lottoNums) {
-    return new LottoNumList(lottoNums);
+  public static LottoNums valueOf(List<Integer> lottoNums) {
+    return new LottoNums(lottoNums);
   }
 
   public int getMatchCount(WinningNums winningNums) {
@@ -43,7 +43,7 @@ public class LottoNumList {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LottoNumList that = (LottoNumList) o;
+    LottoNums that = (LottoNums) o;
     return Objects.equals(lottoNums, that.lottoNums);
   }
 
