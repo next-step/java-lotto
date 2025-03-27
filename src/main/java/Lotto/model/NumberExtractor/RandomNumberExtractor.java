@@ -8,12 +8,12 @@ public class RandomNumberExtractor implements NumberExtractor{
     @Override
     public List<Integer> extract(int size, int min, int max) {
         List<Integer> numberList = new ArrayList<>();
-        for (int i=1; i<=size; i++){
+        for (int i=1; i<=max; i++){
             numberList.add(i);
         }
 
         Collections.shuffle(numberList);
 
-        return numberList.subList(0,6);
+        return numberList.subList(0,size);
     }
 }
