@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoNumSetTest {
 
     @Test
-    void create() {
+    void 로또숫자집합은_로또숫자들을_가짐() {
         LottoNumSet lottoNumSet = new LottoNumSet(List.of(
                 new LottoNum(1),
                 new LottoNum(2),

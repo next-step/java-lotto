@@ -14,7 +14,7 @@ public class LottoNum {
 
     private void validateLottoNumber(int lottoNum) {
         if (lottoNum < MIN_LOTTO_NUM || lottoNum > MAX_LOTTO_NUM) {
-            throw new RuntimeException("로또의 숫자는 1 - 45 사이만 가능합니다.");
+            throw new RuntimeException("로또의 숫자는 1 - 45 사이만 가능합니다. 현재: " + lottoNum);
         }
     }
 
