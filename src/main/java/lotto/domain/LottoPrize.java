@@ -26,6 +26,11 @@ public enum LottoPrize {
             .orElseThrow(() -> new IllegalArgumentException("일치하는 LottoPrize가 없습니다."));
   }
 
+  public static boolean contains(int count, boolean matchesBonus) {
+    return Arrays.stream(values())
+            .anyMatch(p -> p.matches(count, matchesBonus));
+  }
+
   private boolean matches(int count, boolean matchesBonus) {
     if (this.matchCount != count) return false;
     if (hasBonusVariant()) return this.isBonus == matchesBonus;
@@ -38,13 +43,11 @@ public enum LottoPrize {
             .count() > 1;
   }
 
-  public static boolean contains(int count, boolean matchesBonus) {
-    return Arrays.stream(values())
-            .anyMatch(p -> p.matches(count, matchesBonus));
-  }
-
-  public int getMatchCount() {
-    return matchCount;
+  public String getDisplayText() {
+    if (this.isBonus) {
+      return String.format("%d개 일치, 보너스 볼 일치(%d원)", matchCount, prizeMoney);
+    }
+    return String.format("%d개 일치 (%d원)", matchCount, prizeMoney);
   }
 
   public int getPrizeMoney() {

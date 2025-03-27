@@ -33,7 +33,7 @@ public class LottoReport {
   }
 
   private String getPrizeAndCountStatus(LottoPrize prize, int count) {
-    return String.format(TOTAL_COUNT_FORMAT, prize.getMatchCount(), prize.getPrizeMoney(), count);
+    return String.format("%s- %d개", prize.getDisplayText(), count);
   }
 
   public String createMoneyReport() {
