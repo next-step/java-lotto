@@ -1,6 +1,4 @@
-package step2.domain.lotto;
-
-import step2.domain.MatchedCount;
+package step2.domain.rank;
 
 import java.util.EnumSet;
 

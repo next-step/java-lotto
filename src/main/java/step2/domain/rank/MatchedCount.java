@@ -1,4 +1,4 @@
-package step2.domain;
+package step2.domain.rank;
 
 public class MatchedCount {
     private final int matchedCount;

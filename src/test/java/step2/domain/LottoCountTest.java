@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.lotto.LottoContainer;
+import step2.domain.lotto.LottoCount;
 import step2.domain.lotto.LottoFactory;
 import step2.domain.lotto.LottoGenerator;
 
@@ -34,5 +35,20 @@ class LottoCountTest {
 
         // then
         Assertions.assertThat(lottoContainer.size()).isEqualTo(purchaseAmount / lottoPrice);
+    }
+
+    @DisplayName("수익률 계산 테스트")
+    @CsvSource({"1000, 1000", "2000, 500", "4000, 3000"})
+    @ParameterizedTest
+    void getWinningRate(int purchasedAmount, int winningAmount) {
+        // given
+        LottoCount lottoCount = new LottoCount(purchasedAmount, 1000);
+
+        // when
+        double winningRate = lottoCount.getWinningRate(winningAmount);
+
+        // then
+        double actual = (double) winningAmount / purchasedAmount;
+        Assertions.assertThat(actual).isEqualTo(winningRate);
     }
 }

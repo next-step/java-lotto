@@ -2,8 +2,8 @@ package views;
 
 import step1.symbol.Operand;
 import step2.domain.LottoGameResult;
-import step2.domain.RankCounter;
-import step2.domain.lotto.Rank;
+import step2.domain.rank.RankCounter;
+import step2.domain.rank.Rank;
 
 public class ResultView {
     public static void printMessage(String message) {

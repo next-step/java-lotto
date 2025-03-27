@@ -1,6 +1,7 @@
 package step2.domain;
 
-import step2.domain.lotto.Rank;
+import step2.domain.rank.Rank;
+import step2.domain.rank.RankCounter;
 
 import java.util.List;
 

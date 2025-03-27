@@ -5,10 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.domain.lotto.LottoFactory;
-import step2.domain.lotto.LottoGenerator;
-import step2.domain.lotto.Rank;
-import step2.domain.lotto.WinningLotto;
+import step2.domain.lotto.*;
+import step2.domain.rank.Rank;
 
 import java.util.List;
 
@@ -22,8 +20,11 @@ class LottoGameResultTest {
     @CsvSource(value = {"1000, 1000, 1", "14000, 2000, 7", "5000, 5000, 1"})
     @ParameterizedTest
     void createLotto(int purchaseAmount, int lottoPrice, int expected) {
+        // given
+        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
+
         // when
-        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, lottoFactory);
+        LottoGame lottoGame = new LottoGame(lottoCount, lottoFactory);
         LottoGameResult lottoGameResult = lottoGame.play(winningLotto);
 
         // then
@@ -35,8 +36,9 @@ class LottoGameResultTest {
     void playLotto() {
         int purchaseAmount = 10000;
         int lottoPrice = 1000;
+        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
-        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, lottoFactory);
+        LottoGame lottoGame = new LottoGame(lottoCount, lottoFactory);
         LottoGameResult result = lottoGame.play(winningLotto);
 
         int actual = 0;
@@ -52,8 +54,9 @@ class LottoGameResultTest {
     void calculateWinningAmountTest() {
         int purchaseAmount = 10000;
         int lottoPrice = 1000;
+        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
-        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, lottoFactory);
+        LottoGame lottoGame = new LottoGame(lottoCount, lottoFactory);
         LottoGameResult result = lottoGame.play(winningLotto);
 
         long actual = result.getWinningsSum();

@@ -1,10 +1,8 @@
-package step2.domain;
-
-import step2.domain.lotto.LottoContainer;
-import step2.domain.lotto.LottoFactory;
+package step2.domain.lotto;
 
 public class LottoCount {
-    private final int count;
+    private final int purchasedAmount;
+    private final int lottoPrice;
 
     public LottoCount(int purchaseAmount, int lottoPrice) {
         if (isValid(purchaseAmount, lottoPrice)) {
@@ -12,11 +10,17 @@ public class LottoCount {
                     lottoPrice, lottoPrice);
             throw new IllegalArgumentException(validationMessage);
         }
-        this.count = purchaseAmount / lottoPrice;
+        this.purchasedAmount = purchaseAmount;
+        this.lottoPrice = lottoPrice;
     }
 
     public LottoContainer generateLottoContainer(LottoFactory lottoFactory) {
+        int count = this.purchasedAmount / this.lottoPrice;
         return new LottoContainer(count, lottoFactory);
+    }
+
+    public double getWinningRate(long winningAmount) {
+        return (double) winningAmount / this.purchasedAmount;
     }
 
     private boolean isValid(int purchaseAmount, int lottoPrice) {

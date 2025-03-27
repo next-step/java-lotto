@@ -3,7 +3,8 @@ package step2.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.lotto.Rank;
+import step2.domain.rank.Rank;
+import step2.domain.rank.RankCounter;
 
 public class RankCounterTest {
 

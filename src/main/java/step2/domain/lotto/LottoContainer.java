@@ -1,5 +1,7 @@
 package step2.domain.lotto;
 
+import step2.domain.rank.Rank;
+
 import java.util.ArrayList;
 import java.util.List;
 

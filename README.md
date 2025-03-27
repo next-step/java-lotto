@@ -42,8 +42,9 @@
   - [x] 통계 구현
   - [x] 게임 진행 구현
   - [x] 리팩토링
-- [ ] Views 구현
-  - [ ] InputView 구현
-  - [ ] ResultView 구현
-- [ ] Controller 구현
+- [x] Views 구현
+  - [x] InputView 구현
+  - [x] ResultView 구현
+- [x] Controller 구현
+  - [x] 리팩토링
 
