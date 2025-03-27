@@ -11,7 +11,10 @@ public class LottoGame {
     ResultView.printLottoSet(lottoSet);
 
     Lotto winningLotto = InputView.inputWinningLotto();
-    LottoResult lottoResult = lottoSet.provideLottoResult(winningLotto);
+    LottoNumber bonusNumber = InputView.inputBonusNumber();
+    BonusNumberValidator.validateBonusNumber(winningLotto, bonusNumber);
+
+    LottoResult lottoResult = lottoSet.provideLottoResult(winningLotto, bonusNumber);
     ResultView.printLottoStatistics(lottoResult);
 
     InputView.closeScanner();

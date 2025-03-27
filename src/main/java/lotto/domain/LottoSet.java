@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -36,24 +37,32 @@ public class LottoSet implements LottoResultProvider {
   }
 
   @Override
-  public LottoResult provideLottoResult(Lotto winningLotto) {
-    Map<WinningRank, Integer> matchCount = getMatchCount(winningLotto);
+  public LottoResult provideLottoResult(Lotto winningLotto, LottoNumber bonusNumber) {
+    Map<WinningRank, Integer> matchCount = getMatchCount(winningLotto, bonusNumber);
     double profitRate = getProfitRate(matchCount);
 
     return new LottoResult(matchCount, profitRate);
   }
 
-  private Map<WinningRank, Integer> getMatchCount(Lotto winningLotto) {
-    Map<WinningRank, Integer> matchCount = new HashMap<>();
+  private Map<WinningRank, Integer> getMatchCount(Lotto winningLotto, LottoNumber bonusNumber) {
+    return lottos.stream()
+        .map(lotto -> calculateMatchRank(lotto, winningLotto, bonusNumber))
+        .filter(Objects::nonNull)
+        .collect(Collectors.toMap(
+            rank -> rank,
+            rank -> 1,
+            Integer::sum
+        ));
+  }
 
-    lottos.stream()
-        .map(lotto -> (int) lotto.getNumbers().stream().filter(winningLotto.getNumbers()::contains).count())
-        .filter(match -> match >= MINIMUM_MATCH_COUNT)
-        .map(WinningRank::fromMatchCount)
-        .filter(rank -> rank != null)
-        .forEach(rank -> matchCount.put(rank, matchCount.getOrDefault(rank, 0) + 1));
+  private WinningRank calculateMatchRank(Lotto lotto, Lotto winningLotto, LottoNumber bonusNumber) {
+    int match = (int) lotto.getNumbers().stream()
+        .filter(winningLotto.getNumbers()::contains)
+        .count();
 
-    return matchCount;
+    boolean matchBonus = lotto.getNumbers().contains(bonusNumber);
+
+    return WinningRank.from(match, matchBonus);
   }
 
   private double getProfitRate(Map<WinningRank, Integer> matchCount) {
