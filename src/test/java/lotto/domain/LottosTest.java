@@ -56,14 +56,14 @@ class LottosTest {
             ))
     ));
 
-    Lotto winningLotto = new Lotto(List.of(
+    WinningLotto winningLotto = new WinningLotto(List.of(
             new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
             new LottoNumber(6)
-    ));
+    ), new LottoNumber(7));
 
     List<Integer> matchingNumbers = lottos.countMatchingNumbers(winningLotto);
     assertEquals(List.of(6, 6), matchingNumbers);

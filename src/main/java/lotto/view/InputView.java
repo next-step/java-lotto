@@ -2,7 +2,11 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseAmount;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
   private final Scanner scanner;
@@ -21,9 +25,13 @@ public class InputView {
     }
   }
 
-  public String receiveWinningLotto() {
+  public List<LottoNumber> receiveWinningLottoNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해주세요.");
-    return scanner.nextLine();
+    String input = scanner.nextLine();
+    return Arrays.stream(input.split(","))
+            .map(String::trim)
+            .map(num -> new LottoNumber(Integer.parseInt(num)))
+            .collect(Collectors.toList());
   }
 
   public LottoNumber receiveBonusNumber() {

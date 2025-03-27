@@ -19,15 +19,6 @@ public class Lotto {
     this.numbers = numbers;
   }
 
-  public Lotto(String numbers) {
-    List<LottoNumber> lottoNumbers = Arrays.stream(numbers.split(","))
-            .map(String::trim)
-            .map(num -> new LottoNumber(Integer.parseInt(num)))
-            .collect(Collectors.toList());
-    validate(lottoNumbers);
-    this.numbers = lottoNumbers;
-  }
-
   private void validate(List<LottoNumber> numbers) {
     if (numbers.size() != SIZE) {
       throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
@@ -38,7 +29,7 @@ public class Lotto {
     }
   }
 
-  public int countMatchingNumbers(Lotto winningLotto) {
+  public int countMatchingNumbers(WinningLotto winningLotto) {
     return (int) numbers.stream()
             .filter(winningLotto::contains)
             .count();

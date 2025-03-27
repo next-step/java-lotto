@@ -4,6 +4,7 @@ import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,13 +30,17 @@ class InputViewTest {
 
   @DisplayName("지난 주 당첨번호를 입력받는 기능 테스트")
   @Test
-  void testReceiveWinningLotto() {
+  void testReceiveWinningLottoNumbers() {
     String testInput = "1, 2, 3, 4, 5, 6";
     InputView inputView = new InputView(getTestScanner(testInput));
 
-    String actual = inputView.receiveWinningLotto();
+    List<LottoNumber> actual = inputView.receiveWinningLottoNumbers();
 
-    assertEquals("1, 2, 3, 4, 5, 6", actual);
+    assertEquals(
+            List.of(new LottoNumber(1), new LottoNumber(2),
+                    new LottoNumber(3), new LottoNumber(4),
+                    new LottoNumber(5), new LottoNumber(6)),
+            actual);
   }
 
   @DisplayName("보너스 볼을 입력받는 기능 테스트")

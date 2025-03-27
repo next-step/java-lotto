@@ -1,9 +1,8 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrize;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,16 +12,16 @@ import java.util.stream.Collectors;
 public class LottoReward {
   private final Map<LottoPrize, Integer> prizeMap;
 
-  public LottoReward(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
-    this.prizeMap = createPrizeMap(lottos, winningLotto, bonusNumber);
+  public LottoReward(Lottos lottos, WinningLotto winningLotto) {
+    this.prizeMap = createPrizeMap(lottos, winningLotto);
   }
 
-  private Map<LottoPrize, Integer> createPrizeMap(Lottos lottoList, Lotto winningLotto, LottoNumber bonusNumber) {
+  private Map<LottoPrize, Integer> createPrizeMap(Lottos lottoList, WinningLotto winningLotto) {
     Map<LottoPrize, Integer> prizeMap = Arrays.stream(LottoPrize.values())
             .collect(Collectors.toMap(prize -> prize, prize -> 0));
 
     List<Integer> matchingNumberCounts = lottoList.countMatchingNumbers(winningLotto);
-    List<Boolean> matchingBonusCounts = lottoList.countMatchingBonus(bonusNumber);
+    List<Boolean> matchingBonusCounts = lottoList.countMatchingBonus(winningLotto);
 
     for (int i = 0; i < matchingNumberCounts.size(); i++) {
       int matchCount = matchingNumberCounts.get(i);
