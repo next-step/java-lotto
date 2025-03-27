@@ -8,7 +8,7 @@ public class LottoStatistics {
         this.purchasedAmount = purchasedAmount;
     }
 
-    public double getWinningRate(int winningAmount) {
+    public double getWinningRate(long winningAmount) {
         return (double) winningAmount / purchasedAmount;
     }
 }

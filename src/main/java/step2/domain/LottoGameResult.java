@@ -22,4 +22,13 @@ public class LottoGameResult {
     public Integer lottoCount() {
         return ranks.size();
     }
+
+    public long getWinningsSum() {
+        long sum = 0;
+        RankCounter rankCounters = getRankCounters();
+        for (Rank rank: Rank.values()) {
+            sum += rank.getTotalWinnings(rankCounters.getCount(rank));
+        }
+        return sum;
+    }
 }

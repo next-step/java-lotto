@@ -15,15 +15,4 @@ public class RankCounterTest {
 
         Assertions.assertThat(rankCounter.getCount(Rank.FIRST)).isEqualTo(1);
     }
-
-    @DisplayName("당첨금 계산")
-    @Test
-    void calculateWinningAmountTest() {
-        RankCounter rankCounter = new RankCounter();
-        rankCounter.increaseCount(Rank.FIRST);
-
-        int winningsSum = rankCounter.getWinningsSum();
-
-        Assertions.assertThat(winningsSum).isEqualTo(Rank.FIRST.getTotalWinnings(1));
-    }
 }

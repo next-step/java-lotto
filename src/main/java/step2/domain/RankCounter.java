@@ -22,12 +22,4 @@ public class RankCounter {
     public void increaseCount(Rank rank) {
         rankCountMap.put(rank, getCount(rank) + 1);
     }
-
-    public int getWinningsSum() {
-        int sum = 0;
-        for (Rank rank: rankCountMap.keySet()) {
-            sum += rank.getTotalWinnings(getCount(rank));
-        }
-        return sum;
-    }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 class LottoGameResultTest {
 
     private static final WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
-    private static final LottoGenerator lottoGenerator = new LottoGenerator(1, 45, 6);
+    private static final LottoGenerator lottoGenerator = new LottoGenerator(1, 6, 6);
     private static final LottoFactory lottoFactory = new LottoFactory(lottoGenerator);
 
     @DisplayName("구매 금액에 해당하는 갯수의 로또 발급")
@@ -44,5 +44,21 @@ class LottoGameResultTest {
             actual += result.getRankCounters().getCount(rank);
         }
         Assertions.assertThat(actual).isEqualTo(result.lottoCount());
+    }
+
+
+    @DisplayName("당첨금 계산")
+    @Test
+    void calculateWinningAmountTest() {
+        int purchaseAmount = 10000;
+        int lottoPrice = 1000;
+
+        LottoGame lottoGame = new LottoGame(purchaseAmount, lottoPrice, winningLotto, lottoFactory);
+        LottoGameResult result = lottoGame.play();
+
+        long actual = result.getWinningsSum();
+        long expected = Rank.FIRST.getTotalWinnings(10);
+
+        Assertions.assertThat(actual).isEqualTo(expected);
     }
 }

@@ -11,9 +11,9 @@ public enum Rank {
 
     private final String title;
     private final int requiredMatches;
-    private final int winnings;
+    private final long winnings;
 
-    Rank(String title, int requiredMatches, int winnings) {
+    Rank(String title, int requiredMatches, long winnings) {
         this.title = title;
         this.requiredMatches = requiredMatches;
         this.winnings = winnings;
@@ -24,7 +24,7 @@ public enum Rank {
         return rankMatcher.matches(matchedCount);
     }
 
-    public int getTotalWinnings(int count) {
+    public long getTotalWinnings(int count) {
         return winnings * count;
     }
 
