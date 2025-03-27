@@ -7,6 +7,10 @@ import lotto.domain.product.LottoRank;
 
 public class OutputView {
 
+    public static final String NUMBER_OUTPUT_DELIMITER = ", ";
+    public static final String OUTPUT_PREFIX = "[";
+    public static final String OUTPUT_SUFFIX = "]";
+
     public void printResult(FinalResult result, PaymentReceipt paid) {
         System.out.println("당첨 통계");
         System.out.println("---------");

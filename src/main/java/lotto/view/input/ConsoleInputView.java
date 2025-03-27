@@ -27,6 +27,6 @@ public class ConsoleInputView extends BaseInputView {
     @Override
     public LotteryTicket lastWeekNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new LotteryTicket(scanner.nextLine());
+        return new LotteryTicket(parseToLottoNumbers(scanner.nextLine()));
     }
 }

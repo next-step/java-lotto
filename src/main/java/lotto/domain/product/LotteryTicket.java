@@ -2,20 +2,18 @@ package lotto.domain.product;
 
 import lotto.domain.Money;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.view.output.OutputView.NUMBER_OUTPUT_DELIMITER;
+import static lotto.view.output.OutputView.OUTPUT_PREFIX;
+import static lotto.view.output.OutputView.OUTPUT_SUFFIX;
+
 public class LotteryTicket implements Product {
 
-    public static final String NUMBER_INPUT_DELIMITER = ", ";
-    public static final String NUMBER_OUTPUT_DELIMITER = ", ";
-    public static final String OUTPUT_PREFIX = "[";
-    public static final String OUTPUT_SUFFIX = "]";
-
-    public static final int LOTTO_PRICE = 1000;
-    public static final int MAX_LOTTO_SIZE = 6;
+    private static final int LOTTO_PRICE = 1000;
+    private static final int MAX_LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> numbers;
 
@@ -23,14 +21,8 @@ public class LotteryTicket implements Product {
         this.numbers = makeRandomNumbers();
     }
 
-    public LotteryTicket(String input) {
-        this.numbers = parseNumbers(input);
-    }
-
-    private Set<LottoNumber> parseNumbers(String input) {
-        return Arrays.stream(input.split(NUMBER_INPUT_DELIMITER))
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+    public LotteryTicket(Set<LottoNumber> input) {
+        this.numbers = input;
     }
 
     private Set<LottoNumber> makeRandomNumbers() {

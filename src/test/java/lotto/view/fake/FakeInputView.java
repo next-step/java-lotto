@@ -28,7 +28,7 @@ public class FakeInputView extends BaseInputView {
 
     @Override
     public LotteryTicket lastWeekNumber() {
-        return new LotteryTicket(input);
+        return new LotteryTicket(parseToLottoNumbers(input));
     }
 
     public Integer parseInt() {
