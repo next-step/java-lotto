@@ -3,12 +3,12 @@ package step1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step1.domain.Calculator;
 import step1.domain.Expression;
 import step1.domain.Operand;
 import step1.domain.Operator;
 import step1.view.InputView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,34 +65,39 @@ public class StringCalculatorTest {
 
     @Test
     public void testAdd() {
-        // StringCalculator.add(1+3-2) = 2
+        assertEquals(4, Calculator.add("1", "3"));
+        assertEquals(1, Calculator.add("3", "-2"));
     }
 
     @Test
     public void testSubtract() {
-        // StringCalculator.add(3-1+2) = 4
-        // StringCalculator.add(1-2-3) = -4
+        assertEquals(2, Calculator.subtract("3", "1"));
+        assertEquals(-1, Calculator.subtract("1", "2"));
     }
 
     @Test
     public void testMultiply() {
-        // StringCalculator.multiply(3*2) = 6
-        // StringCalculator.multiply(3-3*7) = 0
-        // StringCalculator.multiply(1-5*2) = -8
+        assertEquals(6, Calculator.multiply("3", "2"));
+        assertEquals(0, Calculator.multiply("3", "0"));
+        assertEquals(-5, Calculator.multiply("1", "-5"));
     }
 
     @Test
     public void testDivide() {
-        // StringCalculator.divide(4/2) = 2
-        // StringCalculator.divide(3/2) = 1
-        // StringCalculator.divide(-5/2) = -2
-        // StringCalculator.divide(0/2) = 0
-        // StringCalculator.divide(2/5) = 0
+        assertEquals(2, Calculator.divide("4", "2"));
+        assertEquals(1, Calculator.divide("3", "2"));
+        assertEquals(-2, Calculator.divide("-5", "2"));
+        assertEquals(0, Calculator.divide("0", "2"));
+        assertEquals(0, Calculator.divide("2", "5"));
     }
 
     @Test
-    public void testGetTotalResult() {
-        // StringCalculator.calculate(2 + 3 * 4 / 2) = 10
+    public void testCalculate() {
+        List<Operand> operands = List.of(new Operand(2), new Operand(3), new Operand(4), new Operand(2));
+        List<Operator> operators = List.of(new Operator("+"), new Operator("*"), new Operator("/"));
+
+        int result = Calculator.calculate(operands, operators);
+        assertEquals(10, result);
     }
 
 }
