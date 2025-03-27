@@ -46,4 +46,14 @@ class LottoPrizeTest {
     assertFalse(LottoPrize.contains(2, false));
     assertFalse(LottoPrize.contains(2, true));
   }
+
+  @DisplayName("화면 출력에 대한 테스트")
+  @Test
+  void testGetDisplayText() {
+    assertEquals("3개 일치 (5000원)", LottoPrize.THREE_MATCHES.getDisplayText());
+    assertEquals("4개 일치 (50000원)", LottoPrize.FOUR_MATCHES.getDisplayText());
+    assertEquals("5개 일치 (1500000원)", LottoPrize.FIVE_MATCHES.getDisplayText());
+    assertEquals("5개 일치, 보너스 볼 일치(30000000원)", LottoPrize.FIVE_MATCHES_WITH_BONUS.getDisplayText());
+    assertEquals("6개 일치 (2000000000원)", LottoPrize.SIX_MATCHES.getDisplayText());
+  }
 }

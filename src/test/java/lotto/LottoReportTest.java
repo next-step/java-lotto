@@ -49,6 +49,7 @@ class LottoReportTest {
     assertThat(report).contains("4개 일치 (50000원)- 1개");
     assertThat(report).contains("6개 일치 (2000000000원)- 1개");
     assertThat(report).contains("5개 일치 (1500000원)- 0개");
+    assertThat(report).contains("5개 일치, 보너스 볼 일치(30000000원)- 0개");
   }
 
   @Test
