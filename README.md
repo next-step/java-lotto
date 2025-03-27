@@ -7,3 +7,15 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능목록
+### 뮨자열 계산기
+- [x] 입력값을 공백을 기준으로 토큰을 분리
+- [x] 분리된 토큰에서 '숫자'와 '사칙연산 부호'을 분리
+- [x] 순서대로 계산
+  - [x] 덧셈 계산기
+  - [x] 뺄셈 계산기
+  - [x] 곱셈 계산기
+  - [x] 나눗셈 계산기
+- [x] 입력값이 null or blank일 때 IllegalArgumentException throw
+- [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
