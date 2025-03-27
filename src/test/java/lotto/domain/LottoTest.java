@@ -36,8 +36,7 @@ class LottoTest {
     void createLottoWithInvalidNumberOfNumbers() {
         List<Integer> invalidNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(invalidNumbers))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(invalidNumbers));
     }
 
     @Test
@@ -45,8 +44,7 @@ class LottoTest {
     void createLottoWithInvalidNumberRange() {
         List<Integer> invalidNumbers = Arrays.asList(1, 2, 3, 4, 5, 46);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(invalidNumbers))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(invalidNumbers));
     }
 
     @Test
@@ -54,7 +52,6 @@ class LottoTest {
     void createLottoWithDuplicateNumbers() {
         List<Integer> duplicateNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(duplicateNumbers))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(duplicateNumbers));
     }
 }
