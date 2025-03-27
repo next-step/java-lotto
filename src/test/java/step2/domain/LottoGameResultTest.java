@@ -13,8 +13,8 @@ import java.util.List;
 class LottoGameResultTest {
 
     private static final WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
-    private static final LottoGenerator lottoGenerator = new LottoGenerator(1, 6, 6);
-    private static final LottoFactory lottoFactory = new LottoFactory(lottoGenerator);
+    private static final LottoNumberGenerator LOTTO_NUMBER_GENERATOR = new LottoNumberGenerator(1, 6, 6);
+    private static final LottoFactory lottoFactory = new LottoFactory(LOTTO_NUMBER_GENERATOR);
 
     @DisplayName("구매 금액에 해당하는 갯수의 로또 발급")
     @CsvSource(value = {"1000, 1000, 1", "14000, 2000, 7", "5000, 5000, 1"})

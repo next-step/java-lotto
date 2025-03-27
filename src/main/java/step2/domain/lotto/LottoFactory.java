@@ -2,14 +2,14 @@ package step2.domain.lotto;
 
 public class LottoFactory {
 
-    private final LottoGenerator lottoGenerator;
+    private final LottoNumberGenerator lottoNumberGenerator;
 
-    public LottoFactory(LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
+    public LottoFactory(LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
     public Lotto createLotto() {
-        return new Lotto(lottoGenerator.generateLotto());
+        return new Lotto(lottoNumberGenerator.generateLotto());
     }
 }
 

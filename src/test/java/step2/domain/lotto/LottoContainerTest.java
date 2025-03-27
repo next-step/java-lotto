@@ -9,8 +9,8 @@ import java.util.List;
 
 public class LottoContainerTest {
 
-    private static final LottoGenerator lottoGenerator = new LottoGenerator(1, 45, 6);
-    private static final LottoFactory lottoFactory = new LottoFactory(lottoGenerator);
+    private static final LottoNumberGenerator LOTTO_NUMBER_GENERATOR = new LottoNumberGenerator(1, 45, 6);
+    private static final LottoFactory lottoFactory = new LottoFactory(LOTTO_NUMBER_GENERATOR);
 
     @DisplayName("주어진 개수만큼 로또 발급")
     @Test

@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.lotto.LottoContainer;
 import step2.domain.lotto.LottoCount;
 import step2.domain.lotto.LottoFactory;
-import step2.domain.lotto.LottoGenerator;
+import step2.domain.lotto.LottoNumberGenerator;
 
 class LottoCountTest {
 
@@ -29,8 +29,8 @@ class LottoCountTest {
         LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
         // when
-        LottoGenerator lottoGenerator = new LottoGenerator(1, 45, 6);
-        LottoFactory lottoFactory = new LottoFactory(lottoGenerator);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(1, 45, 6);
+        LottoFactory lottoFactory = new LottoFactory(lottoNumberGenerator);
         LottoContainer lottoContainer = lottoCount.generateLottoContainer(lottoFactory);
 
         // then

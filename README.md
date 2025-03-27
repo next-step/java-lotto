@@ -47,4 +47,12 @@
   - [x] ResultView 구현
 - [x] Controller 구현
   - [x] 리팩토링
-
+- [ ] 피드백
+  - [ ] Lotto 생성 시 검증 추가
+  - [ ] WinningLotto.countMatchedNumbers 파라미터 수정
+  - [ ] LottoGenerator 이름 변경
+  - [ ] LottoFactory 제거 후 Lotto에 정적 팩토리 메서드 도입
+  - [ ] MatchedCount equals 및 hashCode 구현
+  - [ ] Rank.displayRank 변경
+  - [ ] toString 대신 String 반환 메소드 생성
+  - [ ] LottoGameResult에서 winningRate 계산하도록 변경
