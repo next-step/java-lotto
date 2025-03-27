@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
@@ -16,5 +17,9 @@ public class LottoTickets {
 
     public int size() {
         return tickets.size();
+    }
+
+    public List<LottoTicket> getAll() {
+        return Collections.unmodifiableList(tickets);
     }
 }

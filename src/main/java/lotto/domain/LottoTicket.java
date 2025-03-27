@@ -10,5 +10,8 @@ public class LottoTicket {
         numbers = generationStrategy.generateNumbers();
     }
 
-
+    @Override
+    public String toString() {
+        return  numbers.toString();
+    }
 }
