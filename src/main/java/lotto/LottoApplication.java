@@ -15,9 +15,8 @@ public class LottoApplication {
   private static final int LOTTO_PRICE = 1_000;
 
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
 
-    int purchaseAmount = InputView.getPurchaseAmount(scanner);
+    int purchaseAmount = InputView.getPurchaseAmount();
     int ticketCount = purchaseAmount / LOTTO_PRICE;
 
     List<Lotto> tickets = new ArrayList<>();
@@ -28,12 +27,11 @@ public class LottoApplication {
 
     ResultView.showLottos(tickets);
 
-    List<Integer> winningNumbers = InputView.getWinningNumbers(scanner);
+    List<Integer> winningNumbers = InputView.getWinningNumbers();
 
     Map<Integer, Long> lottoResults = LottoChecker.calculateResults(tickets, winningNumbers);
     double profitRate = LottoChecker.calculateProfitRate(lottoResults, purchaseAmount);
     ResultView.printResults(lottoResults, profitRate);
-    scanner.close();
   }
 
 
