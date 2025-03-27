@@ -10,5 +10,8 @@ public class DivisionTest {
     @Test
     void check_prize_by_division() {
         assertThat(Division.FIRST.getPrize()).isEqualTo(2000000000);
+        assertThat(Division.THIRD.getPrize()).isEqualTo(1500000);
+        assertThat(Division.FOURTH.getPrize()).isEqualTo(50000);
+        assertThat(Division.FIFTH.getPrize()).isEqualTo(5000);
     }
 }
