@@ -13,12 +13,9 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
 
-    private final LotteryTickets tickets;
-
     public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        tickets = new LotteryTickets();
     }
 
     public static void main(String[] args) {
@@ -31,28 +28,22 @@ public class LottoController {
         Integer count = receipt.getUserCountBy(new LotteryTicket());
         outputView.userPurchased(count);
 
-        makeAutoLotteryNumbers(count);
+        LotteryTickets myTickets = LotteryTickets.makeAutoTickets(count);
+        outputView.printAutoLottery(myTickets);
 
         LotteryTicket winningTicket = getWinningTicket();
-        getResult(winningTicket, receipt);
+        getResult(myTickets, winningTicket, receipt);
 
         inputView.closeScanner();
     }
 
-    private void getResult(LotteryTicket winningTicket, PaymentReceipt paid) {
-        FinalResult result = tickets.getResult(winningTicket);
-        outputView.printResult(result, paid);
+    private void getResult(LotteryTickets myTickets, LotteryTicket winningTicket, PaymentReceipt receipt) {
+        FinalResult result = myTickets.getResult(winningTicket);
+        outputView.printResult(result, receipt);
     }
 
     private LotteryTicket getWinningTicket() {
         return inputView.lastWeekNumber();
     }
 
-    private void makeAutoLotteryNumbers(Integer count) {
-        for (int i = 0; i < count; i++) {
-            tickets.add(new LotteryTicket());
-        }
-
-        outputView.printAutoLottery(tickets);
-    }
 }

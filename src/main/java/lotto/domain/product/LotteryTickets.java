@@ -30,4 +30,12 @@ public class LotteryTickets {
         });
         return finalResult;
     }
+
+    public static LotteryTickets makeAutoTickets(Integer count) {
+        LotteryTickets lotteryTickets = new LotteryTickets();
+        for (int i = 0; i < count; i++) {
+            lotteryTickets.add(new LotteryTicket());
+        }
+        return lotteryTickets;
+    }
 }
