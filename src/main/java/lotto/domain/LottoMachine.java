@@ -50,7 +50,9 @@ public class LottoMachine {
         return stats;
     }
 
-    private double calculateRevenue(Map<LottoRank, Integer> stats) {
+    public double calculateRevenue(LottoTicket winningTicket) {
+        Map<LottoRank, Integer> stats = compare(winningTicket);
+
         int revenue = 0;
         for (LottoRank rank : stats.keySet()) {
             revenue += rank.getWinningAmount() * stats.get(rank);

@@ -57,4 +57,18 @@ class LottoMachineTest {
                 .containsEntry(LottoRank.FIRST, 1);
     }
 
+    @Test
+    @DisplayName("로또 머신은 총수익률을 반환한다")
+    void getTotalIncomeRatio() {
+        List<LottoTicket> tickets = Arrays.asList(
+                new LottoTicket(List.of(1,7,8,9,10,11)),
+                new LottoTicket(List.of(1,2,3,9,10,11)),
+                new LottoTicket(List.of(1,2,3,4,5,6))
+        );
+        LottoMachine lottoMachine = new LottoMachine(TICKET_AMOUNT, tickets);
+        LottoTicket winningTicket = new LottoTicket(List.of(1,2,3,4,5,6));
+
+        double expected =(double)(LottoRank.FOURTH.getWinningAmount() + LottoRank.FIRST.getWinningAmount()) /TICKET_AMOUNT;
+        assertThat(lottoMachine.calculateRevenue(winningTicket)).isEqualTo(expected);
+    }
 }
