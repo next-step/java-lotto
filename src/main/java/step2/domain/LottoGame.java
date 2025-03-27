@@ -25,8 +25,8 @@ public class LottoGame {
         return lottoCount.generateLottoContainer(lottoRule);
     }
 
-    @Override
-    public String toString() {
-        return purchasedLotto.toString();
+    public String purchasedLottosAsString() {
+        LottoContainerFormatter lottoContainerFormatter = purchasedLotto.generateFormatter();
+        return lottoContainerFormatter.lottosAsString();
     }
 }

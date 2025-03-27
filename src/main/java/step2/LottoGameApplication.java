@@ -16,7 +16,7 @@ public class LottoGameApplication {
         LottoGame lottoGame = setUpLottoGame(lottoCount);
 
         ResultView.printMessage("");
-        ResultView.printMessage(lottoGame.toString());
+        ResultView.printMessage(lottoGame.purchasedLottosAsString());
 
         LottoGameResult lottoGameResult = playLottoRound(lottoGame);
 

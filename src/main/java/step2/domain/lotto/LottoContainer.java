@@ -1,6 +1,7 @@
 package step2.domain.lotto;
 
 import step2.domain.rank.Rank;
+import views.LottoFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +48,11 @@ public class LottoContainer {
         return lottos;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            sb.append(lotto).append("\n");
+    public LottoContainerFormatter generateFormatter() {
+        List<LottoFormatter> lottoFormatters = new ArrayList<>();
+        for (Lotto lotto: lottos) {
+            lottoFormatters.add(lotto.generateFormatter());
         }
-        return sb.toString();
+        return new LottoContainerFormatter(lottoFormatters);
     }
 }

@@ -2,6 +2,7 @@ package step2.domain.lotto;
 
 import step2.domain.rank.MatchedCount;
 import step2.domain.rank.Rank;
+import views.LottoFormatter;
 
 import java.util.List;
 
@@ -39,8 +40,7 @@ public class Lotto {
         return new MatchedCount(matchedCount);
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
+    public LottoFormatter generateFormatter() {
+        return new LottoFormatter(this.lottoNumbers);
     }
 }
