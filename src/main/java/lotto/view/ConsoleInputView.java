@@ -1,22 +1,19 @@
-package view;
+package lotto.view;
 
 import java.util.Scanner;
 
-public class InputView {
+public class ConsoleInputView implements InputViewInterface {
     private static final Scanner scanner = new Scanner(System.in);
     public static final String VALID_NUMBER_INPUT_MSG = "유효한 숫자를 입력해 주세요.";
 
-    public static String[] getStringListInput(String prompt, String delimiter) {
+    @Override
+    public String[] getStringListInput(String prompt, String delimiter) {
         System.out.print(prompt);
         return scanner.nextLine().trim().split(delimiter);
     }
 
-    public static String getStringInput(String prompt) {
-        System.out.print(prompt);
-        return scanner.nextLine().trim();
-    }
-
-    public static int getNumberInput(String prompt) {
+    @Override
+    public int getNumberInput(String prompt) {
         System.out.print(prompt);
         String input = scanner.nextLine().trim();
         if (isInteger(input)) return Integer.parseInt(input);
@@ -24,7 +21,7 @@ public class InputView {
         return getNumberInput(prompt);
     }
 
-    private static boolean isInteger(String input) {
+    private boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
             return true;

@@ -1,41 +1,46 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int PRICE = 1_000;
     public static final int NUMBER_LENGTH = 6;
     public static final String WRONG_NUMBER_COUNT = "로또 번호는 6개여야 합니다.";
-    private final Set<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoTicket(Set<LottoNumber> numbers) {
+    public LottoTicket(List<LottoNumber> numbers) {
+        validate(numbers.size());
         this.numbers = numbers;
     }
 
     public LottoTicket(String[] numbers) {
-        this(Arrays.stream(numbers).mapToInt(Integer::parseInt).toArray());
+        this(Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList()));
     }
 
     public LottoTicket(int[] numbers) {
-        if (numbers == null || numbers.length != NUMBER_LENGTH) {
-            throw new IllegalArgumentException(WRONG_NUMBER_COUNT);
-        }
+        this(Arrays.stream(numbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList()));
+    }
 
-        this.numbers = new HashSet<>();
-        for (int number : numbers) {
-            this.numbers.add(LottoNumber.of(number));
+    private void validate(int size) {
+        if (size != NUMBER_LENGTH) {
+            throw new IllegalArgumentException(WRONG_NUMBER_COUNT + " 현재 개수: " + size);
         }
     }
 
     public LottoResult matchWinner(LottoTicket other, int bonusNumber) {
-        int matchCount = (int) other.numbers.stream()
+        int count = (int) other.numbers.stream()
                 .filter(this.numbers::contains)
                 .count();
         boolean isBonusMatch = this.numbers.contains(LottoNumber.of(bonusNumber));
-        return new LottoResult(this, PrizeRank.of(matchCount, isBonusMatch));
+        return new LottoResult(this, PrizeRank.of(MatchCount.of(count), isBonusMatch));
     }
 
     @Override
