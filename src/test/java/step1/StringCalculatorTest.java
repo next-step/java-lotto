@@ -3,6 +3,14 @@ package step1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step1.domain.Expression;
+import step1.domain.Operand;
+import step1.domain.Operator;
+import step1.view.InputView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,37 +24,42 @@ public class StringCalculatorTest {
             "'2 ++ 3 * 4 / 2', '제대로 된 형식으로 입력해 주세요.(e.g.2 + 3 * 4 / 2)'",
             "'* 2 + 3 * 4 / 2', '제대로 된 형식으로 입력해 주세요.(e.g.2 + 3 * 4 / 2)'",
             "'2 + 3 * 4 / 2 -', '제대로 된 형식으로 입력해 주세요.(e.g.2 + 3 * 4 / 2)'",
+            "'2 + a * b / 5', '제대로 된 형식으로 입력해 주세요.(e.g.2 + 3 * 4 / 2)'",
+            "' 2 + 3 // 2^2  5', '제대로 된 형식으로 입력해 주세요.(e.g.2 + 3 * 4 / 2)'",
             "'2 + 3 * 4 / 2', 'none'"  // 정상 케이스
     })
     public void testValidateInputFormat(String input, String expectedMessage) {
         if ("none".equals(expectedMessage)) {
-            // 정상 케이스, 예외가 발생하지 않아야 함
             boolean result = InputView.isValidInputFormat(input);
             assertTrue(result);
             return;
         }
 
-        // 유효하지 않은 입력 시, 예외 발생
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.isValidInputFormat(input))
                 .withMessage(expectedMessage);
     }
 
     @Test
-    public void testValidateInputValue() {
-        // InputView.IsValidInputValue( 2 + a * b / 5 ) = false,  IllegalArgumentException throw -> "숫자와 사칙연산(+-*/)만 입력 가능합니다."
-        // InputView.IsValidInputValue( 2 + 3 // 2^2  5 ) = false,  IllegalArgumentException throw -> "숫자와 사칙연산(+-*/)만 입력 가능합니다."
-        // InputView.IsValidInputValue( 2 + 3 * 4 / 0 ) = false, IllegalArgumentException throw -> "0으로 나눌 수 없습니다."
-    }
-
-    @Test
     public void testGetOperands() {
-        // InputView.getOperands(2 + 3 * 4 / 2) = [2,3,4,2]
+        String expression = "2 + 3 * 4 / 2";
+        List<Operand> operands = Expression.getOperands(expression);
+        List<Operand> expected = List.of(new Operand(2), new Operand(3), new Operand(4), new Operand(2));
+
+        assertEquals(expected, operands, "Operands should match the expected values.");
     }
 
     @Test
     public void testGetOperators() {
-        // InputView.getOperators(2 + 3 * 4 / 2) = [+,*,/]
+        String expression = "2 + 3 * 4 / 2";
+        List<Operator> operators = Expression.getOperators(expression);
+
+        List<String> expected = List.of("+", "*", "/");
+        List<String> actual = operators.stream()
+                .map(Operator::getSymbol)
+                .collect(Collectors.toList());
+
+        assertEquals(expected, actual);
     }
 
 
