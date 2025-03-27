@@ -20,8 +20,8 @@ class LottoGameTest {
     void calculate_earning_rate() {
         LottoGame lottoGame = new LottoGame(new Lottos(
                 Arrays.asList(
-                        new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1)),
-                        new Lotto(Arrays.asList(35, 23, 5, 9, 3, 8))
+                        Lotto.createManually(Arrays.asList(6, 5, 4, 3, 2, 1)),
+                        Lotto.createManually(Arrays.asList(35, 23, 5, 9, 3, 8))
                 )
         ));
         lottoGame.draw(Arrays.asList(6, 5, 4, 3, 2, 1));

@@ -10,7 +10,7 @@ public class Lotto {
 
     private List<Integer> numbers;
 
-    public Lotto() {
+    private Lotto() {
         List<Integer> lottoNumberCandidate = new ArrayList<>();
         for (int i = 1; i <= LOTTO_NUMBER_UPPER_BOUND; ++i) {
             lottoNumberCandidate.add(i);
@@ -19,9 +19,17 @@ public class Lotto {
         this.numbers = sortNumbers(cropNumbers(lottoNumberCandidate));
     }
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = sortNumbers(numbers);
+    }
+
+    public static Lotto createQuickPick() {
+        return new Lotto();
+    }
+
+    public static Lotto createManually(List<Integer> numbers) {
+        return new Lotto(numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {

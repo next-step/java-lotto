@@ -14,8 +14,8 @@ class LottosTest {
     void create_lotto_list () {
         Lottos lottos = new Lottos(
                 Arrays.asList(
-                        new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1)),
-                        new Lotto(Arrays.asList(35, 23, 5, 9, 3, 8))
+                        Lotto.createManually(Arrays.asList(6, 5, 4, 3, 2, 1)),
+                        Lotto.createManually(Arrays.asList(35, 23, 5, 9, 3, 8))
                 )
         );
         assertThat(lottos)
@@ -27,8 +27,8 @@ class LottosTest {
                 .extracting("lottos")
                 .asList()
                 .containsExactly(
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Arrays.asList(3, 5, 8, 9, 23, 35))
+                        Lotto.createManually(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        Lotto.createManually(Arrays.asList(3, 5, 8, 9, 23, 35))
                 );
 
     }
@@ -38,11 +38,11 @@ class LottosTest {
     void compare_lottos () {
         Lottos lottos = new Lottos(
                 Arrays.asList(
-                        new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1)),
-                        new Lotto(Arrays.asList(35, 23, 5, 9, 3, 8))
+                        Lotto.createManually(Arrays.asList(6, 5, 4, 3, 2, 1)),
+                        Lotto.createManually(Arrays.asList(35, 23, 5, 9, 3, 8))
                 )
         );
-        assertThat(lottos.compareNumbers(new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1))))
+        assertThat(lottos.compareNumbers(Lotto.createManually(Arrays.asList(6, 5, 4, 3, 2, 1))))
                 .contains(entry(Division.FIRST, 1));
 
     }

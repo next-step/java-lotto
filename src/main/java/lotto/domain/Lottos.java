@@ -10,7 +10,7 @@ public class Lottos {
     public Lottos(int count) {
         lottos = new ArrayList<>();
         for (int i = 0; i < count; ++i) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.createQuickPick());
         }
     }
 

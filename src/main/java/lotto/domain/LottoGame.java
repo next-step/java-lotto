@@ -28,7 +28,7 @@ public class LottoGame {
     }
 
     public void draw(List<Integer> numbers) {
-        winnerCountMap = lottos.compareNumbers(new Lotto(numbers));
+        winnerCountMap = lottos.compareNumbers(Lotto.createManually(numbers));
     }
 
     public double calculateEarningRate() {
