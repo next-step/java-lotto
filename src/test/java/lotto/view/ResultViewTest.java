@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.LottoGeneratorTest.TestLottoGenerator;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.LottoReport;

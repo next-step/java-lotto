@@ -1,8 +1,7 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +21,7 @@ public class RandomLottoGenerator implements LottoGenerator {
   public Lotto generate() {
     List<LottoNumber> numbersCopied = new ArrayList<>(NUMBERS);
     Collections.shuffle(numbersCopied);
-    List<LottoNumber> sublist = numbersCopied.subList(0, LottoNumbers.SIZE);
+    List<LottoNumber> sublist = numbersCopied.subList(0, Lotto.SIZE);
     return new Lotto(sublist);
   }
 }

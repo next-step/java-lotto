@@ -21,7 +21,7 @@ public class WinningLotto extends Lotto {
     return otherLotto.contains(bonusNumber);
   }
 
-  public LottoNumbers getNumbers() {
+  public List<LottoNumber> getLotto() {
     return numbers;
   }
 }
