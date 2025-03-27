@@ -5,8 +5,8 @@ public enum Rank {
     SECOND(1_500_000, 5),
     THIRD(50_000, 4),
     FOURTH(5_000, 3),
-    NO_PRIZE(0, 2),
-    PENDING(0, 0);
+    NO_PRIZE(0, 0);
+
     private final int prize;
     private final int matchCount;
 
