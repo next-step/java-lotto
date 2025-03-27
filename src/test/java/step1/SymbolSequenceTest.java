@@ -1,7 +1,7 @@
-package domain;
+package step1;
 
-import domain.symbol.OperatorType;
-import domain.symbol.SymbolSequence;
+import step1.symbol.OperatorType;
+import step1.symbol.SymbolSequence;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
-package domain;
+package step1;
 
-import domain.symbol.Operand;
-import views.InputView;
-import views.ResultView;
+import step1.symbol.Operand;
+import step1.views.InputView;
+import step1.views.ResultView;
 
 public class Calculator {
 

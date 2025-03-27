@@ -1,9 +1,9 @@
-package domain.symbol;
+package step1.symbol;
 
-import domain.symbol.operator.AddOperator;
-import domain.symbol.operator.DivideOperator;
-import domain.symbol.operator.MultiplyOperator;
-import domain.symbol.operator.SubtractOperator;
+import step1.symbol.operator.AddOperator;
+import step1.symbol.operator.DivideOperator;
+import step1.symbol.operator.MultiplyOperator;
+import step1.symbol.operator.SubtractOperator;
 
 public enum OperatorType {
     ADD("+", new AddOperator()),

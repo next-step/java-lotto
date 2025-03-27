@@ -1,6 +1,6 @@
-package views;
+package step1.views;
 
-import domain.symbol.Operand;
+import step1.symbol.Operand;
 
 public class ResultView {
     public static void printMessage(String message) {

@@ -1,6 +1,6 @@
-package domain;
+package step1;
 
-import domain.symbol.Operand;
+import step1.symbol.Operand;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

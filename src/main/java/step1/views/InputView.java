@@ -1,6 +1,6 @@
-package views;
+package step1.views;
 
-import domain.Tokens;
+import step1.Tokens;
 
 import java.util.Scanner;
 

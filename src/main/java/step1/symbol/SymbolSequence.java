@@ -1,4 +1,4 @@
-package domain.symbol;
+package step1.symbol;
 
 import java.util.ArrayList;
 import java.util.List;

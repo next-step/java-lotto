@@ -1,7 +1,7 @@
-package domain.symbol.operator;
+package step1.symbol.operator;
 
-import domain.symbol.Operand;
-import domain.symbol.Operator;
+import step1.symbol.Operand;
+import step1.symbol.Operator;
 
 public class SubtractOperator implements Operator {
     @Override
