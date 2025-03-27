@@ -33,15 +33,16 @@ public class Lotto {
     }
 
     private void validateNumbers(List<Integer> numbers) {
-        for (int number: numbers) {
-            validateNumber(number);
-        }
+        numbers.stream()
+                .filter(number -> isLottoOutOfRange(number))
+                .findAny()
+                .ifPresent(invalid -> {
+                    throw new IllegalArgumentException("로또 번호의 범위는 1부터 " + LOTTO_NUMBER_UPPER_BOUND + "까지 입니다.");
+                });
     }
 
-    private static void validateNumber(int number) {
-        if (number < 1 || number > LOTTO_NUMBER_UPPER_BOUND) {
-            throw new IllegalArgumentException("로또 번호의 범위는 1부터 " + LOTTO_NUMBER_UPPER_BOUND + "까지 입니다.");
-        }
+    private boolean isLottoOutOfRange(Integer number) {
+        return number < 1 || number > LOTTO_NUMBER_UPPER_BOUND;
     }
 
     private List<Integer> cropNumbers(List<Integer> numbers) {
@@ -54,11 +55,10 @@ public class Lotto {
     }
 
     public Division compareNumbers(Lotto lotto) {
-        int matchCount = 0;
-        for (int number: lotto.numbers) {
-            matchCount += isInNumbers(number);
-        }
-        return Division.getDivision(matchCount);
+        long matchCount = numbers.stream()
+                .filter(number -> lotto.numbers.contains(number))
+                .count();
+        return Division.getDivision((int)matchCount);
     }
 
     private int isInNumbers(int number) {
