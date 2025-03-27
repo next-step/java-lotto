@@ -9,7 +9,7 @@ import step2.lotto.domain.Statistic;
 
 public class Game {
 
-    private final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private int gameCount;
     private final LottoNumberGenerator generator;
     private Lottos lottos;
@@ -36,20 +36,11 @@ public class Game {
         this.lottos = new Lottos(lotto);
     }
 
-    public Statistic play(String winningLotto) {
-        Lotto lastWeekLotto = new Lotto(convertStringToList(winningLotto));
+    public Statistic play(List<Integer> winningLottoNumbers) {
+        Lotto winningLotto = new Lotto(winningLottoNumbers);
         Statistic stat = new Statistic();
-        stat.calculate(lottos, lastWeekLotto);
+        stat.calculate(lottos, winningLotto);
         return stat;
-    }
-
-    private List<Integer> convertStringToList(String lastWeekLottoResult) {
-        String[] split = lastWeekLottoResult.trim().split(",");
-        List<Integer> integerList = new ArrayList<>();
-        for (String s : split) {
-            integerList.add(Integer.parseInt(s.trim()));
-        }
-        return integerList;
     }
 
 }

@@ -1,5 +1,6 @@
 package step2.lotto;
 
+import java.util.List;
 import step2.lotto.domain.Lottos;
 import step2.lotto.domain.Statistic;
 import step2.lotto.game.Game;
@@ -15,7 +16,7 @@ public class Main {
         Lottos lottos = game.createLottos(paidMoney);
         ResultView.showLottos(lottos);
 
-        String winningLotto = InputView.lastWeekLottoNumbers();
+        List<Integer> winningLotto = InputView.lastWeekLottoNumbers();
         Statistic stat = game.play(winningLotto);
 
         ResultView.showStatistics(stat, paidMoney);

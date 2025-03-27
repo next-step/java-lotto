@@ -1,5 +1,7 @@
 package step2.lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -13,8 +15,18 @@ public class InputView {
         return money;
     }
 
-    public static String lastWeekLottoNumbers() {
+    public static List<Integer> lastWeekLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        return convertStringToList(scanner.nextLine());
     }
+
+    public static List<Integer> convertStringToList(String lastWeekLottoResult) {
+        String[] split = lastWeekLottoResult.trim().split(",");
+        List<Integer> integerList = new ArrayList<>();
+        for (String s : split) {
+            integerList.add(Integer.parseInt(s.trim()));
+        }
+        return integerList;
+    }
+
 }

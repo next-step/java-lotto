@@ -2,6 +2,7 @@ package step2.lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import step2.lotto.game.Game;
 
 public class Statistic {
 
@@ -38,7 +39,7 @@ public class Statistic {
 
     public double getProfitRate(int paidMoney) {
         // lottoCount * 1000 = 총 투자금
-        int lottoCount = paidMoney / 1000;
+        int lottoCount = paidMoney / Game.LOTTO_PRICE;
         if (lottoCount <= 0) {
             return 0.0;
         }
