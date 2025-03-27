@@ -10,10 +10,14 @@ public class LottoList {
         this.lottoList = lottoList;
     }
 
-
-    public List<Rank> getResult(WinningLotto winningLotto) {
-        return lottoList.stream()
+    public LottoResult getLottoResult(WinningLotto winningLotto) {
+        List<Rank> rankList = lottoList.stream()
                 .map(lotto -> lotto.getRank(winningLotto))
                 .collect(Collectors.toList());
+        return new LottoResult(rankList);
+    }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
     }
 }

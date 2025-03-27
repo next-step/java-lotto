@@ -13,11 +13,11 @@ public class LottoMachine {
         return new Lotto(lottoNumSet);
     }
 
-    public static List<Lotto> buyLotto(int money) {
-        int numberOfLottos = money / LOTTO_PRICE;
-        return IntStream.rangeClosed(1, numberOfLottos)
+    public static LottoList buyLotto(int money) {
+        List<Lotto> lottoList = IntStream.rangeClosed(1, money / LOTTO_PRICE)
                 .mapToObj(e -> createRandomLotto())
                 .collect(Collectors.toList());
+        return new LottoList(lottoList);
     }
 
     public static Lotto createLotto(String lottoNumsInput) {

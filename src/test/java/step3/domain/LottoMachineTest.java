@@ -10,8 +10,8 @@ public class LottoMachineTest {
 
     @Test
     void 가격만큼_로또_생성() {
-        List<Lotto> lottoList = LottoMachine.buyLotto(14000);
-        assertThat(lottoList).hasSize(14);
+        LottoList lottoList = LottoMachine.buyLotto(14000);
+        assertThat(lottoList.getLottoList()).hasSize(14);
     }
 
     @Test
