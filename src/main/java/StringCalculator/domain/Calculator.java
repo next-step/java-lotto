@@ -1,4 +1,4 @@
-package step1.domain;
+package StringCalculator.domain;
 
 import java.util.List;
 import java.util.Map;

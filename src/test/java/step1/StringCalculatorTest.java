@@ -3,11 +3,11 @@ package step1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step1.domain.Calculator;
-import step1.domain.Expression;
-import step1.domain.Operand;
-import step1.domain.Operator;
-import step1.view.InputView;
+import StringCalculator.domain.Calculator;
+import StringCalculator.domain.Expression;
+import StringCalculator.domain.Operand;
+import StringCalculator.domain.Operator;
+import StringCalculator.view.InputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -99,5 +99,4 @@ public class StringCalculatorTest {
         int result = Calculator.calculate(operands, operators);
         assertEquals(10, result);
     }
-
 }

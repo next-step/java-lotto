@@ -1,10 +1,10 @@
-package step1.controller;
+package StringCalculator.controller;
 
-import step1.domain.Calculator;
-import step1.domain.Expression;
-import step1.domain.Operand;
-import step1.domain.Operator;
-import step1.view.InputView;
+import StringCalculator.domain.Calculator;
+import StringCalculator.domain.Expression;
+import StringCalculator.domain.Operand;
+import StringCalculator.domain.Operator;
+import StringCalculator.view.InputView;
 
 import java.util.List;
 

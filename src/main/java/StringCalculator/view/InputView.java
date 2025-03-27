@@ -1,6 +1,6 @@
-package step1.view;
+package StringCalculator.view;
 
-import step1.domain.Expression;
+import StringCalculator.domain.Expression;
 
 import java.util.Scanner;
 
