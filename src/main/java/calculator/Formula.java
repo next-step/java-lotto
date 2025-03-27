@@ -8,14 +8,14 @@ public class Formula {
 
     private static final String PREFIX = "+ ";
 
-    public Formula(String formula){
+    public Formula(String formula) {
         if (formula == null || formula.isBlank()) {
             throw new IllegalArgumentException(Messages.TYPE_ERROR);
         }
         this.formula = formula;
     }
 
-    public String[] getCalculateTarget(){
+    public String[] getCalculateTarget() {
         return PREFIX.concat(formula).split(" ");
     }
 }

@@ -1,17 +1,42 @@
 package calculator;
 
-
 import data.Messages;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class Calculator {
 
-    private int result = 0;
+    private static int result = 0;
     private final Formula formula;
-    private final Map<String, Consumer<Integer>> calculateConsumerMap;
+
+    public enum SignEnum {
+        ADD("+", Calculator::add),
+        SUBTRACT("-", Calculator::subtract),
+        MULTIPLY("*", Calculator::multiply),
+        DIVIDE("/", Calculator::divide),
+        ;
+
+        private final String sign;
+        private final Consumer<Integer> consumer;
+
+        SignEnum(String sign, Consumer<Integer> consumer) {
+            this.sign = sign;
+            this.consumer = consumer;
+        }
+
+        public String getSign() {
+            return sign;
+        }
+
+        public static SignEnum of(String sign) {
+            return Arrays.stream(values())
+                    .filter(s -> s.getSign().equals(sign))
+                    .findAny()
+                    .orElse(null);
+        }
+    }
 
     Calculator(int init) {
         this(init, "0");
@@ -24,31 +49,25 @@ public class Calculator {
     public Calculator(int init, String formula) {
         this.result = init;
         this.formula = new Formula(formula);
-
-        calculateConsumerMap = new HashMap<>();
-        calculateConsumerMap.put("+", this::add);
-        calculateConsumerMap.put("-", this::subtract);
-        calculateConsumerMap.put("*", this::multiply);
-        calculateConsumerMap.put("/", this::divide);
     }
 
     public int getResult() {
         return result;
     }
 
-    public int add(int num) {
+    public static int add(int num) {
         return result += num;
     }
 
-    public int subtract(int num) {
+    public static int subtract(int num) {
         return result -= num;
     }
 
-    public int multiply(int num) {
+    public static int multiply(int num) {
         return result *= num;
     }
 
-    public int divide(int num) {
+    public static int divide(int num) {
         if (result % num != 0) {
             throw new IllegalArgumentException(Messages.TYPE_ERROR);
         }
@@ -56,10 +75,9 @@ public class Calculator {
     }
 
     public void calculate(String sign, String numStr) {
-        if(!calculateConsumerMap.containsKey(sign)){
-            throw new IllegalArgumentException(Messages.TYPE_ERROR);
-        }
-        calculateConsumerMap.get(sign).accept(Integer.parseInt(numStr));
+        Optional.ofNullable(SignEnum.of(sign))
+                .orElseThrow(() -> new IllegalArgumentException(Messages.TYPE_ERROR))
+                .consumer.accept(Integer.parseInt(numStr));
     }
 
     public int calculateFormula() {
