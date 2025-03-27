@@ -26,7 +26,7 @@ public class ResultView {
 
     for (WinningRank rank : WinningRank.values()) {
       int count = lottoResult.getMatchCount().getOrDefault(rank, 0);
-      System.out.printf("%d개 일치 (%d원) - %d개\n", rank.getMatchCount(), rank.getPrice(), count);
+      System.out.printf("%s (%d원)- %d개\n", rank.getDescription(), rank.getPrice(), count);
     }
 
     double profitRate = lottoResult.getProfitRate();

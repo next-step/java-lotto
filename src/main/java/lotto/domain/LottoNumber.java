@@ -15,6 +15,10 @@ public class LottoNumber {
     this.number = number;
   }
 
+  public static LottoNumber of(String input) {
+    return new LottoNumber(Integer.parseInt(input));
+  }
+
   public int getNumber() {
     return number;
   }
