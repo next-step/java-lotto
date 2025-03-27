@@ -20,7 +20,20 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
+        validateNumbers(numbers);
         this.numbers = sortNumbers(numbers);
+    }
+
+    private void validateNumbers(List<Integer> numbers) {
+        for (int number: numbers) {
+            validateNumber(number);
+        }
+    }
+
+    private static void validateNumber(int number) {
+        if (number < 1 || number > LOTTO_NUMBER_UPPER_BOUND) {
+            throw new IllegalArgumentException("로또 번호의 범위는 1부터 " + LOTTO_NUMBER_UPPER_BOUND + "까지 입니다.");
+        }
     }
 
     private List<Integer> cropNumbers(List<Integer> numbers) {
