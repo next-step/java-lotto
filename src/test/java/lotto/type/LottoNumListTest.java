@@ -13,7 +13,11 @@ class LottoNumListTest {
   @DisplayName("생성자 테스트")
   @Test
   public void constructorTest() {
-    assertDoesNotThrow(() -> LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6)));
+    assertAll(
+        () ->  assertDoesNotThrow(() -> LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 6))),
+        () ->  assertThrows(RuntimeException.class, () -> LottoNumList.valueOf(List.of(1, 2, 3, 4, 5))),
+        () ->  assertThrows(RuntimeException.class, () -> LottoNumList.valueOf(List.of(1, 2, 3, 4, 5, 47)))
+    );
   }
 
   @DisplayName("당첨번호 일치 수 가져오기")

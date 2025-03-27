@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.LottoSystemConstants.LOTTO_MAX_NUM;
+import static lotto.LottoSystemConstants.LOTTO_MIN_NUM;
+
 public class WinningNums {
 
   private final List<Integer> winningNums;
@@ -24,7 +27,7 @@ public class WinningNums {
       throw new IllegalArgumentException("당첨 번호 수가 유효하지 않습니다.");
     }
 
-    if (winningNums.stream().anyMatch(num -> num > LottoSystemConstants.LOTTO_MAX_NUM) || winningNums.stream().anyMatch(num -> num < LottoSystemConstants.LOTTO_MIN_NUM)) {
+    if (winningNums.stream().anyMatch((num -> (num > LOTTO_MAX_NUM) ||  (num < LOTTO_MIN_NUM)))) {
       throw new IllegalArgumentException("당첨 번호가 유효하지 않습니다.");
     }
   }
