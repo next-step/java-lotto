@@ -16,7 +16,7 @@ public class Main {
         OutputView.lottoCount(lottos);
 
         Winning winning = InputView.winningNumsLastWeek();
-        Statistics statistics = lottos.analyze(winning);
+        Statistics statistics = Statistics.from(lottos, winning);
         OutputView.strategy(statistics, money);
     }
 }

@@ -11,6 +11,10 @@ public class Statistics {
         this.matchResults = matchResults;
     }
 
+    public static Statistics from(Lottos lottos, Winning winning) {
+        return new Statistics(lottos.matchAll(winning));
+    }
+
     public Map<Rank, Integer> winningCounts() {
         Map<Rank, Integer> result = new EnumMap<>(Rank.class);
 

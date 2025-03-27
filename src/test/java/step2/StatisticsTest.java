@@ -20,7 +20,7 @@ public class StatisticsTest {
         Lottos lottos = new Lottos(lottoList);
         Winning winning = new Winning(of(1, 2, 3, 4, 5, 6));
 
-        Statistics statistics = lottos.analyze(winning);
+        Statistics statistics = Statistics.from(lottos, winning);
         Map<Rank, Integer> winningCounts = statistics.winningCounts();
 
         assertThat(winningCounts.get(Rank.FIRST)).isEqualTo(1);
@@ -39,7 +39,7 @@ public class StatisticsTest {
 
         Lottos lottos = new Lottos(lottoList);
         Winning winning = new Winning(of(1, 2, 3, 4, 5, 6));
-        Statistics statistics = lottos.analyze(winning);
+        Statistics statistics = Statistics.from(lottos, winning);
         double profitRate = statistics.profitRate(3000); // 3장
 
         double expected = (2_000_000_000 + 1_500_000) / 3000.0;

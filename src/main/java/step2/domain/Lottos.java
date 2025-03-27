@@ -21,11 +21,6 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public Statistics analyze(Winning winning) {
-        List<MatchResult> results = matchAll(winning);
-        return new Statistics(results);
-    }
-
     public List<Lotto> getLottos() {
         return lottos;
     }
