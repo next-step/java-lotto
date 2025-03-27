@@ -1,31 +1,29 @@
 package step1.domain;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiFunction;
 
 public class Calculator {
 
-    public static int calculate(List<Operand> operands,  List<Operator> operators) {
-        int result = operands.get(0).getValue(); // 첫 번째 피연산자부터 시작
+    private static final Map<String, BiFunction<Integer, Integer, Integer>> OPERATORS = Map.of(
+            "+", (a, b) -> a + b,
+            "-", (a, b) -> a - b,
+            "*", (a, b) -> a * b,
+            "/", (a, b) -> {
+                if (b == 0) {
+                    throw new ArithmeticException("Cannot divide by zero");
+                }
+                return a / b;
+            }
+    );
+
+    public static int calculate(List<Operand> operands, List<Operator> operators) {
+        int result = operands.get(0).getValue();
         for (int i = 0; i < operators.size(); i++) {
             String operatorSymbol = operators.get(i).getSymbol();
-            int operandValue = operands.get(i + 1).getValue();  // 다음 피연산자 값
-
-            switch (operatorSymbol) {
-                case "+":
-                    result = add(String.valueOf(result), String.valueOf(operandValue));
-                    break;
-                case "-":
-                    result = subtract(String.valueOf(result), String.valueOf(operandValue));
-                    break;
-                case "*":
-                    result = multiply(String.valueOf(result), String.valueOf(operandValue));
-                    break;
-                case "/":
-                    result = divide(String.valueOf(result), String.valueOf(operandValue));
-                    break;
-                default:
-                    throw new IllegalArgumentException("지원하지 않는 연산자: " + operatorSymbol);
-            }
+            int operandValue = operands.get(i + 1).getValue();
+            result = OPERATORS.get(operatorSymbol).apply(result, operandValue);
         }
         return result;
     }
