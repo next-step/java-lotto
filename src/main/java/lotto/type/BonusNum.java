@@ -1,6 +1,7 @@
 package lotto.type;
 
-import lotto.LottoSystemConstants;
+import static lotto.LottoSystemConstants.LOTTO_MAX_NUM;
+import static lotto.LottoSystemConstants.LOTTO_MIN_NUM;
 
 public class BonusNum {
   int num;
@@ -10,7 +11,7 @@ public class BonusNum {
   }
 
   private BonusNum(int num, WinningNums winningNums) {
-    if (num > LottoSystemConstants.LOTTO_MAX_NUM || num < LottoSystemConstants.LOTTO_MIN_NUM) {
+    if (num > LOTTO_MAX_NUM || num < LOTTO_MIN_NUM) {
       throw new IllegalArgumentException("유효하지 않은 보너스 숫자입니다.");
     }
     if (winningNums.contains(num)) {

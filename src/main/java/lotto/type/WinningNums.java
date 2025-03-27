@@ -1,13 +1,10 @@
 package lotto.type;
 
-import lotto.LottoSystemConstants;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.LottoSystemConstants.LOTTO_MAX_NUM;
-import static lotto.LottoSystemConstants.LOTTO_MIN_NUM;
+import static lotto.LottoSystemConstants.*;
 
 public class WinningNums {
 
@@ -23,11 +20,11 @@ public class WinningNums {
         .map(token -> Integer.parseInt(token.trim()))
         .collect(Collectors.toList());
 
-    if (new HashSet<>(winningNums).size() != LottoSystemConstants.LOTTO_SIZE) {
+    if (new HashSet<>(winningNums).size() != LOTTO_SIZE) {
       throw new IllegalArgumentException("당첨 번호 수가 유효하지 않습니다.");
     }
 
-    if (winningNums.stream().anyMatch((num -> (num > LOTTO_MAX_NUM) ||  (num < LOTTO_MIN_NUM)))) {
+    if (winningNums.stream().anyMatch((num -> (num > LOTTO_MAX_NUM) || (num < LOTTO_MIN_NUM)))) {
       throw new IllegalArgumentException("당첨 번호가 유효하지 않습니다.");
     }
   }
