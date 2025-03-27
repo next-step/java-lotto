@@ -29,7 +29,7 @@ public class ResultViewTest {
             new TestLottoGenerator().generate(),
             new TestLottoGenerator().generate()
     ));
-    String expected = "[1, 45, 2, 44, 3, 43]\n[1, 45, 2, 44, 3, 43]\n";
+    String expected = "[1, 2, 3, 43, 44, 45]\n[1, 2, 3, 43, 44, 45]\n";
 
     ResultView.printLottos(lottos);
 

@@ -1,36 +1,18 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import static java.util.stream.Collectors.joining;
 
 public class Lotto {
-  public static final int SIZE = 6;
   static final int PRICE = 1000;
 
-  private final List<LottoNumber> numbers;
+  protected final LottoNumbers numbers;
 
   public Lotto(List<LottoNumber> numbers) {
-    validate(numbers);
-    this.numbers = numbers;
-  }
-
-  private void validate(List<LottoNumber> numbers) {
-    if (numbers.size() != SIZE) {
-      throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
-    }
-    Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);
-    if (uniqueNumbers.size() != SIZE) {
-      throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
-    }
+    this.numbers = new LottoNumbers(numbers);
   }
 
   public int countMatchingNumbers(WinningLotto winningLotto) {
-    return (int) numbers.stream()
-            .filter(winningLotto::contains)
-            .count();
+    return (int) numbers.countMatching(winningLotto.getNumbers());
   }
 
   boolean contains(LottoNumber lottoNumber) {
@@ -38,9 +20,6 @@ public class Lotto {
   }
 
   public String getNumberRepresentation() {
-    return "[" + numbers.stream()
-            .map(LottoNumber::getNumber)
-            .map(String::valueOf)
-            .collect(joining(", ")) + "]";
+    return "[" + numbers.format() + "]";
   }
 }

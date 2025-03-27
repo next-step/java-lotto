@@ -23,6 +23,11 @@ public class LottoReward {
     List<Integer> matchingNumberCounts = lottoList.countMatchingNumbers(winningLotto);
     List<Boolean> matchingBonusCounts = lottoList.countMatchingBonus(winningLotto);
 
+    updatePrizeMap(matchingNumberCounts, matchingBonusCounts, prizeMap);
+    return prizeMap;
+  }
+
+  private static void updatePrizeMap(List<Integer> matchingNumberCounts, List<Boolean> matchingBonusCounts, Map<LottoPrize, Integer> prizeMap) {
     for (int i = 0; i < matchingNumberCounts.size(); i++) {
       int matchCount = matchingNumberCounts.get(i);
       boolean isBonus = matchingBonusCounts.get(i);
@@ -31,8 +36,6 @@ public class LottoReward {
       LottoPrize prize = LottoPrize.getPrizeFromMatchCount(matchCount, isBonus);
       prizeMap.put(prize, prizeMap.get(prize) + 1);
     }
-
-    return prizeMap;
   }
 
   public int getPrizeCount(LottoPrize prize) {
