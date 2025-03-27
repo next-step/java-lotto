@@ -12,7 +12,7 @@ import lotto.view.ResultView;
 
 public class LottoApplication {
 
-  private static final int LOTTO_PRICE = 1000;
+  private static final int LOTTO_PRICE = 1_000;
 
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
