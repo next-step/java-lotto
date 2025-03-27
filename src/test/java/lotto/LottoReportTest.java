@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,15 +15,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoReportTest {
 
-  private Lotto winningLotto;
+  private WinningLotto winningLotto;
   private Lottos lottos;
 
   @BeforeEach
   void setUp() {
-    winningLotto = new Lotto(List.of(
+    winningLotto = new WinningLotto(List.of(
             new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-    ));
+    ), new LottoNumber(7));
 
     lottos = new Lottos(List.of(
             new Lotto(List.of(
@@ -48,6 +49,7 @@ class LottoReportTest {
     assertThat(report).contains("4개 일치 (50000원)- 1개");
     assertThat(report).contains("6개 일치 (2000000000원)- 1개");
     assertThat(report).contains("5개 일치 (1500000원)- 0개");
+    assertThat(report).contains("5개 일치, 보너스 볼 일치(30000000원)- 0개");
   }
 
   @Test

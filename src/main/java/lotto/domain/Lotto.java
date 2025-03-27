@@ -1,51 +1,47 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
-  public static final int SIZE = 6;
   static final int PRICE = 1000;
-
-  private final List<LottoNumber> numbers;
+  public static final int SIZE = 6;
+  protected final List<LottoNumber> numbers;
 
   public Lotto(List<LottoNumber> numbers) {
     validate(numbers);
-    this.numbers = numbers;
-  }
-
-  public Lotto(String numbers) {
-    List<LottoNumber> lottoNumbers = Arrays.stream(numbers.split(","))
-            .map(String::trim)
-            .map(num -> new LottoNumber(Integer.parseInt(num)))
-            .collect(Collectors.toList());
-    validate(lottoNumbers);
-    this.numbers = lottoNumbers;
+    this.numbers = sort(numbers);
   }
 
   private void validate(List<LottoNumber> numbers) {
     if (numbers.size() != SIZE) {
-      throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+      throw new IllegalArgumentException("로또 번호는 " + Lotto.SIZE + "개여야 합니다.");
     }
+
     Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);
     if (uniqueNumbers.size() != SIZE) {
       throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
     }
   }
 
-  public int countMatchingNumbers(Lotto winningLotto) {
-    return (int) numbers.stream()
-            .filter(winningLotto::contains)
-            .count();
+  private List<LottoNumber> sort(List<LottoNumber> numbers) {
+    return numbers.stream()
+            .sorted()
+            .collect(toList());
   }
 
-  private boolean contains(LottoNumber lottoNumber) {
-    return numbers.contains(lottoNumber);
+  public boolean contains(LottoNumber number) {
+    return numbers.contains(number);
+  }
+
+  public int countMatchingNumbers(Lotto other) {
+    return (int) numbers.stream()
+            .filter(other::contains)
+            .count();
   }
 
   public String getNumberRepresentation() {

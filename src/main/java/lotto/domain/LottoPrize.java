@@ -1,38 +1,53 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public enum LottoPrize {
-  THREE_MATCHES(3, 5_000),
-  FOUR_MATCHES(4, 50_000),
-  FIVE_MATCHES(5, 1_500_000),
-  SIX_MATCHES(6, 2_000_000_000);
+  THREE_MATCHES(3, false, 5_000),
+  FOUR_MATCHES(4, false, 50_000),
+  FIVE_MATCHES(5, false, 1_500_000),
+  FIVE_MATCHES_WITH_BONUS(5, true, 30_000_000),
+  SIX_MATCHES(6, false, 2_000_000_000);
 
   private final int matchCount;
+  private final boolean isBonus;
   private final int prizeMoney;
 
-  LottoPrize(int matchCount, int prizeMoney) {
+  LottoPrize(int matchCount, boolean isBonus, int prizeMoney) {
     this.matchCount = matchCount;
+    this.isBonus = isBonus;
     this.prizeMoney = prizeMoney;
   }
 
-  public static LottoPrize getPrizeFromMatchCount(int count) {
+  public static LottoPrize getPrizeFromMatchCount(int count, boolean matchesBonus) {
     return Arrays.stream(values())
-            .filter(prize -> prize.matchCount == count)
+            .filter(p -> p.matches(count, matchesBonus))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("일치하는 LottoPrize가 없습니다."));
   }
 
-  public static Set<Integer> getAllMatchCounts() {
+  public static boolean contains(int count, boolean matchesBonus) {
     return Arrays.stream(values())
-            .map(prize -> prize.matchCount)
-            .collect(Collectors.toSet());
+            .anyMatch(p -> p.matches(count, matchesBonus));
   }
 
-  public int getMatchCount() {
-    return matchCount;
+  private boolean matches(int count, boolean matchesBonus) {
+    if (this.matchCount != count) return false;
+    if (hasBonusVariant()) return this.isBonus == matchesBonus;
+    return true;
+  }
+
+  private boolean hasBonusVariant() {
+    return Arrays.stream(values())
+            .filter(p -> p.matchCount == this.matchCount)
+            .count() > 1;
+  }
+
+  public String getDisplayText() {
+    if (this.isBonus) {
+      return String.format("%d개 일치, 보너스 볼 일치(%d원)", matchCount, prizeMoney);
+    }
+    return String.format("%d개 일치 (%d원)", matchCount, prizeMoney);
   }
 
   public int getPrizeMoney() {

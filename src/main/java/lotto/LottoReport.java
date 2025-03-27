@@ -1,9 +1,9 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoPrize;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,11 @@ import java.util.List;
 public class LottoReport {
 
   private static final String TOTAL_PRIZE_RATE_FORMAT = "총 수익률은 %.2f입니다.";
-  private static final String TOTAL_COUNT_FORMAT = "%d개 일치 (%d원)- %d개";
 
   private final LottoReward lottoReward;
   private final PurchaseAmount purchaseAmount;
 
-  public LottoReport(PurchaseAmount purchaseAmount, Lotto winningLotto, Lottos lottos) {
+  public LottoReport(PurchaseAmount purchaseAmount, WinningLotto winningLotto, Lottos lottos) {
     this.lottoReward = new LottoReward(lottos, winningLotto);
     this.purchaseAmount = purchaseAmount;
   }
@@ -32,7 +31,7 @@ public class LottoReport {
   }
 
   private String getPrizeAndCountStatus(LottoPrize prize, int count) {
-    return String.format(TOTAL_COUNT_FORMAT, prize.getMatchCount(), prize.getPrizeMoney(), count);
+    return String.format("%s- %d개", prize.getDisplayText(), count);
   }
 
   public String createMoneyReport() {

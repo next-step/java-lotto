@@ -1,11 +1,12 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.LottoGeneratorTest.TestLottoGenerator;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.LottoReport;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class ResultViewTest {
             new TestLottoGenerator().generate(),
             new TestLottoGenerator().generate()
     ));
-    String expected = "[1, 45, 2, 44, 3, 43]\n[1, 45, 2, 44, 3, 43]\n";
+    String expected = "[1, 2, 3, 43, 44, 45]\n[1, 2, 3, 43, 44, 45]\n";
 
     ResultView.printLottos(lottos);
 
@@ -43,10 +44,10 @@ public class ResultViewTest {
     PrintStream originalOut = System.out;
     System.setOut(new PrintStream(outputStream));
 
-    Lotto winningLotto = new Lotto(List.of(
+    WinningLotto winningLotto = new WinningLotto(List.of(
             new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-    ));
+    ), new LottoNumber(7));
     PurchaseAmount purchaseAmount = new PurchaseAmount(3000);
     Lottos lottos = getLottos();
 
@@ -54,8 +55,9 @@ public class ResultViewTest {
             "3개 일치 (5000원)- 1개\n" +
             "4개 일치 (50000원)- 1개\n" +
             "5개 일치 (1500000원)- 0개\n" +
+            "5개 일치, 보너스 볼 일치(30000000원)- 1개\n" +
             "6개 일치 (2000000000원)- 1개\n" +
-            "총 수익률은 666685.00입니다.\n";
+            "총 수익률은 676685.00입니다.\n";
 
     ResultView.printStatistics(new LottoReport(purchaseAmount, winningLotto, lottos));
 
@@ -64,7 +66,7 @@ public class ResultViewTest {
   }
 
   private static Lottos getLottos() {
-    Lottos lottos = new Lottos(List.of(
+    return new Lottos(List.of(
             new Lotto(List.of(
                     new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
                     new LottoNumber(7), new LottoNumber(9), new LottoNumber(11))),
@@ -73,8 +75,10 @@ public class ResultViewTest {
                     new LottoNumber(6), new LottoNumber(12), new LottoNumber(14))),
             new Lotto(List.of(
                     new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))
+                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
+            new Lotto(List.of(
+                    new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(7)))
     ));
-    return lottos;
   }
 }

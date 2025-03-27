@@ -19,9 +19,15 @@ public class Lottos {
     lottoList.forEach(lotto -> System.out.println(lotto.getNumberRepresentation()));
   }
 
-  public List<Integer> countMatchingNumbers(Lotto winningLotto) {
+  public List<Integer> countMatchingNumbers(WinningLotto winningLotto) {
     return lottoList.stream().map(
         lotto -> lotto.countMatchingNumbers(winningLotto)
+    ).collect(Collectors.toList());
+  }
+
+  public List<Boolean> countMatchingBonus(WinningLotto winningLotto) {
+    return lottoList.stream().map(
+            winningLotto::hasBonus
     ).collect(Collectors.toList());
   }
 }

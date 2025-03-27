@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrize;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,15 +15,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoRewardTest {
 
-  private Lotto winningLotto;
+  private WinningLotto winningLotto;
   private Lottos lottos;
 
   @BeforeEach
   void setUp() {
-    winningLotto = new Lotto(List.of(
+    winningLotto = new WinningLotto(List.of(
             new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-    ));
+    ), new LottoNumber(7));
 
     lottos = new Lottos(List.of(
             new Lotto(List.of(
