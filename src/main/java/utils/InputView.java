@@ -1,28 +1,23 @@
 package utils;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
+    private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String WINNING_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     public String inputExpression() {
-        String input = scanner.nextLine();
-        isNullOrBlank(input);
-        return input;
+        return scanner.nextLine();
     }
 
-    private static void isNullOrBlank(String input) {
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("입력값이 비어 있거나 null입니다.");
-        }
+    public static String inputPurchaseAmount() {
+        System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
+        return scanner.nextLine();
     }
 
-    public static int toInt(String number) {
-        return Integer.parseInt(number);
-    }
-
-    public static List<String> parse(String input) {
-        return List.of(input.split(" "));
+    public static String inputWinningNumbers() {
+        System.out.println(WINNING_NUMBERS_INPUT_MESSAGE);
+        return scanner.nextLine();
     }
 }
