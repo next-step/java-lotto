@@ -22,4 +22,12 @@ public enum Prize {
             .findFirst()
             .orElse(null);
     }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getMoney() {
+        return money;
+    }
 }

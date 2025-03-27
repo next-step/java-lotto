@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -12,6 +15,16 @@ public class LottoMain {
 
         ResultView.printLottoNumber(lottoTicket.getLottoRowList());
 
+        String winningNumbers = InputView.inputWinningNumbers();
+        List<Integer> winningNumberList = Arrays.stream(winningNumbers.split(","))
+            .map(String::trim)
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
+
+        WinningNumber winningNumber = new WinningNumber(winningNumberList);
+        Map<Prize, Integer> calculate = winningNumber.calculate(lottoTicket);
+
+        ResultView.printWinning(calculate);
 
     }
 }
