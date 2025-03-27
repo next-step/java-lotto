@@ -1,7 +1,9 @@
 package model;
 
 import model.lotto.Lotto;
+import model.lotto.LottoNumber;
 import model.lotto.LottoResult;
+import model.lotto.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,11 +14,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoResultTest {
-    private Lotto winningLotto;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     public void init() {
-        winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        winningLotto = new WinningLotto(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNumber(40));
     }
 
     @Test

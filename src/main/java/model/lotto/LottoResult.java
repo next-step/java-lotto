@@ -26,11 +26,10 @@ public class LottoResult {
         return (double) totalPrice / this.payAmount;
     }
 
-    public static LottoResult of(Lotto winningLotto, List<Lotto> paidLottoList, int payAmount) {
+    public static LottoResult of(WinningLotto winningLotto, List<Lotto> paidLottoList, int payAmount) {
         Map<Rank, Integer> totalRank = new HashMap<>();
         for (Lotto paidLotto : paidLottoList) {
-            int count = paidLotto.countWinningNumbers(winningLotto);
-            Rank rank = Rank.of(count);
+            Rank rank = paidLotto.countWinningNumbers(winningLotto);
             totalRank.put(rank, totalRank.getOrDefault(rank, ZERO_COUNT) + 1);
         }
         return new LottoResult(totalRank, payAmount);
