@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
+    public static final int LOTTO_COUNT = 6;
 
     private List<Integer> numbers;
 
@@ -39,6 +40,10 @@ public class Lotto {
                 .ifPresent(invalid -> {
                     throw new IllegalArgumentException("로또 번호의 범위는 1부터 " + LOTTO_NUMBER_UPPER_BOUND + "까지 입니다.");
                 });
+
+        if (numbers.size() != LOTTO_COUNT) {
+            throw new IllegalArgumentException("로또 번호의 개수는 " + LOTTO_COUNT + "개이어야 합니다.");
+        }
     }
 
     private boolean isLottoOutOfRange(Integer number) {
@@ -46,7 +51,7 @@ public class Lotto {
     }
 
     private List<Integer> cropNumbers(List<Integer> numbers) {
-        return numbers.subList(0, 6);
+        return numbers.subList(0, LOTTO_COUNT);
     }
 
     private List<Integer> sortNumbers(List<Integer> numbers) {
@@ -59,13 +64,6 @@ public class Lotto {
                 .filter(number -> lotto.numbers.contains(number))
                 .count();
         return Division.getDivision((int)matchCount);
-    }
-
-    private int isInNumbers(int number) {
-        if (this.numbers.contains(number)) {
-            return 1;
-        }
-        return 0;
     }
 
     @Override

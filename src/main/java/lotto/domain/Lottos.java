@@ -49,11 +49,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<List<Integer>> getLottos() {
-        List<List<Integer>> returnLottos = new ArrayList<>();
-        for (Lotto lotto: lottos) {
-            returnLottos.add(lotto.getNumbers());
-        }
-        return returnLottos;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

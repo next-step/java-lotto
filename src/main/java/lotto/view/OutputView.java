@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Division;
+import lotto.domain.Lotto;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -16,10 +17,10 @@ public class OutputView {
         printStringMap.put(Division.FIRST, "6개 일치 (2000000000원)- ");
     }
 
-    public static void printPurchaseList(List<List<Integer>> lottos) {
+    public static void printPurchaseList(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (List<Integer> lotto: lottos) {
-            System.out.println(lotto);
+        for (Lotto lotto: lottos) {
+            System.out.println(lotto.getNumbers());
         }
          System.out.println();
     }

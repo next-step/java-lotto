@@ -39,7 +39,7 @@ public class LottoGame {
         return (double)earning / (count * LOTTO_PRICE);
     }
 
-    public List<List<Integer>> getLottos() {
+    public List<Lotto> getLottos() {
         return lottos.getLottos();
     }
 
