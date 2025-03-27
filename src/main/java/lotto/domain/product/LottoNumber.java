@@ -11,11 +11,18 @@ public class LottoNumber {
     private final Integer number;
 
     public LottoNumber(Integer number) {
+        validateInput(number);
         this.number = number;
     }
 
     public LottoNumber(String number) {
-        this.number = Integer.parseInt(number);
+        this(Integer.parseInt(number));
+    }
+
+    private static void validateInput(Integer number) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또의 숫자는 " + MIN_LOTTO_NUMBER + " 와 " + MAX_LOTTO_NUMBER + "사이의 값이어야 합니다.");
+        }
     }
 
     public static LottoNumber makeRandomNumber() {
