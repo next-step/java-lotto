@@ -1,5 +1,6 @@
 package step3.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +34,13 @@ public class Lotto {
         int matchCount = getMatchCount(winningLotto.getWinningLotto());
         boolean matchBonus = containsBonus(winningLotto.getBonusNum());
         return Rank.valueOf(matchCount, matchBonus);
+    }
+
+    public List<LottoNum> sortedNumbers() {
+        return new ArrayList<>(lottoNumSet.getLottoNumSet())
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     @Override
