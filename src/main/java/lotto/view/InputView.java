@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseAmount;
 import java.util.Scanner;
 
@@ -23,5 +24,15 @@ public class InputView {
   public String receiveWinningLotto() {
     System.out.println("지난 주 당첨 번호를 입력해주세요.");
     return scanner.nextLine();
+  }
+
+  public LottoNumber receiveBonusNumber() {
+    System.out.println("보너스 볼을 입력해주세요.");
+    try {
+      int money = Integer.parseInt(scanner.nextLine().trim());
+      return new LottoNumber(money);
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+    }
   }
 }

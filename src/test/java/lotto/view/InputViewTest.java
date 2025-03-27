@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +36,28 @@ class InputViewTest {
     String actual = inputView.receiveWinningLotto();
 
     assertEquals("1, 2, 3, 4, 5, 6", actual);
+  }
+
+  @DisplayName("보너스 볼을 입력받는 기능 테스트")
+  @Test
+  void testReceiveBonusNumber() {
+    String testInput = "1";
+    InputView inputView = new InputView(getTestScanner(testInput));
+
+    LottoNumber actual = inputView.receiveBonusNumber();
+
+    assertEquals(new LottoNumber(1), actual);
+  }
+
+  @DisplayName("숫자가 아닌 보너스 볼을 입력받을 시 에러")
+  @Test
+  void testReceiveNotNumberBonusBall() {
+    String testInput = "a";
+    InputView inputView = new InputView(getTestScanner(testInput));
+
+    assertThatThrownBy(inputView::receiveMoney)
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("숫자가 아닌 값이 포함되어 있습니다.");
   }
 
 }

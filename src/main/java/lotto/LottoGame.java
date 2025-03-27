@@ -11,22 +11,21 @@ import java.util.Scanner;
 
 public class LottoGame {
 
-  private final Scanner scanner;
+  private final InputView inputView;
 
   public LottoGame(Scanner scanner) {
-    this.scanner = scanner;
+    this.inputView = new InputView(scanner);
   }
 
   public void play() {
     PurchaseAmount purchaseAmount = receiveMoney();
     Lottos lottos = buyLottos(purchaseAmount);
     Lotto winningLotto = receiveWinningLotto();
-    LottoNumber bonusNumber = new LottoNumber(0);
+    LottoNumber bonusNumber = receiveBonusNumber();
     printResult(purchaseAmount, winningLotto, lottos, bonusNumber);
   }
 
   private PurchaseAmount receiveMoney() {
-    InputView inputView = new InputView(scanner);
     return inputView.receiveMoney();
   }
 
@@ -39,9 +38,12 @@ public class LottoGame {
   }
 
   private Lotto receiveWinningLotto() {
-    InputView inputView = new InputView(scanner);
     String winninLottoNumbers = inputView.receiveWinningLotto();
     return new Lotto(winninLottoNumbers);
+  }
+
+  private LottoNumber receiveBonusNumber() {
+    return inputView.receiveBonusNumber();
   }
 
   private void printResult(PurchaseAmount purchaseAmount, Lotto winningLotto, Lottos lottos, LottoNumber bonusNumber) {
