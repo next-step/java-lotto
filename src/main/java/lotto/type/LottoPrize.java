@@ -2,7 +2,6 @@ package lotto.type;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public enum LottoPrize {
   ZERO_MATCHES(0, 0),
