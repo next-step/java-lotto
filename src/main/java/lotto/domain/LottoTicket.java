@@ -12,7 +12,11 @@ public class LottoTicket {
 
     public List<Integer> issue() {
         for(int i=0; i<6; i++) {
-            numbers.add(generateNumber());
+            int number = generateNumber();
+            while (numbers.contains(number)) {
+                number = generateNumber();
+            }
+            numbers.add(number);
         }
         return numbers;
     }

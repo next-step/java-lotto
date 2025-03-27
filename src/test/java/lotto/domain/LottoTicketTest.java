@@ -2,7 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +14,13 @@ class LottoTicketTest {
         assertThat(lottoTicket.issue())
                 .hasSize(6)
                 .allMatch(number -> number >= 1 && number <= 45);
+    }
+
+    @RepeatedTest(100)
+    @DisplayName("로또 티켓은 중복된 숫자를 가지지 않는다.")
+    void ticketNumberShouldNotBeDuplicate() {
+        LottoTicket lottoTicket = new LottoTicket();
+        assertThat(lottoTicket.issue()).doesNotHaveDuplicates();
     }
 
 }
