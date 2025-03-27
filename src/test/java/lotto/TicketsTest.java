@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.RandomNumberGeneration;
-import lotto.domain.Tickets;
+import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class TicketsTest {
         int purchaseQuantity = 14;
 
         //when
-        Tickets tickets = new Tickets(purchaseQuantity, new RandomNumberGeneration());
+        LottoTickets tickets = new LottoTickets(purchaseQuantity, new RandomNumberGeneration());
 
         //then
         assertThat(tickets.size()).isEqualTo(purchaseQuantity);

@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,10 +15,10 @@ class LottoTest {
     void calculatePurchaseQuantityTest() {
         //given
         int purchaseAmount = 14000;
-        Lotto lotto = new Lotto();
+        LottoMachine lottoMachine = new LottoMachine(numberGenerationStrategy);
 
         //when`
-        int purchaseQuantity = lotto.calculatePurchaseQuantity(purchaseAmount);
+        int purchaseQuantity = lottoMachine.calculatePurchaseQuantity(purchaseAmount);
 
         //then
         assertThat(purchaseQuantity).isEqualTo(14);
@@ -29,11 +29,11 @@ class LottoTest {
     @ValueSource(ints = {-1, 0, 999})
     void calculatePurchaseQuantityWithInvalidAmount(int purchaseAmount) {
         //given
-        Lotto lotto = new Lotto();
+        LottoMachine lottoMachine = new LottoMachine(numberGenerationStrategy);
 
         //when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotto.calculatePurchaseQuantity(purchaseAmount))
+                .isThrownBy(() -> lottoMachine.calculatePurchaseQuantity(purchaseAmount))
                 .withMessageContaining("로또를 구매하기 적절한 금액이 아닙니다");
 
     }
