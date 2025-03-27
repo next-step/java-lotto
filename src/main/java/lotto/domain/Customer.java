@@ -6,34 +6,30 @@ import java.util.List;
 
 public class Customer {
     private int purchaseAmount;
-    private Lottos lottos;
+    private List<Lotto> lottoList;
 
     public Customer() {
     }
 
-    public Customer(int purchaseAmount, Lottos lottos) {
+    public Customer(int purchaseAmount, List<Lotto> lottoList) {
         this.purchaseAmount = purchaseAmount;
-        this.lottos = lottos;
+        this.lottoList = lottoList;
     }
 
-    public void purchaseLottos(int purchaseAmount) {
+    public void purchaseLotto(int purchaseAmount) {
         if (purchaseAmount <= 0) {
             throw new IllegalArgumentException("구입금액은 0 이하일 수 없습니다. 입력한 구입금액: " + purchaseAmount);
         }
 
         this.purchaseAmount = purchaseAmount;
-        this.lottos = LottoGenerator.generateLottosByAmount(purchaseAmount);
-    }
-
-    public void checkLottosResult(List<LottoNumber> winningNumbers) {
-        lottos.determineAllLottoResult(winningNumbers);
+        this.lottoList = LottoGenerator.generateLottoListByAmount(purchaseAmount);
     }
 
     public int getPurchaseAmount() {
         return purchaseAmount;
     }
 
-    public Lottos getLottos() {
-        return lottos;
+    public List<Lotto> getLottoList() {
+        return lottoList;
     }
 }

@@ -1,36 +1,37 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
+import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-    public static void printLottos(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        lottos.getLottoList().stream().map(Lotto::getNumbers).forEach(System.out::println);
+    public static void printLottos(List<Lotto> lottoList) {
+        System.out.println(lottoList.size() + "개를 구매했습니다.");
+        lottoList.stream().map(Lotto::getNumbersAsString).forEach(System.out::println);
     }
 
-    public static void printStatistics(Map<Rank, Integer> statistics) {
+    public static void printLottoResult(LottoResult lottoResult) {
         System.out.println("\n당첨 통계");
         System.out.println("----------");
 
         for (Rank rank : Rank.values()) {
-            if(rank == Rank.PENDING) {
+            if (rank == Rank.NO_PRIZE) {
                 continue;
             }
 
             int matchCount = rank.getMatchCount();
             int prize = rank.getPrize();
-            int winningLottoCount = statistics.get(rank);
-            String messageFormat = "%d개 일치 (%d원) - %d개";
 
-            System.out.println(String.format(messageFormat, matchCount, prize, winningLottoCount));
+            Map<Rank, Integer> lottoStatistics = lottoResult.getLottoStatistics();
+            int winningLottoCount = lottoStatistics.get(rank);
+
+            System.out.println(String.format("%d개 일치 (%d원) - %d개", matchCount, prize, winningLottoCount));
         }
+
+        System.out.println(String.format("총 수익률은 %.2f 입니다.", lottoResult.getROI()));
     }
 
-    public static void printROI(double ROI) {
-        System.out.println("총 수익률은 " + ROI + "입니다.");
-    }
 }

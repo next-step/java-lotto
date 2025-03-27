@@ -16,28 +16,23 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoTest {
 
     @Test
-    public void 당첨번호와_로또정보를_기반으로_등수정보를_반환한다() {
+    public void 당첨번호와_구매_로또정보를_기반으로_등수정보를_반환한다() {
         List<LottoNumber> winningNumbers = Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        Lotto firstRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        firstRankLotto.determineLottoResult(winningNumbers);
+        Lotto firstRankLotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        Lotto thirdRankLotto = Lotto.of(List.of(1, 2, 3, 4, 10, 20));
+        Lotto noPrizeRankLotto = Lotto.of(List.of(1, 2, 11, 23, 33, 38));
 
-        Lotto thirdRankLotto = new Lotto(List.of(1, 2, 3, 4, 10, 20));
-        thirdRankLotto.determineLottoResult(winningNumbers);
-
-        Lotto noPrizeRankLotto = new Lotto(List.of(1, 2, 11, 23, 33, 38));
-        noPrizeRankLotto.determineLottoResult(winningNumbers);
-
-        assertThat(firstRankLotto.getRank()).isEqualTo(Rank.FIRST);
-        assertThat(thirdRankLotto.getRank()).isEqualTo(Rank.THIRD);
-        assertThat(noPrizeRankLotto.getRank()).isEqualTo(Rank.NO_PRIZE);
+        assertThat(firstRankLotto.checkLottoRank(winningNumbers)).isEqualTo(Rank.FIRST);
+        assertThat(thirdRankLotto.checkLottoRank(winningNumbers)).isEqualTo(Rank.THIRD);
+        assertThat(noPrizeRankLotto.checkLottoRank(winningNumbers)).isEqualTo(Rank.NO_PRIZE);
     }
 
     @Test
     public void 생성된_로또_번호에_대해_조작연산을_진행하면_예외_발생() {
-        List<LottoNumber> numbers = LottoGenerator.generate().getNumbers();
+        List<LottoNumber> numbers = LottoGenerator.generateLotto().getLottoNumbers();
         assertThatThrownBy(() -> numbers.add(new LottoNumber(1)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
