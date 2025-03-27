@@ -3,10 +3,9 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import lotto.domain.Lotto;
 import lotto.domain.LottoChecker;
-import lotto.domain.LottoNumberGenerator;
+import lotto.domain.RandomDrawingStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -22,7 +21,7 @@ public class LottoApplication {
     List<Lotto> tickets = new ArrayList<>();
 
     for (int i = 0; i < ticketCount; i++) {
-      tickets.add(new Lotto(LottoNumberGenerator.getInstance().generate()));
+      tickets.add(new Lotto(new RandomDrawingStrategy()));
     }
 
     ResultView.showLottos(tickets);
