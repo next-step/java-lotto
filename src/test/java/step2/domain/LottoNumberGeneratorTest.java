@@ -4,14 +4,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import step2.lotto.domain.Generator;
+import step2.lotto.domain.LottoNumberGenerator;
 
-public class GeneratorTest {
+public class LottoNumberGeneratorTest {
 
     @Test
     void 로또번호는_6개의_숫자이며_중복되지않는다() {
         // given
-        Generator generator = new Generator();
+        LottoNumberGenerator generator = new LottoNumberGenerator();
 
         // when
         List<Integer> numbers = generator.generate();
@@ -24,7 +24,7 @@ public class GeneratorTest {
     @Test
     void 로또번호는_1부터_45까지의_숫자이다() {
         // given
-        Generator generator = new Generator();
+        LottoNumberGenerator generator = new LottoNumberGenerator();
 
         // when
         List<Integer> numbers = generator.generate();

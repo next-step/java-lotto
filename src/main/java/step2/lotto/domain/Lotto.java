@@ -15,10 +15,6 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(String lottoNumber) {
-        this(convertStringToList(lottoNumber));
-    }
-
     private void validateNumber(int lottoNumber) {
         if (lottoNumber < 1 || lottoNumber > 45) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
@@ -41,13 +37,11 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public static List<Integer> convertStringToList(String lastWeekLottoResult) {
-        String[] split = lastWeekLottoResult.trim().split(",");
-        List<Integer> lastWeekLotto = new ArrayList<>();
-        for (String s : split) {
-            lastWeekLotto.add(Integer.parseInt(s.trim()));
-        }
-        return lastWeekLotto;
+    public int matchCount(Lotto lastWeekLotto) {
+        return (int) this.lottoNumbers().stream()
+            .filter(lastWeekLotto.lottoNumbers()::contains)
+            .count();
     }
+
 
 }

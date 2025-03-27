@@ -16,15 +16,9 @@ public class Statistic {
 
     public void calculate(Lottos lottos, Lotto lastWeekLotto) {
         for (Lotto lotto : lottos.getLottos()) {
-            int match = matchCount(lotto, lastWeekLotto);
+            int match = lotto.matchCount(lastWeekLotto);
             statistic(match);
         }
-    }
-
-    private int matchCount(Lotto lotto, Lotto lastWeekLotto) {
-        return (int) lotto.lottoNumbers().stream()
-            .filter(lastWeekLotto.lottoNumbers()::contains)
-            .count();
     }
 
     public Map<Integer, Integer> getMatchCountMap() {
@@ -40,5 +34,15 @@ public class Statistic {
             matchCountMap.put(match, matchCountMap.getOrDefault(match, 0) + 1);
             totalPrize += PRIZE_MAP.get(match);
         }
+    }
+
+    public double getProfitRate(int paidMoney) {
+        // lottoCount * 1000 = 총 투자금
+        int lottoCount = paidMoney / 1000;
+        if (lottoCount <= 0) {
+            return 0.0;
+        }
+        return (double) totalPrize / paidMoney;
+
     }
 }

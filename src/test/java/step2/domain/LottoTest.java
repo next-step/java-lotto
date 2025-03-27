@@ -34,10 +34,11 @@ public class LottoTest {
     }
 
     @Test
-    void 지난주_로또_번호는_쉼표를_구분지어_입력한다() {
-        String lastWeekLottoResult = "1, 2, 3, 4, 5, 6";
-        Lotto lotto = new Lotto(lastWeekLottoResult);
-        assertThat(lotto.lottoNumbers()).asList().containsExactly(1, 2, 3, 4, 5, 6);
+    void 로또번호_맞추기(){
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto other = new Lotto(List.of(1, 2, 3, 7, 8, 9));
+        assertThat(lotto.matchCount(other)).isEqualTo(3);
     }
+
 
 }

@@ -1,7 +1,6 @@
 package step2.lotto.view;
 
 import java.util.Scanner;
-import step2.lotto.domain.Lotto;
 
 public class InputView {
 
@@ -14,8 +13,8 @@ public class InputView {
         return money;
     }
 
-    public static Lotto lastWeekLottoNumbers() {
+    public static String lastWeekLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(scanner.nextLine());
+        return scanner.nextLine();
     }
 }
