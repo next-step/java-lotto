@@ -18,11 +18,18 @@ public class Lotto {
   }
 
   private void validateChecks(List<LottoNumber> numbers) {
+    validateSize(numbers);
+    validateDuplication(numbers);
+  }
+
+  private void validateSize(List<LottoNumber> numbers) {
     if (numbers.size() != SIZE) {
       throw new IllegalArgumentException("로또 번호는 " + SIZE + "개여야 합니다.");
     }
+  }
 
-    Set<LottoNumber> uniqueNumbers = numbers.stream().collect(Collectors.toSet());
+  private void validateDuplication(List<LottoNumber> numbers) {
+    Set<LottoNumber> uniqueNumbers = Set.copyOf(numbers);
     if (uniqueNumbers.size() != numbers.size()) {
       throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
     }
@@ -46,7 +53,16 @@ public class Lotto {
   }
 
   public List<LottoNumber> getNumbers() {
-    return numbers;
+    return List.copyOf(numbers);
   }
 
+  public boolean contains(LottoNumber number) {
+    return numbers.contains(number);
+  }
+
+  public long matchCountWith(Lotto comparedLotto) {
+    return numbers.stream()
+        .filter(comparedLotto::contains)
+        .count();
+  }
 }

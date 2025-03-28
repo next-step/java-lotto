@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import static lotto.domain.WinningRank.FIVE_MATCH;
+
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -37,16 +39,16 @@ public class LottoSet implements LottoResultProvider {
   }
 
   @Override
-  public LottoResult provideLottoResult(Lotto winningLotto, LottoNumber bonusNumber) {
-    Map<WinningRank, Integer> matchCount = getMatchCount(winningLotto, bonusNumber);
+  public LottoResult provideLottoResult(WinningLotto winningLottoWithBonus) {
+    Map<WinningRank, Integer> matchCount = getMatchCount(winningLottoWithBonus);
     double profitRate = getProfitRate(matchCount);
 
     return new LottoResult(matchCount, profitRate);
   }
 
-  private Map<WinningRank, Integer> getMatchCount(Lotto winningLotto, LottoNumber bonusNumber) {
+  private Map<WinningRank, Integer> getMatchCount(WinningLotto winningLottoWithBonus) {
     return lottos.stream()
-        .map(lotto -> calculateMatchRank(lotto, winningLotto, bonusNumber))
+        .map(lotto -> calculateMatchRank(lotto, winningLottoWithBonus))
         .filter(Objects::nonNull)
         .collect(Collectors.toMap(
             rank -> rank,
@@ -55,14 +57,8 @@ public class LottoSet implements LottoResultProvider {
         ));
   }
 
-  private WinningRank calculateMatchRank(Lotto lotto, Lotto winningLotto, LottoNumber bonusNumber) {
-    int match = (int) lotto.getNumbers().stream()
-        .filter(winningLotto.getNumbers()::contains)
-        .count();
-
-    boolean matchBonus = lotto.getNumbers().contains(bonusNumber);
-
-    return WinningRank.from(match, matchBonus);
+  private WinningRank calculateMatchRank(Lotto lotto, WinningLotto winningLottoWithBonus) {
+    return winningLottoWithBonus.calculateRank(lotto);
   }
 
   private double getProfitRate(Map<WinningRank, Integer> matchCount) {
@@ -70,6 +66,6 @@ public class LottoSet implements LottoResultProvider {
         .mapToLong(entry -> entry.getKey().getPrice() * entry.getValue())
         .sum();
 
-    return totalPrice == 0 ? 0 : (double) totalPrice / lottoPurchase.getPurchaseAmount();
+    return lottoPurchase.calculateProfitRate(totalPrice);
   }
 }

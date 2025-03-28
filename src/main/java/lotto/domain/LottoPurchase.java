@@ -24,4 +24,11 @@ public class LottoPurchase {
         return purchaseAmount / PRICE;
     }
 
+    public double calculateProfitRate(long totalReward) {
+        if (totalReward == 0) {
+            return 0;
+        }
+        return (double) totalReward / purchaseAmount;
+    }
+
 }
