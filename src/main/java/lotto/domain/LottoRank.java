@@ -25,6 +25,10 @@ public enum LottoRank {
         return prize;
     }
 
+    public int getTotalPrize(int count) {
+        return prize * count;
+    }
+
     public static LottoRank of(int matchCount) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
