@@ -1,22 +1,31 @@
 package lotto.view;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoSet;
+import lotto.domain.LottoType;
 import lotto.domain.WinningRank;
 
 public class ResultView {
   public static void printLottoSet(LottoSet lottoSet) {
-    System.out.println(lottoSet.size() + "개를 구매했습니다.");
+    Map<LottoType, Long> typeCounts = lottoSet.getLottos().stream()
+        .collect(Collectors.groupingBy(Lotto::getLottoType, Collectors.counting()));
+
+    long manualCount = typeCounts.getOrDefault(LottoType.MANUAL, 0L);
+    long randomCount = typeCounts.getOrDefault(LottoType.RANDOM, 0L);
+
+    System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, randomCount);
 
     lottoSet.getLottos().stream()
         .map(lotto -> "[" + lotto.getNumbers().stream()
             .map(LottoNumber::getNumber)
             .map(String::valueOf)
-            .collect(Collectors.joining(", ")) + "]")  // 포맷팅 과정 바로 처리
+            .collect(Collectors.joining(", ")) + "]")
         .forEach(System.out::println);
   }
 
