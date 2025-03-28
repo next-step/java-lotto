@@ -1,8 +1,10 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -48,11 +50,13 @@ public class Lottos {
                 .collect(Collectors.joining("\n"));
     }
 
-    public Map<LottoResult, Integer> getResultMap(Lotto winningLotto) {
+    public EnumMap<LottoResult, Integer> getResultMap(Lotto winningLotto) {
         return lottos.stream()
-                .collect(Collectors.toMap(
-                        lotto -> LottoResult.getResult(winningLotto, lotto),
-                        lotto -> 1,
-                        Integer::sum));
+                .map(lotto -> LottoResult.getResult(winningLotto, lotto))
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        () -> new EnumMap<>(LottoResult.class),
+                        Collectors.summingInt(result -> 1)
+                ));
     }
 }

@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static lotto.Lotto.LOTTO_NUMBER_COUNT;
-import static lotto.Lotto.MAX_LOTTO_NUMBER;
-import static lotto.Lotto.MIN_LOTTO_NUMBER;
+import static lotto.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.LottoNumber.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class LottoTest {
