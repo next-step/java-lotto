@@ -1,18 +1,16 @@
-package lotto.domain.generator;
-
-import lotto.domain.Lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoGenerator {
+public class LottoShop {
     private static final int LOTTO_PRICE = 1000;
 
-    private LottoGenerator() {
+    private LottoShop() {
     }
 
-    public static List<Lotto> generateLottoListByPurchaseAmount(int purchaseAmount) {
+    public static List<Lotto> sellLotto(int purchaseAmount) {
         validateInputs(purchaseAmount);
 
         return IntStream.range(0, calculateLottoCount(purchaseAmount))

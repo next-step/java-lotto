@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.generator.LottoGenerator;
-
 import java.util.List;
 
 public class Customer {
@@ -18,7 +16,7 @@ public class Customer {
 
     public void purchaseLotto(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
-        this.lottoList = LottoGenerator.generateLottoListByPurchaseAmount(purchaseAmount);
+        this.lottoList = LottoShop.sellLotto(purchaseAmount);
     }
 
     public int getPurchaseAmount() {
