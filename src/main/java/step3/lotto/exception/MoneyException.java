@@ -6,4 +6,8 @@ public class MoneyException extends RuntimeException {
         super();
     }
 
+    public MoneyException(String message) {
+        super(message);
+    }
+
 }

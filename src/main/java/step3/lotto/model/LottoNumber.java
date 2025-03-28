@@ -9,28 +9,28 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int value;
 
     public LottoNumber(String value) {
-        validate(value);
+        validateLottoNumber(value);
         this.value = Integer.parseInt(value);
     }
 
     public LottoNumber(int value) {
-        validate(value);
+        validateLottoNumber(value);
         this.value = value;
     }
 
-    private void validate(int value) {
+    private void validateLottoNumber(int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new LottoNumberException();
         }
     }
 
-    private void validate(String value) {
+    private void validateLottoNumber(String value) {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
             throw new LottoNumberException();
         }
-        validate(Integer.parseInt(value));
+        validateLottoNumber(Integer.parseInt(value));
     }
 
     public int value() {

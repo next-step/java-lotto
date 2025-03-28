@@ -6,4 +6,8 @@ public class CountException extends RuntimeException {
         super();
     }
 
+    public CountException(String message) {
+        super(message);
+    }
+
 }

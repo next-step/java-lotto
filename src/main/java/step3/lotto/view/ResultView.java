@@ -2,6 +2,7 @@ package step3.lotto.view;
 
 import java.util.List;
 import step3.lotto.model.Count;
+import step3.lotto.model.LottoMatchCount;
 import step3.lotto.model.LottoPrize;
 import step3.lotto.model.LottoResult;
 import step3.lotto.model.LottoTicket;
@@ -26,8 +27,8 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    public void printMatchTicketCount(Count matchTicketCount, Count matchCount) {
-        System.out.println(matchCount + "개 일치 (" + LottoPrize.moneyOf(matchCount).value() + "원)- " + matchTicketCount + "개");
+    public void printMatchTicketCount(Count matchTicketCount, LottoMatchCount lottoMatchCount) {
+        System.out.println(lottoMatchCount.value() + "개 일치 (" + LottoPrize.moneyOf(lottoMatchCount) + "원)- " + matchTicketCount + "개");
     }
 
     public void printRateOfReturn(double rateOfReturn) {
@@ -44,9 +45,9 @@ public class ResultView {
     }
 
     public void printLottoResult(LottoResult lottoResult) {
-        printMatchTicketCount(lottoResult.match3LottoTicketCount(), new Count(3));
-        printMatchTicketCount(lottoResult.match4LottoTicketCount(), new Count(4));
-        printMatchTicketCount(lottoResult.match5LottoTicketCount(), new Count(5));
-        printMatchTicketCount(lottoResult.match6LottoTicketCount(), new Count(6));
+        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.FIFTH), LottoPrize.matchCountOf(LottoPrize.FIFTH));
+        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.FOURTH), LottoPrize.matchCountOf(LottoPrize.FOURTH));
+        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.THIRD), LottoPrize.matchCountOf(LottoPrize.THIRD));
+        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.FIRST), LottoPrize.matchCountOf(LottoPrize.FIRST));
     }
 }

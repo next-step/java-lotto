@@ -10,12 +10,12 @@ public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
+        validateLottoTicket(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public LottoTicket(String lottoNumbersDelimitedByComma) {
-        validate(lottoNumbersDelimitedByComma);
+        validateLottoTicket(lottoNumbersDelimitedByComma);
         lottoNumbers = new ArrayList<>();
         String[] stringLottoNumbers = lottoNumbersDelimitedByComma.replaceAll(" ", "").split(",");
         for (String stringLottoNumber : stringLottoNumbers) {
@@ -33,20 +33,20 @@ public class LottoTicket {
         return matchCount;
     }
 
-    private void validate(List<LottoNumber> lottoNumbers) {
+    private void validateLottoTicket(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new LottoTicketException();
         }
     }
 
-    private void validate(String lastWeekWinningNumbers) {
+    private void validateLottoTicket(String lastWeekWinningNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         String[] splitedLastWeekWinningNumbers = lastWeekWinningNumbers.replaceAll(" ", "").split(",");
         for (String winningNumber : splitedLastWeekWinningNumbers) {
             LottoNumber lottoNumber = new LottoNumber(winningNumber);
             lottoNumbers.add(lottoNumber);
         }
-        validate(lottoNumbers);
+        validateLottoTicket(lottoNumbers);
     }
 
     @Override

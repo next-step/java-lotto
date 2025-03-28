@@ -6,4 +6,8 @@ public class LottoTicketException extends RuntimeException {
         super();
     }
 
+    public LottoTicketException(String message) {
+        super(message);
+    }
+
 }

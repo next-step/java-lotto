@@ -11,11 +11,11 @@ public class Money {
     }
 
     public Money(String value) {
-        validate(value);
+        validateMoney(value);
         this.value = Integer.parseInt(value);
     }
 
-    private void validate(String purchaseAmount) {
+    private void validateMoney(String purchaseAmount) {
         try {
             Integer.parseInt(purchaseAmount);
         } catch (NumberFormatException e) {
@@ -33,10 +33,6 @@ public class Money {
 
     public void add(Money money) {
         this.value += money.value;
-    }
-
-    public void multiply(Count count) {
-        this.value *= count.value();
     }
 
 }
