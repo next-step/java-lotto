@@ -4,6 +4,7 @@ import generator.RandomNumberGenerator;
 import model.lotto.Lotto;
 import model.lotto.LottoResult;
 import model.lotto.LottoShop;
+import model.lotto.WinningLotto;
 import ui.InputView;
 import ui.ResultView;
 
@@ -18,7 +19,7 @@ public class LottoService {
 
         ResultView.printLottoNumbers(paidLottoList);
 
-        Lotto winningLotto = InputView.getLastWeekWinNumber();
+        WinningLotto winningLotto= InputView.getLastWeekWinNumber();
         LottoResult result = LottoResult.of(winningLotto, paidLottoList, payAmount);
 
         ResultView.printLottoResults(result);

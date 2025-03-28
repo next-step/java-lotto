@@ -1,22 +1,24 @@
 package ui;
 
-import model.lotto.Lotto;
+import model.lotto.WinningLotto;
 
 import java.util.Scanner;
 
 public class InputView {
 
     public static int getPayAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
+        System.out.println("구입금액을 입력해 주세요.");
         return scanner.nextInt();
     }
 
-    public static Lotto getLastWeekWinNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    public static WinningLotto getLastWeekWinNumber() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
-        return new Lotto(input);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusBall = scanner.nextInt();
+        return new WinningLotto(input, bonusBall);
     }
 
     public static String getInput() {

@@ -1,13 +1,10 @@
 package model.lotto;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
     private static final int LOTTO_SIZE = 6;
     private static final String INVALID_LOTTO_SIZE = "하나의 로또엔 6개의 숫자여야 한다.";
     private static final String NUMBER_DELIMITER = ", ";
@@ -27,10 +24,10 @@ public class Lotto {
         this(value.split(NUMBER_DELIMITER));
     }
 
-    private List<LottoNumber> toLottoNumber(List<Integer> numbers) {
+    private Set<LottoNumber> toLottoNumber(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private void checkValidLotto(List<Integer> numbers) {
@@ -39,10 +36,14 @@ public class Lotto {
         }
     }
 
-    public int countWinningNumbers(Lotto lotto) {
-        return (int) lottoNumbers.stream()
-                .filter(lotto.lottoNumbers::contains)
+    public Rank countWinningNumbers(WinningLotto winningLotto) {
+        int lottoCount = (int) lottoNumbers.stream()
+                .filter(winningLotto::containsWinNumber)
                 .count();
+        int bonusCount = (int) lottoNumbers.stream()
+                .filter(winningLotto::containsWinBonusNumber)
+                .count();
+        return Rank.of(lottoCount, bonusCount);
     }
 
     @Override
@@ -67,5 +68,9 @@ public class Lotto {
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(NUMBER_DELIMITER))
                 + "]";
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }
