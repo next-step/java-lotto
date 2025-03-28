@@ -4,6 +4,8 @@ import calculator.view.OutputView;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -23,11 +25,14 @@ public class LottoOutputView extends OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        String statisticMessage = "%d개 일치 (%d원)- %d개";
-        System.out.println(String.format(statisticMessage, FOURTH.getMatchCount(), FOURTH.getPrize(), stats.get(FOURTH)));
-        System.out.println(String.format(statisticMessage, THIRD.getMatchCount(), THIRD.getPrize(), stats.get(THIRD)));
-        System.out.println(String.format(statisticMessage, SECOND.getMatchCount(), SECOND.getPrize(), stats.get(SECOND)));
-        System.out.println(String.format(statisticMessage, FIRST.getMatchCount(), FIRST.getPrize(), stats.get(FIRST)));
+        Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LAST)
+                .sorted(Comparator.reverseOrder())
+                .forEach(rank -> printRank(rank, stats.getOrDefault(rank, 0)));
+    }
+
+    private static void printRank(LottoRank rank, int count) {
+        System.out.println(String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getPrize(), count));
     }
 
     public void printIncomeRatio(double ratio) {
