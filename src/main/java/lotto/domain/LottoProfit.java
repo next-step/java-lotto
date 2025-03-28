@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Map;
 
 public class LottoProfit {
-    private static Double profitRate;
+    private Double profitRate;
 
     public LottoProfit(Map<Integer, Integer> ranks, int totalCount) {
         int totalMoney = 0;
@@ -22,5 +22,3 @@ public class LottoProfit {
         return profitRate;
     }
 }
-
-
