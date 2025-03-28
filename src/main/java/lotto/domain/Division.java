@@ -8,7 +8,8 @@ public enum Division {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
-    FIRST(6, 2_000_000_000);
+    FIRST(6, 2_000_000_000),
+    LOSE(0, 0);
 
     public final static Map<Division, Integer> matchCounts = new EnumMap<>(Division.class);
 
@@ -31,11 +32,23 @@ public enum Division {
         return prize;
     }
 
-    public static Division getDivision(int matchCount) {
-        return Arrays.stream(values())
-                .filter(division -> division.matchCount == matchCount)
-                .findFirst()
-                .orElse(null);
+    public static Division valueOf(int matchCount) {
+        if (matchCount == 6) {
+            return FIRST;
+        }
+        if (matchCount == 5) {
+            return THIRD;
+        }
+        if (matchCount == 4) {
+            return FOURTH;
+        }
+        if (matchCount == 3) {
+            return FIFTH;
+        }
+        if (matchCount == 0 || matchCount == 1 || matchCount == 2) {
+            return LOSE;
+        }
+        throw new IllegalArgumentException("로또 맞은 번호의 개수가 6개 초과입니다.");
     }
 
     public final static Map<Division, Integer> getMatchCounts() {

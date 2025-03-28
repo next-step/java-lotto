@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
@@ -34,15 +35,30 @@ public class Lotto {
     }
 
     private void validateNumbers(List<Integer> numbers) {
+        validateLottoCount(numbers);
+        validateDuplicates(numbers);
+        validateNumber(numbers);
+    }
+
+    private void validateNumber(List<Integer> numbers) {
         numbers.stream()
                 .filter(number -> isLottoOutOfRange(number))
                 .findAny()
                 .ifPresent(invalid -> {
                     throw new IllegalArgumentException("로또 번호의 범위는 1부터 " + LOTTO_NUMBER_UPPER_BOUND + "까지 입니다.");
                 });
+    }
 
+    private static void validateLottoCount(List<Integer> numbers) {
         if (numbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 번호의 개수는 " + LOTTO_COUNT + "개이어야 합니다.");
+        }
+    }
+
+    private void validateDuplicates(List<Integer> numbers) {
+        List<Integer> noDuplicateNumbers = numbers.stream().distinct().collect(Collectors.toList());
+        if (noDuplicateNumbers.size() < LOTTO_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
 
@@ -63,7 +79,7 @@ public class Lotto {
         long matchCount = numbers.stream()
                 .filter(number -> lotto.numbers.contains(number))
                 .count();
-        return Division.getDivision((int)matchCount);
+        return Division.valueOf((int)matchCount);
     }
 
     @Override

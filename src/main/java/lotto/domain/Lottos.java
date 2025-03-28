@@ -28,6 +28,7 @@ public class Lottos {
             divisions.add(division);
         }
         divisions.removeAll(Collections.singletonList(null));
+        divisions.removeAll(Collections.singletonList(Division.LOSE));
 
         for (Division division: divisions) {
             winnerCounts.put(division, winnerCounts.getOrDefault(division, 0) + 1);

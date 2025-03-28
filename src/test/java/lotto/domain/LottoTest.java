@@ -16,8 +16,9 @@ class LottoTest {
                 .asList()
                 .containsExactly(1, 2, 3, 4, 5, 6);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.createManually(Arrays.asList(76,5,4,3,2,1)));
-        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.createManually(Arrays.asList(7,6,5,4,3,2,1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.createManually(Arrays.asList(76, 5, 4, 3, 2, 1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.createManually(Arrays.asList(7, 6, 5, 4, 3, 2, 1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.createManually(Arrays.asList(5, 5, 4, 3, 2, 1)));
     }
 
     @DisplayName("로또 번호 비교 하여 당첨 순위 반환하는 기능 테스트")
