@@ -21,7 +21,7 @@ public class Lottos {
     }
 
     public Map<Division, Integer> compareNumbers(Lotto comparingLotto) {
-        Map<Division, Integer> winnerCountMap = initializeWinnerCountMap();
+        Map<Division, Integer> winnerCounts = Division.getMatchCounts();
         List<Division> divisions = new ArrayList<>();
         for (Lotto lotto: lottos) {
             Division division = lotto.compareNumbers(comparingLotto);
@@ -30,20 +30,10 @@ public class Lottos {
         divisions.removeAll(Collections.singletonList(null));
 
         for (Division division: divisions) {
-            winnerCountMap.put(division, winnerCountMap.getOrDefault(division, 0) + 1);
+            winnerCounts.put(division, winnerCounts.getOrDefault(division, 0) + 1);
         }
-        return winnerCountMap;
+        return winnerCounts;
     }
-
-    private Map<Division, Integer> initializeWinnerCountMap() {
-        Map<Division, Integer> winnerCountMap = new EnumMap<>(Division.class);
-        winnerCountMap.put(Division.FIFTH, 0);
-        winnerCountMap.put(Division.FOURTH, 0);
-        winnerCountMap.put(Division.THIRD, 0);
-        winnerCountMap.put(Division.FIRST, 0);
-        return winnerCountMap;
-    }
-
 
     public int size() {
         return lottos.size();
