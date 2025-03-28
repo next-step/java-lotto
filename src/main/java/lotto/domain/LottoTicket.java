@@ -2,43 +2,33 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTicket {
-    private static final int NUMBER_SIZE = 6;
-    private static final int NUMBER_UPPER_BOUND = 45;
-    private static final int NUMBER_LOWER_BOUND = 1;
-    private final List<Integer> numbers;
+    private static final int NUMBERS_SIZE = 6;
+
+    private final List<LottoNumber> numbers;
 
     public LottoTicket(List<Integer> numbers) {
-        validateNumberNotNull(numbers);
         validateNumberSize(numbers);
-        validateNumberBound(numbers);
         validateNotDuplicate(numbers);
-        this.numbers = new ArrayList<>(numbers);
+        this.numbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public LottoTicket() {
         this.numbers = generate();
     }
 
-    private List<Integer> generate() {
-        List<Integer> numberCandidates = IntStream.rangeClosed(NUMBER_LOWER_BOUND, NUMBER_UPPER_BOUND)
-                .boxed()
-                .collect(Collectors.toList());
+    private List<LottoNumber> generate() {
+        List<LottoNumber> candidates = LottoNumber.getAllNumbers();
+        Collections.shuffle(candidates);
 
-        Collections.shuffle(numberCandidates);
-
-        return numberCandidates.subList(0, NUMBER_SIZE);
-    }
-
-    private void validateNumberNotNull(List<Integer> numbers) {
-        if (numbers.stream().anyMatch(Objects::isNull))
-            throw new IllegalArgumentException("number should not be null.");
+        return candidates.subList(0, NUMBERS_SIZE);
     }
 
     private void validateNumberSize(List<Integer> numbers) {
-        if (numbers.size() != NUMBER_SIZE)
+        if (numbers.size() != NUMBERS_SIZE)
             throw new IllegalArgumentException("number size should be 6.");
     }
 
@@ -46,14 +36,6 @@ public class LottoTicket {
         Set<Integer> set = new HashSet<>(numbers);
         if (set.size() != numbers.size())
             throw new IllegalArgumentException("number should not be duplicate.");
-    }
-
-    private void validateNumberBound(List<Integer> numbers) {
-        boolean hasOutOfBound = numbers.stream()
-                .anyMatch(number -> number < NUMBER_LOWER_BOUND || number > NUMBER_UPPER_BOUND);
-
-        if (hasOutOfBound)
-            throw new IllegalArgumentException(String.format("number should be between %d and %d.", NUMBER_LOWER_BOUND, NUMBER_UPPER_BOUND));
     }
 
     public LottoRank rank(LottoTicket winningTicket) {
@@ -65,6 +47,8 @@ public class LottoTicket {
     }
 
     public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 }

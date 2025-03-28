@@ -46,4 +46,5 @@ class LottoTicketTest {
         LottoTicket winingTicket = new LottoTicket(winningNumbers);
         assertThat(lottoTicket.rank(winingTicket)).isEqualTo(LottoRank.FIRST);
     }
+
 }
