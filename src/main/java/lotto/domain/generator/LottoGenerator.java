@@ -16,14 +16,16 @@ public class LottoGenerator {
     private LottoGenerator() {
     }
 
-    public static List<Lotto> generateLottoListByAmount(int amount) {
-        return IntStream.range(0, calculateLottoCount(amount))
+    public static List<Lotto> generateLottoListByPurchaseAmount(int purchaseAmount) {
+        validInputs(purchaseAmount);
+
+        return IntStream.range(0, calculateLottoCount(purchaseAmount))
                 .mapToObj(i -> generateLotto())
                 .collect(Collectors.toList());
     }
 
-    public static int calculateLottoCount(int amount) {
-        return amount / LOTTO_PRICE;
+    public static int calculateLottoCount(int purchaseAmount) {
+        return purchaseAmount / LOTTO_PRICE;
     }
 
     public static Lotto generateLotto() {
@@ -33,6 +35,12 @@ public class LottoGenerator {
         Collections.sort(lottoNumbers);
 
         return new Lotto(lottoNumbers);
+    }
+
+    private static void validInputs(int purchaseAmount) {
+        if (purchaseAmount < LOTTO_PRICE) {
+            throw new IllegalArgumentException("구입금액은 로또 한장 가격보다 작을 수 없습니다. 입력한 구입금액: " + purchaseAmount);
+        }
     }
 
 }
