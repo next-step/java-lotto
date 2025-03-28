@@ -18,7 +18,7 @@ class WinningTest {
     @Test
     @DisplayName("유효한 당첨번호")
     void valid() {
-        Winning winning = new Winning(of(1,3,4,5,6,8));
+        Winning winning = new Winning(of(1,3,4,5,6,8), new LottoNum(19));
         assertThat(winning.size()).isEqualTo(6);
     }
 
@@ -26,7 +26,7 @@ class WinningTest {
     @MethodSource("provideSets")
     @DisplayName("무효한 당첨번호")
     void invalid(Set<LottoNum> set) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Winning(set));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Winning(set, new LottoNum(19)));
     }
 
     static Stream<Set<LottoNum>> provideSets() {

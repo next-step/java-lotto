@@ -50,6 +50,6 @@ class LottoTest {
         Set<LottoNum> winningNums = LottoNumberUtils.of(1, 2, 3, 4, 5, 6);
         Winning winning = new Winning(winningNums, new LottoNum(19));
 
-        assertThat(winning.match(lotto).getRank()).isEqualTo(Rank.SECOND_BONUS);
+        assertThat(winning.match(lotto).getRank()).isEqualTo(Rank.SECOND);
     }
 }
