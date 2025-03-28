@@ -27,7 +27,10 @@ public class InputView {
     public static Winning winningNumsLastWeek() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Set<LottoNum> winningNums = getWinningNums();
-        return new Winning(winningNums);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        LottoNum bonusNum = getBonusNum();
+        return new Winning(winningNums, bonusNum);
+
     }
 
     private static Set<LottoNum> getWinningNums() {
@@ -39,6 +42,8 @@ public class InputView {
                 .collect(Collectors.toSet());
     }
 
-
+    private static LottoNum getBonusNum() {
+        return new LottoNum(scanner.nextInt());
+    }
 
 }
