@@ -20,17 +20,6 @@ public enum Rank {
         this.bonusBallMatch = bonusBallMatch;
     }
 
-    public static Rank getRankByMatchCount(int matchCount) {
-        Rank[] values = Rank.values();
-        for (Rank value : values) {
-            if (value.matchCount == matchCount) {
-                return value;
-            }
-        }
-
-        return NO_PRIZE;
-    }
-
     public static Rank of(int matchCount, boolean bonusBallMatch) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == matchCount && rank.bonusBallMatch == bonusBallMatch)

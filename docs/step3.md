@@ -32,7 +32,7 @@
   - WinningLotto 로 당첨번호는 따로 관리 → (Lotto + 보너스번호)
 - Lotto.checkLottoRank : 보너스 번호 판별에 대한 로직 변경 필요
   - 그런데 당첨 번호 판단을 Lotto 에서 해야하나?
-  - WinningLotto 가 갖고 있는게 맞는 것 같다.
+  - WinningLotto 가 갖고 있는게 맞는 것 같다. → **WinningLotto 만들면서 역할을 Lotto 로 부터 옮김**
     - Lotto 가 당첨 번호 판단 메서드를 갖고 있으면, 해당 메서드는 당첨 번호가 나온 이후부터 유효한 메서드가 된다.
     - 반면 WinningLotto 가 가지고 있게되면 해당 메서드는 처음부터 유효하기 때문에 더 적합한듯.
 - Rank : 보너스 번호라는 요구사항 추가로 인한 변경 필요

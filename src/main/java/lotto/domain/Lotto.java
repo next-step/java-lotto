@@ -16,18 +16,6 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
-    public Rank checkLottoRank(List<LottoNumber> winningNumbers) {
-        int matchCount = 0;
-
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (winningNumbers.contains(lottoNumber)) {
-                matchCount++;
-            }
-        }
-
-        return Rank.getRankByMatchCount(matchCount);
-    }
-
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
