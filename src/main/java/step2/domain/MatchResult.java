@@ -5,6 +5,7 @@ public class MatchResult {
 
     public MatchResult(int matchedCount, boolean isBonusMatched) {
         this.rank = Rank.from(matchedCount, isBonusMatched);
+
     }
 
     public Rank getRank() {

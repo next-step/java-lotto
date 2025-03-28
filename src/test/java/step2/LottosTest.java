@@ -24,5 +24,6 @@ public class LottosTest {
         Assertions.assertThat(matchResults)
                 .extracting(MatchResult::getRank)
                 .containsExactly(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.NONE);
+
     }
 }

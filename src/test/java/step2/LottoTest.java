@@ -10,6 +10,7 @@ import step2.util.LottoNumberUtils;
 import step2.util.LottoStrategy;
 import step2.domain.Rank;
 
+
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,5 +52,6 @@ class LottoTest {
         Winning winning = new Winning(winningNums, new LottoNum(19));
 
         assertThat(winning.match(lotto).getRank()).isEqualTo(Rank.SECOND);
+
     }
 }

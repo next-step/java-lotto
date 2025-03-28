@@ -30,6 +30,7 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         LottoNum bonusNum = getBonusNum();
         return new Winning(winningNums, bonusNum);
+
     }
 
     private static Set<LottoNum> getWinningNums() {
@@ -44,7 +45,5 @@ public class InputView {
     private static LottoNum getBonusNum() {
         return new LottoNum(scanner.nextInt());
     }
-
-
 
 }

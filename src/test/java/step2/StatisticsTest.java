@@ -20,14 +20,14 @@ public class StatisticsTest {
         );
         Lottos lottos = new Lottos(lottoList);
         Winning winning = new Winning(of(1, 2, 3, 4, 5, 6), new LottoNum(19));
-
         Statistics statistics = Statistics.from(lottos, winning);
         Map<Rank, Integer> winningCounts = statistics.winningCounts();
 
         assertThat(winningCounts.get(Rank.FIRST)).isEqualTo(1);
         assertThat(winningCounts.get(Rank.SECOND)).isEqualTo(1);
         assertThat(winningCounts.get(Rank.THIRD)).isEqualTo(1);
-        assertThat(winningCounts.getOrDefault(Rank.NONE, 0)).isEqualTo(0);
+        assertThat(winningCounts.getOrDefault(Rank.THIRD, 0)).isEqualTo(0);
+
     }
 
     @Test
