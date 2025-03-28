@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.controller.WinningNumbers;
+import lotto.domain.WinningNumbers;
 
 import java.util.Scanner;
 

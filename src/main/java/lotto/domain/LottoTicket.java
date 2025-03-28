@@ -14,4 +14,10 @@ public class LottoTicket {
     public String toString() {
         return  numbers.toString();
     }
+
+    public int matchCountWith(List<Integer> winningNumbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
 }

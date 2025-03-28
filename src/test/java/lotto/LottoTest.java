@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoTickets;
+import lotto.domain.RandomNumberGeneration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,17 +13,17 @@ import static org.assertj.core.api.Assertions.*;
 class LottoTest {
 
     @Test
-    @DisplayName("구입 금액으로 로또 개수를 계산한다")
+    @DisplayName("구입 금액으로 로또 개수를 계산하여 발행한다")
     void calculatePurchaseQuantityTest() {
         //given
         int purchaseAmount = 14000;
-        LottoMachine lottoMachine = new LottoMachine(numberGenerationStrategy);
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGeneration());
 
         //when`
-        int purchaseQuantity = lottoMachine.calculatePurchaseQuantity(purchaseAmount);
+        LottoTickets tickets = lottoMachine.issue(purchaseAmount);
 
         //then
-        assertThat(purchaseQuantity).isEqualTo(14);
+        assertThat(tickets.size()).isEqualTo(14);
     }
 
     @ParameterizedTest
@@ -29,11 +31,11 @@ class LottoTest {
     @ValueSource(ints = {-1, 0, 999})
     void calculatePurchaseQuantityWithInvalidAmount(int purchaseAmount) {
         //given
-        LottoMachine lottoMachine = new LottoMachine(numberGenerationStrategy);
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGeneration());
 
         //when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoMachine.calculatePurchaseQuantity(purchaseAmount))
+                .isThrownBy(() -> lottoMachine.issue(purchaseAmount))
                 .withMessageContaining("로또를 구매하기 적절한 금액이 아닙니다");
 
     }
