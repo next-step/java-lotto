@@ -35,8 +35,8 @@ public class Lottos {
         return lottos.size();
     }
 
-    public long totalPayment() {
-        return (long) lottos.size() * LOTTO_PRICE;
+    public Amount totalPayment() {
+        return new Amount(LOTTO_PRICE.multiply(lottos.size()));
     }
 
     public boolean isAllValidRange() {

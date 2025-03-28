@@ -14,6 +14,10 @@ public class Ranks {
         return ranks;
     }
 
+    public float roi(Amount totalPayment) {
+        return totalWinningMoney().divide(totalPayment);
+    }
+
     public Amount totalWinningMoney() {
         return new Amount(ranks.stream()
                 .mapToLong(Rank::winningMoney)

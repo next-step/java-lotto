@@ -6,7 +6,6 @@ import java.util.List;
 
 import static lotto.util.Price.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.linesOf;
 
 public class LottosTest {
     @Test
@@ -19,7 +18,7 @@ public class LottosTest {
     @Test
     void 가격으로_생성_시_개수_검증() {
         Lottos lottos = Lottos.from(new Amount(2000));
-        assertThat(lottos.size()).isEqualTo(2000 / LOTTO_PRICE);
+        assertThat(lottos.size()).isEqualTo(2000 / LOTTO_PRICE.value());
     }
 
     @Test
