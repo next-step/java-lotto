@@ -11,7 +11,7 @@ public class Main {
 
         lottoGame.draw(InputView.inputWinningNumbers());
 
-        OutputView.printWinningResult(lottoGame.getWinnerCountMap());
+        OutputView.printWinningResult(lottoGame.getWinnerCounts());
         OutputView.printEarningRate(lottoGame.calculateEarningRate());
     }
 }

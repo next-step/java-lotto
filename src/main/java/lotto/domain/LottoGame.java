@@ -43,7 +43,7 @@ public class LottoGame {
         return lottos.getLottos();
     }
 
-    public Map<Division, Integer> getWinnerCountMap() {
+    public Map<Division, Integer> getWinnerCounts() {
         return winnerCountMap;
     }
 }
