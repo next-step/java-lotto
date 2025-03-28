@@ -1,16 +1,16 @@
 package step3.lotto.view;
 
+import java.util.List;
 import step3.lotto.model.Count;
 import step3.lotto.model.LottoResult;
 import step3.lotto.model.LottoTicket;
-import step3.lotto.model.LottoTicketList;
 import step3.lotto.model.PrizeMoney;
 
 public class ResultView {
 
-    public void printLottoTicketCount(LottoTicketList lottoTicketList) {
-        System.out.println(lottoTicketList.value().size() + "개를 구매했습니다.");
-        for (LottoTicket lottoTicket : lottoTicketList.value()) {
+    public void printLottoTicketCount(List<LottoTicket> lottoTickets) {
+        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+        for (LottoTicket lottoTicket : lottoTickets) {
             printLottoTicket(lottoTicket);
         }
         System.out.println();
@@ -31,7 +31,7 @@ public class ResultView {
     }
 
     public void printRateOfReturn(double rateOfReturn) {
-        System.out.print(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 ", rateOfReturn));
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 ", rateOfReturn);
         if (rateOfReturn == 1) {
             System.out.println("결과적으로 본전이라는 의미임)");
         }

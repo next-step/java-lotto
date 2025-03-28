@@ -1,10 +1,10 @@
 package step3.lotto.controller;
 
+import java.util.List;
 import step3.lotto.model.Count;
 import step3.lotto.model.LottoMachine;
 import step3.lotto.model.LottoResult;
 import step3.lotto.model.LottoTicket;
-import step3.lotto.model.LottoTicketList;
 import step3.lotto.model.Money;
 import step3.lotto.view.InputView;
 import step3.lotto.view.ResultView;
@@ -20,15 +20,15 @@ public class LottoMain {
         Money money = new Money(purchaseAmount);
 
         LottoMachine lottoMachine = new LottoMachine();
-        LottoTicketList lottoTicketList = lottoMachine.buyLottoTickets(money);
-        resultView.printLottoTicketCount(lottoTicketList);
+        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTickets(money);
+        resultView.printLottoTicketCount(lottoTickets);
 
         String winningNumbers = inputView.getLastWeekWinningNumbers();
         LottoTicket lastWeekWinningTicket = new LottoTicket(winningNumbers);
 
         LottoResult lottoResult = new LottoResult();
         resultView.printLottoResultTitle();
-        for (LottoTicket lottoTicket : lottoTicketList.value()) {
+        for (LottoTicket lottoTicket : lottoTickets) {
             Count matchCount = lottoTicket.match(lastWeekWinningTicket);
             lottoResult.reflect(matchCount);
         }
