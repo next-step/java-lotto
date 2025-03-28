@@ -1,12 +1,14 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.LottoTicketMachine;
+import lotto.domain.model.LottoNumber;
 import lotto.domain.model.LottoTicket;
+import lotto.domain.strategy.LottoNumberGeneratorStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -36,19 +38,16 @@ public class LottoTicketMachineTest {
     }
 
     @Test
-    @DisplayName("생성된 티켓은 1부터 45 사이 숫자이며 중복되지 않는 번호를 가진다.")
-    void shouldGenerateTicketWithSixUniqueNumbers() {
-        LottoTicketMachine machine = new LottoTicketMachine();
+    @DisplayName("로또 번호 생성 전략에 따라 로또 티켓을 생성할 수 있다.")
+    void shouldGenerateTicketWithExpectedNumberGeneratorStrategy() {
+        LottoNumberGeneratorStrategy fixedLottoNumberGeneratorStrategy =
+                () -> IntStream.range(0, 6).mapToObj(LottoNumber::new).collect(Collectors.toSet());
+        LottoTicketMachine machine = new LottoTicketMachine(fixedLottoNumberGeneratorStrategy);
+        int purchaseAmount = 1000;
 
-        List<LottoTicket> tickets = machine.purchaseTickets(1000);
+        List<LottoTicket> tickets = machine.purchaseTickets(purchaseAmount);
 
-        for (LottoTicket ticket : tickets) {
-            Set<Integer> numbers = ticket.getNumbers();
-
-            assertThat(numbers)
-                    .hasSize(6)
-                    .allMatch(num -> num >= 1 && num <= 45);
-        }
+        assertThat(tickets).isEqualTo(List.of(new LottoTicket(fixedLottoNumberGeneratorStrategy.generate())));
     }
 
 }

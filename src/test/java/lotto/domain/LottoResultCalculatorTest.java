@@ -1,6 +1,6 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.LottoResultCalculator;
+import lotto.domain.model.LottoNumber;
 import lotto.domain.model.LottoResult;
 import lotto.domain.model.LottoTicket;
 import lotto.domain.model.Rank;
@@ -46,9 +46,9 @@ public class LottoResultCalculatorTest {
     }
 
     private LottoTicket createTicket(final int... numbers) {
-        Set<Integer> numberSet = new HashSet<>();
+        Set<LottoNumber> numberSet = new HashSet<>();
         for (int number : numbers) {
-            numberSet.add(number);
+            numberSet.add(new LottoNumber(number));
         }
         return new LottoTicket(numberSet);
     }

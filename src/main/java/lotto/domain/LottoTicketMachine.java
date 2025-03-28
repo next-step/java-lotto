@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.domain.model.LottoTicket;
+import lotto.domain.strategy.LottoNumberGeneratorStrategy;
+import lotto.domain.strategy.RandomLottoNumberGeneratorStrategy;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -9,20 +11,27 @@ import java.util.stream.IntStream;
 public class LottoTicketMachine {
 
     private static final int TICKET_PRICE = 1000;
-    private final List<Integer> ticketNumberPool;
+    private final LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy;
 
-    public LottoTicketMachine(){
-        ticketNumberPool = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    public LottoTicketMachine() {
+        this.lottoNumberGeneratorStrategy = new RandomLottoNumberGeneratorStrategy();
+    }
+
+    public LottoTicketMachine(final LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
+        this.lottoNumberGeneratorStrategy = lottoNumberGeneratorStrategy;
     }
 
     public List<LottoTicket> purchaseTickets(final int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
-        int ticketCount = purchaseAmount / TICKET_PRICE;
-        List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
-            tickets.add(generateTicket());
-        }
-        return tickets;
+        int ticketCount = calculateTicketCount(purchaseAmount);
+
+        return IntStream.range(0, ticketCount)
+                .mapToObj(i -> generateTicket())
+                .collect(Collectors.toList());
+    }
+
+    private int calculateTicketCount(final int purchaseAmount) {
+        return purchaseAmount / TICKET_PRICE;
     }
 
     private void validatePurchaseAmount(final int purchaseAmount) {
@@ -32,9 +41,6 @@ public class LottoTicketMachine {
     }
 
     private LottoTicket generateTicket() {
-        Collections.shuffle(ticketNumberPool);
-        Set<Integer> ticketNumbers = new TreeSet<>(ticketNumberPool.subList(0, 6));
-
-        return new LottoTicket(ticketNumbers);
+        return new LottoTicket(lottoNumberGeneratorStrategy.generate());
     }
 }

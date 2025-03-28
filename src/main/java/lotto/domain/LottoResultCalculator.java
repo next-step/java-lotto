@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.model.LottoNumber;
 import lotto.domain.model.LottoTicket;
 import lotto.domain.model.LottoResult;
 import lotto.domain.model.Rank;
@@ -20,7 +21,7 @@ public class LottoResultCalculator {
 
     private int countMatches(final LottoTicket lottoTicket, final LottoTicket winningLottoTicket) {
         int matches = 0;
-        for (int number : lottoTicket.getNumbers()) {
+        for (LottoNumber number : lottoTicket.getNumbers()) {
             if (winningLottoTicket.contains(number)) {
                 matches++;
             }

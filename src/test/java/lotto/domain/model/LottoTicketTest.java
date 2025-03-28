@@ -1,6 +1,6 @@
-package lotto;
+package lotto.domain.model;
 
-import lotto.domain.model.LottoTicket;
+import lotto.domain.strategy.RandomLottoNumberGeneratorStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 티켓을 생성할 수 있다.")
     void shouldCreateValidLottoTicket() {
-        Set<Integer> validNumbers = new HashSet<>(Set.of(1, 2, 3, 4, 5, 6));
+        Set<LottoNumber> validNumbers = new RandomLottoNumberGeneratorStrategy().generate();
 
         LottoTicket lottoTicket = new LottoTicket(validNumbers);
 
@@ -25,7 +25,10 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 티켓 번호가 6개가 아니면 예외를 던진다.")
     void shouldThrowExceptionWhenNumberCountIsInvalid() {
-        Set<Integer> invalidNumbers = Set.of(1, 2, 3, 4, 5);
+        Set<LottoNumber> validNumbers = new RandomLottoNumberGeneratorStrategy().generate();
+
+        Set<LottoNumber> invalidNumbers = new HashSet<>(validNumbers);
+        invalidNumbers.remove(invalidNumbers.iterator().next());
 
         assertThatThrownBy(() -> new LottoTicket(invalidNumbers))
                 .isInstanceOf(IllegalArgumentException.class)

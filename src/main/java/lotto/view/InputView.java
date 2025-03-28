@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.model.LottoTicket;
+import lotto.domain.model.LottoNumber;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,12 +14,13 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public Set<Integer> inputWinningNumbers() {
+    public Set<LottoNumber> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요. (쉼표로 구분)");
         String[] tokens = scanner.nextLine().split(",");
 
         return Stream.of(tokens)
                 .map(token -> Integer.parseInt(token.trim()))
+                .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableSet());
     }
 
