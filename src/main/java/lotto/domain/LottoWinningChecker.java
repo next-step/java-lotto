@@ -5,13 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoWinningChecker {
-    private final Map<Integer, Integer> ranks = new HashMap<>();
+    private final Map<LottoPrize, Integer> ranks = new HashMap<>();
     private final LottoProfit lottoProfit;
 
-    public LottoWinningChecker(List<Lotto> lottos, Lotto winLotto) {
+    public LottoWinningChecker(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos) {
-            int matchCount = getMatchCount(winLotto.getLottoNumbers(), lotto.getLottoNumbers());
-            ranks.put(matchCount, ranks.getOrDefault(matchCount, 0) + 1);
+            int matchCount = getMatchCount(lotto.getLottoNumbers(), winLotto.getLottoNumbers());
+            boolean isMatchBonus = isNumberPresent(lotto.getLottoNumbers(), bonusNumber);
+            LottoPrize lottoPrize = LottoPrize.valueOf(matchCount, isMatchBonus);
+            ranks.put(lottoPrize, ranks.getOrDefault(lottoPrize, 0) + 1);
         }
         lottoProfit = new LottoProfit(ranks, lottos.size());
     }
@@ -20,20 +22,20 @@ public class LottoWinningChecker {
         int count = 0;
 
         for (LottoNumber winNumber : winNumbers) {
-            count += isNumberPresent(lottoNumbers, winNumber);
+            count += isNumberPresent(lottoNumbers, winNumber) ? 1 : 0;
         }
 
         return count;
     }
 
-    private int isNumberPresent(List<LottoNumber> lottoNumbers, LottoNumber winNumber) {
+    private boolean isNumberPresent(List<LottoNumber> lottoNumbers, LottoNumber winNumber) {
         if (lottoNumbers.contains(winNumber)) {
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
     }
 
-    public Map<Integer, Integer> getRanks() {
+    public Map<LottoPrize, Integer> getRanks() {
         return ranks;
     }
 

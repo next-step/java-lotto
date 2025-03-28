@@ -14,7 +14,7 @@ class LottoNumberTest {
     @CsvSource({"0", "46"})
     void invalidNumberTest(int argument) {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(argument))
-                .withMessage("LottoNumber is between 1 and 45");
+                .withMessage("invalid Lotto number : " + argument);
     }
 
     @Test

@@ -4,6 +4,7 @@ package lotto;
 import java.util.List;
 import lotto.domain.AutomaticStrategy;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoSeller;
 import lotto.domain.LottoWinningChecker;
 import lotto.domain.ManualStrategy;
@@ -20,10 +21,12 @@ public class LottoMain {
         OutputView.printLottos(lottos);
 
         String enteredWinningNumbers = InputView.inputWinLotto();
-        String bonusLottoNumber = InputView.inputBonusLottoNumber();
         Lotto winningLotto = new ManualStrategy(enteredWinningNumbers).generate();
 
-        LottoWinningChecker lottoWinningChecker = new LottoWinningChecker(lottos, winningLotto);
+        String bonusLottoNumber = InputView.inputBonusLottoNumber();
+        LottoNumber bonusNumber = new LottoNumber(bonusLottoNumber);
+
+        LottoWinningChecker lottoWinningChecker = new LottoWinningChecker(lottos, winningLotto, bonusNumber);
         OutputView.printStatics(lottoWinningChecker.getRanks(), lottoWinningChecker.getProfitRate());
 
     }

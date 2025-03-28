@@ -14,12 +14,12 @@ class LottoWinningCheckerTest {
         // given
         List<Lotto> userBuyLotto = Collections.singletonList(new FakeStrategy(List.of(1, 2, 3, 4, 5, 6)).generate());
         Lotto winLotto = new FakeStrategy(List.of(6, 5, 4, 3, 2, 16)).generate();
+        LottoNumber bonusNumber = new LottoNumber(14);
 
         // when
-        LottoWinningChecker lottoWinningChecker = new LottoWinningChecker(userBuyLotto, winLotto);
+        LottoWinningChecker lottoWinningChecker = new LottoWinningChecker(userBuyLotto, winLotto, bonusNumber);
 
         // then
-        assertThat(lottoWinningChecker.getRanks().get(5)).isEqualTo(1);
+        assertThat(lottoWinningChecker.getRanks().get(LottoPrize.THIRD)).isEqualTo(1);
     }
-
 }
