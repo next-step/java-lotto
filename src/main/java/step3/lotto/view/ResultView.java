@@ -2,9 +2,9 @@ package step3.lotto.view;
 
 import java.util.List;
 import step3.lotto.model.Count;
+import step3.lotto.model.LottoPrize;
 import step3.lotto.model.LottoResult;
 import step3.lotto.model.LottoTicket;
-import step3.lotto.model.PrizeMoney;
 
 public class ResultView {
 
@@ -27,7 +27,7 @@ public class ResultView {
     }
 
     public void printMatchTicketCount(Count matchTicketCount, Count matchCount) {
-        System.out.println(matchCount + "개 일치 (" + PrizeMoney.of(matchCount).value() + "원)- " + matchTicketCount + "개");
+        System.out.println(matchCount + "개 일치 (" + LottoPrize.moneyOf(matchCount).value() + "원)- " + matchTicketCount + "개");
     }
 
     public void printRateOfReturn(double rateOfReturn) {

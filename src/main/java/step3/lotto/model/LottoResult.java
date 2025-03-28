@@ -42,11 +42,10 @@ public class LottoResult {
 
     public Money prizeMoney() {
         Money prizeMoney = new Money("0");
-        LongStream.range(0, match3LottoTicketCount.value()).forEach(i -> prizeMoney.add(
-            PrizeMoney.of(new Count(3))));
-        LongStream.range(0, match4LottoTicketCount.value()).forEach(i -> prizeMoney.add(PrizeMoney.of(new Count(4))));
-        LongStream.range(0, match5LottoTicketCount.value()).forEach(i -> prizeMoney.add(PrizeMoney.of(new Count(5))));
-        LongStream.range(0, match6LottoTicketCount.value()).forEach(i -> prizeMoney.add(PrizeMoney.of(new Count(6))));
+        LongStream.range(0, match3LottoTicketCount.value()).forEach(i -> prizeMoney.add(LottoPrize.moneyOf(new Count(3))));
+        LongStream.range(0, match4LottoTicketCount.value()).forEach(i -> prizeMoney.add(LottoPrize.moneyOf(new Count(4))));
+        LongStream.range(0, match5LottoTicketCount.value()).forEach(i -> prizeMoney.add(LottoPrize.moneyOf(new Count(5))));
+        LongStream.range(0, match6LottoTicketCount.value()).forEach(i -> prizeMoney.add(LottoPrize.moneyOf(new Count(6))));
         return prizeMoney;
     }
 
