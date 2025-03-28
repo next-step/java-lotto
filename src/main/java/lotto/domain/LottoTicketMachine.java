@@ -9,6 +9,11 @@ import java.util.stream.IntStream;
 public class LottoTicketMachine {
 
     private static final int TICKET_PRICE = 1000;
+    private final List<Integer> ticketNumberPool;
+
+    public LottoTicketMachine(){
+        ticketNumberPool = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    }
 
     public List<LottoTicket> purchaseTickets(final int purchaseAmount) {
         int ticketCount = purchaseAmount / TICKET_PRICE;
@@ -20,10 +25,9 @@ public class LottoTicketMachine {
     }
 
     private LottoTicket generateTicket() {
-        List<Integer> pool = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
-        Collections.shuffle(pool);
+        Collections.shuffle(ticketNumberPool);
+        Set<Integer> ticketNumbers = new TreeSet<>(ticketNumberPool.subList(0, 6));
 
-        Set<Integer> ticketNumbers = new TreeSet<>(pool.subList(0, 6));
         return new LottoTicket(ticketNumbers);
     }
 }
