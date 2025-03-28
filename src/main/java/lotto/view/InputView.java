@@ -11,6 +11,9 @@ import static lotto.LottoConfig.LOTTO_PRICE;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
+    private InputView() {
+    }
+
     public static int getPositiveNumberInput(String prompt) {
         System.out.println(prompt);
 
