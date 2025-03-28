@@ -31,27 +31,11 @@ public class Lottos {
         return lottos;
     }
 
-    public int getSize() {
+    public int size() {
         return lottos.size();
     }
 
-    public List<Rank> getRanks(Lotto winningNumbers, Number bonusNumber) {
-        return lottos.stream()
-                .map(lotto -> lotto.getRank(winningNumbers, bonusNumber))
-                .collect(Collectors.toList());
-    }
-
-    public float calculateROI(List<Rank> ranks) {
-        return (float) totalWinningMoney(ranks) / totalPayment();
-    }
-
-    private long totalWinningMoney(List<Rank> ranks) {
-        return ranks.stream()
-            .mapToInt(Rank::winningMoney)
-            .sum();
-    }
-
-    private long totalPayment() {
+    public long totalPayment() {
         return (long) lottos.size() * LOTTO_PRICE;
     }
 

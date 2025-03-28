@@ -1,13 +1,13 @@
 package lotto.domain;
 
 public class Amount {
-    private final int value;
+    private final long value;
 
-    public Amount(int value) {
+    public Amount(long value) {
         this.value = value;
     }
 
-    public int divide(int divisor) {
+    public long divide(long divisor) {
         return value / divisor;
     }
 }

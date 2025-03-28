@@ -1,9 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.domain.Number;
-import lotto.domain.Rank;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +9,7 @@ import java.util.stream.Collectors;
 public class ResultView {
     public static void printLottos(Lottos lottos) {
         StringBuilder sb = new StringBuilder();
-        sb.append(lottos.getSize()).append("개를 구매했습니다.\n");
+        sb.append(lottos.size()).append("개를 구매했습니다.\n");
         for (Lotto lotto : lottos.values()) {
             sb.append(lotto.values().stream()
                     .map(Number::value)
@@ -22,9 +20,7 @@ public class ResultView {
         System.out.println(sb);
     }
 
-    public static void printReport(Lottos lottos, Lotto winningNumbers, Number bonusNumber) {
-        List<Rank> ranks = lottos.getRanks(winningNumbers, bonusNumber);
-
+    public static void printReport(Ranks ranks, float roi) {
         StringBuilder sb = new StringBuilder();
         sb.append("당첨 통계\n");
         sb.append("---------\n");
@@ -36,13 +32,13 @@ public class ResultView {
             sb.append(" (")
                 .append(rank.winningMoney())
                 .append("원)- ")
-                .append(ranks.stream()
+                .append(ranks.values().stream()
                         .filter(r -> r.equals(rank))
                         .count())
                 .append("개)\n");
         }
 
-        sb.append("총 수익률은 ").append(lottos.calculateROI(ranks)).append("입니다\n");
+        sb.append("총 수익률은 ").append(roi).append("입니다\n");
         System.out.println(sb);
     }
 }

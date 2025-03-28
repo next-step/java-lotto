@@ -38,11 +38,8 @@ public class Lotto {
         return Objects.hashCode(numbers);
     }
 
-    public Rank getRank(Lotto winningLotto, Number bonusNumber) {
-        return Rank.valueOf((int) numbers.stream()
-                 .filter(winningLotto.numbers::contains)
-                 .count()
-                , numbers.contains(bonusNumber));
+    public boolean contains(Number number) {
+        return numbers.contains(number);
     }
 
     public boolean isValidRange() {
