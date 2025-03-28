@@ -6,13 +6,17 @@ import lotto.domain.Number;
 import lotto.domain.Rank;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printLottos(Lottos lottos) {
         StringBuilder sb = new StringBuilder();
         sb.append(lottos.getSize()).append("개를 구매했습니다.\n");
         for (Lotto lotto : lottos.values()) {
-            sb.append(lotto.combine(", "));
+            sb.append(lotto.values().stream()
+                    .map(Number::value)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", ")));
             sb.append("\n");
         }
         System.out.println(sb);

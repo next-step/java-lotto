@@ -22,11 +22,8 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
-    public String combine(String seperator) {
-        return numbers.stream()
-                .map(Number::value)
-                .map(String::valueOf)
-                .collect(Collectors.joining(seperator));
+    public List<Number> values() {
+        return numbers;
     }
 
     @Override
