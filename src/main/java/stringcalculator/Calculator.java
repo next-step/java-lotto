@@ -8,10 +8,6 @@ import java.util.function.BiFunction;
 public class Calculator {
 
     public static final String DELIMITER = " ";
-    public static final String ADD = "+";
-    public static final String SUBTRACT = "-";
-    public static final String MULTIPLY = "*";
-    public static final String DIVIDE = "/";
 
     public void init() {
         Scanner scanner = new Scanner(System.in);
@@ -38,13 +34,6 @@ public class Calculator {
         return a / b;
     }
 
-    private static final Map<String, BiFunction<Integer, Integer, Integer>> OPERATIONS = Map.of(
-            ADD, Calculator::add,
-            SUBTRACT, Calculator::subtract,
-            MULTIPLY, Calculator::multiply,
-            DIVIDE, Calculator::divide
-    );
-
     public List<String> splitWithSpace(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("유효하지 않은 문자열입니다: " + input);
@@ -65,12 +54,12 @@ public class Calculator {
         return result;
     }
 
-    private int operate(String operator, int a, int b) {
-        BiFunction<Integer, Integer, Integer> operation = OPERATIONS.get(operator);
-        if (operation == null) {
-            throw new IllegalArgumentException("사칙연산을 수행할 수 없는 문자열을 포함합니다: " + operator);
+    private int operate(String symbol, int a, int b) {
+        Operator operator = Operator.getBySymbol(symbol);
+        if (operator == null) {
+            throw new IllegalArgumentException("사칙연산을 수행할 수 없는 문자열을 포함합니다: " + symbol);
         }
-        return operation.apply(a, b);
+        return operator.operate(a, b);
     }
 
     private int parseOrThrow(String element) {
