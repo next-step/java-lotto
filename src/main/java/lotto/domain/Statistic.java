@@ -4,44 +4,44 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import lotto.game.Game;
 
 public class Statistic {
 
-    private final WinLottoNumber winLottoNumber;
-    private final List<GameResult> gameResults;
+    private final List<Rank> gameResults;
+    private int paidMoney;
 
     public Statistic(Lottos lottos, WinLottoNumber winNumber) {
-        winLottoNumber = winNumber;
         gameResults = new ArrayList<>();
-        calculate(lottos);
+        calculate(lottos, winNumber);
+        this.paidMoney = lottos.size() * Game.LOTTO_PRICE;
     }
 
-    private void calculate(Lottos lottos) {
+    private void calculate(Lottos lottos, WinLottoNumber winNumber) {
         for (Lotto lotto : lottos.getLottos()) {
-            int match = lotto.matchCount(winLottoNumber.winLotto());
-            boolean matchBonus = lotto.matchBonus(winLottoNumber.bonusNumber());
-            gameResults.add(new GameResult(match, matchBonus));
+            int match = lotto.matchCount(winNumber.winLotto());
+            boolean matchBonus = lotto.matchBonus(winNumber.bonusNumber());
+            gameResults.add(Rank.valueOf(match, matchBonus));
         }
     }
 
     public Map<Rank, Integer> result() {
         Map<Rank, Integer> result = new EnumMap<>(Rank.class);
 
-        for (GameResult gameResult : gameResults) {
-            Rank rank = gameResult.result();
+        for (Rank rank : gameResults) {
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
 
         return result;
     }
 
-    public double getProfitRate(int paidMoney) {
+    public double getProfitRate() {
         return (double) getTotalPrize() / paidMoney;
     }
 
     public long getTotalPrize() {
         return gameResults.stream()
-            .map(gameResult -> gameResult.result().getWinningMoney())
+            .map(Rank::getWinningMoney)
             .mapToLong(Long::valueOf)
             .sum();
     }

@@ -6,6 +6,7 @@ import java.util.List;
 public class Lotto {
 
     private final List<LottoNum> lottoNumbers;
+    public static final int LOTTO_SIZE = 6;
 
     public Lotto(List<LottoNum> lottoNumbers) {
         checkDuplicate(lottoNumbers);
@@ -15,7 +16,7 @@ public class Lotto {
 
 
     private void checkSize(List<LottoNum> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }

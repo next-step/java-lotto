@@ -15,7 +15,7 @@ public class ResultView {
         }
     }
 
-    public static void showStatistics(Statistic stat, int paidMoney) {
+    public static void showStatistics(Statistic stat) {
         System.out.println("\n당첨 통계\n---------");
         Map<Rank, Integer> resultMap = stat.result();
 
@@ -34,7 +34,7 @@ public class ResultView {
             System.out.printf(" (%d원) - %d개\n", prize, count);
         }
 
-        double rate = stat.getProfitRate(paidMoney);
+        double rate = stat.getProfitRate();
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s)\n",
             rate, rate < 1 ? "손해라는 의미임" : "이득이라는 의미임");
     }

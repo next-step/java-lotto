@@ -20,7 +20,7 @@ public class Main {
         int bonusNumber = InputView.getBonusNumber();
         Statistic stat = game.play(winningLotto, bonusNumber);
 
-        ResultView.showStatistics(stat, paidMoney);
+        ResultView.showStatistics(stat);
     }
 
 }
