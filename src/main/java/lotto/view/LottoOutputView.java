@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.LottoRank.*;
+import static lotto.domain.LottoRank.LAST;
 
 public class LottoOutputView extends OutputView {
 

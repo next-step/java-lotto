@@ -17,7 +17,7 @@ public class LottoNumber {
     }
 
     private void validateNumberBound(int number) {
-        if(number < NUMBER_LOWER_BOUND || number > NUMBER_UPPER_BOUND)
+        if (number < NUMBER_LOWER_BOUND || number > NUMBER_UPPER_BOUND)
             throw new IllegalArgumentException(String.format("number should be between %d and %d.", NUMBER_LOWER_BOUND, NUMBER_UPPER_BOUND));
     }
 
