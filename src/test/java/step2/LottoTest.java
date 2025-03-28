@@ -34,17 +34,17 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("5개 + 보너스 번호가 다른 경우 2등을 리턴한다")
+    @DisplayName("5개 + 보너스 번호가 다른 경우 3등을 리턴한다")
     void notMatchedBonus() {
         Lotto lotto = new Lotto(LottoNumberUtils.of(2, 3, 4, 5, 6, 9));
         Set<LottoNum> winningNums = LottoNumberUtils.of(1, 2, 3, 4, 5, 6);
         Winning winning = new Winning(winningNums, new LottoNum(19));
 
-        assertThat(winning.match(lotto).getRank()).isEqualTo(Rank.SECOND);
+        assertThat(winning.match(lotto).getRank()).isEqualTo(Rank.THIRD);
     }
 
     @Test
-    @DisplayName("5개 + 보너스 번호가 같은 경우 2등_bonus을 리턴한다")
+    @DisplayName("5개 + 보너스 번호가 같은 경우 2등을 리턴한다")
     void matchedBonus() {
         Lotto lotto = new Lotto(LottoNumberUtils.of(2, 4, 5, 6, 3, 19));
         Set<LottoNum> winningNums = LottoNumberUtils.of(1, 2, 3, 4, 5, 6);
