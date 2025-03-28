@@ -18,6 +18,10 @@ public enum LottoPrize {
         this.prize = prize;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public static LottoPrize valueOf(int matchCount) {
         return Arrays.stream(values())
                 .filter(prize -> prize.matchCount == matchCount)
@@ -25,4 +29,7 @@ public enum LottoPrize {
                 .orElse(NONE);
     }
 
+    public int getPrize() {
+        return prize;
+    }
 }

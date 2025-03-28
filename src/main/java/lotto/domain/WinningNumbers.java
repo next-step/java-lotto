@@ -14,4 +14,8 @@ public class WinningNumbers {
         int matchCount = ticket.matchCountWith(numbers);
         return LottoPrize.valueOf(matchCount);
     }
+
+    public int size() {
+        return numbers.size();
+    }
 }
