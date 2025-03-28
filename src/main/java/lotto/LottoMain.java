@@ -7,14 +7,15 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoSeller;
 import lotto.domain.LottoWinningChecker;
 import lotto.domain.ManualStrategy;
+import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        int money = InputView.inputMoney();
+        int inputValue = InputView.inputMoney();
 
-        LottoSeller lottoSeller = new LottoSeller(money);
+        LottoSeller lottoSeller = new LottoSeller(new Money(inputValue));
         List<Lotto> lottos = lottoSeller.generateLottos(new AutomaticStrategy());
         OutputView.printLottos(lottos);
 
