@@ -6,6 +6,7 @@ public enum Rank {
     FOURTH(3, 5000),
     THIRD(4, 50000),
     SECOND(5, 1500000),
+    SECOND_BONUS(5, 1500000),
     FIRST(6, 2000000000),
     NONE(0, 0);
     private final int matchedCount;
@@ -17,6 +18,17 @@ public enum Rank {
     }
 
     public static Rank from(int matchedCount) {
+        return Arrays.stream(values())
+                .filter(r -> r.matchedCount == matchedCount)
+                .findFirst()
+                .orElse(NONE);
+    }
+
+    public static Rank from(int matchedCount, boolean isBonusMatched) {
+        if (matchedCount == 5) {
+            return isBonusMatched ? SECOND_BONUS : SECOND;
+        }
+
         return Arrays.stream(values())
                 .filter(r -> r.matchedCount == matchedCount)
                 .findFirst()
