@@ -1,0 +1,26 @@
+package ui;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class InputView {
+
+    public static int inputPurchaseAmount() {
+        System.out.println("구입금액을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    public static List<Integer> inputWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        String winningNumbers = scanner.nextLine();
+
+        return Stream.of(winningNumbers.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toUnmodifiableList());
+    }
+}
