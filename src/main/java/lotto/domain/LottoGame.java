@@ -6,8 +6,8 @@ import java.util.Map;
 public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
 
-    private int count;
-    private Lottos lottos;
+    private final int count;
+    private final Lottos lottos;
     private Map<Division, Integer> winnerCountMap;
 
     public LottoGame(int money) {

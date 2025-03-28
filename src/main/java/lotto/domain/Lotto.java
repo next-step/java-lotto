@@ -9,7 +9,7 @@ public class Lotto {
     public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
     public static final int LOTTO_COUNT = 6;
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     private Lotto() {
         List<Integer> lottoNumberCandidate = new ArrayList<>();
