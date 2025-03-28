@@ -1,9 +1,10 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicket {
-    private static final Random RANDOM = new Random();
     private static final int NUMBER_SIZE = 6;
     private static final int NUMBER_UPPER_BOUND = 45;
     private static final int NUMBER_LOWER_BOUND = 1;
@@ -22,15 +23,13 @@ public class LottoTicket {
     }
 
     private List<Integer> generate() {
-        Set<Integer> uniqueNumbers = new HashSet<>();
-        while (uniqueNumbers.size() < NUMBER_SIZE) {
-            uniqueNumbers.add(generateNumber());
-        }
-        return new ArrayList<>(uniqueNumbers);
-    }
+        List<Integer> numberCandidates = IntStream.rangeClosed(NUMBER_LOWER_BOUND, NUMBER_UPPER_BOUND)
+                .boxed()
+                .collect(Collectors.toList());
 
-    private int generateNumber() {
-        return RANDOM.nextInt(NUMBER_UPPER_BOUND - NUMBER_LOWER_BOUND + 1) + NUMBER_LOWER_BOUND;
+        Collections.shuffle(numberCandidates);
+
+        return numberCandidates.subList(0, NUMBER_SIZE);
     }
 
     private void validateNumberNotNull(List<Integer> numbers) {
