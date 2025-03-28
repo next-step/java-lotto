@@ -12,20 +12,11 @@ import java.util.stream.Stream;
 
 public class SellerTest {
 
-    @Test
-    @DisplayName("판매자는 로또기계 하나를 가지고 있다.")
-    void sellerHasLottoMachineTest() {
-        var machine = new LottoTicketMachine(new Random());
-        var seller = new Seller(machine);
-
-        Assertions.assertThat(seller.hasSameMachine(machine)).isTrue();
-    }
-
     @ParameterizedTest
     @MethodSource("sellTestData")
     @DisplayName("구매 금액을 받아 1000원당 1장으로 로또를 판매한다.")
     void sellTest(int money, int expected) {
-        var seller = new Seller(new LottoTicketMachine(new Random()));
+        var seller = new Seller();
         var lottos = seller.sell(money);
 
         Assertions.assertThat(lottos).hasSize(expected);
