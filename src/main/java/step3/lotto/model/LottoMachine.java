@@ -30,6 +30,7 @@ public class LottoMachine {
         for (int i = 0; i < 6; i++) {
             lottoTicket.add(allLottoNumbers.get(i));
         }
+        Collections.sort(lottoTicket);
         return new LottoTicket(lottoTicket);
     }
 

@@ -58,8 +58,8 @@ public class LottoTicketTest {
         LottoNumber lottoNumber5 = new LottoNumber(5);
 
         // when
-        assertThatThrownBy(() -> new LottoTicket(
-            List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5)))
+        assertThatThrownBy(
+            () -> new LottoTicket(List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5)))
 
             // then
             .isExactlyInstanceOf(LottoTicketException.class);
@@ -102,31 +102,124 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("맞춘 로또 개수 테스트 #1")
+    @DisplayName("당첨 X 테스트 #1")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount0_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicket lastWeekWinningTicket = new LottoTicket("7, 8, 9, 10, 11, 12");
+        LottoNumber bonusLottoNumber = new LottoNumber(1);
+
+        // when
+        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+
+            // then
+            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.NONE0));
+    }
+
+    @Test
+    @DisplayName("당첨 X 테스트 #2")
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount1_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicket lastWeekWinningTicket = new LottoTicket("6, 7, 8, 9, 10, 11");
+        LottoNumber bonusLottoNumber = new LottoNumber(1);
 
         // when
-        assertThat(lottoTicket.match(lastWeekWinningTicket))
+        assertThat(lottoTicket.matchLottoNumbers(lastWeekWinningTicket))
 
             // then
-            .isEqualTo(new Count(1));
+            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.NONE1));
     }
 
     @Test
-    @DisplayName("맞춘 로또 개수 테스트 #2")
+    @DisplayName("당첨 X 테스트 #3")
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount2_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicket lastWeekWinningTicket = new LottoTicket("5, 6, 7, 8, 9, 10");
+        LottoNumber bonusLottoNumber = new LottoNumber(1);
 
         // when
-        assertThat(lottoTicket.match(lastWeekWinningTicket))
+        assertThat(lottoTicket.matchLottoNumbers(lastWeekWinningTicket))
 
             // then
-            .isEqualTo(new Count(2));
+            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.NONE2));
+    }
+
+
+    @Test
+    @DisplayName("5등 당첨 테스트")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount3_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicket lastWeekWinningTicket = new LottoTicket("4, 5, 6, 7, 8, 9");
+        LottoNumber bonusLottoNumber = new LottoNumber(1);
+
+        // when
+        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+
+            // then
+            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.FIFTH));
+    }
+
+    @Test
+    @DisplayName("4등 당첨 테스트")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount4_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicket lastWeekWinningTicket = new LottoTicket("3, 4, 5, 6, 7, 8");
+        LottoNumber bonusLottoNumber = new LottoNumber(1);
+
+        // when
+        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+
+            // then
+            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.FOURTH));
+    }
+
+    @Test
+    @DisplayName("3등 당첨 테스트")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount5_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicket lastWeekWinningTicket = new LottoTicket("2, 3, 4, 5, 6, 7");
+        LottoNumber bonusLottoNumber = new LottoNumber(8);
+
+        // when
+        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+
+            // then
+            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.THIRD));
+    }
+
+    @Test
+    @DisplayName("2등 당첨 테스트")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount5AndBonusNumber_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicket lastWeekWinningTicket = new LottoTicket("2, 3, 4, 5, 6, 7");
+        LottoNumber bonusLottoNumber = new LottoNumber(1);
+
+        // when
+        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+
+            // then
+            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.SECOND));
+    }
+
+    @Test
+    @DisplayName("1등 당첨 테스트")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount6_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicket lastWeekWinningTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusLottoNumber = new LottoNumber(7);
+
+        // when
+        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+
+            // then
+            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.FIRST));
     }
 
 }

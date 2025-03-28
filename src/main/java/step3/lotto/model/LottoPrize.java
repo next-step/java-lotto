@@ -1,5 +1,6 @@
 package step3.lotto.model;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public enum LottoPrize {
@@ -8,7 +9,11 @@ public enum LottoPrize {
     SECOND(new LottoMatchCount(5), new LottoMatchBonusCount(1)),
     THIRD(new LottoMatchCount(5), new LottoMatchBonusCount(0)),
     FOURTH(new LottoMatchCount(4)),
-    FIFTH(new LottoMatchCount(3));
+    FIFTH(new LottoMatchCount(3)),
+
+    NONE2(new LottoMatchCount(2)),
+    NONE1(new LottoMatchCount(1)),
+    NONE0(new LottoMatchCount(0));
 
     private final LottoMatchCount lottoMatchCount;
     private LottoMatchBonusCount lottoMatchBonusCount = null;
@@ -28,7 +33,10 @@ public enum LottoPrize {
         SECOND, SECOND.lottoMatchCount,
         THIRD, THIRD.lottoMatchCount,
         FOURTH, FOURTH.lottoMatchCount,
-        FIFTH, FIFTH.lottoMatchCount
+        FIFTH, FIFTH.lottoMatchCount,
+        NONE2, NONE2.lottoMatchCount,
+        NONE1, NONE1.lottoMatchCount,
+        NONE0, NONE0.lottoMatchCount
     );
 
     private static final Map<LottoPrize, LottoMatchBonusCount> BONUS_MATCH_COUNT = Map.of(
@@ -42,28 +50,21 @@ public enum LottoPrize {
         SECOND, new Money(30_000_000L),
         THIRD, new Money(1_500_000L),
         FOURTH, new Money(50_000L),
-        FIFTH, new Money(5_000L)
+        FIFTH, new Money(5_000L),
+        NONE2, new Money(0L),
+        NONE1, new Money(0L),
+        NONE0, new Money(0L)
     );
 
     public static LottoPrize of(LottoMatchCount lottoMatchCount, LottoMatchBonusCount lottoMatchBonusCount) {
-        if (lottoMatchCount.equals(FIRST.lottoMatchCount)) {
-            return FIRST;
+        if (lottoMatchCount.equals(SECOND.lottoMatchCount) && lottoMatchBonusCount.equals(SECOND.lottoMatchBonusCount)) {
+            return SECOND;
         }
-        if (lottoMatchCount.equals(SECOND.lottoMatchCount)) {
-            if (lottoMatchBonusCount.equals(SECOND.lottoMatchBonusCount)) {
-                return SECOND;
-            }
-        }
-        if (lottoMatchCount.equals(THIRD.lottoMatchCount)) {
-            return THIRD;
-        }
-        if (lottoMatchCount.equals(FOURTH.lottoMatchCount)) {
-            return FOURTH;
-        }
-        if (lottoMatchCount.equals(FIFTH.lottoMatchCount)) {
-            return FIFTH;
-        }
-        return null;
+
+        return Arrays.stream(LottoPrize.values())
+            .filter(prize -> prize.lottoMatchCount.equals(lottoMatchCount))
+            .findFirst()
+            .orElse(null);
     }
 
     public static LottoMatchCount matchCountOf(LottoPrize lottoPrize) {

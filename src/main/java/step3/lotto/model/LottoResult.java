@@ -1,5 +1,6 @@
 package step3.lotto.model;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.LongStream;
 
@@ -14,6 +15,12 @@ public class LottoResult {
     );
 
     public void reflect(LottoPrize lottoPrize) {
+        if (lottoPrize == null
+            || lottoPrize.equals(LottoPrize.NONE0)
+            || lottoPrize.equals(LottoPrize.NONE1)
+            || lottoPrize.equals(LottoPrize.NONE2)) {
+            return;
+        }
         TICKET_COUNT.get(lottoPrize).increase();
     }
 
