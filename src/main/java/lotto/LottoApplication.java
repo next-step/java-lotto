@@ -4,6 +4,7 @@ import calculator.Operator;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
@@ -16,9 +17,11 @@ public class LottoApplication {
         Integer lottoQuantity = Operator.DIVIDE.formula.apply(lottoPurchaseAmount, LOTTO_PRICE);
         OutputView.showLottoQuantity(lottoQuantity);
 
+        List<List<Integer>> lottos = new ArrayList<>();;
         for (int i = 0; i < lottoQuantity; i++) {
             List<Integer> numbers = LottoNumberAutoGenerator.generateNumbers();
             OutputView.showLottoNumbers(numbers);
+            lottos.add(numbers);
         }
     }
 }
