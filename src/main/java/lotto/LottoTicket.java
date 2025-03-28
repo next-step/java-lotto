@@ -16,6 +16,7 @@ public class LottoTicket {
         }
 
         this.numbers = new ArrayList<>(numbers);
+        this.numbers.sort(Integer::compareTo);
     }
 
     public long countMatches(List<Integer> winningNumbers) {
