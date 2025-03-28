@@ -17,7 +17,7 @@ class WinningLottoTest {
     @Test
     public void 보너스번호가_당첨번호와_중복이_발생하면_예외가_발생한다() {
         List<LottoNumber> winningNumbers = convertToLottoNumber(List.of(1, 2, 3, 4, 5, 6));
-        Integer bonusNumber = 6;
+        int bonusNumber = 6;
 
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningLotto(winningNumbers, bonusNumber));
     }
