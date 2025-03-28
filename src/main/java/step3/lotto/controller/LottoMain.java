@@ -1,9 +1,7 @@
 package step3.lotto.controller;
 
 import java.util.List;
-import step3.lotto.model.Count;
 import step3.lotto.model.LottoMachine;
-import step3.lotto.model.LottoMatchCount;
 import step3.lotto.model.LottoNumber;
 import step3.lotto.model.LottoPrize;
 import step3.lotto.model.LottoResult;

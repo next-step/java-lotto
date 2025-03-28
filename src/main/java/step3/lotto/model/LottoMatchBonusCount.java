@@ -4,11 +4,6 @@ import step3.lotto.exception.LottoMatchCountException;
 
 public class LottoMatchBonusCount extends Count {
 
-    public LottoMatchBonusCount(String value) {
-        super(value);
-        validateLottoMatchBonusCount(value);
-    }
-
     public LottoMatchBonusCount(long value) {
         super(value);
         validateLottoMatchBonusCount(value);
