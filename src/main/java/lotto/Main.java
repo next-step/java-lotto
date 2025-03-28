@@ -1,16 +1,17 @@
-package step2.lotto;
+package lotto;
 
 import java.util.List;
-import step2.lotto.domain.Lottos;
-import step2.lotto.domain.Statistic;
-import step2.lotto.game.Game;
-import step2.lotto.view.InputView;
-import step2.lotto.view.ResultView;
+import lotto.domain.Lottos;
+import lotto.domain.Statistic;
+import lotto.game.Game;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class Main {
 
     public static void main(String[] args) {
         int paidMoney = InputView.getPaidMoney();
+        int bonusNumber = InputView.getBonusNumber();
 
         Game game = new Game();
         Lottos lottos = game.createLottos(paidMoney);

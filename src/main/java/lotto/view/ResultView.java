@@ -1,8 +1,8 @@
-package step2.lotto.view;
+package lotto.view;
 
-import step2.lotto.domain.Lotto;
-import step2.lotto.domain.Lottos;
-import step2.lotto.domain.Statistic;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Statistic;
 
 public class ResultView {
 

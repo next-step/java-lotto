@@ -1,11 +1,11 @@
-package step2.domain;
+package lotto.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import step2.lotto.domain.Lotto;
+import lotto.domain.Lotto;
 
 public class LottoTest {
 

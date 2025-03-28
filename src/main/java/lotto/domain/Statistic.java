@@ -1,8 +1,8 @@
-package step2.lotto.domain;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import step2.lotto.game.Game;
+import lotto.game.Game;
 
 public class Statistic {
 

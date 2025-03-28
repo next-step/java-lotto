@@ -1,13 +1,13 @@
-package step2.domain;
+package lotto.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import step2.lotto.domain.Lotto;
-import step2.lotto.domain.Lottos;
-import step2.lotto.domain.Statistic;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Statistic;
 
 public class StatisticTest {
 

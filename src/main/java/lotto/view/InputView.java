@@ -1,4 +1,4 @@
-package step2.lotto.view;
+package lotto.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,11 @@ public class InputView {
         int money = scanner.nextInt();
         scanner.nextLine();
         return money;
+    }
+
+    public static int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 
     public static List<Integer> lastWeekLottoNumbers() {
