@@ -1,7 +1,8 @@
 package lotto.generator;
 
 
-import lotto.type.LottoNumList;
+import lotto.LottoSystemConstants;
+import lotto.type.LottoNums;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,24 +11,16 @@ import java.util.stream.IntStream;
 
 public class LottoNumGenerator {
 
-  private final int lottoNumSize;
-  private final int maxLottoCandidateNum;
-
-  public LottoNumGenerator(int lottoNumSize, int maxLottoCandidateNum) {
-    this.lottoNumSize = lottoNumSize;
-    this.maxLottoCandidateNum = maxLottoCandidateNum;
-  }
-
-  public LottoNumList generate(ShuffleStrategy shuffleStrategy) {
-    List<Integer> res =  IntStream
-        .rangeClosed(1, maxLottoCandidateNum)
+  public LottoNums generate(ShuffleStrategy shuffleStrategy) {
+    List<Integer> res = IntStream
+        .rangeClosed(LottoSystemConstants.LOTTO_MIN_NUM, LottoSystemConstants.LOTTO_MAX_NUM)
         .boxed()
         .collect(Collectors.toList());
 
     res = shuffleStrategy.shuffle(res);
-    res = res.subList(0, lottoNumSize);
+    res = res.subList(0, LottoSystemConstants.LOTTO_SIZE);
     Collections.sort(res);
 
-    return LottoNumList.valueOf(res);
+    return LottoNums.valueOf(res);
   }
 }

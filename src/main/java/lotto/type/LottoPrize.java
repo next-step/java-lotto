@@ -1,8 +1,7 @@
 package lotto.type;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public enum LottoPrize {
   ZERO_MATCHES(0, 0),
@@ -11,30 +10,30 @@ public enum LottoPrize {
   THREE_MATCHES(3, 5_000),
   FOUR_MATCHES(4, 50_000),
   FIVE_MATCHES(5, 1_500_000),
+  FIVE_WITH_BONUS_MATCHES(5, 30_000_000),
   SIX_MATCHES(6, 2_000_000_000);
-
-  private static final Map<Integer, LottoPrize> MATCH_COUNT_TO_PRIZE_MAP = new HashMap<>();
 
   private final int matchCount;
   private final int prizeAmount;
+
+  private boolean hasMatchCount(int matchCount) {
+    return this.matchCount == matchCount;
+  }
 
   LottoPrize(int matchCount, int prizeAmount) {
     this.matchCount = matchCount;
     this.prizeAmount = prizeAmount;
   }
 
-  static {
-    for (LottoPrize prize : values()) {
-      MATCH_COUNT_TO_PRIZE_MAP.put(prize.matchCount, prize);
+  public static LottoPrize findByMatchCount(int matchCount, boolean matchBonus) {
+    if (matchCount == 5) {
+      return matchBonus ? FIVE_WITH_BONUS_MATCHES : FIVE_MATCHES;
     }
-  }
 
-  public static LottoPrize findByMatchCount(int count) {
-    LottoPrize prize = MATCH_COUNT_TO_PRIZE_MAP.get(count);
-    if (prize == null) {
-      throw new IllegalArgumentException("No prize available for this match count: " + count);
-    }
-    return prize;
+    return Arrays.stream(values())
+        .filter(lottoPrize -> lottoPrize.hasMatchCount(matchCount))
+        .findFirst()
+        .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 일치 수입니다."));
   }
 
   public static int getTotalPrize(List<LottoPrize> lottoPrizes) {
