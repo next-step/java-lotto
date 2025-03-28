@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoChecker;
 import lotto.domain.RandomDrawingStrategy;
@@ -19,20 +18,19 @@ public class LottoApplication {
     int purchaseAmount = InputView.getPurchaseAmount();
     int ticketCount = purchaseAmount / LOTTO_PRICE;
 
-    List<Lotto> tickets = new ArrayList<>();
+    List<Lotto> lottos = new ArrayList<>();
 
     for (int i = 0; i < ticketCount; i++) {
-      tickets.add(new Lotto(new RandomDrawingStrategy()));
+      lottos.add(new Lotto(new RandomDrawingStrategy()));
     }
 
-    ResultView.showLottos(tickets);
+    ResultView.showLottos(lottos);
 
     WinningLotto winningLotto = InputView.getWinningNumbers();
+    LottoChecker lottoChecker = new LottoChecker()
+        .calculateResults(lottos, winningLotto, purchaseAmount);
 
-    Map<Integer, Long> lottoResults = LottoChecker.calculateResults(tickets, winningLotto);
-    double profitRate = LottoChecker.calculateProfitRate(lottoResults, purchaseAmount);
-    ResultView.printResults(lottoResults, profitRate);
+    ResultView.printResults(lottoChecker);
+
   }
-
-
 }
