@@ -29,12 +29,31 @@ public class LottoResult {
         return new LottoResult(purchaseAmount, lottoResult);
     }
 
+    public static LottoResult of(Customer customer, WinningLotto winningLotto) {
+        int purchaseAmount = customer.getPurchaseAmount();
+        Map<Rank, Integer> lottoResult = analyzeLottoStatistics(customer.getLottoList(), winningLotto);
+
+        return new LottoResult(purchaseAmount, lottoResult);
+    }
+
     public static Map<Rank, Integer> analyzeLottoStatistics(List<Lotto> lottoList, Lotto winningLotto) {
         Map<Rank, Integer> statistics = new EnumMap<>(Rank.class);
         initializeStatistics(statistics);
 
         for (Lotto lotto : lottoList) {
             Rank rank = lotto.checkLottoRank(winningLotto.getLottoNumbers());
+            statistics.put(rank, statistics.get(rank) + 1);
+        }
+
+        return statistics;
+    }
+
+    public static Map<Rank, Integer> analyzeLottoStatistics(List<Lotto> lottoList, WinningLotto winningLotto) {
+        Map<Rank, Integer> statistics = new EnumMap<>(Rank.class);
+        initializeStatistics(statistics);
+
+        for (Lotto lotto : lottoList) {
+            Rank rank = winningLotto.checkLottoRank(lotto);
             statistics.put(rank, statistics.get(rank) + 1);
         }
 
