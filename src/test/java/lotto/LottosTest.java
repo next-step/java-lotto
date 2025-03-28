@@ -39,16 +39,18 @@ class LottosTest {
         Lotto winningLotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
         Lottos lottos = new Lottos(List.of(
                 Lotto.create(List.of(1, 2, 3, 4, 5, 6)),
+                Lotto.create(List.of(1, 2, 3, 4, 5, 45)),
                 Lotto.create(List.of(1, 2, 3, 4, 5, 16)),
                 Lotto.create(List.of(1, 2, 3, 4, 15, 6)),
                 Lotto.create(List.of(1, 2, 3, 4, 15, 16)),
                 Lotto.create(List.of(11, 12, 13, 14, 15, 16))
         ));
-        Map<LottoResult, Integer> resultMap = lottos.getResultMap(winningLotto);
+        Map<LottoResult, Integer> resultMap = lottos.getResultMap(winningLotto, LottoNumber.of(45));
         assertEquals(1, resultMap.get(LottoResult.FIRST));
-        assertEquals(2, resultMap.get(LottoResult.SECOND));
-        assertEquals(1, resultMap.get(LottoResult.THIRD));
-        assertNull(resultMap.get(LottoResult.FOURTH));
+        assertEquals(1, resultMap.get(LottoResult.SECOND));
+        assertEquals(2, resultMap.get(LottoResult.THIRD));
+        assertEquals(1, resultMap.get(LottoResult.FOURTH));
+        assertNull(resultMap.get(LottoResult.FIFTH));
         assertEquals(1, resultMap.get(LottoResult.NONE));
     }
 }

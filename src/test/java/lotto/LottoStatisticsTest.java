@@ -42,8 +42,8 @@ class LottoStatisticsTest {
     static Stream<Arguments> provideCalculateYieldTestCases() {
         return Stream.of(
                 Arguments.of(15000, new EnumMap<LottoResult, Integer>(LottoResult.class), "0.00"),
-                Arguments.of(15000, new EnumMap<>(Map.of(LottoResult.FOURTH, 1)), "0.33"),
-                Arguments.of(15000, new EnumMap<>(Map.of(LottoResult.NONE, 2, LottoResult.SECOND, 1)), "100.00")
+                Arguments.of(15000, new EnumMap<>(Map.of(LottoResult.FOURTH, 1)), "3.33"),
+                Arguments.of(15000, new EnumMap<>(Map.of(LottoResult.NONE, 2, LottoResult.SECOND, 1)), "2000.00")
         );
     }
 }

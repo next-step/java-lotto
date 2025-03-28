@@ -66,6 +66,10 @@ public class Lotto {
                 .sum();
     }
 
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
     @Override
     public String toString() {
         return numbers.stream()

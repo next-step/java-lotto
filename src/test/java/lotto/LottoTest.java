@@ -118,6 +118,17 @@ class LottoTest {
         );
     }
 
+    @Test
+    @DisplayName("로또 번호가 포함되어 있는지 확인한다")
+    void contains() {
+        Lotto lotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber number = LottoNumber.of(1);
+        Assertions.assertThat(lotto.contains(number)).isTrue();
+
+        LottoNumber number2 = LottoNumber.of(45);
+        Assertions.assertThat(lotto.contains(number2)).isFalse();
+    }
+
     private static class LottoParserForTest {
 
         private static final String DELIMITER = ",";

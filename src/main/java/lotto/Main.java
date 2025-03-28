@@ -9,7 +9,7 @@ public class Main {
         View.printLottos(lottos);
         Lotto winningLotto = View.inputWinningLotto();
         LottoNumber bonusLottoNumber = View.inputBonusLottoNumber();
-        LottoStatistics statistics = LottoStatistics.getStatistics(lottoPrice, lottos.getResultMap(winningLotto));
+        LottoStatistics statistics = LottoStatistics.getStatistics(lottoPrice, lottos.getResultMap(winningLotto, bonusLottoNumber));
         View.printLottoStatistics(statistics);
     }
 }
