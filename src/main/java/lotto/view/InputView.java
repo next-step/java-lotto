@@ -18,7 +18,7 @@ public class InputView {
 
     public static Lotto getWinningNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(Arrays.stream(scanner.nextLine().split(DELIMITER))
+        return Lotto.of(Arrays.stream(scanner.nextLine().split(DELIMITER))
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));

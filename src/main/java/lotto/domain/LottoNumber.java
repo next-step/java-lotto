@@ -21,6 +21,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
                 .collect(Collectors.toList());
     }
 
+    public static List<LottoNumber> convertToLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
     private void validateInputs(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             String messageFormat = "로또 번호는 %d ~ %d 사이 정수만 가능합니다.";
@@ -48,5 +54,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber o) {
         return number - o.number;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

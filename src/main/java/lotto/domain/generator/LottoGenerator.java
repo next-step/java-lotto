@@ -3,7 +3,6 @@ package lotto.domain.generator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,10 +16,10 @@ public class LottoGenerator {
     }
 
     public static List<Lotto> generateLottoListByPurchaseAmount(int purchaseAmount) {
-        validInputs(purchaseAmount);
+        validateInputs(purchaseAmount);
 
         return IntStream.range(0, calculateLottoCount(purchaseAmount))
-                .mapToObj(i -> generateLotto())
+                .mapToObj(i -> Lotto.generateRandomly())
                 .collect(Collectors.toList());
     }
 
@@ -28,16 +27,7 @@ public class LottoGenerator {
         return purchaseAmount / LOTTO_PRICE;
     }
 
-    public static Lotto generateLotto() {
-        Collections.shuffle(LOTTO_NUMBER_CACHE);
-
-        List<LottoNumber> lottoNumbers = LOTTO_NUMBER_CACHE.subList(0, LOTTO_NUMBER_COUNT);
-        Collections.sort(lottoNumbers);
-
-        return new Lotto(lottoNumbers);
-    }
-
-    private static void validInputs(int purchaseAmount) {
+    private static void validateInputs(int purchaseAmount) {
         if (purchaseAmount < LOTTO_PRICE) {
             throw new IllegalArgumentException("구입금액은 로또 한장 가격보다 작을 수 없습니다. 입력한 구입금액: " + purchaseAmount);
         }

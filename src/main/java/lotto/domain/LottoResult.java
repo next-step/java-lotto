@@ -42,16 +42,16 @@ public class LottoResult {
         return statistics;
     }
 
-    private static void initializeStatistics(Map<Rank, Integer> statistics) {
-        Arrays.stream(Rank.values()).forEach(rank -> statistics.put(rank, 0));
-    }
-
     public Map<Rank, Integer> getLottoStatistics() {
         return lottoStatistics;
     }
 
     public double getROI() {
         return (double) totalPrize / purchaseAmount;
+    }
+
+    private static void initializeStatistics(Map<Rank, Integer> statistics) {
+        Arrays.stream(Rank.values()).forEach(rank -> statistics.put(rank, 0));
     }
 
 }

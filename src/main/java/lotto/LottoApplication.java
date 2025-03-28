@@ -11,7 +11,7 @@ public class LottoApplication {
         int purchaseAmount = InputView.getPurchaseAmount();
         customer.purchaseLotto(purchaseAmount);
 
-        OutputView.printLottos(customer.getLottoList());
+        OutputView.printLottoList(customer.getLottoList());
 
         WinningLotto winningLotto = new WinningLotto(InputView.getWinningNumbers(), InputView.getBonusNumber());
 
