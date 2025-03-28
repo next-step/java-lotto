@@ -25,6 +25,6 @@ class LottoTest {
     )
     void 갯수_매칭_테스트(String winningNumbers, int matches) {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.getMatchCount(Arrays.stream(winningNumbers.split(",")).map(Integer::parseInt).collect(Collectors.toList()))).isEqualTo(matches);
+        assertThat(lotto.getMatchCount(Arrays.stream(winningNumbers.split(",")).map(value -> new LottoNumber(Integer.parseInt(value))).collect(Collectors.toList()))).isEqualTo(matches);
     }
 }

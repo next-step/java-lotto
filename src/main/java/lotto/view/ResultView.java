@@ -1,12 +1,12 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Rewards;
 import lotto.enums.Rank;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -20,8 +20,8 @@ public class ResultView {
 
     public static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getValues()) {
-            List<Integer> lottoNumbers = lotto.getLottoNumbers();
-            Collections.sort(lottoNumbers);
+            List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+            lottoNumbers.sort(Comparator.comparing(LottoNumber::getNumber));
             System.out.println(lottoNumbers);
         }
     }

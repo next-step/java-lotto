@@ -19,7 +19,7 @@ public class Lottos {
         this.values = values;
     }
 
-    public Rewards getResult(WinningNumbers winningNumbers, int bonusNumber) {
+    public Rewards getResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         return new Rewards(this.values.stream()
                 .map(lotto -> Rank.valueOf(winningNumbers.countNumberMatching(lotto), lotto.matchBonusNumber(bonusNumber)))
                 .collect(Collectors.toList()));

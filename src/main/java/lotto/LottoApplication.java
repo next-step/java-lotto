@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Rewards;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,7 +14,7 @@ public class LottoApplication {
 
         String winningNumber = InputView.inputWinningNumber();
         WinningNumbers winningNumbers = new WinningNumbers(winningNumber);
-        int bonusNumber = InputView.inputBonusNumber();
+        BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber());
         ResultView.printResultOverview();
 
         Rewards result = lottos.getResult(winningNumbers, bonusNumber);
