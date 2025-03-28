@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -42,9 +43,7 @@ public class LottoResult {
     }
 
     private static void initializeStatistics(Map<Rank, Integer> statistics) {
-        for (Rank rank : Rank.values()) {
-            statistics.put(rank, 0);
-        }
+        Arrays.stream(Rank.values()).forEach(rank -> statistics.put(rank, 0));
     }
 
     public Map<Rank, Integer> getLottoStatistics() {
