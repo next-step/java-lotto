@@ -15,7 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static List<LottoNumber> generateLottoNumberList() {
+    public static List<LottoNumber> cacheLottoNumbers() {
         return IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
