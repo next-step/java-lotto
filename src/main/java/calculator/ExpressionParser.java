@@ -1,3 +1,5 @@
+package calculator;
+
 public class ExpressionParser {
 
     public static final String EXPRESSION_REGEX = "^\\d+( [+\\-*/] \\d+)*$";

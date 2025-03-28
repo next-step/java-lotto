@@ -1,3 +1,5 @@
+package calculator;
+
 import view.InputView;
 import view.OutputView;
 
