@@ -37,11 +37,12 @@ public enum LottoPrize {
         THIRD, new LottoMatchBonusCount(0)
     );
 
-    private static final Map<Count, Money> PRIZE_MONEY = Map.of(
-        FIRST.lottoMatchCount, new Money(2_000_000_000L),
-        THIRD.lottoMatchCount, new Money(1_500_000L),
-        FOURTH.lottoMatchCount, new Money(50_000L),
-        FIFTH.lottoMatchCount, new Money(5_000L)
+    private static final Map<LottoPrize, Money> PRIZE_MONEY = Map.of(
+        FIRST, new Money(2_000_000_000L),
+        SECOND, new Money(30_000_000L),
+        THIRD, new Money(1_500_000L),
+        FOURTH, new Money(50_000L),
+        FIFTH, new Money(5_000L)
     );
 
     public static LottoPrize of(LottoMatchCount lottoMatchCount, LottoMatchBonusCount lottoMatchBonusCount) {
@@ -73,12 +74,8 @@ public enum LottoPrize {
         return BONUS_MATCH_COUNT.get(lottoPrize);
     }
 
-    public static Money moneyOf(Count count) {
-        return PRIZE_MONEY.get(count);
-    }
-
     public static Money moneyOf(LottoPrize lottoPrize) {
-        return PRIZE_MONEY.get(MATCH_COUNT.get(lottoPrize));
+        return PRIZE_MONEY.get(lottoPrize);
     }
 
 }

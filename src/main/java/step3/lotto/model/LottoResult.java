@@ -38,4 +38,8 @@ public class LottoResult {
         return prizeMoney;
     }
 
+    public double rateOfReturn(Money purchaseAmount) {
+        return (double) prizeMoney().value() / purchaseAmount.value();
+    }
+
 }

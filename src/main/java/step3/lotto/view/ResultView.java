@@ -6,6 +6,7 @@ import step3.lotto.model.LottoMatchCount;
 import step3.lotto.model.LottoPrize;
 import step3.lotto.model.LottoResult;
 import step3.lotto.model.LottoTicket;
+import step3.lotto.model.Money;
 
 public class ResultView {
 
@@ -27,11 +28,28 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    public void printMatchTicketCount(Count matchTicketCount, LottoMatchCount lottoMatchCount) {
-        System.out.println(lottoMatchCount.value() + "개 일치 (" + LottoPrize.moneyOf(lottoMatchCount) + "원)- " + matchTicketCount + "개");
+    public void printLottoResult(LottoResult lottoResult, Money purchaseAmount) {
+        printLottoPrizeResult(LottoPrize.FIFTH, lottoResult.ticketCountOf(LottoPrize.FIFTH));
+        printLottoPrizeResult(LottoPrize.FOURTH, lottoResult.ticketCountOf(LottoPrize.FOURTH));
+        printLottoPrizeResult(LottoPrize.THIRD, lottoResult.ticketCountOf(LottoPrize.THIRD));
+        printLottoPrizeResult(LottoPrize.SECOND, lottoResult.ticketCountOf(LottoPrize.SECOND));
+        printLottoPrizeResult(LottoPrize.FIRST, lottoResult.ticketCountOf(LottoPrize.FIRST));
+
+        printRateOfReturn(lottoResult, purchaseAmount);
     }
 
-    public void printRateOfReturn(double rateOfReturn) {
+    public void printLottoPrizeResult(LottoPrize lottoPrize, Count lottoTicketCount) {
+        LottoMatchCount lottoMatchCount = LottoPrize.matchCountOf(lottoPrize);
+        Money lottoPrizeMoney = LottoPrize.moneyOf(lottoPrize);
+        if (lottoPrize.equals(LottoPrize.SECOND)) {
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", lottoMatchCount.value(), lottoPrizeMoney.value(), lottoTicketCount.value());
+            return;
+        }
+        System.out.printf("%d개 일치 (%d원) - %d개\n", lottoMatchCount.value(), lottoPrizeMoney.value(), lottoTicketCount.value());
+    }
+
+    public void printRateOfReturn(LottoResult lottoResult, Money purchaseAmount) {
+        double rateOfReturn = lottoResult.rateOfReturn(purchaseAmount);
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 ", rateOfReturn);
         if (rateOfReturn == 1) {
             System.out.println("결과적으로 본전이라는 의미임)");
@@ -44,11 +62,4 @@ public class ResultView {
         }
     }
 
-    public void printLottoResult(LottoResult lottoResult) {
-        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.FIFTH), LottoPrize.matchCountOf(LottoPrize.FIFTH));
-        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.FOURTH), LottoPrize.matchCountOf(LottoPrize.FOURTH));
-        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.THIRD), LottoPrize.matchCountOf(LottoPrize.THIRD));
-        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.SECOND), LottoPrize.matchCountOf(LottoPrize.SECOND));
-        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.FIRST), LottoPrize.matchCountOf(LottoPrize.FIRST));
-    }
 }

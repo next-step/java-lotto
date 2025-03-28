@@ -16,33 +16,24 @@ public class LottoMain {
 
     private final static InputView inputView = new InputView();
     private final static ResultView resultView = new ResultView();
+    private final static LottoMachine lottoMachine = new LottoMachine();
+    private final static LottoResult lottoResult = new LottoResult();
 
     public static void main(String[] args) {
 
-        String purchaseAmount = inputView.getPurchaseAmount();
-        Money money = new Money(purchaseAmount);
-
-        LottoMachine lottoMachine = new LottoMachine();
-        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTickets(money);
+        Money purchaseAmount = new Money(inputView.getPurchaseAmount());
+        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTickets(purchaseAmount);
         resultView.printLottoTicketCount(lottoTickets);
 
-        String winningNumbers = inputView.getLastWeekWinningNumbers();
-        LottoTicket lastWeekWinningTicket = new LottoTicket(winningNumbers);
-
-        String bonusNumber = inputView.getBonusNumber();
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
-
-        LottoResult lottoResult = new LottoResult();
+        LottoTicket lastWeekWinningTicket = new LottoTicket(inputView.getLastWeekWinningNumbers());
+        LottoNumber bonusLottoNumber = new LottoNumber(inputView.getBonusNumber());
         resultView.printLottoResultTitle();
+
         for (LottoTicket lottoTicket : lottoTickets) {
             LottoPrize lottoPrize = lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber);
             lottoResult.reflect(lottoPrize);
         }
-        resultView.printLottoResult(lottoResult);
-
-        Money prizeMoney = lottoResult.prizeMoney();
-        double rateOfReturn = (double) prizeMoney.value() / money.value();
-        resultView.printRateOfReturn(rateOfReturn);
+        resultView.printLottoResult(lottoResult, purchaseAmount);
     }
 
 }
