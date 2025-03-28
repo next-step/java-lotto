@@ -62,6 +62,7 @@ public enum LottoPrize {
         }
 
         return Arrays.stream(LottoPrize.values())
+            .filter(prize -> !prize.equals(SECOND))
             .filter(prize -> prize.lottoMatchCount.equals(lottoMatchCount))
             .findFirst()
             .orElse(null);

@@ -113,7 +113,7 @@ public class LottoTicketTest {
         assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
 
             // then
-            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.NONE0));
+            .isEqualTo(LottoPrize.NONE0);
     }
 
     @Test
@@ -125,10 +125,10 @@ public class LottoTicketTest {
         LottoNumber bonusLottoNumber = new LottoNumber(1);
 
         // when
-        assertThat(lottoTicket.matchLottoNumbers(lastWeekWinningTicket))
+        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
 
             // then
-            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.NONE1));
+            .isEqualTo(LottoPrize.NONE1);
     }
 
     @Test
@@ -140,10 +140,10 @@ public class LottoTicketTest {
         LottoNumber bonusLottoNumber = new LottoNumber(1);
 
         // when
-        assertThat(lottoTicket.matchLottoNumbers(lastWeekWinningTicket))
+        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
 
             // then
-            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.NONE2));
+            .isEqualTo(LottoPrize.NONE2);
     }
 
 
@@ -159,7 +159,7 @@ public class LottoTicketTest {
         assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
 
             // then
-            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.FIFTH));
+            .isEqualTo(LottoPrize.FIFTH);
     }
 
     @Test
@@ -174,7 +174,7 @@ public class LottoTicketTest {
         assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
 
             // then
-            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.FOURTH));
+            .isEqualTo(LottoPrize.FOURTH);
     }
 
     @Test
@@ -189,7 +189,7 @@ public class LottoTicketTest {
         assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
 
             // then
-            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.THIRD));
+            .isEqualTo(LottoPrize.THIRD);
     }
 
     @Test
@@ -204,7 +204,7 @@ public class LottoTicketTest {
         assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
 
             // then
-            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.SECOND));
+            .isEqualTo(LottoPrize.SECOND);
     }
 
     @Test
@@ -219,7 +219,7 @@ public class LottoTicketTest {
         assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
 
             // then
-            .isEqualTo(LottoPrize.matchCountOf(LottoPrize.FIRST));
+            .isEqualTo(LottoPrize.FIRST);
     }
 
 }
