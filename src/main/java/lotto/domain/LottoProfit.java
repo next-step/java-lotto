@@ -3,19 +3,28 @@ package lotto.domain;
 import java.util.Map;
 
 public class LottoProfit {
-    private Double profitRate;
+    private final Double profitRate;
 
-    public LottoProfit(Map<Integer, Integer> ranks, int totalCount) {
-        int totalMoney = 0;
+    public LottoProfit(Map<LottoPrize, Integer> ranks, int totalCount) {
+        int totalPrize = calculateTotalPrize(ranks);
+        profitRate = calculateProfitRate(totalPrize, totalCount);
+    }
 
-        for (Map.Entry<Integer, Integer> entry : ranks.entrySet()) {
-            int match = entry.getKey();
-            int count = entry.getValue();
-            totalMoney += LottoPrize.getPrize(match) * count;
+    private int calculateTotalPrize(Map<LottoPrize, Integer> ranks) {
+        int totalPrize = 0;
+
+        for (Map.Entry<LottoPrize, Integer> entry : ranks.entrySet()) {
+            LottoPrize lottoPrize = entry.getKey();
+            int winsCount = entry.getValue();
+            totalPrize += lottoPrize.getPrize() * winsCount;
         }
 
-        profitRate = totalMoney / (double) (totalCount * 1000);
-        profitRate = Math.floor(profitRate * 100) / 100.0;
+        return totalPrize;
+    }
+
+    private double calculateProfitRate(int totalPrize, int totalCount) {
+        double rawProfitRate = totalPrize / (double) (totalCount * 1000);
+        return Math.floor(rawProfitRate * 100) / 100.0;
     }
 
     public Double getProfitRate() {
