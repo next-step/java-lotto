@@ -4,8 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
 import step2.domain.LottoNum;
+import step2.domain.Winning;
 import step2.util.FixLottoStrategy;
+import step2.util.LottoNumberUtils;
 import step2.util.LottoStrategy;
+import step2.domain.Rank;
 
 import java.util.Set;
 
@@ -31,10 +34,22 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또번호와 당첨번호가 5개 같은 경우")
-    void countMatch() {
-        Lotto lotto = new Lotto(of(2, 4, 5, 6, 3, 9));
-        Set<LottoNum> winningNums = of(1, 2, 3, 4, 5, 6);
-        assertThat(lotto.countMatch(winningNums)).isEqualTo(5);
+    @DisplayName("5개 + 보너스 번호가 다른 경우 2등을 리턴한다")
+    void notMatchedBonus() {
+        Lotto lotto = new Lotto(LottoNumberUtils.of(2, 3, 4, 5, 6, 9));
+        Set<LottoNum> winningNums = LottoNumberUtils.of(1, 2, 3, 4, 5, 6);
+        Winning winning = new Winning(winningNums, new LottoNum(19));
+
+        assertThat(winning.match(lotto).getRank()).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    @DisplayName("5개 + 보너스 번호가 같은 경우 2등_bonus을 리턴한다")
+    void matchedBonus() {
+        Lotto lotto = new Lotto(LottoNumberUtils.of(2, 4, 5, 6, 3, 19));
+        Set<LottoNum> winningNums = LottoNumberUtils.of(1, 2, 3, 4, 5, 6);
+        Winning winning = new Winning(winningNums, new LottoNum(19));
+
+        assertThat(winning.match(lotto).getRank()).isEqualTo(Rank.SECOND_BONUS);
     }
 }

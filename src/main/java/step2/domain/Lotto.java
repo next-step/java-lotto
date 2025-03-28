@@ -22,6 +22,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean matchBonus(LottoNum bonus) {
+        return lotto.contains(bonus);
+    }
+
     public Set<LottoNum> getNumbers() {
         return lotto;
     }
