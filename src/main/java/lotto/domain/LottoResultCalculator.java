@@ -21,7 +21,7 @@ public class LottoResultCalculator {
     private int countMatches(final LottoTicket lottoTicket, final LottoTicket winningLottoTicket) {
         int matches = 0;
         for (int number : lottoTicket.getNumbers()) {
-            if (winningLottoTicket.getNumbers().contains(number)) {
+            if (winningLottoTicket.contains(number)) {
                 matches++;
             }
         }

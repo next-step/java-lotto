@@ -20,6 +20,10 @@ public class LottoTicket {
         }
     }
 
+    public boolean contains(final int number) {
+        return numbers.contains(number);
+    }
+
     public Set<Integer> getNumbers() {
         return Collections.unmodifiableSet(numbers);
     }
