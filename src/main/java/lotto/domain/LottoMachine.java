@@ -11,7 +11,7 @@ public class LottoMachine {
         validatePositiveAmount(amount);
         validateDividedAmount(amount);
         this.amount = amount;
-        this.tickets = issue();
+        this.tickets = new ArrayList<>();
     }
 
     public LottoMachine(int amount, List<LottoTicket> tickets) {

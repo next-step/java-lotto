@@ -46,7 +46,7 @@ class LottoMachineTest {
                 new LottoTicket(List.of(1, 2, 3, 9, 10, 11)),
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
         );
-        LottoMachine lottoMachine = new LottoMachine(TICKET_AMOUNT, tickets);
+        LottoMachine lottoMachine = new LottoMachine(TICKET_AMOUNT*tickets.size(), tickets);
 
         LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
 
@@ -65,10 +65,11 @@ class LottoMachineTest {
                 new LottoTicket(List.of(1, 2, 3, 9, 10, 11)),
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
         );
-        LottoMachine lottoMachine = new LottoMachine(TICKET_AMOUNT, tickets);
+        int amount = TICKET_AMOUNT * tickets.size();
+        LottoMachine lottoMachine = new LottoMachine(amount, tickets);
         LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
 
-        double expected = (double) (LottoRank.FOURTH.getPrize() + LottoRank.FIRST.getPrize()) / TICKET_AMOUNT;
+        double expected = (double) (LottoRank.FOURTH.getPrize() + LottoRank.FIRST.getPrize()) / amount;
         assertThat(lottoMachine.calculateRevenue(winningTicket)).isEqualTo(expected);
     }
 }
