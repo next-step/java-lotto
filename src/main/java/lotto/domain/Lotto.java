@@ -5,34 +5,28 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNum> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
-        lottoNumbers.forEach(this::validateNumber);
+    public Lotto(List<LottoNum> lottoNumbers) {
         checkDuplicate(lottoNumbers);
         checkSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateNumber(int lottoNumber) {
-        if (lottoNumber < 1 || lottoNumber > 45) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
-        }
-    }
 
-    private void checkSize(List<Integer> lottoNumbers) {
+    private void checkSize(List<LottoNum> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
 
-    private void checkDuplicate(List<Integer> lottoNumbers) {
+    private void checkDuplicate(List<LottoNum> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
 
-    public List<Integer> lottoNumbers() {
+    public List<LottoNum> lottoNumbers() {
         return lottoNumbers;
     }
 
@@ -40,6 +34,10 @@ public class Lotto {
         return (int) this.lottoNumbers().stream()
             .filter(lastWeekLotto.lottoNumbers()::contains)
             .count();
+    }
+
+    public boolean matchBonus(LottoNum bonus) {
+        return this.lottoNumbers().contains(bonus);
     }
 
 

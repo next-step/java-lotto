@@ -1,49 +1,49 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
-import lotto.game.Game;
 
 public class Statistic {
 
-    public static final Map<Integer, Integer> PRIZE_MAP = Map.of(
-        3, 5000,
-        4, 50000,
-        5, 1500000,
-        6, 2000000000
-    );
-    private final Map<Integer, Integer> matchCountMap = new HashMap<>();
-    private int totalPrize = 0;
+    private final WinLottoNumber winLottoNumber;
+    private final List<GameResult> gameResults;
 
-    public void calculate(Lottos lottos, Lotto lastWeekLotto) {
+    public Statistic(Lottos lottos, WinLottoNumber winNumber) {
+        winLottoNumber = winNumber;
+        gameResults = new ArrayList<>();
+        calculate(lottos);
+    }
+
+    private void calculate(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            int match = lotto.matchCount(lastWeekLotto);
-            statistic(match);
+            int match = lotto.matchCount(winLottoNumber.winLotto());
+            boolean matchBonus = lotto.matchBonus(winLottoNumber.bonusNumber());
+            gameResults.add(new GameResult(match, matchBonus));
         }
     }
 
-    public Map<Integer, Integer> getMatchCountMap() {
-        return matchCountMap;
-    }
+    public Map<Rank, Integer> result() {
+        Map<Rank, Integer> result = new EnumMap<>(Rank.class);
 
-    public int getTotalPrize() {
-        return totalPrize;
-    }
-
-    private void statistic(int match) {
-        if (match >= 3) {
-            matchCountMap.put(match, matchCountMap.getOrDefault(match, 0) + 1);
-            totalPrize += PRIZE_MAP.get(match);
+        for (GameResult gameResult : gameResults) {
+            Rank rank = gameResult.result();
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
+
+        return result;
     }
 
     public double getProfitRate(int paidMoney) {
-        // lottoCount * 1000 = 총 투자금
-        int lottoCount = paidMoney / Game.LOTTO_PRICE;
-        if (lottoCount <= 0) {
-            return 0.0;
-        }
-        return (double) totalPrize / paidMoney;
-
+        return (double) getTotalPrize() / paidMoney;
     }
+
+    public long getTotalPrize() {
+        return gameResults.stream()
+            .map(gameResult -> gameResult.result().getWinningMoney())
+            .mapToLong(Long::valueOf)
+            .sum();
+    }
+
 }

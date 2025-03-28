@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import lotto.domain.LottoNum;
 import lotto.domain.Lottos;
 import lotto.domain.Statistic;
 import lotto.game.Game;
@@ -11,17 +12,15 @@ public class Main {
 
     public static void main(String[] args) {
         int paidMoney = InputView.getPaidMoney();
+
+        Game game = new Game(paidMoney);
+        ResultView.showLottos(game.lottos());
+
+        List<LottoNum> winningLotto = InputView.lastWeekLottoNumbers();
         int bonusNumber = InputView.getBonusNumber();
-
-        Game game = new Game();
-        Lottos lottos = game.createLottos(paidMoney);
-        ResultView.showLottos(lottos);
-
-        List<Integer> winningLotto = InputView.lastWeekLottoNumbers();
-        Statistic stat = game.play(winningLotto);
+        Statistic stat = game.play(winningLotto, bonusNumber);
 
         ResultView.showStatistics(stat, paidMoney);
-
     }
 
 }
