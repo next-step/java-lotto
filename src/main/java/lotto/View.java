@@ -30,6 +30,13 @@ public class View {
         return createWinningLotto(SCANNER.nextLine());
     }
 
+    public static LottoNumber inputBonusLottoNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        LottoNumber lottoNumber = LottoNumber.of(SCANNER.nextInt());
+        SCANNER.nextLine(); // newline character 제거
+        return lottoNumber;
+    }
+
     private static Lotto createWinningLotto(String winningLotto) {
         List<Integer> lottoNumbers = Arrays.stream(winningLotto.split(","))
                 .map(String::trim)

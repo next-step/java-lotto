@@ -8,6 +8,7 @@ public class Main {
         View.printLottoCount(lottos.getLottoCount());
         View.printLottos(lottos);
         Lotto winningLotto = View.inputWinningLotto();
+        LottoNumber bonusLottoNumber = View.inputBonusLottoNumber();
         LottoStatistics statistics = LottoStatistics.getStatistics(lottoPrice, lottos.getResultMap(winningLotto));
         View.printLottoStatistics(statistics);
     }
