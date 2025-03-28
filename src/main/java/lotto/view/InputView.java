@@ -1,0 +1,23 @@
+package lotto.view;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class InputView {
+    public static int inputPurchaseAmount() {
+        System.out.println("구입금액을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    public static List<Integer> inputWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        String inputString = scanner.nextLine();
+        return Arrays.stream(inputString.split(", "))
+                .map(number -> Integer.parseInt(number))
+                .collect(Collectors.toList());
+    }
+}
