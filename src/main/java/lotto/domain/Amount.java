@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.util.Price.LOTTO_PRICE;
-
 public class Amount {
     private final int value;
 
@@ -9,7 +7,7 @@ public class Amount {
         this.value = value;
     }
 
-    public int lottoCount() {
-        return value / LOTTO_PRICE;
+    public int divide(int divisor) {
+        return value / divisor;
     }
 }

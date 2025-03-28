@@ -16,7 +16,7 @@ public class Lottos {
 
     public static Lottos from(Amount amount) {
         List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < amount.lottoCount(); i++) {
+        for (int i = 0; i < amount.divide(LOTTO_PRICE); i++) {
             Collections.shuffle(TotalNumbers.NUMBERS);
             result.add(new Lotto(TotalNumbers.NUMBERS.subList(0, 6)
                             .stream()
