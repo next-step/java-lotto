@@ -34,4 +34,19 @@ class LottoTest {
   void duplicateNumber() {
     assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of("1,1,1,1,1,1"));
   }
+
+  @Test
+  @DisplayName("로또의 값을 직접 지정하면 수동으로 생성된 로또이다.")
+  void checkManualLottoType() {
+    Lotto lotto = Lotto.of("1,2,3,4,5,6");
+    assertThat(lotto.getLottoType()).isEqualTo(LottoType.MANUAL);
+  }
+
+  @Test
+  @DisplayName("로또의 값을 지정하지 않으면 랜덤으로 생성된 로또이다.")
+  void checkRandomLottoType() {
+    RandomLottoGenerator lottoGenerator = new RandomLottoGenerator();
+    Lotto randomLotto = Lotto.generateRandomLotto(lottoGenerator);
+    assertThat(randomLotto.getLottoType()).isEqualTo(LottoType.RANDOM);
+  }
 }

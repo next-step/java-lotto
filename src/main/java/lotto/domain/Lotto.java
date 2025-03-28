@@ -8,10 +8,11 @@ import java.util.stream.Collectors;
 public class Lotto {
   private final List<LottoNumber> numbers;
   public static final int SIZE = 6;
+  private final LottoType lottoType;
 
-  public Lotto(List<LottoNumber> numbers) {
+  public Lotto(List<LottoNumber> numbers, LottoType lottoType) {
     validateChecks(numbers);
-
+    this.lottoType = lottoType;
     this.numbers = numbers.stream()
         .sorted((n1, n2) -> Integer.compare(n1.getNumber(), n2.getNumber()))
         .collect(Collectors.toList());
@@ -41,7 +42,7 @@ public class Lotto {
         .map(Integer::parseInt)
         .map(LottoNumber::new)
         .collect(Collectors.toList());
-    return new Lotto(numbers);
+    return new Lotto(numbers, LottoType.MANUAL);
   }
 
   public static Lotto generateRandomLotto(RandomLottoGenerator lottoGenerator) {
@@ -64,5 +65,9 @@ public class Lotto {
     return numbers.stream()
         .filter(comparedLotto::contains)
         .count();
+  }
+
+  public LottoType getLottoType() {
+    return lottoType;
   }
 }

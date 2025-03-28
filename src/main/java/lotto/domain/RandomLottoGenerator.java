@@ -21,7 +21,7 @@ public class RandomLottoGenerator {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        return new Lotto(selectedNumbersList);
+        return new Lotto(selectedNumbersList, LottoType.RANDOM);
     }
 
 }
