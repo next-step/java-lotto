@@ -9,7 +9,7 @@ public enum LottoMatch {
     TWO(2, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
-    IVE(5, 1_500_000),
+    FIVE(5, 1_500_000),
     SIX(6, 2_000_000_000);
 
     public final int matchCount;
@@ -31,4 +31,8 @@ public enum LottoMatch {
                 .orElseThrow(() -> new IllegalArgumentException("일치하는 값이 없습니다."));
     }
 
+    @Override
+    public String toString() {
+        return String.format("%d개 일치 (%,d원)", matchCount, prize);
+    }
 }
