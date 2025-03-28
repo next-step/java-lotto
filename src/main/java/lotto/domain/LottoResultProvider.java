@@ -2,5 +2,5 @@ package lotto.domain;
 
 public interface LottoResultProvider {
 
-  public LottoResult provideLottoResult(Lotto winningLotto, LottoNumber bonusNumber);
+  public LottoResult provideLottoResult(WinningLotto winningLottoWithBonus);
 }

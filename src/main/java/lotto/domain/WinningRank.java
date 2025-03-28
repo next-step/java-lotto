@@ -40,17 +40,12 @@ public enum WinningRank {
   public static WinningRank from(int matchCount, boolean matchBonus) {
     return Arrays.stream(values())
         .filter(rank -> rank.matchCount == matchCount)
-        .filter(rank -> {
-          if (isFiveMatch(matchCount)) {
-            return rank.matchBonus == matchBonus;
-          }
-          return true;
-        })
+        .filter(rank -> isNotFiveMatch(matchCount) || rank.matchBonus == matchBonus)
         .findFirst()
         .orElse(null);
   }
 
-  private static boolean isFiveMatch(int matchCount) {
-    return matchCount == FIVE_MATCH.getMatchCount();
+  private static boolean isNotFiveMatch(int matchCount) {
+    return matchCount != FIVE_MATCH.matchCount;
   }
 }

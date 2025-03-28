@@ -27,10 +27,8 @@ class LottoSetTest {
     Lotto lotto5 = Lotto.of("1, 2, 3, 7, 8, 9");  // 3개(3등)
 
     LottoSet lottoSet = LottoMachine.generateManualLotto(new LottoPurchase(5000), List.of(lotto1, lotto2, lotto3, lotto4, lotto5));
-    Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
-    LottoNumber bonusNumber = LottoNumber.of("30");
-
-    LottoResult lottoResult = lottoSet.provideLottoResult(winningLotto, bonusNumber);
+    WinningLotto winningLottoWithBonus = new WinningLotto(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.of("30"));
+    LottoResult lottoResult = lottoSet.provideLottoResult(winningLottoWithBonus);
 
     assertThat(lottoResult.getMatchCount()).containsExactlyInAnyOrderEntriesOf(Map.of(
         WinningRank.SIX_MATCH, 1,
@@ -39,6 +37,17 @@ class LottoSetTest {
         WinningRank.FOUR_MATCH, 1,
         WinningRank.THREE_MATCH, 1
     ));
+  }
+
+  @Test
+  @DisplayName("5개 번호 + 보너스번호가 같을 경우 2등이다. (단일테스트)")
+  void createLottoStatisticsWithBonus() {
+    Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 30");
+    LottoSet lottoSet = LottoMachine.generateManualLotto(new LottoPurchase(1000), List.of(lotto));
+    WinningLotto winningLottoWithBonus = new WinningLotto(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.of("30"));
+    LottoResult lottoResult = lottoSet.provideLottoResult(winningLottoWithBonus);
+
+    assertThat(lottoResult.getMatchCount().get(WinningRank.FIVE_MATCH_BONUS)).isEqualTo(1);
   }
 
   @Test
@@ -51,10 +60,8 @@ class LottoSetTest {
     Lotto lotto5 = Lotto.of("1, 2, 3, 7, 8, 9");
 
     LottoSet lottoSet = LottoMachine.generateManualLotto(new LottoPurchase(5000), List.of(lotto1, lotto2, lotto3, lotto4, lotto5));
-    Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
-    LottoNumber bonusNumber = LottoNumber.of("30");
-
-    LottoResult lottoResult = lottoSet.provideLottoResult(winningLotto, bonusNumber);
+    WinningLotto winningLottoWithBonus = new WinningLotto(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.of("30"));
+    LottoResult lottoResult = lottoSet.provideLottoResult(winningLottoWithBonus);
 
     assertThat(lottoResult.getProfitRate()).isEqualTo(406311.0);
   }

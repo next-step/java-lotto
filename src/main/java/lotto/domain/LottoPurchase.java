@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class LottoPurchase {
-    private static final int PRICE = 1000;
+    public static final int PRICE = 1000;
 
     private final int purchaseAmount;
 
@@ -22,6 +22,13 @@ public class LottoPurchase {
 
     public int calculateLottoCount() {
         return purchaseAmount / PRICE;
+    }
+
+    public double calculateProfitRate(long totalReward) {
+        if (totalReward == 0) {
+            return 0;
+        }
+        return (double) totalReward / purchaseAmount;
     }
 
 }
