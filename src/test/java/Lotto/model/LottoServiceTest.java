@@ -20,6 +20,7 @@ public class LottoServiceTest {
         final int purchaseAmount = 14000;
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         LottoService service = new LottoService(purchaseAmount, extractor);
+        service.draw();
         service.decideWinning(new int[]{1, 2, 3, 7, 8, 9});
         assertThat(service.winningCounts()).containsExactly(new int[]{14, 0, 0, 0});
         assertThat(service.profitRate()).isEqualTo(5);
