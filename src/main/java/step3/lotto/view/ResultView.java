@@ -48,6 +48,7 @@ public class ResultView {
         printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.FIFTH), LottoPrize.matchCountOf(LottoPrize.FIFTH));
         printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.FOURTH), LottoPrize.matchCountOf(LottoPrize.FOURTH));
         printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.THIRD), LottoPrize.matchCountOf(LottoPrize.THIRD));
+        printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.SECOND), LottoPrize.matchCountOf(LottoPrize.SECOND));
         printMatchTicketCount(lottoResult.ticketCountOf(LottoPrize.FIRST), LottoPrize.matchCountOf(LottoPrize.FIRST));
     }
 }

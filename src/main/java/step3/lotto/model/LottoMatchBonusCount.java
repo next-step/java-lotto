@@ -1,0 +1,32 @@
+package step3.lotto.model;
+
+import step3.lotto.exception.LottoMatchCountException;
+
+public class LottoMatchBonusCount extends Count {
+
+    public LottoMatchBonusCount(String value) {
+        super(value);
+        validateLottoMatchBonusCount(value);
+    }
+
+    public LottoMatchBonusCount(long value) {
+        super(value);
+        validateLottoMatchBonusCount(value);
+    }
+
+    private void validateLottoMatchBonusCount(String value) {
+        try {
+            Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            throw new LottoMatchCountException();
+        }
+        validateLottoMatchBonusCount(Long.parseLong(value));
+    }
+
+    private void validateLottoMatchBonusCount(long value) {
+        if (value < 0 || value > 1) {
+            throw new LottoMatchCountException();
+        }
+    }
+
+}

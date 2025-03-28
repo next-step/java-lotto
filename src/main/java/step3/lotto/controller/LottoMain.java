@@ -4,6 +4,8 @@ import java.util.List;
 import step3.lotto.model.Count;
 import step3.lotto.model.LottoMachine;
 import step3.lotto.model.LottoMatchCount;
+import step3.lotto.model.LottoNumber;
+import step3.lotto.model.LottoPrize;
 import step3.lotto.model.LottoResult;
 import step3.lotto.model.LottoTicket;
 import step3.lotto.model.Money;
@@ -27,11 +29,14 @@ public class LottoMain {
         String winningNumbers = inputView.getLastWeekWinningNumbers();
         LottoTicket lastWeekWinningTicket = new LottoTicket(winningNumbers);
 
+        String bonusNumber = inputView.getBonusNumber();
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+
         LottoResult lottoResult = new LottoResult();
         resultView.printLottoResultTitle();
         for (LottoTicket lottoTicket : lottoTickets) {
-            LottoMatchCount matchCount = lottoTicket.match(lastWeekWinningTicket);
-            lottoResult.reflect(matchCount);
+            LottoPrize lottoPrize = lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber);
+            lottoResult.reflect(lottoPrize);
         }
         resultView.printLottoResult(lottoResult);
 

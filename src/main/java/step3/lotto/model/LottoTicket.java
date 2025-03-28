@@ -27,10 +27,20 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public LottoMatchCount match(LottoTicket lastWeekWinningNumbers) {
+    public LottoMatchCount matchLottoNumbers(LottoTicket lastWeekWinningNumbers) {
         LottoMatchCount lottoMatchCount = new LottoMatchCount(0);
         lottoNumbers.stream().filter(lastWeekWinningNumbers.value()::contains).forEach(i -> lottoMatchCount.increase());
         return lottoMatchCount;
+    }
+
+    public LottoMatchBonusCount matchBonusLottoNumber(LottoNumber bonusLottoNumber) {
+        return lottoNumbers.contains(bonusLottoNumber) ? new LottoMatchBonusCount(1) : new LottoMatchBonusCount(0);
+    }
+
+    public LottoPrize scratch(LottoTicket lastWeekWinningNumbers, LottoNumber bonusLottoNumber) {
+        LottoMatchCount lottoMatchCount = matchLottoNumbers(lastWeekWinningNumbers);
+        LottoMatchBonusCount lottoMatchBonusCount = matchBonusLottoNumber(bonusLottoNumber);
+        return LottoPrize.of(lottoMatchCount, lottoMatchBonusCount);
     }
 
     private void validateLottoTicket(List<LottoNumber> lottoNumbers) {
