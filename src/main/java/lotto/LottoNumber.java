@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static lotto.LottoConfig.LOTTO_NUMBER_SIZE;
@@ -25,5 +28,12 @@ public class LottoNumber {
         Set<Integer> intersection = new HashSet<>(numbers);
         intersection.retainAll(other.numbers);
         return intersection.size();
+    }
+
+    @Override
+    public String toString() {
+        List<Integer> numberList = new ArrayList<>(numbers);
+        Collections.sort(numberList);
+        return numberList.toString();
     }
 }
