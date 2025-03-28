@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.WinningRank.FIVE_MATCH;
-
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
