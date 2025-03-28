@@ -16,11 +16,16 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static Lotto getWinningLotto() {
-        System.out.println("\n 지난 주 당첨 번호를 입력해 주세요.");
+    public static Lotto getWinningNumbers() {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return new Lotto(Arrays.stream(scanner.nextLine().split(DELIMITER))
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
+    }
+
+    public static LottoNumber getBonusNumber() {
+        System.out.println("\n보너스 볼을 입력해 주세요.");
+        return new LottoNumber(Integer.parseInt(scanner.nextLine()));
     }
 }

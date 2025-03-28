@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Customer;
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,7 +13,8 @@ public class LottoApplication {
 
         OutputView.printLottos(customer.getLottoList());
 
-        Lotto winningLotto = InputView.getWinningLotto();
+        WinningLotto winningLotto = new WinningLotto(InputView.getWinningNumbers(), InputView.getBonusNumber());
+
         LottoResult lottoResult = LottoResult.of(customer, winningLotto);
         OutputView.printLottoResult(lottoResult);
     }
