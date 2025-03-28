@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int PRICE = 1000;
@@ -15,5 +16,16 @@ public class LottoTicket {
         }
 
         this.numbers = new ArrayList<>(numbers);
+    }
+
+    public long countMatches(List<Integer> winningNumbers) {
+        return numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
