@@ -11,7 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
-        checkNumberRange(number);
+        validateInputs(number);
         this.number = number;
     }
 
@@ -21,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
                 .collect(Collectors.toList());
     }
 
-    private void checkNumberRange(int number) {
+    private void validateInputs(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             String messageFormat = "로또 번호는 %d ~ %d 사이 정수만 가능합니다.";
             throw new IllegalArgumentException(String.format(messageFormat, LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
