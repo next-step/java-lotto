@@ -1,7 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -50,11 +52,4 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public String getNumbersAsString() {
-        return "[" + lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "))
-                + "]";
-    }
 }

@@ -1,16 +1,13 @@
 package lotto.domain.generator;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
-    private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int LOTTO_PRICE = 1000;
-    private static final List<LottoNumber> LOTTO_NUMBER_CACHE = LottoNumber.cacheLottoNumbers();
 
     private LottoGenerator() {
     }
