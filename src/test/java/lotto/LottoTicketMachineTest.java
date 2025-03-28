@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketMachineTest {
 
@@ -21,6 +22,17 @@ public class LottoTicketMachineTest {
         List<LottoTicket> tickets = machine.purchaseTickets(purchaseAmount);
 
         assertThat(tickets).hasSize(5);
+    }
+
+    @Test
+    @DisplayName("구매 금액이 0원 미만이면 예외를 발생시킨다.")
+    void shouldThrowExceptionWhenPurchaseAmountIsNegative() {
+        LottoTicketMachine machine = new LottoTicketMachine();
+        int purchaseAmount = 0;
+
+        assertThatThrownBy(() -> machine.purchaseTickets(purchaseAmount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구입 금액은 0보다 커야 합니다.");
     }
 
     @Test

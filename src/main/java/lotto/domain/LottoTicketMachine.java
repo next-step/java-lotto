@@ -16,12 +16,19 @@ public class LottoTicketMachine {
     }
 
     public List<LottoTicket> purchaseTickets(final int purchaseAmount) {
+        validatePurchaseAmount(purchaseAmount);
         int ticketCount = purchaseAmount / TICKET_PRICE;
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             tickets.add(generateTicket());
         }
         return tickets;
+    }
+
+    private void validatePurchaseAmount(final int purchaseAmount) {
+        if (purchaseAmount <= 0) {
+            throw new IllegalArgumentException("구입 금액은 0보다 커야 합니다.");
+        }
     }
 
     private LottoTicket generateTicket() {
