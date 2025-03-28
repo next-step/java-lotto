@@ -27,10 +27,10 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public Count match(LottoTicket lastWeekWinningNumbers) {
-        Count matchCount = new Count(0);
-        lottoNumbers.stream().filter(lastWeekWinningNumbers.value()::contains).forEach(i -> matchCount.increase());
-        return matchCount;
+    public LottoMatchCount match(LottoTicket lastWeekWinningNumbers) {
+        LottoMatchCount lottoMatchCount = new LottoMatchCount(0);
+        lottoNumbers.stream().filter(lastWeekWinningNumbers.value()::contains).forEach(i -> lottoMatchCount.increase());
+        return lottoMatchCount;
     }
 
     private void validateLottoTicket(List<LottoNumber> lottoNumbers) {

@@ -3,6 +3,7 @@ package step3.lotto.controller;
 import java.util.List;
 import step3.lotto.model.Count;
 import step3.lotto.model.LottoMachine;
+import step3.lotto.model.LottoMatchCount;
 import step3.lotto.model.LottoResult;
 import step3.lotto.model.LottoTicket;
 import step3.lotto.model.Money;
@@ -29,7 +30,7 @@ public class LottoMain {
         LottoResult lottoResult = new LottoResult();
         resultView.printLottoResultTitle();
         for (LottoTicket lottoTicket : lottoTickets) {
-            Count matchCount = lottoTicket.match(lastWeekWinningTicket);
+            LottoMatchCount matchCount = lottoTicket.match(lastWeekWinningTicket);
             lottoResult.reflect(matchCount);
         }
         resultView.printLottoResult(lottoResult);

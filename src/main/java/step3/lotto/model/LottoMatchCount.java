@@ -24,7 +24,7 @@ public class LottoMatchCount extends Count {
     }
 
     private void validateLottoMatchCount(long value) {
-        if (value < 3 || value > 6) {
+        if (value < 0 || value > 6) {
             throw new LottoMatchCountException();
         }
     }

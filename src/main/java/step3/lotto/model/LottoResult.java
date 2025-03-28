@@ -5,14 +5,14 @@ import java.util.stream.LongStream;
 
 public class LottoResult {
 
-    private final Map<Count, Count> TICKET_COUNT = Map.of(
+    private final Map<LottoMatchCount, Count> TICKET_COUNT = Map.of(
         LottoPrize.matchCountOf(LottoPrize.FIFTH), new Count(0),
         LottoPrize.matchCountOf(LottoPrize.FOURTH), new Count(0),
         LottoPrize.matchCountOf(LottoPrize.THIRD), new Count(0),
         LottoPrize.matchCountOf(LottoPrize.FIRST), new Count(0)
     );
 
-    public void reflect(Count lottoMatchCount) {
+    public void reflect(LottoMatchCount lottoMatchCount) {
         TICKET_COUNT.get(lottoMatchCount).increase();
     }
 
