@@ -4,10 +4,16 @@ import java.util.Set;
 
 public class Winning {
     private final Set<LottoNum> nums;
+    private final LottoNum bonus;
 
     public Winning(Set<LottoNum> nums) {
+        this(nums, new LottoNum(1));
+    }
+
+    public Winning(Set<LottoNum> nums, LottoNum bonus) {
         validate(nums);
         this.nums = nums;
+        this.bonus = bonus;
     }
 
     private void validate(Set<LottoNum> nums) {
@@ -21,6 +27,6 @@ public class Winning {
     }
 
     public MatchResult match(Lotto lotto) {
-        return new MatchResult(lotto.countMatch(this.nums));
+        return new MatchResult(lotto.countMatch(this.nums), lotto.matchBonus(this.bonus));
     }
 }
