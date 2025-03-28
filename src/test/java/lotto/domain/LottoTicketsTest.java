@@ -3,13 +3,17 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketsTest {
+    private static final int TICKET_AMOUNT = 1000;
     private static LottoTickets tickets;
     private static List<LottoTicket> ticketElements;
 
@@ -26,11 +30,28 @@ class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("로또 발행 머신은 구입 금액에 해당하는 로또 티켓 N장을 발급해야 한다.")
+    @DisplayName("로또 티켓 컬렉션은 개수에 해당하는 로또 티켓을 발급해야 한다.")
     void buyLottoTickets() {
         assertThat(new LottoTickets(5).getCount()).isEqualTo(5);
     }
 
+    @Test
+    @DisplayName("로또 티켓 컬렉션에 티켓 금액보다 적은 금액을 넣을 경우, 에러가 발생한다.")
+    void buyLottoTicketWithUnaffordableAmount() {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(100);
+        assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {TICKET_AMOUNT - 1, TICKET_AMOUNT + 1})
+    @DisplayName("로또 티켓 컬렉션은 구입 금액을 장당 가격으로 나누었을 때, 정수가 아니면 에러를 반환한다.")
+    void validateAmount(int amount) {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
+
+        assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
     @Test
     @DisplayName("로또 티켓 컬렉션은 티켓을 반환한다.")

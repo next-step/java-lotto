@@ -20,16 +20,6 @@ class LottoMachineTest {
         assertThat(lottoMachine.getTickets()).hasSize(1);
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {TICKET_AMOUNT - 1, TICKET_AMOUNT + 1})
-    @DisplayName("로또 발행 머신은 구입 금액을 장당 가격으로 나누었을 때, 정수가 아니면 에러를 반환한다.")
-    void validateAmount(int amount) {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
-
-        assertThatThrownBy(() -> new LottoMachine(purchaseAmount))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
     @Test
     @DisplayName("로또 머신은 총수익률을 반환한다")
     void getReturnRate() {
