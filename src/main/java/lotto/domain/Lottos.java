@@ -1,22 +1,17 @@
 package lotto.domain;
 
 import lotto.enums.Rank;
-import lotto.view.ResultView;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> values;
 
     public Lottos(int lottoCount) {
-        this.values = IntStream.range(0, lottoCount)
-                .mapToObj(i -> {
-                    Lotto lotto = new Lotto();
-                    ResultView.printLotto(lotto);
-                    return lotto;
-                })
+        this.values = Stream.generate(Lotto::new)
+                .limit(lottoCount)
                 .collect(Collectors.toList());
     }
 
@@ -28,5 +23,9 @@ public class Lottos {
         return new Rewards(this.values.stream()
                 .map(lotto -> Rank.valueOf(winningNumbers.countNumberMatching(lotto), lotto.matchBonusNumber(bonusNumber)))
                 .collect(Collectors.toList()));
+    }
+
+    public List<Lotto> getValues() {
+        return this.values;
     }
 }

@@ -17,10 +17,6 @@ public class InputView {
         }
     }
 
-    public static void printLottoCount(int count) {
-        System.out.printf("%d개를 구매했습니다.%n", count);
-    }
-
     public static String inputWinningNumber() {
         System.out.println(System.lineSeparator() + "지난 주 당첨 번호를 입력해 주세요.");
         return SCANNER.nextLine();

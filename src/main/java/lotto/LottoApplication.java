@@ -7,15 +7,13 @@ import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import static lotto.view.InputView.inputLottoPurchaseAmount;
-import static lotto.view.InputView.printLottoCount;
-
 public class LottoApplication {
     public static void main(String[] args) {
-        int initialAmount = inputLottoPurchaseAmount();
+        int initialAmount = InputView.inputLottoPurchaseAmount();
         int count = Lotto.calculateLottoCount(initialAmount);
-        printLottoCount(count);
+        ResultView.printLottoCount(count);
         Lottos lottos = new Lottos(count);
+        ResultView.printLottos(lottos);
 
         String winningNumber = InputView.inputWinningNumber();
         WinningNumbers winningNumbers = new WinningNumbers(winningNumber);
