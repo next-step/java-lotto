@@ -12,14 +12,14 @@ class LottoTest {
     @DisplayName("로또는 6개의 번호를 갖는다.")
     @Test
     void lottoNumber() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(new RandomLottoNumberGenerator());
         assertThat(lotto.getNumbers()).hasSize(6);
     }
 
     @DisplayName("로또의 번호는 1~45의 범위를 갖는다.")
     @Test
     void lottoNumberRange() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(new RandomLottoNumberGenerator());
         assertThat(lotto.getNumbers()).allSatisfy(number -> {
             assertThat(number).isBetween(1, 45);
         });
