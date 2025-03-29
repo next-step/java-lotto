@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowableOfType;
 
 class WinningLottoTest {
 
@@ -59,6 +61,14 @@ class WinningLottoTest {
 
         assertThat(winningLotto.getRank(lotto))
             .isEqualTo(LottoRank.NO_RANK);
+    }
+
+    @Test
+    void 보너스번호는_당첨번호와_중복_될_수_없다() {
+        IllegalArgumentException e
+                = catchThrowableOfType(() -> new WinningLotto(asList(1, 2, 3, 4, 5, 6), 5), IllegalArgumentException.class);
+
+        assertThat(e).hasMessage("보너스번호는 당첨번호와 동일 할 수 없습니다.");
     }
 
 }
