@@ -16,6 +16,10 @@ public class LottoTickets {
         tickets.add(ticket);
     }
 
+    public void addAll(LottoTickets tickets) {
+        tickets.getTickets().forEach(this::add);
+    }
+
     public List<LottoTicket> getTickets() {
         return tickets;
     }

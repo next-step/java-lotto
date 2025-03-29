@@ -1,7 +1,9 @@
 package lotto.view;
 
-public interface InputViewInterface {
-    int getNumberInput(String message);
+import java.util.List;
 
-    String[] getStringListInput(String message, String delimiter);
+public interface InputViewInterface {
+    int getNumberInput();
+
+    int[] getNumberListInput(String delimiter);
 }

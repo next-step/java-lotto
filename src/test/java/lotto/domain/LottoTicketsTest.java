@@ -25,4 +25,19 @@ public class LottoTicketsTest {
         assertThat(report.getTicketCount(PrizeRank.FIRST)).isEqualTo(1);
         assertThat(report.getTicketCount(PrizeRank.FIFTH)).isEqualTo(1);
     }
+
+    @Test
+    void add() {
+        LottoTickets lottoTickets = LottoTickets.generate(10000);
+        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}));
+        assertThat(lottoTickets.size()).isEqualTo(11);
+    }
+
+    @Test
+    void addAll() {
+        LottoTickets lottoTickets = new LottoTickets();
+        LottoTickets otherTickets = LottoTickets.generate(14000);
+        lottoTickets.addAll(otherTickets);
+        assertThat(lottoTickets.size()).isEqualTo(14);
+    }
 }

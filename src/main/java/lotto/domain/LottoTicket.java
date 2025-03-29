@@ -19,13 +19,6 @@ public class LottoTicket {
         ;
     }
 
-    public LottoTicket(String[] numbers) {
-        this(Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList()));
-    }
-
     public LottoTicket(int[] numbers) {
         this(Arrays.stream(numbers)
                 .mapToObj(LottoNumber::of)
