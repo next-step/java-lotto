@@ -2,7 +2,10 @@ package lotto;
 
 import lotto.strategy.pick.RandomNumberPickStrategy;
 import lotto.strategy.shuffle.CollectionsShuffleStrategy;
-import lotto.type.*;
+import lotto.type.LottoNumber;
+import lotto.type.LottoNumbers;
+import lotto.type.LottoNumbersBundle;
+import lotto.type.LottoPrize;
 import lotto.util.LottoPurchaseCalculator;
 import lotto.util.ReturnRateCalculator;
 

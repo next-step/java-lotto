@@ -6,11 +6,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.Iterator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +30,7 @@ class LottoNumbersTest {
   }
 
   private List<LottoNumber> createCase2InvalidLottoNumbers() {
-    List<LottoNumber> res =  IntStream.rangeClosed(1, 5)
+    List<LottoNumber> res = IntStream.rangeClosed(1, 5)
         .mapToObj(LottoNumber::new)
         .collect(Collectors.toList());
 
@@ -43,9 +43,9 @@ class LottoNumbersTest {
   @Test
   public void constructorTest1() {
     assertAll(
-        () ->  assertDoesNotThrow(() -> new LottoNumbers(createValidLottoNumbers())),
-        () ->  assertThrows(RuntimeException.class, () -> new LottoNumbers(createCase1InvalidLottoNumbers())),
-        () ->  assertThrows(RuntimeException.class, () -> new LottoNumbers(createCase2InvalidLottoNumbers()))
+        () -> assertDoesNotThrow(() -> new LottoNumbers(createValidLottoNumbers())),
+        () -> assertThrows(RuntimeException.class, () -> new LottoNumbers(createCase1InvalidLottoNumbers())),
+        () -> assertThrows(RuntimeException.class, () -> new LottoNumbers(createCase2InvalidLottoNumbers()))
     );
   }
 
@@ -53,10 +53,10 @@ class LottoNumbersTest {
   @Test
   public void constructorTest2() {
     assertAll(
-        () ->  assertDoesNotThrow(() -> new LottoNumbers("1, 2, 3, 4, 5, 6")),
-        () ->  assertThrows(RuntimeException.class, () -> new LottoNumbers("1, 2, 3, 4, 5")),
-        () ->  assertThrows(RuntimeException.class, () -> new LottoNumbers("1, 2, 3, 4, 5, 46")),
-        () ->  assertThrows(RuntimeException.class, () -> new LottoNumbers("-1, 2, 3, 4, 5, 45"))
+        () -> assertDoesNotThrow(() -> new LottoNumbers("1, 2, 3, 4, 5, 6")),
+        () -> assertThrows(RuntimeException.class, () -> new LottoNumbers("1, 2, 3, 4, 5")),
+        () -> assertThrows(RuntimeException.class, () -> new LottoNumbers("1, 2, 3, 4, 5, 46")),
+        () -> assertThrows(RuntimeException.class, () -> new LottoNumbers("-1, 2, 3, 4, 5, 45"))
     );
   }
 
