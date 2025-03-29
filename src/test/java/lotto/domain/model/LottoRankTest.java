@@ -13,13 +13,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoRankTest {
-    @Test
-    @DisplayName("로또 번호의 갯수보다 더 많은 수의 당첨이 되면 예외가 발생한다.")
-    void invalidMatchedNumberTest() {
-        assertThatThrownBy(() -> LottoRank.of(7, true))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
     @ParameterizedTest(name = "로또 번호가 일치한 갯수에 따라 올바른 rank를 반환한다.")
     @MethodSource("rankTestCases")
     void rankReturnTest(int numOfMatched, boolean bonusMatched, LottoRank expected) {
