@@ -1,7 +1,6 @@
 package lotto.type;
 
 import lotto.strategy.pick.NumberPickStrategy;
-import lotto.strategy.pick.RandomNumberPickStrategy;
 import lotto.strategy.shuffle.ShuffleStrategy;
 
 import java.util.*;
