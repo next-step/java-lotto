@@ -11,6 +11,7 @@ public class LottoNumbers {
     private final int REQUIRED_NUMBER_COUNT = 6;
 
     private final List<Integer> lottoNumbers;
+    private final List<Integer> numbers = IntStream.rangeClosed(1, LOTTO_NUMBER_BOUND).boxed().collect(Collectors.toList());
 
     public LottoNumbers() {
         this.lottoNumbers = auto();
@@ -25,8 +26,6 @@ public class LottoNumbers {
     }
 
     private List<Integer> auto() {
-
-        List<Integer> numbers = IntStream.rangeClosed(1, LOTTO_NUMBER_BOUND).boxed().collect(Collectors.toList());
 
         Collections.shuffle(numbers);
 
