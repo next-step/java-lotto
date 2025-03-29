@@ -1,8 +1,12 @@
-package lotto.domain;
+package lotto.view;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import lotto.domain.Lotto;
+import lotto.domain.LottoRank;
+import lotto.domain.Money;
+import lotto.domain.WinningLotto;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
@@ -16,8 +20,8 @@ public class LottoStatistics {
         }
     }
 
-    public Map<LottoRank, Integer> getStatistics() {
-        return statistics;
+    public int getCountByRank(LottoRank rank) {
+        return statistics.getOrDefault(rank, 0);
     }
 
     public Money getTotalPrize() {

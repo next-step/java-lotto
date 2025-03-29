@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoPurchase;
 import lotto.domain.LottoShop;
-import lotto.domain.LottoStatistics;
+import lotto.view.LottoStatistics;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoInputView;
