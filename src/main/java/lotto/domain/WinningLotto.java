@@ -27,4 +27,8 @@ public class WinningLotto {
                 .collect(Collectors.toList())
         );
     }
+
+    public float roi(Lottos lottos) {
+        return ranks(lottos).roi(lottos.totalAmount());
+    }
 }

@@ -20,7 +20,7 @@ public class ResultView {
         System.out.println(sb);
     }
 
-    public static void printReport(LottoResult lottoResult) {
+    public static void printReport(Ranks ranks, float roi) {
         StringBuilder sb = new StringBuilder();
         sb.append("당첨 통계\n");
         sb.append("---------\n");
@@ -32,13 +32,13 @@ public class ResultView {
             sb.append(" (")
                 .append(rank.winningMoney())
                 .append("원)- ")
-                .append(lottoResult.ranks().values().stream()
+                .append(ranks.values().stream()
                         .filter(r -> r.equals(rank))
                         .count())
                 .append("개)\n");
         }
 
-        sb.append("총 수익률은 ").append(lottoResult.roi()).append("입니다\n");
+        sb.append("총 수익률은 ").append(roi).append("입니다\n");
         System.out.println(sb);
     }
 }

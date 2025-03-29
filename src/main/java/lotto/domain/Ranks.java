@@ -20,6 +20,10 @@ public class Ranks {
                 .sum());
     }
 
+    public float roi(Amount totalAmount) {
+        return totalWinningMoney().divide(totalAmount);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
