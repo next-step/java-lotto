@@ -13,16 +13,15 @@ public class LottoPurchase {
     private static final Money LOTTO_PRICE = new Money(1000);
 
     private final Money money;
-    private final int lottoSize;
     private final Money change;
     private final List<Lotto> lottos;
 
     public LottoPurchase(Money money) {
         this.money = money;
         Pair<Money> pair = money.divAndMod(LOTTO_PRICE);
-        this.lottoSize = pair.getLeft().getValue();
         this.change = pair.getRight();
-        this.lottos = createLottos();
+        int lottoSize = pair.getLeft().getValue();
+        this.lottos = createLottos(lottoSize);
     }
 
     public List<Lotto> getLottos() {
@@ -36,8 +35,8 @@ public class LottoPurchase {
             .divide(BigDecimal.valueOf(invest.getValue()), 2, RoundingMode.HALF_UP);
     }
 
-    private List<Lotto> createLottos() {
-        return IntStream.range(0, this.lottoSize)
+    private List<Lotto> createLottos(int lottoSize) {
+        return IntStream.range(0, lottoSize)
             .mapToObj(i -> LottoFactory.createAuto())
             .collect(Collectors.toList());
     }

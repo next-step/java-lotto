@@ -1,55 +1,74 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowableOfType;
 
 class WinningLottoTest {
 
     @Test
-    void MATCH6_일치_테스트() {
-        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
+    void _1등_일치_테스트() {
+        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6), 7);
         Lotto lotto = LottoFactory.createManual(asList(1, 2, 3, 4, 5, 6));
 
         assertThat(winningLotto.getRank(lotto))
-            .isEqualTo(LottoRank.MATCH_6);
+            .isEqualTo(LottoRank.FIRST);
     }
 
     @Test
-    void MATCH5_일치_테스트() {
-        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
+    void _2등_일치_테스트() {
+        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6), 7);
         Lotto lotto = LottoFactory.createManual(asList(1, 2, 3, 4, 5, 7));
 
         assertThat(winningLotto.getRank(lotto))
-            .isEqualTo(LottoRank.MATCH_5);
+                .isEqualTo(LottoRank.SECOND);
     }
 
     @Test
-    void MATCH4_일치_테스트() {
-        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
+    void _3등_일치_테스트() {
+        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6), 10);
+        Lotto lotto = LottoFactory.createManual(asList(1, 2, 3, 4, 5, 7));
+
+        assertThat(winningLotto.getRank(lotto))
+            .isEqualTo(LottoRank.THIRD);
+    }
+
+    @Test
+    void _4등_일치_테스트() {
+        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6), 10);
         Lotto lotto = LottoFactory.createManual(asList(1, 2, 3, 4, 8, 9));
 
         assertThat(winningLotto.getRank(lotto))
-            .isEqualTo(LottoRank.MATCH_4);
+            .isEqualTo(LottoRank.FOURTH);
     }
 
     @Test
-    void MATCH3_일치_테스트() {
-        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
+    void _5등_일치_테스트() {
+        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6), 10);
         Lotto lotto = LottoFactory.createManual(asList(1, 2, 3, 10, 11, 12));
 
         assertThat(winningLotto.getRank(lotto))
-            .isEqualTo(LottoRank.MATCH_3);
+            .isEqualTo(LottoRank.FIFTH);
     }
 
     @Test
-    void NO_MATCH_테스트() {
-        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6));
+    void 당첨X_테스트() {
+        WinningLotto winningLotto = new WinningLotto(asList(1, 2, 3, 4, 5, 6), 10);
         Lotto lotto = LottoFactory.createManual(asList(7, 8, 9, 10, 1, 2));
 
         assertThat(winningLotto.getRank(lotto))
-            .isEqualTo(LottoRank.NO_MATCH);
+            .isEqualTo(LottoRank.NO_RANK);
+    }
+
+    @Test
+    void 보너스번호는_당첨번호와_중복_될_수_없다() {
+        IllegalArgumentException e
+                = catchThrowableOfType(() -> new WinningLotto(asList(1, 2, 3, 4, 5, 6), 5), IllegalArgumentException.class);
+
+        assertThat(e).hasMessage("보너스번호는 당첨번호와 동일 할 수 없습니다.");
     }
 
 }

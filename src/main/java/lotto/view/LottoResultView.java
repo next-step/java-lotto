@@ -1,14 +1,13 @@
 package lotto.view;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
-import lotto.domain.LottoStatistics;
 import lotto.domain.Money;
 
 public class LottoResultView {
@@ -26,17 +25,13 @@ public class LottoResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Map<LottoRank, Integer> statistics = lottoStatistics.getStatistics();
+        List<LottoRank> printableLottoRanks = Arrays.stream(LottoRank.values())
+                .filter(rank -> rank.getPrize().compareTo(Money.ZERO) > 0)
+                .collect(Collectors.toList());
 
-        Arrays.stream(LottoRank
-            .values())
-            .filter(rank -> rank.getPrize().compareTo(Money.ZERO) > 0)
-            .forEach(rank -> printRankStat(statistics, rank));
-    }
-
-    private void printRankStat(Map<LottoRank, Integer> statistics, LottoRank rank) {
-        System.out.println(
-            rank.getMatchCount() + "개 일치 (" + rank.getPrize().getValue()+ "원)- " + statistics.getOrDefault(rank, 0) + "개");
+        for (LottoRank rank : printableLottoRanks) {
+            System.out.println(LottoRankFormatter.format(rank) + " - " + lottoStatistics.getCountByRank(rank) + "개");
+        }
     }
 
     public void printRoi(BigDecimal roi) {
