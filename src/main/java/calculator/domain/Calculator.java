@@ -1,53 +1,25 @@
 package calculator.domain;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
-import calculator.view.InputView;
-import calculator.view.OutputView;
+import java.util.List;
 
 public class Calculator {
-	private final InputView inputView;
-	private final OutputView outputView;
-	private Deque<Operand> operands = new ArrayDeque<>();
-	private Deque<Operator> operators = new ArrayDeque<>();
+	private final List<Operand> operands;
+	private final List<Operator> operators;
 
-	public Calculator(InputView inputView, OutputView outputView) {
-		this.inputView = inputView;
-		this.outputView = outputView;
-	}
-
-	public void startCalculation() {
-		String[] values = inputView.readAndSplitInput();
-		for (int i = 0; i < values.length; i++) {
-			addDeque(i, values[i]);
-		}
-		int result = calculateOutput();
-		outputView.printOutput(result);
+	public Calculator(List<Operand> operands, List<Operator> operators) {
+		this.operands = List.copyOf(operands);
+		this.operators = List.copyOf(operators);
 	}
 
 	public int calculateOutput() {
-		while (!operators.isEmpty()) {
-			applyOperator();
-		}
-		return operands.peekFirst()
+		int result = operands.get(0)
 			.getNumber();
-	}
-
-	private void addDeque(int index, String value) {
-		if (index % 2 == 0) {
-			operands.add(new Operand(Integer.parseInt(value)));
-			return;
+		for (int i = 0; i < operators.size(); i++) {
+			Operator operator = operators.get(i);
+			result = operator.apply(result, operands.get(i + 1)
+				.getNumber());
 		}
-		operators.add(Operator.fromSymbol(value));
-	}
-
-	private void applyOperator() {
-		Operand first = operands.pollFirst();
-		Operand second = operands.pollFirst();
-		Operator operator = operators.pollFirst();
-		int result = operator.apply(first.getNumber(), second.getNumber());
-		operands.addFirst(new Operand(result));
+		return result;
 	}
 
 }

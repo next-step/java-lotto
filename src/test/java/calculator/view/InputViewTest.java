@@ -1,7 +1,6 @@
 package calculator.view;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,17 +29,5 @@ class InputViewTest {
 			.isThrownBy(() ->
 				inputView.validateInput(null)
 			);
-	}
-
-	@Test
-	@DisplayName("공백을 기준으로 문자열을 자른다.")
-	void splitStringTest() {
-		InputView inputView = new InputView();
-		String input = "  2 +  3 * 4";
-		String[] expected = {"2", "+", "3", "*", "4"};
-
-		String[] result = inputView.splitString(input);
-
-		assertArrayEquals(result, expected);
 	}
 }

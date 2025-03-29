@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class OperatorTest {
 	@Test
@@ -40,13 +42,16 @@ class OperatorTest {
 			.isThrownBy(() -> Operator.DIVIDE.apply(2, 0));
 	}
 
-	@Test
+	@ParameterizedTest
 	@DisplayName("올바른 Operator를 찾는다.")
-	void findOperatorTest() {
-		assertEquals(Operator.ADD, Operator.fromSymbol("+"));
-		assertEquals(Operator.SUBTRACT, Operator.fromSymbol("-"));
-		assertEquals(Operator.MULTIPLY, Operator.fromSymbol("*"));
-		assertEquals(Operator.DIVIDE, Operator.fromSymbol("/"));
+	@CsvSource({
+		"+, ADD",
+		"- , SUBTRACT",
+		"*, MULTIPLY",
+		"/, DIVIDE"
+	})
+	void findOperatorTest(String symbol, Operator expected) {
+		assertEquals(expected, Operator.fromSymbol(symbol));
 	}
 
 	@Test
