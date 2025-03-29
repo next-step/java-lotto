@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class Lotto {
@@ -28,6 +27,13 @@ public class Lotto {
     if (numbers.stream().anyMatch(num -> num < MIN_NUMBER || num > MAX_NUMBER)) {
       throw new IllegalArgumentException();
     }
+  }
+
+  public int findCount(List<Integer> numbers) {
+    return (int) lottoNumbers
+        .stream()
+        .filter(numbers::contains)
+        .count();
   }
 
   public List<Integer> getLottoNumbers() {

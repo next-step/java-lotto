@@ -28,10 +28,6 @@ public class ResultView {
   }
 
   private static int getTotalWinningCount(LottoChecker lottoChecker, int winningNumber) {
-    return lottoChecker.getLottoResults().stream()
-        .filter(result -> result.getWinningsNumber() == winningNumber)
-        .mapToInt(LottoResult::getTotalWinningCount)
-        .findFirst()
-        .orElse(0);
+    return lottoChecker.findTotalWinningCount(winningNumber);
   }
 }

@@ -11,12 +11,7 @@ public class WinningLotto {
     this.numbers = numbers;
   }
 
-  public List<Integer> getNumbers() {
-    return numbers;
-  }
-
   public int matchingWinningNumber(Lotto lotto) {
-    return (int) lotto.getLottoNumbers().stream().filter(numbers::contains).count();
-
+    return lotto.findCount(numbers);
   }
 }
