@@ -20,6 +20,10 @@ public class WinningNumber {
         return numbers.contains(lottoNumber);
     }
 
+    public boolean matchBonusNumber(int lottoNumber) {
+        return bonusNumber == lottoNumber;
+    }
+
     private List<Integer> fromNumberInput(String input) {
         return Arrays.stream(input.split(","))
                 .map(String::trim)
