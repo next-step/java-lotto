@@ -1,7 +1,9 @@
 package step2;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class PrizeWinningNumber {
     private final List<LotteryNumber> prizeWinningNumbers;
@@ -9,14 +11,10 @@ public class PrizeWinningNumber {
     private static final int LOTTO_LENGTH = 6;
 
     public PrizeWinningNumber(String input) {
-        prizeWinningNumbers = validatePrizeWinningNumbers(input);
+        prizeWinningNumbers = validatePrizeWinningNumbers(validateInput(input));
     }
 
-    public List<Integer> getPrizeWinningNumbers() {
-        return prizeWinningNumbers;
-    }
-    private List<Integer> validatePrizeWinningNumbers(String input) {
-        List<Integer> numbers = new ArrayList<>();
+    private String[] validateInput(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("당첨 번호가 입력되지 않았습니다.");
         }
@@ -24,19 +22,20 @@ public class PrizeWinningNumber {
         if (LOTTO_LENGTH != result.length) {
             throw new IllegalArgumentException("당첨 결과의 개수가 올바르지 않습니다.");
         }
-        for (int i = 0; i < result.length; i++) {
+        return result;
+    }
+
+    private List<LotteryNumber> validatePrizeWinningNumbers(String[] result) {
+        List<LotteryNumber> numbers = new ArrayList<>();
+        for (String number : result) {
             try {
-                int matchCount = Integer.parseInt(result[i]);
-                if (matchCount < MIN_NUMBER || matchCount > MAX_NUMBER) {
-                    throw new IllegalArgumentException("당첨 번호의 범위가 올바르지 않습니다.");
-                }
-                numbers.add(matchCount);
+                numbers.add(new LotteryNumber(Integer.parseInt(number)));
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("당첨 결과가 숫자가 아닙니다.");
             }
         }
-        if (numbers.size() != numbers.stream().distinct().count()) {
-            throw new IllegalArgumentException("중복된 숫자가 있습니다.");
+        if (numbers.stream().distinct().count() != LOTTO_LENGTH) {
+            throw new IllegalArgumentException("당첨 번호는 중복되지 않는 6개의 숫자여야 합니다.");
         }
         return numbers;
     }

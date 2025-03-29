@@ -1,5 +1,7 @@
 package step2;
 
+import java.util.Arrays;
+
 public enum Winning {
     FIRST(6, 2000000000),
     THIRD(5, 1500000),
@@ -17,11 +19,9 @@ public enum Winning {
         return prize;
     }
     public static Winning valueOf(int matchCount) {
-        for (Winning winning : values()) {
-            if (winning.matchCount == matchCount) {
-                return winning;
-            }
-        }
-        return NONE;
+        return Arrays.stream(values())
+                .filter(winning -> winning.matchCount == matchCount)
+                .findFirst()
+                .orElse(NONE);
     }
 }
