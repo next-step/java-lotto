@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningNumber {
+    private final int LOTTO_MIN_NUMBER = 1;
+    private final int LOTTO_MAX_NUMBER = 45;
     private final List<Integer> numbers;
     private final int bonusNumber;
 
@@ -43,6 +45,9 @@ public class WinningNumber {
     private void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
+        }
+        if (bonusNumber < LOTTO_MIN_NUMBER || bonusNumber > LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException("보너스 번호는 1~45까지 가능합니다.");
         }
     }
 
