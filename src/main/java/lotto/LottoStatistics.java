@@ -1,19 +1,19 @@
 package lotto;
 
-import java.util.Map;
+import java.util.EnumMap;
 
 public class LottoStatistics {
     private final int lottoPrice;
-    private final Map<LottoResult, Integer> statistics;
+    private final EnumMap<LottoResult, Integer> statistics;
 
     private Integer totalPrize = null;
 
-    private LottoStatistics(int lottoPrice, Map<LottoResult, Integer> statistics) {
+    private LottoStatistics(int lottoPrice, EnumMap<LottoResult, Integer> statistics) {
         this.lottoPrice = lottoPrice;
         this.statistics = statistics;
     }
 
-    public static LottoStatistics getStatistics(int lottoPrice, Map<LottoResult, Integer> statistics) {
+    public static LottoStatistics getStatistics(int lottoPrice, EnumMap<LottoResult, Integer> statistics) {
         return new LottoStatistics(lottoPrice, statistics);
     }
 

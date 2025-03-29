@@ -9,17 +9,12 @@ public class Lotto {
 
     public static final int LOTTO_PRICE = 1000;
     public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    private Lotto(List<Integer> numbers) {
+    private Lotto(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_COUNT + "개여야 합니다.");
-        }
-        if (numbers.stream().anyMatch(number -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)) {
-            throw new IllegalArgumentException("로또 번호는 " + MIN_LOTTO_NUMBER + "이상 " + MAX_LOTTO_NUMBER + "이하의 숫자여야 합니다.");
         }
         if (numbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 서로 다른 숫자여야 합니다.");
@@ -30,9 +25,9 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private boolean isNotAscendingSorted(List<Integer> numbers) {
+    private boolean isNotAscendingSorted(List<LottoNumber> numbers) {
         for (int i = 0; i < numbers.size() - 2; i++) {
-            if (numbers.get(i) > numbers.get(i + 1)) {
+            if (numbers.get(i).get() > numbers.get(i + 1).get()) {
                 return true;
             }
         }
@@ -40,11 +35,11 @@ public class Lotto {
     }
 
     public static Lotto createRandomly() {
-        List<Integer> participants = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .boxed()
+        List<LottoNumber> participants = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
         Collections.shuffle(participants);
-        List<Integer> selectedNumbers = participants.subList(0, LOTTO_NUMBER_COUNT);
+        List<LottoNumber> selectedNumbers = participants.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(selectedNumbers);
         return new Lotto(selectedNumbers);
     }
@@ -54,18 +49,25 @@ public class Lotto {
      * @param numbers
      * 1. 6개의 숫자로 이루어져야 한다
      * 2. 각 숫자는 1이상 45이하의 숫자여야 한다
-     * 3. 중복된 숫자가 있으면 안된다
-     * 4. 숫자는 오름차순으로 정렬되어야 한다
+     * 2. 중복된 숫자가 있으면 안된다
+     * 3. 숫자는 오름차순으로 정렬되어야 한다
      * @return
      */
     public static Lotto create(List<Integer> numbers) {
-        return new Lotto(numbers);
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
     }
 
-    public int getMatchCount(Lotto winningLotto) {
-        return winningLotto.numbers.stream()
+    public int getMatchCount(Lotto otherLotto) {
+        return otherLotto.numbers.stream()
                 .mapToInt(number -> numbers.contains(number) ? 1 : 0)
                 .sum();
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     @Override

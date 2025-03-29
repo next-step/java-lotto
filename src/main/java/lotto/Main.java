@@ -7,7 +7,7 @@ public class Main {
         Lottos lottos = Lottos.buyLotto(lottoPrice);
         View.printLottoCount(lottos.getLottoCount());
         View.printLottos(lottos);
-        Lotto winningLotto = View.inputWinningLotto();
+        WinningLotto winningLotto = WinningLotto.of(View.inputWinningLotto(), View.inputBonusLottoNumber());
         LottoStatistics statistics = LottoStatistics.getStatistics(lottoPrice, lottos.getResultMap(winningLotto));
         View.printLottoStatistics(statistics);
     }

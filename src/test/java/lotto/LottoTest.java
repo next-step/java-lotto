@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static lotto.Lotto.LOTTO_NUMBER_COUNT;
-import static lotto.Lotto.MAX_LOTTO_NUMBER;
-import static lotto.Lotto.MIN_LOTTO_NUMBER;
+import static lotto.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.LottoNumber.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class LottoTest {
@@ -116,6 +116,17 @@ class LottoTest {
                 Arguments.of(Lotto.create(List.of(1, 2, 3, 4, 5, 6)), Lotto.create(List.of(1, 2, 3, 4, 5, 16)), 5),
                 Arguments.of(Lotto.create(List.of(1, 2, 3, 4, 5, 6)), Lotto.create(List.of(1, 2, 3, 14, 15, 16)), 3)
         );
+    }
+
+    @Test
+    @DisplayName("로또 번호가 포함되어 있는지 확인한다")
+    void contains() {
+        Lotto lotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber number = LottoNumber.of(1);
+        Assertions.assertThat(lotto.contains(number)).isTrue();
+
+        LottoNumber number2 = LottoNumber.of(45);
+        Assertions.assertThat(lotto.contains(number2)).isFalse();
     }
 
     private static class LottoParserForTest {
