@@ -8,7 +8,6 @@ public class RandomDrawingStrategy implements DrawingStrategy{
 
   private static final int MAX_NUMBER = 45;
   private static final List<Integer> POOL = new ArrayList<>();
-  private static final RandomDrawingStrategy LOTTO_NUMBER_GENERATOR = new RandomDrawingStrategy();
 
   static {
     for (int i = 1; i <= MAX_NUMBER; i++) {
@@ -17,10 +16,6 @@ public class RandomDrawingStrategy implements DrawingStrategy{
   }
 
   public RandomDrawingStrategy() {
-  }
-
-  public static RandomDrawingStrategy getInstance() {
-    return LOTTO_NUMBER_GENERATOR;
   }
 
   @Override
