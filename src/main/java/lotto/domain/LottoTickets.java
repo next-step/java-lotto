@@ -2,10 +2,10 @@ package lotto.domain;
 
 import java.util.*;
 
-public class LottoTicketList {
+public class LottoTickets {
     List<LottoTicket> tickets;
 
-    public LottoTicketList() {
+    public LottoTickets() {
         this.tickets = new ArrayList<>();
     }
 
@@ -35,10 +35,10 @@ public class LottoTicketList {
         return new SummaryReport(summary);
     }
 
-    public static LottoTicketList generate(int paidMoney, LottoNumberGenerator generator) {
+    public static LottoTickets generate(int paidMoney, LottoNumberGenerator generator) {
         int count = paidMoney / LottoTicket.PRICE;
 
-        LottoTicketList list = new LottoTicketList();
+        LottoTickets list = new LottoTickets();
         for (int i = 0; i < count; i++) {
             List<LottoNumber> numbers = generator.shuffle();
             list.add(new LottoTicket(numbers));

@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketList;
+import lotto.domain.LottoTickets;
 import lotto.domain.PrizeRank;
 import lotto.domain.SummaryReport;
 
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class ConsoleResultView implements ResultViewInterface {
     @Override
-    public void printTickets(LottoTicketList tickets) {
+    public void printTickets(LottoTickets tickets) {
         System.out.println(tickets.size() + "개를 구매했습니다.");
         for (LottoTicket lottoTicket : tickets.getTickets()) {
             System.out.println(lottoTicket.toString());

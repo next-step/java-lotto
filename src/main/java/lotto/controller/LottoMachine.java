@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketList;
+import lotto.domain.LottoTickets;
 import lotto.domain.SummaryReport;
 import lotto.view.InputViewInterface;
 import lotto.view.ResultViewInterface;
@@ -22,7 +22,7 @@ public class LottoMachine {
 
     public void run() {
         int paidMoney = inputView.getNumberInput(PAID_MONEY_MESSAGE);
-        LottoTicketList lottoTickets = LottoTicketList.generate(paidMoney, new LottoNumberGenerator());
+        LottoTickets lottoTickets = LottoTickets.generate(paidMoney, new LottoNumberGenerator());
         resultView.printTickets(lottoTickets);
 
         String[] winningNumber = inputView.getStringListInput(WINNING_LOTTERY_NUMBERS_MESSAGE, ",");

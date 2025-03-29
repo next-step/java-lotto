@@ -1,10 +1,10 @@
 package lotto.view;
 
-import lotto.domain.LottoTicketList;
+import lotto.domain.LottoTickets;
 import lotto.domain.SummaryReport;
 
 public interface ResultViewInterface {
-    void printTickets(LottoTicketList tickets);
+    void printTickets(LottoTickets tickets);
 
     void printSummary(SummaryReport summary);
 }
