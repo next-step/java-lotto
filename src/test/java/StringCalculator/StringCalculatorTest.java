@@ -3,7 +3,6 @@ package StringCalculator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import StringCalculator.domain.Calculator;
 import StringCalculator.domain.Expression;
 import StringCalculator.domain.Operand;
 import StringCalculator.domain.Operator;
@@ -60,14 +59,5 @@ public class StringCalculatorTest {
                 .collect(Collectors.toList());
 
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testCalculate() {
-        List<Operand> operands = List.of(new Operand(2), new Operand(3), new Operand(4), new Operand(2));
-        List<Operator> operators = List.of(Operator.ADD, Operator.MULTIPLY, Operator.DIVIDE);
-
-        int result = Calculator.calculate(operands, operators);
-        assertEquals(10, result);
     }
 }

@@ -50,6 +50,14 @@ public class Expression {
         return !input.matches("^[0-9]+( [\\+\\-\\*/] [0-9]+)*$");
     }
 
+    public int calculate() {
+        int result = operands.get(0).getValue();
+        for (int i = 0; i < operators.size(); i++) {
+            result = operators.get(i).apply(result, operands.get(i + 1).getValue());
+        }
+        return result;
+    }
+
     public List<Operator> getOperators() {
         return operators;
     }
