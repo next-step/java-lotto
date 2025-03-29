@@ -26,7 +26,7 @@ public class Main {
 
     private static void printReport(Lottos lottos, WinningLotto winningLotto) {
         Ranks ranks = winningLotto.ranks(lottos);
-        float roi = ranks.roi(lottos.totalPayment());
-        ResultView.printReport(ranks, roi);
+        LottoResult lottoResult = new LottoResult(ranks, lottos.totalPayment());
+        ResultView.printReport(lottoResult);
     }
 }
