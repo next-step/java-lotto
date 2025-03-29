@@ -12,32 +12,27 @@ import lotto.domain.WinLottoNumber;
 public class Game {
 
     public static final int LOTTO_PRICE = 1000;
-    private int gameCount;
+    private final int manualCount;
+    private final int autoCount;
+    private final List<Lotto> manualLottos = new ArrayList<>();
     private Lottos lottos;
 
-    public Game(int paidMoney) {
-        createLottos(paidMoney);
-    }
-
-    private void createLottos(int paidMoney) {
-        calculateLottoCount(paidMoney);
-        rollingLotto();
+    public Game(int paidMoney, int manualCount) {
+        this.manualCount = manualCount;
+        this.autoCount = (paidMoney / LOTTO_PRICE) - manualCount;
     }
 
     public Lottos lottos() {
         return lottos;
     }
 
-    public void calculateLottoCount(int paidMoney) {
-        gameCount = paidMoney / LOTTO_PRICE;
-    }
-
-    public void rollingLotto() {
-        List<Lotto> lotto = new ArrayList<>();
-        for (int i = 0; i < gameCount; i++) {
-            lotto.add(new Lotto(LottoGenerator.generate()));
+    public void generateAllLottos() {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "장을 구매했습니다.");
+        List<Lotto> allLottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < autoCount; i++) {
+            allLottos.add(new Lotto(LottoGenerator.generate()));
         }
-        this.lottos = new Lottos(lotto);
+        this.lottos = new Lottos(allLottos);
     }
 
     public Statistic play(List<LottoNum> winningLottoNumbers, int bonusNumber) {
@@ -46,4 +41,9 @@ public class Game {
         return new Statistic(lottos, winNumber);
     }
 
+    public void addManualLottoNumbers(List<List<LottoNum>> manualLottoNumbersList) {
+        for (List<LottoNum> numbers : manualLottoNumbersList) {
+            manualLottos.add(new Lotto(numbers));
+        }
+    }
 }

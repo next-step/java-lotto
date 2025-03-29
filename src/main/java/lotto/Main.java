@@ -12,8 +12,14 @@ public class Main {
 
     public static void main(String[] args) {
         int paidMoney = InputView.getPaidMoney();
+        int manualCount = InputView.getManualCount();
 
-        Game game = new Game(paidMoney);
+        Game game = new Game(paidMoney, manualCount);
+
+        List<List<LottoNum>> manualLottoNumbers = InputView.getManualLottoNumbers(manualCount);
+
+        game.addManualLottoNumbers(manualLottoNumbers);
+        game.generateAllLottos();
         ResultView.showLottos(game.lottos());
 
         List<LottoNum> winningLotto = InputView.lastWeekLottoNumbers();
