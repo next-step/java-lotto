@@ -31,7 +31,7 @@ public class LottoResult {
     }
 
     private void addLottoResult(Lotto purchasedLotto, WinningLotto winningLotto) {
-        LottoRank rank = purchasedLotto.calculateRank(winningLotto);
+        LottoRank rank = winningLotto.calculateRank(purchasedLotto);
         lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
     }
 

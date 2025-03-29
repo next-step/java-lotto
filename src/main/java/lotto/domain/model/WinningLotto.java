@@ -1,8 +1,6 @@
 package lotto.domain.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class WinningLotto {
     private final Lotto lotto;
@@ -22,12 +20,11 @@ public class WinningLotto {
         return new WinningLotto(lotto, bonusLottoNumber);
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
-    }
+    public LottoRank calculateRank(Lotto lotto) {
+        boolean isBonusMatched = lotto.contains(bonusNumber);
+        int matchedNum = lotto.calculateMatchedNum(this.lotto);
 
-    public Lotto getLotto() {
-        return lotto;
+        return LottoRank.of(matchedNum, isBonusMatched);
     }
 
     private static void validateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
