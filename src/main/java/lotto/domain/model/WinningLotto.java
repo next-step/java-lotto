@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WinningLotto {
-    private static final String DEFAULT_DELIMITER = ",";
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
@@ -14,8 +13,7 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto of(String inputNumbers, int bonusNumber) {
-        List<Integer> winningNumbers = convertStringToInt(inputNumbers);
+    public static WinningLotto of(List<Integer> winningNumbers, int bonusNumber) {
         validateBonusNumber(winningNumbers, bonusNumber);
 
         Lotto lotto = Lotto.createManual(winningNumbers);
@@ -30,17 +28,6 @@ public class WinningLotto {
 
     public Lotto getLotto() {
         return lotto;
-    }
-
-    private static List<Integer> convertStringToInt(String input) {
-        String[] splitInput = split(input);
-        return Stream.of(splitInput)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
-    private static String[] split(String input) {
-        return input.split(DEFAULT_DELIMITER);
     }
 
     private static void validateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
