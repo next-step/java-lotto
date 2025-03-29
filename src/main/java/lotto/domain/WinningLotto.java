@@ -13,7 +13,7 @@ public class WinningLotto {
 
     public PrizeLevel countMatchingNumbers(Lotto lotto) {
         int count = (int) lottoNumbers.stream()
-            .filter(lotto.getLottoNumbers()::contains)
+            .filter(lotto::containsNumber)
             .count();
 
         return getPrizeLevel(count);

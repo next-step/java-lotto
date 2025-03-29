@@ -48,6 +48,10 @@ public class Lotto {
         }
     }
 
+    public boolean containsNumber(int number) {
+        return lottoNumbers.contains(number);
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
