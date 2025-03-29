@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.dto.LottoStatisticsDTO;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoWinningStatisticsTest {
@@ -26,13 +28,13 @@ class LottoWinningStatisticsTest {
     @DisplayName("로또 당첨 통계 생성 테스트(0개)")
     void generateReportTest_0개() {
         LottoWinningStatistics stats = new LottoWinningStatistics(statistics);
-        List<String> report = stats.generateFormattedReport();
+        List<LottoStatisticsDTO> report = stats.getLottoStatisticsDTOs();
 
         assertThat(report).containsExactly(
-            "6개 일치 (2000000000원) - 0개",
-            "5개 일치 (1500000원) - 0개",
-            "4개 일치 (50000원) - 0개",
-            "3개 일치 (5000원) - 0개"
+            new LottoStatisticsDTO(PrizeLevel.FIRST, 0),
+            new LottoStatisticsDTO(PrizeLevel.SECOND, 0),
+            new LottoStatisticsDTO(PrizeLevel.THIRD, 0),
+            new LottoStatisticsDTO(PrizeLevel.FOURTH, 0)
         );
     }
 
@@ -44,13 +46,13 @@ class LottoWinningStatisticsTest {
         statistics.put(PrizeLevel.THIRD, 3);
         LottoWinningStatistics stats = new LottoWinningStatistics(statistics);
 
-        List<String> report = stats.generateFormattedReport();
+        List<LottoStatisticsDTO> report = stats.getLottoStatisticsDTOs();
 
         assertThat(report).containsExactly(
-            "6개 일치 (2000000000원) - 1개",
-            "5개 일치 (1500000원) - 2개",
-            "4개 일치 (50000원) - 3개",
-            "3개 일치 (5000원) - 0개"
+            new LottoStatisticsDTO(PrizeLevel.FIRST, 1),
+            new LottoStatisticsDTO(PrizeLevel.SECOND, 2),
+            new LottoStatisticsDTO(PrizeLevel.THIRD, 3),
+            new LottoStatisticsDTO(PrizeLevel.FOURTH, 0)
         );
     }
 
