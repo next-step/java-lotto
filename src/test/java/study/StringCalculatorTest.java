@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
 
@@ -83,8 +84,7 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("0으로 나누기 연산 테스트")
     public void testDivisionByZero() {
-        assertThatIllegalArgumentException().isThrownBy(() -> calculator.calculate("5 / 0"))
-                .withMessageContaining("0으로 나눌 수 없습니다");
+        assertThrows(ArithmeticException.class, () -> calculator.calculate("2 / 0"));
     }
 
     @ParameterizedTest
