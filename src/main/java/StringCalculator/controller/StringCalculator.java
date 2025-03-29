@@ -5,6 +5,7 @@ import StringCalculator.domain.Expression;
 import StringCalculator.domain.Operand;
 import StringCalculator.domain.Operator;
 import StringCalculator.view.InputView;
+import StringCalculator.view.ResultView;
 
 import java.util.List;
 
@@ -16,6 +17,6 @@ public class StringCalculator {
 
                 int result = Calculator.calculate(operands, operators);
 
-                System.out.println(result);
+                ResultView.printResult(result);
         }
 }
