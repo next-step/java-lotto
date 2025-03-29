@@ -29,10 +29,18 @@ class WinningLottoTest {
         Lotto firstRankLotto = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 6)));
         Lotto secondRankLotto = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 7)));
         Lotto thirdRankLotto = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 38)));
+        Lotto fourthRankLottoWithBonusNumber = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 7, 38)));
+        Lotto fourthRankLottoWithoutBonusNumber = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 17, 38)));
+        Lotto fifthRankLottoWithBonusNumber = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 14, 7, 38)));
+        Lotto fifthRankLottoWithoutBonusNumber = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 14, 17, 38)));
 
-        assertThat(winningLotto.checkLottoRank(firstRankLotto)).isEqualTo(Rank.FIRST);
-        assertThat(winningLotto.checkLottoRank(secondRankLotto)).isEqualTo(Rank.SECOND);
-        assertThat(winningLotto.checkLottoRank(thirdRankLotto)).isEqualTo(Rank.THIRD);
+        assertThat(winningLotto.determineLottoRank(firstRankLotto)).isEqualTo(Rank.FIRST);
+        assertThat(winningLotto.determineLottoRank(secondRankLotto)).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.determineLottoRank(thirdRankLotto)).isEqualTo(Rank.THIRD);
+        assertThat(winningLotto.determineLottoRank(fourthRankLottoWithBonusNumber)).isEqualTo(Rank.FOURTH);
+        assertThat(winningLotto.determineLottoRank(fourthRankLottoWithoutBonusNumber)).isEqualTo(Rank.FOURTH);
+        assertThat(winningLotto.determineLottoRank(fifthRankLottoWithBonusNumber)).isEqualTo(Rank.FIFTH);
+        assertThat(winningLotto.determineLottoRank(fifthRankLottoWithoutBonusNumber)).isEqualTo(Rank.FIFTH);
     }
 
 }

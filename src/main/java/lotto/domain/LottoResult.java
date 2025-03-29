@@ -35,7 +35,7 @@ public class LottoResult {
         initializeStatistics(statistics);
 
         for (Lotto lotto : lottoList) {
-            Rank rank = winningLotto.checkLottoRank(lotto);
+            Rank rank = winningLotto.determineLottoRank(lotto);
             statistics.put(rank, statistics.get(rank) + 1);
         }
 

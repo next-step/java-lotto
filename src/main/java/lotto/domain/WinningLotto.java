@@ -18,7 +18,7 @@ public class WinningLotto {
         this(Lotto.of(numbers), new LottoNumber(bonusNumber));
     }
 
-    public Rank checkLottoRank(Lotto lotto) {
+    public Rank determineLottoRank(Lotto lotto) {
         Set<LottoNumber> winningNumbers = numbers.getLottoNumbers();
         Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 

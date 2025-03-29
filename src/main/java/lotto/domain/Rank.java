@@ -12,19 +12,27 @@ public enum Rank {
 
     private final int prize;
     private final int matchCount;
-    private final boolean bonusBallMatch;
+    private final boolean isBonusNumberRequired;
 
-    Rank(int prize, int matchCount, boolean bonusBallMatch) {
+    Rank(int prize, int matchCount, boolean isBonusNumberRequired) {
         this.prize = prize;
         this.matchCount = matchCount;
-        this.bonusBallMatch = bonusBallMatch;
+        this.isBonusNumberRequired = isBonusNumberRequired;
     }
 
-    public static Rank of(int matchCount, boolean bonusBallMatch) {
+    public static Rank of(int matchCount, boolean bonusNumberMatch) {
+        if (isSecondRank(matchCount, bonusNumberMatch)) {
+            return SECOND;
+        }
+
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchCount == matchCount && rank.bonusBallMatch == bonusBallMatch)
+                .filter(rank -> rank.matchCount == matchCount && !rank.isBonusNumberRequired)
                 .findFirst()
                 .orElse(NO_PRIZE);
+    }
+
+    private static boolean isSecondRank(int matchCount, boolean bonusNumberMatch) {
+        return SECOND.matchCount == matchCount && bonusNumberMatch;
     }
 
     public int getPrize() {
