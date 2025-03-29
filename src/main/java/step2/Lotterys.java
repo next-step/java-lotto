@@ -24,23 +24,4 @@ public class Lotterys {
     public Lottery getLottery(int index) {
         return lottos.get(index);
     }
-
-    public WinningResults prizeWinning(String input) {
-        Map<Winning, Integer> prizeAmounts = initializePrizeAmounts();
-        PrizeWinningNumber prizeWinningNumber = new PrizeWinningNumber(input);
-
-        for (Lottery lotto : lottos) {
-            int matchCount = lotto.match(prizeWinningNumber.getPrizeWinningNumbers());
-            prizeAmounts.put(Winning.valueOf(matchCount), prizeAmounts.get(Winning.valueOf(matchCount)) + 1);
-        }
-        return new WinningResults(prizeAmounts);
-    }
-
-    private Map<Winning, Integer> initializePrizeAmounts() {
-        Map<Winning, Integer> prizeAmounts = new HashMap<>();
-        for (Winning winning : Winning.values()) {
-            prizeAmounts.put(winning, 0);
-        }
-        return prizeAmounts;
-    }
 }

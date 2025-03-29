@@ -14,6 +14,23 @@ public class PrizeWinningNumber {
         prizeWinningNumbers = validatePrizeWinningNumbers(validateInput(input));
     }
 
+    public WinningResults match(Lotterys lotterys) {
+        Map<Winning, Integer> prizeAmounts = initializePrizeAmounts();
+        for (int i = 0; i < lotterys.length(); i++) {
+            int matchCount = lotterys.getLottery(i).match(prizeWinningNumbers);
+            prizeAmounts.put(Winning.valueOf(matchCount), prizeAmounts.get(Winning.valueOf(matchCount)) + 1);
+        }
+        return new WinningResults(prizeAmounts);
+    }
+
+    private Map<Winning, Integer> initializePrizeAmounts() {
+        Map<Winning, Integer> prizeAmounts = new EnumMap<>(Winning.class);
+        for (Winning winning : Winning.values()) {
+            prizeAmounts.put(winning, 0);
+        }
+        return prizeAmounts;
+    }
+
     private String[] validateInput(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("당첨 번호가 입력되지 않았습니다.");
