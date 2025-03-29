@@ -14,9 +14,8 @@ public class LottoTicket {
 
     private void validate(final Set<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != TICKET_NUMBER_COUNT) {
-            final String EXCEPTION_MESSAGE_FORMAT = "로또 번호는 반드시 %d개의 숫자로 구성되어야 합니다.";
-
-            throw new IllegalArgumentException(String.format(EXCEPTION_MESSAGE_FORMAT, TICKET_NUMBER_COUNT));
+            throw new IllegalArgumentException(
+                    String.format("로또 번호는 반드시 %d개의 숫자로 구성되어야 합니다.", TICKET_NUMBER_COUNT));
         }
     }
 
