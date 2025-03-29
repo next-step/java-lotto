@@ -6,10 +6,6 @@ public class RandomNumberPickStrategy implements NumberPickStrategy {
 
   private final Random random;
 
-  public RandomNumberPickStrategy(Random random) {
-    this.random = random;
-  }
-
   public RandomNumberPickStrategy() {
     this.random = new Random();
   }
