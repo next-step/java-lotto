@@ -44,6 +44,8 @@ public class LottoNumbers {
 
     private List<Integer> auto() {
 
+        List<Integer> numbers = IntStream.rangeClosed(1, LOTTO_NUMBER_BOUND).boxed().collect(Collectors.toList());
+
         Collections.shuffle(numbers);
 
         List<Integer> lottoNumbers = new ArrayList<>(numbers.subList(0, REQUIRED_NUMBER_COUNT));
