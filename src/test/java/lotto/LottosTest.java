@@ -53,4 +53,19 @@ class LottosTest {
         assertNull(resultMap.get(LottoResult.FIFTH));
         assertEquals(1, resultMap.get(LottoResult.NONE));
     }
+
+    @Test
+    @DisplayName("로또를 합친다")
+    void merge() {
+        Lottos lottos1 = new Lottos(List.of(
+                Lotto.create(List.of(1, 2, 3, 4, 5, 6)),
+                Lotto.create(List.of(1, 2, 3, 4, 5, 45))
+        ));
+        Lottos lottos2 = new Lottos(List.of(
+                Lotto.create(List.of(1, 2, 3, 4, 5, 16)),
+                Lotto.create(List.of(1, 2, 3, 4, 15, 6))
+        ));
+        Lottos mergedLottos = lottos1.merge(lottos2);
+        assertEquals(4, mergedLottos.getLottoCount());
+    }
 }

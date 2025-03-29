@@ -43,6 +43,12 @@ public class Lottos {
         return lottos.size();
     }
 
+    public Lottos merge(Lottos otherLottos) {
+        List<Lotto> mergedLottos = new ArrayList<>(this.lottos);
+        mergedLottos.addAll(otherLottos.lottos);
+        return new Lottos(mergedLottos);
+    }
+
     @Override
     public String toString() {
         return lottos.stream()
