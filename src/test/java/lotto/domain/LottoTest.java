@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import org.assertj.core.internal.WholeNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     Lotto userLotto;
@@ -54,5 +54,26 @@ public class LottoTest {
     void 로또_순서_검증() {
         Lotto lotto = Lotto.from("6, 5, 4, 3, 2, 1");
         assertThat(lotto.isSorted()).isTrue();
+    }
+
+    @Test
+    void 로또_숫자_중복_예외() {
+        assertThatThrownBy(() ->
+            Lotto.from("1, 1, 2, 2, 3, 3")
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 로또_숫자_개수_미만_예외() {
+        assertThatThrownBy(() ->
+            Lotto.from("1, 2, 3, 4, 5")
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 로또_숫자_개수_초과_예외() {
+        assertThatThrownBy(() ->
+                Lotto.from("1, 2, 3, 4, 5, 6, 7")
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }
