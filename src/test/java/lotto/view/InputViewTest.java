@@ -31,7 +31,7 @@ public class InputViewTest {
     @DisplayName("사용자는 최종 로또 번호를 입력할 수 있다.")
     public void makeInputLottoNumber() {
         FakeInputView inputView = new FakeInputView("5, 6, 7, 8, 9, 10");
-        LotteryTicket lotteryTicket = new LotteryTicket(inputView.read());
+        LotteryTicket lotteryTicket = new LotteryTicket(inputView.parseToLottoNumbers(inputView.read()));
         assertThat(lotteryTicket.getLottoNumbersCount()).isEqualTo(6);
     }
 }

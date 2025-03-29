@@ -2,12 +2,14 @@ package lotto.domain;
 
 import lotto.domain.product.FinalResult;
 import lotto.domain.product.LotteryTicket;
+import lotto.domain.product.LottoNumber;
 import lotto.domain.product.LottoRank;
 import lotto.view.fake.FakeInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LotteryTicketTest {
 
@@ -41,5 +43,21 @@ public class LotteryTicketTest {
         result.put(4);
         Money totalPrize = result.getTotalPrize();
         assertThat(totalPrize).isEqualTo(new Money(55_000));
+    }
+
+    @Test
+    @DisplayName("로또 티켓은 1보다 작은 숫자는 만들어 질 수 없다.")
+    public void lottoNumberUnderTest() {
+        assertThatThrownBy(() -> {
+            new LottoNumber(0);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 티켓은 46보다 큰 숫자는 만들어 질 수 없다.")
+    public void lottoNumberUpperTest() {
+        assertThatThrownBy(() -> {
+            new LottoNumber(46);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
