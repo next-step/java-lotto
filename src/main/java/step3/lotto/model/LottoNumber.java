@@ -1,5 +1,7 @@
 package step3.lotto.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import step3.lotto.exception.LottoNumberException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -8,9 +10,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public final static int MAX_VALUE = 45;
     private final int value;
 
-    public LottoNumber(String value) {
-        validateLottoNumber(value);
-        this.value = Integer.parseInt(value);
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+    static {
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            CACHE.put(i, new LottoNumber(i));
+        }
     }
 
     public LottoNumber(int value) {
@@ -18,13 +22,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
-    private void validateLottoNumber(int value) {
+    public static LottoNumber of(int value) {
+        validateLottoNumber(value);
+        return CACHE.get(value);
+    }
+
+    public static LottoNumber of(String value) {
+        validateLottoNumber(value);
+        return CACHE.get(Integer.parseInt(value));
+    }
+
+    private static void validateLottoNumber(int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new LottoNumberException();
         }
     }
 
-    private void validateLottoNumber(String value) {
+    private static void validateLottoNumber(String value) {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {

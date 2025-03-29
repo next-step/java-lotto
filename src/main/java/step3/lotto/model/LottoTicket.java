@@ -19,7 +19,7 @@ public class LottoTicket {
         lottoNumbers = new ArrayList<>();
         String[] stringLottoNumbers = lottoNumbersDelimitedByComma.replaceAll(" ", "").split(",");
         for (String stringLottoNumber : stringLottoNumbers) {
-            lottoNumbers.add(new LottoNumber(stringLottoNumber));
+            lottoNumbers.add(LottoNumber.of(stringLottoNumber));
         }
     }
 
@@ -53,7 +53,7 @@ public class LottoTicket {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         String[] splitedLastWeekWinningNumbers = lastWeekWinningNumbers.replaceAll(" ", "").split(",");
         for (String winningNumber : splitedLastWeekWinningNumbers) {
-            LottoNumber lottoNumber = new LottoNumber(winningNumber);
+            LottoNumber lottoNumber = LottoNumber.of(winningNumber);
             lottoNumbers.add(lottoNumber);
         }
         validateLottoTicket(lottoNumbers);

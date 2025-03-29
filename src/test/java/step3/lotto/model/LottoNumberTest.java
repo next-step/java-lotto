@@ -16,7 +16,7 @@ public class LottoNumberTest {
         String lottoNumber = "1";
 
         // when
-        LottoNumber number = new LottoNumber(lottoNumber);
+        LottoNumber number = LottoNumber.of(lottoNumber);
 
         // then
         assertThat(number.value()).isEqualTo(1);
@@ -29,7 +29,7 @@ public class LottoNumberTest {
         String lottoNumber = "0";
 
         // when
-        assertThatThrownBy(() -> new LottoNumber(lottoNumber))
+        assertThatThrownBy(() -> LottoNumber.of(lottoNumber))
 
             // then
             .isExactlyInstanceOf(LottoNumberException.class);
@@ -42,7 +42,7 @@ public class LottoNumberTest {
         String lottoNumber = "46";
 
         // when
-        assertThatThrownBy(() -> new LottoNumber(lottoNumber))
+        assertThatThrownBy(() -> LottoNumber.of(lottoNumber))
 
             // then
             .isExactlyInstanceOf(LottoNumberException.class);
@@ -55,7 +55,7 @@ public class LottoNumberTest {
         String lottoNumber = "abc";
 
         // when
-        assertThatThrownBy(() -> new LottoNumber(lottoNumber))
+        assertThatThrownBy(() -> LottoNumber.of(lottoNumber))
 
             // then
             .isExactlyInstanceOf(LottoNumberException.class);
@@ -68,7 +68,7 @@ public class LottoNumberTest {
         String lottoNumber = "1.1";
 
         // when
-        assertThatThrownBy(() -> new LottoNumber(lottoNumber))
+        assertThatThrownBy(() -> LottoNumber.of(lottoNumber))
 
             // then
             .isExactlyInstanceOf(LottoNumberException.class);

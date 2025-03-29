@@ -24,7 +24,7 @@ public class LottoMain {
         resultView.printLottoTicketCount(lottoTickets);
 
         LottoTicket lastWeekWinningTicket = new LottoTicket(inputView.getLastWeekWinningNumbers());
-        LottoNumber bonusLottoNumber = new LottoNumber(inputView.getBonusNumber());
+        LottoNumber bonusLottoNumber = LottoNumber.of(inputView.getBonusNumber());
         resultView.printLottoResultTitle();
 
         for (LottoTicket lottoTicket : lottoTickets) {
