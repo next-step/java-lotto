@@ -27,18 +27,4 @@ public class Calculator {
         }
         return result;
     }
-
-    public static int add(String num1, String num2) { return Integer.parseInt(num1) + Integer.parseInt(num2); }
-
-    public static int subtract(String num1, String num2) {
-        return Integer.parseInt(num1) - Integer.parseInt(num2);
-    }
-
-    public static int multiply(String num1, String num2) {
-        return Integer.parseInt(num1) * Integer.parseInt(num2);
-    }
-
-    public static int divide(String num1, String num2) {
-        return Integer.parseInt(num1) / Integer.parseInt(num2);
-    }
 }

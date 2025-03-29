@@ -1,4 +1,4 @@
-package step1;
+package StringCalculator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -60,35 +60,6 @@ public class StringCalculatorTest {
                 .collect(Collectors.toList());
 
         assertEquals(expected, actual);
-    }
-
-
-    @Test
-    public void testAdd() {
-        assertEquals(4, Calculator.add("1", "3"));
-        assertEquals(1, Calculator.add("3", "-2"));
-    }
-
-    @Test
-    public void testSubtract() {
-        assertEquals(2, Calculator.subtract("3", "1"));
-        assertEquals(-1, Calculator.subtract("1", "2"));
-    }
-
-    @Test
-    public void testMultiply() {
-        assertEquals(6, Calculator.multiply("3", "2"));
-        assertEquals(0, Calculator.multiply("3", "0"));
-        assertEquals(-5, Calculator.multiply("1", "-5"));
-    }
-
-    @Test
-    public void testDivide() {
-        assertEquals(2, Calculator.divide("4", "2"));
-        assertEquals(1, Calculator.divide("3", "2"));
-        assertEquals(-2, Calculator.divide("-5", "2"));
-        assertEquals(0, Calculator.divide("0", "2"));
-        assertEquals(0, Calculator.divide("2", "5"));
     }
 
     @Test
