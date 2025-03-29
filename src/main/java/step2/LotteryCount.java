@@ -2,7 +2,7 @@ package step2;
 
 public class LotteryCount {
     private final int lottoCount;
-    private final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     public LotteryCount(int purchaseAmount) {
         if (purchaseAmount < 0) {

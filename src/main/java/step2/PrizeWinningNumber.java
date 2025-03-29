@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrizeWinningNumber {
-    private final List<Integer> prizeWinningNumbers;
-    private final String DELIMITER = ",";
-    private final int LOTTO_LENGTH = 6;
-    private final int MIN_NUMBER = 1;
-    private final int MAX_NUMBER = 45;
+    private final List<LotteryNumber> prizeWinningNumbers;
+    private static final String DELIMITER = ",";
+    private static final int LOTTO_LENGTH = 6;
 
     public PrizeWinningNumber(String input) {
         prizeWinningNumbers = validatePrizeWinningNumbers(input);

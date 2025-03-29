@@ -29,6 +29,6 @@ public class LotterysTest {
                 return List.of(1, 2, 3, 4, 5, 6);
             }
         });
-        assertThat(lotterys.getLotto(0)).isEqualTo(new Lottery(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lotterys.getLottery(0)).isEqualTo(new Lottery(List.of(1, 2, 3, 4, 5, 6)));
     }
 }

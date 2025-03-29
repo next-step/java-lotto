@@ -11,7 +11,7 @@ public class OutputView {
 
     public static void printLotteryNumbers(Lotterys lotterys) {
         for (int i = 0; i < lotterys.length(); i++) {
-            System.out.println(lotterys.getLotto(i).toString());
+            System.out.println(lotterys.getLottery(i).toString());
         }
         System.out.println();
     }

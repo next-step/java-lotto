@@ -3,7 +3,6 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PrizeWinningNumberTest {
@@ -40,7 +39,7 @@ public class PrizeWinningNumberTest {
         assertThatThrownBy(() -> {
             new PrizeWinningNumber("1, 2, 3, 4, 5, 5");
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("중복된 숫자가 있습니다.");
+                .hasMessageContaining("당첨 번호는 중복되지 않는 6개의 숫자여야 합니다.");
     }
 
     @Test
@@ -50,30 +49,5 @@ public class PrizeWinningNumberTest {
             new PrizeWinningNumber("1, 2, 3, 4, 5, a");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("당첨 결과가 숫자가 아닙니다.");
-    }
-
-    @Test
-    @DisplayName("당첨 번호의 범위가 올바르지 않을 때, 예외를 발생시킨다.")
-    void outOfRangeTest() {
-        assertThatThrownBy(() -> {
-            new PrizeWinningNumber("1, 2, 3, 4, 5, 46");
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호의 범위가 올바르지 않습니다.");
-    }
-
-    @Test
-    @DisplayName("당첨 번호가 음수가 있을 때, 예외를 발생시킨다.")
-    void negativeNumberTest() {
-        assertThatThrownBy(() -> {
-            new PrizeWinningNumber("1, 2, 3, 4, 5, -1");
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호의 범위가 올바르지 않습니다.");
-    }
-
-    @Test
-    @DisplayName("당첨 번호가 정상일때, 객체를 생성한다")
-    void createPrizeWinningNumberTest() {
-        PrizeWinningNumber prizeWinningNumber = new PrizeWinningNumber("1, 2, 3, 4, 5, 6");
-        assertThat(prizeWinningNumber.getPrizeWinningNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }
 }

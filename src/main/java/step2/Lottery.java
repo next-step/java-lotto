@@ -1,18 +1,19 @@
 package step2;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottery {
-    private final List<Integer> lottoNumbers;
+    private final List<LotteryNumber> lottoNumbers;
 
     public Lottery(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
-            throw new IllegalArgumentException("중복된 숫자가 있습니다.");
+        if (lottoNumbers.stream().distinct().count() < 6) {
+            throw new IllegalArgumentException("로또 번호는 6개 이상이어야 합니다.");
         }
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers.stream().map(LotteryNumber::new).collect(Collectors.toList());
     }
 
-    public int match(List<Integer> numbers) {
+    public int match(List<LotteryNumber> numbers) {
         return (int) numbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();

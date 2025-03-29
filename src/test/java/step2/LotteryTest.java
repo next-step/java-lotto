@@ -17,7 +17,7 @@ public class LotteryTest {
         assertThatThrownBy(() -> {
             new Lottery(numbers);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("중복된 숫자가 있습니다.");
+                .hasMessageContaining("로또 번호는 6개 이상이어야 합니다.");
     }
 
     @Test
@@ -25,7 +25,7 @@ public class LotteryTest {
     void matchTest() {
         List<Integer> lottoNumbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 8));
         Lottery lotto = new Lottery(lottoNumbers);
-        List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.match(numbers)).isEqualTo(5);
+        List<LotteryNumber> numbers = new ArrayList<>(List.of(new LotteryNumber(1), new LotteryNumber(2)));
+        assertThat(lotto.match(numbers)).isEqualTo(2);
     }
 }

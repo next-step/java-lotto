@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Lotterys {
     private List<Lottery> lottos;
-    private final int LOTTO_LENGTH = 6;
+    private static final int LOTTO_LENGTH = 6;
     public Lotterys(int count, Shuffle shuffle) {
         lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -21,7 +21,7 @@ public class Lotterys {
         return lottos.size();
     }
 
-    public Lottery getLotto(int index) {
+    public Lottery getLottery(int index) {
         return lottos.get(index);
     }
 
