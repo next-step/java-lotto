@@ -20,7 +20,7 @@ public class LottoNumbers {
 
     public LottoNumbers(String input) {
         if (!validate(input)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("잘못된 입력값");
         }
         this.numbers = Arrays.stream(input.split(DELIMITER))
                 .map(String::trim)

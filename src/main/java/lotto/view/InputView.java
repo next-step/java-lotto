@@ -9,14 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static lotto.util.Price.LOTTO_PRICE;
+
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static Amount purchase() {
         System.out.println("구입금액을 입력해 주세요.");
-        int price = scanner.nextInt();
+        Amount price = new Amount(scanner.nextInt());
+        if (price.modulo(LOTTO_PRICE) != 0) {
+            throw new IllegalArgumentException("구입금액은 " + LOTTO_PRICE.value() + "원 단위여야 합니다.");
+        }
         scanner.nextLine();
-        return new Amount(price);
+        return price;
     }
 
     public static Lottos manualLottos() {

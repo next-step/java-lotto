@@ -30,4 +30,8 @@ public class Amount {
     public long minus(Amount operand) {
         return value - operand.value;
     }
+
+    public long modulo(Amount operand) {
+        return value % operand.value;
+    }
 }
