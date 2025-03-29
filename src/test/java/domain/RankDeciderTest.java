@@ -20,22 +20,22 @@ class RankDeciderTest {
         return List.of(
                 org.junit.jupiter.params.provider.Arguments.of(
                         new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                        new WinningNumber("1,2,3,4,5,6"),
+                        new WinningNumber("1,2,3,4,5,6", "7"),
                         Rank.FIRST
                 ),
                 org.junit.jupiter.params.provider.Arguments.of(
                         new Lotto(List.of(1, 2, 3, 4, 5, 10)),
-                        new WinningNumber("1,2,3,4,5,6"),
+                        new WinningNumber("1,2,3,4,5,6", "7"),
                         Rank.SECOND
                 ),
                 org.junit.jupiter.params.provider.Arguments.of(
                         new Lotto(List.of(1, 2, 3, 4, 10, 11)),
-                        new WinningNumber("1,2,3,4,5,6"),
+                        new WinningNumber("1,2,3,4,5,6", "7"),
                         Rank.THIRD
                 ),
                 org.junit.jupiter.params.provider.Arguments.of(
                         new Lotto(List.of(1, 2, 3, 9, 10, 11)),
-                        new WinningNumber("1,2,3,4,5,6"),
+                        new WinningNumber("1,2,3,4,5,6", "7"),
                         Rank.FOURTH
                 )
         );
