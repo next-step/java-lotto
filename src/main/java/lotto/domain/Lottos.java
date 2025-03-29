@@ -35,7 +35,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Amount totalPayment() {
+    public Amount totalAmount() {
         return new Amount(LOTTO_PRICE.multiply(lottos.size()));
     }
 
@@ -45,5 +45,23 @@ public class Lottos {
 
     public boolean isAllSorted() {
         return lottos.stream().allMatch(Lotto::isSorted);
+    }
+
+    public Lottos merged(Lottos other) {
+        List<Lotto> merged = new ArrayList<>(this.lottos);
+        merged.addAll(other.lottos);
+        return new Lottos(merged);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lottos);
     }
 }

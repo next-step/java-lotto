@@ -32,4 +32,11 @@ public class LottosTest {
         Lottos lottos = Lottos.from(new Amount(2000));
         assertThat(lottos.isAllSorted()).isTrue();
     }
+
+    @Test
+    void 병합된_로또() {
+        Lottos lottos1 = new Lottos(List.of(Lotto.from("1,2,3,4,5,6")));
+        Lottos lottos2 = new Lottos(List.of(Lotto.from("11,12,13,14,15,16")));
+        assertThat(lottos1.merged(lottos2)).isEqualTo(new Lottos(List.of(Lotto.from("1,2,3,4,5,6"), Lotto.from("11,12,13,14,15,16"))));
+    }
 }

@@ -26,4 +26,8 @@ public class Amount {
     public long multiply(long multiplier) {
         return value * multiplier;
     }
+
+    public long minus(Amount operand) {
+        return value - operand.value;
+    }
 }

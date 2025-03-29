@@ -2,11 +2,11 @@ package lotto.domain;
 
 public class LottoResult {
     private final Ranks ranks;
-    private final Amount totalPayment;
+    private final Amount totalAmount;
 
-    public LottoResult(Ranks ranks, Amount totalPayment) {
+    public LottoResult(Ranks ranks, Amount totalAmount) {
         this.ranks = ranks;
-        this.totalPayment = totalPayment;
+        this.totalAmount = totalAmount;
     }
 
     public Ranks ranks() {
@@ -14,6 +14,6 @@ public class LottoResult {
     }
 
     public float roi() {
-        return ranks.totalWinningMoney().divide(totalPayment);
+        return ranks.totalWinningMoney().divide(totalAmount);
     }
 }
