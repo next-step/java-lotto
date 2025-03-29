@@ -19,17 +19,22 @@ public class WinningLotto {
     }
 
     public Rank determineLottoRank(Lotto lotto) {
+        return Rank.of(getNumberMatchCount(lotto), isBonusNumberMatched(lotto));
+    }
+
+    private int getNumberMatchCount(Lotto lotto) {
         Set<LottoNumber> winningNumbers = numbers.getLottoNumbers();
         Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
-        int matchCount = (int) lottoNumbers.stream()
+        return (int) lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
+    }
 
-        boolean bonusBallMatch = lottoNumbers.stream()
+    private boolean isBonusNumberMatched(Lotto lotto) {
+        Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+        return lottoNumbers.stream()
                 .anyMatch(bonusNumber::equals);
-
-        return Rank.of(matchCount, bonusBallMatch);
     }
 
     private void validateInputs(Lotto numbers, LottoNumber bonusNumber) {
