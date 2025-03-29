@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 import lotto.exception.LottoPriceException;
+import lotto.service.LottoFactoryService;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
@@ -24,7 +25,7 @@ public class LottoMachine {
     }
 
     public List<Lotto> getLottos() {
-        return LottoFactory.createLottos(getLottoCount());
+        return LottoFactoryService.createLottos(getLottoCount());
     }
 
     private int getLottoCount() {

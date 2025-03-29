@@ -1,14 +1,16 @@
-package lotto.domain;
+package lotto.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import lotto.domain.Lotto;
+
 import static java.util.stream.Collectors.toList;
 import static lotto.domain.Lotto.LOTTO_NUMBER_END;
 import static lotto.domain.Lotto.LOTTO_NUMBER_START;
 
-public class LottoFactory {
+public class LottoFactoryService {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     public static List<Lotto> createLottos(int lottoCount) {

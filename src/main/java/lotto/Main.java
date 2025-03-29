@@ -6,7 +6,7 @@ import java.util.Scanner;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.WinningLotto;
-import lotto.domain.LottoChecker;
+import lotto.service.LottoCheckerService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,7 +21,7 @@ public class Main {
         OutputView.printLottos(lottos);
 
         WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers());
-        LottoChecker checker = new LottoChecker(winningLotto);
+        LottoCheckerService checker = new LottoCheckerService(winningLotto);
         OutputView.printWinningStatistics(money, checker.check(lottos));
     }
 }

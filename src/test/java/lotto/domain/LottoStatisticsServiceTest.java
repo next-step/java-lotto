@@ -9,10 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.dto.LottoStatisticsDTO;
+import lotto.service.LottoStatisticsService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoWinningStatisticsTest {
+class LottoStatisticsServiceTest {
     private Map<PrizeLevel, Integer> statistics;
 
     @BeforeEach
@@ -27,7 +28,7 @@ class LottoWinningStatisticsTest {
     @Test
     @DisplayName("로또 당첨 통계 생성 테스트(0개)")
     void generateReportTest_0개() {
-        LottoWinningStatistics stats = new LottoWinningStatistics(statistics);
+        LottoStatisticsService stats = new LottoStatisticsService(statistics);
         List<LottoStatisticsDTO> report = stats.getLottoStatisticsDTOs();
 
         assertThat(report).containsExactly(
@@ -44,7 +45,7 @@ class LottoWinningStatisticsTest {
         statistics.put(PrizeLevel.FIRST, 1);
         statistics.put(PrizeLevel.SECOND, 2);
         statistics.put(PrizeLevel.THIRD, 3);
-        LottoWinningStatistics stats = new LottoWinningStatistics(statistics);
+        LottoStatisticsService stats = new LottoStatisticsService(statistics);
 
         List<LottoStatisticsDTO> report = stats.getLottoStatisticsDTOs();
 
@@ -62,7 +63,7 @@ class LottoWinningStatisticsTest {
         statistics.put(PrizeLevel.THIRD, 2);
         statistics.put(PrizeLevel.FOURTH, 10);
 
-        LottoWinningStatistics stats = new LottoWinningStatistics(statistics);
+        LottoStatisticsService stats = new LottoStatisticsService(statistics);
         int purchaseAmount = 100_000;
 
         double profitRate = stats.getProfitRate(purchaseAmount);

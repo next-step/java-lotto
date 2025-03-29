@@ -4,7 +4,7 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.dto.LottoStatisticsDTO;
-import lotto.domain.LottoWinningStatistics;
+import lotto.service.LottoStatisticsService;
 
 import static java.util.Collections.reverse;
 
@@ -29,7 +29,7 @@ public class OutputView {
         );
     }
 
-    public static void printWinningStatistics(int money, LottoWinningStatistics statistics) {
+    public static void printWinningStatistics(int money, LottoStatisticsService statistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
