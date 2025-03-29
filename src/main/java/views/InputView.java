@@ -1,6 +1,7 @@
 package views;
 
 import data.Messages;
+import domain.LottoGame;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,11 +11,10 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
-    public static final int TICKET_PRICE = 1000;
 
     public static int inputBuyAmountGetTicketCount() {
         ResultView.println(Messages.ASK_BUY_AMOUNT);
-        int ticketCount = scanner.nextInt() / TICKET_PRICE;
+        int ticketCount = scanner.nextInt() / LottoGame.TICKET_PRICE;
         System.out.printf(Messages.BUY_TICKET_COUNT_RESULT, ticketCount);
         return ticketCount;
     }
@@ -29,4 +29,10 @@ public class InputView {
         return Arrays.stream(winNumbersStr).map(Integer::parseInt).collect(Collectors.toList());
     }
 
+    public static int inputBonusNumbers() {
+
+        ResultView.println(Messages.ASK_BONUS_NUMBERS);
+
+        return scanner.nextInt();
+    }
 }

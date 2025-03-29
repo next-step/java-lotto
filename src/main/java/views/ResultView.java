@@ -1,15 +1,12 @@
 package views;
 
 import data.Messages;
-import domain.Lotto;
+import domain.Lottos;
 import domain.PrizeEnum;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ResultView {
 
@@ -21,47 +18,27 @@ public class ResultView {
         System.out.println(str);
     }
 
-    public static void printLottoNumber(List<Lotto> lottos) {
-        lottos.forEach(lotto -> println(convertToString(lotto.getLottoNumbers())));
+    public static void printLottoNumber(Lottos lottos) {
+        lottos.getLottos().forEach(lotto -> println(convertToString(lotto.getLottoNumbers())));
     }
 
     public static String convertToString(List<Integer> lottoNumbers) {
         return Arrays.toString(lottoNumbers.toArray());
     }
 
-    public static void printSummary(List<Integer> winNumbers, List<Lotto> lottos) {
-
-        Map<Long, Integer> summaryMap = getSummary(winNumbers, lottos);
-
-        BigDecimal totalAmount = BigDecimal.valueOf(lottos.size() * InputView.TICKET_PRICE);
+    public static void printSummary(Map<PrizeEnum, Integer> summaryMap, BigDecimal totalAmount) {
 
         BigDecimal sumPrizeAmount = BigDecimal.ZERO;
-
         for (PrizeEnum prizeEnum : PrizeEnum.values()) {
-
-            long hitCnt = prizeEnum.getHit();
+            int ticketCnt = Optional.ofNullable(summaryMap.get(prizeEnum)).orElse(0);
             BigDecimal prizeAmt = prizeEnum.getPrizeAmt();
-            int exactTicketCnt = summaryMap.getOrDefault(hitCnt, 0);
+            String bonusMessage = PrizeEnum.FIVE_HIT_BONUS_HIT.equals(prizeEnum) ? Messages.BONUS_HIT : Messages.BLANK;
 
-            System.out.printf(Messages.PRIZE_RESULT, hitCnt, prizeAmt.toPlainString(), exactTicketCnt);
+            sumPrizeAmount = sumPrizeAmount.add(prizeAmt.multiply(BigDecimal.valueOf(ticketCnt)));
 
-            sumPrizeAmount = sumPrizeAmount.add(prizeAmt.multiply(BigDecimal.valueOf(exactTicketCnt)));
+            System.out.printf(Messages.PRIZE_RESULT, prizeEnum.getHit(), bonusMessage, prizeAmt.toPlainString(), ticketCnt);
         }
-
         System.out.printf(Messages.TOTAL_PRIZE_RATIO, sumPrizeAmount.divide(totalAmount, 2, RoundingMode.HALF_UP).doubleValue());
-    }
-
-    private static Map<Long, Integer> getSummary(List<Integer> winNumbers, List<Lotto> lottos) {
-        Map<Long, Integer> summaryMap = new HashMap<>();
-        for (Lotto lotto : lottos) {
-            long existsCnt = lotto.getLottoNumbers()
-                    .stream()
-                    .filter(winNumbers::contains)
-                    .count();
-
-            summaryMap.put(existsCnt, summaryMap.getOrDefault(existsCnt, 0) + 1);
-        }
-        return summaryMap;
     }
 
     public static void printWinNumbers(String[] lottoNumbers) {
