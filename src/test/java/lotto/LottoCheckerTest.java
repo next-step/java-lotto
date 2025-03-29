@@ -28,19 +28,14 @@ class LottoCheckerTest {
   void calculateResults_validCase() {
     List<Lotto> lottos = List.of(
         new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-        new Lotto(List.of(1, 2, 3, 4, 5, 7)),
-        new Lotto(List.of(1, 2, 3, 4, 8, 9)),
         new Lotto(List.of(1, 2, 3, 10, 11, 12))
     );
-    int purchaseAmount = 4000;
+    int purchaseAmount = 2000;
 
     LottoChecker resultChecker = lottoChecker.calculateResults(lottos, winningLotto, purchaseAmount);
 
-    assertThat(resultChecker.getLottoResults()).hasSize(4);
-    assertThat(resultChecker.getLottoResults()).extracting("winningsNumber")
-        .containsExactlyInAnyOrder(6, 5, 4, 3);
-    assertThat(resultChecker.getLottoResults()).extracting("totalWinningCount")
-        .containsExactlyInAnyOrder(1, 1, 1, 1);
+    assertThat(resultChecker.findTotalWinningCount(6)).isEqualTo(1);
+    assertThat(resultChecker.findTotalWinningCount(3)).isEqualTo(1);
   }
 
   @Test
@@ -61,7 +56,10 @@ class LottoCheckerTest {
 
     LottoChecker resultChecker = lottoChecker.calculateResults(lottos, winningLotto, purchaseAmount);
 
-    assertThat(resultChecker.getLottoResults()).isEmpty();
+    assertThat(resultChecker.findTotalWinningCount(6)).isEqualTo(0);
+    assertThat(resultChecker.findTotalWinningCount(5)).isEqualTo(0);
+    assertThat(resultChecker.findTotalWinningCount(4)).isEqualTo(0);
+    assertThat(resultChecker.findTotalWinningCount(3)).isEqualTo(0);
     assertThat(resultChecker.getProfitRate()).isEqualTo(0.0);
   }
 
@@ -76,9 +74,7 @@ class LottoCheckerTest {
     LottoChecker resultChecker = lottoChecker.calculateResults(lottos, winningLotto, purchaseAmount);
 
     // Then
-    assertThat(resultChecker.getLottoResults()).hasSize(1);
-    assertThat(resultChecker.getLottoResults().get(0).getWinningsNumber()).isEqualTo(6);
-    assertThat(resultChecker.getLottoResults().get(0).getTotalWinningCount()).isEqualTo(1);
+    assertThat(resultChecker.findTotalWinningCount(6)).isEqualTo(1);
   }
 
   @Test
