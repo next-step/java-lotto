@@ -14,9 +14,9 @@ public class LottoTest {
 
     @Test
     void shouldReturnSixNumbers() {
-        NumberExtractor extractor = new RandomNumberExtractor();
+        NumberExtractor extractor = new RandomNumberExtractor(MIN_NUM, MAX_NUM);
         Lotto lotto = new Lotto(extractor);
-        lotto.draw(NUMBER_SIZE, MIN_NUM, MAX_NUM);
+        lotto.draw();
         List<Integer> numbers = lotto.numbers();
 
         assertThat(numbers.size()).isEqualTo(6);
@@ -24,9 +24,9 @@ public class LottoTest {
 
     @Test
     void shouldReturnBetween1And45() {
-        NumberExtractor extractor = new RandomNumberExtractor();
+        NumberExtractor extractor = new RandomNumberExtractor(MIN_NUM, MAX_NUM);
         Lotto lotto = new Lotto(extractor);
-        lotto.draw(NUMBER_SIZE, MIN_NUM, MAX_NUM);
+        lotto.draw();
         List<Integer> numbers = lotto.numbers();
 
         for (int num : numbers) {
@@ -39,7 +39,7 @@ public class LottoTest {
         int[] winNumbers = {1, 2, 3, 4, 5, 6};
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{7,8,9,10,11,12});
         Lotto lotto = new Lotto(extractor);
-        lotto.draw(NUMBER_SIZE, MIN_NUM, MAX_NUM);
+        lotto.draw();
 
         assertThat(lotto.checkMatched(winNumbers)).isEqualTo(0);
     }
@@ -49,7 +49,7 @@ public class LottoTest {
         int[] winNumbers = {1, 2, 3, 4, 5, 6};
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{4,5,6,7,8,9});
         Lotto lotto = new Lotto(extractor);
-        lotto.draw(NUMBER_SIZE, MIN_NUM, MAX_NUM);
+        lotto.draw();
 
         assertThat(lotto.checkMatched(winNumbers)).isEqualTo(3);
     }
@@ -59,7 +59,7 @@ public class LottoTest {
         int[] winNumbers = {1, 2, 3, 4, 5, 6};
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         Lotto lotto = new Lotto(extractor);
-        lotto.draw(NUMBER_SIZE, MIN_NUM, MAX_NUM);
+        lotto.draw();
 
         assertThat(lotto.checkMatched(winNumbers)).isEqualTo(6);
     }

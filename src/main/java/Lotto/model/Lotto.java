@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
+    private static final int SIZE = 6;
     private final NumberExtractor extractor;
     private List<Integer> numbers;
 
@@ -13,8 +14,8 @@ public class Lotto {
         this.extractor = extractor;
     }
 
-    public void draw(int size, int min, int max) {
-        numbers = this.extractor.extract(size, min, max);
+    public void draw() {
+        numbers = this.extractor.extract(SIZE);
         Collections.sort(numbers);
     }
 

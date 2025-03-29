@@ -29,7 +29,7 @@ public class LottoService {
 
         for (int i = 0; i < lottoNum; i++) {
             Lotto lotto = new Lotto(extractor);
-            lotto.draw(NUMBER_SIZE, MIN_NUM, MAX_NUM);
+            lotto.draw();
             lottos.add(lotto);
         }
     }
