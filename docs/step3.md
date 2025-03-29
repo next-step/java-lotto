@@ -63,3 +63,4 @@
 - 메서드이름의 check 라는 prefix 는 보통 확인하는 곳에서만 사용된다. (권한 확인, 사용 가능 여부 등) → determine, find, calculate 등등 으로 바꾸기
   -  → WinningLotto.checkLottoRank 에 대한 리뷰
 - 로또 번호 당첨 여부 확인 로직 수정 필요 → 4등 이하부터는 보너스 볼을 맞춰버리면 제대로 등수를 찾지 못하는 로직으로 되어있음.
+- getter 를 사용하여 비즈니스 로직 구현부 제거 (TDA) 
