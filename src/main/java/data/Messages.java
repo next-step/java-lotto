@@ -8,7 +8,7 @@ public class Messages {
     public static final String ASK_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String PRIZE_RESULT = "%d개 일치%s (%s원)- %d개%n";
     public static final String BONUS_HIT = ", 보너스볼 일치";
-    public static final String TOTAL_PRIZE_RATIO = "총 수익률을 %.2f입니다.";
+    public static final String TOTAL_PRIZE_RATIO = "총 수익률은 %.2f입니다.";
     public static final String ASK_BONUS_NUMBERS = "보너스 볼을 입력해 주세요.";
     public static final String BLANK = "";
 }
