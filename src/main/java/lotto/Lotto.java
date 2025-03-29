@@ -60,8 +60,8 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public int getMatchCount(Lotto winningLotto) {
-        return winningLotto.numbers.stream()
+    public int getMatchCount(Lotto otherLotto) {
+        return otherLotto.numbers.stream()
                 .mapToInt(number -> numbers.contains(number) ? 1 : 0)
                 .sum();
     }

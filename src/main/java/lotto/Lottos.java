@@ -50,9 +50,9 @@ public class Lottos {
                 .collect(Collectors.joining("\n"));
     }
 
-    public EnumMap<LottoResult, Integer> getResultMap(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+    public EnumMap<LottoResult, Integer> getResultMap(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> LottoResult.getResult(winningLotto, lotto, bonusLottoNumber))
+                .map(winningLotto::getResult)
                 .collect(Collectors.groupingBy(
                         Function.identity(),
                         () -> new EnumMap<>(LottoResult.class),

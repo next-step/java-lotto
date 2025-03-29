@@ -1,8 +1,5 @@
 package lotto;
 
-import java.util.Arrays;
-
-
 /**
  * 선언된 순서대로 출력하기 때문에 순서를 유지하면서 추가하거나 삭제해야 한다.
  */
@@ -25,35 +22,39 @@ public enum LottoResult {
         this.prize = prize;
     }
 
-    public static LottoResult getResult(Lotto winningLotto, Lotto lotto, LottoNumber bonusLottoNumber) {
-        int matchCount = lotto.getMatchCount(winningLotto);
-        return Arrays.stream(LottoResult.values())
-                .filter(lottoResult -> {
-                    boolean isCountMatched = lottoResult.matchCount == matchCount;
-                    if (lottoResult.requiresBonusMatch == BonusMatch.ANY) {
-                        return isCountMatched;
-                    }
-                    boolean isBonusMatched = lotto.contains(bonusLottoNumber);
-                    if (lottoResult.requiresBonusMatch == BonusMatch.NO) {
-                        return isCountMatched && !isBonusMatched;
-                    }
-                    return isCountMatched && isBonusMatched;
-                })
-                .findFirst()
-                .orElse(LottoResult.NONE);
-    }
-
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public BonusMatch getRequiresBonusMatch() {
+        return requiresBonusMatch;
     }
 
     public int getPrize() {
         return prize;
     }
 
-    private enum BonusMatch {
-        YES,
-        NO,
-        ANY
+    public enum BonusMatch {
+        YES {
+            @Override
+            public boolean matches(boolean bonusMatched) {
+                return bonusMatched;
+            }
+        },
+        NO {
+            @Override
+            public boolean matches(boolean bonusMatched) {
+                return !bonusMatched;
+            }
+        },
+        ANY {
+            @Override
+            public boolean matches(boolean bonusMatched) {
+                return true;
+            }
+        },
+        ;
+
+        public abstract boolean matches(boolean bonusMatched);
     }
 }

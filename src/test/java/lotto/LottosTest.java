@@ -36,7 +36,7 @@ class LottosTest {
     @Test
     @DisplayName("당첨 로또에 대한 결과를 반환한다")
     void getResultMap() {
-        Lotto winningLotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = WinningLotto.of(Lotto.create(List.of(1, 2, 3, 4, 5, 6)), LottoNumber.of(45));
         Lottos lottos = new Lottos(List.of(
                 Lotto.create(List.of(1, 2, 3, 4, 5, 6)),
                 Lotto.create(List.of(1, 2, 3, 4, 5, 45)),
@@ -45,7 +45,7 @@ class LottosTest {
                 Lotto.create(List.of(1, 2, 3, 4, 15, 16)),
                 Lotto.create(List.of(11, 12, 13, 14, 15, 16))
         ));
-        Map<LottoResult, Integer> resultMap = lottos.getResultMap(winningLotto, LottoNumber.of(45));
+        Map<LottoResult, Integer> resultMap = lottos.getResultMap(winningLotto);
         assertEquals(1, resultMap.get(LottoResult.FIRST));
         assertEquals(1, resultMap.get(LottoResult.SECOND));
         assertEquals(2, resultMap.get(LottoResult.THIRD));
