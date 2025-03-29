@@ -35,8 +35,7 @@ public class LottoResultView {
     }
 
     private void printRankStat(Map<LottoRank, Integer> statistics, LottoRank rank) {
-        System.out.println(
-            rank.getMatchCount() + "개 일치 (" + rank.getPrize().getValue()+ "원)- " + statistics.getOrDefault(rank, 0) + "개");
+        System.out.println(LottoRankFormatter.format(rank) + " - " + statistics.getOrDefault(rank, 0) + "개");
     }
 
     public void printRoi(BigDecimal roi) {

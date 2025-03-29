@@ -1,10 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchase;
 import lotto.domain.LottoShop;
 import lotto.domain.LottoStatistics;
@@ -27,7 +22,9 @@ public class LottoController {
 
         resultView.printPurchaseLotto(LottoResult.from(lottoPurchase.getLottos()));
 
-        WinningLotto winningLotto = new WinningLotto(inputView.getWinningLotto());
+        WinningLotto winningLotto = new WinningLotto(
+                inputView.getWinningLottoNumbers(),
+                inputView.getWinningLottoBonusNumber());
 
         LottoStatistics lottoStatistics = new LottoStatistics(winningLotto, lottoPurchase.getLottos());
         resultView.printStatistics(lottoStatistics);

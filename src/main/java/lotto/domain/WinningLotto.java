@@ -1,29 +1,27 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final Lotto lotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers) {
+    public WinningLotto(List<Integer> numbers, int bonusNumber) {
         this.lotto = LottoFactory.createManual(numbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
+        validate();
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return lotto.contains(lottoNumber);
+    private void validate() {
+        if (lotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스번호는 당첨번호와 동일 할 수 없습니다.");
+        }
     }
-
 
     public LottoRank getRank(Lotto lotto) {
-        return Arrays.stream(LottoRank.values())
-            .filter(rank -> rank.match(this, lotto))
-            .max(Comparator.comparing(LottoRank::getPrize))
-            .orElseThrow();
+        int matchCount = this.lotto.getMatchCount(lotto);
+        boolean bonusMatch = lotto.contains(bonusNumber);
+
+        return LottoRank.findRank(matchCount, bonusMatch);
     }
 }
