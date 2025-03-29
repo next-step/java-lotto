@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.type.LottoBundle;
+import lotto.type.LottoNumbersBundle;
 import lotto.type.LottoPrize;
 
 import java.util.Arrays;
@@ -12,8 +12,8 @@ public class OutputView {
     System.out.printf("%d개를 구매했습니다.%n", lottoCount);
   }
 
-  public static void showLottoBundle(LottoBundle lottoBundle) {
-    System.out.println(lottoBundle);
+  public static void showLottoBundle(LottoNumbersBundle lottoNumbersBundle) {
+    System.out.println(lottoNumbersBundle);
   }
 
   public static void showLottoPrize(List<LottoPrize> lottoPrizeList) {

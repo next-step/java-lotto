@@ -1,11 +1,8 @@
 package lotto;
 
-import lotto.generator.CollectionsShuffleStrategy;
-import lotto.generator.LottoNumGenerator;
-import lotto.type.BonusNum;
-import lotto.type.LottoBundle;
-import lotto.type.LottoPrize;
-import lotto.type.WinningNums;
+import lotto.strategy.pick.RandomNumberPickStrategy;
+import lotto.strategy.shuffle.CollectionsShuffleStrategy;
+import lotto.type.*;
 import lotto.util.LottoPurchaseCalculator;
 import lotto.util.ReturnRateCalculator;
 
@@ -23,18 +20,12 @@ public class LottoSystem {
 
     showLottoCount(lottoCount);
 
-    LottoBundle lottoBundle = LottoBundle.generate(
-        lottoCount,
-        new LottoNumGenerator(),
-        new CollectionsShuffleStrategy()
-    );
-    showLottoBundle(lottoBundle);
+    LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle(lottoCount, new RandomNumberPickStrategy(), new CollectionsShuffleStrategy());
+    showLottoBundle(lottoNumbersBundle);
 
-    WinningNums winningNums = WinningNums.valueOf(showWinningNums());
-    BonusNum bonusNum = BonusNum.valueOf(showBonusNumInput(), winningNums);
-    List<LottoPrize> lottoPrizeList = lottoBundle.getLottoPrizes(winningNums, bonusNum);
-
+    List<LottoPrize> lottoPrizeList = lottoNumbersBundle.getLottoPrizes(new LottoNumbers(showWinningNums()), new LottoNumber(showBonusNumInput()));
     showLottoPrize(lottoPrizeList);
+
     showReturnRate(ReturnRateCalculator.calculate(price, LottoPrize.getTotalPrize(lottoPrizeList)));
   }
 }
