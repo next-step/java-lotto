@@ -15,17 +15,18 @@ public class InputView {
         scanner.nextLine();
         return money;
     }
+
     public static int getManualCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualCount = scanner.nextInt();
         scanner.nextLine();
         return manualCount;
     }
+
     public static List<List<LottoNum>> getManualLottoNumbers(int manualCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<List<LottoNum>> manualLottoNumbers = new ArrayList<>();
         while (manualLottoNumbers.size() < manualCount) {
-            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
             String manualLottoNumber = scanner.nextLine();
             manualLottoNumbers.add(convertStringToList(manualLottoNumber));
         }
