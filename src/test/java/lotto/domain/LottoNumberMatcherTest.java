@@ -42,6 +42,10 @@ public class LottoNumberMatcherTest {
         LottoNumberMatcher matcher = new LottoNumberMatcher(lottoNumbers, winningLottoNumbers);
         LottoWinningRecord record = matcher.result();
 
+        assertThat(record.lottoRankMap().get(LottoRank.MATCH_3)).isEqualTo(0);
+        assertThat(record.lottoRankMap().get(LottoRank.MATCH_4)).isEqualTo(0);
+        assertThat(record.lottoRankMap().get(LottoRank.MATCH_5)).isEqualTo(0);
+        assertThat(record.lottoRankMap().get(LottoRank.MATCH_6)).isEqualTo(0);
         assertThat(record.totalLottoPrizeAmount()).isEqualTo(0);
     }
 }
