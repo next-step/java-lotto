@@ -3,6 +3,8 @@ package domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -14,5 +16,15 @@ class LottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         Assertions.assertThat(lotto.matchCount(winningNumber)).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 번호와 보너스 번호의 일치 여부를 반환한다.")
+    @CsvSource({"7, true", "8, false"})
+    void 로또_번호_보너스_번호_일치_여부(String bonusNumberInput, boolean expected) {
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", bonusNumberInput);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+
+        Assertions.assertThat(lotto.matchBonusNumber(winningNumber)).isEqualTo(expected);
     }
 }
