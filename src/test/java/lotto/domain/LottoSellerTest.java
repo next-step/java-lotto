@@ -14,7 +14,7 @@ class LottoSellerTest {
     @Test
     void createTest() {
         // given
-        int money = 14000;
+        Money money = new Money(14000);
 
         // when
         LottoSeller lottoSeller = new LottoSeller(money);
@@ -26,7 +26,7 @@ class LottoSellerTest {
     @DisplayName("로또보다 돈이 모자른 경우 예외가 발생한다.")
     @Test
     void checkMoneyTest() {
-        int money = 999;
+        Money money = new Money(999);
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoSeller(money))
                 .withMessage("money is less than " + PRICE);
@@ -36,7 +36,7 @@ class LottoSellerTest {
     @Test
     void generateLottosTest() {
         // given
-        LottoSeller lottoSeller = new LottoSeller(10000);
+        LottoSeller lottoSeller = new LottoSeller(new Money(10000));
 
         // when
         List<Lotto> lottos = lottoSeller.generateLottos(new AutomaticStrategy());

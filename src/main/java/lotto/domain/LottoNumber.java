@@ -3,6 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+
     private final int value;
 
     public LottoNumber(String value) {
@@ -15,8 +18,8 @@ public class LottoNumber {
     }
 
     private void checkValue(int value) {
-        if (value < 1 || value > 45) {
-            throw new IllegalArgumentException("LottoNumber is between 1 and 45");
+        if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("invalid Lotto number : " + value);
         }
     }
 
