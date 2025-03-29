@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static java.util.Arrays.stream;
+
 public enum PrizeLevel {
     FIRST(6, 2_000_000_000, "6개 일치 (2000000000원)"),
     SECOND(5, 1_500_000, "5개 일치 (1500000원)"),
@@ -18,13 +20,10 @@ public enum PrizeLevel {
     }
 
     public static PrizeLevel getPrizeLevel(int matchingCount) {
-        for (PrizeLevel level : values()) {
-            if (level.matchingCount == matchingCount) {
-                return level;
-            }
-        }
-
-        return NO_PRIZE;
+        return stream(values())
+            .filter(level -> level.matchingCount == matchingCount)
+            .findFirst()
+            .orElse(NO_PRIZE);
     }
 
     public int getPrice() {
