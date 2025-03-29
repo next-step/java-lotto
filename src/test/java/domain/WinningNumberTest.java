@@ -17,4 +17,10 @@ class WinningNumberTest {
     void 보너스번호_중복() {
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumber("1, 2, 3, 4, 5, 6", "6"));
     }
+
+    @Test
+    @DisplayName("보너스 번호 입력 시 1~45 사이의 숫자가 아니면 IllegalArgumentException 이 발생한다.")
+    void 보너스번호_범위() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumber("1, 2, 3, 4, 5, 6", "46"));
+    }
 }
