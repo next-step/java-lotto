@@ -1,37 +1,44 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.util.Prize;
-import lotto.util.Reporter;
+import lotto.domain.*;
+import lotto.domain.Number;
 
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printLottos(Lottos lottos) {
         StringBuilder sb = new StringBuilder();
-        sb.append(lottos.getSize()).append("개를 구매했습니다.\n");
-        for (Lotto lotto : lottos.getAllLottos()) {
-            sb.append(lotto.toString());
+        sb.append(lottos.size()).append("개를 구매했습니다.\n");
+        for (Lotto lotto : lottos.values()) {
+            sb.append(lotto.values().stream()
+                    .map(Number::value)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", ")));
             sb.append("\n");
         }
         System.out.println(sb);
     }
 
-    public static void printReport(Lottos lottos, Lotto winningNumbers) {
-        Map<Integer, Integer> matchNums = lottos.getMatchNums(winningNumbers);
-
+    public static void printReport(Ranks ranks, float roi) {
         StringBuilder sb = new StringBuilder();
         sb.append("당첨 통계\n");
         sb.append("---------\n");
-        for (Prize prize : Prize.values()) {
-            sb.append(prize.number()).append("개 일치 (")
-                    .append(prize.money())
-                    .append("원)- ")
-                    .append(matchNums.getOrDefault(prize.number(), 0))
-                    .append("개)\n");
+        for (Rank rank : Rank.values()) {
+            sb.append(rank.countOfMatch()).append("개 일치");
+            if (rank.equals(Rank.SECOND)) {
+                sb.append(", 보너스 볼 일치");
+            }
+            sb.append(" (")
+                .append(rank.winningMoney())
+                .append("원)- ")
+                .append(ranks.values().stream()
+                        .filter(r -> r.equals(rank))
+                        .count())
+                .append("개)\n");
         }
-        sb.append("총 수익률은 ").append(Reporter.getROI(matchNums, lottos.getSize())).append("입니다\n");
+
+        sb.append("총 수익률은 ").append(roi).append("입니다\n");
         System.out.println(sb);
     }
 }

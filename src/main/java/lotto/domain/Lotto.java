@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -13,18 +13,17 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto from(List<Integer> numbers) {
-        return new Lotto(
-                numbers.stream()
-                        .sorted(Comparator.comparingInt(Integer::intValue))
-                        .map(Number::new)
-                        .collect(Collectors.toList())
-        );
+    public static Lotto from(String input) {
+        return new Lotto(Arrays.stream(input.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .sorted()
+                .map(Number::new)
+                .collect(Collectors.toList()));
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
+    public List<Number> values() {
+        return numbers;
     }
 
     @Override
@@ -39,10 +38,8 @@ public class Lotto {
         return Objects.hashCode(numbers);
     }
 
-    public int getMatchNum(Lotto other) {
-        return (int) numbers.stream()
-                .filter(other.numbers::contains)
-                .count();
+    public boolean contains(Number number) {
+        return numbers.contains(number);
     }
 
     public boolean isValidRange() {

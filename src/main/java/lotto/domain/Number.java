@@ -9,10 +9,6 @@ public class Number {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public boolean isValidRange() {
         return value >= 1 && value <= 45;
     }
@@ -33,8 +29,7 @@ public class Number {
         return Objects.hashCode(value);
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(value);
+    public int value() {
+        return value;
     }
 }

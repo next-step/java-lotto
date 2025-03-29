@@ -1,29 +1,32 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class Main {
     public static void main(String[] args) {
         Lottos lottos = purchageLottos();
-        Lotto winningNumbers = inputWinningNumbers();
-        printReport(lottos, winningNumbers);
+        WinningLotto winningLotto = inputWinningLotto();
+        printReport(lottos, winningLotto);
     }
 
     private static Lottos purchageLottos() {
-        int inputPrice = InputView.purchase();
-        Lottos lottos = Lottos.from(inputPrice);
+        Lottos lottos = Lottos.from(InputView.purchase());
         ResultView.printLottos(lottos);
         return lottos;
     }
 
-    private static Lotto inputWinningNumbers() {
-        return InputView.winningNumbers();
+    private static WinningLotto inputWinningLotto() {
+        return new WinningLotto(
+                InputView.winningNumbers(),
+                InputView.BonusNumber()
+        );
     }
 
-    private static void printReport(Lottos lottos, Lotto winningNumbers) {
-        ResultView.printReport(lottos, winningNumbers);
+    private static void printReport(Lottos lottos, WinningLotto winningLotto) {
+        Ranks ranks = winningLotto.ranks(lottos);
+        float roi = ranks.roi(lottos.totalPayment());
+        ResultView.printReport(ranks, roi);
     }
 }

@@ -14,34 +14,29 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos from(int inputPrice) {
+    public static Lottos from(Amount amount) {
         List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < inputPrice / LOTTO_PRICE; i++) {
+        for (int i = 0; i < amount.divide(LOTTO_PRICE); i++) {
             Collections.shuffle(TotalNumbers.NUMBERS);
             result.add(new Lotto(TotalNumbers.NUMBERS.subList(0, 6)
                             .stream()
-                            .sorted(Comparator.comparingInt(Number::getValue))
+                            .sorted(Comparator.comparingInt(Number::value))
                             .collect(Collectors.toList())
             ));
         }
         return new Lottos(result);
     }
 
-    public List<Lotto> getAllLottos() {
+    public List<Lotto> values() {
         return lottos;
     }
 
-    public int getSize() {
+    public int size() {
         return lottos.size();
     }
 
-    public Map<Integer, Integer> getMatchNums(Lotto winningNumbers) {
-        Map<Integer, Integer> matchNums = new HashMap<>();
-        for (Lotto lotto : lottos) {
-            int matchNum = lotto.getMatchNum(winningNumbers);
-            matchNums.put(matchNum, matchNums.getOrDefault(matchNum, 0) + 1);
-        }
-        return matchNums;
+    public Amount totalPayment() {
+        return new Amount(LOTTO_PRICE.multiply(lottos.size()));
     }
 
     public boolean isAllValidRange() {
