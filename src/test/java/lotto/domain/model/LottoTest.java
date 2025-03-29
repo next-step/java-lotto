@@ -18,7 +18,7 @@ class LottoTest {
     }
 
     static Stream<Arguments> provideLottoTestCases() {
-        WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6", 7);
+        WinningLotto winningLotto = WinningLotto.of(List.of(1,2,3,4,5,6), 7);
         return Stream.of(
                 Arguments.of(Lotto.createManual(List.of(1,2,3,4,5,6)), winningLotto, LottoRank.FIRST),
                 Arguments.of(Lotto.createManual(List.of(1,2,3,4,5,7)), winningLotto, LottoRank.SECOND),

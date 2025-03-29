@@ -12,7 +12,7 @@ class LottoResultTest {
     @Test
     @DisplayName("당첨되지 않은 경우")
     void noWinning() {
-        WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6", 7);
+        WinningLotto winningLotto = WinningLotto.of(List.of(1,2,3,4,5,6), 7);
         Lotto nonWinningLotto1 = Lotto.createManual(List.of(7, 8, 9, 10, 11, 12));
         Lotto nonWinningLotto2 = Lotto.createManual(List.of(13, 14, 15, 16, 17, 18));
 
@@ -25,7 +25,7 @@ class LottoResultTest {
     @Test
     @DisplayName("4등 당첨 1개, 나머지 당첨 안 된 경우")
     void singleWinning() {
-        WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6", 7);
+        WinningLotto winningLotto = WinningLotto.of(List.of(1,2,3,4,5,6), 7);
         Lotto fourthRankLotto = Lotto.createManual(List.of(1, 2, 3, 4, 8, 9));
         Lotto nonWinningLotto = Lotto.createManual(List.of(10, 11, 12, 13, 14, 15));
 
@@ -42,7 +42,7 @@ class LottoResultTest {
     @Test
     @DisplayName("여러 등수 당첨 테스트")
     void multipleWinnings() {
-        WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6", 7);
+        WinningLotto winningLotto = WinningLotto.of(List.of(1,2,3,4,5,6), 7);
 
         Lotto firstRankLotto = Lotto.createManual(List.of(1, 2, 3, 4, 5, 6));
         Lotto secondRankLotto = Lotto.createManual(List.of(1, 2, 3, 4, 5, 7));
