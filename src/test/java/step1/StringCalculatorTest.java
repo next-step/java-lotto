@@ -30,13 +30,13 @@ public class StringCalculatorTest {
     })
     public void testValidateInputFormat(String input, String expectedMessage) {
         if ("none".equals(expectedMessage)) {
-            boolean result = InputView.isValidInputFormat(input);
+            boolean result = InputView.isInvalidInputFormat(input);
             assertTrue(result);
             return;
         }
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> InputView.isValidInputFormat(input))
+                .isThrownBy(() -> InputView.isInvalidInputFormat(input))
                 .withMessage(expectedMessage);
     }
 

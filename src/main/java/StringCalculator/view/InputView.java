@@ -12,7 +12,7 @@ public class InputView {
             try {
                 System.out.println("수식을 입력하세요: (예: 2 + 3 * 4 / 2)");
                 String input = SCANNER.nextLine();
-                if (!isValidInputFormat(input)) {
+                if (isInvalidInputFormat(input)) {
                     System.out.println("제대로 된 형식으로 입력해 주세요. (예: 2 + 3 * 4 / 2)");
                     continue;
                 }
@@ -23,11 +23,11 @@ public class InputView {
         }
     }
 
-    public static boolean isValidInputFormat(String input) {
+    public static boolean isInvalidInputFormat(String input) {
         if (input == null || input.isBlank() || input.trim().isEmpty()) {
             return false;
         }
-        return input.matches("^[0-9]+( [\\+\\-\\*/] [0-9]+)*$");
+        return !input.matches("^[0-9]+( [\\+\\-\\*/] [0-9]+)*$");
     }
 }
 
