@@ -37,6 +37,16 @@ public class Lotto {
         return Lotto.of(Lotto.LOTTO_NUMBER_CACHE.subList(0, LOTTO_NUMBER_COUNT));
     }
 
+    public int countNumberMatchCount(Set<LottoNumber> numbers) {
+        return (int) lottoNumbers.stream()
+                .filter(numbers::contains)
+                .count();
+    }
+
+    public boolean isNumberMatched(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
     private static void addUniqueLottoNumber(LottoNumber lottoNumber, Set<LottoNumber> lottoNumbers) {
         if (isNotUniqueLottoNumber(lottoNumber, lottoNumbers)) {
             throw new IllegalArgumentException("중복되는 번호가 있습니다. 중복된 번호: " + lottoNumber);
