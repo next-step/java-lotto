@@ -4,6 +4,7 @@ package StringCalculator.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Expression {
     private final List<Operator> operators;
@@ -32,11 +33,14 @@ public class Expression {
     }
 
     private void validateDivisionByZero() {
-        for (int i = 0; i < operators.size(); i++) {
-            if (operators.get(i).isDivision() && operands.get(i + 1).getValue() == 0) {
-                throw new IllegalArgumentException("나누기 연산에서 0을 사용할 수 없습니다.");
-            }
+        if (IntStream.range(0, operators.size())
+                .anyMatch(this::isDivisionByZero)) {
+            throw new IllegalArgumentException("나누기 연산에서 0을 사용할 수 없습니다.");
         }
+    }
+
+    private boolean isDivisionByZero(int index) {
+        return operators.get(index).isDivision() && operands.get(index + 1).getValue() == 0;
     }
 
     public List<Operator> getOperators() {
