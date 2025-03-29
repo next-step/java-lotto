@@ -9,9 +9,9 @@ public class LottoGame {
         this.generator = generator;
     }
 
-    public void run(String amountInput, String winningNumberInput) {
+    public void run(String amountInput, String winningNumberInput, String bonusNumberInput) {
         PurchaseAmount purchaseAmount = new PurchaseAmount(Integer.parseInt(amountInput));
-        WinningNumber winningNumber = new WinningNumber(winningNumberInput);
+        WinningNumber winningNumber = new WinningNumber(winningNumberInput, bonusNumberInput);
 
         int lottoCount = purchaseAmount.countOfLotto();
 

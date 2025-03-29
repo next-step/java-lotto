@@ -5,26 +5,53 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningNumber {
+    private final int LOTTO_MIN_NUMBER = 1;
+    private final int LOTTO_MAX_NUMBER = 45;
     private final List<Integer> numbers;
+    private final int bonusNumber;
 
-    public WinningNumber(String input) {
-        List<Integer> inputNumbers = from(input);
-        validate(inputNumbers);
+    public WinningNumber(String numberInput, String bonusNumberInput) {
+        List<Integer> inputNumbers = fromNumberInput(numberInput);
+        int bonusNumber = fromBonusNumberInput(bonusNumberInput);
+        validate(inputNumbers, bonusNumber);
         this.numbers = inputNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public boolean contains(int lottoNumber) {
+    public boolean containsNumbers(int lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 
-    private List<Integer> from(String input) {
+    public boolean matchBonusNumber(int lottoNumber) {
+        return bonusNumber == lottoNumber;
+    }
+
+    private List<Integer> fromNumberInput(String input) {
         return Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    private void validate(List<Integer> numbers) {
+    private int fromBonusNumberInput(String bonusNumberInput) {
+        return Integer.parseInt(bonusNumberInput);
+    }
+
+    private void validate(List<Integer> numbers, int bonusNumber) {
+        validateDuplicateNumbers(numbers);
+        validateBonusNumber(numbers, bonusNumber);
+    }
+
+    private void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
+        }
+        if (bonusNumber < LOTTO_MIN_NUMBER || bonusNumber > LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException("보너스 번호는 1~45까지 가능합니다.");
+        }
+    }
+
+    private static void validateDuplicateNumbers(List<Integer> numbers) {
         List<Integer> distinctNumbers = numbers.stream()
                 .distinct()
                 .collect(Collectors.toList());

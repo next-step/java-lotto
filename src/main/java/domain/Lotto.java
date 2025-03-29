@@ -12,8 +12,13 @@ public class Lotto {
 
     public int matchCount(WinningNumber winningNumber) {
         return (int) numbers.stream()
-                .filter(winningNumber::contains)
+                .filter(winningNumber::containsNumbers)
                 .count();
+    }
+
+    public boolean matchBonusNumber(WinningNumber winningNumber) {
+        return numbers.stream()
+                .anyMatch(winningNumber::matchBonusNumber);
     }
 
     public List<Integer> getLottoNumbers() {

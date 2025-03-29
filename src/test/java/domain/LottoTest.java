@@ -1,18 +1,33 @@
-package domain;
+package utils;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import java.util.Scanner;
 
-import java.util.List;
+public class InputView {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String WINNING_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-class LottoTest {
-    @Test
-    @DisplayName("로또 번호와 당첨 번호의 일치 개수를 반환해야한다.")
-    void 로또_번호_당첨_번호_일치_개수() {
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+    public String inputExpression() {
+        return scanner.nextLine();
+    }
 
-        Assertions.assertThat(lotto.matchCount(winningNumber)).isEqualTo(6);
+    public static String inputPurchaseAmount() {
+        System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
+        return scanner.nextLine();
+    }
+
+    public static String inputWinningNumbers() {
+        System.out.println(WINNING_NUMBERS_INPUT_MESSAGE);
+        return scanner.nextLine();
+    }
+
+    public static String inputBonusNumber() {
+        System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
+        return scanner.nextLine();
+    }
+
+    public static int toInt(String input) {
+        return Integer.parseInt(input);
     }
 }

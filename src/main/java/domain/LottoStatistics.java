@@ -3,13 +3,15 @@ package domain;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoStatistics {
     private final Map<Rank, Integer> statistics = new EnumMap<>(Rank.class);
 
     public LottoStatistics(List<Rank> ranks) {
-        ranks.forEach(rank ->
-                statistics.put(rank, statistics.getOrDefault(rank, 0) + 1)
+        ranks.stream()
+                .filter(Objects::nonNull)
+                .forEach(rank -> statistics.put(rank, statistics.getOrDefault(rank, 0) + 1)
         );
     }
 
