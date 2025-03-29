@@ -14,9 +14,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos from(Amount amount) {
+    public static Lottos from(int lottoCount) {
         List<Lotto> result = new ArrayList<>();
-        for (int i = 0; i < amount.divide(LOTTO_PRICE); i++) {
+        for (int i = 0; i < lottoCount; i++) {
             Collections.shuffle(TotalNumbers.NUMBERS);
             result.add(new Lotto(TotalNumbers.NUMBERS.subList(0, 6)
                             .stream()

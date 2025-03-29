@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.util.Price.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
@@ -16,20 +15,20 @@ public class LottosTest {
     }
 
     @Test
-    void 가격으로_생성_시_개수_검증() {
-        Lottos lottos = Lottos.from(new Amount(2000));
-        assertThat(lottos.size()).isEqualTo(2000 / LOTTO_PRICE.value());
+    void 개수로_생성_시_검증() {
+        Lottos lottos = Lottos.from(2);
+        assertThat(lottos.size()).isEqualTo(2);
     }
 
     @Test
-    void 가격으로_생성_시_값_검증() {
-        Lottos lottos = Lottos.from(new Amount(2000));
+    void 개수로_생성_시_값_검증() {
+        Lottos lottos = Lottos.from(2);
         assertThat(lottos.isAllValidRange()).isTrue();
     }
 
     @Test
-    void 가격으로_생성_시_정렬_검증() {
-        Lottos lottos = Lottos.from(new Amount(2000));
+    void 개수로_생성_시_정렬_검증() {
+        Lottos lottos = Lottos.from(2);
         assertThat(lottos.isAllSorted()).isTrue();
     }
 

@@ -12,11 +12,9 @@ public class Main {
     }
 
     private static Lottos purchageLottos() {
-        Amount inputAmount = InputView.purchase();
-        Lottos manualLottos = InputView.manualLottos();
-
-        Amount autoLottoAmount = new Amount(inputAmount.minus(manualLottos.totalAmount()));
-        Lottos autoLottos = Lottos.from(autoLottoAmount);
+        int totalLottoCount = InputView.purchase();
+        Lottos manualLottos = InputView.manualLottos(totalLottoCount);
+        Lottos autoLottos = Lottos.from(totalLottoCount - manualLottos.size());
 
         ResultView.printLottos(manualLottos, autoLottos);
         return manualLottos.merged(autoLottos);
