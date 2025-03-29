@@ -4,10 +4,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static lotto.domain.LottoNumber.*;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final List<LottoNumber> LOTTO_NUMBER_CACHE = LottoNumber.cacheLottoNumbers();
+    private static final List<LottoNumber> LOTTO_NUMBER_CACHE = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
 
     private final Set<LottoNumber> lottoNumbers;
 
