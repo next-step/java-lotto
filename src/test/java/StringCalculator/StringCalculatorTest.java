@@ -43,7 +43,7 @@ public class StringCalculatorTest {
     @Test
     public void testGetOperands() {
         String expression = "2 + 3 * 4 / 2";
-        List<Operand> operands = Expression.filterOperands(expression);
+        List<Operand> operands = Expression.parseOperands(expression);
         List<Operand> expected = List.of(new Operand(2), new Operand(3), new Operand(4), new Operand(2));
 
         assertEquals(expected, operands, "Operands should match the expected values.");
@@ -51,8 +51,8 @@ public class StringCalculatorTest {
 
     @Test
     public void testGetOperators() {
-        String expression = "2 + 3 * 4 / 2";
-        List<Operator> operators = Expression.filterOperators(expression);
+        String input = "2 + 3 * 4 / 2";
+        List<Operator> operators = Expression.parseOperators(input);
 
         List<String> expected = List.of("+", "*", "/");
         List<String> actual = operators.stream()
@@ -65,7 +65,7 @@ public class StringCalculatorTest {
     @Test
     public void testCalculate() {
         List<Operand> operands = List.of(new Operand(2), new Operand(3), new Operand(4), new Operand(2));
-        List<Operator> operators = List.of(new Operator("+"), new Operator("*"), new Operator("/"));
+        List<Operator> operators = List.of(Operator.ADD, Operator.MULTIPLY, Operator.DIVIDE);
 
         int result = Calculator.calculate(operands, operators);
         assertEquals(10, result);
