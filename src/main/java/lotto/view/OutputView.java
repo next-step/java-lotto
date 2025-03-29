@@ -8,8 +8,8 @@ import java.util.List;
 
 public class OutputView {
 
-  public static void showLottoCount(int lottoCount) {
-    System.out.printf("%d개를 구매했습니다.%n", lottoCount);
+  public static void showLottoCount(int toCreateLottoCount, int manualLottoCount) {
+    System.out.printf("%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount, toCreateLottoCount);
   }
 
   public static void showLottoBundle(LottoNumbersBundle lottoNumbersBundle) {

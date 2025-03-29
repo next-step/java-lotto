@@ -1,7 +1,6 @@
 package lotto.type;
 
-import lotto.strategy.pick.RandomNumberPickStrategy;
-import lotto.strategy.shuffle.ShuffleStrategy;
+import lotto.LottoCreateStrategyContext;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,10 +14,35 @@ public class LottoNumbersBundle {
     this.bundle = bundle;
   }
 
-  public LottoNumbersBundle(int lottoCount, RandomNumberPickStrategy randomNumberPickStrategy, ShuffleStrategy shuffleStrategy) {
-    this(IntStream.range(0, lottoCount)
-        .mapToObj(i -> LottoNumbers.generate(shuffleStrategy, randomNumberPickStrategy))
-        .collect(java.util.stream.Collectors.toList()));
+  public LottoNumbersBundle(
+      int lottoCount,
+      LottoCreateStrategyContext lottoCreateStrategyContext
+  ) {
+    this(
+        IntStream.range(0, lottoCount)
+            .mapToObj(i -> LottoNumbers.generate(lottoCreateStrategyContext.getShuffleStrategy(), lottoCreateStrategyContext.getNumberPickStrategy()))
+            .collect(Collectors.toList())
+    );
+  }
+
+  public LottoNumbersBundle(
+      int toCreateLottoNumbersCount,
+      List<String> manualCreatedLottoNumbersBundle,
+      LottoCreateStrategyContext lottoCreateStrategyContext
+  ) {
+    if (toCreateLottoNumbersCount < 0) {
+      throw new IllegalArgumentException("총 구매한 로또수 보다 수동으로 입력한 값이 많습니다.");
+    }
+
+    List<LottoNumbers> res = manualCreatedLottoNumbersBundle.stream().map(LottoNumbers::new).collect(Collectors.toList());
+
+    res.addAll(
+        IntStream.range(0, toCreateLottoNumbersCount)
+            .mapToObj(i -> LottoNumbers.generate(lottoCreateStrategyContext.getShuffleStrategy(), lottoCreateStrategyContext.getNumberPickStrategy()))
+            .collect(Collectors.toList())
+    );
+
+    this.bundle = res;
   }
 
   public List<LottoPrize> getLottoPrizes(LottoNumbers winningNumbers, LottoNumber bonusLottoNumber) {

@@ -1,6 +1,6 @@
 package lotto.type;
 
-import lotto.strategy.pick.RandomNumberPickStrategy;
+import lotto.strategy.pick.NumberPickStrategy;
 import lotto.strategy.shuffle.ShuffleStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,7 +64,7 @@ class LottoNumbersTest {
   @Test
   public void testGenerate() {
     ShuffleStrategy shuffleStrategyStub = lottoNumbers -> lottoNumbers;
-    RandomNumberPickStrategy randomNumberPickStrategyStub = new RandomNumberPickStrategy() {
+    NumberPickStrategy numberPickStrategyStub = new NumberPickStrategy() {
       private final Iterator<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6).iterator();
 
       @Override
@@ -76,7 +76,7 @@ class LottoNumbersTest {
       }
     };
 
-    LottoNumbers lottoNumbers = LottoNumbers.generate(shuffleStrategyStub, randomNumberPickStrategyStub);
+    LottoNumbers lottoNumbers = LottoNumbers.generate(shuffleStrategyStub, numberPickStrategyStub);
     LottoNumbers expectedNumbers = new LottoNumbers(Arrays.asList(
         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
         new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)

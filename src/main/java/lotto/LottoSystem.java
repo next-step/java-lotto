@@ -20,10 +20,16 @@ public class LottoSystem {
   public static void main(String[] args) {
     int price = showPriceInput();
     int lottoCount = LottoPurchaseCalculator.toLottoCount(price);
+    List<String> manualLottoNumbersBundle = showManualLottoNumbersBundle(showManualPurchaseCount());
+    int toCreateLottoCount = lottoCount - manualLottoNumbersBundle.size();
+    LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle(
+        toCreateLottoCount,
+        manualLottoNumbersBundle,
+        new LottoCreateStrategyContext(new RandomNumberPickStrategy(), new CollectionsShuffleStrategy())
+    );
 
-    showLottoCount(lottoCount);
+    showLottoCount(toCreateLottoCount, manualLottoNumbersBundle.size());
 
-    LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle(lottoCount, new RandomNumberPickStrategy(), new CollectionsShuffleStrategy());
     showLottoBundle(lottoNumbersBundle);
 
     List<LottoPrize> lottoPrizeList = lottoNumbersBundle.getLottoPrizes(new LottoNumbers(showWinningNums()), new LottoNumber(showBonusNumInput()));

@@ -1,5 +1,6 @@
 package lotto.type;
 
+import lotto.strategy.pick.NumberPickStrategy;
 import lotto.strategy.pick.RandomNumberPickStrategy;
 import lotto.strategy.shuffle.ShuffleStrategy;
 
@@ -33,7 +34,7 @@ public class LottoNumbers {
     this.value = lottoNumbers;
   }
 
-  public static LottoNumbers generate(ShuffleStrategy shuffleStrategy, RandomNumberPickStrategy randomNumberPickStrategy) {
+  public static LottoNumbers generate(ShuffleStrategy shuffleStrategy, NumberPickStrategy randomNumberPickStrategy) {
     List<LottoNumber> res = new ArrayList<>();
 
     while (res.size() < LOTTO_SIZE) {
