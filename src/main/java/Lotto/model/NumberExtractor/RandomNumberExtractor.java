@@ -8,7 +8,7 @@ public class RandomNumberExtractor implements NumberExtractor{
     @Override
     public List<Integer> extract(int size, int min, int max) {
         List<Integer> numberList = new ArrayList<>();
-        for (int i=1; i<=max; i++){
+        for (int i = 1; i <= max; i++) {
             numberList.add(i);
         }
 
