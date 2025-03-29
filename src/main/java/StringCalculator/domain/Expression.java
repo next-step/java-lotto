@@ -11,12 +11,12 @@ public class Expression {
     private final List<Operand> operands;
 
     public Expression(String input) {
-        this.operators = getOperators(input);
-        this.operands = getOperands(input);
+        this.operators = filterOperators(input);
+        this.operands = filterOperands(input);
         validateDivisionByZero();
     }
 
-    public static List<Operand> getOperands(String expression) {
+    public static List<Operand> filterOperands(String expression) {
         return Arrays.stream(expression.split("[^0-9]+"))
                 .filter(number -> !number.isEmpty())
                 .map(Integer::parseInt)
@@ -24,7 +24,7 @@ public class Expression {
                 .collect(Collectors.toList());
     }
 
-    public static List<Operator> getOperators(String expression) {
+    public static List<Operator> filterOperators(String expression) {
         return Arrays.stream(expression.split("[ 0-9]+"))
                 .filter(token -> !token.isEmpty())
                 .map(String::trim)
