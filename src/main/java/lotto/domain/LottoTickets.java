@@ -18,20 +18,25 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public static LottoTickets fromNumbers(int count) {
+    public static LottoTickets fromNumbers(int count, LottoStrategy lottoStrategy) {
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            tickets.add(new LottoTicket());
+            tickets.add(LottoTicket.generateLottoNumbers(lottoStrategy));
         }
         return new LottoTickets(tickets);
     }
 
-    public void generateAllLottoNumbers(AutoLottoStrategy autoLottoStrategy){
-        lottoTickets.forEach(lottoTickets -> lottoTickets.generateLottoNumbers(autoLottoStrategy));
+    public void generateAllLottoNumbers(LottoStrategy lottoStrategy){
+        lottoTickets.forEach(lottoTickets -> lottoTickets.generateLottoNumbers(lottoStrategy));
+    }
+
     public static LottoTickets purchase(int payment, LottoStrategy lottoStrategy) {
         int count = payment / LOTTO_PRICE;
         return fromNumbers(count, lottoStrategy);
     }
+
+    public int getCount() {
+        return lottoTickets.size();
     }
 
 }

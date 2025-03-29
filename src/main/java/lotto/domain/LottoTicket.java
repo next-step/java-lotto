@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import lotto.strategy.AutoLottoStrategy;
+import lotto.strategy.LottoStrategy;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private List<Integer> lottoNumbers;
 
-    public LottoTicket() {}
+    private final List<Integer> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -18,8 +17,9 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public void generateLottoNumbers(AutoLottoStrategy autoLottoStrategy) {
-        lottoNumbers = autoLottoStrategy.generateLottoNumbers();
+    public static LottoTicket generateLottoNumbers(LottoStrategy lottoStrategy) {
+        List<Integer> generatedNumbers = lottoStrategy.generateLottoNumbers();
+        return new LottoTicket(generatedNumbers);
     }
 
     public int matchLottoNumbers(List<Integer> winningNumbers) {
@@ -31,10 +31,10 @@ public class LottoTicket {
         }
         return matchCount;
     }
-    @Override
-    public String toString() {
+
+    public String formatLottoNumbers() {
         return lottoNumbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(" "));
+                .collect(Collectors.joining(", "));
     }
 }

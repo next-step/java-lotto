@@ -1,25 +1,23 @@
 package lotto.strategy;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import lotto.domain.LottoNumber;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class AutoLottoStrategy implements LottoStrategy{
 
-    public static final int LOTTO_NUM_MIN = 0;
-    public static final int LOTTO_NUM_MAX = 45;
+public class AutoLottoStrategy implements LottoStrategy {
+    private static final int SELECT_COUNT = 6;
 
     @Override
     public List<Integer> generateLottoNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        for(int i = LOTTO_NUM_MIN; i < LOTTO_NUM_MAX; i++) {
-            numbers.add(i);
-        }
-        Collections.shuffle(numbers);
+        // LottoNumber를 통해 셔플된 번호를 가져옴
+        List<Integer> shuffledNumbers = LottoNumber.getInstance().getShuffledNumbers();
 
-        List<Integer> result = numbers.subList(0, 6);
-        Collections.sort(result);
-
-        return result;
+        // 상위 6개 번호를 선택하고 정렬하여 반환
+        return shuffledNumbers.stream()
+                .limit(SELECT_COUNT)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

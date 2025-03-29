@@ -1,58 +1,55 @@
 package lotto.domain;
 
 import lotto.strategy.AutoLottoStrategy;
+import lotto.strategy.LottoStrategy;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
     private LottoTickets tickets;
-    private Map<Rank, Integer> results;
 
     public LottoGame(LottoTickets tickets) {
         this.tickets = tickets;
-        initResults();
     }
-
-    public LottoGame(LottoTickets tickets, Map<Rank, Integer> results) {
-        this.tickets = tickets;
-        this.results = results;
-    }
-
 
     public LottoTickets getTickets() {
         return tickets;
     }
-    
-    public Map<Rank, Integer> getResults() {
-        return results;
-    }
 
-    public void generateAutoLottoNumbers(AutoLottoStrategy autoLottoStrategy) {
-        tickets.generateAllLottoNumbers(autoLottoStrategy);
-    }
 
-    private void initResults() {
-        results = new HashMap<Rank, Integer>();
+    private Map<Rank, Integer> initializeResults() {
+        // Rank의 모든 값을 초기화하여 결과 맵 생성
+        Map<Rank, Integer> results = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             results.put(rank, 0);
         }
+        return results;
     }
 
-    public void gameStart(List<Integer> winningNumbers) {
-        for (LottoTicket ticket : tickets.getLottoTickets()) {
-            int matchCount = ticket.matchLottoNumbers(winningNumbers);
-            Rank rank = Rank.getRankByMatchCount(matchCount);
-            results.put(rank, results.get(rank) + 1);
-        }
+    public GameResult gameStart(List<Integer> winningNumbers) {
+        Map<Rank, Integer> results = initializeResults();
+
+        // 각 티켓의 당첨 등수를 계산하여 결과 맵에 반영
+        tickets.getLottoTickets().stream()
+                .map(ticket -> Rank.getRankByMatchCount(ticket.matchLottoNumbers(winningNumbers)))
+                .forEach(rank -> results.merge(rank, 1, Integer::sum));
+
+        // 수익률 계산
+        double returnRate = calculateReturnRate(results);
+
+        // 결과 객체 생성 및 반환
+        return new GameResult(results, returnRate);
     }
 
-    public double calculateReturnRate() {
-        int totalSpent = tickets.getLottoTickets().size() * 1000;
+    private double calculateReturnRate(Map<Rank, Integer> results) {
+        int totalSpent = tickets.getCount() * LottoTickets.LOTTO_PRICE; // 로또 구매 비용 계산
         int totalWon = results.entrySet().stream()
-                .mapToInt(e -> e.getKey().getWinningMoney() * e.getValue())
+                .mapToInt(entry -> entry.getKey().getWinningMoney() * entry.getValue())
                 .sum();
         return (double) totalWon / totalSpent;
     }
+
 }
