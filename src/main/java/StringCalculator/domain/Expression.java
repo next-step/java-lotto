@@ -43,6 +43,13 @@ public class Expression {
         return operators.get(index).isDivision() && operands.get(index + 1).getValue() == 0;
     }
 
+    public static boolean isInvalidInputFormat(String input) {
+        if (input == null || input.isBlank() || input.trim().isEmpty()) {
+            return false;
+        }
+        return !input.matches("^[0-9]+( [\\+\\-\\*/] [0-9]+)*$");
+    }
+
     public List<Operator> getOperators() {
         return operators;
     }

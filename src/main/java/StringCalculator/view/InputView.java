@@ -4,6 +4,8 @@ import StringCalculator.domain.Expression;
 
 import java.util.Scanner;
 
+import static StringCalculator.domain.Expression.isInvalidInputFormat;
+
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -21,13 +23,6 @@ public class InputView {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    public static boolean isInvalidInputFormat(String input) {
-        if (input == null || input.isBlank() || input.trim().isEmpty()) {
-            return false;
-        }
-        return !input.matches("^[0-9]+( [\\+\\-\\*/] [0-9]+)*$");
     }
 }
 

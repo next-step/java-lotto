@@ -7,11 +7,11 @@ import StringCalculator.domain.Calculator;
 import StringCalculator.domain.Expression;
 import StringCalculator.domain.Operand;
 import StringCalculator.domain.Operator;
-import StringCalculator.view.InputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static StringCalculator.domain.Expression.isInvalidInputFormat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,13 +30,13 @@ public class StringCalculatorTest {
     })
     public void testValidateInputFormat(String input, String expectedMessage) {
         if ("none".equals(expectedMessage)) {
-            boolean result = InputView.isInvalidInputFormat(input);
+            boolean result = isInvalidInputFormat(input);
             assertTrue(result);
             return;
         }
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> InputView.isInvalidInputFormat(input))
+                .isThrownBy(() -> isInvalidInputFormat(input))
                 .withMessage(expectedMessage);
     }
 
