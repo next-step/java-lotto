@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.Rank;
+import lotto.domain.*;
 import lotto.strategy.AutoLottoStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,18 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoGameTest {
 
     public static final int COUNT = 2;
-    LottoGame lottoGame;
 
-    @DisplayName("로또번호는 6개로 생성된다")
-    void generateAutoLottoNumbers() {
-
-        LottoGame lottoGame = new LottoGame(LottoTickets.fromNumbers(COUNT));
-        lottoGame.generateAutoLottoNumbers(new AutoLottoStrategy());
-
-        assertThat(lottoGame.getTickets().getLottoTickets().size()).isEqualTo(COUNT);
-        assertThat(lottoGame.getTickets().getLottoTickets().get(0).getLottoNumbers().size()).isEqualTo(6);
-        assertThat(lottoGame.getTickets().getLottoTickets().get(1).getLottoNumbers().size()).isEqualTo(6);
-    }
 
     @Test
     void gameStartAndcalculateReturnRate() {
@@ -39,12 +25,11 @@ public class LottoGameTest {
         tickets.add(new LottoTicket(Arrays.asList(11, 12, 13, 14, 15, 16)));
 
         LottoGame lottoGame = new LottoGame(new LottoTickets(tickets));
-        lottoGame.gameStart(winningNumbers);
+        GameResult gameResult = lottoGame.gameStart(winningNumbers);
 
-        double rate = lottoGame.calculateReturnRate();
-        assertThat(lottoGame.getResults().get(Rank.FOURTH)).isEqualTo(1);
-        assertThat(lottoGame.getResults().get(Rank.MISS)).isEqualTo(1);
-        assertThat(lottoGame.calculateReturnRate()).isEqualTo(2.5);
+        assertThat(gameResult.getResultStats().get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(gameResult.getResultStats().get(Rank.MISS)).isEqualTo(1);
+        assertThat(gameResult.getReturnRate()).isEqualTo(2.5);
 
     }
 

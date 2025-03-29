@@ -16,9 +16,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또번호는 6개로 생성된다.")
     void generateLottoNumbers_6자제한(){
-        LottoTicket lottoTicket = new LottoTicket();
-        lottoTicket.generateLottoNumbers(new AutoLottoStrategy());
-        assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
+        assertThat(LottoTicket.generateLottoNumbers(new AutoLottoStrategy()).getLottoNumbers().size()).isEqualTo(6);
     }
 
     @Test

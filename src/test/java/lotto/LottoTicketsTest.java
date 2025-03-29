@@ -16,7 +16,7 @@ public class LottoTicketsTest {
 
     @BeforeEach
     public void setUpLottoTickets() {
-        lottoTickets = LottoTickets.fromNumbers(COUNT);
+        lottoTickets = LottoTickets.fromNumbers(COUNT,new AutoLottoStrategy());
     }
 
     @Test
