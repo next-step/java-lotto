@@ -1,14 +1,18 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.PrizeRank;
-import lotto.domain.SummaryReport;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
+    @Test
+    void generate() {
+        int money = 14000;
+        LottoTickets lottoTickets = LottoTickets.generate(money);
+        int expectedCount = money / LottoTicket.PRICE;
+        assertThat(lottoTickets.size()).isEqualTo(expectedCount);
+    }
+
     @Test
     void summary_results() {
         LottoTicket winner = new LottoTicket(new int[]{1, 2, 3, 4, 5, 6});

@@ -1,19 +1,22 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int PRICE = 1_000;
     public static final int NUMBER_LENGTH = 6;
     public static final String WRONG_NUMBER_COUNT = "로또 번호는 6개여야 합니다.";
+    public static final String DUPLICATE_NUMBER = "로또 번호는 중복될 수 없습니다.";
     private final List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
-        validate(numbers.size());
-        this.numbers = numbers;
+        validate(numbers);
+        this.numbers = numbers.stream()
+                .distinct()
+                .sorted()
+                .collect(Collectors.toUnmodifiableList());
+        ;
     }
 
     public LottoTicket(String[] numbers) {
@@ -29,9 +32,14 @@ public class LottoTicket {
                 .collect(Collectors.toList()));
     }
 
-    private void validate(int size) {
-        if (size != NUMBER_LENGTH) {
-            throw new IllegalArgumentException(WRONG_NUMBER_COUNT + " 현재 개수: " + size);
+    private void validate(List<LottoNumber> numbers) {
+        if (numbers.size() != NUMBER_LENGTH) {
+            throw new IllegalArgumentException(WRONG_NUMBER_COUNT + " 현재 개수: " + numbers.size());
+        }
+
+        Set<LottoNumber> unique = new HashSet<>(numbers);
+        if (unique.size() != NUMBER_LENGTH) {
+            throw new IllegalArgumentException(DUPLICATE_NUMBER + " 입력: " + numbers);
         }
     }
 

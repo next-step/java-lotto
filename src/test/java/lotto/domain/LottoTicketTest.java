@@ -1,9 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.MatchCount;
-import lotto.domain.PrizeRank;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

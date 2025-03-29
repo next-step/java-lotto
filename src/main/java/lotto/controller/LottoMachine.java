@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.SummaryReport;
@@ -22,7 +21,7 @@ public class LottoMachine {
 
     public void run() {
         int paidMoney = inputView.getNumberInput(PAID_MONEY_MESSAGE);
-        LottoTickets lottoTickets = LottoTickets.generate(paidMoney, new LottoNumberGenerator());
+        LottoTickets lottoTickets = LottoTickets.generate(paidMoney);
         resultView.printTickets(lottoTickets);
 
         String[] winningNumber = inputView.getStringListInput(WINNING_LOTTERY_NUMBERS_MESSAGE, ",");

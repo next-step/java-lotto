@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LottoTickets {
     List<LottoTicket> tickets;
@@ -35,13 +38,12 @@ public class LottoTickets {
         return new SummaryReport(summary);
     }
 
-    public static LottoTickets generate(int paidMoney, LottoNumberGenerator generator) {
+    public static LottoTickets generate(int paidMoney) {
         int count = paidMoney / LottoTicket.PRICE;
 
         LottoTickets list = new LottoTickets();
         for (int i = 0; i < count; i++) {
-            List<LottoNumber> numbers = generator.shuffle();
-            list.add(new LottoTicket(numbers));
+            list.add(AutoTicketGenerator.generate());
         }
         return list;
     }

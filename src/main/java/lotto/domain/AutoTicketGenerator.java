@@ -3,9 +3,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class LottoNumberGenerator {
+public class AutoTicketGenerator {
     private static final List<LottoNumber> candidates = new ArrayList<>();
 
     static {
@@ -14,12 +13,9 @@ public class LottoNumberGenerator {
         }
     }
 
-    public List<LottoNumber> shuffle() {
+    public static LottoTicket generate() {
         List<LottoNumber> copy = new ArrayList<>(candidates);
         Collections.shuffle(copy);
-        return copy.subList(0, LottoTicket.NUMBER_LENGTH)
-                .stream()
-                .sorted()
-                .collect(Collectors.toList());
+        return new LottoTicket(copy.subList(0, LottoTicket.NUMBER_LENGTH));
     }
 }
