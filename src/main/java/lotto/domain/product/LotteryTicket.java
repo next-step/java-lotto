@@ -17,6 +17,10 @@ public class LotteryTicket implements Product {
         this.numbers = makeRandomNumbers();
     }
 
+    protected LotteryTicket(LotteryTicket lotteryTicket) {
+        this.numbers = lotteryTicket.numbers;
+    }
+
     public LotteryTicket(Set<LottoNumber> input) {
         this.numbers = input;
     }
@@ -40,12 +44,6 @@ public class LotteryTicket implements Product {
 
     public Integer getLottoNumbersCount() {
         return numbers.size();
-    }
-
-    public Integer getResultBy(LotteryTicket winningTicket) {
-        return Math.toIntExact(this.numbers.stream()
-                .filter(winningTicket.numbers::contains)
-                .count());
     }
 
     public Set<Integer> getValues() {

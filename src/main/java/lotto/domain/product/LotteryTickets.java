@@ -23,11 +23,11 @@ public class LotteryTickets {
                 .collect(Collectors.toList());
     }
 
-    public FinalResult getResult(LotteryTicket winningTicket) {
+    public FinalResult getResult(WinningTicket winningTicket) {
         FinalResult finalResult = new FinalResult();
         lotteryTickets.forEach(lotteryTicket -> {
-            Integer result = lotteryTicket.getResultBy(winningTicket);
-            finalResult.put(result);
+            LottoRank rank = winningTicket.getRank(lotteryTicket);
+            finalResult.put(rank);
         });
         return finalResult;
     }
