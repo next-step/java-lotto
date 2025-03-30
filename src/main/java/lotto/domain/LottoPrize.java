@@ -43,14 +43,15 @@ public enum LottoPrize {
             .count() > 1;
   }
 
-  public String getDisplayText() {
-    if (this.isBonus) {
-      return String.format("%d개 일치, 보너스 볼 일치(%d원)", matchCount, prizeMoney);
-    }
-    return String.format("%d개 일치 (%d원)", matchCount, prizeMoney);
-  }
-
   public int getPrizeMoney() {
     return prizeMoney;
+  }
+
+  public int getMatchCount() {
+    return matchCount;
+  }
+
+  public boolean getIsBonus() {
+    return isBonus;
   }
 }

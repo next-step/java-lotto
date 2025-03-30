@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.LottoGeneratorTest.TestLottoGenerator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPrize;
 import lotto.domain.Lottos;
 import lotto.LottoReport;
 import lotto.domain.PurchaseAmount;
@@ -14,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ResultViewTest {
@@ -34,7 +37,7 @@ public class ResultViewTest {
     ResultView.printLottos(lottos);
 
     System.setOut(originalOut);
-    Assertions.assertEquals(expected, outputStream.toString());
+    assertEquals(expected, outputStream.toString());
   }
 
   @DisplayName("당첨 통계를 출력한다.")
@@ -62,7 +65,13 @@ public class ResultViewTest {
     ResultView.printStatistics(new LottoReport(purchaseAmount, winningLotto, lottos));
 
     System.setOut(originalOut);
-    Assertions.assertEquals(expected, outputStream.toString());
+    assertEquals(expected, outputStream.toString());
+  }
+
+  @DisplayName("화면 출력 텍스트를 구하는 메서드를 테스트한다.")
+  @Test
+  void testGetDisplayText() {
+    assertEquals("3개 일치 (5000원)- 1개", ResultView.getPrizeAndCountStatus(LottoPrize.THREE_MATCHES, 1));
   }
 
   private static Lottos getLottos() {

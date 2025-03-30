@@ -4,6 +4,7 @@ import lotto.domain.LottoPrize;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
+import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,9 @@ public class LottoReport {
 
     for (LottoPrize prize : LottoPrize.values()) {
       int count = lottoReward.getPrizeCount(prize);
-      countReportContent.add(getPrizeAndCountStatus(prize, count));
+      countReportContent.add(ResultView.getPrizeAndCountStatus(prize, count));
     }
     return String.join("\n", countReportContent);
-  }
-
-  private String getPrizeAndCountStatus(LottoPrize prize, int count) {
-    return String.format("%s- %d개", prize.getDisplayText(), count);
   }
 
   public String createMoneyReport() {
