@@ -1,13 +1,14 @@
 package lotto.domain.model;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
     private final Map<LottoRank, Integer> lottoResult = new HashMap<>();
 
-    public static LottoResult of(List<Lotto> purchasedLottos, Lotto winningLotto) {
+    public static LottoResult of(List<Lotto> purchasedLottos, WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
         purchasedLottos.forEach(lotto -> lottoResult.addLottoResult(lotto, winningLotto));
         return lottoResult;
@@ -18,19 +19,19 @@ public class LottoResult {
         return (double) calculateTotalPrize() / sumOfPurchaseAmount;
     }
 
-    public String generateStatistics() {
-        StringBuilder sb = new StringBuilder();
+    public Map<LottoRank, Integer> generateStatistics() {
+        Map<LottoRank, Integer> statisticsMap = new LinkedHashMap<>();
 
         for (LottoRank rank : LottoRank.RANK_WITH_PRIZE) {
             int count = lottoResult.getOrDefault(rank, 0);
-            sb.append(formatLottoRankResult(rank, count));
+            statisticsMap.put(rank, count);
         }
 
-        return sb.toString();
+        return statisticsMap;
     }
 
-    private void addLottoResult(Lotto purchasedLotto, Lotto winningLotto) {
-        LottoRank rank = purchasedLotto.getRank(winningLotto);
+    private void addLottoResult(Lotto purchasedLotto, WinningLotto winningLotto) {
+        LottoRank rank = winningLotto.calculateRank(purchasedLotto);
         lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
     }
 
@@ -40,9 +41,5 @@ public class LottoResult {
             sumOfPrize += (long) lottoResult.getOrDefault(rank, 0) * rank.getPrize();
         }
         return sumOfPrize;
-    }
-
-    private String formatLottoRankResult(LottoRank rank, int count) {
-        return String.format("%d개 일치 (%d원)- %d개\n", rank.getNumOfMatch(), rank.getPrize(), count);
     }
 }
