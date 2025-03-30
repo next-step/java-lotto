@@ -1,7 +1,9 @@
 package step2.generate;
 
-import java.util.List;
+import step2.LotteryNumber;
+
+import java.util.Set;
 
 public interface Generate {
-    List<Integer> makeNumbers(int size);
+    Set<LotteryNumber> makeNumbers(int size);
 }

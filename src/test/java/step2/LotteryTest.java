@@ -4,28 +4,28 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LotteryTest {
     @Test
-    @DisplayName("중복된 숫자가 있는 경우, 예외를 반환한다")
-    void duplicateNumberTest() {
-        List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 5));
-        assertThatThrownBy(() -> {
-            new Lottery(numbers);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호는 6개 이상이어야 합니다.");
-    }
-
-    @Test
     @DisplayName("로또 번호와 일치하는 숫자가 몇개인지 확인한다")
     void matchTest() {
-        List<Integer> lottoNumbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 8));
+        Set<LotteryNumber> lottoNumbers = Set.of(
+                new LotteryNumber(1),
+                new LotteryNumber(2),
+                new LotteryNumber(3),
+                new LotteryNumber(4),
+                new LotteryNumber(5),
+                new LotteryNumber(6)
+        );
         Lottery lotto = new Lottery(lottoNumbers);
-        List<LotteryNumber> numbers = new ArrayList<>(List.of(new LotteryNumber(1), new LotteryNumber(2)));
+
+        Set<LotteryNumber> numbers = Set.of(
+                new LotteryNumber(1),
+                new LotteryNumber(2)
+        );
         assertThat(lotto.match(numbers)).isEqualTo(2);
     }
 }

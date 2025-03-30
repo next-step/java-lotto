@@ -4,6 +4,8 @@ import step2.Lotterys;
 import step2.Winning;
 import step2.WinningResults;
 
+import java.util.stream.Collectors;
+
 public class OutputView {
     public static void printPurchaseAmount(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
@@ -11,7 +13,11 @@ public class OutputView {
 
     public static void printLotteryNumbers(Lotterys lotterys) {
         for (int i = 0; i < lotterys.length(); i++) {
-            System.out.println(lotterys.getLottery(i).toString());
+            System.out.println(
+                    lotterys.getLottery(i).getLottoNumbers().stream()
+                            .sorted()
+                            .map(Object::toString)
+                            .collect(Collectors.joining(", ", "[", "]")));
         }
         System.out.println();
     }

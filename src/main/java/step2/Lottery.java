@@ -1,27 +1,23 @@
 package step2;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lottery {
-    private final List<LotteryNumber> lottoNumbers;
+    private final Set<LotteryNumber> lottoNumbers;
 
-    public Lottery(List<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() < 6) {
-            throw new IllegalArgumentException("로또 번호는 6개 이상이어야 합니다.");
-        }
-        this.lottoNumbers = lottoNumbers.stream().map(LotteryNumber::new).collect(Collectors.toList());
+    public Lottery(Set<LotteryNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public int match(List<LotteryNumber> numbers) {
+    public int match(Set<LotteryNumber> numbers) {
         return (int) numbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
+    public Set<LotteryNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override

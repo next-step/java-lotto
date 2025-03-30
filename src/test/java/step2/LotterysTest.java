@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.generate.Generate;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,8 +14,15 @@ public class LotterysTest {
     void createLottoTest() {
         Lotterys lotterys = new Lotterys(1, new Generate() {
             @Override
-            public List<Integer> makeNumbers(int size) {
-                return List.of(1, 2, 3, 4, 5, 6);
+            public Set<LotteryNumber> makeNumbers(int size) {
+                return Set.of(
+                        new LotteryNumber(1),
+                        new LotteryNumber(2),
+                        new LotteryNumber(3),
+                        new LotteryNumber(4),
+                        new LotteryNumber(5),
+                        new LotteryNumber(6)
+                );
             }
         });
         assertThat(lotterys.length()).isEqualTo(1);
@@ -25,10 +32,24 @@ public class LotterysTest {
     void randomNumbersTest() {
         Lotterys lotterys = new Lotterys(1, new Generate() {
             @Override
-            public List<Integer> makeNumbers(int size) {
-                return List.of(1, 2, 3, 4, 5, 6);
+            public Set<LotteryNumber> makeNumbers(int size) {
+                return Set.of(
+                        new LotteryNumber(1),
+                        new LotteryNumber(2),
+                        new LotteryNumber(3),
+                        new LotteryNumber(4),
+                        new LotteryNumber(5),
+                        new LotteryNumber(6)
+                );
             }
         });
-        assertThat(lotterys.getLottery(0)).isEqualTo(new Lottery(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lotterys.getLottery(0)).isEqualTo(new Lottery(Set.of(
+                new LotteryNumber(1),
+                new LotteryNumber(2),
+                new LotteryNumber(3),
+                new LotteryNumber(4),
+                new LotteryNumber(5),
+                new LotteryNumber(6)
+        )));
     }
 }

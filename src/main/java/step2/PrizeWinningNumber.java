@@ -1,12 +1,12 @@
 package step2;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
+import java.util.Set;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.EnumMap;
 
 public class PrizeWinningNumber {
-    private final List<LotteryNumber> prizeWinningNumbers;
+    private final Set<LotteryNumber> prizeWinningNumbers;
     private static final String DELIMITER = ",";
     private static final int LOTTO_LENGTH = 6;
 
@@ -42,8 +42,8 @@ public class PrizeWinningNumber {
         return result;
     }
 
-    private List<LotteryNumber> validatePrizeWinningNumbers(String[] result) {
-        List<LotteryNumber> numbers = new ArrayList<>();
+    private Set<LotteryNumber> validatePrizeWinningNumbers(String[] result) {
+        Set<LotteryNumber> numbers = new HashSet<>();
         for (String number : result) {
             try {
                 numbers.add(new LotteryNumber(Integer.parseInt(number)));
@@ -51,7 +51,7 @@ public class PrizeWinningNumber {
                 throw new IllegalArgumentException("당첨 결과가 숫자가 아닙니다.");
             }
         }
-        if (numbers.stream().distinct().count() != LOTTO_LENGTH) {
+        if (numbers.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException("당첨 번호는 중복되지 않는 6개의 숫자여야 합니다.");
         }
         return numbers;
