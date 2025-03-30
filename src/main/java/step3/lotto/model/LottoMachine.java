@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LottoMachine {
 
+    public final static Money PRICE = new Money(1000);
     private final List<LottoNumber> allLottoNumbers;
 
     public LottoMachine() {
@@ -16,7 +17,7 @@ public class LottoMachine {
     }
 
     public LottoTicketList buyLottoTickets(Money purchaseAmount) {
-        Count ticketCount = new Count(purchaseAmount.value() / LottoTicket.PRICE.value());
+        Count ticketCount = new Count(purchaseAmount.value() / PRICE.value());
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticketCount.value(); i++) {
             lottoTickets.add(issueLottoTicket());

@@ -6,7 +6,6 @@ import step3.lotto.exception.LottoTicketException;
 
 public class LottoTicket {
 
-    public final static Money PRICE = new Money(1000);
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
