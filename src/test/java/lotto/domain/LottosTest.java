@@ -44,6 +44,8 @@ class LottosTest {
         );
         assertThat(lottos.compareNumbers(Lotto.createManually(Arrays.asList(6, 5, 4, 3, 2, 1))))
                 .contains(entry(Division.FIRST, 1));
+        assertThat(lottos.compareNumbers(Lotto.createManually(Arrays.asList(39, 5, 4, 3, 2, 1)), 6))
+                .contains(entry(Division.SECOND, 1));
 
     }
 }

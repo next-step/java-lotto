@@ -76,10 +76,15 @@ public class Lotto {
     }
 
     public Division compareNumbers(Lotto lotto) {
+        return compareNumbers(lotto, 0);
+    }
+
+    public Division compareNumbers(Lotto lotto, int bonusNumber) {
         long matchCount = numbers.stream()
                 .filter(number -> lotto.numbers.contains(number))
                 .count();
-        return Division.valueOf((int)matchCount);
+        boolean matchBonus = numbers.contains(bonusNumber);
+        return Division.valueOf((int)matchCount, matchBonus);
     }
 
     @Override

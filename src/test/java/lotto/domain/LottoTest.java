@@ -28,6 +28,8 @@ class LottoTest {
         assertThat(lotto.compareNumbers(Lotto.createManually(Arrays.asList(1, 2, 3, 4, 5, 6))))
                 .isEqualTo(Division.FIRST);
         assertThat(lotto.compareNumbers(Lotto.createManually(Arrays.asList(7, 8, 9, 10, 11, 12))))
-                .isEqualTo(null);
+                .isEqualTo(Division.LOSE);
+        assertThat(lotto.compareNumbers(Lotto.createManually(Arrays.asList(5, 4, 3, 2, 1, 19)), 6))
+                .isEqualTo(Division.SECOND);
     }
 }

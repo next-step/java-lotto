@@ -23,9 +23,7 @@ public class DivisionTest {
         assertThat(Division.valueOf(6, false)).isEqualTo(Division.FIRST);
         assertThat(Division.valueOf(5, true)).isEqualTo(Division.SECOND);
         assertThat(Division.valueOf(5, false)).isEqualTo(Division.THIRD);
-        assertThat(Division.valueOf(4, true)).isEqualTo(Division.FOURTH);
-        assertThat(Division.valueOf(4, false)).isEqualTo(Division.FOURTH);
-        assertThat(Division.valueOf(2, true)).isEqualTo(Division.LOSE);
-        assertThat(Division.valueOf(2, false)).isEqualTo(Division.LOSE);
+        assertThat(Division.valueOf(4)).isEqualTo(Division.FOURTH);
+        assertThat(Division.valueOf(2)).isEqualTo(Division.LOSE);
     }
 }

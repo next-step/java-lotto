@@ -21,10 +21,14 @@ public class Lottos {
     }
 
     public Map<Division, Integer> compareNumbers(Lotto comparingLotto) {
+        return compareNumbers(comparingLotto, 0);
+    }
+
+    public Map<Division, Integer> compareNumbers(Lotto comparingLotto, int bonusNumber) {
         Map<Division, Integer> winnerCounts = Division.getMatchCounts();
         List<Division> divisions = new ArrayList<>();
         for (Lotto lotto: lottos) {
-            Division division = lotto.compareNumbers(comparingLotto);
+            Division division = lotto.compareNumbers(comparingLotto, bonusNumber);
             divisions.add(division);
         }
         divisions.removeAll(Collections.singletonList(null));

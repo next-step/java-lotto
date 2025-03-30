@@ -18,6 +18,7 @@ public enum Division {
         matchCounts.put(Division.FIFTH, 0);
         matchCounts.put(Division.FOURTH, 0);
         matchCounts.put(Division.THIRD, 0);
+        matchCounts.put(Division.SECOND, 0);
         matchCounts.put(Division.FIRST, 0);
     }
 
@@ -34,29 +35,14 @@ public enum Division {
     }
 
     public static Division valueOf(int matchCount) {
-        if (matchCount == 6) {
-            return FIRST;
-        }
-        if (matchCount == 5) {
-            return THIRD;
-        }
-        if (matchCount == 4) {
-            return FOURTH;
-        }
-        if (matchCount == 3) {
-            return FIFTH;
-        }
-        if (matchCount == 0 || matchCount == 1 || matchCount == 2) {
-            return LOSE;
-        }
-        throw new IllegalArgumentException("로또 맞은 번호의 개수가 6개 초과입니다.");
+        return Division.valueOf(matchCount, false);
     }
 
     public static Division valueOf(int matchCount, boolean matchBonus) {
         if (matchCount == 6) {
             return FIRST;
         }
-        if (matchCount == 5 && matchBonus == true) {
+        if (matchCount == 5 && matchBonus) {
             return SECOND;
         }
         if (matchCount == 5) {
