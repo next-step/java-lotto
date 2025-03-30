@@ -1,8 +1,10 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseAmount;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -25,18 +27,29 @@ public class InputView {
     }
   }
 
-  public List<LottoNumber> receiveManualNumbers() {
+  public List<Lotto> receiveManualLottos() {
     System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-    return receiveLottoNumbers();
+
+    List<Lotto> manualLottos = new ArrayList<>();
+
+    while (true) {
+      String input = scanner.nextLine();
+      if (input.isEmpty()) {
+        break;
+      }
+      List<LottoNumber> lottoNumbers = parseLottoNumbers(input);
+      manualLottos.add(new Lotto(lottoNumbers));
+    }
+    return manualLottos;
   }
 
   public List<LottoNumber> receiveWinningLottoNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해주세요.");
-    return receiveLottoNumbers();
+    String input = scanner.nextLine();
+    return parseLottoNumbers(input);
   }
 
-  private List<LottoNumber> receiveLottoNumbers() {
-    String input = scanner.nextLine();
+  private List<LottoNumber> parseLottoNumbers(String input) {
     try {
       return Arrays.stream(input.split(","))
               .map(String::trim)

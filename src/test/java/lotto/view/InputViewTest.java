@@ -1,9 +1,11 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,7 +57,7 @@ class InputViewTest {
     String testInput = "1, 2, 3, 4, 5, 6";
     InputView inputView = new InputView(getTestScanner(testInput));
 
-    assertThat(inputView.receiveManualNumbers())
+    assertThat(inputView.receiveWinningLottoNumbers())
             .containsExactly(
                     new LottoNumber(1),
                     new LottoNumber(2),
@@ -64,5 +66,17 @@ class InputViewTest {
                     new LottoNumber(5),
                     new LottoNumber(6)
             );
+  }
+
+  @DisplayName("직접 로또 번호를 입력받는 기능 테스트")
+  @Test
+  void testReceiveManualLottos() {
+    String testInput = "1, 2, 3, 4, 5, 6\n7, 8, 9, 10, 11, 12\n\n";
+    InputView inputView = new InputView(getTestScanner(testInput));
+
+    assertThat(inputView.receiveManualLottos()).allMatch(lotto ->
+            List.of(
+                    "[1, 2, 3, 4, 5, 6]", "[7, 8, 9, 10, 11, 12]"
+            ).contains(lotto.getNumberRepresentation()));
   }
 }

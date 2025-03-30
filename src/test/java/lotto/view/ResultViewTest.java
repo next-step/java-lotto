@@ -89,4 +89,17 @@ public class ResultViewTest {
                     new LottoNumber(4), new LottoNumber(5), new LottoNumber(7)))
     ));
   }
+
+  @DisplayName("수동, 자동 로또 카운트를 출력하는 테스트")
+  @Test
+  void testPrintLottoCount() {
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outputStream));
+
+    ResultView.printLottoCount(3, 4);
+
+    System.setOut(originalOut);
+    assertEquals("수동으로 3장, 자동으로 4장 구매했습니다.\n", outputStream.toString());
+  }
 }

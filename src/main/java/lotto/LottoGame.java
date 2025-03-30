@@ -34,9 +34,8 @@ public class LottoGame {
   }
 
   private Lottos buyLottos(PurchaseAmount purchaseAmount) {
-    LottoShop lottoShop = new LottoShop(new RandomLottoGenerator());
-    Lottos lottos = lottoShop.buyLottos(purchaseAmount);
-    ResultView.printLottoCount(lottos);
+    LottoShop lottoShop = new LottoShop(new RandomLottoGenerator(), inputView);
+    Lottos lottos =  lottoShop.buyLottos(purchaseAmount.calculateLottoCount());
     ResultView.printLottos(lottos);
     return lottos;
   }

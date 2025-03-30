@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -9,6 +10,11 @@ public class Lottos {
 
   public Lottos(List<Lotto> lottoList) {
     this.lottoList = lottoList;
+  }
+
+  public Lottos(List<Lotto> lottoList1, List<Lotto> lottoList2) {
+    this.lottoList = Stream.concat(lottoList1.stream(), lottoList2.stream())
+            .collect(Collectors.toList());
   }
 
   public int getCount() {

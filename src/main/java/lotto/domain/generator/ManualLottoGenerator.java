@@ -2,21 +2,19 @@ package lotto.domain.generator;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.view.InputView;
 
 import java.util.List;
 
-public class ManualLottoGenerator implements LottoGenerator{
+public class ManualLottoGenerator implements LottoGenerator {
 
-  private final InputView inputView;
+  private final List<LottoNumber> lottoNumberList;
 
-  public ManualLottoGenerator(InputView inputView) {
-    this.inputView = inputView;
+  public ManualLottoGenerator(List<LottoNumber> lottoNumberList) {
+    this.lottoNumberList = lottoNumberList;
   }
 
   @Override
   public Lotto generate() {
-    List<LottoNumber> numbers = inputView.receiveManualNumbers();
-    return new Lotto(numbers);
+    return new Lotto(lottoNumberList);
   }
 }
