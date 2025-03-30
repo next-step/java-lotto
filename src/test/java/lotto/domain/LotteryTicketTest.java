@@ -49,7 +49,7 @@ public class LotteryTicketTest {
     @DisplayName("로또 티켓은 1보다 작은 숫자는 만들어 질 수 없다.")
     public void lottoNumberUnderTest() {
         assertThatThrownBy(() -> {
-            new LottoNumber(0);
+            LottoNumber.of(0);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -57,7 +57,7 @@ public class LotteryTicketTest {
     @DisplayName("로또 티켓은 46보다 큰 숫자는 만들어 질 수 없다.")
     public void lottoNumberUpperTest() {
         assertThatThrownBy(() -> {
-            new LottoNumber(46);
+            LottoNumber.of(46);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

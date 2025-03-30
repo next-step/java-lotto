@@ -18,12 +18,8 @@ public class LottoNumber {
         }
     }
 
-    public LottoNumber(Integer number) {
+    private LottoNumber(int number) {
         this.number = number;
-    }
-
-    public LottoNumber(String number) {
-        this(Integer.parseInt(number));
     }
 
     public static LottoNumber of(Integer number) {
