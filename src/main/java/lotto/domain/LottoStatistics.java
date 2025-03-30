@@ -1,17 +1,16 @@
-package lotto.service;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import lotto.domain.PrizeLevel;
 import lotto.dto.LottoStatisticsDTO;
 
-public class LottoStatisticsService {
+public class LottoStatistics {
     private final Map<PrizeLevel, Integer> statistics;
 
-    public LottoStatisticsService(Map<PrizeLevel, Integer> statistics) {
+    public LottoStatistics(Map<PrizeLevel, Integer> statistics) {
         this.statistics = statistics;
     }
 

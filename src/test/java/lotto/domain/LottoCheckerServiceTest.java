@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import lotto.dto.LottoStatisticsDTO;
 import lotto.service.LottoCheckerService;
-import lotto.service.LottoStatisticsService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +15,7 @@ class LottoCheckerServiceTest {
     @DisplayName("당첨 여부 테스트 (로또 구매가 없는 경우)")
     void checkLottosTestByEmpty() {
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-        LottoStatisticsService stats = new LottoCheckerService(winningLotto).check(List.of());
+        LottoStatistics stats = new LottoCheckerService(winningLotto).check(List.of());
 
         assertThat(stats.getLottoStatisticsDTOs()).containsExactly(
             new LottoStatisticsDTO(PrizeLevel.FIRST, 0),
@@ -39,7 +38,7 @@ class LottoCheckerServiceTest {
         );
 
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-        LottoStatisticsService stats = new LottoCheckerService(winningLotto).check(lottos);
+        LottoStatistics stats = new LottoCheckerService(winningLotto).check(lottos);
 
         assertThat(stats.getLottoStatisticsDTOs()).containsExactly(
             new LottoStatisticsDTO(PrizeLevel.FIRST, 1),

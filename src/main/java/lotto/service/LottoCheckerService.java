@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoStatistics;
 import lotto.domain.PrizeLevel;
 import lotto.domain.WinningLotto;
 
@@ -24,12 +25,12 @@ public class LottoCheckerService {
 
     }
 
-    public LottoStatisticsService check(List<Lotto> lottos) {
+    public LottoStatistics check(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             PrizeLevel prizeLevel = winningLotto.countMatchingNumbers(lotto);
             statistics.put(prizeLevel, statistics.get(prizeLevel) + 1);
         }
 
-        return new LottoStatisticsService(statistics);
+        return new LottoStatistics(statistics);
     }
 }
