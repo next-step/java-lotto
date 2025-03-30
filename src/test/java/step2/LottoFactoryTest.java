@@ -16,7 +16,7 @@ class LottoFactoryTest {
     void buy() {
         LottoFactory lottoFactory = new LottoFactory(new FixLottoStrategy(LottoNumberUtils.of(1,2,3,4,5,6)));
         LottosCount lottosCount = new LottosCount(3, 10000);
-        Lottos lottos = lottoFactory.buy(lottosCount);
+        Lottos lottos = lottoFactory.buyAuto(lottosCount.getAuto());
         System.out.println(lottosCount.getAuto());
         assertThat(lottos.size()).isEqualTo(7);
     }

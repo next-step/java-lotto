@@ -3,6 +3,7 @@ package step2.domain;
 import step2.util.LottoStrategy;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,11 +25,13 @@ public class LottoFactory {
                 .collect(Collectors.toSet());
     }
 
-    public Lottos buy(LottosCount lottosCount) {
+    public Lottos buyAuto(int autoCount) {
         return new Lottos(
-                IntStream.range(0, lottosCount.getAuto())
+                IntStream.range(0, autoCount)
                         .mapToObj(i -> new Lotto(lottoStrategy.generateLottoNumbers()))
                         .collect(Collectors.toList()));
     }
-
+    public Lottos buyManual(List<Lotto> manualList) {
+        return new Lottos(manualList);
+    }
 }

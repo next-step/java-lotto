@@ -29,13 +29,13 @@ public class InputView {
         return new LottosCount(countManual, money);
     }
 
-    public static Lottos buyLottosManual(int manual) {
+    public static List<Lotto> buyLottosManual(int manual) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < manual; i++) {
             lottos.add(new Lotto(LottoFactory.fromSplit(scanner.nextLine())));
         }
-        return new Lottos(lottos);
+        return lottos;
     }
 
     public static Winning winningNumsLastWeek() {
