@@ -1,6 +1,5 @@
 package step4.lotto.controller;
 
-import java.util.ArrayList;
 import step4.lotto.model.Count;
 import step4.lotto.model.LottoMachine;
 import step4.lotto.model.LottoNumber;

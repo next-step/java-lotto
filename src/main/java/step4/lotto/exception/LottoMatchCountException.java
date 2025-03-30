@@ -1,10 +1,6 @@
 package step4.lotto.exception;
 
-public class LottoMatchCountException extends RuntimeException {
-
-    public LottoMatchCountException() {
-        super();
-    }
+public class LottoMatchCountException extends LottoException {
 
     public LottoMatchCountException(String message) {
         super(message);
