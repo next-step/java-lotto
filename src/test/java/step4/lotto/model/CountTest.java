@@ -6,6 +6,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step4.lotto.exception.CountException;
+import step4.lotto.exception.CountInvalidFormatException;
+import step4.lotto.exception.CountInvalidValueException;
 
 public class CountTest {
 
@@ -45,7 +47,20 @@ public class CountTest {
         assertThatThrownBy(() -> new Count(count))
 
             // then
-            .isExactlyInstanceOf(CountException.class);
+            .isExactlyInstanceOf(CountInvalidValueException.class);
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 문자열로 Count 생성")
+    void givenNotNumber_whenCreateCount_thenFail() {
+        // given
+        String count = "abc";
+
+        // when
+        assertThatThrownBy(() -> new Count(count))
+
+            // then
+            .isExactlyInstanceOf(CountInvalidFormatException.class);
     }
 
 }

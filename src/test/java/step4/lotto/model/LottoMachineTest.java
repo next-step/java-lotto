@@ -33,7 +33,7 @@ public class LottoMachineTest {
     @DisplayName("로또 발행 테스트")
     void givenLottoMachine_whenCreateLottoMachine_thenSuccess() {
         // given && when
-        LottoTicket lottoTicket = lottoMachine.issueLottoTicket();
+        LottoTicket lottoTicket = lottoMachine.issueLottoTicketAuto();
 
         // then
         assertThat(lottoTicket).isNotNull();

@@ -20,6 +20,10 @@ public class LottoMachine {
         }
     }
 
+    public LottoTicketList buyLottoTickets(Money purchaseAmount) {
+        return buyLottoTickets(purchaseAmount, new Count(0));
+    }
+
     public LottoTicketList buyLottoTickets(Money purchaseAmount, Count manualLottoTicketCount) {
         validateBuyLottoTickets(purchaseAmount, manualLottoTicketCount);
         List<LottoTicket> lottoTickets = new ArrayList<>();
