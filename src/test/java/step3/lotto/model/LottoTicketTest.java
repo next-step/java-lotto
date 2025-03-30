@@ -155,8 +155,8 @@ public class LottoTicketTest {
 
 
     @Test
-    @DisplayName("5등 당첨 테스트")
-    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount3_thenSuccess() {
+    @DisplayName("5등 당첨 테스트 - 보너스 볼 매치 O")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount3BonusBallMatch_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
@@ -172,8 +172,25 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("4등 당첨 테스트")
-    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount4_thenSuccess() {
+    @DisplayName("5등 당첨 테스트 - 보너스 볼 매치 X")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount3BonusBallUnMatch_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("4, 5, 6, 7, 8, 9"),
+            new LottoNumber(10)
+        );
+
+        // when
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
+
+            // then
+            .isEqualTo(LottoPrize.FIFTH);
+    }
+
+    @Test
+    @DisplayName("4등 당첨 테스트 - 보너스 볼 매치 O")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount4BonusBallMatch_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
@@ -189,8 +206,25 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("3등 당첨 테스트")
-    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount5_thenSuccess() {
+    @DisplayName("4등 당첨 테스트 - 보너스 볼 매치 X")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount4BonusBallUnMatch_thenSuccess() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("3, 4, 5, 6, 7, 8"),
+            new LottoNumber(9)
+        );
+
+        // when
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
+
+            // then
+            .isEqualTo(LottoPrize.FOURTH);
+    }
+
+    @Test
+    @DisplayName("3등 당첨 테스트 - 보너스 볼 매치 X")
+    void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount5BonusBallUnMatch_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
@@ -206,7 +240,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("2등 당첨 테스트")
+    @DisplayName("2등 당첨 테스트 - 보너스 볼 매치 O")
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount5AndBonusNumber_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
@@ -223,7 +257,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("1등 당첨 테스트")
+    @DisplayName("1등 당첨 테스트 - 보너스 볼 매치 X")
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount6_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");

@@ -19,4 +19,4 @@
 - [x] \1. `LottoTicketList` 다시 적용
 - [x] \2. 로또 티켓 가격 위치 `LottoTicket` --> `LottoMachine` 으로 이동
 - [x] \3. `LottoTicketWinner` 추가
-- [ ] \4. 보너스 여부와 상관없이 당첨이 잘 되는지 검증하는 테스트 추가
+- [x] \4. 보너스 여부와 상관없이 당첨이 잘 되는지 검증하는 테스트 추가
