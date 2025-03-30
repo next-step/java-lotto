@@ -34,7 +34,7 @@ public class Lotto {
         }
     }
 
-    private void validateSingleNumberRange(Integer number) {
+    private void validateSingleNumberRange(int number) {
         if (number < LOTTO_NUMBER_START || number > LOTTO_NUMBER_END) {
             throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
         }
