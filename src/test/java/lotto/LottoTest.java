@@ -12,22 +12,25 @@ class LottoTest {
     @DisplayName("로또는 6개의 번호를 갖는다.")
     @Test
     void lottoNumber() {
-        Lotto lotto = new Lotto(new RandomLottoNumberGenerator());
+        List<Integer> validNumbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(new FixedLottoNumberGenerator(validNumbers));
         assertThat(lotto.getNumbers()).hasSize(6);
     }
 
     @DisplayName("로또 번호의 개수가 6개가 아니라면 IllegalArgumentException 예외를 발생시킨다.")
     @Test
     void lottoNumberCountException() {
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
-        assertThatThrownBy(() -> new Lotto(numbers))
+        List<Integer> invalidNumbers = List.of(1, 2, 3, 4, 5);
+        LottoNumberGenerator generator = new FixedLottoNumberGenerator(invalidNumbers);
+        assertThatThrownBy(() -> new Lotto(generator))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또의 번호는 1~45의 범위를 갖는다.")
     @Test
     void lottoNumberRange() {
-        Lotto lotto = new Lotto(new RandomLottoNumberGenerator());
+        List<Integer> validNumbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(new FixedLottoNumberGenerator(validNumbers));
         assertThat(lotto.getNumbers()).allSatisfy(number -> {
             assertThat(number).isBetween(1, 45);
         });
@@ -36,8 +39,9 @@ class LottoTest {
     @DisplayName("로또의 번호가 1~45 범위가 아니라면 IllegalArgumentException 예외를 발생시킨다.")
     @Test
     void lottoNumberOutOfRange() {
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 46);
-        assertThatThrownBy(() -> new Lotto(numbers))
+        List<Integer> invalidNumbers = List.of(1, 2, 3, 4, 5, 46);
+        LottoNumberGenerator generator = new FixedLottoNumberGenerator(invalidNumbers);
+        assertThatThrownBy(() -> new Lotto(generator))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -47,8 +51,8 @@ class LottoTest {
         List<Integer> number1 = List.of(1, 2, 3, 4, 5, 6);
         List<Integer> number2 = List.of(4, 5, 6, 7, 8, 9);
 
-        Lotto lotto1 = new Lotto(number1);
-        Lotto lotto2 = new Lotto(number2);
+        Lotto lotto1 = new Lotto(new FixedLottoNumberGenerator(number1));
+        Lotto lotto2 = new Lotto(new FixedLottoNumberGenerator(number2));
 
         assertThat(lotto1.countMatchWith(lotto2)).isEqualTo(3);
     }
