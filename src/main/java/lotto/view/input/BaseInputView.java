@@ -16,7 +16,7 @@ public abstract class BaseInputView implements InputView {
                 .collect(Collectors.toSet());
     }
 
-    private Integer parseInt(String input) {
+    protected Integer parseInt(String input) {
         return Integer.parseInt(input);
     }
 }

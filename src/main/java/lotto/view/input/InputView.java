@@ -1,7 +1,8 @@
 package lotto.view.input;
 
 import lotto.domain.PaymentReceipt;
-import lotto.domain.product.LotteryTicket;
+import lotto.domain.product.LottoNumber;
+import lotto.domain.product.WinningTicket;
 
 public interface InputView {
 
@@ -11,5 +12,7 @@ public interface InputView {
 
     void closeScanner();
 
-    LotteryTicket lastWeekNumber();
+    WinningTicket getWinningTicket();
+
+    LottoNumber getBonusNumber();
 }
