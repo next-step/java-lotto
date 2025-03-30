@@ -6,10 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.view.output.OutputView.NUMBER_OUTPUT_DELIMITER;
-import static lotto.view.output.OutputView.OUTPUT_PREFIX;
-import static lotto.view.output.OutputView.OUTPUT_SUFFIX;
-
 public class LotteryTicket implements Product {
 
     private static final int LOTTO_PRICE = 1000;
@@ -51,14 +47,6 @@ public class LotteryTicket implements Product {
                 .filter(winningTicket.numbers::contains)
                 .count());
     }
-
-//    public String getValues() {
-//        return numbers.stream()
-//                .map(LottoNumber::getValue)
-//                .sorted()
-//                .map(String::valueOf)
-//                .collect(Collectors.joining(NUMBER_OUTPUT_DELIMITER, OUTPUT_PREFIX, OUTPUT_SUFFIX));
-//    }
 
     public Set<Integer> getValues() {
         return numbers.stream()
