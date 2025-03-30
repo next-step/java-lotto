@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
@@ -16,7 +15,7 @@ public class LottoTicket {
         return  numbers.toString();
     }
 
-    public int matchCountWith(List<Integer> winningNumbers) {
+    public int matchCountWith(Set<Integer> winningNumbers) {
         return (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();

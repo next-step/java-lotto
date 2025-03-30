@@ -1,12 +1,15 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Set;
 
 public class WinningNumbers {
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public WinningNumbers(List<Integer> numbers) {
+    public WinningNumbers(Set<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
+        }
         this.numbers = numbers;
     }
 
