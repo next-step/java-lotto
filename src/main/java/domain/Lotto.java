@@ -4,6 +4,8 @@ package domain;
 import java.util.List;
 
 public class Lotto {
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> lottoNumbers) {

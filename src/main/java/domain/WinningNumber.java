@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static domain.Lotto.LOTTO_MAX_NUMBER;
+import static domain.Lotto.LOTTO_MIN_NUMBER;
+
 public class WinningNumber {
-    private final int LOTTO_MIN_NUMBER = 1;
-    private final int LOTTO_MAX_NUMBER = 45;
     private final List<Integer> numbers;
     private final int bonusNumber;
 
@@ -42,6 +43,11 @@ public class WinningNumber {
         validateBonusNumber(numbers, bonusNumber);
     }
 
+    private void validateNumbers(List<Integer> numbers) {
+        validateDuplicateNumbers(numbers);
+
+    }
+
     private void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
@@ -51,7 +57,7 @@ public class WinningNumber {
         }
     }
 
-    private static void validateDuplicateNumbers(List<Integer> numbers) {
+    private void validateDuplicateNumbers(List<Integer> numbers) {
         List<Integer> distinctNumbers = numbers.stream()
                 .distinct()
                 .collect(Collectors.toList());
