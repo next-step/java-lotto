@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import lotto.strategy.AutoLottoStrategy;
 import lotto.strategy.LottoStrategy;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoTickets {
     public static final int LOTTO_PRICE = 1000;
@@ -26,10 +27,6 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
-    public void generateAllLottoNumbers(LottoStrategy lottoStrategy){
-        lottoTickets.forEach(lottoTickets -> lottoTickets.generateLottoNumbers(lottoStrategy));
-    }
-
     public static LottoTickets purchase(int payment, LottoStrategy lottoStrategy) {
         int count = payment / LOTTO_PRICE;
         return fromNumbers(count, lottoStrategy);
@@ -39,4 +36,20 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
+    private Map<Rank, Integer> initializeResults() {
+        // Rank의 모든 값을 초기화하여 결과 맵 생성
+        Map<Rank, Integer> results = new EnumMap<>(Rank.class);
+        for (Rank rank : Rank.values()) {
+            results.put(rank, 0);
+        }
+        return results;
+    }
+
+    public Map<Rank, Integer> match(LottoTicket winningTicket) {
+        Map<Rank, Integer> results = initializeResults();
+        lottoTickets.stream()
+                .map(ticket -> Rank.getRankByMatchCount(ticket.matchLottoNumbers(winningTicket)))
+                .forEach(rank -> results.merge(rank, 1, Integer::sum));
+        return results;
+    }
 }

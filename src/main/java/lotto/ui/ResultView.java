@@ -2,6 +2,8 @@ package lotto.ui;
 
 import lotto.domain.*;
 
+import java.util.List;
+
 public class ResultView {
     public static void viewLottoCount(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
@@ -9,7 +11,9 @@ public class ResultView {
 
     public static void viewLottoTickets(LottoGame lottoGame) {
         for (LottoTicket ticket : lottoGame.getTickets().getLottoTickets()) {
-            System.out.println("[" + ticket.formatLottoNumbers() + "]");
+            System.out.println("["  + String.join(", ", ticket.getLottoNumbers().stream()
+                    .map(String::valueOf)
+                    .toArray(String[]::new)) + "]");
         }
         System.out.println();
     }
@@ -29,8 +33,11 @@ public class ResultView {
 
     }
 
-    public static void viewReturnStatistics(Double returnRate) {
-        System.out.printf("총 수익률은 %.2f입니다.%n",
-                returnRate, returnRate < 1 ? "손해" : "이익");
+    public static void printListWithCommas(List<Integer> list) {
+        // 리스트의 요소를 문자열로 변환 후 ", "로 연결
+        System.out.println(String.join(", ", list.stream()
+                .map(String::valueOf)
+                .toArray(String[]::new)));
     }
+
 }
