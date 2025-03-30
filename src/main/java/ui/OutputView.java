@@ -24,7 +24,9 @@ public class OutputView {
         System.out.println("3개 일치 (5000원) - " + result.getOrDefault(3L, 0L) + "개");
         System.out.println("4개 일치 (50000원) - " + result.getOrDefault(4L, 0L) + "개");
         System.out.println("5개 일치 (500000원) - " + result.getOrDefault(5L, 0L) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + result.getOrDefault(5L, 0L) + "개");
         System.out.println("6개 일치 (2000000000) - " + result.getOrDefault(6L, 0L) + "개");
+
         System.out.println("총 수익률은 " + calculateYield(result) + "%입니다.");
     }
 }
