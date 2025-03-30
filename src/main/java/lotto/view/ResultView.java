@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.LottoReport;
-import lotto.domain.LottoPrize;
+import lotto.domain.prize.LottoPrize;
 import lotto.domain.Lottos;
 
 public class ResultView {

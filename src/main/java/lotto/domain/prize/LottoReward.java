@@ -1,9 +1,7 @@
-package lotto;
+package lotto.domain.prize;
 
-import lotto.domain.LottoPrize;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
-import lotto.LottoPrizeMatcher;
 
 import java.util.Arrays;
 import java.util.List;

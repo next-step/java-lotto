@@ -1,9 +1,10 @@
 package lotto;
 
-import lotto.domain.LottoPrize;
+import lotto.domain.prize.LottoPrize;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
+import lotto.domain.prize.LottoReward;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;

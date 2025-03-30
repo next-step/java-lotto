@@ -1,14 +1,13 @@
 package lotto.view;
 
-import lotto.LottoGeneratorTest.TestLottoGenerator;
+import lotto.domain.generator.LottoGeneratorTest.TestLottoGenerator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoPrize;
+import lotto.domain.prize.LottoPrize;
 import lotto.domain.Lottos;
 import lotto.LottoReport;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
