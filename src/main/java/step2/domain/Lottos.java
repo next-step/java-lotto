@@ -30,8 +30,4 @@ public class Lottos {
     public Stream<Lotto> stream() {
         return lottos.stream();
     }
-
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
 }
