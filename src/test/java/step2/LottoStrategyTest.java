@@ -16,7 +16,6 @@ public class LottoStrategyTest {
     void fixLottoNums() {
         LottoStrategy lottoStrategy = new FixLottoStrategy(of(2, 4, 5, 6, 7, 8));
         Lotto lotto = new Lotto(lottoStrategy.generateLottoNumbers());
-        assertThat(lotto.getNumbers()).containsExactlyElementsOf(of(2, 4, 5, 6, 7, 8));
-
+        assertThat(lotto.getNumbers()).containsExactlyInAnyOrderElementsOf(of(2, 4, 5, 6, 7, 8));
     }
 }

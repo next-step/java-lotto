@@ -26,8 +26,6 @@ public class StatisticsTest {
         assertThat(winningCounts.get(Rank.FIRST)).isEqualTo(1);
         assertThat(winningCounts.get(Rank.SECOND)).isEqualTo(1);
         assertThat(winningCounts.get(Rank.THIRD)).isEqualTo(1);
-        assertThat(winningCounts.getOrDefault(Rank.THIRD, 0)).isEqualTo(0);
-
     }
 
     @Test
