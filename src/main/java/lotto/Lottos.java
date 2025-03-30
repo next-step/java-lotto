@@ -1,9 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
 
@@ -25,19 +23,19 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Integer, Integer> countMatchResults(Lotto winningLotto) {
-        Map<Integer, Integer> matchResults = new HashMap<>();
+    public WinningResult countMatchResults(Lotto winningLotto) {
+        WinningResult winningResult = new WinningResult();
         for (Lotto lotto : lottos) {
-            countIfWinningLotto(winningLotto, lotto, matchResults);
+            countIfWinningLotto(winningLotto, lotto, winningResult);
         }
-        return matchResults;
+        return winningResult;
     }
 
     private static void countIfWinningLotto(Lotto winningLotto, Lotto lotto,
-        Map<Integer, Integer> matchResults) {
+        WinningResult winningResult) {
         if (lotto.isWinningLotto(winningLotto)) {
             int matchCount = lotto.countMatchWith(winningLotto);
-            matchResults.put(matchCount, matchResults.getOrDefault(matchCount, 0) + 1);
+            winningResult.add(matchCount);
         }
     }
 }
