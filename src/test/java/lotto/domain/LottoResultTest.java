@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoResultTest {
 
@@ -23,8 +24,8 @@ class LottoResultTest {
         Map<LottoResult.Rank, Long> statistics = lottoResult.getStatistics();
 
         // then
-        assertThat(statistics.get(LottoResult.Rank.FOURTH)).isEqualTo(2);
-        assertThat(statistics.get(LottoResult.Rank.THIRD)).isEqualTo(1);
+        assertAll(() -> assertThat(statistics.get(LottoResult.Rank.FOURTH)).isEqualTo(2),
+                () -> assertThat(statistics.get(LottoResult.Rank.THIRD)).isEqualTo(1));
     }
 
     @DisplayName("일치하는 번호가 3개 미만이면 MISS 등수로 처리된다.")
