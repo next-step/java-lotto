@@ -26,7 +26,7 @@ class InputViewTest {
 
     assertThatThrownBy(inputView::receiveMoney)
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("숫자가 아닌 값이 포함되어 있습니다.");
+            .hasMessage("구매 금액은 숫자여야 합니다.");
   }
 
   @DisplayName("보너스 볼을 입력받는 기능 테스트")
@@ -46,9 +46,9 @@ class InputViewTest {
     String testInput = "a";
     InputView inputView = new InputView(getTestScanner(testInput));
 
-    assertThatThrownBy(inputView::receiveMoney)
+    assertThatThrownBy(inputView::receiveBonusNumber)
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("숫자가 아닌 값이 포함되어 있습니다.");
+            .hasMessage("로또 번호는 숫자여야 합니다.");
   }
 
   @DisplayName("로또 번호를 입력받는 기능 테스트")

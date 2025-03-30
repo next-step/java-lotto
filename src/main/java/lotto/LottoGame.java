@@ -21,12 +21,16 @@ public class LottoGame {
   }
 
   public void play() {
-    PurchaseAmount purchaseAmount = receiveMoney();
-    Lottos lottos = buyLottos(purchaseAmount);
-    List<LottoNumber> winningLottoNumbers = receiveWinningLottoNumbers();
-    LottoNumber bonusNumber = receiveBonusNumber();
-    WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
-    printResult(purchaseAmount, winningLotto, lottos);
+    try {
+      PurchaseAmount purchaseAmount = receiveMoney();
+      Lottos lottos = buyLottos(purchaseAmount);
+      List<LottoNumber> winningLottoNumbers = receiveWinningLottoNumbers();
+      LottoNumber bonusNumber = receiveBonusNumber();
+      WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
+      printResult(purchaseAmount, winningLotto, lottos);
+    } catch (IllegalArgumentException e) {
+      System.out.println("에러 발생: " + e.getMessage());
+    }
   }
 
   private PurchaseAmount receiveMoney() {

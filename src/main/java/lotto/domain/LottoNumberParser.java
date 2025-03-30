@@ -15,7 +15,7 @@ public class LottoNumberParser {
               .map(num -> new LottoNumber(Integer.parseInt(num)))
               .collect(Collectors.toList());
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+      throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
     }
   }
 }
