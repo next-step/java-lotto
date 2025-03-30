@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import lotto.domain.Lotto;
-import lotto.strategy.LottoAutoStrategy;
 import lotto.domain.LottoMachine;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoCheckerService;
+import lotto.strategy.LottoAutoStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,7 +21,7 @@ public class Main {
         OutputView.printLottoCount(lottos.size());
         OutputView.printLottos(lottos);
 
-        WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers());
+        WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
         LottoCheckerService checker = new LottoCheckerService(winningLotto);
         OutputView.printWinningStatistics(money, checker.check(lottos));
     }
