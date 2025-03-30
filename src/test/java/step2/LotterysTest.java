@@ -2,7 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.shuffle.Shuffle;
+import step2.generate.Generate;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ public class LotterysTest {
     @Test
     @DisplayName("count 만큼 로또 생성하는지 체크한다.")
     void createLottoTest() {
-        Lotterys lotterys = new Lotterys(1, new Shuffle() {
+        Lotterys lotterys = new Lotterys(1, new Generate() {
             @Override
-            public List<Integer> makeRandomNumbers(int size) {
+            public List<Integer> makeNumbers(int size) {
                 return List.of(1, 2, 3, 4, 5, 6);
             }
         });
@@ -23,9 +23,9 @@ public class LotterysTest {
     @Test
     @DisplayName("shuffle 을 통해 로또 번호를 생성한다.")
     void randomNumbersTest() {
-        Lotterys lotterys = new Lotterys(1, new Shuffle() {
+        Lotterys lotterys = new Lotterys(1, new Generate() {
             @Override
-            public List<Integer> makeRandomNumbers(int size) {
+            public List<Integer> makeNumbers(int size) {
                 return List.of(1, 2, 3, 4, 5, 6);
             }
         });

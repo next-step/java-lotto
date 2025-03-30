@@ -1,19 +1,17 @@
 package step2;
 
-import step2.shuffle.Shuffle;
+import step2.generate.Generate;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lotterys {
     private List<Lottery> lottos;
     private static final int LOTTO_LENGTH = 6;
-    public Lotterys(int count, Shuffle shuffle) {
+    public Lotterys(int count, Generate generate) {
         lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lottery(shuffle.makeRandomNumbers(LOTTO_LENGTH)));
+            lottos.add(new Lottery(generate.makeNumbers(LOTTO_LENGTH)));
         }
     }
 

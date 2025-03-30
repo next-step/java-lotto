@@ -2,8 +2,8 @@ import step2.LotteryCount;
 import step2.Lotterys;
 import step2.PrizeWinningNumber;
 import step2.WinningResults;
-import step2.shuffle.RandomShuffle;
-import step2.shuffle.Shuffle;
+import step2.generate.RandomGenerate;
+import step2.generate.Generate;
 import step2.util.InputView;
 import step2.util.OutputView;
 
@@ -14,7 +14,7 @@ public class Main {
         LotteryCount lotteryCount = new LotteryCount(purchaseAmount);
         OutputView.printPurchaseAmount(lotteryCount.getLottoCount());
 
-        Shuffle randomShuffle = new RandomShuffle();
+        Generate randomShuffle = new RandomGenerate();
         Lotterys lotterys = new Lotterys(lotteryCount.getLottoCount(), randomShuffle);
 
         OutputView.printLotteryNumbers(lotterys);
