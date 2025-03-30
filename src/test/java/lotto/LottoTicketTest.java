@@ -1,15 +1,16 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.strategy.AutoLottoStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import static lotto.LottoTestUtils.createLottoTicket;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTicketTest {
 
@@ -22,7 +23,44 @@ public class LottoTicketTest {
     @Test
     @DisplayName("당첨번호와 매칭되는 수를 반환한다.")
     void matchLottoNumbers(){
-       List<Integer> winningNumbers = Arrays.asList(1, 1, 1, 1, 1, 1);
-       assertThat(new LottoTicket(winningNumbers).matchLottoNumbers((winningNumbers))).isEqualTo(6);
+        LottoTicket purchasedTicket = createLottoTicket(List.of(1, 2, 3, 7, 8, 9));
+        LottoTicket winningTicket = createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
+
+        int matchCount = purchasedTicket.matchLottoNumbers(winningTicket);
+
+        assertThat(matchCount).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("중복된 숫자가 포함된 6개의 숫자를 입력하면 오류가 발생한다.")
+    void validateLottoNumbers_withDuplicateNumbers() {
+        List<LottoNumber> duplicateNumbers = List.of(
+                LottoNumber.of(1),
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5)
+        );
+
+        assertThatThrownBy(() -> new LottoTicket(duplicateNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 중복되지 않은 6개의 숫자여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("6개 숫자가 아니면 오류가 발생한다.")
+    void validateLottoNumbers_withLessThanSixNumbers() {
+        List<LottoNumber> lessNumbers = List.of(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3)
+        );
+
+        assertThatThrownBy(() -> new LottoTicket(lessNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 중복되지 않은 6개의 숫자여야 합니다.");
+    }
+
+
 }

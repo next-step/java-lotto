@@ -1,36 +1,44 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.strategy.AutoLottoStrategy;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+import java.util.List;
+import java.util.Map;
+
+import static lotto.LottoTestUtils.createLottoTicket;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGameTest {
 
-    public static final int COUNT = 2;
-
-
     @Test
-    void gameStartAndcalculateReturnRate() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+    void gameStart() {
+        // 당첨 티켓 생성
+        LottoTicket winningTicket = createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
 
-        List<LottoTicket> tickets = new ArrayList<>();
-        tickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        tickets.add(new LottoTicket(Arrays.asList(11, 12, 13, 14, 15, 16)));
+        // 구매한 티켓 리스트 생성
+        List<LottoTicket> tickets = List.of(
+                createLottoTicket(List.of(1, 2, 3, 7, 8, 9)),
+                createLottoTicket(List.of(11, 12, 13, 14, 15, 16))
+        );
 
+        // 실제 게임 실행
         LottoGame lottoGame = new LottoGame(new LottoTickets(tickets));
-        GameResult gameResult = lottoGame.gameStart(winningNumbers);
+        GameResult gameResult = lottoGame.gameStart(winningTicket);
 
-        assertThat(gameResult.getResultStats().get(Rank.FOURTH)).isEqualTo(1);
-        assertThat(gameResult.getResultStats().get(Rank.MISS)).isEqualTo(1);
-        assertThat(gameResult.getReturnRate()).isEqualTo(2.5);
+        // 기대하는 결과 생성
+        Map<Rank, Integer> expectedStats = Map.of(
+                Rank.FIRST, 0,
+                Rank.SECOND, 0,
+                Rank.THIRD, 0,
+                Rank.FOURTH, 1,
+                Rank.MISS, 1
+        );
+        GameResult expectedGameResult = new GameResult(expectedStats, 2.5);
 
+        assertThat(gameResult).isEqualTo(expectedGameResult);
     }
+
 
 }
