@@ -83,3 +83,43 @@ private static Calculation getCalculation(String formula) {
     return null;
 }
 ```
+## Feedback
+### SymbolSequence
+- SymbolSequence.size() 반환형 wrapper 대신 primitive 로 변경
+### Operator
+  - Operator.operate()
+    - 현재는 switch-case 문으로 구현되어 있어 연산자가 늘어날 경우 이 부분을 수정해야 함
+      - OperatorType enum에 연산자별 연산을 수행하는 메서드를 포함 <- 이 방법은 문제가 복잡해질 경우 좋지 않음
+        ```java
+        public enum OperatorType {
+          ADD("+", (a, b) -> a + b),
+          SUBTRACT("-", (a, b) -> a - b),
+          MULTIPLY("*", (a, b) -> a * b),
+          DIVIDE("/", (a, b) -> {
+              if (b == 0) throw new ArithmeticException("Division by zero");
+              return a / b;
+          });
+  
+          private final String value;
+          private final BinaryOperator<Double> operation;
+  
+          OperatorType(String value, BinaryOperator<Double> operation) {
+              this.value = value;
+              this.operation = operation;
+          }
+  
+          public double calculate(double operand1, double operand2) {
+              return operation.apply(operand1, operand2);
+          }
+  
+          public static OperatorType findOperatorByString(String value) {
+              for (OperatorType operatorType : OperatorType.values()) {
+                  if (operatorType.value.equals(value)) {
+                      return operatorType;
+                  }
+              }
+              throw new IllegalArgumentException("Invalid operator: " + value);
+          }
+        }
+        ```
+      - `Operator` 인터페이스를 만들고 각 연산자별로 구현체를 만들어 연산자별 연산을 수행

@@ -1,4 +1,4 @@
-package domain.symbol;
+package step1.symbol;
 
 public class Operand {
     private final Integer value;

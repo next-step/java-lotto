@@ -1,7 +1,7 @@
-package domain;
+package step1;
 
-import domain.symbol.Operator;
-import domain.symbol.SymbolSequence;
+import step1.symbol.OperatorType;
+import step1.symbol.SymbolSequence;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,11 +12,11 @@ class SymbolSequenceTest {
     @Test
     void hasNextOperatorTest() {
         // Given
-        SymbolSequence<Operator> operators = new SymbolSequence<>();
-        operators.add(new Operator("+"));
-        operators.add(new Operator("-"));
-        operators.add(new Operator("*"));
-        operators.add(new Operator("/"));
+        SymbolSequence<OperatorType> operators = new SymbolSequence<>();
+        operators.add(OperatorType.findOperatorByString("+"));
+        operators.add(OperatorType.findOperatorByString("-"));
+        operators.add(OperatorType.findOperatorByString("*"));
+        operators.add(OperatorType.findOperatorByString("/"));
 
         // When
         boolean[] actualResults = new boolean[]{
@@ -32,7 +32,7 @@ class SymbolSequenceTest {
         Assertions.assertThat(actualResults).containsExactly(expectedResults);
     }
 
-    private boolean getNextOperatorAndCheck(SymbolSequence<Operator> operators) {
+    private boolean getNextOperatorAndCheck(SymbolSequence<OperatorType> operators) {
         operators.getNext();
         return operators.hasNext();
     }

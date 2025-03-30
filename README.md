@@ -23,3 +23,36 @@
 - [x] Views 구현
   - [x] InputView 구현
   - [x] ResultView 구현
+### 2단계
+- [x] 핵심 기능 구현
+  - [x] 로또 구입 금액에 해당하는 로또 발급
+    - [x] 기능 구현
+    - [x] 예외 처리 구현
+      - [x] 로또 구입 금액이 1000원 단위가 아닌 경우 IllegalArgumentException throw
+      - [x] 로또 구입 금액이 0원 이하인 경우 IllegalArgumentException throw
+    - [x] 리팩토링
+  - [x] 로또 생성
+    - [x] 조건에 맞는 무작위 번호 생성 구현
+  - [x] 당첨 번호 구현
+    - [x] 당첨 여부 확인 구현
+    - [x] 등수 구현
+  - [x] 당첨 통계 구현
+    - [x] 통합 통계 구현
+    - [x] 당첨금 계산
+  - [x] 통계 구현
+  - [x] 게임 진행 구현
+  - [x] 리팩토링
+- [x] Views 구현
+  - [x] InputView 구현
+  - [x] ResultView 구현
+- [x] Controller 구현
+  - [x] 리팩토링
+- [ ] 피드백
+  - [x] Lotto 생성 시 검증 추가
+  - [ ] WinningLotto.countMatchedNumbers 파라미터 수정
+  - [x] LottoGenerator 이름 변경
+  - [x] LottoFactory 제거 후 Lotto에 정적 팩토리 메서드 도입
+  - [x] MatchedCount equals 및 hashCode 구현
+  - [x] Rank.displayRank 변경
+  - [x] toString 대신 String 반환 메소드 생성
+  - [x] LottoGameResult에서 winningRate 계산하도록 변경
