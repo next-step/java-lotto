@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class LottoNumberConverter {
     public static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 }

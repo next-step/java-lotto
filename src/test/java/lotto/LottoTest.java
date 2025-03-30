@@ -17,10 +17,10 @@ class LottoTest {
         Lotto lotto = Lotto.of(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
         Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
-        assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(7)))
+        assertThatThrownBy(() -> lottoNumbers.add(LottoNumber.of(7)))
                 .isInstanceOf(UnsupportedOperationException.class);
 
-        assertThatThrownBy(() -> lottoNumbers.remove(new LottoNumber(1)))
+        assertThatThrownBy(() -> lottoNumbers.remove(LottoNumber.of(1)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
@@ -35,6 +35,6 @@ class LottoTest {
     @Test
     public void 로또가_특정_번호를_갖고있는지_여부를_반환한다() {
         Lotto lotto = Lotto.of(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
-        assertThat(lotto.isNumberMatched(new LottoNumber(3))).isTrue();
+        assertThat(lotto.isNumberMatched(LottoNumber.of(3))).isTrue();
     }
 }
