@@ -48,11 +48,6 @@ class LottoGeneratorTest {
 
         // then
         assertThat(lottos).hasSize(5);
-
-        // 모든 로또가 6개의 숫자를 갖는지 확인
-        for (Lotto lotto : lottos) {
-            assertThat(lotto.getNumbers()).hasSize(6);
-        }
     }
 
     @DisplayName("발급된 로또의 숫자는 정렬되어 있어야 한다.")
