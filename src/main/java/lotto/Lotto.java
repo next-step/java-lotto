@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Lotto {
 
+    private static final int WINNING_CRITERIA = 3;
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -30,6 +31,10 @@ public class Lotto {
         return (int) numbers.stream()
             .filter(other.getNumbers()::contains)
             .count();
+    }
+
+    public boolean isWinningLotto(Lotto winningLotto) {
+        return countMatchWith(winningLotto) >= WINNING_CRITERIA;
     }
 
     public List<Integer> getNumbers() {

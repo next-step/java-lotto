@@ -4,8 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
 
@@ -42,7 +46,7 @@ class LottoTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("Lotto 는 다른 Lotto와 일치하는 번호의 개수를 확인할 수 있다.")
+    @DisplayName("Lotto 는 다른 Lotto 와 일치하는 번호의 개수를 확인할 수 있다.")
     @Test
     void checkNumber() {
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
@@ -50,4 +54,23 @@ class LottoTest {
 
         assertThat(lotto1.countMatchWith(lotto2)).isEqualTo(3);
     }
+
+    @DisplayName("Lotto 는 당첨 로또를 통해 당첨 조건에 부합하는지 판단할 수 있다.")
+    @ParameterizedTest(name = "{index}: purchased={0}")
+    @MethodSource("providePurchasedLottos")
+    void confirm(List<Integer> numbers) {
+        Lotto purchasedLotto = new Lotto(numbers);
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(purchasedLotto.isWinningLotto(winningLotto)).isTrue();
+    }
+
+    private static Stream<Arguments> providePurchasedLottos() {
+        return Stream.of(
+            Arguments.of(List.of(1, 2, 3, 4, 5, 6)),
+            Arguments.of(List.of(2, 3, 4, 5, 6, 7)),
+            Arguments.of(List.of(3, 4, 5, 6, 7, 8)),
+            Arguments.of(List.of(4, 5, 6, 7, 8, 9))
+        );
+    }
+
 }
