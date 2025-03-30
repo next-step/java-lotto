@@ -11,7 +11,7 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     @Override
     public List<Integer> generate() {
         List<Integer> randomLottoNumber = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < LottoRules.LOTTO_NUMBER_COUNT; i++) {
             randomLottoNumber.add(random.nextInt(45) + 1);
         }
         return randomLottoNumber;

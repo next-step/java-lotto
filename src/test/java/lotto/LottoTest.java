@@ -16,6 +16,14 @@ class LottoTest {
         assertThat(lotto.getNumbers()).hasSize(6);
     }
 
+    @DisplayName("로또 번호의 개수가 6개가 아니라면 IllegalArgumentException 예외를 발생시킨다.")
+    @Test
+    void lottoNumberCountException() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+        assertThatThrownBy(() -> new Lotto(numbers))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("로또의 번호는 1~45의 범위를 갖는다.")
     @Test
     void lottoNumberRange() {

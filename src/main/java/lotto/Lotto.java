@@ -8,7 +8,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validateNumbersRange(numbers);
+        validateNumbers(numbers);
         this.numbers = new ArrayList<>(numbers);
     }
 
@@ -16,8 +16,12 @@ public class Lotto {
         this(generator.generate());
     }
 
-    private void validateNumbersRange(List<Integer> numbers) {
-        if (numbers.stream().anyMatch(n -> n < 1 || n > 45)) {
+    private void validateNumbers(List<Integer> numbers) {
+        if (numbers.size() != LottoRules.LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
+        if (numbers.stream()
+            .anyMatch(n -> n < LottoRules.MIN_NUMBER || n > LottoRules.MAX_NUMBER)) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이여야 합니다.");
         }
     }
