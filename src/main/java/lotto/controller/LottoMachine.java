@@ -1,11 +1,11 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.ManualTicketGenerator;
-import lotto.domain.SummaryReport;
+import lotto.domain.*;
 import lotto.view.InputViewInterface;
 import lotto.view.OutputViewInterface;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoMachine {
     public static final String PAID_MONEY_MSG = "구입금액을 입력해 주세요.";
@@ -28,17 +28,10 @@ public class LottoMachine {
         outputView.printTickets(lottoTickets);
 
         LottoTicket winningTicket = getWinningTicket();
-
         int bonusNumber = getBonusNumber();
 
         SummaryReport summaryReport = lottoTickets.getSummary(winningTicket, bonusNumber);
-
         outputView.printSummary(summaryReport);
-    }
-
-    private int getBonusNumber() {
-        outputView.printPrompt(BONUS_NUMBERS_MSG);
-        return inputView.getNumberInput();
     }
 
     private LottoTickets generateAllTickets() {
@@ -47,41 +40,32 @@ public class LottoMachine {
 
         outputView.printPrompt(MANUAL_TICKET_COUNT_MSG);
         int manualCount = inputView.getNumberInput();
+        List<int[]> manualNumbers = getManualNumbers(manualCount);
 
-        LottoTickets lottoTickets = generateManualTickets(manualCount);
-        LottoTickets autoTickets = LottoTickets.generate(paidMoney - (manualCount * LottoTicket.PRICE));
-        lottoTickets.addAll(autoTickets);
-        outputView.printTicketCount(manualCount, autoTickets.size());
+        int autoCount = (paidMoney - (manualCount * LottoTicket.PRICE)) / LottoTicket.PRICE;
+        LottoTickets lottoTickets = LottoTickets.generate(manualNumbers, autoCount);
+        outputView.printTicketCount(manualCount, autoCount);
 
         return lottoTickets;
     }
 
-    private LottoTickets generateManualTickets(int count) {
+    private List<int[]> getManualNumbers(int count) {
         outputView.printPrompt(MANUAL_TICKET_NUMBERS_MSG);
-        LottoTickets manualTickets = new LottoTickets();
-        int i = 0;
-        while (i < count) {
-            int[] numbers = inputView.getNumberListInput(DELIMITER);
-            LottoTicket ticket = createTicket(numbers);
-            if (ticket == null) continue;
-            manualTickets.add(ticket);
-            i++;
+        List<int[]> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            manualNumbers.add(inputView.getNumberListInput(DELIMITER));
         }
-        return manualTickets;
-    }
-
-    private LottoTicket createTicket(int[] numbers) {
-        try {
-            return ManualTicketGenerator.generate(numbers);
-        } catch (IllegalArgumentException e) {
-            System.out.println("❌ " + e.getMessage());
-            return null;
-        }
+        return manualNumbers;
     }
 
     private LottoTicket getWinningTicket() {
         outputView.printPrompt(WINNING_LOTTERY_NUMBERS_MSG);
         int[] winningNumber = inputView.getNumberListInput(DELIMITER);
         return new LottoTicket(winningNumber);
+    }
+
+    private int getBonusNumber() {
+        outputView.printPrompt(BONUS_NUMBERS_MSG);
+        return inputView.getNumberInput();
     }
 }

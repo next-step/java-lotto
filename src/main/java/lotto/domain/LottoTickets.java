@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoTickets {
     List<LottoTicket> tickets;
@@ -14,10 +11,6 @@ public class LottoTickets {
 
     public void add(LottoTicket ticket) {
         tickets.add(ticket);
-    }
-
-    public void addAll(LottoTickets tickets) {
-        tickets.getTickets().forEach(this::add);
     }
 
     public List<LottoTicket> getTickets() {
@@ -42,13 +35,29 @@ public class LottoTickets {
         return new SummaryReport(summary);
     }
 
-    public static LottoTickets generate(int paidMoney) {
-        int count = paidMoney / LottoTicket.PRICE;
+    public static LottoTickets generate(int autoCount) {
+        return generate(List.of(), autoCount);
+    }
 
-        LottoTickets list = new LottoTickets();
-        for (int i = 0; i < count; i++) {
-            list.add(AutoTicketGenerator.generate());
+    public static LottoTickets generate(List<int[]> manualNumbers) {
+        return generate(manualNumbers, 0);
+    }
+
+    public static LottoTickets generate(List<int[]> manualNumbers, int autoCount) {
+        LottoTickets allTickets = new LottoTickets();
+
+        for (int i = 0; i < manualNumbers.size(); i++) {
+            int[] numbers = manualNumbers.get(i);
+            try {
+                allTickets.add(LottoTicketGenerator.manual(numbers));
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException((i + 1) + "번째 수동 번호" + Arrays.toString(numbers) + "가 유효하지 않습니다 - " + e.getMessage());
+            }
         }
-        return list;
+
+        for (int i = 0; i < autoCount; i++) {
+            allTickets.add(LottoTicketGenerator.auto());
+        }
+        return allTickets;
     }
 }

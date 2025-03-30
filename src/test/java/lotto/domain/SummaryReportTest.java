@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SummaryReportTest {
     @Test
+    @DisplayName("로또 티켓 수익률 계산")
     void calculate() {
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}));

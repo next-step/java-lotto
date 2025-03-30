@@ -27,6 +27,9 @@ public enum PrizeRank {
     }
 
     public static PrizeRank of(MatchCount matchCount, boolean bonus) {
-        return Arrays.stream(values()).filter(rank -> rank.rankRule.matches(matchCount, bonus)).findFirst().orElse(NONE);
+        return Arrays.stream(values())
+                .filter(rank -> rank.rankRule.matches(matchCount, bonus))
+                .findFirst()
+                .orElse(NONE);
     }
 }

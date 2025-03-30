@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class AutoTicketGenerator {
+public class LottoTicketGenerator {
     private static final List<LottoNumber> candidates = new ArrayList<>();
 
     static {
@@ -13,9 +15,16 @@ public class AutoTicketGenerator {
         }
     }
 
-    public static LottoTicket generate() {
+    public static LottoTicket auto() {
         List<LottoNumber> copy = new ArrayList<>(candidates);
         Collections.shuffle(copy);
         return new LottoTicket(copy.subList(0, LottoTicket.NUMBER_LENGTH));
+    }
+
+    public static LottoTicket manual(int[] numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList());
+        return new LottoTicket(lottoNumbers);
     }
 }
