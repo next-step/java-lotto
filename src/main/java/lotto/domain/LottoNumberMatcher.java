@@ -24,17 +24,15 @@ public class LottoNumberMatcher {
     private void calculateMatchStats(Map<LottoRank, Integer> rank) {
         lottoNumbers.forEach(lottoNumber -> {
             LottoRank lottoRank = lottoNumber.lottoRank(winningLottoNumbers);
-            if (lottoRank != null) {
-                rank.put(lottoRank, rank.get(lottoRank) + 1);
-            }
+            rank.put(lottoRank, rank.get(lottoRank) + 1);
         });
     }
 
     private static Map<LottoRank, Integer> initializeLottoWinningBoardMap() {
-        Map<LottoRank, Integer> rank = new EnumMap<>(LottoRank.class);
-        for(Integer i = 3; i <= 6; i++) {
-            rank.put(LottoRank.fromMatch(i), 0);
+        Map<LottoRank, Integer> rankMap = new EnumMap<>(LottoRank.class);
+        for(LottoRank lottoRank: LottoRank.values()) {
+            rankMap.put(lottoRank, 0);
         }
-        return rank;
+        return rankMap;
     }
 }

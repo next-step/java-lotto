@@ -33,8 +33,10 @@ public class ResultView {
     private static void showWinningRecord(LottoWinningRecord record) {
         Map<LottoRank, Integer> rank = record.lottoRankMap();
         rank.entrySet()
+                .stream()
+                .filter(it -> it.getKey() != LottoRank.NO_MATCH)
                 .forEach(entry ->
-                        System.out.printf("%s - %d개%n", entry.getKey().description(), entry.getValue())
+                        System.out.printf("%s - %d개\n", entry.getKey().description(), entry.getValue())
                 );
     }
 

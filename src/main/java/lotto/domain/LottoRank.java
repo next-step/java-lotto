@@ -5,6 +5,7 @@ public enum LottoRank {
     MATCH_4(4, 50_000, "4개 일치 (50000원)"),
     MATCH_5(5, 1_500_000, "5개 일치 (1500000원)"),
     MATCH_6(6, 2_000_000_000, "6개 일치 (2000000000원)"),
+    NO_MATCH(0, 0, "NO_MATCH");
     ;
 
     private final int match;
@@ -24,7 +25,7 @@ public enum LottoRank {
             }
         }
 
-        return null;
+        return NO_MATCH;
     }
 
     public int money() {
