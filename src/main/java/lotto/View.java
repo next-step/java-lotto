@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 public class View {
 
@@ -17,8 +17,24 @@ public class View {
         return lottoPrice;
     }
 
-    public static void printLottoCount(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printLottoCount(int manualLottoCount, int randomLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + randomLottoCount + "개를 구매했습니다.");
+    }
+
+    public static int getManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualLottoCount = SCANNER.nextInt();
+        SCANNER.nextLine(); // newline character 제거
+        return manualLottoCount;
+    }
+
+    public static Lottos inputManualLottos(int manualLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> manualLottos = IntStream.range(0, manualLottoCount)
+                .mapToObj(i -> SCANNER.nextLine())
+                .map(View::createLotto)
+                .collect(Collectors.toList());
+        return new Lottos(manualLottos);
     }
 
     public static void printLottos(Lottos lottos) {
@@ -27,7 +43,7 @@ public class View {
 
     public static Lotto inputWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return createWinningLotto(SCANNER.nextLine());
+        return createLotto(SCANNER.nextLine());
     }
 
     public static LottoNumber inputBonusLottoNumber() {
@@ -37,7 +53,7 @@ public class View {
         return lottoNumber;
     }
 
-    private static Lotto createWinningLotto(String winningLotto) {
+    private static Lotto createLotto(String winningLotto) {
         List<Integer> lottoNumbers = Arrays.stream(winningLotto.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
