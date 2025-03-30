@@ -9,7 +9,7 @@ import lotto.game.Game;
 public class Statistic {
 
     private final List<Rank> gameResults;
-    private int paidMoney;
+    private final int paidMoney;
 
     public Statistic(Lottos lottos, WinLottoNumber winNumber) {
         gameResults = new ArrayList<>();
