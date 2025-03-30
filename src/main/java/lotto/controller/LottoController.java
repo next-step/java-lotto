@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+import lotto.view.WinningNumbersParser;
 
 public class LottoController {
 
