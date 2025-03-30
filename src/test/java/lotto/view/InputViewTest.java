@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +25,6 @@ class InputViewTest {
     assertThatThrownBy(inputView::receiveMoney)
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("숫자가 아닌 값이 포함되어 있습니다.");
-
   }
 
   @DisplayName("보너스 볼을 입력받는 기능 테스트")
@@ -49,4 +49,20 @@ class InputViewTest {
             .hasMessage("숫자가 아닌 값이 포함되어 있습니다.");
   }
 
+  @DisplayName("로또 번호를 입력받는 기능 테스트")
+  @Test
+  void testReceiveWinningLottoNumbers() {
+    String testInput = "1, 2, 3, 4, 5, 6";
+    InputView inputView = new InputView(getTestScanner(testInput));
+
+    assertThat(inputView.receiveManualNumbers())
+            .containsExactly(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)
+            );
+  }
 }

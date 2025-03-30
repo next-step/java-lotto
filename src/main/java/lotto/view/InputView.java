@@ -25,8 +25,17 @@ public class InputView {
     }
   }
 
+  public List<LottoNumber> receiveManualNumbers() {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    return receiveLottoNumbers();
+  }
+
   public List<LottoNumber> receiveWinningLottoNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해주세요.");
+    return receiveLottoNumbers();
+  }
+
+  private List<LottoNumber> receiveLottoNumbers() {
     String input = scanner.nextLine();
     return Arrays.stream(input.split(","))
             .map(String::trim)
