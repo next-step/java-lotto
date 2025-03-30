@@ -1,17 +1,26 @@
 package step4.lotto.view;
 
+import java.util.stream.Collectors;
 import step4.lotto.model.Count;
 import step4.lotto.model.LottoMatchCount;
 import step4.lotto.model.LottoPrize;
 import step4.lotto.model.LottoResult;
 import step4.lotto.model.LottoTicket;
+import step4.lotto.model.LottoTicketAuto;
 import step4.lotto.model.LottoTicketList;
+import step4.lotto.model.LottoTicketManual;
 import step4.lotto.model.Money;
 
 public class ResultView {
 
     public void printLottoTicketCount(LottoTicketList lottoTickets) {
-        System.out.println(lottoTickets.value().size() + "개를 구매했습니다.");
+        LottoTicketList lottoTicketManuals = new LottoTicketList(
+            lottoTickets.value().stream().filter(lottoTicket -> lottoTicket instanceof LottoTicketManual).collect(Collectors.toList()));
+        LottoTicketList lottoTicketAutos = new LottoTicketList(
+            lottoTickets.value().stream().filter(lottoTicket -> lottoTicket instanceof LottoTicketAuto).collect(Collectors.toList()));
+
+        System.out.println();
+        System.out.println("수동으로 " + lottoTicketManuals.value().size() + "장, 자동으로 " + lottoTicketAutos.value().size() + "개를 구매했습니다.");
         for (LottoTicket lottoTicket : lottoTickets.value()) {
             printLottoTicket(lottoTicket);
         }

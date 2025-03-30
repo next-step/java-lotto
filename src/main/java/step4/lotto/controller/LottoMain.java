@@ -1,5 +1,7 @@
 package step4.lotto.controller;
 
+import java.util.ArrayList;
+import step4.lotto.model.Count;
 import step4.lotto.model.LottoMachine;
 import step4.lotto.model.LottoNumber;
 import step4.lotto.model.LottoResult;
@@ -18,7 +20,8 @@ public class LottoMain {
 
     public static void main(String[] args) {
         Money purchaseAmount = new Money(inputView.getPurchaseAmount());
-        LottoTicketList lottoTickets = lottoMachine.buyLottoTickets(purchaseAmount);
+        Count manualLottoTicketCount = new Count(inputView.getManualLottoTicketCount());
+        LottoTicketList lottoTickets = lottoMachine.buyLottoTickets(purchaseAmount, manualLottoTicketCount);
         resultView.printLottoTicketCount(lottoTickets);
 
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(

@@ -35,4 +35,8 @@ public class Money {
         this.value += money.value;
     }
 
+    public void subtract(Money money) {
+        this.value -= money.value;
+    }
+
 }
