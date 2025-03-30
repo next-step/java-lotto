@@ -17,8 +17,8 @@ class LottoTicketsTest {
     static void beforeAll() {
         ticketElements = Arrays.asList(
                 new LottoTicket(List.of(1, 7, 8, 9, 10, 11)),
-                new LottoTicket(List.of(1, 2, 8, 9, 10, 11)),
                 new LottoTicket(List.of(1, 2, 3, 9, 10, 11)),
+                new LottoTicket(List.of(1, 2, 3, 4, 5, 11)),
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
         );
 
@@ -44,13 +44,29 @@ class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("로또 티켓 컬렉션은 당첨번호를 입력하면 N개의 번호가 일치하는 티켓 개수와 상금을 각각 반환한다.")
+    @DisplayName("로또 티켓 컬렉션은 당첨번호와 보너스볼(일치)을 입력하면 당첨 통계를 반환한다.")
     void getRankStatistics() {
         LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusBall = new LottoNumber(11);
 
-        assertThat(tickets.getRankStatistics(winningTicket))
-                .containsEntry(LottoRank.FOURTH, 1)
+        assertThat(tickets.getRankStatistics(winningTicket, bonusBall))
+                .containsEntry(LottoRank.FIFTH, 1)
+                .containsEntry(LottoRank.FOURTH, 0)
                 .containsEntry(LottoRank.THIRD, 0)
+                .containsEntry(LottoRank.SECOND, 1)
+                .containsEntry(LottoRank.FIRST, 1);
+    }
+
+    @Test
+    @DisplayName("로또 티켓 컬렉션은 당첨번호와 보너스볼(불일치)을 입력하면 당첨 통계를 반환한다.")
+    void getRankStatisticsWithNoBonus() {
+        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusBall = new LottoNumber(13);
+
+        assertThat(tickets.getRankStatistics(winningTicket, bonusBall))
+                .containsEntry(LottoRank.FIFTH, 1)
+                .containsEntry(LottoRank.FOURTH, 0)
+                .containsEntry(LottoRank.THIRD, 1)
                 .containsEntry(LottoRank.SECOND, 0)
                 .containsEntry(LottoRank.FIRST, 1);
     }
@@ -63,7 +79,8 @@ class LottoTicketsTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 7))
         ));
         LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,10,11));
+        LottoNumber bonusBall = new LottoNumber(16);
 
-        assertThat(lottoTickets.income(lottoTicket)).isEqualTo(100_000);
+        assertThat(lottoTickets.income(lottoTicket, bonusBall)).isEqualTo(100_000);
     }
 }

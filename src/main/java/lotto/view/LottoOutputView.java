@@ -32,6 +32,11 @@ public class LottoOutputView extends OutputView {
     }
 
     private static void printRank(LottoRank rank, int count) {
+        if (rank.getBonusCount() != 0) {
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개", rank.getMatchCount(), rank.getPrize(), count));
+            return;
+        }
+
         System.out.println(String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getPrize(), count));
     }
 

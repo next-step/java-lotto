@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.PurchaseAmount;
 import lotto.view.LottoInputView;
@@ -16,7 +17,8 @@ public class LottoApplication {
         outputView.printTickets(lottoMachine.getTickets());
 
         LottoTicket winningTicket = new LottoTicket(inputView.inputWinningNumbers());
-        outputView.printStatistic(lottoMachine.getRankStatistics(winningTicket));
-        outputView.printIncomeRatio(lottoMachine.getReturnRate(winningTicket));
+        LottoNumber bonusBall = new LottoNumber(inputView.inputBonusNumber());
+        outputView.printStatistic(lottoMachine.getRankStatistics(winningTicket, bonusBall));
+        outputView.printIncomeRatio(lottoMachine.getReturnRate(winningTicket, bonusBall));
     }
 }

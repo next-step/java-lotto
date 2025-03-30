@@ -18,7 +18,6 @@ public class LottoInputView {
     public List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] numberTexts = SCANNER.nextLine().split(", ");
-        System.out.println();
 
         List<Integer> result = new ArrayList<>();
         for (String numberText : numberTexts) {
@@ -27,4 +26,11 @@ public class LottoInputView {
         return result;
     }
 
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = SCANNER.nextInt();
+        SCANNER.nextLine();
+        System.out.println();
+        return bonusNumber;
+    }
 }

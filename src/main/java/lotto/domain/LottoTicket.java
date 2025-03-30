@@ -30,12 +30,14 @@ public class LottoTicket {
             throw new IllegalArgumentException("number should not be duplicate.");
     }
 
-    public LottoRank rank(LottoTicket winningTicket) {
-        long count = numbers.stream()
+    public LottoRank rank(LottoTicket winningTicket, LottoNumber bonusBall) {
+        int matchCount = (int) numbers.stream()
                 .filter(winningTicket.numbers::contains)
                 .count();
 
-        return LottoRank.of((int) count);
+        int bonusCount = numbers.contains(bonusBall) ? 1 : 0;
+
+        return LottoRank.of(matchCount, bonusCount);
     }
 
     public List<Integer> getNumbers() {

@@ -44,7 +44,8 @@ class LottoTicketTest {
 
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         LottoTicket winingTicket = new LottoTicket(winningNumbers);
-        assertThat(lottoTicket.rank(winingTicket)).isEqualTo(LottoRank.FIRST);
+        LottoNumber bonusBall = new LottoNumber(15);
+        assertThat(lottoTicket.rank(winingTicket, bonusBall)).isEqualTo(LottoRank.FIRST);
     }
 
 }

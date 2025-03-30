@@ -19,21 +19,21 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public Map<LottoRank, Integer> getRankStatistics(LottoTicket winningTicket) {
+    public Map<LottoRank, Integer> getRankStatistics(LottoTicket winningTicket, LottoNumber bonusBall) {
         Map<LottoRank, Integer> statistics = new EnumMap<>(LottoRank.class);
 
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> statistics.put(rank, 0));
 
         tickets.stream()
-                .map(ticket -> ticket.rank(winningTicket))
+                .map(ticket -> ticket.rank(winningTicket, bonusBall))
                 .forEach(rank -> statistics.merge(rank, 1, Integer::sum));
 
         return statistics;
     }
 
-    public int income(LottoTicket winningTicket) {
-        return getRankStatistics(winningTicket)
+    public int income(LottoTicket winningTicket,  LottoNumber bonusBall) {
+        return getRankStatistics(winningTicket, bonusBall)
                 .entrySet().stream()
                 .map(entry -> entry.getKey().getTotalPrize(entry.getValue()))
                 .reduce(Integer::sum)
