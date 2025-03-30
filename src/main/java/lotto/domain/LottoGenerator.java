@@ -11,6 +11,8 @@ public class LottoGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
+    private static final List<Integer> NUMBERS = IntStream
+            .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
 
     public List<Lotto> generate(int money) {
         validateMoney(money);
@@ -31,14 +33,10 @@ public class LottoGenerator {
     }
 
     private Lotto generateRandomLotto() {
-        List<Integer> numbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).boxed()
-                .collect(Collectors.toList());
-
+        List<Integer> numbers = new ArrayList<>(NUMBERS);
         Collections.shuffle(numbers);
         List<Integer> selectedNumbers = numbers.subList(0, LOTTO_SIZE);
-
         Collections.sort(selectedNumbers);
-
         return new Lotto(selectedNumbers);
     }
 }
