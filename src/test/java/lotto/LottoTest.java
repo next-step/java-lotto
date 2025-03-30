@@ -2,38 +2,39 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.Rank;
-import lotto.domain.generator.LottoGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Set;
 
+import static lotto.domain.LottoNumber.convertToLottoNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
-
     @Test
-    public void 당첨번호와_구매_로또정보를_기반으로_등수정보를_반환한다() {
-        List<LottoNumber> winningNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    public void 생성된_로또에_대해_조작연산을_진행하면_예외_발생() {
+        Lotto lotto = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 6)));
+        Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
-        Lotto firstRankLotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
-        Lotto thirdRankLotto = Lotto.of(List.of(1, 2, 3, 4, 10, 20));
-        Lotto noPrizeRankLotto = Lotto.of(List.of(1, 2, 11, 23, 33, 38));
+        assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(7)))
+                .isInstanceOf(UnsupportedOperationException.class);
 
-        assertThat(firstRankLotto.checkLottoRank(winningNumbers)).isEqualTo(Rank.FIRST);
-        assertThat(thirdRankLotto.checkLottoRank(winningNumbers)).isEqualTo(Rank.THIRD);
-        assertThat(noPrizeRankLotto.checkLottoRank(winningNumbers)).isEqualTo(Rank.NO_PRIZE);
+        assertThatThrownBy(() -> lottoNumbers.remove(new LottoNumber(1)))
+                .isInstanceOf(UnsupportedOperationException.class);
     }
 
     @Test
-    public void 생성된_로또_번호에_대해_조작연산을_진행하면_예외_발생() {
-        List<LottoNumber> numbers = LottoGenerator.generateLotto().getLottoNumbers();
-        assertThatThrownBy(() -> numbers.add(new LottoNumber(1)))
-                .isInstanceOf(UnsupportedOperationException.class);
+    public void 로또번호를_비교하여_일치하는_번호의_개수를_반환한다() {
+        Lotto lotto1 = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto lotto2 = Lotto.of(convertToLottoNumber(List.of(4, 5, 6, 7, 8, 9)));
+
+        assertThat(lotto1.countNumberMatchCount(lotto2.getLottoNumbers())).isEqualTo(3);
+    }
+
+    @Test
+    public void 로또가_특정_번호를_갖고있는지_여부를_반환한다() {
+        Lotto lotto = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lotto.isNumberMatched(new LottoNumber(3))).isTrue();
     }
 }

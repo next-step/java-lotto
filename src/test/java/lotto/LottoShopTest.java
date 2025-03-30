@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.generator.LottoGenerator;
+import lotto.domain.LottoShop;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -9,14 +9,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoGeneratorTest {
+class LottoShopTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1000, 5000, 10000})
     public void 입력한_금액만큼_로또를_구매한다(int amount) {
-        List<Lotto> lottoList = LottoGenerator.generateLottoListByAmount(amount);
+        List<Lotto> lottoList = LottoShop.sellLotto(amount);
 
-        int expected = LottoGenerator.calculateLottoCount(amount);
+        int expected = LottoShop.calculateLottoCount(amount);
         assertThat(lottoList.size()).isEqualTo(expected);
     }
 

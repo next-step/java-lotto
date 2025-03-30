@@ -1,29 +1,38 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
-    FIRST(2_000_000_000, 6),
-    SECOND(1_500_000, 5),
-    THIRD(50_000, 4),
-    FOURTH(5_000, 3),
-    NO_PRIZE(0, 0);
+    FIRST(2_000_000_000, 6, false),
+    SECOND(30_000_000, 5, true),
+    THIRD(1_500_000, 5, false),
+    FOURTH(50_000, 4, false),
+    FIFTH(5_000, 3, false),
+    NO_PRIZE(0, 0, false);
 
     private final int prize;
     private final int matchCount;
+    private final boolean isBonusNumberRequired;
 
-    Rank(int prize, int matchCount) {
+    Rank(int prize, int matchCount, boolean isBonusNumberRequired) {
         this.prize = prize;
         this.matchCount = matchCount;
+        this.isBonusNumberRequired = isBonusNumberRequired;
     }
 
-    public static Rank getRankByMatchCount(int matchCount) {
-        Rank[] values = Rank.values();
-        for (Rank value : values) {
-            if (value.matchCount == matchCount) {
-                return value;
-            }
+    public static Rank of(int matchCount, boolean bonusNumberMatch) {
+        if (isSecondRank(matchCount, bonusNumberMatch)) {
+            return SECOND;
         }
 
-        return NO_PRIZE;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount == matchCount && !rank.isBonusNumberRequired)
+                .findFirst()
+                .orElse(NO_PRIZE);
+    }
+
+    private static boolean isSecondRank(int matchCount, boolean bonusNumberMatch) {
+        return SECOND.matchCount == matchCount && bonusNumberMatch;
     }
 
     public int getPrize() {

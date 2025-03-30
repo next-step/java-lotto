@@ -1,16 +1,21 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class OutputView {
-    public static void printLottos(List<Lotto> lottoList) {
+    public static void printLottoList(List<Lotto> lottoList) {
         System.out.println(lottoList.size() + "개를 구매했습니다.");
-        lottoList.stream().map(Lotto::getNumbersAsString).forEach(System.out::println);
+        for (Lotto lotto : lottoList) {
+            Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+            System.out.println(lottoNumbers);
+        }
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
