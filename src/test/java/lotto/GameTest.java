@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class LottoNumberTest {
+public class GameTest {
     @Test
     @DisplayName("당첨번호를 통해서 몇개 맞추었는지 확인한다.")
     void lottoMatchTest() {
-        var lotto = new LottoNumber(List.of(1, 2, 3, 4, 5, 6));
+        var lotto = new Game(List.of(1, 2, 3, 4, 5, 6));
         var winningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
         var result = lotto.countMatches(winningNumbers);

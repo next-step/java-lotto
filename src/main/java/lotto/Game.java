@@ -3,12 +3,12 @@ package lotto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumber {
+public class Game {
     private final List<Integer> numbers;
 
     public static final int DIGIT = 6;
 
-    public LottoNumber(List<Integer> numbers) {
+    public Game(List<Integer> numbers) {
         validate(numbers);
 
         this.numbers = numbers.stream()

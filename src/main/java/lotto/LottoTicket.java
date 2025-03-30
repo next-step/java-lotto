@@ -5,10 +5,10 @@ import java.util.List;
 public class LottoTicket {
     public static final int PRICE = 1000;
 
-    private final LottoNumber numbers;
+    private final Game numbers;
 
     public LottoTicket(List<Integer> numbers) {
-        this.numbers = new LottoNumber(numbers);
+        this.numbers = new Game(numbers);
     }
 
     public long countMatches(List<Integer> winningNumbers) {
