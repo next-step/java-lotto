@@ -1,9 +1,10 @@
 package lotto;
 
-import lotto.domain.model.LottoTicket;
-import lotto.domain.LottoTicketMachine;
-import lotto.domain.model.LottoResult;
-import lotto.domain.LottoResultCalculator;
+import lotto.domain.LottoService;
+import lotto.domain.model.game.LottoGameResult;
+import lotto.domain.model.lotto.LottoNumber;
+import lotto.domain.model.lotto.LottoTicket;
+import lotto.domain.model.lotto.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,23 +14,25 @@ public class LottoApplication {
 
     private final InputView inputView;
     private final ResultView resultView;
+    private final LottoService service;
 
     public LottoApplication() {
         this.inputView = new InputView();
         this.resultView = new ResultView();
+        this.service = new LottoService();
     }
 
     public void start() {
         try {
             int amount = inputView.inputPurchaseAmount();
-            List<LottoTicket> lottoTickets = new LottoTicketMachine().purchaseTickets(amount);
-
+            List<LottoTicket> lottoTickets = service.purchaseTickets(amount);
             resultView.printTickets(lottoTickets);
 
-            LottoTicket winingLottoTicket = new LottoTicket(inputView.inputWinningNumbers());
-            LottoResult lottoResult = new LottoResultCalculator().calculate(lottoTickets, winingLottoTicket);
+            WinningLottoTicket winingLottoTicket =
+                    service.createWinningTicket(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
+            LottoGameResult result = service.draw(lottoTickets, winingLottoTicket);
 
-            resultView.printResult(lottoResult, amount);
+            resultView.printResult(amount, result);
         } finally {
             inputView.close();
         }

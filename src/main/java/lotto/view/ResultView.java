@@ -1,14 +1,13 @@
 package lotto.view;
 
-import lotto.domain.model.LottoTicket;
-import lotto.domain.model.LottoResult;
-import lotto.domain.model.Rank;
+import lotto.domain.model.game.LottoGameResult;
+import lotto.domain.model.lotto.LottoTicket;
+import lotto.domain.model.game.Rank;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -17,10 +16,10 @@ public class ResultView {
         tickets.forEach(System.out::println);
     }
 
-    public void printResult(final LottoResult result, final int purchaseAmount) {
+    public void printResult(final int purchaseAmount, final LottoGameResult result) {
         printHeader();
         printWinningStatistics(result);
-        printYield(result, purchaseAmount);
+        printYield(purchaseAmount, result);
     }
 
     private void printHeader() {
@@ -28,25 +27,28 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    private void printWinningStatistics(final LottoResult result) {
-        Map<Rank, Integer> matchCounts = result.getRankCounts();
+    private void printWinningStatistics(final LottoGameResult result) {
+        Map<Rank, Integer> matchCounts = result.getRankCountMap();
 
         Arrays.stream(Rank.values())
                 .filter(rank -> rank.getWinningPrize() > 0)
                 .sorted(Comparator.comparingInt(Rank::getWinningPrize))
-                .forEach(rank -> printRankStatistics(rank, matchCounts));
+                .forEach(rank -> printRankStatistics(rank, matchCounts.getOrDefault(rank, 0)));
     }
 
-    private void printRankStatistics(Rank rank, Map<Rank, Integer> matchCounts) {
+    private void printRankStatistics(final Rank rank, final int matchCounts) {
+        String RESULT_MESSAGE_FORMAT = "%d개 일치 (%s원) - %d개%n";
+        String RESULT_MESSAGE_WITH_BONUS_BALL_FORMAT = "%d개 일치, 보너스 볼 일치(%s원) - %d개%n";
+
         System.out.printf(
-                "%d개 일치 (%d원)- %d개%n",
+                Boolean.TRUE.equals(rank.isBonusMatch()) ? RESULT_MESSAGE_WITH_BONUS_BALL_FORMAT : RESULT_MESSAGE_FORMAT,
                 rank.getMatchCriteria(),
                 rank.getWinningPrize(),
-                matchCounts.getOrDefault(rank, 0)
+                matchCounts
         );
     }
 
-    private void printYield(final LottoResult result, final int purchaseAmount) {
-        System.out.printf("총 수익률은 %.2f입니다.%n", result.calculateYield(purchaseAmount));
+    private void printYield(final int purchaseAmount, final LottoGameResult result) {
+        System.out.printf("총 수익률은 %.2f입니다.%n", result.getYield(purchaseAmount));
     }
 }

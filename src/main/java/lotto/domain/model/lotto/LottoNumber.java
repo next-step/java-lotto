@@ -1,4 +1,4 @@
-package lotto.domain.model;
+package lotto.domain.model.lotto;
 
 import java.util.Objects;
 
@@ -40,6 +40,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(final LottoNumber o) {
-        return o.number - this.number;
+        return Integer.compare(this.number, o.number);
     }
 }

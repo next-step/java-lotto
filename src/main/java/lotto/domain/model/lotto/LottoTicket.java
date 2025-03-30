@@ -1,4 +1,4 @@
-package lotto.domain.model;
+package lotto.domain.model.lotto;
 
 import java.util.*;
 
@@ -23,8 +23,25 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
+    public int countMatchingNumbers(final LottoTicket other) {
+        return (int) numbers.stream().filter(other::contains).count();
+    }
+
     public Set<LottoNumber> getNumbers() {
         return Collections.unmodifiableSet(numbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     @Override
