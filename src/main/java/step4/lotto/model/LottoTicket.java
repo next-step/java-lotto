@@ -1,21 +1,24 @@
 package step4.lotto.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import step4.lotto.exception.LottoTicketException;
+import java.util.Set;
+import step4.lotto.exception.LottoTicketInvalidSizeException;
 
 public class LottoTicket {
 
-    private final List<LottoNumber> lottoNumbers;
+    public static final int SIZE = 6;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateLottoTicket(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public LottoTicket(String lottoNumbersDelimitedByComma) {
         validateLottoTicket(lottoNumbersDelimitedByComma);
-        lottoNumbers = new ArrayList<>();
+        lottoNumbers = new HashSet<>();
         String[] stringLottoNumbers = lottoNumbersDelimitedByComma.replaceAll(" ", "").split(",");
         for (String stringLottoNumber : stringLottoNumbers) {
             lottoNumbers.add(LottoNumber.of(stringLottoNumber));
@@ -23,7 +26,7 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> value() {
-        return lottoNumbers;
+        return new ArrayList<>(lottoNumbers);
     }
 
     public LottoMatchCount matchLottoNumbers(LottoTicket lastWeekWinningNumbers) {
@@ -36,13 +39,9 @@ public class LottoTicket {
         return lottoNumbers.contains(bonusLottoNumber) ? new LottoMatchBonusCount(1) : new LottoMatchBonusCount(0);
     }
 
-    public LottoPrize scratch(LottoTicketWinner lastWeekWinningTicket) {
-        return lastWeekWinningTicket.match(this);
-    }
-
     private void validateLottoTicket(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
-            throw new LottoTicketException();
+        if (new HashSet<>(lottoNumbers).size() != LottoTicket.SIZE) {
+            throw new LottoTicketInvalidSizeException();
         }
     }
 
