@@ -35,7 +35,8 @@ class LottoStatisticsServiceTest {
             new LottoStatisticsDTO(PrizeLevel.FIRST, 0),
             new LottoStatisticsDTO(PrizeLevel.SECOND, 0),
             new LottoStatisticsDTO(PrizeLevel.THIRD, 0),
-            new LottoStatisticsDTO(PrizeLevel.FOURTH, 0)
+            new LottoStatisticsDTO(PrizeLevel.FOURTH, 0),
+            new LottoStatisticsDTO(PrizeLevel.FIFTH, 0)
         );
     }
 
@@ -43,25 +44,26 @@ class LottoStatisticsServiceTest {
     @DisplayName("로또 당첨 통계 생성 테스트(여러 개)")
     void generateReport_다양한_결과() {
         statistics.put(PrizeLevel.FIRST, 1);
-        statistics.put(PrizeLevel.SECOND, 2);
-        statistics.put(PrizeLevel.THIRD, 3);
+        statistics.put(PrizeLevel.THIRD, 2);
+        statistics.put(PrizeLevel.FOURTH, 3);
         LottoStatisticsService stats = new LottoStatisticsService(statistics);
 
         List<LottoStatisticsDTO> report = stats.getLottoStatisticsDTOs();
 
         assertThat(report).containsExactly(
             new LottoStatisticsDTO(PrizeLevel.FIRST, 1),
-            new LottoStatisticsDTO(PrizeLevel.SECOND, 2),
-            new LottoStatisticsDTO(PrizeLevel.THIRD, 3),
-            new LottoStatisticsDTO(PrizeLevel.FOURTH, 0)
+            new LottoStatisticsDTO(PrizeLevel.SECOND, 0),
+            new LottoStatisticsDTO(PrizeLevel.THIRD, 2),
+            new LottoStatisticsDTO(PrizeLevel.FOURTH, 3),
+            new LottoStatisticsDTO(PrizeLevel.FIFTH, 0)
         );
     }
 
     @Test
     @DisplayName("수익률 계산 테스트")
     void profitRateTest() {
-        statistics.put(PrizeLevel.THIRD, 2);
-        statistics.put(PrizeLevel.FOURTH, 10);
+        statistics.put(PrizeLevel.FOURTH, 2);
+        statistics.put(PrizeLevel.FIFTH, 10);
 
         LottoStatisticsService stats = new LottoStatisticsService(statistics);
         int purchaseAmount = 100_000;
