@@ -55,10 +55,6 @@ public class ExpressionTokens {
                 .collect(Collectors.toList());
     }
 
-    public LinkedList<ExpressionToken> getValues() {
-        return new LinkedList<>(values);
-    }
-
     public boolean isEmpty() {
         return values.isEmpty();
     }

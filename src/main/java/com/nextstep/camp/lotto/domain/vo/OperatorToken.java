@@ -45,10 +45,6 @@ public class OperatorToken implements ExpressionToken {
         return new OperatorToken(value, true);
     }
 
-    public String getValue() {
-        return value;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
