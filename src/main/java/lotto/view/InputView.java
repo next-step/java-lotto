@@ -37,10 +37,14 @@ public class InputView {
 
   private List<LottoNumber> receiveLottoNumbers() {
     String input = scanner.nextLine();
-    return Arrays.stream(input.split(","))
-            .map(String::trim)
-            .map(num -> new LottoNumber(Integer.parseInt(num)))
-            .collect(Collectors.toList());
+    try {
+      return Arrays.stream(input.split(","))
+              .map(String::trim)
+              .map(num -> new LottoNumber(Integer.parseInt(num)))
+              .collect(Collectors.toList());
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+    }
   }
 
   public LottoNumber receiveBonusNumber() {
