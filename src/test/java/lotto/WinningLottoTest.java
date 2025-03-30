@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.domain.LottoNumber.convertToLottoNumber;
+import static lotto.util.LottoNumberConverter.toLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -16,7 +16,7 @@ class WinningLottoTest {
 
     @Test
     public void 보너스번호가_당첨번호와_중복이_발생하면_예외가_발생한다() {
-        List<LottoNumber> winningNumbers = convertToLottoNumber(List.of(1, 2, 3, 4, 5, 6));
+        List<LottoNumber> winningNumbers = toLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 6;
 
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningLotto(winningNumbers, bonusNumber));
@@ -24,15 +24,15 @@ class WinningLottoTest {
 
     @Test
     public void 당첨번호와_구매_로또정보를_기반으로_등수정보를_반환한다_보너스번호포함() {
-        WinningLotto winningLotto = new WinningLotto(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 6)), 7);
+        WinningLotto winningLotto = new WinningLotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)), 7);
 
-        Lotto firstRankLotto = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 6)));
-        Lotto secondRankLotto = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 7)));
-        Lotto thirdRankLotto = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 5, 38)));
-        Lotto fourthRankLottoWithBonusNumber = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 7, 38)));
-        Lotto fourthRankLottoWithoutBonusNumber = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 4, 17, 38)));
-        Lotto fifthRankLottoWithBonusNumber = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 14, 7, 38)));
-        Lotto fifthRankLottoWithoutBonusNumber = Lotto.of(convertToLottoNumber(List.of(1, 2, 3, 14, 17, 38)));
+        Lotto firstRankLotto = Lotto.of(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto secondRankLotto = Lotto.of(toLottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
+        Lotto thirdRankLotto = Lotto.of(toLottoNumbers(List.of(1, 2, 3, 4, 5, 38)));
+        Lotto fourthRankLottoWithBonusNumber = Lotto.of(toLottoNumbers(List.of(1, 2, 3, 4, 7, 38)));
+        Lotto fourthRankLottoWithoutBonusNumber = Lotto.of(toLottoNumbers(List.of(1, 2, 3, 4, 17, 38)));
+        Lotto fifthRankLottoWithBonusNumber = Lotto.of(toLottoNumbers(List.of(1, 2, 3, 14, 7, 38)));
+        Lotto fifthRankLottoWithoutBonusNumber = Lotto.of(toLottoNumbers(List.of(1, 2, 3, 14, 17, 38)));
 
         assertThat(winningLotto.determineLottoRank(firstRankLotto)).isEqualTo(Rank.FIRST);
         assertThat(winningLotto.determineLottoRank(secondRankLotto)).isEqualTo(Rank.SECOND);
