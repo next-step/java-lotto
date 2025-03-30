@@ -6,6 +6,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step4.lotto.exception.LottoNumberException;
+import step4.lotto.exception.LottoNumberInvalidFormatException;
+import step4.lotto.exception.LottoNumberInvalidValueException;
 
 public class LottoNumberTest {
 
@@ -32,7 +34,7 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> LottoNumber.of(lottoNumber))
 
             // then
-            .isExactlyInstanceOf(LottoNumberException.class);
+            .isExactlyInstanceOf(LottoNumberInvalidValueException.class);
     }
 
     @Test
@@ -45,7 +47,7 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> LottoNumber.of(lottoNumber))
 
             // then
-            .isExactlyInstanceOf(LottoNumberException.class);
+            .isExactlyInstanceOf(LottoNumberInvalidValueException.class);
     }
 
     @Test
@@ -58,7 +60,7 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> LottoNumber.of(lottoNumber))
 
             // then
-            .isExactlyInstanceOf(LottoNumberException.class);
+            .isExactlyInstanceOf(LottoNumberInvalidFormatException.class);
     }
 
     @Test
@@ -71,7 +73,7 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> LottoNumber.of(lottoNumber))
 
             // then
-            .isExactlyInstanceOf(LottoNumberException.class);
+            .isExactlyInstanceOf(LottoNumberInvalidFormatException.class);
     }
 
 }
