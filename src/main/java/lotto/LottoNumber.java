@@ -3,6 +3,7 @@ package lotto;
 import java.util.Objects;
 
 public class LottoNumber {
+
     private int number;
 
     public LottoNumber(int number) {
@@ -10,10 +11,22 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public LottoNumber(String strNumber) {
+        checkValidStrLottoNumber(strNumber);
+    }
+
+    private void checkValidStrLottoNumber(String strNumber) {
+        checkValidLottoNumber(Integer.parseInt(strNumber));
+    }
+
     private void checkValidLottoNumber(int number) {
         if (number <= 0 || number >= 46) {
             throw new IllegalArgumentException("로또의 숫자는 1~45 사이의 숫자이어야 합니다.");
         }
+    }
+
+    int getNumber() {
+        return number;
     }
 
     @Override
