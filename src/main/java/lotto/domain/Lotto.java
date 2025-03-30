@@ -6,16 +6,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Lotto {
-    public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
-    public static final int LOTTO_COUNT = 6;
+import static lotto.common.Constants.*;
 
-    private final List<Integer> numbers;
+public class Lotto {
+    private final List<LottoNumber> numbers;
 
     private Lotto() {
-        List<Integer> lottoNumberCandidate = new ArrayList<>();
-        for (int i = 1; i <= LOTTO_NUMBER_UPPER_BOUND; ++i) {
-            lottoNumberCandidate.add(i);
+        List<LottoNumber> lottoNumberCandidate = new ArrayList<>();
+        for (int i = LOTTO_NUMBER_LOWER_BOUND; i <= LOTTO_NUMBER_UPPER_BOUND; ++i) {
+            lottoNumberCandidate.add(new LottoNumber(i));
         }
         Collections.shuffle(lottoNumberCandidate);
         this.numbers = sortNumbers(cropNumbers(lottoNumberCandidate));
@@ -23,7 +22,10 @@ public class Lotto {
 
     private Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = sortNumbers(numbers);
+        this.numbers = numbers.stream()
+                .map(number -> new LottoNumber(number))
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public static Lotto createQuickPick() {
@@ -37,16 +39,6 @@ public class Lotto {
     private void validateNumbers(List<Integer> numbers) {
         validateLottoCount(numbers);
         validateDuplicates(numbers);
-        validateNumber(numbers);
-    }
-
-    private void validateNumber(List<Integer> numbers) {
-        numbers.stream()
-                .filter(number -> isLottoOutOfRange(number))
-                .findAny()
-                .ifPresent(invalid -> {
-                    throw new IllegalArgumentException("로또 번호의 범위는 1부터 " + LOTTO_NUMBER_UPPER_BOUND + "까지 입니다.");
-                });
     }
 
     private static void validateLottoCount(List<Integer> numbers) {
@@ -62,29 +54,36 @@ public class Lotto {
         }
     }
 
-    private boolean isLottoOutOfRange(Integer number) {
-        return number < 1 || number > LOTTO_NUMBER_UPPER_BOUND;
-    }
-
-    private List<Integer> cropNumbers(List<Integer> numbers) {
+    private List<LottoNumber> cropNumbers(List<LottoNumber> numbers) {
         return numbers.subList(0, LOTTO_COUNT);
     }
 
-    private List<Integer> sortNumbers(List<Integer> numbers) {
+    private List<LottoNumber> sortNumbers(List<LottoNumber> numbers) {
         Collections.sort(numbers);
         return numbers;
     }
 
     public Division compareNumbers(Lotto lotto) {
-        return compareNumbers(lotto, 0);
-    }
-
-    public Division compareNumbers(Lotto lotto, int bonusNumber) {
         long matchCount = numbers.stream()
                 .filter(number -> lotto.numbers.contains(number))
                 .count();
-        boolean matchBonus = numbers.contains(bonusNumber);
+        return Division.valueOf((int)matchCount);
+    }
+
+    public Division compareNumbers(Lotto lotto, int bonusNumber) {
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        validateBonusLottoNumber(bonusLottoNumber);
+        long matchCount = numbers.stream()
+                .filter(number -> lotto.numbers.contains(number))
+                .count();
+        boolean matchBonus = numbers.contains(bonusLottoNumber);
         return Division.valueOf((int)matchCount, matchBonus);
+    }
+
+    private void validateBonusLottoNumber(LottoNumber bonusLottoNumber) {
+        if (numbers.contains(bonusLottoNumber)) {
+            throw new IllegalArgumentException("보너스 숫자가 기존 로또 번호와 겹칩니다.");
+        }
     }
 
     @Override
@@ -100,6 +99,8 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return numbers.stream()
+                .map(number -> number.getValue())
+                .collect(Collectors.toList());
     }
 }
