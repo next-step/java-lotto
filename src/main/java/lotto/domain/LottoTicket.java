@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -15,18 +17,6 @@ public class LottoTicket {
                 .map(LottoNumber::new)
                 .sorted()
                 .collect(Collectors.toList());
-    }
-
-    public LottoTicket() {
-        this.numbers = generate();
-        Collections.sort(numbers);
-    }
-
-    private List<LottoNumber> generate() {
-        List<LottoNumber> candidates = LottoNumber.getAllNumbers();
-        Collections.shuffle(candidates);
-
-        return candidates.subList(0, NUMBERS_SIZE);
     }
 
     private void validateNumberSize(List<Integer> numbers) {

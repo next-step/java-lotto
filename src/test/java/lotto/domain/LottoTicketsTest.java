@@ -3,17 +3,13 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketsTest {
-    private static final int TICKET_AMOUNT = 1000;
     private static LottoTickets tickets;
     private static List<LottoTicket> ticketElements;
 
@@ -32,7 +28,7 @@ class LottoTicketsTest {
     @Test
     @DisplayName("로또 티켓 컬렉션은 개수에 해당하는 로또 티켓을 발급해야 한다.")
     void buyLottoTickets() {
-        assertThat(new LottoTickets(5).getCount()).isEqualTo(5);
+        assertThat(new LottoTickets(ticketElements).getCount()).isEqualTo(4);
     }
 
     @Test
@@ -57,5 +53,17 @@ class LottoTicketsTest {
                 .containsEntry(LottoRank.THIRD, 0)
                 .containsEntry(LottoRank.SECOND, 0)
                 .containsEntry(LottoRank.FIRST, 1);
+    }
+
+    @Test
+    @DisplayName("로또 당첨 티켓 번호를 입력하면, 총 수익률을 계산한다.")
+    void calculateIncome() {
+        LottoTickets lottoTickets = new LottoTickets(List.of(
+                new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
+                new LottoTicket(List.of(1, 2, 3, 4, 5, 7))
+        ));
+        LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,10,11));
+
+        assertThat(lottoTickets.income(lottoTicket)).isEqualTo(100_000);
     }
 }

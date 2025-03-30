@@ -1,26 +1,14 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTickets {
 
 
     private final List<LottoTicket> tickets;
 
-    public LottoTickets(int count) {
-        this.tickets = issueTickets(count);
-    }
-
     public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = new ArrayList<>(tickets);
-    }
-
-    private List<LottoTicket> issueTickets(int count) {
-        return IntStream.range(0, count)
-                .mapToObj(i -> new LottoTicket())
-                .collect(Collectors.toList());
     }
 
     public List<LottoTicket> getTickets() {
@@ -44,5 +32,12 @@ public class LottoTickets {
         return statistics;
     }
 
+    public int income(LottoTicket winningTicket) {
+        return getRankStatistics(winningTicket)
+                .entrySet().stream()
+                .map(entry -> entry.getKey().getTotalPrize(entry.getValue()))
+                .reduce(Integer::sum)
+                .orElse(0);
+    }
 
 }
