@@ -3,10 +3,12 @@ package lotto;
 import lotto.domain.LottoPrize;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
+import lotto.LottoPrizeMatcher;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class LottoReward {
@@ -31,15 +33,13 @@ public class LottoReward {
     for (int i = 0; i < matchingNumberCounts.size(); i++) {
       int matchCount = matchingNumberCounts.get(i);
       boolean isBonus = matchingBonusCounts.get(i);
-      updateOnlyExistingPrize(prizeMap, matchCount, isBonus);
+      updatePrizeCount(prizeMap, matchCount, isBonus);
     }
   }
 
-  private static void updateOnlyExistingPrize(Map<LottoPrize, Integer> prizeMap, int matchCount, boolean isBonus) {
-    if (LottoPrize.contains(matchCount, isBonus)) {
-      LottoPrize prize = LottoPrize.getPrizeFromMatchCount(matchCount, isBonus);
-      prizeMap.put(prize, prizeMap.get(prize) + 1);
-    }
+  private static void updatePrizeCount(Map<LottoPrize, Integer> prizeMap, int matchCount, boolean isBonus) {
+    Optional<LottoPrize> prize = LottoPrizeMatcher.findPrize(matchCount, isBonus);
+    prize.ifPresent(value -> prizeMap.put(value, prizeMap.get(value) + 1));
   }
 
   public int getPrizeCount(LottoPrize prize) {

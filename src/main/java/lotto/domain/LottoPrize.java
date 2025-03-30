@@ -19,25 +19,7 @@ public enum LottoPrize {
     this.prizeMoney = prizeMoney;
   }
 
-  public static LottoPrize getPrizeFromMatchCount(int count, boolean matchesBonus) {
-    return Arrays.stream(values())
-            .filter(p -> p.matches(count, matchesBonus))
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("일치하는 LottoPrize가 없습니다."));
-  }
-
-  public static boolean contains(int count, boolean matchesBonus) {
-    return Arrays.stream(values())
-            .anyMatch(p -> p.matches(count, matchesBonus));
-  }
-
-  private boolean matches(int count, boolean matchesBonus) {
-    if (this.matchCount != count) return false;
-    if (hasBonusVariant()) return this.isBonus == matchesBonus;
-    return true;
-  }
-
-  private boolean hasBonusVariant() {
+  public boolean hasBonusVariant() {
     return Arrays.stream(values())
             .filter(p -> p.matchCount == this.matchCount)
             .count() > 1;
