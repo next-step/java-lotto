@@ -106,11 +106,14 @@ public class LottoTicketTest {
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount0_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        LottoTicket lastWeekWinningTicket = new LottoTicket("7, 8, 9, 10, 11, 12");
-        LottoNumber bonusLottoNumber = new LottoNumber(1);
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("7, 8, 9, 10, 11, 12"),
+            new LottoNumber(1)
+        );
+
 
         // when
-        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
 
             // then
             .isEqualTo(LottoPrize.NONE0);
@@ -121,11 +124,13 @@ public class LottoTicketTest {
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount1_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        LottoTicket lastWeekWinningTicket = new LottoTicket("6, 7, 8, 9, 10, 11");
-        LottoNumber bonusLottoNumber = new LottoNumber(1);
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("6, 7, 8, 9, 10, 11"),
+            new LottoNumber(1)
+        );
 
         // when
-        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
 
             // then
             .isEqualTo(LottoPrize.NONE1);
@@ -136,11 +141,13 @@ public class LottoTicketTest {
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount2_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        LottoTicket lastWeekWinningTicket = new LottoTicket("5, 6, 7, 8, 9, 10");
-        LottoNumber bonusLottoNumber = new LottoNumber(1);
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("5, 6, 7, 8, 9, 10"),
+            new LottoNumber(1)
+        );
 
         // when
-        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
 
             // then
             .isEqualTo(LottoPrize.NONE2);
@@ -152,11 +159,13 @@ public class LottoTicketTest {
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount3_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        LottoTicket lastWeekWinningTicket = new LottoTicket("4, 5, 6, 7, 8, 9");
-        LottoNumber bonusLottoNumber = new LottoNumber(1);
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("4, 5, 6, 7, 8, 9"),
+            new LottoNumber(1)
+        );
 
         // when
-        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
 
             // then
             .isEqualTo(LottoPrize.FIFTH);
@@ -167,11 +176,13 @@ public class LottoTicketTest {
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount4_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        LottoTicket lastWeekWinningTicket = new LottoTicket("3, 4, 5, 6, 7, 8");
-        LottoNumber bonusLottoNumber = new LottoNumber(1);
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("3, 4, 5, 6, 7, 8"),
+            new LottoNumber(1)
+        );
 
         // when
-        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
 
             // then
             .isEqualTo(LottoPrize.FOURTH);
@@ -182,11 +193,13 @@ public class LottoTicketTest {
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount5_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        LottoTicket lastWeekWinningTicket = new LottoTicket("2, 3, 4, 5, 6, 7");
-        LottoNumber bonusLottoNumber = new LottoNumber(8);
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("2, 3, 4, 5, 6, 7"),
+            new LottoNumber(8)
+        );
 
         // when
-        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
 
             // then
             .isEqualTo(LottoPrize.THIRD);
@@ -197,11 +210,13 @@ public class LottoTicketTest {
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount5AndBonusNumber_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        LottoTicket lastWeekWinningTicket = new LottoTicket("2, 3, 4, 5, 6, 7");
-        LottoNumber bonusLottoNumber = new LottoNumber(1);
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("2, 3, 4, 5, 6, 7"),
+            new LottoNumber(1)
+        );
 
         // when
-        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
 
             // then
             .isEqualTo(LottoPrize.SECOND);
@@ -212,11 +227,13 @@ public class LottoTicketTest {
     void givenLottoTickets_whenCalculateLottoTicketsCountOfMatchTargetCount6_thenSuccess() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        LottoTicket lastWeekWinningTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("1, 2, 3, 4, 5, 6"),
+            new LottoNumber(7)
+        );
 
         // when
-        assertThat(lottoTicket.scratch(lastWeekWinningTicket, bonusLottoNumber))
+        assertThat(lastWeekWinningTicket.match(lottoTicket))
 
             // then
             .isEqualTo(LottoPrize.FIRST);

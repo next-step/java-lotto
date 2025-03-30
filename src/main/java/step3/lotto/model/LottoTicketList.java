@@ -14,10 +14,10 @@ public class LottoTicketList {
         return lottoTickets;
     }
 
-    public LottoResult scratchAll(LottoTicket lastWeekWinningTicket, LottoNumber bonusNumber) {
+    public LottoResult scratchAll(LottoTicketWinner lastWeekWinningTicket) {
         LottoResult lottoResult = new LottoResult();
         for (LottoTicket lottoTicket : lottoTickets) {
-            LottoPrize lottoPrize = lottoTicket.scratch(lastWeekWinningTicket, bonusNumber);
+            LottoPrize lottoPrize = lastWeekWinningTicket.match(lottoTicket);
             lottoResult.reflect(lottoPrize);
         }
         return lottoResult;

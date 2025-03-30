@@ -12,22 +12,19 @@ public class LottoResultTest {
     @DisplayName("로또 결과 테스트")
     void givenLottoTickets_whenLottoResult_thenSuccess() {
         // given
-        LottoResult lottoResult = new LottoResult();
-        List<LottoTicket> lottoTickets = List.of(
-            new LottoTicket("2, 3, 4, 5, 6, 7"),  // 5등
+        LottoTicketList lottoTickets = new LottoTicketList(List.of(new LottoTicket("2, 3, 4, 5, 6, 7"),  // 5등
             new LottoTicket("3, 4, 5, 6, 7, 8"),  // 4등
             new LottoTicket("3, 5, 6, 7, 8, 9"),  // 3등
             new LottoTicket("4, 5, 6, 7, 8, 9"),  // 2등
             new LottoTicket("5, 6, 7, 8, 9, 10")  // 1등
+        ));
+        LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
+            new LottoTicket("5, 6, 7, 8, 9, 10"),
+            new LottoNumber(4)
         );
-        LottoTicket lastWinningTicket = new LottoTicket("5, 6, 7, 8, 9, 10");
-        LottoNumber bonusNumber = new LottoNumber(4);
 
         // when
-        for (LottoTicket lottoTicket : lottoTickets) {
-            LottoPrize lottoPrize = lottoTicket.scratch(lastWinningTicket, bonusNumber);
-            lottoResult.reflect(lottoPrize);
-        }
+        LottoResult lottoResult = lottoTickets.scratchAll(lastWeekWinningTicket);
 
         // then
         assertThat(lottoResult.ticketCountOf(LottoPrize.FIFTH)).isEqualTo(new Count(1));
