@@ -19,9 +19,20 @@ public class LottoService {
     private List<Lotto> lottos;
 
     public LottoService(int purchaseAmount, NumberExtractor extractor) {
+        this.validatePurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
         this.lottoNum = purchaseAmount / SALES_PRICE;
         this.extractor = extractor;
+    }
+
+    private void validatePurchaseAmount(int purchaseAmount) {
+        if (purchaseAmount < 1000) {
+            throw new IllegalArgumentException("The minimum of purchase price is 1,000 won.");
+        }
+
+        if (purchaseAmount % 1000 != 0) {
+            throw new IllegalArgumentException("The purchase price is in units of 1,000 won.");
+        }
     }
 
     public void draw() {
@@ -62,7 +73,7 @@ public class LottoService {
     }
 
     private void increaseWinningCount(int matchedNum) {
-        if (winningCountMap.containsKey(matchedNum)){
+        if (winningCountMap.containsKey(matchedNum)) {
             winningCountMap.put(matchedNum, winningCountMap.get(matchedNum) + 1);
         }
     }
@@ -75,7 +86,7 @@ public class LottoService {
 
     public double profitRate() {
         double sum = 0;
-        for (Map.Entry<Integer, Integer> entry : winningCountMap.entrySet()){
+        for (Map.Entry<Integer, Integer> entry : winningCountMap.entrySet()) {
             sum += LottoPrizeTable.prize(entry.getKey()) * entry.getValue();
         }
 
