@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.generator.ManualLottoGenerator;
+import lotto.utils.LottoNumberParser;
 import lotto.view.InputView;
 
 import java.util.ArrayList;

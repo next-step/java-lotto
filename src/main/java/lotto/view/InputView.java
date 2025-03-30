@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumberParser;
+import lotto.utils.LottoNumberParser;
 import lotto.domain.PurchaseAmount;
 
 import java.util.ArrayList;
