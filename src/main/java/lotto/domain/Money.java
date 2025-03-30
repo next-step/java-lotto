@@ -9,6 +9,9 @@ public class Money {
     private final BigDecimal amount;
 
     public Money(Integer amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("마이너스 통장은 사용할 수 없습니다: " + amount);
+        }
         this.amount = BigDecimal.valueOf(amount);
     }
 
