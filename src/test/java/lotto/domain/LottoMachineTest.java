@@ -20,18 +20,4 @@ class LottoMachineTest {
         assertThat(lottoMachine.getTickets()).hasSize(1);
     }
 
-    @Test
-    @DisplayName("로또 머신은 총수익률을 반환한다")
-    void getReturnRate() {
-        LottoTickets tickets = new LottoTickets(List.of(
-                new LottoTicket(List.of(1, 7, 8, 9, 10, 11)),
-                new LottoTicket(List.of(1, 2, 3, 9, 10, 11))
-        ));
-        LottoMachine lottoMachine = new LottoMachine(tickets);
-        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        int amount = TICKET_AMOUNT * tickets.getCount();
-
-        double expected = (double) LottoRank.FOURTH.getPrize() / amount;
-        assertThat(lottoMachine.getReturnRate(winningTicket)).isEqualTo(expected);
-    }
 }

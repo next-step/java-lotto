@@ -6,12 +6,14 @@ import java.util.Map;
 public class LottoMachine {
 
     private final LottoTickets tickets;
+    private final PurchaseAmount amount;
 
     public LottoMachine(PurchaseAmount amount) {
-        this(new LottoTickets(amount));
+        this(amount, new LottoTickets(amount.getTicketCount()));
     }
 
-    public LottoMachine(LottoTickets tickets) {
+    public LottoMachine(PurchaseAmount amount, LottoTickets tickets) {
+        this.amount = amount;
         this.tickets = tickets;
     }
 
@@ -24,7 +26,15 @@ public class LottoMachine {
     }
 
     public double getReturnRate(LottoTicket winningTicket) {
-        return tickets.getReturnRate(winningTicket);
+        return amount.getReturnRate(income(winningTicket));
+    }
+
+    private int income(LottoTicket winningTicket) {
+        return getRankStatistics(winningTicket)
+                .entrySet().stream()
+                .map(entry -> entry.getKey().getTotalPrize(entry.getValue()))
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
 }

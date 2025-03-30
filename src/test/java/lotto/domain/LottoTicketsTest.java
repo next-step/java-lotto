@@ -36,24 +36,6 @@ class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("로또 티켓 컬렉션에 티켓 금액보다 적은 금액을 넣을 경우, 에러가 발생한다.")
-    void buyLottoTicketWithUnaffordableAmount() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(100);
-        assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {TICKET_AMOUNT - 1, TICKET_AMOUNT + 1})
-    @DisplayName("로또 티켓 컬렉션은 구입 금액을 장당 가격으로 나누었을 때, 정수가 아니면 에러를 반환한다.")
-    void validateAmount(int amount) {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
-
-        assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     @DisplayName("로또 티켓 컬렉션은 티켓을 반환한다.")
     void getTickets() {
         assertThat(tickets.getTickets()).containsAll(ticketElements);

@@ -5,16 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTickets {
-    private static final int TICKET_PRICE = 1000;
+
 
     private final List<LottoTicket> tickets;
 
     public LottoTickets(int count) {
         this.tickets = issueTickets(count);
-    }
-
-    public LottoTickets(PurchaseAmount amount) {
-        this.tickets = issueTickets(amount.getTicketCount(TICKET_PRICE));
     }
 
     public LottoTickets(List<LottoTicket> tickets) {
@@ -48,19 +44,5 @@ public class LottoTickets {
         return statistics;
     }
 
-    public double getReturnRate(LottoTicket winningTicket) {
-        return (double) income(winningTicket) / cost();
-    }
 
-    private int income(LottoTicket winningTicket) {
-        return getRankStatistics(winningTicket)
-                .entrySet().stream()
-                .map(entry -> entry.getKey().getTotalPrize(entry.getValue()))
-                .reduce(Integer::sum)
-                .orElse(0);
-    }
-
-    public double cost() {
-        return Math.multiplyExact(TICKET_PRICE, tickets.size());
-    }
 }
