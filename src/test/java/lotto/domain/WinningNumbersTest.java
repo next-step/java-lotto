@@ -6,7 +6,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 
@@ -19,8 +21,8 @@ class WinningNumbersTest {
         //given
         NumberGenerationStrategy fixedNumberGenerationStrategy = new NumberGenerationStrategy() {
             @Override
-            public List<Integer> generateNumbers() {
-                return List.of(1, 2, 3, 4, 5, 6);
+            public Set<Integer> generateNumbers() {
+                return Set.of(1, 2, 3, 4, 5, 6);
             }
         };
         LottoTicket ticket = new LottoTicket(fixedNumberGenerationStrategy);

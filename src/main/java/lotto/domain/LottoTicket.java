@@ -1,10 +1,11 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoTicket {
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
     public LottoTicket(NumberGenerationStrategy generationStrategy) {
         numbers = generationStrategy.generateNumbers();
