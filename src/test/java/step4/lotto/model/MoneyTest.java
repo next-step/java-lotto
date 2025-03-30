@@ -6,6 +6,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step4.lotto.exception.MoneyException;
+import step4.lotto.exception.MoneyInvalidFormatException;
+import step4.lotto.exception.MoneyInvalidValueException;
 
 public class MoneyTest {
 
@@ -32,7 +34,7 @@ public class MoneyTest {
         assertThatThrownBy(() -> new Money(purchaseAmount))
 
             // then
-            .isExactlyInstanceOf(MoneyException.class);
+            .isExactlyInstanceOf(MoneyInvalidFormatException.class);
     }
 
     @Test
@@ -45,7 +47,7 @@ public class MoneyTest {
         assertThatThrownBy(() -> new Money(purchaseAmount))
 
             // then
-            .isExactlyInstanceOf(MoneyException.class);
+            .isExactlyInstanceOf(MoneyInvalidValueException.class);
     }
 
 }

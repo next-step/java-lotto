@@ -1,6 +1,8 @@
 package step4.lotto.model;
 
 import step4.lotto.exception.MoneyException;
+import step4.lotto.exception.MoneyInvalidFormatException;
+import step4.lotto.exception.MoneyInvalidValueException;
 
 public class Money {
 
@@ -19,11 +21,11 @@ public class Money {
         try {
             Integer.parseInt(purchaseAmount);
         } catch (NumberFormatException e) {
-            throw new MoneyException();
+            throw new MoneyInvalidFormatException();
         }
 
         if (Integer.parseInt(purchaseAmount) < 0) {
-            throw new MoneyException();
+            throw new MoneyInvalidValueException();
         }
     }
 
