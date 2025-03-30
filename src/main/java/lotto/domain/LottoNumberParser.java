@@ -10,7 +10,7 @@ public class LottoNumberParser {
 
   public static List<LottoNumber> parse(String numberLine) {
     try {
-      return Arrays.stream(numberLine.split(","))
+      return Arrays.stream(numberLine.split(DELIMITER))
               .map(String::trim)
               .map(num -> new LottoNumber(Integer.parseInt(num)))
               .collect(Collectors.toList());
