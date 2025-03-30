@@ -1,9 +1,8 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -13,17 +12,17 @@ class LottoPurchaseTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-        "10031,10000,1.00",
-        "10031,20000,2.00",
-        "10031,15000,1.50",
-        "10031,25000,2.50",
-        "10031,30000,3.00",
-        "10031,33333,3.33",
-        "10031,35555,3.56",
+        "10000,0,10000,1.00",
+        "10000,0,20000,2.00",
+        "10000,0,15000,1.50",
+        "10031,31,25000,2.50",
+        "10031,31,30000,3.00",
+        "10031,31,33333,3.33",
+        "10031,31,35555,3.56",
     })
-    void ROI는_두번째_자리수에서_반올림_된다(int invest, int totalPrize, String expected) {
+    void ROI는_두번째_자리수에서_반올림_된다(int invest, int change, int totalPrize, String expected) {
         LottoPurchase lottoPurchase
-            = new LottoPurchase(new Money(invest));
+            = new LottoPurchase(new Money(invest), new Money(change), Collections.emptyList(), 0);
 
         BigDecimal roi = lottoPurchase.getRoi(new Money(totalPrize));
 

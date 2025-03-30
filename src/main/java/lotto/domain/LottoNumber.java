@@ -16,19 +16,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    private final int number;
+    private final int value;
 
-    public LottoNumber(int number) {
-        this.number = number;
+    public LottoNumber(int value) {
+        this.value = value;
         validate();
     }
 
-    public int getNumber() {
-        return number;
+    public int getValue() {
+        return value;
     }
 
     private void validate() {
-        if (MIN > number || number > MAX) {
+        if (MIN > value || value > MAX) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자여야 합니다.");
         }
     }
@@ -42,16 +42,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(number);
+        return Objects.hashCode(value);
     }
 
     @Override
     public int compareTo(LottoNumber o) {
-        return Integer.compare(number, o.number);
+        return Integer.compare(value, o.value);
     }
 }

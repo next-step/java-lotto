@@ -7,15 +7,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoPurchase;
 import lotto.domain.LottoRank;
 import lotto.domain.Money;
 
 public class LottoResultView {
 
-    public void printPurchaseLotto(List<LottoResult> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (LottoResult lotto : lottos) {
-            System.out.println(lotto.display());
+    public void printPurchaseLotto(LottoPurchase lottoPurchase) {
+        String msg = String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.",
+                lottoPurchase.getManualSize(), lottoPurchase.getAutoSize());
+        System.out.println(msg);
+
+        for (Lotto lotto : lottoPurchase.getLottos()) {
+            System.out.println(LottoFormatter.format(lotto));
         }
         System.out.println();
     }
