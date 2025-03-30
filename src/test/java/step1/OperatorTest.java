@@ -1,7 +1,7 @@
-package domain;
+package step1;
 
-import domain.symbol.Operand;
-import domain.symbol.OperatorType;
+import step1.symbol.Operand;
+import step1.symbol.OperatorType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

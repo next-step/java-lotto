@@ -1,20 +1,20 @@
-package domain;
+package step1;
 
-import domain.symbol.Operand;
+import step1.symbol.Operand;
 import views.InputView;
 import views.ResultView;
 
 public class Calculator {
 
     public static void main(String[] args) {
-        Operand calculated = createCalculationWithQuery("수식을 입력하세요.").calculate();
+        Operand calculated = createCalculationWithQuery().calculate();
         ResultView.printResult(calculated);
     }
 
-    private static Calculation createCalculationWithQuery(String query) {
+    private static Calculation createCalculationWithQuery() {
         Calculation calculation = null;
         while (calculation == null) {
-            Tokens tokens = InputView.promptForTokens(query);
+            Tokens tokens = InputView.promptForTokens("수식을 입력하세요.", " ");
             calculation = getCalculation(tokens);
         }
         return calculation;

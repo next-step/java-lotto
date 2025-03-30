@@ -1,4 +1,9 @@
-package domain.symbol;
+package step1.symbol;
+
+import step1.symbol.operator.AddOperator;
+import step1.symbol.operator.DivideOperator;
+import step1.symbol.operator.MultiplyOperator;
+import step1.symbol.operator.SubtractOperator;
 
 import domain.symbol.operator.AddOperator;
 import domain.symbol.operator.DivideOperator;
