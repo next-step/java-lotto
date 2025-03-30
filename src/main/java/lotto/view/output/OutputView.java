@@ -5,6 +5,10 @@ import lotto.domain.product.FinalResult;
 import lotto.domain.product.LotteryTickets;
 import lotto.domain.product.LottoRank;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class OutputView {
 
     public static final String NUMBER_OUTPUT_DELIMITER = ", ";
@@ -36,6 +40,15 @@ public class OutputView {
     }
 
     public void printAutoLottery(LotteryTickets tickets) {
-        System.out.println(tickets.getLotteryTickets());
+        System.out.println(autoLotteryToString(tickets.getLotteryTickets()));
+    }
+
+    public String autoLotteryToString(List<Set<Integer>> lotteryTickets) {
+        return lotteryTickets.stream()
+                .map(ticket -> ticket.stream()
+                        .sorted()
+                        .map(String::valueOf)
+                        .collect(Collectors.joining(NUMBER_OUTPUT_DELIMITER, OUTPUT_PREFIX, OUTPUT_SUFFIX)))
+                .collect(Collectors.joining("\n"));
     }
 }

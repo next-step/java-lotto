@@ -52,12 +52,18 @@ public class LotteryTicket implements Product {
                 .count());
     }
 
-    public String getValues() {
+//    public String getValues() {
+//        return numbers.stream()
+//                .map(LottoNumber::getValue)
+//                .sorted()
+//                .map(String::valueOf)
+//                .collect(Collectors.joining(NUMBER_OUTPUT_DELIMITER, OUTPUT_PREFIX, OUTPUT_SUFFIX));
+//    }
+
+    public Set<Integer> getValues() {
         return numbers.stream()
                 .map(LottoNumber::getValue)
-                .sorted()
-                .map(String::valueOf)
-                .collect(Collectors.joining(NUMBER_OUTPUT_DELIMITER, OUTPUT_PREFIX, OUTPUT_SUFFIX));
+                .collect(Collectors.toSet());
     }
 
 }

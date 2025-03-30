@@ -2,6 +2,7 @@ package lotto.domain.product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LotteryTickets {
@@ -16,10 +17,10 @@ public class LotteryTickets {
         lotteryTickets.add(lotteryTicket);
     }
 
-    public String getLotteryTickets() {
+    public List<Set<Integer>>  getLotteryTickets() {
         return lotteryTickets.stream()
                 .map(LotteryTicket::getValues)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.toList());
     }
 
     public FinalResult getResult(LotteryTicket winningTicket) {
