@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import lotto.domain.Lotto;
+import lotto.strategy.LottoAutoStrategy;
 import lotto.domain.LottoMachine;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoCheckerService;
@@ -16,7 +17,7 @@ public class Main {
         int money = inputView.inputPurchaseAmount();
 
         LottoMachine machine = new LottoMachine(money);
-        List<Lotto> lottos = machine.getLottos();
+        List<Lotto> lottos = machine.getLottos(new LottoAutoStrategy());
         OutputView.printLottoCount(lottos.size());
         OutputView.printLottos(lottos);
 

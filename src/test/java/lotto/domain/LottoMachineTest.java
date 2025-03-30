@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.exception.LottoPriceException;
+import lotto.strategy.LottoAutoStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,7 +18,7 @@ class LottoMachineTest {
         int money = 5000;
         LottoMachine lottoMachine = new LottoMachine(money);
 
-        List<Lotto> lottos = lottoMachine.getLottos();
+        List<Lotto> lottos = lottoMachine.getLottos(new LottoAutoStrategy());
 
         assertThat(lottos).hasSize(5)
             .allSatisfy(lotto -> assertThat(lotto).isNotNull());
