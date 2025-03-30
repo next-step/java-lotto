@@ -4,10 +4,7 @@ import calculator.Operator;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoApplication {
 
@@ -20,7 +17,7 @@ public class LottoApplication {
         OutputView.showLottoQuantity(lottoQuantity);
 
         List<Lotto> lottos = LottoNumberGenerator.generateLottoNumbers(lottoQuantity);
-        List<Integer> winningLotto = Arrays.stream(InputView.showWinningLottoNumbersInput().split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        List<Integer> winningLotto = LottoNumbersParser.parse(InputView.showWinningLottoNumbersInput());
 
         LottosResult lottosResult = new LottosResult(lottos, winningLotto);
         OutputView.showLottoMatchResult(lottosResult);
