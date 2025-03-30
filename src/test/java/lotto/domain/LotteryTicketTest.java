@@ -31,7 +31,7 @@ public class LotteryTicketTest {
     @Test
     @DisplayName("로또 번호의 맞춘 개수에 따라 받는 가격을 알 수 있다.")
     public void getRank() {
-        LottoRank lottoRank = LottoRank.of(3);
+        LottoRank lottoRank = LottoRank.of(3, false);
         assertThat(lottoRank.getPrize()).isEqualTo(5000);
     }
 
@@ -39,9 +39,9 @@ public class LotteryTicketTest {
     @DisplayName("맞춘 개수에 따라 받는 총 상금을 알 수 있다.")
     public void getPrize() {
         FinalResult result = new FinalResult();
-        result.put(3);
-        result.put(4);
-        Money totalPrize = result.getTotalPrize();
+        result.put(LottoRank.of(3, false));
+        result.put(LottoRank.of(4, false));
+        Money totalPrize = result.calculateTotalReward();
         assertThat(totalPrize).isEqualTo(new Money(55_000));
     }
 
