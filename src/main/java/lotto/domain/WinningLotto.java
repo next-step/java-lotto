@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class WinningLotto extends Lotto {
@@ -22,6 +23,6 @@ public class WinningLotto extends Lotto {
   }
 
   public List<LottoNumber> getLotto() {
-    return numbers;
+    return Collections.unmodifiableList(numbers);
   }
 }
