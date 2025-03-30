@@ -30,9 +30,13 @@ public class Lotto {
 
     private void validateNumberRange(List<Integer> numbers) {
         for (Integer number : numbers) {
-            if (number < LOTTO_NUMBER_START || number > LOTTO_NUMBER_END) {
-                throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-            }
+            validateSingleNumberRange(number);
+        }
+    }
+
+    private void validateSingleNumberRange(int number) {
+        if (number < LOTTO_NUMBER_START || number > LOTTO_NUMBER_END) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
         }
     }
 
@@ -42,6 +46,10 @@ public class Lotto {
         if (uniqueNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호에 중복된 숫자가 있습니다.");
         }
+    }
+
+    public boolean containsNumber(int number) {
+        return lottoNumbers.contains(number);
     }
 
     public List<Integer> getLottoNumbers() {

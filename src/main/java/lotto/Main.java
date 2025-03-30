@@ -1,10 +1,13 @@
 package lotto;
 
+import java.util.List;
 import java.util.Scanner;
 
-import lotto.domain.LottoChecker;
+import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.WinningLotto;
+import lotto.service.LottoCheckerService;
+import lotto.strategy.LottoAutoStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,11 +17,12 @@ public class Main {
         int money = inputView.inputPurchaseAmount();
 
         LottoMachine machine = new LottoMachine(money);
-        OutputView.printLottoCount(machine.getLottos().size());
-        OutputView.printLottos(machine.getLottos());
+        List<Lotto> lottos = machine.getLottos(new LottoAutoStrategy());
+        OutputView.printLottoCount(lottos.size());
+        OutputView.printLottos(lottos);
 
-        WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers());
-        LottoChecker checker = new LottoChecker(winningLotto);
-        OutputView.printWinningStatistics(money, checker.check(machine.getLottos()));
+        WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
+        LottoCheckerService checker = new LottoCheckerService(winningLotto);
+        OutputView.printWinningStatistics(money, checker.check(lottos));
     }
 }

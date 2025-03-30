@@ -5,19 +5,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import static java.lang.Double.parseDouble;
-import static java.lang.String.format;
+import lotto.dto.LottoStatisticsDTO;
 
-public class LottoWinningStatistics {
-    private static final String RESULT_FORMAT = "%s - %d개";
-    private static final String PROFIT_RATE_FORMAT = "%.2f";
+public class LottoStatistics {
     private final Map<PrizeLevel, Integer> statistics;
 
-    public LottoWinningStatistics(Map<PrizeLevel, Integer> statistics) {
+    public LottoStatistics(Map<PrizeLevel, Integer> statistics) {
         this.statistics = statistics;
     }
 
-    public List<String> generateFormattedReport() {
+    public List<LottoStatisticsDTO> getLottoStatisticsDTOs() {
        return statistics.entrySet().stream()
             .filter(this::hasWinningPrize)
             .map(entry -> formatEntry(entry.getKey(), entry.getValue()))
@@ -33,10 +30,10 @@ public class LottoWinningStatistics {
             .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
             .sum();
 
-        return parseDouble(format(PROFIT_RATE_FORMAT, (double) totalPrize / money));
+        return (double) totalPrize / money;
     }
 
-    private String formatEntry(PrizeLevel level, int count) {
-        return format(RESULT_FORMAT, level.getMessage(), count);
+    private LottoStatisticsDTO formatEntry(PrizeLevel level, int count) {
+        return new LottoStatisticsDTO(level, count);
     }
 }

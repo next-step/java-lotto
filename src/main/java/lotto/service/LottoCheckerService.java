@@ -1,10 +1,15 @@
-package lotto.domain;
+package lotto.service;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class LottoChecker {
+import lotto.domain.Lotto;
+import lotto.domain.LottoStatistics;
+import lotto.domain.PrizeLevel;
+import lotto.domain.WinningLotto;
+
+public class LottoCheckerService {
     private static final Map<PrizeLevel, Integer> statistics = new EnumMap<>(PrizeLevel.class);
 
     private final WinningLotto winningLotto;
@@ -15,17 +20,17 @@ public class LottoChecker {
         }
     }
 
-    public LottoChecker(WinningLotto winningLotto) {
+    public LottoCheckerService(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
 
     }
 
-    public LottoWinningStatistics check(List<Lotto> lottos) {
+    public LottoStatistics check(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             PrizeLevel prizeLevel = winningLotto.countMatchingNumbers(lotto);
             statistics.put(prizeLevel, statistics.get(prizeLevel) + 1);
         }
 
-        return new LottoWinningStatistics(statistics);
+        return new LottoStatistics(statistics);
     }
 }
