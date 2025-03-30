@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.view.LottoResult;
-
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
@@ -35,12 +33,7 @@ public class Lotto {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public LottoResult toResult() {
-        List<Integer> numbers = this.lottoNumbers
-            .stream()
-            .map(LottoNumber::getNumber)
-            .collect(Collectors.toList());
-        return new LottoResult(numbers);
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
-
 }
