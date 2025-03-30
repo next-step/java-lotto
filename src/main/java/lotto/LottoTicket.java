@@ -15,6 +15,10 @@ public class LottoTicket {
         return numbers.countMatches(winningNumbers);
     }
 
+    public boolean hasBonusNumber(int bonusNumber) {
+        return numbers.hasBonusNumber(bonusNumber);
+    }
+
     @Override
     public String toString() {
         return numbers.toString();

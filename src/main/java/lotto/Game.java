@@ -31,4 +31,8 @@ public class Game {
                 .filter(winningNumbers::contains)
                 .count();
     }
+
+    public boolean hasBonusNumber(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
 }

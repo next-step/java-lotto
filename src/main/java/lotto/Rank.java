@@ -37,4 +37,12 @@ public enum Rank {
                 .findAny()
                 .orElse(MISS);
     }
+
+    public String guideMessage(long count) {
+        if (this == SECOND) {
+            return this.countOfMatch + "개 일치, 보너스 볼 일치 (" + winningMoney + "원) - " + count + "개";
+        }
+
+        return this.countOfMatch + "개 일치 (" + winningMoney + "원) - " + count + "개";
+    }
 }
