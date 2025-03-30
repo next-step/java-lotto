@@ -1,5 +1,3 @@
-package Lotto;
-
 import Lotto.domain.Purchase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
