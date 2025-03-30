@@ -23,10 +23,10 @@ public class LottoMachineTest {
         String purchaseAmount = "1234";
 
         // when
-        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTickets(new Money(purchaseAmount));
+        LottoTicketList lottoTickets = lottoMachine.buyLottoTickets(new Money(purchaseAmount));
 
         // then
-        assertThat(lottoTickets.size()).isEqualTo(1);
+        assertThat(lottoTickets.value().size()).isEqualTo(1);
     }
 
     @Test

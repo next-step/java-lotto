@@ -6,13 +6,14 @@ import step3.lotto.model.LottoMatchCount;
 import step3.lotto.model.LottoPrize;
 import step3.lotto.model.LottoResult;
 import step3.lotto.model.LottoTicket;
+import step3.lotto.model.LottoTicketList;
 import step3.lotto.model.Money;
 
 public class ResultView {
 
-    public void printLottoTicketCount(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
-        for (LottoTicket lottoTicket : lottoTickets) {
+    public void printLottoTicketCount(LottoTicketList lottoTickets) {
+        System.out.println(lottoTickets.value().size() + "개를 구매했습니다.");
+        for (LottoTicket lottoTicket : lottoTickets.value()) {
             printLottoTicket(lottoTicket);
         }
         System.out.println();

@@ -15,13 +15,13 @@ public class LottoMachine {
         }
     }
 
-    public List<LottoTicket> buyLottoTickets(Money purchaseAmount) {
+    public LottoTicketList buyLottoTickets(Money purchaseAmount) {
         Count ticketCount = new Count(purchaseAmount.value() / LottoTicket.PRICE.value());
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticketCount.value(); i++) {
             lottoTickets.add(issueLottoTicket());
         }
-        return lottoTickets;
+        return new LottoTicketList(lottoTickets);
     }
 
     public LottoTicket issueLottoTicket() {
