@@ -1,28 +1,24 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
-    private final List<Number> numbers;
+    private final LottoNumbers numbers;
 
     public Lotto(List<Number> numbers) {
-        this.numbers = numbers;
+        this.numbers = new LottoNumbers(numbers);
+    }
+
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.numbers = lottoNumbers;
     }
 
     public static Lotto from(String input) {
-        return new Lotto(Arrays.stream(input.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .sorted()
-                .map(Number::new)
-                .collect(Collectors.toList()));
+        return new Lotto((new LottoNumbers(input)));
     }
 
-    public List<Number> values() {
+    public LottoNumbers numbers() {
         return numbers;
     }
 
@@ -43,11 +39,10 @@ public class Lotto {
     }
 
     public boolean isValidRange() {
-        return numbers.stream().allMatch(Number::isValidRange);
+        return numbers.isValidRange();
     }
 
     public boolean isSorted() {
-        return IntStream.range(0, numbers.size()-1)
-                .allMatch(i -> numbers.get(i).isSmallerThan(numbers.get(i+1)));
+        return numbers.isSorted();
     }
 }

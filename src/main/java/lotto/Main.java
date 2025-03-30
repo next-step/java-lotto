@@ -12,9 +12,12 @@ public class Main {
     }
 
     private static Lottos purchageLottos() {
-        Lottos lottos = Lottos.from(InputView.purchase());
-        ResultView.printLottos(lottos);
-        return lottos;
+        int totalLottoCount = InputView.purchase();
+        Lottos manualLottos = InputView.manualLottos(totalLottoCount);
+        Lottos autoLottos = Lottos.from(totalLottoCount - manualLottos.size());
+
+        ResultView.printLottos(manualLottos, autoLottos);
+        return manualLottos.merged(autoLottos);
     }
 
     private static WinningLotto inputWinningLotto() {
@@ -26,7 +29,7 @@ public class Main {
 
     private static void printReport(Lottos lottos, WinningLotto winningLotto) {
         Ranks ranks = winningLotto.ranks(lottos);
-        float roi = ranks.roi(lottos.totalPayment());
+        float roi = winningLotto.roi(lottos);
         ResultView.printReport(ranks, roi);
     }
 }

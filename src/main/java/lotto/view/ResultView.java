@@ -3,15 +3,15 @@ package lotto.view;
 import lotto.domain.*;
 import lotto.domain.Number;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static void printLottos(Lottos lottos) {
+    public static void printLottos(Lottos manualLottos, Lottos autoLottos) {
         StringBuilder sb = new StringBuilder();
-        sb.append(lottos.size()).append("개를 구매했습니다.\n");
-        for (Lotto lotto : lottos.values()) {
-            sb.append(lotto.values().stream()
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottos.size(), autoLottos.size());
+
+        for (Lotto lotto : manualLottos.merged(autoLottos).values()) {
+            sb.append(lotto.numbers().stream()
                     .map(Number::value)
                     .map(String::valueOf)
                     .collect(Collectors.joining(", ")));
