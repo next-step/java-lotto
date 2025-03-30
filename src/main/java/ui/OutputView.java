@@ -1,6 +1,7 @@
 package ui;
 
 import lotto.LottoTicket;
+import lotto.Rank;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class OutputView {
 
     public static void printResult(List<Integer> winningNumbers, List<LottoTicket> lottoTickets) {
         var result = lottoTickets.stream()
-                        .collect(Collectors.groupingBy(lottoTicket -> lottoTicket.countMatches(winningNumbers), Collectors.counting()));
+                .collect(Collectors.groupingBy(lottoTicket -> Rank.valueOf(lottoTicket.countMatches(winningNumbers), false), Collectors.counting()));
 
         System.out.println("당첨 통계");
         System.out.println("---------");

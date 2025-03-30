@@ -11,7 +11,7 @@ public class LottoTicket {
         this.numbers = new Game(numbers);
     }
 
-    public long countMatches(List<Integer> winningNumbers) {
+    public int countMatches(List<Integer> winningNumbers) {
         return numbers.countMatches(winningNumbers);
     }
 

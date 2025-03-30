@@ -26,8 +26,8 @@ public class Game {
         }
     }
 
-    public long countMatches(List<Integer> winningNumbers) {
-        return numbers.stream()
+    public int countMatches(List<Integer> winningNumbers) {
+        return (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
