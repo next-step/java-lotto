@@ -16,12 +16,8 @@ public class LottoGenerator {
         validateMoney(money);
         int lottoCount = money / LOTTO_PRICE;
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(generateRandomLotto());
-        }
-
-        return lottos;
+        return IntStream.range(0, lottoCount).mapToObj(i -> generateRandomLotto())
+                .collect(Collectors.toList());
     }
 
     private void validateMoney(int money) {
