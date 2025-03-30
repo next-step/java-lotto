@@ -16,7 +16,7 @@ public class LottoMachine {
     public LottoMachine() {
         allLottoNumbers = new ArrayList<>();
         for (int i = LottoNumber.MIN_VALUE; i <= LottoNumber.MAX_VALUE; i++) {
-            allLottoNumbers.add(new LottoNumber(i));
+            allLottoNumbers.add(LottoNumber.of(i));
         }
     }
 

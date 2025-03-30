@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step4.lotto.exception.LottoTicketException;
+import step4.lotto.exception.LottoTicketInvalidSizeException;
 
 public class LottoTicketTest {
 
@@ -15,12 +15,12 @@ public class LottoTicketTest {
     @DisplayName("로또 번호 6개로 생성된 올바른 로또 티켓")
     void given6LottoNumbers_whenCreateLottoTicket_thenSuccess() {
         // given
-        LottoNumber lottoNumber1 = new LottoNumber(1);
-        LottoNumber lottoNumber2 = new LottoNumber(2);
-        LottoNumber lottoNumber3 = new LottoNumber(3);
-        LottoNumber lottoNumber4 = new LottoNumber(4);
-        LottoNumber lottoNumber5 = new LottoNumber(5);
-        LottoNumber lottoNumber6 = new LottoNumber(6);
+        LottoNumber lottoNumber1 = LottoNumber.of(1);
+        LottoNumber lottoNumber2 = LottoNumber.of(2);
+        LottoNumber lottoNumber3 = LottoNumber.of(3);
+        LottoNumber lottoNumber4 = LottoNumber.of(4);
+        LottoNumber lottoNumber5 = LottoNumber.of(5);
+        LottoNumber lottoNumber6 = LottoNumber.of(6);
 
         // when & then
         assertDoesNotThrow(() -> new LottoTicket(
@@ -29,40 +29,59 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("로또 번호 7개로 생성된 유효하지 않은 로또 티켓")
-    void given7LottoNumbers_whenCreateLottoTicket_thenSuccess() {
+    void given7LottoNumbers_whenCreateLottoTicket_thenFail() {
         // given
-        LottoNumber lottoNumber1 = new LottoNumber(1);
-        LottoNumber lottoNumber2 = new LottoNumber(2);
-        LottoNumber lottoNumber3 = new LottoNumber(3);
-        LottoNumber lottoNumber4 = new LottoNumber(4);
-        LottoNumber lottoNumber5 = new LottoNumber(5);
-        LottoNumber lottoNumber6 = new LottoNumber(6);
-        LottoNumber lottoNumber7 = new LottoNumber(7);
+        LottoNumber lottoNumber1 = LottoNumber.of(1);
+        LottoNumber lottoNumber2 = LottoNumber.of(2);
+        LottoNumber lottoNumber3 = LottoNumber.of(3);
+        LottoNumber lottoNumber4 = LottoNumber.of(4);
+        LottoNumber lottoNumber5 = LottoNumber.of(5);
+        LottoNumber lottoNumber6 = LottoNumber.of(6);
+        LottoNumber lottoNumber7 = LottoNumber.of(7);
 
         // when
         assertThatThrownBy(() -> new LottoTicket(
             List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5, lottoNumber6, lottoNumber7)))
 
             // then
-            .isExactlyInstanceOf(LottoTicketException.class);
+            .isExactlyInstanceOf(LottoTicketInvalidSizeException.class);
     }
 
     @Test
     @DisplayName("로또 번호 5개로 생성된 유효하지 않은 로또 티켓")
-    void given5LottoNumbers_whenCreateLottoTicket_thenSuccess() {
+    void given5LottoNumbers_whenCreateLottoTicket_thenFail() {
         // given
-        LottoNumber lottoNumber1 = new LottoNumber(1);
-        LottoNumber lottoNumber2 = new LottoNumber(2);
-        LottoNumber lottoNumber3 = new LottoNumber(3);
-        LottoNumber lottoNumber4 = new LottoNumber(4);
-        LottoNumber lottoNumber5 = new LottoNumber(5);
+        LottoNumber lottoNumber1 = LottoNumber.of(1);
+        LottoNumber lottoNumber2 = LottoNumber.of(2);
+        LottoNumber lottoNumber3 = LottoNumber.of(3);
+        LottoNumber lottoNumber4 = LottoNumber.of(4);
+        LottoNumber lottoNumber5 = LottoNumber.of(5);
 
         // when
         assertThatThrownBy(
             () -> new LottoTicket(List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5)))
 
             // then
-            .isExactlyInstanceOf(LottoTicketException.class);
+            .isExactlyInstanceOf(LottoTicketInvalidSizeException.class);
+    }
+
+    @Test
+    @DisplayName("중복된 로또 번호로 생성된 유효하지 않은 로또 티켓")
+    void givenDuplicatedLottoNumbers_whenCreateLottoTicket_thenFail() {
+        // given
+        LottoNumber lottoNumber1 = LottoNumber.of(1);
+        LottoNumber lottoNumber2 = LottoNumber.of(2);
+        LottoNumber lottoNumber3 = LottoNumber.of(3);
+        LottoNumber lottoNumber4 = LottoNumber.of(4);
+        LottoNumber lottoNumber5 = LottoNumber.of(5);
+        LottoNumber lottoNumber6 = LottoNumber.of(5);
+
+        // when
+        assertThatThrownBy(() -> new LottoTicket(
+            List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4, lottoNumber5, lottoNumber6)))
+
+            // then
+            .isExactlyInstanceOf(LottoTicketInvalidSizeException.class);
     }
 
     @Test
@@ -85,7 +104,7 @@ public class LottoTicketTest {
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
 
             // then
-            .isExactlyInstanceOf(LottoTicketException.class);
+            .isExactlyInstanceOf(LottoTicketInvalidSizeException.class);
     }
 
     @Test
@@ -98,7 +117,7 @@ public class LottoTicketTest {
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
 
             // then
-            .isExactlyInstanceOf(LottoTicketException.class);
+            .isExactlyInstanceOf(LottoTicketInvalidSizeException.class);
     }
 
     @Test
@@ -108,7 +127,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("7, 8, 9, 10, 11, 12"),
-            new LottoNumber(1)
+            LottoNumber.of(1)
         );
 
 
@@ -126,7 +145,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("6, 7, 8, 9, 10, 11"),
-            new LottoNumber(1)
+            LottoNumber.of(1)
         );
 
         // when
@@ -143,7 +162,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("5, 6, 7, 8, 9, 10"),
-            new LottoNumber(1)
+            LottoNumber.of(1)
         );
 
         // when
@@ -161,7 +180,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("4, 5, 6, 7, 8, 9"),
-            new LottoNumber(1)
+            LottoNumber.of(1)
         );
 
         // when
@@ -178,7 +197,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("4, 5, 6, 7, 8, 9"),
-            new LottoNumber(10)
+            LottoNumber.of(10)
         );
 
         // when
@@ -195,7 +214,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("3, 4, 5, 6, 7, 8"),
-            new LottoNumber(1)
+            LottoNumber.of(1)
         );
 
         // when
@@ -212,7 +231,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("3, 4, 5, 6, 7, 8"),
-            new LottoNumber(9)
+            LottoNumber.of(9)
         );
 
         // when
@@ -229,7 +248,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("2, 3, 4, 5, 6, 7"),
-            new LottoNumber(8)
+            LottoNumber.of(8)
         );
 
         // when
@@ -246,7 +265,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("2, 3, 4, 5, 6, 7"),
-            new LottoNumber(1)
+            LottoNumber.of(1)
         );
 
         // when
@@ -263,7 +282,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("1, 2, 3, 4, 5, 6"),
-            new LottoNumber(7)
+            LottoNumber.of(7)
         );
 
         // when

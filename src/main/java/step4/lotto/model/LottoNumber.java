@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public LottoNumber(int value) {
+    private LottoNumber(int value) {
         validateLottoNumber(value);
         this.value = value;
     }

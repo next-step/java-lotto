@@ -20,7 +20,7 @@ public class LottoResultTest {
         ));
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket("5, 6, 7, 8, 9, 10"),
-            new LottoNumber(4)
+            LottoNumber.of(4)
         );
 
         // when
