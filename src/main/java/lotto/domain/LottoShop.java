@@ -20,7 +20,6 @@ public class LottoShop {
   public Lottos buyLottos(int count) {
     List<Lotto> manualLottos = generateManualLottos(count);
     List<Lotto> autoLottos = generateLottos(count - manualLottos.size());
-    ResultView.printLottoCount(manualLottos.size(), autoLottos.size());
     return new Lottos(manualLottos, autoLottos);
   }
 

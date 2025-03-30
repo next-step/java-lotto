@@ -11,10 +11,16 @@ public class Lotto {
   static final int PRICE = 1000;
   public static final int SIZE = 6;
   protected final List<LottoNumber> numbers;
+  private final LottoType type;
 
   public Lotto(List<LottoNumber> numbers) {
+    this(numbers, LottoType.AUTO);
+  }
+
+  public Lotto(List<LottoNumber> numbers, LottoType type) {
     validate(numbers);
     this.numbers = sort(numbers);
+    this.type = type;
   }
 
   private void validate(List<LottoNumber> numbers) {
@@ -49,5 +55,13 @@ public class Lotto {
             .map(LottoNumber::getNumber)
             .map(String::valueOf)
             .collect(joining(", ")) + "]";
+  }
+
+  public boolean isManual() {
+    return type == LottoType.MANUAL;
+  }
+
+  public boolean isAuto() {
+    return type == LottoType.AUTO;
   }
 }

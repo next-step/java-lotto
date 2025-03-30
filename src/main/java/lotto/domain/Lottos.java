@@ -17,8 +17,16 @@ public class Lottos {
             .collect(Collectors.toList());
   }
 
-  public int getCount() {
-    return lottoList.size();
+  public int getManualLottoCount() {
+    return (int) lottoList.stream()
+            .filter(Lotto::isManual)
+            .count();
+  }
+
+  public int getAutoLottoCount() {
+    return (int) lottoList.stream()
+            .filter(Lotto::isAuto)
+            .count();
   }
 
   public void printAllLottos() {

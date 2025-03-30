@@ -20,6 +20,7 @@ public class LottoShopTest {
     LottoShop lottoShop = new LottoShop(new TestLottoGenerator(), new InputView(new Scanner(testInput)));
     Lottos lottos = lottoShop.buyLottos(purchaseCount);
 
-    assertEquals(10, lottos.getCount());
+    assertEquals(1, lottos.getManualLottoCount());
+    assertEquals(9, lottos.getAutoLottoCount());
   }
 }

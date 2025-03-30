@@ -2,7 +2,9 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoType;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.generator.ManualLottoGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +40,7 @@ public class InputView {
         break;
       }
       List<LottoNumber> lottoNumbers = parseLottoNumbers(input);
-      manualLottos.add(new Lotto(lottoNumbers));
+      manualLottos.add(new ManualLottoGenerator(lottoNumbers).generate());
     }
     return manualLottos;
   }

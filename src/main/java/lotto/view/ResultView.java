@@ -16,8 +16,8 @@ public class ResultView {
     System.out.println(lottoReport.createMoneyReport());
   }
 
-  public static void printLottoCount(int manualLottoCount, int autoLottoCount) {
-    String lottoCountStatus = String.format("수동으로 %d장, 자동으로 %d장 구매했습니다.", manualLottoCount, autoLottoCount);
+  public static void printLottoCount(Lottos lottos) {
+    String lottoCountStatus = String.format("수동으로 %d장, 자동으로 %d장 구매했습니다.", lottos.getManualLottoCount(), lottos.getAutoLottoCount());
     System.out.println(lottoCountStatus);
   }
 
