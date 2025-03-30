@@ -7,16 +7,17 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoMatchTest {
+public class LottoTest {
 
     @Test
     void getLottoMatch_0match() {
         List<Integer> lottoNumbers = Arrays.asList(5, 6, 7, 10, 11, 12);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 40, 41, 42);
 
-        LottoMatch result = LottoMatch.getLottoMatch(lottoNumbers, winningNumbers);
+        Lotto lotto = new Lotto(lottoNumbers);
+        LottoMatch result = lotto.getLottoMatch(winningNumbers);
 
-        assertThat(result).isEqualTo(LottoMatch.ZERO);
+        assertThat(result).isEqualTo(LottoMatch.NONE);
     }
 
     @Test
@@ -24,7 +25,8 @@ public class LottoMatchTest {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 40, 41, 42);
 
-        LottoMatch result = LottoMatch.getLottoMatch(lottoNumbers, winningNumbers);
+        Lotto lotto = new Lotto(lottoNumbers);
+        LottoMatch result = lotto.getLottoMatch(winningNumbers);
 
         assertThat(result).isEqualTo(LottoMatch.THREE);
     }
@@ -34,7 +36,8 @@ public class LottoMatchTest {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
 
-        LottoMatch result = LottoMatch.getLottoMatch(lottoNumbers, winningNumbers);
+        Lotto lotto = new Lotto(lottoNumbers);
+        LottoMatch result = lotto.getLottoMatch(winningNumbers);
 
         assertThat(result).isEqualTo(LottoMatch.SIX);
     }

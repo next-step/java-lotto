@@ -14,4 +14,8 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public LottoMatch getLottoMatch(List<Integer> winningNumbers) {
+        return LottoMatch.fromMatchCount((int) this.lottoNumbers.stream().filter(winningNumbers::contains).count());
+    }
+
 }

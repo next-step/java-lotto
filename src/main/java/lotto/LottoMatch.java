@@ -1,12 +1,9 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum LottoMatch {
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
+    NONE(0, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
@@ -20,15 +17,15 @@ public enum LottoMatch {
         this.prize = prize;
     }
 
-    public static LottoMatch getLottoMatch(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
-        return of((int) lottoNumbers.stream().filter(winningNumbers::contains).count());
+    public int getPrize() {
+        return prize;
     }
 
-    public static LottoMatch of(int matchCount) {
+    public static LottoMatch fromMatchCount(int matchCount) {
         return Arrays.stream(values())
                 .filter(match -> match.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("일치하는 값이 없습니다."));
+                .orElse(NONE);
     }
 
     @Override
