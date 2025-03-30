@@ -1,12 +1,13 @@
 
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable {
     private static final int NUMBER_UPPER_BOUND = 45;
     private static final int NUMBER_LOWER_BOUND = 1;
     private final int number;
@@ -41,5 +42,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hashCode(number);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.number - ((LottoNumber) o).number;
     }
 }

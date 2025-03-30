@@ -13,11 +13,13 @@ public class LottoTicket {
         validateNotDuplicate(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
     public LottoTicket() {
         this.numbers = generate();
+        Collections.sort(numbers);
     }
 
     private List<LottoNumber> generate() {

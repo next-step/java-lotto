@@ -103,7 +103,7 @@
 - [x] 기능을 구현하기 전에 README.md 파일에 구현할 기능 목록을 정리해 추가한다.
 - [x] git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
 
-### 코멘트
+### 1차 코멘트
 - [x] 테스트 케이스 실패 확인이 필요할 것 같습니다 😄
 - [x] LottoMachine이 하고 있는일이 너무 많습니다 😅 LottoMachine 로또구매금액을 관리하는 객체가 하나 정의되면 어떨까요😄 (예를 들어 PucharseAmount 같은??)
 - [x] LottoTicket도 하고 있는 역할이 좀 많은 것 같습니다 😄 로또 번호 객체가 하나 정의되면 어떨까요??
@@ -112,3 +112,12 @@
   - Collections.sort() 메소드를 활용해 정렬 가능하다.
 - [x] OutputView에서 LottoRank에 계속 수정이 발생할 것 같습니다. LottoRank라는 Enum잘 정의해주셨으니 순회하는 식으로 변경하면 될 것 같네요 😄
 - [x] LottoRank에서 금액을 표현할 때 가독성을 위해 2_000_000_000 으로도 표현 가능합니다 🙇
+
+### 2차 코멘트
+- [ ] LottoNumber라는 원시객체가 getAllNumbers를 해서 자기의 객체 그룹을 반환하는게 좀 어색하긴 합니다 😄
+- [ ] 로또 구매금액이니까 PurchaseAmount가 관리하게 되면 getTicketCount에 인자로 전달될 필요도 없고 이미 검증도 PurchaseAmount가 하고 있습니다 😄
+- [ ] LottoTickets의 cost, return rate도 PurchaseAmount로 위임해보면 어떨까요??
+- [ ] LottoNumber가 1 ~ 45가 아닐 때 제대로 검증되는지도 테스트 되면 좋을 것 같네요 😄
+- [x] 정렬이 한번 되면 좋을 것 같습니다 😄
+
+
