@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.LottoConfig.LOTTO_PRICE;
+import static lotto.LottoStore.LOTTO_PRICE;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);

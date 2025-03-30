@@ -1,32 +1,33 @@
 package lotto.view;
 
-import lotto.LottoNumber;
+import lotto.LottoNumbers;
 import lotto.LottoRank;
 
 import java.util.Map;
-
-import static lotto.LottoConfig.LOTTO_PRICE;
 
 public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoNumber(LottoNumber lottoNumber) {
-        System.out.println(lottoNumber);
+    public static void printLottoNumber(LottoNumbers lottoNumbers) {
+        System.out.println(lottoNumbers);
     }
 
-    public static void printStat(int totalCount, Map<LottoRank, Integer> rankCount) {
+    public static void printStat(double rateOfReturn, Map<LottoRank, Integer> rankCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (LottoRank lottoRank : LottoRank.values()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", lottoRank.getMatchCount(), lottoRank.getMoney(), rankCount.getOrDefault(lottoRank, 0));
+            printLottoRankStatWhenLottoRankIsNotETC(lottoRank, rankCount);
         }
 
-        long winnings = rankCount.entrySet().stream()
-                .mapToLong(entry -> (long)entry.getKey().getMoney() * entry.getValue())
-                .sum();
+        System.out.printf("총 수익률은 %.2f입니다.\n", rateOfReturn);
+    }
 
-        System.out.printf("총 수익률은 %.2f입니다.\n", (double)winnings / (totalCount * LOTTO_PRICE));
+    private static void printLottoRankStatWhenLottoRankIsNotETC(LottoRank lottoRank, Map<LottoRank, Integer> rankCount) {
+        if (lottoRank == LottoRank.ETC)
+            return;
+
+        System.out.printf("%d개 일치 (%d원)- %d개\n", lottoRank.getMatchCount(), lottoRank.getMoney(), rankCount.getOrDefault(lottoRank, 0));
     }
 }

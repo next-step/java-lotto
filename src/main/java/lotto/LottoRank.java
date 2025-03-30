@@ -3,13 +3,12 @@ package lotto;
 import java.util.HashMap;
 import java.util.Map;
 
-import static lotto.LottoConfig.LOTTO_NUMBER_SIZE;
-
-public enum LottoRank implements Comparable<LottoRank> {
-    FOURTH(LOTTO_NUMBER_SIZE - 3, 5000),
-    THIRD(LOTTO_NUMBER_SIZE - 2, 50000),
-    SECOND(LOTTO_NUMBER_SIZE - 1, 1500000),
-    FIRST(LOTTO_NUMBER_SIZE, 2000000000),
+public enum LottoRank {
+    ETC(-1, 0),
+    FOURTH(LottoNumbersCondition.getDefaultInstance().getLottoNumberSize() - 3, 5000),
+    THIRD(LottoNumbersCondition.getDefaultInstance().getLottoNumberSize() - 2, 50000),
+    SECOND(LottoNumbersCondition.getDefaultInstance().getLottoNumberSize() - 1, 1500000),
+    FIRST(LottoNumbersCondition.getDefaultInstance().getLottoNumberSize(), 2000000000),
     ;
 
     private final Integer matchCount;
@@ -23,12 +22,13 @@ public enum LottoRank implements Comparable<LottoRank> {
     private static final Map<Integer, LottoRank> LOTTO_RANK = new HashMap<>();
 
     static {
-        for (LottoRank lottoRank : LottoRank.values())
+        for (LottoRank lottoRank : LottoRank.values()) {
             LOTTO_RANK.put(lottoRank.matchCount, lottoRank);
+        }
     }
 
     public static LottoRank valueOfMatchCount(Integer matchCount) {
-        return LOTTO_RANK.get(matchCount);
+        return LOTTO_RANK.getOrDefault(matchCount, ETC);
     }
 
     public Integer getMatchCount() {
@@ -38,6 +38,4 @@ public enum LottoRank implements Comparable<LottoRank> {
     public Integer getMoney() {
         return money;
     }
-
-
 }

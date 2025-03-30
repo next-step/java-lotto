@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.LottoNumber;
+import lotto.LottoNumbers;
 import lotto.LottoRound;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +18,7 @@ class ResultViewTest {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
 
-        ResultView.printLottoNumber(new LottoNumber(Set.of(3,6,1,5,2,4)));
+        ResultView.printLottoNumber(new LottoNumbers(Set.of(3,6,1,5,2,4)));
 
         Assertions.assertThat(output.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]\n");
         System.setOut(System.out);
@@ -32,13 +32,13 @@ class ResultViewTest {
 
         LottoRound lottoRound = new LottoRound(Set.of(1, 2, 4, 3, 5, 6));
 
-        LottoNumber first = new LottoNumber(Set.of(1, 2, 3, 4, 5, 6));
-        LottoNumber second = new LottoNumber(Set.of(1, 2, 3, 4, 5, 7));
-        LottoNumber third = new LottoNumber(Set.of(1, 2, 3, 4, 7, 8));
-        LottoNumber fourth = new LottoNumber(Set.of(1, 2, 3, 7, 8, 9));
-        LottoNumber etc = new LottoNumber(Set.of(1, 2, 7, 8, 9, 10));
+        LottoNumbers first = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers second = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 7));
+        LottoNumbers third = new LottoNumbers(Set.of(1, 2, 3, 4, 7, 8));
+        LottoNumbers fourth = new LottoNumbers(Set.of(1, 2, 3, 7, 8, 9));
+        LottoNumbers etc = new LottoNumbers(Set.of(1, 2, 7, 8, 9, 10));
 
-        ResultView.printStat(9, lottoRound.checkLottoRank(List.of(first, first, second, second, second, third, fourth, etc, etc)));
+        ResultView.printStat(444950.56, lottoRound.checkLottoRank(List.of(first, first, second, second, second, third, fourth, etc, etc)));
 
         Assertions.assertThat(output.toString()).isEqualTo("당첨 통계\n" +
                 "---------\n" +

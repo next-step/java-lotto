@@ -8,8 +8,11 @@ class LottoRankTest {
     @DisplayName("같은 번호 개수로 enum 찾기")
     @Test
     public void findByMatchCount() throws Exception {
+        Assertions.assertThat(LottoRank.valueOfMatchCount(1))
+                .isEqualTo(LottoRank.ETC);
+
         Assertions.assertThat(LottoRank.valueOfMatchCount(2))
-                .isNull();
+                .isEqualTo(LottoRank.ETC);
 
         Assertions.assertThat(LottoRank.valueOfMatchCount(3))
                 .isEqualTo(LottoRank.FOURTH);
