@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String SEPARATOR = ",";
 
     private InputView() {}
 
@@ -26,20 +25,11 @@ public class InputView {
 
     public static Winning winningNumsLastWeek() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Set<LottoNum> winningNums = getWinningNums();
+        Set<LottoNum> winningNums = LottoFactory.fromSplit(scanner.nextLine());
         System.out.println("보너스 볼을 입력해 주세요.");
         LottoNum bonusNum = getBonusNum();
         return new Winning(winningNums, bonusNum);
 
-    }
-
-    private static Set<LottoNum> getWinningNums() {
-        String[] tokens = scanner.nextLine().split(",");
-        return Arrays.stream(tokens)
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNum::new)
-                .collect(Collectors.toSet());
     }
 
     private static LottoNum getBonusNum() {
