@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 public class NumberUtils {
 
     private static final int ZERO = 0;
+    private static final String NUMBER_REGEX = "-?\\d+";
 
     private NumberUtils() {
         throw new UtilInstantiationException();
@@ -17,8 +18,8 @@ public class NumberUtils {
         if (StringUtils.hasNotText(value)) {
             return false;
         }
-        return value.chars()
-            .allMatch(Character::isDigit);
+
+        return value.matches(NUMBER_REGEX);
     }
 
     public static boolean isNotNumber(String value) {

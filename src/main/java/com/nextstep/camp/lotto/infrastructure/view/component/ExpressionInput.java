@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class ExpressionInput extends AbstractInput<ExpressionTokens> {
 
+    private static final String EXPRESSION_REGEX = "^-?\\d+(?: [+\\-*/] -?\\d+)*$";
+
     private ExpressionInput(Scanner scanner) {
         super(scanner);
     }
@@ -16,7 +18,7 @@ public class ExpressionInput extends AbstractInput<ExpressionTokens> {
 
     @Override
     protected boolean isValid(String value) {
-        return true;
+        return value.matches(EXPRESSION_REGEX);
     }
 
     @Override
