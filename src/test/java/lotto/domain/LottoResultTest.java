@@ -3,6 +3,10 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
@@ -11,40 +15,39 @@ class LottoResultTest {
     @Test
     void add() {
         // given
-        LottoResult lottoResult = new LottoResult();
+        List<LottoResult.Rank> ranks = Arrays.asList(LottoResult.Rank.FOURTH,
+                LottoResult.Rank.FOURTH, LottoResult.Rank.THIRD);
+        LottoResult lottoResult = new LottoResult(ranks);
 
         // when
-        lottoResult.add(3);
-        lottoResult.add(3);
-        lottoResult.add(4);
+        Map<LottoResult.Rank, Long> statistics = lottoResult.getStatistics();
 
         // then
-        assertThat(lottoResult.getMatchCount(3)).isEqualTo(2);
-        assertThat(lottoResult.getMatchCount(4)).isEqualTo(1);
+        assertThat(statistics.get(LottoResult.Rank.FOURTH)).isEqualTo(2);
+        assertThat(statistics.get(LottoResult.Rank.THIRD)).isEqualTo(1);
     }
 
-    @DisplayName("일치하는 번호가 3개 미만이면 해당 결과의 개수가 증가하지 않는다.")
+    @DisplayName("일치하는 번호가 3개 미만이면 MISS 등수로 처리된다.")
     @Test
     void addLessThanThree() {
         // given
-        LottoResult lottoResult = new LottoResult();
+        List<LottoResult.Rank> ranks = Arrays.asList(LottoResult.Rank.MISS, LottoResult.Rank.MISS);
+        LottoResult lottoResult = new LottoResult(ranks);
 
         // when
-        lottoResult.add(2);
+        Map<LottoResult.Rank, Long> statistics = lottoResult.getStatistics();
 
         // then
-        assertThat(lottoResult.getMatchCount(2)).isEqualTo(0);
+        assertThat(statistics.get(LottoResult.Rank.MISS)).isEqualTo(2);
     }
 
     @DisplayName("당첨금을 계산한다.")
     @Test
     void calculateTotalPrize() {
         // given
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.add(3);
-        lottoResult.add(4);
-        lottoResult.add(5);
-        lottoResult.add(6);
+        List<LottoResult.Rank> ranks = Arrays.asList(LottoResult.Rank.FOURTH,
+                LottoResult.Rank.THIRD, LottoResult.Rank.SECOND, LottoResult.Rank.FIRST);
+        LottoResult lottoResult = new LottoResult(ranks);
 
         // when
         long totalPrize = lottoResult.calculateTotalPrize();
@@ -58,8 +61,8 @@ class LottoResultTest {
     @Test
     void calculateProfitRate() {
         // given
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.add(3); // 5,000원
+        List<LottoResult.Rank> ranks = Arrays.asList(LottoResult.Rank.FOURTH); // 5,000원
+        LottoResult lottoResult = new LottoResult(ranks);
 
         // when
         double profitRate = lottoResult.calculateProfitRate(1000);
