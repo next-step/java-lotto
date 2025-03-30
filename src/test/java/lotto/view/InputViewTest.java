@@ -71,12 +71,12 @@ class InputViewTest {
   @DisplayName("직접 로또 번호를 입력받는 기능 테스트")
   @Test
   void testReceiveManualLottos() {
-    String testInput = "1, 2, 3, 4, 5, 6\n7, 8, 9, 10, 11, 12\n\n";
+    String testInput = "1, 2, 3, 4, 5, 6\n7,8,9,10,11,12\n\n";
     InputView inputView = new InputView(getTestScanner(testInput));
 
-    assertThat(inputView.receiveManualLottos()).allMatch(lotto ->
+    assertThat(inputView.receiveManualLottos()).allMatch(lottoNumberString ->
             List.of(
-                    "[1, 2, 3, 4, 5, 6]", "[7, 8, 9, 10, 11, 12]"
-            ).contains(lotto.getNumberRepresentation()));
+                    "1, 2, 3, 4, 5, 6", "7,8,9,10,11,12"
+            ).contains(lottoNumberString));
   }
 }

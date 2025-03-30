@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import lotto.domain.generator.LottoGenerator;
+import lotto.domain.generator.ManualLottoGenerator;
 import lotto.view.InputView;
-import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoShop {
 
@@ -24,11 +25,14 @@ public class LottoShop {
   }
 
   private List<Lotto> generateManualLottos(int maxCount) {
-    List<Lotto> lottos = inputView.receiveManualLottos();
-    if (lottos.size() > maxCount) {
+    List<String> lottoNumbers = inputView.receiveManualLottos();
+    if (lottoNumbers.size() > maxCount) {
       throw new IllegalArgumentException("수동으로 구매할 수 있는 횟수를 초과하였습니다.");
     }
-    return lottos;
+    return lottoNumbers.stream()
+            .map(LottoNumberParser::parse)
+            .map(numbers -> new ManualLottoGenerator(numbers).generate())
+            .collect(Collectors.toList());
   }
 
   private List<Lotto> generateLottos(int count) {
