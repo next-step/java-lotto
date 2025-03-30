@@ -16,7 +16,7 @@ public class OutputView {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println(HYPHEN.repeat(9));
 
-        for (Rank rank : List.of(Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)) {
+        for (Rank rank : List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)) {
             System.out.println(rank.getMessage() + HYPHEN + " " + statistics.getCountByRank(rank) + UNIT);
         }
     }
