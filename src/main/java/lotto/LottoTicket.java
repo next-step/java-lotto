@@ -11,12 +11,16 @@ public class LottoTicket {
     private final List<Integer> numbers;
 
     public LottoTicket(List<Integer> numbers) {
-        if (numbers.size() != DIGIT) {
-            throw new IllegalArgumentException("로또는 " + DIGIT + "자리여야 합니다.");
-        }
+        validate(numbers);
 
         this.numbers = new ArrayList<>(numbers);
         this.numbers.sort(Integer::compareTo);
+    }
+
+    private static void validate(List<Integer> numbers) {
+        if (numbers.size() != DIGIT) {
+            throw new IllegalArgumentException("로또는 " + DIGIT + "자리여야 합니다.");
+        }
     }
 
     public long countMatches(List<Integer> winningNumbers) {
