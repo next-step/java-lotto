@@ -30,4 +30,9 @@ public class Expression {
 
         return current;
     }
+
+    @Override
+    public String toString() {
+        return root.toString();
+    }
 }
