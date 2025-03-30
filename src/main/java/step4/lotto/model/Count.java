@@ -2,6 +2,8 @@ package step4.lotto.model;
 
 import java.util.Objects;
 import step4.lotto.exception.CountException;
+import step4.lotto.exception.CountInvalidFormatException;
+import step4.lotto.exception.CountInvalidValueException;
 
 public class Count {
 
@@ -27,7 +29,7 @@ public class Count {
 
     public void validate(long value) {
         if (value < 0) {
-            throw new CountException();
+            throw new CountInvalidValueException();
         }
     }
 
@@ -35,7 +37,7 @@ public class Count {
         try {
             Integer.parseInt(count);
         } catch (NumberFormatException e) {
-            throw new CountException();
+            throw new CountInvalidFormatException();
         }
         validate(Integer.parseInt(count));
     }
