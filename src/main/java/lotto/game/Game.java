@@ -14,7 +14,6 @@ public class Game {
     public static final int LOTTO_PRICE = 1000;
     private final int manualCount;
     private final int autoCount;
-    private final List<Lotto> manualLottos = new ArrayList<>();
     private Lottos lottos;
 
     public Game(int paidMoney, int manualCount) {
@@ -26,9 +25,9 @@ public class Game {
         return lottos;
     }
 
-    public void generateAllLottos() {
+    public void generateLottos(List<Lotto> manualLottoNumbersList) {
         System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "장을 구매했습니다.");
-        List<Lotto> allLottos = new ArrayList<>(manualLottos);
+        List<Lotto> allLottos = new ArrayList<>(manualLottoNumbersList);
         for (int i = 0; i < autoCount; i++) {
             allLottos.add(new Lotto(LottoGenerator.generate()));
         }
@@ -41,9 +40,4 @@ public class Game {
         return new Statistic(lottos, winNumber);
     }
 
-    public void addManualLottoNumbers(List<List<LottoNum>> manualLottoNumbersList) {
-        for (List<LottoNum> numbers : manualLottoNumbersList) {
-            manualLottos.add(new Lotto(numbers));
-        }
-    }
 }

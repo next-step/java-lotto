@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNum;
 
 public class InputView {
@@ -23,12 +24,12 @@ public class InputView {
         return manualCount;
     }
 
-    public static List<List<LottoNum>> getManualLottoNumbers(int manualCount) {
+    public static List<Lotto> getManualLottoNumbers(int manualCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<List<LottoNum>> manualLottoNumbers = new ArrayList<>();
+        List<Lotto> manualLottoNumbers = new ArrayList<>();
         while (manualLottoNumbers.size() < manualCount) {
             String manualLottoNumber = scanner.nextLine();
-            manualLottoNumbers.add(convertStringToList(manualLottoNumber));
+            manualLottoNumbers.add(new Lotto(convertStringToList(manualLottoNumber)));
         }
         return manualLottoNumbers;
     }
