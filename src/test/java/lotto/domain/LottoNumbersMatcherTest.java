@@ -8,21 +8,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LottoNumberMatcherTest {
+public class LottoNumbersMatcherTest {
 
-    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    List<LottoNumbers> lottoNumbers = new ArrayList<>();
 
     @BeforeEach
     private void setUp() {
-        lottoNumbers.add(new LottoNumber(Arrays.asList( 1,  2,  3,  4,  5,  6)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList( 6,  7,  8,  9, 10, 11)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList( 1,  2,  3, 14, 15, 16)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList( 1,  2,  3, 24, 25, 26)));
+//        LottoNumbers.fromIntegers(Arrays.asList(1, 2, 3, 4, 5, 6))
+        lottoNumbers.add(LottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3,  4,  5,  6)));
+        lottoNumbers.add(LottoNumbers.fromIntegers(Arrays.asList( 6,  7,  8,  9, 10, 11)));
+        lottoNumbers.add(LottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3, 14, 15, 16)));
+        lottoNumbers.add(LottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3, 24, 25, 26)));
     }
 
     @Test
     public void 당첨_통계_당첨존재() {
-        LottoNumber winningLottoNumbers = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningLottoNumbers = LottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3,  4,  5,  6));
 
         LottoNumberMatcher matcher = new LottoNumberMatcher(lottoNumbers, winningLottoNumbers);
         LottoWinningRecord record = matcher.result();
@@ -37,7 +38,7 @@ public class LottoNumberMatcherTest {
 
     @Test
     public void 당첨_통계_당첨없을경우() {
-        LottoNumber winningLottoNumbers = new LottoNumber(Arrays.asList(40, 41, 42, 43, 44, 45));
+        LottoNumbers winningLottoNumbers = LottoNumbers.fromIntegers(Arrays.asList(40, 41, 42, 43, 44, 45));
 
         LottoNumberMatcher matcher = new LottoNumberMatcher(lottoNumbers, winningLottoNumbers);
         LottoWinningRecord record = matcher.result();

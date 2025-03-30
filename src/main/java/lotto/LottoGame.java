@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumberMatcher;
 import lotto.domain.LottoWinningRecord;
 import lotto.view.InputView;
@@ -14,12 +14,12 @@ public class LottoGame {
     public static void main(String[] args) {
         long amount = InputView.purchaseAmount();
         LottoMachine machine = new LottoMachine();
-        List<LottoNumber> purchasedLottos = machine.buy(amount);
+        List<LottoNumbers> purchasedLottos = machine.buy(amount);
         ResultView.showPurchasedLottos(purchasedLottos);
 
         String lastWinningLottoNumbers = InputView.inputLastWinningLottoNumbers();
 
-        LottoNumberMatcher matcher = new LottoNumberMatcher(purchasedLottos, LottoNumber.toLottoNumber(lastWinningLottoNumbers));
+        LottoNumberMatcher matcher = new LottoNumberMatcher(purchasedLottos, LottoNumbers.toLottoNumber(lastWinningLottoNumbers));
         LottoWinningRecord winningRecord = matcher.result();
         ResultView.showLottoWinningResult(winningRecord, purchasedLottos.size());
     }

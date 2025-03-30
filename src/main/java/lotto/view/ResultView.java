@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoWinningRecord;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static void showPurchasedLottos(List<LottoNumber> lottoNumbers) {
+    public static void showPurchasedLottos(List<LottoNumbers> lottoNumbers) {
         System.out.println(lottoNumbers.size() + "개를 구매했습니다.");
 
         lottoNumbers.forEach(

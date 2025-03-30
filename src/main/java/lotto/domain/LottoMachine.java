@@ -8,12 +8,12 @@ public class LottoMachine {
 
     public static final int PRICE_OF_LOTTO = 1_000;
 
-    public List<LottoNumber> buy (long money) {
+    public List<LottoNumbers> buy (long money) {
         validate(money);
 
-        List<LottoNumber> lottos = new ArrayList<>();
+        List<LottoNumbers> lottos = new ArrayList<>();
         IntStream.range(0, numberOfLottoTickets(money))
-                .forEach(i -> lottos.add(new LottoNumber()));
+                .forEach(i -> lottos.add(new LottoNumbers()));
         return lottos;
     }
 

@@ -15,7 +15,7 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
 
         int money = 3000;
-        List<LottoNumber> lottoNumbers = machine.buy(money);
+        List<LottoNumbers> lottoNumbers = machine.buy(money);
         Assertions.assertThat(lottoNumbers).hasSize(money / PRICE_OF_LOTTO);
     }
 

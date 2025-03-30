@@ -4,7 +4,8 @@ public enum LottoRank {
     MATCH_3(3, 5_000, "3개 일치 (5000원)"),
     MATCH_4(4, 50_000, "4개 일치 (50000원)"),
     MATCH_5(5, 1_500_000, "5개 일치 (1500000원)"),
-    MATCH_6(6, 2_000_000_000, "6개 일치 (2000000000원)");
+    MATCH_6(6, 2_000_000_000, "6개 일치 (2000000000원)"),
+    ;
 
     private final int match;
     private final int money;
