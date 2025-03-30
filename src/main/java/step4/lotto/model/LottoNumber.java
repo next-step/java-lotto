@@ -3,6 +3,8 @@ package step4.lotto.model;
 import java.util.HashMap;
 import java.util.Map;
 import step4.lotto.exception.LottoNumberException;
+import step4.lotto.exception.LottoNumberInvalidFormatException;
+import step4.lotto.exception.LottoNumberInvalidValueException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -34,7 +36,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validateLottoNumber(int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
-            throw new LottoNumberException();
+            throw new LottoNumberInvalidValueException();
         }
     }
 
@@ -42,7 +44,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new LottoNumberException();
+            throw new LottoNumberInvalidFormatException();
         }
         validateLottoNumber(Integer.parseInt(value));
     }

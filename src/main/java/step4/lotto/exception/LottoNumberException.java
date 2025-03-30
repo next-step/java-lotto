@@ -1,10 +1,6 @@
 package step4.lotto.exception;
 
-public class LottoNumberException extends RuntimeException {
-
-    public LottoNumberException() {
-        super();
-    }
+public class LottoNumberException extends LottoException {
 
     public LottoNumberException(String message) {
         super(message);
