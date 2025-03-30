@@ -117,7 +117,7 @@
 - [ ] LottoNumber라는 원시객체가 getAllNumbers를 해서 자기의 객체 그룹을 반환하는게 좀 어색하긴 합니다 😄
 - [ ] 로또 구매금액이니까 PurchaseAmount가 관리하게 되면 getTicketCount에 인자로 전달될 필요도 없고 이미 검증도 PurchaseAmount가 하고 있습니다 😄
 - [ ] LottoTickets의 cost, return rate도 PurchaseAmount로 위임해보면 어떨까요??
-- [ ] LottoNumber가 1 ~ 45가 아닐 때 제대로 검증되는지도 테스트 되면 좋을 것 같네요 😄
+- [x] LottoNumber가 1 ~ 45가 아닐 때 제대로 검증되는지도 테스트 되면 좋을 것 같네요 😄
 - [x] 정렬이 한번 되면 좋을 것 같습니다 😄
 
 
