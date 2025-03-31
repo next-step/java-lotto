@@ -38,12 +38,12 @@ public class LottoMachine {
         return tickets.getTickets();
     }
 
-    public Map<LottoRank, Integer> getRankStatistics(LottoTicket winningTicket, LottoNumber bonusBall) {
-        return tickets.getRankStatistics(winningTicket, bonusBall);
+    public Map<LottoRank, Integer> getRankStatistics(WinningLotto winningLotto) {
+        return tickets.getRankStatistics(winningLotto);
     }
 
-    public double getReturnRate(LottoTicket winningTicket, LottoNumber bonusBall) {
-        return amount.getReturnRate(tickets.income(winningTicket, bonusBall));
+    public double getReturnRate(WinningLotto winningLotto) {
+        return amount.getReturnRate(tickets.income(winningLotto));
     }
 
 }

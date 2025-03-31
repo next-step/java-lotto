@@ -46,10 +46,9 @@ class LottoTicketsTest {
     @Test
     @DisplayName("로또 티켓 컬렉션은 당첨번호와 보너스볼(일치)을 입력하면 당첨 통계를 반환한다.")
     void getRankStatistics() {
-        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusBall = new LottoNumber(11);
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 11);
 
-        assertThat(tickets.getRankStatistics(winningTicket, bonusBall))
+        assertThat(tickets.getRankStatistics(winningLotto))
                 .containsEntry(LottoRank.FIFTH, 1)
                 .containsEntry(LottoRank.FOURTH, 0)
                 .containsEntry(LottoRank.THIRD, 0)
@@ -60,10 +59,9 @@ class LottoTicketsTest {
     @Test
     @DisplayName("로또 티켓 컬렉션은 당첨번호와 보너스볼(불일치)을 입력하면 당첨 통계를 반환한다.")
     void getRankStatisticsWithNoBonus() {
-        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusBall = new LottoNumber(13);
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 13);
 
-        assertThat(tickets.getRankStatistics(winningTicket, bonusBall))
+        assertThat(tickets.getRankStatistics(winningLotto))
                 .containsEntry(LottoRank.FIFTH, 1)
                 .containsEntry(LottoRank.FOURTH, 0)
                 .containsEntry(LottoRank.THIRD, 1)
@@ -78,9 +76,8 @@ class LottoTicketsTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 7))
         ));
-        LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,10,11));
-        LottoNumber bonusBall = new LottoNumber(16);
+        WinningLotto winningLotto = new WinningLotto(List.of(1,2,3,4,10,11), 16);
 
-        assertThat(lottoTickets.income(lottoTicket, bonusBall)).isEqualTo(100_000);
+        assertThat(lottoTickets.income(winningLotto)).isEqualTo(100_000);
     }
 }

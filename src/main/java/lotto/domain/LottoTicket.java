@@ -31,17 +31,24 @@ public class LottoTicket {
             throw new IllegalArgumentException("number should not be duplicate.");
     }
 
-    public LottoRank rank(LottoTicket winningTicket, LottoNumber bonusBall) {
+    public LottoRank rank(WinningLotto winningLotto) {
         int matchCount = (int) numbers.stream()
-                .filter(winningTicket.numbers::contains)
+                .filter(winningLotto::matchTicket)
                 .count();
 
-        return LottoRank.of(matchCount, numbers.contains(bonusBall));
+        boolean hasBonus = numbers.stream()
+                .anyMatch(winningLotto::matchBonus);
+
+        return LottoRank.of(matchCount, hasBonus);
     }
 
     public List<Integer> getNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
+    }
+
+    public boolean match(LottoNumber number) {
+        return numbers.contains(number);
     }
 }
