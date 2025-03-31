@@ -2,10 +2,7 @@ package Lotto.model;
 
 import Lotto.model.NumberExtractor.NumberExtractor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoService {
     private static final int NUMBER_SIZE = 6;
@@ -58,7 +55,21 @@ public class LottoService {
         return this.lottoNum;
     }
 
+    private void validateLottoNumber(int[] lottoNumber){
+        if (lottoNumber.length > 6){
+            throw new IllegalArgumentException("The count of Lotto number exceed 6.");
+        }
+
+        Set<Integer> set = new HashSet<>();
+        for (int num: lottoNumber){
+            if (!set.add(num)){
+                throw new IllegalArgumentException("Lotto numbers must not contain duplicates.");
+            }
+        }
+    }
+
     public void decideWinning(int[] winnerNum) {
+        validateLottoNumber(winnerNum);
         this.winningCountMap = new HashMap<>(Map.of(
                 LottoPrizeTable.MATCHED_3, 0,
                 LottoPrizeTable.MATCHED_4, 0,
