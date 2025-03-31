@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrize;
 import lotto.domain.LottoResult;
 
 import java.util.List;
@@ -17,10 +18,9 @@ public class ResultView {
     public static void printResult(LottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5,000원)- " + result.getThreeMatches() + "개");
-        System.out.println("4개 일치 (50,000원)- " + result.getFourMatches() + "개");
-        System.out.println("5개 일치 (1,500,000원)- " + result.getFiveMatches() + "개");
-        System.out.println("6개 일치 (2,000,000,000원)- " + result.getSixMatches() + "개");
+        for (int i = 3; i <= 6; i++) {
+            System.out.println(i + "개 일치 (" + LottoPrize.getPrizeByMatchCount(i) + "원)- " + result.getMatchCounts().getOrDefault(i, 0) + "개");
+        }
         System.out.printf("총 수익률은 %,.2f입니다.%n", result.getRate());
     }
 }

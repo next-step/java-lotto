@@ -3,11 +3,12 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoMachine {
+    private final int LOTTO_PRICE = 1000;
     private final LottoGenerator generator = new LottoGenerator();
 
     public List<Lotto> buy(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
-        int ticketCount = purchaseAmount / 1000;
+        int ticketCount = purchaseAmount / LOTTO_PRICE;
         return generator.generate(ticketCount);
     }
 

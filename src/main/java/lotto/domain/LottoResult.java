@@ -1,34 +1,18 @@
 package lotto.domain;
 
+import java.util.Map;
+
 public class LottoResult {
-    private final int threeMatches;
-    private final int fourMatches;
-    private final int fiveMatches;
-    private final int sixMatches;
+    private final Map<Integer, Integer> matchCounts;
     private final double rate;
 
-    public LottoResult(int three, int four, int five, int six, double rate) {
-        this.threeMatches = three;
-        this.fourMatches = four;
-        this.fiveMatches = five;
-        this.sixMatches = six;
+    public LottoResult(Map<Integer, Integer> matchCounts, double rate) {
+        this.matchCounts = matchCounts;
         this.rate = rate;
     }
 
-    public int getThreeMatches() {
-        return threeMatches;
-    }
-
-    public int getFourMatches() {
-        return fourMatches;
-    }
-
-    public int getFiveMatches() {
-        return fiveMatches;
-    }
-
-    public int getSixMatches() {
-        return sixMatches;
+    public Map<Integer, Integer> getMatchCounts() {
+        return matchCounts;
     }
 
     public double getRate() {
