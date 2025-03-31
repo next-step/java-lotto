@@ -3,6 +3,8 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
+import lotto.domain.MatchCount;
+import lotto.domain.WinningResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

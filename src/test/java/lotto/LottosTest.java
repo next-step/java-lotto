@@ -3,17 +3,21 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.MatchCount;
+import lotto.domain.RandomLottoNumberGenerator;
+import lotto.domain.WinningResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class LottosTest {
 
-    @DisplayName("로또 구입 금액을 입력하면 구입 금액에 해당하는 개수만큼 Lotto를 갖는다.")
+    @DisplayName("로또 구입 개수만큼 Lotto를 갖는다.")
     @Test
     void purchase() {
-        int purchasePrice = 15000;
-        Lottos lottos = new Lottos(purchasePrice);
+        Lottos lottos = new Lottos(15, new RandomLottoNumberGenerator());
         assertThat(lottos.count()).isEqualTo(15);
     }
 

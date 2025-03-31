@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,10 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int purchasePrice) {
+    public Lottos(int purchaseAmount, LottoNumberGenerator generator) {
         lottos = new ArrayList<>();
-        int purchaseAmount = purchasePrice / 1000;
         for (int i = 0; i < purchaseAmount; i++) {
-            lottos.add(new Lotto(new RandomLottoNumberGenerator()));
+            lottos.add(new Lotto(generator));
         }
     }
 
