@@ -26,6 +26,6 @@ WinningLotto
  
 
 LottoRank
-- [ ] LottoRank는 1등부터 6등까지 존재한다. (Enum)
-- [ ] LottoRank는 등수의 당첨금을 함께 관리한다.
+- [x] LottoRank는 1등부터 6등까지 존재한다. (Enum)
+- [x] LottoRank는 등수의 당첨금을 함께 관리한다.
 
