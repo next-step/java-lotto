@@ -3,43 +3,34 @@ package lotto.domain.product;
 import lotto.domain.Money;
 import lotto.domain.PaymentReceipt;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class FinalResult {
 
-    private Map<Integer, Integer> result;
+    private final Map<LottoRank, Integer> result;
 
     public FinalResult() {
-        this.result = new HashMap<>();
+        this.result = new EnumMap<>(LottoRank.class);
     }
 
-    public void put(Integer number) {
-        Integer count = result.getOrDefault(number, 0);
-        result.put(number, count + 1);
-    }
-
-    public Integer get(Integer number) {
-        return result.get(number);
+    public void put(LottoRank rank) {
+        result.put(rank, result.getOrDefault(rank, 0) + 1);
     }
 
     public double returnRate(PaymentReceipt paid) {
-        Money totalPrize = getTotalPrize();
+        Money totalPrize = calculateTotalReward();
         return paid.getRateBy(totalPrize);
     }
 
-    public Money getTotalPrize() {
-        Money totalPrize = new Money(0);
-        for (Map.Entry<Integer, Integer> entry : result.entrySet()) {
-            int matchCount = entry.getKey();
-            int count = entry.getValue();
+    public Map<LottoRank, Integer> getResult() {
+        return result;
+    }
 
-            LottoRank rank = LottoRank.of(matchCount);
-            int prizePerWin = rank.getPrize();
-
-            totalPrize = totalPrize.add(new Money(prizePerWin * count));
-        }
-        return totalPrize;
+    public Money calculateTotalReward() {
+        return new Money(result.entrySet().stream()
+                .mapToInt(e -> e.getKey().getPrize() * e.getValue())
+                .sum());
     }
 
 }

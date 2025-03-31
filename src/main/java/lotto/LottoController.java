@@ -4,6 +4,7 @@ import lotto.domain.PaymentReceipt;
 import lotto.domain.product.FinalResult;
 import lotto.domain.product.LotteryTicket;
 import lotto.domain.product.LotteryTickets;
+import lotto.domain.product.WinningTicket;
 import lotto.view.input.ConsoleInputView;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
@@ -31,19 +32,19 @@ public class LottoController {
         LotteryTickets myTickets = LotteryTickets.makeAutoTickets(count);
         outputView.printAutoLottery(myTickets);
 
-        LotteryTicket winningTicket = getWinningTicket();
+        WinningTicket winningTicket = getWinningTicket();
         getResult(myTickets, winningTicket, receipt);
 
         inputView.closeScanner();
     }
 
-    private void getResult(LotteryTickets myTickets, LotteryTicket winningTicket, PaymentReceipt receipt) {
+    private void getResult(LotteryTickets myTickets, WinningTicket winningTicket, PaymentReceipt receipt) {
         FinalResult result = myTickets.getResult(winningTicket);
         outputView.printResult(result, receipt);
     }
 
-    private LotteryTicket getWinningTicket() {
-        return inputView.lastWeekNumber();
+    private WinningTicket getWinningTicket() {
+        return inputView.getWinningTicket();
     }
 
 }

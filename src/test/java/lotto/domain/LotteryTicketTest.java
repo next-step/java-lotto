@@ -2,12 +2,14 @@ package lotto.domain;
 
 import lotto.domain.product.FinalResult;
 import lotto.domain.product.LotteryTicket;
+import lotto.domain.product.LottoNumber;
 import lotto.domain.product.LottoRank;
 import lotto.view.fake.FakeInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LotteryTicketTest {
 
@@ -29,7 +31,7 @@ public class LotteryTicketTest {
     @Test
     @DisplayName("로또 번호의 맞춘 개수에 따라 받는 가격을 알 수 있다.")
     public void getRank() {
-        LottoRank lottoRank = LottoRank.of(3);
+        LottoRank lottoRank = LottoRank.of(3, false);
         assertThat(lottoRank.getPrize()).isEqualTo(5000);
     }
 
@@ -37,9 +39,25 @@ public class LotteryTicketTest {
     @DisplayName("맞춘 개수에 따라 받는 총 상금을 알 수 있다.")
     public void getPrize() {
         FinalResult result = new FinalResult();
-        result.put(3);
-        result.put(4);
-        Money totalPrize = result.getTotalPrize();
+        result.put(LottoRank.of(3, false));
+        result.put(LottoRank.of(4, false));
+        Money totalPrize = result.calculateTotalReward();
         assertThat(totalPrize).isEqualTo(new Money(55_000));
+    }
+
+    @Test
+    @DisplayName("로또 티켓은 1보다 작은 숫자는 만들어 질 수 없다.")
+    public void lottoNumberUnderTest() {
+        assertThatThrownBy(() -> {
+            LottoNumber.of(0);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 티켓은 46보다 큰 숫자는 만들어 질 수 없다.")
+    public void lottoNumberUpperTest() {
+        assertThatThrownBy(() -> {
+            LottoNumber.of(46);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

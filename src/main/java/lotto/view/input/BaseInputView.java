@@ -10,9 +10,13 @@ public abstract class BaseInputView implements InputView {
 
     private static final String NUMBER_INPUT_DELIMITER = ", ";
 
-    protected Set<LottoNumber> parseToLottoNumbers(String input) {
+    public Set<LottoNumber> parseToLottoNumbers(String input) {
         return Arrays.stream(input.split(NUMBER_INPUT_DELIMITER))
-                .map(LottoNumber::new)
+                .map(s -> LottoNumber.of(parseInt(s)))
                 .collect(Collectors.toSet());
+    }
+
+    protected Integer parseInt(String input) {
+        return Integer.parseInt(input);
     }
 }

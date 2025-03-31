@@ -3,6 +3,8 @@ package lotto.view.fake;
 
 import lotto.domain.PaymentReceipt;
 import lotto.domain.product.LotteryTicket;
+import lotto.domain.product.LottoNumber;
+import lotto.domain.product.WinningTicket;
 import lotto.view.input.BaseInputView;
 
 public class FakeInputView extends BaseInputView {
@@ -27,8 +29,13 @@ public class FakeInputView extends BaseInputView {
     public void closeScanner() {}
 
     @Override
-    public LotteryTicket lastWeekNumber() {
-        return new LotteryTicket(parseToLottoNumbers(input));
+    public WinningTicket getWinningTicket() {
+        return new WinningTicket(new LotteryTicket(parseToLottoNumbers(input)), getBonusNumber());
+    }
+
+    @Override
+    public LottoNumber getBonusNumber() {
+        return LottoNumber.of(4);
     }
 
     public Integer parseInt() {
