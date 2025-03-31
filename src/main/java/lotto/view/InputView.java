@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.ManualLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +27,7 @@ public class InputView {
     public static List<Lotto> getManualLottoList(int manualLottoCount) {
         List<Lotto> manualLottoList = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
-            manualLottoList.add(getLotto());
+            manualLottoList.add(getManualLotto());
         }
 
         return manualLottoList;
@@ -34,7 +35,7 @@ public class InputView {
 
     public static Lotto getWinningNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return getLotto();
+        return getManualLotto();
     }
 
     public static LottoNumber getBonusNumber() {
@@ -42,8 +43,8 @@ public class InputView {
         return LottoNumber.of(Integer.parseInt(scanner.nextLine()));
     }
 
-    private static Lotto getLotto() {
-        return Lotto.of(Arrays.stream(scanner.nextLine().split(DELIMITER))
+    private static Lotto getManualLotto() {
+        return new ManualLotto(Arrays.stream(scanner.nextLine().split(DELIMITER))
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));

@@ -19,6 +19,11 @@ public class Customer {
         this.lottoList = LottoShop.sellLotto(purchaseAmount);
     }
 
+    public void purchaseLotto(int purchaseAmount, List<Lotto> manualLottoList) {
+        this.purchaseAmount = purchaseAmount;
+        this.lottoList = LottoShop.sellLotto(purchaseAmount, manualLottoList);
+    }
+
     public int getPurchaseAmount() {
         return purchaseAmount;
     }

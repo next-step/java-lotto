@@ -15,7 +15,7 @@ public class WinningLotto {
     }
 
     public WinningLotto(List<LottoNumber> numbers, int bonusNumber) {
-        this(Lotto.of(numbers), LottoNumber.of(bonusNumber));
+        this(new ManualLotto(numbers), LottoNumber.of(bonusNumber));
     }
 
     public Rank determineLottoRank(Lotto lotto) {
