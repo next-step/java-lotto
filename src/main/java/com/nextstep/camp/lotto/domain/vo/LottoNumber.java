@@ -1,5 +1,7 @@
 package com.nextstep.camp.lotto.domain.vo;
 
+import com.nextstep.camp.lotto.domain.exception.LottoNumberOutOfRangeException;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -15,7 +17,7 @@ public class LottoNumber {
 
     private static void validate(int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
-            throw new IllegalArgumentException("로또 번호는 1~45 사이여야 합니다.");
+            throw new LottoNumberOutOfRangeException();
         }
     }
 

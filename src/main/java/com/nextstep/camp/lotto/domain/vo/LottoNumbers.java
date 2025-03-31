@@ -1,5 +1,8 @@
 package com.nextstep.camp.lotto.domain.vo;
 
+import com.nextstep.camp.lotto.domain.exception.LottoNumberDuplicatedException;
+import com.nextstep.camp.lotto.domain.exception.LottoNumbersSizeException;
+
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -11,13 +14,20 @@ public class LottoNumbers {
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     private LottoNumbers(List<Integer> rawNumbers) {
-        if (rawNumbers.size() != LOTTO_NUMBER_SIZE || new HashSet<>(rawNumbers).size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 중복 없이 6개여야 합니다.");
-        }
+        validate(rawNumbers);
         this.numbers = rawNumbers.stream()
                 .map(LottoNumber::of)
                 .sorted(Comparator.comparingInt(LottoNumber::getValue))
                 .collect(Collectors.toList());
+    }
+
+    private static void validate(List<Integer> rawNumbers) {
+        if (rawNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new LottoNumbersSizeException();
+        }
+        if (new HashSet<>(rawNumbers).size() != LOTTO_NUMBER_SIZE) {
+            throw new LottoNumberDuplicatedException();
+        }
     }
 
     public static LottoNumbers of(List<Integer> rawNumbers) {
