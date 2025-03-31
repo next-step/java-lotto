@@ -3,13 +3,16 @@ package lotto.view;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.LottoRank;
 import lotto.domain.model.LottoResult;
+import lotto.view.model.UserManualLottoInput;
 
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-    public static void printPurchasedAmount(int amount) {
-        System.out.printf("%d개를 구매했습니다.\n", amount);
+    public static void printPurchasedAmount(int totalAmount, UserManualLottoInput manualLottoInput) {
+        int manualAmount = manualLottoInput.getManualAmount();
+        int autoAmount = totalAmount - manualAmount;
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualAmount, autoAmount);
     }
 
     public static void printLottos(List<Lotto> lottos) {

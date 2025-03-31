@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.LottoResult;
 import lotto.domain.model.LottoSeller;
+import lotto.view.model.UserManualLottoInput;
 import lotto.view.model.UserMoneyInput;
 import lotto.domain.model.WinningLotto;
 import lotto.view.OutputView;
@@ -21,9 +22,9 @@ public class LottoService {
 
     private List<Lotto> purchaseLotto() {
         UserMoneyInput userInput = InputView.getMoneyInput();
-
         int purchasedAmount = lottoSeller.getPurchasableLottoCount(userInput);
-        OutputView.printPurchasedAmount(purchasedAmount);
+        UserManualLottoInput manualLottoInput = InputView.getManualLotto();
+        OutputView.printPurchasedAmount(purchasedAmount, manualLottoInput);
 
         List<Lotto> purchasedLotto = lottoSeller.generateAndSell(purchasedAmount);
         OutputView.printLottos(purchasedLotto);
