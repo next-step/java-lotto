@@ -12,8 +12,8 @@ public class OutputView {
     private static final String RESULT_FORMAT = "%s - %d개";
     private static final String PROFIT_RATE_FORMAT = "%.2f";
 
-    public static void printLottoCount(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printLottoCount(int lottoManualCount, int lottoAutoCount) {
+        System.out.println("수동으로 " + lottoManualCount + "장, 자동으로 " + lottoAutoCount + "개를 구매했습니다.");
     }
 
     public static void printLottos(List<Lotto> lottos) {
