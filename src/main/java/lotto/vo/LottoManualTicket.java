@@ -12,8 +12,4 @@ public class LottoManualTicket {
     public List<Integer> getNumbers() {
         return numbers;
     }
-
-    public int lottoManualCount() {
-        return numbers.size();
-    }
 }
