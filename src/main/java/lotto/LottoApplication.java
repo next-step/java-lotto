@@ -4,6 +4,8 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoApplication {
     public static void main(String[] args) {
         Customer customer = new Customer();
@@ -11,7 +13,7 @@ public class LottoApplication {
         int purchaseAmount = InputView.getPurchaseAmount();
         int manualLottoCount = InputView.getManualLottoCount();
 
-        customer.purchaseLotto(purchaseAmount);
+        customer.purchaseLotto(purchaseAmount, InputView.getManualLottoList(manualLottoCount));
 
         OutputView.printLottoList(customer.getLottoList());
 

@@ -3,7 +3,9 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -21,16 +23,29 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
+    public static List<Lotto> getManualLottoList(int manualLottoCount) {
+        List<Lotto> manualLottoList = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottoList.add(getLotto());
+        }
+
+        return manualLottoList;
+    }
+
     public static Lotto getWinningNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return Lotto.of(Arrays.stream(scanner.nextLine().split(DELIMITER))
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+        return getLotto();
     }
 
     public static LottoNumber getBonusNumber() {
         System.out.println("\n보너스 볼을 입력해 주세요.");
         return LottoNumber.of(Integer.parseInt(scanner.nextLine()));
+    }
+
+    private static Lotto getLotto() {
+        return Lotto.of(Arrays.stream(scanner.nextLine().split(DELIMITER))
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
     }
 }
