@@ -47,7 +47,7 @@ public class LottoGame {
   private Lottos buyLottos(PurchaseInfo purchaseInfo) {
     LottoShop lottoShop = new LottoShop(new RandomLottoGenerator(), inputView);
     Lottos lottos =  lottoShop.buyLottos(purchaseInfo);
-    ResultView.printLottoCount(lottos);
+    ResultView.printLottoCount(purchaseInfo);
     ResultView.printLottos(lottos);
     return lottos;
   }

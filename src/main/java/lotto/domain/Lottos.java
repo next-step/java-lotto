@@ -12,21 +12,9 @@ public class Lottos {
     this.lottoList = lottoList;
   }
 
-  public Lottos(List<Lotto> lottoList1, List<Lotto> lottoList2) {
-    this.lottoList = Stream.concat(lottoList1.stream(), lottoList2.stream())
+  public Lottos(List<Lotto> manualLottoList, List<Lotto> autoLottoList) {
+    this.lottoList = Stream.concat(manualLottoList.stream(), autoLottoList.stream())
             .collect(Collectors.toList());
-  }
-
-  public int getManualLottoCount() {
-    return (int) lottoList.stream()
-            .filter(Lotto::isManual)
-            .count();
-  }
-
-  public int getAutoLottoCount() {
-    return (int) lottoList.stream()
-            .filter(Lotto::isAuto)
-            .count();
   }
 
   public void printAllLottos() {

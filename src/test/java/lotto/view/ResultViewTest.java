@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoType;
 import lotto.domain.generator.LottoGeneratorTest.TestLottoGenerator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -78,7 +77,7 @@ public class ResultViewTest {
     return new Lottos(List.of(
             new Lotto(List.of(
                     new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
-                    new LottoNumber(7), new LottoNumber(9), new LottoNumber(11)), LottoType.MANUAL),
+                    new LottoNumber(7), new LottoNumber(9), new LottoNumber(11))),
             new Lotto(List.of(
                     new LottoNumber(1), new LottoNumber(2), new LottoNumber(5),
                     new LottoNumber(6), new LottoNumber(12), new LottoNumber(14))),
@@ -98,7 +97,7 @@ public class ResultViewTest {
     PrintStream originalOut = System.out;
     System.setOut(new PrintStream(outputStream));
 
-    ResultView.printLottoCount(getLottos());
+    ResultView.printLottoCount(new PurchaseInfo(4000, 1));
 
     System.setOut(originalOut);
     assertEquals("수동으로 1장, 자동으로 3장 구매했습니다.\n", outputStream.toString());

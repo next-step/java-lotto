@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoReport;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.prize.LottoPrize;
 import lotto.domain.Lottos;
 
@@ -16,8 +17,8 @@ public class ResultView {
     System.out.println(lottoReport.createMoneyReport());
   }
 
-  public static void printLottoCount(Lottos lottos) {
-    String lottoCountStatus = String.format("수동으로 %d장, 자동으로 %d장 구매했습니다.", lottos.getManualLottoCount(), lottos.getAutoLottoCount());
+  public static void printLottoCount(PurchaseInfo purchaseInfo) {
+    String lottoCountStatus = String.format("수동으로 %d장, 자동으로 %d장 구매했습니다.", purchaseInfo.getManualLottoCount(), purchaseInfo.getAutoLottoCount());
     System.out.println(lottoCountStatus);
   }
 
