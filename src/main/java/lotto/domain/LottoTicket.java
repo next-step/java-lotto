@@ -31,16 +31,6 @@ public class LottoTicket {
             throw new IllegalArgumentException("number should not be duplicate.");
     }
 
-    public LottoRank rank(WinningLotto winningLotto) {
-        int matchCount = (int) numbers.stream()
-                .filter(winningLotto::matchTicket)
-                .count();
-
-        boolean hasBonus = numbers.stream()
-                .anyMatch(winningLotto::matchBonus);
-
-        return LottoRank.of(matchCount, hasBonus);
-    }
 
     public List<Integer> getNumbers() {
         return numbers.stream()
@@ -48,7 +38,13 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public boolean match(LottoNumber number) {
-        return numbers.contains(number);
+    public int countMatchNumbers(LottoTicket ticket) {
+        return (int) numbers.stream()
+                .filter(ticket.numbers::contains)
+                .count();
+    }
+
+    public boolean contains(LottoNumber bonus) {
+        return numbers.contains(bonus);
     }
 }

@@ -36,13 +36,19 @@ class LottoTicketTest {
         assertThatThrownBy(() -> new LottoTicket(numbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    @DisplayName("당첨된 로또 티켓과 비교하여 당첨 순위를 반환한다.")
-    void findNumberMatchCount() {
-        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 15);
 
-        assertThat(lottoTicket.rank(winningLotto)).isEqualTo(LottoRank.FIRST);
+    @Test
+    @DisplayName("로또 티켓은 당첨번호와 일치하는 숫자의 개수를 반환한다.")
+    void countMatchNumbers() {
+        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket2 = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
+        assertThat(lottoTicket.countMatchNumbers(lottoTicket2)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("로또 티켓은 로또 넘버를 포함하는지 확인한다.")
+    void containsNumber() {
+        assertThat(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)).contains(new LottoNumber(1))).isTrue();
     }
 
 }

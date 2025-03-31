@@ -3,19 +3,16 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningLotto {
-    private final LottoTicket ticket;
-    private final LottoNumber bonus;
+    private final LottoTicket winningNumbers;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
-        this.ticket = new LottoTicket(winningNumbers);
-        this.bonus = new LottoNumber(bonusNumber);
+        this.winningNumbers = new LottoTicket(winningNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public boolean matchTicket(LottoNumber number) {
-        return ticket.match(number);
+    public LottoRank rank(LottoTicket ticket) {
+        return LottoRank.of(ticket.countMatchNumbers(winningNumbers), ticket.contains(bonusNumber));
     }
 
-    public boolean matchBonus(LottoNumber number) {
-        return bonus.equals(number);
-    }
 }

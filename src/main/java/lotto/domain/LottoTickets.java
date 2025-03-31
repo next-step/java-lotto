@@ -25,7 +25,7 @@ public class LottoTickets {
                 .forEach(rank -> statistics.put(rank, 0));
 
         tickets.stream()
-                .map(ticket -> ticket.rank(winningLotto))
+                .map(ticket -> winningLotto.rank(ticket))
                 .forEach(rank -> statistics.merge(rank, 1, Integer::sum));
 
         return statistics;
