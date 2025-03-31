@@ -38,4 +38,12 @@ class StringCalculatorTest {
     StringCalculator stringCalculator = new StringCalculator();
     assertEquals(2, stringCalculator.calculateString("1 * 2"));
   }
+
+  @Test
+  void 미구현_연산자는_예외를_발생시킨다() {
+    StringCalculator stringCalculator = new StringCalculator();
+    assertThatThrownBy(() -> {
+      stringCalculator.calculateString("1 %% 2");
+    }).isInstanceOf(IllegalArgumentException.class);
+  }
 }
