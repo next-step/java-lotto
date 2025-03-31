@@ -26,4 +26,10 @@ class StringCalculatorTest {
     StringCalculator stringCalculator = new StringCalculator();
     assertEquals(3, stringCalculator.calculateString("1 + 2"));
   }
+
+  @Test
+  void 뺄셈() {
+    StringCalculator stringCalculator = new StringCalculator();
+    assertEquals(-1, stringCalculator.calculateString("1 - 2"));
+  }
 }
