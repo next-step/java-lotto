@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private LottoNumbers(List<Integer> rawNumbers) {
         validate(rawNumbers);
@@ -22,10 +22,10 @@ public class LottoNumbers {
     }
 
     private static void validate(List<Integer> rawNumbers) {
-        if (rawNumbers.size() != LOTTO_NUMBER_SIZE) {
+        if (rawNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new LottoNumbersSizeException();
         }
-        if (new HashSet<>(rawNumbers).size() != LOTTO_NUMBER_SIZE) {
+        if (new HashSet<>(rawNumbers).size() != LOTTO_NUMBERS_SIZE) {
             throw new LottoNumberDuplicatedException();
         }
     }
