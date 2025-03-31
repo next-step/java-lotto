@@ -18,6 +18,10 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
+    public List<Lotto> getLottos() {
+        return this.lottos;
+    }
+
     public int count() {
         return lottos.size();
     }

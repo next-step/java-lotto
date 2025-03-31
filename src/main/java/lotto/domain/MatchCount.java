@@ -32,4 +32,8 @@ public enum MatchCount {
     public int getPrize() {
         return prize;
     }
+
+    public int getMatchCount() {
+        return this.matchCount;
+    }
 }
