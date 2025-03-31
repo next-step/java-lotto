@@ -3,6 +3,7 @@ package lotto.view;
 import calculator.view.OutputView;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -13,9 +14,9 @@ import static lotto.domain.LottoRank.LAST;
 
 public class LottoOutputView extends OutputView {
 
-    public void printTickets(List<LottoTicket> tickets) {
-        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", 0, tickets.size()));
-        for (LottoTicket ticket : tickets) {
+    public void printTickets(LottoTickets tickets) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", tickets.countManualTickets(), tickets.countAutoTickets()));
+        for (LottoTicket ticket : tickets.getTickets()) {
             System.out.println(ticket.getNumbers());
         }
         System.out.println();

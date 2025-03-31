@@ -14,22 +14,25 @@ public class LottoMachine {
 
     public LottoMachine(int amount) {
         this.amount = new PurchaseAmount(amount);
-        this.tickets = issueTickets(this.amount.getTicketCount());
+        this.tickets = new LottoTickets(issueTickets(this.amount.getTicketCount()));
     }
 
-    public LottoMachine(int amount, List<LottoTicket> manualTicket) {
-        this.amount = new PurchaseAmount(amount, manualTicket.size());
-        int autoCount = this.amount.getTicketCount() - manualTicket.size();
-        this.tickets = issueTickets(autoCount);
-        tickets.addManualTickets(manualTicket);
+    public LottoMachine(int amount, List<List<Integer>> ticketNumbers) {
+        this.amount = new PurchaseAmount(amount, ticketNumbers.size());
+        int autoCount = this.amount.getTicketCount() - ticketNumbers.size();
+        this.tickets = new LottoTickets(issueTickets(autoCount), getManualTickets(ticketNumbers));
     }
 
-    private LottoTickets issueTickets(int count) {
-        List<LottoTicket> tickets = IntStream.range(0, count)
+    private static List<LottoTicket> getManualTickets(List<List<Integer>> ticketNumbers) {
+        return ticketNumbers.stream()
+                .map(ticketNumbersList -> new LottoTicket(false, ticketNumbersList))
+                .collect(Collectors.toList());
+    }
+
+    private List<LottoTicket> issueTickets(int count) {
+        return IntStream.range(0, count)
                 .mapToObj(i -> new LottoTicket(generateTicketNumbers()))
                 .collect(Collectors.toList());
-
-        return new LottoTickets(tickets);
     }
 
     private List<Integer> generateTicketNumbers() {
@@ -41,8 +44,12 @@ public class LottoMachine {
         return candidates.subList(0, TICKET_NUMBER_SIZE);
     }
 
-    public List<LottoTicket> getTickets() {
-        return tickets.getTickets();
+    public LottoTickets getTickets() {
+        return tickets;
+    }
+
+    public int getTicketCount() {
+        return tickets.getCount();
     }
 
     public Map<LottoRank, Integer> getRankStatistics(WinningLotto winningLotto) {

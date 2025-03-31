@@ -10,6 +10,12 @@ public class LottoTickets {
         this.tickets = new ArrayList<>(tickets);
     }
 
+    public LottoTickets(List<LottoTicket> autoTickets, List<LottoTicket> manualTickets) {
+        this.tickets = new ArrayList<>();
+        tickets.addAll(autoTickets);
+        tickets.addAll(manualTickets);
+    }
+
     public List<LottoTicket> getTickets() {
         return Collections.unmodifiableList(tickets);
     }
@@ -49,7 +55,4 @@ public class LottoTickets {
         return tickets.size() - countAutoTickets();
     }
 
-    public void addManualTickets(List<LottoTicket> manualTicket) {
-        tickets.addAll(manualTicket);
-    }
 }

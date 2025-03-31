@@ -17,10 +17,8 @@ public class LottoInputView {
     }
 
     public List<List<Integer>> inputLottoTicketNumbers() {
-        List<List<Integer>> input = IntStream.range(0, inputLottoCount())
-                .mapToObj(i -> inputLottoNumbers())
-                .collect(Collectors.toList());
-
+        int count = inputLottoCount();
+        List<List<Integer>> input = inputLottoTicketNumbers(count);
         System.out.println();
         return input;
     }
@@ -32,9 +30,13 @@ public class LottoInputView {
         return number;
     }
 
-    private List<Integer> inputLottoNumbers() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        return scanNumbersWithComma();
+    private static List<List<Integer>> inputLottoTicketNumbers(int count) {
+        if (count > 0) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        }
+        return IntStream.range(0, count)
+                .mapToObj(i -> scanNumbersWithComma())
+                .collect(Collectors.toList());
     }
 
     public List<Integer> inputWinningNumbers() {
