@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -79,5 +80,28 @@ class LottoTicketsTest {
         WinningLotto winningLotto = new WinningLotto(List.of(1,2,3,4,10,11), 16);
 
         assertThat(lottoTickets.income(winningLotto)).isEqualTo(100_000);
+    }
+
+    @Test
+    @DisplayName("로또 티켓 컬렉션은 자동 발급된 티켓 수를 반환한다.")
+    void createNumbersByMachine() {
+        assertThat(tickets.countAutoTickets()).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("로또 티켓 컬렉션은 수동 발급된 티켓 수를 반환한다.")
+    void createNumbersByUser() {
+        LottoTicket manualTicket = new LottoTicket(false, List.of(1, 2, 3, 4, 5, 6));
+        assertThat(new LottoTickets(List.of(manualTicket)).countManualTickets()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("로또 티켓 컬렉션에 수동 발급된 티켓을 추가한다.")
+    void addManualTickets() {
+        List<LottoTicket> autoTickets = List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 7)));
+        LottoTicket manualTicket = new LottoTicket(false, List.of(1, 2, 3, 4, 5, 6));
+        List<LottoTicket> manualTickets = List.of(manualTicket);
+
+        assertThat(new LottoTickets(autoTickets, manualTickets).getTickets()).contains(manualTicket);
     }
 }

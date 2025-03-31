@@ -6,9 +6,19 @@ public class PurchaseAmount {
     private final int amount;
 
     public PurchaseAmount(int amount) {
+        this(amount, 0);
+    }
+
+    public PurchaseAmount(int amount, int ticketCount) {
         validatePositiveAmount(amount);
         validateDividedAmount(amount);
+        validateBiggerTicketCount(amount, ticketCount);
         this.amount = amount;
+    }
+
+    private void validateBiggerTicketCount(int amount, int ticketCount) {
+        if(amount / TICKET_PRICE < ticketCount)
+            throw new IllegalArgumentException(String.format("Amount paid is not enough to buy %d tickets", ticketCount));
     }
 
     private void validatePositiveAmount(int amount) {

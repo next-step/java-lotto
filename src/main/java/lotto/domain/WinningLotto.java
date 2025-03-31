@@ -3,19 +3,22 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningLotto {
-    private final LottoTicket ticket;
-    private final LottoNumber bonus;
+    private final LottoTicket winningNumbers;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
-        this.ticket = new LottoTicket(winningNumbers);
-        this.bonus = new LottoNumber(bonusNumber);
+        validateDuplicate(winningNumbers, bonusNumber);
+        this.winningNumbers = new LottoTicket(winningNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public boolean matchTicket(LottoNumber number) {
-        return ticket.match(number);
+    private void validateDuplicate(List<Integer> winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber))
+            throw new IllegalArgumentException(String.format("bonus number(%d) should not be duplicate. (winning numbers: %s)", bonusNumber, winningNumbers));
     }
 
-    public boolean matchBonus(LottoNumber number) {
-        return bonus.equals(number);
+    public LottoRank rank(LottoTicket ticket) {
+        return LottoRank.of(ticket.countMatchNumbers(winningNumbers), ticket.contains(bonusNumber));
     }
+
 }

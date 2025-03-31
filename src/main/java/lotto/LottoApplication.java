@@ -12,7 +12,7 @@ public class LottoApplication {
         LottoInputView inputView = new LottoInputView();
         LottoOutputView outputView = new LottoOutputView();
 
-        LottoMachine lottoMachine = new LottoMachine(inputView.inputAmount());
+        LottoMachine lottoMachine = new LottoMachine(inputView.inputAmount(), inputView.inputLottoTicketNumbers());
         outputView.printTickets(lottoMachine.getTickets());
 
         WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
