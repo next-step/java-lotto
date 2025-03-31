@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -11,8 +12,9 @@ public class Lottos {
     this.lottoList = lottoList;
   }
 
-  public int getCount() {
-    return lottoList.size();
+  public Lottos(List<Lotto> manualLottoList, List<Lotto> autoLottoList) {
+    this.lottoList = Stream.concat(manualLottoList.stream(), autoLottoList.stream())
+            .collect(Collectors.toList());
   }
 
   public void printAllLottos() {

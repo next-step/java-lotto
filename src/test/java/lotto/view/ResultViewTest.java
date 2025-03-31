@@ -1,19 +1,21 @@
 package lotto.view;
 
-import lotto.LottoGeneratorTest.TestLottoGenerator;
+import lotto.domain.generator.LottoGeneratorTest.TestLottoGenerator;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.prize.LottoPrize;
 import lotto.domain.Lottos;
-import lotto.LottoReport;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.LottoReport;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.WinningLotto;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ResultViewTest {
@@ -34,7 +36,7 @@ public class ResultViewTest {
     ResultView.printLottos(lottos);
 
     System.setOut(originalOut);
-    Assertions.assertEquals(expected, outputStream.toString());
+    assertEquals(expected, outputStream.toString());
   }
 
   @DisplayName("당첨 통계를 출력한다.")
@@ -48,7 +50,7 @@ public class ResultViewTest {
             new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
     ), new LottoNumber(7));
-    PurchaseAmount purchaseAmount = new PurchaseAmount(3000);
+    PurchaseInfo purchaseInfo = new PurchaseInfo(3000);
     Lottos lottos = getLottos();
 
     String expected = "당첨 통계\n" + "---------\n" +
@@ -59,10 +61,16 @@ public class ResultViewTest {
             "6개 일치 (2000000000원)- 1개\n" +
             "총 수익률은 676685.00입니다.\n";
 
-    ResultView.printStatistics(new LottoReport(purchaseAmount, winningLotto, lottos));
+    ResultView.printStatistics(new LottoReport(purchaseInfo, winningLotto, lottos));
 
     System.setOut(originalOut);
-    Assertions.assertEquals(expected, outputStream.toString());
+    assertEquals(expected, outputStream.toString());
+  }
+
+  @DisplayName("화면 출력 텍스트를 구하는 메서드를 테스트한다.")
+  @Test
+  void testGetDisplayText() {
+    assertEquals("3개 일치 (5000원)- 1개", ResultView.getPrizeAndCountStatus(LottoPrize.THREE_MATCHES, 1));
   }
 
   private static Lottos getLottos() {
@@ -80,5 +88,18 @@ public class ResultViewTest {
                     new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                     new LottoNumber(4), new LottoNumber(5), new LottoNumber(7)))
     ));
+  }
+
+  @DisplayName("수동, 자동 로또 카운트를 출력하는 테스트")
+  @Test
+  void testPrintLottoCount() {
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outputStream));
+
+    ResultView.printLottoCount(new PurchaseInfo(4000, 1));
+
+    System.setOut(originalOut);
+    assertEquals("수동으로 1장, 자동으로 3장 구매했습니다.\n", outputStream.toString());
   }
 }

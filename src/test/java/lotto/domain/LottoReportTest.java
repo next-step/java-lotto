@@ -1,10 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,8 +36,8 @@ class LottoReportTest {
   @Test
   @DisplayName("createCountReport()는 올바른 당첨 개수를 반환해야 한다.")
   void createCountReport_shouldReturnCorrectCountReport() {
-    PurchaseAmount purchaseAmount = new PurchaseAmount(3000);
-    LottoReport lottoReport = new LottoReport(purchaseAmount, winningLotto, lottos);
+    PurchaseInfo purchaseInfo = new PurchaseInfo(3000);
+    LottoReport lottoReport = new LottoReport(purchaseInfo, winningLotto, lottos);
     String report = lottoReport.createCountReport();
 
     assertThat(report).contains("3개 일치 (5000원)- 1개");
@@ -55,11 +50,11 @@ class LottoReportTest {
   @Test
   @DisplayName("createMoneyReport()는 총 수익률을 정확히 계산해야 한다.")
   void createMoneyReport_shouldCalculateCorrectTotalPrizeRate() {
-    PurchaseAmount purchaseAmount = new PurchaseAmount(3000);
+    PurchaseInfo purchaseInfo = new PurchaseInfo(3000);
     int expectedTotalMoney = (5000 + 50000 + 2000000000);
     double expectedRate = (double) expectedTotalMoney / 3000;
 
-    LottoReport lottoReport = new LottoReport(purchaseAmount, winningLotto, lottos);
+    LottoReport lottoReport = new LottoReport(purchaseInfo, winningLotto, lottos);
     String report = lottoReport.createMoneyReport();
 
     assertThat(report).isEqualTo(String.format("총 수익률은 %.2f입니다.", expectedRate));

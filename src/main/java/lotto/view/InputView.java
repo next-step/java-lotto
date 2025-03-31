@@ -1,12 +1,11 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.PurchaseAmount;
+import lotto.utils.LottoNumberParser;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
   private final Scanner scanner;
@@ -15,23 +14,38 @@ public class InputView {
     this.scanner = scanner;
   }
 
-  public PurchaseAmount receiveMoney() {
+  public int receiveMoney() {
     System.out.println("구입금액을 입력해 주세요.");
     try {
-      int money = Integer.parseInt(scanner.nextLine().trim());
-      return new PurchaseAmount(money);
+      return Integer.parseInt(scanner.nextLine().trim());
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+      throw new IllegalArgumentException("구매 금액은 숫자여야 합니다.");
     }
+  }
+
+  public int receiveManualLottoCount() {
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    try {
+      return Integer.parseInt(scanner.nextLine().trim());
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("로또 수는 숫자여야 합니다.");
+    }
+  }
+
+  public List<String> receiveManualLottos(int count) {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+    List<String> manualLottoNumberList = new ArrayList<>();
+    for (int i = 0; i < count; i++) {
+      manualLottoNumberList.add(scanner.nextLine());
+    }
+    return manualLottoNumberList;
   }
 
   public List<LottoNumber> receiveWinningLottoNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해주세요.");
     String input = scanner.nextLine();
-    return Arrays.stream(input.split(","))
-            .map(String::trim)
-            .map(num -> new LottoNumber(Integer.parseInt(num)))
-            .collect(Collectors.toList());
+    return LottoNumberParser.parse(input);
   }
 
   public LottoNumber receiveBonusNumber() {
@@ -40,7 +54,7 @@ public class InputView {
       int money = Integer.parseInt(scanner.nextLine().trim());
       return new LottoNumber(money);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+      throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
     }
   }
 }

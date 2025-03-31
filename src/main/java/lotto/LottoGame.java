@@ -1,9 +1,12 @@
 package lotto;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoReport;
+import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.WinningLotto;
+import lotto.domain.generator.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,22 +22,32 @@ public class LottoGame {
   }
 
   public void play() {
-    PurchaseAmount purchaseAmount = receiveMoney();
-    Lottos lottos = buyLottos(purchaseAmount);
-    List<LottoNumber> winningLottoNumbers = receiveWinningLottoNumbers();
-    LottoNumber bonusNumber = receiveBonusNumber();
-    WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
-    printResult(purchaseAmount, winningLotto, lottos);
+    try {
+      int customerMoney = receiveMoney();
+      int manualLottoCount = receiveManualLottoCount();
+      PurchaseInfo purchaseInfo = new PurchaseInfo(customerMoney, manualLottoCount);
+      Lottos lottos = buyLottos(purchaseInfo);
+      List<LottoNumber> winningLottoNumbers = receiveWinningLottoNumbers();
+      LottoNumber bonusNumber = receiveBonusNumber();
+      WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
+      printResult(purchaseInfo, winningLotto, lottos);
+    } catch (IllegalArgumentException e) {
+      System.out.println("에러 발생: " + e.getMessage());
+    }
   }
 
-  private PurchaseAmount receiveMoney() {
+  private int receiveMoney() {
     return inputView.receiveMoney();
   }
 
-  private Lottos buyLottos(PurchaseAmount purchaseAmount) {
-    LottoShop lottoShop = new LottoShop(new RandomLottoGenerator());
-    Lottos lottos = lottoShop.buyLottos(purchaseAmount);
-    ResultView.printLottoCount(lottos);
+  private int receiveManualLottoCount() {
+    return inputView.receiveManualLottoCount();
+  }
+
+  private Lottos buyLottos(PurchaseInfo purchaseInfo) {
+    LottoShop lottoShop = new LottoShop(new RandomLottoGenerator(), inputView);
+    Lottos lottos =  lottoShop.buyLottos(purchaseInfo);
+    ResultView.printLottoCount(purchaseInfo);
     ResultView.printLottos(lottos);
     return lottos;
   }
@@ -47,8 +60,8 @@ public class LottoGame {
     return inputView.receiveBonusNumber();
   }
 
-  private void printResult(PurchaseAmount purchaseAmount, WinningLotto winningLotto, Lottos lottos) {
-    LottoReport lottoReport = new LottoReport(purchaseAmount, winningLotto, lottos);
+  private void printResult(PurchaseInfo purchaseInfo, WinningLotto winningLotto, Lottos lottos) {
+    LottoReport lottoReport = new LottoReport(purchaseInfo, winningLotto, lottos);
     ResultView.printStatistics(lottoReport);
   }
 }
