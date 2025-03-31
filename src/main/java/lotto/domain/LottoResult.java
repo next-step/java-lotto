@@ -20,7 +20,7 @@ public class LottoResult {
         }
     }
 
-    public int calculateMatchCount(LottoTicket winningLotto, List<Integer> lottos) {
+    private int calculateMatchCount(LottoTicket winningLotto, List<Integer> lottos) {
         return (int) lottos.stream()
                 .filter(winningLotto.getNumbers()::contains)
                 .count();

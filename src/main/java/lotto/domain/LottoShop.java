@@ -23,13 +23,13 @@ public class LottoShop {
         this.lottoTickets = List.copyOf(temp);
     }
 
-    public void validatePrice(int price) {
+    private void validatePrice(int price) {
         if (price < 0) {
             throw new IllegalArgumentException("로또 구매 가능 가격은 0원 이상입니다.");
         }
     }
 
-    public int calculateTicketAmount(int price) {
+    private int calculateTicketAmount(int price) {
         return price / PRICE_PER_TICKET;
     }
 
