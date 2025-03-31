@@ -12,20 +12,20 @@ public class LottoMachine {
     private final PurchaseAmount amount;
     private final LottoTickets tickets;
 
-    public LottoMachine(PurchaseAmount amount) {
-        this.amount = amount;
-        this.tickets = issueTickets(amount.getTicketCount());
+    public LottoMachine(int amount) {
+        this.amount = new PurchaseAmount(amount);
+        this.tickets = issueTickets(this.amount.getTicketCount());
     }
 
     private LottoTickets issueTickets(int count) {
         List<LottoTicket> tickets = IntStream.range(0, count)
-                .mapToObj(i -> new LottoTicket(generate()))
+                .mapToObj(i -> new LottoTicket(generateTicketNumbers()))
                 .collect(Collectors.toList());
 
         return new LottoTickets(tickets);
     }
 
-    private List<Integer> generate() {
+    private List<Integer> generateTicketNumbers() {
         List<Integer> candidates = IntStream.rangeClosed(TICKET_NUMBER_MIN, TICKET_NUMBER_MAX)
                 .boxed()
                 .collect(Collectors.toList());
