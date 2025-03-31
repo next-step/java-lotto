@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
+import static lotto.domain.PrizeLevel.BONUS_MATCHING_COUNT;
 import static lotto.domain.PrizeLevel.getPrizeLevel;
 
 public class WinningLotto {
@@ -22,6 +23,6 @@ public class WinningLotto {
     }
 
     private boolean isBonus(int count, Lotto lotto) {
-        return count == 5 && lotto.containsNumber(bonusNumber);
+        return count == BONUS_MATCHING_COUNT && lotto.containsNumber(bonusNumber);
     }
 }

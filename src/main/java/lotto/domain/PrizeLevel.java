@@ -24,6 +24,8 @@ public enum PrizeLevel {
         this.message = message;
     }
 
+    public static final int BONUS_MATCHING_COUNT = 5;
+
     public static PrizeLevel getPrizeLevel(int matchingCount, boolean bonus) {
         return stream(values())
             .filter(getPrizeLevelPredicate(matchingCount, bonus))
