@@ -38,8 +38,8 @@ public class LottoMachine {
     }
 
     public List<Lotto> buyLottos() {
-        List<Lotto> lottos = getAutoLottos();
-        lottos.addAll(getManualLottos(tickets));
+        List<Lotto> lottos = getManualLottos(tickets);
+        lottos.addAll(getAutoLottos());
         return lottos;
     }
 
