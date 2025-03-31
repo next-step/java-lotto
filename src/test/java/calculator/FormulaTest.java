@@ -1,5 +1,6 @@
 package calculator;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
@@ -39,5 +40,11 @@ class FormulaTest {
     assertThatThrownBy(() -> new Formula("2 ^ 3"))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage("숫자와 사칙연산 기호만 입력할 수 있습니다.");
+  }
+
+  @Test
+  void 토큰_리스트_생성_확인() {
+    Formula formula = new Formula("2 + 3 * 4");
+    assertThat(formula.calculateBy(new Calculator())).isEqualTo(14);
   }
 } 

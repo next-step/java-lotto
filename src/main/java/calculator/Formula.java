@@ -1,19 +1,22 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Formula {
 
-  private static final String[] OPERATORS = {"*", "/", "+", "-"};
   private static final String DELIMITER = " ";
 
-  private final String[] tokens;
+  private final List<Token> tokens;
 
   public Formula(String formula) {
     if (formula.trim().isEmpty()) {
       throw new IllegalArgumentException("식은 빈 값일 수 없습니다.");
     }
-    this.tokens = formula.split(DELIMITER);
+    this.tokens = Arrays.stream(formula.split(DELIMITER))
+        .map(Token::from)
+        .collect(Collectors.toList());
     validate();
   }
 
@@ -23,7 +26,7 @@ public class Formula {
   }
 
   private void validateNumberPosition() {
-    if (!(isNumeric(tokens[tokens.length - 1]) && isNumeric(tokens[0]))) {
+    if (!(tokens.get(0).isNumeric() && tokens.get(tokens.size() - 1).isNumeric())) {
       throw new IllegalArgumentException("식의 처음과 마지막은 숫자여야 합니다.");
     }
   }
@@ -35,28 +38,11 @@ public class Formula {
   }
 
   private boolean hasInvalidCharacter() {
-    return Arrays.stream(tokens)
-        .anyMatch(token -> !isAllowedToken(token));
-  }
-
-  private boolean isAllowedToken(String token) {
-    return isNumeric(token) || isOperator(token);
-  }
-
-  private boolean isOperator(String token) {
-    return Arrays.asList(OPERATORS).contains(token);
-  }
-
-  private boolean isNumeric(String token) {
-    try {
-      Integer.parseInt(token);
-      return true;
-    } catch (NumberFormatException e) {
-      return false;
-    }
+    return tokens.stream()
+        .anyMatch(Token::isNotValid);
   }
 
   public int calculateBy(Calculator calculator) {
-    return calculator.calculate(tokens.clone());
+    return calculator.calculate(tokens);
   }
 }
