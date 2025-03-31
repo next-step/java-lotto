@@ -20,4 +20,10 @@ public class InputView {
                 .map(number -> Integer.parseInt(number))
                 .collect(Collectors.toList());
     }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
 }

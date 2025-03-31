@@ -25,9 +25,11 @@ class LottoTest {
     @Test
     void compare_lotto() {
         Lotto lotto = Lotto.createManually(Arrays.asList(6,5,4,3,2,1));
-        assertThat(lotto.compareNumbers(Lotto.createManually(Arrays.asList(1, 2, 3, 4, 5, 6))))
+        assertThat(lotto.compareLotto(Lotto.createManually(Arrays.asList(1, 2, 3, 4, 5, 6))))
                 .isEqualTo(Division.FIRST);
-        assertThat(lotto.compareNumbers(Lotto.createManually(Arrays.asList(7, 8, 9, 10, 11, 12))))
-                .isEqualTo(null);
+        assertThat(lotto.compareLotto(Lotto.createManually(Arrays.asList(7, 8, 9, 10, 11, 12))))
+                .isEqualTo(Division.LOSE);
+        assertThat(lotto.compareLotto(Lotto.createManually(Arrays.asList(5, 4, 3, 2, 1, 19)), 6))
+                .isEqualTo(Division.SECOND);
     }
 }

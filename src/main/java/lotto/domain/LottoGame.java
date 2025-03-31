@@ -31,6 +31,10 @@ public class LottoGame {
         winnerCountMap = lottos.compareNumbers(Lotto.createManually(numbers));
     }
 
+    public void draw(List<Integer> numbers, int bonusNumber) {
+        winnerCountMap = lottos.compareNumbers(Lotto.createManually(numbers), new LottoNumber(bonusNumber));
+    }
+
     public double calculateEarningRate() {
         int earning = 0;
         for (Map.Entry<Division, Integer> entry: winnerCountMap.entrySet()) {

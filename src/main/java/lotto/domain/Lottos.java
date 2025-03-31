@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -21,13 +20,28 @@ public class Lottos {
     }
 
     public Map<Division, Integer> compareNumbers(Lotto comparingLotto) {
-        Map<Division, Integer> winnerCounts = Division.getMatchCounts();
+        Map<Division, Integer> winnerCounts = Division.getRankCounts();
         List<Division> divisions = new ArrayList<>();
         for (Lotto lotto: lottos) {
-            Division division = lotto.compareNumbers(comparingLotto);
+            Division division = lotto.compareLotto(comparingLotto);
             divisions.add(division);
         }
-        divisions.removeAll(Collections.singletonList(null));
+        divisions.removeAll(Collections.singletonList(Division.LOSE));
+
+        for (Division division: divisions) {
+            winnerCounts.put(division, winnerCounts.getOrDefault(division, 0) + 1);
+        }
+        return winnerCounts;
+    }
+
+    public Map<Division, Integer> compareNumbers(Lotto comparingLotto, LottoNumber bonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(comparingLotto, bonusNumber);
+        Map<Division, Integer> winnerCounts = Division.getRankCounts();
+        List<Division> divisions = new ArrayList<>();
+        for (Lotto lotto: lottos) {
+            Division division = lotto.compareLotto(winningLotto);
+            divisions.add(division);
+        }
         divisions.removeAll(Collections.singletonList(Division.LOSE));
 
         for (Division division: divisions) {
