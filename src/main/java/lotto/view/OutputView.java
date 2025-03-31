@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class OutputView {
     public static void printLottoList(Lottos lottos) {
-        String messageFormat = "수동으로 %d장, 자동으로 %d장 구매했습니다.";
+        String messageFormat = "\n수동으로 %d장, 자동으로 %d장 구매했습니다.";
         System.out.println(String.format(messageFormat, lottos.countManualLotto(), lottos.countAutoLotto()));
 
         for (Lotto lotto : lottos.getLottos()) {
