@@ -5,11 +5,10 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.ManualLotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -26,12 +25,11 @@ public class InputView {
     }
 
     public static Lottos getManualLottoList(int manualLottoCount) {
-        List<Lotto> manualLottoList = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
-            manualLottoList.add(getManualLotto());
-        }
-
-        return new Lottos(manualLottoList);
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return new Lottos(
+                IntStream.range(0, manualLottoCount)
+                        .mapToObj(i -> getManualLotto())
+                        .collect(Collectors.toList()));
     }
 
     public static Lotto getWinningNumbers() {
