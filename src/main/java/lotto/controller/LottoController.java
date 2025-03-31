@@ -29,7 +29,7 @@ public class LottoController {
         int bonusNumber = inputview.readBonusNumber();
         winningNumbers.setBonusNumber(bonusNumber);
 
-        LottoResult lottoResult = lottoResultsService.calculateResult(tickets, winningNumbers, bonusNumber, purchaseAmount);
+        LottoResult lottoResult = lottoResultsService.calculateResult(tickets, winningNumbers, purchaseAmount);
         resultView.printLottoResult(lottoResult);
     }
 }
