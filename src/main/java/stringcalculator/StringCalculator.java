@@ -19,8 +19,6 @@ public class StringCalculator {
         for (int i = 0; i < tokens.length; i++) {
             if (i % 2 == 0 && !isNumber(tokens[i]))
                 throw new IllegalArgumentException("Expected a number at position " + i + ": " + tokens[i]);
-            if (i % 2 != 0 && !isOperator(tokens[i]))
-                throw new IllegalArgumentException("Invalid operator at position " + i + ": " + tokens[i]);
         }
     }
 
@@ -33,16 +31,9 @@ public class StringCalculator {
         }
     }
 
-    private boolean isOperator(String token) {
-        return "+".equals(token) || "-".equals(token) || "*".equals(token) || "/".equals(token);
-    }
-
     int applyOperation(int a, String op, int b) {
-        if ("+".equals(op)) return add(a, b);
-        if ("-".equals(op)) return subtract(a, b);
-        if ("*".equals(op)) return multiply(a, b);
-        if ("/".equals(op)) return divide(a, b);
-        throw new IllegalArgumentException("Invalid operator: " + op);
+        StringOperator operator = StringOperator.fromString(op);
+        return operator.apply(a, b);
     }
 
     int add(int a, int b) {
