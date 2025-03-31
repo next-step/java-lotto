@@ -5,11 +5,22 @@ import java.util.Objects;
 public class LottoNumber {
     private final int value;
 
-    public LottoNumber(int value) {
-        if (value < 1 || value > 45) {
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 45;
+
+    private LottoNumber(int value) {
+        validate(value);
+        this.value = value;
+    }
+
+    private static void validate(int value) {
+        if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이여야 합니다.");
         }
-        this.value = value;
+    }
+
+    public static LottoNumber of(int value) {
+        return new LottoNumber(value);
     }
 
     public int getValue() {

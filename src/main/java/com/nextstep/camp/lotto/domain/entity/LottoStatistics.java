@@ -11,11 +11,17 @@ import java.util.Map;
 public class LottoStatistics {
     private final Map<MatchResult, Integer> resultCounts;
 
-    public LottoStatistics(List<MatchResult> results) {
+    private static final int INIT_COUNT = 1;
+
+    private LottoStatistics(List<MatchResult> results) {
         this.resultCounts = new EnumMap<>(MatchResult.class);
         for (MatchResult result : results) {
-            resultCounts.merge(result, 1, Integer::sum);
+            resultCounts.merge(result, INIT_COUNT, Integer::sum);
         }
+    }
+
+    public static LottoStatistics of(List<MatchResult> results) {
+        return new LottoStatistics(results);
     }
 
     public int totalPrize() {
@@ -25,7 +31,7 @@ public class LottoStatistics {
     }
 
     public RateOfReturn calculateRateOfReturn(Money spent) {
-        return new RateOfReturn(totalPrize(), spent);
+        return RateOfReturn.of(totalPrize(), spent);
     }
 
     public Map<MatchResult, Integer> getResultCounts() {

@@ -5,8 +5,12 @@ import java.util.List;
 public class WinningNumbers {
     private final LottoNumbers numbers;
 
-    public WinningNumbers(List<Integer> rawNumbers) {
-        this.numbers = new LottoNumbers(rawNumbers);
+    private WinningNumbers(List<Integer> rawNumbers) {
+        this.numbers = LottoNumbers.of(rawNumbers);
+    }
+
+    public static WinningNumbers of(List<Integer> rawNumbers) {
+        return new WinningNumbers(rawNumbers);
     }
 
     public LottoNumbers getNumbers() {

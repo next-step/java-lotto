@@ -8,14 +8,20 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<Integer> rawNumbers) {
-        if (rawNumbers.size() != 6 || new HashSet<>(rawNumbers).size() != 6) {
+    private static final int LOTTO_NUMBER_SIZE = 6;
+
+    private LottoNumbers(List<Integer> rawNumbers) {
+        if (rawNumbers.size() != LOTTO_NUMBER_SIZE || new HashSet<>(rawNumbers).size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복 없이 6개여야 합니다.");
         }
         this.numbers = rawNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .sorted(Comparator.comparingInt(LottoNumber::getValue))
                 .collect(Collectors.toList());
+    }
+
+    public static LottoNumbers of(List<Integer> rawNumbers) {
+        return new LottoNumbers(rawNumbers);
     }
 
     public int countMatch(LottoNumbers winningNumbers) {

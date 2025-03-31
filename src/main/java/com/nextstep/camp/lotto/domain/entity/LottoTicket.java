@@ -6,8 +6,12 @@ import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(LottoNumbers lottoNumbers) {
+    private LottoTicket(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoTicket of(LottoNumbers lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
     }
 
     public LottoNumbers getLottoNumbers() {

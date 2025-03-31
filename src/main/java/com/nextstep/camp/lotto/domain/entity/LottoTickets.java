@@ -9,8 +9,12 @@ import java.util.stream.Collectors;
 public class LottoTickets {
     private final List<LottoTicket> tickets;
 
-    public LottoTickets(List<LottoTicket> tickets) {
+    private LottoTickets(List<LottoTicket> tickets) {
         this.tickets = tickets;
+    }
+
+    public static LottoTickets of(List<LottoTicket> tickets) {
+        return new LottoTickets(tickets);
     }
 
     public int size() {
