@@ -1,6 +1,6 @@
-package com.nextstep.camp.calculator.infrastructure.view.component;
+package com.nextstep.camp.common.view.component;
 
-import com.nextstep.camp.calculator.infrastructure.view.Element;
+import com.nextstep.camp.common.view.Element;
 
 import java.util.Scanner;
 import java.util.stream.Stream;

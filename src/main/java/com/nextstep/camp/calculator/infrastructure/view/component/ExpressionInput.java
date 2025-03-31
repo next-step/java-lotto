@@ -1,6 +1,7 @@
 package com.nextstep.camp.calculator.infrastructure.view.component;
 
 import com.nextstep.camp.calculator.domain.vo.ExpressionTokens;
+import com.nextstep.camp.common.view.component.AbstractInput;
 
 import java.util.Scanner;
 

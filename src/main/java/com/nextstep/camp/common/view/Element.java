@@ -1,4 +1,4 @@
-package com.nextstep.camp.calculator.infrastructure.view;
+package com.nextstep.camp.common.view;
 
 public interface Element<T> {
     void action();

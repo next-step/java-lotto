@@ -1,6 +1,7 @@
 package com.nextstep.camp.calculator.infrastructure.view.component;
 
 import com.nextstep.camp.calculator.application.dto.ExpressionResponse;
+import com.nextstep.camp.common.view.component.AbstractResult;
 
 public class ExpressionResult extends AbstractResult<Integer> {
 
