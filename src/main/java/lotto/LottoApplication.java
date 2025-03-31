@@ -9,6 +9,8 @@ public class LottoApplication {
         Customer customer = new Customer();
 
         int purchaseAmount = InputView.getPurchaseAmount();
+        int manualLottoCount = InputView.getManualLottoCount();
+
         customer.purchaseLotto(purchaseAmount);
 
         OutputView.printLottoList(customer.getLottoList());

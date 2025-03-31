@@ -16,6 +16,11 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
+    public static int getManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
     public static Lotto getWinningNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return Lotto.of(Arrays.stream(scanner.nextLine().split(DELIMITER))
