@@ -25,6 +25,10 @@ public enum LottoPrize {
         return matchCount;
     }
 
+    public boolean hasBonus() {
+        return requiresBonusNumber;
+    }
+
     public static LottoPrize valueOf(int matchCount) {
         return Arrays.stream(values())
                 .filter(prize -> prize.matchCount == matchCount)
