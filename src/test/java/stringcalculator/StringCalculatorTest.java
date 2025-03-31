@@ -32,4 +32,10 @@ class StringCalculatorTest {
     StringCalculator stringCalculator = new StringCalculator();
     assertEquals(-1, stringCalculator.calculateString("1 - 2"));
   }
+
+  @Test
+  void 곱셈() {
+    StringCalculator stringCalculator = new StringCalculator();
+    assertEquals(2, stringCalculator.calculateString("1 * 2"));
+  }
 }

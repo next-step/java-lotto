@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 import stringcalculator.operation.AddOperationImpl;
+import stringcalculator.operation.MultiplicationOperationImpl;
 import stringcalculator.operation.Operation;
 import stringcalculator.operation.SubtractionOperationImpl;
 
@@ -38,7 +39,8 @@ public class StringCalculator {
     // 연산자와 Operation 객체 매핑
     private static final Map<String, Operation> operations = Map.of(
         "+", new AddOperationImpl(),
-        "-", new SubtractionOperationImpl()
+        "-", new SubtractionOperationImpl(),
+        "*", new MultiplicationOperationImpl()
     );
 
     // 연산 객체 반환
