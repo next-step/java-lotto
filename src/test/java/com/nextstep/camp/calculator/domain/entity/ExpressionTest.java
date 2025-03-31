@@ -31,7 +31,7 @@ class ExpressionTest {
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}")
     @MethodSource("invalidInputs")
     void evaluate_invalid_input_throws_exception(String input) {
         assertThatThrownBy(() -> Expression.of(ExpressionTokens.of(input)))
@@ -46,7 +46,7 @@ class ExpressionTest {
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}")
     @MethodSource("invalidExpressions")
     void evaluate_unsupported_operator_throws_exception(String input) {
         assertThatThrownBy(() -> Expression.of(ExpressionTokens.of(input)))
@@ -59,8 +59,24 @@ class ExpressionTest {
             "4 - 3 *",
             "2 * 3 /",
             "8 / 2 +",
-            "2 + 3 * 4 - 5 /",
-            "2 + 3 % 4"
+            "2 + 3 * 4 - 5 /"
+        );
+    }
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("invalidExpressionTokens")
+    void evaluate_invalid_expression_tokens_throws_exception(String input) {
+        assertThatThrownBy(() -> Expression.of(ExpressionTokens.of(input)))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+    static Stream<String> invalidExpressionTokens() {
+        return Stream.of(
+            "1 + 2 % 3",
+            "4 - (3 * 2)",
+            "2 * 3 ! 4",
+            "8 / 2 ~ 1",
+            "2 + 3 ^^ 4 - 5 / 6",
+            "1 + 2 + 3 - 4 * x / y"
         );
     }
 }
