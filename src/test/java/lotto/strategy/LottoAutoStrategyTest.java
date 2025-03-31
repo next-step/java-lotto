@@ -15,7 +15,7 @@ class LottoAutoStrategyTest {
     @RepeatedTest(100)
     @DisplayName("랜덤 전략으로 생성된 번호가 유효한지 검증")
     void generate_ValidNumbers() {
-        List<Integer> numbers = strategy.generate();
+        List<Integer> numbers = strategy.generate().getLottoNumbers();
 
         assertThat(numbers)
             .hasSize(6)

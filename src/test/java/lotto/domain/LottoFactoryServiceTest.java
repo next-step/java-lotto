@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import lotto.service.LottoFactoryService;
 import lotto.strategy.LottoGenerationStrategy;
 import lotto.strategy.LottoManualStrategy;
+import lotto.vo.LottoManualTicket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +16,7 @@ class LottoFactoryServiceTest {
     @Test
     @DisplayName("지정한 수량만큼 로또 생성되는지 테스트")
     void createCorrectNumberOfLottos() {
-        LottoGenerationStrategy strategy = () -> List.of(1, 2, 3, 4, 5, 6);
+        LottoGenerationStrategy strategy = () -> new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         LottoFactoryService factory = new LottoFactoryService(strategy);
         int expectedCount = 5;
@@ -47,7 +48,7 @@ class LottoFactoryServiceTest {
     @DisplayName("수동 전략으로 로또 생성 테스트")
     void createManualLottos() {
         List<Integer> manualNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoGenerationStrategy strategy = new LottoManualStrategy(manualNumbers);
+        LottoGenerationStrategy strategy = new LottoManualStrategy(new LottoManualTicket(manualNumbers));
         LottoFactoryService factory = new LottoFactoryService(strategy);
 
         List<Lotto> result = factory.createLottos(1);
