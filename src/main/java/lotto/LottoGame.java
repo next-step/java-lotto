@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoReport;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.WinningLotto;
 import lotto.domain.generator.RandomLottoGenerator;
 import lotto.view.InputView;
@@ -25,12 +25,12 @@ public class LottoGame {
     try {
       int customerMoney = receiveMoney();
       int manualLottoCount = receiveManualLottoCount();
-      PurchaseAmount purchaseAmount = new PurchaseAmount(customerMoney, manualLottoCount);
-      Lottos lottos = buyLottos(purchaseAmount);
+      PurchaseInfo purchaseInfo = new PurchaseInfo(customerMoney, manualLottoCount);
+      Lottos lottos = buyLottos(purchaseInfo);
       List<LottoNumber> winningLottoNumbers = receiveWinningLottoNumbers();
       LottoNumber bonusNumber = receiveBonusNumber();
       WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
-      printResult(purchaseAmount, winningLotto, lottos);
+      printResult(purchaseInfo, winningLotto, lottos);
     } catch (IllegalArgumentException e) {
       System.out.println("에러 발생: " + e.getMessage());
     }
@@ -44,9 +44,9 @@ public class LottoGame {
     return inputView.receiveManualLottoCount();
   }
 
-  private Lottos buyLottos(PurchaseAmount purchaseAmount) {
+  private Lottos buyLottos(PurchaseInfo purchaseInfo) {
     LottoShop lottoShop = new LottoShop(new RandomLottoGenerator(), inputView);
-    Lottos lottos =  lottoShop.buyLottos(purchaseAmount);
+    Lottos lottos =  lottoShop.buyLottos(purchaseInfo);
     ResultView.printLottoCount(lottos);
     ResultView.printLottos(lottos);
     return lottos;
@@ -60,8 +60,8 @@ public class LottoGame {
     return inputView.receiveBonusNumber();
   }
 
-  private void printResult(PurchaseAmount purchaseAmount, WinningLotto winningLotto, Lottos lottos) {
-    LottoReport lottoReport = new LottoReport(purchaseAmount, winningLotto, lottos);
+  private void printResult(PurchaseInfo purchaseInfo, WinningLotto winningLotto, Lottos lottos) {
+    LottoReport lottoReport = new LottoReport(purchaseInfo, winningLotto, lottos);
     ResultView.printStatistics(lottoReport);
   }
 }

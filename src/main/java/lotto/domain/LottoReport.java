@@ -12,11 +12,11 @@ public class LottoReport {
   private static final String TOTAL_PRIZE_RATE_FORMAT = "총 수익률은 %.2f입니다.";
 
   private final LottoReward lottoReward;
-  private final PurchaseAmount purchaseAmount;
+  private final PurchaseInfo purchaseInfo;
 
-  public LottoReport(PurchaseAmount purchaseAmount, WinningLotto winningLotto, Lottos lottos) {
+  public LottoReport(PurchaseInfo purchaseInfo, WinningLotto winningLotto, Lottos lottos) {
     this.lottoReward = new LottoReward(lottos, winningLotto);
-    this.purchaseAmount = purchaseAmount;
+    this.purchaseInfo = purchaseInfo;
   }
 
   public String createCountReport() {
@@ -31,7 +31,7 @@ public class LottoReport {
 
   public String createMoneyReport() {
     int totalMoney = lottoReward.calculateTotalWinningMoney();
-    double totalRevenue = purchaseAmount.calculateProfitRate(totalMoney);
+    double totalRevenue = purchaseInfo.calculateProfitRate(totalMoney);
     return String.format(TOTAL_PRIZE_RATE_FORMAT, totalRevenue);
   }
 }

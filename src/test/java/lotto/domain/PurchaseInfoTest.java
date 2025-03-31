@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PurchaseAmountTest {
+class PurchaseInfoTest {
 
   @DisplayName("로또 한 장의 가격보다 적은 금액으로 로또를 구매할 수 없다.")
   @Test
   void testPurchaseAmountCannotBeLessThanLottoPrice() {
     int money = Lotto.PRICE - 100;
 
-    assertThatThrownBy(() -> new PurchaseAmount(money))
+    assertThatThrownBy(() -> new PurchaseInfo(money))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("로또 한 장의 가격보다 적은 금액으로 로또를 구매할 수 없습니다.");
   }
@@ -23,7 +23,7 @@ class PurchaseAmountTest {
   void testPurchaseAmountCannotBeNegative() {
     int money = -1000;
 
-    assertThatThrownBy(() -> new PurchaseAmount(money))
+    assertThatThrownBy(() -> new PurchaseInfo(money))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("0 미만의 금액으로 로또를 구매할 수 없습니다.");
   }
@@ -31,10 +31,10 @@ class PurchaseAmountTest {
   @DisplayName("로또 구매 가격과 총 당첨금의 수익률을 계산하는 테스트")
   @Test
   void testCalculateProfitRate() {
-    PurchaseAmount purchaseAmount = new PurchaseAmount(14000);
+    PurchaseInfo purchaseInfo = new PurchaseInfo(14000);
     int totalPrizeMoney = 28000;
 
-    double profitRate = purchaseAmount.calculateProfitRate(totalPrizeMoney);
+    double profitRate = purchaseInfo.calculateProfitRate(totalPrizeMoney);
     assertEquals(2, profitRate);
   }
 
@@ -44,7 +44,7 @@ class PurchaseAmountTest {
     int money = 14000;
     int manualLottoCount = 15;
 
-    assertThatThrownBy(() -> new PurchaseAmount(money, manualLottoCount))
+    assertThatThrownBy(() -> new PurchaseInfo(money, manualLottoCount))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("수동 로또 개수가 총 로또 개수보다 많습니다.");
   }
@@ -55,7 +55,7 @@ class PurchaseAmountTest {
     int money = 14000;
     int manualLottoCount = -1;
 
-    assertThatThrownBy(() -> new PurchaseAmount(money, manualLottoCount))
+    assertThatThrownBy(() -> new PurchaseInfo(money, manualLottoCount))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("0 미만의 수동 로또 개수로 로또를 구매할 수 없습니다.");
   }

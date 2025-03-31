@@ -15,10 +15,10 @@ public class LottoShopTest {
   @Test
   void testBuyLottoTicket() {
     String testInput = "1,2,3,4,5,6\n\n";
-    PurchaseAmount purchaseAmount = new PurchaseAmount(10000, 1);
+    PurchaseInfo purchaseInfo = new PurchaseInfo(10000, 1);
 
     LottoShop lottoShop = new LottoShop(new TestLottoGenerator(), new InputView(new Scanner(testInput)));
-    Lottos lottos = lottoShop.buyLottos(purchaseAmount);
+    Lottos lottos = lottoShop.buyLottos(purchaseInfo);
 
     assertEquals(1, lottos.getManualLottoCount());
     assertEquals(9, lottos.getAutoLottoCount());

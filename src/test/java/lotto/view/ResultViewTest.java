@@ -7,7 +7,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.prize.LottoPrize;
 import lotto.domain.Lottos;
 import lotto.domain.LottoReport;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,7 +51,7 @@ public class ResultViewTest {
             new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
     ), new LottoNumber(7));
-    PurchaseAmount purchaseAmount = new PurchaseAmount(3000);
+    PurchaseInfo purchaseInfo = new PurchaseInfo(3000);
     Lottos lottos = getLottos();
 
     String expected = "당첨 통계\n" + "---------\n" +
@@ -62,7 +62,7 @@ public class ResultViewTest {
             "6개 일치 (2000000000원)- 1개\n" +
             "총 수익률은 676685.00입니다.\n";
 
-    ResultView.printStatistics(new LottoReport(purchaseAmount, winningLotto, lottos));
+    ResultView.printStatistics(new LottoReport(purchaseInfo, winningLotto, lottos));
 
     System.setOut(originalOut);
     assertEquals(expected, outputStream.toString());

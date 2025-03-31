@@ -1,14 +1,14 @@
 package lotto.domain;
 
-public class PurchaseAmount {
+public class PurchaseInfo {
   private final int customerMoney;
   private final int manualLottoCount;
 
-  public PurchaseAmount(int value) {
+  public PurchaseInfo(int value) {
     this(value, 0);
   }
 
-  public PurchaseAmount(int value, int manualLottoCount) {
+  public PurchaseInfo(int value, int manualLottoCount) {
     validateCustomerMoney(value);
     this.customerMoney = value;
     validateManualLottoCount(manualLottoCount);

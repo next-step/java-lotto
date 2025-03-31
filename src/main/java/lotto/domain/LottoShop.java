@@ -19,15 +19,15 @@ public class LottoShop {
     this.inputView = inputView;
   }
 
-  public Lottos buyLottos(PurchaseAmount purchaseAmount) {
-    List<Lotto> manualLottos = generateManualLottos(purchaseAmount);
-    List<Lotto> autoLottos = generateAutoLottos(purchaseAmount);
+  public Lottos buyLottos(PurchaseInfo purchaseInfo) {
+    List<Lotto> manualLottos = generateManualLottos(purchaseInfo);
+    List<Lotto> autoLottos = generateAutoLottos(purchaseInfo);
     return new Lottos(manualLottos, autoLottos);
   }
 
-  private List<Lotto> generateManualLottos(PurchaseAmount purchaseAmount) {
-    List<String> lottoNumbers = inputView.receiveManualLottos(purchaseAmount.getManualLottoCount());
-    if (lottoNumbers.size() > purchaseAmount.getManualLottoCount()) {
+  private List<Lotto> generateManualLottos(PurchaseInfo purchaseInfo) {
+    List<String> lottoNumbers = inputView.receiveManualLottos(purchaseInfo.getManualLottoCount());
+    if (lottoNumbers.size() > purchaseInfo.getManualLottoCount()) {
       throw new IllegalArgumentException("수동으로 구매할 수 있는 횟수를 초과하였습니다.");
     }
     return lottoNumbers.stream()
@@ -36,9 +36,9 @@ public class LottoShop {
             .collect(Collectors.toList());
   }
 
-  private List<Lotto> generateAutoLottos(PurchaseAmount purchaseAmount) {
+  private List<Lotto> generateAutoLottos(PurchaseInfo purchaseInfo) {
     List<Lotto> lottos = new ArrayList<>();
-    for (int i = 0; i < purchaseAmount.getAutoLottoCount(); i++) {
+    for (int i = 0; i < purchaseInfo.getAutoLottoCount(); i++) {
       lottos.add(lottoGenerator.generate());
     }
     return lottos;
