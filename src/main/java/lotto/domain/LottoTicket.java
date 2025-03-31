@@ -36,9 +36,7 @@ public class LottoTicket {
                 .filter(winningTicket.numbers::contains)
                 .count();
 
-        int bonusCount = numbers.contains(bonusBall) ? 1 : 0;
-
-        return LottoRank.of(matchCount, bonusCount);
+        return LottoRank.of(matchCount, numbers.contains(bonusBall));
     }
 
     public List<Integer> getNumbers() {
