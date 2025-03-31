@@ -16,7 +16,8 @@ public class WinningNumbers {
 
     public LottoPrize determineLottoPrize(LottoTicket ticket) {
         int matchCount = ticket.matchCountWith(numbers);
-        return LottoPrize.valueOf(matchCount);
+        boolean hasBonusNumber = ticket.hasBonusNumber(bonusNumber);
+        return LottoPrize.valueOf(matchCount, hasBonusNumber);
     }
 
     public void setBonusNumber(int bonusNumber) {
