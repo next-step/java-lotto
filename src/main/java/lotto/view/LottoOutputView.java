@@ -14,7 +14,7 @@ import static lotto.domain.LottoRank.LAST;
 public class LottoOutputView extends OutputView {
 
     public void printTickets(List<LottoTicket> tickets) {
-        System.out.println(String.format("%d개를 구매했습니다.", tickets.size()));
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", 0, tickets.size()));
         for (LottoTicket ticket : tickets) {
             System.out.println(ticket.getNumbers());
         }
