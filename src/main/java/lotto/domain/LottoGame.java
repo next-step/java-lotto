@@ -14,16 +14,8 @@ public class LottoGame {
     }
 
     public GameResult gameStart(LottoTicket winningTicket) {
-        Map<Rank, Integer> results = tickets.match(winningTicket);
-        return new GameResult(results, calculateReturnRate(results));
+        return tickets.match(winningTicket);
     }
 
-    private double calculateReturnRate(Map<Rank, Integer> results) {
-        int totalSpent = tickets.getCount() * LottoTickets.LOTTO_PRICE; // 로또 구매 비용 계산
-        int totalWon = results.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getWinningMoney() * entry.getValue())
-                .sum();
-        return (double) totalWon / totalSpent;
-    }
 
 }
