@@ -1,9 +1,8 @@
 package com.nextstep.camp.calculator.domain.vo;
 
+import com.nextstep.camp.calculator.domain.exception.*;
 import com.nextstep.camp.common.utils.NumberUtils;
-import com.nextstep.camp.calculator.domain.exception.NotOddNumberOfValuesException;
-import com.nextstep.camp.calculator.domain.exception.NotStartWithNumberException;
-import com.nextstep.camp.calculator.domain.exception.TooShortExpressionException;
+import com.nextstep.camp.common.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -18,18 +17,29 @@ public class ExpressionTokens {
     private static final int MINIMUM_SIZE = 3;
     private static final int FIRST_TOKEN_INDEX = 0;
     private static final int TOKEN_PAIR_SIZE = 2;
+    private static final String EXPRESSION_REGEX = "^-?\\d+(?: [+\\-*/] -?\\d+)*$";
 
     public ExpressionTokens(String input, String delimiter) {
+        validateInput(input);
         String[] split = input.trim().split(delimiter);
-        validate(split);
+        validateSplit(split);
         this.values = new LinkedList<>(toTokens(split));
     }
 
-    public ExpressionTokens(String input) {
+    private ExpressionTokens(String input) {
         this(input, DEFAULT_DELIMITER);
     }
 
-    private static void validate(String[] split) {
+    private static void validateInput(String input) {
+        if (StringUtils.hasNotText(input)) {
+            throw new NotFoundInputException();
+        }
+        if (!input.matches(EXPRESSION_REGEX)) {
+            throw new InvalidExpressionException();
+        }
+    }
+
+    private static void validateSplit(String[] split) {
         if (split.length < MINIMUM_SIZE) {
             throw new TooShortExpressionException();
         }
