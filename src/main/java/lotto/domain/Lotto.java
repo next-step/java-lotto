@@ -10,15 +10,11 @@ public abstract class Lotto {
 
     protected final Set<LottoNumber> lottoNumbers;
 
-    private Lotto(Set<LottoNumber> numbers) {
+    protected Lotto(Set<LottoNumber> numbers) {
         lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
     }
 
-    protected Lotto(List<LottoNumber> numbers) {
-       this(convertToSet(numbers));
-    }
-
-    private static Set<LottoNumber> convertToSet(List<LottoNumber> numbers) {
+    protected static Set<LottoNumber> convertToSet(List<LottoNumber> numbers) {
         validateInputs(numbers);
 
         Set<LottoNumber> lottoNumbers = new TreeSet<>();

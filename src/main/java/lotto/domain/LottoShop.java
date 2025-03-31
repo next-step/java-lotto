@@ -19,8 +19,13 @@ public class LottoShop {
 
     public static Lottos sellLottosWithManualAndAuto(int purchaseAmount, Lottos manualLottos) {
         validateInputs(purchaseAmount, manualLottos);
-        Lottos autoLottos = sellAutoLottos(calculateRemainingPurchaseAmount(purchaseAmount, manualLottos));
-        return manualLottos.add(autoLottos);
+
+        int remainAmount = calculateRemainingPurchaseAmount(purchaseAmount, manualLottos);
+        if (remainAmount >= LOTTO_PRICE) {
+            manualLottos.add(sellAutoLottos(remainAmount));
+        }
+
+        return manualLottos;
     }
 
     private static int calculateRemainingPurchaseAmount(int purchaseAmount, Lottos manualLottos) {

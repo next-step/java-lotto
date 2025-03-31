@@ -3,7 +3,7 @@ package lotto.domain;
 public class AutoLotto extends Lotto {
 
     public AutoLotto() {
-        super(LottoNumber.pickRandomLottoNumbers(LOTTO_NUMBER_COUNT));
+        super(convertToSet(LottoNumber.pickRandomLottoNumbers(LOTTO_NUMBER_COUNT)));
     }
 
     @Override

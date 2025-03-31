@@ -5,7 +5,7 @@ import java.util.List;
 public class ManualLotto extends Lotto {
 
     public ManualLotto(List<LottoNumber> lottoNumbers) {
-        super(lottoNumbers);
+        super(convertToSet(lottoNumbers));
     }
 
     @Override
