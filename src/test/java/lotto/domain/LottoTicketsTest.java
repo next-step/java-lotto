@@ -3,17 +3,13 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketsTest {
-    private static final int TICKET_AMOUNT = 1000;
     private static LottoTickets tickets;
     private static List<LottoTicket> ticketElements;
 
@@ -21,8 +17,8 @@ class LottoTicketsTest {
     static void beforeAll() {
         ticketElements = Arrays.asList(
                 new LottoTicket(List.of(1, 7, 8, 9, 10, 11)),
-                new LottoTicket(List.of(1, 2, 8, 9, 10, 11)),
                 new LottoTicket(List.of(1, 2, 3, 9, 10, 11)),
+                new LottoTicket(List.of(1, 2, 3, 4, 5, 11)),
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
         );
 
@@ -32,25 +28,7 @@ class LottoTicketsTest {
     @Test
     @DisplayName("로또 티켓 컬렉션은 개수에 해당하는 로또 티켓을 발급해야 한다.")
     void buyLottoTickets() {
-        assertThat(new LottoTickets(5).getCount()).isEqualTo(5);
-    }
-
-    @Test
-    @DisplayName("로또 티켓 컬렉션에 티켓 금액보다 적은 금액을 넣을 경우, 에러가 발생한다.")
-    void buyLottoTicketWithUnaffordableAmount() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(100);
-        assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {TICKET_AMOUNT - 1, TICKET_AMOUNT + 1})
-    @DisplayName("로또 티켓 컬렉션은 구입 금액을 장당 가격으로 나누었을 때, 정수가 아니면 에러를 반환한다.")
-    void validateAmount(int amount) {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
-
-        assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThat(new LottoTickets(ticketElements).getCount()).isEqualTo(4);
     }
 
     @Test
@@ -66,14 +44,40 @@ class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("로또 티켓 컬렉션은 당첨번호를 입력하면 N개의 번호가 일치하는 티켓 개수와 상금을 각각 반환한다.")
+    @DisplayName("로또 티켓 컬렉션은 당첨번호와 보너스볼(일치)을 입력하면 당첨 통계를 반환한다.")
     void getRankStatistics() {
-        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 11);
 
-        assertThat(tickets.getRankStatistics(winningTicket))
-                .containsEntry(LottoRank.FOURTH, 1)
+        assertThat(tickets.getRankStatistics(winningLotto))
+                .containsEntry(LottoRank.FIFTH, 1)
+                .containsEntry(LottoRank.FOURTH, 0)
                 .containsEntry(LottoRank.THIRD, 0)
+                .containsEntry(LottoRank.SECOND, 1)
+                .containsEntry(LottoRank.FIRST, 1);
+    }
+
+    @Test
+    @DisplayName("로또 티켓 컬렉션은 당첨번호와 보너스볼(불일치)을 입력하면 당첨 통계를 반환한다.")
+    void getRankStatisticsWithNoBonus() {
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 13);
+
+        assertThat(tickets.getRankStatistics(winningLotto))
+                .containsEntry(LottoRank.FIFTH, 1)
+                .containsEntry(LottoRank.FOURTH, 0)
+                .containsEntry(LottoRank.THIRD, 1)
                 .containsEntry(LottoRank.SECOND, 0)
                 .containsEntry(LottoRank.FIRST, 1);
+    }
+
+    @Test
+    @DisplayName("로또 당첨 티켓 번호를 입력하면, 총 수익률을 계산한다.")
+    void calculateIncome() {
+        LottoTickets lottoTickets = new LottoTickets(List.of(
+                new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
+                new LottoTicket(List.of(1, 2, 3, 4, 5, 7))
+        ));
+        WinningLotto winningLotto = new WinningLotto(List.of(1,2,3,4,10,11), 16);
+
+        assertThat(lottoTickets.income(winningLotto)).isEqualTo(100_000);
     }
 }

@@ -39,12 +39,10 @@ class LottoTicketTest {
     @Test
     @DisplayName("당첨된 로또 티켓과 비교하여 당첨 순위를 반환한다.")
     void findNumberMatchCount() {
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 15);
 
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoTicket winingTicket = new LottoTicket(winningNumbers);
-        assertThat(lottoTicket.rank(winingTicket)).isEqualTo(LottoRank.FIRST);
+        assertThat(lottoTicket.rank(winningLotto)).isEqualTo(LottoRank.FIRST);
     }
 
 }

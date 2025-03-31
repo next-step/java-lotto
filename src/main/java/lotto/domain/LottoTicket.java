@@ -1,10 +1,13 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoConstant.TICKET_NUMBER_SIZE;
+
 public class LottoTicket {
-    private static final int NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -13,22 +16,12 @@ public class LottoTicket {
         validateNotDuplicate(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
-    public LottoTicket() {
-        this.numbers = generate();
-    }
-
-    private List<LottoNumber> generate() {
-        List<LottoNumber> candidates = LottoNumber.getAllNumbers();
-        Collections.shuffle(candidates);
-
-        return candidates.subList(0, NUMBERS_SIZE);
-    }
-
     private void validateNumberSize(List<Integer> numbers) {
-        if (numbers.size() != NUMBERS_SIZE)
+        if (numbers.size() != TICKET_NUMBER_SIZE)
             throw new IllegalArgumentException("number size should be 6.");
     }
 
@@ -38,17 +31,24 @@ public class LottoTicket {
             throw new IllegalArgumentException("number should not be duplicate.");
     }
 
-    public LottoRank rank(LottoTicket winningTicket) {
-        long count = numbers.stream()
-                .filter(winningTicket.numbers::contains)
+    public LottoRank rank(WinningLotto winningLotto) {
+        int matchCount = (int) numbers.stream()
+                .filter(winningLotto::matchTicket)
                 .count();
 
-        return LottoRank.of((int) count);
+        boolean hasBonus = numbers.stream()
+                .anyMatch(winningLotto::matchBonus);
+
+        return LottoRank.of(matchCount, hasBonus);
     }
 
     public List<Integer> getNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
+    }
+
+    public boolean match(LottoNumber number) {
+        return numbers.contains(number);
     }
 }

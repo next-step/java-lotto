@@ -1,14 +1,12 @@
 
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class LottoNumber {
-    private static final int NUMBER_UPPER_BOUND = 45;
-    private static final int NUMBER_LOWER_BOUND = 1;
+import static lotto.domain.LottoConstant.TICKET_NUMBER_MAX;
+import static lotto.domain.LottoConstant.TICKET_NUMBER_MIN;
+
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
@@ -17,14 +15,8 @@ public class LottoNumber {
     }
 
     private void validateNumberBound(int number) {
-        if (number < NUMBER_LOWER_BOUND || number > NUMBER_UPPER_BOUND)
-            throw new IllegalArgumentException(String.format("number should be between %d and %d.", NUMBER_LOWER_BOUND, NUMBER_UPPER_BOUND));
-    }
-
-    public static List<LottoNumber> getAllNumbers() {
-        return IntStream.rangeClosed(NUMBER_LOWER_BOUND, NUMBER_UPPER_BOUND)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+        if (number < TICKET_NUMBER_MIN || number > TICKET_NUMBER_MAX)
+            throw new IllegalArgumentException(String.format("number should be between %d and %d.", TICKET_NUMBER_MIN, TICKET_NUMBER_MAX));
     }
 
     public int getNumber() {
@@ -41,5 +33,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hashCode(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.number - other.number;
     }
 }
