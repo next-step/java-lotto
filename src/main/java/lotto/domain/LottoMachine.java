@@ -6,10 +6,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.LottoConstant.*;
+
 public class LottoMachine {
-    private static final int TICKET_MAX_NUMBER = 45;
-    private static final int TICKET_MIN_NUMBER = 1;
-    private static final int TICKET_NUMBER_SIZE = 6;
     private final PurchaseAmount amount;
     private final LottoTickets tickets;
 
@@ -27,7 +26,7 @@ public class LottoMachine {
     }
 
     private List<Integer> generate() {
-        List<Integer> candidates = IntStream.rangeClosed(TICKET_MIN_NUMBER, TICKET_MAX_NUMBER)
+        List<Integer> candidates = IntStream.rangeClosed(TICKET_NUMBER_MIN, TICKET_NUMBER_MAX)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(candidates);

@@ -4,7 +4,6 @@ import java.util.*;
 
 public class LottoTickets {
 
-
     private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
@@ -32,7 +31,7 @@ public class LottoTickets {
         return statistics;
     }
 
-    public int income(LottoTicket winningTicket,  LottoNumber bonusBall) {
+    public int income(LottoTicket winningTicket, LottoNumber bonusBall) {
         return getRankStatistics(winningTicket, bonusBall)
                 .entrySet().stream()
                 .map(entry -> entry.getKey().getTotalPrize(entry.getValue()))

@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoConstant.TICKET_NUMBER_SIZE;
+
 public class LottoTicket {
-    private static final int NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -20,7 +21,7 @@ public class LottoTicket {
     }
 
     private void validateNumberSize(List<Integer> numbers) {
-        if (numbers.size() != NUMBERS_SIZE)
+        if (numbers.size() != TICKET_NUMBER_SIZE)
             throw new IllegalArgumentException("number size should be 6.");
     }
 

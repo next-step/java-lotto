@@ -3,9 +3,10 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.domain.LottoConstant.TICKET_NUMBER_MAX;
+import static lotto.domain.LottoConstant.TICKET_NUMBER_MIN;
+
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int NUMBER_UPPER_BOUND = 45;
-    private static final int NUMBER_LOWER_BOUND = 1;
     private final int number;
 
     public LottoNumber(int number) {
@@ -14,8 +15,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateNumberBound(int number) {
-        if (number < NUMBER_LOWER_BOUND || number > NUMBER_UPPER_BOUND)
-            throw new IllegalArgumentException(String.format("number should be between %d and %d.", NUMBER_LOWER_BOUND, NUMBER_UPPER_BOUND));
+        if (number < TICKET_NUMBER_MIN || number > TICKET_NUMBER_MAX)
+            throw new IllegalArgumentException(String.format("number should be between %d and %d.", TICKET_NUMBER_MIN, TICKET_NUMBER_MAX));
     }
 
     public int getNumber() {
