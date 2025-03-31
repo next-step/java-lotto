@@ -22,6 +22,14 @@ public class LotteryTicketTest {
     }
 
     @Test
+    @DisplayName("사용자는 로또를 수동으로 구매할 수 있다.")
+    public void manualLottoTest() {
+        FakeInputView inputView = new FakeInputView("8, 21, 23, 41, 42, 43");
+        LotteryTicket lotteryTicket = new LotteryTicket(inputView.read());
+        assertThat(lotteryTicket).isEqualTo(new LotteryTicket(inputView.read()));
+    }
+
+    @Test
     @DisplayName("로또 번호를 자동으로 생성할 수 있다.")
     public void makeLotto() {
         LotteryTicket lotteryTicket = new LotteryTicket();

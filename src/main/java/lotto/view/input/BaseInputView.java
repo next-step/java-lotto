@@ -12,7 +12,7 @@ public abstract class BaseInputView implements InputView {
 
     public Set<LottoNumber> parseToLottoNumbers(String input) {
         return Arrays.stream(input.split(NUMBER_INPUT_DELIMITER))
-                .map(s -> LottoNumber.of(parseInt(s)))
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 

@@ -37,6 +37,6 @@ public class ConsoleInputView extends BaseInputView {
     @Override
     public LottoNumber getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return LottoNumber.of(parseInt(scanner.nextLine()));
+        return LottoNumber.of(scanner.nextLine());
     }
 }

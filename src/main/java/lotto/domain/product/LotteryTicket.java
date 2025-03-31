@@ -2,7 +2,9 @@ package lotto.domain.product;
 
 import lotto.domain.Money;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,25 @@ public class LotteryTicket implements Product {
 
     public LotteryTicket(Set<LottoNumber> input) {
         this.numbers = input;
+    }
+
+    public LotteryTicket(String input) {
+        this(parseInput(input));
+    }
+
+    private static Set<LottoNumber> parseInput(String input) {
+        Set<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
+                .map(String::trim)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+        validSizeOf(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    private static void validSizeOf(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != MAX_LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 숫자는 6개로 이뤄져 있습니다.");
+        }
     }
 
     private Set<LottoNumber> makeRandomNumbers() {
@@ -52,4 +73,15 @@ public class LotteryTicket implements Product {
                 .collect(Collectors.toSet());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        LotteryTicket that = (LotteryTicket) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numbers);
+    }
 }

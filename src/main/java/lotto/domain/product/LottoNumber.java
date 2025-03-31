@@ -22,6 +22,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public static LottoNumber of(String number) {
+        return of(Integer.parseInt(number));
+    }
+
     public static LottoNumber of(Integer number) {
         validateInput(number);
         return CACHE[number - 1];
