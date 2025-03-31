@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lotto.exception.LottoNumberException;
+
 import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class Lotto {
@@ -24,7 +26,7 @@ public class Lotto {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+            throw new LottoNumberException("로또 번호는 6개여야 합니다.");
         }
     }
 
@@ -36,7 +38,7 @@ public class Lotto {
 
     private void validateSingleNumberRange(int number) {
         if (number < LOTTO_NUMBER_START || number > LOTTO_NUMBER_END) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+            throw new LottoNumberException("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
         }
     }
 
@@ -44,7 +46,7 @@ public class Lotto {
         Set<Integer> uniqueNumbers = new HashSet<>(numbers);
 
         if (uniqueNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException("로또 번호에 중복된 숫자가 있습니다.");
+            throw new LottoNumberException("로또 번호에 중복된 숫자가 있습니다.");
         }
     }
 
