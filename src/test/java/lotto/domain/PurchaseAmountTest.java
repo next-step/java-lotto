@@ -30,7 +30,7 @@ class PurchaseAmountTest {
     @Test
     @DisplayName("로또 머신은 구입 금액이 수동으로 구매할 로또 수보다 적으면 에러가 발생한다.")
     void validateEnoughAmount() {
-        assertThatThrownBy(() -> new PurchaseAmount(3000, 2)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new PurchaseAmount(TICKET_AMOUNT, 2)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

@@ -48,4 +48,8 @@ public class LottoTickets {
     public int countManualTickets() {
         return tickets.size() - countAutoTickets();
     }
+
+    public void addManualTickets(List<LottoTicket> manualTicket) {
+        tickets.addAll(manualTicket);
+    }
 }

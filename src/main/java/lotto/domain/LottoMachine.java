@@ -17,6 +17,13 @@ public class LottoMachine {
         this.tickets = issueTickets(this.amount.getTicketCount());
     }
 
+    public LottoMachine(int amount, List<LottoTicket> manualTicket) {
+        this.amount = new PurchaseAmount(amount, manualTicket.size());
+        int autoCount = this.amount.getTicketCount() - manualTicket.size();
+        this.tickets = issueTickets(autoCount);
+        tickets.addManualTickets(manualTicket);
+    }
+
     private LottoTickets issueTickets(int count) {
         List<LottoTicket> tickets = IntStream.range(0, count)
                 .mapToObj(i -> new LottoTicket(generateTicketNumbers()))
