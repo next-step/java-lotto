@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,13 +19,11 @@ public class DivisionTest {
     }
 
     @DisplayName("로또 당첨 개수에 따른 Division 테스트")
-    @Test
-    void check_division_by_match_count_bonus() {
-        assertThat(Division.valueOf(6, true)).isEqualTo(Division.FIRST);
-        assertThat(Division.valueOf(6, false)).isEqualTo(Division.FIRST);
-        assertThat(Division.valueOf(5, true)).isEqualTo(Division.SECOND);
-        assertThat(Division.valueOf(5, false)).isEqualTo(Division.THIRD);
-        assertThat(Division.valueOf(4)).isEqualTo(Division.FOURTH);
-        assertThat(Division.valueOf(2)).isEqualTo(Division.LOSE);
+    @ParameterizedTest
+    @CsvSource(value = {"6,true,FIRST", "6,false,FIRST",
+                        "5,true,SECOND", "5,false,THIRD",
+                        "2,true,LOSE", "2,false,LOSE"})
+    void check_division_by_match_count_bonus(int matchCount, boolean matchBonus, Division division) {
+        assertThat(Division.valueOf(matchCount, matchBonus)).isEqualTo(division);
     }
 }

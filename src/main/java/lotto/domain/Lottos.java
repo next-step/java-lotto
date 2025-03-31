@@ -20,7 +20,7 @@ public class Lottos {
     }
 
     public Map<Division, Integer> compareNumbers(Lotto comparingLotto) {
-        Map<Division, Integer> winnerCounts = Division.getMatchCounts();
+        Map<Division, Integer> winnerCounts = Division.getRankCounts();
         List<Division> divisions = new ArrayList<>();
         for (Lotto lotto: lottos) {
             Division division = lotto.compareNumbers(comparingLotto);
@@ -35,7 +35,7 @@ public class Lottos {
     }
 
     public Map<Division, Integer> compareNumbers(Lotto comparingLotto, int bonusNumber) {
-        Map<Division, Integer> winnerCounts = Division.getMatchCounts();
+        Map<Division, Integer> winnerCounts = Division.getRankCounts();
         List<Division> divisions = new ArrayList<>();
         for (Lotto lotto: lottos) {
             Division division = lotto.compareNumbers(comparingLotto, bonusNumber);

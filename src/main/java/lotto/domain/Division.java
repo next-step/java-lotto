@@ -2,31 +2,34 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public enum Division {
-    FIFTH(3, 5_000),
-    FOURTH(4, 50_000),
-    THIRD(5, 1_500_000),
-    SECOND(5, 30_000_000),
-    FIRST(6, 2_000_000_000),
-    LOSE(0, 0);
+    FIFTH(Arrays.asList(3), false, 5_000),
+    FOURTH(Arrays.asList(4), false, 50_000),
+    THIRD(Arrays.asList(5), false, 1_500_000),
+    SECOND(Arrays.asList(5), true, 30_000_000),
+    FIRST(Arrays.asList(6), false, 2_000_000_000),
+    LOSE(Arrays.asList(0, 1, 2), false, 0);
 
-    public final static Map<Division, Integer> matchCounts = new EnumMap<>(Division.class);
+    public final static Map<Division, Integer> rankCounts = new EnumMap<>(Division.class);
 
     static {
-        matchCounts.put(Division.FIFTH, 0);
-        matchCounts.put(Division.FOURTH, 0);
-        matchCounts.put(Division.THIRD, 0);
-        matchCounts.put(Division.SECOND, 0);
-        matchCounts.put(Division.FIRST, 0);
+        rankCounts.put(Division.FIFTH, 0);
+        rankCounts.put(Division.FOURTH, 0);
+        rankCounts.put(Division.THIRD, 0);
+        rankCounts.put(Division.SECOND, 0);
+        rankCounts.put(Division.FIRST, 0);
     }
 
-    private int matchCount;
+    private List<Integer> matchCounts;
+    private boolean matchBonus;
     private int prize;
 
-    private Division(int matchCount, int prize) {
-        this.matchCount = matchCount;
+    private Division(List<Integer> matchCounts, boolean matchBonus, int prize) {
+        this.matchCounts = matchCounts;
+        this.matchBonus = matchBonus;
         this.prize = prize;
     }
 
@@ -39,28 +42,19 @@ public enum Division {
     }
 
     public static Division valueOf(int matchCount, boolean matchBonus) {
-        if (matchCount == 6) {
-            return FIRST;
-        }
-        if (matchCount == 5 && matchBonus) {
-            return SECOND;
-        }
-        if (matchCount == 5) {
-            return THIRD;
-        }
-        if (matchCount == 4) {
-            return FOURTH;
-        }
-        if (matchCount == 3) {
-            return FIFTH;
-        }
-        if (matchCount == 0 || matchCount == 1 || matchCount == 2) {
-            return LOSE;
-        }
-        throw new IllegalArgumentException("로또 맞은 번호의 개수가 6개 초과입니다.");
+        return Arrays.stream(values())
+                .filter(division -> division.matchCounts.contains(matchCount))
+                .filter(division -> {
+                    if (division.matchCounts.contains(5)) {
+                        return division.matchBonus == matchBonus;
+                    }
+                    return true;
+                })
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("로또 맞은 번호의 개수가 지정된 범위를 벗어납니다."));
     }
 
-    public final static Map<Division, Integer> getMatchCounts() {
-        return matchCounts;
+    public final static Map<Division, Integer> getRankCounts() {
+        return rankCounts;
     }
 }

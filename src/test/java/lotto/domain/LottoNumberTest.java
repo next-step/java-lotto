@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-class LottoTest {
+class LottoNumberTest {
     @DisplayName("로또 번호 유효성 검사사 테스트")
     @Test
     void create_lotto() {
@@ -22,9 +22,8 @@ class LottoTest {
         LottoNumber number1 = new LottoNumber(3);
         LottoNumber number2 = new LottoNumber(3);
         LottoNumber number3 = new LottoNumber(4);
-        assertThat(number1 == number2)
-                .isTrue();
-        assertThat(number3.comparTo(number2) > 0)
+        assertThat(number1.equals(number2)).isTrue();
+        assertThat(number3.compareTo(number2) > 0)
                 .isTrue();
     }
 }
