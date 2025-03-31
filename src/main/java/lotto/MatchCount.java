@@ -28,4 +28,8 @@ public enum MatchCount {
     public boolean isAtLeast(MatchCount other) {
         return this.matchCount >= other.matchCount;
     }
+
+    public int getPrize() {
+        return prize;
+    }
 }

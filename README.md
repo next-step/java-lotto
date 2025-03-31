@@ -67,10 +67,10 @@
 - `Lottos`는 `List<Lotto>`를 갖는다.
   - 로또 구입 금액을 입력하면 구입 금액에 해당하는 개수만큼 `Lotto`를 갖는다.
 - `Lottos`는 당첨 번호와 로또 번호가 3개 이상 일치하는 `Lotto`를 확인할 수 있다.
-- `Lottos`는 당첨 번호와 로또 번호가 3개 이상 일치하는 `Lotto`의 개수에 따라 수익률을 계산할 수 있다.
 #### WinningResult
 - `WinningResult`는 `Map<MatchCount, Integer>'를 갖는다.
   - Map 의 key 값으로는 3, 4, 5, 6를 가진다.
   - Map 의 value 로는 당첨 번호와 로또 번호가 3, 4, 5, 6개 일치하는 로또의 개수를 저장한다.
 #### MatchCount
 - `MatchCount`는 `enum`클래스로, 당첨번호와 로또번호가 3, 4, 5, 6개 일치하는 경우에 대한 당첨금 정보를 갖는다.
+- `MatchCount`는 당첨 번호와 로또 번호가 3개 이상 일치하는 `Lotto`의 개수에 따라 수익률을 계산할 수 있다.
