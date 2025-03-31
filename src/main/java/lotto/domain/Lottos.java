@@ -23,7 +23,7 @@ public class Lottos {
         Map<Division, Integer> winnerCounts = Division.getRankCounts();
         List<Division> divisions = new ArrayList<>();
         for (Lotto lotto: lottos) {
-            Division division = lotto.compareNumbers(comparingLotto);
+            Division division = lotto.compareLotto(comparingLotto);
             divisions.add(division);
         }
         divisions.removeAll(Collections.singletonList(Division.LOSE));
@@ -34,11 +34,12 @@ public class Lottos {
         return winnerCounts;
     }
 
-    public Map<Division, Integer> compareNumbers(Lotto comparingLotto, int bonusNumber) {
+    public Map<Division, Integer> compareNumbers(Lotto comparingLotto, LottoNumber bonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(comparingLotto, bonusNumber);
         Map<Division, Integer> winnerCounts = Division.getRankCounts();
         List<Division> divisions = new ArrayList<>();
         for (Lotto lotto: lottos) {
-            Division division = lotto.compareNumbers(comparingLotto, bonusNumber);
+            Division division = lotto.compareLotto(winningLotto);
             divisions.add(division);
         }
         divisions.removeAll(Collections.singletonList(Division.LOSE));

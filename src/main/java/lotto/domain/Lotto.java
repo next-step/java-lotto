@@ -63,16 +63,15 @@ public class Lotto {
         return numbers;
     }
 
-    public Division compareNumbers(Lotto lotto) {
+    public Division compareLotto(Lotto lotto) {
         long matchCount = numbers.stream()
                 .filter(number -> lotto.numbers.contains(number))
                 .count();
         return Division.valueOf((int)matchCount);
     }
 
-    public Division compareNumbers(Lotto lotto, int bonusNumber) {
+    public Division compareLotto(Lotto lotto, int bonusNumber) {
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
-        validateBonusLottoNumber(bonusLottoNumber);
         long matchCount = numbers.stream()
                 .filter(number -> lotto.numbers.contains(number))
                 .count();
@@ -80,10 +79,20 @@ public class Lotto {
         return Division.valueOf((int)matchCount, matchBonus);
     }
 
-    private void validateBonusLottoNumber(LottoNumber bonusLottoNumber) {
-        if (numbers.contains(bonusLottoNumber)) {
-            throw new IllegalArgumentException("보너스 숫자가 기존 로또 번호와 겹칩니다.");
-        }
+    public Division compareLotto(WinningLotto winningLotto) {
+        int matchCount = (int)checkMatchCount(winningLotto);
+        boolean matchBonus = winningLotto.matchBonusNumber(numbers);
+        return Division.valueOf(matchCount, matchBonus);
+    }
+
+    private long checkMatchCount(WinningLotto winningLotto) {
+        return numbers.stream()
+                .filter(number -> winningLotto.contains(number))
+                .count();
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     @Override

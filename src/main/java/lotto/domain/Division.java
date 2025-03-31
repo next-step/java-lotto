@@ -45,7 +45,7 @@ public enum Division {
         return Arrays.stream(values())
                 .filter(division -> division.matchCounts.contains(matchCount))
                 .filter(division -> {
-                    if (division.matchCounts.contains(5)) {
+                    if (matchCount == 5) {
                         return division.matchBonus == matchBonus;
                     }
                     return true;
