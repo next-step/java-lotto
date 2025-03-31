@@ -1,11 +1,13 @@
-class Calculator {
+package utils;
+
+public class Calculator {
     private static void validateInput(String expression) {
         if (expression == null || expression.isBlank()) {
             throw new IllegalArgumentException("입력 값이 null이거나 빈 공백 문자입니다.");
         }
     }
 
-    static int run(String expression) {
+    public static int run(String expression) {
         validateInput(expression);
 
         String[] tokens = expression.split(" ");
