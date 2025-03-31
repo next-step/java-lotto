@@ -11,8 +11,8 @@ public class LottoRequest {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private int money;
-    private List<Lotto> manuelLottos;
+    private final int money;
+    private final List<Lotto> manuelLottos;
 
     public LottoRequest(int money, List<String> manuelLottoStrs) {
         this.money = money;
