@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lotto.model.*;
 import lotto.view.InputView;
@@ -10,9 +11,10 @@ public class Main {
 
     public static void main(String[] args) {
         int money = InputView.getMoney();
-        LottoShop lottoShop = new LottoShop();
+        List<String> manuelLottoNumbers = InputView.getManuelCount();
+        LottoRequest request = new LottoRequest(money, manuelLottoNumbers);
 
-        LottoWallet lottoWallet = lottoShop.buy(money);
+        LottoWallet lottoWallet = request.buy();
 
         OutputView.printLottoWallet(lottoWallet);
 

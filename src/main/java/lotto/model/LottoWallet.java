@@ -8,14 +8,24 @@ import java.util.List;
 public class LottoWallet implements Iterable<Lotto> {
 
     private final List<Lotto> lottos;
+    private final int manuelSize;
 
-    public LottoWallet(List<Lotto> lottos) {
+    public LottoWallet(List<Lotto> lottos, int manuelSize) {
         this.lottos = lottos;
+        this.manuelSize = manuelSize;
+    }
+    public LottoWallet(List<Lotto> lottos) {
+        this(lottos, 0);
     }
 
     public int getLottoCount() {
         return lottos.size();
     }
+
+    public int autoLottoCount() {
+        return lottos.size() - this.manuelLottoCount();
+    }
+    public int manuelLottoCount() { return this.manuelSize; }
 
     @Override
     public Iterator<Lotto> iterator() {

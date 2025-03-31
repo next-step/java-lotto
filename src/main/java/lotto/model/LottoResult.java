@@ -11,8 +11,8 @@ public class LottoResult {
         this.lottoPrizes = lottoPrizes;
     }
 
-    public int calculateProfit() {
-        int profit = 0;
+    public long calculateProfit() {
+        long profit = 0;
         for (LottoPrize prize : lottoPrizes) {
             profit += prize.getAmount();
         }
@@ -27,7 +27,7 @@ public class LottoResult {
 
     public double calculateReturnRate() {
         double returnRate =
-                (double) calculateProfit() / (lottoPrizes.size() * LottoShop.LOTTO_PRICE);
+                (double) calculateProfit() / (lottoPrizes.size() * LottoRequest.LOTTO_PRICE);
         return Math.floor(returnRate * 100) / 100.0;
     }
 
