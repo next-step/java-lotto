@@ -24,4 +24,8 @@ public class LottoCount {
     private int getTotalCount(int payAmount) {
         return payAmount / LOTTO_PRICE;
     }
+
+    public int getManualCount(){
+        return manualCount;
+    }
 }

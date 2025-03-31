@@ -14,10 +14,9 @@ public class LottoShop {
         this.numberGenerator = numberGenerator;
     }
 
-    public List<Lotto> generateLotto(int price) {
-        int lottoCounts = getLottoCounts(price);
-        List<Lotto> lottos = new ArrayList<>();
-        for (int index = 0; index < lottoCounts; index++) {
+    public List<Lotto> generateLotto(LottoCount lottoCount, List<Lotto> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        for (int index = 0; index < lottoCount.getAutoCount(); index++) {
             lottos.add(new Lotto(numberGenerator.generate()));
         }
         return lottos;
