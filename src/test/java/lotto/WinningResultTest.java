@@ -12,12 +12,12 @@ class WinningResultTest {
     void addAndCountByMatch() {
         WinningResult result = new WinningResult();
 
-        result.add(3);
-        result.add(3);
-        result.add(4);
+        result.add(MatchCount.of(3));
+        result.add(MatchCount.of(3));
+        result.add(MatchCount.of(4));
 
-        assertThat(result.countByMatch(3)).isEqualTo(2);
-        assertThat(result.countByMatch(4)).isEqualTo(1);
-        assertThat(result.countByMatch(5)).isZero();
+        assertThat(result.countByMatch(MatchCount.THREE)).isEqualTo(2);
+        assertThat(result.countByMatch(MatchCount.FOUR)).isEqualTo(1);
+        assertThat(result.countByMatch(MatchCount.FIVE)).isZero();
     }
 }

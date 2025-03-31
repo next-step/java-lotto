@@ -1,21 +1,21 @@
 package lotto;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class WinningResult {
 
-    private final Map<Integer, Integer> winningResult;
+    private final Map<MatchCount, Integer> winningResult;
 
     public WinningResult() {
-        this.winningResult = new HashMap<>();
+        this.winningResult = new EnumMap<>(MatchCount.class);
     }
 
-    public int countByMatch(int matchesNumber) {
-        return winningResult.getOrDefault(matchesNumber, 0);
+    public int countByMatch(MatchCount matchCount) {
+        return winningResult.getOrDefault(matchCount, 0);
     }
 
-    public void add(int matchCount) {
+    public void add(MatchCount matchCount) {
         winningResult.put(matchCount, winningResult.getOrDefault(matchCount, 0) + 1);
     }
 }

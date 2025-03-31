@@ -34,8 +34,7 @@ public class Lottos {
     private static void countIfWinningLotto(Lotto winningLotto, Lotto lotto,
         WinningResult winningResult) {
         if (lotto.isWinningLotto(winningLotto)) {
-            int matchCount = lotto.countMatchWith(winningLotto);
-            winningResult.add(matchCount);
+            winningResult.add(lotto.countMatchWith(winningLotto));
         }
     }
 }

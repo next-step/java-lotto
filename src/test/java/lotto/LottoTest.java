@@ -52,7 +52,7 @@ class LottoTest {
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(4, 5, 6, 7, 8, 9));
 
-        assertThat(lotto1.countMatchWith(lotto2)).isEqualTo(3);
+        assertThat(lotto1.countMatchWith(lotto2)).isEqualTo(MatchCount.THREE);
     }
 
     @DisplayName("Lotto 는 당첨 로또를 통해 당첨 조건에 부합하는지 판단할 수 있다.")
