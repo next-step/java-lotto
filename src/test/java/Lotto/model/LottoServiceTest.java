@@ -29,20 +29,40 @@ public class LottoServiceTest {
     }
 
     @Test
-    void shouldNotAllowPurchase_WhenPurchaseAmountIsUnder1000Won(){
+    void shouldNotAllowPurchase_WhenPurchaseAmountIsUnder1000Won() {
         final int PURCHASE_AMOUNT = 900;
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         assertThatIllegalArgumentException()
-                .isThrownBy(()->new LottoService(PURCHASE_AMOUNT, extractor))
+                .isThrownBy(() -> new LottoService(PURCHASE_AMOUNT, extractor))
                 .withMessage("The minimum of purchase price is 1,000 won.");
     }
 
     @Test
-    void shouldNotAllowPurchase_WhenPurchaseAmountIsNotDivisibleBy1000(){
+    void shouldNotAllowPurchase_WhenPurchaseAmountIsNotDivisibleBy1000() {
         final int PURCHASE_AMOUNT = 1001;
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         assertThatIllegalArgumentException()
-                .isThrownBy(()->new LottoService(PURCHASE_AMOUNT, extractor))
+                .isThrownBy(() -> new LottoService(PURCHASE_AMOUNT, extractor))
                 .withMessage("The purchase price is in units of 1,000 won.");
+    }
+
+    @Test
+    void shouldNotAllowWinningLottoNumber_WhenNumberCountExceed6() {
+        final int PURCHASE_AMOUNT = 1000;
+        NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
+        LottoService service = new LottoService(PURCHASE_AMOUNT, extractor);
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> service.decideWinning(new int[]{1, 2, 3, 4, 5, 6, 7}))
+                .withMessage("The count of Lotto number exceed 6.");
+    }
+
+    @Test
+    void shouldNotAllowWinningLottoNumber_WhenWinningNumberContainDuplicates() {
+        final int PURCHASE_AMOUNT = 1000;
+        NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
+        LottoService service = new LottoService(PURCHASE_AMOUNT, extractor);
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> service.decideWinning(new int[]{1, 2, 2, 4, 5, 6}))
+                .withMessage("Lotto numbers must not contain duplicates.");
     }
 }
