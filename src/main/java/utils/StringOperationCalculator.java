@@ -1,8 +1,12 @@
+package utils;
+
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
 public class StringOperationCalculator {
+    private StringOperationCalculator() {}
+
     public static String calculate(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("input은 null 이거나, 빈값일 수 없습니다.");
