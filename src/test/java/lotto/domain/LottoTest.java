@@ -6,8 +6,10 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.exception.LottoNumberException;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
     @Test
@@ -36,7 +38,8 @@ class LottoTest {
     void createLottoWithInvalidNumberOfNumbers() {
         List<Integer> invalidNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(invalidNumbers));
+        assertThatThrownBy(() -> new Lotto(invalidNumbers))
+            .isInstanceOf(LottoNumberException.class);
     }
 
     @Test
@@ -44,7 +47,8 @@ class LottoTest {
     void createLottoWithInvalidNumberRange() {
         List<Integer> invalidNumbers = Arrays.asList(1, 2, 3, 4, 5, 46);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(invalidNumbers));
+        assertThatThrownBy(() -> new Lotto(invalidNumbers))
+            .isInstanceOf(LottoNumberException.class);
     }
 
     @Test
@@ -52,6 +56,7 @@ class LottoTest {
     void createLottoWithDuplicateNumbers() {
         List<Integer> duplicateNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(duplicateNumbers));
+        assertThatThrownBy(() -> new Lotto(duplicateNumbers))
+            .isInstanceOf(LottoNumberException.class);
     }
 }
