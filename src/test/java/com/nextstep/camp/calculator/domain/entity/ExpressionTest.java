@@ -46,11 +46,21 @@ class ExpressionTest {
         );
     }
 
-    @Test
-    @DisplayName("지원하지 않는 연산자는 IllegalArgumentException 발생")
-    void evaluate_unsupported_operator_throws_exception() {
-        String input = "2 % 3"; // '%'는 사칙연산 아님
+    @ParameterizedTest
+    @MethodSource("invalidExpressions")
+    void evaluate_unsupported_operator_throws_exception(String input) {
         assertThatThrownBy(() -> Expression.of(ExpressionTokens.of(input)))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    static Stream<String> invalidExpressions() {
+        return Stream.of(
+            "1 + 2 +",
+            "4 - 3 *",
+            "2 * 3 /",
+            "8 / 2 +",
+            "2 + 3 * 4 - 5 /",
+            "2 + 3 % 4"
+        );
     }
 }
