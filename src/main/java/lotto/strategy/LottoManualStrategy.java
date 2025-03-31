@@ -1,57 +1,30 @@
 package lotto.strategy;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import lotto.exception.LottoNumberException;
+import lotto.domain.Lotto;
+import lotto.exception.LottoGenerationException;
+import lotto.vo.LottoManualTicket;
 
 import static java.util.stream.Collectors.toList;
 
 public class LottoManualStrategy implements LottoGenerationStrategy {
-    private static final int LOTTO_NUMBERS_COUNT = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    private final LottoManualTicket ticket;
 
-    private final List<Integer> manualNumbers;
-
-    public LottoManualStrategy(List<Integer> numbers) {
-        validate(numbers);
-        validateRange(numbers);
-        validateDuplicates(numbers);
-        this.manualNumbers = numbers;
+    public LottoManualStrategy(LottoManualTicket ticket) {
+        validation(ticket);
+        this.ticket = ticket;
     }
 
-    private void validate(List<Integer> numbers) {
-        if (numbers == null) {
-            throw new LottoNumberException();
-        }
-
-        if (numbers.size() != LOTTO_NUMBERS_COUNT) {
-            throw new LottoNumberException();
-        }
-    }
-
-    private void validateRange(List<Integer> numbers) {
-        numbers.forEach(number -> {
-            if (number < MIN_NUMBER || number > MAX_NUMBER) {
-                throw new LottoNumberException();
-            }
-        });
-    }
-
-    private void validateDuplicates(List<Integer> numbers) {
-        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
-
-        if (uniqueNumbers.size() != LOTTO_NUMBERS_COUNT) {
-            throw new LottoNumberException();
+    private void validation(LottoManualTicket ticket) {
+        if (ticket == null) {
+            throw new LottoGenerationException("수동 로또 티켓이 존재하지 않습니다.");
         }
     }
 
     @Override
-    public List<Integer> generate() {
-        return manualNumbers.stream()
+    public Lotto generate() {
+        return new Lotto(ticket.getNumbers()
+            .stream()
             .sorted()
-            .collect(toList());
+            .collect(toList()));
     }
 }

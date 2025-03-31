@@ -17,13 +17,13 @@ public class LottoFactoryService {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(generateLottoNumbers(strategy)));
+            lottos.add(generateLottoNumbers(strategy));
         }
 
         return lottos;
     }
 
-    private static List<Integer> generateLottoNumbers(LottoGenerationStrategy strategy) {
+    private static Lotto generateLottoNumbers(LottoGenerationStrategy strategy) {
         return strategy.generate();
     }
 }
