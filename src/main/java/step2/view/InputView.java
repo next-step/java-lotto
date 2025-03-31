@@ -29,13 +29,13 @@ public class InputView {
         return new LottosCount(countManual, money);
     }
 
-    public static List<Lotto> buyLottosManual(int manual) {
+    public static List<String> buyLottosManual(int manualCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < manual; i++) {
-            lottos.add(new Lotto(LottoFactory.fromSplit(scanner.nextLine())));
+        List<String> inputs = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            inputs.add(scanner.nextLine());
         }
-        return lottos;
+        return inputs;
     }
 
     public static Winning winningNumsLastWeek() {
@@ -44,7 +44,6 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         LottoNum bonusNum = getBonusNum();
         return new Winning(winningNums, bonusNum);
-
     }
 
     private static LottoNum getBonusNum() {

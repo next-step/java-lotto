@@ -31,7 +31,11 @@ public class LottoFactory {
                         .mapToObj(i -> new Lotto(lottoStrategy.generateLottoNumbers()))
                         .collect(Collectors.toList()));
     }
-    public Lottos buyManual(List<Lotto> manualList) {
-        return new Lottos(manualList);
+    public Lottos buyManual(List<String> manualInputs) {
+        List<Lotto> lottos = manualInputs.stream()
+                .map(LottoFactory::fromSplit)
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+        return new Lottos(lottos);
     }
 }
