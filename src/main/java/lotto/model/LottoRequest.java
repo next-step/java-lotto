@@ -15,8 +15,12 @@ public class LottoRequest {
     private List<Lotto> manuelLottos;
 
     public LottoRequest(int money, List<String> manuelLottoStrs) {
-
         this.money = money;
+
+        if(buyChance() - manuelLottoStrs.size() < 0) {
+            throw new IllegalArgumentException("구매 비용이 모자랍니다.");
+        }
+
         this.manuelLottos = manuelLottoStrs
                 .stream()
                 .map(str -> List.of(str.split(",")))
@@ -39,7 +43,7 @@ public class LottoRequest {
             lottos.add(lottoGenerator.generate());
         }
 
-        return new LottoWallet(lottos);
+        return new LottoWallet(lottos, manuelLottos.size());
     }
 }
 
