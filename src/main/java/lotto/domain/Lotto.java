@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -8,16 +7,16 @@ public class Lotto {
   private static final int LOTTO_NUMBER_COUNT = 6;
   private static final int MIN_NUMBER = 1;
   private static final int MAX_NUMBER = 45;
-  private List<Integer> lottoNumbers = new ArrayList<>();
+  private LottoNumbers lottoNumbers = new LottoNumbers();
 
   public Lotto(List<Integer> lottoNumbers) {
     validateLottoNumbers(lottoNumbers);
-    this.lottoNumbers = lottoNumbers;
+    this.lottoNumbers.createLottoNumbers(lottoNumbers);
   }
 
   public Lotto(DrawingStrategy drawingStrategy) {
     validateLottoNumbers(drawingStrategy.draw());
-    this.lottoNumbers = drawingStrategy.draw();
+    lottoNumbers.createLottoNumbers(drawingStrategy.draw());
   }
 
   private void validateLottoNumbers(List<Integer> numbers) {
@@ -30,13 +29,10 @@ public class Lotto {
   }
 
   public int findCount(List<Integer> numbers) {
-    return (int) lottoNumbers
-        .stream()
-        .filter(numbers::contains)
-        .count();
+    return lottoNumbers.findCount(numbers);
   }
 
   public List<Integer> getLottoNumbers() {
-    return lottoNumbers;
+    return lottoNumbers.getLottoNumbers();
   }
 }
