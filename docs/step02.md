@@ -3,6 +3,7 @@
 https://edu.nextstep.camp/s/Ie5Dwep0/ls/KH5Q2XXD
 
 ## 기능 요구사항
+
 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 로또 1장의 가격은 1000원이다.
 
@@ -45,7 +46,7 @@ https://edu.nextstep.camp/s/Ie5Dwep0/ls/KH5Q2XXD
 - [ ] LottoEvent는 LottoTicket을 발급한다.
 - [ ] LottoEvent는 LottoTicket을 발급할 때 마다 LottoTicketNumber를 생성한다.
 - [ ] LottoEvent는 LottoTicket을 발급할 때 마다 LottoTicketNumber를 생성할 때 중복이 되지 않아야 한다.
-- [ ] LottoEvent는 LottoTicket을 발급할 때 마다 LottoTicketNumber를 생성할 때 1~45 사이의 숫자여야 한다.
+- [x] LottoEvent는 LottoTicket을 발급할 때 마다 LottoTicketNumber를 생성할 때 1~45 사이의 숫자여야 한다.
 - [ ] LottoEvent는 LottoTicket을 발급할 때 LottoTicketNumber를 6개씩 발급한다.
 - [ ] LottoEvent는 LottoTicket을 발급할 때 LottoTicketNumber를 오름차순으로 정렬한다.
 - [ ] LottoEvent는 LottoTicket을 발급할 때 LottoTicketNumber를 1개씩 발급할 때 마다 Me의 금액을 1000원씩 차감한다.
