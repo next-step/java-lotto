@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoShop {
     private static final int LOTTO_PRICE = 1000;
@@ -11,36 +9,32 @@ public class LottoShop {
     private LottoShop() {
     }
 
-    public static List<Lotto> sellLotto(int purchaseAmount) {
+    public static Lottos sellAutoLottos(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
 
-        return IntStream.range(0, calculateLottoCount(purchaseAmount))
+        return new Lottos(IntStream.range(0, calculateLottoCount(purchaseAmount))
                 .mapToObj(i -> (Lotto) new AutoLotto())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
-    public static List<Lotto> sellLotto(int purchaseAmount, List<Lotto> manualLottoList) {
-        validateInputs(purchaseAmount, manualLottoList);
-
-        return Stream.concat(
-                        IntStream.range(0, calculateAutoLottoCount(purchaseAmount, manualLottoList))
-                                .mapToObj(i -> (Lotto) new AutoLotto()),
-                        manualLottoList.stream())
-                .collect(Collectors.toList());
+    public static Lottos sellLottosWithManualAndAuto(int purchaseAmount, Lottos manualLottos) {
+        validateInputs(purchaseAmount, manualLottos);
+        Lottos autoLottos = sellAutoLottos(calculateRemainingPurchaseAmount(purchaseAmount, manualLottos));
+        return manualLottos.add(autoLottos);
     }
 
-    private static int calculateAutoLottoCount(int purchaseAmount, List<Lotto> manualLottoList) {
-        return calculateLottoCount(purchaseAmount) - manualLottoList.size();
+    private static int calculateRemainingPurchaseAmount(int purchaseAmount, Lottos manualLottos) {
+        return purchaseAmount - manualLottos.countAllLotto() * LOTTO_PRICE;
     }
 
     public static int calculateLottoCount(int purchaseAmount) {
         return purchaseAmount / LOTTO_PRICE;
     }
 
-    private static void validateInputs(int purchaseAmount, List<Lotto> manualLottoList) {
+    private static void validateInputs(int purchaseAmount, Lottos manualLottoList) {
         validatePurchaseAmount(purchaseAmount);
 
-        if (calculateAutoLottoCount(purchaseAmount, manualLottoList) < 0) {
+        if (calculateRemainingPurchaseAmount(purchaseAmount, manualLottoList) < 0) {
             throw new IllegalArgumentException("구입금액을 초과한 로또를 구매할 수 없습니다");
         }
     }

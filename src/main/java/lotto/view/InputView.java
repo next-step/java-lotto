@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.ManualLotto;
 
 import java.util.ArrayList;
@@ -24,13 +25,13 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<Lotto> getManualLottoList(int manualLottoCount) {
+    public static Lottos getManualLottoList(int manualLottoCount) {
         List<Lotto> manualLottoList = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             manualLottoList.add(getManualLotto());
         }
 
-        return manualLottoList;
+        return new Lottos(manualLottoList);
     }
 
     public static Lotto getWinningNumbers() {

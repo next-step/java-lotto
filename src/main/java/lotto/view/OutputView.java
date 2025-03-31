@@ -1,18 +1,17 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class OutputView {
-    public static void printLottoList(List<Lotto> lottoList) {
-        System.out.println(lottoList.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottoList) {
+    public static void printLottoList(Lottos lottos) {
+        String messageFormat = "수동으로 %d장, 자동으로 %d장 구매했습니다.";
+        System.out.println(String.format(messageFormat, lottos.countManualLotto(), lottos.countAutoLotto()));
+
+        for (Lotto lotto : lottos.getLottos()) {
             Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
             System.out.println(lottoNumbers);
         }
