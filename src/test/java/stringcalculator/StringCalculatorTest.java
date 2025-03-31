@@ -40,6 +40,12 @@ class StringCalculatorTest {
   }
 
   @Test
+  void 나눗셈() {
+    StringCalculator stringCalculator = new StringCalculator();
+    assertEquals(1, stringCalculator.calculateString("2 / 2"));
+  }
+
+  @Test
   void 미구현_연산자는_예외를_발생시킨다() {
     StringCalculator stringCalculator = new StringCalculator();
     assertThatThrownBy(() -> {

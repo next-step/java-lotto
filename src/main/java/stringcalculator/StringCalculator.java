@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import stringcalculator.operation.AddOperationImpl;
+import stringcalculator.operation.DivisionOperationImpl;
 import stringcalculator.operation.MultiplicationOperationImpl;
 import stringcalculator.operation.Operation;
 import stringcalculator.operation.SubtractionOperationImpl;
@@ -51,7 +52,8 @@ public class StringCalculator {
     private static final Map<String, Operation> operations = Map.of(
         "+", new AddOperationImpl(),
         "-", new SubtractionOperationImpl(),
-        "*", new MultiplicationOperationImpl()
+        "*", new MultiplicationOperationImpl(),
+        "/", new DivisionOperationImpl()
     );
 
     public static Operation getOperation(String operator) {
