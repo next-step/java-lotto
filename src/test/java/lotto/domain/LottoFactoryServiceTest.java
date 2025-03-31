@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import lotto.service.LottoFactoryService;
 import lotto.strategy.LottoGenerationStrategy;
+import lotto.strategy.LottoManualStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,5 +41,22 @@ class LottoFactoryServiceTest {
 
         List<Lotto> result = factory.createLottos(0);
         assertThat(result).isEmpty();
+    }
+
+    @Test
+    @DisplayName("수동 전략으로 로또 생성 테스트")
+    void createManualLottos() {
+        List<Integer> manualNumbers = List.of(1, 2, 3, 4, 5, 6);
+        LottoGenerationStrategy strategy = new LottoManualStrategy(manualNumbers);
+        LottoFactoryService factory = new LottoFactoryService(strategy);
+
+        List<Lotto> result = factory.createLottos(1);
+
+        assertThat(result)
+            .hasSize(1)
+            .allSatisfy(
+                lotto -> assertThat(lotto.getLottoNumbers())
+                    .containsExactlyElementsOf(manualNumbers)
+            );
     }
 }
