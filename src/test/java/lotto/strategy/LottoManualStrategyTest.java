@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.Lotto;
 import lotto.exception.LottoGenerationException;
 import lotto.exception.LottoNumberException;
 import lotto.vo.LottoManualTicket;
@@ -12,16 +13,18 @@ import lotto.vo.LottoManualTicket;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+
 class LottoManualStrategyTest {
 
     @Test
     @DisplayName("유효한 수동 입력으로 로또 생성")
     void createWithValidNumbers() {
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoManualStrategy strategy = new LottoManualStrategy(new LottoManualTicket(lottoNumbers));
-        List<Integer> result = strategy.generate().getLottoNumbers();
+        LottoManualStrategy strategy = new LottoManualStrategy(List.of(new LottoManualTicket(lottoNumbers)));
+        List<Lotto> result = strategy.generateLottos();
 
-        assertThat(result)
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getLottoNumbers())
             .containsExactlyElementsOf(lottoNumbers)
             .isSorted();
     }
@@ -38,7 +41,7 @@ class LottoManualStrategyTest {
     void insufficientNumbers_ThrowsException() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5);
 
-        assertThatThrownBy(() -> new LottoManualStrategy(new LottoManualTicket(numbers)).generate())
+        assertThatThrownBy(() -> new LottoManualStrategy(List.of(new LottoManualTicket(numbers))).generateLottos())
             .isInstanceOf(LottoNumberException.class);
     }
 
@@ -47,7 +50,7 @@ class LottoManualStrategyTest {
     void excessiveNumbers_ThrowsException() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
-        assertThatThrownBy(() -> new LottoManualStrategy(new LottoManualTicket(numbers)).generate())
+        assertThatThrownBy(() -> new LottoManualStrategy(List.of(new LottoManualTicket(numbers))).generateLottos())
             .isInstanceOf(LottoNumberException.class);
     }
 
@@ -56,7 +59,7 @@ class LottoManualStrategyTest {
     void outOfRangeNumber_ThrowsException() {
         List<Integer> numbers = List.of(0, 1, 2, 3, 4, 46);
 
-        assertThatThrownBy(() -> new LottoManualStrategy(new LottoManualTicket(numbers)).generate())
+        assertThatThrownBy(() -> new LottoManualStrategy(List.of(new LottoManualTicket(numbers))).generateLottos())
             .isInstanceOf(LottoNumberException.class);
     }
 
@@ -65,7 +68,29 @@ class LottoManualStrategyTest {
     void duplicateNumbers_ThrowsException() {
         List<Integer> numbers = List.of(1, 1, 2, 3, 4, 5);
 
-        assertThatThrownBy(() -> new LottoManualStrategy(new LottoManualTicket(numbers)).generate())
+        assertThatThrownBy(() -> new LottoManualStrategy(List.of(new LottoManualTicket(numbers))).generateLottos())
             .isInstanceOf(LottoNumberException.class);
+    }
+
+    @Test
+    @DisplayName("여러 개의 수동 티켓으로 로또 생성")
+    void createWithMultipleTickets() {
+        List<Integer> numbers1 = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers2 = List.of(7, 8, 9, 10, 11, 12);
+
+        LottoManualStrategy strategy = new LottoManualStrategy(List.of(
+            new LottoManualTicket(numbers1),
+            new LottoManualTicket(numbers2)
+        ));
+
+        List<Lotto> result = strategy.generateLottos();
+
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0).getLottoNumbers())
+            .containsExactlyElementsOf(numbers1)
+            .isSorted();
+        assertThat(result.get(1).getLottoNumbers())
+            .containsExactlyElementsOf(numbers2)
+            .isSorted();
     }
 }

@@ -16,42 +16,32 @@ class LottoFactoryServiceTest {
     @Test
     @DisplayName("지정한 수량만큼 로또 생성되는지 테스트")
     void createCorrectNumberOfLottos() {
-        LottoGenerationStrategy strategy = () -> new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoGenerationStrategy strategy =
+            () -> List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(List.of(1, 2, 3, 4, 7, 8)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 10)),
+                new Lotto(List.of(1, 2, 3, 4, 7, 16)),
+                new Lotto(List.of(1, 2, 3, 14, 15, 26))
+            );
 
         LottoFactoryService factory = new LottoFactoryService(strategy);
         int expectedCount = 5;
 
-        List<Lotto> result = factory.createLottos(expectedCount);
+        List<Lotto> result = factory.generateLottos();
 
         assertThat(result)
-            .hasSize(expectedCount)
-            .allSatisfy(lotto ->
-                assertThat(lotto.getLottoNumbers())
-                    .containsExactly(1, 2, 3, 4, 5, 6)
-            );
-    }
-
-    @Test
-    @DisplayName("0개 요청 시 빈 리스트 반환 테스트")
-    void createZeroLottos() {
-        LottoGenerationStrategy dummyStrategy = () -> {
-            throw new IllegalStateException();
-        };
-
-        LottoFactoryService factory = new LottoFactoryService(dummyStrategy);
-
-        List<Lotto> result = factory.createLottos(0);
-        assertThat(result).isEmpty();
+            .hasSize(expectedCount);
     }
 
     @Test
     @DisplayName("수동 전략으로 로또 생성 테스트")
     void createManualLottos() {
         List<Integer> manualNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoGenerationStrategy strategy = new LottoManualStrategy(new LottoManualTicket(manualNumbers));
+        LottoGenerationStrategy strategy = new LottoManualStrategy(List.of(new LottoManualTicket(manualNumbers)));
         LottoFactoryService factory = new LottoFactoryService(strategy);
 
-        List<Lotto> result = factory.createLottos(1);
+        List<Lotto> result = factory.generateLottos();
 
         assertThat(result)
             .hasSize(1)

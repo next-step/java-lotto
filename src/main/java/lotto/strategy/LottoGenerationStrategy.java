@@ -1,7 +1,9 @@
 package lotto.strategy;
 
+import java.util.List;
+
 import lotto.domain.Lotto;
 
 public interface LottoGenerationStrategy {
-    Lotto generate();
+    List<Lotto> generateLottos();
 }
