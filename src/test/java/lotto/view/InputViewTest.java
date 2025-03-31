@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,6 +26,17 @@ class InputViewTest {
     assertThatThrownBy(inputView::receiveMoney)
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("구매 금액은 숫자여야 합니다.");
+  }
+
+  @DisplayName("숫자가 아닌 수동구매할 로또 수를 입력받는 기능 테스트")
+  @Test
+  void testReceiveManualLottoCount() {
+    String testInput = "notANumber";
+    InputView inputView = new InputView(getTestScanner(testInput));
+
+    assertThatThrownBy(inputView::receiveManualLottoCount)
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("로또 수는 숫자여야 합니다.");
   }
 
   @DisplayName("보너스 볼을 입력받는 기능 테스트")
@@ -74,7 +84,7 @@ class InputViewTest {
     String testInput = "1, 2, 3, 4, 5, 6\n7,8,9,10,11,12\n\n";
     InputView inputView = new InputView(getTestScanner(testInput));
 
-    assertThat(inputView.receiveManualLottos()).allMatch(lottoNumberString ->
+    assertThat(inputView.receiveManualLottos(2)).allMatch(lottoNumberString ->
             List.of(
                     "1, 2, 3, 4, 5, 6", "7,8,9,10,11,12"
             ).contains(lottoNumberString));

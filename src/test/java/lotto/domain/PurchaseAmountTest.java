@@ -37,4 +37,26 @@ class PurchaseAmountTest {
     double profitRate = purchaseAmount.calculateProfitRate(totalPrizeMoney);
     assertEquals(2, profitRate);
   }
+
+  @DisplayName("수동 로또 개수가 총 로또 개수보다 많으면 예외를 발생시킨다.")
+  @Test
+  void testManualLottoCountCannotBeGreaterThanTotalLottoCount() {
+    int money = 14000;
+    int manualLottoCount = 15;
+
+    assertThatThrownBy(() -> new PurchaseAmount(money, manualLottoCount))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("수동 로또 개수가 총 로또 개수보다 많습니다.");
+  }
+
+  @DisplayName("0 미만의 수동 로또 개수로 로또를 구매할 수 없다.")
+  @Test
+  void testManualLottoCountCannotBeNegative() {
+    int money = 14000;
+    int manualLottoCount = -1;
+
+    assertThatThrownBy(() -> new PurchaseAmount(money, manualLottoCount))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("0 미만의 수동 로또 개수로 로또를 구매할 수 없습니다.");
+  }
 }

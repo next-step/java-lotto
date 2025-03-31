@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.utils.LottoNumberParser;
-import lotto.domain.PurchaseAmount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,27 +14,30 @@ public class InputView {
     this.scanner = scanner;
   }
 
-  public PurchaseAmount receiveMoney() {
+  public int receiveMoney() {
     System.out.println("구입금액을 입력해 주세요.");
     try {
-      int money = Integer.parseInt(scanner.nextLine().trim());
-      return new PurchaseAmount(money);
+      return Integer.parseInt(scanner.nextLine().trim());
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException("구매 금액은 숫자여야 합니다.");
     }
   }
 
-  public List<String> receiveManualLottos() {
+  public int receiveManualLottoCount() {
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    try {
+      return Integer.parseInt(scanner.nextLine().trim());
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("로또 수는 숫자여야 합니다.");
+    }
+  }
+
+  public List<String> receiveManualLottos(int count) {
     System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
     List<String> manualLottoNumberList = new ArrayList<>();
-
-    while (true) {
-      String input = scanner.nextLine();
-      if (input.isEmpty()) {
-        break;
-      }
-      manualLottoNumberList.add(input);
+    for (int i = 0; i < count; i++) {
+      manualLottoNumberList.add(scanner.nextLine());
     }
     return manualLottoNumberList;
   }

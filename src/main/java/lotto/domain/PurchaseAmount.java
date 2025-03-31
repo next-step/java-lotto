@@ -2,13 +2,20 @@ package lotto.domain;
 
 public class PurchaseAmount {
   private final int customerMoney;
+  private final int manualLottoCount;
 
   public PurchaseAmount(int value) {
-    validate(value);
-    this.customerMoney = value;
+    this(value, 0);
   }
 
-  private void validate(int value) {
+  public PurchaseAmount(int value, int manualLottoCount) {
+    validateCustomerMoney(value);
+    this.customerMoney = value;
+    validateManualLottoCount(manualLottoCount);
+    this.manualLottoCount = manualLottoCount;
+  }
+
+  private void validateCustomerMoney(int value) {
     if (value < 0) {
       throw new IllegalArgumentException("0 미만의 금액으로 로또를 구매할 수 없습니다.");
     }
@@ -17,11 +24,31 @@ public class PurchaseAmount {
     }
   }
 
-  public int calculateLottoCount() {
+  private void validateManualLottoCount(int manualLottoCount) {
+    if (manualLottoCount < 0) {
+      throw new IllegalArgumentException("0 미만의 수동 로또 개수로 로또를 구매할 수 없습니다.");
+    }
+
+    if (manualLottoCount > calculateTotalLottoCount()) {
+      System.out.println("manualLottoCount = " + manualLottoCount);
+      System.out.println("calculateTotalLottoCount() = " + calculateTotalLottoCount());
+      throw new IllegalArgumentException("수동 로또 개수가 총 로또 개수보다 많습니다.");
+    }
+  }
+
+  public int calculateTotalLottoCount() {
     return customerMoney / Lotto.PRICE;
   }
 
+  public int getManualLottoCount() {
+    return manualLottoCount;
+  }
+
+  public int getAutoLottoCount() {
+    return calculateTotalLottoCount() - manualLottoCount;
+  }
+
   public double calculateProfitRate(int totalPrizeMoney) {
-    return (double) totalPrizeMoney / (Lotto.PRICE * calculateLottoCount());
+    return (double) totalPrizeMoney / (Lotto.PRICE * calculateTotalLottoCount());
   }
 }

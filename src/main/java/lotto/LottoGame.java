@@ -23,7 +23,9 @@ public class LottoGame {
 
   public void play() {
     try {
-      PurchaseAmount purchaseAmount = receiveMoney();
+      int customerMoney = receiveMoney();
+      int manualLottoCount = receiveManualLottoCount();
+      PurchaseAmount purchaseAmount = new PurchaseAmount(customerMoney, manualLottoCount);
       Lottos lottos = buyLottos(purchaseAmount);
       List<LottoNumber> winningLottoNumbers = receiveWinningLottoNumbers();
       LottoNumber bonusNumber = receiveBonusNumber();
@@ -34,13 +36,17 @@ public class LottoGame {
     }
   }
 
-  private PurchaseAmount receiveMoney() {
+  private int receiveMoney() {
     return inputView.receiveMoney();
+  }
+
+  private int receiveManualLottoCount() {
+    return inputView.receiveManualLottoCount();
   }
 
   private Lottos buyLottos(PurchaseAmount purchaseAmount) {
     LottoShop lottoShop = new LottoShop(new RandomLottoGenerator(), inputView);
-    Lottos lottos =  lottoShop.buyLottos(purchaseAmount.calculateLottoCount());
+    Lottos lottos =  lottoShop.buyLottos(purchaseAmount);
     ResultView.printLottoCount(lottos);
     ResultView.printLottos(lottos);
     return lottos;
