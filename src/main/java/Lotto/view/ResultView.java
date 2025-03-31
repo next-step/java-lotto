@@ -14,4 +14,17 @@ public class ResultView {
             System.out.println(lotto.toString());
         }
     }
+
+    public static void printStats(int[] stats) {
+        System.out.println("\n당첨 통계");
+        System.out.println("---------");
+        System.out.println("3개 일치 (5,000원) - " + stats[3] + "개");
+        System.out.println("4개 일치 (50,000원) - " + stats[4] + "개");
+        System.out.println("5개 일치 (1,500,000원) - " + stats[5] + "개");
+        System.out.println("6개 일치 (2,000,000,000원) - " + stats[6] + "개");
+    }
+
+    public static void printProfitRate(double profitRate) {
+        System.out.printf("총 수익률은 %.2f입니다.\n", profitRate);
+    }
 }
