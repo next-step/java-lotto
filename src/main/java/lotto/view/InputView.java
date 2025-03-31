@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.view.model.UserManualLottoInput;
+import lotto.view.model.LottoInput;
 import lotto.view.model.UserMoneyInput;
 import lotto.domain.model.WinningLotto;
 
@@ -19,9 +19,12 @@ public class InputView {
         return UserMoneyInput.from(scanner.nextLine());
     }
 
-    public static UserManualLottoInput getManualLotto() {
+    public static LottoInput getLottoInput() {
+        System.out.println("구입금액을 입력해 주세요.");
+        int purchaseAmount = Integer.parseInt(scanner.nextLine());
+
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int numOfManualLotto = scanner.nextInt();
+        int numOfManualLotto = Integer.parseInt(scanner.nextLine());
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<List<Integer>> manualNums = new ArrayList<>();
@@ -29,7 +32,7 @@ public class InputView {
             manualNums.add(convertStringToInt(scanner.nextLine()));
         }
 
-        return UserManualLottoInput.from(manualNums);
+        return LottoInput.from(purchaseAmount, manualNums);
     }
 
     public static WinningLotto getWinnerInput() {
