@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
 import lotto.view.InputView;
@@ -16,5 +17,9 @@ public class LottoApplication {
     resultView.printLottos(lottoTickets);
 
     Lotto winningNumbers = new Lotto(inputView.readPreviousNumbers());
+    Map<Integer, Integer> statistics = lottoTickets.calculateWinningStatistics(winningNumbers);
+    double profitRate = lottoTickets.calculateProfitRate(statistics);
+
+    resultView.printWinningStatistics(statistics, profitRate);
   }
 }
