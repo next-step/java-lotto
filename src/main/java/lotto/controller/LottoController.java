@@ -26,7 +26,7 @@ public class LottoController {
         String input = inputview.readWinningNumbers();
         WinningNumbers winningNumbers = WinningNumbersParser.parse(input);
         int bonusNumber = inputview.readBonusNumber();
-        LottoResult lottoResult = lottoResultsService.calculateResult(tickets, winningNumbers, purchaseAmount);
+        LottoResult lottoResult = lottoResultsService.calculateResult(tickets, winningNumbers, bonusNumber, purchaseAmount);
         resultView.printLottoResult(lottoResult);
     }
 }
