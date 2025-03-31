@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 
 import lotto.domain.Lotto;
-import lotto.dto.LottoStatisticsDTO;
+import lotto.vo.LottoStatisticsValue;
 import lotto.domain.LottoStatistics;
 
 import static java.util.Collections.reverse;
@@ -33,7 +33,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        List<LottoStatisticsDTO> report = statistics.getLottoStatisticsDTOs();
+        List<LottoStatisticsValue> report = statistics.getLottoStatisticsDTOs();
         reverse(report);
         report.stream()
             .map(dto -> String.format(RESULT_FORMAT, dto.getPrizeLevel().getMessage(), dto.getCount()))

@@ -1,14 +1,14 @@
-package lotto.dto;
+package lotto.vo;
 
 import java.util.Objects;
 
 import lotto.domain.PrizeLevel;
 
-public class LottoStatisticsDTO {
+public class LottoStatisticsValue {
     private final PrizeLevel prizeLevel;
     private final int count;
 
-    public LottoStatisticsDTO(PrizeLevel prizeLevel, int count) {
+    public LottoStatisticsValue(PrizeLevel prizeLevel, int count) {
         this.prizeLevel = prizeLevel;
         this.count = count;
     }
@@ -25,7 +25,7 @@ public class LottoStatisticsDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoStatisticsDTO that = (LottoStatisticsDTO) o;
+        LottoStatisticsValue that = (LottoStatisticsValue) o;
         return count == that.count && prizeLevel == that.prizeLevel;
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.dto.LottoStatisticsDTO;
+import lotto.vo.LottoStatisticsValue;
 import lotto.service.LottoCheckerService;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,11 +18,11 @@ class LottoCheckerServiceTest {
         LottoStatistics stats = new LottoCheckerService(winningLotto).check(List.of());
 
         assertThat(stats.getLottoStatisticsDTOs()).containsExactly(
-            new LottoStatisticsDTO(PrizeLevel.FIRST, 0),
-            new LottoStatisticsDTO(PrizeLevel.SECOND, 0),
-            new LottoStatisticsDTO(PrizeLevel.THIRD, 0),
-            new LottoStatisticsDTO(PrizeLevel.FOURTH, 0),
-            new LottoStatisticsDTO(PrizeLevel.FIFTH, 0)
+            new LottoStatisticsValue(PrizeLevel.FIRST, 0),
+            new LottoStatisticsValue(PrizeLevel.SECOND, 0),
+            new LottoStatisticsValue(PrizeLevel.THIRD, 0),
+            new LottoStatisticsValue(PrizeLevel.FOURTH, 0),
+            new LottoStatisticsValue(PrizeLevel.FIFTH, 0)
         );
     }
 
@@ -41,11 +41,11 @@ class LottoCheckerServiceTest {
         LottoStatistics stats = new LottoCheckerService(winningLotto).check(lottos);
 
         assertThat(stats.getLottoStatisticsDTOs()).containsExactly(
-            new LottoStatisticsDTO(PrizeLevel.FIRST, 1),
-            new LottoStatisticsDTO(PrizeLevel.SECOND, 1),
-            new LottoStatisticsDTO(PrizeLevel.THIRD, 1),
-            new LottoStatisticsDTO(PrizeLevel.FOURTH, 1),
-            new LottoStatisticsDTO(PrizeLevel.FIFTH, 1)
+            new LottoStatisticsValue(PrizeLevel.FIRST, 1),
+            new LottoStatisticsValue(PrizeLevel.SECOND, 1),
+            new LottoStatisticsValue(PrizeLevel.THIRD, 1),
+            new LottoStatisticsValue(PrizeLevel.FOURTH, 1),
+            new LottoStatisticsValue(PrizeLevel.FIFTH, 1)
         );
     }
 }
