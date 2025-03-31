@@ -1,7 +1,6 @@
 package lotto.type;
 
-import lotto.strategy.pick.NumberPickStrategy;
-import lotto.strategy.shuffle.ShuffleStrategy;
+import lotto.strategy.LottoCreateStrategy;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,17 +32,17 @@ public class LottoNumbers {
     this.value = lottoNumbers;
   }
 
-  public static LottoNumbers generate(ShuffleStrategy shuffleStrategy, NumberPickStrategy randomNumberPickStrategy) {
+  public static LottoNumbers generate(LottoCreateStrategy lottoCreateStrategy) {
     List<LottoNumber> res = new ArrayList<>();
 
     while (res.size() < LOTTO_SIZE) {
-      LottoNumber newLottoNumber = LottoNumber.createRandomNumber(randomNumberPickStrategy);
+      LottoNumber newLottoNumber = LottoNumber.createRandomNumber(lottoCreateStrategy);
       if (!res.contains(newLottoNumber)) {
         res.add(newLottoNumber);
       }
     }
 
-    res = shuffleStrategy.shuffle(res);
+    res = lottoCreateStrategy.shuffle(res);
     res = res.subList(0, LOTTO_SIZE);
     Collections.sort(res);
 

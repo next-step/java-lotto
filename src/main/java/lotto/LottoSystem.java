@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.strategy.pick.RandomNumberPickStrategy;
-import lotto.strategy.shuffle.CollectionsShuffleStrategy;
+import lotto.strategy.DefaultLottoCreateStrategy;
 import lotto.type.LottoNumber;
 import lotto.type.LottoNumbers;
 import lotto.type.LottoNumbersBundle;
@@ -25,7 +24,7 @@ public class LottoSystem {
     LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle(
         toCreateLottoCount,
         manualLottoNumbersBundle,
-        new LottoCreateStrategyContext(new RandomNumberPickStrategy(), new CollectionsShuffleStrategy())
+        new DefaultLottoCreateStrategy()
     );
 
     showLottoCount(toCreateLottoCount, manualLottoNumbersBundle.size());

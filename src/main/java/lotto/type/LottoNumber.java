@@ -1,7 +1,7 @@
 package lotto.type;
 
 
-import lotto.strategy.pick.NumberPickStrategy;
+import lotto.strategy.LottoCreateStrategy;
 
 import java.util.Objects;
 
@@ -18,8 +18,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     this.value = value;
   }
 
-  public static LottoNumber createRandomNumber(NumberPickStrategy numberPickStrategy) {
-    return new LottoNumber(numberPickStrategy.pick(LOTTO_MIN_NUM, LOTTO_MAX_NUM));
+  public static LottoNumber createRandomNumber(LottoCreateStrategy lottoCreateStrategy) {
+    return new LottoNumber(lottoCreateStrategy.pick(LOTTO_MIN_NUM, LOTTO_MAX_NUM));
   }
 
   @Override

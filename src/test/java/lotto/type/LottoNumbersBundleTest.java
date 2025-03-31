@@ -1,8 +1,6 @@
 package lotto.type;
 
-import lotto.LottoCreateStrategyContext;
-import lotto.strategy.pick.RandomNumberPickStrategy;
-import lotto.strategy.shuffle.ShuffleStrategy;
+import lotto.strategy.LottoCreateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +25,7 @@ class LottoNumbersBundleTest {
   @DisplayName("생성자 테스트2")
   @Test
   public void constructorTest2() {
-    ShuffleStrategy shuffleStrategyStub = lottoNumbers -> lottoNumbers;
-    RandomNumberPickStrategy randomNumberPickStrategyStub = new RandomNumberPickStrategy() {
+    LottoCreateStrategy lottoCreateStrategyStub = new LottoCreateStrategy() {
       private final Iterator<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6).iterator();
 
       @Override
@@ -38,12 +35,14 @@ class LottoNumbersBundleTest {
         }
         return numbers.next();
       }
+
+      @Override
+      public List<LottoNumber> shuffle(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers;
+      }
     };
 
-    LottoNumbersBundle bundle = new LottoNumbersBundle(
-        1,
-        new LottoCreateStrategyContext(randomNumberPickStrategyStub, shuffleStrategyStub)
-    );
+    LottoNumbersBundle bundle = new LottoNumbersBundle(1, lottoCreateStrategyStub);
 
     assertThat(bundle).isEqualTo(new LottoNumbersBundle(List.of(new LottoNumbers("1, 2, 3, 4, 5, 6"))));
   }
@@ -51,8 +50,7 @@ class LottoNumbersBundleTest {
   @DisplayName("생성자 테스트3")
   @Test
   public void constructorTest3() {
-    ShuffleStrategy shuffleStrategyStub = lottoNumbers -> lottoNumbers;
-    RandomNumberPickStrategy randomNumberPickStrategyStub = new RandomNumberPickStrategy() {
+    LottoCreateStrategy lottoCreateStrategyStub = new LottoCreateStrategy() {
       private final Iterator<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6).iterator();
 
       @Override
@@ -62,12 +60,17 @@ class LottoNumbersBundleTest {
         }
         return numbers.next();
       }
+
+      @Override
+      public List<LottoNumber> shuffle(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers;
+      }
     };
 
     LottoNumbersBundle bundle = new LottoNumbersBundle(
         1,
         List.of("20, 21, 22, 23, 24, 25"),
-        new LottoCreateStrategyContext(randomNumberPickStrategyStub, shuffleStrategyStub)
+        lottoCreateStrategyStub
     );
 
     assertThat(bundle).isEqualTo(new LottoNumbersBundle(
