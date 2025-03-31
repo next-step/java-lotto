@@ -80,4 +80,17 @@ class LottoTicketsTest {
 
         assertThat(lottoTickets.income(winningLotto)).isEqualTo(100_000);
     }
+
+    @Test
+    @DisplayName("로또 티켓 컬렉션은 자동 발급된 티켓 수를 반환한다.")
+    void createNumbersByMachine() {
+        assertThat(tickets.countAutoTickets()).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("로또 티켓 컬렉션은 수동 발급된 티켓 수를 반환한다.")
+    void createNumbersByUser() {
+        LottoTicket manualTicket = new LottoTicket(false, List.of(1, 2, 3, 4, 5, 6));
+        assertThat(new LottoTickets(List.of(manualTicket)).countManualTickets()).isEqualTo(1);
+    }
 }
