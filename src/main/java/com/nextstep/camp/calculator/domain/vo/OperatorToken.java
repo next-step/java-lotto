@@ -12,11 +12,11 @@ public class OperatorToken implements ExpressionToken {
 
     private final String value;
 
-    public final static OperatorToken PLUS = new OperatorToken("+", false);
-    public final static OperatorToken MINUS = new OperatorToken("-", false);
-    public final static OperatorToken MULTIPLY = new OperatorToken("*", false);
-    public final static OperatorToken DIVIDE = new OperatorToken("/", false);
-    private final static Set<String> OPERATOR_TOKENS = new HashSet<>();
+    public static final OperatorToken PLUS = new OperatorToken("+", false);
+    public static final OperatorToken MINUS = new OperatorToken("-", false);
+    public static final OperatorToken MULTIPLY = new OperatorToken("*", false);
+    public static final OperatorToken DIVIDE = new OperatorToken("/", false);
+    private static final Set<String> OPERATOR_TOKENS = new HashSet<>();
 
     static {
         OPERATOR_TOKENS.add(PLUS.value);
