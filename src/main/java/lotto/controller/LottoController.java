@@ -23,9 +23,12 @@ public class LottoController {
         int purchaseAmount = inputview.readPurchaseAmount();
         LottoTickets tickets = lottoMachine.issue(purchaseAmount);
         resultView.printLottoTickets(tickets);
-        String input = inputview.readWinningNumbers();
-        WinningNumbers winningNumbers = WinningNumbersParser.parse(input);
+
+        String winningNumbersInput = inputview.readWinningNumbers();
+        WinningNumbers winningNumbers = WinningNumbersParser.parse(winningNumbersInput);
         int bonusNumber = inputview.readBonusNumber();
+        winningNumbers.setBonusNumber(bonusNumber);
+
         LottoResult lottoResult = lottoResultsService.calculateResult(tickets, winningNumbers, bonusNumber, purchaseAmount);
         resultView.printLottoResult(lottoResult);
     }
