@@ -7,11 +7,12 @@ import com.nextstep.camp.common.utils.StringUtils;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 public class ExpressionTokens {
 
-    private final LinkedList<ExpressionToken> values;
+    private final Queue<ExpressionToken> values;
 
     private static final String DEFAULT_DELIMITER = " ";
     private static final int MINIMUM_SIZE = 3;
