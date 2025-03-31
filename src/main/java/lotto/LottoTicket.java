@@ -25,9 +25,11 @@ public class LottoTicket {
   }
 
   private List<LottoTicketNumber> generateLottoTicket() {
-    List<LottoTicketNumber> shuffledNumbers = new ArrayList<>(ALL_LOTTO_NUMBERS); // 변경 가능한 리스트
-    Collections.shuffle(shuffledNumbers); // 무작위 섞기
-    return shuffledNumbers.subList(0, LOTTO_NUMBER_COUNT); // 6개의 번호 선택
+    List<LottoTicketNumber> shuffledNumbers = new ArrayList<>(ALL_LOTTO_NUMBERS);
+    Collections.shuffle(shuffledNumbers);
+    List<LottoTicketNumber> selectedNumbers = shuffledNumbers.subList(0, LOTTO_NUMBER_COUNT);
+    Collections.sort(selectedNumbers);
+    return selectedNumbers;
   }
 
   public List<LottoTicketNumber> getLottoNumbers() {

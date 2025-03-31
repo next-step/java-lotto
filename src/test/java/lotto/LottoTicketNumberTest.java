@@ -25,6 +25,5 @@ class LottoTicketNumberTest {
         () -> assertThatThrownBy(() -> new LottoTicketNumber(LottoTicketNumber.getMaxBound() + 1))
             .isInstanceOf(IllegalArgumentException.class)
     );
-
   }
 }

@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.Random;
 
-public class LottoTicketNumber {
+public class LottoTicketNumber implements Comparable<LottoTicketNumber> {
 
   private static final int MIN_BOUND = 1;
   private static final int MAX_BOUND = 45;
@@ -29,6 +29,11 @@ public class LottoTicketNumber {
     if (number < MIN_BOUND || number > MAX_BOUND) {
       throw new IllegalArgumentException("로또 번호는 1~45 사이여야 합니다.");
     }
+  }
+
+  @Override
+  public int compareTo(LottoTicketNumber other) {
+    return this.number.compareTo(other.number);
   }
 
   @Override
