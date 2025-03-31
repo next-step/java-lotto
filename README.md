@@ -21,8 +21,8 @@ LottoNumber
 - [x] 로또 숫자는 1에서 45 사이의 숫자를 가진다.
 
 WinningLotto
-- [ ] 당첨 로또는 Lotto와 보너스숫자인 LottoNumber 하나를 가진다.
-- [ ] 점검할 로또를 받아 로또 등수(LottoRank)를 돌려줄 수 있다.
+- [x] 당첨 로또는 Lotto와 보너스숫자인 LottoNumber 하나를 가진다.
+- [x] 점검할 로또를 받아 로또 등수(LottoRank)를 돌려줄 수 있다.
  
 
 LottoRank

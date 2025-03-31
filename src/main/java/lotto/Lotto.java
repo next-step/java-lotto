@@ -57,4 +57,16 @@ public class Lotto {
                 .sorted()
                 .toArray();
     }
+
+    public int getMatchCount(Lotto lotto) {
+        Set<LottoNumber> intersection = new HashSet<>(lottoNumbers);
+        intersection.retainAll(lotto.lottoNumbers);
+        return intersection.size();
+    }
+
+    public boolean isMatchedBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+
 }
