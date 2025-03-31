@@ -1,17 +1,29 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
 
-  private List<Integer> numbers = new ArrayList<>();
+  private LottoNumbers lottoNumbers = new LottoNumbers();
+  private int bonusNumber;
 
   public WinningLotto(List<Integer> numbers) {
-    this.numbers = numbers;
+    lottoNumbers.createLottoNumbers(numbers);
   }
 
-  public int matchingWinningNumber(Lotto lotto) {
-    return lotto.findCount(numbers);
+  public WinningLotto(List<Integer> numbers, int bonusNumber) {
+    lottoNumbers.createLottoNumbers(numbers);
+    this.bonusNumber = bonusNumber;
+
+  }
+
+  public PRIZES matchingWinningNumber(Lotto lotto) {
+    int count = lottoNumbers.findCount(lotto);
+    boolean containBonusBall = isContainBonusBall();
+    return PRIZES.valueOf(count, containBonusBall);
+  }
+
+  public boolean isContainBonusBall() {
+    return lottoNumbers.containBonusBall(bonusNumber);
   }
 }

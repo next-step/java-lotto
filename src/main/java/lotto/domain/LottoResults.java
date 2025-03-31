@@ -7,21 +7,19 @@ public class LottoResults {
 
   private List<LottoResult> lottoResults = new ArrayList<>();
 
-  public LottoResults() {
-
-  }
+  public LottoResults() { }
 
   public LottoResults(List<LottoResult> lottoResults) {
     this.lottoResults = lottoResults;
   }
 
 
-  public long calculateTotalWinningCount() {
+  public long calculateTotalWinning(WinningLotto winningLotto) {
     return lottoResults.stream()
         .mapToLong(
-            result -> PRIZES.getWinningMoneyByWinningNumber(result.getWinningsNumber()) * result
-                .getTotalWinningCount())
+            result -> result.calculateWinning(winningLotto))
         .sum();
+
   }
 
   public LottoResult findLottoResult(int count) {

@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoChecker;
-import lotto.domain.LottoResult;
 import lotto.domain.PRIZES;
 
 public class ResultView {
@@ -17,10 +16,18 @@ public class ResultView {
     System.out.println("당첨 통계");
     System.out.println("---------");
 
-    for(int i = 3; i < 7; i++){
+    for (int i = 3; i < 7; i++) {
 
       int totalWinningCount = getTotalWinningCount(lottoChecker, i);
-      System.out.println( i + "개 일치 (" + PRIZES.getWinningMoneyByWinningNumber(i) + "원)- " + totalWinningCount  + "개");
+      System.out.println(
+          i + "개 일치 (" + PRIZES.valueOf(i, false).getWinningMoney() + "원)- "
+              + totalWinningCount + "개");
+
+      if(i == 5){
+        System.out.println(
+            i + "개 일치 (" + PRIZES.valueOf(i, true).getWinningMoney() + "원)- "
+                + totalWinningCount + "개");
+      }
     }
 
     System.out.printf("총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)\n",

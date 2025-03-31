@@ -25,12 +25,14 @@ public enum PRIZES {
     return winningMoney;
   }
 
+  public static PRIZES valueOf(int winningsNumber, boolean matchBonus) {
+    if (winningsNumber == 5) {
+      return matchBonus ? SECOND : THIRD;
+    }
 
-  public static int getWinningMoneyByWinningNumber(int winningsNumber) {
     return Arrays.stream(values())
-        .filter(prize -> prize.winningsNumber == winningsNumber)
+        .filter(prizes -> prizes.winningsNumber == winningsNumber)
         .findFirst()
-        .map(PRIZES::getWinningMoney)
-        .orElse(0);
+        .orElse(MISS);
   }
 }

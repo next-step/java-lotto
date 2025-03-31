@@ -73,14 +73,12 @@ class LottoCheckerTest {
 
     LottoChecker resultChecker = lottoChecker.calculateResults(lottos, winningLotto, purchaseAmount);
 
-    // Then
     assertThat(resultChecker.findTotalWinningCount(6)).isEqualTo(1);
   }
 
   @Test
   @DisplayName("총 수익률 계산이 정상적으로 이루어지는지 검증")
   void calculateProfitRate() {
-    // Given
     List<Lotto> lottos = List.of(
         new Lotto(List.of(1, 2, 3, 4, 5, 6)),
         new Lotto(List.of(1, 2, 3, 4, 5, 7))
@@ -90,9 +88,27 @@ class LottoCheckerTest {
     LottoChecker resultChecker = lottoChecker.calculateResults(lottos, winningLotto, purchaseAmount);
     double profitRate = resultChecker.getProfitRate();
 
-    long expectedWinning = PRIZES.getWinningMoneyByWinningNumber(6) * 1
-        + PRIZES.getWinningMoneyByWinningNumber(5) * 1;
+    long expectedWinning = PRIZES.valueOf(6, winningLotto.isContainBonusBall()).getWinningMoney()
+        + PRIZES.valueOf(5, winningLotto.isContainBonusBall()).getWinningMoney();
 
     assertThat(profitRate).isEqualTo((double) expectedWinning / purchaseAmount);
+  }
+
+  @Test
+  @DisplayName("보너스 번호 매칭 검증")
+  void bonusNumber(){
+    int bonusNumber = 7;
+    List<Lotto> lottos = List.of(
+        new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+        new Lotto(List.of(1, 2, 3, 4, 5, 7))
+    );
+
+    int purchaseAmount = 2000;
+    winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), bonusNumber);
+    LottoChecker lottoChecker = this.lottoChecker
+        .calculateResults(lottos, winningLotto, purchaseAmount);
+
+    assertThat(lottoChecker.findTotalWinningCount(5)).isEqualTo(1);
+
   }
 }

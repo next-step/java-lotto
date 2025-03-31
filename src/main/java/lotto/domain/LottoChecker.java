@@ -12,12 +12,13 @@ public class LottoChecker {
 
     checkPurchaseAmount(purchaseAmount);
 
+    PRIZES prizes = null;
     for (Lotto lotto : lottos) {
-      int winningCount = winningLotto.matchingWinningNumber(lotto);
-      updateWinningCount(winningCount);
+      prizes = winningLotto.matchingWinningNumber(lotto);
+      updateWinningCount(prizes.getWinningsNumber());
     }
 
-    this.profitRate = calculateProfitRate(purchaseAmount);
+    this.profitRate = calculateProfitRate(purchaseAmount, winningLotto);
     return this;
   }
 
@@ -27,12 +28,12 @@ public class LottoChecker {
     }
   }
 
-  private double calculateProfitRate(int purchaseAmount) {
+  private double calculateProfitRate(int purchaseAmount, WinningLotto winningLotto) {
     if (purchaseAmount == 0) {
       return 0.0;
     }
 
-    long totalWinning = lottoResults.calculateTotalWinningCount();
+    long totalWinning = lottoResults.calculateTotalWinning(winningLotto);
 
     return (double) totalWinning / purchaseAmount;
   }
