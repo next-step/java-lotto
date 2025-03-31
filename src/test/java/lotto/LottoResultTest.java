@@ -4,7 +4,6 @@ import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static lotto.util.LottoNumberConverter.toLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
