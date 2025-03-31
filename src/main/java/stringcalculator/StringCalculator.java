@@ -25,8 +25,13 @@ public class StringCalculator {
 
   private static List<String> parseValidTokens(String input) {
 
-    List<String> tokens = Arrays.asList(input.split(DELIMITER));
     if (input == null || input.isEmpty()) {
+      throw new IllegalArgumentException();
+    }
+
+    List<String> tokens = Arrays.asList(input.split(DELIMITER));
+
+    if (tokens.size() < 3) {
       throw new IllegalArgumentException();
     }
 
