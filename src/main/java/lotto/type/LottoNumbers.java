@@ -36,7 +36,7 @@ public class LottoNumbers {
     List<LottoNumber> res = new ArrayList<>();
 
     while (res.size() < LOTTO_SIZE) {
-      LottoNumber newLottoNumber = LottoNumber.createRandomNumber(lottoCreateStrategy);
+      LottoNumber newLottoNumber = LottoNumber.byStrategy(lottoCreateStrategy);
       if (!res.contains(newLottoNumber)) {
         res.add(newLottoNumber);
       }

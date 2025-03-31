@@ -18,7 +18,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     this.value = value;
   }
 
-  public static LottoNumber createRandomNumber(LottoCreateStrategy lottoCreateStrategy) {
+  public static LottoNumber byStrategy(LottoCreateStrategy lottoCreateStrategy) {
     return new LottoNumber(lottoCreateStrategy.pick(LOTTO_MIN_NUM, LOTTO_MAX_NUM));
   }
 

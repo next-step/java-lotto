@@ -38,6 +38,6 @@ class LottoNumberTest {
       }
     };
 
-    assertThat(LottoNumber.createRandomNumber(lottoCreateStrategyStub)).isEqualTo(new LottoNumber(1));
+    assertThat(LottoNumber.byStrategy(lottoCreateStrategyStub)).isEqualTo(new LottoNumber(1));
   }
 }

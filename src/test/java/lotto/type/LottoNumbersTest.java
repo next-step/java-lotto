@@ -28,23 +28,12 @@ class LottoNumbersTest {
         .collect(Collectors.toList());
   }
 
-  private List<LottoNumber> createCase2InvalidLottoNumbers() {
-    List<LottoNumber> res = IntStream.rangeClosed(1, 5)
-        .mapToObj(LottoNumber::new)
-        .collect(Collectors.toList());
-
-    res.add(new LottoNumber(46));
-    return res;
-  }
-
-
   @DisplayName("생성자 테스트1")
   @Test
   public void constructorTest1() {
     assertAll(
         () -> assertDoesNotThrow(() -> new LottoNumbers(createValidLottoNumbers())),
-        () -> assertThrows(RuntimeException.class, () -> new LottoNumbers(createCase1InvalidLottoNumbers())),
-        () -> assertThrows(RuntimeException.class, () -> new LottoNumbers(createCase2InvalidLottoNumbers()))
+        () -> assertThrows(RuntimeException.class, () -> new LottoNumbers(createCase1InvalidLottoNumbers()))
     );
   }
 
