@@ -8,13 +8,13 @@ import com.nextstep.camp.calculator.domain.vo.OperatorToken;
 
 public class OperatorNode implements ExpressionNode {
 
-    private final ExpressionToken operatorToken;
+    private final OperatorToken operatorToken;
     private final ExpressionNode left;
     private final ExpressionNode right;
 
     private OperatorNode(ExpressionToken operatorToken, ExpressionNode left, ExpressionNode right) {
         validate(operatorToken, left, right);
-        this.operatorToken = operatorToken;
+        this.operatorToken = (OperatorToken) operatorToken;
         this.left = left;
         this.right = right;
     }
@@ -39,19 +39,7 @@ public class OperatorNode implements ExpressionNode {
     public int evaluate() {
         int l = left.evaluate();
         int r = right.evaluate();
-        if (operatorToken.equals(OperatorToken.PLUS)) {
-            return l + r;
-        }
-        if (operatorToken.equals(OperatorToken.MINUS)) {
-            return l - r;
-        }
-        if (operatorToken.equals(OperatorToken.MULTIPLY)) {
-            return l * r;
-        }
-        if (operatorToken.equals(OperatorToken.DIVIDE)) {
-            return l / r;
-        }
-        throw new UnsupportedOperatorException();
+        return operatorToken.operate(l, r);
     }
 
     @Override

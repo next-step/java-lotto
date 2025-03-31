@@ -45,6 +45,22 @@ public class OperatorToken implements ExpressionToken {
         return new OperatorToken(value, true);
     }
 
+    public int operate(int left, int right) {
+        if (this.equals(PLUS)) {
+            return left + right;
+        }
+        if (this.equals(MINUS)) {
+            return left - right;
+        }
+        if (this.equals(MULTIPLY)) {
+            return left * right;
+        }
+        if (this.equals(DIVIDE)) {
+            return left / right;
+        }
+        throw new UnsupportedOperatorException();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
