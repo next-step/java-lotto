@@ -7,7 +7,7 @@ import static lotto.common.Constants.LOTTO_NUMBER_LOWER_BOUND;
 import static lotto.common.Constants.LOTTO_NUMBER_UPPER_BOUND;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private int number;
+    private final int number;
     
     public LottoNumber(int number){
         validateNumber(number);
