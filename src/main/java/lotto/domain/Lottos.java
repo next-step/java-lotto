@@ -10,13 +10,18 @@ public class Lottos {
     private final List<Lotto> values;
 
     public Lottos(int lottoCount) {
-        this.values = Stream.generate(Lotto::new)
-                .limit(lottoCount)
-                .collect(Collectors.toList());
+        this(lottoCount, List.of());
     }
 
     public Lottos(List<Lotto> values) {
-        this.values = values;
+        this(0, values);
+    }
+
+    public Lottos(int autoCount, List<Lotto> manualLottoNumbers) {
+        this.values = Stream.concat(
+                manualLottoNumbers.stream(),
+                Stream.generate(Lotto::new).limit(autoCount)
+        ).collect(Collectors.toList());
     }
 
     public Rewards getResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {

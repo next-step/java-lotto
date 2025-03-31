@@ -14,8 +14,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoCount(int count) {
-        System.out.printf("%d개를 구매했습니다.%n", count);
+    public static void printLottoCount(int totalCount, int manualCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, totalCount-manualCount);
     }
 
     public static void printLottos(Lottos lottos) {
