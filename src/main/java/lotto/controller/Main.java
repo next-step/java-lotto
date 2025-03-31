@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         int money = InputView.getMoney();
-        List<String> manuelLottoNumbers = InputView.getManuelCount();
+        List<String> manuelLottoNumbers = InputView.getManuelLottos();
 
         LottoRequest request;
         try {
