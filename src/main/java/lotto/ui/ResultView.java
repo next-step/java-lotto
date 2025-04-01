@@ -11,7 +11,7 @@ public class ResultView {
 
     public static void viewLottoTickets(LottoGame lottoGame) {
         for (LottoTicket ticket : lottoGame.getTickets().getLottoTickets()) {
-            System.out.println("["  + String.join(", ", ticket.getLottoNumbers().stream()
+            System.out.println("[" + String.join(", ", ticket.getLottoNumbers().stream()
                     .map(String::valueOf)
                     .toArray(String[]::new)) + "]");
         }
@@ -23,21 +23,19 @@ public class ResultView {
         System.out.println("---------");
         for (Rank rank : Rank.values()) {
             if (rank != Rank.MISS) {
-                System.out.printf("%d개 일치 (%d원)- %d개%n",
-                        rank.getCountOfMatch(), rank.getWinningMoney(), gameResult.getResultStats().get(rank));
+                System.out.printf("%d개 일치", rank.getCountOfMatch());
+                if (rank.getBonusMatch()) {
+                    System.out.print(", 보너스 볼 일치 ");
+                }
+                System.out.printf("(%d원)- %d개%n",
+                        rank.getWinningMoney(), gameResult.getResultStats().get(rank));
+
             }
         }
-
         System.out.printf("총 수익률은 %.2f입니다.%n",
                 gameResult.getReturnRate(), gameResult.getReturnRate() < 1 ? "손해" : "이익");
 
     }
 
-    public static void printListWithCommas(List<Integer> list) {
-        // 리스트의 요소를 문자열로 변환 후 ", "로 연결
-        System.out.println(String.join(", ", list.stream()
-                .map(String::valueOf)
-                .toArray(String[]::new)));
-    }
 
 }

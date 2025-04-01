@@ -45,11 +45,21 @@ public class LottoTickets {
         return results;
     }
 
-    public Map<Rank, Integer> match(LottoTicket winningTicket) {
+    public GameResult match(WinningLottoTicket winningTicket) {
         Map<Rank, Integer> results = initializeResults();
         lottoTickets.stream()
-                .map(ticket -> Rank.getRankByMatchCount(ticket.matchLottoNumbers(winningTicket)))
+                .map(ticket -> Rank.getRankByMatchCount(winningTicket.matchLottoNumbers(ticket), winningTicket.hasBonusMatch(ticket)))
                 .forEach(rank -> results.merge(rank, 1, Integer::sum));
-        return results;
+        return new GameResult(results, calculateReturnRate(results));
     }
+
+    private double calculateReturnRate(Map<Rank, Integer> results) {
+        int totalSpent = lottoTickets.size() * LOTTO_PRICE; // 로또 구매 비용 계산
+        int totalWon = results.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getWinningMoney() * entry.getValue())
+                .sum();
+        return (double) totalWon / totalSpent;
+    }
+
+
 }
