@@ -1,5 +1,7 @@
 package lotto.domain.product;
 
+import lotto.domain.Quantity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -32,9 +34,9 @@ public class LotteryTickets {
         return finalResult;
     }
 
-    public static LotteryTickets makeAutoTickets(Integer count) {
+    public static LotteryTickets makeAutoTickets(Quantity auto) {
         LotteryTickets lotteryTickets = new LotteryTickets();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < auto.value(); i++) {
             lotteryTickets.add(new LotteryTicket());
         }
         return lotteryTickets;

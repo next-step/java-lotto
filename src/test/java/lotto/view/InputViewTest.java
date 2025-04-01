@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.PaymentReceipt;
+import lotto.domain.Quantity;
 import lotto.domain.product.LotteryTicket;
 import lotto.domain.product.LottoNumber;
 import lotto.domain.product.LottoRank;
@@ -25,9 +26,9 @@ public class InputViewTest {
     public void countLottoTest() {
         FakeInputView inputView = new FakeInputView("10000");
 
-        Integer count = new PaymentReceipt(inputView.read())
-                .getUserCountBy(new LotteryTicket());
-        assertThat(count).isEqualTo(10);
+        Quantity count = new PaymentReceipt(inputView.read())
+                .getQuantityAbout(new LotteryTicket());
+        assertThat(count).isEqualTo(new Quantity(10));
     }
 
     @Test

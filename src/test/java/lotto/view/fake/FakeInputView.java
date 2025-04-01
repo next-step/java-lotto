@@ -2,7 +2,9 @@ package lotto.view.fake;
 
 
 import lotto.domain.PaymentReceipt;
+import lotto.domain.Quantity;
 import lotto.domain.product.LotteryTicket;
+import lotto.domain.product.LotteryTickets;
 import lotto.domain.product.LottoNumber;
 import lotto.domain.product.WinningTicket;
 import lotto.view.input.BaseInputView;
@@ -36,6 +38,20 @@ public class FakeInputView extends BaseInputView {
     @Override
     public LottoNumber getBonusNumber() {
         return LottoNumber.of(4);
+    }
+
+    @Override
+    public Quantity getManualLotteryQuantity() {
+        return new Quantity(this.input);
+    }
+
+    @Override
+    public LotteryTickets getManualLotteryTickets(Quantity manual) {
+        LotteryTickets lotteryTickets = new LotteryTickets();
+        for (int i = 0; i < manual.value(); i++) {
+            lotteryTickets.add(getTicket(this.input));
+        }
+        return lotteryTickets;
     }
 
     public Integer parseInt() {
