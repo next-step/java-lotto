@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -22,7 +21,7 @@ class WinningNumbersTest {
 
         //when&then
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumbers(winningNumbers))
+                .isThrownBy(() -> new WinningNumbers(winningNumbers, bonusNumber))
                 .withMessageContaining("당첨 번호는 6개여야 합니다.");
 
     }
@@ -39,7 +38,7 @@ class WinningNumbersTest {
             }
         };
         LottoTicket ticket = new LottoTicket(fixedNumberGenerationStrategy);
-        WinningNumbers winningNumbers = new WinningNumbers(numbers);
+        WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
         //when
         LottoPrize lottoPrize = winningNumbers.determineLottoPrize(ticket);
@@ -62,7 +61,7 @@ class WinningNumbersTest {
     @DisplayName("보너스볼이 당첨번호와 중복되면 에러를 던진다.")
     void duplicateThrow() {
         //given
-        WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6), bonusNumber);
         int bonusNumber = 6;
 
         // when & then

@@ -7,8 +7,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Parser {
-    public static WinningNumbers parseWinningNumbers(String input) {
-        return new WinningNumbers(parseNumberSet(input));
+    public static WinningNumbers parseWinningNumbers(String input, int bonusNumber) {
+        return new WinningNumbers(parseNumberSet(input), bonusNumber);
     }
 
     public static Set<Integer> parseNumberSet(String input) {
