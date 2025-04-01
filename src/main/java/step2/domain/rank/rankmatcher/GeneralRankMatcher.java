@@ -1,10 +1,9 @@
 package step2.domain.rank.rankmatcher;
 
-import step2.domain.rank.RankMatcher;
 import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoNumbers;
 import step2.domain.lotto.WinningLotto;
-
-import java.util.Set;
+import step2.domain.rank.RankMatcher;
 
 public class GeneralRankMatcher implements RankMatcher {
     private final int requiredMatches;
@@ -15,7 +14,7 @@ public class GeneralRankMatcher implements RankMatcher {
 
     @Override
     public boolean matches(WinningLotto winningLotto, Lotto lotto) {
-        Set<Integer> matchedNumbers = winningLotto.matchedWith(lotto);
+        LottoNumbers matchedNumbers = winningLotto.matchedWith(lotto);
         return matchedNumbers.size() == requiredMatches;
     }
 }

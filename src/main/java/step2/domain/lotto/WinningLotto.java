@@ -2,8 +2,6 @@ package step2.domain.lotto;
 
 import step2.domain.rank.RankType;
 
-import java.util.Set;
-
 public class WinningLotto {
     private final Lotto winningLotto;
     private final Integer bonusNumber;
@@ -17,11 +15,11 @@ public class WinningLotto {
         this(winningLotto, null);
     }
 
-    public Set<Integer> matchedWith(Lotto lotto) {
+    public LottoNumbers matchedWith(Lotto lotto) {
         return winningLotto.matchedWith(lotto);
     }
 
-    public Set<Integer> notMatchedWith(Lotto lotto) {
+    public LottoNumbers notMatchedWith(Lotto lotto) {
         return winningLotto.notMatchedWith(lotto);
     }
 
@@ -44,7 +42,7 @@ public class WinningLotto {
         return candidateRank.matches(this, lotto);
     }
 
-    public boolean isBonusNumberPresent(Set<Integer> number) {
+    public boolean isBonusNumberPresent(LottoNumbers number) {
         return number.contains(this.bonusNumber);
     }
 }

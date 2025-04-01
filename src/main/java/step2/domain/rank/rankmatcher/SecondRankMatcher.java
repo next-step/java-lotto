@@ -1,10 +1,9 @@
 package step2.domain.rank.rankmatcher;
 
-import step2.domain.rank.RankMatcher;
 import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoNumbers;
 import step2.domain.lotto.WinningLotto;
-
-import java.util.Set;
+import step2.domain.rank.RankMatcher;
 
 public class SecondRankMatcher implements RankMatcher {
 
@@ -13,17 +12,17 @@ public class SecondRankMatcher implements RankMatcher {
 
     @Override
     public boolean matches(WinningLotto winningLotto, Lotto lotto) {
-        Set<Integer> matchedNumbers = winningLotto.matchedWith(lotto);
-        Set<Integer> notMatchedNumbers = winningLotto.notMatchedWith(lotto);
+        LottoNumbers matchedNumbers = winningLotto.matchedWith(lotto);
+        LottoNumbers notMatchedNumbers = winningLotto.notMatchedWith(lotto);
 
         return checkMatchedNumbers(matchedNumbers) && checkBonusNumbers(notMatchedNumbers, winningLotto);
     }
 
-    private boolean checkBonusNumbers(Set<Integer> notMatchedNumbers, WinningLotto winningLotto) {
+    private boolean checkBonusNumbers(LottoNumbers notMatchedNumbers, WinningLotto winningLotto) {
         return notMatchedNumbers.size() == BONUS_NUMBER_COUNT && winningLotto.isBonusNumberPresent(notMatchedNumbers);
     }
 
-    private boolean checkMatchedNumbers(Set<Integer> matchedNumbers) {
+    private boolean checkMatchedNumbers(LottoNumbers matchedNumbers) {
         return matchedNumbers.size() == TOTAL_NUMBERS_DRAWN - BONUS_NUMBER_COUNT;
     }
 }
