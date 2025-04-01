@@ -1,6 +1,4 @@
-package step2.domain.lotto;
-
-import views.LottoFormatter;
+package views;
 
 import java.util.List;
 

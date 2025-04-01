@@ -2,6 +2,7 @@ package step2.domain;
 
 import step2.domain.lotto.*;
 import step2.domain.rank.Rank;
+import views.LottoContainerFormatter;
 
 import java.util.List;
 

@@ -59,8 +59,8 @@
 ### 3단계
 - [ ] 2단계 피드백
   - [x] LottoGameApplication 상수 적용
+  - [x] LottoContainerFormatter 패키지 위치 조정
   - [ ] Rank 객체가 RankFormatter 객체를 의존하지 않도록 변경
-  - [ ] LottoContainerFormatter 패키지 위치 조정
   - [ ] LottoGameApplication 에서 ResultView 에게 결과 출력 메시지를 전달
 - [ ] 보너스 볼 추가
   - [ ] 보너스 볼을 입력받아 당첨 통계에 추가
