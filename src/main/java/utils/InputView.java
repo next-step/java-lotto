@@ -31,9 +31,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputManualLottoCount() {
+    public static int inputManualLottoCount() {
         System.out.println(MANUAL_LOTTO_COUNT_INPUT_MESSAGE);
-        return scanner.nextLine();
+        return toInt(scanner.nextLine());
     }
 
     public static List<String> inputManualLotto(int count) {
