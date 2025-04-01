@@ -39,5 +39,8 @@ public class StringCalculatorTest {
         assertThatIllegalArgumentException().isThrownBy(() -> StringCalculator.calculate(input));
     }
 
-
+    @Test
+    public void invalidOperation() {
+        assertThatIllegalArgumentException().isThrownBy(() -> StringCalculator.calculate("1 % 2"));
+    }
 }
