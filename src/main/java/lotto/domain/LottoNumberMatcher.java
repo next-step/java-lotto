@@ -7,9 +7,9 @@ import java.util.Map;
 public class LottoNumberMatcher {
 
     private List<LottoNumbers> lottoNumbers;
-    private LottoNumbers winningLottoNumbers;
+    private WinningLottoNumbers winningLottoNumbers;
 
-    public LottoNumberMatcher(List<LottoNumbers> lottoNumbers, LottoNumbers winningLottoNumbers) {
+    public LottoNumberMatcher(List<LottoNumbers> lottoNumbers, WinningLottoNumbers winningLottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         this.winningLottoNumbers = winningLottoNumbers;
     }
@@ -23,7 +23,7 @@ public class LottoNumberMatcher {
 
     private void calculateMatchStats(Map<LottoRank, Integer> rank) {
         lottoNumbers.forEach(lottoNumber -> {
-            LottoRank lottoRank = lottoNumber.lottoRank(winningLottoNumbers);
+            LottoRank lottoRank = winningLottoNumbers.lottoRank(lottoNumber);
             rank.put(lottoRank, rank.get(lottoRank) + 1);
         });
     }

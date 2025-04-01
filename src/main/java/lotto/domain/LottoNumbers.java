@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumberGenerator.NUMBER_COUNT;
-
 public class LottoNumbers {
+
+    public static final int NUMBER_COUNT = 6;
 
     private List<LottoNumber> numbers;
 
     public LottoNumbers() {
-        this(LottoNumberGenerator.generate());
+        this(LottoNumberGenerator.generate(NUMBER_COUNT));
     }
 
     public LottoNumbers(LottoNumbers lottoNumbers) {
@@ -21,10 +21,9 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<LottoNumber> numbers) {
-        validate(numbers);
+        validate(numbers, NUMBER_COUNT);
 
-        this.numbers = numbers
-                .stream()
+        this.numbers = numbers.stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -50,9 +49,9 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    private void validate(List<LottoNumber> numbers) {
-        if( numbers == null || numbers.size() != NUMBER_COUNT) {
-            throw new IllegalArgumentException("숫자가 빈값이거나, 개수가 맞지 않습니다.");
+    public static void validate(List<LottoNumber> numbers, int numberCount) {
+        if( numbers == null || numbers.size() != numberCount) {
+            throw new IllegalArgumentException("숫자가 빈값이거나, 개수가 맞지 않습니다. " + numbers + ", " + numberCount);
         }
 
         Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);
@@ -65,12 +64,5 @@ public class LottoNumbers {
         return numbers;
     }
 
-    public LottoRank lottoRank(LottoNumbers lottoWinningNumbers) {
-        Set<LottoNumber> numberSet = new HashSet<>(numbers);
-        int match = (int) lottoWinningNumbers.numbers()
-                .stream()
-                .filter(numberSet::contains)
-                .count();
-        return LottoRank.fromMatch(match);
-    }
+
 }
