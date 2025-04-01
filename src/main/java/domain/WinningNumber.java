@@ -4,27 +4,27 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static domain.Lotto.LOTTO_MAX_NUMBER;
-import static domain.Lotto.LOTTO_MIN_NUMBER;
+import static domain.LottoNumber.LOTTO_MAX_NUMBER;
+import static domain.LottoNumber.LOTTO_MIN_NUMBER;
 
 public class WinningNumber {
-    private final List<Integer> numbers;
-    private final int bonusNumber;
+    private final LottoNumbers numbers;
+    private final LottoNumber bonusNumber;
 
     public WinningNumber(String numberInput, String bonusNumberInput) {
         List<Integer> inputNumbers = fromNumberInput(numberInput);
         int bonusNumber = fromBonusNumberInput(bonusNumberInput);
         validate(inputNumbers, bonusNumber);
-        this.numbers = inputNumbers;
-        this.bonusNumber = bonusNumber;
+        this.numbers = new LottoNumbers(inputNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public boolean containsNumbers(int lottoNumber) {
+    public boolean containsNumbers(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 
-    public boolean matchBonusNumber(int lottoNumber) {
-        return bonusNumber == lottoNumber;
+    public boolean matchBonusNumber(LottoNumber lottoNumber) {
+        return bonusNumber.equals(lottoNumber);
     }
 
     private List<Integer> fromNumberInput(String input) {
@@ -39,13 +39,7 @@ public class WinningNumber {
     }
 
     private void validate(List<Integer> numbers, int bonusNumber) {
-        validateDuplicateNumbers(numbers);
         validateBonusNumber(numbers, bonusNumber);
-    }
-
-    private void validateNumbers(List<Integer> numbers) {
-        validateDuplicateNumbers(numbers);
-
     }
 
     private void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
@@ -57,12 +51,4 @@ public class WinningNumber {
         }
     }
 
-    private void validateDuplicateNumbers(List<Integer> numbers) {
-        List<Integer> distinctNumbers = numbers.stream()
-                .distinct()
-                .collect(Collectors.toList());
-        if (distinctNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException("당첨번호는 중복될 수 없습니다.");
-        }
-    }
 }
