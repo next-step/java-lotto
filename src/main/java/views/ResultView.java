@@ -18,9 +18,16 @@ public class ResultView {
         RankCounter rankCounters = lottoGameResult.getRankCounters();
         printMessage("당첨 통계\n---------");
         for (RankType rank : RankType.validValues()) {
-            RankFormatter rankFormatter = rank.generateFormatter();
-            String formattedRankInformation = rankFormatter.format("%d개 일치 (%d)원");
-            String rankDisplayMessage = String.format("%s - %d개", formattedRankInformation, rankCounters.getCount(rank));
+            String additionalDescription = rank.getAdditionalDescription();
+            RankFormatter rankFormatter = new RankFormatter(rank);
+
+            String format = "%d개 일치 (%d)원";
+            if (additionalDescription != null) {
+                format = "%d개 일치, " + additionalDescription + " (%d)원";
+            }
+
+            String formattedRankInformation = rankFormatter.format(format);
+            String rankDisplayMessage = String.format("%s- %d개", formattedRankInformation, rankCounters.getCount(rank));
             printMessage(rankDisplayMessage);
         }
     }

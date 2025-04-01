@@ -17,9 +17,9 @@ public class LottoGame {
         this.purchasedLotto = generatelottoContainer();
     }
 
-    public LottoGameResult play(List<Integer> winningNumbers) {
+    public LottoGameResult play(List<Integer> winningNumbers, Integer bonusNumber) {
         Lotto lotto = new Lotto(winningNumbers, lottoRule);
-        WinningLotto winningLotto = new WinningLotto(lotto);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
         List<RankType> ranks = this.purchasedLotto.checkWinningResults(winningLotto);
         return new LottoGameResult(ranks);
     }

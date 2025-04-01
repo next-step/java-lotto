@@ -4,7 +4,6 @@ import step2.domain.lotto.Lotto;
 import step2.domain.lotto.WinningLotto;
 import step2.domain.rank.rankmatcher.GeneralRankMatcher;
 import step2.domain.rank.rankmatcher.SecondRankMatcher;
-import views.RankFormatter;
 
 import java.util.EnumSet;
 
@@ -34,12 +33,19 @@ public enum RankType {
         return winnings * count;
     }
 
-    public RankFormatter generateFormatter() {
-        return new RankFormatter(this.requiredMatches, this.winnings);
-    }
-
     public static RankType[] validValues() {
         return EnumSet.complementOf(EnumSet.of(NO_RANK)).toArray(new RankType[0]);
     }
 
+    public int getRequiredMatches() {
+        return requiredMatches;
+    }
+
+    public long getWinnings() {
+        return winnings;
+    }
+
+    public String getAdditionalDescription() {
+        return rankMatcher.getAdditionalDescription();
+    }
 }

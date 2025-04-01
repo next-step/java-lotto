@@ -38,7 +38,8 @@ public class LottoGameApplication {
 
     private static LottoGameResult playLottoRound(LottoGame lottoGame) {
         List<Integer> winningNumbers = InputView.promptForIntegerList("지난 주 당첨 번호를 입력해 주세요.", ",");
-        return lottoGame.play(winningNumbers);
+        Integer bonusNumber = InputView.promptForInteger("보너스 볼을 입력해 주세요.");
+        return lottoGame.play(winningNumbers, bonusNumber);
     }
 
     private static LottoGame setUpLottoGame(LottoCount lottoCount) {

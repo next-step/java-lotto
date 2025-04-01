@@ -12,6 +12,7 @@ import java.util.List;
 
 class LottoGameResultTest {
 
+    public static final Integer BONUS_NUMBER = 7;
     private static final List<Integer> WINNING_NUMBERS = List.of(1, 2, 3, 4, 5, 6);
     private static final LottoRule LOTTO_RULE = new LottoRule(1, 6, 6);
 
@@ -24,7 +25,7 @@ class LottoGameResultTest {
 
         // when
         LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
-        LottoGameResult lottoGameResult = lottoGame.play(WINNING_NUMBERS);
+        LottoGameResult lottoGameResult = lottoGame.play(WINNING_NUMBERS, BONUS_NUMBER);
 
         // then
         Assertions.assertThat(lottoGameResult.lottoCount()).isEqualTo(expected);
@@ -38,7 +39,7 @@ class LottoGameResultTest {
         LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
         LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
-        LottoGameResult result = lottoGame.play(WINNING_NUMBERS);
+        LottoGameResult result = lottoGame.play(WINNING_NUMBERS, BONUS_NUMBER);
 
         int actual = 0;
         for (RankType rank: RankType.values()) {
@@ -56,7 +57,7 @@ class LottoGameResultTest {
         LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
         LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
-        LottoGameResult result = lottoGame.play(WINNING_NUMBERS);
+        LottoGameResult result = lottoGame.play(WINNING_NUMBERS, BONUS_NUMBER);
 
         long actual = result.getWinningsSum();
         long expected = RankType.FIRST.getTotalWinnings(10);

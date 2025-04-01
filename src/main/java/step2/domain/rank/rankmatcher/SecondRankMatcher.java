@@ -18,6 +18,11 @@ public class SecondRankMatcher implements RankMatcher {
         return checkMatchedNumbers(matchedNumbers) && checkBonusNumbers(notMatchedNumbers, winningLotto);
     }
 
+    @Override
+    public String getAdditionalDescription() {
+        return "보너스 볼 일치";
+    }
+
     private boolean checkBonusNumbers(LottoNumbers notMatchedNumbers, WinningLotto winningLotto) {
         return notMatchedNumbers.size() == BONUS_NUMBER_COUNT && winningLotto.isBonusNumberPresent(notMatchedNumbers);
     }

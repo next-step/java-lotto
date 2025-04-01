@@ -17,4 +17,9 @@ public class GeneralRankMatcher implements RankMatcher {
         LottoNumbers matchedNumbers = winningLotto.matchedWith(lotto);
         return matchedNumbers.size() == requiredMatches;
     }
+
+    @Override
+    public String getAdditionalDescription() {
+        return null;
+    }
 }
