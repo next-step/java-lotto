@@ -9,15 +9,15 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         int money = InputView.inputMoney();
-        LottoList lottoList = LottoMachine.buyLotto(money);
-        ResultView.printLottoList(lottoList);
+        Lottos lottos = LottoMachine.buyLotto(money);
+        ResultView.printLottoList(lottos);
 
         String rawWinningLotto = InputView.inputWinningLotto();
         int rawBonusNum = InputView.inputBonusNumber();
 
         WinningLotto winningLotto = new WinningLotto(LottoMachine.createLotto(rawWinningLotto), new LottoNum(rawBonusNum));
 
-        LottoResult lottoResult = lottoList.getLottoResult(winningLotto);
+        LottoResult lottoResult = lottos.getLottoResult(winningLotto);
         ResultView.printLottoResult(lottoResult);
 
     }

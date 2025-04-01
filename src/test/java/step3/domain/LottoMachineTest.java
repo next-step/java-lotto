@@ -2,16 +2,14 @@ package step3.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoMachineTest {
 
     @Test
     void 가격만큼_로또_생성() {
-        LottoList lottoList = LottoMachine.buyLotto(14000);
-        assertThat(lottoList.getLottoList()).hasSize(14);
+        Lottos lottos = LottoMachine.buyLotto(14000);
+        assertThat(lottos.getLottos()).hasSize(14);
     }
 
     @Test

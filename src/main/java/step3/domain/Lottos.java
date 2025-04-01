@@ -3,21 +3,21 @@ package step3.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoList {
-    private final List<Lotto> lottoList;
+public class Lottos {
+    private final List<Lotto> lottos;
 
-    public LottoList(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public LottoResult getLottoResult(WinningLotto winningLotto) {
-        List<Rank> rankList = lottoList.stream()
+        List<Rank> rankList = lottos.stream()
                 .map(lotto -> lotto.getRank(winningLotto))
                 .collect(Collectors.toList());
         return new LottoResult(rankList);
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

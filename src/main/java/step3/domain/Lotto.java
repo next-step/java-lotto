@@ -7,27 +7,17 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final LottoNumSet lottoNumSet;
+    private final LottoNums lottoNums;
 
-    public Lotto(LottoNumSet lottoNumSet) {
-        this.lottoNumSet = lottoNumSet;
+    public Lotto(LottoNums lottoNums) {
+        this.lottoNums = lottoNums;
     }
 
     public static Lotto of(int... lottoNums) {
         List<LottoNum> lottoNumList = Arrays.stream(lottoNums)
                 .mapToObj(LottoNum::new)
                 .collect(Collectors.toList());
-        return new Lotto(new LottoNumSet(lottoNumList));
-    }
-
-    public int getMatchCount(Lotto other) {
-        return (int) this.lottoNumSet.getLottoNumSet().stream()
-                .filter(other.lottoNumSet::contains)
-                .count();
-    }
-
-    public boolean containsBonus(LottoNum bonusNum) {
-        return this.lottoNumSet.contains(bonusNum);
+        return new Lotto(new LottoNums(lottoNumList));
     }
 
     public Rank getRank(WinningLotto winningLotto) {
@@ -37,10 +27,20 @@ public class Lotto {
     }
 
     public List<LottoNum> sortedNumbers() {
-        return new ArrayList<>(lottoNumSet.getLottoNumSet())
+        return new ArrayList<>(lottoNums.getLottoNums())
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    public int getMatchCount(Lotto other) {
+        return (int) this.lottoNums.getLottoNums().stream()
+                .filter(other.lottoNums::contains)
+                .count();
+    }
+
+    public boolean containsBonus(LottoNum bonusNum) {
+        return this.lottoNums.contains(bonusNum);
     }
 
     @Override
@@ -48,11 +48,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumSet, lotto.lottoNumSet);
+        return Objects.equals(lottoNums, lotto.lottoNums);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(lottoNumSet);
+        return Objects.hashCode(lottoNums);
     }
 }

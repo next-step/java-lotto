@@ -2,13 +2,13 @@ package step3.domain;
 
 import java.util.*;
 
-public class LottoNumSet {
+public class LottoNums {
     public static final int LOTTO_NUM_COUNT = 6;
-    private final Set<LottoNum> lottoNumSet;
+    private final Set<LottoNum> lottoNums;
 
-    public LottoNumSet(List<LottoNum> lottoNums) {
+    public LottoNums(List<LottoNum> lottoNums) {
         validateLottoNums(lottoNums);
-        this.lottoNumSet = new HashSet<>(lottoNums);
+        this.lottoNums = new HashSet<>(lottoNums);
     }
 
     private void validateLottoNums(List<LottoNum> lottoNums) {
@@ -21,24 +21,24 @@ public class LottoNumSet {
     }
 
     public boolean contains(LottoNum lottoNum) {
-        return lottoNumSet.contains(lottoNum);
+        return lottoNums.contains(lottoNum);
     }
 
 
-    public Set<LottoNum> getLottoNumSet() {
-        return lottoNumSet;
+    public Set<LottoNum> getLottoNums() {
+        return lottoNums;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumSet that = (LottoNumSet) o;
-        return Objects.equals(lottoNumSet, that.lottoNumSet);
+        LottoNums that = (LottoNums) o;
+        return Objects.equals(lottoNums, that.lottoNums);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(lottoNumSet);
+        return Objects.hashCode(lottoNums);
     }
 }

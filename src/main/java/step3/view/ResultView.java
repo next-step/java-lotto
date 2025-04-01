@@ -1,7 +1,7 @@
 package step3.view;
 
 import step3.domain.Lotto;
-import step3.domain.LottoList;
+import step3.domain.Lottos;
 import step3.domain.LottoResult;
 import step3.domain.Rank;
 
@@ -9,8 +9,8 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void printLottoList(LottoList lottoList) {
-        List<Lotto> lottos = lottoList.getLottoList();
+    public static void printLottoList(Lottos lottoList) {
+        List<Lotto> lottos = lottoList.getLottos();
 
         System.out.println(lottos.size() + "개를 구매했습니다");
         for (Lotto lotto : lottos) {

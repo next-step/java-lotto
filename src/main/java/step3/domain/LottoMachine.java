@@ -8,20 +8,21 @@ public class LottoMachine {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private static Lotto createRandomLotto() {
-        LottoNumSet lottoNumSet = LottoNumSetGenerator.generateRandomSet();
-        return new Lotto(lottoNumSet);
-    }
-
-    public static LottoList buyLotto(int money) {
+    public static Lottos buyLotto(int money) {
         List<Lotto> lottoList = IntStream.rangeClosed(1, money / LOTTO_PRICE)
                 .mapToObj(e -> createRandomLotto())
                 .collect(Collectors.toList());
-        return new LottoList(lottoList);
+        return new Lottos(lottoList);
     }
 
+    private static Lotto createRandomLotto() {
+        LottoNums lottoNums = LottoNumSetGenerator.generateRandomSet();
+        return new Lotto(lottoNums);
+    }
+
+
     public static Lotto createLotto(String lottoNumsInput) {
-        LottoNumSet lottoNumSet = LottoNumSetGenerator.generateSet(lottoNumsInput);
-        return new Lotto(lottoNumSet);
+        LottoNums lottoNums = LottoNumSetGenerator.generateSet(lottoNumsInput);
+        return new Lotto(lottoNums);
     }
 }

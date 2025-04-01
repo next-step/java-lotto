@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 import static step3.domain.LottoNum.MAX_LOTTO_NUM;
 import static step3.domain.LottoNum.MIN_LOTTO_NUM;
-import static step3.domain.LottoNumSet.LOTTO_NUM_COUNT;
+import static step3.domain.LottoNums.LOTTO_NUM_COUNT;
 
 public class LottoNumSetGenerator {
     private static final List<LottoNum> ALL_LOTTO_NUM =
@@ -16,16 +16,16 @@ public class LottoNumSetGenerator {
                     .mapToObj(LottoNum::new)
                     .collect(Collectors.toList());
 
-    public static LottoNumSet generateRandomSet() {
+    public static LottoNums generateRandomSet() {
         Collections.shuffle(ALL_LOTTO_NUM);
-        return new LottoNumSet(ALL_LOTTO_NUM.subList(0, LOTTO_NUM_COUNT));
+        return new LottoNums(ALL_LOTTO_NUM.subList(0, LOTTO_NUM_COUNT));
     }
 
-    public static LottoNumSet generateSet(String lottoNumsInput) {
+    public static LottoNums generateSet(String lottoNumsInput) {
         List<LottoNum> lottoNums = Arrays.stream(lottoNumsInput.split(","))
                 .map(Integer::parseInt)
                 .map(LottoNum::new)
                 .collect(Collectors.toList());
-        return new LottoNumSet(lottoNums);
+        return new LottoNums(lottoNums);
     }
 }
