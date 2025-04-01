@@ -4,11 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD
 import java.util.List;
 
-=======
->>>>>>> b847f65dfce15b439c84d02eeab3a33e63efafbf
 public class WinningNumbersTest {
     @Test
     @DisplayName("빈 당첨 번호를 생성할 수 없다.")
@@ -36,7 +33,6 @@ public class WinningNumbersTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-<<<<<<< HEAD
     @Test
     @DisplayName("로또 티켓을 받아 매치 카운트 정보를 반환한다.")
     void matchCount() {
@@ -61,6 +57,4 @@ public class WinningNumbersTest {
         Assertions.assertThat(summary).isNotNull();
     }
 
-=======
->>>>>>> b847f65dfce15b439c84d02eeab3a33e63efafbf
 }
