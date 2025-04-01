@@ -15,21 +15,21 @@ public class LottoResult {
     this.totalWinningCount = totalWinningCount;
   }
 
-  public int getWinningsNumber() {
-    return winningsNumber;
-  }
-
-  public int getTotalWinningCount() {
-    return totalWinningCount;
-  }
-
   public void increaseTotalWinningCount() {
     this.totalWinningCount++;
   }
 
   public long calculateWinning(WinningLotto winningLotto) {
-    return
-        (long) PRIZES.valueOf(winningsNumber, winningLotto.isContainBonusBall()).getWinningMoney()
-            * totalWinningCount;
+    return PRIZES.valueOf(winningsNumber, winningLotto.isContainBonusBall())
+        .calculateWinning(totalWinningCount);
+  }
+
+  public int matchesWinningCount(int winningNumber) {
+    if(this.winningsNumber == winningNumber) return totalWinningCount;
+    return -1;
+  }
+
+  public boolean matchesWinningNumber(int count) {
+    return winningsNumber == count;
   }
 }

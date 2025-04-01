@@ -7,8 +7,9 @@ import lotto.domain.PRIZES;
 
 public class ResultView {
 
-  public static void showLottos(List<Lotto> tickets) {
-    System.out.println(tickets.size() + "개를 구매했습니다.");
+  public static void showLottos(List<Lotto> tickets, int passivityTicketCount,
+      int automaticTicketCount) {
+    System.out.println("수동으로" + passivityTicketCount + "장, 자동으로" + automaticTicketCount + "개를 구매했습니다.");
     tickets.forEach(ticket -> System.out.println(ticket.getLottoNumbers()));
   }
 
@@ -23,7 +24,7 @@ public class ResultView {
           i + "개 일치 (" + PRIZES.valueOf(i, false).getWinningMoney() + "원)- "
               + totalWinningCount + "개");
 
-      if(i == 5){
+      if (i == 5) {
         System.out.println(
             i + "개 일치 (" + PRIZES.valueOf(i, true).getWinningMoney() + "원)- "
                 + totalWinningCount + "개");

@@ -7,7 +7,8 @@ public class LottoResults {
 
   private List<LottoResult> lottoResults = new ArrayList<>();
 
-  public LottoResults() { }
+  public LottoResults() {
+  }
 
   public LottoResults(List<LottoResult> lottoResults) {
     this.lottoResults = lottoResults;
@@ -24,7 +25,7 @@ public class LottoResults {
 
   public LottoResult findLottoResult(int count) {
     return lottoResults.stream()
-        .filter(result -> result.getWinningsNumber() == count)
+        .filter(result -> result.matchesWinningNumber(count))
         .findFirst()
         .orElse(null);
   }
@@ -35,8 +36,8 @@ public class LottoResults {
 
   public int findTotalWinningCount(int winningNumber) {
     return lottoResults.stream()
-        .filter(result -> result.getWinningsNumber() == winningNumber)
-        .mapToInt(LottoResult::getTotalWinningCount)
+        .mapToInt(result -> result.matchesWinningCount(winningNumber))
+        .filter(count -> count != -1)
         .findFirst()
         .orElse(0);
   }

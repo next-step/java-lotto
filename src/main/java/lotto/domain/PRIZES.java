@@ -18,9 +18,6 @@ public enum PRIZES {
     this.winningMoney = winningMoney;
   }
 
-  public int getWinningsNumber() {
-    return winningsNumber;
-  }
   public int getWinningMoney() {
     return winningMoney;
   }
@@ -34,5 +31,18 @@ public enum PRIZES {
         .filter(prizes -> prizes.winningsNumber == winningsNumber)
         .findFirst()
         .orElse(MISS);
+  }
+
+  public long calculateWinning(int totalWinningCount) {
+    return (long) winningMoney * totalWinningCount;
+  }
+
+  public void updateWinningCount(LottoResults lottoResults) {
+    LottoResult existingResult = lottoResults.findLottoResult(winningsNumber);
+    if (existingResult != null) {
+      existingResult.increaseTotalWinningCount();
+    } else {
+      lottoResults.addLottoResult(winningsNumber);
+    }
   }
 }

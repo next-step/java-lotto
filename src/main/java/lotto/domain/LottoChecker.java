@@ -15,7 +15,7 @@ public class LottoChecker {
     PRIZES prizes = null;
     for (Lotto lotto : lottos) {
       prizes = winningLotto.matchingWinningNumber(lotto);
-      updateWinningCount(prizes.getWinningsNumber());
+      prizes.updateWinningCount(lottoResults);
     }
 
     this.profitRate = calculateProfitRate(purchaseAmount, winningLotto);
@@ -36,15 +36,6 @@ public class LottoChecker {
     long totalWinning = lottoResults.calculateTotalWinning(winningLotto);
 
     return (double) totalWinning / purchaseAmount;
-  }
-
-  private void updateWinningCount(int winningCount) {
-    LottoResult existingResult = lottoResults.findLottoResult(winningCount);
-    if (existingResult != null) {
-      existingResult.increaseTotalWinningCount();
-    } else {
-      lottoResults.addLottoResult(winningCount);
-    }
   }
 
   public int findTotalWinningCount(int winningNumber) {
