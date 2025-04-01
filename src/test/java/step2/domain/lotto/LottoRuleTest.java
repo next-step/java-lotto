@@ -27,4 +27,17 @@ public class LottoRuleTest {
                 .doesNotHaveDuplicates()
                 .allSatisfy(number -> Assertions.assertThat(number).isBetween(MIN_NUMBER, MAX_NUMBER));
     }
+
+    @DisplayName("로또 번호 중복 입력 검증")
+    @Test
+    void validateDuplicateLottoNumbers() {
+        // given
+        LottoRule lottoRule = new LottoRule(MIN_NUMBER, MAX_NUMBER, SIZE);
+        List<Integer> duplicateLottoNumbers = List.of(1, 2, 3, 4, 5, 5);
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> new Lotto(duplicateLottoNumbers, lottoRule))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("규칙을 만족하지 않는 숫자 입력입니다");
+    }
 }

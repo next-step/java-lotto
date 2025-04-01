@@ -1,8 +1,6 @@
 package step2.domain.lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoRule {
 
@@ -20,12 +18,31 @@ public class LottoRule {
     }
 
     public boolean isSatisfied(List<Integer> lottoNumbers) {
+        if (containsOutOfRangeNumber(lottoNumbers)) return false;
+        if (hasDuplicated(lottoNumbers)) return false;
+
+        return hasCorrectSize(lottoNumbers);
+    }
+
+    private boolean hasCorrectSize(List<Integer> lottoNumbers) {
+        return lottoNumbers.size() == size;
+    }
+
+    private boolean hasDuplicated(List<Integer> lottoNumbers) {
+        Set<Integer> numberSet = new HashSet<>(lottoNumbers);
+        if (numberSet.size() != lottoNumbers.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean containsOutOfRangeNumber(List<Integer> lottoNumbers) {
         for (int number : lottoNumbers) {
             if (number < minNumber || maxNumber < number) {
-                return false;
+                return true;
             }
         }
-        return lottoNumbers.size() == size;
+        return false;
     }
 
     public List<Integer> generateLotto() {
