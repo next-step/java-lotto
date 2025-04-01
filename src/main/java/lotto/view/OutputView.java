@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Division;
 import lotto.domain.Lotto;
+import lotto.domain.LottoAmount;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -18,12 +19,26 @@ public class OutputView {
         printStringMap.put(Division.FIRST, "6개 일치 (2000000000원)- ");
     }
 
+    public static void printManualInputHeader() {
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printPurchaseList(LottoAmount manualLottoAmount, List<Lotto> lottos) {
+        System.out.println("수동으로 " + manualLottoAmount.getValue() + "장, 자동으로 "
+                + (lottos.size() - manualLottoAmount.getValue()) + "개를 구매했습니다.");
+        for (Lotto lotto: lottos) {
+            System.out.println(lotto.getNumbers());
+        }
+        System.out.println();
+    }
+
     public static void printPurchaseList(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
         for (Lotto lotto: lottos) {
             System.out.println(lotto.getNumbers());
         }
-         System.out.println();
+        System.out.println();
     }
 
     public static void printWinningResult(Map<Division, Integer> winnerCountMap) {
