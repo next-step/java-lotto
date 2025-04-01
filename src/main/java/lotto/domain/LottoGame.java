@@ -6,19 +6,22 @@ import java.util.Map;
 public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
 
-    private final int count;
     private final Lottos lottos;
     private Map<Division, Integer> winnerCountMap;
 
     public LottoGame(int money) {
         validateMoney(money);
-        count = money / LOTTO_PRICE;
-        lottos = new Lottos(count);
+        lottos = new Lottos(money / LOTTO_PRICE);
     }
 
     public LottoGame(Lottos lottos) {
-        count = lottos.size();
         this.lottos = lottos;
+    }
+
+    public LottoGame(int money, List<Lotto> lottos) {
+        validateMoney(money);
+        LottoAmount quickPickAmount = new LottoAmount(money / LOTTO_PRICE - lottos.size());
+        this.lottos = new Lottos(lottos, quickPickAmount);
     }
 
     private void validateMoney(int money) {
@@ -38,9 +41,9 @@ public class LottoGame {
     public double calculateEarningRate() {
         int earning = 0;
         for (Map.Entry<Division, Integer> entry: winnerCountMap.entrySet()) {
-           earning += entry.getKey().getPrize() * entry.getValue();
+            earning += entry.getKey().getPrize() * entry.getValue();
         }
-        return (double)earning / (count * LOTTO_PRICE);
+        return (double)earning / (lottos.size() * LOTTO_PRICE);
     }
 
     public List<Lotto> getLottos() {

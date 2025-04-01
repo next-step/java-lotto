@@ -5,17 +5,22 @@ import java.util.*;
 public class Lottos {
     private List<Lotto> lottos;
 
-    public Lottos(int count) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < count; ++i) {
-            lottos.add(Lotto.createQuickPick());
-        }
+    public Lottos(int quickPickAmount) {
+        this(Collections.emptyList(), new LottoAmount(quickPickAmount));
     }
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>();
+        this(lottos, new LottoAmount(0));
+    }
+
+    public Lottos(List<Lotto> lottos, LottoAmount quickPickAmount) {
+        this.lottos = new ArrayList<Lotto>();
         for (int i = 0; i < lottos.size(); ++i) {
             this.lottos.add(lottos.get(i));
+        }
+        for (int i = 0; quickPickAmount.isNotEqual(i); ++i) {
+            System.out.println(quickPickAmount.getValue());
+            this.lottos.add(Lotto.createQuickPick());
         }
     }
 

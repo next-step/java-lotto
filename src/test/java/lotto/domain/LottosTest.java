@@ -31,6 +31,15 @@ class LottosTest {
                         Lotto.createManually(Arrays.asList(3, 5, 8, 9, 23, 35))
                 );
 
+        assertThat(new Lottos(
+                Arrays.asList(
+                        Lotto.createManually(Arrays.asList(6, 5, 4, 3, 2, 1)),
+                        Lotto.createManually(Arrays.asList(35, 23, 5, 9, 3, 8))
+                ), new LottoAmount(3)
+        ))
+                .extracting("lottos")
+                .asList()
+                .hasSize(5);
     }
 
     @DisplayName("로또 여러 개 비교 후 순위 개수 리스트 생성 테스트")
