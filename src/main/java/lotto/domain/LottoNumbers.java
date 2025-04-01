@@ -13,7 +13,7 @@ public class LottoNumbers {
     private List<LottoNumber> numbers;
 
     public LottoNumbers() {
-        this(LottoNumberGenerator.generate(NUMBER_COUNT));
+        this(LottoNumberGenerator.generate());
     }
 
     public LottoNumbers(LottoNumbers lottoNumbers) {
