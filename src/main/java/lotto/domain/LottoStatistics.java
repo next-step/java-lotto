@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import lotto.dto.LottoStatisticsDTO;
+import lotto.vo.LottoStatisticsValue;
 
 public class LottoStatistics {
     private final Map<PrizeLevel, Integer> statistics;
@@ -14,7 +14,7 @@ public class LottoStatistics {
         this.statistics = statistics;
     }
 
-    public List<LottoStatisticsDTO> getLottoStatisticsDTOs() {
+    public List<LottoStatisticsValue> getLottoStatisticsDTOs() {
        return statistics.entrySet().stream()
             .filter(this::hasWinningPrize)
             .map(entry -> formatEntry(entry.getKey(), entry.getValue()))
@@ -33,7 +33,7 @@ public class LottoStatistics {
         return (double) totalPrize / money;
     }
 
-    private LottoStatisticsDTO formatEntry(PrizeLevel level, int count) {
-        return new LottoStatisticsDTO(level, count);
+    private LottoStatisticsValue formatEntry(PrizeLevel level, int count) {
+        return new LottoStatisticsValue(level, count);
     }
 }

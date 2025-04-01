@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.dto.LottoStatisticsDTO;
+import lotto.vo.LottoStatisticsValue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,14 +28,14 @@ class LottoStatisticsTest {
     @DisplayName("로또 당첨 통계 생성 테스트(0개)")
     void generateReportTest_0개() {
         LottoStatistics stats = new LottoStatistics(statistics);
-        List<LottoStatisticsDTO> report = stats.getLottoStatisticsDTOs();
+        List<LottoStatisticsValue> report = stats.getLottoStatisticsDTOs();
 
         assertThat(report).containsExactly(
-            new LottoStatisticsDTO(PrizeLevel.FIRST, 0),
-            new LottoStatisticsDTO(PrizeLevel.SECOND, 0),
-            new LottoStatisticsDTO(PrizeLevel.THIRD, 0),
-            new LottoStatisticsDTO(PrizeLevel.FOURTH, 0),
-            new LottoStatisticsDTO(PrizeLevel.FIFTH, 0)
+            new LottoStatisticsValue(PrizeLevel.FIRST, 0),
+            new LottoStatisticsValue(PrizeLevel.SECOND, 0),
+            new LottoStatisticsValue(PrizeLevel.THIRD, 0),
+            new LottoStatisticsValue(PrizeLevel.FOURTH, 0),
+            new LottoStatisticsValue(PrizeLevel.FIFTH, 0)
         );
     }
 
@@ -47,14 +47,14 @@ class LottoStatisticsTest {
         statistics.put(PrizeLevel.FOURTH, 3);
         LottoStatistics stats = new LottoStatistics(statistics);
 
-        List<LottoStatisticsDTO> report = stats.getLottoStatisticsDTOs();
+        List<LottoStatisticsValue> report = stats.getLottoStatisticsDTOs();
 
         assertThat(report).containsExactly(
-            new LottoStatisticsDTO(PrizeLevel.FIRST, 1),
-            new LottoStatisticsDTO(PrizeLevel.SECOND, 0),
-            new LottoStatisticsDTO(PrizeLevel.THIRD, 2),
-            new LottoStatisticsDTO(PrizeLevel.FOURTH, 3),
-            new LottoStatisticsDTO(PrizeLevel.FIFTH, 0)
+            new LottoStatisticsValue(PrizeLevel.FIRST, 1),
+            new LottoStatisticsValue(PrizeLevel.SECOND, 0),
+            new LottoStatisticsValue(PrizeLevel.THIRD, 2),
+            new LottoStatisticsValue(PrizeLevel.FOURTH, 3),
+            new LottoStatisticsValue(PrizeLevel.FIFTH, 0)
         );
     }
 

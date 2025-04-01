@@ -26,8 +26,8 @@ class WinningLottoTest {
     @MethodSource("provideLottoTestCases")
     @DisplayName("로또 번호 일치 개수 검증")
     void countMatchingNumbers_다양한_케이스_검증(List<Integer> numbers, PrizeLevel expectedLevel) {
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-        PrizeLevel actualLevel = winningLotto.countMatchingNumbers(new Lotto(numbers));
+        WinningLotto winningLotto = WinningLotto.from(List.of(1, 2, 3, 4, 5, 6), 7);
+        PrizeLevel actualLevel = winningLotto.countMatchingNumbers(Lotto.from(numbers));
 
         assertThat(actualLevel).isEqualTo(expectedLevel);
     }
