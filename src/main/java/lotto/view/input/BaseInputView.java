@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public abstract class BaseInputView implements InputView {
 
     private static final String NUMBER_INPUT_DELIMITER = ", ";
+    private static final String TICKET_INPUT_DELIMITER = ",";
 
     public Set<LottoNumber> parseToLottoNumbers(String input) {
         return Arrays.stream(input.split(NUMBER_INPUT_DELIMITER))
@@ -17,9 +18,14 @@ public abstract class BaseInputView implements InputView {
                 .collect(Collectors.toSet());
     }
 
-    protected static LotteryTicket getTicket(String input) {
-        return new LotteryTicket(input);
+    protected LotteryTicket getTicket(String input) {
+        return new LotteryTicket(parseInput(input));
     }
 
-
+    public Set<LottoNumber> parseInput(String input) {
+        return Arrays.stream(input.split(TICKET_INPUT_DELIMITER))
+                .map(String::trim)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+    }
 }

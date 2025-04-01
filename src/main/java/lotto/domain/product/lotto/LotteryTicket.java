@@ -3,7 +3,6 @@ package lotto.domain.product.lotto;
 import lotto.domain.Money;
 import lotto.domain.product.Product;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -13,7 +12,6 @@ public class LotteryTicket implements Product {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int MAX_LOTTO_SIZE = 6;
-    private static final String INPUT_DELIMITER = ",";
 
     private final Set<LottoNumber> numbers;
 
@@ -26,23 +24,11 @@ public class LotteryTicket implements Product {
     }
 
     public LotteryTicket(Set<LottoNumber> input) {
+        validSizeOf(input);
         this.numbers = input;
     }
 
-    public LotteryTicket(String input) {
-        this(parseInput(input));
-    }
-
-    private static Set<LottoNumber> parseInput(String input) {
-        Set<LottoNumber> lottoNumbers = Arrays.stream(input.split(INPUT_DELIMITER))
-                .map(String::trim)
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet());
-        validSizeOf(lottoNumbers);
-        return lottoNumbers;
-    }
-
-    private static void validSizeOf(Set<LottoNumber> lottoNumbers) {
+    private void validSizeOf(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != MAX_LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 숫자는 6개로 이뤄져 있습니다.");
         }
