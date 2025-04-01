@@ -12,7 +12,7 @@ public class LottoTicket {
     public LottoTicket(int count) {
         this.count = count/LOTTO_PRICE;
 
-        GenerateNumber generateNumber = new GenerateNumber();
+        GenerateNumber generateNumber = GenerateNumber.getInstance();
         for (int i = 0; i < this.count; i++) {
             this.lottoRowList.add(new LottoRow(generateNumber.generateRandomNumbers()));
         }

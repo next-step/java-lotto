@@ -6,15 +6,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoRow {
-    private final List<LottoNumber> lottoNumber = new ArrayList<>();
-    public LottoRow(List<Integer> numbers) {
+    private List<LottoNumber> lottoNumber = new ArrayList<>();
+
+    public LottoRow(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 한줄의 번호 개수는 6개여야합니다");
         }
 
-        for (Integer number : numbers) {
-            this.lottoNumber.add(new LottoNumber(number));
-        }
+        this.lottoNumber = numbers;
     }
 
     public List<Integer> getLottoNumbers() {

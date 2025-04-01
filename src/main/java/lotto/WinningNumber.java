@@ -9,7 +9,7 @@ public class WinningNumber {
     private final LottoRow winningNumber;
     private Map<Prize, Integer> winningLotto = new HashMap<>();
 
-    public WinningNumber(List<Integer> numbers) {
+    public WinningNumber(List<LottoNumber> numbers) {
         this.winningNumber = new LottoRow(numbers);
     }
 

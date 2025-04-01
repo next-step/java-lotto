@@ -16,9 +16,10 @@ public class LottoMain {
         ResultView.printLottoNumber(lottoTicket.getLottoRowList());
 
         String winningNumbers = InputView.inputWinningNumbers();
-        List<Integer> winningNumberList = Arrays.stream(winningNumbers.split(","))
+        List<LottoNumber> winningNumberList = Arrays.stream(winningNumbers.split(","))
             .map(String::trim)
             .map(Integer::parseInt)
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
 
         WinningNumber winningNumber = new WinningNumber(winningNumberList);

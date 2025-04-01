@@ -2,20 +2,29 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GenerateNumber {
-    private final static int BOUND = 45;
-    public List<Integer> generateRandomNumbers() {
-        List<Integer> numbers = new ArrayList<>();
+    private static final int BOUND = 45;
+    private static final List<LottoNumber> numbers = new ArrayList<>();
+    private static final GenerateNumber INSTANCE = new GenerateNumber();
 
+    private GenerateNumber() {
         for (int i = 1; i <= BOUND; i++) {
-            numbers.add(i);
+            numbers.add(new LottoNumber(i));
         }
+    }
 
-        Collections.shuffle(numbers);
-        List<Integer> randoms = numbers.subList(0, 6);
-        Collections.sort(randoms);
+    public static GenerateNumber getInstance() {
+        return INSTANCE;
+    }
+
+    public List<LottoNumber> generateRandomNumbers() {
+        List<LottoNumber> shuffledNumbers = new ArrayList<>(numbers);
+        Collections.shuffle(shuffledNumbers);
+        List<LottoNumber> randoms = shuffledNumbers.subList(0, 6);
+        randoms.sort(Comparator.comparing(LottoNumber::getNumber));
 
         return randoms;
     }

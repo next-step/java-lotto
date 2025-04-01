@@ -14,8 +14,18 @@ class LottoRowTest {
     @Test
     @DisplayName("로또 번호 한줄 생성")
     void 로또_번호_한줄_생성() {
-        List<Integer> numbers = new ArrayList<>(List.of(1, 5, 6, 9, 30, 31));
-        LottoRow expectedLottoRow = new LottoRow(List.of(1, 5, 6, 9, 30, 31));
+        List<LottoNumber> numbers = new ArrayList<>(List.of(new LottoNumber(1),
+                                    new LottoNumber(5),
+                                    new LottoNumber(6),
+                                    new LottoNumber(9),
+                                    new LottoNumber(30),
+                                    new LottoNumber(31)));
+        LottoRow expectedLottoRow = new LottoRow(List.of(new LottoNumber(1),
+                                    new LottoNumber(5),
+                                    new LottoNumber(6),
+                                    new LottoNumber(9),
+                                    new LottoNumber(30),
+                                    new LottoNumber(31)));
 
         LottoRow lottoRow = new LottoRow(numbers);
 
@@ -25,7 +35,11 @@ class LottoRowTest {
     @Test
     @DisplayName("로또 번호 개수 체크")
     void 로또_번호_개수_체크() {
-        List<Integer> numbers = new ArrayList<>(List.of(30,31,1,5));
+        List<LottoNumber> numbers = new ArrayList<>(List.of(new LottoNumber(1),
+                                new LottoNumber(5),
+                                new LottoNumber(6),
+                                new LottoNumber(9),
+                                new LottoNumber(30)));
 
         assertThatThrownBy(() -> new LottoRow(numbers))
             .isInstanceOf(IllegalArgumentException.class)
