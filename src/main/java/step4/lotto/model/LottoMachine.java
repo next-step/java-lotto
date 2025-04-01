@@ -11,7 +11,6 @@ public class LottoMachine {
 
     public final static Money PRICE = new Money(1000);
     private final List<LottoNumber> allLottoNumbers;
-    private final static InputView inputView = new InputView();
 
     public LottoMachine() {
         allLottoNumbers = new ArrayList<>();
