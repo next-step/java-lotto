@@ -19,6 +19,10 @@ public class Lottery {
         return lottoNumbers;
     }
 
+    public boolean contains(LotteryNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Lottery) {
