@@ -25,7 +25,7 @@ public class WinningNumber {
 
         Prize prize = Prize.valueOfCount(containCount);
 
-        if (prize != null) {
+        if (prize != Prize.NONE) {
             winningLotto.put(prize, winningLotto.getOrDefault(prize, 0) + 1);
         }
     }

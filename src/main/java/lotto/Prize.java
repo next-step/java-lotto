@@ -7,7 +7,8 @@ public enum Prize {
     ONE(6,2000000000),
     TWO(5, 1500000),
     THREE(4, 50000),
-    FOUR(3, 50000);
+    FOUR(3, 50000),
+    NONE(0,0);
 
     private final int count;
     private final int money;
