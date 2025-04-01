@@ -1,24 +1,37 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.toSet;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_LENGTH = 6;
+    private final Set<LottoNo> lottoNos;
 
-    private final List<LottoNumber> lottoNumbers;
-
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        checkLength(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<Integer> lottoNumbers) {
+        this(new HashSet<>(lottoNumbers.stream().map(LottoNo::new).collect(toSet())));
     }
 
-    private void checkLength(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
-            throw new IllegalArgumentException("lotto size is not 6");
+    public Lotto(Set<LottoNo> lottoNos) {
+        this.lottoNos = lottoNos;
+    }
+
+    public int matchCount(Lotto lotto) {
+        int count = 0;
+
+        for (LottoNo winNumber : lotto.lottoNos) {
+            count += isMatch(winNumber) ? 1 : 0;
         }
+
+        return count;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public boolean isMatch(LottoNo lottoNo) {
+        return this.lottoNos.contains(lottoNo);
+    }
+
+    public Set<LottoNo> getLottoNumbers() {
+        return lottoNos;
     }
 }
