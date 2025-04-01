@@ -23,7 +23,7 @@ public class LottoMachineTest {
         Lottos lottos1 = LottoMachine.buyLottoAutomatically(2000);
         Lottos lottos2 = LottoMachine.buyLottoAutomatically(3000);
 
-        Lottos mergedLottos = LottoMachine.mergeLotto(lottos1, lottos2);
+        Lottos mergedLottos = LottoMachine.combineLottos(lottos1, lottos2);
 
         assertThat(mergedLottos.getLottos()).hasSize(5);
         assertThat(mergedLottos.getLottos())

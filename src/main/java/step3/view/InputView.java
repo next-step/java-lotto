@@ -1,6 +1,8 @@
 package step3.view;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -10,6 +12,22 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         return inputNum();
     }
+
+    public static int inputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return inputNum();
+    }
+
+    public static List<String> inputManualLottosNums(int lottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String> lottoNumsInputs = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            String lottoNums = SCANNER.nextLine();
+            lottoNumsInputs.add(lottoNums);
+        }
+        return lottoNumsInputs;
+    }
+
 
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");

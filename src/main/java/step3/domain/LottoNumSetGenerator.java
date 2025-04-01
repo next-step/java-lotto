@@ -22,7 +22,7 @@ public class LottoNumSetGenerator {
     }
 
     public static LottoNums generateSet(String lottoNumsInput) {
-        List<LottoNum> lottoNums = Arrays.stream(lottoNumsInput.split(","))
+        List<LottoNum> lottoNums = Arrays.stream(lottoNumsInput.split(", "))
                 .map(Integer::parseInt)
                 .map(LottoNum::new)
                 .collect(Collectors.toList());

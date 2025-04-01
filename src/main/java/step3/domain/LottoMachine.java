@@ -9,6 +9,10 @@ public class LottoMachine {
 
     public static final int LOTTO_PRICE = 1000;
 
+    public static int remainingMoney(int totalMoney, int purchasedLottoCount) {
+        return totalMoney - purchasedLottoCount * LOTTO_PRICE;
+    }
+
     public static Lottos buyLottoAutomatically(int money) {
         List<Lotto> lottoList = IntStream.rangeClosed(1, money / LOTTO_PRICE)
                 .mapToObj(e -> createRandomLotto())
@@ -33,7 +37,7 @@ public class LottoMachine {
         return new Lotto(lottoNums);
     }
 
-    public static Lottos mergeLotto(Lottos... lottosList) {
+    public static Lottos combineLottos(Lottos... lottosList) {
         List<Lotto> lottoList = new ArrayList<>();
         for (Lottos lottos : lottosList) {
             lottoList.addAll(lottos.getLottos());

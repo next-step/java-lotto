@@ -9,10 +9,11 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void printLottoList(Lottos lottoList) {
+    public static void printLottoList(Lottos lottoList, int manualLottoCount) {
         List<Lotto> lottos = lottoList.getLottos();
+        int automaticLottoCount = lottos.size() - manualLottoCount;
 
-        System.out.println(lottos.size() + "개를 구매했습니다");
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + automaticLottoCount + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             System.out.println(lotto.sortedNumbers());
         }
