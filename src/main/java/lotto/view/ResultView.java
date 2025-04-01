@@ -9,10 +9,14 @@ import lotto.domain.Statistic;
 public class ResultView {
 
     public static void showLottos(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottos.getLottos()) {
+        System.out.println("수동으로 " + lottos.getManualLottos().size() + "장, 자동으로 " + lottos.getAutoLottos().size() + "장을 구매했습니다.");
+        for (Lotto lotto : lottos.getManualLottos()) {
             System.out.println(lotto.lottoNumbers());
         }
+        for (Lotto lotto : lottos.getAutoLottos()) {
+            System.out.println(lotto.lottoNumbers());
+        }
+
     }
 
     public static void showStatistics(Statistic stat) {

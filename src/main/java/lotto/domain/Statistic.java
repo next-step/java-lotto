@@ -14,7 +14,7 @@ public class Statistic {
     public Statistic(Lottos lottos, WinLottoNumber winNumber) {
         gameResults = new ArrayList<>();
         calculate(lottos, winNumber);
-        this.paidMoney = lottos.size() * Game.LOTTO_PRICE;
+        this.paidMoney = lottos.getLottos().size() * Game.LOTTO_PRICE;
     }
 
     private void calculate(Lottos lottos, WinLottoNumber winNumber) {
@@ -25,6 +25,13 @@ public class Statistic {
         }
     }
 
+    /*
+    로또 당첨 결과를 반환
+      - Key: 등급(Rank)
+      - Value: 해당 등급의 당첨 개수(Integer)
+
+    변환: 등급별 당첨 개수를 포함한 맵
+    * */
     public Map<Rank, Integer> result() {
         Map<Rank, Integer> result = new EnumMap<>(Rank.class);
 

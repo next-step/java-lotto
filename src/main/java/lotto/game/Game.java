@@ -8,30 +8,31 @@ import lotto.domain.LottoNum;
 import lotto.domain.Lottos;
 import lotto.domain.Statistic;
 import lotto.domain.WinLottoNumber;
+import lotto.dto.GameRequest;
 
 public class Game {
 
     public static final int LOTTO_PRICE = 1000;
-    private final int manualCount;
-    private final int autoCount;
     private Lottos lottos;
 
-    public Game(int paidMoney, int manualCount) {
-        this.manualCount = manualCount;
-        this.autoCount = (paidMoney / LOTTO_PRICE) - manualCount;
+    public Game() {
     }
 
-    public Lottos lottos() {
+    public Lottos createLottos(GameRequest gameRequest) {
+        int paidMoney = gameRequest.getPaidMoney();
+        int manualCount = gameRequest.getManualCount();
+        List<Lotto> manualLottoNumbersList = gameRequest.getManualLottoNumbers();
+        List<Lotto> autoLottoNumbers = autoLottoNumbers(paidMoney / LOTTO_PRICE - manualCount);
+        lottos = new Lottos(manualLottoNumbersList, autoLottoNumbers);
         return lottos;
     }
 
-    public void generateLottos(List<Lotto> manualLottoNumbersList) {
-        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "장을 구매했습니다.");
-        List<Lotto> allLottos = new ArrayList<>(manualLottoNumbersList);
+    private List<Lotto> autoLottoNumbers(int autoCount) {
+        List<Lotto> autoLottoNumbers = new ArrayList<>();
         for (int i = 0; i < autoCount; i++) {
-            allLottos.add(new Lotto(LottoGenerator.generate()));
+            autoLottoNumbers.add(new Lotto(LottoGenerator.generate()));
         }
-        this.lottos = new Lottos(allLottos);
+        return autoLottoNumbers;
     }
 
     public Statistic play(List<LottoNum> winningLottoNumbers, int bonusNumber) {

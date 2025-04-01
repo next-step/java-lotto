@@ -29,7 +29,8 @@ public class StatisticTest {
             toLotto(List.of(1, 2, 3, 4, 5, 9)),    // 5개 일치 (보너스 X) → 1,500,000
             toLotto(List.of(1, 2, 3, 4, 5, 6)),    // 6개 일치 → 2,000,000,000
             toLotto(List.of(10, 11, 12, 13, 14, 15)) // 0개 일치 → MISS
-        ));
+        ),
+            List.of());
 
         Statistic statistic = new Statistic(lottos, winLottoNumber);
 

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.Lotto;
@@ -50,6 +51,7 @@ public class InputView {
         for (String s : split) {
             integerList.add(new LottoNum(Integer.parseInt(s.trim())));
         }
+        Collections.sort(integerList);
         return integerList;
     }
 
