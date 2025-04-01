@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.List;
 
+import static lotto.Lotto.LOTTO_NUM_COUNT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoNumberGeneratorTest {
@@ -21,7 +22,7 @@ public class LottoNumberGeneratorTest {
         List<Lotto> lottos = LottoNumberGenerator.generateLottoNumbers(1);
         List<Integer> numbers = lottos.get(0).getLottoNumbers();
 
-        assertThat(numbers.size()).isEqualTo(LottoNumberGenerator.LOTTO_PICK_COUNT);
+        assertThat(numbers.size()).isEqualTo(LOTTO_NUM_COUNT);
         assertThat(new HashSet<>(numbers).size()).isEqualTo(numbers.size());
     }
 

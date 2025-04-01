@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.Lotto.LOTTO_NUM_COUNT;
+
 public class LottoNumberGenerator {
 
     private static final int LOTTO_MIN_NUM = 1;
     private static final int LOTTO_MAX_NUM = 45;
-    public static final long LOTTO_PICK_COUNT = 6;
 
     private static List<Integer> numbersPool = IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
             .boxed()
@@ -24,7 +25,7 @@ public class LottoNumberGenerator {
     private static List<Integer> generateLottoNumbers() {
         Collections.shuffle(numbersPool);
         return numbersPool.stream()
-                .limit(LOTTO_PICK_COUNT)
+                .limit(LOTTO_NUM_COUNT)
                 .sorted()
                 .collect(Collectors.toList());
     }

@@ -1,5 +1,6 @@
 package lotto;
 
+import view.LottoNumbersParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -3,7 +3,7 @@ package lotto;
 import java.util.EnumMap;
 import java.util.List;
 
-import static lotto.LottoApplication.LOTTO_PRICE;
+import static lotto.Lotto.LOTTO_PRICE;
 
 public class LottosResult {
 

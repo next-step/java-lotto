@@ -1,5 +1,6 @@
 package view;
 
+import lotto.Lotto;
 import lotto.LottoMatch;
 import lotto.LottosResult;
 
@@ -33,5 +34,9 @@ public class OutputView {
 
     public static void showTotalYieldRate(double totalYieldRate) {
         System.out.printf("총 수익률은 %.2f입니다.\n", totalYieldRate);
+    }
+
+    public static void showGeneratedLottoNumber(List<Lotto> lottos) {
+        lottos.forEach(lotto -> showLottoNumbers(lotto.getLottoNumbers()));
     }
 }

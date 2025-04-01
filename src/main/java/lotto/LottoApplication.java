@@ -1,14 +1,15 @@
 package lotto;
 
 import calculator.Operator;
+import view.LottoNumbersParser;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
 
-public class LottoApplication {
+import static lotto.Lotto.LOTTO_PRICE;
 
-    public static final int LOTTO_PRICE = 1000;
+public class LottoApplication {
 
     public static void main(String[] args) {
 
@@ -17,6 +18,7 @@ public class LottoApplication {
         OutputView.showLottoQuantity(lottoQuantity);
 
         List<Lotto> lottos = LottoNumberGenerator.generateLottoNumbers(lottoQuantity);
+        OutputView.showGeneratedLottoNumber(lottos);
         List<Integer> winningLotto = LottoNumbersParser.parse(InputView.showWinningLottoNumbersInput());
 
         LottosResult lottosResult = new LottosResult(lottos, winningLotto);
