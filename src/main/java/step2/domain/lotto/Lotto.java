@@ -27,6 +27,10 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
+    public boolean contains(int number) {
+        return lottoNumbers.contains(number);
+    }
+
     public LottoNumbers matchedWith(Lotto lotto) {
         return findMatchingNumbers(lotto.getLottoNumbers());
     }

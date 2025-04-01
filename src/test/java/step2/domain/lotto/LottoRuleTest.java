@@ -40,4 +40,18 @@ public class LottoRuleTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("규칙을 만족하지 않는 숫자 입력입니다");
     }
+
+    @DisplayName("로또 번호와 보너스 번호가 겹치는 상황 검증")
+    @Test
+    void validateLottoAndBonusNumberOverlap() {
+        // given
+        LottoRule lottoRule = new LottoRule(MIN_NUMBER, MAX_NUMBER, SIZE);
+        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 6;
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> new WinningLotto(new Lotto(lottoNumbers, lottoRule), bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+    }
 }

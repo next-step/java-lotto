@@ -70,7 +70,7 @@
   - [x] '\n' 대신 System.lineSeparator() 사용
   - [x] 로또 번호 정렬
   - [x] 로또 번호 중복 입력 검증
-  - [ ] 로또 번호와 보너스 번호가 겹치는 상황 검증
+  - [x] 로또 번호와 보너스 번호가 겹치는 상황 검증
   - [ ] domain 에서 views 의존성 제거
     - [ ] LottoContainer
     - [ ] Lotto

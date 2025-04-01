@@ -30,10 +30,7 @@ public class LottoRule {
 
     private boolean hasDuplicated(List<Integer> lottoNumbers) {
         Set<Integer> numberSet = new HashSet<>(lottoNumbers);
-        if (numberSet.size() != lottoNumbers.size()) {
-            return true;
-        }
-        return false;
+        return numberSet.size() != lottoNumbers.size();
     }
 
     private boolean containsOutOfRangeNumber(List<Integer> lottoNumbers) {

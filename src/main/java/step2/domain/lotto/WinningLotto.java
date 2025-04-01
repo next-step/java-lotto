@@ -7,6 +7,10 @@ public class WinningLotto {
     private final Integer bonusNumber;
 
     public WinningLotto(Lotto winningLotto, Integer bonusNumber) {
+        if (lottoContainsBonusNumber(winningLotto, bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+        }
+
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
@@ -29,6 +33,11 @@ public class WinningLotto {
             matchedRank = findMatchedRank(lotto, matchedRank, rank);
         }
         return matchedRank;
+    }
+
+    private boolean lottoContainsBonusNumber(Lotto winningLotto, Integer bonusNumber) {
+        return winningLotto.contains(bonusNumber);
+
     }
 
     private RankType findMatchedRank(Lotto lotto, RankType currentRank, RankType candidateRank) {
