@@ -60,6 +60,6 @@ public class OutputView {
     }
 
     public void printUserReceipt(Quantity totalQuantity, Quantity manualQuantity) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualQuantity.value(), totalQuantity.minus(manualQuantity).value());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualQuantity.value(), totalQuantity.minus(manualQuantity).value());
     }
 }
