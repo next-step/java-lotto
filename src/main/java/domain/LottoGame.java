@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.List;
+
+import static domain.LottoMachine.generate;
 import static utils.OutputView.*;
 
 public class LottoGame {
@@ -9,14 +12,20 @@ public class LottoGame {
         this.generator = generator;
     }
 
-    public void run(String amountInput, String winningNumberInput, String bonusNumberInput) {
+    public Lottos buyLotto(String amountInput, int manualLottoCount, List<String> manualLottoInput) {
         PurchaseAmount purchaseAmount = new PurchaseAmount(Integer.parseInt(amountInput));
-        WinningNumber winningNumber = new WinningNumber(winningNumberInput, bonusNumberInput);
 
-        int lottoCount = purchaseAmount.countOfLotto();
+        int totalLottoCount = purchaseAmount.countOfLotto();
+        int autoLottoCount = totalLottoCount - manualLottoCount;
 
-        Lottos lottos = Lottos.generate(lottoCount, generator);
+        Lottos lottos = generate(autoLottoCount, generator, manualLottoInput);
         printPurchasedLottos(lottos.getValue());
+
+        return lottos;
+    }
+
+    public void displayStatistic(String amountInput, String winningNumberInput, String bonusNumberInput, Lottos lottos) {
+        WinningNumber winningNumber = new WinningNumber(winningNumberInput, bonusNumberInput);
 
         Ranks ranks = new Ranks(lottos.match(winningNumber));
         LottoStatistics statistics = ranks.toStatistics();
