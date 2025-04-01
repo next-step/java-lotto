@@ -1,38 +1,25 @@
 package lotto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Game {
-    private final List<Integer> numbers;
 
-    public static final int DIGIT = 6;
+    private final LottoNumbers numbers;
 
     public Game(List<Integer> numbers) {
-        validate(numbers);
-
-        this.numbers = numbers.stream()
-                .sorted(Integer::compareTo)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != DIGIT) {
-            throw new IllegalArgumentException("로또는 " + DIGIT + "자리여야 합니다.");
-        }
-
-        if (numbers.stream().anyMatch(it -> it < 1 || it > 45)) {
-            throw new IllegalArgumentException("로또는 1~45 사이의 숫자여야 합니다.");
-        }
+        this.numbers = new LottoNumbers(numbers);
     }
 
     public int countMatches(List<Integer> winningNumbers) {
-        return (int) numbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
+        return numbers.countMatches(winningNumbers);
     }
 
     public boolean hasBonusNumber(int bonusNumber) {
-        return numbers.contains(bonusNumber);
+        return numbers.hasBonusNumber(bonusNumber);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }

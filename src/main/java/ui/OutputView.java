@@ -1,6 +1,6 @@
 package ui;
 
-import lotto.LottoTicket;
+import lotto.Game;
 import lotto.Rank;
 
 import java.util.List;
@@ -10,14 +10,14 @@ import static lotto.YieldCalculator.calculateYield;
 
 public class OutputView {
 
-    public static void printLottoTickets(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
-        lottoTickets.forEach(System.out::println);
+    public static void printLottoTickets(List<Game> games) {
+        System.out.println(games.size() + "개를 구매했습니다.");
+        games.forEach(System.out::println);
         System.out.println();
     }
 
-    public static void printResult(List<Integer> winningNumbers, int bonusNumber, List<LottoTicket> lottoTickets) {
-        var result = lottoTickets.stream()
+    public static void printResult(List<Integer> winningNumbers, int bonusNumber, List<Game> games) {
+        var result = games.stream()
                 .collect(Collectors.groupingBy(lottoTicket -> Rank.valueOf(lottoTicket.countMatches(winningNumbers), lottoTicket.hasBonusNumber(bonusNumber)), Collectors.counting()));
 
         System.out.println("당첨 통계");

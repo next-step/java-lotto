@@ -14,8 +14,8 @@ public class Seller {
         this.lottoTicketMachine = new LottoTicketMachine(new Random());
     }
 
-    public List<LottoTicket> sell(int money) {
-        int lottoCount = money/ PRICE;
+    public List<Game> sell(int money) {
+        int lottoCount = money / PRICE;
 
         return IntStream.range(0, lottoCount)
                 .mapToObj(it -> lottoTicketMachine.issue())

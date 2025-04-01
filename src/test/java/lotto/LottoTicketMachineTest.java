@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-public class LottoTicketTicketMachineTest {
+public class LottoTicketMachineTest {
 
     @Test
     @DisplayName("로또 발행한다.")
@@ -14,6 +14,6 @@ public class LottoTicketTicketMachineTest {
         var machine = new LottoTicketMachine(new Random());
         var lotto = machine.issue();
 
-        Assertions.assertThat(lotto).isInstanceOf(LottoTicket.class);
+        Assertions.assertThat(lotto).isInstanceOf(Game.class);
     }
 }
