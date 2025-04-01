@@ -47,9 +47,9 @@
   - [x] ResultView 구현
 - [x] Controller 구현
   - [x] 리팩토링
-- [ ] 피드백
+- [x] 피드백
   - [x] Lotto 생성 시 검증 추가
-  - [ ] WinningLotto.countMatchedNumbers 파라미터 수정
+  - [x] WinningLotto.countMatchedNumbers 파라미터 수정
   - [x] LottoGenerator 이름 변경
   - [x] LottoFactory 제거 후 Lotto에 정적 팩토리 메서드 도입
   - [x] MatchedCount equals 및 hashCode 구현
@@ -57,6 +57,11 @@
   - [x] toString 대신 String 반환 메소드 생성
   - [x] LottoGameResult에서 winningRate 계산하도록 변경
 ### 3단계
+- [ ] 2단계 피드백
+  - [x] LottoGameApplication 상수 적용
+  - [ ] Rank 객체가 RankFormatter 객체를 의존하지 않도록 변경
+  - [ ] LottoContainerFormatter 패키지 위치 조정
+  - [ ] LottoGameApplication 에서 ResultView 에게 결과 출력 메시지를 전달
 - [ ] 보너스 볼 추가
   - [ ] 보너스 볼을 입력받아 당첨 통계에 추가
   - [ ] 보너스 볼을 포함한 등수 계산

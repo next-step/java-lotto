@@ -11,6 +11,11 @@ import java.util.List;
 
 public class LottoGameApplication {
 
+    public static final int LOTTO_TICKET_PRICE = 1000;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
+    public static final int PICKS_PER_TICKET = 6;
+
     public static void main(String[] args) {
         LottoCount lottoCount = createLottoCountWithQuery();
         LottoGame lottoGame = setUpLottoGame(lottoCount);
@@ -38,7 +43,7 @@ public class LottoGameApplication {
     }
 
     private static LottoGame setUpLottoGame(LottoCount lottoCount) {
-        LottoRule lottoRule = new LottoRule(1, 45, 6);
+        LottoRule lottoRule = new LottoRule(MIN_NUMBER, MAX_NUMBER, PICKS_PER_TICKET);
         return new LottoGame(lottoCount, lottoRule);
     }
 
@@ -53,7 +58,7 @@ public class LottoGameApplication {
 
     private static LottoCount createLottoCount(int purchaseAmount) {
         try {
-            return new LottoCount(purchaseAmount, 1000);
+            return new LottoCount(purchaseAmount, LOTTO_TICKET_PRICE);
         } catch (IllegalArgumentException e) {
             ResultView.printMessage(e.getMessage());
         }
