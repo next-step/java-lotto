@@ -29,7 +29,7 @@ public class LottoApplication {
 
         String winningNumber = InputView.inputWinningNumber();
         WinningNumbers winningNumbers = new WinningNumbers(winningNumber);
-        BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber());
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
         ResultView.printResultOverview();
 
         Rewards result = lottos.getResult(winningNumbers, bonusNumber);

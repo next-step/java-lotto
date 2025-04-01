@@ -27,8 +27,8 @@ public class Lotto {
         return (int) this.lottoNumbers.stream().filter(winningNumbers::contains).count();
     }
 
-    public boolean matchBonusNumber(BonusNumber bonusNumber) {
-        return bonusNumber.isContainedIn(this.lottoNumbers);
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     public List<LottoNumber> getLottoNumbers() {

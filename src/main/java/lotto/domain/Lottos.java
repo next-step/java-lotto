@@ -9,10 +9,6 @@ import java.util.stream.Stream;
 public class Lottos {
     private final List<Lotto> values;
 
-    public Lottos(int lottoCount) {
-        this(lottoCount, List.of());
-    }
-
     public Lottos(List<Lotto> values) {
         this(0, values);
     }
@@ -24,7 +20,7 @@ public class Lottos {
         ).collect(Collectors.toList());
     }
 
-    public Rewards getResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public Rewards getResult(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         return new Rewards(this.values.stream()
                 .map(lotto -> Rank.valueOf(winningNumbers.countNumberMatching(lotto), lotto.matchBonusNumber(bonusNumber)))
                 .collect(Collectors.toList()));
