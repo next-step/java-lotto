@@ -1,8 +1,9 @@
 package lotto.view.output;
 
+import lotto.domain.PaymentHistory;
 import lotto.domain.PaymentReceipt;
+import lotto.domain.Quantity;
 import lotto.domain.product.FinalResult;
-import lotto.domain.product.LotteryTickets;
 import lotto.domain.product.LottoRank;
 
 import java.util.Arrays;
@@ -40,12 +41,13 @@ public class OutputView {
                 result.getResult().getOrDefault(rank, 0));
     }
 
+    @Deprecated
     public void userPurchased(Integer count) {
         System.out.println(count + "개를 구매 했습니다.");
     }
 
-    public void printAutoLottery(LotteryTickets tickets) {
-        System.out.println(autoLotteryToString(tickets.getLotteryTickets()));
+    public void printAutoLottery(PaymentHistory tickets) {
+        System.out.println(autoLotteryToString(tickets.autoLotteryTickets()));
     }
 
     public String autoLotteryToString(List<Set<Integer>> lotteryTickets) {
@@ -55,5 +57,9 @@ public class OutputView {
                         .map(String::valueOf)
                         .collect(Collectors.joining(NUMBER_OUTPUT_DELIMITER, OUTPUT_PREFIX, OUTPUT_SUFFIX)))
                 .collect(Collectors.joining("\n"));
+    }
+
+    public void printUserReceipt(Quantity totalQuantity, Quantity manualQuantity) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualQuantity.value(), totalQuantity.minus(manualQuantity).value());
     }
 }

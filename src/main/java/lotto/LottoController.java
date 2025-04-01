@@ -1,6 +1,8 @@
 package lotto;
 
+import lotto.domain.PaymentHistory;
 import lotto.domain.PaymentReceipt;
+import lotto.domain.Quantity;
 import lotto.domain.product.FinalResult;
 import lotto.domain.product.LotteryTicket;
 import lotto.domain.product.LotteryTickets;
@@ -26,10 +28,12 @@ public class LottoController {
 
     public void run() {
         PaymentReceipt receipt = inputView.purchase();
-        Integer count = receipt.getUserCountBy(new LotteryTicket());
-        outputView.userPurchased(count);
+        Quantity totalQuantity = receipt.getQuantityAbout(new LotteryTicket());
+        Quantity manualQuantity = inputView.getManualLotteryQuantity();
+        LotteryTickets manualLotteryTickets = inputView.getManualLotteryTickets(manualQuantity);
 
-        LotteryTickets myTickets = LotteryTickets.makeAutoTickets(count);
+        outputView.printUserReceipt(totalQuantity, manualQuantity);
+        PaymentHistory myTickets = new PaymentHistory(totalQuantity.minus(manualQuantity), manualLotteryTickets);
         outputView.printAutoLottery(myTickets);
 
         WinningTicket winningTicket = getWinningTicket();
@@ -38,7 +42,7 @@ public class LottoController {
         inputView.closeScanner();
     }
 
-    private void getResult(LotteryTickets myTickets, WinningTicket winningTicket, PaymentReceipt receipt) {
+    private void getResult(PaymentHistory myTickets, WinningTicket winningTicket, PaymentReceipt receipt) {
         FinalResult result = myTickets.getResult(winningTicket);
         outputView.printResult(result, receipt);
     }
