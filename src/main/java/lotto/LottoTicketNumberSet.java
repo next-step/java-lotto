@@ -49,4 +49,29 @@ public class LottoTicketNumberSet {
   public List<LottoTicketNumber> getNumbers() {
     return numbers;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    LottoTicketNumberSet that = (LottoTicketNumberSet) o;
+
+    for (int i = 0; i < this.numbers.size(); i++) {
+      if (!this.numbers.get(i).equals(that.numbers.get(i))) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return numbers.hashCode();
+  }
 }

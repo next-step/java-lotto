@@ -49,4 +49,19 @@ public class LottoTicketNumber implements Comparable<LottoTicketNumber> {
   public String toString() {
     return number.toString();
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    LottoTicketNumber that = (LottoTicketNumber) o;
+    return number.equals(that.number);
+  }
+
+  @Override
+  public int hashCode() {
+    return number.hashCode();
+  }
 }
