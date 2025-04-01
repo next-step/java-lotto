@@ -7,6 +7,8 @@ import lotto.domain.product.lotto.LottoRank;
 import lotto.view.fake.FakeInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -27,6 +29,15 @@ public class LotteryTicketTest {
         FakeInputView inputView = new FakeInputView("8, 21, 23, 41, 42, 43");
         LotteryTicket lotteryTicket = new LotteryTicket(inputView.parseInput(inputView.read()));
         assertThat(lotteryTicket).isEqualTo(new LotteryTicket(inputView.parseInput(inputView.read())));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"8, 21, 23, 41/ 42/ 43", "WrongNumber"})
+    @DisplayName("사용자가 수동 로또 번호를 잘못 입력할 경우 예외가 발생한다.")
+    public void makeManualFailTest(String input) {
+        FakeInputView inputView = new FakeInputView(input);
+        assertThatThrownBy(() -> new LotteryTicket(inputView.parseInput(inputView.read())))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
