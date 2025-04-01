@@ -2,13 +2,12 @@ package lotto;
 
 
 import java.util.List;
-import lotto.domain.AutomaticStrategy;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoSeller;
-import lotto.domain.LottoWinningChecker;
+import lotto.domain.LottoNo;
 import lotto.domain.ManualStrategy;
-import lotto.domain.Money;
+import lotto.domain.Seller;
+import lotto.domain.WinnerChecker;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,8 +16,8 @@ public class LottoMain {
         int inputValue = InputView.inputMoney();
         List<String> manualLotto = InputView.inputManualLotto();
 
-        LottoSeller lottoSeller = new LottoSeller(new Money(inputValue));
-        List<Lotto> lottos = lottoSeller.generateLottos(new AutomaticStrategy());
+        Seller seller = new Seller(inputValue, manualLotto);
+        List<Lotto> lottos = seller.generateLottos();
         OutputView.printLottos(lottos);
 
         String enteredWinningNumbers = InputView.inputWinLotto();

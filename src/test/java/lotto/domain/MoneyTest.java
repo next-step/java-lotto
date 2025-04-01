@@ -1,30 +1,35 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class MoneyTest {
-    @DisplayName("구매 가능 여부를 판단할 수 있다.")
     @Test
-    void checkPayAbleTest() {
-        Money money = new Money(999);
-        int buyAblePrice = 998;
-        int notAblePrice = 1000;
-
-        assertAll(() -> assertThat(money.checkPayAble(buyAblePrice)).isTrue(),
-                () -> assertThat(money.checkPayAble(notAblePrice)).isFalse());
+    void createTest() {
+        assertThat(new Money(1000)).isEqualTo(new Money(1000));
     }
 
-    @DisplayName("구매 할 수 있다.")
     @Test
-    void payTest() {
+    void divideTest() {
+        Money money = new Money(1000);
+
+        assertThat(money.divide(new Money(500))).isEqualTo(2);
+    }
+
+    @Test
+    void invalidDivideTest() {
+        assertThatThrownBy(() -> new Money(1000).divide(new Money(0))).isInstanceOf(ArithmeticException.class)
+                .hasMessage("Cannot divide by zero");
+    }
+
+    @Test
+    void greaterThanTest() {
         Money money = new Money(999);
 
-        money = money.pay(99);
-
-        assertThat(money).isEqualTo(new Money(900));
+        assertAll(() -> assertThat(money.greaterThan(new Money(998))).isTrue(),
+                () -> assertThat(money.greaterThan(new Money(1000))).isFalse());
     }
 }

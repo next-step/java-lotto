@@ -1,18 +1,23 @@
 package lotto.domain;
 
 public class Money {
+    private static final int ZERO = 0;
+
     private final int value;
 
     public Money(int value) {
         this.value = value;
     }
 
-    public boolean checkPayAble(int price) {
-        return value >= price;
+    public int divide(Money money) {
+        if (money.value == ZERO) {
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+        return this.value / money.value;
     }
 
-    public Money pay(int price) {
-        return new Money(value - price);
+    public boolean greaterThan(Money price) {
+        return value >= price.value;
     }
 
     @Override
@@ -30,5 +35,10 @@ public class Money {
     @Override
     public int hashCode() {
         return Integer.hashCode(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }
