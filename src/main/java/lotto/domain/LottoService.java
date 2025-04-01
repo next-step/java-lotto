@@ -18,18 +18,9 @@ public class LottoService {
 
     private final LottoTicketFactory ticketFactory = new LottoTicketFactory();
 
-    public List<LottoTicket> purchaseTickets(final int purchaseAmount) {
-        return purchaseTickets(new PurchaseAmount(purchaseAmount));
-    }
-    
     public List<LottoTicket> purchaseTickets(final PurchaseAmount amount) {
         TicketCount ticketCount = TicketCount.from(amount, TicketPrice.standard());
         return ticketFactory.create(ticketCount.getCount());
-    }
-
-    public WinningLottoTicket createWinningTicket(
-            final Set<LottoNumber> winningNumbers, final BonusNumber bonusLottoNumber) {
-        return ticketFactory.createWinning(winningNumbers, bonusLottoNumber);
     }
 
     public LottoGameResult draw(final List<LottoTicket> lottoTickets, final WinningLottoTicket winningLottoTicket) {

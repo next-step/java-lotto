@@ -29,7 +29,7 @@ public class LottoApplication {
             resultView.printTickets(lottoTickets);
 
             WinningLottoTicket winingLottoTicket =
-                    service.createWinningTicket(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
+                    new WinningLottoTicket(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
             LottoGameResult result = service.draw(lottoTickets, winingLottoTicket);
 
             resultView.printResult(amount, result);

@@ -28,7 +28,7 @@ class LottoServiceTest {
     @DisplayName("로또 티켓 구매 테스트")
     @Test
     void purchaseTickets() {
-        int purchaseAmount = 5000;
+        PurchaseAmount purchaseAmount = new PurchaseAmount(5000);
 
         List<LottoTicket> tickets = lottoService.purchaseTickets(purchaseAmount);
 
@@ -42,7 +42,7 @@ class LottoServiceTest {
     @ParameterizedTest
     @ValueSource(ints = {1000, 2000, 5000, 10000})
     void calculateTicketCount(int purchaseAmount) {
-        List<LottoTicket> tickets = lottoService.purchaseTickets(purchaseAmount);
+        List<LottoTicket> tickets = lottoService.purchaseTickets(new PurchaseAmount(purchaseAmount));
 
         int expectedCount = purchaseAmount / 1000;
         assertThat(tickets).hasSize(expectedCount);
@@ -52,21 +52,9 @@ class LottoServiceTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1000})
     void validateInvalidPurchaseAmount(int invalidAmount) {
-        assertThatThrownBy(() -> lottoService.purchaseTickets(invalidAmount))
+        assertThatThrownBy(() -> lottoService.purchaseTickets(new PurchaseAmount(invalidAmount)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구입 금액은 0보다 커야 합니다");
-    }
-
-    @DisplayName("당첨 로또 티켓 생성 테스트")
-    @Test
-    void createWinningTicket() {
-        Set<LottoNumber> winningNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
-        BonusNumber bonusNumber = new BonusNumber(7);
-
-        WinningLottoTicket winningTicket = lottoService.createWinningTicket(winningNumbers, bonusNumber);
-
-        assertThat(winningTicket.getNumbers()).containsExactlyInAnyOrderElementsOf(winningNumbers);
-        assertThat(winningTicket.getBonusNumber()).isEqualTo(bonusNumber);
     }
 
     @DisplayName("로또 게임 결과 계산 테스트")

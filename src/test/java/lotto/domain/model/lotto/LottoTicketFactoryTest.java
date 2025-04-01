@@ -28,27 +28,6 @@ class LottoTicketFactoryTest {
         }
     }
 
-    @DisplayName("당첨 로또 티켓 생성 테스트")
-    @Test
-    void createWinningLottoTicket() {
-        LottoTicketFactory factory = new LottoTicketFactory();
-        Set<LottoNumber> winningNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
-        BonusNumber bonusNumber = new BonusNumber(7);
-
-        WinningLottoTicket winningTicket = factory.createWinning(winningNumbers, bonusNumber);
-
-        assertThat(winningTicket.getNumbers()).containsExactlyInAnyOrderElementsOf(winningNumbers);
-        assertThat(winningTicket.getBonusNumber()).isEqualTo(bonusNumber);
-    }
-
-    private Set<LottoNumber> createLottoNumbers(final int... numbers) {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-        for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return lottoNumbers;
-    }
-
     private static class FixedLottoNumberGeneratorStrategy implements LottoNumberGeneratorStrategy {
         @Override
         public Set<LottoNumber> generate() {
