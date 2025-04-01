@@ -1,19 +1,26 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoRow {
-    private List<LottoNumber> lottoNumber = new ArrayList<>();
+    private Set<LottoNumber> lottoNumber = new HashSet<>();
 
     public LottoRow(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 한줄의 번호 개수는 6개여야합니다");
         }
 
-        this.lottoNumber = numbers;
+        Set<LottoNumber> tmp = new HashSet<>(numbers);
+        if (tmp.size() != 6) {
+            throw new IllegalArgumentException("로또 번호에 중복된 숫자가 있습니다");
+        }
+
+        this.lottoNumber = tmp;
     }
 
     public List<Integer> getLottoNumbers() {
