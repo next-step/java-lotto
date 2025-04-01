@@ -3,12 +3,14 @@ package lotto.domain;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.LottoResult;
 import lotto.domain.model.LottoSeller;
-import lotto.view.model.UserMoneyInput;
+import lotto.view.model.LottoInput;
 import lotto.domain.model.WinningLotto;
 import lotto.view.OutputView;
 import lotto.view.InputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoService {
     private final LottoSeller lottoSeller = new LottoSeller();
@@ -20,15 +22,19 @@ public class LottoService {
     }
 
     private List<Lotto> purchaseLotto() {
-        UserMoneyInput userInput = InputView.getMoneyInput();
+        LottoInput lottoInput = InputView.getLottoInput();
 
-        int purchasedAmount = lottoSeller.getPurchasableLottoCount(userInput);
-        OutputView.printPurchasedAmount(purchasedAmount);
+        List<Lotto> manualLottos = lottoSeller.sellManualLotto(lottoInput);
+        List<Lotto> autoLottos = lottoSeller.sellAutoLotto(lottoInput);
 
-        List<Lotto> purchasedLotto = lottoSeller.generateAndSell(purchasedAmount);
-        OutputView.printLottos(purchasedLotto);
+        OutputView.printPurchasedLottos(manualLottos, autoLottos);
 
-        return purchasedLotto;
+        return getTotalPurchasedLottos(manualLottos, autoLottos);
+    }
+
+    private List<Lotto> getTotalPurchasedLottos(List<Lotto> manualLottos, List<Lotto> autoCreatedLottos) {
+        return Stream.concat(manualLottos.stream(), autoCreatedLottos.stream())
+                .collect(Collectors.toList());
     }
 
     private WinningLotto getWinningLotto() {
