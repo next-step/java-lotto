@@ -7,9 +7,14 @@ public class InputView {
 
     public int readPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        int amount = scanner.nextInt();
+        return scanner.nextInt();
+    }
+
+    public int readNumberOfManuallyPickedTickets() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int number = scanner.nextInt();
         scanner.nextLine();
-        return amount;
+        return number;
     }
 
     public String readWinningNumbers() {

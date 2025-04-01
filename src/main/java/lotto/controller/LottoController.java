@@ -21,6 +21,7 @@ public class LottoController {
 
     public void run() {
         int purchaseAmount = inputview.readPurchaseAmount();
+        int numberOfManuallyPickTickets = inputview.readNumberOfManuallyPickedTickets();
         LottoTickets tickets = lottoMachine.issue(purchaseAmount);
         resultView.printLottoTickets(tickets);
 
