@@ -1,13 +1,9 @@
 package lotto.domain;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinningLottoNumbers {
-
-    public static final int NUMBER_COUNT = 7;
 
     private LottoNumbers lottoNumbers;
     private LottoNumber bonusNumber;
@@ -20,19 +16,6 @@ public class WinningLottoNumbers {
 
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
-    }
-    public WinningLottoNumbers(List<LottoNumber> numbers) {
-        LottoNumbers.validate(numbers, NUMBER_COUNT);
-
-        this.bonusNumber = numbers.get(numbers.size() - 1);
-        this.lottoNumbers = new LottoNumbers(numbers.subList(0, numbers.size() - 1));
-    }
-
-    public static WinningLottoNumbers fromIntegers(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        return new WinningLottoNumbers(lottoNumbers);
     }
 
     public static WinningLottoNumbers toLottoNumbers(String lottoNumbersText, String bonusText) {

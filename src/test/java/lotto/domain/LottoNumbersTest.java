@@ -20,8 +20,8 @@ public class LottoNumbersTest {
     public void 로또번호_정렬테스트() {
         LottoNumbers numbers = LottoNumbers.fromIntegers(Arrays.asList(6, 5, 3, 4, 2, 1));
 
-        LottoNumbers lottoWinningNumbers = LottoNumbers.fromIntegers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers orderedNumbers = LottoNumbers.fromIntegers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertArrayEquals(numbers.numbers().toArray(), lottoWinningNumbers.numbers().toArray());
+        assertArrayEquals(numbers.numbers().toArray(), orderedNumbers.numbers().toArray());
     }
 }

@@ -13,7 +13,7 @@ public class LottoNumbers {
     private List<LottoNumber> numbers;
 
     public LottoNumbers() {
-        this(LottoNumberGenerator.generate(NUMBER_COUNT));
+        this(LottoNumberGenerator.generate());
     }
 
     public LottoNumbers(LottoNumbers lottoNumbers) {
@@ -21,7 +21,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<LottoNumber> numbers) {
-        validate(numbers, NUMBER_COUNT);
+        validate(numbers);
 
         this.numbers = numbers.stream()
                 .sorted()
@@ -49,9 +49,9 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public static void validate(List<LottoNumber> numbers, int numberCount) {
-        if( numbers == null || numbers.size() != numberCount) {
-            throw new IllegalArgumentException("숫자가 빈값이거나, 개수가 맞지 않습니다. " + numbers + ", " + numberCount);
+    public static void validate(List<LottoNumber> numbers) {
+        if( numbers == null || numbers.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException("숫자가 빈값이거나, 개수가 맞지 않습니다. " + numbers + ", " + numbers.size());
         }
 
         Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);

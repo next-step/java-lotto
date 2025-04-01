@@ -26,7 +26,10 @@ public class LottoNumbersMatcherTest {
 
     @Test
     public void 당첨_통계_당첨존재() {
-        WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3,  4,  5,  6, 7));
+        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(
+                LottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3,  4,  5,  6)),
+                bonusNumber);
 
         LottoNumberMatcher matcher = new LottoNumberMatcher(lottoNumbers, winningLottoNumbers);
         LottoWinningRecord record = matcher.result();
@@ -47,7 +50,10 @@ public class LottoNumbersMatcherTest {
 
     @Test
     public void 당첨_통계_당첨없을경우() {
-        WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.fromIntegers(Arrays.asList(39, 40, 41, 42, 43, 44, 45));
+        LottoNumber bonusNumber = new LottoNumber(45);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(
+                LottoNumbers.fromIntegers(Arrays.asList(39, 40, 41, 42, 43, 44)),
+                bonusNumber);
 
         LottoNumberMatcher matcher = new LottoNumberMatcher(lottoNumbers, winningLottoNumbers);
         LottoWinningRecord record = matcher.result();
