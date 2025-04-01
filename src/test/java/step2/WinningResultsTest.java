@@ -21,6 +21,15 @@ public class WinningResultsTest {
     }
 
     @Test
+    @DisplayName("2등 당첨 금액을 확인한다.")
+    void SecondCalculatePrizeTest() {
+        Map<Winning, Integer> matchResult = new HashMap<>();
+        matchResult.put(Winning.SECOND, 1);
+        WinningResults winningResults = new WinningResults(matchResult);
+        assertThat(winningResults.calculatePrize()).isEqualTo(30000000);
+    }
+
+    @Test
     @DisplayName("3등 당첨 금액을 확인한다.")
     void ThirdCalculatePrizeTest() {
         Map<Winning, Integer> matchResult = new HashMap<>();
