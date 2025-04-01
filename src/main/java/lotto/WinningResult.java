@@ -31,13 +31,13 @@ public class WinningResult {
         return Rank.valueOf(matchCount, matchBonus);
     }
 
-    public long getMatchCount(List<Integer> lottoNumbers) {
+    private long getMatchCount(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
                 .filter(this.winningTicket.getLottoNumbers()::contains)
                 .count();
     }
 
-    public boolean isMatchBonusNumber(List<Integer> lottoNumbers) {
+    private boolean isMatchBonusNumber(List<Integer> lottoNumbers) {
         return lottoNumbers.contains(this.bonusNumber);
     }
 }
