@@ -1,12 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.ManualLotto;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,32 +21,31 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static Lottos getManualLottoList(int manualLottoCount) {
+    public static List<List<Integer>> getManualLottoList(int manualLottoCount) {
         if (manualLottoCount == 0) {
-            return new Lottos(new ArrayList<>());
+            return new ArrayList<>();
         }
 
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        return new Lottos(
-                IntStream.range(0, manualLottoCount)
-                        .mapToObj(i -> getManualLotto())
-                        .collect(Collectors.toList()));
+        return IntStream.range(0, manualLottoCount)
+                .mapToObj(i -> getNumbers())
+                .collect(Collectors.toList());
     }
 
-    public static Lotto getWinningNumbers() {
+    public static List<Integer> getWinningNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return getManualLotto();
+        return getNumbers();
     }
 
-    public static LottoNumber getBonusNumber() {
+    public static int getBonusNumber() {
         System.out.println("\n보너스 볼을 입력해 주세요.");
-        return LottoNumber.of(Integer.parseInt(scanner.nextLine()));
+        return Integer.parseInt(scanner.nextLine());
     }
 
-    private static Lotto getManualLotto() {
-        return new ManualLotto(Arrays.stream(scanner.nextLine().split(DELIMITER))
+    private static List<Integer> getNumbers() {
+        return Arrays.stream(scanner.nextLine().split(DELIMITER))
                 .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
+
 }
