@@ -42,7 +42,7 @@ public class InputView {
         List<LottoManualTicket> manualTickets = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            manualTickets.add(new LottoManualTicket(split(scanner.nextLine())));
+            manualTickets.add(LottoManualTicket.from(split(scanner.nextLine())));
         }
 
         return manualTickets;

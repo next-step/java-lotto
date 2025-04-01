@@ -17,8 +17,8 @@ class LottoMachineTest {
     void testBuyAllLottos() {
         int money = 6000;
         List<LottoManualTicket> tickets = List.of(
-            new LottoManualTicket(List.of(1, 2, 3, 4, 5, 6)),
-            new LottoManualTicket(List.of(7, 8, 9, 10, 11, 12))
+            LottoManualTicket.from(List.of(1, 2, 3, 4, 5, 6)),
+            LottoManualTicket.from(List.of(7, 8, 9, 10, 11, 12))
         );
 
         LottoMachine lottoMachine = new LottoMachine(money, tickets);
@@ -53,9 +53,9 @@ class LottoMachineTest {
     void testTooManyManualTickets() {
         int money = 2000;
         List<LottoManualTicket> tickets = List.of(
-            new LottoManualTicket(List.of(1, 2, 3, 4, 5, 6)),
-            new LottoManualTicket(List.of(7, 8, 9, 10, 11, 12)),
-            new LottoManualTicket(List.of(13, 14, 15, 16, 17, 18))
+            LottoManualTicket.from(List.of(1, 2, 3, 4, 5, 6)),
+            LottoManualTicket.from(List.of(7, 8, 9, 10, 11, 12)),
+            LottoManualTicket.from(List.of(13, 14, 15, 16, 17, 18))
         );
 
         assertThatThrownBy(() -> new LottoMachine(money, tickets))
