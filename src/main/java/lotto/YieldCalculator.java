@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class YieldCalculator {
@@ -8,12 +9,14 @@ public class YieldCalculator {
                 .mapToLong(Long::longValue)
                 .sum();
 
-       long totalWinningAmount = (result.getOrDefault(Rank.FIFTH, 0L) * Rank.FIFTH.getWinningMoney()) +
-               (result.getOrDefault(Rank.FOURTH, 0L) * Rank.FOURTH.getWinningMoney()) +
-               (result.getOrDefault(Rank.THIRD, 0L) * Rank.THIRD.getWinningMoney()) +
-               (result.getOrDefault(Rank.SECOND, 0L) * Rank.SECOND.getWinningMoney()) +
-               (result.getOrDefault(Rank.FIRST, 0L) * Rank.FIRST.getWinningMoney());
+        long totalWinningAmount = Arrays.stream(Rank.values())
+                .mapToLong(rank -> calculateWinningAmountByRank(result, rank))
+                .sum();
 
         return (double) totalWinningAmount / (totalWinningCount * Seller.PRICE) * 100;
+    }
+
+    private static long calculateWinningAmountByRank(Map<Rank, Long> result, Rank rank) {
+        return result.getOrDefault(rank, 0L) * rank.getWinningMoney();
     }
 }
