@@ -13,7 +13,7 @@ public class LottoGame {
         return tickets;
     }
 
-    public GameResult gameStart(LottoTicket winningTicket) {
+    public GameResult gameStart(WinningLottoTicket winningTicket) {
         return tickets.match(winningTicket);
     }
 

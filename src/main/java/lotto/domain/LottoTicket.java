@@ -34,14 +34,8 @@ public class LottoTicket {
         return new LottoTicket(generatedNumbers);
     }
 
-    public int matchLottoNumbers(LottoTicket winningTicket) {
-        int matchCount = 0;
-        for(LottoNumber lottoNumber : winningTicket.lottoNumbers) {
-            if(lottoNumbers.contains(lottoNumber)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
-    }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }

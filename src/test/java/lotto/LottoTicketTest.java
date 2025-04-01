@@ -21,17 +21,6 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("당첨번호와 매칭되는 수를 반환한다.")
-    void matchLottoNumbers(){
-        LottoTicket purchasedTicket = createLottoTicket(List.of(1, 2, 3, 7, 8, 9));
-        LottoTicket winningTicket = createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
-
-        int matchCount = purchasedTicket.matchLottoNumbers(winningTicket);
-
-        assertThat(matchCount).isEqualTo(3);
-    }
-
-    @Test
     @DisplayName("중복된 숫자가 포함된 6개의 숫자를 입력하면 오류가 발생한다.")
     void validateLottoNumbers_withDuplicateNumbers() {
         List<LottoNumber> duplicateNumbers = List.of(

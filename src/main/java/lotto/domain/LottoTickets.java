@@ -45,10 +45,10 @@ public class LottoTickets {
         return results;
     }
 
-    public GameResult match(LottoTicket winningTicket) {
+    public GameResult match(WinningLottoTicket winningTicket) {
         Map<Rank, Integer> results = initializeResults();
         lottoTickets.stream()
-                .map(ticket -> Rank.getRankByMatchCount(ticket.matchLottoNumbers(winningTicket)))
+                .map(ticket -> Rank.getRankByMatchCount(winningTicket.matchLottoNumbers(ticket), winningTicket.hasBonusMatch(ticket)))
                 .forEach(rank -> results.merge(rank, 1, Integer::sum));
         return new GameResult(results, calculateReturnRate(results));
     }
@@ -60,4 +60,6 @@ public class LottoTickets {
                 .sum();
         return (double) totalWon / totalSpent;
     }
+
+
 }
