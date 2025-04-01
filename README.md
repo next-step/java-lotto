@@ -68,7 +68,7 @@
   - [x] 보너스 볼을 입력받아 당첨 통계에 추가
 - [ ] 피드백
   - [x] '\n' 대신 System.lineSeparator() 사용
-  - [ ] 로또 번호 정렬
+  - [x] 로또 번호 정렬
   - [ ] domain 에서 views 의존성 제거
     - [ ] LottoContainer
     - [ ] Lotto

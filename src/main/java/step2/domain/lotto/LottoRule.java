@@ -34,7 +34,9 @@ public class LottoRule {
             lottoNumbers.add(i);
         }
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, size);
+        List<Integer> generatedLotto = lottoNumbers.subList(0, size);
+        generatedLotto.sort(Integer::compareTo);
+        return generatedLotto;
     }
 
     private boolean isValid(int minNumber, int maxNumber, int size) {
