@@ -1,5 +1,6 @@
 package lotto.domain.model.game;
 
+import lotto.domain.model.lotto.BonusNumber;
 import lotto.domain.model.lotto.LottoNumber;
 import lotto.domain.model.lotto.LottoTicket;
 import lotto.domain.model.lotto.WinningLottoTicket;
@@ -21,14 +22,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoGameTest {
 
     private static final WinningLottoTicket WINNING_TICKET = new WinningLottoTicket(
-            numbers(1, 2, 3, 4, 5, 6), new LottoNumber(7)
+            numbers(1, 2, 3, 4, 5, 6), new BonusNumber(7)
     );
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("scenarios")
     void calculateLottoGameResult(
             final String description, final List<LottoTicket> tickets,
-            final Map<Rank, Integer> expectedRanks, final int expectedPrize) {
+            final Map<Rank, Integer> expectedRanks, final Prize expectedPrize) {
         LottoGameResult result = new LottoGame(tickets, WINNING_TICKET).draw();
 
         expectedRanks.forEach((rank, count) -> 
@@ -60,7 +61,7 @@ class LottoGameTest {
             Rank.FOURTH, 1, Rank.FIFTH, 1, Rank.MISS, 1
         );
         
-        int expectedPrize = prize(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
+        Prize expectedPrize = prize(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
         
         return Arguments.of("모든 등수 포함", tickets, expectedRanks, expectedPrize);
     }
@@ -68,7 +69,7 @@ class LottoGameTest {
     private static Arguments noTicketsScenario() {
         List<LottoTicket> tickets = Collections.emptyList();
         Map<Rank, Integer> expectedRanks = Collections.emptyMap();
-        int expectedPrize = 0;
+        Prize expectedPrize = Prize.zero();
         
         return Arguments.of("티켓 없음", tickets, expectedRanks, expectedPrize);
     }
@@ -80,7 +81,7 @@ class LottoGameTest {
         );
         
         Map<Rank, Integer> expectedRanks = Map.of(Rank.MISS, 2);
-        int expectedPrize = 0;
+        Prize expectedPrize = Prize.zero();
         
         return Arguments.of("모두 낙첨", tickets, expectedRanks, expectedPrize);
     }
@@ -88,7 +89,7 @@ class LottoGameTest {
     private static Arguments onlyBonusMatchScenario() {
         List<LottoTicket> tickets = tickets(numbers(7, 11, 12, 13, 14, 15));
         Map<Rank, Integer> expectedRanks = Map.of(Rank.MISS, 1);
-        int expectedPrize = 0;
+        Prize expectedPrize = Prize.zero();
         
         return Arguments.of("보너스 번호만 일치", tickets, expectedRanks, expectedPrize);
     }
@@ -106,7 +107,9 @@ class LottoGameTest {
         return lottoNumbers;
     }
     
-    private static int prize(Rank... ranks) {
-        return Arrays.stream(ranks).mapToInt(Rank::getWinningPrize).sum();
+    private static Prize prize(Rank... ranks) {
+        return Arrays.stream(ranks)
+                .map(Rank::getWinningPrize)
+                .reduce(Prize.zero(), Prize::add);
     }
 } 

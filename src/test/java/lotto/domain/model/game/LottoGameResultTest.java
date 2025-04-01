@@ -1,5 +1,6 @@
 package lotto.domain.model.game;
 
+import lotto.domain.model.lotto.PurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +11,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoGameResultTest {
 
@@ -20,7 +20,7 @@ class LottoGameResultTest {
         LottoGameResult result = new LottoGameResult();
 
         assertThat(result.getRankCountMap()).isEmpty();
-        assertThat(result.getTotalPrize()).isZero();
+        assertThat(result.getTotalPrize()).isEqualTo(Prize.zero());
     }
 
     @DisplayName("로또 게임 결과 추가 테스트")
@@ -48,7 +48,7 @@ class LottoGameResultTest {
     @DisplayName("로또 게임 총 상금 계산 테스트")
     @ParameterizedTest
     @MethodSource("prizeCalculationTestCases")
-    void getTotalPrize(final Rank[] ranksToAdd, final int expectedTotalPrize) {
+    void getTotalPrize(final Rank[] ranksToAdd, final Prize expectedTotalPrize) {
         LottoGameResult result = new LottoGameResult();
         
         for (Rank rank : ranksToAdd) {
@@ -62,30 +62,31 @@ class LottoGameResultTest {
         return Stream.of(
                 Arguments.of(
                     new Rank[]{Rank.FIRST, Rank.THIRD, Rank.FIFTH}, 
-                    Rank.FIRST.getWinningPrize() + Rank.THIRD.getWinningPrize() + Rank.FIFTH.getWinningPrize()
+                    Rank.FIRST.getWinningPrize().add(Rank.THIRD.getWinningPrize()).add(Rank.FIFTH.getWinningPrize())
                 ),
-                Arguments.of(new Rank[]{Rank.MISS, Rank.MISS}, 0),
-                Arguments.of(new Rank[]{Rank.FIFTH, Rank.FIFTH}, Rank.FIFTH.getWinningPrize() * 2)
+                Arguments.of(new Rank[]{Rank.MISS, Rank.MISS}, Prize.zero()),
+                Arguments.of(new Rank[]{Rank.FIFTH, Rank.FIFTH}, Rank.FIFTH.getWinningPrize().add(Rank.FIFTH.getWinningPrize()))
         );
     }
 
     @DisplayName("로또 게임 수익률 계산 테스트")
     @ParameterizedTest
     @MethodSource("yieldCalculationTestCases")
-    void getYield(final Rank[] ranksToAdd, final int purchaseAmount, final double expectedYield) {
+    void getYield(final Rank[] ranksToAdd, final int purchaseAmountValue, final double expectedYield) {
         LottoGameResult result = new LottoGameResult();
+        PurchaseAmount purchaseAmount = new PurchaseAmount(purchaseAmountValue);
         
         for (Rank rank : ranksToAdd) {
             result.addResult(rank);
         }
 
-        assertThat(result.getYield(purchaseAmount)).isEqualTo(expectedYield);
+        assertThat(result.getYield(purchaseAmount).getValue()).isEqualTo(expectedYield);
     }
 
     private static Stream<Arguments> yieldCalculationTestCases() {
         return Stream.of(
-                Arguments.of(new Rank[]{Rank.THIRD}, 5000, (double) Rank.THIRD.getWinningPrize() / 5000),
-                Arguments.of(new Rank[]{Rank.FIFTH}, 1000, (double) Rank.FIFTH.getWinningPrize() / 1000),
+                Arguments.of(new Rank[]{Rank.THIRD}, 5000, (double) Rank.THIRD.getWinningPrize().getAmount() / 5000),
+                Arguments.of(new Rank[]{Rank.FIFTH}, 1000, (double) Rank.FIFTH.getWinningPrize().getAmount() / 1000),
                 Arguments.of(new Rank[]{Rank.MISS}, 1000, 0.0)
         );
     }

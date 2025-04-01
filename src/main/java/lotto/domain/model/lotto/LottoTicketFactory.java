@@ -26,7 +26,7 @@ public class LottoTicketFactory {
     }
 
     public WinningLottoTicket createWinning(
-            final Set<LottoNumber> winningNumbers, final LottoNumber bonusNumber) {
+            final Set<LottoNumber> winningNumbers, final BonusNumber bonusNumber) {
         return new WinningLottoTicket(winningNumbers, bonusNumber);
     }
 }

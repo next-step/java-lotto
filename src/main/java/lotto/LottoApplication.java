@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoService;
 import lotto.domain.model.game.LottoGameResult;
-import lotto.domain.model.lotto.LottoNumber;
+import lotto.domain.model.lotto.PurchaseAmount;
 import lotto.domain.model.lotto.LottoTicket;
 import lotto.domain.model.lotto.WinningLottoTicket;
 import lotto.view.InputView;
@@ -24,7 +24,7 @@ public class LottoApplication {
 
     public void start() {
         try {
-            int amount = inputView.inputPurchaseAmount();
+            PurchaseAmount amount = inputView.inputPurchaseAmount();
             List<LottoTicket> lottoTickets = service.purchaseTickets(amount);
             resultView.printTickets(lottoTickets);
 

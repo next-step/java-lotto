@@ -33,7 +33,7 @@ class LottoTicketFactoryTest {
     void createWinningLottoTicket() {
         LottoTicketFactory factory = new LottoTicketFactory();
         Set<LottoNumber> winningNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(7);
+        BonusNumber bonusNumber = new BonusNumber(7);
 
         WinningLottoTicket winningTicket = factory.createWinning(winningNumbers, bonusNumber);
 

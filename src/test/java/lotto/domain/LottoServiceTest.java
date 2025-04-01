@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import lotto.domain.model.game.LottoGameResult;
+import lotto.domain.model.lotto.PurchaseAmount;
 import lotto.domain.model.game.Rank;
+import lotto.domain.model.game.Yield;
+import lotto.domain.model.lotto.BonusNumber;
 import lotto.domain.model.lotto.LottoNumber;
 import lotto.domain.model.lotto.LottoTicket;
 import lotto.domain.model.lotto.WinningLottoTicket;
@@ -58,7 +61,7 @@ class LottoServiceTest {
     @Test
     void createWinningTicket() {
         Set<LottoNumber> winningNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(7);
+        BonusNumber bonusNumber = new BonusNumber(7);
 
         WinningLottoTicket winningTicket = lottoService.createWinningTicket(winningNumbers, bonusNumber);
 
@@ -70,8 +73,9 @@ class LottoServiceTest {
     @Test
     void calculateLottoGameResult() {
         int purchaseAmount = 6000;
+        PurchaseAmount purchaseAmountObj = new PurchaseAmount(purchaseAmount);
         List<LottoTicket> tickets = createLottoTickets();
-        WinningLottoTicket winningTicket = new WinningLottoTicket(numbers(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        WinningLottoTicket winningTicket = new WinningLottoTicket(numbers(1, 2, 3, 4, 5, 6), new BonusNumber(7));
 
         LottoGameResult result = lottoService.draw(tickets, winningTicket);
 
@@ -80,8 +84,8 @@ class LottoServiceTest {
                 Rank.FOURTH, 1, Rank.FIFTH, 1, Rank.MISS, 1);
         assertThat(result.getRankCountMap()).isEqualTo(expectedRanks);
 
-        double expectedYield = (double) result.getTotalPrize() / purchaseAmount;
-        assertThat(result.getYield(purchaseAmount)).isEqualTo(expectedYield);
+        Yield expectedYield = new Yield(result.getTotalPrize(), purchaseAmountObj);
+        assertThat(result.getYield(purchaseAmountObj).getValue()).isEqualTo(expectedYield.getValue());
     }
 
     private List<LottoTicket> createLottoTickets() {

@@ -13,6 +13,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private void validateNumberRange(final int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(

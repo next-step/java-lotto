@@ -15,7 +15,7 @@ class WinningLottoTicketTest {
     @Test
     void createWinningLottoTicket() {
         Set<LottoNumber> winningNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(7);
+        BonusNumber bonusNumber = new BonusNumber(7);
 
         WinningLottoTicket winningTicket = new WinningLottoTicket(winningNumbers, bonusNumber);
 
@@ -28,7 +28,7 @@ class WinningLottoTicketTest {
     @Test
     void validateBonusNumberDuplication() {
         Set<LottoNumber> winningNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumber duplicatedBonusNumber = new LottoNumber(6);
+        BonusNumber duplicatedBonusNumber = new BonusNumber(6);
 
         assertThatThrownBy(() -> new WinningLottoTicket(winningNumbers, duplicatedBonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)

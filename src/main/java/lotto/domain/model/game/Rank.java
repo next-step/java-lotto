@@ -4,43 +4,43 @@ import java.util.Arrays;
 
 public enum Rank {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, true, 30_000_000),
-    THIRD(5,  1_500_000),
-    FOURTH(4,  50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    FIRST(new MatchCount(6), new Prize(2_000_000_000)),
+    SECOND(new MatchCount(5), BonusMatch.from(true), new Prize(30_000_000)),
+    THIRD(new MatchCount(5), new Prize(1_500_000)),
+    FOURTH(new MatchCount(4), new Prize(50_000)),
+    FIFTH(new MatchCount(3), new Prize(5_000)),
+    MISS(new MatchCount(0), Prize.zero());
 
-    private final int matchCriteria;
-    private final int winningPrize;
-    private Boolean isBonusMatch;
+    private final MatchCount matchCriteria;
+    private final Prize winningPrize;
+    private BonusMatch bonusMatch;
 
-    Rank(final int matchCriteria, final int winningPrize) {
+    Rank(final MatchCount matchCriteria, final Prize winningPrize) {
         this.matchCriteria = matchCriteria;
         this.winningPrize = winningPrize;
     }
 
-    Rank(final int matchCriteria, final Boolean isBonusMatch, final int winningPrize) {
+    Rank(final MatchCount matchCriteria, final BonusMatch bonusMatch, final Prize winningPrize) {
         this(matchCriteria, winningPrize);
-        this.isBonusMatch = isBonusMatch;
+        this.bonusMatch = bonusMatch;
     }
 
-    public int getMatchCriteria() {
+    public MatchCount getMatchCriteria() {
         return matchCriteria;
     }
 
-    public Boolean isBonusMatch() {
-        return isBonusMatch;
+    public BonusMatch getBonusMatch() {
+        return bonusMatch;
     }
 
-    public int getWinningPrize() {
+    public Prize getWinningPrize() {
         return winningPrize;
     }
 
-    public static Rank of(final int matchCount, final boolean isBonusMatch) {
+    public static Rank of(final MatchCount matchCount, final BonusMatch bonusMatch) {
         return Arrays.stream(values())
-                .filter(r -> r.getMatchCriteria() == matchCount)
-                .filter(r -> r.isBonusMatch() == null || r.isBonusMatch().equals(isBonusMatch))
+                .filter(r -> r.getMatchCriteria().equals(matchCount))
+                .filter(r -> r.getBonusMatch() == null || r.getBonusMatch().equals(bonusMatch))
                 .findFirst()
                 .orElse(MISS);
     }

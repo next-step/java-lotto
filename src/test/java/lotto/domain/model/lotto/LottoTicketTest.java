@@ -1,9 +1,9 @@
 package lotto.domain.model.lotto;
 
+import lotto.domain.model.game.MatchCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -49,9 +49,10 @@ class LottoTicketTest {
         LottoTicket ticket1 = new LottoTicket(createLottoNumbers(1, 2, 3, 4, 5, 6));
         LottoTicket ticket2 = new LottoTicket(createLottoNumbers(1, 2, 3, 7, 8, 9));
 
-        int matchCount = ticket1.countMatchingNumbers(ticket2);
+        MatchCount matchCount = ticket1.countMatchingNumbers(ticket2);
 
-        assertThat(matchCount).isEqualTo(3);
+        assertThat(matchCount).isEqualTo(new MatchCount(3));
+        assertThat(matchCount.getValue()).isEqualTo(3);
     }
 
     private Set<LottoNumber> createLottoNumbers(final int... numbers) {

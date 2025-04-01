@@ -1,5 +1,7 @@
 package lotto.domain.model.lotto;
 
+import lotto.domain.model.game.MatchCount;
+
 import java.util.*;
 
 public class LottoTicket {
@@ -23,10 +25,9 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
-    public int countMatchingNumbers(final LottoTicket other) {
-        return (int) numbers.stream().
-        filter(other::contains)
-        .count();
+    public MatchCount countMatchingNumbers(final LottoTicket other) {
+        int matchCount = (int) numbers.stream().filter(other::contains).count();
+        return new MatchCount(matchCount);
     }
 
     public Set<LottoNumber> getNumbers() {

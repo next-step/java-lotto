@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.model.lotto.PurchaseAmount;
+import lotto.domain.model.lotto.BonusNumber;
 import lotto.domain.model.lotto.LottoNumber;
 
 import java.util.*;
@@ -9,14 +11,14 @@ import java.util.stream.Stream;
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);
 
-    public int inputPurchaseAmount() {
+    public PurchaseAmount inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        return new PurchaseAmount(Integer.parseInt(scanner.nextLine()));
     }
 
-    public LottoNumber inputBonusNumber() {
+    public BonusNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(Integer.parseInt(scanner.nextLine()));
+        return new BonusNumber(Integer.parseInt(scanner.nextLine()));
     }
 
     public Set<LottoNumber> inputWinningNumbers() {
