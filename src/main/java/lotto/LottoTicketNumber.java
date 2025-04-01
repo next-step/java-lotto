@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicketNumber implements Comparable<LottoTicketNumber> {
 
@@ -23,6 +26,12 @@ public class LottoTicketNumber implements Comparable<LottoTicketNumber> {
 
   public static int getMinBound() {
     return MIN_BOUND;
+  }
+
+  public static List<LottoTicketNumber> generateAllPossibleNumbers() {
+    return IntStream.rangeClosed(MIN_BOUND, MAX_BOUND)
+        .mapToObj(LottoTicketNumber::new)
+        .collect(Collectors.toList());
   }
 
   private void validateNumber(Integer number) {
