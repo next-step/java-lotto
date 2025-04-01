@@ -15,12 +15,7 @@ public class LottoMain {
 
         ResultView.printLottoNumber(lottoTicket.getLottoRowList());
 
-        String winningNumbers = InputView.inputWinningNumbers();
-        List<LottoNumber> winningNumberList = Arrays.stream(winningNumbers.split(","))
-            .map(String::trim)
-            .map(Integer::parseInt)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+        List<LottoNumber> winningNumberList = InputView.inputWinningNumbers();
 
         WinningNumber winningNumber = new WinningNumber(winningNumberList);
         Map<Prize, Integer> calculate = winningNumber.calculate(lottoTicket);
