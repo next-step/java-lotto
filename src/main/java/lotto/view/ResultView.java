@@ -20,16 +20,29 @@ public class ResultView {
 
         for (LottoPrize prize : LottoPrize.values()) {
             if (prize == LottoPrize.NONE) continue;
-
-            int matchCount = prize.getMatchCount();
-            int prizeMoney = prize.getPrize();
             int count = lottoResult.getWinningCountsByPrize()
                     .getOrDefault(prize, 0);
-
-            System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, prizeMoney, count);
+            System.out.println(buildFormat(prize, count));
         }
 
         double profitRate = lottoResult.getProfitRate();
         System.out.printf("총 수익률은 %.2f입니다.", profitRate);
+    }
+
+    private static String buildFormat(LottoPrize prize, int count) {
+        int matchCount = prize.getMatchCount();
+        int prizeMoney = prize.getPrize();
+
+        String bonusText = prize.hasBonus() ? ", 보너스 볼 포함" : "";
+
+        return String.format("%d개 일치%s (%s원) - %d개",
+                matchCount,
+                bonusText,
+                formatWithComma(prizeMoney),
+                count);
+    }
+
+    private static String formatWithComma(int amount) {
+        return String.format("%,d", amount);
     }
 }

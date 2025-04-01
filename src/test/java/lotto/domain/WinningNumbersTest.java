@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -57,4 +58,16 @@ class WinningNumbersTest {
         );
     }
 
+    @Test
+    @DisplayName("보너스볼이 당첨번호와 중복되면 에러를 던진다.")
+    void duplicateThrow() {
+        //given
+        WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 6;
+
+        // when & then
+        Assertions.assertThatIllegalStateException()
+                .isThrownBy(() -> winningNumbers.setBonusNumber(bonusNumber))
+                .withMessageContaining("보너스 볼은 당첨 번호와 중복될 수 없습니다: " + bonusNumber);
+    }
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 public class WinningNumbers {
 
     private final Set<Integer> numbers;
+    private int bonusNumber;
 
     public WinningNumbers(Set<Integer> numbers) {
         if (numbers.size() != 6) {
@@ -15,7 +16,16 @@ public class WinningNumbers {
 
     public LottoPrize determineLottoPrize(LottoTicket ticket) {
         int matchCount = ticket.matchCountWith(numbers);
-        return LottoPrize.valueOf(matchCount);
+        boolean hasBonusNumber = ticket.hasBonusNumber(bonusNumber);
+        return LottoPrize.valueOf(matchCount, hasBonusNumber);
+    }
+
+    public void setBonusNumber(int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalStateException("보너스 볼은 당첨 번호와 중복될 수 없습니다: " + bonusNumber);
+        }
+
+        this.bonusNumber = bonusNumber;
     }
 
     public int size() {
