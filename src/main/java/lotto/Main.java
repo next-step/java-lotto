@@ -21,10 +21,11 @@ public class Main {
         LottoMachine machine = new LottoMachine(money, manualTickets);
         List<Lotto> lottos = machine.buyLottos();
 
-        OutputView.printLottoCount(manualTicketCount, lottos.size());
+        int autoTicketCount = lottos.size() - manualTicketCount;
+        OutputView.printLottoCount(manualTicketCount, autoTicketCount);
         OutputView.printLottos(lottos);
 
-        WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
+        WinningLotto winningLotto = WinningLotto.from(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
         LottoCheckerService checker = new LottoCheckerService(winningLotto);
         OutputView.printWinningStatistics(money, checker.check(lottos));
     }
