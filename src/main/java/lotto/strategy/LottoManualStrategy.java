@@ -18,7 +18,7 @@ public class LottoManualStrategy implements LottoGenerationStrategy {
 
     private void validation(List<LottoManualTicket> ticket) {
         if (ticket == null) {
-            throw new LottoGenerationException("수동 로또는 최소 1개 이상 입력해야 합니다.");
+            throw new LottoGenerationException();
         }
     }
 
