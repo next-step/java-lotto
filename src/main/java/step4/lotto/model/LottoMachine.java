@@ -21,15 +21,14 @@ public class LottoMachine {
     }
 
     public LottoTicketList buyLottoTickets(Money purchaseAmount) {
-        return buyLottoTickets(purchaseAmount, new Count(0));
+        return buyLottoTickets(purchaseAmount, new String[0]);
     }
 
-    public LottoTicketList buyLottoTickets(Money purchaseAmount, Count manualLottoTicketCount) {
-        validateBuyLottoTickets(purchaseAmount, manualLottoTicketCount);
+    public LottoTicketList buyLottoTickets(Money purchaseAmount, String[] manualLottoNumbersList) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        inputView.printManualLottoNumbersTitle();
-        for (int i = 0; i < manualLottoTicketCount.value(); i++) {
-            lottoTickets.add(issueLottoTicketManual());
+        validateBuyLottoTickets(purchaseAmount, new Count(manualLottoNumbersList.length));
+        for (String s : manualLottoNumbersList) {
+            lottoTickets.add(issueLottoTicketManual(s));
             purchaseAmount.subtract(PRICE);
         }
         Count ticketCount = new Count(purchaseAmount.value() / PRICE.value());
@@ -39,8 +38,8 @@ public class LottoMachine {
         return new LottoTicketList(lottoTickets);
     }
 
-    public LottoTicket issueLottoTicketManual() {
-        return new LottoTicketManual(inputView.getManualLottoNumbers());
+    public LottoTicket issueLottoTicketManual(String manualLottoNumbers) {
+        return new LottoTicketManual(manualLottoNumbers);
     }
 
     public LottoTicket issueLottoTicketAuto() {
@@ -53,7 +52,7 @@ public class LottoMachine {
         return new LottoTicketAuto(lottoTicket);
     }
 
-    private void validateBuyLottoTickets(Money purchaseAmount, Count manualLottoTicketCount) {
+    public void validateBuyLottoTickets(Money purchaseAmount, Count manualLottoTicketCount) {
         if (manualLottoTicketCount.value() * PRICE.value() > purchaseAmount.value()) {
             throw new LottoMachineNotEnoughMoneyException();
         }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import step4.lotto.exception.LottoTicketInvalidSizeException;
 
-public class LottoTicket {
+public class LottoTicket{
 
     public static final int SIZE = 6;
     private final Set<LottoNumber> lottoNumbers;
@@ -60,4 +60,11 @@ public class LottoTicket {
         return lottoNumbers.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoTicket)) return false;
+        LottoTicket that = (LottoTicket) o;
+        return lottoNumbers.equals(that.lottoNumbers);
+    }
 }

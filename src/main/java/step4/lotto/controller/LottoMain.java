@@ -20,13 +20,16 @@ public class LottoMain {
     public static void main(String[] args) {
         Money purchaseAmount = new Money(inputView.getPurchaseAmount());
         Count manualLottoTicketCount = new Count(inputView.getManualLottoTicketCount());
-        LottoTicketList lottoTickets = lottoMachine.buyLottoTickets(purchaseAmount, manualLottoTicketCount);
+        lottoMachine.validateBuyLottoTickets(purchaseAmount, manualLottoTicketCount);
+
+        inputView.printManualLottoNumbersTitle();
+        LottoTicketList lottoTickets = lottoMachine.buyLottoTickets(purchaseAmount, inputView.getManualLottoNumbersList(manualLottoTicketCount));
         resultView.printLottoTicketCount(lottoTickets);
 
         LottoTicketWinner lastWeekWinningTicket = new LottoTicketWinner(
             new LottoTicket(inputView.getLastWeekWinningNumbers()), LottoNumber.of(inputView.getBonusNumber()));
-        resultView.printLottoResultTitle();
 
+        resultView.printLottoResultTitle();
         LottoResult lottoResult = lottoTickets.scratchAll(lastWeekWinningTicket);
         resultView.printLottoResult(lottoResult, purchaseAmount);
     }

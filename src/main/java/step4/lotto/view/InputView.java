@@ -27,6 +27,14 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public String[] getManualLottoNumbersList(Count manualLottoTicketCount) {
+        String[] manualLottoNumbersList = new String[(int) manualLottoTicketCount.value()];
+        for (int i = 0; i < manualLottoTicketCount.value(); i++) {
+            manualLottoNumbersList[i] = getManualLottoNumbers();
+        }
+        return manualLottoNumbersList;
+    }
+
     public String getLastWeekWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();

@@ -2,7 +2,6 @@ package step4.lotto.model;
 
 import java.util.HashMap;
 import java.util.Map;
-import step4.lotto.exception.LottoNumberException;
 import step4.lotto.exception.LottoNumberInvalidFormatException;
 import step4.lotto.exception.LottoNumberInvalidValueException;
 
