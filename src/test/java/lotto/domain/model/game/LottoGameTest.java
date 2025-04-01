@@ -61,7 +61,7 @@ class LottoGameTest {
             Rank.FOURTH, 1, Rank.FIFTH, 1, Rank.MISS, 1
         );
         
-        Prize expectedPrize = prize(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
+        Prize expectedPrize = new Prize(2_031_555_000);
         
         return Arguments.of("모든 등수 포함", tickets, expectedRanks, expectedPrize);
     }
@@ -105,11 +105,5 @@ class LottoGameTest {
             lottoNumbers.add(new LottoNumber(value));
         }
         return lottoNumbers;
-    }
-    
-    private static Prize prize(Rank... ranks) {
-        return Arrays.stream(ranks)
-                .map(Rank::getWinningPrize)
-                .reduce(Prize.zero(), Prize::add);
     }
 } 

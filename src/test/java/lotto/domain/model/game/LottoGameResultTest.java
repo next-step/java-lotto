@@ -60,12 +60,9 @@ class LottoGameResultTest {
 
     private static Stream<Arguments> prizeCalculationTestCases() {
         return Stream.of(
-                Arguments.of(
-                    new Rank[]{Rank.FIRST, Rank.THIRD, Rank.FIFTH}, 
-                    Rank.FIRST.getWinningPrize().add(Rank.THIRD.getWinningPrize()).add(Rank.FIFTH.getWinningPrize())
-                ),
+                Arguments.of(new Rank[]{Rank.FIRST, Rank.THIRD, Rank.FIFTH}, new Prize(2_001_505_000)),
                 Arguments.of(new Rank[]{Rank.MISS, Rank.MISS}, Prize.zero()),
-                Arguments.of(new Rank[]{Rank.FIFTH, Rank.FIFTH}, Rank.FIFTH.getWinningPrize().add(Rank.FIFTH.getWinningPrize()))
+                Arguments.of(new Rank[]{Rank.FIFTH, Rank.FIFTH}, new Prize(10_000))
         );
     }
 
@@ -85,8 +82,8 @@ class LottoGameResultTest {
 
     private static Stream<Arguments> yieldCalculationTestCases() {
         return Stream.of(
-                Arguments.of(new Rank[]{Rank.THIRD}, 5000, (double) Rank.THIRD.getWinningPrize().getAmount() / 5000),
-                Arguments.of(new Rank[]{Rank.FIFTH}, 1000, (double) Rank.FIFTH.getWinningPrize().getAmount() / 1000),
+                Arguments.of(new Rank[]{Rank.THIRD}, 5000, 300.0),
+                Arguments.of(new Rank[]{Rank.FIFTH}, 1000, 5.0),
                 Arguments.of(new Rank[]{Rank.MISS}, 1000, 0.0)
         );
     }

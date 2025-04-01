@@ -84,8 +84,8 @@ class LottoServiceTest {
                 Rank.FOURTH, 1, Rank.FIFTH, 1, Rank.MISS, 1);
         assertThat(result.getRankCountMap()).isEqualTo(expectedRanks);
 
-        Yield expectedYield = new Yield(result.getTotalPrize(), purchaseAmountObj);
-        assertThat(result.getYield(purchaseAmountObj).getValue()).isEqualTo(expectedYield.getValue());
+        double expectedYieldValue = 338_592.5;
+        assertThat(result.getYield(purchaseAmountObj).getValue()).isEqualTo(expectedYieldValue);
     }
 
     private List<LottoTicket> createLottoTickets() {
