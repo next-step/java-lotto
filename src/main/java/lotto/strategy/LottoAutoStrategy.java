@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
 
 import static java.util.stream.Collectors.toList;
 import static lotto.domain.Lotto.LOTTO_NUMBER_END;
@@ -36,6 +37,7 @@ public class LottoAutoStrategy implements LottoGenerationStrategy {
             .limit(LOTTO_NUMBER_COUNT)
             .boxed()
             .sorted()
+            .map(LottoNo::new)
             .collect(toList()));
     }
 }

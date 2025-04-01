@@ -30,11 +30,11 @@ class LottoCheckerServiceTest {
     @DisplayName("당첨 여부 테스트 (로또 구매가 있는 경우)")
     void checkLottosTest() {
         List<Lotto> lottos = List.of(
-            new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-            new Lotto(List.of(1, 2, 3, 4, 5, 7)),
-            new Lotto(List.of(1, 2, 3, 4, 5, 8)),
-            new Lotto(List.of(1, 2, 3, 4, 8, 9)),
-            new Lotto(List.of(1, 2, 3, 10, 11, 12))
+            Lotto.from(List.of(1, 2, 3, 4, 5, 6)),
+            Lotto.from(List.of(1, 2, 3, 4, 5, 7)),
+            Lotto.from(List.of(1, 2, 3, 4, 5, 8)),
+            Lotto.from(List.of(1, 2, 3, 4, 8, 9)),
+            Lotto.from(List.of(1, 2, 3, 10, 11, 12))
         );
 
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);

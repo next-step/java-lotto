@@ -18,11 +18,11 @@ class LottoFactoryServiceTest {
     void createCorrectNumberOfLottos() {
         LottoGenerationStrategy strategy =
             () -> List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(List.of(1, 2, 3, 4, 7, 8)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 10)),
-                new Lotto(List.of(1, 2, 3, 4, 7, 16)),
-                new Lotto(List.of(1, 2, 3, 14, 15, 26))
+                Lotto.from(List.of(1, 2, 3, 4, 5, 6)),
+                Lotto.from(List.of(1, 2, 3, 4, 7, 8)),
+                Lotto.from(List.of(1, 2, 3, 4, 5, 10)),
+                Lotto.from(List.of(1, 2, 3, 4, 7, 16)),
+                Lotto.from(List.of(1, 2, 3, 14, 15, 26))
             );
 
         LottoFactoryService factory = new LottoFactoryService(strategy);
@@ -38,7 +38,16 @@ class LottoFactoryServiceTest {
     @DisplayName("수동 전략으로 로또 생성 테스트")
     void createManualLottos() {
         List<Integer> manualNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoGenerationStrategy strategy = new LottoManualStrategy(List.of(new LottoManualTicket(manualNumbers)));
+        List<LottoNo> expectedNumbers = List.of(
+            new LottoNo(1),
+            new LottoNo(2),
+            new LottoNo(3),
+            new LottoNo(4),
+            new LottoNo(5),
+            new LottoNo(6)
+        );
+
+        LottoGenerationStrategy strategy = new LottoManualStrategy(List.of(LottoManualTicket.from(manualNumbers)));
         LottoFactoryService factory = new LottoFactoryService(strategy);
 
         List<Lotto> result = factory.generateLottos();
@@ -47,7 +56,7 @@ class LottoFactoryServiceTest {
             .hasSize(1)
             .allSatisfy(
                 lotto -> assertThat(lotto.getLottoNumbers())
-                    .containsExactlyElementsOf(manualNumbers)
+                    .containsExactlyElementsOf(expectedNumbers)
             );
     }
 }

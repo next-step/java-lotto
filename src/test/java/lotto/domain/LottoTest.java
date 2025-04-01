@@ -16,21 +16,35 @@ class LottoTest {
     @DisplayName("로또 번호가 올바르게 생성되는지 테스트")
     void createLottoWithValidNumbers() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = Lotto.from(numbers);
 
         assertThat(lotto.getLottoNumbers())
-            .containsExactly(1, 2, 3, 4, 5, 6);
+            .containsExactly(
+                new LottoNo(1),
+                new LottoNo(2),
+                new LottoNo(3),
+                new LottoNo(4),
+                new LottoNo(5),
+                new LottoNo(6)
+            );
     }
 
     @Test
     @DisplayName("로또 번호가 정렬되어 반환되는지 테스트")
     void lottoNumbersShouldBeSorted() {
         List<Integer> numbers = Arrays.asList(6, 1, 3, 5, 4, 2);
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = Lotto.from(numbers);
 
         assertThat(lotto.getLottoNumbers())
             .isSorted()
-            .containsExactly(1, 2, 3, 4, 5, 6);
+            .containsExactly(
+                new LottoNo(1),
+                new LottoNo(2),
+                new LottoNo(3),
+                new LottoNo(4),
+                new LottoNo(5),
+                new LottoNo(6)
+            );
     }
 
     @Test
@@ -38,7 +52,7 @@ class LottoTest {
     void createLottoWithInvalidNumberOfNumbers() {
         List<Integer> invalidNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
-        assertThatThrownBy(() -> new Lotto(invalidNumbers))
+        assertThatThrownBy(() -> Lotto.from(invalidNumbers))
             .isInstanceOf(LottoNumberException.class);
     }
 
@@ -47,7 +61,7 @@ class LottoTest {
     void createLottoWithInvalidNumberRange() {
         List<Integer> invalidNumbers = Arrays.asList(1, 2, 3, 4, 5, 46);
 
-        assertThatThrownBy(() -> new Lotto(invalidNumbers))
+        assertThatThrownBy(() -> Lotto.from(invalidNumbers))
             .isInstanceOf(LottoNumberException.class);
     }
 
@@ -56,7 +70,7 @@ class LottoTest {
     void createLottoWithDuplicateNumbers() {
         List<Integer> duplicateNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
-        assertThatThrownBy(() -> new Lotto(duplicateNumbers))
+        assertThatThrownBy(() -> Lotto.from(duplicateNumbers))
             .isInstanceOf(LottoNumberException.class);
     }
 }
