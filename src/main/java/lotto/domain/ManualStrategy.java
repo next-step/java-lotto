@@ -1,10 +1,12 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ManualStrategy implements GeneratorStrategy {
-    public static final String REGEX = ",";
+    private static final int LOTTO_NUMBER_LENGTH = 6;
+    private static final String REGEX = ",";
+
     private final String input;
 
     public ManualStrategy(String input) {
@@ -13,10 +15,24 @@ public class ManualStrategy implements GeneratorStrategy {
 
     @Override
     public Lotto generate() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : input.split(REGEX)) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
+        Set<LottoNo> lottoNos = new HashSet<>();
+        String[] split = input.split(REGEX);
+
+        for (String number : split) {
+            lottoNos.add(new LottoNo(Integer.parseInt(number.trim())));
         }
-        return new Lotto(lottoNumbers);
+
+        checkValid(lottoNos, split);
+        return new Lotto(new HashSet<>(lottoNos));
+    }
+
+    private void checkValid(Set<LottoNo> lottoNos, String[] split) {
+        if (lottoNos.size() != split.length) {
+            throw new IllegalArgumentException("duplicate number is not allowed");
+        }
+
+        if (lottoNos.size() != LOTTO_NUMBER_LENGTH) {
+            throw new IllegalArgumentException("lotto size is not 6");
+        }
     }
 }
