@@ -15,6 +15,7 @@ import lotto.view.OutputView;
 public class LottoMain {
     public static void main(String[] args) {
         int inputValue = InputView.inputMoney();
+        List<String> manualLotto = InputView.inputManualLotto();
 
         LottoSeller lottoSeller = new LottoSeller(new Money(inputValue));
         List<Lotto> lottos = lottoSeller.generateLottos(new AutomaticStrategy());
