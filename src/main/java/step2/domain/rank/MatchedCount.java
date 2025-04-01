@@ -1,19 +1,21 @@
 package step2.domain.rank;
 
-public class MatchedCount {
-    private final int matchedCount;
+import java.util.Set;
 
-    public MatchedCount(int matchedCount) {
-        this.matchedCount = matchedCount;
+public class MatchedCount {
+    private final Set<Integer> matchedNumbersSet;
+
+    public MatchedCount(Set<Integer> matchedNumbers) {
+        this.matchedNumbersSet = matchedNumbers;
     }
 
-    public boolean isSame(int number) {
-        return matchedCount == number;
+    public boolean matchesCount(int number) {
+        return matchedNumbersSet.size() == number;
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(matchedCount);
+        return Integer.hashCode(matchedNumbersSet.hashCode());
     }
 
     @Override
@@ -25,6 +27,6 @@ public class MatchedCount {
 
         MatchedCount other = (MatchedCount) obj;
 
-        return matchedCount == other.matchedCount;
+        return matchedNumbersSet == other.matchedNumbersSet;
     }
 }

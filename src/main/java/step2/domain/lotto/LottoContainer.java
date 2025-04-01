@@ -29,7 +29,7 @@ public class LottoContainer {
     public List<Rank> checkWinningResults(WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.determineRank(winningLotto);
+            Rank rank = winningLotto.determineRank(lotto);
             ranks.add(rank);
         }
         return ranks;

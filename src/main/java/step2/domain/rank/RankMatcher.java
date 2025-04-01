@@ -9,6 +9,6 @@ public class RankMatcher {
     }
 
     public boolean matches(MatchedCount matchedCount) {
-        return matchedCount.isSame(requiredMatches);
+        return matchedCount.matchesCount(requiredMatches);
     }
 }

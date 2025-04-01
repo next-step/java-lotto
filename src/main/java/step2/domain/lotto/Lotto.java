@@ -1,10 +1,10 @@
 package step2.domain.lotto;
 
-import step2.domain.rank.MatchedCount;
-import step2.domain.rank.Rank;
 import views.LottoFormatter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
     private final List<Integer> lottoNumbers;
@@ -20,27 +20,21 @@ public class Lotto {
         this.lottoNumbers = lottoRule.generateLotto();
     }
 
-    public Rank determineRank(WinningLotto winningLotto) {
-        Rank matchedRank = Rank.NO_RANK;
-        for (Rank rank : Rank.values()) {
-            matchedRank = findMatchedRank(winningLotto, matchedRank, rank);
-        }
-        return matchedRank;
-    }
-
-    private Rank findMatchedRank(WinningLotto winningLotto, Rank currentRank, Rank candidateRank) {
-        if (candidateRank.matches(compareWith(winningLotto))) {
-            return candidateRank;
-        }
-        return currentRank;
-    }
-
-    private MatchedCount compareWith(WinningLotto winningLotto) {
-        int matchedCount = winningLotto.countMatchedNumbers(this.lottoNumbers);
-        return new MatchedCount(matchedCount);
-    }
-
     public LottoFormatter generateFormatter() {
         return new LottoFormatter(this.lottoNumbers);
+    }
+
+    public Set<Integer> findMatchingNumbers(List<Integer> winningNumbers) {
+        Set<Integer> winningSet = new HashSet<>(winningNumbers);
+        Set<Integer> lottoSet = new HashSet<>(lottoNumbers);
+        winningSet.retainAll(lottoSet);
+        return winningSet;
+    }
+
+    public Set<Integer> findNotMatchingNumbers(List<Integer> winningNumbers) {
+        Set<Integer> lottoSet = new HashSet<>(lottoNumbers);
+        Set<Integer> winningSet = new HashSet<>(winningNumbers);
+        lottoSet.removeAll(winningSet);
+        return lottoSet;
     }
 }
