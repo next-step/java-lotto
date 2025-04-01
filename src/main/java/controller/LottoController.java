@@ -11,6 +11,8 @@ import domain.generator.RandomLottoNumberGenerator;
 import java.util.List;
 import java.util.Map;
 
+import static domain.constant.LottoConstants.MATCH_PRICES;
+
 
 public class LottoController {
     private final LottoWallet lottoWallet = new LottoWallet();
@@ -50,7 +52,7 @@ public class LottoController {
         for (int matchCount : matchResult.keySet()) {
             ResultView.printMatchCount(
                     matchCount,
-                    LottoMatchCounter.MATCH_PRICES.getOrDefault(matchCount, 0),
+                    MATCH_PRICES.getOrDefault(matchCount, 0),
                     matchResult.getOrDefault(matchCount, 0)
             );
         }

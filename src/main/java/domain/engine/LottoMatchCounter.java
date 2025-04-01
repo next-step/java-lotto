@@ -1,19 +1,14 @@
 package domain.engine;
 
 import domain.model.LottoNumbers;
+import static domain.constant.LottoConstants.MATCH_PRICES;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoMatchCounter {
-    public static final Map<Integer, Integer> MATCH_PRICES = Map.of(
-            3, 5000,
-            4, 50000,
-            5, 1500000,
-            6, 2000000000
-    );
-    private LottoNumbers winNumbers;
+    private final LottoNumbers winNumbers;
 
     public LottoMatchCounter(LottoNumbers winNumbers) {
         this.winNumbers = winNumbers;

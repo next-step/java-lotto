@@ -2,6 +2,8 @@ package domain.model;
 
 import java.util.List;
 
+import static domain.constant.LottoConstants.*;
+
 public class LottoNumbers {
     private final List<Integer> numbers;
 
@@ -15,11 +17,11 @@ public class LottoNumbers {
     }
 
     private void validate() {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("Lotto numbers must contain exactly 6 numbers.");
         }
         for (Integer number : numbers) {
-            if (number < 1 || number > 45) {
+            if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
                 throw new IllegalArgumentException("Lotto numbers must be between 1 and 45.");
             }
         }
