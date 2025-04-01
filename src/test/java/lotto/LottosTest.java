@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.util.LottoNumberConverter.toLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
@@ -29,7 +28,7 @@ public class LottosTest {
 
     @Test
     public void 구매한_전체_로또의_당첨_결과를_반환한다_보너스볼판단포함() {
-        WinningLotto winningLotto = new WinningLotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)), 7);
+        WinningLotto winningLotto = new WinningLotto(Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 6))), LottoNumber.of(7));
 
         Lotto firstRankLotto = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 6)));
         Lotto secondRankLotto = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 7)));

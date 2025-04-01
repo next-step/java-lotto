@@ -1,20 +1,15 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottoList) {
         lottos = lottoList;
-    }
-
-    public static Lottos of(List<List<Integer>> numbersList) {
-        return new Lottos(numbersList.stream()
-                .map(LottoNumber::from)
-                .map(Lotto::generateManualLotto)
-                .collect(Collectors.toList()));
     }
 
     public void add(Lottos lottos) {

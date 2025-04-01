@@ -5,6 +5,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -12,8 +13,12 @@ public class LottoApplication {
 
         int purchaseAmount = InputView.getPurchaseAmount();
         int manualLottoCount = InputView.getManualLottoCount();
+        List<Lotto> manualLottoList = InputView.getManualLottoList(manualLottoCount).stream()
+                .map(LottoNumber::from)
+                .map(Lotto::generateManualLotto)
+                .collect(Collectors.toList());
 
-        customer.purchaseLotto(purchaseAmount, Lottos.of(InputView.getManualLottoList(manualLottoCount)));
+        customer.purchaseLotto(purchaseAmount, new Lottos(manualLottoList));
 
         OutputView.printLottoList(customer.getLottos());
 
@@ -24,6 +29,5 @@ public class LottoApplication {
         LottoResult lottoResult = LottoResult.of(customer, winningLotto);
         OutputView.printLottoResult(lottoResult);
     }
-
 
 }

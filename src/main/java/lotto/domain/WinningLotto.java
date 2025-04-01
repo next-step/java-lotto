@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Set;
 
 public class WinningLotto {
@@ -12,10 +11,6 @@ public class WinningLotto {
 
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
-    }
-
-    public WinningLotto(List<LottoNumber> numbers, int bonusNumber) {
-        this(Lotto.generateManualLotto(numbers), LottoNumber.of(bonusNumber));
     }
 
     public Rank determineLottoRank(Lotto lotto) {
