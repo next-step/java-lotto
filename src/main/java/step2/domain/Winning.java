@@ -6,10 +6,6 @@ public class Winning {
     private final Set<LottoNum> nums;
     private final LottoNum bonus;
 
-    public Winning(Set<LottoNum> nums) {
-        this(nums, new LottoNum(1));
-    }
-
     public Winning(Set<LottoNum> nums, LottoNum bonus) {
         validate(nums);
         this.nums = nums;
