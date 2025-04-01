@@ -18,7 +18,8 @@ class RankMatcherTest {
     @Test
     void matchesTest() {
         // given
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        WinningLotto winningLotto = new WinningLotto(givenLotto);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
         int requiredMatches = 6;
 
@@ -36,7 +37,8 @@ class RankMatcherTest {
     void matchesFailTest() {
         // given
         int bonusNumber = 7;
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), bonusNumber);
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        WinningLotto winningLotto = new WinningLotto(givenLotto, bonusNumber);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8), LOTTO_RULE);
         int requiredMatches = 6;
 
@@ -54,7 +56,8 @@ class RankMatcherTest {
     void secondRankMatchesTest() {
         // given
         int bonusNumber = 7;
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), bonusNumber);
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        WinningLotto winningLotto = new WinningLotto(givenLotto, bonusNumber);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7), LOTTO_RULE);
 
         // when
@@ -70,7 +73,8 @@ class RankMatcherTest {
     void secondRankMatchesFailTest() {
         // given
         int bonusNumber = 7;
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), bonusNumber);
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        WinningLotto winningLotto = new WinningLotto(givenLotto, bonusNumber);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8), LOTTO_RULE);
 
         // when

@@ -40,7 +40,8 @@ public class LottoContainerTest {
     @Test
     void checkWinningResults() {
         // given
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        WinningLotto winningLotto = new WinningLotto(lotto);
 
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
         Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12), LOTTO_RULE);
