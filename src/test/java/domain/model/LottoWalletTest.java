@@ -1,5 +1,6 @@
 package domain.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoWalletTest {
+    @DisplayName("로또를 추가한다.")
     @Test
     void addTest() {
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));

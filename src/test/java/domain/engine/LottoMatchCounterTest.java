@@ -2,6 +2,7 @@ package domain.engine;
 
 import domain.model.Lotto;
 import domain.model.LottoNumbers;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMatchCounterTest {
+    @DisplayName("Lotto의 list를 받아 당첨 번호와 일치하는 개수를 카운트한다.")
     @Test
     void countMatchesTest() {
         LottoNumbers winNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
@@ -28,6 +30,7 @@ public class LottoMatchCounterTest {
         assertThat(matchCount).doesNotContainKey(6);
     }
 
+    @DisplayName("당첨 번호와 일치하는 개수에 따라 수익률을 계산한다.")
     @Test
     void calculateProfitTest() {
         Map<Integer, Integer> matchCount = new HashMap<>();
