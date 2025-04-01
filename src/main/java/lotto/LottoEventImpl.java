@@ -14,10 +14,6 @@ public class LottoEventImpl implements LottoEvent {
     return lottoTicketSeller.getLottoPrice();
   }
 
-  public LottoTicketNumberSet getWinningLottoTicketNumberSet() {
-    return winningLottoTicketNumberSet;
-  }
-
   @Override
   public LottoTicket sellAutoLottoTicket() {
     return lottoTicketSeller.sellAutoLottoTicket();
