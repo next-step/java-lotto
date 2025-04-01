@@ -2,10 +2,12 @@ package domain;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
     @Test
@@ -27,5 +29,16 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(Collections.emptyList()))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("numList가 null이거나 비어있을수 없습니다.");
+    }
+
+    @Test
+    void matchRank_테스트() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> winningNums = Arrays.asList(1, 2, 3, 4, 5, 7);
+        BonusNumber bonusNumber = new BonusNumber(6);
+
+        lotto.matchRank(winningNums, bonusNumber);
+
+        assertThat(lotto.getRank()).isEqualTo(Rank.SECOND);
     }
 }

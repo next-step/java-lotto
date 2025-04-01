@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ShuffleStrategy implements LottoNumberStrategy {
+    final static int MAX_RANGE = 45;
+
     @Override
     public List<Integer> generateNumbers(int count) {
         List<Integer> candidateNumList = this.getCandidateNumList();
@@ -18,7 +20,7 @@ public class ShuffleStrategy implements LottoNumberStrategy {
     }
 
     private List<Integer> getCandidateNumList() {
-        return IntStream.rangeClosed(1, 45)
+        return IntStream.rangeClosed(1, MAX_RANGE)
             .boxed()
             .collect(Collectors.toList());
     }

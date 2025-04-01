@@ -8,7 +8,7 @@ public class LottoBundle {
     private final List<Lotto> lottoList;
     private final LottoStatics lottoStatics;
 
-    public LottoBundle(List<Lotto> lottoList, List<Integer> winningNums) {
+    public LottoBundle(List<Lotto> lottoList, List<Integer> winningNums, BonusNumber bonusNumber) {
         if (winningNums == null || winningNums.isEmpty()) {
             throw new IllegalArgumentException("winningNums는 null이거나 비어있을 수 없습니다.");
         }
@@ -18,10 +18,17 @@ public class LottoBundle {
         }
 
         this.lottoList = lottoList;
-        this.lottoStatics = new LottoStatics(lottoList, winningNums);
+        this.matchRank(winningNums, bonusNumber);
+        this.lottoStatics = new LottoStatics(lottoList);
     }
 
     public LottoStatics getLottoStatics() {
         return lottoStatics;
+    }
+
+    private void matchRank(List<Integer> winningNums, BonusNumber bonusNumber){
+        for(Lotto lotto : lottoList){
+            lotto.matchRank(winningNums, bonusNumber);
+        }
     }
 }

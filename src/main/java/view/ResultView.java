@@ -5,8 +5,14 @@ import java.util.stream.Collectors;
 
 import domain.Lotto;
 import domain.LottoStatics;
+import domain.Rank;
 
 import static domain.LottoStatics.PROFIT_STANDARD;
+import static domain.Rank.FIFTH;
+import static domain.Rank.FIRST;
+import static domain.Rank.FOURTH;
+import static domain.Rank.SECOND;
+import static domain.Rank.THIRD;
 
 public class ResultView {
 
@@ -27,10 +33,11 @@ public class ResultView {
     public static void print(LottoStatics lottoStatics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (" + LottoStatics.HIT_3_WINNING_AMOUNT + "원)- " + lottoStatics.getHit3Count() + "개");
-        System.out.println("4개 일치 (" + LottoStatics.HIT_4_WINNING_AMOUNT + "원)- " + lottoStatics.getHit4Count() + "개");
-        System.out.println("5개 일치 (" + LottoStatics.HIT_5_WINNING_AMOUNT + "원)- " + lottoStatics.getHit5Count() + "개");
-        System.out.println("6개 일치 (" + LottoStatics.HIT_6_WINNING_AMOUNT + "원)- " + lottoStatics.getHit6Count() + "개");
+        FIFTH.print(lottoStatics);
+        FOURTH.print(lottoStatics);
+        THIRD.print(lottoStatics);
+        SECOND.print(lottoStatics);
+        FIRST.print(lottoStatics);
 
         System.out.println("총 수익률은 " + lottoStatics.getProfitRate()
             + "입니다.(기준이 " + PROFIT_STANDARD

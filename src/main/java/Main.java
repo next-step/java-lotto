@@ -1,7 +1,9 @@
 
 import java.util.List;
+import java.util.Scanner;
 
 
+import domain.BonusNumber;
 import domain.Lotto;
 import domain.LottoBundle;
 import domain.LottoGenerator;
@@ -9,6 +11,7 @@ import domain.LottoGenerator;
 import static domain.Lotto.PRICE_PER_ONE;
 import static utils.Splitter.splitAndConvertInt;
 import static view.InputView.inputAmount;
+import static view.InputView.inputBonusNumbers;
 import static view.InputView.inputWinningNumber;
 import static view.ResultView.print;
 
@@ -23,7 +26,8 @@ public class Main {
         print(lottoList);
 
         List<Integer> winningNumbers = splitAndConvertInt(inputWinningNumber());
-        LottoBundle lottoBundle = new LottoBundle(lottoList, winningNumbers);
+        BonusNumber bonusNumber = new BonusNumber(inputBonusNumbers(), winningNumbers);
+        LottoBundle lottoBundle = new LottoBundle(lottoList, winningNumbers, bonusNumber);
         print(lottoBundle.getLottoStatics());
     }
 }

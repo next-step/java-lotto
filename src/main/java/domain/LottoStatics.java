@@ -2,75 +2,62 @@ package domain;
 
 import java.util.List;
 
+import static domain.Rank.FIFTH;
+import static domain.Rank.FIRST;
+import static domain.Rank.FOURTH;
+import static domain.Rank.SECOND;
+import static domain.Rank.THIRD;
+
 public class LottoStatics {
-    private int hit3Count = 0;
-    private int hit4Count = 0;
-    private int hit5Count = 0;
-    private int hit6Count = 0;
+    private int fifthCount = 0;
+    private int fourthCount = 0;
+    private int thirdCount = 0;
+    private int secondCount = 0;
+    private int firstCount = 0;
     private int totalLottoCount = 0;
     private double profitRate;
 
-    public static final int HIT_3_WINNING_AMOUNT = 5000;
-    public static final int HIT_4_WINNING_AMOUNT = 50000;
-    public static final int HIT_5_WINNING_AMOUNT = 150000;
-    public static final int HIT_6_WINNING_AMOUNT = 2000000000;
     public static final int PROFIT_STANDARD = 1;
 
-    public LottoStatics(List<Lotto> lottoList, List<Integer> winningNums) {
+    public LottoStatics(List<Lotto> lottoList) {
         this.totalLottoCount = lottoList.size();
-        this.makeStatics(lottoList, winningNums);
+        this.makeStatics(lottoList);
         this.makeProfitRate();
     }
 
-    public int getHit3Count() {
-        return hit3Count;
-    }
-
-    public int getHit4Count() {
-        return hit4Count;
-    }
-
-    public int getHit5Count() {
-        return hit5Count;
-    }
-
-    public int getHit6Count() {
-        return hit6Count;
-    }
-
-    private void makeStatics(List<Lotto> lottoList, List<Integer> winningNums) {
+    private void makeStatics(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            int matchCount = (int) lotto.getNumList().stream()
-                .filter(winningNums::contains)
-                .count();
-
-            this.increaseHitCount(matchCount);
+            this.increaseHitCount(lotto);
         }
     }
 
 
-    private void increaseHitCount(int matchCount) {
-        switch (matchCount) {
-            case 3:
-                hit3Count++;
+    private void increaseHitCount(Lotto lotto) {
+        switch (lotto.getRank()) {
+            case FIFTH:
+                fifthCount++;
                 break;
-            case 4:
-                hit4Count++;
+            case FOURTH:
+                fourthCount++;
                 break;
-            case 5:
-                hit5Count++;
+            case THIRD:
+                thirdCount++;
                 break;
-            case 6:
-                hit6Count++;
+            case SECOND:
+                secondCount++;
+                break;
+            case FIRST:
+                firstCount++;
                 break;
         }
     }
 
     private void makeProfitRate() {
-        int totalPrize = (hit3Count * HIT_3_WINNING_AMOUNT)
-            + (hit4Count * HIT_4_WINNING_AMOUNT)
-            + (hit5Count * HIT_5_WINNING_AMOUNT)
-            + (hit6Count * HIT_6_WINNING_AMOUNT);
+        int totalPrize = (fifthCount * FIFTH.getWinningMoney())
+            + (fourthCount * FOURTH.getWinningMoney())
+            + (thirdCount * THIRD.getWinningMoney())
+            + (secondCount * SECOND.getWinningMoney())
+            + (firstCount * FIRST.getWinningMoney());
 
         int totalSpent = totalLottoCount * Lotto.PRICE_PER_ONE;
         this.profitRate = (double) totalPrize / totalSpent;
@@ -83,5 +70,26 @@ public class LottoStatics {
 
     public boolean isProfit() {
         return this.profitRate > PROFIT_STANDARD;
+    }
+
+    public int getFirstCount() {
+        return this.firstCount;
+    }
+
+    public int getSecondCount() {
+        return this.secondCount;
+    }
+
+
+    public int getThirdCount() {
+        return thirdCount;
+    }
+
+    public int getFourthCount() {
+        return fourthCount;
+    }
+
+    public int getFifthCount() {
+        return fifthCount;
     }
 }
