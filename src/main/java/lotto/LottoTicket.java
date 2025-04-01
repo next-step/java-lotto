@@ -53,11 +53,11 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public LottoRank calculateRank(LottoTicket winningTicket) {
+    public Rank calculateRank(LottoTicket winningTicket) {
         long matchCount = lottoNumbers.stream()
                 .filter(winningTicket.getLottoNumbers()::contains)
                 .count();
 
-        return LottoRank.valueOf(matchCount);
+        return Rank.valueOf(matchCount);
     }
 }

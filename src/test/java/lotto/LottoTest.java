@@ -43,18 +43,18 @@ public class LottoTest {
         LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
 
         LottoTicket rank1Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(rank1Ticket.calculateRank(winningTicket)).isEqualTo(LottoRank.RANK_1);
+        assertThat(rank1Ticket.calculateRank(winningTicket)).isEqualTo(Rank.FIRST);
 
         LottoTicket rank3Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
-        assertThat(rank3Ticket.calculateRank(winningTicket)).isEqualTo(LottoRank.RANK_3);
+        assertThat(rank3Ticket.calculateRank(winningTicket)).isEqualTo(Rank.THIRD);
 
         LottoTicket rank4Ticket = new LottoTicket(List.of(1, 2, 3, 4, 7, 8));
-        assertThat(rank4Ticket.calculateRank(winningTicket)).isEqualTo(LottoRank.RANK_4);
+        assertThat(rank4Ticket.calculateRank(winningTicket)).isEqualTo(Rank.FOURTH);
 
         LottoTicket rank5Ticket = new LottoTicket(List.of(1, 2, 3, 7, 8, 9));
-        assertThat(rank5Ticket.calculateRank(winningTicket)).isEqualTo(LottoRank.RANK_5);
+        assertThat(rank5Ticket.calculateRank(winningTicket)).isEqualTo(Rank.FIFTH);
 
         LottoTicket unrankedTicket = new LottoTicket(List.of(1, 2, 7, 8, 9, 10));
-        assertThat(unrankedTicket.calculateRank(winningTicket)).isEqualTo(LottoRank.UNRANKED);
+        assertThat(unrankedTicket.calculateRank(winningTicket)).isEqualTo(Rank.MISS);
     }
 }

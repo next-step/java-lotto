@@ -1,13 +1,13 @@
 package lotto.ui;
 
-import lotto.LottoRank;
 import lotto.LottoTicket;
 import lotto.LottoTickets;
+import lotto.Rank;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.LottoRank.*;
+import static lotto.Rank.*;
 
 public class ResultView {
 
@@ -18,24 +18,24 @@ public class ResultView {
     }
 
     public static void printResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
-        List<LottoRank> ranks = lottoTickets.getLottoTickets().stream()
+        List<Rank> ranks = lottoTickets.getLottoTickets().stream()
                 .map(lottoTicket -> lottoTicket.calculateRank(winningTicket))
                 .collect(Collectors.toList());
 
-        long rank5Count = ranks.stream().filter(RANK_5::equals).count();
-        long rank4Count = ranks.stream().filter(RANK_4::equals).count();
-        long rank3Count = ranks.stream().filter(RANK_3::equals).count();
-        long rank1Count = ranks.stream().filter(RANK_1::equals).count();
+        long rank5Count = ranks.stream().filter(FIFTH::equals).count();
+        long rank4Count = ranks.stream().filter(FOURTH::equals).count();
+        long rank3Count = ranks.stream().filter(THIRD::equals).count();
+        long rank1Count = ranks.stream().filter(FIRST::equals).count();
 
-        long totalPrize = rank5Count * RANK_5.getPrize() + rank4Count * RANK_4.getPrize() + rank3Count * RANK_3.getPrize() + rank1Count * RANK_1.getPrize();
+        long totalPrize = rank5Count * FIFTH.getPrize() + rank4Count * FOURTH.getPrize() + rank3Count * THIRD.getPrize() + rank1Count * FIRST.getPrize();
         double totalPrizeRate = (double) totalPrize / (lottoTickets.getLottoTicketCount() * LottoTicket.PRICE);
 
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (" + RANK_5.getPrize() + "원)- " + rank5Count + "개");
-        System.out.println("4개 일치 (" + RANK_4.getPrize() + "원)- " + rank4Count + "개");
-        System.out.println("5개 일치 (" + RANK_3.getPrize() + "원)- " + rank3Count + "개");
-        System.out.println("6개 일치 (" + RANK_1.getPrize() + "원)- " + rank1Count + "개");
+        System.out.println("3개 일치 (" + FIFTH.getPrize() + "원)- " + rank5Count + "개");
+        System.out.println("4개 일치 (" + FOURTH.getPrize() + "원)- " + rank4Count + "개");
+        System.out.println("5개 일치 (" + THIRD.getPrize() + "원)- " + rank3Count + "개");
+        System.out.println("6개 일치 (" + FIRST.getPrize() + "원)- " + rank1Count + "개");
         System.out.printf("총 수익률은 %.2f입니다.", totalPrizeRate);
         System.out.println(getPrizeRateMessage(totalPrizeRate));
     }
