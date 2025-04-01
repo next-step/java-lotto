@@ -27,13 +27,8 @@ public class Lotto {
     }
 
     private boolean hasDuplicates(List<LottoNumber> numbers) {
-        Set<LottoNumber> container = new HashSet<>();
-        for (LottoNumber number : numbers) {
-            if (!container.add(number)) {
-                return true;
-            }
-        }
-        return false;
+        HashSet<LottoNumber> filteredNumbers = new HashSet<>(numbers);
+        return numbers.size() != filteredNumbers.size();
     }
 
     public List<LottoNumber> numbers() {
