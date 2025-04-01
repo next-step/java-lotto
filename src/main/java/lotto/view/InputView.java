@@ -17,6 +17,10 @@ public class InputView {
         return number;
     }
 
+    public String readManualNumbers() {
+        return scanner.nextLine();
+    }
+
     public String readWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
@@ -26,4 +30,6 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
     }
+
+
 }

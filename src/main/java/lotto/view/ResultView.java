@@ -14,6 +14,18 @@ public class ResultView {
         }
     }
 
+    public void printLottoTickets(LottoTickets manualTickets, LottoTickets autoTickets) {
+        String headerForm = String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다", manualTickets.size(), autoTickets.size());
+        System.out.println(headerForm);
+
+        for (LottoTicket ticket : manualTickets.getAll()) {
+            System.out.println(ticket);
+        }
+        for (LottoTicket ticket : autoTickets.getAll()) {
+            System.out.println(ticket);
+        }
+    }
+
     public void printLottoResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");

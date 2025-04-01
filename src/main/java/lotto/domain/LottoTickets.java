@@ -17,6 +17,12 @@ public class LottoTickets {
         return tickets.size();
     }
 
+    public LottoTickets merge(LottoTickets other) {
+        List<LottoTicket> mergedTickets = new ArrayList<>(tickets);
+        mergedTickets.addAll(other.getAll());
+        return new LottoTickets(mergedTickets);
+    }
+
     public List<LottoTicket> getAll() {
         return Collections.unmodifiableList(tickets);
     }
