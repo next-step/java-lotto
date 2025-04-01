@@ -15,7 +15,6 @@ public class LottoResult {
     this.totalWinningCount = totalWinningCount;
   }
 
-
   public int getWinningsNumber() {
     return winningsNumber;
   }
@@ -26,5 +25,11 @@ public class LottoResult {
 
   public void increaseTotalWinningCount() {
     this.totalWinningCount++;
+  }
+
+  public long calculateWinning(WinningLotto winningLotto) {
+    return
+        (long) PRIZES.valueOf(winningsNumber, winningLotto.isContainBonusBall()).getWinningMoney()
+            * totalWinningCount;
   }
 }

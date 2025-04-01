@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoChecker {
 
-  private final List<LottoResult> lottoResults = new ArrayList<>();
+  private LottoResults lottoResults = new LottoResults();
   private double profitRate = 0.0;
 
   public LottoChecker calculateResults(List<Lotto> lottos, WinningLotto winningLotto,
@@ -13,12 +12,13 @@ public class LottoChecker {
 
     checkPurchaseAmount(purchaseAmount);
 
+    PRIZES prizes = null;
     for (Lotto lotto : lottos) {
-      int count = winningLotto.matchingWinningNumber(lotto);
-      updateWinningCount(count);
+      prizes = winningLotto.matchingWinningNumber(lotto);
+      updateWinningCount(prizes.getWinningsNumber());
     }
 
-    this.profitRate = calculateProfitRate(purchaseAmount);
+    this.profitRate = calculateProfitRate(purchaseAmount, winningLotto);
     return this;
   }
 
@@ -28,39 +28,27 @@ public class LottoChecker {
     }
   }
 
-  private double calculateProfitRate(int purchaseAmount) {
+  private double calculateProfitRate(int purchaseAmount, WinningLotto winningLotto) {
     if (purchaseAmount == 0) {
       return 0.0;
     }
 
-    long totalWinning = lottoResults.stream()
-        .mapToLong(
-            result -> PRIZES.getWinningMoneyByWinningNumber(result.getWinningsNumber()) * result
-                .getTotalWinningCount())
-        .sum();
+    long totalWinning = lottoResults.calculateTotalWinning(winningLotto);
 
     return (double) totalWinning / purchaseAmount;
   }
 
-  private void updateWinningCount(int count) {
-    LottoResult existingResult = findLottoResult(count);
+  private void updateWinningCount(int winningCount) {
+    LottoResult existingResult = lottoResults.findLottoResult(winningCount);
     if (existingResult != null) {
       existingResult.increaseTotalWinningCount();
     } else {
-      lottoResults.add(new LottoResult(count));
+      lottoResults.addLottoResult(winningCount);
     }
-
   }
 
-  private LottoResult findLottoResult(int count) {
-    return lottoResults.stream()
-        .filter(result -> result.getWinningsNumber() == count)
-        .findFirst()
-        .orElse(null);
-  }
-
-  public List<LottoResult> getLottoResults() {
-    return lottoResults;
+  public int findTotalWinningCount(int winningNumber) {
+    return lottoResults.findTotalWinningCount(winningNumber);
   }
 
   public double getProfitRate() {

@@ -14,8 +14,9 @@ public class LottoApplication {
   private static final int LOTTO_PRICE = 1_000;
 
   public static void main(String[] args) {
+    InputView inputView = new InputView();
 
-    int purchaseAmount = InputView.getPurchaseAmount();
+    int purchaseAmount = inputView.getPurchaseAmount();
     int ticketCount = purchaseAmount / LOTTO_PRICE;
 
     List<Lotto> lottos = new ArrayList<>();
@@ -26,7 +27,7 @@ public class LottoApplication {
 
     ResultView.showLottos(lottos);
 
-    WinningLotto winningLotto = InputView.getWinningNumbers();
+    WinningLotto winningLotto = inputView.getWinningNumbers();
     LottoChecker lottoChecker = new LottoChecker()
         .calculateResults(lottos, winningLotto, purchaseAmount);
 
