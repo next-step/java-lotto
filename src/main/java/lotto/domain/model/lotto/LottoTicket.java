@@ -24,7 +24,9 @@ public class LottoTicket {
     }
 
     public int countMatchingNumbers(final LottoTicket other) {
-        return (int) numbers.stream().filter(other::contains).count();
+        return (int) numbers.stream().
+        filter(other::contains)
+        .count();
     }
 
     public Set<LottoNumber> getNumbers() {
