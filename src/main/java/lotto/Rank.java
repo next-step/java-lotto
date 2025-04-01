@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -38,11 +39,7 @@ public enum Rank {
                 .orElse(MISS);
     }
 
-    public String guideMessage(long count) {
-        if (this == SECOND) {
-            return this.countOfMatch + "개 일치, 보너스 볼 일치 (" + winningMoney + "원) - " + count + "개";
-        }
-
-        return this.countOfMatch + "개 일치 (" + winningMoney + "원) - " + count + "개";
+    public static List<Rank> getWiningRanks() {
+        return List.of(FIFTH, FOURTH, THIRD, SECOND, FIRST);
     }
 }

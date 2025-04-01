@@ -22,12 +22,17 @@ public class OutputView {
 
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(Rank.FIFTH.guideMessage(result.getOrDefault(Rank.FIFTH, 0L)));
-        System.out.println(Rank.FOURTH.guideMessage(result.getOrDefault(Rank.FOURTH, 0L)));
-        System.out.println(Rank.THIRD.guideMessage(result.getOrDefault(Rank.THIRD, 0L)));
-        System.out.println(Rank.SECOND.guideMessage(result.getOrDefault(Rank.SECOND, 0L)));
-        System.out.println(Rank.FIRST.guideMessage(result.getOrDefault(Rank.FIRST, 0L)));
+
+        Rank.getWiningRanks().forEach(it -> printGuideMessage(it, result.getOrDefault(it, 0L)));
 
         System.out.println("총 수익률은 " + calculateYield(result) + "%입니다.");
+    }
+
+    private static void printGuideMessage(Rank rank, long matchedCount) {
+        if (rank == Rank.SECOND) {
+            System.out.println(rank.getCountOfMatch() + "개 일치, 보너스 볼 일치 (" + rank.getWinningMoney() + "원) - " + matchedCount + "개");
+            return;
+        }
+        System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원) - " + matchedCount + "개");
     }
 }
