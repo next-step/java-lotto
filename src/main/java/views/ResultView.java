@@ -25,7 +25,8 @@ public class ResultView {
 
     private static void printResult(LottoGameResult lottoGameResult) {
         RankCounter rankCounters = lottoGameResult.getRankCounters();
-        printMessage("당첨 통계\n---------");
+        printMessage("당첨 통계" + System.lineSeparator() + "---------");
+
         for (RankType rank : RankType.validValues()) {
             String formattedRankInformation = generateRankDisplay(rank);
             String rankDisplayMessage = String.format("%s- %d개", formattedRankInformation, rankCounters.getCount(rank));

@@ -14,7 +14,7 @@ public class LottoContainerFormatter {
         StringBuilder sb = new StringBuilder();
         for (LottoFormatter lottoFormatter : lottoFormatters) {
             String numbersAsString = lottoFormatter.numbersAsString();
-            sb.append(numbersAsString).append("\n");
+            sb.append(numbersAsString).append(System.lineSeparator());
         }
         return sb.toString();
     }
