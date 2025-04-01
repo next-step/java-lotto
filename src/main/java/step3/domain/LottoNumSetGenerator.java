@@ -23,7 +23,13 @@ public class LottoNumSetGenerator {
 
     public static LottoNums generateSet(String lottoNumsInput) {
         List<LottoNum> lottoNums = Arrays.stream(lottoNumsInput.split(", "))
-                .map(Integer::parseInt)
+                .map(numStr -> {
+                    try {
+                        return Integer.parseInt(numStr);
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("로또 번호는 숫자만 입력 가능합니다: " + numStr);
+                    }
+                })
                 .map(LottoNum::new)
                 .collect(Collectors.toList());
         return new LottoNums(lottoNums);
