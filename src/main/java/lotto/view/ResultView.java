@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.Rewards;
+import lotto.domain.*;
 import lotto.enums.Rank;
 
 import java.util.Arrays;
@@ -12,6 +9,13 @@ import java.util.List;
 
 public class ResultView {
     private ResultView() {
+    }
+
+    public static Lottos printAndGetLottos(LottoInput input, List<Lotto> manualLottos) {
+        printLottoCount(input.getAvailableLottoCount(), input.getManualCount());
+        Lottos lottos = new Lottos(input.getAutoCount(), manualLottos);
+        printLottos(lottos);
+        return lottos;
     }
 
     public static void printLottoCount(int totalCount, int manualCount) {

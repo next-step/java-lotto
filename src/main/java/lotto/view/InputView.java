@@ -1,5 +1,9 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoInput;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +13,29 @@ public class InputView {
     public static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
+    }
+
+    public static LottoInput lottoInput() {
+        int initialAmount = inputLottoPurchaseAmount();
+        int availableLottoCount = Lotto.calculateLottoCount(initialAmount);
+        int manualCount = inputManualLottoCount();
+        int autoCount = availableLottoCount - manualCount;
+
+        if (manualCount > 0) {
+            printManualLottoGuide();
+        }
+
+        return new LottoInput(initialAmount, availableLottoCount, manualCount, autoCount);
+    }
+
+    public static List<Lotto> inputManualLotto(int manualCount) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            Lotto lotto = new Lotto(inputManualLottoNumbers());
+            manualLottos.add(lotto);
+        }
+
+        return manualLottos;
     }
 
     public static int inputLottoPurchaseAmount() {

@@ -4,28 +4,10 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoApplication {
     public static void main(String[] args) {
-        int initialAmount = InputView.inputLottoPurchaseAmount();
-        int availableLottoCount = Lotto.calculateLottoCount(initialAmount);
-        int manualCount = InputView.inputManualLottoCount();
-
-        if (manualCount > 0) {
-            InputView.printManualLottoGuide();
-        }
-
-        List<Lotto> manualLottos = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            Lotto lotto = new Lotto(InputView.inputManualLottoNumbers());
-            manualLottos.add(lotto);
-        }
-
-        ResultView.printLottoCount(availableLottoCount, manualCount);
-        Lottos lottos = new Lottos(availableLottoCount-manualCount, manualLottos);
-        ResultView.printLottos(lottos);
+        LottoInput lottoInput = InputView.lottoInput();
+        Lottos lottos = ResultView.printAndGetLottos(lottoInput, InputView.inputManualLotto(lottoInput.getManualCount()));
 
         String winningNumber = InputView.inputWinningNumber();
         WinningNumbers winningNumbers = new WinningNumbers(winningNumber);
@@ -33,6 +15,6 @@ public class LottoApplication {
         ResultView.printResultOverview();
 
         Rewards result = lottos.getResult(winningNumbers, bonusNumber);
-        ResultView.printResult(initialAmount, result);
+        ResultView.printResult(lottoInput.getInitialAmount(), result);
     }
 }
