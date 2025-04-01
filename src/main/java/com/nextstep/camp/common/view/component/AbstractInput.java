@@ -1,43 +1,35 @@
 package com.nextstep.camp.common.view.component;
 
+import com.nextstep.camp.common.strategy.InputStrategy;
 import com.nextstep.camp.common.view.Element;
 
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 public abstract class AbstractInput<T> implements Element<T> {
-    protected String untypedValue;
+    private final InputStrategy<T> inputStrategy;
     protected T value;
 
-    private static final String ERROR_MESSAGE = "잘못된 입력입니다. 다시 입력해주세요.";
-    private final Scanner scanner;
-
-    public AbstractInput(Scanner scanner) {
-        this.scanner = scanner;
+    public AbstractInput(InputStrategy<T> inputStrategy) {
+        this.inputStrategy = inputStrategy;
     }
 
     @Override
-    public void action() {
+    public T action() {
         requestInput();
+        return value;
     }
 
     private void requestInput() {
         System.out.println(getLabel());
-        this.untypedValue = readValidValue();
+        this.value = readValidValue();
     }
 
-    private String readValidValue() {
-        return Stream.generate(scanner::nextLine)
-            .filter(answer -> {
-                if (isValid(answer)) {
-                    return true;
-                }
-                System.out.println(ERROR_MESSAGE);
-                return false;
-            })
-            .findFirst()
-            .orElseThrow();
+    private T readValidValue() {
+        return inputStrategy.read();
     }
 
-    protected abstract boolean isValid(String value);
+    public T getValue() {
+        return value;
+    }
 }

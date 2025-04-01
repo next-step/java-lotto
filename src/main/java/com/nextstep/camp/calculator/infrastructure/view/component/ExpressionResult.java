@@ -24,7 +24,8 @@ public class ExpressionResult extends AbstractResult<Integer> {
     }
 
     @Override
-    public void action() {
+    public Integer action() {
         System.out.println(getLabel() + getValue());
+        return value;
     }
 }

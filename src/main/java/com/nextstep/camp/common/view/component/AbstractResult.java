@@ -10,5 +10,5 @@ public abstract class AbstractResult<T> implements Element<T> {
     }
 
     @Override
-    public abstract void action();
+    public abstract T action();
 }

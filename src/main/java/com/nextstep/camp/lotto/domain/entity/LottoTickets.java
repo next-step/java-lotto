@@ -1,5 +1,7 @@
 package com.nextstep.camp.lotto.domain.entity;
 
+import com.nextstep.camp.lotto.domain.exception.LottoTicketsCannotBeEmptyException;
+import com.nextstep.camp.lotto.domain.strategy.LottoPickStrategy;
 import com.nextstep.camp.lotto.domain.type.MatchResult;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 
@@ -9,12 +11,16 @@ import java.util.stream.Collectors;
 public class LottoTickets {
     private final List<LottoTicket> tickets;
 
-    private LottoTickets(List<LottoTicket> tickets) {
+    private LottoTickets(LottoPickStrategy pickStrategy) {
+        List<LottoTicket> tickets = pickStrategy.generate();
+        if (tickets == null || tickets.isEmpty()) {
+            throw new LottoTicketsCannotBeEmptyException();
+        }
         this.tickets = tickets;
     }
 
-    public static LottoTickets of(List<LottoTicket> tickets) {
-        return new LottoTickets(tickets);
+    public static LottoTickets of(LottoPickStrategy pickStrategy) {
+        return new LottoTickets(pickStrategy);
     }
 
     public int size() {

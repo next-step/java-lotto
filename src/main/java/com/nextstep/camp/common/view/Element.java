@@ -1,7 +1,7 @@
 package com.nextstep.camp.common.view;
 
 public interface Element<T> {
-    void action();
+    T action();
     String getLabel();
     T getValue();
 }
