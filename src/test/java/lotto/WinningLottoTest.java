@@ -23,13 +23,13 @@ class WinningLottoTest {
     public void 당첨번호와_구매_로또정보를_기반으로_등수정보를_반환한다_보너스번호포함() {
         WinningLotto winningLotto = new WinningLotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)), 7);
 
-        Lotto firstRankLotto = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
-        Lotto secondRankLotto = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
-        Lotto thirdRankLotto = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 38)));
-        Lotto fourthRankLottoWithBonusNumber = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 4, 7, 38)));
-        Lotto fourthRankLottoWithoutBonusNumber = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 4, 17, 38)));
-        Lotto fifthRankLottoWithBonusNumber = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 14, 7, 38)));
-        Lotto fifthRankLottoWithoutBonusNumber = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 14, 17, 38)));
+        Lotto firstRankLotto = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto secondRankLotto = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 7)));
+        Lotto thirdRankLotto = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 38)));
+        Lotto fourthRankLottoWithBonusNumber = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 7, 38)));
+        Lotto fourthRankLottoWithoutBonusNumber = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 17, 38)));
+        Lotto fifthRankLottoWithBonusNumber = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 14, 7, 38)));
+        Lotto fifthRankLottoWithoutBonusNumber = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 14, 17, 38)));
 
         assertThat(winningLotto.determineLottoRank(firstRankLotto)).isEqualTo(Rank.FIRST);
         assertThat(winningLotto.determineLottoRank(secondRankLotto)).isEqualTo(Rank.SECOND);

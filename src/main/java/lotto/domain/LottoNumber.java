@@ -23,6 +23,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return LOTTO_NUMBER_CACHE.get(number);
     }
 
+    public static List<LottoNumber> from(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+    }
+
     public static List<LottoNumber> pickRandomLottoNumbers(int count) {
         List<LottoNumber> lottoNumbers = new ArrayList<>(LOTTO_NUMBER_CACHE.values());
         Collections.shuffle(lottoNumbers);

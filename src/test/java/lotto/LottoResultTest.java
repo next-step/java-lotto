@@ -15,9 +15,9 @@ class LottoResultTest {
     public void 구매한_로또의_당첨통계와_구입금액_기반으로_수익률_반환_보너스볼판단포함() {
         int purchaseAmount = 3000;
 
-        Lotto firstRankLotto = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
-        Lotto secondRankLotto = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
-        Lotto thirdRankLotto = new ManualLotto(toLottoNumbers(List.of(1, 2, 3, 4, 5, 38)));
+        Lotto firstRankLotto = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto secondRankLotto = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 7)));
+        Lotto thirdRankLotto = Lotto.generateManualLotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 38)));
         List<Lotto> lottoList = List.of(firstRankLotto, secondRankLotto, thirdRankLotto);
 
         Customer customer = new Customer(purchaseAmount, new Lottos(lottoList));

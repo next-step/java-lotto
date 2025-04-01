@@ -12,7 +12,8 @@ public class Lottos {
 
     public static Lottos of(List<List<Integer>> numbersList) {
         return new Lottos(numbersList.stream()
-                .map(ManualLotto::of)
+                .map(LottoNumber::from)
+                .map(Lotto::generateManualLotto)
                 .collect(Collectors.toList()));
     }
 
@@ -42,13 +43,13 @@ public class Lottos {
 
     public int countManualLotto() {
         return (int) lottos.stream()
-                .filter(lotto -> lotto.getLottoType() == LottoType.MANUAL)
+                .filter(Lotto::isManualLotto)
                 .count();
     }
 
     public int countAutoLotto() {
         return (int) lottos.stream()
-                .filter(lotto -> lotto.getLottoType() == LottoType.AUTO)
+                .filter(Lotto::isAutoLotto)
                 .count();
     }
 

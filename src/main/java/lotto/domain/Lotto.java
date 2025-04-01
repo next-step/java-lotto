@@ -5,24 +5,28 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public abstract class Lotto {
-    protected static final int LOTTO_NUMBER_COUNT = 6;
+public class Lotto {
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
-    protected final Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
+    private final LottoType lottoType;
 
-    protected Lotto(Set<LottoNumber> numbers) {
-        lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
+    private Lotto(Set<LottoNumber> numbers, LottoType lottoType) {
+        validateInputs(numbers);
+        this.lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
+        this.lottoType = lottoType;
     }
 
-    protected static Set<LottoNumber> convertToSet(List<LottoNumber> numbers) {
-        validateInputs(numbers);
+    private Lotto(List<LottoNumber> numbers, LottoType lottoType) {
+        this(toTreeSet(numbers), lottoType);
+    }
 
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-        for (LottoNumber number : numbers) {
-            addUniqueLottoNumber(number, lottoNumbers);
-        }
+    public static Lotto generateManualLotto(List<LottoNumber> numbers) {
+        return new Lotto(numbers, LottoType.MANUAL);
+    }
 
-        return lottoNumbers;
+    public static Lotto generateAutoLotto() {
+        return new Lotto(LottoNumber.pickRandomLottoNumbers(LOTTO_NUMBER_COUNT), LottoType.AUTO);
     }
 
     public int countNumberMatchCount(Set<LottoNumber> numbers) {
@@ -35,17 +39,25 @@ public abstract class Lotto {
         return lottoNumbers.contains(number);
     }
 
-    protected static void addUniqueLottoNumber(LottoNumber lottoNumber, Set<LottoNumber> lottoNumbers) {
+    private static Set<LottoNumber> toTreeSet(List<LottoNumber> numbers) {
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
+        for (LottoNumber number : numbers) {
+            addUniqueLottoNumber(number, lottoNumbers);
+        }
+        return lottoNumbers;
+    }
+
+    private static void addUniqueLottoNumber(LottoNumber lottoNumber, Set<LottoNumber> lottoNumbers) {
         if (isNotUniqueLottoNumber(lottoNumber, lottoNumbers)) {
             throw new IllegalArgumentException("중복되는 번호가 있습니다. 중복된 번호: " + lottoNumber);
         }
     }
 
-    protected static boolean isNotUniqueLottoNumber(LottoNumber lottoNumber, Set<LottoNumber> lottoNumbers) {
+    private static boolean isNotUniqueLottoNumber(LottoNumber lottoNumber, Set<LottoNumber> lottoNumbers) {
         return !lottoNumbers.add(lottoNumber);
     }
 
-    protected static void validateInputs(List<LottoNumber> lottoNumbers) {
+    private static void validateInputs(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             String messageFormat = "로또는 %d개의 숫자로 구성되어 있습니다. 입력된 숫자 수: %d";
             throw new IllegalArgumentException(String.format(messageFormat, LOTTO_NUMBER_COUNT, lottoNumbers.size()));
@@ -56,5 +68,12 @@ public abstract class Lotto {
         return lottoNumbers;
     }
 
-    public abstract LottoType getLottoType();
+    public boolean isManualLotto() {
+        return LottoType.MANUAL == lottoType;
+    }
+
+    public boolean isAutoLotto() {
+        return LottoType.AUTO == lottoType;
+    }
+
 }

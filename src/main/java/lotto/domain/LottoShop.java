@@ -13,7 +13,7 @@ public class LottoShop {
         validatePurchaseAmount(purchaseAmount);
 
         return new Lottos(IntStream.range(0, calculateLottoCount(purchaseAmount))
-                .mapToObj(i -> (Lotto) new AutoLotto())
+                .mapToObj(i -> Lotto.generateAutoLotto())
                 .collect(Collectors.toList()));
     }
 
