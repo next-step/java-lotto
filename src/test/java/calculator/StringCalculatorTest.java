@@ -23,4 +23,10 @@ public class StringCalculatorTest {
         int result = StringCalculator.calculate("2 * 3 * 4");
         assertThat(result).isEqualTo(24);
     }
+
+    @Test
+    public void testDivide() {
+        int result = StringCalculator.calculate("10 / 2");
+        assertThat(result).isEqualTo(5);
+    }
 }
