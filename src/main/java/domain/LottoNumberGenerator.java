@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static domain.Lotto.LOTTO_MAX_NUMBER;
-import static domain.Lotto.LOTTO_MIN_NUMBER;
+import static domain.LottoNumber.LOTTO_MAX_NUMBER;
+import static domain.LottoNumber.LOTTO_MIN_NUMBER;
 
 public class LottoNumberGenerator {
     public List<Integer> generate() {
