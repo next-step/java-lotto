@@ -77,5 +77,4 @@ public class WinningNumbers {
         List<MatchCount> matchCounts = match(ticket);
         return new Summary(matchCounts);
     }
-
 }
