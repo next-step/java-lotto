@@ -24,6 +24,8 @@ public class StringCalculator {
                 return number1 + number2;
             case "-":
                 return number1 - number2;
+            case "*":
+                return number1 * number2;
             default:
                 throw new IllegalArgumentException("Invalid operation: " + operation);
         }

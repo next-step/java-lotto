@@ -17,4 +17,10 @@ public class StringCalculatorTest {
         int result = StringCalculator.calculate("10 - 2 - 3");
         assertThat(result).isEqualTo(5);
     }
+
+    @Test
+    public void testMultiply() {
+        int result = StringCalculator.calculate("2 * 3 * 4");
+        assertThat(result).isEqualTo(24);
+    }
 }
