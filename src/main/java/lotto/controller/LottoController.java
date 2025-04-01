@@ -34,13 +34,14 @@ public class LottoController {
         LottoTickets autoTickets = lottoMachine.issueAuto(autoCount);
         LottoTickets manualTickets = lottoMachine.issueManual(numberSets);
         resultView.printLottoTickets(manualTickets, autoTickets);
+        LottoTickets mergedTickets = autoTickets.merge(manualTickets);
 
         String winningNumbersInput = inputview.readWinningNumbers();
         WinningNumbers winningNumbers = Parser.parseWinningNumbers(winningNumbersInput);
         int bonusNumber = inputview.readBonusNumber();
         winningNumbers.setBonusNumber(bonusNumber);
 
-        LottoResult lottoResult = lottoResultsService.calculateResult(autoTickets, winningNumbers, purchaseAmount);
+        LottoResult lottoResult = lottoResultsService.calculateResult(mergedTickets, winningNumbers, purchaseAmount);
         resultView.printLottoResult(lottoResult);
     }
 
