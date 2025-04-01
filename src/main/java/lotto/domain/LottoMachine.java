@@ -15,6 +15,10 @@ public class LottoMachine {
 
     public LottoTickets issueAuto(int purchaseQuantity) {
 
+        if (purchaseQuantity <= 0) {
+            throw new IllegalArgumentException("유효하지 않는 구입 장수입니다: " + purchaseQuantity);
+        }
+
         return new LottoTickets(IntStream.range(0, purchaseQuantity)
                 .mapToObj(i -> new LottoTicket(numberGenerationStrategy.generateNumbers()))
                 .collect(Collectors.toList()));

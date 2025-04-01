@@ -16,15 +16,9 @@ class LottoPrizeTest {
     @MethodSource("provideWinningNumbers")
     void determinePrizeTest(Set<Integer> numbers, int bonusNumber, LottoPrize expectedLottoPrize) {
         //given
-        NumberGenerationStrategy fixedNumberGenerationStrategy = new NumberGenerationStrategy() {
-            @Override
-            public Set<Integer> generateNumbers() {
-                return Set.of(1, 2, 3, 4, 5, 6);
-            }
-        };
-        LottoTicket ticket = new LottoTicket(fixedNumberGenerationStrategy);
+
+        LottoTicket ticket = new LottoTicket(Set.of(1, 2, 3, 4, 5, 6));
         WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
-        winningNumbers.setBonusNumber(bonusNumber);
 
         //when
         LottoPrize lottoPrize = winningNumbers.determineLottoPrize(ticket);
