@@ -25,15 +25,7 @@ public class LottoGameApplication {
 
         LottoGameResult lottoGameResult = playLottoRound(lottoGame);
 
-        showGameSummary(lottoCount, lottoGameResult);
-    }
-
-    private static void showGameSummary(LottoCount lottoCount, LottoGameResult lottoGameResult) {
-        double winningRate = lottoCount.getWinningRate(lottoGameResult.getWinningsSum());
-
-        ResultView.printMessage("");
-        ResultView.printResult(lottoGameResult);
-        ResultView.printMessage(String.format("총 수익률은 %.2f입니다.", winningRate));
+        ResultView.showGameSummary(lottoCount, lottoGameResult);
     }
 
     private static LottoGameResult playLottoRound(LottoGame lottoGame) {

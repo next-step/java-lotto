@@ -57,12 +57,12 @@
   - [x] toString 대신 String 반환 메소드 생성
   - [x] LottoGameResult에서 winningRate 계산하도록 변경
 ### 3단계
-- [ ] 2단계 피드백
+- [x] 2단계 피드백
   - [x] LottoGameApplication 상수 적용
   - [x] LottoContainerFormatter 패키지 위치 조정
-  - [ ] Rank 객체가 RankFormatter 객체를 의존하지 않도록 변경
-  - [ ] LottoGameApplication 에서 ResultView 에게 결과 출력 메시지를 전달
-- [ ] 보너스 볼 추가
+  - [x] Rank 객체가 RankFormatter 객체를 의존하지 않도록 변경
+  - [x] LottoGameApplication 에서 ResultView 에게 결과 출력 메시지를 전달
+- [x] 보너스 볼 추가
   - [x] 보너스 볼을 포함한 등수 계산
-    - [ ] 리팩토링
-  - [ ] 보너스 볼을 입력받아 당첨 통계에 추가
+    - [x] 리팩토링
+  - [x] 보너스 볼을 입력받아 당첨 통계에 추가
