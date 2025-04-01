@@ -1,11 +1,10 @@
 package domain;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static domain.LottoNumber.LOTTO_MAX_NUMBER;
 import static domain.LottoNumber.LOTTO_MIN_NUMBER;
+import static utils.Parser.fromNumberInput;
 
 public class WinningNumber {
     private final LottoNumbers numbers;
@@ -25,13 +24,6 @@ public class WinningNumber {
 
     public boolean matchBonusNumber(LottoNumber lottoNumber) {
         return bonusNumber.equals(lottoNumber);
-    }
-
-    private List<Integer> fromNumberInput(String input) {
-        return Arrays.stream(input.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
     }
 
     private int fromBonusNumberInput(String bonusNumberInput) {
