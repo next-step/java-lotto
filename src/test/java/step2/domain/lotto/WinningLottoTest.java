@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.domain.rank.Rank;
+import step2.domain.rank.RankType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +22,10 @@ public class WinningLottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
 
         // when
-        Rank actual = winningLotto.determineRank(lotto);
+        RankType actual = winningLotto.determineRank(lotto);
 
         // then
-        Rank expected = Rank.FIRST;
+        RankType expected = RankType.FIRST;
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
@@ -38,10 +38,10 @@ public class WinningLottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7), LOTTO_RULE);
 
         // when
-        Rank actual = winningLotto.determineRank(lotto);
+        RankType actual = winningLotto.determineRank(lotto);
 
         // then
-        Rank expected = Rank.SECOND;
+        RankType expected = RankType.SECOND;
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
@@ -54,10 +54,10 @@ public class WinningLottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8), LOTTO_RULE);
 
         // when
-        Rank actual = winningLotto.determineRank(lotto);
+        RankType actual = winningLotto.determineRank(lotto);
 
         // then
-        Rank expected = Rank.THIRD;
+        RankType expected = RankType.THIRD;
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
@@ -69,10 +69,10 @@ public class WinningLottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 7, 8), LOTTO_RULE);
 
         // when
-        Rank actual = winningLotto.determineRank(lotto);
+        RankType actual = winningLotto.determineRank(lotto);
 
         // then
-        Rank expected = Rank.FOURTH;
+        RankType expected = RankType.FOURTH;
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
@@ -84,10 +84,10 @@ public class WinningLottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 9, 7, 8), LOTTO_RULE);
 
         // when
-        Rank actual = winningLotto.determineRank(lotto);
+        RankType actual = winningLotto.determineRank(lotto);
 
         // then
-        Rank expected = Rank.FIFTH;
+        RankType expected = RankType.FIFTH;
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
@@ -101,10 +101,10 @@ public class WinningLottoTest {
         Lotto lotto = new Lotto(lottoNumbers, LOTTO_RULE);
 
         // when
-        Rank actual = winningLotto.determineRank(lotto);
+        RankType actual = winningLotto.determineRank(lotto);
 
         // then
-        Rank expected = Rank.NO_RANK;
+        RankType expected = RankType.NO_RANK;
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 

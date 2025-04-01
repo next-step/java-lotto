@@ -1,6 +1,6 @@
 package step2.domain.lotto;
 
-import step2.domain.rank.Rank;
+import step2.domain.rank.RankType;
 import views.LottoContainerFormatter;
 import views.LottoFormatter;
 
@@ -26,10 +26,10 @@ public class LottoContainer {
         return lottos.size();
     }
 
-    public List<Rank> checkWinningResults(WinningLotto winningLotto) {
-        List<Rank> ranks = new ArrayList<>();
+    public List<RankType> checkWinningResults(WinningLotto winningLotto) {
+        List<RankType> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            Rank rank = winningLotto.determineRank(lotto);
+            RankType rank = winningLotto.determineRank(lotto);
             ranks.add(rank);
         }
         return ranks;

@@ -1,7 +1,7 @@
 package step2.domain;
 
 import step2.domain.lotto.*;
-import step2.domain.rank.Rank;
+import step2.domain.rank.RankType;
 import views.LottoContainerFormatter;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class LottoGame {
     }
 
     public LottoGameResult play(WinningLotto winningLotto) {
-        List<Rank> ranks = this.purchasedLotto.checkWinningResults(winningLotto);
+        List<RankType> ranks = this.purchasedLotto.checkWinningResults(winningLotto);
         return new LottoGameResult(ranks);
     }
 

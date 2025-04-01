@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.lotto.*;
-import step2.domain.rank.Rank;
+import step2.domain.rank.RankType;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ class LottoGameResultTest {
         LottoGameResult result = lottoGame.play(WINNING_LOTTO);
 
         int actual = 0;
-        for (Rank rank: Rank.values()) {
+        for (RankType rank: RankType.values()) {
             actual += result.getRankCounters().getCount(rank);
         }
         Assertions.assertThat(actual).isEqualTo(result.lottoCount());
@@ -59,7 +59,7 @@ class LottoGameResultTest {
         LottoGameResult result = lottoGame.play(WINNING_LOTTO);
 
         long actual = result.getWinningsSum();
-        long expected = Rank.FIRST.getTotalWinnings(10);
+        long expected = RankType.FIRST.getTotalWinnings(10);
 
         Assertions.assertThat(actual).isEqualTo(expected);
     }

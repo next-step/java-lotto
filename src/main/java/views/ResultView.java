@@ -3,7 +3,7 @@ package views;
 import step1.symbol.Operand;
 import step2.domain.LottoGameResult;
 import step2.domain.rank.RankCounter;
-import step2.domain.rank.Rank;
+import step2.domain.rank.RankType;
 
 public class ResultView {
     public static void printMessage(String message) {
@@ -17,7 +17,7 @@ public class ResultView {
     public static void printResult(LottoGameResult lottoGameResult) {
         RankCounter rankCounters = lottoGameResult.getRankCounters();
         printMessage("당첨 통계\n---------");
-        for (Rank rank : Rank.validValues()) {
+        for (RankType rank : RankType.validValues()) {
             RankFormatter rankFormatter = rank.generateFormatter();
             String formattedRankInformation = rankFormatter.format("%d개 일치 (%d)원");
             String rankDisplayMessage = String.format("%s - %d개", formattedRankInformation, rankCounters.getCount(rank));

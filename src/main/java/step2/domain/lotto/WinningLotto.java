@@ -1,14 +1,13 @@
 package step2.domain.lotto;
 
-import step2.domain.rank.MatchedCount;
-import step2.domain.rank.Rank;
+import step2.domain.rank.RankType;
 
 import java.util.List;
 import java.util.Set;
 
 public class WinningLotto {
-    public final List<Integer> winningNumbers;
-    public final Integer bonusNumber;
+    private final List<Integer> winningNumbers;
+    private final Integer bonusNumber;
 
     public WinningLotto(List<Integer> winningNumbers, Integer bonusNumber) {
         this.winningNumbers = winningNumbers;
@@ -19,34 +18,34 @@ public class WinningLotto {
         this(winningNumbers, null);
     }
 
-    public Rank determineRank(Lotto lotto) {
-        Rank matchedRank = Rank.NO_RANK;
-        for (Rank rank : Rank.values()) {
+    public RankType determineRank(Lotto lotto) {
+        RankType matchedRank = RankType.NO_RANK;
+        for (RankType rank : RankType.values()) {
             matchedRank = findMatchedRank(lotto, matchedRank, rank);
         }
         return matchedRank;
     }
 
-    private Rank findMatchedRank(Lotto lotto, Rank currentRank, Rank candidateRank) {
+    private RankType findMatchedRank(Lotto lotto, RankType currentRank, RankType candidateRank) {
         if (isWinningLotto(lotto, candidateRank)) {
             return candidateRank;
         }
         return currentRank;
     }
 
-    private boolean isWinningLotto(Lotto lotto, Rank candidateRank) {
-        if (candidateRank == Rank.SECOND) {
-            Set<Integer> matchingNumbers = lotto.findMatchingNumbers(this.winningNumbers);
-            Set<Integer> notMatchingNumbers = lotto.findNotMatchingNumbers(this.winningNumbers);
-            if (matchingNumbers.size() == 5 && notMatchingNumbers.size() == 1 && notMatchingNumbers.contains(this.bonusNumber)) {
-                return true;
-            }
-        }
-        return candidateRank.matches(compareWith(lotto), false);
+    private boolean isWinningLotto(Lotto lotto, RankType candidateRank) {
+        return candidateRank.matches(this, lotto);
     }
 
-    private MatchedCount compareWith(Lotto lotto) {
-        Set<Integer> matchedCount = lotto.findMatchingNumbers(this.winningNumbers);
-        return new MatchedCount(matchedCount);
+    public Set<Integer> matchedWith(Lotto lotto) {
+        return lotto.findMatchingNumbers(this.winningNumbers);
+    }
+
+    public Set<Integer> notMatchedWith(Lotto lotto) {
+        return lotto.findNotMatchingNumbers(this.winningNumbers);
+    }
+
+    public boolean isBonusNumberPresent(Set<Integer> number) {
+        return number.contains(this.bonusNumber);
     }
 }

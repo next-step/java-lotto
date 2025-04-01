@@ -3,7 +3,7 @@ package step2.domain.lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.rank.Rank;
+import step2.domain.rank.RankType;
 
 import java.util.List;
 
@@ -47,9 +47,9 @@ public class LottoContainerTest {
         LottoContainer lottoContainer = new LottoContainer(List.of(lotto1, lotto2));
 
         // when
-        List<Rank> ranks = lottoContainer.checkWinningResults(winningLotto);
+        List<RankType> ranks = lottoContainer.checkWinningResults(winningLotto);
 
         // then
-        Assertions.assertThat(ranks).containsAnyOf(Rank.FIRST, Rank.NO_RANK);
+        Assertions.assertThat(ranks).containsAnyOf(RankType.FIRST, RankType.NO_RANK);
     }
 }
