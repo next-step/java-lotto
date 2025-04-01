@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FakeStrategy implements GeneratorStrategy {
     private final List<Integer> numbers;
@@ -12,10 +11,6 @@ public class FakeStrategy implements GeneratorStrategy {
 
     @Override
     public Lotto generate() {
-        return new Lotto(convert());
-    }
-
-    private List<LottoNumber> convert() {
-        return this.numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+        return new Lotto(numbers);
     }
 }

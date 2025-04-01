@@ -2,17 +2,17 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNo {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
     private final int value;
 
-    public LottoNumber(String value) {
+    public LottoNo(String value) {
         this(Integer.parseInt(value));
     }
 
-    public LottoNumber(int value) {
+    public LottoNo(int value) {
         checkValue(value);
         this.value = value;
     }
@@ -25,11 +25,11 @@ public class LottoNumber {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof LottoNumber)) {
+        if (!(o instanceof LottoNo)) {
             return false;
         }
-        LottoNumber lottoNumber = (LottoNumber) o;
-        return value == lottoNumber.value;
+        LottoNo lottoNo = (LottoNo) o;
+        return value == lottoNo.value;
     }
 
     @Override
