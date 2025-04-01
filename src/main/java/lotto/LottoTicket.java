@@ -52,4 +52,12 @@ public class LottoTicket {
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public LottoRank calculateRank(LottoTicket winningTicket) {
+        long matchCount = lottoNumbers.stream()
+                .filter(winningTicket.getLottoNumbers()::contains)
+                .count();
+
+        return LottoRank.valueOf(matchCount);
+    }
 }

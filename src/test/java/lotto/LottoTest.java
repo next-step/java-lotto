@@ -28,8 +28,7 @@ public class LottoTest {
     @Test
     void lottoTickets() {
         LottoTickets lottoTickets = new LottoTickets(3000);
-        List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
-        assertThat(lottoTicketList).hasSize(3);
+        assertThat(lottoTickets.getLottoTicketCount()).isEqualTo(3);
     }
 
     @Test
@@ -37,5 +36,25 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5)));
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 46)));
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 5)));
+    }
+
+    @Test
+    void lottoRank() {
+        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+
+        LottoTicket rank1Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(rank1Ticket.calculateRank(winningTicket)).isEqualTo(LottoRank.RANK_1);
+
+        LottoTicket rank3Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
+        assertThat(rank3Ticket.calculateRank(winningTicket)).isEqualTo(LottoRank.RANK_3);
+
+        LottoTicket rank4Ticket = new LottoTicket(List.of(1, 2, 3, 4, 7, 8));
+        assertThat(rank4Ticket.calculateRank(winningTicket)).isEqualTo(LottoRank.RANK_4);
+
+        LottoTicket rank5Ticket = new LottoTicket(List.of(1, 2, 3, 7, 8, 9));
+        assertThat(rank5Ticket.calculateRank(winningTicket)).isEqualTo(LottoRank.RANK_5);
+
+        LottoTicket unrankedTicket = new LottoTicket(List.of(1, 2, 7, 8, 9, 10));
+        assertThat(unrankedTicket.calculateRank(winningTicket)).isEqualTo(LottoRank.UNRANKED);
     }
 }

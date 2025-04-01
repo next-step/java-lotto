@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.ui.InputView;
+import lotto.ui.ResultView;
+
 import java.util.List;
 
 public class LottoGame {
@@ -10,5 +13,6 @@ public class LottoGame {
         ResultView.printLottoTickets(lottoTickets);
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
         LottoTicket winningTicket = new LottoTicket(winningNumbers);
+        ResultView.printResult(lottoTickets, winningTicket);
     }
 }
