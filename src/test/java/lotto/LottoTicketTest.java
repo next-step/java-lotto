@@ -19,7 +19,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("로또의 자릿수 이상의 갯수의 숫자를 받을 수 없다.")
+    @DisplayName("6자리의 숫자만 받을 수 있다.")
     void lottoCreateNumbersSizeTest2() {
         var lessCase = IntStream.range(0, Game.DIGIT - 1).boxed().collect(Collectors.toUnmodifiableList());
         var moreCase = IntStream.range(0, Game.DIGIT + 1).boxed().collect(Collectors.toUnmodifiableList());
