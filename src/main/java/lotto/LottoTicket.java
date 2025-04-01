@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 
 public class LottoTicket {
 
-    private static final int LOTTO_MIN = 1;
-    private static final int LOTTO_MAX = 45;
+    public static final int LOTTO_MIN = 1;
+    public static final int LOTTO_MAX = 45;
     public static final int LOTTO_SIZE = 6;
     public static final int PRICE = 1000;
 
@@ -51,13 +51,5 @@ public class LottoTicket {
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    public Rank calculateRank(LottoTicket winningTicket) {
-        long matchCount = lottoNumbers.stream()
-                .filter(winningTicket.getLottoNumbers()::contains)
-                .count();
-
-        return Rank.valueOf(matchCount);
     }
 }

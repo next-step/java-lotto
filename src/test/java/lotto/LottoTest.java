@@ -41,20 +41,32 @@ public class LottoTest {
     @Test
     void lottoRank() {
         LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 7;
+        WinningResult winningResult = new WinningResult(winningTicket, bonusNumber);
 
         LottoTicket rank1Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(rank1Ticket.calculateRank(winningTicket)).isEqualTo(Rank.FIRST);
+        assertThat(winningResult.calculateRank(rank1Ticket)).isEqualTo(Rank.FIRST);
 
-        LottoTicket rank3Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
-        assertThat(rank3Ticket.calculateRank(winningTicket)).isEqualTo(Rank.THIRD);
+        LottoTicket rank2Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
+        assertThat(winningResult.calculateRank(rank2Ticket)).isEqualTo(Rank.SECOND);
+
+        LottoTicket rank3Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 8));
+        assertThat(winningResult.calculateRank(rank3Ticket)).isEqualTo(Rank.THIRD);
 
         LottoTicket rank4Ticket = new LottoTicket(List.of(1, 2, 3, 4, 7, 8));
-        assertThat(rank4Ticket.calculateRank(winningTicket)).isEqualTo(Rank.FOURTH);
+        assertThat(winningResult.calculateRank(rank4Ticket)).isEqualTo(Rank.FOURTH);
 
         LottoTicket rank5Ticket = new LottoTicket(List.of(1, 2, 3, 7, 8, 9));
-        assertThat(rank5Ticket.calculateRank(winningTicket)).isEqualTo(Rank.FIFTH);
+        assertThat(winningResult.calculateRank(rank5Ticket)).isEqualTo(Rank.FIFTH);
 
         LottoTicket unrankedTicket = new LottoTicket(List.of(1, 2, 7, 8, 9, 10));
-        assertThat(unrankedTicket.calculateRank(winningTicket)).isEqualTo(Rank.MISS);
+        assertThat(winningResult.calculateRank(unrankedTicket)).isEqualTo(Rank.MISS);
+    }
+
+    @Test
+    void validateBonusNumber() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningResult(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 6));
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningResult(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 0));
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningResult(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 46));
     }
 }

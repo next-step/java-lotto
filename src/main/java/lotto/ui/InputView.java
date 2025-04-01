@@ -17,6 +17,13 @@ public class InputView {
         return money;
     }
 
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+        scanner.nextLine();
+        return bonusNumber;
+    }
+
     public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumbers = scanner.nextLine();
@@ -24,7 +31,7 @@ public class InputView {
         return parse(winningNumbers);
     }
 
-    public static List<Integer> parse(String numbers) {
+    private static List<Integer> parse(String numbers) {
         return Stream.of(numbers.split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());

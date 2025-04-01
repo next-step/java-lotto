@@ -13,6 +13,8 @@ public class LottoGame {
         ResultView.printLottoTickets(lottoTickets);
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
         LottoTicket winningTicket = new LottoTicket(winningNumbers);
-        ResultView.printResult(lottoTickets, winningTicket);
+        int bonusNumber = InputView.inputBonusNumber();
+        WinningResult winningResult = new WinningResult(winningTicket, bonusNumber);
+        ResultView.printResult(lottoTickets, winningResult);
     }
 }
