@@ -20,7 +20,7 @@ class LottoTest {
         LottoMachine lottoMachine = new LottoMachine(new RandomNumberGeneration());
 
         //when`
-        LottoTickets tickets = lottoMachine.issue(purchaseAmount);
+        LottoTickets tickets = lottoMachine.issueAuto(purchaseAmount);
 
         //then
         assertThat(tickets.size()).isEqualTo(14);
@@ -35,7 +35,7 @@ class LottoTest {
 
         //when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoMachine.issue(purchaseAmount))
+                .isThrownBy(() -> lottoMachine.issueAuto(purchaseAmount))
                 .withMessageContaining("로또를 구매하기 적절한 금액이 아닙니다");
 
     }

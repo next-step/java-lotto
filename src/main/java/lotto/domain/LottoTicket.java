@@ -6,8 +6,8 @@ public class LottoTicket {
 
     private final Set<Integer> numbers;
 
-    public LottoTicket(NumberGenerationStrategy generationStrategy) {
-        numbers = generationStrategy.generateNumbers();
+    public LottoTicket(Set<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     @Override
