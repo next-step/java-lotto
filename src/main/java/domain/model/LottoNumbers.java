@@ -6,6 +6,7 @@ import static domain.constant.LottoConstants.*;
 
 public class LottoNumbers {
     private final List<Integer> numbers;
+    private int matchCount;
 
     public LottoNumbers(List<Integer> numbers) {
         this.numbers = numbers;
@@ -14,6 +15,18 @@ public class LottoNumbers {
 
     public List<Integer> getNumbers() {
         return this.numbers;
+    }
+
+    public void countMatch(LottoNumbers winNumbers) {
+        for (int number : winNumbers.getNumbers()) {
+            if (this.numbers.contains(number)) {
+                this.matchCount++;
+            }
+        }
+    }
+
+    int getMatchCount() {
+        return this.matchCount;
     }
 
     private void validate() {

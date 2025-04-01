@@ -45,4 +45,15 @@ public class LottoNumbersTest {
             assertThat(e.getMessage()).isEqualTo("Lotto numbers must be between 1 and 45.");
         }
     }
+
+    @DisplayName("로또 번호를 비교하여 일치하는 개수를 센다.")
+    @Test
+    void countMatchTest() {
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 2, 3, 7, 8, 9));
+
+        lottoNumbers.countMatch(winningNumbers);
+
+        assertThat(lottoNumbers.getMatchCount()).isEqualTo(3);
+    }
 }

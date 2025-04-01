@@ -4,30 +4,23 @@ import view.InputView;
 import view.ResultView;
 import domain.model.LottoNumbers;
 import domain.model.LottoWallet;
-import domain.engine.LottoMatchCounter;
 import domain.engine.LottoMachine;
 import domain.generator.RandomLottoNumberGenerator;
 
 import java.util.List;
-import java.util.Map;
-
-import static domain.constant.LottoConstants.MATCH_PRICES;
 
 
 public class LottoController {
     private final LottoWallet lottoWallet = new LottoWallet();
     private final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberGenerator());
-    private LottoMatchCounter lottoMatchCounter;
 
     public void run() {
         int purchaseAmount = InputView.getPurchaseAmount();
         purchase(purchaseAmount);
 
-        LottoNumbers winNumbers = draw();
+        draw();
 
-        Map<Integer, Integer> matchResult = announce(winNumbers);
-
-        calculateProfit(matchResult, purchaseAmount);
+        calculateProfit(purchaseAmount);
     }
 
     private void purchase(int purchaseAmount) {
@@ -40,27 +33,14 @@ public class LottoController {
         }
     }
 
-    private LottoNumbers draw() {
-        return new LottoNumbers(InputView.getWinNumbers());
+    private void draw() {
+        LottoNumbers winNumbers = new LottoNumbers(InputView.getWinNumbers());
+        this.lottoWallet.countMatches(winNumbers);
+        ResultView.printMatchResult(this.lottoWallet.getMatchResult());
     }
 
-    private Map<Integer, Integer> announce(LottoNumbers winNumbers) {
-        this.lottoMatchCounter = new LottoMatchCounter(winNumbers);
-        Map<Integer, Integer> matchResult = this.lottoMatchCounter.countMatches(lottoWallet.getLottos());
-        ResultView.printMessage("당첨 통계");
-        ResultView.printMessage("---------");
-        for (int matchCount : matchResult.keySet()) {
-            ResultView.printMatchCount(
-                    matchCount,
-                    MATCH_PRICES.getOrDefault(matchCount, 0),
-                    matchResult.getOrDefault(matchCount, 0)
-            );
-        }
-        return matchResult;
-    }
-
-    private void calculateProfit(Map<Integer, Integer> matchResult, int purchaseAmount) {
-        double profit = this.lottoMatchCounter.calculateProfit(matchResult, purchaseAmount);
-        ResultView.printMessage(String.format("총 수익률은 %.2f 입니다.", profit));
+    private void calculateProfit(int purchaseAmount) {
+        double profit = (double) this.lottoWallet.getPrize() / purchaseAmount;
+        ResultView.printProfit(profit);
     }
 }
