@@ -56,3 +56,7 @@
   - [x] Rank.displayRank 변경
   - [x] toString 대신 String 반환 메소드 생성
   - [x] LottoGameResult에서 winningRate 계산하도록 변경
+### 3단계
+- [ ] 보너스 볼 추가
+  - [ ] 보너스 볼을 입력받아 당첨 통계에 추가
+  - [ ] 보너스 볼을 포함한 등수 계산
