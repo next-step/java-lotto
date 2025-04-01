@@ -1,6 +1,7 @@
-package lotto.domain.product;
+package lotto.domain.product.lotto;
 
 import lotto.domain.Money;
+import lotto.domain.product.Product;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,6 +13,7 @@ public class LotteryTicket implements Product {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int MAX_LOTTO_SIZE = 6;
+    private static final String INPUT_DELIMITER = ",";
 
     private final Set<LottoNumber> numbers;
 
@@ -32,7 +34,7 @@ public class LotteryTicket implements Product {
     }
 
     private static Set<LottoNumber> parseInput(String input) {
-        Set<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
+        Set<LottoNumber> lottoNumbers = Arrays.stream(input.split(INPUT_DELIMITER))
                 .map(String::trim)
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());

@@ -2,10 +2,10 @@ package lotto.view.input;
 
 import lotto.domain.PaymentReceipt;
 import lotto.domain.Quantity;
-import lotto.domain.product.LotteryTicket;
-import lotto.domain.product.LotteryTickets;
-import lotto.domain.product.LottoNumber;
-import lotto.domain.product.WinningTicket;
+import lotto.domain.product.lotto.LotteryTicket;
+import lotto.domain.product.lotto.LotteryTickets;
+import lotto.domain.product.lotto.LottoNumber;
+import lotto.domain.product.lotto.WinningTicket;
 
 import java.util.Scanner;
 

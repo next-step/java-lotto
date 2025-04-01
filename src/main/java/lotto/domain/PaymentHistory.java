@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import lotto.domain.product.FinalResult;
-import lotto.domain.product.LotteryTickets;
-import lotto.domain.product.WinningTicket;
+import lotto.domain.product.lotto.LotteryTickets;
+import lotto.domain.product.lotto.WinningTicket;
 
 import java.util.List;
 import java.util.Set;

@@ -1,6 +1,7 @@
-package lotto.domain.product;
+package lotto.domain.product.lotto;
 
 import lotto.domain.Quantity;
+import lotto.domain.product.FinalResult;
 
 import java.util.ArrayList;
 import java.util.List;

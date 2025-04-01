@@ -2,6 +2,7 @@ package lotto.domain.product;
 
 import lotto.domain.Money;
 import lotto.domain.PaymentReceipt;
+import lotto.domain.product.lotto.LottoRank;
 
 import java.util.EnumMap;
 import java.util.Map;

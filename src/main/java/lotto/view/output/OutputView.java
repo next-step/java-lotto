@@ -4,7 +4,7 @@ import lotto.domain.PaymentHistory;
 import lotto.domain.PaymentReceipt;
 import lotto.domain.Quantity;
 import lotto.domain.product.FinalResult;
-import lotto.domain.product.LottoRank;
+import lotto.domain.product.lotto.LottoRank;
 
 import java.util.Arrays;
 import java.util.Comparator;

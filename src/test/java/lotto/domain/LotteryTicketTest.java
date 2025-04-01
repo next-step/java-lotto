@@ -1,9 +1,9 @@
 package lotto.domain;
 
 import lotto.domain.product.FinalResult;
-import lotto.domain.product.LotteryTicket;
-import lotto.domain.product.LottoNumber;
-import lotto.domain.product.LottoRank;
+import lotto.domain.product.lotto.LotteryTicket;
+import lotto.domain.product.lotto.LottoNumber;
+import lotto.domain.product.lotto.LottoRank;
 import lotto.view.fake.FakeInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

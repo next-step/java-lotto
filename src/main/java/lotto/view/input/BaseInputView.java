@@ -1,7 +1,7 @@
 package lotto.view.input;
 
-import lotto.domain.product.LotteryTicket;
-import lotto.domain.product.LottoNumber;
+import lotto.domain.product.lotto.LotteryTicket;
+import lotto.domain.product.lotto.LottoNumber;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -20,4 +20,6 @@ public abstract class BaseInputView implements InputView {
     protected static LotteryTicket getTicket(String input) {
         return new LotteryTicket(input);
     }
+
+
 }
