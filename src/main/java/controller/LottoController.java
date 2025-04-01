@@ -2,7 +2,6 @@ package controller;
 
 import view.InputView;
 import view.ResultView;
-import domain.model.Lotto;
 import domain.model.LottoNumbers;
 import domain.model.LottoWallet;
 import domain.engine.LottoMatchCounter;
@@ -30,12 +29,12 @@ public class LottoController {
     }
 
     private void purchase(int purchaseAmount) {
-        List<Lotto> lottoList = this.lottoMachine.buyLottos(purchaseAmount);
+        List<LottoNumbers> lottoList = this.lottoMachine.buyLottos(purchaseAmount);
         ResultView.printPurchasedLottoCount(lottoList.size());
         this.lottoWallet.addLottos(lottoList);
 
-        for (Lotto lotto : this.lottoWallet.getLottos()) {
-            ResultView.printLottoNumbers(lotto.getLottoNumbers());
+        for (LottoNumbers lotto : this.lottoWallet.getLottos()) {
+            ResultView.printLottoNumbers(lotto.getNumbers());
         }
     }
 

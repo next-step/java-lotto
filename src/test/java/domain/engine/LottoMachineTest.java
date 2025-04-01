@@ -1,6 +1,6 @@
 package domain.engine;
 
-import domain.model.Lotto;
+import domain.model.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import domain.generator.StaticLottoNumberGenerator;
@@ -16,9 +16,9 @@ public class LottoMachineTest {
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
         LottoMachine lottoMachine = new LottoMachine(new StaticLottoNumberGenerator(lottoNumbers));
 
-        List<Lotto> lottoList = lottoMachine.buyLottos(2000);
+        List<LottoNumbers> lottoList = lottoMachine.buyLottos(2000);
         assertThat(lottoList).hasSize(2);
-        assertThat(lottoList.get(0).getLottoNumbers())
+        assertThat(lottoList.get(0).getNumbers())
                 .containsExactlyInAnyOrder(lottoNumbers.toArray(new Integer[0]));
 
     }

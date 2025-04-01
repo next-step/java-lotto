@@ -8,7 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumbersTest {
-    @DisplayName("로또 번호를 생성한다.")
+    @DisplayName("로또 번호를 생성한다.")ㅈ
     @Test
     void createTest() {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));

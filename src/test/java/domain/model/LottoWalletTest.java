@@ -11,14 +11,14 @@ public class LottoWalletTest {
     @DisplayName("로또를 추가한다.")
     @Test
     void addTest() {
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12));
+        LottoNumbers lotto1 = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers lotto2 = new LottoNumbers(List.of(7, 8, 9, 10, 11, 12));
 
         LottoWallet lottoWallet = new LottoWallet();
 
         lottoWallet.addLottos(List.of(lotto1, lotto2));
 
-        List<Lotto> lottos = lottoWallet.getLottos();
+        List<LottoNumbers> lottos = lottoWallet.getLottos();
         assertThat(lottos).containsExactlyInAnyOrder(lotto1, lotto2);
     }
 }

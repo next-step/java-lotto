@@ -1,8 +1,7 @@
 package domain.engine;
 
 import domain.generator.LottoNumberGenerator;
-import domain.generator.RandomLottoNumberGenerator;
-import domain.model.Lotto;
+import domain.model.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +14,11 @@ public class LottoMachine {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public List<Lotto> buyLottos(int purchaseAmount) {
+    public List<LottoNumbers> buyLottos(int purchaseAmount) {
         int numLottos = purchaseAmount / LOTTO_PRICE;
-        List<Lotto> lottos = new ArrayList<>();
+        List<LottoNumbers> lottos = new ArrayList<>();
         for (int i = 0; i < numLottos; i++) {
-            lottos.add(new Lotto(this.lottoNumberGenerator.generate()));
+            lottos.add(new LottoNumbers(this.lottoNumberGenerator.generate()));
         }
         return lottos;
     }

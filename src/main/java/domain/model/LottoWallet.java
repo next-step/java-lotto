@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWallet {
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<LottoNumbers> lottos = new ArrayList<>();
 
-    public void addLottos(List<Lotto> lottos) {
+    public void addLottos(List<LottoNumbers> lottos) {
         this.lottos.addAll(lottos);
     }
 
-    public List<Lotto> getLottos() {
+    public List<LottoNumbers> getLottos() {
         return this.lottos;
     }
 }

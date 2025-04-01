@@ -1,6 +1,6 @@
 package domain.engine;
 
-import domain.model.Lotto;
+import domain.model.LottoNumbers;
 import domain.model.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,10 +16,10 @@ public class LottoMatchCounterTest {
     @Test
     void countMatchesTest() {
         LottoNumbers winNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 7, 8, 9));
-        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 4, 7, 8));
-        Lotto lotto3 = new Lotto(List.of(7, 8, 9, 10, 11, 12));
-        List<Lotto> lottos = List.of(lotto1, lotto2, lotto3);
+        LottoNumbers lotto1 = new LottoNumbers(List.of(1, 2, 3, 7, 8, 9));
+        LottoNumbers lotto2 = new LottoNumbers(List.of(1, 2, 3, 4, 7, 8));
+        LottoNumbers lotto3 = new LottoNumbers(List.of(7, 8, 9, 10, 11, 12));
+        List<LottoNumbers> lottos = List.of(lotto1, lotto2, lotto3);
 
         LottoMatchCounter lottoMatchCounter = new LottoMatchCounter(winNumbers);
         Map<Integer, Integer> matchCount = lottoMatchCounter.countMatches(lottos);
