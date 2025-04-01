@@ -3,10 +3,10 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoNo;
 import lotto.domain.ManualStrategy;
 import lotto.domain.Seller;
-import lotto.domain.WinnerChecker;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -20,14 +20,12 @@ public class LottoMain {
         List<Lotto> lottos = seller.generateLottos();
         OutputView.printLottos(lottos);
 
-        String enteredWinningNumbers = InputView.inputWinLotto();
-        Lotto winningLotto = new ManualStrategy(enteredWinningNumbers).generate();
+        String inputWinLotto = InputView.inputWinLotto();
+        String bonusNumber = InputView.inputBonusLottoNumber();
 
-        String bonusLottoNumber = InputView.inputBonusLottoNumber();
-        LottoNumber bonusNumber = new LottoNumber(bonusLottoNumber);
-
-        LottoWinningChecker lottoWinningChecker = new LottoWinningChecker(lottos, winningLotto, bonusNumber);
-        OutputView.printStatics(lottoWinningChecker.getRanks(), lottoWinningChecker.getProfitRate());
-
+        WinningLotto winLotto =
+                new WinningLotto(new ManualStrategy(inputWinLotto).generate(), new LottoNo(bonusNumber));
+        LottoGame lottoGame = new LottoGame(lottos, winLotto);
+        OutputView.printStatics(lottoGame.getRanks(), lottoGame.getProfit());
     }
 }
