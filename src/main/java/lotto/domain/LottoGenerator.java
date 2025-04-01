@@ -10,7 +10,7 @@ public class LottoGenerator {
 
     private static List<LottoNum> init() {
         List<LottoNum> initNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = LottoNum.MIN_NUM; i <= LottoNum.MAX_NUM; i++) {
             initNumbers.add(new LottoNum(i));
         }
         return initNumbers;

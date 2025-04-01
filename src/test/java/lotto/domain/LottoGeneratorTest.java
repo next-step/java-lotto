@@ -19,6 +19,6 @@ public class LottoGeneratorTest {
     void 로또번호는_1부터_45까지의_숫자이다() {
         List<LottoNum> numbers = LottoGenerator.generate();
 
-        assertThat(numbers.stream().allMatch(number -> number.num() >= 1 && number.num() <= 45)).isTrue();
+        assertThat(numbers.stream().allMatch(number -> number.num() >= LottoNum.MIN_NUM && number.num() <= LottoNum.MAX_NUM)).isTrue();
     }
 }

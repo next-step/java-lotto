@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNum implements Comparable<LottoNum> {
 
-    private final static int MIN_NUM = 1;
-    private final static int MAX_NUM = 45;
+    public final static int MIN_NUM = 1;
+    public final static int MAX_NUM = 45;
     private final int num;
 
     public LottoNum(int num) {
