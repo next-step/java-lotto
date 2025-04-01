@@ -15,4 +15,10 @@ public class LottoTest {
         assertThat(lotto).allMatch(number -> number >= 1 && number <= 45);
         assertThat(lotto).doesNotHaveDuplicates();
     }
+
+    @Test
+    void lottoSorted() {
+        List<Integer> lotto = Lotto.getLotto();
+        assertThat(lotto).isSorted();
+    }
 }

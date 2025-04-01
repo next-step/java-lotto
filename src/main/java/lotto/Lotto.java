@@ -16,6 +16,8 @@ public class Lotto {
 
     public static List<Integer> getLotto() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, LOTTO_SIZE);
+        List<Integer> lotto = lottoNumbers.subList(0, LOTTO_SIZE);
+        Collections.sort(lotto);
+        return lotto;
     }
 }
