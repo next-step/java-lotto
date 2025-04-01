@@ -14,9 +14,20 @@ import java.util.Map;
 
 
 public class LottoController {
-    private final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberGenerator());
     private final LottoWallet lottoWallet = new LottoWallet();
+    private final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberGenerator());
     private LottoMatchCounter lottoMatchCounter;
+
+    public void run() {
+        int purchaseAmount = InputView.getPurchaseAmount();
+        purchase(purchaseAmount);
+
+        LottoNumbers winNumbers = draw();
+
+        Map<Integer, Integer> matchResult = announce(winNumbers);
+
+        calculateProfit(matchResult, purchaseAmount);
+    }
 
     private void purchase(int purchaseAmount) {
         List<Lotto> lottoList = this.lottoMachine.buyLottos(purchaseAmount);
@@ -50,16 +61,5 @@ public class LottoController {
     private void calculateProfit(Map<Integer, Integer> matchResult, int purchaseAmount) {
         double profit = this.lottoMatchCounter.calculateProfit(matchResult, purchaseAmount);
         ResultView.printMessage(String.format("총 수익률은 %.2f 입니다.", profit));
-    }
-
-    public void run() {
-        int purchaseAmount = InputView.getPurchaseAmount();
-        purchase(purchaseAmount);
-
-        LottoNumbers winNumbers = draw();
-
-        Map<Integer, Integer> matchResult = announce(winNumbers);
-
-        calculateProfit(matchResult, purchaseAmount);
     }
 }

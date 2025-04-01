@@ -16,13 +16,13 @@ public class ResultView {
         printMessage(matchCount + "개 일치 (" + price + "원)- " + count + "개");
     }
 
+    public static void printMessage(String message) {
+        System.out.println(message);
+    }
+
     private static String arrayToString(List<Integer> array) {
         return "[" + array.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", ")) + "]";
-    }
-
-    public static void printMessage(String message) {
-        System.out.println(message);
     }
 }

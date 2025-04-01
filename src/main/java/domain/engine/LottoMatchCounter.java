@@ -31,6 +31,14 @@ public class LottoMatchCounter {
         return matchResult;
     }
 
+    public double calculateProfit(Map<Integer, Integer> matchResult, int purchaseAmount) {
+        int totalPrize = 0;
+        for (int matchCount : matchResult.keySet()) {
+            totalPrize += matchResult.get(matchCount) * MATCH_PRICES.getOrDefault(matchCount, 0);
+        }
+        return (double) totalPrize / purchaseAmount;
+    }
+
     private int countMatch(Lotto lotto) {
         int matchCount = 0;
         for (int number : lotto.getLottoNumbers()) {
@@ -39,13 +47,5 @@ public class LottoMatchCounter {
             }
         }
         return matchCount;
-    }
-
-    public double calculateProfit(Map<Integer, Integer> matchResult, int purchaseAmount) {
-        int totalPrize = 0;
-        for (int matchCount : matchResult.keySet()) {
-            totalPrize += matchResult.get(matchCount) * MATCH_PRICES.getOrDefault(matchCount, 0);
-        }
-        return (double) totalPrize / purchaseAmount;
     }
 }
