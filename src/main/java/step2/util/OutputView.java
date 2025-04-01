@@ -1,8 +1,8 @@
 package step2.util;
 
-import step2.Lotterys;
-import step2.Winning;
-import step2.WinningResults;
+import step2.lottery.Lotterys;
+import step2.winning.Winning;
+import step2.winning.WinningResults;
 
 import java.util.stream.Collectors;
 

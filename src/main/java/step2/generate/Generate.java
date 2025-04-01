@@ -1,6 +1,6 @@
 package step2.generate;
 
-import step2.LotteryNumber;
+import step2.lottery.LotteryNumber;
 
 import java.util.Set;
 

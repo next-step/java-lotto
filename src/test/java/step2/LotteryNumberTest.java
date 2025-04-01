@@ -2,6 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.lottery.LotteryNumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,6 +30,6 @@ public class LotteryNumberTest {
     @DisplayName("로또 번호가 1 이상 45 이하인 경우, 로또 번호를 생성한다.")
     void createLottoNumberTest() {
         LotteryNumber number = new LotteryNumber(1);
-        assertThat(number.toString()).isEqualTo("1");
+        assertThat(number).isEqualTo(new LotteryNumber(1));
     }
 }

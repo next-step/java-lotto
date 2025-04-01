@@ -3,6 +3,9 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.generate.Generate;
+import step2.lottery.Lottery;
+import step2.lottery.LotteryNumber;
+import step2.lottery.Lotterys;
 
 import java.util.Set;
 

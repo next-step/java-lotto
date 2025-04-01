@@ -1,4 +1,4 @@
-package step2;
+package step2.lottery;
 
 public class LotteryCount {
     private final int lottoCount;

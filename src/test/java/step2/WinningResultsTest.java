@@ -2,6 +2,8 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.winning.Winning;
+import step2.winning.WinningResults;
 
 import java.util.HashMap;
 import java.util.Map;

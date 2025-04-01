@@ -1,7 +1,6 @@
-package step2;
+package step2.lottery;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lottery {
     private final Set<LotteryNumber> lottoNumbers;
