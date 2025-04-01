@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
     private final List<Lotto> lottoList;
@@ -26,10 +25,7 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottoList);
     }
 
-    public Summary summarize(WinningNumbers winningNumbers) {
-        List<MatchCount> matchCounts = this.lottoList.stream()
-                .map(it -> it.match(winningNumbers))
-                .collect(Collectors.toUnmodifiableList());
-        return new Summary(matchCounts);
+    public List<Lotto> lottoList() {
+        return Collections.unmodifiableList(lottoList);
     }
 }

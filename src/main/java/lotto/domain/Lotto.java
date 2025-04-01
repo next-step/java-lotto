@@ -34,12 +34,4 @@ public class Lotto {
     public List<LottoNumber> numbers() {
         return Collections.unmodifiableList(numbers);
     }
-
-    public MatchCount match(WinningNumbers winningNumbers) {
-        List<LottoNumber> numbers = winningNumbers.numbers();
-        long matchCount = this.numbers.stream()
-                .filter(numbers::contains)
-                .count();
-        return new MatchCount(matchCount);
-    }
 }
