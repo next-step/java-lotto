@@ -14,6 +14,6 @@ public class YieldCalculator {
                (result.getOrDefault(Rank.SECOND, 0L) * Rank.SECOND.getWinningMoney()) +
                (result.getOrDefault(Rank.FIRST, 0L) * Rank.FIRST.getWinningMoney());
 
-        return (double) totalWinningAmount / (totalWinningCount * LottoTicket.PRICE) * 100;
+        return (double) totalWinningAmount / (totalWinningCount * Seller.PRICE) * 100;
     }
 }
