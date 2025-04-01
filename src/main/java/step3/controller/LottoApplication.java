@@ -9,7 +9,7 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         int money = InputView.inputMoney();
-        Lottos lottos = LottoMachine.buyLotto(money);
+        Lottos lottos = LottoMachine.buyLottoAutomatically(money);
         ResultView.printLottoList(lottos);
 
         String rawWinningLotto = InputView.inputWinningLotto();
