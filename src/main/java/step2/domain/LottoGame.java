@@ -29,7 +29,7 @@ public class LottoGame {
     }
 
     public String purchasedLottosAsString() {
-        LottoContainerFormatter lottoContainerFormatter = purchasedLotto.generateFormatter();
+        LottoContainerFormatter lottoContainerFormatter = new LottoContainerFormatter(purchasedLotto);
         return lottoContainerFormatter.lottosAsString();
     }
 }

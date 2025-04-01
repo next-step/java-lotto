@@ -66,11 +66,11 @@
   - [x] 보너스 볼을 포함한 등수 계산
     - [x] 리팩토링
   - [x] 보너스 볼을 입력받아 당첨 통계에 추가
-- [ ] 피드백
+- [x] 피드백
   - [x] '\n' 대신 System.lineSeparator() 사용
   - [x] 로또 번호 정렬
   - [x] 로또 번호 중복 입력 검증
   - [x] 로또 번호와 보너스 번호가 겹치는 상황 검증
-  - [ ] domain 에서 views 의존성 제거
-    - [ ] LottoContainer
-    - [ ] Lotto
+  - [x] domain 에서 views 의존성 제거
+    - [x] Lotto
+    - [x] LottoContainer

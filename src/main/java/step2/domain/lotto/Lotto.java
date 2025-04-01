@@ -1,8 +1,6 @@
 package step2.domain.lotto;
 
-import views.LottoFormatter;
-
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -19,12 +17,8 @@ public class Lotto {
         this.lottoNumbers = lottoRule.generateLotto();
     }
 
-    public LottoFormatter generateFormatter() {
-        return new LottoFormatter(this.lottoNumbers);
-    }
-
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public List<Integer> copyLottoNumbers() {
+        return new ArrayList<>(lottoNumbers);
     }
 
     public boolean contains(int number) {
@@ -32,11 +26,11 @@ public class Lotto {
     }
 
     public LottoNumbers matchedWith(Lotto lotto) {
-        return findMatchingNumbers(lotto.getLottoNumbers());
+        return findMatchingNumbers(lotto.copyLottoNumbers());
     }
 
     public LottoNumbers notMatchedWith(Lotto lotto) {
-        return findNotMatchingNumbers(lotto.getLottoNumbers());
+        return findNotMatchingNumbers(lotto.copyLottoNumbers());
     }
 
     private LottoNumbers findMatchingNumbers(List<Integer> inputNumbers) {

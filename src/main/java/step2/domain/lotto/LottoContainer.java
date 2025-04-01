@@ -1,8 +1,6 @@
 package step2.domain.lotto;
 
 import step2.domain.rank.RankType;
-import views.LottoContainerFormatter;
-import views.LottoFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +24,10 @@ public class LottoContainer {
         return lottos.size();
     }
 
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
+    }
+
     public List<RankType> checkWinningResults(WinningLotto winningLotto) {
         List<RankType> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
@@ -47,13 +49,5 @@ public class LottoContainer {
             lottos.add(lotto);
         }
         return lottos;
-    }
-
-    public LottoContainerFormatter generateFormatter() {
-        List<LottoFormatter> lottoFormatters = new ArrayList<>();
-        for (Lotto lotto: lottos) {
-            lottoFormatters.add(lotto.generateFormatter());
-        }
-        return new LottoContainerFormatter(lottoFormatters);
     }
 }
