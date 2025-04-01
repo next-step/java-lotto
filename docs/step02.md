@@ -43,16 +43,14 @@ https://edu.nextstep.camp/s/Ie5Dwep0/ls/KH5Q2XXD
 - [ ] LottoEvent 클래스와 LottoTicket 클래스가 있다.
 - [ ] LottoTicket은 LottoTicketNumber를 가진다.
 - [ ] 로또 상점에서 티켓을 구매 할 Me 클래스가 있다.
-- [ ] LottoEvent는 LottoTicket을 발급한다.
+- [x] LottoEvent는 LottoTicket을 발급한다.
 - [x] LottoTicket을 발급할 때 마다 LottoTicketNumber를 생성한다.
 - [x] LottoTicket을 발급할 때 마다 LottoTicketNumber를 생성할 때 중복이 되지 않아야 한다.
 - [x] LottoEvent는 LottoTicket을 발급할 때 마다 LottoTicketNumber를 생성할 때 1~45 사이의 숫자여야 한다.
 - [x] LottoTicket을 발급할 때 LottoTicketNumber를 6개씩 발급한다.
 - [x] LottoEvent는 LottoTicket을 발급할 때 LottoTicketNumber를 오름차순으로 정렬한다.
-- [ ] LottoEvent는 LottoTicket을 발급할 때 LottoTicketNumber를 1개씩 발급할 때 마다 Me의 금액을 1000원씩 차감한다.
-- [ ] LottoEvent는 지난 주 당첨 번호를 입력 받을 수 있다.
-- [ ] Me는 LottoEvent의 지난 주 당첨 번호를 입력 받을 수 있다.
-- [ ] Me는 LottoTicket을 구매 할 수 있다.
-- [ ] Me는 구매한 LottoTicket 목록을 출력 할 수 있다.
-- [ ] Me는 LottoEvent 로 부터 당첨 금액을 받을 수 있다.
-- [ ] Me는 당첨 통계 계산할 수 있다.
+- [x] LottoEvent는 당첨 번호를 입력 받을 수 있다.
+- [x] Me는 LottoTicket을 구매 할 수 있다.
+- [x] Me는 구매한 LottoTicket 목록을 출력 할 수 있다.
+- [x] Me는 LottoEvent 로 부터 당첨 금액을 받을 수 있다.
+- [x] Me는 당첨 통계 계산할 수 있다.

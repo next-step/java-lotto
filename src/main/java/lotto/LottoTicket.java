@@ -6,6 +6,10 @@ public class LottoTicket {
 
   private final LottoTicketNumberSet numberSet;
 
+  public LottoTicket() {
+    numberSet = new LottoTicketNumberSet();
+  }
+
   public LottoTicket(int number1, int number2, int number3, int number4, int number5, int number6) {
     this.numberSet = new LottoTicketNumberSet(
         List.of(
@@ -17,6 +21,10 @@ public class LottoTicket {
             new LottoTicketNumber(number6)
         )
     );
+  }
+
+  public LottoTicketNumberSet getNumberSet() {
+    return numberSet;
   }
 
   @Override
