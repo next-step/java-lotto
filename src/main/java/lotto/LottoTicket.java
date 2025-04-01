@@ -10,6 +10,10 @@ public class LottoTicket {
     private final List<LottoRow> lottoRowList = new ArrayList<>();
 
     public LottoTicket(int count) {
+        if (count < LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또를 한장 이상 구매하여야합니다");
+        }
+
         this.count = count/LOTTO_PRICE;
 
         GenerateNumber generateNumber = GenerateNumber.getInstance();
