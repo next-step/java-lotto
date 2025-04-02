@@ -11,17 +11,21 @@ public class LottoTickets {
     private final int autoTicketCount;
 
     public LottoTickets(int money, List<LottoTicket> manualTickets) {
-        int autoTicketCount = money / LottoTicket.PRICE - manualTickets.size();
-        validateAutoTicketCount(autoTicketCount);
+        int autoTicketCount = getAutoTicketCount(money, manualTickets);
+
         this.lottoTickets = Stream.concat(manualTickets.stream(), generateLottoTickets(autoTicketCount).stream())
                 .collect(Collectors.toList());
         this.autoTicketCount = autoTicketCount;
     }
 
-    private void validateAutoTicketCount(int autoTicketCount) {
+    private static int getAutoTicketCount(int money, List<LottoTicket> manualTickets) {
+        int autoTicketCount = money / LottoTicket.PRICE - manualTickets.size();
+
         if (autoTicketCount < 0) {
             throw new IllegalArgumentException("구매 금액이 부족합니다.");
         }
+
+        return autoTicketCount;
     }
 
     private List<LottoTicket> generateLottoTickets(int count) {

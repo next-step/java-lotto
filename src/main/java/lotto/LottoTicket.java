@@ -32,12 +32,19 @@ public class LottoTicket {
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
 
-        if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
-        }
+        validateSize(lottoNumbers);
+        validateDuplicate(numbers);
+    }
 
+    private static void validateDuplicate(List<Integer> numbers) {
         if (numbers.stream().distinct().count() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
+        }
+    }
+
+    private static void validateSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
 
