@@ -27,24 +27,11 @@ public class Lotto {
     }
 
     private boolean hasDuplicates(List<LottoNumber> numbers) {
-        Set<LottoNumber> container = new HashSet<>();
-        for (LottoNumber number : numbers) {
-            if (!container.add(number)) {
-                return true;
-            }
-        }
-        return false;
+        HashSet<LottoNumber> filteredNumbers = new HashSet<>(numbers);
+        return numbers.size() != filteredNumbers.size();
     }
 
     public List<LottoNumber> numbers() {
         return Collections.unmodifiableList(numbers);
-    }
-
-    public MatchCount match(WinningNumbers winningNumbers) {
-        List<LottoNumber> numbers = winningNumbers.numbers();
-        long matchCount = this.numbers.stream()
-                .filter(numbers::contains)
-                .count();
-        return new MatchCount(matchCount);
     }
 }

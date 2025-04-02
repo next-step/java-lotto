@@ -59,7 +59,22 @@ public class WinningNumbers {
         return false;
     }
 
-    public List<LottoNumber> numbers() {
-        return Collections.unmodifiableList(numbers);
+    public List<MatchCount> match(LottoTicket ticket) {
+        return ticket.lottoList().stream()
+                .map(this::match)
+                .collect(Collectors.toUnmodifiableList());
+
+    }
+
+    private MatchCount match(Lotto lotto) {
+        long matchCount = this.numbers.stream()
+                .filter(it -> lotto.numbers().contains(it))
+                .count();
+        return new MatchCount(matchCount);
+    }
+
+    public Summary summarize(LottoTicket ticket) {
+        List<MatchCount> matchCounts = match(ticket);
+        return new Summary(matchCounts);
     }
 }

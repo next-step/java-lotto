@@ -1,13 +1,16 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Rewards {
-    private final List<Reward> rewards;
+    private final Map<Reward, Integer> rewards;
 
     public Rewards(List<Reward> rewards) {
         validate(rewards);
-        this.rewards = rewards;
+        this.rewards = rewards.stream()
+                .collect(Collectors.toUnmodifiableMap(reward -> reward, reward -> 1, Integer::sum));
     }
 
     private void validate(List<Reward> rewards) {
@@ -17,33 +20,32 @@ public class Rewards {
     }
 
     public int firstPrizeCount() {
-        return (int) rewards.stream()
-                .filter(reward -> reward == Reward.FIRST)
-                .count();
+        return rewards.getOrDefault(Reward.FIRST, 0);
     }
 
     public int secondPrizeCount() {
-        return (int) rewards.stream()
-                .filter(reward -> reward == Reward.SECOND)
-                .count();
+        return rewards.getOrDefault(Reward.SECOND, 0);
     }
 
     public int thirdPrizeCount() {
-        return (int) rewards.stream()
-                .filter(reward -> reward == Reward.THIRD)
-                .count();
+        return rewards.getOrDefault(Reward.THIRD, 0);
     }
 
     public int fourthPrizeCount() {
-        return (int) rewards.stream()
-                .filter(reward -> reward == Reward.FOURTH)
-                .count();
+        return rewards.getOrDefault(Reward.FOURTH, 0);
     }
 
     public float winningRate() {
-        int totalPrize = rewards.stream()
-                .mapToInt(Reward::prize)
+        int totalPrize = rewards.entrySet().stream()
+                .filter(it -> it.getValue() > 0 && it.getKey() != Reward.NONE)
+                .mapToInt(it -> it.getKey().prize() * it.getValue())
                 .sum();
-        return (float) totalPrize / (rewards.size() * Money.UNIT);
+        return (float) totalPrize / totalCost();
+    }
+
+    private int totalCost() {
+        return rewards.values().stream()
+                .mapToInt(it -> it * Money.UNIT)
+                .sum();
     }
 }

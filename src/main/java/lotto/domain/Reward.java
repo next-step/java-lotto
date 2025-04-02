@@ -16,9 +16,6 @@ public enum Reward {
     }
 
     public static Reward valueOf(MatchCount matchCount) {
-        if (matchCount.value() == FIRST.matchCount) {
-            return FIRST;
-        }
         for (Reward reward : Reward.values()) {
             if (reward.matchCount == matchCount.value()) {
                 return reward;
