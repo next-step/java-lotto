@@ -5,6 +5,8 @@ import Lotto.model.NumberExtractor.NumberExtractor;
 import Lotto.model.NumberExtractor.RandomNumberExtractor;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -23,8 +25,8 @@ public class LottoServiceTest {
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         LottoService service = new LottoService(PURCHASE_AMOUNT, extractor);
         service.draw();
-        service.decideWinning(new int[]{1, 2, 3, 7, 8, 9});
-        assertThat(service.winningCounts()).containsExactly(new int[]{14, 0, 0, 0});
+        service.decideWinning(List.of(1, 2, 3, 7, 8, 9));
+        assertThat(service.winningCounts()).containsExactlyElementsOf(List.of(14, 0, 0, 0));
         assertThat(service.profitRate()).isEqualTo(5);
     }
 
@@ -52,7 +54,7 @@ public class LottoServiceTest {
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         LottoService service = new LottoService(PURCHASE_AMOUNT, extractor);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> service.decideWinning(new int[]{1, 2, 3, 4, 5, 6, 7}))
+                .isThrownBy(() -> service.decideWinning(List.of(1, 2, 3, 4, 5, 6, 7)))
                 .withMessage("The count of Lotto number exceed 6.");
     }
 
@@ -62,7 +64,7 @@ public class LottoServiceTest {
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         LottoService service = new LottoService(PURCHASE_AMOUNT, extractor);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> service.decideWinning(new int[]{1, 2, 2, 4, 5, 6}))
+                .isThrownBy(() -> service.decideWinning(List.of(1, 2, 2, 4, 5, 6)))
                 .withMessage("Lotto numbers must not contain duplicates.");
     }
 }

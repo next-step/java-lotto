@@ -19,7 +19,7 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-    public int checkMatched(int[] winNumbers) {
+    public int checkMatched(List<Integer> winNumbers) {
         int matchedNum = 0;
         for (int num : winNumbers) {
             if (this.numbers.contains(num)) {

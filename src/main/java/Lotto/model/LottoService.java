@@ -3,6 +3,7 @@ package Lotto.model;
 import Lotto.model.NumberExtractor.NumberExtractor;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoService {
     private static final int NUMBER_SIZE = 6;
@@ -55,8 +56,8 @@ public class LottoService {
         return this.lottoNum;
     }
 
-    private void validateLottoNumber(int[] lottoNumber){
-        if (lottoNumber.length > 6){
+    private void validateLottoNumber(List<Integer> lottoNumber){
+        if (lottoNumber.size() > 6){
             throw new IllegalArgumentException("The count of Lotto number exceed 6.");
         }
 
@@ -68,7 +69,7 @@ public class LottoService {
         }
     }
 
-    public void decideWinning(int[] winnerNum) {
+    public void decideWinning(List<Integer> winnerNum) {
         validateLottoNumber(winnerNum);
         this.winningCountMap = new HashMap<>(Map.of(
                 LottoPrizeTable.MATCHED_3, 0,
@@ -89,10 +90,8 @@ public class LottoService {
         }
     }
 
-    public int[] winningCounts() {
-        return winningCountMap.values().stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
+    public List<Integer> winningCounts() {
+        return new ArrayList<>(winningCountMap.values());
     }
 
     public double profitRate() {

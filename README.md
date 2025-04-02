@@ -31,7 +31,7 @@
 - PR 피드백 반영
   - [] Const 클래스 대신 Enum 활용
   - [] List<Lotto> Lottos라는 일급컬렉션으로 만들기
-  - [] int array 대신에 List으로 바꾸기
+  - [x] int array 대신에 List으로 바꾸기
   - [] 당첨결과에 대한 DTO 만들어서 적용하기
   - [] Lotto 불변객체로 만들기(numbers 외부에서 접근 못하게 하기)
   - [x] 구입금액 입력 검증 로직 추가

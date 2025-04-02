@@ -36,7 +36,7 @@ public class LottoTest {
 
     @Test
     void shouldBeZeroMatched() {
-        int[] winNumbers = {1, 2, 3, 4, 5, 6};
+        List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{7,8,9,10,11,12});
         Lotto lotto = new Lotto(extractor);
         lotto.draw();
@@ -46,7 +46,7 @@ public class LottoTest {
 
     @Test
     void shouldBeThreeMatched() {
-        int[] winNumbers = {1, 2, 3, 4, 5, 6};
+        List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{4,5,6,7,8,9});
         Lotto lotto = new Lotto(extractor);
         lotto.draw();
@@ -56,7 +56,7 @@ public class LottoTest {
 
     @Test
     void shouldBeSixMatched() {
-        int[] winNumbers = {1, 2, 3, 4, 5, 6};
+        List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         Lotto lotto = new Lotto(extractor);
         lotto.draw();
