@@ -17,6 +17,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    public static LottoNumber toLottoNumber(String lottoNumberText) {
+        if (lottoNumberText == null || lottoNumberText.trim().isEmpty()) {
+            throw new IllegalArgumentException("로또 번호는 비어 있을 수 없습니다.");
+        }
+
+        return new LottoNumber(Integer.parseInt(lottoNumberText.trim()));
+    }
+
     public int number() {
         return this.number;
     }

@@ -34,9 +34,7 @@ public class LottoNumbers {
         }
 
         List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumbersText.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::toLottoNumber)
                 .collect(Collectors.toList());
 
         return new LottoNumbers(lottoNumbers);
@@ -58,6 +56,10 @@ public class LottoNumbers {
         if (uniqueNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
         }
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     public List<LottoNumber> numbers() {

@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class WinningLottoNumbers {
 
     private LottoNumbers winningNumbers;
@@ -20,17 +17,16 @@ public class WinningLottoNumbers {
 
     public static WinningLottoNumbers toLottoNumbers(String lottoNumbersText, String bonusText) {
         LottoNumbers lottoNumber = LottoNumbers.toLottoNumber(lottoNumbersText);
-        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(bonusText));
+        LottoNumber bonusNumber = LottoNumber.toLottoNumber(bonusText);
 
         return new WinningLottoNumbers(lottoNumber, bonusNumber);
     }
     public LottoRank lottoRank(LottoNumbers lottoNumbers) {
-        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers.numbers());
         int match = (int) this.winningNumbers.numbers()
                 .stream()
-                .filter(lottoNumberSet::contains)
+                .filter(lottoNumbers::contains)
                 .count();
-        boolean bonusMatch = lottoNumberSet.contains(this.bonusNumber);
+        boolean bonusMatch = lottoNumbers.contains(this.bonusNumber);
         
         return LottoRank.fromMatch(match, bonusMatch);
     }
