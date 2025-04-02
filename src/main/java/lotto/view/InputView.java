@@ -1,6 +1,9 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);
@@ -17,8 +20,16 @@ public class InputView {
         return number;
     }
 
-    public String readManualNumbers() {
-        return scanner.nextLine();
+    public List<Set<Integer>> readManualNumberSets(int manualCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Set<Integer>> numberSets = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            String manualNumbersInput = scanner.nextLine();
+            Set<Integer> numberSet = Parser.parseNumberSet(manualNumbersInput);
+            numberSets.add(numberSet);
+        }
+
+        return numberSets;
     }
 
     public String readWinningNumbers() {
