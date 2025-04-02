@@ -57,7 +57,7 @@ public class LottoService {
     }
 
     private void validateLottoNumber(List<Integer> lottoNumber){
-        if (lottoNumber.size() > 6){
+        if (lottoNumber.size() != 6){
             throw new IllegalArgumentException("The count of Lotto number exceed 6.");
         }
 
