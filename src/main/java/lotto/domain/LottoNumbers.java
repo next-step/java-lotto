@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumberGenerator.NUMBER_COUNT;
-
 public class LottoNumbers {
+
+    public static final int NUMBER_COUNT = 6;
 
     private List<LottoNumber> numbers;
 
@@ -23,8 +23,7 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNumber> numbers) {
         validate(numbers);
 
-        this.numbers = numbers
-                .stream()
+        this.numbers = numbers.stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -35,9 +34,7 @@ public class LottoNumbers {
         }
 
         List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumbersText.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::toLottoNumber)
                 .collect(Collectors.toList());
 
         return new LottoNumbers(lottoNumbers);
@@ -50,9 +47,9 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    private void validate(List<LottoNumber> numbers) {
+    public static void validate(List<LottoNumber> numbers) {
         if( numbers == null || numbers.size() != NUMBER_COUNT) {
-            throw new IllegalArgumentException("숫자가 빈값이거나, 개수가 맞지 않습니다.");
+            throw new IllegalArgumentException("숫자가 빈값이거나, 개수가 맞지 않습니다. " + numbers + ", " + numbers.size());
         }
 
         Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);
@@ -61,16 +58,13 @@ public class LottoNumbers {
         }
     }
 
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
     public List<LottoNumber> numbers() {
         return numbers;
     }
 
-    public LottoRank lottoRank(LottoNumbers lottoWinningNumbers) {
-        Set<LottoNumber> numberSet = new HashSet<>(numbers);
-        int match = (int) lottoWinningNumbers.numbers()
-                .stream()
-                .filter(numberSet::contains)
-                .count();
-        return LottoRank.fromMatch(match);
-    }
+
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoNumbers.NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumbersGeneratorTest {

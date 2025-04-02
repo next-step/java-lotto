@@ -5,12 +5,24 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
     private final Integer number;
 
+    public LottoNumber(LottoNumber lottoNumber) {
+        this(lottoNumber.number());
+    }
+
     public LottoNumber(int number) {
         if (number < 1 || number > 45) {
             throw new IllegalArgumentException("숫자는 1보다 크거나 같고, 45보다 작거나 같아야 합니다.");
         }
 
         this.number = number;
+    }
+
+    public static LottoNumber toLottoNumber(String lottoNumberText) {
+        if (lottoNumberText == null || lottoNumberText.trim().isEmpty()) {
+            throw new IllegalArgumentException("로또 번호는 비어 있을 수 없습니다.");
+        }
+
+        return new LottoNumber(Integer.parseInt(lottoNumberText.trim()));
     }
 
     public int number() {
