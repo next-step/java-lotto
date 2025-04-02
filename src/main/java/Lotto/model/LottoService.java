@@ -3,7 +3,6 @@ package Lotto.model;
 import Lotto.model.NumberExtractor.NumberExtractor;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoService {
     private static final int SALES_PRICE = 1000;
@@ -82,11 +81,8 @@ public class LottoService {
         winningCountMap.put(rank, winningCountMap.getOrDefault(rank, 0) + 1);
     }
 
-    public List<Integer> winningCounts() {
-        return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank != LottoRank.MISS)
-                .map(rank -> winningCountMap.getOrDefault(rank, 0))
-                .collect(Collectors.toList());
+    public Map<LottoRank, Integer> winningCountMap() {
+        return Collections.unmodifiableMap(new EnumMap<>(this.winningCountMap));
     }
 
     public double profitRate() {

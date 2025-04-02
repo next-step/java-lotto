@@ -1,5 +1,6 @@
 package Lotto.controller;
 
+import Lotto.dto.RankResultDto;
 import Lotto.model.LottoService;
 import Lotto.model.NumberExtractor.NumberExtractor;
 import Lotto.view.InputView;
@@ -25,6 +26,7 @@ public class LottoController {
         resultView.printLotto(lottoService.lottoList());
 
         lottoService.decideWinning(inputView.getWinnerNumbers());
-        resultView.printWinStatistics(lottoService.winningCounts(), lottoService.profitRate());
+        resultView.printWinStatistics(RankResultDto.convertToDtos(lottoService.winningCountMap()),
+                lottoService.profitRate());
     }
 }
