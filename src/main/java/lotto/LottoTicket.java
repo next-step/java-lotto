@@ -1,17 +1,19 @@
 package lotto;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoTicket {
 
     public static final int MAX_LOTTO_NUM = 45;
     private static final int LOTTO_NUM_COUNT = 6;
     private static final int MIN_LOTTO_NUM = 1;
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
     public LottoTicket(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = new HashSet<>(numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {
@@ -28,7 +30,21 @@ public class LottoTicket {
         }
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return this.numbers;
+    }
+
+    public int countMatches(LottoTicket other) {
+        if (other == null) {
+            throw new IllegalArgumentException("비교할 번호는 null일 수 없습니다.");
+        }
+
+        int count = 0;
+        for (int number : numbers) {
+            if (other.numbers.contains(number)) {
+                count++;
+            }
+        }
+        return count;
     }
 }

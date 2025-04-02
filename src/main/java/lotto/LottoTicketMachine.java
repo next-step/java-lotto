@@ -1,12 +1,15 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class LottoTicketMachine {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final Random random = new Random();
 
     public static LottoTicket[] purchase(int amount) {
         validateAmount(amount);
@@ -35,11 +38,13 @@ public class LottoTicketMachine {
     }
 
     private static List<Integer> generateRandomNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            numbers.add(new Random().nextInt(45) + 1);
+        Set<Integer> numbers = new HashSet<>();
+
+        while (numbers.size() < 6) {
+            numbers.add(random.nextInt(45) + 1);
         }
-        return numbers;
+
+        return new ArrayList<>(numbers);
     }
 
 }
