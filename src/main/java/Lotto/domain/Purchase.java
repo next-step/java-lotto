@@ -1,9 +1,9 @@
 package Lotto.domain;
 
 public class Purchase {
-    public int price = 0;
-    public int quantity;
     private static final int UNIT = 1000;
+    private int price = 0;
+    private int quantity;
 
     public Purchase(int price) {
         this.price = price;
