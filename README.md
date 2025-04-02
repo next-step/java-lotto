@@ -19,3 +19,20 @@
   - [x] 나눗셈 계산기
 - [x] 입력값이 null or blank일 때 IllegalArgumentException throw
 - [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+
+### 로또(자동)
+- [x] 구입 금액 입력 받기
+- [x] 구입 금액에 따라서 로또 구매 개수 구하기
+- [x] 로또 발급
+- [x] 발급 결과 출력
+- [x] 지난 주 당첨 번호 입력 받기
+- [x] 당첨 여부 판별 하기
+- [x] 당첨 통계 출력
+- PR 피드백 반영
+  - [x] Const 클래스 대신 Enum 활용
+  - [x] List<Lotto> Lottos라는 일급컬렉션으로 만들기
+  - [x] int array 대신에 List으로 바꾸기
+  - [x] 당첨결과에 대한 DTO 만들어서 적용하기
+  - [x] Lotto 불변객체로 만들기(numbers 외부에서 접근 못하게 하기)
+  - [x] 구입금액 입력 검증 로직 추가
+  - [x] 당첨번호 입력 검증 로직 추가
