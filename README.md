@@ -30,7 +30,7 @@
 - [x] 당첨 통계 출력
 - PR 피드백 반영
   - [x] Const 클래스 대신 Enum 활용
-  - [] List<Lotto> Lottos라는 일급컬렉션으로 만들기
+  - [x] List<Lotto> Lottos라는 일급컬렉션으로 만들기
   - [x] int array 대신에 List으로 바꾸기
   - [x] 당첨결과에 대한 DTO 만들어서 적용하기
   - [x] Lotto 불변객체로 만들기(numbers 외부에서 접근 못하게 하기)

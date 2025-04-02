@@ -10,7 +10,7 @@ public class LottoService {
     private final int purchaseAmount;
     private final int lottoNum;
     private final Map<LottoRank, Integer> winningCountMap = new EnumMap<>(LottoRank.class);
-    private List<Lotto> lottos;
+    private Lottos lottos;
 
     public LottoService(int purchaseAmount, NumberExtractor extractor) {
         this.validatePurchaseAmount(purchaseAmount);
@@ -30,7 +30,7 @@ public class LottoService {
     }
 
     public void draw() {
-        this.lottos = new ArrayList<>();
+        this.lottos = new Lottos();
 
         for (int i = 0; i < lottoNum; i++) {
             Lotto lotto = new Lotto(extractor);
@@ -40,12 +40,7 @@ public class LottoService {
     }
 
     public List<List<Integer>> lottoList() {
-        List<List<Integer>> lottoList = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            lottoList.add(lotto.numbers());
-        }
-
-        return lottoList;
+        return lottos.toNumberList();
     }
 
     public int lottoNum() {
@@ -71,7 +66,7 @@ public class LottoService {
             winningCountMap.put(rank, 0);
         }
 
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.all()) {
             int matchedNum = lotto.checkMatched(winnerNum);
             increaseWinningCount(LottoRank.valueOf(matchedNum));
         }
