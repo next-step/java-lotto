@@ -22,4 +22,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public static Integer showLottoBonusNumberInput() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
 }
