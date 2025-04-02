@@ -10,7 +10,7 @@ public class LottoService {
     private final NumberExtractor extractor;
     private final int purchaseAmount;
     private final int lottoNum;
-    private Map<Integer, Integer> winningCountMap;
+    private final Map<LottoRank, Integer> winningCountMap = new EnumMap<>(LottoRank.class);
     private List<Lotto> lottos;
 
     public LottoService(int purchaseAmount, NumberExtractor extractor) {
@@ -53,14 +53,14 @@ public class LottoService {
         return this.lottoNum;
     }
 
-    private void validateLottoNumber(List<Integer> lottoNumber){
-        if (lottoNumber.size() != 6){
+    private void validateLottoNumber(List<Integer> lottoNumber) {
+        if (lottoNumber.size() != 6) {
             throw new IllegalArgumentException("The count of Lotto number exceed 6.");
         }
 
         Set<Integer> set = new HashSet<>();
-        for (int num: lottoNumber){
-            if (!set.add(num)){
+        for (int num : lottoNumber) {
+            if (!set.add(num)) {
                 throw new IllegalArgumentException("Lotto numbers must not contain duplicates.");
             }
         }
@@ -68,33 +68,31 @@ public class LottoService {
 
     public void decideWinning(List<Integer> winnerNum) {
         validateLottoNumber(winnerNum);
-        this.winningCountMap = new HashMap<>(Map.of(
-                LottoPrizeTable.MATCHED_3, 0,
-                LottoPrizeTable.MATCHED_4, 0,
-                LottoPrizeTable.MATCHED_5, 0,
-                LottoPrizeTable.MATCHED_6, 0
-        ));
+        for (LottoRank rank : LottoRank.values()){
+            winningCountMap.put(rank, 0);
+        }
 
         for (Lotto lotto : lottos) {
             int matchedNum = lotto.checkMatched(winnerNum);
-            increaseWinningCount(matchedNum);
+            increaseWinningCount(LottoRank.valueOf(matchedNum));
         }
     }
 
-    private void increaseWinningCount(int matchedNum) {
-        if (winningCountMap.containsKey(matchedNum)) {
-            winningCountMap.put(matchedNum, winningCountMap.get(matchedNum) + 1);
-        }
+    private void increaseWinningCount(LottoRank rank) {
+        winningCountMap.put(rank, winningCountMap.getOrDefault(rank, 0) + 1);
     }
 
     public List<Integer> winningCounts() {
-        return new ArrayList<>(winningCountMap.values());
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LottoRank.MISS)
+                .map(rank -> winningCountMap.getOrDefault(rank, 0))
+                .collect(Collectors.toList());
     }
 
     public double profitRate() {
         double sum = 0;
-        for (Map.Entry<Integer, Integer> entry : winningCountMap.entrySet()) {
-            sum += LottoPrizeTable.prize(entry.getKey()) * entry.getValue();
+        for (Map.Entry<LottoRank, Integer> entry : winningCountMap.entrySet()) {
+            sum += entry.getKey().getWinningMoney() * entry.getValue();
         }
 
         return sum / purchaseAmount;
