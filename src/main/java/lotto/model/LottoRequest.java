@@ -12,16 +12,16 @@ public class LottoRequest {
     public static final int LOTTO_PRICE = 1000;
 
     private final int money;
-    private final List<Lotto> manuelLottos;
+    private final List<Lotto> manualLottos;
 
-    public LottoRequest(int money, List<String> manuelLottoStrs) {
+    public LottoRequest(int money, List<String> manualLottoStrs) {
         this.money = money;
 
-        if(buyChance() - manuelLottoStrs.size() < 0) {
+        if(buyChance() - manualLottoStrs.size() < 0) {
             throw new IllegalArgumentException("구매 비용이 모자랍니다.");
         }
 
-        this.manuelLottos = manuelLottoStrs
+        this.manualLottos = manualLottoStrs
                 .stream()
                 .map(str -> List.of(str.split(",")))
                 .map(Lotto::new)
@@ -38,12 +38,12 @@ public class LottoRequest {
 
         int size = buyChance();
         List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(manuelLottos);
-        for (int i = 0; i < size - manuelLottos.size(); i++) {
+        lottos.addAll(manualLottos);
+        for (int i = 0; i < size - manualLottos.size(); i++) {
             lottos.add(lottoGenerator.generate());
         }
 
-        return new LottoWallet(lottos, manuelLottos.size());
+        return new LottoWallet(lottos, manualLottos.size());
     }
 }
 

@@ -8,7 +8,7 @@ import lotto.model.LottoWallet;
 public class OutputView {
 
     public static void printLottoWallet(LottoWallet wallet) {
-        System.out.println("수동으로 " + wallet.manuelLottoCount() + "장, 자동으로 " + wallet.autoLottoCount() + "개를 구매했습니다");
+        System.out.println("수동으로 " + wallet.manualLottoCount() + "장, 자동으로 " + wallet.autoLottoCount() + "개를 구매했습니다");
         for (Lotto lotto : wallet) {
             System.out.println(lotto.numbers());
         }

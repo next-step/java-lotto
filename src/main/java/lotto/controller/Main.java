@@ -10,11 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
         int money = InputView.getMoney();
-        List<String> manuelLottoNumbers = InputView.getManuelLottos();
+        List<String> manualLottoNumbers = InputView.getManualLottos();
 
         LottoRequest request;
         try {
-            request = new LottoRequest(money, manuelLottoNumbers);
+            request = new LottoRequest(money, manualLottoNumbers);
         } catch (IllegalArgumentException e) {
             System.out.println("이 조건으로 로또를 구매할 수 없습니다. 사유 = " + e.getMessage());
             return;
