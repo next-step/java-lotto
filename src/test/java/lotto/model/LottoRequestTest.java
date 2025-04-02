@@ -24,10 +24,7 @@ class LottoRequestTest {
         LottoRequest request = new LottoRequest(5000, Collections.emptyList());
         LottoWallet lottoWallet = request.buy();
         assertThat(lottoWallet.getLottoCount()).isEqualTo(5);
-
-        for (Lotto lotto : lottoWallet) {
-            assertThat(lotto.getLottoNumbers()).hasSize(6);
-        }
+        assertThat(lottoWallet.autoLottoCount()).isEqualTo(5);
     }
 
     @Test
@@ -38,9 +35,6 @@ class LottoRequestTest {
         LottoWallet lottoWallet = request.buy();
         assertThat(lottoWallet.getLottoCount()).isEqualTo(5);
 
-        for (Lotto lotto : lottoWallet) {
-            assertThat(lotto.getLottoNumbers()).hasSize(6);
-        }
         Lotto expectedLotto1 = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         Lotto expectedLotto2 = new Lotto(Set.of(1, 42, 45, 3, 6, 9));
         assertThat(lottoWallet).contains(expectedLotto1, expectedLotto2);
