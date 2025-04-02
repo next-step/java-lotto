@@ -1,12 +1,14 @@
 package lotto.domain.model.lotto;
 
+import lotto.domain.model.game.Prize;
+
 import java.util.Objects;
 
-public class TicketCount {
+public class TicketCount implements Comparable<TicketCount> {
     private final int count;
 
     public TicketCount(final int count) {
-        if (count <= 0) {
+        if (count < 0) {
             throw new IllegalArgumentException("티켓 수량은 0보다 커야 합니다.");
         }
         this.count = count;
@@ -18,6 +20,10 @@ public class TicketCount {
 
     public int getCount() {
         return count;
+    }
+
+    public TicketCount substract(final int count) {
+        return new TicketCount(this.count - count);
     }
 
     @Override
@@ -37,4 +43,9 @@ public class TicketCount {
     public String toString() {
         return String.valueOf(count);
     }
-} 
+
+    @Override
+    public int compareTo(final TicketCount o) {
+        return Integer.compare(count, o.count);
+    }
+}

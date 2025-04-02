@@ -1,18 +1,20 @@
 package lotto.domain;
 
 import lotto.domain.model.game.LottoGameResult;
-import lotto.domain.model.lotto.PurchaseAmount;
+import lotto.domain.model.lotto.*;
 import lotto.domain.model.game.Rank;
-import lotto.domain.model.game.Yield;
 import lotto.domain.model.lotto.BonusNumber;
 import lotto.domain.model.lotto.LottoNumber;
 import lotto.domain.model.lotto.LottoTicket;
 import lotto.domain.model.lotto.WinningLottoTicket;
+import lotto.domain.model.lotto.TotalTicketCount;
+import lotto.domain.model.lotto.TicketCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,36 +27,34 @@ class LottoServiceTest {
 
     private final LottoService lottoService = new LottoService();
 
-    @DisplayName("로또 티켓 구매 테스트")
+    @DisplayName("자동 로또 티켓 구매 테스트")
     @Test
-    void purchaseTickets() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(5000);
+    void purchaseOnlyAutoTickets() {
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        int totalCount = 5;
+        TotalTicketCount totalTicketCount = new TotalTicketCount(
+            new TicketCount(totalCount),
+            new TicketCount(0)
+        );
 
-        List<LottoTicket> tickets = lottoService.purchaseTickets(purchaseAmount);
+        List<LottoTicket> tickets = lottoService.purchaseTickets(manualTickets, totalTicketCount);
 
-        assertThat(tickets).hasSize(5);
-        for (LottoTicket ticket : tickets) {
-            assertThat(ticket.getNumbers()).hasSize(6);
-        }
+        assertThat(tickets).hasSize(totalCount);
     }
 
     @DisplayName("로또 티켓 구매 수량 계산 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {1000, 2000, 5000, 10000})
-    void calculateTicketCount(int purchaseAmount) {
-        List<LottoTicket> tickets = lottoService.purchaseTickets(new PurchaseAmount(purchaseAmount));
+    @ValueSource(ints = {1, 2, 5, 10})
+    void calculateTicketCount(int count) {
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        TotalTicketCount totalTicketCount = new TotalTicketCount(
+            new TicketCount(count), 
+            new TicketCount(0)
+        );
 
-        int expectedCount = purchaseAmount / 1000;
-        assertThat(tickets).hasSize(expectedCount);
-    }
+        List<LottoTicket> tickets = lottoService.purchaseTickets(manualTickets, totalTicketCount);
 
-    @DisplayName("로또 티켓 구매 금액 검증 테스트")
-    @ParameterizedTest
-    @ValueSource(ints = {0, -1000})
-    void validateInvalidPurchaseAmount(int invalidAmount) {
-        assertThatThrownBy(() -> lottoService.purchaseTickets(new PurchaseAmount(invalidAmount)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("구입 금액은 0보다 커야 합니다");
+        assertThat(tickets).hasSize(count);
     }
 
     @DisplayName("로또 게임 결과 계산 테스트")
@@ -101,5 +101,33 @@ class LottoServiceTest {
             lottoNumbers.add(new LottoNumber(number));
         }
         return lottoNumbers;
+    }
+    
+    @DisplayName("수동 티켓과 자동 티켓 함께 구매 테스트")
+    @Test
+    void purchaseTicketsWithManualAndAuto() {
+        List<LottoTicket> manualTickets = List.of(
+            new LottoTicket(numbers(1, 2, 3, 4, 5, 6)),
+            new LottoTicket(numbers(10, 20, 30, 40, 41, 42))
+        );
+        int manualCount = manualTickets.size();
+        int totalCount = 5;
+        int autoCount = totalCount - manualCount;
+        
+        TotalTicketCount totalTicketCount = new TotalTicketCount(
+            new TicketCount(totalCount), 
+            new TicketCount(manualCount)
+        );
+
+        List<LottoTicket> allTickets = lottoService.purchaseTickets(manualTickets, totalTicketCount);
+
+        assertThat(allTickets).hasSize(totalCount);
+        assertThat(allTickets.subList(0, manualCount)).containsExactlyElementsOf(manualTickets);
+
+        List<LottoTicket> autoTickets = allTickets.subList(manualCount, totalCount);
+        assertThat(autoTickets).hasSize(autoCount);
+        for (LottoTicket ticket : autoTickets) {
+            assertThat(ticket.getNumbers()).hasSize(6);
+        }
     }
 } 

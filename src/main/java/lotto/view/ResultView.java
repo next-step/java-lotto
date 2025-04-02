@@ -1,8 +1,7 @@
 package lotto.view;
 
 import lotto.domain.model.game.LottoGameResult;
-import lotto.domain.model.lotto.PurchaseAmount;
-import lotto.domain.model.lotto.LottoTicket;
+import lotto.domain.model.lotto.*;
 import lotto.domain.model.game.Rank;
 
 import java.util.Arrays;
@@ -12,8 +11,8 @@ import java.util.Map;
 
 public class ResultView {
 
-    public void printTickets(final List<LottoTicket> tickets) {
-        System.out.printf("%d개를 구매했습니다.%n", tickets.size());
+    public void printTicketsWithManualCount(final List<LottoTicket> tickets, final TotalTicketCount totalTicketCount) {
+        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.%n", totalTicketCount.getManualTicketCount(), totalTicketCount.getAutoTicketCount());
         tickets.forEach(System.out::println);
     }
 
