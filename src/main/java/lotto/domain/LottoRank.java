@@ -1,9 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static lotto.LottoNumbers.LOTTO_SIZE;
+import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 
 public enum LottoRank {
     ETC(-1, 0),

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    public final static int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> numbers;
 
     public LottoNumbers(String numbers) {

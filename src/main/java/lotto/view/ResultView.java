@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.LottoNumbers;
-import lotto.LottoRank;
-import lotto.LottoResult;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 
 public class ResultView {
     private ResultView() {

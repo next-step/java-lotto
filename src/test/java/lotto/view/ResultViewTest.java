@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.LottoNumbers;
-import lotto.LottoRound;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoRound;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
