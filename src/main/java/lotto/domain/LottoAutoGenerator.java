@@ -2,27 +2,27 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoAutoGenerator {
-	private static final int LOTTO_SIZE = 6;
-	private static final int LOTTO_MIN_NUMBER = 1;
-	private static final int LOTTO_MAX_NUMBER = 45;
-	private static final List<Integer> BASE_NUMBERS = generateBaseNumbers();
+    private static final int SIZE = 6;
+    private static final List<LottoNumber> BASE_NUMBERS = generateBaseNumbers();
 
-	private static List<Integer> generateBaseNumbers() {
-		List<Integer> numbers = new ArrayList<>();
-		for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-			numbers.add(i);
-		}
-		return List.copyOf(numbers);
-	}
+    private static List<LottoNumber> generateBaseNumbers() {
+        return IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toUnmodifiableList());
+    }
 
-	public List<Integer> generateLottoTicket() {
-		List<Integer> numbers = new ArrayList<>(BASE_NUMBERS);
-		Collections.shuffle(numbers);
-		List<Integer> lottoNumbers = numbers.subList(0, LOTTO_SIZE);
-		Collections.sort(lottoNumbers);
-		return lottoNumbers;
-	}
+    public LottoTicket generateLottoTicket() {
+        List<LottoNumber> numbers = new ArrayList<>(BASE_NUMBERS);
+        Collections.shuffle(numbers);
+        List<LottoNumber> lottoNumbers = numbers.subList(0, SIZE).stream()
+                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
+                .collect(Collectors.toUnmodifiableList());
+        return new LottoTicket(lottoNumbers);
+    }
 }

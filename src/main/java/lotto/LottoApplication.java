@@ -17,10 +17,10 @@ public class LottoApplication {
         resultView.printLottoTicketAmount(lottoShop.getTicketAmount());
         lottoShop.getLottoTicketsNumber().forEach(resultView::printLottoNumbers);
 
-        List<Integer> winningNumbers = parser.splitAndParseToIntegerList(inputView.getStringInput());
-        LottoResult lottoResult = new LottoResult(winningNumbers, lottoShop.getLottoTicketsNumber());
+        List<LottoNumber> winningNumbers = parser.splitAndParseToLottoNumberList(inputView.getStringInput());
+        LottoResult lottoResult = LottoResult.from(winningNumbers, lottoShop.getLottoTicketsNumber());
         resultView.printMatchResult(lottoResult.getResult());
-        LottoEarning lottoProfit = new LottoEarning(lottoResult.getResult(), lottoShop.getPurchasePrice());
+        LottoEarning lottoProfit = LottoEarning.from(lottoResult.getResult(), lottoShop.getPurchasePrice());
         resultView.printReturnRate(lottoProfit.getReturnRate());
     }
 }

@@ -18,7 +18,7 @@ public class LottoShop {
         this.ticketAmount = calculateTicketAmount(price);
         List<LottoTicket> temp = new ArrayList<>();
         for (int i = 0; i < ticketAmount; i++) {
-            temp.add(new LottoTicket(lottoAutoGenerator.generateLottoTicket()));
+            temp.add(lottoAutoGenerator.generateLottoTicket());
         }
         this.lottoTickets = List.copyOf(temp);
     }

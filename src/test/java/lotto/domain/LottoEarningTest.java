@@ -17,7 +17,7 @@ class LottoEarningTest {
         );
         int purchasePrice = 5000;
 
-        LottoEarning lottoEarning = new LottoEarning(lottoResult, purchasePrice);
+        LottoEarning lottoEarning = LottoEarning.from(lottoResult, purchasePrice);
 
         Assertions.assertEquals(5_000 * 2 + 50_000 * 1 + 1_500_000 * 1, lottoEarning.getProfit());
     }
@@ -32,7 +32,7 @@ class LottoEarningTest {
         );
         int purchasePrice = 5000;
 
-        LottoEarning lottoEarning = new LottoEarning(lottoResult, purchasePrice);
+        LottoEarning lottoEarning = LottoEarning.from(lottoResult, purchasePrice);
 
         Assertions.assertEquals((double) (5_000 * 2 + 50_000 * 1 + 1_500_000 * 1) / purchasePrice, lottoEarning.getReturnRate());
     }

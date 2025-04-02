@@ -6,19 +6,27 @@ public class LottoEarning {
     private final int profit;
     private final double returnRate;
 
-    public LottoEarning(Map<Rank, Integer> result, int purchasePrice) {
-        this.profit = calculateTotalEarning(result);
-        this.returnRate = calculateReturnRate(purchasePrice);
+    private LottoEarning(int profit, double returnRate) {
+        this.profit = profit;
+        this.returnRate = returnRate;
     }
 
-    private int calculateTotalEarning(Map<Rank, Integer> result) {
+    public static LottoEarning from(Map<Rank, Integer> result, int purchasePrice) {
+        int profit = calculateTotalEarning(result);
+        double returnRate = calculateReturnRate(profit, purchasePrice);
+        return new LottoEarning(profit, returnRate);
+    }
+
+    private static int calculateTotalEarning(Map<Rank, Integer> result) {
         return result.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
     }
 
-    private double calculateReturnRate(int purchasePrice) {
-        if (purchasePrice == 0) return 0.0;
+    private static double calculateReturnRate(int profit, int purchasePrice) {
+        if (purchasePrice == 0) {
+            return 0.0;
+        }
         return (double) profit / purchasePrice;
     }
 

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -16,9 +17,9 @@ class ParserTest {
         List<Integer> expected = List.of(1, 2, 3, 4);
         Parser parser = new Parser();
 
-        List<Integer> result = parser.splitAndParseToIntegerList(input);
+        List<LottoNumber> result = parser.splitAndParseToLottoNumberList(input);
 
-        Assertions.assertEquals(result, expected);
+        Assertions.assertEquals(result.stream().map(LottoNumber::getNumber).collect(Collectors.toList()), expected);
     }
 
     @Test
@@ -28,7 +29,7 @@ class ParserTest {
         Parser parser = new Parser();
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> parser.splitAndParseToIntegerList(input));
+                .isThrownBy(() -> parser.splitAndParseToLottoNumberList(input));
     }
 
 }
