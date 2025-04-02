@@ -7,7 +7,6 @@ import lotto.view.ResultView;
 import java.util.List;
 
 public class LottoGame {
-
     public static void main(String[] args) {
         long amount = InputView.purchaseAmount();
         LottoMachine machine = new LottoMachine();
