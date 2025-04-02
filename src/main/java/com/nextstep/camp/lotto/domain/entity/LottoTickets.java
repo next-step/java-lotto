@@ -1,18 +1,18 @@
 package com.nextstep.camp.lotto.domain.entity;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.nextstep.camp.lotto.domain.exception.LottoTicketsCannotBeEmptyException;
 import com.nextstep.camp.lotto.domain.strategy.LottoPickStrategy;
 import com.nextstep.camp.lotto.domain.type.MatchResult;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class LottoTickets {
     private final List<LottoTicket> tickets;
 
     private LottoTickets(LottoPickStrategy pickStrategy) {
-        List<LottoTicket> tickets = pickStrategy.generate();
+        List<LottoTicket> tickets = pickStrategy.pick();
         if (tickets == null || tickets.isEmpty()) {
             throw new LottoTicketsCannotBeEmptyException();
         }

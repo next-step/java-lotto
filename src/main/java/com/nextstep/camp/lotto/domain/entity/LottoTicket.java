@@ -1,9 +1,9 @@
 package com.nextstep.camp.lotto.domain.entity;
 
+import java.util.List;
+
 import com.nextstep.camp.lotto.domain.vo.LottoNumbers;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
-
-import java.util.List;
 
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
@@ -22,10 +22,6 @@ public class LottoTicket {
 
     public static LottoTicket of(List<Integer> rawNumbers) {
         return new LottoTicket(rawNumbers);
-    }
-
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
     }
 
     public int countMatch(WinningNumbers winning) {

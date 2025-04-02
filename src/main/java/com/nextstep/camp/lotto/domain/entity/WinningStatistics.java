@@ -1,19 +1,17 @@
 package com.nextstep.camp.lotto.domain.entity;
 
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import com.nextstep.camp.lotto.domain.type.MatchResult;
 import com.nextstep.camp.lotto.domain.type.ProfitType;
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
 import com.nextstep.camp.lotto.domain.vo.RateOfReturn;
 
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 public class WinningStatistics {
     private final Map<MatchResult, Integer> resultCounts;
     private final LottoAmount spent;
-
-    private static final int INIT_COUNT = 1;
 
     private WinningStatistics(List<MatchResult> results, LottoAmount spent) {
         this.spent = spent;

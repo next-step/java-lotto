@@ -1,10 +1,10 @@
 package com.nextstep.camp.lotto.domain.strategy;
 
-import com.nextstep.camp.lotto.domain.entity.LottoTicket;
-
 import java.util.List;
+
+import com.nextstep.camp.lotto.domain.entity.LottoTicket;
 
 @FunctionalInterface
 public interface LottoPickStrategy {
-    List<LottoTicket> generate();
+    List<LottoTicket> pick();
 }

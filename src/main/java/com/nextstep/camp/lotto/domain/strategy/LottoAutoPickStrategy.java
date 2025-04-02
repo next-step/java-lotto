@@ -1,12 +1,12 @@
 package com.nextstep.camp.lotto.domain.strategy;
 
-import com.nextstep.camp.lotto.domain.entity.LottoTicket;
-import com.nextstep.camp.lotto.domain.vo.LottoAmount;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import com.nextstep.camp.lotto.domain.entity.LottoTicket;
+import com.nextstep.camp.lotto.domain.vo.LottoAmount;
 
 public class LottoAutoPickStrategy implements LottoPickStrategy {
 
@@ -25,7 +25,7 @@ public class LottoAutoPickStrategy implements LottoPickStrategy {
     }
 
     @Override
-    public List<LottoTicket> generate() {
+    public List<LottoTicket> pick() {
         return IntStream.range(0, this.amount.lottoCount())
                 .mapToObj(i -> LottoTicket.of(generateOne()))
                 .collect(Collectors.toList());
