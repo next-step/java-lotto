@@ -21,7 +21,7 @@ public enum Prize {
     public static Prize valueOfCount(int matchCount) {
         return Arrays.stream(values()).filter(prize -> prize.count == matchCount)
             .findFirst()
-            .orElse(null);
+            .orElse(NONE);
     }
 
     public int getCount() {
