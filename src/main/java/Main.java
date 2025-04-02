@@ -13,7 +13,9 @@ public class Main {
         OutputView.printLottoTickets(lottoTickets);
 
         var winningNumbers = InputView.inputWinningNumbers();
+        var bonusNumber = InputView.inputBonusNumber();
 
-        OutputView.printResult(winningNumbers, lottoTickets);
+
+        OutputView.printResult(winningNumbers, bonusNumber, lottoTickets);
     }
 }

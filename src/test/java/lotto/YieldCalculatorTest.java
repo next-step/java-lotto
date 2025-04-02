@@ -12,10 +12,10 @@ class YieldCalculatorTest {
     void calculateYield_returnsCorrectYield() {
         // given
         var result = Map.of(
-                3L, 2L,  // 5천원 * 2
-                4L, 1L,  // 5만원 * 1
-                5L, 0L,
-                6L, 1L   // 20억 * 1
+                Rank.FIFTH, 2L,  // 5천원 * 2
+                Rank.FOURTH, 1L,  // 5만원 * 1
+                Rank.THIRD, 0L,
+                Rank.FIRST, 1L   // 20억 * 1
         );
 
         long totalInvestment = 4 * 1000L; // 총 4장 구매

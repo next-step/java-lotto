@@ -1,18 +1,22 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class YieldCalculator {
-    public static double calculateYield(Map<Long, Long> result) {
+    public static double calculateYield(Map<Rank, Long> result) {
         long totalWinningCount = result.values().stream()
                 .mapToLong(Long::longValue)
                 .sum();
 
-        long totalWinningAmount = (result.getOrDefault(3L, 0L) * 5000) +
-                (result.getOrDefault(4L, 0L) * 50000) +
-                (result.getOrDefault(5L, 0L) * 500000) +
-                (result.getOrDefault(6L, 0L) * 2000000000);
+        long totalWinningAmount = Arrays.stream(Rank.values())
+                .mapToLong(rank -> calculateWinningAmountByRank(result, rank))
+                .sum();
 
-        return (double) totalWinningAmount / (totalWinningCount * LottoTicket.PRICE) * 100;
+        return (double) totalWinningAmount / (totalWinningCount * Seller.PRICE) * 100;
+    }
+
+    private static long calculateWinningAmountByRank(Map<Rank, Long> result, Rank rank) {
+        return result.getOrDefault(rank, 0L) * rank.getWinningMoney();
     }
 }
