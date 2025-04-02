@@ -7,7 +7,7 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new IllegalArgumentException("Lotto number must be between 1 and 45");
+            throw new IllegalArgumentException("로또는 1~45사이 숫자여야 합니다.");
         }
         this.number = number;
     }
