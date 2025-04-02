@@ -1,6 +1,6 @@
 package lotto.domain.strategy;
 
-import lotto.domain.model.LottoNumber;
+import lotto.domain.model.lotto.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
