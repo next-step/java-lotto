@@ -19,10 +19,16 @@ public enum Prize {
         this.money = money;
     }
 
-    public static Prize valueOfCount(int matchCount) {
-        return Arrays.stream(values()).filter(prize -> prize.count == matchCount)
+    public static Prize valueOfCount(int matchCount, boolean isBonus) {
+        Prize prize = Arrays.stream(values()).filter(prz -> prz.count == matchCount)
             .findFirst()
             .orElse(NONE);
+
+        if (prize == THIRD && isBonus) {
+            prize = SECOND;
+        }
+
+        return prize;
     }
 
     public int getCount() {

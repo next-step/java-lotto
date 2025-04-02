@@ -16,7 +16,8 @@ class WinningNumberTest {
 
         WinningNumber winningNumber = new WinningNumber(List.of(
             new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-            new LottoNumber(5), new LottoNumber(6)));
+            new LottoNumber(5), new LottoNumber(6))
+            , new LottoNumber(7));
 
 
         LottoRow row1 = new LottoRow(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12))); // 3개 일치
@@ -27,7 +28,7 @@ class WinningNumberTest {
 
         Map<Prize, Integer> winningList = winningNumber.calculate(lottoTicket);
 
-        assertThat(winningList.get(Prize.FOUR)).isEqualTo(2);
+        assertThat(winningList.get(Prize.FIFTH)).isEqualTo(2);
 
     }
 }

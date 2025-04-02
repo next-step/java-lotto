@@ -21,11 +21,10 @@ public class LottoMain {
 
         LottoNumber lottoBonusNumber = InputView.inputBonusNumber();
 
-
-        WinningNumber winningNumber = new WinningNumber(winningNumberList);
+        WinningNumber winningNumber = new WinningNumber(winningNumberList, lottoBonusNumber);
         Map<Prize, Integer> calculate = winningNumber.calculate(lottoTicket);
 
-        ResultView.printWinning(calculate);
+        ResultView.printWinning(calculate, price);
 
     }
 }

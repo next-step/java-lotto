@@ -12,9 +12,9 @@ class PrizeTest {
     void 로또_맞춘_개수와_일치하는_상금_정보_반환() {
         int count = 3;
 
-        Prize prize = Prize.valueOfCount(count);
+        Prize prize = Prize.valueOfCount(count, false);
 
-        assertThat(prize).isEqualTo(Prize.FOUR);
+        assertThat(prize).isEqualTo(Prize.FIFTH);
     }
 
     @Test
@@ -22,7 +22,7 @@ class PrizeTest {
     void 로또_맞춘_개수와_일치하는_상금_정보_반환_NONE() {
         int count = 0;
 
-        Prize prize = Prize.valueOfCount(count);
+        Prize prize = Prize.valueOfCount(count, false);
 
         assertThat(prize).isEqualTo(Prize.NONE);
     }
