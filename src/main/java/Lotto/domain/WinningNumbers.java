@@ -14,7 +14,7 @@ public class WinningNumbers {
     private final Set<LottoNumber> numbers;
 
     public WinningNumbers(List<LottoNumber> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_PICK_COUNT) {
             throw new IllegalArgumentException("Winning numbers must have 6 numbers.");
         }
         this.numbers = new HashSet<>(numbers);
