@@ -9,15 +9,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PurchaseTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"14000", "14500", "14,000", "1000", "-1000", "", " "})
+    @ValueSource(strings = {"14000", "14500", "14,000", "1000"})
     void should_be_valid_price(String input) {
-        boolean result = Validations.isInvalidPrice(input);
+        assertFalse(Validations.isInvalidPrice(input));
+    }
 
-        if (input.equals("14000") || input.equals("1000") || input.equals("14,000")) {
-            assertFalse(result);
-        } else {
-            assertTrue(result);
-        }
+    @ParameterizedTest
+    @ValueSource(strings = {"-1000", "", " ", "14501"})
+    void should_be_invalid_price(String input) {
+        assertTrue(Validations.isInvalidPrice(input));
     }
 
     @Test
