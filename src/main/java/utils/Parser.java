@@ -11,4 +11,8 @@ public class Parser {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public static int toInt(String input) {
+        return Integer.parseInt(input);
+    }
 }

@@ -12,8 +12,8 @@ public class LottoGame {
         this.generator = generator;
     }
 
-    public Lottos buyLotto(String amountInput, int manualLottoCount, List<String> manualLottoInput) {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(Integer.parseInt(amountInput));
+    public Lottos buyLotto(int amount, int manualLottoCount, List<String> manualLottoInput) {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
 
         int totalLottoCount = purchaseAmount.countOfLotto();
         int autoLottoCount = totalLottoCount - manualLottoCount;
@@ -24,13 +24,13 @@ public class LottoGame {
         return lottos;
     }
 
-    public void displayStatistic(String amountInput, String winningNumberInput, String bonusNumberInput, Lottos lottos) {
+    public void displayStatistic(int amount, String winningNumberInput, String bonusNumberInput, Lottos lottos) {
         WinningNumber winningNumber = new WinningNumber(winningNumberInput, bonusNumberInput);
 
         Ranks ranks = new Ranks(lottos.match(winningNumber));
         LottoStatistics statistics = ranks.toStatistics();
 
         printStatistics(statistics);
-        printProfitRate(statistics.calculateProfitRate(Integer.parseInt(amountInput)));
+        printProfitRate(statistics.calculateProfitRate(amount));
     }
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static utils.Parser.toInt;
+
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
@@ -43,9 +45,5 @@ public class InputView {
             manualLottoNumber.add(scanner.nextLine());
         }
         return manualLottoNumber;
-    }
-
-    public static int toInt(String input) {
-        return Integer.parseInt(input);
     }
 }
