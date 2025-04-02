@@ -19,7 +19,7 @@ class RankMatcherTest {
     void matchesTest() {
         // given
         Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        WinningLotto winningLotto = new WinningLotto(givenLotto);
+        WinningLotto winningLotto = new WinningLotto(givenLotto, 7);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
         int requiredMatches = 6;
 

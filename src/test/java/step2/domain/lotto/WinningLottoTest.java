@@ -18,8 +18,7 @@ public class WinningLottoTest {
     @Test
     void determineFirstRank() {
         // given
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        WinningLotto winningLotto = new WinningLotto(givenLotto);
+        WinningLotto winningLotto = fixture();
         Lotto actualLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
 
         // when
@@ -34,9 +33,7 @@ public class WinningLottoTest {
     @Test
     void determineSecondRank() {
         // given
-        int bonusNumber = 7;
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        WinningLotto winningLotto = new WinningLotto(givenLotto, bonusNumber);
+        WinningLotto winningLotto = fixture();
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7), LOTTO_RULE);
 
         // when
@@ -51,9 +48,7 @@ public class WinningLottoTest {
     @Test
     void determineThirdRank() {
         // given
-        int bonusNumber = 7;
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        WinningLotto winningLotto = new WinningLotto(givenLotto, bonusNumber);
+        WinningLotto winningLotto = fixture();
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8), LOTTO_RULE);
 
         // when
@@ -68,8 +63,7 @@ public class WinningLottoTest {
     @Test
     void determineFourthRank() {
         // given
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        WinningLotto winningLotto = new WinningLotto(givenLotto);
+        WinningLotto winningLotto = fixture();
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 7, 8), LOTTO_RULE);
 
         // when
@@ -84,8 +78,7 @@ public class WinningLottoTest {
     @Test
     void determineFifthRank() {
         // given
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        WinningLotto winningLotto = new WinningLotto(givenLotto);
+        WinningLotto winningLotto = fixture();
         Lotto lotto = new Lotto(List.of(1, 2, 3, 9, 7, 8), LOTTO_RULE);
 
         // when
@@ -101,8 +94,7 @@ public class WinningLottoTest {
     @ParameterizedTest
     void determineNoRank(String lottoNumbersString) {
         // given
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        WinningLotto winningLotto = new WinningLotto(givenLotto);
+        WinningLotto winningLotto = fixture();
         List<Integer> lottoNumbers = getLottoNumbersFromString(lottoNumbersString);
         Lotto lotto = new Lotto(lottoNumbers, LOTTO_RULE);
 
@@ -112,6 +104,11 @@ public class WinningLottoTest {
         // then
         RankType expected = RankType.NO_RANK;
         Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    private WinningLotto fixture() {
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        return new WinningLotto(winningLotto, 7);
     }
 
     private List<Integer> getLottoNumbersFromString(String lottoNumbersString) {

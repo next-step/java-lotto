@@ -41,7 +41,7 @@ public class LottoContainerTest {
     void checkWinningResults() {
         // given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        WinningLotto winningLotto = new WinningLotto(lotto);
+        WinningLotto winningLotto = new WinningLotto(lotto, 7);
 
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
         Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12), LOTTO_RULE);

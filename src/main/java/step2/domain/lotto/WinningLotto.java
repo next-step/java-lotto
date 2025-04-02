@@ -15,10 +15,6 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningLotto(Lotto winningLotto) {
-        this(winningLotto, null);
-    }
-
     public LottoNumbers matchedWith(Lotto lotto) {
         return winningLotto.matchedWith(lotto);
     }
