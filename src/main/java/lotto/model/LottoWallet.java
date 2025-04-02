@@ -14,6 +14,7 @@ public class LottoWallet implements Iterable<Lotto> {
         this.lottos = lottos;
         this.manualSize = manualSize;
     }
+
     public LottoWallet(List<Lotto> lottos) {
         this(lottos, 0);
     }
@@ -25,7 +26,10 @@ public class LottoWallet implements Iterable<Lotto> {
     public int autoLottoCount() {
         return lottos.size() - this.manualLottoCount();
     }
-    public int manualLottoCount() { return this.manualSize; }
+
+    public int manualLottoCount() {
+        return this.manualSize;
+    }
 
     @Override
     public Iterator<Lotto> iterator() {
