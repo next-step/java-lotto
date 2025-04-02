@@ -1,35 +1,33 @@
 package step2.domain.lotto;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class LottoNumbers {
-    private final Set<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(Set<Integer> lottoNumbers) {
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoNumbers findIntersection(List<Integer> list1, List<Integer> list2) {
-        Set<Integer> intersection = new HashSet<>(list1);
-        Set<Integer> list2Set = new HashSet<>(list2);
-        intersection.retainAll(list2Set);
-        return new LottoNumbers(intersection);
-    }
-
-    public static LottoNumbers findDifference(List<Integer> list1, List<Integer> list2) {
-        Set<Integer> difference = new HashSet<>(list1);
-        Set<Integer> list2Set = new HashSet<>(list2);
-        difference.removeAll(list2Set);
-        return new LottoNumbers(difference);
+    public Set<LottoNumber> getLottoNumberSet() {
+        return lottoNumbers;
     }
 
     public int size() {
         return lottoNumbers.size();
     }
 
-    public boolean contains(Integer number) {
+    public LottoNumbers findIntersection(Set<LottoNumber> intersection) {
+        intersection.retainAll(this.lottoNumbers);
+        return new LottoNumbers(intersection);
+    }
+
+    public LottoNumbers findDifference(Set<LottoNumber> difference) {
+        difference.removeAll(this.lottoNumbers);
+        return new LottoNumbers(difference);
+    }
+
+    public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 }

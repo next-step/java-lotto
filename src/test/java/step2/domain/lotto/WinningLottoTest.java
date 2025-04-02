@@ -12,14 +12,25 @@ import java.util.List;
 
 public class WinningLottoTest {
 
-    public static final LottoRule LOTTO_RULE = new LottoRule(1, 45, 6);
+    @DisplayName("로또 번호와 보너스 번호가 겹치는 상황 검증")
+    @Test
+    void validateLottoAndBonusNumberOverlap() {
+        // given
+        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 6;
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> new WinningLotto(new Lotto(lottoNumbers), bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+    }
 
     @DisplayName("6개 번호가 일치하면 1등")
     @Test
     void determineFirstRank() {
         // given
         WinningLotto winningLotto = fixture();
-        Lotto actualLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        Lotto actualLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         // when
         RankType actual = winningLotto.determineRank(actualLotto);
@@ -34,7 +45,7 @@ public class WinningLottoTest {
     void determineSecondRank() {
         // given
         WinningLotto winningLotto = fixture();
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7), LOTTO_RULE);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
         // when
         RankType actual = winningLotto.determineRank(lotto);
@@ -49,7 +60,7 @@ public class WinningLottoTest {
     void determineThirdRank() {
         // given
         WinningLotto winningLotto = fixture();
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8), LOTTO_RULE);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8));
 
         // when
         RankType actual = winningLotto.determineRank(lotto);
@@ -64,7 +75,7 @@ public class WinningLottoTest {
     void determineFourthRank() {
         // given
         WinningLotto winningLotto = fixture();
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 7, 8), LOTTO_RULE);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 7, 8));
 
         // when
         RankType actual = winningLotto.determineRank(lotto);
@@ -79,7 +90,7 @@ public class WinningLottoTest {
     void determineFifthRank() {
         // given
         WinningLotto winningLotto = fixture();
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 9, 7, 8), LOTTO_RULE);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 9, 7, 8));
 
         // when
         RankType actual = winningLotto.determineRank(lotto);
@@ -96,7 +107,7 @@ public class WinningLottoTest {
         // given
         WinningLotto winningLotto = fixture();
         List<Integer> lottoNumbers = getLottoNumbersFromString(lottoNumbersString);
-        Lotto lotto = new Lotto(lottoNumbers, LOTTO_RULE);
+        Lotto lotto = new Lotto(lottoNumbers);
 
         // when
         RankType actual = winningLotto.determineRank(lotto);
@@ -107,7 +118,7 @@ public class WinningLottoTest {
     }
 
     private WinningLotto fixture() {
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         return new WinningLotto(winningLotto, 7);
     }
 

@@ -4,7 +4,7 @@ import step2.domain.rank.RankType;
 
 public class WinningLotto {
     private final Lotto winningLotto;
-    private final Integer bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningLotto, Integer bonusNumber) {
         if (lottoContainsBonusNumber(winningLotto, bonusNumber)) {
@@ -12,7 +12,7 @@ public class WinningLotto {
         }
 
         this.winningLotto = winningLotto;
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public LottoNumbers matchedWith(Lotto lotto) {

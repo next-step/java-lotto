@@ -22,7 +22,7 @@ public class LottoContainerFormatter {
     public String lottosAsString() {
         StringBuilder sb = new StringBuilder();
         for (LottoFormatter lottoFormatter : lottoFormatters) {
-            String numbersAsString = lottoFormatter.numbersAsString();
+            String numbersAsString = lottoFormatter.numbersAsListString();
             sb.append(numbersAsString).append(System.lineSeparator());
         }
         return sb.toString();

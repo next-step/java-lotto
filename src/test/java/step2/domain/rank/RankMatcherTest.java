@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoRule;
 import step2.domain.lotto.WinningLotto;
 import step2.domain.rank.rankmatcher.GeneralRankMatcher;
 import step2.domain.rank.rankmatcher.SecondRankMatcher;
@@ -12,15 +11,13 @@ import step2.domain.rank.rankmatcher.SecondRankMatcher;
 import java.util.List;
 
 class RankMatcherTest {
-    public static final LottoRule LOTTO_RULE = new LottoRule(1, 45, 6);
-
     @DisplayName("GeneralRank matches 테스트")
     @Test
     void matchesTest() {
         // given
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(givenLotto, 7);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int requiredMatches = 6;
 
         // when
@@ -37,9 +34,9 @@ class RankMatcherTest {
     void matchesFailTest() {
         // given
         int bonusNumber = 7;
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(givenLotto, bonusNumber);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8), LOTTO_RULE);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8));
         int requiredMatches = 6;
 
         // when
@@ -56,9 +53,9 @@ class RankMatcherTest {
     void secondRankMatchesTest() {
         // given
         int bonusNumber = 7;
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(givenLotto, bonusNumber);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7), LOTTO_RULE);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
         // when
         RankMatcher rankMatcher = new SecondRankMatcher();
@@ -73,9 +70,9 @@ class RankMatcherTest {
     void secondRankMatchesFailTest() {
         // given
         int bonusNumber = 7;
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(givenLotto, bonusNumber);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8), LOTTO_RULE);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8));
 
         // when
         RankMatcher rankMatcher = new SecondRankMatcher();

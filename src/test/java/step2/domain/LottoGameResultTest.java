@@ -14,7 +14,7 @@ class LottoGameResultTest {
 
     public static final Integer BONUS_NUMBER = 7;
     private static final List<Integer> WINNING_NUMBERS = List.of(1, 2, 3, 4, 5, 6);
-    private static final LottoRule LOTTO_RULE = new LottoRule(1, 6, 6);
+    private static final LottoGenerator LOTTO_RULE = new LottoGenerator(1, 6, 6);
 
     @DisplayName("구매 금액에 해당하는 갯수의 로또 발급")
     @CsvSource(value = {"1000, 1000, 1", "14000, 2000, 7", "5000, 5000, 1"})
@@ -47,7 +47,6 @@ class LottoGameResultTest {
         }
         Assertions.assertThat(actual).isEqualTo(result.lottoCount());
     }
-
 
     @DisplayName("당첨금 계산")
     @Test

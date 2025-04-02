@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LottoContainerTest {
 
-    private static final LottoRule LOTTO_RULE = new LottoRule(1, 45, 6);
+    private static final LottoGenerator LOTTO_RULE = new LottoGenerator(1, 45, 6);
 
     @DisplayName("주어진 개수만큼 로또 발급")
     @Test
@@ -40,11 +40,11 @@ public class LottoContainerTest {
     @Test
     void checkWinningResults() {
         // given
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(lotto, 7);
 
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12), LOTTO_RULE);
+        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12));
         LottoContainer lottoContainer = new LottoContainer(List.of(lotto1, lotto2));
 
         // when

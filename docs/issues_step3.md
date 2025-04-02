@@ -11,3 +11,8 @@
 - WinningLotto에서 당첨 여부를 확인하도록 변경
 - Lotto에서 WinningLotto와 겹치는 숫자를 반환
 - WinningLotto에서 겹치지 않는 숫자와 보너스 볼을 비교하여 당첨 여부를 확인
+### 검증 프로세스 변경
+- 기존에는 Lotto에서 LottoRule을 입력받아 검증
+- LottoNumber를 구현하고 각자 검증
+- 상수는 LottoConstatns로 분리
+- LottoRule은 LottoGenerator로 이름 변경

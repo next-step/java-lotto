@@ -8,12 +8,12 @@ import java.util.List;
 public class LottoContainer {
     private final List<Lotto> lottos;
 
-    public LottoContainer(int lottoCount, LottoRule lottoRule) {
+    public LottoContainer(int lottoCount, LottoGenerator lottoGenerator) {
         if (isInvalid(lottoCount)) {
             throw new IllegalArgumentException("로또 개수는 1개 이상이어야 합니다.");
         }
 
-        this.lottos = initializeLottos(lottoCount, lottoRule);
+        this.lottos = initializeLottos(lottoCount, lottoGenerator);
     }
 
     public LottoContainer(List<Lotto> lottos) {
@@ -41,11 +41,11 @@ public class LottoContainer {
         return lottoCount <= 0;
     }
 
-    private List<Lotto> initializeLottos(int lottoCount, LottoRule lottoRule) {
+    private List<Lotto> initializeLottos(int lottoCount, LottoGenerator lottoGenerator) {
         final List<Lotto> lottos;
         lottos = new ArrayList<>(lottoCount);
         for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = new Lotto(lottoRule);
+            Lotto lotto = new Lotto(lottoGenerator);
             lottos.add(lotto);
         }
         return lottos;
