@@ -1,27 +1,33 @@
 package com.nextstep.camp.lotto.domain.entity;
 
 import com.nextstep.camp.lotto.domain.type.MatchResult;
+import com.nextstep.camp.lotto.domain.type.ProfitType;
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
 import com.nextstep.camp.lotto.domain.vo.RateOfReturn;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class WinningStatistics {
     private final Map<MatchResult, Integer> resultCounts;
+    private final LottoAmount spent;
 
     private static final int INIT_COUNT = 1;
 
-    private WinningStatistics(List<MatchResult> results) {
-        this.resultCounts = new EnumMap<>(MatchResult.class);
-        for (MatchResult result : results) {
-            resultCounts.merge(result, INIT_COUNT, Integer::sum);
-        }
+    private WinningStatistics(List<MatchResult> results, LottoAmount spent) {
+        this.spent = spent;
+        this.resultCounts = MatchResult.getValidValues().stream()
+            .collect(Collectors.toMap(
+                Function.identity(),
+                matchResult -> Collections.frequency(results, matchResult),
+                (a, b) -> a,
+                LinkedHashMap::new
+            ));
     }
 
-    public static WinningStatistics of(List<MatchResult> results) {
-        return new WinningStatistics(results);
+    public static WinningStatistics of(List<MatchResult> results, LottoAmount spent) {
+        return new WinningStatistics(results, spent);
     }
 
     public int totalPrize() {
@@ -36,5 +42,19 @@ public class WinningStatistics {
 
     public Map<MatchResult, Integer> getResultCounts() {
         return resultCounts;
+    }
+
+    @Override
+    public String toString() {
+        String resultString = resultCounts.entrySet().stream()
+            .map(entry -> entry.getKey() + " - " + entry.getValue() + "개")
+            .collect(Collectors.joining("\n"));
+
+        RateOfReturn rateOfReturn = calculateRateOfReturn(spent);
+        ProfitType profitType = rateOfReturn.getProfitType();
+        return resultString + "\n" +
+            "총 수익률은 " +
+            rateOfReturn.toString() +
+            "입니다.(기준이 1이기 때문에 결과적으로 " + profitType.getDescription() + "라는 의미임)";
     }
 }

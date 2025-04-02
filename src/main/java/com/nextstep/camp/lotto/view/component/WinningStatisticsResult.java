@@ -2,30 +2,31 @@ package com.nextstep.camp.lotto.view.component;
 
 import com.nextstep.camp.calculator.application.dto.ExpressionResponse;
 import com.nextstep.camp.common.view.component.AbstractResult;
+import com.nextstep.camp.lotto.domain.entity.WinningStatistics;
 
-public class WinningStatisticsResult extends AbstractResult<Integer> {
+public class WinningStatisticsResult extends AbstractResult<WinningStatistics> {
 
-    protected WinningStatisticsResult(Integer value) {
-        super(value);
+    protected WinningStatisticsResult(WinningStatistics statistics) {
+        super(statistics);
     }
 
-    public static WinningStatisticsResult create(ExpressionResponse response) {
-        return new WinningStatisticsResult(response.getResult());
+    public static WinningStatisticsResult create(WinningStatistics statistics) {
+        return new WinningStatisticsResult(statistics);
     }
 
     @Override
     public String getLabel() {
-        return "답: ";
+        return "\n당첨 통계\n---------\n";
     }
 
     @Override
-    public Integer getValue() {
+    public WinningStatistics getValue() {
         return value;
     }
 
     @Override
-    public Integer action() {
-        System.out.println(getLabel() + getValue());
+    public WinningStatistics action() {
+        System.out.println(getLabel() + value);
         return value;
     }
 }

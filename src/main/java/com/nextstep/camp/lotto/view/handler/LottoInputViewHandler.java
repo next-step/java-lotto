@@ -21,10 +21,7 @@ public class LottoInputViewHandler {
     }
 
     public LottoInputData handle() {
-        LottoAmountInput lottoAmountInput = LottoAmountInput.create(LottoAmountInputStrategy.ofSystemIn());
-        WinningNumbersInput winningNumbersInput = WinningNumbersInput.create(WinningNumbersInputStrategy.ofSystemIn());
-
-        LottoInputView view = LottoInputView.publish(lottoAmountInput, winningNumbersInput);
+        LottoInputView view = LottoInputView.publish();
         view.render();
         return view.toInputData();
     }

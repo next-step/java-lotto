@@ -1,6 +1,8 @@
 package com.nextstep.camp.lotto.domain.type;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum MatchResult {
     THREE(3, 5_000),
@@ -26,5 +28,16 @@ public enum MatchResult {
 
     public int getPrize() {
         return prize;
+    }
+
+    public static List<MatchResult> getValidValues() {
+        return Arrays.stream(values())
+                .filter(result -> result != NONE)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d개 일치 (%d원)", matchCount, prize);
     }
 }

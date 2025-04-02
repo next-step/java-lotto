@@ -14,7 +14,7 @@ public class WinningNumbersInputStrategy implements InputStrategy<WinningNumbers
     private final Scanner scanner;
 
     private static final String WINNING_NUMBER_REGEX = "^\\s*\\d{1,2}\\s*(,\\s*\\d{1,2}\\s*){5}$";;
-    private static final String DELIMITER = ",";
+    private static final String DELIMITER = ",\\s?";
     private static final int WINNING_NUMBER_SIZE = 6;
     private static final int MIN_WINNING_NUMBER = 1;
     private static final int MAX_WINNING_NUMBER = 45;

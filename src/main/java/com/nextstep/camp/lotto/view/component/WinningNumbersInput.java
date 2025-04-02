@@ -23,6 +23,6 @@ public class WinningNumbersInput extends AbstractInput<WinningNumbers> {
 
     @Override
     public String getLabel() {
-        return "지난 주 당첨 번호를 입력해 주세요.";
+        return "\n지난 주 당첨 번호를 입력해 주세요.";
     }
 }
