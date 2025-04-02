@@ -9,7 +9,9 @@ public class LottoMain {
     public static void main(String[] args) {
 
         int price = InputView.inputPrice();
-        LottoTicket lottoTicket = new LottoTicket(price);
+
+        GenerateNumber generateNumber = GenerateNumber.getInstance();
+        LottoTicket lottoTicket = new LottoTicket(price, generateNumber);
 
         ResultView.printCount(lottoTicket.getCount());
 
