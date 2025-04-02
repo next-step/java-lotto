@@ -1,7 +1,7 @@
 package com.nextstep.camp.calculator.infrastructure.view;
 
 import com.nextstep.camp.calculator.infrastructure.view.component.ExpressionInput;
-import com.nextstep.camp.calculator.infrastructure.view.dto.InputData;
+import com.nextstep.camp.calculator.infrastructure.view.dto.ExpressionInputData;
 
 public class ExpressionInputView {
     private final ExpressionInput expressionInput;
@@ -18,7 +18,7 @@ public class ExpressionInputView {
         expressionInput.action();
     }
 
-    public InputData toInputData() {
-        return InputData.of(expressionInput);
+    public ExpressionInputData toInputData() {
+        return ExpressionInputData.of(expressionInput);
     }
 }

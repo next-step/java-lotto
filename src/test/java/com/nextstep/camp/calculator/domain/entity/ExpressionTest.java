@@ -31,7 +31,7 @@ class ExpressionTest {
         );
     }
 
-    @ParameterizedTest(name = "{0}")
+    @ParameterizedTest(name = "input: {0}")
     @MethodSource("invalidInputs")
     void evaluate_invalid_input_throws_exception(String input) {
         assertThatThrownBy(() -> Expression.of(ExpressionTokens.of(input)))
@@ -46,7 +46,7 @@ class ExpressionTest {
         );
     }
 
-    @ParameterizedTest(name = "{0}")
+    @ParameterizedTest(name = "input: {0}")
     @MethodSource("invalidExpressions")
     void evaluate_unsupported_operator_throws_exception(String input) {
         assertThatThrownBy(() -> Expression.of(ExpressionTokens.of(input)))

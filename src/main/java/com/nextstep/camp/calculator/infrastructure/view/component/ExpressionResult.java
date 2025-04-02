@@ -1,6 +1,7 @@
 package com.nextstep.camp.calculator.infrastructure.view.component;
 
 import com.nextstep.camp.calculator.application.dto.ExpressionResponse;
+import com.nextstep.camp.common.view.component.AbstractResult;
 
 public class ExpressionResult extends AbstractResult<Integer> {
 
@@ -23,7 +24,8 @@ public class ExpressionResult extends AbstractResult<Integer> {
     }
 
     @Override
-    public void action() {
+    public Integer action() {
         System.out.println(getLabel() + getValue());
+        return value;
     }
 }

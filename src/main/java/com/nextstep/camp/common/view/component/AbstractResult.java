@@ -1,6 +1,6 @@
-package com.nextstep.camp.calculator.infrastructure.view.component;
+package com.nextstep.camp.common.view.component;
 
-import com.nextstep.camp.calculator.infrastructure.view.Element;
+import com.nextstep.camp.common.view.Element;
 
 public abstract class AbstractResult<T> implements Element<T> {
     protected final T value;
@@ -10,5 +10,5 @@ public abstract class AbstractResult<T> implements Element<T> {
     }
 
     @Override
-    public abstract void action();
+    public abstract T action();
 }
