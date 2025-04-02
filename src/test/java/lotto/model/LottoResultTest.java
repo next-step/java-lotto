@@ -22,7 +22,7 @@ class LottoResultTest {
                         LottoPrize.NONE
                 )
         );
-        int profit = lottoResult.calculateProfit();
+        long profit = lottoResult.calculateProfit();
 
         assertThat(profit).isEqualTo(2_000_000_000 * 1 + 30_000_000 * 2 + 1_500_000 * 1 + 50_000 * 1 + 5_000 * 2 + 0 * 1);
     }
