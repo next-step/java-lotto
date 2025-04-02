@@ -3,13 +3,13 @@ package step2.domain.lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.rank.Rank;
+import step2.domain.rank.RankType;
 
 import java.util.List;
 
 public class LottoContainerTest {
 
-    private static final LottoRule LOTTO_RULE = new LottoRule(1, 45, 6);
+    private static final LottoGenerator LOTTO_RULE = new LottoGenerator(1, 45, 6);
 
     @DisplayName("주어진 개수만큼 로또 발급")
     @Test
@@ -40,16 +40,17 @@ public class LottoContainerTest {
     @Test
     void checkWinningResults() {
         // given
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(lotto, 7);
 
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6), LOTTO_RULE);
-        Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12), LOTTO_RULE);
+        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12));
         LottoContainer lottoContainer = new LottoContainer(List.of(lotto1, lotto2));
 
         // when
-        List<Rank> ranks = lottoContainer.checkWinningResults(winningLotto);
+        List<RankType> ranks = lottoContainer.checkWinningResults(winningLotto);
 
         // then
-        Assertions.assertThat(ranks).containsAnyOf(Rank.FIRST, Rank.NO_RANK);
+        Assertions.assertThat(ranks).containsAnyOf(RankType.FIRST, RankType.NO_RANK);
     }
 }

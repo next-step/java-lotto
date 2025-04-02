@@ -14,9 +14,9 @@ public class LottoCount {
         this.lottoPrice = lottoPrice;
     }
 
-    public LottoContainer generateLottoContainer(LottoRule lottoRule) {
+    public LottoContainer generateLottoContainer(LottoGenerator lottoGenerator) {
         int count = this.purchasedAmount / this.lottoPrice;
-        return new LottoContainer(count, lottoRule);
+        return new LottoContainer(count, lottoGenerator);
     }
 
     public double getWinningRate(long winningAmount) {

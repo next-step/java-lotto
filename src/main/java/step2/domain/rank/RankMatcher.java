@@ -1,14 +1,9 @@
 package step2.domain.rank;
 
-public class RankMatcher {
+import step2.domain.lotto.Lotto;
+import step2.domain.lotto.WinningLotto;
 
-    private final int requiredMatches;
-
-    public RankMatcher(int requiredMatches) {
-        this.requiredMatches = requiredMatches;
-    }
-
-    public boolean matches(MatchedCount matchedCount) {
-        return matchedCount.isSame(requiredMatches);
-    }
+public interface RankMatcher {
+    boolean matches(WinningLotto winningLotto, Lotto lotto);
+    String getAdditionalDescription();
 }

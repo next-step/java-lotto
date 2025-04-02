@@ -1,16 +1,14 @@
 package step2.domain.lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-public class LottoRule {
+public class LottoGenerator {
 
     private final int minNumber;
     private final int maxNumber;
     private final int size;
 
-    public LottoRule(int minNumber, int maxNumber, int size) {
+    public LottoGenerator(int minNumber, int maxNumber, int size) {
         if (!isValid(minNumber, maxNumber, size)) {
             throw new IllegalArgumentException("invalid range");
         }
@@ -19,22 +17,24 @@ public class LottoRule {
         this.size = size;
     }
 
-    public boolean isSatisfied(List<Integer> lottoNumbers) {
-        for (int number : lottoNumbers) {
-            if (number < minNumber || maxNumber < number) {
-                return false;
-            }
+    public LottoNumbers generateLotto() {
+        List<Integer> generatedRandomNumbers = generateRandomNumbers();
+        Set<LottoNumber> generatedLottoNumbers = new HashSet<>();
+        for (Integer number : generatedRandomNumbers) {
+            generatedLottoNumbers.add(new LottoNumber(number));
         }
-        return lottoNumbers.size() == size;
+        return new LottoNumbers(generatedLottoNumbers);
     }
 
-    public List<Integer> generateLotto() {
+    private List<Integer> generateRandomNumbers() {
         List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = minNumber; i <= maxNumber; i++) {
             lottoNumbers.add(i);
         }
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, size);
+        List<Integer> generatedLotto = lottoNumbers.subList(0, size);
+        generatedLotto.sort(Integer::compareTo);
+        return generatedLotto;
     }
 
     private boolean isValid(int minNumber, int maxNumber, int size) {

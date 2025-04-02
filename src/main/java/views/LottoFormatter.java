@@ -1,16 +1,19 @@
 package views;
 
-import java.util.List;
+import step2.domain.lotto.LottoNumber;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class LottoFormatter {
 
-    private final List<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public LottoFormatter(List<Integer> numbers) {
+    public LottoFormatter(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public String numbersAsString() {
-        return numbers.toString();
+    public String numbersAsListString() {
+        return new ArrayList<>(numbers).toString();
     }
 }
