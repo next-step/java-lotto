@@ -1,31 +1,28 @@
 package model.lotto;
 
 public class LottoCount {
-    private static final int LOTTO_PRICE = 1000;
+    private final int manualLottoCount;
+    private final int autoLottoCount;
     private final int totalCount;
-    private final int manualCount;
 
-    public LottoCount(int payAmount, int manualCount) {
-        this.totalCount = getTotalCount(payAmount);
-        this.manualCount = manualCount;
-        checkLottoCountValidation();
+    public LottoCount(int totalCount, int manualLottoCount){
+        this.totalCount = totalCount;
+        this.manualLottoCount = manualLottoCount;
+        this.autoLottoCount = totalCount - manualLottoCount;
+        checkValidLottoCounts();
     }
 
-    private void checkLottoCountValidation() {
-        if (totalCount < manualCount) {
-            throw new IllegalArgumentException("수동으로 구매한 개수는 총 구매 개수를 초과할 수 없습니다.");
+    private void checkValidLottoCounts(){
+        if(manualLottoCount > totalCount) {
+            throw new IllegalArgumentException("발급 가능한 수를 초과했습니다.");
         }
     }
 
-    public int getAutoCount() {
-        return totalCount - manualCount;
+    public int getManualLottoCount() {
+        return manualLottoCount;
     }
 
-    private int getTotalCount(int payAmount) {
-        return payAmount / LOTTO_PRICE;
-    }
-
-    public int getManualCount(){
-        return manualCount;
+    public int getAutoLottoCount(){
+        return autoLottoCount;
     }
 }

@@ -3,6 +3,7 @@ package model;
 import generator.RandomNumberGenerator;
 import model.lotto.LottoCount;
 import model.lotto.LottoShop;
+import model.lotto.Price;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,12 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoShopTest {
+    private final RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
     @Test
     @DisplayName("금액/1000한 숫자만큼 로또를 발급해준다.")
     void generateLotto() {
-        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        Price price = new Price(14000);
         LottoShop lottoShop = new LottoShop(randomNumberGenerator);
-        assertThat(lottoShop.generateLotto(new LottoCount(14000, 14), new ArrayList<>())).hasSize(14);
+        assertThat(lottoShop.generateLotto(price)).hasSize(14);
     }
 
     @Test

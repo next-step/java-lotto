@@ -1,6 +1,7 @@
 package ui;
 
 import model.lotto.Lotto;
+import model.lotto.Price;
 import model.lotto.WinningLotto;
 
 import java.util.List;
@@ -11,9 +12,10 @@ import java.util.stream.Stream;
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static int getPayAmount() {
+    public static Price getPayAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return SCANNER.nextInt();
+        int payAmount = SCANNER.nextInt();
+        return new Price(payAmount);
     }
 
     public static WinningLotto getLastWeekWinNumber() {
