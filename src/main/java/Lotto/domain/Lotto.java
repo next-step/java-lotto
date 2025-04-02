@@ -21,7 +21,7 @@ public class Lotto {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public int countMatches(Set<LottoNumber> winningNumbers) {
