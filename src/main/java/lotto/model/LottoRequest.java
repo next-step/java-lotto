@@ -1,9 +1,9 @@
 package lotto.model;
 
+import java.util.Collections;
 import lotto.model.generator.LottoGenerator;
 import lotto.model.generator.LottoNumberGenerator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +12,7 @@ public class LottoRequest {
     public static final int LOTTO_PRICE = 1000;
 
     private final Money money;
-    private final List<Lotto> manualLottos;
+    private final List<String> manualLottoStrs;
 
     public LottoRequest(int money, List<String> manualLottoStrs) {
         this.money = new Money(money);
@@ -21,11 +21,7 @@ public class LottoRequest {
             throw new IllegalArgumentException("구매 비용이 모자랍니다.");
         }
 
-        this.manualLottos = manualLottoStrs
-                .stream()
-                .map(str -> List.of(str.split(",")))
-                .map(Lotto::new)
-                .collect(Collectors.toList());
+        this.manualLottoStrs = manualLottoStrs;
     }
 
     private int lottoBuyChance() {
@@ -34,14 +30,31 @@ public class LottoRequest {
 
     public LottoWallet buy() {
         LottoGenerator lottoGenerator = new LottoGenerator(new LottoNumberGenerator());
+        List<RequestDto> requests = manualLottoStrs
+                .stream()
+                .map(str -> List.of(str.split(",")))
+                .map(LottoRequest::parse)
+                .map(RequestDto::new)
+                .collect(Collectors.toList());
 
         int size = lottoBuyChance();
-        List<Lotto> lottos = new ArrayList<>(manualLottos);
-        for (int i = 0; i < size - manualLottos.size(); i++) {
-            lottos.add(lottoGenerator.generate());
-        }
+        int autoSize = size - manualLottoStrs.size();
 
-        return new LottoWallet(lottos, manualLottos.size());
+        requests.addAll(Collections.nCopies(autoSize, new RequestDto()));
+
+        List<Lotto> lottos = requests
+                .stream()
+                .map(lottoGenerator::generate)
+                .collect(Collectors.toList());
+
+        return new LottoWallet(lottos, manualLottoStrs.size());
+    }
+
+    private static List<Integer> parse(List<String> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
 

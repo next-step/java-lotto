@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Set;
 
 import lotto.model.Lotto;
+import lotto.model.RequestDto;
 import org.junit.jupiter.api.Test;
 
 class LottoGeneratorTest {
@@ -14,7 +15,7 @@ class LottoGeneratorTest {
         NumberGenerator testGenerator = new NumberGeneratorTestImpl();
         LottoGenerator lottoGenerator = new LottoGenerator(testGenerator);
 
-        Lotto lotto = lottoGenerator.generate();
+        Lotto lotto = lottoGenerator.generate(new RequestDto());
 
         assertThat(lotto).isEqualTo(new Lotto(Set.of(1,2,3,4,5,6)));
     }
