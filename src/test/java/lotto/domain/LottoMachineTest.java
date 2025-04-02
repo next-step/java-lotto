@@ -1,10 +1,14 @@
 package lotto.domain;
 
 import org.assertj.core.api.Assertions;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoMachine.PRICE_OF_LOTTO;
 
@@ -15,8 +19,8 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
 
         int money = 3000;
-        List<LottoNumbers> lottoNumbers = machine.buy(money);
-        Assertions.assertThat(lottoNumbers).hasSize(money / PRICE_OF_LOTTO);
+        List<LottoNumbers> lottos = machine.buy(money);
+        Assertions.assertThat(lottos).hasSize(money / PRICE_OF_LOTTO);
     }
 
     @Test
@@ -26,5 +30,22 @@ public class LottoMachineTest {
         int money = 500;
         assertThatThrownBy(() -> machine.buy(money))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void 로또구매시_수동구매번호도_추가() {
+        LottoMachine machine = new LottoMachine();
+        List<String> manualLottoNumberInputs = new ArrayList<>();
+        String userInput1 = "1,2,3,4,5,6";
+        String userInput2 = "7,8,9,10,11,12";
+        manualLottoNumberInputs.add(userInput1);
+        manualLottoNumberInputs.add(userInput2);
+
+        int money = 10000;
+        List<LottoNumbers> lottos = machine.buy(money, manualLottoNumberInputs);
+
+        assertThat(lottos).hasSize(10);
+        assertThat(lottos.get(0)).isEqualTo(LottoNumbers.toLottoNumber(userInput1));
+        assertThat(lottos.get(1)).isEqualTo(LottoNumbers.toLottoNumber(userInput2));
     }
 }
