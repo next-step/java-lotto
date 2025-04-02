@@ -15,8 +15,8 @@ public class WinningLottoTicketTest {
     @Test
     public void winningLottoTicket_정상() {
         WinningLottoTicket ticket = new WinningLottoTicket("1,2,3,4,5,6", 7);
-        assertThat(ticket.matchLottoNumbers(createLottoTicket(List.of(1,2,3,4,5,6)))).isEqualTo(6);
-        assertThat(ticket.hasBonusMatch(createLottoTicket(List.of(1,2,3,4,5,6)))).isFalse();
+        assertThat(ticket.matchLottoNumbers(createLottoTicket(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
+        assertThat(ticket.hasBonusMatch(createLottoTicket(List.of(1, 2, 3, 4, 5, 6)))).isFalse();
     }
 
     @Test
@@ -32,20 +32,20 @@ public class WinningLottoTicketTest {
     }
 
     @Test
-    void matchLottoNumbers(){
+    void matchLottoNumbers() {
         WinningLottoTicket ticket = new WinningLottoTicket("1,2,3,4,5,6", 7);
-        assertThat(ticket.matchLottoNumbers(createLottoTicket(List.of(1,2,3,4,5,6)))).isEqualTo(6);
+        assertThat(ticket.matchLottoNumbers(createLottoTicket(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
     }
 
     @Test
-    void hasBonusMatch_false(){
+    void hasBonusMatch_false() {
         WinningLottoTicket ticket = new WinningLottoTicket("1,2,3,4,5,6", 7);
-        assertThat(ticket.hasBonusMatch(createLottoTicket(List.of(1,2,3,4,5,6)))).isFalse();
+        assertThat(ticket.hasBonusMatch(createLottoTicket(List.of(1, 2, 3, 4, 5, 6)))).isFalse();
     }
 
     @Test
-    void hasBonusMatch_true(){
+    void hasBonusMatch_true() {
         WinningLottoTicket ticket = new WinningLottoTicket("1,2,3,4,5,6", 7);
-        assertThat(ticket.hasBonusMatch(createLottoTicket(List.of(1,2,3,4,5,7)))).isTrue();
+        assertThat(ticket.hasBonusMatch(createLottoTicket(List.of(1, 2, 3, 4, 5, 7)))).isTrue();
     }
 }

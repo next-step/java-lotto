@@ -8,13 +8,23 @@ public class WinningLottoTicket {
     private final List<LottoNumber> lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLottoTicket(final List<LottoNumber>  lottoNumbers, final LottoNumber bonusNumber) {
+    public WinningLottoTicket(final List<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
         validateNumbers(lottoNumbers, bonusNumber);
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
-    public WinningLottoTicket(final String lottoNumbers,final int bonusNumber) {
+
+    public WinningLottoTicket(final String lottoNumbers, final int bonusNumber) {
         this(createWinningTicket(lottoNumbers), LottoNumber.of(bonusNumber));
+    }
+
+    private static List<LottoNumber> createWinningTicket(String input) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(input.trim().split(","))
+                .map(String::trim)        // 각 번호의 공백 제거
+                .map(Integer::parseInt)   // 문자열을 숫자로 변환
+                .map(LottoNumber::of)     // 숫자를 LottoNumber로 변환
+                .collect(Collectors.toList()); // List<LottoNumber>로 수집
+        return lottoNumbers;
     }
 
     private void validateNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
@@ -38,14 +48,5 @@ public class WinningLottoTicket {
 
     public boolean hasBonusMatch(LottoTicket userLottoTicket) {
         return userLottoTicket.contains(bonusNumber); // 직접 LottoTicket에 contains 호출
-    }
-
-    private static List<LottoNumber> createWinningTicket(String input) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(input.trim().split(","))
-                .map(String::trim)        // 각 번호의 공백 제거
-                .map(Integer::parseInt)   // 문자열을 숫자로 변환
-                .map(LottoNumber::of)     // 숫자를 LottoNumber로 변환
-                .collect(Collectors.toList()); // List<LottoNumber>로 수집
-        return lottoNumbers;
     }
 }

@@ -40,7 +40,7 @@ public enum Rank {
                     if (rank == SECOND) {
                         return bonusMatch; // SECOND는 보너스 매치가 true여야 함
                     }
-                    return rank != SECOND || !bonusMatch; // 나머지는 보너스 매치와 무관
+                    return !bonusMatch; // 나머지는 보너스 매치와 무관
                 })
                 .findFirst()
                 .orElse(MISS);
