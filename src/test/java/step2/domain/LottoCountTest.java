@@ -26,8 +26,8 @@ class LottoCountTest {
         LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
 
         // when
-        LottoRule lottoRule = new LottoRule(1, 45, 6);
-        LottoContainer lottoContainer = lottoCount.generateLottoContainer(lottoRule);
+        LottoGenerator lottoGenerator = new LottoGenerator(1, 45, 6);
+        LottoContainer lottoContainer = lottoCount.generateLottoContainer(lottoGenerator);
 
         // then
         Assertions.assertThat(lottoContainer.size()).isEqualTo(purchaseAmount / lottoPrice);

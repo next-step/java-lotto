@@ -1,32 +1,35 @@
 package step2.domain;
 
 import step2.domain.lotto.*;
-import step2.domain.rank.Rank;
+import step2.domain.rank.RankType;
+import views.LottoContainerFormatter;
 
 import java.util.List;
 
 public class LottoGame {
     private final LottoCount lottoCount;
-    private final LottoRule lottoRule;
+    private final LottoGenerator lottoGenerator;
     private final LottoContainer purchasedLotto;
 
-    public LottoGame(LottoCount lottoCount, LottoRule lottoRule) {
+    public LottoGame(LottoCount lottoCount, LottoGenerator lottoGenerator) {
         this.lottoCount = lottoCount;
-        this.lottoRule = lottoRule;
+        this.lottoGenerator = lottoGenerator;
         this.purchasedLotto = generatelottoContainer();
     }
 
-    public LottoGameResult play(WinningLotto winningLotto) {
-        List<Rank> ranks = this.purchasedLotto.checkWinningResults(winningLotto);
+    public LottoGameResult play(List<Integer> winningNumbers, Integer bonusNumber) {
+        Lotto lotto = new Lotto(winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+        List<RankType> ranks = this.purchasedLotto.checkWinningResults(winningLotto);
         return new LottoGameResult(ranks);
     }
 
     private LottoContainer generatelottoContainer() {
-        return lottoCount.generateLottoContainer(lottoRule);
+        return lottoCount.generateLottoContainer(lottoGenerator);
     }
 
     public String purchasedLottosAsString() {
-        LottoContainerFormatter lottoContainerFormatter = purchasedLotto.generateFormatter();
+        LottoContainerFormatter lottoContainerFormatter = new LottoContainerFormatter(purchasedLotto);
         return lottoContainerFormatter.lottosAsString();
     }
 }

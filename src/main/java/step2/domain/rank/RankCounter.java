@@ -4,20 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RankCounter {
-    private final Map<Rank, Integer> rankCountMap;
+    private final Map<RankType, Integer> rankCountMap;
 
     public RankCounter() {
         rankCountMap = new HashMap<>();
-        for (Rank rank: Rank.values()) {
+        for (RankType rank: RankType.values()) {
             rankCountMap.put(rank, 0);
         }
     }
 
-    public int getCount(Rank rank) {
+    public int getCount(RankType rank) {
         return rankCountMap.getOrDefault(rank, 0);
     }
 
-    public void increaseCount(Rank rank) {
+    public void increaseCount(RankType rank) {
         rankCountMap.put(rank, getCount(rank) + 1);
     }
 }
