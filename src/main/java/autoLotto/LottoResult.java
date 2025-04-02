@@ -57,7 +57,6 @@ public class LottoResult {
         return resultString.toString();
     }
 
-
     private String formatLottoPrize(Map.Entry<LottoPrize, Integer> entry, AtomicLong profit) {
         LottoPrize lottoPrize = entry.getKey();
         int quantity = entry.getValue();
