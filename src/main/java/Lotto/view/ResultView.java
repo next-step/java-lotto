@@ -15,13 +15,13 @@ public class ResultView {
         }
     }
 
-    public static void printStats(int[] stats) {
+    public static void printStats(List<Integer> stats) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5,000원) - " + stats[3] + "개");
-        System.out.println("4개 일치 (50,000원) - " + stats[4] + "개");
-        System.out.println("5개 일치 (1,500,000원) - " + stats[5] + "개");
-        System.out.println("6개 일치 (2,000,000,000원) - " + stats[6] + "개");
+        System.out.println("3개 일치 (5,000원) - " + stats.get(3) + "개");
+        System.out.println("4개 일치 (50,000원) - " + stats.get(4) + "개");
+        System.out.println("5개 일치 (1,500,000원) - " + stats.get(5) + "개");
+        System.out.println("6개 일치 (2,000,000,000원) - " + stats.get(6) + "개");
     }
 
     public static void printProfitRate(double profitRate) {

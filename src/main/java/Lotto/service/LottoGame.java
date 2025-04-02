@@ -19,7 +19,7 @@ public class LottoGame {
         ResultView.printLottos(lottos);
 
         Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
-        int[] stats = lottoList.calculateStats(winningNumbers);
+        List<Integer> stats = lottoList.calculateStats(winningNumbers);
         ResultView.printStats(stats);
 
         double profitRate = calculateProfitRate(lottoList, winningNumbers);
@@ -27,8 +27,8 @@ public class LottoGame {
     }
 
     public static double calculateProfitRate(LottoList lottoList, Set<LottoNumber> winningNumbers) {
-        int[] stats = lottoList.calculateStats(winningNumbers);
-        int totalPrize = stats[3] * 5000 + stats[4] * 50000 + stats[5] * 1500000 + stats[6] * 2000000000;
+        List<Integer> stats = lottoList.calculateStats(winningNumbers);
+        int totalPrize = stats.get(3) * 5000 + stats.get(4) * 50000 + stats.get(5) * 1500000 + stats.get(6) * 2000000000;
         int totalSpent = lottoList.getLottos().size() * 1000;
 
         return totalPrize / (double) totalSpent;

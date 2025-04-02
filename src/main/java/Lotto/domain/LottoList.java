@@ -50,12 +50,12 @@ public class LottoList {
         return lottos;
     }
 
-    public int[] calculateStats(Set<LottoNumber> winningNumbers) {
-        int[] stats = new int[LOTTO_PICK_COUNT + 1];
+    public List<Integer> calculateStats(Set<LottoNumber> winningNumbers) {
+        List<Integer> stats = new ArrayList<>(Collections.nCopies(LOTTO_PICK_COUNT + 1, 0));
 
         for (Lotto lotto : lottos) {
             int matchCount = lotto.countMatches(winningNumbers);
-            stats[matchCount]++;
+            stats.set(matchCount, stats.get(matchCount) + 1);
         }
 
         return stats;
