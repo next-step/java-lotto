@@ -1,9 +1,10 @@
 package Lotto.domain;
 
+import static Lotto.constants.LottoConstants.LOTTO_MAX_NUMBER;
+import static Lotto.constants.LottoConstants.LOTTO_MIN_NUMBER;
+
 public class LottoNumber {
     private final int number;
-    public static final int LOTTO_MIN_NUMBER = 1;
-    static final int LOTTO_MAX_NUMBER = 45;
 
     public LottoNumber(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {

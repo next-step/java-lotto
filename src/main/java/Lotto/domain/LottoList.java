@@ -1,12 +1,13 @@
 package Lotto.domain;
 
+import Lotto.constants.LottoConstants;
+
 import java.util.*;
+
+import static Lotto.constants.LottoConstants.*;
 
 public class LottoList {
     private final List<Lotto> lottos;
-    static final int LOTTO_PICK_COUNT = 6;
-    static final int LOTTO_MIN_NUMBER = 1;
-    static final int LOTTO_MAX_NUMBER = 45;
 
     public LottoList() {
         this.lottos = new ArrayList<>();

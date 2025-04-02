@@ -1,4 +1,5 @@
 import Lotto.domain.Purchase;
+import Lotto.validation.Validations;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,7 +11,7 @@ public class PurchaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"14000", "14500", "14,000", "1000", "-1000", "", " "})
     void should_be_valid_price(String input) {
-        boolean result = Purchase.isInvalidPrice(input);
+        boolean result = Validations.isInvalidPrice(input);
 
         if (input.equals("14000") || input.equals("1000") || input.equals("14,000")) {
             assertFalse(result);
