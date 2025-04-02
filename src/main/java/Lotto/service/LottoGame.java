@@ -1,5 +1,6 @@
 package Lotto.service;
 
+import Lotto.constants.LottoPrize;
 import Lotto.domain.Lotto;
 import Lotto.domain.LottoList;
 import Lotto.domain.LottoNumber;
@@ -28,7 +29,13 @@ public class LottoGame {
 
     public static double calculateProfitRate(LottoList lottoList, Set<LottoNumber> winningNumbers) {
         List<Integer> stats = lottoList.calculateStats(winningNumbers);
-        int totalPrize = stats.get(3) * 5000 + stats.get(4) * 50000 + stats.get(5) * 1500000 + stats.get(6) * 2000000000;
+
+        int totalPrize = 0;
+
+        for(LottoPrize prize: LottoPrize.values()) {
+            totalPrize += stats.get(prize.getMatchCount()) * prize.getPrizeMoney();
+        }
+
         int totalSpent = lottoList.getLottos().size() * 1000;
 
         return totalPrize / (double) totalSpent;
