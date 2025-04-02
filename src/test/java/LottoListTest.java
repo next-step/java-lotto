@@ -23,11 +23,11 @@ public class LottoListTest {
         lottoList.addLotto(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(8), new LottoNumber(9))));
 
-        int[] stats = lottoList.calculateStats(winningNumbers);
+        List<Integer> stats = lottoList.calculateStats(winningNumbers);
 
-        assertEquals(1, stats[3]); // 3개 일치하는 로또 개수
-        assertEquals(1, stats[4]); // 4개 일치하는 로또 개수
-        assertEquals(0, stats[5]); // 5개 이상 일치하는 로또 없음
+        assertEquals(1, stats.get(3)); // 3개 일치하는 로또 개수
+        assertEquals(1, stats.get(4)); // 4개 일치하는 로또 개수
+        assertEquals(0, stats.get(5)); // 5개 이상 일치하는 로또 없음
     }
 
     @Test
