@@ -2,16 +2,14 @@ package Lotto.view;
 
 import Lotto.domain.LottoNumber;
 import Lotto.domain.Purchase;
-import Lotto.domain.WinningNumbers;
 
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static Lotto.domain.Purchase.isInvalidPrice;
-import static Lotto.domain.WinningNumbers.isInvalidWinningNumbers;
-import static Lotto.domain.WinningNumbers.parseWinningNumbers;
+import static Lotto.validation.Validations.isInvalidPrice;
+import static Lotto.validation.Validations.isInvalidWinningNumbers;
 
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
@@ -35,4 +33,15 @@ public class InputView {
         return parseWinningNumbers(input);
     }
 
+    public static int trimAndReturnInt(String input) {
+        return Integer.parseInt(input.trim());
+    }
+
+    private static Set<LottoNumber> parseWinningNumbers(String input) {
+        return Arrays.stream(input.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+    }
 }
