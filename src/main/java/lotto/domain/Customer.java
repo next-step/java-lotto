@@ -1,29 +1,38 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Map;
 
 public class Customer {
     private int purchaseAmount;
-    private List<Lotto> lottoList;
+    private Lottos lottos;
 
     public Customer() {
     }
 
-    public Customer(int purchaseAmount, List<Lotto> lottoList) {
+    public Customer(int purchaseAmount, Lottos lottos) {
         this.purchaseAmount = purchaseAmount;
-        this.lottoList = lottoList;
+        this.lottos = lottos;
     }
 
     public void purchaseLotto(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
-        this.lottoList = LottoShop.sellLotto(purchaseAmount);
+        this.lottos = LottoShop.sellAutoLottos(purchaseAmount);
+    }
+
+    public void purchaseLotto(int purchaseAmount, Lottos manualLottoList) {
+        this.purchaseAmount = purchaseAmount;
+        this.lottos = LottoShop.sellLottosWithManualAndAuto(purchaseAmount, manualLottoList);
     }
 
     public int getPurchaseAmount() {
         return purchaseAmount;
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public Map<Rank, Integer> determineLottosResult(WinningLotto winningLotto) {
+        return lottos.analyzeLottoStatistics(winningLotto);
+    }
+
+    public Lottos getLottos() {
+        return lottos;
     }
 }

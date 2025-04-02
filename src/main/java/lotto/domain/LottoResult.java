@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
@@ -25,21 +22,9 @@ public class LottoResult {
 
     public static LottoResult of(Customer customer, WinningLotto winningLotto) {
         int purchaseAmount = customer.getPurchaseAmount();
-        Map<Rank, Integer> lottoResult = analyzeLottoStatistics(customer.getLottoList(), winningLotto);
+        Map<Rank, Integer> lottoResult = customer.determineLottosResult(winningLotto);
 
         return new LottoResult(purchaseAmount, lottoResult);
-    }
-
-    public static Map<Rank, Integer> analyzeLottoStatistics(List<Lotto> lottoList, WinningLotto winningLotto) {
-        Map<Rank, Integer> statistics = new EnumMap<>(Rank.class);
-        initializeStatistics(statistics);
-
-        for (Lotto lotto : lottoList) {
-            Rank rank = winningLotto.determineLottoRank(lotto);
-            statistics.put(rank, statistics.get(rank) + 1);
-        }
-
-        return statistics;
     }
 
     public Map<Rank, Integer> getLottoStatistics() {
@@ -48,10 +33,6 @@ public class LottoResult {
 
     public double getROI() {
         return (double) totalPrize / purchaseAmount;
-    }
-
-    private static void initializeStatistics(Map<Rank, Integer> statistics) {
-        Arrays.stream(Rank.values()).forEach(rank -> statistics.put(rank, 0));
     }
 
 }

@@ -4,37 +4,29 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static lotto.domain.LottoNumber.*;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final List<LottoNumber> LOTTO_NUMBER_CACHE = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
 
     private final Set<LottoNumber> lottoNumbers;
+    private final LottoType lottoType;
 
-    private Lotto(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(lottoNumbers));
-    }
-
-    public static Lotto of(List<LottoNumber> numbers) {
+    private Lotto(Set<LottoNumber> numbers, LottoType lottoType) {
         validateInputs(numbers);
-
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-        for (LottoNumber number : numbers) {
-            addUniqueLottoNumber(number, lottoNumbers);
-        }
-
-        return new Lotto(lottoNumbers);
+        this.lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
+        this.lottoType = lottoType;
     }
 
-    public static Lotto generateRandomly() {
-        Collections.shuffle(LOTTO_NUMBER_CACHE);
-        return Lotto.of(Lotto.LOTTO_NUMBER_CACHE.subList(0, LOTTO_NUMBER_COUNT));
+    private Lotto(List<LottoNumber> numbers, LottoType lottoType) {
+        this(toTreeSet(numbers), lottoType);
+    }
+
+    public static Lotto generateManualLotto(List<LottoNumber> numbers) {
+        return new Lotto(numbers, LottoType.MANUAL);
+    }
+
+    public static Lotto generateAutoLotto() {
+        return new Lotto(LottoNumber.pickRandomLottoNumbers(LOTTO_NUMBER_COUNT), LottoType.AUTO);
     }
 
     public int countNumberMatchCount(Set<LottoNumber> numbers) {
@@ -47,6 +39,14 @@ public class Lotto {
         return lottoNumbers.contains(number);
     }
 
+    private static Set<LottoNumber> toTreeSet(List<LottoNumber> numbers) {
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
+        for (LottoNumber number : numbers) {
+            addUniqueLottoNumber(number, lottoNumbers);
+        }
+        return lottoNumbers;
+    }
+
     private static void addUniqueLottoNumber(LottoNumber lottoNumber, Set<LottoNumber> lottoNumbers) {
         if (isNotUniqueLottoNumber(lottoNumber, lottoNumbers)) {
             throw new IllegalArgumentException("중복되는 번호가 있습니다. 중복된 번호: " + lottoNumber);
@@ -57,7 +57,7 @@ public class Lotto {
         return !lottoNumbers.add(lottoNumber);
     }
 
-    private static void validateInputs(List<LottoNumber> lottoNumbers) {
+    private static void validateInputs(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             String messageFormat = "로또는 %d개의 숫자로 구성되어 있습니다. 입력된 숫자 수: %d";
             throw new IllegalArgumentException(String.format(messageFormat, LOTTO_NUMBER_COUNT, lottoNumbers.size()));
@@ -66,6 +66,14 @@ public class Lotto {
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public boolean isManualLotto() {
+        return LottoType.MANUAL == lottoType;
+    }
+
+    public boolean isAutoLotto() {
+        return LottoType.AUTO == lottoType;
     }
 
 }
