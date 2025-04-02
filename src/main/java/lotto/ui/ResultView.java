@@ -13,7 +13,7 @@ import static lotto.Rank.*;
 public class ResultView {
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getLottoTicketCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + lottoTickets.getManualTicketCount() + "장, 자동으로 " + lottoTickets.getAutoTicketCount() + "개를 구매했습니다.");
         lottoTickets.getLottoTickets().forEach(lottoTicket -> System.out.println(lottoTicket.getLottoNumbers()));
         System.out.println();
     }

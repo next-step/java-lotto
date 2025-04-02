@@ -27,7 +27,7 @@ public class LottoTest {
 
     @Test
     void lottoTickets() {
-        LottoTickets lottoTickets = new LottoTickets(3000);
+        LottoTickets lottoTickets = new LottoTickets(3000, List.of());
         assertThat(lottoTickets.getLottoTicketCount()).isEqualTo(3);
     }
 
@@ -68,5 +68,10 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningResult(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 6));
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningResult(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 0));
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningResult(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 46));
+    }
+
+    @Test
+    void validateManualTicketCount() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTickets(1000, List.of(new LottoTicket(), new LottoTicket())));
     }
 }
