@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 public class LottoTicketMachine {
 
     private static final int LOTTO_PRICE = 1000;
@@ -25,7 +27,7 @@ public class LottoTicketMachine {
     private LottoTicket[] generateTickets(int ticketCount) {
         LottoTicket[] tickets = new LottoTicket[ticketCount];
         for (int i = 0; i < ticketCount; i++) {
-            tickets[i] = new LottoTicket();
+            tickets[i] = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
         }
         return tickets;
     }
