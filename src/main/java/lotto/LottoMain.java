@@ -19,6 +19,9 @@ public class LottoMain {
 
         List<LottoNumber> winningNumberList = InputView.inputWinningNumbers();
 
+        LottoNumber lottoBonusNumber = InputView.inputBonusNumber();
+
+
         WinningNumber winningNumber = new WinningNumber(winningNumberList);
         Map<Prize, Integer> calculate = winningNumber.calculate(lottoTicket);
 
