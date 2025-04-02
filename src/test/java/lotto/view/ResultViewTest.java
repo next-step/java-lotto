@@ -18,7 +18,7 @@ class ResultViewTest {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
 
-        ResultView.printLottoNumber(new LottoNumbers(Set.of(3,6,1,5,2,4)));
+        ResultView.printLottoNumber(new LottoNumbers("3,6,1,5,2,4"));
 
         Assertions.assertThat(output.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]\n");
         System.setOut(System.out);
@@ -32,11 +32,11 @@ class ResultViewTest {
 
         LottoRound lottoRound = new LottoRound(Set.of(1, 2, 4, 3, 5, 6));
 
-        LottoNumbers first = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers second = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 7));
-        LottoNumbers third = new LottoNumbers(Set.of(1, 2, 3, 4, 7, 8));
-        LottoNumbers fourth = new LottoNumbers(Set.of(1, 2, 3, 7, 8, 9));
-        LottoNumbers etc = new LottoNumbers(Set.of(1, 2, 7, 8, 9, 10));
+        LottoNumbers first = new LottoNumbers("1,2,3,4,5,6");
+        LottoNumbers second = new LottoNumbers("1,2,3,4,5,7");
+        LottoNumbers third = new LottoNumbers("1,2,3,4,7,8");
+        LottoNumbers fourth = new LottoNumbers("1,2,3,7,8,9");
+        LottoNumbers etc = new LottoNumbers("1,2,7,8,9,10");
 
         ResultView.printStat(444950.56, lottoRound.checkLottoRank(List.of(first, first, second, second, second, third, fourth, etc, etc)));
 

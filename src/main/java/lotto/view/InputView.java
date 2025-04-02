@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.LottoNumbers.LOTTO_SIZE;
 import static lotto.LottoStore.LOTTO_PRICE;
 
 public class InputView {
@@ -31,7 +32,7 @@ public class InputView {
         }
     }
 
-    public static Set<Integer> getPositiveNumberSetInput(String prompt, String delimiter, int count) {
+    public static Set<Integer> getPositiveNumberSetInput(String prompt, String delimiter) {
         System.out.println(prompt);
 
         while (true) {
@@ -44,10 +45,10 @@ public class InputView {
                         .map(Integer::parseInt)
                         .collect(Collectors.toSet());
 
-                if (result.size() == count)
+                if (result.size() == LOTTO_SIZE)
                     return result;
 
-                System.out.println("당첨 번호는 중복이 허용되지 않습니다. " + count + "개의 숫자를 다시 입력해 주세요. input: " + result);
+                System.out.println("당첨 번호는 중복이 허용되지 않습니다. " + LOTTO_SIZE + "개의 숫자를 다시 입력해 주세요. input: " + result);
             } catch (NumberFormatException e) {
                 System.out.println("입력은 숫자 포맷만 허용합니다. 다시 입력해 주세요.");
             }

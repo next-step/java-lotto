@@ -6,23 +6,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoMachine {
-    private final LottoNumbersCondition lottoNumbersCondition;
-    private final List<Integer> lottoNumbers;
+import static lotto.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.LottoNumber.MIN_LOTTO_NUMBER;
+import static lotto.LottoNumbers.LOTTO_SIZE;
 
-    public LottoMachine(LottoNumbersCondition lottoNumbersCondition) {
-        this.lottoNumbersCondition = lottoNumbersCondition;
-        this.lottoNumbers = IntStream.range(lottoNumbersCondition.getMinLottoNumber(), lottoNumbersCondition.getMaxLottoNumber() + 1)
-                .boxed()
-                .collect(Collectors.toList());
+public class LottoMachine {
+    private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+
+    private LottoMachine() {
     }
 
-    public LottoNumbers generateLottoNumber() {
-        ArrayList<Integer> numbers = new ArrayList<>(lottoNumbers);
+    public static LottoNumbers generateLottoNumber() {
+        ArrayList<LottoNumber> numbers = new ArrayList<>(LOTTO_NUMBERS);
         Collections.shuffle(numbers);
 
-        return new LottoNumbers(lottoNumbersCondition, numbers.stream()
-                .limit(lottoNumbersCondition.getLottoNumberSize())
+        return new LottoNumbers(numbers.stream()
+                .limit(LOTTO_SIZE)
                 .collect(Collectors.toSet())
         );
     }

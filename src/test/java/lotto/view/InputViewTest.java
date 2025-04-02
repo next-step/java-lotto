@@ -1,6 +1,5 @@
 package lotto.view;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class InputViewTest {
 
         assertThat(InputView.getPositiveNumberInput("구입금액을 입력해 주세요."))
                 .isEqualTo(14000);
-        assertThat(InputView.getPositiveNumberSetInput("지난 주 당첨 번호를 입력해 주세요.", ",", 6))
+        assertThat(InputView.getPositiveNumberSetInput("지난 주 당첨 번호를 입력해 주세요.", ","))
                 .containsExactly(1,2,3,4,5,6);
 
         System.setIn(System.in);

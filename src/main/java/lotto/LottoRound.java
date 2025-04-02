@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
@@ -11,21 +10,21 @@ public class LottoRound {
     private final LottoNumbers winnerNumbers;
 
     public LottoRound(Set<Integer> winnerNumbers) {
-        this.winnerNumbers = new LottoNumbers(winnerNumbers);
-    }
-
-    public LottoRound(LottoNumbers winnerNumbers) {
-        this.winnerNumbers = winnerNumbers;
+        this.winnerNumbers = new LottoNumbers(winnerNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet())
+        );
     }
 
     public LottoRank checkLottoRank(LottoNumbers lottoNumbers) {
         return LottoRank.valueOfMatchCount(winnerNumbers.intersectCount(lottoNumbers));
     }
 
-    public Map<LottoRank, Integer> checkLottoRank(List<LottoNumbers> lottoNumbers) {
-        return lottoNumbers.stream()
+    public LottoResult checkLottoRank(List<LottoNumbers> lottoNumbers) {
+        return new LottoResult(lottoNumbers.stream()
                 .map(this::checkLottoRank)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toMap(Function.identity(), lottoNumber -> 1, Integer::sum));
+                .collect(Collectors.toMap(Function.identity(), lottoNumber -> 1, Integer::sum))
+        );
     }
 }

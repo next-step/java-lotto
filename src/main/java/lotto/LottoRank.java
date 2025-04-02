@@ -3,18 +3,20 @@ package lotto;
 import java.util.HashMap;
 import java.util.Map;
 
+import static lotto.LottoNumbers.LOTTO_SIZE;
+
 public enum LottoRank {
     ETC(-1, 0),
-    FOURTH(LottoNumbersCondition.getDefaultInstance().getLottoNumberSize() - 3, 5000),
-    THIRD(LottoNumbersCondition.getDefaultInstance().getLottoNumberSize() - 2, 50000),
-    SECOND(LottoNumbersCondition.getDefaultInstance().getLottoNumberSize() - 1, 1500000),
-    FIRST(LottoNumbersCondition.getDefaultInstance().getLottoNumberSize(), 2000000000),
+    FOURTH(LOTTO_SIZE - 3, 5000),
+    THIRD(LOTTO_SIZE - 2, 50000),
+    SECOND(LOTTO_SIZE - 1, 1500000),
+    FIRST(LOTTO_SIZE, 2000000000),
     ;
 
-    private final Integer matchCount;
-    private final Integer money;
+    private final int matchCount;
+    private final int money;
 
-    LottoRank(Integer matchCount, Integer money) {
+    LottoRank(int matchCount, int money) {
         this.matchCount = matchCount;
         this.money = money;
     }
@@ -31,11 +33,11 @@ public enum LottoRank {
         return LOTTO_RANK.getOrDefault(matchCount, ETC);
     }
 
-    public Integer getMatchCount() {
+    public int getMatchCount() {
         return matchCount;
     }
 
-    public Integer getMoney() {
+    public int getMoney() {
         return money;
     }
 }
