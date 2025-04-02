@@ -1,5 +1,7 @@
 package Lotto.constants;
 
+import java.util.Arrays;
+
 public enum LottoPrize {
     THREE_MATCH(3, 5000),
     FOUR_MATCH(4, 50000),
@@ -18,5 +20,12 @@ public enum LottoPrize {
     }
     public int getPrizeMoney() {
         return prizeMoney;
+    }
+
+    public static LottoPrize fromMatchCount(int matchCount) {
+        return Arrays.stream(values())
+                .filter(prize -> prize.matchCount == matchCount)
+                .findFirst()
+                .orElse(null);
     }
 }

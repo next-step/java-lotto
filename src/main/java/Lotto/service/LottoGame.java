@@ -8,6 +8,7 @@ import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class LottoGame {
@@ -20,7 +21,7 @@ public class LottoGame {
         ResultView.printLottos(lottos);
 
         Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
-        List<Integer> stats = lottoList.calculateStats(winningNumbers);
+        Map<LottoPrize, Integer> stats = lottoList.calculateStats(winningNumbers);
         ResultView.printStats(stats);
 
         double profitRate = calculateProfitRate(lottoList, winningNumbers);
@@ -28,7 +29,7 @@ public class LottoGame {
     }
 
     public static double calculateProfitRate(LottoList lottoList, Set<LottoNumber> winningNumbers) {
-        List<Integer> stats = lottoList.calculateStats(winningNumbers);
+        Map<LottoPrize, Integer> stats = lottoList.calculateStats(winningNumbers);
 
         int totalPrize = 0;
 

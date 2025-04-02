@@ -1,8 +1,10 @@
 package Lotto.view;
 
+import Lotto.constants.LottoPrize;
 import Lotto.domain.Lotto;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     public static void printQuantity(int quantity) {
@@ -15,14 +17,17 @@ public class ResultView {
         }
     }
 
-    public static void printStats(List<Integer> stats) {
+
+    public static void printStats(Map<LottoPrize, Integer> stats) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5,000원) - " + stats.get(3) + "개");
-        System.out.println("4개 일치 (50,000원) - " + stats.get(4) + "개");
-        System.out.println("5개 일치 (1,500,000원) - " + stats.get(5) + "개");
-        System.out.println("6개 일치 (2,000,000,000원) - " + stats.get(6) + "개");
+
+        for (LottoPrize prize : LottoPrize.values()) {
+            int count = stats.getOrDefault(prize, 0);
+            System.out.println(prize.getMatchCount() + "개 일치 (" + prize.getPrizeMoney() + "원) - " + count + "개");
+        }
     }
+
 
     public static void printProfitRate(double profitRate) {
         System.out.printf("총 수익률은 %.2f입니다.\n", profitRate);

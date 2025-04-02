@@ -1,6 +1,6 @@
 package Lotto.domain;
 
-import Lotto.constants.LottoConstants;
+import Lotto.constants.LottoPrize;
 
 import java.util.*;
 
@@ -51,12 +51,19 @@ public class LottoList {
         return lottos;
     }
 
-    public List<Integer> calculateStats(Set<LottoNumber> winningNumbers) {
-        List<Integer> stats = new ArrayList<>(Collections.nCopies(LOTTO_PICK_COUNT + 1, 0));
+    public Map<LottoPrize, Integer> calculateStats(Set<LottoNumber> winningNumbers) {
+        Map<LottoPrize, Integer> stats = new HashMap<>();
+
+        for (LottoPrize prize : LottoPrize.values()) {
+            stats.put(prize, 0);
+        }
 
         for (Lotto lotto : lottos) {
             int matchCount = lotto.countMatches(winningNumbers);
-            stats.set(matchCount, stats.get(matchCount) + 1);
+            LottoPrize prize = LottoPrize.fromMatchCount(matchCount);
+            if (prize != null) {
+                stats.put(prize, stats.get(prize) + 1);
+            }
         }
 
         return stats;
