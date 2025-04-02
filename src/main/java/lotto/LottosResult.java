@@ -9,23 +9,23 @@ public class LottosResult {
 
     private List<Lotto> lottos;
     private List<Integer> winningNumbers;
-    private EnumMap<LottoMatch, Integer> lottoMatchMap = new EnumMap<>(LottoMatch.class);
+    private final EnumMap<LottoRank, Integer> lottoRankMap = new EnumMap<>(LottoRank.class);
 
-    public LottosResult(List<Lotto> lottos, List<Integer> winningNumbers) {
+    public LottosResult(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
         this.lottos = lottos;
         this.winningNumbers = winningNumbers;
 
         for (Lotto lotto : lottos) {
-            LottoMatch lottoMatch = lotto.getLottoMatch(winningNumbers);
-            lottoMatchMap.put(
-                    lottoMatch,
-                    lottoMatchMap.getOrDefault(lotto.getLottoMatch(winningNumbers), 0) + 1
+            LottoRank lottoRank = lotto.getLottoRank(winningNumbers, bonusNumber);
+            lottoRankMap.put(
+                    lottoRank,
+                    lottoRankMap.getOrDefault(lottoRank, 0) + 1
             );
         }
     }
 
-    public Integer getLottoMatchCount(LottoMatch lottoMatch) {
-        return lottoMatchMap.getOrDefault(lottoMatch, 0);
+    public Integer getLottoRankCount(LottoRank lottoRank) {
+        return lottoRankMap.getOrDefault(lottoRank, 0);
     }
 
     public double getTotalYieldRate() {
@@ -33,7 +33,7 @@ public class LottosResult {
     }
 
     private int getTotalPrize() {
-        return lottoMatchMap.entrySet().stream()
+        return lottoRankMap.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
     }

@@ -1,7 +1,6 @@
 package lotto;
 
 import org.junit.jupiter.api.Test;
-import view.LottoNumbersParser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,36 +11,48 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 public class LottoTest {
 
     @Test
-    void getLottoMatch_0match() {
+    void getLottoRank_None() {
         List<Integer> lottoNumbers = Arrays.asList(5, 6, 7, 10, 11, 12);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 40, 41, 42);
 
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoMatch result = lotto.getLottoMatch(winningNumbers);
+        LottoRank result = lotto.getLottoRank(winningNumbers, null);
 
-        assertThat(result).isEqualTo(LottoMatch.NONE);
+        assertThat(result).isEqualTo(LottoRank.NONE);
     }
 
     @Test
-    void getLottoMatch_3match() {
+    void getLottoRank_Fifth() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 40, 41, 42);
 
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoMatch result = lotto.getLottoMatch(winningNumbers);
+        LottoRank result = lotto.getLottoRank(winningNumbers, null);
 
-        assertThat(result).isEqualTo(LottoMatch.THREE);
+        assertThat(result).isEqualTo(LottoRank.FIFTH);
     }
 
     @Test
-    void getLottoMatch_6match() {
+    void getLottoRank_First() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
 
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoMatch result = lotto.getLottoMatch(winningNumbers);
+        LottoRank result = lotto.getLottoRank(winningNumbers, null);
 
-        assertThat(result).isEqualTo(LottoMatch.SIX);
+        assertThat(result).isEqualTo(LottoRank.FIRST);
+    }
+
+    @Test
+    void getLottoRank_Second() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 10, 11, 19);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
+        Integer bonusNumber = 19;
+
+        Lotto lotto = new Lotto(lottoNumbers);
+        LottoRank result = lotto.getLottoRank(winningNumbers, bonusNumber);
+
+        assertThat(result).isEqualTo(LottoRank.SECOND);
     }
 
     @Test

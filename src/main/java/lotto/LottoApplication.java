@@ -21,8 +21,10 @@ public class LottoApplication {
         OutputView.showGeneratedLottoNumber(lottos);
         List<Integer> winningLotto = LottoNumbersParser.parse(InputView.showWinningLottoNumbersInput());
 
-        LottosResult lottosResult = new LottosResult(lottos, winningLotto);
-        OutputView.showLottoMatchResult(lottosResult);
+        Integer bonusNumber = InputView.showLottoBonusNumberInput();
+
+        LottosResult lottosResult = new LottosResult(lottos, winningLotto, bonusNumber);
+        OutputView.showLottoRankResult(lottosResult);
         OutputView.showTotalYieldRate(lottosResult.getTotalYieldRate());
     }
 }
