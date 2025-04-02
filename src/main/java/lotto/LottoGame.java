@@ -14,19 +14,35 @@ public class LottoGame {
 
         int manualTicketCount = InputView.inputManualTicketCount();
         List<List<Integer>> manualTicketList = InputView.inputManualTicket(manualTicketCount);
-        List<LottoTicket> manualTickets = manualTicketList.stream()
-                .map(LottoTicket::new)
-                .collect(Collectors.toList());
+
+        List<LottoTicket> manualTickets = toLottoTickets(manualTicketList);
 
         LottoTickets lottoTickets = new LottoTickets(money, manualTickets);
 
         ResultView.printLottoTickets(lottoTickets);
 
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        List<Integer> winningNumberList = InputView.inputWinningNumbers();
+        List<LottoNumber> winningNumbers = toLottoNumbers(winningNumberList);
         LottoTicket winningTicket = new LottoTicket(winningNumbers);
 
-        int bonusNumber = InputView.inputBonusNumber();
+        int bonusNumberValue = InputView.inputBonusNumber();
+        LottoNumber bonusNumber = new LottoNumber(bonusNumberValue);
         WinningResult winningResult = new WinningResult(winningTicket, bonusNumber);
         ResultView.printResult(lottoTickets, winningResult);
+    }
+
+    private static List<LottoTicket> toLottoTickets(List<List<Integer>> manualTicketList) {
+        return manualTicketList.stream()
+                .map(ticket -> ticket.stream()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList()))
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+    }
+
+    private static List<LottoNumber> toLottoNumbers(List<Integer> manualTicket) {
+        return manualTicket.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }

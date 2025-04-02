@@ -4,40 +4,36 @@ import java.util.List;
 
 public class WinningResult {
     private final LottoTicket winningTicket;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningResult(LottoTicket winningTicket, int bonusNumber) {
+    public WinningResult(LottoTicket winningTicket, LottoNumber bonusNumber) {
         this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
         validateBonusNumber();
     }
 
     private void validateBonusNumber() {
-        List<Integer> winningNumbers = this.winningTicket.getLottoNumbers();
-        if (winningNumbers.contains(this.bonusNumber)) {
+        if (winningTicket.contains(this.bonusNumber)) {
             throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
-        }
-
-        if (this.bonusNumber < LottoTicket.LOTTO_MIN || this.bonusNumber > LottoTicket.LOTTO_MAX) {
-            throw new IllegalArgumentException("보너스 볼은 1부터 45 사이여야 합니다.");
         }
     }
 
     public Rank calculateRank(LottoTicket lottoTicket) {
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
-        long matchCount = getMatchCount(lottoNumbers);
-        boolean matchBonus = isMatchBonusNumber(lottoNumbers);
+        long matchCount = getMatchCount(lottoTicket);
+        boolean matchBonus = isMatchBonusNumber(lottoTicket);
 
         return Rank.valueOf(matchCount, matchBonus);
     }
 
-    private long getMatchCount(List<Integer> lottoNumbers) {
+    private long getMatchCount(LottoTicket lottoTicket) {
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+
         return lottoNumbers.stream()
-                .filter(this.winningTicket.getLottoNumbers()::contains)
+                .filter(this.winningTicket::contains)
                 .count();
     }
 
-    private boolean isMatchBonusNumber(List<Integer> lottoNumbers) {
-        return lottoNumbers.contains(this.bonusNumber);
+    private boolean isMatchBonusNumber(LottoTicket lottoTicket) {
+        return lottoTicket.contains(this.bonusNumber);
     }
 }
