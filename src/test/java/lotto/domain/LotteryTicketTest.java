@@ -1,12 +1,14 @@
 package lotto.domain;
 
 import lotto.domain.product.FinalResult;
-import lotto.domain.product.LotteryTicket;
-import lotto.domain.product.LottoNumber;
-import lotto.domain.product.LottoRank;
+import lotto.domain.product.lotto.LotteryTicket;
+import lotto.domain.product.lotto.LottoNumber;
+import lotto.domain.product.lotto.LottoRank;
 import lotto.view.fake.FakeInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -19,6 +21,41 @@ public class LotteryTicketTest {
         FakeInputView inputView = new FakeInputView("10000");
         Money money = new Money(inputView.parseInt());
         assertThat(money).isEqualTo(new Money(10000));
+    }
+
+    @Test
+    @DisplayName("사용자는 로또를 수동으로 구매할 수 있다.")
+    public void manualLottoTest() {
+        FakeInputView inputView = new FakeInputView("8, 21, 23, 41, 42, 43");
+        LotteryTicket lotteryTicket = new LotteryTicket(inputView.parseInput(inputView.read()));
+        assertThat(lotteryTicket).isEqualTo(new LotteryTicket(inputView.parseInput(inputView.read())));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"8, 21, 23, 41/ 42/ 43", "WrongNumber"})
+    @DisplayName("사용자가 수동 로또 번호를 잘못 입력할 경우 예외가 발생한다.")
+    public void makeManualFailTest(String input) {
+        FakeInputView inputView = new FakeInputView(input);
+        assertThatThrownBy(() -> new LotteryTicket(inputView.parseInput(inputView.read())))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"3,3,29,31,22,1"})
+    @DisplayName("로또 번호는 중복으로 입력할 수 없다.")
+    public void makeSameNumber(String input) {
+        FakeInputView inputView = new FakeInputView(input);
+        assertThatThrownBy(() -> new LotteryTicket(inputView.parseInput(inputView.read())))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"3,3,29,31,22,", "43"})
+    @DisplayName("로또 번호는 6자리로 이뤄져야 한다.")
+    public void makeUnder6Numbers(String input) {
+        FakeInputView inputView = new FakeInputView(input);
+        assertThatThrownBy(() -> new LotteryTicket(inputView.parseInput(inputView.read())))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -54,7 +91,7 @@ public class LotteryTicketTest {
     }
 
     @Test
-    @DisplayName("로또 티켓은 46보다 큰 숫자는 만들어 질 수 없다.")
+    @DisplayName("로또 티켓은 45보다 큰 숫자는 만들어 질 수 없다.")
     public void lottoNumberUpperTest() {
         assertThatThrownBy(() -> {
             LottoNumber.of(46);

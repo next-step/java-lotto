@@ -2,6 +2,7 @@ package lotto.domain.product;
 
 import lotto.domain.Money;
 import lotto.domain.PaymentReceipt;
+import lotto.domain.product.lotto.LottoRank;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -33,4 +34,17 @@ public class FinalResult {
                 .sum());
     }
 
+    public FinalResult plus(FinalResult that) {
+        FinalResult finalResult = new FinalResult();
+
+        finalResult.result.putAll(this.result);
+
+        for (Map.Entry<LottoRank, Integer> entry : that.result.entrySet()) {
+            finalResult.result.put(
+                    entry.getKey(),
+                    finalResult.result.getOrDefault(entry.getKey(), 0) + entry.getValue()
+            );
+        }
+        return finalResult;
+    }
 }

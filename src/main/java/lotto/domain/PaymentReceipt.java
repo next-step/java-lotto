@@ -10,8 +10,8 @@ public class PaymentReceipt {
         this.money = new Money(money);
     }
 
-    public Integer getUserCountBy(Product product) {
-        return product.divideBy(money);
+    public Quantity getQuantityAbout(Product product) {
+        return new Quantity(product.divideBy(money));
     }
 
     public Double getRateBy(Money totalPrize) {

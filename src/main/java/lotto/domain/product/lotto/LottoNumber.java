@@ -1,4 +1,4 @@
-package lotto.domain.product;
+package lotto.domain.product.lotto;
 
 import java.util.Objects;
 import java.util.Random;
@@ -20,6 +20,10 @@ public class LottoNumber {
 
     private LottoNumber(int number) {
         this.number = number;
+    }
+
+    public static LottoNumber of(String number) {
+        return of(Integer.parseInt(number));
     }
 
     public static LottoNumber of(Integer number) {
