@@ -49,7 +49,7 @@ public class LottoGameApplication {
 
     private static LottoCount createLottoCount(int purchaseAmount) {
         try {
-            return new LottoCount(purchaseAmount, LOTTO_TICKET_PRICE);
+            return new LottoCount(purchaseAmount, LOTTO_TICKET_PRICE, 0);
         } catch (IllegalArgumentException e) {
             ResultView.printMessage(e.getMessage());
         }

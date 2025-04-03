@@ -21,7 +21,7 @@ class LottoGameResultTest {
     @ParameterizedTest
     void createLotto(int purchaseAmount, int lottoPrice, int expected) {
         // given
-        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
+        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice, 0);
 
         // when
         LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
@@ -36,7 +36,7 @@ class LottoGameResultTest {
     void playLotto() {
         int purchaseAmount = 10000;
         int lottoPrice = 1000;
-        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
+        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice, 0);
 
         LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
         LottoGameResult result = lottoGame.play(WINNING_NUMBERS, BONUS_NUMBER);
@@ -53,7 +53,7 @@ class LottoGameResultTest {
     void calculateWinningAmountTest() {
         int purchaseAmount = 10000;
         int lottoPrice = 1000;
-        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
+        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice, 0);
 
         LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
         LottoGameResult result = lottoGame.play(WINNING_NUMBERS, BONUS_NUMBER);

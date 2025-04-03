@@ -13,7 +13,7 @@ class LottoCountTest {
     @CsvSource(value={"0, 500", "500, 1000", "1500, 1000"})
     @ParameterizedTest
     void shouldNotAllowInvalidLottoPurchaseAmount(int purchaseAmount, int lottoPrice) {
-        Assertions.assertThatThrownBy(() -> new LottoCount(purchaseAmount, lottoPrice))
+        Assertions.assertThatThrownBy(() -> new LottoCount(purchaseAmount, lottoPrice, 0))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -23,14 +23,16 @@ class LottoCountTest {
         // given
         int purchaseAmount = 14000;
         int lottoPrice = 1000;
-        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice);
+        int manualLottoCount = 7;
+        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice, manualLottoCount);
 
         // when
         LottoGenerator lottoGenerator = new LottoGenerator(1, 45, 6);
-        LottoContainer lottoContainer = lottoCount.generateLottoContainer(lottoGenerator);
+        LottoContainer lottoContainer = lottoCount.generateAutoLottoContainer(lottoGenerator);
 
         // then
-        Assertions.assertThat(lottoContainer.size()).isEqualTo(purchaseAmount / lottoPrice);
+        int totalLottoCount = purchaseAmount / lottoPrice;
+        Assertions.assertThat(lottoContainer.size()).isEqualTo(totalLottoCount - manualLottoCount);
     }
 
     @DisplayName("수익률 계산 테스트")
@@ -38,7 +40,7 @@ class LottoCountTest {
     @ParameterizedTest
     void getWinningRate(int purchasedAmount, int winningAmount) {
         // given
-        LottoCount lottoCount = new LottoCount(purchasedAmount, 1000);
+        LottoCount lottoCount = new LottoCount(purchasedAmount, 1000, 0);
 
         // when
         double winningRate = lottoCount.getWinningRate(winningAmount);

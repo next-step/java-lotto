@@ -25,7 +25,7 @@ public class LottoGame {
     }
 
     private LottoContainer generatelottoContainer() {
-        return lottoCount.generateLottoContainer(lottoGenerator);
+        return lottoCount.generateAutoLottoContainer(lottoGenerator);
     }
 
     public String purchasedLottosAsString() {
