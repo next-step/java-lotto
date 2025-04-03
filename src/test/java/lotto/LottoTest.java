@@ -68,5 +68,4 @@ public class LottoTest {
             new Lotto(Arrays.asList(1, 2, 3, 3, 4, 5, 5));
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
 }

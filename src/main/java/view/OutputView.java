@@ -6,6 +6,7 @@ import lotto.LottosResult;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class OutputView {
 
@@ -17,7 +18,7 @@ public class OutputView {
         System.out.println(lottoQuantity + "개를 구매했습니다.");
     }
 
-    public static void showLottoNumbers(List<Integer> numbers) {
+    public static void showLottoNumbers(Set<Integer> numbers) {
         System.out.println(numbers);
     }
 
