@@ -54,5 +54,30 @@ public class InputView {
         }
     }
 
+    public static int readBonusNumber(String question) {
+        System.out.println(question);
+        String input = scanner.nextLine();
+        try {
+            validateBonusNumber(input);
+            return Integer.parseInt(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return readBonusNumber(question);
+        }
+    }
+
+    private static void validateBonusNumber(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException("공백이 입력되었습니다. 다시 입력해주세요.");
+        }
+        if (!isInteger(input.trim())) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다. 다시 입력해주세요.");
+        }
+        int bonusNumber = Integer.parseInt(input);
+        if (bonusNumber < 1 || bonusNumber > 45) {
+            throw new IllegalArgumentException("1~45 사이의 숫자를 입력해주세요.");
+        }
+    }
+
 
 }

@@ -10,14 +10,17 @@ public class WinningNumbers {
     private static final String DELIMITER = ",";
     private static final int MAX = 45;
     private static final int MIN = 1;
-    public List<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(String numbers) {
-        validate(numbers);
+
+    public WinningNumbers(String numbers, int bonusNumber) {
+        validate(numbers, bonusNumber);
         this.numbers = parse(numbers);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
-    private void validate(String numbers) {
+    private void validate(String numbers, int bonusNumber) {
         if (numbers == null || numbers.isBlank()) {
             throw new IllegalArgumentException("공백이 입력되었습니다. 다시 입력해주세요.");
         }

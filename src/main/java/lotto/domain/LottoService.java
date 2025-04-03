@@ -10,7 +10,9 @@ public class LottoService {
         LottoTicket lottoTicket = lottoMachine.buyLotto(money);
         ResultView.printAmount(lottoTicket);
         ResultView.printLottoTicket(lottoTicket);
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.readWinningNumbers("지난 주 당첨 번호를 입력해 주세요."));
+        String inputWinningNumbers = InputView.readWinningNumbers("지난 주 당첨 번호를 입력해 주세요.");
+        int bonusNumber = InputView.readBonusNumber("보너스 볼을 입력해 주세요.");
+        WinningNumbers winningNumbers = new WinningNumbers(inputWinningNumbers, bonusNumber);
         Summary summary = winningNumbers.summarize(lottoTicket);
         Rewards rewards = summary.rewards();
         ResultView.printRewards(rewards);
