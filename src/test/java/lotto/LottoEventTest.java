@@ -10,7 +10,7 @@ class LottoEventTest {
   @Test
   @DisplayName("로또 이벤트는 로또 티켓을 생성할 수 있다")
   void createLottoTicket() {
-    LottoEventImpl lottoEvent = new LottoEventImpl();
+    LottoEvent lottoEvent = new LottoEvent();
     assertNotNull(lottoEvent);
   }
 

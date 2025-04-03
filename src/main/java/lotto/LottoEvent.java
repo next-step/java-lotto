@@ -1,12 +1,26 @@
 package lotto;
 
-public interface LottoEvent {
+public class LottoEvent {
 
-  LottoRank getRank(LottoTicket lottoTicket);
+  LottoTicketSeller lottoTicketSeller = new LottoTicketSeller();
+  LottoTicketNumberSet winningLottoTicketNumberSet;
 
-  int getLottoTicketPrice();
+  public LottoEvent() {
+  }
 
-  void setWinningLottoTicketNumberSet(LottoTicketNumberSet winningLottoTicketNumberSet);
+  public int getLottoTicketPrice() {
+    return lottoTicketSeller.getLottoPrice();
+  }
 
-  LottoTicket sellAutoLottoTicket();
+  public void setWinningLottoTicketNumberSet(LottoTicketNumberSet winningLottoTicketNumberSet) {
+    this.winningLottoTicketNumberSet = winningLottoTicketNumberSet;
+  }
+
+  public LottoTicket sellAutoLottoTicket() {
+    return lottoTicketSeller.sellAutoLottoTicket();
+  }
+
+  public LottoRank getRank(LottoTicket lottoTicket) {
+    return LottoRank.valueOfMatchedCount(lottoTicket.countMatchingNumbers(winningLottoTicketNumberSet));
+  }
 }

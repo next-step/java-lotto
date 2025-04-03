@@ -3,6 +3,7 @@ package view;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
+import lotto.LottoEvent;
 import lotto.LottoRank;
 import lotto.LottoTicket;
 import lotto.User;
@@ -39,9 +40,10 @@ class PrintResultTest {
 
   }
 
-  class MockUserImpl implements User {
+  class MockUserImpl extends User {
 
     public MockUserImpl() {
+      super(0, new LottoEvent());
     }
 
     @Override
@@ -53,11 +55,6 @@ class PrintResultTest {
           LottoRank.MISS,
           LottoRank.MISS
       );
-    }
-
-    @Override
-    public void buyAllLottoTickets() {
-      // do nothing
     }
 
     @Override

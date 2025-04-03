@@ -1,14 +1,49 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public interface User {
+public class User {
 
-  List<LottoRank> evaluateLottoTickets();
+  private final LottoEvent lottoEvent;
+  private final List<LottoTicket> lottoTickets;
+  private int payedMoney;
+  private int money;
 
-  void buyAllLottoTickets();
+  public User(int money, LottoEvent lottoEvent) {
+    this.money = money;
+    this.lottoEvent = lottoEvent;
+    lottoTickets = new ArrayList<>();
+  }
 
-  List<LottoTicket> getLottoTickets();
+  public void buyAllLottoTickets() {
+    int lottoPrice = lottoEvent.getLottoTicketPrice();
+    int lottoCount = money / lottoPrice;
+    money -= lottoPrice * lottoCount;
+    payedMoney = lottoPrice * lottoCount;
+    lottoTickets.addAll(
+        IntStream.range(0, lottoCount)
+            .mapToObj(i -> lottoEvent.sellAutoLottoTicket())
+            .collect(Collectors.toList())
+    );
+  }
 
-  double calculateProfitRate();
+  public List<LottoTicket> getLottoTickets() {
+    return lottoTickets;
+  }
+
+  public List<LottoRank> evaluateLottoTickets() {
+    return lottoTickets.stream()
+        .map(lottoEvent::getRank)
+        .collect(Collectors.toList());
+  }
+
+  public double calculateProfitRate() {
+    int totalWinningAmount = evaluateLottoTickets().stream()
+        .mapToInt(LottoRank::getWinningAmount)
+        .sum();
+    return (double) totalWinningAmount / payedMoney;
+  }
 }

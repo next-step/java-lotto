@@ -2,11 +2,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.LottoEvent;
-import lotto.LottoEventImpl;
 import lotto.LottoTicketNumber;
 import lotto.LottoTicketNumberSet;
 import lotto.User;
-import lotto.UserImpl;
 import view.PrintResult;
 
 public class Main {
@@ -16,8 +14,8 @@ public class Main {
     System.out.println("구입금액을 입력해 주세요.");
     int amount = scanner.nextInt();
 
-    LottoEvent lottoEvent = new LottoEventImpl();
-    User user = new UserImpl(amount, lottoEvent);
+    LottoEvent lottoEvent = new LottoEvent();
+    User user = new User(amount, lottoEvent);
 
     user.buyAllLottoTickets();
     System.out.printf("%d개를 구매했습니다.%n", user.getLottoTickets().size());
