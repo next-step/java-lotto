@@ -2,11 +2,11 @@ package lotto;
 
 import java.util.List;
 
-public class Game {
+public class LottoGame {
 
     private final LottoNumbers numbers;
 
-    public Game(List<Integer> numbers) {
+    public LottoGame(List<Integer> numbers) {
         this.numbers = new LottoNumbers(numbers);
     }
 

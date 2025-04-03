@@ -14,8 +14,8 @@ public class LottoTicketMachine {
         this.randomPicker = new RandomPicker(random);
     }
 
-    public Game issue() {
+    public LottoGame issue() {
         var lottoNumber = randomPicker.pickNumbers(LottoNumbers.DIGIT, availableNumbers);
-        return new Game(lottoNumber);
+        return new LottoGame(lottoNumber);
     }
 }

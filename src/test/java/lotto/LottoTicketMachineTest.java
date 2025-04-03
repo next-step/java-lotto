@@ -14,6 +14,6 @@ public class LottoTicketMachineTest {
         var machine = new LottoTicketMachine(new Random());
         var lotto = machine.issue();
 
-        Assertions.assertThat(lotto).isInstanceOf(Game.class);
+        Assertions.assertThat(lotto).isInstanceOf(LottoGame.class);
     }
 }
