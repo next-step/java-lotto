@@ -4,6 +4,8 @@ import StringCalculator.domain.Expression;
 
 import java.util.Scanner;
 
+import static StringCalculator.domain.Expression.isInvalidInputFormat;
+
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -12,7 +14,7 @@ public class InputView {
             try {
                 System.out.println("수식을 입력하세요: (예: 2 + 3 * 4 / 2)");
                 String input = SCANNER.nextLine();
-                if (!isValidInputFormat(input)) {
+                if (isInvalidInputFormat(input)) {
                     System.out.println("제대로 된 형식으로 입력해 주세요. (예: 2 + 3 * 4 / 2)");
                     continue;
                 }
@@ -21,13 +23,6 @@ public class InputView {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    public static boolean isValidInputFormat(String input) {
-        if (input == null || input.isBlank() || input.trim().isEmpty()) {
-            return false;
-        }
-        return input.matches("^[0-9]+( [\\+\\-\\*/] [0-9]+)*$");
     }
 }
 
