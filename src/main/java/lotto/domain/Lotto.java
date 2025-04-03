@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
+    private static final int LOTTO_NUMBER_LENGTH = 6;
+
     private final Set<LottoNo> lottoNos;
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -14,6 +16,7 @@ public class Lotto {
     }
 
     public Lotto(Set<LottoNo> lottoNos) {
+        checkValid(lottoNos);
         this.lottoNos = lottoNos;
     }
 
@@ -33,5 +36,11 @@ public class Lotto {
 
     public Set<LottoNo> getLottoNumbers() {
         return lottoNos;
+    }
+
+    private void checkValid(Set<LottoNo> lottoNos) {
+        if (lottoNos.size() != LOTTO_NUMBER_LENGTH) {
+            throw new IllegalArgumentException("lotto size is not 6");
+        }
     }
 }

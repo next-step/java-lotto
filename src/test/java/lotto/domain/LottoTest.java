@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -38,5 +40,20 @@ class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lotto.getLottoNumbers()).isEqualTo(new HashSet<>(lotto.getLottoNumbers()));
+    }
+
+    @DisplayName("로또 생성시 중복값 발생하면 예외처리한다.")
+    @Test
+    void invalidTest() {
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5))).isInstanceOf(
+                        IllegalArgumentException.class)
+                .hasMessage("lotto size is not 6");
+    }
+
+    @DisplayName("로또 생성 시 길이가 6이 아닌 경우 예외가 발생한다.")
+    @Test
+    void checkValidLengthTest() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
+                .withMessage("lotto size is not 6");
     }
 }
