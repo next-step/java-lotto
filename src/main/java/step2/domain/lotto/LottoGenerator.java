@@ -32,9 +32,7 @@ public class LottoGenerator {
             lottoNumbers.add(i);
         }
         Collections.shuffle(lottoNumbers);
-        List<Integer> generatedLotto = lottoNumbers.subList(0, size);
-        generatedLotto.sort(Integer::compareTo);
-        return generatedLotto;
+        return lottoNumbers.subList(0, size);
     }
 
     private boolean isValid(int minNumber, int maxNumber, int size) {
