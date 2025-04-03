@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static domain.constant.LottoConstants.*;
-
 public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     private static final List<Integer> CACHED_NUMBERS = new ArrayList<>();
     static {

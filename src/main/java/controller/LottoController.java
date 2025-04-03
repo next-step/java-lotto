@@ -1,5 +1,6 @@
 package controller;
 
+import domain.model.MatchResult;
 import view.InputView;
 import view.ResultView;
 import domain.model.LottoNumbers;
@@ -7,40 +8,34 @@ import domain.model.LottoWallet;
 import domain.engine.LottoMachine;
 import domain.generator.RandomLottoNumberGenerator;
 
-import java.util.List;
-
 
 public class LottoController {
-    private final LottoWallet lottoWallet = new LottoWallet();
     private final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberGenerator());
 
     public void run() {
         int purchaseAmount = InputView.getPurchaseAmount();
-        purchase(purchaseAmount);
+        LottoWallet lottoWallet = purchase(purchaseAmount);
 
-        draw();
+        MatchResult result = draw(lottoWallet);
 
-        calculateProfit(purchaseAmount);
+        calculateProfit(purchaseAmount, result);
     }
 
-    private void purchase(int purchaseAmount) {
-        List<LottoNumbers> lottoList = this.lottoMachine.buyLottos(purchaseAmount);
-        ResultView.printPurchasedLottoCount(lottoList.size());
-        this.lottoWallet.addLottos(lottoList);
-
-        for (LottoNumbers lotto : this.lottoWallet.getLottos()) {
-            ResultView.printLottoNumbers(lotto.getNumbers());
-        }
+    private LottoWallet purchase(int purchaseAmount) {
+        LottoWallet lottoWallet = this.lottoMachine.buyLottos(purchaseAmount);
+        ResultView.printPurchasedLottos(lottoWallet);
+        return lottoWallet;
     }
 
-    private void draw() {
+    private MatchResult draw(LottoWallet lottoWallet) {
         LottoNumbers winNumbers = new LottoNumbers(InputView.getWinNumbers());
-        this.lottoWallet.countMatches(winNumbers);
-        ResultView.printMatchResult(this.lottoWallet.getMatchResult());
+        MatchResult result = lottoWallet.countMatches(winNumbers);
+        ResultView.printMatchResult(result);
+        return result;
     }
 
-    private void calculateProfit(int purchaseAmount) {
-        double profit = (double) this.lottoWallet.getPrize() / purchaseAmount;
+    private void calculateProfit(int purchaseAmount, MatchResult result) {
+        double profit = result.calculateProfit(purchaseAmount);
         ResultView.printProfit(profit);
     }
 }
