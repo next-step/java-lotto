@@ -19,13 +19,11 @@
 - purchasedAmount 필드는 getWinningRate 에서만 사용
 - purchasedAmount 필드를 분리
   - getWinningRate 메소드 가져감
-  - 의존 관계 변경
-    - LottoCount -> LottoPurchaseManager 로 이름 변경
-    - LottoCount 신규 생성
-  - LottoGameParameter 역할
-    - PurchaseAmount 와 lottoPrice 에 해당하는 LottoCount 생성
-    - autoLottoCount, manualLottoCount 관리
-- generateAutoLottoContainer 메소드 LottoGame 으로 이동
-- LottoGame 에서 autoLottoCount, manualLottoCount 관리
-### LottoGame 역할
-- 수동 로또 입력을 받아 LottoContainer 에 추가
+### 수동 로또 입력은 어떤 형태로 받아야 하는가?
+- View
+  - List<Integer> 형태의 입력을 받아서 Lotto 생성
+  - List<Lotto> 를 이용하여 LottoContainer 생성
+  - LottoContainer 크기가 manualLottoCount 와 같은지 검증 
+    - 어디서? 반드시 필요한가? 테스트만 하면 되지 않을까?
+  - manualLottoCount 가 전체 로또 개수보다 작거나 같은지 검증 
+    - 입력값 검증은 View 에서 해도 됨

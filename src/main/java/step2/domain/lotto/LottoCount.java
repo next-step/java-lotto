@@ -25,4 +25,17 @@ public class LottoCount {
     public boolean isBiggerThan(LottoCount other) {
         return this.count > other.value();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof LottoCount)) {
+            return false;
+        }
+
+        return this.count == ((LottoCount) obj).value();
+    }
 }

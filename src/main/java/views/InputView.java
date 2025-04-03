@@ -12,6 +12,10 @@ public class InputView {
 
     public static List<Integer> promptForIntegerList(String query, String delimiter) {
         Tokens tokens = promptForTokens(query, delimiter);
+        return convertTokensToIntegers(tokens);
+    }
+
+    public static List<Integer> convertTokensToIntegers(Tokens tokens) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < tokens.size(); i++ ) {
             result.add(Integer.parseInt(tokens.getToken(i)));
@@ -29,6 +33,10 @@ public class InputView {
 
     public static String inputExpression(String query) {
         System.out.println(query);
+        return scanner.nextLine();
+    }
+
+    public static String inputWithoutExpression() {
         return scanner.nextLine();
     }
 
