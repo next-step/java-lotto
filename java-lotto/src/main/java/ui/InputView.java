@@ -5,12 +5,11 @@ import java.util.Scanner;
 public class InputView {
     private static final String INPUT_MESSAGE = "Please input string:";
 
-    public String[] readAndSplitInput() {
-        String input = getInput();
+    public String[] readAndSplitInput(String input) {
         return splitString(input);
     }
 
-    public static String getInput() {
+    public String getInput() {
         System.out.println(INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();

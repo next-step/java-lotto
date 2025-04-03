@@ -11,4 +11,5 @@ public class Operand {
     public int getNumber() {
         return number;
     }
+
 }

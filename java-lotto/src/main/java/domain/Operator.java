@@ -27,7 +27,7 @@ public enum Operator {
         this.operate = operate;
     }
 
-    public int apply(int first, int second) {
+    public int operate(int first, int second) {
         return operate.apply(first, second);
     }
 
