@@ -1,7 +1,7 @@
 package view;
 
 import lotto.Lotto;
-import lotto.LottoMatch;
+import lotto.LottoRank;
 import lotto.LottosResult;
 
 import java.util.Arrays;
@@ -21,13 +21,13 @@ public class OutputView {
         System.out.println(numbers);
     }
 
-    public static void showLottoMatchResult(LottosResult lottosResult) {
+    public static void showLottoRankResult(LottosResult lottosResult) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        Arrays.stream(LottoMatch.values())
-                .filter(match -> match != LottoMatch.NONE)
+        Arrays.stream(LottoRank.values())
+                .filter(match -> match != LottoRank.NONE)
                 .forEach(match -> {
-                    int count = lottosResult.getLottoMatchCount(match);
+                    int count = lottosResult.getLottoRankCount(match);
                     System.out.println(match.toString() + " - " + count + "개 일치");
                 });
     }

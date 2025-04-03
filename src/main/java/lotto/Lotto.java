@@ -19,8 +19,8 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public LottoMatch getLottoMatch(List<Integer> winningNumbers) {
-        return LottoMatch.fromMatchCount((int) this.lottoNumbers.stream().filter(winningNumbers::contains).count());
+    public LottoRank getLottoRank(List<Integer> winningNumbers, Integer bonusNumber) {
+        return LottoRank.fromMatchCount((int) this.lottoNumbers.stream().filter(winningNumbers::contains).count(), lottoNumbers.contains(bonusNumber));
     }
 
     private void validateLottoNumbers(List<Integer> numbers) {
