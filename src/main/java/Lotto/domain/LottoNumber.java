@@ -1,7 +1,7 @@
 package Lotto.domain;
 
-import static Lotto.constants.LottoConstants.LOTTO_MAX_NUMBER;
-import static Lotto.constants.LottoConstants.LOTTO_MIN_NUMBER;
+import static Lotto.domain.LottoList.LOTTO_MAX_NUMBER;
+import static Lotto.domain.LottoList.LOTTO_MIN_NUMBER;
 
 public class LottoNumber {
     private final int number;

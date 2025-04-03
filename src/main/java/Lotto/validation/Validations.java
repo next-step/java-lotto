@@ -4,7 +4,7 @@ import Lotto.utils.ValidationUtils;
 
 import java.util.Arrays;
 
-import static Lotto.constants.LottoConstants.*;
+import static Lotto.domain.LottoList.*;
 import static Lotto.domain.Purchase.UNIT;
 
 public class Validations {
