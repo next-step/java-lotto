@@ -22,18 +22,22 @@ public class Seller {
         return money.divide(PRICE);
     }
 
+    private void generateLotto(GeneratorStrategy strategy) {
+        this.lottos.add(strategy.generate());
+        this.count = count.decrease();
+    }
+
     private void generateManual(List<String> manualLottos) {
         for (String manualLotto : manualLottos) {
-            this.lottos.add(new ManualStrategy(manualLotto).generate());
-            this.count = count.decrease();
+            generateLotto(new ManualStrategy(manualLotto));
         }
     }
 
     public List<Lotto> generateLottos() {
         while (count.isPositive()) {
-            this.lottos.add(new AutomaticStrategy().generate());
-            this.count = count.decrease();
+            generateLotto(new AutomaticStrategy());
         }
         return lottos;
     }
+
 }
