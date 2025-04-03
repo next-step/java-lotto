@@ -4,16 +4,16 @@ import java.util.List;
 
 import com.nextstep.camp.lotto.domain.entity.LottoTicket;
 
-public class LottoFixedPickStrategy implements LottoPickStrategy {
+public class LottoFixedPicker implements LottoPicker {
 
     private final List<LottoTicket> tickets;
 
-    private LottoFixedPickStrategy(List<LottoTicket> tickets) {
+    private LottoFixedPicker(List<LottoTicket> tickets) {
         this.tickets = tickets;
     }
 
-    public static LottoFixedPickStrategy of(List<LottoTicket> tickets) {
-        return new LottoFixedPickStrategy(tickets);
+    public static LottoFixedPicker of(List<LottoTicket> tickets) {
+        return new LottoFixedPicker(tickets);
     }
 
     @Override

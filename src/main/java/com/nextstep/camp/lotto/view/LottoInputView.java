@@ -1,10 +1,7 @@
 package com.nextstep.camp.lotto.view;
 
-import com.nextstep.camp.lotto.domain.strategy.LottoAutoPickStrategy;
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
-import com.nextstep.camp.lotto.view.component.LottoAmountInput;
-import com.nextstep.camp.lotto.view.component.LottoTicketsInput;
-import com.nextstep.camp.lotto.view.component.WinningNumbersInput;
+import com.nextstep.camp.lotto.view.component.*;
 import com.nextstep.camp.lotto.view.dto.LottoInputData;
 import com.nextstep.camp.lotto.view.strategy.*;
 
@@ -29,8 +26,7 @@ public class LottoInputView {
     public void render() {
         LottoAmount lottoAmount = this.lottoAmountInput.action();
 
-        LottoAutoPickStrategy pickStrategy = LottoAutoPickStrategy.of(lottoAmount);
-        LottoTicketsInputStrategy inputStrategy = LottoTicketsInputStrategy.of(pickStrategy);
+        LottoTicketsAutoInputStrategy inputStrategy = LottoTicketsAutoInputStrategy.of(lottoAmount);
         this.lottoTicketsInput = LottoTicketsInput.create(inputStrategy);
         this.lottoTicketsInput.action();
 

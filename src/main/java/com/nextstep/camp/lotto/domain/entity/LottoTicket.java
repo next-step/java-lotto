@@ -13,7 +13,7 @@ public class LottoTicket {
     }
 
     private LottoTicket(List<Integer> rawNumbers) {
-        this.lottoNumbers = LottoNumbers.of(rawNumbers);
+        this(LottoNumbers.of(rawNumbers));
     }
 
     public static LottoTicket of(LottoNumbers lottoNumbers) {

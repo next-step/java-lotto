@@ -4,23 +4,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.nextstep.camp.lotto.domain.exception.LottoTicketsCannotBeEmptyException;
-import com.nextstep.camp.lotto.domain.strategy.LottoPickStrategy;
 import com.nextstep.camp.lotto.domain.type.MatchResult;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 
 public class LottoTickets {
     private final List<LottoTicket> tickets;
 
-    private LottoTickets(LottoPickStrategy pickStrategy) {
-        List<LottoTicket> tickets = pickStrategy.pick();
-        if (tickets == null || tickets.isEmpty()) {
-            throw new LottoTicketsCannotBeEmptyException();
-        }
+    private LottoTickets(List<LottoTicket> tickets) {
+        validate(tickets);
         this.tickets = tickets;
     }
 
-    public static LottoTickets of(LottoPickStrategy pickStrategy) {
-        return new LottoTickets(pickStrategy);
+    private static void validate(List<LottoTicket> tickets) {
+        if (tickets == null || tickets.isEmpty()) {
+            throw new LottoTicketsCannotBeEmptyException();
+        }
+    }
+
+    public static LottoTickets of(List<LottoTicket> tickets) {
+        return new LottoTickets(tickets);
     }
 
     public int size() {

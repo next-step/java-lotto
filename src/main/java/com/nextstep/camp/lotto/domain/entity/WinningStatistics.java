@@ -42,6 +42,10 @@ public class WinningStatistics {
         return resultCounts;
     }
 
+    public LottoAmount getSpent() {
+        return spent;
+    }
+
     @Override
     public String toString() {
         String resultString = resultCounts.entrySet().stream()

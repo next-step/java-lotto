@@ -1,12 +1,8 @@
 package com.nextstep.camp.lotto.view;
 
 import com.nextstep.camp.lotto.domain.entity.WinningStatistics;
-import com.nextstep.camp.lotto.domain.strategy.LottoAutoPickStrategy;
-import com.nextstep.camp.lotto.domain.vo.LottoAmount;
-import com.nextstep.camp.lotto.view.component.*;
-import com.nextstep.camp.lotto.view.dto.LottoInputData;
+import com.nextstep.camp.lotto.view.component.WinningStatisticsResult;
 import com.nextstep.camp.lotto.view.dto.LottoResultData;
-import com.nextstep.camp.lotto.view.strategy.*;
 
 public class LottoResultView {
     private final LottoResultData lottoResultData;

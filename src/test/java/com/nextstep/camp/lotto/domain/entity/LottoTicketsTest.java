@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.nextstep.camp.lotto.domain.strategy.LottoFixedPickStrategy;
+import com.nextstep.camp.lotto.domain.strategy.LottoFixedPicker;
 import com.nextstep.camp.lotto.domain.type.MatchResult;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,7 +35,8 @@ class LottoTicketsTest {
             .map(LottoTicket::of)
             .collect(Collectors.toList());
 
-        LottoTickets lottoTickets = LottoTickets.of(LottoFixedPickStrategy.of(tickets));
+        List<LottoTicket> lottoTicketList = LottoFixedPicker.of(tickets).pick();
+        LottoTickets lottoTickets = LottoTickets.of(lottoTicketList);
         WinningNumbers winning = WinningNumbers.of(testCase.getWinningNumbers());
 
         List<MatchResult> actual = lottoTickets.matchAll(winning);
