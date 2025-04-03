@@ -1,3 +1,5 @@
+package utils;
+
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,12 +37,19 @@ public class CalculatorTest {
         assertEquals(2, result);
     }
 
+    @DisplayName("복합 연산 테스트")
+    @Test
+    void complexOperationTest() {
+        int result = Calculator.run("2 + 3 * 4 / 2");
+        assertEquals(10, result);
+    }
+
     @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우")
     @ParameterizedTest
     @ValueSource(strings = {"", " "})
-    void nullOrEmptyTest() {
+    void nullOrEmptyTest(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            Calculator.run(null);
+            Calculator.run(input);
         }).withMessage("입력 값이 null이거나 빈 공백 문자입니다.");
     }
 
