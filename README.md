@@ -75,8 +75,8 @@
     - [x] Lotto
     - [x] LottoContainer
 ### 4단계
-- [ ] 3단계 피드백
-  - [ ] LottoGenerator
+- [x] 3단계 피드백
+  - [x] LottoGenerator
     - [x] 정렬 책임 분리
-    - [ ] 번호 캐싱
+    - [x] 번호 캐싱
   - [x] Lotto 정적 팩토리 메소드로 주 생성자 호출
