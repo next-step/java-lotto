@@ -1,8 +1,10 @@
 package views;
 
 import step1.symbol.Operand;
+import step2.domain.LottoGame;
 import step2.domain.LottoGameResult;
 import step2.domain.PurchaseAmount;
+import step2.domain.lotto.LottoContainer;
 import step2.domain.rank.RankCounter;
 import step2.domain.rank.RankType;
 
@@ -21,6 +23,14 @@ public class ResultView {
         ResultView.printMessage("");
         ResultView.printResult(lottoGameResult);
         ResultView.printMessage(String.format("총 수익률은 %.2f입니다.", winningRate));
+    }
+
+    public static void showPurchasedLotto(LottoGame lottoGame) {
+        ResultView.printMessage("");
+        LottoContainer purchasedLotto = lottoGame.getPurchasedLotto();
+        LottoContainerFormatter lottoContainerFormatter = new LottoContainerFormatter(purchasedLotto);
+        String lottosAsString = lottoContainerFormatter.lottosAsString();
+        ResultView.printMessage(lottosAsString);
     }
 
     private static void printResult(LottoGameResult lottoGameResult) {

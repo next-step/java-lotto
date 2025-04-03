@@ -1,8 +1,9 @@
 package step2.domain;
 
-import step2.domain.lotto.*;
+import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoContainer;
+import step2.domain.lotto.WinningLotto;
 import step2.domain.rank.RankType;
-import views.LottoContainerFormatter;
 
 import java.util.List;
 
@@ -20,8 +21,7 @@ public class LottoGame {
         return new LottoGameResult(ranks);
     }
 
-    public String purchasedLottosAsString() {
-        LottoContainerFormatter lottoContainerFormatter = new LottoContainerFormatter(purchasedLotto);
-        return lottoContainerFormatter.lottosAsString();
+    public LottoContainer getPurchasedLotto() {
+        return purchasedLotto;
     }
 }

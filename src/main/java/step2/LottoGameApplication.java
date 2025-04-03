@@ -1,9 +1,12 @@
 package step2;
 
-import step2.domain.PurchaseAmount;
 import step2.domain.LottoGame;
 import step2.domain.LottoGameResult;
-import step2.domain.lotto.*;
+import step2.domain.PurchaseAmount;
+import step2.domain.lotto.LottoConstants;
+import step2.domain.lotto.LottoContainer;
+import step2.domain.lotto.LottoCount;
+import step2.domain.lotto.LottoGenerator;
 import views.InputView;
 import views.LottoInputView;
 import views.ResultView;
@@ -20,13 +23,11 @@ public class LottoGameApplication {
         PurchaseAmount purchaseAmount = createPurchaseAmountWithQuery();
         LottoCount totalLottoCount = createLottoCountWithQuery(purchaseAmount);
         LottoCount manualLottoCount = createManualLottoCountWithQuery(totalLottoCount);
-        LottoGame lottoGame = setUpLottoGame(totalLottoCount, manualLottoCount);
 
-        ResultView.printMessage("");
-        ResultView.printMessage(lottoGame.purchasedLottosAsString());
+        LottoGame lottoGame = setUpLottoGame(totalLottoCount, manualLottoCount);
+        ResultView.showPurchasedLotto(lottoGame);
 
         LottoGameResult lottoGameResult = playLottoRound(lottoGame);
-
         ResultView.showGameSummary(purchaseAmount, lottoGameResult);
     }
 
