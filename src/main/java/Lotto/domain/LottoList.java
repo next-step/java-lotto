@@ -13,14 +13,6 @@ public class LottoList {
         this.lottos = new ArrayList<>();
     }
 
-    public void addLotto(Lotto lotto) {
-        this.lottos.add(lotto);
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
     public static List<LottoNumber> generateLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
@@ -38,6 +30,14 @@ public class LottoList {
         result.sort((n1, n2) -> Integer.compare(n1.getNumber(), n2.getNumber()));
 
         return result;
+    }
+
+    public void addLotto(Lotto lotto) {
+        this.lottos.add(lotto);
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public List<Lotto> generateLottos(int purchasedQty) {
