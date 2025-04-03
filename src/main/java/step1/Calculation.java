@@ -1,8 +1,8 @@
-package domain;
+package step1;
 
-import domain.symbol.Operand;
-import domain.symbol.OperatorType;
-import domain.symbol.SymbolSequence;
+import step1.symbol.Operand;
+import step1.symbol.OperatorType;
+import step1.symbol.SymbolSequence;
 
 public class Calculation {
 
