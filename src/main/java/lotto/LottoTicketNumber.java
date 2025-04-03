@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,10 +9,6 @@ public class LottoTicketNumber implements Comparable<LottoTicketNumber> {
   private static final int MIN_BOUND = 1;
   private static final int MAX_BOUND = 45;
   private final Integer number;
-
-  public LottoTicketNumber() {
-    this(new Random().nextInt(MAX_BOUND) + 1);
-  }
 
   public LottoTicketNumber(Integer number) {
     validateNumber(number);

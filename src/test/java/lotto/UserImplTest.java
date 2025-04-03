@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class UserImplTest {
 
   @Test
   @DisplayName("유저에게 14000원을 주면 14개의 티켓을 구매한다")
   void buyLottoTickets() {
-    User user = new User(14000, new LottoEventImpl(new LottoTicketNumberSet()));
+    User user = new UserImpl(14000, new LottoEventImpl());
     user.buyAllLottoTickets();
 
     assertEquals(14, user.getLottoTickets().size());
@@ -21,11 +21,11 @@ class UserTest {
   void createLottoResult() {
     FOURTHRankMockLottoEvent mockLottoEvent = new FOURTHRankMockLottoEvent();
 
-    User user = new User(5000, mockLottoEvent);
+    User user = new UserImpl(5000, mockLottoEvent);
     user.buyAllLottoTickets();
 
     assertEquals(user.getLottoTickets().size(), user.evaluateLottoTickets().size());
-    assertEquals((double) LottoRank.FOURTH.getWinningAmount() / mockLottoEvent.getLottoTicketPrice() * 100,
+    assertEquals((double) LottoRank.FOURTH.getWinningAmount() / mockLottoEvent.getLottoTicketPrice(),
         user.calculateProfitRate());
   }
 
@@ -43,6 +43,11 @@ class UserTest {
     @Override
     public int getLottoTicketPrice() {
       return 1000;
+    }
+
+    @Override
+    public void setWinningLottoTicketNumberSet(LottoTicketNumberSet winningLottoTicketNumberSet) {
+      // do nothing
     }
 
     @Override

@@ -6,5 +6,7 @@ public interface LottoEvent {
 
   int getLottoTicketPrice();
 
+  void setWinningLottoTicketNumberSet(LottoTicketNumberSet winningLottoTicketNumberSet);
+
   LottoTicket sellAutoLottoTicket();
 }

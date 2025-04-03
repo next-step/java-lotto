@@ -40,9 +40,6 @@ https://edu.nextstep.camp/s/Ie5Dwep0/ls/KH5Q2XXD
 
 ## TODO List
 
-- [ ] LottoEvent 클래스와 LottoTicket 클래스가 있다.
-- [ ] LottoTicket은 LottoTicketNumber를 가진다.
-- [ ] 로또 상점에서 티켓을 구매 할 Me 클래스가 있다.
 - [x] LottoEvent는 LottoTicket을 발급한다.
 - [x] LottoTicket을 발급할 때 마다 LottoTicketNumber를 생성한다.
 - [x] LottoTicket을 발급할 때 마다 LottoTicketNumber를 생성할 때 중복이 되지 않아야 한다.

@@ -5,13 +5,17 @@ public class LottoEventImpl implements LottoEvent {
   LottoTicketSeller lottoTicketSeller = new LottoTicketSeller();
   LottoTicketNumberSet winningLottoTicketNumberSet;
 
-  public LottoEventImpl(LottoTicketNumberSet winningLottoTicketNumberSet) {
-    this.winningLottoTicketNumberSet = winningLottoTicketNumberSet;
+  public LottoEventImpl() {
   }
 
   @Override
   public int getLottoTicketPrice() {
     return lottoTicketSeller.getLottoPrice();
+  }
+
+  @Override
+  public void setWinningLottoTicketNumberSet(LottoTicketNumberSet winningLottoTicketNumberSet) {
+    this.winningLottoTicketNumberSet = winningLottoTicketNumberSet;
   }
 
   @Override
