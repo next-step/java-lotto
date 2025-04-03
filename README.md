@@ -74,3 +74,5 @@
   - [x] domain 에서 views 의존성 제거
     - [x] Lotto
     - [x] LottoContainer
+### 4단계
+- [ ] 3단계 피드백
