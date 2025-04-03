@@ -40,6 +40,24 @@ public class LotteryTicketTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"3,3,29,31,22,1"})
+    @DisplayName("로또 번호는 중복으로 입력할 수 없다.")
+    public void makeSameNumber(String input) {
+        FakeInputView inputView = new FakeInputView(input);
+        assertThatThrownBy(() -> new LotteryTicket(inputView.parseInput(inputView.read())))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"3,3,29,31,22,", "43"})
+    @DisplayName("로또 번호는 6자리로 이뤄져야 한다.")
+    public void makeUnder6Numbers(String input) {
+        FakeInputView inputView = new FakeInputView(input);
+        assertThatThrownBy(() -> new LotteryTicket(inputView.parseInput(inputView.read())))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @Test
     @DisplayName("로또 번호를 자동으로 생성할 수 있다.")
     public void makeLotto() {
@@ -73,7 +91,7 @@ public class LotteryTicketTest {
     }
 
     @Test
-    @DisplayName("로또 티켓은 46보다 큰 숫자는 만들어 질 수 없다.")
+    @DisplayName("로또 티켓은 45보다 큰 숫자는 만들어 질 수 없다.")
     public void lottoNumberUpperTest() {
         assertThatThrownBy(() -> {
             LottoNumber.of(46);
