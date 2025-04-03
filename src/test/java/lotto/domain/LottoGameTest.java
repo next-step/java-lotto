@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,6 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(userBuyLotto, new WinningLotto(winLotto, bonusNumber));
 
         // then
-        assertThat(lottoGame.getRanks()).hasSize(1);
-        assertThat(lottoGame.getRanks().get(Rank.THIRD)).isEqualTo(1);
+        assertThat(lottoGame.getRanks()).isEqualTo(Map.of(Rank.THIRD, 1));
     }
 }

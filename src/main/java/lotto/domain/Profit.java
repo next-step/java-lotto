@@ -22,8 +22,8 @@ public class Profit {
 
         for (Map.Entry<Rank, Integer> entry : ranks.entrySet()) {
             Rank rank = entry.getKey();
-            long winsCount = entry.getValue();
-            totalPrize += rank.getPrize() * winsCount;
+            int winsCount = entry.getValue();
+            totalPrize += rank.calculatePrize(winsCount);
         }
 
         return totalPrize;

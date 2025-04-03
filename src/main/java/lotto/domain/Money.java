@@ -10,14 +10,18 @@ public class Money {
     }
 
     public int divide(Money money) {
-        if (money.value == ZERO) {
+        if (money.isZero()) {
             throw new ArithmeticException("Cannot divide by zero");
         }
         return this.value / money.value;
     }
 
-    public boolean greaterThan(Money price) {
-        return value >= price.value;
+    private boolean isZero() {
+        return value == ZERO;
+    }
+
+    public boolean greaterThan(Money other) {
+        return value >= other.value;
     }
 
     @Override
