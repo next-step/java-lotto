@@ -24,7 +24,7 @@ public class LottoContainerTest {
          Assertions.assertThat(lottoContainer.size()).isEqualTo(lottoCount);
     }
 
-    @DisplayName("로또 개수가 0개인 경우 IllegarArgumentException throw")
+    @DisplayName("로또 개수가 0개인 경우 IllegalArgumentException throw")
     @Test
     void createLottoContainerException() {
         // given
@@ -52,5 +52,25 @@ public class LottoContainerTest {
 
         // then
         Assertions.assertThat(ranks).containsAnyOf(RankType.FIRST, RankType.NO_RANK);
+    }
+
+    @DisplayName("로또 합치기")
+    @Test
+    void addLottoContainer() {
+        // given
+        int lottoCount1 = 2;
+        int lottoCount2 = 3;
+
+        // when
+        LottoContainer lottoContainer1 = new LottoContainer(lottoCount1, LOTTO_RULE);
+        LottoContainer lottoContainer2 = new LottoContainer(lottoCount2, LOTTO_RULE);
+        LottoContainer combinedLottoContainer = lottoContainer1.add(lottoContainer2);
+
+        List<Lotto> actual = combinedLottoContainer.getLottos();
+
+        // then
+        Assertions.assertThat(actual)
+                .containsAll(lottoContainer1.getLottos())
+                .containsAll(lottoContainer2.getLottos());
     }
 }

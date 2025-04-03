@@ -50,4 +50,10 @@ public class LottoContainer {
         }
         return lottos;
     }
+
+    public LottoContainer add(LottoContainer additionalContainer) {
+        List<Lotto> newLottos = getLottos();
+        newLottos.addAll(additionalContainer.getLottos());
+        return new LottoContainer(newLottos);
+    }
 }
