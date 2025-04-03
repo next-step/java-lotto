@@ -82,5 +82,8 @@
   - [x] Lotto 정적 팩토리 메소드로 주 생성자 호출
 - [ ] 로또 수동 입력 구현
   - [x] LottoContainer 합치기
-  - [x] LottoCount 에 manualLottoCount 추가 
+  - [x] LottoCount 에 manualLottoCount 추가
+  - [ ] LottoCount 리팩터링
+    - [x] PurchaseAmount 분리
+    - 
   - [ ] 사용자에게 수동 입력 받기

@@ -2,7 +2,7 @@ package views;
 
 import step1.symbol.Operand;
 import step2.domain.LottoGameResult;
-import step2.domain.lotto.LottoCount;
+import step2.domain.lotto.LottoPurchaseManager;
 import step2.domain.rank.RankCounter;
 import step2.domain.rank.RankType;
 
@@ -15,8 +15,8 @@ public class ResultView {
         System.out.println("계산 결과는 " + result.value() + "입니다.");
     }
 
-    public static void showGameSummary(LottoCount lottoCount, LottoGameResult lottoGameResult) {
-        double winningRate = lottoCount.getWinningRate(lottoGameResult.getWinningsSum());
+    public static void showGameSummary(LottoPurchaseManager lottoPurchaseManager, LottoGameResult lottoGameResult) {
+        double winningRate = lottoGameResult.getWinningRate(lottoPurchaseManager.getPurchaseAmount());
 
         ResultView.printMessage("");
         ResultView.printResult(lottoGameResult);

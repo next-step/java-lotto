@@ -1,6 +1,7 @@
 package step2;
 
-import step2.domain.lotto.LottoCount;
+import step2.domain.PurchaseAmount;
+import step2.domain.lotto.LottoPurchaseManager;
 import step2.domain.LottoGame;
 import step2.domain.LottoGameResult;
 import step2.domain.lotto.*;
@@ -14,15 +15,15 @@ public class LottoGameApplication {
     public static final int LOTTO_TICKET_PRICE = 1000;
 
     public static void main(String[] args) {
-        LottoCount lottoCount = createLottoCountWithQuery();
-        LottoGame lottoGame = setUpLottoGame(lottoCount);
+        LottoPurchaseManager lottoPurchaseManager = createLottoCountWithQuery();
+        LottoGame lottoGame = setUpLottoGame(lottoPurchaseManager);
 
         ResultView.printMessage("");
         ResultView.printMessage(lottoGame.purchasedLottosAsString());
 
         LottoGameResult lottoGameResult = playLottoRound(lottoGame);
 
-        ResultView.showGameSummary(lottoCount, lottoGameResult);
+        ResultView.showGameSummary(lottoPurchaseManager, lottoGameResult);
     }
 
     private static LottoGameResult playLottoRound(LottoGame lottoGame) {
@@ -31,25 +32,26 @@ public class LottoGameApplication {
         return lottoGame.play(winningNumbers, bonusNumber);
     }
 
-    private static LottoGame setUpLottoGame(LottoCount lottoCount) {
+    private static LottoGame setUpLottoGame(LottoPurchaseManager lottoPurchaseManager) {
         LottoGenerator lottoGenerator = new LottoGenerator(LottoConstants.MIN_LOTTO_NUMBER,
                 LottoConstants.MAX_LOTTO_NUMBER,
                 LottoConstants.NUMBERS_PER_LOTTO);
-        return new LottoGame(lottoCount, lottoGenerator);
+        return new LottoGame(lottoPurchaseManager, lottoGenerator);
     }
 
-    private static LottoCount createLottoCountWithQuery() {
-        LottoCount lottoCount = null;
-        while (lottoCount == null) {
+    private static LottoPurchaseManager createLottoCountWithQuery() {
+        LottoPurchaseManager lottoPurchaseManager = null;
+        while (lottoPurchaseManager == null) {
             int purchaseAmount = InputView.promptForInteger("구입금액을 입력해 주세요.");
-            lottoCount = createLottoCount(purchaseAmount);
+            lottoPurchaseManager = createLottoCount(purchaseAmount);
         }
-        return lottoCount;
+        return lottoPurchaseManager;
     }
 
-    private static LottoCount createLottoCount(int purchaseAmount) {
+    private static LottoPurchaseManager createLottoCount(int inputAmount) {
         try {
-            return new LottoCount(purchaseAmount, LOTTO_TICKET_PRICE, 0);
+            PurchaseAmount purchaseAmount = new PurchaseAmount(inputAmount);
+            return new LottoPurchaseManager(purchaseAmount, LOTTO_TICKET_PRICE, 0);
         } catch (IllegalArgumentException e) {
             ResultView.printMessage(e.getMessage());
         }

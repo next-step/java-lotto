@@ -7,14 +7,14 @@ import views.LottoContainerFormatter;
 import java.util.List;
 
 public class LottoGame {
-    private final LottoCount lottoCount;
+    private final LottoPurchaseManager lottoPurchaseManager;
     private final LottoGenerator lottoGenerator;
     private final LottoContainer purchasedLotto;
 
-    public LottoGame(LottoCount lottoCount, LottoGenerator lottoGenerator) {
-        this.lottoCount = lottoCount;
+    public LottoGame(LottoPurchaseManager lottoPurchaseManager, LottoGenerator lottoGenerator) {
+        this.lottoPurchaseManager = lottoPurchaseManager;
         this.lottoGenerator = lottoGenerator;
-        this.purchasedLotto = generatelottoContainer();
+        this.purchasedLotto = generateAutolottoContainer();
     }
 
     public LottoGameResult play(List<Integer> winningNumbers, Integer bonusNumber) {
@@ -24,8 +24,8 @@ public class LottoGame {
         return new LottoGameResult(ranks);
     }
 
-    private LottoContainer generatelottoContainer() {
-        return lottoCount.generateAutoLottoContainer(lottoGenerator);
+    private LottoContainer generateAutolottoContainer() {
+        return lottoPurchaseManager.generateAutoLottoContainer(lottoGenerator);
     }
 
     public String purchasedLottosAsString() {

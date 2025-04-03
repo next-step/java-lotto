@@ -15,5 +15,17 @@
 ### LottoCount 역할
 - 구매 금액에 해당하는 로또 개수를 의미
 - 수동 로또 개수를 추가로 받아 generateLottoContainer 는 수동 로또 개수를 제외한 수의 로또를 생성
+### LottoCount 리팩터링
+- purchasedAmount 필드는 getWinningRate 에서만 사용
+- purchasedAmount 필드를 분리
+  - getWinningRate 메소드 가져감
+  - 의존 관계 변경
+    - LottoCount -> LottoPurchaseManager 로 이름 변경
+    - LottoCount 신규 생성
+  - LottoGameParameter 역할
+    - PurchaseAmount 와 lottoPrice 에 해당하는 LottoCount 생성
+    - autoLottoCount, manualLottoCount 관리
+- generateAutoLottoContainer 메소드 LottoGame 으로 이동
+- LottoGame 에서 autoLottoCount, manualLottoCount 관리
 ### LottoGame 역할
 - 수동 로또 입력을 받아 LottoContainer 에 추가

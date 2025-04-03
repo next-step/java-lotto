@@ -19,12 +19,13 @@ class LottoGameResultTest {
     @DisplayName("구매 금액에 해당하는 갯수의 로또 발급")
     @CsvSource(value = {"1000, 1000, 1", "14000, 2000, 7", "5000, 5000, 1"})
     @ParameterizedTest
-    void createLotto(int purchaseAmount, int lottoPrice, int expected) {
+    void createLotto(int inputAmount, int lottoPrice, int expected) {
         // given
-        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice, 0);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(inputAmount);
+        LottoPurchaseManager lottoPurchaseManager = new LottoPurchaseManager(purchaseAmount, lottoPrice, 0);
 
         // when
-        LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
+        LottoGame lottoGame = new LottoGame(lottoPurchaseManager, LOTTO_RULE);
         LottoGameResult lottoGameResult = lottoGame.play(WINNING_NUMBERS, BONUS_NUMBER);
 
         // then
@@ -34,11 +35,11 @@ class LottoGameResultTest {
     @DisplayName("로또 결과 반환")
     @Test
     void playLotto() {
-        int purchaseAmount = 10000;
+        PurchaseAmount purchaseAmount = new PurchaseAmount(10000);
         int lottoPrice = 1000;
-        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice, 0);
+        LottoPurchaseManager lottoPurchaseManager = new LottoPurchaseManager(purchaseAmount, lottoPrice, 0);
 
-        LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
+        LottoGame lottoGame = new LottoGame(lottoPurchaseManager, LOTTO_RULE);
         LottoGameResult result = lottoGame.play(WINNING_NUMBERS, BONUS_NUMBER);
 
         int actual = 0;
@@ -51,11 +52,11 @@ class LottoGameResultTest {
     @DisplayName("당첨금 계산")
     @Test
     void calculateWinningAmountTest() {
-        int purchaseAmount = 10000;
+        PurchaseAmount purchaseAmount = new PurchaseAmount(10000);
         int lottoPrice = 1000;
-        LottoCount lottoCount = new LottoCount(purchaseAmount, lottoPrice, 0);
+        LottoPurchaseManager lottoPurchaseManager = new LottoPurchaseManager(purchaseAmount, lottoPrice, 0);
 
-        LottoGame lottoGame = new LottoGame(lottoCount, LOTTO_RULE);
+        LottoGame lottoGame = new LottoGame(lottoPurchaseManager, LOTTO_RULE);
         LottoGameResult result = lottoGame.play(WINNING_NUMBERS, BONUS_NUMBER);
 
         long actual = result.getWinningsSum();
