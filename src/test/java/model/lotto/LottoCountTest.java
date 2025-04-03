@@ -18,6 +18,6 @@ class LottoCountTest {
     @DisplayName("금액/1000한 횟수에서 수동 로또를 빼면 자동 로또 개수가 된다.")
     void getAutoCount() {
         LottoCount lottoCount = new LottoCount(2000, 1);
-        assertEquals(lottoCount.getAutoCount(), 1);
+        assertEquals(lottoCount.getAutoLottoCount(), 1);
     }
 }

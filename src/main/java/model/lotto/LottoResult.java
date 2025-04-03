@@ -1,7 +1,6 @@
 package model.lotto;
 
 import java.util.EnumMap;
-import java.util.stream.Collectors;
 
 public class LottoResult {
     private final EnumMap<Rank, Integer> totalRank;
@@ -26,14 +25,7 @@ public class LottoResult {
     }
 
     public static LottoResult of(WinningLotto winningLotto, Lottos paidLottoList, Price payAmount) {
-        EnumMap<Rank, Integer> totalRank = paidLottoList.matchstream()
-                .map(paidLotto -> paidLotto.countWinningNumbers(winningLotto))
-                .collect(Collectors.toMap(
-                        rank -> rank,
-                        rank -> 1,
-                        Integer::sum,
-                        () -> new EnumMap<>(Rank.class)
-                ));
+        EnumMap<Rank, Integer> totalRank = paidLottoList.countWinningNumbers(winningLotto);
         return new LottoResult(totalRank, payAmount);
     }
 }

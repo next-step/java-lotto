@@ -1,16 +1,13 @@
 package model;
 
 import generator.RandomNumberGenerator;
-import model.lotto.LottoCount;
 import model.lotto.LottoShop;
 import model.lotto.Price;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoShopTest {
     private final RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
@@ -19,7 +16,7 @@ class LottoShopTest {
     void generateLotto() {
         Price price = new Price(14000);
         LottoShop lottoShop = new LottoShop(randomNumberGenerator);
-        assertThat(lottoShop.generateLotto(price)).hasSize(14);
+        assertEquals(lottoShop.generateLotto(price).getTotalLottoCounts(), 14);
     }
 
     @Test
@@ -27,7 +24,8 @@ class LottoShopTest {
     public void generateLottoException() {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
         LottoShop lottoShop = new LottoShop(randomNumberGenerator);
-        assertThatThrownBy(() -> lottoShop.generateLotto(new LottoCount(100, 1), new ArrayList<>()))
+        Price price = new Price(100);
+        assertThatThrownBy(() -> lottoShop.generateLotto(price))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

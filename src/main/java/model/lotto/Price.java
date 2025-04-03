@@ -20,6 +20,6 @@ public class Price {
     }
 
     public double getPercentOf(int value) {
-        return (double) this.price / value;
+        return (double) value / this.price;
     }
 }
