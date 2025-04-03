@@ -1,11 +1,10 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.WinningNumbers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);
@@ -27,7 +26,7 @@ public class InputView {
         List<Set<LottoNumber>> numberSets = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {
             String manualNumbersInput = scanner.nextLine();
-            Set<LottoNumber> numberSet = Parser.parseNumberSet(manualNumbersInput);
+            Set<LottoNumber> numberSet = parseNumberSet(manualNumbersInput);
             numberSets.add(numberSet);
         }
 
@@ -43,6 +42,20 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = scanner.nextInt();
         return new LottoNumber(bonusNumber);
+    }
+
+    public WinningNumbers parseWinningNumbers(String input, LottoNumber bonusNumber) {
+        return new WinningNumbers(parseNumberSet(input), bonusNumber);
+    }
+
+    public Set<LottoNumber> parseNumberSet(String input) {
+        String[] tokens = input.split(",");
+
+        return Arrays.stream(tokens)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
 

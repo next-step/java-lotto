@@ -38,7 +38,7 @@ public class LottoController {
 
         String winningNumbersInput = inputview.readWinningNumbers();
         LottoNumber bonusNumber = inputview.readBonusNumber();
-        WinningNumbers winningNumbers = Parser.parseWinningNumbers(winningNumbersInput, bonusNumber);
+        WinningNumbers winningNumbers = inputview.parseWinningNumbers(winningNumbersInput, bonusNumber);
 
         LottoResult lottoResult = lottoResultsService.calculateResult(mergedTickets, winningNumbers, purchaseAmount);
         resultView.printLottoResult(lottoResult);
