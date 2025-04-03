@@ -29,7 +29,7 @@ public class LottoController {
         int purchaseAmount = inputview.readPurchaseAmount();
         int manualCount = inputview.readNumberOfManuallyPickedTickets();
         int autoCount = this.calculateAutoCount(purchaseAmount, manualCount);
-        List<Set<Integer>> numberSets = inputview.readManualNumberSets(manualCount);
+        List<Set<LottoNumber>> numberSets = inputview.readManualNumberSets(manualCount);
 
         LottoTickets autoTickets = lottoMachine.issueAuto(autoCount);
         LottoTickets manualTickets = lottoMachine.issueManual(numberSets);
@@ -37,15 +37,12 @@ public class LottoController {
         resultView.printLottoTickets(mergedTickets, manualTickets.size());
 
         String winningNumbersInput = inputview.readWinningNumbers();
-        int bonusNumber = inputview.readBonusNumber();
+        LottoNumber bonusNumber = inputview.readBonusNumber();
         WinningNumbers winningNumbers = Parser.parseWinningNumbers(winningNumbersInput, bonusNumber);
 
         LottoResult lottoResult = lottoResultsService.calculateResult(mergedTickets, winningNumbers, purchaseAmount);
         resultView.printLottoResult(lottoResult);
     }
-
-
-
 
     private int calculateAutoCount(int purchaseAmount, int numberPickedTickets) {
 

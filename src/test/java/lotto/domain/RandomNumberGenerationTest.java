@@ -16,7 +16,7 @@ class RandomNumberGenerationTest {
         RandomNumberGeneration randomNumberGeneration = new RandomNumberGeneration();
 
         //when
-        Set<Integer> numberSet = new HashSet<>(randomNumberGeneration.generateNumbers());
+        Set<LottoNumber> numberSet = new HashSet<>(randomNumberGeneration.generateNumbers());
 
         //then
         Assertions.assertThat(numberSet).hasSize(6);

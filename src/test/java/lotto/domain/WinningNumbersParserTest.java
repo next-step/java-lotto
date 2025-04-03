@@ -14,7 +14,7 @@ class WinningNumbersParserTest {
     @DisplayName("쉼표로 구분된 문자열을 WinningNumbers로 변환한다")
     void parseValidInput() {
         String input = "1, 2, 3, 4, 5, 6";
-        int bonusNumber = 7;
+        LottoNumber bonusNumber = new LottoNumber(7);
         WinningNumbers winningNumbers = Parser.parseWinningNumbers(input, bonusNumber);
 
         assertThat(winningNumbers.size()).isEqualTo(6);
@@ -26,7 +26,7 @@ class WinningNumbersParserTest {
         String input = "1,2,3,4,5"; // 5개만
         int bonusNumber = 7;
 
-        assertThatThrownBy(() -> Parser.parseWinningNumbers(input, 7))
+        assertThatThrownBy(() -> Parser.parseWinningNumbers(input, new LottoNumber(7)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("당첨 번호는 6개여야 합니다");
     }

@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
 import lotto.domain.RandomNumberGeneration;
 import org.junit.jupiter.api.DisplayName;
@@ -8,8 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -34,8 +37,8 @@ class LottoTest {
     void manualIssueTest() {
         //given
         LottoMachine lottoMachine = new LottoMachine(new RandomNumberGeneration());
-        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
-        List<Set<Integer>> numbersSets = List.of(numbers);
+        Set<LottoNumber> numbers = toLottoNumbers(1, 2, 3, 4, 5, 6);
+        List<Set<LottoNumber>> numbersSets = List.of(numbers);
 
         //when`
         LottoTickets tickets = lottoMachine.issueManual(numbersSets);
@@ -56,5 +59,11 @@ class LottoTest {
                 .isThrownBy(() -> lottoMachine.issueAuto(purchaseAmount))
                 .withMessageContaining("유효하지 않는 구입 장수입니다: ");
 
+    }
+
+    private static Set<LottoNumber> toLottoNumbers(Integer... numbers) {
+        return Arrays.stream(numbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 }

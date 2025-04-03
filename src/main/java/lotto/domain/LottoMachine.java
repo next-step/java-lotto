@@ -24,7 +24,7 @@ public class LottoMachine {
                 .collect(Collectors.toList()));
     }
 
-    public LottoTickets issueManual(List<Set<Integer>> numberSets) {
+    public LottoTickets issueManual(List<Set<LottoNumber>> numberSets) {
 
         List<LottoTicket> tickets = numberSets.stream()
                 .map(LottoTicket::new)
