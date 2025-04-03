@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class LottoTicketMachine {
 
-    private final List<Integer> availableNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toUnmodifiableList());
+    private static final List<Integer> AVAILABLE_NUMBERS = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toUnmodifiableList());
     private final RandomPicker randomPicker;
 
     public LottoTicketMachine(Random random) {
@@ -15,7 +15,7 @@ public class LottoTicketMachine {
     }
 
     public LottoGame issue() {
-        var lottoNumbers = randomPicker.pickNumbers(LottoNumbers.DIGIT, availableNumbers);
+        var lottoNumbers = randomPicker.pickNumbers(LottoNumbers.DIGIT, AVAILABLE_NUMBERS);
         return new LottoGame(lottoNumbers);
     }
 }
