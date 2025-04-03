@@ -18,7 +18,7 @@ public class Seller {
         int lottoCount = money / PRICE;
 
         return IntStream.range(0, lottoCount)
-                .mapToObj(it -> lottoTicketMachine.issue())
+                .mapToObj(it -> lottoTicketMachine.issueRandom())
                 .collect(Collectors.toUnmodifiableList());
     }
 }
