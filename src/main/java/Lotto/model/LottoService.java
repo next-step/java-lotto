@@ -5,6 +5,7 @@ import Lotto.model.NumberExtractor.NumberExtractor;
 import java.util.*;
 
 public class LottoService {
+    private static final int NUMBER_SIZE = 6;
     private static final int SALES_PRICE = 1000;
     private final NumberExtractor extractor;
     private final int purchaseAmount;
@@ -48,7 +49,7 @@ public class LottoService {
     }
 
     private void validateLottoNumber(List<Integer> lottoNumber) {
-        if (lottoNumber.size() != 6) {
+        if (lottoNumber.size() != NUMBER_SIZE) {
             throw new IllegalArgumentException("The count of Lotto number exceed 6.");
         }
 
