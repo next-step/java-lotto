@@ -24,8 +24,8 @@ public enum Prize {
             .findFirst()
             .orElse(NONE);
 
-        if (prize == THIRD && isBonus) {
-            prize = SECOND;
+        if (prize == SECOND && !isBonus) {
+            prize = THIRD;
         }
 
         return prize;
