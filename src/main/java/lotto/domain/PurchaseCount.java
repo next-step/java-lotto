@@ -14,6 +14,10 @@ public class PurchaseCount {
         this.value = value;
     }
 
+    public boolean isLessThan(int other) {
+        return this.value < other;
+    }
+
     public PurchaseCount decrease() {
         return new PurchaseCount(this.value - 1);
     }

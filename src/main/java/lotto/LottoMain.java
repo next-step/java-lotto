@@ -14,10 +14,11 @@ import lotto.view.OutputView;
 public class LottoMain {
     public static void main(String[] args) {
         int inputValue = InputView.inputMoney();
-        List<String> manualLotto = InputView.inputManualLotto();
+        int manualLottoCount = InputView.inputManualLotto();
+        Seller seller = new Seller(inputValue, manualLottoCount);
 
-        Seller seller = new Seller(inputValue, manualLotto);
-        List<Lotto> lottos = seller.generateLottos();
+        seller.generateManual(InputView.inputLotto(manualLottoCount));
+        List<Lotto> lottos = seller.generateAuto();
         OutputView.printLottos(lottos);
 
         String inputWinLotto = InputView.inputWinLotto();
