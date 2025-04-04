@@ -42,6 +42,9 @@ public class LottoMachineTest {
         int money = 3000;
         Lottos lottos = machine.buy(money, manualLottoNumberInputs);
 
+        assertThat(lottos.manualLottoCount()).isEqualTo(2);
+        assertThat(lottos.autoLottoCount()).isEqualTo(1);
+
         assertThat(lottos.size()).isEqualTo(money / PRICE_OF_LOTTO);
         assertThat(lottos.get(0)).isEqualTo(LottoNumbers.toLottoNumber(userInput1));
         assertThat(lottos.get(1)).isEqualTo(LottoNumbers.toLottoNumber(userInput2));
