@@ -9,7 +9,7 @@ class WinningLottoTest {
     @Test
     void createTest() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNo bonusNo = new LottoNo(7);
+        LottoNumber bonusNo = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNo);
 
         assertThat(winningLotto).isNotNull();
@@ -19,7 +19,7 @@ class WinningLottoTest {
     void calculateRankTest() {
         // given
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNo bonusNo = new LottoNo(7);
+        LottoNumber bonusNo = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNo);
 
         // when

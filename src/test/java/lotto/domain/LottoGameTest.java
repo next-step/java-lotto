@@ -20,7 +20,7 @@ class LottoGameTest {
         // given
         List<Lotto> userBuyLotto = Collections.singletonList(new FakeStrategy(List.of(1, 2, 3, 4, 5, 6)).generate());
         Lotto winLotto = new FakeStrategy(List.of(6, 5, 4, 3, 2, 16)).generate();
-        LottoNo bonusNumber = new LottoNo(14);
+        LottoNumber bonusNumber = new LottoNumber(14);
 
         // when
         LottoGame lottoGame = new LottoGame(userBuyLotto, new WinningLotto(winLotto, bonusNumber));

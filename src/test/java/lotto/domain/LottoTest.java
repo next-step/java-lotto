@@ -31,7 +31,7 @@ class LottoTest {
     void isMatchTest() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(lotto.isMatch(new LottoNo(1))).isTrue();
+        assertThat(lotto.isMatch(new LottoNumber(1))).isTrue();
     }
 
     @DisplayName("로또 번호 목록을 가져올 수 있다.")

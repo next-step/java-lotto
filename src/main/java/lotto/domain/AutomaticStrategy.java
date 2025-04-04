@@ -14,12 +14,12 @@ public class AutomaticStrategy implements GeneratorStrategy {
 
     @Override
     public Lotto generate() {
-        List<LottoNo> lottoNos = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = START_NUM; i <= END_NUM; i++) {
-            lottoNos.add(new LottoNo(i));
+            lottoNumbers.add(new LottoNumber(i));
         }
-        Collections.shuffle(lottoNos);
+        Collections.shuffle(lottoNumbers);
 
-        return new Lotto(new HashSet<>(lottoNos.subList(START_LEN, END_LEN)));
+        return new Lotto(new HashSet<>(lottoNumbers.subList(START_LEN, END_LEN)));
     }
 }

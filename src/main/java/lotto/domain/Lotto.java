@@ -9,37 +9,37 @@ import java.util.Set;
 public class Lotto {
     private static final int LOTTO_NUMBER_LENGTH = 6;
 
-    private final Set<LottoNo> lottoNos;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
-        this(new HashSet<>(lottoNumbers.stream().map(LottoNo::new).collect(toSet())));
+        this(new HashSet<>(lottoNumbers.stream().map(LottoNumber::new).collect(toSet())));
     }
 
-    public Lotto(Set<LottoNo> lottoNos) {
-        checkValid(lottoNos);
-        this.lottoNos = lottoNos;
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        checkValid(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public int matchCount(Lotto lotto) {
         int count = 0;
 
-        for (LottoNo winNumber : lotto.lottoNos) {
+        for (LottoNumber winNumber : lotto.lottoNumbers) {
             count += isMatch(winNumber) ? 1 : 0;
         }
 
         return count;
     }
 
-    public boolean isMatch(LottoNo lottoNo) {
-        return this.lottoNos.contains(lottoNo);
+    public boolean isMatch(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public Set<LottoNo> getLottoNumbers() {
-        return lottoNos;
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
-    private void checkValid(Set<LottoNo> lottoNos) {
-        if (lottoNos.size() != LOTTO_NUMBER_LENGTH) {
+    private void checkValid(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
             throw new IllegalArgumentException("lotto size is not 6");
         }
     }

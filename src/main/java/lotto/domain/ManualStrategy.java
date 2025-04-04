@@ -14,14 +14,14 @@ public class ManualStrategy implements GeneratorStrategy {
 
     @Override
     public Lotto generate() {
-        Set<LottoNo> lottoNos = new HashSet<>();
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         String[] split = input.split(REGEX);
 
         for (String number : split) {
-            lottoNos.add(new LottoNo(Integer.parseInt(number.trim())));
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
         }
 
-        return new Lotto(new HashSet<>(lottoNos));
+        return new Lotto(new HashSet<>(lottoNumbers));
     }
 
 }
