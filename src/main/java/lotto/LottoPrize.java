@@ -17,12 +17,21 @@ public enum LottoPrize {
         this.prize = prize;
     }
 
-    public static int getPrize(int matchCount) {
+    public static LottoPrize getPrize(int matchCount) {
         for (LottoPrize prize : values()) {
             if (prize.matchCount == matchCount) {
-                return prize.prize;
+                return prize;
             }
         }
         throw new IllegalArgumentException("Invalid match count: " + matchCount);
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    @Override
+    public String toString() {
+        return matchCount + "개 일치 (" + prize + "원)";
     }
 }

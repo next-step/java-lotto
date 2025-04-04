@@ -8,7 +8,6 @@ import java.util.Set;
 
 public class LottoTicketMachine {
 
-    private static final int LOTTO_PRICE = 1000;
     private static final Random random = new Random();
 
     public static LottoTicket[] purchase(int amount) {
@@ -20,13 +19,13 @@ public class LottoTicketMachine {
         if (amount <= 0) {
             throw new IllegalArgumentException("Amount must be greater than 0");
         }
-        if (amount % LOTTO_PRICE != 0) {
+        if (amount % LottoTicket.PRICE_PER_TICKET != 0) {
             throw new IllegalArgumentException("Amount must be a multiple of 1000");
         }
     }
 
     private static int calculateTicketCount(int amount) {
-        return amount / LOTTO_PRICE;
+        return amount / LottoTicket.PRICE_PER_TICKET;
     }
 
     private static LottoTicket[] generateTickets(int ticketCount) {

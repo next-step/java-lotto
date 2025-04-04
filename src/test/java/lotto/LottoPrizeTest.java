@@ -11,7 +11,7 @@ public class LottoPrizeTest {
     @Test
     @DisplayName("일치하는 번호 개수에 따라 상금을 반환한다.")
     void shouldReturnCorrectPrizeBasedOnMatchCount() {
-        assertThat(LottoPrize.getPrize(6)).isEqualTo(2000000000);
+        assertThat(LottoPrize.getPrize(6)).isEqualTo(LottoPrize.SIX_MATCH);
     }
 
     @Test

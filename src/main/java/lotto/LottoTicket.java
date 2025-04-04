@@ -7,6 +7,7 @@ import java.util.Set;
 public class LottoTicket {
 
     public static final int MAX_LOTTO_NUM = 45;
+    public static final int PRICE_PER_TICKET = 1000;
     private static final int LOTTO_NUM_COUNT = 6;
     private static final int MIN_LOTTO_NUM = 1;
     private final Set<Integer> numbers;
@@ -46,5 +47,10 @@ public class LottoTicket {
             }
         }
         return count;
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
