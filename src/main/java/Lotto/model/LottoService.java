@@ -6,28 +6,17 @@ import java.util.*;
 
 public class LottoService {
     private static final int NUMBER_SIZE = 6;
-    private static final int SALES_PRICE = 1000;
+    static final int SALES_PRICE = 1000;
     private final NumberExtractor extractor;
-    private final int purchaseAmount;
+    private final PurchaseAmount purchaseAmount;
     private final int lottoNum;
     private final Map<LottoRank, Integer> winningCountMap = new EnumMap<>(LottoRank.class);
     private Lottos lottos;
 
     public LottoService(int purchaseAmount, NumberExtractor extractor) {
-        this.validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
+        this.purchaseAmount = new PurchaseAmount(purchaseAmount);
         this.lottoNum = purchaseAmount / SALES_PRICE;
         this.extractor = extractor;
-    }
-
-    private void validatePurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount < SALES_PRICE) {
-            throw new IllegalArgumentException("The minimum of purchase price is 1,000 won.");
-        }
-
-        if (purchaseAmount % SALES_PRICE != 0) {
-            throw new IllegalArgumentException("The purchase price is in units of 1,000 won.");
-        }
     }
 
     public void draw() {
@@ -85,6 +74,6 @@ public class LottoService {
             sum += entry.getKey().getWinningMoney() * entry.getValue();
         }
 
-        return sum / purchaseAmount;
+        return sum / purchaseAmount.value();
     }
 }

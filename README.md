@@ -40,4 +40,5 @@
   - [x] SALES_PRICE 상수 이용
   - [x] List Set 변환으로 개수 체크
   - [x] Enum valueOf stream 활용
+  - [x] purchaseAmount 원시객체로 포장
   - [] LottoNumber에 validation 책임 위임
