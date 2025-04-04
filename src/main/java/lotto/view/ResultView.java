@@ -1,19 +1,19 @@
 package lotto.view;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoWinningRecord;
+import lotto.domain.Lottos;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
 
-    public static void showPurchasedLottos(List<LottoNumbers> lottoNumbers) {
-        System.out.println(lottoNumbers.size() + "개를 구매했습니다.");
+    public static void showPurchasedLottos(Lottos lottos) {
+        System.out.println("수동으로 " + lottos.manualLottoCount() + "장, "
+                + "자동으로 " + lottos.autoLottoCount() + "개를 구매했습니다.");
 
-        lottoNumbers.forEach(
+        lottos.lottoNumbers().forEach(
                 number -> {
                     System.out.println( number.numbers() );
                 }

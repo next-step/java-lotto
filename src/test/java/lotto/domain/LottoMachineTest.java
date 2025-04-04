@@ -1,16 +1,14 @@
 package lotto.domain;
 
 import org.assertj.core.api.Assertions;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static lotto.domain.LottoMachine.PRICE_OF_LOTTO;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoMachineTest {
 
@@ -19,8 +17,8 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
 
         int money = 3000;
-        List<LottoNumbers> lottos = machine.buy(money);
-        Assertions.assertThat(lottos).hasSize(money / PRICE_OF_LOTTO);
+        Lottos lottos = machine.buy(money);
+        Assertions.assertThat(lottos.size()).isEqualTo(money / PRICE_OF_LOTTO);
     }
 
     @Test
@@ -41,10 +39,10 @@ public class LottoMachineTest {
         manualLottoNumberInputs.add(userInput1);
         manualLottoNumberInputs.add(userInput2);
 
-        int money = 10000;
-        List<LottoNumbers> lottos = machine.buy(money, manualLottoNumberInputs);
+        int money = 3000;
+        Lottos lottos = machine.buy(money, manualLottoNumberInputs);
 
-        assertThat(lottos).hasSize(10);
+        assertThat(lottos.size()).isEqualTo(money / PRICE_OF_LOTTO);
         assertThat(lottos.get(0)).isEqualTo(LottoNumbers.toLottoNumber(userInput1));
         assertThat(lottos.get(1)).isEqualTo(LottoNumbers.toLottoNumber(userInput2));
     }

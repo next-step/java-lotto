@@ -8,20 +8,33 @@ public class LottoMachine {
 
     public static final int PRICE_OF_LOTTO = 1_000;
 
-    public List<LottoNumbers> buy (long money) {
+    public Lottos buy (long money) {
         return this.buy(money, new ArrayList<>());
     }
 
-    public List<LottoNumbers> buy (long money, List<String> manualLottoNumberInputs) {
+    public Lottos buy (long money, List<String> manualLottoNumberInputs) {
         validate(money, manualLottoNumberInputs);
 
         List<LottoNumbers> lottos = new ArrayList<>();
-
+        lottos.addAll(generateManualLottos(manualLottoNumberInputs));
         money = money - (PRICE_OF_LOTTO * manualLottoNumberInputs.size());
-        for(String manualLottoNumberInput : manualLottoNumberInputs) {
+        lottos.addAll(generateAutoLottos(money));
+
+        int manualLottoCount = manualLottoNumberInputs.size();
+        int autoLottoCount = numberOfLottoTickets(money);
+        return new Lottos(lottos, manualLottoCount, autoLottoCount);
+    }
+
+    private List<LottoNumbers> generateManualLottos(List<String> manualLottoNumberInputs) {
+        List<LottoNumbers> lottos = new ArrayList<>();
+        for (String manualLottoNumberInput : manualLottoNumberInputs) {
             lottos.add(LottoNumbers.toLottoNumber(manualLottoNumberInput));
         }
+        return lottos;
+    }
 
+    private List<LottoNumbers> generateAutoLottos(long money) {
+        List<LottoNumbers> lottos = new ArrayList<>();
         IntStream.range(0, numberOfLottoTickets(money))
                 .forEach(i -> lottos.add(new LottoNumbers()));
         return lottos;
