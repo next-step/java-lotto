@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.strategy.AutoLottoStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,5 +52,10 @@ public class LottoTicketTest {
                 .hasMessageContaining("로또 번호는 중복되지 않은 6개의 숫자여야 합니다.");
     }
 
+    @Test
+    @DisplayName("문자열 입력으로 생성된 로또 티켓이 예상 번호와 일치한다")
+    void LottoTicket(){
+        assertThat(new LottoTicket("1, 2, 3, 4, 5, 6").getLottoNumbers()).isEqualTo(List.of(1,2,3,4,5,6));
+    }
 
 }
