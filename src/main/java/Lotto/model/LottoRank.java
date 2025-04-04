@@ -1,5 +1,7 @@
 package Lotto.model;
 
+import java.util.Arrays;
+
 public enum LottoRank {
     MISS(0, 0),
     FIFTH(3, 5_000),
@@ -26,19 +28,9 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int countOfMatch) {
-        if (countOfMatch == 6) {
-            return FIRST;
-        }
-        if (countOfMatch == 5) {
-            return THIRD;
-        }
-        if (countOfMatch == 4) {
-            return FOURTH;
-        }
-        if (countOfMatch == 3) {
-            return FIFTH;
-        }
-
-        return MISS;
+        return Arrays.stream(values())
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(MISS);
     }
 }
