@@ -14,8 +14,8 @@ public class OutputView {
         System.out.println("result = " + result);
     }
 
-    public static void showLottoQuantity(int lottoQuantity) {
-        System.out.println(lottoQuantity + "개를 구매했습니다.");
+    public static void showTotalLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println("\n수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
     }
 
     public static void showLottoNumbers(Set<Integer> numbers) {
@@ -41,3 +41,4 @@ public class OutputView {
         lottos.forEach(lotto -> showLottoNumbers(lotto.getLottoNumbers()));
     }
 }
+

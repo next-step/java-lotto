@@ -15,17 +15,15 @@ public class LottoApplication {
     public static void main(String[] args) {
 
 
-        Integer lottoPurchaseAmount = InputView.showLottoPurchaseAmountInput();
-
-        Integer lottoQuantity = Operator.DIVIDE.formula.apply(lottoPurchaseAmount, LOTTO_PRICE);
-        OutputView.showLottoQuantity(lottoQuantity);
+        int lottoPurchaseAmount = InputView.showLottoPurchaseAmountInput();
+        int totalLottoCount = Operator.DIVIDE.formula.apply(lottoPurchaseAmount, LOTTO_PRICE);
 
         int manualLottoCount = InputView.showManualLottoCountInput();
-
         List<Lotto> lottos = new ArrayList<>(InputView.showManualLottoNumbersInput(manualLottoCount));
 
-        int automaticLottoCount = lottoQuantity - manualLottoCount;
-        lottos.addAll(LottoNumberGenerator.generateLottoNumbers(automaticLottoCount));
+        int autoLottoCount = totalLottoCount - manualLottoCount;
+        lottos.addAll(LottoNumberGenerator.generateLottoNumbers(autoLottoCount));
+        OutputView.showTotalLottoCount(manualLottoCount, autoLottoCount);
         OutputView.showGeneratedLottoNumber(lottos);
 
         List<Integer> winningLotto = LottoNumbersParser.parse(InputView.showWinningLottoNumbersInput());

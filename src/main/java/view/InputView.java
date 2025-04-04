@@ -14,7 +14,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static Integer showLottoPurchaseAmountInput() {
+    public static int showLottoPurchaseAmountInput() {
         System.out.println("구입금액을 입력해 주세요.");
         return readInt();
     }
@@ -24,12 +24,12 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static Integer showLottoBonusNumberInput() {
+    public static int showLottoBonusNumberInput() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return readInt();
     }
 
-    public static Integer showManualLottoCountInput() {
+    public static int showManualLottoCountInput() {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         return readInt();
     }
@@ -44,7 +44,7 @@ public class InputView {
         return manualLottoNumbers;
     }
 
-    private static Integer readInt() {
+    private static int readInt() {
         String input = scanner.nextLine();
         try {
             return Integer.parseInt(input);
