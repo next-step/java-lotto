@@ -1,12 +1,11 @@
 package com.nextstep.camp.lotto.domain.entity;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 import java.util.stream.Stream;
 
-import com.nextstep.camp.lotto.domain.strategy.LottoFixedPicker;
 import com.nextstep.camp.lotto.domain.type.MatchResult;
-import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
+import com.nextstep.camp.lotto.domain.vo.LottoAmount;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -14,65 +13,101 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoTicketsTest {
 
-    static Stream<TestCase> provideMatchResults() {
+    static Stream<TestCase> provideStatistics() {
         return Stream.of(
             new TestCase(
-                List.of(
-                    List.of(1, 2, 3, 4, 5, 6),
-                    List.of(1, 2, 3, 4, 5, 7),
-                    List.of(10, 20, 30, 40, 41, 42)
+                List.of(MatchResult.THREE, MatchResult.THREE, MatchResult.FOUR, MatchResult.SIX, MatchResult.NONE),
+                LottoAmount.of(5000),
+                Map.of(
+                    MatchResult.THREE, 2,
+                    MatchResult.FOUR, 1,
+                    MatchResult.FIVE, 0,
+                    MatchResult.SIX, 1
                 ),
-                List.of(1, 2, 3, 4, 5, 6),
-                List.of(MatchResult.SIX, MatchResult.FIVE, MatchResult.NONE)
+                2 * 5000 + 50_000 + 2_000_000_000
+            ),
+            new TestCase(
+                List.of(MatchResult.NONE, MatchResult.NONE, MatchResult.NONE),
+                LottoAmount.of(3000),
+                Map.of(
+                    MatchResult.THREE, 0,
+                    MatchResult.FOUR, 0,
+                    MatchResult.FIVE, 0,
+                    MatchResult.SIX, 0
+                ),
+                0
+            ),
+            new TestCase(
+                List.of(MatchResult.FIVE_BONUS, MatchResult.FIVE),
+                LottoAmount.of(2000),
+                Map.of(
+                    MatchResult.FIVE, 1,
+                    MatchResult.FIVE_BONUS, 1,
+                    MatchResult.SIX, 0
+                ),
+                1_500_000 + 30_000_000
+            ),
+            new TestCase(
+                List.of(MatchResult.THREE, MatchResult.FOUR, MatchResult.FIVE, MatchResult.FIVE_BONUS, MatchResult.SIX, MatchResult.NONE),
+                LottoAmount.of(6000),
+                Map.of(
+                    MatchResult.THREE, 1,
+                    MatchResult.FOUR, 1,
+                    MatchResult.FIVE, 1,
+                    MatchResult.FIVE_BONUS, 1,
+                    MatchResult.SIX, 1
+                ),
+                5_000 + 50_000 + 1_500_000 + 30_000_000 + 2_000_000_000
             )
         );
     }
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("provideMatchResults")
-    void matchAll_returns_expected_results(TestCase testCase) {
-        List<LottoTicket> tickets = testCase.getLottoNumbers().stream()
-            .map(LottoTicket::of)
-            .collect(Collectors.toList());
+    @MethodSource("provideStatistics")
+    void statistics_calculates_correctly(TestCase testCase) {
+        WinningStatistics stats = WinningStatistics.of(testCase.getResults(), testCase.getSpent());
 
-        List<LottoTicket> lottoTicketList = LottoFixedPicker.of(tickets).pick();
-        LottoTickets lottoTickets = LottoTickets.of(lottoTicketList);
-        WinningNumbers winning = WinningNumbers.of(testCase.getWinningNumbers());
+        Map<MatchResult, Integer> counts = stats.getResultCounts();
+        for (MatchResult result : MatchResult.getValidValues()) {
+            int expected = testCase.getExpectedCounts().getOrDefault(result, 0);
+            assertEquals(expected, counts.getOrDefault(result, 0), result.name());
+        }
 
-        List<MatchResult> actual = lottoTickets.matchAll(winning);
-        assertEquals(testCase.getExpectedResults(), actual);
+        assertEquals(testCase.getExpectedPrize(), stats.totalPrize());
     }
 
     private static class TestCase {
-        private final List<List<Integer>> lottoNumbers;
-        private final List<Integer> winningNumbers;
-        private final List<MatchResult> expectedResults;
+        private final List<MatchResult> results;
+        private final LottoAmount spent;
+        private final Map<MatchResult, Integer> expectedCounts;
+        private final int expectedPrize;
 
-        private TestCase(List<List<Integer>> lottoNumbers, List<Integer> winningNumbers, List<MatchResult> expectedResults) {
-            this.lottoNumbers = lottoNumbers;
-            this.winningNumbers = winningNumbers;
-            this.expectedResults = expectedResults;
+        private TestCase(List<MatchResult> results, LottoAmount spent, Map<MatchResult, Integer> expectedCounts, int expectedPrize) {
+            this.results = results;
+            this.spent = spent;
+            this.expectedCounts = expectedCounts;
+            this.expectedPrize = expectedPrize;
         }
 
-        public List<List<Integer>> getLottoNumbers() {
-            return lottoNumbers;
+        public List<MatchResult> getResults() {
+            return results;
         }
 
-        public List<Integer> getWinningNumbers() {
-            return winningNumbers;
+        public LottoAmount getSpent() {
+            return spent;
         }
 
-        public List<MatchResult> getExpectedResults() {
-            return expectedResults;
+        public Map<MatchResult, Integer> getExpectedCounts() {
+            return expectedCounts;
+        }
+
+        public int getExpectedPrize() {
+            return expectedPrize;
         }
 
         @Override
         public String toString() {
-            return "TestCase{" +
-                "lottoNumbers=" + lottoNumbers +
-                ", winningNumbers=" + winningNumbers +
-                ", expectedResults=" + expectedResults +
-                '}';
+            return "Results=" + results + ", Spent=" + spent.getValue();
         }
     }
 }

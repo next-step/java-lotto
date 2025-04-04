@@ -30,8 +30,8 @@ class LottoNumbersTest {
 
     static Stream<List<Integer>> sizeInvalidNumbers() {
         return Stream.of(
-            List.of(1, 2, 3), // 너무 적음
-            List.of(1, 2, 3, 4, 5, 6, 7) // 너무 많음
+            List.of(1, 2, 3),
+            List.of(1, 2, 3, 4, 5, 6, 7)
         );
     }
 

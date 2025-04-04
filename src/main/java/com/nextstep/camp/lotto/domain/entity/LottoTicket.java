@@ -2,6 +2,7 @@ package com.nextstep.camp.lotto.domain.entity;
 
 import java.util.List;
 
+import com.nextstep.camp.lotto.domain.type.MatchResult;
 import com.nextstep.camp.lotto.domain.vo.LottoNumbers;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 
@@ -24,8 +25,10 @@ public class LottoTicket {
         return new LottoTicket(rawNumbers);
     }
 
-    public int countMatch(WinningNumbers winning) {
-        return lottoNumbers.countMatch(winning.getNumbers());
+    public MatchResult match(WinningNumbers winning) {
+        int matchCount = lottoNumbers.countMatch(winning.getNumbers());
+        boolean bonusMatch = lottoNumbers.contains(winning.getBonusNumber());
+        return MatchResult.of(matchCount, bonusMatch);
     }
 
     @Override

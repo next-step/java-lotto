@@ -35,7 +35,7 @@ public class LottoTickets {
 
     public List<MatchResult> matchAll(WinningNumbers winning) {
         return tickets.stream()
-                .map(ticket -> MatchResult.of(ticket.countMatch(winning)))
+                .map(ticket -> ticket.match(winning))
                 .collect(Collectors.toList());
     }
 

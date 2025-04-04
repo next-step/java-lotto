@@ -4,6 +4,7 @@ import java.util.List;
 
 public class WinningNumbers {
     private final LottoNumbers numbers;
+    private LottoNumber bonusNumber;
 
     private WinningNumbers(List<Integer> rawNumbers) {
         this.numbers = LottoNumbers.of(rawNumbers);
@@ -15,5 +16,14 @@ public class WinningNumbers {
 
     public LottoNumbers getNumbers() {
         return numbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
+    public WinningNumbers withBonusNumber(LottoNumber bonusNumber) {
+        this.bonusNumber = bonusNumber;
+        return this;
     }
 }

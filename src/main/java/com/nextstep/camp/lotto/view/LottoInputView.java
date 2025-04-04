@@ -1,6 +1,7 @@
 package com.nextstep.camp.lotto.view;
 
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
+import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 import com.nextstep.camp.lotto.view.component.*;
 import com.nextstep.camp.lotto.view.dto.LottoInputData;
 import com.nextstep.camp.lotto.view.strategy.*;
@@ -30,7 +31,11 @@ public class LottoInputView {
         this.lottoTicketsInput = LottoTicketsInput.create(inputStrategy);
         this.lottoTicketsInput.action();
 
-        this.winningNumbersInput.action();
+        WinningNumbers winningNumbers = this.winningNumbersInput.action();
+
+        BonusNumberInputStrategy bonusNumberInputStrategy = BonusNumberInputStrategy.ofSystemIn(winningNumbers);
+        BonusNumbersInput bonusNumbersInput = BonusNumbersInput.create(bonusNumberInputStrategy);
+        bonusNumbersInput.action();
     }
 
     public LottoInputData toInputData() {

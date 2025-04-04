@@ -16,21 +16,43 @@ class WinningStatisticsTest {
     static Stream<TestCase> provideStatistics() {
         return Stream.of(
             new TestCase(
-                List.of(
-                    MatchResult.THREE,
-                    MatchResult.THREE,
-                    MatchResult.FOUR,
-                    MatchResult.SIX,
-                    MatchResult.NONE
-                ),
+                List.of(MatchResult.THREE, MatchResult.THREE, MatchResult.FOUR, MatchResult.SIX, MatchResult.NONE),
                 LottoAmount.of(5000),
                 Map.of(
                     MatchResult.THREE, 2,
                     MatchResult.FOUR, 1,
                     MatchResult.FIVE, 0,
+                    MatchResult.FIVE_BONUS, 0,
                     MatchResult.SIX, 1
                 ),
                 2 * 5_000 + 50_000 + 2_000_000_000
+            ),
+            new TestCase(
+                List.of(MatchResult.NONE, MatchResult.NONE, MatchResult.NONE),
+                LottoAmount.of(3000),
+                Map.of(),
+                0
+            ),
+            new TestCase(
+                List.of(MatchResult.FIVE, MatchResult.FIVE_BONUS),
+                LottoAmount.of(2000),
+                Map.of(
+                    MatchResult.FIVE, 1,
+                    MatchResult.FIVE_BONUS, 1
+                ),
+                1_500_000 + 30_000_000
+            ),
+            new TestCase(
+                List.of(MatchResult.THREE, MatchResult.FOUR, MatchResult.FIVE, MatchResult.FIVE_BONUS, MatchResult.SIX, MatchResult.NONE),
+                LottoAmount.of(6000),
+                Map.of(
+                    MatchResult.THREE, 1,
+                    MatchResult.FOUR, 1,
+                    MatchResult.FIVE, 1,
+                    MatchResult.FIVE_BONUS, 1,
+                    MatchResult.SIX, 1
+                ),
+                5_000 + 50_000 + 1_500_000 + 30_000_000 + 2_000_000_000
             )
         );
     }
@@ -82,8 +104,7 @@ class WinningStatisticsTest {
         public String toString() {
             return "TestCase{" +
                 "results=" + results +
-                ", spent=" + spent +
-                ", expectedCounts=" + expectedCounts +
+                ", spent=" + spent.getValue() +
                 ", expectedPrize=" + expectedPrize +
                 '}';
         }
