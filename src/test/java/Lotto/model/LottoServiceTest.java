@@ -33,7 +33,7 @@ public class LottoServiceTest {
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         LottoService service = new LottoService(PURCHASE_AMOUNT, extractor);
         service.draw();
-        service.decideWinning(List.of(1, 2, 3, 7, 8, 9));
+        service.decideWinning(List.of(1, 2, 3, 7, 8, 9), 10);
         assertThat(service.winningCountMap()).isEqualTo(expected);
         assertThat(service.profitRate()).isEqualTo(5);
     }
@@ -62,7 +62,7 @@ public class LottoServiceTest {
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         LottoService service = new LottoService(PURCHASE_AMOUNT, extractor);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> service.decideWinning(List.of(1, 2, 3, 4, 5, 6, 7)))
+                .isThrownBy(() -> service.decideWinning(List.of(1, 2, 3, 4, 5, 6, 7), 10))
                 .withMessage("The count of Lotto number exceed 6.");
     }
 
@@ -72,7 +72,17 @@ public class LottoServiceTest {
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
         LottoService service = new LottoService(PURCHASE_AMOUNT, extractor);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> service.decideWinning(List.of(1, 2, 2, 4, 5, 6)))
+                .isThrownBy(() -> service.decideWinning(List.of(1, 2, 2, 4, 5, 6), 10))
                 .withMessage("Lotto numbers must not contain duplicates.");
+    }
+
+    @Test
+    void shouldBe2ndPlace(){
+        final int PURCHASE_AMOUNT = 1000;
+        NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
+        LottoService service = new LottoService(PURCHASE_AMOUNT, extractor);
+        service.draw();
+        service.decideWinning(List.of(1, 2, 3, 4, 5, 11), 6);
+        assertThat(service.winningCountMap().get(LottoRank.SECOND)).isEqualTo(1);
     }
 }
