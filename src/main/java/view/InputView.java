@@ -16,7 +16,7 @@ public class InputView {
 
     public static Integer showLottoPurchaseAmountInput() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return readInt();
     }
 
     public static String showWinningLottoNumbersInput() {
@@ -26,14 +26,12 @@ public class InputView {
 
     public static Integer showLottoBonusNumberInput() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return readInt();
     }
 
     public static Integer showManualLottoCountInput() {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
-        int manualLottoCount = scanner.nextInt();
-        scanner.nextLine();
-        return manualLottoCount;
+        return readInt();
     }
 
     public static List<Lotto> showManualLottoNumbersInput(int manualLottoCount) {
@@ -44,5 +42,15 @@ public class InputView {
             manualLottoNumbers.add(new Lotto(LottoNumbersParser.parse(input)));
         }
         return manualLottoNumbers;
+    }
+
+    private static Integer readInt() {
+        String input = scanner.nextLine();
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("잘못된 입력입니다. 다시 시도하세요.");
+            return readInt();
+        }
     }
 }
