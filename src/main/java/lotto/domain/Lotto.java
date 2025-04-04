@@ -20,6 +20,16 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    private void checkValid(Set<LottoNumber> lottoNumbers) {
+        if (isInvalidSize(lottoNumbers)) {
+            throw new IllegalArgumentException("lotto size is not 6");
+        }
+    }
+
+    private boolean isInvalidSize(Set<LottoNumber> lottoNumbers) {
+        return lottoNumbers.size() != LOTTO_NUMBER_LENGTH;
+    }
+
     public int matchCount(Lotto lotto) {
         int count = 0;
 
@@ -36,11 +46,5 @@ public class Lotto {
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    private void checkValid(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
-            throw new IllegalArgumentException("lotto size is not 6");
-        }
     }
 }
