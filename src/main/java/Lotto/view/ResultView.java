@@ -17,11 +17,12 @@ public class ResultView {
     }
 
     public void printWinStatistics(List<RankResultDto> results, double profitRate) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
         results.forEach(dto -> System.out.printf(
-                "%d개 일치 (%d원)- %d개\n",
+                "%d개 일치%s(%d원)- %d개\n",
                 dto.getMatchCount(),
+                dto.getMessage(),
                 dto.getPrize(),
                 dto.getCount()
         ));

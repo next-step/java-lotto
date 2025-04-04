@@ -48,15 +48,16 @@ public class LottoService {
         }
     }
 
-    public void decideWinning(List<Integer> winnerNum) {
+    public void decideWinning(List<Integer> winnerNum, int bonusNumber) {
         validateLottoNumber(winnerNum);
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
         for (LottoRank rank : LottoRank.values()) {
             winningCountMap.put(rank, 0);
         }
 
         for (Lotto lotto : lottos.all()) {
             int matchedNum = lotto.checkMatched(winnerNum);
-            increaseWinningCount(LottoRank.valueOf(matchedNum));
+            increaseWinningCount(LottoRank.valueOf(matchedNum, lotto.contains(bonusLottoNumber.value())));
         }
     }
 

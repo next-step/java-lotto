@@ -7,7 +7,7 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
-    //    SECOND(5, 30_000_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
 
@@ -27,7 +27,11 @@ public enum LottoRank {
         return winningMoney;
     }
 
-    public static LottoRank valueOf(int countOfMatch) {
+    public static LottoRank valueOf(int countOfMatch, boolean matchedBonus) {
+        if (countOfMatch == 5) {
+            return matchedBonus ? SECOND : THIRD;
+        }
+
         return Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch)
                 .findFirst()

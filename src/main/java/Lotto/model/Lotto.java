@@ -43,4 +43,9 @@ public class Lotto {
     List<LottoNumber> numbers() {
         return Collections.unmodifiableList(numbers);
     }
+
+    public boolean contains(int value) {
+        return numbers.stream()
+                .anyMatch(num -> num.value() == value);
+    }
 }

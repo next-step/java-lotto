@@ -29,7 +29,7 @@ public class LottoController {
 
         List<Integer> winningNumbers = inputView.getWinnerNumbers();
         int bonusNumber = inputView.getBonusNumber();
-        lottoService.decideWinning(winningNumbers);
+        lottoService.decideWinning(winningNumbers, bonusNumber);
         resultView.printWinStatistics(RankResultDto.convertToDtos(lottoService.winningCountMap()),
                 lottoService.profitRate());
     }

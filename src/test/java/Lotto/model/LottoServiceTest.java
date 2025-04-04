@@ -27,6 +27,7 @@ public class LottoServiceTest {
                 LottoRank.FIFTH, 14,
                 LottoRank.FOURTH, 0,
                 LottoRank.THIRD, 0,
+                LottoRank.SECOND, 0,
                 LottoRank.FIRST, 0
         );
 
