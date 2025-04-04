@@ -1,18 +1,33 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Rewards;
+import lotto.domain.*;
 import lotto.enums.Rank;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class ResultView {
     private ResultView() {
     }
 
-    public static void printLotto(Lotto lotto) {
-        System.out.println(lotto.getLottoNumbers().toString());
+    public static Lottos printAndGetLottos(LottoInput input, List<Lotto> manualLottos) {
+        printLottoCount(input.getAvailableLottoCount(), input.getManualCount());
+        Lottos lottos = new Lottos(input.getAutoCount(), manualLottos);
+        printLottos(lottos);
+        return lottos;
+    }
+
+    public static void printLottoCount(int totalCount, int manualCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, totalCount-manualCount);
+    }
+
+    public static void printLottos(Lottos lottos) {
+        for (Lotto lotto : lottos.getValues()) {
+            List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+            lottoNumbers.sort(Comparator.comparing(LottoNumber::getNumber));
+            System.out.println(lottoNumbers);
+        }
     }
 
     public static void printResultOverview() {
