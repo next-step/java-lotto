@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 당첨 번호, 보너스 번호를 저장
@@ -21,11 +23,28 @@ public class WinningLottoNumbers {
         }
     }
 
-    public LottoTicket getWinningLotto() {
-        return winningLotto;
+    public int getBonusNumber() {
+        return bonusNumber.getNumber();
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public Map<Rank, Integer> calculateResult(List<List<Integer>> purchaseLotto) {
+        Map<Rank, Integer> result = new HashMap<>();
+        for (List<Integer> lotto : purchaseLotto) {
+            int matchCount = calculateMatchCount(lotto);
+            boolean bonusMatch = containsBonusNumber(lotto);
+            Rank rank = Rank.valueOf(matchCount, bonusMatch);
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
+        }
+        return result;
+    }
+
+    private int calculateMatchCount(List<Integer> lottos) {
+        return (int) lottos.stream()
+                .filter(this.winningLotto.getNumbers()::contains)
+                .count();
+    }
+
+    private boolean containsBonusNumber(List<Integer> lotto) {
+        return lotto.contains(getBonusNumber());
     }
 }

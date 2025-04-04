@@ -20,7 +20,7 @@ public class LottoApplication {
         List<LottoNumber> winningNumbers = parser.splitAndParseToLottoNumberList(inputView.getWinningNumbers());
         LottoNumber bonusNumber = new LottoNumber(inputView.getBonusNumber());
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonusNumber);
-        LottoEarning lottoEarning = LottoEarning.from(winningLottoNumbers, lottoShop.getLottoTicketsNumber(), lottoShop.getPurchasePrice());
+        LottoEarning lottoEarning = LottoEarning.from(winningLottoNumbers.calculateResult(lottoShop.getLottoTicketsNumber()), lottoShop.getPurchasePrice());
         resultView.printMatchResult(lottoEarning.getResult());
         resultView.printReturnRate(lottoEarning.getReturnRate());
     }

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,34 +16,16 @@ public class LottoEarning {
         this.result = result;
     }
 
-    public static LottoEarning from(WinningLottoNumbers winningLottoNumbers, List<List<Integer>> purchaseLotto, int purchasePrice) {
-        Map<Rank, Integer> result = calculateResult(winningLottoNumbers, purchaseLotto);
+    public static LottoEarning from(Map<Rank, Integer> result, int purchasePrice) {
         int profit = calculateTotalEarning(result);
         double returnRate = calculateReturnRate(profit, purchasePrice);
         return new LottoEarning(profit, returnRate, result);
-    }
-
-    private static Map<Rank, Integer> calculateResult(WinningLottoNumbers winningLottoNumbers, List<List<Integer>> lottos) {
-        Map<Rank, Integer> result = new HashMap<>();
-        for (List<Integer> lotto : lottos) {
-            int matchCount = calculateMatchCount(winningLottoNumbers.getWinningLotto(), lotto);
-            boolean bonusMatch = lotto.contains(winningLottoNumbers.getBonusNumber().getNumber());
-            Rank rank = Rank.valueOf(matchCount, bonusMatch);
-            result.put(rank, result.getOrDefault(rank, 0) + 1);
-        }
-        return result;
     }
 
     private static int calculateTotalEarning(Map<Rank, Integer> result) {
         return result.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
-    }
-
-    private static int calculateMatchCount(LottoTicket winningLotto, List<Integer> lottos) {
-        return (int) lottos.stream()
-                .filter(winningLotto.getNumbers()::contains)
-                .count();
     }
 
     private static double calculateReturnRate(int profit, int purchasePrice) {

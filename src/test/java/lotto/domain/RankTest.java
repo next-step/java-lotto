@@ -12,7 +12,7 @@ class RankTest {
             "0, false, NO_MATCH",
             "1, false, NO_MATCH",
             "1, true, NO_MATCH",
-            "3, true, NO_MATCH",
+            "3, true, THREE_MATCH",
             "3, false, THREE_MATCH",
             "4, false, FOUR_MATCH",
             "5, false, FIVE_MATCH",

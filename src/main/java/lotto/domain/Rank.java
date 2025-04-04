@@ -24,7 +24,7 @@ public enum Rank {
 
     public static Rank valueOf(int matchCount, boolean bonusMatch) {
         return Arrays.stream(values())
-                .filter(rank -> rank.matchCount == matchCount && rank.bonusMatch == bonusMatch)
+                .filter(rank -> rank.isCountMatch(matchCount) && rank.isBonusMatch(bonusMatch))
                 .findFirst()
                 .orElse(NO_MATCH);
     }
@@ -39,5 +39,16 @@ public enum Rank {
 
     public String getDescription() {
         return description;
+    }
+
+    private boolean isCountMatch(int matchCount) {
+        return this.matchCount == matchCount;
+    }
+
+    private boolean isBonusMatch(boolean bonusMatch) {
+        if (this.matchCount == 5) {
+            return this.bonusMatch == bonusMatch;
+        }
+        return true;
     }
 }
