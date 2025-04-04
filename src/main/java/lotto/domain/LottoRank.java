@@ -22,8 +22,12 @@ public enum LottoRank {
     }
 
     public static LottoRank fromMatch(int match, boolean bonusMatch) {
+        if (match == 5 && bonusMatch) {
+            return MATCH_5_AND_BONUS;
+        }
+
         for(LottoRank rank: LottoRank.values()) {
-            if (rank.match == match && rank.bonusMatch == bonusMatch) {
+            if (rank.match == match) {
                 return rank;
             }
         }
