@@ -1,6 +1,7 @@
 package Lotto.view;
 
 import Lotto.dto.RankResultDto;
+import Lotto.model.LottoNumber;
 
 import java.util.List;
 

@@ -29,8 +29,8 @@ public class LottoService {
         }
     }
 
-    public List<List<Integer>> lottoList() {
-        return lottos.toNumberList();
+    public List<List<Integer>> lottoList(){
+        return lottos.toIntegerNumberList();
     }
 
     public int lottoNum() {

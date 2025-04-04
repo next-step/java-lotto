@@ -17,7 +17,7 @@ public class LottoTest {
         NumberExtractor extractor = new RandomNumberExtractor(MIN_NUM, MAX_NUM);
         Lotto lotto = new Lotto(extractor);
         lotto.draw();
-        List<Integer> numbers = lotto.numbers();
+        List<LottoNumber> numbers = lotto.numbers();
 
         assertThat(numbers.size()).isEqualTo(6);
     }
@@ -27,10 +27,10 @@ public class LottoTest {
         NumberExtractor extractor = new RandomNumberExtractor(MIN_NUM, MAX_NUM);
         Lotto lotto = new Lotto(extractor);
         lotto.draw();
-        List<Integer> numbers = lotto.numbers();
+        List<LottoNumber> numbers = lotto.numbers();
 
-        for (int num : numbers) {
-            assertThat(num).isBetween(1, 45);
+        for (LottoNumber num : numbers) {
+            assertThat(num.value()).isBetween(1, 45);
         }
     }
 
