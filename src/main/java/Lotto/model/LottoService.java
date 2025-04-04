@@ -53,17 +53,15 @@ public class LottoService {
             throw new IllegalArgumentException("The count of Lotto number exceed 6.");
         }
 
-        Set<Integer> set = new HashSet<>();
-        for (int num : lottoNumber) {
-            if (!set.add(num)) {
-                throw new IllegalArgumentException("Lotto numbers must not contain duplicates.");
-            }
+        Set<Integer> set = new HashSet<>(lottoNumber);
+        if (set.size() != NUMBER_SIZE) {
+            throw new IllegalArgumentException("Lotto numbers must not contain duplicates.");
         }
     }
 
     public void decideWinning(List<Integer> winnerNum) {
         validateLottoNumber(winnerNum);
-        for (LottoRank rank : LottoRank.values()){
+        for (LottoRank rank : LottoRank.values()) {
             winningCountMap.put(rank, 0);
         }
 
