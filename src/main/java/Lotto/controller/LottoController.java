@@ -6,6 +6,8 @@ import Lotto.model.NumberExtractor.NumberExtractor;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
@@ -25,7 +27,9 @@ public class LottoController {
         resultView.printBuyNum(lottoService.lottoNum());
         resultView.printLotto(lottoService.lottoList());
 
-        lottoService.decideWinning(inputView.getWinnerNumbers());
+        List<Integer> winningNumbers = inputView.getWinnerNumbers();
+        int bonusNumber = inputView.getBonusNumber();
+        lottoService.decideWinning(winningNumbers);
         resultView.printWinStatistics(RankResultDto.convertToDtos(lottoService.winningCountMap()),
                 lottoService.profitRate());
     }

@@ -42,3 +42,7 @@
   - [x] Enum valueOf stream 활용
   - [x] purchaseAmount 원시객체로 포장
   - [x] LottoNumber에 validation 책임 위임
+
+### 로또(2등)
+- [x] 보너스 볼 번호 입력 받기
+- [] 2등(보너스 번호 당첨) Rank 처리
