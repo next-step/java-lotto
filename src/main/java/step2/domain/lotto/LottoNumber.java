@@ -1,6 +1,6 @@
 package step2.domain.lotto;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
@@ -12,6 +12,11 @@ public class LottoNumber {
 
     public int value() {
         return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return Integer.compare(this.number, other.value());
     }
 
     @Override

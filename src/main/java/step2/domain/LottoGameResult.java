@@ -32,4 +32,8 @@ public class LottoGameResult {
         }
         return sum;
     }
+
+    public double getWinningRate(PurchaseAmount purchaseAmount) {
+        return purchaseAmount.getWinningRate(getWinningsSum());
+    }
 }

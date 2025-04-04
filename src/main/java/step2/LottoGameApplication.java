@@ -1,28 +1,39 @@
 package step2;
 
-import step2.domain.lotto.LottoCount;
 import step2.domain.LottoGame;
 import step2.domain.LottoGameResult;
-import step2.domain.lotto.*;
+import step2.domain.PurchaseAmount;
+import step2.domain.lotto.LottoConstants;
+import step2.domain.lotto.LottoContainer;
+import step2.domain.lotto.LottoCount;
+import step2.domain.lotto.LottoGenerator;
 import views.InputView;
+import views.LottoInputView;
 import views.ResultView;
 
 import java.util.List;
+
+import static views.LottoInputView.createManualLottoCountWithQuery;
 
 public class LottoGameApplication {
 
     public static final int LOTTO_TICKET_PRICE = 1000;
 
     public static void main(String[] args) {
-        LottoCount lottoCount = createLottoCountWithQuery();
-        LottoGame lottoGame = setUpLottoGame(lottoCount);
+        PurchaseAmount purchaseAmount = createPurchaseAmountWithQuery();
+        LottoCount totalLottoCount = createLottoCountWithQuery(purchaseAmount);
+        LottoCount manualLottoCount = createManualLottoCountWithQuery(totalLottoCount);
 
-        ResultView.printMessage("");
-        ResultView.printMessage(lottoGame.purchasedLottosAsString());
+        LottoGame lottoGame = setUpLottoGame(totalLottoCount, manualLottoCount);
+        ResultView.showPurchasedLotto(lottoGame);
 
         LottoGameResult lottoGameResult = playLottoRound(lottoGame);
+        ResultView.showGameSummary(purchaseAmount, lottoGameResult);
+    }
 
-        ResultView.showGameSummary(lottoCount, lottoGameResult);
+    private static PurchaseAmount createPurchaseAmountWithQuery() {
+        int purchaseAmountInput = InputView.promptForInteger("구입금액을 입력해 주세요.");
+        return new PurchaseAmount(purchaseAmountInput);
     }
 
     private static LottoGameResult playLottoRound(LottoGame lottoGame) {
@@ -31,28 +42,23 @@ public class LottoGameApplication {
         return lottoGame.play(winningNumbers, bonusNumber);
     }
 
-    private static LottoGame setUpLottoGame(LottoCount lottoCount) {
+    private static LottoGame setUpLottoGame(LottoCount totalLottoCount, LottoCount manualLottoCount) {
         LottoGenerator lottoGenerator = new LottoGenerator(LottoConstants.MIN_LOTTO_NUMBER,
                 LottoConstants.MAX_LOTTO_NUMBER,
                 LottoConstants.NUMBERS_PER_LOTTO);
-        return new LottoGame(lottoCount, lottoGenerator);
+        LottoContainer manualLottoContainer = LottoInputView.manualLottoInput(manualLottoCount);
+
+        LottoCount autoLottoCount = totalLottoCount.subtract(manualLottoCount);
+        LottoContainer autoLottoContainer = new LottoContainer(autoLottoCount.value(), lottoGenerator);
+
+        return new LottoGame(manualLottoContainer.add(autoLottoContainer));
     }
 
-    private static LottoCount createLottoCountWithQuery() {
+    private static LottoCount createLottoCountWithQuery(PurchaseAmount purchaseAmount) {
         LottoCount lottoCount = null;
         while (lottoCount == null) {
-            int purchaseAmount = InputView.promptForInteger("구입금액을 입력해 주세요.");
-            lottoCount = createLottoCount(purchaseAmount);
+            lottoCount = purchaseAmount.getLottoCount(LOTTO_TICKET_PRICE);
         }
         return lottoCount;
-    }
-
-    private static LottoCount createLottoCount(int purchaseAmount) {
-        try {
-            return new LottoCount(purchaseAmount, LOTTO_TICKET_PRICE);
-        } catch (IllegalArgumentException e) {
-            ResultView.printMessage(e.getMessage());
-        }
-        return null;
     }
 }

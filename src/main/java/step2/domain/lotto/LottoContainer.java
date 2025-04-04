@@ -45,9 +45,15 @@ public class LottoContainer {
         final List<Lotto> lottos;
         lottos = new ArrayList<>(lottoCount);
         for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = new Lotto(lottoGenerator);
+            Lotto lotto = Lotto.auto(lottoGenerator);
             lottos.add(lotto);
         }
         return lottos;
+    }
+
+    public LottoContainer add(LottoContainer additionalContainer) {
+        List<Lotto> newLottos = getLottos();
+        newLottos.addAll(additionalContainer.getLottos());
+        return new LottoContainer(newLottos);
     }
 }

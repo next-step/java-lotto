@@ -74,3 +74,16 @@
   - [x] domain 에서 views 의존성 제거
     - [x] Lotto
     - [x] LottoContainer
+### 4단계
+- [x] 3단계 피드백
+  - [x] LottoGenerator
+    - [x] 정렬 책임 분리
+    - [x] 번호 캐싱
+  - [x] Lotto 정적 팩토리 메소드로 주 생성자 호출
+- [x] 로또 수동 입력 구현
+  - [x] LottoContainer 합치기
+  - [x] LottoCount 에 manualLottoCount 추가
+  - [x] PurchaseAmount 분리
+  - [x] 사용자에게 수동 입력 받기
+- [x] 리팩터링
+ - [x] LottoGame LottoContainerFormatter 의존성 제거

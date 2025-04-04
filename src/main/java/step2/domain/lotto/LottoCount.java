@@ -1,29 +1,41 @@
 package step2.domain.lotto;
 
 public class LottoCount {
-    private final int purchasedAmount;
-    private final int lottoPrice;
+    private final int count;
 
-    public LottoCount(int purchaseAmount, int lottoPrice) {
-        if (isValid(purchaseAmount, lottoPrice)) {
-            String validationMessage = String.format("로또 구입 금액은 %d원 이상이어야 하며 %d원 단위로 가능합니다.",
-                    lottoPrice, lottoPrice);
-            throw new IllegalArgumentException(validationMessage);
+    public LottoCount(int count) {
+        this.count = count;
+    }
+
+    public int value() {
+        return count;
+    }
+
+    public LottoCount add(LottoCount other) {
+        return new LottoCount(this.count + other.value());
+    }
+
+    public LottoCount subtract(LottoCount other) {
+        if (this.count < other.value()) {
+            throw new IllegalArgumentException("빼려는 값이 원래 값보다 큽니다.");
         }
-        this.purchasedAmount = purchaseAmount;
-        this.lottoPrice = lottoPrice;
+        return new LottoCount(this.count - other.value());
     }
 
-    public LottoContainer generateLottoContainer(LottoGenerator lottoGenerator) {
-        int count = this.purchasedAmount / this.lottoPrice;
-        return new LottoContainer(count, lottoGenerator);
+    public boolean isBiggerThan(LottoCount other) {
+        return this.count > other.value();
     }
 
-    public double getWinningRate(long winningAmount) {
-        return (double) winningAmount / this.purchasedAmount;
-    }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
 
-    private boolean isValid(int purchaseAmount, int lottoPrice) {
-        return purchaseAmount < lottoPrice || purchaseAmount % lottoPrice != 0;
+        if (!(obj instanceof LottoCount)) {
+            return false;
+        }
+
+        return this.count == ((LottoCount) obj).value();
     }
 }

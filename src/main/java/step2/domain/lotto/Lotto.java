@@ -16,6 +16,18 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(lottoNumberSet);
     }
 
+    private Lotto(LottoNumbers lottoNumbers) {
+        if (!checkValid(lottoNumbers)) {
+            throw new IllegalArgumentException("규칙을 만족하지 않는 숫자 입력입니다.");
+        }
+
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto auto(LottoGenerator lottoGenerator) {
+        return new Lotto(lottoGenerator.generateLotto());
+    }
+
     private Set<LottoNumber> toLottoNumberSet(List<Integer> lottoNumbers) {
         Set<LottoNumber> lottoNumberSet = new HashSet<>();
         for (int number : lottoNumbers) {
@@ -28,6 +40,10 @@ public class Lotto {
         return hasAllDistinctValues(lottoNumbers) && hasCorrectSize(lottoNumbers);
     }
 
+    private boolean checkValid(LottoNumbers lottoNumbers) {
+        return lottoNumbers.size() == LottoConstants.NUMBERS_PER_LOTTO;
+    }
+
     private boolean hasAllDistinctValues(List<Integer> lottoNumbers) {
         Set<Integer> distinct = new HashSet<>(lottoNumbers);
         return distinct.size() == lottoNumbers.size();
@@ -35,10 +51,6 @@ public class Lotto {
 
     private boolean hasCorrectSize(List<Integer> lottoNumbers) {
         return lottoNumbers.size() == LottoConstants.NUMBERS_PER_LOTTO;
-    }
-
-    public Lotto(LottoGenerator lottoGenerator) {
-        this.lottoNumbers = lottoGenerator.generateLotto();
     }
 
     public Set<LottoNumber> copyLottoNumbers() {
