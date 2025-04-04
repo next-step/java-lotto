@@ -36,3 +36,8 @@
   - [x] Lotto 불변객체로 만들기(numbers 외부에서 접근 못하게 하기)
   - [x] 구입금액 입력 검증 로직 추가
   - [x] 당첨번호 입력 검증 로직 추가
+  - [] NUMBER_SIZE 상수 추출
+  - [x] SALES_PRICE 상수 이용
+  - [] List Set 변환으로 개수 체크
+  - [] Enum valueOf stream 활용
+  - [] LottoNumber에 validation 책임 위임

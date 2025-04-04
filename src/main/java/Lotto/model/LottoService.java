@@ -20,11 +20,11 @@ public class LottoService {
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount < 1000) {
+        if (purchaseAmount < SALES_PRICE) {
             throw new IllegalArgumentException("The minimum of purchase price is 1,000 won.");
         }
 
-        if (purchaseAmount % 1000 != 0) {
+        if (purchaseAmount % SALES_PRICE != 0) {
             throw new IllegalArgumentException("The purchase price is in units of 1,000 won.");
         }
     }
