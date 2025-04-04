@@ -7,15 +7,19 @@ import java.util.stream.IntStream;
 
 public class LottoTicketMachine {
 
-    private final List<Integer> availableNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toUnmodifiableList());
+    private static final List<Integer> AVAILABLE_NUMBERS = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toUnmodifiableList());
     private final RandomPicker randomPicker;
 
     public LottoTicketMachine(Random random) {
         this.randomPicker = new RandomPicker(random);
     }
 
-    public Game issue() {
-        var lottoNumber = randomPicker.pickNumbers(LottoNumbers.DIGIT, availableNumbers);
-        return new Game(lottoNumber);
+    public LottoGame issueRandom() {
+        var lottoNumbers = randomPicker.pickNumbers(LottoNumbers.DIGIT, AVAILABLE_NUMBERS);
+        return new LottoGame(lottoNumbers);
+    }
+
+    public LottoGame issueManual(List<Integer> pickedNumbers) {
+        return new LottoGame(pickedNumbers);
     }
 }
