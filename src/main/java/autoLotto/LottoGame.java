@@ -23,9 +23,9 @@ public class LottoGame {
     }
 
     private void processLottoResult(LottoResult lottoResult, AutoLotto autoLotto, WinningLotto winningNumber) {
-        autoLotto.getNumbers()
+        autoLotto.getLottos()
                  .forEach(lotto ->
-                              lottoResult.addMatchCount(LottoPrize.valueOf(lotto.countCommonNumbers(winningNumber)))
+                              lottoResult.addMatchCount(LottoPrize.valueOf(lotto.getMatchedNumberCount(winningNumber)))
                          );
     }
 

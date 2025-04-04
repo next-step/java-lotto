@@ -11,6 +11,6 @@ class AutoLottoTest {
     void generateLottos() {
         int TEST_COUNT = 5;
         AutoLotto autoLotto = new AutoLotto(TEST_COUNT);
-        assertEquals(TEST_COUNT, autoLotto.getNumbers().size());
+        assertEquals(TEST_COUNT, autoLotto.getLottos().size());
     }
 }

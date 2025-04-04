@@ -24,7 +24,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         WinningLotto winningLotto = new WinningLotto(winningNumbers);
 
-        int commonCount = lotto.countCommonNumbers(winningLotto);
+        int commonCount = lotto.getMatchedNumberCount(winningLotto);
 
         assertEquals(expectedCount, commonCount);
     }
