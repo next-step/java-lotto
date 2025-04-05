@@ -8,14 +8,6 @@ import java.util.Map;
 public class LottoTickets {
 
   private static final int PRICE_PER_LOTTO = 1000;
-  private static final Map<Integer, Integer> PRIZE_TABLE = new HashMap<>();
-
-  static {
-    PRIZE_TABLE.put(3, 5000);
-    PRIZE_TABLE.put(4, 50000);
-    PRIZE_TABLE.put(5, 1500000);
-    PRIZE_TABLE.put(6, 2000000000);
-  }
 
   private final List<Lotto> lottoTickets;
 
@@ -34,26 +26,29 @@ public class LottoTickets {
     return lottoTickets.size();
   }
 
-  public Map<Integer, Integer> calculateWinningStatistics(Lotto winningNumbers) {
-    Map<Integer, Integer> statistics = new HashMap<>();
-    for (int i = 3; i <= 6; i++) {
-      statistics.put(i, 0);
+  public Map<PrizeRank, Integer> calculateWinningStatistics(Lotto winningNumbers) {
+    Map<PrizeRank, Integer> statistics = new HashMap<>();
+    for (PrizeRank rank : PrizeRank.values()) {
+      statistics.put(rank, 0);
     }
 
     for (Lotto ticket : lottoTickets) {
       int matchCount = ticket.countMatchingNumbers(winningNumbers);
-      if (matchCount >= 3) {
-        statistics.merge(matchCount, 1, Integer::sum);
+      PrizeRank rank = PrizeRank.valueOf(matchCount);
+      if (rank != null) {
+        statistics.merge(rank, 1, Integer::sum);
       }
     }
     return statistics;
   }
 
-  public double calculateProfitRate(Map<Integer, Integer> statistics) {
+  public double calculateProfitRate(Map<PrizeRank, Integer> statistics) {
     int totalPrize = statistics.entrySet().stream()
-        .mapToInt(entry -> entry.getValue() * PRIZE_TABLE.get(entry.getKey()))
+        .mapToInt(entry -> entry.getValue() * entry.getKey().getPrizeMoney())
         .sum();
-    return (double) totalPrize / (lottoTickets.size() * PRICE_PER_LOTTO);
+
+    int totalCost = lottoTickets.size() * PRICE_PER_LOTTO;
+    return (double) totalPrize / totalCost;
   }
 
   @Override

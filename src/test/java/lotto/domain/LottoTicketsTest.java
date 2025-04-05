@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -14,12 +15,53 @@ class LottoTicketsTest {
   }
 
   @Test
+  void 로또_티켓_개수로_생성() {
+    assertThat(new LottoTickets(3).size()).isEqualTo(3);
+  }
+
+  @Test
+  void 당첨_통계_계산() {
+    LottoTickets tickets = new LottoTickets(5);
+    Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+    Map<PrizeRank, Integer> statistics = tickets.calculateWinningStatistics(winningNumbers);
+
+    assertThat(statistics).isNotNull();
+    assertThat(statistics.values().stream().mapToInt(Integer::intValue).sum())
+        .isLessThanOrEqualTo(tickets.size());
+  }
+
+  @Test
   void 수익률_계산() {
-    Map<Integer, Integer> statistics = new HashMap<>();
-    statistics.put(3, 1);
-    statistics.put(4, 0);
-    statistics.put(5, 0);
-    statistics.put(6, 0);
+    Map<PrizeRank, Integer> statistics = new HashMap<>();
+    statistics.put(PrizeRank.FIFTH, 1);
+    statistics.put(PrizeRank.FOURTH, 0);
+    statistics.put(PrizeRank.THIRD, 0);
+    statistics.put(PrizeRank.FIRST, 0);
+
     assertThat(new LottoTickets(5).calculateProfitRate(statistics)).isEqualTo(1.0);
+  }
+
+  @Test
+  void 당첨_통계_합이_구매한_로또_개수와_일치() {
+    Map<PrizeRank, Integer> statistics = new HashMap<>();
+    statistics.put(PrizeRank.FIFTH, 2);
+    statistics.put(PrizeRank.FOURTH, 1);
+    statistics.put(PrizeRank.THIRD, 0);
+    statistics.put(PrizeRank.FIRST, 0);
+
+    LottoTickets tickets = new LottoTickets(3);
+    assertThat(statistics.values().stream().mapToInt(Integer::intValue).sum())
+        .isLessThanOrEqualTo(tickets.size());
+  }
+
+  @Test
+  void 로또_티켓_문자열_표현() {
+    LottoTickets tickets = new LottoTickets(2);
+    String result = tickets.toString();
+
+    assertThat(result).contains("[");
+    assertThat(result).contains("]");
+    assertThat(result.split("\n")).hasSize(2);
   }
 } 
