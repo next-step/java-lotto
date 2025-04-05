@@ -28,10 +28,10 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public Integer intersectCount(LottoNumbers other) {
+    public MatchResult intersectCount(LottoNumbers other, LottoNumber bonusNumber) {
         Set<LottoNumber> intersection = new HashSet<>(numbers);
         intersection.retainAll(other.numbers);
-        return intersection.size();
+        return new MatchResult(intersection.size(), other.numbers.contains(bonusNumber));
     }
 
     @Override

@@ -8,16 +8,18 @@ import java.util.stream.Collectors;
 
 public class LottoRound {
     private final LottoNumbers winnerNumbers;
+    private final LottoNumber bonusNumber;
 
-    public LottoRound(Set<Integer> winnerNumbers) {
+    public LottoRound(Set<Integer> winnerNumbers, Integer bonusNumber) {
         this.winnerNumbers = new LottoNumbers(winnerNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet())
         );
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public LottoRank checkLottoRank(LottoNumbers lottoNumbers) {
-        return LottoRank.valueOfMatchCount(winnerNumbers.intersectCount(lottoNumbers));
+        return LottoRank.valueOfMatchCount(winnerNumbers.intersectCount(lottoNumbers, bonusNumber));
     }
 
     public LottoResult checkLottoRank(List<LottoNumbers> lottoNumbers) {

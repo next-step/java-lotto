@@ -17,11 +17,11 @@ class LottoResultTest {
     @DisplayName("로또 결과 총 당첨금, 수익률 테스트")
     @Test
     public void lottoResult() {
-        LottoResult lottoResult = new LottoResult(Map.of(FIRST, 1, SECOND, 2, THIRD, 3, FOURTH, 4, ETC, 9));
+        LottoResult lottoResult = new LottoResult(Map.of(FIRST, 1, SECOND, 2, THIRD, 3, FOURTH, 4, ETC, 6));
         assertThat(lottoResult.totalWinnings())
-                .isEqualTo(2003170000L);
+                .isEqualTo(2064700000L);
 
         assertThat(lottoResult.rateOfReturn())
-                .isEqualTo(105430.0);
+                .isEqualTo(129043.75);
     }
 }

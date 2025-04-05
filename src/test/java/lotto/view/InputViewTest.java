@@ -13,7 +13,7 @@ class InputViewTest {
     public void validInput() {
         System.setIn(new ByteArrayInputStream("1242a\n-123\nasdb\n14000\n1,2\na,b\n1,b\n1,2,3,4,5,6".getBytes()));
 
-        assertThat(InputView.getPositiveNumberInput("구입금액을 입력해 주세요."))
+        assertThat(InputView.getPositiveNumberInputWithLowBound("구입금액을 입력해 주세요."))
                 .isEqualTo(14000);
         assertThat(InputView.getPositiveNumberSetInput("지난 주 당첨 번호를 입력해 주세요.", ","))
                 .containsExactly(1,2,3,4,5,6);
