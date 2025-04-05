@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 public class LottoGame {
 
-    private final int LOTTO_PRISE = 1000;
+    private static final int LOTTO_PRISE = 1000;
 
     public Lotto[] buyLottos(int money) {
         int buyLottoCount = money / LOTTO_PRISE;

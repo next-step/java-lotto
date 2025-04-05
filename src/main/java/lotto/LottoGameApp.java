@@ -9,7 +9,7 @@ public class LottoGameApp {
         LottoGame lottoGame = new LottoGame();
 
         int money = inputView.receiveMoney();
-        Lotto [] lottos = lottoGame.buyLottos(money);
+        Lotto[] lottos = lottoGame.buyLottos(money);
 
         inputView.printBoughtLottos(lottos);
 
