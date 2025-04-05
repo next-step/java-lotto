@@ -50,14 +50,14 @@ public class LottoService {
 
     public void decideWinning(List<Integer> winnerNum, int bonusNumber) {
         validateLottoNumber(winnerNum);
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        WinningNumber winningNumber = new WinningNumber(winnerNum, bonusNumber);
         for (LottoRank rank : LottoRank.values()) {
             winningCountMap.put(rank, 0);
         }
 
-        for (Lotto lotto : lottos.all()) {
-            int matchedNum = lotto.checkMatched(winnerNum);
-            increaseWinningCount(LottoRank.valueOf(matchedNum, lotto.contains(bonusLottoNumber.value())));
+        for(Lotto lotto: lottos.all()){
+            int matchedCount = winningNumber.countMatchedNumber(lotto);
+            increaseWinningCount(LottoRank.valueOf(matchedCount, winningNumber.matchedBonusNumber(lotto)));
         }
     }
 

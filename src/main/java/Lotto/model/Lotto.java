@@ -22,7 +22,7 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-    private List<LottoNumber> toLottoNumbers(List<Integer> winNumbers) {
+    static List<LottoNumber> toLottoNumbers(List<Integer> winNumbers) {
         return winNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
