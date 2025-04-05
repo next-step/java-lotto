@@ -5,5 +5,5 @@ import java.util.Set;
 
 public interface NumberGenerationStrategy {
 
-    Set<Integer> generateNumbers();
+    Set<LottoNumber> generateNumbers();
 }

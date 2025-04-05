@@ -3,9 +3,15 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import lotto.view.WinningNumbersParser;
+import lotto.view.Parser;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class LottoController {
+
+    private static final int TICKET_PRICE = 1000;
 
     private final LottoMachine lottoMachine;
     private final LottoResultsService lottoResultsService;
@@ -21,15 +27,20 @@ public class LottoController {
 
     public void run() {
         int purchaseAmount = inputview.readPurchaseAmount();
-        LottoTickets tickets = lottoMachine.issue(purchaseAmount);
-        resultView.printLottoTickets(tickets);
+        int manualCount = inputview.readNumberOfManuallyPickedTickets();
+        LottoPurchase purchase = LottoPurchase.purchase(purchaseAmount, manualCount);
+        List<Set<LottoNumber>> numberSets = inputview.readManualNumberSets(purchase.getManualPurchaseCount());
+
+        LottoTickets autoTickets = lottoMachine.issueAuto(purchase.getAutoPurchaseCount());
+        LottoTickets manualTickets = lottoMachine.issueManual(numberSets);
+        LottoTickets mergedTickets = autoTickets.merge(manualTickets);
+        resultView.printLottoTickets(mergedTickets, manualTickets.size());
 
         String winningNumbersInput = inputview.readWinningNumbers();
-        WinningNumbers winningNumbers = WinningNumbersParser.parse(winningNumbersInput);
-        int bonusNumber = inputview.readBonusNumber();
-        winningNumbers.setBonusNumber(bonusNumber);
+        LottoNumber bonusNumber = inputview.readBonusNumber();
+        WinningNumbers winningNumbers = inputview.parseWinningNumbers(winningNumbersInput, bonusNumber);
 
-        LottoResult lottoResult = lottoResultsService.calculateResult(tickets, winningNumbers, purchaseAmount);
+        LottoResult lottoResult = lottoResultsService.calculateResult(mergedTickets, winningNumbers, purchaseAmount);
         resultView.printLottoResult(lottoResult);
     }
 }

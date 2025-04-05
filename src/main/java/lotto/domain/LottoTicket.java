@@ -4,10 +4,10 @@ import java.util.Set;
 
 public class LottoTicket {
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public LottoTicket(NumberGenerationStrategy generationStrategy) {
-        numbers = generationStrategy.generateNumbers();
+    public LottoTicket(Set<LottoNumber> numbers) {
+        this.numbers = numbers;
     }
 
     @Override
@@ -15,13 +15,13 @@ public class LottoTicket {
         return  numbers.toString();
     }
 
-    public int matchCountWith(Set<Integer> winningNumbers) {
+    public int matchCountWith(Set<LottoNumber> winningNumbers) {
         return (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
 
-    public boolean hasBonusNumber(int bonusNumber) {
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 }

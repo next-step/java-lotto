@@ -14,6 +14,16 @@ public class ResultView {
         }
     }
 
+    public void printLottoTickets(LottoTickets mergedTickets, int manualSize) {
+        int autoTicketSize = mergedTickets.size() - manualSize;
+        String headerForm = String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다", manualSize, autoTicketSize);
+        System.out.println(headerForm);
+
+        for (LottoTicket ticket : mergedTickets.getAll()) {
+            System.out.println(ticket);
+        }
+    }
+
     public void printLottoResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");

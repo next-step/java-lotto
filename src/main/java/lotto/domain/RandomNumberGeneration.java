@@ -10,10 +10,10 @@ import java.util.stream.IntStream;
 public class RandomNumberGeneration implements NumberGenerationStrategy {
 
     @Override
-    public Set<Integer> generateNumbers() {
+    public Set<LottoNumber> generateNumbers() {
 
-        List<Integer> pool = IntStream.rangeClosed(1, 45)
-                .boxed()
+        List<LottoNumber> pool = IntStream.rangeClosed(1, 45)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
         Collections.shuffle(pool);
 

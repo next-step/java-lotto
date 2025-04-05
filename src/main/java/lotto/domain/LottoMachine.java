@@ -1,25 +1,36 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class LottoMachine {
 
-    private static final int TICKET_PRICE = 1000;
     private final NumberGenerationStrategy numberGenerationStrategy;
 
     public LottoMachine(NumberGenerationStrategy numberGenerationStrategy) {
         this.numberGenerationStrategy = numberGenerationStrategy;
     }
 
-    public LottoTickets issue(int purchaseAmount) {
-        int purchaseQuantity = this.calculatePurchaseQuantity(purchaseAmount);
-        return new LottoTickets(purchaseQuantity, numberGenerationStrategy);
-    }
+    public LottoTickets issueAuto(int purchaseQuantity) {
 
-    private int calculatePurchaseQuantity(int purchaseAmount) {
-
-        if (purchaseAmount < TICKET_PRICE) {
-            throw new IllegalArgumentException("로또를 구매하기 적절한 금액이 아닙니다: " + purchaseAmount);
+        if (purchaseQuantity <= 0) {
+            throw new IllegalArgumentException("유효하지 않는 구입 장수입니다: " + purchaseQuantity);
         }
 
-        return purchaseAmount/TICKET_PRICE;
+        return new LottoTickets(IntStream.range(0, purchaseQuantity)
+                .mapToObj(i -> new LottoTicket(numberGenerationStrategy.generateNumbers()))
+                .collect(Collectors.toList()));
     }
+
+    public LottoTickets issueManual(List<Set<LottoNumber>> numberSets) {
+
+        List<LottoTicket> tickets = numberSets.stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+
+        return new LottoTickets(tickets);
+    }
+
 }
