@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static util.ErrorMessage.INVALID_NUMBER;
 import static util.ErrorMessage.INVALID_OPERATOR;
@@ -42,10 +43,28 @@ public enum Operator {
 
     public abstract int apply(final int a, final int b);
 
+    public String getSymbol() {
+        return this.symbol;
+    }
+
     public static Operator from(final String symbol) {
+        if (!isSupported(symbol)) {
+            throw new IllegalArgumentException(INVALID_OPERATOR);
+        }
         return Arrays.stream(values())
                 .filter(op -> op.symbol.equals(symbol))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_OPERATOR));
+    }
+
+    public static boolean isSupported(final String input) {
+        return Arrays.stream(values())
+                .anyMatch(op -> op.symbol.equals(input));
+    }
+
+    public static String supportSymbols() {
+        return Arrays.stream(values())
+                .map(Operator::getSymbol)
+                .collect(Collectors.joining(", "));
     }
 }
