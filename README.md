@@ -47,6 +47,6 @@
 - [x] 보너스 볼 번호 입력 받기
 - [x] 2등(보너스 번호 당첨) Rank 처리
 - PR 피드백 반영
-  - [] LottoRank 테스트 코드 추가
+  - [x] LottoRank 테스트 코드 추가
   - [] 1, 45 상수 한 곳에서 관리
   - [] winningNumber와 bonusNumber가 하나의 객체에서 관리 되도록 변경(WinningNumber 객체 만들기)
