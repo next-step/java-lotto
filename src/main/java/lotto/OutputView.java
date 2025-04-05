@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class OutputView {
+import static java.lang.System.out;
 
-    private final List<LottoRank> printTargetRank = List.of(
+class OutputView {
+
+    private static final List<LottoRank> printTargetRank = List.of(
             LottoRank.FIFTH,
             LottoRank.FOURTH,
             LottoRank.THIRD,
@@ -15,15 +17,26 @@ public class OutputView {
             LottoRank.FIRST
     );
 
-    public void printResult(LottoRank[] lottoResults) {
+    public static void printResult(LottoRank[] lottoResults) {
         Map<LottoRank, Long> collect = Arrays.stream(lottoResults)
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
         printTargetRank.forEach(rank ->
-                    printLottoRank(rank, Math.toIntExact(collect.getOrDefault(rank, 0L)))
+                    OutputView.printLottoRank(rank, Math.toIntExact(collect.getOrDefault(rank, 0L)))
         );
     }
 
-    private void printLottoRank(LottoRank lottoRank, int count) {
+    private static void printLottoRank(LottoRank lottoRank, int count) {
         System.out.println(lottoRank.getCountOfMatch() + "개 일치" + "(" + lottoRank.getWinningMoney() + ")-" + count + "개");
+    }
+
+    public static void printBoughtLottos(Lotto[] lottos) {
+        out.println(lottos.length + "개를 구매했습니다.");
+        Arrays.stream(lottos)
+                .forEach(OutputView::printLotto);
+
+    }
+
+    private static void printLotto(Lotto lotto) {
+        out.println(Arrays.toString(lotto.getLottoNumbers()));
     }
 }

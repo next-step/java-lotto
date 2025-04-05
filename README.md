@@ -42,7 +42,7 @@ LottoRank
 3단계 리뷰 내용 반영
 - [x] 로또 순위 반환시 Stream 사용
 - [x] final -> static final 로 통일
-- [ ] InputView, OutputView 를 유틸성 클래스로 변경
+- [x] InputView, OutputView 를 유틸성 클래스로 변경
 - [ ] WinningLottoTest 에 2등, 3등 테스트 추가
 
 LottoTicket
