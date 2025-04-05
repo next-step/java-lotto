@@ -34,7 +34,7 @@ public class LottoPrizeTest {
             2, 5
         );
 
-        int expectedTotal = 2000000000 + 60000000 + 4500000 + 200000;
+        int expectedTotal = 2000000000 + 1500000 * 2 + 50000 * 3 + 5000 * 4;
         assertThat(LottoPrize.calculateTotalWinningAmount(matchCounts)).isEqualTo(expectedTotal);
     }
 
@@ -42,9 +42,9 @@ public class LottoPrizeTest {
     @DisplayName("toString()이 올바른 형식으로 문자열을 반환한다.")
     void shouldReturnCorrectStringFormat() {
         assertThat(LottoPrize.SIX_MATCH.toString()).isEqualTo("6개 일치 (2000000000원)");
-        assertThat(LottoPrize.FIVE_MATCH.toString()).isEqualTo("5개 일치 (30000000원)");
-        assertThat(LottoPrize.FOUR_MATCH.toString()).isEqualTo("4개 일치 (1500000원)");
-        assertThat(LottoPrize.THREE_MATCH.toString()).isEqualTo("3개 일치 (50000원)");
+        assertThat(LottoPrize.FIVE_MATCH.toString()).isEqualTo("5개 일치 (1500000원)");
+        assertThat(LottoPrize.FOUR_MATCH.toString()).isEqualTo("4개 일치 (50000원)");
+        assertThat(LottoPrize.THREE_MATCH.toString()).isEqualTo("3개 일치 (5000원)");
         assertThat(LottoPrize.TWO_MATCH.toString()).isEqualTo("2개 일치 (0원)");
     }
 }
