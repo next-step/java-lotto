@@ -5,7 +5,6 @@ import data.Messages;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,7 +21,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        if(lottoNumbers.size() != REQUIRED_NUMBER_COUNT){
+        if (lottoNumbers.size() != REQUIRED_NUMBER_COUNT) {
             throw new IllegalArgumentException(Messages.NUMBER_OF_NUMBERS_ERROR);
         }
         this.lottoNumbers = lottoNumbers;

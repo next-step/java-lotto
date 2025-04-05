@@ -18,15 +18,15 @@ public class Lotto {
         return lottoNumbers.getLottoNumbers();
     }
 
-    public int getHitCount(List<Integer> winNumbers){
+    public int getHitCount(List<Integer> winNumbers) {
         return lottoNumbers.getHitCount(winNumbers);
     }
 
-    public int getHitCount(LottoNumbers winNumbers){
+    public int getHitCount(LottoNumbers winNumbers) {
         return lottoNumbers.getHitCount(winNumbers);
     }
 
-    public boolean hasBonusNumber(int bonus){
+    public boolean hasBonusNumber(int bonus) {
         return lottoNumbers.hasBonusNumber(bonus);
     }
 
