@@ -8,7 +8,7 @@ public class LottoGame {
 
     private final Lottos lottos;
 
-    public LottoGame(){
+    public LottoGame() {
         this.lottos = new Lottos();
     }
 
@@ -16,12 +16,12 @@ public class LottoGame {
         return lottos;
     }
 
-    public LottoGame buy(int ticketCount){
+    public LottoGame buy(int ticketCount) {
         lottos.buy(ticketCount);
         return this;
     }
 
-    public Map<PrizeEnum, Integer> calculateWinResult(LottoNumbers winNumbers, int bonus){
+    public Map<PrizeEnum, Integer> calculateWinResult(LottoNumbers winNumbers, int bonus) {
         return lottos.calculateWinResult(winNumbers, bonus);
     }
 }

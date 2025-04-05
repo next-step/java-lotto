@@ -36,7 +36,7 @@ public enum PrizeEnum {
     }
 
     private static PrizeEnum getPrizeEnum(long hit, boolean matchBonus, PrizeEnum prizeEnum) {
-        if(hit == 5L && matchBonus){
+        if (hit == 5L && matchBonus) {
             return PrizeEnum.FIVE_HIT_BONUS_HIT;
         }
         return prizeEnum;
