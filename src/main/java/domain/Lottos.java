@@ -28,9 +28,13 @@ public class Lottos {
         return this;
     }
 
-    public Map<PrizeEnum, Integer> getSummary(List<Integer> winNumbers, int bonus) {
+    public Map<PrizeEnum, Integer> calculateWinResult(LottoNumbers winNumbers, int bonus) {
 
         Map<PrizeEnum, Integer> summaryMap = new HashMap<>();
+
+        if(lottos.isEmpty()){
+            throw new IllegalArgumentException("비어있음");
+        }
 
         for (Lotto lotto : lottos) {
             int countOfMatch = lotto.getHitCount(winNumbers);

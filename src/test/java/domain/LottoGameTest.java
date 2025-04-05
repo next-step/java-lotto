@@ -3,8 +3,8 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,7 +13,7 @@ class LottoGameTest {
     @Test
     @DisplayName("객체 정상 생성 확인")
     void getLottos() {
-        assertThat(new LottoGame()).isNotEqualTo(null);
+        assertThat(new LottoGame()).isNotNull();
     }
 
     @Test
@@ -27,11 +27,11 @@ class LottoGameTest {
     @Test
     @DisplayName("Summary Key 확인")
     void getSummary() {
-        List<PrizeEnum> prizeEnums = new ArrayList<>(new LottoGame()
+        Set<PrizeEnum> prizeEnums = new LottoGame()
                 .buy(100)
-                .getSummary(List.of(1, 2, 3, 4, 5, 6), 7)
-                .keySet());
-        if(prizeEnums.size() != 0){
+                .calculateWinResult(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), 7)
+                .keySet();
+        if(!prizeEnums.isEmpty()){
             assertThat(prizeEnums).containsAnyOf(PrizeEnum.values());
         }
     }

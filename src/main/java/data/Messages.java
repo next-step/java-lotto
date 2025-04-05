@@ -11,4 +11,5 @@ public class Messages {
     public static final String TOTAL_PRIZE_RATIO = "총 수익률은 %.2f입니다.";
     public static final String ASK_BONUS_NUMBERS = "보너스 볼을 입력해 주세요.";
     public static final String BLANK = "";
+    public static final String NUMBER_OF_NUMBERS_ERROR = "개수가 올바르지 않습니다.";
 }

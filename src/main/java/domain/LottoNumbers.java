@@ -1,23 +1,30 @@
 package domain;
 
+import data.Messages;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
-    private final int LOTTO_NUMBER_BOUND = 45;
-    private final int REQUIRED_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_BOUND = 45;
+    private static final int REQUIRED_NUMBER_COUNT = 6;
 
     private final List<Integer> lottoNumbers;
-    private final List<Integer> numbers = IntStream.rangeClosed(1, LOTTO_NUMBER_BOUND).boxed().collect(Collectors.toList());
+    private static final List<Integer> numbers = IntStream.rangeClosed(1, LOTTO_NUMBER_BOUND).boxed().collect(Collectors.toList());
 
     public LottoNumbers() {
         this.lottoNumbers = auto();
     }
 
-    LottoNumbers(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        if(lottoNumbers.size() != REQUIRED_NUMBER_COUNT){
+            throw new IllegalArgumentException(Messages.NUMBER_OF_NUMBERS_ERROR);
+        }
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -29,7 +36,7 @@ public class LottoNumbers {
 
         Collections.shuffle(numbers);
 
-        List<Integer> lottoNumbers = numbers.subList(0, REQUIRED_NUMBER_COUNT);
+        List<Integer> lottoNumbers = new ArrayList<>(numbers.subList(0, REQUIRED_NUMBER_COUNT));
 
         Collections.sort(lottoNumbers);
 
@@ -42,7 +49,14 @@ public class LottoNumbers {
                 .count();
     }
 
+    public int getHitCount(LottoNumbers winNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(winNumbers.getLottoNumbers()::contains)
+                .count();
+    }
+
     public boolean hasBonusNumber(int bonus) {
         return this.lottoNumbers.contains(bonus);
     }
+
 }
