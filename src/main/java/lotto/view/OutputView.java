@@ -3,7 +3,8 @@ package lotto.view;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
-import lotto.domain.LottoPrize;
+import lotto.domain.Profit;
+import lotto.domain.Rank;
 
 public class OutputView {
     public static void printLottos(List<Lotto> lottos) {
@@ -14,14 +15,15 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printStatics(Map<LottoPrize, Integer> ranks, double profitRate) {
+    public static void printStatics(Map<Rank, Integer> ranks, Profit profitRate) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        System.out.println("3개 일치 (5000원) : " + ranks.getOrDefault(LottoPrize.FIFTH, 0) + "개");
-        System.out.println("4개 일치 (50000원) : " + ranks.getOrDefault(LottoPrize.FOURTH, 0) + "개");
-        System.out.println("5개 일치 (1500000원) : " + ranks.getOrDefault(LottoPrize.THIRD, 0) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치 (30000000원) : " + ranks.getOrDefault(LottoPrize.SECOND, 0) + "개");
-        System.out.println("6개 일치 (2000000000원) : " + ranks.getOrDefault(LottoPrize.FIRST, 0) + "개");
+        System.out.println("3개 일치 (" + Rank.FIFTH.getPrize() + "원) : " + ranks.getOrDefault(Rank.FIFTH, 0) + "개");
+        System.out.println("4개 일치 (" + Rank.FOURTH.getPrize() + "원) : " + ranks.getOrDefault(Rank.FOURTH, 0) + "개");
+        System.out.println("5개 일치 (" + Rank.THIRD.getPrize() + "원) : " + ranks.getOrDefault(Rank.THIRD, 0) + "개");
+        System.out.println(
+                "5개 일치, 보너스 볼 일치 (" + Rank.SECOND.getPrize() + "원) : " + ranks.getOrDefault(Rank.SECOND, 0) + "개");
+        System.out.println("6개 일치 (" + Rank.FIRST.getPrize() + "원) : " + ranks.getOrDefault(Rank.FIRST, 0) + "개");
         System.out.println("총 수익률은 " + profitRate + "입니다.");
     }
 

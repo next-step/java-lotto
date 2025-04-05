@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ManualStrategy implements GeneratorStrategy {
-    public static final String REGEX = ",";
+    private static final String REGEX = ",";
+
     private final String input;
 
     public ManualStrategy(String input) {
@@ -13,10 +14,14 @@ public class ManualStrategy implements GeneratorStrategy {
 
     @Override
     public Lotto generate() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : input.split(REGEX)) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        String[] split = input.split(REGEX);
+
+        for (String number : split) {
             lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
         }
-        return new Lotto(lottoNumbers);
+
+        return new Lotto(new HashSet<>(lottoNumbers));
     }
+
 }

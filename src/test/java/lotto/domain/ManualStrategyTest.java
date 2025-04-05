@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ManualStrategyTest {
-    @DisplayName("사용자 입력값으로 당첨 번호를 생성한다.")
+    @DisplayName("수동 로또를 생성한다.")
     @Test
     void generateTest() {
         // given
@@ -18,5 +18,4 @@ class ManualStrategyTest {
         // then
         assertThat(lotto).isNotNull();
     }
-
 }
