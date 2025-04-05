@@ -1,20 +1,16 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static lotto.Lotto.LOTTO_NUM_COUNT;
+import static lotto.LottoNumber.*;
 
 public class LottoNumberGenerator {
-
-    private static final int LOTTO_MIN_NUM = 1;
-    private static final int LOTTO_MAX_NUM = 45;
-
-    private static List<Integer> numbersPool = IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
-            .boxed()
-            .collect(Collectors.toList());
+    private static final List<Integer> numbersPool = new ArrayList<>(lottoNumberMap.keySet());
 
     public static List<Lotto> generateLottoNumbers(int lottoQuantity) {
         return IntStream.range(0, lottoQuantity)

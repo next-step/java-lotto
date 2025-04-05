@@ -1,7 +1,6 @@
 package lotto;
 
 import calculator.Operator;
-import view.LottoNumbersParser;
 import view.InputView;
 import view.OutputView;
 
@@ -14,7 +13,6 @@ public class LottoApplication {
 
     public static void main(String[] args) {
 
-
         int lottoPurchaseAmount = InputView.showLottoPurchaseAmountInput();
         int totalLottoCount = Operator.DIVIDE.formula.apply(lottoPurchaseAmount, LOTTO_PRICE);
 
@@ -26,7 +24,7 @@ public class LottoApplication {
         OutputView.showTotalLottoCount(manualLottoCount, autoLottoCount);
         OutputView.showGeneratedLottoNumber(lottos);
 
-        List<Integer> winningLotto = LottoNumbersParser.parse(InputView.showWinningLottoNumbersInput());
+        Lotto winningLotto = InputView.showWinningLottoNumbersInput();
         Integer bonusNumber = InputView.showLottoBonusNumberInput();
 
         LottosResult lottosResult = new LottosResult(lottos, winningLotto, bonusNumber);

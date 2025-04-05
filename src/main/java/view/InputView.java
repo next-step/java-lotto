@@ -19,9 +19,10 @@ public class InputView {
         return readInt();
     }
 
-    public static String showWinningLottoNumbersInput() {
+    public static Lotto showWinningLottoNumbersInput() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        return new Lotto(LottoNumbersParser.parse(input));
     }
 
     public static int showLottoBonusNumberInput() {

@@ -1,6 +1,7 @@
 package view;
 
 import lotto.Lotto;
+import lotto.LottoNumber;
 import lotto.LottoRank;
 import lotto.LottosResult;
 
@@ -18,7 +19,7 @@ public class OutputView {
         System.out.println("\n수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
     }
 
-    public static void showLottoNumbers(Set<Integer> numbers) {
+    public static void showLottoNumbers(Set<LottoNumber> numbers) {
         System.out.println(numbers);
     }
 

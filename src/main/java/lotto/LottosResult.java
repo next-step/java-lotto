@@ -8,15 +8,15 @@ import static lotto.Lotto.LOTTO_PRICE;
 public class LottosResult {
 
     private List<Lotto> lottos;
-    private List<Integer> winningNumbers;
+    private Lotto winningLotto;
     private final EnumMap<LottoRank, Integer> lottoRankMap = new EnumMap<>(LottoRank.class);
 
-    public LottosResult(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
+    public LottosResult(List<Lotto> lottos, Lotto winningLotto, int bonusNumber) {
         this.lottos = lottos;
-        this.winningNumbers = winningNumbers;
+        this.winningLotto = winningLotto;
 
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = lotto.getLottoRank(winningNumbers, bonusNumber);
+            LottoRank lottoRank = lotto.getLottoRank(winningLotto, bonusNumber);
             lottoRankMap.put(
                     lottoRank,
                     lottoRankMap.getOrDefault(lottoRank, 0) + 1
