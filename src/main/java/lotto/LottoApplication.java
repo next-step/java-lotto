@@ -17,8 +17,9 @@ public class LottoApplication {
     LottoTickets lottoTickets = LottoTickets.of(inputView.readPrice());
     resultView.printLottos(lottoTickets);
 
-    Lotto winningNumbers = new Lotto(inputView.readPreviousNumbers());
-    Map<PrizeRank, Integer> statistics = lottoTickets.calculateWinningStatistics(winningNumbers);
+    Lotto winningNumbers = new Lotto(inputView.readWinningNumbers());
+    int bonusBall = inputView.readBonusBall();
+    Map<PrizeRank, Integer> statistics = lottoTickets.calculateWinningStatistics(winningNumbers, bonusBall);
     double profitRate = lottoTickets.calculateProfitRate(statistics);
 
     resultView.printWinningStatistics(statistics, profitRate);

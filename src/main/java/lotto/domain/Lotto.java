@@ -46,6 +46,10 @@ public class Lotto {
         .count();
   }
 
+  public boolean hasBonusBall(int bonusBall) {
+    return numbers.contains(bonusBall);
+  }
+
   @Override
   public String toString() {
     return numbers.toString();

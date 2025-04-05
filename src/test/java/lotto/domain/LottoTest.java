@@ -41,4 +41,11 @@ class LottoTest {
     assertThatThrownBy(() -> new Lotto(numbers))
         .isInstanceOf(IllegalArgumentException.class);
   }
+
+  @Test
+  void 보너스_볼_일치_여부_확인() {
+    Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    assertThat(lotto.hasBonusBall(7)).isFalse();
+    assertThat(lotto.hasBonusBall(6)).isTrue();
+  }
 } 

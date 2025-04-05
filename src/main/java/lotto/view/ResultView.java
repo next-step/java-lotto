@@ -15,7 +15,12 @@ public class ResultView {
     System.out.println("당첨 통계");
     System.out.println("---------");
     for (PrizeRank rank : PrizeRank.values()) {
-      System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatchCount(), rank.getPrizeMoney(), statistics.get(rank));
+      String bonusBallInfo = rank.hasBonusBall() ? ", 보너스 볼 일치" : "";
+      System.out.printf("%d개 일치%s (%d원)- %d개\n",
+          rank.getMatchCount(),
+          bonusBallInfo,
+          rank.getPrizeMoney(),
+          statistics.get(rank));
     }
     printProfitRateMessage(profitRate);
   }

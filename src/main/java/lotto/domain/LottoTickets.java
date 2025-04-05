@@ -26,7 +26,7 @@ public class LottoTickets {
     return lottoTickets.size();
   }
 
-  public Map<PrizeRank, Integer> calculateWinningStatistics(Lotto winningNumbers) {
+  public Map<PrizeRank, Integer> calculateWinningStatistics(Lotto winningNumbers, int bonusBall) {
     Map<PrizeRank, Integer> statistics = new HashMap<>();
     for (PrizeRank rank : PrizeRank.values()) {
       statistics.put(rank, 0);
@@ -34,7 +34,7 @@ public class LottoTickets {
 
     for (Lotto ticket : lottoTickets) {
       int matchCount = ticket.countMatchingNumbers(winningNumbers);
-      PrizeRank rank = PrizeRank.valueOf(matchCount);
+      PrizeRank rank = PrizeRank.valueOf(matchCount, ticket.hasBonusBall(bonusBall));
       if (rank != null) {
         statistics.merge(rank, 1, Integer::sum);
       }
