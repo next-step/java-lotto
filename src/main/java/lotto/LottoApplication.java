@@ -3,8 +3,8 @@ package lotto;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        PurchasePrice purchaseAmount = InputView.getPurchaseAmount();
-        LottoTicket[] lottoTickets = LottoTicketMachine.purchase(purchaseAmount.getValue());
+        PurchasePrice purchasePrice = InputView.getPurchaseAmount();
+        LottoTicket[] lottoTickets = LottoTicketMachine.purchase(purchasePrice);
         ResultView.showPurchaseResult(lottoTickets);
 
         WinningNumbers winningNumbers = InputView.getWinningNumbers();

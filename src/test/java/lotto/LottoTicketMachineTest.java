@@ -5,31 +5,27 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottoTicketMachineTest {
 
     @Test
-    @DisplayName("로또 구매 금액은 0원 이상이어야 한다.")
-    void shouldThrowExceptionWhenPurchaseAmountIsLessThanZero() {
-        assertThatThrownBy(() -> LottoTicketMachine.purchase(-1))
+    @DisplayName("유효하지 않은 구매 금액으로 티켓을 구매할 수 없다")
+    void shouldThrowExceptionWhenInvalidPurchasePrice() {
+        PurchasePrice price = new PurchasePrice("500");
+        assertThatThrownBy(() -> LottoTicketMachine.purchase(price))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("Amount must be greater than 0");
+            .hasMessage("구입 금액이 티켓 가격보다 작습니다.");
     }
 
     @Test
-    @DisplayName("로또 구매 금액은 1000원 단위여야 한다.")
-    void shouldThrowExceptionWhenPurchaseAmountIsNotMultipleOfThousand() {
-        assertThatThrownBy(() -> LottoTicketMachine.purchase(500))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("Amount must be a multiple of 1000");
-    }
+    @DisplayName("유효한 구매 금액으로 티켓을 구매할 수 있다")
+    void shouldPurchaseTickets() {
+        PurchasePrice price = new PurchasePrice("3000");
+        LottoTicket[] tickets = LottoTicketMachine.purchase(price);
 
-    @ParameterizedTest
-    @DisplayName("로또 구매 금액 1000원당 1장의 로또 티켓을 구매할 수 있다.")
-    @CsvSource({"1000, 1", "2000, 2", "14000, 14"})
-    void shouldReturnCorrectNumberOfTicketsWhenPurchaseAmountIsMultipleOfThousand(int purchaseAmount, int expectedTicketCount) {
-        assertThat(LottoTicketMachine.purchase(purchaseAmount)).hasSize(expectedTicketCount);
+        assertThat(tickets).hasSize(3);
+        for (LottoTicket ticket : tickets) {
+            assertThat(ticket.getNumbers()).hasSize(6);
+        }
     }
 }

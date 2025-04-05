@@ -10,22 +10,13 @@ public class LottoTicketMachine {
 
     private static final Random random = new Random();
 
-    public static LottoTicket[] purchase(int amount) {
-        validateAmount(amount);
-        return generateTickets(calculateTicketCount(amount));
-    }
-
-    private static void validateAmount(int amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Amount must be greater than 0");
+    public static LottoTicket[] purchase(PurchasePrice purchasePrice) {
+        int ticketCount = purchasePrice.calculateTicketCount(LottoTicket.PRICE_PER_TICKET);
+        if (ticketCount == 0) {
+            throw new IllegalArgumentException("구입 금액이 티켓 가격보다 작습니다.");
         }
-        if (amount % LottoTicket.PRICE_PER_TICKET != 0) {
-            throw new IllegalArgumentException("Amount must be a multiple of 1000");
-        }
-    }
 
-    private static int calculateTicketCount(int amount) {
-        return amount / LottoTicket.PRICE_PER_TICKET;
+        return generateTickets(ticketCount);
     }
 
     private static LottoTicket[] generateTickets(int ticketCount) {
