@@ -9,8 +9,8 @@ public class LottoApplication {
 
         WinningNumbers winningNumbers = InputView.getWinningNumbers();
         LottoTicket winningTicket = new LottoTicket(winningNumbers.getNumbers());
-        LottoResult lottoResult = new LottoResult(winningTicket, lottoTickets);
-        ResultView.showStatistics(lottoResult.calculateStatistics(), lottoResult.calculateProfitRate());
+        LottoStatistics lottoStatistics = new LottoStatistics(winningTicket, lottoTickets);
+        ResultView.showStatistics(lottoStatistics);
     }
 
 }

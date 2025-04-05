@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Map;
+
 public enum LottoPrize {
     SIX_MATCH(6, 2000000000),
     FIVE_MATCH(5, 30000000),
@@ -28,6 +30,21 @@ public enum LottoPrize {
 
     public int getPrize() {
         return prize;
+    }
+
+    public static int calculateTotalWinningAmount(Map<Integer, Integer> matchCounts) {
+        int totalAmount = 0;
+        for (Map.Entry<Integer, Integer> entry : matchCounts.entrySet()) {
+            int matches = entry.getKey();
+            int count = entry.getValue();
+            LottoPrize prize = getPrize(matches);
+            totalAmount += prize.calculateWinningAmount(count);
+        }
+        return totalAmount;
+    }
+
+    public int calculateWinningAmount(int count) {
+        return prize * count;
     }
 
     @Override

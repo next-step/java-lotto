@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.Map;
-
 public class ResultView {
 
     public static void showPurchaseResult(LottoTicket[] lottoTickets) {
@@ -11,13 +9,25 @@ public class ResultView {
         }
     }
 
-    public static void showStatistics(Map<LottoPrize, Integer> lottoPrizes, double winningRate) {
+    public static void showStatistics(LottoStatistics statistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Map.Entry<LottoPrize, Integer> entry : lottoPrizes.entrySet()) {
-            System.out.println(entry.getKey().toString() + " - " + entry.getValue() + "개");
+        showMatchCounts(statistics);
+        System.out.println("총 수익률은 " + statistics.calculateProfitRate() + "입니다.");
+    }
+
+    private static void showMatchCounts(LottoStatistics statistics) {
+        for (int matches = 6; matches >= 0; matches--) {
+            int count = statistics.getCountByMatches(matches);
+            if (count > 0) {
+                LottoPrize prize = LottoPrize.getPrize(matches);
+                System.out.println(formatMatchCount(prize, count));
+            }
         }
-        System.out.println("총 수익률은 " + winningRate + "입니다.");
+    }
+
+    private static String formatMatchCount(LottoPrize prize, int count) {
+        return prize.toString() + " - " + count + "개";
     }
 
 }
