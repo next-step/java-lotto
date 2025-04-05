@@ -53,4 +53,8 @@ public class LottoRow {
             .filter(winningList::contains)
             .count();
     }
+
+    public Boolean isContainBonusNumber(LottoNumber bonusNumber) {
+        return this.getLottoNumbers().contains(bonusNumber.getNumber());
+    }
 }

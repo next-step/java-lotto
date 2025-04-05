@@ -22,4 +22,11 @@ public class InputView {
             .map(Integer::parseInt).map(LottoNumber::new).collect(
                 Collectors.toList());
     }
+
+    public static LottoNumber inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        int bonus = scanner.nextInt();
+        return new LottoNumber(bonus);
+    }
 }

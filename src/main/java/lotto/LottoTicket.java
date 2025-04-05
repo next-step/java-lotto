@@ -9,14 +9,14 @@ public class LottoTicket {
     private final static int LOTTO_PRICE = 1000;
     private final List<LottoRow> lottoRowList = new ArrayList<>();
 
-    public LottoTicket(int count) {
+    public LottoTicket(int count, GenerateNumber generateNumber) {
         if (count < LOTTO_PRICE) {
             throw new IllegalArgumentException("로또를 한장 이상 구매하여야합니다");
         }
 
         this.count = count/LOTTO_PRICE;
 
-        GenerateNumber generateNumber = GenerateNumber.getInstance();
+
         for (int i = 0; i < this.count; i++) {
             this.lottoRowList.add(new LottoRow(generateNumber.generateRandomNumbers()));
         }

@@ -9,7 +9,9 @@ public class LottoMain {
     public static void main(String[] args) {
 
         int price = InputView.inputPrice();
-        LottoTicket lottoTicket = new LottoTicket(price);
+
+        GenerateNumber generateNumber = GenerateNumber.getInstance();
+        LottoTicket lottoTicket = new LottoTicket(price, generateNumber);
 
         ResultView.printCount(lottoTicket.getCount());
 
@@ -17,10 +19,12 @@ public class LottoMain {
 
         List<LottoNumber> winningNumberList = InputView.inputWinningNumbers();
 
-        WinningNumber winningNumber = new WinningNumber(winningNumberList);
+        LottoNumber lottoBonusNumber = InputView.inputBonusNumber();
+
+        WinningNumber winningNumber = new WinningNumber(winningNumberList, lottoBonusNumber);
         Map<Prize, Integer> calculate = winningNumber.calculate(lottoTicket);
 
-        ResultView.printWinning(calculate);
+        ResultView.printWinning(calculate, price);
 
     }
 }
