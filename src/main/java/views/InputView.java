@@ -2,6 +2,7 @@ package views;
 
 import data.Messages;
 import domain.LottoGame;
+import domain.LottoNumbers;
 import domain.LottoGame;
 import domain.LottoNumbers;
 

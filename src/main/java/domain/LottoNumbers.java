@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -53,12 +54,6 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public int getHitCount(List<Integer> winNumbers) {
-        return (int) this.lottoNumbers.stream()
-                .filter(winNumbers::contains)
-                .count();
-    }
-
     public int getHitCount(LottoNumbers winNumbers) {
         return (int) this.lottoNumbers.stream()
                 .filter(winNumbers.getLottoNumbers()::contains)
@@ -68,5 +63,4 @@ public class LottoNumbers {
     public boolean hasBonusNumber(int bonus) {
         return this.lottoNumbers.contains(bonus);
     }
-
 }

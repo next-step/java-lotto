@@ -1,3 +1,4 @@
+import domain.*;
 import domain.Lotto;
 import domain.LottoGame;
 import domain.Lottos;
@@ -7,7 +8,6 @@ import views.InputView;
 import views.ResultView;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 import java.math.BigDecimal;
 import java.util.Map;

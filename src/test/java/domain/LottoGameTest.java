@@ -3,7 +3,6 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +13,6 @@ class LottoGameTest {
     @Test
     @DisplayName("객체 정상 생성 확인")
     void getLottos() {
-        assertThat(new LottoGame()).isNotEqualTo(null);
         assertThat(new LottoGame()).isNotNull();
     }
 
