@@ -8,10 +8,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(int purchaseAmount, LottoNumberGenerator generator) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < purchaseAmount; i++) {
-            lottos.add(new Lotto(generator));
-        }
+        this.lottos = LottoFactory.createRandomLottos(purchaseAmount, generator);
     }
 
     public Lottos(List<Lotto> lottos) {
