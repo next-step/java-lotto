@@ -27,10 +27,6 @@ public class Lotto {
         return lottoNumbers.getHitCount(winNumbers);
     }
 
-    public int getHitCount(LottoNumbers winNumbers){
-        return lottoNumbers.getHitCount(winNumbers);
-    }
-
     public int getHitCount(LottoNumbers winNumbers) {
         return lottoNumbers.getHitCount(winNumbers);
     }

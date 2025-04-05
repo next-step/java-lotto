@@ -21,7 +21,7 @@ public class LottoGame {
         return this;
     }
 
-    public Map<PrizeEnum, Integer> calculateWinResult(LottoNumbers winNumbers, int bonus){
+    public Map<PrizeEnum, Integer> calculateWinResult(LottoNumbers winNumbers, int bonus) {
         return lottos.calculateWinResult(winNumbers, bonus);
     }
 
