@@ -40,7 +40,7 @@ LottoRank
 * 구매로또 수 - 수동구매 로또 수 = 자동 구매 로또 수
 
 3단계 리뷰 내용 반영
-- [ ] 로또 순위 반환시 Stream 사용
+- [x] 로또 순위 반환시 Stream 사용
 - [ ] final -> static final 로 통일
 - [ ] InputView, OutputView 를 유틸성 클래스로 변경
 - [ ] WinningLottoTest 에 2등, 3등 테스트 추가
