@@ -3,10 +3,12 @@ package Lotto.model;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < 1 || number > 45) {
+        if (number < MIN_VALUE || number > MAX_VALUE) {
             throw new IllegalArgumentException("The Lotto number must be between 1 and 45.");
         }
         this.number = number;
