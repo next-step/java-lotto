@@ -1,12 +1,12 @@
 package com.nextstep.camp.lotto.domain.strategy;
 
+import com.nextstep.camp.lotto.domain.entity.LottoTicket;
+import com.nextstep.camp.lotto.domain.vo.LottoAmount;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import com.nextstep.camp.lotto.domain.entity.LottoTicket;
-import com.nextstep.camp.lotto.domain.vo.LottoAmount;
 
 public class LottoAutoPicker implements LottoPicker {
 

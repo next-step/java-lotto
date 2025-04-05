@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum MatchResult {
+public enum Rank {
     THREE(3, false, 5_000),
     FOUR(4, false, 50_000),
     FIVE(5, false, 1_500_000),
@@ -16,13 +16,13 @@ public enum MatchResult {
     private final boolean hasBonus;
     private final int prize;
 
-    MatchResult(int matchCount, boolean hasBonus, int prize) {
+    Rank(int matchCount, boolean hasBonus, int prize) {
         this.matchCount = matchCount;
         this.hasBonus = hasBonus;
         this.prize = prize;
     }
 
-    public static MatchResult of(int matchCount, boolean hasBonus) {
+    public static Rank of(int matchCount, boolean hasBonus) {
         return Arrays.stream(values())
                 .filter(r -> r.matchCount == matchCount && r.hasBonus == hasBonus)
                 .findFirst()
@@ -33,7 +33,7 @@ public enum MatchResult {
         return prize;
     }
 
-    public static List<MatchResult> getValidValues() {
+    public static List<Rank> getValidValues() {
         return Arrays.stream(values())
                 .filter(result -> result != NONE)
                 .collect(Collectors.toList());

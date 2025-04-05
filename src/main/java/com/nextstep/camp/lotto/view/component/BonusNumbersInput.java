@@ -2,15 +2,15 @@ package com.nextstep.camp.lotto.view.component;
 
 import com.nextstep.camp.common.strategy.InputStrategy;
 import com.nextstep.camp.common.view.component.AbstractInput;
-import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
+import com.nextstep.camp.lotto.domain.vo.LottoNumber;
 
-public class BonusNumbersInput extends AbstractInput<WinningNumbers> {
+public class BonusNumbersInput extends AbstractInput<LottoNumber> {
 
-    private BonusNumbersInput(InputStrategy<WinningNumbers> inputStrategy) {
+    private BonusNumbersInput(InputStrategy<LottoNumber> inputStrategy) {
         super(inputStrategy);
     }
 
-    public static BonusNumbersInput create(InputStrategy<WinningNumbers> inputStrategy) {
+    public static BonusNumbersInput create(InputStrategy<LottoNumber> inputStrategy) {
         return new BonusNumbersInput(inputStrategy);
     }
 

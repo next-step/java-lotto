@@ -1,12 +1,8 @@
 package com.nextstep.camp.lotto.view.component;
 
 import com.nextstep.camp.common.strategy.InputStrategy;
-import com.nextstep.camp.common.utils.NumberUtils;
 import com.nextstep.camp.common.view.component.AbstractInput;
-import com.nextstep.camp.lotto.domain.exception.NotNumberFormatStringException;
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
-
-import java.util.Scanner;
 
 public class LottoAmountInput extends AbstractInput<LottoAmount> {
 

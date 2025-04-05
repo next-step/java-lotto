@@ -1,12 +1,12 @@
 package com.nextstep.camp.lotto.view.strategy;
 
-import java.util.List;
-
 import com.nextstep.camp.common.strategy.InputStrategy;
 import com.nextstep.camp.lotto.domain.entity.LottoTicket;
 import com.nextstep.camp.lotto.domain.entity.LottoTickets;
 import com.nextstep.camp.lotto.domain.strategy.LottoAutoPicker;
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
+
+import java.util.List;
 
 public class LottoTicketsAutoInputStrategy implements InputStrategy<LottoTickets> {
 

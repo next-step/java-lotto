@@ -1,11 +1,11 @@
 package com.nextstep.camp.lotto.view.component;
 
-import java.util.stream.Collectors;
-
 import com.nextstep.camp.common.view.component.AbstractResult;
 import com.nextstep.camp.lotto.domain.entity.WinningStatistics;
 import com.nextstep.camp.lotto.domain.type.ProfitType;
 import com.nextstep.camp.lotto.domain.vo.RateOfReturn;
+
+import java.util.stream.Collectors;
 
 public class WinningStatisticsResult extends AbstractResult<WinningStatistics> {
 

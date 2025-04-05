@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 import com.nextstep.camp.lotto.domain.exception.LottoAmountCannotBeZeroOrNegativeException;
 import com.nextstep.camp.lotto.domain.exception.LottoAmountNotDivisibleByLottoPriceException;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,16 +13,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoAmountTest {
 
-    static Stream<Integer> validAmounts() {
-        return Stream.of(1000, 2000, 5000, 10000, 14000);
+    static Stream<org.junit.jupiter.params.provider.Arguments> validAmounts() {
+        return Stream.of(
+                Arguments.of(1000, 1),
+                Arguments.of(2000, 2),
+                Arguments.of(5000, 5),
+                Arguments.of(10000, 10),
+                Arguments.of(14000, 14)
+        );
     }
 
-    @ParameterizedTest(name = "{0}")
+    @ParameterizedTest(name = "amount={0}, expectedCount={1}")
     @MethodSource("validAmounts")
-    void valid_amount_creates_LottoAmount(int input) {
+    void valid_amount_creates_LottoAmount(int input, int expectedCount) {
         LottoAmount amount = LottoAmount.of(input);
         assertEquals(input, amount.getValue());
-        assertEquals(input / 1000, amount.lottoCount());
+        assertEquals(expectedCount, amount.lottoCount());
     }
 
     static Stream<Integer> zeroOrNegativeAmounts() {

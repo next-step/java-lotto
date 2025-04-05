@@ -3,9 +3,6 @@ package com.nextstep.camp.common.view.component;
 import com.nextstep.camp.common.strategy.InputStrategy;
 import com.nextstep.camp.common.view.Element;
 
-import java.util.Scanner;
-import java.util.stream.Stream;
-
 public abstract class AbstractInput<T> implements Element<T> {
     private final InputStrategy<T> inputStrategy;
     protected T value;

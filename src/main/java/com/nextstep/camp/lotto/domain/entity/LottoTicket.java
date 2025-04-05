@@ -1,10 +1,10 @@
 package com.nextstep.camp.lotto.domain.entity;
 
-import java.util.List;
-
-import com.nextstep.camp.lotto.domain.type.MatchResult;
+import com.nextstep.camp.lotto.domain.type.Rank;
 import com.nextstep.camp.lotto.domain.vo.LottoNumbers;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
+
+import java.util.List;
 
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
@@ -25,10 +25,10 @@ public class LottoTicket {
         return new LottoTicket(rawNumbers);
     }
 
-    public MatchResult match(WinningNumbers winning) {
-        int matchCount = lottoNumbers.countMatch(winning.getNumbers());
+    public Rank match(WinningNumbers winning) {
+        int matchCount = lottoNumbers.countMatch(winning.getWinningNumbers());
         boolean bonusMatch = lottoNumbers.contains(winning.getBonusNumber());
-        return MatchResult.of(matchCount, bonusMatch);
+        return Rank.of(matchCount, bonusMatch);
     }
 
     @Override

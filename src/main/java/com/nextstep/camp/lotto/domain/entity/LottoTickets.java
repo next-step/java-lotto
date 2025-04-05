@@ -1,11 +1,11 @@
 package com.nextstep.camp.lotto.domain.entity;
 
+import com.nextstep.camp.lotto.domain.exception.LottoTicketsCannotBeEmptyException;
+import com.nextstep.camp.lotto.domain.type.Rank;
+import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
+
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.nextstep.camp.lotto.domain.exception.LottoTicketsCannotBeEmptyException;
-import com.nextstep.camp.lotto.domain.type.MatchResult;
-import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 
 public class LottoTickets {
     private final List<LottoTicket> tickets;
@@ -33,7 +33,7 @@ public class LottoTickets {
         return tickets;
     }
 
-    public List<MatchResult> matchAll(WinningNumbers winning) {
+    public List<Rank> matchAll(WinningNumbers winning) {
         return tickets.stream()
                 .map(ticket -> ticket.match(winning))
                 .collect(Collectors.toList());

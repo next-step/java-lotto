@@ -1,31 +1,24 @@
 package com.nextstep.camp.lotto.domain.entity;
 
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import com.nextstep.camp.lotto.domain.type.MatchResult;
 import com.nextstep.camp.lotto.domain.type.ProfitType;
+import com.nextstep.camp.lotto.domain.type.Rank;
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
 import com.nextstep.camp.lotto.domain.vo.RateOfReturn;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class WinningStatistics {
-    private final Map<MatchResult, Integer> resultCounts;
+    private final Map<Rank, Integer> resultCounts;
     private final LottoAmount spent;
 
-    private WinningStatistics(List<MatchResult> results, LottoAmount spent) {
+    private WinningStatistics(Map<Rank, Integer> resultCounts, LottoAmount spent) {
         this.spent = spent;
-        this.resultCounts = MatchResult.getValidValues().stream()
-            .collect(Collectors.toMap(
-                Function.identity(),
-                matchResult -> Collections.frequency(results, matchResult),
-                (a, b) -> a,
-                LinkedHashMap::new
-            ));
+        this.resultCounts = resultCounts;
     }
 
-    public static WinningStatistics of(List<MatchResult> results, LottoAmount spent) {
-        return new WinningStatistics(results, spent);
+    public static WinningStatistics of(Map<Rank, Integer> resultCounts, LottoAmount spent) {
+        return new WinningStatistics(resultCounts, spent);
     }
 
     public int totalPrize() {
@@ -38,7 +31,7 @@ public class WinningStatistics {
         return RateOfReturn.of(totalPrize(), spent);
     }
 
-    public Map<MatchResult, Integer> getResultCounts() {
+    public Map<Rank, Integer> getResultCounts() {
         return resultCounts;
     }
 

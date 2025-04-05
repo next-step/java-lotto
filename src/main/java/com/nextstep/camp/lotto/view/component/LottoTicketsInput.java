@@ -3,7 +3,6 @@ package com.nextstep.camp.lotto.view.component;
 import com.nextstep.camp.common.strategy.InputStrategy;
 import com.nextstep.camp.common.view.component.AbstractInput;
 import com.nextstep.camp.lotto.domain.entity.LottoTickets;
-import com.nextstep.camp.lotto.domain.vo.LottoNumbers;
 
 public class LottoTicketsInput extends AbstractInput<LottoTickets> {
 
