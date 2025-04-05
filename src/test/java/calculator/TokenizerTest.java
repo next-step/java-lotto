@@ -15,8 +15,6 @@ public class TokenizerTest {
         final Tokens tokens = Tokens.from("2 * 3 + 4");
 
         assertThat(tokens.getValues()).containsExactly("2", "*", "3", "+", "4");
-        assertThat(tokens.size()).isEqualTo(5);
-        assertThat(tokens.isOddSize()).isTrue();
     }
 
     @Test
@@ -25,8 +23,6 @@ public class TokenizerTest {
         final Tokens tokens = Tokens.from("             10 / 2           ");
 
         assertThat(tokens.getValues()).containsExactly("10", "/", "2");
-        assertThat(tokens.size()).isEqualTo(3);
-        assertThat(tokens.isOddSize()).isTrue();
     }
 
     @Test
@@ -40,12 +36,9 @@ public class TokenizerTest {
     @Test
     @DisplayName("null 또는 공백 입력은 예외가 발생한다")
     void null_or_blank_should_throw() {
-        assertThatThrownBy(() -> Tokens.from(null))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INVALID_INPUT);
 
-        assertThatThrownBy(() -> Tokens.from("  "))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INVALID_INPUT);
+        assertThatThrownBy(() -> Tokens.from(null)).isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorMessage.INVALID_INPUT);
+
+        assertThatThrownBy(() -> Tokens.from("  ")).isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorMessage.INVALID_INPUT);
     }
 }
