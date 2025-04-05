@@ -12,11 +12,11 @@ public enum LottoPrize {
     ZERO_MATCH(0, 0);
 
     private final int matchCount;
-    private final int prize;
+    private final int prizeMoney;
 
-    LottoPrize(int matchCount, int prize) {
+    LottoPrize(int matchCount, int prizeMoney) {
         this.matchCount = matchCount;
-        this.prize = prize;
+        this.prizeMoney = prizeMoney;
     }
 
     public static LottoPrize getPrize(int matchCount) {
@@ -26,10 +26,6 @@ public enum LottoPrize {
             }
         }
         throw new IllegalArgumentException("Invalid match count: " + matchCount);
-    }
-
-    public int getPrize() {
-        return prize;
     }
 
     public static int calculateTotalWinningAmount(Map<Integer, Integer> matchCounts) {
@@ -44,11 +40,11 @@ public enum LottoPrize {
     }
 
     public int calculateWinningAmount(int count) {
-        return prize * count;
+        return prizeMoney * count;
     }
 
     @Override
     public String toString() {
-        return matchCount + "개 일치 (" + prize + "원)";
+        return matchCount + "개 일치 (" + prizeMoney + "원)";
     }
 }
