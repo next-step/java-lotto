@@ -1,12 +1,12 @@
-package controller;
+package lotto.controller;
 
-import domain.model.MatchResult;
-import view.InputView;
-import view.ResultView;
-import domain.model.LottoNumbers;
-import domain.model.LottoWallet;
-import domain.engine.LottoMachine;
-import domain.generator.RandomLottoNumberGenerator;
+import lotto.domain.model.MatchResult;
+import lotto.domain.generator.RandomLottoNumberGenerator;
+import lotto.view.InputView;
+import lotto.view.ResultView;
+import lotto.domain.model.LottoNumbers;
+import lotto.domain.model.LottoWallet;
+import lotto.domain.service.LottoMachine;
 
 
 public class LottoController {

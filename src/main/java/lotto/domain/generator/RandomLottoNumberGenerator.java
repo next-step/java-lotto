@@ -1,8 +1,10 @@
-package domain.generator;
+package lotto.domain.generator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static lotto.constant.LottoConstants.*;
 
 public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     private static final List<Integer> CACHED_NUMBERS = new ArrayList<>();

@@ -1,12 +1,12 @@
-package domain.model;
+package lotto.domain.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static constant.LottoConstants.MATCH_PRICES;
+import static lotto.constant.LottoConstants.MATCH_PRICES;
 
 public class MatchResult {
-    private Map<Integer, Integer> resultMap = new HashMap<>();
+    private final Map<Integer, Integer> resultMap = new HashMap<>();
 
     public double calculateProfit(int purchaseAmount) {
         return (double) getPrize() / purchaseAmount * 100;

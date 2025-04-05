@@ -1,4 +1,4 @@
-package constant;
+package lotto.constant;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package domain.model;
+package lotto.domain.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,10 +50,8 @@ public class LottoNumbersTest {
     @Test
     void countMatchTest() {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 2, 3, 7, 8, 9));
+        LottoNumbers winNumbers = new LottoNumbers(List.of(1, 2, 3, 7, 8, 9));
 
-        lottoNumbers.countMatch(winningNumbers);
-
-        assertThat(lottoNumbers.getMatchCount()).isEqualTo(3);
+        assertThat(lottoNumbers.countMatch(winNumbers)).isEqualTo(3);
     }
 }

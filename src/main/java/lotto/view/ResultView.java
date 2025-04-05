@@ -1,13 +1,13 @@
-package view;
+package lotto.view;
 
-import domain.model.LottoNumbers;
-import domain.model.LottoWallet;
-import domain.model.MatchResult;
+import lotto.domain.model.LottoNumbers;
+import lotto.domain.model.LottoWallet;
+import lotto.domain.model.MatchResult;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static constant.LottoConstants.MATCH_PRICES;
+import static lotto.constant.LottoConstants.MATCH_PRICES;
 
 public class ResultView {
     public static void printPurchasedLottos(LottoWallet lottoWallet) {
