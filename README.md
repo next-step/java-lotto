@@ -46,8 +46,8 @@ LottoRank
 - [x] WinningLottoTest 에 2등, 3등 테스트 추가
 
 LottoTicket
-- [ ] AUTO, MANUAL
-- [ ] 로또 가격을 상수로 관리한다.
+- [x] AUTO, MANUAL
+- [x] 로또 가격을 상수로 관리한다.
 
 LottoGame
 - [ ] 받은 티켓을 가지고 로또를 생성한다.
