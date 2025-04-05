@@ -15,10 +15,7 @@ public class LottoController {
     public void run() {
         int purchaseAmount = InputView.getPurchaseAmount();
         LottoWallet lottoWallet = purchase(purchaseAmount);
-
-        MatchResult result = draw(lottoWallet);
-
-        calculateProfit(purchaseAmount, result);
+        draw(lottoWallet, purchaseAmount);
     }
 
     private LottoWallet purchase(int purchaseAmount) {
@@ -27,15 +24,10 @@ public class LottoController {
         return lottoWallet;
     }
 
-    private MatchResult draw(LottoWallet lottoWallet) {
+    private void draw(LottoWallet lottoWallet, int purchaseAmount) {
         LottoNumbers winNumbers = new LottoNumbers(InputView.getWinNumbers());
-        MatchResult result = lottoWallet.countMatches(winNumbers);
-        ResultView.printMatchResult(result);
-        return result;
-    }
-
-    private void calculateProfit(int purchaseAmount, MatchResult result) {
-        double profit = result.calculateProfit(purchaseAmount);
-        ResultView.printProfit(profit);
+        int bonusNumber = InputView.getBonusNumber();
+        MatchResult result = lottoWallet.countMatches(winNumbers, bonusNumber);
+        ResultView.printMatchResult(result, purchaseAmount);
     }
 }

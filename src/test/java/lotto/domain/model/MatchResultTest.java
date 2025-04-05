@@ -11,16 +11,15 @@ public class MatchResultTest {
     @DisplayName("수익률을 계산한다.")
     @Test
     void calculateProfitTest() {
-        LottoNumbers lotto1 = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers lotto2 = new LottoNumbers(List.of(7, 8, 9, 10, 11, 12));
-
         LottoWallet lottoWallet = new LottoWallet();
-        lottoWallet.addLotto(lotto1);
-        lottoWallet.addLotto(lotto2);
+        lottoWallet.addLotto(new LottoNumbers(List.of(7, 8, 9, 10, 11, 12)));
+        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 7, 8, 9)));
 
-        LottoNumbers winNumbers = new LottoNumbers(List.of(1, 2, 3, 7, 8, 9));
-        MatchResult result = lottoWallet.countMatches(winNumbers);
+        LottoNumbers winNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 10;
 
-        assertThat(result.calculateProfit(2000)).isEqualTo(1.5);
+        MatchResult result = lottoWallet.countMatches(winNumbers, bonusNumber);
+
+        assertThat(result.calculateProfit(2000)).isEqualTo(2.5);
     }
 }

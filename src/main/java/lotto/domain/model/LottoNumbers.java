@@ -22,6 +22,10 @@ public class LottoNumbers {
                 .count();
     }
 
+    boolean matchBonus(int bonusNumber) {
+        return this.numbers.contains(bonusNumber);
+    }
+
     private void validate() {
         validateSize();
         validateRange();

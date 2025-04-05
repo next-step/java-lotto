@@ -3,6 +3,7 @@ package lotto.domain.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,19 +27,24 @@ public class LottoWalletTest {
     @DisplayName("로또 번호를 비교하여 일치하는 개수를 센다.")
     @Test
     void countMatchTest() {
-        LottoNumbers lotto1 = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers lotto2 = new LottoNumbers(List.of(7, 8, 9, 10, 11, 12));
-        LottoNumbers winNumbers = new LottoNumbers(List.of(1, 2, 3, 7, 8, 9));
-
         LottoWallet lottoWallet = new LottoWallet();
-        lottoWallet.addLotto(lotto1);
-        lottoWallet.addLotto(lotto2);
+        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
+        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 4, 7, 8)));
+        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 7, 8, 9)));
+        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 7, 8, 9, 10)));
+        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 10)));
 
-        MatchResult result = lottoWallet.countMatches(winNumbers);
+        LottoNumbers winNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 10;
 
-        assertThat(result.getCount(3)).isEqualTo(1);
-        assertThat(result.getCount(4)).isEqualTo(0);
-        assertThat(result.getCount(5)).isEqualTo(0);
-        assertThat(result.getCount(6)).isEqualTo(0);
+        MatchResult result = lottoWallet.countMatches(winNumbers, bonusNumber);
+
+        assertThat(result.getCount(Rank.valueOf("FIRST"))).isEqualTo(1);
+        assertThat(result.getCount(Rank.valueOf("SECOND"))).isEqualTo(1);
+        assertThat(result.getCount(Rank.valueOf("THIRD"))).isEqualTo(1);
+        assertThat(result.getCount(Rank.valueOf("FOURTH"))).isEqualTo(1);
+        assertThat(result.getCount(Rank.valueOf("FIFTH"))).isEqualTo(1);
+        assertThat(result.getCount(Rank.valueOf("MISS"))).isEqualTo(1);
     }
 }

@@ -17,6 +17,10 @@ public class InputView {
         return parseIntFromString(stringInput);
     }
 
+    public static int getBonusNumber() {
+        return getIntInput("보너스 볼을 입력해 주세요.");
+    }
+
     private static List<Integer> parseIntFromString(String input) {
         return Arrays.stream(input.split(","))
                 .map(String::trim)
