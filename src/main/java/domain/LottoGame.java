@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
@@ -22,7 +21,7 @@ public class LottoGame {
         return this;
     }
 
-    public Map<PrizeEnum, Integer> getSummary(List<Integer> winNumbers, int bonus){
-        return lottos.getSummary(winNumbers, bonus);
+    public Map<PrizeEnum, Integer> calculateWinResult(LottoNumbers winNumbers, int bonus){
+        return lottos.calculateWinResult(winNumbers, bonus);
     }
 }

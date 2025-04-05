@@ -2,6 +2,7 @@ package views;
 
 import data.Messages;
 import domain.LottoGame;
+import domain.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,14 +20,14 @@ public class InputView {
         return ticketCount;
     }
 
-    public static List<Integer> inputWinNumbers() {
+    public static LottoNumbers inputWinNumbers() {
         ResultView.println(Messages.ASK_WIN_NUMBERS);
 
         String[] winNumbersStr = scanner.next().split(",");
 
         ResultView.printWinNumbers(winNumbersStr);
 
-        return Arrays.stream(winNumbersStr).map(Integer::parseInt).collect(Collectors.toList());
+        return new LottoNumbers(Arrays.stream(winNumbersStr).map(Integer::parseInt).collect(Collectors.toList()));
     }
 
     public static int inputBonusNumbers() {

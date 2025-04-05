@@ -27,7 +27,7 @@ class LottosTest {
             add(new Lotto(new LottoNumbers(List.of(1,2,3,4,5,6))));
         }});
 
-        assertThat(lottos.getSummary(List.of(1,2,3,4,5,7), 6)).containsKey(PrizeEnum.FIVE_HIT_BONUS_HIT);
+        assertThat(lottos.calculateWinResult(new LottoNumbers(List.of(1,2,3,4,5,7)), 6)).containsKey(PrizeEnum.FIVE_HIT_BONUS_HIT);
     }
 
     @Test
@@ -37,6 +37,6 @@ class LottosTest {
             add(new Lotto(new LottoNumbers(List.of(1,2,3,4,5,6))));
         }});
 
-        assertThat(lottos.getSummary(List.of(1,2,3,4,5,6), 7)).containsKey(PrizeEnum.SIX_HIT);
+        assertThat(lottos.calculateWinResult(new LottoNumbers(List.of(1,2,3,4,5,6)), 7)).containsKey(PrizeEnum.SIX_HIT);
     }
 }
