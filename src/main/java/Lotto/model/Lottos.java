@@ -2,11 +2,12 @@ package Lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(){
+    public Lottos() {
         lottos = new ArrayList<>();
     }
 
@@ -14,11 +15,15 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public List<List<Integer>> toNumberList() {
+    public List<List<Integer>> toIntegerNumberList() {
         List<List<Integer>> numberList = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            numberList.add(lotto.numbers());
+            List<Integer> converted = lotto.numbers().stream()
+                    .map(LottoNumber::value)
+                    .collect(Collectors.toList());
+            numberList.add(converted);
         }
+
         return numberList;
     }
 
