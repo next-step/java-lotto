@@ -71,5 +71,5 @@
 
 - [x] 수익률 계산 기능
 
-- [ ] InputView, ResultView 
+- [X] InputView, ResultView 
 
