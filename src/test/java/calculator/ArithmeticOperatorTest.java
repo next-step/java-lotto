@@ -1,7 +1,10 @@
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+package calculator;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class ArithmeticOperatorTest {
 
@@ -33,8 +36,8 @@ class ArithmeticOperatorTest {
     @DisplayName("0으로 나누면 예외가 발생한다.")
     void divisionByZero() {
         assertThatThrownBy(() -> ArithmeticOperator.DIVISION.operate(6, 0))
-                .isInstanceOf(ArithmeticException.class)
-                .hasMessage("0으로 나눌 수 없습니다.");
+            .isInstanceOf(ArithmeticException.class)
+            .hasMessage("0으로 나눌 수 없습니다.");
     }
 
     @Test
@@ -69,7 +72,7 @@ class ArithmeticOperatorTest {
     @DisplayName("지원하지 않는 연산자 기호로 찾으면 예외가 발생한다.")
     void fromSymbolWithInvalidOperator() {
         assertThatThrownBy(() -> ArithmeticOperator.fromSymbol("%"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("지원하지 않는 연산자입니다: %");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("지원하지 않는 연산자입니다: %");
     }
 } 
