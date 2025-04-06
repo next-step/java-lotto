@@ -12,11 +12,11 @@ public class InputView {
         return new PurchasePrice(scanner.nextLine());
     }
 
-    public static WinningNumbers getWinningNumbers() {
+    public static LottoTicket getWinningTicket() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.nextLine();
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusNumber = scanner.nextLine();
-        return new WinningNumbers(numbers, bonusNumber);
+        return new LottoTicket(numbers, bonusNumber);
     }
 }

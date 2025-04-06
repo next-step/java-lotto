@@ -7,8 +7,7 @@ public class LottoApplication {
         LottoTicket[] lottoTickets = LottoTicketMachine.purchase(purchasePrice);
         ResultView.showPurchaseResult(lottoTickets);
 
-        WinningNumbers winningNumbers = InputView.getWinningNumbers();
-        LottoTicket winningTicket = new LottoTicket(winningNumbers.getNumbers());
+        LottoTicket winningTicket = InputView.getWinningTicket();
         LottoStatistics lottoStatistics = new LottoStatistics(winningTicket, lottoTickets);
         ResultView.showStatistics(lottoStatistics);
     }

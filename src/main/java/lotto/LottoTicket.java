@@ -1,20 +1,46 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
 
-    public static final int MAX_LOTTO_NUM = 45;
     public static final int PRICE_PER_TICKET = 1000;
+    private static final int MAX_LOTTO_NUM = 45;
     private static final int LOTTO_NUM_COUNT = 6;
     private static final int MIN_LOTTO_NUM = 1;
+
     private final Set<Integer> numbers;
 
     public LottoTicket(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = new HashSet<>(numbers);
+    }
+
+    public LottoTicket(String numbersStr, String bonusNumberStr) {
+        this(parseNumbers(numbersStr));
+    }
+
+    private static List<Integer> parseNumbers(String numbersStr) {
+        if (numbersStr == null || numbersStr.isBlank()) {
+            throw new IllegalArgumentException("입력값이 없습니다.");
+        }
+
+        List<Integer> numbers = new ArrayList<>();
+        for (String numberStr : numbersStr.split(",")) {
+            numbers.add(parseNumber(numberStr));
+        }
+        return numbers;
+    }
+
+    private static int parseNumber(String numberStr) {
+        try {
+            return Integer.parseInt(numberStr.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
+        }
     }
 
     private void validateNumbers(List<Integer> numbers) {

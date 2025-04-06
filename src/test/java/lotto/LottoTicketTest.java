@@ -1,7 +1,7 @@
 package lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +13,7 @@ class LottoTicketTest {
     @DisplayName("로또 티켓은 6개의 숫자로 이루어져 있다.")
     void shouldHaveSixNumbers() {
         LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        assertEquals(6, lottoTicket.getNumbers().size());
+        assertThat(6).isEqualTo(lottoTicket.getNumbers().size());
     }
 
     @Test
@@ -41,10 +41,65 @@ class LottoTicketTest {
     void shouldCompareLottoTickets() {
         LottoTicket lottoTicket1 = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
 
-        assertEquals(6, lottoTicket1.countMatches(new LottoTicket(List.of(1, 2, 3, 4, 5, 6))));
-        assertEquals(5, lottoTicket1.countMatches(new LottoTicket(List.of(7, 2, 3, 4, 5, 6))));
-        assertEquals(1, lottoTicket1.countMatches(new LottoTicket(List.of(7, 8, 9, 10, 11, 6))));
-        assertEquals(0, lottoTicket1.countMatches(new LottoTicket(List.of(7, 8, 9, 10, 11, 12))));
+        assertThat(6).isEqualTo(lottoTicket1.countMatches(new LottoTicket(List.of(1, 2, 3, 4, 5, 6))));
+        assertThat(5).isEqualTo(lottoTicket1.countMatches(new LottoTicket(List.of(7, 2, 3, 4, 5, 6))));
+        assertThat(1).isEqualTo(lottoTicket1.countMatches(new LottoTicket(List.of(7, 8, 9, 10, 11, 6))));
+        assertThat(0).isEqualTo(lottoTicket1.countMatches(new LottoTicket(List.of(7, 8, 9, 10, 11, 12))));
+    }
+
+    @Test
+    @DisplayName("문자열로부터 로또 티켓을 생성한다")
+    void shouldCreateLottoTicketFromString() {
+        String numbersStr = "1,2,3,4,5,6";
+        String bonusNumberStr = "7";
+
+        LottoTicket ticket = new LottoTicket(numbersStr, bonusNumberStr);
+
+        assertThat(ticket.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
+    @Test
+    @DisplayName("공백이 포함된 문자열로부터 로또 티켓을 생성한다")
+    void shouldCreateLottoTicketFromStringWithSpaces() {
+        String numbersStr = "1, 2, 3, 4, 5, 6";
+        String bonusNumberStr = "7";
+
+        LottoTicket ticket = new LottoTicket(numbersStr, bonusNumberStr);
+
+        assertThat(ticket.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
+    @Test
+    @DisplayName("입력값이 null이면 예외가 발생한다")
+    void shouldThrowExceptionWhenInputIsNull() {
+        String numbersStr = null;
+        String bonusNumberStr = "7";
+
+        assertThatThrownBy(() -> new LottoTicket(numbersStr, bonusNumberStr))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("입력값이 없습니다.");
+    }
+
+    @Test
+    @DisplayName("입력값이 비어있으면 예외가 발생한다")
+    void shouldThrowExceptionWhenInputIsBlank() {
+        String numbersStr = "";
+        String bonusNumberStr = "7";
+
+        assertThatThrownBy(() -> new LottoTicket(numbersStr, bonusNumberStr))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("입력값이 없습니다.");
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 문자열이 포함되어 있으면 예외가 발생한다")
+    void shouldThrowExceptionWhenInputContainsNonNumber() {
+        String numbersStr = "1,2,3,4,5,a";
+        String bonusNumberStr = "7";
+
+        assertThatThrownBy(() -> new LottoTicket(numbersStr, bonusNumberStr))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("로또 번호는 숫자여야 합니다.");
     }
 
 }
