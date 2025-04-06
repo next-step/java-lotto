@@ -22,11 +22,11 @@ class LottoTest {
         Set<Integer> winningNumbers = parseNumbers(winningNumbersStr);
 
         Lotto lotto = new Lotto(lottoNumbers);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, 7);
 
-        int commonCount = lotto.getMatchedNumberCount(winningLotto);
+        MatchedLottoCount matchedLottoCount = lotto.getMatchedNumberCount(winningLotto);
 
-        assertEquals(expectedCount, commonCount);
+        assertEquals(expectedCount, matchedLottoCount.getMatchedMainCount());
     }
 
 

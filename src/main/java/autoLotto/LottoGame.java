@@ -14,7 +14,7 @@ public class LottoGame {
         AutoLotto autoLottos = new AutoLotto(lottoResult.getPurchasedLottoCount());
         System.out.println(autoLottos);
 
-        WinningLotto winningLotto = new WinningLotto(inputView.getLottoWinningNumber());
+        WinningLotto winningLotto = new WinningLotto(inputView.getLottoWinningNumber(), inputView.getBouns());
         winningLotto.validate();
 
         processLottoResult(lottoResult, autoLottos, winningLotto);

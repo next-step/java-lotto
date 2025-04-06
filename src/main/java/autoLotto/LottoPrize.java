@@ -3,17 +3,20 @@ package autoLotto;
 import java.util.Arrays;
 
 public enum LottoPrize {
-    NONE(-1, 0),
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    MISS(-1, false, 0),
+    FIFTH(3, false, 5_000),
+    FOURTH(4, false, 50_000),
+    THIRD(5, false, 1_500_000),
+    SECOND(5, true, 30_000_000),
+    FIRST(6, false, 2_000_000_000);
 
     private final int matchedCount;
+    private final boolean hitBonusNumber;
     private final int prize;
 
-    LottoPrize(int matchedCount, int prize) {
+    LottoPrize(int matchedCount, boolean hitBonusNumber, int prize) {
         this.matchedCount = matchedCount;
+        this.hitBonusNumber = hitBonusNumber;
         this.prize = prize;
     }
 
@@ -21,19 +24,28 @@ public enum LottoPrize {
         return matchedCount;
     }
 
+    public boolean isHitBonusNumber() {
+        return hitBonusNumber;
+    }
+
     public int getPrize() {
         return prize;
     }
 
-    public static LottoPrize valueOf(int matchedCount) {
+    public static LottoPrize valueOf(MatchedLottoCount matchedLottoCount) {
         return Arrays.stream(values())
-                     .filter(prize -> prize.getMatchedCount() == matchedCount)
+                     .filter(it -> matchedLottoCount.validate(it))
                      .findFirst()
-                     .orElse(NONE);
+                     .orElse(MISS);
     }
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%d원)", matchedCount, prize);
+        String result = String.format("%d개 일치", matchedCount);
+        if (hitBonusNumber) {
+            result += ", 보너스 볼 일치";
+        }
+        return String.format("%s (%,d원)", result, prize);
     }
+
 }

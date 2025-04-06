@@ -18,14 +18,14 @@ class LottoResultTest {
     @DisplayName("addMatchCount()는 인자에 해당하는 LottoPrize에 맞는 matchCount를 증가시킨다.")
     @Test
     void addMatchCount() {
-        lottoResult.addMatchCount(LottoPrize.THREE);
-        lottoResult.addMatchCount(LottoPrize.FOUR);
-        lottoResult.addMatchCount(LottoPrize.FOUR);
+        lottoResult.addMatchCount(LottoPrize.THIRD);
+        lottoResult.addMatchCount(LottoPrize.FOURTH);
+        lottoResult.addMatchCount(LottoPrize.FOURTH);
 
-        assertEquals(1, lottoResult.getResult(LottoPrize.THREE));
-        assertEquals(2, lottoResult.getResult(LottoPrize.FOUR));
-        assertEquals(0, lottoResult.getResult(LottoPrize.FIVE));
-        assertEquals(0, lottoResult.getResult(LottoPrize.SIX));
-        assertEquals(0, lottoResult.getResult(LottoPrize.NONE));
+        assertEquals(0, lottoResult.getResult(LottoPrize.FIRST));
+        assertEquals(0, lottoResult.getResult(LottoPrize.SECOND));
+        assertEquals(1, lottoResult.getResult(LottoPrize.THIRD));
+        assertEquals(2, lottoResult.getResult(LottoPrize.FOURTH));
+        assertEquals(0, lottoResult.getResult(LottoPrize.MISS));
     }
 }

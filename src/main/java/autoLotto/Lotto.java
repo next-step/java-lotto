@@ -10,13 +10,20 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int getMatchedNumberCount(Lotto winningLotto) {
-        return (int) numbers.stream()
-                            .filter(winningLotto::containsNumber)
-                            .count();
+    public MatchedLottoCount getMatchedNumberCount(WinningLotto winningLotto) {
+        int matchedMainCount = (int) numbers.stream()
+                                            .filter(winningLotto::containsNumber)
+                                            .count();
+        boolean isBonusNumber = false;
+        if (matchedMainCount == LottoPrize.SECOND.getMatchedCount()) {
+            isBonusNumber = numbers.stream()
+                                   .anyMatch(winningLotto::containsBonusNumber);
+
+        }
+        return new MatchedLottoCount(matchedMainCount, isBonusNumber);
     }
 
-    private boolean containsNumber(int number) {
+    protected boolean containsNumber(int number) {
         return numbers.contains(number);
     }
 
@@ -24,7 +31,17 @@ public class Lotto {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("The number of Lotto numbers must be 6.");
         }
+        validateNumbersInRange();
     }
+
+    private void validateNumbersInRange() {
+        boolean hasInvalidNumber = numbers.stream()
+                                          .anyMatch(num -> num < 1 || num > 45);
+        if (hasInvalidNumber) {
+            throw new IllegalArgumentException("All numbers must be between 1 and 45.");
+        }
+    }
+
 
     @Override
     public String toString() {

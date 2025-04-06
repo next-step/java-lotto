@@ -40,7 +40,7 @@ public class LottoResult {
 
         AtomicLong profit = new AtomicLong();
         result.entrySet().stream()
-              .filter(entry -> !entry.getKey().equals(LottoPrize.NONE))
+              .filter(entry -> !entry.getKey().equals(LottoPrize.MISS))
               .map(entry -> formatLottoPrize(entry, profit))
               .forEach(resultString::append);
 
