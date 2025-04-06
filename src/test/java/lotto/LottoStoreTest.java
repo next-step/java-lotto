@@ -1,8 +1,12 @@
 package lotto;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,5 +25,17 @@ class LottoStoreTest {
 
         assertThat(LottoStore.sellLotto(100000000))
                 .hasSize(100000);
+    }
+
+    @DisplayName("로또 수동 생성 테스트")
+    @Test
+    public void sellLottoWithSlips() throws Exception {
+        assertThat(LottoStore.sellLotto(0, List.of(Set.of(1,2,3,4,5,6))))
+                .hasSize(1)
+                .containsExactly(new LottoNumbers("1,2,3,4,5,6"));
+
+        assertThat(LottoStore.sellLotto(10000, List.of(Set.of(1,2,3,4,5,6))))
+                .hasSize(11)
+                .contains(new LottoNumbers("1,2,3,4,5,6"));
     }
 }
