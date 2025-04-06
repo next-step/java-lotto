@@ -1,7 +1,10 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -51,9 +54,23 @@ public class InputView {
         }
     }
 
-    public static Set<Integer> getPositiveNumberSetInput(String prompt, String delimiter) {
+    public static List<Set<Integer>> getPositiveNumberSetInput(String prompt, String delimiter, int count) {
         System.out.println(prompt);
 
+        List<Set<Integer>> resultList = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            resultList.add(getPositiveNumberSetInput(delimiter));
+        }
+
+        return resultList;
+    }
+
+    public static Set<Integer> getPositiveNumberSetInput(String prompt, String delimiter) {
+        System.out.println(prompt);
+        return getPositiveNumberSetInput(delimiter);
+    }
+
+    private static Set<Integer> getPositiveNumberSetInput(String delimiter) {
         while (true) {
             try {
                 String line = scanner.nextLine();
