@@ -9,17 +9,18 @@ class RankTest {
     @ParameterizedTest
     @DisplayName("matchCount에 매칭되는 Rank를 반환한다.")
     @CsvSource({
-            "0, NO_MATCH",
-            "1, ONE_MATCH",
-            "2, TWO_MATCH",
-            "3, THREE_MATCH",
-            "4, FOUR_MATCH",
-            "5, FIVE_MATCH",
-            "6, SIX_MATCH",
-            "7, NO_MATCH"
+            "0, false, NO_MATCH",
+            "1, false, NO_MATCH",
+            "1, true, NO_MATCH",
+            "3, true, THREE_MATCH",
+            "3, false, THREE_MATCH",
+            "4, false, FOUR_MATCH",
+            "5, false, FIVE_MATCH",
+            "5, true, FIVE_MATCH_BONUS",
+            "6, false, SIX_MATCH",
     })
-    void valueOfTest(int input, Rank expected) {
-        Rank result = Rank.valueOf(input);
+    void valueOfTest(int matchCount, boolean bonusMatch, Rank expected) {
+        Rank result = Rank.valueOf(matchCount, bonusMatch);
 
         Assertions.assertEquals(result, expected);
     }

@@ -12,15 +12,16 @@ public class LottoApplication {
         ResultView resultView = new ResultView();
         Parser parser = new Parser();
 
-        int price = inputView.getIntegerInput();
+        int price = inputView.getPurchasePrice();
         LottoShop lottoShop = new LottoShop(price, new LottoAutoGenerator());
         resultView.printLottoTicketAmount(lottoShop.getTicketAmount());
         lottoShop.getLottoTicketsNumber().forEach(resultView::printLottoNumbers);
 
-        List<LottoNumber> winningNumbers = parser.splitAndParseToLottoNumberList(inputView.getStringInput());
-        LottoResult lottoResult = LottoResult.from(winningNumbers, lottoShop.getLottoTicketsNumber());
-        resultView.printMatchResult(lottoResult.getResult());
-        LottoEarning lottoProfit = LottoEarning.from(lottoResult.getResult(), lottoShop.getPurchasePrice());
-        resultView.printReturnRate(lottoProfit.getReturnRate());
+        List<LottoNumber> winningNumbers = parser.splitAndParseToLottoNumberList(inputView.getWinningNumbers());
+        LottoNumber bonusNumber = new LottoNumber(inputView.getBonusNumber());
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonusNumber);
+        LottoEarning lottoEarning = LottoEarning.from(winningLottoNumbers.calculateResult(lottoShop.getLottoTicketsNumber()), lottoShop.getPurchasePrice());
+        resultView.printMatchResult(lottoEarning.getResult());
+        resultView.printReturnRate(lottoEarning.getReturnRate());
     }
 }

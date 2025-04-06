@@ -28,7 +28,7 @@ public class ResultView {
                 .filter(rank -> rank.getMatchCount() >= 3)
                 .forEach(rank -> {
                     int count = result.getOrDefault(rank, 0);
-                    System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getMatchCount(), rank.getPrize(), count);
+                    System.out.printf("%s (%d원) - %d개%n", rank.getDescription(), rank.getPrize(), count);
                 });
     }
 }

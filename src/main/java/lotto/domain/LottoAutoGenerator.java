@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -21,7 +20,7 @@ public class LottoAutoGenerator {
         List<LottoNumber> numbers = new ArrayList<>(BASE_NUMBERS);
         Collections.shuffle(numbers);
         List<LottoNumber> lottoNumbers = numbers.subList(0, SIZE).stream()
-                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
+                .sorted()
                 .collect(Collectors.toUnmodifiableList());
         return new LottoTicket(lottoNumbers);
     }
