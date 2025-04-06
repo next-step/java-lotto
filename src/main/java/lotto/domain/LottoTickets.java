@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.strategy.AutoLottoStrategy;
 import lotto.strategy.LottoStrategy;
 
 import java.util.ArrayList;
@@ -12,9 +11,6 @@ public class LottoTickets {
     public static final int LOTTO_PRICE = 1000;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets() {
-        this.lottoTickets = new ArrayList<>();
-    }
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
@@ -66,9 +62,6 @@ public class LottoTickets {
         return (double) totalWon / totalSpent;
     }
 
-    public void addTicket(LottoTicket lottoTicket) {
-        lottoTickets.add(lottoTicket);
-    }
 
     public static LottoTickets merge(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
         // 두 LottoTickets 객체의 내부 리스트를 가져와 병합

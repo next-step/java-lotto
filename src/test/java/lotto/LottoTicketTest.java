@@ -2,16 +2,16 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.strategy.AutoLottoStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.LottoTestUtils.createLottoTicket;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTicketTest {
 
@@ -53,9 +53,22 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("문자열 입력으로 생성된 로또 티켓이 예상 번호와 일치한다")
-    void LottoTicket(){
-        assertThat(new LottoTicket("1, 2, 3, 4, 5, 6").getLottoNumbers()).isEqualTo(List.of(1,2,3,4,5,6));
+    @DisplayName("contains()는 LottoNumber가 리스트에 포함되어 있는지 확인한다")
+    void contains_LottoNumberExists() {
+        String input = "1, 2, 3, 4, 5, 6";
+        LottoTicket lottoTicket = new LottoTicket(input);
+        LottoNumber targetNumber = LottoNumber.of(3);
+
+        assertTrue(lottoTicket.contains(targetNumber));
     }
 
+    @Test
+    @DisplayName("contains()는 LottoNumber가 리스트에 포함되어 있지 않으면 false를 반환한다")
+    void contains_LottoNumberDoesNotExist() {
+        String input = "1, 2, 3, 4, 5, 6";
+        LottoTicket lottoTicket = new LottoTicket(input);
+        LottoNumber targetNumber = LottoNumber.of(7);
+
+        assertFalse(lottoTicket.contains(targetNumber));
+    }
 }

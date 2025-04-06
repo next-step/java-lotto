@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLottoTicket {
     private final List<LottoNumber> lottoNumbers;
@@ -15,16 +13,7 @@ public class WinningLottoTicket {
     }
 
     public WinningLottoTicket(final String lottoNumbers, final int bonusNumber) {
-        this(createWinningTicket(lottoNumbers), LottoNumber.of(bonusNumber));
-    }
-
-    private static List<LottoNumber> createWinningTicket(String input) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(input.trim().split(","))
-                .map(String::trim)        // 각 번호의 공백 제거
-                .map(Integer::parseInt)   // 문자열을 숫자로 변환
-                .map(LottoNumber::of)     // 숫자를 LottoNumber로 변환
-                .collect(Collectors.toList()); // List<LottoNumber>로 수집
-        return lottoNumbers;
+        this(LottoTicket.createLottoTicket(lottoNumbers), LottoNumber.of(bonusNumber));
     }
 
     private void validateNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {

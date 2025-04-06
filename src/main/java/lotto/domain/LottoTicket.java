@@ -4,6 +4,7 @@ import lotto.strategy.LottoStrategy;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,11 +22,16 @@ public class LottoTicket {
         this(createLottoTicket(input));
     }
 
+    public List<LottoNumber> getLottoTicket() {
+        return lottoNumbers;
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
+
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> uniqueNumbers = lottoNumbers.stream().collect(Collectors.toSet());
 
@@ -39,7 +45,7 @@ public class LottoTicket {
         return new LottoTicket(generatedNumbers);
     }
 
-    private static List<LottoNumber> createLottoTicket(String input) {
+    static List<LottoNumber> createLottoTicket(String input) {
         List<LottoNumber> lottoNumbers = Arrays.stream(input.trim().split(","))
                 .map(String::trim)        // 각 번호의 공백 제거
                 .map(Integer::parseInt)   // 문자열을 숫자로 변환
@@ -47,7 +53,16 @@ public class LottoTicket {
                 .collect(Collectors.toList()); // List<LottoNumber>로 수집
         return lottoNumbers;
     }
+
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 }
