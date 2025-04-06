@@ -1,13 +1,9 @@
 package autoLotto;
 
-import java.util.List;
-import java.util.Set;
-
 public class LottoGame {
     private LottoGenerator lottoGenerator = new LottoGenerator();
     private InputView inputView = new InputView();
     private OutputView outputView = new OutputView();
-    private LottoValidator lottoValidator = new LottoValidator();
 
     void play() {
         int budget = inputView.getLottoBudget();
@@ -15,22 +11,23 @@ public class LottoGame {
 
         LottoResult lottoResult = new LottoResult(budget);
 
-        List<List<Integer>> boughtLottos = lottoGenerator.generateLottos(lottoResult.getPurchasedLottoCount());
-        boughtLottos.forEach(outputView::printLotto);
+        AutoLotto autoLottos = new AutoLotto(lottoResult.getPurchasedLottoCount());
+        System.out.println(autoLottos);
 
-        Set<Integer> winningNumber = inputView.getLottoWinningNumber();
-        lottoValidator.validateInputLotto(winningNumber);
+        WinningLotto winningLotto = new WinningLotto(inputView.getLottoWinningNumber());
+        winningLotto.validate();
 
-        boughtLottos.forEach(boughtLotto -> processLottoResult(lottoResult, boughtLotto, winningNumber));
+        processLottoResult(lottoResult, autoLottos, winningLotto);
 
         outputView.printLottoResult(lottoResult);
     }
 
-    private void processLottoResult(LottoResult lottoResult, List<Integer> boughtLotto, Set<Integer> winningNumber) {
-        boughtLotto.retainAll(winningNumber);
-        lottoResult.addMatchCount(LottoPrize.valueOf(boughtLotto.size()));
+    private void processLottoResult(LottoResult lottoResult, AutoLotto autoLotto, WinningLotto winningNumber) {
+        autoLotto.getLottos()
+                 .forEach(lotto ->
+                              lottoResult.addMatchCount(LottoPrize.valueOf(lotto.getMatchedNumberCount(winningNumber)))
+                         );
     }
-
 
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame();

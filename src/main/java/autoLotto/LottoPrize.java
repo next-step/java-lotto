@@ -1,7 +1,6 @@
 package autoLotto;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum LottoPrize {
     NONE(-1, 0),
