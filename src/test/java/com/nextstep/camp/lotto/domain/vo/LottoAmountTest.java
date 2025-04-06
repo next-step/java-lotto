@@ -28,7 +28,7 @@ class LottoAmountTest {
     void valid_amount_creates_LottoAmount(int input, int expectedCount) {
         LottoAmount amount = LottoAmount.of(input);
         assertEquals(input, amount.getValue());
-        assertEquals(expectedCount, amount.lottoCount());
+        assertEquals(expectedCount, amount.getLottoCount().getCount());
     }
 
     static Stream<Integer> zeroOrNegativeAmounts() {

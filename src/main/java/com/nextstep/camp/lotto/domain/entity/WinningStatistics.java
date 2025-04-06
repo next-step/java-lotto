@@ -1,12 +1,10 @@
 package com.nextstep.camp.lotto.domain.entity;
 
-import com.nextstep.camp.lotto.domain.type.ProfitType;
+import java.util.Map;
+
 import com.nextstep.camp.lotto.domain.type.Rank;
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
 import com.nextstep.camp.lotto.domain.vo.RateOfReturn;
-
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class WinningStatistics {
     private final Map<Rank, Integer> resultCounts;
@@ -37,19 +35,5 @@ public class WinningStatistics {
 
     public LottoAmount getSpent() {
         return spent;
-    }
-
-    @Override
-    public String toString() {
-        String resultString = resultCounts.entrySet().stream()
-            .map(entry -> entry.getKey() + " - " + entry.getValue() + "개")
-            .collect(Collectors.joining("\n"));
-
-        RateOfReturn rateOfReturn = calculateRateOfReturn(spent);
-        ProfitType profitType = rateOfReturn.getProfitType();
-        return resultString + "\n" +
-            "총 수익률은 " +
-            rateOfReturn.toString() +
-            "입니다.(기준이 1이기 때문에 결과적으로 " + profitType.getDescription() + "라는 의미임)";
     }
 }

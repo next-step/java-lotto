@@ -1,11 +1,12 @@
 package com.nextstep.camp.lotto.domain.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.nextstep.camp.lotto.domain.exception.LottoTicketsCannotBeEmptyException;
 import com.nextstep.camp.lotto.domain.type.Rank;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoTicket> tickets;
@@ -23,6 +24,13 @@ public class LottoTickets {
 
     public static LottoTickets of(List<LottoTicket> tickets) {
         return new LottoTickets(tickets);
+    }
+
+    public static LottoTickets of(LottoTickets manualTickets, LottoTickets autoTickets) {
+        List<LottoTicket> allTickets = new ArrayList<>();
+        allTickets.addAll(manualTickets.getTickets());
+        allTickets.addAll(autoTickets.getTickets());
+        return new LottoTickets(allTickets);
     }
 
     public int size() {

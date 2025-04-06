@@ -1,14 +1,14 @@
 package com.nextstep.camp.lotto.domain.vo;
 
-import com.nextstep.camp.lotto.domain.exception.LottoNumberOutOfRangeException;
-
 import java.util.Objects;
+
+import com.nextstep.camp.lotto.domain.exception.LottoNumberOutOfRangeException;
 
 public class LottoNumber {
     private final int value;
 
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 45;
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
 
     private LottoNumber(int value) {
         validate(value);

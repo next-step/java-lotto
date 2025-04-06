@@ -1,17 +1,15 @@
 package com.nextstep.camp.lotto.domain.vo;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 import com.nextstep.camp.lotto.domain.exception.LottoNumberDuplicatedException;
 import com.nextstep.camp.lotto.domain.exception.LottoNumbersSizeException;
-
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
-    private static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private LottoNumbers(List<Integer> rawNumbers) {
         validate(rawNumbers);

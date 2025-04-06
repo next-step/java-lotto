@@ -16,13 +16,6 @@ public class LottoTicketsInput extends AbstractInput<LottoTickets> {
 
     @Override
     public String getLabel() {
-        return "14개를 구매했습니다.";
-    }
-
-    @Override
-    public LottoTickets action() {
-        LottoTickets lottoTickets = super.action();
-        System.out.println(lottoTickets);
-        return lottoTickets;
+        return "";
     }
 }
