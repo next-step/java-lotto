@@ -3,6 +3,7 @@ package domain;
 import data.Messages;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,16 @@ public class LottoNumbers {
             throw new IllegalArgumentException(Messages.NUMBER_OF_NUMBERS_ERROR);
         }
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public LottoNumbers(String lottoNumbers) {
+        this.lottoNumbers = manaul(lottoNumbers);
+    }
+
+    private List<Integer> manaul(String lottoNumber) {
+        return Arrays.stream(lottoNumber.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public List<Integer> getLottoNumbers() {

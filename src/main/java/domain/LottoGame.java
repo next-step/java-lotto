@@ -24,4 +24,9 @@ public class LottoGame {
     public Map<PrizeEnum, Integer> calculateWinResult(LottoNumbers winNumbers, int bonus) {
         return lottos.calculateWinResult(winNumbers, bonus);
     }
+
+    public LottoGame buy(int ticketCount, String[] manualTicketNumbers){
+        lottos.buy(ticketCount, manualTicketNumbers);
+        return this;
+    }
 }

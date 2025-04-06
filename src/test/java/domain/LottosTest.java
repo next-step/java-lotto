@@ -10,6 +10,13 @@ import static org.assertj.core.api.Assertions.*;
 class LottosTest {
 
     @Test
+    void 자동_수동_생성_개수확인() {
+        Lottos lottos = new Lottos().buy(5,new String[]{"1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8"});
+        assertThat(lottos.getAutoLottos()).hasSize(2);
+        assertThat(lottos.getManualLottos()).hasSize(3);
+    }
+
+    @Test
     void 구입후_동일_객체확인() {
         Lottos lottos = new Lottos();
         assertThat(lottos.buy(3)).isEqualTo(lottos);
@@ -17,7 +24,7 @@ class LottosTest {
 
     @Test
     void 구입갯수_확인() {
-        assertThat(new Lottos().buy(3).getLottos()).hasSize(3);
+        assertThat(new Lottos().buy(3).getAutoLottos()).hasSize(3);
     }
 
     @Test

@@ -11,8 +11,11 @@ public class LottoMain {
 
         int ticketCount = InputView.inputBuyAmountGetTicketCount();
 
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.buy(ticketCount);
+        int manualTicketCount = InputView.inputBuyManualTicketCount();
+
+        String[] manualTicketNumbers = InputView.inputManualTicketNumbers(manualTicketCount);
+
+        LottoGame lottoGame = new LottoGame().buy(ticketCount, manualTicketNumbers);
 
         Lottos lottos = lottoGame.getLottos();
 

@@ -1,29 +1,43 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Lottos {
 
-    private final List<Lotto> lottos;
+    private final List<Lotto> autoLottos;
+    private final List<Lotto> manaulLottos;
 
     public Lottos() {
         this(new ArrayList<>());
     }
 
     Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this(lottos, new ArrayList<>());
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    Lottos(List<Lotto> lottos, List<Lotto> manualLottos) {
+        this.autoLottos = lottos;
+        this.manaulLottos = manualLottos;
+    }
+
+    public List<Lotto> getAutoLottos() {
+        return autoLottos;
+    }
+
+    public List<Lotto> getManualLottos() {
+        return manaulLottos;
     }
 
     public Lottos buy(int ticketCount) {
-        for (int i = 0; i < ticketCount; i++) {
-            this.lottos.add(new Lotto());
+        return buy(ticketCount, new String[]{});
+    }
+
+    public Lottos buy(int ticketCount, String[] manualTicketNumbers) {
+        for (int i = 0; i < ticketCount - manualTicketNumbers.length; i++) {
+            this.autoLottos.add(new Lotto());
+        }
+        for (String manualTicketNumber : manualTicketNumbers) {
+            this.manaulLottos.add(new Lotto(manualTicketNumber));
         }
         return this;
     }
@@ -32,12 +46,14 @@ public class Lottos {
 
         Map<PrizeEnum, Integer> summaryMap = new HashMap<>();
 
+        List<Lotto> lottos = new ArrayList<>() {{
+            addAll(autoLottos);
+            addAll(manaulLottos);
+        }};
+
         for (Lotto lotto : lottos) {
-            int countOfMatch = lotto.getHitCount(winNumbers);
 
-            boolean matchBonus = lotto.hasBonusNumber(bonus);
-
-            PrizeEnum prizeEnum = PrizeEnum.of(countOfMatch, matchBonus);
+            PrizeEnum prizeEnum = PrizeEnum.of(lotto.getHitCount(winNumbers), lotto.hasBonusNumber(bonus));
 
             summaryMap.put(prizeEnum, summaryMap.getOrDefault(prizeEnum, 0) + 1);
         }

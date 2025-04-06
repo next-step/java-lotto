@@ -14,16 +14,23 @@ public class ResultView {
         System.out.println(num);
     }
 
+    public static void println() {
+        System.out.println();
+    }
+
     public static void println(String str) {
         System.out.println(str);
     }
 
-    public static void printLottoNumber(Lottos lottos) {
-        lottos.getLottos().forEach(lotto -> println(convertToString(lotto.getLottoNumbers())));
+    public static void printf(String str, Object ...value) {
+        System.out.printf(str, value);
     }
 
-    public static String convertToString(List<Integer> lottoNumbers) {
-        return Arrays.toString(lottoNumbers.toArray());
+    public static void printLottoNumber(Lottos lottos) {
+        printf(Messages.TICKET_SUMMARY, lottos.getManualLottos().size(), lottos.getAutoLottos().size());
+        lottos.getManualLottos().forEach(lotto -> println(lotto.convertToString()));
+        lottos.getAutoLottos().forEach(lotto -> println(lotto.convertToString()));
+        println();
     }
 
     public static void printSummary(Map<PrizeEnum, Integer> summaryMap, BigDecimal totalAmount) {
@@ -36,9 +43,9 @@ public class ResultView {
 
             sumPrizeAmount = sumPrizeAmount.add(prizeAmt.multiply(BigDecimal.valueOf(ticketCnt)));
 
-            System.out.printf(Messages.PRIZE_RESULT, prizeEnum.getHit(), bonusMessage, prizeAmt.toPlainString(), ticketCnt);
+            printf(Messages.PRIZE_RESULT, prizeEnum.getHit(), bonusMessage, prizeAmt.toPlainString(), ticketCnt);
         }
-        System.out.printf(Messages.TOTAL_PRIZE_RATIO, sumPrizeAmount.divide(totalAmount, 2, RoundingMode.HALF_UP).doubleValue());
+        printf(Messages.TOTAL_PRIZE_RATIO, sumPrizeAmount.divide(totalAmount, 2, RoundingMode.HALF_UP).doubleValue());
     }
 
     public static void printWinNumbers(String[] lottoNumbers) {

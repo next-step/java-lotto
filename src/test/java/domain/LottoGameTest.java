@@ -21,7 +21,7 @@ class LottoGameTest {
     void buy() {
         LottoGame lottoGame = new LottoGame();
         assertThat(lottoGame).isEqualTo(lottoGame.buy(5));
-        assertThat(lottoGame.getLottos().getLottos().size()).isEqualTo(5);
+        assertThat(lottoGame.getLottos().getAutoLottos().size()).isEqualTo(5);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
@@ -8,6 +9,10 @@ public class Lotto {
 
     public Lotto() {
         this.lottoNumbers = new LottoNumbers();
+    }
+
+    public Lotto(String lottoNumbers) {
+        this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
     Lotto(LottoNumbers lottoNumbers) {
@@ -30,4 +35,7 @@ public class Lotto {
         return lottoNumbers.hasBonusNumber(bonus);
     }
 
+    public String convertToString() {
+        return Arrays.toString(lottoNumbers.getLottoNumbers().toArray());
+    }
 }
