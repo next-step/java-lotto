@@ -1,16 +1,17 @@
 package com.nextstep.camp.lotto;
 
-import java.util.List;
-
 import com.nextstep.camp.lotto.domain.entity.LottoTickets;
 import com.nextstep.camp.lotto.domain.entity.WinningStatistics;
-import com.nextstep.camp.lotto.domain.type.MatchResult;
+import com.nextstep.camp.lotto.domain.type.Rank;
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
+import com.nextstep.camp.lotto.domain.vo.Ranks;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
-import com.nextstep.camp.lotto.view.dto.LottoResultData;
-import com.nextstep.camp.lotto.view.handler.LottoResultViewHandler;
-import com.nextstep.camp.lotto.view.handler.LottoInputViewHandler;
 import com.nextstep.camp.lotto.view.dto.LottoInputData;
+import com.nextstep.camp.lotto.view.dto.LottoResultData;
+import com.nextstep.camp.lotto.view.handler.LottoInputViewHandler;
+import com.nextstep.camp.lotto.view.handler.LottoResultViewHandler;
+
+import java.util.List;
 
 public class LottoApplication {
 
@@ -29,7 +30,8 @@ public class LottoApplication {
         LottoAmount lottoAmount = lottoInputData.getLottoAmount();
         LottoTickets lottoTickets = lottoInputData.getLottoTickets();
         WinningNumbers winningNumbers = lottoInputData.getWinningNumbers();
-        List<MatchResult> matchResults =  lottoTickets.matchAll(winningNumbers);
-        return WinningStatistics.of(matchResults, lottoAmount);
+        List<Rank> ranks =  lottoTickets.matchAll(winningNumbers);
+        Ranks matchResults = Ranks.of(ranks);
+        return WinningStatistics.of(matchResults.getRanksCount(), lottoAmount);
     }
 }

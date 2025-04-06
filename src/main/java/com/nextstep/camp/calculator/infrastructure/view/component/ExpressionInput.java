@@ -4,8 +4,6 @@ import com.nextstep.camp.calculator.domain.vo.ExpressionTokens;
 import com.nextstep.camp.common.strategy.InputStrategy;
 import com.nextstep.camp.common.view.component.AbstractInput;
 
-import java.util.Scanner;
-
 public class ExpressionInput extends AbstractInput<ExpressionTokens> {
 
     private ExpressionInput(InputStrategy<ExpressionTokens> inputStrategy) {

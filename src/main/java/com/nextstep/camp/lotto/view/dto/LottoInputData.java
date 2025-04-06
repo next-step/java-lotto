@@ -2,7 +2,6 @@ package com.nextstep.camp.lotto.view.dto;
 
 import com.nextstep.camp.lotto.domain.entity.LottoTickets;
 import com.nextstep.camp.lotto.domain.vo.LottoAmount;
-import com.nextstep.camp.lotto.domain.vo.LottoNumbers;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 
 public class LottoInputData {

@@ -3,6 +3,9 @@ package com.nextstep.camp.lotto.domain.entity;
 import java.util.List;
 import java.util.stream.Stream;
 
+import com.nextstep.camp.lotto.domain.type.Rank;
+import com.nextstep.camp.lotto.domain.vo.LottoNumber;
+import com.nextstep.camp.lotto.domain.vo.LottoNumbers;
 import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,29 +16,38 @@ class LottoTicketTest {
 
     static Stream<TestCase> provideMatchCases() {
         return Stream.of(
-            new TestCase(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 6), 6),
-            new TestCase(List.of(10, 20, 30, 40, 41, 42), List.of(1, 2, 3, 4, 5, 6), 0),
-            new TestCase(List.of(1, 2, 3, 10, 11, 12), List.of(1, 2, 3, 4, 5, 6), 3)
+            new TestCase(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 6), 7, Rank.SIX),
+            new TestCase(List.of(1, 2, 3, 4, 5, 7), List.of(1, 2, 3, 4, 5, 6), 7, Rank.FIVE_BONUS),
+            new TestCase(List.of(1, 2, 3, 4, 5, 8), List.of(1, 2, 3, 4, 5, 6), 7, Rank.FIVE),
+            new TestCase(List.of(10, 20, 30, 40, 41, 42), List.of(1, 2, 3, 4, 5, 6), 7, Rank.NONE),
+            new TestCase(List.of(1, 2, 3, 10, 11, 12), List.of(1, 2, 3, 4, 5, 6), 7, Rank.THREE)
         );
     }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("provideMatchCases")
-    void countMatch_returns_expected(TestCase testCase) {
+    void match_returns_expected_match_result(TestCase testCase) {
         LottoTicket ticket = LottoTicket.of(testCase.getLottoNumbers());
-        WinningNumbers winning = WinningNumbers.of(testCase.getWinningNumbers());
-        assertEquals(testCase.getExpectedMatchCount(), ticket.countMatch(winning));
+        LottoNumbers lottoNumbers = LottoNumbers.of(testCase.getWinningNumbers());
+
+        LottoNumber bonusNumber = LottoNumber.of(testCase.getBonusNumber());
+        WinningNumbers winning = WinningNumbers.of(lottoNumbers, bonusNumber);
+
+        Rank result = ticket.match(winning);
+        assertEquals(testCase.getExpected(), result);
     }
 
     private static class TestCase {
         private final List<Integer> lottoNumbers;
         private final List<Integer> winningNumbers;
-        private final int expectedMatchCount;
+        private final int bonusNumber;
+        private final Rank expected;
 
-        private TestCase(List<Integer> lottoNumbers, List<Integer> winningNumbers, int expectedMatchCount) {
+        private TestCase(List<Integer> lottoNumbers, List<Integer> winningNumbers, int bonusNumber, Rank expected) {
             this.lottoNumbers = lottoNumbers;
             this.winningNumbers = winningNumbers;
-            this.expectedMatchCount = expectedMatchCount;
+            this.bonusNumber = bonusNumber;
+            this.expected = expected;
         }
 
         public List<Integer> getLottoNumbers() {
@@ -46,8 +58,12 @@ class LottoTicketTest {
             return winningNumbers;
         }
 
-        public int getExpectedMatchCount() {
-            return expectedMatchCount;
+        public int getBonusNumber() {
+            return bonusNumber;
+        }
+
+        public Rank getExpected() {
+            return expected;
         }
 
         @Override
@@ -55,7 +71,8 @@ class LottoTicketTest {
             return "TestCase{" +
                 "lottoNumbers=" + lottoNumbers +
                 ", winningNumbers=" + winningNumbers +
-                ", expectedMatchCount=" + expectedMatchCount +
+                ", bonus=" + bonusNumber +
+                ", expected=" + expected +
                 '}';
         }
     }

@@ -1,77 +1,80 @@
 package com.nextstep.camp.lotto.domain.entity;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.nextstep.camp.lotto.domain.strategy.LottoFixedPickStrategy;
-import com.nextstep.camp.lotto.domain.type.MatchResult;
-import com.nextstep.camp.lotto.domain.vo.WinningNumbers;
+import com.nextstep.camp.lotto.domain.exception.LottoTicketsCannotBeEmptyException;
+import com.nextstep.camp.lotto.domain.type.Rank;
+import com.nextstep.camp.lotto.domain.vo.*;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTicketsTest {
 
-    static Stream<TestCase> provideMatchResults() {
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("matchTestCases")
+    void matchAll_should_return_correct_rank_list(List<List<Integer>> tickets, List<Integer> winning, int bonus, List<Rank> expectedRanks) {
+        List<LottoTicket> ticketObjects = tickets.stream()
+                .map(LottoTicket::of)
+                .collect(Collectors.toList());
+
+        LottoTickets lottoTickets = LottoTickets.of(ticketObjects);
+        LottoNumbers lottoNumbers = LottoNumbers.of(winning);
+        LottoNumber bonusNumber = LottoNumber.of(bonus);
+        WinningNumbers winningNumbers = WinningNumbers.of(lottoNumbers, bonusNumber);
+
+        List<Rank> actualRanks = lottoTickets.matchAll(winningNumbers);
+        assertEquals(expectedRanks, actualRanks);
+    }
+
+    static Stream<Arguments> matchTestCases() {
         return Stream.of(
-            new TestCase(
-                List.of(
-                    List.of(1, 2, 3, 4, 5, 6),
-                    List.of(1, 2, 3, 4, 5, 7),
-                    List.of(10, 20, 30, 40, 41, 42)
-                ),
-                List.of(1, 2, 3, 4, 5, 6),
-                List.of(MatchResult.SIX, MatchResult.FIVE, MatchResult.NONE)
-            )
+                Arguments.of(
+                        List.of(
+                                List.of(1, 2, 3, 4, 5, 6),
+                                List.of(1, 2, 3, 4, 5, 7),
+                                List.of(1, 2, 3, 4, 5, 10),
+                                List.of(1, 2, 3, 4, 10, 11),
+                                List.of(1, 2, 3, 10, 11, 12),
+                                List.of(1, 2, 10, 11, 12, 13)
+                        ),
+                        List.of(1, 2, 3, 4, 5, 6),
+                        7,
+                        List.of(
+                                Rank.SIX,
+                                Rank.FIVE_BONUS,
+                                Rank.FIVE,
+                                Rank.FOUR,
+                                Rank.THREE,
+                                Rank.NONE
+                        )
+                )
         );
     }
 
-    @ParameterizedTest(name = "{0}")
-    @MethodSource("provideMatchResults")
-    void matchAll_returns_expected_results(TestCase testCase) {
-        List<LottoTicket> tickets = testCase.getLottoNumbers().stream()
-            .map(LottoTicket::of)
-            .collect(Collectors.toList());
-
-        LottoTickets lottoTickets = LottoTickets.of(LottoFixedPickStrategy.of(tickets));
-        WinningNumbers winning = WinningNumbers.of(testCase.getWinningNumbers());
-
-        List<MatchResult> actual = lottoTickets.matchAll(winning);
-        assertEquals(testCase.getExpectedResults(), actual);
+    @Test
+    void size_should_return_number_of_tickets() {
+        List<LottoTicket> tickets = List.of(
+                LottoTicket.of(List.of(1, 2, 3, 4, 5, 6)),
+                LottoTicket.of(List.of(11, 12, 13, 14, 15, 16))
+        );
+        LottoTickets lottoTickets = LottoTickets.of(tickets);
+        assertEquals(2, lottoTickets.size());
     }
 
-    private static class TestCase {
-        private final List<List<Integer>> lottoNumbers;
-        private final List<Integer> winningNumbers;
-        private final List<MatchResult> expectedResults;
-
-        private TestCase(List<List<Integer>> lottoNumbers, List<Integer> winningNumbers, List<MatchResult> expectedResults) {
-            this.lottoNumbers = lottoNumbers;
-            this.winningNumbers = winningNumbers;
-            this.expectedResults = expectedResults;
-        }
-
-        public List<List<Integer>> getLottoNumbers() {
-            return lottoNumbers;
-        }
-
-        public List<Integer> getWinningNumbers() {
-            return winningNumbers;
-        }
-
-        public List<MatchResult> getExpectedResults() {
-            return expectedResults;
-        }
-
-        @Override
-        public String toString() {
-            return "TestCase{" +
-                "lottoNumbers=" + lottoNumbers +
-                ", winningNumbers=" + winningNumbers +
-                ", expectedResults=" + expectedResults +
-                '}';
-        }
+    @Test
+    void getTickets_should_return_original_ticket_list() {
+        List<LottoTicket> original = List.of(
+                LottoTicket.of(List.of(1, 2, 3, 4, 5, 6))
+        );
+        LottoTickets lottoTickets = LottoTickets.of(original);
+        assertEquals(original, lottoTickets.getTickets());
     }
 }

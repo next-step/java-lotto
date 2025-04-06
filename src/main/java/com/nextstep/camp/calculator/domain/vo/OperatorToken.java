@@ -1,8 +1,8 @@
 package com.nextstep.camp.calculator.domain.vo;
 
-import com.nextstep.camp.common.utils.StringUtils;
 import com.nextstep.camp.calculator.domain.exception.NotFoundValueException;
 import com.nextstep.camp.calculator.domain.exception.UnsupportedOperatorException;
+import com.nextstep.camp.common.utils.StringUtils;
 
 import java.util.HashSet;
 import java.util.Objects;

@@ -1,19 +1,32 @@
 package com.nextstep.camp.lotto.domain.vo;
 
-import java.util.List;
+import com.nextstep.camp.lotto.domain.exception.WinningNumbersCannotContainBonusNumberException;
 
 public class WinningNumbers {
-    private final LottoNumbers numbers;
+    private final LottoNumbers winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    private WinningNumbers(List<Integer> rawNumbers) {
-        this.numbers = LottoNumbers.of(rawNumbers);
+    private WinningNumbers(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        validate(winningNumbers, bonusNumber);
+        this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningNumbers of(List<Integer> rawNumbers) {
-        return new WinningNumbers(rawNumbers);
+    private static void validate(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new WinningNumbersCannotContainBonusNumberException();
+        }
     }
 
-    public LottoNumbers getNumbers() {
-        return numbers;
+    public static WinningNumbers of(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        return new WinningNumbers(winningNumbers, bonusNumber);
+    }
+
+    public LottoNumbers getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }
