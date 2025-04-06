@@ -1,24 +1,47 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-import static common.message.ErrorMessage.INVALID_LOTTO_SIZE;
+import static common.message.ErrorMessage.*;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validateLottoCount(numbers);
+        validateLotto(numbers);
         this.numbers = List.copyOf(numbers);
     }
 
-    private void validateLottoCount(List<Integer> numbers) {
+    private void validateLotto(List<Integer> numbers) {
+        this.validateSize(numbers);
+        this.validateDuplicate(numbers);
+        this.validateRange(numbers);
+    }
+
+    private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(String.format(INVALID_LOTTO_SIZE, LOTTO_SIZE));
+        }
+    }
+
+    private void validateDuplicate(List<Integer> numbers) {
+        if (new HashSet<>(numbers).size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER);
+        }
+    }
+
+    private void validateRange(List<Integer> numbers) {
+        if (numbers.stream().anyMatch(n -> n < MIN_NUMBER || n > MAX_NUMBER)) {
+            throw new IllegalArgumentException(
+                    String.format(INVALID_LOTTO_NUMBER_RANGE, MIN_NUMBER, MAX_NUMBER)
+            );
         }
     }
 
