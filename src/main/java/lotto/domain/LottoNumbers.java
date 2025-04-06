@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    public final static int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> numbers;
 
     public LottoNumbers(String numbers) {
@@ -28,10 +28,10 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public Integer intersectCount(LottoNumbers other) {
+    public MatchResult intersectCount(LottoNumbers other, LottoNumber bonusNumber) {
         Set<LottoNumber> intersection = new HashSet<>(numbers);
         intersection.retainAll(other.numbers);
-        return intersection.size();
+        return new MatchResult(intersection.size(), other.numbers.contains(bonusNumber));
     }
 
     @Override

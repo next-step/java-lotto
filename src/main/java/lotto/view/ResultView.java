@@ -1,8 +1,9 @@
 package lotto.view;
 
-import lotto.LottoNumbers;
-import lotto.LottoRank;
-import lotto.LottoResult;
+import lotto.domain.BonusNumberMatchCondition;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 
 public class ResultView {
     private ResultView() {
@@ -27,6 +28,7 @@ public class ResultView {
         if (lottoRank == LottoRank.ETC)
             return;
 
-        System.out.printf("%d개 일치 (%d원)- %d개\n", lottoRank.getMatchCount(), lottoRank.getMoney(), lottoResult.lottoResult(lottoRank));
+        String additionalStr = lottoRank.getBonusNumberMatchCondition() == BonusNumberMatchCondition.MATCH ? ", 보너스 볼 일치" : "";
+        System.out.printf("%d개 일치%s (%d원)- %d개\n", lottoRank.getMatchCount(), additionalStr, lottoRank.getMoney(), lottoResult.lottoResult(lottoRank));
     }
 }
