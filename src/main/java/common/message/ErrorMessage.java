@@ -12,6 +12,7 @@ public class ErrorMessage {
 
 
     public static final String INVALID_PURCHASE_AMOUNT = "구입 금액은 0보다 커야 합니다.";
+    public static final String INVALID_LOTTO_SIZE = "로또 번호는 %d 개 여야 합니다.";
 
     private ErrorMessage() {
     }
