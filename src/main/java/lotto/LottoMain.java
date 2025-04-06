@@ -24,7 +24,7 @@ public class LottoMain {
         }
 
         Set<Integer> winningNumbers = InputView.getPositiveNumberSetInput("지난 주 당첨 번호를 입력해 주세요.", ",");
-        int bonusNumber = InputView.getPositiveNumberInput("보너스 볼을 입력해 주세요.");
+        int bonusNumber = InputView.getLottoNumberInput("보너스 볼을 입력해 주세요.");
         LottoRound lottoRound = new LottoRound(winningNumbers, bonusNumber);
 
         LottoResult lottoResult = lottoRound.checkLottoRank(lottoNumbers);
