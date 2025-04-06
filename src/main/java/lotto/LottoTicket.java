@@ -12,4 +12,8 @@ public class LottoTicket {
     public boolean isManual() {
         return ticketType.equals(TicketType.MANUAL);
     }
+
+    public boolean isAuto() {
+        return ticketType.equals(TicketType.AUTO);
+    }
 }

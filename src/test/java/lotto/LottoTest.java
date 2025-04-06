@@ -10,6 +10,7 @@ public class LottoTest {
     @Test
     @DisplayName("6개의 숫자를 입력해 로또를 생성할 수 있다. - String")
     void lottoCreateTest1() {
+
         assertThat(new Lotto("1,2,3,4,5,6")).isEqualTo(new Lotto("1,2,3,4,5,6"));
     }
 
