@@ -7,8 +7,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static util.ErrorMessage.INVALID_FORMAT;
-import static util.ErrorMessage.INVALID_INPUT;
+import static common.message.ErrorMessage.INVALID_FORMAT;
+import static common.message.ErrorMessage.INVALID_INPUT;
 
 public class CalculatorTest {
 

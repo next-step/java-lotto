@@ -3,8 +3,8 @@ package calculator;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static util.ErrorMessage.INVALID_NUMBER;
-import static util.ErrorMessage.INVALID_OPERATOR;
+import static common.ErrorMessage.INVALID_NUMBER;
+import static common.ErrorMessage.INVALID_OPERATOR;
 
 public enum Operator {
     PLUS("+") {

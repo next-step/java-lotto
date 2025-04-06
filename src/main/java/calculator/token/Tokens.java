@@ -2,7 +2,7 @@ package calculator.token;
 
 import calculator.token.impl.NumberToken;
 import calculator.token.impl.OperatorToken;
-import util.InputValidator;
+import common.InputValidator;
 
 import java.util.ArrayList;
 import java.util.List;
