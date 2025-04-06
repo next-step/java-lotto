@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoTest {
 
@@ -29,6 +30,15 @@ class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"), new LottoNumber(7));
         Lotto lotto = new Lotto("1,2,3,4,5,8");
         assertThat(winningLotto.getRank(lotto)).isEqualTo(LottoRank.THIRD);
+    }
+
+    @Test
+    @DisplayName("보너스 숫자 유효성 검사 - 보너스 숫자는 로또 숫자에 없는 숫자이어야한다.")
+    void bonusNumberTest() {
+        assertThatThrownBy(() -> new WinningLotto(
+                new Lotto("1,2,3,4,5,6"),
+                new LottoNumber(6))
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
