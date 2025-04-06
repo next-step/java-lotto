@@ -1,9 +1,9 @@
-import domain.Lotto;
+import domain.*;
 import views.InputView;
 import views.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Map;
 
 public class LottoMain {
 
@@ -11,15 +11,19 @@ public class LottoMain {
 
         int ticketCount = InputView.inputBuyAmountGetTicketCount();
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
-            lottos.add(new Lotto());
-        }
+        LottoGame lottoGame = new LottoGame();
+        lottoGame.buy(ticketCount);
+
+        Lottos lottos = lottoGame.getLottos();
 
         ResultView.printLottoNumber(lottos);
 
-        List<Integer> winNumbers = InputView.inputWinNumbers();
+        LottoNumbers winNumbers = InputView.inputWinNumbers();
 
-        ResultView.printSummary(winNumbers, lottos);
+        int bonus = InputView.inputBonusNumbers();
+
+        Map<PrizeEnum, Integer> summaryMap = lottos.calculateWinResult(winNumbers, bonus);
+
+        ResultView.printSummary(summaryMap, BigDecimal.valueOf(ticketCount * LottoGame.TICKET_PRICE));
     }
 }
