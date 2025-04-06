@@ -23,6 +23,10 @@ public enum Rank {
                 .findFirst();
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public int getReward() {
         return reward;
     }
