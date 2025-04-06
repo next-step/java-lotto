@@ -1,16 +1,16 @@
 package com.nextstep.camp.lotto.domain.strategy;
 
-import com.nextstep.camp.lotto.domain.entity.LottoTicket;
-import com.nextstep.camp.lotto.domain.vo.LottoAmount;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.nextstep.camp.lotto.domain.entity.LottoTicket;
+import com.nextstep.camp.lotto.domain.vo.LottoCount;
+
 public class LottoAutoPicker implements LottoPicker {
 
-    private final LottoAmount amount;
+    private final LottoCount count;
 
     private static final int LOTTO_MIN = 1;
     private static final int LOTTO_MAX = 45;
@@ -19,19 +19,19 @@ public class LottoAutoPicker implements LottoPicker {
             .boxed()
             .collect(Collectors.toList());
 
-    private LottoAutoPicker(LottoAmount amount) {
-        this.amount = amount;
+    private LottoAutoPicker(LottoCount count) {
+        this.count = count;
     }
 
-    public static LottoAutoPicker of(LottoAmount amount) {
+    public static LottoAutoPicker of(LottoCount amount) {
         return new LottoAutoPicker(amount);
     }
 
     @Override
     public List<LottoTicket> pick() {
-        return IntStream.range(0, this.amount.lottoCount())
-                .mapToObj(i -> LottoTicket.of(generateOne()))
-                .collect(Collectors.toList());
+        return this.count.intStream()
+            .mapToObj(count -> LottoTicket.of(generateOne()))
+            .collect(Collectors.toList());
     }
 
     private List<Integer> generateOne() {

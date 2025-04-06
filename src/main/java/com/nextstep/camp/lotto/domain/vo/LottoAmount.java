@@ -31,11 +31,11 @@ public class LottoAmount {
         return new LottoAmount(value);
     }
 
-    public int lottoCount() {
-        return value / LOTTO_PRICE;
-    }
-
     public int getValue() {
         return value;
+    }
+
+    public LottoCount getLottoCount() {
+        return LottoCount.of(value / LOTTO_PRICE);
     }
 }
