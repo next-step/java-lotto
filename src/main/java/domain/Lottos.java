@@ -1,5 +1,9 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.*;
 
 public class Lottos {
@@ -52,6 +56,9 @@ public class Lottos {
         }};
 
         for (Lotto lotto : lottos) {
+            int countOfMatch = lotto.getHitCount(winNumbers);
+
+            boolean matchBonus = lotto.hasBonusNumber(bonus);
 
             PrizeEnum prizeEnum = PrizeEnum.of(lotto.getHitCount(winNumbers), lotto.hasBonusNumber(bonus));
 

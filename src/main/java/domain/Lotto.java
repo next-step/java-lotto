@@ -11,12 +11,12 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers();
     }
 
-    public Lotto(String lottoNumbers) {
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+    Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = new LottoNumbers();
     }
 
-    Lotto(LottoNumbers lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(String lottoNumbers) {
+        this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
     public List<Integer> getLottoNumbers() {

@@ -13,9 +13,9 @@ public class LottoNumbers {
 
     private static final int LOTTO_NUMBER_BOUND = 45;
     private static final int REQUIRED_NUMBER_COUNT = 6;
-    private static final List<Integer> numbers = IntStream.rangeClosed(1, LOTTO_NUMBER_BOUND).boxed().collect(Collectors.toList());
 
     private final List<Integer> lottoNumbers;
+    private static final List<Integer> numbers = IntStream.rangeClosed(1, LOTTO_NUMBER_BOUND).boxed().collect(Collectors.toList());
 
     public LottoNumbers() {
         this.lottoNumbers = auto();
