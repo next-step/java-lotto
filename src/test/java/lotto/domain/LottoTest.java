@@ -37,7 +37,6 @@ public class LottoTest {
     @Test
     @DisplayName("범위를 벗어난 번호가 있을 때 IllegalArgumentException 발생 확인")
     public void testOutOfRangeNumbers() {
-        // 0은 유효 범위(1~45)를 벗어남
         List<Integer> numbers = Arrays.asList(0, 2, 3, 4, 5, 6);
         assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
     }

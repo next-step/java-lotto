@@ -6,17 +6,17 @@ import java.util.Map;
 
 public class LottoCalculator {
 
-    public LottoResult calculate(int purchaseAmount, List<Lotto> lottoList, List<Integer> winningNumbers) {
-        long totalPrize = 0;
-        Map<Integer, Integer> matchCounts = new HashMap<>();
+    public LottoResult calculate(int purchaseAmount, List<Lotto> lottoList, LottoWinnings lottoWinnings) {
+        long totalWinningMoney = 0;
+        Map<LottoPrize, Integer> lottoPrizes = new HashMap<>();
         for (Lotto lotto : lottoList) {
-            int matchCount = lotto.countMatches(winningNumbers);
-            long prize = LottoPrize.getPrizeByMatchCount(matchCount);
-            totalPrize += prize;
-            matchCounts.put(matchCount, matchCounts.getOrDefault(matchCount, 0) + 1);
+            LottoMatch lottoMatch = lottoWinnings.countMatches(lotto);
+            LottoPrize lottoPrize = LottoPrize.from(lottoMatch);
+            totalWinningMoney += lottoPrize.getWinningMoney();
+            lottoPrizes.put(lottoPrize, lottoPrizes.getOrDefault(lottoPrize, 0) + 1);
         }
-        double rate = (double) totalPrize / purchaseAmount;
-        return new LottoResult(matchCounts, rate);
+        double rate = (double) totalWinningMoney / purchaseAmount;
+        return new LottoResult(lottoPrizes, rate);
     }
 
 }

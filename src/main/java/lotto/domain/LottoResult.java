@@ -3,16 +3,16 @@ package lotto.domain;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<Integer, Integer> matchCounts;
+    private final Map<LottoPrize, Integer> lottoPrizes;
     private final double rate;
 
-    public LottoResult(Map<Integer, Integer> matchCounts, double rate) {
-        this.matchCounts = matchCounts;
+    public LottoResult(Map<LottoPrize, Integer> lottoPrizes, double rate) {
+        this.lottoPrizes = lottoPrizes;
         this.rate = rate;
     }
 
-    public Map<Integer, Integer> getMatchCounts() {
-        return matchCounts;
+    public Map<LottoPrize, Integer> getLottoPrizes() {
+        return lottoPrizes;
     }
 
     public double getRate() {

@@ -9,7 +9,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = List.copyOf(numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {
@@ -29,17 +29,6 @@ public class Lotto {
                 throw new IllegalArgumentException("Lotto number " + number + " is out of valid range (1-45).");
             }
         }
-    }
-
-    public int countMatches(List<Integer> winningNumbers) {
-        validateNumbers(winningNumbers);
-        int count = 0;
-        for (Integer number : this.numbers) {
-            if (winningNumbers.contains(number)) {
-                count++;
-            }
-        }
-        return count;
     }
 
     public List<Integer> getNumbers() {
