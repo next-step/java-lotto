@@ -1,4 +1,4 @@
-package common;
+package common.message;
 
 import calculator.Operator;
 
@@ -9,6 +9,9 @@ public class ErrorMessage {
     public static final String INVALID_OPERATOR = "유효하지 않은 연산자입니다.(+, -, *, / 가능)";
     public static final String INVALID_NUMBER = "0으로 나눌 수 없습니다.";
     public static final String INVALID_FORMAT = "올바른 연산식이 아닙니다. (" + Operator.supportSymbols() + "가능)";
+
+
+    public static final String INVALID_PURCHASE_AMOUNT = "구입 금액은 0보다 커야 합니다.";
 
     private ErrorMessage() {
     }

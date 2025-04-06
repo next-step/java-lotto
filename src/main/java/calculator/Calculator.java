@@ -2,7 +2,7 @@ package calculator;
 
 import calculator.token.Tokens;
 
-import static common.ErrorMessage.*;
+import static common.message.ErrorMessage.*;
 
 public final class Calculator {
 

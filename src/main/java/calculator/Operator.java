@@ -3,8 +3,8 @@ package calculator;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static common.ErrorMessage.INVALID_NUMBER;
-import static common.ErrorMessage.INVALID_OPERATOR;
+import static common.message.ErrorMessage.INVALID_NUMBER;
+import static common.message.ErrorMessage.INVALID_OPERATOR;
 
 public enum Operator {
     PLUS("+") {
@@ -12,20 +12,17 @@ public enum Operator {
         public int apply(final int a, final int b) {
             return a + b;
         }
-    },
-    MINUS("-") {
+    }, MINUS("-") {
         @Override
         public int apply(final int a, final int b) {
             return a - b;
         }
-    },
-    MULTIPLY("*") {
+    }, MULTIPLY("*") {
         @Override
         public int apply(final int a, final int b) {
             return a * b;
         }
-    },
-    DIVIDE("/") {
+    }, DIVIDE("/") {
         @Override
         public int apply(final int a, final int b) {
             if (b == 0) {
@@ -51,20 +48,14 @@ public enum Operator {
         if (!isSupported(symbol)) {
             throw new IllegalArgumentException(INVALID_OPERATOR);
         }
-        return Arrays.stream(values())
-                .filter(op -> op.symbol.equals(symbol))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(INVALID_OPERATOR));
+        return Arrays.stream(values()).filter(op -> op.symbol.equals(symbol)).findFirst().orElseThrow(() -> new IllegalArgumentException(INVALID_OPERATOR));
     }
 
     public static boolean isSupported(final String input) {
-        return Arrays.stream(values())
-                .anyMatch(op -> op.symbol.equals(input));
+        return Arrays.stream(values()).anyMatch(op -> op.symbol.equals(input));
     }
 
     public static String supportSymbols() {
-        return Arrays.stream(values())
-                .map(Operator::getSymbol)
-                .collect(Collectors.joining(", "));
+        return Arrays.stream(values()).map(Operator::getSymbol).collect(Collectors.joining(", "));
     }
 }
