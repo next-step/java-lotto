@@ -29,4 +29,9 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
+
+    public int getManualPurchaseNumber(){
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
 }
