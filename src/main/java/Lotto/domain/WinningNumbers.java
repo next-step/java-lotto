@@ -1,10 +1,13 @@
 package Lotto.domain;
 
+import Lotto.utils.ValidationUtils;
+
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static Lotto.domain.Lottos.LOTTO_PICK_COUNT;
+import static Lotto.domain.Lottos.*;
 
 public class WinningNumbers {
     private final Set<LottoNumber> numbers;
@@ -18,5 +21,11 @@ public class WinningNumbers {
 
     public Set<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    public static boolean isInvalidWinningNumbers(String input) {
+        String[] numbers = input.split(",");
+        return numbers.length != LOTTO_PICK_COUNT ||
+                Arrays.stream(numbers).anyMatch(number -> ValidationUtils.isInvalidNumber(number, LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
     }
 }

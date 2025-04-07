@@ -8,11 +8,12 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static Lotto.validation.Validations.isInvalidPrice;
-import static Lotto.validation.Validations.isInvalidWinningNumbers;
+import static Lotto.domain.Purchase.isInvalidPrice;
+import static Lotto.domain.WinningNumbers.isInvalidWinningNumbers;
+
 
 public class InputView {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     public static int askHowMuchYouWouldBuy() {
         System.out.println("구입금액을 입력해 주세요.");
         String price = scanner.nextLine();
