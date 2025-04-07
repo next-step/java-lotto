@@ -7,16 +7,18 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
+
+    private static String format(Lotto lotto) {
+        return lotto.toString();
+    }
+
     public static void printQuantity(int quantity) {
         System.out.println(quantity+"개를 구매했습니다.");
     }
 
     public static void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.toString());
-        }
+        lottos.forEach(lotto -> System.out.println(format(lotto)));
     }
-
 
     public static void printStats(Map<LottoPrize, Integer> stats) {
         System.out.println("\n당첨 통계");
