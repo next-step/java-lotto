@@ -15,6 +15,10 @@ public class LottoTicket {
     public static final int LOTTO_SIZE = 6;
     public static final int PRICE = 1000;
 
+    private static final List<Integer> numbers = IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX)
+            .boxed()
+            .collect(Collectors.toList());
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket() {
@@ -49,10 +53,6 @@ public class LottoTicket {
     }
 
     private List<LottoNumber> generateLottoNumbers() {
-        List<Integer> numbers = IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX)
-                .boxed()
-                .collect(Collectors.toList());
-
         Collections.shuffle(numbers);
 
         List<Integer> lottoNumbers = numbers.subList(0, LOTTO_SIZE);
