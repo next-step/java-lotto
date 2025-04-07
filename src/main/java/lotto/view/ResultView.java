@@ -1,13 +1,14 @@
 package lotto.view;
 
+import java.util.List;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 
 public class ResultView {
 
-    public static void showPurchaseResult(LottoTicket[] lottoTickets) {
-        System.out.println(lottoTickets.length + "개를 구매했습니다.");
+    public static void showPurchaseResult(List<LottoTicket> lottoTickets) {
+        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.toString());
         }

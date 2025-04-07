@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -9,12 +10,12 @@ public class LottoStatistics {
     private final Map<LottoRank, Integer> matchCounts;
     private final int totalPurchaseAmount;
 
-    public LottoStatistics(LottoTicket winningTicket, LottoTicket[] purchaseTickets) {
+    public LottoStatistics(LottoTicket winningTicket, List<LottoTicket> purchaseTickets) {
         this.matchCounts = calculateRankCounts(winningTicket, purchaseTickets);
-        this.totalPurchaseAmount = purchaseTickets.length * LottoOrder.PRICE_PER_TICKET;
+        this.totalPurchaseAmount = purchaseTickets.size() * LottoOrder.PRICE_PER_TICKET;
     }
 
-    private Map<LottoRank, Integer> calculateRankCounts(LottoTicket winningTicket, LottoTicket[] purchaseTickets) {
+    private Map<LottoRank, Integer> calculateRankCounts(LottoTicket winningTicket, List<LottoTicket> purchaseTickets) {
         Map<LottoRank, Integer> counts = new EnumMap<>(LottoRank.class);
         for (LottoTicket ticket : purchaseTickets) {
             int matches = winningTicket.countMatches(ticket);

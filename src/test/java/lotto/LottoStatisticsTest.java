@@ -16,14 +16,14 @@ public class LottoStatisticsTest {
     void shouldCalculateRankCounts() {
         // given
         LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6), 7);
-        LottoTicket[] purchaseTickets = new LottoTicket[]{
+        List<LottoTicket> purchaseTickets = List.of(
             new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), // 6개 일치
             new LottoTicket(List.of(1, 2, 3, 4, 5, 7)), // 5개 일치 + 보너스 숫자
             new LottoTicket(List.of(1, 2, 3, 4, 5, 45)), // 5개 일치
             new LottoTicket(List.of(1, 2, 3, 4, 44, 45)), // 4개 일치
             new LottoTicket(List.of(1, 2, 3, 43, 44, 45)), // 3개 일치
             new LottoTicket(List.of(1, 2, 42, 43, 44, 45)) // 2개 일치
-        };
+        );
 
         // when
         LottoStatistics statistics = new LottoStatistics(winningTicket, purchaseTickets);
@@ -38,9 +38,9 @@ public class LottoStatisticsTest {
     void shouldCalculateTotalWinningAmountCorrectly() {
         // given
         LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6), 7);
-        LottoTicket[] purchaseTickets = new LottoTicket[]{
-            new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), // 6개 일치
-        };
+        List<LottoTicket> purchaseTickets = List.of(
+            new LottoTicket(List.of(1, 2, 3, 4, 5, 6)) // 6개 일치
+        );
 
         // when
         LottoStatistics statistics = new LottoStatistics(winningTicket, purchaseTickets);

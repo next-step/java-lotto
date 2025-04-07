@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.LottoOrder;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
@@ -11,7 +12,7 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         LottoOrder lottoOrder = InputView.getPurchaseAmount();
-        LottoTicket[] lottoTickets = LottoTicketMachine.purchase(lottoOrder);
+        List<LottoTicket> lottoTickets = LottoTicketMachine.purchase(lottoOrder);
         ResultView.showPurchaseResult(lottoTickets);
 
         LottoTicket winningTicket = InputView.getWinningTicket();

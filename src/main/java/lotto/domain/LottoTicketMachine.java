@@ -1,40 +1,41 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicketMachine {
 
-    private static final Random random = new Random();
-
-    public static LottoTicket[] purchase(LottoOrder lottoOrder) {
+    public static List<LottoTicket> purchase(LottoOrder lottoOrder) {
         int ticketCount = lottoOrder.getTicketCount();
-        if (ticketCount == 0) {
-            throw new IllegalArgumentException("구입 금액이 티켓 가격보다 작습니다.");
-        }
-
         return generateTickets(ticketCount);
     }
 
-    private static LottoTicket[] generateTickets(int ticketCount) {
-        LottoTicket[] tickets = new LottoTicket[ticketCount];
+    private static List<LottoTicket> generateTickets(int ticketCount) {
+        List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
-            tickets[i] = new LottoTicket(generateRandomNumbers());
+            tickets.add(generateTicket());
         }
         return tickets;
     }
 
-    private static List<Integer> generateRandomNumbers() {
-        Set<Integer> numbers = new HashSet<>();
+    private static List<Integer> generateTotalNumbers() {
+        return IntStream.rangeClosed(1, 45)
+            .boxed()
+            .collect(Collectors.toList());
+    }
 
-        while (numbers.size() < 6) {
-            numbers.add(random.nextInt(45) + 1);
-        }
+    private static List<Integer> shuffleAndSelect(List<Integer> numbers) {
+        Collections.shuffle(numbers);
+        return numbers.subList(0, 6);
+    }
 
-        return new ArrayList<>(numbers);
+    private static LottoTicket generateTicket() {
+        List<Integer> numbers = generateTotalNumbers();
+        List<Integer> selectedNumbers = shuffleAndSelect(numbers);
+        return new LottoTicket(selectedNumbers);
     }
 
 }
