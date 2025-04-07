@@ -1,9 +1,11 @@
 package lotto;
 
 public class LottoNumber {
-    private final int number;
+
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
+
+    private final int number;
 
     public LottoNumber(int number) {
         validateNumber(number);
