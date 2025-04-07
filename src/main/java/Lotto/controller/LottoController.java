@@ -30,10 +30,10 @@ public class LottoController {
         for(int i=0; i<manualNumberList.size(); i++){
             fixedExtractors[i] = new FixedNumberExtractor(manualNumberList.get(i));
         }
-//        lottoService = new LottoService(purchaseAmount, extractor);
+
         lottoService = new LottoService(purchaseAmount, extractor, fixedExtractors);
         lottoService.draw();
-        resultView.printBuyNum(lottoService.lottoNum());
+        resultView.printBuyNum(lottoService.manualLottoNum(), lottoService.autoLottoNum());
         resultView.printLotto(lottoService.lottoList());
 
         List<Integer> winningNumbers = inputView.getWinnerNumbers();

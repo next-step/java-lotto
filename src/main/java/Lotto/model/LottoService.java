@@ -10,6 +10,7 @@ public class LottoService {
     private final NumberExtractor autoExtractor;
     private final NumberExtractor[] manualExtractors;
     private final PurchaseAmount purchaseAmount;
+    private final int manualLottoNum;
     private final int autoLottoNum;
     private final Map<LottoRank, Integer> winningCountMap = new EnumMap<>(LottoRank.class);
     private Lottos lottos;
@@ -22,6 +23,7 @@ public class LottoService {
         int autoPurchaseAmount = purchaseAmount - (manualExtractors.length * SALES_PRICE);
 
         this.autoLottoNum = autoPurchaseAmount / SALES_PRICE;
+        this.manualLottoNum = manualExtractors.length;
         this.purchaseAmount = new PurchaseAmount(purchaseAmount);
         this.autoExtractor = autoExtractor;
         this.manualExtractors = manualExtractors;
@@ -55,7 +57,15 @@ public class LottoService {
     }
 
     public int lottoNum() {
+        return this.autoLottoNum + this.manualLottoNum;
+    }
+
+    public int autoLottoNum(){
         return this.autoLottoNum;
+    }
+
+    public int manualLottoNum(){
+        return this.manualLottoNum;
     }
 
     private void validateLottoNumber(List<Integer> lottoNumber) {
