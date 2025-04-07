@@ -19,12 +19,12 @@ public class LottoShop {
         int totalCounts = changePriceToLottoCount(price);
         int manualCounts = InputView.getManualLottoCount();
         LottoCount lottoCount = new LottoCount(totalCounts, manualCounts);
-        ResultView.printLottoCounts(lottoCount.getAutoLottoCount(), lottoCount.getManualLottoCount());
         List<Lotto> manualLottos = InputView.getManualLottoList(lottoCount.getManualLottoCount());
         List<Lotto> autoLottos = new ArrayList<>();
         for (int index = 0; index < lottoCount.getAutoLottoCount(); index++) {
             autoLottos.add(new Lotto(numberGenerator.generate()));
         }
+        ResultView.printLottoCounts(lottoCount.getAutoLottoCount(), lottoCount.getManualLottoCount());
         return new Lottos(manualLottos, autoLottos);
     }
 

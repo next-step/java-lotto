@@ -18,22 +18,6 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public int getAutoLottoCounts() {
-        return (int) lottos.stream()
-                .filter(Lotto::isAutoLotto)
-                .count();
-    }
-
-    public int getManualLottoCounts() {
-        return (int) lottos.stream()
-                .filter(Lotto::isManualLotto)
-                .count();
-    }
-
-    public int getTotalLottoCounts() {
-        return lottos.size();
-    }
-
     public EnumMap<Rank, Integer> countWinningNumbers(WinningLotto winningLotto) {
         return lottos.stream()
                 .map(lotto -> lotto.countWinningNumbers(winningLotto))
