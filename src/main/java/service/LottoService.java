@@ -12,7 +12,7 @@ public class LottoService {
         LottoShop lottoShop = new LottoShop(randomNumberGenerator);
 
         Lottos lottos = lottoShop.generateLotto(payAmount);
-        ResultView.printLottoNumbers(lottos);
+        lottos.getAllLottoNumbers();
         WinningLotto winningLotto = InputView.getLastWeekWinNumber();
         LottoResult result = LottoResult.of(winningLotto, lottos, payAmount);
 

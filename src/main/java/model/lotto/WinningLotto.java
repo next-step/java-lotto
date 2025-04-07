@@ -11,7 +11,7 @@ public class WinningLotto {
     }
 
     public WinningLotto(String value, int bonusNumber) {
-        this(new Lotto(value, LottoType.WIN), new LottoNumber(bonusNumber));
+        this(new Lotto(value), new LottoNumber(bonusNumber));
     }
 
     private void checkValidBonusBall(Lotto lotto, LottoNumber lottoNumber) {

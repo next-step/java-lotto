@@ -2,11 +2,10 @@ package model.lotto;
 
 import generator.NumberGenerator;
 import ui.InputView;
+import ui.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static model.lotto.LottoType.MANUAL;
 
 public class LottoShop {
     private static final int LOTTO_PER_AMOUNT = 1000;
@@ -20,11 +19,11 @@ public class LottoShop {
         int totalCounts = changePriceToLottoCount(price);
         int manualCounts = InputView.getManualLottoCount();
         LottoCount lottoCount = new LottoCount(totalCounts, manualCounts);
-
+        ResultView.printLottoCounts(lottoCount.getAutoLottoCount(), lottoCount.getManualLottoCount());
         List<Lotto> manualLottos = InputView.getManualLottoList(lottoCount.getManualLottoCount());
         List<Lotto> autoLottos = new ArrayList<>();
         for (int index = 0; index < lottoCount.getAutoLottoCount(); index++) {
-            autoLottos.add(new Lotto(numberGenerator.generate(), MANUAL));
+            autoLottos.add(new Lotto(numberGenerator.generate()));
         }
         return new Lottos(manualLottos, autoLottos);
     }

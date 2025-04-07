@@ -3,30 +3,25 @@ package model.lotto;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static model.lotto.LottoType.AUTO;
-import static model.lotto.LottoType.MANUAL;
-
 public class Lotto {
-    private final Set<LottoNumber> lottoNumbers;
     private static final int LOTTO_SIZE = 6;
     private static final String INVALID_LOTTO_SIZE = "하나의 로또엔 6개의 숫자여야 한다.";
     private static final String NUMBER_DELIMITER = ", ";
-    private final LottoType lottoType;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers, LottoType lottoType) {
+    public Lotto(List<Integer> numbers) {
         checkValidLotto(numbers);
         this.lottoNumbers = toLottoNumber(numbers);
-        this.lottoType = lottoType;
     }
 
-    public Lotto(String[] value, LottoType lottoType) {
+    public Lotto(String[] value) {
         this(Arrays.stream(value)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList()), lottoType);
+                .collect(Collectors.toList()));
     }
 
-    public Lotto(String value, LottoType lottoType) {
-        this(value.split(NUMBER_DELIMITER), lottoType);
+    public Lotto(String value) {
+        this(value.split(NUMBER_DELIMITER));
     }
 
     private Set<LottoNumber> toLottoNumber(List<Integer> numbers) {
@@ -77,13 +72,5 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
-    }
-
-    public boolean isAutoLotto() {
-        return lottoType == AUTO;
-    }
-
-    public boolean isManualLotto() {
-        return lottoType == MANUAL;
     }
 }
