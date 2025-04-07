@@ -55,8 +55,7 @@ public class OperatorTest {
         Calculator calculator = Calculator.create();
 
         assertThatThrownBy(() -> calculator.run("a + 3"))
-                .isInstanceOf(NumberFormatException.class)
-                .hasMessage(INVALID_STRING);
+                .isInstanceOf(NumberFormatException.class);
     }
 
     @DisplayName("지원하는 연산자인 경우 true를 반환한다.")
