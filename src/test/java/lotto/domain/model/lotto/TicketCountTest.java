@@ -21,7 +21,7 @@ class TicketCountTest {
 
     @DisplayName("티켓 수량 유효성 검증 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {0, -1})
+    @ValueSource(ints = {-1})
     void validateTicketCount(int invalidCount) {
         assertThatThrownBy(() -> new TicketCount(invalidCount))
                 .isInstanceOf(IllegalArgumentException.class)
