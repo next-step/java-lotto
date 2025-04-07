@@ -1,4 +1,4 @@
-package view;
+package lotto.view;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +15,10 @@ public class InputView {
     public static List<Integer> getWinNumbers() {
         String stringInput = getStringInput("지난 주 당첨 번호를 입력해 주세요.");
         return parseIntFromString(stringInput);
+    }
+
+    public static int getBonusNumber() {
+        return getIntInput("보너스 볼을 입력해 주세요.");
     }
 
     private static List<Integer> parseIntFromString(String input) {

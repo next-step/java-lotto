@@ -1,4 +1,4 @@
-package domain.model;
+package lotto.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,10 @@ public class LottoWallet {
         this.lottos.add(lotto);
     }
 
-    public MatchResult countMatches(LottoNumbers winNumbers) {
-        MatchResult matchResult = new MatchResult();
+    public MatchResult countMatches(LottoNumbers winNumbers, int bonusNumber) {
+        MatchResult matchResult = new MatchResult(winNumbers, bonusNumber);
         for (LottoNumbers lotto : lottos) {
-            matchResult.addMatchCount(lotto.countMatch(winNumbers));
+            matchResult.addRank(lotto);
         }
         return matchResult;
     }

@@ -1,8 +1,8 @@
-package domain.model;
+package lotto.domain.model;
 
 import java.util.List;
 
-import static constant.LottoConstants.*;
+import static lotto.constant.LottoConstants.*;
 
 public class LottoNumbers {
     private final List<Integer> numbers;
@@ -20,6 +20,10 @@ public class LottoNumbers {
         return (int) winNumbers.getNumbers().stream()
                 .filter(this.numbers::contains)
                 .count();
+    }
+
+    boolean matchBonus(int bonusNumber) {
+        return this.numbers.contains(bonusNumber);
     }
 
     private void validate() {

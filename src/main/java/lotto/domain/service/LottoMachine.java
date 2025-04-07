@@ -1,8 +1,8 @@
-package domain.engine;
+package lotto.domain.service;
 
-import domain.generator.LottoNumberGenerator;
-import domain.model.LottoNumbers;
-import domain.model.LottoWallet;
+import lotto.domain.generator.LottoNumberGenerator;
+import lotto.domain.model.LottoNumbers;
+import lotto.domain.model.LottoWallet;
 
 
 public class LottoMachine {
