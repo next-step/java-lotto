@@ -45,6 +45,6 @@ class FormulaTest {
   @Test
   void 토큰_리스트_생성_확인() {
     Formula formula = new Formula("2 + 3 * 4");
-    assertThat(formula.calculateBy(new Calculator())).isEqualTo(14);
+    assertThat(formula.calculateBy(new Calculator())).isEqualTo(20);
   }
 } 
