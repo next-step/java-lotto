@@ -2,6 +2,7 @@ package Lotto.controller;
 
 import Lotto.dto.RankResultDto;
 import Lotto.model.LottoService;
+import Lotto.model.NumberExtractor.FixedNumberExtractor;
 import Lotto.model.NumberExtractor.NumberExtractor;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
@@ -24,7 +25,13 @@ public class LottoController {
         int purchaseAmount = this.inputView.getPurchaseAmount();
         int manualPurchaseNumber = this.inputView.getManualPurchaseNumber();
         List<List<Integer>> manualNumberList = this.inputView.getManualNumbers(manualPurchaseNumber);
-        lottoService = new LottoService(purchaseAmount, extractor);
+
+        NumberExtractor[] fixedExtractors = new NumberExtractor[manualNumberList.size()];
+        for(int i=0; i<manualNumberList.size(); i++){
+            fixedExtractors[i] = new FixedNumberExtractor(manualNumberList.get(i));
+        }
+//        lottoService = new LottoService(purchaseAmount, extractor);
+        lottoService = new LottoService(purchaseAmount, extractor, fixedExtractors);
         lottoService.draw();
         resultView.printBuyNum(lottoService.lottoNum());
         resultView.printLotto(lottoService.lottoList());

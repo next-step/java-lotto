@@ -22,8 +22,8 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-    static List<LottoNumber> toLottoNumbers(List<Integer> winNumbers) {
-        return winNumbers.stream()
+    static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }

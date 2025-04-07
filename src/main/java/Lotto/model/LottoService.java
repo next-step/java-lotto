@@ -7,34 +7,55 @@ import java.util.*;
 public class LottoService {
     private static final int NUMBER_SIZE = 6;
     static final int SALES_PRICE = 1000;
-    private final NumberExtractor extractor;
+    private final NumberExtractor autoExtractor;
+    private final NumberExtractor[] manualExtractors;
     private final PurchaseAmount purchaseAmount;
-    private final int lottoNum;
+    private final int autoLottoNum;
     private final Map<LottoRank, Integer> winningCountMap = new EnumMap<>(LottoRank.class);
     private Lottos lottos;
 
-    public LottoService(int purchaseAmount, NumberExtractor extractor) {
+    public LottoService(int purchaseAmount, NumberExtractor autoExtractor) {
+        this(purchaseAmount, autoExtractor, new NumberExtractor[0]);
+    }
+
+    public LottoService(int purchaseAmount, NumberExtractor autoExtractor, NumberExtractor... manualExtractors) {
+        int autoPurchaseAmount = purchaseAmount - (manualExtractors.length * SALES_PRICE);
+
+        this.autoLottoNum = autoPurchaseAmount / SALES_PRICE;
         this.purchaseAmount = new PurchaseAmount(purchaseAmount);
-        this.lottoNum = purchaseAmount / SALES_PRICE;
-        this.extractor = extractor;
+        this.autoExtractor = autoExtractor;
+        this.manualExtractors = manualExtractors;
+        this.lottos = new Lottos();
     }
 
     public void draw() {
         this.lottos = new Lottos();
+        drawManually();
+        drawAutomatically();
+    }
 
-        for (int i = 0; i < lottoNum; i++) {
+    private void drawManually(){
+        for (NumberExtractor extractor: manualExtractors){
             Lotto lotto = new Lotto(extractor);
             lotto.draw();
             lottos.add(lotto);
         }
     }
 
-    public List<List<Integer>> lottoList(){
+    private void drawAutomatically(){
+        for (int i = 0; i < autoLottoNum; i++) {
+            Lotto lotto = new Lotto(autoExtractor);
+            lotto.draw();
+            lottos.add(lotto);
+        }
+    }
+
+    public List<List<Integer>> lottoList() {
         return lottos.toIntegerNumberList();
     }
 
     public int lottoNum() {
-        return this.lottoNum;
+        return this.autoLottoNum;
     }
 
     private void validateLottoNumber(List<Integer> lottoNumber) {
@@ -55,7 +76,7 @@ public class LottoService {
             winningCountMap.put(rank, 0);
         }
 
-        for(Lotto lotto: lottos.all()){
+        for (Lotto lotto : lottos.all()) {
             int matchedCount = winningNumber.countMatchedNumber(lotto);
             increaseWinningCount(LottoRank.valueOf(matchedCount, winningNumber.matchedBonusNumber(lotto)));
         }
