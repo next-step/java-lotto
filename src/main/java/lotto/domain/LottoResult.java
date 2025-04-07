@@ -1,56 +1,41 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoResult {
-    private final List<Rank> ranks;
+  private final Map<Rank, Integer> rankCounts;
 
-    public LottoResult(List<Rank> ranks) {
-        this.ranks = ranks;
+  public LottoResult() {
+    this.rankCounts = new HashMap<>();
+    initializeRankCounts();
+  }
+
+  private void initializeRankCounts() {
+    for (Rank rank : Rank.values()) {
+      rankCounts.put(rank, 0);
     }
+  }
 
-    public List<Rank> getRanks() {
-        return ranks;
-    }
+  public void addRank(Rank rank) {
+    rankCounts.put(rank, rankCounts.get(rank) + 1);
+  }
 
-    public Map<Rank, Long> getStatistics() {
-        return ranks.stream().collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
-    }
+  public int getRankCount(Rank rank) {
+    return rankCounts.getOrDefault(rank, 0);
+  }
 
-    public long calculateTotalPrize() {
-        return ranks.stream().mapToLong(Rank::getPrize).sum();
-    }
+  public Map<Rank, Integer> getRankCounts() {
+    return new HashMap<>(rankCounts);
+  }
 
-    public double calculateProfitRate(int purchaseAmount) {
-        return (double) calculateTotalPrize() / purchaseAmount;
-    }
+  public long calculateTotalPrize() {
+    return rankCounts.entrySet().stream()
+        .mapToLong(entry -> (long) entry.getKey().getWinningMoney() * entry.getValue())
+        .sum();
+  }
 
-    public enum Rank {
-        FIRST(6, 2_000_000_000), SECOND(5, 1_500_000), THIRD(4, 50_000), FOURTH(3, 5_000), MISS(0,
-                0);
-
-        private final int matchCount;
-        private final int prize;
-
-        Rank(int matchCount, int prize) {
-            this.matchCount = matchCount;
-            this.prize = prize;
-        }
-
-        public static Rank valueOf(int matchCount) {
-            return Arrays.stream(values()).filter(rank -> rank.matchCount == matchCount).findFirst()
-                    .orElse(MISS);
-        }
-
-        public int getMatchCount() {
-            return matchCount;
-        }
-
-        public int getPrize() {
-            return prize;
-        }
-    }
+  public double calculateProfitRate(int purchaseAmount) {
+    return (double) calculateTotalPrize() / purchaseAmount;
+  }
 }
