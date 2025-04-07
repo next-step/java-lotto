@@ -3,10 +3,6 @@ package views;
 import data.Messages;
 import domain.LottoGame;
 import domain.LottoNumbers;
-import domain.LottoGame;
-import domain.LottoNumbers;
-import domain.LottoGame;
-import domain.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -30,7 +26,6 @@ public class InputView {
 
         ResultView.printWinNumbers(winNumbersStr);
 
-        return new LottoNumbers(Arrays.stream(winNumbersStr).map(Integer::parseInt).collect(Collectors.toList()));
         return new LottoNumbers(Arrays.stream(winNumbersStr).map(Integer::parseInt).collect(Collectors.toList()));
     }
 
