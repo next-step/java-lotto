@@ -3,6 +3,8 @@ package Lotto.domain;
 import java.util.*;
 
 import static Lotto.domain.LottoList.LOTTO_PICK_COUNT;
+import static Lotto.domain.LottoList.LOTTO_MIN_NUMBER;
+import static Lotto.domain.LottoList.LOTTO_MAX_NUMBER;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
@@ -24,6 +26,26 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
+
+    public static List<LottoNumber> generateLottoNumbers() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+
+        Collections.shuffle(lottoNumbers);
+
+        List<LottoNumber> result = new ArrayList<>();
+        for (int i = 0; i < LOTTO_PICK_COUNT; i++) {
+            result.add(lottoNumbers.get(i));
+        }
+
+        result.sort((n1, n2) -> Integer.compare(n1.getNumber(), n2.getNumber()));
+
+        return result;
+    }
+
 
     public int countMatches(Set<LottoNumber> winningNumbers) {
         Set<LottoNumber> intersection = new HashSet<>(this.lottoNumbers);

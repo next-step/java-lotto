@@ -1,3 +1,4 @@
+import Lotto.domain.LottoList;
 import Lotto.domain.LottoNumber;
 import Lotto.domain.Lotto;
 
@@ -23,6 +24,14 @@ class LottoTest {
         );
 
         assertEquals("로또 번호는 반드시 6개여야 합니다.", exception.getMessage());
+    }
+
+    @Test
+    void generateLottoNumbers_ShouldReturnSixUniqueNumbers() {
+        List<LottoNumber> generatedNumbers = Lotto.generateLottoNumbers();
+        assertEquals(6, generatedNumbers.size());
+        assertTrue(generatedNumbers.stream().allMatch(n -> n.getNumber() >= 1 && n.getNumber() <= 45));
+        assertEquals(generatedNumbers.size(), new HashSet<>(generatedNumbers).size());
     }
 
     @Test

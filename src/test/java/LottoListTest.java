@@ -32,12 +32,4 @@ public class LottoListTest {
         assertEquals(0, stats.getOrDefault(LottoPrize.FIVE_MATCH, 0), "5개 이상 일치하는 로또가 없어야 합니다.");
         assertEquals(0, stats.getOrDefault(LottoPrize.SIX_MATCH, 0), "6개 일치하는 로또가 없어야 합니다.");
     }
-
-    @Test
-    void generateLottoNumbers_ShouldReturnSixUniqueNumbers() {
-        List<LottoNumber> generatedNumbers = LottoList.generateLottoNumbers();
-        assertEquals(6, generatedNumbers.size());
-        assertTrue(generatedNumbers.stream().allMatch(n -> n.getNumber() >= 1 && n.getNumber() <= 45));
-        assertEquals(generatedNumbers.size(), new HashSet<>(generatedNumbers).size()); // 중복 없는지 확인
-    }
 }

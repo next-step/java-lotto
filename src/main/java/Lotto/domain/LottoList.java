@@ -4,6 +4,8 @@ import Lotto.constants.LottoPrize;
 
 import java.util.*;
 
+import static Lotto.domain.Lotto.generateLottoNumbers;
+
 public class LottoList {
     public static final int LOTTO_PICK_COUNT = 6;
     public static final int LOTTO_MIN_NUMBER = 1;
@@ -13,25 +15,6 @@ public class LottoList {
 
     public LottoList() {
         this.lottos = new ArrayList<>();
-    }
-
-    public static List<LottoNumber> generateLottoNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
-
-        Collections.shuffle(lottoNumbers);
-
-        List<LottoNumber> result = new ArrayList<>();
-        for (int i = 0; i < LOTTO_PICK_COUNT; i++) {
-            result.add(lottoNumbers.get(i));
-        }
-
-        result.sort((n1, n2) -> Integer.compare(n1.getNumber(), n2.getNumber()));
-
-        return result;
     }
 
     public void addLotto(Lotto lotto) {
