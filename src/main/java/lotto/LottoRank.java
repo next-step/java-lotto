@@ -1,13 +1,11 @@
 package lotto;
 
-import java.util.Map;
-
 public enum LottoRank {
-    First(6, false, 2000000000),
-    Second(5, true, 2000000000),
-    Third(5, false, 1500000),
-    Fourth(4, false, 50000),
-    Fifth(3, false, 5000);
+    FIRST(6, false, 2000000000),
+    SECOND(5, true, 30000000),
+    THIRD(5, false, 1500000),
+    FOURTH(4, false, 50000),
+    FIFTH(3, false, 5000);
 
     private final int matchCount;
     private final boolean containsBonusNumber;
@@ -19,31 +17,20 @@ public enum LottoRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank getPrize(int matchCount) {
-        return LottoRank.getPrize(matchCount, false);
+    public static LottoRank getRank(int matchCount) {
+        return LottoRank.getRank(matchCount, false);
     }
 
-    public static LottoRank getPrize(int matchCount, boolean containsBonusNumber) {
+    public static LottoRank getRank(int matchCount, boolean containsBonusNumber) {
         for (LottoRank prize : values()) {
             if (prize.matchCount == matchCount && prize.containsBonusNumber == containsBonusNumber) {
                 return prize;
             }
         }
-        throw new IllegalArgumentException("Invalid match count: " + matchCount);
+        return null;
     }
 
-    public static int calculateTotalWinningAmount(Map<Integer, Integer> matchCounts) {
-        int totalAmount = 0;
-        for (Map.Entry<Integer, Integer> entry : matchCounts.entrySet()) {
-            int matches = entry.getKey();
-            int count = entry.getValue();
-            LottoRank prize = getPrize(matches, false);
-            totalAmount += prize.calculateWinningAmount(count);
-        }
-        return totalAmount;
-    }
-
-    public int calculateWinningAmount(int count) {
+    public int getPrizeMoney(int count) {
         return prizeMoney * count;
     }
 

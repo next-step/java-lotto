@@ -17,12 +17,9 @@ public class ResultView {
     }
 
     private static void showMatchCounts(LottoStatistics statistics) {
-        for (int matches = 6; matches >= 0; matches--) {
-            int count = statistics.getCountByMatches(matches);
-            if (count > 0) {
-                LottoRank prize = LottoRank.getPrize(matches);
-                System.out.println(formatMatchCount(prize, count));
-            }
+        for (LottoRank rank : LottoRank.values()) {
+            int count = statistics.getCountByRank(rank);
+            System.out.println(formatMatchCount(rank, count));
         }
     }
 

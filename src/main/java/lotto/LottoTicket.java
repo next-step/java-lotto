@@ -104,4 +104,8 @@ public class LottoTicket {
     public String toString() {
         return numbers.toString();
     }
+
+    public boolean containsBonusNumber(LottoTicket other) {
+        return this.numbers.contains(other.bonusNumber);
+    }
 }

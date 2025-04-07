@@ -10,26 +10,39 @@ public class LottoStatisticsTest {
 
     @Test
     @DisplayName("당첨 티켓과 구매 티켓을 비교하여 맞춘 개수별 통계를 계산할 수 있다.")
-    void shouldCalculateMatchCounts() {
+    void shouldCalculateRankCounts() {
         // given
-        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6), 7);
         LottoTicket[] purchaseTickets = new LottoTicket[]{
             new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), // 6개 일치
-            new LottoTicket(List.of(1, 2, 3, 4, 5, 7)), // 5개 일치
-            new LottoTicket(List.of(1, 2, 3, 4, 8, 9)), // 4개 일치
-            new LottoTicket(List.of(1, 2, 3, 7, 8, 9)), // 3개 일치
-            new LottoTicket(List.of(1, 2, 7, 8, 9, 10)) // 2개 일치
+            new LottoTicket(List.of(1, 2, 3, 4, 5, 7)), // 5개 일치 + 보너스 숫자
+            new LottoTicket(List.of(1, 2, 3, 4, 5, 45)), // 5개 일치
+            new LottoTicket(List.of(1, 2, 3, 4, 44, 45)), // 4개 일치
+            new LottoTicket(List.of(1, 2, 3, 43, 44, 45)), // 3개 일치
+            new LottoTicket(List.of(1, 2, 42, 43, 44, 45)) // 2개 일치
         };
 
         // when
         LottoStatistics statistics = new LottoStatistics(winningTicket, purchaseTickets);
 
         // then
-        assertThat(statistics.getCountByMatches(6)).isEqualTo(1);
-        assertThat(statistics.getCountByMatches(5)).isEqualTo(1);
-        assertThat(statistics.getCountByMatches(4)).isEqualTo(1);
-        assertThat(statistics.getCountByMatches(3)).isEqualTo(1);
-        assertThat(statistics.getCountByMatches(2)).isEqualTo(1);
+        assertThat(statistics.getCountByRank(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(statistics.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("전체 상금을 올바르게 계산한다.")
+    void shouldCalculateTotalWinningAmountCorrectly() {
+        // given
+        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6), 7);
+        LottoTicket[] purchaseTickets = new LottoTicket[]{
+            new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), // 6개 일치
+        };
+
+        // when
+        LottoStatistics statistics = new LottoStatistics(winningTicket, purchaseTickets);
+
+        assertThat(statistics.calculateTotalWinningAmount())
+            .isEqualTo(LottoRank.FIRST.getPrizeMoney(1));
+    }
 }
