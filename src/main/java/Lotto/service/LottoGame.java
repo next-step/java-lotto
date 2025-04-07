@@ -1,15 +1,11 @@
 package Lotto.service;
 
-import Lotto.constants.LottoPrize;
-import Lotto.domain.Lotto;
 import Lotto.domain.Lottos;
 import Lotto.domain.LottoNumber;
 import Lotto.domain.ResultStats;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class LottoGame {
