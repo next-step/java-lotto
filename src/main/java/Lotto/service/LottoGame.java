@@ -33,12 +33,14 @@ public class LottoGame {
 
         int totalPrize = 0;
 
-        for(LottoPrize prize: LottoPrize.values()) {
-            totalPrize += stats.get(prize.getMatchCount()) * prize.getPrizeMoney();
+        for (LottoPrize prize : LottoPrize.values()) {
+            int count = stats.getOrDefault(prize, 0);
+            totalPrize += count * prize.getPrizeMoney();
         }
 
         int totalSpent = lottoList.getLottos().size() * 1000;
 
         return totalPrize / (double) totalSpent;
     }
+
 }
