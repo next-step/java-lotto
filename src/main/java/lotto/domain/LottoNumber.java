@@ -14,6 +14,22 @@ public class LottoNumber {
         this.value = value;
     }
 
+    public LottoNumber(String valueStr) {
+        this(parseNumber(valueStr));
+    }
+
+    private static int parseNumber(String numberStr) {
+        if (numberStr == null || numberStr.isBlank()) {
+            throw new IllegalArgumentException("입력값이 없습니다.");
+        }
+
+        try {
+            return Integer.parseInt(numberStr.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
+        }
+    }
+
     private void validateValue(int value) {
         if (value < MIN_LOTTO_NUM || value > MAX_LOTTO_NUM) {
             throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다.");

@@ -10,19 +10,17 @@ public class LottoStatistics {
     private final Map<LottoRank, Integer> matchCounts;
     private final int totalPurchaseAmount;
 
-    public LottoStatistics(LottoTicket winningTicket, List<LottoTicket> purchaseTickets) {
+    public LottoStatistics(WinningNumbers winningTicket, List<LottoTicket> purchaseTickets) {
         this.matchCounts = calculateRankCounts(winningTicket, purchaseTickets);
         this.totalPurchaseAmount = purchaseTickets.size() * LottoOrder.PRICE_PER_TICKET;
     }
 
-    private Map<LottoRank, Integer> calculateRankCounts(LottoTicket winningTicket, List<LottoTicket> purchaseTickets) {
+    private Map<LottoRank, Integer> calculateRankCounts(WinningNumbers winningTicket, List<LottoTicket> purchaseTickets) {
         Map<LottoRank, Integer> counts = new EnumMap<>(LottoRank.class);
         for (LottoTicket ticket : purchaseTickets) {
-            int matches = winningTicket.countMatches(ticket);
-            boolean containsBonusNumber = ticket.containsBonusNumber(winningTicket);
-            LottoRank rank = LottoRank.getRank(matches, containsBonusNumber);
+            LottoRank rank = winningTicket.getLottoRank(ticket);
             if (rank != null) {
-                counts.put(rank, counts.getOrDefault(matches, 0) + 1);
+                counts.put(rank, counts.getOrDefault(rank, 0) + 1);
             }
         }
         return counts;

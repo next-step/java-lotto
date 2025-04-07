@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,40 +10,30 @@ public class LottoTicket {
     private static final int LOTTO_NUM_COUNT = 6;
 
     private final Set<LottoNumber> numbers;
-    private final LottoNumber bonusNumber;
+
+    public LottoTicket(Set<LottoNumber> numbers) {
+        this.numbers = new HashSet<>(numbers);
+    }
 
     public LottoTicket(List<Integer> numbers) {
-        this(numbers, null);
-    }
-
-    public LottoTicket(List<Integer> numbers, Integer bonusNumber) {
         validateNumbers(numbers);
         this.numbers = convertToLottoNumbers(numbers);
-        this.bonusNumber = createBonusNumber(numbers, bonusNumber);
     }
 
-    public LottoTicket(String numbersStr, String bonusNumberStr) {
-        this(parseNumbers(numbersStr), parseNumber(bonusNumberStr));
+    public LottoTicket(String numbersStr) {
+        this(parseNumbers(numbersStr));
     }
 
-    private static List<Integer> parseNumbers(String numbersStr) {
+    private static Set<LottoNumber> parseNumbers(String numbersStr) {
         if (numbersStr == null || numbersStr.isBlank()) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
 
-        List<Integer> numbers = new ArrayList<>();
+        Set<LottoNumber> numbers = new HashSet<>();
         for (String numberStr : numbersStr.split(",")) {
-            numbers.add(parseNumber(numberStr));
+            numbers.add(new LottoNumber(numberStr));
         }
         return numbers;
-    }
-
-    private static int parseNumber(String numberStr) {
-        try {
-            return Integer.parseInt(numberStr.trim());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
-        }
     }
 
     private Set<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
@@ -53,14 +42,6 @@ public class LottoTicket {
             lottoNumbers.add(new LottoNumber(number));
         }
         return lottoNumbers;
-    }
-
-    private LottoNumber createBonusNumber(List<Integer> numbers, Integer bonusNumber) {
-        if (bonusNumber == null) {
-            return null;
-        }
-        validateBonusNumber(numbers, bonusNumber);
-        return new LottoNumber(bonusNumber);
     }
 
     private void validateNumbers(List<Integer> numbers) {
@@ -73,11 +54,6 @@ public class LottoTicket {
         }
     }
 
-    private void validateBonusNumber(List<Integer> numbers, Integer bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호는 로또 번호와 중복될 수 없습니다.");
-        }
-    }
 
     public Set<Integer> getNumbers() {
         return this.numbers.stream()
@@ -104,7 +80,7 @@ public class LottoTicket {
         return numbers.toString();
     }
 
-    public boolean containsBonusNumber(LottoTicket other) {
-        return this.numbers.contains(other.bonusNumber);
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 }

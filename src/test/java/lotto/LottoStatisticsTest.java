@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ public class LottoStatisticsTest {
     @DisplayName("당첨 티켓과 구매 티켓을 비교하여 맞춘 개수별 통계를 계산할 수 있다.")
     void shouldCalculateRankCounts() {
         // given
-        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningNumbers winningTicket = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         List<LottoTicket> purchaseTickets = List.of(
             new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), // 6개 일치
             new LottoTicket(List.of(1, 2, 3, 4, 5, 7)), // 5개 일치 + 보너스 숫자
@@ -37,7 +38,7 @@ public class LottoStatisticsTest {
     @DisplayName("전체 상금을 올바르게 계산한다.")
     void shouldCalculateTotalWinningAmountCorrectly() {
         // given
-        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningNumbers winningTicket = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         List<LottoTicket> purchaseTickets = List.of(
             new LottoTicket(List.of(1, 2, 3, 4, 5, 6)) // 6개 일치
         );

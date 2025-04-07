@@ -42,7 +42,7 @@ class LottoTicketTest {
         String numbersStr = "1,2,3,4,5,6";
         String bonusNumberStr = "7";
 
-        LottoTicket ticket = new LottoTicket(numbersStr, bonusNumberStr);
+        LottoTicket ticket = new LottoTicket(numbersStr);
 
         assertThat(ticket.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }
@@ -51,9 +51,8 @@ class LottoTicketTest {
     @DisplayName("공백이 포함된 문자열로부터 로또 티켓을 생성한다")
     void shouldCreateLottoTicketFromStringWithSpaces() {
         String numbersStr = "1, 2, 3, 4, 5, 6";
-        String bonusNumberStr = "7";
 
-        LottoTicket ticket = new LottoTicket(numbersStr, bonusNumberStr);
+        LottoTicket ticket = new LottoTicket(numbersStr);
 
         assertThat(ticket.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }
@@ -62,9 +61,8 @@ class LottoTicketTest {
     @DisplayName("입력값이 null이면 예외가 발생한다")
     void shouldThrowExceptionWhenInputIsNull() {
         String numbersStr = null;
-        String bonusNumberStr = "7";
 
-        assertThatThrownBy(() -> new LottoTicket(numbersStr, bonusNumberStr))
+        assertThatThrownBy(() -> new LottoTicket(numbersStr))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("입력값이 없습니다.");
     }
@@ -73,9 +71,8 @@ class LottoTicketTest {
     @DisplayName("입력값이 비어있으면 예외가 발생한다")
     void shouldThrowExceptionWhenInputIsBlank() {
         String numbersStr = "";
-        String bonusNumberStr = "7";
 
-        assertThatThrownBy(() -> new LottoTicket(numbersStr, bonusNumberStr))
+        assertThatThrownBy(() -> new LottoTicket(numbersStr))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("입력값이 없습니다.");
     }
@@ -84,44 +81,8 @@ class LottoTicketTest {
     @DisplayName("숫자가 아닌 문자열이 포함되어 있으면 예외가 발생한다")
     void shouldThrowExceptionWhenInputContainsNonNumber() {
         String numbersStr = "1,2,3,4,5,a";
-        String bonusNumberStr = "7";
 
-        assertThatThrownBy(() -> new LottoTicket(numbersStr, bonusNumberStr))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또 번호는 숫자여야 합니다.");
-    }
-
-    @Test
-    @DisplayName("보너스 번호는 1부터 45 사이의 숫자여야 한다")
-    void shouldHaveBonusNumberBetweenOneAndFortyFive() {
-        String numbersStr = "1,2,3,4,5,6";
-
-        assertThatThrownBy(() -> new LottoTicket(numbersStr, "0"))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-
-        assertThatThrownBy(() -> new LottoTicket(numbersStr, "46"))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-    }
-
-    @Test
-    @DisplayName("보너스 번호는 로또 번호와 중복될 수 없다")
-    void shouldNotHaveDuplicateBonusNumber() {
-        String numbersStr = "1,2,3,4,5,6";
-
-        assertThatThrownBy(() -> new LottoTicket(numbersStr, "1"))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("보너스 번호는 로또 번호와 중복될 수 없습니다.");
-    }
-
-    @Test
-    @DisplayName("보너스 번호가 숫자가 아닌 문자열이면 예외가 발생한다")
-    void shouldThrowExceptionWhenBonusNumberIsNotNumber() {
-        String numbersStr = "1,2,3,4,5,6";
-        String bonusNumberStr = "a";
-
-        assertThatThrownBy(() -> new LottoTicket(numbersStr, bonusNumberStr))
+        assertThatThrownBy(() -> new LottoTicket(numbersStr))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("로또 번호는 숫자여야 합니다.");
     }
