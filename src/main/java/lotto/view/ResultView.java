@@ -6,8 +6,11 @@ import lotto.domain.PrizeRank;
 
 public class ResultView {
 
+  public void printLottoCount(int manualCount, int autoCount) {
+    System.out.printf("%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, autoCount);
+  }
+
   public void printLottos(LottoTickets lottoTickets) {
-    System.out.println(lottoTickets.size() + "개를 구매했습니다.");
     lottoTickets.getLottoNumbersAsStrings().forEach(System.out::println);
   }
 

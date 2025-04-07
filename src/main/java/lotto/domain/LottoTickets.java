@@ -19,8 +19,19 @@ public class LottoTickets {
     }
   }
 
+  public LottoTickets(List<Lotto> manualLottos, int autoLottoCount) {
+    lottoTickets = new ArrayList<>(manualLottos);
+    for (int i = 0; i < autoLottoCount; i++) {
+      lottoTickets.add(new Lotto());
+    }
+  }
+
   public static LottoTickets of(int price) {
     return new LottoTickets(price / PRICE_PER_LOTTO);
+  }
+
+  public static LottoTickets of(List<Lotto> manualLottos, int price) {
+    return new LottoTickets(manualLottos, (price / PRICE_PER_LOTTO) - manualLottos.size());
   }
 
   public int size() {
