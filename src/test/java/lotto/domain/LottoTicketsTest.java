@@ -26,7 +26,7 @@ class LottoTicketsTest {
         new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12))
     );
 
-    assertThat(LottoTickets.of(manualLottos, 3).size()).isEqualTo(5);
+    assertThat(LottoTickets.of(manualLottos, 5000).size()).isEqualTo(5);
   }
 
   @Test

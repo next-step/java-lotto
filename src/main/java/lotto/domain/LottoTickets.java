@@ -60,7 +60,7 @@ public class LottoTickets {
 
   public List<String> getLottoNumbersAsStrings() {
     return lottoTickets.stream()
-        .map(Lotto::toString)
+        .map(Lotto::getNumbersAsString)
         .collect(Collectors.toList());
   }
 }

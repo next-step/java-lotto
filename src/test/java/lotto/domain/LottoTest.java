@@ -12,7 +12,7 @@ class LottoTest {
 
   @Test
   void 로또_번호_생성() {
-    assertThat(new Lotto().toString().split(",")).hasSize(6);
+    assertThat(new Lotto().getNumbersAsString().split(",")).hasSize(6);
   }
 
   @ParameterizedTest

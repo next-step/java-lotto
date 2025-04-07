@@ -3,20 +3,21 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
   private static final int LOTTO_SIZE = 6;
-  private static final int MIN_NUMBER = 1;
-  private static final int MAX_NUMBER = 45;
-  private final List<Integer> numbers;
+  private final List<LottoNo> numbers;
 
   public Lotto() {
     this.numbers = createLottoNumbers();
   }
 
   public Lotto(List<Integer> numbers) {
-    this.numbers = numbers;
+    this.numbers = numbers.stream()
+        .map(LottoNo::of)
+        .collect(Collectors.toList());
     validate();
   }
 
@@ -24,19 +25,16 @@ public class Lotto {
     if (numbers.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException("숫자의 개수는 " + LOTTO_SIZE + "개여야 합니다.");
     }
-    if (numbers.stream().anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER)) {
-      throw new IllegalArgumentException("로또 번호는 " + MIN_NUMBER + "부터 " + MAX_NUMBER + " 사이의 숫자여야 합니다.");
-    }
   }
 
-  private List<Integer> createLottoNumbers() {
-    List<Integer> candidates = new ArrayList<>();
-    for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-      candidates.add(i);
+  private List<LottoNo> createLottoNumbers() {
+    List<LottoNo> candidates = new ArrayList<>();
+    for (int i = LottoNo.MIN_NUMBER; i <= LottoNo.MAX_NUMBER; i++) {
+      candidates.add(LottoNo.of(i));
     }
     Collections.shuffle(candidates);
-    List<Integer> selectedNumbers = candidates.subList(0, LOTTO_SIZE);
-    Collections.sort(selectedNumbers);
+    List<LottoNo> selectedNumbers = candidates.subList(0, LOTTO_SIZE);
+    selectedNumbers.sort((a, b) -> a.getNumber() - b.getNumber());
     return selectedNumbers;
   }
 
@@ -47,11 +45,13 @@ public class Lotto {
   }
 
   public boolean hasBonusBall(int bonusBall) {
-    return numbers.contains(bonusBall);
+    return numbers.contains(LottoNo.of(bonusBall));
   }
 
-  @Override
-  public String toString() {
-    return numbers.toString();
+  public String getNumbersAsString() {
+    return numbers.stream()
+        .map(LottoNo::getNumber)
+        .map(String::valueOf)
+        .collect(Collectors.joining(", ", "[", "]"));
   }
 }
