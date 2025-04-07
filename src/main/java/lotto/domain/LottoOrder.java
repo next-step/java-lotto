@@ -21,8 +21,8 @@ public class LottoOrder {
     }
 
     private void validateAmount(int amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("구입 금액은 0원보다 커야 합니다.");
+        if (amount < 1000) {
+            throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다.");
         }
     }
 

@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 public class LottoOrderTest {
 
     @Test
-    @DisplayName("구매 금액은 0원 이상이어야 한다")
+    @DisplayName("구매 금액은 1000원 이상이어야 한다")
     void shouldThrowExceptionWhenPurchaseAmountIsLessThanZero() {
-        assertThatThrownBy(() -> new LottoOrder("-1"))
+        assertThatThrownBy(() -> new LottoOrder("500"))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("구입 금액은 0원보다 커야 합니다.");
+            .hasMessage("구입 금액은 1000원 이상이어야 합니다.");
     }
 
     @Test
