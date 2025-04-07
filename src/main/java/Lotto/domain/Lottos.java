@@ -46,9 +46,10 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             int matchCount = lotto.countMatches(winningNumbers);
             LottoPrize prize = LottoPrize.fromMatchCount(matchCount);
-            if (prize != null) {
-                stats.put(prize, stats.get(prize) + 1);
-            }
+
+            if (prize == null) continue;
+
+            stats.put(prize, stats.get(prize) + 1);
         }
 
         return stats;
