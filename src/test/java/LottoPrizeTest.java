@@ -1,29 +1,36 @@
 import Lotto.constants.LottoPrize;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoPrizeTest {
-
-    @Test
-    void fromMatchCount_ShouldReturnCorrectEnum() {
-        assertEquals(LottoPrize.THREE_MATCH, LottoPrize.fromMatchCount(3));
-        assertEquals(LottoPrize.FOUR_MATCH, LottoPrize.fromMatchCount(4));
-        assertEquals(LottoPrize.FIVE_MATCH, LottoPrize.fromMatchCount(5));
-        assertEquals(LottoPrize.SIX_MATCH, LottoPrize.fromMatchCount(6));
+    @ParameterizedTest
+    @CsvSource({
+            "3, THREE_MATCH",
+            "4, FOUR_MATCH",
+            "5, FIVE_MATCH",
+            "6, SIX_MATCH"
+    })
+    void fromMatchCount_ShouldReturnCorrectEnum(int input, LottoPrize expected) {
+        assertEquals(expected, LottoPrize.fromMatchCount(input));
     }
 
-    @Test
-    void fromMatchCount_ShouldReturnNull_ForInvalidInput() {
-        assertNull(LottoPrize.fromMatchCount(2)); // 존재하지 않는 매칭 개수
-        assertNull(LottoPrize.fromMatchCount(7)); // 존재하지 않는 매칭 개수
-        assertNull(LottoPrize.fromMatchCount(-1)); // 잘못된 입력
+    @ParameterizedTest
+    @ValueSource(ints = {2, 7, -1})
+    void fromMatchCount_ShouldReturnNull_ForInvalidInput(int input) {
+        assertNull(LottoPrize.fromMatchCount(input));
     }
 
-    @Test
-    void getPrizeMoney_ShouldReturnCorrectValue() {
-        assertEquals(5000, LottoPrize.THREE_MATCH.getPrizeMoney());
-        assertEquals(50000, LottoPrize.FOUR_MATCH.getPrizeMoney());
-        assertEquals(1500000, LottoPrize.FIVE_MATCH.getPrizeMoney());
-        assertEquals(2000000000, LottoPrize.SIX_MATCH.getPrizeMoney());
+    @ParameterizedTest
+    @CsvSource({
+            "THREE_MATCH, 5000",
+            "FOUR_MATCH, 50000",
+            "FIVE_MATCH, 1500000",
+            "SIX_MATCH, 2000000000"
+    })
+    void getPrizeMoney_ShouldReturnCorrectValue(LottoPrize prize, int expectedMoney) {
+        assertEquals(expectedMoney, prize.getPrizeMoney());
     }
 }

@@ -15,6 +15,10 @@ public class Validations {
     }
 
     public static boolean isInvalidPrice(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return true;
+        }
+
         String sanitizedInput = input.replace(",", "");
         return ValidationUtils.isInvalidNumber(sanitizedInput, UNIT, Integer.MAX_VALUE) ||
                 Integer.parseInt(sanitizedInput) % UNIT != 0;

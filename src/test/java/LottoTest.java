@@ -9,7 +9,6 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
-
     @Test
     void should_throw_exception_when_lotto_size_is_not_six() {
         List<LottoNumber> invalidNumbers = Arrays.asList(

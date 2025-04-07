@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PurchaseTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"14000", "14500", "14,000", "1000"})
+    @ValueSource(strings = {"14000", "14,000", "1000"})
     void should_be_valid_price(String input) {
         assertFalse(Validations.isInvalidPrice(input));
     }

@@ -9,6 +9,7 @@ public class ValidationUtils {
         if (input == null || input.trim().isEmpty()) {
             return true;
         }
+
         if ( number < min || number > max) {
             return true;
         }
