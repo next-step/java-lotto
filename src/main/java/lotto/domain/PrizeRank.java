@@ -1,25 +1,21 @@
 package lotto.domain;
 
 public enum PrizeRank {
-  FIRST(6, 2000000000),
-  SECOND(5, 30000000, true),
-  THIRD(5, 1500000),
-  FOURTH(4, 50000),
-  FIFTH(3, 5000),
-  MISS(0, 0);
+  FIRST(6, false, 2_000_000_000),
+  SECOND(5, true, 30_000_000),
+  THIRD(5, false, 1_500_000),
+  FOURTH(4, false, 50_000),
+  FIFTH(3, false, 5_000),
+  MISS(0, false, 0);
 
   private final int matchCount;
-  private final int prizeMoney;
   private final boolean hasBonusBall;
+  private final int prizeMoney;
 
-  PrizeRank(int matchCount, int prizeMoney) {
-    this(matchCount, prizeMoney, false);
-  }
-
-  PrizeRank(int matchCount, int prizeMoney, boolean hasBonusBall) {
+  PrizeRank(int matchCount, boolean hasBonusBall, int prizeMoney) {
     this.matchCount = matchCount;
-    this.prizeMoney = prizeMoney;
     this.hasBonusBall = hasBonusBall;
+    this.prizeMoney = prizeMoney;
   }
 
   public static PrizeRank valueOf(int matchCount, boolean hasBonusBall) {
@@ -35,11 +31,11 @@ public enum PrizeRank {
     return matchCount;
   }
 
-  public int getPrizeMoney() {
-    return prizeMoney;
-  }
-
   public boolean hasBonusBall() {
     return hasBonusBall;
+  }
+
+  public int getPrizeMoney() {
+    return prizeMoney;
   }
 } 

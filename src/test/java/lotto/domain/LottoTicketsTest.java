@@ -57,14 +57,4 @@ class LottoTicketsTest {
     assertThat(statistics.values().stream().mapToInt(Integer::intValue).sum())
         .isLessThanOrEqualTo(tickets.size());
   }
-
-  @Test
-  void 로또_티켓_문자열_표현() {
-    LottoTickets tickets = new LottoTickets(2);
-    String result = tickets.toString();
-
-    assertThat(result).contains("[");
-    assertThat(result).contains("]");
-    assertThat(result.split("\n")).hasSize(2);
-  }
 } 

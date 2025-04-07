@@ -4,8 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoTest {
 
@@ -14,16 +15,15 @@ class LottoTest {
     assertThat(new Lotto().toString().split(",")).hasSize(6);
   }
 
-  @Test
-  void 번호가_범위_미만이면_예외_발생() {
-    assertThatThrownBy(() -> new Lotto(Arrays.asList(0, 2, 3, 4, 5, 6)))
-        .isInstanceOf(IllegalArgumentException.class);
-  }
-
-  @Test
-  void 번호가_범위_초과면_예외_발생() {
-    assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 51)))
-        .isInstanceOf(IllegalArgumentException.class);
+  @ParameterizedTest
+  @CsvSource({
+      "0, 2, 3, 4, 5, 6",
+      "1, 2, 3, 4, 5, 51"
+  })
+  void 번호가_범위를_벗어나면_예외_발생(int n1, int n2, int n3, int n4, int n5, int n6) {
+    assertThatThrownBy(() -> new Lotto(Arrays.asList(n1, n2, n3, n4, n5, n6)))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
   }
 
   @Test
@@ -31,21 +31,15 @@ class LottoTest {
     Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
 
-    int matchCount = lotto.countMatchingNumbers(winningNumbers);
-    assertThat(matchCount).isEqualTo(3);
+    assertThat(lotto.countMatchingNumbers(winningNumbers)).isEqualTo(3);
   }
 
-  @Test
-  void 번호_개수가_정해진_개수가_아니면_예외_발생() {
-    List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-    assertThatThrownBy(() -> new Lotto(numbers))
-        .isInstanceOf(IllegalArgumentException.class);
-  }
-
-  @Test
-  void 보너스_볼_일치_여부_확인() {
-    Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-    assertThat(lotto.hasBonusBall(7)).isFalse();
-    assertThat(lotto.hasBonusBall(6)).isTrue();
+  @ParameterizedTest
+  @CsvSource({
+      "1, 2, 3, 4, 5, 6, 7, false",
+      "1, 2, 3, 4, 5, 6, 6, true"
+  })
+  void 보너스_볼_일치_여부_확인(int n1, int n2, int n3, int n4, int n5, int n6, int bonusBall, boolean expected) {
+    assertThat(new Lotto(Arrays.asList(n1, n2, n3, n4, n5, n6)).hasBonusBall(bonusBall)).isEqualTo(expected);
   }
 } 

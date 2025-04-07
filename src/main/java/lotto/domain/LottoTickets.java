@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -33,13 +34,17 @@ public class LottoTickets {
     }
 
     for (Lotto ticket : lottoTickets) {
-      int matchCount = ticket.countMatchingNumbers(winningNumbers);
-      PrizeRank rank = PrizeRank.valueOf(matchCount, ticket.hasBonusBall(bonusBall));
-      if (rank != null) {
-        statistics.merge(rank, 1, Integer::sum);
-      }
+      updateStatisticsForTicket(winningNumbers, bonusBall, ticket, statistics);
     }
     return statistics;
+  }
+
+  private void updateStatisticsForTicket(Lotto winningNumbers, int bonusBall, Lotto ticket,
+      Map<PrizeRank, Integer> statistics) {
+    PrizeRank rank = PrizeRank.valueOf(ticket.countMatchingNumbers(winningNumbers), ticket.hasBonusBall(bonusBall));
+    if (rank != null) {
+      statistics.merge(rank, 1, Integer::sum);
+    }
   }
 
   public double calculateProfitRate(Map<PrizeRank, Integer> statistics) {
@@ -51,12 +56,9 @@ public class LottoTickets {
     return (double) totalPrize / totalCost;
   }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    for (Lotto lotto : lottoTickets) {
-      sb.append(lotto.toString()).append("\n");
-    }
-    return sb.toString();
+  public List<String> getLottoNumbersAsStrings() {
+    return lottoTickets.stream()
+        .map(Lotto::toString)
+        .collect(Collectors.toList());
   }
 }

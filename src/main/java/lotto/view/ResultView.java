@@ -8,19 +8,18 @@ public class ResultView {
 
   public void printLottos(LottoTickets lottoTickets) {
     System.out.println(lottoTickets.size() + "개를 구매했습니다.");
-    System.out.println(lottoTickets);
+    lottoTickets.getLottoNumbersAsStrings().forEach(System.out::println);
   }
 
   public void printWinningStatistics(Map<PrizeRank, Integer> statistics, double profitRate) {
     System.out.println("당첨 통계");
     System.out.println("---------");
     for (PrizeRank rank : PrizeRank.values()) {
-      String bonusBallInfo = rank.hasBonusBall() ? ", 보너스 볼 일치" : "";
-      System.out.printf("%d개 일치%s (%d원)- %d개\n",
+      System.out.printf("%d개 일치%s (%d원) - %d개%n",
           rank.getMatchCount(),
-          bonusBallInfo,
+          rank.hasBonusBall() ? ", 보너스 볼 일치" : "",
           rank.getPrizeMoney(),
-          statistics.get(rank));
+          statistics.getOrDefault(rank, 0));
     }
     printProfitRateMessage(profitRate);
   }
@@ -31,9 +30,9 @@ public class ResultView {
       return;
     }
     if (profitRate < 1.0) {
-      System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n", profitRate);
+      System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n", profitRate);
       return;
     }
-    System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)\n", profitRate);
+    System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)%n", profitRate);
   }
 }
