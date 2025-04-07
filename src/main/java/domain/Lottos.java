@@ -55,7 +55,6 @@ public class Lottos {
         }};
 
         for (Lotto lotto : lottos) {
-
             PrizeEnum prizeEnum = PrizeEnum.of(lotto.getHitCount(winNumbers), lotto.hasBonusNumber(bonus));
 
             summaryMap.put(prizeEnum, summaryMap.getOrDefault(prizeEnum, 0) + 1);

@@ -21,7 +21,11 @@ class LottoGameTest {
     void buy() {
         LottoGame lottoGame = new LottoGame();
         assertThat(lottoGame).isEqualTo(lottoGame.buy(5));
+<<<<<<< HEAD
         assertThat(lottoGame.getLottos().getAutoLottos().size()).isEqualTo(5);
+=======
+        assertThat(lottoGame.getLottos().getLottos().size()).isEqualTo(5);
+>>>>>>> upstream/jhm9595
     }
 
     @Test
@@ -31,7 +35,11 @@ class LottoGameTest {
                 .buy(100)
                 .calculateWinResult(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), 7)
                 .keySet();
+<<<<<<< HEAD
         if (!prizeEnums.isEmpty()) {
+=======
+        if(!prizeEnums.isEmpty()){
+>>>>>>> upstream/jhm9595
             assertThat(prizeEnums).containsAnyOf(PrizeEnum.values());
         }
     }

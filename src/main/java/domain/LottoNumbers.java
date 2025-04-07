@@ -66,4 +66,5 @@ public class LottoNumbers {
     public boolean hasBonusNumber(int bonus) {
         return this.lottoNumbers.contains(bonus);
     }
+
 }
