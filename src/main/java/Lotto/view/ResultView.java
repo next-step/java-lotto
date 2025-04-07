@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ResultView {
     public void printBuyNum(int num) {
-        System.out.println(num + "개를 구매했습니다.");
+        System.out.println("\n"+num + "개를 구매했습니다.");
     }
 
     public void printLotto(List<List<Integer>> numbers) {
