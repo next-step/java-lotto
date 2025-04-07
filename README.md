@@ -111,7 +111,7 @@
 - LottoStatistics: 당첨 번호와 구매 티켓을 비교하여 당첨 통계와 수익률을 계산
 - LottoRank: 로또 당첨 금액과 관련된 상수와 계산 로직을 관리
 - WinningNumbers: 당첨 번호의 입력과 유효성 검증을 담당
-- PurchasePrice: 로또 구매 금액의 입력과 유효셩 검증을 담당
+- LottoOrder: 로또 구매 금액의 입력과 유효셩 검증을 담당
 - InputView: 입력 UI
 - ResultView: 출력 UI
 
