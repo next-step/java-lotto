@@ -25,7 +25,7 @@ class LottoResultTest {
     })
     void countByRank(Rank expectedRank, int n1, int n2, int n3, int n4, int n5, int n6) {
         Lotto ticket = LottoFixture.of(n1, n2, n3, n4, n5, n6);
-        Lottos lottos = new Lottos(List.of(ticket));
+        Lottos lottos = Lottos.copyOf(List.of(ticket));
         LottoResult result = new LottoResult(lottos, winning);
         Map<Rank, Integer> stats = result.getResults();
 
@@ -35,7 +35,7 @@ class LottoResultTest {
     @DisplayName("총 수익률을 계산한다")
     @Test
     void calculatesCorrectProfitRate() {
-        Lottos lottos = new Lottos(List.of(
+        Lottos lottos = Lottos.copyOf(List.of(
                 LottoFixture.of(1, 2, 3, 10, 11, 12),
                 LottoFixture.of(1, 2, 3, 4, 11, 12)
         ));

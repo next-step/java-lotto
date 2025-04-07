@@ -16,7 +16,11 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validateLotto(numbers);
-        this.numbers = List.copyOf(numbers);
+        this.numbers = numbers;
+    }
+
+    public static Lotto copyOf(List<Integer> values) {
+        return new Lotto(List.copyOf(values)); // 내부 리스트 불변화
     }
 
     private void validateLotto(List<Integer> numbers) {

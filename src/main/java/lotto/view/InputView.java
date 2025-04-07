@@ -45,7 +45,7 @@ public class InputView {
                 String input = SCANNER.nextLine();
                 List<Integer> numbers = parseNumbers(input);
 
-                return new Lotto(numbers);
+                return Lotto.copyOf(numbers);
             } catch (IllegalArgumentException e) {
                 System.out.println(OutputMessage.ERROR_PREFIX + e.getMessage());
             }

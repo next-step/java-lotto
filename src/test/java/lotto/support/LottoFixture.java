@@ -14,6 +14,6 @@ public class LottoFixture {
                 .boxed()
                 .collect(Collectors.toList());
 
-        return new Lotto(list);
+        return Lotto.copyOf(list);
     }
 }

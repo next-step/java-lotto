@@ -20,6 +20,6 @@ public class LottoNumberGenerator {
         List<Integer> selected = numbers.subList(0, Lotto.LOTTO_SIZE);
         Collections.sort(selected);
 
-        return new Lotto(selected);
+        return Lotto.copyOf(selected);
     }
 }
