@@ -11,7 +11,7 @@ class LottosTest {
 
     @Test
     void 자동_수동_생성_개수확인() {
-        Lottos lottos = new Lottos().buy(5,new String[]{"1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8"});
+        Lottos lottos = new Lottos().buy(5, new String[]{"1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8"});
         assertThat(lottos.getAutoLottos()).hasSize(2);
         assertThat(lottos.getManualLottos()).hasSize(3);
     }
@@ -30,20 +30,20 @@ class LottosTest {
     @Test
     void 보너스볼_확인() {
 
-        Lottos lottos = new Lottos(new ArrayList<>(){{
-            add(new Lotto(new LottoNumbers(List.of(1,2,3,4,5,6))));
+        Lottos lottos = new Lottos(new ArrayList<>() {{
+            add(new Lotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))));
         }});
 
-        assertThat(lottos.calculateWinResult(new LottoNumbers(List.of(1,2,3,4,5,7)), 6)).containsKey(PrizeEnum.FIVE_HIT_BONUS_HIT);
+        assertThat(lottos.calculateWinResult(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)), 6)).containsKey(PrizeEnum.FIVE_HIT_BONUS_HIT);
     }
 
     @Test
     void 일등_확인() {
 
-        Lottos lottos = new Lottos(new ArrayList<>(){{
-            add(new Lotto(new LottoNumbers(List.of(1,2,3,4,5,6))));
+        Lottos lottos = new Lottos(new ArrayList<>() {{
+            add(new Lotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))));
         }});
 
-        assertThat(lottos.calculateWinResult(new LottoNumbers(List.of(1,2,3,4,5,6)), 7)).containsKey(PrizeEnum.SIX_HIT);
+        assertThat(lottos.calculateWinResult(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), 7)).containsKey(PrizeEnum.SIX_HIT);
     }
 }

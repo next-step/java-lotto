@@ -31,7 +31,7 @@ class LottoGameTest {
                 .buy(100)
                 .calculateWinResult(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), 7)
                 .keySet();
-        if(!prizeEnums.isEmpty()){
+        if (!prizeEnums.isEmpty()) {
             assertThat(prizeEnums).containsAnyOf(PrizeEnum.values());
         }
     }

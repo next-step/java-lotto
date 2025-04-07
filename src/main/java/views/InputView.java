@@ -48,7 +48,7 @@ public class InputView {
     public static String[] inputManualTicketNumbers(int manualTicketCount) {
         ResultView.println(Messages.ASK_MANUAL_TICKET_NUMBERS);
         String[] manualTicketNumbers = new String[manualTicketCount];
-        for(int i = 0; i < manualTicketCount; i++){
+        for (int i = 0; i < manualTicketCount; i++) {
             manualTicketNumbers[i] = scanner.next();
         }
         return manualTicketNumbers;

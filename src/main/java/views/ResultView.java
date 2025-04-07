@@ -22,7 +22,7 @@ public class ResultView {
         System.out.println(str);
     }
 
-    public static void printf(String str, Object ...value) {
+    public static void printf(String str, Object... value) {
         System.out.printf(str, value);
     }
 

@@ -25,7 +25,7 @@ public class LottoGame {
         return lottos.calculateWinResult(winNumbers, bonus);
     }
 
-    public LottoGame buy(int ticketCount, String[] manualTicketNumbers){
+    public LottoGame buy(int ticketCount, String[] manualTicketNumbers) {
         lottos.buy(ticketCount, manualTicketNumbers);
         return this;
     }
