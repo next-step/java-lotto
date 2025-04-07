@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 public enum LottoRank {
     MATCH_3(3, false, 5_000, "3개 일치 (5000원)"),
     MATCH_4(4, false, 50_000, "4개 일치 (50000원)"),
@@ -40,4 +43,12 @@ public enum LottoRank {
     }
 
     public String description() { return this.description; }
+
+    public static Map<LottoRank, Integer> createLottoWinningBoardMap() {
+        Map<LottoRank, Integer> rankMap = new EnumMap<>(LottoRank.class);
+        for(LottoRank lottoRank: LottoRank.values()) {
+            rankMap.put(lottoRank, 0);
+        }
+        return rankMap;
+    }
 }

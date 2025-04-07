@@ -17,9 +17,9 @@
 
 ### TODO
 - [ ] 로또 구매 비용 원시값 포장
-- [ ] LottoWinningRecord 생성자 역할과 책임에 대한 검토 & 리팩토링
-- [ ] 금액을 관리하는 책임에 대한 검토 with LottoMachine
-- [ ] InputView에서 빈 객체 리턴하도록 리팩토링
+- [x] LottoWinningRecord 생성자 역할과 책임에 대한 검토 & 리팩토링
+- [x] 금액을 관리하는 책임에 대한 검토 with LottoMachine
+- [x] InputView에서 빈 객체 리턴하도록 리팩토링
  
 - [x] 수동/자동 구매 정보 화면 노출
 - [x] 로또 타입에 자동/수동 구분 짓는 상태에 대한 고민
