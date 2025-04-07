@@ -34,8 +34,11 @@ public enum LottoRank {
         return prizeMoney * count;
     }
 
-    @Override
-    public String toString() {
-        return matchCount + "개 일치 (" + prizeMoney + "원)";
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isContainsBonusNumber() {
+        return this.containsBonusNumber;
     }
 }

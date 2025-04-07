@@ -23,8 +23,9 @@ public class ResultView {
         }
     }
 
-    private static String formatMatchCount(LottoRank prize, int count) {
-        return prize.toString() + " - " + count + "개";
+    private static String formatMatchCount(LottoRank rank, int count) {
+        String bonusMsg = rank.isContainsBonusNumber() ? ", 보너스 볼 일치" : "";
+        return String.format("%d개 일치%s (%d원) - %d개", rank.getMatchCount(), bonusMsg, rank.getPrizeMoney(1), count);
     }
 
 }
