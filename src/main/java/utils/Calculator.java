@@ -2,6 +2,8 @@ package utils;
 
 import java.util.List;
 
+import static utils.Parser.toInt;
+
 public class Calculator {
     private static final String PLUS_SYMBOL = "+";
     private static final String MINUS_SYMBOL = "-";
@@ -9,11 +11,11 @@ public class Calculator {
     private static final String DIVIDE_SYMBOL = "/";
 
     public static int evaluateExpression(List<String> expressions) {
-        int result = InputView.toInt(expressions.get(0));
+        int result = toInt(expressions.get(0));
 
         for (int i = 1; i < expressions.size(); i += 2) {
             String operator = expressions.get(i);
-            int nextNumber = InputView.toInt(expressions.get(i + 1));
+            int nextNumber = toInt(expressions.get(i + 1));
 
             result = calculate(result, nextNumber, operator);
         }

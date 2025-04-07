@@ -1,33 +1,30 @@
-package utils;
+package domain;
 
-import java.util.Scanner;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-public class InputView {
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String WINNING_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
+import java.util.List;
 
-    public String inputExpression() {
-        return scanner.nextLine();
+class LottoTest {
+    @Test
+    @DisplayName("로또 번호와 당첨 번호의 일치 개수를 반환해야한다.")
+    void 로또_번호_당첨_번호_일치_개수() {
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        Assertions.assertThat(lotto.matchCount(winningNumber)).isEqualTo(6);
     }
 
-    public static String inputPurchaseAmount() {
-        System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
-        return scanner.nextLine();
-    }
+    @ParameterizedTest
+    @DisplayName("로또 번호와 보너스 번호의 일치 여부를 반환한다.")
+    @CsvSource({"7, true", "8, false"})
+    void 로또_번호_보너스_번호_일치_여부(String bonusNumberInput, boolean expected) {
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", bonusNumberInput);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
-    public static String inputWinningNumbers() {
-        System.out.println(WINNING_NUMBERS_INPUT_MESSAGE);
-        return scanner.nextLine();
-    }
-
-    public static String inputBonusNumber() {
-        System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
-        return scanner.nextLine();
-    }
-
-    public static int toInt(String input) {
-        return Integer.parseInt(input);
+        Assertions.assertThat(lotto.matchBonusNumber(winningNumber)).isEqualTo(expected);
     }
 }

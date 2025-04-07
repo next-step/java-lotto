@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumberGenerator {
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
+import static domain.LottoNumber.LOTTO_MAX_NUMBER;
+import static domain.LottoNumber.LOTTO_MIN_NUMBER;
 
+public class LottoNumberGenerator {
     public List<Integer> generate() {
         List<Integer> lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                 .boxed()
