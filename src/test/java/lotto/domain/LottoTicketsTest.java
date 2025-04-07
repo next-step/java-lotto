@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -14,12 +14,21 @@ class LottoTicketsTest {
   }
 
   @Test
-  void 수익률_계산() {
-    Map<Integer, Integer> statistics = new HashMap<>();
-    statistics.put(3, 1);
-    statistics.put(4, 0);
-    statistics.put(5, 0);
-    statistics.put(6, 0);
-    assertThat(new LottoTickets(5).calculateProfitRate(statistics)).isEqualTo(1.0);
+  void 로또_티켓_개수로_생성() {
+    assertThat(new LottoTickets(3).size()).isEqualTo(3);
+  }
+
+  @Test
+  void 당첨_통계_생성() {
+    LottoTickets tickets = new LottoTickets(5);
+    Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    int bonusBall = 7;
+
+    LottoStatistics statistics = tickets.createWinningStatistics(winningNumbers, bonusBall);
+
+    Map<PrizeRank, Integer> result = statistics.getRankCounts();
+    assertThat(result).isNotNull();
+    assertThat(result.values().stream().mapToInt(Integer::intValue).sum())
+        .isLessThanOrEqualTo(tickets.size());
   }
 } 

@@ -23,11 +23,16 @@ public class InputView {
     return price;
   }
 
-  public List<Integer> readPreviousNumbers() {
+  public List<Integer> readWinningNumbers() {
     System.out.println(READ_PREVIOUS_NUMBER_QUESTION);
     return Arrays.stream(scanner.nextLine().split(DELIMITER))
         .map(String::trim)
         .map(Integer::parseInt)
         .collect(Collectors.toList());
+  }
+
+  public int readBonusBall() {
+    System.out.println("보너스 볼을 입력해 주세요.");
+    return Integer.parseInt(scanner.nextLine());
   }
 }

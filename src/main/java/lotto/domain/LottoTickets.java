@@ -4,18 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
   private static final int PRICE_PER_LOTTO = 1000;
-  private static final Map<Integer, Integer> PRIZE_TABLE = new HashMap<>();
-
-  static {
-    PRIZE_TABLE.put(3, 5000);
-    PRIZE_TABLE.put(4, 50000);
-    PRIZE_TABLE.put(5, 1500000);
-    PRIZE_TABLE.put(6, 2000000000);
-  }
 
   private final List<Lotto> lottoTickets;
 
@@ -34,34 +27,29 @@ public class LottoTickets {
     return lottoTickets.size();
   }
 
-  public Map<Integer, Integer> calculateWinningStatistics(Lotto winningNumbers) {
-    Map<Integer, Integer> statistics = new HashMap<>();
-    for (int i = 3; i <= 6; i++) {
-      statistics.put(i, 0);
+  public LottoStatistics createWinningStatistics(Lotto winningNumbers, int bonusBall) {
+    Map<PrizeRank, Integer> statistics = new HashMap<>();
+    for (PrizeRank rank : PrizeRank.values()) {
+      statistics.put(rank, 0);
     }
 
     for (Lotto ticket : lottoTickets) {
-      int matchCount = ticket.countMatchingNumbers(winningNumbers);
-      if (matchCount >= 3) {
-        statistics.merge(matchCount, 1, Integer::sum);
-      }
+      updateRankCount(winningNumbers, bonusBall, ticket, statistics);
     }
-    return statistics;
+    return new LottoStatistics(statistics, lottoTickets.size(), PRICE_PER_LOTTO);
   }
 
-  public double calculateProfitRate(Map<Integer, Integer> statistics) {
-    int totalPrize = statistics.entrySet().stream()
-        .mapToInt(entry -> entry.getValue() * PRIZE_TABLE.get(entry.getKey()))
-        .sum();
-    return (double) totalPrize / (lottoTickets.size() * PRICE_PER_LOTTO);
+  private void updateRankCount(Lotto winningNumbers, int bonusBall, Lotto ticket,
+      Map<PrizeRank, Integer> statistics) {
+    PrizeRank rank = PrizeRank.valueOf(ticket.countMatchingNumbers(winningNumbers), ticket.hasBonusBall(bonusBall));
+    if (rank != null) {
+      statistics.merge(rank, 1, Integer::sum);
+    }
   }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    for (Lotto lotto : lottoTickets) {
-      sb.append(lotto.toString()).append("\n");
-    }
-    return sb.toString();
+  public List<String> getLottoNumbersAsStrings() {
+    return lottoTickets.stream()
+        .map(Lotto::toString)
+        .collect(Collectors.toList());
   }
 }
