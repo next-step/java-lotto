@@ -31,7 +31,7 @@ public class LotterysTest {
         assertThat(lotterys.length()).isEqualTo(1);
     }
     @Test
-    @DisplayName("shuffle 을 통해 로또 번호를 생성한다.")
+    @DisplayName("generate 을 통해 로또 번호를 생성한다.")
     void randomNumbersTest() {
         Lotterys lotterys = new Lotterys(1, new Generate() {
             @Override

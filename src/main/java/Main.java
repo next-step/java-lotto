@@ -1,6 +1,5 @@
 import step2.lottery.LotteryCount;
 import step2.lottery.Lotterys;
-import step2.winning.LotteryMatcher;
 import step2.winning.PrizeWinningNumber;
 import step2.winning.WinningResults;
 import step2.generate.RandomGenerate;
@@ -23,7 +22,7 @@ public class Main {
         String winningNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
         PrizeWinningNumber prizeWinningNumber = new PrizeWinningNumber(winningNumber, bonusBall);
-        WinningResults result = LotteryMatcher.match(prizeWinningNumber, lotterys);
+        WinningResults result = lotterys.countWinningResults(prizeWinningNumber);
 
         OutputView.printWinningStatistics(result);
         OutputView.printTotalPrize(result.calculatePrize(), purchaseAmount);

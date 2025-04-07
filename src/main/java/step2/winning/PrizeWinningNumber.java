@@ -16,11 +16,13 @@ public class PrizeWinningNumber {
         WinningNumberValidator.validateBonusNumber(prizeWinningNumbers, bonusNumber);
     }
 
-    public Set<LotteryNumber> getPrizeWinningNumbers() {
-        return prizeWinningNumbers;
+    public int matchCount(Set<LotteryNumber> lottoNumbers) {
+        return (int) prizeWinningNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
+    }
+    public boolean isMatchBounus(Set<LotteryNumber> lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
-    public LotteryNumber getBonusNumber() {
-        return bonusNumber;
-    }
 }
