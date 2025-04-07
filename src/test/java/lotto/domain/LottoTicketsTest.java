@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,8 +16,17 @@ class LottoTicketsTest {
   }
 
   @Test
-  void 로또_티켓_개수로_생성() {
-    assertThat(new LottoTickets(3).size()).isEqualTo(3);
+  void 금액_범위_예외() {
+    assertThatThrownBy(() -> LottoTickets.of(999))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("로또 구매 금액은 1000원 이상이어야 합니다.");
+  }
+
+  @Test
+  void 금액_단위_예외() {
+    assertThatThrownBy(() -> LottoTickets.of(1500))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("로또 구매 금액은 1000원 단위여야 합니다.");
   }
 
   @Test
@@ -30,16 +40,24 @@ class LottoTicketsTest {
   }
 
   @Test
+  void 수동_로또_수_초과_예외() {
+    List<Lotto> manualLottos = Arrays.asList(
+        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+        new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12))
+    );
+    assertThatThrownBy(() -> LottoTickets.of(manualLottos, 1000))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("수동 로또 수가 구매 가능한 로또 수를 초과했습니다.");
+  }
+
+  @Test
   void 당첨_통계_생성() {
-    LottoTickets tickets = new LottoTickets(5);
-    Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-    int bonusBall = 7;
+    LottoTickets lottoTickets = LottoTickets.of(5000);
 
-    LottoStatistics statistics = tickets.createWinningStatistics(winningNumbers, bonusBall);
-
-    Map<PrizeRank, Integer> result = statistics.getRankCounts();
+    Map<PrizeRank, Integer> result = lottoTickets.createWinningStatistics(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7)
+        .getRankCounts();
     assertThat(result).isNotNull();
     assertThat(result.values().stream().mapToInt(Integer::intValue).sum())
-        .isLessThanOrEqualTo(tickets.size());
+        .isLessThanOrEqualTo(lottoTickets.size());
   }
 } 
