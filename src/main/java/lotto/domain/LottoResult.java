@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private static final int NO_MATCH = 0;
     private static final int FIRST_INDEX = 1;
 
     private final Map<Rank, Integer> results = new EnumMap<>(Rank.class);
@@ -16,12 +15,12 @@ public class LottoResult {
 
     private void compareAll(Lottos lottos, Lotto winningLotto) {
         for (Lotto lotto : lottos.getValues()) {
-            int matchCount = (int) lotto.getNumbers().stream()
-                    .filter(winningLotto.getNumbers()::contains)
-                    .count();
+            int matchCount = lotto.countMatchWith(winningLotto);
+            Rank rank = Rank.from(matchCount);
 
-            Rank.valueOf(matchCount)
-                    .ifPresent(rank -> results.put(rank, results.getOrDefault(rank, NO_MATCH) + FIRST_INDEX));
+            if (rank.isWin()) {
+                results.put(rank, results.getOrDefault(rank, 0) + FIRST_INDEX);
+            }
         }
     }
 

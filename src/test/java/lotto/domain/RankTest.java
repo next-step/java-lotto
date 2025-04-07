@@ -18,13 +18,13 @@ class RankTest {
             "6, SIX"
     })
     void rank(int matchCount, Rank expected) {
-        assertThat(Rank.valueOf(matchCount)).contains(expected);
+        assertThat(Rank.from(matchCount)).isEqualTo(expected);
     }
 
     @DisplayName("일치 개수가 없으면 빈 Optional을 반환한다")
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 7, 10})
     void empty_rank(int matchCount) {
-        assertThat(Rank.valueOf(matchCount)).isEmpty();
+        assertThat(Rank.from(matchCount)).isEqualTo(Rank.NONE);
     }
 }

@@ -1,9 +1,9 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Rank {
+    NONE(0, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
@@ -17,14 +17,19 @@ public enum Rank {
         this.reward = reward;
     }
 
-    public static Optional<Rank> valueOf(int matchCount) {
+    public static Rank from(int matchCount) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
-                .findFirst();
+                .findFirst()
+                .orElse(NONE);
     }
 
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public boolean isWin() {
+        return this != NONE;
     }
 
     public int getReward() {

@@ -53,6 +53,12 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
+    public int countMatchWith(Lotto other) {
+        return (int) this.numbers.stream()
+                .filter(other.numbers::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
         return this.numbers.toString();
