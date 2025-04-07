@@ -18,10 +18,6 @@ public class WinningNumbers {
         this(new LottoTicket(numbers), new LottoNumber(bonusNumber));
     }
 
-    public WinningNumbers(String numbersStr, String bonusNumberStr) {
-        this(new LottoTicket(numbersStr), new LottoNumber(bonusNumberStr));
-    }
-
     private void validateBonusNumber(LottoTicket numbers, LottoNumber bonusNumber) {
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 로또 번호와 중복될 수 없습니다.");

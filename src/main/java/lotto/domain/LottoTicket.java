@@ -20,22 +20,6 @@ public class LottoTicket {
         this(convertToLottoNumbers(numbers));
     }
 
-    public LottoTicket(String numbersStr) {
-        this(parseNumbers(numbersStr));
-    }
-
-    private static Set<LottoNumber> parseNumbers(String numbersStr) {
-        if (numbersStr == null || numbersStr.isBlank()) {
-            throw new IllegalArgumentException("입력값이 없습니다.");
-        }
-
-        Set<LottoNumber> numbers = new HashSet<>();
-        for (String numberStr : numbersStr.split(",")) {
-            numbers.add(new LottoNumber(numberStr));
-        }
-        return numbers;
-    }
-
     private static Set<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer number : numbers) {
