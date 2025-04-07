@@ -2,9 +2,9 @@ package Lotto.domain;
 
 import java.util.*;
 
-import static Lotto.domain.LottoList.LOTTO_PICK_COUNT;
-import static Lotto.domain.LottoList.LOTTO_MIN_NUMBER;
-import static Lotto.domain.LottoList.LOTTO_MAX_NUMBER;
+import static Lotto.domain.Lottos.LOTTO_PICK_COUNT;
+import static Lotto.domain.Lottos.LOTTO_MIN_NUMBER;
+import static Lotto.domain.Lottos.LOTTO_MAX_NUMBER;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;

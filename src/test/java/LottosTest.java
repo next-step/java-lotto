@@ -1,22 +1,20 @@
 import Lotto.constants.LottoPrize;
-import Lotto.domain.LottoList;
+import Lotto.domain.Lottos;
 import Lotto.domain.LottoNumber;
 import Lotto.domain.Lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LottoListTest {
+public class LottosTest {
     @Test
     void calculateStats_ShouldReturnCorrectCounts() {
-        LottoList lottoList = new LottoList();
+        Lottos lottoList = new Lottos();
         Set<LottoNumber> winningNumbers = Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 

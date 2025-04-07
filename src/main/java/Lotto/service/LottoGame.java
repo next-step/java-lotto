@@ -2,7 +2,7 @@ package Lotto.service;
 
 import Lotto.constants.LottoPrize;
 import Lotto.domain.Lotto;
-import Lotto.domain.LottoList;
+import Lotto.domain.Lottos;
 import Lotto.domain.LottoNumber;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
@@ -16,7 +16,7 @@ public class LottoGame {
         int purchasedQty = InputView.askHowMuchYouWouldBuy();
         ResultView.printQuantity(purchasedQty);
 
-        LottoList lottoList = new LottoList();
+        Lottos lottoList = new Lottos();
         List<Lotto> lottos = lottoList.generateLottos(purchasedQty);
         ResultView.printLottos(lottos);
 
@@ -28,7 +28,7 @@ public class LottoGame {
         ResultView.printProfitRate(profitRate);
     }
 
-    public static double calculateProfitRate(LottoList lottoList, Set<LottoNumber> winningNumbers) {
+    public static double calculateProfitRate(Lottos lottoList, Set<LottoNumber> winningNumbers) {
         Map<LottoPrize, Integer> stats = lottoList.calculateStats(winningNumbers);
 
         int totalPrize = 0;

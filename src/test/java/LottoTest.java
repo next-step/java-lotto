@@ -1,4 +1,3 @@
-import Lotto.domain.LottoList;
 import Lotto.domain.LottoNumber;
 import Lotto.domain.Lotto;
 
