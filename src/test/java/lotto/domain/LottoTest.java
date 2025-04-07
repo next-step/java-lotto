@@ -17,13 +17,13 @@ class LottoTest {
 
   @ParameterizedTest
   @CsvSource({
-      "0, 2, 3, 4, 5, 6",
-      "1, 2, 3, 4, 5, 51"
+      "0, 2, 3, 4, 5, 6, '0는 로또 번호가 될 수 없습니다. 로또 번호는 1부터 45 사이의 숫자여야 합니다.'",
+      "1, 2, 3, 4, 5, 51, '51는 로또 번호가 될 수 없습니다. 로또 번호는 1부터 45 사이의 숫자여야 합니다.'"
   })
-  void 번호가_범위를_벗어나면_예외_발생(int n1, int n2, int n3, int n4, int n5, int n6) {
+  void 번호가_범위를_벗어나면_예외_발생(int n1, int n2, int n3, int n4, int n5, int n6, String expectedMessage) {
     assertThatThrownBy(() -> new Lotto(Arrays.asList(n1, n2, n3, n4, n5, n6)))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+        .hasMessage(expectedMessage);
   }
 
   @Test

@@ -17,7 +17,8 @@ public class LottoNo {
 
   private void validate(int number) {
     if (number < MIN_NUMBER || number > MAX_NUMBER) {
-      throw new IllegalArgumentException(String.format("로또 번호는 %d부터 %d 사이의 숫자여야 합니다.", MIN_NUMBER, MAX_NUMBER));
+      throw new IllegalArgumentException(
+          String.format("%d는 로또 번호가 될 수 없습니다. 로또 번호는 %d부터 %d 사이의 숫자여야 합니다.", number, MIN_NUMBER, MAX_NUMBER));
     }
   }
 

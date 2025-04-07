@@ -19,12 +19,7 @@ public enum PrizeRank {
   }
 
   public static PrizeRank valueOf(int matchCount, boolean hasBonusBall) {
-    for (PrizeRank rank : values()) {
-      if (rank.matchCount == matchCount && rank.hasBonusBall == hasBonusBall) {
-        return rank;
-      }
-    }
-    return MISS;
+    return MatchResult.of(matchCount, hasBonusBall).toPrizeRank();
   }
 
   public int getMatchCount() {

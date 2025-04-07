@@ -45,17 +45,19 @@ public class LottoTickets {
     }
 
     for (Lotto ticket : lottoTickets) {
-      updateRankCount(winningNumbers, bonusBall, ticket, statistics);
+      merge(statistics, calculatePrizeRank(ticket, winningNumbers, bonusBall));
     }
     return new LottoStatistics(statistics, lottoTickets.size(), PRICE_PER_LOTTO);
   }
 
-  private void updateRankCount(Lotto winningNumbers, int bonusBall, Lotto ticket,
-      Map<PrizeRank, Integer> statistics) {
-    PrizeRank rank = PrizeRank.valueOf(ticket.countMatchingNumbers(winningNumbers), ticket.hasBonusBall(bonusBall));
+  private void merge(Map<PrizeRank, Integer> statistics, PrizeRank rank) {
     if (rank != null) {
       statistics.merge(rank, 1, Integer::sum);
     }
+  }
+
+  private PrizeRank calculatePrizeRank(Lotto ticket, Lotto winningNumbers, int bonusBall) {
+    return PrizeRank.valueOf(ticket.countMatchingNumbers(winningNumbers), ticket.hasBonusBall(bonusBall));
   }
 
   public List<String> getLottoNumbersAsStrings() {
