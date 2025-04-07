@@ -10,6 +10,9 @@ public class ResultView {
     public static void showPurchaseResult(List<LottoTicket> manualTickets, List<LottoTicket> autoTickets) {
         // 수동으로 3장, 자동으로 11개를 구매했습니다.
         System.out.println("수동으로 " + manualTickets.size() + "장, 자동으로 " + autoTickets.size() + "장을 구매했습니다.");
+        for (LottoTicket manualTicket : manualTickets) {
+            System.out.println(manualTicket.toString());
+        }
         for (LottoTicket autoTicket : autoTickets) {
             System.out.println(autoTicket.toString());
         }

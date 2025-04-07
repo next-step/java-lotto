@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoNumber {
@@ -30,6 +32,10 @@ public class LottoNumber {
         if (value < MIN_NUMBER || value > MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 " + MIN_NUMBER + "부터 " + MAX_NUMBER + " 사이의 숫자여야 합니다.");
         }
+    }
+
+    public static List<LottoNumber> getAll() {
+        return new ArrayList<>(CACHE.values());
     }
 
     public int getValue() {
