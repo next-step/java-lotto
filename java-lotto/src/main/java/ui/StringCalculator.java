@@ -1,7 +1,7 @@
 package ui;
 
-import domain.Operand;
-import domain.Operator;
+import domain.Calculator.Operand;
+import domain.Calculator.Operator;
 
 public class StringCalculator {
     public final InputView inputView;
@@ -12,10 +12,16 @@ public class StringCalculator {
         this.inputView = inputView;
         this.outputView = outputView;
     }
+
     public int calculate(String input) {
         String[] tokens = inputView.readAndSplitInput(input);
         return evaluate(tokens);
     }
+
+    public void run() {
+        OutputFunc(InputFunc());
+    }
+
 
     private int evaluate(String[] tokens) {
         int result = Integer.parseInt(tokens[0]);
@@ -29,5 +35,16 @@ public class StringCalculator {
 
     private int applyOperation(int left, Operator operator, Operand operand) {
         return operator.operate(left, operand.getNumber());
+    }
+
+    private String InputFunc() {
+        String input = inputView.getInput();
+        inputView.validateInput(input);
+        return input;
+    }
+
+    private void OutputFunc(String input) {
+        int result = calculate(input);
+        outputView.printOutput(result);
     }
 }

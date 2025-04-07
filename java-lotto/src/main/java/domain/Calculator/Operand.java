@@ -1,4 +1,4 @@
-package domain;
+package domain.Calculator;
 
 
 public class Operand {
