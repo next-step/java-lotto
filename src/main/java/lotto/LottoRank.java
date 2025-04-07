@@ -2,26 +2,30 @@ package lotto;
 
 import java.util.Map;
 
-public enum LottoPrize {
-    SIX_MATCH(6, 2000000000),
-    FIVE_MATCH(5, 1500000),
-    FOUR_MATCH(4, 50000),
-    THREE_MATCH(3, 5000),
-    TWO_MATCH(2, 0),
-    ONE_MATCH(1, 0),
-    ZERO_MATCH(0, 0);
+public enum LottoRank {
+    First(6, false, 2000000000),
+    Second(5, true, 2000000000),
+    Third(5, false, 1500000),
+    Fourth(4, false, 50000),
+    Fifth(3, false, 5000);
 
     private final int matchCount;
+    private final boolean containsBonusNumber;
     private final int prizeMoney;
 
-    LottoPrize(int matchCount, int prizeMoney) {
+    LottoRank(int matchCount, boolean containsBonusNumber, int prizeMoney) {
         this.matchCount = matchCount;
+        this.containsBonusNumber = containsBonusNumber;
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoPrize getPrize(int matchCount) {
-        for (LottoPrize prize : values()) {
-            if (prize.matchCount == matchCount) {
+    public static LottoRank getPrize(int matchCount) {
+        return LottoRank.getPrize(matchCount, false);
+    }
+
+    public static LottoRank getPrize(int matchCount, boolean containsBonusNumber) {
+        for (LottoRank prize : values()) {
+            if (prize.matchCount == matchCount && prize.containsBonusNumber == containsBonusNumber) {
                 return prize;
             }
         }
@@ -33,7 +37,7 @@ public enum LottoPrize {
         for (Map.Entry<Integer, Integer> entry : matchCounts.entrySet()) {
             int matches = entry.getKey();
             int count = entry.getValue();
-            LottoPrize prize = getPrize(matches);
+            LottoRank prize = getPrize(matches, false);
             totalAmount += prize.calculateWinningAmount(count);
         }
         return totalAmount;

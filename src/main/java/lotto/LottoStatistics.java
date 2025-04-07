@@ -27,7 +27,7 @@ public class LottoStatistics {
     }
 
     private int calculateTotalWinningAmount() {
-        return LottoPrize.calculateTotalWinningAmount(matchCounts);
+        return LottoRank.calculateTotalWinningAmount(matchCounts);
     }
 
     public double calculateProfitRate() {

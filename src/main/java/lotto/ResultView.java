@@ -20,13 +20,13 @@ public class ResultView {
         for (int matches = 6; matches >= 0; matches--) {
             int count = statistics.getCountByMatches(matches);
             if (count > 0) {
-                LottoPrize prize = LottoPrize.getPrize(matches);
+                LottoRank prize = LottoRank.getPrize(matches);
                 System.out.println(formatMatchCount(prize, count));
             }
         }
     }
 
-    private static String formatMatchCount(LottoPrize prize, int count) {
+    private static String formatMatchCount(LottoRank prize, int count) {
         return prize.toString() + " - " + count + "개";
     }
 
