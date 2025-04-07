@@ -38,7 +38,7 @@ public class Lottos {
     }
 
     public Map<LottoPrize, Integer> calculateStats(Set<LottoNumber> winningNumbers) {
-        Map<LottoPrize, Integer> stats = new HashMap<>();
+        Map<LottoPrize, Integer> stats = new EnumMap<>(LottoPrize.class);
 
         for (LottoPrize prize : LottoPrize.values()) {
             stats.put(prize, 0);
