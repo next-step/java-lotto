@@ -19,12 +19,12 @@ public class LotteryTest {
     @DisplayName("6개 번호가 일치할 경우, 1등 당첨이다.")
     void matchFirstTest() {
         Set<LotteryNumber> lottoNumbers = Set.of(
-                new LotteryNumber(1),
-                new LotteryNumber(2),
-                new LotteryNumber(3),
-                new LotteryNumber(4),
-                new LotteryNumber(5),
-                new LotteryNumber(6)
+                LotteryNumber.of(1),
+                LotteryNumber.of(2),
+                LotteryNumber.of(3),
+                LotteryNumber.of(4),
+                LotteryNumber.of(5),
+                LotteryNumber.of(6)
         );
         Lottery lotto = new Lottery(lottoNumbers);
 
@@ -35,12 +35,12 @@ public class LotteryTest {
     @DisplayName("5개 번호와 보너스 번호가 일치할 경우, 2등 당첨이다.")
     void matchSecondTest() {
         Set<LotteryNumber> lottoNumbers = Set.of(
-                new LotteryNumber(1),
-                new LotteryNumber(2),
-                new LotteryNumber(3),
-                new LotteryNumber(4),
-                new LotteryNumber(5),
-                new LotteryNumber(7)
+                LotteryNumber.of(1),
+                LotteryNumber.of(2),
+                LotteryNumber.of(3),
+                LotteryNumber.of(4),
+                LotteryNumber.of(5),
+                LotteryNumber.of(7)
         );
         Lottery lotto = new Lottery(lottoNumbers);
 
@@ -52,12 +52,12 @@ public class LotteryTest {
     @DisplayName("당첨 번호가 3개 이하일 경우, None 이다.")
     void matchNoneTest() {
         Set<LotteryNumber> lottoNumbers = Set.of(
-                new LotteryNumber(1),
-                new LotteryNumber(2),
-                new LotteryNumber(13),
-                new LotteryNumber(14),
-                new LotteryNumber(15),
-                new LotteryNumber(18)
+                LotteryNumber.of(1),
+                LotteryNumber.of(2),
+                LotteryNumber.of(13),
+                LotteryNumber.of(14),
+                LotteryNumber.of(15),
+                LotteryNumber.of(16)
         );
         Lottery lotto = new Lottery(lottoNumbers);
 

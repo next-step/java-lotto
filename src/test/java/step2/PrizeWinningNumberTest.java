@@ -61,9 +61,9 @@ public class PrizeWinningNumberTest {
     void matchCountTest() {
         PrizeWinningNumber prizeWinningNumber = new PrizeWinningNumber("1,2,3,4,5,6", 7);
         Set<LotteryNumber> numbers = Set.of(
-                new LotteryNumber(1),
-                new LotteryNumber(2),
-                new LotteryNumber(7)
+                LotteryNumber.of(1),
+                LotteryNumber.of(2),
+                LotteryNumber.of(7)
         );
         assertThat(prizeWinningNumber.matchCount(numbers)).isEqualTo(2);
     }
@@ -73,8 +73,8 @@ public class PrizeWinningNumberTest {
     void matchBonusTest() {
         PrizeWinningNumber prizeWinningNumber = new PrizeWinningNumber("1,2,3,4,5,6", 7);
         Set<LotteryNumber> numbers = Set.of(
-                new LotteryNumber(1),
-                new LotteryNumber(7)
+                LotteryNumber.of(1),
+                LotteryNumber.of(7)
         );
         assertThat(prizeWinningNumber.isMatchBounus(numbers)).isTrue();
     }

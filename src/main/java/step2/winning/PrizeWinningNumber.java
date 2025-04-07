@@ -14,7 +14,7 @@ public class PrizeWinningNumber {
     public PrizeWinningNumber(String input, int number) {
         String[] parsedInput = validateInput(input);
         prizeWinningNumbers = parseNumbers(parsedInput);
-        bonusNumber = new LotteryNumber(number);
+        bonusNumber = LotteryNumber.of(number);
         validateBonusNumber(prizeWinningNumbers, bonusNumber);
     }
 
@@ -42,7 +42,7 @@ public class PrizeWinningNumber {
         Set<LotteryNumber> numbers = new HashSet<>();
         for (String number : result) {
             try {
-                numbers.add(new LotteryNumber(Integer.parseInt(number)));
+                numbers.add(LotteryNumber.of(Integer.parseInt(number)));
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("당첨 번호가 숫자가 아닙니다.");
             }

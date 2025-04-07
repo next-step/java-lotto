@@ -19,12 +19,12 @@ public class LotterysTest {
             @Override
             public Set<LotteryNumber> makeNumbers(int size) {
                 return Set.of(
-                        new LotteryNumber(1),
-                        new LotteryNumber(2),
-                        new LotteryNumber(3),
-                        new LotteryNumber(4),
-                        new LotteryNumber(5),
-                        new LotteryNumber(6)
+                        LotteryNumber.of(1),
+                        LotteryNumber.of(2),
+                        LotteryNumber.of(3),
+                        LotteryNumber.of(4),
+                        LotteryNumber.of(5),
+                        LotteryNumber.of(6)
                 );
             }
         });
@@ -37,22 +37,22 @@ public class LotterysTest {
             @Override
             public Set<LotteryNumber> makeNumbers(int size) {
                 return Set.of(
-                        new LotteryNumber(1),
-                        new LotteryNumber(2),
-                        new LotteryNumber(3),
-                        new LotteryNumber(4),
-                        new LotteryNumber(5),
-                        new LotteryNumber(6)
+                        LotteryNumber.of(1),
+                        LotteryNumber.of(2),
+                        LotteryNumber.of(3),
+                        LotteryNumber.of(4),
+                        LotteryNumber.of(5),
+                        LotteryNumber.of(6)
                 );
             }
         });
         assertThat(lotterys.getLottery(0)).isEqualTo(new Lottery(Set.of(
-                new LotteryNumber(1),
-                new LotteryNumber(2),
-                new LotteryNumber(3),
-                new LotteryNumber(4),
-                new LotteryNumber(5),
-                new LotteryNumber(6)
+                LotteryNumber.of(1),
+                LotteryNumber.of(2),
+                LotteryNumber.of(3),
+                LotteryNumber.of(4),
+                LotteryNumber.of(5),
+                LotteryNumber.of(6)
         )));
     }
 }
