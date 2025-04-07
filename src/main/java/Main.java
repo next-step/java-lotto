@@ -1,12 +1,12 @@
 
 import java.util.List;
-import java.util.Scanner;
 
 
 import domain.BonusNumber;
 import domain.Lotto;
 import domain.LottoBundle;
 import domain.LottoGenerator;
+import domain.WinningNumbers;
 
 import static domain.Lotto.PRICE_PER_ONE;
 import static utils.Splitter.splitAndConvertInt;
@@ -25,9 +25,10 @@ public class Main {
         List<Lotto> lottoList = lottoGenerator.createLottoBulk(amount);
         print(lottoList);
 
-        List<Integer> winningNumbers = splitAndConvertInt(inputWinningNumber());
-        BonusNumber bonusNumber = new BonusNumber(inputBonusNumbers(), winningNumbers);
-        LottoBundle lottoBundle = new LottoBundle(lottoList, winningNumbers, bonusNumber);
+        WinningNumbers winningNumbers = new WinningNumbers(splitAndConvertInt(inputWinningNumber()),
+            inputBonusNumbers());
+
+        LottoBundle lottoBundle = new LottoBundle(lottoList, winningNumbers);
         print(lottoBundle.getLottoStatics());
     }
 }

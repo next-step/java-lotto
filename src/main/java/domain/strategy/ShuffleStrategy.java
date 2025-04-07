@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static domain.LottoNumber.MAX_RANGE;
+import static domain.LottoNumber.MIN_RANGE;
+
 public class ShuffleStrategy implements LottoNumberStrategy {
-    final static int MAX_RANGE = 45;
 
     @Override
     public List<Integer> generateNumbers(int count) {
@@ -20,7 +22,7 @@ public class ShuffleStrategy implements LottoNumberStrategy {
     }
 
     private List<Integer> getCandidateNumList() {
-        return IntStream.rangeClosed(1, MAX_RANGE)
+        return IntStream.rangeClosed(MIN_RANGE, MAX_RANGE)
             .boxed()
             .collect(Collectors.toList());
     }

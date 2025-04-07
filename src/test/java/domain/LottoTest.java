@@ -32,13 +32,10 @@ public class LottoTest {
     }
 
     @Test
-    void matchRank_테스트() {
+    void matchRank시_5개_맞고_bonusnumber_맞았을경우_SECOND() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<Integer> winningNums = Arrays.asList(1, 2, 3, 4, 5, 7);
-        BonusNumber bonusNumber = new BonusNumber(6);
-
-        lotto.matchRank(winningNums, bonusNumber);
-
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
+        lotto.matchRank(winningNumbers);
         assertThat(lotto.getRank()).isEqualTo(Rank.SECOND);
     }
 }

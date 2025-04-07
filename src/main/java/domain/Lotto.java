@@ -1,45 +1,62 @@
 package domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static domain.LottoGenerator.DRAW_NUMBER_COUNT;
 
 public class Lotto {
     public static final int PRICE_PER_ONE = 1000;
 
-    private final List<Integer> numList;
+    private final List<LottoNumber> lottoNumberList;
     private Rank rank;
 
-    public Lotto(List<Integer> numList){
-        if(numList == null || numList.isEmpty()){
+    public Lotto(List<Integer> lottoNumberList) {
+        if (lottoNumberList == null || lottoNumberList.isEmpty()) {
             throw new IllegalArgumentException("numList가 null이거나 비어있을수 없습니다.");
         }
 
-        if(numList.size() != DRAW_NUMBER_COUNT){
-            throw new IllegalArgumentException("numList의 size가 잘못되었습니다. numList.size() : " + numList.size());
+        if (lottoNumberList.size() != DRAW_NUMBER_COUNT) {
+            throw new IllegalArgumentException("numList의 size가 잘못되었습니다. numList.size() : " + lottoNumberList.size());
         }
-        this.numList = numList;
+
+        this.lottoNumberList = convertLottoNumberList(lottoNumberList);
     }
 
-    public Lotto(List<Integer> numList, List<Integer> winningNums, BonusNumber bonusNumber){
-        this(numList);
-        this.matchRank(winningNums, bonusNumber);
+    public Lotto(List<Integer> lottoNumberList, WinningNumbers winningNumbers) {
+        this(lottoNumberList);
+        this.matchRank(winningNumbers);
     }
 
 
-    public List<Integer> getNumList(){
-        return numList;
+    public List<LottoNumber> getLottoNumberList() {
+        return lottoNumberList;
     }
 
-    public void matchRank(List<Integer> winningNums, BonusNumber bonusNumber){
-        int countOfMatch = (int) this.numList.stream()
-            .filter(winningNums::contains)
-            .count();
+    public static List<LottoNumber> convertLottoNumberList(List<Integer> lottoNumberList) {
+        return lottoNumberList.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+    }
 
-        boolean matchBonus = bonusNumber.isMatch(this);
+    public void matchRank(WinningNumbers winningNumbers) {
+        int countOfMatch = this.getMatchCount(winningNumbers);
+
+        boolean matchBonus = this.isMatchBonus(winningNumbers.getBonusNumber());
 
         this.rank = Rank.valueOf(countOfMatch, matchBonus);
     }
+
+    private boolean isMatchBonus(BonusNumber bonusNumber) {
+        return lottoNumberList.contains(bonusNumber.getLottoNumber());
+    }
+
+    private int getMatchCount(WinningNumbers winningNumbers) {
+        return (int) this.lottoNumberList.stream()
+            .filter(winningNumbers::isMatch)
+            .count();
+    }
+
 
     public Rank getRank() {
         return rank;
