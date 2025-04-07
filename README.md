@@ -33,3 +33,26 @@ LottoRank
 - [x] OutputView
 - [x] LottoGame
 
+## 4단계 요구사항
+
+* 수동으로 구매할 로또수를 입력받는다.
+* 수동구매 로또 수만큼 입력을 받는다.
+* 구매로또 수 - 수동구매 로또 수 = 자동 구매 로또 수
+
+3단계 리뷰 내용 반영
+- [x] 로또 순위 반환시 Stream 사용
+- [x] final -> static final 로 통일
+- [x] InputView, OutputView 를 유틸성 클래스로 변경
+- [x] WinningLottoTest 에 2등, 3등 테스트 추가
+
+LottoTicket
+- [x] AUTO, MANUAL
+- [x] 로또 가격을 상수로 관리한다.
+
+LottoGame
+- [x] 받은 티켓을 가지고 로또를 생성한다.
+
+WinningLotto
+- [x] 보너스 숫자는 당첨 로또와 겹칠 수 없다.
+
+- [x] 입출력 구성

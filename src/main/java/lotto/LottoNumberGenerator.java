@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,10 +12,21 @@ class LottoNumberGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-    public static int[] generateLottoNumbers() {
+    public static LottoNumbers generateLottoNumbers() {
         Collections.shuffle(numbers);
-        return numbers.subList(0, 6).stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
+        return new LottoNumbers(
+                numbers.subList(0, 6).stream()
+                        .mapToInt(Integer::intValue)
+                        .toArray()
+        );
+    }
+
+    public static LottoNumbers parseIntsFromString(String numberString) {
+        return new LottoNumbers(
+                Arrays.stream(numberString.split(","))
+                        .map(Integer::parseInt)
+                        .mapToInt(Integer::intValue)
+                        .toArray()
+        );
     }
 }

@@ -1,23 +1,30 @@
 package lotto;
 
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class LottoGameApp {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        OutputView outputView = new OutputView();
         LottoGame lottoGame = new LottoGame();
+        int money = InputView.receiveMoney();
+        int manualTicketCount = InputView.receiveManualTicketCount();
+        LottoTickets lottoTickets = new LottoTickets(money, manualTicketCount);
+        List<LottoNumbers> manualLottoNumbersList = Arrays.stream(InputView.lottoTickets(lottoTickets.getManualTicketCount()))
+                .map(LottoNumbers::new)
+                .collect(Collectors.toList());
+        Lotto[] lottos = lottoGame.buyLottos(lottoTickets, manualLottoNumbersList);
 
-        int money = inputView.receiveMoney();
-        Lotto [] lottos = lottoGame.buyLottos(money);
+        OutputView.printBoughtLottos(lottos);
 
-        inputView.printBoughtLottos(lottos);
+        WinningLotto winningLotto = lottoGame.getWinningLotto(
+                InputView.receiveWinningLottoNumbers(),
+                InputView.receiveBonusNumber()
+        );
 
-        int[] winningLottoNumbers = inputView.receiveWinningLottoNumbers();
-        int bonusNumber = inputView.receiveBonusNumber();
-        WinningLotto winningLotto = lottoGame.getWinningLotto(winningLottoNumbers, bonusNumber);
-
-        LottoRank [] lottoResults = lottoGame.getResults(lottos, winningLotto);
-        outputView.printResult(lottoResults);
+        LottoRank[] lottoResults = lottoGame.getResults(lottos, winningLotto);
+        OutputView.printResult(lottoResults);
     }
 }

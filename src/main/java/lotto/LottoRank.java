@@ -1,6 +1,8 @@
 package lotto;
 
 
+import java.util.Arrays;
+
 public enum LottoRank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -26,18 +28,22 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == 6) {
-            return FIRST;
-        }
-        if (countOfMatch == 5) {
+        if (isSecondOrThirdRank(countOfMatch)) {
             return matchBonus ? SECOND : THIRD;
         }
-        if (countOfMatch == 4) {
-            return FOURTH;
-        }
-        if (countOfMatch == 3) {
-            return FIFTH;
-        }
-        return MISS;
+
+        return valueOf(countOfMatch);
     }
+
+    private static boolean isSecondOrThirdRank(int countOfMatch) {
+        return countOfMatch == 5;
+    }
+
+    private static LottoRank valueOf(int countOfMatch) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(MISS);
+    }
+
 }
