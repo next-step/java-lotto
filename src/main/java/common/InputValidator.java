@@ -13,7 +13,7 @@ public class InputValidator {
     }
 
     public static void validatePurchaseAmount(int amount) {
-        if (amount <= MINIMUM_PRICE) {
+        if (amount < MINIMUM_PRICE) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_PURCHASE_AMOUNT);
         }
     }

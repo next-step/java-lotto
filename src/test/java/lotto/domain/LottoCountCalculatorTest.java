@@ -19,6 +19,7 @@ class LottoCountCalculatorTest {
             "50000, 50"
     })
     void calculateLottoCount(int amount, int expected) {
-        assertThat(LottoCountCalculator.calculateLottoCount(amount)).isEqualTo(expected);
+        Amount amount1 = new Amount(amount);
+        assertThat(amount1.calculateLottoCount(amount)).isEqualTo(expected);
     }
 }
