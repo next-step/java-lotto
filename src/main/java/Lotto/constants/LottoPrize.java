@@ -15,6 +15,7 @@ public enum LottoPrize {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
     }
+
     public int getMatchCount() {
         return matchCount;
     }
@@ -27,5 +28,10 @@ public enum LottoPrize {
                 .filter(prize -> prize.matchCount == matchCount)
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public String toString() {
+        return matchCount + "개 일치 (" + prizeMoney + "원)";
     }
 }

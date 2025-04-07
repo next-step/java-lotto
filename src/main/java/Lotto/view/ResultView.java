@@ -26,7 +26,7 @@ public class ResultView {
 
         for (LottoPrize prize : LottoPrize.values()) {
             int count = stats.getOrDefault(prize, 0);
-            System.out.println(prize.getMatchCount() + "개 일치 (" + prize.getPrizeMoney() + "원) - " + count + "개");
+            System.out.println(prize + " - " + count + "개");
         }
     }
 

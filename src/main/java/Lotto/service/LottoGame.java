@@ -10,18 +10,22 @@ import java.util.Set;
 
 public class LottoGame {
     public static void main(String[] args) {
-        int purchasedQty = InputView.askHowMuchYouWouldBuy();
-        ResultView.printQuantity(purchasedQty);
+        try {
+            int purchasedQty = InputView.askHowMuchYouWouldBuy();
+            ResultView.printQuantity(purchasedQty);
 
-        Lottos lottoList = new Lottos(purchasedQty);
-        ResultView.printLottos(lottoList.getLottos());
+            Lottos lottoList = new Lottos(purchasedQty);
+            ResultView.printLottos(lottoList.getLottos());
 
-        Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
-        ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers);
-        ResultView.printStats(resultStats.getStats());
+            Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
+            ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers);
+            ResultView.printStats(resultStats.getStats());
 
-        int totalSpent = purchasedQty * 1000;
-        ResultView.printProfitRate(resultStats.calculateProfitRate(totalSpent));
+            int totalSpent = purchasedQty * 1000;
+            ResultView.printProfitRate(resultStats.calculateProfitRate(totalSpent));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
