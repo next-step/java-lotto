@@ -14,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LottoGameTest {
     @Test
     void calculateProfitRate_ShouldReturnCorrectRate() {
-        Lottos lottoList = new Lottos();
+        int mockQuantity = 6;
+        Lottos lottoList = new Lottos(mockQuantity);
         lottoList.addLotto(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(7), new LottoNumber(8), new LottoNumber(9))));
         Set<LottoNumber> winningNumbers = Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),

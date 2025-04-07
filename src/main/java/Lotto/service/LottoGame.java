@@ -16,8 +16,8 @@ public class LottoGame {
         int purchasedQty = InputView.askHowMuchYouWouldBuy();
         ResultView.printQuantity(purchasedQty);
 
-        Lottos lottoList = new Lottos();
-        List<Lotto> lottos = lottoList.generateLottos(purchasedQty);
+        Lottos lottoList = new Lottos(purchasedQty);
+        List<Lotto> lottos = lottoList.getLottos();
         ResultView.printLottos(lottos);
 
         Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();

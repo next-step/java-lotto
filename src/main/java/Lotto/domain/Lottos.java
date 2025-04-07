@@ -12,9 +12,11 @@ public class Lottos {
     public static final int LOTTO_MAX_NUMBER = 45;
 
     private final List<Lotto> lottos;
+    private final int purchasedQty;
 
-    public Lottos() {
-        this.lottos = new ArrayList<>();
+    public Lottos(int purchasedQty) {
+        this.purchasedQty = purchasedQty;
+        this.lottos = generateLottos();
     }
 
     public void addLotto(Lotto lotto) {
@@ -25,13 +27,12 @@ public class Lottos {
         return lottos;
     }
 
-    public List<Lotto> generateLottos(int purchasedQty) {
+    public List<Lotto> generateLottos() {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchasedQty; i++) {
             List<LottoNumber> lottoNumbers = generateLottoNumbers();
             Lotto lotto = new Lotto(lottoNumbers);
             lottos.add(lotto);
-            this.lottos.add(lotto);
         }
         return lottos;
     }

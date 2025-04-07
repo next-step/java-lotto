@@ -14,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LottosTest {
     @Test
     void calculateStats_ShouldReturnCorrectCounts() {
-        Lottos lottoList = new Lottos();
+        int mockQuantity = 6;
+        Lottos lottoList = new Lottos(mockQuantity);
         Set<LottoNumber> winningNumbers = Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 
