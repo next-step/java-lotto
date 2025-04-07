@@ -10,6 +10,7 @@ public class LottoTicketMachine {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    private static final int COUNT = 6;
     private static final List<Integer> TOTAL_NUMBERS = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
         .boxed()
         .collect(Collectors.toList());
@@ -22,10 +23,10 @@ public class LottoTicketMachine {
         return tickets;
     }
 
-    public static LottoTicket generateTicket() {
+    private static LottoTicket generateTicket() {
         List<Integer> numbers = new ArrayList<>(TOTAL_NUMBERS);
         Collections.shuffle(numbers);
-        return new LottoTicket(numbers.subList(0, 6));
+        return new LottoTicket(numbers.subList(0, COUNT));
     }
 
 }
