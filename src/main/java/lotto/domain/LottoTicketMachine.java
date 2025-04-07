@@ -8,34 +8,22 @@ import java.util.stream.IntStream;
 
 public class LottoTicketMachine {
 
-    public static List<LottoTicket> purchase(LottoOrder lottoOrder) {
-        int ticketCount = lottoOrder.getTicketCount();
-        return generateTickets(ticketCount);
-    }
+    private static final List<Integer> TOTAL_NUMBERS = IntStream.rangeClosed(1, 45)
+        .boxed()
+        .collect(Collectors.toList());
 
-    private static List<LottoTicket> generateTickets(int ticketCount) {
+    public static List<LottoTicket> purchase(LottoOrder lottoOrder) {
         List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
+        for (int i = 0; i < lottoOrder.getTicketCount(); i++) {
             tickets.add(generateTicket());
         }
         return tickets;
     }
 
-    private static List<Integer> generateTotalNumbers() {
-        return IntStream.rangeClosed(1, 45)
-            .boxed()
-            .collect(Collectors.toList());
-    }
-
-    private static List<Integer> shuffleAndSelect(List<Integer> numbers) {
+    public static LottoTicket generateTicket() {
+        List<Integer> numbers = new ArrayList<>(TOTAL_NUMBERS);
         Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
-    }
-
-    private static LottoTicket generateTicket() {
-        List<Integer> numbers = generateTotalNumbers();
-        List<Integer> selectedNumbers = shuffleAndSelect(numbers);
-        return new LottoTicket(selectedNumbers);
+        return new LottoTicket(numbers.subList(0, 6));
     }
 
 }
