@@ -12,12 +12,12 @@ public class LottoTicket {
     private final Set<LottoNumber> numbers;
 
     public LottoTicket(Set<LottoNumber> numbers) {
+        validateNumbers(numbers);
         this.numbers = new HashSet<>(numbers);
     }
 
     public LottoTicket(List<Integer> numbers) {
-        validateNumbers(numbers);
-        this.numbers = convertToLottoNumbers(numbers);
+        this(convertToLottoNumbers(numbers));
     }
 
     public LottoTicket(String numbersStr) {
@@ -36,7 +36,7 @@ public class LottoTicket {
         return numbers;
     }
 
-    private Set<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+    private static Set<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
@@ -44,13 +44,9 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("로또 티켓은 6개의 숫자로 이루어져 있어야 합니다.");
-        }
-
-        if (numbers.stream().distinct().count() != LOTTO_NUM_COUNT) {
-            throw new IllegalArgumentException("로또 티켓은 중복된 숫자를 포함할 수 없습니다.");
         }
     }
 

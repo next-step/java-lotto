@@ -15,6 +15,9 @@ class LottoTicketTest {
     void shouldHaveSixNumbers() {
         LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
         assertThat(6).isEqualTo(lottoTicket.getNumbers().size());
+
+        assertThatThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5)))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -22,7 +25,7 @@ class LottoTicketTest {
     void shouldNotHaveDuplicateNumbers() {
         assertThatThrownBy(() -> new LottoTicket(List.of(1, 1, 3, 4, 5, 6)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또 티켓은 중복된 숫자를 포함할 수 없습니다.");
+            .hasMessage("로또 티켓은 6개의 숫자로 이루어져 있어야 합니다.");
     }
 
     @Test
