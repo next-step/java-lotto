@@ -24,7 +24,7 @@ public class LottoService {
 
     for (Lotto lotto : lottos) {
       int matchCount = lotto.countMatchingNumbers(winningLotto);
-      boolean bonusMatch = lotto.containsNumber(bonusNumber.getNumber());
+      boolean bonusMatch = lotto.contains(bonusNumber);
 
       Rank rank = Rank.valueOf(matchCount, bonusMatch);
       lottoResult.addRank(rank);

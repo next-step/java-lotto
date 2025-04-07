@@ -22,8 +22,7 @@ class LottoTest {
     List<Integer> invalidNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
     // when & then
-    assertThatThrownBy(() -> new Lotto(invalidNumbers))
-        .isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> Lotto.of(invalidNumbers)).isInstanceOf(IllegalArgumentException.class);
   }
 
   @DisplayName("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.")
@@ -33,7 +32,7 @@ class LottoTest {
     List<Integer> duplicatedNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
     // when & then
-    assertThatThrownBy(() -> new Lotto(duplicatedNumbers))
+    assertThatThrownBy(() -> Lotto.of(duplicatedNumbers))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -43,8 +42,8 @@ class LottoTest {
   void countMatchingNumbers(
       List<Integer> lottoNumbers, List<Integer> winningNumbers, int expected) {
     // given
-    Lotto lotto = new Lotto(lottoNumbers);
-    Lotto winningLotto = new Lotto(winningNumbers);
+    Lotto lotto = Lotto.of(lottoNumbers);
+    Lotto winningLotto = Lotto.of(winningNumbers);
 
     // when
     int actual = lotto.countMatchingNumbers(winningLotto);
@@ -57,11 +56,11 @@ class LottoTest {
   @Test
   void containsBonusNumber() {
     // given
-    Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
     LottoNumber bonusNumber = new LottoNumber(6);
 
     // when
-    boolean contains = lotto.containsNumber(bonusNumber.getNumber());
+    boolean contains = lotto.contains(bonusNumber);
 
     // then
     assertThat(contains).isTrue();
@@ -71,11 +70,11 @@ class LottoTest {
   @Test
   void notContainsBonusNumber() {
     // given
-    Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
     LottoNumber bonusNumber = new LottoNumber(7);
 
     // when
-    boolean contains = lotto.containsNumber(bonusNumber.getNumber());
+    boolean contains = lotto.contains(bonusNumber);
 
     // then
     assertThat(contains).isFalse();
@@ -89,7 +88,7 @@ class LottoTest {
         Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toList());
 
     // when
-    Lotto lotto = new Lotto(lottoNumbers, true);
+    Lotto lotto = new Lotto(lottoNumbers);
 
     // then
     assertThat(lotto.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);

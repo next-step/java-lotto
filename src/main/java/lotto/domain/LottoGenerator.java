@@ -40,6 +40,6 @@ public class LottoGenerator {
 
     selectedNumbers.sort((ln1, ln2) -> Integer.compare(ln1.getNumber(), ln2.getNumber()));
 
-    return new Lotto(selectedNumbers, true);
+    return new Lotto(selectedNumbers);
   }
 }

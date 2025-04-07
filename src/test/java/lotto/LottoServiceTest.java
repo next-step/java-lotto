@@ -33,16 +33,16 @@ class LottoServiceTest {
     // given
     LottoService lottoService = new LottoService();
 
-    Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)); // 6개 일치 (1등)
-    Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)); // 5개 일치, 보너스 O (2등)
-    Lotto lotto3 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)); // 5개 일치, 보너스 X (3등)
-    Lotto lotto4 = new Lotto(Arrays.asList(1, 2, 3, 4, 9, 10)); // 4개 일치 (4등)
-    Lotto lotto5 = new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13)); // 3개 일치 (5등)
-    Lotto lotto6 = new Lotto(Arrays.asList(1, 2, 14, 15, 16, 17)); // 2개 일치 (꽝)
+    Lotto lotto1 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)); // 6개 일치 (1등)
+    Lotto lotto2 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7)); // 5개 일치, 보너스 O (2등)
+    Lotto lotto3 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 8)); // 5개 일치, 보너스 X (3등)
+    Lotto lotto4 = Lotto.of(Arrays.asList(1, 2, 3, 4, 9, 10)); // 4개 일치 (4등)
+    Lotto lotto5 = Lotto.of(Arrays.asList(1, 2, 3, 11, 12, 13)); // 3개 일치 (5등)
+    Lotto lotto6 = Lotto.of(Arrays.asList(1, 2, 14, 15, 16, 17)); // 2개 일치 (꽝)
 
     List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6);
 
-    Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
     LottoNumber bonusNumber = new LottoNumber(7);
 
     // when
