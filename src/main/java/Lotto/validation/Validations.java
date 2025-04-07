@@ -8,13 +8,13 @@ import static Lotto.domain.Lottos.*;
 import static Lotto.domain.Purchase.UNIT;
 
 public class Validations {
-    public static boolean isInvalidWinningNumbers(String input) {
+    public static boolean isNotSixValidNumbersInRange(String input) {
         String[] numbers = input.split(",");
         return numbers.length != LOTTO_PICK_COUNT ||
                 Arrays.stream(numbers).anyMatch(number -> ValidationUtils.isInvalidNumber(number, LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
     }
 
-    public static boolean isInvalidPrice(String input) {
+    public static boolean isNotPositiveUnitPrice(String input) {
         if (input == null || input.trim().isEmpty()) {
             return true;
         }
