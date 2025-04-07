@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public enum LottoRank {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 30_000_000),
@@ -7,23 +9,36 @@ public enum LottoRank {
     FOURTH(4, false, 50_000),
     FIFTH(3, false, 5_000);
 
+    private static final List<LottoRank> RANKING_ORDER = List.of(
+        FIRST, SECOND, THIRD, FOURTH, FIFTH
+    );
     private final int matchCount;
-    private final boolean containsBonusNumber;
+    private final boolean requiresBonusNumber;
     private final int prizeMoney;
 
-    LottoRank(int matchCount, boolean containsBonusNumber, int prizeMoney) {
+    LottoRank(int matchCount, boolean requiresBonusNumber, int prizeMoney) {
         this.matchCount = matchCount;
-        this.containsBonusNumber = containsBonusNumber;
+        this.requiresBonusNumber = requiresBonusNumber;
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank getRank(int matchCount, boolean containsBonusNumber) {
-        for (LottoRank prize : values()) {
-            if (prize.matchCount == matchCount && prize.containsBonusNumber == containsBonusNumber) {
-                return prize;
+    public static LottoRank getRank(int matchCount, boolean bonusMatched) {
+        for (LottoRank rank : RANKING_ORDER) {
+            if (rank.matches(matchCount, bonusMatched)) {
+                return rank;
             }
         }
         return null;
+    }
+
+    private boolean matches(int matchCount, boolean bonusMatched) {
+        if (this.matchCount != matchCount) {
+            return false;
+        }
+        if (this.requiresBonusNumber) {
+            return bonusMatched;
+        }
+        return true;
     }
 
     public int getPrizeMoney(int count) {
@@ -34,7 +49,7 @@ public enum LottoRank {
         return matchCount;
     }
 
-    public boolean isContainsBonusNumber() {
-        return this.containsBonusNumber;
+    public boolean requiresBonusNumber() {
+        return requiresBonusNumber;
     }
 }
