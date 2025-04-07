@@ -41,8 +41,8 @@ public class WinningNumbersTest {
         Lotto lotto2 = new Lotto(List.of(LottoNumber.ONE, LottoNumber.TWO, LottoNumber.THREE, LottoNumber.FOUR, LottoNumber.FIVE, LottoNumber.SEVEN));
         Lotto lotto3 = new Lotto(List.of(LottoNumber.ONE, LottoNumber.TWO, LottoNumber.THREE, LottoNumber.FOUR, LottoNumber.FIVE, LottoNumber.EIGHT));
         LottoTicket lottoTicket = new LottoTicket(List.of(lotto, lotto2, lotto3));
-        List<MatchCount> matchCounts = winningNumbers.match(lottoTicket);
-        Assertions.assertThat(matchCounts).hasSize(3);
+        List<MatchResult> matchResults = winningNumbers.match(lottoTicket);
+        Assertions.assertThat(matchResults).hasSize(3);
     }
 
     @Test

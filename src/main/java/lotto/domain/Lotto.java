@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Lotto {
     public static final int NUMBER_COUNT = 6;
@@ -29,6 +28,10 @@ public class Lotto {
     private boolean hasDuplicates(List<LottoNumber> numbers) {
         HashSet<LottoNumber> filteredNumbers = new HashSet<>(numbers);
         return numbers.size() != filteredNumbers.size();
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     public List<LottoNumber> numbers() {
