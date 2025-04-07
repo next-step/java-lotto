@@ -1,7 +1,5 @@
 package Lotto.domain;
 
-import Lotto.constants.LottoPrize;
-
 import java.util.*;
 
 import static Lotto.domain.Lotto.generateLottoNumbers;
@@ -35,24 +33,5 @@ public class Lottos {
             lottos.add(lotto);
         }
         return lottos;
-    }
-
-    public Map<LottoPrize, Integer> calculateStats(Set<LottoNumber> winningNumbers) {
-        Map<LottoPrize, Integer> stats = new EnumMap<>(LottoPrize.class);
-
-        for (LottoPrize prize : LottoPrize.values()) {
-            stats.put(prize, 0);
-        }
-
-        for (Lotto lotto : lottos) {
-            int matchCount = lotto.countMatches(winningNumbers);
-            LottoPrize prize = LottoPrize.fromMatchCount(matchCount);
-
-            if (prize == null) continue;
-
-            stats.put(prize, stats.get(prize) + 1);
-        }
-
-        return stats;
     }
 }

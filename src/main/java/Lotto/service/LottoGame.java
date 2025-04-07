@@ -4,6 +4,7 @@ import Lotto.constants.LottoPrize;
 import Lotto.domain.Lotto;
 import Lotto.domain.Lottos;
 import Lotto.domain.LottoNumber;
+import Lotto.domain.ResultStats;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
@@ -17,30 +18,14 @@ public class LottoGame {
         ResultView.printQuantity(purchasedQty);
 
         Lottos lottoList = new Lottos(purchasedQty);
-        List<Lotto> lottos = lottoList.getLottos();
-        ResultView.printLottos(lottos);
+        ResultView.printLottos(lottoList.getLottos());
 
         Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
-        Map<LottoPrize, Integer> stats = lottoList.calculateStats(winningNumbers);
-        ResultView.printStats(stats);
+        ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers);
+        ResultView.printStats(resultStats.getStats());
 
-        double profitRate = calculateProfitRate(lottoList, winningNumbers);
-        ResultView.printProfitRate(profitRate);
+        int totalSpent = purchasedQty * 1000;
+        ResultView.printProfitRate(resultStats.calculateProfitRate(totalSpent));
     }
-
-    public static double calculateProfitRate(Lottos lottoList, Set<LottoNumber> winningNumbers) {
-        Map<LottoPrize, Integer> stats = lottoList.calculateStats(winningNumbers);
-
-        int totalPrize = 0;
-
-        for (LottoPrize prize : LottoPrize.values()) {
-            int count = stats.getOrDefault(prize, 0);
-            totalPrize += count * prize.getPrizeMoney();
-        }
-
-        int totalSpent = lottoList.getLottos().size() * 1000;
-
-        return totalPrize / (double) totalSpent;
-    }
-
 }
+
