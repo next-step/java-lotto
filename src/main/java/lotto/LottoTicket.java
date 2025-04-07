@@ -1,9 +1,8 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,57 +18,39 @@ public class LottoTicket {
             .boxed()
             .collect(Collectors.toList());
 
-    private final List<LottoNumber> lottoNumbers;
+    private final TreeSet<LottoNumber> lottoNumbers;
 
     public LottoTicket() {
         this.lottoNumbers = generateLottoNumbers();
     }
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
-        this.lottoNumbers.sort(Comparator.comparing(LottoNumber::getNumber));
-    }
-
-    private static void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        List<Integer> numbers = lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
-
+    public LottoTicket(TreeSet<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
-        validateDuplicate(numbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private static void validateDuplicate(List<Integer> numbers) {
-        if (numbers.stream().distinct().count() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
-        }
-    }
-
-    private static void validateSize(List<LottoNumber> lottoNumbers) {
+    private static void validateSize(TreeSet<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
 
-    private List<LottoNumber> generateLottoNumbers() {
+    private TreeSet<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(numbers);
 
         List<Integer> lottoNumbers = numbers.subList(0, LOTTO_SIZE);
-        Collections.sort(lottoNumbers);
 
         return lottoNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public TreeSet<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .anyMatch(number -> number == lottoNumber.getNumber());
+                .anyMatch(number -> number.equals(lottoNumber));
     }
 }

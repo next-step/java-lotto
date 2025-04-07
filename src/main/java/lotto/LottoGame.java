@@ -4,6 +4,7 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoGame {
@@ -22,7 +23,7 @@ public class LottoGame {
         ResultView.printLottoTickets(lottoTickets);
 
         List<Integer> winningNumberList = InputView.inputWinningNumbers();
-        List<LottoNumber> winningNumbers = toLottoNumbers(winningNumberList);
+        TreeSet<LottoNumber> winningNumbers = toLottoNumbers(winningNumberList);
         LottoTicket winningTicket = new LottoTicket(winningNumbers);
 
         int bonusNumberValue = InputView.inputBonusNumber();
@@ -35,14 +36,14 @@ public class LottoGame {
         return manualTicketList.stream()
                 .map(ticket -> ticket.stream()
                         .map(LottoNumber::new)
-                        .collect(Collectors.toList()))
+                        .collect(Collectors.toCollection(TreeSet::new)))
                 .map(LottoTicket::new)
                 .collect(Collectors.toList());
     }
 
-    private static List<LottoNumber> toLottoNumbers(List<Integer> manualTicket) {
+    private static TreeSet<LottoNumber> toLottoNumbers(List<Integer> manualTicket) {
         return manualTicket.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }

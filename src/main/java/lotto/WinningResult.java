@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.List;
+import java.util.TreeSet;
 
 public class WinningResult {
     private final LottoTicket winningTicket;
@@ -26,7 +26,7 @@ public class WinningResult {
     }
 
     private long getMatchCount(LottoTicket lottoTicket) {
-        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+        TreeSet<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         return lottoNumbers.stream()
                 .filter(this.winningTicket::contains)
