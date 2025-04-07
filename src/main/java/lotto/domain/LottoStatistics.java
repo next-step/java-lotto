@@ -11,7 +11,7 @@ public class LottoStatistics {
 
     public LottoStatistics(LottoTicket winningTicket, LottoTicket[] purchaseTickets) {
         this.matchCounts = calculateRankCounts(winningTicket, purchaseTickets);
-        this.totalPurchaseAmount = purchaseTickets.length * LottoTicket.PRICE_PER_TICKET;
+        this.totalPurchaseAmount = purchaseTickets.length * LottoOrder.PRICE_PER_TICKET;
     }
 
     private Map<LottoRank, Integer> calculateRankCounts(LottoTicket winningTicket, LottoTicket[] purchaseTickets) {

@@ -10,8 +10,8 @@ public class LottoTicketMachine {
 
     private static final Random random = new Random();
 
-    public static LottoTicket[] purchase(PurchasePrice purchasePrice) {
-        int ticketCount = purchasePrice.calculateTicketCount(LottoTicket.PRICE_PER_TICKET);
+    public static LottoTicket[] purchase(LottoOrder lottoOrder) {
+        int ticketCount = lottoOrder.getTicketCount();
         if (ticketCount == 0) {
             throw new IllegalArgumentException("구입 금액이 티켓 가격보다 작습니다.");
         }

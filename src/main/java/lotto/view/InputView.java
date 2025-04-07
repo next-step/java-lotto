@@ -1,17 +1,17 @@
 package lotto.view;
 
 import java.util.Scanner;
+import lotto.domain.LottoOrder;
 import lotto.domain.LottoTicket;
-import lotto.domain.PurchasePrice;
 
 
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static PurchasePrice getPurchaseAmount() {
+    public static LottoOrder getPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new PurchasePrice(scanner.nextLine());
+        return new LottoOrder(scanner.nextLine());
     }
 
     public static LottoTicket getWinningTicket() {
