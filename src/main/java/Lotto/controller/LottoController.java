@@ -20,9 +20,10 @@ public class LottoController {
         this.resultView = resultView;
     }
 
-    public void start(){
+    public void start() {
         int purchaseAmount = this.inputView.getPurchaseAmount();
         int manualPurchaseNumber = this.inputView.getManualPurchaseNumber();
+        List<List<Integer>> manualNumberList = this.inputView.getManualNumbers(manualPurchaseNumber);
         lottoService = new LottoService(purchaseAmount, extractor);
         lottoService.draw();
         resultView.printBuyNum(lottoService.lottoNum());
