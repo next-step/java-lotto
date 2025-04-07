@@ -1,7 +1,7 @@
 package ui;
 
-import domain.LottoResult;
-import domain.LottoTicket;
+import domain.Lotto.LottoResult;
+import domain.Lotto.LottoTicket;
 
 import java.util.List;
 

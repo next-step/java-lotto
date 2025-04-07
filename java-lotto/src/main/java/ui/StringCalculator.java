@@ -1,7 +1,7 @@
 package ui;
 
-import domain.Operand;
-import domain.Operator;
+import domain.Calculator.Operand;
+import domain.Calculator.Operator;
 
 public class StringCalculator {
     public final InputView inputView;

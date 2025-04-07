@@ -1,5 +1,7 @@
 package ui;
 
+import domain.Lotto.LottoTicket;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -37,13 +39,14 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public List<Integer> getWinningNumbers() {
+    public LottoTicket getWinningTicket() {
         System.out.println("Please enter last week's winning number.");
         Scanner sc = new Scanner(System.in);
-        String input = sc.next();
-        return Arrays.stream(input.split(","))
+        String input = sc.next(); // 예: 1,2,3,4,5,6
+        List<Integer> numbers = Arrays.stream(input.split(","))
                 .map(Integer::parseInt)
                 .toList();
+        return new LottoTicket(numbers);
     }
 
 }

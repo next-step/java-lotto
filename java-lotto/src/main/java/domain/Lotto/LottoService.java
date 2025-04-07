@@ -1,4 +1,4 @@
-package domain;
+package domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,10 +17,10 @@ public class LottoService {
         return tickets;
     }
 
-    public LottoResult calculateResults(List<LottoTicket> tickets, List<Integer> winningNumbers) {
+    public LottoResult calculateResults(List<LottoTicket> tickets, LottoTicket winningTicket) {
         Map<Integer, Integer> matchCounts = new HashMap<>();
         for (LottoTicket ticket : tickets) {
-            int matchCount = ticket.getMatchCount(winningNumbers);
+            int matchCount = ticket.getMatchCount(winningTicket.getNumbers());
             matchCounts.put(matchCount, matchCounts.getOrDefault(matchCount, 0) + 1);
         }
         return new LottoResult(matchCounts);

@@ -1,4 +1,4 @@
-package domain;
+package domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +9,14 @@ public class LottoTicket {
 
     public LottoTicket() {
         numbers = generateRandomNumbers();
+    }
+
+    public LottoTicket(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
+        this.numbers = new ArrayList<>(numbers);
+        Collections.sort(this.numbers); // 정렬은 선택
     }
 
     private List<Integer> generateRandomNumbers() {
@@ -24,6 +32,10 @@ public class LottoTicket {
 
     public int getMatchCount(List<Integer> winningNumbers) {
         return (int) numbers.stream().filter(winningNumbers::contains).count();
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
     @Override

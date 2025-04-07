@@ -1,9 +1,8 @@
-package domain;
-
-
+import domain.Lotto.LottoResult;
+import domain.Lotto.LottoService;
+import domain.Lotto.LottoTicket;
 import ui.OutputView;
 import ui.InputView;
-import ui.StringCalculator;
 
 import java.util.List;
 
@@ -23,8 +22,8 @@ public class LottoGame {
         List<LottoTicket> tickets = lottoService.generateLottoTickets(purchaseAmount / LOTTO_PRICE);
         outputView.printLottoTickets(tickets);
 
-        List<Integer> winningNumbers = inputView.getWinningNumbers();
-        LottoResult result = lottoService.calculateResults(tickets, winningNumbers);
+        LottoTicket winningTicket = inputView.getWinningTicket();
+        LottoResult result = lottoService.calculateResults(tickets, winningTicket);
         outputView.printResult(result);
 
     }
