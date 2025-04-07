@@ -53,10 +53,14 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public int getHitCount(LottoNumbers winNumbers) {
+    public int getHitCount(List<Integer> winNumbers) {
         return (int) this.lottoNumbers.stream()
-                .filter(winNumbers.getLottoNumbers()::contains)
+                .filter(winNumbers::contains)
                 .count();
+    }
+
+    public int getHitCount(LottoNumbers winNumbers) {
+        return this.getHitCount(winNumbers.getLottoNumbers());
     }
 
     public boolean hasBonusNumber(int bonus) {
