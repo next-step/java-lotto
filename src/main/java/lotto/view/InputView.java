@@ -1,6 +1,8 @@
-package lotto;
+package lotto.view;
 
 import java.util.Scanner;
+import lotto.domain.LottoTicket;
+import lotto.domain.PurchasePrice;
 
 
 public class InputView {

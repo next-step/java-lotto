@@ -3,6 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +30,7 @@ class LottoNumberTest {
         LottoNumber number1 = new LottoNumber(1);
         LottoNumber number2 = new LottoNumber(1);
         LottoNumber number3 = new LottoNumber(2);
-        
+
         assertThat(number1).isEqualTo(number2);
         assertThat(number1).isNotEqualTo(number3);
     }
