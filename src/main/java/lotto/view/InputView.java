@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.LottoOrder;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumbers;
 
 
@@ -17,6 +18,16 @@ public class InputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualTicketCount = parseInt(scanner.nextLine());
         return new LottoOrder(totalAmount, manualTicketCount);
+    }
+
+    public static List<LottoTicket> getManualTickets(LottoOrder lottoOrder) {
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        for (int i = 0; i < lottoOrder.getManualTicketCount(); i++) {
+            List<Integer> manualTicketCount = parseIntCommaSeparated(scanner.nextLine());
+            manualTickets.add(new LottoTicket(manualTicketCount));
+        }
+        return manualTickets;
     }
 
     public static WinningNumbers getWinningTicket() {

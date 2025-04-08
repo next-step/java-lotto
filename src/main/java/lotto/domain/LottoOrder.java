@@ -35,4 +35,8 @@ public class LottoOrder {
     public int getTotalCount() {
         return totalCount;
     }
+
+    public int getManualTicketCount() {
+        return manualTicketCount;
+    }
 }
