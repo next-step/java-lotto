@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,7 +14,7 @@ public class LottoTickets {
   private final List<Lotto> lottoTickets;
 
   private LottoTickets(List<Lotto> tickets) {
-    this.lottoTickets = new ArrayList<>(tickets);
+    this.lottoTickets = new ArrayList<>(Objects.requireNonNull(tickets, "로또 티켓 목록이 null입니다."));
   }
 
   public static LottoTickets of(int price) {
@@ -24,6 +26,9 @@ public class LottoTickets {
   }
 
   public static LottoTickets of(List<Lotto> manualLottos, int price) {
+    if (manualLottos == null) {
+      throw new IllegalArgumentException("수동 로또 목록이 null입니다.");
+    }
     validatePrice(price);
     int autoCount = (price / PRICE_PER_LOTTO) - manualLottos.size();
     validateAutoCount(autoCount);
@@ -58,6 +63,9 @@ public class LottoTickets {
   }
 
   public LottoStatistics createWinningStatistics(Lotto winningNumbers, int bonusBall) {
+    if (winningNumbers == null) {
+      throw new IllegalArgumentException("당첨 번호가 null입니다.");
+    }
     return new WinningStatisticsCalculator(winningNumbers, bonusBall).calculate(lottoTickets);
   }
 
@@ -65,5 +73,26 @@ public class LottoTickets {
     return lottoTickets.stream()
         .map(Lotto::getNumbersAsString)
         .collect(Collectors.toList());
+  }
+
+  public List<Lotto> getLottoTickets() {
+    return Collections.unmodifiableList(lottoTickets);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    LottoTickets that = (LottoTickets) o;
+    return lottoTickets.equals(that.lottoTickets);
+  }
+
+  @Override
+  public int hashCode() {
+    return lottoTickets.hashCode();
   }
 }

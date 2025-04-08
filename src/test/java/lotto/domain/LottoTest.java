@@ -26,6 +26,13 @@ class LottoTest {
     assertThat(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)).getNumbersAsString().split(",")).hasSize(6);
   }
 
+  @Test
+  void 로또_번호가_null이면_예외_발생() {
+    assertThatThrownBy(() -> new Lotto(null))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("로또 번호가 null입니다.");
+  }
+
   @ParameterizedTest
   @MethodSource("provideInvalidLottoNumbers")
   void 로또_번호_개수_예외(List<Integer> numbers) {
@@ -45,6 +52,7 @@ class LottoTest {
         .hasMessage(expectedMessage);
   }
 
+
   @Test
   void 로또_번호_중복_예외() {
     assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5)))
@@ -58,6 +66,13 @@ class LottoTest {
     Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
 
     assertThat(lotto.countMatchingNumbers(winningNumbers)).isEqualTo(3);
+  }
+
+  @Test
+  void null_로또_비교() {
+    assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)).countMatchingNumbers(null))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("비교할 로또가 null입니다.");
   }
 
   @ParameterizedTest

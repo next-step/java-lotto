@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Optional;
+
 public class LottoNo implements Comparable<LottoNo> {
 
   public static final int MIN_NUMBER = 1;
@@ -7,19 +9,20 @@ public class LottoNo implements Comparable<LottoNo> {
   private final int number;
 
   private LottoNo(int number) {
-    validate(number);
     this.number = number;
   }
 
-  public static LottoNo of(int number) {
-    return new LottoNo(number);
+  public static Optional<LottoNo> of(int number) {
+    if (number < MIN_NUMBER || number > MAX_NUMBER) {
+      return Optional.empty();
+    }
+    return Optional.of(new LottoNo(number));
   }
 
-  private void validate(int number) {
-    if (number < MIN_NUMBER || number > MAX_NUMBER) {
-      throw new IllegalArgumentException(
-          String.format("%d는 로또 번호가 될 수 없습니다. 로또 번호는 %d부터 %d 사이의 숫자여야 합니다.", number, MIN_NUMBER, MAX_NUMBER));
-    }
+  public static LottoNo from(int number) {
+    return of(number)
+        .orElseThrow(() -> new IllegalArgumentException(
+            String.format("%d는 로또 번호가 될 수 없습니다. 로또 번호는 %d부터 %d 사이의 숫자여야 합니다.", number, MIN_NUMBER, MAX_NUMBER)));
   }
 
   public int getNumber() {

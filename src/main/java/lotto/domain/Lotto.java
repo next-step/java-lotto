@@ -12,16 +12,17 @@ public class Lotto {
     validateSize(numbers);
     validateDuplicate(numbers);
     this.numbers = numbers.stream()
-        .map(LottoNo::of)
+        .map(LottoNo::from)
         .sorted()
         .collect(Collectors.toList());
   }
 
   private void validateSize(List<Integer> numbers) {
+    if (numbers == null) {
+      throw new IllegalArgumentException("로또 번호가 null입니다.");
+    }
     if (numbers.size() != LOTTO_SIZE) {
-      throw new IllegalArgumentException(
-          String.format("로또 번호는 %d개여야 합니다. 하지만 %d개입니다.", LOTTO_SIZE, numbers.size())
-      );
+      throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다. 하지만 %d개입니다.", LOTTO_SIZE, numbers.size()));
     }
   }
 
@@ -32,13 +33,16 @@ public class Lotto {
   }
 
   public int countMatchingNumbers(Lotto other) {
+    if (other == null) {
+      throw new IllegalArgumentException("비교할 로또가 null입니다.");
+    }
     return (int) numbers.stream()
         .filter(other.numbers::contains)
         .count();
   }
 
   public boolean hasBonusBall(int bonusBall) {
-    return numbers.contains(LottoNo.of(bonusBall));
+    return numbers.contains(LottoNo.from(bonusBall));
   }
 
   public String getNumbersAsString() {
@@ -46,5 +50,22 @@ public class Lotto {
         .map(LottoNo::getNumber)
         .map(String::valueOf)
         .collect(Collectors.joining(", ", "[", "]"));
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Lotto lotto = (Lotto) o;
+    return numbers.equals(lotto.numbers);
+  }
+
+  @Override
+  public int hashCode() {
+    return numbers.hashCode();
   }
 }

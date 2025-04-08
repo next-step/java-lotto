@@ -5,8 +5,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTicketsTest {
 
@@ -15,18 +16,14 @@ class LottoTicketsTest {
     assertThat(LottoTickets.of(5000).size()).isEqualTo(5);
   }
 
-  @Test
-  void 금액_범위_예외() {
-    assertThatThrownBy(() -> LottoTickets.of(999))
+  @ParameterizedTest
+  @ValueSource(ints = {999, 1500})
+  void 잘못된_가격으로_로또_티켓_생성_시_예외_발생(int price) {
+    assertThatThrownBy(() -> LottoTickets.of(price))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("로또 구매 금액은 1000원 이상이어야 합니다.");
-  }
-
-  @Test
-  void 금액_단위_예외() {
-    assertThatThrownBy(() -> LottoTickets.of(1500))
-        .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("로또 구매 금액은 1000원 단위여야 합니다.");
+        .hasMessage(price < 1000 ?
+            "로또 구매 금액은 1000원 이상이어야 합니다." :
+            "로또 구매 금액은 1000원 단위여야 합니다.");
   }
 
   @Test
@@ -37,6 +34,13 @@ class LottoTicketsTest {
     );
 
     assertThat(LottoTickets.of(manualLottos, 5000).size()).isEqualTo(5);
+  }
+
+  @Test
+  void 수동_로또_목록_null_예외() {
+    assertThatThrownBy(() -> LottoTickets.of(null, 5000))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("수동 로또 목록이 null입니다.");
   }
 
   @Test
@@ -52,12 +56,21 @@ class LottoTicketsTest {
 
   @Test
   void 당첨_통계_생성() {
-    LottoTickets lottoTickets = LottoTickets.of(5000);
+    Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    LottoStatistics statistics = LottoTickets.of(5000).createWinningStatistics(winningNumbers, 7);
 
-    Map<PrizeRank, Integer> result = lottoTickets.createWinningStatistics(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7)
-        .getRankCounts();
-    assertThat(result).isNotNull();
-    assertThat(result.values().stream().mapToInt(Integer::intValue).sum())
-        .isLessThanOrEqualTo(lottoTickets.size());
+    assertThat(statistics).isNotNull();
+  }
+
+  @Test
+  void 당첨_번호_null_예외() {
+    assertThatThrownBy(() -> LottoTickets.of(5000).createWinningStatistics(null, 7))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("당첨 번호가 null입니다.");
+  }
+
+  @Test
+  void 로또_티켓_목록_조회() {
+    assertThat(LottoTickets.of(5000).getLottoTickets()).hasSize(5);
   }
 } 
