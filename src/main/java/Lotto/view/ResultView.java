@@ -1,30 +1,32 @@
 package Lotto.view;
 
-import Lotto.constants.LottoPrize;
+import Lotto.constants.Rank;
 import Lotto.domain.Lotto;
 
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
+
+    private static String format(Lotto lotto) {
+        return lotto.toString();
+    }
+
     public static void printQuantity(int quantity) {
         System.out.println(quantity+"개를 구매했습니다.");
     }
 
     public static void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.toString());
-        }
+        lottos.forEach(lotto -> System.out.println(format(lotto)));
     }
 
-
-    public static void printStats(Map<LottoPrize, Integer> stats) {
+    public static void printStats(Map<Rank, Integer> stats) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        for (LottoPrize prize : LottoPrize.values()) {
+        for (Rank prize : Rank.values()) {
             int count = stats.getOrDefault(prize, 0);
-            System.out.println(prize.getMatchCount() + "개 일치 (" + prize.getPrizeMoney() + "원) - " + count + "개");
+            System.out.println(prize + " - " + count + "개");
         }
     }
 

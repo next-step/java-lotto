@@ -9,7 +9,6 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
-
     @Test
     void should_throw_exception_when_lotto_size_is_not_six() {
         List<LottoNumber> invalidNumbers = Arrays.asList(
@@ -23,6 +22,14 @@ class LottoTest {
         );
 
         assertEquals("로또 번호는 반드시 6개여야 합니다.", exception.getMessage());
+    }
+
+    @Test
+    void generateLottoNumbers_ShouldReturnSixUniqueNumbers() {
+        List<LottoNumber> generatedNumbers = Lotto.generateLottoNumbers();
+        assertEquals(6, generatedNumbers.size());
+        assertTrue(generatedNumbers.stream().allMatch(n -> n.getNumber() >= 1 && n.getNumber() <= 45));
+        assertEquals(generatedNumbers.size(), new HashSet<>(generatedNumbers).size());
     }
 
     @Test

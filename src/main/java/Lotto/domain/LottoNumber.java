@@ -1,7 +1,7 @@
 package Lotto.domain;
 
-import static Lotto.domain.LottoList.LOTTO_MAX_NUMBER;
-import static Lotto.domain.LottoList.LOTTO_MIN_NUMBER;
+import static Lotto.domain.Lottos.LOTTO_MAX_NUMBER;
+import static Lotto.domain.Lottos.LOTTO_MIN_NUMBER;
 
 public class LottoNumber {
     private final int number;
@@ -18,6 +18,22 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    public static boolean isInvalidLottoNumber(String input) {
+        if(input == null || input.trim().isEmpty()) {
+            return true;
+        }
+
+        if(!input.chars().allMatch(Character::isDigit)) {
+            return true;
+        }
+
+        if(Integer.parseInt(input) < LOTTO_MIN_NUMBER || Integer.parseInt(input)  > LOTTO_MAX_NUMBER) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

@@ -1,44 +1,32 @@
 package Lotto.service;
 
-import Lotto.constants.LottoPrize;
-import Lotto.domain.Lotto;
-import Lotto.domain.LottoList;
+import Lotto.domain.Lottos;
 import Lotto.domain.LottoNumber;
+import Lotto.domain.ResultStats;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class LottoGame {
     public static void main(String[] args) {
-        int purchasedQty = InputView.askHowMuchYouWouldBuy();
-        ResultView.printQuantity(purchasedQty);
+        try {
+            int purchasedQty = InputView.askHowMuchYouWouldBuy();
+            ResultView.printQuantity(purchasedQty);
 
-        LottoList lottoList = new LottoList();
-        List<Lotto> lottos = lottoList.generateLottos(purchasedQty);
-        ResultView.printLottos(lottos);
+            Lottos lottoList = new Lottos(purchasedQty);
+            ResultView.printLottos(lottoList.getLottos());
 
-        Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
-        Map<LottoPrize, Integer> stats = lottoList.calculateStats(winningNumbers);
-        ResultView.printStats(stats);
+            Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
+            LottoNumber bonusNumber = InputView.askForBonusNumber();
+            ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers, bonusNumber);
+            ResultView.printStats(resultStats.getStats());
 
-        double profitRate = calculateProfitRate(lottoList, winningNumbers);
-        ResultView.printProfitRate(profitRate);
-    }
-
-    public static double calculateProfitRate(LottoList lottoList, Set<LottoNumber> winningNumbers) {
-        Map<LottoPrize, Integer> stats = lottoList.calculateStats(winningNumbers);
-
-        int totalPrize = 0;
-
-        for(LottoPrize prize: LottoPrize.values()) {
-            totalPrize += stats.get(prize.getMatchCount()) * prize.getPrizeMoney();
+            int totalSpent = purchasedQty * 1000;
+            ResultView.printProfitRate(resultStats.calculateProfitRate(totalSpent));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        int totalSpent = lottoList.getLottos().size() * 1000;
-
-        return totalPrize / (double) totalSpent;
     }
 }
+
