@@ -11,20 +11,18 @@ import java.util.List;
 
 public class LottoController {
     private final LottoService lottoService;
-    private int numberOfGames;
-    private List<LottoGame> lottoGames;
-//    private List<Integer> lottoNumbers;
 
     public LottoController(LottoService lottoService) {
         this.lottoService = lottoService;
     }
 
     public void run() {
+        List<LottoGame> lottoGames;
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
         int purchasePrice = inputView.getPurchasePrice();
 
-        numberOfGames = lottoService.calculateNumberOfGames(purchasePrice);
+        int numberOfGames = lottoService.calculateNumberOfGames(purchasePrice);
         lottoGames = lottoService.generateLottoGames(numberOfGames);
 
         inputView.printNumberOfGames(numberOfGames);
@@ -32,12 +30,12 @@ public class LottoController {
 
         String lottoNumberString = inputView.getLottoWinningNumbers();
         List<Integer> lottoNumbers = lottoService.getLottoNumbers(lottoNumberString);
-
         LottoResult lottoResult = new LottoResult(lottoNumbers);
 
         for (LottoGame lottoGame : lottoGames) {
             lottoResult.addGame(lottoGame);
         }
+
         List<String> lottoResultStat = lottoResult.getStatStrings();
         resultView.printStat(lottoResultStat);
     }
