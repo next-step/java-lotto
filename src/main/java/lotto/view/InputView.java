@@ -13,7 +13,10 @@ public class InputView {
 
     public static LottoOrder getPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new LottoOrder(scanner.nextLine());
+        int totalAmount = parseInt(scanner.nextLine());
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualTicketCount = parseInt(scanner.nextLine());
+        return new LottoOrder(totalAmount, manualTicketCount);
     }
 
     public static WinningNumbers getWinningTicket() {

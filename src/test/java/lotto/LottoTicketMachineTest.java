@@ -14,7 +14,7 @@ public class LottoTicketMachineTest {
     @Test
     @DisplayName("유효한 구매 금액으로 티켓을 구매할 수 있다")
     void shouldPurchaseTickets() {
-        LottoOrder price = new LottoOrder("3000");
+        LottoOrder price = new LottoOrder(3000, 0);
         List<LottoTicket> tickets = LottoTicketMachine.purchase(price);
 
         assertThat(tickets).hasSize(3);
