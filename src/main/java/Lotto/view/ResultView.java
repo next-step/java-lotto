@@ -1,6 +1,6 @@
 package Lotto.view;
 
-import Lotto.constants.LottoPrize;
+import Lotto.constants.Rank;
 import Lotto.domain.Lotto;
 
 import java.util.List;
@@ -20,11 +20,11 @@ public class ResultView {
         lottos.forEach(lotto -> System.out.println(format(lotto)));
     }
 
-    public static void printStats(Map<LottoPrize, Integer> stats) {
+    public static void printStats(Map<Rank, Integer> stats) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        for (LottoPrize prize : LottoPrize.values()) {
+        for (Rank prize : Rank.values()) {
             int count = stats.getOrDefault(prize, 0);
             System.out.println(prize + " - " + count + "개");
         }

@@ -52,10 +52,15 @@ public enum Rank {
         }
     }
 
+
     @Override
     public String toString() {
         return countOfMatch + "개 일치" +
                 (matchBonus ? ", 보너스 볼 일치" : "") +
                 " (" + winningMoney + "원)";
+    }
+
+    public int getOrDefault(Rank prize, int i) {
+        return  prize.getOrDefault(prize, i);
     }
 }
