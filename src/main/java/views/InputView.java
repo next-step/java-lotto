@@ -15,7 +15,7 @@ public class InputView {
     public static int inputBuyAmountGetTicketCount() {
         ResultView.println(Messages.ASK_BUY_AMOUNT);
         int ticketCount = scanner.nextInt() / LottoGame.TICKET_PRICE;
-        System.out.printf(Messages.BUY_TICKET_COUNT_RESULT, ticketCount);
+        ResultView.printf(Messages.BUY_TICKET_COUNT_RESULT, ticketCount);
         return ticketCount;
     }
 
@@ -34,5 +34,21 @@ public class InputView {
         ResultView.println(Messages.ASK_BONUS_NUMBERS);
 
         return scanner.nextInt();
+    }
+
+    public static int inputBuyManualTicketCount() {
+
+        ResultView.println(Messages.ASK_MANUAL_TICKET_COUNT);
+
+        return scanner.nextInt();
+    }
+
+    public static String[] inputManualTicketNumbers(int manualTicketCount) {
+        ResultView.println(Messages.ASK_MANUAL_TICKET_NUMBERS);
+        String[] manualTicketNumbers = new String[manualTicketCount];
+        for (int i = 0; i < manualTicketCount; i++) {
+            manualTicketNumbers[i] = scanner.next();
+        }
+        return manualTicketNumbers;
     }
 }

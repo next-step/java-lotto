@@ -3,6 +3,7 @@ package domain;
 import data.Messages;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,16 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public LottoNumbers(String lottoNumbers) {
+        this.lottoNumbers = manaul(lottoNumbers);
+    }
+
+    private List<Integer> manaul(String lottoNumber) {
+        return Arrays.stream(lottoNumber.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
@@ -49,9 +60,7 @@ public class LottoNumbers {
     }
 
     public int getHitCount(LottoNumbers winNumbers) {
-        return (int) this.lottoNumbers.stream()
-                .filter(winNumbers.getLottoNumbers()::contains)
-                .count();
+        return this.getHitCount(winNumbers.getLottoNumbers());
     }
 
     public boolean hasBonusNumber(int bonus) {

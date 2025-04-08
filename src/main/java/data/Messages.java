@@ -3,7 +3,7 @@ package data;
 public class Messages {
 
     public static final String TYPE_ERROR = "유효하지 않은 타입입니다.";
-    public static final String BUY_TICKET_COUNT_RESULT = "%d개를 구매했습니다.\n";
+    public static final String BUY_TICKET_COUNT_RESULT = "%d개를 구매했습니다.%n";
     public static final String ASK_BUY_AMOUNT = "구입 금액을 입력해 주세요.";
     public static final String ASK_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String PRIZE_RESULT = "%d개 일치%s (%s원)- %d개%n";
@@ -12,4 +12,7 @@ public class Messages {
     public static final String ASK_BONUS_NUMBERS = "보너스 볼을 입력해 주세요.";
     public static final String BLANK = "";
     public static final String NUMBER_OF_NUMBERS_ERROR = "개수가 올바르지 않습니다.";
+    public static final String ASK_MANUAL_TICKET_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String TICKET_SUMMARY = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
+    public static final String ASK_MANUAL_TICKET_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 }
