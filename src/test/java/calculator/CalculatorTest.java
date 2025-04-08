@@ -7,7 +7,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static util.ErrorMessage.INVALID_INPUT;
+import static common.message.ErrorMessage.INVALID_FORMAT;
+import static common.message.ErrorMessage.INVALID_INPUT;
 
 public class CalculatorTest {
 
@@ -46,5 +47,22 @@ public class CalculatorTest {
         int result = calculator.run("10 - 3 + 2 * 2 / 2");
 
         assertThat(result).isEqualTo(9);
+    }
+
+    @DisplayName("계산 수행 후 결과값을 반환한다.")
+    @Test
+    void return_value() {
+
+        Calculator calculator = Calculator.create();
+        assertThat(calculator.run("2 + 3 * 4")).isEqualTo(20);
+    }
+
+    @DisplayName("홀수가 아니면 exception을 반환한다")
+    @Test
+    void exception() {
+        Calculator calculator = Calculator.create();
+        assertThatThrownBy(() -> calculator.run("2 + "))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INVALID_FORMAT);
     }
 }
