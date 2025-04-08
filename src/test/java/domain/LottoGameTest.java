@@ -18,10 +18,18 @@ class LottoGameTest {
 
     @Test
     @DisplayName("Buy 메소드 검증")
-    void buy() {
+    void auto_buy() {
         LottoGame lottoGame = new LottoGame();
         assertThat(lottoGame).isEqualTo(lottoGame.buy(5));
-        assertThat(lottoGame.getLottos().getAutoLottos().size()).isEqualTo(5);
+        assertThat(lottoGame.getAutoLottosSize()).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("Buy 메소드 검증")
+    void manual_buy() {
+        LottoGame lottoGame = new LottoGame();
+        assertThat(lottoGame).isEqualTo(lottoGame.buy(new String[]{"1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8"}));
+        assertThat(lottoGame.getManualLottosSize()).isEqualTo(3);
     }
 
     @Test

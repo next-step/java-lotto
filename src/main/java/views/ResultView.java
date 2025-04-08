@@ -1,6 +1,7 @@
 package views;
 
 import data.Messages;
+import domain.LottoGame;
 import domain.Lottos;
 import domain.PrizeEnum;
 
@@ -22,14 +23,19 @@ public class ResultView {
         System.out.println(str);
     }
 
+    public static void println(List<String> strList) {
+        for(String str : strList){
+            println(str);
+        }
+    }
+
     public static void printf(String str, Object... value) {
         System.out.printf(str, value);
     }
 
-    public static void printLottoNumber(Lottos lottos) {
-        printf(Messages.TICKET_SUMMARY, lottos.getManualLottos().size(), lottos.getAutoLottos().size());
-        lottos.getManualLottos().forEach(lotto -> println(lotto.convertToString()));
-        lottos.getAutoLottos().forEach(lotto -> println(lotto.convertToString()));
+    public static void printLottoNumber(LottoGame lottoGame) {
+        printf(Messages.TICKET_SUMMARY, lottoGame.getManualLottosSize(), lottoGame.getAutoLottosSize());
+        println(lottoGame.convertToString());
         println();
     }
 

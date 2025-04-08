@@ -14,21 +14,21 @@ public class LottoMain {
 
         int ticketCount = InputView.inputBuyAmountGetTicketCount();
 
+        if(ticketCount == 0) return;
+
         int manualTicketCount = InputView.inputBuyManualTicketCount();
 
         String[] manualTicketNumbers = InputView.inputManualTicketNumbers(manualTicketCount);
 
         LottoGame lottoGame = new LottoGame().buy(ticketCount, manualTicketNumbers);
 
-        Lottos lottos = lottoGame.getLottos();
-
-        ResultView.printLottoNumber(lottos);
+        ResultView.printLottoNumber(lottoGame);
 
         LottoNumbers winNumbers = InputView.inputWinNumbers();
 
         int bonus = InputView.inputBonusNumbers();
 
-        Map<PrizeEnum, Integer> summaryMap = lottos.calculateWinResult(winNumbers, bonus);
+        Map<PrizeEnum, Integer> summaryMap = lottoGame.calculateWinResult(winNumbers, bonus);
 
         ResultView.printSummary(summaryMap, BigDecimal.valueOf(ticketCount * LottoGame.TICKET_PRICE));
     }
