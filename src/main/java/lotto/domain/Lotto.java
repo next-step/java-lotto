@@ -3,17 +3,19 @@ package lotto.domain;
 import java.util.*;
 
 public class Lotto {
-    private final List<Integer> numbers;
-    public final int MIN_NUMBER = 1;
-    public final int MAX_NUMBER = 45;
+    private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validateNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = validateNumbers(numbers);
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private List<LottoNumber> validateNumbers(List<Integer> numbers) {
         Objects.requireNonNull(numbers, "numbers must not be null");
+
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
 
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("Lotto numbers must contain exactly 6 numbers.");
@@ -24,25 +26,11 @@ public class Lotto {
             throw new IllegalArgumentException("Lotto numbers must be unique.");
         }
 
-        for (Integer number : numbers) {
-            if (number < MIN_NUMBER || number > MAX_NUMBER) {
-                throw new IllegalArgumentException("Lotto number " + number + " is out of valid range (1-45).");
-            }
-        }
+        return lottoNumbers;
     }
 
-    public int countMatches(List<Integer> winningNumbers) {
-        validateNumbers(winningNumbers);
-        int count = 0;
-        for (Integer number : this.numbers) {
-            if (winningNumbers.contains(number)) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
+
 }

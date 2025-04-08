@@ -5,6 +5,7 @@ import lotto.domain.LottoPrize;
 import lotto.domain.LottoResult;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -16,10 +17,20 @@ public class ResultView {
     }
 
     public static void printResult(LottoResult result) {
+        Map<LottoPrize, Integer> lottoPrizes = result.getLottoPrizes();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (int i = 3; i <= 6; i++) {
-            System.out.println(i + "개 일치 (" + LottoPrize.getPrizeByMatchCount(i) + "원)- " + result.getMatchCounts().getOrDefault(i, 0) + "개");
+        for (Map.Entry<LottoPrize, Integer> entry : lottoPrizes.entrySet()) {
+            LottoPrize lottoPrize = entry.getKey();
+            int lottoPrizeCount = entry.getValue();
+            if (lottoPrize == LottoPrize.MISS) {
+                continue;
+            }
+            if (lottoPrize == LottoPrize.SECOND) {
+                System.out.println(lottoPrize.getMatchCount() + "개 일치, 보너스 볼 일치 (" + lottoPrize.getWinningMoney() + "원)- " + lottoPrizeCount + "개");
+                continue;
+            }
+            System.out.println(lottoPrize.getMatchCount() + "개 일치 (" + lottoPrize.getWinningMoney() + "원)- " + lottoPrizeCount + "개");
         }
         System.out.printf("총 수익률은 %,.2f입니다.%n", result.getRate());
     }
