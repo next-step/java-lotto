@@ -17,11 +17,14 @@ public class LottoService {
         return tickets;
     }
 
-    public LottoResult calculateResults(List<LottoTicket> tickets, LottoTicket winningTicket) {
-        Map<Integer, Integer> matchCounts = new HashMap<>();
+    public LottoResult calculateResults(List<LottoTicket> tickets, LottoTicket winningTicket, int bonusNumber) {
+        Map<Rank, Integer> matchCounts = new HashMap<>();
         for (LottoTicket ticket : tickets) {
-            int matchCount = ticket.getMatchCount(winningTicket.getNumbers());
-            matchCounts.put(matchCount, matchCounts.getOrDefault(matchCount, 0) + 1);
+            int matchCount = ticket.countMatchingNumbersWith(winningTicket);
+            boolean matchBonus = ticket.contains(bonusNumber);
+
+            Rank rank = Rank.valueOf(matchCount, matchBonus);
+            matchCounts.put(rank, matchCounts.getOrDefault(rank, 0) + 1);
         }
         return new LottoResult(matchCounts);
     }

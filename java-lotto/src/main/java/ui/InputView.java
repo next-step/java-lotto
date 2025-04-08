@@ -49,5 +49,11 @@ public class InputView {
         return new LottoTicket(numbers);
     }
 
+    public int getBonusTicket() {
+        System.out.println("Please enter Bonus number.");
+        Scanner sc = new Scanner(System.in);
+        return sc.nextInt();
+    }
+
 }
 
