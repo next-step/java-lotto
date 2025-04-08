@@ -2,6 +2,7 @@ package Lotto.model;
 
 import Lotto.model.NumberExtractor.FixedNumberExtractor;
 import Lotto.model.NumberExtractor.NumberExtractor;
+import Lotto.model.NumberExtractor.RandomNumberExtractor;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -85,5 +86,16 @@ public class LottoServiceTest {
         service.draw();
         service.decideWinning(List.of(1, 2, 3, 4, 5, 11), 6);
         assertThat(service.winningCountMap().get(LottoRank.SECOND)).isEqualTo(1);
+    }
+
+    @Test
+    void shouldBeTwo2ndPlace(){
+        final int PURCHASE_AMOUNT = 2000;
+        NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
+        FixedNumberExtractor extractor2 = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
+        LottoService service = new LottoService(PURCHASE_AMOUNT, extractor, extractor2);
+        service.draw();
+        service.decideWinning(List.of(1, 2, 3, 4, 5, 11), 6);
+        assertThat(service.winningCountMap().get(LottoRank.SECOND)).isEqualTo(2);
     }
 }

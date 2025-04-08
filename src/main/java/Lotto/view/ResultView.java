@@ -6,8 +6,8 @@ import Lotto.model.LottoNumber;
 import java.util.List;
 
 public class ResultView {
-    public void printBuyNum(int num) {
-        System.out.println(num + "개를 구매했습니다.");
+    public void printBuyNum(int manualBuyNum, int autoBuyNum) {
+        System.out.println("\n수동으로 " + manualBuyNum + "장, 자동으로 " + autoBuyNum + "개를 구매했습니다.");
     }
 
     public void printLotto(List<List<Integer>> numbers) {
