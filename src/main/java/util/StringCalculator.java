@@ -22,15 +22,28 @@ public class StringCalculator {
         }
     }
 
-    private int operate(String operator, int num1, int num2) {
-        if (operator.equals("+")) return num1 + num2;
-        if (operator.equals("-")) return num1 - num2;
-        if (operator.equals("*")) return num1 * num2;
-        if (operator.equals("/")) {
-            if (num2 == 0) throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
-            if (num1 % num2 != 0) throw new IllegalArgumentException("나눔 값이 정수가 아닙니다.");
-            return num1 / num2;
+    private int operate(String operator, int left, int right) {
+        switch (operator) {
+            case "+":
+                return left + right;
+            case "-":
+                return left - right;
+            case "*":
+                return left * right;
+            case "/":
+                return division(left, right);
+            default:
+                throw new IllegalArgumentException("올바른 사칙연산 부호가 아닙니다");
         }
-        throw new IllegalArgumentException("올바른 사칙연산 부호가 아닙니다");
+    }
+
+    int division(int left, int right) {
+        if (right == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+        if (left % right != 0) {
+            throw new IllegalArgumentException("나눔 값이 정수가 아닙니다.");
+        }
+        return left / right;
     }
 }
