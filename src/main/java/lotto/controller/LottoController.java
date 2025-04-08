@@ -1,12 +1,12 @@
 package lotto.controller;
 
-import lotto.domain.model.MatchResult;
+import lotto.domain.model.*;
 import lotto.domain.generator.RandomLottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import lotto.domain.model.LottoNumbers;
-import lotto.domain.model.LottoWallet;
 import lotto.domain.service.LottoMachine;
+
+import java.util.List;
 
 
 public class LottoController {
@@ -26,9 +26,11 @@ public class LottoController {
     }
 
     private void draw(LottoWallet lottoWallet, int purchaseAmount) {
-        LottoNumbers winNumbers = new LottoNumbers(InputView.getWinNumbers());
-        int bonusNumber = InputView.getBonusNumber();
-        MatchResult result = lottoWallet.countMatches(winNumbers, bonusNumber);
+        List<LottoNumber> winNumbers = InputView.getWinNumbers();
+        LottoNumber bonusNumber = InputView.getBonusNumber();
+        WinningTicket winningTicket = new WinningTicket(winNumbers, bonusNumber);
+
+        MatchResult result = lottoWallet.countMatches(winningTicket);
         ResultView.printMatchResult(result, purchaseAmount);
     }
 }

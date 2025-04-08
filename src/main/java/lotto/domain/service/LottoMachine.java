@@ -1,8 +1,11 @@
 package lotto.domain.service;
 
 import lotto.domain.generator.LottoNumberGenerator;
-import lotto.domain.model.LottoNumbers;
+import lotto.domain.model.LottoNumber;
+import lotto.domain.model.LottoTicket;
 import lotto.domain.model.LottoWallet;
+
+import java.util.List;
 
 
 public class LottoMachine {
@@ -18,7 +21,8 @@ public class LottoMachine {
         int numLottos = purchaseAmount / LOTTO_PRICE;
         LottoWallet lottoWallet = new LottoWallet();
         for (int i = 0; i < numLottos; i++) {
-            lottoWallet.addLotto(new LottoNumbers(this.lottoNumberGenerator.generate()));
+            List<LottoNumber> numbers = this.lottoNumberGenerator.generate();
+            lottoWallet.addLotto(new LottoTicket(numbers));
         }
         return lottoWallet;
     }

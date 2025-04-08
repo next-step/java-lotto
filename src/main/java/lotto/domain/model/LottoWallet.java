@@ -1,21 +1,20 @@
 package lotto.domain.model;
 
+import lotto.domain.service.LottoResultCalculator;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class LottoWallet {
-    private final List<LottoNumbers> lottos = new ArrayList<>();
+    private final List<LottoTicket> lottos = new ArrayList<>();
 
-    public void addLotto(LottoNumbers lotto) {
+    public void addLotto(LottoTicket lotto) {
         this.lottos.add(lotto);
     }
 
-    public MatchResult countMatches(LottoNumbers winNumbers, int bonusNumber) {
-        MatchResult matchResult = new MatchResult(winNumbers, bonusNumber);
-        for (LottoNumbers lotto : lottos) {
-            matchResult.addRank(lotto);
-        }
+    public MatchResult countMatches(WinningTicket winningTicket) {
+        MatchResult matchResult = LottoResultCalculator.evaluateLottos(winningTicket, this.lottos);
         return matchResult;
     }
 
@@ -23,7 +22,7 @@ public class LottoWallet {
         return this.lottos.size();
     }
 
-    public List<LottoNumbers> getLottos() {
+    public List<LottoTicket> getLottos() {
         return this.lottos;
     }
 }

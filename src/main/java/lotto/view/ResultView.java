@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.model.LottoNumbers;
+import lotto.domain.model.LottoTicket;
 import lotto.domain.model.LottoWallet;
 import lotto.domain.model.MatchResult;
 import lotto.domain.model.Rank;
@@ -15,8 +15,8 @@ public class ResultView {
     public static void printPurchasedLottos(LottoWallet lottoWallet) {
         int count = lottoWallet.getCount();
         printMessage(count + "개를 구매했습니다.");
-        for (LottoNumbers lotto : lottoWallet.getLottos()) {
-            printLottoNumbers(lotto.getNumbers());
+        for (LottoTicket lotto : lottoWallet.getLottos()) {
+            printLottoTicket(lotto);
         }
     }
 
@@ -32,9 +32,11 @@ public class ResultView {
         printProfit(profit);
     }
 
-    private static void printLottoNumbers(List<Integer> lottoNumbers) {
-        String formattedNumbers = arrayToString(lottoNumbers);
-        printMessage(formattedNumbers);
+    private static void printLottoTicket(LottoTicket lotto) {
+        String lottoTicketString = lotto.getNumbers().stream()
+                .map(n -> String.valueOf(n.getNumber()))
+                .collect(Collectors.joining(", ", "[", "]"));
+        printMessage(lottoTicketString);
     }
 
     private static void printMatchCount(Rank rank, MatchResult matchResults) {
@@ -56,11 +58,5 @@ public class ResultView {
 
     private static void printMessage(String message) {
         System.out.println(message);
-    }
-
-    private static String arrayToString(List<Integer> array) {
-        return "[" + array.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", ")) + "]";
     }
 }

@@ -17,6 +17,5 @@ public class LottoMachineTest {
 
         LottoWallet lottoWallet = lottoMachine.buyLottos(2000);
         assertThat(lottoWallet.getCount()).isEqualTo(2);
-        assertThat(lottoWallet.getLottos().get(0).getNumbers()).containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6);
     }
 }

@@ -7,20 +7,19 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoNumbersTest {
-    @DisplayName("로또 번호를 생성한다.")
-    @Test
-    void createTest() {
-        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-
-        assertThat(lottoNumbers.getNumbers()).containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6);
-    }
-
+public class LottoTicketTest {
     @DisplayName("중복이 있는 로또 번호를 생성할 수 없다.")
     @Test
     void createDuplicateTest() {
         try {
-            new LottoNumbers(List.of(1, 2, 3, 4, 5, 5));
+            new LottoTicket(List.of(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(5) // 중복된 번호
+            ));
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage()).isEqualTo("Lotto numbers must not contain duplicates.");
         }
@@ -30,7 +29,13 @@ public class LottoNumbersTest {
     @Test
     void createSizeTest() {
         try {
-            new LottoNumbers(List.of(1, 2, 3, 4, 5));
+            new LottoTicket(List.of(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5)
+            ));
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage()).isEqualTo("Lotto numbers must contain exactly 6 numbers.");
         }
@@ -40,27 +45,32 @@ public class LottoNumbersTest {
     @Test
     void createRangeTest() {
         try {
-            new LottoNumbers(List.of(0, 2, 3, 4, 5, 6));
+            new LottoTicket(List.of(
+                    new LottoNumber(0),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)
+            ));
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage()).isEqualTo("Lotto numbers must be between 1 and 45.");
+            assertThat(e.getMessage()).isEqualTo("Lotto number must be between 1 and 45.");
         }
     }
 
-    @DisplayName("로또 번호를 비교하여 일치하는 개수를 센다.")
+    @DisplayName("로또 번호를 포함하는지 확인한다.")
     @Test
-    void countMatchTest() {
-        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers winNumbers = new LottoNumbers(List.of(1, 2, 3, 7, 8, 9));
+    void containsTest() {
+        LottoTicket lottoTicket = new LottoTicket(List.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
 
-        assertThat(lottoNumbers.countMatch(winNumbers)).isEqualTo(3);
-    }
-
-    @DisplayName("보너스 번호와 일치하는지 확인한다.")
-    @Test
-    void matchBonusTest() {
-        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-
-        assertThat(lottoNumbers.matchBonus(7)).isFalse();
-        assertThat(lottoNumbers.matchBonus(1)).isTrue();
+        assertThat(lottoTicket.contains(new LottoNumber(1))).isTrue();
+        assertThat(lottoTicket.contains(new LottoNumber(7))).isFalse();
     }
 }

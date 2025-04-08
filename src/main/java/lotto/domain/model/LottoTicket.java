@@ -1,52 +1,34 @@
 package lotto.domain.model;
 
+
 import java.util.List;
 
 import static lotto.constant.LottoConstants.*;
 
-public class LottoNumbers {
-    private final List<Integer> numbers;
+public class LottoTicket {
+    private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoTicket(List<LottoNumber> numbers) {
         this.numbers = numbers;
         validate();
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return this.numbers;
     }
 
-    int countMatch(LottoNumbers winNumbers) {
-        return (int) winNumbers.getNumbers().stream()
-                .filter(this.numbers::contains)
-                .count();
-    }
-
-    boolean contains(int number) {
+    public boolean contains(LottoNumber number) {
         return this.numbers.contains(number);
-    }
-
-    boolean matchBonus(int bonusNumber) {
-        return this.numbers.contains(bonusNumber);
     }
 
     private void validate() {
         validateSize();
-        validateRange();
         validateNoDuplicates();
     }
 
     private void validateSize() {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("Lotto numbers must contain exactly 6 numbers.");
-        }
-    }
-
-    private void validateRange() {
-        boolean hasInvalid = numbers.stream()
-                .anyMatch(n -> n < MIN_LOTTO_NUMBER || n > MAX_LOTTO_NUMBER);
-        if (hasInvalid) {
-            throw new IllegalArgumentException("Lotto numbers must be between 1 and 45.");
         }
     }
 
