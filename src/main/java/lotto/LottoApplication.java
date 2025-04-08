@@ -15,7 +15,7 @@ public class LottoApplication {
         LottoOrder lottoOrder = InputView.getPurchaseAmount();
         List<LottoTicket> manualTickets = InputView.getManualTickets(lottoOrder);
         List<LottoTicket> lottoTickets = LottoTicketMachine.purchase(lottoOrder);
-        ResultView.showPurchaseResult(lottoTickets);
+        ResultView.showPurchaseResult(manualTickets, lottoTickets);
 
         WinningNumbers winningTicket = InputView.getWinningTicket();
         LottoStatistics lottoStatistics = new LottoStatistics(winningTicket, lottoTickets);
