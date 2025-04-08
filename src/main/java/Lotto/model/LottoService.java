@@ -1,6 +1,8 @@
 package Lotto.model;
 
+import Lotto.model.NumberExtractor.FixedNumberExtractor;
 import Lotto.model.NumberExtractor.NumberExtractor;
+import Lotto.model.NumberExtractor.RandomNumberExtractor;
 
 import java.util.*;
 
@@ -8,7 +10,7 @@ public class LottoService {
     private static final int NUMBER_SIZE = 6;
     static final int SALES_PRICE = 1000;
     private final NumberExtractor autoExtractor;
-    private final NumberExtractor[] manualExtractors;
+    private final FixedNumberExtractor[] manualExtractors;
     private final PurchaseAmount purchaseAmount;
     private final int manualLottoNum;
     private final int autoLottoNum;
@@ -16,10 +18,10 @@ public class LottoService {
     private Lottos lottos;
 
     public LottoService(int purchaseAmount, NumberExtractor autoExtractor) {
-        this(purchaseAmount, autoExtractor, new NumberExtractor[0]);
+        this(purchaseAmount, autoExtractor, new FixedNumberExtractor[0]);
     }
 
-    public LottoService(int purchaseAmount, NumberExtractor autoExtractor, NumberExtractor... manualExtractors) {
+    public LottoService(int purchaseAmount, NumberExtractor autoExtractor, FixedNumberExtractor... manualExtractors) {
         int autoPurchaseAmount = purchaseAmount - (manualExtractors.length * SALES_PRICE);
 
         this.autoLottoNum = autoPurchaseAmount / SALES_PRICE;
@@ -36,15 +38,15 @@ public class LottoService {
         drawAutomatically();
     }
 
-    private void drawManually(){
-        for (NumberExtractor extractor: manualExtractors){
+    private void drawManually() {
+        for (NumberExtractor extractor : manualExtractors) {
             Lotto lotto = new Lotto(extractor);
             lotto.draw();
             lottos.add(lotto);
         }
     }
 
-    private void drawAutomatically(){
+    private void drawAutomatically() {
         for (int i = 0; i < autoLottoNum; i++) {
             Lotto lotto = new Lotto(autoExtractor);
             lotto.draw();
@@ -60,11 +62,11 @@ public class LottoService {
         return this.autoLottoNum + this.manualLottoNum;
     }
 
-    public int autoLottoNum(){
+    public int autoLottoNum() {
         return this.autoLottoNum;
     }
 
-    public int manualLottoNum(){
+    public int manualLottoNum() {
         return this.manualLottoNum;
     }
 

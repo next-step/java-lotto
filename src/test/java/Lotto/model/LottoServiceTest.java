@@ -92,8 +92,8 @@ public class LottoServiceTest {
     void shouldBeTwo2ndPlace(){
         final int PURCHASE_AMOUNT = 2000;
         NumberExtractor extractor = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
-        NumberExtractor extractor2 = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
-        LottoService service = new LottoService(PURCHASE_AMOUNT, extractor, extractor);
+        FixedNumberExtractor extractor2 = new FixedNumberExtractor(new int[]{1, 2, 3, 4, 5, 6});
+        LottoService service = new LottoService(PURCHASE_AMOUNT, extractor, extractor2);
         service.draw();
         service.decideWinning(List.of(1, 2, 3, 4, 5, 11), 6);
         assertThat(service.winningCountMap().get(LottoRank.SECOND)).isEqualTo(2);

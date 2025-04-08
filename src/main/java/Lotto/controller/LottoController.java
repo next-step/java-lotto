@@ -26,7 +26,7 @@ public class LottoController {
         int manualPurchaseNumber = this.inputView.getManualPurchaseNumber();
         List<List<Integer>> manualNumberList = this.inputView.getManualNumbers(manualPurchaseNumber);
 
-        NumberExtractor[] fixedExtractors = new NumberExtractor[manualNumberList.size()];
+        FixedNumberExtractor[] fixedExtractors = new FixedNumberExtractor[manualNumberList.size()];
         for(int i=0; i<manualNumberList.size(); i++){
             fixedExtractors[i] = new FixedNumberExtractor(manualNumberList.get(i));
         }
