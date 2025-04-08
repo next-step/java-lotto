@@ -19,9 +19,7 @@ public class LottoStatistics {
         Map<LottoRank, Integer> counts = new EnumMap<>(LottoRank.class);
         for (LottoTicket ticket : purchaseTickets) {
             LottoRank rank = winningTicket.getLottoRank(ticket);
-            if (rank != null) {
-                counts.put(rank, counts.getOrDefault(rank, 0) + 1);
-            }
+            counts.put(rank, counts.getOrDefault(rank, 0) + 1);
         }
         return counts;
     }

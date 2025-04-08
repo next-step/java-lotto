@@ -22,7 +22,7 @@ public class InputView {
 
     public static List<LottoTicket> getManualTickets(LottoOrder lottoOrder) {
         List<LottoTicket> manualTickets = new ArrayList<>();
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < lottoOrder.getManualTicketCount(); i++) {
             List<Integer> manualTicketCount = parseIntCommaSeparated(scanner.nextLine());
             manualTickets.add(new LottoTicket(manualTicketCount));

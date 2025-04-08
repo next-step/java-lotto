@@ -26,7 +26,7 @@ public class ResultView {
     }
 
     private static void showMatchCounts(LottoStatistics statistics) {
-        for (LottoRank rank : LottoRank.values()) {
+        for (LottoRank rank : LottoRank.RANKING_ORDER) {
             int count = statistics.getCountByRank(rank);
             System.out.println(formatMatchCount(rank, count));
         }
