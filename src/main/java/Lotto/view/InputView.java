@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static Lotto.domain.LottoNumber.isInvalidLottoNumber;
 import static Lotto.domain.Purchase.isInvalidPrice;
 import static Lotto.domain.WinningNumbers.isInvalidWinningNumbers;
 
@@ -32,6 +33,16 @@ public class InputView {
             input = scanner.nextLine();
         }
         return parseWinningNumbers(input);
+    }
+
+    public static LottoNumber askForBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String input = scanner.nextLine();
+        while(isInvalidLottoNumber(input)){
+            System.out.println("1~45 사이 숫자로 입력해 주세요.");
+            input = scanner.nextLine();
+        }
+        return new LottoNumber(Integer.parseInt(input));
     }
 
     public static int trimAndReturnInt(String input) {

@@ -46,6 +46,10 @@ public class Lotto {
         return result;
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
 
     public int countMatches(Set<LottoNumber> winningNumbers) {
         Set<LottoNumber> intersection = new HashSet<>(this.lottoNumbers);

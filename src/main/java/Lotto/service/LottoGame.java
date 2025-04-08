@@ -18,7 +18,8 @@ public class LottoGame {
             ResultView.printLottos(lottoList.getLottos());
 
             Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
-            ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers);
+            LottoNumber bonusNumber = InputView.askForBonusNumber();
+            ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers, bonusNumber);
             ResultView.printStats(resultStats.getStats());
 
             int totalSpent = purchasedQty * 1000;

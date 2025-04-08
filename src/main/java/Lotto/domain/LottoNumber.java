@@ -20,6 +20,22 @@ public class LottoNumber {
         return number;
     }
 
+    public static boolean isInvalidLottoNumber(String input) {
+        if(input == null || input.trim().isEmpty()) {
+            return true;
+        }
+
+        if(!input.chars().allMatch(Character::isDigit)) {
+            return true;
+        }
+
+        if(Integer.parseInt(input) < LOTTO_MIN_NUMBER || Integer.parseInt(input)  > LOTTO_MAX_NUMBER) {
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
