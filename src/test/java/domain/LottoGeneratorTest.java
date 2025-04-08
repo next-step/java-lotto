@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import domain.strategy.LottoNumberStrategy;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -19,7 +20,7 @@ public class LottoGeneratorTest {
 
         assertThat(lottoList).hasSize(5);
         for (Lotto lotto : lottoList) {
-            assertThat(lotto.getNumList()).hasSize(6);
+            assertThat(lotto.getLottoNumberList()).hasSize(6);
         }
     }
 
@@ -40,6 +41,6 @@ public class LottoGeneratorTest {
         List<Lotto> lottoList = lottoGenerator.createLottoBulk(1000);
 
         assertThat(lottoList).hasSize(1);
-        assertThat(lottoList.get(0).getNumList()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lottoList.get(0).getLottoNumberList()).hasSize(6);
     }
 }

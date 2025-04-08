@@ -10,8 +10,13 @@ public class InputView {
         return scanner.next();
     }
 
-    public static int inputAmount(){
+    public static int inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
+    public static int inputBonusNumbers() {
+        System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
     }
 }

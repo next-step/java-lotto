@@ -2,26 +2,27 @@ package domain;
 
 import java.util.List;
 
-import static domain.LottoGenerator.DRAW_NUMBER_COUNT;
-
 public class LottoBundle {
     private final List<Lotto> lottoList;
-    private final LottoStatics lottoStatics;
+    private final LottoStatistics lottoStatistics;
 
-    public LottoBundle(List<Lotto> lottoList, List<Integer> winningNums) {
-        if (winningNums == null || winningNums.isEmpty()) {
-            throw new IllegalArgumentException("winningNums는 null이거나 비어있을 수 없습니다.");
-        }
-
-        if (winningNums.size() != DRAW_NUMBER_COUNT) {
-            throw new IllegalArgumentException("winningNums의 사이즈가 잘못되었습니다. winningNums.size() : " + winningNums.size());
-        }
-
+    public LottoBundle(List<Lotto> lottoList, WinningNumbers winningNumbers) {
         this.lottoList = lottoList;
-        this.lottoStatics = new LottoStatics(lottoList, winningNums);
+        this.matchRank(winningNumbers);
+        this.lottoStatistics = new LottoStatistics(lottoList);
     }
 
-    public LottoStatics getLottoStatics() {
-        return lottoStatics;
+    public LottoStatistics getLottoStatics() {
+        return lottoStatistics;
+    }
+
+    private void matchRank(WinningNumbers winningNumbers){
+        for(Lotto lotto : lottoList){
+            lotto.matchRank(winningNumbers);
+        }
+    }
+
+    public List<Lotto> getLottoList() {
+        return this.lottoList;
     }
 }
