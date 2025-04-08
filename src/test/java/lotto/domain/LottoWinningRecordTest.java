@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,12 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LottoNumbersMatcherTest {
+import static org.assertj.core.api.Assertions.assertThat;
 
+class LottoWinningRecordTest {
     List<LottoNumbers> lottoNumbers = new ArrayList<>();
 
     @BeforeEach
-    private void setUp() {
+    public void setUp() {
         lottoNumbers.add(LottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3,  4,  5,  6)));
         lottoNumbers.add(LottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3,  4,  5,  7)));
         lottoNumbers.add(LottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3,  4,  5,  8)));
@@ -31,8 +31,9 @@ public class LottoNumbersMatcherTest {
                 LottoNumbers.fromIntegers(Arrays.asList( 1,  2,  3,  4,  5,  6)),
                 bonusNumber);
 
-        LottoNumberMatcher matcher = new LottoNumberMatcher(lottoNumbers, winningLottoNumbers);
-        LottoWinningRecord record = matcher.result();
+        Lottos lottos = new Lottos(lottoNumbers, 0, 10);
+        LottoWinningRecord record = new LottoWinningRecord();
+        record.match(winningLottoNumbers, lottos);
 
         assertThat(record.lottoRankMap().get(LottoRank.MATCH_3)).isEqualTo(3);
         assertThat(record.lottoRankMap().get(LottoRank.MATCH_4)).isEqualTo(1);
@@ -55,8 +56,9 @@ public class LottoNumbersMatcherTest {
                 LottoNumbers.fromIntegers(Arrays.asList(39, 40, 41, 42, 43, 44)),
                 bonusNumber);
 
-        LottoNumberMatcher matcher = new LottoNumberMatcher(lottoNumbers, winningLottoNumbers);
-        LottoWinningRecord record = matcher.result();
+        Lottos lottos = new Lottos(lottoNumbers, 0, 10);
+        LottoWinningRecord record = new LottoWinningRecord();
+        record.match(winningLottoNumbers, lottos);
 
         assertThat(record.lottoRankMap().get(LottoRank.MATCH_3)).isEqualTo(0);
         assertThat(record.lottoRankMap().get(LottoRank.MATCH_4)).isEqualTo(0);
@@ -64,4 +66,6 @@ public class LottoNumbersMatcherTest {
         assertThat(record.lottoRankMap().get(LottoRank.MATCH_6)).isEqualTo(0);
         assertThat(record.totalLottoPrizeAmount()).isEqualTo(0);
     }
+
+
 }
