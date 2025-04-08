@@ -17,7 +17,7 @@ public class LottoTicketMachine {
 
     public static List<LottoTicket> purchase(LottoOrder lottoOrder) {
         List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < lottoOrder.getTotalCount(); i++) {
+        for (int i = 0; i < lottoOrder.getAutoTicketCount(); i++) {
             tickets.add(generateTicket());
         }
         return tickets;

@@ -12,14 +12,18 @@ import org.junit.jupiter.api.Test;
 public class LottoTicketMachineTest {
 
     @Test
-    @DisplayName("유효한 구매 금액으로 티켓을 구매할 수 있다")
-    void shouldPurchaseTickets() {
-        LottoOrder price = new LottoOrder(3000, 0);
-        List<LottoTicket> tickets = LottoTicketMachine.purchase(price);
+    @DisplayName("자동 구매 티켓 수만큼 자동 티켓을 구매한다.")
+    void shouldPurchaseAutoTickets() {
+        LottoOrder order1 = new LottoOrder(3000, 0);
+        List<LottoTicket> tickets1 = LottoTicketMachine.purchase(order1);
 
-        assertThat(tickets).hasSize(3);
-        for (LottoTicket ticket : tickets) {
+        assertThat(tickets1).hasSize(3);
+        for (LottoTicket ticket : tickets1) {
             assertThat(ticket.getNumbers()).hasSize(6);
         }
+
+        LottoOrder order2 = new LottoOrder(3000, 3);
+        List<LottoTicket> tickets2 = LottoTicketMachine.purchase(order2);
+        assertThat(tickets2).hasSize(0);
     }
 }

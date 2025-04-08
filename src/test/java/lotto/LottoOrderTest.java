@@ -39,4 +39,11 @@ public class LottoOrderTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("수동 구매 티켓 수는 전체 티켓 수를 초과할 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("자동 구매 티켓 수는 전체 티켓 수 - 수동 구매 키텟 수이다.")
+    void shouldCalculateAutoTicketCount() {
+        LottoOrder order = new LottoOrder(5000, 3);
+        assertThat(order.getAutoTicketCount()).isEqualTo(5 - 3);
+    }
 }
