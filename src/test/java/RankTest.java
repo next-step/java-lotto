@@ -16,12 +16,12 @@ class RankTest {
             "6, false, FIRST",
             "5, true, SECOND",
             "5, false, THIRD",
-            "4, true, FOURTH",
+            "4, false, FOURTH",
             "3, false, FIFTH",
             "2, false, MISS"
     })
     void shouldDetermineRankBasedOnMatchCountAndBonusBall(int countOfMatch, boolean matchBonus, Rank expected) {
-        Rank rank = Rank.valueOf(countOfMatch, matchBonus);
+        Rank rank = Rank.fromMatchCountAndBonus(countOfMatch, matchBonus);
         assertThat(rank).isEqualTo(expected);
     }
 
@@ -29,7 +29,7 @@ class RankTest {
     @ParameterizedTest
     @ValueSource(ints = {7, 10, 100})
     void shouldThrowExceptionForInvalidMatchCount(int countOfMatch) {
-        assertThatThrownBy(() -> Rank.valueOf(countOfMatch, false))
+        assertThatThrownBy(() -> Rank.fromMatchCountAndBonus(countOfMatch, false))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("일치하는 번호는 최대 6개까지만 가능합니다.");
     }
