@@ -27,7 +27,7 @@ public class LottoGame {
         LottoTicket winningTicket = new LottoTicket(winningNumbers);
 
         int bonusNumberValue = InputView.inputBonusNumber();
-        LottoNumber bonusNumber = new LottoNumber(bonusNumberValue);
+        LottoNumber bonusNumber = LottoNumber.of(bonusNumberValue);
         WinningResult winningResult = new WinningResult(winningTicket, bonusNumber);
         ResultView.printResult(lottoTickets, winningResult);
     }
@@ -35,7 +35,7 @@ public class LottoGame {
     private static List<LottoTicket> toLottoTickets(List<List<Integer>> manualTicketList) {
         return manualTicketList.stream()
                 .map(ticket -> ticket.stream()
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::of)
                         .collect(Collectors.toCollection(TreeSet::new)))
                 .map(LottoTicket::new)
                 .collect(Collectors.toList());
@@ -43,7 +43,7 @@ public class LottoGame {
 
     private static TreeSet<LottoNumber> toLottoNumbers(List<Integer> manualTicket) {
         return manualTicket.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 }

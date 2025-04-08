@@ -41,7 +41,7 @@ public class LottoTicket {
         List<Integer> lottoNumbers = numbers.subList(0, LOTTO_SIZE);
 
         return lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 

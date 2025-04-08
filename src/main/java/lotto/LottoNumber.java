@@ -1,21 +1,33 @@
 package lotto;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
 
+    public static Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
+
     private final int number;
 
-    public LottoNumber(int number) {
-        validateNumber(number);
+    static {
+        for (int i = LOTTO_MIN; i <= LOTTO_MAX; i++) {
+            lottoNumberMap.put(i, new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(int number) {
+
         this.number = number;
     }
 
-    private void validateNumber(int number) {
-        if (number < LOTTO_MIN || number > LOTTO_MAX) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이여야 합니다.");
+    public static LottoNumber of(int number) {
+        if (lottoNumberMap.containsKey(number)) {
+            return lottoNumberMap.get(number);
         }
+        throw new IllegalArgumentException("로또 번호는 1부터 45 사이여야 합니다.");
     }
 
     public int getNumber() {
@@ -33,5 +45,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
         return number == that.number;
+    }
+
+    public String toString() {
+        return String.valueOf(number);
     }
 }
