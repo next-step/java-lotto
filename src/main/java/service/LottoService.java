@@ -26,4 +26,14 @@ public class LottoService {
         }
         return lottoGames;
     }
+
+    public List<Integer> getLottoNumbers(String input) {
+        String[] numbers = input.split(", ");
+        List<Integer> lottoNumbers = new ArrayList<>();
+
+        for (String number : numbers) {
+            lottoNumbers.add(Integer.parseInt(number));
+        }
+        return lottoNumbers;
+    }
 }

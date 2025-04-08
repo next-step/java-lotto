@@ -1,9 +1,11 @@
 package controller;
 
 import model.LottoGame;
+import model.LottoResult;
 import service.LottoService;
 import util.LottoNumberGenerator;
 import view.InputView;
+import view.ResultView;
 
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class LottoController {
     private final LottoService lottoService;
     private int numberOfGames;
     private List<LottoGame> lottoGames;
+//    private List<Integer> lottoNumbers;
 
     public LottoController(LottoService lottoService) {
         this.lottoService = lottoService;
@@ -18,11 +21,25 @@ public class LottoController {
 
     public void run() {
         InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
         int purchasePrice = inputView.getPurchasePrice();
+
         numberOfGames = lottoService.calculateNumberOfGames(purchasePrice);
         lottoGames = lottoService.generateLottoGames(numberOfGames);
+
         inputView.printNumberOfGames(numberOfGames);
         inputView.printLottoGames(lottoGames);
+
+        String lottoNumberString = inputView.getLottoWinningNumbers();
+        List<Integer> lottoNumbers = lottoService.getLottoNumbers(lottoNumberString);
+
+        LottoResult lottoResult = new LottoResult(lottoNumbers);
+
+        for (LottoGame lottoGame : lottoGames) {
+            lottoResult.addGame(lottoGame);
+        }
+        List<String> lottoResultStat = lottoResult.getStatStrings();
+        resultView.printStat(lottoResultStat);
     }
 
 
