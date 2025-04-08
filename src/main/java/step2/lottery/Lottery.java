@@ -1,7 +1,9 @@
-package step2;
+package step2.lottery;
+
+import step2.winning.PrizeWinningNumber;
+import step2.winning.Winning;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lottery {
     private final Set<LotteryNumber> lottoNumbers;
@@ -9,11 +11,10 @@ public class Lottery {
     public Lottery(Set<LotteryNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
-
-    public int match(Set<LotteryNumber> numbers) {
-        return (int) numbers.stream()
-                .filter(lottoNumbers::contains)
-                .count();
+    public Winning matchWith(PrizeWinningNumber prize) {
+        int matchCount = prize.matchCount(lottoNumbers);
+        boolean bonus = (matchCount == 5 && prize.isMatchBounus(lottoNumbers));
+        return Winning.valueOf(matchCount, bonus);
     }
 
     public Set<LotteryNumber> getLottoNumbers() {

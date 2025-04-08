@@ -1,6 +1,6 @@
 package step2.generate;
 
-import step2.LotteryNumber;
+import step2.lottery.LotteryNumber;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class RandomGenerate implements Generate {
     static {
         CACHED_NUMBERS = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            CACHED_NUMBERS.add(new LotteryNumber(i));
+            CACHED_NUMBERS.add(LotteryNumber.of(i));
         }
     }
 

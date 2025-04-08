@@ -2,6 +2,8 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.winning.Winning;
+import step2.winning.WinningResults;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,15 @@ public class WinningResultsTest {
         matchResult.put(Winning.FIRST, 1);
         WinningResults winningResults = new WinningResults(matchResult);
         assertThat(winningResults.calculatePrize()).isEqualTo(2000000000);
+    }
+
+    @Test
+    @DisplayName("2등 당첨 금액을 확인한다.")
+    void SecondCalculatePrizeTest() {
+        Map<Winning, Integer> matchResult = new HashMap<>();
+        matchResult.put(Winning.SECOND, 1);
+        WinningResults winningResults = new WinningResults(matchResult);
+        assertThat(winningResults.calculatePrize()).isEqualTo(30000000);
     }
 
     @Test
