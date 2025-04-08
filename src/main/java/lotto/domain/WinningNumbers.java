@@ -10,14 +10,17 @@ public class WinningNumbers {
     private static final String DELIMITER = ",";
     private static final int MAX = 45;
     private static final int MIN = 1;
-    public List<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(String numbers) {
-        validate(numbers);
+
+    public WinningNumbers(String numbers, int bonusNumber) {
+        validate(numbers, bonusNumber);
         this.numbers = parse(numbers);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
-    private void validate(String numbers) {
+    private void validate(String numbers, int bonus) {
         if (numbers == null || numbers.isBlank()) {
             throw new IllegalArgumentException("공백이 입력되었습니다. 다시 입력해주세요.");
         }
@@ -31,6 +34,11 @@ public class WinningNumbers {
         if (hasDuplicates(lottoNumbers)) {
             throw new IllegalArgumentException("중복된 숫자가 있습니다.");
         }
+        LottoNumber bonusNumber = LottoNumber.valueOf(bonus);
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+        }
+
     }
 
     private List<LottoNumber> parse(String numbers) {
@@ -59,22 +67,22 @@ public class WinningNumbers {
         return false;
     }
 
-    public List<MatchCount> match(LottoTicket ticket) {
+    public List<MatchResult> match(LottoTicket ticket) {
         return ticket.lottoList().stream()
                 .map(this::match)
                 .collect(Collectors.toUnmodifiableList());
 
     }
 
-    private MatchCount match(Lotto lotto) {
+    private MatchResult match(Lotto lotto) {
         long matchCount = this.numbers.stream()
-                .filter(it -> lotto.numbers().contains(it))
+                .filter(lotto::contains)
                 .count();
-        return new MatchCount(matchCount);
+        return new MatchResult(matchCount, lotto.contains(this.bonusNumber));
     }
 
     public Summary summarize(LottoTicket ticket) {
-        List<MatchCount> matchCounts = match(ticket);
-        return new Summary(matchCounts);
+        List<MatchResult> matchResults = match(ticket);
+        return new Summary(matchResults);
     }
 }
