@@ -1,16 +1,14 @@
 package model.lotto;
 
 import java.util.EnumMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoResult {
     private final EnumMap<Rank, Integer> totalRank;
     private final int totalPrice;
-    private final int payAmount;
+    private final Price payAmount;
     private static final int ZERO_COUNT = 0;
 
-    public LottoResult(EnumMap<Rank, Integer> totalRank, int payAmount) {
+    public LottoResult(EnumMap<Rank, Integer> totalRank, Price payAmount) {
         this.totalRank = totalRank;
         this.totalPrice = totalRank.entrySet().stream()
                 .mapToInt(rank -> rank.getKey().getWinningPrice() * rank.getValue())
@@ -23,18 +21,11 @@ public class LottoResult {
     }
 
     public double getTotalProfitPercent() {
-        return (double) totalPrice / this.payAmount;
+        return payAmount.getPercentOf(totalPrice);
     }
 
-    public static LottoResult of(WinningLotto winningLotto, List<Lotto> paidLottoList, int payAmount) {
-        EnumMap<Rank, Integer> totalRank = paidLottoList.stream()
-                .map(paidLotto -> paidLotto.countWinningNumbers(winningLotto))
-                .collect(Collectors.toMap(
-                        rank -> rank,
-                        rank -> 1,
-                        Integer::sum,
-                        () -> new EnumMap<>(Rank.class)
-                ));
+    public static LottoResult of(WinningLotto winningLotto, Lottos paidLottoList, Price payAmount) {
+        EnumMap<Rank, Integer> totalRank = paidLottoList.countWinningNumbers(winningLotto);
         return new LottoResult(totalRank, payAmount);
     }
 }

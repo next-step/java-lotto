@@ -4,10 +4,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final Set<LottoNumber> lottoNumbers;
     private static final int LOTTO_SIZE = 6;
     private static final String INVALID_LOTTO_SIZE = "하나의 로또엔 6개의 숫자여야 한다.";
     private static final String NUMBER_DELIMITER = ", ";
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
         checkValidLotto(numbers);
@@ -62,7 +62,7 @@ public class Lotto {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + lottoNumbers.stream()
                 .sorted(Comparator.comparing(LottoNumber::getNumber))
                 .map(LottoNumber::toString)

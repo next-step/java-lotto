@@ -3,37 +3,22 @@ package model.lotto;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000) {
-        @Override
-        public boolean matches(int matchCount, int bonusMatchCount) {
-            return getMatchCount() == matchCount;
-        }
-    },
-    SECOND(5, 30_000_000){
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000) {
         @Override
         public boolean matches(int matchCount, int bonusMatchCount) {
             return getMatchCount() == matchCount && bonusMatchCount == 1;
         }
     },
-    THIRD(5, 1_500_000){
+    THIRD(5, 1_500_000) {
         @Override
         public boolean matches(int matchCount, int bonusMatchCount) {
             return getMatchCount() == matchCount && bonusMatchCount == 0;
         }
     },
-    FOURTH(4, 50_000){
-        @Override
-        public boolean matches(int matchCount, int bonusMatchCount) {
-            return getMatchCount() == matchCount;
-        }
-    },
-    FIFTH(3, 5_000){
-        @Override
-        public boolean matches(int matchCount, int bonusMatchCount) {
-            return getMatchCount() == matchCount;
-        }
-    },
-    ZERO(0, 0){
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    ZERO(0, 0) {
         @Override
         public boolean matches(int matchCount, int bonusMatchCount) {
             return false;
@@ -54,13 +39,15 @@ public enum Rank {
                 .orElse(ZERO);
     }
 
-    public int getWinningPrice(){
+    public int getWinningPrice() {
         return this.winningPrice;
     }
 
-    public int getMatchCount(){
+    public int getMatchCount() {
         return matchCount;
     }
 
-    public abstract boolean matches(int matchCount, int bonusMatchCount);
+    public boolean matches(int matchCount, int bonusMatchCount) {
+        return this.matchCount == matchCount;
+    }
 }

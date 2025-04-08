@@ -1,12 +1,13 @@
 package model.lotto;
 
 import generator.NumberGenerator;
+import ui.InputView;
+import ui.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoShop {
-
     private static final int LOTTO_PER_AMOUNT = 1000;
     private final NumberGenerator numberGenerator;
 
@@ -14,19 +15,27 @@ public class LottoShop {
         this.numberGenerator = numberGenerator;
     }
 
-    public List<Lotto> generateLotto(int price) {
-        int lottoCounts = getLottoCounts(price);
-        List<Lotto> lottos = new ArrayList<>();
-        for (int index = 0; index < lottoCounts; index++) {
-            lottos.add(new Lotto(numberGenerator.generate()));
+    public Lottos generateLotto(Price price) {
+        int totalCounts = changePriceToLottoCount(price);
+        int manualCounts = InputView.getManualLottoCount();
+        LottoCount lottoCount = new LottoCount(totalCounts, manualCounts);
+        List<Lotto> manualLottos = InputView.getManualLottoList(lottoCount.getManualLottoCount());
+        List<Lotto> autoLottos = new ArrayList<>();
+        for (int index = 0; index < lottoCount.getAutoLottoCount(); index++) {
+            autoLottos.add(new Lotto(numberGenerator.generate()));
         }
-        return lottos;
+        ResultView.printLottoCounts(lottoCount.getAutoLottoCount(), lottoCount.getManualLottoCount());
+        return new Lottos(manualLottos, autoLottos);
     }
 
-    private int getLottoCounts(int price) {
-        if(price < LOTTO_PER_AMOUNT) {
-            throw new IllegalArgumentException("구입 금액은 1000원을 넘어야합니다.");
+    private int changePriceToLottoCount(Price price) {
+        validLottoPayAmount(price);
+        return price.getPrice() / LOTTO_PER_AMOUNT;
+    }
+
+    private void validLottoPayAmount(Price price) {
+        if (price.getPrice() < LOTTO_PER_AMOUNT) {
+            throw new IllegalArgumentException("최소 구매 가능 금액은 천원입니다.");
         }
-        return price / LOTTO_PER_AMOUNT;
     }
 }

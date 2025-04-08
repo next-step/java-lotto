@@ -1,10 +1,7 @@
 package ui;
 
-import model.lotto.Lotto;
 import model.lotto.LottoResult;
 import model.lotto.Rank;
-
-import java.util.List;
 
 public class ResultView {
     public static void printLottoResults(LottoResult result) {
@@ -19,9 +16,7 @@ public class ResultView {
         System.out.println("총 수익률은 " + String.format("%.2f", result.getTotalProfitPercent()) + "% 입니다.");
     }
 
-    public static void printLottoNumbers(List<Lotto> lottos){
-        for(Lotto lotto : lottos) {
-            System.out.println(lotto.toString());
-        }
+    public static void printLottoCounts(int autoLottoCount, int manualLottoCount) {
+        System.out.printf("수동으로 %d, 자동으로 %d개를 구매했습니다. %n", manualLottoCount, autoLottoCount);
     }
 }
