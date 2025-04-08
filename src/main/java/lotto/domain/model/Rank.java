@@ -8,29 +8,21 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private int countOfMatch;
-    private int winningMoney;
+    private final int countOfMatch;
+    private final int winningMoney;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == 6) return FIRST;
-        if (countOfMatch == 5 && matchBonus) return SECOND;
-        if (countOfMatch == 5) return THIRD;
-        if (countOfMatch == 4) return FOURTH;
-        if (countOfMatch == 3) return FIFTH;
+        if (countOfMatch == FIRST.countOfMatch) return FIRST;
+        if (countOfMatch == SECOND.countOfMatch && matchBonus) return SECOND;
+        if (countOfMatch == THIRD.countOfMatch) return THIRD;
+        if (countOfMatch == FOURTH.countOfMatch) return FOURTH;
+        if (countOfMatch == FIFTH.countOfMatch) return FIFTH;
         return MISS;
-    }
-
-    public String getDescription() {
-        String description = this.countOfMatch + "개 일치";
-        if (this == SECOND) {
-            description += ", 보너스 볼 일치";
-        }
-        return description;
     }
 
     public int getCountOfMatch() {

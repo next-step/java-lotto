@@ -15,6 +15,7 @@ public class LottoController {
     public void run() {
         int purchaseAmount = InputView.getPurchaseAmount();
         LottoWallet lottoWallet = purchase(purchaseAmount);
+
         draw(lottoWallet, purchaseAmount);
     }
 

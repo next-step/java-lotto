@@ -10,6 +10,7 @@ public class MatchResult {
     private final int bonusNumber;
 
     MatchResult(LottoNumbers winNumbers, int bonusNumber) {
+        validate(winNumbers, bonusNumber);
         this.winNumbers = winNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -28,6 +29,12 @@ public class MatchResult {
         int matchCount = lotto.countMatch(this.winNumbers);
         boolean matchBonus = lotto.matchBonus(this.bonusNumber);
         this.ranks.add(Rank.valueOf(matchCount, matchBonus));
+    }
+
+    private void validate(LottoNumbers winNumbers, int bonusNumber) {
+        if (winNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("Bonus number must not be in winning numbers.");
+        }
     }
 
     private int getPrize() {

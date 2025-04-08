@@ -41,7 +41,10 @@ public class ResultView {
         if (rank == Rank.MISS) {
             return;
         }
-        String description = rank.getDescription();
+        String description = rank.getCountOfMatch() + "개 일치";
+        if (rank == Rank.SECOND) {
+            description += " + 보너스 볼 일치";
+        }
         int price = rank.getWinningMoney();
         int count = matchResults.getCount(rank);
         printMessage(description + " (" + price + "원)- " + count + "개");

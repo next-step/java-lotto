@@ -22,6 +22,10 @@ public class LottoNumbers {
                 .count();
     }
 
+    boolean contains(int number) {
+        return this.numbers.contains(number);
+    }
+
     boolean matchBonus(int bonusNumber) {
         return this.numbers.contains(bonusNumber);
     }
