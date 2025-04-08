@@ -7,36 +7,39 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
-    private static final int LOTTO_PRICE = 1000;
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_SIZE = 6;
-    private static final List<Integer> NUMBERS = IntStream
-            .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
+  private static final int LOTTO_PRICE = 1000;
+  private static final int LOTTO_SIZE = 6;
+  private static final List<LottoNumber> ALL_LOTTO_NUMBERS =
+      IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
+          .mapToObj(LottoNumber::new)
+          .collect(Collectors.toList());
 
-    public List<Lotto> generate(int money) {
-        validateMoney(money);
-        int lottoCount = money / LOTTO_PRICE;
+  public List<Lotto> generate(int money) {
+    validateMoney(money);
+    int lottoCount = money / LOTTO_PRICE;
 
-        return IntStream.range(0, lottoCount).mapToObj(i -> generateRandomLotto())
-                .collect(Collectors.toList());
+    return IntStream.range(0, lottoCount)
+        .mapToObj(i -> generateRandomLotto())
+        .collect(Collectors.toList());
+  }
+
+  private void validateMoney(int money) {
+    if (money < LOTTO_PRICE) {
+      throw new IllegalArgumentException("로또 구입 금액은 최소 1000원 이상이어야 합니다.");
     }
 
-    private void validateMoney(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException("로또 구입 금액은 최소 1000원 이상이어야 합니다.");
-        }
-
-        if (money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("로또 구입 금액은 1000원 단위여야 합니다.");
-        }
+    if (money % LOTTO_PRICE != 0) {
+      throw new IllegalArgumentException("로또 구입 금액은 1000원 단위여야 합니다.");
     }
+  }
 
-    private Lotto generateRandomLotto() {
-        List<Integer> numbers = new ArrayList<>(NUMBERS);
-        Collections.shuffle(numbers);
-        List<Integer> selectedNumbers = numbers.subList(0, LOTTO_SIZE);
-        Collections.sort(selectedNumbers);
-        return new Lotto(selectedNumbers);
-    }
+  private Lotto generateRandomLotto() {
+    List<LottoNumber> numbers = new ArrayList<>(ALL_LOTTO_NUMBERS);
+    Collections.shuffle(numbers);
+    List<LottoNumber> selectedNumbers = numbers.subList(0, LOTTO_SIZE);
+
+    selectedNumbers.sort((ln1, ln2) -> Integer.compare(ln1.getNumber(), ln2.getNumber()));
+
+    return new Lotto(selectedNumbers);
+  }
 }
