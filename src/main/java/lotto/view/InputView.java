@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
 import static lotto.domain.LottoNumbers.LOTTO_SIZE;
-import static lotto.domain.LottoStore.LOTTO_PRICE;
+import static lotto.domain.LottoPrice.LOTTO_PRICE;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);

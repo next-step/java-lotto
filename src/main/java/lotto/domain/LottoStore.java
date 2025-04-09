@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoStore {
-    public static final Integer LOTTO_PRICE = 1000;
-
     private LottoStore() {
     }
 
@@ -19,7 +17,7 @@ public class LottoStore {
             slips = List.of();
         }
 
-        int lottoCount = price / LOTTO_PRICE;
+        int lottoCount = LottoPrice.possibleTotalLottoCount(price);
 
         List<LottoNumbers> lottoNumbersList = slips.stream()
                 .map(lottoNumbers -> lottoNumbers.stream()
