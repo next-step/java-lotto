@@ -1,5 +1,6 @@
 package domain.Lotto;
 
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
@@ -12,8 +13,8 @@ public class LottoResult {
 
     private final Map<Rank, Integer> matchCounts;
 
-    public LottoResult(Map<Rank, Integer> rankCounts) {
-        this.matchCounts = rankCounts;
+    public LottoResult(Map<Rank, Integer> matchCounts) {
+        this.matchCounts = new EnumMap<>(matchCounts); // 복사할 때도 EnumMap 사용
     }
 
     public double calculateProfitRate(int totalSpent) {

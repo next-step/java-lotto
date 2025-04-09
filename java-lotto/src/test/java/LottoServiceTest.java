@@ -1,5 +1,6 @@
 import domain.Lotto.LottoService;
 import domain.Lotto.LottoTicket;
+import domain.Lotto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -25,7 +26,8 @@ class LottoServiceTest {
                 new LottoTicket(List.of(10, 11, 12, 13, 14, 15)) // 0개
         );
         LottoTicket winning = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        var result = lottoService.calculateResults(tickets, winning);
+        WinningLotto winningLotto = new WinningLotto(winning,10);
+        var result = lottoService.calculateResults(tickets, winningLotto);
 
         assertEquals(1, result.getMatchCounts().get(3));
         assertEquals(1, result.getMatchCounts().get(4));

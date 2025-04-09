@@ -1,6 +1,7 @@
 import domain.Lotto.LottoResult;
 import domain.Lotto.LottoService;
 import domain.Lotto.LottoTicket;
+import domain.Lotto.WinningLotto;
 import ui.OutputView;
 import ui.InputView;
 
@@ -21,7 +22,9 @@ public class LottoGame {
 
         LottoTicket winningTicket = inputView.getWinningTicket();
         int BonusNumber = inputView.getBonusTicket();
-        LottoResult result = lottoService.calculateResults(tickets, winningTicket,BonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningTicket, BonusNumber);
+
+        LottoResult result = lottoService.calculateResults(tickets, winningLotto);
         outputView.printResult(result);
 
     }

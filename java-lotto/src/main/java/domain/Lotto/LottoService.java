@@ -1,9 +1,6 @@
 package domain.Lotto;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoService {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -17,15 +14,17 @@ public class LottoService {
         return tickets;
     }
 
-    public LottoResult calculateResults(List<LottoTicket> tickets, LottoTicket winningTicket, int bonusNumber) {
-        Map<Rank, Integer> matchCounts = new HashMap<>();
+    public LottoResult calculateResults(List<LottoTicket> tickets, WinningLotto winningLotto) {
+        Map<Rank, Integer> matchCounts = new EnumMap<>(Rank.class);
+
         for (LottoTicket ticket : tickets) {
-            int matchCount = ticket.countMatchingNumbersWith(winningTicket);
-            boolean matchBonus = ticket.contains(bonusNumber);
+            int matchCount = ticket.countMatchingNumbersWith(winningLotto.getWinningTicket());
+            boolean matchBonus = ticket.contains(winningLotto.getBonusNumber());
 
             Rank rank = Rank.valueOf(matchCount, matchBonus);
             matchCounts.put(rank, matchCounts.getOrDefault(rank, 0) + 1);
         }
+
         return new LottoResult(matchCounts);
     }
 
