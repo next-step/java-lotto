@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,29 +10,28 @@ public class LottoStore {
     }
 
     public static List<LottoNumbers> sellLotto(final int price) {
-        return sellLotto(price, List.of());
-    }
-
-    public static List<LottoNumbers> sellLotto(final int price, List<Set<Integer>> slips) {
-        if (slips == null) {
-            slips = List.of();
-        }
-
         int lottoCount = LottoPrice.possibleTotalLottoCount(price);
 
-        List<LottoNumbers> lottoNumbersList = slips.stream()
-                .map(lottoNumbers -> lottoNumbers.stream()
-                        .map(LottoNumber::new)
-                        .collect(Collectors.toSet())
-                )
-                .map(LottoNumbers::new)
-                .collect(Collectors.toList());
-
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             LottoNumbers lottoNumber = LottoMachine.generateLottoNumber();
             lottoNumbersList.add(lottoNumber);
         }
 
         return lottoNumbersList;
+    }
+
+    public static List<LottoNumbers> sellLotto(List<Set<Integer>> slips) {
+        if (slips == null) {
+            return List.of();
+        }
+
+        return slips.stream()
+                .map(lottoNumbers -> lottoNumbers.stream()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toSet())
+                )
+                .map(LottoNumbers::new)
+                .collect(Collectors.toList());
     }
 }

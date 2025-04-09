@@ -7,6 +7,7 @@ import lotto.domain.LottoStore;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,10 @@ public class LottoMain {
 
         List<Set<Integer>> slipsLottoNumbers = InputView.getPositiveNumberSetInput("수동으로 구매할 번호를 입력해 주세요.", ",", slipsCount);
 
-        List<LottoNumbers> lottoNumbers = LottoStore.sellLotto(budget, slipsLottoNumbers);
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        lottoNumbers.addAll(LottoStore.sellLotto(slipsLottoNumbers));
+        lottoNumbers.addAll(LottoStore.sellLotto(budget));
+
         for (LottoNumbers lottoNumber : lottoNumbers) {
             ResultView.printLottoNumber(lottoNumber);
         }

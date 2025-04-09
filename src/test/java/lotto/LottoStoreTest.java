@@ -30,12 +30,8 @@ class LottoStoreTest {
     @DisplayName("로또 수동 생성 테스트")
     @Test
     public void sellLottoWithSlips() throws Exception {
-        assertThat(LottoStore.sellLotto(0, List.of(Set.of(1,2,3,4,5,6))))
+        assertThat(LottoStore.sellLotto(List.of(Set.of(1,2,3,4,5,6))))
                 .hasSize(1)
                 .containsExactly(new LottoNumbers("1,2,3,4,5,6"));
-
-        assertThat(LottoStore.sellLotto(10000, List.of(Set.of(1,2,3,4,5,6))))
-                .hasSize(11)
-                .contains(new LottoNumbers("1,2,3,4,5,6"));
     }
 }
