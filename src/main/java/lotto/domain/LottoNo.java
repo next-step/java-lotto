@@ -1,11 +1,21 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class LottoNo implements Comparable<LottoNo> {
 
   public static final int MIN_NUMBER = 1;
   public static final int MAX_NUMBER = 45;
+  private static final Map<Integer, LottoNo> CACHE = new HashMap<>();
+
+  static {
+    for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+      CACHE.put(i, new LottoNo(i));
+    }
+  }
+
   private final int number;
 
   private LottoNo(int number) {
@@ -16,7 +26,7 @@ public class LottoNo implements Comparable<LottoNo> {
     if (number < MIN_NUMBER || number > MAX_NUMBER) {
       return Optional.empty();
     }
-    return Optional.of(new LottoNo(number));
+    return Optional.of(CACHE.get(number));
   }
 
   public static LottoNo from(int number) {
