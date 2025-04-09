@@ -6,17 +6,33 @@ import java.util.List;
 
 public class LottoTicket {
     private final List<Integer> numbers;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
 
     public LottoTicket() {
         numbers = generateRandomNumbers();
     }
 
     public LottoTicket(List<Integer> numbers) {
+        validate(numbers);
+        this.numbers = new ArrayList<>(numbers);
+        Collections.sort(this.numbers); // 정렬은 선택
+    }
+
+    private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-        this.numbers = new ArrayList<>(numbers);
-        Collections.sort(this.numbers); // 정렬은 선택
+
+        long uniqueCount = numbers.stream().distinct().count();
+        if (uniqueCount != 6) {
+            throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
+        }
+
+        boolean allInRange = numbers.stream().allMatch(n -> n >= LOTTO_START_NUMBER && n <= LOTTO_END_NUMBER);
+        if (!allInRange) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+        }
     }
 
     private List<Integer> generateRandomNumbers() {
@@ -36,6 +52,16 @@ public class LottoTicket {
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+
+    public int countMatchingNumbersWith(LottoTicket winningTicket) {
+        return (int) numbers.stream()
+                .filter(winningTicket::contains)
+                .count();
+    }
+
+    public boolean contains(int number) {
+        return numbers.contains(number);
     }
 
     @Override

@@ -1,4 +1,5 @@
 import domain.Lotto.LottoResult;
+import domain.Lotto.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -9,15 +10,16 @@ class LottoResultTest {
 
     @Test
     void 수익률_계산_정확성_테스트() {
-        Map<Integer, Integer> matchCounts = Map.of(
-                3, 1,
-                4, 1,
-                5, 0,
-                6, 0
+        Map<Rank, Integer> rankCounts = Map.of(
+                Rank.FIFTH, 1,
+                Rank.FOURTH, 1,
+                Rank.THIRD, 0,
+                Rank.SECOND, 0,
+                Rank.FIRST, 0
         );
-        LottoResult result = new LottoResult(matchCounts);
+        LottoResult result = new LottoResult(rankCounts);
         double profitRate = result.calculateProfitRate(3000);
-        int expectedPrize = 5000 + 50000;
+        int expectedPrize = Rank.FIFTH.getWinningMoney() + Rank.FOURTH.getWinningMoney();
         assertEquals((double) expectedPrize / 3000, profitRate);
     }
 }

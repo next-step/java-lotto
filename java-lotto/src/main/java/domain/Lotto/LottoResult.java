@@ -1,5 +1,6 @@
 package domain.Lotto;
 
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
@@ -10,10 +11,10 @@ public class LottoResult {
             6, 2000000000
     );
 
-    private final Map<Integer, Integer> matchCounts;
+    private final Map<Rank, Integer> matchCounts;
 
-    public LottoResult(Map<Integer, Integer> matchCounts) {
-        this.matchCounts = matchCounts;
+    public LottoResult(Map<Rank, Integer> matchCounts) {
+        this.matchCounts = new EnumMap<>(matchCounts); // 복사할 때도 EnumMap 사용
     }
 
     public double calculateProfitRate(int totalSpent) {
@@ -29,7 +30,7 @@ public class LottoResult {
      *         - key: 당첨 번호 개수 (예: 3, 4, 5, 6)
      *         - value: 해당 개수만큼 맞춘 로또 티켓의 수
      */
-    public Map<Integer, Integer> getMatchCounts() {
+    public Map<Rank, Integer> getMatchCounts() {
         return matchCounts;
     }
 }
