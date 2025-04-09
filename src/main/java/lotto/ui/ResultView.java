@@ -9,6 +9,10 @@ public class ResultView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
+    public static void viewAutoManualLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println("수동으로 "+manualLottoCount+"장, 자동으로 "+autoLottoCount+"개를 구매했습니다.");
+    }
+
     public static void viewLottoTickets(LottoGame lottoGame) {
         for (LottoTicket ticket : lottoGame.getTickets().getLottoTickets()) {
             System.out.println("[" + String.join(", ", ticket.getLottoNumbers().stream()

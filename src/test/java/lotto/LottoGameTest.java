@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.factory.LottoFactory;
 import org.junit.jupiter.api.Test;
 
 
@@ -23,7 +24,7 @@ public class LottoGameTest {
 
         // 실제 게임 실행
         LottoGame lottoGame = new LottoGame(new LottoTickets(tickets));
-        GameResult gameResult = lottoGame.gameStart(new WinningLottoTicket("1, 2, 3, 4, 5, 6", 7));
+        GameResult gameResult = lottoGame.gameStart(LottoFactory.createWinningLottoTicket("1, 2, 3, 4, 5, 6", 7));
 
         // 기대하는 결과 생성 (2등, 꼴등)
         Map<Rank, Integer> expectedStats = Map.of(

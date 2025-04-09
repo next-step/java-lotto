@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.strategy.LottoStrategy;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,11 +17,16 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public List<LottoNumber> getLottoTicket() {
+        return lottoNumbers;
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
+
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> uniqueNumbers = lottoNumbers.stream().collect(Collectors.toSet());
 
@@ -34,8 +40,15 @@ public class LottoTicket {
         return new LottoTicket(generatedNumbers);
     }
 
-
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 }
