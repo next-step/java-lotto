@@ -11,11 +11,12 @@ public class WinningNumbers {
 
     public WinningNumbers(Lotto winningLotto, int bonusNumber) {
         this.winningLotto = winningLotto;
-        this.bonusNumber = new BonusNumber(bonusNumber, winningLotto);
+        this.bonusNumber = new BonusNumber(bonusNumber, this.winningLotto);
     }
 
     public WinningNumbers(List<Integer> lottoNumberList, int bonusNumber) {
         this.winningLotto = new Lotto(lottoNumberList);
+        this.bonusNumber = new BonusNumber(bonusNumber, this.winningLotto);
     }
 
     public boolean isMatch(LottoNumber lottoNumber){
