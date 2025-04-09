@@ -1,6 +1,8 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.domain.LottoTickets;
 import lotto.domain.PrizeRank;
 
@@ -11,7 +13,15 @@ public class ResultView {
   }
 
   public void printLottos(LottoTickets lottoTickets) {
-    lottoTickets.getLottoNumbersAsStrings().forEach(System.out::println);
+    lottoTickets.getLottoTickets().stream()
+        .map(lotto -> formatLottoNumbers(lotto.getNumbers()))
+        .forEach(System.out::println);
+  }
+
+  private String formatLottoNumbers(List<Integer> numbers) {
+    return numbers.stream()
+        .map(String::valueOf)
+        .collect(Collectors.joining(", ", "[", "]"));
   }
 
   public void printWinningStatistics(Map<PrizeRank, Integer> statistics, double profitRate) {

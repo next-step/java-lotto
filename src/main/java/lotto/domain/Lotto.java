@@ -45,11 +45,10 @@ public class Lotto {
     return numbers.contains(LottoNo.from(bonusBall));
   }
 
-  public String getNumbersAsString() {
+  public List<Integer> getNumbers() {
     return numbers.stream()
         .map(LottoNo::getNumber)
-        .map(String::valueOf)
-        .collect(Collectors.joining(", ", "[", "]"));
+        .collect(Collectors.toList());
   }
 
   @Override

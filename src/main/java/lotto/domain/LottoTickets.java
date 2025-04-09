@@ -69,12 +69,6 @@ public class LottoTickets {
     return new WinningStatisticsCalculator(winningNumbers, bonusBall).calculate(lottoTickets);
   }
 
-  public List<String> getLottoNumbersAsStrings() {
-    return lottoTickets.stream()
-        .map(Lotto::getNumbersAsString)
-        .collect(Collectors.toList());
-  }
-
   public List<Lotto> getLottoTickets() {
     return Collections.unmodifiableList(lottoTickets);
   }
