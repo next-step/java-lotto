@@ -3,7 +3,6 @@ package lotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,39 +42,39 @@ public class LottoTest {
 
     @Test
     void invalidLottoNumbers() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5)))));
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(46)))));
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(5)))));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 46)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 5)));
     }
 
     @Test
     void lottoRank() {
-        LottoTicket winningTicket = new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
+        LottoTicket winningTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.of(7);
         WinningResult winningResult = new WinningResult(winningTicket, bonusNumber);
 
-        LottoTicket rank1Ticket = new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
+        LottoTicket rank1Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
         assertThat(winningResult.calculateRank(rank1Ticket)).isEqualTo(Rank.FIRST);
 
-        LottoTicket rank2Ticket = new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7))));
+        LottoTicket rank2Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
         assertThat(winningResult.calculateRank(rank2Ticket)).isEqualTo(Rank.SECOND);
 
-        LottoTicket rank3Ticket = new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(8))));
+        LottoTicket rank3Ticket = new LottoTicket(List.of(1, 2, 3, 4, 5, 8));
         assertThat(winningResult.calculateRank(rank3Ticket)).isEqualTo(Rank.THIRD);
 
-        LottoTicket rank4Ticket = new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(7), LottoNumber.of(8))));
+        LottoTicket rank4Ticket = new LottoTicket(List.of(1, 2, 3, 4, 7, 8));
         assertThat(winningResult.calculateRank(rank4Ticket)).isEqualTo(Rank.FOURTH);
 
-        LottoTicket rank5Ticket = new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9))));
+        LottoTicket rank5Ticket = new LottoTicket(List.of(1, 2, 3, 7, 8, 9));
         assertThat(winningResult.calculateRank(rank5Ticket)).isEqualTo(Rank.FIFTH);
 
-        LottoTicket unrankedTicket = new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9), LottoNumber.of(10))));
+        LottoTicket unrankedTicket = new LottoTicket(List.of(1, 2, 7, 8, 9, 10));
         assertThat(winningResult.calculateRank(unrankedTicket)).isEqualTo(Rank.MISS);
     }
 
     @Test
     void validateBonusNumber() {
-        LottoTicket lottoTicket = new LottoTicket(new TreeSet<>(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
+        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningResult(lottoTicket, LottoNumber.of(6)));
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningResult(lottoTicket, LottoNumber.of(0)));
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningResult(lottoTicket, LottoNumber.of(46)));

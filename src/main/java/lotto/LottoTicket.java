@@ -29,6 +29,12 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public LottoTicket(List<Integer> numbers) {
+        this(numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toCollection(TreeSet::new)));
+    }
+
     private static void validateSize(TreeSet<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
