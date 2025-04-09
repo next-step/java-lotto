@@ -23,7 +23,7 @@ public class InputView {
 
     public static int getPositiveNumberInputWithLowBound(String prompt) {
         return getNumberInput(prompt, LOTTO_PRICE + "이상의 정수만 허용됩니다. 다시 입력해 주세요.",
-                input -> input > LOTTO_PRICE);
+                input -> input >= LOTTO_PRICE);
     }
 
     public static int getLottoNumberInput(String prompt) {
@@ -32,8 +32,8 @@ public class InputView {
     }
 
     public static int getPositiveNumberInput(String prompt) {
-        return getNumberInput(prompt, "양의 정수만 허용됩니다. 다시 입력해 주세요.",
-                input -> input > 0);
+        return getNumberInput(prompt, "0 이상의 정수만 허용됩니다. 다시 입력해 주세요.",
+                input -> input >= 0);
     }
 
     private static int getNumberInput(String prompt, String errorMessage, Predicate<Integer> predicate) {
@@ -42,6 +42,9 @@ public class InputView {
         while (true) {
             try {
                 int result = scanner.nextInt();
+
+                // scanner.nextInt() 는 개행 문자를 제거하지 못해 nextInt 이후 nextLine 으로 개행 제거
+                scanner.nextLine();
 
                 if (predicate.test(result)) {
                     return result;
