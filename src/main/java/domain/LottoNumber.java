@@ -25,4 +25,8 @@ public class LottoNumber {
         LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }
+
+    public int getNumber() {
+        return number;
+    }
 }

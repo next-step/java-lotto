@@ -41,7 +41,6 @@ public class Lotto {
 
     public void matchRank(WinningNumbers winningNumbers) {
         int countOfMatch = this.getMatchCount(winningNumbers);
-
         boolean matchBonus = this.isMatchBonus(winningNumbers.getBonusNumber());
 
         this.rank = Rank.valueOf(countOfMatch, matchBonus);
@@ -55,6 +54,10 @@ public class Lotto {
         return (int) this.lottoNumberList.stream()
             .filter(winningNumbers::isMatch)
             .count();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumberList.contains(lottoNumber);
     }
 
 

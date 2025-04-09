@@ -21,8 +21,4 @@ public class LottoBundle {
             lotto.matchRank(winningNumbers);
         }
     }
-
-    public List<Lotto> getLottoList() {
-        return this.lottoList;
-    }
 }

@@ -6,25 +6,20 @@ import static domain.Lotto.convertLottoNumberList;
 import static domain.LottoGenerator.DRAW_NUMBER_COUNT;
 
 public class WinningNumbers {
-    private List<LottoNumber> winningNumberList;
+    private Lotto winningLotto;
     private BonusNumber bonusNumber;
 
-    public WinningNumbers(List<Integer> winningNumberList, int bonusNumber) {
-        if (winningNumberList == null || winningNumberList.isEmpty()) {
-            throw new IllegalArgumentException("winningNumberList는 null이거나 비어있을 수 없습니다.");
-        }
+    public WinningNumbers(Lotto winningLotto, int bonusNumber) {
+        this.winningLotto = winningLotto;
+        this.bonusNumber = new BonusNumber(bonusNumber, winningLotto);
+    }
 
-        if (winningNumberList.size() != DRAW_NUMBER_COUNT) {
-            throw new IllegalArgumentException("winningNumberList의 사이즈가 잘못되었습니다. winningNumberList.size() : " + winningNumberList.size());
-        }
-
-
-        this.winningNumberList = convertLottoNumberList(winningNumberList);
-        this.bonusNumber = new BonusNumber(bonusNumber, winningNumberList);
+    public WinningNumbers(List<Integer> lottoNumberList, int bonusNumber) {
+        this.winningLotto = new Lotto(lottoNumberList);
     }
 
     public boolean isMatch(LottoNumber lottoNumber){
-        return winningNumberList.contains(lottoNumber);
+        return winningLotto.contains(lottoNumber);
     }
 
     public BonusNumber getBonusNumber(){

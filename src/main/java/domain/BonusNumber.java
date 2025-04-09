@@ -9,10 +9,10 @@ public class BonusNumber {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public BonusNumber(int bonusNumber, List<Integer> winningNumberList) {
+    public BonusNumber(int bonusNumber, Lotto winningLotto) {
         this(bonusNumber);
 
-        if (winningNumberList.contains(bonusNumber)) {
+        if (winningLotto.contains(this.bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호에 보너스 넘버가 포함되어있습니다. number : " + bonusNumber);
         }
     }

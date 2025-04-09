@@ -9,13 +9,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class WinningNumbersTest {
-        @Test
-    void 당첨번호가_null이면_예외() {
-        assertThatThrownBy(() -> new WinningNumbers(null, 7))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("winningNumberList는 null이거나 비어있을 수 없습니다.");
-    }
-
     @Test
     void 당첨번호가_빈_리스트이면_예외() {
         assertThatThrownBy(() -> new WinningNumbers(Collections.emptyList(), 7))

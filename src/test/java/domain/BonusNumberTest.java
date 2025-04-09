@@ -12,10 +12,10 @@ class BonusNumberTest {
 
     @Test
     void 보너스번호가_당첨번호에_포함되면_예외() {
-        List<Integer> winningNums = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusNum = 3;
 
-        assertThatThrownBy(() -> new BonusNumber(bonusNum, winningNums))
+        assertThatThrownBy(() -> new BonusNumber(bonusNum, winningLotto))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("당첨 번호에 보너스 넘버가 포함되어있습니다.");
     }
