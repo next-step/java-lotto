@@ -9,6 +9,10 @@ import java.util.List;
 public class LottoWallet {
     private final List<LottoTicket> lottos = new ArrayList<>();
 
+    public void addLottos(List<LottoTicket> lottos) {
+        this.lottos.addAll(lottos);
+    }
+
     public void addLotto(LottoTicket lotto) {
         this.lottos.add(lotto);
     }

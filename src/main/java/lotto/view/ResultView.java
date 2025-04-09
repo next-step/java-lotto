@@ -12,9 +12,8 @@ import java.util.stream.Collectors;
 
 
 public class ResultView {
-    public static void printPurchasedLottos(LottoWallet lottoWallet) {
-        int count = lottoWallet.getCount();
-        printMessage(count + "개를 구매했습니다.");
+    public static void printPurchasedLottos(LottoWallet lottoWallet, int manualLottoCount, int autoLottoCount) {
+        printMessage("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
         for (LottoTicket lotto : lottoWallet.getLottos()) {
             printLottoTicket(lotto);
         }

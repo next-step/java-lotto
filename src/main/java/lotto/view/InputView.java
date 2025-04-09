@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.model.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -14,16 +15,28 @@ public class InputView {
         return getIntInput("구입금액을 입력해 주세요.");
     }
 
-    public static List<LottoNumber> getWinNumbers() {
-        String stringInput = getStringInput("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> parsedInput = parseIntFromString(stringInput);
-        return parsedInput.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    public static int getManualLottoCount() {
+        return getIntInput("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
-    public static LottoNumber getBonusNumber() {
-        return new LottoNumber(getIntInput("보너스 볼을 입력해 주세요."));
+    public static List<List<Integer>> getManualNumbersList(int manualLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> manualNumbersList = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            String stringInput = scanner.nextLine();
+            List<Integer> manualNumbers = parseIntFromString(stringInput);
+            manualNumbersList.add(manualNumbers);
+        }
+        return manualNumbersList;
+    }
+
+    public static List<Integer> getWinNumbers() {
+        String stringInput = getStringInput("지난 주 당첨 번호를 입력해 주세요.");
+        return parseIntFromString(stringInput);
+    }
+
+    public static int getBonusNumber() {
+        return getIntInput("보너스 볼을 입력해 주세요.");
     }
 
     private static List<Integer> parseIntFromString(String input) {

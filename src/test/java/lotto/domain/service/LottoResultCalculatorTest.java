@@ -12,16 +12,8 @@ public class LottoResultCalculatorTest {
     @DisplayName("로또 결과를 계산한다.")
     @Test
     void evaluateLottostest() {
-        List<LottoNumber> winNumbers = List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        );
-
-        LottoNumber bonusNumber = new LottoNumber(7);
+        List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
         WinningTicket winningTicket = new WinningTicket(winNumbers, bonusNumber);
 
         List<LottoTicket> lottos = List.of(

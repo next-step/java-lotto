@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.model.*;
-import lotto.domain.generator.RandomLottoNumberGenerator;
+import lotto.domain.generator.RandomLottoTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import lotto.domain.service.LottoMachine;
@@ -10,24 +10,32 @@ import java.util.List;
 
 
 public class LottoController {
-    private final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberGenerator());
-
     public void run() {
         int purchaseAmount = InputView.getPurchaseAmount();
-        LottoWallet lottoWallet = purchase(purchaseAmount);
+        int manualLottoCount = InputView.getManualLottoCount();
+        List<List<Integer>> manualNumbersList = InputView.getManualNumbersList(manualLottoCount);
+        LottoWallet lottoWallet = purchase(purchaseAmount, manualNumbersList);
 
-        draw(lottoWallet, purchaseAmount);
+        List<Integer> winNumbers = InputView.getWinNumbers();
+        int bonusNumber = InputView.getBonusNumber();
+        draw(winNumbers, bonusNumber, lottoWallet, purchaseAmount);
     }
 
-    private LottoWallet purchase(int purchaseAmount) {
-        LottoWallet lottoWallet = this.lottoMachine.buyLottos(purchaseAmount);
-        ResultView.printPurchasedLottos(lottoWallet);
+    private LottoWallet purchase(int purchaseAmount, List<List<Integer>> manualNumbersList) {
+        LottoWallet lottoWallet = new LottoWallet();
+        LottoMachine lottoMachine = new LottoMachine(new RandomLottoTicketGenerator(), purchaseAmount);
+
+        List<LottoTicket> manualLottos = lottoMachine.buyManualLottos(manualNumbersList);
+        lottoWallet.addLottos(manualLottos);
+
+        List<LottoTicket> automaticLottos = lottoMachine.buyAutomaticLottos();
+        lottoWallet.addLottos(automaticLottos);
+
+        ResultView.printPurchasedLottos(lottoWallet, manualNumbersList.size(), automaticLottos.size());
         return lottoWallet;
     }
 
-    private void draw(LottoWallet lottoWallet, int purchaseAmount) {
-        List<LottoNumber> winNumbers = InputView.getWinNumbers();
-        LottoNumber bonusNumber = InputView.getBonusNumber();
+    private void draw(List<Integer> winNumbers, int bonusNumber, LottoWallet lottoWallet, int purchaseAmount) {
         WinningTicket winningTicket = new WinningTicket(winNumbers, bonusNumber);
 
         MatchResult result = lottoWallet.countMatches(winningTicket);
