@@ -7,22 +7,26 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    private static final String LOTTO_TICKET_AMOUNT_MESSAGE = "%d개를 구매했습니다.";
+    private static final String LOTTO_TICKET_AMOUNT_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String RETURN_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
 
-    public void printLottoTicketAmount(int amount) {
-        System.out.printf(LOTTO_TICKET_AMOUNT_MESSAGE + "%n", amount);
+    private ResultView() {
     }
 
-    public void printLottoNumbers(List<Integer> numbers) {
+    public static void printLottoTicketAmount(int manualAmount, int autoAmount) {
+        System.out.println();
+        System.out.printf(LOTTO_TICKET_AMOUNT_MESSAGE + "%n", manualAmount, autoAmount);
+    }
+
+    public static void printLottoNumbers(List<Integer> numbers) {
         System.out.println(numbers.toString());
     }
 
-    public void printReturnRate(double returnRate) {
+    public static void printReturnRate(double returnRate) {
         System.out.printf(RETURN_RATE_MESSAGE + "%n", returnRate);
     }
 
-    public void printMatchResult(Map<Rank, Integer> result) {
+    public static void printMatchResult(Map<Rank, Integer> result) {
         System.out.println("\n당첨 통계\n---------");
         Arrays.stream(Rank.values())
                 .filter(rank -> rank.getMatchCount() >= 3)

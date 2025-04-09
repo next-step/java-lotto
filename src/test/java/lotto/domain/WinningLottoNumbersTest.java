@@ -15,9 +15,9 @@ class WinningLottoNumbersTest {
     @Test
     @DisplayName("당첨 번호와 보너스 번호가 중복이면 예외를 반환한다.")
     void validateDuplicationTest() {
-        List<LottoNumber> winningNumbers = IntStream.rangeClosed(1, 6)
+        LottoTicket winningNumbers = new LottoTicket(IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
         LottoNumber bonusNumber = new LottoNumber(1);
 
         Assertions.assertThatIllegalArgumentException()
@@ -28,9 +28,9 @@ class WinningLottoNumbersTest {
     @DisplayName("당첨 번호와 구매한 로또를 비교하여 몇개의 숫자가 동일한지 비교한다.")
     void constructorTest() {
         // given
-        List<LottoNumber> winningNumbers = IntStream.rangeClosed(1, 6)
+        LottoTicket winningNumbers = new LottoTicket(IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
         LottoNumber bonusNumber = new LottoNumber(7);
         List<List<Integer>> lottos = List.of(
                 List.of(1, 2, 3, 4, 5, 6),  // 6개 일치 (1개)

@@ -8,20 +8,20 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-        Parser parser = new Parser();
+        Money price = InputView.getPurchasePrice();
+        TicketAmount manualLottoAmount = InputView.getManualLottoAmount();
+        TicketAmount totalLottoAmount = LottoShop.validateAndGetTotalTicketAmount(price, manualLottoAmount);
+        List<LottoTicket> manualLotto = InputView.getManualLottoNumbers(manualLottoAmount);
 
-        int price = inputView.getPurchasePrice();
-        LottoShop lottoShop = new LottoShop(price, new LottoAutoGenerator());
-        resultView.printLottoTicketAmount(lottoShop.getTicketAmount());
-        lottoShop.getLottoTicketsNumber().forEach(resultView::printLottoNumbers);
+        LottoShop lottoShop = new LottoShop(price, totalLottoAmount, manualLottoAmount, manualLotto);
+        ResultView.printLottoTicketAmount(lottoShop.getManualTicketAmount(), lottoShop.getAutoTicketAmount());
+        lottoShop.getLottoTicketsNumber().forEach(ResultView::printLottoNumbers);
 
-        List<LottoNumber> winningNumbers = parser.splitAndParseToLottoNumberList(inputView.getWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(inputView.getBonusNumber());
+        LottoTicket winningNumbers = InputView.getWinningLotto();
+        LottoNumber bonusNumber = InputView.getBonusNumber();
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonusNumber);
         LottoEarning lottoEarning = LottoEarning.from(winningLottoNumbers.calculateResult(lottoShop.getLottoTicketsNumber()), lottoShop.getPurchasePrice());
-        resultView.printMatchResult(lottoEarning.getResult());
-        resultView.printReturnRate(lottoEarning.getReturnRate());
+        ResultView.printMatchResult(lottoEarning.getResult());
+        ResultView.printReturnRate(lottoEarning.getReturnRate());
     }
 }

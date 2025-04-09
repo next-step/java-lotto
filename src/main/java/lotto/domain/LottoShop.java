@@ -2,35 +2,52 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- * 로또 티켓을 생성하고 관리
+ * 로또 티켓을 관리
  */
 public class LottoShop {
-    private static final int PRICE_PER_TICKET = 1000;
-    private final int purchasePrice;
-    private final int ticketAmount;
+    private static final Money PRICE_PER_TICKET = new Money(1000);
+    private static final LottoAutoGenerator LOTTO_AUTO_GENERATOR = new LottoAutoGenerator();
+    private final Money purchasePrice;
+    private final TicketAmount totalTicketAmount;
+    private final TicketAmount manualTicketAmount;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoShop(int price, LottoAutoGenerator lottoAutoGenerator) {
-        validatePrice(price);
-        this.purchasePrice = price;
-        this.ticketAmount = calculateTicketAmount(price);
-        List<LottoTicket> temp = new ArrayList<>();
-        for (int i = 0; i < ticketAmount; i++) {
-            temp.add(lottoAutoGenerator.generateLottoTicket());
-        }
-        this.lottoTickets = List.copyOf(temp);
+    public LottoShop(Money purchasePrice, TicketAmount totalTicketAmount, TicketAmount manualTicketAmount, List<LottoTicket> manualLotto) {
+        this.purchasePrice = purchasePrice;
+        this.totalTicketAmount = totalTicketAmount;
+        this.manualTicketAmount = manualTicketAmount;
+
+        List<LottoTicket> autoLotto = sellAutoLottoTicket(totalTicketAmount.minus(manualTicketAmount));
+        this.lottoTickets = Stream.concat(manualLotto.stream(), autoLotto.stream())
+                .collect(Collectors.toList());
     }
 
-    private void validatePrice(int price) {
-        if (price < 0) {
-            throw new IllegalArgumentException("로또 구매 가능 가격은 0원 이상입니다.");
+    public static TicketAmount validateAndGetTotalTicketAmount(Money price, TicketAmount manualAmount) {
+        TicketAmount totalAmount = calculateTicketAmount(price);
+        validateManualTicketAmount(totalAmount, manualAmount);
+        return totalAmount;
+    }
+
+    private static TicketAmount calculateTicketAmount(Money price) {
+        return new TicketAmount(price.getPrice() / PRICE_PER_TICKET.getPrice());
+    }
+
+    private static void validateManualTicketAmount(TicketAmount total, TicketAmount manual) {
+        if (manual.isGreaterThan(total)) {
+            throw new IllegalArgumentException("수동 로또의 갯수가 전체 로또 갯수를 넘을 수 없습니다.");
         }
     }
 
-    private int calculateTicketAmount(int price) {
-        return price / PRICE_PER_TICKET;
+    public List<LottoTicket> sellAutoLottoTicket(TicketAmount amount) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < amount.getAmount(); i++) {
+            tickets.add(LOTTO_AUTO_GENERATOR.generateLottoTicket());
+        }
+        return tickets;
     }
 
     public List<List<Integer>> getLottoTicketsNumber() {
@@ -40,10 +57,18 @@ public class LottoShop {
     }
 
     public int getPurchasePrice() {
-        return this.purchasePrice;
+        return this.purchasePrice.getPrice();
     }
 
-    public int getTicketAmount() {
-        return ticketAmount;
+    public int getTotalTicketAmount() {
+        return totalTicketAmount.getAmount();
+    }
+
+    public int getManualTicketAmount() {
+        return manualTicketAmount.getAmount();
+    }
+
+    public int getAutoTicketAmount() {
+        return totalTicketAmount.getAmount() - manualTicketAmount.getAmount();
     }
 }

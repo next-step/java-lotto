@@ -4,31 +4,29 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoShopTest {
-    static final int PRICE_PER_TICKET = 1000;
 
     @Test
-    @DisplayName("구매 금액이 0보다 작으면 예외를 반환한다.")
-    void validatePriceTest_priceLtZero() {
-        int input = -1;
-        LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+    @DisplayName("수동 티켓 수가 총 티켓 수를 초과하면 예외 발생한다")
+    void validateAndGetTotalTicketAmountTest_manualGtTotal() {
+        Money price = new Money(3000);
+        TicketAmount manualAmount = new TicketAmount(5);
 
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoShop(input, lottoAutoGenerator))
-                .withMessageContaining("로또 구매 가능 가격은 0원 이상입니다.");
+                .isThrownBy(() -> LottoShop.validateAndGetTotalTicketAmount(price, manualAmount));
     }
 
     @Test
     @DisplayName("구매 금액으로 살 수 있는 로또 갯수를 반환한다(로또 1장의 가격은 1000원이다.)")
-    void calculateTicketAmount() {
-        int input = 14000;
-        LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+    void validateAndGetTotalTicketAmountTest_returnsTotalAmount() {
+        Money price = new Money(5000); // 5장
+        TicketAmount manualAmount = new TicketAmount(3);
 
-        LottoShop lottoShop = new LottoShop(input, lottoAutoGenerator);
+        TicketAmount total = LottoShop.validateAndGetTotalTicketAmount(price, manualAmount);
 
-        assertEquals(input / PRICE_PER_TICKET, lottoShop.getTicketAmount());
+        assertThat(total.getAmount()).isEqualTo(5);
     }
 
 }
