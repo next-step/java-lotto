@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.factory.LottoFactory;
 import lotto.strategy.AutoLottoStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ public class LottoTicketTest {
     @DisplayName("contains()는 LottoNumber가 리스트에 포함되어 있는지 확인한다")
     void contains_LottoNumberExists() {
         String input = "1, 2, 3, 4, 5, 6";
-        LottoTicket lottoTicket = new LottoTicket(input);
+        LottoTicket lottoTicket = LottoFactory.createLottoTicket(input);
         LottoNumber targetNumber = LottoNumber.of(3);
 
         assertTrue(lottoTicket.contains(targetNumber));
@@ -66,7 +67,7 @@ public class LottoTicketTest {
     @DisplayName("contains()는 LottoNumber가 리스트에 포함되어 있지 않으면 false를 반환한다")
     void contains_LottoNumberDoesNotExist() {
         String input = "1, 2, 3, 4, 5, 6";
-        LottoTicket lottoTicket = new LottoTicket(input);
+        LottoTicket lottoTicket = LottoFactory.createLottoTicket(input);
         LottoNumber targetNumber = LottoNumber.of(7);
 
         assertFalse(lottoTicket.contains(targetNumber));

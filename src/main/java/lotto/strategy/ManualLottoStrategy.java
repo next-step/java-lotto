@@ -11,7 +11,6 @@ public class ManualLottoStrategy implements LottoStrategy {
 
     public ManualLottoStrategy(List<LottoNumber> numbers) {
         this.lottoNumbers = numbers;
-
     }
 
     public ManualLottoStrategy(LottoTicket lottoTicket) {

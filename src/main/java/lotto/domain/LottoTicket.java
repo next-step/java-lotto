@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.strategy.LottoStrategy;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -16,10 +15,6 @@ public class LottoTicket {
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public LottoTicket(String input) {
-        this(createLottoTicket(input));
     }
 
     public List<LottoNumber> getLottoTicket() {
@@ -43,15 +38,6 @@ public class LottoTicket {
     public static LottoTicket generateLottoNumbers(LottoStrategy lottoStrategy) {
         List<LottoNumber> generatedNumbers = lottoStrategy.generateLottoNumbers();
         return new LottoTicket(generatedNumbers);
-    }
-
-    static List<LottoNumber> createLottoTicket(String input) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(input.trim().split(","))
-                .map(String::trim)        // 각 번호의 공백 제거
-                .map(Integer::parseInt)   // 문자열을 숫자로 변환
-                .map(LottoNumber::of)     // 숫자를 LottoNumber로 변환
-                .collect(Collectors.toList()); // List<LottoNumber>로 수집
-        return lottoNumbers;
     }
 
     public boolean contains(LottoNumber lottoNumber) {

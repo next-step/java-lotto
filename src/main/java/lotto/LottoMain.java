@@ -2,9 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoTickets;
-import lotto.factory.ManualLottoFactory;
 import lotto.strategy.AutoLottoStrategy;
-import lotto.strategy.ManualLottoStrategy;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -16,12 +14,11 @@ public class LottoMain {
 
         int manualCount = InputView.inputManualLottoCount();
         List<String> manualLottoTickets = InputView.inputManualLottoTickets(manualCount);
-        LottoTickets manualTickets = ManualLottoFactory.createTickets(manualLottoTickets);
 
-        LottoTickets autoTickets = LottoTickets.purchase(lottoPrice, manualCount, new AutoLottoStrategy());
-        ResultView.viewAutoManualLottoCount(manualTickets.getCount(), autoTickets.getCount());
+        LottoTickets allTickets = LottoTickets.purchase(lottoPrice, manualCount, manualLottoTickets, new AutoLottoStrategy());
+        ResultView.viewAutoManualLottoCount(manualCount, allTickets.getCount()-manualCount);
 
-        LottoGame lottoGame = new LottoGame(LottoTickets.merge(manualTickets, autoTickets));
+        LottoGame lottoGame = new LottoGame(allTickets);
         ResultView.viewLottoTickets(lottoGame);
 
         ResultView.viewWinningStatistics(lottoGame.gameStart(InputView.inputWinningLottoNumbers()));

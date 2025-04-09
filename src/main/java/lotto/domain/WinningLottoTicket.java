@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class WinningLottoTicket {
     private final List<LottoNumber> lottoNumbers;
@@ -10,10 +11,6 @@ public class WinningLottoTicket {
         validateNumbers(lottoNumbers, bonusNumber);
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
-    }
-
-    public WinningLottoTicket(final String lottoNumbers, final int bonusNumber) {
-        this(LottoTicket.createLottoTicket(lottoNumbers), LottoNumber.of(bonusNumber));
     }
 
     private void validateNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
@@ -38,4 +35,13 @@ public class WinningLottoTicket {
     public boolean hasBonusMatch(LottoTicket userLottoTicket) {
         return userLottoTicket.contains(bonusNumber); // 직접 LottoTicket에 contains 호출
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningLottoTicket that = (WinningLottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers) && Objects.equals(bonusNumber, that.bonusNumber);
+    }
+
 }

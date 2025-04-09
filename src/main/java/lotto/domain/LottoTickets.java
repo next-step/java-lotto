@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.factory.LottoFactory;
 import lotto.strategy.LottoStrategy;
 
 import java.util.ArrayList;
@@ -24,9 +25,30 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
-    public static LottoTickets purchase(int payment, int manualCount, LottoStrategy lottoStrategy) {
+    public static LottoTickets purchase(int payment, int manualCount, List<String> manualLottoInputs, LottoStrategy lottoStrategy) {
         int count = payment / LOTTO_PRICE;
-        return fromNumbers(count - manualCount, lottoStrategy);
+        validLottoTickets(payment, manualCount);
+        LottoTickets manualTickets = LottoFactory.createTickets(manualLottoInputs);
+        LottoTickets autoTickets = fromNumbers(count - manualCount, lottoStrategy);
+        return LottoTickets.merge(manualTickets, autoTickets);
+    }
+
+    public static LottoTickets merge(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+        // 두 LottoTickets 객체의 내부 리스트를 가져와 병합
+        List<LottoTicket> merged = new ArrayList<>(manualLottoTickets.getLottoTickets());
+        merged.addAll(autoLottoTickets.getLottoTickets());
+
+        // 병합된 리스트로 새로운 LottoTickets 객체 생성
+        return new LottoTickets(merged);
+    }
+
+    private static void validLottoTickets(int totalPrice, int manualLottoCount) {
+        int totalCount = totalPrice / LottoTickets.LOTTO_PRICE;
+        if (totalCount < manualLottoCount) {
+            throw new IllegalArgumentException(
+                    "수동으로 구매하려는 로또 개수가 총 구매 가능한 개수를 초과했습니다."
+            );
+        }
     }
 
     public List<LottoTicket> getLottoTickets() {
@@ -60,15 +82,5 @@ public class LottoTickets {
                 .mapToInt(entry -> entry.getKey().getWinningMoney() * entry.getValue())
                 .sum();
         return (double) totalWon / totalSpent;
-    }
-
-
-    public static LottoTickets merge(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
-        // 두 LottoTickets 객체의 내부 리스트를 가져와 병합
-        List<LottoTicket> merged = new ArrayList<>(manualLottoTickets.getLottoTickets());
-        merged.addAll(autoLottoTickets.getLottoTickets());
-
-        // 병합된 리스트로 새로운 LottoTickets 객체 생성
-        return new LottoTickets(merged);
     }
 }

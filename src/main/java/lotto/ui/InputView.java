@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.WinningLottoTicket;
+import lotto.factory.LottoFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,10 @@ public class InputView {
 
     public static WinningLottoTicket inputWinningLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String test = SCANNER.nextLine();
         String input = SCANNER.nextLine();
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonus = SCANNER.nextInt();
-        return new WinningLottoTicket(input, bonus);
+        return LottoFactory.createWinningLottoTicket(input, bonus);
     }
 
     public static List<String> inputManualLottoTickets(int count) {
