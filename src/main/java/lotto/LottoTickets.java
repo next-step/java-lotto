@@ -49,4 +49,14 @@ public class LottoTickets {
     public int getManualTicketCount() {
         return getLottoTicketCount() - getAutoTicketCount();
     }
+
+    public List<Rank> getRanks(WinningResult winningResult) {
+        return lottoTickets.stream()
+                .map(winningResult::calculateRank)
+                .collect(Collectors.toList());
+    }
+
+    public long getPurchaseAmount() {
+        return getLottoTicketCount() * LottoTicket.PRICE;
+    }
 }

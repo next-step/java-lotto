@@ -29,7 +29,11 @@ public class LottoGame {
         int bonusNumberValue = InputView.inputBonusNumber();
         LottoNumber bonusNumber = LottoNumber.of(bonusNumberValue);
         WinningResult winningResult = new WinningResult(winningTicket, bonusNumber);
-        ResultView.printResult(lottoTickets, winningResult);
+
+        List<Rank> ranks = lottoTickets.getRanks(winningResult);
+        long purchaseAmount = lottoTickets.getPurchaseAmount();
+        LottoResult lottoResult = new LottoResult(ranks, purchaseAmount);
+        ResultView.printResult(lottoResult);
     }
 
     private static List<LottoTicket> toLottoTickets(List<List<Integer>> manualTicketList) {

@@ -1,12 +1,7 @@
 package lotto.ui;
 
-import lotto.LottoTicket;
+import lotto.LottoResult;
 import lotto.LottoTickets;
-import lotto.Rank;
-import lotto.WinningResult;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static lotto.Rank.*;
 
@@ -18,20 +13,14 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printResult(LottoTickets lottoTickets, WinningResult winningResult) {
-        List<Rank> ranks = lottoTickets.getLottoTickets().stream()
-                .map(winningResult::calculateRank)
-                .collect(Collectors.toList());
+    public static void printResult(LottoResult lottoResult) {
+        long rank5Count = lottoResult.getRankCount(FIFTH);
+        long rank4Count = lottoResult.getRankCount(FOURTH);
+        long rank3Count = lottoResult.getRankCount(THIRD);
+        long rank2Count = lottoResult.getRankCount(SECOND);
+        long rank1Count = lottoResult.getRankCount(FIRST);
 
-        long rank5Count = ranks.stream().filter(FIFTH::equals).count();
-        long rank4Count = ranks.stream().filter(FOURTH::equals).count();
-        long rank3Count = ranks.stream().filter(THIRD::equals).count();
-        long rank2Count = ranks.stream().filter(SECOND::equals).count();
-        long rank1Count = ranks.stream().filter(FIRST::equals).count();
-
-        long totalPrize = rank5Count * FIFTH.getPrize() + rank4Count * FOURTH.getPrize() + rank3Count * THIRD.getPrize()
-                + rank2Count * SECOND.getPrize() + rank1Count * FIRST.getPrize();
-        double totalPrizeRate = (double) totalPrize / (lottoTickets.getLottoTicketCount() * LottoTicket.PRICE);
+        double totalPrizeRate = lottoResult.getTotalPrizeRate();
 
         System.out.println("당첨 통계");
         System.out.println("---------");
