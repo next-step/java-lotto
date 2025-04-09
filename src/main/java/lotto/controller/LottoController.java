@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 import lotto.service.LottoService;
@@ -30,7 +31,7 @@ public class LottoController {
   }
 
   private LottoTickets createLottoTickets() {
-    int price = inputView.readPrice();
+    LottoPrice price = LottoPrice.from(inputView.readPrice());
     int manualLottoCount = inputView.readManualLottoCount();
     List<List<Integer>> manualLottoNumbers = inputView.readManualLottoNumbers(manualLottoCount);
 
@@ -46,6 +47,6 @@ public class LottoController {
   private LottoStatistics calculateWinningStatistics(LottoTickets lottoTickets) {
     List<Integer> winningNumbers = inputView.readWinningNumbers();
     int bonusBall = inputView.readBonusBall();
-    return lottoService.calculateWinningStatistics(lottoTickets, winningNumbers, bonusBall);
+    return lottoService.calculateWinningStatistics(lottoTickets, new Lotto(winningNumbers), bonusBall);
   }
 } 
