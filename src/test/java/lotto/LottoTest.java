@@ -13,7 +13,7 @@ public class LottoTest {
 
     @Test
     void lottoNumber() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(47));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(46));
     }
 
     @Test
