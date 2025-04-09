@@ -34,12 +34,15 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        // 2등 조건을 예외케이스로 먼저 분리
+        if (countOfMatch == 5 && matchBonus) {
+            return SECOND;
+        }
+
+        // 나머지는 matchBonus 무시하고 countOfMatch로만 처리
         return Arrays.stream(values())
-                .filter(rank -> rank.countOfMatch == countOfMatch && rank.matchBonus == matchBonus)
+                .filter(rank -> rank.countOfMatch == countOfMatch && !rank.matchBonus)
                 .findFirst()
-                .orElseGet(() -> Arrays.stream(values())
-                        .filter(rank -> rank.countOfMatch == countOfMatch && !rank.matchBonus)
-                        .findFirst()
-                        .orElse(MISS));
+                .orElse(MISS);
     }
 }
