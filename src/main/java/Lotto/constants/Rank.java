@@ -2,8 +2,6 @@ package Lotto.constants;
 
 import java.util.Arrays;
 
-import static Lotto.domain.Lottos.LOTTO_PICK_COUNT;
-
 public enum Rank implements RankMatcher {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 30_000_000),

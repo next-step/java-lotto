@@ -2,7 +2,6 @@ package Lotto.domain;
 
 import Lotto.constants.Rank;
 
-
 import java.util.*;
 
 public class ResultStats {
