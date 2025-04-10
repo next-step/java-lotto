@@ -19,6 +19,6 @@ class LottoPrizeTest {
             "7, false, MISS",
     })
     void valueOf(int count, boolean hitBonus, LottoPrize lottPrize) {
-        assertEquals(lottPrize, LottoPrize.valueOf(new MatchedLottoCount(count, hitBonus)));
+        assertEquals(lottPrize, LottoPrize.valueOf(count, hitBonus));
     }
 }

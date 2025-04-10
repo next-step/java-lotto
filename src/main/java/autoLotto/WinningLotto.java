@@ -4,11 +4,11 @@ import java.util.Set;
 
 public class WinningLotto extends Lotto {
 
-    int bonus;
+    LottoNumber bonus;
 
-    public WinningLotto(Set<Integer> numbers, int bonus) {
+    public WinningLotto(String numbers, String bonus) {
         super(numbers);
-        this.bonus = bonus;
+        this.bonus = new LottoNumber(Integer.parseInt(bonus));
     }
 
     public void validate() {
@@ -18,7 +18,16 @@ public class WinningLotto extends Lotto {
         }
     }
 
-    public boolean containsBonusNumber(int number) {
+    public LottoPrize getLottoPrize(Lotto lotto) {
+        long matched = numbers.stream()
+                         .filter(lotto.numbers::contains)
+                         .count();
+        boolean isBonusNumber = lotto.numbers.contains(bonus) && matched == LottoPrize.SECOND.getMatchedCount();
+
+        return LottoPrize.valueOf(matched, isBonusNumber);
+    }
+
+    public boolean containsBonusNumber(LottoNumber number) {
         return bonus == number;
     }
 }

@@ -7,9 +7,9 @@ public class LottoGame {
 
     void play() {
         int budget = inputView.getLottoBudget();
-        outputView.printLottoCount(budget);
-
         LottoResult lottoResult = new LottoResult(budget);
+        outputView.printLottoCount(lottoResult.getPurchasedLottoCount());
+
 
         AutoLotto autoLottos = new AutoLotto(lottoResult.getPurchasedLottoCount());
         System.out.println(autoLottos);
@@ -24,9 +24,7 @@ public class LottoGame {
 
     private void processLottoResult(LottoResult lottoResult, AutoLotto autoLotto, WinningLotto winningNumber) {
         autoLotto.getLottos()
-                 .forEach(lotto ->
-                              lottoResult.addMatchCount(LottoPrize.valueOf(lotto.getMatchedNumberCount(winningNumber)))
-                         );
+                .forEach( lotto -> lottoResult.addMatchCount(winningNumber.getLottoPrize(lotto)));
     }
 
     public static void main(String[] args) {
