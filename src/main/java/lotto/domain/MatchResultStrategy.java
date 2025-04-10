@@ -12,7 +12,10 @@ public class MatchResultStrategy implements MatchStrategy {
 
   @Override
   public boolean matches(int matchCount, boolean hasBonusBall) {
-    return requiresBonusBall ? matchCount == this.matchCount && hasBonusBall : matchCount == this.matchCount;
+    if (requiresBonusBall) {
+      return matchCount == this.matchCount && hasBonusBall;
+    }
+    return matchCount == this.matchCount;
   }
 
   @Override

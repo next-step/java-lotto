@@ -18,7 +18,7 @@ public class WinningStatisticsCalculator {
   public LottoStatistics calculate(List<Lotto> tickets) {
     Map<PrizeRank, Integer> statistics = initializeStatistics();
     for (Lotto ticket : tickets) {
-      updateStatistics(statistics, calculateMatchResult(ticket));
+      updateStatistics(statistics, calculatePrizeRank(ticket));
     }
     return new LottoStatistics(statistics, tickets.size(), PRICE_PER_LOTTO);
   }
@@ -31,14 +31,14 @@ public class WinningStatisticsCalculator {
     return statistics;
   }
 
-  private MatchResult calculateMatchResult(Lotto ticket) {
-    return MatchResult.of(
+  private PrizeRank calculatePrizeRank(Lotto ticket) {
+    return PrizeRank.valueOf(
         ticket.countMatchingNumbers(winningNumbers),
         ticket.hasBonusBall(bonusBall)
     );
   }
 
-  private void updateStatistics(Map<PrizeRank, Integer> statistics, MatchResult result) {
-    statistics.merge(result.toPrizeRank(), 1, Integer::sum);
+  private void updateStatistics(Map<PrizeRank, Integer> statistics, PrizeRank rank) {
+    statistics.merge(rank, 1, Integer::sum);
   }
 } 
