@@ -10,6 +10,10 @@ public class Lottery extends AbstractLottery {
         super(lottoNumbers);
     }
 
+    public Lottery(String input) {
+        super(input);
+    }
+
     public Winning matchWith(PrizeWinningNumber prize) {
         int matchCount = prize.matchCount(lottoNumbers);
         boolean bonus = (matchCount == 5 && prize.isMatchBounus(lottoNumbers));

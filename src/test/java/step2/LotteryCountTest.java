@@ -30,13 +30,20 @@ public class LotteryCountTest {
     @DisplayName("구매 금액이 로또 한 장의 가격보다 클 때, 로또 개수를 반환한다.")
     void lottoCountTest() {
         LotteryCount purchaseAmount = new LotteryCount(1999);
-        assertThat(purchaseAmount.getLottoCount()).isEqualTo(1);
+        assertThat(purchaseAmount.getAutoLottoCount()).isEqualTo(1);
     }
 
     @Test
     @DisplayName("구매 금액이 로또 한 장의 가격보다 클 때, 로또 개수를 반환한다.")
     void lottoCountTest2() {
         LotteryCount purchaseAmount = new LotteryCount(2000);
-        assertThat(purchaseAmount.getLottoCount()).isEqualTo(2);
+        assertThat(purchaseAmount.getAutoLottoCount()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("수동으로 구매한 금액은 제외하고, 실제 살 수 있는 로또 개수를 반환한다.")
+    void lottoCountExceptManualTest() {
+        LotteryCount purchaseAmount = new LotteryCount(2000, 1);
+        assertThat(purchaseAmount.getAutoLottoCount()).isEqualTo(1);
     }
 }

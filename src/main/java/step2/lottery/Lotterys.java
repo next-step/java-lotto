@@ -20,6 +20,11 @@ public class Lotterys {
         }
     }
 
+    public Lotterys(List<Lottery> lotteries, int count, Generate generate) {
+        this(count, generate);
+        this.lotteries.addAll(lotteries);
+    }
+
     public int length() {
         return lotteries.size();
     }
