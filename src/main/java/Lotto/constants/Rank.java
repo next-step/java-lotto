@@ -1,8 +1,10 @@
 package Lotto.constants;
 
+import java.util.Arrays;
+
 import static Lotto.domain.Lottos.LOTTO_PICK_COUNT;
 
-public enum Rank {
+public enum Rank implements RankMatcher {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 30_000_000),
     THIRD(5, false, 1_500_000),
@@ -33,15 +35,7 @@ public enum Rank {
     }
 
     public static Rank fromMatchCountAndBonus(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch > LOTTO_PICK_COUNT) {
-            throw new IllegalArgumentException("일치하는 번호는 최대 6개까지만 가능합니다.");
-        }
-        for (Rank rank : values()) {
-            if (rank.countOfMatch == countOfMatch && rank.matchBonus == matchBonus) {
-                return rank;
-            }
-        }
-        return MISS;
+        return Arrays.stream(values()).filter(rank -> rank.match(countOfMatch, matchBonus)).findFirst().orElse(MISS);
     }
 
     public static Rank fromRankName(String rankName) {
@@ -54,13 +48,17 @@ public enum Rank {
 
 
     @Override
+    public boolean match(int countOfMatch, boolean matchBonus) {
+        if (countOfMatch == 6) {
+            return true; // 6개 번호가 맞으면 보너스 번호는 상관없음
+        }
+        return this.countOfMatch == countOfMatch && this.matchBonus == matchBonus;
+    }
+
+    @Override
     public String toString() {
         return countOfMatch + "개 일치" +
                 (matchBonus ? ", 보너스 볼 일치" : "") +
                 " (" + winningMoney + "원)";
-    }
-
-    public int getOrDefault(Rank prize, int i) {
-        return  prize.getOrDefault(prize, i);
     }
 }
