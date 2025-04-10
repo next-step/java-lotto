@@ -2,11 +2,14 @@ import domain.Lotto.LottoResult;
 import domain.Lotto.LottoService;
 import domain.Lotto.LottoTicket;
 import domain.Lotto.WinningLotto;
+import domain.Lotto.LottoNo;
 import ui.OutputView;
 import ui.InputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class LottoGame {
@@ -18,7 +21,13 @@ public class LottoGame {
 
         int purchaseAmount = inputView.getPurchaseAmount();
         int manualTicketCount = inputView.getManualTicketCount();
-        List<LottoTicket> manualTickets = inputView.getManualTickets(manualTicketCount);
+        List<List<Integer>> manualNumbers = inputView.getManualLottoNumbers(manualTicketCount);
+
+        List<LottoTicket> manualTickets = manualNumbers.stream()
+                .map(numbers -> new LottoTicket(numbers.stream()
+                        .map(LottoNo::new)
+                        .collect(Collectors.toList())))
+                .collect(Collectors.toList());
 
         int autoTicketCount = (purchaseAmount / LOTTO_PRICE) - manualTicketCount;
         List<LottoTicket> autoTickets = lottoService.generateLottoTickets(autoTicketCount);
@@ -27,17 +36,14 @@ public class LottoGame {
 
         outputView.printLottoPurchaseResult(manualTickets.size(), autoTickets.size(), allTickets);
 
-        LottoTicket winningTicket = inputView.getWinningTicket();
-        int bonusNumber = inputView.getBonusTicket();
-        WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
+        WinningLotto winningLotto = inputView.getWinningLotto();
 
         LottoResult result = lottoService.calculateResults(allTickets, winningLotto);
-        outputView.printResult(result);
+        outputView.printResult(result,purchaseAmount);
     }
 
     private static List<LottoTicket> concatTickets(List<LottoTicket> manual, List<LottoTicket> auto) {
-        List<LottoTicket> combined = new ArrayList<>(manual);
-        combined.addAll(auto);
-        return combined;
+        return Stream.concat(manual.stream(), auto.stream())
+                .collect(Collectors.toList());
     }
 }

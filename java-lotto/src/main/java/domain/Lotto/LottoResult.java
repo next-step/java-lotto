@@ -19,8 +19,11 @@ public class LottoResult {
 
     public double calculateProfitRate(int totalSpent) {
         int totalPrize = matchCounts.entrySet().stream()
-                .mapToInt(entry -> PRIZE_MONEY.getOrDefault(entry.getKey(), 0) * entry.getValue())
+                .mapToInt(entry -> entry.getKey().getWinningMoney() * entry.getValue())
                 .sum();
+        if (totalSpent == 0) {
+            return 0.0; // 나눗셈 예외 방지
+        }
         return (double) totalPrize / totalSpent;
     }
     /**

@@ -1,9 +1,12 @@
 package ui;
 
+import domain.Lotto.LottoNo;
 import domain.Lotto.LottoTicket;
+import domain.Lotto.WinningLotto;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
     private static final String INPUT_MESSAGE = "Please input string:";
@@ -22,7 +25,7 @@ public class InputView {
 
     public void validateInput(String input) {
         if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("입력 값이 null 이거나 빈 문자열 입니다.");
+            throw new IllegalArgumentException("The input value is null or an empty string.");
         }
     }
 
@@ -40,38 +43,71 @@ public class InputView {
     public LottoTicket getWinningTicket() {
         System.out.println("Please enter last week's winning number.");
         Scanner sc = new Scanner(System.in);
-        String input = sc.next(); // 예: 1,2,3,4,5,6
-        List<Integer> numbers = Arrays.stream(input.split(","))
+        String input = sc.nextLine(); // 예: 1,2,3,4,5,6
+
+        List<LottoNo> lottoNumbers = Arrays.stream(input.split(","))
+                .map(String::trim)
                 .map(Integer::parseInt)
-                .toList();
-        return new LottoTicket(numbers);
+                .map(LottoNo::new)
+                .collect(Collectors.toList());
+
+        return new LottoTicket(lottoNumbers); // validate = true by default
     }
 
-    public int getBonusTicket() {
+    public LottoNo getBonusTicket() {
         System.out.println("Please enter Bonus number.");
         Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
+        int bonus = Integer.parseInt(sc.nextLine());
+        LottoNo bonusNumber = new LottoNo(bonus);
+        return bonusNumber;
+
     }
 
     public int getManualTicketCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("Please enter the number of lottoes to purchase manually.");
         Scanner sc = new Scanner(System.in);
         return sc.nextInt();
     }
 
-    public List<LottoTicket> getManualTickets(int manualTicketCount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        Scanner sc = new Scanner(System.in);
-        List<LottoTicket> manualTickets = new ArrayList<>();
+    public List<List<Integer>> getManualLottoNumbers(int manualTicketCount) {
+        System.out.println("Please enter the number you want to purchase manually.");
+        Scanner scanner = new Scanner(System.in);
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+
         for (int i = 0; i < manualTicketCount; i++) {
-            String input = sc.nextLine(); // 예: "8, 21, 23, 41, 42, 43"
-            List<Integer> numbers = Arrays.stream(input.split(","))
+            String line = scanner.nextLine();
+            List<Integer> numbers = Stream.of(line.split(","))
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-            manualTickets.add(new LottoTicket(numbers));
+
+            if (numbers.size() != 6) {
+                throw new IllegalArgumentException("The lotto number should be six.");
+            }
+            manualNumbers.add(numbers);
         }
-        return manualTickets;
+
+        return manualNumbers;
+    }
+
+    public WinningLotto getWinningLotto() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please enter last week's winning number.");
+        String input = scanner.nextLine();
+        List<LottoNo> winningNumbers = Stream.of(input.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNo::new)
+                .collect(Collectors.toList());
+
+        if (winningNumbers.size() != 6) {
+            throw new IllegalArgumentException("The lotto number should be six.");
+        }
+
+        LottoNo bonusNumber = getBonusTicket();
+
+        return new WinningLotto(new LottoTicket(winningNumbers,true), bonusNumber);
     }
 }
 

@@ -2,9 +2,9 @@ package domain.Lotto;
 
 public class WinningLotto {
     private final LottoTicket winningTicket;
-    private final int bonusNumber;
+    private final LottoNo bonusNumber;
 
-    public WinningLotto(LottoTicket winningTicket, int bonusNumber) {
+    public WinningLotto(LottoTicket winningTicket, LottoNo bonusNumber) {
         this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
     }
@@ -13,7 +13,7 @@ public class WinningLotto {
         return winningTicket;
     }
 
-    public int getBonusNumber() {
+    public LottoNo getBonusNumber() {
         return bonusNumber;
     }
 }

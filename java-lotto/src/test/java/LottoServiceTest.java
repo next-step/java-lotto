@@ -1,37 +1,70 @@
-import domain.Lotto.LottoService;
-import domain.Lotto.LottoTicket;
-import domain.Lotto.WinningLotto;
+import domain.Lotto.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottoServiceTest {
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    private final LottoService lottoService = new LottoService();
+import java.util.*;
+import java.util.stream.Collectors;
 
-    @Test
-    void 로또_티켓_개수_확인() {
-        List<LottoTicket> tickets = lottoService.generateLottoTickets(5);
-        assertEquals(5, tickets.size());
+import static org.assertj.core.api.Assertions.assertThat;
+
+
+public class LottoServiceTest {
+
+    private LottoService lottoService;
+
+    @BeforeEach
+    void setUp() {
+        lottoService = new LottoService();
     }
 
     @Test
-    void 로또_당첨_결과_계산_확인() {
-        List<LottoTicket> tickets = List.of(
-                new LottoTicket(List.of(1, 2, 3, 7, 8, 9)), // 3개
-                new LottoTicket(List.of(1, 2, 3, 4, 8, 9)), // 4개
-                new LottoTicket(List.of(1, 2, 3, 4, 5, 9)), // 5개
-                new LottoTicket(List.of(10, 11, 12, 13, 14, 15)) // 0개
-        );
-        LottoTicket winning = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(winning,10);
-        var result = lottoService.calculateResults(tickets, winningLotto);
+    void generateLottoTickets_요청한_개수만큼_티켓을_생성한다() {
+        int count = 5;
+        List<LottoTicket> tickets = lottoService.generateLottoTickets(count);
 
-        assertEquals(1, result.getMatchCounts().get(3));
-        assertEquals(1, result.getMatchCounts().get(4));
-        assertEquals(1, result.getMatchCounts().get(5));
-        assertNull(result.getMatchCounts().get(6));
+        assertThat(tickets).hasSize(count);
+        for (LottoTicket ticket : tickets) {
+            assertThat(ticket.getNumbers()).hasSize(6);
+        }
+    }
+
+    @Test
+    void calculateResults_로또_결과를_정확히_계산한다() {
+        // 당첨 번호 및 보너스 번호 세팅
+        List<LottoNo> winningNumbers = List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNo::new)
+                .collect(Collectors.toList());
+        LottoNo bonus = new LottoNo(7);
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(winningNumbers, true), bonus);
+
+        // 티켓 준비
+        LottoTicket match3 = new LottoTicket(List.of(1, 2, 3, 10, 11, 12).stream()
+                .map(LottoNo::new)
+                .collect(Collectors.toList()), true);
+
+        LottoTicket match6 = new LottoTicket(List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNo::new)
+                .collect(Collectors.toList()), true);
+
+        LottoTicket miss = new LottoTicket(List.of(10, 11, 12, 13, 14, 15).stream()
+                .map(LottoNo::new)
+                .collect(Collectors.toList()), true);
+
+        List<LottoTicket> tickets = List.of(match3, match6, miss);
+
+        // 결과 계산
+        LottoResult result = lottoService.calculateResults(tickets, winningLotto);
+
+        // 결과 검증
+        Map<Rank, Integer> matchCounts = result.getMatchCounts();
+        assertThat(matchCounts.getOrDefault(Rank.THIRD, 0)).isEqualTo(1);
+        assertThat(matchCounts.getOrDefault(Rank.FIFTH, 0)).isEqualTo(1);
+        assertThat(matchCounts.getOrDefault(Rank.MISS, 0)).isEqualTo(1);
     }
 }
