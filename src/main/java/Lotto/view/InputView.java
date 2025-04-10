@@ -8,9 +8,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static Lotto.domain.LottoNumber.isInvalidLottoNumber;
-import static Lotto.domain.WinningNumbers.isInvalidWinningNumbers;
-
+import static Lotto.domain.Lottos.LOTTO_PICK_COUNT;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -42,6 +40,21 @@ public class InputView {
         return parseWinningNumbers(input);
     }
 
+    private static boolean isInvalidWinningNumbers(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return true;
+        }
+
+        String[] numbers = input.split(",");
+        if (numbers.length !=LOTTO_PICK_COUNT) {
+            return true;
+        }
+
+        return Arrays.stream(numbers)
+                .map(String::trim)
+                .anyMatch(InputView::isInvalidLottoNumber);
+    }
+
     public static LottoNumber askForBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         String input = scanner.nextLine();
@@ -50,6 +63,15 @@ public class InputView {
             input = scanner.nextLine();
         }
         return new LottoNumber(Integer.parseInt(input));
+    }
+
+    private static boolean isInvalidLottoNumber(String input) {
+        try {
+            int number = Integer.parseInt(input);
+            return number < LottoNumber.LOTTO_MIN_NUMBER || number > LottoNumber.LOTTO_MAX_NUMBER;
+        } catch (NumberFormatException e) {
+            return true;
+        }
     }
 
     public static int trimAndReturnInt(String input) {

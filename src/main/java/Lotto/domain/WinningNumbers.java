@@ -15,19 +15,16 @@ public class WinningNumbers {
     private final Set<LottoNumber> numbers;
 
     public WinningNumbers(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_PICK_COUNT) {
-            throw new IllegalArgumentException("당첨 번호는 6자리여야 합니다.");
+        if (numbers == null || numbers.size() != LOTTO_PICK_COUNT) {
+            throw new IllegalArgumentException("당첨 번호는 " + LOTTO_PICK_COUNT + "자리여야 합니다.");
         }
         this.numbers = new HashSet<>(numbers);
+        if (this.numbers.size() != LOTTO_PICK_COUNT) {
+            throw new IllegalArgumentException("중복된 번호는 허용되지 않습니다.");
+        }
     }
 
     public Set<LottoNumber> getNumbers() {
         return numbers;
-    }
-
-    public static boolean isInvalidWinningNumbers(String input) {
-        String[] numbers = input.split(",");
-        return numbers.length != LOTTO_PICK_COUNT ||
-                Arrays.stream(numbers).anyMatch(number -> ValidationUtils.isInvalidNumber(number, LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
     }
 }
