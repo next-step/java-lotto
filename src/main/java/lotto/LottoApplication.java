@@ -15,8 +15,7 @@ public class LottoApplication {
         List<Integer> winningNumbers = InputView.getWinningNumbers();
         int bonusNumber = InputView.getBonusNumber();
         LottoWinnings lottoWinnings = new LottoWinnings(winningNumbers, bonusNumber);
-        LottoCalculator calculator = new LottoCalculator();
-        LottoResult result = calculator.calculate(purchaseAmount, lottoList, lottoWinnings);
+        LottoResult result = new LottoResult(purchaseAmount, lottoList, lottoWinnings);
         ResultView.printResult(result);
     }
 }

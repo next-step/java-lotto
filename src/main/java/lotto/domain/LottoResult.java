@@ -1,12 +1,19 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
     private final Map<LottoPrize, Integer> lottoPrizes;
     private final double rate;
 
-    public LottoResult(Map<LottoPrize, Integer> lottoPrizes, int purchaseAmount) {
+    public LottoResult(int purchaseAmount, List<Lotto> lottoList, LottoWinnings lottoWinnings) {
+        Map<LottoPrize, Integer> lottoPrizes = new HashMap<>();
+        for (Lotto lotto : lottoList) {
+            LottoPrize lottoPrize = lottoWinnings.countMatches(lotto);
+            lottoPrizes.put(lottoPrize, lottoPrizes.getOrDefault(lottoPrize, 0) + 1);
+        }
         this.lottoPrizes = lottoPrizes;
         this.rate = calculateRate(purchaseAmount);
     }
@@ -30,4 +37,5 @@ public class LottoResult {
     public double getRate() {
         return rate;
     }
+
 }
