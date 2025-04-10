@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static Lotto.domain.LottoNumber.isInvalidLottoNumber;
-import static Lotto.domain.Purchase.isInvalidPrice;
 import static Lotto.domain.WinningNumbers.isInvalidWinningNumbers;
 
 
@@ -24,6 +23,14 @@ public class InputView {
         }
         return new Purchase(Integer.parseInt(price)).getQuantity();
     };
+
+    private static boolean isInvalidPrice(String price) {
+        if (price == null || price.trim().isEmpty()) {
+            return true;
+        }
+        String sanitizedInput = price.replace(",", "");
+        return !sanitizedInput.matches("\\d+") || Integer.parseInt(sanitizedInput) <= 0;
+    }
 
     public static Set<LottoNumber> askForWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요. (e.g. 1, 2, 3, 4, 5, 6)");

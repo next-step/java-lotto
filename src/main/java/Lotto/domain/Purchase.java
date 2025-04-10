@@ -8,6 +8,9 @@ public class Purchase {
     private int quantity;
 
     public Purchase(int price) {
+        if (price <= 0 || price % UNIT != 0) {
+            throw new IllegalArgumentException("구입 금액은 1000원 단위의 양수여야 합니다.");
+        }
         this.price = price;
         this.quantity = purchaseLotto(price);
     }
@@ -22,15 +25,5 @@ public class Purchase {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public static boolean isInvalidPrice(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            return true;
-        }
-
-        String sanitizedInput = input.replace(",", "");
-        return ValidationUtils.isInvalidNumber(sanitizedInput, UNIT, Integer.MAX_VALUE) ||
-                Integer.parseInt(sanitizedInput) % UNIT != 0;
     }
 }
