@@ -46,7 +46,6 @@ public enum Rank implements RankMatcher {
         }
     }
 
-
     @Override
     public boolean match(int countOfMatch, boolean matchBonus) {
         if (countOfMatch == 6) {
@@ -55,10 +54,4 @@ public enum Rank implements RankMatcher {
         return this.countOfMatch == countOfMatch && this.matchBonus == matchBonus;
     }
 
-    @Override
-    public String toString() {
-        return countOfMatch + "개 일치" +
-                (matchBonus ? ", 보너스 볼 일치" : "") +
-                " (" + winningMoney + "원)";
-    }
 }

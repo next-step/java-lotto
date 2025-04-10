@@ -57,8 +57,4 @@ public class Lotto {
         return intersection.size();
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
-    }
 }
