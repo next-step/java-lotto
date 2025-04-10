@@ -44,7 +44,7 @@ public class PrizeWinningNumberTest {
         assertThatThrownBy(() -> {
             new PrizeWinningNumber("1, 2, 3, 4, 5, 5", 6);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호는 중복되지 않는 6개의 숫자여야 합니다.");
+                .hasMessageContaining("당첨 번호의 개수가 올바르지 않습니다.");
     }
 
     @Test
