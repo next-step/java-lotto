@@ -2,10 +2,10 @@ package model;
 
 import java.util.List;
 
-public class LottoGame {
+public class Lotto {
     private List<Integer> numbers;
 
-    public LottoGame(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 

@@ -1,7 +1,9 @@
 package controller;
 
-import model.LottoGame;
-import model.LottoResult;
+import model.Lottos;
+import model.Placement;
+import model.Placements;
+import model.Result;
 import service.LottoService;
 import util.LottoNumberGenerator;
 import view.InputView;
@@ -17,34 +19,30 @@ public class LottoController {
     }
 
     public void run() {
-        List<LottoGame> lottoGames;
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
+
         int purchasePrice = inputView.getPurchasePrice();
+        Lottos lottos = lottoService.create(purchasePrice);
+        resultView.printLottos(lottos);
 
-        int numberOfGames = lottoService.calculateNumberOfGames(purchasePrice);
-        lottoGames = lottoService.generateLottoGames(numberOfGames);
+        String winningNumbersStr = inputView.getLottoWinningNumbers();
+        Result result = lottoService.getResult(lottos, winningNumbersStr);
 
-        inputView.printNumberOfGames(numberOfGames);
-        inputView.printLottoGames(lottoGames);
-
-        String lottoNumberString = inputView.getLottoWinningNumbers();
-        List<Integer> lottoNumbers = lottoService.getLottoNumbers(lottoNumberString);
-        LottoResult lottoResult = new LottoResult(lottoNumbers);
-
-        for (LottoGame lottoGame : lottoGames) {
-            lottoResult.addGame(lottoGame);
-        }
-
-        List<String> lottoResultStat = lottoResult.getStatStrings();
-        resultView.printStat(lottoResultStat);
-    }
+        Placements placements = new Placements(List.of(
+                new Placement(6, 2000000000),
+                new Placement(5, 1500000),
+                new Placement(4, 50000),
+                new Placement(3, 5000),
+                new Placement(0, 0)
+        ));
 
 
-    public static void main(String[] args) {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        LottoService lottoService = new LottoService(lottoNumberGenerator);
-        LottoController lottoController = new LottoController(lottoService);
-        lottoController.run();
+//        for (LottoGame lottoGame : lottoGames) {
+//            lottoResult.addGame(lottoGame);
+//        }
+//
+//        List<String> lottoResultStat = lottoResult.getStatStrings();
+//        resultView.printStat(lottoResultStat);
     }
 }

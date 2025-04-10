@@ -1,6 +1,6 @@
 package view;
 
-import model.LottoGame;
+import model.Lotto;
 
 import java.util.List;
 import java.util.Scanner;
@@ -21,8 +21,8 @@ public class InputView {
         System.out.println(numberOfGames + "개를 구매했습니다");
     }
 
-    public void printLottoGames(List<LottoGame> lottoGames) {
-        for (LottoGame lottoGame : lottoGames) {
+    public void printLottoGames(List<Lotto> lottoGames) {
+        for (Lotto lottoGame : lottoGames) {
             System.out.println(lottoGame.getNumbers());
         }
     }
