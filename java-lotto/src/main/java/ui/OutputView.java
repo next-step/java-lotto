@@ -37,5 +37,9 @@ public class OutputView {
         System.out.printf("total rate of return : %.2f." + System.lineSeparator(), result.calculateProfitRate(14000));
     }
 
+    public void printLottoPurchaseResult(int manualCount, int autoCount, List<LottoTicket> allTickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.%n", manualCount, autoCount);
+        allTickets.forEach(ticket -> System.out.println(ticket.getNumbers()));
+    }
 }
 

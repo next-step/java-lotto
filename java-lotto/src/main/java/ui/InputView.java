@@ -2,10 +2,8 @@ package ui;
 
 import domain.Lotto.LottoTicket;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final String INPUT_MESSAGE = "Please input string:";
@@ -55,5 +53,25 @@ public class InputView {
         return sc.nextInt();
     }
 
+    public int getManualTicketCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        Scanner sc = new Scanner(System.in);
+        return sc.nextInt();
+    }
+
+    public List<LottoTicket> getManualTickets(int manualTicketCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        Scanner sc = new Scanner(System.in);
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        for (int i = 0; i < manualTicketCount; i++) {
+            String input = sc.nextLine(); // 예: "8, 21, 23, 41, 42, 43"
+            List<Integer> numbers = Arrays.stream(input.split(","))
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+            manualTickets.add(new LottoTicket(numbers));
+        }
+        return manualTickets;
+    }
 }
 
