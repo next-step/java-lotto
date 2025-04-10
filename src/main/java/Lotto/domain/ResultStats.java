@@ -14,18 +14,16 @@ public class ResultStats {
             stats.put(rank, 0);
         }
 
-        int prizeSum = 0;
-        for (Lotto lotto : lottos) {
-            int matchCount = lotto.countMatches(winningNumbers);
-            boolean matchBonus = lotto.contains(bonusNumber);
-            Rank rank = Rank.fromMatchCountAndBonus(matchCount, matchBonus);
-
-            if (rank == Rank.MISS) continue;
-
-            stats.put(rank, stats.get(rank) + 1);
-            prizeSum += rank.getWinningMoney();
-        }
-        this.totalPrize = prizeSum;
+        this.totalPrize = lottos.stream()
+                .map(lotto -> {
+                    int matchCount = lotto.countMatches(winningNumbers);
+                    boolean matchBonus = lotto.contains(bonusNumber);
+                    return Rank.fromMatchCountAndBonus(matchCount, matchBonus);
+                })
+                .filter(rank -> rank != Rank.MISS)
+                .peek(rank -> stats.put(rank, stats.get(rank) + 1))
+                .mapToInt(Rank::getWinningMoney)
+                .sum();
     }
 
     public int getTotalPrize() {
