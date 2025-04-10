@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static Lotto.domain.LottoNumber.LOTTO_MAX_NUMBER;
+import static Lotto.domain.LottoNumber.LOTTO_MIN_NUMBER;
 import static Lotto.domain.Lottos.*;
 
 public class WinningNumbers {

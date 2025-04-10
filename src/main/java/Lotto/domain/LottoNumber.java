@@ -1,9 +1,9 @@
 package Lotto.domain;
 
-import static Lotto.domain.Lottos.LOTTO_MAX_NUMBER;
-import static Lotto.domain.Lottos.LOTTO_MIN_NUMBER;
-
 public class LottoNumber {
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+
     private final int number;
 
     public LottoNumber(int number) {
