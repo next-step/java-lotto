@@ -1,21 +1,20 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
     private final Map<LottoPrize, Integer> lottoPrizes;
     private final double rate;
 
-    public LottoResult(int purchaseAmount, List<Lotto> lottoList, LottoWinnings lottoWinnings) {
+    public LottoResult(LottoPurchase lottoPurchase, LottoWinnings lottoWinnings) {
         Map<LottoPrize, Integer> lottoPrizes = new HashMap<>();
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottoPurchase.getLottoList()) {
             LottoPrize lottoPrize = lottoWinnings.countMatches(lotto);
             lottoPrizes.put(lottoPrize, lottoPrizes.getOrDefault(lottoPrize, 0) + 1);
         }
         this.lottoPrizes = lottoPrizes;
-        this.rate = calculateRate(purchaseAmount);
+        this.rate = calculateRate(lottoPurchase.getPurchaseAmount());
     }
 
     private long calculateTotalWinningMoney() {
