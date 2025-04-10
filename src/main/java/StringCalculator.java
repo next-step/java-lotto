@@ -14,7 +14,7 @@ public class StringCalculator {
         final int firstNumberInt = Integer.parseInt(firstNumber);
         final int secondNumberInt = Integer.parseInt(secondNumber);
 
-        final Operator operator = OperatorFactory.createOperator(operatorString);
+        final Operator operator = ArithmeticOperator.from(operatorString);
 
         return operator.calculate(firstNumberInt, secondNumberInt);
     }
