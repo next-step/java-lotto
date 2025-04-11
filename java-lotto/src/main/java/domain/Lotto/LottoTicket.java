@@ -14,13 +14,6 @@ public class LottoTicket {
         this.numbers = generateRandomNumbers();
     }
 
-//    public LottoTicket(List<Integer> numbers) {
-//        validate(numbers);
-//        this.numbers = numbers.stream()
-//                .map(LottoNo::new)
-//                .sorted()
-//                .collect(Collectors.toList());
-//    }
     public LottoTicket(List<LottoNo> lottoNumbers) {
         this(lottoNumbers, true);
     }

@@ -31,7 +31,7 @@ class LottoTicketTest {
                 .collect(Collectors.toList());
 
         LottoTicket ticket = new LottoTicket(testNumbers, true);
-        int matchCount = ticket.countMatchingNumbersWith(winningLotto.getWinningTicket());
+        int matchCount = winningLotto.matchCountWith(ticket);
 
         assertEquals(3, matchCount);
     }

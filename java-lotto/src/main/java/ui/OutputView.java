@@ -14,11 +14,6 @@ public class OutputView {
         System.out.printf(OUTPUT_MESSAGE + System.lineSeparator(), output);
     }
 
-    public void printLottoTickets(List<LottoTicket> tickets) {
-        System.out.printf("you purchased %d piece" + System.lineSeparator(), tickets.size());
-        tickets.forEach(System.out::println);
-    }
-
     public void printResult(LottoResult result, int totalSpent) {
         System.out.println("winning statistics");
         System.out.println("---------");
