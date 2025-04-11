@@ -1,57 +1,70 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
   private static final int LOTTO_SIZE = 6;
-  private static final int MIN_NUMBER = 1;
-  private static final int MAX_NUMBER = 45;
-  private final List<Integer> numbers;
-
-  public Lotto() {
-    this.numbers = createLottoNumbers();
-  }
+  private final List<LottoNo> numbers;
 
   public Lotto(List<Integer> numbers) {
-    this.numbers = numbers;
-    validate();
+    validateSize(numbers);
+    validateDuplicate(numbers);
+    this.numbers = numbers.stream()
+        .map(LottoNo::from)
+        .sorted()
+        .collect(Collectors.toList());
   }
 
-  private void validate() {
+  private void validateSize(List<Integer> numbers) {
+    if (numbers == null) {
+      throw new IllegalArgumentException("로또 번호가 null입니다.");
+    }
     if (numbers.size() != LOTTO_SIZE) {
-      throw new IllegalArgumentException("숫자의 개수는 " + LOTTO_SIZE + "개여야 합니다.");
-    }
-    if (numbers.stream().anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER)) {
-      throw new IllegalArgumentException("로또 번호는 " + MIN_NUMBER + "부터 " + MAX_NUMBER + " 사이의 숫자여야 합니다.");
+      throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다. 하지만 %d개입니다.", LOTTO_SIZE, numbers.size()));
     }
   }
 
-  private List<Integer> createLottoNumbers() {
-    List<Integer> candidates = new ArrayList<>();
-    for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-      candidates.add(i);
+  private void validateDuplicate(List<Integer> numbers) {
+    if (numbers.size() != numbers.stream().distinct().count()) {
+      throw new IllegalArgumentException("로또 번호에 중복된 숫자가 있습니다.");
     }
-    Collections.shuffle(candidates);
-    List<Integer> selectedNumbers = candidates.subList(0, LOTTO_SIZE);
-    Collections.sort(selectedNumbers);
-    return selectedNumbers;
   }
 
   public int countMatchingNumbers(Lotto other) {
+    if (other == null) {
+      throw new IllegalArgumentException("비교할 로또가 null입니다.");
+    }
     return (int) numbers.stream()
         .filter(other.numbers::contains)
         .count();
   }
 
   public boolean hasBonusBall(int bonusBall) {
-    return numbers.contains(bonusBall);
+    return numbers.contains(LottoNo.from(bonusBall));
+  }
+
+  public List<Integer> getNumbers() {
+    return numbers.stream()
+        .map(LottoNo::getNumber)
+        .collect(Collectors.toList());
   }
 
   @Override
-  public String toString() {
-    return numbers.toString();
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Lotto lotto = (Lotto) o;
+    return numbers.equals(lotto.numbers);
+  }
+
+  @Override
+  public int hashCode() {
+    return numbers.hashCode();
   }
 }

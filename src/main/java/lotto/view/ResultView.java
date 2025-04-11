@@ -1,14 +1,27 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.domain.LottoTickets;
 import lotto.domain.PrizeRank;
 
 public class ResultView {
 
+  public void printLottoCount(int manualCount, int autoCount) {
+    System.out.printf("%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, autoCount);
+  }
+
   public void printLottos(LottoTickets lottoTickets) {
-    System.out.println(lottoTickets.size() + "개를 구매했습니다.");
-    lottoTickets.getLottoNumbersAsStrings().forEach(System.out::println);
+    lottoTickets.getLottoTickets().stream()
+        .map(lotto -> formatLottoNumbers(lotto.getNumbers()))
+        .forEach(System.out::println);
+  }
+
+  private String formatLottoNumbers(List<Integer> numbers) {
+    return numbers.stream()
+        .map(String::valueOf)
+        .collect(Collectors.joining(", ", "[", "]"));
   }
 
   public void printWinningStatistics(Map<PrizeRank, Integer> statistics, double profitRate) {

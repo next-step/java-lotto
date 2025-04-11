@@ -1,38 +1,36 @@
 package lotto.domain;
 
-public enum PrizeRank {
-  FIRST(6, false, 2_000_000_000),
-  SECOND(5, true, 30_000_000),
-  THIRD(5, false, 1_500_000),
-  FOURTH(4, false, 50_000),
-  FIFTH(3, false, 5_000),
-  MISS(0, false, 0);
+import java.util.Arrays;
 
-  private final int matchCount;
-  private final boolean hasBonusBall;
+public enum PrizeRank {
+  FIRST(new MatchResultStrategy(6, false), 2_000_000_000),
+  SECOND(new MatchResultStrategy(5, true), 30_000_000),
+  THIRD(new MatchResultStrategy(5, false), 1_500_000),
+  FOURTH(new MatchResultStrategy(4, false), 50_000),
+  FIFTH(new MatchResultStrategy(3, false), 5_000),
+  MISS(new MatchResultStrategy(0, false), 0);
+
+  private final MatchStrategy matchStrategy;
   private final int prizeMoney;
 
-  PrizeRank(int matchCount, boolean hasBonusBall, int prizeMoney) {
-    this.matchCount = matchCount;
-    this.hasBonusBall = hasBonusBall;
+  PrizeRank(MatchStrategy matchStrategy, int prizeMoney) {
+    this.matchStrategy = matchStrategy;
     this.prizeMoney = prizeMoney;
   }
 
   public static PrizeRank valueOf(int matchCount, boolean hasBonusBall) {
-    for (PrizeRank rank : values()) {
-      if (rank.matchCount == matchCount && rank.hasBonusBall == hasBonusBall) {
-        return rank;
-      }
-    }
-    return MISS;
+    return Arrays.stream(values())
+        .filter(rank -> rank.matchStrategy.matches(matchCount, hasBonusBall))
+        .findFirst()
+        .orElse(MISS);
   }
 
   public int getMatchCount() {
-    return matchCount;
+    return matchStrategy.getMatchCount();
   }
 
   public boolean hasBonusBall() {
-    return hasBonusBall;
+    return matchStrategy.requiresBonusBall();
   }
 
   public int getPrizeMoney() {
