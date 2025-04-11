@@ -15,9 +15,8 @@ class ParserTest {
     void splitAndParseToIntegerListTest() {
         String input = "1, 2,  3,  4";
         List<Integer> expected = List.of(1, 2, 3, 4);
-        Parser parser = new Parser();
 
-        List<LottoNumber> result = parser.splitAndParseToLottoNumberList(input);
+        List<LottoNumber> result = Parser.splitAndParseToLottoNumberList(input);
 
         Assertions.assertEquals(result.stream().map(LottoNumber::getNumber).collect(Collectors.toList()), expected);
     }
@@ -26,10 +25,9 @@ class ParserTest {
     @DisplayName("정수가 아니면 예외를 반환한다.")
     void splitAndParseToIntegerListTest_notInteger() {
         String input = "1, 2,  3,  A";
-        Parser parser = new Parser();
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> parser.splitAndParseToLottoNumberList(input));
+                .isThrownBy(() -> Parser.splitAndParseToLottoNumberList(input));
     }
 
 }

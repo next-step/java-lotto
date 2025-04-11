@@ -2,48 +2,42 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- * 로또 티켓을 생성하고 관리
+ * 로또 티켓을 판매
  */
 public class LottoShop {
-    private static final int PRICE_PER_TICKET = 1000;
-    private final int purchasePrice;
-    private final int ticketAmount;
-    private final List<LottoTicket> lottoTickets;
+    private static final Money PRICE_PER_TICKET = new Money(1000);
+    private static final LottoAutoGenerator LOTTO_AUTO_GENERATOR = new LottoAutoGenerator();
 
-    public LottoShop(int price, LottoAutoGenerator lottoAutoGenerator) {
-        validatePrice(price);
-        this.purchasePrice = price;
-        this.ticketAmount = calculateTicketAmount(price);
-        List<LottoTicket> temp = new ArrayList<>();
-        for (int i = 0; i < ticketAmount; i++) {
-            temp.add(lottoAutoGenerator.generateLottoTicket());
-        }
-        this.lottoTickets = List.copyOf(temp);
+    public List<LottoTicket> sellLotto(Money price, List<LottoTicket> manualLotto) {
+        int totalAmount = price.getPrice() / PRICE_PER_TICKET.getPrice();
+        validateManualLottoAmount(totalAmount, manualLotto.size());
+        int autoAmount = totalAmount - manualLotto.size();
+
+        List<LottoTicket> autoLotto = sellAutoLottoTicket(autoAmount);
+        return Stream.concat(manualLotto.stream(), autoLotto.stream())
+                .collect(Collectors.toList());
     }
 
-    private void validatePrice(int price) {
-        if (price < 0) {
-            throw new IllegalArgumentException("로또 구매 가능 가격은 0원 이상입니다.");
+    private void validateManualLottoAmount(int totalAmount, int manualAmount) {
+        if (manualAmount > totalAmount) {
+            throw new IllegalArgumentException("수동 로또의 갯수가 전체 로또 갯수를 넘을 수 없습니다.");
         }
     }
 
-    private int calculateTicketAmount(int price) {
-        return price / PRICE_PER_TICKET;
+    private TicketAmount calculateTicketAmount(Money price) {
+        return new TicketAmount(price.getPrice() / PRICE_PER_TICKET.getPrice());
     }
 
-    public List<List<Integer>> getLottoTicketsNumber() {
-        List<List<Integer>> lottos = new ArrayList<>();
-        lottoTickets.forEach(l -> lottos.add(l.getNumbers()));
-        return lottos;
+    private List<LottoTicket> sellAutoLottoTicket(int amount) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            tickets.add(LOTTO_AUTO_GENERATOR.generateLottoTicket());
+        }
+        return tickets;
     }
 
-    public int getPurchasePrice() {
-        return this.purchasePrice;
-    }
-
-    public int getTicketAmount() {
-        return ticketAmount;
-    }
 }
