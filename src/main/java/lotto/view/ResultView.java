@@ -1,9 +1,9 @@
 package lotto.view;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -18,8 +18,8 @@ public class ResultView {
         System.out.printf(LOTTO_TICKET_AMOUNT_MESSAGE + "%n", manualAmount, autoAmount);
     }
 
-    public static void printLottoNumbers(List<Integer> numbers) {
-        System.out.println(numbers.toString());
+    public static void printLottoNumbers(LottoTicket lottoTicket) {
+        System.out.println(lottoTicket.getNumbers());
     }
 
     public static void printReturnRate(double returnRate) {

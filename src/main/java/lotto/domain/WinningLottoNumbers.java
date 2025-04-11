@@ -27,11 +27,12 @@ public class WinningLottoNumbers {
         return bonusNumber.getNumber();
     }
 
-    public Map<Rank, Integer> calculateResult(List<List<Integer>> purchaseLotto) {
+    public Map<Rank, Integer> calculateResult(List<LottoTicket> purchaseLotto) {
         Map<Rank, Integer> result = new HashMap<>();
-        for (List<Integer> lotto : purchaseLotto) {
-            int matchCount = calculateMatchCount(lotto);
-            boolean bonusMatch = containsBonusNumber(lotto);
+        for (LottoTicket lotto : purchaseLotto) {
+            List<Integer> numbers = lotto.getNumbers();
+            int matchCount = calculateMatchCount(numbers);
+            boolean bonusMatch = containsBonusNumber(numbers);
             Rank rank = Rank.valueOf(matchCount, bonusMatch);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }

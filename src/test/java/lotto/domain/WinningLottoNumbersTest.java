@@ -32,13 +32,13 @@ class WinningLottoNumbersTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList()));
         LottoNumber bonusNumber = new LottoNumber(7);
-        List<List<Integer>> lottos = List.of(
-                List.of(1, 2, 3, 4, 5, 6),  // 6개 일치 (1개)
-                List.of(1, 2, 3, 4, 5, 7), // 5개 일치 + 보너스 일치 (1개)
-                List.of(1, 2, 3, 4, 5, 10), // 5개 일치 (1개)
-                List.of(1, 2, 3, 4, 9, 10), // 4개 일치
-                List.of(1, 2, 3, 4, 40, 41),  // 4개 일치 (2개)
-                List.of(1, 12, 13, 14, 15, 16) // 1개 일치 (1개)
+        List<LottoTicket> lottos = List.of(
+                toTicket(List.of(1, 2, 3, 4, 5, 6)),  // 6개 일치 (1개)
+                toTicket(List.of(1, 2, 3, 4, 5, 7)), // 5개 일치 + 보너스 일치 (1개)
+                toTicket(List.of(1, 2, 3, 4, 5, 10)), // 5개 일치 (1개)
+                toTicket(List.of(1, 2, 3, 4, 9, 10)), // 4개 일치
+                toTicket(List.of(1, 2, 3, 4, 40, 41)),  // 4개 일치 (2개)
+                toTicket(List.of(1, 12, 13, 14, 15, 16)) // 1개 일치 (1개)
         );
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonusNumber);
 
@@ -51,6 +51,11 @@ class WinningLottoNumbersTest {
         assertEquals(1, result.getOrDefault(Rank.FIVE_MATCH, 0));
         assertEquals(2, result.getOrDefault(Rank.FOUR_MATCH, 0));
         assertEquals(1, result.getOrDefault(Rank.NO_MATCH, 0));
+    }
+
+    LottoTicket toTicket(List<Integer> numbers) {
+        return new LottoTicket(numbers.stream().map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
 
