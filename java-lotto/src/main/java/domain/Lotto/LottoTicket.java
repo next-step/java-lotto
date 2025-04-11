@@ -3,20 +3,27 @@ package domain.Lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final List<Integer> numbers;
+    private final List<LottoNo> numbers;
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
 
     public LottoTicket() {
-        numbers = generateRandomNumbers();
+        this.numbers = generateRandomNumbers();
     }
 
-    public LottoTicket(List<Integer> numbers) {
-        validate(numbers);
-        this.numbers = new ArrayList<>(numbers);
-        Collections.sort(this.numbers); // 정렬은 선택
+    public LottoTicket(List<LottoNo> lottoNumbers) {
+        this(lottoNumbers, true);
+    }
+
+    public LottoTicket(List<LottoNo> lottoNumbers, boolean validate) {
+        if (validate) {
+            validateLottoNos(lottoNumbers);
+        }
+        this.numbers = new ArrayList<>(lottoNumbers);
+        Collections.sort(this.numbers);
     }
 
     private void validate(List<Integer> numbers) {
@@ -35,23 +42,27 @@ public class LottoTicket {
         }
     }
 
-    private List<Integer> generateRandomNumbers() {
+    private void validateLottoNos(List<LottoNo> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
+
+        long uniqueCount = lottoNumbers.stream().distinct().count();
+        if (uniqueCount != 6) {
+            throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
+        }
+    }
+
+    private List<LottoNo> generateRandomNumbers() {
         List<Integer> allNumbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
             allNumbers.add(i);
         }
         Collections.shuffle(allNumbers);
-        List<Integer> selectedNumbers = allNumbers.subList(0, 6);
-        Collections.sort(selectedNumbers);
-        return selectedNumbers;
-    }
-
-    public int getMatchCount(List<Integer> winningNumbers) {
-        return (int) numbers.stream().filter(winningNumbers::contains).count();
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
+        return allNumbers.subList(0, 6).stream()
+                .map(LottoNo::new)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public int countMatchingNumbersWith(LottoTicket winningTicket) {
@@ -60,14 +71,17 @@ public class LottoTicket {
                 .count();
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNo number) {
         return numbers.contains(number);
+    }
+
+    public List<LottoNo> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override
     public String toString() {
         return numbers.toString();
     }
-
 }
 

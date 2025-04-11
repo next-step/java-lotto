@@ -3,8 +3,17 @@ package domain.Lotto;
 import java.util.*;
 
 public class LottoService {
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_PRICE = 1000;
+
+    public Lottos generateLottos(LottoRequest request, int purchaseAmount) {
+        int manualCount = request.getManualTicketCount();
+        int autoCount = (purchaseAmount / LOTTO_PRICE) - manualCount;
+
+        List<LottoTicket> manualTickets = request.toManualTickets();
+        List<LottoTicket> autoTickets = generateLottoTickets(autoCount);
+
+        return new Lottos(manualTickets, autoTickets);
+    }
 
     public List<LottoTicket> generateLottoTickets(int count) {
         List<LottoTicket> tickets = new ArrayList<>();
@@ -15,17 +24,6 @@ public class LottoService {
     }
 
     public LottoResult calculateResults(List<LottoTicket> tickets, WinningLotto winningLotto) {
-        Map<Rank, Integer> matchCounts = new EnumMap<>(Rank.class);
-
-        for (LottoTicket ticket : tickets) {
-            int matchCount = ticket.countMatchingNumbersWith(winningLotto.getWinningTicket());
-            boolean matchBonus = ticket.contains(winningLotto.getBonusNumber());
-
-            Rank rank = Rank.valueOf(matchCount, matchBonus);
-            matchCounts.put(rank, matchCounts.getOrDefault(rank, 0) + 1);
-        }
-
-        return new LottoResult(matchCounts);
+        return LottoResult.from(tickets, winningLotto);
     }
-
 }

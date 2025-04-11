@@ -1,31 +1,38 @@
-import domain.Lotto.LottoResult;
-import domain.Lotto.LottoService;
-import domain.Lotto.LottoTicket;
-import domain.Lotto.WinningLotto;
+import domain.Lotto.*;
 import ui.OutputView;
 import ui.InputView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class LottoGame {
-    private static final int LOTTO_PRICE = 1000;
     public static void main(String[] args) {
-
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
         LottoService lottoService = new LottoService();
 
         int purchaseAmount = inputView.getPurchaseAmount();
-        List<LottoTicket> tickets = lottoService.generateLottoTickets(purchaseAmount / LOTTO_PRICE);
-        outputView.printLottoTickets(tickets);
+        int manualTicketCount = inputView.getManualTicketCount();
 
-        LottoTicket winningTicket = inputView.getWinningTicket();
-        int BonusNumber = inputView.getBonusTicket();
-        WinningLotto winningLotto = new WinningLotto(winningTicket, BonusNumber);
+        LottoRequest request = new LottoRequest(
+                manualTicketCount,
+                inputView.getManualLottoNumbers(manualTicketCount)
+        );
 
-        LottoResult result = lottoService.calculateResults(tickets, winningLotto);
-        outputView.printResult(result);
+        Lottos lottos = lottoService.generateLottos(request, purchaseAmount);
 
+        outputView.printLottoPurchaseResult(
+                request.getManualTicketCount(),
+                lottos.getAutoTicketCount(),
+                lottos.getTickets()
+        );
+
+        WinningLotto winningLotto = inputView.getWinningLotto();
+        LottoResult result = lottoService.calculateResults(lottos.getTickets(), winningLotto);
+
+        outputView.printResult(result, purchaseAmount);
     }
 }
