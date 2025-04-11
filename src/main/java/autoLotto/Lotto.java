@@ -1,22 +1,25 @@
 package autoLotto;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private Set<Integer> numbers;
+    protected Set<LottoNumber> numbers;
 
-    public Lotto(Set<Integer> numbers) {
+    public Lotto(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public int getMatchedNumberCount(Lotto winningLotto) {
-        return (int) numbers.stream()
-                            .filter(winningLotto::containsNumber)
-                            .count();
+    public Lotto(String numbers) {
+        this.numbers = Arrays.stream(numbers.split(","))
+                             .map(String::trim)
+                             .map(Integer::parseInt)
+                             .map(LottoNumber::new)
+                             .collect(Collectors.toSet());
     }
 
-    private boolean containsNumber(int number) {
+    protected boolean containsNumber(LottoNumber number) {
         return numbers.contains(number);
     }
 
@@ -26,11 +29,12 @@ public class Lotto {
         }
     }
 
+
     @Override
     public String toString() {
         String result = numbers.stream()
                                .sorted()
-                               .map(String::valueOf)
+                               .map(LottoNumber::toString)
                                .collect(Collectors.joining(", "));
         return String.format("[%s]", result);
     }
