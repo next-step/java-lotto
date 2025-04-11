@@ -1,8 +1,5 @@
 package view;
 
-import model.Lotto;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -17,18 +14,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public void printNumberOfGames(int numberOfGames) {
-        System.out.println(numberOfGames + "개를 구매했습니다");
-    }
-
-    public void printLottoGames(List<Lotto> lottoGames) {
-        for (Lotto lottoGame : lottoGames) {
-            System.out.println(lottoGame.getNumbers());
-        }
-    }
-
     public String getLottoWinningNumbers() {
-        System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         scanner.nextLine();
         return scanner.nextLine();

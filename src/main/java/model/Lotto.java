@@ -1,6 +1,8 @@
 package model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
     private List<Integer> numbers;
@@ -9,13 +11,17 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> numbers() {
         return numbers;
     }
 
-    public int getMatchNumber(List<Integer> winningNumbers) {
-        return (int) numbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
+    public int matchingCount(Lotto winningLotto) {
+        Set<Integer> copy = new HashSet<>(this.numbers);
+        copy.retainAll(winningLotto.numbers);
+        return copy.size();
+    }
+
+    public int size() {
+        return numbers.size();
     }
 }

@@ -2,19 +2,19 @@ package model;
 
 public class Placement {
     private final int matchingCount;
-    private final int prizeMoney;
+    private final int prize;
 
 
-    public Placement(int matchingCount, int prizeMoney) {
+    public Placement(int matchingCount, int prize) {
         this.matchingCount = matchingCount;
-        this.prizeMoney = prizeMoney;
+        this.prize = prize;
     }
 
-    public int getMatchingCount() {
+    public int matchingCount() {
         return matchingCount;
     }
 
-    public int getPrizeMoney() {
-        return prizeMoney;
+    public int prize() {
+        return prize;
     }
 }
