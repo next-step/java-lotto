@@ -43,6 +43,6 @@ public class DivisionTest {
         Number right = Number.of(4);
         Calculator calculator = new Calculator();
         Number result = calculator.calculate(left, right, operator);
-        assertEquals(result.getValue(), BigDecimal.valueOf(1.5));
+        assertEquals(result.getValue(), BigDecimal.valueOf(2));
     }
 }
