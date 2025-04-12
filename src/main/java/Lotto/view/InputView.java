@@ -62,7 +62,7 @@ public class InputView {
             System.out.println("1~45 사이 숫자로 입력해 주세요.");
             input = scanner.nextLine();
         }
-        return new LottoNumber(Integer.parseInt(input));
+        return LottoNumber.of(Integer.parseInt(input));
     }
 
     private static boolean isInvalidLottoNumber(String input) {
@@ -82,7 +82,7 @@ public class InputView {
         return Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 }

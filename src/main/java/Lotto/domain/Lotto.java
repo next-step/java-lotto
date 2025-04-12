@@ -31,7 +31,7 @@ public class Lotto {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.of(i));
         }
 
         Collections.shuffle(lottoNumbers);
