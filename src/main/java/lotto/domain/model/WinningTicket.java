@@ -15,17 +15,17 @@ public class WinningTicket {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
+    public Rank evaluate(LottoTicket lotto) {
+        int countOfMatch = (int) winNumbers.stream()
+                .filter(lotto::contains)
+                .count();
+        boolean matchBonus = lotto.contains(bonusNumber);
+        return Rank.valueOf(countOfMatch, matchBonus);
+    }
+
     private void validate(List<Integer> winNumbers, int bonusNumber) {
         if (winNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("Bonus number must not be in winning numbers.");
         }
-    }
-
-    public List<LottoNumber> getWinNumbers() {
-        return winNumbers;
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
     }
 }

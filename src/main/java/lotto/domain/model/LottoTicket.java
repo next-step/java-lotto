@@ -1,6 +1,5 @@
 package lotto.domain.model;
 
-
 import java.util.List;
 
 import static lotto.constant.LottoConstants.*;

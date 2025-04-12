@@ -1,7 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.model.*;
+import lotto.domain.generator.LottoTicketGenerator;
 import lotto.domain.generator.RandomLottoTicketGenerator;
+import lotto.domain.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import lotto.domain.service.LottoMachine;
@@ -11,27 +12,19 @@ import java.util.List;
 
 public class LottoController {
     public void run() {
-        int purchaseAmount = InputView.getPurchaseAmount();
-        int manualLottoCount = InputView.getManualLottoCount();
-        List<List<Integer>> manualNumbersList = InputView.getManualNumbersList(manualLottoCount);
-        LottoWallet lottoWallet = purchase(purchaseAmount, manualNumbersList);
+        LottoRequest request = InputView.getLottoRequest();
+        LottoWallet lottoWallet = purchase(request);
 
         List<Integer> winNumbers = InputView.getWinNumbers();
         int bonusNumber = InputView.getBonusNumber();
+        int purchaseAmount = request.getPurchaseAmount();
         draw(winNumbers, bonusNumber, lottoWallet, purchaseAmount);
     }
 
-    private LottoWallet purchase(int purchaseAmount, List<List<Integer>> manualNumbersList) {
-        LottoWallet lottoWallet = new LottoWallet();
-        LottoMachine lottoMachine = new LottoMachine(new RandomLottoTicketGenerator(), purchaseAmount);
-
-        List<LottoTicket> manualLottos = lottoMachine.buyManualLottos(manualNumbersList);
-        lottoWallet.addLottos(manualLottos);
-
-        List<LottoTicket> automaticLottos = lottoMachine.buyAutomaticLottos();
-        lottoWallet.addLottos(automaticLottos);
-
-        ResultView.printPurchasedLottos(lottoWallet, manualNumbersList.size(), automaticLottos.size());
+    private LottoWallet purchase(LottoRequest request) {
+        LottoTicketGenerator lottoTicketGenerator = new RandomLottoTicketGenerator();
+        LottoWallet lottoWallet = LottoMachine.buy(lottoTicketGenerator, request);
+        ResultView.printPurchasedLottos(lottoWallet, request.getAutomaticLottosCount(), request.getManualLottosCount());
         return lottoWallet;
     }
 
