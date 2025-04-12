@@ -1,4 +1,4 @@
-package domain;
+package step1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,15 +10,15 @@ import org.junit.jupiter.api.Test;
 import step1.domain.Calculator;
 import step1.domain.Number;
 
-public class SubtractionTest {
+public class MultiplicationTest {
     @Test
-    @DisplayName("뺄셈 연산")
-    public void subtractionTest() {
-        String operator = "-";
+    @DisplayName("곱셈 연산")
+    public void multiplyTest() {
+        String operator = "*";
         Number left = Number.of(2);
         Number right = Number.of(3);
         Calculator calculator = new Calculator();
         Number result = calculator.calculate(left, right, operator);
-        assertEquals(BigDecimal.valueOf(-1), result.getValue());
+        assertEquals(result.getValue(), BigDecimal.valueOf(6));
     }
 }
