@@ -1,5 +1,7 @@
-package autoLotto;
+package lotto;
 
+import lotto.model.LottoPrize;
+import lotto.model.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

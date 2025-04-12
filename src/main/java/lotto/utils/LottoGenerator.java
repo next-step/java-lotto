@@ -1,4 +1,6 @@
-package autoLotto;
+package lotto.utils;
+
+import lotto.model.LottoNumber;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,7 +15,7 @@ public class LottoGenerator {
                                                              .mapToObj(it -> new LottoNumber(it))
                                                              .collect(Collectors.toList());
 
-    Set<LottoNumber> generate() {
+    public Set<LottoNumber> generate() {
         Collections.shuffle(LOTTO_NUMBERS);
         return new HashSet<>(LOTTO_NUMBERS.subList(0, 6));
     }
