@@ -14,7 +14,6 @@ public class Calculator {
         if (tokens.length < 3) {
             throw new IllegalArgumentException("연산이 불가능한 숫자입니다.");
         }
-        // if (tokens[tokens.length-1].equals(""))
         Number left = Number.of(tokens[0]);
         for (int i = 1; i < tokens.length; i += 2) {
             String operator = tokens[i];
