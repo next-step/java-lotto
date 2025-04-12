@@ -1,9 +1,9 @@
 package lotto.domain.model;
 
+import lotto.domain.service.LottoResultCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,14 +12,28 @@ public class LottoWalletTest {
     @DisplayName("로또를 추가한다.")
     @Test
     void addTest() {
-        LottoNumbers lotto1 = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers lotto2 = new LottoNumbers(List.of(7, 8, 9, 10, 11, 12));
+        LottoTicket lotto1 = new LottoTicket(List.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
+        LottoTicket lotto2 = new LottoTicket(List.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(7)
+        ));
 
         LottoWallet lottoWallet = new LottoWallet();
         lottoWallet.addLotto(lotto1);
         lottoWallet.addLotto(lotto2);
 
-        List<LottoNumbers> lottos = lottoWallet.getLottos();
+        List<LottoTicket> lottos = lottoWallet.getLottos();
         assertThat(lottos).containsExactlyInAnyOrder(lotto1, lotto2);
         assertThat(lottoWallet.getCount()).isEqualTo(2);
     }
@@ -27,24 +41,35 @@ public class LottoWalletTest {
     @DisplayName("로또 번호를 비교하여 일치하는 개수를 센다.")
     @Test
     void countMatchTest() {
+        List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+        WinningTicket winningTicket = new WinningTicket(winNumbers, bonusNumber);
+
         LottoWallet lottoWallet = new LottoWallet();
-        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
-        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
-        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 4, 7, 8)));
-        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 7, 8, 9)));
-        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 7, 8, 9, 10)));
-        lottoWallet.addLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 10)));
+        lottoWallet.addLotto(new LottoTicket(List.of(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6)
+                )));
+        lottoWallet.addLotto(new LottoTicket(List.of(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(7)
+                )));
 
-        LottoNumbers winNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        int bonusNumber = 10;
+        MatchResult matchResult = lottoWallet.countMatches(winningTicket);
 
-        MatchResult result = lottoWallet.countMatches(winNumbers, bonusNumber);
-
-        assertThat(result.getCount(Rank.valueOf("FIRST"))).isEqualTo(1);
-        assertThat(result.getCount(Rank.valueOf("SECOND"))).isEqualTo(1);
-        assertThat(result.getCount(Rank.valueOf("THIRD"))).isEqualTo(1);
-        assertThat(result.getCount(Rank.valueOf("FOURTH"))).isEqualTo(1);
-        assertThat(result.getCount(Rank.valueOf("FIFTH"))).isEqualTo(1);
-        assertThat(result.getCount(Rank.valueOf("MISS"))).isEqualTo(1);
+        assertThat(matchResult.getCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(matchResult.getCount(Rank.SECOND)).isEqualTo(1);
+        assertThat(matchResult.getCount(Rank.THIRD)).isEqualTo(0);
+        assertThat(matchResult.getCount(Rank.FOURTH)).isEqualTo(0);
+        assertThat(matchResult.getCount(Rank.FIFTH)).isEqualTo(0);
+        assertThat(matchResult.getCount(Rank.MISS)).isEqualTo(0);
     }
 }

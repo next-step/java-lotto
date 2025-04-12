@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.model.LottoNumbers;
+import lotto.domain.model.LottoTicket;
 import lotto.domain.model.LottoWallet;
 import lotto.domain.model.MatchResult;
 import lotto.domain.model.Rank;
@@ -12,11 +12,10 @@ import java.util.stream.Collectors;
 
 
 public class ResultView {
-    public static void printPurchasedLottos(LottoWallet lottoWallet) {
-        int count = lottoWallet.getCount();
-        printMessage(count + "개를 구매했습니다.");
-        for (LottoNumbers lotto : lottoWallet.getLottos()) {
-            printLottoNumbers(lotto.getNumbers());
+    public static void printPurchasedLottos(LottoWallet lottoWallet, int manualLottoCount, int autoLottoCount) {
+        printMessage("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
+        for (LottoTicket lotto : lottoWallet.getLottos()) {
+            printLottoTicket(lotto);
         }
     }
 
@@ -32,16 +31,21 @@ public class ResultView {
         printProfit(profit);
     }
 
-    private static void printLottoNumbers(List<Integer> lottoNumbers) {
-        String formattedNumbers = arrayToString(lottoNumbers);
-        printMessage(formattedNumbers);
+    private static void printLottoTicket(LottoTicket lotto) {
+        String lottoTicketString = lotto.getNumbers().stream()
+                .map(n -> String.valueOf(n.getNumber()))
+                .collect(Collectors.joining(", ", "[", "]"));
+        printMessage(lottoTicketString);
     }
 
     private static void printMatchCount(Rank rank, MatchResult matchResults) {
         if (rank == Rank.MISS) {
             return;
         }
-        String description = rank.getDescription();
+        String description = rank.getCountOfMatch() + "개 일치";
+        if (rank == Rank.SECOND) {
+            description += " + 보너스 볼 일치";
+        }
         int price = rank.getWinningMoney();
         int count = matchResults.getCount(rank);
         printMessage(description + " (" + price + "원)- " + count + "개");
@@ -53,11 +57,5 @@ public class ResultView {
 
     private static void printMessage(String message) {
         System.out.println(message);
-    }
-
-    private static String arrayToString(List<Integer> array) {
-        return "[" + array.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", ")) + "]";
     }
 }

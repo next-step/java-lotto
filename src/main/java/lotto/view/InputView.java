@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.model.LottoRequest;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -8,8 +10,19 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int getPurchaseAmount() {
-        return getIntInput("구입금액을 입력해 주세요.");
+    public static LottoRequest getLottoRequest() {
+        int purchaseAmount = getPurchaseAmount();
+        int manualLottoCount = getManualLottoCount();
+
+        LottoRequest request = new LottoRequest(purchaseAmount);
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < manualLottoCount; i ++) {
+            String stringInput = scanner.nextLine();
+            List<Integer> manualNumbers = parseIntFromString(stringInput);
+            request.addRequest(manualNumbers);
+        }
+
+        return request;
     }
 
     public static List<Integer> getWinNumbers() {
@@ -19,6 +32,14 @@ public class InputView {
 
     public static int getBonusNumber() {
         return getIntInput("보너스 볼을 입력해 주세요.");
+    }
+
+    private static int getPurchaseAmount() {
+        return getIntInput("구입금액을 입력해 주세요.");
+    }
+
+    private static int getManualLottoCount() {
+        return getIntInput("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
     private static List<Integer> parseIntFromString(String input) {

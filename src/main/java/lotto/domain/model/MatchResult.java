@@ -6,12 +6,9 @@ import java.util.List;
 
 public class MatchResult {
     private final List<Rank> ranks = new ArrayList<>();
-    private final LottoNumbers winNumbers;
-    private final int bonusNumber;
 
-    MatchResult(LottoNumbers winNumbers, int bonusNumber) {
-        this.winNumbers = winNumbers;
-        this.bonusNumber = bonusNumber;
+    public void addRank(Rank rank) {
+        this.ranks.add(rank);
     }
 
     public int getCount(Rank rank) {
@@ -22,12 +19,6 @@ public class MatchResult {
 
     public double calculateProfit(int purchaseAmount) {
         return (double) getPrize() / purchaseAmount;
-    }
-
-    void addRank(LottoNumbers lotto) {
-        int matchCount = lotto.countMatch(this.winNumbers);
-        boolean matchBonus = lotto.matchBonus(this.bonusNumber);
-        this.ranks.add(Rank.valueOf(matchCount, matchBonus));
     }
 
     private int getPrize() {
