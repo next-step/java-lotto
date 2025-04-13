@@ -1,15 +1,33 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
     private final int LOTTO_PRICE = 1000;
     private final LottoGenerator generator = new LottoGenerator();
 
-    public List<Lotto> buy(int purchaseAmount) {
+    public LottoPurchase buy(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
         int ticketCount = purchaseAmount / LOTTO_PRICE;
-        return generator.generate(ticketCount);
+        List<Lotto> autoLottoList = generator.generate(ticketCount);
+        return new LottoPurchase(purchaseAmount, ticketCount, 0, ticketCount, autoLottoList);
+    }
+
+    public LottoPurchase buy(int purchaseAmount, List<List<Integer>> manualNumbers) {
+        validatePurchaseAmount(purchaseAmount);
+        int totalTicketCount = purchaseAmount / LOTTO_PRICE;
+        int manualTicketCount = manualNumbers.size();
+        int autoTicketCount = totalTicketCount - manualTicketCount;
+
+        List<Lotto> autoLottoList = generator.generate(autoTicketCount);
+        List<Lotto> manualLottoList = generator.generate(manualNumbers);
+
+        List<Lotto> totalLottoList = new ArrayList<>();
+        totalLottoList.addAll(manualLottoList);
+        totalLottoList.addAll(autoLottoList);
+
+        return new LottoPurchase(purchaseAmount, totalTicketCount, manualTicketCount, autoTicketCount, totalLottoList);
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {

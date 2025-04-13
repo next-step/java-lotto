@@ -23,4 +23,13 @@ public class LottoGenerator {
         }
         return lottoList;
     }
+
+    public List<Lotto> generate(List<List<Integer>> numbers) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (List<Integer> number : numbers) {
+            lottoList.add(new Lotto(number));
+        }
+        return lottoList;
+    }
+
 }

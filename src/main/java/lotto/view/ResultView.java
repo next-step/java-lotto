@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoPrize;
+import lotto.domain.LottoPurchase;
 import lotto.domain.LottoResult;
 
 import java.util.List;
@@ -9,9 +10,9 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static void printLotto(List<Lotto> lottoList) {
-        System.out.println(lottoList.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottoList) {
+    public static void printLottoPurchase(LottoPurchase lottoPurchase) {
+        System.out.println("수동으로 " + lottoPurchase.getManualTicketCount() + "개, 자동으로 " + lottoPurchase.getAutoTicketCount() + "개를 구매했습니다.");
+        for (Lotto lotto : lottoPurchase.getLottoList()) {
             System.out.println(lotto.getNumbers());
         }
     }

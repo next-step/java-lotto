@@ -1,20 +1,20 @@
 package lotto.domain;
 
 public enum LottoPrize {
-    FIRST(6, false, 2_000_000_000),
-    SECOND(5, true, 30_000_000),
-    THIRD(5, false, 1_500_000),
-    FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000),
-    MISS(0, false, 0);
+    FIRST(6, LottoBonusCondition.IGNORED, 2_000_000_000),
+    SECOND(5, LottoBonusCondition.MATCH, 30_000_000),
+    THIRD(5, LottoBonusCondition.MISMATCH, 1_500_000),
+    FOURTH(4, LottoBonusCondition.IGNORED, 50_000),
+    FIFTH(3, LottoBonusCondition.IGNORED, 5_000),
+    MISS(0, LottoBonusCondition.IGNORED, 0);
 
     private final int matchCount;
-    private final boolean bonus;
+    private final LottoBonusCondition lottoBonusCondition;
     private final int winningMoney;
 
-    LottoPrize(int matchCount, boolean bonus, int winningMoney) {
+    LottoPrize(int matchCount, LottoBonusCondition lottoBonusCondition, int winningMoney) {
         this.matchCount = matchCount;
-        this.bonus = bonus;
+        this.lottoBonusCondition = lottoBonusCondition;
         this.winningMoney = winningMoney;
     }
 
