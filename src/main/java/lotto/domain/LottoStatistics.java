@@ -10,9 +10,9 @@ public class LottoStatistics {
     private final Map<LottoRank, Integer> matchCounts;
     private final int totalPurchaseAmount;
 
-    public LottoStatistics(WinningNumbers winningTicket, List<LottoTicket> purchaseTickets) {
-        this.matchCounts = calculateRankCounts(winningTicket, purchaseTickets);
-        this.totalPurchaseAmount = purchaseTickets.size() * LottoOrder.PRICE_PER_TICKET;
+    public LottoStatistics(WinningNumbers winningTicket, LottoTickets purchaseTickets) {
+        this.matchCounts = calculateRankCounts(winningTicket, purchaseTickets.getTickets());
+        this.totalPurchaseAmount = purchaseTickets.getTickets().size() * LottoOrder.PRICE_PER_TICKET;
     }
 
     private Map<LottoRank, Integer> calculateRankCounts(WinningNumbers winningTicket, List<LottoTicket> purchaseTickets) {

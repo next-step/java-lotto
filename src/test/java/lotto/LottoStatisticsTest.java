@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class LottoStatisticsTest {
         );
 
         // when
-        LottoStatistics statistics = new LottoStatistics(winningTicket, purchaseTickets);
+        LottoStatistics statistics = new LottoStatistics(winningTicket, new LottoTickets(purchaseTickets));
 
         // then
         assertThat(statistics.getCountByRank(LottoRank.FIRST)).isEqualTo(1);
@@ -45,7 +46,7 @@ public class LottoStatisticsTest {
         );
 
         // when
-        LottoStatistics statistics = new LottoStatistics(winningTicket, purchaseTickets);
+        LottoStatistics statistics = new LottoStatistics(winningTicket, new LottoTickets(purchaseTickets));
 
         assertThat(statistics.calculateTotalWinningAmount())
             .isEqualTo(LottoRank.FIRST.getPrizeMoney(1) + LottoRank.SECOND.getPrizeMoney(1));
