@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.LottoOrder;
+import lotto.domain.Price;
 import lotto.domain.WinningNumbers;
 
 
@@ -25,7 +26,7 @@ public class InputView {
             manualNumbers.add(manualNumber);
         }
 
-        return new LottoOrder(totalAmount, manualTicketCount, manualNumbers);
+        return new LottoOrder(new Price(totalAmount), manualTicketCount, manualNumbers);
     }
 
     public static WinningNumbers getWinningTicket() {
