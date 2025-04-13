@@ -42,13 +42,9 @@ public class LottoOrder {
         return manualTicketCount;
     }
 
-    public List<LottoTicket> getManualTickets() {
-        return manualTickets;
-    }
-
     public LottoTickets getTickets() {
         List<LottoTicket> tickets = manualTickets;
-        tickets.addAll(LottoTicketMachine.purchase(this).getTickets());
+        tickets.addAll(LottoTicketMachine.purchase(getAutoTicketCount()).getTickets());
         return new LottoTickets(tickets);
     }
 }

@@ -10,11 +10,9 @@ public class LottoTicketMachine {
     private static final int COUNT = 6;
     private static final List<LottoNumber> TOTAL_NUMBERS = LottoNumber.getAll();
 
-    public static LottoTickets purchase(LottoOrder lottoOrder) {
+    public static LottoTickets purchase(Count ticketCount) {
         List<LottoTicket> tickets = new ArrayList<>();
-        tickets.addAll(lottoOrder.getManualTickets());
-
-        for (int i = 0; (new Count(i)).isLessThan(lottoOrder.getAutoTicketCount()); i++) {
+        for (int i = 0; (new Count(i)).isLessThan(ticketCount); i++) {
             tickets.add(generateTicket());
         }
         return new LottoTickets(tickets);
