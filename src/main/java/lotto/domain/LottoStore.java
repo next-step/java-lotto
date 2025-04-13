@@ -9,11 +9,22 @@ public class LottoStore {
     private LottoStore() {
     }
 
-    public static List<LottoNumbers> sellLotto(final int price) {
-        int lottoCount = LottoPrice.possibleTotalLottoCount(price);
+    public static PurchasedLottoNumbers sellLotto(final LottoPaper paper, List<Set<Integer>> slips) {
+        int lottoCount = paper.possibleTotalLottoCount();
+
+        int slipsCount = Math.min(slips.size(), lottoCount);
+        List<LottoNumbers> lottoNumbers = new ArrayList<>(sellLotto(slips.subList(0, slipsCount)));
+        int slipsSize = lottoNumbers.size();
+        lottoNumbers.addAll(sellLotto(lottoCount - slipsCount));
+        int autoSize = lottoNumbers.size() - slipsSize;
+
+        return new PurchasedLottoNumbers(lottoNumbers, autoSize, slipsSize);
+    }
+
+    public static List<LottoNumbers> sellLotto(final int count) {
 
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < count; i++) {
             LottoNumbers lottoNumber = LottoMachine.generateLottoNumber();
             lottoNumbersList.add(lottoNumber);
         }

@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoPaper;
 import lotto.domain.LottoStore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,19 +12,19 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStoreTest {
-    @DisplayName("예산 별 로또 판매 개수 테스트")
+    @DisplayName("로또 자동 생성 개수 테스트")
     @Test
     public void sellLotto() throws Exception {
-        assertThat(LottoStore.sellLotto(1000))
+        assertThat(LottoStore.sellLotto(1))
                 .hasSize(1);
 
-        assertThat(LottoStore.sellLotto(10000))
+        assertThat(LottoStore.sellLotto(10))
                 .hasSize(10);
 
-        assertThat(LottoStore.sellLotto(15243))
+        assertThat(LottoStore.sellLotto(15))
                 .hasSize(15);
 
-        assertThat(LottoStore.sellLotto(100000000))
+        assertThat(LottoStore.sellLotto(100000))
                 .hasSize(100000);
     }
 
@@ -33,5 +34,20 @@ class LottoStoreTest {
         assertThat(LottoStore.sellLotto(List.of(Set.of(1,2,3,4,5,6))))
                 .hasSize(1)
                 .containsExactly(new LottoNumbers("1,2,3,4,5,6"));
+    }
+
+    @DisplayName("로또 자동 + 수동 생성 테스트")
+    @Test
+    public void sellLottoWithGenerateAndSlips() throws Exception {
+        assertThat(LottoStore.sellLotto(new LottoPaper(500), List.of(Set.of(1,2,3,4,5,6))).getLottoNumbers())
+                .hasSize(0);
+
+        assertThat(LottoStore.sellLotto(new LottoPaper(1000), List.of(Set.of(1,2,3,4,5,6))).getLottoNumbers())
+                .hasSize(1)
+                .containsExactly(new LottoNumbers("1,2,3,4,5,6"));
+
+        assertThat(LottoStore.sellLotto(new LottoPaper(2000), List.of(Set.of(1,2,3,4,5,6))).getLottoNumbers())
+                .hasSize(2)
+                .contains(new LottoNumbers("1,2,3,4,5,6"));
     }
 }

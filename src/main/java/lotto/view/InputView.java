@@ -2,7 +2,6 @@ package lotto.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
 import static lotto.domain.LottoNumbers.LOTTO_SIZE;
-import static lotto.domain.LottoPrice.LOTTO_PRICE;
+import static lotto.domain.LottoPaper.LOTTO_PRICE;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
