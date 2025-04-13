@@ -8,18 +8,17 @@ public class StringCalculator {
 
     public int calculateString(String string) {
         final List<String> strings = split(string);
+        Integer.parseInt(strings.get(strings.size() - 1));
         int result = Integer.parseInt(strings.get(0));
         for (int i = 1; i < strings.size(); i += 2) {
-            final String operator = strings.get(i);
+            final Operator operator = ArithmeticOperator.from(strings.get(i));
             final int secondNumber = Integer.parseInt(strings.get(i + 1));
             result = calculate(result, secondNumber, operator);
         }
         return result;
     }
 
-    private static int calculate(int firstNumber, int secondNumber, String operatorString) {
-        final Operator operator = ArithmeticOperator.from(operatorString);
-
+    private static int calculate(int firstNumber, int secondNumber, Operator operator) {
         return operator.calculate(firstNumber, secondNumber);
     }
 
