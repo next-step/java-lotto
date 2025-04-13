@@ -29,7 +29,7 @@ public class PriceTest {
     @DisplayName("티켓 개수 계산")
     void calculateTicketCount() {
         Price price = new Price(1000);
-        assertThat(price.calcualteTicketCount())
+        assertThat(price.calculateTicketCount())
             .isEqualTo(new Count(1));
     }
 

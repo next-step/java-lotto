@@ -35,7 +35,7 @@ public class LottoOrder {
     }
 
     private Count calculateTicketCount(Price price) {
-        return price.calcualteTicketCount();
+        return price.calculateTicketCount();
     }
 
     public Count getTotalCount() {

@@ -19,7 +19,7 @@ public class Price {
         return new Price(ticketCount * TICKET_PRICE);
     }
 
-    public Count calcualteTicketCount() {
+    public Count calculateTicketCount() {
         return new Count(value / TICKET_PRICE);
     }
 
