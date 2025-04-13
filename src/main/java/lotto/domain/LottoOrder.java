@@ -1,19 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoOrder {
 
     private final Count totalCount;
-    private final List<LottoTicket> manualTickets;
+    private final LottoTickets manualTickets;
 
     public LottoOrder(Price totalAmount, List<LottoTicket> manualNumbers) {
-        Count totalCount = calculateTicketCount(totalAmount);
-
+        Count totalCount = totalAmount.calculateTicketCount();
         validate(totalCount, new Count(manualNumbers.size()));
+
         this.totalCount = totalCount;
-        this.manualTickets = manualNumbers;
+        this.manualTickets = new LottoTickets(manualNumbers, true);
     }
 
     private void validate(Count totalCount, Count manualTicketCount) {
@@ -22,22 +21,12 @@ public class LottoOrder {
         }
     }
 
-    private Count calculateTicketCount(Price price) {
-        return price.calculateTicketCount();
-    }
-
-    public Count getAutoTicketCount() {
-        return totalCount.subtract(new Count(manualTickets.size()));
-    }
-
-    public Count getManualTicketCount() {
-        return new Count(manualTickets.size());
+    private Count getAutoTicketCount() {
+        return totalCount.subtract(manualTickets.getManualTicketCount());
     }
 
     public LottoTickets createTickets() {
-        List<LottoTicket> tickets = new ArrayList<>();
-        tickets.addAll(manualTickets);
-        tickets.addAll(LottoTicketMachine.purchase(getAutoTicketCount()).getTickets());
-        return new LottoTickets(tickets);
+        LottoTickets tickets = LottoTicketMachine.purchase(getAutoTicketCount());
+        return tickets.add(manualTickets);
     }
 }

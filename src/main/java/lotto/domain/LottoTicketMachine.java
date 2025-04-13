@@ -15,7 +15,7 @@ public class LottoTicketMachine {
         for (int i = 0; (new Count(i)).isLessThan(ticketCount); i++) {
             tickets.add(generateTicket());
         }
-        return new LottoTickets(tickets);
+        return new LottoTickets(List.of(), tickets);
     }
 
     private static LottoTicket generateTicket() {

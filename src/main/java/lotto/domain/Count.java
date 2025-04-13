@@ -13,6 +13,10 @@ public class Count {
         this.value = value;
     }
 
+    public static Count add(Count count1, Count count2) {
+        return new Count(count1.value + count2.value);
+    }
+
     public Count subtract(Count other) {
         return new Count(this.value - other.value);
     }

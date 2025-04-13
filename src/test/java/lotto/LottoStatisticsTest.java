@@ -28,7 +28,7 @@ public class LottoStatisticsTest {
         );
 
         // when
-        LottoStatistics statistics = new LottoStatistics(winningTicket, new LottoTickets(purchaseTickets));
+        LottoStatistics statistics = new LottoStatistics(winningTicket, new LottoTickets(purchaseTickets, true));
 
         // then
         assertThat(statistics.getCountByRank(LottoRank.FIRST)).isEqualTo(1);
@@ -46,7 +46,7 @@ public class LottoStatisticsTest {
         );
 
         // when
-        LottoStatistics statistics = new LottoStatistics(winningTicket, new LottoTickets(purchaseTickets));
+        LottoStatistics statistics = new LottoStatistics(winningTicket, new LottoTickets(purchaseTickets, true));
 
         assertThat(statistics.calculateTotalWinningAmount())
             .isEqualTo(LottoRank.FIRST.getPrizeMoney(1) + LottoRank.SECOND.getPrizeMoney(1));

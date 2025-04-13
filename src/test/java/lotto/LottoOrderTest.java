@@ -27,21 +27,11 @@ public class LottoOrderTest {
     }
 
     @Test
-    @DisplayName("자동 구매 티켓 수는 전체 티켓 수 - 수동 구매 티켓 수이다.")
-    void shouldCalculateAutoTicketCount() {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)));
-        lottoTickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)));
-
-        LottoOrder order = new LottoOrder(new Price(5000), lottoTickets);
-        assertThat(order.getAutoTicketCount()).isEqualTo(new Count(3));
-    }
-
-    @Test
     @DisplayName("order 수만큼 티켓 생성")
     void shouldCreateTickets() {
         LottoOrder order = new LottoOrder(new Price(5000), new ArrayList<>());
-        assertThat(order.createTickets().getTickets()).hasSize(5);
+        assertThat(order.createTickets().getAutoTicketCount()).isEqualTo(new Count(5));
+        assertThat(order.createTickets().getManualTicketCount()).isEqualTo(new Count(0));
     }
 
 }
