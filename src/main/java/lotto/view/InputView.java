@@ -32,6 +32,7 @@ public class InputView {
     public static WinningNumbers getWinningTicket() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.nextLine();
+        
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusNumber = scanner.nextLine();
         return new WinningNumbers(parseIntCommaSeparated(numbers), parseInt(bonusNumber));

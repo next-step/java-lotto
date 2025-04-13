@@ -54,7 +54,4 @@ public enum LottoRank {
         return requiresBonusNumber;
     }
 
-    public boolean isWinning() {
-        return this != NONE;
-    }
 }

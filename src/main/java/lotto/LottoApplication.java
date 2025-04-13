@@ -13,7 +13,6 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         LottoOrder lottoOrder = InputView.createLottoOrder();
-
         List<LottoTicket> tickets = LottoTicketMachine.purchase(lottoOrder);
         ResultView.showPurchaseResult(lottoOrder, tickets);
 
