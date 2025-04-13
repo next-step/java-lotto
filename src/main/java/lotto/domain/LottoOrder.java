@@ -7,25 +7,23 @@ public class LottoOrder {
 
     private final Count totalCount;
     private final Count manualTicketCount;
-    private final List<LottoTicket> manualTickets = new ArrayList<>();
+    private final List<LottoTicket> manualTickets;
 
     public LottoOrder(int totalAmount, int manualTicketCount) {
-        this(new Price(totalAmount), manualTicketCount, new ArrayList<>());
+        this(new Price(totalAmount), new Count(manualTicketCount), new ArrayList<>());
     }
 
-    public LottoOrder(Price totalAmount, int manualTicketCount, List<List<Integer>> manualNumbers) {
+    public LottoOrder(Price totalAmount, Count manualTicketCount, List<LottoTicket> manualNumbers) {
         Count totalCount = calculateTicketCount(totalAmount);
 
         validate(totalCount, manualTicketCount);
         this.totalCount = totalCount;
-        this.manualTicketCount = new Count(manualTicketCount);
-        for (List<Integer> numbers : manualNumbers) {
-            manualTickets.add(new LottoTicket(numbers));
-        }
+        this.manualTicketCount = manualTicketCount;
+        this.manualTickets = manualNumbers;
     }
 
-    private void validate(Count totalCount, int manualTicketCount) {
-        if (totalCount.isLessThan(new Count(manualTicketCount))) {
+    private void validate(Count totalCount, Count manualTicketCount) {
+        if (totalCount.isLessThan(manualTicketCount)) {
             throw new IllegalArgumentException("수동 구매 티켓 수는 전체 티켓 수를 초과할 수 없습니다.");
         }
     }
