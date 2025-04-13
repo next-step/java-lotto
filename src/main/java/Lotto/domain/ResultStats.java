@@ -1,28 +1,18 @@
 package Lotto.domain;
 
-import Lotto.constants.Rank;
-
 import java.util.*;
 
 public class ResultStats {
-    private final Map<Rank, Integer> stats = new EnumMap<>(Rank.class);
+    private final Map<Rank, Integer> stats;
     private final int totalPrize;
 
-    public ResultStats(List<Lotto> lottos, Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        for (Rank rank : Rank.values()) {
-            stats.put(rank, 0);
-        }
+    public ResultStats(Map<Rank, Integer> stats, int totalPrize) {
+        this.stats = Collections.unmodifiableMap(new EnumMap<>(stats));
+        this.totalPrize = totalPrize;
+    }
 
-        this.totalPrize = lottos.stream()
-                .map(lotto -> {
-                    int matchCount = lotto.countMatches(winningNumbers);
-                    boolean matchBonus = lotto.contains(bonusNumber);
-                    return Rank.fromMatchCountAndBonus(matchCount, matchBonus);
-                })
-                .filter(rank -> rank != Rank.MISS)
-                .peek(rank -> stats.put(rank, stats.get(rank) + 1))
-                .mapToInt(Rank::getWinningMoney)
-                .sum();
+    public Map<Rank, Integer> getStats() {
+        return stats;
     }
 
     public int getTotalPrize() {
@@ -33,8 +23,8 @@ public class ResultStats {
         return totalPrize / (double) totalSpent;
     }
 
-    public Map<Rank, Integer> getStats() {
-        return Collections.unmodifiableMap(stats);
+    public int getCountByRank(Rank rank) {
+        return stats.getOrDefault(rank, 0);
     }
 }
 

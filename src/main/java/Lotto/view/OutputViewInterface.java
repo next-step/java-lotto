@@ -10,5 +10,5 @@ public interface OutputViewInterface {
 
     void printLottos(Lottos lottos);
 
-//    void printSummary(ResultStats summary);
+    void printResultStats(ResultStats resultStats, int totalSpent);
 }

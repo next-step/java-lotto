@@ -3,13 +3,15 @@ package Lotto.service;
 import Lotto.domain.Lotto;
 import Lotto.domain.Lottos;
 import Lotto.domain.LottoNumber;
-import Lotto.view.InputView;
+import Lotto.domain.ResultStats;
 import Lotto.view.InputViewInterface;
 import Lotto.view.OutputViewInterface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoGame {
     public static final String PAID_MONEY_MSG = "구입금액을 입력해 주세요.";
@@ -31,9 +33,12 @@ public class LottoGame {
         Lottos lottos = generateAllLottos();
         outputView.printLottos(lottos);
 
-        Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
-        LottoNumber bonusNumber = InputView.askForBonusNumber();
+        Set<LottoNumber> winningNumbers= getWinningTicket();
+        LottoNumber bonusNumber = getBonusNumber();
 
+        ResultStats result = lottos.getSummary(winningNumbers, bonusNumber);
+        int totalSpent = lottos.size() * Lotto.PRICE;
+        outputView.printResultStats(result, totalSpent);
     }
 
     private Lottos generateAllLottos() {
@@ -58,6 +63,20 @@ public class LottoGame {
             manualNumbers.add(inputView.getNumberListInput(DELIMITER));
         }
         return manualNumbers;
+    }
+
+    private Set<LottoNumber> getWinningTicket() {
+        outputView.printPrompt(WINNING_LOTTERY_NUMBERS_MSG);
+        int[] winningNumbersArray = inputView.getNumberListInput(DELIMITER);
+        return Arrays.stream(winningNumbersArray)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toSet());
+    }
+
+    private LottoNumber getBonusNumber() {
+        outputView.printPrompt(BONUS_NUMBERS_MSG);
+        int bonusNumber = inputView.getNumberInput();
+        return LottoNumber.of(bonusNumber);
     }
 }
 

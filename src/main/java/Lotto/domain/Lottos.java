@@ -5,33 +5,59 @@ import java.util.*;
 import static Lotto.domain.Lotto.generateLottoNumbers;
 
 public class Lottos {
-    public static final int LOTTO_PICK_COUNT = 6;
+    private static List<Lotto> lottos;
 
-    private final List<Lotto> lottos;
+    public Lottos() {
+        this.lottos = new ArrayList<>();
+    }
 
     public Lottos(int purchasedQty) {
-        this.lottos = generateLottos(purchasedQty);
+        this.lottos = generate(purchasedQty).getLottos();
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
-    }
-
-    private List<Lotto> generateLottos(int purchasedQty) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchasedQty; i++) {
-            List<LottoNumber> lottoNumbers = generateLottoNumbers();
-            Lotto lotto = new Lotto(lottoNumbers);
-            lottos.add(lotto);
-        }
-        return lottos;
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
 
-    public void addLotto(Lotto lotto) {
-        this.lottos.add(lotto);
+    public int size() {
+        return lottos.size();
+    }
+
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
+    }
+
+    public ResultStats getSummary(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        Map<Rank, Integer> stats = LottoResultCalculator.calculateStats(lottos, winningNumbers, bonusNumber);
+        int totalPrize = LottoResultCalculator.calculateTotalPrize(stats);
+
+        return new ResultStats(stats, totalPrize);
+    }
+
+    public static Lottos generate(int autoCount) {
+        return generate(List.of(), autoCount);
+    }
+
+    public static Lottos generate(List<int[]> manualNumbers) {
+        return generate(manualNumbers, 0);
+    }
+
+    public static Lottos generate(List<int[]> manualNumbers, int autoCount) {
+        Lottos allTickets = new Lottos();
+
+        for (int i = 0; i < manualNumbers.size(); i++) {
+            int[] numbers = manualNumbers.get(i);
+            allTickets.add(LottoGenerator.manual(numbers));
+        }
+
+        for (int i = 0; i < autoCount; i++) {
+            allTickets.add(LottoGenerator.auto());
+        }
+
+        return allTickets;
     }
 }
