@@ -24,7 +24,9 @@ public class LottoNumbers {
      */
     public LottoNumbers(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+            .sorted()
+            .collect(Collectors.toList());
     }
 
     /**

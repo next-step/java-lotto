@@ -30,7 +30,7 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또번호 실패 테스트 - 중복된 숫자가 들어있을 경우")
     public void duplicatedNumberTest() {
-        List<Integer> numbers = List.of(1,2,2,3,4,5);
+        List<Integer> numbers = List.of(1, 2, 2, 3, 4, 5);
         assertThatThrownBy(
             () -> new LottoNumbers(numbers)
         ).isInstanceOf(IllegalArgumentException.class);
@@ -39,7 +39,7 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또번호 실패 테스트 - 숫자가 6개 초과할 경우")
     public void exceedSizeTest() {
-        List<Integer> numbers = List.of(1,2,3,4,5,6,7);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
         assertThatThrownBy(
             () -> new LottoNumbers(numbers)
         ).isInstanceOf(IllegalArgumentException.class);
@@ -48,7 +48,7 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또번호 실패 테스트 - 숫자가 6개 미만일 경우")
     public void underSizeTest() {
-        List<Integer> numbers = List.of(1,2,3,4,5);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
         assertThatThrownBy(
             () -> new LottoNumbers(numbers)
         ).isInstanceOf(IllegalArgumentException.class);
@@ -57,8 +57,8 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또번호 실패 테스트 - 범위 밖 숫자가 들어갔을 경우")
     public void overRangeTest() {
-        List<Integer> exceedNumbers = List.of(1,2,3,4,5,46);
-        List<Integer> underNumbers = List.of(0,1,2,3,4,5);
+        List<Integer> exceedNumbers = List.of(1, 2, 3, 4, 5, 46);
+        List<Integer> underNumbers = List.of(0, 1, 2, 3, 4, 5);
         assertAll(
             () -> assertThatThrownBy(
                 () -> new LottoNumbers(exceedNumbers)
@@ -67,5 +67,24 @@ public class LottoNumbersTest {
                 () -> new LottoNumbers(underNumbers)
             ).isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    @DisplayName("equals test")
+    public void equalsTest() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        LottoNumbers lottoNumbers1 = new LottoNumbers(numbers);
+        LottoNumbers lottoNumbers2 = new LottoNumbers(numbers);
+        assertThat(lottoNumbers1).isEqualTo(lottoNumbers2);
+    }
+
+    @Test
+    @DisplayName("로또 정렬 테스트")
+    public void autoSortTest() {
+        List<Integer> numbers = List.of(6, 5, 4, 3, 2, 1);
+        List<Integer> sortedNumbers = List.of(1, 2, 3, 4, 5, 6);
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        LottoNumbers sortedLottoNumbers = new LottoNumbers(sortedNumbers);
+        assertThat(lottoNumbers).isEqualTo(sortedLottoNumbers);
     }
 }

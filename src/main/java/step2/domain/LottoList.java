@@ -19,4 +19,8 @@ public class LottoList {
     public int size() {
         return lottoList.size();
     }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
 }
