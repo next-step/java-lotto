@@ -6,7 +6,7 @@ public class Amount {
     private int value;
 
     public Amount(int amount) {
-        if (value < 0) {
+        if (amount < 0) {
             throw new IllegalArgumentException("Amount 는 음수일 수 없습니다.");
         }
 
@@ -15,9 +15,5 @@ public class Amount {
 
     public int getBuyCount() {
         return value / PRICE_PER_ONE;
-    }
-
-    public int getValue() {
-        return this.value;
     }
 }
