@@ -1,4 +1,4 @@
-package lotto;
+package Lotto;
 
 import Lotto.service.LottoGame;
 import Lotto.view.ConsoleInputView;

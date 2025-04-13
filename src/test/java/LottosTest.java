@@ -1,4 +1,4 @@
-import Lotto.constants.Rank;
+import Lotto.domain.Rank;
 import Lotto.domain.Lottos;
 import Lotto.domain.LottoNumber;
 import Lotto.domain.Lotto;

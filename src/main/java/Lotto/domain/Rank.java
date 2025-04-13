@@ -1,4 +1,4 @@
-package Lotto.constants;
+package Lotto.domain;
 
 import java.util.Arrays;
 

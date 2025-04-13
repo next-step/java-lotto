@@ -4,9 +4,11 @@ import java.util.*;
 
 import static Lotto.domain.LottoNumber.LOTTO_MAX_NUMBER;
 import static Lotto.domain.LottoNumber.LOTTO_MIN_NUMBER;
-import static Lotto.domain.Lottos.LOTTO_PICK_COUNT;
 
 public class Lotto {
+    public static final int PRICE = 1000;
+    public static final int LOTTO_PICK_COUNT = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -50,11 +52,26 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-
     public int countMatches(Set<LottoNumber> winningNumbers) {
         Set<LottoNumber> intersection = new HashSet<>(this.lottoNumbers);
         intersection.retainAll(winningNumbers);
         return intersection.size();
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lottoNumbers);
+    }
 }

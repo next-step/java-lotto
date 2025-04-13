@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static Lotto.domain.Lottos.*;
+import static Lotto.domain.Lotto.LOTTO_PICK_COUNT;
 
 public class WinningNumbers {
     private final Set<LottoNumber> numbers;
