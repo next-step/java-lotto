@@ -25,10 +25,6 @@ public class LottoOrder {
     }
 
     private void validate(Count totalCount, int manualTicketCount) {
-        if (totalCount.equals(new Count(0))) {
-            throw new IllegalArgumentException("하나 이상의 티켓을 구매해야 합니다.");
-        }
-
         if (totalCount.isLessThan(new Count(manualTicketCount))) {
             throw new IllegalArgumentException("수동 구매 티켓 수는 전체 티켓 수를 초과할 수 없습니다.");
         }
@@ -36,10 +32,6 @@ public class LottoOrder {
 
     private Count calculateTicketCount(Price price) {
         return price.calculateTicketCount();
-    }
-
-    public Count getTotalCount() {
-        return totalCount;
     }
 
     public Count getAutoTicketCount() {
@@ -52,5 +44,11 @@ public class LottoOrder {
 
     public List<LottoTicket> getManualTickets() {
         return manualTickets;
+    }
+
+    public LottoTickets getTickets() {
+        List<LottoTicket> tickets = manualTickets;
+        tickets.addAll(LottoTicketMachine.purchase(this).getTickets());
+        return new LottoTickets(tickets);
     }
 }

@@ -24,4 +24,12 @@ public class LottoOrderTest {
         LottoOrder order = new LottoOrder(5000, 3);
         assertThat(order.getAutoTicketCount()).isEqualTo(new Count(2));
     }
+
+    @Test
+    @DisplayName("order 수만큼 티켓 생성")
+    void shouldCreateTickets() {
+        LottoOrder order = new LottoOrder(5000, 0);
+        assertThat(order.getTickets().getTickets()).hasSize(5);
+    }
+
 }
