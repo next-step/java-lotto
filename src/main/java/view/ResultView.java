@@ -5,23 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import domain.Lotto;
-import domain.LottoBundle;
 import domain.LottoNumber;
 import domain.LottoStatistics;
 import domain.Rank;
-
-import static domain.LottoStatistics.PROFIT_STANDARD;
-import static domain.Rank.FIFTH;
-import static domain.Rank.FIRST;
-import static domain.Rank.FOURTH;
-import static domain.Rank.SECOND;
-import static domain.Rank.THIRD;
 
 public class ResultView {
 
     private static void print(Lotto lotto) {
         String formatted = lotto.getLottoNumberList().stream()
-            .map(LottoNumber::getNumber)
+            .map(LottoNumber::getValue)
             .map(String::valueOf)
             .collect(Collectors.joining(", "));
 

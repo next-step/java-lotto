@@ -2,6 +2,7 @@
 import java.util.List;
 
 
+import domain.Amount;
 import domain.Lotto;
 import domain.LottoBundle;
 import domain.LottoGenerator;
@@ -19,16 +20,16 @@ import static view.ResultView.printBuyCount;
 
 public class Main {
     public static void main(String[] args) {
-        int autoAmount = inputAmount();
-        int autoBuyCount = autoAmount / PRICE_PER_ONE;
-        int manualCount = inputManualLottoCount();
+        Amount buyAmount = new Amount(inputAmount());
+        int manualBuyCount = inputManualLottoCount();
+        int autoBuyCount = buyAmount.getBuyCount() - manualBuyCount;
 
-        List<Lotto> manualLottoList = inputManualLottoNumber(manualCount);
+        List<Lotto> manualLottoList = inputManualLottoNumber(manualBuyCount);
 
-        printBuyCount(manualCount, autoBuyCount);
+        printBuyCount(manualBuyCount, autoBuyCount);
 
         LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Lotto> lottoList = lottoGenerator.createLottoBulk(autoAmount);
+        List<Lotto> lottoList = lottoGenerator.createLottoBulk(autoBuyCount);
         lottoList.addAll(manualLottoList);
         print(lottoList);
 

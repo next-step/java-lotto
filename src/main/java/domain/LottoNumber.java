@@ -4,12 +4,12 @@ public class LottoNumber {
     public final static int MIN_RANGE = 1;
     public final static int MAX_RANGE = 45;
 
-    private final int number;
+    private final int value;
 
 
-    public LottoNumber(int number){
-        this.validate(number);
-        this.number = number;
+    public LottoNumber(int value){
+        this.validate(value);
+        this.value = value;
     }
 
     private void validate(int number){
@@ -23,10 +23,10 @@ public class LottoNumber {
         if (o == null || getClass() != o.getClass()) return false;
 
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return value == that.value;
     }
 
-    public int getNumber() {
-        return number;
+    public int getValue() {
+        return value;
     }
 }
