@@ -1,32 +1,63 @@
 package Lotto.service;
 
+import Lotto.domain.Lotto;
 import Lotto.domain.Lottos;
 import Lotto.domain.LottoNumber;
-import Lotto.domain.ResultStats;
 import Lotto.view.InputView;
-import Lotto.view.ResultView;
+import Lotto.view.InputViewInterface;
+import Lotto.view.OutputViewInterface;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class LottoGame {
-    public static void main(String[] args) {
-        try {
-            int purchasedQty = InputView.askHowMuchYouWouldBuy();
-            ResultView.printQuantity(purchasedQty);
+    public static final String PAID_MONEY_MSG = "구입금액을 입력해 주세요.";
+    public static final String WINNING_LOTTERY_NUMBERS_MSG = "\n지난 주 당첨 번호를 입력해 주세요.";
+    public static final String BONUS_NUMBERS_MSG = "보너스 볼을 입력해 주세요.";
+    public static final String MANUAL_TICKET_COUNT_MSG = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String MANUAL_TICKET_NUMBERS_MSG = "수동으로 구매할 번호를 입력해 주세요.";
+    public static final String DELIMITER = ",";
 
-            Lottos lottoList = new Lottos(purchasedQty);
-            ResultView.printLottos(lottoList.getLottos());
+    private final InputViewInterface inputView;
+    private final OutputViewInterface outputView;
 
-            Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
-            LottoNumber bonusNumber = InputView.askForBonusNumber();
-            ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers, bonusNumber);
-            ResultView.printStats(resultStats.getStats());
+    public LottoGame(InputViewInterface inputView, OutputViewInterface outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
-            int totalSpent = purchasedQty * 1000;
-            ResultView.printProfitRate(resultStats.calculateProfitRate(totalSpent));
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void play() {
+        Lottos lottos = generateAllLottos();
+        outputView.printLottos(lottos);
+
+        Set<LottoNumber> winningNumbers = InputView.askForWinningNumbers();
+        LottoNumber bonusNumber = InputView.askForBonusNumber();
+
+    }
+
+    private Lottos generateAllLottos() {
+        outputView.printPrompt(PAID_MONEY_MSG);
+        int paidMoney = inputView.getNumberInput();
+
+        outputView.printPrompt(MANUAL_TICKET_COUNT_MSG);
+        int manualCount = inputView.getNumberInput();
+        List<int[]> manualNumbers = getManualNumbers(manualCount);
+
+        int autoCount = (paidMoney - (manualCount * Lotto.PRICE)) / Lotto.PRICE;
+        Lottos lottoTickets = Lottos.generate(manualNumbers, autoCount);
+        outputView.printTicketCount(manualCount, autoCount);
+
+        return lottoTickets;
+    }
+
+    private List<int[]> getManualNumbers(int count) {
+        outputView.printPrompt(MANUAL_TICKET_NUMBERS_MSG);
+        List<int[]> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            manualNumbers.add(inputView.getNumberListInput(DELIMITER));
         }
+        return manualNumbers;
     }
 }
 

@@ -16,17 +16,20 @@ public class LottoGameTest {
 
         // 당첨 번호: 1, 2, 3, 4, 5, 6
         Set<LottoNumber> winningNumbers = Set.of(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)
         );
 
         // 수동으로 하나의 로또만 추가: 1, 2, 3, 7, 8, 9 (3개 일치 → 5등 5,000원)
-        lottoList.addLotto(new Lotto(List.of(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)
+        lottoList.add(new Lotto(List.of(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9)
         )));
 
-        ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers);
+        // 보너스 번호: 7
+        LottoNumber bonusNumber = LottoNumber.of(7);
+
+        ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers, bonusNumber);
 
         // when
         int totalSpent = 1000; // 로또 한 장 구매
