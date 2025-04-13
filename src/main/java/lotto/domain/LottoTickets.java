@@ -11,7 +11,7 @@ public class LottoTickets {
     }
 
     public Price getTotalPrice() {
-        return new Price(tickets.size() * LottoOrder.PRICE_PER_TICKET);
+        return Price.calculateFromTicketCount(tickets.size());
     }
 
     public List<LottoTicket> getTickets() {

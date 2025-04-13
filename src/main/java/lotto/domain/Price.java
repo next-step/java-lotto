@@ -4,18 +4,23 @@ import java.util.Objects;
 
 public class Price {
 
+    private final static int TICKET_PRICE = 1000;
     private final int value;
 
     public Price(int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("가격은 음수일 수 없다.");
+        if (value < TICKET_PRICE) {
+            throw new IllegalArgumentException("가격은 티켓 가격(" + TICKET_PRICE + "원)보다 작을 수 없다.");
         }
 
         this.value = value;
     }
 
-    public Count calcualteTicketCount(Price ticketPrice) {
-        return new Count(value / ticketPrice.value);
+    public static Price calculateFromTicketCount(int ticketCount) {
+        return new Price(ticketCount * TICKET_PRICE);
+    }
+
+    public Count calcualteTicketCount() {
+        return new Count(value / TICKET_PRICE);
     }
 
     public double calculateYield(Price totalPrice) {

@@ -5,8 +5,6 @@ import java.util.List;
 
 public class LottoOrder {
 
-    public static final int PRICE_PER_TICKET = 1000;
-
     private final Count totalCount;
     private final Count manualTicketCount;
     private final List<LottoTicket> manualTickets = new ArrayList<>();
@@ -37,7 +35,7 @@ public class LottoOrder {
     }
 
     private Count calculateTicketCount(Price price) {
-        return price.calcualteTicketCount(new Price(PRICE_PER_TICKET));
+        return price.calcualteTicketCount();
     }
 
     public Count getTotalCount() {

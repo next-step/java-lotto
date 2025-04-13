@@ -11,9 +11,10 @@ import org.junit.jupiter.api.Test;
 public class PriceTest {
 
     @Test
-    @DisplayName("가격은 0이상의 숫자여야 한다.")
+    @DisplayName("금액은 1000원 이상이어야 한다.")
     void priceIsPositive() {
-        assertThatThrownBy(() -> new Price(-1)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Price(1000 - 1)).isInstanceOf(IllegalArgumentException.class);
+        assertThat(new Price(1000)).isNotNull();
     }
 
     @Test
@@ -28,9 +29,15 @@ public class PriceTest {
     @DisplayName("티켓 개수 계산")
     void calculateTicketCount() {
         Price price = new Price(1000);
-        Price ticketPrice = new Price(100);
-        assertThat(price.calcualteTicketCount(ticketPrice))
-            .isEqualTo(new Count(10));
+        assertThat(price.calcualteTicketCount())
+            .isEqualTo(new Count(1));
+    }
+
+    @Test
+    @DisplayName("티켓 금액 계산")
+    void calculateTicketPrice() {
+        assertThat(Price.calculateFromTicketCount(1))
+            .isEqualTo(new Price(1000));
     }
 
     @Test
