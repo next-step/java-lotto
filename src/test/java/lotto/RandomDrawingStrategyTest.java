@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import lotto.domain.FixedDrawingStrategy;
 import lotto.domain.Lotto;
-import lotto.domain.RandomDrawingStrategy;
 import org.junit.jupiter.api.Test;
 
 class RandomDrawingStrategyTest {

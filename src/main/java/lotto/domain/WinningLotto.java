@@ -18,7 +18,7 @@ public class WinningLotto {
   }
 
   public PRIZES matchingWinningNumber(Lotto lotto) {
-    int count = lottoNumbers.findCount(lotto);
+    int count = lotto.findCount(lottoNumbers);
     boolean containBonusBall = isContainBonusBall();
     return PRIZES.valueOf(count, containBonusBall);
   }
