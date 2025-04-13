@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.LottoOrder;
-import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumbers;
 
 
@@ -12,22 +11,21 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static LottoOrder getPurchaseAmount() {
+    public static LottoOrder createLottoOrder() {
         System.out.println("구입금액을 입력해 주세요.");
         int totalAmount = parseInt(scanner.nextLine());
+
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualTicketCount = parseInt(scanner.nextLine());
-        return new LottoOrder(totalAmount, manualTicketCount);
-    }
 
-    public static List<LottoTicket> getManualTickets(LottoOrder lottoOrder) {
-        List<LottoTicket> manualTickets = new ArrayList<>();
+        List<List<Integer>> manualNumbers = new ArrayList<>();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < lottoOrder.getManualTicketCount(); i++) {
-            List<Integer> manualTicketCount = parseIntCommaSeparated(scanner.nextLine());
-            manualTickets.add(new LottoTicket(manualTicketCount));
+        for (int i = 0; i < manualTicketCount; i++) {
+            List<Integer> manualNumber = parseIntCommaSeparated(scanner.nextLine());
+            manualNumbers.add(manualNumber);
         }
-        return manualTickets;
+
+        return new LottoOrder(totalAmount, manualTicketCount, manualNumbers);
     }
 
     public static WinningNumbers getWinningTicket() {

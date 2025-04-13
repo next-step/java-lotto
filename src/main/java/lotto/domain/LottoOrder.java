@@ -1,18 +1,27 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoOrder {
 
     public static final int PRICE_PER_TICKET = 1000;
 
     private final int totalCount;
     private final int manualTicketCount;
+    private final List<List<Integer>> manualNumbers;
 
     public LottoOrder(int totalAmount, int manualTicketCount) {
+        this(totalAmount, manualTicketCount, new ArrayList<>());
+    }
+
+    public LottoOrder(int totalAmount, int manualTicketCount, List<List<Integer>> manualNumbers) {
         int totalCount = calculateTicketCount(totalAmount);
 
         validate(totalCount, manualTicketCount);
         this.totalCount = totalCount;
         this.manualTicketCount = manualTicketCount;
+        this.manualNumbers = manualNumbers;
     }
 
     private void validate(int totalCount, int manualTicketCount) {
@@ -42,5 +51,9 @@ public class LottoOrder {
 
     public int getManualTicketCount() {
         return manualTicketCount;
+    }
+
+    public List<List<Integer>> getManualNumbers() {
+        return manualNumbers;
     }
 }
