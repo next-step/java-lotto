@@ -11,7 +11,7 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         LottoOrder lottoOrder = InputView.createLottoOrder();
-        LottoTickets tickets = lottoOrder.getTickets();
+        LottoTickets tickets = lottoOrder.createTickets();
         ResultView.showPurchaseResult(lottoOrder, tickets);
 
         WinningNumbers winningTicket = InputView.getWinningTicket();

@@ -6,19 +6,13 @@ import java.util.List;
 public class LottoOrder {
 
     private final Count totalCount;
-    private final Count manualTicketCount;
     private final List<LottoTicket> manualTickets;
 
-    public LottoOrder(int totalAmount, int manualTicketCount) {
-        this(new Price(totalAmount), new Count(manualTicketCount), new ArrayList<>());
-    }
-
-    public LottoOrder(Price totalAmount, Count manualTicketCount, List<LottoTicket> manualNumbers) {
+    public LottoOrder(Price totalAmount, List<LottoTicket> manualNumbers) {
         Count totalCount = calculateTicketCount(totalAmount);
 
-        validate(totalCount, manualTicketCount);
+        validate(totalCount, new Count(manualNumbers.size()));
         this.totalCount = totalCount;
-        this.manualTicketCount = manualTicketCount;
         this.manualTickets = manualNumbers;
     }
 
@@ -33,15 +27,16 @@ public class LottoOrder {
     }
 
     public Count getAutoTicketCount() {
-        return totalCount.subtract(manualTicketCount);
+        return totalCount.subtract(new Count(manualTickets.size()));
     }
 
     public Count getManualTicketCount() {
-        return manualTicketCount;
+        return new Count(manualTickets.size());
     }
 
-    public LottoTickets getTickets() {
-        List<LottoTicket> tickets = manualTickets;
+    public LottoTickets createTickets() {
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.addAll(manualTickets);
         tickets.addAll(LottoTicketMachine.purchase(getAutoTicketCount()).getTickets());
         return new LottoTickets(tickets);
     }

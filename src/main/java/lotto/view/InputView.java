@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.Count;
 import lotto.domain.LottoOrder;
 import lotto.domain.LottoTicket;
 import lotto.domain.Price;
@@ -28,7 +27,7 @@ public class InputView {
             manualNumbers.add(new LottoTicket(manualNumber));
         }
 
-        return new LottoOrder(new Price(totalAmount), new Count(manualTicketCount), manualNumbers);
+        return new LottoOrder(new Price(totalAmount), manualNumbers);
     }
 
     public static WinningNumbers getWinningTicket() {
