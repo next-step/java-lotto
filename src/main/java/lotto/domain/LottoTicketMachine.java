@@ -12,10 +12,8 @@ public class LottoTicketMachine {
 
     public static List<LottoTicket> purchase(LottoOrder lottoOrder) {
         List<LottoTicket> tickets = new ArrayList<>();
-        for (List<Integer> manualNumber : lottoOrder.getManualNumbers()) {
-            tickets.add(new LottoTicket(manualNumber));
-        }
-
+        tickets.addAll(lottoOrder.getManualTickets());
+        
         for (int i = 0; (new Count(i)).isLessThan(lottoOrder.getAutoTicketCount()); i++) {
             tickets.add(generateTicket());
         }

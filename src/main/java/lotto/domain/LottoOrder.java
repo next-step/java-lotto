@@ -9,7 +9,7 @@ public class LottoOrder {
 
     private final Count totalCount;
     private final Count manualTicketCount;
-    private final List<List<Integer>> manualNumbers;
+    private final List<LottoTicket> manualTickets = new ArrayList<>();
 
     public LottoOrder(int totalAmount, int manualTicketCount) {
         this(new Price(totalAmount), manualTicketCount, new ArrayList<>());
@@ -21,7 +21,9 @@ public class LottoOrder {
         validate(totalCount, manualTicketCount);
         this.totalCount = totalCount;
         this.manualTicketCount = new Count(manualTicketCount);
-        this.manualNumbers = manualNumbers;
+        for (List<Integer> numbers : manualNumbers) {
+            manualTickets.add(new LottoTicket(numbers));
+        }
     }
 
     private void validate(Count totalCount, int manualTicketCount) {
@@ -50,7 +52,7 @@ public class LottoOrder {
         return manualTicketCount;
     }
 
-    public List<List<Integer>> getManualNumbers() {
-        return manualNumbers;
+    public List<LottoTicket> getManualTickets() {
+        return manualTickets;
     }
 }
