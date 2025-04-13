@@ -11,15 +11,13 @@ public class LottoStatistics {
 
     public static final int PROFIT_STANDARD = 1;
 
-    public LottoStatistics(List<Lotto> lottoList) {
-        for (Lotto lotto : lottoList) {
-            Rank rank = lotto.getRank();
-            statistics.put(rank, statistics.getOrDefault(rank,0) + 1);
+    public LottoStatistics(List<Rank> ranks, int buyCount) {
+        for(Rank rank : ranks) {
+            this.statistics.put(rank, statistics.getOrDefault(rank,0) + 1);
         }
 
-        this.makeProfitRate(lottoList.size());
+        this.makeProfitRate(buyCount);
     }
-
 
     private void makeProfitRate(int totalLottoCount) {
         AtomicInteger totalPrize = new AtomicInteger();

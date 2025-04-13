@@ -36,6 +36,6 @@ public class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
         lotto.matchRank(winningNumbers);
-        assertThat(lotto.getRank()).isEqualTo(Rank.SECOND);
+        assertThat(lotto.rankOf(winningNumbers)).isEqualTo(Rank.SECOND);
     }
 }

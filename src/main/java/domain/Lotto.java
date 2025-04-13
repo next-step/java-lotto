@@ -9,7 +9,6 @@ public class Lotto {
     public static final int PRICE_PER_ONE = 1000;
 
     private final List<LottoNumber> lottoNumberList;
-    private Rank rank;
 
     public Lotto(List<Integer> lottoNumberList) {
         if (lottoNumberList == null || lottoNumberList.isEmpty()) {
@@ -25,7 +24,6 @@ public class Lotto {
 
     public Lotto(List<Integer> lottoNumberList, WinningNumbers winningNumbers) {
         this(lottoNumberList);
-        this.matchRank(winningNumbers);
     }
 
 
@@ -39,11 +37,15 @@ public class Lotto {
             .collect(Collectors.toList());
     }
 
-    public void matchRank(WinningNumbers winningNumbers) {
+    public Rank rankOf(WinningNumbers winningNumbers) {
         int countOfMatch = this.getMatchCount(winningNumbers);
         boolean matchBonus = this.isMatchBonus(winningNumbers.getBonusNumber());
 
-        this.rank = Rank.valueOf(countOfMatch, matchBonus);
+        return Rank.valueOf(countOfMatch, matchBonus);
+    }
+
+    public void matchRank(WinningNumbers winningNumbers) {
+
     }
 
     private boolean isMatchBonus(BonusNumber bonusNumber) {
@@ -58,10 +60,5 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumberList.contains(lottoNumber);
-    }
-
-
-    public Rank getRank() {
-        return rank;
     }
 }

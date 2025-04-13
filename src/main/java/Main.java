@@ -37,6 +37,6 @@ public class Main {
             inputBonusNumbers());
 
         LottoBundle lottoBundle = new LottoBundle(lottoList, winningNumbers);
-        print(lottoBundle.getLottoStatics());
+        print(lottoBundle.toLottoStatics());
     }
 }
