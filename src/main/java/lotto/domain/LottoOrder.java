@@ -7,8 +7,8 @@ public class LottoOrder {
 
     public static final int PRICE_PER_TICKET = 1000;
 
-    private final int totalCount;
-    private final int manualTicketCount;
+    private final Count totalCount;
+    private final Count manualTicketCount;
     private final List<List<Integer>> manualNumbers;
 
     public LottoOrder(int totalAmount, int manualTicketCount) {
@@ -19,8 +19,8 @@ public class LottoOrder {
         int totalCount = calculateTicketCount(totalAmount);
 
         validate(totalCount, manualTicketCount);
-        this.totalCount = totalCount;
-        this.manualTicketCount = manualTicketCount;
+        this.totalCount = new Count(totalCount);
+        this.manualTicketCount = new Count(manualTicketCount);
         this.manualNumbers = manualNumbers;
     }
 
@@ -29,9 +29,6 @@ public class LottoOrder {
             throw new IllegalArgumentException("하나 이상의 티켓을 구매해야 합니다.");
         }
 
-        if (manualTicketCount < 0) {
-            throw new IllegalArgumentException("수동 구매 티켓 수는 0 이상이어야 합니다.");
-        }
         if (manualTicketCount > totalCount) {
             throw new IllegalArgumentException("수동 구매 티켓 수는 전체 티켓 수를 초과할 수 없습니다.");
         }
@@ -41,15 +38,15 @@ public class LottoOrder {
         return price / PRICE_PER_TICKET;
     }
 
-    public int getTotalCount() {
+    public Count getTotalCount() {
         return totalCount;
     }
 
-    public int getAutoTicketCount() {
-        return totalCount - manualTicketCount;
+    public Count getAutoTicketCount() {
+        return totalCount.subtract(manualTicketCount);
     }
 
-    public int getManualTicketCount() {
+    public Count getManualTicketCount() {
         return manualTicketCount;
     }
 
