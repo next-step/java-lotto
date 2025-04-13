@@ -10,6 +10,10 @@ public class LottoTickets {
         this.tickets = tickets;
     }
 
+    public Price getTotalPrice() {
+        return new Price(tickets.size() * LottoOrder.PRICE_PER_TICKET);
+    }
+
     public List<LottoTicket> getTickets() {
         return tickets;
     }

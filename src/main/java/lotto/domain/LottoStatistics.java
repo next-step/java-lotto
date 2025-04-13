@@ -8,11 +8,11 @@ import java.util.Map.Entry;
 public class LottoStatistics {
 
     private final Map<LottoRank, Integer> matchCounts;
-    private final int totalPurchaseAmount;
+    private final Price totalPurchaseAmount;
 
     public LottoStatistics(WinningNumbers winningTicket, LottoTickets purchaseTickets) {
         this.matchCounts = calculateRankCounts(winningTicket, purchaseTickets.getTickets());
-        this.totalPurchaseAmount = purchaseTickets.getTickets().size() * LottoOrder.PRICE_PER_TICKET;
+        this.totalPurchaseAmount = purchaseTickets.getTotalPrice();
     }
 
     private Map<LottoRank, Integer> calculateRankCounts(WinningNumbers winningTicket, List<LottoTicket> purchaseTickets) {
@@ -40,6 +40,6 @@ public class LottoStatistics {
 
     public double calculateProfitRate() {
         int totalWinningAmount = calculateTotalWinningAmount();
-        return (double) totalWinningAmount / totalPurchaseAmount;
+        return new Price(totalWinningAmount).calculateYield(totalPurchaseAmount);
     }
 }

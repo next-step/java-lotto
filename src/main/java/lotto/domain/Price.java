@@ -18,6 +18,10 @@ public class Price {
         return new Count(value / ticketPrice.value);
     }
 
+    public double calculateYield(Price totalPrice) {
+        return (double) value / totalPrice.value;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
