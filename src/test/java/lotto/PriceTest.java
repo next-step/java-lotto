@@ -43,8 +43,8 @@ public class PriceTest {
     @Test
     @DisplayName("수익률 계산")
     void calculateYield() {
-        Price price = new Price(1000);
+        int winningAmount = 1000;
         Price totalPrice = new Price(2000);
-        assertThat(price.calculateYield(totalPrice)).isEqualTo(0.5);
+        assertThat(totalPrice.calculateYield(winningAmount)).isEqualTo(0.5);
     }
 }

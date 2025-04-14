@@ -40,6 +40,6 @@ public class LottoStatistics {
 
     public double calculateProfitRate() {
         int totalWinningAmount = calculateTotalWinningAmount();
-        return new Price(totalWinningAmount).calculateYield(totalPurchaseAmount);
+        return totalPurchaseAmount.calculateYield(totalWinningAmount);
     }
 }

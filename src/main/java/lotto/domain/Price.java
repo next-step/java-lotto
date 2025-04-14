@@ -23,8 +23,8 @@ public class Price {
         return new Count(value / TICKET_PRICE);
     }
 
-    public double calculateYield(Price totalPrice) {
-        return (double) value / totalPrice.value;
+    public double calculateYield(int winningAmount) {
+        return (double) winningAmount / value;
     }
 
     @Override
