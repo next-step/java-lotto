@@ -59,7 +59,7 @@ public class LottoNumbers {
     /**
      * 사이즈 체크 validation
      */
-    public void checkSize(List<Integer> numbers) {
+    private void checkSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("숫자는 반드시" + LOTTO_NUMBERS_SIZE + "개여야 합니다.");
         }
@@ -68,7 +68,7 @@ public class LottoNumbers {
     /**
      * 중복 validation
      */
-    public void checkDuplicateNumbers(List<Integer> numbers) {
+    private void checkDuplicateNumbers(List<Integer> numbers) {
         if (numbers.size() != numbers.stream().distinct().count()) {
             throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
         }
@@ -77,11 +77,11 @@ public class LottoNumbers {
     /**
      * 범위 validation
      */
-    public void checkRangeAll(List<Integer> numbers) {
+    private void checkRangeAll(List<Integer> numbers) {
         numbers.forEach(this::checkRange);
     }
 
-    public void checkRange(int number) {
+    private void checkRange(int number) {
         if (number < LOTTO_NUMBERS_MIN || number > LOTTO_NUMBERS_MAX) {
             throw new IllegalArgumentException("숫자는 " + LOTTO_NUMBERS_MIN + " ~ " + LOTTO_NUMBERS_MAX + " 사이여야 합니다.");
         }
@@ -113,4 +113,5 @@ public class LottoNumbers {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
 }

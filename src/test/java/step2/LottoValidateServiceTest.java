@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
 import step2.domain.LottoList;
 import step2.domain.LottoNumbers;
-import step2.domain.LottoWinner;
 import step2.domain.Rank;
+import step2.domain.WinningNumber;
 import step2.service.LottoValidateService;
 
 public class LottoValidateServiceTest {
@@ -20,33 +20,33 @@ public class LottoValidateServiceTest {
     @DisplayName("로또 검증 시스템")
     public void lottoValidateServiceTest() {
         Lotto requestFirst = new Lotto(new LottoNumbers(List.of(
-            1,2,3,4,5,6
+            1, 2, 3, 4, 5, 6
         )));
         Lotto requestSecond = new Lotto(new LottoNumbers(List.of(
-            1,2,3,4,5,7
+            1, 2, 3, 4, 5, 7
         )));
         Lotto requestThird = new Lotto(new LottoNumbers(List.of(
-            1,2,3,4,7,8
+            1, 2, 3, 4, 7, 8
         )));
         Lotto requestFourth = new Lotto(new LottoNumbers(List.of(
-            1,2,3,7,8,9
+            1, 2, 3, 7, 8, 9
         )));
         Lotto requestFifth = new Lotto(new LottoNumbers(List.of(
-            1,2,7,8,9,10
+            1, 2, 7, 8, 9, 10
         )));
         Lotto requestSixth = new Lotto(new LottoNumbers(List.of(
-            1,7,8,9,10,11
+            1, 7, 8, 9, 10, 11
         )));
         Lotto requestSeventh = new Lotto(new LottoNumbers(List.of(
-            7,8,9,10,11,12
+            7, 8, 9, 10, 11, 12
         )));
         LottoList requestList = new LottoList(List.of(
             requestFirst, requestSecond, requestThird, requestFourth, requestFifth, requestSixth, requestSeventh
         ));
         LottoNumbers actual = new LottoNumbers(List.of(
-            1,2,3,4,5,6
+            1, 2, 3, 4, 5, 6
         ));
-        LottoWinner winner = new LottoWinner(actual);
+        WinningNumber winner = new WinningNumber(actual);
         LottoValidateService lottoValidateService = new LottoValidateService(requestList, winner);
         lottoValidateService.validateAll();
         Map<Rank, Integer> result = lottoValidateService.getResult();

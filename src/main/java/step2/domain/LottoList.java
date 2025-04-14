@@ -1,30 +1,48 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 로또 묶음
  */
 public class LottoList {
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
 
     public LottoList(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+        this.lottos = lottoList;
     }
 
     public LottoList(int count) {
-        lottoList = new ArrayList<>();
+        lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoList.add(new Lotto());
+            lottos.add(new Lotto());
         }
     }
 
     public int size() {
-        return lottoList.size();
+        return lottos.size();
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public int getTotal() {
+        return lottos.size() * Lotto.getLottoPrice();
+    }
+
+    public Map<Lotto, Integer> getAllMatchCount(LottoNumbers target) {
+        Map<Lotto, Integer> matchCountMap = new HashMap<>();
+        for (Lotto lotto : lottos) {
+            int matchCount = lotto.getMatchCount(target);
+            matchCountMap.put(lotto, matchCount);
+        }
+        return matchCountMap;
+    }
+
+    public String getAllLottoNumbers() {
+        return lottos.stream()
+            .map(Lotto::getLottoNumbers)
+            .collect(Collectors.joining("\n"));
     }
 }

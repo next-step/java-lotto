@@ -21,7 +21,19 @@ public class Lotto {
         return LOTTO_PRICE;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers.getNumbers();
+    // 다른 로또와 비교해서 일치하는 숫자 개수 반환
+    public int getMatchCount(LottoNumbers target) {
+        int matchCount = 0;
+        for (Integer number : lottoNumbers.getNumbers()) {
+            if (target.getNumbers().contains(number)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
+
+    public String getLottoNumbers() {
+        return lottoNumbers.getNumbers()
+            .toString();
     }
 }

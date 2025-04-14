@@ -6,7 +6,7 @@ import java.util.Map;
 
 import step2.domain.Lotto;
 import step2.domain.LottoList;
-import step2.domain.LottoWinner;
+import step2.domain.WinningNumber;
 import step2.domain.Rank;
 
 /**
@@ -14,20 +14,20 @@ import step2.domain.Rank;
  */
 public class LottoValidateService {
     private final LottoList bought;
-    private final LottoWinner winner;
+    private final WinningNumber winner;
     private final Map<Rank, Integer> result = new HashMap<>();
 
     /**
      * 단일 장수 생성자
      */
-    public LottoValidateService(Lotto lotto, LottoWinner winner) {
+    public LottoValidateService(Lotto lotto, WinningNumber winner) {
         this(new LottoList(List.of(lotto)), winner);
     }
 
     /**
      * 여러 장수 생성자
      */
-    public LottoValidateService(LottoList bought, LottoWinner winner) {
+    public LottoValidateService(LottoList bought, WinningNumber winner) {
         this.bought = bought;
         this.winner = winner;
     }
@@ -36,23 +36,13 @@ public class LottoValidateService {
      * 전체 검증 시스템
      */
     public void validateAll() {
-        for (Lotto lotto : bought.getLottoList()) {
-            Rank rank = validateLotto(lotto);
-            result.put(rank, result.getOrDefault(rank, 0) + 1);
-        }
-    }
-
-    /**
-     * 단일 검증 시스템
-     */
-    private Rank validateLotto(Lotto requestLotto) {
-        int matchCount = 0;
-        for (Integer number : requestLotto.getLottoNumbers()) {
-            if (winner.getWinningNumbers().contains(number)) {
-                matchCount++;
+        Map<Lotto, Integer> matchCounts = bought.getAllMatchCount(winner.getWinningNumbers());
+        matchCounts.forEach(
+            (lotto, matchCount) -> {
+                Rank rank = Rank.of(matchCount);
+                result.put(rank, result.getOrDefault(rank, 0) + 1);
             }
-        }
-        return Rank.of(matchCount);
+        );
     }
 
     /**

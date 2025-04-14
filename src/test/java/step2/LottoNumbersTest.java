@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import step2.domain.LottoNumbers;
 
@@ -54,19 +56,16 @@ public class LottoNumbersTest {
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    @DisplayName("로또번호 실패 테스트 - 범위 밖 숫자가 들어갔을 경우")
-    public void overRangeTest() {
-        List<Integer> exceedNumbers = List.of(1, 2, 3, 4, 5, 46);
-        List<Integer> underNumbers = List.of(0, 1, 2, 3, 4, 5);
-        assertAll(
-            () -> assertThatThrownBy(
-                () -> new LottoNumbers(exceedNumbers)
-            ).isInstanceOf(IllegalArgumentException.class),
-            () -> assertThatThrownBy(
-                () -> new LottoNumbers(underNumbers)
-            ).isInstanceOf(IllegalArgumentException.class)
-        );
+    @ParameterizedTest
+    @CsvSource({
+        "1,2,3,4,5,46", // 범위 초과
+        "0,1,2,3,4,5" // 범위 미만
+    })
+    public void rangeNumberTest(int num1, int num2, int num3, int num4, int num5, int num6) {
+        List<Integer> numbers = List.of(num1, num2, num3, num4, num5, num6);
+        assertThatThrownBy(
+            () -> new LottoNumbers(numbers)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -78,10 +77,15 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers1).isEqualTo(lottoNumbers2);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({
+        "6,5,4,3,2,1", // 역순
+        "1,3,2,4,5,6", // 랜덤
+        "1,2,3,4,5,6" // 정상
+    })
     @DisplayName("로또 정렬 테스트")
-    public void autoSortTest() {
-        List<Integer> numbers = List.of(6, 5, 4, 3, 2, 1);
+    public void autoSortTest(int num1, int num2, int num3, int num4, int num5, int num6) {
+        List<Integer> numbers = List.of(num1, num2, num3, num4, num5, num6);
         List<Integer> sortedNumbers = List.of(1, 2, 3, 4, 5, 6);
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         LottoNumbers sortedLottoNumbers = new LottoNumbers(sortedNumbers);
