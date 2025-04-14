@@ -19,7 +19,7 @@ public class ConsoleOutputView implements OutputViewInterface {
     @Override
     public void printLottos(Lottos lottos) {
         for (Lotto lottoTicket : lottos.getLottos()) {
-            System.out.println(lottoTicket.toString());
+            System.out.println(lottoTicket);
         }
     }
 
