@@ -18,7 +18,7 @@ public class LottoTicketMachine {
         }
 
         LottoTickets manualTickets = order.getManualTickets();
-        return manualTickets.add(new LottoTickets(tickets, false));
+        return manualTickets.add(LottoTickets.fromAutoTickets(tickets));
     }
 
     private static LottoTicket generateTicket() {

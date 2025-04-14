@@ -18,16 +18,18 @@ public class LottoTickets {
         this.autoTicketCount = new Count(autoTickets.size());
     }
 
-    public LottoTickets(List<LottoTicket> tickets, boolean manual) {
-        this.tickets = tickets;
-        this.manualTicketCount = manual ? new Count(tickets.size()) : new Count(0);
-        this.autoTicketCount = manual ? new Count(0) : new Count(tickets.size());
-    }
-
     private LottoTickets(List<LottoTicket> tickets, Count manualTicketCount, Count autoTicketCount) {
         this.tickets = tickets;
         this.manualTicketCount = manualTicketCount;
         this.autoTicketCount = autoTicketCount;
+    }
+
+    public static LottoTickets fromManualTickets(List<LottoTicket> tickets) {
+        return new LottoTickets(tickets, new ArrayList<>());
+    }
+
+    public static LottoTickets fromAutoTickets(List<LottoTicket> tickets) {
+        return new LottoTickets(new ArrayList<>(), tickets);
     }
 
     public LottoTickets add(LottoTickets other) {

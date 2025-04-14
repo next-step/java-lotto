@@ -1,9 +1,10 @@
 package lotto;
 
 import lotto.domain.LottoOrder;
-import lotto.domain.LottoStatistics;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
+import lotto.domain.Price;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -16,8 +17,13 @@ public class LottoApplication {
         ResultView.showPurchaseResult(tickets);
 
         WinningNumbers winningTicket = InputView.getWinningTicket();
-        LottoStatistics lottoStatistics = new LottoStatistics(winningTicket, tickets);
-        ResultView.showStatistics(lottoStatistics);
+        LottoResult lottoResult = LottoResult.createLottoResult(winningTicket, tickets);
+        ResultView.showStatistics(lottoResult.getLottoRankCount());
+
+        Price totalAmount = lottoOrder.getPurchaseAmount();
+        int totalPrizeMoney = lottoResult.calculateTotalPrizeMoney();
+        double profitRate = totalAmount.calculateYield(totalPrizeMoney);
+        ResultView.showProfitRate(profitRate);
     }
 
 }
