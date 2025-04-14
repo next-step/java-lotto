@@ -36,14 +36,6 @@ public enum Rank implements RankMatcher {
         return Arrays.stream(values()).filter(rank -> rank.match(countOfMatch, matchBonus)).findFirst().orElse(MISS);
     }
 
-    public static Rank fromRankName(String rankName) {
-        try {
-            return Rank.valueOf(rankName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("유효하지 않은 Rank 이름입니다: " + rankName, e);
-        }
-    }
-
     @Override
     public boolean match(int countOfMatch, boolean matchBonus) {
         if (countOfMatch == 6) {
