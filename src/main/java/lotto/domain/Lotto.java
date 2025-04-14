@@ -28,8 +28,8 @@ public class Lotto {
     }
   }
 
-  public int findCount(List<Integer> numbers) {
-    return lottoNumbers.findCount(numbers);
+  public int findCount(LottoNumbers winningNumbers) {
+    return lottoNumbers.findCount(winningNumbers);
   }
 
   public List<Integer> getLottoNumbers() {
