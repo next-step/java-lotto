@@ -20,7 +20,7 @@ public class LottoResult {
     }
 
     public double rateOfReturn() {
-        return (double) totalWinnings() / (totalCount() * LottoStore.LOTTO_PRICE);
+        return (double) totalWinnings() / (totalCount() * LottoPaper.LOTTO_PRICE);
     }
 
     private int totalCount() {

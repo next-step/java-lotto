@@ -11,10 +11,14 @@ class InputViewTest {
     @DisplayName("input 테스트, 유효하지 않은 문자열은 정상 범위 숫자가 나올 때까지 next")
     @Test
     public void validInput() {
-        System.setIn(new ByteArrayInputStream("1242a\n-123\nasdb\n14000\n1,2\na,b\n1,b\n1,2,3,4,5,6".getBytes()));
+        System.setIn(new ByteArrayInputStream("1242a\n-123\nasdb\n14000\nas\n-140\n1\nas\n0\n46\n45\n1,2\na,b\n1,b\n1,2,3,4,5,6".getBytes()));
 
         assertThat(InputView.getPositiveNumberInputWithLowBound("구입금액을 입력해 주세요."))
                 .isEqualTo(14000);
+        assertThat(InputView.getPositiveNumberInput("수동으로 구매할 로또 수를 입력해 주세요."))
+                .isEqualTo(1);
+        assertThat(InputView.getLottoNumberInput("보너스 볼을 입력해 주세요."))
+                .isEqualTo(45);
         assertThat(InputView.getPositiveNumberSetInput("지난 주 당첨 번호를 입력해 주세요.", ","))
                 .containsExactly(1,2,3,4,5,6);
 

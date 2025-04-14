@@ -4,9 +4,14 @@ import lotto.domain.BonusNumberMatchCondition;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
+import lotto.domain.PurchasedLottoNumbers;
 
 public class ResultView {
     private ResultView() {
+    }
+
+    public static void printPurchasedLottoNumbers(PurchasedLottoNumbers purchasedLottoNumbers) {
+        System.out.println(purchasedLottoNumbers);
     }
 
     public static void printLottoNumber(LottoNumbers lottoNumbers) {

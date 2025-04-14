@@ -10,11 +10,11 @@ import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 
 public enum LottoRank {
     ETC(-1, ANY, 0),
-    FIFTH(LOTTO_SIZE - 3, ANY, 5000),
-    FOURTH(LOTTO_SIZE - 2, ANY, 50000),
-    THIRD(LOTTO_SIZE - 1, NON_MATCH, 1500000),
-    SECOND(LOTTO_SIZE - 1, MATCH, 30000000),
-    FIRST(LOTTO_SIZE, NON_MATCH, 2000000000),
+    FIFTH(LOTTO_SIZE - 3, ANY, 5_000),
+    FOURTH(LOTTO_SIZE - 2, ANY, 50_000),
+    THIRD(LOTTO_SIZE - 1, NON_MATCH, 1_500_000),
+    SECOND(LOTTO_SIZE - 1, MATCH, 30_000_000),
+    FIRST(LOTTO_SIZE, NON_MATCH, 2_000_000_000),
     ;
 
     private final int matchCount;
@@ -31,13 +31,17 @@ public enum LottoRank {
 
     static {
         for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank.bonusNumberMatchCondition == MATCH || lottoRank.bonusNumberMatchCondition == ANY) {
-                LOTTO_RANK.put(new MatchResult(lottoRank.matchCount, true), lottoRank);
-            }
+            putLottoRankMap(lottoRank);
+        }
+    }
 
-            if (lottoRank.bonusNumberMatchCondition == NON_MATCH || lottoRank.bonusNumberMatchCondition == ANY) {
-                LOTTO_RANK.put(new MatchResult(lottoRank.matchCount, false), lottoRank);
-            }
+    private static void putLottoRankMap(LottoRank lottoRank) {
+        if (lottoRank.bonusNumberMatchCondition == MATCH || lottoRank.bonusNumberMatchCondition == ANY) {
+            LOTTO_RANK.put(new MatchResult(lottoRank.matchCount, true), lottoRank);
+        }
+
+        if (lottoRank.bonusNumberMatchCondition == NON_MATCH || lottoRank.bonusNumberMatchCondition == ANY) {
+            LOTTO_RANK.put(new MatchResult(lottoRank.matchCount, false), lottoRank);
         }
     }
 
