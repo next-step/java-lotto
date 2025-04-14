@@ -32,8 +32,9 @@ public class Lottos {
     }
 
     public ResultStats getSummary(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        Map<Rank, Integer> stats = LottoResultCalculator.calculateStats(lottos, winningNumbers, bonusNumber);
-        int totalPrize = LottoResultCalculator.calculateTotalPrize(stats);
+        LottoResultCalculator calculator = new LottoResultCalculator(lottos, winningNumbers, bonusNumber);
+        Map<Rank, Integer> stats = calculator.calculateStats();
+        int totalPrize = calculator.calculateTotalPrize();
 
         return new ResultStats(stats, totalPrize);
     }
