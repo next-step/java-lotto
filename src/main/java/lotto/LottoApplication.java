@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoOrder;
 import lotto.domain.LottoStatistics;
+import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
@@ -11,7 +12,7 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         LottoOrder lottoOrder = InputView.createLottoOrder();
-        LottoTickets tickets = lottoOrder.createTickets();
+        LottoTickets tickets = LottoTicketMachine.purchase(lottoOrder);
         ResultView.showPurchaseResult(tickets);
 
         WinningNumbers winningTicket = InputView.getWinningTicket();

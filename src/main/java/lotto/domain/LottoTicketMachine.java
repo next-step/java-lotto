@@ -10,12 +10,15 @@ public class LottoTicketMachine {
     private static final int COUNT = 6;
     private static final List<LottoNumber> TOTAL_NUMBERS = LottoNumber.getAll();
 
-    public static LottoTickets purchase(Count ticketCount) {
+    public static LottoTickets purchase(LottoOrder order) {
         List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; (new Count(i)).isLessThan(ticketCount); i++) {
+        Count autoTicketCount = order.getAutoTicketCount();
+        for (int i = 0; (new Count(i)).isLessThan(autoTicketCount); i++) {
             tickets.add(generateTicket());
         }
-        return new LottoTickets(List.of(), tickets);
+
+        LottoTickets manualTickets = order.getManualTickets();
+        return manualTickets.add(new LottoTickets(tickets, false));
     }
 
     private static LottoTicket generateTicket() {

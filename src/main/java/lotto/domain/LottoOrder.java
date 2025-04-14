@@ -1,11 +1,16 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoOrder {
 
     private final Count totalCount;
     private final LottoTickets manualTickets;
+
+    public LottoOrder(int totalAmount, List<List<Integer>> manualNumbers) {
+        this(new Price(totalAmount), manualNumbers.stream().map(LottoTicket::new).collect(Collectors.toList()));
+    }
 
     public LottoOrder(Price totalAmount, List<LottoTicket> manualNumbers) {
         Count totalCount = totalAmount.calculateTicketCount();
@@ -21,12 +26,11 @@ public class LottoOrder {
         }
     }
 
-    private Count getAutoTicketCount() {
+    public Count getAutoTicketCount() {
         return totalCount.subtract(manualTickets.getManualTicketCount());
     }
 
-    public LottoTickets createTickets() {
-        LottoTickets tickets = LottoTicketMachine.purchase(getAutoTicketCount());
-        return tickets.add(manualTickets);
+    public LottoTickets getManualTickets() {
+        return manualTickets;
     }
 }

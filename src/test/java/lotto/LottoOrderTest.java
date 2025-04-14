@@ -1,11 +1,9 @@
 package lotto;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.Count;
 import lotto.domain.LottoOrder;
 import lotto.domain.LottoTicket;
 import lotto.domain.Price;
@@ -24,14 +22,6 @@ public class LottoOrderTest {
         assertThatThrownBy(() -> new LottoOrder(new Price(1000), lottoTickets))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("수동 구매 티켓 수는 전체 티켓 수를 초과할 수 없습니다.");
-    }
-
-    @Test
-    @DisplayName("order 수만큼 티켓 생성")
-    void shouldCreateTickets() {
-        LottoOrder order = new LottoOrder(new Price(5000), new ArrayList<>());
-        assertThat(order.createTickets().getAutoTicketCount()).isEqualTo(new Count(5));
-        assertThat(order.createTickets().getManualTicketCount()).isEqualTo(new Count(0));
     }
 
 }
