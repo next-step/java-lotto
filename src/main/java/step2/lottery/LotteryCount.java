@@ -1,12 +1,25 @@
 package step2.lottery;
 
 public class LotteryCount {
-    private final int lottoCount;
+    private final int autoLottoCount;
+    private final int manualLottoCount;
     private static final int LOTTO_PRICE = 1000;
 
     public LotteryCount(int purchaseAmount) {
         validate(purchaseAmount);
-        this.lottoCount = purchaseAmount / LOTTO_PRICE;
+        this.autoLottoCount = count(purchaseAmount);
+        this.manualLottoCount = 0;
+    }
+
+    public LotteryCount(int purchaseAmount, int manualCount) {
+        int totalAmount = purchaseAmount - (manualCount * LOTTO_PRICE);
+        validate(totalAmount);
+        this.autoLottoCount = count(totalAmount);
+        this.manualLottoCount = manualCount;
+    }
+
+    private int count(int purchaseAmount) {
+        return purchaseAmount / LOTTO_PRICE;
     }
 
     private void validate(int purchaseAmount) {
@@ -17,7 +30,7 @@ public class LotteryCount {
             throw new IllegalArgumentException("로또 한 장의 가격보다 작은 금액입니다. 값 : " + purchaseAmount);
         }
     }
-    public int getLottoCount() {
-        return lottoCount;
+    public int getAutoLottoCount() {
+        return autoLottoCount;
     }
 }

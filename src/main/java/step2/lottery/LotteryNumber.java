@@ -3,7 +3,7 @@ package step2.lottery;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LotteryNumber {
+public class LotteryNumber implements Comparable<LotteryNumber> {
     private final int number;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
@@ -28,5 +28,15 @@ public class LotteryNumber {
             throw new IllegalArgumentException("로또 번호는 1부터 45 사이여야 합니다.");
         }
         return cached;
+    }
+
+    @Override
+    public int compareTo(LotteryNumber other) {
+        return Integer.compare(this.number, other.number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }
