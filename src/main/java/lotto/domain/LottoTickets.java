@@ -20,13 +20,8 @@ public class LottoTickets {
 
     public LottoTickets(List<LottoTicket> tickets, boolean manual) {
         this.tickets = tickets;
-        if (manual) {
-            this.manualTicketCount = new Count(tickets.size());
-            this.autoTicketCount = new Count(0);
-        } else {
-            this.manualTicketCount = new Count(0);
-            this.autoTicketCount = new Count(tickets.size());
-        }
+        this.manualTicketCount = manual ? new Count(tickets.size()) : new Count(0);
+        this.autoTicketCount = manual ? new Count(0) : new Count(tickets.size());
     }
 
     private LottoTickets(List<LottoTicket> tickets, Count manualTicketCount, Count autoTicketCount) {
