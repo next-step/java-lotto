@@ -2,7 +2,7 @@
 import java.util.List;
 
 
-import domain.BonusNumber;
+import domain.Amount;
 import domain.Lotto;
 import domain.LottoBundle;
 import domain.LottoGenerator;
@@ -12,23 +12,31 @@ import static domain.Lotto.PRICE_PER_ONE;
 import static utils.Splitter.splitAndConvertInt;
 import static view.InputView.inputAmount;
 import static view.InputView.inputBonusNumbers;
+import static view.InputView.inputManualLottoCount;
+import static view.InputView.inputManualLottoNumber;
 import static view.InputView.inputWinningNumber;
 import static view.ResultView.print;
+import static view.ResultView.printBuyCount;
 
 public class Main {
     public static void main(String[] args) {
-        int amount = inputAmount();
-        int buyCount = amount / PRICE_PER_ONE;
-        System.out.println(buyCount + "개를 구매하였습니다.");
+        Amount buyAmount = new Amount(inputAmount());
+        int manualBuyCount = inputManualLottoCount();
+        int autoBuyCount = buyAmount.getBuyCount() - manualBuyCount;
+
+        List<Lotto> manualLottoList = inputManualLottoNumber(manualBuyCount);
+
+        printBuyCount(manualBuyCount, autoBuyCount);
 
         LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Lotto> lottoList = lottoGenerator.createLottoBulk(amount);
+        List<Lotto> lottoList = lottoGenerator.createLottoBulk(autoBuyCount);
+        lottoList.addAll(manualLottoList);
         print(lottoList);
 
-        WinningNumbers winningNumbers = new WinningNumbers(splitAndConvertInt(inputWinningNumber()),
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(splitAndConvertInt(inputWinningNumber())),
             inputBonusNumbers());
 
         LottoBundle lottoBundle = new LottoBundle(lottoList, winningNumbers);
-        print(lottoBundle.getLottoStatics());
+        print(lottoBundle.toLottoStatics());
     }
 }

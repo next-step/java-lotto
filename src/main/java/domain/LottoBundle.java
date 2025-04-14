@@ -1,28 +1,24 @@
 package domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoBundle {
     private final List<Lotto> lottoList;
-    private final LottoStatistics lottoStatistics;
+    private final WinningNumbers winningNumbers;
 
     public LottoBundle(List<Lotto> lottoList, WinningNumbers winningNumbers) {
         this.lottoList = lottoList;
-        this.matchRank(winningNumbers);
-        this.lottoStatistics = new LottoStatistics(lottoList);
+        this.winningNumbers = winningNumbers;
     }
 
-    public LottoStatistics getLottoStatics() {
-        return lottoStatistics;
+    public LottoStatistics toLottoStatics() {
+        return new LottoStatistics(getRanks(), this.lottoList.size());
     }
 
-    private void matchRank(WinningNumbers winningNumbers){
-        for(Lotto lotto : lottoList){
-            lotto.matchRank(winningNumbers);
-        }
-    }
-
-    public List<Lotto> getLottoList() {
-        return this.lottoList;
+    public List<Rank> getRanks() {
+        return lottoList.stream()
+            .map(lotto -> lotto.rankOf(winningNumbers))
+            .collect(Collectors.toList());
     }
 }
