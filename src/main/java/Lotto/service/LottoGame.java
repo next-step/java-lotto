@@ -4,8 +4,9 @@ import Lotto.domain.Lotto;
 import Lotto.domain.Lottos;
 import Lotto.domain.LottoNumber;
 import Lotto.domain.ResultStats;
-import Lotto.view.InputViewInterface;
-import Lotto.view.OutputViewInterface;
+import Lotto.view.input.InputViewInterface;
+import Lotto.view.message.Message;
+import Lotto.view.output.OutputViewInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,13 +15,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoGame {
-    public static final String PAID_MONEY_MSG = "구입금액을 입력해 주세요.";
-    public static final String WINNING_LOTTERY_NUMBERS_MSG = "\n지난 주 당첨 번호를 입력해 주세요.";
-    public static final String BONUS_NUMBERS_MSG = "보너스 볼을 입력해 주세요.";
-    public static final String MANUAL_TICKET_COUNT_MSG = "수동으로 구매할 로또 수를 입력해 주세요.";
-    public static final String MANUAL_TICKET_NUMBERS_MSG = "수동으로 구매할 번호를 입력해 주세요.";
-    public static final String DELIMITER = ",";
-
     private final InputViewInterface inputView;
     private final OutputViewInterface outputView;
 
@@ -42,10 +36,10 @@ public class LottoGame {
     }
 
     private Lottos generateAllLottos() {
-        outputView.printPrompt(PAID_MONEY_MSG);
+        outputView.printPrompt(Message.PAID_MONEY.getMessage());
         int paidMoney = inputView.getNumberInput();
 
-        outputView.printPrompt(MANUAL_TICKET_COUNT_MSG);
+        outputView.printPrompt(Message.MANUAL_COUNT.getMessage());
         int manualCount = inputView.getNumberInput();
         List<int[]> manualNumbers = getManualNumbers(manualCount);
 
@@ -57,24 +51,24 @@ public class LottoGame {
     }
 
     private List<int[]> getManualNumbers(int count) {
-        outputView.printPrompt(MANUAL_TICKET_NUMBERS_MSG);
+        outputView.printPrompt(Message.MANUAL_NUMBERS.getMessage());
         List<int[]> manualNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            manualNumbers.add(inputView.getNumberListInput(DELIMITER));
+            manualNumbers.add(inputView.getNumberListInput());
         }
         return manualNumbers;
     }
 
     private Set<LottoNumber> getWinningTicket() {
-        outputView.printPrompt(WINNING_LOTTERY_NUMBERS_MSG);
-        int[] winningNumbersArray = inputView.getNumberListInput(DELIMITER);
+        outputView.printPrompt(Message.WINNING_NUMBERS.getMessage());
+        int[] winningNumbersArray = inputView.getNumberListInput();
         return Arrays.stream(winningNumbersArray)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 
     private LottoNumber getBonusNumber() {
-        outputView.printPrompt(BONUS_NUMBERS_MSG);
+        outputView.printPrompt(Message.BONUS_NUMBER.getMessage());
         int bonusNumber = inputView.getNumberInput();
         return LottoNumber.of(bonusNumber);
     }

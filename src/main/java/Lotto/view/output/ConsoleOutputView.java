@@ -1,4 +1,4 @@
-package Lotto.view;
+package Lotto.view.output;
 
 import Lotto.domain.*;
 
@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ConsoleOutputView implements OutputViewInterface {
+
     @Override
     public void printPrompt(String prompt) {
         System.out.println(prompt);

@@ -1,8 +1,8 @@
 package Lotto;
 
 import Lotto.service.LottoGame;
-import Lotto.view.ConsoleInputView;
-import Lotto.view.ConsoleOutputView;
+import Lotto.view.input.ConsoleInputView;
+import Lotto.view.output.ConsoleOutputView;
 
 public class Application {
     public static void main(String[] args) {
