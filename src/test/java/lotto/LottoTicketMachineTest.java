@@ -4,22 +4,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import lotto.domain.LottoOrder;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketMachine;
+import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketMachineTest {
 
     @Test
-    @DisplayName("유효한 구매 금액으로 티켓을 구매할 수 있다")
-    void shouldPurchaseTickets() {
-        LottoOrder price = new LottoOrder("3000");
-        List<LottoTicket> tickets = LottoTicketMachine.purchase(price);
+    @DisplayName("주문대로 티켓을 구매한다.")
+    void shouldPurchaseManualTickets() {
+        LottoOrder lottoOrder = new LottoOrder(5000, List.of(List.of(1, 2, 3, 4, 5, 6)));
+        LottoTickets tickets = LottoTicketMachine.purchase(lottoOrder);
 
-        assertThat(tickets).hasSize(3);
-        for (LottoTicket ticket : tickets) {
-            assertThat(ticket.getNumbers()).hasSize(6);
-        }
+        assertThat(tickets.getTickets()).hasSize(5);
     }
 }

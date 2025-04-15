@@ -2,31 +2,29 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTicketMachine {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
     private static final int COUNT = 6;
-    private static final List<Integer> TOTAL_NUMBERS = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-        .boxed()
-        .collect(Collectors.toList());
+    private static final List<LottoNumber> TOTAL_NUMBERS = LottoNumber.getAll();
 
-    public static List<LottoTicket> purchase(LottoOrder lottoOrder) {
+    public static LottoTickets purchase(LottoOrder order) {
         List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < lottoOrder.getTicketCount(); i++) {
+        Count autoTicketCount = order.getAutoTicketCount();
+        for (int i = 0; (new Count(i)).isLessThan(autoTicketCount); i++) {
             tickets.add(generateTicket());
         }
-        return tickets;
+
+        LottoTickets manualTickets = order.getManualTickets();
+        return manualTickets.add(LottoTickets.fromAutoTickets(tickets));
     }
 
     private static LottoTicket generateTicket() {
-        List<Integer> numbers = new ArrayList<>(TOTAL_NUMBERS);
+        List<LottoNumber> numbers = new ArrayList<>(TOTAL_NUMBERS);
         Collections.shuffle(numbers);
-        return new LottoTicket(numbers.subList(0, COUNT));
+        return new LottoTicket(new HashSet<>(numbers.subList(0, COUNT)));
     }
 
 }

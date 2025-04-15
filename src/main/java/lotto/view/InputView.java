@@ -11,14 +11,27 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static LottoOrder getPurchaseAmount() {
+    public static LottoOrder createLottoOrder() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new LottoOrder(scanner.nextLine());
+        int totalAmount = parseInt(scanner.nextLine());
+
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualTicketCount = parseInt(scanner.nextLine());
+
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < manualTicketCount; i++) {
+            List<Integer> manualNumber = parseIntCommaSeparated(scanner.nextLine());
+            manualNumbers.add(manualNumber);
+        }
+
+        return new LottoOrder(totalAmount, manualNumbers);
     }
 
     public static WinningNumbers getWinningTicket() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.nextLine();
+
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusNumber = scanner.nextLine();
         return new WinningNumbers(parseIntCommaSeparated(numbers), parseInt(bonusNumber));

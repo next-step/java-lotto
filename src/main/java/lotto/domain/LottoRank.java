@@ -7,9 +7,10 @@ public enum LottoRank {
     SECOND(5, true, 30_000_000),
     THIRD(5, false, 1_500_000),
     FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000);
+    FIFTH(3, false, 5_000),
+    NONE(0, false, 0);
 
-    private static final List<LottoRank> RANKING_ORDER = List.of(
+    public static final List<LottoRank> RANKING_ORDER = List.of(
         FIRST, SECOND, THIRD, FOURTH, FIFTH
     );
     private final int matchCount;
@@ -28,7 +29,7 @@ public enum LottoRank {
                 return rank;
             }
         }
-        return null;
+        return NONE;
     }
 
     private boolean matches(int matchCount, boolean bonusMatched) {
@@ -52,4 +53,5 @@ public enum LottoRank {
     public boolean requiresBonusNumber() {
         return requiresBonusNumber;
     }
+
 }
