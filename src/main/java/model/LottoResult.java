@@ -1,25 +1,28 @@
 package model;
 
-
-import java.util.Arrays;
+import java.util.Map;
 
 public class LottoResult {
     private final int lottoPrice;
-    private final int[] placementCounts;
+    private final Map<Integer, Integer> placementCountsMap;
 
-    public LottoResult(int lottoPrice, int[] placementCounts) {
+
+    public LottoResult(int lottoPrice, Map<Integer, Integer> placementCountsMap) {
         this.lottoPrice = lottoPrice;
-        this.placementCounts = placementCounts;
+        this.placementCountsMap = placementCountsMap;
     }
 
     public int placementCount(int matchingCount) {
-        return placementCounts[matchingCount];
+        return placementCountsMap.getOrDefault(matchingCount, 0);
     }
 
-    public double yield(Placements placements) {
-        int totalCount = Arrays.stream(placementCounts).sum();
-        int totalPrize = placements.totalPrize(placementCounts);
-
+    public double yield() {
+        int totalPrize = 0;
+        int totalCount = 0;
+        for (Placement placement : Placement.values()) {
+            totalCount += placementCount(placement.matchingCount());
+            totalPrize += placementCount(placement.matchingCount()) * placement.prizeMoney();
+        }
         return (double) totalPrize / (totalCount * lottoPrice);
     }
 }

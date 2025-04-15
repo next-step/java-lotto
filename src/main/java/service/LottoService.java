@@ -3,10 +3,13 @@ package service;
 import model.Lotto;
 import model.LottoResult;
 import model.Lottos;
+import model.Placement;
 import util.LottoInputParser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoService {
     private static final int UPPER_BOUND = 45;
@@ -44,7 +47,8 @@ public class LottoService {
     public LottoResult result(Lottos lottos, String winningNumbersStr) {
         List<Integer> winningNumbers = inputParser.parse(winningNumbersStr);
         Lotto winningLotto = new Lotto(winningNumbers);
-        int[] placementCounts = lottos.placementCounts(winningLotto);
-        return new LottoResult(LOTTO_PRICE, placementCounts);
+        Map<Integer, Integer> a = lottos.pc(winningLotto);
+
+        return new LottoResult(LOTTO_PRICE, a);
     }
 }
