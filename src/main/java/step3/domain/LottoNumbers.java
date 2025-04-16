@@ -121,4 +121,8 @@ public class LottoNumbers {
         return numbers;
     }
 
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
 }

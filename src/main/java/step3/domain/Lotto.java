@@ -23,12 +23,12 @@ public class Lotto {
     public int matchCount(LottoNumbers target) {
         return (int)lottoNumbers.numbers()
             .stream()
-            .filter(target.numbers()::contains)
+            .filter(target::contains)
             .count();
     }
 
     public boolean containNumber(int number) {
-        return lottoNumbers.numbers().contains(number);
+        return lottoNumbers.contains(number);
     }
 
     public String numbersToString() {
