@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
  */
 public class Lottos {
     private final List<Lotto> lottos;
-    // private final Map<Lotto, MatchResult> result = new HashMap<>();
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;

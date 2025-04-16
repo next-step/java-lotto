@@ -28,10 +28,6 @@ public enum Rank {
             .orElse(MISS);
     }
 
-    public static Rank of(int matchCount) {
-        return of(matchCount, false);
-    }
-
     public int matchCount() {
         return matchCount;
     }
