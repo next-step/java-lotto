@@ -1,13 +1,9 @@
 package service;
 
-import model.Lotto;
-import model.LottoResult;
-import model.Lottos;
-import model.Placement;
+import model.*;
 import util.LottoInputParser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,10 +21,12 @@ public class LottoService {
 
     public Lottos create(int purchasePrice) {
         int numberOfGames = calculateNumberOfGames(purchasePrice);
+        List<Integer> lottoNumberSet = inputParser.generateRangeSet();
+        LottoGenerator lottoGenerator = new LottoGenerator(lottoNumberSet, LOTTO_NUMBER_COUNT);
+
         List<Lotto> list = new ArrayList<>();
         for (int i = 0; i < numberOfGames; i++) {
-            List<Integer> numbers = inputParser.getLottoNumbers();
-            list.add(new Lotto(numbers));
+            list.add(lottoGenerator.randomLotto());
         }
         return new Lottos(list);
     }
@@ -47,8 +45,7 @@ public class LottoService {
     public LottoResult result(Lottos lottos, String winningNumbersStr) {
         List<Integer> winningNumbers = inputParser.parse(winningNumbersStr);
         Lotto winningLotto = new Lotto(winningNumbers);
-        Map<Integer, Integer> a = lottos.pc(winningLotto);
-
-        return new LottoResult(LOTTO_PRICE, a);
+        Map<Integer, Integer> placementCounts = lottos.placementCounts(winningLotto);
+        return new LottoResult(LOTTO_PRICE, placementCounts);
     }
 }

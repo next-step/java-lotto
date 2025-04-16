@@ -1,8 +1,9 @@
 package util;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoInputParser {
     private final int upperBound;
@@ -27,7 +28,17 @@ public class LottoInputParser {
         for (String number : numbers) {
             lottoNumbers.add(parseNumber(number));
         }
+
+        if (hasDuplicates(lottoNumbers)) {
+            throw new IllegalArgumentException("로또 번호에 중복된 숫자가 있습니다.");
+        }
+
         return lottoNumbers;
+    }
+
+    private boolean hasDuplicates(List<Integer> lottoNumbers) {
+        Set<Integer> unique = new HashSet<>(lottoNumbers);
+        return unique.size() < lottoNumbers.size();
     }
 
     private void validateInput(String input) {
@@ -50,16 +61,9 @@ public class LottoInputParser {
         return number;
     }
 
-    public List<Integer> getLottoNumbers() {
-        List<Integer> lottoNumbers = generateRangeSet(lowerBound, upperBound);
-        List<Integer> shuffledNumbers = new java.util.ArrayList<>(List.copyOf(lottoNumbers)); // Create a copy to avoid modifying the original list
-        Collections.shuffle(shuffledNumbers);
-        return shuffledNumbers.subList(0, lottoNumberCount);
-    }
-
-    private static List<Integer> generateRangeSet(int n, int m) {
-        List<Integer> result = new ArrayList<>(n);
-        for (int i = n; i <= m; i++) {
+    public  List<Integer> generateRangeSet() {
+        List<Integer> result = new ArrayList<>();
+        for (int i = lowerBound; i <= upperBound; i++) {
             result.add(i);
         }
         return result;

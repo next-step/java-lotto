@@ -17,14 +17,14 @@ public class LottoTest {
 
     @Test
     public void getMatchingCountTest() {
+        //Given
         List<Integer> numbers = List.of(1, 2, 3, 5, 6, 7);
         Lotto lotto = new Lotto(numbers);
-
+        //When
         List<Integer> winningNumbers = List.of(1, 2, 3, 5, 6, 7);
         Lotto winningLotto = new Lotto(winningNumbers);
-
+        //Then
         int expected = 6;
-
         assertThat(lotto.matchingCount(winningLotto)).isEqualTo(expected);
     }
 }

@@ -7,7 +7,6 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.list = lottos;
-
     }
 
     public Map<Integer, Integer> placementCounts(Lotto winningLotto) {
@@ -18,14 +17,6 @@ public class Lottos {
         }
         return pc;
     }
-//    public List<Integer> pc(Lotto winningLotto) {
-//        List<Integer> pc = new ArrayList<>();
-//        for (Lotto lotto : list) {
-//            int matchingCount = lotto.matchingCount(winningLotto);
-//            pc.add(matchingCount);
-//        }
-//        return pc;
-//    }
 
     public int count() {
         return list.size();

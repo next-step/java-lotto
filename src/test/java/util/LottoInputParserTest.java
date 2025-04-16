@@ -57,9 +57,11 @@ public class LottoInputParserTest {
     }
 
     @Test
-    public void getLottoNumberRandomGeneratorTest() {
-        List<Integer> numbers = parser.getLottoNumbers();
-        assertThat(numbers).hasSize(lottoNumberCount);
-        assertThat(numbers).allMatch(n -> n >= lowerBound && n <= upperBound);
+    void testHasDuplicatesTrue() {
+        //given
+        String input = "1, 2, 3, 4, 5, 5";
+        //Then
+        assertThatThrownBy(() -> parser.parse(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
