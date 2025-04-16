@@ -1,14 +1,16 @@
 package step2.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     NONE(0, 0);
 
-    private final int matchCount;
-    private final int prize;
+    private final Integer matchCount;
+    private final Integer prize;
 
     Rank(int matchCount, int prize) {
         this.matchCount = matchCount;
@@ -16,12 +18,10 @@ public enum Rank {
     }
 
     public static Rank of(int matchCount) {
-        for (Rank rank : values()) {
-            if (rank.matchCount == matchCount) {
-                return rank;
-            }
-        }
-        return NONE;
+        return Arrays.stream(values())
+            .filter(rank -> rank.matchCount == matchCount)
+            .findFirst()
+            .orElse(NONE);
     }
 
     public int getMatchCount() {
@@ -30,5 +30,9 @@ public enum Rank {
 
     public int getPrize() {
         return prize;
+    }
+
+    public int getPrizeByCount(int count) {
+        return count * prize;
     }
 }

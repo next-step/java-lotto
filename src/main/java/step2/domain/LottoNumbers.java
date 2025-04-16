@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
-    private static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final int LOTTO_NUMBERS_MIN = 1;
-    private static final int LOTTO_NUMBERS_MAX = 45;
+    private static final Integer LOTTO_NUMBERS_SIZE = 6;
+    private static final Integer LOTTO_NUMBERS_MIN = 1;
+    private static final Integer LOTTO_NUMBERS_MAX = 45;
     private final List<Integer> numbers;
 
     /**

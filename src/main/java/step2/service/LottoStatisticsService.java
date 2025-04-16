@@ -19,15 +19,15 @@ public class LottoStatisticsService {
 
     public double getRate() {
         int spend = order.getLottoList().getTotal();
-        int earn = getTotalCount();
+        long earn = getTotalCount();
         return Math.round(earn * 100 / spend) / 100.0 ;
     }
 
-    public int getTotalCount() {
+    public long getTotalCount() {
         return result.entrySet()
             .stream()
             .mapToInt((entry) -> {
-                return entry.getKey().getPrize() * entry.getValue();
+                return entry.getKey().getPrizeByCount(entry.getValue());
             })
             .sum();
     }

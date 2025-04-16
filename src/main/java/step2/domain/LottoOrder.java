@@ -5,7 +5,7 @@ package step2.domain;
  */
 public class LottoOrder {
     // 로또 구매 단가 - 실제 로또 가격은 LottoList에서
-    private final int totalPrice;
+    private final Integer totalPrice;
     private final LottoList lottoList;
 
     public LottoOrder(int totalPrice) {

@@ -28,7 +28,7 @@ public class LottoList {
     }
 
     public int getTotal() {
-        return lottos.size() * Lotto.getLottoPrice();
+        return size() * Lotto.getLottoPrice();
     }
 
     public Map<Lotto, Integer> getAllMatchCount(LottoNumbers target) {

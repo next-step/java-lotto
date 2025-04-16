@@ -20,13 +20,19 @@ public class OutputView {
         stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계\n---------\n");
         for (Rank rank : Rank.values()) {
-            if (rank == Rank.NONE) {
-                continue;
-            }
-            stringBuilder.append(
-                rank.getMatchCount() + "개 일치 (" + rank.getPrize() + "원) - " + result.getOrDefault(rank, 0) + "개\n");
+            appendValidRank(rank, result);
         }
         System.out.print(stringBuilder);
+    }
+
+    private void appendValidRank(Rank rank, Map<Rank, Integer> result) {
+        if (rank == Rank.NONE) {
+            return;
+        }
+        stringBuilder
+            .append(rank.getMatchCount()).append("개 일치 (")
+            .append(rank.getPrize()).append("원) - ")
+            .append(result.getOrDefault(rank, 0)).append("개\n");
     }
 
     public void printRate(double rate) {
