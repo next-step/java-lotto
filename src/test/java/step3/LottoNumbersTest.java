@@ -1,4 +1,4 @@
-package step2;
+package step3;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import step2.domain.LottoNumbers;
+import step3.domain.LottoNumbers;
 
 public class LottoNumbersTest {
     @Test

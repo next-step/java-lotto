@@ -1,4 +1,4 @@
-package step2.domain;
+package step3.domain;
 
 /**
  * 로또 엔터티
@@ -27,6 +27,9 @@ public class Lotto {
             .count();
     }
 
+    public boolean containNumber(int number) {
+        return lottoNumbers.numbers().contains(number);
+    }
 
     public String numbersToString() {
         return lottoNumbers.numbers()

@@ -1,4 +1,4 @@
-package step2;
+package step3;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import step2.domain.Lotto;
-import step2.domain.LottoNumbers;
+import step3.domain.Lotto;
+import step3.domain.LottoNumbers;
 
 public class LottoTest {
     @Test

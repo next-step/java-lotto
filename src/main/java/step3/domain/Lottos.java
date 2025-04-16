@@ -1,4 +1,4 @@
-package step2.domain;
+package step3.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,9 +11,10 @@ import java.util.stream.Collectors;
  */
 public class Lottos {
     private final List<Lotto> lottos;
+    // private final Map<Lotto, MatchResult> result = new HashMap<>();
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottos = lottoList;
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public Lottos(int count) {

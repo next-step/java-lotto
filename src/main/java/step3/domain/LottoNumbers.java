@@ -1,4 +1,4 @@
-package step2.domain;
+package step3.domain;
 
 import java.util.Collections;
 import java.util.List;

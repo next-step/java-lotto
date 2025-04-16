@@ -1,9 +1,9 @@
-package step2.service;
+package step3.service;
 
 import java.util.Map;
 
-import step2.domain.LottoOrder;
-import step2.domain.Rank;
+import step3.domain.LottoOrder;
+import step3.domain.Rank;
 
 /**
  * 로또 통계 서비스

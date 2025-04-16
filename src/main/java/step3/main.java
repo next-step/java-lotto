@@ -1,14 +1,14 @@
-package step2;
+package step3;
 
 import java.util.Map;
 
-import step2.domain.LottoOrder;
-import step2.domain.WinningNumber;
-import step2.domain.Rank;
-import step2.service.LottoStatisticsService;
-import step2.service.LottoValidateService;
-import step2.view.InputView;
-import step2.view.OutputView;
+import step3.domain.LottoOrder;
+import step3.domain.WinningNumber;
+import step3.domain.Rank;
+import step3.service.LottoStatisticsService;
+import step3.service.LottoValidateService;
+import step3.view.InputView;
+import step3.view.OutputView;
 
 public class main {
     public static void main(String[] args) {
@@ -23,7 +23,8 @@ public class main {
 
         // 로또 당첨 번호 입력 및 우승자 찾기
         String winnerNumber = inputView.inputWinner();
-        WinningNumber winningNumber = new WinningNumber(winnerNumber);
+        int bonusNumber = inputView.inputBonusNumber();
+        WinningNumber winningNumber = new WinningNumber(winnerNumber, bonusNumber);
 
         // 로또 검증 서비스 생성 및 검증
         LottoValidateService validateService = new LottoValidateService(lottoOrder.lottos(), winningNumber);

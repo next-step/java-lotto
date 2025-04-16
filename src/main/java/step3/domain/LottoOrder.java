@@ -1,4 +1,4 @@
-package step2.domain;
+package step3.domain;
 
 /**
  * 로또 구매 요청
