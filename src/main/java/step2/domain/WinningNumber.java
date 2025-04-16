@@ -26,7 +26,7 @@ public class WinningNumber {
             )
             .boxed()
             .collect(Collectors.toList());
-        this.lottoNumbers = new LottoNumbers(numberList);
+        this.lottoNumbers = LottoNumbers.organized(numberList);
     }
 
     public WinningNumber(LottoNumbers lottoNumbers) {

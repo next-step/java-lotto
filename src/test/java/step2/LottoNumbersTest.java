@@ -16,14 +16,14 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또번호 생성 테스트")
     public void lottoSizeTest() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumbers lottoNumbers = LottoNumbers.randomized();
         assertThat(lottoNumbers.getSize()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("로또번호 생성 테스트 - 랜덤한 생성")
     public void lottoNumbersTest() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumbers lottoNumbers = LottoNumbers.randomized();
         assertDoesNotThrow(
             () -> lottoNumbers.validateNumbers(lottoNumbers.getNumbers())
         );
@@ -34,7 +34,7 @@ public class LottoNumbersTest {
     public void duplicatedNumberTest() {
         List<Integer> numbers = List.of(1, 2, 2, 3, 4, 5);
         assertThatThrownBy(
-            () -> new LottoNumbers(numbers)
+            () -> LottoNumbers.organized(numbers)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,7 +43,7 @@ public class LottoNumbersTest {
     public void exceedSizeTest() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
         assertThatThrownBy(
-            () -> new LottoNumbers(numbers)
+            () -> LottoNumbers.organized(numbers)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -52,7 +52,7 @@ public class LottoNumbersTest {
     public void underSizeTest() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5);
         assertThatThrownBy(
-            () -> new LottoNumbers(numbers)
+            () -> LottoNumbers.organized(numbers)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -64,7 +64,7 @@ public class LottoNumbersTest {
     public void rangeNumberTest(int num1, int num2, int num3, int num4, int num5, int num6) {
         List<Integer> numbers = List.of(num1, num2, num3, num4, num5, num6);
         assertThatThrownBy(
-            () -> new LottoNumbers(numbers)
+            () -> LottoNumbers.organized(numbers)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -72,8 +72,8 @@ public class LottoNumbersTest {
     @DisplayName("equals test")
     public void equalsTest() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoNumbers lottoNumbers1 = new LottoNumbers(numbers);
-        LottoNumbers lottoNumbers2 = new LottoNumbers(numbers);
+        LottoNumbers lottoNumbers1 = LottoNumbers.organized(numbers);
+        LottoNumbers lottoNumbers2 = LottoNumbers.organized(numbers);
         assertThat(lottoNumbers1).isEqualTo(lottoNumbers2);
     }
 
@@ -87,8 +87,8 @@ public class LottoNumbersTest {
     public void autoSortTest(int num1, int num2, int num3, int num4, int num5, int num6) {
         List<Integer> numbers = List.of(num1, num2, num3, num4, num5, num6);
         List<Integer> sortedNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        LottoNumbers sortedLottoNumbers = new LottoNumbers(sortedNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.organized(numbers);
+        LottoNumbers sortedLottoNumbers = LottoNumbers.organized(sortedNumbers);
         assertThat(lottoNumbers).isEqualTo(sortedLottoNumbers);
     }
 }

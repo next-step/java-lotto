@@ -8,7 +8,7 @@ public class Lotto {
     private final LottoNumbers lottoNumbers;
 
     public Lotto() {
-        this.lottoNumbers = new LottoNumbers();
+        this.lottoNumbers = LottoNumbers.randomized();
     }
 
     public Lotto(LottoNumbers lottoNumbers) {

@@ -13,16 +13,9 @@ public class LottoNumbers {
     private final List<Integer> numbers;
 
     /**
-     * 내부 생성자
-     */
-    public LottoNumbers() {
-        this(generateNumbers());
-    }
-
-    /**
      * 외부에서 주입받을 경우
      */
-    public LottoNumbers(List<Integer> numbers) {
+    private LottoNumbers(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
             .sorted()
@@ -32,7 +25,7 @@ public class LottoNumbers {
     /**
      * 내부 생성 로직
      */
-    public static List<Integer> generateNumbers() {
+    private static List<Integer> generateNumbers() {
         // 1부터 45까지의 숫자 생성
         List<Integer> numbers = IntStream.range(LOTTO_NUMBERS_MIN, LOTTO_NUMBERS_MAX)
             .boxed()
@@ -85,6 +78,20 @@ public class LottoNumbers {
         if (number < LOTTO_NUMBERS_MIN || number > LOTTO_NUMBERS_MAX) {
             throw new IllegalArgumentException("숫자는 " + LOTTO_NUMBERS_MIN + " ~ " + LOTTO_NUMBERS_MAX + " 사이여야 합니다.");
         }
+    }
+
+    /**
+     * 로또 자동으로 구매했을 경우
+     */
+    public static LottoNumbers randomized() {
+        return new LottoNumbers(generateNumbers());
+    }
+
+    /**
+     * 로또를 수동으로 구매하거나 번호를 주입받을 경우
+     */
+    public static LottoNumbers organized(List<Integer> numbers) {
+        return new LottoNumbers(numbers);
     }
 
     /**
