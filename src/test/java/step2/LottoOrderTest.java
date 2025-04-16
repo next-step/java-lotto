@@ -12,11 +12,20 @@ public class LottoOrderTest {
     @ParameterizedTest
     @CsvSource({
         "1000, 1",
-        "14000, 14",
-        "8500, 8" // 금액 안되면 버려야함
+        "14000, 14"
     })
-    @DisplayName("로또 가격별 발행 테스트")
+    @DisplayName("로또 가격별 발행 테스트 - 금액의 배수인 경우")
     public void buyLottoTest(int price, int expected) {
+        LottoOrder lottoOrder = new LottoOrder(price);
+        assertEquals(expected, lottoOrder.getLottoList().size());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "8500, 8"
+    })
+    @DisplayName("로또 가격별 발행 테스트 - 금액의 배수가 아닌 경우")
+    void buyLottoTest2(int price, int expected) {
         LottoOrder lottoOrder = new LottoOrder(price);
         assertEquals(expected, lottoOrder.getLottoList().size());
     }

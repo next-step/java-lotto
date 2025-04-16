@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import step2.domain.Lotto;
-import step2.domain.LottoList;
+import step2.domain.Lottos;
 import step2.domain.LottoNumbers;
 import step2.domain.Rank;
 import step2.domain.WinningNumber;
@@ -40,7 +40,7 @@ public class LottoValidateServiceTest {
         Lotto requestSeventh = new Lotto(new LottoNumbers(List.of(
             7, 8, 9, 10, 11, 12
         )));
-        LottoList requestList = new LottoList(List.of(
+        Lottos requestList = new Lottos(List.of(
             requestFirst, requestSecond, requestThird, requestFourth, requestFifth, requestSixth, requestSeventh
         ));
         LottoNumbers actual = new LottoNumbers(List.of(

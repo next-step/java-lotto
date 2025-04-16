@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import step2.domain.Lotto;
-import step2.domain.LottoList;
+import step2.domain.Lottos;
 import step2.domain.WinningNumber;
 import step2.domain.Rank;
 
@@ -13,7 +13,7 @@ import step2.domain.Rank;
  * 로또 검증 시스템
  */
 public class LottoValidateService {
-    private final LottoList bought;
+    private final Lottos bought;
     private final WinningNumber winner;
     private final Map<Rank, Integer> result = new HashMap<>();
 
@@ -21,13 +21,13 @@ public class LottoValidateService {
      * 단일 장수 생성자
      */
     public LottoValidateService(Lotto lotto, WinningNumber winner) {
-        this(new LottoList(List.of(lotto)), winner);
+        this(new Lottos(List.of(lotto)), winner);
     }
 
     /**
      * 여러 장수 생성자
      */
-    public LottoValidateService(LottoList bought, WinningNumber winner) {
+    public LottoValidateService(Lottos bought, WinningNumber winner) {
         this.bought = bought;
         this.winner = winner;
     }

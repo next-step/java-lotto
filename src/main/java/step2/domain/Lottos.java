@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 /**
  * 로또 묶음
  */
-public class LottoList {
+public class Lottos {
     private final List<Lotto> lottos;
 
-    public LottoList(List<Lotto> lottoList) {
+    public Lottos(List<Lotto> lottoList) {
         this.lottos = lottoList;
     }
 
-    public LottoList(int count) {
+    public Lottos(int count) {
         lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto());

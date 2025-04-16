@@ -6,15 +6,15 @@ package step2.domain;
 public class LottoOrder {
     // 로또 구매 단가 - 실제 로또 가격은 LottoList에서
     private final Integer totalPrice;
-    private final LottoList lottoList;
+    private final Lottos lottos;
 
     public LottoOrder(int totalPrice) {
         this.totalPrice = totalPrice;
         int count = totalPrice / Lotto.getLottoPrice();
-        this.lottoList = new LottoList(count);
+        this.lottos = new Lottos(count);
     }
 
-    public LottoList getLottoList() {
-        return lottoList;
+    public Lottos getLottoList() {
+        return lottos;
     }
 }
