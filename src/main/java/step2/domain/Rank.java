@@ -24,15 +24,15 @@ public enum Rank {
             .orElse(NONE);
     }
 
-    public int getMatchCount() {
+    public int matchCount() {
         return matchCount;
     }
 
-    public int getPrize() {
-        return prize;
+    public int prize() {
+        return calculateTotalPrizeByCount(1);
     }
 
-    public int getPrizeByCount(int count) {
+    public int calculateTotalPrizeByCount(int count) {
         return count * prize;
     }
 }

@@ -36,7 +36,7 @@ public class LottoValidateService {
      * 전체 검증 시스템
      */
     public void validateAll() {
-        Map<Lotto, Integer> matchCounts = bought.getAllMatchCount(winner.getWinningNumbers());
+        Map<Lotto, Integer> matchCounts = bought.matchCountMap(winner.numbers());
         matchCounts.forEach(
             (lotto, matchCount) -> {
                 Rank rank = Rank.of(matchCount);
@@ -48,7 +48,7 @@ public class LottoValidateService {
     /**
      * 검증 결과
      */
-    public Map<Rank, Integer> getResult() {
+    public Map<Rank, Integer> result() {
         return result;
     }
 }

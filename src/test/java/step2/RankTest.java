@@ -25,7 +25,7 @@ public class RankTest {
         Rank rank = Rank.of(matchCount);
         assertAll(
             () -> assertEquals(expectedRank, rank),
-            () -> assertEquals(expectedPrize, rank.getPrize())
+            () -> assertEquals(expectedPrize, rank.prize())
         );
     }
 

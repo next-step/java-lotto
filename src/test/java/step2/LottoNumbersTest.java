@@ -17,15 +17,15 @@ public class LottoNumbersTest {
     @DisplayName("로또번호 생성 테스트")
     public void lottoSizeTest() {
         LottoNumbers lottoNumbers = LottoNumbers.randomized();
-        assertThat(lottoNumbers.getSize()).isEqualTo(6);
+        assertThat(lottoNumbers.size()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("로또번호 생성 테스트 - 랜덤한 생성")
-    public void lottoNumbersTest() {
+    public void lottoNumbersToStringTest() {
         LottoNumbers lottoNumbers = LottoNumbers.randomized();
         assertDoesNotThrow(
-            () -> lottoNumbers.validateNumbers(lottoNumbers.getNumbers())
+            () -> lottoNumbers.validateNumbers(lottoNumbers.numbers())
         );
     }
 

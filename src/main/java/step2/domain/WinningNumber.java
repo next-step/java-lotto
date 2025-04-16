@@ -33,7 +33,7 @@ public class WinningNumber {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoNumbers getWinningNumbers() {
+    public LottoNumbers numbers() {
         return lottoNumbers;
     }
 }

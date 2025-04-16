@@ -51,7 +51,7 @@ public class LottoValidateServiceTest {
         WinningNumber winner = new WinningNumber(actual);
         LottoValidateService lottoValidateService = new LottoValidateService(requestList, winner);
         lottoValidateService.validateAll();
-        Map<Rank, Integer> result = lottoValidateService.getResult();
+        Map<Rank, Integer> result = lottoValidateService.result();
         assertAll(
             () -> assertEquals(1, result.get(Rank.FIRST)),
             () -> assertEquals(1, result.get(Rank.SECOND)),

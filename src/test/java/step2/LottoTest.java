@@ -21,6 +21,6 @@ public class LottoTest {
             List.of(1, 2, 3, 4, 5, 7)
         );
         Lotto sourceLotto = new Lotto(source);
-        assertEquals(5, sourceLotto.getMatchCount(target));
+        assertEquals(5, sourceLotto.matchCount(target));
     }
 }

@@ -26,14 +26,14 @@ public class main {
         WinningNumber winningNumber = new WinningNumber(winnerNumber);
 
         // 로또 검증 서비스 생성 및 검증
-        LottoValidateService validateService = new LottoValidateService(lottoOrder.getLottoList(), winningNumber);
+        LottoValidateService validateService = new LottoValidateService(lottoOrder.lottos(), winningNumber);
         validateService.validateAll();
-        Map<Rank, Integer> result = validateService.getResult();
+        Map<Rank, Integer> result = validateService.result();
 
         //로또 결과 출력
         outputView.printResult(result);
         LottoStatisticsService lottoStatisticsService = new LottoStatisticsService(lottoOrder, result);
-        outputView.printRate(lottoStatisticsService.getRate());
+        outputView.printRate(lottoStatisticsService.calculateRate());
 
     }
 }

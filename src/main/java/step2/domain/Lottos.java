@@ -27,22 +27,22 @@ public class Lottos {
         return lottos.size();
     }
 
-    public int getTotal() {
+    public int calculateTotal() {
         return size() * Lotto.getLottoPrice();
     }
 
-    public Map<Lotto, Integer> getAllMatchCount(LottoNumbers target) {
+    public Map<Lotto, Integer> matchCountMap(LottoNumbers target) {
         Map<Lotto, Integer> matchCountMap = new HashMap<>();
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.getMatchCount(target);
+            int matchCount = lotto.matchCount(target);
             matchCountMap.put(lotto, matchCount);
         }
         return matchCountMap;
     }
 
-    public String getAllLottoNumbers() {
+    public String allLottoNumbersToString() {
         return lottos.stream()
-            .map(Lotto::getLottoNumbers)
+            .map(Lotto::numbersToString)
             .collect(Collectors.joining("\n"));
     }
 }

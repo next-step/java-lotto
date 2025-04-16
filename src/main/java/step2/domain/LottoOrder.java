@@ -14,7 +14,7 @@ public class LottoOrder {
         this.lottos = new Lottos(count);
     }
 
-    public Lottos getLottoList() {
+    public Lottos lottos() {
         return lottos;
     }
 }

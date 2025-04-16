@@ -10,8 +10,8 @@ public class OutputView {
 
     public void printNumbers(LottoOrder lottoOrder) {
         stringBuilder = new StringBuilder();
-        stringBuilder.append(lottoOrder.getLottoList().size() + "개를 구매했습니다.\n");
-        stringBuilder.append(lottoOrder.getLottoList().getAllLottoNumbers());
+        stringBuilder.append(lottoOrder.lottos().size() + "개를 구매했습니다.\n");
+        stringBuilder.append(lottoOrder.lottos().allLottoNumbersToString());
         stringBuilder.append("\n");
         System.out.print(stringBuilder);
     }
@@ -30,8 +30,8 @@ public class OutputView {
             return;
         }
         stringBuilder
-            .append(rank.getMatchCount()).append("개 일치 (")
-            .append(rank.getPrize()).append("원) - ")
+            .append(rank.matchCount()).append("개 일치 (")
+            .append(rank.prize()).append("원) - ")
             .append(result.getOrDefault(rank, 0)).append("개\n");
     }
 

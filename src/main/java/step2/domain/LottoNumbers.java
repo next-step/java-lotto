@@ -113,11 +113,11 @@ public class LottoNumbers {
     /**
      * getter 정의
      */
-    public int getSize() {
+    public int size() {
         return numbers.size();
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> numbers() {
         return numbers;
     }
 

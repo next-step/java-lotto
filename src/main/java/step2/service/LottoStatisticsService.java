@@ -17,17 +17,17 @@ public class LottoStatisticsService {
         this.result = result;
     }
 
-    public double getRate() {
-        int spend = order.getLottoList().getTotal();
-        long earn = getTotalCount();
+    public double calculateRate() {
+        int spend = order.lottos().calculateTotal();
+        long earn = calculateTotalCount();
         return Math.round(earn * 100 / spend) / 100.0 ;
     }
 
-    public long getTotalCount() {
+    public long calculateTotalCount() {
         return result.entrySet()
             .stream()
             .mapToInt((entry) -> {
-                return entry.getKey().getPrizeByCount(entry.getValue());
+                return entry.getKey().calculateTotalPrizeByCount(entry.getValue());
             })
             .sum();
     }

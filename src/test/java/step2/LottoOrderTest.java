@@ -17,7 +17,7 @@ public class LottoOrderTest {
     @DisplayName("로또 가격별 발행 테스트 - 금액의 배수인 경우")
     public void buyLottoTest(int price, int expected) {
         LottoOrder lottoOrder = new LottoOrder(price);
-        assertEquals(expected, lottoOrder.getLottoList().size());
+        assertEquals(expected, lottoOrder.lottos().size());
     }
 
     @ParameterizedTest
@@ -27,6 +27,6 @@ public class LottoOrderTest {
     @DisplayName("로또 가격별 발행 테스트 - 금액의 배수가 아닌 경우")
     void buyLottoTest2(int price, int expected) {
         LottoOrder lottoOrder = new LottoOrder(price);
-        assertEquals(expected, lottoOrder.getLottoList().size());
+        assertEquals(expected, lottoOrder.lottos().size());
     }
 }
