@@ -10,7 +10,7 @@ public class OutputView {
 
     public void printNumbers(LottoOrder lottoOrder) {
         stringBuilder = new StringBuilder();
-        stringBuilder.append(lottoOrder.lottos().size() + "개를 구매했습니다.\n");
+        stringBuilder.append(lottoOrder.size() + "개를 구매했습니다.\n");
         stringBuilder.append(lottoOrder.lottos().allLottoNumbersToString());
         stringBuilder.append("\n");
         System.out.print(stringBuilder);

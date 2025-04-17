@@ -6,8 +6,9 @@ import java.util.Map;
 
 import step3.domain.Lotto;
 import step3.domain.Lottos;
-import step3.domain.WinningNumber;
+import step3.domain.MatchResult;
 import step3.domain.Rank;
+import step3.domain.WinningNumber;
 
 /**
  * 로또 검증 시스템
@@ -36,11 +37,10 @@ public class LottoValidateService {
      * 전체 검증 시스템
      */
     public void validateAll() {
-        Map<Lotto, Integer> matchCounts = bought.matchCountMap(winner.numbers());
-        int bonusNumber = winner.bonusNumber();
-        matchCounts.forEach(
-            (lotto, matchCount) -> {
-                Rank rank = Rank.of(matchCount, lotto.containNumber(bonusNumber));
+        Map<Lotto, MatchResult> matchResults = bought.matchResultMap(winner.numbers(), winner.bonusNumber());
+        matchResults.forEach(
+            (lotto, matchResult) -> {
+                Rank rank = Rank.of(matchResult);
                 result.put(rank, result.getOrDefault(rank, 0) + 1);
             }
         );

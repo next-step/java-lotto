@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import step3.domain.MatchResult;
 import step3.domain.Rank;
 
 public class RankTest {
@@ -23,7 +24,7 @@ public class RankTest {
     })
     @DisplayName("Rank Enum 매칭 테스트")
     void testRankMatching(int matchCount, Rank expectedRank, int expectedPrize, boolean isBonusMatched) {
-        Rank rank = Rank.of(matchCount, isBonusMatched);
+        Rank rank = Rank.of(new MatchResult(matchCount, isBonusMatched));
         assertAll(
             () -> assertEquals(expectedRank, rank),
             () -> assertEquals(expectedPrize, rank.prize())

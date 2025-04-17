@@ -27,17 +27,12 @@ public class Lottos {
         return lottos.size();
     }
 
-    public int calculateTotal() {
-        return size() * Lotto.getLottoPrice();
-    }
-
-    public Map<Lotto, Integer> matchCountMap(LottoNumbers target) {
-        Map<Lotto, Integer> matchCountMap = new HashMap<>();
+    public Map<Lotto, MatchResult> matchResultMap(LottoNumbers target, int bonusNumber) {
+        Map<Lotto, MatchResult> matchResultMap = new HashMap<>();
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.matchCount(target);
-            matchCountMap.put(lotto, matchCount);
+            matchResultMap.put(lotto, lotto.match(target, bonusNumber));
         }
-        return matchCountMap;
+        return matchResultMap;
     }
 
     public String allLottoNumbersToString() {

@@ -15,24 +15,30 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Integer getLottoPrice() {
+    public static int getLottoPrice() {
         return LOTTO_PRICE;
     }
 
     // 다른 로또와 비교해서 일치하는 숫자 개수 반환
-    public int matchCount(LottoNumbers target) {
+    private int matchCount(LottoNumbers target) {
         return (int)lottoNumbers.numbers()
             .stream()
             .filter(target::contains)
             .count();
     }
 
-    public boolean containNumber(int number) {
+    private boolean containNumber(int number) {
         return lottoNumbers.contains(number);
     }
 
     public String numbersToString() {
         return lottoNumbers.numbers()
             .toString();
+    }
+
+    public MatchResult match(LottoNumbers target, int bonusNumber) {
+        int matchCount = matchCount(target);
+        boolean hasBonus = containNumber(bonusNumber);
+        return new MatchResult(matchCount, hasBonus);
     }
 }
