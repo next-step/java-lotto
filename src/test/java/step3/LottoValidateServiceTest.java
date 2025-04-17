@@ -22,31 +22,31 @@ public class LottoValidateServiceTest {
     @DisplayName("로또 검증 시스템")
     public void lottoValidateServiceTest() {
         //6개
-        Lotto requestFirst = new Lotto(LottoNumbers.organized(List.of(
+        Lotto requestFirst = new Lotto(LottoNumbers.ofManual(List.of(
             1, 2, 3, 4, 5, 6
         )));
         //5개 + 보너스
-        Lotto requestSecond = new Lotto(LottoNumbers.organized(List.of(
+        Lotto requestSecond = new Lotto(LottoNumbers.ofManual(List.of(
             1, 2, 3, 4, 5, 8
         )));
         //5개
-        Lotto requestThird = new Lotto(LottoNumbers.organized(List.of(
+        Lotto requestThird = new Lotto(LottoNumbers.ofManual(List.of(
             1, 2, 3, 4, 5, 7
         )));
         //4개
-        Lotto requestFourth = new Lotto(LottoNumbers.organized(List.of(
+        Lotto requestFourth = new Lotto(LottoNumbers.ofManual(List.of(
             1, 2, 3, 4, 7, 8
         )));
         //3개
-        Lotto requestFifth = new Lotto(LottoNumbers.organized(List.of(
+        Lotto requestFifth = new Lotto(LottoNumbers.ofManual(List.of(
             1, 2, 3, 8, 9, 10
         )));
         //2개
-        Lotto requestSixth = new Lotto(LottoNumbers.organized(List.of(
+        Lotto requestSixth = new Lotto(LottoNumbers.ofManual(List.of(
             1, 7, 8, 9, 10, 11
         )));
         //1개
-        Lotto requestSeventh = new Lotto(LottoNumbers.organized(List.of(
+        Lotto requestSeventh = new Lotto(LottoNumbers.ofManual(List.of(
             7, 8, 9, 10, 11, 12
         )));
 

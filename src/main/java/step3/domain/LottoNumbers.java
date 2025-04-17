@@ -24,19 +24,25 @@ public class LottoNumbers {
 
     /**
      * 내부 생성 로직
+     *
      */
     private static List<Integer> generateNumbers() {
-        // 1부터 45까지의 숫자 생성
-        List<Integer> numbers = IntStream.range(LOTTO_NUMBERS_MIN, LOTTO_NUMBERS_MAX)
-            .boxed()
-            .collect(Collectors.toList());
+        List<Integer> numbers = generateNumbersInRange(LOTTO_NUMBERS_MIN, LOTTO_NUMBERS_MAX);
         // 숫자 셔플
         Collections.shuffle(numbers);
-
         // 리스트에서 6개 숫자 선택 후 정렬하고 반환
         return numbers.stream()
             .limit(LOTTO_NUMBERS_SIZE)
             .sorted()
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * 최소 범위에서 최대 범위를 가지는 숫자 리스트 생성
+     */
+    private static List<Integer> generateNumbersInRange(int start, int end) {
+        return IntStream.rangeClosed(start, end)
+            .boxed()
             .collect(Collectors.toList());
     }
 
@@ -83,16 +89,17 @@ public class LottoNumbers {
     /**
      * 로또 자동으로 구매했을 경우
      */
-    public static LottoNumbers randomized() {
+    public static LottoNumbers ofAuto() {
         return new LottoNumbers(generateNumbers());
     }
 
     /**
      * 로또를 수동으로 구매하거나 번호를 주입받을 경우
      */
-    public static LottoNumbers organized(List<Integer> numbers) {
+    public static LottoNumbers ofManual(List<Integer> numbers) {
         return new LottoNumbers(numbers);
     }
+
 
     /**
      * VO를 위한 equals, hashcode -> 계속 정렬 유지

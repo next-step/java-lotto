@@ -14,10 +14,10 @@ public class LottoTest {
     @Test
     @DisplayName("로또 번호 비교 로직 테스트")
     public void compareTest() {
-        LottoNumbers source = LottoNumbers.organized(
+        LottoNumbers source = LottoNumbers.ofManual(
             List.of(1, 2, 3, 4, 5, 6)
         );
-        LottoNumbers target = LottoNumbers.organized(
+        LottoNumbers target = LottoNumbers.ofManual(
             List.of(1, 2, 3, 4, 5, 7)
         );
         Lotto sourceLotto = new Lotto(source);

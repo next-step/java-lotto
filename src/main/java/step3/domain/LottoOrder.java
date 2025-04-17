@@ -4,13 +4,12 @@ package step3.domain;
  * 로또 구매 요청
  */
 public class LottoOrder {
-    private final Integer price;
+    private final Amount price;
     private final Lottos lottos;
 
     public LottoOrder(int totalPrice) {
-        int count = totalPrice / Lotto.getLottoPrice();
-        this.price = count * Lotto.getLottoPrice();
-        this.lottos = new Lottos(count);
+        this.price = new Amount(totalPrice);
+        this.lottos = new Lottos(convertToCount(totalPrice));
     }
 
     public Lottos lottos() {
@@ -22,6 +21,10 @@ public class LottoOrder {
     }
 
     public int price() {
-        return price;
+        return price.getAmount();
+    }
+
+    private int convertToCount(int totalPrice) {
+        return totalPrice / Lotto.getLottoPrice();
     }
 }

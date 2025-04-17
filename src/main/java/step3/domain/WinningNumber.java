@@ -27,7 +27,7 @@ public class WinningNumber {
             )
             .boxed()
             .collect(Collectors.toList());
-        this.lottoNumbers = LottoNumbers.organized(numberList);
+        this.lottoNumbers = LottoNumbers.ofManual(numberList);
         this.bonusNumber = bonusNumber;
     }
 
