@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    private final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(1, 45)
+    private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(1, 45)
                                                              .mapToObj(it -> new LottoNumber(it))
                                                              .collect(Collectors.toList());
 

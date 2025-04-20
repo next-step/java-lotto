@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.LottoGroup;
 import lotto.model.LottoResult;
 
 public class OutputView {
@@ -10,5 +11,9 @@ public class OutputView {
 
     public void printLottoResult(LottoResult lottoResult) {
         System.out.println("당첨 통계\n" + "---------\n" + lottoResult);
+    }
+
+    public void printLotto(LottoGroup lottoGroup) {
+        System.out.println(lottoGroup);
     }
 }

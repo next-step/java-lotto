@@ -1,12 +1,10 @@
 package lotto;
 
 import lotto.model.*;
-import lotto.utils.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoGame {
-    private LottoGenerator lottoGenerator = new LottoGenerator();
     private InputView inputView = new InputView();
     private OutputView outputView = new OutputView();
 
@@ -21,7 +19,7 @@ public class LottoGame {
         outputView.printLottoCount(autoLottoCount, manualLottoCount);
 
         AutoLotto autoLottos = new AutoLotto(lottoResult.getPurchasedLottoCount());
-        System.out.println(autoLottos);
+        outputView.printLotto(autoLottos);
 
         WinningLotto winningLotto = new WinningLotto(inputView.getLottoWinningNumber(), inputView.getBouns());
         winningLotto.validate();
