@@ -1,11 +1,11 @@
-package step3;
+package step4;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import step3.domain.Amount;
+import step4.domain.Amount;
 
 public class AmountTest {
     @Test

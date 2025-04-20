@@ -1,5 +1,6 @@
-package step3.domain;
+package step4.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -96,10 +97,18 @@ public class LottoNumbers {
     /**
      * 로또를 수동으로 구매하거나 번호를 주입받을 경우
      */
+    public static LottoNumbers ofManual(String numbers) {
+        return ofManual(
+            Arrays.stream(numbers.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList())
+        );
+    }
+
     public static LottoNumbers ofManual(List<Integer> numbers) {
         return new LottoNumbers(numbers);
     }
-
 
     /**
      * VO를 위한 equals, hashcode -> 계속 정렬 유지

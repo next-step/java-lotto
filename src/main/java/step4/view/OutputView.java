@@ -1,9 +1,9 @@
-package step3.view;
+package step4.view;
 
 import java.util.Map;
 
-import step3.domain.LottoOrder;
-import step3.domain.Rank;
+import step4.domain.LottoOrder;
+import step4.domain.Rank;
 
 public class OutputView {
     StringBuilder stringBuilder;
@@ -31,7 +31,7 @@ public class OutputView {
         }
         stringBuilder
             .append(rank.matchCount()).append("개 일치").append(rank == Rank.SECOND ? ", 보너스 볼 일치(" : " (")
-            .append(rank.prize()).append("원) - ")
+            .append(rank.parsePrizeIntoBigInteger()).append("원) - ")
             .append(result.getOrDefault(rank, 0)).append("개\n");
     }
 

@@ -1,14 +1,14 @@
-package step3.service;
+package step4.service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import step3.domain.Lotto;
-import step3.domain.Lottos;
-import step3.domain.MatchResult;
-import step3.domain.Rank;
-import step3.domain.WinningNumber;
+import step4.domain.Lotto;
+import step4.domain.Lottos;
+import step4.domain.MatchResult;
+import step4.domain.Rank;
+import step4.domain.WinningNumber;
 
 /**
  * 로또 검증 시스템
@@ -37,13 +37,11 @@ public class LottoValidateService {
      * 전체 검증 시스템
      */
     public void validateAll() {
-        Map<Lotto, MatchResult> matchResults = bought.matchResultMap(winner.numbers(), winner.bonusNumber());
-        matchResults.forEach(
-            (lotto, matchResult) -> {
-                Rank rank = Rank.of(matchResult);
-                result.put(rank, result.getOrDefault(rank, 0) + 1);
-            }
-        );
+        Map<Lotto, MatchResult> matchResultMap = winner.createMatchResultMap(bought);
+        matchResultMap.forEach((lotto, matchResult) -> {
+            Rank rank = Rank.of(matchResult);
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
+        });
     }
 
     /**

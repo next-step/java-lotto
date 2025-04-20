@@ -1,14 +1,14 @@
-package step3;
+package step4;
 
 import java.util.Map;
 
-import step3.domain.LottoOrder;
-import step3.domain.WinningNumber;
-import step3.domain.Rank;
-import step3.service.LottoStatisticsService;
-import step3.service.LottoValidateService;
-import step3.view.InputView;
-import step3.view.OutputView;
+import step4.domain.LottoOrder;
+import step4.domain.WinningNumber;
+import step4.domain.Rank;
+import step4.service.LottoStatisticsService;
+import step4.service.LottoValidateService;
+import step4.view.InputView;
+import step4.view.OutputView;
 
 public class main {
     public static void main(String[] args) {

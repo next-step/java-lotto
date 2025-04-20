@@ -1,4 +1,4 @@
-package step3;
+package step4;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import step3.domain.MatchResult;
-import step3.domain.Rank;
+import step4.domain.MatchResult;
+import step4.domain.Rank;
 
 public class MatchResultTest {
     @Test

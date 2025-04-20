@@ -1,4 +1,4 @@
-package step3.domain;
+package step4.domain;
 
 /**
  * 로또 구매 요청
@@ -9,7 +9,7 @@ public class LottoOrder {
 
     public LottoOrder(int totalPrice) {
         this.price = new Amount(totalPrice);
-        this.lottos = new Lottos(convertToCount(totalPrice));
+        this.lottos = Lottos.createLottosByPrice(this.price);
     }
 
     public Lottos lottos() {
@@ -20,11 +20,7 @@ public class LottoOrder {
         return lottos.size();
     }
 
-    public int price() {
-        return price.getAmount();
-    }
-
-    private int convertToCount(int totalPrice) {
-        return totalPrice / Lotto.getLottoPrice();
+    public Amount price() {
+        return price;
     }
 }

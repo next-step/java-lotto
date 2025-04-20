@@ -1,5 +1,6 @@
-package step3.domain;
+package step4.domain;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public enum Rank {
@@ -11,11 +12,11 @@ public enum Rank {
     MISS(0, 0);
 
     private final Integer matchCount;
-    private final Integer prize;
+    private final Amount prize;
 
     Rank(int matchCount, int prize) {
         this.matchCount = matchCount;
-        this.prize = prize;
+        this.prize = new Amount(prize);
     }
 
     public static Rank of(MatchResult matchResult) {
@@ -32,11 +33,11 @@ public enum Rank {
         return matchCount;
     }
 
-    public int prize() {
-        return calculateTotalPrizeByCount(1);
+    public BigInteger parsePrizeIntoBigInteger() {
+        return prize.getAmount();
     }
 
-    public int calculateTotalPrizeByCount(int count) {
-        return count * prize;
+    public Amount calculateTotalPrizeByCount(int count) {
+        return prize.multiplyByCount(count);
     }
 }

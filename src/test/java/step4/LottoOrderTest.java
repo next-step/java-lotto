@@ -1,4 +1,4 @@
-package step3;
+package step4;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import step3.domain.LottoOrder;
+import step4.domain.LottoOrder;
 
 public class LottoOrderTest {
     @ParameterizedTest
