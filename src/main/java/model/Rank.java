@@ -10,12 +10,10 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private static final int MIN_RANK_COUNT = 3;
-
     private int countOfMatch;
     private int winningMoney;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
@@ -28,13 +26,13 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+    public static Rank valueOf(LottoMatch lottoMatch) {
         Rank[] ranks = values();
         return Arrays.stream(ranks)
-                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .filter(rank -> lottoMatch.doesCountMatch(rank.countOfMatch))
                 .findFirst()
                 .map(rank -> {
-                    if (rank == SECOND && !matchBonus) {
+                    if (rank == SECOND && !lottoMatch.isMatchBonus()) {
                         return THIRD;
                     }
                     return rank;

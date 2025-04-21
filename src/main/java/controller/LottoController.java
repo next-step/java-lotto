@@ -22,8 +22,8 @@ public class LottoController {
         resultView.printLottos(lottos);
 
         String winningNumbersStr = inputView.getLottoWinningNumbers();
-        LottoResult result = lottoService.result(lottos, winningNumbersStr);
-
+        int bonusNumber = inputView.getBonusNumber();
+        LottoResult result = lottoService.result(lottos, winningNumbersStr, bonusNumber);
         resultView.printResult(result);
     }
 }

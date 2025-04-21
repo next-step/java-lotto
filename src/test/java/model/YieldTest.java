@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,11 +20,10 @@ public class YieldTest {
         Lottos lottos = new Lottos(List.of(lotto1, lotto2));
         List<Integer> winningNumbers = List.of(1, 2, 3, 14, 15, 16);
         Lotto winningLotto = new Lotto(winningNumbers);
+        int bonusNumber = 10;
 
         // given
-        Map<Integer, Integer> placementCounts = lottos.placementCounts(winningLotto);
-        LottoResult result = new LottoResult(LOTTO_PRICE, placementCounts);
-
+        LottoResult result = lottos.rankCounts(winningLotto, bonusNumber, LOTTO_PRICE);
         int totalPrize = result.totalPrize();
         int totalInvestment = result.totalInvestment();
         Yield lottoYield = Yield.of(totalPrize, totalInvestment);
@@ -45,11 +43,10 @@ public class YieldTest {
         Lottos lottos = new Lottos(List.of(lotto1, lotto2));
         List<Integer> winningNumbers = List.of(21, 22, 23, 24, 25, 26);
         Lotto winningLotto = new Lotto(winningNumbers);
+        int bonusNumber = 10;
 
         // given
-        Map<Integer, Integer> placementCounts = lottos.placementCounts(winningLotto);
-        LottoResult result = new LottoResult(LOTTO_PRICE, placementCounts);
-
+        LottoResult result = lottos.rankCounts(winningLotto, bonusNumber, LOTTO_PRICE);
         int totalPrize = result.totalPrize();
         int totalInvestment = result.totalInvestment();
         Yield lottoYield = Yield.of(totalPrize, totalInvestment);

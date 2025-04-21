@@ -18,6 +18,16 @@ public class Lottos {
         return pc;
     }
 
+    public LottoResult rankCounts(Lotto winningLotto, Integer bonusNumber, Integer lottoPrice) {
+        Map<Rank, Integer> map = new EnumMap<>(Rank.class);
+        for (Lotto lotto : list) {
+            LottoMatch match = LottoMatcher.match(lotto, winningLotto, bonusNumber);
+            Rank rank = Rank.valueOf(match);
+            map.put(rank, map.getOrDefault(rank, 0) + 1);
+        }
+        return new LottoResult(lottoPrice, map);
+    }
+
     public int count() {
         return list.size();
     }
