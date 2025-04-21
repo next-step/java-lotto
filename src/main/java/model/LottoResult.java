@@ -16,13 +16,19 @@ public class LottoResult {
         return placementCountsMap.getOrDefault(matchingCount, 0);
     }
 
-    public double yield() {
+    public int totalPrize() {
         int totalPrize = 0;
+        for (Placement placement : Placement.values()) {
+            totalPrize += placementCount(placement.matchingCount()) * placement.prizeMoney();
+        }
+        return totalPrize;
+    }
+
+    public int totalInvestment() {
         int totalCount = 0;
         for (Placement placement : Placement.values()) {
             totalCount += placementCount(placement.matchingCount());
-            totalPrize += placementCount(placement.matchingCount()) * placement.prizeMoney();
         }
-        return (double) totalPrize / (totalCount * lottoPrice);
+        return totalCount * lottoPrice;
     }
 }
