@@ -1,6 +1,6 @@
 package step4;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 import java.util.Map;
@@ -43,14 +43,13 @@ public class LottoValidateServiceTest {
         int bonusNumber = 8;
         WinningNumber winner = new WinningNumber(actual, bonusNumber);
         LottoValidateService lottoValidateService = new LottoValidateService(requestList, winner);
-        lottoValidateService.validateAll();
-        Map<Rank, Integer> result = lottoValidateService.result();
-        assertAll(
-            () -> assertEquals(1, result.get(Rank.FIRST)),
-            () -> assertEquals(1, result.get(Rank.SECOND)),
-            () -> assertEquals(1, result.get(Rank.FOURTH)),
-            () -> assertEquals(1, result.get(Rank.FIFTH)),
-            () -> assertEquals(2, result.get(Rank.MISS))
+        Map<Rank, Integer> result = lottoValidateService.match();
+        assertThat(result).contains(
+            Map.entry(Rank.FIRST, 1),
+            Map.entry(Rank.SECOND, 1),
+            Map.entry(Rank.FOURTH, 1),
+            Map.entry(Rank.FIFTH, 1),
+            Map.entry(Rank.MISS, 2)
         );
     }
 }

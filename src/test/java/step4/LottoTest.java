@@ -1,14 +1,13 @@
 package step4;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import step4.domain.Lotto;
 import step4.domain.LottoNumbers;
+import step4.domain.MatchResult;
 
 public class LottoTest {
     @Test
@@ -17,6 +16,7 @@ public class LottoTest {
         LottoNumbers source = LottoNumbers.ofManual("1, 2, 3, 4, 5, 6");
         LottoNumbers target = LottoNumbers.ofManual("1, 2, 3, 4, 5, 7");
         Lotto sourceLotto = new Lotto(source);
-        assertTrue(sourceLotto.match(target, 8).verifyMatchCount(5));
+        MatchResult match = sourceLotto.match(target, 8);
+        assertThat(match).isEqualTo(new MatchResult(5, false));
     }
 }

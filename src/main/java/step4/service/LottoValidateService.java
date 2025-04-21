@@ -47,7 +47,8 @@ public class LottoValidateService {
     /**
      * 검증 결과
      */
-    public Map<Rank, Integer> result() {
+    public Map<Rank, Integer> match() {
+        validateAll();
         return result;
     }
 }

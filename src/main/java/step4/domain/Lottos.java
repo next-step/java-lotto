@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * 로또 묶음
@@ -16,20 +17,26 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    private Lottos(int count) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
-        }
+    /**
+     * 전부 자동으로 구매시
+     */
+    public static Lottos ofAutoCount(int count) {
+        return new Lottos(generateLottosByCount(count));
     }
 
-    public static Lottos createLottosByCount(int count) {
-        return new Lottos(count);
+    /**
+     * 일부 수동구매시
+     */
+    public static Lottos ofMixed(List<Lotto> manualLottos, int count) {
+        List<Lotto> combined = new ArrayList<>(manualLottos);
+        combined.addAll(generateLottosByCount(count));
+        return new Lottos(combined);
     }
 
-    public static Lottos createLottosByPrice(Amount totalAmount) {
-        int count = totalAmount.divideIntoCount(Lotto.defaultPrice());
-        return new Lottos(count);
+    private static List<Lotto> generateLottosByCount(int count) {
+        return IntStream.range(0, count)
+            .mapToObj(i -> Lotto.ofAuto())
+            .collect(Collectors.toList());
     }
 
     public int size() {
@@ -48,11 +55,5 @@ public class Lottos {
             matchResultMap.put(lotto, lotto.match(lottoNumbers, bonusNumber));
         }
         return matchResultMap;
-    }
-
-    public Amount totalPrice() {
-        return lottos.stream()
-            .map(Lotto::price)
-            .reduce(new Amount(0), Amount::add);
     }
 }

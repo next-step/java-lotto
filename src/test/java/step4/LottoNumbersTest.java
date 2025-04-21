@@ -21,15 +21,6 @@ public class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("로또번호 생성 테스트 - 랜덤한 생성")
-    public void lottoNumbersToStringTest() {
-        LottoNumbers lottoNumbers = LottoNumbers.ofAuto();
-        assertDoesNotThrow(
-            () -> lottoNumbers.validateNumbers(lottoNumbers.numbers())
-        );
-    }
-
-    @Test
     @DisplayName("로또번호 실패 테스트 - 중복된 숫자가 들어있을 경우")
     public void duplicatedNumberTest() {
         assertThatThrownBy(

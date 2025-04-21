@@ -4,21 +4,25 @@ package step4.domain;
  * 로또 엔터티
  */
 public class Lotto {
-    private static final Amount DEFAULT_LOTTO_PRICE = new Amount(1_000);
     private final LottoNumbers lottoNumbers;
-    private final Amount price;
-
-    public Lotto() {
-        this(LottoNumbers.ofAuto(), DEFAULT_LOTTO_PRICE);
-    }
 
     public Lotto(LottoNumbers lottoNumbers) {
-        this(lottoNumbers, DEFAULT_LOTTO_PRICE);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(LottoNumbers lottoNumbers, Amount price) {
-        this.lottoNumbers = lottoNumbers;
-        this.price = price;
+    /**
+     * 팩토리 메서드
+     */
+    public static Lotto ofAuto() {
+        return new Lotto(LottoNumbers.ofAuto());
+    }
+
+    public static Lotto ofManual(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto ofManual(String number) {
+        return new Lotto(LottoNumbers.ofManual(number));
     }
 
     // 다른 로또와 비교해서 일치하는 숫자 개수 반환
@@ -44,11 +48,4 @@ public class Lotto {
         return new MatchResult(matchCount, hasBonus);
     }
 
-    public Amount price() {
-        return price;
-    }
-
-    public static Amount defaultPrice() {
-        return DEFAULT_LOTTO_PRICE;
-    }
 }

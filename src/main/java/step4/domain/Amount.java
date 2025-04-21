@@ -30,6 +30,10 @@ public class Amount {
         return new Amount(this.amount.add(amount.getAmount()));
     }
 
+    public Amount subtract(Amount amount) {
+        return new Amount(this.amount.subtract(amount.getAmount()));
+    }
+
     public Amount multiplyByCount(int count) {
         return new Amount(this.amount.multiply(BigInteger.valueOf(count)));
     }

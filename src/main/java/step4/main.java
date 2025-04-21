@@ -1,5 +1,6 @@
 package step4;
 
+import java.util.List;
 import java.util.Map;
 
 import step4.domain.LottoOrder;
@@ -17,8 +18,10 @@ public class main {
         OutputView outputView = new OutputView();
 
         // 로또 구매 금액 입력 및 로또 발행
+        // TODO INPUT 합치기
         int price = inputView.init();
-        LottoOrder lottoOrder = new LottoOrder(price);
+        List<String> manualNumbers = inputView.inputManualCount();
+        LottoOrder lottoOrder = LottoOrder.ofCombined(price, manualNumbers);
         outputView.printNumbers(lottoOrder);
 
         // 로또 당첨 번호 입력 및 우승자 찾기
@@ -28,8 +31,7 @@ public class main {
 
         // 로또 검증 서비스 생성 및 검증
         LottoValidateService validateService = new LottoValidateService(lottoOrder.lottos(), winningNumber);
-        validateService.validateAll();
-        Map<Rank, Integer> result = validateService.result();
+        Map<Rank, Integer> result = validateService.match();
 
         //로또 결과 출력
         outputView.printResult(result);

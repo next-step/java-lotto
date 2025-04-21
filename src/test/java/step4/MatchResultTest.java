@@ -19,6 +19,12 @@ public class MatchResultTest {
             () -> assertThat(Rank.of(secondPlace)).isEqualTo(Rank.SECOND),
             () -> assertThat(Rank.of(thirdPlace)).isEqualTo(Rank.THIRD)
         );
+    }
 
+    @Test
+    @DisplayName("맞은 숫자 개수 찾기")
+    void verifyMatchCountTest() {
+        MatchResult match = new MatchResult(5, true);
+        assertThat(match.verifyMatchCount(5)).isTrue();
     }
 }

@@ -50,7 +50,7 @@ public class LottoNumbers {
     /**
      * 외부에서 번호를 주입받을 경우 validation을 거침
      */
-    public void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers(List<Integer> numbers) {
         checkSize(numbers);
         checkRangeAll(numbers);
         checkDuplicateNumbers(numbers);
@@ -134,7 +134,7 @@ public class LottoNumbers {
     }
 
     public List<Integer> numbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     public boolean contains(int number) {
