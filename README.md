@@ -13,7 +13,7 @@
 - [x] 통계 출력
 - [ ] 보너스 볼 입력 기능
 - [ ] 보너스 볼 비교 로직
-- [ ] 등수 2등 관리 추가
+- [x] 등수 2등 관리 추가
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
