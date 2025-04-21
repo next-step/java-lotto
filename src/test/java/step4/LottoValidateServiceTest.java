@@ -15,8 +15,6 @@ import step4.domain.Rank;
 import step4.domain.WinningNumber;
 import step4.service.LottoValidateService;
 
-;
-
 public class LottoValidateServiceTest {
     @Test
     @DisplayName("로또 검증 시스템")
@@ -42,8 +40,8 @@ public class LottoValidateServiceTest {
         String actual = "1,2,3,4,5,6";
         int bonusNumber = 8;
         WinningNumber winner = new WinningNumber(actual, bonusNumber);
-        LottoValidateService lottoValidateService = new LottoValidateService(requestList, winner);
-        Map<Rank, Integer> result = lottoValidateService.match();
+        LottoValidateService lottoValidateService = new LottoValidateService(winner);
+        Map<Rank, Integer> result = lottoValidateService.validate(requestList);
         assertThat(result).contains(
             Map.entry(Rank.FIRST, 1),
             Map.entry(Rank.SECOND, 1),

@@ -11,31 +11,30 @@ import step4.domain.Rank;
  * 로또 통계 서비스
  */
 public class LottoStatisticsService {
-    private final LottoOrder order;
+    private final Amount spent;
     private final Map<Rank, Integer> result;
 
-    public LottoStatisticsService(LottoOrder order, Map<Rank, Integer> result) {
-        this.order = order;
+    private LottoStatisticsService(Amount spent, Map<Rank, Integer> result) {
+        this.spent = spent;
         this.result = result;
     }
 
+    public static LottoStatisticsService of(LottoOrder order, Map<Rank, Integer> result) {
+        return new LottoStatisticsService(order.price(), result);
+    }
+
+    /**
+     * 수익률 계산: (총 상금 ÷ 사용액) × 100
+     */
     public double calculateRate() {
-        Amount spend = order.price();
-        Amount earn = calculateTotalCount();
-        return earn.getAmount()
-            .multiply(BigInteger.valueOf(100))
-            .divide(spend.getAmount())
-            .doubleValue();
-    }
-
-    public Amount calculateTotalCount() {
-        return result.entrySet()
-            .stream()
-            .map(this::calculateTotalPrize)
+        Amount earned = result.entrySet().stream()
+            .map(e -> e.getKey().calculateTotalPrizeByCount(e.getValue()))
             .reduce(new Amount(0), Amount::add);
-    }
 
-    private Amount calculateTotalPrize(Map.Entry<Rank, Integer> entry) {
-        return entry.getKey().calculateTotalPrizeByCount(entry.getValue());
+        // (earned / spent) × 100
+        return earned.getAmount()
+            .multiply(BigInteger.valueOf(100))
+            .divide(spent.getAmount())
+            .doubleValue();
     }
 }

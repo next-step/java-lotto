@@ -1,36 +1,39 @@
 package step4.view;
 
-import java.util.ArrayList;
+import static java.util.stream.IntStream.*;
+
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import step4.domain.LottoOrder;
+import step4.domain.WinningNumber;
 
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);
 
-    public int init() {
+    public LottoOrder readLottoOrder() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
-    }
+        int totalPrice = scanner.nextInt();
 
-    public List<String> inputManualCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int count = scanner.nextInt();
-        List<String> manualNumbers = new ArrayList<>();
+        int manualCount = scanner.nextInt();
+
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        while (count > 0) {
-            manualNumbers.add(scanner.next());
-            count--;
-        }
-        return manualNumbers;
+        List<String> manualInputs =
+            range(0, manualCount)
+                .mapToObj(i -> scanner.next())
+                .collect(Collectors.toList());
+
+        return LottoOrder.ofCombined(totalPrice, manualInputs);
     }
 
-    public String inputWinner() {
+    /** 지난 주 당첨 번호 + 보너스 번호 입력 */
+    public WinningNumber readWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.next();
-    }
-
-    public int inputBonusNumber() {
+        String numbers = scanner.next();      // ex. "1,2,3,4,5,6"
         System.out.println("보너스 번호를 입력해 주세요.");
-        return scanner.nextInt();
+        int bonus = scanner.nextInt();
+        return new WinningNumber(numbers, bonus);
     }
 }

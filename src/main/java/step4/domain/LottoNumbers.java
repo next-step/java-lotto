@@ -7,6 +7,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * 번호 6개 담당, 검증까지만 담당하는 로또 번호 객체
+ * 행위 : matchCount(다른 번호와 몇 개 일치하는지 세기), contains(특정 숫자 포함 확인)
+ */
 public class LottoNumbers {
     private static final Integer LOTTO_NUMBERS_SIZE = 6;
     private static final Integer LOTTO_NUMBERS_MIN = 1;
@@ -108,6 +112,13 @@ public class LottoNumbers {
 
     public static LottoNumbers ofManual(List<Integer> numbers) {
         return new LottoNumbers(numbers);
+    }
+
+    // 다른 번호와 비교해 맞는 숫자 반환
+    public int matchCount(LottoNumbers other) {
+        return (int)numbers.stream()
+            .filter(other::contains)
+            .count();
     }
 
     /**

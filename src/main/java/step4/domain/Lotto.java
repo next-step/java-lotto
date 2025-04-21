@@ -1,7 +1,9 @@
 package step4.domain;
 
 /**
- * 로또 엔터티
+ * 로또 엔터티 : 하나의 로또 티켓
+ * 내부에 정확히 하나의 LottoNumbers만 보유, 가격 가지고 있지 않음
+ * 행위 : match(당첨번호와 비교해 MatchResult 만듬)
  */
 public class Lotto {
     private final LottoNumbers lottoNumbers;
@@ -25,27 +27,15 @@ public class Lotto {
         return new Lotto(LottoNumbers.ofManual(number));
     }
 
-    // 다른 로또와 비교해서 일치하는 숫자 개수 반환
-    private int matchCount(LottoNumbers target) {
-        return (int)lottoNumbers.numbers()
-            .stream()
-            .filter(target::contains)
-            .count();
-    }
-
-    private boolean containNumber(int number) {
-        return lottoNumbers.contains(number);
+    //당첨 결과와 비교해서 MatchResult 반환
+    public MatchResult match(LottoNumbers otherNumbers, int bonusNumber) {
+        int match = lottoNumbers.matchCount(otherNumbers);
+        boolean bonusMatch = lottoNumbers.contains(bonusNumber);
+        return new MatchResult(match, bonusMatch);
     }
 
     public String numbersToString() {
         return lottoNumbers.numbers()
             .toString();
     }
-
-    public MatchResult match(LottoNumbers target, int bonusNumber) {
-        int matchCount = matchCount(target);
-        boolean hasBonus = containNumber(bonusNumber);
-        return new MatchResult(matchCount, hasBonus);
-    }
-
 }

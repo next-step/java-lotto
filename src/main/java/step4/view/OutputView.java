@@ -8,10 +8,10 @@ import step4.domain.Rank;
 public class OutputView {
     StringBuilder stringBuilder;
 
-    public void printNumbers(LottoOrder lottoOrder) {
+    public void printPurchase(LottoOrder lottoOrder) {
         stringBuilder = new StringBuilder();
-        stringBuilder.append(lottoOrder.size() + "개를 구매했습니다.\n");
-        stringBuilder.append(lottoOrder.lottos().allLottoNumbersToString());
+        stringBuilder.append("수동으로 " + lottoOrder.manualCount() + "개, 자동으로 " + lottoOrder.autoCount() + "개를 구매했습니다.\n");
+        stringBuilder.append(lottoOrder);
         stringBuilder.append("\n");
         System.out.print(stringBuilder);
     }
