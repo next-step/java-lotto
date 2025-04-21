@@ -1,9 +1,12 @@
-package autoLotto;
+package lotto.model;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private int number;
+
+    private static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
 
     public LottoNumber(int number) {
         validate(number);
@@ -11,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validate(int number) {
-        if (number > 45 || number < 1) {
+        if (number > MAX_NUMBER || number < MIN_NUMBER) {
             throw new IllegalArgumentException("lotto number must be in 1..45.");
         }
     }

@@ -1,5 +1,8 @@
-package autoLotto;
+package lotto;
 
+import lotto.model.Lotto;
+import lotto.model.LottoPrize;
+import lotto.model.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -21,9 +24,9 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbersStr);
         WinningLotto winningLotto = new WinningLotto(winningNumbersStr, "7");
 
-        LottoPrize lottoPrize = winningLotto.getLottoPrize(lotto);
+        lotto.setLottoPrize(winningLotto);
 
-        assertEquals(exprectedLottoPrize, lottoPrize);
+        assertEquals(exprectedLottoPrize, lotto.getLottoPrize());
     }
 }
 

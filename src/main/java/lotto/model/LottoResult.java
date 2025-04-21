@@ -1,4 +1,4 @@
-package autoLotto;
+package lotto.model;
 
 import java.util.EnumMap;
 import java.util.Map;
