@@ -16,17 +16,6 @@ public class LottoInputParser {
         this.lottoNumberCount = lottoNumberCount;
     }
 
-    public List<Integer> parse(String input, int bonusNumber) {
-        List<Integer> list = parse(input);
-        parseNumber(String.valueOf(bonusNumber));
-
-        if (list.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 숫자가 당첨번호에 존재할 수 없습니다");
-        }
-
-        return list;
-    }
-
     public List<Integer> parse(String input) {
         validateInput(input);
         String[] numbers = input.split(", ");
@@ -78,5 +67,13 @@ public class LottoInputParser {
             result.add(i);
         }
         return result;
+    }
+
+    public void validateBonusNumber(int bonusNumber, List<Integer> lottoNumbers) {
+        parseNumber(String.valueOf(bonusNumber));
+
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 숫자가 이미 당첨 번호 숫자에 존재합니다");
+        }
     }
 }

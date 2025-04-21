@@ -42,8 +42,8 @@ public class LottoService {
     }
 
     public LottoResult result(Lottos lottos, String winningNumbersStr, Integer bonusNumber) {
-//        List<Integer> winningNumbers = inputParser.parse(winningNumbersStr);
-        List<Integer> winningNumbers = inputParser.parse(winningNumbersStr, bonusNumber);
+        List<Integer> winningNumbers = inputParser.parse(winningNumbersStr);
+        inputParser.validateBonusNumber(bonusNumber, winningNumbers);
         Lotto winningLotto = new Lotto(winningNumbers);
         return lottos.rankCounts(winningLotto, bonusNumber, LOTTO_PRICE);
     }
