@@ -12,7 +12,7 @@ public class Lottos {
     public Map<Integer, Integer> placementCounts(Lotto winningLotto) {
         Map<Integer, Integer> pc = new HashMap<>();
         for (Lotto lotto : list) {
-            int matchingCount = lotto.matchingCount(winningLotto);
+            int matchingCount = LottoMatcher.count(lotto, winningLotto);
             pc.put(matchingCount, pc.getOrDefault(matchingCount, 0) + 1);
         }
         return pc;
