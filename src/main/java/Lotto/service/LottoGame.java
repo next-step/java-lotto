@@ -42,7 +42,7 @@ public class LottoGame {
 
         outputView.printPrompt(Message.MANUAL_COUNT.getMessage());
         int manualCount = inputView.getNumberInput();
-        List<int[]> manualNumbers = getManualNumbers(manualCount);
+        List<List<LottoNumber>> manualNumbers = getManualNumbers(manualCount);
 
         int autoCount = (paidMoney.getPrice() - (manualCount * Lotto.PRICE)) / Lotto.PRICE;
         Lottos lottoTickets = Lottos.generate(manualNumbers, autoCount);
@@ -51,13 +51,9 @@ public class LottoGame {
         return lottoTickets;
     }
 
-    private List<int[]> getManualNumbers(int count) {
+    private List<List<LottoNumber>> getManualNumbers(int count) {
         outputView.printPrompt(Message.MANUAL_NUMBERS.getMessage());
-        List<int[]> manualNumbers = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            manualNumbers.add(inputView.getNumberListInput());
-        }
-        return manualNumbers;
+        return inputView.getManualLottoNumbers(count);
     }
 
     private Set<LottoNumber> getWinningTicket() {

@@ -1,9 +1,14 @@
 package Lotto.view.input;
 
 import Lotto.view.message.Message;
+import Lotto.domain.LottoNumber;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import java.util.function.Predicate;
 
 public class ConsoleInputView implements InputViewInterface {
@@ -41,6 +46,23 @@ public class ConsoleInputView implements InputViewInterface {
         }
         System.out.println(errorMessage);
         return getValidatedNumberInput(validator, errorMessage);
+    }
+
+    @Override
+    public List<List<LottoNumber>> getManualLottoNumbers(int count) {
+        List<List<LottoNumber>> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            String input = scanner.nextLine().trim();
+            String[] tokens = input.split(",");
+            List<LottoNumber> numbers = Arrays.stream(tokens)
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .map(LottoNumber::of)
+                    .collect(Collectors.toList());
+
+            manualNumbers.add(numbers);
+        }
+        return manualNumbers;
     }
 
     private boolean isInteger(String input) {
