@@ -4,8 +4,6 @@ import Lotto.domain.*;
 import Lotto.view.input.InputViewInterface;
 import Lotto.view.message.Message;
 import Lotto.view.output.OutputViewInterface;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;

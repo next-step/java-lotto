@@ -4,38 +4,56 @@ import Lotto.domain.LottoNumber;
 import Lotto.domain.Lotto;
 
 import Lotto.domain.ResultStats;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottosTest {
+
+    @DisplayName("통계 계산 시 각 등수에 대한 개수를 정확히 반환한다")
     @Test
-    void calculateStats_ShouldReturnCorrectCounts() {
-        int mockQuantity = 6; // 가상의 로또 개수
+    void should_return_correct_counts_for_each_rank() {
+        int mockQuantity = 6;
         Lottos lottoList = new Lottos(mockQuantity);
+
         Set<LottoNumber> winningNumbers = Set.of(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        LottoNumber bonusNumber = new LottoNumber(7); // 보너스 번호
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)
+        );
+        LottoNumber bonusNumber = LottoNumber.of(7);
 
-        lottoList.addLotto(new Lotto(List.of(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(7), new LottoNumber(8), new LottoNumber(9))));
-        lottoList.addLotto(new Lotto(List.of(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(8), new LottoNumber(9))));
+        lottoList.add(new Lotto(List.of(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9)
+        )));
+        lottoList.add(new Lotto(List.of(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(5), LottoNumber.of(8), LottoNumber.of(9)
+        )));
 
-        ResultStats resultStats = new ResultStats(lottoList.getLottos(), winningNumbers, bonusNumber);
-        Map<Rank, Integer> stats = resultStats.getStats();
+        Map<Rank, Integer> stats = new EnumMap<>(Rank.class);
+        int totalPrize = 0;
+        List<Lotto> lottos = lottoList.getLottos();
 
-        assertEquals(1, stats.getOrDefault(Rank.FIFTH, 0), "3개 일치하는 로또 개수는 1개여야 합니다.");
-        assertEquals(1, stats.getOrDefault(Rank.FOURTH, 0), "4개 일치하는 로또 개수는 1개여야 합니다.");
-        assertEquals(0, stats.getOrDefault(Rank.THIRD, 0), "5개 일치하는 로또가 없어야 합니다.");
-        assertEquals(0, stats.getOrDefault(Rank.SECOND, 0), "5개 + 보너스 볼 일치하는 로또가 없어야 합니다.");
-        assertEquals(0, stats.getOrDefault(Rank.FIRST, 0), "6개 일치하는 로또가 없어야 합니다.");
+        for (Lotto lotto : lottos) {
+            Rank rank = Rank.fromMatchCountAndBonus(
+                    lotto.countMatches(winningNumbers),
+                    lotto.contains(bonusNumber)
+            );
+            stats.put(rank, stats.getOrDefault(rank, 0) + 1);
+            totalPrize += rank.getWinningMoney();
+        }
+
+        ResultStats resultStats = new ResultStats(stats, totalPrize);
+
+        assertEquals(1, resultStats.getCountByRank(Rank.FIFTH), "3개 숫자가 일치하는 로또는 1개여야 합니다.");
+        assertEquals(1, resultStats.getCountByRank(Rank.FOURTH), "4개 숫자가 일치하는 로또는 1개여야 합니다.");
+        assertEquals(0, resultStats.getCountByRank(Rank.THIRD), "5개 숫자가 일치하는 로또는 없어야 합니다.");
+        assertEquals(0, resultStats.getCountByRank(Rank.SECOND), "5개 숫자와 보너스 번호가 일치하는 로또는 없어야 합니다.");
+        assertEquals(0, resultStats.getCountByRank(Rank.FIRST), "6개 숫자가 모두 일치하는 로또는 없어야 합니다.");
     }
 }

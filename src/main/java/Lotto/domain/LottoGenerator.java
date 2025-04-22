@@ -1,10 +1,8 @@
 package Lotto.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class LottoGenerator {
     private static final List<LottoNumber> candidates = new ArrayList<>();

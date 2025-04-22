@@ -33,15 +33,28 @@ public enum Rank implements RankMatcher {
     }
 
     public static Rank fromMatchCountAndBonus(int countOfMatch, boolean matchBonus) {
+        if (countOfMatch < 0 || countOfMatch > 6) {
+            throw new IllegalArgumentException("일치하는 번호는 최대 6개까지만 가능합니다.");
+        }
+
         return Arrays.stream(values()).filter(rank -> rank.match(countOfMatch, matchBonus)).findFirst().orElse(MISS);
     }
 
     @Override
     public boolean match(int countOfMatch, boolean matchBonus) {
         if (countOfMatch == 6) {
-            return true; // 6개 번호가 맞으면 보너스 번호는 상관없음
+            return this == FIRST;
         }
-        return this.countOfMatch == countOfMatch && this.matchBonus == matchBonus;
+        if (countOfMatch == 5) {
+            return (this == SECOND && matchBonus) || (this == THIRD && !matchBonus);
+        }
+        if (countOfMatch == 4) {
+            return this == FOURTH;
+        }
+        if (countOfMatch == 3) {
+            return this == FIFTH;
+        }
+        return this == MISS;
     }
 
 }
