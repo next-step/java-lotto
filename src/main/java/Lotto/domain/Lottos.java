@@ -43,15 +43,14 @@ public class Lottos {
         return generate(List.of(), autoCount);
     }
 
-    public static Lottos generate(List<int[]> manualNumbers) {
+    public static Lottos generate(List<List<LottoNumber>> manualNumbers) {
         return generate(manualNumbers, 0);
     }
 
-    public static Lottos generate(List<int[]> manualNumbers, int autoCount) {
+    public static Lottos generate(List<List<LottoNumber>> manualNumbers, int autoCount) {
         Lottos allTickets = new Lottos();
 
-        for (int i = 0; i < manualNumbers.size(); i++) {
-            int[] numbers = manualNumbers.get(i);
+        for (List<LottoNumber> numbers : manualNumbers) {
             allTickets.add(LottoGenerator.manual(numbers));
         }
 

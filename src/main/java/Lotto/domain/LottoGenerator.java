@@ -21,10 +21,7 @@ public class LottoGenerator {
         return new Lotto(copy.subList(0, Lotto.LOTTO_PICK_COUNT));
     }
 
-    public static Lotto manual(int[] numbers) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
+    public static Lotto manual(List<LottoNumber> numbers) {
+        return new Lotto(numbers);
     }
 }
