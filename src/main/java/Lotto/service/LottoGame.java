@@ -1,9 +1,6 @@
 package Lotto.service;
 
-import Lotto.domain.Lotto;
-import Lotto.domain.Lottos;
-import Lotto.domain.LottoNumber;
-import Lotto.domain.ResultStats;
+import Lotto.domain.*;
 import Lotto.view.input.InputViewInterface;
 import Lotto.view.message.Message;
 import Lotto.view.output.OutputViewInterface;
@@ -37,13 +34,17 @@ public class LottoGame {
 
     private Lottos generateAllLottos() {
         outputView.printPrompt(Message.PAID_MONEY.getMessage());
-        int paidMoney = inputView.getNumberInput();
+        int price = inputView.getValidatedNumberInput(
+                value -> value > 0 && value % 1000 == 0,
+                "1000원 단위의 양수를 입력해주세요."
+        );
+        Purchase paidMoney = new Purchase(price);
 
         outputView.printPrompt(Message.MANUAL_COUNT.getMessage());
         int manualCount = inputView.getNumberInput();
         List<int[]> manualNumbers = getManualNumbers(manualCount);
 
-        int autoCount = (paidMoney - (manualCount * Lotto.PRICE)) / Lotto.PRICE;
+        int autoCount = (paidMoney.getPrice() - (manualCount * Lotto.PRICE)) / Lotto.PRICE;
         Lottos lottoTickets = Lottos.generate(manualNumbers, autoCount);
         outputView.printTicketCount(manualCount, autoCount);
 

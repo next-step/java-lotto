@@ -4,6 +4,7 @@ import Lotto.view.message.Message;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class ConsoleInputView implements InputViewInterface {
     private static final Scanner scanner = new Scanner(System.in);
@@ -28,6 +29,18 @@ public class ConsoleInputView implements InputViewInterface {
         }
         System.out.println(Message.VALID_NUMBER_INPUT);
         return getNumberListInput();
+    }
+
+    public int getValidatedNumberInput(Predicate<Integer> validator, String errorMessage) {
+        String input = scanner.nextLine().trim();
+        if (isInteger(input)) {
+            int value = Integer.parseInt(input);
+            if (validator.test(value)) {
+                return value;
+            }
+        }
+        System.out.println(errorMessage);
+        return getValidatedNumberInput(validator, errorMessage);
     }
 
     private boolean isInteger(String input) {
