@@ -29,10 +29,6 @@ public class Lottos {
         return new ResultStats(stats, totalPrize);
     }
 
-    public static Lottos generate(int autoCount) {
-        return generate(List.of(), autoCount);
-    }
-
     public static Lottos generate(List<List<LottoNumber>> manualNumbers, int autoCount) {
         Lottos allTickets = new Lottos();
 
