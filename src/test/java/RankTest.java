@@ -20,7 +20,7 @@ class RankTest {
             "2, false, MISS"
     })
     void should_determine_rank_based_on_match_count_and_bonus_number(int countOfMatch, boolean matchBonus, Rank expected) {
-        Rank rank = Rank.fromMatchCountAndBonus(countOfMatch, matchBonus);
+        Rank rank = Rank.find(countOfMatch, matchBonus);
         assertThat(rank).isEqualTo(expected);
     }
 
@@ -28,7 +28,7 @@ class RankTest {
     @ParameterizedTest
     @ValueSource(ints = {7, 10, 100})
     void should_throw_exception_when_match_count_exceeds_six(int countOfMatch) {
-        assertThatThrownBy(() -> Rank.fromMatchCountAndBonus(countOfMatch, false))
+        assertThatThrownBy(() -> Rank.find(countOfMatch, false))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("일치하는 번호는 최대 6개까지만 가능합니다.");
     }

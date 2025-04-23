@@ -37,7 +37,7 @@ public class LottoResultCalculator {
     private Rank getLottoRank(Lotto lotto) {
         int matchCount = lotto.countMatches(winningNumbers);
         boolean matchBonus = lotto.contains(bonusNumber);
-        return Rank.fromMatchCountAndBonus(matchCount, matchBonus);
+        return Rank.find(matchCount, matchBonus);
     }
 
     public int calculateTotalPrize() {

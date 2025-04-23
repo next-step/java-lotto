@@ -38,7 +38,7 @@ public class LottosTest {
         List<Lotto> lottos = lottoList.getLottos();
 
         for (Lotto lotto : lottos) {
-            Rank rank = Rank.fromMatchCountAndBonus(
+            Rank rank = Rank.find(
                     lotto.countMatches(winningNumbers),
                     lotto.contains(bonusNumber)
             );
