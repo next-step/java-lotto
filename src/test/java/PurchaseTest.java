@@ -1,29 +1,41 @@
-import Lotto.domain.Purchase;
+import lotto.domain.Purchase;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import static Lotto.domain.Purchase.isInvalidPrice;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class PurchaseTest {
 
-    @ParameterizedTest
-    @ValueSource(strings = {"14000", "14,000", "1000"})
-    void should_be_valid_price(String input) {
-        assertFalse(isInvalidPrice(input));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"-1000", "", " ", "14501"})
-    void should_be_invalid_price(String input) {
-        assertTrue(isInvalidPrice(input));
-    }
-
+    @DisplayName("정상 금액이면 로또 개수가 계산된다")
     @Test
-    void should_buy_right_amount_of_lotto() {
-        int price = 14000;
-        Purchase purchase = new Purchase(price);
-        assertEquals(14, purchase.getQuantity(), "로또 구매 개수는 금액에 비례해야 합니다.");
+    void should_calculate_lotto_quantity_with_valid_amount() {
+        Purchase purchase = new Purchase(14000);
+        assertThat(purchase.getQuantity()).isEqualTo(14);
+    }
+
+    @DisplayName("금액이 음수이면 예외가 발생한다")
+    @Test
+    void should_throw_exception_when_amount_is_negative() {
+        assertThatThrownBy(() -> new Purchase(-1000))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구입 금액은 1000원 단위의 양수여야 합니다.");
+    }
+
+    @DisplayName("금액이 0원이면 예외가 발생한다")
+    @Test
+    void should_throw_exception_when_amount_is_zero() {
+        assertThatThrownBy(() -> new Purchase(0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구입 금액은 1000원 단위의 양수여야 합니다.");
+    }
+
+    @DisplayName("금액이 1000원 단위가 아니면 예외가 발생한다")
+    @Test
+    void should_throw_exception_when_amount_is_not_multiple_of_1000() {
+        assertThatThrownBy(() -> new Purchase(14501))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구입 금액은 1000원 단위의 양수여야 합니다.");
     }
 }
+
