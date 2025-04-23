@@ -1,5 +1,5 @@
-import Lotto.domain.LottoNumber;
-import Lotto.domain.WinningNumbers;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;

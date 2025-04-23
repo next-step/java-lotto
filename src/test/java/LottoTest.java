@@ -1,5 +1,5 @@
-import Lotto.domain.LottoNumber;
-import Lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

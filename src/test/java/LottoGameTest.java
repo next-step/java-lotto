@@ -1,12 +1,10 @@
-import Lotto.domain.*;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoGameTest {
 

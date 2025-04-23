@@ -1,14 +1,14 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import StringCalculator.domain.Expression;
-import StringCalculator.domain.Operand;
-import StringCalculator.domain.Operator;
+import stringCalculator.domain.Expression;
+import stringCalculator.domain.Operand;
+import stringCalculator.domain.Operator;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static StringCalculator.domain.Expression.isInvalidInputFormat;
+import static stringCalculator.domain.Expression.isInvalidInputFormat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 

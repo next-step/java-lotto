@@ -1,4 +1,4 @@
-import Lotto.domain.Purchase;
+import lotto.domain.Purchase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

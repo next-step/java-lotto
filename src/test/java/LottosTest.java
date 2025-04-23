@@ -1,14 +1,13 @@
-import Lotto.domain.Rank;
-import Lotto.domain.Lottos;
-import Lotto.domain.LottoNumber;
-import Lotto.domain.Lotto;
+import lotto.domain.Rank;
+import lotto.domain.Lottos;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lotto;
 
-import Lotto.domain.ResultStats;
+import lotto.domain.ResultStats;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
