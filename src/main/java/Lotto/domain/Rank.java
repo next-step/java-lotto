@@ -24,10 +24,6 @@ public enum Rank implements RankMatcher {
         return countOfMatch;
     }
 
-    public boolean isMatchBonus() {
-        return matchBonus;
-    }
-
     public int getWinningMoney() {
         return winningMoney;
     }

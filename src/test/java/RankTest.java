@@ -48,11 +48,4 @@ class RankTest {
         Rank rank = Rank.valueOf(rankName);
         assertThat(rank.getWinningMoney()).isEqualTo(expectedWinningMoney);
     }
-
-    @DisplayName("2등만 보너스 번호 일치가 필요하다")
-    @Test
-    void only_second_rank_should_require_bonus_match() {
-        assertThat(Rank.SECOND.isMatchBonus()).isTrue();
-        assertThat(Rank.FIRST.isMatchBonus()).isFalse();
-    }
 }
