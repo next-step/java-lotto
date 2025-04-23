@@ -17,8 +17,7 @@ public class LottosTest {
     @DisplayName("통계 계산 시 각 등수에 대한 개수를 정확히 반환한다")
     @Test
     void should_return_correct_counts_for_each_rank() {
-        int mockQuantity = 6;
-        Lottos lottoList = new Lottos(mockQuantity);
+        Lottos lottoList = new Lottos();
 
         Set<LottoNumber> winningNumbers = Set.of(
                 LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),

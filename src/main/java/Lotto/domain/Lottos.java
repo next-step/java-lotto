@@ -2,17 +2,11 @@ package Lotto.domain;
 
 import java.util.*;
 
-import static Lotto.domain.Lotto.generateLottoNumbers;
-
 public class Lottos {
     private static List<Lotto> lottos;
 
     public Lottos() {
         this.lottos = new ArrayList<>();
-    }
-
-    public Lottos(int purchasedQty) {
-        this.lottos = generate(purchasedQty).getLottos();
     }
 
     public void add(Lotto lotto) {
@@ -27,10 +21,6 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
-    }
-
     public ResultStats getSummary(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         LottoResultCalculator calculator = new LottoResultCalculator(lottos, winningNumbers, bonusNumber);
         Map<Rank, Integer> stats = calculator.calculateStats();
@@ -41,10 +31,6 @@ public class Lottos {
 
     public static Lottos generate(int autoCount) {
         return generate(List.of(), autoCount);
-    }
-
-    public static Lottos generate(List<List<LottoNumber>> manualNumbers) {
-        return generate(manualNumbers, 0);
     }
 
     public static Lottos generate(List<List<LottoNumber>> manualNumbers, int autoCount) {
