@@ -15,33 +15,23 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-
-        for (Placement placement: Placement.values()) {
-            printPlacementStat(result, placement);
+        for (Rank rank: Rank.values()) {
+            printPlacementStat2(result, rank);
         }
 
-        double yield = result.yield();
-        printYield(yield);
+        Yield lottoResultYield = Yield.of(result.totalPrize(), result.totalInvestment());
+        printYield(lottoResultYield);
         System.out.println();
     }
 
-    private void printYield(double yield) {
-        String verdict = "본전";
-
-        if (yield > 1) {
-            verdict = "이득";
-        }
-        if (yield < 1) {
-            verdict = "손해";
-        }
-
-        System.out.printf("총 수익률은 %.0f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", yield, verdict);
+    private void printYield(Yield lottoYield) {
+        System.out.printf("총 수익률은 %.0f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", lottoYield.valueOf(), lottoYield.verdictInKorean());
     }
 
-    public void printPlacementStat(LottoResult result, Placement placement) {
-        int matchingCount = placement.matchingCount();
-        int count = result.placementCount(matchingCount);
-        int prize = placement.prizeMoney();
+    public void printPlacementStat2(LottoResult result, Rank rank) {
+        int matchingCount = rank.getCountOfMatch();
+        int count = result.rankCount(rank);
+        int prize = rank.getWinningMoney();
 
         System.out.printf("%d개 일치 (%d원)- %d개%n", matchingCount, prize, count);
     }

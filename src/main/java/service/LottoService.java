@@ -5,7 +5,6 @@ import util.LottoInputParser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class LottoService {
     private static final int UPPER_BOUND = 45;
@@ -42,10 +41,10 @@ public class LottoService {
         return purchasePrice / LOTTO_PRICE;
     }
 
-    public LottoResult result(Lottos lottos, String winningNumbersStr) {
+    public LottoResult result(Lottos lottos, String winningNumbersStr, Integer bonusNumber) {
         List<Integer> winningNumbers = inputParser.parse(winningNumbersStr);
+        inputParser.validateBonusNumber(bonusNumber, winningNumbers);
         Lotto winningLotto = new Lotto(winningNumbers);
-        Map<Integer, Integer> placementCounts = lottos.placementCounts(winningLotto);
-        return new LottoResult(LOTTO_PRICE, placementCounts);
+        return lottos.rankCounts(winningLotto, bonusNumber, LOTTO_PRICE);
     }
 }

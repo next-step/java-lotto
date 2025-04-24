@@ -12,10 +12,20 @@ public class Lottos {
     public Map<Integer, Integer> placementCounts(Lotto winningLotto) {
         Map<Integer, Integer> pc = new HashMap<>();
         for (Lotto lotto : list) {
-            int matchingCount = lotto.matchingCount(winningLotto);
+            int matchingCount = LottoMatcher.count(lotto, winningLotto);
             pc.put(matchingCount, pc.getOrDefault(matchingCount, 0) + 1);
         }
         return pc;
+    }
+
+    public LottoResult rankCounts(Lotto winningLotto, Integer bonusNumber, Integer lottoPrice) {
+        Map<Rank, Integer> map = new EnumMap<>(Rank.class);
+        for (Lotto lotto : list) {
+            LottoMatch match = LottoMatcher.match(lotto, winningLotto, bonusNumber);
+            Rank rank = Rank.valueOf(match);
+            map.put(rank, map.getOrDefault(rank, 0) + 1);
+        }
+        return new LottoResult(lottoPrice, map);
     }
 
     public int count() {

@@ -68,4 +68,12 @@ public class LottoInputParser {
         }
         return result;
     }
+
+    public void validateBonusNumber(int bonusNumber, List<Integer> lottoNumbers) {
+        parseNumber(String.valueOf(bonusNumber));
+
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 숫자가 이미 당첨 번호 숫자에 존재합니다");
+        }
+    }
 }

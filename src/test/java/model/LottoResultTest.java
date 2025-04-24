@@ -1,47 +1,35 @@
 package model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import service.LottoService;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
-    LottoResult result;
-//    Placements placements;
+    private static final int LOTTO_PRICE = 1_000;
 
-    @BeforeEach
-    public void setUp() {
+    @Test
+    public void testRank() {
+        // when
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
-        Lotto lotto2 = new Lotto(List.of(4,5,6,7,8,9));
-        Lotto lotto3 = new Lotto(List.of(1,2,3,7,10,11));
+        Lotto lotto2 = new Lotto(List.of(4,5,16,7,8,9));
+        Lotto lotto3 = new Lotto(List.of(1,2,3,4,5,11));
         Lottos lottos = new Lottos(List.of(lotto,lotto2,lotto3));
-        String winningNumbersString = "1, 2, 3, 4, 7, 8";
+        Lotto winningLotto = new Lotto(List.of(1,2,3,4,5,16));
+        int bonusNumber = 6;
 
-        LottoService lottoService = new LottoService();
-        result = lottoService.result(lottos, winningNumbersString);
+        // given
+        LottoResult result = lottos.rankCounts(winningLotto, bonusNumber, LOTTO_PRICE);
 
-//        this.placements = new Placements(List.of(
-//                new Placement_Old(6, 2_000_000_000),
-//                new Placement_Old(5, 1_500_000),
-//                new Placement_Old(4, 50_000),
-//                new Placement_Old(3, 5_000),
-//                new Placement_Old(0, 0)
-//        ));
+        // then
+        assertThat(result.rankCount(Rank.SECOND)).isEqualTo(1);
+        assertThat(result.rankCount(Rank.THIRD)).isEqualTo(1);
+        assertThat(result.rankCount(Rank.FIFTH)).isEqualTo(1);
+        assertThat(result.totalInvestment()).isEqualTo(lottos.count()*LOTTO_PRICE);
 
-    }
-
-    @Test
-    public void placementCountTest() {
-        assertThat(result.placementCount(4)).isEqualTo(2);
-        assertThat(result.placementCount(3)).isEqualTo(1);
-    }
-
-    @Test
-    public void yieldTest() {
-//        assertThat(result.yield(placements)).isEqualTo((double)105000/3000);
+        int expectedPrize = Rank.SECOND.getWinningMoney() + Rank.THIRD.getWinningMoney() + Rank.FIFTH.getWinningMoney();
+        assertThat(result.totalPrize()).isEqualTo(expectedPrize);
     }
 
 
