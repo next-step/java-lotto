@@ -2,7 +2,7 @@ package calculator;
 
 public class Operator {
 
-    public static int operator(int operand1, int operand2, String operator) {
+    public static int calculate(int operand1, int operand2, String operator) {
         if (operator.equals("+")) {
             return add(operand1, operand2);
         }
