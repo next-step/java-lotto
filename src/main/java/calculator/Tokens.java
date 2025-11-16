@@ -22,8 +22,7 @@ public class Tokens {
     }
 
     public int calculate() {
-        int result = parseFirstNumber();
-        return accumulateResult(result);
+        return accumulateResult(parseFirstNumber());
     }
 
     private int parseFirstNumber() {
@@ -38,8 +37,8 @@ public class Tokens {
     }
 
     private int calculateNext(int currentResult, int operatorIndex) {
-        String operator = values[operatorIndex];
         int operand = Integer.parseInt(values[operatorIndex + 1]);
-        return Operator.calculate(currentResult, operand, operator);
+        OperatorType operator = OperatorType.from(values[operatorIndex]);
+        return operator.calculate(currentResult, operand);
     }
 }
