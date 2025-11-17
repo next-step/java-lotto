@@ -4,20 +4,24 @@ public class Tokens {
     private final String[] values;
 
     public Tokens(String expression) {
-        validate(expression);
-        this.values = parse(expression);
+        this(parse(validate(expression)));
     }
 
-    private void validate(String expression) {
+    private Tokens(String[] values) {
+        this.values = values;
+    }
+
+    private static String validate(String expression) {
         if (expression == null) {
             throw new IllegalArgumentException("null을 입력할 수 없습니다.");
         }
         if (expression.trim().isEmpty()) {
             throw new IllegalArgumentException("공백 혹은 빈문자열은 입력할 수 없습니다.");
         }
+        return expression;
     }
 
-    private String[] parse(String expression) {
+    private static String[] parse(String expression) {
         return expression.split(" ");
     }
 
