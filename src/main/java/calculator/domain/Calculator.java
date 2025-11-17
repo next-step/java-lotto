@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
@@ -21,11 +21,11 @@ public class Calculator {
 
     private static int calculation(List<Operator> operators, List<Integer> numbers) {
         int result = numbers.getFirst();
+
         for (int i = 0; i < operators.size(); i++) {
-            Operator operator = operators.get(i);
-            int number = numbers.get(i + 1);
-            result = executeOperation(operator, new TargetNumber(result, number));
+            result = executeOperation(operators.get(i), new TargetNumber(result, numbers.get(i + 1)));
         }
+
         return result;
     }
 
@@ -42,27 +42,21 @@ public class Calculator {
         if (operator == Operator.DIVISION) {
             return numbers.division();
         }
-        return 0;
+        return numbers.getFirstNumber();
     }
 
     private static List<Integer> splitNumber(String[] values) {
-        List<Integer> numbers = new ArrayList<>();
-        for (String value : values) {
-            if (isNumber(value)) {
-                numbers.add(Integer.parseInt(value));
-            }
-        }
-        return numbers;
+        return Arrays.stream(values)
+                .filter(Calculator::isNumber)
+                .map(Integer::parseInt)
+                .toList();
     }
 
     private static List<Operator> splitOperator(String[] values) {
-        List<Operator> operators = new ArrayList<>();
-        for (String value : values) {
-            if (!isNumber(value)) {
-                operators.add(Operator.fromName(value));
-            }
-        }
-        return operators;
+        return Arrays.stream(values)
+                .filter(value -> !isNumber(value))
+                .map(Operator::fromName)
+                .toList();
     }
 
     private static boolean isNumber(String value) {

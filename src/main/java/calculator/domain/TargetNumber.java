@@ -24,4 +24,12 @@ public class TargetNumber {
     public int division() {
         return this.firstNumber / this.secondNumber;
     }
+
+    public int getFirstNumber() {
+        return firstNumber;
+    }
+
+    public int getSecondNumber() {
+        return secondNumber;
+    }
 }
