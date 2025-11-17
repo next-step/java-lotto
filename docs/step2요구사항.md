@@ -14,8 +14,8 @@
 ## 로또 번호
 
 - [ ] 로또 번호는 총 6개이다
-- [ ] 로또 번호는 1부터 45 사이의 숫자이다
-    - [ ] 로또 번호 범위를 벗어나면 IllegalArgumentException을 발생시킨다
+- [x] 로또 번호는 1부터 45 사이의 숫자이다
+    - [x] 로또 번호 범위를 벗어나면 IllegalArgumentException을 발생시킨다
 - [ ] 로또 번호는 중복되지 않아야 한다
     - [ ] 로또 번호 중복 시 IllegalArgumentException을 발생시킨다
 
