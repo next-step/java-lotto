@@ -4,9 +4,9 @@ public class TargetNumber {
     private final int firstNumber;
     private final int secondNumber;
 
-    public TargetNumber(String firstNumber, String secondNumber) {
-        this.firstNumber = Integer.parseInt(firstNumber);
-        this.secondNumber = Integer.parseInt(secondNumber);
+    public TargetNumber(int firstNumber, int secondNumber) {
+        this.firstNumber = firstNumber;
+        this.secondNumber = secondNumber;
     }
 
     public int plus() {
