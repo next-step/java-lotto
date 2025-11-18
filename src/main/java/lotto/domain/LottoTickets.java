@@ -16,8 +16,8 @@ public class LottoTickets {
         this.lottos = lottos;
     }
 
-    public static LottoTickets create(int purchaseAmount) {
-        int count = purchaseAmount / LOTTO_PRICE;
+    public static LottoTickets create(PurchaseAmount purchaseAmount) {
+        int count = purchaseAmount.getAmount() / LOTTO_PRICE;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(createRandomLotto());

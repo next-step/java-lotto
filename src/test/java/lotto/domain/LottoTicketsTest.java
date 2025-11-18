@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTicketsTest {
     @Test
     void 구입_금액으로_로또_티켓_생성() {
-        int purchaseAmount = 5_000;
+        PurchaseAmount purchaseAmount =new PurchaseAmount(5_000);
 
         LottoTickets tickets = LottoTickets.create(purchaseAmount);
 
@@ -22,7 +22,7 @@ public class LottoTicketsTest {
 
     @Test
     void 모든_로또_티켓_조회() {
-        int purchaseAmount = 3_000;
+        PurchaseAmount purchaseAmount =new PurchaseAmount(3_000);
 
         LottoTickets tickets = LottoTickets.create(purchaseAmount);
 
