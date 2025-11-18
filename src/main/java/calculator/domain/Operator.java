@@ -1,10 +1,30 @@
 package calculator.domain;
 
-public enum Operator {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLICATION("*"),
-    DIVISION("/");
+public enum Operator implements Calculate {
+    PLUS("+") {
+        @Override
+        public int calculate(TargetNumber targetNumber) {
+            return targetNumber.plus();
+        }
+    },
+    MINUS("-") {
+        @Override
+        public int calculate(TargetNumber targetNumber) {
+            return targetNumber.minus();
+        }
+    },
+    MULTIPLICATION("*") {
+        @Override
+        public int calculate(TargetNumber targetNumber) {
+            return targetNumber.multiplication();
+        }
+    },
+    DIVISION("/") {
+        @Override
+        public int calculate(TargetNumber targetNumber) {
+            return targetNumber.division();
+        }
+    };
 
     private final String name;
 
