@@ -16,4 +16,5 @@ public class LottoResultTest {
         double result = LottoResult.profitPercent(26000, 1500000);
         Assertions.assertThat(result).isEqualTo(57.69);
     }
+
 }
