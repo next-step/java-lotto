@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 //- [ ] 로또 번호는 총 6개이다
 //- [ ] 로또 번호는 1부터 45 사이의 숫자이다
