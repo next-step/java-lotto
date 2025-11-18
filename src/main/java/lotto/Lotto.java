@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +11,18 @@ public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> numbers;
+
+    public Lotto(int... intNumbers) {
+        this(createLottoNumbers(numbersToList(intNumbers)));
+    }
+
+    private static List<Integer> numbersToList(int[] intNumbers) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int number : intNumbers) {
+            numbers.add(number);
+        }
+        return numbers;
+    }
 
     public Lotto(List<LottoNumber> numbers) {
         validateSize(numbers);
