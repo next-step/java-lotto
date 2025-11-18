@@ -8,13 +8,13 @@ public class LottoNumber {
 
     private final int value;
 
+    public LottoNumber(String value) {
+        this(Integer.parseInt(value));
+    }
+
     public LottoNumber(int value) {
         validate(value);
         this.value = value;
-    }
-
-    public LottoNumber(String value) {
-        this(Integer.parseInt(value));
     }
 
     private void validate(int value) {
