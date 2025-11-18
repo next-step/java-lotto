@@ -9,19 +9,17 @@ import lotto.view.ResultView;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        ResultView resultView = new ResultView();
-
         PurchaseAmount purchaseAmount = new PurchaseAmount(InputView.inputPurchaseAmount());
         LottoTickets tickets = LottoTickets.create(purchaseAmount);
 
-        resultView.printTicketCount(tickets.size());
-        resultView.printLottoTickets(tickets);
+        ResultView.printTicketCount(tickets.size());
+        ResultView.printLottoTickets(tickets);
 
         Lotto winningNumbers = InputView.inputWinningNumbers();
         WinningResult result = new WinningResult(tickets, winningNumbers);
 
-        resultView.printWinningStatistics(result);
-        double profitRate = result.calculateProfitRate(purchaseAmount.getAmount());
-        resultView.printProfitRate(profitRate);
+        ResultView.printWinningStatistics(result);
+        double profitRate = result.calculateProfitRate(purchaseAmount);
+        ResultView.printProfitRate(profitRate);
     }
 }

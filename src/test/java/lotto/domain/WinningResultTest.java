@@ -44,7 +44,7 @@ public class WinningResultTest {
                 new Lotto(1, 2, 3, 7, 8, 9)
         );
         Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
-        int purchaseAmount = 2000;
+        PurchaseAmount purchaseAmount = new PurchaseAmount(2000);
 
         WinningResult result = new WinningResult(tickets, winningNumbers);
 

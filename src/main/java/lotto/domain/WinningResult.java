@@ -8,24 +8,25 @@ public class WinningResult {
     private final Map<Rank, Integer> result;
 
     public WinningResult(LottoTickets tickets, Lotto winningNumbers) {
-        this.result = new HashMap<>();
-        initializeResult();
-        calculateResult(tickets, winningNumbers);
+        this.result = calculateResult(tickets, winningNumbers);
     }
 
-    private void initializeResult() {
-        for (Rank rank : Rank.values()) {
-            result.put(rank, 0);
-        }
-    }
-
-    private void calculateResult(LottoTickets tickets, Lotto winningNumbers) {
+    private Map<Rank,Integer> calculateResult(LottoTickets tickets, Lotto winningNumbers) {
+        Map<Rank, Integer> result = initializeResult();
         List<Lotto> lottos = tickets.getLottos();
         for (Lotto lotto : lottos) {
             int matchCount = lotto.countMatchNumber(winningNumbers);
             Rank rank = Rank.valueOf(matchCount);
             result.put(rank, result.get(rank) + 1);
         }
+        return result;
+    }
+    private Map<Rank, Integer> initializeResult() {
+        Map<Rank, Integer> result = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
+        }
+        return result;
     }
 
     public int getCountByRank(Rank rank) {
@@ -40,7 +41,7 @@ public class WinningResult {
         return total;
     }
 
-    public double calculateProfitRate(int purchaseAmount) {
-        return (double) getTotalWinningAmount() / purchaseAmount;
+    public double calculateProfitRate(PurchaseAmount purchaseAmount) {
+        return (double) getTotalWinningAmount() / purchaseAmount.getAmount();
     }
 }
