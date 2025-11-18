@@ -13,32 +13,41 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
-        this.numbers = createLottoNumbers(numbers);
+        this.numbers = sortNumbers(numbers);
     }
 
-    private void validateSize(List<Integer> numbers) {
+    public static Lotto from(List<Integer> intNumbers) {
+        return new Lotto(createLottoNumbers(intNumbers));
+    }
+
+    private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 총 6개여야 합니다.");
         }
     }
 
-    private void validateDuplicate(List<Integer> numbers) {
-        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
-        if (uniqueNumbers.size() != LOTTO_NUMBER_COUNT) {
+    private void validateDuplicate(List<LottoNumber> numbers) {
+        Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);
+        if (uniqueNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
 
-    private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
+    private static List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
-        Collections.sort(lottoNumbers, Comparator.comparingInt(LottoNumber::getValue));
         return lottoNumbers;
+    }
+
+    private List<LottoNumber> sortNumbers(List<LottoNumber> numbers) {
+        List<LottoNumber> sorted = new ArrayList<>(numbers);
+        sorted.sort(Comparator.comparingInt(LottoNumber::getValue));
+        return sorted;
     }
 
     public List<Integer> getNumbers() {
@@ -60,12 +69,7 @@ public class Lotto {
     }
 
     private boolean contains(LottoNumber number) {
-        for (LottoNumber lottoNumber : numbers) {
-            if (lottoNumber.equals(number)) {
-                return true;
-            }
-        }
-        return false;
+        return numbers.contains(number);
     }
 
 }

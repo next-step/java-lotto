@@ -38,7 +38,7 @@ public class LottoTickets {
             selectedNumbers.add(numbers.get(i));
         }
 
-        return new Lotto(selectedNumbers);
+        return Lotto.from(selectedNumbers);
     }
 
     public int size() {
