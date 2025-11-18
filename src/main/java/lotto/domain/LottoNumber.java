@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoNumber {
 
@@ -15,14 +17,33 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    public int checkLottoNumber(List<Integer> inputNumbers) {
-        int count = 0;
-        for (int i = 0; i < numbers.size(); i++) {
-            if (numbers.contains(inputNumbers.get(i))) {
+    public LottoResult checkLottoNumber(List<LottoNumber> useLottoNumber) {
+        LottoResult lottoResult = new LottoResult();
+
+        for (LottoNumber lottoNumber : useLottoNumber) {
+            int count = 0;
+
+            count = successCount(lottoNumber, count);
+
+            LottoRank lottoRank = LottoRank.fromMatchCount(count);
+
+            lottoResult.putLottoResult(lottoRank);
+        }
+
+        return lottoResult;
+    }
+
+    private int successCount(LottoNumber useLotto, int count) {
+        for (int j = 0; j < useLotto.numbers.size(); j++) {
+            if (isContains(useLotto, j)) {
                 count++;
             }
         }
         return count;
+    }
+
+    private boolean isContains(LottoNumber useLotto, int index) {
+        return numbers.contains(useLotto.numbers.get(index));
     }
 
     private static void validation(List<Integer> numbers) {
