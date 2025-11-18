@@ -15,12 +15,12 @@ public class LottoMachine {
         }
     }
 
-    public static List<List<Integer>> createLotto(int count) {
-        List<List<Integer>> lottos = new ArrayList<>();
+    public static List<LottoNumber> createLotto(int count) {
+        List<LottoNumber> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
             Collections.shuffle(lottoNumbers);
-            lottos.add(new ArrayList<>(lottoNumbers.subList(0, 6)));
+            lottos.add(new LottoNumber(new ArrayList<>(lottoNumbers.subList(0, 6))));
         }
 
         return lottos;
