@@ -1,20 +1,27 @@
 package lotto.domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
 
+    @BeforeEach
+    void init() {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.putLottoResult(LottoRank.THIRD);
+    }
+
     @Test
     void 수익률_100퍼센트_미만() {
-        double result = LottoResult.profitPercent(14000, 5000);
-        Assertions.assertThat(result).isEqualTo(0.35);
+        double result = LottoResult.profitPercent(new LottoPrice(100000));
+        Assertions.assertThat(result).isEqualTo(0.5);
     }
 
     @Test
     void 수익률_100퍼센트_이상() {
-        double result = LottoResult.profitPercent(26000, 1500000);
-        Assertions.assertThat(result).isEqualTo(57.69);
+        double result = LottoResult.profitPercent(new LottoPrice(50000));
+        Assertions.assertThat(result).isEqualTo(1.0);
     }
 
 }

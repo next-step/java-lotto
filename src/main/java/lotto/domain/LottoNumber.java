@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LottoNumber {
 
@@ -52,4 +50,8 @@ public class LottoNumber {
         }
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(numbers);
+    }
 }

@@ -15,19 +15,14 @@ public class LottoMachine {
         }
     }
 
-    public static List<LottoNumber> createLotto(int count) {
-        List<LottoNumber> lottos = new ArrayList<>();
+    public static List<LottoNumber> createLotto(LottoPrice lottoPrice) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
-            Collections.shuffle(lottoNumbers);
-            lottos.add(new LottoNumber(new ArrayList<>(lottoNumbers.subList(0, 6))));
-        }
+        lottoPrice.create(() -> {
+            Collections.shuffle(LottoMachine.lottoNumbers);
+            lottoNumbers.add(new LottoNumber(new ArrayList<>(LottoMachine.lottoNumbers.subList(0, 6))));
+        });
 
-        return lottos;
+        return lottoNumbers;
     }
-
-
-
-
-
 }

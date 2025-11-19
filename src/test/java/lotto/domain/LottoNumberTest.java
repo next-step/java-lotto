@@ -19,7 +19,7 @@ class LottoNumberTest {
     }
 
     @Test
-    void 지난주_당첨번호_6개_불일치() {
+    void 지난주_당첨번호_6개_미만() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoNumber(1, 2, 3, 4, 5));
     }
