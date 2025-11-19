@@ -69,7 +69,11 @@ public class Lotto {
         return result;
     }
 
-    public int countMatchNumber(Lotto other) {
+    public Rank match(Lotto other) {
+        return Rank.valueOf(countMatchNumber(other));
+    }
+
+    private int countMatchNumber(Lotto other) {
         int count = 0;
         for (LottoNumber number : numbers) {
             if (other.contains(number)) {
@@ -78,6 +82,7 @@ public class Lotto {
         }
         return count;
     }
+
 
     private boolean contains(LottoNumber number) {
         return numbers.contains(number);

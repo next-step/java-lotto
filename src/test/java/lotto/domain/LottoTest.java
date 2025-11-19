@@ -47,13 +47,13 @@ public class LottoTest {
     }
 
     @Test
-    void 당첨_번호와_일치하는_개수_확인() {
+    void 당첨_번호와_일치하는_등수_확인() {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
         Lotto winNumbers = new Lotto(1, 2, 3, 7, 8, 9);
 
-        int matchCountNumber = lotto.countMatchNumber(winNumbers);
+        Rank match = lotto.match(winNumbers);
 
-        assertThat(matchCountNumber).isEqualTo(3);
+        assertThat(match).isEqualTo(Rank.FOURTH);
     }
 
 }
