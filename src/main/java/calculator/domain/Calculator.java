@@ -23,26 +23,10 @@ public class Calculator {
         int result = numbers.getFirst();
 
         for (int i = 0; i < operators.size(); i++) {
-            result = executeOperation(operators.get(i), new TargetNumber(result, numbers.get(i + 1)));
+            result = operators.get(i).calculate(new TargetNumber(result, numbers.get(i + 1)));
         }
 
         return result;
-    }
-
-    private static int executeOperation(Operator operator, TargetNumber numbers) {
-        if (operator == Operator.PLUS) {
-            return numbers.plus();
-        }
-        if (operator == Operator.MINUS) {
-            return numbers.minus();
-        }
-        if (operator == Operator.MULTIPLICATION) {
-            return numbers.multiplication();
-        }
-        if (operator == Operator.DIVISION) {
-            return numbers.division();
-        }
-        return numbers.getFirstNumber();
     }
 
     private static List<Integer> splitNumber(String[] values) {
