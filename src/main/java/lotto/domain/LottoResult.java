@@ -29,7 +29,7 @@ public class LottoResult {
         return lottoResult;
     }
 
-    public void lottoResultInit(){
+    public void lottoResultInit() {
         lottoResult = new HashMap<>();
         lottoResult.put(LottoRank.FOURTH, 0);
         lottoResult.put(LottoRank.THIRD, 0);

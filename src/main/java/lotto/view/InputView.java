@@ -23,19 +23,19 @@ public class InputView {
         return new LottoPrice(scanner.nextInt());
     }
 
-    public static void printLottoCount(LottoPrice lottoPrice){
+    public static void printLottoCount(LottoPrice lottoPrice) {
         System.out.println(String.format(LOTTO_COUNT_MESSAGE, lottoPrice.getTicketCount()));
     }
 
-    public static void printBuyLotto(List<LottoNumber> lottoNumbers){
+    public static void printBuyLotto(List<LottoNumber> lottoNumbers) {
         lottoNumbers.stream().forEach(System.out::println);
     }
 
-    public static void printResultLottoNumber(){
+    public static void printResultLottoNumber() {
         System.out.println(RESULT_LOTTO_MESSAGE);
     }
-    
-    public static LottoNumber inputResultLottoNumber(){
+
+    public static LottoNumber inputResultLottoNumber() {
         scanner.nextLine();
         return new LottoNumber(StringToIntegerArray(scanner.nextLine()));
     }
