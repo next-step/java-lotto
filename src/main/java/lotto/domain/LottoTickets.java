@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-    private static final int LOTTO_PRICE = 1_000;
-
     private final List<Lotto> lottos;
 
     public LottoTickets(List<Lotto> lottos) {
@@ -13,7 +11,7 @@ public class LottoTickets {
     }
 
     public static LottoTickets create(PurchaseAmount purchaseAmount) {
-        int count = purchaseAmount.getAmount() / LOTTO_PRICE;
+        int count = purchaseAmount.getLottoCount();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(Lotto.from(LottoNumberGenerator.generate()));

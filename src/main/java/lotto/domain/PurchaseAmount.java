@@ -2,26 +2,34 @@ package lotto.domain;
 
 public class PurchaseAmount {
     private static final int LOTTO_PRICE = 1000;
-    private static final int MIN_AMOUNT = 0;
 
-    private final int amount;
+    private final Money money;
 
-    public PurchaseAmount(int amount) {
-        validate(amount);
-        this.amount = amount;
+    public PurchaseAmount(int moneyValue) {
+        this(new Money(moneyValue));
     }
 
-    private void validate(int amount) {
-        if (amount <= MIN_AMOUNT) {
-            throw new IllegalArgumentException("구입 금액은 0보다 커야 합니다.");
-        }
-        if (amount % LOTTO_PRICE != 0) {
+    public PurchaseAmount(Money money) {
+        validate(money.getValue());
+        this.money = money;
+    }
+
+    private void validate(int moneyValue) {
+        if (moneyValue % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다.");
         }
     }
 
     public int getAmount() {
-        return amount;
+        return money.getValue();
+    }
+
+    public int getLottoCount() {
+        return getAmount() / LOTTO_PRICE;
+    }
+
+    public double calculateProfitRate(int totalWinningAmount) {
+        return money.calculateRate(totalWinningAmount);
     }
 
 }

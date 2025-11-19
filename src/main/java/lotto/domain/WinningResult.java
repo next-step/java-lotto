@@ -11,7 +11,7 @@ public class WinningResult {
         this.result = calculateResult(tickets, winningNumbers);
     }
 
-    private Map<Rank,Integer> calculateResult(LottoTickets tickets, Lotto winningNumbers) {
+    private Map<Rank, Integer> calculateResult(LottoTickets tickets, Lotto winningNumbers) {
         Map<Rank, Integer> result = initializeResult();
         List<Lotto> lottos = tickets.getLottos();
         for (Lotto lotto : lottos) {
@@ -21,6 +21,7 @@ public class WinningResult {
         }
         return result;
     }
+
     private Map<Rank, Integer> initializeResult() {
         Map<Rank, Integer> result = new HashMap<>();
         for (Rank rank : Rank.values()) {
@@ -42,6 +43,6 @@ public class WinningResult {
     }
 
     public double calculateProfitRate(PurchaseAmount purchaseAmount) {
-        return (double) getTotalWinningAmount() / purchaseAmount.getAmount();
+        return purchaseAmount.calculateProfitRate(getTotalWinningAmount());
     }
 }
