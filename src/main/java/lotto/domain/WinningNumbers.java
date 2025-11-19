@@ -4,15 +4,15 @@ import java.util.List;
 
 public class WinningNumbers {
     private final Lotto lotto;
-    private final BonusNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(Lotto lotto, BonusNumber bonusNumber) {
+    public WinningNumbers(Lotto lotto, LottoNumber bonusNumber) {
         validateDuplicate(lotto, bonusNumber);
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplicate(Lotto lotto, BonusNumber bonusNumber) {
+    private void validateDuplicate(Lotto lotto, LottoNumber bonusNumber) {
         List<Integer> numbers = lotto.getNumbers();
         if (numbers.contains(bonusNumber.getValue())) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
@@ -23,7 +23,7 @@ public class WinningNumbers {
         return lotto;
     }
 
-    public BonusNumber getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 
@@ -33,6 +33,6 @@ public class WinningNumbers {
     }
 
     public boolean matchBonus(LottoNumber number) {
-        return bonusNumber.getValue() == number.getValue();
+        return bonusNumber.equals(number);
     }
 }
