@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-//- [ ] 로또 번호는 총 6개이다
-//- [ ] 로또 번호는 중복되지 않아야 한다
-//    - [ ] 로또 번호 중복 시 IllegalArgumentException을 발생시킨다
-
 public class LottoTest {
 
     @Test
@@ -49,11 +45,13 @@ public class LottoTest {
     @Test
     void 당첨_번호와_일치하는_등수_확인() {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        Lotto winNumbers = new Lotto(1, 2, 3, 7, 8, 9);
+        Lotto winningLotto = new Lotto(1, 2, 3, 7, 8, 9);
+        LottoNumber bonusNumber = new LottoNumber(10);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
-        Rank match = lotto.match(winNumbers);
+        Rank match = lotto.match(winningNumbers);
 
-        assertThat(match).isEqualTo(Rank.FOURTH);
+        assertThat(match).isEqualTo(Rank.FIFTH);
     }
 
 }

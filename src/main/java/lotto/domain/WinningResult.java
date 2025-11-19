@@ -7,11 +7,11 @@ import java.util.Map;
 public class WinningResult {
     private final Map<Rank, Integer> result;
 
-    public WinningResult(LottoTickets tickets, Lotto winningNumbers) {
+    public WinningResult(LottoTickets tickets, WinningNumbers winningNumbers) {
         this.result = calculateResult(tickets, winningNumbers);
     }
 
-    private Map<Rank, Integer> calculateResult(LottoTickets tickets, Lotto winningNumbers) {
+    private Map<Rank, Integer> calculateResult(LottoTickets tickets, WinningNumbers winningNumbers) {
         Map<Rank, Integer> result = initializeResult();
         List<Lotto> lottos = tickets.getLottos();
         for (Lotto lotto : lottos) {
