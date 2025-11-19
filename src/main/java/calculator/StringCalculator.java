@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -17,52 +16,33 @@ import java.util.Scanner;
 
 public class StringCalculator {
 
-    private static final Scanner SCANNER = new Scanner(System.in);
     private static final String NUM_AND_OPERATOR_DELIMITER = " ";
-    
+
+    private final CalculatorFactory calculatorFactory;
+
+    public StringCalculator(CalculatorFactory calculatorFactory) {
+        this.calculatorFactory = calculatorFactory;
+    }
+
     public int calculate(String input) {
-        List<String> inputArrays = validAndSplitInput(input);
-        for (int i = 1; i < inputArrays.size(); i = i + 2) {
+        CalculatorTokens calculateTokens = new CalculatorTokens(
+                new InputValidator().validAndSplitInput(input)
+        );
 
+        int result = calculateTokens.firstTokenNum();
+
+        while (calculateTokens.hasNext()) {
+            OneTokenBundle oneTokenBundle = calculateTokens.getOneTokenBundle();
+
+            result = calculatorFactory.handleWayByOperator(
+                    oneTokenBundle.operator(),
+                    result,
+                    oneTokenBundle.rightNumber()
+            );
         }
 
-        return 0;
+        return result;
     }
 
-    private List<String> validAndSplitInput(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("입력값이 없거나 빈 문자열 입니다");
-        }
 
-        String[] inputArrays = input.split(NUM_AND_OPERATOR_DELIMITER);
-        if (inputArrays.length < 2) {
-            throw new IllegalArgumentException("입력값이 하나이거나 비정상 문자열 입니다");
-        }
-
-        return List.of(inputArrays);
-    }
-
-    // split 한 문자열을 숫자와 연산자로 따로 나눠서 작업할지, 하나의 리스트로 관리하며 홀수 인덱스 = 연산자, 짝수인덱스=숫자의 공식을 가져갈건지. 후자로 결정.
-
-    public int add(int left, int right) {
-        return left + right;
-    }
-
-    public int sub(int left, int right) {
-        return left - right;
-    }
-
-    public int multi(int left, int right) {
-        return left * right;
-    }
-
-    public int div(int left, int right) {
-        return left / right;
-    }
-
-    public static void main(String[] args) {
-        String input = SCANNER.nextLine();
-        
-        
-    }
 }
