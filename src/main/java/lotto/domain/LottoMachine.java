@@ -20,7 +20,9 @@ public class LottoMachine {
 
         lottoPrice.create(() -> {
             Collections.shuffle(LottoMachine.lottoNumbers);
-            lottoNumbers.add(new LottoNumber(new ArrayList<>(LottoMachine.lottoNumbers.subList(0, 6))));
+            lottoNumbers.add(new LottoNumber(new ArrayList<>(
+                    LottoMachine.lottoNumbers.subList(0, 6).stream().map(NumberElement::new).toList()))
+            );
         });
 
         return lottoNumbers;

@@ -14,8 +14,7 @@ class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(1, 2, 3, 4, 5, 6);
         LottoResult lottoResult = lottoNumber.checkLottoNumber(
                 List.of(new LottoNumber(13, 2, 33, 40, 1, 3)));
-
-        assertThat(lottoResult.getLottoResult()).containsEntry(LottoRank.FOURTH, 1);
+        assertThat(lottoResult.getLottoNumberResult().getFirst()).isEqualTo(new LottoNumberResult(LottoRank.FOURTH, 1));
     }
 
     @Test

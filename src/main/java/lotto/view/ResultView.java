@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumberResult;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 
@@ -21,14 +22,14 @@ public class ResultView {
     }
 
     public static void printResult(LottoResult lottoResult) {
-        Map<LottoRank, Integer> resultData = lottoResult.getLottoResult();
+        List<LottoNumberResult> resultData = lottoResult.lottoNumberResult();
 
-        for (LottoRank lottoRank : mapSort(resultData)) {
+        for (LottoNumberResult resultDatum : resultData) {
             System.out.println(String.format(
                     LOTTO_RESULT_FORMAT,
-                    lottoRank.getMatchCount(),
-                    lottoRank.getPrizeMoney(),
-                    resultData.get(lottoRank)
+                    resultDatum.getLottoRank().getMatchCount(),
+                    resultDatum.getLottoRank().getPrizeMoney(),
+                    resultDatum.getMatchCount()
             ));
         }
     }
