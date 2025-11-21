@@ -1,11 +1,10 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.BuyLotto;
+import lotto.domain.Lotto;
 import lotto.domain.LottoPrice;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -29,17 +28,17 @@ public class InputView {
         System.out.println(String.format(LOTTO_COUNT_MESSAGE, lottoPrice.getTicketCount()));
     }
 
-    public static void printBuyLotto(List<LottoNumber> lottoNumbers) {
-        lottoNumbers.stream().forEach(System.out::println);
+    public static void printBuyLotto(BuyLotto buyLotto) {
+        buyLotto.getLottos().stream().forEach(System.out::println);
     }
 
     public static void printResultLottoNumber() {
         System.out.println(RESULT_LOTTO_MESSAGE);
     }
 
-    public static LottoNumbers inputResultLottoNumber() {
+    public static Lotto inputResultLottoNumber() {
         scanner.nextLine();
-        return new LottoNumbers(StringToIntegerArray(scanner.nextLine()));
+        return new Lotto(StringToIntegerArray(scanner.nextLine()));
     }
 
     public static void printBonusNumber() {

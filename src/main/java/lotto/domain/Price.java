@@ -25,7 +25,7 @@ public class Price {
     }
 
     private void checkMinPrice(int value) {
-        if (value < 1000) {
+        if (value < 1_000) {
             throw new IllegalArgumentException("1000원 이상 입력해주세요.");
         }
     }

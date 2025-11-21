@@ -7,10 +7,14 @@ import java.util.List;
 
 public class LottoResult {
 
-    private static List<LottoNumberResult> lottoNumberResult;
+    private static List<LottoNumberResult> lottoNumberResults = new ArrayList<>();
 
-    public LottoResult() {
-        lottoNumberResult = lottoResultInit();
+    static {
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.FIFTH, 0));
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.FOURTH, 0));
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.THIRD, 0));
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.SECOND, 0));
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.FIRST, 0));
     }
 
     public static double profitPercent(LottoPrice lottoPrice) {
@@ -18,7 +22,7 @@ public class LottoResult {
     }
 
     private static int totalResultPrice() {
-        return lottoNumberResult.stream()
+        return lottoNumberResults.stream()
                 .filter(LottoNumberResult::isCountNotZero)
                 .mapToInt(LottoNumberResult::multiplication)
                 .sum();
@@ -32,27 +36,18 @@ public class LottoResult {
     }
 
     public static List<LottoNumberResult> lottoNumberResult() {
-        return lottoNumberResult;
-    }
-
-    private List<LottoNumberResult> lottoResultInit() {
-        List<LottoNumberResult> lottoNumberResults = new ArrayList<>();
-        lottoNumberResults.add(new LottoNumberResult(LottoRank.FOURTH, 0));
-        lottoNumberResults.add(new LottoNumberResult(LottoRank.THIRD, 0));
-        lottoNumberResults.add(new LottoNumberResult(LottoRank.SECOND, 0));
-        lottoNumberResults.add(new LottoNumberResult(LottoRank.BONUS, 0));
-        lottoNumberResults.add(new LottoNumberResult(LottoRank.FIRST, 0));
         return lottoNumberResults;
     }
 
+
     private LottoNumberResult findLottoNumberResult(LottoRank lottoRank) {
-        return lottoNumberResult.stream()
+        return lottoNumberResults.stream()
                 .filter(lotto -> lotto.isEqualsRank(lottoRank))
                 .findFirst()
                 .orElse(null);
     }
 
     public List<LottoNumberResult> getLottoNumberResult() {
-        return lottoNumberResult;
+        return lottoNumberResults;
     }
 }

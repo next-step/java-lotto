@@ -11,7 +11,6 @@ public class LottoPrice {
         this(price, price / 1_000);
     }
 
-
     public LottoPrice(int price, int ticketCount) {
         this(new Price(price), new TicketCount(ticketCount));
     }

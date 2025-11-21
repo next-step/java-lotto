@@ -25,7 +25,7 @@ public class ResultView {
     public static void printResult(LottoResult lottoResult) {
         for (LottoNumberResult result : lottoResult.lottoNumberResult()) {
             System.out.println(String.format(
-                    result.getLottoRank() != LottoRank.BONUS ? LOTTO_RESULT_FORMAT : LOTTO_BONUS_RESULT_FORMAT,
+                    result.getLottoRank() != LottoRank.SECOND ? LOTTO_RESULT_FORMAT : LOTTO_BONUS_RESULT_FORMAT,
                     result.getLottoRank().getMatchCount(),
                     result.getLottoRank().getPrizeMoney(),
                     result.getMatchCount()
@@ -44,9 +44,4 @@ public class ResultView {
         }
     }
 
-    private static List<LottoRank> mapSort(Map<LottoRank, Integer> resultData) {
-        return resultData.keySet().stream()
-                .sorted(Comparator.comparingInt(Enum::ordinal))
-                .toList();
-    }
 }
