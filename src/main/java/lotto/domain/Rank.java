@@ -20,11 +20,15 @@ public enum Rank {
 
     public static Rank valueOf(int matchCount, boolean matchBonus) {
         for (Rank rank : values()) {
-            if (rank.matchCount == matchCount && rank.matchBonus == matchBonus) {
+            if (rank.match(matchCount, matchBonus)) {
                 return rank;
             }
         }
         return MISS;
+    }
+
+    private boolean match(int matchCount, boolean matchBonus) {
+        return this.matchCount == matchCount && this.matchBonus == matchBonus;
     }
 
     public int getWinningAmount() {
