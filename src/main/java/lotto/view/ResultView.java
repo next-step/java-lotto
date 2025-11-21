@@ -12,7 +12,8 @@ public class ResultView {
 
     private static final String RESULT_MESSAGE = "당첨 통계";
     private static final String HYPHEN = "---------";
-    private static final String LOTTO_RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final String LOTTO_RESULT_FORMAT = "%d개 일치, (%d원)- %d개";
+    private static final String LOTTO_BONUS_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
     private static final String LOTTO_RESULT_PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String LOTTO_RESULT_ONE_PERCENT_BELOW_FORMAT = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -22,14 +23,12 @@ public class ResultView {
     }
 
     public static void printResult(LottoResult lottoResult) {
-        List<LottoNumberResult> resultData = lottoResult.lottoNumberResult();
-
-        for (LottoNumberResult resultDatum : resultData) {
+        for (LottoNumberResult result : lottoResult.lottoNumberResult()) {
             System.out.println(String.format(
-                    LOTTO_RESULT_FORMAT,
-                    resultDatum.getLottoRank().getMatchCount(),
-                    resultDatum.getLottoRank().getPrizeMoney(),
-                    resultDatum.getMatchCount()
+                    result.getLottoRank() != LottoRank.BONUS ? LOTTO_RESULT_FORMAT : LOTTO_BONUS_RESULT_FORMAT,
+                    result.getLottoRank().getMatchCount(),
+                    result.getLottoRank().getPrizeMoney(),
+                    result.getMatchCount()
             ));
         }
     }

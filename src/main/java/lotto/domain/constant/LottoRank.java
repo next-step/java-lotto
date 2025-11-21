@@ -17,6 +17,9 @@ public enum LottoRank {
 
     public static LottoRank fromMatchCount(int matchCount) {
         for (LottoRank rank : LottoRank.values()) {
+            if(rank == BONUS){
+                continue;
+            }
             if (rank.matchCount <= matchCount) {
                 return rank;
             }

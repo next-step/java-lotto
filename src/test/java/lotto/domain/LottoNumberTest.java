@@ -24,4 +24,13 @@ class LottoNumberTest {
                 .isThrownBy(() -> new LottoNumber(1, 2, 3, 4, 5));
     }
 
+    @Test
+    void 로또번호_5개_보너스번호_일치() {
+        LottoNumber lottoNumber = new LottoNumber(List.of(1, 2, 3, 4, 5, 6), 7);
+        LottoResult lottoResult = lottoNumber.checkLottoNumber(
+                List.of(new LottoNumber(1,2,3,4,5,7)));
+        // [FOURTH(0), THIRD(0), SECOND(0), BONUS(1), FIRST(0)]
+        assertThat(lottoResult.getLottoNumberResult().get(3)).isEqualTo(new LottoNumberResult(LottoRank.BONUS, 1));
+    }
+
 }

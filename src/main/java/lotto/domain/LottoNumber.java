@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.constant.LottoRank;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class LottoNumber {
         LottoResult lottoResult = new LottoResult();
 
         for (LottoNumber lottoNumber : useLottoNumber) {
-            lottoResult.putLottoResult(this.numbers.match(lottoNumber));
+            lottoResult.putLottoResult(this.numbers.match(lottoNumber, this.bonusNumber));
         }
 
         return lottoResult;
@@ -51,6 +53,9 @@ public class LottoNumber {
                 .toList());
     }
 
+    public LottoRank checkBonusNumber(BonusNumber bonusNumber) {
+        return this.numbers.checkBonusNumber(bonusNumber) ? LottoRank.BONUS : LottoRank.SECOND;
+    }
 
     public LottoNumbers getNumbers() {
         return numbers;

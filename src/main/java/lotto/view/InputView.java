@@ -42,11 +42,11 @@ public class InputView {
         return new LottoNumbers(StringToIntegerArray(scanner.nextLine()));
     }
 
-    public static void printBonusNumber(){
+    public static void printBonusNumber() {
         System.out.println(BONUS_NUMBER_MESSAGE);
     }
 
-    public static int inputBonusNumber(){
+    public static int inputBonusNumber() {
         return scanner.nextInt();
     }
 

@@ -4,26 +4,26 @@ import java.util.Objects;
 
 public class NumberElement {
 
-    private final int number;
+    private final int value;
 
-    public NumberElement(int number) {
-        this.number = number;
+    public NumberElement(int value) {
+        this.value = value;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(number);
+        return String.valueOf(value);
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         NumberElement that = (NumberElement) o;
-        return number == that.number;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(number);
+        return Objects.hashCode(value);
     }
 }

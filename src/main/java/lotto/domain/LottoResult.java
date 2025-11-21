@@ -40,6 +40,7 @@ public class LottoResult {
         lottoNumberResults.add(new LottoNumberResult(LottoRank.FOURTH, 0));
         lottoNumberResults.add(new LottoNumberResult(LottoRank.THIRD, 0));
         lottoNumberResults.add(new LottoNumberResult(LottoRank.SECOND, 0));
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.BONUS, 0));
         lottoNumberResults.add(new LottoNumberResult(LottoRank.FIRST, 0));
         return lottoNumberResults;
     }
