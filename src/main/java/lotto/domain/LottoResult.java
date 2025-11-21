@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.constant.LottoRank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class LottoResult {
     private static List<LottoNumberResult> lottoNumberResult;
 
     public LottoResult() {
-        this.lottoNumberResult = lottoResultInit();
+        lottoNumberResult = lottoResultInit();
     }
 
     public static double profitPercent(LottoPrice lottoPrice) {

@@ -6,12 +6,12 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private static final List<Integer> lottoNumbers;
+    private static final List<NumberElement> lottoNumbers;
 
     static {
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            lottoNumbers.add(i);
+            lottoNumbers.add(new NumberElement(i));
         }
     }
 
@@ -21,7 +21,7 @@ public class LottoMachine {
         lottoPrice.create(() -> {
             Collections.shuffle(LottoMachine.lottoNumbers);
             lottoNumbers.add(new LottoNumber(new ArrayList<>(
-                    LottoMachine.lottoNumbers.subList(0, 6).stream().map(NumberElement::new).toList()))
+                    LottoMachine.lottoNumbers.subList(0, 6).stream().toList()))
             );
         });
 

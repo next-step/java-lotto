@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumberResult;
-import lotto.domain.LottoRank;
+import lotto.domain.constant.LottoRank;
 import lotto.domain.LottoResult;
 
 import java.util.Comparator;
