@@ -1,10 +1,7 @@
 package lotto;
 
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoPrice;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 
 import java.util.List;
 
@@ -23,8 +20,12 @@ public class Main {
         List<LottoNumber> lottoNumbers = LottoMachine.createLotto(lottoPrice);
         printBuyLotto(lottoNumbers);
 
+
         printResultLottoNumber();
-        LottoNumber resultLottoNumber = inputResultLottoNumber();
+        LottoNumbers resultNumber = inputResultLottoNumber();
+        printBonusNumber();
+        int bonusNumber = inputBonusNumber();
+        LottoNumber resultLottoNumber = new LottoNumber(resultNumber, bonusNumber);
 
         printResultMessage();
         LottoResult lottoResult = resultLottoNumber.checkLottoNumber(lottoNumbers);

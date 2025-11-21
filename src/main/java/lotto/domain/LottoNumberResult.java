@@ -46,19 +46,16 @@ public class LottoNumberResult {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumberResult that = (LottoNumberResult) o;
-        return matchCount == that.matchCount && lottoRank == that.lottoRank;
+        return getLottoRank() == that.getLottoRank() && Objects.equals(getMatchCount(), that.getMatchCount());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoRank, matchCount);
+        return Objects.hash(getLottoRank(), getMatchCount());
     }
 
     @Override
     public String toString() {
-        return "LottoNumberResult{" +
-                "lottoRank=" + lottoRank +
-                ", matchCount=" + matchCount +
-                '}';
+        return String.format("%s(%d)", lottoRank, matchCount.getValue());
     }
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Price {
 
     private final int value;
@@ -32,5 +34,17 @@ public class Price {
         if (value % 1000 != 0) {
             throw new IllegalArgumentException("1000 단위로 입력해주세요.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Price price = (Price) o;
+        return getValue() == price.getValue();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getValue());
     }
 }

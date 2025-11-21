@@ -2,11 +2,16 @@ package lotto.domain;
 
 import lotto.domain.constant.LottoRank;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoNumbers {
 
     private final List<NumberElement> numbers;
+
+    public LottoNumbers(Integer[] numbers){
+        this(Arrays.stream(numbers).map(NumberElement::new).toList());
+    }
 
     public LottoNumbers(List<NumberElement> numbers) {
         validation(numbers);

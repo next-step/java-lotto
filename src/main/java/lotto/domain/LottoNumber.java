@@ -6,17 +6,27 @@ import java.util.List;
 public class LottoNumber {
 
     private final LottoNumbers numbers;
+    private final BonusNumber bonusNumber;
 
     public LottoNumber(Integer... numbers) {
-        this(Arrays.stream(numbers).map(NumberElement::new).toList());
+        this(integerToLottoNumbers(numbers), new BonusNumber());
+    }
+
+    public LottoNumber(List<Integer> numbers, int bonusNumber) {
+        this(integerToLottoNumbers(numbers), new BonusNumber(bonusNumber));
     }
 
     public LottoNumber(List<NumberElement> numbers) {
-        this(new LottoNumbers(numbers));
+        this(new LottoNumbers(numbers), new BonusNumber());
     }
 
-    public LottoNumber(LottoNumbers numbers) {
+    public LottoNumber(LottoNumbers numbers, int bonusNumber) {
+        this(numbers, new BonusNumber(bonusNumber));
+    }
+
+    public LottoNumber(LottoNumbers numbers, BonusNumber bonusNumber) {
         this.numbers = numbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public LottoResult checkLottoNumber(List<LottoNumber> useLottoNumber) {
@@ -28,6 +38,19 @@ public class LottoNumber {
 
         return lottoResult;
     }
+
+    private static LottoNumbers integerToLottoNumbers(Integer... numbers) {
+        return new LottoNumbers(Arrays.stream(numbers)
+                .map(NumberElement::new)
+                .toList());
+    }
+
+    private static LottoNumbers integerToLottoNumbers(List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream()
+                .map(NumberElement::new)
+                .toList());
+    }
+
 
     public LottoNumbers getNumbers() {
         return numbers;

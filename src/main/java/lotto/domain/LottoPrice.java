@@ -39,7 +39,7 @@ public class LottoPrice {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         LottoPrice that = (LottoPrice) o;
-        return price == that.price && getTicketCount() == that.getTicketCount();
+        return Objects.equals(price, that.price) && Objects.equals(getTicketCount(), that.getTicketCount());
     }
 
     @Override
