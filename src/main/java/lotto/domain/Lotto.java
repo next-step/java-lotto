@@ -69,4 +69,18 @@ public class Lotto {
         return result;
     }
 
+    public boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
+    }
+
+    public int countMatch(Lotto other) {
+        int count = 0;
+        for (LottoNumber number : this.numbers) {
+            if (other.contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 }

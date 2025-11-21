@@ -17,8 +17,7 @@ public class WinningNumbers {
     }
 
     private void validateDuplicate(Lotto lotto, LottoNumber bonusNumber) {
-        List<Integer> numbers = lotto.getNumbers();
-        if (numbers.contains(bonusNumber.getValue())) {
+        if (lotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }
     }
@@ -30,32 +29,14 @@ public class WinningNumbers {
     }
 
     private int countMatch(Lotto userLotto) {
-        List<Integer> userNumbers = userLotto.getNumbers();
-        List<Integer> winningNumbers = lotto.getNumbers();
-        int count = 0;
-        for (Integer number : userNumbers) {
-            if (winningNumbers.contains(number)) {
-                count++;
-            }
-        }
-        return count;
+        return lotto.countMatch(userLotto);
     }
 
     private boolean hasMatchBonus(Lotto userLotto, int matchCount) {
         if (matchCount != 5) {
             return false;
-
         }
-        List<Integer> userNumbers = userLotto.getNumbers();
-        for (Integer number : userNumbers) {
-            if (number == bonusNumber.getValue()) {
-                return true;
-
-            }
-
-        }
-        return false;
-
+        return userLotto.contains(bonusNumber);
     }
 
     public Lotto getLotto() {
@@ -67,8 +48,7 @@ public class WinningNumbers {
     }
 
     public boolean containsInLotto(LottoNumber number) {
-        List<Integer> numbers = lotto.getNumbers();
-        return numbers.contains(number.getValue());
+        return lotto.contains(number);
     }
 
     public boolean matchBonus(LottoNumber number) {
