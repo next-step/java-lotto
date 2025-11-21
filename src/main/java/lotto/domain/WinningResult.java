@@ -1,32 +1,12 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WinningResult {
     private final Map<Rank, Integer> result;
 
     public WinningResult(LottoTickets tickets, WinningNumbers winningNumbers) {
-        this.result = calculateResult(tickets, winningNumbers);
-    }
-
-    private Map<Rank, Integer> calculateResult(LottoTickets tickets, WinningNumbers winningNumbers) {
-        Map<Rank, Integer> result = initializeResult();
-        List<Lotto> lottos = tickets.getLottos();
-        for (Lotto lotto : lottos) {
-            Rank rank = winningNumbers.match(lotto);
-            result.put(rank, result.get(rank) + 1);
-        }
-        return result;
-    }
-
-    private Map<Rank, Integer> initializeResult() {
-        Map<Rank, Integer> result = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            result.put(rank, 0);
-        }
-        return result;
+        this.result = tickets.matchWith(winningNumbers);
     }
 
     public int getCountByRank(Rank rank) {
