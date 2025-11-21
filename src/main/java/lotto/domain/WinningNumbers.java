@@ -6,6 +6,10 @@ public class WinningNumbers {
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
+    public WinningNumbers(List<Integer> lottoNumbers, int bonusNumber) {
+        this(Lotto.from(lottoNumbers), new LottoNumber(bonusNumber));
+    }
+
     public WinningNumbers(Lotto lotto, LottoNumber bonusNumber) {
         validateDuplicate(lotto, bonusNumber);
         this.lotto = lotto;

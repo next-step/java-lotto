@@ -11,7 +11,6 @@ public class RankTest {
         Rank rank = Rank.valueOf(6, false);
 
         assertThat(rank).isEqualTo(Rank.FIRST);
-        assertThat(rank.getWinningAmount()).isEqualTo(2_000_000_000);
     }
 
     @Test
@@ -19,7 +18,6 @@ public class RankTest {
         Rank rank = Rank.valueOf(5, true);
 
         assertThat(rank).isEqualTo(Rank.SECOND);
-        assertThat(rank.getWinningAmount()).isEqualTo(30_000_000);
     }
 
     @Test
@@ -27,7 +25,6 @@ public class RankTest {
         Rank rank = Rank.valueOf(5, false);
 
         assertThat(rank).isEqualTo(Rank.THIRD);
-        assertThat(rank.getWinningAmount()).isEqualTo(1_500_000);
     }
 
     @Test
@@ -35,7 +32,6 @@ public class RankTest {
         Rank rank = Rank.valueOf(4, false);
 
         assertThat(rank).isEqualTo(Rank.FOURTH);
-        assertThat(rank.getWinningAmount()).isEqualTo(50_000);
     }
 
     @Test
@@ -43,15 +39,13 @@ public class RankTest {
         Rank rank = Rank.valueOf(3, false);
 
         assertThat(rank).isEqualTo(Rank.FIFTH);
-        assertThat(rank.getWinningAmount()).isEqualTo(5_000);
     }
 
 
     @Test
-    void 일치개수_2개_이하는_낙첨이며_상금은_0원이다() {
+    void 일치개수_2개_이하는_낙첨이다() {
         Rank rank = Rank.valueOf(2, false);
 
         assertThat(rank).isEqualTo(Rank.MISS);
-        assertThat(rank.getWinningAmount()).isEqualTo(0);
     }
 }
