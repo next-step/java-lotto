@@ -15,7 +15,7 @@ public class WinningResult {
         Map<Rank, Integer> result = initializeResult();
         List<Lotto> lottos = tickets.getLottos();
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.match(winningNumbers);
+            Rank rank = winningNumbers.match(lotto);
             result.put(rank, result.get(rank) + 1);
         }
         return result;

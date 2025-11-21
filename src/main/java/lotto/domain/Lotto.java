@@ -69,36 +69,4 @@ public class Lotto {
         return result;
     }
 
-    public Rank match(WinningNumbers winningNumbers) {
-        int matchCount = countMatch(winningNumbers.getLotto());
-        boolean matchBonus = hasMatchBonus(winningNumbers, matchCount);
-        return Rank.valueOf(matchCount, matchBonus);
-    }
-
-    private int countMatch(Lotto other) {
-        int count = 0;
-        for (LottoNumber number : numbers) {
-            if (other.contains(number)) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    private boolean hasMatchBonus(WinningNumbers winningNumbers, int matchCount) {
-        if (matchCount != 5) {
-            return false;
-        }
-        for (LottoNumber number : numbers) {
-            if (winningNumbers.matchBonus(number)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean contains(LottoNumber number) {
-        return numbers.contains(number);
-    }
-
 }

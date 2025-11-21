@@ -47,4 +47,16 @@ public class WinningNumbersTest {
         assertThat(winningNumbers.matchBonus(new LottoNumber(7))).isTrue();
         assertThat(winningNumbers.matchBonus(new LottoNumber(1))).isFalse();
     }
+
+    @Test
+    void 당첨_번호와_일치하는_등수_확인() {
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(1, 2, 3, 7, 8, 9);
+        LottoNumber bonusNumber = new LottoNumber(10);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
+
+        Rank match = winningNumbers.match(lotto);
+
+        assertThat(match).isEqualTo(Rank.FIFTH);
+    }
 }

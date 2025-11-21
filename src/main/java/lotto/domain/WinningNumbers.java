@@ -19,6 +19,41 @@ public class WinningNumbers {
         }
     }
 
+    public Rank match(Lotto userLotto) {
+        int matchCount = countMatch(userLotto);
+        boolean matchBonus = hasMatchBonus(userLotto, matchCount);
+        return Rank.valueOf(matchCount, matchBonus);
+    }
+
+    private int countMatch(Lotto userLotto) {
+        List<Integer> userNumbers = userLotto.getNumbers();
+        List<Integer> winningNumbers = lotto.getNumbers();
+        int count = 0;
+        for (Integer number : userNumbers) {
+            if (winningNumbers.contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private boolean hasMatchBonus(Lotto userLotto, int matchCount) {
+        if (matchCount != 5) {
+            return false;
+
+        }
+        List<Integer> userNumbers = userLotto.getNumbers();
+        for (Integer number : userNumbers) {
+            if (number == bonusNumber.getValue()) {
+                return true;
+
+            }
+
+        }
+        return false;
+
+    }
+
     public Lotto getLotto() {
         return lotto;
     }
