@@ -19,7 +19,7 @@ public class WinningResultTest {
         LottoNumber bonusNumber = new LottoNumber(7);
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
-        WinningResult result = new WinningResult(tickets, winningNumbers);
+        WinningResult result = tickets.matchWith2(winningNumbers);
 
         assertThat(result.getCountByRank(Rank.FIRST)).isEqualTo(1);
         assertThat(result.getCountByRank(Rank.FIFTH)).isEqualTo(1);
@@ -36,7 +36,7 @@ public class WinningResultTest {
             LottoNumber bonusNumber = new LottoNumber(7);
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
-        WinningResult result = new WinningResult(tickets, winningNumbers);
+        WinningResult result = tickets.matchWith2(winningNumbers);
 
         assertThat(result.getTotalWinningAmount()).isEqualTo(2_000_005_000);
     }
@@ -52,7 +52,7 @@ public class WinningResultTest {
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
         PurchaseAmount purchaseAmount = new PurchaseAmount(2000);
 
-        WinningResult result = new WinningResult(tickets, winningNumbers);
+        WinningResult result = tickets.matchWith2(winningNumbers);
 
         assertThat(result.calculateProfitRate(purchaseAmount)).isEqualTo(1000002.5);
     }

@@ -38,6 +38,15 @@ public class LottoTickets {
         return result;
     }
 
+    public WinningResult matchWith2(WinningNumbers winningNumbers){
+        Map<Rank, Integer> result = initializeResult();
+        for (Lotto lotto : lottos) {
+            Rank rank = winningNumbers.match(lotto);
+            result.put(rank, result.get(rank) + 1);
+        }
+        return new WinningResult(result);
+    }
+
     private Map<Rank, Integer> initializeResult() {
         Map<Rank, Integer> result = new HashMap<>();
         for (Rank rank : Rank.values()) {

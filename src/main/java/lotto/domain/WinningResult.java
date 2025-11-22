@@ -5,8 +5,8 @@ import java.util.Map;
 public class WinningResult {
     private final Map<Rank, Integer> result;
 
-    public WinningResult(LottoTickets tickets, WinningNumbers winningNumbers) {
-        this.result = tickets.matchWith(winningNumbers);
+    public WinningResult(Map<Rank, Integer> result) {
+        this.result = result;
     }
 
     public int getCountByRank(Rank rank) {
