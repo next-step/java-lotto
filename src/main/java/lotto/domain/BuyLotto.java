@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.constant.LottoRank;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -21,37 +19,15 @@ public class BuyLotto {
         return lottos;
     }
 
-    public LottoResult match(Lotto winningLotto, NumberElement bonusNumber) {
+    public LottoResult match(WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
 
         for (Lotto buyLotto : lottos) {
-            lottoResult.putLottoResult(matchCount(buyLotto, winningLotto, bonusNumber));
+            lottoResult.putLottoResult(winningLotto.matchCount(buyLotto));
         }
 
         return lottoResult;
     }
-
-    private LottoRank matchCount(Lotto buyLotto, Lotto winningLotto, NumberElement bonusNumber) {
-        int count = buyLotto.matchCount(winningLotto);
-
-        if (isBonus(count)) {
-            return checkBonusNumber(buyLotto, bonusNumber);
-        }
-
-        return LottoRank.fromMatchCount(count);
-    }
-
-    private static boolean isBonus(int count) {
-        return count == 5;
-    }
-
-    public LottoRank checkBonusNumber(Lotto buyLotto, NumberElement bonusNumber) {
-        if (buyLotto.checkBonusNumber(bonusNumber)) {
-            return LottoRank.SECOND;
-        }
-        return LottoRank.THIRD;
-    }
-
 
     @Override
     public String toString() {

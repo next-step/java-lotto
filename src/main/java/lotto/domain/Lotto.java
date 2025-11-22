@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Lotto {
 
@@ -38,13 +39,9 @@ public class Lotto {
     }
 
     public int matchCount(Lotto winningLotto) {
-        int count = 0;
-        for (int i = 0; i < this.numbers.size(); i++) {
-            if (this.numbers.contains(winningLotto.numbers.get(i))) {
-                count++;
-            }
-        }
-        return count;
+        return (int) IntStream.range(0, this.numbers.size())
+                .filter(index -> this.numbers.contains(winningLotto.numbers.get(index)))
+                .count();
     }
 
     public boolean checkBonusNumber(NumberElement bonusNumber) {
