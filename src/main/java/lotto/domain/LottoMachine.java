@@ -2,7 +2,9 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
 
@@ -20,8 +22,8 @@ public class LottoMachine {
 
         lottoPrice.create(() -> {
             Collections.shuffle(LottoMachine.lottoNumbers);
-            lottoNumbers.add(new Lotto(new ArrayList<>(
-                    LottoMachine.lottoNumbers.subList(0, 6).stream().toList()))
+            lottoNumbers.add(new Lotto(new HashSet<>(
+                    LottoMachine.lottoNumbers.subList(0, 6).stream().collect(Collectors.toSet())))
             );
         });
 

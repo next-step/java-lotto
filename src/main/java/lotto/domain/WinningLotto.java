@@ -4,6 +4,7 @@ import lotto.domain.constant.LottoRank;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
 
@@ -35,13 +36,13 @@ public class WinningLotto {
     private static Lotto integerToLottoNumbers(Integer... numbers) {
         return new Lotto(Arrays.stream(numbers)
                 .map(NumberElement::new)
-                .toList());
+                .collect(Collectors.toSet()));
     }
 
     private static Lotto integerToLottoNumbers(List<Integer> numbers) {
         return new Lotto(numbers.stream()
                 .map(NumberElement::new)
-                .toList());
+                .collect(Collectors.toSet()));
     }
 
     public LottoRank matchCount(Lotto buyLotto) {

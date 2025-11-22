@@ -1,34 +1,24 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<NumberElement> numbers;
+    private final Set<NumberElement> numbers;
 
-    public Lotto(Integer[] numbers) {
-        this(Arrays.stream(numbers).map(NumberElement::new).toList());
+    public Lotto(Integer... numbers) {
+        this(Arrays.stream(numbers).map(NumberElement::new).collect(Collectors.toSet()));
     }
 
-    public Lotto(List<NumberElement> numbers) {
+    public Lotto(Set<NumberElement> numbers) {
         validationCount(numbers);
-        validationOverlap(numbers);
         this.numbers = numbers;
     }
 
-    private void validationOverlap(List<NumberElement> numbers) {
-        if (numbers.size() != new HashSet<>(numbers).size()) {
-            throw new IllegalArgumentException("동일한 번호는 입력할 수 없습니다.");
-        }
-    }
-
-    private static void validationCount(List<NumberElement> numbers) {
+    private static void validationCount(Set<NumberElement> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개만 입력할 수 있습니다.");
+            throw new IllegalArgumentException("동일한 번호는 입력할 수 없으며, 로또 번호는 6개만 입력할 수 있습니다.");
         }
     }
 
@@ -39,8 +29,8 @@ public class Lotto {
     }
 
     public int matchCount(Lotto winningLotto) {
-        return (int) IntStream.range(0, this.numbers.size())
-                .filter(index -> this.numbers.contains(winningLotto.numbers.get(index)))
+        return (int) winningLotto.numbers.stream()
+                .filter(this.numbers::contains)
                 .count();
     }
 
