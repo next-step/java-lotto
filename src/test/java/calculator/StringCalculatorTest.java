@@ -10,4 +10,9 @@ public class StringCalculatorTest {
     void add() {
         assertThat(Calculator.add(1, 2)).isEqualTo(3);
     }
+
+    @Test
+    void substract() {
+        assertThat(Calculator.subtract(1, 0)).isEqualTo(1);
+    }
 }
