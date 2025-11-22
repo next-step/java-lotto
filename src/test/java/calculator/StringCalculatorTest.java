@@ -20,4 +20,9 @@ public class StringCalculatorTest {
     void multiply() {
         assertThat(Calculator.multiply(2, 1)).isEqualTo(2);
     }
+
+    @Test
+    void divide() {
+        assertThat(Calculator.divide(2, 1)).isEqualTo(2);
+    }
 }
