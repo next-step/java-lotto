@@ -1,39 +1,53 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import lotto.domain.constant.LottoRank;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoResult {
 
-    private static Map<LottoRank, Integer> lottoResult;
+    private static List<LottoNumberResult> lottoNumberResults = new ArrayList<>();
+
+    static {
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.FIFTH, 0));
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.FOURTH, 0));
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.THIRD, 0));
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.SECOND, 0));
+        lottoNumberResults.add(new LottoNumberResult(LottoRank.FIRST, 0));
+    }
 
     public static double profitPercent(LottoPrice lottoPrice) {
         return lottoPrice.profitPercent(totalResultPrice());
     }
 
     private static int totalResultPrice() {
-        return lottoResult.keySet().stream()
-                .filter(rank -> rank.getMatchCount() != 0)
-                .mapToInt(rank -> rank.getPrizeMoney() * lottoResult.get(rank))
+        return lottoNumberResults.stream()
+                .filter(LottoNumberResult::isCountNotZero)
+                .mapToInt(LottoNumberResult::multiplication)
                 .sum();
     }
 
     public void putLottoResult(LottoRank lottoRank) {
-        lottoResultInit();
         if (lottoRank != null) {
-            lottoResult.put(lottoRank, lottoResult.get(lottoRank) + 1);
+            LottoNumberResult findLottoResult = findLottoNumberResult(lottoRank);
+            findLottoResult.plus();
         }
     }
 
-    public Map<LottoRank, Integer> getLottoResult() {
-        return lottoResult;
+    public static List<LottoNumberResult> lottoNumberResult() {
+        return lottoNumberResults;
     }
 
-    public void lottoResultInit() {
-        lottoResult = new HashMap<>();
-        lottoResult.put(LottoRank.FOURTH, 0);
-        lottoResult.put(LottoRank.THIRD, 0);
-        lottoResult.put(LottoRank.SECOND, 0);
-        lottoResult.put(LottoRank.FIRST, 0);
+
+    private LottoNumberResult findLottoNumberResult(LottoRank lottoRank) {
+        return lottoNumberResults.stream()
+                .filter(lotto -> lotto.isEqualsRank(lottoRank))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<LottoNumberResult> getLottoNumberResult() {
+        return lottoNumberResults;
     }
 }

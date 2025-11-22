@@ -1,6 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoRank;
+import lotto.domain.LottoNumberResult;
+import lotto.domain.constant.LottoRank;
 import lotto.domain.LottoResult;
 
 import java.util.Comparator;
@@ -11,7 +12,8 @@ public class ResultView {
 
     private static final String RESULT_MESSAGE = "당첨 통계";
     private static final String HYPHEN = "---------";
-    private static final String LOTTO_RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final String LOTTO_RESULT_FORMAT = "%d개 일치, (%d원)- %d개";
+    private static final String LOTTO_BONUS_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
     private static final String LOTTO_RESULT_PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String LOTTO_RESULT_ONE_PERCENT_BELOW_FORMAT = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -21,14 +23,12 @@ public class ResultView {
     }
 
     public static void printResult(LottoResult lottoResult) {
-        Map<LottoRank, Integer> resultData = lottoResult.getLottoResult();
-
-        for (LottoRank lottoRank : mapSort(resultData)) {
+        for (LottoNumberResult result : lottoResult.lottoNumberResult()) {
             System.out.println(String.format(
-                    LOTTO_RESULT_FORMAT,
-                    lottoRank.getMatchCount(),
-                    lottoRank.getPrizeMoney(),
-                    resultData.get(lottoRank)
+                    result.getLottoRank() != LottoRank.SECOND ? LOTTO_RESULT_FORMAT : LOTTO_BONUS_RESULT_FORMAT,
+                    result.getLottoRank().getMatchCount(),
+                    result.getLottoRank().getPrizeMoney(),
+                    result.getMatchCount()
             ));
         }
     }
@@ -44,9 +44,4 @@ public class ResultView {
         }
     }
 
-    private static List<LottoRank> mapSort(Map<LottoRank, Integer> resultData) {
-        return resultData.keySet().stream()
-                .sorted(Comparator.comparingInt(Enum::ordinal))
-                .toList();
-    }
 }

@@ -1,12 +1,8 @@
 package lotto;
 
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoPrice;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 
-import java.util.List;
 
 import static lotto.domain.LottoResult.*;
 import static lotto.view.InputView.*;
@@ -20,14 +16,17 @@ public class Main {
         LottoPrice lottoPrice = inputBuyPrice();
         printLottoCount(lottoPrice);
 
-        List<LottoNumber> lottoNumbers = LottoMachine.createLotto(lottoPrice);
-        printBuyLotto(lottoNumbers);
+        BuyLotto buyLotto = LottoMachine.createLotto(lottoPrice);
+        printBuyLotto(buyLotto);
 
         printResultLottoNumber();
-        LottoNumber resultLottoNumber = inputResultLottoNumber();
+        Lotto resultLotto = inputResultLottoNumber();
+        printBonusNumber();
+        int bonusNumber = inputBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(resultLotto, bonusNumber);
 
         printResultMessage();
-        LottoResult lottoResult = resultLottoNumber.checkLottoNumber(lottoNumbers);
+        LottoResult lottoResult = winningLotto.checkLottoNumber(buyLotto);
 
         printResult(lottoResult);
         printProfit(profitPercent(lottoPrice));
