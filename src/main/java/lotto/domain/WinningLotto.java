@@ -12,15 +12,15 @@ public class WinningLotto {
     private final NumberElement bonusNumber;
 
     public WinningLotto(Integer... numbers) {
-        this(integerToLottoNumbers(numbers), new NumberElement());
+        this(integerToLottoNumbers(numbers), NumberElement.create(0));
     }
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        this(integerToLottoNumbers(numbers), new NumberElement(bonusNumber));
+        this(integerToLottoNumbers(numbers), NumberElement.create(bonusNumber));
     }
 
     public WinningLotto(Lotto numbers, int bonusNumber) {
-        this(numbers, new NumberElement(bonusNumber));
+        this(numbers, NumberElement.create(bonusNumber));
     }
 
     public WinningLotto(Lotto numbers, NumberElement bonusNumber) {
@@ -35,13 +35,13 @@ public class WinningLotto {
 
     private static Lotto integerToLottoNumbers(Integer... numbers) {
         return new Lotto(Arrays.stream(numbers)
-                .map(NumberElement::new)
+                .map(NumberElement::create)
                 .collect(Collectors.toSet()));
     }
 
     private static Lotto integerToLottoNumbers(List<Integer> numbers) {
         return new Lotto(numbers.stream()
-                .map(NumberElement::new)
+                .map(NumberElement::create)
                 .collect(Collectors.toSet()));
     }
 

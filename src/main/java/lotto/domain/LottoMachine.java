@@ -13,7 +13,7 @@ public class LottoMachine {
     static {
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            lottoNumbers.add(new NumberElement(i));
+            lottoNumbers.add(NumberElement.create(i));
         }
     }
 
