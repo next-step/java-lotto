@@ -14,26 +14,26 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumberTest {
     @Test
     void 로또_번호_생성() {
-        LottoNumber lottoNumber = new LottoNumber(1);
+        LottoNumber lottoNumber = LottoNumber.of(1);
 
         assertThat(lottoNumber.getValue()).isEqualTo(1);
     }
 
     @Test
     void 로또_번호의_범위를_벗어나면_예외발생1to45() {
-        assertThatThrownBy(() -> new LottoNumber(0))
+        assertThatThrownBy(() -> LottoNumber.of(0))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1부터 45 사이의 숫자여야 한다");
 
-        assertThatThrownBy(() -> new LottoNumber(46))
+        assertThatThrownBy(() -> LottoNumber.of(46))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1부터 45 사이의 숫자여야 한다");
     }
 
     @Test
     void 같은_번호는_동등성을_가진다() {
-        LottoNumber number1 = new LottoNumber(1);
-        LottoNumber number2 = new LottoNumber(1);
+        LottoNumber number1 = LottoNumber.of(1);
+        LottoNumber number2 = LottoNumber.of(1);
 
         assertThat(number1).isEqualTo(number2);
     }

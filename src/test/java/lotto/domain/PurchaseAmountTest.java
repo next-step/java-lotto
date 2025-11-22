@@ -21,18 +21,12 @@ public class PurchaseAmountTest {
                 .hasMessage("구입 금액은 1000원 단위여야 합니다.");
     }
 
-    @Test
-    void 음수면_예외발생() {
-        assertThatThrownBy(() -> new PurchaseAmount(-1000))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입 금액은 0보다 커야 합니다.");
-    }
 
     @Test
     void 영이면_예외발생() {
         assertThatThrownBy(() -> new PurchaseAmount(0))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입 금액은 0보다 커야 합니다.");
+                .hasMessage("금액은 0보다 커야 합니다.");
     }
 
 }

@@ -23,6 +23,7 @@ public class ResultView {
     public static void printWinningStatistics(WinningResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
+        printRankResult(Rank.FIFTH, result);
         printRankResult(Rank.FOURTH, result);
         printRankResult(Rank.THIRD, result);
         printRankResult(Rank.SECOND, result);
@@ -33,6 +34,10 @@ public class ResultView {
         int matchCount = rank.getMatchCount();
         int winningAmount = rank.getWinningAmount();
         int count = result.getCountByRank(rank);
+        if (rank == Rank.SECOND) {
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개", matchCount, winningAmount, count));
+            return;
+        }
         System.out.println(String.format("%d개 일치 (%d원)- %d개", matchCount, winningAmount, count));
     }
 

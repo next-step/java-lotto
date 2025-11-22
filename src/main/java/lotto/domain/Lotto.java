@@ -1,64 +1,62 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(int... intNumbers) {
-        this(createLottoNumbers(numbersToList(intNumbers)));
+        this(numbersToSet(intNumbers));
     }
 
-    private static List<Integer> numbersToList(int[] intNumbers) {
-        List<Integer> numbers = new ArrayList<>();
+    public Lotto(Set<LottoNumber> numbers) {
+        validateInputSize(numbers.size());
+        this.numbers = numbers;
+    }
+
+    private static Set<LottoNumber> numbersToSet(int[] intNumbers) {
+        validateInputSize(intNumbers.length);
+        Set<LottoNumber> numbers = new HashSet<>();
         for (int number : intNumbers) {
-            numbers.add(number);
+            numbers.add(LottoNumber.of(number));
         }
+        validateNoDuplicate(numbers.size(), intNumbers.length);
         return numbers;
-    }
-
-    public Lotto(List<LottoNumber> numbers) {
-        validateSize(numbers);
-        validateDuplicate(numbers);
-        this.numbers = sortNumbers(numbers);
     }
 
     public static Lotto from(List<Integer> intNumbers) {
         return new Lotto(createLottoNumbers(intNumbers));
     }
 
-    private void validateSize(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 총 6개여야 합니다.");
-        }
-    }
-
-    private void validateDuplicate(List<LottoNumber> numbers) {
-        Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);
-        if (uniqueNumbers.size() != numbers.size()) {
+    private static void validateNoDuplicate(int setSize, int inputSize) {
+        if (setSize != inputSize) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
 
-    private static List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+    private static void validateInputSize(int length) {
+        if (length != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 총 6개여야 합니다.");
         }
-        return lottoNumbers;
     }
 
-    private List<LottoNumber> sortNumbers(List<LottoNumber> numbers) {
-        List<LottoNumber> sorted = new ArrayList<>(numbers);
-        sorted.sort(Comparator.comparingInt(LottoNumber::getValue));
-        return sorted;
+    private static Set<LottoNumber> createLottoNumbers(List<Integer> intNumbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for (Integer number : intNumbers) {
+            lottoNumbers.add(LottoNumber.of(number));
+        }
+
+        validateNoDuplicate(lottoNumbers.size(), intNumbers.size());
+        validateInputSize(lottoNumbers.size());
+        return lottoNumbers;
     }
 
     public List<Integer> getNumbers() {
@@ -66,21 +64,30 @@ public class Lotto {
         for (LottoNumber number : numbers) {
             result.add(number.getValue());
         }
+        Collections.sort(result);
         return result;
     }
 
-    public int countMatchNumber(Lotto other) {
-        int count = 0;
-        for (LottoNumber number : numbers) {
-            if (other.contains(number)) {
-                count++;
-            }
-        }
-        return count;
+    public boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 
-    private boolean contains(LottoNumber number) {
-        return numbers.contains(number);
+    public int countMatch(Lotto other) {
+        return (int) this.numbers.stream()
+                .filter(other::contains)
+                .count();
+
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numbers);
+    }
 }

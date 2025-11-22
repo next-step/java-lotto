@@ -24,10 +24,6 @@ public class LottoNumberGenerator {
     }
 
     private static List<Integer> selectNumbers(List<Integer> numbers) {
-        List<Integer> selectedNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-            selectedNumbers.add(numbers.get(i));
-        }
-        return selectedNumbers;
+        return new ArrayList<>(numbers.subList(0, 6));
     }
 }

@@ -10,17 +10,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinningResultTest {
     @Test
     void 당첨_결과를_생성한다() {
-        Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
         LottoTickets tickets = createTickets(
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(1, 2, 3, 7, 8, 9),
                 new Lotto(10, 11, 12, 13, 14, 15)
         );
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.of(7);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
-        WinningResult result = new WinningResult(tickets, winningNumbers);
+        WinningResult result = tickets.matchWith(winningNumbers);
 
         assertThat(result.getCountByRank(Rank.FIRST)).isEqualTo(1);
-        assertThat(result.getCountByRank(Rank.FOURTH)).isEqualTo(1);
+        assertThat(result.getCountByRank(Rank.FIFTH)).isEqualTo(1);
         assertThat(result.getCountByRank(Rank.MISS)).isEqualTo(1);
     }
 
@@ -30,9 +32,11 @@ public class WinningResultTest {
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(1, 2, 3, 7, 8, 9)
         );
-        Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
+            Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+            LottoNumber bonusNumber = LottoNumber.of(7);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
-        WinningResult result = new WinningResult(tickets, winningNumbers);
+        WinningResult result = tickets.matchWith(winningNumbers);
 
         assertThat(result.getTotalWinningAmount()).isEqualTo(2_000_005_000);
     }
@@ -43,10 +47,12 @@ public class WinningResultTest {
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(1, 2, 3, 7, 8, 9)
         );
-        Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.of(10);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
         PurchaseAmount purchaseAmount = new PurchaseAmount(2000);
 
-        WinningResult result = new WinningResult(tickets, winningNumbers);
+        WinningResult result = tickets.matchWith(winningNumbers);
 
         assertThat(result.calculateProfitRate(purchaseAmount)).isEqualTo(1000002.5);
     }
