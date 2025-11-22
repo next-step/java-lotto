@@ -20,7 +20,7 @@ public class LottoApplication {
         Lotto winningLotto = InputView.inputWinningNumbers();
         LottoNumber bonusNumber = InputView.inputBonusNumber();
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
-        WinningResult result = tickets.matchWith2(winningNumbers);
+        WinningResult result = tickets.matchWith(winningNumbers);
 
         ResultView.printWinningStatistics(result);
         double profitRate = result.calculateProfitRate(purchaseAmount);

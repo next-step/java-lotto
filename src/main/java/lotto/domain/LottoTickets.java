@@ -29,16 +29,7 @@ public class LottoTickets {
         return new ArrayList<>(lottos);
     }
 
-    public Map<Rank, Integer> matchWith(WinningNumbers winningNumbers) {
-        Map<Rank, Integer> result = initializeResult();
-        for (Lotto lotto : lottos) {
-            Rank rank = winningNumbers.match(lotto);
-            result.put(rank, result.get(rank) + 1);
-        }
-        return result;
-    }
-
-    public WinningResult matchWith2(WinningNumbers winningNumbers){
+    public WinningResult matchWith(WinningNumbers winningNumbers){
         Map<Rank, Integer> result = initializeResult();
         for (Lotto lotto : lottos) {
             Rank rank = winningNumbers.match(lotto);
