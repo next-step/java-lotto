@@ -13,8 +13,8 @@ public class WinningNumbersTest {
     void 로또_번호와_보너스_번호로_생성한다() {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
 
-        assertThat(winningNumbers.getLotto().getNumbers()).contains(1, 2, 3, 4, 5, 6);
-        assertThat(winningNumbers.getBonusNumber().getValue()).isEqualTo(7);
+        assertThat(winningNumbers).isEqualTo(new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7));
+
     }
 
     @Test
@@ -22,22 +22,6 @@ public class WinningNumbersTest {
         assertThatThrownBy(() -> new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 6))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
-    }
-
-    @Test
-    void 특정_번호가_당첨_번호에_포함되는지_확인() {
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
-
-        assertThat(winningNumbers.containsInLotto(new LottoNumber(1))).isTrue();
-        assertThat(winningNumbers.containsInLotto(new LottoNumber(10))).isFalse();
-    }
-
-    @Test
-    void 특정_번호가_보너스_번호와_일치하는지_확인() {
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
-
-        assertThat(winningNumbers.matchBonus(new LottoNumber(7))).isTrue();
-        assertThat(winningNumbers.matchBonus(new LottoNumber(1))).isFalse();
     }
 
     @Test

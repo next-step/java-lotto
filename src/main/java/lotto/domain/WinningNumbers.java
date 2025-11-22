@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class WinningNumbers {
     private final Lotto lotto;
@@ -47,11 +48,15 @@ public class WinningNumbers {
         return bonusNumber;
     }
 
-    public boolean containsInLotto(LottoNumber number) {
-        return lotto.contains(number);
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningNumbers that = (WinningNumbers) o;
+        return Objects.equals(lotto, that.lotto) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
-    public boolean matchBonus(LottoNumber number) {
-        return bonusNumber.equals(number);
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto, bonusNumber);
     }
 }
