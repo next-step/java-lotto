@@ -12,7 +12,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    void substract() {
+    void subtract() {
         assertThat(Calculator.subtract(1, 0)).isEqualTo(1);
     }
 
