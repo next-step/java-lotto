@@ -1,4 +1,4 @@
-package calculate;
+package calculate.domain;
 
 public class Calculator {
     public static int add(int a, int b) {
