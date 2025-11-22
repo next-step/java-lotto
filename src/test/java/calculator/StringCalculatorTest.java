@@ -15,4 +15,9 @@ public class StringCalculatorTest {
     void substract() {
         assertThat(Calculator.subtract(1, 0)).isEqualTo(1);
     }
+
+    @Test
+    void multiply() {
+        assertThat(Calculator.multiply(2, 1)).isEqualTo(2);
+    }
 }
