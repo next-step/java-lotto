@@ -1,9 +1,12 @@
 package lottoGame.controller;
 
+import lottoGame.model.lotto.LottoMachine;
+
 public class LottoStore {
+    public static final int PER_LOTTO_PRICE = 1000;
 
-    private void start() {
-
+    public void start() {
+        LottoMachine lottoMachine = new LottoMachine();
     }
 
 

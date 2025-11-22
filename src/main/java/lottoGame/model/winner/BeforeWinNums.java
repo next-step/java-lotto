@@ -1,5 +1,17 @@
 package lottoGame.model.winner;
 
-public class BeforeWinNums {
+import java.util.Collections;
+import java.util.List;
 
+public class BeforeWinNums {
+    private final List<Integer> winNums;
+
+    public BeforeWinNums(List<Integer> winNums) {
+        Collections.sort(winNums);
+        this.winNums = winNums;
+    }
+
+    public boolean isContain(int num) {
+        return winNums.contains(num);
+    }
 }
