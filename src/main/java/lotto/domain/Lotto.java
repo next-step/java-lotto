@@ -72,13 +72,10 @@ public class Lotto {
     }
 
     public int countMatch(Lotto other) {
-        int count = 0;
-        for (LottoNumber number : this.numbers) {
-            if (other.contains(number)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) this.numbers.stream()
+                .filter(other::contains)
+                .count();
+
     }
 
 }
