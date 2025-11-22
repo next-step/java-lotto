@@ -32,7 +32,7 @@ public class InputView {
 
     public static LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(Integer.parseInt(scanner.nextLine()));
+        return LottoNumber.of(Integer.parseInt(scanner.nextLine()));
 
     }
 }

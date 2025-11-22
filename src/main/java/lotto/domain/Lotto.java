@@ -26,7 +26,7 @@ public class Lotto {
         validateInputSize(intNumbers.length);
         Set<LottoNumber> numbers = new HashSet<>();
         for (int number : intNumbers) {
-            numbers.add(new LottoNumber(number));
+            numbers.add(LottoNumber.of(number));
         }
         validateNoDuplicate(numbers.size(), intNumbers.length);
         return numbers;
@@ -51,7 +51,7 @@ public class Lotto {
     private static Set<LottoNumber> createLottoNumbers(List<Integer> intNumbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer number : intNumbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.of(number));
         }
 
         validateNoDuplicate(lottoNumbers.size(), intNumbers.size());

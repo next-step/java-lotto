@@ -16,7 +16,7 @@ public class WinningResultTest {
                 new Lotto(10, 11, 12, 13, 14, 15)
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.of(7);
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
         WinningResult result = tickets.matchWith(winningNumbers);
@@ -33,7 +33,7 @@ public class WinningResultTest {
                 new Lotto(1, 2, 3, 7, 8, 9)
         );
             Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-            LottoNumber bonusNumber = new LottoNumber(7);
+            LottoNumber bonusNumber = LottoNumber.of(7);
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
         WinningResult result = tickets.matchWith(winningNumbers);
@@ -48,7 +48,7 @@ public class WinningResultTest {
                 new Lotto(1, 2, 3, 7, 8, 9)
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(10);
+        LottoNumber bonusNumber = LottoNumber.of(10);
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
         PurchaseAmount purchaseAmount = new PurchaseAmount(2000);
 
