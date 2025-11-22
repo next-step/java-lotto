@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ExpressionTest {
+
+    @Test
+    void split() {
+        assertThat(new Expression("2 + 3 - 2").split()).hasSize(5);
+    }
 
     @Test
     @DisplayName("입력값은 숫자와 사칙연산 기호로 나뉜다")
