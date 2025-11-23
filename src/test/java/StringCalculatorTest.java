@@ -24,4 +24,9 @@ public class StringCalculatorTest {
     void 곱셈() {
         assertThat(StringCalculator.multiply(1,2)).isEqualTo(2);
     }
+
+    @Test
+    void 나눗셈() {
+        assertThat(StringCalculator.divide(4,2)).isEqualTo(2);
+    }
 }
