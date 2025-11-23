@@ -12,8 +12,16 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int inputPurchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        while (true) {
+            try {
+                System.out.println("구입금액을 입력해 주세요.");
+                String input = scanner.nextLine();
+                validateNotEmpty(input);
+                return Integer.parseInt(input.trim());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public static Lotto inputWinningNumbers() {
@@ -37,23 +45,43 @@ public class InputView {
     }
 
     public static int inputManualLottoCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        while (true) {
+            try {
+                System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+                String input = scanner.nextLine();
+                validateNotEmpty(input);
+                return Integer.parseInt(input.trim());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public static ManualLottos inputManualLottos(int count) {
-        if(count < 0) {
-            throw new IllegalArgumentException("음수를 입력할 수 없습니다.");
-        }
-        if(count == 0) {
+        validateCount(count);
+        if (count == 0) {
             return new ManualLottos(null);
         }
+
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             String input = scanner.nextLine();
+            validateNotEmpty(input);
             manualLottos.add(parseWinningNumbers(input));
         }
         return new ManualLottos(manualLottos);
+    }
+
+    private static void validateCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("음수를 입력할 수 없습니다.");
+        }
+    }
+
+    private static void validateNotEmpty(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            throw new IllegalArgumentException("빈 값을 입력할 수 없습니다.");
+        }
     }
 }
