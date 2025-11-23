@@ -4,12 +4,19 @@ public class Parser {
 
     public static String[] parse(String input) {
         String[] tokens = split(input);
+        validateLength(tokens);
         validateSequence(tokens);
         return tokens;
     }
 
     private static String[] split(String input) {
         return input.trim().split("\\s+");
+    }
+
+    private static void validateLength(String[] tokens) {
+        if (tokens.length % 2 == 0) {
+            throw new IllegalArgumentException("연산 순서가 바르지 않습니다");
+        }
     }
 
     private static void validateSequence(String[] tokens) {
