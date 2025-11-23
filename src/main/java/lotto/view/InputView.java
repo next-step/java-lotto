@@ -42,6 +42,12 @@ public class InputView {
     }
 
     public static ManualLottos inputManualLottos(int count) {
+        if(count < 0) {
+            throw new IllegalArgumentException("음수를 입력할 수 없습니다.");
+        }
+        if(count == 0) {
+            return new ManualLottos(null);
+        }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
