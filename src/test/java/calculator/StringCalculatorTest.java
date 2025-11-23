@@ -41,4 +41,11 @@ public class StringCalculatorTest {
                 .isThrownBy(() -> StringCalculator.validateSequence(tokens))
                 .withMessageContaining("순서");
     }
+
+    @DisplayName("배열을 연산한다")
+    @Test
+    void caculate() {
+        String[] tokens = {"1", "+", "2", "+", "3"};
+        assertThat(StringCalculator.calculate(tokens)).isEqualTo(6);
+    }
 }
