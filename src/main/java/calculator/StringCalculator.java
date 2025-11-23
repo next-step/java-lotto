@@ -3,7 +3,7 @@ package calculator;
 public class StringCalculator {
 
     public static String[] split(String s) {
-        return s.trim().split("\\s+");
+        return s.split("\\s+");
     }
 
     public static boolean validateSequence(String[] tokens) {
