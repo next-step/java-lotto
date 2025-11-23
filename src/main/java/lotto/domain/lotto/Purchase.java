@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Purchase {
 
-  private final int pricePerTicket;
+  private final Money pricePerTicket;
   private final List<LottoTicket> tickets;
 
-  public Purchase(int pricePerTicket, List<LottoTicket> tickets) {
+  public Purchase(Money pricePerTicket, List<LottoTicket> tickets) {
     this.pricePerTicket = pricePerTicket;
     this.tickets = tickets;
   }
@@ -16,8 +16,8 @@ public class Purchase {
     return this.tickets;
   }
 
-  public int getPurchaseAmount() {
-    return this.pricePerTicket * this.tickets.size();
+  public Money getPurchaseAmount() {
+    return this.pricePerTicket.multiply(this.tickets.size());
   }
 
   @Override

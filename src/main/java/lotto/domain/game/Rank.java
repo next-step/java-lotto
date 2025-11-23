@@ -1,5 +1,7 @@
 package lotto.domain.game;
 
+import lotto.domain.lotto.Money;
+
 public enum Rank {
 
   FIRST(2_000_000_000, 6),
@@ -25,8 +27,8 @@ public enum Rank {
     return NONE;
   }
 
-  public int getPrize() {
-    return this.prize;
+  public Money getPrize() {
+    return new Money(this.prize);
   }
 
   @Override

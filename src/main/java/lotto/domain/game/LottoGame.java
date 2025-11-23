@@ -16,14 +16,14 @@ public class LottoGame {
   }
 
   public GameResult check(Purchase purchase) {
-    int winningPrize = 0;
+    Money winningPrize = new Money(0);
     Map<Rank, Integer> ranks = new HashMap<>();
     for (LottoTicket ticket : purchase.getTickets()) {
       Rank rank = Rank.valueOf(winningTicket.countMatchingNumbers(ticket));
       ranks.compute(rank, (k, v) -> v == null ? 1 : v + 1);
-      winningPrize += rank.getPrize();
+      winningPrize = winningPrize.add(rank.getPrize());
     }
 
-    return new GameResult(ranks, new Money(winningPrize), new Money(purchase.getPurchaseAmount()));
+    return new GameResult(ranks, winningPrize, purchase.getPurchaseAmount());
   }
 }

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.Money;
 import lotto.domain.lotto.Purchase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,22 +22,22 @@ class PurchaseTest {
   })
   void getPurchaseAmount(int pricePerTicket, int ticketCount, int expectedAmount) {
     List<LottoTicket> tickets = createTickets(ticketCount);
-    Purchase purchase = new Purchase(pricePerTicket, tickets);
-    assertThat(purchase.getPurchaseAmount()).isEqualTo(expectedAmount);
+    Purchase purchase = new Purchase(new Money(pricePerTicket), tickets);
+    assertThat(purchase.getPurchaseAmount()).isEqualTo(new Money(expectedAmount));
   }
 
   @Test
   void getTickets() {
     List<LottoTicket> tickets = createTickets(3);
-    Purchase purchase = new Purchase(1000, tickets);
+    Purchase purchase = new Purchase(new Money(1000), tickets);
     assertThat(purchase.getTickets()).hasSize(3);
     assertThat(purchase.getTickets()).isEqualTo(tickets);
   }
 
   @Test
   void emptyTickets() {
-    Purchase purchase = new Purchase(1000, List.of());
-    assertThat(purchase.getPurchaseAmount()).isEqualTo(0);
+    Purchase purchase = new Purchase(new Money(1000), List.of());
+    assertThat(purchase.getPurchaseAmount()).isEqualTo(new Money(0));
     assertThat(purchase.getTickets()).isEmpty();
   }
 

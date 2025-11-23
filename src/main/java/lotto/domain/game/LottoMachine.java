@@ -1,5 +1,6 @@
 package lotto.domain.game;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.lotto.LottoTicket;
@@ -8,24 +9,24 @@ import lotto.domain.lotto.Purchase;
 
 public class LottoMachine {
 
-  private static final int DEFAULT_LOTTO_TICKET_PRICE = 1_000;
+  private static final Money DEFAULT_LOTTO_TICKET_PRICE = new Money(1_000);
 
-  private final int lottoTicketPrice;
+  private final Money lottoTicketPrice;
 
   public LottoMachine() {
     this(DEFAULT_LOTTO_TICKET_PRICE);
   }
 
-  public LottoMachine(int lottoTicketPrice) {
+  public LottoMachine(Money lottoTicketPrice) {
     this.lottoTicketPrice = lottoTicketPrice;
   }
 
   public Purchase purchase(Money money) {
-    return new Purchase(this.lottoTicketPrice, generateTickets(calculate(money)));
+    return new Purchase(money, generateTickets(calculate(money)));
   }
 
-  int calculate(Money money) {
-    return (int) money.divideBy(new Money(lottoTicketPrice));
+  private int calculate(Money money) {
+    return money.divideForCount(lottoTicketPrice);
   }
 
   List<LottoTicket> generateTickets(int cnt) {

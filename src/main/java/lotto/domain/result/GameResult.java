@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,13 +11,13 @@ import lotto.domain.lotto.Money;
 public class GameResult {
 
   private final Map<Rank, Integer> details;
-  private final float rate;
+  private final BigDecimal rate;
 
   public GameResult(Map<Rank, Integer> details, Money winningPrize, Money purchaseAmount){
     this(details, winningPrize.divideBy(purchaseAmount));
   }
 
-  public GameResult(Map<Rank, Integer> details, float rate) {
+  public GameResult(Map<Rank, Integer> details, BigDecimal rate) {
     this.details = details;
     this.rate = rate;
   }
@@ -45,8 +46,8 @@ public class GameResult {
       this.message = message;
     }
 
-    static String getMessage(float value) {
-      if (value >= 1) {
+    static String getMessage(BigDecimal value) {
+      if (value.compareTo(BigDecimal.ONE) >= 0) {
         return PROFIT.message;
       }
       return LOSS.message;
