@@ -1,8 +1,14 @@
 package calculator.model;
 
+import java.util.List;
+
 public class Calculator {
     private final Numbers numbers;
     private final Operators operators;
+
+    public Calculator(List<Number> numbers, List<Operator> operators) {
+        this(new Numbers(numbers), new Operators(operators));
+    }
 
     public Calculator(Numbers numbers, Operators operators) {
         this.numbers = numbers;

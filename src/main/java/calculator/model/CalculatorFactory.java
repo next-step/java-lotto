@@ -15,7 +15,7 @@ public class CalculatorFactory {
         for (String token : expression.split(" ")) {
             parseToken(token, numbers, operators);
         }
-       return new Calculator(new Numbers(numbers), new Operators(operators));
+       return new Calculator(numbers, operators);
     }
 
     private static boolean isNullOrEmpty(String str) {
