@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StringCalculatorTest {
 
@@ -23,5 +24,21 @@ public class StringCalculatorTest {
     @Test
     void splitByTrimmedSpaces() {
         assertThat(StringCalculator.split(" 1 + 2 ")).containsExactly("1", "+", "2");
+    }
+
+    @DisplayName("숫자-연산자 순서가 올바른 경우 true 반환한다")
+    @Test
+    void validateTokenSequence() {
+        String[] tokens = {"1", "+", "2", "-", "3"};
+        assertThat(StringCalculator.validateSequence(tokens)).isTrue();
+    }
+
+    @DisplayName("숫자-연산자 순서가 잘못된 경우 예외 발생한다")
+    @Test
+    void invalidTokenSequenceThrows() {
+        String[] tokens = {"1", "+", "+", "2"};
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringCalculator.validateSequence(tokens))
+                .withMessageContaining("순서");
     }
 }
