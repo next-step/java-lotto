@@ -19,14 +19,14 @@ public class Lottos {
     }
 
     public LottoResults calculateResults(Lotto winningLotto) {
-        List<Integer> matchCountResults = Arrays.asList(0, 0, 0, 0);
+        LottoResults results = new LottoResults();
 
         for (Lotto lotto : lottos) {
             int matchCount = lotto.countMatchNumbers(winningLotto);
-            addMatchCount(matchCount, matchCountResults);
+            results.updateMatchCount(matchCount);
         }
 
-        return new LottoResults(matchCountResults.get(0), matchCountResults.get(1), matchCountResults.get(2), matchCountResults.get(3));
+        return results;
     }
 
     private void addMatchCount(int matchCount, List<Integer> results) {

@@ -3,6 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +19,7 @@ class LottosTest {
         );
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         assertThat(lottos.calculateResults(winningLotto))
-                .isEqualTo(new LottoResults(0, 1, 1, 1));
+                .isEqualTo(new LottoResults(Map.of(4, 1, 5, 1, 6, 1)));
     }
 
 }

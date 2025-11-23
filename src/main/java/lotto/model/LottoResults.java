@@ -1,61 +1,59 @@
 package lotto.model;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoResults {
-    private final int countThreeMatches;
-    private final int countFourMatches;
-    private final int countFiveMatches;
-    private final int countSixMatches;
-    public final static int PRIZE_THREE_MATCHES = 5000;
-    public final static int PRIZE_FOUR_MATCHES = 50000;
-    public final static int PRIZE_FIVE_MATCHES = 1500000;
-    public final static int PRIZE_SIX_MATCHES = 2000000000;
+    private final Map<Integer, Integer> matchCounts;
 
-    public LottoResults(int countThreeMatches, int countFourMatches, int countFiveMatches, int countSixMatches) {
-        this.countThreeMatches = countThreeMatches;
-        this.countFourMatches = countFourMatches;
-        this.countFiveMatches = countFiveMatches;
-        this.countSixMatches = countSixMatches;
+    public LottoResults() {
+        this(new HashMap<>());
     }
 
-    public int threeMatches() {
-        return countThreeMatches;
+    public LottoResults(Map<Integer, Integer> matchCounts) {
+        this.matchCounts = matchCounts;
     }
 
-    public int fourMatches() {
-        return countFourMatches;
-    }
-
-    public int fiveMatches() {
-        return countFiveMatches;
-    }
-
-    public int sixMatches() {
-        return countSixMatches;
+    public void updateMatchCount(int matchCount) {
+        if (matchCount < 3) {
+            return;
+        }
+        matchCounts.put(matchCount, matchCounts.getOrDefault(matchCount, 0) + 1);
     }
 
     public long getPrizeValue() {
-        return (long) countThreeMatches * PRIZE_THREE_MATCHES
-                + (long) countFourMatches * PRIZE_FOUR_MATCHES
-                + (long) countFiveMatches * PRIZE_FIVE_MATCHES
-                + (long) countSixMatches * PRIZE_SIX_MATCHES;
+        return matchCounts.entrySet().stream()
+                .mapToLong(entry -> (long) entry.getValue() * Prize.fromMatchCount(entry.getKey()).value())
+                .sum();
     }
 
-    public double getReturnRate(Budget budget) {
+    public double getReturnRate(PurchaseAmount purchaseAmount) {
         long totalPrize = getPrizeValue();
-        return budget.getReturnRate(totalPrize);
+        return purchaseAmount.getReturnRate(totalPrize);
+    }
+
+    public Integer getMatchCount(int matchCount) {
+        return matchCounts.getOrDefault(matchCount, 0);
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         LottoResults that = (LottoResults) o;
-        return countThreeMatches == that.countThreeMatches && countFourMatches == that.countFourMatches && countFiveMatches == that.countFiveMatches && countSixMatches == that.countSixMatches;
+        return Objects.equals(matchCounts, that.matchCounts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(countThreeMatches, countFourMatches, countFiveMatches, countSixMatches);
+        return Objects.hashCode(matchCounts);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoResults{" +
+                "matchCounts=" + matchCounts +
+                '}';
     }
 }

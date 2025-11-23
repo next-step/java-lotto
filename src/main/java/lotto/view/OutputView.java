@@ -1,10 +1,9 @@
 package lotto.view;
 
+import lotto.model.Prize;
 import lotto.model.PurchaseAmount;
 import lotto.model.LottoResults;
 import lotto.model.Lottos;
-
-import static lotto.model.LottoResults.*;
 
 public class OutputView {
     public static void printPurchaseCount(int count) {
