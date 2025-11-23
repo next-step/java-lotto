@@ -11,10 +11,6 @@ public class WinningLotto {
     private final Lotto numbers;
     private final NumberElement bonusNumber;
 
-    public WinningLotto(Integer... numbers) {
-        this(integerToLottoNumbers(numbers), NumberElement.create(0));
-    }
-
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
         this(integerToLottoNumbers(numbers), NumberElement.create(bonusNumber));
     }

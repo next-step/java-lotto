@@ -21,7 +21,7 @@ class WinningLottoTest {
     @Test
     void 지난주_당첨번호_6개_미만() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningLotto(1, 2, 3, 4, 5));
+                .isThrownBy(() -> new WinningLotto(new Lotto(1, 2, 3, 4, 5), NumberElement.create(10)));
     }
 
     @Test
