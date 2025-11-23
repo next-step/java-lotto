@@ -22,10 +22,6 @@ public class LottoTicket {
     return new LottoTicket(numbers);
   }
 
-  public static LottoTicket from(List<Integer> numbers) {
-    return new LottoTicket(convert(numbers));
-  }
-
   public static LottoTicket from(String numbers) {
     return new LottoTicket(convert(parse(numbers)));
   }
