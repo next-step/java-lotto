@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class LottoTicket {
 
   private static final int LOTTO_CNT = 6;
-  private List<LottoNumber> numbers;
+  private final List<LottoNumber> numbers;
 
   public LottoTicket(List<Integer> numbers) {
     validate(numbers);
@@ -23,7 +23,7 @@ public class LottoTicket {
 
   private List<LottoNumber> convert(List<Integer> numbers) {
     return numbers.stream()
-        .map(LottoNumber::new)
+        .map(LottoNumber::of)
         .collect(Collectors.toList());
   }
 

@@ -12,12 +12,12 @@ class LottoNumberTest {
   @ParameterizedTest
   @CsvSource({"0", "46"})
   void numberNotBetween1To45ThrowException(int value) {
-    assertThatThrownBy(() -> new LottoNumber(value))
+    assertThatThrownBy(() -> LottoNumber.of(value))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
   void sameValeSameLottoNumber() {
-    assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+    assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
   }
 }

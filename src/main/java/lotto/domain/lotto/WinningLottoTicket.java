@@ -6,7 +6,7 @@ import lotto.domain.game.Rank;
 
 public class WinningLottoTicket {
 
-  private List<LottoNumber> numbers;
+  private final List<LottoNumber> numbers;
 
   public WinningLottoTicket(String numbers) {
     this.numbers = parse(numbers);
@@ -15,7 +15,7 @@ public class WinningLottoTicket {
   private List<LottoNumber> parse(String numbers) {
     return Arrays.stream(numbers.split(", "))
         .map(Integer::parseInt)
-        .map(LottoNumber::new).toList();
+        .map(LottoNumber::of).toList();
   }
 
   public Rank compare(LottoTicket ticket) {

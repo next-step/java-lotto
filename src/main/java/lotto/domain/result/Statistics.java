@@ -7,7 +7,7 @@ import lotto.domain.game.Rank;
 
 public class Statistics {
 
-  private Map<Rank, Integer> details;
+  private final Map<Rank, Integer> details;
 
   public Statistics(Map<Rank, Integer> details) {
     this.details = details;

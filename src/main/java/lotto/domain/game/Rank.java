@@ -8,8 +8,8 @@ public enum Rank {
   FOURTH(5000, 3),
   NONE(0, -1);
 
-  private int prize;
-  private int matched;
+  private final int prize;
+  private final int matched;
 
   Rank(int prize, int matched) {
     this.prize = prize;

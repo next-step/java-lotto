@@ -5,8 +5,8 @@ import lotto.domain.lotto.LottoTicket;
 
 public class Purchase {
 
-  private int pricePerTicket;
-  private List<LottoTicket> tickets;
+  private final int pricePerTicket;
+  private final List<LottoTicket> tickets;
 
   public Purchase(int pricePerTicket, List<LottoTicket> tickets) {
     this.pricePerTicket = pricePerTicket;

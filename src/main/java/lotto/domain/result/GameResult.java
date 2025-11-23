@@ -3,8 +3,8 @@ package lotto.domain.result;
 
 public class GameResult {
 
-  private Statistics statistics;
-  private ProfitRate rate;
+  private final Statistics statistics;
+  private final ProfitRate rate;
 
   public GameResult(Statistics statistics, ProfitRate rate) {
     this.statistics = statistics;
