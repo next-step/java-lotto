@@ -17,19 +17,11 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("Lotto 객체 생성자는 중복 없이 1부터 45사이의 숫자 6개로 생성된다.")
-    void createLottoTest() {
-        Lotto lotto = new Lotto();
-        assertThat(lotto.value().stream().filter(
-                number -> number >= 1 && number <= 45
-        ).count()).isEqualTo(6);
-    }
-
-    @Test
-    @DisplayName("Lotto 객체는 1과 45 사이 외의 숫자나 6개 이상의 숫자를 가지면 에러를 반환한다.")
+    @DisplayName("Lotto 객체는 1과 45 사이 외의 숫자나 6개 이상의 숫자, 중복된 숫자를 가지면 에러를 반환한다.")
     void invalidLottoTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(0, 2, 3, 4, 5, 6));
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 46));
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 1, 2, 3, 4, 5)));
     }
 }
