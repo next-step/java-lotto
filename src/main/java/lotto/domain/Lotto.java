@@ -23,28 +23,19 @@ public class Lotto {
     }
 
     private static Set<LottoNumber> numbersToSet(int[] intNumbers) {
-        validateInputSize(intNumbers.length);
         Set<LottoNumber> numbers = new HashSet<>();
         for (int number : intNumbers) {
             numbers.add(LottoNumber.of(number));
         }
-        validateNoDuplicate(numbers.size(), intNumbers.length);
         return numbers;
     }
 
     public static Lotto from(List<Integer> intNumbers) {
         return new Lotto(createLottoNumbers(intNumbers));
     }
-
-    private static void validateNoDuplicate(int setSize, int inputSize) {
-        if (setSize != inputSize) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
-    }
-
     private static void validateInputSize(int length) {
         if (length != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 총 6개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 중복없이 6개여야 합니다.");
         }
     }
 
@@ -54,8 +45,6 @@ public class Lotto {
             lottoNumbers.add(LottoNumber.of(number));
         }
 
-        validateNoDuplicate(lottoNumbers.size(), intNumbers.size());
-        validateInputSize(lottoNumbers.size());
         return lottoNumbers;
     }
 

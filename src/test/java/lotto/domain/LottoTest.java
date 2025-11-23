@@ -18,14 +18,14 @@ public class LottoTest {
     void 로또_번호_6개가_아니면_예외발생() {
         assertThatThrownBy(() -> new Lotto(1, 2, 3, 4, 5))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 총 6개여야 합니다.");
+                .hasMessage("로또 번호는 중복없이 6개여야 합니다.");
     }
 
     @Test
     void 로또_번호가_중복되면_예외발생() {
         assertThatThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 5))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 중복될 수 없습니다.");
+                .hasMessage("로또 번호는 중복없이 6개여야 합니다.");
     }
 
     @Test

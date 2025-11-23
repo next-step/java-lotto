@@ -17,24 +17,16 @@ public class LottoNumber {
 
     private final int value;
 
-    private LottoNumber(String value) {
-        this(Integer.parseInt(value));
-    }
-
     private LottoNumber(int value) {
-        validate(value);
         this.value = value;
     }
 
     public static LottoNumber of(int number) {
-        validate(number);
-        return CACHE.get(number);
-    }
-
-    private static void validate(int value) {
-        if (value < MIN_NUMBER || value > MAX_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 한다");
+        LottoNumber lottoNumber = CACHE.get(number);
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException(String.format("로또 번호는 %d부터 %d 사이의 숫자여야 한다", MIN_NUMBER, MAX_NUMBER));
         }
+        return lottoNumber;
     }
 
     public int getValue() {
