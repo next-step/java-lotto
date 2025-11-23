@@ -11,7 +11,13 @@ import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
     @Test
-    void 더하기() {
+    void 덧셈() {
         assertThat(StringCalculator.add(1,2)).isEqualTo(3);
+    }
+
+
+    @Test
+    void 뺄셈() {
+        assertThat(StringCalculator.minus(1,2)).isEqualTo(-1);
     }
 }
