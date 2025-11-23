@@ -1,0 +1,49 @@
+package lotto.domain.result;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
+import lotto.domain.lotto.LottoTicket;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+class PurchaseTest {
+
+  @ParameterizedTest
+  @CsvSource({
+      "1000, 1, 1000",
+      "1000, 5, 5000",
+      "1000, 10, 10000",
+      "2000, 3, 6000"
+  })
+  void getPurchaseAmount(int pricePerTicket, int ticketCount, int expectedAmount) {
+    List<LottoTicket> tickets = createTickets(ticketCount);
+    Purchase purchase = new Purchase(pricePerTicket, tickets);
+    assertThat(purchase.getPurchaseAmount()).isEqualTo(expectedAmount);
+  }
+
+  @Test
+  void getTickets() {
+    List<LottoTicket> tickets = createTickets(3);
+    Purchase purchase = new Purchase(1000, tickets);
+    assertThat(purchase.getTickets()).hasSize(3);
+    assertThat(purchase.getTickets()).isEqualTo(tickets);
+  }
+
+  @Test
+  void emptyTickets() {
+    Purchase purchase = new Purchase(1000, List.of());
+    assertThat(purchase.getPurchaseAmount()).isEqualTo(0);
+    assertThat(purchase.getTickets()).isEmpty();
+  }
+
+  private List<LottoTicket> createTickets(int count) {
+    List<LottoTicket> tickets = new ArrayList<>();
+    for (int i = 0; i < count; i++) {
+      tickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)));
+    }
+    return tickets;
+  }
+}
