@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 
 class RankTest {
@@ -21,10 +22,19 @@ class RankTest {
         .isInstanceOf(IllegalArgumentException.class);
   }
 
-  @Test
-  void findRankWithMatched() {
-    assertThat(Rank.valueOf(4)).isEqualTo(Rank.THIRD);
+  @ParameterizedTest
+  @CsvSource({
+      "5, true, SECOND",
+      "5, false, THIRD"
+  })
+  void findSecondAndThirdBasedOnBonusMatched(int matched, boolean bonusMatched, Rank rank) {
+    assertThat(Rank.valueOf(matched, bonusMatched)).isEqualTo(rank);
   }
 
+  @ParameterizedTest
+  @CsvSource({"6, false, FIRST", "6, true, FIRST", "4, true, FOURTH", "4, false, FOURTH"})
+  void otherRank(int matched, boolean bonusMatched, Rank rank) {
+    assertThat(Rank.valueOf(matched, bonusMatched)).isEqualTo(rank);
+  }
 
 }

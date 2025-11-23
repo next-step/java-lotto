@@ -13,17 +13,17 @@ public class LottoTicket {
 
   private final List<LottoNumber> numbers;
 
-  private LottoTicket(List<LottoNumber> numbers) {
+  public LottoTicket(List<LottoNumber> numbers) {
     validate(numbers);
     this.numbers = List.copyOf(numbers);
   }
 
-  public static LottoTicket of(List<LottoNumber> numbers) {
-    return new LottoTicket(numbers);
+  public LottoTicket(String numbers){
+    this(convert(parse(numbers)));
   }
 
-  public static LottoTicket from(String numbers) {
-    return new LottoTicket(convert(parse(numbers)));
+  public static LottoTicket of(List<LottoNumber> numbers) {
+    return new LottoTicket(numbers);
   }
 
   public static LottoTicket of(Integer... numbers) {
@@ -58,5 +58,14 @@ public class LottoTicket {
   @Override
   public String toString() {
     return numbers.toString();
+  }
+
+  protected boolean contains(LottoNumber bonus) {
+    for(LottoNumber number : this.numbers){
+      if(number == bonus){
+        return true;
+      }
+    }
+    return false;
   }
 }

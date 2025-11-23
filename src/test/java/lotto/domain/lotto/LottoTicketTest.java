@@ -16,15 +16,14 @@ class LottoTicketTest {
 
   @BeforeEach
   void setUp() {
-    winning = LottoTicket.from("1, 2, 3, 4, 5, 6");
+    winning = new LottoTicket("1, 2, 3, 4, 5, 6");
   }
 
   @ParameterizedTest
   @CsvSource({"1", "1, 2, 3, 4, 5", "1, 1, 2, 3, 4, 5"})
   void lottoTicketNotHas6LottoNumbersThrowsException(String numbers) {
-    assertThatThrownBy(() ->
-        LottoTicket.from(numbers)
-    ).isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> new LottoTicket(numbers))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 
   @ParameterizedTest

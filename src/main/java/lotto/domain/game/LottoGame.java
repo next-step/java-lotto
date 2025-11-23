@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.Money;
+import lotto.domain.lotto.WinningTicket;
 import lotto.domain.result.GameResult;
 import lotto.domain.lotto.Purchase;
 
 public class LottoGame {
 
-  private final LottoTicket winningTicket;
+  private final WinningTicket winningTicket;
 
-  public LottoGame(LottoTicket winningTicket) {
+  public LottoGame(WinningTicket winningTicket) {
     this.winningTicket = winningTicket;
   }
 
@@ -19,7 +20,7 @@ public class LottoGame {
     Money winningPrize = new Money(0);
     Map<Rank, Integer> ranks = new HashMap<>();
     for (LottoTicket ticket : purchase.getTickets()) {
-      Rank rank = Rank.valueOf(winningTicket.countMatchingNumbers(ticket));
+      Rank rank = Rank.valueOf(winningTicket.countMatchingNumbers(ticket), winningTicket.containsBonus(ticket));
       ranks.compute(rank, (k, v) -> v == null ? 1 : v + 1);
       winningPrize = winningPrize.add(rank.getPrize());
     }
