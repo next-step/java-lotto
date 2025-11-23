@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.result.GameResult;
-import lotto.domain.result.ProfitRate;
 import lotto.domain.result.Purchase;
-import lotto.domain.result.Statistics;
 
 public class LottoGame {
 
@@ -25,9 +23,6 @@ public class LottoGame {
       winningPrize += rank.getPrize();
     }
 
-    Statistics statistics = new Statistics(ranks);
-    ProfitRate rate = new ProfitRate(winningPrize, purchase.getPurchaseAmount());
-
-    return new GameResult(statistics, rate);
+    return new GameResult(ranks, winningPrize, purchase.getPurchaseAmount());
   }
 }
