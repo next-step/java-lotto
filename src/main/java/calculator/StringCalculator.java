@@ -1,20 +1,52 @@
 package calculator;
 
+import java.util.List;
+
 public class StringCalculator {
+    private final String DELIMITER = " ";
+    private final List<String> expression;
 
-    public static int add(int num1, int num2) {
-        return num1 + num2;
+    public StringCalculator(String expression) {
+        validation(expression);
+        this.expression = List.of(split(expression));
     }
 
-    public static int minus(int num1, int num2) {
-        return num1 - num2;
+    public int calculate() {
+        int curValue = getFirstNumber();
+
+        for(int i = 1; i < this.expression.size(); i+=2) {
+            curValue = getCurValue(i, curValue);
+        }
+
+        return curValue;
     }
 
-    public static int multiply(int num1, int num2) {
-        return num1 * num2;
+    private int getCurValue(int operIndex, int curValue) {
+        Operator operator = Operator.getOperator(this.expression.get(operIndex));
+
+        curValue = operator.apply(curValue, Integer.parseInt(expression.get(operIndex +1)));
+
+        return curValue;
     }
 
-    public static int divide(int num1, int num2) {
-        return num1 / num2;
+    public List<String> value() {
+        return this.expression;
+    }
+    private String[] split(String expression) {
+        return expression.split(DELIMITER);
+    }
+
+    private int getFirstNumber() {
+        return Integer.parseInt(this.expression.getFirst());
+    }
+
+    private void validation(String expression) {
+        if(expression == null || expression.isEmpty()) {
+            throw new IllegalArgumentException("null 이거나 빈 문자열일 수 없습니다.");
+        }
+
+        if(expression.trim().isEmpty()) {
+            throw new IllegalArgumentException("공백 문자열일 수 없습니다.");
+        }
     }
 }
