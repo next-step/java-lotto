@@ -12,4 +12,16 @@ public class StringCalculatorTest {
     void splitBySpace() {
         assertThat(StringCalculator.split("1 + 2")).containsExactly("1", "+", "2");
     }
+
+    @DisplayName("문자열에서 연속 공백을 무시하고 분리한다")
+    @Test
+    void splitByMultipleSpaces() {
+        assertThat(StringCalculator.split("1  +   2")).containsExactly("1", "+", "2");
+    }
+
+    @DisplayName("문자열 앞뒤 공백을 무시하고 분리한다")
+    @Test
+    void splitByTrimmedSpaces() {
+        assertThat(StringCalculator.split(" 1 + 2 ")).containsExactly("1", "+", "2");
+    }
 }
