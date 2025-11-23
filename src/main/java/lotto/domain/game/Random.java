@@ -10,11 +10,10 @@ public class Random {
 
   private static final int MIN = 1, MAX = 45;
   private static final int LOTTO_NUMBER_COUNT = 6;
-
+  private static List<Integer> numbers = IntStream.rangeClosed(MIN, MAX)
+      .boxed()
+      .collect(Collectors.toList());
   public static List<LottoNumber> generate() {
-    List<Integer> numbers = IntStream.rangeClosed(MIN, MAX)
-        .boxed()
-        .collect(Collectors.toList());
     Collections.shuffle(numbers);
     return numbers.subList(0, LOTTO_NUMBER_COUNT).stream()
         .sorted()
