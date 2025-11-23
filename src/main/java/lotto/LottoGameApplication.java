@@ -3,8 +3,9 @@ package lotto;
 import lotto.domain.game.LottoGame;
 import lotto.domain.game.LottoMachine;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.Money;
 import lotto.domain.result.GameResult;
-import lotto.domain.result.Purchase;
+import lotto.domain.lotto.Purchase;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -14,7 +15,7 @@ public class LottoGameApplication {
     LottoMachine machine = new LottoMachine();
 
     int purchaseAmount = InputView.inputPurchaseAmount();
-    Purchase purchase = machine.purchase(purchaseAmount);
+    Purchase purchase = machine.purchase(new Money(purchaseAmount));
     ResultView.printPurchase(purchase);
 
     String winningLottoNumbers = InputView.inputWinningLottoNumbers();

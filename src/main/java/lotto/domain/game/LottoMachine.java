@@ -2,13 +2,13 @@ package lotto.domain.game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.result.Purchase;
+import lotto.domain.lotto.Money;
+import lotto.domain.lotto.Purchase;
 
 public class LottoMachine {
 
-  private static final int DEFAULT_LOTTO_TICKET_PRICE = 1000;
+  private static final int DEFAULT_LOTTO_TICKET_PRICE = 1_000;
 
   private final int lottoTicketPrice;
 
@@ -20,12 +20,12 @@ public class LottoMachine {
     this.lottoTicketPrice = lottoTicketPrice;
   }
 
-  public Purchase purchase(int money) {
+  public Purchase purchase(Money money) {
     return new Purchase(this.lottoTicketPrice, generateTickets(calculate(money)));
   }
 
-  int calculate(int pay) {
-    return pay / lottoTicketPrice;
+  int calculate(Money money) {
+    return (int) money.divideBy(new Money(lottoTicketPrice));
   }
 
   List<LottoTicket> generateTickets(int cnt) {

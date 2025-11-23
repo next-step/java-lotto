@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.HashMap;
 import java.util.Map;
 import lotto.domain.game.Rank;
+import lotto.domain.lotto.Money;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,7 +16,7 @@ class GameResultTest {
   @Test
   void testCalculateProfitRate() {
     Map<Rank, Integer> details = new HashMap<>();
-    GameResult result = new GameResult(details, 2000000000, 1000);
+    GameResult result = new GameResult(details, new Money(2000000000), new Money(1000));
     assertThat(result.toString()).contains(String.valueOf((float) 2000000000 / 1000));
   }
 
@@ -30,17 +31,17 @@ class GameResultTest {
   @Test
   void divisionByZeroThrowException() {
     Map<Rank, Integer> details = new HashMap<>();
-    assertThatThrownBy(() -> new GameResult(details, 1000, 0))
+    assertThatThrownBy(() -> new GameResult(details, new Money(1000), new Money(0)))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("구매 금액은 0보다 커야 합니다");
+        .hasMessageContaining("몫은 0보다 커야 합니다");
   }
 
   @Test
   void negativeWinningPrizeThrowException() {
     Map<Rank, Integer> details = new HashMap<>();
-    assertThatThrownBy(() -> new GameResult(details, -1000, 1000))
+    assertThatThrownBy(() -> new GameResult(details, new Money(-1000), new Money(1000)))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("당첨 금액은 0 이상이어야 합니다");
+        .hasMessageContaining("금액은 0이상이어야 합니다");
   }
 
 }

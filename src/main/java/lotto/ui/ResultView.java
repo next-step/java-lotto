@@ -1,7 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.result.GameResult;
-import lotto.domain.result.Purchase;
+import lotto.domain.lotto.Purchase;
 
 public class ResultView {
 

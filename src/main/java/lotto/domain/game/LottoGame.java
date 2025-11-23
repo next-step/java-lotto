@@ -3,8 +3,9 @@ package lotto.domain.game;
 import java.util.HashMap;
 import java.util.Map;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.Money;
 import lotto.domain.result.GameResult;
-import lotto.domain.result.Purchase;
+import lotto.domain.lotto.Purchase;
 
 public class LottoGame {
 
@@ -23,6 +24,6 @@ public class LottoGame {
       winningPrize += rank.getPrize();
     }
 
-    return new GameResult(ranks, winningPrize, purchase.getPurchaseAmount());
+    return new GameResult(ranks, new Money(winningPrize), new Money(purchase.getPurchaseAmount()));
   }
 }

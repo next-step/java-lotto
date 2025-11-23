@@ -1,7 +1,6 @@
-package lotto.domain.result;
+package lotto.domain.lotto;
 
 import java.util.List;
-import lotto.domain.lotto.LottoTicket;
 
 public class Purchase {
 
