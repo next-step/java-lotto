@@ -10,22 +10,22 @@ public class LottoMachine {
 
   private static final int DEFAULT_LOTTO_TICKET_PRICE = 1000;
 
-  private final int LOTTO_TICKET_PRICE;
+  private final int lottoTicketPrice;
 
   public LottoMachine() {
     this(DEFAULT_LOTTO_TICKET_PRICE);
   }
 
   public LottoMachine(int lottoTicketPrice) {
-    this.LOTTO_TICKET_PRICE = lottoTicketPrice;
+    this.lottoTicketPrice = lottoTicketPrice;
   }
 
   public Purchase purchase(int money) {
-    return new Purchase(this.LOTTO_TICKET_PRICE, generateTickets(calculate(money)));
+    return new Purchase(this.lottoTicketPrice, generateTickets(calculate(money)));
   }
 
   int calculate(int pay) {
-    return pay / LOTTO_TICKET_PRICE;
+    return pay / lottoTicketPrice;
   }
 
   List<LottoTicket> generateTickets(int cnt) {
