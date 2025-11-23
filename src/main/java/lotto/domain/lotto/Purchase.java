@@ -9,11 +9,15 @@ public class Purchase {
 
   public Purchase(Money pricePerTicket, List<LottoTicket> tickets) {
     this.pricePerTicket = pricePerTicket;
-    this.tickets = tickets;
+    this.tickets = List.copyOf(tickets);
   }
 
   public List<LottoTicket> getTickets() {
-    return this.tickets;
+    return tickets;
+  }
+
+  public int getTicketCount() {
+    return tickets.size();
   }
 
   public Money getPurchaseAmount() {

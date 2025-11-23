@@ -34,7 +34,7 @@ public class LottoMachine {
     for (int i = 0; i < cnt; i++) {
       tickets.add(LottoTicket.of(Random.generate()));
     }
-    return tickets;
+    return List.copyOf(tickets);
   }
 
 }

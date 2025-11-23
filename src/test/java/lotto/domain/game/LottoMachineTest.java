@@ -14,6 +14,6 @@ public class LottoMachineTest {
   void lottoMachinePurchaseNTicketsBasedOnPrice(int pay, int expectedNTicket) {
     LottoMachine machine = new LottoMachine();
     Purchase tickets = machine.purchase(new Money(pay));
-    assertThat(tickets.getTickets().size()).isEqualTo(expectedNTicket);
+    assertThat(tickets.getTicketCount()).isEqualTo(expectedNTicket);
   }
 }

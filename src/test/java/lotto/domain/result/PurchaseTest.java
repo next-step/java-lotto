@@ -35,6 +35,13 @@ class PurchaseTest {
   }
 
   @Test
+  void getTicketCount() {
+    List<LottoTicket> tickets = createTickets(3);
+    Purchase purchase = new Purchase(new Money(1000), tickets);
+    assertThat(purchase.getTicketCount()).isEqualTo(3);
+  }
+
+  @Test
   void emptyTickets() {
     Purchase purchase = new Purchase(new Money(1000), List.of());
     assertThat(purchase.getPurchaseAmount()).isEqualTo(new Money(0));

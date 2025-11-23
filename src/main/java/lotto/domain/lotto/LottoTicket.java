@@ -35,11 +35,6 @@ public class LottoTicket {
         .map(Integer::parseInt).toList();
   }
 
-  private static List<LottoNumber> convert(Integer... numbers) {
-    return Arrays.stream(numbers)
-        .map(LottoNumber::of)
-        .collect(Collectors.toList());
-  }
 
   private static List<LottoNumber> convert(List<Integer> numbers) {
     return numbers.stream()
