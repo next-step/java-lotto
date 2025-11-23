@@ -13,26 +13,7 @@ public class Number {
         return value;
     }
 
-    Number plus(Number number) {
-        return new Number(this.value + number.value);
-    }
-
-    Number minus(Number number) {
-        return new Number(this.value - number.value);
-    }
-
-    Number multiply(Number number) {
-        return new Number(this.value * number.value);
-    }
-
-    Number divide(Number number) {
-        if (!isDividableBy(number)) {
-            throw new IllegalArgumentException("나눗셈의 결과가 정수가 아닙니다.");
-        }
-        return new Number(this.value / number.value);
-    }
-
-    private boolean isDividableBy(Number number) {
+    boolean isDividableBy(Number number) {
         return this.value % number.value == 0;
     }
 
