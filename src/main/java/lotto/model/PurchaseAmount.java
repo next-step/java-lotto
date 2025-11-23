@@ -2,10 +2,10 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class Budget {
+public class PurchaseAmount {
     private final int amount;
 
-    public Budget(int amount) {
+    public PurchaseAmount(int amount) {
         if (!isValid(amount)) {
             throw new IllegalArgumentException("예산은 0 이상이며 1000원 단위로만 설정 가능합니다.");
         }
@@ -13,7 +13,7 @@ public class Budget {
     }
 
     public int countLottoTickets() {
-        return amount / 1000;
+        return amount / 1_000;
     }
 
     public Lottos buyLottos() {
@@ -35,8 +35,8 @@ public class Budget {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Budget budget = (Budget) o;
-        return amount == budget.amount;
+        PurchaseAmount purchaseAmount = (PurchaseAmount) o;
+        return amount == purchaseAmount.amount;
     }
 
     @Override

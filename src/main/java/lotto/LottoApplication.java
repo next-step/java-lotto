@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.model.Budget;
+import lotto.model.PurchaseAmount;
 import lotto.model.Lotto;
 import lotto.model.LottoResults;
 import lotto.model.Lottos;
@@ -9,14 +9,14 @@ import lotto.view.OutputView;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        Budget budget = InputView.readBudgetInput();
+        PurchaseAmount purchaseAmount = InputView.readBudgetInput();
         Lotto winningLotto = InputView.readWinningLottoInput();
 
-        OutputView.printPurchaseCount(budget.countLottoTickets());
-        Lottos lottos = budget.buyLottos();
+        OutputView.printPurchaseCount(purchaseAmount.countLottoTickets());
+        Lottos lottos = purchaseAmount.buyLottos();
         OutputView.printBoughtLottos(lottos);
 
         LottoResults result = lottos.calculateResults(winningLotto);
-        OutputView.printResults(result, budget);
+        OutputView.printResults(result, purchaseAmount);
     }
 }

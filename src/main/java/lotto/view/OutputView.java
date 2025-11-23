@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.model.Budget;
+import lotto.model.PurchaseAmount;
 import lotto.model.LottoResults;
 import lotto.model.Lottos;
 
@@ -11,10 +11,10 @@ public class OutputView {
         System.out.printf("%s개를 구매했습니다.%n", count);
     }
 
-    public static void printResults(LottoResults result, Budget budget) {
+    public static void printResults(LottoResults result, PurchaseAmount purchaseAmount) {
         printResultHeader();
-        printMatchCounts(result, budget);
-        printRate(result, budget);
+        printMatchCounts(result);
+        printRate(result, purchaseAmount);
     }
 
     public static void printBoughtLottos(Lottos lottos) {
@@ -26,15 +26,15 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    private static void printMatchCounts(LottoResults results, Budget budget) {
-        System.out.printf("3개 일치 (%s원)- %s개%n", PRIZE_THREE_MATCHES, results.threeMatches());
-        System.out.printf("4개 일치 (%s원)- %s개%n", PRIZE_FOUR_MATCHES, results.fourMatches());
-        System.out.printf("5개 일치 (%s원)- %s개%n", PRIZE_FIVE_MATCHES, results.fiveMatches());
-        System.out.printf("6개 일치 (%s원)- %s개%n", PRIZE_SIX_MATCHES, results.sixMatches());
+    private static void printMatchCounts(LottoResults results) {
+        System.out.printf("%s- %s개%n", Prize.THREE_MATCHES, results.getMatchCount(3));
+        System.out.printf("%s- %s개%n", Prize.FOUR_MATCHES, results.getMatchCount(4));
+        System.out.printf("%s- %s개%n", Prize.FIVE_MATCHES, results.getMatchCount(5));
+        System.out.printf("%s- %s개%n", Prize.SIX_MATCHES, results.getMatchCount(6));
     }
 
-    private static void printRate(LottoResults results, Budget budget) {
-        double rate = results.getReturnRate(budget);
+    private static void printRate(LottoResults results, PurchaseAmount purchaseAmount) {
+        double rate = results.getReturnRate(purchaseAmount);
         System.out.printf("총 수익률은 %.2f입니다.", rate);
         if (rate >= 1) {
             System.out.printf("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)%n");

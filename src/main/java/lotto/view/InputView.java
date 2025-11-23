@@ -1,18 +1,17 @@
 package lotto.view;
 
-import lotto.model.Budget;
+import lotto.model.PurchaseAmount;
 import lotto.model.Lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    public static Budget readBudgetInput() {
+    public static PurchaseAmount readBudgetInput() {
         Scanner scanner = new Scanner(System.in);
         print("구입금액을 입력해 주세요.");
-        return new Budget(scanner.nextInt());
+        return new PurchaseAmount(scanner.nextInt());
     }
 
     public static Lotto readWinningLottoInput() {
