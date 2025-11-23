@@ -42,7 +42,7 @@ class PurchaseTest {
   private List<LottoTicket> createTickets(int count) {
     List<LottoTicket> tickets = new ArrayList<>();
     for (int i = 0; i < count; i++) {
-      tickets.add(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)));
+      tickets.add(LottoTicket.of(1, 2, 3, 4, 5, 6));
     }
     return tickets;
   }

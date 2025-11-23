@@ -12,23 +12,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoTicketTest {
 
-  private List<LottoNumber> winning;
+  private LottoTicket winning;
 
   @BeforeEach
   void setUp() {
-    winning = List.of(
-        LottoNumber.of(1), LottoNumber.of(2),
-        LottoNumber.of(3), LottoNumber.of(4),
-        LottoNumber.of(5), LottoNumber.of(6));
+    winning = LottoTicket.from("1, 2, 3, 4, 5, 6");
   }
 
-  @Test
-  void lottoTicketNotHas6LottoNumbersThrowsException() {
+  @ParameterizedTest
+  @CsvSource({"1", "1, 2, 3, 4, 5", "1, 1, 2, 3, 4, 5"})
+  void lottoTicketNotHas6LottoNumbersThrowsException(String numbers) {
     assertThatThrownBy(() ->
-        new LottoTicket(List.of(1))).isInstanceOf(IllegalArgumentException.class);
-
-    assertThatThrownBy(() ->
-        new LottoTicket(List.of(1, 2, 3, 4, 5))
+        LottoTicket.from(numbers)
     ).isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -42,7 +37,7 @@ class LottoTicketTest {
   })
   void countMatchingNumbers_rank(int expectedMatches, int n1, int n2, int n3, int n4, int n5,
       int n6) {
-    LottoTicket ticket = new LottoTicket(List.of(n1, n2, n3, n4, n5, n6));
+    LottoTicket ticket = LottoTicket.of(n1, n2, n3, n4, n5, n6);
     assertThat(ticket.countMatchingNumbers(winning)).isEqualTo(expectedMatches);
   }
 
@@ -53,7 +48,7 @@ class LottoTicketTest {
   })
   void countMatchingNumbers_order(int expectedMatches, int n1, int n2, int n3, int n4, int n5,
       int n6) {
-    LottoTicket ticket = new LottoTicket(List.of(n1, n2, n3, n4, n5, n6));
+    LottoTicket ticket = LottoTicket.of(n1, n2, n3, n4, n5, n6);
     assertThat(ticket.countMatchingNumbers(winning)).isEqualTo(expectedMatches);
   }
 }

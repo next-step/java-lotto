@@ -30,7 +30,7 @@ public class LottoMachine {
   List<LottoTicket> generateTickets(int cnt) {
     List<LottoTicket> tickets = new ArrayList<>();
     for (int i = 0; i < cnt; i++) {
-      tickets.add(new LottoTicket(Random.generate()));
+      tickets.add(LottoTicket.from(Random.generate()));
     }
     return tickets;
   }
