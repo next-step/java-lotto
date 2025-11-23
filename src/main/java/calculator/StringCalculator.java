@@ -24,7 +24,7 @@ public class StringCalculator {
     private int getCurValue(int operIndex, int curValue) {
         Operator operator = Operator.getOperator(this.expression.get(operIndex));
 
-        curValue = operator.apply(curValue, Integer.parseInt(expression.get(operIndex +1)));
+        curValue = operator.apply(curValue, StringToInt(expression.get(operIndex +1)));
 
         return curValue;
     }
@@ -37,7 +37,17 @@ public class StringCalculator {
     }
 
     private int getFirstNumber() {
-        return Integer.parseInt(this.expression.getFirst());
+        return StringToInt(this.expression.getFirst());
+    }
+    private int StringToInt(String expression) {
+        isNumberValidation(expression);
+
+        return Integer.parseInt(expression);
+    }
+    private void isNumberValidation(String expression) {
+        if(expression == null || expression.matches("\\d+")) {
+            throw new IllegalArgumentException("숫자로 이루어져 있지 않음");
+        }
     }
 
     private void validation(String expression) {

@@ -40,4 +40,12 @@ public class StringCalculatorTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("공백 문자열일 수 없습니다.");
     }
+
+    @Test
+    void 숫자가_아닐_경우_예외() {
+        assertThatThrownBy(()->{
+            new StringCalculator("1 + 2a + 3").calculate();
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자로 이루어져 있지 않음");
+    }
 }
