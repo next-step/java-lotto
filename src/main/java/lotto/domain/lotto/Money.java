@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money {
+
   private final BigDecimal amount;
 
   public Money(int amount) {
@@ -16,8 +17,10 @@ public class Money {
     this.amount = amount;
   }
 
-  private void validate(int amount){
-    if(amount < 0) throw new IllegalArgumentException("금액은 0이상이어야 합니다");
+  private void validate(int amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException("금액은 0이상이어야 합니다");
+    }
   }
 
   public Money add(Money money) {
@@ -38,7 +41,7 @@ public class Money {
     return this.amount.divide(divisor.amount, 0, RoundingMode.DOWN).intValue();
   }
 
-  private void validateDivisor(Money divisor){
+  private void validateDivisor(Money divisor) {
     if (divisor.amount.compareTo(BigDecimal.ZERO) <= 0) {
       throw new IllegalArgumentException("몫은 0보다 커야 합니다");
     }

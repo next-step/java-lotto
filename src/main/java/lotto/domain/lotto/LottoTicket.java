@@ -5,10 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.domain.game.LottoMachine;
-import lotto.domain.game.Rank;
 
 public class LottoTicket {
+
   private static final int LOTTO_CNT = 6;
 
   private final List<LottoNumber> numbers;
@@ -18,7 +17,7 @@ public class LottoTicket {
     this.numbers = List.copyOf(numbers);
   }
 
-  public LottoTicket(String numbers){
+  public LottoTicket(String numbers) {
     this(convert(parse(numbers)));
   }
 
@@ -61,8 +60,8 @@ public class LottoTicket {
   }
 
   protected boolean contains(LottoNumber bonus) {
-    for(LottoNumber number : this.numbers){
-      if(number == bonus){
+    for (LottoNumber number : this.numbers) {
+      if (number == bonus) {
         return true;
       }
     }

@@ -19,7 +19,7 @@ public class InputView {
     return scanner.nextLine();
   }
 
-  public static int inputBonusNumber(){
+  public static int inputBonusNumber() {
     System.out.println("보너스 번호를 입력해주세요.");
     return scanner.nextInt();
   }

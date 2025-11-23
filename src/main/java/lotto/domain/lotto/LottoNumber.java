@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
+
   private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
   static {
@@ -19,7 +20,7 @@ public class LottoNumber {
     this.value = value;
   }
 
-  public static LottoNumber of(int value){
+  public static LottoNumber of(int value) {
     validate(value);
     return CACHE.get(value);
   }

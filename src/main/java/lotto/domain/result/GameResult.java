@@ -13,7 +13,7 @@ public class GameResult {
   private final Map<Rank, Integer> details;
   private final BigDecimal rate;
 
-  public GameResult(Map<Rank, Integer> details, Money winningPrize, Money purchaseAmount){
+  public GameResult(Map<Rank, Integer> details, Money winningPrize, Money purchaseAmount) {
     this(details, winningPrize.divideBy(purchaseAmount));
   }
 

@@ -3,9 +3,9 @@ package lotto;
 import lotto.domain.game.LottoGame;
 import lotto.domain.game.LottoMachine;
 import lotto.domain.lotto.Money;
+import lotto.domain.lotto.Purchase;
 import lotto.domain.lotto.WinningTicket;
 import lotto.domain.result.GameResult;
-import lotto.domain.lotto.Purchase;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 

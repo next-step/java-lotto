@@ -1,6 +1,5 @@
 package lotto.domain.game;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.lotto.LottoTicket;

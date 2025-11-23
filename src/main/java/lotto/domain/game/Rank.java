@@ -15,7 +15,7 @@ public enum Rank {
   private final int matched;
   private final boolean bonusMatched;
 
-  Rank(int prize, int matched){
+  Rank(int prize, int matched) {
     this(prize, matched, false);
   }
 
