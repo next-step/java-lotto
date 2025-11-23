@@ -7,8 +7,7 @@ public class StringCalculatorApplication {
 
     public static void main(String[] args) {
         String input = InputView.readInput();
-        String[] tokens = StringCalculator.split(input);
-        StringCalculator.validateSequence(tokens);
-        OutputView.printResult(StringCalculator.calculate(tokens));
+        int result = StringCalculator.calculate(Parser.parse(input));
+        OutputView.printResult(result);
     }
 }
