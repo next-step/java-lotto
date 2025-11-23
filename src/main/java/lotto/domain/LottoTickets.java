@@ -61,7 +61,7 @@ public class LottoTickets {
     }
 
     public List<Lotto> getLottos() {
-        return new ArrayList<>(lottos);
+        return List.copyOf(lottos);
     }
 
     public WinningResult matchWith(WinningNumbers winningNumbers) {

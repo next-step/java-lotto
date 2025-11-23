@@ -54,7 +54,7 @@ public class Lotto {
             result.add(number.getValue());
         }
         Collections.sort(result);
-        return result;
+        return List.copyOf(result);
     }
 
     public boolean contains(LottoNumber number) {

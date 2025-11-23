@@ -17,6 +17,6 @@ public class ManualLottos {
     }
 
     public List<Lotto> getManualLottos() {
-        return manualLottos;
+        return List.copyOf(manualLottos);
     }
 }
