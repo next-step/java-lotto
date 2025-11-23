@@ -5,6 +5,7 @@ import lottoGame.model.winner.BeforeWinNums;
 import lottoGame.model.winner.WinnerResult;
 
 public class Lottos {
+
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -12,11 +13,21 @@ public class Lottos {
     }
 
     public WinnerResult compareAndElectWinResult(BeforeWinNums beforeWinNums) {
+        WinnerResult winnerResult = new WinnerResult();
+        for (Lotto lotto : lottos) {
+            winnerResult.addWinResult(lotto.checkIfWin(beforeWinNums));
+        }
 
-        return null;
+        return winnerResult;
     }
 
     public int size() {
-        return 0;
+        return this.lottos.size();
+    }
+
+    public List<String> convertRawString() {
+        return this.lottos.stream()
+                .map(Lotto::toString)
+                .toList();
     }
 }

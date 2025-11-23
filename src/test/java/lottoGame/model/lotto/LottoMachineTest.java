@@ -1,9 +1,9 @@
 package lottoGame.model.lotto;
 
 import static lottoGame.controller.LottoStore.PER_LOTTO_PRICE;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import lottoGame.model.price.BuyPrice;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class LottoMachineTest {
@@ -11,12 +11,14 @@ class LottoMachineTest {
 
     @Test
     void 사용자의금액만큼_로또를_발행할_수_있다() {
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoMachine lottoMachine = new LottoMachine(1000);
         BuyPrice buyPrice = new BuyPrice(14000);
-        Lottos lotto = lottoMachine.publishLottos(buyPrice);
+        Lottos lotto = lottoMachine.publish(buyPrice);
 
-        Assertions.assertThat(
+        assertThat(
                 lotto.size()
-        ).isEqualTo(buyPrice.calculateLottoCount(PER_LOTTO_PRICE));
+        ).isEqualTo(
+                buyPrice.calculateLottoCount(PER_LOTTO_PRICE)
+        );
     }
 }

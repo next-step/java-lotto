@@ -18,4 +18,8 @@ public class BuyPrice {
 
         return price / perLottoPrice;
     }
+
+    public int price() {
+        return this.price;
+    }
 }

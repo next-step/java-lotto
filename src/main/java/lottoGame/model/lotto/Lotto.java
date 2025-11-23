@@ -1,8 +1,11 @@
 package lottoGame.model.lotto;
 
+import static java.lang.String.join;
+
 import java.util.Collections;
 import java.util.List;
 import lottoGame.model.winner.BeforeWinNums;
+import lottoGame.model.winner.WinStandard;
 
 public class Lotto {
 
@@ -20,12 +23,24 @@ public class Lotto {
         this.lottoNums = lottoNums;
     }
 
-    public int compareWith(BeforeWinNums beforeWinNums) {
+    public WinStandard checkIfWin(BeforeWinNums beforeWinNums) {
         long result = this.lottoNums.stream()
                 .mapToInt(LottoNum::value)
                 .filter(beforeWinNums::isContain)
                 .count();
 
-        return Long.valueOf(result).intValue();
+        return WinStandard.findByValue(
+                Long.valueOf(result).intValue()
+        );
+    }
+
+    public String toString() {
+        return "[" + join(", ", convertString()) + "]";
+    }
+
+    private List<String> convertString() {
+        return this.lottoNums.stream()
+                .map(LottoNum::toString)
+                .toList();
     }
 }

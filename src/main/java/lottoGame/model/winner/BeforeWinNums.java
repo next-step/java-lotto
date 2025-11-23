@@ -7,7 +7,6 @@ public class BeforeWinNums {
     private final List<Integer> winNums;
 
     public BeforeWinNums(List<Integer> winNums) {
-        Collections.sort(winNums);
         this.winNums = winNums;
     }
 
