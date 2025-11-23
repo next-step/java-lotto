@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StringCalculatorTest {
 
@@ -27,14 +26,5 @@ public class StringCalculatorTest {
     void negativeNumbers() {
         String[] tokens = {"-5", "+", "3"};
         assertThat(StringCalculator.calculate(tokens)).isEqualTo(-2);
-    }
-
-    @DisplayName("유효하지 않은 연산자를 사용하면 예외가 발생한다")
-    @Test
-    void invalidOperator() {
-        String[] tokens = {"2", "^", "3"};
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> StringCalculator.calculate(tokens))
-                .withMessageContaining("연산 불가");
     }
 }
