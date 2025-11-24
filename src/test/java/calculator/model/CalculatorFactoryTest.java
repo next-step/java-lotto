@@ -2,6 +2,8 @@ package calculator.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -22,14 +24,12 @@ class CalculatorFactoryTest {
         });
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("입력값이 null 이거나 빈 문자열이면 오류가 발생한다.")
-    void nullOrEmptyExpressionTest() {
+    @NullAndEmptySource
+    void nullOrEmptyExpressionTest(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            CalculatorFactory.createCalculator(null);
-        });
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            CalculatorFactory.createCalculator("");
+            CalculatorFactory.createCalculator(input);
         });
     }
 }

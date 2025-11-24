@@ -10,16 +10,37 @@ public class Operator {
     }
 
     public Number calculate(Number former, Number latter) {
-        return switch (symbol) {
-            case PLUS -> symbol.plus(former, latter);
-            case MINUS -> symbol.minus(former, latter);
-            case MULTIPLY -> symbol.multiply(former, latter);
-            case DIVIDE -> symbol.divide(former, latter);
-        };
+        return symbol.calculate(former, latter);
     }
 
     private enum Symbol {
-        PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/");
+        PLUS("+") {
+            @Override
+            public Number calculate(Number operand1, Number operand2) {
+                return new Number(operand1.value() + operand2.value());
+            }
+        },
+        MINUS("-") {
+            @Override
+            public Number calculate(Number operand1, Number operand2) {
+                return new Number(operand1.value() - operand2.value());
+            }
+        },
+        MULTIPLY("*") {
+            @Override
+            public Number calculate(Number operand1, Number operand2) {
+                return new Number(operand1.value() * operand2.value());
+            }
+        },
+        DIVIDE("/") {
+            @Override
+            public Number calculate(Number operand1, Number operand2) {
+                if (!operand1.isDividableBy(operand2)) {
+                    throw new IllegalArgumentException("나눗셈의 결과가 정수가 아닙니다.");
+                }
+                return new Number(operand1.value() / operand2.value());
+            }
+        };
 
         private String symbol;
 
@@ -34,20 +55,6 @@ public class Operator {
                     .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 연산자입니다."));
         }
 
-        Number plus(Number left, Number right) {
-            return left.plus(right);
-        }
-
-        Number minus(Number left, Number right) {
-            return left.minus(right);
-        }
-
-        Number multiply(Number left, Number right) {
-            return left.multiply(right);
-        }
-
-        Number divide(Number left, Number right) {
-            return left.divide(right);
-        }
-    }
+        public abstract Number calculate(Number operand1, Number operand2);
+    };
 }
