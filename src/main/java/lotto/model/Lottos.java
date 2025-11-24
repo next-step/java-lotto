@@ -14,14 +14,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public LottoResults calculateResults(Lotto winningLotto) {
+    public LottoResults calculateResults(Lotto winningLotto, LottoNumber bonusNumber) {
         LottoResults results = new LottoResults();
-
         for (Lotto lotto : lottos) {
             int matchCount = lotto.countMatchNumbers(winningLotto);
-            results.updateMatchCount(matchCount);
+            boolean matchBonus = lotto.matchesBonusNumber(bonusNumber);
+            results.update(Prize.valueOf(matchCount, matchBonus));
         }
-
         return results;
     }
 

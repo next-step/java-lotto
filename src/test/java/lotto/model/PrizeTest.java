@@ -8,11 +8,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PrizeTest {
 
     @Test
-    @DisplayName("일치 개수로 상금을 올바르게 반환한다.")
+    @DisplayName("로또 숫자 일치 개수에 따른 상금을 올바르게 반환한다.")
     void fromMatchCount() {
-        assertThat(Prize.fromMatchCount(3)).isEqualTo(Prize.THREE_MATCHES);
-        assertThat(Prize.fromMatchCount(4)).isEqualTo(Prize.FOUR_MATCHES);
-        assertThat(Prize.fromMatchCount(5)).isEqualTo(Prize.FIVE_MATCHES);
-        assertThat(Prize.fromMatchCount(6)).isEqualTo(Prize.SIX_MATCHES);
+        assertThat(Prize.valueOf(2, false)).isEqualTo(Prize.MISS);
+        assertThat(Prize.valueOf(5, false)).isEqualTo(Prize.THIRD);
+        assertThat(Prize.valueOf(5, true)).isEqualTo(Prize.SECOND);
+        assertThat(Prize.valueOf(6, false)).isEqualTo(Prize.FIRST);
     }
 }
