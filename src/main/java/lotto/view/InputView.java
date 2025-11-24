@@ -1,11 +1,10 @@
 package lotto.view;
 
+import lotto.model.LottoNumber;
 import lotto.model.PurchaseAmount;
 import lotto.model.Lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputView {
     public static PurchaseAmount readBudgetInput() {
@@ -24,6 +23,13 @@ public class InputView {
             numbers.add(number);
         }
         return new Lotto(numbers);
+    }
+
+    public static LottoNumber readBonusNumberInput() {
+        Scanner scanner = new Scanner(System.in);
+        print("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+        return new LottoNumber(bonusNumber);
     }
 
     private static void print(String message) {

@@ -26,10 +26,11 @@ public class OutputView {
     }
 
     private static void printMatchCounts(LottoResults results) {
-        System.out.printf("%s- %s개%n", Prize.THREE_MATCHES, results.getMatchCount(3));
-        System.out.printf("%s- %s개%n", Prize.FOUR_MATCHES, results.getMatchCount(4));
-        System.out.printf("%s- %s개%n", Prize.FIVE_MATCHES, results.getMatchCount(5));
-        System.out.printf("%s- %s개%n", Prize.SIX_MATCHES, results.getMatchCount(6));
+        System.out.printf("%s- %s개%n", Prize.FIFTH, results.getPrizeCount(Prize.FIFTH));
+        System.out.printf("%s- %s개%n", Prize.FOURTH, results.getPrizeCount(Prize.FOURTH));
+        System.out.printf("%s- %s개%n", Prize.THIRD, results.getPrizeCount(Prize.THIRD));
+        System.out.printf("%s- %s개%n", Prize.SECOND, results.getPrizeCount(Prize.SECOND));
+        System.out.printf("%s- %s개%n", Prize.FIRST, results.getPrizeCount(Prize.FIRST));
     }
 
     private static void printRate(LottoResults results, PurchaseAmount purchaseAmount) {
