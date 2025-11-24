@@ -1,13 +1,11 @@
 package lotto.model;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto() {
         this(generateRandomNumbers());
@@ -18,42 +16,28 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
-        checkValidity(numbers);
-        Collections.sort(numbers);
-        this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+        this(numbers.stream().map(LottoNumber::new).collect(Collectors.toSet()));
     }
 
-    public List<LottoNumber> value() {
-        return Collections.unmodifiableList(this.numbers);
+    public Lotto(Set<LottoNumber> numbers) {
+        checkValidity(numbers);
+        List<LottoNumber> numbersList = new ArrayList<>(numbers);
+        Collections.sort(numbersList);
+        this.numbers = new HashSet<>(numbersList);
+    }
+
+    public Set<LottoNumber> value() {
+        return Collections.unmodifiableSet(this.numbers);
     }
 
     public int countMatchNumbers(Lotto lotto) {
-        int matchCount = 0;
-        for (LottoNumber number : this.numbers) {
-            matchCount += addMatchCount(number, lotto);
-        }
-        return matchCount;
+        return Math.toIntExact(this.numbers.stream().filter(lotto::contains).count());
     }
 
-    private void checkValidity(List<Integer> numbers) {
+    private void checkValidity(Set<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-        if (hasDuplicated(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
-    }
-
-    private boolean hasDuplicated(List<Integer> numbers) {
-        long distinctCount = numbers.stream().distinct().count();
-        return distinctCount != numbers.size();
-    }
-
-    private int addMatchCount(LottoNumber number, Lotto lotto) {
-        if (lotto.contains(number)) {
-            return 1;
-        }
-        return 0;
     }
 
     private boolean contains(LottoNumber number) {

@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
@@ -35,5 +35,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber another) {
+        return Integer.compare(this.number, another.number);
     }
 }
