@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
+import lotto.domain.LottoTicketsFactory;
 import lotto.domain.ManualLottos;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
@@ -17,7 +18,7 @@ public class LottoApplication {
         int manualCount = InputView.inputManualLottoCount();
         ManualLottos manualLottos = InputView.inputManualLottos(manualCount);
 
-        LottoTickets tickets = LottoTickets.create(purchaseAmount, manualLottos);
+        LottoTickets tickets = LottoTicketsFactory.create(purchaseAmount, manualLottos);
         ResultView.printTicketCount(tickets);
         ResultView.printLottoTickets(tickets);
 

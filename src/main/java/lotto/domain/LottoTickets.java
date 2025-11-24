@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,36 +15,6 @@ public class LottoTickets {
     public LottoTickets(List<Lotto> lottos, ManualLottos manualLottos) {
         this.lottos = lottos;
         this.manualLottos = manualLottos;
-    }
-
-    public static LottoTickets create(PurchaseAmount purchaseAmount) {
-        int count = purchaseAmount.getLottoCount();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.from(LottoNumberGenerator.generate()));
-        }
-        return new LottoTickets(lottos);
-    }
-
-    public static LottoTickets create(PurchaseAmount purchaseAmount, ManualLottos manualLottos) {
-        validateManualLottoCount(purchaseAmount, manualLottos);
-        List<Lotto> lottos = createLottos(purchaseAmount, manualLottos);
-        return new LottoTickets(lottos, manualLottos);
-    }
-
-    private static void validateManualLottoCount(PurchaseAmount purchaseAmount, ManualLottos manualLottos) {
-        if (manualLottos.getCount() > purchaseAmount.getLottoCount()) {
-            throw new IllegalArgumentException("수동로또 개수가 구입 가능한 개수보다 많습니다.");
-        }
-    }
-
-    private static List<Lotto> createLottos(PurchaseAmount purchaseAmount, ManualLottos manualLottos) {
-        List<Lotto> lottos = new ArrayList<>(manualLottos.getManualLottos());
-        int autoCount = purchaseAmount.getLottoCount() - manualLottos.getCount();
-        for (int i = 0; i < autoCount; i++) {
-            lottos.add(Lotto.from(LottoNumberGenerator.generate()));
-        }
-        return lottos;
     }
 
     public int getManualCount() {
