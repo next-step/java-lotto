@@ -1,24 +1,24 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoTickets {
     private final List<Lotto> lottos;
+    private final ManualLottos manualLottos;
 
-    public LottoTickets(List<Lotto> lottos) {
+    public LottoTickets(List<Lotto> lottos, ManualLottos manualLottos) {
         this.lottos = lottos;
+        this.manualLottos = manualLottos;
     }
 
-    public static LottoTickets create(PurchaseAmount purchaseAmount) {
-        int count = purchaseAmount.getLottoCount();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.from(LottoNumberGenerator.generate()));
-        }
-        return new LottoTickets(lottos);
+    public int getManualCount() {
+        return manualLottos.getCount();
+    }
+
+    public int getAutoCount() {
+        return lottos.size() - manualLottos.getCount();
     }
 
     public int size() {
@@ -26,10 +26,10 @@ public class LottoTickets {
     }
 
     public List<Lotto> getLottos() {
-        return new ArrayList<>(lottos);
+        return List.copyOf(lottos);
     }
 
-    public WinningResult matchWith(WinningNumbers winningNumbers){
+    public WinningResult matchWith(WinningNumbers winningNumbers) {
         Map<Rank, Integer> result = initializeResult();
         for (Lotto lotto : lottos) {
             Rank rank = winningNumbers.match(lotto);

@@ -8,8 +8,10 @@ import lotto.domain.WinningResult;
 import java.util.List;
 
 public class ResultView {
-    public static void printTicketCount(int count) {
-        System.out.println(String.format("%d개를 구매했습니다.", count));
+    public static void printTicketCount(LottoTickets tickets) {
+        int manualCount = tickets.getManualCount();
+        int autoCount = tickets.getAutoCount();
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualCount, autoCount));
     }
 
     public static void printLottoTickets(LottoTickets tickets) {
