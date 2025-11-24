@@ -34,6 +34,10 @@ public class Lotto {
         return Math.toIntExact(this.numbers.stream().filter(lotto::contains).count());
     }
 
+    public boolean matchesBonusNumber(LottoNumber bonusNumber) {
+        return contains(bonusNumber);
+    }
+
     private void checkValidity(Set<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");

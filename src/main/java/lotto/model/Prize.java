@@ -4,10 +4,12 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum Prize {
-    THREE_MATCHES(3, 5_000),
-    FOUR_MATCHES(4, 50_000),
-    FIVE_MATCHES(5, 1_500_000),
-    SIX_MATCHES(6, 2_000_000_000);
+    MISS(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private final int matchCount;
     private final int prizeValue;
@@ -23,13 +25,22 @@ public enum Prize {
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%s원)", matchCount, prizeValue);
+        if (this.equals(SECOND)) {
+            return String.format("%d개 일치, 보너스 볼 일치(%s원)", matchCount, prizeValue);
+        }
+        return String.format("%d개 일치(%s원)", matchCount, prizeValue);
     }
 
-    static Prize fromMatchCount(int matchCount) {
+    static Prize valueOf(int matchCount, boolean matchBonus) {
+        if (matchCount < 3) {
+            return MISS;
+        }
+        if (matchCount == 5 && matchBonus) {
+            return SECOND;
+        }
         return Arrays.stream(Prize.values())
                 .filter(prize -> prize.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 일치 값입니다. " + matchCount));
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 일치 값입니다. " + matchCount + matchBonus));
     }
 }
