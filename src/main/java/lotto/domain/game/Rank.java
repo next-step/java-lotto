@@ -1,6 +1,6 @@
 package lotto.domain.game;
 
-import lotto.domain.lotto.Money;
+import java.util.Arrays;
 
 public enum Rank {
 
@@ -26,12 +26,14 @@ public enum Rank {
   }
 
   public static Rank valueOf(int matched, boolean bonusMatched) {
-    for (Rank rank : values()) {
-      if (isMatch(rank, matched, bonusMatched)) {
-        return rank;
-      }
-    }
-    return NONE;
+    return Arrays.stream(values())
+        .filter(x -> isMatch(x, matched, bonusMatched))
+        .findFirst()
+        .orElse(NONE);
+  }
+
+  public int getPrize() {
+    return prize;
   }
 
   private static boolean isMatch(Rank rank, int matched,
@@ -43,10 +45,6 @@ public enum Rank {
       return true;
     }
     return rank.bonusMatched == bonusMatched;
-  }
-
-  public Money getPrize() {
-    return new Money(this.prize);
   }
 
   @Override

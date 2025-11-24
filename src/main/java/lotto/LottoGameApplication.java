@@ -25,6 +25,6 @@ public class LottoGameApplication {
     LottoGame game = new LottoGame(winning);
     GameResult gameResult = game.check(purchase);
 
-    ResultView.printResult(gameResult);
+    ResultView.printResult(gameResult, purchase.getPurchaseAmount());
   }
 }

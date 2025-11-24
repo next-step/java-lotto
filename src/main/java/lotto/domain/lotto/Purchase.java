@@ -1,6 +1,9 @@
 package lotto.domain.lotto;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import lotto.domain.game.Rank;
 
 public class Purchase {
 
@@ -12,8 +15,12 @@ public class Purchase {
     this.tickets = List.copyOf(tickets);
   }
 
-  public List<LottoTicket> getTickets() {
-    return tickets;
+  public Map<Rank, Integer> matchWith(WinningTicket winningTicket) {
+    Map<Rank, Integer> ranks = new HashMap<>();
+    for (LottoTicket ticket : tickets) {
+      ranks.compute(winningTicket.match(ticket), (k, v) -> v == null ? 1 : v + 1);
+    }
+    return ranks;
   }
 
   public int getTicketCount() {

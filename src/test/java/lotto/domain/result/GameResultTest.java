@@ -16,16 +16,19 @@ class GameResultTest {
   @Test
   void testCalculateProfitRate() {
     Map<Rank, Integer> details = new HashMap<>();
-    GameResult result = new GameResult(details, new Money(2000000000), new Money(1000));
-    assertThat(result.toString()).contains(String.valueOf((float) 2000000000 / 1000));
+    details.put(Rank.FIRST, 1);
+    GameResult result = new GameResult(details);
+    Money purchaseAmount = new Money(1000);
+    assertThat(result.getProfitMessage(purchaseAmount)).contains("2000000.00");
   }
 
   @ParameterizedTest
-  @CsvSource({"1,이익", "0.999,손해"})
-  void testExplanation(BigDecimal profit, String value) {
+  @CsvSource({"50000,50000,이익", "100000,50000,손해"})
+  void testExplanation(int purchaseAmount, int totalPrize, String value) {
     Map<Rank, Integer> details = new HashMap<>();
-    GameResult result = new GameResult(details, profit);
-    assertThat(result.toString()).contains(value);
+    details.put(Rank.FOURTH, totalPrize / 50000);
+    GameResult result = new GameResult(details);
+    assertThat(result.getProfitMessage(new Money(purchaseAmount))).contains(value);
   }
 
 }

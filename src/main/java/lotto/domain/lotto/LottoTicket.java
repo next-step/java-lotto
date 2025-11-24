@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -21,12 +20,8 @@ public class LottoTicket {
     this(convert(parse(numbers)));
   }
 
-  public static LottoTicket of(List<LottoNumber> numbers) {
-    return new LottoTicket(numbers);
-  }
-
-  public static LottoTicket of(Integer... numbers) {
-    return new LottoTicket(convert(List.of(numbers)));
+  public LottoTicket (Integer... numbers) {
+    this(convert(List.of(numbers)));
   }
 
   private static List<Integer> parse(String numbers) {
@@ -47,11 +42,14 @@ public class LottoTicket {
     }
   }
 
-  public int countMatchingNumbers(LottoTicket winningNumbers) {
-    Set<LottoNumber> winnings = new HashSet<>(winningNumbers.numbers);
-    return (int) numbers.stream()
-        .filter(winnings::contains)
+  public int matchCount(LottoTicket ticket) {
+    return (int) this.numbers.stream()
+        .filter(ticket::contains)
         .count();
+  }
+
+  public boolean contains(LottoNumber number) {
+    return this.numbers.contains(number);
   }
 
   @Override
@@ -59,12 +57,4 @@ public class LottoTicket {
     return numbers.toString();
   }
 
-  protected boolean contains(LottoNumber bonus) {
-    for (LottoNumber number : this.numbers) {
-      if (number == bonus) {
-        return true;
-      }
-    }
-    return false;
-  }
 }

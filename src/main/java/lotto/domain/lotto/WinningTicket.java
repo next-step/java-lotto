@@ -1,22 +1,22 @@
 package lotto.domain.lotto;
 
-import java.util.List;
+import lotto.domain.game.Rank;
 
-public class WinningTicket extends LottoTicket {
-
+public class WinningTicket {
+  private final LottoTicket ticket;
   private final LottoNumber bonus;
 
-  public WinningTicket(String numbers, int bonus) {
-    super(numbers);
-    this.bonus = LottoNumber.of(bonus);
-  }
-
-  public WinningTicket(List<LottoNumber> numbers, LottoNumber bonus) {
-    super(numbers);
+  public WinningTicket(LottoTicket ticket, LottoNumber bonus) {
+    this.ticket = ticket;
     this.bonus = bonus;
   }
 
-  public boolean containsBonus(LottoTicket purchased) {
-    return purchased.contains(bonus);
+  public WinningTicket(String numbers, int bonus){
+    this(new LottoTicket(numbers), LottoNumber.of(bonus));
   }
+
+  public Rank match(LottoTicket ticket) {
+    return Rank.valueOf(this.ticket.matchCount(ticket), ticket.contains(this.bonus));
+  }
+
 }

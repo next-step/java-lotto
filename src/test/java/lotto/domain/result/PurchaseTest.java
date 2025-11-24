@@ -30,8 +30,7 @@ class PurchaseTest {
   void getTickets() {
     List<LottoTicket> tickets = createTickets(3);
     Purchase purchase = new Purchase(new Money(1000), tickets);
-    assertThat(purchase.getTickets()).hasSize(3);
-    assertThat(purchase.getTickets()).isEqualTo(tickets);
+    assertThat(purchase.getTicketCount()).isEqualTo(3);
   }
 
   @Test
@@ -45,13 +44,13 @@ class PurchaseTest {
   void emptyTickets() {
     Purchase purchase = new Purchase(new Money(1000), List.of());
     assertThat(purchase.getPurchaseAmount()).isEqualTo(new Money(0));
-    assertThat(purchase.getTickets()).isEmpty();
+    assertThat(purchase.getTicketCount()).isEqualTo(0);
   }
 
   private List<LottoTicket> createTickets(int count) {
     List<LottoTicket> tickets = new ArrayList<>();
     for (int i = 0; i < count; i++) {
-      tickets.add(LottoTicket.of(1, 2, 3, 4, 5, 6));
+      tickets.add(new LottoTicket(1, 2, 3, 4, 5, 6));
     }
     return tickets;
   }
