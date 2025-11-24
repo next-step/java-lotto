@@ -62,7 +62,7 @@ public class WinningResultTest {
         for (Lotto lotto : lottos) {
             lottoList.add(lotto);
         }
-        return new LottoTickets(lottoList);
+        return new LottoTickets(lottoList, new ManualLottos(null));
     }
 
 }

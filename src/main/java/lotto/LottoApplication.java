@@ -11,12 +11,15 @@ import lotto.domain.WinningResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoApplication {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = new PurchaseAmount(InputView.inputPurchaseAmount());
 
         int manualCount = InputView.inputManualLottoCount();
-        ManualLottos manualLottos = InputView.inputManualLottos(manualCount);
+        List<String> manualLottosInputs = InputView.inputManualLottos(manualCount);
+        ManualLottos manualLottos = new ManualLottos(manualLottosInputs);
 
         LottoTickets tickets = LottoTicketsFactory.create(purchaseAmount, manualLottos);
         ResultView.printTicketCount(tickets);

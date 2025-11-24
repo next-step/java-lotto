@@ -11,12 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ManualLottosTest {
 
     @Test
-    void 수동_로또_리스트로_생성한다() {
-        Lotto lotto1 = new Lotto(1, 2, 3, 4, 5, 6);
-        Lotto lotto2 = new Lotto(7, 8, 9, 10, 11, 12);
-        List<Lotto> lottos = Arrays.asList(lotto1, lotto2);
+    void 수동_로또_문자열리스트로_생성한다() {
+        List<String> lottosInputs = Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12");
 
-        ManualLottos manualLottos = new ManualLottos(lottos);
+        ManualLottos manualLottos = new ManualLottos(lottosInputs);
 
         assertThat(manualLottos.getCount()).isEqualTo(2);
     }

@@ -8,10 +8,6 @@ public class LottoTickets {
     private final List<Lotto> lottos;
     private final ManualLottos manualLottos;
 
-    public LottoTickets(List<Lotto> lottos) {
-        this(lottos, new ManualLottos(lottos));
-    }
-
     public LottoTickets(List<Lotto> lottos, ManualLottos manualLottos) {
         this.lottos = lottos;
         this.manualLottos = manualLottos;

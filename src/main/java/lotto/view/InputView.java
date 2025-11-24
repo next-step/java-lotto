@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.ManualLottos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,20 +56,26 @@ public class InputView {
         }
     }
 
-    public static ManualLottos inputManualLottos(int count) {
+    public static List<String> inputManualLottos(int count) {
         validateCount(count);
         if (count == 0) {
-            return new ManualLottos(null);
+            return new ArrayList<>();
         }
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> manualLottos = new ArrayList<>();
+        List<String> manualLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            String input = scanner.nextLine();
-            validateNotEmpty(input);
-            manualLottos.add(parseWinningNumbers(input));
+            manualLottos.add(inputSingleManualLotto());
         }
-        return new ManualLottos(manualLottos);
+        return manualLottos;
+    }
+
+    private static String inputSingleManualLotto() {
+        String input = scanner.nextLine();
+        validateNotEmpty(input);
+//
+//        parseWinningNumbers(input);
+        return input.trim();
     }
 
     private static void validateCount(int count) {
