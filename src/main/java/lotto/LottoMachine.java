@@ -17,4 +17,12 @@ public class LottoMachine {
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
+
+    public static List<List<Integer>> generateLottos(int money) {
+        List<List<Integer>> lottos = new ArrayList<>();
+        for (int i = 0; i < money / 1000; i++) {
+            lottos.add(generateLotto());
+        }
+        return lottos;
+    }
 }

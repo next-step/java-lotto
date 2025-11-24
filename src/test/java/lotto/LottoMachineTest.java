@@ -15,4 +15,11 @@ public class LottoMachineTest {
         List<Integer> generated = LottoMachine.generateLotto();
         assertThat(generated).hasSize(6);
     }
+
+    @DisplayName("구입 금액만큼 로또를 발행한다")
+    @Test
+    void generateLottos() {
+        List<List<Integer>> lottos = LottoMachine.generateLottos(1000);
+        assertThat(lottos).hasSize(1);
+    }
 }
