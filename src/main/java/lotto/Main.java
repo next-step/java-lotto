@@ -13,10 +13,21 @@ public class Main {
 
     public static void main(String[] args) {
         printStart();
-        LottoPrice lottoPrice = inputBuyPrice();
+        int price = inputBuyPrice();
+
+        printPassiveBuyLottoCount();
+        int passiveCount = inputPassiveBuyLottoCount();
+        LottoPrice lottoPrice = new LottoPrice(price, passiveCount);
+
+        BuyLotto buyLotto = new BuyLotto();
+        if (passiveCount > 0) {
+            printPassiveBuyLotto();
+            inputPassiveBuyLotto(buyLotto, passiveCount);
+        }
+
         printLottoCount(lottoPrice);
 
-        BuyLotto buyLotto = LottoMachine.createLotto(lottoPrice);
+        LottoMachine.createLotto(buyLotto, lottoPrice);
         printBuyLotto(buyLotto);
 
         printResultLottoNumber();

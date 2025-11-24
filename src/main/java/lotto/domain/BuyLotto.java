@@ -1,11 +1,16 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class BuyLotto {
 
     private final List<Lotto> lottos;
+
+    public BuyLotto() {
+        lottos = new ArrayList<>();
+    }
 
     public BuyLotto(Integer... numbers) {
         this(List.of(new Lotto(numbers)));
@@ -27,6 +32,10 @@ public class BuyLotto {
         }
 
         return lottoResult;
+    }
+
+    public void add(Lotto lotto){
+        this.lottos.add(lotto);
     }
 
     @Override

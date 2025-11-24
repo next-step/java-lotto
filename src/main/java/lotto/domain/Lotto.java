@@ -8,7 +8,9 @@ public class Lotto {
     private final Set<NumberElement> numbers;
 
     public Lotto(Integer... numbers) {
-        this(Arrays.stream(numbers).map(NumberElement::create).collect(Collectors.toSet()));
+        this(Arrays.stream(numbers)
+                .map(NumberElement::create)
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
     }
 
     public Lotto(Set<NumberElement> numbers) {
