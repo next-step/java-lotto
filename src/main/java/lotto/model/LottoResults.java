@@ -19,14 +19,14 @@ public class LottoResults {
         prizeCounts.put(prize, prizeCounts.getOrDefault(prize, 0) + 1);
     }
 
-    public long getPrizeValue() {
+    public long getTotalPrizeValue() {
         return prizeCounts.entrySet().stream()
                 .mapToLong(entry -> (long) entry.getValue() * entry.getKey().value())
                 .sum();
     }
 
     public double getReturnRate(PurchaseAmount purchaseAmount) {
-        long totalPrize = getPrizeValue();
+        long totalPrize = getTotalPrizeValue();
         return purchaseAmount.getReturnRate(totalPrize);
     }
 
