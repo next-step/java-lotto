@@ -1,7 +1,5 @@
 package calculate.domain;
 
-import java.util.Calendar;
-
 public class Executor {
 
     private Expression expression;
@@ -15,17 +13,27 @@ public class Executor {
     }
 
     public int calculate() {
-        String[] inputList = expression.split();
+        String[] inputList = splitExpression();
+        int result = calculateFirstNumber(inputList);
+        result = calculateOtherNumber(inputList, result);
+        return result;
+    }
 
-        int result = Integer.parseInt(inputList[0]);
+    private String[] splitExpression() {
+        return expression.split();
+    }
 
+    private int calculateOtherNumber(String[] inputList, int result) {
         for (int i = 1; i < inputList.length; i += 2) {
             String operator = inputList[i];
             int value = Integer.parseInt(inputList[i+1]);
             result = Calculator.fromSymbol(operator).calculate(result, value);
         }
-
         return result;
+    }
+
+    private int calculateFirstNumber(String[] inputList) {
+        return Integer.parseInt(inputList[0]);
     }
 
 }
