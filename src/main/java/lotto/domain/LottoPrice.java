@@ -9,7 +9,7 @@ public class LottoPrice {
     private final TicketCount passiveTicketCount;
 
     public LottoPrice(int price) {
-        this(price, (price / 1_000));
+        this(price, (price / 1_000), 0);
     }
 
     public LottoPrice(int price, int passiveTicketCount) {

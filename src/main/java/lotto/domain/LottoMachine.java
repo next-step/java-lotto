@@ -20,9 +20,7 @@ public class LottoMachine {
     public static void createLotto(BuyLotto buyLotto, LottoPrice lottoPrice) {
         lottoPrice.create(() -> {
             Collections.shuffle(LottoMachine.lottoNumbers);
-            buyLotto.add(new Lotto(new HashSet<>(
-                    LottoMachine.lottoNumbers.subList(0, 6).stream().collect(Collectors.toSet())))
-            );
+            buyLotto.add(new Lotto(new HashSet<>(LottoMachine.lottoNumbers.subList(0, 6))));
         });
     }
 }
