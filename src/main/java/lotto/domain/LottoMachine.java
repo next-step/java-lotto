@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoMachine {
 
@@ -17,10 +16,12 @@ public class LottoMachine {
         }
     }
 
-    public static void createLotto(BuyLotto buyLotto, LottoPrice lottoPrice) {
+    public static PurchasedLottos createLotto(LottoPrice lottoPrice) {
+        List<Lotto> lottos = new ArrayList<>();
         lottoPrice.create(() -> {
             Collections.shuffle(LottoMachine.lottoNumbers);
-            buyLotto.add(new Lotto(new HashSet<>(LottoMachine.lottoNumbers.subList(0, 6))));
+            lottos.add(new Lotto(new HashSet<>(LottoMachine.lottoNumbers.subList(0, 6))));
         });
+        return new PurchasedLottos(lottos);
     }
 }

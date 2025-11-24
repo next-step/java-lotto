@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.BuyLotto;
+import lotto.domain.PurchasedLottos;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPrice;
 
@@ -27,11 +27,15 @@ public class InputView {
     }
 
     public static void printLottoCount(LottoPrice lottoPrice) {
-        System.out.println(String.format(LOTTO_COUNT_MESSAGE, lottoPrice.getPassiveTicketCount(), lottoPrice.getTicketCount()));
+        System.out.println(String.format(
+                LOTTO_COUNT_MESSAGE,
+                lottoPrice.getTicketCount().getPassiveTicketCount(),
+                lottoPrice.getTicketCount().getAutoTicketCount())
+        );
     }
 
-    public static void printBuyLotto(BuyLotto buyLotto) {
-        buyLotto.getLottos().stream().forEach(System.out::println);
+    public static void printBuyLotto(PurchasedLottos purchasedLottos) {
+        purchasedLottos.getLottos().stream().forEach(System.out::println);
     }
 
     public static void printPassiveBuyLottoCount() {
@@ -42,10 +46,10 @@ public class InputView {
         System.out.println(PASSIVE_BUY_MESSAGE);
     }
 
-    public static void inputPassiveBuyLotto(BuyLotto buyLotto, int count) {
+    public static void inputPassiveBuyLotto(PurchasedLottos purchasedLottos, int count) {
         scanner.nextLine();
         for (int i = 0; i < count; i++) {
-            buyLotto.add(new Lotto(StringToIntegerArray(scanner.next())));
+            purchasedLottos.add(new Lotto(StringToIntegerArray(scanner.next())));
         }
     }
 

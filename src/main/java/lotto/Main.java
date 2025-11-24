@@ -4,6 +4,8 @@ package lotto;
 import lotto.domain.*;
 
 
+import java.util.List;
+
 import static lotto.domain.LottoResult.*;
 import static lotto.view.InputView.*;
 import static lotto.view.InputView.inputBuyPrice;
@@ -19,16 +21,18 @@ public class Main {
         int passiveCount = inputPassiveBuyLottoCount();
         LottoPrice lottoPrice = new LottoPrice(price, passiveCount);
 
-        BuyLotto buyLotto = new BuyLotto();
+        PurchasedLottos purchasedLottos = new PurchasedLottos();
         if (passiveCount > 0) {
             printPassiveBuyLotto();
-            inputPassiveBuyLotto(buyLotto, passiveCount);
+            inputPassiveBuyLotto(purchasedLottos, passiveCount);
         }
 
         printLottoCount(lottoPrice);
 
-        LottoMachine.createLotto(buyLotto, lottoPrice);
-        printBuyLotto(buyLotto);
+        PurchasedLottos createLottos = LottoMachine.createLotto(lottoPrice);
+        purchasedLottos.addAll(createLottos);
+
+        printBuyLotto(purchasedLottos);
 
         printResultLottoNumber();
         Lotto resultLotto = inputResultLottoNumber();
@@ -37,7 +41,7 @@ public class Main {
         WinningLotto winningLotto = new WinningLotto(resultLotto, bonusNumber);
 
         printResultMessage();
-        LottoResult lottoResult = winningLotto.checkLottoNumber(buyLotto);
+        LottoResult lottoResult = winningLotto.checkLottoNumber(purchasedLottos);
 
         printResult(lottoResult);
         printProfit(profitPercent(lottoPrice));
