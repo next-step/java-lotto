@@ -17,7 +17,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         print("지난 주 당첨 번호를 입력해 주세요.");
         String[] inputs = scanner.nextLine().split(",");
-        List<Integer> numbers = new ArrayList<>();
+        Set<Integer> numbers = new HashSet<>();
         for (String input : inputs) {
             int number = Integer.parseInt(input.trim());
             numbers.add(number);

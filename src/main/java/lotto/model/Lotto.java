@@ -5,29 +5,28 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private final Set<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto() {
         this(generateRandomNumbers());
     }
 
     public Lotto(int... numbers) {
-        this(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
+        this(Arrays.stream(numbers).boxed().collect(Collectors.toSet()));
     }
 
-    public Lotto(List<Integer> numbers) {
-        this(numbers.stream().map(LottoNumber::new).collect(Collectors.toSet()));
+    public Lotto(Set<Integer> numbers) {
+        this(numbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
-    public Lotto(Set<LottoNumber> numbers) {
+    private Lotto(List<LottoNumber> numbers) {
         checkValidity(numbers);
-        List<LottoNumber> numbersList = new ArrayList<>(numbers);
-        Collections.sort(numbersList);
-        this.numbers = new HashSet<>(numbersList);
+        Collections.sort(numbers);
+        this.numbers = numbers;
     }
 
-    public Set<LottoNumber> value() {
-        return Collections.unmodifiableSet(this.numbers);
+    public List<LottoNumber> value() {
+        return Collections.unmodifiableList(this.numbers);
     }
 
     public int countMatchNumbers(Lotto lotto) {
@@ -38,7 +37,7 @@ public class Lotto {
         return contains(bonusNumber);
     }
 
-    private void checkValidity(Set<LottoNumber> numbers) {
+    private void checkValidity(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
@@ -48,9 +47,9 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    private static List<Integer> generateRandomNumbers() {
+    private static Set<Integer> generateRandomNumbers() {
         List<Integer> array = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
         Collections.shuffle(array);
-        return array.subList(0, 6);
+        return new HashSet<>(array.subList(0, 6));
     }
 }
