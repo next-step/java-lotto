@@ -6,13 +6,13 @@ public class WinningTicket {
   private final LottoTicket ticket;
   private final LottoNumber bonus;
 
+  public WinningTicket(String numbers, int bonus){
+    this(new LottoTicket(numbers), LottoNumber.of(bonus));
+  }
+
   public WinningTicket(LottoTicket ticket, LottoNumber bonus) {
     this.ticket = ticket;
     this.bonus = bonus;
-  }
-
-  public WinningTicket(String numbers, int bonus){
-    this(new LottoTicket(numbers), LottoNumber.of(bonus));
   }
 
   public Rank match(LottoTicket ticket) {

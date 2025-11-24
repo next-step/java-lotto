@@ -10,10 +10,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class LottoMachineTest {
 
   @ParameterizedTest
-  @CsvSource({"10000,10", "1,0", "2320,2"})
-  void lottoMachinePurchaseNTicketsBasedOnPrice(int pay, int expectedNTicket) {
+  @CsvSource({"10000,10000", "1,0", "2320,2000"})
+  void lottoMachinePurchaseNTicketsBasedOnPrice(int pay, int expected) {
     LottoMachine machine = new LottoMachine();
     Purchase tickets = machine.purchase(new Money(pay));
-    assertThat(tickets.getTicketCount()).isEqualTo(expectedNTicket);
+    assertThat(tickets.getPurchaseAmount()).isEqualTo(new Money(expected));
   }
 }

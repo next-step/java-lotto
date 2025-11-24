@@ -11,17 +11,17 @@ public class LottoTicket {
 
   private final List<LottoNumber> numbers;
 
-  public LottoTicket(List<LottoNumber> numbers) {
-    validate(numbers);
-    this.numbers = List.copyOf(numbers);
-  }
-
   public LottoTicket(String numbers) {
     this(convert(parse(numbers)));
   }
 
   public LottoTicket (Integer... numbers) {
     this(convert(List.of(numbers)));
+  }
+
+  public LottoTicket(List<LottoNumber> numbers) {
+    validate(numbers);
+    this.numbers = List.copyOf(numbers);
   }
 
   private static List<Integer> parse(String numbers) {

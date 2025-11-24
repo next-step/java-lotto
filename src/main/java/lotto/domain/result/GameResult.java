@@ -1,8 +1,8 @@
 package lotto.domain.result;
 
-
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.game.Rank;
@@ -12,8 +12,16 @@ public class GameResult {
 
   private final Map<Rank, Integer> ranks;
 
+  public GameResult(){
+    this(new HashMap<>());
+  }
+
   public GameResult(Map<Rank, Integer> ranks) {
     this.ranks = ranks;
+  }
+
+  public void updateRank(Rank rank){
+      ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
   }
 
   public String getProfitMessage(Money purchaseAmount) {
