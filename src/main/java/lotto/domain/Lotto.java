@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private List<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto(String[] numbers) {
         this(StringToList(numbers));

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGroup {
-    private static int PRICE = 1000;
-    private List<Lotto> lottos;
+    private static final int PRICE = 1000;
+    private final List<Lotto> lottos;
 
     public LottoGroup(int money) {
         this(buyLotto(money));

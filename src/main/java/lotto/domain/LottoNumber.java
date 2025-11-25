@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
-    private int number;
+    private final int number;
     public LottoNumber(int number) {
         validation(number);
         this.number = number;

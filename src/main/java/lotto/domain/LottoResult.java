@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private Map<LottoRank, Integer> result;
+    private final Map<LottoRank, Integer> result;
 
     public LottoResult(LottoGroup lottoGroup, Lotto winLotto) {
         this(calculate(lottoGroup, winLotto));
