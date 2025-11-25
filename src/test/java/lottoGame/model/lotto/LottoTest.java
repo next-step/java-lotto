@@ -49,7 +49,7 @@ class LottoTest {
 
         assertThat(
                 lotto.checkIfWin(beforeWinLotto, new LottoNum(1))
-        ).isEqualTo(WinStandard.SECOND_BONUS);
+        ).isEqualTo(WinStandard.SECOND);
     }
 
 

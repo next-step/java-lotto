@@ -4,18 +4,21 @@ import static java.lang.Math.floor;
 import static java.util.Objects.isNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class WinnerResult {
-
-    private final List<WinStandard> winResults;
+    private final Map<WinStandard, Integer> winStandardToWinCount;
 
     public WinnerResult() {
-        this(new ArrayList<>());
+        this(WinStandard.getInitWinStandardMap());
     }
 
-    public WinnerResult(List<WinStandard> winResults) {
-        this.winResults = winResults;
+    public WinnerResult(Map<WinStandard, Integer> winStandardToWinCount) {
+        this.winStandardToWinCount = winStandardToWinCount;
     }
 
     public void addWinResult(WinStandard winStandard) {
@@ -27,23 +30,46 @@ public class WinnerResult {
             return;
         }
 
-        winResults.add(winStandard);
+        Integer countBy = winStandardToWinCount.getOrDefault(winStandard, 0);
+        winStandardToWinCount.put(
+                winStandard,
+                countBy + 1
+        );
     }
 
     public int findWinCount(WinStandard winStandard) {
-        long count = this.winResults.stream()
-                .filter(winResult -> winResult.equals(winStandard))
-                .count();
+        if (isNull(winStandard) || winStandard.isNothing()) {
+            return 0;
+        }
 
-        return Long.valueOf(count).intValue();
+        return this.winStandardToWinCount.get(winStandard);
     }
 
     public double calculateRateOfReturn(int buyPrice) {
-        int totalWinReturn = this.winResults.stream()
-                .mapToInt(WinStandard::returnOfWin)
+        int totalWinReturn = this.winStandardToWinCount.entrySet().stream()
+                .mapToInt((entry) -> entry.getKey().returnOfWin() * entry.getValue())
                 .sum();
 
         double rawRate = (double) totalWinReturn / buyPrice * 100;
         return floor(rawRate) / 100.0;
+    }
+
+    public String toString(double rateOfReturn) {
+        List<Entry<WinStandard, Integer>> sortedLowWinValue = winStandardToWinCount.entrySet().stream()
+                .sorted(Entry.comparingByKey(
+                        Comparator.comparing(WinStandard::value)
+                ))
+                .toList();
+
+        StringBuilder sb = new StringBuilder();
+        for (Entry<WinStandard, Integer> winEntry : sortedLowWinValue) {
+            sb.append(winEntry.getKey().desc())
+                    .append(winEntry.getValue() + "개")
+                    .append("\n");
+        }
+
+        sb.append("총 수익률은 " + rateOfReturn + "입니다.");
+
+        return sb.toString();
     }
 }

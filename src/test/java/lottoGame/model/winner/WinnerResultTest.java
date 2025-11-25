@@ -1,5 +1,6 @@
 package lottoGame.model.winner;
 
+import static lottoGame.model.winner.WinStandard.FIFTH;
 import static lottoGame.model.winner.WinStandard.FIRST;
 import static lottoGame.model.winner.WinStandard.FOURTH;
 import static lottoGame.model.winner.WinStandard.NOTHING;
@@ -9,24 +10,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class WinnerResultTest {
 
     @Test
     void 당첨결과에서_각등수가_몇개_당첨됐는지_확인할_수_있다() {
-        WinnerResult winnerResult = new WinnerResult(
-                List.of(
-                        WinStandard.FIRST,
-                        WinStandard.SECOND,
-                        WinStandard.THIRD,
-                        WinStandard.FOURTH
-                )
-        );
+        WinnerResult winnerResult = new WinnerResult();
+        List.of(FIRST, THIRD, FOURTH, FIFTH).forEach(winnerResult::addWinResult);
 
         assertThat(winnerResult.findWinCount(FIRST)).isEqualTo(1);
-        assertThat(winnerResult.findWinCount(SECOND)).isEqualTo(1);
         assertThat(winnerResult.findWinCount(THIRD)).isEqualTo(1);
         assertThat(winnerResult.findWinCount(FOURTH)).isEqualTo(1);
+        assertThat(winnerResult.findWinCount(FIFTH)).isEqualTo(1);
     }
 
     @Test
@@ -40,9 +37,11 @@ class WinnerResultTest {
 
     @Test
     void 당첨결과에따른_수익률을_계산_할_수_있다() {
+        WinnerResult winnerResult = new WinnerResult();
+        winnerResult.addWinResult(FIFTH);
+
         assertThat(
-                new WinnerResult(List.of(WinStandard.FOURTH))
-                        .calculateRateOfReturn(14000)
+                winnerResult.calculateRateOfReturn(14000)
         ).isEqualTo(0.35);
     }
 }

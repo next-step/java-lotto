@@ -3,10 +3,10 @@ package lottoGame.model.lotto;
 import static lottoGame.fixture.LottoFixture.로또번호리스트를_오름차순으로_생성한다;
 import static lottoGame.fixture.LottoFixture.로또번호리스트를_지정해서_생성한다;
 import static lottoGame.model.winner.WinStandard.FIRST;
-import static lottoGame.model.winner.WinStandard.FOURTH;
-import static lottoGame.model.winner.WinStandard.SECOND;
-import static lottoGame.model.winner.WinStandard.SECOND_BONUS;
+import static lottoGame.model.winner.WinStandard.FIFTH;
 import static lottoGame.model.winner.WinStandard.THIRD;
+import static lottoGame.model.winner.WinStandard.SECOND;
+import static lottoGame.model.winner.WinStandard.FOURTH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -30,9 +30,9 @@ class LottosTest {
         WinnerResult winnerResult = lottos.compareAndElectWinResult(beforeWinLotto, new LottoNum(45));
 
         assertThat(winnerResult.findWinCount(FIRST)).isEqualTo(1);
-        assertThat(winnerResult.findWinCount(SECOND)).isEqualTo(1);
         assertThat(winnerResult.findWinCount(THIRD)).isEqualTo(1);
         assertThat(winnerResult.findWinCount(FOURTH)).isEqualTo(1);
+        assertThat(winnerResult.findWinCount(FIFTH)).isEqualTo(1);
     }
 
     @Test
@@ -49,7 +49,7 @@ class LottosTest {
                 new LottoNum(7)
         );
 
-        assertThat(winnerResult.findWinCount(SECOND_BONUS)).isEqualTo(1);
+        assertThat(winnerResult.findWinCount(SECOND)).isEqualTo(1);
     }
 
     @Test

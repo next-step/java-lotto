@@ -44,7 +44,7 @@ public class LottoMachine {
         }
 
         /**
-         * TODO : 피드백 주신부분 잘봤습니다.
+         * TODO : 피드백 주신부분 확인했습니다.
          *  아래 부분의 Set은 단순 중복제거 용도로 사용했습니다
          *  List를 밖으로 응답하는 이유는 당장은 외부에서 해당 메서드를 호출시 응답 결과의 갯수보장 vs 정렬관련 편의성 중 선택하는 상황이었고
          *  두 방식의 차이는 Set보다는 순서개념이 존재하는(정렬할수 있는) List가 더 유용할거라는 판단이었습니다.
@@ -59,7 +59,7 @@ public class LottoMachine {
     }
 
     public List<LottoNum> createLottoByNums(List<Integer> rawNums) {
-        if (rawNums.isEmpty() || rawNums.size() == LOTTO_NUM_COUNT) {
+        if (rawNums.isEmpty() || rawNums.size() != LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("생성할 로또의 로또번호 갯수를 정확히 입력해 주세요.");
         }
 

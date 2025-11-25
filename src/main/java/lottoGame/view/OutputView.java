@@ -2,10 +2,6 @@ package lottoGame.view;
 
 import static java.lang.String.join;
 
-import java.util.List;
-import lottoGame.model.lotto.Lotto;
-import lottoGame.model.lotto.Lottos;
-
 public class OutputView {
 
     public static void printQuestionByBuyPrice() {
@@ -24,9 +20,13 @@ public class OutputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printWinResultMsg(WinResultDto winResultDto) {
+    public static void printQuestionBonusLottoNum() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
+    public static void printWinResultMsg(String winResultMessage) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(winResultDto.toString());
+        System.out.println(winResultMessage);
     }
 }

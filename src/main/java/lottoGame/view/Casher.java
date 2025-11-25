@@ -22,13 +22,18 @@ public class Casher {
                 .toList();
     }
 
+    public static int askBonusNum() {
+        OutputView.printQuestionBonusLottoNum();
+        return InputView.inputInt();
+    }
+
     public static void informPublishedLottos(List<String> perLottoNums) {
         for (String perLottoNum : perLottoNums) {
             OutputView.printPerLottoNums(perLottoNum);
         }
     }
 
-    public static void informWinResult(WinResultDto winResultDto) {
-        OutputView.printWinResultMsg(winResultDto);
+    public static void informWinResult(String winResultMessage) {
+        OutputView.printWinResultMsg(winResultMessage);
     }
 }

@@ -27,13 +27,15 @@ public class Lotto {
         this.lottoNums = lottoNums;
     }
 
+
+    // 아래 카운트, 보너스 체크로직을 새로운 당첨객체값에 적용해야 할듯..?
     public WinStandard checkIfWin(Lotto beforeWinLotto, LottoNum bonusNum) {
         long matchCount = this.lottoNums.stream()
                 .filter(beforeWinLotto::isContain)
                 .count();
         boolean isMatchBonus = isContain(bonusNum);
 
-        return WinStandard.findByValue(
+        return WinStandard.findBy(
                 Long.valueOf(matchCount).intValue(),
                 isMatchBonus
         );

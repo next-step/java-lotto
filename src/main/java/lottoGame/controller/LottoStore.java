@@ -1,6 +1,7 @@
 package lottoGame.controller;
 
 import static lottoGame.view.Casher.askBeforeWinNums;
+import static lottoGame.view.Casher.askBonusNum;
 import static lottoGame.view.Casher.askBuyPrice;
 import static lottoGame.view.Casher.informBuyCount;
 import static lottoGame.view.Casher.informPublishedLottos;
@@ -13,7 +14,6 @@ import lottoGame.model.lotto.LottoNum;
 import lottoGame.model.lotto.Lottos;
 import lottoGame.model.price.BuyPrice;
 import lottoGame.model.winner.WinnerResult;
-import lottoGame.view.WinResultDto;
 
 public class LottoStore {
 
@@ -32,7 +32,7 @@ public class LottoStore {
                 getBeforeWinLotto(lottoMachine),
                 lottos,
                 buyPrice.price(),
-                new LottoNum(7)
+                new LottoNum(askBonusNum())
         );
     }
 
@@ -67,11 +67,8 @@ public class LottoStore {
                 bonusNum
         );
 
-        informWinResult(
-                new WinResultDto(
-                        winnerResult,
-                        price
-                )
+        informWinResult(winnerResult.toString(
+                winnerResult.calculateRateOfReturn(price))
         );
     }
 
