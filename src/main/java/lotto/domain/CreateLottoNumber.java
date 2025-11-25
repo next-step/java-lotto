@@ -22,9 +22,10 @@ public class CreateLottoNumber {
     }
 
     private static List<LottoNumber> selectLottoNumbers(List<LottoNumber> lottoNumbers) {
+        List<LottoNumber> result = new ArrayList<>();
         for(int i = 1; i <= COUNT; i++){
-            lottoNumbers.add(lottoNumbers.get(i));
+            result.add(lottoNumbers.get(i));
         }
-        return lottoNumbers;
+        return result;
     }
 }
