@@ -7,15 +7,15 @@ public enum LottoRank {
     SIX(6, 2000000000),
     ;
 
-    private final Integer matchCnt;
-    private final Integer prizeMoney;
+    private final int matchCnt;
+    private final int prizeMoney;
 
-    LottoRank(Integer matchCnt, Integer prizeMoney) {
+    LottoRank(int matchCnt, int prizeMoney) {
         this.matchCnt = matchCnt;
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank getLottoRank(Integer matchCnt) {
+    public static LottoRank getLottoRank(int matchCnt) {
         for(LottoRank lottoRank : LottoRank.values()) {
             if(lottoRank.matchCnt == matchCnt) {
                 return lottoRank;
@@ -24,11 +24,11 @@ public enum LottoRank {
         return null;
     }
 
-    public Integer getMatchCnt() {
+    public int getMatchCnt() {
         return matchCnt;
     }
 
-    public Integer getPrizeMoney() {
+    public int getPrizeMoney() {
         return prizeMoney;
     }
 }
