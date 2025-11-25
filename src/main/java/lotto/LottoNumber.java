@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Objects;
+
 public class LottoNumber {
     private int number;
     public LottoNumber(int number) {
@@ -14,5 +16,24 @@ public class LottoNumber {
 
     public int value() {
         return this.number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(number);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
     }
 }
