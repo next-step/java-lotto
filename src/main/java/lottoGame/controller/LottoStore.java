@@ -12,11 +12,11 @@ import lottoGame.model.lotto.LottoMachine;
 import lottoGame.model.lotto.LottoNum;
 import lottoGame.model.lotto.Lottos;
 import lottoGame.model.price.BuyPrice;
-import lottoGame.model.winner.BeforeWinNums;
 import lottoGame.model.winner.WinnerResult;
 import lottoGame.view.WinResultDto;
 
 public class LottoStore {
+
     public static final int PER_LOTTO_PRICE = 1_000;
 
     public void start() {
@@ -31,7 +31,8 @@ public class LottoStore {
         totalWinResult(
                 getBeforeWinLotto(lottoMachine),
                 lottos,
-                buyPrice.price()
+                buyPrice.price(),
+                new LottoNum(7)
         );
     }
 
@@ -55,8 +56,16 @@ public class LottoStore {
         return new Lotto(lottoByNums);
     }
 
-    private void totalWinResult(Lotto beforeWinLotto, Lottos lottos, int price) {
-        WinnerResult winnerResult = lottos.compareAndElectWinResult(beforeWinLotto);
+    private void totalWinResult(
+            Lotto beforeWinLotto,
+            Lottos lottos,
+            int price,
+            LottoNum bonusNum
+    ) {
+        WinnerResult winnerResult = lottos.compareAndElectWinResult(
+                beforeWinLotto,
+                bonusNum
+        );
 
         informWinResult(
                 new WinResultDto(

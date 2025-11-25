@@ -28,7 +28,7 @@ class LottoTest {
         Lotto beforeWinLotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
 
         assertThat(
-                lotto.checkIfWin(beforeWinLotto)
+                lotto.checkIfWin(beforeWinLotto, new LottoNum(7))
         ).isEqualTo(WinStandard.FIRST);
     }
 
@@ -38,8 +38,18 @@ class LottoTest {
         Lotto beforeWinLotto = new Lotto(로또번호리스트를_지정해서_생성한다(5, 11));
 
         assertThat(
-                lotto.checkIfWin(beforeWinLotto)
+                lotto.checkIfWin(beforeWinLotto, new LottoNum(7))
         ).isEqualTo(WinStandard.NOTHING);
+    }
+
+    @Test
+    void 입력받은_당첨번호목록과_보너스볼이_2등인지_비교할_수_있다() {
+        Lotto lotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
+        Lotto beforeWinLotto = new Lotto(로또번호리스트를_지정해서_생성한다(1, 7));
+
+        assertThat(
+                lotto.checkIfWin(beforeWinLotto, new LottoNum(1))
+        ).isEqualTo(WinStandard.SECOND_BONUS);
     }
 
 

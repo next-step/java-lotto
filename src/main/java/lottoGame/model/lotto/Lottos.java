@@ -1,7 +1,7 @@
 package lottoGame.model.lotto;
 
 import java.util.List;
-import lottoGame.model.winner.BeforeWinNums;
+import lottoGame.model.winner.WinStandard;
 import lottoGame.model.winner.WinnerResult;
 
 public class Lottos {
@@ -12,10 +12,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public WinnerResult compareAndElectWinResult(Lotto beforeWinLotto) {
+    public WinnerResult compareAndElectWinResult(
+            final Lotto beforeWinLotto,
+            final LottoNum bonusNum
+    ) {
         WinnerResult winnerResult = new WinnerResult();
         for (Lotto lotto : lottos) {
-            winnerResult.addWinResult(lotto.checkIfWin(beforeWinLotto));
+            WinStandard winStandard = lotto.checkIfWin(beforeWinLotto, bonusNum);
+            winnerResult.addWinResult(winStandard);
         }
 
         return winnerResult;

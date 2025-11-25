@@ -27,13 +27,15 @@ public class Lotto {
         this.lottoNums = lottoNums;
     }
 
-    public WinStandard checkIfWin(Lotto beforeWinLotto) {
-        long result = this.lottoNums.stream()
+    public WinStandard checkIfWin(Lotto beforeWinLotto, LottoNum bonusNum) {
+        long matchCount = this.lottoNums.stream()
                 .filter(beforeWinLotto::isContain)
                 .count();
+        boolean isMatchBonus = isContain(bonusNum);
 
         return WinStandard.findByValue(
-                Long.valueOf(result).intValue()
+                Long.valueOf(matchCount).intValue(),
+                isMatchBonus
         );
     }
 
