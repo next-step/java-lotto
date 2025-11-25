@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.Money;
 import lotto.domain.lotto.Purchase;
 import org.junit.jupiter.api.Test;
@@ -21,31 +22,17 @@ class PurchaseTest {
       "2000, 3, 6000"
   })
   void getPurchaseAmount(int pricePerTicket, int ticketCount, int expectedAmount) {
-    List<LottoTicket> tickets = createTickets(ticketCount);
+    LottoTickets tickets = createTickets(ticketCount);
     Purchase purchase = new Purchase(new Money(pricePerTicket), tickets);
     assertThat(purchase.getPurchaseAmount()).isEqualTo(new Money(expectedAmount));
   }
 
-  @Test
-  void getTickets() {
-    List<LottoTicket> tickets = createTickets(3);
-    Purchase purchase = new Purchase(new Money(1000), tickets);
-    assertThat(purchase.getTickets()).hasSize(3);
-    assertThat(purchase.getTickets()).isEqualTo(tickets);
-  }
 
-  @Test
-  void emptyTickets() {
-    Purchase purchase = new Purchase(new Money(1000), List.of());
-    assertThat(purchase.getPurchaseAmount()).isEqualTo(new Money(0));
-    assertThat(purchase.getTickets()).isEmpty();
-  }
-
-  private List<LottoTicket> createTickets(int count) {
+  private LottoTickets createTickets(int count) {
     List<LottoTicket> tickets = new ArrayList<>();
     for (int i = 0; i < count; i++) {
-      tickets.add(LottoTicket.of(1, 2, 3, 4, 5, 6));
+      tickets.add(new LottoTicket(1, 2, 3, 4, 5, 6));
     }
-    return tickets;
+    return new LottoTickets(tickets);
   }
 }

@@ -13,6 +13,7 @@ public class Random {
   private static List<Integer> numbers = IntStream.rangeClosed(MIN, MAX)
       .boxed()
       .collect(Collectors.toList());
+
   public static List<LottoNumber> generate() {
     Collections.shuffle(numbers);
     return numbers.subList(0, LOTTO_NUMBER_COUNT).stream()

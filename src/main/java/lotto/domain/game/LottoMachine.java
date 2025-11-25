@@ -1,9 +1,6 @@
 package lotto.domain.game;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.Money;
 import lotto.domain.lotto.Purchase;
 
@@ -22,19 +19,15 @@ public class LottoMachine {
   }
 
   public Purchase purchase(Money money) {
-    return new Purchase(money, generateTickets(calculate(money)));
+    return new Purchase(lottoTicketPrice, generateTickets(calculate(money)));
   }
 
   private int calculate(Money money) {
     return money.divideForCount(lottoTicketPrice);
   }
 
-  List<LottoTicket> generateTickets(int cnt) {
-    List<LottoTicket> tickets = new ArrayList<>();
-    for (int i = 0; i < cnt; i++) {
-      tickets.add(LottoTicket.of(Random.generate()));
-    }
-    return tickets;
+  LottoTickets generateTickets(int cnt) {
+    return new LottoTickets(cnt);
   }
 
 }

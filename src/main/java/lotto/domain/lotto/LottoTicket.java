@@ -3,31 +3,25 @@ package lotto.domain.lotto;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.domain.game.LottoMachine;
-import lotto.domain.game.Rank;
 
 public class LottoTicket {
+
   private static final int LOTTO_CNT = 6;
 
   private final List<LottoNumber> numbers;
 
-  private LottoTicket(List<LottoNumber> numbers) {
+  public LottoTicket(String numbers) {
+    this(convert(parse(numbers)));
+  }
+
+  public LottoTicket (Integer... numbers) {
+    this(convert(List.of(numbers)));
+  }
+
+  public LottoTicket(List<LottoNumber> numbers) {
     validate(numbers);
     this.numbers = List.copyOf(numbers);
-  }
-
-  public static LottoTicket of(List<LottoNumber> numbers) {
-    return new LottoTicket(numbers);
-  }
-
-  public static LottoTicket from(String numbers) {
-    return new LottoTicket(convert(parse(numbers)));
-  }
-
-  public static LottoTicket of(Integer... numbers) {
-    return new LottoTicket(convert(List.of(numbers)));
   }
 
   private static List<Integer> parse(String numbers) {
@@ -35,11 +29,6 @@ public class LottoTicket {
         .map(Integer::parseInt).toList();
   }
 
-  private static List<LottoNumber> convert(Integer... numbers) {
-    return Arrays.stream(numbers)
-        .map(LottoNumber::of)
-        .collect(Collectors.toList());
-  }
 
   private static List<LottoNumber> convert(List<Integer> numbers) {
     return numbers.stream()
@@ -53,15 +42,19 @@ public class LottoTicket {
     }
   }
 
-  public int countMatchingNumbers(LottoTicket winningNumbers) {
-    Set<LottoNumber> winnings = new HashSet<>(winningNumbers.numbers);
-    return (int) numbers.stream()
-        .filter(winnings::contains)
+  public int matchCount(LottoTicket ticket) {
+    return (int) this.numbers.stream()
+        .filter(ticket::contains)
         .count();
+  }
+
+  public boolean contains(LottoNumber number) {
+    return this.numbers.contains(number);
   }
 
   @Override
   public String toString() {
     return numbers.toString();
   }
+
 }
