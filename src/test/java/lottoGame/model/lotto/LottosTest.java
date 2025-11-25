@@ -1,6 +1,5 @@
 package lottoGame.model.lotto;
 
-import static lottoGame.fixture.LottoFixture.당첨번호리스트를_오름차순으로_생성한다;
 import static lottoGame.fixture.LottoFixture.로또번호리스트를_오름차순으로_생성한다;
 import static lottoGame.fixture.LottoFixture.로또번호리스트를_지정해서_생성한다;
 import static lottoGame.model.winner.WinStandard.FIRST;
@@ -10,7 +9,6 @@ import static lottoGame.model.winner.WinStandard.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import lottoGame.model.winner.BeforeWinNums;
 import lottoGame.model.winner.WinnerResult;
 import org.junit.jupiter.api.Test;
 
@@ -26,9 +24,9 @@ class LottosTest {
                         new Lotto(로또번호리스트를_오름차순으로_생성한다(6))
                 )
         );
-        BeforeWinNums beforeWinNums = 당첨번호리스트를_오름차순으로_생성한다(6);
+        Lotto beforeWinLotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
 
-        WinnerResult winnerResult = lottos.compareAndElectWinResult(beforeWinNums);
+        WinnerResult winnerResult = lottos.compareAndElectWinResult(beforeWinLotto);
 
         assertThat(winnerResult.findWinCount(FIRST)).isEqualTo(1);
         assertThat(winnerResult.findWinCount(SECOND)).isEqualTo(1);

@@ -12,10 +12,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public WinnerResult compareAndElectWinResult(BeforeWinNums beforeWinNums) {
+    public WinnerResult compareAndElectWinResult(Lotto beforeWinLotto) {
         WinnerResult winnerResult = new WinnerResult();
         for (Lotto lotto : lottos) {
-            winnerResult.addWinResult(lotto.checkIfWin(beforeWinNums));
+            winnerResult.addWinResult(lotto.checkIfWin(beforeWinLotto));
         }
 
         return winnerResult;

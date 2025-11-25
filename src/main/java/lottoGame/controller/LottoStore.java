@@ -4,9 +4,12 @@ import static lottoGame.view.Casher.askBeforeWinNums;
 import static lottoGame.view.Casher.askBuyPrice;
 import static lottoGame.view.Casher.informBuyCount;
 import static lottoGame.view.Casher.informPublishedLottos;
-import static lottoGame.view.Casher.informWinningLottoNums;
+import static lottoGame.view.Casher.informWinResult;
 
+import java.util.List;
+import lottoGame.model.lotto.Lotto;
 import lottoGame.model.lotto.LottoMachine;
+import lottoGame.model.lotto.LottoNum;
 import lottoGame.model.lotto.Lottos;
 import lottoGame.model.price.BuyPrice;
 import lottoGame.model.winner.BeforeWinNums;
@@ -14,25 +17,30 @@ import lottoGame.model.winner.WinnerResult;
 import lottoGame.view.WinResultDto;
 
 public class LottoStore {
-    public static final int PER_LOTTO_PRICE = 1000;
+    public static final int PER_LOTTO_PRICE = 1_000;
 
     public void start() {
         BuyPrice buyPrice = getBuyPrice();
+        LottoMachine lottoMachine = new LottoMachine(PER_LOTTO_PRICE);
 
-        Lottos lottos = buyLottos(buyPrice);
+        Lottos lottos = buyLottos(
+                lottoMachine,
+                buyPrice
+        );
 
         totalWinResult(
-                new BeforeWinNums(askBeforeWinNums()),
+                getBeforeWinLotto(lottoMachine),
                 lottos,
                 buyPrice.price()
         );
     }
 
-    private Lottos buyLottos(BuyPrice buyPrice) {
-        Lottos lottos = publishLottos(buyPrice);
+    private Lottos buyLottos(LottoMachine lottoMachine, BuyPrice buyPrice) {
+        Lottos lottos = lottoMachine.publish(buyPrice);
         informPublishedLottos(lottos.convertRawString());
         return lottos;
     }
+
 
     private BuyPrice getBuyPrice() {
         BuyPrice buyPrice = new BuyPrice(askBuyPrice());
@@ -41,16 +49,16 @@ public class LottoStore {
         return buyPrice;
     }
 
-    private Lottos publishLottos(BuyPrice buyPrice) {
-        LottoMachine lottoMachine = new LottoMachine(PER_LOTTO_PRICE);
+    private Lotto getBeforeWinLotto(LottoMachine lottoMachine) {
+        List<LottoNum> lottoByNums = lottoMachine.createLottoByNums(askBeforeWinNums());
 
-        return lottoMachine.publish(buyPrice);
+        return new Lotto(lottoByNums);
     }
 
-    private void totalWinResult(BeforeWinNums beforeWinNums, Lottos lottos, int price) {
-        WinnerResult winnerResult = lottos.compareAndElectWinResult(beforeWinNums);
+    private void totalWinResult(Lotto beforeWinLotto, Lottos lottos, int price) {
+        WinnerResult winnerResult = lottos.compareAndElectWinResult(beforeWinLotto);
 
-        informWinningLottoNums(
+        informWinResult(
                 new WinResultDto(
                         winnerResult,
                         price

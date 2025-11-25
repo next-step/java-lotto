@@ -2,7 +2,6 @@ package lottoGame.view;
 
 import java.util.Arrays;
 import java.util.List;
-import lottoGame.model.winner.WinnerResult;
 
 public class Casher {
     public static int askBuyPrice() {
@@ -29,7 +28,7 @@ public class Casher {
         }
     }
 
-    public static void informWinningLottoNums(WinResultDto winResultDto) {
+    public static void informWinResult(WinResultDto winResultDto) {
         OutputView.printWinResultMsg(winResultDto);
     }
 }
