@@ -1,13 +1,13 @@
 package lotto.ui;
 
+import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.Money;
-import lotto.domain.lotto.Purchase;
 import lotto.domain.result.GameResult;
 
 public class ResultView {
 
-  public static void printPurchase(Purchase purchase) {
-    System.out.println(purchase);
+  public static void printPurchase(LottoTickets tickets) {
+    System.out.println(tickets);
   }
 
   public static void printResult(GameResult gameResult, Money purchaseAmount) {

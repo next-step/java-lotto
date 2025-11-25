@@ -3,23 +3,18 @@ package lotto.domain.lotto;
 public class Purchase {
 
   private final Money pricePerTicket;
-  private final LottoTickets tickets;
+  private final int count;
 
-  public Purchase(Money pricePerTicket, LottoTickets tickets) {
+  public Purchase(Money pricePerTicket, int count) {
     this.pricePerTicket = pricePerTicket;
-    this.tickets = tickets;
-  }
-
-  public LottoTickets getTickets(){
-    return this.tickets;
+    this.count = count;
   }
 
   public Money getPurchaseAmount() {
-    return tickets.calculate(this.pricePerTicket);
+    return pricePerTicket.multiply(count);
   }
 
-  @Override
-  public String toString() {
-    return tickets.toString();
+  public int getCount() {
+    return this.count;
   }
 }

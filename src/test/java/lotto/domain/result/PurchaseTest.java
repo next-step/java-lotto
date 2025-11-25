@@ -22,17 +22,8 @@ class PurchaseTest {
       "2000, 3, 6000"
   })
   void getPurchaseAmount(int pricePerTicket, int ticketCount, int expectedAmount) {
-    LottoTickets tickets = createTickets(ticketCount);
-    Purchase purchase = new Purchase(new Money(pricePerTicket), tickets);
+    Purchase purchase = new Purchase(new Money(pricePerTicket), ticketCount);
     assertThat(purchase.getPurchaseAmount()).isEqualTo(new Money(expectedAmount));
   }
 
-
-  private LottoTickets createTickets(int count) {
-    List<LottoTicket> tickets = new ArrayList<>();
-    for (int i = 0; i < count; i++) {
-      tickets.add(new LottoTicket(1, 2, 3, 4, 5, 6));
-    }
-    return new LottoTickets(tickets);
-  }
 }

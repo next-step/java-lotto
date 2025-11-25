@@ -18,16 +18,16 @@ public class LottoMachine {
     this.lottoTicketPrice = lottoTicketPrice;
   }
 
+  public static LottoTickets generateTickets(Purchase purchase) {
+    return new LottoTickets(purchase.getCount());
+  }
+
   public Purchase purchase(Money money) {
-    return new Purchase(lottoTicketPrice, generateTickets(calculate(money)));
+    return new Purchase(lottoTicketPrice, calculate(money));
   }
 
   private int calculate(Money money) {
     return money.divideForCount(lottoTicketPrice);
-  }
-
-  LottoTickets generateTickets(int cnt) {
-    return new LottoTickets(cnt);
   }
 
 }

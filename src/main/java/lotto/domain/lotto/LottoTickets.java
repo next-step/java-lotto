@@ -24,14 +24,10 @@ public class LottoTickets {
     return tickets;
   }
 
-  public Money calculate(Money pricePerTicket) {
-    return pricePerTicket.multiply(tickets.size());
-  }
-
-  public GameResult updateRank(WinningTicket winningTicket) {
+  public GameResult match(WinningTicket winning) {
     GameResult gameResult = new GameResult();
     for(LottoTicket ticket : tickets){
-      gameResult.updateRank(winningTicket.match(ticket));
+      gameResult.updateRank(winning.match(ticket));
     }
     return gameResult;
   }
@@ -39,7 +35,7 @@ public class LottoTickets {
   @Override
   public String toString(){
     StringBuilder sb = new StringBuilder();
-    sb.append(tickets.size()+"개를 구매했습니다.");
+    sb.append(tickets.size()+"개를 구매했습니다.\n");
     for (int i = 0; i < tickets.size(); i++) {
       sb.append(tickets.get(i) + "\n");
     }

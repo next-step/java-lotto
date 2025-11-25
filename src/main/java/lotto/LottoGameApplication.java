@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.game.LottoGame;
 import lotto.domain.game.LottoMachine;
+import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.Money;
 import lotto.domain.lotto.Purchase;
 import lotto.domain.lotto.WinningTicket;
@@ -16,15 +16,15 @@ public class LottoGameApplication {
 
     int purchaseAmount = InputView.inputPurchaseAmount();
     Purchase purchase = machine.purchase(new Money(purchaseAmount));
-    ResultView.printPurchase(purchase);
+    LottoTickets tickets = LottoMachine.generateTickets(purchase); // purchase에서 구매할 ticket수를 구해 LottoTicket을 생성해 반환
+    ResultView.printPurchase(tickets);
 
     String winningLottoNumbers = InputView.inputWinningLottoNumbers();
     int bonusNumber = InputView.inputBonusNumber();
     WinningTicket winning = new WinningTicket(winningLottoNumbers, bonusNumber);
 
-    LottoGame game = new LottoGame(winning);
-    GameResult gameResult = game.check(purchase);
+    GameResult result = tickets.match(winning);
 
-    ResultView.printResult(gameResult, purchase.getPurchaseAmount());
+    ResultView.printResult(result, purchase.getPurchaseAmount());
   }
 }
