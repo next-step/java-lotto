@@ -1,34 +1,30 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoGroup;
 import lotto.domain.LottoRank;
-
-import java.util.List;
-import java.util.Map;
+import lotto.domain.LottoResult;
 
 public class ResultView {
 
-    public static void showBuyLottos(List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
+    public static void showBuyLottos(LottoGroup lottoGroup) {
+        System.out.printf("%d개를 구매했습니다.%n", lottoGroup.getLottoNumbers().size());
 
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottoGroup.getLottoNumbers()) {
             System.out.println(lotto);
         }
     }
 
-    public static void showStatus(Map<LottoRank, Integer> map, int money) {
+    public static void showStatus(LottoResult lottoResult, int money) {
         System.out.println("당첨 통계");
         System.out.println("-------");
 
         for (LottoRank lottoRank : LottoRank.values()) {
-            System.out.printf("%d개 일치 (%d원)- %d개%n", lottoRank.getMatchCnt(), lottoRank.getPrizeMoney(), map.get(lottoRank));
+            System.out.printf("%d개 일치 (%d원)- %d개%n", lottoRank.getMatchCnt(), lottoRank.getPrizeMoney(), lottoResult.getCntByLottoRank(lottoRank));
         }
 
-        double sum = 0;
-        for (LottoRank lottoRank : LottoRank.values()) {
-            sum += map.get(lottoRank) * lottoRank.getPrizeMoney();
-        }
+        int total = lottoResult.calTotal();
 
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", sum / (double) money);
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", (double) total / (double) money);
     }
 }
