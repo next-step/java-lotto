@@ -12,8 +12,8 @@ public class CreateLottoNumberTest {
     void create() {
         CreateLottoNumber createLottoNumber = new CreateLottoNumber();
 
-        List<Integer> lottoNumbers = createLottoNumber.createLottoNumbers();
-        System.out.println(lottoNumbers);
+        List<LottoNumber> lottoNumbers = createLottoNumber.createLottoNumbers();
+
         assertThat(lottoNumbers).hasSize(6);
     }
 }

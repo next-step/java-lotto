@@ -8,28 +8,28 @@ public class CreateLottoNumber {
     private final static int MAX_NUMBER = 45;
     private final static int MIN_NUMBER = 1;
     private final static int COUNT = 6;
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
     public CreateLottoNumber() {
         numbers = createNumbers();
     }
-    public List<Integer> createLottoNumbers() {
+    public List<LottoNumber> createLottoNumbers() {
         Collections.shuffle(this.numbers);
 
         return selectLottoNumbers();
     }
 
-    private List<Integer> selectLottoNumbers() {
-        List<Integer> lottoNumbers = new ArrayList<>();
+    private List<LottoNumber> selectLottoNumbers() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for(int i = 1; i <= COUNT; i++){
             lottoNumbers.add(numbers.get(i));
         }
         return lottoNumbers;
     }
 
-    private List<Integer> createNumbers() {
-        List<Integer> nums = new ArrayList<>();
+    private List<LottoNumber> createNumbers() {
+        List<LottoNumber> nums = new ArrayList<>();
         for(int i = MIN_NUMBER; i <= MAX_NUMBER; i++){
-            nums.add(i);
+            nums.add(new LottoNumber(i));
         }
         return nums;
     }
