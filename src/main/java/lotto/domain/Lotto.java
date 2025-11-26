@@ -12,6 +12,7 @@ public class Lotto {
 
     public Lotto() {
         List<Integer> tempNumbers = new ArrayList<>(DEFAULT_NUMBERS);
+        Collections.shuffle(tempNumbers);
         numbers = tempNumbers.subList(0, 6);
         Collections.sort(numbers);
     }
