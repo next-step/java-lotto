@@ -36,14 +36,10 @@ public class LottoResult {
   }
 
   private static long calculateTotalPrize(Map<Integer, Integer> result) {
-    Map<Integer, Integer> rank = Map.of(
-        6, 2_000_000_000,
-        5, 1_500_000,
-        4, 50_000,
-        3, 5_000);
     long totalPrize = 0;
-    for (int i = 3; i <= 6; i++) {
-      totalPrize += (long) result.getOrDefault(i, 0) * rank.get(i);
+    for (LottoRank rank : LottoRank.values()) {
+      int count = result.getOrDefault(rank.matchCount(), 0);
+      totalPrize += (long) count * rank.prize();
     }
     return totalPrize;
   }

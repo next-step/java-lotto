@@ -1,18 +1,11 @@
 package lotto.view;
 
 import java.util.List;
-import java.util.Map;
 import lotto.Lotto;
+import lotto.LottoRank;
 import lotto.LottoResult;
 
 public class ResultView {
-
-  private static final Map<Integer, Integer> RANK_PRIZE = Map.of(
-      6, 2_000_000_000,
-      5, 1_500_000,
-      4, 50_000,
-      3, 5_000
-  );
 
   public static void printPurchasedLottos(List<Lotto> lottos) {
     System.out.printf("%d개를 구매했습니다.%n", lottos.size());
@@ -27,10 +20,11 @@ public class ResultView {
     System.out.println("당첨 통계");
     System.out.println("---------");
 
-    for (int i = 3; i <= 6; i++) {
-      int count = result.matchCounts().getOrDefault(i, 0);
-      int prize = RANK_PRIZE.get(i);
-      System.out.printf("%d개 일치 (%d원)- %d개%n", i, prize, count);
+    for (LottoRank rank : LottoRank.values()) {
+      int matchCount = rank.matchCount();
+      int count = result.matchCounts().getOrDefault(matchCount, 0);
+      int prize = rank.prize();
+      System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, prize, count);
     }
 
     double profitRate = result.profitRate();
