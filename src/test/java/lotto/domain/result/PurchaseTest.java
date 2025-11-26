@@ -2,13 +2,8 @@ package lotto.domain.result;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
-import java.util.List;
-import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.Money;
 import lotto.domain.lotto.Purchase;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -16,14 +11,24 @@ class PurchaseTest {
 
   @ParameterizedTest
   @CsvSource({
-      "1000, 1, 1000",
-      "1000, 5, 5000",
-      "1000, 10, 10000",
-      "2000, 3, 6000"
+      "0, 1, 1000, 1000",
+      "2, 5, 1000, 5000",
+      "5, 10, 1000, 10000",
+      "1, 3, 2000, 6000"
   })
-  void getPurchaseAmount(int pricePerTicket, int ticketCount, int expectedAmount) {
-    Purchase purchase = new Purchase(new Money(pricePerTicket), ticketCount);
+  void getPurchaseAmount(int manualCount, int totalCount, int pricePerTicket, int expectedAmount) {
+    Purchase purchase = new Purchase(manualCount, totalCount, new Money(pricePerTicket));
     assertThat(purchase.getPurchaseAmount()).isEqualTo(new Money(expectedAmount));
   }
 
+  @ParameterizedTest
+  @CsvSource({
+      "3, 10, 7",
+      "0, 10, 10",
+      "5, 10, 5"
+  })
+  void getAutoCount(int manualCount, int totalCount, int expectedAutoCount) {
+    Purchase purchase = new Purchase(manualCount, totalCount, new Money(1000));
+    assertThat(purchase.getAutoCount()).isEqualTo(expectedAutoCount);
+  }
 }

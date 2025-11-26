@@ -1,5 +1,8 @@
 package lotto.domain.game;
 
+import java.util.ArrayList;
+import java.util.List;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.Money;
 import lotto.domain.lotto.Purchase;
@@ -18,16 +21,32 @@ public class LottoMachine {
     this.lottoTicketPrice = lottoTicketPrice;
   }
 
-  public static LottoTickets generateTickets(Purchase purchase) {
-    return new LottoTickets(purchase.getCount());
+  public int calculateTotalCount(Money budget) {
+    return budget.divideForCount(lottoTicketPrice);
   }
 
-  public Purchase purchase(Money money) {
-    return new Purchase(lottoTicketPrice, calculate(money));
+  public LottoTickets generateTickets(List<String> manualTickets, int autoCount) {
+    List<LottoTicket> manual = convert(manualTickets);
+    List<LottoTicket> auto = generate(autoCount);
+
+    List<LottoTicket> allTickets = new ArrayList<>(manual);
+    allTickets.addAll(auto);
+    return new LottoTickets(allTickets);
   }
 
-  private int calculate(Money money) {
-    return money.divideForCount(lottoTicketPrice);
+  public Purchase createPurchase(int manualCount, int totalCount) {
+    return new Purchase(manualCount, totalCount, lottoTicketPrice);
   }
 
+  private List<LottoTicket> convert(List<String> tickets) {
+    return tickets.stream().map(LottoTicket::new).toList();
+  }
+
+  private List<LottoTicket> generate(int count) {
+    List<LottoTicket> tickets = new ArrayList<>();
+    for (int i = 0; i < count; i++) {
+      tickets.add(new LottoTicket(Random.generate()));
+    }
+    return tickets;
+  }
 }
