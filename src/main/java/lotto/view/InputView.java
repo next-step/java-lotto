@@ -7,7 +7,7 @@ public class InputView {
 
     public static long initLottoPrice() {
         System.out.println("구매금액을 입력해 주세요.");
-        return SCANNER.nextLong();
+        return Long.parseLong(SCANNER.nextLine());
     }
 
     public static String initWinningLotto() {
