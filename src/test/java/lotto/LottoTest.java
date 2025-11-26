@@ -46,6 +46,14 @@ public class LottoTest {
                 .withMessageContaining("중복");
     }
 
+    @DisplayName("로또 번호는 정렬된다")
+    @Test
+    void sortLottoNumbers() {
+        Lotto lotto = new Lotto(List.of(2, 5, 8, 1, 3, 4));
+        List<Integer> expected = List.of(1, 2, 3, 4, 5, 8);
+        assertThat(lotto.numbers()).isEqualTo(expected);
+    }
+
     static Stream<List<Integer>> invalidLottoSizes() {
         return Stream.of(
                 List.of(),

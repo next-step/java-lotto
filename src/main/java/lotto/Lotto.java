@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
 
@@ -12,7 +10,13 @@ public class Lotto {
         validateNumbersCount(numbers);
         validateNumberRange(numbers);
         validateNoDuplicates(numbers);
-        this.numbers = numbers;
+        List<Integer> sortedNumbers = new ArrayList<>(numbers);
+        Collections.sort(sortedNumbers);
+        this.numbers = sortedNumbers;
+    }
+
+    public List<Integer> numbers() {
+        return new ArrayList<>(numbers);
     }
 
     private static void validateNoDuplicates(List<Integer> numbers) {
