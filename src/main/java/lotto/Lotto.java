@@ -8,10 +8,6 @@ import java.util.Set;
 
 public class Lotto {
 
-  private static final int LOTTO_NUMBER_COUNT = 6;
-  private static final int MIN_NUMBER = 1;
-  private static final int MAX_NUMBER = 45;
-
   private static final String ERROR_DUPLICATE = "로또 번호는 중복될 수 없습니다";
   private static final String ERROR_INVALID_COUNT = "로또 번호는 6개여야 한다";
   private static final String ERROR_OUT_OF_RANGE = "로또 번호는 1~45 범위의 숫자여야 한다";
