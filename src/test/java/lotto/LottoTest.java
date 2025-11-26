@@ -29,11 +29,28 @@ public class LottoTest {
                 .withMessageContaining("6개");
     }
 
+    @DisplayName("로또 번호는 1~45 사이의 숫자로 구성된다")
+    @ParameterizedTest
+    @MethodSource("invalidLottoNumberRange")
+    void validLottoNumberRange(List<Integer> numbers) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Lotto(numbers))
+                .withMessageContaining("1~45");
+    }
+
     static Stream<List<Integer>> invalidLottoSizes() {
         return Stream.of(
                 List.of(),
                 List.of(1, 2, 3, 4, 5),
                 List.of(1, 2, 3, 4, 5, 6, 7)
+        );
+    }
+
+    static Stream<List<Integer>> invalidLottoNumberRange() {
+        return Stream.of(
+                List.of(-1, 2, 3, 4, 5, 6),
+                List.of(0, 2, 3, 4, 5, 6),
+                List.of(1, 2, 3, 4, 5, 46)
         );
     }
 
