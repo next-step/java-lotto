@@ -94,4 +94,12 @@ public class LottoMachineTest {
         long totalPrize = LottoMachine.calculateTotalPrize(result);
         assertThat(totalPrize).isEqualTo(2_000_000_000 + 1_500_000 + 2 * 5_000);
     }
+
+    @DisplayName("당첨금 수익률을 계산한다")
+    @Test
+    void calculateProfitRate() {
+        long totalPrize = 15_000;
+        int money = 100_000;
+        assertThat(LottoMachine.calculateProfitRate(totalPrize, money)).isEqualTo(0.15);
+    }
 }

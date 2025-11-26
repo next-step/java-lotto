@@ -61,6 +61,10 @@ public class LottoMachine {
         return totalPrize;
     }
 
+    public static double calculateProfitRate(long totalPrize, int money) {
+        return (double) totalPrize / money;
+    }
+
     private static void validateMoney(int money) {
         if (money < PRICE_PER_LOTTO || money % PRICE_PER_LOTTO != 0) {
             throw new IllegalArgumentException(ERROR_INVALID_PURCHASE_AMOUNT);
