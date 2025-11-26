@@ -25,4 +25,14 @@ public class LottoMachine {
         }
         return lottos;
     }
+
+    public static int countMatches(List<Integer> lotto, List<Integer> winningNumbers) {
+        int count = 0;
+        for (Integer number : lotto) {
+            if (winningNumbers.contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
