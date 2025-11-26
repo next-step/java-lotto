@@ -10,9 +10,7 @@ public class LottoMachineTest {
 
     @Test
     void create() {
-        LottoMachine lottoMachine = new LottoMachine();
-
-        List<LottoNumber> lottoNumbers = lottoMachine.createLottoNumbers();
+        List<Integer> lottoNumbers = LottoMachine.createLottoNumbers();
 
         assertThat(lottoNumbers).hasSize(6);
     }

@@ -21,7 +21,7 @@ public class LottoGroup {
         List<Lotto> lottoArray = new ArrayList<>();
 
         for(int i = 0; i < cnt; i++) {
-            lottoArray.add(new Lotto(LottoMachine.createLottoNumbers()));
+            lottoArray.add(Lotto.of(LottoMachine.createLottoNumbers()));
         }
 
         return lottoArray;
