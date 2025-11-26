@@ -17,6 +17,10 @@ public class PurchaseAmount {
     return value;
   }
 
+  public int getTicketCount() {
+    return value / PRICE_PER_LOTTO;
+  }
+
   private static void validate(int amount) {
     if (amount < PRICE_PER_LOTTO || amount % PRICE_PER_LOTTO != 0) {
       throw new IllegalArgumentException(ERROR_INVALID_PURCHASE_AMOUNT);

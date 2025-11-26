@@ -9,13 +9,9 @@ public class LottoResult {
   private final Map<Integer, Integer> matchCounts;
   private final double profitRate;
 
-  public LottoResult(List<Lotto> lottos, Lotto winningNumbers) {
-    this(lottos, winningNumbers, lottos.size() * 1000);
-  }
-
-  public LottoResult(List<Lotto> lottos, Lotto winningNumbers, int money) {
+  public LottoResult(List<Lotto> lottos, Lotto winningNumbers, PurchaseAmount amount) {
     this.matchCounts = calculateResult(lottos, winningNumbers);
-    this.profitRate = calculateProfitRate(calculateTotalPrize(matchCounts), money);
+    this.profitRate = calculateProfitRate(calculateTotalPrize(matchCounts), amount);
   }
 
   public Map<Integer, Integer> matchCounts() {
@@ -44,8 +40,8 @@ public class LottoResult {
     return totalPrize;
   }
 
-  private static double calculateProfitRate(long totalPrize, int money) {
-    return (double) totalPrize / money;
+  private static double calculateProfitRate(long totalPrize, PurchaseAmount amount) {
+    return (double) totalPrize / amount.value();
   }
 
   private static int countMatches(Lotto lotto, Lotto winningNumbers) {

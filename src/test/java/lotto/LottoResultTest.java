@@ -25,7 +25,8 @@ public class LottoResultTest {
     List<Lotto> lottos = List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)),
         new Lotto(List.of(1, 2, 3, 4, 5, 7)), new Lotto(List.of(7, 8, 9, 10, 11, 12)));
     Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-    LottoResult result = new LottoResult(lottos, winningNumbers);
+    PurchaseAmount amount = new PurchaseAmount(lottos.size() * 1000);
+    LottoResult result = new LottoResult(lottos, winningNumbers, amount);
     assertThat(result.matchCounts().getOrDefault(matchCount, 0)).isEqualTo(expectedCount);
   }
 
@@ -35,7 +36,8 @@ public class LottoResultTest {
     List<Lotto> lottos = List.of(new Lotto(List.of(1, 2, 3, 7, 8, 9)),
         new Lotto(List.of(1, 2, 3, 10, 11, 12)), new Lotto(List.of(7, 8, 9, 10, 11, 12)));
     Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-    LottoResult lottoResult = new LottoResult(lottos, winningNumbers);
+    PurchaseAmount amount = new PurchaseAmount(lottos.size() * 1000);
+    LottoResult lottoResult = new LottoResult(lottos, winningNumbers, amount);
     double rounded = Math.round(lottoResult.profitRate() * 10) / 10.0;
     assertThat(rounded).isEqualTo(3.3);
   }
