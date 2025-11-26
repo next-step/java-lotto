@@ -7,28 +7,45 @@ import java.util.Objects;
 public class Lotto {
     private final List<LottoNumber> numbers;
 
-    public Lotto(String[] numbers) {
-        this(StringToList(numbers));
+    public Lotto(int... numbers) {
+        this(intToList(numbers));
+    }
+
+    public Lotto(String... numbers) {
+        this(stringToList(numbers));
     }
 
     public Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    private static List<LottoNumber> StringToList(String[] numbers) {
+    private static List<LottoNumber> stringToList(String[] numbers) {
         List<LottoNumber> list = new ArrayList<>();
-        for (int i = 0; i < numbers.length; i++) {
-            list.add(new LottoNumber(Integer.parseInt(numbers[i])));
+        for (String number : numbers) {
+            list.add(new LottoNumber(number));
+        }
+        return list;
+    }
+
+    private static List<LottoNumber> intToList(int... numbers) {
+        List<LottoNumber> list = new ArrayList<>();
+        for (int number : numbers) {
+            list.add(new LottoNumber(number));
         }
         return list;
     }
 
     public int matchedCount(Lotto lotto) {
+        return lotto.matchedCount(this.numbers);
+    }
+
+    public int matchedCount(List<LottoNumber> lottoNumbers) {
         int cnt = 0;
 
-        for (int i = 0; i < lotto.value().size(); i++) {
-            cnt += containsNumber(lotto.value().get(i));
+        for (LottoNumber lottoNumber: lottoNumbers) {
+            cnt += containsNumber(lottoNumber);
         }
+
         return cnt;
     }
 

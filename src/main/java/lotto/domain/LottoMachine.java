@@ -22,10 +22,6 @@ public class LottoMachine {
     }
 
     private static List<LottoNumber> selectLottoNumbers(List<LottoNumber> lottoNumbers) {
-        List<LottoNumber> result = new ArrayList<>();
-        for(int i = 1; i <= COUNT; i++){
-            result.add(lottoNumbers.get(i));
-        }
-        return result;
+        return lottoNumbers.subList(0,COUNT);
     }
 }

@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGroup;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 
 public class ResultView {
 
@@ -15,7 +12,7 @@ public class ResultView {
         }
     }
 
-    public static void showStatus(LottoResult lottoResult, int money) {
+    public static void showStatus(LottoResult lottoResult, Money money) {
         System.out.println("당첨 통계");
         System.out.println("-------");
 
@@ -23,8 +20,6 @@ public class ResultView {
             System.out.printf("%d개 일치 (%d원)- %d개%n", lottoRank.getMatchCnt(), lottoRank.getPrizeMoney(), lottoResult.getCntByLottoRank(lottoRank));
         }
 
-        int total = lottoResult.calTotal();
-
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", (double) total / (double) money);
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", money.getYield(lottoResult.calTotal()));
     }
 }

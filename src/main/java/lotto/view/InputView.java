@@ -12,10 +12,10 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static Lotto getInputWinNumber() {
+    public static String[] getInputWinNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        return new Lotto(parse(scanner.nextLine()));
+        return parse(scanner.nextLine());
     }
 
     private static String[] parse(String s) {

@@ -4,6 +4,11 @@ import java.util.Objects;
 
 public class LottoNumber {
     private final int number;
+
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number));
+    }
+
     public LottoNumber(int number) {
         validation(number);
         this.number = number;
