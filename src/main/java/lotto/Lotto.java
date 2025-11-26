@@ -39,7 +39,7 @@ public class Lotto {
   }
 
   private static void validateNumbersCount(List<Integer> numbers) {
-    if (numbers.size() != LOTTO_NUMBER_COUNT) {
+    if (numbers.size() != LottoConstants.LOTTO_NUMBER_COUNT) {
       throw new IllegalArgumentException(ERROR_INVALID_COUNT);
     }
   }
@@ -51,7 +51,7 @@ public class Lotto {
   }
 
   private static void checkRange(int number) {
-    if (number < MIN_NUMBER || number > MAX_NUMBER) {
+    if (number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
       throw new IllegalArgumentException(ERROR_OUT_OF_RANGE);
     }
   }

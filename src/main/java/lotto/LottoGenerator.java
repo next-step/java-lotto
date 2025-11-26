@@ -16,7 +16,7 @@ public class LottoGenerator {
 
   private static Lotto generateLotto() {
     List<Integer> numbers = new ArrayList<>();
-    for (int i = 1; i <= 45; i++) {
+    for (int i = LottoConstants.MIN_NUMBER; i <= LottoConstants.MAX_NUMBER; i++) {
       numbers.add(i);
     }
     Collections.shuffle(numbers);
