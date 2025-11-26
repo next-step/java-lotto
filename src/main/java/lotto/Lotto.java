@@ -8,27 +8,39 @@ import java.util.Set;
 
 public class Lotto {
 
+  private static final int LOTTO_NUMBER_COUNT = 6;
+  private static final int MIN_NUMBER = 1;
+  private static final int MAX_NUMBER = 45;
+
+  private static final String ERROR_DUPLICATE = "로또 번호는 중복될 수 없습니다";
+  private static final String ERROR_INVALID_COUNT = "로또 번호는 6개여야 한다";
+  private static final String ERROR_OUT_OF_RANGE = "로또 번호는 1~45 범위의 숫자여야 한다";
+
   private final List<Integer> numbers;
 
   public Lotto(List<Integer> numbers) {
-    validateNumbersCount(numbers);
-    validateNumberRange(numbers);
-    validateNoDuplicates(numbers);
+    validate(numbers);
     List<Integer> sortedNumbers = new ArrayList<>(numbers);
     Collections.sort(sortedNumbers);
     this.numbers = sortedNumbers;
   }
 
+  private static void validate(List<Integer> numbers) {
+    validateNumbersCount(numbers);
+    validateNumberRange(numbers);
+    validateNoDuplicates(numbers);
+  }
+
   private static void validateNoDuplicates(List<Integer> numbers) {
     Set<Integer> uniqueNumbers = new HashSet<>(numbers);
     if (uniqueNumbers.size() != numbers.size()) {
-      throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다");
+      throw new IllegalArgumentException(ERROR_DUPLICATE);
     }
   }
 
   private static void validateNumbersCount(List<Integer> numbers) {
-    if (numbers.size() != 6) {
-      throw new IllegalArgumentException("로또 번호는 6개여야 한다");
+    if (numbers.size() != LOTTO_NUMBER_COUNT) {
+      throw new IllegalArgumentException(ERROR_INVALID_COUNT);
     }
   }
 
@@ -39,8 +51,8 @@ public class Lotto {
   }
 
   private static void checkRange(int number) {
-    if (number < 1 || number > 45) {
-      throw new IllegalArgumentException("로또 번호는 1~45 범위의 숫자여야 한다");
+    if (number < MIN_NUMBER || number > MAX_NUMBER) {
+      throw new IllegalArgumentException(ERROR_OUT_OF_RANGE);
     }
   }
 
