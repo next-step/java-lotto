@@ -31,14 +31,18 @@ public class Money {
     return new Money(this.amount.multiply(BigDecimal.valueOf(multiplier)));
   }
 
-  public BigDecimal divideBy(Money divisor) {
+  public BigDecimal calculateRatio(Money divisor) {
     validateDivisor(divisor);
     return this.amount.divide(divisor.amount, 2, RoundingMode.HALF_UP);
   }
 
-  public int divideForCount(Money divisor) {
-    validateDivisor(divisor);
-    return this.amount.divide(divisor.amount, 0, RoundingMode.DOWN).intValue();
+  public int countUnits(Money unit) {
+    validateDivisor(unit);
+    return this.amount.divide(unit.amount, 0, RoundingMode.DOWN).intValue();
+  }
+
+  public boolean isLessThan(Money other) {
+    return this.amount.compareTo(other.amount) < 0;
   }
 
   private void validateDivisor(Money divisor) {

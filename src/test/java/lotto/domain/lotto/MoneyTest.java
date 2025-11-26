@@ -13,9 +13,9 @@ public class MoneyTest {
   }
 
   @Test
-  void divideByZeroThrowsException() {
+  void calculateRatioByZeroThrowsException() {
     Money money = new Money(1000);
-    assertThatThrownBy(() -> money.divideBy(new Money(0)))
+    assertThatThrownBy(() -> money.calculateRatio(new Money(0)))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("몫은 0보다 커야 합니다");
   }

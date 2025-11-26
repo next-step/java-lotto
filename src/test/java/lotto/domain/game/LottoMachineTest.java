@@ -10,18 +10,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class LottoMachineTest {
 
   @ParameterizedTest
-  @CsvSource({"10000,10", "1000,1", "2320,2"})
-  void calculateTotalCountBasedOnBudget(int pay, int expectedCount) {
+  @CsvSource({"10000, 3, 7", "1000, 0, 1", "10000, 5, 5"})
+  void createPurchaseWithBudgetAndManualCount(int budget, int manualCount, int expectedAutoCount) {
     LottoMachine machine = new LottoMachine();
-    int totalCount = machine.calculateTotalCount(new Money(pay));
-    assertThat(totalCount).isEqualTo(expectedCount);
+    Purchase purchase = machine.createPurchase(new Money(budget), manualCount);
+    assertThat(purchase.getAutoCount()).isEqualTo(expectedAutoCount);
   }
 
   @ParameterizedTest
-  @CsvSource({"3, 10, 10000", "0, 10, 10000", "5, 10, 10000"})
-  void createPurchaseWithManualAndTotalCount(int manualCount, int totalCount, int expectedAmount) {
+  @CsvSource({"10000, 3, 10000", "5000, 2, 5000", "2320, 0, 2000"})
+  void createPurchaseCalculatesSpentAmount(int budget, int manualCount, int expectedSpent) {
     LottoMachine machine = new LottoMachine();
-    Purchase purchase = machine.createPurchase(manualCount, totalCount);
-    assertThat(purchase.getPurchaseAmount()).isEqualTo(new Money(expectedAmount));
+    Purchase purchase = machine.createPurchase(new Money(budget), manualCount);
+    assertThat(purchase.getSpentAmount()).isEqualTo(new Money(expectedSpent));
   }
 }

@@ -19,9 +19,7 @@ public class LottoGameApplication {
     int manualCount = InputView.inputManualLottoCount();
     List<String> manualTickets = InputView.inputManualLottoTickets(manualCount);
 
-    int totalCount = machine.calculateTotalCount(new Money(purchaseAmount));
-
-    Purchase purchase = machine.createPurchase(manualCount, totalCount);
+    Purchase purchase = machine.createPurchase(new Money(purchaseAmount), manualCount);
     ResultView.printPurchase(purchase);
 
     LottoTickets tickets = machine.generateTickets(manualTickets, purchase.getAutoCount());
@@ -32,6 +30,6 @@ public class LottoGameApplication {
     WinningTicket winning = new WinningTicket(winningLottoNumbers, bonusNumber);
 
     GameResult result = tickets.match(winning);
-    ResultView.printResult(result, purchase.getPurchaseAmount());
+    ResultView.printResult(result, purchase.getSpentAmount());
   }
 }

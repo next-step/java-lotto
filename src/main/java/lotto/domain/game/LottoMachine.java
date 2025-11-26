@@ -21,8 +21,8 @@ public class LottoMachine {
     this.lottoTicketPrice = lottoTicketPrice;
   }
 
-  public int calculateTotalCount(Money budget) {
-    return budget.divideForCount(lottoTicketPrice);
+  public Purchase createPurchase(Money budget, int manualCount) {
+    return new Purchase(budget, lottoTicketPrice, manualCount);
   }
 
   public LottoTickets generateTickets(List<String> manualTickets, int autoCount) {
@@ -32,10 +32,6 @@ public class LottoMachine {
     List<LottoTicket> allTickets = new ArrayList<>(manual);
     allTickets.addAll(auto);
     return new LottoTickets(allTickets);
-  }
-
-  public Purchase createPurchase(int manualCount, int totalCount) {
-    return new Purchase(manualCount, totalCount, lottoTicketPrice);
   }
 
   private List<LottoTicket> convert(List<String> tickets) {

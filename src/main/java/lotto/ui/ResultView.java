@@ -21,7 +21,7 @@ public class ResultView {
     System.out.println(gameResult);
 
     Money totalPrize = gameResult.getTotalPrize();
-    BigDecimal profitRate = totalPrize.divideBy(purchaseAmount);
+    BigDecimal profitRate = totalPrize.calculateRatio(purchaseAmount);
     String explanation = profitRate.compareTo(BigDecimal.ONE) >= 0 ? "이익" : "손해";
 
     System.out.printf("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n",
