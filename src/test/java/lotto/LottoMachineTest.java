@@ -82,4 +82,16 @@ public class LottoMachineTest {
         assertThat(result).hasSize(lottos.size());
         assertThat(result.getOrDefault(matchCount, 0)).isEqualTo(expectedCount);
     }
+
+    @DisplayName("총 당첨금을 계산한다")
+    @Test
+    void calculateTotalPrize() {
+        Map<Integer, Integer> result = Map.of(
+                6, 1,
+                5, 1,
+                3, 2
+        );
+        long totalPrize = LottoMachine.calculateTotalPrize(result);
+        assertThat(totalPrize).isEqualTo(2_000_000_000 + 1_500_000 + 2 * 5_000);
+    }
 }

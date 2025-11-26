@@ -48,6 +48,19 @@ public class LottoMachine {
         return result;
     }
 
+    public static long calculateTotalPrize(Map<Integer, Integer> result) {
+        Map<Integer, Integer> rank = Map.of(
+                6, 2_000_000_000,
+                5, 1_500_000,
+                4, 50_000,
+                3, 5_000);
+        long totalPrize = 0;
+        for (int i = 3; i <= 6; i++) {
+            totalPrize += (long) result.getOrDefault(i, 0) * rank.get(i);
+        }
+        return totalPrize;
+    }
+
     private static void validateMoney(int money) {
         if (money < PRICE_PER_LOTTO || money % PRICE_PER_LOTTO != 0) {
             throw new IllegalArgumentException(ERROR_INVALID_PURCHASE_AMOUNT);
