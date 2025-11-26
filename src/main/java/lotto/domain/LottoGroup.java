@@ -19,7 +19,7 @@ public class LottoGroup {
         List<Lotto> lottoArray = new ArrayList<>();
 
         for(int i = 0; i < cnt; i++) {
-            lottoArray.add(new Lotto(CreateLottoNumber.createLottoNumbers()));
+            lottoArray.add(new Lotto(LottoMachine.createLottoNumbers()));
         }
 
         return lottoArray;

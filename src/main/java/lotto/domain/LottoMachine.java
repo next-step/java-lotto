@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CreateLottoNumber {
+public class LottoMachine {
     private final static int MAX_NUMBER = 45;
     private final static int MIN_NUMBER = 1;
     private final static int COUNT = 6;

@@ -6,13 +6,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CreateLottoNumberTest {
+public class LottoMachineTest {
 
     @Test
     void create() {
-        CreateLottoNumber createLottoNumber = new CreateLottoNumber();
+        LottoMachine lottoMachine = new LottoMachine();
 
-        List<LottoNumber> lottoNumbers = createLottoNumber.createLottoNumbers();
+        List<LottoNumber> lottoNumbers = lottoMachine.createLottoNumbers();
 
         assertThat(lottoNumbers).hasSize(6);
     }
