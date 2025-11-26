@@ -39,4 +39,11 @@ class LottoTest {
     void generate_lotto_passive() {
         assertThat(new Lotto(List.of(1, 2, 3, 4, 5, 6)).numbers()).hasSize(6);
     }
+
+    @Test
+    @DisplayName("로또는 6자리만 가능하다")
+    void generate_lotto_max() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)).numbers())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

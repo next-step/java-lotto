@@ -11,8 +11,15 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        validateNumbers(numbers);
         this.numbers = new ArrayList<>(numbers);
         Collections.sort(this.numbers);
+    }
+
+    private void validateNumbers(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public Lotto() {
