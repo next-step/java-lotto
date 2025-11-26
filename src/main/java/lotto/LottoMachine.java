@@ -28,19 +28,13 @@ public class LottoMachine {
         return lottos;
     }
 
-    public static int countMatches(List<Integer> lotto, List<Integer> winningNumbers) {
-        int count = 0;
-        for (Integer number : lotto) {
-            if (winningNumbers.contains(number)) {
-                count++;
-            }
-        }
-        return count;
+    public static int countMatches(Lotto lotto, Lotto winningNumbers) {
+        return lotto.countMatchingNumbers(winningNumbers);
     }
 
-    public static Map<Integer, Integer> calculateResult(List<List<Integer>> lottos, List<Integer> winningNumbers) {
+    public static Map<Integer, Integer> calculateResult(List<Lotto> lottos, Lotto winningNumbers) {
         Map<Integer, Integer> result = new HashMap<>();
-        for (List<Integer> lotto : lottos) {
+        for (Lotto lotto : lottos) {
             int match = countMatches(lotto, winningNumbers);
             result.put(match, result.getOrDefault(match, 0) + 1);
         }
