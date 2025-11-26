@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,10 @@ public class Lottos {
     this.lottos = lottos;
   }
 
+  public int count() {
+    return lottos.size();
+  }
+
   public Map<Integer, Integer> calculateMatchCounts(Lotto winningNumbers) {
     Map<Integer, Integer> result = new HashMap<>();
     for (Lotto lotto : lottos) {
@@ -19,6 +24,14 @@ public class Lottos {
       result.put(match, result.getOrDefault(match, 0) + 1);
     }
     return result;
+  }
+
+  public List<String> toDisplayStrings() {
+    List<String> lines = new ArrayList<>();
+    for (Lotto lotto : lottos) {
+      lines.add(lotto.toString());
+    }
+    return lines;
   }
 
 }

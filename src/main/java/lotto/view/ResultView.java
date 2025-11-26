@@ -1,16 +1,15 @@
 package lotto.view;
 
-import java.util.List;
-import lotto.Lotto;
 import lotto.LottoRank;
 import lotto.LottoResult;
+import lotto.Lottos;
 
 public class ResultView {
 
-  public static void printPurchasedLottos(List<Lotto> lottos) {
-    System.out.printf("%d개를 구매했습니다.%n", lottos.size());
-    for (Lotto lotto : lottos) {
-      System.out.println(lotto.numbers());
+  public static void printPurchasedLottos(Lottos lottos) {
+    System.out.printf("%d개를 구매했습니다.%n", lottos.count());
+    for (String line : lottos.toDisplayStrings()) {
+      System.out.println(line);
     }
     System.out.println();
   }

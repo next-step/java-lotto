@@ -1,16 +1,16 @@
 package lotto;
 
-import java.util.List;
+import java.util.Map;
 
 public class LottoMachine {
 
-  public static List<Lotto> generateLottos(int count) {
+  public static Lottos generateLottos(int count) {
     return LottoGenerator.generateLottos(count);
   }
 
-  public static LottoResult generateResult(List<Lotto> lottos, Lotto winningNumbers,
+  public static LottoResult generateResult(Map<Integer, Integer> matchResult,
       PurchaseAmount amount) {
-    return new LottoResult(lottos, winningNumbers, amount);
+    return new LottoResult(matchResult, amount);
   }
 
 }

@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
@@ -9,8 +7,8 @@ public class LottoResult {
   private final Map<Integer, Integer> matchCounts;
   private final double profitRate;
 
-  public LottoResult(List<Lotto> lottos, Lotto winningNumbers, PurchaseAmount amount) {
-    this.matchCounts = calculateResult(lottos, winningNumbers);
+  public LottoResult(Map<Integer, Integer> matchCounts, PurchaseAmount amount) {
+    this.matchCounts = matchCounts;
     this.profitRate = calculateProfitRate(calculateTotalPrize(matchCounts), amount);
   }
 
@@ -20,15 +18,6 @@ public class LottoResult {
 
   public double profitRate() {
     return profitRate;
-  }
-
-  private static Map<Integer, Integer> calculateResult(List<Lotto> lottos, Lotto winningNumbers) {
-    Map<Integer, Integer> result = new HashMap<>();
-    for (Lotto lotto : lottos) {
-      int match = countMatches(lotto, winningNumbers);
-      result.put(match, result.getOrDefault(match, 0) + 1);
-    }
-    return result;
   }
 
   private static long calculateTotalPrize(Map<Integer, Integer> result) {
@@ -43,9 +32,4 @@ public class LottoResult {
   private static double calculateProfitRate(long totalPrize, PurchaseAmount amount) {
     return (double) totalPrize / amount.value();
   }
-
-  private static int countMatches(Lotto lotto, Lotto winningNumbers) {
-    return lotto.countMatchingNumbers(winningNumbers);
-  }
-
 }

@@ -6,12 +6,12 @@ import java.util.List;
 
 public class LottoGenerator {
 
-  public static List<Lotto> generateLottos(int count) {
+  public static Lottos generateLottos(int count) {
     List<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < count; i++) {
       lottos.add(generateLotto());
     }
-    return lottos;
+    return new Lottos(lottos);
   }
 
   private static Lotto generateLotto() {
