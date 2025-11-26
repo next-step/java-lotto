@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoMachine {
 
@@ -39,6 +37,15 @@ public class LottoMachine {
             }
         }
         return count;
+    }
+
+    public static Map<Integer, Integer> calculateResult(List<List<Integer>> lottos, List<Integer> winningNumbers) {
+        Map<Integer, Integer> result = new HashMap<>();
+        for (List<Integer> lotto : lottos) {
+            int match = countMatches(lotto, winningNumbers);
+            result.put(match, result.getOrDefault(match, 0) + 1);
+        }
+        return result;
     }
 
     private static void validateMoney(int money) {

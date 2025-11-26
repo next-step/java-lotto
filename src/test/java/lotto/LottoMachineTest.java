@@ -3,9 +3,11 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -60,5 +62,24 @@ public class LottoMachineTest {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int result = LottoMachine.countMatches(lotto, winningNumbers);
         assertThat(result).isEqualTo(6);
+    }
+
+    @DisplayName("당첨 통계를 계산한다")
+    @ParameterizedTest
+    @CsvSource({
+            "6, 1",
+            "5, 1",
+            "0, 1",
+            "4, 0",
+            "3, 0",
+            "2, 0",
+            "1, 0",
+    })
+    void lottoResult(int matchCount, int expectedCount) {
+        List<List<Integer>> lottos = List.of(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 7), List.of(7, 8, 9, 10, 11, 12));
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        Map<Integer, Integer> result = LottoMachine.calculateResult(lottos, winningNumbers);
+        assertThat(result).hasSize(lottos.size());
+        assertThat(result.getOrDefault(matchCount, 0)).isEqualTo(expectedCount);
     }
 }
