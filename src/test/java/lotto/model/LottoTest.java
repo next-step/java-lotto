@@ -3,9 +3,6 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.Set;
-
 import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
@@ -22,6 +19,6 @@ class LottoTest {
     void invalidLottoTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(0, 2, 3, 4, 5, 6));
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 46));
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Set.of(1, 2, 3, 4, 5, 6, 7)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 6, 7));
     }
 }

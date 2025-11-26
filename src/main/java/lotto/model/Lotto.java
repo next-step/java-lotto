@@ -5,28 +5,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private final List<LottoNumber> numbers;
+    private final static int LOTTO_NUMBER_SIZE = 6;
+    private final static List<Integer> rangedInts = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    private final Set<LottoNumber> numbers;
 
     public Lotto() {
         this(generateRandomNumbers());
     }
 
     public Lotto(int... numbers) {
-        this(Arrays.stream(numbers).boxed().collect(Collectors.toSet()));
+        this(Arrays.stream(numbers).mapToObj(LottoNumberFactory::get).collect(Collectors.toSet()));
     }
 
-    public Lotto(Set<Integer> numbers) {
-        this(numbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
-    }
-
-    private Lotto(List<LottoNumber> numbers) {
+    public Lotto(Set<LottoNumber> numbers) {
         checkValidity(numbers);
-        Collections.sort(numbers);
         this.numbers = numbers;
-    }
-
-    public List<LottoNumber> value() {
-        return Collections.unmodifiableList(this.numbers);
     }
 
     public int countMatchNumbers(Lotto lotto) {
@@ -37,19 +30,25 @@ public class Lotto {
         return contains(bonusNumber);
     }
 
-    private void checkValidity(List<LottoNumber> numbers) {
-        if (numbers.size() != 6) {
+    @Override
+    public String toString() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(this.numbers);
+        Collections.sort(lottoNumbers);
+        return lottoNumbers.toString();
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    private void checkValidity(Set<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
 
-    private boolean contains(LottoNumber number) {
-        return numbers.contains(number);
-    }
-
-    private static Set<Integer> generateRandomNumbers() {
-        List<Integer> array = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
-        Collections.shuffle(array);
-        return new HashSet<>(array.subList(0, 6));
+    private static Set<LottoNumber> generateRandomNumbers() {
+        Collections.shuffle(rangedInts);
+        return rangedInts.subList(0, LOTTO_NUMBER_SIZE).stream().map(LottoNumberFactory::get).collect(Collectors.toSet());
     }
 }
