@@ -43,4 +43,18 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 1~45 범위의 숫자여야 한다");
         }
     }
+
+    public int countMatchingNumbers(Lotto winningNumbers) {
+        int count = 0;
+        for (Integer number : numbers) {
+            if (winningNumbers.contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private boolean contains(Integer number) {
+        return numbers.contains(number);
+    }
 }

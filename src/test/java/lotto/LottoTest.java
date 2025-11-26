@@ -54,6 +54,23 @@ public class LottoTest {
         assertThat(lotto.numbers()).isEqualTo(expected);
     }
 
+    @DisplayName("일치하는 번호가 없으면 0을 반환한다")
+    @Test
+    void compareNumbers_NoneEqual() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(List.of(7, 8, 9, 10, 11, 12));
+        assertThat(lotto.countMatchingNumbers(winningNumbers)).isEqualTo(0);
+    }
+
+    @DisplayName("전부 일치하면 6을 반환한다")
+    @Test
+    void compareNumbers_AllEqual() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.countMatchingNumbers(winningNumbers)).isEqualTo(6);
+    }
+
+
     static Stream<List<Integer>> invalidLottoSizes() {
         return Stream.of(
                 List.of(),
