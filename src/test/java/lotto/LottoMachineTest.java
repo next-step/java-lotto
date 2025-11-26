@@ -17,14 +17,14 @@ public class LottoMachineTest {
     @DisplayName("로또 1장에 6개의 번호가 생성된다")
     @Test
     void generateSixNumbers() {
-        List<Integer> generated = LottoMachine.generateLotto();
-        assertThat(generated).hasSize(6);
+        Lotto generated = LottoMachine.generateLotto();
+        assertThat(generated.numbers()).hasSize(6);
     }
 
     @DisplayName("구입 금액만큼 로또를 발행한다")
     @Test
     void generateLottos() {
-        List<List<Integer>> lottos = LottoMachine.generateLottos(1000);
+        List<Lotto> lottos = LottoMachine.generateLottos(1000);
         assertThat(lottos).hasSize(1);
     }
 

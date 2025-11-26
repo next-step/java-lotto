@@ -8,7 +8,7 @@ public class LottoMachine {
     private static final String ERROR_INVALID_PURCHASE_AMOUNT =
             "금액은 " + PRICE_PER_LOTTO + "원 단위로 입력해야 합니다.";
 
-    public static List<Integer> generateLotto() {
+    public static Lotto generateLotto() {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
             numbers.add(i);
@@ -16,13 +16,12 @@ public class LottoMachine {
         Collections.shuffle(numbers);
 
         List<Integer> lottoNumbers = numbers.subList(0, 6);
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return new Lotto(lottoNumbers);
     }
 
-    public static List<List<Integer>> generateLottos(int money) {
+    public static List<Lotto> generateLottos(int money) {
         validateMoney(money);
-        List<List<Integer>> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < money / PRICE_PER_LOTTO; i++) {
             lottos.add(generateLotto());
         }
