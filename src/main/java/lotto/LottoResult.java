@@ -1,18 +1,16 @@
 package lotto;
 
-import java.util.Map;
-
 public class LottoResult {
 
-  private final Map<Integer, Integer> matchCounts;
+  private final LottoMatchResult matchCounts;
   private final ProfitRate profitRate;
 
-  public LottoResult(Map<Integer, Integer> matchCounts, PurchaseAmount amount) {
+  public LottoResult(LottoMatchResult matchCounts, PurchaseAmount amount) {
     this.matchCounts = matchCounts;
     this.profitRate = new ProfitRate(matchCounts, amount);
   }
 
-  public Map<Integer, Integer> matchCounts() {
+  public LottoMatchResult matchCounts() {
     return matchCounts;
   }
 

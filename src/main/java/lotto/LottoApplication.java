@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import java.util.Map;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,7 +15,7 @@ public class LottoApplication {
 
     List<Integer> numbers = InputView.readWinningNumbers();
     Lotto winningNumbers = new Lotto(numbers);
-    Map<Integer, Integer> matchResult = lottos.calculateMatchCounts(winningNumbers);
+    LottoMatchResult matchResult = lottos.calculateMatchCounts(winningNumbers);
     ResultView.printLottoResult(LottoMachine.generateResult(matchResult, amount));
   }
 

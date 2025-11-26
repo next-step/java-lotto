@@ -17,13 +17,13 @@ public class Lottos {
     return lottos.size();
   }
 
-  public Map<Integer, Integer> calculateMatchCounts(Lotto winningNumbers) {
+  public LottoMatchResult calculateMatchCounts(Lotto winningNumbers) {
     Map<Integer, Integer> result = new HashMap<>();
     for (Lotto lotto : lottos) {
       int match = lotto.countMatchingNumbers(winningNumbers);
       result.put(match, result.getOrDefault(match, 0) + 1);
     }
-    return result;
+    return new LottoMatchResult(result);
   }
 
   public List<String> toDisplayStrings() {
