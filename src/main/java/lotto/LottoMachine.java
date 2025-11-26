@@ -1,6 +1,8 @@
 package lotto;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LottoMachine {
 
@@ -8,24 +10,9 @@ public class LottoMachine {
     private static final String ERROR_INVALID_PURCHASE_AMOUNT =
             "금액은 " + PRICE_PER_LOTTO + "원 단위로 입력해야 합니다.";
 
-    public static Lotto generateLotto() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
-        }
-        Collections.shuffle(numbers);
-
-        List<Integer> lottoNumbers = numbers.subList(0, 6);
-        return new Lotto(lottoNumbers);
-    }
-
     public static List<Lotto> generateLottos(int money) {
         validateMoney(money);
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money / PRICE_PER_LOTTO; i++) {
-            lottos.add(generateLotto());
-        }
-        return lottos;
+        return LottoGenerator.generateLottos(money / PRICE_PER_LOTTO);
     }
 
     public static int countMatches(Lotto lotto, Lotto winningNumbers) {
@@ -63,4 +50,5 @@ public class LottoMachine {
             throw new IllegalArgumentException(ERROR_INVALID_PURCHASE_AMOUNT);
         }
     }
+
 }

@@ -14,13 +14,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoMachineTest {
 
-    @DisplayName("로또 1장에 6개의 번호가 생성된다")
-    @Test
-    void generateSixNumbers() {
-        Lotto generated = LottoMachine.generateLotto();
-        assertThat(generated.numbers()).hasSize(6);
-    }
-
     @DisplayName("구입 금액만큼 로또를 발행한다")
     @Test
     void generateLottos() {
