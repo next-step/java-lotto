@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.Lotto;
 
 public class InputView {
 
@@ -13,7 +14,7 @@ public class InputView {
     return parseIntOrThrow(SCANNER.nextLine());
   }
 
-  public static List<Integer> readWinningNumbers() {
+  public static Lotto readWinningNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     String input = SCANNER.nextLine();
     String[] numberStrings = input.split(",");
@@ -21,7 +22,7 @@ public class InputView {
     for (String s : numberStrings) {
       winningNumbers.add(parseIntOrThrow(s));
     }
-    return winningNumbers;
+    return new Lotto(winningNumbers);
   }
 
   private static int parseIntOrThrow(String input) {
