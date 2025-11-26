@@ -13,7 +13,8 @@ public class LottoApplication {
     List<Lotto> lottos = LottoMachine.generateLottos(amount.getTicketCount());
     ResultView.printPurchasedLottos(lottos);
 
-    Lotto winningNumbers = InputView.readWinningNumbers();
+    List<Integer> numbers = InputView.readWinningNumbers();
+    Lotto winningNumbers = new Lotto(numbers);
     ResultView.printLottoResult(LottoMachine.generateResult(lottos, winningNumbers, amount));
   }
 
