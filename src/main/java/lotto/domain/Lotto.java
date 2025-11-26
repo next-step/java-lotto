@@ -16,10 +16,13 @@ public class Lotto {
     }
 
     public Lotto() {
+        this(generateLottoNumbers());
+    }
+
+    private static List<Integer> generateLottoNumbers() {
         List<Integer> tempNumbers = new ArrayList<>(DEFAULT_NUMBERS);
         Collections.shuffle(tempNumbers);
-        numbers = tempNumbers.subList(0, 6);
-        Collections.sort(numbers);
+        return new ArrayList<>(tempNumbers.subList(0, 6));
     }
 
     public List<Integer> numbers() {
