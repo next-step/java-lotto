@@ -8,7 +8,12 @@ import java.util.stream.IntStream;
 
 public class Lotto {
     private static final List<Integer> DEFAULT_NUMBERS = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toUnmodifiableList());
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
+
+    public Lotto(List<Integer> numbers) {
+        this.numbers = new ArrayList<>(numbers);
+        Collections.sort(this.numbers);
+    }
 
     public Lotto() {
         List<Integer> tempNumbers = new ArrayList<>(DEFAULT_NUMBERS);
@@ -18,6 +23,6 @@ public class Lotto {
     }
 
     public List<Integer> numbers() {
-        return numbers;
+        return List.copyOf(numbers);
     }
 }
