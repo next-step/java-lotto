@@ -26,7 +26,7 @@ public class ResultView {
       System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, prize, count);
     }
 
-    double profitRate = result.profitRate();
+    double profitRate = result.profitRate().value();
     String status = "손해";
     if (profitRate >= 1) {
       status = "이익";
