@@ -26,7 +26,7 @@ public class GameResult {
 
   public Money getTotalPrize() {
     int total = ranks.entrySet().stream()
-        .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
+        .mapToInt(entry -> entry.getKey().calculatePrize(entry.getValue()))
         .sum();
     return new Money(total);
   }
