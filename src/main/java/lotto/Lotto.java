@@ -14,6 +14,10 @@ public class Lotto {
 
   private final List<Integer> numbers;
 
+  public Lotto(Integer... numbers) {
+    this(List.of(numbers));
+  }
+
   public Lotto(List<Integer> numbers) {
     validate(numbers);
     List<Integer> sortedNumbers = new ArrayList<>(numbers);
