@@ -4,24 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
-import lotto.domain.lotto.Money;
 import lotto.domain.lotto.Purchase;
 
 public class LottoMachine {
 
-  private static final Money DEFAULT_LOTTO_TICKET_PRICE = new Money(1_000);
+  private static final int DEFAULT_LOTTO_TICKET_PRICE = 1_000;
 
-  private final Money lottoTicketPrice;
+  private final int lottoTicketPrice;
 
   public LottoMachine() {
     this(DEFAULT_LOTTO_TICKET_PRICE);
   }
 
-  public LottoMachine(Money lottoTicketPrice) {
+  public LottoMachine(int lottoTicketPrice) {
     this.lottoTicketPrice = lottoTicketPrice;
   }
 
-  public Purchase createPurchase(Money budget, int manualCount) {
+  public Purchase createPurchase(int budget, int manualCount) {
     return new Purchase(budget, lottoTicketPrice, manualCount);
   }
 

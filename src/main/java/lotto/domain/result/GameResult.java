@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.game.Rank;
-import lotto.domain.lotto.Money;
 
 public class GameResult {
 
@@ -24,11 +23,10 @@ public class GameResult {
     ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
   }
 
-  public Money getTotalPrize() {
-    int total = ranks.entrySet().stream()
+  public int getTotalPrize() {
+    return ranks.entrySet().stream()
         .mapToInt(entry -> entry.getKey().calculatePrize(entry.getValue()))
         .sum();
-    return new Money(total);
   }
 
   @Override

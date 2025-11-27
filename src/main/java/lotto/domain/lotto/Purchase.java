@@ -1,24 +1,33 @@
 package lotto.domain.lotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Purchase {
 
-  private final Money budget;
-  private final Money ticketPrice;
+  private final int ticketPrice;
   private final int manualCount;
   private final int autoCount;
 
-  public Purchase(Money budget, Money ticketPrice, int manualCount) {
+  public Purchase(int budget, int ticketPrice, int manualCount) {
+    validatePositive(budget, "예산");
+    validatePositive(ticketPrice, "티켓 가격");
     validateBudget(budget, ticketPrice);
-    int totalCount = budget.countUnits(ticketPrice);
+    int totalCount = budget / ticketPrice;
     validateManualCount(manualCount, totalCount);
-    this.budget = budget;
     this.ticketPrice = ticketPrice;
     this.manualCount = manualCount;
     this.autoCount = totalCount - manualCount;
   }
 
-  private static void validateBudget(Money budget, Money ticketPrice) {
-    if (budget.isLessThan(ticketPrice)) {
+  private static void validatePositive(int amount, String name) {
+    if (amount < 0) {
+      throw new IllegalArgumentException(name + "은 0 이상이어야 합니다");
+    }
+  }
+
+  private static void validateBudget(int budget, int ticketPrice) {
+    if (budget < ticketPrice) {
       throw new IllegalArgumentException("예산이 티켓 가격보다 적습니다");
     }
   }
@@ -29,10 +38,22 @@ public class Purchase {
     }
   }
 
-  public Money getSpentAmount() {
-    return ticketPrice.multiply(manualCount + autoCount);
+  public BigDecimal calculateProfitRate(int totalPrize) {
+    int spent = getSpentAmount();
+    if (spent == 0) {
+      throw new IllegalArgumentException("지출 금액이 0입니다");
+    }
+    return BigDecimal.valueOf(totalPrize)
+        .divide(BigDecimal.valueOf(spent), 2, RoundingMode.HALF_UP);
   }
 
+  public int getSpentAmount() {
+    return ticketPrice * getTotalCount();
+  }
+
+  public int getTotalCount() {
+    return manualCount + autoCount;
+  }
 
   public int getAutoCount() {
     return autoCount;

@@ -3,7 +3,6 @@ package lotto;
 import java.util.List;
 import lotto.domain.game.LottoMachine;
 import lotto.domain.lotto.LottoTickets;
-import lotto.domain.lotto.Money;
 import lotto.domain.lotto.Purchase;
 import lotto.domain.lotto.WinningTicket;
 import lotto.domain.result.GameResult;
@@ -19,7 +18,7 @@ public class LottoGameApplication {
     int manualCount = InputView.inputManualLottoCount();
     List<String> manualTickets = InputView.inputManualLottoTickets(manualCount);
 
-    Purchase purchase = machine.createPurchase(new Money(purchaseAmount), manualCount);
+    Purchase purchase = machine.createPurchase(purchaseAmount, manualCount);
     ResultView.printPurchase(purchase);
 
     LottoTickets tickets = machine.generateTickets(manualTickets, purchase.getAutoCount());
@@ -30,6 +29,6 @@ public class LottoGameApplication {
     WinningTicket winning = new WinningTicket(winningLottoNumbers, bonusNumber);
 
     GameResult result = tickets.match(winning);
-    ResultView.printResult(result, purchase.getSpentAmount());
+    ResultView.printResult(result, purchase);
   }
 }
