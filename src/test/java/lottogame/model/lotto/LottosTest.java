@@ -19,9 +19,9 @@ class LottosTest {
     void 발행된_로또들과_당첨번호를_비고해_당첨결과를_추출할_수_있다() {
         Lottos lottos = new Lottos(
                 List.of(
-                        new Lotto(로또번호리스트를_지정해서_생성한다(3, 9)),
-                        new Lotto(로또번호리스트를_지정해서_생성한다(2, 8)),
-                        new Lotto(로또번호리스트를_지정해서_생성한다(1, 7)),
+                        new Lotto(로또번호리스트를_지정해서_생성한다(4, 9)),
+                        new Lotto(로또번호리스트를_지정해서_생성한다(3, 8)),
+                        new Lotto(로또번호리스트를_지정해서_생성한다(2, 7)),
                         new Lotto(로또번호리스트를_오름차순으로_생성한다(6))
                 )
         );
@@ -40,7 +40,7 @@ class LottosTest {
     void 발행된_로또들과_당첨번호를_비고해_2등_당첨결과를_추출할_수_있다() {
         Lottos lottos = new Lottos(
                 List.of(
-                        new Lotto(로또번호리스트를_지정해서_생성한다(1, 7))
+                        new Lotto(로또번호리스트를_지정해서_생성한다(2, 7))
                 )
         );
         WinningLottoNums winningLottoNums = new WinningLottoNums(

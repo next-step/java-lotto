@@ -4,6 +4,8 @@ import static lottogame.controller.LottoStore.PER_LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
+import java.util.Set;
 import lottogame.model.price.LottoPurchasePrice;
 import org.junit.jupiter.api.Test;
 
@@ -23,17 +25,17 @@ class LottoMachineTest {
         );
     }
 
-//    @Test
-//    void 요청받은_갯수만큼_로또번호목록을_생성할_수_있다() {
-//        assertThat(
-//                new LottoMachine(1000).createLottoByCount(6).size()
-//        ).isEqualTo(6);
-//    }
-//
-//    @Test
-//    void 요청받은_갯수가_0이하면_예외처리_할_수_있다() {
-//        assertThatThrownBy(
-//                () -> new LottoMachine(1000).createLottoByCount(0)
-//        ).isInstanceOf(IllegalArgumentException.class);
-//    }
+    @Test
+    void 요청받은_갯수만큼_로또번호목록을_생성할_수_있다() {
+        assertThat(
+                new LottoMachine(1000).createLottoByNums(Set.of(1,2,3,4,5,6)).size()
+        ).isEqualTo(6);
+    }
+
+    @Test
+    void 요청받은_갯수가_0이하면_예외처리_할_수_있다() {
+        assertThatThrownBy(
+                () -> new LottoMachine(1000).createLottoByNums(Set.of())
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
 }

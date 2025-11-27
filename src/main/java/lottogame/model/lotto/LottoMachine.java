@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lottogame.model.price.LottoPurchasePrice;
 
 public class LottoMachine {
@@ -38,7 +39,7 @@ public class LottoMachine {
         );
     }
 
-    private List<LottoNum> createLottoByCount(int numCount) {
+    private Set<LottoNum> createLottoByCount(int numCount) {
         if (numCount <= 0) {
             throw new IllegalArgumentException("생성할 로또의 로또번호 갯수를 입력해 주세요.");
         }
@@ -48,21 +49,16 @@ public class LottoMachine {
             lottoNums.add(createLottoNum());
         }
 
-        return new ArrayList<>(lottoNums);
+        return lottoNums;
     }
 
-    public List<LottoNum> createLottoByNums(List<Integer> rawNums) {
+    public Set<LottoNum> createLottoByNums(Set<Integer> rawNums) {
         if (rawNums.isEmpty() || rawNums.size() != LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("생성할 로또의 로또번호 갯수를 정확히 입력해 주세요.");
         }
 
-        Set<LottoNum> lottoNums = new HashSet<>();
-        while (lottoNums.size() < LOTTO_NUM_COUNT) {
-            lottoNums.add(createLottoNum());
-        }
-
-        return new ArrayList<>(lottoNums);
+        return rawNums.stream()
+                .map(LottoNum::new)
+                .collect(Collectors.toSet());
     }
-
-
 }

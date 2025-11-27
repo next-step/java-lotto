@@ -7,7 +7,7 @@ import static lottogame.view.Casher.informBuyCount;
 import static lottogame.view.Casher.informPublishedLottos;
 import static lottogame.view.Casher.informWinResult;
 
-import java.util.List;
+import java.util.Set;
 import lottogame.model.lotto.Lotto;
 import lottogame.model.lotto.LottoMachine;
 import lottogame.model.lotto.LottoNum;
@@ -26,16 +26,17 @@ public class LottoStore {
 
         Lottos lottos = buyLottos(lottoMachine, lottoPurchasePrice);
 
-        WinnerResult winnerResult = lottos.compareAndElectWinResult(getWinningLottoNums(lottoMachine));
+        WinnerResult winnerResult = lottos.compareAndElectWinResult(
+                getWinningLottoNums(lottoMachine));
 
         informWinResult(winnerResult, lottoPurchasePrice.price());
     }
 
-    private WinningLottoNums getWinningLottoNums(LottoMachine lottoMachine) {
-        List<LottoNum> lottoByNums = lottoMachine.createLottoByNums(askBeforeWinNums());
-        int bonusNum = askBonusNum();
+    private LottoPurchasePrice getLottoPurchasePrice() {
+        LottoPurchasePrice lottoPurchasePrice = new LottoPurchasePrice(askBuyPrice());
+        informBuyCount(lottoPurchasePrice.calculateLottoCount(PER_LOTTO_PRICE));
 
-        return new WinningLottoNums(new Lotto(lottoByNums), new LottoNum(bonusNum));
+        return lottoPurchasePrice;
     }
 
     private Lottos buyLottos(LottoMachine lottoMachine, LottoPurchasePrice lottoPurchasePrice) {
@@ -44,11 +45,10 @@ public class LottoStore {
         return lottos;
     }
 
+    private WinningLottoNums getWinningLottoNums(LottoMachine lottoMachine) {
+        Set<LottoNum> lottoByNums = lottoMachine.createLottoByNums(askBeforeWinNums());
+        int bonusNum = askBonusNum();
 
-    private LottoPurchasePrice getLottoPurchasePrice() {
-        LottoPurchasePrice lottoPurchasePrice = new LottoPurchasePrice(askBuyPrice());
-        informBuyCount(lottoPurchasePrice.calculateLottoCount(PER_LOTTO_PRICE));
-
-        return lottoPurchasePrice;
+        return new WinningLottoNums(new Lotto(lottoByNums), new LottoNum(bonusNum));
     }
 }

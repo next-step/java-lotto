@@ -24,7 +24,7 @@ class LottoTest {
     @Test
     void 전달받은_로또와_객체의_로또를_비교해_같은번호의_갯수를_카운팅할_수_있다() {
         Lotto lotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
-        Lotto winLotto = new Lotto(로또번호리스트를_지정해서_생성한다(1, 7));
+        Lotto winLotto = new Lotto(로또번호리스트를_지정해서_생성한다(2, 7));
 
         assertThat(
                 winLotto.findMatchCountBy(lotto)

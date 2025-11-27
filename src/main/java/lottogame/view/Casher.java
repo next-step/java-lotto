@@ -1,5 +1,6 @@
 package lottogame.view;
 
+import static lottogame.model.winner.WinStandard.FIFTH;
 import static lottogame.model.winner.WinStandard.FIRST;
 import static lottogame.model.winner.WinStandard.FOURTH;
 import static lottogame.model.winner.WinStandard.SECOND;
@@ -7,6 +8,8 @@ import static lottogame.model.winner.WinStandard.THIRD;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lottogame.model.winner.WinnerResult;
 
 public class Casher {
@@ -26,13 +29,13 @@ public class Casher {
         OutputView.printBuyLottoCount(buyCount);
     }
 
-    public static List<Integer> askBeforeWinNums() {
+    public static Set<Integer> askBeforeWinNums() {
         OutputView.printQuestionBeforeWinNums();
         String rawValue = InputView.inputString();
 
         return Arrays.stream(rawValue.split(", "))
                 .map(Integer::parseInt)
-                .toList();
+                .collect(Collectors.toSet());
     }
 
     public static int askBonusNum() {
@@ -47,12 +50,11 @@ public class Casher {
     }
 
     public static void informWinResult(WinnerResult winnerResult, int lottoPurchasePrice) {
-        String msg = FIRST_WIN_MESSAGE + winnerResult.findWinCount(FIRST)
-                + SECOND_WIN_MESSAGE + winnerResult.findWinCount(SECOND)
-                + THIRD_WIN_MESSAGE + winnerResult.findWinCount(THIRD)
-                + FOURTH_WIN_MESSAGE + winnerResult.findWinCount(FOURTH)
-                + FIFTH_WIN_MESSAGE + winnerResult.findWinCount(FIRST)
-                + FIFTH_WIN_MESSAGE + winnerResult.findWinCount(FIRST)
+        String msg = FIRST_WIN_MESSAGE + winnerResult.findWinCount(FIRST) + "개\n"
+                + SECOND_WIN_MESSAGE + winnerResult.findWinCount(SECOND) + "개\n"
+                + THIRD_WIN_MESSAGE + winnerResult.findWinCount(THIRD) + "개\n"
+                + FOURTH_WIN_MESSAGE + winnerResult.findWinCount(FOURTH) + "개\n"
+                + FIFTH_WIN_MESSAGE + winnerResult.findWinCount(FIFTH) + "개\n"
                 + "총 수익률은 " + winnerResult.calculateRateOfReturn(lottoPurchasePrice) + "입니다.";
 
         OutputView.printWinResultMsg(msg);

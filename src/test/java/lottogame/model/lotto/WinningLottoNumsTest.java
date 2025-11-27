@@ -25,7 +25,7 @@ class WinningLottoNumsTest {
     @Test
     void 입력받은_당첨번호목록과_로또번호가_꽝인지_비교할_수_있다() {
         WinningLottoNums winningLottoNums = new WinningLottoNums(
-                new Lotto(로또번호리스트를_지정해서_생성한다(5, 11)),
+                new Lotto(로또번호리스트를_지정해서_생성한다(6, 11)),
                 new LottoNum(7)
         );
 
@@ -39,7 +39,7 @@ class WinningLottoNumsTest {
     @Test
     void 입력받은_당첨번호목록과_보너스볼이_2등인지_비교할_수_있다() {
         WinningLottoNums winningLottoNums = new WinningLottoNums(
-                new Lotto(로또번호리스트를_지정해서_생성한다(1, 7)),
+                new Lotto(로또번호리스트를_지정해서_생성한다(2, 7)),
                 new LottoNum(1)
         );
         Lotto lotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
