@@ -4,8 +4,8 @@ public class ProfitRate {
 
   private final double value;
 
-  public ProfitRate(LottoMatchResult matchResult, PurchaseAmount amount) {
-    this.value = calculateProfitRate(matchResult.totalPrize(), amount);
+  public ProfitRate(long totalPrize, PurchaseAmount amount) {
+    this.value = calculateProfitRate(totalPrize, amount);
   }
 
   public double value() {
