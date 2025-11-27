@@ -1,4 +1,4 @@
-package view;
+package calculator.view;
 
 public class ResultView {
     public static void show(int value) {
