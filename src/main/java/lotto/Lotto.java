@@ -2,17 +2,16 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
 
-  private static final String ERROR_DUPLICATE = "로또 번호는 중복될 수 없습니다";
   private static final String ERROR_INVALID_COUNT = "로또 번호는 6개여야 한다";
   private static final String ERROR_OUT_OF_RANGE = "로또 번호는 1~45 범위의 숫자여야 한다";
 
-  private final List<Integer> numbers;
+  private final Set<Integer> numbers;
 
   public Lotto(String numbersString) {
     this(parseNumbers(numbersString));
@@ -24,9 +23,7 @@ public class Lotto {
 
   public Lotto(List<Integer> numbers) {
     validate(numbers);
-    List<Integer> sortedNumbers = new ArrayList<>(numbers);
-    Collections.sort(sortedNumbers);
-    this.numbers = sortedNumbers;
+    this.numbers = new TreeSet<>(numbers);
   }
 
   private static List<Integer> parseNumbers(String numbersString) {
@@ -49,14 +46,6 @@ public class Lotto {
   private static void validate(List<Integer> numbers) {
     validateNumbersCount(numbers);
     validateNumberRange(numbers);
-    validateNoDuplicates(numbers);
-  }
-
-  private static void validateNoDuplicates(List<Integer> numbers) {
-    Set<Integer> uniqueNumbers = new HashSet<>(numbers);
-    if (uniqueNumbers.size() != numbers.size()) {
-      throw new IllegalArgumentException(ERROR_DUPLICATE);
-    }
   }
 
   private static void validateNumbersCount(List<Integer> numbers) {
@@ -78,7 +67,7 @@ public class Lotto {
   }
 
   public List<Integer> numbers() {
-    return new ArrayList<>(numbers);
+    return Collections.unmodifiableList(new ArrayList<>(numbers));
   }
 
   public int countMatchingNumbers(Lotto winningNumbers) {

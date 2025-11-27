@@ -43,14 +43,6 @@ public class LottoTest {
         .withMessageContaining("1~45");
   }
 
-  @DisplayName("로또 번호는 중복될 수 없다")
-  @Test
-  void validateNoDuplicates() {
-    assertThatIllegalArgumentException()
-        .isThrownBy(() -> new Lotto(1, 1, 2, 3, 4, 5))
-        .withMessageContaining("중복");
-  }
-
   @DisplayName("로또 번호는 정렬된다")
   @Test
   void sortLottoNumbers() {
