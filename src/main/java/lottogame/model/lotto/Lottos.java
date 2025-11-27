@@ -12,13 +12,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public WinnerResult compareAndElectWinResult(
-            final WinningLottoNums winningLottoNums
-    ) {
+    public WinnerResult compareAndElectWinResult(final WinningLottoNums winningLottoNums) {
         WinnerResult winnerResult = new WinnerResult();
         for (Lotto lotto : lottos) {
             WinStandard winStandard = winningLottoNums.checkIfWin(lotto);
-//            WinStandard winStandard = lotto.checkIfWin(beforeWinLotto, bonusNum);
             winnerResult.addWinResult(winStandard);
         }
 

@@ -26,11 +26,9 @@ public class LottoStore {
 
         Lottos lottos = buyLottos(lottoMachine, lottoPurchasePrice);
 
-        WinnerResult winnerResult = lottos.compareAndElectWinResult(
-                getWinningLottoNums(lottoMachine)
-        );
+        WinnerResult winnerResult = lottos.compareAndElectWinResult(getWinningLottoNums(lottoMachine));
 
-        totalWinResult(winnerResult, lottoPurchasePrice);
+        informWinResult(winnerResult, lottoPurchasePrice.price());
     }
 
     private WinningLottoNums getWinningLottoNums(LottoMachine lottoMachine) {
@@ -53,20 +51,4 @@ public class LottoStore {
 
         return lottoPurchasePrice;
     }
-
-    private Lotto getBeforeWinLotto(LottoMachine lottoMachine) {
-        List<LottoNum> lottoByNums = lottoMachine.createLottoByNums(askBeforeWinNums());
-
-        return new Lotto(lottoByNums);
-    }
-
-    private void totalWinResult(
-            WinnerResult winnerResult,
-            LottoPurchasePrice lottoPurchasePrice
-    ) {
-        double rateOfReturn = winnerResult.calculateRateOfReturn(lottoPurchasePrice.price());
-
-        informWinResult(winnerResult.toString(rateOfReturn));
-    }
-
 }

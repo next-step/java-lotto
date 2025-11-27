@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum WinStandard {
-    FIRST("6개 일치 (2000000000원)- ", 6, false, 2_000_000_000),
-    SECOND("5개 일치, 보너스볼 일치 (30000000원)- ", 5, true, 30_000_000),
-    THIRD("5개 일치 (1500000원)- ", 5, false, 1_500_000),
-    FOURTH("4개 일치 (50000원)- ", 4, false, 50_000),
-    FIFTH("3개 일치 (5000원)- ", 3, false, 5_000),
+    FIRST("1등", 6, false, 2_000_000_000),
+    SECOND("2등", 5, true, 30_000_000),
+    THIRD("3등", 5, false, 1_500_000),
+    FOURTH("4등", 4, false, 50_000),
+    FIFTH("5등", 3, false, 5_000),
 
     NOTHING("x", -1, false,0),
     ;
@@ -32,7 +32,6 @@ public enum WinStandard {
                 .filter(winStandard -> winStandard.isBonus == isBonus)
                 .findFirst().orElse(NOTHING);
     }
-
 
     public boolean isNothing() {
         return this == NOTHING;

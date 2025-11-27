@@ -3,20 +3,30 @@ package lottogame.model.winner;
 import static java.lang.Math.floor;
 import static java.util.Objects.isNull;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class WinnerResult {
-    private final Map<WinStandard, Integer> winStandardToWinCount;
+
+    private Map<WinStandard, Integer> winStandardToWinCount;
 
     public WinnerResult() {
-        this(WinStandard.getInitWinStandardMap());
+        this(getInitWinStandardMap());
     }
 
     public WinnerResult(Map<WinStandard, Integer> winStandardToWinCount) {
         this.winStandardToWinCount = winStandardToWinCount;
+    }
+
+    private static Map<WinStandard, Integer> getInitWinStandardMap() {
+        return Arrays.stream(WinStandard.values())
+                .filter(winStandard -> !winStandard.isNothing())
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        winStandard -> 0
+                ));
     }
 
     public void addWinResult(WinStandard winStandard) {
@@ -28,8 +38,8 @@ public class WinnerResult {
             return;
         }
 
-        Integer countBy = winStandardToWinCount.getOrDefault(winStandard, 0);
-        winStandardToWinCount.put(
+        Integer countBy = this.winStandardToWinCount.getOrDefault(winStandard, 0);
+        this.winStandardToWinCount.put(
                 winStandard,
                 countBy + 1
         );
@@ -50,24 +60,5 @@ public class WinnerResult {
 
         double rawRate = (double) totalWinReturn / buyPrice * 100;
         return floor(rawRate) / 100.0;
-    }
-
-    public String toString(double rateOfReturn) {
-        List<Entry<WinStandard, Integer>> sortedLowWinValue = winStandardToWinCount.entrySet().stream()
-                .sorted(Entry.comparingByKey(
-                        Comparator.comparing(WinStandard::value)
-                ))
-                .toList();
-
-        StringBuilder sb = new StringBuilder();
-        for (Entry<WinStandard, Integer> winEntry : sortedLowWinValue) {
-            sb.append(winEntry.getKey().desc())
-                    .append(winEntry.getValue() + "개")
-                    .append("\n");
-        }
-
-        sb.append("총 수익률은 " + rateOfReturn + "입니다.");
-
-        return sb.toString();
     }
 }
