@@ -22,11 +22,10 @@ public class LottosTest {
   })
   void calculateMatchCounts(int matchCount, int expectedCount) {
     Lottos lottos = new Lottos(List.of(
-        new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-        new Lotto(List.of(1, 2, 3, 4, 5, 7)),
-        new Lotto(List.of(7, 8, 9, 10, 11, 12))
-    ));
-    Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        new Lotto(1, 2, 3, 4, 5, 6),
+        new Lotto(1, 2, 3, 4, 5, 7),
+        new Lotto(7, 8, 9, 10, 11, 12)));
+    Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
     LottoMatchResult result = lottos.calculateMatchCounts(winningNumbers);
     assertThat(result.countMatches(matchCount)).isEqualTo(expectedCount);
   }

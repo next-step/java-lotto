@@ -15,7 +15,7 @@ public class LottoTest {
   @DisplayName("로또를 생성한다")
   @Test
   void createLotto() {
-    Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+    Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
     assertThat(lotto).isNotNull();
   }
 
@@ -41,14 +41,14 @@ public class LottoTest {
   @Test
   void validateNoDuplicates() {
     assertThatIllegalArgumentException()
-        .isThrownBy(() -> new Lotto(List.of(1, 1, 2, 3, 4, 5)))
+        .isThrownBy(() -> new Lotto(1, 1, 2, 3, 4, 5))
         .withMessageContaining("중복");
   }
 
   @DisplayName("로또 번호는 정렬된다")
   @Test
   void sortLottoNumbers() {
-    Lotto lotto = new Lotto(List.of(2, 5, 8, 1, 3, 4));
+    Lotto lotto = new Lotto(2, 5, 8, 1, 3, 4);
     List<Integer> expected = List.of(1, 2, 3, 4, 5, 8);
     assertThat(lotto.numbers()).isEqualTo(expected);
   }
@@ -56,16 +56,16 @@ public class LottoTest {
   @DisplayName("일치하는 번호가 없으면 0을 반환한다")
   @Test
   void compareNumbers_NoneEqual() {
-    Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-    Lotto winningNumbers = new Lotto(List.of(7, 8, 9, 10, 11, 12));
+    Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+    Lotto winningNumbers = new Lotto(7, 8, 9, 10, 11, 12);
     assertThat(lotto.countMatchingNumbers(winningNumbers)).isEqualTo(0);
   }
 
   @DisplayName("전부 일치하면 6을 반환한다")
   @Test
   void compareNumbers_AllEqual() {
-    Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-    Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+    Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+    Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
     assertThat(lotto.countMatchingNumbers(winningNumbers)).isEqualTo(6);
   }
 
