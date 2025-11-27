@@ -17,7 +17,7 @@ public class PurchaseAmount {
     return value;
   }
 
-  public int getTicketCount() {
+  public int ticketCount() {
     return value / PRICE_PER_LOTTO;
   }
 
