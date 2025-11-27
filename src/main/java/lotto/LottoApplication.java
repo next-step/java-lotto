@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.List;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,8 +13,8 @@ public class LottoApplication {
     Lottos lottos = LottoGenerator.generateLottos(amount.getTicketCount());
     ResultView.printPurchasedLottos(lottos);
 
-    List<Integer> numbers = InputView.readWinningNumbers();
-    Lotto winningNumbers = new Lotto(numbers);
+    String numbersString = InputView.readWinningNumbers();
+    Lotto winningNumbers = new Lotto(numbersString);
 
     LottoMatchResult matchResult = lottos.calculateMatchCounts(winningNumbers);
     ProfitRate profitRate = new ProfitRate(matchResult, amount);

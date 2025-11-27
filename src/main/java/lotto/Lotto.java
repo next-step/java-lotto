@@ -14,6 +14,10 @@ public class Lotto {
 
   private final List<Integer> numbers;
 
+  public Lotto(String numbersString) {
+    this(parseNumbers(numbersString));
+  }
+
   public Lotto(Integer... numbers) {
     this(List.of(numbers));
   }
@@ -23,6 +27,23 @@ public class Lotto {
     List<Integer> sortedNumbers = new ArrayList<>(numbers);
     Collections.sort(sortedNumbers);
     this.numbers = sortedNumbers;
+  }
+
+  private static List<Integer> parseNumbers(String numbersString) {
+    String[] numberStrings = numbersString.split(",");
+    List<Integer> nums = new ArrayList<>();
+    for (String s : numberStrings) {
+      nums.add(parseIntOrThrow(s));
+    }
+    return nums;
+  }
+
+  private static int parseIntOrThrow(String s) {
+    try {
+      return Integer.parseInt(s.trim());
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("숫자 형식이 올바르지 않습니다: " + s);
+    }
   }
 
   private static void validate(List<Integer> numbers) {

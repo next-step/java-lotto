@@ -19,6 +19,12 @@ public class LottoTest {
     assertThat(lotto).isNotNull();
   }
 
+  @Test
+  void createLottoFromString() {
+    Lotto lotto = new Lotto("1,2,3,4,5,6");
+    assertThat(lotto.numbers()).containsExactly(1, 2, 3, 4, 5, 6);
+  }
+
   @DisplayName("로또 번호는 6개여야 한다")
   @ParameterizedTest
   @MethodSource("invalidLottoSizes")
