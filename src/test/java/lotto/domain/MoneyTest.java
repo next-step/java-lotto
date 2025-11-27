@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -27,6 +26,6 @@ public class MoneyTest {
 
     @Test
     void 수익률_계산() {
-        assertThat(new Money(14000).getYield(5000)).isLessThan(1);
+        assertThat(new Money(14000).getYield(new Money(5000))).isLessThan(1);
     }
 }

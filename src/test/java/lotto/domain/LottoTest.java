@@ -12,8 +12,8 @@ public class LottoTest {
     void 로또_지난_주_당첨번호_개수() {
         Lotto lotto = new Lotto(1,2,3,4,5,6);
 
-        assertThat(lotto.matchedCount(
+        assertThat(lotto.determineRank(
                 new Lotto(1,2,3,11,22,33)
-        )).isEqualTo(3);
+        )).isEqualTo(LottoRank.THIRD);
     }
 }

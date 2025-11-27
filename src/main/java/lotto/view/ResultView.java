@@ -17,6 +17,7 @@ public class ResultView {
         System.out.println("-------");
 
         for (LottoRank lottoRank : LottoRank.values()) {
+            if (lottoRank == LottoRank.MISS) continue;
             System.out.printf("%d개 일치 (%d원)- %d개%n", lottoRank.getMatchCnt(), lottoRank.getPrizeMoney(), lottoResult.getCntByLottoRank(lottoRank));
         }
 

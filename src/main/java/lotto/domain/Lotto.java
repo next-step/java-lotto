@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,50 +8,34 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(int... numbers) {
-        this(createNumbers(intToList(numbers)));
+        this(intToList(numbers));
     }
 
     public Lotto(String... numbers) {
-        this(createNumbers(stringToList(numbers)));
+        this(stringToList(numbers));
     }
 
     public Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public static Lotto of(List<Integer> numbers) {
-        return new Lotto(createNumbers(numbers));
+    private static List<LottoNumber> stringToList(String... numbers) {
+        return Arrays.stream(numbers)
+                .map(LottoNumber::new)
+                .toList();
     }
 
-    private static List<LottoNumber> createNumbers(List<Integer> numbers) {
-        List<LottoNumber> list = new ArrayList<>();
-        for (Integer number : numbers) {
-            list.add(new LottoNumber(number));
-        }
-        return list;
+    private static List<LottoNumber> intToList(int... numbers) {
+        return Arrays.stream(numbers)
+                .mapToObj(LottoNumber::new)
+                .toList();
     }
 
-    private static List<Integer> stringToList(String... numbers) {
-        List<Integer> list = new ArrayList<>();
-        for (String number : numbers) {
-            list.add(Integer.parseInt(number));
-        }
-        return list;
+    public LottoRank determineRank(Lotto lotto) {
+        return LottoRank.getLottoRank(lotto.countMatchedNumbers(this.numbers));
     }
 
-    private static List<Integer> intToList(int... numbers) {
-        List<Integer> list = new ArrayList<>();
-        for (int number : numbers) {
-            list.add(number);
-        }
-        return list;
-    }
-
-    public int matchedCount(Lotto lotto) {
-        return lotto.matchedCount(this.numbers);
-    }
-
-    public int matchedCount(List<LottoNumber> lottoNumbers) {
+    public int countMatchedNumbers(List<LottoNumber> lottoNumbers) {
         int cnt = 0;
 
         for (LottoNumber lottoNumber: lottoNumbers) {
@@ -63,10 +47,6 @@ public class Lotto {
 
     private int containsNumber(LottoNumber number) {
         return this.numbers.contains(number) ? 1 : 0;
-    }
-
-    public List<LottoNumber> value() {
-        return this.numbers;
     }
 
     @Override

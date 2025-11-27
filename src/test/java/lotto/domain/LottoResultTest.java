@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottoResultTest {
     @Test
-    void create() {
+    void 총_당첨_금액() {
         Lotto winLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
         LottoGroup lottoGroup = new LottoGroup(
@@ -20,6 +20,22 @@ public class LottoResultTest {
 
         LottoResult lottoResult = lottoGroup.match(winLotto);
 
-        Assertions.assertThat(lottoResult.calTotal()).isEqualTo(10000);
+        Assertions.assertThat(lottoResult.calTotal()).isEqualTo(new Money(10000));
+    }
+
+    @Test
+    void 해당_랭크의_개수() {
+        Lotto winLotto = new Lotto(1, 2, 3, 4, 5, 6);
+
+        LottoGroup lottoGroup = new LottoGroup(
+                List.of(
+                        new Lotto(1, 2, 3, 9, 8, 7),
+                        new Lotto(1, 2, 3, 44, 15, 26)
+                )
+        );
+
+        LottoResult lottoResult = lottoGroup.match(winLotto);
+
+        Assertions.assertThat(lottoResult.getCntByLottoRank(LottoRank.THIRD)).isEqualTo(2);
     }
 }

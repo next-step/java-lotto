@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Money {
     private static final int PRICE = 1000;
     private final int money;
@@ -23,7 +25,26 @@ public class Money {
         return this.money / PRICE;
     }
 
-    public double getYield(int total) {
-        return total / (double) this.money;
+    public double getYield(Money total) {
+        return total.value() / (double) this.money;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money1 = (Money) o;
+        return money == money1.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(money);
+    }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+                "money=" + money +
+                '}';
     }
 }
