@@ -1,9 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
 
@@ -18,12 +16,12 @@ public class Lottos {
   }
 
   public LottoMatchResult calculateMatchCounts(Lotto winningNumbers) {
-    Map<Integer, Integer> result = new HashMap<>();
+    LottoMatchResult result = new LottoMatchResult();
     for (Lotto lotto : lottos) {
       int match = lotto.countMatchingNumbers(winningNumbers);
-      result.put(match, result.getOrDefault(match, 0) + 1);
+      result.match(match);
     }
-    return new LottoMatchResult(result);
+    return result;
   }
 
   public List<String> toDisplayStrings() {
