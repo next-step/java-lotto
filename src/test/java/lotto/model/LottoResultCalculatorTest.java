@@ -19,7 +19,7 @@ class LottoResultCalculatorTest {
                         new Lotto(3, 4, 5, 6, 7, 8)
                 )
         );
-        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(45));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), LottoNumber.of(45));
         assertThat(LottoResultCalculator.calculate(lottos, winningLotto))
                 .isEqualTo(new LottoResults(Map.of(Prize.FOURTH, 1, Prize.THIRD, 1, Prize.FIRST, 1)));
     }
@@ -34,7 +34,7 @@ class LottoResultCalculatorTest {
                         new Lotto(3, 4, 5, 6, 7, 8)
                 )
         );
-        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(45));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), LottoNumber.of(45));
         assertThat(LottoResultCalculator.calculate(lottos, winningLotto))
                 .isEqualTo(new LottoResults(Map.of(Prize.FOURTH, 1, Prize.SECOND, 1, Prize.FIRST, 1)));
     }
