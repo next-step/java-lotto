@@ -13,7 +13,7 @@ public class LottoApplication {
         Lottos lottos = purchaseAmount.buyLottos();
         OutputView.printBoughtLottos(lottos);
 
-        LottoResults result = LottoResultCalculator.calculate(lottos, winningLotto);
+        LottoResults result = lottos.match(winningLotto);
         OutputView.printResults(result, purchaseAmount);
     }
 }

@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -15,10 +14,15 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> lottos() {
-        return Collections.unmodifiableList(lottos);
+    public LottoResults match(WinningLotto winningLotto) {
+        LottoResults lottoResults = new LottoResults();
+        for (Lotto lotto : this.lottos) {
+            lottoResults.update(winningLotto.calculatePrize(lotto));
+        }
+        return lottoResults;
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
