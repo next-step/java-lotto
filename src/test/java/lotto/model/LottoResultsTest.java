@@ -15,25 +15,27 @@ class LottoResultsTest {
 
     @Test
     @DisplayName("당첨금 합계를 계산한다.")
-    void getPrizeValue() {
-        assertThat(new LottoResults(Map.of(3, 1, 4, 1, 5, 1, 6, 1)).getPrizeValue())
-                .isEqualTo(2001555000L);
-        assertThat(new LottoResults(Map.of(3, 0, 4, 1, 5, 1, 6, 4)).getPrizeValue())
-                .isEqualTo(8001550000L);
+    void getTotalPrizeValue() {
+        assertThat(new LottoResults(Map.of(Prize.FIFTH, 1, Prize.FOURTH, 1, Prize.THIRD, 1, Prize.FIRST, 1)).getTotalPrizeValue())
+                .isEqualTo(new Money(2_001_555_000L));
+        assertThat(new LottoResults(Map.of(Prize.FIFTH, 0, Prize.FOURTH, 1, Prize.THIRD, 1, Prize.FIRST, 4)).getTotalPrizeValue())
+                .isEqualTo(new Money(8_001_550_000L));
+        assertThat(new LottoResults(Map.of(Prize.SECOND, 3, Prize.FIRST, 2)).getTotalPrizeValue())
+                .isEqualTo(new Money(4_090_000_000L));
     }
 
     @ParameterizedTest
     @DisplayName("당첨금과 구매 금액을 통해 수익률을 계산한다.")
     @MethodSource("returnRateProvider")
     void getReturnRate(LottoResults results, double expectedRate) {
-        assertThat(results.getReturnRate(new PurchaseAmount(14000))).isEqualTo(expectedRate);
+        assertThat(results.getReturnRate(new Money(14000))).isEqualTo(expectedRate);
     }
 
     static Stream<Arguments> returnRateProvider() {
         return Stream.of(
-                Arguments.of(new LottoResults(Map.of(3, 0, 4, 0, 5, 0, 6, 0)), 0.0),
-                Arguments.of(new LottoResults(Map.of(3, 1, 4, 0, 5, 0, 6, 0)), 0.35),
-                Arguments.of(new LottoResults(Map.of(3, 0, 4, 0, 5, 0, 6, 1)), 142857.14)
+                Arguments.of(new LottoResults(Map.of(Prize.FIFTH, 0, Prize.FOURTH, 0, Prize.THIRD, 0, Prize.FIRST, 0)), 0.0),
+                Arguments.of(new LottoResults(Map.of(Prize.FIFTH, 1, Prize.FOURTH, 0, Prize.THIRD, 0, Prize.FIRST, 0)), 0.35),
+                Arguments.of(new LottoResults(Map.of(Prize.FIFTH, 0, Prize.FOURTH, 0, Prize.SECOND, 1, Prize.FIRST, 1)), 145000.0)
         );
     }
 }

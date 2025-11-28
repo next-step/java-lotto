@@ -2,10 +2,14 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class PurchaseAmount {
-    private final int amount;
+public class Money {
+    private final long amount;
 
-    public PurchaseAmount(int amount) {
+    public Money(int amount) {
+        this((long) amount);
+    }
+
+    public Money(long amount) {
         if (!isValid(amount)) {
             throw new IllegalArgumentException("예산은 0 이상이며 1000원 단위로만 설정 가능합니다.");
         }
@@ -13,30 +17,30 @@ public class PurchaseAmount {
     }
 
     public int countLottoTickets() {
-        return amount / 1_000;
+        return Math.toIntExact(amount / 1_000L);
     }
 
     public Lottos buyLottos() {
         return new Lottos(countLottoTickets());
     }
 
-    public double getReturnRate(Long totalPrize) {
-        if (amount == 0) {
-            return 0;
-        }
-        double rate = (double) totalPrize / amount;
-        return Math.floor(rate * 100) / 100.0;
+    public boolean isZero() {
+        return amount == 0;
     }
 
-    private boolean isValid(int amount) {
+    public double divideBy(Money money) {
+        return (double) this.amount / money.amount;
+    }
+
+    private boolean isValid(Long amount) {
         return amount >= 0 && amount % 1000 == 0;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        PurchaseAmount purchaseAmount = (PurchaseAmount) o;
-        return amount == purchaseAmount.amount;
+        Money money = (Money) o;
+        return amount == money.amount;
     }
 
     @Override
