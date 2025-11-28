@@ -14,7 +14,7 @@ public class Lotto {
     }
 
     public Lotto(int... numbers) {
-        this(Arrays.stream(numbers).mapToObj(LottoNumberFactory::get).collect(Collectors.toSet()));
+        this(Arrays.stream(numbers).mapToObj(LottoNumber::of).collect(Collectors.toSet()));
     }
 
     public Lotto(Set<LottoNumber> numbers) {
@@ -49,6 +49,6 @@ public class Lotto {
 
     private static Set<LottoNumber> generateRandomNumbers() {
         Collections.shuffle(rangedInts);
-        return rangedInts.subList(0, LOTTO_NUMBER_SIZE).stream().map(LottoNumberFactory::get).collect(Collectors.toSet());
+        return rangedInts.subList(0, LOTTO_NUMBER_SIZE).stream().map(LottoNumber::of).collect(Collectors.toSet());
     }
 }

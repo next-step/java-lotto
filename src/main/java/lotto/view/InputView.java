@@ -23,7 +23,7 @@ public class InputView {
         String[] inputs = scanner.nextLine().split(",");
         Set<LottoNumber> numbers = new HashSet<>();
         for (String input : inputs) {
-            numbers.add(LottoNumberFactory.get(input.trim()));
+            numbers.add(LottoNumber.of(input.trim()));
         }
         return new Lotto(numbers);
     }
@@ -32,7 +32,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         print("보너스 볼을 입력해 주세요.");
         int bonusNumber = scanner.nextInt();
-        return LottoNumberFactory.get(bonusNumber);
+        return LottoNumber.of(bonusNumber);
     }
 
     private static void print(String message) {
