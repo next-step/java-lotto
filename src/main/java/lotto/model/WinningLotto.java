@@ -4,6 +4,10 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
+    public WinningLotto(Lotto lotto, int bonusNumber) {
+        this(lotto, LottoNumber.of(bonusNumber));
+    }
+
     public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         if (lotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호는 보너스볼의 번호를 포함할 수 없습니다.");
