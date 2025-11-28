@@ -1,13 +1,13 @@
 package lottogame.model.lotto;
 
 import static java.lang.String.join;
+import static lottogame.model.lotto.LottoMachine.LOTTO_NUM_COUNT;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    public static final int LOTTO_NUM_COUNT = 6;
 
     private final Set<LottoNum> lottoNums;
 

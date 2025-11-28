@@ -22,15 +22,15 @@ public class LottoMachine {
         this.perLottoPrice = perLottoPrice;
     }
 
-    public Lottos publish(LottoPurchasePrice lottoPurchasePrice) { // 2
-        List<Lotto> lottos = range(0, lottoPurchasePrice.calculateLottoCount(perLottoPrice)) // 1
+    public Lottos publish(LottoPurchasePrice lottoPurchasePrice) {
+        List<Lotto> lottos = range(0, lottoPurchasePrice.calculateLottoCount(perLottoPrice))
                 .mapToObj(idx ->
-                        new Lotto( // 1
-                                createLottoByCount(LOTTO_NUM_COUNT) // 1
+                        new Lotto(
+                                createLottoByCount(LOTTO_NUM_COUNT)
                         )
                 ).toList();
 
-        return new Lottos(lottos); // 2
+        return new Lottos(lottos);
     }
 
     private LottoNum createLottoNum() {

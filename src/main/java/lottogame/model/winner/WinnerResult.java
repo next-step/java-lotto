@@ -1,6 +1,5 @@
 package lottogame.model.winner;
 
-import static java.lang.Math.floor;
 import static java.util.Objects.isNull;
 
 import java.util.Arrays;
@@ -53,12 +52,13 @@ public class WinnerResult {
         return this.winStandardToWinCount.get(winStandard);
     }
 
-    public double calculateRateOfReturn(int buyPrice) {
-        int totalWinReturn = this.winStandardToWinCount.entrySet().stream()
-                .mapToInt((entry) -> entry.getKey().returnOfWin() * entry.getValue())
+    public int sumTotalWinReturn() {
+        return this.winStandardToWinCount.keySet().stream()
+                .mapToInt(this::calculateWinReturnBy)
                 .sum();
+    }
 
-        double rawRate = (double) totalWinReturn / buyPrice * 100;
-        return floor(rawRate) / 100.0;
+    private int calculateWinReturnBy(WinStandard winStandard) {
+        return winStandard.returnOfWin() * this.winStandardToWinCount.get(winStandard);
     }
 }

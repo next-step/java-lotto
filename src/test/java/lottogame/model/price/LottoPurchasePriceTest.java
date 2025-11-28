@@ -2,6 +2,7 @@ package lottogame.model.price;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.within;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,5 +20,12 @@ class LottoPurchasePriceTest {
         assertThat(
                 new LottoPurchasePrice(14000).calculateLottoCount(1000)
         ).isEqualTo(14);
+    }
+
+    @Test
+    void 총상금으로_구매가격에비해_수익률이_얼마인지_계산할_수_있다() {
+        assertThat(
+                new LottoPurchasePrice(14000).calculateRateOfReturn(5000)
+        ).isCloseTo(0.35, within(0.01));
     }
 }

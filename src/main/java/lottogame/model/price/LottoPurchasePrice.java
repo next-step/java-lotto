@@ -19,6 +19,14 @@ public class LottoPurchasePrice {
         return price / perLottoPrice;
     }
 
+    public double calculateRateOfReturn(int totalWinReturn) {
+        if (totalWinReturn < 0) {
+            throw new IllegalArgumentException("잘못된 값입니다.");
+        }
+
+        return (double) totalWinReturn / this.price;
+    }
+
     public int price() {
         return this.price;
     }

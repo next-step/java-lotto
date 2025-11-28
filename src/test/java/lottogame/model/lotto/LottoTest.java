@@ -2,7 +2,7 @@ package lottogame.model.lotto;
 
 import static lottogame.fixture.LottoFixture.로또번호리스트를_오름차순으로_생성한다;
 import static lottogame.fixture.LottoFixture.로또번호리스트를_지정해서_생성한다;
-import static lottogame.model.lotto.Lotto.LOTTO_NUM_COUNT;
+import static lottogame.model.lotto.LottoMachine.LOTTO_NUM_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

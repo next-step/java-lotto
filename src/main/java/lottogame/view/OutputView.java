@@ -1,7 +1,5 @@
 package lottogame.view;
 
-import static java.lang.String.join;
-
 public class OutputView {
 
     public static void printQuestionByBuyPrice() {

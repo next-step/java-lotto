@@ -8,6 +8,7 @@ import static lottogame.model.winner.WinStandard.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lottogame.model.price.LottoPurchasePrice;
 import org.junit.jupiter.api.Test;
 
 class WinnerResultTest {
@@ -33,12 +34,12 @@ class WinnerResultTest {
     }
 
     @Test
-    void 당첨결과에따른_수익률을_계산_할_수_있다() {
+    void 당첨결과에따른_총상금을_계산_할_수_있다() {
         WinnerResult winnerResult = new WinnerResult();
         winnerResult.addWinResult(FIFTH);
 
         assertThat(
-                winnerResult.calculateRateOfReturn(14000)
-        ).isEqualTo(0.35);
+                winnerResult.sumTotalWinReturn()
+        ).isEqualTo(FIFTH.returnOfWin());
     }
 }

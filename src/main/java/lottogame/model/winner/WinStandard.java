@@ -37,10 +37,6 @@ public enum WinStandard {
         return this == NOTHING;
     }
 
-    public String desc() {
-        return this.desc;
-    }
-
     public int returnOfWin() {
         return this.returnOfWin;
     }
