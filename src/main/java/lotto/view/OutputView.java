@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.Prize;
-import lotto.model.PurchaseAmount;
+import lotto.model.Money;
 import lotto.model.LottoResults;
 import lotto.model.Lottos;
 
@@ -10,7 +10,7 @@ public class OutputView {
         System.out.printf("%s개를 구매했습니다.%n", count);
     }
 
-    public static void printResults(LottoResults result, PurchaseAmount purchaseAmount) {
+    public static void printResults(LottoResults result, Money purchaseAmount) {
         printResultHeader();
         printMatchCounts(result);
         printRate(result, purchaseAmount);
@@ -33,7 +33,7 @@ public class OutputView {
         System.out.printf("%s- %s개%n", Prize.FIRST, results.getPrizeCount(Prize.FIRST));
     }
 
-    private static void printRate(LottoResults results, PurchaseAmount purchaseAmount) {
+    private static void printRate(LottoResults results, Money purchaseAmount) {
         double rate = results.getReturnRate(purchaseAmount);
         System.out.printf("총 수익률은 %.2f입니다.", rate);
         if (rate >= 1) {

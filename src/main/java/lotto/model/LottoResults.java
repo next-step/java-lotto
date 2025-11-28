@@ -19,15 +19,23 @@ public class LottoResults {
         prizeCounts.put(prize, prizeCounts.getOrDefault(prize, 0) + 1);
     }
 
-    public long getTotalPrizeValue() {
-        return prizeCounts.entrySet().stream()
+    public Money getTotalPrizeValue() {
+        return new Money(prizeCounts.entrySet().stream()
                 .mapToLong(entry -> (long) entry.getValue() * entry.getKey().value())
-                .sum();
+                .sum());
     }
 
-    public double getReturnRate(PurchaseAmount purchaseAmount) {
-        long totalPrize = getTotalPrizeValue();
-        return purchaseAmount.getReturnRate(totalPrize);
+    public double getReturnRate(Money purchaseAmount) {
+        Money totalPrize = getTotalPrizeValue();
+        return calculateReturnRate(purchaseAmount, totalPrize);
+    }
+
+    private double calculateReturnRate(Money purchaseAmount, Money totalPrize) {
+        if (purchaseAmount.isZero()) {
+            return 0;
+        }
+        double rate = totalPrize.divideBy(purchaseAmount);
+        return Math.floor(rate * 100) / 100.0;
     }
 
     public Integer getPrizeCount(Prize prize) {

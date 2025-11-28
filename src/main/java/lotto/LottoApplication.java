@@ -6,7 +6,7 @@ import lotto.view.OutputView;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        PurchaseAmount purchaseAmount = InputView.readBudgetInput();
+        Money purchaseAmount = InputView.readPurchaseAmountInput();
         WinningLotto winningLotto = InputView.readWinningLottoInput();
 
         OutputView.printPurchaseCount(purchaseAmount.countLottoTickets());
