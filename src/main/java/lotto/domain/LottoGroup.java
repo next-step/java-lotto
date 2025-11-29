@@ -29,15 +29,15 @@ public class LottoGroup {
         return lottos;
     }
 
-    public LottoResult match(Lotto winLotto) {
-        return calculate(winLotto);
+    public LottoResult match(Lotto winLotto, LottoNumber bonusNumber) {
+        return calculate(winLotto, bonusNumber);
     }
 
-    private LottoResult calculate(Lotto winLotto) {
+    private LottoResult calculate(Lotto winLotto, LottoNumber bonusNumber) {
         LottoResult lottoResult = new LottoResult();
 
         for (Lotto lotto : this.lottos) {
-            LottoRank rank = lotto.determineRank(winLotto);
+            LottoRank rank = lotto.determineRank(winLotto,bonusNumber);
 
             lottoResult.rank(rank);
         }
