@@ -16,7 +16,7 @@ public class LottoApplication {
     String numbersString = InputView.readWinningNumbers();
     Lotto winningNumbers = new Lotto(numbersString);
 
-    LottoMatchResult matchResult = lottos.calculateMatchCounts(winningNumbers);
+    LottoMatchResult matchResult = lottos.matchResult(winningNumbers);
     ProfitRate profitRate = new ProfitRate(matchResult.totalPrize(), amount);
 
     ResultView.printLottoResult(matchResult, profitRate);
