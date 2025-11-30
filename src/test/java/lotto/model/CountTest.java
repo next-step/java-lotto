@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CountTest {
-
     @Test
     void add() {
         assertThat(new Count(1).add(new Count(3))).isEqualTo(new Count(4));
@@ -18,10 +17,8 @@ class CountTest {
     }
 
     @Test
-    void isNegative() {
-    }
-
-    @Test
     void isBiggerThan() {
+        assertThat(new Count(3).isBiggerThan(new Count(1))).isTrue();
+        assertThat(new Count(1).isBiggerThan(new Count(3))).isFalse();
     }
 }
