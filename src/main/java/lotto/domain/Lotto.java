@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
@@ -12,6 +9,28 @@ public class Lotto {
 
     public Lotto() {
         this(LottoFactory.generateLotto());
+    }
+
+    public Lotto(String value) {
+        this(splitAndParseInt(value));
+    }
+
+    private static List<Integer> splitAndParseInt(String value) {
+        String[] split = getSplit(value);
+        List<Integer> numbers = strToInt(split);
+        return numbers;
+    }
+
+    private static List<Integer> strToInt(String[] split) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String s : split) {
+            numbers.add(Integer.parseInt(s));
+        }
+        return numbers;
+    }
+
+    private static String[] getSplit(String value) {
+        return value.split(",");
     }
 
     public Lotto(Integer... numbers) {
