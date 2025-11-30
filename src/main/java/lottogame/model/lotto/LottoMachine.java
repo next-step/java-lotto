@@ -5,8 +5,10 @@ import static lottogame.model.lotto.LottoNum.MAX_NUM;
 import static lottogame.model.lotto.LottoNum.MIN_NUM;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,16 +16,23 @@ import lottogame.model.price.LottoPurchasePrice;
 
 public class LottoMachine {
 
+    public static final int MIN_NUM = 1;
+    public static final int MAX_NUM = 45;
     public static final int LOTTO_NUM_COUNT = 6;
+    public static final int PER_LOTTO_PRICE = 1_000;
 
-    private final int perLottoPrice;
+    private static final Random RANDOM = new Random();
 
-    public LottoMachine(int perLottoPrice) {
-        this.perLottoPrice = perLottoPrice;
+    private static final Map<Integer, LottoNum> LOTTO_NUM_POOL = new HashMap<>();
+
+    static {
+        range(MIN_NUM, MAX_NUM + 1).forEach(
+                num -> LOTTO_NUM_POOL.put(num, new LottoNum(num))
+        );
     }
 
     public Lottos publish(LottoPurchasePrice lottoPurchasePrice) {
-        List<Lotto> lottos = range(0, lottoPurchasePrice.calculateLottoCount(perLottoPrice))
+        List<Lotto> lottos = range(0, lottoPurchasePrice.calculateLottoCount(PER_LOTTO_PRICE))
                 .mapToObj(idx ->
                         new Lotto(
                                 createLottoByCount(LOTTO_NUM_COUNT)
@@ -33,10 +42,8 @@ public class LottoMachine {
         return new Lottos(lottos);
     }
 
-    private LottoNum createLottoNum() {
-        return new LottoNum(
-                new Random().nextInt(MIN_NUM, MAX_NUM)
-        );
+    public LottoNum getLottoNum(int num) {
+        return LOTTO_NUM_POOL.get(num);
     }
 
     private Set<LottoNum> createLottoByCount(int numCount) {
@@ -46,7 +53,8 @@ public class LottoMachine {
 
         Set<LottoNum> lottoNums = new HashSet<>();
         while (lottoNums.size() < numCount) {
-            lottoNums.add(createLottoNum());
+            LottoNum lottoNum = getLottoNum(RANDOM.nextInt(MIN_NUM, MAX_NUM));
+            lottoNums.add(lottoNum);
         }
 
         return lottoNums;
@@ -58,7 +66,7 @@ public class LottoMachine {
         }
 
         return rawNums.stream()
-                .map(LottoNum::new)
+                .map(LOTTO_NUM_POOL::get)
                 .collect(Collectors.toSet());
     }
 }

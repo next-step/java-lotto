@@ -20,10 +20,6 @@ public class LottoNum implements Comparable<LottoNum>{
         return num < MIN_NUM || num > MAX_NUM;
     }
 
-    public int value() {
-        return num;
-    }
-
     @Override
     public int compareTo(LottoNum o) {
         return Integer.compare(this.num, o.num);

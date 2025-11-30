@@ -1,5 +1,6 @@
 package lottogame.controller;
 
+import static lottogame.model.lotto.LottoMachine.PER_LOTTO_PRICE;
 import static lottogame.view.Casher.askBeforeWinNums;
 import static lottogame.view.Casher.askBonusNum;
 import static lottogame.view.Casher.askBuyPrice;
@@ -8,6 +9,7 @@ import static lottogame.view.Casher.informPublishedLottos;
 import static lottogame.view.Casher.informWinResult;
 
 import java.util.Set;
+import lottogame.model.lotto.Lotto;
 import lottogame.model.lotto.LottoMachine;
 import lottogame.model.lotto.LottoNum;
 import lottogame.model.lotto.Lottos;
@@ -17,11 +19,9 @@ import lottogame.model.winner.WinnerResult;
 
 public class LottoStore {
 
-    public static final int PER_LOTTO_PRICE = 1_000;
-
     public void start() {
         LottoPurchasePrice lottoPurchasePrice = getLottoPurchasePrice();
-        LottoMachine lottoMachine = new LottoMachine(PER_LOTTO_PRICE);
+        LottoMachine lottoMachine = new LottoMachine();
 
         Lottos lottos = buyLottos(lottoMachine, lottoPurchasePrice);
 
@@ -46,7 +46,7 @@ public class LottoStore {
 
     private WinningLottoNums getWinningLottoNums(LottoMachine lottoMachine) {
         Set<LottoNum> lottoByNums = lottoMachine.createLottoByNums(askBeforeWinNums());
-        int bonusNum = askBonusNum();
+        LottoNum bonusNum = lottoMachine.getLottoNum(askBonusNum());
 
         return new WinningLottoNums(lottoByNums, bonusNum);
     }
