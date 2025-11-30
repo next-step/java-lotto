@@ -56,7 +56,7 @@ public class LottoTest {
   void compareNumbers_NoneEqual() {
     Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
     Lotto winningNumbers = new Lotto(7, 8, 9, 10, 11, 12);
-    assertThat(lotto.countMatchingNumbers(winningNumbers)).isEqualTo(LottoRank.MISS);
+    assertThat(lotto.matchingRank(winningNumbers)).isEqualTo(LottoRank.MISS);
   }
 
   @DisplayName("전부 일치하면 6을 반환한다")
@@ -64,7 +64,7 @@ public class LottoTest {
   void compareNumbers_AllEqual() {
     Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
     Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
-    assertThat(lotto.countMatchingNumbers(winningNumbers)).isEqualTo(LottoRank.SIX);
+    assertThat(lotto.matchingRank(winningNumbers)).isEqualTo(LottoRank.SIX);
   }
 
 

@@ -73,8 +73,8 @@ public class Lotto {
   public List<Integer> numbers() {
     return Collections.unmodifiableList(new ArrayList<>(numbers));
   }
-  
-  public LottoRank countMatchingNumbers(Lotto winningNumbers) {
+
+  public LottoRank matchingRank(Lotto winningNumbers) {
     int count = 0;
     for (Integer number : numbers) {
       if (winningNumbers.contains(number)) {
