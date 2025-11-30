@@ -5,7 +5,7 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String lotto, int bonusNumber) {
-        this(LottoFactory.createLotto(lotto), LottoNumber.of(bonusNumber));
+        this(Lotto.of(lotto), LottoNumber.of(bonusNumber));
     }
 
     public WinningLotto(Lotto lotto, int bonusNumber) {

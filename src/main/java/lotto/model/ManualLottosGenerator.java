@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ManualLottosGenerator implements LottosGenerator {
     private final List<String> lottoStrings;
@@ -13,7 +12,7 @@ public class ManualLottosGenerator implements LottosGenerator {
     @Override
     public Lottos generate() {
         List<Lotto> lottos = this.lottoStrings.stream()
-                .map(LottoFactory::createLotto)
+                .map(Lotto::of)
                 .toList();
         return new Lottos(lottos);
     }
