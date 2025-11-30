@@ -8,8 +8,8 @@ import java.util.List;
 
 public class LottoController {
     public void run() {
-        Money purchaseAmount = InputView.readPurchaseAmountInput();
-        Count manualCount = InputView.readManualLottoCountInput();
+        Money purchaseAmount = new Money(InputView.readPurchaseAmountInput());
+        Count manualCount = new Count(InputView.readManualLottoCountInput());
         LottoPurchasePlan lottoPurchasePlan = new LottoPurchasePlan(purchaseAmount, manualCount);
 
         Lottos lottos = buyLottos(lottoPurchasePlan);

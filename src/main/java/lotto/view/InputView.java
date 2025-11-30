@@ -5,16 +5,16 @@ import lotto.model.*;
 import java.util.*;
 
 public class InputView {
-    public static Money readPurchaseAmountInput() {
+    public static int readPurchaseAmountInput() {
         Scanner scanner = new Scanner(System.in);
         print("구입금액을 입력해 주세요.");
-        return new Money(scanner.nextInt());
+        return scanner.nextInt();
     }
 
-    public static Count readManualLottoCountInput() {
+    public static int readManualLottoCountInput() {
         Scanner scanner = new Scanner(System.in);
         print("수동으로 구매할 로또 수를 입력해 주세요.");
-        return new Count(scanner.nextInt());
+        return scanner.nextInt();
     }
 
     public static List<String> readMaualLottoInput(int manualLottoCount) {
