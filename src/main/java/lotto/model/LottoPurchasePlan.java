@@ -28,10 +28,6 @@ public class LottoPurchasePlan {
         return totalCounts.equals(manual.add(auto));
     }
 
-    public Lottos generateAutoLottos() {
-        return new Lottos(auto);
-    }
-
     public Count manualCount() {
         return manual;
     }

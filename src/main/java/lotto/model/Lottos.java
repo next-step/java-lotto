@@ -6,10 +6,6 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(Count count) {
-        this(createLottos(count));
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
@@ -29,14 +25,6 @@ public class Lottos {
             sb.append(lotto.toString()).append("\n");
         }
         return sb.toString();
-    }
-
-    private static List<Lotto> createLottos(Count count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count.value(); i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
     }
 
     public static Lottos of(Lottos lottos1, Lottos lottos2) {
