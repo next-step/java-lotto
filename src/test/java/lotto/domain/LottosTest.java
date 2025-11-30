@@ -4,8 +4,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class LottosTest {
     @Test
     @DisplayName("Lottos는 생성된 숫자만큼의 로또를 가진다")

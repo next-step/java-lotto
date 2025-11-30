@@ -17,10 +17,12 @@ public class Lotto {
     public Lotto(Integer... numbers) {
         this(Arrays.asList(numbers));
     }
+
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         this.numbers = List.copyOf(numbers);
     }
+
     private void validate(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException();
@@ -30,5 +32,12 @@ public class Lotto {
         if (noDuplicateNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
+
+        boolean invalidNumber = numbers.stream()
+                .anyMatch(n -> n < 1 || n > 45);
+        if (invalidNumber) {
+            throw new IllegalArgumentException();
+        }
+
     }
 }
