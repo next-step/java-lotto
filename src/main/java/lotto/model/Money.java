@@ -16,12 +16,8 @@ public class Money {
         this.amount = amount;
     }
 
-    public int countLottoTickets() {
-        return Math.toIntExact(amount / 1_000L);
-    }
-
-    public Lottos buyLottos() {
-        return new Lottos(countLottoTickets());
+    public Count countBuyableLottoTickets() {
+        return new Count(Math.toIntExact(amount / 1_000L));
     }
 
     public boolean isZero() {

@@ -6,7 +6,7 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(int count) {
+    public Lottos(Count count) {
         this(createLottos(count));
     }
 
@@ -31,11 +31,18 @@ public class Lottos {
         return sb.toString();
     }
 
-    private static List<Lotto> createLottos(int count) {
+    private static List<Lotto> createLottos(Count count) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count.value(); i++) {
             lottos.add(new Lotto());
         }
         return lottos;
+    }
+
+    public static Lottos of(Lottos lottos1, Lottos lottos2) {
+        List<Lotto> mergedLottos = new ArrayList<>();
+        mergedLottos.addAll(lottos1.lottos);
+        mergedLottos.addAll(lottos2.lottos);
+        return new Lottos(mergedLottos);
     }
 }
