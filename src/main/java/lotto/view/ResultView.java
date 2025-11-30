@@ -21,6 +21,9 @@ public class ResultView {
     System.out.println("---------");
 
     for (LottoRank rank : LottoRank.values()) {
+      if (rank == LottoRank.MISS) {
+        continue;
+      }
       int count = matchResult.countMatches(rank);
       int prize = rank.prize();
       System.out.printf("%d개 일치 (%d원)- %d개%n", rank.matchCount(), prize, count);
