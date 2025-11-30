@@ -10,7 +10,7 @@ public class LottoApplication {
     int input = InputView.readPurchaseAmount();
     PurchaseAmount amount = new PurchaseAmount(input);
 
-    Lottos lottos = LottoGenerator.generateLottos(amount.ticketCount());
+    Lottos lottos = LottoMachine.randomLottos(amount.ticketCount());
     ResultView.printPurchasedLottos(lottos);
 
     String numbersString = InputView.readWinningNumbers();

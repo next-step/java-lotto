@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator {
+public class LottoMachine {
 
-  public static Lottos generateLottos(int count) {
+  public static Lottos randomLottos(int count) {
     List<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < count; i++) {
-      lottos.add(generateLotto());
+      lottos.add(randomLotto());
     }
     return new Lottos(lottos);
   }
 
-  private static Lotto generateLotto() {
+  private static Lotto randomLotto() {
     List<Integer> numbers = new ArrayList<>();
     for (int i = Lotto.MIN_NUMBER; i <= Lotto.MAX_NUMBER; i++) {
       numbers.add(i);
