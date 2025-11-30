@@ -40,6 +40,20 @@ public class Lotto {
         }
     }
 
+    public int match(Lotto winningLotto) {
+        int count = 0;
+        for (Integer number : numbers) {
+            if (winningLotto.numbers().contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private List<Integer> numbers() {
+        return numbers;
+    }
+
     @Override
     public String toString() {
         return numbers.toString();

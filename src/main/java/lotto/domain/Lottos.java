@@ -16,4 +16,13 @@ public class Lottos {
     public List<Lotto> values() {
         return lottos;
     }
+
+    public LottoResult findResult(Lotto winningLotto) {
+        LottoResult result = new LottoResult();
+        for (Lotto lotto : lottos) {
+            int match = lotto.match(winningLotto);
+            result.addMatch(match);
+        }
+        return result;
+    }
 }

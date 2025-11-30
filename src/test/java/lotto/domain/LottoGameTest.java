@@ -12,4 +12,14 @@ class LottoGameTest {
     void generate_lotto() {
         assertThat(new LottoGame(14000).lottos()).hasSize(14);
     }
+
+    @Test
+    void winningResult() {
+        assertThat(new LottoGame(14000).check(new Lotto(1, 2, 3, 4, 5, 6))).isNotNull();
+    }
+
+    @Test
+    void winningResult2() {
+        //new LottoGame();
+    }
 }

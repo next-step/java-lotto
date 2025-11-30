@@ -22,4 +22,8 @@ public class LottoGame {
     public List<Lotto> lottos() {
         return lottos.values();
     }
+
+    public LottoResult check(Lotto winningLotto) {
+        return lottos.findResult(winningLotto);
+    }
 }
