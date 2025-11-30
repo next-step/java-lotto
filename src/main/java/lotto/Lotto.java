@@ -73,15 +73,15 @@ public class Lotto {
   public List<Integer> numbers() {
     return Collections.unmodifiableList(new ArrayList<>(numbers));
   }
-
-  public int countMatchingNumbers(Lotto winningNumbers) {
+  
+  public LottoRank countMatchingNumbers(Lotto winningNumbers) {
     int count = 0;
     for (Integer number : numbers) {
       if (winningNumbers.contains(number)) {
         count++;
       }
     }
-    return count;
+    return LottoRank.of(count);
   }
 
   private boolean contains(Integer number) {

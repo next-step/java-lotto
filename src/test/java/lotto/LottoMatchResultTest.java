@@ -19,7 +19,8 @@ public class LottoMatchResultTest {
   })
   void countMatches(int matchCount, int expected) {
     LottoMatchResult matchResult = LottoMatchResult.of(6, 5, 5);
-    assertThat(matchResult.countMatches(matchCount)).isEqualTo(expected);
+    LottoRank rank = LottoRank.of(matchCount);
+    assertThat(matchResult.countMatches(rank)).isEqualTo(expected);
   }
 
   @DisplayName("총 당첨금을 계산한다")

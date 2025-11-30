@@ -18,7 +18,7 @@ public class Lottos {
   public LottoMatchResult matchResult(Lotto winningNumbers) {
     LottoMatchResult result = new LottoMatchResult();
     for (Lotto lotto : lottos) {
-      int match = lotto.countMatchingNumbers(winningNumbers);
+      LottoRank match = lotto.countMatchingNumbers(winningNumbers);
       result.match(match);
     }
     return result;

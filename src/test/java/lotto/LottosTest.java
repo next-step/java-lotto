@@ -16,9 +16,7 @@ public class LottosTest {
       "5, 1",
       "0, 1",
       "4, 0",
-      "3, 0",
-      "2, 0",
-      "1, 0",
+      "3, 0"
   })
   void matchResult(int matchCount, int expectedCount) {
     Lottos lottos = new Lottos(List.of(
@@ -27,7 +25,8 @@ public class LottosTest {
         new Lotto(7, 8, 9, 10, 11, 12)));
     Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
     LottoMatchResult result = lottos.matchResult(winningNumbers);
-    assertThat(result.countMatches(matchCount)).isEqualTo(expectedCount);
+    LottoRank rank = LottoRank.of(matchCount);
+    assertThat(result.countMatches(rank)).isEqualTo(expectedCount);
   }
 
 }

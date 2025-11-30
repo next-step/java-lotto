@@ -21,10 +21,9 @@ public class ResultView {
     System.out.println("---------");
 
     for (LottoRank rank : LottoRank.values()) {
-      int matchCount = rank.matchCount();
-      int count = matchResult.countMatches(matchCount);
+      int count = matchResult.countMatches(rank);
       int prize = rank.prize();
-      System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, prize, count);
+      System.out.printf("%d개 일치 (%d원)- %d개%n", rank.matchCount(), prize, count);
     }
 
     double rate = profitRate.value();

@@ -5,20 +5,20 @@ import java.util.Map;
 
 public class LottoMatchResult {
 
-  private final Map<Integer, Integer> matchResult = new HashMap<>();
+  private final Map<LottoRank, Integer> matchResult = new HashMap<>();
 
-  public void match(int match) {
-    matchResult.put(match, matchResult.getOrDefault(match, 0) + 1);
+  public void match(LottoRank rank) {
+    matchResult.put(rank, matchResult.getOrDefault(rank, 0) + 1);
   }
 
-  public int countMatches(int matchCount) {
-    return matchResult.getOrDefault(matchCount, 0);
+  public int countMatches(LottoRank rank) {
+    return matchResult.getOrDefault(rank, 0);
   }
 
   public long totalPrize() {
     long totalPrize = 0;
     for (LottoRank rank : LottoRank.values()) {
-      int count = countMatches(rank.matchCount());
+      int count = countMatches(rank);
       totalPrize += (long) count * rank.prize();
     }
     return totalPrize;
@@ -27,7 +27,8 @@ public class LottoMatchResult {
   public static LottoMatchResult of(int... matches) {
     LottoMatchResult result = new LottoMatchResult();
     for (int m : matches) {
-      result.match(m);
+      LottoRank rank = LottoRank.of(m);
+      result.match(rank);
     }
     return result;
   }
