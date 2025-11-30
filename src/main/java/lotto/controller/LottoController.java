@@ -4,6 +4,8 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
     public void run() {
         Money purchaseAmount = InputView.readPurchaseAmountInput();
@@ -15,14 +17,21 @@ public class LottoController {
         OutputView.printPurchaseCount(lottoPurchasePlan);
         OutputView.printBoughtLottos(lottos);
 
-        WinningLotto winningLotto = InputView.readWinningLottoAndBonusBallInput();
+        WinningLotto winningLotto = readWinningLottoAndBonusBall();
         LottoResults result = lottos.match(winningLotto);
         OutputView.printResults(result, purchaseAmount);
     }
 
+    private WinningLotto readWinningLottoAndBonusBall() {
+        String lotto = InputView.readWinningLottoInput();
+        int bonusNumber = InputView.readBonusNumberInput();
+        return new WinningLotto(lotto, bonusNumber);
+    }
+
     private Lottos buyLottos(LottoPurchasePlan lottoPurchasePlan) {
-        Lottos manuals = InputView.readMaualLottoInput(lottoPurchasePlan.manualCount().value());
-        Lottos autos = lottoPurchasePlan.generateAutoLottos();
+        List<String> manualInputs = InputView.readMaualLottoInput(lottoPurchasePlan.manualCount().value());
+        Lottos manuals = new ManualLottosGenerator(manualInputs).generate();
+        Lottos autos = new AutoLottosGenerator(lottoPurchasePlan).generate();
         return Lottos.of(manuals, autos);
     }
 }

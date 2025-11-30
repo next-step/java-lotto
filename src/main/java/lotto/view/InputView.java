@@ -17,42 +17,30 @@ public class InputView {
         return new Count(scanner.nextInt());
     }
 
-    public static Lottos readMaualLottoInput(int manualLottoCount) {
+    public static List<String> readMaualLottoInput(int manualLottoCount) {
         Scanner scanner = new Scanner(System.in);
         print("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> lottos = new ArrayList<>();
+        List<String> lottos = new ArrayList<>();
         for(int i = 0; i < manualLottoCount; i++) {
-               lottos.add(readLotto(scanner));
+            lottos.add(readLotto(scanner));
         }
-        return new Lottos(lottos);
+        return lottos;
     }
 
-    public static WinningLotto readWinningLottoAndBonusBallInput() {
-        Lotto lotto = readWinningLottoInput();
-        LottoNumber lottoNumber = readBonusNumberInput();
-        return new WinningLotto(lotto, lottoNumber);
+    private static String readLotto(Scanner scanner) {
+        return scanner.nextLine();
     }
 
-    private static Lotto readLotto(Scanner scanner) {
-        String[] inputs = scanner.nextLine().split(",");
-        Set<LottoNumber> numbers = new HashSet<>();
-        for (String input : inputs) {
-            numbers.add(LottoNumber.of(input.trim()));
-        }
-        return new Lotto(numbers);
-    }
-
-    private static Lotto readWinningLottoInput() {
+    public static String readWinningLottoInput() {
         Scanner scanner = new Scanner(System.in);
         print("지난 주 당첨 번호를 입력해 주세요.");
         return readLotto(scanner);
     }
 
-    private static LottoNumber readBonusNumberInput() {
+    public static int readBonusNumberInput() {
         Scanner scanner = new Scanner(System.in);
         print("보너스 볼을 입력해 주세요.");
-        int bonusNumber = scanner.nextInt();
-        return LottoNumber.of(bonusNumber);
+        return scanner.nextInt();
     }
 
     private static void print(String message) {

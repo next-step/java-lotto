@@ -4,6 +4,10 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
+    public WinningLotto(String lotto, int bonusNumber) {
+        this(LottoFactory.createLotto(lotto), LottoNumber.of(bonusNumber));
+    }
+
     public WinningLotto(Lotto lotto, int bonusNumber) {
         this(lotto, LottoNumber.of(bonusNumber));
     }
