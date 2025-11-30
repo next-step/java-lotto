@@ -38,6 +38,10 @@ public class Lotto {
         if (invalidNumber) {
             throw new IllegalArgumentException();
         }
+    }
 
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
