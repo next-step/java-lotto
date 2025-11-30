@@ -1,13 +1,10 @@
 package lotto.view;
 
-import lotto.model.Prize;
-import lotto.model.Money;
-import lotto.model.LottoResults;
-import lotto.model.Lottos;
+import lotto.model.*;
 
 public class OutputView {
-    public static void printPurchaseCount(int count) {
-        System.out.printf("%s개를 구매했습니다.%n", count);
+    public static void printPurchaseCount(LottoPurchasePlan lottoPurchasePlan) {
+        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.%n", lottoPurchasePlan.manualCount(), lottoPurchasePlan.totalCount());
     }
 
     public static void printResults(LottoResults result, Money purchaseAmount) {
