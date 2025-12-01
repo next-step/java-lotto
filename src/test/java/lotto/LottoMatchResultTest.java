@@ -12,14 +12,14 @@ public class LottoMatchResultTest {
   @DisplayName("특정 개수만큼 일치하는 로또가 몇 개인지 센다")
   @ParameterizedTest
   @CsvSource({
-      "6, 1",
-      "5, 2",
-      "4, 0",
-      "3, 0"
+      "6, false, 1",
+      "5, false, 2",
+      "4, false, 0",
+      "3, false, 0"
   })
-  void countMatches(int matchCount, int expected) {
+  void countMatches(int matchCount, boolean hasBonus, int expected) {
     LottoMatchResult matchResult = LottoMatchResult.of(6, 5, 5);
-    LottoRank rank = LottoRank.of(matchCount);
+    LottoRank rank = LottoRank.of(matchCount, hasBonus);
     assertThat(matchResult.countMatches(rank)).isEqualTo(expected);
   }
 

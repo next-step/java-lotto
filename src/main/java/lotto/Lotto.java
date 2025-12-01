@@ -74,12 +74,27 @@ public class Lotto {
 
   public LottoRank matchingRank(Lotto winningNumbers) {
     int count = 0;
+    boolean hasBonus = false;
     for (LottoNumber number : numbers) {
       if (winningNumbers.contains(number)) {
         count++;
       }
     }
-    return LottoRank.of(count);
+    return LottoRank.of(count, hasBonus);
+  }
+
+  public LottoRank matchingRank(Lotto winningNumbers, LottoNumber bonusNumber) {
+    int count = 0;
+    boolean hasBonus = false;
+    for (LottoNumber number : numbers) {
+      if (winningNumbers.contains(number)) {
+        count++;
+      }
+      if (number.equals(bonusNumber)) {
+        hasBonus = true;
+      }
+    }
+    return LottoRank.of(count, hasBonus);
   }
 
   private boolean contains(LottoNumber number) {

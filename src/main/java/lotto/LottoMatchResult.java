@@ -27,7 +27,7 @@ public class LottoMatchResult {
   public static LottoMatchResult of(int... matches) {
     LottoMatchResult result = new LottoMatchResult();
     for (int m : matches) {
-      LottoRank rank = LottoRank.of(m);
+      LottoRank rank = LottoRank.of(m, false);
       result.match(rank);
     }
     return result;

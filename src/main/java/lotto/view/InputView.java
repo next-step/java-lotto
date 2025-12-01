@@ -16,6 +16,11 @@ public class InputView {
     return SCANNER.nextLine();
   }
 
+  public static String readBonusNumber() {
+    System.out.println("보너스 볼을 입력해 주세요.");
+    return SCANNER.nextLine();
+  }
+
   private static int parseIntOrThrow(String input) {
     try {
       return Integer.parseInt(input.trim());

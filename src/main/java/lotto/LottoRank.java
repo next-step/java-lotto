@@ -28,11 +28,21 @@ public enum LottoRank {
     return (long) prize * count;
   }
 
-  public static LottoRank of(int matchCount) {
-    for (LottoRank rank : values()) {
-      if (rank.matchCount == matchCount) {
-        return rank;
-      }
+  public static LottoRank of(int matchCount, boolean hasBonus) {
+    if (matchCount == 6) {
+      return FIRST;
+    }
+    if (matchCount == 5 && hasBonus) {
+      return SECOND;
+    }
+    if (matchCount == 5) {
+      return THIRD;
+    }
+    if (matchCount == 4) {
+      return FOURTH;
+    }
+    if (matchCount == 3) {
+      return FIFTH;
     }
     return MISS;
   }
