@@ -13,6 +13,14 @@ public class Number {
         this.number = number;
     }
 
+    public Number calculate(Operator operator, Number otherNumber) {
+        return operator.operate(number, otherNumber.value());
+    }
+
+    public int value() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
