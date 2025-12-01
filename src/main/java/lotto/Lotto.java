@@ -83,14 +83,14 @@ public class Lotto {
     return LottoRank.of(count, hasBonus);
   }
 
-  public LottoRank matchingRank(Lotto winningNumbers, LottoNumber bonusNumber) {
+  public LottoRank matchingRank(WinningNumbers winningNumbers) {
     int count = 0;
     boolean hasBonus = false;
     for (LottoNumber number : numbers) {
       if (winningNumbers.contains(number)) {
         count++;
       }
-      if (number.equals(bonusNumber)) {
+      if (winningNumbers.hasBonus(number)) {
         hasBonus = true;
       }
     }

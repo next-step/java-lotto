@@ -21,6 +21,14 @@ public class WinningNumbers {
     return bonusNumber;
   }
 
+  public boolean contains(LottoNumber number) {
+    return winningNumbers.contains(number);
+  }
+
+  public boolean hasBonus(LottoNumber number) {
+    return bonusNumber.equals(number);
+  }
+
   private void validateDuplicate(Lotto winningNumber, LottoNumber bonusNumber) {
     if (winningNumber.contains(bonusNumber)) {
       throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS);
