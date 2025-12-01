@@ -72,17 +72,6 @@ public class Lotto {
     return Collections.unmodifiableList(new ArrayList<>(numbers));
   }
 
-  public LottoRank matchingRank(Lotto winningNumbers) {
-    int count = 0;
-    boolean hasBonus = false;
-    for (LottoNumber number : numbers) {
-      if (winningNumbers.contains(number)) {
-        count++;
-      }
-    }
-    return LottoRank.of(count, hasBonus);
-  }
-
   public LottoRank matchingRank(WinningNumbers winningNumbers) {
     int count = 0;
     boolean hasBonus = false;

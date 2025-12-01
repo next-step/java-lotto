@@ -13,14 +13,6 @@ public class WinningNumbers {
     this.bonusNumber = bonusNumber;
   }
 
-  public Lotto winningNumbers() {
-    return winningNumbers;
-  }
-
-  public LottoNumber bonusNumber() {
-    return bonusNumber;
-  }
-
   public boolean contains(LottoNumber number) {
     return winningNumbers.contains(number);
   }

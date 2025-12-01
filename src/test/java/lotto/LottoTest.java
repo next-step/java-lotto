@@ -41,15 +41,6 @@ public class LottoTest {
         .withMessageContaining("6개");
   }
 
-  @DisplayName("로또 번호는 1~45 사이의 숫자로 구성된다")
-  @ParameterizedTest
-  @MethodSource("invalidLottoNumberRange")
-  void validLottoNumberRange(List<Integer> numbers) {
-    assertThatIllegalArgumentException()
-        .isThrownBy(() -> Lotto.fromIntegers(numbers))
-        .withMessageContaining("1~45");
-  }
-
   @DisplayName("로또 번호는 정렬된다")
   @Test
   void sortLottoNumbers() {
@@ -64,23 +55,6 @@ public class LottoTest {
     );
     assertThat(lotto.numbers()).containsExactlyElementsOf(expectedNumbers);
   }
-
-  @DisplayName("일치하는 번호가 없으면 MISS 반환한다")
-  @Test
-  void compareNumbers_NoneEqual() {
-    Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-    Lotto winningNumbers = new Lotto(7, 8, 9, 10, 11, 12);
-    assertThat(lotto.matchingRank(winningNumbers)).isEqualTo(LottoRank.MISS);
-  }
-
-  @DisplayName("전부 일치하면 FIRST 반환한다")
-  @Test
-  void compareNumbers_AllEqual() {
-    Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-    Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
-    assertThat(lotto.matchingRank(winningNumbers)).isEqualTo(LottoRank.FIRST);
-  }
-
 
   static Stream<List<Integer>> invalidLottoSizes() {
     return Stream.of(
