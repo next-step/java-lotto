@@ -18,9 +18,12 @@ public class ResultView {
 
         for (LottoRank lottoRank : LottoRank.values()) {
             if (lottoRank == LottoRank.MISS) continue;
-            System.out.printf("%d개 일치 (%d원)- %d개%n", lottoRank.getMatchCnt(), lottoRank.getPrizeMoney(), lottoResult.getCntByLottoRank(lottoRank));
+
+            int count = lottoResult.getCntByLottoRank(lottoRank);
+            System.out.println(lottoRank.getMessage(count));
         }
 
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", money.getYield(lottoResult.calTotal()));
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",
+                money.getYield(lottoResult.calTotal()));
     }
 }

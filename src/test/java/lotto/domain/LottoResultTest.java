@@ -18,7 +18,8 @@ public class LottoResultTest {
             )
         );
 
-        LottoResult lottoResult = lottoGroup.match(winLotto);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winLotto, LottoNumber.valueOf(10));
+        LottoResult lottoResult = lottoGroup.match(lottoWinningNumbers);
 
         Assertions.assertThat(lottoResult.calTotal()).isEqualTo(new Money(10000));
     }
@@ -34,8 +35,10 @@ public class LottoResultTest {
                 )
         );
 
-        LottoResult lottoResult = lottoGroup.match(winLotto);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winLotto, LottoNumber.valueOf(10));
 
-        Assertions.assertThat(lottoResult.getCntByLottoRank(LottoRank.THIRD)).isEqualTo(2);
+        LottoResult lottoResult = lottoGroup.match(lottoWinningNumbers);
+
+        Assertions.assertThat(lottoResult.getCntByLottoRank(LottoRank.FIFTH)).isEqualTo(2);
     }
 }

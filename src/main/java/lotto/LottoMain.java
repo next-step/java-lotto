@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGroup;
-import lotto.domain.LottoResult;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,7 +14,9 @@ public class LottoMain {
 
         Lotto winLotto = new Lotto(InputView.getInputWinNumber());
 
-        LottoResult result = lottoGroup.match(winLotto);
+        LottoNumber bonusNumber = LottoNumber.valueOf(InputView.getInputBonusNumber());
+
+        LottoResult result = lottoGroup.match(new LottoWinningNumbers(winLotto, bonusNumber));
 
         ResultView.showStatus(result, money);
     }

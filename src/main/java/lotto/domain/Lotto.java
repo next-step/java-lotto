@@ -21,32 +21,22 @@ public class Lotto {
 
     private static List<LottoNumber> stringToList(String... numbers) {
         return Arrays.stream(numbers)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .toList();
     }
 
     private static List<LottoNumber> intToList(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .toList();
     }
 
-    public LottoRank determineRank(Lotto lotto) {
-        return LottoRank.getLottoRank(lotto.countMatchedNumbers(this.numbers));
+    public int countMatchedNumbers(Lotto winningLotto) {
+        return (int) numbers.stream().filter(winningLotto::contains).count();
     }
 
-    public int countMatchedNumbers(List<LottoNumber> lottoNumbers) {
-        int cnt = 0;
-
-        for (LottoNumber lottoNumber: lottoNumbers) {
-            cnt += containsNumber(lottoNumber);
-        }
-
-        return cnt;
-    }
-
-    private int containsNumber(LottoNumber number) {
-        return this.numbers.contains(number) ? 1 : 0;
+    public boolean contains(LottoNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber);
     }
 
     @Override
