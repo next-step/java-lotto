@@ -31,16 +31,12 @@ public class Lotto {
                 .toList();
     }
 
-    public LottoRank determineRank(Lotto lotto, LottoNumber bonusNumber) {
-        return LottoRank.getLottoRank(lotto.countMatchedNumbers(this.numbers), containsBonusNumber(bonusNumber));
+    public int countMatchedNumbers(Lotto winningLotto) {
+        return (int) numbers.stream().filter(winningLotto::contains).count();
     }
 
-    public boolean containsBonusNumber(LottoNumber winLottoNumber) {
-        return this.numbers.contains(winLottoNumber);
-    }
-
-    public int countMatchedNumbers(List<LottoNumber> lottoNumbers) {
-        return (int) lottoNumbers.stream().filter(this.numbers::contains).count();
+    public boolean contains(LottoNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber);
     }
 
     @Override
