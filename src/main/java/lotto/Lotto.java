@@ -97,7 +97,7 @@ public class Lotto {
     return LottoRank.of(count, hasBonus);
   }
 
-  private boolean contains(LottoNumber number) {
+  public boolean contains(LottoNumber number) {
     return numbers.contains(number);
   }
 
