@@ -26,6 +26,10 @@ public class ResultView {
       }
       int count = matchResult.countMatches(rank);
       int prize = rank.prize();
+      if (rank == LottoRank.SECOND) {
+        System.out.printf("5개 일치, 보너스 볼 일치 (%d원) - %d개%n", prize, count);
+        continue;
+      }
       System.out.printf("%d개 일치 (%d원)- %d개%n", rank.matchCount(), prize, count);
     }
 
