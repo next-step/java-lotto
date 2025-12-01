@@ -22,7 +22,14 @@ public class LottoTest {
   @Test
   void createLottoFromString() {
     Lotto lotto = new Lotto("1,2,3,4,5,6");
-    assertThat(lotto.numbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    assertThat(lotto.numbers()).containsExactly(
+        new LottoNumber(1),
+        new LottoNumber(2),
+        new LottoNumber(3),
+        new LottoNumber(4),
+        new LottoNumber(5),
+        new LottoNumber(6)
+    );
   }
 
   @DisplayName("로또 번호는 6개여야 한다")
@@ -30,7 +37,7 @@ public class LottoTest {
   @MethodSource("invalidLottoSizes")
   void validLottoSize(List<Integer> numbers) {
     assertThatIllegalArgumentException()
-        .isThrownBy(() -> new Lotto(numbers))
+        .isThrownBy(() -> Lotto.fromIntegers(numbers))
         .withMessageContaining("6개");
   }
 
@@ -39,7 +46,7 @@ public class LottoTest {
   @MethodSource("invalidLottoNumberRange")
   void validLottoNumberRange(List<Integer> numbers) {
     assertThatIllegalArgumentException()
-        .isThrownBy(() -> new Lotto(numbers))
+        .isThrownBy(() -> Lotto.fromIntegers(numbers))
         .withMessageContaining("1~45");
   }
 
@@ -47,8 +54,15 @@ public class LottoTest {
   @Test
   void sortLottoNumbers() {
     Lotto lotto = new Lotto(2, 5, 8, 1, 3, 4);
-    List<Integer> expected = List.of(1, 2, 3, 4, 5, 8);
-    assertThat(lotto.numbers()).isEqualTo(expected);
+    List<LottoNumber> expectedNumbers = List.of(
+        new LottoNumber(1),
+        new LottoNumber(2),
+        new LottoNumber(3),
+        new LottoNumber(4),
+        new LottoNumber(5),
+        new LottoNumber(8)
+    );
+    assertThat(lotto.numbers()).containsExactlyElementsOf(expectedNumbers);
   }
 
   @DisplayName("일치하는 번호가 없으면 MISS 반환한다")
