@@ -13,7 +13,6 @@ public class Lotto {
   public static final int LOTTO_NUMBER_COUNT = 6;
 
   private static final String ERROR_INVALID_COUNT = "로또 번호는 6개여야 한다";
-  private static final String ERROR_OUT_OF_RANGE = "로또 번호는 1~45 범위의 숫자여야 한다";
 
   private final Set<LottoNumber> numbers;
 
