@@ -6,19 +6,46 @@ import java.util.stream.Collectors;
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
-    private final Set<LottoNumber> lotto;
+    private final Set<LottoNumber> numbers;
 
-    private Lotto(Set<LottoNumber> lotto) {
-        if (lotto.size() != LOTTO_SIZE) {
+    public Lotto(Integer... numbers) {
+        this(List.of(numbers));
+    }
+
+    public Lotto(String text) {
+        this(toSets(text));
+    }
+
+    public Lotto(List<Integer> numbers) {
+        this(toSets(numbers));
+    }
+
+    public Lotto(Set<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 크기는 6이어야 합니다.");
+        }
+        this.numbers = numbers;
+    }
+
+    private static Set<LottoNumber> toSets(String text) {
+        if (Objects.isNull(text)) {
             throw new IllegalArgumentException();
         }
+        String[] values = text.split(",");
+        return Arrays.stream(values)
+                .map(value -> LottoNumber.of(value))
+                .collect(Collectors.toSet());
+    }
 
-        this.lotto = lotto;
+    private static Set<LottoNumber> toSets(List<Integer> numbers) {
+        return numbers.stream()
+                .map(value -> LottoNumber.of(value))
+                .collect(Collectors.toSet());
     }
 
     public int match(Lotto target) {
         int count = 0;
-        for (LottoNumber lottoNumber : lotto) {
+        for (LottoNumber lottoNumber : numbers) {
             count += target.increment(lottoNumber);
         }
         return count;
@@ -31,24 +58,12 @@ public class Lotto {
         return 0;
     }
 
+    boolean contains(int lottoNumber) {
+        return contains(LottoNumber.of(lottoNumber));
+    }
+
     boolean contains(LottoNumber lottoNumber) {
-        return lotto.contains(lottoNumber);
-    }
-
-    public static Lotto of(List<Integer> numbers) {
-        Set<LottoNumber> lotto = new HashSet<>();
-        for (Integer number : numbers) {
-            lotto.add(LottoNumber.of(number));
-        }
-        return new Lotto(lotto);
-    }
-
-    public static Lotto ofComma(String value) {
-        String[] values = value.split(",");
-        return new Lotto(
-                Arrays.stream(values)
-                        .map(LottoNumber::of)
-                        .collect(Collectors.toSet()));
+        return numbers.contains(lottoNumber);
     }
 
     @Override
@@ -56,18 +71,18 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto1 = (Lotto) o;
-        return Objects.equals(lotto, lotto1.lotto);
+        return Objects.equals(numbers, lotto1.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto);
+        return Objects.hash(numbers);
     }
 
     @Override
     public String toString() {
         return "Lotto{" +
-                "lotto=" + lotto +
+                "numbers=" + numbers +
                 '}';
     }
 }
