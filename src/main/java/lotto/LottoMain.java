@@ -14,7 +14,7 @@ public class LottoMain {
 
         Lotto winLotto = new Lotto(InputView.getInputWinNumber());
 
-        LottoNumber bonusNumber = new LottoNumber(InputView.getInputBonusNumber());
+        LottoNumber bonusNumber = LottoNumber.valueOf(InputView.getInputBonusNumber());
 
         LottoResult result = lottoGroup.match(new LottoWinningNumbers(winLotto, bonusNumber));
 

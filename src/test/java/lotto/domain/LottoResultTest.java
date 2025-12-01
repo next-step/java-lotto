@@ -18,7 +18,7 @@ public class LottoResultTest {
             )
         );
 
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winLotto, new LottoNumber(1));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winLotto, LottoNumber.valueOf(10));
         LottoResult lottoResult = lottoGroup.match(lottoWinningNumbers);
 
         Assertions.assertThat(lottoResult.calTotal()).isEqualTo(new Money(10000));
@@ -35,7 +35,7 @@ public class LottoResultTest {
                 )
         );
 
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winLotto, new LottoNumber(1));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winLotto, LottoNumber.valueOf(10));
 
         LottoResult lottoResult = lottoGroup.match(lottoWinningNumbers);
 

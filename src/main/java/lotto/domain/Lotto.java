@@ -21,13 +21,13 @@ public class Lotto {
 
     private static List<LottoNumber> stringToList(String... numbers) {
         return Arrays.stream(numbers)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .toList();
     }
 
     private static List<LottoNumber> intToList(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .toList();
     }
 
