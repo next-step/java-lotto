@@ -1,30 +1,13 @@
 package lotto.domain;
 
-public enum Rank implements Matchable {
-    FIRST(6, 2000000_000) {
-        @Override
-        public boolean isMatch(int match) {
-            return match == 6;
-        }
-    },
-    THIRD(5, 1500000) {
-        @Override
-        public boolean isMatch(int match) {
-            return match == 5;
-        }
-    },
-    FOURTH(4, 50000) {
-        @Override
-        public boolean isMatch(int match) {
-            return match == 4;
-        }
-    },
-    FIFTH(3, 5000) {
-        @Override
-        public boolean isMatch(int match) {
-            return match == 3;
-        }
-    };
+import java.util.Arrays;
+
+public enum Rank {
+    FIRST(6, 2_000_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    NONE(0, 0);
 
     private final int match;
     private final int prize;
@@ -42,12 +25,14 @@ public enum Rank implements Matchable {
         return match;
     }
 
+    public boolean isMatch(int match) {
+        return this.match == match;
+    }
+
     public static Rank from(int matchCount) {
-        for (Rank rank : values()) {
-            if (rank.isMatch(matchCount)) {
-                return rank;
-            }
-        }
-        return null;
+        return Arrays.stream(values())
+                .filter(rank -> rank.isMatch(matchCount))
+                .findFirst()
+                .orElse(NONE);
     }
 }

@@ -5,24 +5,24 @@ import java.util.*;
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
     public Lotto() {
-        this(LottoFactory.generateLotto());
+        this(new TreeSet<>(LottoFactory.generateLotto()));
     }
 
     public Lotto(String value) {
         this(splitAndParseInt(value));
     }
 
-    private static List<Integer> splitAndParseInt(String value) {
+    private static Set<Integer> splitAndParseInt(String value) {
         String[] split = getSplit(value);
-        List<Integer> numbers = strToInt(split);
+        Set<Integer> numbers = strToIntSet(split);
         return numbers;
     }
 
-    private static List<Integer> strToInt(String[] split) {
-        List<Integer> numbers = new ArrayList<>();
+    private static Set<Integer> strToIntSet(String[] split) {
+        Set<Integer> numbers = new TreeSet<>();
         for (String s : split) {
             numbers.add(Integer.parseInt(s));
         }
@@ -34,21 +34,16 @@ public class Lotto {
     }
 
     public Lotto(Integer... numbers) {
-        this(Arrays.asList(numbers));
+        this(new TreeSet<>(Arrays.asList(numbers)));
     }
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
         validate(numbers);
-        this.numbers = List.copyOf(numbers);
+        this.numbers = Collections.unmodifiableSet(numbers);
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(Set<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException();
-        }
-
-        Set<Integer> noDuplicateNumbers = new HashSet<>(numbers);
-        if (noDuplicateNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
 
@@ -69,7 +64,7 @@ public class Lotto {
         return count;
     }
 
-    private List<Integer> numbers() {
+    private Set<Integer> numbers() {
         return numbers;
     }
 

@@ -14,7 +14,7 @@ public class Main {
 
         Lotto winningLotto = new Lotto(InputView.initWinningLotto());
         LottoResult result = lottoGame.check(winningLotto);
-        ResultView.printResult(result);
+        ResultView.printResult(result, lottoGame);
 
     }
 }

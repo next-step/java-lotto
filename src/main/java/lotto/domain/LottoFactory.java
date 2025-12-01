@@ -16,9 +16,8 @@ public class LottoFactory {
     private static final int LOTTO_SIZE = 6;
 
     public static List<Integer> generateLotto() {
-        List<Integer> numbers = new ArrayList<>(DEFAULT_NUMBERS);
-        Collections.shuffle(numbers);
-        List<Integer> lottoNumbers = numbers.subList(0, LOTTO_SIZE);
+        Collections.shuffle(DEFAULT_NUMBERS);
+        List<Integer> lottoNumbers = DEFAULT_NUMBERS.subList(0, LOTTO_SIZE);
         Collections.sort(lottoNumbers);
         return new ArrayList<>(lottoNumbers);
     }

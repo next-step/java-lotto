@@ -26,4 +26,8 @@ public class LottoGame {
     public LottoResult check(Lotto winningLotto) {
         return lottos.findResult(winningLotto);
     }
+
+    public double rateOfReturn(LottoResult result) {
+        return money.rateOfReturn(result.getTotal());
+    }
 }

@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Money {
-    private static final long LOTTO_PRICE = 1000;
+    private static final long LOTTO_PRICE = 1_000;
 
     private final long money;
 
@@ -20,4 +20,7 @@ public class Money {
         return (int) (money / LOTTO_PRICE);
     }
 
+    public double rateOfReturn(long getTotal) {
+        return Math.round((double) (getTotal / money) * 100) / 100.0;
+    }
 }

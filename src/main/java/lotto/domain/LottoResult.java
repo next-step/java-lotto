@@ -14,13 +14,16 @@ public class LottoResult {
 
     public void addMatch(int match) {
         Rank rank = Rank.from(match);
-        if (rank == null) {
-            return;
-        }
         lottoResult.put(rank, lottoResult.get(rank) + 1);
     }
 
     public int getCount(Rank rank) {
         return lottoResult.get(rank);
+    }
+
+    public long getTotal() {
+        return lottoResult.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().prize() * entry.getValue())
+                .sum();
     }
 }
