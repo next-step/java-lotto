@@ -36,4 +36,13 @@ public class NumberTest {
         Operator operator = new Multiplication();
         assertThat(first.calculate(operator, second)).isEqualTo(new Number(6));
     }
+
+    @Test
+    public void 나눗셈() {
+        Number first = new Number("4");
+        Number second = new Number("2");
+
+        Operator operator = new Division();
+        assertThat(first.calculate(operator, second)).isEqualTo(new Number(2));
+    }
 }
