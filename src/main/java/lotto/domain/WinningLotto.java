@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.result.Rank;
+
 public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonusNumber;

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.result.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
