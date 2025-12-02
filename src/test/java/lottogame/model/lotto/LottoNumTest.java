@@ -11,7 +11,7 @@ class LottoNumTest {
     @ValueSource(ints = {0, 46})
     void 로또번호가_1미만이거나_45를초과하면_예외처리를_할_수_있다(int num) {
         assertThatThrownBy(
-                () -> new LottoNum(num)
+                () -> LottoNum.getInstance(num)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -37,10 +37,6 @@ public enum WinStandard {
         return this == NOTHING;
     }
 
-    public int returnOfWin() {
-        return this.returnOfWin;
-    }
-
     public static Map<WinStandard, Integer> getInitWinStandardMap() {
         return Arrays.stream(WinStandard.values())
                 .filter(winStandard -> !winStandard.isNothing())
@@ -52,5 +48,9 @@ public enum WinStandard {
 
     public int value() {
         return this.value;
+    }
+
+    public int calculateWinReturn(int winCount) {
+        return this.returnOfWin * winCount;
     }
 }

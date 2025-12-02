@@ -26,7 +26,7 @@ class LottosTest {
                 )
         );
         Lotto winLotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
-        WinningLottoNums winningLottoNums = new WinningLottoNums(winLotto, new LottoNum(45));
+        WinningLottoNums winningLottoNums = new WinningLottoNums(winLotto, LottoNum.getInstance(45));
 
         WinnerResult winnerResult = lottos.compareAndElectWinResult(winningLottoNums);
 
@@ -45,7 +45,7 @@ class LottosTest {
         );
         WinningLottoNums winningLottoNums = new WinningLottoNums(
                 new Lotto(로또번호리스트를_오름차순으로_생성한다(6)),
-                new LottoNum(7)
+                LottoNum.getInstance(7)
         );
 
         WinnerResult winnerResult = lottos.compareAndElectWinResult(winningLottoNums);

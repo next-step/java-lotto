@@ -4,6 +4,7 @@ import static lottogame.model.winner.WinStandard.FIFTH;
 import static lottogame.model.winner.WinStandard.FIRST;
 import static lottogame.model.winner.WinStandard.FOURTH;
 import static lottogame.model.winner.WinStandard.NOTHING;
+import static lottogame.model.winner.WinStandard.SECOND;
 import static lottogame.model.winner.WinStandard.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,10 +37,11 @@ class WinnerResultTest {
     @Test
     void 당첨결과에따른_총상금을_계산_할_수_있다() {
         WinnerResult winnerResult = new WinnerResult();
-        winnerResult.addWinResult(FIFTH);
+        winnerResult.addWinResult(FIRST);
+        winnerResult.addWinResult(SECOND);
 
         assertThat(
                 winnerResult.sumTotalWinReturn()
-        ).isEqualTo(FIFTH.returnOfWin());
+        ).isEqualTo(2_000_000_000 + 30_000_000);
     }
 }

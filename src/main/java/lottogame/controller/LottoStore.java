@@ -9,7 +9,6 @@ import static lottogame.view.Casher.informPublishedLottos;
 import static lottogame.view.Casher.informWinResult;
 
 import java.util.Set;
-import lottogame.model.lotto.Lotto;
 import lottogame.model.lotto.LottoMachine;
 import lottogame.model.lotto.LottoNum;
 import lottogame.model.lotto.Lottos;
@@ -21,12 +20,10 @@ public class LottoStore {
 
     public void start() {
         LottoPurchasePrice lottoPurchasePrice = getLottoPurchasePrice();
-        LottoMachine lottoMachine = new LottoMachine();
 
-        Lottos lottos = buyLottos(lottoMachine, lottoPurchasePrice);
+        Lottos lottos = buyLottos(lottoPurchasePrice);
 
-        WinnerResult winnerResult = lottos.compareAndElectWinResult(
-                getWinningLottoNums(lottoMachine));
+        WinnerResult winnerResult = lottos.compareAndElectWinResult(getWinningLottoNums());
 
         informWinResult(winnerResult, lottoPurchasePrice);
     }
@@ -38,15 +35,15 @@ public class LottoStore {
         return lottoPurchasePrice;
     }
 
-    private Lottos buyLottos(LottoMachine lottoMachine, LottoPurchasePrice lottoPurchasePrice) {
-        Lottos lottos = lottoMachine.publish(lottoPurchasePrice);
+    private Lottos buyLottos(LottoPurchasePrice lottoPurchasePrice) {
+        Lottos lottos = LottoMachine.makeLotto(lottoPurchasePrice);
         informPublishedLottos(lottos.convertRawString());
         return lottos;
     }
 
-    private WinningLottoNums getWinningLottoNums(LottoMachine lottoMachine) {
-        Set<LottoNum> lottoByNums = lottoMachine.createLottoByNums(askBeforeWinNums());
-        LottoNum bonusNum = lottoMachine.getLottoNum(askBonusNum());
+    private WinningLottoNums getWinningLottoNums() {
+        Set<LottoNum> lottoByNums = LottoMachine.createLottoByNums(askBeforeWinNums());
+        LottoNum bonusNum = LottoMachine.getLottoNum(askBonusNum());
 
         return new WinningLottoNums(lottoByNums, bonusNum);
     }

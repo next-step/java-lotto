@@ -14,7 +14,7 @@ class LottoMachineTest {
     void 사용자의금액만큼_로또를_발행할_수_있다() {
         LottoMachine lottoMachine = new LottoMachine();
         LottoPurchasePrice lottoPurchasePrice = new LottoPurchasePrice(14000);
-        Lottos lotto = lottoMachine.publish(lottoPurchasePrice);
+        Lottos lotto = lottoMachine.makeLotto(lottoPurchasePrice);
 
         assertThat(
                 lotto.size()

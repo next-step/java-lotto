@@ -17,7 +17,7 @@ public class LottoFixture {
     private static Set<LottoNum> createLottoNumsInRange(int start, int end) {
         Set<LottoNum> lottoNums = new HashSet<>();
         for (int i = start; i <= end; i++) {
-            lottoNums.add(new LottoNum(i));
+            lottoNums.add(LottoNum.getInstance(i));
         }
 
         return lottoNums;

@@ -59,6 +59,6 @@ public class WinnerResult {
     }
 
     private int calculateWinReturnBy(WinStandard winStandard) {
-        return winStandard.returnOfWin() * this.winStandardToWinCount.get(winStandard);
+        return winStandard.calculateWinReturn(this.findWinCount(winStandard));
     }
 }

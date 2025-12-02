@@ -15,7 +15,7 @@ class WinningLottoNumsTest {
     void 입력받은_당첨번호목록과_로또번호가_1등인지_비교할_수_있다() {
         WinningLottoNums winningLottoNums = new WinningLottoNums(
                 new Lotto(로또번호리스트를_오름차순으로_생성한다(6)),
-                new LottoNum(7)
+                LottoNum.getInstance(7)
         );
         Lotto lotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
 
@@ -28,7 +28,7 @@ class WinningLottoNumsTest {
     void 입력받은_당첨번호목록과_로또번호가_꽝인지_비교할_수_있다() {
         WinningLottoNums winningLottoNums = new WinningLottoNums(
                 new Lotto(로또번호리스트를_지정해서_생성한다(6, 11)),
-                new LottoNum(45)
+                LottoNum.getInstance(45)
         );
 
         Lotto lotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
@@ -42,7 +42,7 @@ class WinningLottoNumsTest {
     void 입력받은_당첨번호목록과_보너스볼이_2등인지_비교할_수_있다() {
         WinningLottoNums winningLottoNums = new WinningLottoNums(
                 new Lotto(로또번호리스트를_지정해서_생성한다(2, 7)),
-                new LottoNum(1)
+                LottoNum.getInstance(1)
         );
         Lotto lotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
 
@@ -54,7 +54,7 @@ class WinningLottoNumsTest {
     @Test
     void 입력받은_당첨번호목록에_보너스볼이_존재하면_예외처리_할_수_있다() {
         assertThatThrownBy(
-                 () -> new WinningLottoNums(new Lotto(로또번호리스트를_지정해서_생성한다(2, 7)), new LottoNum(3))
+                 () -> new WinningLottoNums(new Lotto(로또번호리스트를_지정해서_생성한다(2, 7)), LottoNum.getInstance(3))
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }
