@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Calculator {
-    private List<Number> numbers;
-    private List<Operator> operators;
+    private final List<Number> numbers;
+    private final List<Operator> operators;
 
     public Calculator(String expression) {
         this(Parser.parse(expression));
@@ -47,6 +47,16 @@ public class Calculator {
         }
 
         return operators;
+    }
+
+    public Number calculate() {
+        Number result = numbers.getFirst();
+
+        for (int i = 1; i < numbers.size(); i++) {
+            result = result.calculate(operators.get(i - 1), numbers.get(i));
+        }
+
+        return result;
     }
 
     @Override

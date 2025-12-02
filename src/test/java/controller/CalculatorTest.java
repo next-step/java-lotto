@@ -29,4 +29,9 @@ public class CalculatorTest {
 
         assertThat(new Calculator("1 + 2 - 3 * 4 / 5")).isEqualTo(new Calculator(numbers, operators));
     }
+
+    @Test
+    public void 계산() {
+        assertThat(new Calculator("1 + 2 - 3 + 5 * 4 / 5").calculate()).isEqualTo(new Number(4));
+    }
 }
