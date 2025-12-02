@@ -19,6 +19,9 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Rank rank : Rank.values()) {
+            if (rank == Rank.SECOND) {
+                System.out.println(rank.match() + "개 일치, 보너스 볼 일치 (" + rank.prize() + "원) - " + result.getCount(rank) + "개");
+            }
             System.out.println(rank.match() + "개 일치 (" + rank.prize() + "원) - " + result.getCount(rank) + "개");
         }
         printRateOfReturn(result, lottoGame);

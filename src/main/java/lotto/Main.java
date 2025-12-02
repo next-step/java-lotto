@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoResult;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,7 +12,7 @@ public class Main {
         LottoGame lottoGame = new LottoGame(price);
         ResultView.printLottos(lottoGame.lottos());
 
-        Lotto winningLotto = new Lotto(InputView.initWinningLotto());
+        WinningLotto winningLotto = new WinningLotto(InputView.initWinningLotto(), InputView.initBonusNumber());
         LottoResult result = lottoGame.check(winningLotto);
         ResultView.printResult(result, lottoGame);
 

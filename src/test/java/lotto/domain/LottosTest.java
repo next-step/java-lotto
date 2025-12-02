@@ -20,6 +20,6 @@ class LottosTest {
     void findResult() {
         Lottos lottos = new Lottos(List.of(new Lotto(1, 2, 3, 4, 5, 6)
                 , new Lotto(1, 2, 3, 9, 10, 11)));
-        assertThat(lottos.findResult(new Lotto(1, 2, 3, 4, 5, 6))).isNotNull();
+        assertThat(lottos.findResult(new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7))).isNotNull();
     }
 }

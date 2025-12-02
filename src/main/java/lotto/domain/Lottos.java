@@ -17,11 +17,12 @@ public class Lottos {
         return lottos;
     }
 
-    public LottoResult findResult(Lotto winningLotto) {
+    public LottoResult findResult(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
         for (Lotto lotto : lottos) {
-            int match = lotto.match(winningLotto);
-            result.addMatch(match);
+            int match = winningLotto.match(lotto);
+            boolean bonusMatch = winningLotto.isBonusMatch(lotto);
+            result.addMatch(match, bonusMatch);
         }
         return result;
     }
