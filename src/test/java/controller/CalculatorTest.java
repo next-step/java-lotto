@@ -1,16 +1,32 @@
 package controller;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import domain.Operator;
+import domain.OperatorFactory;
+import org.junit.jupiter.api.Test;
+import java.util.List;
+
+import domain.Number;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
-    @ParameterizedTest
-    @ValueSource(strings = {"", " "})
-    public void 빈_문자열_null_체크(String input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Calculator(input);
-        });
+    @Test
+    public void 생성() {
+        List<Number> numbers = List.of(
+                new Number(1),
+                new Number(2),
+                new Number(3),
+                new Number(4),
+                new Number(5)
+
+        );
+        List<Operator> operators = List.of(
+                OperatorFactory.getOperator("+"),
+                OperatorFactory.getOperator("-"),
+                OperatorFactory.getOperator("*"),
+                OperatorFactory.getOperator("/")
+        );
+
+        assertThat(new Calculator("1 + 2 - 3 * 4 / 5")).isEqualTo(new Calculator(numbers, operators));
     }
 }
