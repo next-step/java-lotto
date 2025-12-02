@@ -24,7 +24,7 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(String number){
         validation(Integer.parseInt(number));
-        return CACHE_NUM.get(Integer.parseInt(number));
+        return valueOf(Integer.parseInt(number));
     }
 
     public static LottoNumber valueOf(int number){
