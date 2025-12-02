@@ -26,10 +26,6 @@ public class Calculator {
         this.operators = operators;
     }
 
-    private static String[] parseExpressions(String expression) {
-        return expression.split(" ");
-    }
-
     private static List<Number> parseNumbers(String[] expression) {
         List<Number> numbers = new ArrayList<>();
 
