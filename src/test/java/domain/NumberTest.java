@@ -17,4 +17,14 @@ public class NumberTest {
 
         assertThat(first.calculate(operator, second)).isEqualTo(new Number(3));
     }
+
+    @Test
+    public void 뺄셈() {
+        Number first = new Number("3");
+        Number second = new Number("2");
+
+        Operator operator = new Substraction();
+
+        assertThat(first.calculate(operator, second)).isEqualTo(new Number(1));
+    }
 }
