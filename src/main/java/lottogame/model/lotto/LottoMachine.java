@@ -2,10 +2,8 @@ package lottogame.model.lotto;
 
 import static java.util.stream.IntStream.range;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,7 +17,7 @@ public class LottoMachine {
 
     private static final Random RANDOM = new Random();
 
-    public static Lottos makeLotto(LottoPurchasePrice lottoPurchasePrice) {
+    public static Lottos createAutoLotto(LottoPurchasePrice lottoPurchasePrice) {
         List<Lotto> lottos = range(0, lottoPurchasePrice.calculateLottoCount(PER_LOTTO_PRICE))
                 .mapToObj(idx ->
                         new Lotto(
@@ -48,7 +46,7 @@ public class LottoMachine {
         return lottoNums;
     }
 
-    public static Set<LottoNum> createLottoByNums(Set<Integer> rawNums) {
+    public static Set<LottoNum> createLottoNums(Set<Integer> rawNums) {
         if (rawNums.isEmpty() || rawNums.size() != LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("생성할 로또의 로또번호 갯수를 정확히 입력해 주세요.");
         }

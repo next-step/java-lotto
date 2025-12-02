@@ -1,6 +1,7 @@
 package lottogame.view;
 
 import static java.lang.Math.floor;
+import static lottogame.model.lotto.LottoMachine.LOTTO_NUM_COUNT;
 import static lottogame.model.winner.WinStandard.FIFTH;
 import static lottogame.model.winner.WinStandard.FIRST;
 import static lottogame.model.winner.WinStandard.FOURTH;
@@ -33,13 +34,19 @@ public class Casher {
         OutputView.printBuyLottoCount(buyCount);
     }
 
-    public static Set<Integer> askBeforeWinNums() {
+    public static Set<Integer> askLottoNums() {
         OutputView.printQuestionBeforeWinNums();
         String rawValue = InputView.inputString();
 
-        return Arrays.stream(rawValue.split(", "))
+        Set<Integer> inputLottoNums = Arrays.stream(rawValue.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
+
+        if (inputLottoNums.isEmpty() || inputLottoNums.size() != LOTTO_NUM_COUNT) {
+            throw new IllegalArgumentException("로또번호 갯수를 정확히 입력해 주세요. 6개가 아니거나 중복은 허용되지 않습니다");
+        }
+
+        return inputLottoNums;
     }
 
     public static int askBonusNum() {
