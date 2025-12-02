@@ -15,6 +15,15 @@ public class Lotto {
         this(splitAndParseInt(value));
     }
 
+    public Lotto(Integer... numbers) {
+        this(new TreeSet<>(Arrays.asList(numbers)));
+    }
+
+    public Lotto(Set<Integer> numbers) {
+        validate(numbers);
+        this.numbers = Collections.unmodifiableSet(numbers);
+    }
+
     private static Set<Integer> splitAndParseInt(String value) {
         String[] split = getSplit(value);
         Set<Integer> numbers = strToIntSet(split);
@@ -31,15 +40,6 @@ public class Lotto {
 
     private static String[] getSplit(String value) {
         return value.split(",");
-    }
-
-    public Lotto(Integer... numbers) {
-        this(new TreeSet<>(Arrays.asList(numbers)));
-    }
-
-    public Lotto(Set<Integer> numbers) {
-        validate(numbers);
-        this.numbers = Collections.unmodifiableSet(numbers);
     }
 
     private void validate(Set<Integer> numbers) {

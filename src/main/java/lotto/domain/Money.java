@@ -21,6 +21,7 @@ public class Money {
     }
 
     public double rateOfReturn(long getTotal) {
-        return Math.round((double) (getTotal / money) * 100) / 100.0;
+        double rate = (double) getTotal / money;
+        return Math.floor(rate * 100) / 100.0;
     }
 }
