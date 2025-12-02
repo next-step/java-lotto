@@ -3,7 +3,7 @@ package domain;
 import java.util.Objects;
 
 public class Number {
-    private int number;
+    private final int number;
 
     public Number(String number) {
         this(Integer.parseInt(number));

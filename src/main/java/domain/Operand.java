@@ -3,8 +3,8 @@ package domain;
 import java.util.Objects;
 
 public class Operand {
-    private Number first;
-    private Number second;
+    private final Number first;
+    private final Number second;
 
     public Operand(int first, int second) {
         this(new Number(first), new Number(second));
