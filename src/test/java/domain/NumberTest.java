@@ -11,6 +11,11 @@ public class NumberTest {
     }
 
     @Test
+    public void 유효하지_않은_문자() {
+        assertThatThrownBy(() -> new Number("-")).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
     public void 덧셈() {
         Number first = new Number("1");
         Number second = new Number("2");
