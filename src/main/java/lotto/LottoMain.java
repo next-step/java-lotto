@@ -4,13 +4,23 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoMain {
     public static void main(String[] args) {
         Money money = new Money(InputView.getInputMoney());
 
-        LottoGroup lottoGroup = new LottoGroup(money);
+        int inputManualLottoCount = InputView.getInputManualLottoCount();
 
-        ResultView.showBuyLottos(lottoGroup);
+        LottoCount lottoCount = new LottoCount(money, inputManualLottoCount);
+
+        LottoPurChase lottoPurChase = new LottoPurChase(money, lottoCount);
+
+        List<Lotto> manualLottos = InputView.getInputManualLottos(inputManualLottoCount);
+
+        LottoGroup lottoGroup = new LottoGroup(lottoPurChase, manualLottos);
+
+        ResultView.showBuyLottos(lottoGroup, lottoPurChase);
 
         Lotto winLotto = new Lotto(InputView.getInputWinNumber());
 
