@@ -51,4 +51,12 @@ public class Lotto {
         Collections.shuffle(rangedInts);
         return rangedInts.subList(0, LOTTO_NUMBER_SIZE).stream().map(LottoNumber::of).collect(Collectors.toSet());
     }
+
+    public static Lotto of(String lottoString) {
+        Set<LottoNumber> lottoNumbers = Arrays.stream(lottoString.split(","))
+                .map(String::trim)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+        return new Lotto(lottoNumbers);
+    }
 }

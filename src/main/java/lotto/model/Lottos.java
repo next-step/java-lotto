@@ -6,10 +6,6 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(int count) {
-        this(createLottos(count));
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
@@ -22,6 +18,10 @@ public class Lottos {
         return lottoResults;
     }
 
+    public int size() {
+        return this.lottos.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -31,11 +31,10 @@ public class Lottos {
         return sb.toString();
     }
 
-    private static List<Lotto> createLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
+    public static Lottos of(Lottos lottos1, Lottos lottos2) {
+        List<Lotto> mergedLottos = new ArrayList<>();
+        mergedLottos.addAll(lottos1.lottos);
+        mergedLottos.addAll(lottos2.lottos);
+        return new Lottos(mergedLottos);
     }
 }

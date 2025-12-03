@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.Objects;
 
 public class Money {
+    private static final long LOTTO_PRICE = 1_000L;
     private final long amount;
 
     public Money(int amount) {
@@ -16,12 +17,8 @@ public class Money {
         this.amount = amount;
     }
 
-    public int countLottoTickets() {
-        return Math.toIntExact(amount / 1_000L);
-    }
-
-    public Lottos buyLottos() {
-        return new Lottos(countLottoTickets());
+    public Count countBuyableLottoTickets() {
+        return new Count(Math.toIntExact(amount / LOTTO_PRICE));
     }
 
     public boolean isZero() {
