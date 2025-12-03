@@ -19,18 +19,16 @@ public class NumberTest {
     public void 덧셈() {
         Number first = new Number("1");
         Number second = new Number("2");
-        Operator operator = new Plus();
 
-        assertThat(first.calculate(operator, second)).isEqualTo(new Number(3));
+        assertThat(first.calculate(OperatorFactory.getOperator("+"), second)).isEqualTo(new Number(3));
     }
 
     @Test
     public void 뺄셈() {
         Number first = new Number("3");
         Number second = new Number("2");
-        Operator operator = new Substraction();
 
-        assertThat(first.calculate(operator, second)).isEqualTo(new Number(1));
+        assertThat(first.calculate(OperatorFactory.getOperator("-"), second)).isEqualTo(new Number(1));
     }
 
     @Test
@@ -38,8 +36,7 @@ public class NumberTest {
         Number first = new Number("3");
         Number second = new Number("2");
 
-        Operator operator = new Multiplication();
-        assertThat(first.calculate(operator, second)).isEqualTo(new Number(6));
+        assertThat(first.calculate(OperatorFactory.getOperator("*"), second)).isEqualTo(new Number(6));
     }
 
     @Test
@@ -47,7 +44,6 @@ public class NumberTest {
         Number first = new Number("4");
         Number second = new Number("2");
 
-        Operator operator = new Division();
-        assertThat(first.calculate(operator, second)).isEqualTo(new Number(2));
+        assertThat(first.calculate(OperatorFactory.getOperator("/"), second)).isEqualTo(new Number(2));
     }
 }

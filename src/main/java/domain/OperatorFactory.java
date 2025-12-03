@@ -7,10 +7,20 @@ public class OperatorFactory {
     private static final Map<String, Operator> operators = new HashMap<>();
 
     static {
-        operators.put("+", new Plus());
-        operators.put("-", new Substraction());
-        operators.put("*", new Multiplication());
-        operators.put("/", new Division());
+        operators.put("+", (first, second) -> first.plus(second));
+        operators.put("-", new Operator() {
+            @Override
+            public Number operate(Number first, Number second) {
+                return first.substract(second);
+            }
+        });
+        operators.put("*", Number::multiply);
+        operators.put("/", new Operator() {
+            @Override
+            public Number operate(Number first, Number second) {
+                return first.divide(second);
+            }
+        });
     }
 
     public static Operator getOperator(String operator) {
