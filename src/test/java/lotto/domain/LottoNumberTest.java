@@ -3,9 +3,15 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoNumberTest {
+
+    @Test
+    @DisplayName("같은 값을 가지면, 동일한 로또 번호이다")
+    void init_equals() {
+        assertThat(new LottoNumber(45)).isEqualTo(new LottoNumber(45));
+    }
 
     @Test
     @DisplayName("로또번호는 1부터 45사이의 값을 가져야한다")

@@ -15,12 +15,6 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또는 1부터 45까지의 숫자를 가진다")
-    void lotto_number_limit() {
-        assertThatThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 60)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     @DisplayName("일치한 숫자만큼 count가 발생한다")
     void match() {
         assertThat(new Lotto(1, 2, 3, 4, 5, 6).match(new Lotto(1, 2, 3, 4, 5, 7))).isEqualTo(5);
