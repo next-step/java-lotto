@@ -20,8 +20,8 @@ class LottoGameTest {
     void winningResult() {
         Lottos lottos = new Lottos(List.of(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 3, 9, 10, 11)));
         Money money = new Money(2000);
-        assertThat(new LottoGame(lottos, money).check(new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7)).getCount(Rank.FIRST)).isEqualTo(1);
-        assertThat(new LottoGame(lottos, money).check(new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7)).getCount(Rank.FIFTH)).isEqualTo(1);
+        assertThat(new LottoGame(lottos, money).findWinner(new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7)).getCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(new LottoGame(lottos, money).findWinner(new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7)).getCount(Rank.FIFTH)).isEqualTo(1);
     }
 
     @Test
@@ -30,7 +30,7 @@ class LottoGameTest {
         Lottos lottos = new Lottos(List.of(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(1, 2, 4, 9, 10, 11)));
         Money money = new Money(2000);
         LottoGame lottoGame = new LottoGame(lottos, money);
-        LottoResult result = lottoGame.check(new WinningLotto(new Lotto(1, 2, 3, 20, 23, 45), 7));
+        LottoResult result = lottoGame.findWinner(new WinningLotto(new Lotto(1, 2, 3, 20, 23, 45), 7));
         assertThat(lottoGame.rateOfReturn(result)).isEqualTo(2.5);
     }
 }

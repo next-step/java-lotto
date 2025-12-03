@@ -13,7 +13,7 @@ public class Main {
         ResultView.printLottos(lottoGame.lottos());
 
         WinningLotto winningLotto = new WinningLotto(InputView.initWinningLotto(), InputView.initBonusNumber());
-        LottoResult result = lottoGame.check(winningLotto);
+        LottoResult result = lottoGame.findWinner(winningLotto);
         ResultView.printResult(result, lottoGame);
 
     }

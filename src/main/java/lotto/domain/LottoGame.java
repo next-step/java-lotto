@@ -23,7 +23,7 @@ public class LottoGame {
         return lottos.values();
     }
 
-    public LottoResult check(WinningLotto winningLotto) {
+    public LottoResult findWinner(WinningLotto winningLotto) {
         return lottos.findResult(winningLotto);
     }
 
