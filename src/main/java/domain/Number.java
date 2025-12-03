@@ -14,11 +14,23 @@ public class Number {
     }
 
     public Number calculate(Operator operator, Number otherNumber) {
-        return operator.operate(number, otherNumber.value());
+        return operator.operate(this, otherNumber);
     }
 
-    public int value() {
-        return number;
+    public Number plus(Number other) {
+        return new Number(this.number + other.number);
+    }
+
+    public Number substract(Number other) {
+        return new Number(this.number - other.number);
+    }
+
+    public Number multiply(Number other) {
+        return new Number(this.number * other.number);
+    }
+
+    public Number divide(Number other) {
+        return new Number(this.number / other.number);
     }
 
     @Override

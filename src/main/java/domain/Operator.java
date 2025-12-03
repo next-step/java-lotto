@@ -1,5 +1,5 @@
 package domain;
 
 public interface Operator {
-    Number operate(int first, int second);
+    Number operate(Number first, Number second);
 }
