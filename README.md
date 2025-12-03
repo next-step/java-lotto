@@ -32,8 +32,15 @@
 
 ## 기능 구현 목록
 * domain
-  * LottoGenerator
-  * LottoChecker
+  * LottoFactory - 로또 생성 담당
+  * LottoGame - 당첨 복권 & 수익률 계산
+    * Lottos
+      * Lotto - 로또 복권 하나
+        * LottoNumber - 기본 로또 번호
+      * WinningLotto - Lotto + 보너스번호
+        * Money - 금액에 관련된 책임 수행
+    * LottoResult - 게임의 결과
+      * Rank - 당첨 순위 & 당첨금에 대한 역할
 * view
-  * InputView
-  * ResultView
+  * InputView - 입력 담당
+  * ResultView - 출력 담당
