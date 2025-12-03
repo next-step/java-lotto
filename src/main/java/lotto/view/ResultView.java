@@ -1,18 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
-import java.util.List;
-
 public class ResultView {
-    public static void printLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
-        }
+    public static void printLottos(LottoGame lottoGame) {
+        System.out.println(lottoGame.lottoCount() + "개를 구매했습니다.");
+        System.out.println(lottoGame);
     }
 
     public static void printResult(LottoResult result, LottoGame lottoGame) {
@@ -21,6 +16,7 @@ public class ResultView {
         for (Rank rank : Rank.values()) {
             if (rank == Rank.SECOND) {
                 System.out.println(rank.match() + "개 일치, 보너스 볼 일치 (" + rank.prize() + "원) - " + result.getCount(rank) + "개");
+                continue;
             }
             System.out.println(rank.match() + "개 일치 (" + rank.prize() + "원) - " + result.getCount(rank) + "개");
         }
