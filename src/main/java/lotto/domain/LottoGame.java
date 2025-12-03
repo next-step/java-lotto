@@ -20,10 +20,6 @@ public class LottoGame {
         this.money = money;
     }
 
-    public List<Lotto> lottos() {
-        return lottos.values();
-    }
-
     public LottoResult findWinner(WinningLotto winningLotto) {
         return lottos.findResult(winningLotto);
     }
