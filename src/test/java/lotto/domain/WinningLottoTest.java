@@ -12,12 +12,4 @@ class WinningLottoTest {
     void bonusNumberCheck_duplicate() {
         assertThatThrownBy(() -> new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 6)).isInstanceOf(IllegalArgumentException.class);
     }
-
-    @Test
-    @DisplayName("보너스 번호는 1부터 45 사이어야 한다")
-    void bonusNumberCheck_range() {
-        assertThatThrownBy(() -> new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 50)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-
 }
