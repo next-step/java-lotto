@@ -10,11 +10,11 @@ public class LottoController {
     public void run() {
         Money purchaseAmount = new Money(InputView.readPurchaseAmountInput());
         Count manualCount = new Count(InputView.readManualLottoCountInput());
-        LottoPurchasePlan lottoPurchasePlan = new LottoPurchasePlan(purchaseAmount, manualCount);
 
-        Lottos lottos = buyLottos(lottoPurchasePlan);
+        Lottos lottos = buyLottos(purchaseAmount, manualCount);
 
-        OutputView.printPurchaseCount(lottoPurchasePlan);
+        Count autoCount = purchaseAmount.countBuyableLottoTickets().subtract(manualCount);
+        OutputView.printPurchaseCount(manualCount, autoCount);
         OutputView.printBoughtLottos(lottos);
 
         WinningLotto winningLotto = readWinningLottoAndBonusBall();
@@ -28,10 +28,9 @@ public class LottoController {
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    private Lottos buyLottos(LottoPurchasePlan lottoPurchasePlan) {
-        List<String> manualInputs = InputView.readMaualLottoInput(lottoPurchasePlan.manualCount().value());
-        Lottos manuals = new ManualLottosGenerator(manualInputs).generate();
-        Lottos autos = new AutoLottosGenerator(lottoPurchasePlan).generate();
-        return Lottos.of(manuals, autos);
+    private Lottos buyLottos(Money money, Count manual) {
+        List<String> manualInputs = InputView.readMaualLottoInput(manual.value());
+        LottosBundleGenerator lottosGenerator = new LottosBundleGenerator(money, manualInputs);
+        return lottosGenerator.generate();
     }
 }

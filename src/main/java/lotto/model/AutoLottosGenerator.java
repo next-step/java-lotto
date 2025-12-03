@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoLottosGenerator implements LottosGenerator {
-    private final LottoPurchasePlan plan;
+    private final Count count;
 
-    public AutoLottosGenerator(LottoPurchasePlan plan) {
-        this.plan = plan;
+    public AutoLottosGenerator(Count count) {
+        this.count = count;
     }
 
     @Override
     public Lottos generate() {
-        return createLottos(plan.autoCount());
+        return createLottos(count);
     }
 
     private static Lottos createLottos(Count count) {
