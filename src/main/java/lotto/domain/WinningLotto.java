@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class WinningLotto {
-    private final Lotto lotto;
+    private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String lotto, int bonusNumber) {
@@ -14,7 +14,7 @@ public class WinningLotto {
 
     public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         validateBonusNumber(lotto, bonusNumber);
-        this.lotto = lotto;
+        this.winningLotto = lotto;
         this.bonusNumber = bonusNumber;
     }
 
@@ -24,11 +24,7 @@ public class WinningLotto {
         }
     }
 
-    public int match(Lotto lotto) {
-        return this.lotto.match(lotto);
-    }
-
-    public boolean isBonusMatch(Lotto lotto) {
-        return lotto.contains(bonusNumber);
+    public Rank match(Lotto lotto) {
+        return Rank.from(winningLotto.match(lotto), lotto.contains(bonusNumber));
     }
 }

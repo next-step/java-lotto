@@ -12,8 +12,7 @@ public class LottoResult {
         }
     }
 
-    public void addMatch(int match, boolean matchBonus) {
-        Rank rank = Rank.from(match, matchBonus);
+    public void addMatch(Rank rank) {
         lottoResult.put(rank, lottoResult.get(rank) + 1);
     }
 

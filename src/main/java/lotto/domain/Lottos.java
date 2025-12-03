@@ -20,9 +20,7 @@ public class Lottos {
     public LottoResult findResult(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
         for (Lotto lotto : lottos) {
-            int match = winningLotto.match(lotto);
-            boolean bonusMatch = winningLotto.isBonusMatch(lotto);
-            result.addMatch(match, bonusMatch);
+            result.addMatch(winningLotto.match(lotto));
         }
         return result;
     }
