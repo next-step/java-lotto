@@ -17,12 +17,15 @@ public class Lottos {
         return lottos;
     }
 
-    public LottoResult findResult(Lotto winningLotto) {
+    public LottoResult findResult(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
         for (Lotto lotto : lottos) {
-            int match = lotto.match(winningLotto);
-            result.addMatch(match);
+            result.addMatch(winningLotto.match(lotto));
         }
         return result;
+    }
+
+    public int size() {
+        return lottos.size();
     }
 }

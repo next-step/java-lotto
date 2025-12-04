@@ -16,10 +16,13 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("LottoResult")
+    @DisplayName("1등 당첨")
     void findResult() {
-        Lottos lottos = new Lottos(List.of(new Lotto(1, 2, 3, 4, 5, 6)
-                , new Lotto(1, 2, 3, 9, 10, 11)));
-        assertThat(lottos.findResult(new Lotto(1, 2, 3, 4, 5, 6))).isNotNull();
+        Lottos userLottos = new Lottos(List.of(new Lotto(1, 2, 3, 4, 5, 6)));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7);
+
+        LottoResult result = userLottos.findResult(winningLotto);
+
+        assertThat(result.getCount(Rank.FIRST)).isEqualTo(1);
     }
 }

@@ -12,8 +12,7 @@ public class LottoResult {
         }
     }
 
-    public void addMatch(int match) {
-        Rank rank = Rank.from(match);
+    public void addMatch(Rank rank) {
         lottoResult.put(rank, lottoResult.get(rank) + 1);
     }
 
@@ -25,5 +24,9 @@ public class LottoResult {
         return lottoResult.entrySet().stream()
                 .mapToLong(entry -> entry.getKey().prize() * entry.getValue())
                 .sum();
+    }
+
+    public double profitRate(Money money) {
+        return getTotal() / money.getMoney();
     }
 }

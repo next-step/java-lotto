@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
     private final Lottos lottos;
@@ -19,15 +19,18 @@ public class LottoGame {
         this.money = money;
     }
 
-    public List<Lotto> lottos() {
-        return lottos.values();
-    }
-
-    public LottoResult check(Lotto winningLotto) {
+    public LottoResult findWinner(WinningLotto winningLotto) {
         return lottos.findResult(winningLotto);
     }
 
-    public double rateOfReturn(LottoResult result) {
-        return money.rateOfReturn(result.getTotal());
+    public int lottoCount() {
+        return lottos.size();
+    }
+
+    @Override
+    public String toString() {
+        return lottos.values().stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 }
