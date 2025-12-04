@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoResult;
+import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -14,7 +15,6 @@ public class Main {
 
         WinningLotto winningLotto = new WinningLotto(InputView.initWinningLotto(), InputView.initBonusNumber());
         LottoResult result = lottoGame.findWinner(winningLotto);
-        ResultView.printResult(result, lottoGame);
-
+        ResultView.printResult(result, new Money(price));
     }
 }
