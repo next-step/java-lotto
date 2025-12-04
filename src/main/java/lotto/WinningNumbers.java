@@ -8,7 +8,7 @@ public class WinningNumbers {
   private final LottoNumber bonusNumber;
 
   public WinningNumbers(String numbers, int bonus) {
-    this(new Lotto(numbers), new LottoNumber(bonus));
+    this(new Lotto(numbers), LottoNumber.of(bonus));
   }
 
   public WinningNumbers(Lotto winningNumber, LottoNumber bonusNumber) {
@@ -22,7 +22,7 @@ public class WinningNumbers {
   }
 
   boolean contains(int number) {
-    return contains(new LottoNumber(number));
+    return contains(LottoNumber.of(number));
   }
 
   public boolean hasBonus(LottoNumber number) {
@@ -30,7 +30,7 @@ public class WinningNumbers {
   }
 
   boolean hasBonus(int number) {
-    return hasBonus(new LottoNumber(number));
+    return hasBonus(LottoNumber.of(number));
   }
 
   public LottoRank matchingRank(Lotto lotto) {

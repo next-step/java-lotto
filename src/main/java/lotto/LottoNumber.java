@@ -9,15 +9,28 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   private static final String ERROR_OUT_OF_RANGE = "로또 번호는 1~45 범위의 숫자여야 한다";
 
-  private final int number;
+  private static final LottoNumber[] CACHE = new LottoNumber[MAX_NUMBER + 1];
 
-  public LottoNumber(String number) {
-    this(Integer.parseInt(number));
+  static {
+    for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+      CACHE[i] = new LottoNumber(i);
+    }
   }
 
-  public LottoNumber(int number) {
+  private final int number;
+
+  private LottoNumber(int number) {
     validateRange(number);
     this.number = number;
+  }
+
+  public static LottoNumber of(int number) {
+    validateRange(number);
+    return CACHE[number];
+  }
+
+  public static LottoNumber of(String number) {
+    return of(Integer.parseInt(number));
   }
 
   public int number() {

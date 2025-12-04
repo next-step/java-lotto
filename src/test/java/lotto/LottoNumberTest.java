@@ -13,7 +13,7 @@ class LottoNumberTest {
   @ParameterizedTest
   @ValueSource(ints = {1, 10, 45})
   void createLottoNumber(int number) {
-    LottoNumber lottoNumber = new LottoNumber(number);
+    LottoNumber lottoNumber = LottoNumber.of(number);
     assertThat(lottoNumber.number()).isEqualTo(number);
   }
 
@@ -22,7 +22,7 @@ class LottoNumberTest {
   @ValueSource(ints = {0, 46})
   void invalidLottoNumber(int number) {
     assertThatIllegalArgumentException()
-        .isThrownBy(() -> new LottoNumber(number))
+        .isThrownBy(() -> LottoNumber.of(number))
         .withMessageContaining("1~45");
   }
 }
