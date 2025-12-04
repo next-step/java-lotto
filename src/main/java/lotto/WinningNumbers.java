@@ -21,8 +21,16 @@ public class WinningNumbers {
     return winningNumbers.contains(number);
   }
 
+  boolean contains(int number) {
+    return contains(new LottoNumber(number));
+  }
+
   public boolean hasBonus(LottoNumber number) {
     return bonusNumber.equals(number);
+  }
+
+  boolean hasBonus(int number) {
+    return hasBonus(new LottoNumber(number));
   }
 
   public LottoRank matchingRank(Lotto lotto) {

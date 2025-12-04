@@ -19,14 +19,14 @@ class WinningNumbersTest {
   @Test
   void containsWinningNumber() {
     WinningNumbers wn = new WinningNumbers("1,2,3,4,5,6", 7);
-    assertThat(wn.contains(new LottoNumber(3))).isTrue();
-    assertThat(wn.contains(new LottoNumber(7))).isFalse();
+    assertThat(wn.contains(3)).isTrue();
+    assertThat(wn.contains(7)).isFalse();
   }
 
   @Test
   void hasBonusNumber() {
     WinningNumbers wn = new WinningNumbers("1,2,3,4,5,6", 7);
-    assertThat(wn.hasBonus(new LottoNumber(7))).isTrue();
-    assertThat(wn.hasBonus(new LottoNumber(3))).isFalse();
+    assertThat(wn.hasBonus(7)).isTrue();
+    assertThat(wn.hasBonus(3)).isFalse();
   }
 }
