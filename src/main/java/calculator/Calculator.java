@@ -1,30 +1,23 @@
 package calculator;
 
-public record Calculator(int left, String operator, int right) {
+import static view.OutputView.getCalculationResult;
 
-    public int getString(int left, String operator, int right) {
-        return switch (operator) {
-            case "+" -> add(left, right);
-            case "-" -> sub(left, right);
-            case "*" -> mul(left, right);
-            case "/" -> div(left, right);
-            default -> throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
-        };
+public class Calculator {
+
+    public static void calculate(String[] input) {
+        validate(input);
+        int result = Integer.parseInt(input[0]);
+
+        for (int i = 1; i < input.length; i += 2) {
+            Operator from = Operator.from(input[i]);
+            result = from.apply(result, Integer.parseInt(input[i + 1]));
+        }
+        getCalculationResult(result);
     }
 
-    public int add(int left, int right) {
-        return left + right;
-    }
-
-    public int sub(int left, int right) {
-        return left - right;
-    }
-
-    public int mul(int left, int right) {
-        return left * right;
-    }
-
-    public int div(int left, int right) {
-        return left / right;
+    private static void validate(String[] input) {
+        if (input == null || input.length == 0) {
+            throw new IllegalArgumentException("입력 값이 null이거나 빈 공백 문자일 수 없습니다.");
+        }
     }
 }

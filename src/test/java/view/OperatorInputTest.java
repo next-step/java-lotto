@@ -5,8 +5,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static calculator.Calculator.calculate;
 
-class CalculatorInputTest {
+class OperatorInputTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"", "   "})
@@ -15,7 +16,7 @@ class CalculatorInputTest {
             String input
     ) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            InputView.calculate(input);
+            calculate(input.split(" "));
         });
     }
 
@@ -26,7 +27,7 @@ class CalculatorInputTest {
             String input
     ) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            InputView.calculate(input);
+            calculate(input.split(" "));
         });
     }
 }
