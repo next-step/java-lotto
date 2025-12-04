@@ -1,4 +1,4 @@
-package lotto.result;
+package lotto.domain;
 
 import java.util.Arrays;
 
@@ -32,10 +32,6 @@ public enum Rank {
 
     public int sumMoney(int totalMoney) {
         return money + totalMoney;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
     }
 
     public int getMoney() {
