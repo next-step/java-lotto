@@ -38,4 +38,14 @@ class LottoResultTest {
         result.addMatch(Rank.FIFTH);
         assertThat(result.getTotal()).isEqualTo(5000);
     }
+
+    @Test
+    @DisplayName("수익률 계산 - 구매 2_000, 당첨금 10_000, 수익률 5")
+    void profitRate() {
+        LottoResult result = new LottoResult();
+        result.addMatch(Rank.FIFTH);
+        result.addMatch(Rank.FIFTH);
+        double rate = result.profitRate(new Money(2000));
+        assertThat(rate).isEqualTo(5);
+    }
 }

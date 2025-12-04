@@ -20,8 +20,7 @@ public class Money {
         return (int) (money / LOTTO_PRICE);
     }
 
-    public double rateOfReturn(long getTotal) {
-        double rate = (double) getTotal / money;
-        return Math.floor(rate * 100) / 100.0;
+    public double getMoney() {
+        return money;
     }
 }

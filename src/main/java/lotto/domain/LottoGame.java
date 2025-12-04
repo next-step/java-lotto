@@ -25,7 +25,7 @@ public class LottoGame {
     }
 
     public double rateOfReturn(LottoResult result) {
-        return money.rateOfReturn(result.getTotal());
+        return result.profitRate(money);
     }
 
     public int lottoCount() {
