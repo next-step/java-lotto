@@ -1,26 +1,22 @@
 package lottogame.model.lotto;
 
-import static lottogame.model.lotto.LottoMachine.PER_LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Set;
-import lottogame.model.price.LottoPurchasePrice;
 import org.junit.jupiter.api.Test;
 
 class LottoMachineTest {
 
     @Test
-    void 사용자의금액만큼_로또를_발행할_수_있다() {
+    void 사용자의금액만큼_자동로또를_발행할_수_있다() {
         LottoMachine lottoMachine = new LottoMachine();
-        LottoPurchasePrice lottoPurchasePrice = new LottoPurchasePrice(14000);
-        Lottos lotto = lottoMachine.createAutoLotto(lottoPurchasePrice);
+
+        Lottos lotto = lottoMachine.createAutoLotto(14);
 
         assertThat(
                 lotto.size()
-        ).isEqualTo(
-                lottoPurchasePrice.calculateLottoCount(PER_LOTTO_PRICE)
-        );
+        ).isEqualTo(14);
     }
 
     @Test

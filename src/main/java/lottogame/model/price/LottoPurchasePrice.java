@@ -1,6 +1,13 @@
 package lottogame.model.price;
 
+import static java.lang.Math.floor;
+
+import lottogame.model.winner.WinnerResult;
+
 public class LottoPurchasePrice {
+    private static final int UP_TWO_DECIMAL_PLACE = 100;
+    private static final double DOWN_TWO_DECIMAL_PLACE = 100.0;
+
     private final int price;
 
     public LottoPurchasePrice(int price) {
@@ -24,10 +31,8 @@ public class LottoPurchasePrice {
             throw new IllegalArgumentException("잘못된 값입니다.");
         }
 
-        return (double) totalWinReturn / this.price;
-    }
+        double rateOfReturn = (double) totalWinReturn / this.price * UP_TWO_DECIMAL_PLACE;
 
-    public int price() {
-        return this.price;
+        return floor(rateOfReturn) / DOWN_TWO_DECIMAL_PLACE;
     }
 }

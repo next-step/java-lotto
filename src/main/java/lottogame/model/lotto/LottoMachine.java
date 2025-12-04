@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import lottogame.model.price.LottoPurchasePrice;
 
 public class LottoMachine {
+
     public static final int MIN_NUM = 1;
     public static final int MAX_NUM = 45;
     public static final int LOTTO_NUM_COUNT = 6;
@@ -17,8 +18,8 @@ public class LottoMachine {
 
     private static final Random RANDOM = new Random();
 
-    public static Lottos createAutoLotto(LottoPurchasePrice lottoPurchasePrice) {
-        List<Lotto> lottos = range(0, lottoPurchasePrice.calculateLottoCount(PER_LOTTO_PRICE))
+    public static Lottos createAutoLotto(int autoLottoCount) {
+        List<Lotto> lottos = range(0, autoLottoCount)
                 .mapToObj(idx ->
                         new Lotto(
                                 createLottoByCount(LOTTO_NUM_COUNT)
@@ -27,6 +28,11 @@ public class LottoMachine {
 
         return new Lottos(lottos);
     }
+
+    public static Lottos createManualLotto(ManualLottos manualLottos) {
+        return manualLottos.convertToLottos();
+    }
+
 
     public static LottoNum getLottoNum(int num) {
         return LottoNum.getInstance(num);

@@ -61,4 +61,21 @@ class LottosTest {
 
         assertThat(lottos.size()).isEqualTo(1);
     }
+
+    // TODO 사실 이렇게 단순히 사이즈만 테스트 할 수 밖에 없는 상황에서 살짝 불안감을 느낍니다. 이 테스트가 과연 충분할까? 거짓 양성을 심어놓는거 아닐까? 같은 생각들이요.
+    //  아래 같은 상황은 merge라는 구현방법 자체를 다시 생각해봐야하는 신호일까요?
+    @Test
+    void 두개의_로또목록을_병합할_수_있다() {
+        Lottos baseLottos = new Lottos(
+                List.of(new Lotto(로또번호리스트를_오름차순으로_생성한다(6)))
+        );
+        Lottos additionalLottos = new Lottos(
+                List.of(new Lotto(로또번호리스트를_지정해서_생성한다(7, 12)))
+        );
+
+        Lottos mergedLottos = baseLottos.merge(additionalLottos);
+
+        assertThat(mergedLottos.size()).isEqualTo(2);
+    }
+
 }

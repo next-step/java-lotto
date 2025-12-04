@@ -1,5 +1,6 @@
 package lottogame.model.lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 import lottogame.model.winner.WinStandard;
 import lottogame.model.winner.WinnerResult;
@@ -30,5 +31,12 @@ public class Lottos {
         return this.lottos.stream()
                 .map(Lotto::toString)
                 .toList();
+    }
+
+    public Lottos merge(Lottos additionalLottos) {
+        List<Lotto> mergedLottos = new ArrayList<>(this.lottos);
+        mergedLottos.addAll(additionalLottos.lottos);
+
+        return new Lottos(mergedLottos);
     }
 }
