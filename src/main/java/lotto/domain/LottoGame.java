@@ -29,7 +29,7 @@ public class LottoGame {
     }
 
     public int lottoCount() {
-        return lottos.values().size();
+        return lottos.size();
     }
 
     @Override
