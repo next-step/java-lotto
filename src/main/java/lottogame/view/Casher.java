@@ -49,7 +49,9 @@ public class Casher {
 
         OutputView.printQuestionManualLottoNums();
         for (int i = 0; i < manualCount; i++) {
-            rawManualNums.add(splitAndParseLottoNums(inputString()));
+            String rawValue = inputString();
+            Set<Integer> e = splitAndParseLottoNums(rawValue);
+            rawManualNums.add(e);
         }
 
         return rawManualNums;

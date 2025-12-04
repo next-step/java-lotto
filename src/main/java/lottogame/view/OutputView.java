@@ -17,7 +17,7 @@ OutputView {
 
     public static void printBuyLottoCount(int autoCount, int manualCount) {
         System.out.println(
-                "수동으로 " + manualCount + "장"
+                "수동으로 " + manualCount + "장 "
                 + "자동으로 " +autoCount + "개를 구매했습니다."
         );
     }

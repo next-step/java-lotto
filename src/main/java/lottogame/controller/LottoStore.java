@@ -34,17 +34,16 @@ public class LottoStore {
         LottoPurchasePrice lottoPurchasePrice = new LottoPurchasePrice(askBuyPrice());
         ManualLottos manualLottos = new ManualLottos(askManualLottos());
 
-        informBuyCount(lottoPurchasePrice.calculateLottoCount(PER_LOTTO_PRICE),
-                manualLottos.size());
-
         return new LottoPurchaseRequest(lottoPurchasePrice, manualLottos);
     }
 
     private Lottos buyLottos(LottoPurchaseRequest lottoPurchaseRequest) {
         Lottos autoLottos = LottoMachine.createAutoLotto(lottoPurchaseRequest.calculateAutoLottoCount(PER_LOTTO_PRICE));
-        Lottos manualLotto = LottoMachine.createManualLotto(lottoPurchaseRequest.manualLottos());
+        Lottos manualLottos = LottoMachine.createManualLotto(lottoPurchaseRequest.manualLottos());
 
-        Lottos mergedLottos = autoLottos.merge(manualLotto);
+        Lottos mergedLottos = autoLottos.merge(manualLottos);
+
+        informBuyCount(autoLottos.size(), manualLottos.size());
         informPublishedLottos(mergedLottos.convertRawString());
 
         return mergedLottos;
