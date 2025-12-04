@@ -1,7 +1,5 @@
 package view;
 
-import calculator.Calculator;
-
 import java.util.Scanner;
 
 import static calculator.Calculator.calculate;
@@ -16,6 +14,13 @@ public class InputView {
     }
 
     public static String[] parseInput(String input) {
+        validate(input);
         return input.split(" ");
+    }
+
+    private static void validate(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            throw new IllegalArgumentException("입력 값이 null이거나 빈 공백 문자일 수 없습니다.");
+        }
     }
 }
