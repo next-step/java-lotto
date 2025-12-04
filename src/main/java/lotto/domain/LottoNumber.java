@@ -1,17 +1,34 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
+
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+
+    static {
+        IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+                .forEach(i -> CACHE.put(i, new LottoNumber(i)));
+    }
+
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
-        validate(lottoNumber);
+    private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    private void validate(int lottoNumber) {
-        if (lottoNumber < 1 || lottoNumber > 45) {
+    public static LottoNumber from(int lottoNumber) {
+        validate(lottoNumber);
+        return CACHE.get(lottoNumber);
+    }
+
+    private static void validate(int lottoNumber) {
+        if (lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER) {
             throw new IllegalArgumentException();
         }
     }
