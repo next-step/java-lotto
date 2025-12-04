@@ -16,9 +16,7 @@ public class LottoApplication {
     String numbersString = InputView.readWinningNumbers();
     Lotto winningNumbers = new Lotto(numbersString);
 
-    String bonusNumberString = InputView.readBonusNumber();
-    int bonus = Integer.parseInt(bonusNumberString);
-    LottoNumber bonusNumber = new LottoNumber(bonus);
+    LottoNumber bonusNumber = new LottoNumber(InputView.readBonusNumber());
     
     LottoMatchResult matchResult = lottos.matchResult(
         new WinningNumbers(winningNumbers, bonusNumber));
