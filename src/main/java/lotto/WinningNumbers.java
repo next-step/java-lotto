@@ -7,6 +7,10 @@ public class WinningNumbers {
   private final Lotto winningNumbers;
   private final LottoNumber bonusNumber;
 
+  public WinningNumbers(String numbers, int bonus) {
+    this(new Lotto(numbers), new LottoNumber(bonus));
+  }
+
   public WinningNumbers(Lotto winningNumber, LottoNumber bonusNumber) {
     validateDuplicate(winningNumber, bonusNumber);
     this.winningNumbers = winningNumber;

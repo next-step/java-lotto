@@ -23,9 +23,8 @@ public class LottosTest {
         new Lotto(1, 2, 3, 4, 5, 6),
         new Lotto(1, 2, 3, 4, 5, 7),
         new Lotto(7, 8, 9, 10, 11, 12)));
-    Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
     LottoMatchResult result = lottos.matchResult(
-        new WinningNumbers(winningNumbers, new LottoNumber(15)));
+        new WinningNumbers("1,2,3,4,5,6", 15));
     LottoRank rank = LottoRank.of(matchCount, false);
     assertThat(result.countMatches(rank)).isEqualTo(expectedCount);
   }
