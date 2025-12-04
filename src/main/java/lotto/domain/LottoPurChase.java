@@ -8,6 +8,7 @@ public class LottoPurChase {
     public LottoPurChase(int money, int autoCount, int manualCount) {
         this(new Money(money), new LottoCount(autoCount, manualCount));
     }
+
     public LottoPurChase(Money money, LottoCount lottoCount) {
         this.money = money;
         this.lottoCount = lottoCount;

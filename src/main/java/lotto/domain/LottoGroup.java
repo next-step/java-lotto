@@ -18,10 +18,10 @@ public class LottoGroup {
         this.lottos = lottos;
     }
 
-    private static List<Lotto> buyLotto(LottoPurChase lottoPurchase,  List<Lotto> manualLottos) {
+    private static List<Lotto> buyLotto(LottoPurChase lottoPurchase, List<Lotto> manualLottos) {
         List<Lotto> lottoArray = new ArrayList<>(manualLottos);
 
-        for(int i = 0; i < lottoPurchase.getAutoCount(); i++) {
+        for (int i = 0; i < lottoPurchase.getAutoCount(); i++) {
             lottoArray.add(new Lotto(LottoMachine.createLottoNumbers()));
         }
 
@@ -34,7 +34,7 @@ public class LottoGroup {
 
         List<Lotto> lottoArray = new ArrayList<>();
 
-        for(int i = 0; i < cnt; i++) {
+        for (int i = 0; i < cnt; i++) {
             lottoArray.add(new Lotto(LottoMachine.createLottoNumbers()));
         }
 

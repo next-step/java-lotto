@@ -9,8 +9,8 @@ public class LottoNumber {
     private static final int MAX = 45;
     private static final Map<Integer, LottoNumber> CACHE_NUM = new HashMap<>();
 
-    static{
-        for (int i = MIN; i <= MAX; i++){
+    static {
+        for (int i = MIN; i <= MAX; i++) {
             CACHE_NUM.put(i, new LottoNumber(i));
         }
     }
@@ -22,12 +22,12 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber valueOf(String number){
+    public static LottoNumber valueOf(String number) {
         validation(Integer.parseInt(number));
         return valueOf(Integer.parseInt(number));
     }
 
-    public static LottoNumber valueOf(int number){
+    public static LottoNumber valueOf(int number) {
         validation(number);
         return CACHE_NUM.get(number);
     }

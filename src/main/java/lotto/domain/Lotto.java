@@ -20,6 +20,7 @@ public class Lotto {
         validation(numbers);
         this.numbers = numbers;
     }
+
     private void validation(List<LottoNumber> numbers) {
         if (isDuplication(numbers)) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");

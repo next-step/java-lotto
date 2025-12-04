@@ -8,7 +8,7 @@ public class LottoCount {
         this(money.getBuyableCount() - manualCount, manualCount);
     }
 
-    public LottoCount(int autoCount,int manualCount) {
+    public LottoCount(int autoCount, int manualCount) {
         this.autoCount = autoCount;
         this.manualCount = manualCount;
     }
