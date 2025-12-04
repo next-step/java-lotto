@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import domain.Number;
+import util.Parser;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -27,11 +28,11 @@ public class CalculatorTest {
                 OperatorFactory.getOperator("/")
         );
 
-        assertThat(new Calculator("1 + 2 - 3 * 4 / 5")).isEqualTo(new Calculator(numbers, operators));
+        assertThat(Parser.parse("1 + 2 - 3 * 4 / 5")).isEqualTo(new Calculator(numbers, operators));
     }
 
     @Test
     public void 계산() {
-        assertThat(new Calculator("1 + 2 - 3 + 5 * 4 / 5").calculate()).isEqualTo(new Number(4));
+        assertThat(Parser.parse("1 + 2 - 3 + 5 * 4 / 5").calculate()).isEqualTo(new Number(4));
     }
 }
