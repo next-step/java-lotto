@@ -62,15 +62,11 @@ public class Lotto {
     public int match(Lotto winningLotto) {
         int count = 0;
         for (LottoNumber number : numbers) {
-            if (winningLotto.numbers().contains(number)) {
+            if (winningLotto.contains(number)) {
                 count++;
             }
         }
         return count;
-    }
-
-    private Set<LottoNumber> numbers() {
-        return numbers;
     }
 
     public boolean contains(LottoNumber number) {
