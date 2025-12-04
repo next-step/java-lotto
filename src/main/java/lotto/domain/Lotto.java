@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(int... numbers) {
         this(intToList(numbers));
@@ -16,35 +14,31 @@ public class Lotto {
         this(stringToList(numbers));
     }
 
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(String numbers) {
+        this(stringToList(numbers.split(",")));
+    }
+
+    public Lotto(Set<LottoNumber> numbers) {
         validation(numbers);
         this.numbers = numbers;
     }
 
-    private void validation(List<LottoNumber> numbers) {
-        if (isDuplication(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
-
+    private void validation(Set<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
 
-    private boolean isDuplication(List<LottoNumber> numbers) {
-        return new HashSet<>(numbers).size() != numbers.size();
-    }
-
-    private static List<LottoNumber> stringToList(String... numbers) {
+    private static Set<LottoNumber> stringToList(String... numbers) {
         return Arrays.stream(numbers)
                 .map(LottoNumber::valueOf)
-                .toList();
+                .collect(Collectors.toSet());
     }
 
-    private static List<LottoNumber> intToList(int... numbers) {
+    private static Set<LottoNumber> intToList(int... numbers) {
         return Arrays.stream(numbers)
                 .mapToObj(LottoNumber::valueOf)
-                .toList();
+                .collect(Collectors.toSet());
     }
 
     public int countMatchedNumbers(Lotto winningLotto) {

@@ -18,7 +18,7 @@ public class LottoMain {
 
         List<Lotto> manualLottos = InputView.getInputManualLottos(inputManualLottoCount);
 
-        LottoGroup lottoGroup = new LottoGroup(lottoPurChase, manualLottos);
+        LottoGroup lottoGroup = new LottoGroup(new MixedLottoGenerator(lottoPurChase, manualLottos));
 
         ResultView.showBuyLottos(lottoGroup, lottoPurChase);
 
