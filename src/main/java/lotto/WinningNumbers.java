@@ -21,6 +21,16 @@ public class WinningNumbers {
     return bonusNumber.equals(number);
   }
 
+  public LottoRank matchingRank(Lotto lotto) {
+    int count = (int) lotto.numbers().stream()
+        .filter(winningNumbers::contains)
+        .count();
+
+    boolean hasBonus = lotto.contains(bonusNumber);
+
+    return LottoRank.of(count, hasBonus);
+  }
+
   private void validateDuplicate(Lotto winningNumber, LottoNumber bonusNumber) {
     if (winningNumber.contains(bonusNumber)) {
       throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS);
