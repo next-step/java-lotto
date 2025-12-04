@@ -30,20 +30,14 @@ public class Lotto {
   }
 
   public static Lotto fromIntegers(List<Integer> numbers) {
-    List<LottoNumber> lottoNumbers = numbers.stream()
-        .map(LottoNumber::new)
-        .toList();
-    return new Lotto(lottoNumbers);
+    return new Lotto(toLottoNumbers(numbers));
   }
 
   private static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
-    List<LottoNumber> lottoNumbers = new ArrayList<>();
-    for (Integer number : numbers) {
-      lottoNumbers.add(new LottoNumber(number));
-    }
-    return lottoNumbers;
+    return numbers.stream()
+        .map(LottoNumber::new)
+        .toList();
   }
-
 
   private static List<Integer> parseNumbers(String numbersString) {
     String[] numberStrings = numbersString.split(",");
