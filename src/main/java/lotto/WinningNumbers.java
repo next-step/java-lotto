@@ -37,9 +37,7 @@ public class WinningNumbers {
     int count = (int) lotto.numbers().stream()
         .filter(winningNumbers::contains)
         .count();
-
     boolean hasBonus = lotto.contains(bonusNumber);
-
     return LottoRank.of(count, hasBonus);
   }
 

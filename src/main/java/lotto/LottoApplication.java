@@ -13,9 +13,7 @@ public class LottoApplication {
     Lottos lottos = LottoMachine.randomLottos(amount.ticketCount());
     ResultView.printPurchasedLottos(lottos);
 
-    String numbersString = InputView.readWinningNumbers();
-    Lotto winningNumbers = new Lotto(numbersString);
-
+    Lotto winningNumbers = new Lotto(InputView.readWinningNumbers());
     LottoNumber bonusNumber = LottoNumber.of(InputView.readBonusNumber());
 
     LottoMatchResult matchResult = lottos.matchResult(
