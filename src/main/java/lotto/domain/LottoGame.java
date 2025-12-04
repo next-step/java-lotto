@@ -23,10 +23,6 @@ public class LottoGame {
         return lottos.findResult(winningLotto);
     }
 
-    public double rateOfReturn(LottoResult result) {
-        return result.profitRate(money);
-    }
-
     public int lottoCount() {
         return lottos.size();
     }
