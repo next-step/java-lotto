@@ -16,7 +16,6 @@ public class ResultView {
   }
 
   public static void printLottoResult(LottoMatchResult matchResult, ProfitRate profitRate) {
-    System.out.println();
     System.out.println("당첨 통계");
     System.out.println("---------");
 

@@ -10,7 +10,22 @@ public class InputView {
 
   public static int readPurchaseAmount() {
     System.out.println("구입금액을 입력해 주세요.");
-    return parseIntOrThrow(SCANNER.nextLine());
+    return readInt();
+  }
+
+  public static int readManualLottoCount() {
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    return readInt();
+  }
+
+  public static List<String> readManualLottos(int count) {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    List<String> input = new ArrayList<>();
+    while (count-- > 0) {
+      input.add(SCANNER.nextLine().trim());
+    }
+    System.out.println();
+    return input;
   }
 
   public static String readWinningNumbers() {
@@ -18,30 +33,16 @@ public class InputView {
     return SCANNER.nextLine();
   }
 
-  public static String readBonusNumber() {
+  public static int readBonusNumber() {
     System.out.println("보너스 볼을 입력해 주세요.");
-    return SCANNER.nextLine();
+    return readInt();
   }
 
-  private static int parseIntOrThrow(String input) {
-    try {
-      return Integer.parseInt(input.trim());
-    } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("숫자만 입력 가능합니다: " + input);
-    }
+  private static int readInt() {
+    int value = SCANNER.nextInt();
+    SCANNER.nextLine();
+    System.out.println();
+    return value;
   }
 
-  public static int readManualLottoCount() {
-    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-    return parseIntOrThrow(SCANNER.nextLine());
-  }
-
-  public static List<String> readManualLottos(int count) {
-    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-    List<String> input = new ArrayList<>();
-    while (count-- > 0) {
-      input.add(SCANNER.nextLine());
-    }
-    return input;
-  }
 }
