@@ -21,8 +21,7 @@ public class LottoTest {
 
   @Test
   void createLottoFromString() {
-    Lotto lotto = new Lotto("1,2,3,4,5,6");
-    assertThat(lotto.numbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    assertThat(new Lotto("1,2,3,4,5,6")).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
   }
 
   @DisplayName("로또 번호는 6개여야 한다")
@@ -30,57 +29,21 @@ public class LottoTest {
   @MethodSource("invalidLottoSizes")
   void validLottoSize(List<Integer> numbers) {
     assertThatIllegalArgumentException()
-        .isThrownBy(() -> new Lotto(numbers))
+        .isThrownBy(() -> Lotto.fromIntegers(numbers))
         .withMessageContaining("6개");
-  }
-
-  @DisplayName("로또 번호는 1~45 사이의 숫자로 구성된다")
-  @ParameterizedTest
-  @MethodSource("invalidLottoNumberRange")
-  void validLottoNumberRange(List<Integer> numbers) {
-    assertThatIllegalArgumentException()
-        .isThrownBy(() -> new Lotto(numbers))
-        .withMessageContaining("1~45");
   }
 
   @DisplayName("로또 번호는 정렬된다")
   @Test
   void sortLottoNumbers() {
-    Lotto lotto = new Lotto(2, 5, 8, 1, 3, 4);
-    List<Integer> expected = List.of(1, 2, 3, 4, 5, 8);
-    assertThat(lotto.numbers()).isEqualTo(expected);
+    assertThat(new Lotto("1,2,3,4,8,5")).isEqualTo(new Lotto("1,2,3,4,5,8"));
   }
-
-  @DisplayName("일치하는 번호가 없으면 MISS 반환한다")
-  @Test
-  void compareNumbers_NoneEqual() {
-    Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-    Lotto winningNumbers = new Lotto(7, 8, 9, 10, 11, 12);
-    assertThat(lotto.matchingRank(winningNumbers)).isEqualTo(LottoRank.MISS);
-  }
-
-  @DisplayName("전부 일치하면 FIRST 반환한다")
-  @Test
-  void compareNumbers_AllEqual() {
-    Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-    Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
-    assertThat(lotto.matchingRank(winningNumbers)).isEqualTo(LottoRank.FIRST);
-  }
-
 
   static Stream<List<Integer>> invalidLottoSizes() {
     return Stream.of(
         List.of(),
         List.of(1, 2, 3, 4, 5),
         List.of(1, 2, 3, 4, 5, 6, 7)
-    );
-  }
-
-  static Stream<List<Integer>> invalidLottoNumberRange() {
-    return Stream.of(
-        List.of(-1, 2, 3, 4, 5, 6),
-        List.of(0, 2, 3, 4, 5, 6),
-        List.of(1, 2, 3, 4, 5, 46)
     );
   }
 

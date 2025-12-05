@@ -19,7 +19,7 @@ public class LottoMatchResult {
     long totalPrize = 0;
     for (LottoRank rank : LottoRank.values()) {
       int count = countMatches(rank);
-      totalPrize += (long) count * rank.prize();
+      totalPrize += rank.prize(count);
     }
     return totalPrize;
   }
@@ -27,7 +27,7 @@ public class LottoMatchResult {
   public static LottoMatchResult of(int... matches) {
     LottoMatchResult result = new LottoMatchResult();
     for (int m : matches) {
-      LottoRank rank = LottoRank.of(m);
+      LottoRank rank = LottoRank.of(m, false);
       result.match(rank);
     }
     return result;

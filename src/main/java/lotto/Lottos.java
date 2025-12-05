@@ -15,11 +15,10 @@ public class Lottos {
     return lottos.size();
   }
 
-  public LottoMatchResult matchResult(Lotto winningNumbers) {
+  public LottoMatchResult matchResult(WinningNumbers winningNumbers) {
     LottoMatchResult result = new LottoMatchResult();
     for (Lotto lotto : lottos) {
-      LottoRank match = lotto.matchingRank(winningNumbers);
-      result.match(match);
+      result.match(winningNumbers.matchingRank(lotto));
     }
     return result;
   }

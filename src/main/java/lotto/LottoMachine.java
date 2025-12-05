@@ -22,6 +22,6 @@ public class LottoMachine {
     Collections.shuffle(numbers);
 
     List<Integer> lottoNumbers = numbers.subList(0, 6);
-    return new Lotto(lottoNumbers);
+    return Lotto.fromIntegers(lottoNumbers);
   }
 }
