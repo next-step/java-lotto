@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.List;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,14 +10,14 @@ public class LottoApplication {
     int input = InputView.readPurchaseAmount();
     PurchaseAmount amount = new PurchaseAmount(input);
 
-    int manualCount = InputView.readManualLottoCount();
-    List<String> manualInputs = InputView.readManualLottos(manualCount);
-    Lottos manualLottos = Lottos.manualLottos(manualInputs);
+    ManualLottoCount manualLottoCount = new ManualLottoCount(InputView.readManualLottoCount(),
+        amount);
+    Lottos manualLottos = Lottos.manualLottos(InputView.readManualLottos(manualLottoCount.count()));
 
-    Lottos lottos = LottoMachine.randomLottos(amount.ticketCount() - manualCount);
+    Lottos lottos = LottoMachine.randomLottos(amount.autoCount(manualLottoCount));
 
     Lottos mergedLottos = manualLottos.merge(lottos);
-    ResultView.printPurchasedLottos(mergedLottos, manualCount);
+    ResultView.printPurchasedLottos(mergedLottos, manualLottoCount);
 
     Lotto winningNumbers = new Lotto(InputView.readWinningNumbers());
     LottoNumber bonusNumber = LottoNumber.of(InputView.readBonusNumber());

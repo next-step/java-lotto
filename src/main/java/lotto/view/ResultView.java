@@ -3,12 +3,14 @@ package lotto.view;
 import lotto.LottoMatchResult;
 import lotto.LottoRank;
 import lotto.Lottos;
+import lotto.ManualLottoCount;
 import lotto.ProfitRate;
 
 public class ResultView {
 
-  public static void printPurchasedLottos(Lottos lottos, int manualCount) {
-    System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, lottos.count() - manualCount);
+  public static void printPurchasedLottos(Lottos lottos, ManualLottoCount manualCount) {
+    System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount.count(),
+        lottos.count() - manualCount.count());
     for (String line : lottos.toDisplayStrings()) {
       System.out.println(line);
     }

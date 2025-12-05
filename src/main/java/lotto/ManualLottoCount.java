@@ -14,4 +14,8 @@ public class ManualLottoCount {
     }
     this.count = count;
   }
+
+  public int count() {
+    return count;
+  }
 }
