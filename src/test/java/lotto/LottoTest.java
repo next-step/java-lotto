@@ -39,6 +39,13 @@ public class LottoTest {
     assertThat(new Lotto("1,2,3,4,8,5")).isEqualTo(new Lotto("1,2,3,4,5,8"));
   }
 
+  @DisplayName("로또 번호는 중복 시 예외가 발생한다")
+  @Test
+  void duplicateLottoNumbers() {
+    assertThatIllegalArgumentException().isThrownBy(() -> new Lotto("1,2,3,4,8,8"))
+        .withMessageContaining("중복");
+  }
+
   static Stream<List<Integer>> invalidLottoSizes() {
     return Stream.of(
         List.of(),
