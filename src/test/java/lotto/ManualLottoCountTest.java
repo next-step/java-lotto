@@ -14,4 +14,10 @@ class ManualLottoCountTest {
         .withMessageContaining("구입 가능한 수량을 초과");
   }
 
+  @DisplayName("수동 장수가 음수인 경우 예외를 발생한다")
+  @Test
+  void negativeManualCount() {
+    assertThatIllegalArgumentException().isThrownBy(() -> new ManualLottoCount(-1, 1000))
+        .withMessageContaining("0 이상");
+  }
 }
