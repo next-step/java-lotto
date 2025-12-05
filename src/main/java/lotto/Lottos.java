@@ -15,6 +15,12 @@ public class Lottos {
     return new Lottos(manualNumbers.stream().map(Lotto::new).toList());
   }
 
+  public Lottos merge(Lottos other) {
+    List<Lotto> mergedLottos = new ArrayList<>(this.lottos);
+    mergedLottos.addAll(other.lottos);
+    return new Lottos(mergedLottos);
+  }
+
   public int count() {
     return lottos.size();
   }

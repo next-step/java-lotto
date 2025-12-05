@@ -38,4 +38,13 @@ public class LottosTest {
     assertThat(lottos.count()).isEqualTo(2);
   }
 
+  @DisplayName("수동, 자동 Lottos를 합쳐 하나로 반환한다")
+  @Test
+  void mergeLottos() {
+    Lottos manualLottos = Lottos.manualLottos(List.of("1,2,3,4,5,6", "2,3,4,5,6,7"));
+    Lottos autoLottos = Lottos.manualLottos(List.of("1,2,3,4,5,6", "3,4,5,6,7,8"));
+    Lottos mergedLottos = manualLottos.merge(autoLottos);
+    assertThat(mergedLottos.count()).isEqualTo(4);
+  }
+
 }
