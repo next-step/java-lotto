@@ -34,12 +34,12 @@ public class ResultView {
   }
 
   private static void printRank(LottoMatchResult matchResult, LottoRank rank) {
-    if (rank == LottoRank.MISS) {
+    if (rank.isMiss()) {
       return;
     }
     int count = matchResult.countMatches(rank);
     int prize = rank.prize();
-    if (rank == LottoRank.SECOND) {
+    if (rank.isSecond()) {
       System.out.printf("5개 일치, 보너스 볼 일치 (%d원) - %d개%n", prize, count);
       return;
     }

@@ -39,4 +39,11 @@ public enum LottoRank {
         .orElse(MISS);
   }
 
+  public boolean isMiss() {
+    return this == MISS;
+  }
+
+  public boolean isSecond() {
+    return this == SECOND;
+  }
 }
