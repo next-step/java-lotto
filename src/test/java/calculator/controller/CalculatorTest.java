@@ -1,12 +1,13 @@
-package controller;
+package calculator.controller;
 
-import domain.Operator;
-import domain.OperatorFactory;
+import calculator.controller.Calculator;
+import calculator.domain.Operator;
+import calculator.domain.OperatorFactory;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 
-import domain.Number;
-import util.Parser;
+import calculator.domain.Number;
+import calculator.util.Parser;
 
 import static org.assertj.core.api.Assertions.*;
 

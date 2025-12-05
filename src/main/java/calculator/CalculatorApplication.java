@@ -1,7 +1,9 @@
-import controller.Calculator;
-import ui.InputView;
-import ui.ResultView;
-import util.Parser;
+package calculator;
+
+import calculator.controller.Calculator;
+import calculator.ui.InputView;
+import calculator.ui.ResultView;
+import calculator.util.Parser;
 
 public class CalculatorApplication {
     public static void main(String[] args) {

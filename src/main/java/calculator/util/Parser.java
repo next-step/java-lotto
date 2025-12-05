@@ -1,9 +1,9 @@
-package util;
+package calculator.util;
 
-import controller.Calculator;
-import domain.Number;
-import domain.Operator;
-import domain.OperatorFactory;
+import calculator.controller.Calculator;
+import calculator.domain.Number;
+import calculator.domain.Operator;
+import calculator.domain.OperatorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +25,11 @@ public class Parser {
         return expression != null && !expression.isBlank();
     }
 
-    private static List<domain.Number> parseNumbers(String[] expression) {
+    private static List<Number> parseNumbers(String[] expression) {
         List<Number> numbers = new ArrayList<>();
 
         for (int i = 0; i < expression.length; i += 2) {
-            numbers.add(new domain.Number(expression[i]));
+            numbers.add(new Number(expression[i]));
         }
 
         return numbers;

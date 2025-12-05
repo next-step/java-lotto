@@ -1,4 +1,4 @@
-package ui;
+package calculator.ui;
 
 public class ResultView {
     static public void printResult(String result) {

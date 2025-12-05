@@ -1,5 +1,6 @@
-package util;
+package calculator.util;
 
+import calculator.util.Parser;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

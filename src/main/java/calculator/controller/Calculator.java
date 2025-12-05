@@ -1,11 +1,8 @@
-package controller;
+package calculator.controller;
 
-import domain.Operator;
-import domain.Number;
-import domain.OperatorFactory;
-import util.Parser;
+import calculator.domain.Operator;
+import calculator.domain.Number;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
