@@ -1,10 +1,13 @@
 package calculator;
 
-import static view.InputView.getInput;
+import view.InputView;
+import view.OutputView;
 
 public class CalculatorMain {
 
     public static void main(String[] args) {
-        getInput();
+        String[] text = InputView.inputText();
+        int result = Calculator.calculate(text);
+        OutputView.printResult(result);
     }
 }
