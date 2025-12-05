@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -9,11 +11,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   private static final String ERROR_OUT_OF_RANGE = "로또 번호는 1~45 범위의 숫자여야 한다";
 
-  private static final LottoNumber[] CACHE = new LottoNumber[MAX_NUMBER + 1];
+  private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
   static {
     for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-      CACHE[i] = new LottoNumber(i);
+      CACHE.put(i, new LottoNumber(i));
     }
   }
 
@@ -26,11 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   public static LottoNumber of(int number) {
     validateRange(number);
-    return CACHE[number];
-  }
-
-  public static LottoNumber of(String number) {
-    return of(Integer.parseInt(number));
+    return CACHE.get(number);
   }
 
   public int number() {
