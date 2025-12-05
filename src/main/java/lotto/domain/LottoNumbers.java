@@ -21,7 +21,7 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public boolean matches(int targetMatchCount, LottoNumbers other) {
+    public int getMatchedCount(LottoNumbers other) {
         int matchCount = 0;
 
         for (int i = 0; i < numbers.size(); i++) {
@@ -30,7 +30,7 @@ public class LottoNumbers {
             }
         }
 
-        return matchCount == targetMatchCount;
+        return matchCount;
     }
 
     private boolean matchesAtIndex(int index, LottoNumbers other) {

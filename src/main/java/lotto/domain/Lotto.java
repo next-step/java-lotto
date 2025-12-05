@@ -15,11 +15,16 @@ public class Lotto {
         int matchCount = 0;
 
         for (LottoNumbers lottoNumbers : lottoNumbers) {
-            if (lottoNumbers.matches(targetMatchCount, winningNumbers)) {
+            if (isMatched(targetMatchCount, lottoNumbers.getMatchedCount(winningNumbers))) {
                 matchCount++;
             }
         }
 
         return matchCount;
+    }
+
+
+    private boolean isMatched(int targetMatchCount, int matchedCount) {
+        return targetMatchCount == matchedCount;
     }
 }
