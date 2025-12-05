@@ -11,6 +11,10 @@ public class Lottos {
     this.lottos = lottos;
   }
 
+  public static Lottos manualLottos(List<String> manualNumbers) {
+    return new Lottos(manualNumbers.stream().map(Lotto::new).toList());
+  }
+
   public int count() {
     return lottos.size();
   }
