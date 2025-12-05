@@ -7,8 +7,8 @@ import lotto.ProfitRate;
 
 public class ResultView {
 
-  public static void printPurchasedLottos(Lottos lottos) {
-    System.out.printf("%d개를 구매했습니다.%n", lottos.count());
+  public static void printPurchasedLottos(Lottos lottos, int manualCount) {
+    System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, lottos.count() - manualCount);
     for (String line : lottos.toDisplayStrings()) {
       System.out.println(line);
     }

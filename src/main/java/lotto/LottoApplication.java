@@ -18,7 +18,7 @@ public class LottoApplication {
     Lottos lottos = LottoMachine.randomLottos(amount.ticketCount() - manualCount);
 
     Lottos mergedLottos = manualLottos.merge(lottos);
-    ResultView.printPurchasedLottos(mergedLottos);
+    ResultView.printPurchasedLottos(mergedLottos, manualCount);
 
     Lotto winningNumbers = new Lotto(InputView.readWinningNumbers());
     LottoNumber bonusNumber = LottoNumber.of(InputView.readBonusNumber());
