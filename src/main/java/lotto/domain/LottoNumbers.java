@@ -1,12 +1,40 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoNumbers {
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
+
     public LottoNumbers(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = toLottoNumber(numbers);
+    }
+
+    private static List<LottoNumber> toLottoNumber(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for(int number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+
+        return lottoNumbers;
+    }
+
+    public int matches(LottoNumbers other) {
+        int matchCount = 0;
+
+        for (int i = 0; i < numbers.size(); i++) {
+            if (matchesAtIndex(i, other)) {
+                matchCount++;
+            }
+        }
+
+        return matchCount;
+    }
+
+    private boolean matchesAtIndex(int index, LottoNumbers other) {
+        return numbers.get(index).equals(other.numbers.get(index));
     }
 
     @Override
