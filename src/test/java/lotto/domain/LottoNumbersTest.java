@@ -17,11 +17,11 @@ public class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoNumbers")
-    public void 일치하는_숫자의_개수(List<Integer> numbers, int expected) {
+    public void 일치하는_숫자의_개수(List<Integer> numbers, int targetMatchCount) {
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         LottoNumbers otherLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottoNumbers.matches(otherLottoNumbers)).isEqualTo(expected);
+        assertThat(lottoNumbers.matches(targetMatchCount, otherLottoNumbers)).isTrue();
     }
 
 
