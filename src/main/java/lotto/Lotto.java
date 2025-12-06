@@ -15,6 +15,7 @@ public class Lotto {
 
   private static final String ERROR_INVALID_COUNT = "로또 번호는 6개여야 한다";
   private static final String ERROR_DUPLICATE_NUMBER = "로또 번호에 중복이 있을 수 없습니다.";
+  private static final String ERROR_INVALID_FORMAT = "숫자 형식이 올바르지 않습니다: ";
 
   private final Set<LottoNumber> numbers;
 
@@ -62,7 +63,7 @@ public class Lotto {
     try {
       return Integer.parseInt(s.trim());
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("숫자 형식이 올바르지 않습니다: " + s);
+      throw new IllegalArgumentException(ERROR_INVALID_FORMAT + s);
     }
   }
 
