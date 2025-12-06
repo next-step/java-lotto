@@ -19,8 +19,8 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("돈을 입력하여 자동과 수동으로 몇장 살 수 있는지")
     void mixGenerator() {
-        LottoGenerator mixedLottoGenerator = new MixedLottoGenerator(
-                new LottoPurChase(3000, 2, 1), List.of(new Lotto(1,2,3,4,5,6))
+        LottoGenerator mixedLottoGenerator = new LottosBundleGenerator(
+                new LottoPurChase(3000, 2, 1), List.of("1, 2, 3, 4, 5, 6")
         );
 
         Assertions.assertThat(mixedLottoGenerator.generate()).hasSize(3);

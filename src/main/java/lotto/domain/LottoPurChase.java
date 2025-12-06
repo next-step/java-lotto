@@ -13,6 +13,9 @@ public class LottoPurChase {
         this.money = money;
         this.lottoCount = lottoCount;
     }
+    public Money deductManualLottoCost() {
+        return this.money.deductManualLottoCost(lottoCount.getManualCount());
+    }
 
     public Money getMoney() {
         return this.money;

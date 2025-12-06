@@ -15,10 +15,21 @@ public class Lotto {
     }
 
     public Lotto(String numbers) {
-        this(stringToList(numbers.split(",")));
+        this(stringToList(parse(numbers)));
+    }
+
+    private static String[] parse(String s) {
+        String[] strs = s.split(",");
+
+        for (int i = 0; i < strs.length; i++) {
+            strs[i] = strs[i].trim();
+        }
+
+        return strs;
     }
 
     public Lotto(Set<LottoNumber> numbers) {
+        System.out.println(numbers);
         validation(numbers);
         this.numbers = numbers;
     }

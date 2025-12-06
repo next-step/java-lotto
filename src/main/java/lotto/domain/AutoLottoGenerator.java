@@ -6,8 +6,8 @@ import java.util.List;
 public class AutoLottoGenerator implements LottoGenerator {
     private final Money money;
 
-    public AutoLottoGenerator(int number) {
-        this(new Money(number));
+    public AutoLottoGenerator(int money) {
+        this(new Money(money));
     }
 
     public AutoLottoGenerator(Money money) {
@@ -16,11 +16,9 @@ public class AutoLottoGenerator implements LottoGenerator {
 
     @Override
     public List<Lotto> generate() {
-        int cnt = money.getBuyableCount();
-
         List<Lotto> lottoArray = new ArrayList<>();
 
-        for (int i = 0; i < cnt; i++) {
+        for (int i = 0; i < money.getBuyableCount(); i++) {
             lottoArray.add(new Lotto(LottoMachine.createLottoNumbers()));
         }
 
