@@ -1,8 +1,10 @@
 package lotto.view;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import lotto.InputRetry;
 
 public class InputView {
 
@@ -39,10 +41,17 @@ public class InputView {
   }
 
   private static int readInt() {
-    int value = SCANNER.nextInt();
-    SCANNER.nextLine();
-    System.out.println();
-    return value;
+    return InputRetry.retry(() -> {
+      try {
+        int value = SCANNER.nextInt();
+        SCANNER.nextLine();
+        System.out.println();
+        return value;
+      } catch (InputMismatchException e) {
+        SCANNER.nextLine();
+        throw new IllegalArgumentException("숫자를 올바르게 입력하세요.");
+      }
+    });
   }
 
 }

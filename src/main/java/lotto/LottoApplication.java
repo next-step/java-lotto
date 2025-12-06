@@ -7,25 +7,45 @@ public class LottoApplication {
 
   public static void main(String[] args) {
 
-    int input = InputView.readPurchaseAmount();
-    PurchaseAmount amount = new PurchaseAmount(input);
+    PurchaseAmount amount = createPurchaseAmount();
 
-    ManualLottoCount manualLottoCount = new ManualLottoCount(InputView.readManualLottoCount(),
-        amount);
-    Lottos manualLottos = Lottos.manualLottos(InputView.readManualLottos(manualLottoCount.count()));
+    ManualLottoCount manualCount = createManualLottoCount(amount);
+    Lottos manualLottos = createManualLottos(manualCount);
+    Lottos autoLottos = LottoMachine.randomLottos(amount.autoCount(manualCount));
 
-    Lottos lottos = LottoMachine.randomLottos(amount.autoCount(manualLottoCount));
+    Lottos purchased = manualLottos.merge(autoLottos);
+    ResultView.printPurchasedLottos(purchased, manualCount);
 
-    Lottos mergedLottos = manualLottos.merge(lottos);
-    ResultView.printPurchasedLottos(mergedLottos, manualLottoCount);
-
-    Lotto winningNumbers = new Lotto(InputView.readWinningNumbers());
-    LottoNumber bonusNumber = LottoNumber.of(InputView.readBonusNumber());
-
-    LottoMatchResult matchResult = lottos.matchResult(
-        new WinningNumbers(winningNumbers, bonusNumber));
+    WinningNumbers winningNumbers = createWinningNumbers();
+    LottoMatchResult matchResult = purchased.matchResult(winningNumbers);
     ProfitRate profitRate = new ProfitRate(matchResult.totalPrize(), amount);
 
     ResultView.printLottoResult(matchResult, profitRate);
+  }
+
+  private static PurchaseAmount createPurchaseAmount() {
+    return InputRetry.retry(() ->
+        new PurchaseAmount(InputView.readPurchaseAmount())
+    );
+  }
+
+  private static ManualLottoCount createManualLottoCount(PurchaseAmount amount) {
+    return InputRetry.retry(() ->
+        new ManualLottoCount(InputView.readManualLottoCount(), amount)
+    );
+  }
+
+  private static Lottos createManualLottos(ManualLottoCount manualCount) {
+    return InputRetry.retry(() ->
+        Lottos.manualLottos(InputView.readManualLottos(manualCount.count()))
+    );
+  }
+
+  private static WinningNumbers createWinningNumbers() {
+    return InputRetry.retry(() -> {
+      Lotto winning = new Lotto(InputView.readWinningNumbers());
+      LottoNumber bonus = LottoNumber.of(InputView.readBonusNumber());
+      return new WinningNumbers(winning, bonus);
+    });
   }
 }
