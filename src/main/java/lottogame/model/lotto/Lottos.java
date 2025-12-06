@@ -2,7 +2,7 @@ package lottogame.model.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import lottogame.model.winner.WinStandard;
+import lottogame.model.winner.Rank;
 import lottogame.model.winner.WinnerResult;
 
 public class Lottos {
@@ -16,8 +16,8 @@ public class Lottos {
     public WinnerResult compareAndElectWinResult(final WinningLottoNums winningLottoNums) {
         WinnerResult winnerResult = new WinnerResult();
         for (Lotto lotto : lottos) {
-            WinStandard winStandard = winningLottoNums.checkIfWin(lotto);
-            winnerResult.addWinResult(winStandard);
+            Rank RANK = winningLottoNums.checkIfWin(lotto);
+            winnerResult.addWinResult(RANK);
         }
 
         return winnerResult;

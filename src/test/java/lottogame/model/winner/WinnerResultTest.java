@@ -1,15 +1,14 @@
 package lottogame.model.winner;
 
-import static lottogame.model.winner.WinStandard.FIFTH;
-import static lottogame.model.winner.WinStandard.FIRST;
-import static lottogame.model.winner.WinStandard.FOURTH;
-import static lottogame.model.winner.WinStandard.NOTHING;
-import static lottogame.model.winner.WinStandard.SECOND;
-import static lottogame.model.winner.WinStandard.THIRD;
+import static lottogame.model.winner.Rank.FIFTH;
+import static lottogame.model.winner.Rank.FIRST;
+import static lottogame.model.winner.Rank.FOURTH;
+import static lottogame.model.winner.Rank.NOTHING;
+import static lottogame.model.winner.Rank.SECOND;
+import static lottogame.model.winner.Rank.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import lottogame.model.price.LottoPurchasePrice;
 import org.junit.jupiter.api.Test;
 
 class WinnerResultTest {

@@ -9,18 +9,18 @@ import java.util.stream.Collectors;
 
 public class WinnerResult {
 
-    private Map<WinStandard, Integer> winStandardToWinCount;
+    private Map<Rank, Integer> winStandardToWinCount;
 
     public WinnerResult() {
         this(getInitWinStandardMap());
     }
 
-    public WinnerResult(Map<WinStandard, Integer> winStandardToWinCount) {
+    public WinnerResult(Map<Rank, Integer> winStandardToWinCount) {
         this.winStandardToWinCount = winStandardToWinCount;
     }
 
-    private static Map<WinStandard, Integer> getInitWinStandardMap() {
-        return Arrays.stream(WinStandard.values())
+    private static Map<Rank, Integer> getInitWinStandardMap() {
+        return Arrays.stream(Rank.values())
                 .filter(winStandard -> !winStandard.isNothing())
                 .collect(Collectors.toMap(
                         Function.identity(),
@@ -28,28 +28,28 @@ public class WinnerResult {
                 ));
     }
 
-    public void addWinResult(WinStandard winStandard) {
-        if (isNull(winStandard)) {
+    public void addWinResult(Rank rank) {
+        if (isNull(rank)) {
             return;
         }
 
-        if (winStandard.isNothing()) {
+        if (rank.isNothing()) {
             return;
         }
 
-        Integer countBy = this.winStandardToWinCount.getOrDefault(winStandard, 0);
+        Integer countBy = this.winStandardToWinCount.getOrDefault(rank, 0);
         this.winStandardToWinCount.put(
-                winStandard,
+                rank,
                 countBy + 1
         );
     }
 
-    public int findWinCount(WinStandard winStandard) {
-        if (isNull(winStandard) || winStandard.isNothing()) {
+    public int findWinCount(Rank rank) {
+        if (isNull(rank) || rank.isNothing()) {
             return 0;
         }
 
-        return this.winStandardToWinCount.get(winStandard);
+        return this.winStandardToWinCount.get(rank);
     }
 
     public int sumTotalWinReturn() {
@@ -58,7 +58,7 @@ public class WinnerResult {
                 .sum();
     }
 
-    private int calculateWinReturnBy(WinStandard winStandard) {
-        return winStandard.calculateWinReturn(this.findWinCount(winStandard));
+    private int calculateWinReturnBy(Rank rank) {
+        return rank.calculateWinReturn(this.findWinCount(rank));
     }
 }

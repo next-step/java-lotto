@@ -9,11 +9,11 @@ import static lottogame.view.Casher.informBuyCount;
 import static lottogame.view.Casher.informPublishedLottos;
 import static lottogame.view.Casher.informWinResult;
 
+import java.util.List;
 import java.util.Set;
 import lottogame.model.lotto.LottoMachine;
 import lottogame.model.lotto.LottoNum;
 import lottogame.model.lotto.Lottos;
-import lottogame.model.lotto.ManualLottos;
 import lottogame.model.lotto.WinningLottoNums;
 import lottogame.model.price.LottoPurchasePrice;
 import lottogame.model.winner.WinnerResult;
@@ -32,7 +32,7 @@ public class LottoStore {
 
     private LottoPurchaseRequest getPurchaseInfosFromUser() {
         LottoPurchasePrice lottoPurchasePrice = new LottoPurchasePrice(askBuyPrice());
-        ManualLottos manualLottos = new ManualLottos(askManualLottos());
+        List<String> manualLottos = askManualLottos();
 
         return new LottoPurchaseRequest(lottoPurchasePrice, manualLottos);
     }
@@ -51,7 +51,7 @@ public class LottoStore {
 
     private WinningLottoNums getWinningLottoNums() {
         Set<LottoNum> lottoByNums = LottoMachine.createLottoNums(askLottoNums());
-        LottoNum bonusNum = LottoMachine.getLottoNum(askBonusNum());
+        LottoNum bonusNum = LottoMachine.findLottoNumBy(askBonusNum());
 
         return new WinningLottoNums(lottoByNums, bonusNum);
     }

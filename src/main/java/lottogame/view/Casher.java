@@ -1,12 +1,11 @@
 package lottogame.view;
 
-import static java.lang.Math.floor;
 import static lottogame.model.lotto.LottoMachine.LOTTO_NUM_COUNT;
-import static lottogame.model.winner.WinStandard.FIFTH;
-import static lottogame.model.winner.WinStandard.FIRST;
-import static lottogame.model.winner.WinStandard.FOURTH;
-import static lottogame.model.winner.WinStandard.SECOND;
-import static lottogame.model.winner.WinStandard.THIRD;
+import static lottogame.model.winner.Rank.FIFTH;
+import static lottogame.model.winner.Rank.FIRST;
+import static lottogame.model.winner.Rank.FOURTH;
+import static lottogame.model.winner.Rank.SECOND;
+import static lottogame.model.winner.Rank.THIRD;
 import static lottogame.view.InputView.inputString;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lottogame.model.price.LottoPurchasePrice;
 import lottogame.model.winner.WinnerResult;
 
 public class Casher {
@@ -34,7 +32,7 @@ public class Casher {
         OutputView.printBuyLottoCount(autoCount, manualCount);
     }
 
-    public static List<Set<Integer>> askManualLottos() {
+    public static List<String> askManualLottos() {
         return askManualLottoNums(askManualLottoCount());
     }
 
@@ -44,24 +42,21 @@ public class Casher {
         return InputView.inputInt();
     }
 
-    private static List<Set<Integer>> askManualLottoNums(int manualCount) {
-        List<Set<Integer>> rawManualNums = new ArrayList<>();
+    private static List<String> askManualLottoNums(int manualCount) {
+        List<String> rawManualNums = new ArrayList<>();
 
         OutputView.printQuestionManualLottoNums();
         for (int i = 0; i < manualCount; i++) {
-            String rawValue = inputString();
-            Set<Integer> e = splitAndParseLottoNums(rawValue);
-            rawManualNums.add(e);
+            rawManualNums.add(inputString());
         }
 
         return rawManualNums;
     }
 
-    public static Set<Integer> askLottoNums() {
+    public static String askLottoNums() {
         OutputView.printQuestionBeforeWinNums();
-        String rawValue = inputString();
 
-        return splitAndParseLottoNums(rawValue);
+        return inputString();
     }
 
     public static int askBonusNum() {
@@ -84,18 +79,5 @@ public class Casher {
                 + "총 수익률은 " + rateOfReturn + "입니다.";
 
         OutputView.printWinResultMsg(msg);
-    }
-
-    // 입렵 받는 방식에 문제가 있는듯.. 다시 볼것.
-    private static Set<Integer> splitAndParseLottoNums(String rawValue) {
-        Set<Integer> inputLottoNums = Arrays.stream(rawValue.split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toSet());
-
-        if (inputLottoNums.isEmpty() || inputLottoNums.size() != LOTTO_NUM_COUNT) {
-            throw new IllegalArgumentException("로또번호 갯수를 정확히 입력해 주세요. 6개가 아니거나 중복은 허용되지 않습니다");
-        }
-
-        return inputLottoNums;
     }
 }

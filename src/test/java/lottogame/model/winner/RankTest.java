@@ -1,13 +1,13 @@
 package lottogame.model.winner;
 
-import static lottogame.model.winner.WinStandard.*;
-import static lottogame.model.winner.WinStandard.FIRST;
+import static lottogame.model.winner.Rank.*;
+import static lottogame.model.winner.Rank.FIRST;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
-class WinStandardTest {
+class RankTest {
 
     @Test
     void 일등을_집계할_수_있다() {
@@ -46,7 +46,7 @@ class WinStandardTest {
 
     @Test
     void 각등수를_키값으로하고_값이_0인_Map을_생성할_수_있다() {
-        Map<WinStandard, Integer> result = getInitWinStandardMap();
+        Map<Rank, Integer> result = getInitWinStandardMap();
 
         assertThat(result.get(FIRST)).isEqualTo(0);
         assertThat(result.get(SECOND)).isEqualTo(0);

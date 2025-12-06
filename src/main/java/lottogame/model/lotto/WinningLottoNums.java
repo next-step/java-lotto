@@ -1,7 +1,7 @@
 package lottogame.model.lotto;
 
 import java.util.Set;
-import lottogame.model.winner.WinStandard;
+import lottogame.model.winner.Rank;
 
 public class WinningLottoNums {
     private final Lotto winLotto;
@@ -20,10 +20,10 @@ public class WinningLottoNums {
         this.bonusNums = bonusNums;
     }
 
-    public WinStandard checkIfWin(Lotto otherLotto) {
+    public Rank checkIfWin(Lotto otherLotto) {
         int matchCount = this.winLotto.findMatchCountBy(otherLotto);
         boolean isMatchBonus = otherLotto.isContain(bonusNums);
 
-        return WinStandard.findBy(matchCount, isMatchBonus);
+        return Rank.findBy(matchCount, isMatchBonus);
     }
 }

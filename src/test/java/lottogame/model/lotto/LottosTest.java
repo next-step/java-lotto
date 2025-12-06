@@ -2,11 +2,11 @@ package lottogame.model.lotto;
 
 import static lottogame.fixture.LottoFixture.로또번호리스트를_오름차순으로_생성한다;
 import static lottogame.fixture.LottoFixture.로또번호리스트를_지정해서_생성한다;
-import static lottogame.model.winner.WinStandard.FIRST;
-import static lottogame.model.winner.WinStandard.FIFTH;
-import static lottogame.model.winner.WinStandard.THIRD;
-import static lottogame.model.winner.WinStandard.SECOND;
-import static lottogame.model.winner.WinStandard.FOURTH;
+import static lottogame.model.winner.Rank.FIRST;
+import static lottogame.model.winner.Rank.FIFTH;
+import static lottogame.model.winner.Rank.THIRD;
+import static lottogame.model.winner.Rank.SECOND;
+import static lottogame.model.winner.Rank.FOURTH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -26,7 +26,7 @@ class LottosTest {
                 )
         );
         Lotto winLotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
-        WinningLottoNums winningLottoNums = new WinningLottoNums(winLotto, LottoNum.getInstance(45));
+        WinningLottoNums winningLottoNums = new WinningLottoNums(winLotto, LottoNum.of(45));
 
         WinnerResult winnerResult = lottos.compareAndElectWinResult(winningLottoNums);
 
@@ -45,7 +45,7 @@ class LottosTest {
         );
         WinningLottoNums winningLottoNums = new WinningLottoNums(
                 new Lotto(로또번호리스트를_오름차순으로_생성한다(6)),
-                LottoNum.getInstance(7)
+                LottoNum.of(7)
         );
 
         WinnerResult winnerResult = lottos.compareAndElectWinResult(winningLottoNums);
