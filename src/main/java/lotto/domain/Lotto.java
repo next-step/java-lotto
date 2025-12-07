@@ -11,16 +11,16 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matches(int targetMatchCount, LottoNumbers winningNumbers) {
-        int matchCount = 0;
+    public LottoResult getMatchResult(LottoNumbers winningNumbers) {
+        LottoResult result = new LottoResult();
+
 
         for (LottoNumbers lottoNumbers : lottoNumbers) {
-            if (isMatched(targetMatchCount, lottoNumbers.getMatchedCount(winningNumbers))) {
-                matchCount++;
-            }
+            LottoRank rank = lottoNumbers.getMatchedRank(winningNumbers);
+            result.add(rank);
         }
 
-        return matchCount;
+        return result;
     }
 
 
