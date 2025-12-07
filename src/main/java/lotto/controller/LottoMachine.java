@@ -11,7 +11,7 @@ import java.util.List;
 public class LottoMachine {
     private LottoPrice lottoPrice;
 
-    public LottoMachine(int price) {
+    public LottoMachine(String price) {
         this(new LottoPrice(price));
     }
 
