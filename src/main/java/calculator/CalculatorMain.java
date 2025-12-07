@@ -1,7 +1,7 @@
 package calculator;
 
-import view.InputView;
-import view.OutputView;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorMain {
 
