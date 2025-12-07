@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoResult {
     private final Map<LottoRank, Integer> matchResult;
@@ -23,19 +25,21 @@ public class LottoResult {
         matchResult.put(rank, matchResult.get(rank) + 1);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
+    public int prize() {
+        int prize = 0;
         for (LottoRank rank : LottoRank.values()) {
-            if (rank == LottoRank.NONE) {
-                continue;
-            }
-
-            builder.append(rank).append(" - ").append(matchResult.get(rank));
+            prize += rank.getPrize(rank, matchResult.get(rank));
         }
 
-        return builder.toString();
+        return prize;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LottoRank.NONE)
+                .map(rank -> rank + " - " + matchResult.get(rank) + "개")
+                .collect(Collectors.joining("\n"));
     }
 
     @Override

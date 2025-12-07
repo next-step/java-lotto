@@ -30,6 +30,9 @@ public enum LottoRank {
         return rank.matchCount == matchCount;
     }
 
+    public int getPrize(LottoRank rank, int count) {
+        return rank.prize * count;
+    }
 
     @Override
     public String toString() {
