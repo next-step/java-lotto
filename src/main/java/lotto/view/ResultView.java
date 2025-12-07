@@ -3,12 +3,14 @@ package lotto.view;
 import lotto.LottoMatchResult;
 import lotto.LottoRank;
 import lotto.Lottos;
+import lotto.ManualLottoCount;
 import lotto.ProfitRate;
 
 public class ResultView {
 
-  public static void printPurchasedLottos(Lottos lottos) {
-    System.out.printf("%d개를 구매했습니다.%n", lottos.count());
+  public static void printPurchasedLottos(Lottos lottos, ManualLottoCount manualCount) {
+    System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount.count(),
+        lottos.count() - manualCount.count());
     for (String line : lottos.toDisplayStrings()) {
       System.out.println(line);
     }
@@ -16,7 +18,6 @@ public class ResultView {
   }
 
   public static void printLottoResult(LottoMatchResult matchResult, ProfitRate profitRate) {
-    System.out.println();
     System.out.println("당첨 통계");
     System.out.println("---------");
 
@@ -35,12 +36,12 @@ public class ResultView {
   }
 
   private static void printRank(LottoMatchResult matchResult, LottoRank rank) {
-    if (rank == LottoRank.MISS) {
+    if (rank.isMiss()) {
       return;
     }
     int count = matchResult.countMatches(rank);
     int prize = rank.prize();
-    if (rank == LottoRank.SECOND) {
+    if (rank.isSecond()) {
       System.out.printf("5개 일치, 보너스 볼 일치 (%d원) - %d개%n", prize, count);
       return;
     }

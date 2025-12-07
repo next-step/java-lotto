@@ -7,10 +7,9 @@ import org.junit.jupiter.api.Test;
 
 public class LottoMachineTest {
 
-  @DisplayName("구입한 수만큼 로또를 발행한다")
+  @DisplayName("자동 로또를 1개 발행한다")
   @Test
-  void randomLottos() {
-    Lottos lottos = LottoMachine.randomLottos(10);
-    assertThat(lottos.count()).isEqualTo(10);
+  void randomLotto() {
+    assertThat(LottoMachine.randomLotto().numbers()).hasSize(6);
   }
 }

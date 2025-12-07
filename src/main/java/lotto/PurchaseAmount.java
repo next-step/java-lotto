@@ -21,10 +21,13 @@ public class PurchaseAmount {
     return value / PRICE_PER_LOTTO;
   }
 
+  public int autoCount(ManualLottoCount manualCount) {
+    return ticketCount() - manualCount.count();
+  }
+
   private static void validate(int amount) {
     if (amount < PRICE_PER_LOTTO || amount % PRICE_PER_LOTTO != 0) {
       throw new IllegalArgumentException(ERROR_INVALID_PURCHASE_AMOUNT);
     }
   }
-
 }

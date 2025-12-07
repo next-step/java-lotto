@@ -14,6 +14,8 @@ public class Lotto {
   public static final int LOTTO_NUMBER_COUNT = 6;
 
   private static final String ERROR_INVALID_COUNT = "로또 번호는 6개여야 한다";
+  private static final String ERROR_DUPLICATE_NUMBER = "로또 번호에 중복이 있을 수 없습니다.";
+  private static final String ERROR_INVALID_FORMAT = "숫자 형식이 올바르지 않습니다: ";
 
   private final Set<LottoNumber> numbers;
 
@@ -32,6 +34,14 @@ public class Lotto {
 
   public static Lotto fromIntegers(List<Integer> numbers) {
     return new Lotto(toLottoNumbers(numbers));
+  }
+
+  public List<LottoNumber> numbers() {
+    return Collections.unmodifiableList(new ArrayList<>(numbers));
+  }
+
+  public boolean contains(LottoNumber number) {
+    return numbers.contains(number);
   }
 
   private static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
@@ -53,7 +63,7 @@ public class Lotto {
     try {
       return Integer.parseInt(s.trim());
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("숫자 형식이 올바르지 않습니다: " + s);
+      throw new IllegalArgumentException(ERROR_INVALID_FORMAT + s);
     }
   }
 
@@ -61,14 +71,11 @@ public class Lotto {
     if (numbers.size() != LOTTO_NUMBER_COUNT) {
       throw new IllegalArgumentException(ERROR_INVALID_COUNT);
     }
-  }
 
-  public List<LottoNumber> numbers() {
-    return Collections.unmodifiableList(new ArrayList<>(numbers));
-  }
-
-  public boolean contains(LottoNumber number) {
-    return numbers.contains(number);
+    long distinctCount = numbers.stream().distinct().count();
+    if (distinctCount != LOTTO_NUMBER_COUNT) {
+      throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
+    }
   }
 
   @Override
