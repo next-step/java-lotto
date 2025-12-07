@@ -5,12 +5,8 @@ import java.util.stream.Collectors;
 public class LottoGame {
     private final Lottos lottos;
 
-    public LottoGame(long amount) {
-        this(new Money(amount));
-    }
-
-    public LottoGame(Money money) {
-        this(new Lottos(money.buyCount()));
+    public LottoGame(LottoPurchase purchase) {
+        this(new Lottos(purchase.count()));
     }
 
     public LottoGame(Lottos lottos) {

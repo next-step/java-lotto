@@ -16,10 +16,6 @@ public class Money {
         }
     }
 
-    public int buyCount() {
-        return (int) (money / LOTTO_PRICE);
-    }
-
     public double getMoney() {
         return money;
     }
