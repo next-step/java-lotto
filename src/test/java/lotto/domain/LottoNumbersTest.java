@@ -17,20 +17,20 @@ public class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoNumbers")
-    public void 일치하는_숫자의_개수(List<Integer> numbers, int expected) {
+    public void 일치하는_숫자의_개수(List<Integer> numbers, LottoRank expected) {
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         LottoNumbers otherLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottoNumbers.getMatchedCount(otherLottoNumbers)).isEqualTo(expected);
+        assertThat(lottoNumbers.getMatchedRank(otherLottoNumbers)).isEqualTo(expected);
     }
 
 
     static Stream<Arguments> provideLottoNumbers() {
         return Stream.of(
-                Arguments.of(List.of(1, 2, 3, 4, 5, 6), 6),
-                Arguments.of(List.of(1, 2, 3, 4, 5, 7), 5),
-                Arguments.of(List.of(1, 2, 3, 4, 8, 9), 4),
-                Arguments.of(List.of(1, 2, 3, 10, 11, 12), 3)
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
+                Arguments.of(List.of(1, 2, 3, 4, 8, 9), LottoRank.THIRD),
+                Arguments.of(List.of(1, 2, 3, 10, 11, 12), LottoRank.FOURTH)
         );
     }
 }
