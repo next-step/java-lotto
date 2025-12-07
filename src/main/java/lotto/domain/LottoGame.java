@@ -6,7 +6,7 @@ public class LottoGame {
     private final Lottos lottos;
 
     public LottoGame(LottoPurchase purchase) {
-        this(new Lottos(purchase.count()));
+        this(purchase.toLottos());
     }
 
     public LottoGame(Lottos lottos) {
