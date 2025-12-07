@@ -14,7 +14,7 @@ public class LottoMachine {
     return new Lottos(lottos);
   }
 
-  private static Lotto randomLotto() {
+  public static Lotto randomLotto() {
     List<Integer> numbers = new ArrayList<>();
     for (int i = Lotto.MIN_NUMBER; i <= Lotto.MAX_NUMBER; i++) {
       numbers.add(i);
