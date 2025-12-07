@@ -17,9 +17,17 @@ public class LottoTest {
                 new LottoNumbers(List.of(1, 2, 7, 8, 9, 10))
         );
 
-        LottoPrice price = new LottoPrice(1000);
+        LottoPrice price = new LottoPrice(6000);
         LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(new Lotto(price, lottoNumbersList).matches(3, winningNumbers)).isEqualTo(1);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.add(LottoRank.FIRST);
+        lottoResult.add(LottoRank.SECOND);
+        lottoResult.add(LottoRank.THIRD);
+        lottoResult.add(LottoRank.FOURTH);
+        lottoResult.add(LottoRank.NONE);
+
+
+        assertThat(new Lotto(price, lottoNumbersList).getMatchResult(winningNumbers)).isEqualTo(lottoResult);
     }
 }
