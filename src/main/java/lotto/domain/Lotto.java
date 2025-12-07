@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     LottoPrice price;
@@ -14,7 +15,6 @@ public class Lotto {
     public LottoResult getMatchResult(LottoNumbers winningNumbers) {
         LottoResult result = new LottoResult();
 
-
         for (LottoNumbers lottoNumbers : lottoNumbers) {
             LottoRank rank = lottoNumbers.getMatchedRank(winningNumbers);
             result.add(rank);
@@ -23,8 +23,16 @@ public class Lotto {
         return result;
     }
 
+    public double calculateProfit(int prize) {
+        return price.getProfit(prize);
+    }
 
-    private boolean isMatched(int targetMatchCount, int matchedCount) {
-        return targetMatchCount == matchedCount;
+    public String count() {
+        return String.valueOf(price.count());
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream().map(LottoNumbers::toString).collect(Collectors.joining("\n"));
     }
 }
