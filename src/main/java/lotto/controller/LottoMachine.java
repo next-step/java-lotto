@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    private LottoPrice lottoPrice;
+    private final LottoPrice lottoPrice;
 
     public LottoMachine(String price) {
         this(new LottoPrice(price));

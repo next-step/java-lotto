@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private List<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
 
     public LottoNumbers(List<Integer> numbers) {
         this.numbers = toLottoNumber(numbers);
@@ -15,7 +15,7 @@ public class LottoNumbers {
     private static List<LottoNumber> toLottoNumber(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for(int number : numbers) {
+        for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
 

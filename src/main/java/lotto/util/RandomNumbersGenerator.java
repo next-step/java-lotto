@@ -8,10 +8,10 @@ public class RandomNumbersGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static List<Integer> numbers = new ArrayList<>();
+    private static final List<Integer> numbers = new ArrayList<>();
 
     static {
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++ ) {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             numbers.add(i);
         }
     }

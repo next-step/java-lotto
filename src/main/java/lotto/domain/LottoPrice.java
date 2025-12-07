@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class LottoPrice {
     private static final int PRICE_PER_LOTTO = 1000;
-    private int price;
+    private final int price;
 
     public LottoPrice(String price) {
         this(Integer.parseInt(price));
