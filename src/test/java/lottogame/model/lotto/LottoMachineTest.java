@@ -10,22 +10,12 @@ import org.junit.jupiter.api.Test;
 class LottoMachineTest {
 
     @Test
-    void 사용자의금액만큼_자동로또를_발행할_수_있다() {
-        Lottos lotto = LottoMachine.createAutoLotto(14);
+    void 사용자의_요청값만큼_자동_수동로또를_발행할_수_있다() {
+        Lottos lotto = LottoMachine.createTotallyLottos(5, List.of("1, 2, 3, 4, 5, 6"));
 
         assertThat(
                 lotto.size()
-        ).isEqualTo(14);
-    }
-
-    @Test
-    void 사용자의_요청번호대로_수동로또를_발행할_수_있다() {
-        Lottos result = LottoMachine.createManualLotto(
-                List.of("1, 2, 3, 4, 5, 6", "2, 3, 4, 5, 6, 7"));
-
-        assertThat(
-                result.size()
-        ).isEqualTo(2);
+        ).isEqualTo(6);
     }
 
     @Test

@@ -38,7 +38,7 @@ class LottoTest {
         Lotto lotto = new Lotto(로또번호리스트를_오름차순으로_생성한다(6));
 
         assertThat(
-                lotto.isContain(LottoNum.getInstance(num))
+                lotto.isContain(LottoNum.of(num))
         ).isEqualTo(expect);
     }
 }
