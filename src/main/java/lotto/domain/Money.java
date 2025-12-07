@@ -29,6 +29,10 @@ public class Money {
         return total.value() / (double) this.money;
     }
 
+    public Money deductManualLottoCost(int manualCount) {
+        return new Money(this.money - (manualCount * PRICE));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

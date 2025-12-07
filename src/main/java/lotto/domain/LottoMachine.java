@@ -11,7 +11,7 @@ public class LottoMachine {
 
     public static int[] createLottoNumbers() {
         List<Integer> nums = new ArrayList<>();
-        for(int i = MIN_NUMBER; i <= MAX_NUMBER; i++){
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             nums.add(i);
         }
 
@@ -22,7 +22,7 @@ public class LottoMachine {
 
     private static int[] selectLottoNumbers(List<Integer> lottoNumbers) {
         int[] nums = new int[COUNT];
-        for(int i = 0; i < COUNT; i++){
+        for (int i = 0; i < COUNT; i++) {
             nums[i] = lottoNumbers.get(i);
         }
         return nums;

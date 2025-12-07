@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(int... numbers) {
         this(intToList(numbers));
@@ -15,20 +14,42 @@ public class Lotto {
         this(stringToList(numbers));
     }
 
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(String numbers) {
+        this(stringToList(parse(numbers)));
+    }
+
+    private static String[] parse(String s) {
+        String[] strs = s.split(",");
+
+        for (int i = 0; i < strs.length; i++) {
+            strs[i] = strs[i].trim();
+        }
+
+        return strs;
+    }
+
+    public Lotto(Set<LottoNumber> numbers) {
+        System.out.println(numbers);
+        validation(numbers);
         this.numbers = numbers;
     }
 
-    private static List<LottoNumber> stringToList(String... numbers) {
-        return Arrays.stream(numbers)
-                .map(LottoNumber::valueOf)
-                .toList();
+    private void validation(Set<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
     }
 
-    private static List<LottoNumber> intToList(int... numbers) {
+    private static Set<LottoNumber> stringToList(String... numbers) {
+        return Arrays.stream(numbers)
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toSet());
+    }
+
+    private static Set<LottoNumber> intToList(int... numbers) {
         return Arrays.stream(numbers)
                 .mapToObj(LottoNumber::valueOf)
-                .toList();
+                .collect(Collectors.toSet());
     }
 
     public int countMatchedNumbers(Lotto winningLotto) {

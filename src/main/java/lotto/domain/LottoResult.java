@@ -9,7 +9,8 @@ public class LottoResult {
     public LottoResult() {
         this(initResult());
     }
-    public  LottoResult(Map<LottoRank, Integer> result) {
+
+    public LottoResult(Map<LottoRank, Integer> result) {
         this.result = result;
     }
 
@@ -36,7 +37,7 @@ public class LottoResult {
     }
 
     public void rank(LottoRank rank) {
-        if(rank.isAddAble()) {
+        if (rank.isAddAble()) {
             result.put(rank, result.get(rank) + 1);
         }
     }
