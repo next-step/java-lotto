@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -12,6 +14,10 @@ public class LottoNumbers {
         this.numbers = toLottoNumber(numbers);
     }
 
+    public LottoNumbers(int... numbers) {
+        this(convertToList(numbers));
+    }
+
     private static List<LottoNumber> toLottoNumber(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
@@ -20,6 +26,14 @@ public class LottoNumbers {
         }
 
         return lottoNumbers;
+    }
+
+    private static List<Integer> convertToList(int... numbers) {
+        List<Integer> list = new ArrayList<>();
+        for (int number : numbers) {
+            list.add(number);
+        }
+        return list;
     }
 
     public LottoRank getMatchedRank(LottoNumbers other) {
