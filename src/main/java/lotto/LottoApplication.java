@@ -3,6 +3,7 @@ package lotto;
 import lotto.controller.LottoMachine;
 import lotto.controller.WinningLotto;
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 import lotto.util.LottoNumberParser;
@@ -17,8 +18,8 @@ public class LottoApplication {
 
         String winningNumbers = InputView.getWinningNumber();
         WinningLotto winningLotto = new WinningLotto(LottoNumberParser.parse(winningNumbers));
-
-        ResultView.printLottoResult(winningLotto.getResult(lotto));
-        ResultView.printProfit(winningLotto.getProfit(lotto));
+        LottoResult result = winningLotto.getResult(lotto);
+        ResultView.printLottoResult(result.toString());
+        ResultView.printProfit(result.getProfit());
     }
 }

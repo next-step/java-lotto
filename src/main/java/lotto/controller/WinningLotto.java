@@ -12,12 +12,7 @@ public class WinningLotto {
         this.winningNumbers = winningNumbers;
     }
 
-    public String getResult(Lotto lotto) {
-        return lotto.getMatchResult(winningNumbers).toString();
-    }
-
-    public String getProfit(Lotto lotto) {
-        LottoResult lottoResult = lotto.getMatchResult(winningNumbers);
-        return String.valueOf(lotto.calculateProfit(lottoResult.prize()));
+    public LottoResult getResult(Lotto lotto) {
+        return lotto.getMatchResult(winningNumbers);
     }
 }
