@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.result.LottoMatchResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,14 @@ public class Lottos {
 
     public int size() {
         return this.lottos.size();
+    }
+
+    public LottoMatchResult match(WinningLotto winningLotto) {
+        LottoMatchResult result = new LottoMatchResult();
+        for (Lotto lotto : lottos) {
+            result.updateRank(winningLotto.match(lotto));
+        }
+        return result;
     }
 
     @Override
