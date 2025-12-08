@@ -1,5 +1,6 @@
 package lotto.result;
 
+import lotto.domain.Money;
 import lotto.domain.Rank;
 
 import java.util.EnumMap;
@@ -32,26 +33,13 @@ public class LottoMatchResult {
         results.merge(rank, 1, Integer::sum);
     }
 
-    public int totalPrize() {
-        return results.entrySet().stream()
-                .map(this::calculatePrize)
-                .reduce(0, Integer::sum);
+    public Money totalPrize() {
+        return results.entrySet().stream().map(this::calculatePrize).reduce(Money.ZERO, Money::add);
     }
 
-    private int calculatePrize(Map.Entry<Rank, Integer> entry) {
+    private Money calculatePrize(Map.Entry<Rank, Integer> entry) {
         Rank rank = entry.getKey();
         int count = entry.getValue().intValue();
         return rank.totalPrize(count);
-    }
-
-    private long count(Rank rank) {
-        return results.getOrDefault(rank, 0);
-    }
-
-    @Override
-    public String toString() {
-        return "LottoMatchResult{" +
-                "results=" + results +
-                '}';
     }
 }

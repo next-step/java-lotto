@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
+    public static final Money ZERO = new Money(0);
     private static final int MONEY_PER_LOTTO = 1_000;
 
     private final int money;
@@ -32,6 +33,9 @@ public class Money {
         return new Money(this.money + money.money);
     }
 
+    public Money multiply(int count) {
+        return new Money(this.money * count);
+    }
 
     public double calculateProfitRate(Money prize) {
         return (prize.money * 100) / money;

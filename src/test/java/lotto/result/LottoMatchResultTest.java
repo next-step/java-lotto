@@ -1,12 +1,13 @@
 package lotto.result;
 
-import static org.assertj.core.api.Assertions.*;
-
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 
-class LottoMatchResultTest {
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
+public class LottoMatchResultTest {
     @Test
     void create() {
         assertThatCode(() -> new LottoMatchResult(Rank.FIRST, Rank.FOURTH)).doesNotThrowAnyException();
@@ -18,6 +19,6 @@ class LottoMatchResultTest {
         result.updateRank(Rank.THIRD);
         System.out.println(result);
         assertThat(result.totalPrize())
-                .isEqualTo(2_001_505_000);
+                .isEqualTo(new Money(2_001_505_000));
     }
 }
