@@ -24,7 +24,7 @@ public class LottoBundleGenerator implements LottoGenerator {
     private static List<LottoGenerator> createLottoGenerators(Money buyingMoney, List<String> manualLottoValues) {
         List<LottoGenerator> lottoGenerators = new ArrayList<>();
         lottoGenerators.add(new ManualLottoGenerator(manualLottoValues));
-        lottoGenerators.add(new AutoLottoGenerator(buyingMoney.buyManual(manualLottoValues.size())));
+        lottoGenerators.add(new AutoLottoGenerator(buyingMoney.subtractPurchaseAmount(manualLottoValues.size())));
         return lottoGenerators;
     }
 

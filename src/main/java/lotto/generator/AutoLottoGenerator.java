@@ -28,7 +28,7 @@ public class AutoLottoGenerator implements LottoGenerator {
 
     @Override
     public Lottos generate() {
-        return new Lottos(randomLottos(money.countOfBuyingLotto()));
+        return new Lottos(randomLottos(money.getLottoTicketCount()));
     }
 
     private static List<Lotto> randomLottos(int count) {

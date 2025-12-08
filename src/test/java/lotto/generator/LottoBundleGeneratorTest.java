@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoBundleGeneratorTest {
 
@@ -21,7 +20,7 @@ class LottoBundleGeneratorTest {
         );
         LottoBundleGenerator lottoBundleGenerator = new LottoBundleGenerator(money, values);
         Lottos lottos = lottoBundleGenerator.generate();
-        assertThat(lottos.size()).isEqualTo(money.countOfBuyingLotto());
+        assertThat(lottos.size()).isEqualTo(money.getLottoTicketCount());
         System.out.println(lottos);
     }
 }

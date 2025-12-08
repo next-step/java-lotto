@@ -12,7 +12,7 @@ public class AutoLottoGeneratorTest {
         Money money = new Money(5_000);
         AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(money);
         Lottos lottos = autoLottoGenerator.generate();
-        assertThat(lottos.size()).isEqualTo(money.countOfBuyingLotto());
+        assertThat(lottos.size()).isEqualTo(money.getLottoTicketCount());
         System.out.println(lottos);
     }
 }
