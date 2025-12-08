@@ -1,15 +1,22 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
+
 public class ResultView {
     private static final String LOTTO_COUNT_MESSAGE = "%s개를 구매했습니다.\n";
     private static final String LOTTO_RESULT_MESSSAGE = "당첨 통계\n-------";
 
-    public static void printLottoCount(String lottoCount) {
+    private static void printLottoCount(String lottoCount) {
         System.out.printf(LOTTO_COUNT_MESSAGE, lottoCount);
     }
 
-    public static void printLottoNumbersList(String lottoList) {
+    private static void printLottoNumbersList(String lottoList) {
         System.out.println(lottoList);
+    }
+
+    public static void printLotto(Lotto lotto) {
+        printLottoCount(lotto.count());
+        printLottoNumbersList(lotto.toString());
     }
 
     public static void printLottoResult(String lottoResult) {
