@@ -36,7 +36,7 @@ public class LottoNumbers {
         return list;
     }
 
-    public LottoRank getMatchedRank(LottoNumbers other) {
+    public LottoRank getMatchedRank(LottoNumbers other, LottoNumber bonusNumber) {
         int matchCount = 0;
 
        for (LottoNumber number : numbers) {
@@ -45,7 +45,7 @@ public class LottoNumbers {
            }
        }
 
-        return LottoRank.of(matchCount);
+        return LottoRank.of(matchCount, numbers.contains(bonusNumber));
     }
 
     public boolean contains(LottoNumber number) {

@@ -12,11 +12,11 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoResult getMatchResult(LottoNumbers winningNumbers) {
+    public LottoResult getMatchResult(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         LottoResult result = new LottoResult();
 
         for (LottoNumbers lottoNumbers : lottoNumbers) {
-            LottoRank rank = lottoNumbers.getMatchedRank(winningNumbers);
+            LottoRank rank = lottoNumbers.getMatchedRank(winningNumbers, bonusNumber);
             result.add(rank);
         }
 
