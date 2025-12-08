@@ -26,22 +26,22 @@ public enum Rank {
         return match;
     }
 
+    private boolean isMatch(int matchCount, boolean matchBonus) {
+        if (this == SECOND) {
+            return matchCount == 5 && matchBonus;
+        }
+
+        if (this == THIRD) {
+            return matchCount == 5 && !matchBonus;
+        }
+
+        return this.match == matchCount;
+    }
+
     public static Rank from(int matchCount, boolean matchBonus) {
-        if (matchCount == 6) {
-            return FIRST;
-        }
-        if (matchCount == 5 && matchBonus) {
-            return SECOND;
-        }
-        if (matchCount == 5) {
-            return THIRD;
-        }
-        if (matchCount == 4) {
-            return FOURTH;
-        }
-        if (matchCount == 3) {
-            return FIFTH;
-        }
-        return NONE;
+        return Arrays.stream(values())
+                .filter(rank -> rank.isMatch(matchCount, matchBonus))
+                .findFirst()
+                .orElse(NONE);
     }
 }
