@@ -3,8 +3,9 @@ package lotto;
 import java.util.Arrays;
 
 public enum LottoRank {
+    NO_RANK(0, 0),
     FOURTH(3, 5_000),
-    THIRD (4, 50_000),
+    THIRD(4, 50_000),
     SECOND(5, 1_500_000),
     FIRST(6, 2_000_000_000);
 
@@ -24,10 +25,15 @@ public enum LottoRank {
         return prizeMoney;
     }
 
+    public boolean isNoRank() {
+        return this == NO_RANK;
+    }
+
     public static LottoRank fromMatchCount(int matchCount) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
-                .orElse(null);
+                .orElse(NO_RANK);
+
     }
 }

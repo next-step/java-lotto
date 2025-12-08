@@ -1,28 +1,29 @@
 package lotto.view;
 
-import lotto.Lotto;
 import lotto.LottoRank;
-
-import java.util.List;
-import java.util.Map;
+import lotto.LottoStatistics;
+import lotto.Lottos;
 
 public class OutputView {
 
-    public static void printLotto(List<Lotto> lottoList) {
+    public static void printLotto(Lottos lottoList) {
         System.out.println(lottoList.size() + "개를 구매했습니다.");
 
-        for (Lotto lotto : lottoList) {
-            System.out.println(lotto.numbers());
+        for (var lotto : lottoList.lottos()) {
+            System.out.println(lotto.toString());
         }
     }
 
-    public static void printWinningStatistics(Map<LottoRank, Integer> statistics) {
+    public static void printWinningStatistics(LottoStatistics statistics) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (LottoRank rank : LottoRank.values()) {
-            int count = statistics.getOrDefault(rank, 0);
+            if (rank.isNoRank()) {
+                continue;
+            }
+            int count = statistics.getCount(rank);
             System.out.println(rank.matchCount() + "개 일치 (" + rank.prizeMoney() + "원) - " + count + "개");
         }
     }

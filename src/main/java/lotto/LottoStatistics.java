@@ -7,10 +7,18 @@ import java.util.Map;
 
 public record LottoStatistics(Map<LottoRank, Integer> statistics) {
 
-    static Map<LottoRank, Integer> calculateStatistics(List<Lotto> lottoList, Lotto winningLotto) {
+    public LottoStatistics {
+        statistics = Map.copyOf(statistics);
+    }
+
+    public int getCount(LottoRank rank) {
+        return statistics.getOrDefault(rank, 0);
+    }
+
+    static LottoStatistics calculateStatistics(Lottos lottoList, Lotto winningLotto) {
         Map<LottoRank, Integer> result = new HashMap<>();
 
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottoList.lottos()) {
             int matchCount = lotto.matchCount(winningLotto);
             LottoRank rank = LottoRank.fromMatchCount(matchCount);
             if (rank != null) {
@@ -18,14 +26,16 @@ public record LottoStatistics(Map<LottoRank, Integer> statistics) {
             }
         }
 
-        return result;
+        return new LottoStatistics(result);
     }
 
-    static float calculateYield(Map<LottoRank, Integer> statistics, BigDecimal purchaseAmount) {
-        long totalPrize = statistics.entrySet().stream()
+    long totalPrize() {
+        return statistics.entrySet().stream()
                 .mapToLong(entry -> (long) entry.getKey().prizeMoney() * entry.getValue())
                 .sum();
+    }
 
-        return (float) totalPrize / purchaseAmount.intValue();
+    float calculateYield(BigDecimal purchaseAmount) {
+        return (float) totalPrize() / purchaseAmount.intValue();
     }
 }

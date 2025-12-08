@@ -1,22 +1,30 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-public record Lotto(List<Integer> numbers) {
+public record Lotto(Set<LottoNumber> numbers) {
     public static final int LOTTO_COUNT = 6;
-    public static final int START_NUMBER = 1;
-    public static final int END_NUMBER = 45;
+
+    public Lotto(int... numbers) {
+        this(toSet(numbers));
+    }
+
+    public Lotto(List<Integer> numbers) {
+        this(numbers.stream()
+                .mapToInt(Integer::intValue)
+                .toArray());
+    }
 
     public Lotto {
-        numbers = new ArrayList<>(numbers);
-        Collections.sort(numbers);
         validate(numbers);
     }
 
     @Override
-    public List<Integer> numbers() {
+    public Set<LottoNumber> numbers() {
         return numbers;
     }
 
@@ -26,20 +34,25 @@ public record Lotto(List<Integer> numbers) {
                 .count();
     }
 
-    static void validate(List<Integer> list) {
+    private static Set<LottoNumber> toSet(int... numbers) {
+        return Arrays.stream(numbers)
+                .boxed()
+                .sorted()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
 
-        if (list.size() != LOTTO_COUNT) {
+    private void validate(Set<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
+    }
 
-        if (list.stream().distinct().count() != list.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
-
-        list.forEach(number -> {
-            if (number < START_NUMBER || number > END_NUMBER) {
-                throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-            }
-        });
+    @Override
+    public String toString() {
+        return numbers.stream()
+                .map(LottoNumber::value)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 }
