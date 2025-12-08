@@ -1,4 +1,4 @@
-package view;
+package calculator.view;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +16,7 @@ class OperatorInputTest {
             String input
     ) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            calculate(input.split(" "));
+            InputView.parseInput(input);
         });
     }
 
