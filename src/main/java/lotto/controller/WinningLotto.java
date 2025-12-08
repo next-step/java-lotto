@@ -6,7 +6,7 @@ import lotto.domain.LottoResult;
 
 
 public class WinningLotto {
-    LottoNumbers winningNumbers;
+    private final LottoNumbers winningNumbers;
 
     public WinningLotto(LottoNumbers winningNumbers) {
         this.winningNumbers = winningNumbers;
