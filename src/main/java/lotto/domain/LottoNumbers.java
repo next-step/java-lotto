@@ -25,13 +25,17 @@ public class LottoNumbers {
     public LottoRank getMatchedRank(LottoNumbers other) {
         int matchCount = 0;
 
-        for (int i = 0; i < numbers.size(); i++) {
-            if (matchesAtIndex(i, other)) {
-                matchCount++;
-            }
-        }
+       for (LottoNumber number : numbers) {
+           if (other.contains(number)) {
+               matchCount++;
+           }
+       }
 
         return LottoRank.of(matchCount);
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     private boolean matchesAtIndex(int index, LottoNumbers other) {

@@ -33,4 +33,10 @@ public class LottoNumbersTest {
                 Arguments.of(List.of(1, 2, 3, 10, 11, 12), LottoRank.FOURTH)
         );
     }
+
+    @Test
+    public void 포함_여부() {
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(lottoNumbers.contains(new LottoNumber(1))).isTrue();
+    }
 }
