@@ -47,6 +47,10 @@ public enum LottoRank {
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%d원)", matchCount, prize);
+        return String.format("%d개%s(%d원)", matchCount, matchString(), prize);
+    }
+
+    private String matchString() {
+        return requireBonus ? ", 보너스 볼 일치" : " 일치";
     }
 }

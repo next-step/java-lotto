@@ -7,6 +7,7 @@ public class InputView {
     private static final String WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호 6개를 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
+    public static final String BONUS_BALL_MESSAGE = "보너스볼을 입력해주세요";
 
     public static String getPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_MESSAGE);
@@ -15,6 +16,11 @@ public class InputView {
 
     public static String getWinningNumber() {
         System.out.println(WINNING_NUMBER_MESSAGE);
+        return scanner.nextLine();
+    }
+
+    public static String getBonusNumber() {
+        System.out.println(BONUS_BALL_MESSAGE);
         return scanner.nextLine();
     }
 
