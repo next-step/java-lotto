@@ -26,8 +26,11 @@ public class LottoPurchase {
         this.manualLottos = manualLottos;
     }
 
-    public Lottos toLottos() {
-        return new Lottos(autoCount()).merge(manualLottos);
+    public Lottos purchase() {
+        LottoGenerator compositeGenerator = new CompositeLottoGenerator(
+                List.of(new ManualLottoGenerator(manualLottos), new AutoLottoGenerator(new LottoCount(autoCount()))));
+
+        return compositeGenerator.generate();
     }
 
     public static List<Lotto> convert(List<String> manualList) {
@@ -42,10 +45,6 @@ public class LottoPurchase {
 
     public int count() {
         return count.value();
-    }
-
-    public List<Lotto> manualLottos() {
-        return manualLottos;
     }
 
     public int autoCount() {

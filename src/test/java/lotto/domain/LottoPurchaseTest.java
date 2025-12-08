@@ -35,8 +35,9 @@ public class LottoPurchaseTest {
         List<String> list = List.of("1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8");
 
         LottoPurchase lottoPurchase = new LottoPurchase(money, list);
+        Lottos lottos = lottoPurchase.purchase();
 
-        assertThat(lottoPurchase.count()).isEqualTo(5);
-        assertThat(lottoPurchase.count() - lottoPurchase.autoCount()).isEqualTo(3);
+        assertThat(lottos.size()).isEqualTo(5);
+        assertThat(lottoPurchase.autoCount()).isEqualTo(2);
     }
 }
