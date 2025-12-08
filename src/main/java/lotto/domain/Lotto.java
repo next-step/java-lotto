@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    LottoPrice price;
-    List<LottoNumbers> lottoNumbers;
+    private final LottoPrice price;
+    private final List<LottoNumbers> lottoNumbers;
 
     public Lotto(LottoPrice price, List<LottoNumbers> lottoNumbers) {
         this.price = price;
