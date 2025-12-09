@@ -15,7 +15,7 @@ public class LottoResultTest {
 
     @Test
     void 수익률_100퍼센트_미만() {
-        double result = LottoResult.profitPercent(new LottoPrice(100000));
+        double result = LottoResult.profitPercent(new LottoPrice(100000, 0));
         Assertions.assertThat(result).isEqualTo(0.5);
     }
 

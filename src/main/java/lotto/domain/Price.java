@@ -31,9 +31,13 @@ public class Price {
     }
 
     private void checkDivisibleByThousand(int value) {
-        if (value % 1000 != 0) {
+        if (value % 1_000 != 0) {
             throw new IllegalArgumentException("1000 단위로 입력해주세요.");
         }
+    }
+
+    public int autoTiketCount(int passiveTicketCount) {
+        return (this.value / 1_000) - passiveTicketCount;
     }
 
     @Override
@@ -47,4 +51,5 @@ public class Price {
     public int hashCode() {
         return Objects.hashCode(getValue());
     }
+
 }

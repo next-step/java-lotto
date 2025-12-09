@@ -7,12 +7,12 @@ public class LottoPrice {
     private final Price price;
     private final TicketCount ticketCount;
 
-    public LottoPrice(int price) {
-        this(price, price / 1_000);
+    public LottoPrice(int price, int passiveTicketCount) {
+        this(price, new TicketCount(price, passiveTicketCount));
     }
 
-    public LottoPrice(int price, int ticketCount) {
-        this(new Price(price), new TicketCount(ticketCount));
+    public LottoPrice(int price, TicketCount ticketCount) {
+        this(new Price(price), ticketCount);
     }
 
     public LottoPrice(Price price, TicketCount ticketCount) {
@@ -21,17 +21,15 @@ public class LottoPrice {
     }
 
     public void create(Runnable runnable) {
-        for (int i = 0; i < this.ticketCount.getValue(); i++) {
-            runnable.run();
-        }
+        this.ticketCount.create(runnable);
     }
 
     public double profitPercent(int totalResultPrice) {
         return price.profitPercent(totalResultPrice);
     }
 
-    public int getTicketCount() {
-        return ticketCount.getValue();
+    public TicketCount getTicketCount() {
+        return ticketCount;
     }
 
     @Override

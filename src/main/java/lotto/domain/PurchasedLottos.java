@@ -1,17 +1,22 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class BuyLotto {
+public class PurchasedLottos {
 
     private final List<Lotto> lottos;
 
-    public BuyLotto(Integer... numbers) {
+    public PurchasedLottos() {
+        lottos = new ArrayList<>();
+    }
+
+    public PurchasedLottos(Integer... numbers) {
         this(List.of(new Lotto(numbers)));
     }
 
-    public BuyLotto(List<Lotto> lottos) {
+    public PurchasedLottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
@@ -29,9 +34,25 @@ public class BuyLotto {
         return lottoResult;
     }
 
+    public void add(Lotto lotto){
+        this.lottos.add(lotto);
+    }
+
+    public void addAll(PurchasedLottos lottos){
+        this.lottos.addAll(lottos.lottos);
+    }
+
+    public String toLottosString() {
+        StringBuilder sb = new StringBuilder();
+        for (Lotto lotto : lottos) {
+            sb.append(lotto).append("\n");
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
-        return "BuyLotto{" +
+        return "PurchasedLottos{" +
                 "lotto=" + lottos +
                 '}';
     }
@@ -39,7 +60,7 @@ public class BuyLotto {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        BuyLotto buyLotto = (BuyLotto) o;
+        PurchasedLottos buyLotto = (PurchasedLottos) o;
         return Objects.equals(getLottos(), buyLotto.getLottos());
     }
 

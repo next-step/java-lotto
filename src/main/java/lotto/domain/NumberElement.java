@@ -6,20 +6,22 @@ import java.util.Map;
 public class NumberElement {
 
     private static final Map<Integer, NumberElement> numberElementMap = new HashMap<>();
+    private static final int START_NUMBER = 1;
+    private static final int END_NUMBER = 45;
 
     static {
-        for (int i = 1; i <= 45; i++) {
+        for (int i = START_NUMBER; i <= END_NUMBER; i++) {
             numberElementMap.put(i, new NumberElement(i));
         }
     }
 
     private final int value;
 
-    public NumberElement() {
+    private NumberElement() {
         this(0);
     }
 
-    public NumberElement(int value) {
+    private NumberElement(int value) {
         validationRange(value);
         this.value = value;
     }
@@ -36,7 +38,7 @@ public class NumberElement {
     }
 
     private static boolean isRange(int value) {
-        return 1 > value || value > 45;
+        return START_NUMBER > value || value > END_NUMBER;
     }
 
     @Override

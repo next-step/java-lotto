@@ -11,10 +11,6 @@ public class WinningLotto {
     private final Lotto numbers;
     private final NumberElement bonusNumber;
 
-    public WinningLotto(Integer... numbers) {
-        this(integerToLottoNumbers(numbers), NumberElement.create(0));
-    }
-
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
         this(integerToLottoNumbers(numbers), NumberElement.create(bonusNumber));
     }
@@ -29,14 +25,8 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoResult checkLottoNumber(BuyLotto buyLottos) {
-        return buyLottos.match(this);
-    }
-
-    private static Lotto integerToLottoNumbers(Integer... numbers) {
-        return new Lotto(Arrays.stream(numbers)
-                .map(NumberElement::create)
-                .collect(Collectors.toSet()));
+    public LottoResult checkLottoNumber(PurchasedLottos purchasedLottos) {
+        return purchasedLottos.match(this);
     }
 
     private static Lotto integerToLottoNumbers(List<Integer> numbers) {
@@ -59,8 +49,8 @@ public class WinningLotto {
         return count == 5;
     }
 
-    public LottoRank checkBonusNumber(Lotto buyLotto, NumberElement bonusNumber) {
-        if (buyLotto.checkBonusNumber(bonusNumber)) {
+    public LottoRank checkBonusNumber(Lotto purchasedLotto, NumberElement bonusNumber) {
+        if (purchasedLotto.checkBonusNumber(bonusNumber)) {
             return LottoRank.SECOND;
         }
         return LottoRank.THIRD;

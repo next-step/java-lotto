@@ -4,25 +4,37 @@ import java.util.Objects;
 
 public class TicketCount {
 
-    private final int value;
+    private final int autoTicketCount;
+    private final int passiveTicketCount;
 
-    public TicketCount(int value) {
-        this.value = value;
+    public TicketCount(int price, int passiveTicketCount) {
+        this.autoTicketCount = new Price(price).autoTiketCount(passiveTicketCount);
+        this.passiveTicketCount = passiveTicketCount;
     }
 
-    public int getValue() {
-        return this.value;
+    public void create(Runnable runnable) {
+        for (int i = 0; i < this.autoTicketCount; i++) {
+            runnable.run();
+        }
+    }
+
+    public int getAutoTicketCount() {
+        return this.autoTicketCount;
+    }
+
+    public int getPassiveTicketCount() {
+        return passiveTicketCount;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         TicketCount that = (TicketCount) o;
-        return getValue() == that.getValue();
+        return getAutoTicketCount() == that.getAutoTicketCount();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getValue());
+        return Objects.hashCode(getAutoTicketCount());
     }
 }
