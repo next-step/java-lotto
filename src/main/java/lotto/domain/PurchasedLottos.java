@@ -42,6 +42,14 @@ public class PurchasedLottos {
         this.lottos.addAll(lottos.lottos);
     }
 
+    public String toLottosString() {
+        StringBuilder sb = new StringBuilder();
+        for (Lotto lotto : lottos) {
+            sb.append(lotto).append("\n");
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         return "PurchasedLottos{" +

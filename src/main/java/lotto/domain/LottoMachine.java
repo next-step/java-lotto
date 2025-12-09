@@ -7,11 +7,14 @@ import java.util.List;
 
 public class LottoMachine {
 
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
+
     private static final List<NumberElement> lottoNumbers;
 
     static {
         lottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumbers.add(NumberElement.create(i));
         }
     }

@@ -8,7 +8,7 @@ public class TicketCount {
     private final int passiveTicketCount;
 
     public TicketCount(int price, int passiveTicketCount) {
-        this.autoTicketCount = (price / 1_000) - passiveTicketCount;
+        this.autoTicketCount = new Price(price).autoTiketCount(passiveTicketCount);
         this.passiveTicketCount = passiveTicketCount;
     }
 

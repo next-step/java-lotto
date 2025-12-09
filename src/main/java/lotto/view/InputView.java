@@ -35,7 +35,7 @@ public class InputView {
     }
 
     public static void printBuyLotto(PurchasedLottos purchasedLottos) {
-        purchasedLottos.getLottos().stream().forEach(System.out::println);
+        System.out.println(purchasedLottos.toLottosString());
     }
 
     public static void printPassiveBuyLottoCount() {
