@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.List;
+import lotto.domain.game.Rank;
 import lotto.domain.result.GameResult;
 
 public class LottoTickets {
@@ -11,11 +12,10 @@ public class LottoTickets {
   }
 
   public GameResult match(WinningTicket winning) {
-    GameResult gameResult = new GameResult();
-    for(LottoTicket ticket : tickets){
-      gameResult.updateRank(winning.match(ticket));
-    }
-    return gameResult;
+    List<Rank> rankList = tickets.stream()
+        .map(winning::match)
+        .toList();
+    return new GameResult(rankList);
   }
 
   @Override

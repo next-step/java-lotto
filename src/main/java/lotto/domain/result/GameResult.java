@@ -2,8 +2,9 @@ package lotto.domain.result;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import lotto.domain.game.Rank;
 
@@ -11,16 +12,16 @@ public class GameResult {
 
   private final Map<Rank, Integer> ranks;
 
-  public GameResult(){
-    this(new HashMap<>());
+  public GameResult(List<Rank> rankList) {
+    this.ranks = rankList.stream()
+        .collect(Collectors.groupingBy(
+            Function.identity(),
+            Collectors.summingInt(e -> 1)
+        ));
   }
 
   public GameResult(Map<Rank, Integer> ranks) {
-    this.ranks = ranks;
-  }
-
-  public void updateRank(Rank rank) {
-    ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
+    this.ranks = Map.copyOf(ranks);
   }
 
   public int getTotalPrize() {

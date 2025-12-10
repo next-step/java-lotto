@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
-
+  private static final int MIN = 1, MAX = 45;
   private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
   static {
-    for (int i = 1; i <= 45; i++) {
+    for (int i = MIN; i <= MAX; i++) {
       CACHE.put(i, new LottoNumber(i));
     }
   }
@@ -26,7 +26,7 @@ public class LottoNumber {
   }
 
   private static void validate(int value) {
-    if (value < 1 || value > 45) {
+    if (value < MIN || value > MAX) {
       throw new IllegalArgumentException("로또 넘버는 1이상 45이하의 수입니다");
     }
   }
