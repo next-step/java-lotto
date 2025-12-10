@@ -1,6 +1,5 @@
 package lottogame.controller;
 
-import static lottogame.model.lotto.LottoMachine.PER_LOTTO_PRICE;
 import static lottogame.model.lotto.LottoNum.of;
 import static lottogame.view.Casher.askBonusNum;
 import static lottogame.view.Casher.askBuyPrice;
@@ -16,11 +15,12 @@ import lottogame.model.lotto.LottoMachine;
 import lottogame.model.lotto.LottoNum;
 import lottogame.model.lotto.Lottos;
 import lottogame.model.lotto.WinningLottoNums;
-import lottogame.model.lotto.generator.LottosGenerator;
+import lottogame.model.lotto.generator.TotallyLottosGenerator;
 import lottogame.model.price.LottoPurchasePrice;
 import lottogame.model.winner.WinnerResult;
 
 public class LottoStore {
+
     public static final int PER_LOTTO_PRICE = 1_000;
 
     public void start() {
@@ -46,8 +46,10 @@ public class LottoStore {
     }
 
     private Lottos buyLottos(LottoPurchaseRequest lottoPurchaseRequest) {
-        Lottos lottos = LottoMachine.createTotallyLottos(
-                lottoPurchaseRequest.calculateAutoLottoCount(PER_LOTTO_PRICE), lottoPurchaseRequest.manualLottos());
+        Lottos lottos = new TotallyLottosGenerator(
+                lottoPurchaseRequest.lottoPurchasePrice(),
+                lottoPurchaseRequest.manualLottos()
+        ).generateLottos();
 
         informPublishedLottos(lottos.convertRawString());
 
