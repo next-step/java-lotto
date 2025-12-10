@@ -32,8 +32,8 @@ public enum Rank {
         .orElse(NONE);
   }
 
-  public int getPrize() {
-    return prize;
+  public int calculatePrize(int count) {
+    return prize * count;
   }
 
   private static boolean isMatch(Rank rank, int matched,

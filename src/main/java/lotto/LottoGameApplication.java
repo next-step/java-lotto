@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.domain.game.LottoGame;
+import java.util.List;
 import lotto.domain.game.LottoMachine;
-import lotto.domain.lotto.Money;
+import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.Purchase;
 import lotto.domain.lotto.WinningTicket;
 import lotto.domain.result.GameResult;
@@ -15,16 +15,20 @@ public class LottoGameApplication {
     LottoMachine machine = new LottoMachine();
 
     int purchaseAmount = InputView.inputPurchaseAmount();
-    Purchase purchase = machine.purchase(new Money(purchaseAmount));
+    int manualCount = InputView.inputManualLottoCount();
+    List<String> manualTickets = InputView.inputManualLottoTickets(manualCount);
+
+    Purchase purchase = machine.createPurchase(purchaseAmount, manualCount);
     ResultView.printPurchase(purchase);
+
+    LottoTickets tickets = machine.generateTickets(manualTickets, purchase.getAutoCount());
+    ResultView.printTickets(tickets);
 
     String winningLottoNumbers = InputView.inputWinningLottoNumbers();
     int bonusNumber = InputView.inputBonusNumber();
     WinningTicket winning = new WinningTicket(winningLottoNumbers, bonusNumber);
 
-    LottoGame game = new LottoGame(winning);
-    GameResult gameResult = game.check(purchase);
-
-    ResultView.printResult(gameResult, purchase.getPurchaseAmount());
+    GameResult result = tickets.match(winning);
+    ResultView.printResult(result, purchase);
   }
 }
