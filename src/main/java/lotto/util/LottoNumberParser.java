@@ -21,13 +21,13 @@ public class LottoNumberParser {
     }
 
     private static LottoNumbers makeLottoNumbers(String[] numbers) {
-        List<Integer> winningNumbers = new ArrayList<>();
+        List<Integer> lottoNumbers = new ArrayList<>();
 
         for (String number : numbers) {
-            winningNumbers.add(Integer.parseInt(number));
+            lottoNumbers.add(Integer.parseInt(number));
         }
 
-        return new LottoNumbers(winningNumbers);
+        return new LottoNumbers(lottoNumbers);
     }
 
     private static boolean isValidInput(String[] input) {
