@@ -10,13 +10,14 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
+    public LottoNumbers(int... numbers) {
+        this(convertToList(numbers));
+    }
+
     public LottoNumbers(List<Integer> numbers) {
         this.numbers = toLottoNumber(numbers);
     }
 
-    public LottoNumbers(int... numbers) {
-        this(convertToList(numbers));
-    }
 
     private static List<LottoNumber> toLottoNumber(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
