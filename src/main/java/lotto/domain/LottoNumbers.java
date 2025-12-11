@@ -36,24 +36,20 @@ public class LottoNumbers {
         return list;
     }
 
-    public LottoRank getMatchedRank(LottoNumbers other, LottoNumber bonusNumber) {
+    public int getMatchCount(LottoNumbers other) {
         int matchCount = 0;
 
-       for (LottoNumber number : numbers) {
-           if (other.contains(number)) {
-               matchCount++;
-           }
-       }
+        for (LottoNumber number : numbers) {
+            if (other.contains(number)) {
+                matchCount++;
+            }
+        }
 
-        return LottoRank.of(matchCount, numbers.contains(bonusNumber));
+        return matchCount;
     }
 
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
-    }
-
-    private boolean matchesAtIndex(int index, LottoNumbers other) {
-        return numbers.get(index).equals(other.numbers.get(index));
     }
 
     @Override
