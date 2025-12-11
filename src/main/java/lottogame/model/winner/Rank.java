@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public enum WinStandard {
+public enum Rank {
     FIRST("1등", 6, false, 2_000_000_000),
     SECOND("2등", 5, true, 30_000_000),
     THIRD("3등", 5, false, 1_500_000),
@@ -19,15 +19,15 @@ public enum WinStandard {
     private final boolean isBonus;
     private final int returnOfWin;
 
-    WinStandard(String desc, int value, boolean isBonus, int returnOfWin) {
+    Rank(String desc, int value, boolean isBonus, int returnOfWin) {
         this.desc = desc;
         this.value = value;
         this.isBonus = isBonus;
         this.returnOfWin = returnOfWin;
     }
 
-    public static WinStandard findBy(int value, boolean isBonus) {
-        return Arrays.stream(WinStandard.values())
+    public static Rank findBy(int value, boolean isBonus) {
+        return Arrays.stream(Rank.values())
                 .filter(winStandard -> winStandard.value == value)
                 .filter(winStandard -> winStandard.isBonus == isBonus)
                 .findFirst().orElse(NOTHING);
@@ -37,12 +37,8 @@ public enum WinStandard {
         return this == NOTHING;
     }
 
-    public int returnOfWin() {
-        return this.returnOfWin;
-    }
-
-    public static Map<WinStandard, Integer> getInitWinStandardMap() {
-        return Arrays.stream(WinStandard.values())
+    public static Map<Rank, Integer> getInitWinStandardMap() {
+        return Arrays.stream(Rank.values())
                 .filter(winStandard -> !winStandard.isNothing())
                 .collect(Collectors.toMap(
                         winStandard -> winStandard,
@@ -52,5 +48,9 @@ public enum WinStandard {
 
     public int value() {
         return this.value;
+    }
+
+    public int calculateWinReturn(int winCount) {
+        return this.returnOfWin * winCount;
     }
 }
