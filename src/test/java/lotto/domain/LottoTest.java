@@ -31,6 +31,6 @@ public class LottoTest {
         lottoResult.add(LottoRank.NONE);
 
 
-        assertThat(new Lotto(price, lottoNumbersList).getMatchResult(winningNumbers, bonusNumber)).isEqualTo(lottoResult);
+        assertThat(new Lotto(price, lottoNumbersList).getMatchResult(new WinningLotto(winningNumbers, bonusNumber))).isEqualTo(lottoResult);
     }
 }
