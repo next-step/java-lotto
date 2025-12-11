@@ -23,10 +23,6 @@ public class Lotto {
         return result;
     }
 
-    public double calculateProfit(int prize) {
-        return price.getProfit(prize);
-    }
-
     public String count() {
         return String.valueOf(price.count());
     }
