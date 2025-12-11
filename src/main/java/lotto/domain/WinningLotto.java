@@ -1,9 +1,4 @@
-package lotto.controller;
-
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoResult;
+package lotto.domain;
 
 
 public class WinningLotto {
@@ -15,7 +10,8 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoResult getResult(Lotto lotto) {
-        return lotto.getMatchResult(winningNumbers, bonusNumber);
+    public LottoRank getMatchedRank(LottoNumbers numbers) {
+        int matchCount = winningNumbers.getMatchCount(numbers);
+        return LottoRank.of(matchCount, numbers.contains(bonusNumber));
     }
 }
