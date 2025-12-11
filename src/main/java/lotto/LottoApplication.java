@@ -21,7 +21,7 @@ public class LottoApplication {
         String winningNumbers = InputView.getWinningNumber();
         String bonusNumber = InputView.getBonusNumber();
 
-        WinningLotto winningLotto = new WinningLotto(LottoNumberParser.parse(winningNumbers), new LottoNumber(bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         LottoResult result = lotto.getMatchResult(winningLotto);
 
         ResultView.printLottoResult(result.toString());
