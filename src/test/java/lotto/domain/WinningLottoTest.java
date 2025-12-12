@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.LottoNumberParser;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,5 +31,10 @@ public class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
         assertThat(winningLotto.getMatchedRank(lottoNumbers)).isEqualTo(expected);
+    }
+
+    @Test
+    public void 보너스_숫자_중복() {
+        assertThatThrownBy(() -> new WinningLotto("1, 2, 3, 4, 5, 6", "1")).isInstanceOf(IllegalArgumentException.class);
     }
 }
