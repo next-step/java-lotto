@@ -24,4 +24,8 @@ public class LottoNumberCache {
         }
         return Cache.get(value);
     }
+
+    public static LottoNumber get(String value) {
+        return get(Integer.parseInt(value));
+    }
 }
