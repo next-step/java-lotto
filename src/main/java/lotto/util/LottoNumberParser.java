@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumber;
 
 import java.util.*;
 
@@ -8,7 +8,7 @@ public class LottoNumberParser {
     private static final String SPLIT_REGELX = "[,\\s]+";
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    public static LottoNumbers parse(String input) {
+    public static List<LottoNumber> parse(String input) {
         String[] splittedNumbers = input.split(SPLIT_REGELX);
         for (String splittedNumber : splittedNumbers) {
             System.out.println(splittedNumber);
@@ -17,17 +17,34 @@ public class LottoNumberParser {
             throw new IllegalArgumentException("정상적인 입력이 아닙니다.");
         }
 
-        return makeLottoNumbers(splittedNumbers);
+        return parse(splittedNumbers);
     }
 
-    private static LottoNumbers makeLottoNumbers(String[] numbers) {
-        List<Integer> lottoNumbers = new ArrayList<>();
+    public static List<LottoNumber> parse(String[] numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (String number : numbers) {
-            lottoNumbers.add(Integer.parseInt(number));
+            lottoNumbers.add(LottoNumberCache.get(number));
         }
 
-        return new LottoNumbers(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    public static List<LottoNumber> parse (int... numbers) {
+        List<LottoNumber> list = new ArrayList<>();
+        for (int number : numbers) {
+            list.add(LottoNumberCache.get(number));
+        }
+
+        return list;
+    }
+
+    public static List<LottoNumber> parse(List<Integer> numbers) {
+        List<LottoNumber> list = new ArrayList<>();
+        for (int number : numbers) {
+            list.add(LottoNumberCache.get(number));
+        }
+        return list;
     }
 
     private static boolean isValidInput(String[] input) {
