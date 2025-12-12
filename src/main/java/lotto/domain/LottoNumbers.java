@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.LottoNumberParser;
+
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,30 +13,15 @@ public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
     public LottoNumbers(int... numbers) {
-        this(convertToList(numbers));
+        this(LottoNumberParser.parse(numbers));
     }
 
-    public LottoNumbers(List<Integer> numbers) {
-        this.numbers = toLottoNumber(numbers);
+    public LottoNumbers(String numbers) {
+        this(LottoNumberParser.parse(numbers));
     }
 
-
-    private static List<LottoNumber> toLottoNumber(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-        for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-
-        return lottoNumbers;
-    }
-
-    private static List<Integer> convertToList(int... numbers) {
-        List<Integer> list = new ArrayList<>();
-        for (int number : numbers) {
-            list.add(number);
-        }
-        return list;
+    public LottoNumbers(List<LottoNumber> numbers) {
+        this.numbers = numbers;
     }
 
     public int getMatchCount(LottoNumbers other) {

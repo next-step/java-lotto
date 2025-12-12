@@ -12,19 +12,19 @@ import static org.assertj.core.api.Assertions.*;
 public class WinningLottoTest {
     static Stream<Arguments> provideLottoNumbers() {
         return Stream.of(
-                Arguments.of(List.of(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
-                Arguments.of(List.of(1, 2, 3, 4, 5, 13), LottoRank.SECOND_BONUS),
-                Arguments.of(List.of(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
-                Arguments.of(List.of(1, 2, 3, 4, 8, 9), LottoRank.THIRD),
-                Arguments.of(List.of(1, 2, 3, 10, 11, 12), LottoRank.FOURTH)
+                Arguments.of("1, 2, 3, 4, 5, 6", LottoRank.FIRST),
+                Arguments.of("1, 2, 3, 4, 5, 13", LottoRank.SECOND_BONUS),
+                Arguments.of("1, 2, 3, 4, 5, 7", LottoRank.SECOND),
+                Arguments.of("1, 2, 3, 4, 8, 9", LottoRank.THIRD),
+                Arguments.of("1, 2, 3, 10, 11, 12", LottoRank.FOURTH)
         );
     }
 
     @ParameterizedTest
     @MethodSource("provideLottoNumbers")
-    public void 일치하는_숫자의_개수(List<Integer> numbers, LottoRank expected) {
+    public void 일치하는_숫자의_개수(String numbers, LottoRank expected) {
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningLottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(13);
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
