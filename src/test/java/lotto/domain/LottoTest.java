@@ -20,7 +20,7 @@ public class LottoTest {
 
         LottoPrice price = new LottoPrice(6000);
         LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(11);
+        LottoNumber bonusNumber = LottoNumber.get(11);
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.add(LottoRank.FIRST);

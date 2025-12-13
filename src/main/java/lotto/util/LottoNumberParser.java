@@ -24,7 +24,7 @@ public class LottoNumberParser {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (String number : numbers) {
-            lottoNumbers.add(LottoNumberCache.get(number));
+            lottoNumbers.add(LottoNumber.get(number));
         }
 
         return lottoNumbers;
@@ -33,7 +33,7 @@ public class LottoNumberParser {
     public static List<LottoNumber> parse (int... numbers) {
         List<LottoNumber> list = new ArrayList<>();
         for (int number : numbers) {
-            list.add(LottoNumberCache.get(number));
+            list.add(LottoNumber.get(number));
         }
 
         return list;
@@ -42,7 +42,7 @@ public class LottoNumberParser {
     public static List<LottoNumber> parse(List<Integer> numbers) {
         List<LottoNumber> list = new ArrayList<>();
         for (int number : numbers) {
-            list.add(LottoNumberCache.get(number));
+            list.add(LottoNumber.get(number));
         }
         return list;
     }
