@@ -1,6 +1,10 @@
 package lotto.domain;
 
+import lotto.util.LottoNumberParser;
+
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -8,34 +12,32 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
-        this.numbers = toLottoNumber(numbers);
+    public LottoNumbers(int... numbers) {
+        this(LottoNumberParser.parse(numbers));
     }
 
-    private static List<LottoNumber> toLottoNumber(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-        for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-
-        return lottoNumbers;
+    public LottoNumbers(String numbers) {
+        this(LottoNumberParser.parse(numbers));
     }
 
-    public LottoRank getMatchedRank(LottoNumbers other) {
+    public LottoNumbers(List<LottoNumber> numbers) {
+        this.numbers = numbers;
+    }
+
+    public int getMatchCount(LottoNumbers other) {
         int matchCount = 0;
 
-        for (int i = 0; i < numbers.size(); i++) {
-            if (matchesAtIndex(i, other)) {
+        for (LottoNumber number : numbers) {
+            if (other.contains(number)) {
                 matchCount++;
             }
         }
 
-        return LottoRank.of(matchCount);
+        return matchCount;
     }
 
-    private boolean matchesAtIndex(int index, LottoNumbers other) {
-        return numbers.get(index).equals(other.numbers.get(index));
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     @Override

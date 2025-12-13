@@ -25,13 +25,27 @@ public class LottoResult {
         matchResult.put(rank, matchResult.get(rank) + 1);
     }
 
-    public int prize() {
+    private int prize() {
         int prize = 0;
         for (LottoRank rank : LottoRank.values()) {
             prize += rank.getPrize(rank, matchResult.get(rank));
         }
 
         return prize;
+    }
+
+    private LottoPrice getPrice() {
+        int count = 0;
+        for (LottoRank rank : LottoRank.values()) {
+            count += matchResult.get(rank);
+        }
+
+        return new LottoPrice(count);
+    }
+
+    public String getProfit() {
+        LottoPrice price = getPrice();
+        return String.valueOf(price.getProfit(prize()));
     }
 
     @Override
