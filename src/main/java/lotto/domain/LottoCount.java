@@ -18,6 +18,10 @@ public class LottoCount {
         this.count = count;
     }
 
+    public boolean isBiggerOrSameThan(LottoCount other) {
+        return this.count >= other.count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
