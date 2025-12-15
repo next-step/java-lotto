@@ -10,8 +10,12 @@ public class LottoCount {
         this(Integer.parseInt(count));
     }
 
+    public LottoCount(String purchaseAmount, int pricePerLotto) {
+        this(Integer.parseInt(purchaseAmount) / pricePerLotto);
+    }
+
     public LottoCount(int count) {
-       this.count = count;
+        this.count = count;
     }
 
     @Override
