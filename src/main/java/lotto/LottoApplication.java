@@ -10,6 +10,7 @@ import lotto.ui.ResultView;
 public class LottoApplication {
     public static void main(String[] args) {
         String purchaseAmount = InputView.getPurchaseAmount();
+        String manualLottoCount = InputView.getManualNumber();
 
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
         Lotto lotto = lottoMachine.generate();

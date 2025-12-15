@@ -3,11 +3,11 @@ package lotto.ui;
 import java.util.Scanner;
 
 public class InputView {
+    public static final String BONUS_BALL_MESSAGE = "보너스볼을 입력해주세요";
     private static final String PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호 6개를 입력해 주세요.";
-
     private static final Scanner scanner = new Scanner(System.in);
-    public static final String BONUS_BALL_MESSAGE = "보너스볼을 입력해주세요";
+    public static final String MANUAL_NUMBER_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해주세요.";
 
     public static String getPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_MESSAGE);
@@ -24,5 +24,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
-
+    public static String getManualNumber() {
+        System.out.println(MANUAL_NUMBER_COUNT_MESSAGE);
+        return scanner.nextLine();
+    }
 }
