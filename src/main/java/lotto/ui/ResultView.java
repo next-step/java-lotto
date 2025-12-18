@@ -15,7 +15,7 @@ public class ResultView {
     }
 
     public static void printLotto(Lotto lotto) {
-        printLottoCount(lotto.count());
+        printLottoCount(lotto.toCountString());
         printLottoNumbersList(lotto.toString());
     }
 
