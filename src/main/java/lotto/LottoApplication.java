@@ -21,7 +21,6 @@ public class LottoApplication {
         }
 
         Lotto lotto = lottoMachine.generate();
-
         ResultView.printLotto(lotto);
 
         String winningNumbers = InputView.getWinningNumber();
