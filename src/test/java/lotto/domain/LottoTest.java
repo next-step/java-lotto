@@ -18,7 +18,6 @@ public class LottoTest {
                 new LottoNumbers(1, 2, 3, 4, 5, 11)
         );
 
-        LottoPrice price = new LottoPrice(6000);
         LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = LottoNumber.get(11);
 
@@ -31,6 +30,6 @@ public class LottoTest {
         lottoResult.add(LottoRank.NONE);
 
 
-        assertThat(new Lotto(price, lottoNumbersList).getMatchResult(new WinningLotto(winningNumbers, bonusNumber))).isEqualTo(lottoResult);
+        assertThat(new Lotto(new LottoCount(6), new LottoCount(0), lottoNumbersList).getMatchResult(new WinningLotto(winningNumbers, bonusNumber))).isEqualTo(lottoResult);
     }
 }
