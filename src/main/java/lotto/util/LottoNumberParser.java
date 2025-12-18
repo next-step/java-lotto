@@ -10,9 +10,7 @@ public class LottoNumberParser {
 
     public static List<LottoNumber> parse(String input) {
         String[] splittedNumbers = input.split(SPLIT_REGELX);
-        for (String splittedNumber : splittedNumbers) {
-            System.out.println(splittedNumber);
-        }
+
         if (!isValidInput(splittedNumbers)) {
             throw new IllegalArgumentException("정상적인 입력이 아닙니다.");
         }
