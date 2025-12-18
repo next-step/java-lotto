@@ -22,6 +22,10 @@ public class LottoCount {
         return this.count >= other.count;
     }
 
+    public LottoCount increase() {
+        return new LottoCount(this.count + 1);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

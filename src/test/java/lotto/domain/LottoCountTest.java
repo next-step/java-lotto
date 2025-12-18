@@ -26,4 +26,9 @@ public class LottoCountTest {
     public void 대소비교(int count, int otherCount, boolean expected) {
         assertThat(new LottoCount(count).isBiggerOrSameThan(new LottoCount(otherCount))).isEqualTo(expected);
     }
+
+    @Test
+    public void 증가() {
+        assertThat(new LottoCount(0).increase()).isEqualTo(new LottoCount(1));
+    }
 }
