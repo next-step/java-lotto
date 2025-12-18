@@ -34,6 +34,10 @@ public class LottoCount {
         return new LottoCount(this.count - other.count);
     }
 
+    public boolean isCountSame(int count) {
+        return this.count == count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

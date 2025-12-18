@@ -41,4 +41,12 @@ public class LottoCountTest {
     public void 차이_음수() {
         assertThatThrownBy(() -> new LottoCount(1).diff(new LottoCount(2))).isInstanceOf(RuntimeException.class);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1, true",
+            "2, false",
+    })    public void 카운트_일치_여부(int count, boolean expected) {
+        assertThat(new LottoCount(count).isCountSame(1)).isEqualTo(expected);
+    }
 }
