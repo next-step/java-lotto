@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final LottoPrice price;
     private final List<LottoNumbers> lottoNumbers;
+    private final LottoCount totalCount;
+    private final LottoCount manualCount;
 
-    public Lotto(LottoPrice price, List<LottoNumbers> lottoNumbers) {
-        this.price = price;
+    public Lotto(LottoCount totalCount, LottoCount manualCount, List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        this.totalCount = totalCount;
+        this.manualCount = manualCount;
     }
 
     public LottoResult getMatchResult(WinningLotto winningLotto) {
@@ -23,8 +25,8 @@ public class Lotto {
         return result;
     }
 
-    public String count() {
-        return String.valueOf(price.count());
+    public String toCountString() {
+        return String.format("수동으로 %s장, 자동으로 %s장을 구매했습니다.", manualCount.toString(), totalCount.diff(manualCount).toString());
     }
 
     @Override
