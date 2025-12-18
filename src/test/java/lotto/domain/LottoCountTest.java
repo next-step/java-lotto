@@ -31,4 +31,14 @@ public class LottoCountTest {
     public void 증가() {
         assertThat(new LottoCount(0).increase()).isEqualTo(new LottoCount(1));
     }
+
+    @Test
+    public void 차이() {
+        assertThat(new LottoCount(3).diff(new LottoCount(2))).isEqualTo(new LottoCount(1));
+    }
+
+    @Test
+    public void 차이_음수() {
+        assertThatThrownBy(() -> new LottoCount(1).diff(new LottoCount(2))).isInstanceOf(RuntimeException.class);
+    }
 }

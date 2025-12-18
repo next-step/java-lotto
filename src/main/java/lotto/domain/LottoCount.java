@@ -26,6 +26,14 @@ public class LottoCount {
         return new LottoCount(this.count + 1);
     }
 
+    public LottoCount diff(LottoCount other) {
+        if (this.count - other.count < 0) {
+            throw new RuntimeException("로또 개수는 음수가 될 수 없습니다.");
+        }
+
+        return new LottoCount(this.count - other.count);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
