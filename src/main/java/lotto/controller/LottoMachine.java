@@ -16,10 +16,6 @@ public class LottoMachine implements LottoGenerator {
         this.autoCount = autoCount;
     }
 
-    private static boolean validateLottoCount(LottoCount total, LottoCount manual) {
-        return total.isBiggerOrSameThan(manual);
-    }
-
     @Override
     public Lotto generate() {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
