@@ -13,7 +13,7 @@ public class LottoCountController {
 
     public LottoCountController(LottoCount totalCount, LottoCount manualCount) {
         if (!validateLottoCount(totalCount, manualCount)) {
-            throw new RuntimeException("유효하지 않은 입력입니다");
+            throw new RuntimeException("수동 개수가 전체 로또 개수보다 많습니다.");
         }
 
         this.totalCount = totalCount;
