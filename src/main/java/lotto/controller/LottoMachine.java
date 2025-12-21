@@ -9,7 +9,7 @@ import lotto.util.RandomNumbersGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoMachine {
+public class LottoMachine implements LottoGenerator {
     private static final int PRICE_PER_LOTTO = 1000;
     private LottoCount totalCount;
     private LottoCount manualCount;
