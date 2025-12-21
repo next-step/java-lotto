@@ -40,6 +40,7 @@ public class LottoMachine implements LottoGenerator {
         lottoNumbersList.add(new LottoNumbers(lottoNumbers));
     }
 
+    @Override
     public Lotto generate() {
         LottoCount autoCount = this.totalCount.diff(this.manualCount);
 
@@ -47,7 +48,7 @@ public class LottoMachine implements LottoGenerator {
             this.lottoNumbersList.add(new LottoNumbers(LottoNumberParser.parse(RandomNumbersGenerator.randomNumbers())));
         }
 
-        return new Lotto(totalCount, manualCount, this.lottoNumbersList);
+        return new Lotto(this.lottoNumbersList);
     }
 
     private static boolean validateLottoCount(LottoCount total, LottoCount manual) {

@@ -5,13 +5,9 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<LottoNumbers> lottoNumbers;
-    private final LottoCount totalCount;
-    private final LottoCount manualCount;
 
-    public Lotto(LottoCount totalCount, LottoCount manualCount, List<LottoNumbers> lottoNumbers) {
+    public Lotto(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        this.totalCount = totalCount;
-        this.manualCount = manualCount;
     }
 
     public LottoResult getMatchResult(WinningLotto winningLotto) {
@@ -23,10 +19,6 @@ public class Lotto {
         }
 
         return result;
-    }
-
-    public String toCountString() {
-        return String.format("수동으로 %s장, 자동으로 %s장을 구매했습니다.", manualCount.toString(), totalCount.diff(manualCount).toString());
     }
 
     @Override
