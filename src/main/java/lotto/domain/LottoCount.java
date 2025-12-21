@@ -5,7 +5,6 @@ import java.util.Objects;
 public class LottoCount {
     private final int count;
 
-
     public LottoCount(String count) {
         this(Integer.parseInt(count));
     }
@@ -15,7 +14,7 @@ public class LottoCount {
     }
 
     public LottoCount(String purchaseAmount, int pricePerLotto) {
-        this(Integer.parseInt(purchaseAmount) / pricePerLotto);
+        this(calculateLottoCount(Integer.parseInt(purchaseAmount), pricePerLotto));
     }
 
     public LottoCount(int count) {
@@ -40,6 +39,14 @@ public class LottoCount {
 
     public boolean isCountSame(int count) {
         return this.count == count;
+    }
+
+    private static int calculateLottoCount(int purchaseAmount, int pricePerLotto) {
+        if (purchaseAmount < pricePerLotto) {
+            throw new RuntimeException("로또를 구매할 수 없는 가격입니다.");
+        }
+
+        return purchaseAmount / pricePerLotto;
     }
 
     @Override
