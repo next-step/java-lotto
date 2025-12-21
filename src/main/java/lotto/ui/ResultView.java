@@ -29,4 +29,8 @@ public class ResultView {
     public static void printProfit(String profit) {
         System.out.printf("총 수익률은 %s입니다.", profit);
     }
+
+    public static void printError(String errorMessage) {
+        System.out.printf(String.format("Error :  " + errorMessage));
+    }
 }
