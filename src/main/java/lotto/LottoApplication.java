@@ -1,6 +1,9 @@
 package lotto;
 
+import lotto.controller.LottoCountController;
 import lotto.controller.LottoMachine;
+import lotto.controller.ManualLottoMachine;
+import lotto.domain.LottoCount;
 import lotto.domain.WinningLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
@@ -12,16 +15,24 @@ public class LottoApplication {
         String purchaseAmount = InputView.getPurchaseAmount();
         String manualLottoCount = InputView.getManualNumberCount();
 
-        LottoMachine lottoMachine = new LottoMachine(purchaseAmount, manualLottoCount);
+        LottoCountController lottoCountController = new LottoCountController(purchaseAmount, manualLottoCount);
+        LottoCount manualCount = lottoCountController.getManualCount();
+        LottoCount autoCount = lottoCountController.getAutoCount();
+
+        LottoMachine lottoMachine = new LottoMachine(autoCount);
+        ManualLottoMachine manualLottoMachine = new ManualLottoMachine(manualCount);
 
         InputView.printStartManualNumbersInput();
-        while(!lottoMachine.isManualNumberInputEnd()) {
+        while(!manualLottoMachine.isManualNumberInputEnd()) {
             String manualLottoNumbers = InputView.getManualNumbers();
-            lottoMachine.getManualLottoNumbers(manualLottoNumbers);
+            manualLottoMachine.getManualLottoNumbers(manualLottoNumbers);
         }
 
-        Lotto lotto = lottoMachine.generate();
-        ResultView.printLotto(lotto);
+        Lotto autoLotto = lottoMachine.generate();
+        Lotto manualLotto = manualLottoMachine.generate();
+
+        Lotto lotto = new Lotto(manualLotto, autoLotto);
+        ResultView.printLotto(manualCount, autoCount, lotto);
 
         String winningNumbers = InputView.getWinningNumber();
         String bonusNumber = InputView.getBonusNumber();
