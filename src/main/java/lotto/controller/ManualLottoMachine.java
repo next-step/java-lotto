@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoMachine implements LottoGenerator {
-    private LottoCount manualCount;
+    private final LottoCount manualCount;
     private LottoCount inputCount;
-    private List<LottoNumbers> lottoNumbersList;
+    private final List<LottoNumbers> lottoNumbersList;
 
     public ManualLottoMachine(LottoCount manualCount) {
         this.manualCount = manualCount;

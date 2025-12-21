@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
-    private final int number;
     private static final int MIN = 1;
     private static final int MAX = 45;
     private static final LottoNumber NONE = new LottoNumber(0);
@@ -15,6 +14,12 @@ public class LottoNumber {
         for (int i = MIN; i <= MAX; i++) {
             Cache.put(i, new LottoNumber(i));
         }
+    }
+
+    private final int number;
+
+    private LottoNumber(int number) {
+        this.number = number;
     }
 
     public static LottoNumber get(int value) {
@@ -27,10 +32,6 @@ public class LottoNumber {
 
     public static LottoNumber get(String value) {
         return get(Integer.parseInt(value));
-    }
-
-    private LottoNumber(int number) {
-        this.number = number;
     }
 
     @Override

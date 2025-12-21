@@ -3,10 +3,10 @@ package lotto;
 import lotto.controller.LottoCountController;
 import lotto.controller.LottoMachine;
 import lotto.controller.ManualLottoMachine;
-import lotto.domain.LottoCount;
-import lotto.domain.WinningLotto;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoResult;
+import lotto.domain.WinningLotto;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -23,7 +23,7 @@ public class LottoApplication {
         ManualLottoMachine manualLottoMachine = new ManualLottoMachine(manualCount);
 
         InputView.printStartManualNumbersInput();
-        while(!manualLottoMachine.isManualNumberInputEnd()) {
+        while (!manualLottoMachine.isManualNumberInputEnd()) {
             String manualLottoNumbers = InputView.getManualNumbers();
             manualLottoMachine.getManualLottoNumbers(manualLottoNumbers);
         }

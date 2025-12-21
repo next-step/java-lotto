@@ -17,7 +17,7 @@ public class ResultView {
     }
 
     public static void printLotto(LottoCount manualCount, LottoCount autoCount, Lotto lotto) {
-        printLottoCount(String.format(LOTTO_COUNT_RESULT, manualCount, autoCount) );
+        printLottoCount(String.format(LOTTO_COUNT_RESULT, manualCount, autoCount));
         printLottoNumbersList(lotto.toString());
     }
 

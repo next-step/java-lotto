@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoCountTest {
     @Test
@@ -46,7 +47,8 @@ public class LottoCountTest {
     @CsvSource({
             "1, true",
             "2, false",
-    })    public void 카운트_일치_여부(int count, boolean expected) {
+    })
+    public void 카운트_일치_여부(int count, boolean expected) {
         assertThat(new LottoCount(count).isCountSame(1)).isEqualTo(expected);
     }
 }

@@ -1,10 +1,9 @@
 package calculator.domain;
 
-import calculator.domain.Number;
-import calculator.domain.OperatorFactory;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class NumberTest {
     @Test

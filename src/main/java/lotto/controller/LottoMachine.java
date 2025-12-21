@@ -10,10 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine implements LottoGenerator {
-    private LottoCount autoCount;
+    private final LottoCount autoCount;
 
     public LottoMachine(LottoCount autoCount) {
         this.autoCount = autoCount;
+    }
+
+    private static boolean validateLottoCount(LottoCount total, LottoCount manual) {
+        return total.isBiggerOrSameThan(manual);
     }
 
     @Override
@@ -24,9 +28,5 @@ public class LottoMachine implements LottoGenerator {
         }
 
         return new Lotto(lottoNumbersList);
-    }
-
-    private static boolean validateLottoCount(LottoCount total, LottoCount manual) {
-        return total.isBiggerOrSameThan(manual);
     }
 }

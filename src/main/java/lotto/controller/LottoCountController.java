@@ -4,10 +4,10 @@ import lotto.domain.LottoCount;
 
 public class LottoCountController {
     private static final int PRICE_PER_LOTTO = 1000;
-    private LottoCount totalCount;
-    private LottoCount manualCount;
+    private final LottoCount totalCount;
+    private final LottoCount manualCount;
 
-    public LottoCountController(String price , String manualCount) {
+    public LottoCountController(String price, String manualCount) {
         this(new LottoCount(price, PRICE_PER_LOTTO), new LottoCount(manualCount));
     }
 
@@ -20,15 +20,15 @@ public class LottoCountController {
         this.manualCount = manualCount;
     }
 
+    private static boolean validateLottoCount(LottoCount total, LottoCount manual) {
+        return total.isBiggerOrSameThan(manual);
+    }
+
     public LottoCount getAutoCount() {
         return totalCount.diff(manualCount);
     }
 
     public LottoCount getManualCount() {
         return new LottoCount(manualCount);
-    }
-
-    private static boolean validateLottoCount(LottoCount total, LottoCount manual) {
-        return total.isBiggerOrSameThan(manual);
     }
 }

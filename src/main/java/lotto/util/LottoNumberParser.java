@@ -28,7 +28,7 @@ public class LottoNumberParser {
         return lottoNumbers;
     }
 
-    public static List<LottoNumber> parse (int... numbers) {
+    public static List<LottoNumber> parse(int... numbers) {
         List<LottoNumber> list = new ArrayList<>();
         for (int number : numbers) {
             list.add(LottoNumber.get(number));

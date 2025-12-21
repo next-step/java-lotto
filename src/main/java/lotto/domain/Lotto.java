@@ -15,6 +15,15 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    private static List<LottoNumbers> combineLottoNumbers(Lotto... lottos) {
+        List<LottoNumbers> combined = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            combined.addAll(lotto.lottoNumbers);
+        }
+
+        return combined;
+    }
+
     public LottoResult getMatchResult(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
 
@@ -24,15 +33,6 @@ public class Lotto {
         }
 
         return result;
-    }
-
-    private static List<LottoNumbers> combineLottoNumbers(Lotto... lottos) {
-        List<LottoNumbers> combined = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            combined.addAll(lotto.lottoNumbers);
-        }
-
-        return combined;
     }
 
     @Override

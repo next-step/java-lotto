@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoCount {
-    private int count;
+    private final int count;
 
 
     public LottoCount(String count) {
