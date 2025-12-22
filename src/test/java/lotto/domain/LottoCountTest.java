@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoCountTest {
     @Test
@@ -20,7 +19,7 @@ public class LottoCountTest {
 
     @Test
     public void 로또_개수_계산() {
-        assertThat(LottoCount.getAutoCount("5000", "3")).isEqualTo(new LottoCount(2));
+        assertThat(new LottoCount(3).diffFromPrice(new LottoPrice("5000"))).isEqualTo(new LottoCount(2));
     }
     @ParameterizedTest
     @CsvSource({
