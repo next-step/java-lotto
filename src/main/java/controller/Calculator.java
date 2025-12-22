@@ -1,7 +1,7 @@
 package controller;
 
-import domain.Operator;
 import domain.Number;
+import domain.Operator;
 import domain.OperatorFactory;
 import util.Parser;
 
@@ -29,7 +29,7 @@ public class Calculator {
     private static List<Number> parseNumbers(String[] expression) {
         List<Number> numbers = new ArrayList<>();
 
-        for (int i = 0; i < expression.length; i+=2) {
+        for (int i = 0; i < expression.length; i += 2) {
             numbers.add(new domain.Number(expression[i]));
         }
 
@@ -38,7 +38,7 @@ public class Calculator {
 
     private static List<Operator> parseOperators(String[] expression) {
         List<Operator> operators = new ArrayList<>();
-        for (int i = 1; i < expression.length - 1; i+=2) {
+        for (int i = 1; i < expression.length - 1; i += 2) {
             operators.add(OperatorFactory.getOperator(expression[i]));
         }
 

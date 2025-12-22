@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
     @Test
@@ -18,9 +18,8 @@ public class LottoTest {
                 new LottoNumbers(1, 2, 3, 4, 5, 11)
         );
 
-        LottoPrice price = new LottoPrice(6000);
         LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(11);
+        LottoNumber bonusNumber = LottoNumber.get(11);
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.add(LottoRank.FIRST);
@@ -31,6 +30,6 @@ public class LottoTest {
         lottoResult.add(LottoRank.NONE);
 
 
-        assertThat(new Lotto(price, lottoNumbersList).getMatchResult(new WinningLotto(winningNumbers, bonusNumber))).isEqualTo(lottoResult);
+        assertThat(new Lotto(lottoNumbersList).getMatchResult(new WinningLotto(winningNumbers, bonusNumber))).isEqualTo(lottoResult);
     }
 }

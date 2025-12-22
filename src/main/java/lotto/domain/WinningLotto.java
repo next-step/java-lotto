@@ -8,7 +8,7 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String winningNumbers, String bonusNumber) {
-        this(new LottoNumbers(LottoNumberParser.parse(winningNumbers)), new LottoNumber(bonusNumber));
+        this(new LottoNumbers(LottoNumberParser.parse(winningNumbers)), LottoNumber.get(bonusNumber));
     }
 
     public WinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) {

@@ -2,7 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumbersTest {
     @Test
@@ -13,7 +13,7 @@ public class LottoNumbersTest {
     @Test
     public void 포함_여부() {
         LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        assertThat(lottoNumbers.contains(new LottoNumber(1))).isTrue();
+        assertThat(lottoNumbers.contains(LottoNumber.get(1))).isTrue();
     }
 
     @Test

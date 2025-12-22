@@ -12,4 +12,5 @@ public class ParserTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             Parser.parse(input);
         });
-    }}
+    }
+}

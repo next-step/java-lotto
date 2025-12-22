@@ -1,13 +1,13 @@
 package controller;
 
+import domain.Number;
 import domain.Operator;
 import domain.OperatorFactory;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
-import domain.Number;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
     @Test

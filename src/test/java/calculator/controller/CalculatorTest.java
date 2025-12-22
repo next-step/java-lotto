@@ -1,15 +1,14 @@
 package calculator.controller;
 
-import calculator.controller.Calculator;
+import calculator.domain.Number;
 import calculator.domain.Operator;
 import calculator.domain.OperatorFactory;
+import calculator.util.Parser;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
-import calculator.domain.Number;
-import calculator.util.Parser;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
     @Test

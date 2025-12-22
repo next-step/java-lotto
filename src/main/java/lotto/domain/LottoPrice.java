@@ -9,6 +9,9 @@ public class LottoPrice {
     }
 
     public LottoPrice(int price) {
+        if (price <= PRICE_PER_LOTTO) {
+            throw new IllegalArgumentException("로또를 구매할 수 없는 가격입니다");
+        }
         this.price = price;
     }
 

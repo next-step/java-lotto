@@ -1,15 +1,14 @@
 package lotto.domain;
 
-import lotto.util.LottoNumberParser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTest {
     static Stream<Arguments> provideLottoNumbers() {
@@ -27,7 +26,7 @@ public class WinningLottoTest {
     public void 일치하는_숫자의_개수(String numbers, LottoRank expected) {
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         LottoNumbers winningLottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(13);
+        LottoNumber bonusNumber = LottoNumber.get(13);
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
         assertThat(winningLotto.getMatchedRank(lottoNumbers)).isEqualTo(expected);

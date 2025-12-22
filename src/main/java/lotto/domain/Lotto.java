@@ -1,15 +1,27 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final LottoPrice price;
     private final List<LottoNumbers> lottoNumbers;
 
-    public Lotto(LottoPrice price, List<LottoNumbers> lottoNumbers) {
-        this.price = price;
+    public Lotto(Lotto... lottos) {
+        this(combineLottoNumbers(lottos));
+    }
+
+    public Lotto(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private static List<LottoNumbers> combineLottoNumbers(Lotto... lottos) {
+        List<LottoNumbers> combined = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            combined.addAll(lotto.lottoNumbers);
+        }
+
+        return combined;
     }
 
     public LottoResult getMatchResult(WinningLotto winningLotto) {
@@ -21,10 +33,6 @@ public class Lotto {
         }
 
         return result;
-    }
-
-    public String count() {
-        return String.valueOf(price.count());
     }
 
     @Override

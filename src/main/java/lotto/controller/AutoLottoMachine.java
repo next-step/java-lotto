@@ -1,32 +1,28 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrice;
 import lotto.util.LottoNumberParser;
 import lotto.util.RandomNumbersGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoMachine {
-    private final LottoPrice lottoPrice;
+public class AutoLottoMachine implements LottoGenerator {
+    private final LottoCount autoCount;
 
-    public LottoMachine(String price) {
-        this(new LottoPrice(price));
+    public AutoLottoMachine(LottoCount autoCount) {
+        this.autoCount = autoCount;
     }
 
-    public LottoMachine(LottoPrice lottoPrice) {
-        this.lottoPrice = lottoPrice;
-    }
-
+    @Override
     public Lotto generate() {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-
-        for (int i = 0; i < lottoPrice.count(); i++) {
+        for (int i = 0; !autoCount.isCountSame(i); i++) {
             lottoNumbersList.add(new LottoNumbers(LottoNumberParser.parse(RandomNumbersGenerator.randomNumbers())));
         }
 
-        return new Lotto(lottoPrice, lottoNumbersList);
+        return new Lotto(lottoNumbersList);
     }
 }

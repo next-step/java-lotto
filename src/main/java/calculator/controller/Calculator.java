@@ -1,7 +1,7 @@
 package calculator.controller;
 
-import calculator.domain.Operator;
 import calculator.domain.Number;
+import calculator.domain.Operator;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +14,6 @@ public class Calculator {
         this.numbers = numbers;
         this.operators = operators;
     }
-
 
 
     public Number calculate() {

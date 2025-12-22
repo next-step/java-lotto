@@ -10,9 +10,7 @@ public class LottoNumberParser {
 
     public static List<LottoNumber> parse(String input) {
         String[] splittedNumbers = input.split(SPLIT_REGELX);
-        for (String splittedNumber : splittedNumbers) {
-            System.out.println(splittedNumber);
-        }
+
         if (!isValidInput(splittedNumbers)) {
             throw new IllegalArgumentException("정상적인 입력이 아닙니다.");
         }
@@ -24,16 +22,16 @@ public class LottoNumberParser {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (String number : numbers) {
-            lottoNumbers.add(LottoNumberCache.get(number));
+            lottoNumbers.add(LottoNumber.get(number));
         }
 
         return lottoNumbers;
     }
 
-    public static List<LottoNumber> parse (int... numbers) {
+    public static List<LottoNumber> parse(int... numbers) {
         List<LottoNumber> list = new ArrayList<>();
         for (int number : numbers) {
-            list.add(LottoNumberCache.get(number));
+            list.add(LottoNumber.get(number));
         }
 
         return list;
@@ -42,7 +40,7 @@ public class LottoNumberParser {
     public static List<LottoNumber> parse(List<Integer> numbers) {
         List<LottoNumber> list = new ArrayList<>();
         for (int number : numbers) {
-            list.add(LottoNumberCache.get(number));
+            list.add(LottoNumber.get(number));
         }
         return list;
     }

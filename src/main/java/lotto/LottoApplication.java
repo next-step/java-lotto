@@ -1,30 +1,39 @@
 package lotto;
 
-import lotto.controller.LottoMachine;
-import lotto.domain.WinningLotto;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
+import lotto.controller.LottosBundleGenerator;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
-import lotto.util.LottoNumberParser;
+
+import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        String purchaseAmount = InputView.getPurchaseAmount();
+        try {
+            String purchaseAmount = InputView.getPurchaseAmount();
+            String manualLottoCount = InputView.getManualNumberCount();
 
-        LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
-        Lotto lotto = lottoMachine.generate();
+            LottoPrice price = new LottoPrice(purchaseAmount);
+            LottoCount manualCount = new LottoCount(manualLottoCount);
 
-        ResultView.printLotto(lotto);
+            InputView.printStartManualNumbersInput();
+            List<String> manualLottos = InputView.getManualLottosNumbers(new LottoCount(manualLottoCount));
 
-        String winningNumbers = InputView.getWinningNumber();
-        String bonusNumber = InputView.getBonusNumber();
+            LottosBundleGenerator lottosBundleGenerator = new LottosBundleGenerator(price, manualCount, manualLottos);
+            Lotto lotto = lottosBundleGenerator.generate();
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        LottoResult result = lotto.getMatchResult(winningLotto);
+            ResultView.printLotto(manualCount, manualCount.diffFromPrice(price), lotto);
 
-        ResultView.printLottoResult(result.toString());
-        ResultView.printProfit(result.getProfit());
+            String winningNumbers = InputView.getWinningNumber();
+            String bonusNumber = InputView.getBonusNumber();
+
+            WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+            LottoResult result = lotto.getMatchResult(winningLotto);
+
+            ResultView.printLottoResult(result.toString());
+            ResultView.printProfit(result.getProfit());
+        } catch (Exception ex) {
+            ResultView.printError(ex.getMessage());
+        }
     }
 }

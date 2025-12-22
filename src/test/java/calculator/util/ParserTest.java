@@ -1,6 +1,5 @@
 package calculator.util;
 
-import calculator.util.Parser;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -13,4 +12,5 @@ public class ParserTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             Parser.parse(input);
         });
-    }}
+    }
+}
