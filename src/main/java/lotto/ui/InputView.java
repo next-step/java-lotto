@@ -1,5 +1,9 @@
 package lotto.ui;
 
+import lotto.domain.LottoCount;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -34,8 +38,13 @@ public class InputView {
         System.out.println(MANUAL_NUMBERS_INPUT_MESSAGE);
     }
 
-    public static String getManualNumbers() {
-        return scanner.nextLine();
+    public static List<String> getManualLottosNumbers(LottoCount manualLottoCount) {
+        List<String> manualLottos = new ArrayList<>();
+        for (int i = 0; !manualLottoCount.isCountSame(i); i++) {
+            manualLottos.add(scanner.nextLine());
+        }
+
+        return manualLottos;
     }
 
 }
