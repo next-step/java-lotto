@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ManualLottoMachine implements LottoGenerator {
     private final List<String> lottoNumbersList;
+
     public ManualLottoMachine(List<String> manualLottoNumbers) {
         this.lottoNumbersList = manualLottoNumbers;
     }

@@ -13,12 +13,12 @@ public class LottosBundleGenerator implements LottoGenerator {
         this(toLottosGenerators(price, manualCount, manualLottoText));
     }
 
-    private static List<LottoGenerator> toLottosGenerators(LottoPrice price, LottoCount manualCount, List<String> manualLottoText) {
-        return List.of(new LottoMachine(manualCount.diffFromPrice(price)), new ManualLottoMachine(manualLottoText));
-    }
-
     public LottosBundleGenerator(List<LottoGenerator> lottosGenerators) {
         this.lottosGenerators = lottosGenerators;
+    }
+
+    private static List<LottoGenerator> toLottosGenerators(LottoPrice price, LottoCount manualCount, List<String> manualLottoText) {
+        return List.of(new LottoMachine(manualCount.diffFromPrice(price)), new ManualLottoMachine(manualLottoText));
     }
 
     @Override

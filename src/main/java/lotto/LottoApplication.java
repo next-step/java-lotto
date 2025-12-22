@@ -19,7 +19,7 @@ public class LottoApplication {
             InputView.printStartManualNumbersInput();
             List<String> manualLottos = InputView.getManualLottosNumbers(new LottoCount(manualLottoCount));
 
-            LottosBundleGenerator lottosBundleGenerator = new LottosBundleGenerator(price, manualCount,  manualLottos);
+            LottosBundleGenerator lottosBundleGenerator = new LottosBundleGenerator(price, manualCount, manualLottos);
             Lotto lotto = lottosBundleGenerator.generate();
 
             ResultView.printLotto(manualCount, manualCount.diffFromPrice(price), lotto);
