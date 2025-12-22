@@ -1,13 +1,11 @@
 package lotto;
 
-import lotto.controller.LottoMachine;
-import lotto.controller.ManualLottoMachine;
-import lotto.domain.LottoCount;
-import lotto.domain.WinningLotto;
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
+import lotto.controller.LottosBundleGenerator;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
+
+import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -15,23 +13,16 @@ public class LottoApplication {
             String purchaseAmount = InputView.getPurchaseAmount();
             String manualLottoCount = InputView.getManualNumberCount();
 
-            LottoCount autoCount = LottoCount.getAutoCount(purchaseAmount, manualLottoCount);
+            LottoPrice price = new LottoPrice(purchaseAmount);
             LottoCount manualCount = new LottoCount(manualLottoCount);
 
-            LottoMachine lottoMachine = new LottoMachine(autoCount);
-            ManualLottoMachine manualLottoMachine = new ManualLottoMachine(manualCount);
-
             InputView.printStartManualNumbersInput();
-            while (!manualLottoMachine.isManualNumberInputEnd()) {
-                String manualLottoNumbers = InputView.getManualNumbers();
-                manualLottoMachine.getManualLottoNumbers(manualLottoNumbers);
-            }
+            List<String> manualLottos = InputView.getManualLottosNumbers(new LottoCount(manualLottoCount));
 
-            Lotto autoLotto = lottoMachine.generate();
-            Lotto manualLotto = manualLottoMachine.generate();
+            LottosBundleGenerator lottosBundleGenerator = new LottosBundleGenerator(price, manualCount,  manualLottos);
+            Lotto lotto = lottosBundleGenerator.generate();
 
-            Lotto lotto = new Lotto(manualLotto, autoLotto);
-            ResultView.printLotto(manualCount, autoCount, lotto);
+            ResultView.printLotto(manualCount, manualCount.diffFromPrice(price), lotto);
 
             String winningNumbers = InputView.getWinningNumber();
             String bonusNumber = InputView.getBonusNumber();
