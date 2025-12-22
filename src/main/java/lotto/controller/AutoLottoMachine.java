@@ -9,10 +9,10 @@ import lotto.util.RandomNumbersGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoMachine implements LottoGenerator {
+public class AutoLottoMachine implements LottoGenerator {
     private final LottoCount autoCount;
 
-    public LottoMachine(LottoCount autoCount) {
+    public AutoLottoMachine(LottoCount autoCount) {
         this.autoCount = autoCount;
     }
 

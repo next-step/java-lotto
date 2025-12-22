@@ -18,7 +18,7 @@ public class LottosBundleGenerator implements LottoGenerator {
     }
 
     private static List<LottoGenerator> toLottosGenerators(LottoPrice price, LottoCount manualCount, List<String> manualLottoText) {
-        return List.of(new LottoMachine(manualCount.diffFromPrice(price)), new ManualLottoMachine(manualLottoText));
+        return List.of(new AutoLottoMachine(manualCount.diffFromPrice(price)), new ManualLottoMachine(manualLottoText));
     }
 
     @Override
