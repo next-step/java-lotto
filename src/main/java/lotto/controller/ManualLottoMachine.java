@@ -1,34 +1,26 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
+import lotto.util.LottoNumberParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoMachine implements LottoGenerator {
-    private final LottoCount manualCount;
-    private LottoCount inputCount;
-    private final List<LottoNumbers> lottoNumbersList;
-
-    public ManualLottoMachine(LottoCount manualCount) {
-        this.manualCount = manualCount;
-        this.inputCount = new LottoCount(0);
-        this.lottoNumbersList = new ArrayList<>();
-    }
-
-    public boolean isManualNumberInputEnd() {
-        return this.inputCount.equals(this.manualCount);
-    }
-
-    public void getManualLottoNumbers(String lottoNumbers) {
-        this.inputCount = this.inputCount.increase();
-        lottoNumbersList.add(new LottoNumbers(lottoNumbers));
+    private final List<String> lottoNumbersList;
+    public ManualLottoMachine(List<String> manualLottoNumbers) {
+        this.lottoNumbersList = manualLottoNumbers;
     }
 
     @Override
     public Lotto generate() {
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+
+        for (int i = 0; i < this.lottoNumbersList.size(); i++) {
+            lottoNumbersList.add(new LottoNumbers(LottoNumberParser.parse(this.lottoNumbersList.get(i))));
+        }
+
         return new Lotto(lottoNumbersList);
     }
 }
