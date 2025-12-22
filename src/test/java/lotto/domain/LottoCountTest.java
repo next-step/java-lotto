@@ -14,35 +14,14 @@ public class LottoCountTest {
     }
 
     @Test
-    public void 로또_가격_생성() {
-        assertThat(new LottoCount("3000", 1000)).isEqualTo(new LottoCount(3));
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            "1, 1, true",
-            "1, 2, false",
-            "2, 1, true"
-    })
-    public void 대소비교(int count, int otherCount, boolean expected) {
-        assertThat(new LottoCount(count).isBiggerOrSameThan(new LottoCount(otherCount))).isEqualTo(expected);
-    }
-
-    @Test
     public void 증가() {
         assertThat(new LottoCount(0).increase()).isEqualTo(new LottoCount(1));
     }
 
     @Test
-    public void 차이() {
-        assertThat(new LottoCount(3).diff(new LottoCount(2))).isEqualTo(new LottoCount(1));
+    public void 로또_개수_계산() {
+        assertThat(LottoCount.getAutoCount("5000", "3")).isEqualTo(new LottoCount(2));
     }
-
-    @Test
-    public void 차이_음수() {
-        assertThatThrownBy(() -> new LottoCount(1).diff(new LottoCount(2))).isInstanceOf(RuntimeException.class);
-    }
-
     @ParameterizedTest
     @CsvSource({
             "1, true",

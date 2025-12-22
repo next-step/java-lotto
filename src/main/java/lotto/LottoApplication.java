@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.controller.LottoCountController;
 import lotto.controller.LottoMachine;
 import lotto.controller.ManualLottoMachine;
 import lotto.domain.LottoCount;
@@ -16,9 +15,8 @@ public class LottoApplication {
             String purchaseAmount = InputView.getPurchaseAmount();
             String manualLottoCount = InputView.getManualNumberCount();
 
-            LottoCountController lottoCountController = new LottoCountController(purchaseAmount, manualLottoCount);
-            LottoCount manualCount = lottoCountController.getManualCount();
-            LottoCount autoCount = lottoCountController.getAutoCount();
+            LottoCount autoCount = LottoCount.getAutoCount(purchaseAmount, manualLottoCount);
+            LottoCount manualCount = new LottoCount(manualLottoCount);
 
             LottoMachine lottoMachine = new LottoMachine(autoCount);
             ManualLottoMachine manualLottoMachine = new ManualLottoMachine(manualCount);
