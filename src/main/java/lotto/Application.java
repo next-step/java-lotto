@@ -1,7 +1,7 @@
 package lotto;
 
-import calculator.InputView;
-import calculator.ResultView;
+import lotto.InputView;
+import lotto.ResultView;
 
 public class Application {
     public static void main(String[] args) {

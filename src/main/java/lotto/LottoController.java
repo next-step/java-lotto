@@ -1,7 +1,7 @@
 package lotto;
 
-import calculator.InputView;
-import calculator.ResultView;
+import lotto.InputView;
+import lotto.ResultView;
 import java.util.List;
 
 public class LottoController {

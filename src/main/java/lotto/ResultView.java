@@ -13,8 +13,9 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : Rank.values()) {
-            System.out.println(rank.matchCount() + "개 일치 (" + rank.prize() + "원)- " + stats.countOf(rank) + "개");
+        for (Rank rank : Rank.winningRanks()) {
+            System.out.println(rank.description() + " (" + rank.prize() + "원)- "
+                + stats.countOf(rank) + "개");
         }
 
         System.out.println("총 수익률은 " + stats.profitRate(money) + "입니다.");
