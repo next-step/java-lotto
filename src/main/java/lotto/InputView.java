@@ -1,4 +1,4 @@
-package calculator;
+package lotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,11 +14,9 @@ public class InputView {
 
     public List<Integer> readWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String line = scanner.nextLine();
-        return Arrays.stream(line.split(","))
+        return Arrays.stream(scanner.nextLine().split(","))
             .map(String::trim)
             .map(Integer::parseInt)
             .toList();
     }
-
 }

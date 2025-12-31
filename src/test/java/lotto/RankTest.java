@@ -8,24 +8,24 @@ import org.junit.jupiter.api.Test;
 
 public class RankTest {
     @Test
-    @DisplayName("일치 개수로 당첨 등수를 찾는다")
-    void findRankByMatchCount() {
-        assertThat(Rank.from(3)).isEqualTo(Rank.THREE);
-        assertThat(Rank.from(6)).isEqualTo(Rank.SIX);
+    @DisplayName("일치 개수로 등수를 찾는다 (6개=1등, 5개=3등, 4개=4등, 3개=5등)")
+    void rankOfMatchCount() {
+        assertThat(Rank.of(6)).isEqualTo(Rank.FIRST);
+        assertThat(Rank.of(5)).isEqualTo(Rank.THIRD);
+        assertThat(Rank.of(4)).isEqualTo(Rank.FOURTH);
+        assertThat(Rank.of(3)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
-    @DisplayName("당첨이 아닌 개수로 조회하면 예외가 발생한다")
-    void invalidMatchCountThrowsException() {
-        assertThatThrownBy(() -> Rank.from(2))
-            .isInstanceOf(IllegalArgumentException.class);
+    @DisplayName("당첨이 아닌 개수는 MISS로 반환한다")
+    void nonWinningIsMiss() {
+        assertThat(Rank.of(2)).isEqualTo(Rank.MISS);
+        assertThat(Rank.of(0)).isEqualTo(Rank.MISS);
     }
 
     @Test
-    @DisplayName("당첨 여부는 3~6개만 true다")
-    void winningCheck() {
-        assertThat(Rank.isWinning(2)).isFalse();
-        assertThat(Rank.isWinning(3)).isTrue();
-        assertThat(Rank.isWinning(6)).isTrue();
+    @DisplayName("winningRanks는 MISS를 제외한 당첨 등수만 반환한다")
+    void winningRanksExcludesMiss() {
+        assertThat(Rank.winningRanks()).doesNotContain(Rank.MISS);
     }
 }

@@ -41,8 +41,7 @@ public class LottoTest {
     @DisplayName("당첨 번호와 일치하는 개수를 계산한다")
     void matchCountCalculation() {
         Lotto lotto = new Lotto(List.of(1,2,3,10,11,12));
-        WinningNumbers winning = new WinningNumbers(List.of(1,2,3,4,5,6));
 
-        assertThat(lotto.matchCount(winning)).isEqualTo(3);
+        assertThat(lotto.matchCount(lotto)).isEqualTo(3);
     }
 }

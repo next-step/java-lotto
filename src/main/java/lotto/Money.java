@@ -1,11 +1,12 @@
 package lotto;
 
 public class Money {
-    private static final int UNIT_PRICE = 1000;
+    private static final int UNIT_PRICE = 1_000;
     private final int amount;
 
     private Money(int amount) {
-        validate(amount);
+        validateAmount(amount);
+        validateUnit(amount);
         this.amount = amount;
     }
 
@@ -21,10 +22,13 @@ public class Money {
         return amount;
     }
 
-    private void validate(int amount) {
+    private void validateAmount(int amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("구입 금액은 0보다 커야 한다.");
         }
+    }
+
+    private void validateUnit(int amount) {
         if (amount % UNIT_PRICE != 0) {
             throw new IllegalArgumentException("구입 금액은 1000원 단위여야 한다.");
         }

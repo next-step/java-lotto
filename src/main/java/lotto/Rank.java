@@ -3,17 +3,20 @@ package lotto;
 import java.util.Arrays;
 
 public enum Rank {
-    THREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000);
+    FIRST(6, 2_000_000_000, "6개 일치"),
+    THIRD(5, 1_500_000, "5개 일치"),
+    FOURTH(4, 50_000, "4개 일치"),
+    FIFTH(3, 5_000, "3개 일치"),
+    MISS(0, 0, "");
 
     private final int matchCount;
     private final long prize;
+    private final String description;
 
-    Rank(int matchCount, long prize) {
+    Rank(int matchCount, long prize, String description) {
         this.matchCount = matchCount;
         this.prize = prize;
+        this.description = description;
     }
 
     public int matchCount() {
@@ -24,14 +27,24 @@ public enum Rank {
         return prize;
     }
 
-    public static boolean isWinning(int matchCount) {
-        return Arrays.stream(values()).anyMatch(r -> r.matchCount == matchCount);
+    public String description() {
+        return description;
     }
 
-    public static Rank from(int matchCount) {
+    public boolean isWinning() {
+        return this != MISS;
+    }
+
+    public static Rank of(int matchCount) {
         return Arrays.stream(values())
-            .filter(r -> r.matchCount == matchCount)
+            .filter(rank -> rank.matchCount == matchCount)
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("당첨 등수가 없다."));
+            .orElse(MISS);
+    }
+
+    public static Rank[] winningRanks() {
+        return Arrays.stream(values())
+            .filter(Rank::isWinning)
+            .toArray(Rank[]::new);
     }
 }
