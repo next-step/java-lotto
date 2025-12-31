@@ -1,8 +1,7 @@
-package calculator;
+package lotto;
 
-import lotto.LottoController;
-import lotto.LottoMachine;
-import lotto.ShuffleNumberGenerator;
+import lotto.InputView;
+import lotto.ResultView;
 
 public class Application {
     public static void main(String[] args) {
