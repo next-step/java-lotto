@@ -3,20 +3,21 @@ package lotto;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import lotto.MatchResult;
 
-public class WinningStatistics {
+public final class WinningStatistics {
     private final Map<Rank, Integer> counts = new EnumMap<>(Rank.class);
 
     public WinningStatistics() {
         initCounts();
     }
 
-    public void accumulate(List<Lotto> lottos, Lotto winning) {
-        lottos.forEach(lotto -> accumulateOne(lotto, winning));
+    public void accumulate(List<Lotto> tickets, WinningNumbers winningNumbers) {
+        tickets.forEach(ticket -> accumulateOne(ticket, winningNumbers));
     }
 
     public int countOf(Rank rank) {
-        return counts.get(rank);
+        return counts.getOrDefault(rank, 0);
     }
 
     public long totalPrize() {
@@ -35,11 +36,11 @@ public class WinningStatistics {
         }
     }
 
-    private void accumulateOne(Lotto lotto, Lotto winning) {
-        Rank rank = Rank.of(lotto.matchCount(winning));
+    private void accumulateOne(Lotto ticket, WinningNumbers winningNumbers) {
+        Rank rank = Rank.of(winningNumbers.match(ticket));
         if (!rank.isWinning()) {
             return;
         }
-        counts.put(rank, counts.get(rank) + 1);
+        counts.put(rank, countOf(rank) + 1);
     }
 }

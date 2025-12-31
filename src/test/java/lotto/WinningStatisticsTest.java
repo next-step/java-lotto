@@ -8,35 +8,53 @@ import org.junit.jupiter.api.Test;
 
 public class WinningStatisticsTest {
     @Test
-    @DisplayName("로또 결과를 등수별로 집계한다")
-    void accumulateStatistics() {
+    @DisplayName("5개 일치 + 보너스 일치는 2등으로 집계된다")
+    void accumulateSecondRank() {
         Lotto winning = new Lotto(1, 2, 3, 4, 5, 6);
-        List<Lotto> lottos = List.of(
-            new Lotto(1, 2, 3, 10, 11, 12),
-            new Lotto(1, 2, 3, 4, 11, 12)
+        WinningNumbers winningNumbers = new WinningNumbers(winning, BonusNumber.of(7));
+
+        List<Lotto> tickets = List.of(
+            new Lotto(1, 2, 3, 4, 5, 7) // 5 + bonus => SECOND
         );
 
         WinningStatistics stats = new WinningStatistics();
-        stats.accumulate(lottos, winning);
+        stats.accumulate(tickets, winningNumbers);
 
-        assertThat(stats.countOf(Rank.FIFTH)).isEqualTo(1);
-        assertThat(stats.countOf(Rank.FOURTH)).isEqualTo(1);
+        assertThat(stats.countOf(Rank.SECOND)).isEqualTo(1);
         assertThat(stats.countOf(Rank.THIRD)).isEqualTo(0);
-        assertThat(stats.countOf(Rank.FIRST)).isEqualTo(0);
     }
 
     @Test
-    @DisplayName("총 당첨금은 등수별 상금의 합이다")
-    void totalPrizeCalculation() {
+    @DisplayName("총 당첨금은 등수별 (상금 * 당첨횟수)의 합이다")
+    void totalPrizeIsSumOfPrizeTimesCount() {
         Lotto winning = new Lotto(1, 2, 3, 4, 5, 6);
-        List<Lotto> lottos = List.of(
-            new Lotto(1, 2, 3, 10, 11, 12),
-            new Lotto(1, 2, 3, 4, 11, 12)
+        WinningNumbers winningNumbers = new WinningNumbers(winning, BonusNumber.of(7));
+
+        List<Lotto> tickets = List.of(
+            new Lotto(1, 2, 3, 4, 5, 7), // SECOND: 30,000,000
+            new Lotto(1, 2, 3, 4, 5, 10) // THIRD: 1,500,000
         );
 
         WinningStatistics stats = new WinningStatistics();
-        stats.accumulate(lottos, winning);
+        stats.accumulate(tickets, winningNumbers);
 
-        assertThat(stats.totalPrize()).isEqualTo(55_000);
+        assertThat(stats.totalPrize()).isEqualTo(31_500_000L);
+    }
+
+    @Test
+    @DisplayName("수익률은 총 당첨금을 구입 금액으로 나눈 값이다")
+    void profitRateIsTotalPrizeDividedByPurchaseAmount() {
+        Lotto winning = new Lotto(1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = new WinningNumbers(winning, BonusNumber.of(7));
+
+        List<Lotto> tickets = List.of(
+            new Lotto(1, 2, 3, 4, 5, 7) // 30,000,000
+        );
+
+        WinningStatistics stats = new WinningStatistics();
+        stats.accumulate(tickets, winningNumbers);
+
+        Money purchase = Money.of(10_000);
+        assertThat(stats.profitRate(purchase)).isEqualTo(3000.0);
     }
 }
