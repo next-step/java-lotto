@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.InputView;
-import lotto.ResultView;
+
 import java.util.List;
 
 public class LottoController {
@@ -18,13 +17,13 @@ public class LottoController {
     public void run() {
         Money money = Money.of(inputView.readPurchaseAmount());
 
-        List<Lotto> lottos = lottoMachine.issue(money);
-        resultView.printLottos(lottos);
+        List<Lotto> tickets = lottoMachine.issue(money);
+        resultView.printLottos(tickets);
 
         Lotto winning = new Lotto(inputView.readWinningNumbers());
+        WinningNumbers winningNumbers = new WinningNumbers(winning, inputView.readBonusNumber());
 
-        WinningStatistics stats = new WinningStatistics();
-        stats.accumulate(lottos, winning);
+        WinningStatistics stats = winningNumbers.match(tickets);
 
         resultView.printStatistics(stats, money);
     }

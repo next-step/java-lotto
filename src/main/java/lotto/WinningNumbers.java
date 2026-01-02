@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 public class WinningNumbers {
     private final Lotto winning;
     private final BonusNumber bonus;
@@ -18,6 +20,12 @@ public class WinningNumbers {
         int matchCount = ticket.matchCount(winning);
         boolean bonusMatched = ticket.contains(bonus.value());
         return Rank.of(matchCount, bonusMatched);
+    }
+
+    public WinningStatistics match(List<Lotto> tickets) {
+        WinningStatistics stats = new WinningStatistics();
+        stats.accumulate(tickets, this);
+        return stats;
     }
 
     private void validateBonusNotDuplicated(Lotto winning, BonusNumber bonus) {
