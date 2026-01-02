@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class ResultView {
@@ -13,11 +15,14 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : Rank.winningRanks()) {
-            System.out.println(rank.description() + " (" + rank.prize() + "원)- "
-                + stats.countOf(rank) + "개");
-        }
+        Arrays.stream(Rank.winningRanks())
+            .sorted(Comparator.comparingInt(Rank::displayOrder))
+            .forEach(rank -> printRank(stats, rank));
 
         System.out.println("총 수익률은 " + stats.profitRate(money) + "입니다.");
+    }
+
+    private void printRank(WinningStatistics stats, Rank rank) {
+        System.out.println(rank.description() + " (" + rank.prize() + "원)- " + stats.countOf(rank) + "개");
     }
 }

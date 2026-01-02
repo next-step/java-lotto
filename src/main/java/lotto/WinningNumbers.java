@@ -10,10 +10,14 @@ public class WinningNumbers {
         this.bonus = bonus;
     }
 
-    public MatchResult match(Lotto ticket) {
+    public WinningNumbers(Lotto winning, int bonus) {
+        this(winning, BonusNumber.of(bonus));
+    }
+
+    public Rank match(Lotto ticket) {
         int matchCount = ticket.matchCount(winning);
         boolean bonusMatched = ticket.contains(bonus.value());
-        return new MatchResult(matchCount, bonusMatched);
+        return Rank.of(matchCount, bonusMatched);
     }
 
     private void validateBonusNotDuplicated(Lotto winning, BonusNumber bonus) {

@@ -3,7 +3,6 @@ package lotto;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.MatchResult;
 
 public final class WinningStatistics {
     private final Map<Rank, Integer> counts = new EnumMap<>(Rank.class);
@@ -37,7 +36,7 @@ public final class WinningStatistics {
     }
 
     private void accumulateOne(Lotto ticket, WinningNumbers winningNumbers) {
-        Rank rank = Rank.of(winningNumbers.match(ticket));
+        Rank rank = winningNumbers.match(ticket);
         if (!rank.isWinning()) {
             return;
         }

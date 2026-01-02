@@ -11,23 +11,28 @@ public class WinningNumbersTest {
     @DisplayName("보너스 번호는 당첨 번호와 중복될 수 없다")
     void bonusMustNotDuplicateWinningNumbers() {
         Lotto winning = new Lotto(1, 2, 3, 4, 5, 6);
-        BonusNumber bonus = BonusNumber.of(6);
 
-        assertThatThrownBy(() -> new WinningNumbers(winning, bonus))
+        assertThatThrownBy(() -> new WinningNumbers(winning, 6))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("티켓의 일치 개수와 보너스 일치 여부를 MatchResult로 반환한다")
-    void matchReturnsMatchResult() {
-        Lotto winning = new Lotto(1, 2, 3, 4, 5, 6);
-        BonusNumber bonus = BonusNumber.of(7);
-        WinningNumbers winningNumbers = new WinningNumbers(winning, bonus);
+    @DisplayName("5개 일치 + 보너스 일치면 2등을 반환한다")
+    void matchReturnsSecondRank() {
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(1, 2, 3, 4, 5, 6), 7);
 
-        Lotto ticket = new Lotto(1, 2, 3, 4, 5, 7); // 5개 + bonus
-        MatchResult result = winningNumbers.match(ticket);
+        Rank rank = winningNumbers.match(new Lotto(1, 2, 3, 4, 5, 7));
 
-        assertThat(result.matchCount()).isEqualTo(5);
-        assertThat(result.bonusMatched()).isTrue();
+        assertThat(rank).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    @DisplayName("5개 일치 + 보너스 불일치면 3등을 반환한다")
+    void matchReturnsThirdRank() {
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(1, 2, 3, 4, 5, 6), 7);
+
+        Rank rank = winningNumbers.match(new Lotto(1, 2, 3, 4, 5, 10));
+
+        assertThat(rank).isEqualTo(Rank.THIRD);
     }
 }
