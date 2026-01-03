@@ -17,14 +17,13 @@ public class LottoController {
     public void run() {
         Money money = Money.of(inputView.readPurchaseAmount());
 
-        List<Lotto> tickets = lottoMachine.issue(money);
+        Lottos tickets = lottoMachine.issue(money);
         resultView.printLottos(tickets);
 
         Lotto winning = new Lotto(inputView.readWinningNumbers());
         WinningNumbers winningNumbers = new WinningNumbers(winning, inputView.readBonusNumber());
 
         WinningStatistics stats = winningNumbers.match(tickets);
-
         resultView.printStatistics(stats, money);
     }
 }

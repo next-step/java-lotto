@@ -1,6 +1,7 @@
 package lotto;
 
-import java.util.Arrays;
+
+import lotto.MatchResult;
 
 public enum Rank {
     FIRST(6, false, 2_000_000_000, "6개 일치", 5),
@@ -8,23 +9,34 @@ public enum Rank {
     THIRD(5, false, 1_500_000, "5개 일치", 3),
     FOURTH(4, false, 50_000, "4개 일치", 2),
     FIFTH(3, false, 5_000, "3개 일치", 1),
-    MISS(0, false, 0, "", 99);
+    MISS(0, false, 0, "", 0);
 
     private final int matchCount;
-    private final boolean bonusMatched;
-    private final long prize;
+    private final boolean bonusNeeded;
+    private final int prize;
     private final String description;
     private final int displayOrder;
 
-    Rank(int matchCount, boolean bonusMatched, long prize, String description, int displayOrder) {
+    Rank(int matchCount, boolean bonusNeeded, int prize, String description, int displayOrder) {
         this.matchCount = matchCount;
-        this.bonusMatched = bonusMatched;
+        this.bonusNeeded = bonusNeeded;
         this.prize = prize;
         this.description = description;
         this.displayOrder = displayOrder;
     }
 
-    public long prize() {
+    public static Rank of(MatchResult result) {
+        int matchCount = result.matchCount();
+        boolean bonusMatched = result.bonusMatched();
+
+        if (matchCount == 6) return FIRST;
+        if (matchCount == 5) return bonusMatched ? SECOND : THIRD;
+        if (matchCount == 4) return FOURTH;
+        if (matchCount == 3) return FIFTH;
+        return MISS;
+    }
+
+    public int prize() {
         return prize;
     }
 
@@ -36,29 +48,7 @@ public enum Rank {
         return displayOrder;
     }
 
-    public boolean isWinning() {
-        return this != MISS;
-    }
-
-    public static Rank of(int matchCount, boolean bonusMatched) {
-        return Arrays.stream(values())
-            .filter(r -> r.matchCount == matchCount)
-            .filter(r -> r.bonusMatched == bonusMatched)
-            .findFirst()
-            .orElseGet(() -> fallbackWithoutBonus(matchCount));
-    }
-
     public static Rank[] winningRanks() {
-        return Arrays.stream(values())
-            .filter(Rank::isWinning)
-            .toArray(Rank[]::new);
-    }
-
-    private static Rank fallbackWithoutBonus(int matchCount) {
-        return Arrays.stream(values())
-            .filter(r -> r.matchCount == matchCount)
-            .filter(r -> !r.bonusMatched)
-            .findFirst()
-            .orElse(MISS);
+        return new Rank[]{FIFTH, FOURTH, THIRD, SECOND, FIRST};
     }
 }

@@ -1,22 +1,30 @@
 package lotto;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LottoNumber {
     private static final int MIN = 1;
     private static final int MAX = 45;
 
+    private static final Map<Integer, LottoNumber> CACHE = new ConcurrentHashMap<>();
+
     private final int value;
 
     private LottoNumber(int value) {
-        if (value < MIN || value > MAX) {
-            throw new IllegalArgumentException("로또 번호는 1~45 범위여야 한다.");
-        }
         this.value = value;
     }
 
-    public static LottoNumber of(int value) {
-        return new LottoNumber(value);
+    public static LottoNumber from(int value) {
+        validateRange(value);
+        return CACHE.computeIfAbsent(value, LottoNumber::new);
+    }
+
+    private static void validateRange(int value) {
+        if (value < MIN || value > MAX) {
+            throw new IllegalArgumentException("로또 번호는 " + MIN + " ~ " + MAX + " 사이여야 합니다. value=" + value);
+        }
     }
 
     public int value() {
@@ -27,12 +35,16 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof LottoNumber)) return false;
-        LottoNumber that = (LottoNumber) o;
-        return value == that.value;
+        return value == ((LottoNumber) o).value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Integer.hashCode(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

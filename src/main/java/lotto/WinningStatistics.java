@@ -1,18 +1,13 @@
 package lotto;
 
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 public final class WinningStatistics {
     private final Map<Rank, Integer> counts = new EnumMap<>(Rank.class);
 
-    public WinningStatistics() {
-        initCounts();
-    }
-
-    public void accumulate(List<Lotto> tickets, WinningNumbers winningNumbers) {
-        tickets.forEach(ticket -> accumulateOne(ticket, winningNumbers));
+    public void accumulate(Rank rank) {
+        counts.merge(rank, 1, Integer::sum);
     }
 
     public int countOf(Rank rank) {
@@ -20,26 +15,14 @@ public final class WinningStatistics {
     }
 
     public long totalPrize() {
-        return counts.entrySet().stream()
-            .mapToLong(e -> e.getKey().prize() * e.getValue())
-            .sum();
+        long sum = 0L;
+        for (Map.Entry<Rank, Integer> e : counts.entrySet()) {
+            sum += (long) e.getKey().prize() * e.getValue();
+        }
+        return sum;
     }
 
     public double profitRate(Money purchase) {
         return (double) totalPrize() / purchase.amount();
-    }
-
-    private void initCounts() {
-        for (Rank rank : Rank.winningRanks()) {
-            counts.put(rank, 0);
-        }
-    }
-
-    private void accumulateOne(Lotto ticket, WinningNumbers winningNumbers) {
-        Rank rank = winningNumbers.match(ticket);
-        if (!rank.isWinning()) {
-            return;
-        }
-        counts.put(rank, countOf(rank) + 1);
     }
 }

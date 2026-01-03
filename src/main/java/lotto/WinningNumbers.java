@@ -1,36 +1,39 @@
 package lotto;
 
-import java.util.List;
+
+import lotto.MatchResult;
 
 public class WinningNumbers {
     private final Lotto winning;
-    private final BonusNumber bonus;
+    private final LottoNumber bonus;
 
-    public WinningNumbers(Lotto winning, BonusNumber bonus) {
+    public WinningNumbers(Lotto winning, int bonus) {
+        this(winning, LottoNumber.from(bonus));
+    }
+
+    public WinningNumbers(Lotto winning, LottoNumber bonus) {
         validateBonusNotDuplicated(winning, bonus);
         this.winning = winning;
         this.bonus = bonus;
     }
 
-    public WinningNumbers(Lotto winning, int bonus) {
-        this(winning, BonusNumber.of(bonus));
+    private void validateBonusNotDuplicated(Lotto winning, LottoNumber bonus) {
+        if (winning.contains(bonus)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다. bonus=" + bonus.value());
+        }
     }
 
     public Rank match(Lotto ticket) {
         int matchCount = ticket.matchCount(winning);
-        boolean bonusMatched = ticket.contains(bonus.value());
-        return Rank.of(matchCount, bonusMatched);
+        boolean bonusMatched = ticket.contains(bonus);
+        return Rank.of(new MatchResult(matchCount, bonusMatched));
     }
 
-    public WinningStatistics match(List<Lotto> tickets) {
+    public WinningStatistics match(Lottos tickets) {
         WinningStatistics stats = new WinningStatistics();
-        stats.accumulate(tickets, this);
-        return stats;
-    }
-
-    private void validateBonusNotDuplicated(Lotto winning, BonusNumber bonus) {
-        if (winning.contains(bonus.value())) {
-            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없다.");
+        for (Lotto ticket : tickets.values()) {
+            stats.accumulate(match(ticket));
         }
+        return stats;
     }
 }

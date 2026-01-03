@@ -16,8 +16,8 @@ public class LottoMachineTest {
         ));
 
         LottoMachine machine = new LottoMachine(generator);
-        List<Lotto> lottos = machine.issue(Money.of(2000));
+        Lottos lottos = machine.issue(Money.of(2000));
 
-        assertThat(lottos).hasSize(2);
+        assertThat(lottos.size()).isEqualTo(2);
     }
 }
