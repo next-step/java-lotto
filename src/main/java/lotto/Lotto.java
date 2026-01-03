@@ -34,9 +34,10 @@ public record Lotto(Set<LottoNumber> numbers) {
                 .count();
     }
 
-    public LottoRank rank(Lotto winningLotto) {
-        int matchCount = matchCount(winningLotto);
-        return LottoRank.fromMatchCount(matchCount);
+    public LottoRank rank(WinningLotto winningLotto) {
+        int matchCount = matchCount(winningLotto.lotto());
+        boolean bonusMatch = winningLotto.matchBonusNumber(this);
+        return LottoRank.valueOf(matchCount, bonusMatch);
     }
 
     private static Set<LottoNumber> toSet(int... numbers) {

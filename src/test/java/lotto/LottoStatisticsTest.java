@@ -11,9 +11,13 @@ public class LottoStatisticsTest {
         Lottos lottos = new Lottos(
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(1, 2, 3, 4, 5, 7),
-                new Lotto(1, 2, 3, 4, 8, 9)
+                new Lotto(1, 2, 3, 4, 5, 8)
         );
-        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        WinningLotto winningLotto = new WinningLotto(
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new LottoNumber(7)
+        );
+
         LottoStatistics statistics = LottoStatistics.calculateStatistics(lottos, winningLotto);
 
         assertThat(statistics.getCount(LottoRank.FIRST)).isEqualTo(1);

@@ -13,14 +13,16 @@ public class LottoMain {
     public static void main(String[] args) {
         // 로또 구매
         BigDecimal amount = InputView.inputPurchaseAmount();
-        Lottos lotto = generateLotto(amount);
-        OutputView.printLotto(lotto);
+        Lottos purchasedLottos = generateLotto(amount);
+        OutputView.printLotto(purchasedLottos);
 
         // 로또 당첨 번호 입력
-        Lotto winningLotto = InputView.inputWinningNumbers();
+        Lotto winningNumbers = InputView.inputWinningNumbers();
+        LottoNumber bonusNumber = InputView.inputBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         // 당첨 통계 및 수익률 출력
-        LottoStatistics statistics = calculateStatistics(lotto, winningLotto);
+        LottoStatistics statistics = calculateStatistics(purchasedLottos, winningLotto);
         OutputView.printWinningStatistics(statistics);
         OutputView.printYield(statistics.calculateYield(amount));
     }

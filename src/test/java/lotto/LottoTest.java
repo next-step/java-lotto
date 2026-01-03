@@ -31,4 +31,16 @@ public class LottoTest {
 
         assertThat(numbers).containsExactly(1, 2, 3, 4, 5, 6);
     }
+
+    @Test
+    void 로또_등수를_계산할_수_있다() {
+        WinningLotto winningLotto = new WinningLotto(
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new LottoNumber(7)
+        );
+
+        assertThat(new Lotto(1, 2, 3, 4, 5, 6).rank(winningLotto)).isEqualTo(LottoRank.FIRST);
+        assertThat(new Lotto(1, 2, 3, 4, 5, 7).rank(winningLotto)).isEqualTo(LottoRank.SECOND);
+        assertThat(new Lotto(1, 2, 3, 4, 5, 8).rank(winningLotto)).isEqualTo(LottoRank.THIRD);
+    }
 }
