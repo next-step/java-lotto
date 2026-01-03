@@ -17,7 +17,7 @@ public class LottoRankTest {
         assertThat(LottoRank.fromMatchCount(5)).isEqualTo(SECOND);
         assertThat(LottoRank.fromMatchCount(4)).isEqualTo(THIRD);
         assertThat(LottoRank.fromMatchCount(3)).isEqualTo(FOURTH);
-        assertThat(LottoRank.fromMatchCount(2)).isEqualTo(NO_RANK);
+        assertThat(LottoRank.fromMatchCount(2)).isEqualTo(UNRANK);
     }
     
     @Test

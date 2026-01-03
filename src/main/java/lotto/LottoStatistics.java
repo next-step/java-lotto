@@ -19,8 +19,7 @@ public record LottoStatistics(Map<LottoRank, Integer> statistics) {
         Map<LottoRank, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottoList.lottos()) {
-            int matchCount = lotto.matchCount(winningLotto);
-            LottoRank rank = LottoRank.fromMatchCount(matchCount);
+            LottoRank rank = lotto.rank(winningLotto);
             if (rank != null) {
                 result.put(rank, result.getOrDefault(rank, 0) + 1);
             }

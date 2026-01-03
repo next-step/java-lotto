@@ -34,6 +34,11 @@ public record Lotto(Set<LottoNumber> numbers) {
                 .count();
     }
 
+    public LottoRank rank(Lotto winningLotto) {
+        int matchCount = matchCount(winningLotto);
+        return LottoRank.fromMatchCount(matchCount);
+    }
+
     private static Set<LottoNumber> toSet(int... numbers) {
         return Arrays.stream(numbers)
                 .boxed()
