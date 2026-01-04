@@ -34,6 +34,10 @@ public record Lotto(Set<LottoNumber> numbers) {
                 .count();
     }
 
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
     public LottoRank rank(WinningLotto winningLotto) {
         int matchCount = matchCount(winningLotto.lotto());
         boolean bonusMatch = winningLotto.matchBonusNumber(this);
@@ -44,7 +48,7 @@ public record Lotto(Set<LottoNumber> numbers) {
         return Arrays.stream(numbers)
                 .boxed()
                 .sorted()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 

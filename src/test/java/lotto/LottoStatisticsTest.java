@@ -15,7 +15,7 @@ public class LottoStatisticsTest {
         );
         WinningLotto winningLotto = new WinningLotto(
                 new Lotto(1, 2, 3, 4, 5, 6),
-                new LottoNumber(7)
+                LottoNumber.valueOf(7)
         );
 
         LottoStatistics statistics = LottoStatistics.calculateStatistics(lottos, winningLotto);
