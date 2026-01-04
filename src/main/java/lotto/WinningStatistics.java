@@ -16,8 +16,13 @@ public final class WinningStatistics {
         }
     }
 
-    public void add(Rank rank) {
+    public void accumulate(Rank rank) {
         counts.put(rank, counts.get(rank) + 1);
+    }
+
+    // (선택) 혹시 기존 코드가 add를 쓰고 있다면 호환용으로 남겨도 됨
+    public void add(Rank rank) {
+        accumulate(rank);
     }
 
     public int countOf(Rank rank) {

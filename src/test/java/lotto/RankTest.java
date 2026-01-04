@@ -37,8 +37,8 @@ public class RankTest {
     }
 
     @Test
-    @DisplayName("2개 이하 일치이면 MISS이다")
-    void missRank() {
-        assertThat(Rank.of(new MatchResult(2, false))).isEqualTo(Rank.MISS);
+    @DisplayName("2개 이하 일치이면 NONE이다")
+    void noneRank() {
+        assertThat(Rank.of(new MatchResult(2, false))).isEqualTo(Rank.NONE);
     }
 }

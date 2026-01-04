@@ -13,6 +13,10 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
+    public WinningNumbers(Lotto winningLotto, int bonusNumber) {
+        this(winningLotto, LottoNumber.from(bonusNumber));
+    }
+
     private void validateNoDuplicate(Lotto lotto, LottoNumber bonus) {
         if (lotto.contains(bonus)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없다.");
@@ -28,7 +32,7 @@ public class WinningNumbers {
     public WinningStatistics match(Lottos lottos) {
         WinningStatistics statistics = new WinningStatistics();
         for (Lotto lotto : lottos.values()) {
-            statistics.add(match(lotto));
+            statistics.accumulate(match(lotto));
         }
         return statistics;
     }
