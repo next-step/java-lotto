@@ -13,7 +13,7 @@ public class MatchResult {
         return matchCount;
     }
 
-    public boolean bonusMatched() {
+    public boolean isBonusMatched() {
         return bonusMatched;
     }
 }

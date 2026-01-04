@@ -14,12 +14,12 @@ public class Money {
         return new Money(amount);
     }
 
-    public int ticketCount() {
-        return amount / UNIT_PRICE;
-    }
-
     public int amount() {
         return amount;
+    }
+
+    public int ticketCount() {
+        return amount / UNIT_PRICE;
     }
 
     private void validateAmount(int amount) {

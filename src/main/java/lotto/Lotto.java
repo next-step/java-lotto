@@ -30,7 +30,7 @@ public class Lotto {
 
     private void validate(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 중복 없이 " + LOTTO_SIZE + "개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
 

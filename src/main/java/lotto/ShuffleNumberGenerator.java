@@ -6,11 +6,15 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class ShuffleNumberGenerator implements LottoNumberGenerator{
+    private static final int LOTTO_SIZE = 6;
+
     @Override
     public List<Integer> generate() {
-        List<Integer> numbers = IntStream.rangeClosed(1, 45)
-            .collect(ArrayList::new, List::add, List::addAll);
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            numbers.add(i);
+        }
         Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
+        return numbers.subList(0, LOTTO_SIZE);
     }
 }
