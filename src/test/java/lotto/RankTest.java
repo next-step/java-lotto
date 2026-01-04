@@ -1,31 +1,44 @@
 package lotto;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class RankTest {
     @Test
-    @DisplayName("일치 개수로 등수를 찾는다 (6개=1등, 5개=3등, 4개=4등, 3개=5등)")
-    void rankOfMatchCount() {
-        assertThat(Rank.of(6)).isEqualTo(Rank.FIRST);
-        assertThat(Rank.of(5)).isEqualTo(Rank.THIRD);
-        assertThat(Rank.of(4)).isEqualTo(Rank.FOURTH);
-        assertThat(Rank.of(3)).isEqualTo(Rank.FIFTH);
+    @DisplayName("6개 일치이면 1등이다")
+    void firstRank() {
+        assertThat(Rank.of(new MatchResult(6, false))).isEqualTo(Rank.FIRST);
     }
 
     @Test
-    @DisplayName("당첨이 아닌 개수는 MISS로 반환한다")
-    void nonWinningIsMiss() {
-        assertThat(Rank.of(2)).isEqualTo(Rank.MISS);
-        assertThat(Rank.of(0)).isEqualTo(Rank.MISS);
+    @DisplayName("5개 일치 + 보너스 일치이면 2등이다")
+    void secondRank() {
+        assertThat(Rank.of(new MatchResult(5, true))).isEqualTo(Rank.SECOND);
     }
 
     @Test
-    @DisplayName("winningRanks는 MISS를 제외한 당첨 등수만 반환한다")
-    void winningRanksExcludesMiss() {
-        assertThat(Rank.winningRanks()).doesNotContain(Rank.MISS);
+    @DisplayName("5개 일치 + 보너스 불일치이면 3등이다")
+    void thirdRank() {
+        assertThat(Rank.of(new MatchResult(5, false))).isEqualTo(Rank.THIRD);
+    }
+
+    @Test
+    @DisplayName("4개 일치이면 4등이다")
+    void fourthRank() {
+        assertThat(Rank.of(new MatchResult(4, false))).isEqualTo(Rank.FOURTH);
+    }
+
+    @Test
+    @DisplayName("3개 일치이면 5등이다")
+    void fifthRank() {
+        assertThat(Rank.of(new MatchResult(3, false))).isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
+    @DisplayName("2개 이하 일치이면 MISS이다")
+    void missRank() {
+        assertThat(Rank.of(new MatchResult(2, false))).isEqualTo(Rank.MISS);
     }
 }

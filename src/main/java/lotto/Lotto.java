@@ -1,66 +1,55 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int SIZE = 6;
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    private static final int LOTTO_SIZE = 6;
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validateSize(numbers);
-        validateRange(numbers);
-        validateUnique(numbers);
+        this(toLottoNumbers(numbers));
+    }
+
+    private Lotto(Set<LottoNumber> numbers) {
+        validate(numbers);
         this.numbers = Set.copyOf(numbers);
     }
 
-    public Lotto(int... numbers) {
-        this(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
+    private static Set<LottoNumber> toLottoNumbers(List<Integer> numbers) {
+        Set<LottoNumber> result = new HashSet<>();
+        for (int n : numbers) {
+            result.add(LottoNumber.from(n));
+        }
+        return result;
+    }
+
+    private void validate(Set<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 중복 없이 " + LOTTO_SIZE + "개여야 합니다.");
+        }
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    public int matchCount(Lotto other) {
+        int count = 0;
+        for (LottoNumber n : numbers) {
+            if (other.contains(n)) count++;
+        }
+        return count;
     }
 
     public List<Integer> numbers() {
         return numbers.stream()
+            .map(LottoNumber::value)
             .sorted()
             .collect(Collectors.toList());
-    }
-
-    public boolean contains(int number) {
-        return numbers.contains(number);
-    }
-
-    public int matchCount(Lotto winning) {
-        return (int) numbers.stream()
-            .filter(winning::contains)
-            .count();
-    }
-
-    private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 한다.");
-        }
-    }
-
-    private void validateRange(List<Integer> numbers) {
-        if (numbers.stream().anyMatch(this::isOutOfRange)) {
-            throw new IllegalArgumentException("로또 번호는 1~45 범위여야 한다.");
-        }
-    }
-
-    private boolean isOutOfRange(int number) {
-        return number < MIN || number > MAX;
-    }
-
-    private void validateUnique(List<Integer> numbers) {
-        if (new HashSet<>(numbers).size() != SIZE) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없다.");
-        }
     }
 }

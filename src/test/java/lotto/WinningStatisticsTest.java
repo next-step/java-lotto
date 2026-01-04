@@ -7,36 +7,37 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinningStatisticsTest {
+
     @Test
-    @DisplayName("로또 결과를 등수별로 집계한다")
-    void accumulateStatistics() {
-        Lotto winning = new Lotto(1, 2, 3, 4, 5, 6);
-        List<Lotto> lottos = List.of(
-            new Lotto(1, 2, 3, 10, 11, 12),
-            new Lotto(1, 2, 3, 4, 11, 12)
-        );
+    @DisplayName("총 당첨금은 등수별 상금 * 당첨횟수의 합이다")
+    void totalPrize() {
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(List.of(1,2,3,4,5,6)), 7);
 
-        WinningStatistics stats = new WinningStatistics();
-        stats.accumulate(lottos, winning);
+        Lottos tickets = new Lottos(List.of(
+            new Lotto(List.of(1,2,3,4,5,7)),   // SECOND
+            new Lotto(List.of(1,2,3,4,5,10))   // THIRD
+        ));
 
-        assertThat(stats.countOf(Rank.FIFTH)).isEqualTo(1);
-        assertThat(stats.countOf(Rank.FOURTH)).isEqualTo(1);
-        assertThat(stats.countOf(Rank.THIRD)).isEqualTo(0);
-        assertThat(stats.countOf(Rank.FIRST)).isEqualTo(0);
+        WinningStatistics stats = winningNumbers.match(tickets);
+
+        long expected = (long) Rank.SECOND.prize() + (long) Rank.THIRD.prize();
+        assertThat(stats.totalPrize()).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("총 당첨금은 등수별 상금의 합이다")
-    void totalPrizeCalculation() {
-        Lotto winning = new Lotto(1, 2, 3, 4, 5, 6);
-        List<Lotto> lottos = List.of(
-            new Lotto(1, 2, 3, 10, 11, 12),
-            new Lotto(1, 2, 3, 4, 11, 12)
-        );
+    @DisplayName("수익률은 총 당첨금을 구입 금액으로 나눈 값이다")
+    void profitRate() {
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(List.of(1,2,3,4,5,6)), 7);
 
-        WinningStatistics stats = new WinningStatistics();
-        stats.accumulate(lottos, winning);
+        Lottos tickets = new Lottos(List.of(
+            new Lotto(List.of(1,2,3,4,5,7)) // SECOND
+        ));
 
-        assertThat(stats.totalPrize()).isEqualTo(55_000);
+        WinningStatistics stats = winningNumbers.match(tickets);
+
+        Money purchase = Money.of(10_000);
+        double expected = (double) Rank.SECOND.prize() / purchase.amount();
+
+        assertThat(stats.profitRate(purchase)).isEqualTo(expected);
     }
 }

@@ -1,45 +1,28 @@
 package lotto;
 
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
-public class WinningStatistics {
+public final class WinningStatistics {
     private final Map<Rank, Integer> counts = new EnumMap<>(Rank.class);
 
-    public WinningStatistics() {
-        initCounts();
-    }
-
-    public void accumulate(List<Lotto> lottos, Lotto winning) {
-        lottos.forEach(lotto -> accumulateOne(lotto, winning));
+    public void accumulate(Rank rank) {
+        counts.merge(rank, 1, Integer::sum);
     }
 
     public int countOf(Rank rank) {
-        return counts.get(rank);
+        return counts.getOrDefault(rank, 0);
     }
 
     public long totalPrize() {
-        return counts.entrySet().stream()
-            .mapToLong(e -> e.getKey().prize() * e.getValue())
-            .sum();
+        long sum = 0L;
+        for (Map.Entry<Rank, Integer> e : counts.entrySet()) {
+            sum += (long) e.getKey().prize() * e.getValue();
+        }
+        return sum;
     }
 
     public double profitRate(Money purchase) {
         return (double) totalPrize() / purchase.amount();
-    }
-
-    private void initCounts() {
-        for (Rank rank : Rank.winningRanks()) {
-            counts.put(rank, 0);
-        }
-    }
-
-    private void accumulateOne(Lotto lotto, Lotto winning) {
-        Rank rank = Rank.of(lotto.matchCount(winning));
-        if (!rank.isWinning()) {
-            return;
-        }
-        counts.put(rank, counts.get(rank) + 1);
     }
 }

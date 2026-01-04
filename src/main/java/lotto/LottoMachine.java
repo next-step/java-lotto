@@ -10,11 +10,11 @@ public class LottoMachine {
         this.generator = generator;
     }
 
-    public List<Lotto> issue(Money money) {
+    public Lottos issue(Money money) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < money.ticketCount(); i++) {
             lottos.add(new Lotto(generator.generate()));
         }
-        return List.copyOf(lottos);
+        return new Lottos(lottos);
     }
 }
