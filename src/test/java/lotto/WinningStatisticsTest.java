@@ -9,51 +9,35 @@ import org.junit.jupiter.api.Test;
 public class WinningStatisticsTest {
 
     @Test
-    @DisplayName("WinningStatistics는 Rank를 누적해 등수별 당첨 횟수를 계산한다")
-    void accumulateCounts() {
-        WinningStatistics stats = new WinningStatistics();
-
-        stats.accumulate(Rank.SECOND);
-        stats.accumulate(Rank.SECOND);
-        stats.accumulate(Rank.THIRD);
-
-        assertThat(stats.countOf(Rank.SECOND)).isEqualTo(2);
-        assertThat(stats.countOf(Rank.THIRD)).isEqualTo(1);
-        assertThat(stats.countOf(Rank.FIRST)).isEqualTo(0);
-    }
-
-    @Test
     @DisplayName("총 당첨금은 등수별 상금 * 당첨횟수의 합이다")
     void totalPrize() {
-        WinningStatistics stats = new WinningStatistics();
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(List.of(1,2,3,4,5,6)), 7);
 
-        stats.accumulate(Rank.SECOND);
-        stats.accumulate(Rank.THIRD);
-        stats.accumulate(Rank.THIRD);
+        Lottos tickets = new Lottos(List.of(
+            new Lotto(List.of(1,2,3,4,5,7)),   // SECOND
+            new Lotto(List.of(1,2,3,4,5,10))   // THIRD
+        ));
 
-        long expected = (long) Rank.SECOND.prize()
-            + (long) Rank.THIRD.prize() * 2;
+        WinningStatistics stats = winningNumbers.match(tickets);
 
+        long expected = (long) Rank.SECOND.prize() + (long) Rank.THIRD.prize();
         assertThat(stats.totalPrize()).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("수익률은 총 당첨금 / 구입 금액이다")
+    @DisplayName("수익률은 총 당첨금을 구입 금액으로 나눈 값이다")
     void profitRate() {
-        WinningStatistics stats = new WinningStatistics();
-        stats.accumulate(Rank.SECOND);
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(List.of(1,2,3,4,5,6)), 7);
+
+        Lottos tickets = new Lottos(List.of(
+            new Lotto(List.of(1,2,3,4,5,7)) // SECOND
+        ));
+
+        WinningStatistics stats = winningNumbers.match(tickets);
 
         Money purchase = Money.of(10_000);
         double expected = (double) Rank.SECOND.prize() / purchase.amount();
 
         assertThat(stats.profitRate(purchase)).isEqualTo(expected);
-    }
-
-    @Test
-    @DisplayName("아무것도 누적하지 않으면 총 당첨금은 0이다")
-    void totalPrizeIsZeroWhenEmpty() {
-        WinningStatistics stats = new WinningStatistics();
-
-        assertThat(stats.totalPrize()).isEqualTo(0L);
     }
 }

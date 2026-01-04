@@ -1,34 +1,43 @@
 package lotto;
 
 
-import java.util.Arrays;
 import lotto.MatchResult;
 
 public enum Rank {
-    FIRST(6, false, 2_000_000_000, "6개 일치 (2000000000원)"),
-    SECOND(5, true, 30_000_000, "5개 일치, 보너스 볼 일치(30000000원)"),
-    THIRD(5, false, 1_500_000, "5개 일치 (1500000원)"),
-    FOURTH(4, false, 50_000, "4개 일치 (50000원)"),
-    FIFTH(3, false, 5_000, "3개 일치 (5000원)"),
-    NONE(0, false, 0, "낙첨");
+    FIRST(6, false, 2_000_000_000, "6개 일치", 5),
+    SECOND(5, true, 30_000_000, "5개 일치, 보너스 볼 일치", 4),
+    THIRD(5, false, 1_500_000, "5개 일치", 3),
+    FOURTH(4, false, 50_000, "4개 일치", 2),
+    FIFTH(3, false, 5_000, "3개 일치", 1),
+    MISS(0, false, 0, "", 0);
 
     private final int matchCount;
-    private final boolean bonusRequired;
+    private final boolean bonusNeeded;
     private final int prize;
-    private final String label;
+    private final String description;
+    private final int displayOrder;
 
-    Rank(int matchCount, boolean bonusRequired, int prize, String label) {
+    Rank(int matchCount, boolean bonusNeeded, int prize, String description, int displayOrder) {
         this.matchCount = matchCount;
-        this.bonusRequired = bonusRequired;
+        this.bonusNeeded = bonusNeeded;
         this.prize = prize;
-        this.label = label;
+        this.description = description;
+        this.displayOrder = displayOrder;
     }
 
     public static Rank of(MatchResult result) {
-        return Arrays.stream(values())
-            .filter(rank -> rank.isMatch(result))
-            .findFirst()
-            .orElse(NONE);
+        int matchCount = result.matchCount();
+        boolean bonusMatched = result.bonusMatched();
+
+        if (matchCount == 6) return FIRST;
+        if (matchCount == 5) return bonusMatched ? SECOND : THIRD;
+        if (matchCount == 4) return FOURTH;
+        if (matchCount == 3) return FIFTH;
+        return MISS;
+    }
+
+    public int prize() {
+        return prize;
     }
 
     private boolean isMatch(MatchResult result) {
@@ -41,15 +50,11 @@ public enum Rank {
         return result.isBonusMatched();
     }
 
-    public int prize() {
-        return prize;
+    public int displayOrder() {
+        return displayOrder;
     }
 
-    public int matchCount() {
-        return matchCount;
-    }
-
-    public String label() {
-        return label;
+    public static Rank[] winningRanks() {
+        return new Rank[]{FIFTH, FOURTH, THIRD, SECOND, FIRST};
     }
 }

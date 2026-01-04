@@ -12,17 +12,12 @@ public class Lotto {
     private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validateInputSize(numbers);
-        Set<LottoNumber> converted = toLottoNumbers(numbers);
-        validateNoDuplicate(numbers, converted);
-        validateSize(converted);
-        this.numbers = Set.copyOf(converted);
+        this(toLottoNumbers(numbers));
     }
 
-    private void validateInputSize(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
-        }
+    private Lotto(Set<LottoNumber> numbers) {
+        validate(numbers);
+        this.numbers = Set.copyOf(numbers);
     }
 
     private static Set<LottoNumber> toLottoNumbers(List<Integer> numbers) {
@@ -33,15 +28,9 @@ public class Lotto {
         return result;
     }
 
-    private void validateNoDuplicate(List<Integer> original, Set<LottoNumber> converted) {
-        if (original.size() != converted.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
-    }
-
-    private void validateSize(Set<LottoNumber> numbers) {
+    private void validate(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 중복 없이 " + LOTTO_SIZE + "개여야 합니다.");
         }
     }
 
@@ -52,9 +41,7 @@ public class Lotto {
     public int matchCount(Lotto other) {
         int count = 0;
         for (LottoNumber n : numbers) {
-            if (other.contains(n)) {
-                count++;
-            }
+            if (other.contains(n)) count++;
         }
         return count;
     }
