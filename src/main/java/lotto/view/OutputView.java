@@ -24,6 +24,11 @@ public class OutputView {
                 continue;
             }
             int count = statistics.getCount(rank);
+
+            if (rank == LottoRank.SECOND) {
+                System.out.println("5개 일치, 보너스 볼 일치(" + rank.prizeMoney() + "원) - " + count + "개");
+                continue;
+            }
             System.out.println(rank.matchCount() + "개 일치 (" + rank.prizeMoney() + "원) - " + count + "개");
         }
     }

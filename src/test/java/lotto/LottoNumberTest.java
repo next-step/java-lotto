@@ -10,7 +10,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46, 100} )
     void 로또_번호가_1부터_45_사이의_숫자가_아닌_경우_예외를_발생시킨다(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.valueOf(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -15,13 +15,12 @@ public record LottoStatistics(Map<LottoRank, Integer> statistics) {
         return statistics.getOrDefault(rank, 0);
     }
 
-    static LottoStatistics calculateStatistics(Lottos lottoList, Lotto winningLotto) {
+    static LottoStatistics calculateStatistics(Lottos lottoList, WinningLotto winningLotto) {
         Map<LottoRank, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottoList.lottos()) {
-            int matchCount = lotto.matchCount(winningLotto);
-            LottoRank rank = LottoRank.fromMatchCount(matchCount);
-            if (rank != null) {
+            LottoRank rank = lotto.rank(winningLotto);
+            if (!rank.isNoRank()) {
                 result.put(rank, result.getOrDefault(rank, 0) + 1);
             }
         }

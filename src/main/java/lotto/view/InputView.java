@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.Lotto;
+import lotto.LottoNumber;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -27,5 +28,13 @@ public class InputView {
             numbers.add(Integer.parseInt(numberString.trim()));
         }
         return new Lotto(numbers);
+    }
+
+    public static LottoNumber inputBonusNumber() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        int bonusNumber = scanner.nextInt();
+        return LottoNumber.valueOf(bonusNumber);
     }
 }

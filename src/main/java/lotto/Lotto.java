@@ -34,11 +34,21 @@ public record Lotto(Set<LottoNumber> numbers) {
                 .count();
     }
 
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    public LottoRank rank(WinningLotto winningLotto) {
+        int matchCount = matchCount(winningLotto.lotto());
+        boolean bonusMatch = winningLotto.matchBonusNumber(this);
+        return LottoRank.valueOf(matchCount, bonusMatch);
+    }
+
     private static Set<LottoNumber> toSet(int... numbers) {
         return Arrays.stream(numbers)
                 .boxed()
                 .sorted()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
