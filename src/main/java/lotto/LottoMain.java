@@ -1,11 +1,13 @@
 package lotto;
 
+import lotto.domain.*;
+import lotto.service.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.math.BigDecimal;
 
-import static lotto.LottoStatistics.calculateStatistics;
+import static lotto.domain.LottoStatistics.calculateStatistics;
 
 public class LottoMain {
 

@@ -1,4 +1,9 @@
-package lotto;
+package lotto.service;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoPurchase;
+import lotto.domain.Lottos;
 
 import java.math.BigDecimal;
 import java.util.*;
