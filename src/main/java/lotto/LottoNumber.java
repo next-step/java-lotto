@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class LottoNumber {
     public static final int MIN_NUMBER = 1;
@@ -22,11 +23,8 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(int value) {
-        LottoNumber number = cache.get(value);
-        if (number == null) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-        }
-        return number;
+        return Optional.ofNullable(cache.get(value))
+                .orElseThrow(() -> new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다."));
     }
 
     public int value() {

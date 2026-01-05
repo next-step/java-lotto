@@ -16,13 +16,14 @@ public class LottoGenerator {
         return new Lotto(list.subList(0, Lotto.LOTTO_COUNT));
     }
 
-    public static Lottos generateLotto(BigDecimal amount) {
+    public static Lottos generate(BigDecimal amount, Lottos manualLotto) {
         LottoPurchase purchase = new LottoPurchase(amount);
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lotto = new ArrayList<>(manualLotto.lottos()); // 수동 로또 추가
 
-        for (int i = 0; i < purchase.size(); i++) {
-            lottos.add(generate());
+        int autoCount = purchase.size() - manualLotto.size(); // 자동 로또 개수 계산
+        for (int i = 0; i < autoCount; i++) {
+            lotto.add(generate()); // 자동 로또 생성
         }
-        return new Lottos(lottos);
+        return new Lottos(lotto);
     }
 }

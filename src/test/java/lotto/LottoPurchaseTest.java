@@ -41,4 +41,23 @@ public class LottoPurchaseTest {
 
         assertThat(lottoPurchase.size()).isEqualTo(14);
     }
+
+    @Test
+    void 수동_구매_수가_총_구매_가능_수를_초과하면_예외를_발생시킨다() {
+        LottoPurchase lottoPurchase = new LottoPurchase(BigDecimal.valueOf(14000));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lottoPurchase.validateManualCount(15);
+        });
+    }
+    
+    @Test
+    void 수동_구매_수가_음수이면_예외를_발생시킨다() {
+        LottoPurchase lottoPurchase = new LottoPurchase(BigDecimal.valueOf(14000));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lottoPurchase.validateManualCount(-1);
+        });
+    }
+
 }

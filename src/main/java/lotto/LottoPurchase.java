@@ -18,4 +18,13 @@ public record LottoPurchase(BigDecimal amount) {
     public int size() {
         return amount.divide(BigDecimal.valueOf(1000), RoundingMode.DOWN).intValueExact();
     }
+
+    public void validateManualCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("수동 구매 수는 음수일 수 없습니다.");
+        }
+        if (count > size()) {
+            throw new IllegalArgumentException("수동 구매 수가 총 구매 가능 수를 초과할 수 없습니다.");
+        }
+    }
 }
