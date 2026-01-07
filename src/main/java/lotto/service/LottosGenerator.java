@@ -2,6 +2,6 @@ package lotto.service;
 
 import lotto.domain.Lottos;
 
-public interface LottoGenerator {
+public interface LottosGenerator {
     Lottos generate();
 }

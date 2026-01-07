@@ -1,8 +1,8 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.*;
-import lotto.service.LottoGenerator;
-import lotto.service.MixedLottosGenerator;
+import lotto.service.LottosBundleGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -19,8 +19,8 @@ public class LottoMain {
 
         // 로또 구매 및 수동 로또 입력
         int manualCount = InputView.inputManualCount();
-        Lottos manualLotto = InputView.inputManualLotto(manualCount);
-        MixedLottosGenerator generator = MixedLottosGenerator.of(manualLotto, purchase);
+        List<String> manualLotto = InputView.inputManualLotto(manualCount);
+        LottosBundleGenerator generator = new LottosBundleGenerator(purchase, manualLotto);
         Lottos lottos = generator.generate();
 
         OutputView.printLotto(lottos, manualCount);

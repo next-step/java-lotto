@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoLottosGenerator implements LottoGenerator {
+public class AutoLottosGenerator implements LottosGenerator {
 
     private final int count;
 

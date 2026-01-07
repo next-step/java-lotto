@@ -2,7 +2,7 @@ package lotto.service;
 
 import lotto.domain.Lottos;
 
-public class ManualLottosGenerator implements LottoGenerator {
+public class ManualLottosGenerator implements LottosGenerator {
     private final Lottos manualLottos;
 
     public ManualLottosGenerator(Lottos manualLottos) {

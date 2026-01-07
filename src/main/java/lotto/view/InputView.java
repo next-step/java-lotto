@@ -32,15 +32,14 @@ public class InputView {
                 () -> Integer.parseInt(scanner.nextLine()));
     }
 
-    public static Lottos inputManualLotto(int count) {
+    public static List<String> inputManualLotto(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> lotto = new ArrayList<>();
+        List<String> lottoTexts = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-
-            lotto.add(inputWithRetry("", "올바른 로또 번호를 입력해 주세요.",
-                    () -> parseLotto(scanner.nextLine())));
+            String lottoText = scanner.nextLine();
+            lottoTexts.add(lottoText);
         }
-        return new Lottos(lotto);
+        return lottoTexts;
     }
 
     private static Lotto parseLotto(String input) {
