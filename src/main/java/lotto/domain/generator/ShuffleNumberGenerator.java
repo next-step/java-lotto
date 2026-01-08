@@ -1,11 +1,10 @@
-package lotto;
+package lotto.domain.generator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
-public class ShuffleNumberGenerator implements LottoNumberGenerator{
+public class ShuffleNumberGenerator implements LottoNumberGenerator {
     private static final int LOTTO_SIZE = 6;
 
     @Override

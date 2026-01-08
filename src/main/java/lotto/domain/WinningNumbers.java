@@ -1,7 +1,5 @@
-package lotto;
+package lotto.domain;
 
-
-import lotto.MatchResult;
 
 public class WinningNumbers {
     private final Lotto winning;
