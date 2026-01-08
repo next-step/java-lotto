@@ -1,8 +1,7 @@
-package lotto;
+package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public record LottoStatistics(Map<LottoRank, Integer> statistics) {
@@ -15,7 +14,7 @@ public record LottoStatistics(Map<LottoRank, Integer> statistics) {
         return statistics.getOrDefault(rank, 0);
     }
 
-    static LottoStatistics calculateStatistics(Lottos lottoList, WinningLotto winningLotto) {
+    public static LottoStatistics calculateStatistics(Lottos lottoList, WinningLotto winningLotto) {
         Map<LottoRank, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottoList.lottos()) {
@@ -34,7 +33,7 @@ public record LottoStatistics(Map<LottoRank, Integer> statistics) {
                 .sum();
     }
 
-    float calculateYield(BigDecimal purchaseAmount) {
+    public float calculateYield(BigDecimal purchaseAmount) {
         return (float) totalPrize() / purchaseAmount.intValue();
     }
 }

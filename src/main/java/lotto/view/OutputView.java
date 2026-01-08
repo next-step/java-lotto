@@ -1,13 +1,14 @@
 package lotto.view;
 
-import lotto.LottoRank;
-import lotto.LottoStatistics;
-import lotto.Lottos;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoStatistics;
+import lotto.domain.Lottos;
 
 public class OutputView {
 
-    public static void printLotto(Lottos lottoList) {
-        System.out.println(lottoList.size() + "개를 구매했습니다.");
+    public static void printLotto(Lottos lottoList, int manualCount) {
+        int autoCount = lottoList.size() - manualCount;
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
 
         for (var lotto : lottoList.lottos()) {
             System.out.println(lotto.toString());

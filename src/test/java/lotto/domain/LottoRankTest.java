@@ -1,12 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import static lotto.LottoRank.*;
+import static lotto.domain.LottoRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRankTest {
