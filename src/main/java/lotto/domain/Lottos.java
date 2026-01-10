@@ -1,8 +1,7 @@
-package lotto;
+package lotto.domain;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Lottos {
     private final List<Lotto> values;
@@ -17,5 +16,11 @@ public class Lottos {
 
     public int size() {
         return values.size();
+    }
+
+    public Lottos merge(Lottos other) {
+        List<Lotto> merged = new ArrayList<>(this.values);
+        merged.addAll(other.values);
+        return new Lottos(merged);
     }
 }

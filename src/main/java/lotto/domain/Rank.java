@@ -1,7 +1,5 @@
-package lotto;
+package lotto.domain;
 
-
-import lotto.MatchResult;
 
 public enum Rank {
     FIRST(6, false, 2_000_000_000, "6개 일치", 5),
@@ -50,5 +48,4 @@ public enum Rank {
 
     public static Rank[] winningRanks() {
         return new Rank[]{FIFTH, FOURTH, THIRD, SECOND, FIRST};
-    }
-}
+    }}

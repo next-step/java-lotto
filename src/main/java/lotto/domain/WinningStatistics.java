@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -22,7 +22,10 @@ public final class WinningStatistics {
         return sum;
     }
 
-    public double profitRate(Money purchase) {
-        return (double) totalPrize() / purchase.amount();
+    public double profitRate(Money money) {
+        if (money.amount() == 0) {
+            return 0.0;
+        }
+        return (totalPrize() * 100.0) / money.amount();
     }
 }
