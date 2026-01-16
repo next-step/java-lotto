@@ -13,7 +13,6 @@ public class Main {
         List<String> manualList = InputView.initManualList(manualCount);
 
         LottoPurchase lottoPurchase = new LottoPurchase(money, manualList);
-
         LottoGame lottoGame = new LottoGame(lottoPurchase);
         ResultView.printLottos(lottoGame);
 
