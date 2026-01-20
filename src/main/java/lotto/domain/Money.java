@@ -16,11 +16,14 @@ public class Money {
         }
     }
 
-    public int buyCount() {
-        return (int) (money / LOTTO_PRICE);
-    }
-
     public double getMoney() {
         return money;
+    }
+
+    public Money minus(int count) {
+        if ((count * LOTTO_PRICE) > getMoney()) {
+            throw new IllegalArgumentException();
+        }
+        return new Money((long) (getMoney() - (count * LOTTO_PRICE)));
     }
 }
