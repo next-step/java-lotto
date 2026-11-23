@@ -11,15 +11,19 @@ public class Lottos {
     }
 
     public Lottos(int amount) {
-        int size = amount / 1000;
+        this(create(amount));
+    }
 
+    private static List<Lotto> create(int amount) {
         List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < buyLotto(amount); i++) {
             lottos.add(new Lotto());
         }
+        return lottos;
+    }
 
-        lottoList = lottos;
+    private static int buyLotto(int amount) {
+        return amount / 1000;
     }
 
     public int size() {
