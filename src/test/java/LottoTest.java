@@ -1,3 +1,5 @@
+import domain.Lotto;
+import domain.WinningNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,37 +11,65 @@ public class LottoTest {
 
 
     @Test
-    void 로또_숫자가_1부터_45사이의_아닐경우_예외가_발생한다() {
-
-        List<Integer> numbers = List.of(1,2,3,4,5,46);
+    void 번호에_45_초과_숫자가_포함되면_예외가_발생한다() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 46);
         Assertions.assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 로또_숫자는_6개가_아닐_경우_예외가_발생한다() {
-        List<Integer> numbers = List.of(1,2,3,4,5,6,7);
+    void 번호에_1_미만의_숫자가_포함되면_예외가_발생한다() {
+        List<Integer> numbers = List.of(0, 2, 3, 4, 5, 6);
+        Assertions.assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 번호가_6개를_초과하면_예외가_발생한다() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
+        Assertions.assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 번호가_6개_미만이면_예외가_발생한다() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+        Assertions.assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 번호에_중복이_있으면_예외가_발생한다() {
+        List<Integer> numbers = List.of(1, 1, 2, 3, 4, 5);
         Assertions.assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
 
-
     @Test
-    void 로또는_6개의_숫자를_가져야_한다() {
-        List<Integer> numbers = List.of(1,2,3,4,5,6);
-        Lotto lotto = new Lotto(numbers);
-        assertThat(lotto.getNumbers()).hasSize(6);
+    void 받은_번호를_그대로_보관한다() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }
 
 
     @Test
-    void 자동_생성_로또는_1부터_45사이의_중복없는_6개_번호를_가진다() {
+    void 자동_생성_로또는_1부터_45사이의_중복없는_6개_번호를_오름차순으로_가진다() {
         Lotto lotto = new Lotto();
         assertThat(lotto.getNumbers())
                 .hasSize(6)
                 .doesNotHaveDuplicates()
-                .allMatch(n -> n >= 1 && n <= 45);
+                .allMatch(n -> n >= 1 && n <= 45)
+                .isSorted();
+    }
+
+
+    @Test
+    void 당첨_번호와_일치하는_개수를_반환한다() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(List.of(1, 2, 3, 10, 11, 12));
+
+        assertThat(lotto.match(winningNumber)).isEqualTo(3);
     }
 
 }
