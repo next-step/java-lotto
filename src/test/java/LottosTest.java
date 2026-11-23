@@ -9,4 +9,11 @@ public class LottosTest {
         Lottos lottos = new Lottos(14000);
         Assertions.assertThat(lottos.size()).isEqualTo(14);
     }
+
+
+
+    @Test
+    void test2() {
+
+    }
 }
