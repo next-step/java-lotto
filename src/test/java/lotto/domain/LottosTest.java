@@ -11,7 +11,7 @@ class LottosTest {
 
     @Test
     void 생성_방법을_전달받아_주어진_개수만큼_로또를_생성한다() {
-        Lottos lottos = Lottos.generate(14, FIXED_GENERATOR);
+        Lottos lottos = new Lottos(14, FIXED_GENERATOR);
 
         assertThat(lottos.getLottos())
                 .hasSize(14)
@@ -20,7 +20,7 @@ class LottosTest {
 
     @Test
     void 당첨_번호와_구입_금액을_입력받아_로또_결과를_반환한다() {
-        Lottos lottos = Lottos.generate(3, FIXED_GENERATOR);
+        Lottos lottos = new Lottos(3, FIXED_GENERATOR);
         WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 10, 11, 12)));
 
         LottoResult result = lottos.getResult(winningLotto, new PurchaseAmount(3000));
