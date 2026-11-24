@@ -2,7 +2,7 @@ package domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -11,7 +11,7 @@ public class LottoNumberTest {
 	@ParameterizedTest
 	@ValueSource(ints = {0, 46})
 	void 로또_숫자는_1부터_45이하이다(int number) {
-		Assertions.assertThatThrownBy(() -> new LottoNumber(number))
+		assertThatThrownBy(() -> new LottoNumber(number))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -20,5 +20,10 @@ public class LottoNumberTest {
 	void 로또_숫자는_1과_45를_허용한다(int number) {
 		LottoNumber lottoNumber = new LottoNumber(number);
 		assertThat(lottoNumber.getNumber()).isEqualTo(number);
+	}
+
+	@Test
+	void 같은_lottoNumber는_같은_객체다() {
+		assertThat(new LottoNumber(6)).isEqualTo(new LottoNumber(6));
 	}
 }
