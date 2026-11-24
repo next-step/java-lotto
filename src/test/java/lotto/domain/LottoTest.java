@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.List;
@@ -34,5 +35,12 @@ class LottoTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers));
+    }
+
+    @Test
+    void 숫자들을_오름차순으로_정렬해서_가진다() {
+        Lotto lotto = new Lotto(List.of(45, 3, 21, 8, 1, 30));
+
+        assertThat(lotto.getNumbers()).containsExactly(1, 3, 8, 21, 30, 45);
     }
 }
