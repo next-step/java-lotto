@@ -1,0 +1,38 @@
+package lotto.domain;
+
+import java.util.List;
+import java.util.Set;
+
+public class Lotto {
+
+    private static final int LOTTO_SIZE = 6;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+
+    public Lotto(List<Integer> numbers) {
+        validateSize(numbers);
+        validateRange(numbers);
+        validateDuplicate(numbers);
+    }
+
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("Lotto must have " + LOTTO_SIZE + " numbers.");
+        }
+    }
+
+    private void validateRange(List<Integer> numbers) {
+        boolean hasOutOfRange = numbers.stream()
+                .anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER);
+        if (hasOutOfRange) {
+            throw new IllegalArgumentException(
+                    "Lotto numbers must be between " + MIN_NUMBER + " and " + MAX_NUMBER + ".");
+        }
+    }
+
+    private void validateDuplicate(List<Integer> numbers) {
+        if (Set.copyOf(numbers).size() != numbers.size()) {
+            throw new IllegalArgumentException("Lotto numbers must not be duplicated.");
+        }
+    }
+}
