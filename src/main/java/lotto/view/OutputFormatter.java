@@ -1,7 +1,5 @@
 package lotto.view;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
@@ -26,9 +24,7 @@ public class OutputFormatter {
     }
 
     public static List<String> formatStatistics(LottoResult result) {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.MISS)
-                .sorted(Comparator.comparingInt(Rank::getMatchCount))
+        return Rank.winningRanks().stream()
                 .map(rank -> String.format(STATISTICS_FORMAT,
                         rank.getMatchCount(), rank.getPrize(), result.getCount(rank)))
                 .toList();

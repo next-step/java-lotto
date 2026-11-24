@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
     FIRST(6, 2_000_000_000L),
@@ -8,6 +9,8 @@ public enum Rank {
     THIRD(4, 50_000L),
     FOURTH(3, 5_000L),
     MISS(0, 0L);
+
+    private static final List<Rank> WINNING_RANKS_FROM_LOWEST = List.of(FOURTH, THIRD, SECOND, FIRST);
 
     private final int matchCount;
     private final long prize;
@@ -22,6 +25,13 @@ public enum Rank {
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    /**
+     * 낙첨을 제외한 당첨 등수 목록을 낮은 등수부터 반환한다.
+     */
+    public static List<Rank> winningRanks() {
+        return WINNING_RANKS_FROM_LOWEST;
     }
 
     public int getMatchCount() {

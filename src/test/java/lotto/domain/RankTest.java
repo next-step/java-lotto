@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -38,5 +39,10 @@ class RankTest {
 
         assertThat(rank).isEqualTo(Rank.MISS);
         assertThat(rank.getPrize()).isZero();
+    }
+
+    @Test
+    void 당첨_등수_목록을_낮은_등수부터_반환하고_낙첨은_포함하지_않는다() {
+        assertThat(Rank.winningRanks()).containsExactly(Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
     }
 }
