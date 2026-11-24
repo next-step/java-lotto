@@ -24,6 +24,12 @@ public class Lotto {
         return numbers;
     }
 
+    public int countMatches(Lotto other) {
+        return (int) numbers.stream()
+                .filter(other.numbers::contains)
+                .count();
+    }
+
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("Lotto must have " + LOTTO_SIZE + " numbers.");
