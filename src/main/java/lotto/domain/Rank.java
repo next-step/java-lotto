@@ -27,9 +27,6 @@ public enum Rank {
                 .orElse(MISS);
     }
 
-    /**
-     * 낙첨을 제외한 당첨 등수 목록을 낮은 등수부터 반환한다.
-     */
     public static List<Rank> winningRanks() {
         return WINNING_RANKS_FROM_LOWEST;
     }
