@@ -17,4 +17,16 @@ class LottoGameTest {
                 .hasSize(14)
                 .allSatisfy(lotto -> assertThat(lotto.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6));
     }
+
+    @Test
+    void 당첨_번호를_입력받아_로또_결과를_반환한다() {
+        LottoGenerator fixedGenerator = () -> new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoGame lottoGame = new LottoGame(new PurchaseAmount(3000), fixedGenerator);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 10, 11, 12)));
+
+        LottoResult result = lottoGame.getResult(winningLotto);
+
+        assertThat(result.getCount(Rank.FOURTH)).isEqualTo(3);
+        assertThat(result.getProfitRate()).isEqualTo(5.0);
+    }
 }
