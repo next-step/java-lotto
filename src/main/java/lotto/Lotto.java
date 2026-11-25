@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Lotto {
 
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+    private static final int NUMBERS_SIZE = 6;
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -27,13 +31,13 @@ public class Lotto {
     }
 
     private static void validateNumbersCount(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != NUMBERS_SIZE) {
             throw new RuntimeException("6개의 숫자만 생성 가능합니다.");
         }
     }
 
     private static void validateNumberRange(Integer number) {
-        if (number < 1 || number > 45) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new RuntimeException("1~45 사이 숫자만 가능합니다.");
         }
     }
