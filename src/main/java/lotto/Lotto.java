@@ -32,13 +32,13 @@ public class Lotto {
 
     private static void validateNumbersCount(List<Integer> numbers) {
         if (numbers.size() != NUMBERS_SIZE) {
-            throw new RuntimeException("6개의 숫자만 생성 가능합니다.");
+            throw new RuntimeException("로또 번호 개수가 올바르지 않습니다.");
         }
     }
 
     private static void validateNumberRange(Integer number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new RuntimeException("1~45 사이 숫자만 가능합니다.");
+            throw new RuntimeException("로또 번호 범위를 벗어났습니다.");
         }
     }
 
