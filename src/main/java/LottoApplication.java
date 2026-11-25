@@ -1,5 +1,5 @@
+import domain.Lotto;
 import domain.Lottos;
-import domain.WinningNumber;
 import domain.WinningStatistics;
 import view.InputView;
 import view.ResultView;
@@ -16,8 +16,8 @@ public class LottoApplication {
         ResultView.printLottos(lottos.getLottoList());
 
 
-        WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers());
-        WinningStatistics winningStatistics = new WinningStatistics(lottos.checkResult(winningNumber));
+        Lotto winningLotto = new Lotto(InputView.inputWinningNumbers());
+        WinningStatistics winningStatistics = new WinningStatistics(lottos.checkResult(winningLotto));
 
         ResultView.printStatistics(winningStatistics);
         ResultView.printProfitRate(winningStatistics.profitRate(amount));

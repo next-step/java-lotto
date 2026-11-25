@@ -1,29 +1,52 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    public static final int PRICE = 1000;
+    public static final int SIZE = 6;
+    private final List<LottoNumber> numbers;
 
-    public Lotto() {
-        this(createNumbers());
-    }
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
-        for (Integer number : numbers) {
-            validateRange(number);
-        }
+    public Lotto() {
+        this(create());
+    }
 
-        if (numbers.size() != 6) {
+    public Lotto(String numbers) {
+        this(parseNumbers(numbers));
+    }
+
+    public Lotto(int... values) {
+        this(toLottoNumbers(values));
+    }
+
+    private static List<LottoNumber> toLottoNumbers(int[] values) {
+        return Arrays.stream(values)
+                .mapToObj(LottoNumber::new)
+                .toList();
+    }
+    
+    private static List<LottoNumber> parseNumbers(String numbers) {
+        return Arrays.stream(numbers.split(",", -1))
+                .map(String::trim)
+                .map(LottoNumber::new)
+                .toList();
+    }
+
+    private void validate(List<LottoNumber> numbers) {
+        if (numbers.size() != SIZE) {
             throw new IllegalArgumentException("로또는 6개의 숫자가 생성되어야한다.");
         }
 
@@ -32,33 +55,46 @@ public class Lotto {
         }
     }
 
-    private void validateRange(Integer number) {
-        if (number <= 0 || number > 45) {
-            throw new IllegalArgumentException("1부터 45까지의 로또만 생성이 가능하다.");
-        }
-    }
-
-    private static List<Integer> createNumbers() {
-        List<Integer> candidates = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            candidates.add(i);
-        }
+    private static List<LottoNumber> create() {
+        List<Integer> candidates = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
+                .boxed()
+                .collect(Collectors.toList());
         Collections.shuffle(candidates);
-        List<Integer> numbers = new ArrayList<>(candidates.subList(0, 6));
-        Collections.sort(numbers);
-        return numbers;
-
+        return candidates.subList(0, SIZE).stream()
+                .sorted()
+                .map(LottoNumber::new)
+                .toList();
     }
 
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
 
-    public int match(WinningNumber winningNumber) {
+    public int match(Lotto other) {
         return (int) numbers.stream()
-                .filter(winningNumber::contains)
+                .filter(other::contains)
                 .count();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Lotto)) {
+            return false;
+        }
+        Lotto that = (Lotto) o;
+        return numbers.equals(that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return numbers.hashCode();
     }
 }
