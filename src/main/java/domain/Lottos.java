@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Lottos {
 
-
     private List<Lotto> lottoList;
 
     public Lottos(List<Lotto> lottoList) {
@@ -17,25 +16,25 @@ public class Lottos {
         this(create(amount));
     }
 
-    private static List<Lotto> create(int amount) {
-        validateAmount(amount);
+    public Lottos(PurchaseAmount amount) {
+        this(generate(amount.ticketCount()));
+    }
 
+
+    private static List<Lotto> create(int amount) {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
+        int ticketSize = purchaseAmount.ticketCount();
+        return generate(ticketSize);
+    }
+
+    private static List<Lotto> generate(int ticketSize) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < buyLotto(amount); i++) {
+        for (int i = 0; i < ticketSize; i++) {
             lottos.add(new Lotto());
         }
         return lottos;
     }
 
-    private static int buyLotto(int amount) {
-        return amount / 1000;
-    }
-
-    private static void validateAmount(int amount) {
-        if (amount < 1000) {
-            throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 한다.");
-        }
-    }
 
     public int size() {
         return lottoList.size();
@@ -46,10 +45,10 @@ public class Lottos {
     }
 
 
-    public List<Integer> checkResult(WinningNumber winningNumber) {
+    public List<Integer> checkResult(Lotto winningLotto) {
         List<Integer> matches = new ArrayList<>();
         for (Lotto lotto : lottoList) {
-            int matchCount = lotto.match(winningNumber);
+            int matchCount = lotto.match(winningLotto);
             matches.add(matchCount);
         }
         return matches;
