@@ -41,4 +41,14 @@ public class LottoTest {
 		))).isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@Test
+	void 로또번호는_오름차순으로_정렬된다() {
+		Lotto lotto = new Lotto(List.of(
+			new LottoNumber(6), new LottoNumber(5), new LottoNumber(4),
+			new LottoNumber(3), new LottoNumber(2), new LottoNumber(1)));
+
+		assertThat(lotto.getNumbers()).extracting(LottoNumber::getNumber)
+			.containsExactly(1, 2, 3, 4, 5, 6);
+	}
+
 }

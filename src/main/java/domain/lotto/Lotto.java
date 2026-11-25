@@ -1,5 +1,7 @@
 package domain.lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -17,7 +19,9 @@ public class Lotto {
 			throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다");
 		}
 
-		this.lottoNumbers = lottoNumbers;
+		List<LottoNumber> sorted = new ArrayList<>(lottoNumbers);
+		Collections.sort(sorted);
+		this.lottoNumbers = sorted;
 	}
 
 	public List<LottoNumber> getNumbers() {
