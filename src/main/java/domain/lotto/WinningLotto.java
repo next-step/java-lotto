@@ -18,4 +18,8 @@ public class WinningLotto {
 	public Lotto getLotto() {
 		return lotto;
 	}
+
+	public Rank rank(Lotto lotto) {
+		return Rank.from(this.lotto.countMatch(lotto));
+	}
 }
