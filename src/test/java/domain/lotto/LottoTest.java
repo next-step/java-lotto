@@ -51,4 +51,16 @@ public class LottoTest {
 			.containsExactly(1, 2, 3, 4, 5, 6);
 	}
 
+	@Test
+	void 맞은_로또번호의_개수를_반환한다() {
+		Lotto lotto = new Lotto(List.of(
+			new LottoNumber(6), new LottoNumber(5), new LottoNumber(4),
+			new LottoNumber(3), new LottoNumber(2), new LottoNumber(1)));
+
+		Lotto other = new Lotto(List.of(
+			new LottoNumber(9), new LottoNumber(8), new LottoNumber(7),
+			new LottoNumber(3), new LottoNumber(2), new LottoNumber(1)));
+
+		assertThat(lotto.countMatch(other)).isEqualTo(3);
+	}
 }
