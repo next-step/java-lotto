@@ -22,4 +22,12 @@ public class LottoResult {
 		}
 		return total;
 	}
+
+	public int countOf(Rank rank) {
+		int count = 0;
+		for (Rank r : ranks) {
+			count += r.matchRank(rank);
+		}
+		return count;
+	}
 }

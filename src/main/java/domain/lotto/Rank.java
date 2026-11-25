@@ -32,4 +32,15 @@ public enum Rank {
 	public static Rank from(int matchCount) {
 		return RANKS.getOrDefault(matchCount, MISS);
 	}
+
+	public int matchRank(Rank other) {
+		if (this == other) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public int getMatchCount() {
+		return matchCount;
+	}
 }

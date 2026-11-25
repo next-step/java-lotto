@@ -19,4 +19,12 @@ public class LottoResultTest {
 		LottoResult result = new LottoResult(ranks);
 		assertThat(result.profitRate(14000)).isEqualTo(0.35);
 	}
+
+	@Test
+	void 등수별_개수를_센다() {
+		LottoResult result = new LottoResult(List.of(Rank.FOURTH, Rank.MISS, Rank.FOURTH));
+
+		assertThat(result.countOf(Rank.FOURTH)).isEqualTo(2);
+		assertThat(result.countOf(Rank.FIRST)).isEqualTo(0);
+	}
 }
