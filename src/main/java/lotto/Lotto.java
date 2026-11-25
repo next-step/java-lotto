@@ -1,8 +1,10 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Lotto {
 
@@ -11,6 +13,12 @@ public class Lotto {
     private static final int MAX_NUMBER = 45;
 
     private final List<Integer> numbers;
+
+    public static Lotto create() {
+        List<Integer> numberPool = createNumberPool();
+        Collections.shuffle(numberPool);
+        return new Lotto(numberPool.subList(0, SIZE));
+    }
 
     public Lotto(List<Integer> numbers) {
         if (hasInvalidSize(numbers)) {
@@ -44,5 +52,9 @@ public class Lotto {
 
     private List<Integer> sort(List<Integer> numbers) {
         return numbers.stream().sorted().toList();
+    }
+
+    private static List<Integer> createNumberPool() {
+        return new ArrayList<>(IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER).boxed().toList());
     }
 }

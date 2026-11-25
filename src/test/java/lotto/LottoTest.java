@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -55,6 +57,17 @@ class LottoTest {
         Lotto lotto = new Lotto(List.of(6, 5, 4, 3, 2, 1));
 
         assertThat(lotto.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
+    @DisplayName("자동 생성한 로또는 매번 같은 번호가 아니다")
+    @Test
+    void create() {
+        Set<List<Integer>> results = new HashSet<>();
+        for (int i = 0; i < 10; i++) {
+            results.add(Lotto.create().getNumbers());
+        }
+
+        assertThat(results).hasSizeGreaterThan(1);
     }
 
     private List<Integer> numbersOf(int size) {
