@@ -22,7 +22,8 @@ public class Lotto {
         if (hasDuplicate(numbers)) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다: " + numbers);
         }
-        this.numbers = List.copyOf(numbers);
+
+        this.numbers = sort(numbers);
     }
 
     public List<Integer> getNumbers() {
@@ -39,5 +40,9 @@ public class Lotto {
 
     private boolean hasDuplicate(List<Integer> numbers) {
         return new HashSet<>(numbers).size() != numbers.size();
+    }
+
+    private List<Integer> sort(List<Integer> numbers) {
+        return numbers.stream().sorted().toList();
     }
 }
