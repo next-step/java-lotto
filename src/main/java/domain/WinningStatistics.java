@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,10 @@ public class WinningStatistics {
 
     public WinningStatistics(List<Integer> matchCounts) {
         this(toCountMap(matchCounts));
+    }
+
+    public WinningStatistics(int... matchCounts) {
+        this(Arrays.stream(matchCounts).boxed().toList());
     }
 
     private static Map<Integer, Integer> toCountMap(List<Integer> matchCounts) {
