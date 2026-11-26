@@ -44,8 +44,8 @@ public class LottosTest {
     @Test
     public void test_4() {
         Lottos lottos = new Lottos(List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(List.of(7, 8, 9, 10, 11, 12))
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(7, 8, 9, 10, 11, 12)
         ));
         assertThat(lottos.count()).isEqualTo(2);
     }
@@ -54,8 +54,8 @@ public class LottosTest {
     @Test
     public void test_5() {
         Lottos lottos = new Lottos(List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 6))
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(1, 2, 3, 4, 5, 6)
         ));
         assertThat(lottos.count()).isEqualTo(2);
     }
@@ -63,7 +63,7 @@ public class LottosTest {
     @DisplayName("구입 금액은 로또 장수 x 1000 원이다. (14장 → 14000원)")
     @Test
     public void test_6() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
         Lottos lottos = new Lottos(Collections.nCopies(14, lotto));
         assertThat(lottos.purchaseAmount()).isEqualTo(14000);
     }

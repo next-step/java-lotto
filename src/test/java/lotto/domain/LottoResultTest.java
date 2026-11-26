@@ -11,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
 
-    private static final Lotto WINNING_LOTTO = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-    private static final Lotto THREE_MATCH_LOTTO = new Lotto(List.of(1, 2, 3, 7, 8, 9));
-    private static final Lotto NO_MATCH_LOTTO = new Lotto(List.of(10, 11, 12, 13, 14, 15));
+    private static final Lotto WINNING_LOTTO = new Lotto(1, 2, 3, 4, 5, 6);
+    private static final Lotto THREE_MATCH_LOTTO = new Lotto(1, 2, 3, 7, 8, 9);
+    private static final Lotto NO_MATCH_LOTTO = new Lotto(10, 11, 12, 13, 14, 15);
 
     @DisplayName("일치 개수별 로또 장수를 알 수 있다. (3개 일치 1장 → 1, 4개 일치 없음 → 0)")
     @Test

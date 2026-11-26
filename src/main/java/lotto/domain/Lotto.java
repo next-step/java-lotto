@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -10,6 +11,10 @@ public class Lotto {
     public static final int NUMBERS_SIZE = 6;
 
     private final List<Integer> numbers;
+
+    public Lotto(int... numbers) {
+        this(Arrays.stream(numbers).boxed().toList());
+    }
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
