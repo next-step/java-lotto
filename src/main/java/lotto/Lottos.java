@@ -12,9 +12,8 @@ public class Lottos {
 
     public Lottos(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
-        int lottoCount = purchaseAmount / LOTTO_PRICE;
         lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < purchaseAmount / LOTTO_PRICE; i++) {
             lottos.add(new Lotto(GENERATOR.generate()));
         }
     }
