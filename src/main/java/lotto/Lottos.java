@@ -36,4 +36,12 @@ public class Lottos {
     public int purchaseAmount() {
         return count() * LOTTO_PRICE;
     }
+
+    public List<Prize> calculatePrizes(Lotto winningLotto) {
+        List<Prize> prizes = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            prizes.add(Prize.from(lotto.matchCount(winningLotto)));
+        }
+        return prizes;
+    }
 }
