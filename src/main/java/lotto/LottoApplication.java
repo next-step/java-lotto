@@ -9,11 +9,10 @@ import lotto.view.ResultView;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        Lottos lottos = new Lottos(inputView.readPurchaseAmount());
+        Lottos lottos = new Lottos(InputView.readPurchaseAmount());
         ResultView.viewLottos(lottos);
 
-        Lotto winningLotto = new Lotto(inputView.readWinningNumbers());
+        Lotto winningLotto = new Lotto(InputView.readWinningNumbers());
         ResultView.viewResult(new LottoResult(lottos, winningLotto));
     }
 }
