@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class LottoMachineTest {
@@ -23,5 +25,19 @@ class LottoMachineTest {
     void cannotPurchaseLottoWhenMoneyUnder1000() {
         assertThatThrownBy(() -> new LottoMachine(999))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("구매한 로또를 모두 당첨 결과로 집계한다")
+    @Test
+    void resultOf() {
+        LottoMachine machine = new LottoMachine(14000);
+
+        LottoResult result = machine.resultOf(new WinningLotto(List.of(1, 2, 3, 4, 5, 6)));
+
+        int counted = 0;
+        for (Prize prize : Prize.values()) {
+            counted += result.countOf(prize);
+        }
+        assertThat(counted).isEqualTo(14);
     }
 }

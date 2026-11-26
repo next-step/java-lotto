@@ -19,8 +19,16 @@ public class LottoMachine {
         }
     }
 
+    public LottoResult resultOf(WinningLotto winningLotto) {
+        return new LottoResult(lottos, winningLotto, purchaseAmount());
+    }
+
     public List<Lotto> getLottos() {
         return List.copyOf(lottos);
+    }
+
+    private int purchaseAmount() {
+        return lottos.size() * LOTTO_PRICE;
     }
 
     private int calculateNumberOfLotto(int money) {
