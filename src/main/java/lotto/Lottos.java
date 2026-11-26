@@ -1,27 +1,17 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Lottos {
 
     private static final int LOTTO_PRICE = 1000;
-
-    private final List<Lotto> lottos;
     private static final LottoNumberGenerator GENERATOR = new LottoNumberGenerator();
 
-    public Lottos(int purchaseAmount) {
-        validatePurchaseAmount(purchaseAmount);
-        lottos = new ArrayList<>();
-        for (int i = 0; i < purchaseAmount / LOTTO_PRICE; i++) {
-            lottos.add(new Lotto(GENERATOR.generate()));
-        }
-    }
+    private final List<Lotto> lottos;
 
-    private void validatePurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount <= 0 || purchaseAmount % LOTTO_PRICE != 0) {
-            throw new RuntimeException("구입 금액 단위 오류");
-        }
+    public Lottos(int purchaseAmount) {
+        this(createLottos(purchaseAmount));
     }
 
     public Lottos(List<Lotto> lottos) {
@@ -29,7 +19,20 @@ public class Lottos {
         this.lottos = List.copyOf(lottos);
     }
 
-    private void validateNotEmpty(List<Lotto> lottos) {
+    private static List<Lotto> createLottos(int purchaseAmount) {
+        validatePurchaseAmount(purchaseAmount);
+        return Stream.generate(() -> new Lotto(GENERATOR.generate()))
+                .limit(purchaseAmount / LOTTO_PRICE)
+                .toList();
+    }
+
+    private static void validatePurchaseAmount(int purchaseAmount) {
+        if (purchaseAmount <= 0 || purchaseAmount % LOTTO_PRICE != 0) {
+            throw new RuntimeException("구입 금액 단위 오류");
+        }
+    }
+
+    private static void validateNotEmpty(List<Lotto> lottos) {
         if (lottos.isEmpty()) {
             throw new RuntimeException("로또가 한 장 이상 있어야 합니다.");
         }
@@ -50,6 +53,6 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return List.copyOf(lottos);
+        return lottos;
     }
 }
