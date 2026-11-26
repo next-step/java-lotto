@@ -48,7 +48,7 @@ public class Lottos {
 
     public List<Prize> calculatePrizes(Lotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> Prize.from(lotto.matchCount(winningLotto)))
+                .map(winningLotto::rank)
                 .toList();
     }
 

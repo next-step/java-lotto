@@ -48,4 +48,13 @@ public class LottoTest {
 
         assertThat(myLotto.matchCount(winningLotto)).isEqualTo(3);
     }
+
+    @DisplayName("당첨 로또가 내 로또의 등수를 알려준다. ([1,2,3,4,5,6] vs [1,2,3,7,8,9] → 3개 일치)")
+    @Test
+    public void test_6() {
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto myLotto = new Lotto(1, 2, 3, 7, 8, 9);
+
+        assertThat(winningLotto.rank(myLotto)).isEqualTo(Prize.THREE);
+    }
 }

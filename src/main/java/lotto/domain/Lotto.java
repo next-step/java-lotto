@@ -53,6 +53,10 @@ public class Lotto {
                 .count();
     }
 
+    public Prize rank(Lotto other) {
+        return Prize.from(matchCount(other));
+    }
+
     public List<Integer> getNumbers() {
         return numbers;
     }
