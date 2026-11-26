@@ -48,4 +48,8 @@ public class Lottos {
                 .map(lotto -> Prize.from(lotto.matchCount(winningLotto)))
                 .toList();
     }
+
+    public List<Lotto> getLottos() {
+        return List.copyOf(lottos);
+    }
 }

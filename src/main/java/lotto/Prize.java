@@ -24,6 +24,10 @@ public enum Prize {
                 .orElse(NONE);
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public int getMoney() {
         return money;
     }
