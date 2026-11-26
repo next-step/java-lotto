@@ -26,7 +26,14 @@ public class Lottos {
     }
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        validateNotEmpty(lottos);
+        this.lottos = List.copyOf(lottos);
+    }
+
+    private void validateNotEmpty(List<Lotto> lottos) {
+        if (lottos.isEmpty()) {
+            throw new RuntimeException("로또가 한 장 이상 있어야 합니다.");
+        }
     }
 
     public int count() {
@@ -38,10 +45,8 @@ public class Lottos {
     }
 
     public List<Prize> calculatePrizes(Lotto winningLotto) {
-        List<Prize> prizes = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            prizes.add(Prize.from(lotto.matchCount(winningLotto)));
-        }
-        return prizes;
+        return lottos.stream()
+                .map(lotto -> Prize.from(lotto.matchCount(winningLotto)))
+                .toList();
     }
 }

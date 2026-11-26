@@ -67,4 +67,11 @@ public class LottosTest {
         Lottos lottos = new Lottos(Collections.nCopies(14, lotto));
         assertThat(lottos.purchaseAmount()).isEqualTo(14000);
     }
+
+    @DisplayName("로또 목록이 비어 있으면 예외 ([] → 실패)")
+    @Test
+    public void test_7() {
+        assertThatThrownBy(() -> new Lottos(List.of()))
+                .isInstanceOf(RuntimeException.class);
+    }
 }
