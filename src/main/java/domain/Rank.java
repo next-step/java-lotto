@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
 
@@ -33,9 +34,16 @@ public enum Rank {
         return requiresBonus;
     }
 
+    public static List<Rank> winningRanks() {
+        return Arrays.stream(values())
+                .filter(rank -> rank != MISS)
+                .toList();
+    }
+
     public long prize(int count) {
         return (long) winningMoney * count;
     }
+
 
     public static Rank valueOf(MatchCount matchCount, boolean matchBonus) {
         return Arrays.stream(values())

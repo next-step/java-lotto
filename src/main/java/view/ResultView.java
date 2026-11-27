@@ -4,6 +4,7 @@ import domain.Lotto;
 import domain.Rank;
 import domain.WinningStatistics;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ResultView {
@@ -24,7 +25,11 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)) {
+        List<Rank> ranks = Rank.winningRanks().stream()
+                .sorted(Comparator.comparing(Rank::getWinningMoney))
+                .toList();
+
+        for (Rank rank : ranks) {
             System.out.println(formatRank(rank) + "- " + statistics.countOf(rank) + "개");
         }
     }
