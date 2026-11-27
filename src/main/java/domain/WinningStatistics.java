@@ -1,54 +1,48 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class WinningStatistics {
 
-    private static final Map<Integer, Integer> PRIZES = Map.of(
-            3, 5_000,
-            4, 50_000,
-            5, 1_500_000,
-            6, 2_000_000_000
-    );
+    private final Map<Rank, Integer> rankCounts;
 
-    private final Map<Integer, Integer> matchCounts;
-
-    public WinningStatistics(Map<Integer, Integer> matchCounts) {
-        this.matchCounts = matchCounts;
+    public WinningStatistics(List<Rank> ranks) {
+        this(create(ranks));
     }
 
-    public WinningStatistics(List<Integer> matchCounts) {
-        this(toCountMap(matchCounts));
+    public WinningStatistics(Rank... ranks) {
+        this(create(Arrays.stream(ranks).toList()));
     }
 
-    public WinningStatistics(int... matchCounts) {
-        this(Arrays.stream(matchCounts).boxed().toList());
+    public WinningStatistics(Map<Rank, Integer> rankCounts) {
+        this.rankCounts = rankCounts;
     }
 
-    private static Map<Integer, Integer> toCountMap(List<Integer> matchCounts) {
-        Map<Integer, Integer> counts = new HashMap<>();
-        for (Integer match : matchCounts) {
-            counts.merge(match, 1, Integer::sum);
+
+    private static Map<Rank, Integer> create(List<Rank> ranks) {
+        Map<Rank, Integer> counts = new EnumMap<>(Rank.class);
+        for (Rank rank : ranks) {
+            counts.merge(rank, 1, Integer::sum);
         }
         return counts;
     }
 
-    public int countOf(int match) {
-        return matchCounts.getOrDefault(match, 0);
+    public int countOf(Rank rank) {
+        return rankCounts.getOrDefault(rank, 0);
     }
 
-    public int prizeOf(int match) {
-        return PRIZES.get(match);
+    public long totalPrize() {
+        long total = 0;
+        for (Rank rank : rankCounts.keySet()) {
+            total += rank.prize(countOf(rank));
+        }
+        return total;
     }
 
     public double profitRate(int amount) {
-        long total = 0;
-        for (int match : PRIZES.keySet()) {
-            total += (long) prizeOf(match) * countOf(match);
-        }
-        return (double) total / amount;
+        return (double) totalPrize() / amount;
     }
 }

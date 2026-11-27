@@ -2,6 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.Rank;
 import domain.WinningStatistics;
 
 import java.util.List;
@@ -23,17 +24,23 @@ public class ResultView {
         }
     }
 
-
     public static void printStatistics(WinningStatistics statistics) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (int match = 3; match <= 6; match++) {
-            System.out.println(match + "개 일치 (" + statistics.prizeOf(match) + "원)- "
-                    + statistics.countOf(match) + "개");
+        for (Rank rank : List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)) {
+            System.out.println(formatRank(rank) + "- " + statistics.countOf(rank) + "개");
         }
     }
+
+    private static String formatRank(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return rank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + rank.getWinningMoney() + "원) ";
+        }
+        return rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)";
+    }
+
 
     public static void printProfitRate(double profitRate) {
         System.out.print("총 수익률은 " + String.format("%.2f", profitRate) + "입니다.");

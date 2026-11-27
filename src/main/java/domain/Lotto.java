@@ -15,11 +15,6 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
 
-    public Lotto(List<LottoNumber> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
-    }
-
     public Lotto() {
         this(create());
     }
@@ -30,6 +25,11 @@ public class Lotto {
 
     public Lotto(int... values) {
         this(toLottoNumbers(values));
+    }
+
+    public Lotto(List<LottoNumber> numbers) {
+        validate(numbers);
+        this.numbers = numbers;
     }
 
     private static List<LottoNumber> toLottoNumbers(int[] values) {
@@ -75,10 +75,10 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public int match(Lotto other) {
-        return (int) numbers.stream()
+    public MatchCount match(Lotto other) {
+        return new MatchCount((int) numbers.stream()
                 .filter(other::contains)
-                .count();
+                .count());
     }
 
     @Override

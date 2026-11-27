@@ -1,5 +1,6 @@
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.MatchCount;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -80,6 +81,6 @@ public class LottoTest {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
         Lotto winningLotto = new Lotto(1, 2, 3, 10, 11, 12);
 
-        assertThat(lotto.match(winningLotto)).isEqualTo(3);
+        assertThat(lotto.match(winningLotto)).isEqualTo(new MatchCount(3));
     }
 }
