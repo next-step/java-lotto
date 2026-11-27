@@ -71,6 +71,12 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
+    public List<Integer> getNumberValues() {
+        return numbers.stream()
+                .map(LottoNumber::getValue)
+                .toList();
+    }
+
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }

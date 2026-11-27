@@ -1,7 +1,6 @@
 package view;
 
 import domain.Lotto;
-import domain.LottoNumber;
 import domain.Rank;
 import domain.WinningStatistics;
 
@@ -16,11 +15,7 @@ public class ResultView {
 
     public static void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getNumbers()
-                    .stream()
-                    .mapToInt(LottoNumber::getValue)
-                    .boxed()
-                    .toList());
+            System.out.println(lotto.getNumberValues());
         }
     }
 
