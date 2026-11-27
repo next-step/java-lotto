@@ -1,8 +1,8 @@
 import domain.Lotto;
 import domain.Lottos;
+import domain.Rank;
+import domain.WinningLotto;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,14 +17,14 @@ public class LottosTest {
 
 
     @Test
-    void 전체_로또의_당첨_번호_일치_개수_목록을_반환한다() {
-        Lottos lottos = new Lottos(List.of(
+    void 전체_로또의_등수_목록을_반환한다() {
+        Lottos lottos = new Lottos(
                 new Lotto("1,2,3,4,5,6"),
                 new Lotto("1,2,3,10,11,12"),
                 new Lotto("40,41,42,43,44,45")
-        ));
-        Lotto winningLotto = new Lotto("1,2,3,4,5,6");
+        );
+        WinningLotto winningLotto = new WinningLotto(7, 1, 2, 3, 4, 5, 6);
 
-        assertThat(lottos.checkResult(winningLotto)).containsExactly(6, 3, 0);
+        assertThat(lottos.checkResult(winningLotto)).containsExactly(Rank.FIRST, Rank.FIFTH, Rank.MISS);
     }
 }

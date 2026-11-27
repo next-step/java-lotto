@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,18 +9,22 @@ public class Lottos {
 
     private List<Lotto> lottoList;
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public Lottos(Lotto... lottos) {
+        this(Arrays.stream(lottos).toList());
     }
 
     public Lottos(int amount) {
         this(create(amount));
     }
 
+
     public Lottos(PurchaseAmount amount) {
         this(generate(amount.ticketCount()));
     }
 
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
 
     private static List<Lotto> create(int amount) {
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
@@ -45,11 +50,10 @@ public class Lottos {
     }
 
 
-    public List<Integer> checkResult(Lotto winningLotto) {
-        List<Integer> matches = new ArrayList<>();
+    public List<Rank> checkResult(WinningLotto winningLotto) {
+        List<Rank> matches = new ArrayList<>();
         for (Lotto lotto : lottoList) {
-            int matchCount = lotto.match(winningLotto);
-            matches.add(matchCount);
+            matches.add(winningLotto.match(lotto));
         }
         return matches;
     }

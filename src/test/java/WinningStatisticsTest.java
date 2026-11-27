@@ -1,5 +1,7 @@
 import domain.Lotto;
 import domain.Lottos;
+import domain.Rank;
+import domain.WinningLotto;
 import domain.WinningStatistics;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,28 +15,24 @@ public class WinningStatisticsTest {
 
 
     @ParameterizedTest
-    @CsvSource({"3, 2", "6, 1", "4, 0"})
-    void 일치_개수_목록을_등수별로_집계한다(int match, int expectedCount) {
-        WinningStatistics statistics = new WinningStatistics(3, 3, 0, 6, 1);
-
-        assertThat(statistics.countOf(match)).isEqualTo(expectedCount);
+    @CsvSource({"FIFTH, 2", "FIRST, 1", "FOURTH, 0"})
+    void 등수_목록을_등수별로_집계한다(Rank rank, int expectedCount) {
+        WinningStatistics statistics = new WinningStatistics(Rank.FIFTH, Rank.FIFTH, Rank.MISS, Rank.FIRST, Rank.MISS);
+        assertThat(statistics.countOf(rank)).isEqualTo(expectedCount);
     }
 
 
-    @ParameterizedTest
-    @CsvSource({"3, 5000", "4, 50000", "5, 1500000", "6, 2000000000"})
-    void 일치_개수별_상금을_반환한다(int match, int prize) {
-        WinningStatistics statistics = new WinningStatistics();
-
-        assertThat(statistics.prizeOf(match)).isEqualTo(prize);
+    @Test
+    void 총_상금은_등수별_상금과_개수의_곱의_합이다() {
+        WinningStatistics statistics = new WinningStatistics(Rank.FIFTH, Rank.FIFTH, Rank.FOURTH, Rank.MISS);
+        assertThat(statistics.totalPrize()).isEqualTo(5_000L * 2 + 50_000L);
     }
 
 
     @Test
     void 총_수익률은_총_상금_나누기_구입_금액이다() {
-        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        Lotto threeMatchLotto = new Lotto(1, 2, 3, 10, 11, 12);
-        Lottos lottos = new Lottos(List.of(threeMatchLotto));
+        WinningLotto winningLotto = new WinningLotto(7, 1, 2, 3, 4, 5, 6);
+        Lottos lottos = new Lottos(new Lotto(1, 2, 3, 10, 11, 12));
 
         WinningStatistics statistics = new WinningStatistics(lottos.checkResult(winningLotto));
 
