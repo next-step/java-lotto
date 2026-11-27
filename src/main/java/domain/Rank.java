@@ -38,13 +38,14 @@ public enum Rank {
     }
 
     public static Rank valueOf(MatchCount matchCount, boolean matchBonus) {
-        if (matchCount.isSame(SECOND.countOfMatch)) {
-            return matchBonus ? SECOND : THIRD;
-        }
         return Arrays.stream(values())
-                .filter(rank -> matchCount.isSame(rank.countOfMatch))
+                .filter(rank -> rank.matches(matchCount, matchBonus))
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    private boolean matches(MatchCount matchCount, boolean matchBonus) {
+        return matchCount.isSame(countOfMatch) && (!requiresBonus || matchBonus);
     }
 
 
