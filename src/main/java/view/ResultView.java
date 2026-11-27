@@ -35,7 +35,7 @@ public class ResultView {
     }
 
     private static String formatRank(Rank rank) {
-        if (rank == Rank.SECOND) {
+        if (rank.requiresBonus()) {
             return rank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + rank.getWinningMoney() + "원) ";
         }
         return rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)";
