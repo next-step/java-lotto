@@ -74,4 +74,14 @@ public class LottosTest {
         assertThatThrownBy(() -> new Lottos(List.of()))
                 .isInstanceOf(RuntimeException.class);
     }
+
+    @DisplayName("당첨 로또와 맞춰 본 결과를 만든다. ([1,2,3,7,8,9] vs [1~6] → 3개 일치 1장, 수익률 5.0)")
+    @Test
+    public void test_8() {
+        Lottos lottos = new Lottos(List.of(new Lotto(1, 2, 3, 7, 8, 9)));
+        LottoResult result = lottos.match(new Lotto(1, 2, 3, 4, 5, 6));
+
+        assertThat(result.countOf(Prize.THREE)).isEqualTo(1);
+        assertThat(result.profitRate()).isEqualTo(5.0);
+    }
 }

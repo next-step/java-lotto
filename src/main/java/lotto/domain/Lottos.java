@@ -5,7 +5,6 @@ import java.util.stream.Stream;
 
 public class Lottos {
 
-    private static final int LOTTO_PRICE = 1000;
     private static final LottoNumberGenerator GENERATOR = new LottoNumberGenerator();
 
     private final List<Lotto> lottos;
@@ -22,12 +21,12 @@ public class Lottos {
     private static List<Lotto> createLottos(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
         return Stream.generate(() -> new Lotto(GENERATOR.generate()))
-                .limit(purchaseAmount / LOTTO_PRICE)
+                .limit(purchaseAmount / Lotto.PRICE)
                 .toList();
     }
 
     private static void validatePurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount <= 0 || purchaseAmount % LOTTO_PRICE != 0) {
+        if (purchaseAmount <= 0 || purchaseAmount % Lotto.PRICE != 0) {
             throw new RuntimeException("구입 금액 단위 오류");
         }
     }
@@ -43,10 +42,14 @@ public class Lottos {
     }
 
     public int purchaseAmount() {
-        return count() * LOTTO_PRICE;
+        return count() * Lotto.PRICE;
     }
 
-    public List<Prize> calculatePrizes(Lotto winningLotto) {
+    public LottoResult match(Lotto winningLotto) {
+        return new LottoResult(calculatePrizes(winningLotto));
+    }
+
+    private List<Prize> calculatePrizes(Lotto winningLotto) {
         return lottos.stream()
                 .map(winningLotto::rank)
                 .toList();

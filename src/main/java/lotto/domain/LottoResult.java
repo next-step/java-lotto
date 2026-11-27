@@ -5,11 +5,16 @@ import java.util.List;
 public class LottoResult {
 
     private final List<Prize> prizes;
-    private final int purchaseAmount;
 
-    public LottoResult(Lottos myLottos, Lotto winningLotto) {
-        this.prizes = myLottos.calculatePrizes(winningLotto);
-        this.purchaseAmount = myLottos.purchaseAmount();
+    public LottoResult(List<Prize> prizes) {
+        validateNotEmpty(prizes);
+        this.prizes = List.copyOf(prizes);
+    }
+
+    private static void validateNotEmpty(List<Prize> prizes) {
+        if (prizes.isEmpty()) {
+            throw new RuntimeException("등수 목록이 비어 있습니다.");
+        }
     }
 
     public int countOf(Prize prize) {
@@ -25,7 +30,11 @@ public class LottoResult {
     }
 
     public double profitRate() {
-        double profitRate = (double) totalPrize() / purchaseAmount;
+        double profitRate = (double) totalPrize() / purchaseAmount();
         return Math.floor(profitRate * 100) / 100;
+    }
+
+    private int purchaseAmount() {
+        return prizes.size() * Lotto.PRICE;
     }
 }
