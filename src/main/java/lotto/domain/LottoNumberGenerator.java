@@ -16,7 +16,7 @@ public class LottoNumberGenerator {
 
     private List<Integer> createCandidates() {
         List<Integer> candidates = new ArrayList<>();
-        for (int number = Lotto.MIN_NUMBER; number <= Lotto.MAX_NUMBER; number++) {
+        for (int number = LottoNumber.MIN_NUMBER; number <= LottoNumber.MAX_NUMBER; number++) {
             candidates.add(number);
         }
         return candidates;

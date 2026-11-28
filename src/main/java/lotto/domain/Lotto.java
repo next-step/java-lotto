@@ -6,45 +6,37 @@ import java.util.List;
 
 public class Lotto {
 
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
     public static final int NUMBERS_SIZE = 6;
     public static final int PRICE = 1000;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto(int... numbers) {
         this(Arrays.stream(numbers).boxed().toList());
     }
 
     public Lotto(List<Integer> numbers) {
-        validateNumbers(numbers);
-        this.numbers = List.copyOf(numbers);
+        this.numbers = toLottoNumbers(numbers);
     }
 
-    private static void validateNumbers(List<Integer> numbers) {
-        validateNumbersCount(numbers);
-        validateNoDuplicates(numbers);
-        for (Integer number : numbers) {
-            validateNumberRange(number);
-        }
+    private static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .toList();
+        validateNumbersCount(lottoNumbers);
+        validateNoDuplicates(lottoNumbers);
+        return lottoNumbers;
     }
 
-    private static void validateNoDuplicates(List<Integer> numbers) {
-        if (new HashSet<>(numbers).size() != numbers.size()) {
-            throw new RuntimeException("중복된 수를 가질 수 없습니다.");
-        }
-    }
-
-    private static void validateNumbersCount(List<Integer> numbers) {
+    private static void validateNumbersCount(List<LottoNumber> numbers) {
         if (numbers.size() != NUMBERS_SIZE) {
             throw new RuntimeException("로또 번호 개수가 올바르지 않습니다.");
         }
     }
 
-    private static void validateNumberRange(Integer number) {
-        if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new RuntimeException("로또 번호 범위를 벗어났습니다.");
+    private static void validateNoDuplicates(List<LottoNumber> numbers) {
+        if (new HashSet<>(numbers).size() != numbers.size()) {
+            throw new RuntimeException("중복된 수를 가질 수 없습니다.");
         }
     }
 
@@ -58,7 +50,7 @@ public class Lotto {
         return Prize.from(matchCount(other));
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 }
